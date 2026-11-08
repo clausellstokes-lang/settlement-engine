@@ -86,7 +86,7 @@ describe('G1 — the weighted exclusive group', () => {
     for (const f of forms) expect(tally[f], `${f} governs at least one of 120 cities`).toBeGreaterThan(0);
     const top = Math.max(...Object.values(tally));
     expect(top, `no single form governs half of 120 cities (${JSON.stringify(tally)})`).toBeLessThan(60);
-  });
+  }, 120_000); // 2026-11-07 PEOPLE-1 CAST: an explicit budget — the city sweep births its cities with the cast (59 cards a city), past vitest's 20 s default under a loaded box
 
   it('a group still seats at most one member', () => {
     for (const s of settlements('city', 120)) {
@@ -259,7 +259,7 @@ describe('G6 — a druid is a priest where magic does not work (J30)', () => {
     expect(rows, 'druid rows in magic-free worlds').toBeGreaterThan(40);
     expect(backed, 'druid rows in a settlement with a religious faction').toBeGreaterThan(20);
     expect(wrong).toEqual([]);
-  });
+  }, 120_000); // 2026-11-07 PEOPLE car: an explicit budget — this arm births the 144 magic-free settlements with the cast (12.6 s alone at base, 15.5 s at the tip; 52–57 s six-way on 4 cores), past vitest's 20 s default in the wide sweep
 
   it('in a magic world every druid institution keeps its authored pairing', () => {
     const wrong = [];

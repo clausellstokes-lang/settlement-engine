@@ -9,6 +9,7 @@ import { serif, Empty } from '../Primitives';
 // "NPC Relationships" fold was a truncated copy of that page's list (same card, same
 // strings, 100% superset), so it is cut and every tie stays reachable there.
 import {NPCCategoryGroup} from '../npcComponents';
+import { groupCardsByFirstPower, powersOf, powerNameOf } from '../../../domain/people/cardPowers.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 // W-H4 §6c — the LOCAL half of the wanderer register. A static child of this
@@ -62,30 +63,12 @@ export function NPCsTab({
   const highCount = npcs.filter(n=>n.influence==='high').length;
   const modCount  = npcs.filter(n=>n.influence==='moderate').length;
 
-  // Group by power faction name (factionAffiliation), ordered by faction power rank
-  const powerFactions = settlement?.powerStructure?.factions || [];
-  const factionOrder  = powerFactions.map(f => f.faction);
-  // Map faction name → its category (for color coding)
+  // Group by FIRST-RANK power (PEOPLE-5A, M-1b): a card ranked in a power stands under its
+  // best-ranked power; the unranked members and the cards in no power get their own groups.
+  // Read from the memberships and the powers, never the shim's derived fields.
   const factionCategory = {};
-  powerFactions.forEach(f => { factionCategory[f.faction] = f.category || 'other'; });
-
-  const byFaction = {};
-  npcs.forEach(n => {
-    const key = n.factionAffiliation || 'Unaffiliated';
-    (byFaction[key] = byFaction[key] || []).push(n);
-  });
-
-  // Sort faction groups: power-ranked factions first, then unaffiliated
-  const presentFactions = Object.keys(byFaction).sort((a, b) => {
-    const ia = factionOrder.indexOf(a);
-    const ib = factionOrder.indexOf(b);
-    if (a === 'Unaffiliated') return 1;
-    if (b === 'Unaffiliated') return -1;
-    if (ia === -1 && ib === -1) return a.localeCompare(b);
-    if (ia === -1) return 1;
-    if (ib === -1) return -1;
-    return ia - ib;
-  });
+  powersOf(settlement).forEach(f => { factionCategory[powerNameOf(f)] = f.category || 'other'; });
+  const groups = groupCardsByFirstPower(npcs, settlement);
 
   const q = search.trim().toLowerCase();
 
@@ -144,12 +127,12 @@ export function NPCsTab({
       </div>
 
       {/* ── NPC GROUPS by power faction ────────────────────────────────── */}
-      {presentFactions.map(factionName => (
+      {groups.map(({ key, cards }) => (
         <NPCCategoryGroup
-          key={factionName}
-          category={factionCategory[factionName] || 'other'}
-          label={factionName}
-          group={byFaction[factionName]}
+          key={key}
+          category={factionCategory[key] || 'other'}
+          label={key}
+          group={cards}
           impFilter={impFilter}
           search={q}
           pinnedIds={pinnedIds}

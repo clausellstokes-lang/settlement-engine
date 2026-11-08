@@ -47,6 +47,7 @@ import { relationshipsDeskLists } from '../display/stateProse/relationshipsDeskR
 import { deriveFoundingTraditions } from '../traditions/genesis.js';
 import { mergeCustomFoundingTraditions } from '../traditions/customFounding.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { cardPowerNames, cardHouseOf } from '../people/cardPowers.js';
 
 /**
  * @typedef {{ publicDossier?: boolean, playerView?: boolean }} SearchViewer
@@ -272,7 +273,7 @@ export function enumerateDossierObjects(settlement, viewer = {}, options = {}) {
       type: 'npc', key: `npc:${entry.id}:${objects.length}`, tab: entry.tab, id: entry.id,
       names: [entry.currentName],
       text: [
-        npc.title, npc.role, npc.factionAffiliation, npc.structuralPosition,
+        npc.title, npc.role, ...cardPowerNames(npc), cardHouseOf(npc), npc.structuralPosition,
         ...traits.map((t) => (t ? t.value : '')),
         ...(dmFieldsSearchable ? [npc.activeConstraint, asRecord(npc.goal)?.short, npc.goal] : []),
       ],
@@ -323,8 +324,8 @@ export function enumerateDossierObjects(settlement, viewer = {}, options = {}) {
   }
 
   // FACTIONS — the Power roster rows (the index reads the same list, in the same order).
-  const powerFactions = asList(asRecord(view.powerStructure)?.factions);
-  const factionList = powerFactions.length ? powerFactions : asList(view.factions);
+  // The powers only (PEOPLE-5A): the NPC grouping's fallback is deleted, as the index's is.
+  const factionList = asList(asRecord(view.powerStructure)?.factions);
   index.factions.forEach((/** @type {IndexEntry} */ entry, /** @type {number} */ i) => {
     const faction = asRecord(factionList[i]) || {};
     push({

@@ -186,6 +186,8 @@ function notableNpcPage(n) {
     kv('Role', n.title),
     kv('Race', n.race),
     kv('Faction', n.factionLabel),
+    kv('House', n.house),
+    kv('Standing', n.powerLine),
     kv('Power', n.power),
     kv('Influence', n.influenceLabel),
     n.blurb ? md('', esc(n.blurb)) : null,

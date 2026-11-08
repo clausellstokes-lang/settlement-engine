@@ -73,9 +73,10 @@ registerStep('corruptionPass', {
     npc.corrupt = true;
     npc.corruptionVector = vector;
 
-    // Second relation: an RNG-matched criminal institution + the thieves-guild.
+    // Second relation: an RNG-matched criminal institution + the thieves-guild, carried on
+    // `corruptTies` alone (PEOPLE-5A, M-2: the house is no longer written into the card's
+    // `secondaryAffiliation`, a power slot the people car derives from the memberships).
     const crimInst = rng.pick(climate.criminalInstitutions) || guild;
-    if (!npc.secondaryAffiliation) npc.secondaryAffiliation = crimInst;
     npc.corruptTies = { criminalInstitution: crimInst, thievesGuild: guild };
 
     // Compromised short-term motivation.

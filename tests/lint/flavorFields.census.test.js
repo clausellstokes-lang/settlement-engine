@@ -193,9 +193,12 @@ const NAMED_CASCADE_EXCEPTIONS = Object.freeze(['institutions[].name']);
  * in case A4 to be a real container of a declared cascade path, so a hand-written spelling
  * cannot enter here unchallenged.
  */
+// PEOPLE-5B (2026-11-07, M-7): the grouping left the record, and with it both mirror homes — the member
+// copy `factions[].members[]` (the npc card's second home) and `factions[]` (the faction card's legacy
+// mirror). A card has one home; a faction's is the powers.
 const MIRROR_HOMES = Object.freeze({
-  npc: Object.freeze(['factions[].members[]']),
-  faction: Object.freeze(['factions[]']),
+  npc: Object.freeze([]),
+  faction: Object.freeze([]),
 });
 
 /** Every declaration row of the live table, in AUTHORED order. Nothing is sorted. */

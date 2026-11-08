@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 5a OF THE PEOPLE CAR'S LANDING (PEOPLE-LAND, second seat), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; PEOPLE-RULINGS M-1: one record per lane-cause, signed once at the landing from the stage at the lane's first-parent point; M-3). THE CAUSE, ONE: lane 5A, PEOPLE-5A DISPLAY (docs/PEOPLE_5A_DISPLAY_2026-11-07.md): every birth and display reader of the old faction fields re-wired to the memberships, the institution and the powers, merged onto the 234 tip at c7d552370 (MERGE-5AB). The lane's record says it moves no card, and none does: measured on six moved rows, the only differing path is settlement.factions[].members, the legacy grouping's member lists, whose birth reader the lane re-pointed at the memberships (the grouping itself leaves the record at record 5B and the landing's step 1). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure at the stage of c7d552370 (record 4's post-state) and at the stage of 053283dfd: the generator golden master 172 of 525 (hamlet 84, village 72, city 12, metropolis 4) rows, 27de6ac3.. -> 47e48e47..; the espionage fence's driven corpus 25 of 360 (thorp 7, hamlet 14, village 4), e59a30cd.. -> 080243fb..; the herald desk 478 -> 478 keys (+0 -0, 0 moved); the dossier prose manifest 312 of 1,050 (hamlet 168, village 144); the PDF view-model snapshot 0; the preset lighting witness 0. The four MERGE-5AB record and register commits after the merge (5dd99ee74..3c66d320e) move no golden byte (the stage of 3c66d320e equals this one on all six surfaces).",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
+  "cause": "lane 5A, PEOPLE-5A DISPLAY (lane/people-5a-display-2026-11-07, 3d76fb058, merged at 053283dfd): every birth and display reader of the old faction fields re-wired to the memberships, the institution and the powers",
+  "seat": "PEOPLE-LAND second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 053283dfd",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

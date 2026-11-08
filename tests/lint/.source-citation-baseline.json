@@ -47,9 +47,9 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 137,
+      "dated": 104,
       "sha-pin": 1,
-      "tree": 100
+      "tree": 104
     },
     "files": {
       "banner": [
@@ -95,7 +95,6 @@
         "docs/R6_PLACE_NOT_TIER_2026-11-04.md",
         "docs/REVIEW_INTAKE_2026-11-06.md",
         "docs/REVIEW_INTAKE_LAND_2026-11-07.md",
-        "docs/REVIEW_INTAKE_PLANTS_2026-11-07.md",
         "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.after.json",
         "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.calibration.json",
         "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.md",
@@ -145,30 +144,7 @@
         "docs/chair/2026-11-06/BRIEF-RUNG2-PHASE-D-2026-11-06.md",
         "docs/chair/2026-11-06/BRIEF-RUNG2-TYPES-2026-11-06.md",
         "docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md",
-        "docs/tuning-signatures/2026-11-06-v1.json",
-        "docs/CENSUS_1B_LANE_2026-11-04.md",
-        "docs/CENSUS_1_LANE_2026-11-04.md",
-        "docs/CENSUS_2_LANE_2026-11-04.md",
-        "docs/CENSUS_3_LANE_2026-11-04.md",
-        "docs/CENSUS_4_LANE_2026-11-04.md",
-        "docs/CENSUS_5_LANE_2026-11-04.md",
-        "docs/F13_CRISIS_FACTS_2026-11-04.md",
-        "docs/READER_R11_TONIGHT_WANTS_2026-11-04.md",
-        "docs/READER_R1_VALIDATION_ON_PAGE_2026-11-04.md",
-        "docs/RUNG2_F12_CRISIS_BLIND_2026-11-04.md",
-        "docs/RUNG2_TUNING_2026-11-04.md",
-        "docs/SOAK_10000_RUNG2B_2026-11-04.md",
-        "docs/SOAK_10000_RUNG2C_2026-11-04.md",
-        "docs/SOAK_10000_RUNG2D_2026-11-04.md",
-        "docs/SOAK_10000_RUNG2E_2026-11-06.md",
-        "docs/SOAK_10000_RUNG2F_2026-11-06.md",
-        "docs/SOAK_10000_RUNG2_2026-11-04.md",
-        "docs/census/CHAIR_RULINGS_2026-11-05.md",
-        "docs/census/COMPOSE_2026-11-06.md",
-        "docs/census/LANDING_R2_2026-11-06.md",
-        "docs/census/VOCABULARY_RULINGS_2026-11-04.md",
-        "docs/chair/2026-11-06/BRIEF-LANDING-R2-2026-11-06.md",
-        "docs/INTEGRATION_MERGE_R2_2026-11-07.md"
+        "docs/tuning-signatures/2026-11-06-v1.json"
       ],
       "sha-pin": [
         "docs/SETTLEMENT_CAPABILITY_ATLAS.md"
@@ -268,12 +244,7 @@
         "docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json",
         "docs/shift-records/2026-11-07-w0-05-annotation-date-one-home.json",
         "docs/shift-records/README.md",
-        "docs/shift-records/_TEMPLATE.json",
-        "docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json",
-        "docs/shift-records/2026-11-06-rung2-02-census-composed-espionage-fence.json",
-        "docs/shift-records/2026-11-06-rung2-03-census-composed-herald-desk.json",
-        "docs/shift-records/2026-11-06-rung2-04-census-composed-prose-manifest.json",
-        "docs/shift-records/2026-11-06-rung2-05-census-composed-lighting-witness.json"
+        "docs/shift-records/_TEMPLATE.json"
       ]
     },
     "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377.",
@@ -287,6 +258,18 @@
     "_rosterGrowth2026-11-07-engine-merge-2": "TWO documents JOINED the roster by being BORN into it (ENGINE-MERGE-2, at the engine lane's merge with rung 1's final tip, measured with this walker's own arm): `dated` 76 -> 78, docs/ENGINE_PR_2026-11-06.md (the first engine merge's record) and docs/ENGINE_MERGE2_2026-11-07.md (this merge's record), born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class.",
     "_rosterGrowth2026-11-07-review-intake-land": "TWO documents JOINED the roster by being BORN into it (REVIEW-INTAKE-LAND, the review-intake lane merged onto rung 1's tip, measured with this walker's own arm): `dated` 78 -> 80 (re-measured by the chair at the integration merge; the engine merge took 76 -> 78 first), docs/REVIEW_INTAKE_2026-11-06.md (the lane's record) and docs/REVIEW_INTAKE_LAND_2026-11-07.md (this landing's record), born dated. A GROWTH, not a re-classification: no document changed class.",
     "_rosterGrowth2026-11-07-wiring-w0": "SIX documents JOINED the roster by being BORN into it (WIRING-W0, measured with this walker's own arm): dated:docs/WIRING_W0_2026-11-07.md, tree:docs/shift-records/2026-11-07-w0-01-migration-direction.json, tree:docs/shift-records/2026-11-07-w0-02-one-import-share.json, tree:docs/shift-records/2026-11-07-w0-03-one-food-source-count.json, tree:docs/shift-records/2026-11-07-w0-04-legacy-annotations-dated.json, tree:docs/shift-records/2026-11-07-w0-05-annotation-date-one-home.json; byRule {\"banner\":9,\"dated\":76,\"sha-pin\":1,\"tree\":90} -> {\"banner\":9,\"dated\":77,\"sha-pin\":1,\"tree\":95}. A GROWTH, not a re-classification: no document changed class.",
+    "_rosterGrowth2026-11-07-people-4": "ONE document JOINED the roster by being BORN into it (PEOPLE-4 TIES, the people car's lane 4, measured with this walker's own arm): `dated` 94 -> 95, docs/PEOPLE_4_TIES_2026-11-07.md (the lane's record: one outgoing tie per card, directed; the registers; the red list). A GROWTH, not a re-classification: the file is dated by its basename and archival by its own header; it carries no path:line citation of its own, so pastEofCitationsExcluded is unchanged and ARM 2 over live docs stays 0.",
+    "_rosterGrowth2026-11-07-people-1": "ONE document JOINED the roster by being BORN into it (PEOPLE-1 CAST, the people car's lane 1, measured with this walker's own arm): `dated` 93 -> 94, docs/PEOPLE_1_CAST_2026-11-07.md (the lane's record: the faces in the registry, the representative generator, the powers' people, the registers, the red list). A GROWTH, not a re-classification: the file is dated by its basename and archival by its own header; it carries no path:line citation of its own, so pastEofCitationsExcluded is unchanged and ARM 2 over live docs stays 0.",
+    "_rosterGrowth2026-11-07-merge-234": "TWO documents JOINED the roster at the merge seat's tip (MERGE-234, the people car's merge of lane 2 onto lane 1's final tip bbe4a02ab, measured with this walker's own arm): `dated` 94 -> 96 at the union. docs/PEOPLE_2_CAST_2026-11-07.md is lane 2's record and arrives with its own note above; docs/PEOPLE_234_MERGE_2026-11-07.md is this seat's record (lane 2 merged under the chair's seat ruling, lane 3 aborted on a non-mechanical seam-mint conflict, lane 4 not merged by the order). Each lane's note counted from 94 alone; the union carries both. A GROWTH, not a re-classification: each file is dated by its basename and archival by its own header; neither carries a path:line citation of its own, so pastEofCitationsExcluded is unchanged.",
+    "_rosterGrowth2026-11-07-people-5a": "THREE documents JOINED `dated` (PEOPLE-5A DISPLAY, the people car's lane 5a, measured with this walker's own arm at the lane tip): 96 -> 99, docs/PEOPLE_3_HOOKS_2026-11-07.md and docs/PEOPLE_4_TIES_2026-11-07.md (the lanes 3 and 4 records, merged at the base c7d552370 by MERGE-234 and never counted there) and docs/PEOPLE_5A_DISPLAY_2026-11-07.md, the lane's record, each born dated. GROWTHS, not class moves: no live document left the gated corpus.",
+    "_rosterGrowth2026-11-07-people-6": "ONE document JOINED `dated` at this lane's tip (PEOPLE-6 LINKS, the people car's display lane for the owner's face row and door back, measured with this walker's own arm): 101 -> 102, docs/PEOPLE_6_LINKS_2026-11-07.md, the lane's record, born dated. A GROWTH, not a class move: no live document left the gated corpus.",
+    "_rosterGrowth2026-11-07-merge-5ab": "TWO documents JOINED `dated` at the merge seat's tip (MERGE-5AB, the people car's merge of lane 5A then lane 5B onto the 234 tip c7d552370, measured with this walker's own arm): 99 -> 101 at the union. docs/PEOPLE_5B_EDIT_2026-11-07.md is lane 5B's record and arrives with its own note (people-5b, which counted 99 at its own tip); docs/PEOPLE_5AB_MERGE_2026-11-07.md is this seat's record, born dated. GROWTHS, not class moves: no live document left the gated corpus.",
+    "_rosterGrowth2026-11-07-people-2": "ONE document JOINED the roster by being BORN into it (PEOPLE-2 CAST-DERIVED, the people car's lane 2, measured with this walker's own arm): `dated` 94 -> 95, docs/PEOPLE_2_CAST_2026-11-07.md (the lane's record: the crisis cast, the seat rows, the crisis hooks' party and the structural standing re-derived from the powers' memberships; the registers; the red list). A GROWTH, not a re-classification: the file is dated by its basename and archival by its own header; it carries no path:line citation of its own, so pastEofCitationsExcluded is unchanged and ARM 2 over live docs stays 0.",
+    "_rosterGrowth2026-11-07-people-5b": "THREE documents measured onto the roster at this lane's tip (PEOPLE-5B EDIT, the people car's lane 5b, measured with this walker's own arm): `dated` 96 -> 99. The base (`c7d552370`, MERGE-234's final tip) already measured 98: docs/PEOPLE_3_HOOKS_2026-11-07.md and docs/PEOPLE_4_TIES_2026-11-07.md joined at the merge of lanes 3 and 4 with their own notes above, and the pin was not moved there. This lane adds ONE: docs/PEOPLE_5B_EDIT_2026-11-07.md (the lane's record: the edit layer, schema 2, the first real save migration, the contract), born dated. A GROWTH, not a re-classification: each file is dated by its basename and archival by its own header; none carries a path:line citation of its own, so pastEofCitationsExcluded is unchanged.",
+    "_rosterGrowth2026-11-07-people-land-records": "NINE documents JOINED `tree` by being BORN into it (PEOPLE-LAND second seat, the people car's golden door, measured with this walker's own arm at the stack's tip): 95 -> 104, docs/shift-records/2026-11-07-people-land-0a-review-intake.json, -people-land-0b-w0-merge.json, -people-1-cast.json, -people-2-cast-derived.json, -people-3-hooks.json, -people-4-ties.json, -people-5a-display.json, -people-5b-edit.json, -people-land-shim-out.json, the nine signed records of the landing. `dated` unmoved at 104.",
+    "_rosterGrowth2026-11-07-people-land-l0": "ONE document JOINED `dated` at the landing (PEOPLE-LAND second seat, step L0: lane/people-6-links-2026-11-07 merged --no-ff into the landing, both lanes' growth notes kept, measured with this walker's own arm at the merged tip): 103 -> 104, docs/PEOPLE_6_LINKS_2026-11-07.md, the links lane's record (its own note _rosterGrowth2026-11-07-people-6 counted it 101 -> 102 off the same base bc4b64230; the landing's note counted 101 -> 103), born dated.",
+    "_rosterGrowth2026-11-07-people-land": "TWO documents JOINED `dated` by being BORN into it (PEOPLE-LAND, the people car's landing seat, measured with this walker's own arm): 101 -> 103. docs/PEOPLE_LAND_2026-11-07.md is the seat's record; docs/tuning-signatures/2026-11-07-v2.json is Register VII v2's signing record (M-5). GROWTHS, not class moves: no live document left the gated corpus.",
+    "_rosterGrowth2026-11-07-people-3": "ONE document JOINED the roster by being BORN into it (PEOPLE-3 HOOKS, the people car's lane 3, measured with this walker's own arm): `dated` 94 -> 95, docs/PEOPLE_3_HOOKS_2026-11-07.md (the lane's record: one hook per representative, the three classes and their parties, the gate's party arm, the registers, the red list). A GROWTH, not a re-classification: the file is dated by its basename and archival by its own header; it carries no path:line citation of its own, so pastEofCitationsExcluded is unchanged and ARM 2 over live docs stays 0.",
     "_rosterGrowth2026-11-07-integration-merge": "The chair, at the integration merge of 2026-11-07 (lane/integration-2026-11-07: master db832c892 + the engine merge, the review intake, W6, SOAK-MERGE, PEOPLE-0, the wiring inventory, the style audit, W0, and the people car rulings), measured with this walker's own arm: `dated` 78 -> 93 — the lanes' own growth notes above each measured their count on their own branch (76 -> 78 twice, 77 -> 78, …), so the union is re-measured here once: FIFTEEN dated documents JOINED by being BORN into it: docs/REVIEW_INTAKE_2026-11-06.md, docs/REVIEW_INTAKE_LAND_2026-11-07.md, docs/WIRING_W0_2026-11-07.md, docs/WIRING_W6_2026-11-07.md, and the eleven dated chair documents of docs/chair/2026-11-07/ (BRIEF-PEOPLE-1-CAST, BRIEF-PEOPLE-COMMON, BRIEF-RUNG3-SHARDS, BRIEF-WIRING-COMMON, PEOPLE-INVENTORY, PEOPLE-RULINGS, SOAK_MERGE, STYLE-AUDIT, STYLE-RULINGS, WIRING-INVENTORY, WIRING-RULINGS); the two engine records were already inside 78, and W0's five shift records grew `tree` 90 -> 95 under their tree rule, recorded by W0. A GROWTH, not a re-classification: no document changed class.",
     "_rosterGrowth2026-11-07-people-briefs": "THREE documents JOINED the roster by being BORN into it (the chair, on the integration branch, measured with this walker's own arm): `dated` 93 -> 96, docs/chair/2026-11-07/BRIEF-PEOPLE-2-CAST-DERIVED-2026-11-07.md, BRIEF-PEOPLE-3-HOOKS-2026-11-07.md, BRIEF-PEOPLE-4-TIES-2026-11-07.md, the people car's middle-lane briefs, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class.",
     "_rosterGrowth2026-11-07-parallel-briefs": "THREE documents JOINED the roster by being BORN into it (the chair, on the integration branch, on the owner's word of 2026-11-07 \"Anything else you can run in parallel with children?\"): `dated` 96 -> 99, docs/chair/2026-11-07/BRIEF-PEOPLE-5-PREP-2026-11-07.md, BRIEF-BUILD-CHECK-2026-11-07.md, BRIEF-WAVE-PREP-2026-11-07.md, three measure-only seats' briefs, born dated, 0 past-EOF citations. A GROWTH, not a re-classification: no document changed class.",

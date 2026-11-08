@@ -53,9 +53,11 @@ const STORED_LOCK_MAPS = Object.freeze([
   { npcs: true, history: true },
 ]);
 
+// PEOPLE-5A RE-KEYED (M-1b): the tab groups by the card's FIRST-RANK power, read from its
+// memberships (the shim's `factionAffiliation` is no longer read).
 const roster = () => [
-  { id: 'npc_0', name: 'Alda Reeve', role: 'reeve', influence: 'high', factionAffiliation: 'Council' },
-  { id: 'npc_1', name: 'Bran Smith', role: 'smith', influence: 'low', factionAffiliation: 'Council' },
+  { id: 'npc_0', name: 'Alda Reeve', role: 'reeve', influence: 'high', memberships: [{ power: 'Council', rank: 1 }] },
+  { id: 'npc_1', name: 'Bran Smith', role: 'smith', influence: 'low', memberships: [{ power: 'Council', rank: 2 }] },
 ];
 
 const townOf = (npcs) => ({
@@ -212,7 +214,9 @@ describe('CONSOLIDATION — one count, one faction label, no tie fold', () => {
 
   test('a card inside its own faction group drops the faction suffix; the role stays', () => {
     const { container } = mountNpcs();
-    const row = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Alda Reeve'));
+    // PEOPLE-6 LINKS (2026-11-07): the card's line (role, door back, power line) sits UNDER the
+    // toggle, not inside its <button> (the door is a link), so the card is the toggle's parent.
+    const row = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Alda Reeve')).parentElement;
     expect(row.textContent).toContain('reeve');
     expectAbsentWithAnchor(row.textContent, '· Council', 'reeve', 'N5 faction suffix inside its own group');
   });

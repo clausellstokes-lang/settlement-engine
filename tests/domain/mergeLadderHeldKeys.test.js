@@ -57,7 +57,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { getStepMeta } from '../../src/generators/pipeline.js';
 import { rederive } from '../../src/domain/edit/dmLayer.js';
 import { declarationsFor } from '../../src/domain/edit/fieldDeclarations.js';
-import { mergeConsequence, recomputeMirrors, recomputeReceipts } from '../../src/domain/edit/mergeConsequence.js';
+import { mergeConsequence, recomputeReceipts } from '../../src/domain/edit/mergeConsequence.js';
 import { mergeTree } from '../../src/domain/edit/recordMergeTree.js';
 import { recordInvariants } from '../../src/domain/edit/recordInvariants.js';
 import { ATOMIC_COLLECTIONS, CLASS_EXCEPTIONS, RECORD_CLASSES } from '../../src/domain/edit/recordRegister.js';
@@ -212,7 +212,6 @@ function trials() {
       const merged = out.record;
       const pure = mergeTree(cl(built.record), cl(R0), cl(R1)).value;
       const pipeline = cl(pure);
-      recomputeMirrors(pipeline);
       recomputeReceipts(pipeline);
       const exempt = new Set([...recordInvariants(base).map(vkey), ...recordInvariants(built.record).map(vkey),
         ...recordInvariants(R1).map(vkey)]);
@@ -264,7 +263,8 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // denominator. Nothing writes the key in src/ today, so no trial below can carry it and the
     // census figures are unmoved; this line is the roster join made visible, which is the law
     // this arm's title states.
-    expect(HELD_KEYS.length, 'the HELD denominator is imported from the register, never re-typed').toBe(11);
+    // ELEVEN -> TEN AT PEOPLE-5B (M-7): `factions` (the NPC grouping) left the record and the register.
+    expect(HELD_KEYS.length, 'the HELD denominator is imported from the register, never re-typed').toBe(10);
 
     const movedOnPowerCard = power.filter((trial) => trial.heldMoved.length > 0).map((trial) => `${trial.label} ${trial.key} -> ${h(trial.heldMoved)}`);
     const movedAnywhere = all.filter((trial) => trial.heldMoved.length > 0).map((trial) => `${trial.label} ${trial.key} -> ${h(trial.heldMoved)}`);
@@ -366,7 +366,17 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // 2026-11-05 (LANDING-5, the chair's ruling 4; an anti-vacuity arm, READ and BISECTED by stage): 17 -> 16 TERRAIN-POOLS
     // ac09ea83b -> 9 X-46 car 3 90dc22f18 -> 10 PLACE-NOT-TIER 6129c300d -> 7 car 3 I7 6ca454d2b -> 8 F6 6d84aa834 -> 9 F1
     // 5e9ffb220. Still live (nine trials, six of them the E6 seat edit on the six hamlets), and `foreign` stays empty.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(9);
+    // 2026-11-07 (PEOPLE-4 TIES, R-P7; measured on the lane's base 8fa9de5b8 at 7, red there): 7 -> 40. The ties
+    // are drawn at the coherence seam now and keyed `from,to,type` (directed) in the register, so the
+    // conflicts a rival or enemy tie grounds are re-derived from a different tie list on more trials and the
+    // post-pass restates their citations more often. The law below (no foreign citation) is unchanged.
+    // RE-KEYED by MERGE-234 (the union of lanes 1–4, READ off the arm's received value): 40 -> 32 — lane 3's conflicts pair
+    // over the powers by memberships, and the seam mints' ties are drawn by drawTies to the seat.
+    // RE-KEYED at the people landing (2026-11-07, this arm's count probed with the tip's own trials() at each lane's
+    // tree): 32 at lane 4 c7d552370 -> 30 5A DISPLAY 053283dfd -> 56 5B EDIT a725df7e4 (the v2 boundary strips the
+    // grouping from every returned record) -> 27 the landing's shim out 2981f23f6 (the grouping writer leaves the
+    // pipeline), unmoved to the tip. `foreign` stays empty at every stage.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(27);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
@@ -409,6 +419,13 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // re-takes the evidence array (atomicTaken held only economicState.primaryImports). Searched over all 63 rows with
     // faction[1] halved: town|germanic|plains|road|civilized|gm-seed-c is the ONE row whose merge still takes the
     // evidence whole from R1 with R1's row differing from the record's, so the arm keeps its subject.
+    // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1): THE SUBJECT ROW DISSOLVED. Searched over all 63 rows with
+    // faction[0], [1] and [2] halved in turn at the lane's tip: NO row's merge takes the evidence array whole any
+    // more — the cast is the roster's faces, one per house, so a power's halving no longer re-deals the roster and
+    // the receipt's evidence rows agree between R0 and R1 on every row. The claim is the MERGE's (ATOMIC_COLLECTIONS
+    // governs the evidence array; the post-pass restates the two digits), so it is proved on a re-derivation whose
+    // evidence row is MADE to differ — R1's finalGraph row re-stated with both digits moved — rather than on a row
+    // the corpus happens to carry; the ROSTER_RE and the register row are the same ones the live subject exercised.
     const row = sample63().find((candidate) => keyOf(candidate) === 'town|germanic|plains|road|civilized|gm-seed-c');
     const { _seed: seed, ...config } = row;
     const base = generateSettlementPipeline(config, null, { seed, customContent: {} });
@@ -418,7 +435,13 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     record.powerStructure.factions[1].power = Math.max(1, Math.round((factions[1].power || 20) * 0.5));
     renormalizeFactionPower(record.powerStructure.factions);
     const layer = layerOf([[`faction:${factions[1].faction}:power`, record.powerStructure.factions[1].power]]);
-    const R1 = rederive(record, config, layer, ENGINE, DECLARATIONS).record;
+    const R1 = cl(rederive(record, config, layer, ENGINE, DECLARATIONS).record); // cloned: the re-derivation is frozen
+    {
+      const live = rowAt(R1, 'finalGraph');
+      const moved = String(live.evidence).match(ROSTER_RE);
+      expect(moved, 'the finalGraph evidence row carries the two counted digits').toBeTruthy();
+      live.evidence = String(live.evidence).replace(ROSTER_RE, (whole, a, b) => whole.replace(a, String(Number(a) + 1)).replace(b, String(Number(b) + 2)));
+    }
 
     const { value, receipts } = mergeTree(cl(record), cl(R0), cl(R1));
     expect(receipts.atomicTaken, 'ACT ONE: the evidence array has no sound key, so the tree merge takes it from R1 as ONE value')
@@ -479,7 +502,7 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(quiet.length, 'the quiet trials, which are 477 of 498 once the ladder stops repairing held facts').toBe(477);
     const drifted = quiet.filter((trial) => !trial.mergedIsPipeline).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: `quiet` is 463 rows by the expectation above.
-    expect(drifted, 'a quiet trial whose merged record is not mergeTree + recomputeMirrors + '
+    expect(drifted, 'a quiet trial whose merged record is not mergeTree + '
       + `recomputeReceipts of its own inputs — the guard changed something while doing nothing:\n${drifted.join('\n')}`).toEqual([]);
     const noisy = all.filter((trial) => trial.escalations.length > 0);
     expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(21); // X-29: 40 -> 35; 2026-11-05 (LANDING-5, by stage): 35 -> 21

@@ -405,7 +405,7 @@ export function buildDossierEntityIndex(settlement = {}) {
   const npcs = (settlement.npcs || []).map((/** @type {any} */ npc) =>
     decorateEntry('npc', { ...entityLink('npc', npc), traits: normalizeNpcTraits(npc) }, npc));
 
-  const factions = (settlement.powerStructure?.factions || settlement.factions || []).map((/** @type {any} */ faction) => {
+  const factions = (settlement.powerStructure?.factions || []).map((/** @type {any} */ faction) => {
     const displayName = faction.faction || faction.name || faction.label;
     const base = {
       ...entityLink('faction', faction, faction.faction),

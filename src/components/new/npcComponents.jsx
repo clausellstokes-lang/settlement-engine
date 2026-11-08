@@ -18,6 +18,9 @@ import { useEntityFocus } from '../dossier/useEntityFocus.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
+import { cardTieLines } from '../../domain/relationships/cardTies.js';
+import { cardPowerLine, cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
+import { cardInstitutionDoorOf, cardHonorificOf } from '../../domain/people/cardDoor.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
@@ -82,7 +85,8 @@ export function NPCCategoryGroup({
       const q = search.toLowerCase();
       return (npc.name||'').toLowerCase().includes(q) ||
              (npc.role||'').toLowerCase().includes(q) ||
-             (npc.factionAffiliation||'').toLowerCase().includes(q);
+             cardPowerNames(npc).some(p => p.toLowerCase().includes(q)) ||
+             (cardHouseOf(npc)||'').toLowerCase().includes(q);
     }
     return true;
   });
@@ -107,7 +111,6 @@ export function NPCCategoryGroup({
         <NPCInlineCard
           key={durableNpcId(npc) || `legacy-presentation-${index}`}
           npc={npc}
-          groupLabel={displayLabel}
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
           canAuthorNpc={canAuthorNpc}
@@ -140,9 +143,9 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
           above the toggle; the role line and the chevron are the toggle. */}
       <div style={{background:open?style.bg:'#faf8f4'}}>
         <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',padding:'10px 14px 0',marginBottom:3}}>
-          <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Id?<EntityLink id={rel.npc1Id} type="npc" fallback={rel.npc1Name} style={{...serif,fontSize:FS.lg}}/>:<MentionText text={rel.npc1Name} structural/>}</span>
+          <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.from?<EntityLink id={rel.from} type="npc" fallback={rel.npc1Name} style={{...serif,fontSize:FS.lg}}/>:<MentionText text={rel.npc1Name} structural/>}</span>
           <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
-          <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Id?<EntityLink id={rel.npc2Id} type="npc" fallback={rel.npc2Name} style={{...serif,fontSize:FS.lg}}/>:<MentionText text={rel.npc2Name} structural/>}</span>
+          <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.to?<EntityLink id={rel.to} type="npc" fallback={rel.npc2Name} style={{...serif,fontSize:FS.lg}}/>:<MentionText text={rel.npc2Name} structural/>}</span>
           {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
         </div>
         <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'flex-start',gap:8,background:'none',border:'none',cursor:'pointer',padding:'0 14px 10px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
@@ -185,7 +188,6 @@ export function ConflictCard({conflict:c}) {
 // (BUILD-W2-SEARCH U2), which mounts a person through this same card.
 export function NPCInlineCard({
   npc,
-  groupLabel = '',
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
@@ -207,6 +209,10 @@ export function NPCInlineCard({
     return (id) => map.get(String(id)) || null;
   }, [savedSettlements]);
   const wLine = whereaboutsLine(npc.whereabouts, resolvePlaceName);
+  // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): the card's OWN tie first, then the ties naming it.
+  const relationships = settlement?.relationships;
+  const npcTieId = npc?.id;
+  const tieLines = useMemo(() => cardTieLines(relationships, npcTieId), [relationships, npcTieId]);
   const wBadge = whereaboutsBadge(npc.whereabouts);
   const npcId = durableNpcId(npc);
   const resolveNpcIndex = () => uniqueNpcIndex(settlement?.npcs, npcId);
@@ -246,11 +252,21 @@ export function NPCInlineCard({
   const roleArchetype = NPC_ROLE_ARCHETYPES.includes(roleFacet)
     ? humanizeNpcFacet(roleFacet)
     : '';
-  const nativeRole = NPC_ROLE_ARCHETYPES.includes(npc.role)
+  // The card's house, then its standing in each power by rank (PEOPLE-5A, M-1b). PEOPLE-6 LINKS:
+  // the house is a door to its Institutions card; a minted face's door is its power's card.
+  const cardDoor = cardInstitutionDoorOf(npc, settlement);
+  const cardPowerTail = cardPowerLine(npc);
+  const cardLineTail = cardDoor || cardPowerTail;
+  // PEOPLE-6 LINKS step 2 (the owner's word): a face's heading is its full name alone, and its
+  // role is the honorific of its institution's title, on its own row under the door. The card's
+  // `role`/`title` (the title itself, M-1b) is not printed beside it; a DM's person keeps both.
+  const honorific = cardHonorificOf(npc);
+  const nativeRole = cardDoor ? '' : NPC_ROLE_ARCHETYPES.includes(npc.role)
     ? humanizeNpcFacet(npc.role)
     : (npc.role || '');
   const showRoleArchetype = roleArchetype
     && String(roleFacet) !== String(npc.role || '');
+  const hasSubline = Boolean(nativeRole || showRoleArchetype || cardLineTail || honorific);
   const goalFacet = npcFacetOf(npc, 'goal');
   const goalText = NPC_GOALS.includes(goalFacet)
     ? humanizeNpcFacet(goalFacet)
@@ -322,19 +338,12 @@ export function NPCInlineCard({
       ...edged(`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`, `3px solid ${isPinned ? pinColor : color}`),
       marginBottom:6,overflow:'hidden',
     }}>
-      <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+      <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding: hasSubline ? '8px 12px 0' : '8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
             <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{npc.name}</span>
-            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>{npc.title}</span>
+            {!cardDoor && <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>{npc.title}</span>}
             <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
-          </div>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
-            {nativeRole}
-            {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
-            {/* The group header above already names the faction (chair ruling N5): the
-                suffix prints only where the card stands outside its own faction's group. */}
-            {npc.factionAffiliation && npc.factionAffiliation !== groupLabel ? ` · ${npc.factionAffiliation}` : ''}
           </div>
         </div>
         {pinAvailable && (
@@ -361,6 +370,23 @@ export function NPCInlineCard({
         )}
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
       </button>
+      {/* THE CARD'S LINE, under the toggle (PEOPLE-6 LINKS): it holds the door back, a link, which
+          may not sit inside the toggle's <button>; the role row follows it. */}
+      {hasSubline && (
+        <div data-testid="npc-card-line" style={{padding:'0 12px 8px'}}>
+      <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
+        {nativeRole}
+        {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
+        {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
+            each power by rank — "first of X · second of Y" — read from its memberships. */}
+        {cardLineTail && (nativeRole || showRoleArchetype) ? ' · ' : ''}
+        {cardDoor && <span data-testid="npc-institution-door"><EntityLink id={cardDoor.id} type={cardDoor.type} fallback={cardDoor.name} style={{ color: swatch.inkMag3, fontWeight: 600 }} /></span>}
+        {cardDoor && cardPowerTail ? ' · ' : ''}
+        {cardPowerTail}
+      </div>
+      {honorific && <div data-testid="npc-role" style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>{honorific}</div>}
+        </div>
+      )}
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
           {flag('settlementWorkbench') && canAuthorNpc && npc?.id != null && (
@@ -419,6 +445,16 @@ export function NPCInlineCard({
                 color: wBadge === 'Held' ? swatch.danger : swatch.inkMag3,
               }}>{wBadge}</span>
               <span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
+            </div>
+          )}
+          {tieLines.length>0 && (
+            <div data-testid="npc-card-ties" style={{display:'flex',flexDirection:'column',gap:2,margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
+              {tieLines.map((t,i)=>(
+                <div key={`tie-${i}`} data-tie-direction={t.direction} style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
+                  <span style={{fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.04em'}}>{t.direction==='own'?(t.kind||'Tie'):'Called by'}</span>
+                  <span style={{color:swatch.inkMag2}}>{t.withId?<EntityLink id={t.withId} type="npc" fallback={t.withName}/>:t.withName}{t.direction==='calledBy'&&t.kind?` · ${t.kind}`:''}</span>
+                </div>
+              ))}
             </div>
           )}
           {npc.structuralPosition && (

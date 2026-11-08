@@ -83,7 +83,8 @@ describe('shell — suggested questions are zero-cost (PIN 2)', () => {
   });
 
   it('a settlement anchor yields 3-4 read-model-derived questions (naming the settlement)', () => {
-    const settlement = { id: 's1', name: 'Ashford', factions: [{ id: 'f1' }], npcs: [{ id: 'n1' }] };
+    // PEOPLE-5A RE-KEYED (M-2): the factions are the powers (`powerStructure.factions`), never the grouping.
+    const settlement = { id: 's1', name: 'Ashford', powerStructure: { factions: [{ id: 'f1' }] }, npcs: [{ id: 'n1' }] };
     const anchor = deriveAnchor({ view: 'settlements', params: { id: 's1' }, settlement });
     const qs = suggestedQuestions(anchor, { settlement });
     expect(qs.length).toBeGreaterThanOrEqual(3);

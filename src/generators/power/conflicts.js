@@ -4,6 +4,7 @@
  */
 import { getInstFlags, getStressFlags, pick, randInt } from '../helpers.js';
 import { createGenerationWorldLaw } from '../generationContext.js';
+import { nameOf } from '../../domain/rulingPower.js';
 
 // computeRelTension
 // buildConflictPlotHooks — build up to 3 plot hooks for a conflict between two
@@ -50,29 +51,44 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
 };
 
 /**
- * The pairs of POWER factions a rival or enemy tie crosses, strongest first (GS-2, ODQ
- * §934.101). `factions` is the power projection `factionGrouping.js` builds, so each NPC sits
- * in at most one group and the group's name is a power faction's own. A tie whose two ends
- * share a faction, or whose end belongs to none, grounds nothing. Ranked by tie count, then by
- * the factions' order on the power roster, so the ranking is a pure function of the record.
- * Pure: no draw.
- * @param {Array<{ name: string, members?: Array<{ id?: unknown }> }>} factions
- * @param {Array<{ type?: string, npc1Id?: unknown, npc2Id?: unknown }>} relationships
- * @returns {Array<{ factionA: object, factionB: object, ties: number }>}
+ * A person's home power, by NAME: the power it ranks best in (its memberships, the people car's
+ * shape); none for a card in no power. Pure.
+ * @param {{ memberships?: Array<{ power?: unknown, rank?: unknown }> } | null | undefined} npc
+ * @returns {string | null}
  */
-const crossFactionRivalPairs = (factions, relationships) => {
+const homePowerOf = (npc) => {
+  // PEOPLE-5A (M-2): the memberships only — the legacy `factionAffiliation` fallback is deleted
+  // (a pre-car record gets its memberships from the save migration, M-7).
+  const memberships = Array.isArray(npc?.memberships) ? npc.memberships.filter((m) => m && typeof m.power === 'string') : [];
+  if (!memberships.length) return null;
+  const rankOf = (m) => (Number.isInteger(m.rank) ? m.rank : Number.MAX_SAFE_INTEGER);
+  return String([...memberships].sort((x, y) => rankOf(x) - rankOf(y))[0].power);
+};
+
+/**
+ * The pairs of POWERS a rival or enemy tie crosses, strongest first (GS-2, ODQ §934.101; the
+ * people car, PEOPLE-3 HOOKS: paired over the POWERS — `powerStructure.factions` — never over the
+ * NPC grouping, which PEOPLE-5 deletes). Each person's home is the power it ranks best in
+ * (`homePowerOf`); a tie whose two ends share a home, or whose end has none, grounds nothing.
+ * Ranked by tie count, then by the powers' order on the power roster, so the ranking is a pure
+ * function of the record. Pure: no draw.
+ * @param {Array<{ name: string }>} powers the powers, `{ name }`, in roster order
+ * @param {Array<{ type?: string, from?: unknown, to?: unknown }>} relationships
+ * @param {Array<Record<string, any>>} npcs the cast
+ * @returns {Array<{ factionA: { name: string }, factionB: { name: string }, ties: number }>}
+ */
+const crossFactionRivalPairs = (powers, relationships, npcs) => {
+  const byName = new Map(powers.map((power) => [power.name, power]));
+  const rank = new Map(powers.map((power, index) => [power, index]));
   const homeOf = new Map();
-  const rank = new Map();
-  factions.forEach((faction, index) => {
-    rank.set(faction, index);
-    (faction.members || []).forEach((member) => {
-      if (member?.id != null && !homeOf.has(member.id)) homeOf.set(member.id, faction);
-    });
-  });
+  for (const npc of npcs || []) {
+    const home = byName.get(homePowerOf(npc));
+    if (npc?.id != null && home && !homeOf.has(npc.id)) homeOf.set(npc.id, home);
+  }
   const pairs = new Map();
   for (const rel of relationships || []) {
     if (!['rival', 'enemy'].includes(rel?.type)) continue;
-    const a = homeOf.get(rel.npc1Id), b = homeOf.get(rel.npc2Id);
+    const a = homeOf.get(rel.from), b = homeOf.get(rel.to); // PEOPLE-4 TIES: the directed ends (R-P7)
     if (!a || !b || a === b) continue;
     const [first, second] = rank.get(a) < rank.get(b) ? [a, b] : [b, a];
     const key = `${rank.get(first)}:${rank.get(second)}`;
@@ -85,15 +101,19 @@ const crossFactionRivalPairs = (factions, relationships) => {
     || rank.get(p.factionB) - rank.get(q.factionB));
 };
 
-// generateConflicts — the standing quarrels between POWER factions (GS-2, ODQ §934.101).
-// A conflict is two power factions a rival or enemy tie crosses; its intensity is the count of
-// those ties. A town where no such tie crosses two factions has no conflict row, honestly: the
+// generateConflicts — the standing quarrels between POWERS (GS-2, ODQ §934.101).
+// A conflict is two powers a rival or enemy tie crosses; its intensity is the count of
+// those ties. A town where no such tie crosses two powers has no conflict row, honestly: the
 // old pairing put adjacent tie-components against each other with no rivalry at all four times
 // in ten. Draws (on the caller's stream): the count, then one issue pick per conflict.
-//   factions, relationships, config, institutions
-export const generateConflicts = (factions, relationships, config = {}, institutions = []) => {
-  if (!Array.isArray(factions) || factions.length < 2) return [];
-  const rivalPairs = crossFactionRivalPairs(factions, relationships);
+//   powers (powerStructure.factions rows), relationships, config, institutions, npcs (the cast:
+//   each person's home power is read from its memberships — PEOPLE-3 HOOKS, never the grouping)
+export const generateConflicts = (powers, relationships, config = {}, institutions = [], npcs = []) => {
+  const named = (Array.isArray(powers) ? powers : [])
+    .map((row) => ({ name: nameOf(row) }))
+    .filter((row) => row.name !== '');
+  if (named.length < 2) return [];
+  const rivalPairs = crossFactionRivalPairs(named, relationships, npcs);
   if (!rivalPairs.length) return [];
   const worldLaw = createGenerationWorldLaw(config, {
     tradeRoute: config.tradeRouteAccess,

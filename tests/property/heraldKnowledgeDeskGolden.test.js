@@ -102,10 +102,13 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 2 fewer items (436 → 434).
     // 434 → 435 at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json): the step re-deals the realm's year and the year-one desk files
     // 1 more items (434 → 435).
-    // 435 → 438 at THE POOL CENSUS COMPOSED (ODQ §934.105, RUNG 2 OF THE SOAK LADDER, the landing stacked on rung 1;
-    // record docs/shift-records/2026-11-06-rung2-03-census-composed-herald-desk.json): the census record's shape on rung 1's
-    // desk files 3 more items (5 rows from the census-1b step, 36 interaction rows of the rung-1 merge; 435 → 438).
-    expect(Object.keys(manifest)).toHaveLength(438);
+    // 435 → 479 at RECORD 1, PEOPLE-1 CAST (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-1-cast.json): the cast re-deals the wizard news over the year: one face per face-bearing house replaces the faction rungs' NPCs (222 items added, 178 removed, 2 moved)
+    // 44 more items (435 → 479).
+    // 479 → 478 at RECORD 2, PEOPLE-2 CAST-DERIVED (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-2-cast-derived.json): the crisis cast re-deals the wizard news over the year (9 items added, 10 removed, 2 moved)
+    // 1 fewer items (479 → 478).
+    // 478 → 470 at RECORD 5B, PEOPLE-5B EDIT (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-5b-edit.json): the v2 record re-deals the wizard news over the year (10 items added, 18 removed, 2 moved)
+    // 8 fewer items (478 → 470).
+    expect(Object.keys(manifest)).toHaveLength(470);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -156,9 +159,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the step re-deals the year; the year's misjudgment beats are now 3 (4, 42, 49), all on knowledge.
       // Re-dealt at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json):
       // the step re-deals the year; the year's misjudgment beats are now 2 (4, 42), all on knowledge.
+      // Re-dealt at RECORD 1, PEOPLE-1 CAST (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-1-cast.json):
+      // the cast re-deals the year; the year's misjudgment beats are now 1 (4), on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.42.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');

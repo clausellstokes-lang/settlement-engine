@@ -115,7 +115,9 @@ describe('the landing prose quotes the fixture it is about', () => {
     // 2026-11-04 (LANDING-2, the rung-1 landing): [8, 10] -> [8, 9]. The rung-1 window's town (population 82)
     // derives a new timeline at lf-033 (the reforms at week 8, the Elder Council's capture at week 9); body2 was
     // re-grounded.
-    for (const spoken of [8, 9]) {
+    // 2026-11-07 (PEOPLE-LAND second seat, the people car's landing): [8, 9] -> [5, 9]. The cast derives a new timeline
+    // at lf-033 (the war footing at week 5, the Elder Council's capture at week 9); body2 was re-grounded (an owner veto point).
+    for (const spoken of [5, 9]) {
       expect(
         weeks,
         `the prose calls out week ${spoken}, which the fixture's advance timeline no longer contains`
@@ -135,10 +137,13 @@ describe('the landing prose quotes the fixture it is about', () => {
     // 2026-10-02, the Voice Program (ODQ §934.88): the engine now writes each beat as a deed ("goes onto a war footing",
     // "Crime takes hold", "trade routes break down"), so the pairs bind the deed words on both sides.
     // 2026-11-04 (LANDING-2): re-grounded with body2 on the rung-1 window's timeline; the pairs follow the beats.
+    // 2026-11-07 (PEOPLE-LAND second seat, the people car's landing): re-grounded with body2 on the cast's timeline at
+    // lf-033; one pair per beat, six beats (was five).
     for (const [inProse, inFixture] of [
-      ['open challenge', 'open challenge'],
-      ['raider pressure', 'raider pressure'],
-      ['reforms', 'reforms'],
+      ['restore order', 'restore order'],
+      ['rallied supporters', 'rallies supporters'],
+      ['religious conversion fracture', 'religious conversion fracture'],
+      ['war footing', 'war footing'],
       ['captured an institution', 'captures an institution'],
       ['trade routes', 'trade routes'],
     ]) {
@@ -168,22 +173,24 @@ describe('the landing prose quotes the fixture it is about', () => {
     expect(receipts.institution, 'the fixture institution is no longer the blacksmith').toContain('blacksmith');
   });
 
-  it('the 02 body names the four receipts the card shows', () => {
+  it('the 02 body names the three receipts the card shows', () => {
     const body = landing.voice.body.toLowerCase();
     expect(body).toContain(fixture.town.name.toLowerCase());
-    // The conflict receipt is bound by BOTH its parties, the other three by their nouns.
-    for (const word of ['elder council', 'religious authorities', 'road', 'timber', 'blacksmith']) {
+    // 2026-11-07 (PEOPLE-LAND second seat): the conflict receipt left with the faction grouping (the people car), so the
+    // card prints three receipts, each bound by its noun; the re-emitted fixture at lf-033 derives no conflict.
+    for (const word of ['road', 'timber', 'blacksmith']) {
       expect(body, `the voice body stopped naming the "${word}" receipt`).toContain(word);
     }
     const receipts = fixture.voice.receipts.map((r) => r.text.toLowerCase()).join(' | ');
-    for (const word of ['elder council', 'religious authorities', 'road', 'timber', 'blacksmith']) {
+    for (const word of ['road', 'timber', 'blacksmith']) {
       expect(receipts, `the fixture no longer carries a "${word}" receipt for the voice card`).toContain(word);
     }
     // The card prints FOUR receipt lines and the sentence says so. It printed three from the
     // urban band's re-emitted fixture (2026-09-30), which derived no conflict for lf-033, until
     // the one-faction-set fixture (GS-2, ODQ §934.101; re-emitted 2026-10-31) derived one again.
-    expect(fixture.voice.receipts).toHaveLength(4);
-    expect(body, 'the voice body counts a number of facts the card does not print').toContain('four facts');
+    // 2026-11-07 (PEOPLE-LAND second seat): four -> three, the conflict receipt gone with the grouping.
+    expect(fixture.voice.receipts).toHaveLength(3);
+    expect(body, 'the voice body counts a number of facts the card does not print').toContain('three facts');
   });
 
   it('the commons body offers a town the curated trio actually carries', () => {

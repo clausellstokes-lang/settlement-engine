@@ -103,11 +103,12 @@ import {
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
   RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
+  RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema30Baseline,
+  validateSchema31Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -229,13 +230,18 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     generators/steps/stressConfirmPass.js; no corpus world draws a `mass_migration`, so the
  *     projection's writer never runs in the corpus); the roster 13 -> 14, the bank 76/50 -> 77/51,
  *     and the one new row (src/domain/migrationDirection.js x1) admitted TAGGED (RETIRED).
- * 30 = schema 29's topology, tag law, theta, corpus and fourteen-identity roster, its REGISTER
- *     re-governed to THE CENSUS READERS (the chair's ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on
- *     LANDING-R2's record; cut there as 28 -> 29 and RE-NUMBERED 29 -> 30 at the integration merge,
- *     MERGE-R2): a governed migration rung for a shape change, never a widening of the shrink-only
- *     law. The census and reader lanes' new rows admitted with attribution (`contestsNiche on
- *     factions` MOVED readerBattery.js -> roles/roleClass.js), gone rows retired with cause, the
- *     review re-derived at the merged tip. THE LIVE AUTHORITY.
+ * 30 = schema 29's topology, tag law, roster and corpus definition, re-governed to THE PEOPLE CAR'S
+ *     CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): one face per
+ *     face-bearing house, house-keyed ids, `institution`/`title`/`memberships`, a rank-placed
+ *     `importance`; the corpus's year over the new cast admits 19 ordinary rows with
+ *     attribution and 0 go; nothing declared, the bank 77/51 (RETIRED).
+ * 31 = schema 30's topology, tag law, roster and corpus definition, re-governed to THE PEOPLE CAR'S
+ *     LANDING (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping and the
+ *     per-NPC faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a
+ *     restored consistent schema-30 predecessor (8dd30106b's bytes; MERGE-234's textual merge at
+ *     c7d552370 fails the history walk). 90 new rows ADMITTED with attribution by lane cause, 9 go,
+ *     2 decrease; the migration's v1 reads one review class; nothing declared, the bank 77/51.
+ *     THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -261,6 +267,7 @@ export {
   RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA,
   RETIRED_TIER_COVERAGE_BASELINE_SCHEMA,
   RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA,
+  RETIRED_PEOPLE_CAST_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1572,7 +1579,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema30Baseline(baseline);
+  validateSchema31Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3070,13 +3077,17 @@ export function baselineOf({
       'one guarded read of that projection (src/domain/migrationDirection.js) has no observed writer,',
       'because no corpus world draws a `mass_migration`. The fifth class explains it: ONE declaration,',
       '`migrationDirection on config`, the roster 13 -> 14; the one new row is admitted TAGGED.',
-      'SCHEMA 30 = schema 29\'s topology, tag law, theta, corpus and fourteen-identity roster, its register',
-      're-governed to THE CENSUS READERS (the chair\'s ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on',
-      'LANDING-R2\'s record; cut there as 28 -> 29, RE-NUMBERED 29 -> 30 at the integration merge MERGE-R2):',
-      'a governed migration rung for a shape change. The pool census and the reader lanes landed new readers',
-      '(tradeListDisplay.js, facts/drawDeclared.js, facts/factVocabulary.js) and MOVED one (`contestsNiche on',
-      'factions`, readerBattery.js -> roles/roleClass.js); new rows are admitted with attribution and gone rows',
-      'retired with cause, each named in the review re-derived at the merged tip; no detector source moved.',
+      'SCHEMA 30 (RETIRED) held schema 29\'s topology, tag law, roster and corpus definition, re-governed to THE PEOPLE',
+      'CAR\'S CAST (the owner\'s charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): one face per',
+      'face-bearing house, house-keyed ids, `institution`, `title`, `memberships`, a rank-placed `importance`;',
+      'the named roster and the rung stamps retired from birth. The corpus\'s year over the new cast fires',
+      'different simulation branches, so 19 ordinary rows are ADMITTED with attribution (the schema-24',
+      'posture) and 0 go; nothing is declared and the bank holds at 77/51 (RETIRED).',
+      'SCHEMA 31 = schema 30\'s topology, tag law, roster and corpus definition, re-governed to THE PEOPLE',
+      'CAR\'S LANDING (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping and the',
+      'per-NPC faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored',
+      'consistent schema-30 predecessor; every new row ADMITTED with attribution by lane cause, the',
+      'migration\'s v1 reads one review class (v1-migration-reads); nothing is declared and the bank holds at 77/51.',
       'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3087,7 +3098,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–29 are the RETIRED numeric predecessors.',
+      'Schemas 4–30 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3261,7 +3272,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema30Baseline,
+    validateBaseline: validateSchema31Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

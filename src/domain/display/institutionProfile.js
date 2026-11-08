@@ -26,6 +26,11 @@ import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
 import { identityForInstitution } from './institutionVocabulary.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
+// The backing relation lives in a leaf module so the generator's reader (castPowers via
+// powerSupport) does not drag this display module into the engine-shared, first-paint graph.
+import { institutionBackingFactionName } from './institutionBackingFaction.js';
+
+export { institutionBackingFactionName };
 import { resourceDisplayName } from './resourceDisplayName.js';
 
 /**
@@ -71,20 +76,6 @@ const GATED_GOODS_BY_INSTITUTION = (() => {
   }
   return map;
 })();
-
-// Institution priorityCategory → the faction category that would back it.
-const INST_CATEGORY_TO_FACTION = /** @type {Record<string, string>} */ (Object.freeze({
-  economy: 'economy',
-  crafts: 'economy',
-  trade: 'economy',
-  military: 'military',
-  government: 'government',
-  noble: 'noble',
-  religion: 'religious',
-  religious: 'religious',
-  magic: 'magic',
-  criminal: 'criminal',
-}));
 
 // defenseProfile.institutions bucket key → the defence role label.
 const DEFENSE_BUCKET_LABEL = /** @type {Record<string, string>} */ (Object.freeze({
@@ -174,27 +165,6 @@ function chainsProcessedBy(inst) {
     out.push(product ? `${resource} → ${product}` : String(resource || ''));
   }
   return out;
-}
-
-/** The backing faction (highest-power faction whose category matches the
- *  institution's), or null. Exported as the SINGLE source of truth for the
- *  institution↔power backing relation: the InstitutionCard's "Backed by" row and
- *  the Power tab's support web (domain/dossier/powerSupport.js) both read it, so
- *  the two never diverge. The relation is deliberately COARSE — a category match,
- *  disambiguated to the leading faction of that category — because the generator
- *  emits no per-institution controlling-faction field (only a sparse
- *  `factionSource`); this is the strongest broad signal the data carries.
- *  @param {InstitutionLike} inst @param {any} settlement @returns {(string|null)} */
-export function institutionBackingFactionName(inst, settlement) {
-  const wanted = INST_CATEGORY_TO_FACTION[inst?.priorityCategory || ''];
-  if (!wanted) return null;
-  const factions = settlement?.powerStructure?.factions;
-  if (!Array.isArray(factions)) return null;
-  /** @type {any} */ let best = null;
-  for (const f of factions) {
-    if (f && f.category === wanted && (!best || (f.power || 0) > (best.power || 0))) best = f;
-  }
-  return best ? (best.faction || best.name || null) : null;
 }
 
 /** The defence role this institution fills, or null. Matches by name/catalogId

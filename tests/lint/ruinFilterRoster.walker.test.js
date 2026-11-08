@@ -96,9 +96,11 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/worldPulse/stressorGates.js': 'existence-gate — .some() magic-dependence → narrative strings',
   'src/domain/tableLedger.js': 'name/existence-lookup — exposureTargets offers corruption-marked NPCs/institutions/factions as DM exposure-picker options (selection list, not live-provider aggregation)',
   'src/domain/display/galleryVeil.js': 'mutation — THE GALLERY VEIL (X-21e) REMOVES criminal and clandestine houses from a visitor\'s projected copy; it credits no institution with capacity and sums nothing. A ruined criminal house is hidden exactly as a standing one (existence is the fact veiled), so routing the read through liveInstitutions() would LEAK the ruined ones, not filter them. RULED EXEMPT BY THE CHAIR at the W2-VEIL-A landing (2026-10-31).',
+  'src/domain/settlementMigrations.js': 'name-lookup — PEOPLE-5B (2026-11-07, M-7): the v1 -> v2 save migration reads the roster\'s NAMES once, to recognise a v1 card\'s string `institution` (or an unmapped `secondaryAffiliation`) as a house on the roster. A ruined house is still the house that card was the face of: filtering ruins would turn a DM\'s ruined-temple priest into a face of no house and mis-report the value. It sums nothing and credits no institution with capacity.',
   'src/domain/edit/pools.js': 'name-lookup/affordance — the `npc.role` pool offers a DM the roles the record\'s OWN institutions roster already carries, as a SELECTION LIST ("what may a human name for this field"), never a live-provider aggregation: it sums nothing and credits no institution with capacity. RULED EXEMPT BY THE CHAIR (judgment 138, EM-A2b version 7) on the same reason src/domain/events/targetRosters.js and src/domain/tableLedger.js already hold. Routing it through liveInstitutions() would DROP a ruined institution from a picker where it is a legitimate answer — the former warden of a burned keep is a role a DM may still name — and would add a THIRTEENTH import to a leaf whose own header forbids one.',
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
+  'src/domain/people/cardDoor.js': 'name-lookup/display — PEOPLE-6 LINKS (2026-11-07): the NPC card\'s door back finds its house\'s roster row BY NAME only to compute the id the Institutions card focuses on. It credits no capacity and sums nothing; a ruined house still has its card and its face, so the link stands.',
   'src/domain/coherence/readerBattery.js': 'existence-gate/name-lookup — THE READER BATTERY (lane READER-INSTRUMENTS, 2026-11-04) is an INSTRUMENT, not a provider aggregation: the soak runs it over BIRTH records to ask whether rendered prose names a house the roster lacks — `houseNames` maps the roster to catalogue names for the [~strength-no-house] column and the [no-watch] sub-case, and `hasMarketInstitution(s?.institutions)` is the [no-market] existence gate. It credits no institution with capacity and sums nothing; its own header says it cures nothing. The same standing as contradictions.js above (narrative QA detectors). A ruin on a pulsed save would read present here, which is a false negative in an instrument, never an over-credit in the product.',
   // LANDING-R2 seat E (2026-11-07): the two raw readers the pool census merged in, each classified
   // by reading its one roster read (neither aggregates providers):
@@ -496,7 +498,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // COMPLIANT (isLiveInstitution / the market fact); src/domain/facts/factsOf.js (census-1c unit 2,
     // fbba809db) and src/domain/display/validationOnPage.js (reader-r1 unit 2, d3b9280f6), both
     // EXEMPT above with their reasons. The arm's own failure message: "expected 103 to be 99".
-    expect(readers.length).toBe(103);
+    // PEOPLE-5B (2026-11-07, M-7): 99 -> 100, settlementMigrations.js :: migrateV1toV2's roster-name read (EXEMPT above).
+    // PEOPLE-6 LINKS (2026-11-07): 100 -> 101, src/domain/people/cardDoor.js :: cardInstitutionDoorOf's roster-name read (EXEMPT above).
+    expect(readers.length).toBe(101);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

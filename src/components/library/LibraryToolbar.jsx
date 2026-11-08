@@ -101,9 +101,9 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
         ...(Array.isArray(s.settlement?.npcs)
           ? s.settlement.npcs.map(n => n.name).slice(0, 50)
           : []),
-        // Faction names
-        ...(Array.isArray(s.settlement?.factions)
-          ? s.settlement.factions.map(f => f.faction || f.name).slice(0, 20)
+        // Faction names — the powers (PEOPLE-5A: the NPC grouping is not read)
+        ...(Array.isArray(s.settlement?.powerStructure?.factions)
+          ? s.settlement.powerStructure.factions.map(f => f.faction || f.name).slice(0, 20)
           : []),
       ];
       return fields.some(f => typeof f === 'string' && f.toLowerCase().includes(q));

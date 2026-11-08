@@ -203,6 +203,13 @@ function FullCard({ npc, index }) {
         </Text>
       )}
 
+      {/* PEOPLE-5A (M-1b): the card's house and its standing in each power by rank. */}
+      {(npc.house || npc.powerLine) && (
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2 }}>
+          {safe([npc.house, npc.powerLine].filter(Boolean).join(' · '))}
+        </Text>
+      )}
+
       {/* Description / blurb */}
       {npc.blurb && (
         <View style={{ marginTop: 4 }}>

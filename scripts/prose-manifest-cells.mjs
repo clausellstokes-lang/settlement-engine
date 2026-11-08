@@ -168,7 +168,27 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-06 (THE FOOD PER CENT FROM THE POUNDS, docs/shift-records/2026-11-06-rung1-34-food-per-cent-from-pounds.json, ODQ §934.105,'
     + ' RUNG 1 OF THE SOAK LADDER): re-recorded at the stage of 18fd6b442 because the food writer and its view derive the per cent from the'
-    + ' pounds they publish, with no floor; 24 of the 1,050 rows move, 0 added, 0 removed.',
+    + ' pounds they publish, with no floor; 24 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-07 (THE REVIEW-INTAKE LANE, RECORD 0a OF THE PEOPLE CAR\'S LANDING, docs/shift-records/2026-11-07-people-land-0a-review-intake.json,'
+    + ' ODQ §934.105): re-recorded at the stage of 5b444331a because the review-intake lane\'s merge (a proxy is not a provider; water read'
+    + ' from the record; no roster carries one secret or goal twice) moved the composed prose of four towns; 8 of the 1,050 rows move, 0 added,'
+    + ' 0 removed.'
+    + ' 2026-11-07 (PEOPLE-1 CAST, RECORD 1 OF THE PEOPLE CAR\'S LANDING, docs/shift-records/2026-11-07-people-1-cast'
+    + '.json, ODQ §934.105): re-recorded at the stage of dc655f712 because one face per face-bearing house replaces t'
+    + 'he faction rungs\' NPCs, each power ranking its first, second and third; 762 of the 1,050 rows move, 0 added, '
+    + '0 removed.'
+    + ' 2026-11-07 (PEOPLE-3 HOOKS, RECORD 3 OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-3-hook'
+    + 's.json, ODQ §934.105): re-recorded at the stage of 0f930ce95 because one person hook per card replaces the man'
+    + 'y, the tensions and the history kept; 484 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-07 (PEOPLE-4 TIES, RECORD 4 OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-4-ties.'
+    + 'json, ODQ §934.105): re-recorded at the stage of c7d552370 because one outgoing tie per card replaces the pair'
+    + ' writer; 892 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-07 (PEOPLE-5A DISPLAY, RECORD 5a OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-5a'
+    + '-display.json, ODQ §934.105): re-recorded at the stage of 053283dfd because the legacy grouping’s member lists'
+    + ' are read from the memberships; 312 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-07 (PEOPLE-LAND SHIM OUT, RECORD 6 OF THE PEOPLE CAR’S LANDING, docs/shift-records/2026-11-07-people-'
+    + 'land-shim-out.json, ODQ §934.105): re-recorded at the stage of 2981f23f6 because the pre-law office path ranks'
+    + ' the powers alone once the shim is out; 312 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */

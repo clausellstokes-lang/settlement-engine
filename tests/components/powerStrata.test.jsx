@@ -174,12 +174,14 @@ describe('powerStrata — a faction row counts its members by their own affiliat
   it('the member line reads the NPCs filed under the faction, never a minted group', () => {
     // GS-2 (ODQ §934.101): the sub-row used to print a tie-component's invented name bound to
     // this faction by category. It now counts the named NPCs whose own power affiliation is it.
+    // Re-keyed factionAffiliation -> memberships (PEOPLE-LAND cure, 2026-11-07): lane 5A (053283dfd) reads a card's
+    // powers from its `memberships` (PowerStrata.jsx :: FactionRow, membership.js :: membersByRank); the field is retired.
     const s = {
       ...craftedSettlement(),
       npcs: [
-        { id: 'n1', name: 'Ada', factionAffiliation: 'Merchant Guilds' },
-        { id: 'n2', name: 'Bram', factionAffiliation: 'Merchant Guilds' },
-        { id: 'n3', name: 'Cole', factionAffiliation: 'Town Council' },
+        { id: 'n1', name: 'Ada', memberships: [{ power: 'Merchant Guilds', rank: 1 }] },
+        { id: 'n2', name: 'Bram', memberships: [{ power: 'Merchant Guilds', rank: 2 }] },
+        { id: 'n3', name: 'Cole', memberships: [{ power: 'Town Council', rank: 1 }] },
       ],
       factions: [{ name: 'The Merchant Bloc', powerFactionName: 'Merchant Guilds', members: [{ id: 'n3', name: 'Cole' }] }],
     };

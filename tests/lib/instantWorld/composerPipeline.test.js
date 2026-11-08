@@ -12,6 +12,7 @@
  * index join this car replaced.
  */
 import { describe, test, expect } from 'vitest';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import {
   runComposerSteps,
   COMPOSER_STEP_CONTRACT,
@@ -44,9 +45,11 @@ describe('ST-3 — the declared contract', () => {
     }
   });
 
-  test('the two in-place passes declare `mutates`, never `provides`', () => {
-    // The coupling that a `provides`-only reader would miss entirely.
-    for (const name of ['dedupeFactionNames', 'materializeGenesisTies']) {
+  test('the in-place pass declares `mutates`, never `provides`', () => {
+    // The coupling that a `provides`-only reader would miss entirely. (PEOPLE-5A re-keyed: the
+    // faction-name de-dup, the other in-place pass, is deleted with the NPC grouping — M-2.)
+    expectAbsentWithAnchor(COMPOSER_STEP_ORDER, 'dedupeFactionNames', 'materializeGenesisTies', 'the deleted de-dup step');
+    for (const name of ['materializeGenesisTies']) {
       const step = COMPOSER_STEP_CONTRACT.find(s => s.name === name);
       expect(step, `${name} must be in the contract`).toBeTruthy();
       expect(step.mutates).toContain('settlements');
@@ -54,10 +57,11 @@ describe('ST-3 — the declared contract', () => {
     }
   });
 
-  test('the founding-tie step sits between the de-dup and the discovery', () => {
-    // A1.2.12's ordering law, expressed against the contract rather than the source.
+  test('the founding-tie step sits before the discovery', () => {
+    // A1.2.12's ordering law, expressed against the contract rather than the source. (PEOPLE-5A
+    // re-keyed: the de-dup it also followed is deleted with the NPC grouping — M-2.)
     const i = (n) => COMPOSER_STEP_ORDER.indexOf(n);
-    expect(i('dedupeFactionNames')).toBeLessThan(i('materializeGenesisTies'));
+    expect(i('materializeGenesisTies')).toBeGreaterThanOrEqual(0);
     expect(i('materializeGenesisTies')).toBeLessThan(i('discoverChannels'));
   });
 });

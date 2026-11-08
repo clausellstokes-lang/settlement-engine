@@ -32,9 +32,11 @@ import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
 import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
+import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { relationshipEngagementCards } from '../../domain/display/stateProse/relationshipsDeskRead.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
+import { cardHouseOf, cardPowerLine, firstPowerOf, powerOrderOf } from '../../domain/people/cardPowers.js';
 import { ownerGenerationContracts } from './generationContracts.js';
 // The four settlement-body chapters and the shared small readers moved out under
 // THE DECOMPOSITION WAVE (lane D); buildViewModel below still calls them in the
@@ -184,7 +186,7 @@ function _fmtNum(n, dec = 0) {
 }
 
 function getGoverningFaction(active) {
-  const factions = active?.powerStructure?.factions || active?.factions || [];
+  const factions = active?.powerStructure?.factions || [];
   return factions.find(f => f?.isGoverning) || null;
 }
 
@@ -199,7 +201,7 @@ function getGoverningFaction(active) {
 function summarySlice(active, ai, useAi, aiDailyLife) {
   const s = active || {};
   const governing = getGoverningFaction(active);
-  const factions = s?.powerStructure?.factions || s?.factions || [];
+  const factions = s?.powerStructure?.factions || [];
   const npcs = (s?.npcs || []).slice().sort((a, b) => (b?.power || 0) - (a?.power || 0));
   const top4 = npcs.slice(0, 4);
   const dp = s?.defenseProfile || {};
@@ -247,7 +249,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
       name: npc.name,
       title: npc.title,
       race: npc.race,
-      faction: labelOfFactionRef(npc.factionAffiliation),
+      faction: labelOfFactionRef(firstPowerOf(npc, powerOrderOf(s))),
       power: npc.power || 0,
       sentence: characterSentence(npc),
     })),
@@ -395,7 +397,7 @@ function overviewSlice(active, ai, useAi) {
     primaryImports:     ec?.primaryImports || [],
     institutionsCount:  institutions.length,
     npcsCount:         (s?.npcs || []).length,
-    factionsCount:     (s?.powerStructure?.factions || s?.factions || []).length,
+    factionsCount:     (s?.powerStructure?.factions || []).length,
     institutions,
     categoryDistribution,
     quarters:          (s?.spatialLayout?.quarters || []).map(q => ({
@@ -454,7 +456,7 @@ function dailySlice(active, aiDailyLife) {
 
 function powerSlice(active) {
   const s = active || {};
-  const factionList = s?.powerStructure?.factions || s?.factions || [];
+  const factionList = s?.powerStructure?.factions || [];
   const factions = factionList.map(f => ({
     // Phase-D anchor identity — the canonical faction id (snake) the index keys
     // factions by and an NPC's `factionLink` resolves to. The faction card uses
@@ -684,6 +686,7 @@ function historySlice(active) {
 function npcsSlice(active) {
   const s = active || {};
   const culture = s?.config?.dominantCulture || s?.dominantCulture || s?.culture || null;
+  const powerOrder = powerOrderOf(s);
   const npcs = (s?.npcs || []).map(n => {
     // Engine's `personality` is an object { dominant, flaw, modifier, tell, speech }.
     // X-48 (the owner, 2026-11-03): NO LOOK, VOICE OR TELL ANYWHERE. The temperament and
@@ -732,7 +735,9 @@ function npcsSlice(active) {
     // index entry built off the SAME raw npc); `factionLink` is the canonical
     // faction id (== a faction card's id) the NPC's stated affiliation resolves
     // to, so the affiliation chip can link to that faction with no name match.
-    const factionRefName = labelOfFactionRef(n?.factionAffiliation || n?.faction || n?.category);
+    // PEOPLE-5A (M-1b): the affiliation is the card's FIRST-RANK power, read from its memberships.
+    const firstPower = firstPowerOf(n, powerOrder);
+    const factionRefName = labelOfFactionRef(firstPower || n?.faction || n?.category);
     return {
       id: n?.id || entityIdFor('npc', n),
       factionLink: factionRefName ? factionIdFromName(factionRefName) : null,
@@ -741,8 +746,18 @@ function npcsSlice(active) {
       race: npcRace,
       gender: n?.gender || null,
       age: n?.age || (n?.physical?.age) || null,
-      factionAffiliation: n?.factionAffiliation || n?.faction || n?.category || null,
-      factionLabel: labelOfFactionRef(n?.factionAffiliation || n?.faction || n?.category),
+      factionAffiliation: firstPower || n?.faction || n?.category || null,
+      factionLabel: factionRefName,
+      // THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07): the card's house and its ranked powers, the
+      // facts the representative generator writes (`institution`, `memberships`), carried on the
+      // view row so the dossier's NPC section can print "first of X · second of Y" and the house
+      // (PEOPLE-5A wires the print: `house` is the house's name, `powerLine` the ranked line).
+      // A pre-car record carries neither.
+      house: cardHouseOf(n),
+      powers: Array.isArray(n?.memberships)
+        ? n.memberships.map((m) => ({ power: m?.power || null, rank: m?.rank ?? null }))
+        : [],
+      powerLine: cardPowerLine(n, powerOrder) || null,
       power: n?.power || 0,
       influence: inf,
       influenceLabel,
@@ -752,13 +767,20 @@ function npcsSlice(active) {
       motivation: motivationStr,
       secrets: cleanSecrets,
       plotHooks: cleanHooks(n?.plotHooks),
-      relationships: cleanRelationships(n?.relationships),
+      // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): the card's OWN directed tie first, then the ties
+      // naming it ("called by"), each from the settlement's one tie list. The card's own
+      // `relationships` field this row used to read is written by no producer (a dead arm, cut).
+      relationships: cleanRelationships(cardTieLines(s?.relationships, n?.id).map((t) => ({
+        with: t.withName,
+        type: t.direction === 'own' ? t.kind : `called by${t.kind ? ` · ${t.kind}` : ''}`,
+        description: t.direction === 'own' ? t.description : '',
+      }))),
     };
   });
   return {
     all:      npcs,
     sorted:   [...npcs].sort((a, b) => (b?.power || 0) - (a?.power || 0)),
-    factions: s?.powerStructure?.factions || s?.factions || [],
+    factions: s?.powerStructure?.factions || [],
     npcRelationships: s?.npcRelationships || [],
   };
 }
@@ -773,7 +795,6 @@ const HOOK_CATEGORY_TO_SOURCE = Object.freeze({
   economics: 'crisis',
   safety: 'crime',
   history: 'history',
-  relationship: 'relationship',
 });
 
 // collectPlotHooks priority is a 0–9 NUMBER; the PDF section keys its priority
@@ -848,7 +869,7 @@ function relationshipsSlice(active) {
     neighborSingle:  s?.neighborRelationship || null,
     npcs:            s?.npcs || [],
     npcRelationships: s?.npcRelationships || [],
-    factions:        s?.powerStructure?.factions || s?.factions || [],
+    factions:        s?.powerStructure?.factions || [],
     emergentConditions: s?.emergentConditions || s?.relationships?.emergentConditions || [],
     prominentRelationship: s?.prominentRelationship || null,
   };

@@ -89,6 +89,7 @@ import {
   validateSchema28Baseline,
   validateSchema29Baseline,
   validateSchema30Baseline,
+  validateSchema31Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -114,7 +115,7 @@ import {
   WINDOW_RUNG1_TARGET_SCHEMA,
   TIER_COVERAGE_TARGET_SCHEMA,
   MIGRATION_DIRECTION_TARGET_SCHEMA,
-  CENSUS_READERS_TARGET_SCHEMA,
+  PEOPLE_CAST_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1596,12 +1597,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ AND 29 GROWS IT BY ONE: one declaration (the migration direction's config projection),
     // one address, one read, so the pair goes 76/50 -> 77/51. MEASURED off the live scan.
     expect(declaredBankOf(MIGRATION_DIRECTION_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
-    // ⭐ AND 30 SHRINKS IT BY ONE: no declaration (the roster stays fourteen); the census readers'
-    // review (LANDING-R2's rung, re-numbered at MERGE-R2) retires `stresses on settlement` x1 at
-    // canonicalAccessors.js (the read stands, the detector no longer grounds it), one address, one
-    // read, so the pair goes 77/51 -> 76/50. MEASURED off the live scan.
-    expect(declaredBankOf(CENSUS_READERS_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(CENSUS_READERS_TARGET_SCHEMA));
+    // ⭐ AND 30 HOLDS IT: the people car's cast admits ordinary rows, none on a declared identity.
+    expect(declaredBankOf(PEOPLE_CAST_TARGET_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(PEOPLE_CAST_TARGET_SCHEMA));
     expect(declaredBankOf(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
     expect(declaredBankOf(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
@@ -1692,8 +1690,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ SCHEMA 27: THE RUNG-1 WINDOW (the chair's rulings on lane LANDING-2b's STOP, 2026-11-04): the shape-family theta 0.80 -> 0.76, a topology pass that cures the window's `facets`/`issues` erosion, three crisis declarations (the roster 10 -> 13, the bank 76/50) and the window's rows admitted with attribution.
     // ⭐ SCHEMA 28: THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06, the militia precedent): schema 27's envelope, tag law, roster and register UNCHANGED, re-governed to a corpus builder whose producer 2b pulses one town generated over the city cut so the stamp law mints the tier candidate R-B1 took from producer 2; its reconciliation must be, and measurably is, EMPTY.
     // ⭐ SCHEMA 29: THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): schema 28's envelope, tag law, corpus and register re-governed to ONE declaration of the fifth class, `migrationDirection on config` (the roster 13 -> 14, the bank 77/51); its one new row is admitted tagged and nothing else moves.
-    // ⭐ SCHEMA 30: THE CENSUS READERS (the chair's ruling of 2026-11-07 06:5x UTC, ODQ §934.105, on LANDING-R2's record; cut there as 28 -> 29 and RE-NUMBERED 29 -> 30 at the integration merge MERGE-R2): a governed migration rung, the register's own door for a shape change — schema 29's envelope, tag law, theta, corpus and roster UNCHANGED; the census and reader lanes' ten new rows admitted with attribution (contestsNiche on factions a MOVE, readerBattery.js -> roles/roleClass.js), eleven gone rows retired with cause, the bank 77/51 -> 76/50.
-    expect(BASELINE_SCHEMA).toBe(30);
+    // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing declared, the bank 77/51.
+    expect(BASELINE_SCHEMA).toBe(31); // the people-landing rung, 2026-11-07 (PEOPLE-LAND)
     expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
     expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
@@ -1722,7 +1720,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema30Baseline(live)).toBe(live);
+    expect(validateSchema31Baseline(live)).toBe(live); // the people-landing rung (31), 2026-11-07
+    expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);
     expect(() => validateSchema28Baseline(live)).toThrow(/is not schema 28/);
     expect(() => validateSchema27Baseline(live)).toThrow(/is not schema 27/);
@@ -1870,7 +1869,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(30);
+    expect(BASELINE_SCHEMA).toBe(31); // the people-landing rung, 2026-11-07 (PEOPLE-LAND)
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

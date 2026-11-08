@@ -281,31 +281,17 @@ describe('the record class register — totality over a generated record, in bot
       .filter((path) => !CENSUS.observedPaths.has(path));
     expect(deadExceptions, `a declared CLASS_EXCEPTIONS path no record carries:\n${deadExceptions.join('\n')}`).toEqual([]);
 
-    const mirrorFaults = [];
-    let chips = 0;
-    let fieldsCompared = 0;
-    for (const row of ROWS) {
-      const npcById = new Map((row.record.npcs || []).map((npc) => [npc.id, npc]));
-      for (const faction of row.record.factions || []) {
-        for (const chip of faction.members || []) {
-          chips += 1;
-          const npc = npcById.get(chip.id);
-          if (npc === undefined) {
-            mirrorFaults.push(`${row.label} :: factions[].members[] id ${chip.id} resolves to no npcs[] entry`);
-          } else {
-            for (const field of Object.keys(npc)) {
-              fieldsCompared += 1;
-              if (JSON.stringify(chip[field]) !== JSON.stringify(npc[field])) {
-                mirrorFaults.push(`${row.label} :: factions[].members[${chip.id}].${field} differs from its npcs[] field`);
-              }
-            }
-          }
-        }
-      }
-    }
-    expect(chips, 'member chips observed (the MIRROR arm is not vacuous)').toBeGreaterThan(0);
-    expect(fieldsCompared, 'NPC fields compared chip-for-chip').toBeGreaterThan(chips);
-    expect(mirrorFaults, `a member chip is not a MIRROR of the NPC its id names:\n${mirrorFaults.join('\n')}`).toEqual([]);
+    // PEOPLE-5B (2026-11-07, M-7): the member-chip MIRROR measurement LEFT with the grouping — the
+    // register's `factions[].members[]` row was the ONLY MIRROR on an entity path. What stands in its
+    // place is the law it leaves behind: no MIRROR sits under a HELD root (an entity's facts are held
+    // once, at one home), and the one MIRROR left is the receipt's restated prose counts.
+    const mirrorsOnHeld = Object.entries(CLASS_EXCEPTIONS)
+      .filter(([path, className]) => className === 'MIRROR'
+        && RECORD_CLASSES[path.split('.')[0].replace('[]', '')] === 'HELD')
+      .map(([path]) => path);
+    expect(mirrorsOnHeld, 'a MIRROR declared under a HELD root (an entity stored at a second home)').toEqual([]);
+    expect(Object.entries(CLASS_EXCEPTIONS).filter(([, className]) => className === 'MIRROR').map(([path]) => path),
+      'the MIRROR rows, enumerated').toEqual(['generationCoherenceReceipt.judgments[].evidence']);
 
     const repairRows = ROWS.filter((row) => (row.record.generationCoherenceReceipt?.repairs || []).length > 0);
     expect(repairRows.length, 'corpus rows that carry a generation repair (HISTORY reaches the receipt here)')

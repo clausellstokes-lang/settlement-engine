@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "7eeef76bc927e7e58b541fb212bbfe8a8bc57bbc",
-  "measuredBy": "MERGE-R2",
+  "measuredAtSha": "a620088ee40516b440d3777bc56f8f59fc6ab6c9",
+  "measuredBy": "PEOPLE-LAND second seat",
   "date": "2026-11-07",
-  "note": "the union of the rung-2 landing (fc4cb0b9f) and the integration branch (a8daff92c) at the merged tip: both sides test files counted once, MERGE-R2 (2026-11-07)",
-  "files": 3107,
-  "parked": 384,
-  "credited": 2723,
-  "titles": 28535,
-  "suiteTitles": 7671
+  "note": "the people car's landing: the stack's records, the cures and the re-keys",
+  "files": 2976,
+  "parked": 372,
+  "credited": 2604,
+  "titles": 28043,
+  "suiteTitles": 7476
 }

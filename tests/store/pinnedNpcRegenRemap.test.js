@@ -40,8 +40,9 @@ vi.mock('../../src/lib/saves.js', () => ({
 // The reroll mints its seed through generateSeed() (the sanctioned wall-clock
 // seam, generateSettlementPipeline.js:416), which would turn the slot-moves
 // guard below into a coin flip per run. Pin the mint: under this fixed reroll
-// seed, paired with the FIXTURE seed below, the npcs[2] keeper provably moves
-// npc_6 → npc_8 (re-probed 2026-08-01; it was npc_7 → npc_8 on the pre-I1 tree).
+// seed, paired with the FIXTURE seed below, the npcs[9] keeper provably moves
+// npc_inn_multiple → npc_carriers_guild since PEOPLE-1 CAST (it was npc_6 → npc_8, re-probed 2026-08-01, and
+// npc_7 → npc_8 on the pre-I1 tree).
 vi.mock('../../src/kernel/prng.js', async (importOriginal) => ({
   ...(await importOriginal()),
   generateSeed: () => 'pins-regen-remap-fixed',
@@ -107,9 +108,12 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
     // the window branch beneath x46-3 (x46-2's renames and the town Money changers floor, the
     // sibling lanes' generation), `-20` leaves the keeper in npc_8; of -0..-60, -3 is the first
     // that moves it (npc_6 → npc_8; also -22, -23, -24, -39, -44, -46, -48, -58).
-    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-3', customContent: {} }));
-    town.npcs[2]._authored = true;
-    const target = town.npcs[2];
+    // Re-seated `-3`/npcs[2] to `-50`/npcs[9] on 2026-11-07 (PEOPLE-1 CAST dc655f712): ids are the houses' `npc_<slug>`,
+    // stable across a reroll, so a keeper moves only when chooseSlot lands it on another house; of -0..-60 -50's innkeeper is the first
+    // move off the leader's slot (npc_inn_multiple → npc_carriers_guild; also -13 at npcs[0], -53 at npcs[6]).
+    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-50', customContent: {} }));
+    town.npcs[9]._authored = true;
+    const target = town.npcs[9];
     store.setState({
       settlement: town,
       config: town.config,

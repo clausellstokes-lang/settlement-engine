@@ -305,7 +305,7 @@ export function exposureTargets(settlement) {
   for (const i of institutions) {
     if (marked(i)) out.push({ ref: String(i.id || i.name), label: String(i.name || i.id) });
   }
-  const factions = s.powerStructure?.factions || s.factions || [];
+  const factions = s.powerStructure?.factions || [];
   for (const f of Array.isArray(factions) ? factions : []) {
     if (marked(f)) out.push({ ref: String(f.id || f.faction || f.name), label: String(f.faction || f.name || f.id) });
   }

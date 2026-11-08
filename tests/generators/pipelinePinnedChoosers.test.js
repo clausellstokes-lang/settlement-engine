@@ -101,10 +101,12 @@ const SENTINEL = 'EM-B2a3 SENTINEL LANTERNWRIGHT';
  * §0.S's OWN WATCH LIST, in its table's order: the record keys whose survival under a
  * record-built pin the packet measured. A5 asserts which of them are TOTAL and that the rest
  * are not; it asserts none of the individual short figures (a named STOP of §11).
+ * 2026-11-07 (PEOPLE-LAND, cause M-7: the v2 boundary): `factions`, the NPC grouping, leaves the record at the v2
+ * boundary (PEOPLE_5B_EDIT §1) and so leaves the list, 19 -> 18; measured, the remaining 18 are all keys of the record.
  */
 const WATCHED = [
   'institutions', 'economicState', 'availableServices', 'simulationTrace', 'economicViability',
-  'resourceAnalysis', 'npcs', 'factions', 'powerStructure', 'generationCoherenceReceipt',
+  'resourceAnalysis', 'npcs', 'powerStructure', 'generationCoherenceReceipt',
   'defenseProfile', 'relationships', 'conflicts', 'history', 'spatialLayout', 'isolationSupport',
   'stress', 'name', 'population',
 ];
@@ -413,7 +415,7 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
 
     // The watch list is live: every key it names is a key of the record it is read from.
     const anyRecord = plainRun(probeRow(), []).context.settlement;
-    expect(WATCHED).toHaveLength(19);
+    expect(WATCHED).toHaveLength(18);
     expect(WATCHED.filter((key) => Object.hasOwn(anyRecord, key))).toEqual(WATCHED);
 
     // (a) `generatePower`'s record-built whole-`provides` pin reproduces the settlement TOTALLY.

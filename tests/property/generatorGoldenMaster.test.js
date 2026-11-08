@@ -18,6 +18,69 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-07 — RECORD 6, PEOPLE-LAND SHIM OUT, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-land-shim-out.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   180 of 525 (thorp 12, hamlet 84, village 72, city 12) rows against the stage of 1adf403e4 (8dc527fd.., record 5b's post-state). THE CAUSE, ONE (first-parent
+ *   step 2981f23f6): the landing's step 1, PEOPLE-LAND SHIM OUT (2981f23f6): the shim deleted (M-2's end), the grouping's generator and the relink gone, the pre-law office path ranking the powers alone. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S6 (the tree of 2981f23f6 with the door paths carried from
+ *   the branch, the previous record's writes committed). 8dc527fd.. -> c7c11b0b..
+ *
+ * 2026-11-07 — RECORD 5B, PEOPLE-5B EDIT, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-5b-edit.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) rows against the stage of 3c66d320e (47e48e47.., record 5a's post-state). THE CAUSE, ONE (first-parent
+ *   step a725df7e4): lane 5B, PEOPLE-5B EDIT (lane/people-5b-edit-2026-11-07, f24623a9f, merged at a725df7e4): the edit layer, the schema, the first real save migration and the contract. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S5b (the tree of a725df7e4 with the door paths carried from
+ *   the branch, the previous record's writes committed). 47e48e47.. -> 8dc527fd..
+ *
+ * 2026-11-07 — RECORD 5A, PEOPLE-5A DISPLAY, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-5a-display.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   172 of 525 (hamlet 84, village 72, city 12, metropolis 4) rows against the stage of c7d552370 (27de6ac3.., record 4's post-state). THE CAUSE, ONE (first-parent
+ *   step 053283dfd): lane 5A, PEOPLE-5A DISPLAY (lane/people-5a-display-2026-11-07, 3d76fb058, merged at 053283dfd): every birth and display reader of the old faction fields re-wired to the memberships, the institution and the powers. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S5a (the tree of 053283dfd with the door paths carried from
+ *   the branch, the previous record's writes committed). 27de6ac3.. -> 47e48e47..
+ *
+ * 2026-11-07 — RECORD 4, PEOPLE-4 TIES, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-4-ties.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) rows against the stage of 5697b3735 (bad219f2.., record 3's post-state). THE CAUSE, ONE (first-parent
+ *   step c7d552370): lane 4, PEOPLE-4 TIES (lane/people-4-ties-2026-11-07, 91fb07774, merged at c7d552370): one outgoing relationship per card, directed, the graph holding the rest. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S4 (the tree of c7d552370 with the door paths carried from
+ *   the branch, the previous record's writes committed). bad219f2.. -> 27de6ac3..
+ *
+ * 2026-11-07 — RECORD 3, PEOPLE-3 HOOKS, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-3-hooks.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of f3912a838 (0e235c36.., record 2's post-state). THE CAUSE, ONE (first-parent
+ *   step 0f930ce95): lane 3, PEOPLE-3 HOOKS (f49311d04, merged at 0f930ce95): one plot hook per representative, the tensions and the history kept, parties of every kind. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S3 (the tree of 0f930ce95 with the door paths carried from
+ *   the branch, the previous record's writes committed). 0e235c36.. -> bad219f2..
+ *
+ * 2026-11-07 — RECORD 2, PEOPLE-2 CAST-DERIVED, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-2-cast-derived.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of dc655f712 (58fb2164.., record 1's post-state). THE CAUSE, ONE (first-parent
+ *   step 3aa160a70): lane 2, PEOPLE-2 CAST-DERIVED (ebcf85fc7, merged at 3aa160a70): the crisis cast, the seat rows, the crisis hooks' party and the structural standing read from the powers' people. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S2 (the tree of 3aa160a70 with the door paths carried from
+ *   the branch, the previous record's writes committed). 58fb2164.. -> 0e235c36..
+ *
+ * 2026-11-07 — RECORD 1, PEOPLE-1 CAST, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-1-cast.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of the base 262e8b255 (6b0d226e.., record 0b's post-state). THE CAUSE, ONE (first-parent
+ *   step dc655f712): lane 1, PEOPLE-1 CAST (262e8b255..bbe4a02ab): one face per face-bearing house, the seat always faced, memberships from the backing catalogue, each power's first, second and third, the late-born powers' faces minted at the seam. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S1 (the tree of dc655f712 with the door paths carried from
+ *   the branch, the previous record's writes committed). 6b0d226e.. -> 58fb2164..
+ *
+ * 2026-11-07 — RECORD 0B, THE W0 MERGE'S COMPOSITION, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-land-0b-w0-merge.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of the first parent 780180b08 (b1be65e4.., equal to record 0a's stage). THE CAUSE, ONE (first-parent
+ *   step fc834a6bd): the W0 merge (eb4c508e1, its own five records w0-01..w0-05 signed on a branch without the review-intake code) composed over record 0a's move; the herald desk and the PDF snapshot land on W0's own committed bytes and are not written. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S0b (the tree of fc834a6bd with the door paths carried from
+ *   the branch, the previous record's writes committed). b1be65e4.. -> 6b0d226e..
+ *
+ * 2026-11-07 — RECORD 0A, THE REVIEW-INTAKE LANE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE PEOPLE CAR’S LANDING;
+ *   record docs/shift-records/2026-11-07-people-land-0a-review-intake.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; the key set identical) against the stage of the first parent a1d5ecd0e (e7e8a6ff..). THE CAUSE, ONE (first-parent
+ *   step 5b444331a): the review-intake lane (63a7cd852) merged onto the integration branch, never re-recorded at its own tip: a proxy is not a provider, water read from the record, the receipt reads its trace, the chain table names only processors, a gap says which kind, no roster carries one secret or goal twice; the from-bytes are W0's (06050f53..), whose code this stage predates, and record 0b composes W0 over this one. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S0a (the tree of 5b444331a with the door paths carried from
+ *   the branch, the previous record's writes committed). 06050f53.. -> b1be65e4..
+ *
  * 2026-11-04 — F10 WALLS-WORD (UNITS 1–4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-26-f10-walls-word.json; the cloud chair signs under the owner's delegation, vetoable).
  *   34 OF 525 ROWS MOVED (town 34; thorp, hamlet, village, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent

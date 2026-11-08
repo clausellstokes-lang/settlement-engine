@@ -158,7 +158,12 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 33 census causes inside it; the chair's ruled exception). Measured: the committed manifest reads 0dfd25bc at
 // c488022cf^ and b933a9c0 at c488022cf; this row's own lineage mover, 73fa1a1e7 (reader-tonight-wants R11 unit 3), moves
 // it alone (0dfd25bc at its parent 7f0632463, da214b26 at 73fa1a1e7, by editWorldFactResources' row-21 probe).
-const GOLDEN_CONTROL_HASH = 'b933a9c0cc863c7cdd5a806b5d593d0c996675973b251dcc0839a83bab8bc7ce';
+// 2026-11-07, the people car's landing (ODQ §934.105, PEOPLE-LAND second seat), traced the same way at each record's
+// golden-master commit: 27d34617 -> 7c4966f8 record 0a, the review-intake lane (2781cc742) -> 5ce7a31b 0b, the W0 merge's
+// composition (5c9a2a171; the base 262e8b255's own produced row) -> 2dc1916f PEOPLE-1 CAST (bea23878e) -> df1f6ff3 PEOPLE-2
+// (053b85375) -> b5f89e1d PEOPLE-3 HOOKS (3d52c0932) -> 4957a2b9 PEOPLE-4 TIES (9cd1f1f1c), held by 5A (61136ab39) ->
+// b58f9562 PEOPLE-5B EDIT (32b625930), held by the shim out (d16a14aaf).
+const GOLDEN_CONTROL_HASH = 'b58f9562f8757b45ae5a9d4dcce7642ee1484985affe1ea28cac6bc3f3696850';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -173,7 +178,11 @@ const CHOOSER_KEYS = ['npcs', 'relationships'];
 // Then GS-2 one faction set (2026-10-31, ODQ §934.101): 310 -> 306 (measured; the name picks and the conflict draws left the step).
 // 2026-11-05 (LANDING-6, bisected by first-parent stage): 306 -> 303 X-46 car 3 (90dc22f18), unmoved to the tip (the
 // same figure pipelinePinnedMode's UNPINNED_STEP_DRAWS reads, re-keyed there by LANDING-5).
-const POPULATION_UNPINNED_DRAWS = 303;
+// 2026-11-07, the people car's landing (PEOPLE-LAND second seat, bisected by first-parent stage, each stage's own
+// produced manifest in place): 303 -> 885 PEOPLE-1 CAST (dc655f712: one face per face-bearing house, the cast drawn on the
+// step) -> 840 PEOPLE-3 HOOKS (0f930ce95: one hook per card) -> 560 PEOPLE-4 TIES (c7d552370: the pair writer's draws
+// leave the step), unmoved to the tip.
+const POPULATION_UNPINNED_DRAWS = 560;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -201,7 +210,16 @@ const PICK_VARIANT_CALLS = 31;
 // base bf263a78d, 15): 15 -> 24 census-4 R3 (596cb8b1b, the tie rule: one role-class rule for the tie step and the
 // instrument) -> 32 census-4 R12 (acd70a977, faction-role-fit), both reaching census-1b through the merge 950b75014,
 // unmoved to the tip (pickVariant 31, every one a real choice, unmoved). The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 32;
+// RE-KEYED 2026-11-07 (the people car, PEOPLE-1 CAST): 15 -> 17. The external fnv1a32 callers on the probe row are
+// the tie prose (power/relationshipArchetypes.js) and the conflict lines (dossier/hookLines.js), one hash per tie
+// or conflict drawn; the cast is the roster's faces now (the probe town carries more cards than its named roster
+// did), so two more ties hash their prose. The cast's size is the named cause.
+// RE-KEYED 2026-11-07 (the people car, PEOPLE-4 TIES, R-P7): 17 -> 16, measured. One tie per card replaces the
+// pair saturation, so the probe row's tie prose hashes once per card's own tie; the register's fnv1a32External
+// (15 at this lane's base, never re-keyed by PEOPLE-1) moves to the same measured figure.
+// RE-KEYED by MERGE-234 (one tie writer, the chair's ruling): 16 -> 15, measured by A6 at the 1+2+3+4 tip — the
+// seam mint's tie no longer hashes its prose through the retired pair generator; drawTies writes it.
+const FNV_EXTERNAL_CALLS = 15;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -291,7 +309,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 31 via fork, no golden moves, 306 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 560 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
@@ -327,7 +345,71 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(unpinnedPopulation.draws, 'unpinned population draws').toBe(POPULATION_UNPINNED_DRAWS);
     expect(unpinnedPopulation.random, 'every unpinned draw is a random() call').toBe(POPULATION_UNPINNED_DRAWS);
     expect(unpinnedPopulation.other, 'no non-random method on the population stream').toBe(0);
-    expect(unpinnedPopulation.forkLabels, 'nothing inside the step mints a second stream').toEqual([]);
+    // 2026-11-07, the people car's landing (PEOPLE-LAND second seat; the fork census's law: a keyed fork is DECLARED, never
+    // silent): the step was fork-free through 262e8b255. PEOPLE-1 CAST (dc655f712) mints the cast's inner stream
+    // 'people-faces' and one keyed fork per card (28 on this row); PEOPLE-3 HOOKS (0f930ce95) forks each card's key again
+    // for its one hook and adds ['people-hooks']: 58 labels, 30 distinct, unmoved to the tip. Measured at
+    // every stage with its own produced manifest; pinned EXACTLY, in order (a new, lost or re-ordered fork reds).
+    expect(unpinnedPopulation.forkLabels, 'the step mints exactly the cast\'s declared streams').toEqual([
+      'people-faces',
+      'npc_charcoal_burner',
+      'npc_inn_multiple',
+      'npc_taverns_5_20',
+      'npc_river_ferry',
+      'npc_river_boatyard',
+      'npc_barge_and_river_transport_company',
+      'npc_docks_port_facilities',
+      'npc_town_granary',
+      'npc_mills_2_5',
+      'npc_apothecary_established',
+      'npc_bowyers_fletchers_guild',
+      'npc_tanner_established',
+      'npc_cobbler_s_guild',
+      'npc_butchers_3_8',
+      'npc_bakers_5_15',
+      'npc_craft_guilds_5_15',
+      'npc_parish_churches_2_5',
+      'npc_town_council',
+      'npc_courthouse',
+      'npc_small_prison_stocks',
+      'npc_town_watch',
+      'npc_barracks',
+      'npc_traveling_performers',
+      'npc_gladiatorial_school',
+      'npc_fish_market',
+      'npc_merchant_guilds_3_8',
+      'npc_potter',
+      'npc_brickmaker',
+      'people-hooks',
+      'npc_charcoal_burner',
+      'npc_inn_multiple',
+      'npc_taverns_5_20',
+      'npc_river_ferry',
+      'npc_river_boatyard',
+      'npc_barge_and_river_transport_company',
+      'npc_docks_port_facilities',
+      'npc_town_granary',
+      'npc_mills_2_5',
+      'npc_apothecary_established',
+      'npc_bowyers_fletchers_guild',
+      'npc_tanner_established',
+      'npc_cobbler_s_guild',
+      'npc_butchers_3_8',
+      'npc_bakers_5_15',
+      'npc_craft_guilds_5_15',
+      'npc_parish_churches_2_5',
+      'npc_town_council',
+      'npc_courthouse',
+      'npc_small_prison_stocks',
+      'npc_town_watch',
+      'npc_barracks',
+      'npc_traveling_performers',
+      'npc_gladiatorial_school',
+      'npc_fish_market',
+      'npc_merchant_guilds_3_8',
+      'npc_potter',
+      'npc_brickmaker',
+    ]);
 
     const pins = Object.fromEntries(CHOOSER_KEYS.map((key) => [key, unpinnedContext[key]]));
     for (const key of CHOOSER_KEYS) expect(pins[key], `pin ${key}`).toBeDefined();
@@ -382,7 +464,12 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 2026-11-05 (LANDING-6, measured with this arm's census at the window's moving stages): 38 at 1264a8152^ -> 39 X-46 car 1
     // (1264a8152) -> 40 CRISIS (d3e072368; still 40 at ac09ea83b) -> 39 X-46 car 3 (90dc22f18), 39 at PINS, I7, F6, F10 and the
     // tip. The bound is re-keyed to the tip's figure, never above it.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(39);
+    // 2026-11-07, the people car's landing (PEOPLE-LAND second seat, this arm's census at every stage of the stack, each
+    // with its own produced manifest): 39 at 262e8b255 -> 70 PEOPLE-1 CAST (dc655f712: 'people-faces' and the per-card
+    // keyed forks; fnv1a32External 15 -> 18) -> 91 PEOPLE-3 HOOKS (0f930ce95: 'people-hooks' and each card's hook fork) ->
+    // 110 PEOPLE-4 TIES (c7d552370: each card's tie on its own keyed fork, R-P7; fnv1a32External 18 -> 15), unmoved to the
+    // tip; direct 4, foreign 0 throughout. The bound is re-keyed to the tip's figure, never above it.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(110);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
@@ -471,7 +558,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
     // LANDING-8 (2026-11-06, ODQ §934.105): 17 -> 13, the same cause (8befe5a0d): the four `stress` rows' two comparands
     // now agree ('varies' both), because the record holds a copy of exactly what the stress steps produced.
-    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(13); // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
+    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(13); // MERGE-234 (one tie writer): 14 -> 13, measured by this arm at the 1+2+3+4 tip — the seam's `::tie` fork is retired, so `relationships` is transformed on both comparands // 2026-11-07 PEOPLE-1 CAST: 13 -> 14, the seam's tie moves `relationships` on a crisis-cast row (A4's own reading) // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
     expect(nonUnanimous.length, 'exactly one row lands in two places, and it is already varies').toBe(1);
     // ⛔ THERE IS NO producedPath, AND THAT IS A MEASUREMENT. If this ever becomes non-zero a
     // second path field is owed and the register is telling half a truth about WHERE.
@@ -660,8 +747,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       .filter((row) => row.origin !== (movedUnderHolder.get(row.outputKey) > 0 ? 'drawn' : 'computed'))
       .map((row) => `${row.outputKey}: declared ${row.origin}, moved ${movedUnderHolder.get(row.outputKey)}/${grid.length}`);
     expect(wrongOrigin, 'a declared origin disagrees with its holding-step perturbation').toEqual([]);
+    // RE-KEYED 2026-11-07 (the people car): 5 -> 7. The NPC's role and the placeholder's status no longer move
+    // under the population step's perturbed stream (a card's role is its house's), so they are `computed` too.
     expect(GENERATION_TIER2.filter((row) => row.origin === 'computed').length,
-      'the power structure consumes zero draws, and all ten rows stay editable anyway').toBe(5);
+      'the power structure consumes zero draws, the role and status are the house\'s, and all ten rows stay editable anyway').toBe(7);
 
     // ── THE ANCHORED NEGATIVE. `powerStructure.seats[].holder` is the path the version-2 design
     // joined on and it exists NOWHERE; `powerStructure.governingName` is the real seat and

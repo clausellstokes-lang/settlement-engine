@@ -258,7 +258,7 @@ an **institution's** description (`assembleInstitutions.js:745`), a **building's
 (`glyphAssign.js:125`, `anchorKey` first) and a **generation-time relationship-prose** variant
 (`npcData.js:1334`). ⭐ **And the fact the ruling did not have: the pulse keys an NPC by
 `npc.id`** — `npcAgency.js:194-196`, `npc.id ||` first, written unconditionally on every generated
-NPC at `npcGenerator.js:1629-1631`, and kept OUT of the cascade by name
+NPC at `npcGenerator.js:1569-1571` (re-addressed 2026-11-07, PEOPLE-4 TIES: the retired tie writer shortened the file), and kept OUT of the cascade by name
 (`factionRename.js :: NON_CASCADED_SURFACES`: *"the durable identity undo keys on; a rename
 changes the label only"*). The one NPC-name-keyed draw is generation-time, and **the first door
 performs no pipeline re-entry at all** (charter 16:2x; EM-C4a §6.4), so the stored prose is not

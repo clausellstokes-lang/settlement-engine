@@ -1,0 +1,477 @@
+{
+ "_": "PEOPLE-5-PREP 2026-11-07 (measure-only): the files that may still read the NPC grouping settlement.factions (members[], dominantCategory), the six per-NPC fields or the three helpers AFTER PEOPLE-5 — the simulation (M-6, PEOPLE-0 §5), each with its reason and the subjects it reads at the base 1031233a4. Derived by census.mjs from the syntax-tree pass; the walker draft reads this file.",
+ "base": "1031233a4",
+ "files": [
+  {
+   "file": "src/domain/corruption.js",
+   "reads": [
+    "factionAffiliation",
+    "npcHomeInstitution"
+   ],
+   "lines": [
+    648,
+    649,
+    685
+   ],
+   "reason": "corruption.js:648 npcHomeInstitution (M-6 names the line); its in-file caller rides with it"
+  },
+  {
+   "file": "src/domain/density/factionLifecycle.js",
+   "reads": [
+    "factionAffiliation",
+    "factionRosterOf"
+   ],
+   "lines": [
+    113,
+    117,
+    130,
+    174
+   ],
+   "reason": "density/factionLifecycle.js:113 factionRosterOf (M-6)"
+  },
+  {
+   "file": "src/domain/entities/propagate.js",
+   "reads": [
+    "factions",
+    "linkedFactionIds"
+   ],
+   "lines": [
+    350,
+    460,
+    461,
+    483
+   ],
+   "reason": "entities/propagate.js:320-483 (PEOPLE-0 §5): the advance loop's impairment propagation"
+  },
+  {
+   "file": "src/domain/events/affordanceManifest.js",
+   "reads": [
+    "factionAffiliation",
+    "factions"
+   ],
+   "lines": [
+    206,
+    211
+   ],
+   "reason": "the event engine (M-6: domain/events/) — the advance loop's mutation and undo paths"
+  },
+  {
+   "file": "src/domain/events/batch.js",
+   "reads": [
+    "factions",
+    "linkedFactionIds"
+   ],
+   "lines": [
+    150,
+    396
+   ],
+   "reason": "the event engine (M-6: domain/events/) — the advance loop's mutation and undo paths"
+  },
+  {
+   "file": "src/domain/events/factionResponses.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    35
+   ],
+   "reason": "the event engine (M-6: domain/events/) — the advance loop's mutation and undo paths"
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "reads": [
+    "factionAffiliation",
+    "factions",
+    "linkedFactionIds",
+    "npcHomeInstitution",
+    "structuralRank"
+   ],
+   "lines": [
+    43,
+    382,
+    476,
+    477,
+    488,
+    504,
+    750,
+    827,
+    848,
+    879,
+    880,
+    902
+   ],
+   "reason": "the event engine (M-6: domain/events/) — the advance loop's mutation and undo paths"
+  },
+  {
+   "file": "src/domain/events/mutateHelpers.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    52,
+    167,
+    168,
+    170
+   ],
+   "reason": "the event engine (M-6: domain/events/) — the advance loop's mutation and undo paths"
+  },
+  {
+   "file": "src/domain/events/registry.js",
+   "reads": [
+    "factionAffiliation"
+   ],
+   "lines": [
+    805,
+    820
+   ],
+   "reason": "the event engine (M-6: domain/events/) — the advance loop's mutation and undo paths"
+  },
+  {
+   "file": "src/domain/events/undoEvent.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    487,
+    488
+   ],
+   "reason": "the event engine (M-6: domain/events/) — the advance loop's mutation and undo paths"
+  },
+  {
+   "file": "src/domain/worldPulse/assizeKernel.js",
+   "reads": [
+    "npcInFaction"
+   ],
+   "lines": [
+    48,
+    145,
+    149,
+    173
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/beliefMap.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    828
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/brokeragePatronage.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    123
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/causeLifecycle.js",
+   "reads": [
+    "secondaryAffiliation"
+   ],
+   "lines": [
+    172
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/corruptionImpair.js",
+   "reads": [
+    "factions",
+    "npcHomeInstitution"
+   ],
+   "lines": [
+    14,
+    54,
+    80,
+    81,
+    153
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/factionCompetition.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    149
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "reads": [
+    "factionAffiliation",
+    "factionRosterOf",
+    "linkedFactionIds"
+   ],
+   "lines": [
+    93,
+    262,
+    487,
+    488,
+    491,
+    640,
+    642
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/houseLedger.js",
+   "reads": [
+    "factionAffiliation",
+    "factions"
+   ],
+   "lines": [
+    283,
+    324
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "reads": [
+    "factionAffiliation",
+    "factions",
+    "npcHomeInstitution"
+   ],
+   "lines": [
+    7,
+    301,
+    303,
+    777,
+    821
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/npcCirculationTable.js",
+   "reads": [
+    "factions",
+    "members"
+   ],
+   "lines": [
+    198,
+    282
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderFactionMembership.js",
+   "reads": [
+    "factionAffiliation",
+    "npcInFaction"
+   ],
+   "lines": [
+    54,
+    66
+   ],
+   "reason": "npcInFaction: SHARED with birth (seatHolder, seatHolderFindings, realmEntityWeb). PEOPLE-2 changes its INPUT to read memberships; its legacy handle list stays FPZ's"
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderState.js",
+   "reads": [
+    "npcInFaction",
+    "structuralRank"
+   ],
+   "lines": [
+    18,
+    117,
+    122,
+    158
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/npcLedger.js",
+   "reads": [
+    "factions",
+    "members"
+   ],
+   "lines": [
+    1051,
+    1054
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "reads": [
+    "factionAffiliation",
+    "factions",
+    "linkedFactionIds",
+    "members",
+    "secondaryAffiliation",
+    "structuralRank"
+   ],
+   "lines": [
+    95,
+    104,
+    105,
+    111,
+    212,
+    214,
+    220,
+    260,
+    271
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictTable.js",
+   "reads": [
+    "factionAffiliation",
+    "factions",
+    "members"
+   ],
+   "lines": [
+    273,
+    702,
+    709
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/oathHolder.js",
+   "reads": [
+    "npcInFaction"
+   ],
+   "lines": [
+    88,
+    156
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/religionLegitimacy.js",
+   "reads": [
+    "npcInFaction"
+   ],
+   "lines": [
+    51,
+    279
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/settlementPolitics.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    197
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/successorNpc.js",
+   "reads": [
+    "factionAffiliation"
+   ],
+   "lines": [
+    37
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/supplyKernel.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    772,
+    805
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/thievesGuild.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    57
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/warPoliticalLoop.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    60
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/warRulingsNews.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    176
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/domain/worldPulse/warSeatBooks.js",
+   "reads": [
+    "npcInFaction"
+   ],
+   "lines": [
+    41,
+    215
+   ],
+   "reason": "the world pulse (M-6): the simulation, rebuilt on the new shape when FPZ is built — broken by design at birth"
+  },
+  {
+   "file": "src/store/settlementSlice.js",
+   "reads": [
+    "factions"
+   ],
+   "lines": [
+    1326,
+    1327
+   ],
+   "reason": "store/settlementSlice.js (PEOPLE-0 §5 names :1469; the census finds :1326-1327 stripImpairmentsForEvent on the same event path)"
+  },
+  {
+   "file": "src/generators/density/applyDensityLaw.js",
+   "reads": [
+    "factionAffiliation",
+    "densityRungRole"
+   ],
+   "lines": [],
+   "reason": "density/applyDensityLaw.js :: disperseNamedRoster, the density law's rung dispersal RETIRED FROM BIRTH by lane 1 (no src caller since PEOPLE-1; densityLaw.test.js alone runs it, FPZ's by M-6)",
+   "addedBy": "PEOPLE-LAND 2026-11-07"
+  },
+  {
+   "file": "src/generators/density/titularSuccession.js",
+   "reads": [
+    "factionRosterOf",
+    "densityRungRole"
+   ],
+   "lines": [],
+   "reason": "density/titularSuccession.js :: claimantsFor, the density law's succession over a rung roster (no src caller; densityLaw.test.js alone, FPZ's by M-6)",
+   "addedBy": "PEOPLE-LAND 2026-11-07"
+  },
+  {
+   "file": "src/domain/density/densityRungs.js",
+   "reads": [
+    "densityRungRole"
+   ],
+   "lines": [],
+   "reason": "density/densityRungs.js :: RUNG_ROLE_FIELD, the rung stamp's key, read only by the two retired files above (M-6)",
+   "addedBy": "PEOPLE-LAND 2026-11-07"
+  }
+ ],
+ "_landing": "PEOPLE-LAND 2026-11-07: moved beside its walker (tests/lint/legacyFactionReaders/); three rows added, each `addedBy` PEOPLE-LAND with its reason: the density law's rung machinery retired from birth by lane 1 (no src caller; read only by tests/generators/densityLaw.test.js, FPZ's under M-6)."
+}
