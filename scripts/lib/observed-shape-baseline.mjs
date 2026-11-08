@@ -7,7 +7,12 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **34**: schema 33's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
+ * `BASELINE_SCHEMA` is **35**: schema 34's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
+ * definition UNCHANGED, re-governed to THE J-19 PULSE CURE (ALLEGIANCE-CAR1, 2026-11-08): the simulation no longer
+ * re-rolls a v3 card's corruption, and the corpus's year re-deals. Its full rationale lives beside
+ * `J19_PULSE_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_ALLEGIANCE_BASELINE_SCHEMA` is **34**: schema 33's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
  * definition UNCHANGED, re-governed to THE HIDDEN ALLEGIANCE (ALLEGIANCE-CAR1, 2026-11-08): the retired corrupt mark
  * leaves the birth record and the card's `allegiance` comes in. Its full rationale lives beside
  * `ALLEGIANCE_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
@@ -529,7 +534,10 @@ export const RETIRED_CAR_MERGE_BASELINE_SCHEMA = 32;
 /** The RETIRED veil-merge definition — schema 34's predecessor. Never redefined, never deleted, so a schema-33
  *  PREDECESSOR is still validated as schema 33. */
 export const RETIRED_VEIL_MERGE_BASELINE_SCHEMA = 33;
-export const BASELINE_SCHEMA = 34;
+/** The RETIRED allegiance definition — schema 35's predecessor. Never redefined, never deleted, so a schema-34
+ *  PREDECESSOR is still validated as schema 34. */
+export const RETIRED_ALLEGIANCE_BASELINE_SCHEMA = 34;
+export const BASELINE_SCHEMA = 35;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1254,10 +1262,20 @@ export function validateSchema33Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 34's tagged envelope (the hidden allegiance), re-governed by schema 35 to the J-19
+ *  pulse cure. Re-bound to its own LITERAL now that the authority has moved to 35. */
+export function validateSchema34Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_ALLEGIANCE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema34Baseline(baseline) {
+export function validateSchema35Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

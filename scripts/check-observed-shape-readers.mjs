@@ -107,11 +107,12 @@ import {
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_CAR_MERGE_BASELINE_SCHEMA,
   RETIRED_VEIL_MERGE_BASELINE_SCHEMA,
+  RETIRED_ALLEGIANCE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema34Baseline,
+  validateSchema35Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -256,7 +257,10 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     note; the corpus DEFINITION gains 1b′. 4 new rows (one identity, `covert on impairments`) and 12 gone, each ADMITTED or RETIRED with the veil's attribution; nothing declared, the bank holds at 76/50 (RETIRED).
  * 34 = schema 33's topology, tag law, roster and corpus definition, re-governed to THE HIDDEN ALLEGIANCE (ALLEGIANCE-CAR1,
  *     2026-11-08): the retired corrupt mark leaves the birth record, the card's `allegiance` comes in, and the corpus's
- *     year runs over the new cast. 11 new rows ADMITTED with attribution, 28 go, 1 increases; nothing declared, the bank holds at 76/50. THE LIVE AUTHORITY.
+ *     year runs over the new cast. 11 new rows ADMITTED with attribution, 28 go, 1 increases; nothing declared, the bank holds at 76/50 (RETIRED).
+ * 35 = schema 34's topology, tag law, roster and corpus definition, re-governed to THE J-19 PULSE CURE (ALLEGIANCE-CAR1,
+ *     2026-11-08): the simulation no longer re-rolls a v3 card's corruption, and the corpus's year re-deals.
+ *     23 new rows ADMITTED with attribution, none go, none move; nothing declared, the bank holds at 76/50. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -286,6 +290,7 @@ export {
   RETIRED_PEOPLE_LANDING_BASELINE_SCHEMA,
   RETIRED_CAR_MERGE_BASELINE_SCHEMA,
   RETIRED_VEIL_MERGE_BASELINE_SCHEMA,
+  RETIRED_ALLEGIANCE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1597,7 +1602,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema34Baseline(baseline);
+  validateSchema35Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3116,7 +3121,10 @@ export function baselineOf({
       '4 new rows (`covert on impairments`) ADMITTED and 12 retired with the veil\'s cause; nothing is declared and the bank holds at 76/50 (RETIRED).',
       'SCHEMA 34 = schema 33\'s topology, tag law, roster and corpus definition, re-governed to THE HIDDEN ALLEGIANCE (ALLEGIANCE-CAR1):',
       'the retired corrupt mark leaves the birth record and the card\'s `allegiance` comes in; 11 new rows ADMITTED with',
-      'attribution, 28 retired with cause, 1 increase; nothing is declared and the bank holds at 76/50.',
+      'attribution, 28 retired with cause, 1 increase; nothing is declared and the bank holds at 76/50 (RETIRED).',
+      'SCHEMA 35 = schema 34\'s topology, tag law, roster and corpus definition, re-governed to THE J-19 PULSE CURE (ALLEGIANCE-CAR1):',
+      'the simulation no longer re-rolls a v3 card\'s corruption and the corpus\'s year re-deals; 23 new rows ADMITTED',
+      'with attribution, none go, none move; nothing is declared and the bank holds at 76/50.',
       'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3127,7 +3135,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–33 are the RETIRED numeric predecessors.',
+      'Schemas 4–34 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3301,7 +3309,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema34Baseline,
+    validateBaseline: validateSchema35Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

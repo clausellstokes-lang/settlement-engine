@@ -197,7 +197,11 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 33 -> 34 (LIVE)   the same tagged numeric reconciliation, and THE HIDDEN ALLEGIANCE (ALLEGIANCE-CAR1,
+ *   schema 34 -> 35 (LIVE)   the same tagged numeric reconciliation, and THE J-19 PULSE CURE (ALLEGIANCE-CAR1,
+ *     2026-11-08): the simulation no longer re-rolls a v3 card's corruption and the corpus's year re-deals. 23 new rows ADMITTED with attribution, none go, none move; nothing declared, the bank holds at 76/50.
+ *     Its full rationale lives beside `J19_PULSE_TARGET_SCHEMA`.
+ *
+ *   schema 33 -> 34 (RETIRED) the same tagged numeric reconciliation, and THE HIDDEN ALLEGIANCE (ALLEGIANCE-CAR1,
  *     2026-11-08): the retired corrupt mark leaves the birth record and the card's `allegiance` comes in. 11 new rows ADMITTED with attribution, 28 go, 1 increases; nothing declared, the bank holds at 76/50.
  *     Its full rationale lives beside `ALLEGIANCE_TARGET_SCHEMA`.
  *
@@ -336,6 +340,7 @@ import {
   validateSchema31Baseline,
   validateSchema32Baseline,
   validateSchema33Baseline,
+  validateSchema34Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1542,6 +1547,36 @@ export const VEIL_MERGE_TARGET_SCHEMA = 33;
  *  `ALLEGIANCE_SCANNER_DELTA_PATHS`. The commit pair holds: this rung lands ratchet-red, its re-freeze lands next. */
 export const ALLEGIANCE_TARGET_SCHEMA = 34;
 
+/* ⭐⭐ THE SCHEMA 34 → 35 RUNG — THE J-19 PULSE CURE
+ *
+ *  THE CAUSE (ALLEGIANCE-CAR1, 2026-11-08; the chair's ruling on the J-19 STOP, the design's J-19 AMENDED BY CAUSE):
+ *  `worldPulse/npcAgency.js :: ensureNpcStates` no longer re-rolls a v3 card's corruption (`corruptionLeash.js ::
+ *  corruptMarkOf`: the hidden allegiance is the mark; a v3 card without one is clean), so the corpus's YEAR re-deals
+ *  (d131ab158). The corpus DEFINITION is unchanged; its CONTENT moved (the simulated year), and nothing else did.
+ *
+ *  MEASURED, at the subject, through `--scan-only --scan-mode=legacy-leaf` against the committed schema-34 register:
+ *
+ *      findings 2,171 → 2,203 · identities 1,523 → 1,546
+ *      NEW 23 · GONE 0 · INCREASED 0 · DECREASED 0 · SAME 1,523
+ *
+ *  ATTRIBUTION, CONFIRMED by two scans: the same scan at d131ab158's parent f0f7d6a3b matches the schema-34 register
+ *  EXACTLY (0 moved rows), and at d131ab158 itself it equals the subject's scan EXACTLY (0 differing rows).
+ *
+ *  THE MIGRATION REVIEW — every moved row, its cause, its disposition: (J) THE CORPUS'S YEAR RE-DEALT BY THE J-19
+ *  CURE — NEW `nearbyResourcesState on config` (affordanceManifest.js, mutateWorld.js x4, targetRosters.js,
+ *  deriveSystemState.js, institutionLifecycleResourceRead.js, resourceDynamicsKernel.js, tierResourceDynamics.js x2,
+ *  steps/resolveResources.js x3, resourceSemantics.js), `resourceHistory on settlement` (resourceDynamicsKernel.js x2,
+ *  tierResourceDynamics.js x2, provenance/rosterProvenance.js), the `proposalPayload` / `outcome` rows of
+ *  WorldPulseData.js, applyWorldPulse.js, applyWorldPulseFactionRoster.js, factionCompetition.js and
+ *  proposalAdmission.js, and `archetype on stressors` (lib/generationTelemetry.js) — ADMITTED with attribution: the
+ *  re-dealt year no longer reaches their writers (rung 34 retired most of the same identities when the car's year
+ *  first reached them). Ordinary debt that may only shrink; none declared.
+ *
+ *  THE BANK: no moving row is on a declared identity (76 reads across 13 of 14 declared identities, measured off the
+ *  scan), so the pair holds at 76/50. The three bookkeeping paths are the scanner transition; see
+ *  `J19_PULSE_SCANNER_DELTA_PATHS`. The commit pair holds: this rung lands ratchet-red, its re-freeze lands next. */
+export const J19_PULSE_TARGET_SCHEMA = 35;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1613,6 +1648,9 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // MEASURED off the schema-33 register (76/50) and the live scan at the subject (76 reads across 13 of 14
   // declared identities): no moving row is on a declared identity, so the pair cannot move.
   [ALLEGIANCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // MEASURED off the schema-34 register (76/50) and the live scan at the subject (76 reads across 13 of 14
+  // declared identities): no moving row is on a declared identity, so the pair cannot move.
+  [J19_PULSE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2203,6 +2241,14 @@ export const ALLEGIANCE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-34 → 35 delta: the THREE bookkeeping paths (the live validator moving to `validateSchema35Baseline`,
+ *  the 34 → 35 bump with the retired-34 constant, this rung). */
+export const J19_PULSE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2267,6 +2313,8 @@ const VEIL_MERGE_SCANNER_TRANSITION_POLICY =
   'schema-32-to-33-veil-merge-v1';
 const ALLEGIANCE_SCANNER_TRANSITION_POLICY =
   'schema-33-to-34-exact-scanner-transition-v1';
+const J19_PULSE_SCANNER_TRANSITION_POLICY =
+  'schema-34-to-35-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2319,6 +2367,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [CAR_MERGE_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
   [VEIL_MERGE_TARGET_SCHEMA]: CAR_MERGE_TARGET_SCHEMA,
   [ALLEGIANCE_TARGET_SCHEMA]: VEIL_MERGE_TARGET_SCHEMA,
+  [J19_PULSE_TARGET_SCHEMA]: ALLEGIANCE_TARGET_SCHEMA,
 });
 
 /**
@@ -2418,6 +2467,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [CAR_MERGE_TARGET_SCHEMA]: validateSchema32Baseline,
   // The schema-34 rung's own predecessor (the veil merge's), validated as schema 33 by its retired literal.
   [VEIL_MERGE_TARGET_SCHEMA]: validateSchema33Baseline,
+  // The schema-35 rung's own predecessor (the allegiance's), validated as schema 34 by its retired literal.
+  [ALLEGIANCE_TARGET_SCHEMA]: validateSchema34Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2941,6 +2992,14 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [J19_PULSE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: J19_PULSE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: J19_PULSE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-34 freeze is recorded for the review's decision.
     reviewableUnscannedMovement: true,
   })],
   [ALLEGIANCE_TARGET_SCHEMA, Object.freeze({
@@ -4102,7 +4161,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : ALLEGIANCE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : J19_PULSE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4116,8 +4175,9 @@ export function run(argv = process.argv.slice(2)) {
     CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
-    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, VEIL_MERGE_TARGET_SCHEMA, ALLEGIANCE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${ALLEGIANCE_TARGET_SCHEMA} (live allegiance leaf),`
+    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, VEIL_MERGE_TARGET_SCHEMA, ALLEGIANCE_TARGET_SCHEMA, J19_PULSE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${J19_PULSE_TARGET_SCHEMA} (live J-19 pulse leaf),`
+      + ` ${ALLEGIANCE_TARGET_SCHEMA} (retired allegiance leaf),`
       + ` ${VEIL_MERGE_TARGET_SCHEMA} (retired veil-merge leaf),`
       + ` ${CAR_MERGE_TARGET_SCHEMA} (retired car-merge leaf),`
       + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`
