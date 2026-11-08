@@ -1151,7 +1151,7 @@ export const HISTORICAL_EVENTS_DATA = [
       "The merchant quarter and the labourers' quarter remain walled apart",
     ],
     plotHooks: [
-      'A reformer has been found dead. Suicide or silenced?',
+      'A reformer has been found hanged in their own house, and their papers are missing',
       { text: "A hidden ledger documenting wage theft is circulating in the workers' quarter", needs: ['tier: >= town'] }, // CENSUS-3d unit 6
       'A merchant is funding both the reform movement and the suppression of it',
     ],
@@ -1168,7 +1168,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'A relic claimed by both sides has resurfaced in a private collection',
       'The reformist leader is being blackmailed into silence',
-      'Someone is staging miracles for one side. The question is who benefits',
+      'Someone is staging miracles for one side, and whoever is paying for them has not been named',
     ],
     severity: ['minor', 'major'],
   },
@@ -1211,7 +1211,7 @@ export const HISTORICAL_EVENTS_DATA = [
       'Price ceilings on the affected goods still enforced in lean seasons',
     ],
     plotHooks: [
-      { text: 'A warehouse full of the resource is being held off the market deliberately', needs: ['market'] }, // CENSUS-3d unit 6
+      { text: 'A warehouse full of the scarce goods is being kept off the market on purpose', needs: ['market'] }, // CENSUS-3d unit 6
       'The scarcity was engineered. Someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],
@@ -1332,7 +1332,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'One of the loudest voices warning about infiltration is themselves an agent',
       'An innocent person has been identified as a spy and is about to be executed',
-      "The agents' handler is someone in a position of trust, and the PCs have already met them",
+      "The agents' handler is someone the town trusts, and the players have already met them",
     ],
     severity: ['major'],
   },
@@ -1430,7 +1430,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A fire that began in {location} consumed {building_type} across whole districts before it could be checked',
     factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'],
     plotHooks: [
-      'The fire spared exactly the properties one faction wanted cleared. Coincidence is doubted',
+      'The fire spared exactly the houses one faction wanted cleared, and nobody believes it was chance',
       'A confession was extracted from a scapegoat; the real arsonist still lives in town',
       'Rebuilding uncovered something in the ashes that predates the settlement',
     ],
@@ -1442,7 +1442,7 @@ export const HISTORICAL_EVENTS_DATA = [
     factions: ['Quarantine hardliners', 'The bereaved and the blamed', 'Healers and charlatans alike'],
     plotHooks: [
       'A healer who profited enormously during the plague is being asked how they stayed untouched',
-      'A mass grave from the years holds a body that does not belong to any recorded victim',
+      'The plague pit holds a body that matches no one on the list of the dead',
       'The quarantine was used to settle old scores, and the survivors remember exactly who',
     ],
     severity: ['major', 'catastrophic'],
@@ -1454,7 +1454,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The old property boundaries washed away, and the new map favours whoever drew it',
       { text: 'A structure meant to hold back the water had been quietly left to rot, and someone knew', needs: ['navigable'] }, // CENSUS-3d unit 6
-      { text: 'The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes', needs: ['navigable'] }, // CENSUS-3d unit 6
+      { text: 'The flood uncovered an old foundation under the mud, and someone has been digging there at night', needs: ['navigable'] }, // CENSUS-3d unit 6
     ],
     severity: ['major', 'catastrophic'],
   },
@@ -1524,7 +1524,7 @@ export const HISTORICAL_EVENTS_DATA = [
     factions: ['The sitting authority', 'Those who deny its mandate', 'Pragmatists who want any stable answer'],
     plotHooks: [
       'A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost',
-      'The authority is quietly manufacturing the consent it can no longer command',
+      'Those in power are paying people to speak for them at the gatherings, because no one will do it for free',
       'A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with',
     ],
     severity: ['major', 'catastrophic'],
