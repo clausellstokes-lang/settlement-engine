@@ -147,10 +147,14 @@
   "per-NPC faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored",
   "consistent schema-30 predecessor; every new row ADMITTED with attribution by lane cause, the",
   "migration's v1 reads one review class (v1-migration-reads); nothing is declared and the bank holds at 77/51 (RETIRED).",
-  "SCHEMA 32 = schema 31's topology, tag law, roster and corpus definition, re-governed to MERGE-CAR: the",
+  "SCHEMA 32 (RETIRED) held schema 31's topology, tag law, roster and corpus definition, re-governed to MERGE-CAR: the",
   "people car merged into the integration branch over the rung-2 landing. The car's genesis at 31 STANDS;",
   "the integration side's schema-30 reads (R2's census readers) are ADMITTED at this rung by cause, the",
-  "rows they retired go with cause; nothing is declared and the bank is 76/50.",
+  "rows they retired go with cause; nothing is declared and the bank is 76/50 (RETIRED).",
+  "SCHEMA 33 = schema 32's topology, tag law, roster and corpus definition, re-governed to MERGE-WAVE at the",
+  "W2 DEF merge (one rung per cause): ONE row ADMITTED by cause, `direction on stress` at migrationDirection.js,",
+  "grounded to the `stress` shape by the W2 composition, its writer W0-1's draw (343bd4eec), which no corpus",
+  "seed reaches; nothing goes, nothing is declared and the bank is 76/50.",
   "Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
   "subset of declared. This envelope banks 76 banked read(s) across 50 tagged address(es).",
@@ -161,7 +165,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–31 are the RETIRED numeric predecessors."
+  "Schemas 4–32 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -176,16 +180,16 @@
  },
  "digests": {
   "corpusMeta": "1a4216a0fb4db8841e27ac3e2c45851c67d411b6aae8da02ab3145b4076a224d",
-  "inventory": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
-  "manifests": "16ef36ae4d46c6332eb55ac8dd41bc96dad4d52d548380915ef19bfca9423dad",
-  "migrationReview": "0f122dc60cecf83441c50da0d0e3438d854564666edaf4fefc9dd41f6712666d",
+  "inventory": "cc74f6e33ee581322a5c5da8441d877550340b932fc3511966caf5857530ed24",
+  "manifests": "e3057062e53ca89c19ad0e8b050bc4d5a5718ec54fae564a86cb8560eb650a6b",
+  "migrationReview": "72a1dc05ac8c07a745902dd00d26365360e061b63988c4bb50a8061b9951b339",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "45b014fc5d083050a24aae3530b893b8a7ca3cb06b1262a2cc569504247897a9",
-  "sentinel": "ff8b07f5f951c73b8b0662390c1f4fb9b573b1a1830192d0b3489becfd2d6b11"
+  "scanStats": "dbd9aeaa7d0edd987720de4d4a9bee86fbd3509fac16d4895763dd7f9ec75924",
+  "sentinel": "4626af0964a1cbf5908fba4aa19b973a8df11d48953373ac5b8f9ff372306c7a"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "1ae1a1bb7ea916fa364ce337af41f144929b6ecb",
- "identities": 1548,
+ "frozenAtSha": "358de168241e5fe4c492b962b63df4e618cc97a2",
+ "identities": 1549,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -1045,6 +1049,7 @@
    "trade_connectivity on scores": 2
   },
   "src/domain/migrationDirection.js": {
+   "direction on stress": 1,
    "migrationDirection on config": 1
   },
   "src/domain/normalizeSettlement.js": {
@@ -2601,7 +2606,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
+   "digest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
    "entries": [
     {
      "mode": "100644",
@@ -2620,8 +2625,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "235afcdf09893776253534fb2a0af926e04710adf0e82dee6dc17f5654b50f81",
-     "size": 209359,
+     "sha256": "35fde2d3bc768cf730ad1d48acc028f45cfacdab5b9f81e90bd4bdc675c563f7",
+     "size": 210292,
      "type": "file"
     },
     {
@@ -2641,8 +2646,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "f4c41c067c2095ae292eae8c9b3ef9b1af827f00d5afa5a023a05aa007c2dc12",
-     "size": 83196,
+     "sha256": "5211e753f0181cc95436706fa1be7c635a489f3b8c25a421bb0195685d4cd7e6",
+     "size": 84740,
      "type": "file"
     },
     {
@@ -2669,8 +2674,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "df67d9ce1bbbe76677f9f03fffb5043f7177a40dcdd8ad7d128a677ab5b11db7",
-     "size": 241862,
+     "sha256": "c80e831e032df150d25ecd4054d10d180ce489d597017c853be12f65c95e681d",
+     "size": 245800,
      "type": "file"
     },
     {
@@ -2684,7 +2689,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "b6b95a8f66915d6c636c357b7a004f34818f3cb3b68d4e9729bcfec27701fc56",
+   "digest": "706b1acacc44071526df3124d29587feb43ec84115120ae33b5c21d91f6036e5",
    "entries": [
     {
      "mode": "100644",
@@ -2703,8 +2708,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "235afcdf09893776253534fb2a0af926e04710adf0e82dee6dc17f5654b50f81",
-     "size": 209359,
+     "sha256": "35fde2d3bc768cf730ad1d48acc028f45cfacdab5b9f81e90bd4bdc675c563f7",
+     "size": 210292,
      "type": "file"
     },
     {
@@ -2724,8 +2729,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "f4c41c067c2095ae292eae8c9b3ef9b1af827f00d5afa5a023a05aa007c2dc12",
-     "size": 83196,
+     "sha256": "5211e753f0181cc95436706fa1be7c635a489f3b8c25a421bb0195685d4cd7e6",
+     "size": 84740,
      "type": "file"
     },
     {
@@ -2752,8 +2757,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "df67d9ce1bbbe76677f9f03fffb5043f7177a40dcdd8ad7d128a677ab5b11db7",
-     "size": 241862,
+     "sha256": "c80e831e032df150d25ecd4054d10d180ce489d597017c853be12f65c95e681d",
+     "size": 245800,
      "type": "file"
     },
     {
@@ -5769,8 +5774,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "34ed97541eb75550b5dbc909ff56cc697e8e576c1cf14cf4a62a5192e7616ea9",
-     "size": 50616,
+     "sha256": "5bc8984f0eeca7a71ea54dbf29b6106a6ef4a887cd6d5262fb12c3f19897ed8b",
+     "size": 50610,
      "type": "file"
     },
     {
@@ -5923,8 +5928,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "2403403a6d2b3704e94e55122cc2a5a0449f2081e221307bd2deb2790a821e79",
-     "size": 20851,
+     "sha256": "40afcb491c48cde2578ca139f50d6e8708084f1cae17eba150b4524e8ff26701",
+     "size": 22519,
      "type": "file"
     },
     {
@@ -7246,8 +7251,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "86db307d3c9fb67962970f1a07c8b32becd90834e642f88c02bb4db9e473b30b",
-     "size": 172793,
+     "sha256": "648c0d0919903aa8a4657b3f0eaafabc9dfdfa9ade425c04638a0088a8ed489e",
+     "size": 232862,
      "type": "file"
     },
     {
@@ -7281,8 +7286,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/warFaith.generated.js",
-     "sha256": "0c579135e956797b8f6195ae6ef5c39b62bfa832f7818fde78c9e1b4dfe19747",
-     "size": 176442,
+     "sha256": "feab09107c7e5b33c4ae96896d116a6e55d877cecac9df5da1ebf878b7556a54",
+     "size": 174395,
      "type": "file"
     },
     {
@@ -7526,7 +7531,7 @@
     {
      "mode": "100644",
      "path": "src/data/proseNorms.generated.js",
-     "sha256": "7ea3f8fd07b13702c739c2c5bc9793ecfea17184f3147c405e04f760a5499838",
+     "sha256": "42708f681d8121f1ad1bb15dd2d019f021d0c7617374c798f459d8e659c2f596",
      "size": 19938,
      "type": "file"
     },
@@ -8366,8 +8371,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisBlindFindings.js",
-     "sha256": "df557e6585e787a56e6b5b7025612bb0730f2313cc504740a4534dbcb48cf76e",
-     "size": 11204,
+     "sha256": "e4ba9f43fc6a874225fbcf1fe77eaf87f6506ea0302d63eea8643aafb90a915b",
+     "size": 11187,
      "type": "file"
     },
     {
@@ -8443,8 +8448,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/readerContradictionFindings.js",
-     "sha256": "5ccec013cac3a5ebb1519f5b2a50a6c2b629fee31a2961df63480c96b9dfad03",
-     "size": 4689,
+     "sha256": "5b958e199cdc38894a880e578689c2ac95ef52805adb076cfbd89d20daadc2a0",
+     "size": 4700,
      "type": "file"
     },
     {
@@ -9248,8 +9253,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/defenseDisplay.js",
-     "sha256": "a7637e9c159f5b8604780d0d19179292a4056224210a06e725563903845fa4d5",
-     "size": 37332,
+     "sha256": "eb15114c839232841c5c96d82259eeda532955924a0044ad3f314ec59df627dc",
+     "size": 37213,
      "type": "file"
     },
     {
@@ -9304,8 +9309,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "3c06939cf48c34025c3ad4e91304999cd95377abd5bbdc4bf9d2a0aa434cb684",
-     "size": 33448,
+     "sha256": "b77579a3e8a830a50a426edddeb2a13a1e0c1b94c1c9739868638b8f14abc84e",
+     "size": 37447,
      "type": "file"
     },
     {
@@ -9738,8 +9743,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
-     "size": 105668,
+     "sha256": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
+     "size": 125301,
      "type": "file"
     },
     {
@@ -9759,8 +9764,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/dossierMounts.js",
-     "sha256": "a5f0b201447378df2171a850093e175ece4025bdd43c5f1ce12687b2210aa43f",
-     "size": 40746,
+     "sha256": "82d4ed718040248280dd2bcf08bd54e97d6a18b4827ae51c99c6428b7da76b22",
+     "size": 41087,
      "type": "file"
     },
     {
@@ -9815,8 +9820,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "0a613fefdf6c50ee65e93ade0aa86dbae73c676c8c601ad91078bb94e5675d6e",
-     "size": 41138,
+     "sha256": "7e65c096096bbba9ffe18d188724c5d36f7058e3e3967f3abeda438c5b890e4a",
+     "size": 41450,
      "type": "file"
     },
     {
@@ -9878,8 +9883,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/threatAssessment.js",
-     "sha256": "bc8eebdb6a0d5a91fcfa1f299ceae928c6314b93ad1ac145a95315fdd87260c3",
-     "size": 13967,
+     "sha256": "e7c33a2875a9b0f4090186690357b3335f4f78e07fac1a4a4f9e281a9a60317d",
+     "size": 13722,
      "type": "file"
     },
     {
@@ -11299,7 +11304,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "2904791f5eaf2e7e8304a704904d2af4a0815122b762a7798327b05c733bf96b",
+     "sha256": "171860408733974e16b63371a108276ae5edbe61d3d7e82d598d395a7b9e0c1c",
      "size": 48273,
      "type": "file"
     },
@@ -16773,8 +16778,8 @@
     {
      "mode": "100644",
      "path": "src/generators/safetyProfile.js",
-     "sha256": "8b59c5043e4c3ff04a3d5f90d3afd7cbf910f4e70359034f89df8940aa22554f",
-     "size": 55470,
+     "sha256": "39b97769d3752d08430290bef207319711569fb363f52d7ece72c7afb10a6460",
+     "size": 54071,
      "type": "file"
     },
     {
@@ -19854,7 +19859,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6c90151054547305291cde299253c44f78eb3647d638ff6e45c71b823c7237fc",
+   "digest": "db947280d8c84c0960b90f54754649f24a0d8ffbfd4ef85492dd19dfdeab0a3d",
    "entries": [
     {
      "mode": "100644",
@@ -22869,8 +22874,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "34ed97541eb75550b5dbc909ff56cc697e8e576c1cf14cf4a62a5192e7616ea9",
-     "size": 50616,
+     "sha256": "5bc8984f0eeca7a71ea54dbf29b6106a6ef4a887cd6d5262fb12c3f19897ed8b",
+     "size": 50610,
      "type": "file"
     },
     {
@@ -23023,8 +23028,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "2403403a6d2b3704e94e55122cc2a5a0449f2081e221307bd2deb2790a821e79",
-     "size": 20851,
+     "sha256": "40afcb491c48cde2578ca139f50d6e8708084f1cae17eba150b4524e8ff26701",
+     "size": 22519,
      "type": "file"
     },
     {
@@ -25382,8 +25387,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisBlindFindings.js",
-     "sha256": "df557e6585e787a56e6b5b7025612bb0730f2313cc504740a4534dbcb48cf76e",
-     "size": 11204,
+     "sha256": "e4ba9f43fc6a874225fbcf1fe77eaf87f6506ea0302d63eea8643aafb90a915b",
+     "size": 11187,
      "type": "file"
     },
     {
@@ -25459,8 +25464,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/readerContradictionFindings.js",
-     "sha256": "5ccec013cac3a5ebb1519f5b2a50a6c2b629fee31a2961df63480c96b9dfad03",
-     "size": 4689,
+     "sha256": "5b958e199cdc38894a880e578689c2ac95ef52805adb076cfbd89d20daadc2a0",
+     "size": 4700,
      "type": "file"
     },
     {
@@ -26229,8 +26234,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/defenseDisplay.js",
-     "sha256": "a7637e9c159f5b8604780d0d19179292a4056224210a06e725563903845fa4d5",
-     "size": 37332,
+     "sha256": "eb15114c839232841c5c96d82259eeda532955924a0044ad3f314ec59df627dc",
+     "size": 37213,
      "type": "file"
     },
     {
@@ -26285,8 +26290,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "3c06939cf48c34025c3ad4e91304999cd95377abd5bbdc4bf9d2a0aa434cb684",
-     "size": 33448,
+     "sha256": "b77579a3e8a830a50a426edddeb2a13a1e0c1b94c1c9739868638b8f14abc84e",
+     "size": 37447,
      "type": "file"
     },
     {
@@ -26719,8 +26724,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
-     "size": 105668,
+     "sha256": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
+     "size": 125301,
      "type": "file"
     },
     {
@@ -26740,8 +26745,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/dossierMounts.js",
-     "sha256": "a5f0b201447378df2171a850093e175ece4025bdd43c5f1ce12687b2210aa43f",
-     "size": 40746,
+     "sha256": "82d4ed718040248280dd2bcf08bd54e97d6a18b4827ae51c99c6428b7da76b22",
+     "size": 41087,
      "type": "file"
     },
     {
@@ -26796,8 +26801,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "0a613fefdf6c50ee65e93ade0aa86dbae73c676c8c601ad91078bb94e5675d6e",
-     "size": 41138,
+     "sha256": "7e65c096096bbba9ffe18d188724c5d36f7058e3e3967f3abeda438c5b890e4a",
+     "size": 41450,
      "type": "file"
     },
     {
@@ -26859,8 +26864,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/threatAssessment.js",
-     "sha256": "bc8eebdb6a0d5a91fcfa1f299ceae928c6314b93ad1ac145a95315fdd87260c3",
-     "size": 13967,
+     "sha256": "e7c33a2875a9b0f4090186690357b3335f4f78e07fac1a4a4f9e281a9a60317d",
+     "size": 13722,
      "type": "file"
     },
     {
@@ -28280,7 +28285,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "2904791f5eaf2e7e8304a704904d2af4a0815122b762a7798327b05c733bf96b",
+     "sha256": "171860408733974e16b63371a108276ae5edbe61d3d7e82d598d395a7b9e0c1c",
      "size": 48273,
      "type": "file"
     },
@@ -33754,8 +33759,8 @@
     {
      "mode": "100644",
      "path": "src/generators/safetyProfile.js",
-     "sha256": "8b59c5043e4c3ff04a3d5f90d3afd7cbf910f4e70359034f89df8940aa22554f",
-     "size": 55470,
+     "sha256": "39b97769d3752d08430290bef207319711569fb363f52d7ece72c7afb10a6460",
+     "size": 54071,
      "type": "file"
     },
     {
@@ -36828,7 +36833,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "766158db8f3a4daf4c2e1b1dd2f4f9b00f777968e30d56d5ca2af0a855470235",
+   "digest": "8a00238a6bce0c21b79579384247e51501d0ee02081d59d4194a86c53ad8aa48",
    "entries": [
     {
      "mode": "100644",
@@ -39843,8 +39848,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "34ed97541eb75550b5dbc909ff56cc697e8e576c1cf14cf4a62a5192e7616ea9",
-     "size": 50616,
+     "sha256": "5bc8984f0eeca7a71ea54dbf29b6106a6ef4a887cd6d5262fb12c3f19897ed8b",
+     "size": 50610,
      "type": "file"
     },
     {
@@ -39997,8 +40002,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "2403403a6d2b3704e94e55122cc2a5a0449f2081e221307bd2deb2790a821e79",
-     "size": 20851,
+     "sha256": "40afcb491c48cde2578ca139f50d6e8708084f1cae17eba150b4524e8ff26701",
+     "size": 22519,
      "type": "file"
     },
     {
@@ -41320,8 +41325,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "86db307d3c9fb67962970f1a07c8b32becd90834e642f88c02bb4db9e473b30b",
-     "size": 172793,
+     "sha256": "648c0d0919903aa8a4657b3f0eaafabc9dfdfa9ade425c04638a0088a8ed489e",
+     "size": 232862,
      "type": "file"
     },
     {
@@ -41355,8 +41360,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/warFaith.generated.js",
-     "sha256": "0c579135e956797b8f6195ae6ef5c39b62bfa832f7818fde78c9e1b4dfe19747",
-     "size": 176442,
+     "sha256": "feab09107c7e5b33c4ae96896d116a6e55d877cecac9df5da1ebf878b7556a54",
+     "size": 174395,
      "type": "file"
     },
     {
@@ -41600,7 +41605,7 @@
     {
      "mode": "100644",
      "path": "src/data/proseNorms.generated.js",
-     "sha256": "7ea3f8fd07b13702c739c2c5bc9793ecfea17184f3147c405e04f760a5499838",
+     "sha256": "42708f681d8121f1ad1bb15dd2d019f021d0c7617374c798f459d8e659c2f596",
      "size": 19938,
      "type": "file"
     },
@@ -42440,8 +42445,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisBlindFindings.js",
-     "sha256": "df557e6585e787a56e6b5b7025612bb0730f2313cc504740a4534dbcb48cf76e",
-     "size": 11204,
+     "sha256": "e4ba9f43fc6a874225fbcf1fe77eaf87f6506ea0302d63eea8643aafb90a915b",
+     "size": 11187,
      "type": "file"
     },
     {
@@ -42517,8 +42522,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/readerContradictionFindings.js",
-     "sha256": "5ccec013cac3a5ebb1519f5b2a50a6c2b629fee31a2961df63480c96b9dfad03",
-     "size": 4689,
+     "sha256": "5b958e199cdc38894a880e578689c2ac95ef52805adb076cfbd89d20daadc2a0",
+     "size": 4700,
      "type": "file"
     },
     {
@@ -43322,8 +43327,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/defenseDisplay.js",
-     "sha256": "a7637e9c159f5b8604780d0d19179292a4056224210a06e725563903845fa4d5",
-     "size": 37332,
+     "sha256": "eb15114c839232841c5c96d82259eeda532955924a0044ad3f314ec59df627dc",
+     "size": 37213,
      "type": "file"
     },
     {
@@ -43378,8 +43383,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "3c06939cf48c34025c3ad4e91304999cd95377abd5bbdc4bf9d2a0aa434cb684",
-     "size": 33448,
+     "sha256": "b77579a3e8a830a50a426edddeb2a13a1e0c1b94c1c9739868638b8f14abc84e",
+     "size": 37447,
      "type": "file"
     },
     {
@@ -43812,8 +43817,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "6ebbed0ca4e9125607fde9443b16d4da328cc1481f711f25a22b5d384cec3ce7",
-     "size": 105668,
+     "sha256": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
+     "size": 125301,
      "type": "file"
     },
     {
@@ -43833,8 +43838,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/dossierMounts.js",
-     "sha256": "a5f0b201447378df2171a850093e175ece4025bdd43c5f1ce12687b2210aa43f",
-     "size": 40746,
+     "sha256": "82d4ed718040248280dd2bcf08bd54e97d6a18b4827ae51c99c6428b7da76b22",
+     "size": 41087,
      "type": "file"
     },
     {
@@ -43889,8 +43894,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "0a613fefdf6c50ee65e93ade0aa86dbae73c676c8c601ad91078bb94e5675d6e",
-     "size": 41138,
+     "sha256": "7e65c096096bbba9ffe18d188724c5d36f7058e3e3967f3abeda438c5b890e4a",
+     "size": 41450,
      "type": "file"
     },
     {
@@ -43952,8 +43957,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/threatAssessment.js",
-     "sha256": "bc8eebdb6a0d5a91fcfa1f299ceae928c6314b93ad1ac145a95315fdd87260c3",
-     "size": 13967,
+     "sha256": "e7c33a2875a9b0f4090186690357b3335f4f78e07fac1a4a4f9e281a9a60317d",
+     "size": 13722,
      "type": "file"
     },
     {
@@ -45373,7 +45378,7 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "2904791f5eaf2e7e8304a704904d2af4a0815122b762a7798327b05c733bf96b",
+     "sha256": "171860408733974e16b63371a108276ae5edbe61d3d7e82d598d395a7b9e0c1c",
      "size": 48273,
      "type": "file"
     },
@@ -50847,8 +50852,8 @@
     {
      "mode": "100644",
      "path": "src/generators/safetyProfile.js",
-     "sha256": "8b59c5043e4c3ff04a3d5f90d3afd7cbf910f4e70359034f89df8940aa22554f",
-     "size": 55470,
+     "sha256": "39b97769d3752d08430290bef207319711569fb363f52d7ece72c7afb10a6460",
+     "size": 54071,
      "type": "file"
     },
     {
@@ -53921,30 +53926,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "a724977ec4b20897fe25e52ae6eaebd89f249765456662e78f017c5caeda8fea",
-  "corpusDigest": "5cdc7a820aa8a3a5cb9da5d84bf52b5cb7e26bef45099696601eb030fa7835f1",
-  "currentArtifactDigest": "a9b9d87a0af87337bb8a398d17ca07ca90dd7be1283431cc8d7fe4979ecf3166",
-  "currentDetectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "currentFindingsDigest": "2199afc448118c02bf968b30a63daa2934b464ac83cc52b52e1cf23c3ca9ed4e",
-  "currentScannerSha": "bd47c29c7184decf4f08f089ed486eabd1e9bc5a",
-  "currentScannerToolDigest": "36329db11567aed7c28f03097286cb5dfa4738fe237beaac2de5a925bd600285",
-  "detectorTreeDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "executionTreeDigest": "038319088aff43bf8c8ff7ac998249e13dae05669ac239428bd90b36133caefa",
+  "bundleDigest": "83c52da47212ac09c08238148d0b7fdb09b2c5f748ecadc399b724888ec4eff8",
+  "corpusDigest": "d610699b08b753aae314dc95846689e94ca33fc1c05ff06c2ccc33ea2d17f9c8",
+  "currentArtifactDigest": "a0f2f59d695806bdee5ddfaafad5fe3e7783765bd602b7ee1423c1202ab4c341",
+  "currentDetectorDigest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
+  "currentFindingsDigest": "e0e8a464c0a5c7f289324cdad60359b61d886586daa9dd9a841626e3e9bcc7c2",
+  "currentScannerSha": "358de168241e5fe4c492b962b63df4e618cc97a2",
+  "currentScannerToolDigest": "ebc50a5380a9a86e7674f46b8a8b2bab9dae55abe3dd7e0c0129d28d3c59d318",
+  "detectorTreeDigest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
+  "executionTreeDigest": "706b1acacc44071526df3124d29587feb43ec84115120ae33b5c21d91f6036e5",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "a9b9d87a0af87337bb8a398d17ca07ca90dd7be1283431cc8d7fe4979ecf3166",
-  "legacyDetectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "legacyScannerSha": "bd47c29c7184decf4f08f089ed486eabd1e9bc5a",
-  "legacyScannerToolDigest": "36329db11567aed7c28f03097286cb5dfa4738fe237beaac2de5a925bd600285",
-  "predecessorBaselineDigest": "b1f16cd523b0339a49c450c7686ad7a19837dc9e8046482b724b3140d9c49921",
-  "predecessorBaselineTextSha256": "b14b2de9092a0c3de16b9da99f7612a8682b1fe1a9d69b9b9d545ef0134819ca",
-  "predecessorInventoryDigest": "0a77cc0b1a29d41babeabecbeded0385f72b2876fe36501ab8283b64d8cd3937",
-  "reportDigest": "40a3bae93efcc997a9c7eef115cace6e655600b54413c1da31aa1b445ba2740a",
-  "reviewDigest": "3c132333b96090b19d9442f53c0eb0bf5ff4cddc4f97577d11a1df3e83c27ae4",
+  "legacyArtifactDigest": "a0f2f59d695806bdee5ddfaafad5fe3e7783765bd602b7ee1423c1202ab4c341",
+  "legacyDetectorDigest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
+  "legacyScannerSha": "358de168241e5fe4c492b962b63df4e618cc97a2",
+  "legacyScannerToolDigest": "ebc50a5380a9a86e7674f46b8a8b2bab9dae55abe3dd7e0c0129d28d3c59d318",
+  "predecessorBaselineDigest": "ed264f75116819197b6da7077603952ef8c7ae2cdba906584a2b5668e4d5315f",
+  "predecessorBaselineTextSha256": "a6a9922140a4e70153685db8aceca9d07822c20581ca6394ba14dae8e64eae73",
+  "predecessorInventoryDigest": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
+  "reportDigest": "ce89667e18c6f47a16d0723602a320c88cdf9b027f479853cbed4a38066183d9",
+  "reviewDigest": "27e8fa780cd93082b7d86d5a99fbf3350f5375699dfc1bf71cc8f96dca47aca5",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "77fedcb5de90dddb93e739bdba3cf47d525a5ee06abc5b07c09e954afc8aad56",
-  "sourceTreeDigest": "37314b840e919c0b10a285ce5420cad528ea05d7fa47fc95a052c4e59e44997f",
-  "subjectSha": "bd47c29c7184decf4f08f089ed486eabd1e9bc5a",
-  "targetInventoryDigest": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011"
+  "scanTreeDigest": "db947280d8c84c0960b90f54754649f24a0d8ffbfd4ef85492dd19dfdeab0a3d",
+  "sourceTreeDigest": "8a00238a6bce0c21b79579384247e51501d0ee02081d59d4194a86c53ad8aa48",
+  "subjectSha": "358de168241e5fe4c492b962b63df4e618cc97a2",
+  "targetInventoryDigest": "cc74f6e33ee581322a5c5da8441d877550340b932fc3511966caf5857530ed24"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -54238,22 +54243,22 @@
  },
  "scanStats": {
   "files": 2424,
-  "reads": 138772,
-  "resolved": 10924,
-  "unresolved": 127848
+  "reads": 138873,
+  "resolved": 10993,
+  "unresolved": 127880
  },
  "scannerProvenance": {
-  "detectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "executionTreeDigest": "b6b95a8f66915d6c636c357b7a004f34818f3cb3b68d4e9729bcfec27701fc56",
-  "scanTreeDigest": "6c90151054547305291cde299253c44f78eb3647d638ff6e45c71b823c7237fc",
-  "sourceTreeDigest": "766158db8f3a4daf4c2e1b1dd2f4f9b00f777968e30d56d5ca2af0a855470235",
-  "unscannedInputDigest": "8250dcb809d3439e4058fa2d89e81b5908d98cc127a8132fc847decf260b5e2d"
+  "detectorDigest": "536016d8a7785f9752268c9f01ad8d1cfef8672f9fba2d48d184252852aeae62",
+  "executionTreeDigest": "706b1acacc44071526df3124d29587feb43ec84115120ae33b5c21d91f6036e5",
+  "scanTreeDigest": "db947280d8c84c0960b90f54754649f24a0d8ffbfd4ef85492dd19dfdeab0a3d",
+  "sourceTreeDigest": "8a00238a6bce0c21b79579384247e51501d0ee02081d59d4194a86c53ad8aa48",
+  "unscannedInputDigest": "c8e7f953da6806e0c5858bc5f9ff3ea099445d1c2a768844a6544fff9e3fc0db"
  },
- "schema": 32,
+ "schema": 33,
  "sentinel": {
-  "resolvedReads": 10924,
+  "resolvedReads": 10993,
   "totalKeys": 11997,
   "usableShapes": 517
  },
- "total": 2202
+ "total": 2203
 }
