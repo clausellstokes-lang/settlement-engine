@@ -1431,17 +1431,19 @@ export const NPC_PRESENTATION_MODES = {
 // (Appendix B site 19, `relationshipArchetypes.js :: createTieProseDraw`: CENSUS-1d's to wire).
 // ⚠ ONE index picks the desc AND the tension line: a refusal of either row refuses the pair.
 const closureOf = variant => (typeof variant === 'function' ? variant : variant.line);
-const pairProse = (salt, variants) => Object.assign((r, s, variant, force) => closureOf(isTieIndex(variant) ? variants[variant % variants.length]
-  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s, force || TIE_FORCE_WORDS), { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
+const pairProse = (salt, variants, order = null) => Object.assign((r, s, variant, force) => closureOf(isTieIndex(variant) ? variants[variant % variants.length]
+  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(...(order ? endsOf(r, s, order[0], order[1]) : [r, s]), force || TIE_FORCE_WORDS), { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
 const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
 /**
- * W5 HIS (the owner's style law, 2026-11-08): the tie is DIRECTED (people/ties.js :: drawTies), so `r` is
- * the `from` card and `s` the `to` card whatever their categories. A line that gives each end its part
- * (the merchant's books, the crew's money, the pulpit, the soldiers) reads the two cards' categories and
- * takes the kind's own order; it swaps only when BOTH cards say so, and a card without a category (the
- * ledger's stand-ins) keeps the drawn order.
+ * W5 HIS (the chair's ruling of 2026-11-08, a logic cure): the tie is DIRECTED (people/ties.js :: drawTies), so
+ * `r` is the `from` card and `s` the `to` card whatever their categories. Every line of a CATEGORY-KEYED kind
+ * gives each end a part (the merchant's books, the crew's money, the pulpit, the soldiers) in the kind's own
+ * order, so `pairProse` hands its lines the two cards in that order (its third argument), read from the cards'
+ * categories; it swaps only when BOTH cards say so, and a card without a category (the ledger's stand-ins, a
+ * legacy edge) keeps the drawn order. The draw (the index, the pair-hash fallback) still keys on the drawn pair.
+ * The one orientation in the estate: no other site orients a tie of its own.
  */
 const endsOf = (r, s, first, second) => (r?.category === second && s?.category === first ? [s, r] : [r, s]);
 
@@ -1449,12 +1451,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
   econ_crim_blur: {
     label: 'Commercial Complicity',
     desc: pairProse('d', [
-      { line: (r, s) => { const [m, c] = endsOf(r, s, 'economy', 'criminal');
-        return `${m.name} lends ${c.name}'s business an honest name, and ${c.name} gets ${m.name}'s goods into markets the law keeps closed.`; }, colour: true },
-      { line: (r, s) => { const [m, c] = endsOf(r, s, 'economy', 'criminal');
-        return `${m.name}'s account books look clean because ${c.name} keeps certain sales out of them. Both of them grow richer for it.`; }, colour: true },
-      { line: (r, s) => { const [m, c] = endsOf(r, s, 'economy', 'criminal');
-        return `${c.name} pays ${m.name} for a respectable name, and ${c.name}'s goods travel under it, past inspectors who never look inside.`; }, colour: true },
+      { line: (r, s) =>
+        `${r.name} lends ${s.name}'s business an honest name, and ${s.name} gets ${r.name}'s goods into markets the law keeps closed.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s account books look clean because ${s.name} keeps certain sales out of them. Both of them grow richer for it.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} pays ${r.name} for a respectable name, and ${s.name}'s goods travel under it, past inspectors who never look inside.`, colour: true },
       (r, s) =>
         `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`,
       { line: (r, s) =>
@@ -1465,7 +1467,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`, colour: true },
       { line: (r, s) =>
         `${r.name} holds the licence, ${s.name} supplies the goods, and the profit is split in a back room on the first of every month.`, colour: true },
-    ]),
+    ], ['economy', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.', colour: true },
       { line: (r, s) => 'A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.', colour: true },
@@ -1479,7 +1481,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} has been seen at ${r.name}'s counting-house in daylight. That was never part of the arrangement.`, colour: true },
       { line: (r, s) => `${r.name}'s eldest has found the second ledger and asked what ${s.name}'s initials mean.`, colour: true },
-    ]),
+    ], ['economy', 'criminal']),
     type: 'patron_client',
   },
   econ_crim_exploitation: {
@@ -1489,8 +1491,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name}'s operation charges ${r.name} a "security fee" that is, in practice, a protection racket. ${r.name} pays without complaint because the alternative is worse.`, colour: true },
       { line: (r, s) =>
         `Every month ${r.name} pays ${s.name} for protection against dangers that would, on inspection, trace back to ${s.name}. Both sides account for it as a cost of doing business.`, colour: true },
-      { line: (r, s) => { const [m, c] = endsOf(r, s, 'economy', 'criminal');
-        return `${c.name} collects a "security fee" from ${m.name}, and what it buys is that ${c.name}'s people stay away. ${m.name} pays on the day it falls due.`; }, colour: true },
+      { line: (r, s) =>
+        `${s.name} collects a "security fee" from ${r.name}, and what it buys is that ${s.name}'s people stay away. ${r.name} pays on the day it falls due.`, colour: true },
       { line: (r, s) =>
         `${r.name} pays ${s.name} a tenth of every sale. The one season ${r.name} paid late, a storehouse burned.`, colour: true },
       { line: (r, s) =>
@@ -1501,7 +1503,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} sets the fee, ${r.name} pays it, and the price goes on every customer's bill without a line of its own.`, colour: true },
       { line: (r, s) =>
         `${r.name}'s premises are the only ones on the row that have never been robbed. ${s.name} reminds ${r.name} of this when the fee is due.`, colour: true },
-    ]),
+    ], ['economy', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`, colour: true },
       { line: (r, s) => `The fee went up this quarter without explanation. ${r.name}'s patience is a finite ledger.`, colour: true },
@@ -1515,7 +1517,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} has written to the magistrate about ${s.name}'s collectors. The letter sits unsent in ${r.name}'s desk.`,
       { line: (r, s) =>
         `${s.name}'s collector was found drunk with ${r.name}'s purse still sealed. Someone will have to explain the delay to ${s.name}.`, colour: true },
-    ]),
+    ], ['economy', 'criminal']),
     type: 'debtor_creditor',
   },
   mil_crim_corruption: {
@@ -1525,8 +1527,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} receives regular payments from ${s.name}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.`, colour: true },
       { line: (r, s) =>
         `${s.name}'s operation runs on a schedule ${r.name} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.`, colour: true },
-      { line: (r, s) => { const [k, c] = endsOf(r, s, 'military', 'criminal');
-        return `${k.name}'s arrest record looks good because ${c.name} chooses which crimes get solved, and ${c.name}'s silver pays for the favour.`; }, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s arrest record looks good because ${s.name} chooses which crimes get solved, and ${s.name}'s silver pays for the favour.`, colour: true },
       { line: (r, s) =>
         `${r.name} takes ${s.name}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.`, colour: true },
       { line: (r, s) =>
@@ -1537,7 +1539,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `When ${s.name}'s crew needs a prisoner released, ${r.name} signs the order. When ${r.name} needs an arrest, ${s.name} supplies the culprit.`, colour: true },
       { line: (r, s) =>
         `${r.name} commands the patrols and ${s.name} pays for their routes. The streets ${s.name} uses are the quietest in the settlement.`, colour: true },
-    ]),
+    ], ['military', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) =>
         'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.', colour: true },
@@ -1553,7 +1555,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name}'s quarter-day payment from ${s.name} arrived with a name attached: someone ${s.name} wants arrested.`, colour: true },
       { line: (r, s, f) =>
         `An auditor from the ${f.body} is counting ${r.name}'s arrest records against the coin in ${r.name}'s house. ${s.name} is watching the count.`, colour: true },
-    ]),
+    ], ['military', 'criminal']),
     type: 'ally',
   },
   mil_crim_suppression: {
@@ -1571,7 +1573,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are open enemies. Every raid ${r.name} orders costs ${s.name} money, and every month ${s.name} survives costs ${r.name} standing.`, colour: true },
       { line: (r, s) =>
         `${r.name} hunts ${s.name}'s operation street by street, and ${s.name} moves it one street ahead. The chase has lasted two winters.`, colour: true },
-    ]),
+    ], ['military', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`, colour: true },
       { line: (r, s) => `${r.name} is one warrant away from a raid that would end it. The warrant keeps not being signed.`, colour: true },
@@ -1586,14 +1588,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} has hired an advocate to sue ${r.name} over the last raid. The case comes before the council this season.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
         `${r.name} has been ordered to stand down against ${s.name} by someone above ${r.name}. The order did not say why.`, colour: true },
-    ]),
+    ], ['military', 'criminal']),
     type: 'enemy',
   },
   econ_mil_contract: {
     label: 'Security Contract',
     desc: pairProse('d', [
-      (r, s) => { const [m, k] = endsOf(r, s, 'economy', 'military');
-        return `${m.name} pays ${k.name}'s fighters to guard ${m.name}'s goods and nobody else's. It has gone on so long that no one in authority asks about it any more.`; },
+      (r, s) =>
+        `${r.name} pays ${s.name}'s fighters to guard ${r.name}'s goods and nobody else's. It has gone on so long that no one in authority asks about it any more.`,
       { line: (r, s) =>
         `${r.name} pays ${s.name}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.`, colour: true },
       { line: (r, s) =>
@@ -1608,7 +1610,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} hired ${s.name}'s company after the last caravan was lost. No caravan has been lost since, and ${s.name}'s fee has doubled.`, colour: true },
       { line: (r, s) =>
         `${s.name} answers to ${r.name}'s purse before any other authority. Everyone in the settlement knows which way ${s.name}'s company would march.`, colour: true },
-    ]),
+    ], ['economy', 'military']),
     tension: pairProse('t', [
       { line: (r, s) =>
         `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`, colour: true },
@@ -1622,18 +1624,18 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `The council wants ${s.name}'s company under the watch's command. ${r.name} loses the contract's whole value if it agrees.`, needs: ["watch"], excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) => `${r.name} has asked ${s.name} to escort a cargo with no manifest. ${s.name} has named a price.`, colour: true },
-    ]),
+    ], ['economy', 'military']),
     type: 'patron_client',
   },
   rel_mil_crusader: {
     label: 'Sacred Commission',
     desc: pairProse('d', [
-      { line: (r, s) => { const [p, k] = endsOf(r, s, 'religious', 'military');
-        return `${p.name} preaches and ${k.name} enforces, so whoever crosses one of them answers to both.`; }, colour: true },
-      { line: (r, s, f) => { const [p, k] = endsOf(r, s, 'religious', 'military');
-        return `What ${p.name} preaches from the pulpit on the holy day, ${k.name}'s ${f.body} enforces in the street that week.`; }, colour: true },
-      { line: (r, s, f) => { const [p, k] = endsOf(r, s, 'religious', 'military');
-        return `${p.name} blesses whatever ${k.name}'s ${f.body} enforces, and nobody dares ask which of the two has the final word.`; }, colour: true },
+      { line: (r, s) =>
+        `${r.name} preaches and ${s.name} enforces, so whoever crosses one of them answers to both.`, colour: true },
+      { line: (r, s, f) =>
+        `What ${r.name} preaches from the pulpit on the holy day, ${s.name}'s ${f.body} enforces in the street that week.`, colour: true },
+      { line: (r, s, f) =>
+        `${r.name} blesses whatever ${s.name}'s ${f.body} enforces, and nobody dares ask which of the two has the final word.`, colour: true },
       { line: (r, s, f) =>
         `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`, needs: ["institution: temple"] },
       { line: (r, s, f) =>
@@ -1644,7 +1646,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} hold the settlement between faith and force. The two of them meet after every service to agree the week's orders.`, colour: true },
       { line: (r, s) =>
         `${s.name} carries ${r.name}'s banner on every patrol. Crossing ${s.name} is treated as heresy, and heresy is punished by ${s.name}.`, colour: true },
-    ]),
+    ], ['religious', 'military']),
     tension: pairProse('t', [
       { line: (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.', colour: true },
       { line: (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.', colour: true },
@@ -1658,18 +1660,18 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s, f) =>
         `A ${f.member} under ${s.name} stands accused of sacrilege. ${r.name} demands a church trial; ${s.name} wants a court-martial.`,
       { line: (r, s) => `${s.name} has started giving orders in the name of the faith without consulting ${r.name}.`, colour: true },
-    ]),
+    ], ['religious', 'military']),
     type: 'ally',
   },
   rel_crim_fraud: {
     label: 'Institutional Cover',
     desc: pairProse('d', [
-      { line: (r, s) => { const [p, c] = endsOf(r, s, 'religious', 'criminal');
-        return `${p.name}'s good name gives ${c.name}'s crew a respectable face, a room to meet in, and a reason for money nobody could otherwise explain.`; }, colour: true },
-      { line: (r, s) => { const [p, c] = endsOf(r, s, 'religious', 'criminal');
-        return `${c.name}'s money goes into ${p.name}'s alms box and comes out clean, and nobody checks ${p.name}'s accounts.`; }, colour: true },
-      { line: (r, s) => { const [p, c] = endsOf(r, s, 'religious', 'criminal');
-        return `${p.name} lends the holiness and ${c.name} brings the money, and the faithful, knowing nothing, provide the cover.`; }, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s good name gives ${s.name}'s crew a respectable face, a room to meet in, and a reason for money nobody could otherwise explain.`, colour: true },
+      { line: (r, s) =>
+        `${s.name}'s money goes into ${r.name}'s alms box and comes out clean, and nobody checks ${r.name}'s accounts.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} lends the holiness and ${s.name} brings the money, and the faithful, knowing nothing, provide the cover.`, colour: true },
       { line: (r, s) =>
         `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`, needs: ["institution: temple"] },
       { line: (r, s) =>
@@ -1680,7 +1682,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name}'s charity runs the soup kitchen, and ${s.name}'s couriers collect their parcels from the kitchen's back door.`, colour: true },
       { line: (r, s) =>
         `${r.name} hears ${s.name}'s confession each week and keeps ${s.name}'s accounts each month. Neither duty is written down.`, colour: true },
-    ]),
+    ], ['religious', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`, colour: true },
       { line: (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`, needs: ["institution: temple"] },
@@ -1694,14 +1696,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `${r.name} preached a sermon on theft last week. ${s.name} took it personally.`, colour: true },
       { line: (r, s) =>
         `${s.name} has asked ${r.name} to marry two of the crew under false names. ${r.name} has not set a date.`, colour: true },
-    ]),
+    ], ['religious', 'criminal']),
     type: 'ally',
   },
   mag_crim_market: {
     label: 'Arcane Supplier',
     desc: pairProse('d', [
-      { line: (r, s) => { const [g, c] = endsOf(r, s, 'magic', 'criminal');
-        return `${g.name} supplies ${c.name}'s people with reagents, false papers and the odd forgery only a trained hand could make.`; }, colour: true },
+      { line: (r, s) =>
+        `${r.name} supplies ${s.name}'s people with reagents, false papers and the odd forgery only a trained hand could make.`, colour: true },
       { line: (r, s) =>
         `When ${s.name}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through ${r.name} and is never signed.`, colour: true },
       { line: (r, s) =>
@@ -1715,7 +1717,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} supplies ${s.name}'s network with wards against detection. Each ward is sold at triple the guild price.`, needs: ["guild"] },
       { line: (r, s) =>
         `${s.name} pays ${r.name} a retainer to be ready at any hour. Twice this year, ${r.name} has been called out before dawn.`, colour: true },
-    ]),
+    ], ['magic', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) =>
         `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`, colour: true },
@@ -1730,16 +1732,16 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `The guild has summoned ${r.name} to explain a shortfall in licensed components. ${s.name}'s orders account for the missing stock.`, needs: ["guild"] },
       { line: (r, s) =>
         `${r.name} has been offered a guild post that requires a clean record. ${s.name} has a list of everything ${r.name} has made.`, needs: ["guild"] },
-    ]),
+    ], ['magic', 'criminal']),
     type: 'patron_client',
   },
   gov_econ_dependence: {
     label: 'Financial Dependence',
     desc: pairProse('d', [
-      { line: (r, s) => { const [g, m] = endsOf(r, s, 'government', 'economy');
-        return `${g.name} pays for the common works with money borrowed from ${m.name}. ${g.name} cannot cross ${m.name}, and ${m.name} makes sure ${g.name} remembers it.`; }, colour: true },
-      { line: (r, s) => { const [g, m] = endsOf(r, s, 'government', 'economy');
-        return `${m.name} holds the debts ${g.name} has run up, and so ${m.name} decides what ${g.name} can afford to do.`; }, colour: true },
+      { line: (r, s) =>
+        `${r.name} pays for the common works with money borrowed from ${s.name}. ${r.name} cannot cross ${s.name}, and ${s.name} makes sure ${r.name} remembers it.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} holds the debts ${r.name} has run up, and so ${s.name} decides what ${r.name} can afford to do.`, colour: true },
       { line: (r, s) =>
         `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`, colour: true },
       { line: (r, s) =>
@@ -1751,7 +1753,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`, colour: true },
-    ]),
+    ], ['government', 'economy']),
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`, colour: true },
       { line: (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`, colour: true },
@@ -1766,18 +1768,18 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} has started borrowing small sums from ${s.name}'s rivals. ${s.name}'s clerks have seen the receipts.`, colour: true },
       { line: (r, s) =>
         `${s.name} has refused credit for the winter grain stores. ${r.name} must choose between the creditor and the granary.`, needs: ["institution: granary"] },
-    ]),
+    ], ['government', 'economy']),
     type: 'debtor_creditor',
   },
   gov_mil_friction: {
     label: 'Jurisdictional Tension',
     desc: pairProse('d', [
-      { line: (r, s) => { const [g, k] = endsOf(r, s, 'government', 'military');
-        return `${g.name} and ${k.name} have argued for years over where ${g.name}'s authority ends and ${k.name}'s begins, and neither has given ground.`; }, colour: true },
-      { line: (r, s) => { const [g, k] = endsOf(r, s, 'government', 'military');
-        return `${g.name} gives orders that ${k.name} treats as advice, and ${k.name} acts in ways ${g.name} calls disobedience.`; }, colour: true },
-      { line: (r, s) => { const [g, k] = endsOf(r, s, 'government', 'military');
-        return `The line between ${g.name}'s authority and ${k.name}'s has been redrawn four times, and each of them still follows whichever version suits them.`; }, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} have argued for years over where ${r.name}'s authority ends and ${s.name}'s begins, and neither has given ground.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} gives orders that ${s.name} treats as advice, and ${s.name} acts in ways ${r.name} calls disobedience.`, colour: true },
+      { line: (r, s) =>
+        `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times, and each of them still follows whichever version suits them.`, colour: true },
       { line: (r, s, f) =>
         `${r.name} controls the ${f.body}'s pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`, colour: true },
       { line: (r, s) =>
@@ -1788,7 +1790,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} sets the curfew and ${s.name} decides whether to enforce it. The two have not agreed on a curfew in a year.`, colour: true },
       { line: (r, s) =>
         `${s.name} answers ${r.name}'s summons late and leaves early. ${r.name} now issues them in writing so the delays are on record.`, colour: true },
-    ]),
+    ], ['government', 'military']),
     tension: pairProse('t', [
       { line: (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.', colour: true },
       { line: (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.', colour: true },
@@ -1803,7 +1805,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`, needs: ["market"] },
       { line: (r, s, f) =>
         `${s.name} has begun collecting a road toll for the ${f.body}. ${r.name} calls it theft from the treasury.`, colour: true },
-    ]),
+    ], ['government', 'military']),
     type: 'political',
   },
   peer_rivalry: {
