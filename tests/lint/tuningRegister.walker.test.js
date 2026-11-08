@@ -88,7 +88,10 @@ const CEILINGS = Object.freeze({
   // RAISED 535 -> 536 (2026-11-07, PEOPLE-LAND) under the owner's delegation of 2026-11-06 to the chair (ODQ §934.105),
   // as §883.8 raised it: ONE name, lane 4's SHARED_POWER_FACTOR = 3 in src/generators/people/ties.js (R-P7's ruled
   // factor, 141383cd4), attributed by its DECLARED_GROWTH row; the name earns its register row when the owner signs.
-  UNREGISTERED_NAMED_CEILING: 536,
+  // RAISED 536 -> 539 (2026-11-08, MERGE-WAVE at the W1 ECO merge point) under the owner's delegation (ODQ §934.105), as
+  // PEOPLE-LAND raised it: THREE names, W1 ECO's FAMINE_MOST_FROM = 50, BROUGHT_IN_FROM = 20, INFLUENCE_WEIGHS_FROM = 60 in
+  // src/domain/display/stateProse/economyStateProse.js (725b62eb5), attributed by their DECLARED_GROWTH row.
+  UNREGISTERED_NAMED_CEILING: 539,
   UNITLESS_TABLE_CEILING: 220,
   DECLARED_DIVERGENCE_CEILING: 5,
   PHANTOM_ALIAS_CEILING: 3,
@@ -107,7 +110,9 @@ const CEILINGS = Object.freeze({
   // LANDING-2 idiom ("write the DECLARED_GROWTH rows the ritual admits"): lane 4's src/generators/people/ties.js, the two
   // values R-P7 rules (0.5 for a weight-0 house's target weight, SHARED_POWER_FACTOR = 3), cited to 141383cd4. This counts
   // ATTRIBUTED rows, so it moves with them; the six population ceilings above are not touched.
-  DECLARED_GROWTH_CEILING: 8,
+  // RAISED 8 -> 9 (2026-11-08, MERGE-WAVE at the W1 ECO merge point), the LANDING-2 idiom: W1 ECO's economyStateProse.js
+  // row (725b62eb5). This counts ATTRIBUTED rows, so it moves with them.
+  DECLARED_GROWTH_CEILING: 9,
 });
 
 const register = loadTuningRegister(ROOT);
