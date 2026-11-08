@@ -77,13 +77,13 @@ export const HANDLER_TIE_LINES = Object.freeze({
       { line: (r, s) =>
         `${s.name} has kept every scandal away from ${r.name} so far. ${r.name} knows that protection ends the day ${r.name} stops being useful to ${s.name}.`, colour: true },
       { line: (r, s) =>
-        `The town thinks ${r.name} made their own way. In fact ${s.name} paid for every step, and ${r.name} takes ${s.name}'s instructions without argument.`, colour: true },
+        `Everyone thinks ${r.name} made their own way. In fact ${s.name} paid for every step, and ${r.name} takes ${s.name}'s instructions without argument.`, colour: true },
     ]),
     tension: Object.freeze([
       { line: (r, s) =>
         `${r.name}'s family has begun asking where the early money came from. ${s.name} has told ${r.name} that the questions must stop.`, colour: true },
       { line: (r, s) =>
-        `Someone from ${r.name}'s past has come back to town and remembers who paid the fees. ${s.name} wants to know what ${r.name} means to do about it.`, colour: true },
+        `Someone from ${r.name}'s past has come back and remembers who paid the fees. ${s.name} wants to know what ${r.name} means to do about it.`, colour: true },
       { line: (r, s) =>
         `${s.name} has asked ${r.name} to repay the old help with one large favour, the first in years. ${r.name} has not refused and does not want to agree.`, colour: true },
       { line: (r, s) =>
@@ -101,15 +101,15 @@ export const HANDLER_TIE_LINES = Object.freeze({
     type: 'ally',
     desc: Object.freeze([
       { line: (r, s) =>
-        `${r.name} believes ${s.name}'s people are the only ones who look after the poor of this town, and serves them for that reason alone. ${s.name} has never had to pay ${r.name} a coin.`, colour: true },
+        `${r.name} believes ${s.name}'s people are the only ones who look after the poor here, and serves them for that reason alone. ${s.name} has never had to pay ${r.name} a coin.`, colour: true },
       { line: (r, s) =>
         `${r.name} swore an oath to ${s.name}'s brotherhood years ago and has kept it ever since. The oath comes before ${r.name}'s livelihood, ${r.name}'s family and the law.`, colour: true },
       { line: (r, s) =>
-        `${s.name} calls the people who rule this town thieves with charters, and ${r.name} agrees with every word. Whatever ${r.name} hears and sees goes to ${s.name} the same day.`, colour: true },
+        `${s.name} calls the people who rule here thieves with charters, and ${r.name} agrees with every word. Whatever ${r.name} hears and sees goes to ${s.name} the same day.`, colour: true },
       { line: (r, s) =>
         `${r.name} refuses ${s.name}'s money and does the work anyway, out of belief. ${s.name} trusts ${r.name} more than anyone who is paid.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} share an old grievance against the people who run the town. ${s.name} has the crew, ${r.name} has the standing, and both want the same people brought down.`, colour: true },
+        `${r.name} and ${s.name} share an old grievance against the people who run things here. ${s.name} has the crew, ${r.name} has the standing, and both want the same people brought down.`, colour: true },
       { line: (r, s) =>
         `${r.name} meets ${s.name}'s circle by night to hear what the cause needs next. ${r.name} has done every task given without asking what it was for.`, colour: true },
     ]),
@@ -161,7 +161,7 @@ export const HANDLER_TIE_LINES = Object.freeze({
     type: 'debtor_creditor',
     desc: Object.freeze([
       { line: (r, s) =>
-        `${s.name} knows something about ${r.name} that would end ${r.name}'s standing in this town. ${s.name} has never threatened to tell, and has never needed to.`, colour: true },
+        `${s.name} knows something about ${r.name} that would end ${r.name}'s standing here. ${s.name} has never threatened to tell, and has never needed to.`, colour: true },
       { line: (r, s) =>
         `${s.name} holds letters ${r.name} wrote years ago, in ${r.name}'s own hand. ${r.name} does what ${s.name} asks so the letters stay locked away.`, colour: true },
       { line: (r, s) =>
@@ -193,7 +193,7 @@ export const HANDLER_TIE_LINES = Object.freeze({
       { line: (r, s) =>
         `${s.name} paid off the witnesses to a fire ${r.name} set long ago. The witnesses are still alive, and ${s.name} knows where each of them lives.`, colour: true },
       { line: (r, s) =>
-        `${r.name} ran goods for ${s.name}'s crew before ${r.name} was anyone in this town. ${s.name} remembers every run and the name of everyone who saw it.`, colour: true },
+        `${r.name} ran goods for ${s.name}'s crew before ${r.name} was anyone here. ${s.name} remembers every run and the name of everyone who saw it.`, colour: true },
     ]),
     tension: Object.freeze([
       { line: (r, s) =>
@@ -217,7 +217,7 @@ export const HANDLER_TIE_LINES = Object.freeze({
       { line: (r, s) =>
         `${s.name} knows where ${r.name}'s sister lives, how she earns her keep and what she hides. ${r.name} has never had to be told what would happen if ${r.name} refused ${s.name}.`, colour: true },
       { line: (r, s) =>
-        `${r.name} has a lover the town knows nothing about, and ${s.name} could ruin them both with a word. ${s.name} keeps quiet, and ${r.name} keeps working for ${s.name}.`, colour: true },
+        `${r.name} has a lover nobody knows about, and ${s.name} could ruin them both with a word. ${s.name} keeps quiet, and ${r.name} keeps working for ${s.name}.`, colour: true },
       { line: (r, s, f) =>
         `An old friend of ${r.name}'s is held by the ${f.body}, and ${s.name} is the one who keeps that friend fed and safe inside. ${r.name} pays for it in favours.`, colour: true },
     ]),
@@ -227,7 +227,7 @@ export const HANDLER_TIE_LINES = Object.freeze({
       { line: (r, s) =>
         `${r.name}'s sister has been seen talking to ${s.name}'s people. ${r.name} does not know whether she went to them or they came to her.`, colour: true },
       { line: (r, s) =>
-        `The lover wants the two of them to leave town together. ${s.name} has made it clear to ${r.name} that nobody leaves owing what ${r.name} owes.`, colour: true },
+        `The lover wants the two of them to leave this place together. ${s.name} has made it clear to ${r.name} that nobody leaves owing what ${r.name} owes.`, colour: true },
       { line: (r, s) =>
         `The friend has fallen ill inside. ${s.name} says a physician can be sent in, once ${r.name} has done what ${s.name} asked last month.`, colour: true },
     ]),

@@ -24,6 +24,9 @@ const STRUCK_TICS = [
   /\ba separate question\b/i, /\bnothing has broken yet\b/i, /\bwhich is the kind of\b/i, /\bwhich makes it worse\b/i,
 ];
 
+/** The settlement tier nouns (the soak's coh:tier-noun reads the first three of them against the tier). */
+const TIER_NOUN = /\b(hamlets?|villages?|towns?|cit(?:y|ies)|metropolis(?:es)?)\b/i;
+
 const closureOf = (/** @type {any} */ row) => (typeof row === 'function' ? row : row?.line);
 
 /** Every fault of one row, as strings (empty when the row is clean). */
@@ -42,6 +45,9 @@ const faultsOf = (/** @type {any} */ row) => {
   if (/undefined|\$\{|\{[a-z]+\}/.test(text)) faults.push('unfilled slot');
   for (const tic of STRUCK_TICS) if (tic.test(text)) faults.push(`tic ${tic}`);
   if (!/[.!?]$/.test(text)) faults.push('no closing stop');
+  // the header's R-AO promise: no line names a tier (a "town" printed in a city is the soak's coh:tier-noun, kind 8)
+  const tier = text.match(TIER_NOUN);
+  if (tier) faults.push(`tier noun ${tier[0]}`);
   return faults;
 };
 
@@ -100,5 +106,6 @@ describe('HANDLER_TIE_LINES (WRITE-PEOPLE, design §1.5)', () => {
     expect(faultsOf({ line: () => '' })).toContain('empty');
     expect(faultsOf({ line: (r, s) => `${r.name} owes ${s.name}.`, weight: 2 })).toContain('unknown fields weight');
     expect(faultsOf('a string')).toEqual(['not a closure or { line }']);
+    expect(faultsOf((r, s) => `${r.name} owes ${s.name} more than anyone in this town.`)).toContain('tier noun town');
   });
 });
