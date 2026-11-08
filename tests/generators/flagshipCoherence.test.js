@@ -26,6 +26,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { allegianceOf } from '../../src/domain/people/allegiance.js';
 
 const FLAGSHIP = {
   settType: 'town',
@@ -48,10 +49,12 @@ const forge = (seed) => generateSettlementPipeline({ ...FLAGSHIP }, null, { seed
 const textOf = (v) => JSON.stringify(v || '').toLowerCase();
 const safetyOf = (s) => s.economicState?.safetyProfile || {};
 
-// (a) corrupt guard / corrupted power: any NPC marked corrupt by corruptionPass,
+// (a) corrupt guard / corrupted power: any NPC holding a hidden allegiance,
 // or corruption surfacing in the safety-profile prose.
+// ALLEGIANCE-CAR1 (2026-11-08): the corrupt element is the hidden allegiance (domain/people/allegiance.js ::
+// allegianceOf). J-2 retired corruptionPass, and the birth record carries no `corrupt` mark.
 const hasCorruptPresence = (s) =>
-  (s.npcs || []).some((n) => n.corrupt) ||
+  (s.npcs || []).some((n) => allegianceOf(n)) ||
   /corrupt/.test(textOf(safetyOf(s)));
 
 // (b) underfunded / weak defenses: the economics→defense coupling gate below
