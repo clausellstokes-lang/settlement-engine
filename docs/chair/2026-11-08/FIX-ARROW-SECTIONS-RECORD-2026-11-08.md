@@ -1,84 +1,98 @@
 # FIX-ARROW-SECTIONS — the painted arrow header's six sections equal between their red bindings (2026-11-08)
 
-**Seat:** FIX-ARROW-SECTIONS. **Brief:** `docs/chair/2026-11-08/BRIEF-FIX-ARROW-SECTIONS-2026-11-08.md`. **Base:** `82cc9b88`. **The owner's word (verbatim):** "You know the arrow at the top of the webpage. The spacing between the sections ( represented by the banded thread red) are not equally spaced and scales as such can you do that for me?"
+**Seat:** FIX-ARROW-SECTIONS. **Brief:** `docs/chair/2026-11-08/BRIEF-FIX-ARROW-SECTIONS-2026-11-08.md`, as amended by the chair's rulings of 2026-11-08: water-fill, arrowPaint joining the manifest, fe 5 chosen, the ceiling order. **Base:** `82cc9b88`. **The owner's word (verbatim):** "You know the arrow at the top of the webpage. The spacing between the sections ( represented by the banded thread red) are not equally spaced and scales as such can you do that for me?"
 
-**STATUS: STOPPED ON A CEILING.** Nothing committed. The build crosses the zero-slack first-paint closure in `tests/build/vendorPdfLazy.test.js` (§5). The chair rules.
+**STATUS:** the geometry, the pins and the screenshots are done. The first-paint ceiling is still over (§5) and waits on the chair's step (c) ruling.
 
-## 1. Measured first (`layoutArrow`, the code at the parent)
+## 1. Measured first (`layoutArrow` at the parent)
 
-The chair's §1 is CONFIRMED. In strip px the sections are 121 / 134 / 124 / 160 / 145 / 133. Compendium had no cut, so it stayed at 96.0 CSS px at every slotted width while the other five grew by 2/12 of every extra pixel.
+The brief's §1 is CONFIRMED. The painted sections are 121 / 134 / 124 / 160 / 145 / 133 strip px. Compendium had no cut, so it stayed at 96.0 CSS px at every slotted width while the other five grew by 2/12 of every added pixel. The sections diverged as the page widened, up to a 417.7 px spread at 3840.
 
-## 2. Before → after (CSS px; the same in the page, from the six nav controls' `getBoundingClientRect`, and from `layoutArrow`)
+## 2. Before → after (CSS px)
+
+Measured in the built page from the six nav controls' `getBoundingClientRect`. `layoutArrow` gives the same figures.
 
 | width | before: Create · Library · Realm · Compendium · Gallery · About | after |
 |---|---|---|
-| 1024 | 58.1 · 64.3 · 59.5 · 76.8 · 69.6 · 63.8 | unchanged (uncut painting) |
-| 1280 | 72.6 · 80.4 · 74.4 · 96.0 · 87.0 · 79.8 | unchanged (uncut painting) |
+| 1024 | 58.1 · 64.3 · 59.5 · 76.8 · 69.6 · 63.8 | unchanged (the painting, uncut) |
+| 1280 | 72.6 · 80.4 · 74.4 · 96.0 · 87.0 · 79.8 | 72.8 · 80.4 · 74.4 · 96.0 · 87.0 · 79.8 (water-fill begins: Create +0.2) |
 | 1440 | 99.3 · 107.1 · 101.1 · 96.0 · 113.7 · 106.5 | 104.6 × 6 |
 | 1920 | 179.3 · 187.1 · 181.1 · 96.0 · 193.7 · 186.5 | 173.2 × 6 |
 | 2560 | 286.0 · 293.8 · 287.8 · 96.0 · 300.4 · 293.2 | 264.6 × 6 |
 | 3840 | 499.3 · 507.1 · 501.1 · 96.0 · 513.7 · 506.5 | 447.4 × 6 |
 
-From 1380 to 3840 the largest spread is 1.1e-12 px. The plate's slot is one seventh of the extra width: at 1920 the span from binding 7 to binding 8 is 285.3 px, against 300.5 before.
+**Catch-up width (all six level): 1379.9 CSS px.** From there to 3840 the largest spread is about 1e-12 px. Water-fill along the way: at 1300 Create, Library, Realm and About sit level at 81.1 while Gallery is still 87.0 and Compendium 96.0; at 1340 every section but Compendium is level at 89.2.
 
 ## 3. What changed (`src/components/nav/arrowGeometry.js`)
 
-- **Per-cut crossfade.** Each cut now has its own `fe`. Compendium gets two cuts, at 1032 and 1181, with `COMPENDIUM_FE = 5`. Its plain-wood gaps are [1027, 1037) and [1176, 1187). Its tones were measured with the asset test's own formula: 1032 → 1.050, 1181 → 0.975. Segment fades and filler spans use the cut's `fe`, and a filler is pushed for every join, so a hard cut with `fe` 0 works too. `ArrowPaint.jsx` is unchanged: it reads `fe` only through the layout, and its own FE is used only by the compact join.
-- **Equal allocation.** `fullScale` works in seven parts. Six go to the sections and one to the plate. Each section's width is T = mean painted width × s + one part, and its two slots split T − painted × s equally (`fullSlots`). `SHARES` and `MIN_SHARE_PX` are retired; `SECTION_W`, `SECTION_W_MAX`, `SECTION_W_MEAN`, `PARTS` and `EQUAL_EXTRA` take their place.
-  - The painting stays uncut below (2133 + 166.83) × 0.6 = **1379.9 px**.
-  - s holds at S_MAX up to **4340.9 px**, where Create's slots each reach one filler tile. Above that, s grows.
-- **The hover glow** (a NOTE). Compendium's glow box (its lettering ± 10 columns) would now straddle its own cuts, so the glow would stretch across both slots and grow with the page. `glowSpan` clips a word's glow pad at a cut, so Compendium's pad becomes 5 columns and its glow is exactly its middle segment. Every other word keeps ± 10. Clipping keeps the glow's shape fixed; the other choice is to let it stretch. The chair may veto.
+- **Per-cut crossfade.** Each cut carries its own `fe`. Compendium takes two cuts, at 1032 and 1181, with `COMPENDIUM_FE = 5`; its gaps are 10 and 11 columns of plain wood. The chair chose fe 5 over the hard cut from the seam screenshots; the owner may veto. The new slot tones were measured with the asset test's formula: 1032 → 1.050, 1181 → 0.975. Each join carries its crossfade width, and a filler is pushed at every join.
+- **Scale.** s = min(S_MAX, W / 2133) at every width, the chair's ruling.
+  - The painting is shown uncut, and shrinks with the page, below 1279.8 px.
+  - From 1279.8 the scale holds at S_MAX. s never passes S_MAX and never jumps.
+  - This also cures a pre-existing flaw: the parent's double-share threshold dropped s from 0.611 to 0.600 at 1303.8 px (Create 73.9 → 76.6 across one pixel).
+  - The tile zone above 3958 px (4340.9 in my first cut), where s grew so a slot never repeated the tile, is gone along with its pins. A slot wider than one tile repeats the tile, which the filler's repeat-x always allowed.
+- **Water-fill** (`waterLevel`, `fullSlots`).
+  - The sections take six parts of the extra width and the plate's slot takes one part in seven throughout.
+  - The sections' wood goes to the narrowest one(s) until they draw level with the next; from the catch-up on, all six grow together.
+  - A section's two slots split its wood equally and stay at zero width until it needs wood. A zero-width slot reproduces the uncut painting exactly.
+  - `SHARES` and `MIN_SHARE_PX` are retired.
+- **Hover glow (NOTE).** `glowSpan` clips a word's glow pad at a cut. Only Compendium's pad changes, from 10 to 5 columns; its glow is now exactly its middle segment, so it never stretches across a slot.
+- **Bytes (step (b), same behaviour).**
+  - Every `Object.freeze` is annotated `@__PURE__`; Rollup was already dropping the dead tables, so this gained nothing in the real bundle.
+  - `SECTION_W_MAX` and `SECTION_W_MEAN` are literals, pinned to their derivation by the tests.
+  - CUTS is generated from a list of columns.
+  - The crossfade width rides on each join instead of a parallel array.
 
-## 4. NOTE — the scale jump at the threshold
+## 4. Pins (all re-keyed by cause, none loosened)
 
-In the uncut zone s = cw / 2133 climbs to 0.647. When the slots open at 1380 it drops back to 0.600, so the arrow shrinks about 7% across one pixel (today the drop is 0.611 → 0.600, about 2%). This follows from the brief's rule that the painting stays uncut until all six can be equal. A continuous alternative exists: water-fill the narrow sections first from 1280, which keeps s at 0.6, then equal from 1380. That would be a design change, so it is the chair's or the owner's call.
+- **`tests/components/arrowGeometry.test.js`**
+  - The cut table now reads "two on Compendium at fe 5" and keeps a CONTROL that convicts a full-FE cut there.
+  - (c) checks tiling with per-cut fe and s ≤ S_MAX.
+  - New **(c2)** arms:
+    - equal within 1 px from 1380 to 3840, counting all 2461 widths so it can't pass on an empty range;
+    - the water-fill invariant at every half pixel below the catch-up: no section below its painting or shrinking, each either level or still its painting;
+    - named water-fill widths;
+    - **continuity**: s and every section move by at most 1 px per page pixel through both old thresholds;
+    - a CONTROL that the uncut painting is convicted.
+  - (d) holds s = min(S_MAX, W/P) and the zone constants.
+  - (e) hit widths are read from the region's own slots.
+  - (j) the glow is clipped.
+  - **Red-first.** On the parent, the equal-sections arm fails ("1380: sections 89.3 97.1 91.1 96.0 103.7 96.5") and continuity fails ("1303: section 0 73.92 → 76.63"). On my threshold cut `acd19b4b`, continuity fails ("1379: section 0 78.23 → 96.01") and the water-fill arms fail too.
+  - **Deviation from the chair's spec.** The chair asked for |Δ| ≤ 1 px between W−1 and W+1. While one section alone is the narrowest it takes the sections' whole share, 6/7 px per page pixel, so two pixels move it 1.71 px. The pin measures W to W+1 instead, keeping the 1 px bound; the jumps it exists to catch were 2.77 px and 17.8 px.
+- **`tests/build/arrowHeaderAssets.test.js`:** the cut margin reads each cut's own `fe`. A CONTROL shows that FE at Compendium's cuts finds ink on both sides. `SLOT_TONE` re-measures the two new tones.
+- **`tests/components/arrowPaint.test.jsx`** (joined the manifest by the chair's ruling)
+  - Each middle mask follows its cut's fe. Masks 0, 6, 7, 8 and 13 differ from the uniform middle.
+  - Its uncut example moved from 1280 to 1279, because the slots now open at 1279.8. This second arm is the direct consequence of the ruled cause; I told the chair and it can be dropped.
 
-## 5. STOP — the first-paint ceiling (`tests/build/vendorPdfLazy.test.js`)
+## 5. The first-paint ceiling (`tests/build/vendorPdfLazy.test.js`; zero slack at the parent)
 
-The parent sits exactly on the budget (zero slack). After slimming my addition:
+| | first cut (threshold) | after water-fill, before (b) | after (a)+(b) | budget |
+|---|---|---|---|---|
+| raw | 1,073,029 | 1,073,193 | 1,072,722 (+234) | 1,072,488 |
+| gzip | 341,947 | 342,013 | 341,881 (+234) | 341,647 |
+| Brotli | 287,704 | 287,695 | 287,676 (+149) | 287,527 |
 
-| measure | after | budget | over by |
-|---|---|---|---|
-| raw | 1,073,029 | 1,072,488 | 541 |
-| gzip | 341,947 | 341,647 | 300 |
-| Brotli | 287,704 | 287,527 | 177 |
+The budget was not raised. Step (c) candidate sent to the chair: lazy-load `src/domain/aiOverlayVerifier.js`, which is 4,943 B raw and 1,680 B gzip in the entry chunk. Its sole importer is `store/aiOverlayLifecycle.js :: runOverlayVerifier`; one of its three callers, `setAiSettlement`, is synchronous. I examined and set aside `staleDeploy.js` and `customContentAdmission.js` (eager by design) and the event pipeline (a structural change).
 
-The bytes are all in the entry chunk's `arrowGeometry` (the first build was +726 raw). Nothing in my manifest buys back 300 B gzip. The budget was not raised. `npm run build` exits 0. `verify:dist` exits 1 on these three rows. Its other row, `engineAbsentWhenRemote`, is SKIPPED, not failed.
+## 6. Gates
 
-## 6. Pins
-
-- **`tests/components/arrowGeometry.test.js`**, re-keyed by cause:
-  - "none on Compendium, two shares at the plate" → "two on Compendium at fe 5, the plate's cut last".
-  - The Compendium-gaps pin now pins one cut each at fe 5.
-  - Zones: 1379/1380, 4340.9 and 4400.
-  - Hit widths read the region's own slots.
-  - Tile cap: no word slot over one tile, and the plate's slot no more than two.
-  - Glow: clipped pad, Compendium's glow equals its middle segment.
-  - New controls: FE at 1032 is convicted; a Compendium filler laid at FE is convicted; the equality check convicts the uncut painting at 1379.
-  - New **(c2)**: equal within 1 px at every width from 1380 to 3840, never shrinking as the page widens, ending exactly at the page width, with 2461 widths counted (anti-vacuity).
-  - **Red-first:** run on the parent, (c2) reds at "1380: sections 89.3 97.1 91.1 96.0 103.7 96.5".
-  - **Note:** the first version of the pin passed vacuously on the parent. Its start width came from a new export, which is undefined there, so the loop ran over NaN. The threshold is now a literal, held to the derivation in (d).
-- **`tests/build/arrowHeaderAssets.test.js`:** the cut-margin pin reads each cut's own `fe`. A new CONTROL shows FE at Compendium's cuts finds ink on both sides. `SLOT_TONE` re-measures the two new tones.
-- **`tests/components/arrowPaint.test.jsx`** is outside the manifest and was put to the chair. Its "segments fade at their inner ends only" pin assumes a uniform FE mask. The re-key is held, unapplied, at `/tmp/claude-0/-home-user-settlement-engine/2491b798-ce69-5722-9eb5-2e9553cd8c1a/scratchpad/arrowPaint-rekey.patch`: each mask follows its cut's `fe`, and segments 0, 6, 7, 8 and 13 differ from the middle. With it applied the file passes 16/16.
-
-## 7. Gates (at the uncommitted tree)
-
-- **Arrow suites:** 17 files, 361 passed and 1 failed. The failure is the arrowPaint mask pin above; with the held patch, 0 fail. `arrowGeometry` 39/39.
+- **Geometry, asset and paint suites:** 88/88. All 17 arrow suites pass.
 - **eslint** on the touched files: exit 0.
-- **Type configs:** `tsconfig.json` 167 and `tsconfig.full.json` 172 errors, the same as the parent, none on the touched paths. `tsconfig.ui-boundaries.json` exits 0.
-- **Build:** `npm run build` exits 0. `verify:dist` exits 1 (§5).
+- **Type configs:** no errors on the touched paths. Repo-wide, `tsconfig.json` 167 and `tsconfig.full.json` 172, the same as the parent; `tsconfig.ui-boundaries.json` exits 0.
+- **Build:** `npm run build` exits 0. One run hit Node's heap limit; it passed with `NODE_OPTIONS=--max-old-space-size=8192` set in the environment only.
+- **`verify:dist`:** red on the ceiling (§5).
 
-## 8. Screenshots
+## 7. Screenshots
 
 All under `/tmp/claude-0/-home-user-settlement-engine/2491b798-ce69-5722-9eb5-2e9553cd8c1a/scratchpad/shots/`, at deviceScaleFactor 2, from the built app served by `vite preview`:
 
-- the header, `{before,after-fe5,after-fe0}-{1024,1280,1440,1920,2560,3840}.png`;
-- Compendium close-ups, `…-compendium.png`;
-- seams zoomed 4×, `seam-{after-fe5,after-fe0}-{1440,1920,2560,3840}-{left,right}.png`.
+- the header: `before-*`, `after-wf-*` (water-fill, fe 5, the build in this commit), and the earlier threshold builds `after-fe5-*` and `after-fe0-*`, at widths 1024, 1280, 1440, 1920, 2560 and 3840;
+- Compendium close-ups: `*-compendium.png`;
+- seams zoomed 4×: `seam-{after-fe5,after-fe0}-{1440,1920,2560,3840}-{left,right}.png`.
 
-**The Compendium seams, plainly:**
+**The Compendium seams:**
 
-- **fe 5:** the inserted wood reads as one continuous length of shaft. No edge can be seen at either end of the slot, even at 4×.
-- **fe 0 (hard cut):** each slot shows a straight vertical edge at both ends, a step in brightness and in grain. It is visible in the 4× crops at every width and plain at 1920 and wider.
+- **fe 5:** the inserted wood reads as one continuous length of shaft, with no visible edge at either end of a slot.
+- **fe 0 (hard cut):** each slot shows a straight vertical step in brightness and grain at both ends, plain from 1920 px up.
 
-The owner chooses between them. My measurement favours fe 5 (PLAUSIBLE: judged from crops, not by the owner's eye).
+CONFIRMED: the sections are equal, measured both in the geometry and in the built page. PLAUSIBLE: the owner's eye will see no seam at fe 5.

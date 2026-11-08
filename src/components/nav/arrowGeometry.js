@@ -38,12 +38,15 @@
  * THE SIX SECTIONS ARE EQUAL (owner, 2026-11-08: "The spacing between the sections
  * ( represented by the banded thread red) are not equally spaced and scales as such can you
  * do that for me?"). A section is the shaft between two consecutive red bindings, 1 to 7,
- * each holding one painted word; the painting's own six run from 121 to 160 columns. Once
- * the page is wide enough to lift every section to the widest one's painted width, the extra
- * width is laid so the six are EQUAL, each section's two slots taking half of its section's
- * share, and they grow together; the blank plate's slot takes one part in seven of the extra
- * (it grows like one section). Below that width the painting is shown uncut: no section can
- * shrink, because the painting is never stretched or cut inside ink.
+ * each holding one painted word; the painting's own six run from 121 to 160 columns. From
+ * the width where the painting reaches S_MAX, the sections' share of every added page pixel
+ * WATER-FILLS: it goes to the narrowest section(s) until they reach the next one, so the six
+ * are as equal as the width allows (no section can shrink: the painting is never stretched or
+ * cut inside ink). From the catch-up width (all six at Compendium's painted 160 columns) they
+ * are EQUAL and grow together. Each section's two slots take half of its section's wood, and
+ * a section's slots stay at zero width (the uncut painting, exactly) until it needs wood. The
+ * blank plate's slot takes one part in seven of the extra throughout (it grows like one
+ * section). The scale never passes S_MAX and never jumps (the chair's ruling, 2026-11-08).
  *
  * THE FEATHER HIDES ON SCROLL (owner, 2026-09-17): "once we start scrolling, the feather in
  * the arrow turns completely transparent, only to reappear fully if they scroll to the very
@@ -113,9 +116,9 @@ export const SEAM_BAND_TO = 63;
  * by the painting.
  * @type {ReadonlyArray<Readonly<{ x0: number, x1: number }>>}
  */
-export const ROW0_OPAQUE = Object.freeze([
-  Object.freeze({ x0: 82, x1: 1947 }),
-  Object.freeze({ x0: 1989, x1: 2056 }),
+export const ROW0_OPAQUE = /* @__PURE__ */ Object.freeze([
+  /* @__PURE__ */ Object.freeze({ x0: 82, x1: 1947 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1989, x1: 2056 }),
 ]);
 
 /**
@@ -160,15 +163,15 @@ export const COMPACT_MIN_SLOT = 40;
  * each crimson core. The last one is the arrowhead's binding.
  * @type {ReadonlyArray<Readonly<Span>>}
  */
-export const BINDINGS = Object.freeze([
-  Object.freeze({ x0: 512, x1: 547 }),
-  Object.freeze({ x0: 668, x1: 702 }),
-  Object.freeze({ x0: 836, x1: 870 }),
-  Object.freeze({ x0: 994, x1: 1027 }),
-  Object.freeze({ x0: 1187, x1: 1219 }),
-  Object.freeze({ x0: 1364, x1: 1397 }),
-  Object.freeze({ x0: 1530, x1: 1566 }),
-  Object.freeze({ x0: 1889, x1: 1958 }),
+export const BINDINGS = /* @__PURE__ */ Object.freeze([
+  /* @__PURE__ */ Object.freeze({ x0: 512, x1: 547 }),
+  /* @__PURE__ */ Object.freeze({ x0: 668, x1: 702 }),
+  /* @__PURE__ */ Object.freeze({ x0: 836, x1: 870 }),
+  /* @__PURE__ */ Object.freeze({ x0: 994, x1: 1027 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1187, x1: 1219 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1364, x1: 1397 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1530, x1: 1566 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1889, x1: 1958 }),
 ]);
 
 /**
@@ -177,23 +180,23 @@ export const BINDINGS = Object.freeze([
  * row's median luminance across the shaft. Read off the shipped strip.
  * @type {ReadonlyArray<Readonly<Span>>}
  */
-export const WOOD_RUNS = Object.freeze([
-  Object.freeze({ x0: 548, x1: 569 }),
-  Object.freeze({ x0: 646, x1: 668 }),
-  Object.freeze({ x0: 702, x1: 726 }),
-  Object.freeze({ x0: 813, x1: 836 }),
-  Object.freeze({ x0: 870, x1: 895 }),
-  Object.freeze({ x0: 968, x1: 994 }),
+export const WOOD_RUNS = /* @__PURE__ */ Object.freeze([
+  /* @__PURE__ */ Object.freeze({ x0: 548, x1: 569 }),
+  /* @__PURE__ */ Object.freeze({ x0: 646, x1: 668 }),
+  /* @__PURE__ */ Object.freeze({ x0: 702, x1: 726 }),
+  /* @__PURE__ */ Object.freeze({ x0: 813, x1: 836 }),
+  /* @__PURE__ */ Object.freeze({ x0: 870, x1: 895 }),
+  /* @__PURE__ */ Object.freeze({ x0: 968, x1: 994 }),
   // Compendium's two gaps, 10 and 11 columns wide: narrower than 2 x FE, so each takes a cut
   // with a 5-column crossfade (COMPENDIUM_FE).
-  Object.freeze({ x0: 1027, x1: 1037 }),
-  Object.freeze({ x0: 1176, x1: 1187 }),
-  Object.freeze({ x0: 1219, x1: 1250 }),
-  Object.freeze({ x0: 1337, x1: 1364 }),
-  Object.freeze({ x0: 1397, x1: 1431 }),
-  Object.freeze({ x0: 1503, x1: 1529 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1027, x1: 1037 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1176, x1: 1187 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1219, x1: 1250 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1337, x1: 1364 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1397, x1: 1431 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1503, x1: 1529 }),
   // Binding 7 to the blank plate (the run's last five columns carry the plate's one-pixel tip).
-  Object.freeze({ x0: 1566, x1: 1628 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1566, x1: 1628 }),
 ]);
 
 /**
@@ -210,21 +213,11 @@ export const COMPENDIUM_FE = 5;
  * plate. The other ten are the columns the kit's canvas prototype rendered seamlessly.
  * @type {ReadonlyArray<Readonly<{ x: number, fe: number }>>}
  */
-export const CUTS = Object.freeze([
-  Object.freeze({ x: 558, fe: FE }),
-  Object.freeze({ x: 657, fe: FE }),
-  Object.freeze({ x: 713, fe: FE }),
-  Object.freeze({ x: 825, fe: FE }),
-  Object.freeze({ x: 881, fe: FE }),
-  Object.freeze({ x: 982, fe: FE }),
-  Object.freeze({ x: 1032, fe: COMPENDIUM_FE }),
-  Object.freeze({ x: 1181, fe: COMPENDIUM_FE }),
-  Object.freeze({ x: 1234, fe: FE }),
-  Object.freeze({ x: 1350, fe: FE }),
-  Object.freeze({ x: 1413, fe: FE }),
-  Object.freeze({ x: 1516, fe: FE }),
-  Object.freeze({ x: 1596, fe: FE }),
-]);
+export const CUTS = /* @__PURE__ */ Object.freeze(
+  [558, 657, 713, 825, 881, 982, 1032, 1181, 1234, 1350, 1413, 1516, 1596].map((x) => Object.freeze({
+    x, fe: x === 1032 || x === 1181 ? COMPENDIUM_FE : FE,
+  })),
+);
 
 /**
  * SLOT_TONE: the CSS brightness each slot's filler takes, keyed by cut column. The painting
@@ -237,7 +230,7 @@ export const CUTS = Object.freeze([
  * tone at its right end.
  * @type {Readonly<Record<number, number>>}
  */
-export const SLOT_TONE = Object.freeze({
+export const SLOT_TONE = /* @__PURE__ */ Object.freeze({
   558: 1.047, 657: 1.027, 713: 1.044, 825: 1.014, 881: 1.035, 982: 1.019, 1032: 1.050,
   1181: 0.975, 1234: 0.994, 1350: 0.955, 1413: 0.981, 1516: 0.923, 1596: 0.802,
 });
@@ -248,23 +241,23 @@ export const SLOT_TONE = Object.freeze({
  * first binding, has five columns of wood to its left and none to its right, so the brand
  * crop carries the first binding and 10 columns of wood.)
  */
-export const COMPACT_JOIN = Object.freeze({ left: 558, right: 1596 });
+export const COMPACT_JOIN = /* @__PURE__ */ Object.freeze({ left: 558, right: 1596 });
 
 /** The compact arrow's natural width, strip px (the two crops without a slot). */
 export const COMPACT_W = COMPACT_JOIN.left + (STRIP_W - COMPACT_JOIN.right);
 
 /** The home control: the nock, feather and logo plate, up to the first binding. */
-export const HOME = Object.freeze({ x0: 0, x1: 512 });
+export const HOME = /* @__PURE__ */ Object.freeze({ x0: 0, x1: 512 });
 
 /** The logo plate inside HOME, ornament tip to ornament tip (the home control's hover glow). */
-export const LOGO_PLATE = Object.freeze({ x0: 128, x1: 505 });
+export const LOGO_PLATE = /* @__PURE__ */ Object.freeze({ x0: 128, x1: 505 });
 
 /**
  * THE HOVER GLOW's box: a word's lettering widened by GLOW_PAD columns on each side (still
  * inside its region, and clipped at a cut: glowSpan), or a plate, over band rows GLOW_ROWS.
  */
 export const GLOW_PAD = 10;
-export const GLOW_ROWS = Object.freeze({ top: 4, bottom: 64 });
+export const GLOW_ROWS = /* @__PURE__ */ Object.freeze({ top: 4, bottom: 64 });
 
 /**
  * THE FEATHER. Its hanging pixels lie in columns [19, 464) and reach row 177; from column 475
@@ -302,13 +295,13 @@ export const featherShown = (scrollY) => !(scrollY >= 1);
  * in NAV's order, so a relabel or reorder in lib/routes.js reds instead of mislinking.
  * @type {Readonly<Record<string, Readonly<Span>>>}
  */
-export const NAV_HIT = Object.freeze({
-  generate: Object.freeze({ x0: 547, x1: 668 }),
-  settlements: Object.freeze({ x0: 702, x1: 836 }),
-  realm: Object.freeze({ x0: 870, x1: 994 }),
-  compendium: Object.freeze({ x0: 1027, x1: 1187 }),
-  gallery: Object.freeze({ x0: 1219, x1: 1364 }),
-  'about-what-this-is': Object.freeze({ x0: 1397, x1: 1530 }),
+export const NAV_HIT = /* @__PURE__ */ Object.freeze({
+  generate: /* @__PURE__ */ Object.freeze({ x0: 547, x1: 668 }),
+  settlements: /* @__PURE__ */ Object.freeze({ x0: 702, x1: 836 }),
+  realm: /* @__PURE__ */ Object.freeze({ x0: 870, x1: 994 }),
+  compendium: /* @__PURE__ */ Object.freeze({ x0: 1027, x1: 1187 }),
+  gallery: /* @__PURE__ */ Object.freeze({ x0: 1219, x1: 1364 }),
+  'about-what-this-is': /* @__PURE__ */ Object.freeze({ x0: 1397, x1: 1530 }),
 });
 
 /**
@@ -316,36 +309,61 @@ export const NAV_HIT = Object.freeze({
  * (121, 134, 124, 160, 145, 133).
  * @type {ReadonlyArray<number>}
  */
-export const SECTION_W = Object.freeze(Object.values(NAV_HIT).map((hit) => hit.x1 - hit.x0));
+export const SECTION_W = /* @__PURE__ */ Object.freeze(Object.values(NAV_HIT).map((hit) => hit.x1 - hit.x0));
 
-/** The widest painted section: below the width that lifts every section to it, no slot opens. */
-export const SECTION_W_MAX = Math.max(...SECTION_W);
+/**
+ * The widest painted section (Compendium): the six are equal once every one reaches it.
+ * Literals rather than reductions over SECTION_W, so the first-paint bundle drops them (only
+ * the pins read them); tests/components/arrowGeometry.test.js holds both to SECTION_W.
+ */
+export const SECTION_W_MAX = 160;
 
-/** The mean painted section, 817 / 6 strip px. */
-export const SECTION_W_MEAN = SECTION_W.reduce((sum, w) => sum + w, 0) / SECTION_W.length;
+/** The mean painted section, strip px. */
+export const SECTION_W_MEAN = 817 / 6;
 
 /** The parts the extra width is laid in: one per section and one for the blank plate's slot. */
 export const PARTS = SECTION_W.length + 1;
 
 /**
- * The extra width, strip px at the scale, that lifts every section to SECTION_W_MAX with the
- * plate taking its part: PARTS x (160 - 817 / 6) = 166.83.
+ * The CATCH-UP: the extra width, strip px at the scale, that lifts every section to
+ * SECTION_W_MAX with the plate taking its part, PARTS x (160 - 817 / 6) = 166.83, so the six
+ * are equal from (STRIP_W + EQUAL_EXTRA) x S_MAX = 1379.9 CSS px.
  */
 export const EQUAL_EXTRA = PARTS * (SECTION_W_MAX - SECTION_W_MEAN);
 
 /**
+ * The water level, strip px: the width L every section below it is lifted to when `wood`
+ * strip px are poured over the six painted sections (narrowest first), so that the sum of
+ * max(0, L - painted) is `wood`. At or past the catch-up, L = mean + wood / 6.
+ * @param {number} wood
+ * @returns {number}
+ */
+export function waterLevel(wood) {
+  const sorted = SECTION_W.slice().sort((a, b) => a - b);
+  let sum = 0;
+  for (let j = 1; j <= sorted.length; j += 1) {
+    sum += sorted[j - 1];
+    const level = (wood + sum) / j;
+    if (j === sorted.length || level <= sorted[j]) return level;
+  }
+  return 0; // unreachable: the loop returns at its last step
+}
+
+/**
  * The slot at each cut of the full arrow, CSS px, for one part of the extra width (`part`)
- * at scale s. Every section's width becomes T = (painted mean) x s + part, so each of its two
- * slots takes (T - painted x s) / 2; the plate's cut (in no section) takes one part.
+ * at scale s. The six sections' share (six parts) water-fills to the level L, so a section's
+ * width is max(painted, L) x s and each of its two slots takes half of what it gained; the
+ * plate's cut (in no section) takes one part.
  * @param {number} part
  * @param {number} s
  * @returns {number[]}
  */
 export function fullSlots(part, s) {
   const hits = Object.values(NAV_HIT);
+  const level = waterLevel((SECTION_W.length * part) / s);
   return CUTS.map(({ x }) => {
     const k = hits.findIndex((hit) => x > hit.x0 && x < hit.x1);
-    return k < 0 ? part : (part + (SECTION_W_MEAN - SECTION_W[k]) * s) / 2;
+    return k < 0 ? part : (Math.max(0, level - SECTION_W[k]) * s) / 2;
   });
 }
 
@@ -354,13 +372,13 @@ export function fullSlots(part, s) {
  * Gallery, About), measured as the columns carrying three or more ink pixels.
  * @type {Readonly<Record<string, Readonly<Span>>>}
  */
-export const NAV_WORD = Object.freeze({
-  generate: Object.freeze({ x0: 569, x1: 646 }),
-  settlements: Object.freeze({ x0: 727, x1: 812 }),
-  realm: Object.freeze({ x0: 896, x1: 968 }),
-  compendium: Object.freeze({ x0: 1037, x1: 1176 }),
-  gallery: Object.freeze({ x0: 1250, x1: 1336 }),
-  'about-what-this-is': Object.freeze({ x0: 1432, x1: 1502 }),
+export const NAV_WORD = /* @__PURE__ */ Object.freeze({
+  generate: /* @__PURE__ */ Object.freeze({ x0: 569, x1: 646 }),
+  settlements: /* @__PURE__ */ Object.freeze({ x0: 727, x1: 812 }),
+  realm: /* @__PURE__ */ Object.freeze({ x0: 896, x1: 968 }),
+  compendium: /* @__PURE__ */ Object.freeze({ x0: 1037, x1: 1176 }),
+  gallery: /* @__PURE__ */ Object.freeze({ x0: 1250, x1: 1336 }),
+  'about-what-this-is': /* @__PURE__ */ Object.freeze({ x0: 1432, x1: 1502 }),
 });
 
 /**
@@ -383,7 +401,7 @@ export function glowSpan(id) {
  * The lettering's rows: capitals [19, 41), descenders (the y of Library and Gallery, the p
  * of Compendium) down to row 49.
  */
-export const WORD_ROWS = Object.freeze({ top: 19, baseline: 41, bottom: 50 });
+export const WORD_ROWS = /* @__PURE__ */ Object.freeze({ top: 19, baseline: 41, bottom: 50 });
 
 /**
  * THE ACTIVE PAGE HAS NO MARK ON THE SHAFT (owner, 2026-09-19: "remove that as well", under
@@ -402,25 +420,25 @@ export const WORD_ROWS = Object.freeze({ top: 19, baseline: 41, bottom: 50 });
  */
 
 /** The blank brass plate, ornament tip to ornament tip (the account's home at every width). */
-export const PLATE = Object.freeze({ x0: 1623, x1: 1877 });
+export const PLATE = /* @__PURE__ */ Object.freeze({ x0: 1623, x1: 1877 });
 
 /** The plate's flat field inside its engraved frame. */
-export const PLATE_FIELD = Object.freeze({ x0: 1672, x1: 1833, y0: 11, y1: 51 });
+export const PLATE_FIELD = /* @__PURE__ */ Object.freeze({ x0: 1672, x1: 1833, y0: 11, y1: 51 });
 
 /**
  * The plate's two rivets, inside the flat field's ends.
  * @type {ReadonlyArray<Readonly<Box>>}
  */
-export const PLATE_RIVETS = Object.freeze([
-  Object.freeze({ x0: 1664, x1: 1679, y0: 25, y1: 37 }),
-  Object.freeze({ x0: 1829, x1: 1843, y0: 25, y1: 37 }),
+export const PLATE_RIVETS = /* @__PURE__ */ Object.freeze([
+  /* @__PURE__ */ Object.freeze({ x0: 1664, x1: 1679, y0: 25, y1: 37 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1829, x1: 1843, y0: 25, y1: 37 }),
 ]);
 
 /**
  * THE SLIP: the parchment label's field on the plate, between the rivets and inside the
  * frame, with no engraved line or rivet under it.
  */
-export const SLIP = Object.freeze({ x0: 1683, x1: 1825, y0: 13, y1: 49 });
+export const SLIP = /* @__PURE__ */ Object.freeze({ x0: 1683, x1: 1825, y0: 13, y1: 49 });
 
 /**
  * THE SLIP'S TYPE SIZE, which is a fact about the PAINTING and so lives with the
@@ -489,23 +507,22 @@ export const slipFont = (s) => (s >= 0.55 ? 12 : s >= 0.4 ? 11 : 10);
  */
 
 /**
- * The strip columns each composition shows, in order, the joins between them, the cut
- * columns on each side of each join (for its tone) and each join's crossfade width.
+ * The strip columns each composition shows, in order, the joins between them: the cut
+ * columns on each side of each join (for its tone) and the join's crossfade width.
  * @param {'full' | 'compact'} mode
  * @param {number} share - CSS px per part (full) or the one slot's width (compact)
  * @param {number} s
- * @returns {{ ranges: Array<[number, number]>, slots: number[], joins: Array<[number, number]>, fes: number[] }}
+ * @returns {{ ranges: Array<[number, number]>, slots: number[], joins: Array<[number, number, number]> }}
  */
 function composition(mode, share, s) {
   if (mode === 'compact') {
     return {
       ranges: [[0, COMPACT_JOIN.left], [COMPACT_JOIN.right, STRIP_W]],
       slots: [share],
-      joins: [[COMPACT_JOIN.left, COMPACT_JOIN.right]],
-      fes: [FE],
+      joins: [[COMPACT_JOIN.left, COMPACT_JOIN.right, FE]],
     };
   }
-  if (share <= 0) return { ranges: [[0, STRIP_W]], slots: [], joins: [], fes: [] };
+  if (share <= 0) return { ranges: [[0, STRIP_W]], slots: [], joins: [] };
   /** @type {Array<[number, number]>} */
   const ranges = [];
   let from = 0;
@@ -517,38 +534,23 @@ function composition(mode, share, s) {
   return {
     ranges,
     slots: fullSlots(share, s),
-    joins: CUTS.map((cut) => [cut.x, cut.x]),
-    fes: CUTS.map((cut) => cut.fe),
+    joins: CUTS.map((cut) => [cut.x, cut.x, cut.fe]),
   };
 }
 
-/**
- * The CSS px per part at which the widest word slot is exactly one filler tile, per unit of
- * scale: the narrowest section's slots are the widest, (2 x FILLER_W - (mean - narrowest))
- * per part. (The plate's slot, one part, then stays under two tiles, as its old double share
- * did.)
- */
-const TILE_PART = 2 * FILLER_W - SECTION_W_MEAN + Math.min(...SECTION_W);
+
 
 /**
  * The full arrow's scale and wood per part (one seventh of the extra width), from the page's
- * clientWidth.
- *   - Below (STRIP_W + EQUAL_EXTRA) x S_MAX (1379.9 px): uncut, s = cw / 2133 (so s rises
- *     past S_MAX, to about 0.647, before the slots open: the six sections cannot be equal
- *     without cutting into the widest one's painting).
- *   - Up to (STRIP_W + PARTS x TILE_PART) x S_MAX (4340.9 px): s = S_MAX, and the extra
- *     width is laid so the six sections are equal.
- *   - Above: s grows again so that the widest word slot is exactly one filler tile.
+ * clientWidth: s = min(S_MAX, cw / STRIP_W) at every width (the chair's ruling, 2026-11-08), so
+ * below STRIP_W x S_MAX (1279.8 px) the painting is uncut and shrinks with the page, and from
+ * there the scale holds and the extra width water-fills the sections (fullSlots). The scale
+ * never passes S_MAX and never jumps (the old double-share threshold dropped it 0.611 -> 0.6).
  * @param {number} cw
  * @returns {{ s: number, share: number }}
  */
 export function fullScale(cw) {
-  const uncutBelow = (STRIP_W + EQUAL_EXTRA) * S_MAX;
-  const tiledAbove = (STRIP_W + PARTS * TILE_PART) * S_MAX;
-  if (cw < uncutBelow) return { s: cw / STRIP_W, share: 0 };
-  if (cw <= tiledAbove) return { s: S_MAX, share: (cw - STRIP_W * S_MAX) / PARTS };
-  const s = cw / (STRIP_W + PARTS * TILE_PART);
-  return { s, share: TILE_PART * s };
+  return cw < STRIP_W * S_MAX ? { s: cw / STRIP_W, share: 0 } : { s: S_MAX, share: (cw - STRIP_W * S_MAX) / PARTS };
 }
 
 /**
@@ -577,7 +579,7 @@ export function layoutArrow({ clientWidth, full, short = false }) {
   /** @type {'full' | 'compact'} */
   const mode = full ? 'full' : 'compact';
   const { s, share } = full ? fullScale(width) : compactScale(width, short);
-  const { ranges, slots, joins, fes } = composition(mode, share, s);
+  const { ranges, slots, joins } = composition(mode, share, s);
 
   /** @type {Segment[]} */
   const segments = [];
@@ -587,8 +589,8 @@ export function layoutArrow({ clientWidth, full, short = false }) {
   const starts = [];
   let x = 0;
   ranges.forEach(([a, b], i) => {
-    const feL = i > 0 ? fes[i - 1] : 0;
-    const feR = i < ranges.length - 1 ? fes[i] : 0;
+    const feL = i > 0 ? joins[i - 1][2] : 0;
+    const feR = i < ranges.length - 1 ? joins[i][2] : 0;
     const fadeL = feL * s;
     const fadeR = feR * s;
     starts.push(x);

@@ -15,12 +15,14 @@
  *       the regions, the slip clears the rivets (with a CONTROL showing the cut check can fail);
  *   (c) for every page width from 320 to 3840 px in both compositions: the painting ends
  *       exactly at the page's width, the segments tile with their slots, every filler
- *       spans its slot plus both crossfades (so only painted segments ever fade), no slot
- *       opens below the uncut threshold, and no word slot is longer than one filler tile;
+ *       spans its slot plus both crossfades (so only painted segments ever fade), and no slot
+ *       opens below the uncut threshold (the tile cap went with the tile zone, 2026-11-08: a
+ *       slot wider than one tile repeats the tile, as the filler's repeat-x always allowed);
  *   (c2) THE SIX SECTIONS ARE EQUAL (owner, 2026-11-08: "The spacing between the sections
  *       ( represented by the banded thread red) are not equally spaced and scales as such can
  *       you do that for me?"): binding to binding, within 1 px, at every full width from the
- *       uncut threshold to 3840, and they grow together;
+ *       catch-up to 3840, and they grow together; below the catch-up the extra water-fills
+ *       the narrowest sections first, and the scale never passes S_MAX or jumps;
  *   (d) the scale: the word floor at the switch, S_MAX while wood is inserted, continuity
  *       inside each zone, the short-landscape cap on the compact arrow only;
  *   (e) the hit rectangles: ordered, disjoint, in bounds, each widened only by its own
@@ -38,7 +40,7 @@ import { describe, expect, it } from 'vitest';
 import {
   BAND_H, BARB_HANG_H, BINDINGS, COMPACT_JOIN, COMPACT_MIN_SLOT, COMPACT_W, COMPENDIUM_FE, CUTS, EQUAL_EXTRA,
   FE, FEATHER_FROM, FEATHER_RAMP, FEATHER_X1, FILLER_W, FULL_MIN_VIEWPORT, GLOW_PAD, GLOW_ROWS, HANG_H, HOME,
-  LOGO_PLATE, NAV_HIT, NAV_WORD, PARTS, PLATE, PLATE_FIELD, PLATE_RIVETS, S_MAX, SECTION_W, SECTION_W_MAX,
+  LOGO_PLATE, NAV_HIT, NAV_WORD, PARTS, waterLevel, PLATE, PLATE_FIELD, PLATE_RIVETS, S_MAX, SECTION_W, SECTION_W_MAX,
   SHORT_CAP, SLIP, SLOT_TONE, STRIP_W, WOOD_RUNS, WORD_FLOOR, WORD_ROWS, SEAM_BAND_TO, SEAM_HANG_FROM,
   featherShown, fullScale, glowSpan, layoutArrow, padTarget,
 } from '../../src/components/nav/arrowGeometry.js';
@@ -46,14 +48,14 @@ import { NAV } from '../../src/lib/routes.js';
 import { legacy } from '../../src/design/tokens.js';
 
 const EPS = 1e-6;
+/** Where the slots open: the painting reaches S_MAX, STRIP_W x S_MAX. */
+const UNCUT_BELOW = 1279.8;
 /**
- * Where the slots open: the width whose extra lifts every section to Compendium's 160 painted
- * columns, (STRIP_W + EQUAL_EXTRA) x S_MAX. A literal, so the equality pin below cannot run
- * over an empty range if the geometry loses its constants ((d) holds the two together).
+ * THE CATCH-UP: the width whose extra lifts every section to Compendium's 160 painted columns,
+ * (STRIP_W + EQUAL_EXTRA) x S_MAX. A literal, so the equality pin below cannot run over an
+ * empty range if the geometry loses its constants ((d) holds the two together).
  */
-const UNCUT_BELOW = 1379.9;
-/** Where the widest word slot (Create's) reaches one filler tile at S_MAX. */
-const TILED_ABOVE = 4340.9;
+const CATCH_UP = 1379.9;
 
 /**
  * Every cut that lacks its own `fe` (FE when it names none) columns of plain wood on either
@@ -214,11 +216,7 @@ describe('(c) every width from 320 to 3840 px, both compositions', () => {
       const slotted = layout.segments.length > 1;
       if (slotted !== cw >= UNCUT_BELOW) failures.push(`full ${cw}: slotted=${slotted}`);
       if (slotted && layout.segments.length !== CUTS.length + 1) failures.push(`full ${cw}: ${layout.segments.length} segments`);
-      // No word slot longer than one tile, and the plate's slot (one part) no longer than two.
-      layout.fillers.forEach((f, i) => {
-        const tiles = CUTS[i].x === 1596 ? 2 : 1;
-        if (f.slot > tiles * FILLER_W * layout.s + EPS) failures.push(`full ${cw}: slot ${CUTS[i].x} ${f.slot} longer than ${tiles} tile(s)`);
-      });
+      if (layout.s > S_MAX + EPS) failures.push(`full ${cw}: s ${layout.s} past S_MAX`);
     }
     expect(failures).toEqual([]);
   });
@@ -254,11 +252,11 @@ describe('(c) every width from 320 to 3840 px, both compositions', () => {
   it('the mode follows the full flag, and the uncut arrow is one segment with no fade', () => {
     expect(layoutArrow({ clientWidth: 1280, full: true }).mode).toBe('full');
     expect(layoutArrow({ clientWidth: 1280, full: false }).mode).toBe('compact');
-    const uncut = layoutArrow({ clientWidth: 1280, full: true });
+    const uncut = layoutArrow({ clientWidth: 1279, full: true });
     expect(uncut.segments).toHaveLength(1);
     const [only] = uncut.segments;
     expect([only.x, only.from, only.to, only.fadeL, only.fadeR, only.coreX]).toEqual([0, 0, STRIP_W, 0, 0, 0]);
-    expect(only.w).toBeCloseTo(1280, 9);
+    expect(only.w).toBeCloseTo(1279, 9);
     expect(uncut.fillers).toEqual([]);
   });
 });
@@ -268,7 +266,7 @@ describe('(c2) the six sections are equal between their red bindings, and grow t
     const failures = [];
     let prev = 0;
     let checked = 0;
-    for (let cw = Math.ceil(UNCUT_BELOW); cw <= 3840; cw += 1) {
+    for (let cw = Math.ceil(CATCH_UP); cw <= 3840; cw += 1) {
       checked += 1;
       const layout = layoutArrow({ clientWidth: cw, full: true });
       const w = sectionWidths(layout);
@@ -301,13 +299,56 @@ describe('(c2) the six sections are equal between their red bindings, and grow t
   it('pins the sections at named widths: 104.6 at 1440, 173.2 at 1920, 264.6 at 2560, 447.4 at 3840; at the threshold each is Compendium\'s painted width', () => {
     expect([1440, 1920, 2560, 3840].map((cw) => Number(sectionWidths(layoutArrow({ clientWidth: cw, full: true }))[0].toFixed(1))))
       .toEqual([104.6, 173.2, 264.6, 447.4]);
-    const at = layoutArrow({ clientWidth: Math.ceil(UNCUT_BELOW), full: true });
+    const at = layoutArrow({ clientWidth: Math.ceil(CATCH_UP), full: true });
     expect(sectionWidths(at)[0]).toBeGreaterThanOrEqual(SECTION_W_MAX * S_MAX - EPS);
     expect(sectionWidths(at)[0]).toBeLessThan(SECTION_W_MAX * S_MAX + 1);
   });
 
-  it('CONTROL: the equality check convicts the painting\'s own unequal sections, uncut below the threshold', () => {
-    const w = sectionWidths(layoutArrow({ clientWidth: 1379, full: true }));
+  it('below the catch-up the extra water-fills: the narrowest sections rise together, none shrinks, none passes the level', () => {
+    const failures = [];
+    let prev = sectionWidths(layoutArrow({ clientWidth: 1279, full: true }));
+    for (let cw = 1280; cw < CATCH_UP + 1; cw += 0.5) {
+      const layout = layoutArrow({ clientWidth: cw, full: true });
+      const w = sectionWidths(layout);
+      const lifted = Math.min(...w);
+      w.forEach((v, k) => {
+        if (v < SECTION_W[k] * layout.s - EPS) failures.push(`${cw}: section ${k} under its painting`);
+        if (v < prev[k] - EPS) failures.push(`${cw}: section ${k} shrank`);
+        // A section is either at the level (the narrowest, lifted together) or still its painting.
+        if (Math.abs(v - lifted) > EPS && Math.abs(v - SECTION_W[k] * layout.s) > EPS) failures.push(`${cw}: section ${k} is neither level nor painted`);
+      });
+      prev = w;
+    }
+    expect(failures.slice(0, 3)).toEqual([]);
+    expect(waterLevel(0)).toBe(121);
+    expect(waterLevel(EQUAL_EXTRA * 6 / PARTS)).toBeCloseTo(SECTION_W_MAX, 9);
+  });
+
+  it('pins the water-fill at named widths: 1300 lifts Create, Library, Realm and About to 81.1; 1340 leaves only Compendium above, 89.2', () => {
+    const at = (cw) => sectionWidths(layoutArrow({ clientWidth: cw, full: true })).map((v) => Number(v.toFixed(1)));
+    expect(at(1300)).toEqual([81.1, 81.1, 81.1, 96.0, 87.0, 81.1]);
+    expect(at(1340)).toEqual([89.2, 89.2, 89.2, 96.0, 89.2, 89.2]);
+    expect(at(1380)).toEqual([96.0, 96.0, 96.0, 96.0, 96.0, 96.0]);
+  });
+
+  it('continuity: s and every section move by under 1 px per page pixel, through both old thresholds (1303.8 and 1380)', () => {
+    // Per page PIXEL, not across W - 1 .. W + 1: while one section is the narrowest it takes
+    // the sections' whole share, 6/7 px per page pixel, so two pixels move it 1.71 px. The
+    // bound is a jump detector: the parent jumped 2.77 px at 1303.8, the threshold cut 17.8 px at 1380.
+    const failures = [];
+    for (let w = 1240; w <= 1420; w += 0.25) {
+      const lo = layoutArrow({ clientWidth: w, full: true });
+      const hi = layoutArrow({ clientWidth: w + 1, full: true });
+      if (Math.abs(hi.s - lo.s) > 1 / STRIP_W + EPS) failures.push(`${w}: s ${lo.s} -> ${hi.s}`);
+      const a = sectionWidths(lo);
+      const b = sectionWidths(hi);
+      a.forEach((v, k) => { if (Math.abs(b[k] - v) > 1 + EPS) failures.push(`${w}: section ${k} ${v.toFixed(2)} -> ${b[k].toFixed(2)}`); });
+    }
+    expect(failures.slice(0, 3)).toEqual([]);
+  });
+
+  it('CONTROL: the equality check convicts the painting\'s own unequal sections, uncut below S_MAX', () => {
+    const w = sectionWidths(layoutArrow({ clientWidth: 1279, full: true }));
     expect(Math.max(...w) - Math.min(...w)).toBeGreaterThan(20);
   });
 });
@@ -315,10 +356,13 @@ describe('(c2) the six sections are equal between their red bindings, and grow t
 describe('(d) the scale', () => {
   it('pins the zones at named widths', () => {
     expect(layoutArrow({ clientWidth: 1024, full: true }).s).toBeCloseTo(1024 / 2133, 12);
-    // Uncut until the extra width can lift every section to Compendium's 160 columns.
-    const at1379 = layoutArrow({ clientWidth: 1379, full: true });
-    expect(at1379.share).toBe(0);
-    expect(at1379.s).toBeCloseTo(1379 / 2133, 12);
+    // Uncut until the painting reaches S_MAX; then the slots open and s holds.
+    const at1279 = layoutArrow({ clientWidth: 1279, full: true });
+    expect(at1279.share).toBe(0);
+    expect(at1279.s).toBeCloseTo(1279 / 2133, 12);
+    const at1280 = layoutArrow({ clientWidth: 1280, full: true });
+    expect(at1280.s).toBe(S_MAX);
+    expect(at1280.share).toBeCloseTo((1280 - 1279.8) / 7, 9);
     const at1380 = layoutArrow({ clientWidth: 1380, full: true });
     expect(at1380.s).toBe(S_MAX);
     expect(at1380.share).toBeCloseTo((1380 - 1279.8) / 7, 9);
@@ -328,14 +372,13 @@ describe('(d) the scale', () => {
     const at3840 = layoutArrow({ clientWidth: 3840, full: true });
     expect(at3840.s).toBe(S_MAX);
     expect(at3840.share).toBeCloseTo((3840 - 1279.8) / 7, 9);
-    // The 372-column filler holds S_MAX up to 4340.9 px; past that Create's slots are one tile each.
+    // s = min(S_MAX, cw / STRIP_W) at every width (the chair's ruling, 2026-11-08): no tile zone.
     const at4400 = layoutArrow({ clientWidth: 4400, full: true });
-    expect(at4400.s).toBeCloseTo(4400 / (TILED_ABOVE / S_MAX), 9);
-    expect(at4400.fillers[0].slot).toBeCloseTo(FILLER_W * at4400.s, 9);
-    expect(fullScale(TILED_ABOVE).s).toBe(S_MAX);
-    expect(layoutArrow({ clientWidth: TILED_ABOVE, full: true }).fillers[0].slot).toBeCloseTo(FILLER_W * S_MAX, 9);
+    expect(at4400.s).toBe(S_MAX);
+    expect(at4400.share).toBeCloseTo((4400 - 1279.8) / 7, 9);
     expect(FILLER_W).toBe(372);
-    expect((STRIP_W + EQUAL_EXTRA) * S_MAX).toBeCloseTo(UNCUT_BELOW, 9);
+    expect((STRIP_W + EQUAL_EXTRA) * S_MAX).toBeCloseTo(CATCH_UP, 9);
+    expect(STRIP_W * S_MAX).toBeCloseTo(UNCUT_BELOW, 9);
   });
 
   it('the full arrow keeps the word floor, holds S_MAX while wood is inserted, and moves continuously inside each zone', () => {
@@ -344,10 +387,11 @@ describe('(d) the scale', () => {
     for (let cw = 1009; cw <= 4800; cw += 1) {
       const { s } = fullScale(cw);
       if (s < 0.47) failures.push(`${cw}: s ${s} under the floor`);
-      if (cw >= UNCUT_BELOW && cw <= TILED_ABOVE && s !== S_MAX) failures.push(`${cw}: s ${s} is not S_MAX`);
-      if (cw < TILED_ABOVE && s > UNCUT_BELOW / STRIP_W + EPS) failures.push(`${cw}: s ${s} above the uncut ceiling`);
-      const sameZone = (cw - 1 < UNCUT_BELOW) === (cw < UNCUT_BELOW) && (cw - 1 <= TILED_ABOVE) === (cw <= TILED_ABOVE);
-      if (cw > 1009 && sameZone && Math.abs(s - prev.s) > 1 / STRIP_W + EPS) failures.push(`${cw}: s jumps ${prev.s} -> ${s}`);
+      // The chair's ruling (2026-11-08): no scale past S_MAX, at any width.
+      if (s > S_MAX + EPS) failures.push(`${cw}: s ${s} past S_MAX`);
+      if (cw >= UNCUT_BELOW && s !== S_MAX) failures.push(`${cw}: s ${s} is not S_MAX`);
+      // Continuous across the zone join too: no jump anywhere (the parent dropped 0.611 -> 0.6).
+      if (cw > 1009 && Math.abs(s - prev.s) > 1 / STRIP_W + EPS) failures.push(`${cw}: s jumps ${prev.s} -> ${s}`);
       prev = { s, share: 0 };
     }
     expect(failures).toEqual([]);

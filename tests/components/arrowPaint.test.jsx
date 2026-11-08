@@ -73,7 +73,11 @@ describe('(a) paint order: opaque fillers first, only segments fade', () => {
     expect(segmentMask(fe, 0)).toBe(last);
     expect(segmentMask(0, 0)).toBeUndefined();
     const masks = [...html.matchAll(/(?<!-webkit-)mask-image:([^;"]+)/g)].map((m) => m[1]);
-    expect(masks).toEqual([first, ...Array(CUTS.length - 1).fill(middle), last]);
+    // Each segment fades by its cut's own crossfade width (Compendium's two cuts at 5 columns).
+    const fes = CUTS.map((c) => c.fe * layout.s);
+    expect(masks).toEqual([first, ...fes.slice(1).map((r, i) => segmentMask(fes[i], r)), last]);
+    // The ends, and the three segments beside Compendium's cuts, differ from the uniform middle.
+    expect(masks.map((m, i) => (m === middle ? null : i)).filter((i) => i !== null)).toEqual([0, 6, 7, 8, CUTS.length]);
     expect([...html.matchAll(/-webkit-mask-image:/g)]).toHaveLength(CUTS.length + 1);
     // Every mask sits on a segment: the filler elements' own style strings carry none.
     const fillerStyles = [...html.matchAll(/<div data-sf-arrow-filler="" style="([^"]*)"/g)].map((m) => m[1]);
@@ -94,9 +98,10 @@ describe('(a) paint order: opaque fillers first, only segments fade', () => {
   });
 
   test('the uncut arrow is one unmasked image, and the compact arrow is two crops around one filler', () => {
-    const uncut = paint(layoutArrow({ clientWidth: 1280, full: true }), 'band');
+    // 1279: the last whole width below STRIP_W x S_MAX (1279.8), where the slots open (2026-11-08).
+    const uncut = paint(layoutArrow({ clientWidth: 1279, full: true }), 'band');
     expect(uncut.children).toHaveLength(1);
-    expect(renderToStaticMarkup(<ArrowPaint layout={layoutArrow({ clientWidth: 1280, full: true })} />).includes('mask-image')).toBe(false);
+    expect(renderToStaticMarkup(<ArrowPaint layout={layoutArrow({ clientWidth: 1279, full: true })} />).includes('mask-image')).toBe(false);
     cleanup();
     const compact = paint(layoutArrow({ clientWidth: 390, full: false }), 'band');
     expect(compact.children.map((el) => (el.hasAttribute('data-sf-arrow-filler') ? 'filler' : 'segment'))).toEqual(['filler', 'segment', 'segment']);
