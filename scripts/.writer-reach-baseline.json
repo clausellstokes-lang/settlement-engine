@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "1ae1a1bb7ea916fa364ce337af41f144929b6ecb",
+ "frozenAtSha": "82a4e28563858638ce440b6abf5b6a0944b3184f",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 21984
  },
  "shapesDigest": "e3e094c7fe1ea56d9362f2892c2767871a55d153c6791b7c2eb5c54e9a906d28",
- "detectorDigest": "6de1fcb17cc758e4e0ddb8d549ea9a65bd69d25c05668ca68b37bc193bd19c1e",
- "verdictDigest": "5fcb26f4e7e5cf5c999feb507bada55741983d35bc23b6c4a4bb85b76f983b98",
+ "detectorDigest": "6bb61e1f905b5fe5dc5ace3b559409be9a1b3824b84741e9286aee5f0f71a38b",
+ "verdictDigest": "2d03d418a7c3126d97667e0a45652447ea8a57cab03a05664386b426efdfdb21",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 11997,
-  "lit": 621,
-  "litName": 9962,
-  "dark": 1414,
+  "lit": 641,
+  "litName": 9965,
+  "dark": 1391,
   "thinKeys": 17280,
   "thinShapes": 1203,
   "knownShapes": 517
  },
  "scanStats": {
   "files": 1747,
-  "sites": 41205,
-  "propRead": 39021,
+  "sites": 41278,
+  "propRead": 39094,
   "elemRead": 0,
   "destructure": 2168,
   "inOp": 16,
-  "rGrades": 6399,
-  "nGrades": 1620633,
-  "resolvedReceivers": 7287
+  "rGrades": 6459,
+  "nGrades": 1622060,
+  "resolvedReceivers": 7356
  },
- "registerDigest": "511672c01b1b5660c194a2a586e43e5be1455ab7f6cf1c888113258e54a0dc6e",
- "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 427,
+ "registerDigest": "93a67b1b960e2d5d310b1356109fbb059bdd932996d1b73ec45da5cb990cfe78",
+ "pendingSurfaceCeiling": 0,
+ "reviewableDarkCount": 404,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -686,12 +686,6 @@
    "key": "chainContext",
    "shape": "candidates",
    "rows": 3766
-  },
-  {
-   "identity": "chainModifiers on defenseProfile",
-   "key": "chainModifiers",
-   "shape": "defenseProfile",
-   "rows": 472
   },
   {
    "identity": "clay on reasons",
@@ -2116,104 +2110,14 @@
    "rows": 472
   },
   {
-   "identity": "hasAlchemist on inst",
-   "key": "hasAlchemist",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasAlchemy on traditions",
-   "key": "hasAlchemy",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
-   "identity": "hasArcane on traditions",
-   "key": "hasArcane",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
-   "identity": "hasArcaneGuild on traditions",
-   "key": "hasArcaneGuild",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
-   "identity": "hasBlackMarket on inst",
-   "key": "hasBlackMarket",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
    "identity": "hasCathedral on inst",
    "key": "hasCathedral",
    "shape": "inst",
    "rows": 944
   },
   {
-   "identity": "hasCharterHall on inst",
-   "key": "hasCharterHall",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasDivine on traditions",
-   "key": "hasDivine",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
-   "identity": "hasDruid on traditions",
-   "key": "hasDruid",
-   "shape": "traditions",
-   "rows": 2794
-  },
-  {
-   "identity": "hasFreeCompany on inst",
-   "key": "hasFreeCompany",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasGangInfra on inst",
-   "key": "hasGangInfra",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasGates on inst",
-   "key": "hasGates",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasMagesGuild on inst",
-   "key": "hasMagesGuild",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
    "identity": "hasMonastery on inst",
    "key": "hasMonastery",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasSmuggling on inst",
-   "key": "hasSmuggling",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasThievesGuild on inst",
-   "key": "hasThievesGuild",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasWizardTower on inst",
-   "key": "hasWizardTower",
    "shape": "inst",
    "rows": 944
   },
@@ -2904,18 +2808,6 @@
   {
    "identity": "mageTheocracy on flags",
    "key": "mageTheocracy",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
-   "identity": "magicFillsVoid on flags",
-   "key": "magicFillsVoid",
-   "shape": "flags",
-   "rows": 472
-  },
-  {
-   "identity": "magicMilitarized on flags",
-   "key": "magicMilitarized",
    "shape": "flags",
    "rows": 472
   },
@@ -8348,12 +8240,12 @@
   "terrainOverride on _config": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "tradeRouteAccess on _config": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "all::Criminal::Underground network on _institutionToggles": "",
-  "applicable on _isolationSupport": "dossier-pdf=N foundry=N web-transitive=N",
+  "applicable on _isolationSupport": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "capacity on _isolationSupport": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "deficit on _isolationSupport": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "magicDependent on _isolationSupport": "",
+  "magicDependent on _isolationSupport": "dossier-pdf=N web-display=N",
   "paths on _isolationSupport": "web-display=N",
-  "requiredCapacity on _isolationSupport": "",
+  "requiredCapacity on _isolationSupport": "dossier-pdf=N web-display=N",
   "status on _isolationSupport": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "tier on _isolationSupport": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "version on _isolationSupport": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
@@ -9062,13 +8954,13 @@
   "severity on currentTensions": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=N world-book=N",
   "specificIssue on currentTensions": "",
   "type on currentTensions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
-  "chainModifiers on defenseProfile": "",
+  "chainModifiers on defenseProfile": "dossier-pdf=R web-display=R",
   "economicGates on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "institutions on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "magicDependency on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "readiness on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "scores on defenseProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "traditions on defenseProfile": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "traditions on defenseProfile": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "band on demographicPlans": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "plan on demographicPlans": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "category on dependencies": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
@@ -9076,7 +8968,7 @@
   "impact on dependencies": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "severity on dependencies": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "suggestedFixes on dependencies": "dossier-pdf=N foundry=N web-display=N",
-  "title on dependencies": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
+  "title on dependencies": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=N world-book=N",
   "affectedServices on dependency": "web-display=R",
   "impact on dependency": "dossier-pdf=N foundry=N web-display=R web-transitive=N",
   "institution on dependency": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
@@ -9356,8 +9248,8 @@
   "heresyIntensity on flags": "",
   "heresySuppression on flags": "",
   "mageTheocracy on flags": "",
-  "magicFillsVoid on flags": "",
-  "magicMilitarized on flags": "",
+  "magicFillsVoid on flags": "dossier-pdf=R web-display=R",
+  "magicMilitarized on flags": "dossier-pdf=R web-display=R",
   "merchantArmy on flags": "",
   "merchantCriminalBlur on flags": "",
   "religiousFraud on flags": "",
@@ -9568,22 +9460,22 @@
   "desc on information": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "institution on information": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "name on information": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "hasAlchemist on inst": "",
+  "hasAlchemist on inst": "dossier-pdf=R web-display=R",
   "hasBank on inst": "dossier-pdf=R web-display=R",
-  "hasBlackMarket on inst": "",
+  "hasBlackMarket on inst": "dossier-pdf=R web-display=R",
   "hasCathedral on inst": "",
-  "hasCharterHall on inst": "",
+  "hasCharterHall on inst": "dossier-pdf=R web-display=R",
   "hasChurch on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
   "hasCourtSystem on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "hasCriminalInst on inst": "dossier-pdf=N foundry=N web-transitive=N",
-  "hasFreeCompany on inst": "",
-  "hasGangInfra on inst": "",
+  "hasFreeCompany on inst": "dossier-pdf=R web-display=R",
+  "hasGangInfra on inst": "dossier-pdf=R web-display=R",
   "hasGarrison on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "hasGates on inst": "",
+  "hasGates on inst": "dossier-pdf=R web-display=R",
   "hasGranary on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
   "hasGuild on inst": "dossier-pdf=R web-display=R",
   "hasHospital on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
-  "hasMagesGuild on inst": "",
+  "hasMagesGuild on inst": "dossier-pdf=R web-display=R",
   "hasMagicInst on inst": "dossier-pdf=R web-display=R",
   "hasMarket on inst": "dossier-pdf=R web-display=R web-transitive=N",
   "hasMercenary on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
@@ -9594,12 +9486,12 @@
   "hasNavy on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "hasPort on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "hasPrison on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
-  "hasSmuggling on inst": "",
-  "hasThievesGuild on inst": "",
+  "hasSmuggling on inst": "dossier-pdf=R web-display=R",
+  "hasThievesGuild on inst": "dossier-pdf=R web-display=R",
   "hasWalls on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "hasWarehouse on inst": "dossier-pdf=R web-display=R",
   "hasWatch on inst": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
-  "hasWizardTower on inst": "",
+  "hasWizardTower on inst": "dossier-pdf=R web-display=R",
   "names on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "family on institution": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "key on institution": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
@@ -9661,12 +9553,12 @@
   "agent_protege on internalSeats": "",
   "leader_champion on internalSeats": "dossier-pdf=N foundry=N web-transitive=N",
   "lieutenant_operator on internalSeats": "",
-  "applicable on isolationSupport": "dossier-pdf=N foundry=N web-transitive=N",
-  "capacity on isolationSupport": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "applicable on isolationSupport": "dossier-pdf=R foundry=N web-display=R web-transitive=N",
+  "capacity on isolationSupport": "dossier-pdf=R foundry=N web-display=R web-transitive=N",
   "deficit on isolationSupport": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "magicDependent on isolationSupport": "",
+  "magicDependent on isolationSupport": "dossier-pdf=R web-display=R",
   "paths on isolationSupport": "web-display=N",
-  "requiredCapacity on isolationSupport": "",
+  "requiredCapacity on isolationSupport": "dossier-pdf=R web-display=R",
   "status on isolationSupport": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "tier on isolationSupport": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "version on isolationSupport": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
@@ -19999,7 +19891,7 @@
   "history on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=R web-display=R web-transitive=R world-book=R",
   "id on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=R web-display=R web-transitive=R world-book=R",
   "institutions on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=R web-display=R web-transitive=R world-book=R",
-  "isolationSupport on settlement": "",
+  "isolationSupport on settlement": "dossier-pdf=R web-display=R",
   "name on settlement": "campaign-pdf=R dossier-pdf=R foundry=R json-export=A news=R web-display=R web-transitive=R world-book=R",
   "neighborRelationship on settlement": "dossier-pdf=R foundry=R json-export=A web-display=R web-transitive=R",
   "npcLadder on settlement": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
@@ -20223,11 +20115,11 @@
   "expression on traditions": "dossier-pdf=R web-display=R web-transitive=N",
   "fabricLed on traditions": "web-transitive=N",
   "foundedYear on traditions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "hasAlchemy on traditions": "",
-  "hasArcane on traditions": "",
-  "hasArcaneGuild on traditions": "",
-  "hasDivine on traditions": "",
-  "hasDruid on traditions": "",
+  "hasAlchemy on traditions": "dossier-pdf=N web-display=N",
+  "hasArcane on traditions": "dossier-pdf=N web-display=N",
+  "hasArcaneGuild on traditions": "dossier-pdf=N web-display=N",
+  "hasDivine on traditions": "dossier-pdf=N web-display=N",
+  "hasDruid on traditions": "dossier-pdf=N web-display=N",
   "id on traditions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "lastHeldYear on traditions": "web-transitive=N",
   "lastOutcome on traditions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
