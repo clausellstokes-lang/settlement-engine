@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "15a62cb0ca23d7882e2489a422638ca00e6db1c1",
-  "measuredBy": "ALLEGIANCE-CAR1",
+  "measuredAtSha": "1b7ef4814fb2088ae7b579ad3663049c20f99888",
+  "measuredBy": "ALLEGIANCE-CAR3",
   "date": "2026-11-08",
-  "note": "allegiance.js receipt reason humanized for the prose-numerics ratchet (1515f0b19): ALLEGIANCE_TUNING.organizedCrime is no longer printed, one dependent read fewer; npcAgency.js joins as a dependent through the J-19 cure (d131ab158); re-stamped at the rewritten tip",
+  "note": "RULING_PATRONAGE_TUNING born (draft, design §3.3, J-12) at 1b7ef4814; patronage.js imports allegiance.js (ALLEGIANCE_TUNING dependents +1)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1239,6 +1239,7 @@
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
         "src/domain/npcProfile.js",
+        "src/domain/people/patronage.js",
         "src/domain/settlementMigrations.js",
         "src/domain/tableLedger.js",
         "src/domain/worldPulse/npcAgency.js",
@@ -1252,6 +1253,23 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/settlementMigrations.js"
       ]
+    },
+    "src/domain/people/patronage.js#RULING_PATRONAGE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 54,
+      "spanDigest": "9acdd8bbb6d33f13f0160b4fb859db40ed62562fc613d4cd950fa2f3358584d1",
+      "leaves": {
+        "byRank.1": 0.15,
+        "byRank.2": 0.1,
+        "byRank.3": 0.05,
+        "steward": 0.1,
+        "cap": 0.25,
+        "ceilingGap": 1
+      },
+      "dependents": [],
+      "namedDependents": []
     },
     "src/domain/realm/autoplacement.js#AUTOPLACEMENT_TUNING": {
       "exported": true,
@@ -8861,11 +8879,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 272,
-    "keys": 2228,
+    "tables": 273,
+    "keys": 2232,
     "unregisteredNamed": 536,
     "bareDecimals": 6934,
-    "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 180
+    "zeroDependentTables": 11,
+    "zeroNamedDependentTables": 181
   }
 }
