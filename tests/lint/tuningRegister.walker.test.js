@@ -112,7 +112,9 @@ const CEILINGS = Object.freeze({
   // ATTRIBUTED rows, so it moves with them; the six population ceilings above are not touched.
   // RAISED 8 -> 9 (2026-11-08, MERGE-WAVE at the W1 ECO merge point), the LANDING-2 idiom: W1 ECO's economyStateProse.js
   // row (725b62eb5). This counts ATTRIBUTED rows, so it moves with them.
-  DECLARED_GROWTH_CEILING: 9,
+  // RAISED 9 -> 10 (2026-11-08, MERGE-WAVE at the W4 PEOPLE merge point), the LANDING-2 idiom: W4 PEOPLE's
+  // warFaithStateProse.js bare decimal 0.5 (86a30fdf2). This counts ATTRIBUTED rows, so it moves with them.
+  DECLARED_GROWTH_CEILING: 10,
 });
 
 const register = loadTuningRegister(ROOT);
