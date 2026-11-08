@@ -500,7 +500,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // EXEMPT above with their reasons. The arm's own failure message: "expected 103 to be 99".
     // PEOPLE-5B (2026-11-07, M-7): 99 -> 100, settlementMigrations.js :: migrateV1toV2's roster-name read (EXEMPT above).
     // PEOPLE-6 LINKS (2026-11-07): 100 -> 101, src/domain/people/cardDoor.js :: cardInstitutionDoorOf's roster-name read (EXEMPT above).
-    expect(readers.length).toBe(101);
+    // MERGE-CAR (2026-11-08): 99 + 4 (the pool census's readers, LANDING-R2 above) + 2 (PEOPLE-5B, PEOPLE-6 LINKS) = 105, measured
+    // by this file's own scan at the merged tip; both sides' readers composed, no new one.
+    expect(readers.length).toBe(105);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

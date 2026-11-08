@@ -46,7 +46,7 @@ export function cardHonorificOf(card, settlement) {
   const inst = cardInstitutionOf(card);
   if (!inst) return '';
   const c = recordOf(card);
-  const place = settlement && typeof settlement === 'object' ? { coastal: waterOf(/** @type {any} */ (settlement)).coast } : {};
+  const place = settlement && typeof settlement === 'object' ? { coastal: waterOf(/** @type {import('../facts/terrain.js').TerrainRecord} */ (settlement)).coast } : {};
   return honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${inst.name}`, place);
 }
 

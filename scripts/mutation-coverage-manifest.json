@@ -3285,10 +3285,6 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
-    "tests/generators/guildTitleName.test.js": {
-      "kind": "rationale",
-      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
-    },
     "tests/generators/hookTablesDeclared.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
@@ -3508,6 +3504,26 @@
     "tests/lint/wiringCensusDeclared.walker.test.js": {
       "kind": "rationale",
       "rationale": "CENSUS-1g unit 5 (1425ac790): the wiring census's declared columns equal a fresh annex reading and the registers' reading of the leaves (docs/content/wiring-census.json, the annex, the six generated leaves). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): one row's undeclared 1 -> 0 in docs/content/wiring-census.json -> 1 failed / 9. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+    },
+    "tests/generators/people/castDerived.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/people/personHooks.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/people/ties.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/lint/noLegacyFactionReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE NO-LEGACY-FACTION-READERS WALKER (M-2's closing proof; PEOPLE-LAND). Owed at MERGE-CAR (2026-11-08): the people car's lane added it where the integration side's enumeration rule now reaches it. Its catching power is EXECUTED IN THE TEST BODY on every gate run: the POSITIVE CONTROL plants one read of every refused shape (the five retired per-NPC fields, the grouping, a refused helper; a plain read, an optional chain, a destructured read, a dynamic key list, a key-path string) into a planted source and asserts each is caught by name, and its anchored negative half asserts the powers (powerStructure.factions), a tension's names and the kept structuralRank are NOT caught in the same file. The live arm walks the whole of src (a liveness floor of > 2,000 files) against the FPZ list (an exact 38). At MERGE-CAR it convicted six real reads the merge composed (five line-drifted tension exemptions, re-keyed; one real read of the retired grouping in facts/guild.js, cured). WHY A RATIONALE RATHER THAN A SWEEP PLANT: every plantable target is a shared src module, and the sweep's revert is a `git checkout --` this program's shared-tree protocol forbids."
+    },
+    "tests/data/faceHonorifics.test.js": {
+      "kind": "rationale",
+      "rationale": "THE HONORIFIC REGISTRY (PEOPLE-6 LINKS step 2; the A-11 harbour guard at MERGE-CAR). Owed at MERGE-CAR (2026-11-08): the people car's links lane added it where the integration side's enumeration rule now reaches it. The subject is authored DATA (src/data/faceHonorifics.js) plus one pure resolver, and the suite's catching power is in its own arms: totality both ways against the LIVE census (every title a face can be born with — the catalogue's faceRows and the two mint tables — and no other), the canonical form pinned per named title, the deterministic pick reaching every form, the gendered forms by card gender, and the coast guard's two arms, each with an anchored negative (expectAbsentWithAnchor) so a vacuous pool cannot pass. A sweep plant would mutate src/data/institutionalCatalog.js or the registry, files nearly every generation suite imports and a concurrent lane may hold; the sweep's revert is a `git checkout --`."
     }
   },
   "meta": {
