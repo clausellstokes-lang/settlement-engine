@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "75df41336adb5ef57b39d1ad2e6038c6d6169c25",
-  "measuredBy": "PEOPLE-LAND (the people car landing seat, under the chair)",
-  "date": "2026-11-07",
-  "note": "Register VII v2 (M-5); the npcGenerator win 70 -> 60 (lane 1 and the shim out) banked; lane 4 ties.js growth declared",
+  "measuredAtSha": "e78d0cc67938a56eba52aaa6176d57047bf22a47",
+  "measuredBy": "FIX-PUBLIC-VEIL",
+  "date": "2026-11-08",
+  "note": "dependents moved, no value moved: src/domain/people/cardVeil.js (the veil predicate, moved byte for byte out of galleryVeil.js by FIX-PUBLIC-VEIL) now imports INFORMATION_BROKERAGE_TUNING (through brokerageLegalityOf) and QUADRANT_TUNING (through cohesionWeave facetOf)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -191,6 +191,7 @@
       },
       "dependents": [
         "src/domain/display/galleryVeil.js",
+        "src/domain/people/cardVeil.js",
         "src/domain/worldPulse/brokerageFidelity.js",
         "src/domain/worldPulse/brokerageServices.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
@@ -1575,10 +1576,10 @@
       },
       "dependents": [
         "src/components/new/tabs/PowerTab.jsx",
-        "src/domain/display/galleryVeil.js",
         "src/domain/display/stateProse/printProse.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
+        "src/domain/people/cardVeil.js",
         "src/domain/spatial/navalLayer.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -8046,7 +8047,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 65,
+      "line": 66,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
