@@ -188,7 +188,7 @@
   "sentinel": "c82c6a791df9df55c28359c438c1d554dd2d0eb81595860d86b32fdf833744bf"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "a69c472b7320d0542081979db151c62414eaf85e",
+ "frozenAtSha": "97a0bf8b608797e2af43d345e39eca05551b0944",
  "identities": 1537,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
