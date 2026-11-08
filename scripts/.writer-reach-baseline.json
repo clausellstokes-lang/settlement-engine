@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "140b8f333cf9d1f3316640ffc74c23fe4a697b65",
+ "frozenAtSha": "e13c6982d551f2de07b6fcd6662c827de846c732",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,7 +23,7 @@
   "transitionCount": 21985
  },
  "shapesDigest": "543f494923faf579a383f06fc6dbcb4c13dbcbab56fc2447e7a4af3f899e4458",
- "detectorDigest": "3ffcb402da7c6e6c85b8c0d3e696162d02169bba93beef02e49a12a480e5a6d9",
+ "detectorDigest": "4c06b4c23189735b59f3f3213aa401e10013cb93ca2d752abd7c0188d94ee07c",
  "verdictDigest": "1163e14da50d9ef04aa7fb06cf21201b583d22c35ceb62a378c5e40f0de3d05b",
  "surfaceRoots": {
   "web": [

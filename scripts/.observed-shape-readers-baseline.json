@@ -189,14 +189,14 @@
  "digests": {
   "corpusMeta": "a38f67f25927fa83aaea7a8a50163799229ca355a157842191648785bde4edea",
   "inventory": "e88967d7aa56f66e8a80bb25b648d43a5ae990a798915656b90cfebb9c37e792",
-  "manifests": "12937b3c05100d3d34d5e7c34b30e3b9a7bfd5bd0e2b6eca89050837b80eaac3",
+  "manifests": "13d80c844a3e053e2e3fa3d9a8266050c4c25fa04ee22481e78a4822beb2bfdf",
   "migrationReview": "fa639629cec3d79c90bdb143215e3521eddba91ea563d24d1a579ab1f101b2cb",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
   "scanStats": "64ecf2b1d8ca36179e3ed5a9a3159e9dceb919360a3d4b27f8809fdec3691df6",
   "sentinel": "d53691a27b5c0c64d3b501ad3d3985cd56c521c465c96511b88c4c23719d4942"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "c7357f6714cf56b9839e8793908a9ac898c0c13c",
+ "frozenAtSha": "e13c6982d551f2de07b6fcd6662c827de846c732",
  "identities": 1541,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2689,7 +2689,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "377e68853022bf5e4b4c96fb5232a1b9bd00e3998c456cd9764a031aeda45d36",
+   "digest": "365b8e0d5406cc193ecfe8c1657f35ddbd60179a58a8ea2f61d413348ed96b32",
    "entries": [
     {
      "mode": "100644",
@@ -5613,8 +5613,8 @@
     {
      "mode": "100644",
      "path": "src/components/nav/arrowGeometry.js",
-     "sha256": "c6a88fb218bcf5603d5bc0fb56cabb35365839ced4454b8ccacf2e8ac2933a5e",
-     "size": 26837,
+     "sha256": "7761b8fe05f04bab494f3fe660e62a4312ac0dd00e99398b955b930ac866daf6",
+     "size": 31733,
      "type": "file"
     },
     {
@@ -5718,8 +5718,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "bb382c52ca1fe73412c46f54c0ddeeb57c9d6f724be896df3824fa2aacc6e3db",
-     "size": 32400,
+     "sha256": "a1dfd99bc90d40278ec98b696c3b22624df14b00acc4ee5fdcfedce07fcd80fc",
+     "size": 32398,
      "type": "file"
     },
     {
@@ -5956,8 +5956,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/power/PowerStrata.jsx",
-     "sha256": "b528e3745e322df8c47e41585a423b30a7b29fa9d67bdba7e327b02aa9584978",
-     "size": 28096,
+     "sha256": "22cc8e1ca7a6e47197af1682f6ef46d809584337a2026e593df7583f043b7b52",
+     "size": 28095,
      "type": "file"
     },
     {
@@ -8973,8 +8973,8 @@
     {
      "mode": "100644",
      "path": "src/domain/data/intentAtlas.distillate.json",
-     "sha256": "a21fe290ea9634e6f451c6c01a0089deabb4b8c31d58a97c2ae557608ebf0c50",
-     "size": 20659,
+     "sha256": "4e11d18b158b93b12b494cdff58b47820eed7f283875d42618938967cc01dabc",
+     "size": 20656,
      "type": "file"
     },
     {
@@ -19880,7 +19880,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "7433e5658595dfd5103db1e7d5c99369d098a4b0dbe98e1f4e9d7b65ecb36727",
+   "digest": "0052b3252fca3705f2f6f93f9ddae21ea3ffdd336051362867afb4c189249d26",
    "entries": [
     {
      "mode": "100644",
@@ -22734,8 +22734,8 @@
     {
      "mode": "100644",
      "path": "src/components/nav/arrowGeometry.js",
-     "sha256": "c6a88fb218bcf5603d5bc0fb56cabb35365839ced4454b8ccacf2e8ac2933a5e",
-     "size": 26837,
+     "sha256": "7761b8fe05f04bab494f3fe660e62a4312ac0dd00e99398b955b930ac866daf6",
+     "size": 31733,
      "type": "file"
     },
     {
@@ -22839,8 +22839,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "bb382c52ca1fe73412c46f54c0ddeeb57c9d6f724be896df3824fa2aacc6e3db",
-     "size": 32400,
+     "sha256": "a1dfd99bc90d40278ec98b696c3b22624df14b00acc4ee5fdcfedce07fcd80fc",
+     "size": 32398,
      "type": "file"
     },
     {
@@ -23077,8 +23077,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/power/PowerStrata.jsx",
-     "sha256": "b528e3745e322df8c47e41585a423b30a7b29fa9d67bdba7e327b02aa9584978",
-     "size": 28096,
+     "sha256": "22cc8e1ca7a6e47197af1682f6ef46d809584337a2026e593df7583f043b7b52",
+     "size": 28095,
      "type": "file"
     },
     {
@@ -36875,7 +36875,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "951682f59f83551463e46214196e4908859aa1b91a451a6edaee3aedd6768230",
+   "digest": "747d6cdb722d2d4f899b2f6033353c35822b07dfa18469028d7a0491442806b9",
    "entries": [
     {
      "mode": "100644",
@@ -39729,8 +39729,8 @@
     {
      "mode": "100644",
      "path": "src/components/nav/arrowGeometry.js",
-     "sha256": "c6a88fb218bcf5603d5bc0fb56cabb35365839ced4454b8ccacf2e8ac2933a5e",
-     "size": 26837,
+     "sha256": "7761b8fe05f04bab494f3fe660e62a4312ac0dd00e99398b955b930ac866daf6",
+     "size": 31733,
      "type": "file"
     },
     {
@@ -39834,8 +39834,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "bb382c52ca1fe73412c46f54c0ddeeb57c9d6f724be896df3824fa2aacc6e3db",
-     "size": 32400,
+     "sha256": "a1dfd99bc90d40278ec98b696c3b22624df14b00acc4ee5fdcfedce07fcd80fc",
+     "size": 32398,
      "type": "file"
     },
     {
@@ -40072,8 +40072,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/power/PowerStrata.jsx",
-     "sha256": "b528e3745e322df8c47e41585a423b30a7b29fa9d67bdba7e327b02aa9584978",
-     "size": 28096,
+     "sha256": "22cc8e1ca7a6e47197af1682f6ef46d809584337a2026e593df7583f043b7b52",
+     "size": 28095,
      "type": "file"
     },
     {
@@ -43089,8 +43089,8 @@
     {
      "mode": "100644",
      "path": "src/domain/data/intentAtlas.distillate.json",
-     "sha256": "a21fe290ea9634e6f451c6c01a0089deabb4b8c31d58a97c2ae557608ebf0c50",
-     "size": 20659,
+     "sha256": "4e11d18b158b93b12b494cdff58b47820eed7f283875d42618938967cc01dabc",
+     "size": 20656,
      "type": "file"
     },
     {
@@ -54312,10 +54312,10 @@
  },
  "scannerProvenance": {
   "detectorDigest": "4e02c2d6d2fa0f27f3ebe4da2b6db07da3888d6fff64767c718a32d9f646e025",
-  "executionTreeDigest": "377e68853022bf5e4b4c96fb5232a1b9bd00e3998c456cd9764a031aeda45d36",
-  "scanTreeDigest": "7433e5658595dfd5103db1e7d5c99369d098a4b0dbe98e1f4e9d7b65ecb36727",
-  "sourceTreeDigest": "951682f59f83551463e46214196e4908859aa1b91a451a6edaee3aedd6768230",
-  "unscannedInputDigest": "246bb81f92841f6a1e3a967cf621101eda14b8dec3c6144738c0ac77df55df06"
+  "executionTreeDigest": "365b8e0d5406cc193ecfe8c1657f35ddbd60179a58a8ea2f61d413348ed96b32",
+  "scanTreeDigest": "0052b3252fca3705f2f6f93f9ddae21ea3ffdd336051362867afb4c189249d26",
+  "sourceTreeDigest": "747d6cdb722d2d4f899b2f6033353c35822b07dfa18469028d7a0491442806b9",
+  "unscannedInputDigest": "2a8cd80b054d65dc5c1c9ebde1d33232cb37d0cb12d896c6497605969bfec9d0"
  },
  "schema": 35,
  "sentinel": {
