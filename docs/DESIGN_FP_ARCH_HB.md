@@ -4544,4 +4544,4 @@ Seat FPR-PEOPLE; design text only, the FP parked behind the plat (the owner, 202
 | 6 | §3, the named-domain checklist, rows 10 and 12 | the loop copied onto the agency's record; the kind axis the goal family, the credit by rank | HB |
 | 7 | §4, the HB-3 wave block (the close-8 carry round-trip pin; the verifier's F2) | the pin is stale: no baseline at `mintGoal`; the carrier is owed by the rebuilt agency's goal record (LEARN-WHEN-REBUILT) | HB |
 
-The wave blocks of §4 (their `**Bands:**` lines read by `tests/lint/habitBandsReconciliation.walker.test.js`), §8.2's tuning seam and §9's machine census are untouched.
+The `**Bands:**` lines of §4's wave blocks (read by `tests/lint/habitBandsReconciliation.walker.test.js`), §8.2's tuning seam and §9's machine census are untouched; one §4 wave pin (HB-3's close-8 carry round-trip, row 7) is bracketed as stale, inline on its own line.
