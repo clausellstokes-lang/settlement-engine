@@ -6467,7 +6467,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "prominentRelationship present": [
         {
           "angle": "street",
-          "text": "Of everything {settlement} is tied into, one connection comes up first whenever the town explains itself.",
+          "text": "Of all the ties between people in {settlement}, one is talked about before the rest.",
           "slots": [
             "settlement"
           ],
@@ -6475,7 +6475,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "One of {settlement}'s ties carries more weight than the rest, and the weight shows in what the town will and will not do.",
+          "text": "One tie between two of {settlement}'s people outweighs the rest, and everyone here watches what the pair do next.",
           "slots": [
             "settlement"
           ],
@@ -6501,25 +6501,23 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "flagDriven count > 0": [
         {
           "angle": "street",
-          "text": "{band} of {settlement}'s relationships exist because of the particular way this town's conditions have fallen together; a town with the same neighbours and different pressures would not have them.",
+          "text": "Part of what ties people together in {settlement} grew out of how its powers stand against each other; where they stood differently, those ties would not exist.",
           "slots": [
-            "band",
             "settlement"
           ],
           "vid": 1
         },
         {
           "angle": "ledger",
-          "text": "{band} of the ties on {settlement}'s roll are the town's own circumstances made into arrangements between people.",
+          "text": "Ties that cross between {settlement}'s powers exist here because of how those powers are balanced, and they will shift when the balance does.",
           "slots": [
-            "band",
             "settlement"
           ],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "Some of what binds people together in {settlement} would make no sense in a settlement without {settlement}'s particular difficulties.",
+          "text": "Some of the bonds between people in {settlement} only make sense once you see which of its powers are strong and which are missing.",
           "slots": [
             "settlement"
           ],
@@ -6527,9 +6525,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{band} of {settlement}'s relationships rest on conditions rather than on choices, which makes them exactly as durable as the conditions.",
+          "text": "Not every tie in {settlement} was chosen: some rest on the present balance of its powers, and will likely break if that balance changes.",
           "slots": [
-            "band",
             "settlement"
           ],
           "vid": 4
@@ -6546,7 +6543,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Nothing on {settlement}'s relationship roll requires the town's circumstances to explain it.",
+          "text": "No tie between people in {settlement} was forced by the balance of its powers; each has a cause anyone would recognise.",
           "slots": [
             "settlement"
           ],
@@ -6554,7 +6551,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that.",
+          "text": "Ask how people in {settlement} know each other and the answers are ordinary: kin, trade, neighbours.",
           "slots": [
             "settlement"
           ],
@@ -6562,7 +6559,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{settlement} has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere.",
+          "text": "However {settlement}'s powers are balanced, none of its ties has bent to fit them; people here deal with each other as they would anywhere.",
           "slots": [
             "settlement"
           ],

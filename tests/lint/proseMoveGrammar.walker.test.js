@@ -123,10 +123,12 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // 409 / 114 -> 414 / 111 at W5 HIS's style pass (2026-11-07, the owner's style law): five of the section's pools
     // lose their one two-sentence variant to a single plain sentence, so each pool is now uniform; the openers were
     // varied pool by pool, and three pools that repeated one no longer do.
+    // 414 / 111 -> 414 / 110 at W5 HIS second seat, DS-REL-2 (2026-11-08, the owner's style law): the
+    // `flagDriven count > 0` pool's four variants no longer share an opener ("{band} of …" leaves with its slot).
     expect(uniformSegments).toBe(414);
-    expect(repeatedOpener).toBe(111);
+    expect(repeatedOpener).toBe(110);
     expect(uniformSegments / cells.size).toBeCloseTo(0.580, 3);
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.155, 3);
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.154, 3);
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -149,8 +151,9 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(figures.pools).toBe(714);
     // 406 -> 405 by the same cause as the calibration above (the chair's 06:5x rewording of DS-GEN-17 v3);
     // 405 -> 404 at the chair's 06:5x DS-CND-1 boom line (ODQ §934.105), likewise.
+    // 111 -> 110 repeated openers at W5 HIS second seat, DS-REL-2 (2026-11-08), by the same cause as above.
     expect(Math.round(figures.uniformSegmentShare * 714)).toBe(414);
-    expect(Math.round(figures.repeatedOpenerShare * 714)).toBe(111);
+    expect(Math.round(figures.repeatedOpenerShare * 714)).toBe(110);
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {

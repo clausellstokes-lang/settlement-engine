@@ -679,7 +679,9 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // 341 -> 343 at W5 HIS construction (2026-11-07, ODQ §934.105): two of DS-GEN-16's new legacy lines carry the class. Report-only, still a minority.
     // 343 -> 371 at W5 HIS's style pass (2026-11-07, the owner's style law): plain "X, and Y" statements replace the
     // aphorisms and balances. Report-only, still a minority.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(371);
+    // 371 -> 372 at W5 HIS second seat, DS-REL-2 (2026-11-08, the owner's style law): one of the block's plain
+    // rewrites ends on its consequence clause. Report-only, still a minority.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(372);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

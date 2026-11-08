@@ -5698,22 +5698,22 @@ unchanged.
 **R-DST-W4-e CURE:** the existing banner says *"…would not exist under neutral **slider** conditions."* — UI vocabulary in world prose, and the second-worst voice leak in this cluster after the named generator. Every variant below is a lawful replacement.
 
 **`prominentRelationship` present** {colour}
-1. `[street]` Of everything {settlement} is tied into, one connection comes up first whenever the town explains itself.
-2. `[ledger]` One of {settlement}'s ties carries more weight than the rest, and the weight shows in what the town will and will not do.
+1. `[street]` Of all the ties between people in {settlement}, one is talked about before the rest.
+2. `[ledger]` One tie between two of {settlement}'s people outweighs the rest, and everyone here watches what the pair do next.
 3. `[visitor]` Ask {settlement} about its neighbours and you will get one name before you get a list.
 4. `[counterforce]` {settlement} has one tie that matters more than the others and has not let it become the only one.
 
 **`flagDriven` count > 0** {colour}
-1. `[street]` {band} of {settlement}'s relationships exist because of the particular way this town's conditions have fallen together; a town with the same neighbours and different pressures would not have them.
-2. `[ledger]` {band} of the ties on {settlement}'s roll are the town's own circumstances made into arrangements between people.
-3. `[visitor]` Some of what binds people together in {settlement} would make no sense in a settlement without {settlement}'s particular difficulties.
-4. `[unfolding]` {band} of {settlement}'s relationships rest on conditions rather than on choices, which makes them exactly as durable as the conditions.
+1. `[street]` Part of what ties people together in {settlement} grew out of how its powers stand against each other; where they stood differently, those ties would not exist.
+2. `[ledger]` Ties that cross between {settlement}'s powers exist here because of how those powers are balanced, and they will shift when the balance does.
+3. `[visitor]` Some of the bonds between people in {settlement} only make sense once you see which of its powers are strong and which are missing.
+4. `[unfolding]` Not every tie in {settlement} was chosen: some rest on the present balance of its powers, and will likely break if that balance changes.
 
 **`flagDriven` count zero** *(the good state deserves its sentence)* {colour}
 1. `[street]` Everyone in {settlement} is tied to everyone else for the ordinary reasons: work, family, proximity, and time.
-2. `[ledger]` Nothing on {settlement}'s relationship roll requires the town's circumstances to explain it.
-3. `[visitor]` The people of {settlement} are connected the way the people of any settled place are connected, and there is no more to say about it than that.
-4. `[counterforce]` {settlement} has had pressures enough to bend its relationships and they have not bent; the ties here are what they would be anywhere.
+2. `[ledger]` No tie between people in {settlement} was forced by the balance of its powers; each has a cause anyone would recognise.
+3. `[visitor]` Ask how people in {settlement} know each other and the answers are ordinary: kin, trade, neighbours.
+4. `[counterforce]` However {settlement}'s powers are balanced, none of its ties has bent to fit them; people here deal with each other as they would anywhere.
 
 ---
 

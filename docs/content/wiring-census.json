@@ -31,7 +31,7 @@
     "keyFunctions": 119,
     "keyFunctionsConsulted": 119,
     "keyTables": 33,
-    "slotless": 65,
+    "slotless": 64,
     "bagless": 140,
     "predicatesOverUnreadFields": 100,
     "syntheticTableFields": 100,
@@ -21560,12 +21560,9 @@
         "settlement"
       ],
       "slotsNamed": [
-        "band",
         "settlement"
       ],
-      "slotsWithoutProvider": [
-        "band"
-      ],
+      "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
       "grammars": 1,
@@ -21632,7 +21629,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.relationships",
@@ -56114,7 +56111,7 @@
       "subject": "flagDriven count > 0",
       "fields": [],
       "readingFunction": "flagDrivenPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {band, settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -56122,7 +56119,7 @@
       "subject": "flagDriven count zero",
       "fields": [],
       "readingFunction": "flagDrivenPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

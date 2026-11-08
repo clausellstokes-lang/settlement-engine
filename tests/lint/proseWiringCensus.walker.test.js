@@ -291,7 +291,10 @@ describe('the census printed BESIDE the composed-fill census (report-only)', () 
     // ⛔ THE SUPPORTING FIGURES ARE ASSERTED, NOT PRINTED (car 10, cure 5). The lane's own
     // rule was "every count asserted as an integer" and these four were `console.log` — which
     // is to say they could drift under any rebase and the gate would print the drift.
-    expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(65);
+    // 65 -> 64 at W5 HIS second seat, DS-REL-2 (2026-11-08): `flagDriven count > 0` named {band}, which the
+    // general desk's bag never fills (its slots are {settlement} alone), so three of its four variants could never
+    // print; the rewrite strikes the unfilled slot (the census law: a fact the block does not read is struck).
+    expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(64);
     expect(summary.bagless.length, 'pools in a block with no bag at all').toBe(140);
     // 100 AND NOT 99 SINCE LANDING-7 lane F (R-F1): that recovered guard is over the bare
     // parameter `magicAbsent`, which no composer holds as a field (as `magicDependency` is not).
