@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "9e0d5577607b69db32e65e2b8147293c6ccf7174",
-  "measuredBy": "MERGE-WAVE (W1 ECO merge point)",
+  "measuredAtSha": "3688e4ec42069026130f30b449610b2e2ed9f0e4",
+  "measuredBy": "MERGE-WAVE (W4 PEOPLE merge point)",
   "date": "2026-11-08",
-  "note": "the W1 ECO merge at ea0e269a9: economyStateProse.js gains three named share thresholds (W1 construction 725b62eb5), 2 -> 5, attributed by their DECLARED_GROWTH row; refrozen at the merged tip, Register VII v2 stands",
+  "note": "the W4 PEOPLE merge at 66c23bfea: warFaithStateProse.js gains one bare decimal (W4 construction 86a30fdf2), attributed by its DECLARED_GROWTH row; refrozen at the merged tip, Register VII v2 stands",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1063,7 +1063,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 366,
+      "line": 367,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
@@ -1078,7 +1078,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 582,
+      "line": 583,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1093,7 +1093,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 584,
+      "line": 585,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1108,7 +1108,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 586,
+      "line": 587,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1123,7 +1123,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 588,
+      "line": 589,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -8469,6 +8469,7 @@
     "src/domain/display/settlementBeliefs.js": 6,
     "src/domain/display/settlementPestilence.js": 5,
     "src/domain/display/settlementRumors.js": 3,
+    "src/domain/display/stateProse/warFaithStateProse.js": 1,
     "src/domain/display/threatAssessment.js": 1,
     "src/domain/display/visibilityAudit.js": 2,
     "src/domain/display/warResolve.js": 12,
@@ -8821,7 +8822,7 @@
     "tables": 271,
     "keys": 2222,
     "unregisteredNamed": 539,
-    "bareDecimals": 6934,
+    "bareDecimals": 6935,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 180
   }
