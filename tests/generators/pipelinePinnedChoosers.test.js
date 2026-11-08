@@ -472,7 +472,7 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
 
   it('A7 — the file list is two, and the three power helpers are untouched', () => {
     const roster = getStepMeta();
-    expect(roster).toHaveLength(23); // 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03)
+    expect(roster).toHaveLength(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03)
     const helpers = {
       relationshipArchetypes: { computeRelTension },
       stressFactions: { applyStressEventFactions },
