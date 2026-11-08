@@ -1,5 +1,10 @@
 /**
- * tests/lib/instantWorld/factionDedup.test.js — the world-scoped faction-name dedup.
+ * tests/lib/instantWorld/factionDedup.test.js — the faction-name de-clunk guard.
+ *
+ * PEOPLE-5A (2026-11-07, the chair's ruling M-2) RE-WIRED THIS FILE: the world-scoped dedup pass
+ * is DELETED with the NPC grouping it renamed (a no-op since GS-2: every group was named for one
+ * of its own powers, which the pass never renamed). Its unit, compose and swap arms leave with it;
+ * the de-clunk guard over the candidate space (AMENDMENT A) stays. History of the pass below.
  *
  * Guards the CONTENT-GT-DOSSIER fix for the survey's worst thin-content surface: a
  * composed realm must not show the same FACTION_DESCRIPTORS name on two members. The
@@ -10,10 +15,9 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  dedupeWorldFactionNames, candidateNames, hasBannedStack,
+  candidateNames, hasBannedStack,
   COLLECTIVE_NOUNS, DISTINGUISH_MODIFIERS, FACTION_DESCRIPTORS_EXTRA,
 } from '../../../src/lib/instantWorld/factionDedup.js';
-import { composeInstantWorld } from '../../../src/lib/instantWorld/composeInstantWorld.js';
 // ⭐ THE CREATE BOUNDARY'S ASYNC PRELUDE — A TEST IS A CALLER LIKE ANY OTHER
 // (2026-09-08, lane LIGHT car 1b). `composeInstantWorld` is a classified BIRTH and
 // is SYNCHRONOUS by design, so it cannot load the lazy payload the law it mints
@@ -29,116 +33,6 @@ await loadGenerationLawPayloads();
 import { FACTION_DESCRIPTORS } from '../../../src/data/powerData.js';
 import { inferFactionCategory } from '../../../src/generators/power/factionCategories.js';
 
-const facNames = (m) => (m.settlement?.factions || []).map((f) => f.name);
-const allFacNames = (members) => members.flatMap(facNames);
-
-describe('dedupeWorldFactionNames — unit', () => {
-  const build = () => [
-    { id: 's0', _slot: 0, settlement: { factions: [{ name: 'The Trade Compact', category: 'economy' }], conflicts: [] } },
-    { id: 's1', _slot: 1, settlement: {
-      factions: [{ name: 'The Trade Compact', category: 'economy' }, { name: 'The Garrison Bloc', category: 'military' }],
-      conflicts: [{ parties: ['The Trade Compact', 'The Garrison Bloc'], desc: 'The Trade Compact opposes the guard.' }],
-    } },
-    { id: 's2', _slot: 2, settlement: { factions: [{ name: 'The Trade Compact', category: 'economy' }], conflicts: [] } },
-  ];
-
-  it('renames every cross-settlement collision (first occurrence keeps the name)', () => {
-    const members = build();
-    const renames = dedupeWorldFactionNames(members);
-    const names = allFacNames(members);
-    expect(new Set(names).size, 'no duplicate faction names world-wide').toBe(names.length);
-    expect(members[0].settlement.factions[0].name).toBe('The Trade Compact'); // slot 0 keeps it
-    expect(renames.length).toBe(2); // s1 + s2's colliding "Trade Compact"
-  });
-
-  it('keeps conflicts references consistent with the renamed faction', () => {
-    const members = build();
-    dedupeWorldFactionNames(members);
-    const s1 = members[1].settlement;
-    const newName = s1.factions[0].name; // the renamed one
-    expect(newName).not.toBe('The Trade Compact');
-    expect(s1.conflicts[0].parties).toContain(newName);
-    expect(s1.conflicts[0].parties).not.toContain('The Trade Compact');
-    expect(s1.conflicts[0].desc).toContain(newName);
-    expect(s1.conflicts[0].desc).not.toContain('The Trade Compact');
-  });
-
-  it('is deterministic (same input → same renames)', () => {
-    const a = dedupeWorldFactionNames(build());
-    const b = dedupeWorldFactionNames(build());
-    expect(a).toEqual(b);
-  });
-
-  it('gives DISTINCT names to two same-named factions in ONE settlement (local dedup can cap out)', () => {
-    // Regression: a name-match rename collapsed both to one string; identity rename must not.
-    const members = [
-      { id: 's0', _slot: 0, settlement: { factions: [{ name: 'The Free Alliance', category: 'other' }] } },
-      { id: 's1', _slot: 1, settlement: { factions: [
-        { name: 'The Free Alliance', category: 'other' },
-        { name: 'The Free Alliance', category: 'other' },
-      ] } },
-    ];
-    dedupeWorldFactionNames(members);
-    const names = allFacNames(members);
-    expect(new Set(names).size, `no dup after intra-settlement collision: ${names}`).toBe(names.length);
-  });
-
-  it('never renames a group named for one of its own POWER factions (GS-2, ODQ §934.101)', () => {
-    // The power factions are the factions: "Merchant Guilds" in two towns is two guilds, each
-    // its own town's label, and renaming one would mint the second vocabulary GS-2 removed.
-    // The conflict desc is FIXTURE INPUT that only has to name both parties (the rename pass
-    // rewrites names inside it), so it is built from the parties rather than written out: the
-    // literal sentence aligned with a dossier state-prose variant (DS-GEN-2) and read as a
-    // drawn-prose anchor to proseDrawnAnchors (cure lane T13, at the GS-2 merge).
-    const parties = ['Merchant Guilds', 'Military/Guard'];
-    const town = (id, slot) => ({ id, _slot: slot, settlement: {
-      powerStructure: { factions: [{ faction: 'Merchant Guilds', category: 'economy' }] },
-      factions: [{ name: 'Merchant Guilds', dominantCategory: 'economy' }],
-      conflicts: [{ parties: [...parties], desc: `${parties[0]} and ${parties[1]} are at odds.` }],
-    } });
-    const members = [town('a', 0), town('b', 1)];
-    expect(dedupeWorldFactionNames(members)).toEqual([]);
-    expect(allFacNames(members)).toEqual(['Merchant Guilds', 'Merchant Guilds']);
-    expect(members[1].settlement.conflicts[0].parties).toEqual(['Merchant Guilds', 'Military/Guard']);
-  });
-
-  it('is a no-op when there are no collisions', () => {
-    const members = [
-      { id: 'a', _slot: 0, settlement: { factions: [{ name: 'The Merchant Bloc', category: 'economy' }] } },
-      { id: 'b', _slot: 1, settlement: { factions: [{ name: 'The Garrison Bloc', category: 'military' }] } },
-    ];
-    expect(dedupeWorldFactionNames(members)).toEqual([]);
-  });
-});
-
-describe('composeInstantWorld — no cross-settlement faction collisions + determinism', () => {
-  const compose = (seed) => composeInstantWorld({ seed, basicConfig: { realmSize: 'large' } });
-
-  // A full 'large' realm compose runs the whole pipeline for every member and can overrun
-  // the default 20s testTimeout on a loaded/parallel runner — a wall-clock false positive,
-  // not a correctness fault (the generatorGoldenMaster block uses the same allowance for
-  // the same reason). The dedup post-pass itself is O(collisions) and adds negligible time.
-  // GS-2 (ODQ §934.101) REWROTE THIS PIN. It held "zero duplicate faction names across the
-  // realm", which was true of the minted names and is false by design of the power labels:
-  // every town may hold its own "Merchant Guilds". What a composed realm must hold now is that
-  // each member names its factions by its OWN power factions, untouched by the world pass.
-  it('a composed realm names every member faction by that member\'s own power factions', () => {
-    const { settlements } = compose('realm-dedup-1');
-    const names = allFacNames(settlements);
-    expect(names.length, 'the realm has factions to check').toBeGreaterThan(1);
-    const strays = settlements.flatMap((m) => {
-      const power = new Set((m.settlement?.powerStructure?.factions || []).map((f) => f.faction));
-      return facNames(m).filter((n) => !power.has(n)).map((n) => `${m.id}: ${n}`);
-    });
-    expect(strays).toEqual([]);
-  }, 120_000);
-
-  it('same seed → identical member faction names (determinism preserved)', () => {
-    const a = allFacNames(compose('realm-det').settlements);
-    const b = allFacNames(compose('realm-det').settlements);
-    expect(a).toEqual(b);
-  }, 120_000);
-});
 
 describe('AMENDMENT A — the faction de-clunk rule', () => {
   const CATEGORIES = Object.keys(FACTION_DESCRIPTORS);
@@ -232,39 +126,5 @@ describe('AMENDMENT A — the faction de-clunk rule', () => {
         }
       }
     }
-  });
-
-  it('DESCRIPTOR-SWAP wins first: collisions up to the clean-base count never take a modifier form', () => {
-    // Ten economy collisions (4 base + 6 extra = 10 clean bases) must ALL resolve to whole,
-    // distinct base names — no "The Greater/Second …" modifier form until bases are spent.
-    const members = [];
-    for (let i = 0; i < 10; i += 1) members.push({ id: `s${i}`, _slot: i, settlement: { factions: [{ name: 'The Trade Compact', category: 'economy' }], conflicts: [] } });
-    dedupeWorldFactionNames(members);
-    const names = allFacNames(members);
-    expect(new Set(names).size).toBe(names.length);
-    for (const n of names) expect(n, `${n} took a modifier form before bases were spent`).not.toMatch(/^The (Greater|Elder|United|Reformed|Grand|Old|New|Lesser|Lower|Upper|Second|Third|Northern|Southern|Eastern|Western) /);
-  });
-
-  it('a heavy same-category collision realm stays collision-free AND clunk-free', () => {
-    const members = [];
-    for (let i = 0; i < 24; i += 1) members.push({ id: `m${i}`, _slot: i, settlement: { factions: [{ name: 'The Trade Compact', category: 'economy' }], conflicts: [] } });
-    dedupeWorldFactionNames(members);
-    const names = allFacNames(members);
-    expect(new Set(names).size, 'collision-free under heavy load').toBe(names.length);
-    for (const n of names) expect(hasBannedStack(n), `clunker minted: ${n}`).toBe(false);
-  });
-
-  it('IDENTITY-rename law preserved: two same-named factions in one settlement get distinct clean names', () => {
-    const members = [
-      { id: 's0', _slot: 0, settlement: { factions: [{ name: 'The Devout Circle', category: 'religious' }] } },
-      { id: 's1', _slot: 1, settlement: { factions: [
-        { name: 'The Devout Circle', category: 'religious' },
-        { name: 'The Devout Circle', category: 'religious' },
-      ] } },
-    ];
-    dedupeWorldFactionNames(members);
-    const names = allFacNames(members);
-    expect(new Set(names).size, `distinct after intra-dup: ${names}`).toBe(names.length);
-    for (const n of names) expect(hasBannedStack(n), n).toBe(false);
   });
 });

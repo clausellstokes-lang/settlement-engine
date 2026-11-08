@@ -71,11 +71,9 @@ function unnamedFindings(settlement) {
   const person = (Array.isArray(settlement.npcs) ? settlement.npcs : [])
     .find(npc => ROLE_ONLY_NAME.test(String(npc?.name || '')));
   if (person) out.push({ check: 'unnamed', quote: String(person.name), detail: `a role-only person (${String(person.role || '')})` });
-  // Two record types, each read by its own key (tests/lint/factionNamePrecedenceScan.test.js):
-  // the top-level NPC grouping list is keyed by `.name`; a `powerStructure.factions[]` record's
-  // display name is `.faction`, with `.name` its legacy alias (rulingPower.js :: nameOf).
+  // The powers only (PEOPLE-5A: the NPC grouping's check dropped): a `powerStructure.factions[]`
+  // record's display name is `.faction`, with `.name` its legacy alias (rulingPower.js :: nameOf).
   const factions = [
-    ...(Array.isArray(settlement.factions) ? settlement.factions : []).map(f => String(f?.name ?? '')),
     ...(Array.isArray(settlement.powerStructure?.factions) ? settlement.powerStructure.factions : [])
       .map(f => String(f?.faction ?? f?.name ?? '')),
   ];

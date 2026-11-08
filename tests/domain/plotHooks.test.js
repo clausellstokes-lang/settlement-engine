@@ -102,7 +102,9 @@ describe('the source page of a hook (chair ruling X-2: Plot Hooks groups its car
     const page = (hook) => plotHookSourcePage(hook).id;
     expect(page({ category: 'npc' })).toBe('npcs');
     expect(page({ category: 'faction' })).toBe('relationships');
-    expect(page({ category: 'relationship' })).toBe('relationships');
+    // RE-KEYED (PEOPLE-3 HOOKS, 2026-11-07): the `relationship` category, unemitted since X-2, is
+    // deleted from the vocabulary; a stored hook still carrying the token falls to the default page.
+    expect(page({ category: 'relationship' })).toBe('history');
     expect(page({ category: 'tension' })).toBe('history');
     expect(page({ category: 'tension', source: 'Traditions' })).toBe('traditions');
     expect(page({ category: 'history' })).toBe('history');
@@ -132,9 +134,10 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
     absent: [], stakes: [{ factionId: 'Town Council', stake: 'loses', reason: 'the crisis hits its base' }],
     levers: [{ institution: 'Town granary', holderId: 'n1', holderName: 'Mara Vell' }],
   };
+  // RE-KEYED (PEOPLE-2 CAST-DERIVED, 3aa160a70): a person's house is read from its first-rank membership; the retired `factionAffiliation` became `memberships`.
   const npcs = [
-    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', factionAffiliation: 'Millers', plotHooks: ['Mara keeps a second ledger.'] },
-    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, factionAffiliation: 'Town Council', plotHooks: ['Oswin owes a debt he cannot name.'] },
+    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', memberships: [{ power: 'Millers', rank: 1 }], plotHooks: ['Mara keeps a second ledger.'] },
+    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, memberships: [{ power: 'Town Council', rank: 1 }], plotHooks: ['Oswin owes a debt he cannot name.'] },
   ];
   const crisisTown = () => ({ name: 'Vellbrook', tier: 'town', npcs, stress: [{ type: 'famine', label: 'Famine', cast }] });
   const OWN = ['Mara keeps a second ledger.', 'Oswin owes a debt he cannot name.'];

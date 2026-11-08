@@ -562,7 +562,15 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // terms with their costs): **"do what you recommend"** — and the recommendation on the table
 // was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
 // kept out of the tree. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_062_940; // 2026-11-07: re-recorded AT the measured rung-2 landing closure, LANDING-R2 seat J by the chair's 08:4x ruling, a vetoable rise of 20,907 B (note at file end)
+// 1,042,033 -> 1,051,166 (2026-11-07, THE PEOPLE CAR'S LANDING, PEOPLE-LAND second seat, brief step 5; ODQ §934.105,
+// VETOABLE BY THE OWNER): A RISE OF 9,133 B, measured by a fresh build at every first-parent point of the stack with the
+// landing's two build cures applied (6c8369071, f7bb28ef6: without them lane 1 made coherence-lazy and data-lazy static
+// first-paint chunks, 2,269,707 B / 10 chunks). The 8-chunk closure: the base 262e8b255 1,041,311 (722 under) · lane 1
+// dc655f712 +6,279 · lane 2 3aa160a70 +1,507 · lane 3 0f930ce95 +118 · lane 4 c7d552370 +34 · 5A 053283dfd +1,547 ·
+// 5B a725df7e4 +232 · step 1 2981f23f6 0 · L0 147fa6c3f +138 (the links lane's honorific registry and door) · the cures
+// and records to the tip 0. The sum closes: 1,041,311 + 6,279 + 1,507 + 118 + 34 + 1,547 + 232 + 138 = 1,051,166.
+// gzip 335,954 < 336,286 and Brotli 282,052 < 282,346: both transfer budgets hold, unmoved.
+const CLOSURE_BUDGET_BYTES = 1_051_166; // 2026-11-07: re-recorded AT the measured people-car landing tip, PEOPLE-LAND (note above); was 1_042_033, LANDING-8
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -844,7 +852,14 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // later lines +2,157); SECOND PARENT fc4cb0b9f (the rung-2 landing) 704,656, reproduced (+26,305, attributed at file
     // end); the merge 10b8f09b4's composition -382 of interaction. Sum: 678,351 + 3,428 + 26,305 - 382 = 707,702. No trim
     // that moves no output byte was found; the first-paint closure arm is green on the same build.
-    expect(size).toBeLessThan(707_703); // 2026-11-07: re-recorded AT the measured 707,702, MERGE-R2 (note above)
+    // CEILING 679_000 -> 696_670 (2026-11-07, THE PEOPLE CAR'S LANDING, PEOPLE-LAND second seat, brief step 5; ODQ
+    // §934.105, VETOABLE BY THE OWNER): measured 696,669 at the tip; the bound is strict, so the ceiling is the measured
+    // figure + 1, with NO cross-environment margin (the brief: the measured figure). Fresh builds at every first-parent point
+    // (the landing's build cures applied): the base 262e8b255 681,803 (2,803 over 679,000 before the car: the integration
+    // merges) · lane 1 +12,929 (the cast's generators) · lane 2 +248 · lane 3 +3,366 · lane 4 +549 · 5A -447 · 5B +3 ·
+    // step 1 -1,782 (the shim and the grouping out) · L0 0 · the cures and records 0. Sum: 681,803 + 12,929 + 248 + 3,366
+    // + 549 - 447 + 3 - 1,782 = 696,669. Nothing eager re-merged: the first-paint closure arm reads 8 chunks.
+    expect(size).toBeLessThan(696_670);
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
@@ -1782,9 +1797,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_062_940); // LANDING-R2 seat J, 2026-11-07 (note at file end)
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(338_535);
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(284_950);
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_051_166); // PEOPLE-LAND, 2026-11-07 (note at the constant); LANDING-8 1_042_033 before
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(336_286);
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(282_346);
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP

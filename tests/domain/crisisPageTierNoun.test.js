@@ -39,9 +39,23 @@ describe('the crisis page names a thorp a thorp', () => {
     expect(page.map((s) => s.line)).toEqual(page.map((s) => `${s.label}.`));
   });
 
-  it('soak1k-85 (a hamlet): the defender reason reads "the hamlet\'s defence"', () => {
-    const { settlement } = birth(85);
-    expect(settlement.tier).toBe('hamlet');
+  // 2026-11-07 PEOPLE-1 CAST: re-keyed from soak1k-85 to a crafted hamlet record. The house-fallback reason ("the
+  // town's defence, with no one on the roster leading it") is stored on a record only where NO roster person leads
+  // the defence; the cast faces every garrison and militia house (R-P2), so on the 1,000 at the lane's tip no record
+  // of any tier stores it (probed: zero of 1,000). The routing claim is kept on the stored sentence itself.
+  it('a hamlet record storing the defender house-fallback reason reads "the hamlet\'s defence"', () => {
+    const settlement = {
+      tier: 'hamlet',
+      name: 'Testholm',
+      stress: [{
+        type: 'under_siege', label: 'Under Siege',
+        cast: {
+          nature: 'external',
+          roles: [{ role: 'defender', kind: 'institution', id: 'Palisade or earthworks', name: 'Palisade or earthworks', reason: "the town's defence, with no one on the roster leading it", temporary: false }],
+          absent: [], stakes: [], levers: [],
+        },
+      }],
+    };
     const text = routed(composeCrisisPage(settlement));
     expect(text).not.toMatch(/\bthe town\b/i); // anchored: the next line pins the hamlet's own defender reason in this same text
     expect(text).toMatch(/the hamlet's defence/);

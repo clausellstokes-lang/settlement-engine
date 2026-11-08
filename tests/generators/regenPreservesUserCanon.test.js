@@ -71,7 +71,9 @@ describe('the town this is pinned against', () => {
     // an empty one would make every assertion in this file pass for free.
     expect(settlement.npcs.length).toBeGreaterThan(2);
     expect(parts.relationships.length).toBeGreaterThan(0);
-    expect(parts.factions.length).toBeGreaterThan(0);
+    // PEOPLE-LAND re-key (M-2): the regen no longer returns the NPC grouping; a card's powers are its memberships.
+    expect(Object.hasOwn(parts, 'factions')).toBe(false);
+    expect(parts.npcs.some((/** @type {any} */ n) => (n.memberships || []).length > 0)).toBe(true);
     expect(settlement.npcs[2].id).toBeTruthy();
   });
 
@@ -125,8 +127,10 @@ describe('user canon survives a reroll', () => {
       const ids = new Set(parts.npcs.map((/** @type {{id: string}} */ n) => n.id));
       const withEdges = new Set();
       for (const rel of parts.relationships || []) {
-        withEdges.add(rel.npc1Id);
-        withEdges.add(rel.npc2Id);
+        // RE-KEYED 2026-11-07 (PEOPLE-4 TIES, R-P7): a tie's ends are `from`/`to` (directed); the
+        // undirected npc1Id/npc2Id pair is not written. Every `rel.npc1Id/npc2Id` read in this file moved with it.
+        withEdges.add(rel.from);
+        withEdges.add(rel.to);
       }
       expect(parts.npcs.length).toBeGreaterThanOrEqual(allPinned.npcs.length);
       expect(ids.size).toBe(parts.npcs.length);
@@ -158,26 +162,27 @@ describe('the reference graph stays resolvable', () => {
 
   test('every relationship endpoint resolves to someone in the cast', () => {
     for (const rel of parts.relationships || []) {
-      expect(ids.has(rel.npc1Id)).toBe(true);
-      expect(ids.has(rel.npc2Id)).toBe(true);
+      expect(ids.has(rel.from)).toBe(true);
+      expect(ids.has(rel.to)).toBe(true);
     }
   });
 
   test('relationship name AND role copies match the NPC they point at', () => {
     for (const rel of parts.relationships || []) {
-      expect(rel.npc1Name).toBe(byId.get(rel.npc1Id).name);
-      expect(rel.npc2Name).toBe(byId.get(rel.npc2Id).name);
-      expect(rel.npc1Role).toBe(byId.get(rel.npc1Id).role);
-      expect(rel.npc2Role).toBe(byId.get(rel.npc2Id).role);
+      expect(rel.npc1Name).toBe(byId.get(rel.from).name);
+      expect(rel.npc2Name).toBe(byId.get(rel.to).name);
+      expect(rel.npc1Role).toBe(byId.get(rel.from).role);
+      expect(rel.npc2Role).toBe(byId.get(rel.to).role);
     }
   });
 
-  test('every faction member is a live roster object, not a displaced ghost', () => {
-    for (const faction of parts.factions || []) {
-      for (const member of faction.members || []) {
-        expect(ids.has(member.id)).toBe(true);
-        expect(member).toBe(parts.npcs.find((/** @type {{id: string}} */ n) => n.id === member.id));
-      }
+  // PEOPLE-LAND re-key (M-2): the grouping's member copies are gone; the one-source property now reads the
+  // memberships — every power a regenerated card belongs to is a power of the settlement.
+  test('every regenerated card\'s membership names a live power, not a displaced ghost', () => {
+    const powers = new Set((editedSettlement.powerStructure?.factions || []).map((/** @type {any} */ f) => f.faction));
+    expect(powers.size).toBeGreaterThan(0);
+    for (const npc of parts.npcs) {
+      for (const m of npc.memberships || []) expect(powers.has(m.power), `${npc.id} -> ${m.power}`).toBe(true);
     }
   });
 });
@@ -201,8 +206,8 @@ describe('nobody in the dossier talks about a character who left', () => {
     const byId = new Map(parts.npcs.map((/** @type {{id: string}} */ n) => [n.id, n]));
     for (const rel of parts.relationships || []) {
       const prose = `${rel.description} ${rel.tension}`;
-      expect(prose).toContain(byId.get(rel.npc1Id).name);
-      expect(prose).toContain(byId.get(rel.npc2Id).name);
+      expect(prose).toContain(byId.get(rel.from).name);
+      expect(prose).toContain(byId.get(rel.to).name);
     }
   });
 
@@ -215,9 +220,9 @@ describe('nobody in the dossier talks about a character who left', () => {
     for (const rel of parts.relationships || []) {
       const archetype = STRESS_ECONOMIC_EFFECTS[/** @type {keyof typeof STRESS_ECONOMIC_EFFECTS} */ (rel.archetypeKey)];
       if (!archetype) continue;
-      expect(Number.isInteger(rel.proseVariant), `rel ${rel.npc1Id}→${rel.npc2Id} stores its variant`).toBe(true);
-      const first = byId.get(rel.npc1Id);
-      const second = byId.get(rel.npc2Id);
+      expect(Number.isInteger(rel.proseVariant), `rel ${rel.from}→${rel.to} stores its variant`).toBe(true);
+      const first = byId.get(rel.from);
+      const second = byId.get(rel.to);
       expect(rel.tension).toBe(archetype.tension(first, second, rel.proseVariant));
       expect(rel.description).toBe(archetype.desc(first, second, rel.proseVariant));
       rendered++;
@@ -232,7 +237,7 @@ describe('nobody in the dossier talks about a character who left', () => {
       // pins that this prose names both endpoints, so prose that stopped naming
       // anybody reds on the anchor instead of passing this exclusion for free.
       for (const name of gone) {
-        expectAbsentWithAnchor(prose, name, rel.npc1Name, `rel ${rel.npc1Id}→${rel.npc2Id}`);
+        expectAbsentWithAnchor(prose, name, rel.npc1Name, `rel ${rel.from}→${rel.to}`);
       }
     }
   });

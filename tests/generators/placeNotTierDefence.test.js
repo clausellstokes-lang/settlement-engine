@@ -68,7 +68,7 @@ describe('a village with no garrison, watch or militia (soak1k-110)', () => {
   it('seats no Guard Captain', () => {
     const roles = s.npcs.map((n) => n.role);
     expect(roles.length).toBeGreaterThan(0);
-    expect(roles).not.toContain('Guard Captain'); // anchored: the line above proves the roster is live
+    expect(roles).not.toContain('the militia captain'); // anchored: the line above proves the roster is live (2026-11-07 PEOPLE-1 CAST, M-1b: the role is the title)
     expect(forceTerms(s, roles)).toEqual([]);
   });
 });
@@ -80,7 +80,7 @@ describe('a village with a militia keeps its Guard Captain (soak1k-20)', () => {
   it('has a militia on the record and a Guard Captain on the roster', () => {
     expect(s.tier).toBe('village');
     expect(defenseFactsOf(s).hasMilitia).toBe(true);
-    expect(s.npcs.map((n) => n.role)).toContain('Guard Captain');
+    expect(s.npcs.map((n) => n.role)).toContain('the militia captain'); // 2026-11-07 PEOPLE-1 CAST (M-1b): the militia's face
   });
 });
 

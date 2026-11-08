@@ -515,18 +515,21 @@ describe('NPC profile prevalence and structural integrity', () => {
     expect(totalLines / cities.length).toBeGreaterThanOrEqual(3);
   });
 
-  it('every NPC with a factionAffiliation carries a factionLink', () => {
+  // PEOPLE-5A RE-KEYED (M-1b, M-2): the link is derived from the card's FIRST-RANK membership, not
+  // the shim's `factionAffiliation`; a pre-law structural placeholder (factionRoles.js, PEOPLE-1's
+  // retired path) carries the old field and no membership, so it links nowhere.
+  it('every NPC holding a membership carries a factionLink', () => {
     const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    let linked = 0;
     for (const s of cities) {
       for (const p of deriveAllNpcProfiles(s)) {
-        // factionAffiliation is the legacy source; factionLink is the
-        // canonical id. The derivation guarantees: when the legacy
-        // field is present and non-empty, the link is non-null.
         const npc = s.npcs.find(n => n.id === p.id);
-        if (typeof npc?.factionAffiliation === 'string' && npc.factionAffiliation) {
+        if (Array.isArray(npc?.memberships) && npc.memberships.some(m => m && m.power)) {
           expect(p.factionLink, `${p.name} missing factionLink`).toBeTruthy();
+          linked += 1;
         }
       }
     }
+    expect(linked, 'liveness: some card holds a membership').toBeGreaterThan(0);
   });
 });

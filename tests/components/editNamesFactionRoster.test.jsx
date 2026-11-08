@@ -72,13 +72,16 @@ describe('Edit Names lists the canonical faction roster', () => {
     expect(screen.getByText('Merchant Guild')).toBeTruthy();
   });
 
-  test('a save WITHOUT a power roster still lists the legacy mirror (the documented fallback)', () => {
+  // PEOPLE-5A (M-2) RE-KEYED: the legacy NPC-grouping fallback is deleted — the powers are the only
+  // roster, so a save with only the grouping lists none of it (the empty state is the anchor).
+  test('a save WITHOUT a power roster no longer lists the NPC grouping (the fallback is deleted)', () => {
     renderNames({
       npcs: [],
       factions: [{ name: 'Old Mirror Guild', dominantCategory: 'merchant' }],
       powerStructure: { factions: [] },
     });
-    expect(screen.getByText('Old Mirror Guild')).toBeTruthy();
+    expect(screen.getByText(/no named NPCs or factions to rename/)).toBeTruthy();
+    expect(screen.queryByText('Old Mirror Guild')).toBeNull();
   });
 
   test('a settlement with neither roster shows the honest empty state', () => {
@@ -97,8 +100,8 @@ describe('the library lane writes through the converged writer', () => {
         factions: [{ faction: 'Merchant Guild' }],
         governingName: 'Merchant Guild',
       },
-      npcs: [{ id: 'n1', factionAffiliation: 'Merchant Guild' }],
-      factions: [],
+      // PEOPLE-5B (M-7): the v2 card's powers
+      npcs: [{ id: 'n1', memberships: [{ power: 'Merchant Guild', rank: 1, share: 1 }] }],
     },
   });
   const partnerSave = () => ({
@@ -115,7 +118,7 @@ describe('the library lane writes through the converged writer', () => {
     const next = withFactionRenamed(hostSave(), true, HOST, 'Merchant Guild', 'Amber Concord');
     expect(nameOf(next.settlement.powerStructure.factions[0])).toBe('Amber Concord');
     expect(next.settlement.powerStructure.governingName).toBe('Amber Concord');
-    expect(next.settlement.npcs[0].factionAffiliation).toBe('Amber Concord');
+    expect(next.settlement.npcs[0].memberships[0].power).toBe('Amber Concord');
   });
 
   test('a neighbour save gets only its faction link, never its settlement or person names', () => {
@@ -145,9 +148,9 @@ describe('the library lane renames a PERSON through the same converged writer', 
     id: 'save-host',
     settlement: {
       name: HOST,
+      // PEOPLE-5B (M-7): a v2 save carries no grouping member copy — the card has one home.
       npcs: [{ id: 'n1', name: OLD, role: 'Guildmaster' }],
-      factions: [{ name: 'Merchant Guild', members: [{ id: 'n1', name: OLD, role: 'Guildmaster' }] }],
-      relationships: [{ npc1Id: 'n1', npc2Id: 'n2', npc1Name: OLD, npc2Name: 'Mira Solt' }],
+      relationships: [{ from: 'n1', to: 'n2', npc1Name: OLD, npc2Name: 'Mira Solt' }],
     },
   });
   const partnerSave = () => ({
@@ -160,14 +163,11 @@ describe('the library lane renames a PERSON through the same converged writer', 
     },
   });
 
-  test('the host save gets the MEMBER-CHIP write both lanes used to miss', () => {
+  test('the host save gets the card and the tie ends (the member chip left with the grouping, PEOPLE-5B)', () => {
     const before = hostSave();
-    // Anchored: the member copy is a distinct object holding the same name, which
-    // is the state a reloaded save is always in.
-    expect(before.settlement.factions[0].members[0]).not.toBe(before.settlement.npcs[0]);
     const next = withNpcRenamed(before, true, HOST, OLD, 'Wren Ashdown');
     expect(next.settlement.npcs[0].name).toBe('Wren Ashdown');
-    expect(next.settlement.factions[0].members[0].name).toBe('Wren Ashdown');
+    expect('factions' in next.settlement, 'no grouping is minted').toBe(false);
     expect(next.settlement.relationships[0].npc1Name).toBe('Wren Ashdown');
     expect(next.settlement.relationships[0].npc2Name).toBe('Mira Solt');
   });

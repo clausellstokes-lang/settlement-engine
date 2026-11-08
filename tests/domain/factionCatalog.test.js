@@ -10,13 +10,14 @@ import {
 } from '../../src/domain/factions/factionCatalog.js';
 
 describe('faction compendium', () => {
-  test('presentFactionNames reads powerStructure.factions and the flat fallback', () => {
+  // PEOPLE-5A RE-KEYED (M-2): the flat (NPC grouping) fallback is deleted — the powers only.
+  test('presentFactionNames reads powerStructure.factions, never the flat grouping', () => {
     const ps = { powerStructure: { factions: [{ name: 'The Merchant Bloc' }, { faction: 'The Hidden Hand' }] } };
     expect(presentFactionNames(ps).has('the merchant bloc')).toBe(true);
     expect(presentFactionNames(ps).has('the hidden hand')).toBe(true);
 
     const flat = { factions: [{ faction: 'The Garrison Bloc' }] };
-    expect(presentFactionNames(flat).has('the garrison bloc')).toBe(true);
+    expect(presentFactionNames(flat).has('the garrison bloc')).toBe(false);
 
     expect(presentFactionNames(null).size).toBe(0);
   });

@@ -34,8 +34,11 @@ describe('"Holds power" is the ruler\'s word alone', () => {
   // re-draws the thorp rosters to one faction in most draws, so thorp 1 holds no contender (first-parent
   // bisect: green at fb5edb7f5, red from 3420d01e3).
   // Scanned rulers-thorp-0..59 in order: 4 thorps hold a contender (12, 28, 33, 42); 12 is the first.
+  // Re-seated by identity thorp 12 -> thorp 28 (PEOPLE-LAND cure, 2026-11-07): lane 1 PEOPLE-1 CAST (dc655f712) re-draws
+  // thorp 12 to its Elder Council alone (100), so it holds no contender (green at 262e8b255, red from dc655f712).
+  // Re-scanned rulers-thorp-0..59 at the tip: 5 thorps hold a contender (28, 33, 42, 54, 57); 28 is the first.
   it('a thorp with a ruler and contenders marks the ruler once and each contender "Contests the seat"', () => {
-    const s = born('thorp', 12);
+    const s = born('thorp', 28);
     const { powers } = derivePowerStrata(s);
     const contenders = powers.filter((p) => p.role === 'contender');
     expect(contenders.length, 'fixture premise: contenders press the seat').toBeGreaterThan(0);
@@ -57,16 +60,20 @@ describe('the governs note names the rival or goes', () => {
   // (first-parent bisect: green at fb5edb7f5, red from 3420d01e3).
   // Scanned rulers-thorp-0..59 in order: 2 thorps carry the note AND an outranking rival (12: Grain
   // Holders 56 over the Elder Council 44; 42: Religious Authorities 76 over 24); 12 is the first.
-  it('names the outranking rival when one outranks the governing faction (thorp 12: Grain Holders)', () => {
-    const s = born('thorp', 12);
+  // Re-seated by identity thorp 12 -> thorp 42 (PEOPLE-LAND cure, 2026-11-07): lane 1 PEOPLE-1 CAST (dc655f712) re-draws
+  // thorp 12 to its Elder Council alone, so no rival outranks it (green at 262e8b255, red from dc655f712).
+  // Re-scanned rulers-thorp-0..59 at the tip: 3 carry the note AND an outranking rival (42: Religious Authorities 76
+  // over the Elder Council 24; 54; 57); 42 is the first.
+  it('names the outranking rival when one outranks the governing faction (thorp 42: Religious Authorities)', () => {
+    const s = born('thorp', 42);
     const gov = governingFactionOf(s);
     expect(String(gov.crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
-    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === 'Grain Holders');
+    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === 'Religious Authorities');
     expect(rival?.power, 'fixture premise: the rival outranks the governing faction on power').toBeGreaterThan(gov.power);
     tab(s);
     openGoverning(s);
     const text = document.body.textContent;
-    expect(text).toContain(`${NOTE}; the real decisions rest with Grain Holders.`);
+    expect(text).toContain(`${NOTE}; the real decisions rest with Religious Authorities.`);
   });
 
   it('drops the claim when no rival outranks the governing faction (thorp 13), keeping the fracture reading', () => {

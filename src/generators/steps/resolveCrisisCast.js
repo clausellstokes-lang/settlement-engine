@@ -80,7 +80,7 @@ registerStep('resolveCrisisCast', {
       const id = `npc_temp_${kind}`;
       minted.push({
         id, name, gender, role: TEMPORARY_ROLE[kind] || 'Steward', category: 'civic',
-        power: 1, influence: 'low', factionAffiliation: null,
+        power: 1, influence: 'low', memberships: [],
         temporary: true, temporaryKind: kind, crisisIds: [crisisId],
       });
       return { id, name };

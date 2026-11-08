@@ -35,9 +35,11 @@
  * through facetOf), or which the catalog marks an illegal brokerage. For that class only,
  * `card:institution:<id>` is admitted (`isHideable(address, settlement)` checks the data;
  * `applyVeil` re-checks it), and it is hidden BY DEFAULT. Hiding it removes the card, its
- * service rows in every category, and every NPC's membership reference to it
- * (`institution`, `secondaryAffiliation`, `factionAffiliation`, `linkedInstitutionIds`
- * naming it): the floor yields for those references and nowhere else. A card delta on any
+ * service rows in every category, and every NPC's reference to it (the card's house,
+ * `institution` — the people car's `{ kind: 'house', key }` or a legacy string — and
+ * `linkedInstitutionIds` naming it; PEOPLE-5A: the two affiliation fields name powers, never a
+ * house, since corruptionPass stopped writing a criminal house into `secondaryAffiliation`):
+ * the floor yields for those references and nowhere else. A card delta on any
  * other house (and on every other kind) still reads as its depth, never the card.
  *
  * ── THE VEIL ONLY REMOVES (X-21 (d)) ────────────────────────────────────────────────
@@ -66,6 +68,7 @@ import { entityIdFor, eventIdFor, slugifyEntity } from '../dossier/entityLinks.j
 import { facetOf } from '../spatial/cohesionWeave.js';
 import { deepClone } from '../clone.js';
 import { factionIdFromName } from '../../lib/entities.js';
+import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 
 /** @typedef {Record<string, unknown>} Rec */
@@ -111,6 +114,11 @@ function str(v) {
   return typeof v === 'string' ? v : '';
 }
 
+/** The card's house: the people car's `institution: { kind: 'house', key }`, else a legacy string. */
+function npcHouseOf(/** @type {Record<string, unknown>} */ npc) {
+  return cardHouseOf(npc) || str(npc.institution);
+}
+
 /**
  * Read a dotted path to an array of records.
  * @param {Rec} root @param {ReadonlyArray<string>} path @returns {Rec[]}
@@ -147,16 +155,18 @@ export const CARD_KINDS = Object.freeze({
     lists: [['npcs'], ['powerStructure', 'factions', '*', 'members'], ['factions', '*', 'members']],
     // The gallery member-override key, so a card delta and a revealDm override agree.
     idOf: (card) => galleryMemberKey(card),
+    // PEOPLE-5A (M-1b, M-2): the card's standing in the powers (`memberships`, ranked) is on the
+    // floor where its two derived names were; the card's house (`institution`) stays a tie.
     floor: ['id', 'name', 'role', 'title', 'category', 'gender', 'presentation',
-      'factionAffiliation', 'secondaryAffiliation', 'influence'],
+      'memberships', 'influence'],
     fields: {
       personality: ['personality'],
       physical: ['physical'],
-      goals: ['goal', 'goals', 'factionGoal'],
+      goals: ['goal', 'goals'],
       constraint: ['activeConstraint'],
       whereabouts: ['whereabouts', 'location', 'currentLocation'],
       secret: ['secret'],
-      ties: ['relationships', 'institution', 'linkedInstitutionIds', 'linkedFactionIds'],
+      ties: ['relationships', 'institution', 'linkedInstitutionIds'],
       hooks: ['plotHooks'],
       corruption: ['corrupt', 'corruptionVector', 'corruptTies'],
     },
@@ -218,8 +228,9 @@ export const CARD_KINDS = Object.freeze({
   },
   relationship: {
     lists: [['relationships']],
-    idOf: (card) => ownIdOr(card, 'relationship', card.npc1Id || card.npc1Name, card.npc2Id || card.npc2Name, card.type),
-    floor: ['id', 'type', 'typeName', 'strength', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
+    // PEOPLE-4 TIES (R-P7): the tie's ends are `from`/`to` (directed); the names keep their fields.
+    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Name, card.to || card.npc2Name, card.type),
+    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
     fields: {
       tension: ['tension'],
       description: ['description'],
@@ -717,7 +728,7 @@ export function applyVeil(publicSettlement, veil) {
   // An institution's people: the NPCs' links to it (the NPC cards themselves stay).
   if (peopleOf.size) {
     for (const npc of cardsOf(s, 'npc')) {
-      if (peopleOf.has(str(npc.institution))) delete npc.institution;
+      if (peopleOf.has(npcHouseOf(npc))) delete npc.institution;
     }
   }
   // X-21e: a house removed whole takes its card and every membership reference to it.
@@ -726,8 +737,12 @@ export function applyVeil(publicSettlement, veil) {
       s.institutions = s.institutions.filter(i => !(isRec(i) && goneIds.has(instKind.idOf(i)) && isHideableHouse(i)));
     }
     for (const npc of cardsOf(s, 'npc')) {
-      for (const key of ['institution', 'secondaryAffiliation', 'factionAffiliation']) {
-        if (goneHouses.has(str(npc[key]))) delete npc[key];
+      if (goneHouses.has(npcHouseOf(npc))) delete npc.institution;
+      // A pre-car save names a criminal house in a string field of the card (the corruption tie the
+      // old corruptionPass wrote): every string field naming a gone house goes with it, whatever its
+      // key — the veil hides what it hid (PEOPLE-5A), the identity's id and name aside.
+      for (const key of Object.keys(npc)) {
+        if (key !== 'id' && key !== 'name' && typeof npc[key] === 'string' && goneHouses.has(npc[key])) delete npc[key];
       }
       if (Array.isArray(npc.linkedInstitutionIds)) {
         npc.linkedInstitutionIds = npc.linkedInstitutionIds.filter(v => !(goneIds.has(str(v)) || goneHouses.has(str(v))));

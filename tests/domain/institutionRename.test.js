@@ -226,18 +226,22 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
       'THE RED CONTROL PASSED: version 2 lists survived the two new arms, so the arms convict nothing',
     ).toBeGreaterThanOrEqual(1);
 
-    // (v) THE DISJOINTNESS ARM: no secondaryAffiliation value is BOTH a roster house and a roster faction.
-    const bothKinds = [];
+    // (v) THE DISJOINTNESS ARM, RE-KEYED 2026-11-07 (PEOPLE-1 CAST, M-2): `secondaryAffiliation` is the card's SECOND
+    // POWER, written by the shim from `memberships` (people/legacyShim.js) — a FACTION name by construction, the
+    // faction ledger's, and no longer the criminal or civic HOUSE npcGenerator wrote (the handle row left this
+    // ledger; the NON_CASCADED row names it). Where the power layer names a governing body after its house
+    // ('Merchant oligarchy', 'Democratic assembly') the value is both a house and a faction name, which the old
+    // exact guard could not tell apart and this ledger no longer reads. The arm now holds the shim's contract.
+    const notAFaction = [];
     for (const world of worlds) {
-      const houses = new Set(rosterOf(world.save));
       const factions = new Set((world.save.powerStructure?.factions || [])
         .map((record) => String(record?.faction || record?.name || '').trim()).filter(Boolean));
       for (const value of [...valuesAt(world.save, 'npcs[].secondaryAffiliation'), ...valuesAt(world.save, 'factions[].members[].secondaryAffiliation')]) {
         const held = value.trim();
-        if (houses.has(held) && factions.has(held)) bothKinds.push(`${world.key}: ${held}`);
+        if (held && !factions.has(held)) notAFaction.push(`${world.key}: ${held}`);
       }
     }
-    expect([...new Set(bothKinds)], 'a secondaryAffiliation value names BOTH a house and a faction, so the exact guard cannot tell them apart').toEqual([]);
+    expect([...new Set(notAFaction)], 'a secondaryAffiliation value is not a roster faction: the shim writes the second power only').toEqual([]);
 
     // (vi) THE LABEL_REWRITE CLOSED-VOCABULARY PIN, in OrphanKind's exact shape.
     const forms = Object.keys(LABEL_REWRITE).sort();
@@ -250,7 +254,12 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
     expect(exactRows.filter((row) => Object.hasOwn(row, 'rewrite')).map((row) => row.path),
       'an exact row carries no rewrite field: the match kind forbids the question').toEqual([]);
     // 34 the packet declared, plus the crisis cast's twelve (RUNG1B-F7: lever, house-kind id and name, at four homes).
-    expect(exactRows.length, 'the exact rows are the 46 the packet and RUNG1B-F7 declare').toBe(46);
+    // 2026-11-07 PEOPLE-1 CAST (M-2): 46 -> 44 — the `secondaryAffiliation` handle row left this ledger at both homes (the
+    // field is the shim's SECOND POWER now, a faction name); `institution.key` (kind: house) took the old `institution` row's place.
+    // 2026-11-07 PEOPLE-5B (M-7): 44 -> 40 — the grouping's member copy left the record, so the four NPC handle rows
+    // at the second home (`factions[].members[].{institution.key, corruptTies.thievesGuild, corruptTies.criminalInstitution,
+    // linkedInstitutionIds[]}`) left with it (factionRename.js :: NPC_HOMES is ['npcs[]']).
+    expect(exactRows.length, 'the exact rows are the 40 the packet, RUNG1B-F7 and PEOPLE-5B declare').toBe(40);
 
     // (vi)(d) BOTH MEMBERS OBSERVED FIRING through the cascade, never asserted from the declaration.
     const fired = new Set();
@@ -307,59 +316,37 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
     expect(residuePaths.length, 'anti-vacuity: no residue at all means the walk found nothing').toBeGreaterThan(0);
   });
 
-  it('A3 both NPC homes move together, proved against a one-home negative control', () => {
-    const PAIRED_FIELDS = ['institution', 'secondaryAffiliation'];
-    const membersById = (save) => {
-      const index = new Map();
-      for (const faction of save.factions || []) for (const member of faction.members || []) if (member?.id) index.set(member.id, member);
-      return index;
-    };
-    const disagreeing = (save) => {
-      const members = membersById(save);
-      return (save.npcs || []).filter((npc) => {
-        const twin = npc?.id ? members.get(npc.id) : null;
-        return twin ? PAIRED_FIELDS.some((field) => npc[field] !== twin[field]) : false;
-      }).length;
-    };
-    let paired = 0;
-    let disagreeBefore = 0;
-    const oneHomeRed = [];
-    const twoHomeRed = [];
+  // 2026-11-07 PEOPLE-5B (M-7): the SECOND HOME LEFT with the grouping. What this arm proved — the member copy moves
+  // with the card — has no subject on a v2 record; what stands in its place is the card's HOUSE (its title source,
+  // `institution.key` of a `kind: 'house'` face) moving under the rename, against a control that skips that one row.
+  it('A3 a card\'s house follows the rename at its one home, proved against a control that skips the row', () => {
+    const housed = (save, name) => (save.npcs || []).filter((npc) => npc?.institution?.kind === 'house' && npc.institution.key === name).length;
+    let faces = 0;
+    const controlRed = [];
+    const cascadeRed = [];
     for (const world of worlds) {
       const base = reloaded(world.save);
-      const members = membersById(base);
-      for (const npc of base.npcs || []) if (npc?.id && members.has(npc.id)) paired += 1;
-      disagreeBefore += disagreeing(base);
-
-      // THE NEGATIVE CONTROL: the identical cascade with the SECOND home dropped.
-      const oneHome = reloaded(world.save);
+      expect('factions' in base, `${world.key}: a v2 record carries no grouping`).toBe(false);
+      const before = housed(base, world.worst.name);
+      faces += before;
+      if (!before) continue;
+      const control = reloaded(world.save);
       for (const row of INSTITUTION_RENAME_SURFACES) {
-        if (row.path.startsWith('factions[].members[]')) continue;
-        for (const site of resolveSites(oneHome, row.path)) {
-          if (site.isList) {
-            const list = listOf(site.owner[site.key]) || [];
-            for (let index = 0; index < list.length; index += 1) {
-              if (typeof list[index] === 'string' && list[index].trim() === world.worst.name) list[index] = NEW_NAME;
-            }
-            continue;
-          }
+        if (row.path === 'npcs[].institution.key') continue;
+        for (const site of resolveSites(control, row.path)) {
           const value = site.owner[site.key];
-          const hit = typeof value === 'string'
-            && (row.match === 'label' ? normalise(value) === normalise(world.worst.name) : value.trim() === world.worst.name);
-          if (hit) site.owner[site.key] = LABEL_REWRITE[row.rewrite || 'verbatim'](NEW_NAME);
+          if (typeof value === 'string' && value.trim() === world.worst.name) site.owner[site.key] = NEW_NAME;
         }
       }
-      if (disagreeing(oneHome)) oneHomeRed.push(world.key);
-
-      const twoHome = reloaded(world.save);
-      applyInstitutionRenameToSettlement(twoHome, world.worst.name, NEW_NAME);
-      if (disagreeing(twoHome)) twoHomeRed.push(world.key);
+      if (housed(control, world.worst.name) > 0) controlRed.push(world.key);
+      const renamed = reloaded(world.save);
+      applyInstitutionRenameToSettlement(renamed, world.worst.name, NEW_NAME);
+      if (housed(renamed, world.worst.name) > 0 || housed(renamed, NEW_NAME) !== before) cascadeRed.push(world.key);
     }
-    process.stdout.write(`\n[A3] paired people ${paired}; disagreeing before ${disagreeBefore}; one-home red ${oneHomeRed.length}/${worlds.length}; two-home red ${twoHomeRed.length}/${worlds.length}\n`);
-    expect(paired, 'no person is stored at both homes in this sample, so the mirror claim is vacuous').toBeGreaterThan(0);
-    expect(disagreeBefore, 'the two homes already disagree before any edit, so the baseline is not clean').toBe(0);
-    expect(oneHomeRed.length, 'THE CONTROL PASSED: dropping the second home changed nothing, so this arm proves nothing').toBeGreaterThan(0);
-    expect(twoHomeRed, 'the cascade left a person disagreeing with their own member copy').toEqual([]);
+    process.stdout.write(`\n[A3] house faces of the renamed house ${faces}; control red ${controlRed.length}; cascade red ${cascadeRed.length}\n`);
+    expect(faces, 'no card is the face of a renamed house in this sample, so the claim is vacuous').toBeGreaterThan(0);
+    expect(controlRed.length, 'THE CONTROL PASSED: skipping the house row changed nothing, so this arm proves nothing').toBeGreaterThan(0);
+    expect(cascadeRed, 'the cascade left a card the face of a house that no longer exists').toEqual([]);
   });
 
   it('A6 the rename touches nothing it must not touch', () => {
@@ -403,7 +390,8 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
       // "Thieves' Guild"), so the habitat is re-grounded on both, never the assertion widened.
       const guild = rosterOf(base).find((name) => name === "Thieves' guild chapter" || name === "Thieves' guild (powerful)");
       if (guild) {
-        const handlesOf = (record) => [...valuesAt(record, 'npcs[].secondaryAffiliation'), ...valuesAt(record, 'factions[].members[].secondaryAffiliation')]
+        // 2026-11-07 PEOPLE-5B (M-7): the faction handle on a v2 card is its membership in the power.
+        const handlesOf = (record) => valuesAt(record, 'npcs[].memberships[].power')
           .filter((value) => value.trim() === "Thieves' Guild").length;
         const before = handlesOf(base);
         if (before > 0) {

@@ -6,8 +6,17 @@
  *
  * Two template axes:
  *   - condition: the most salient settlement pressure (6 states)
- *   - rank: whether this NPC is in the dominant faction or a subordinate one
+ *   - rank: whether this NPC HEADS a dominant power or stands below one
  *     (prevents all government NPCs getting identical text in one settlement)
+ *
+ * THE PEOPLE CAR (PEOPLE-2 CAST-DERIVED, 2026-11-07; the chair's ruling of the day): a card's
+ * power is no longer its `factionAffiliation` (the shim's, removed by PEOPLE-5) but its
+ * FIRST-RANK power — its best standing among its `memberships` (domain/people/membership.js).
+ * `structuralRank` is a real field, written on EVERY card from that standing: rank 1 = 'head',
+ * 2–3 = 'inner_circle', a member ranked nowhere = 'member', no membership = 'unaffiliated'. The
+ * template's rank axis reads the same standing: 'dominant' where the card HEADS its first-rank
+ * power and that power leads its category within reach of the governing power (the old power
+ * test, unchanged); 'subordinate' otherwise.
  *
  * activeGoal replaces the existing goal.short field on enriched NPCs so
  * the DM sees one coherent goal derived from the current situation.
@@ -16,6 +25,7 @@ import { resolveDeclared, lineText } from '../domain/facts/drawDeclared.js';
 import { factsOf } from '../domain/facts/factsOf.js';
 
 import { heldByOthers } from './hookVariety.js';
+import { powerOrderOf, structuralStandingOf, STANDING } from '../domain/people/membership.js';
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const GOVERNANCE_FRACTURED = 'governance_fractured';
@@ -35,11 +45,12 @@ function getPrimaryCondition(settlement) {
   return 'stable';
 }
 
-// rank: 'dominant' if NPC's faction is the highest-power faction of its type
-//       'subordinate' if another faction of same or similar category has more power
-function getRank(npc, allFactions) {
-  const affil  = npc.factionAffiliation;
-  const myFac  = allFactions.find(f => f.faction === affil);
+// rank: 'dominant' if the NPC HEADS its first-rank power and that power is the highest-power
+//       power of its type, within reach of the governing power
+//       'subordinate' otherwise (a lower rank, or another power of its category has more power)
+function getRank(standing, allFactions) {
+  if (standing.standing !== STANDING.head) return 'subordinate';
+  const myFac  = allFactions.find(f => f.faction === standing.power);
   if (!myFac) return 'subordinate';
   const myCat  = myFac.category || 'other';
   const sameCategory = allFactions.filter(f => (f.category || 'other') === myCat);
@@ -403,9 +414,14 @@ for (const cond of ['corruption','food_crisis','economic_stress','contested']) {
 }
 
 // ── Score NPCs by power relevance ─────────────────────────────────────────────
-function npcRelevanceScore(npc, powerFactions) {
-  const fac = powerFactions.find(f => f.faction === npc.factionAffiliation);
-  let score = fac?.power || 0;
+// The people car (PEOPLE-2 CAST-DERIVED): the significant NPCs are the powers' own people, the
+// heads first, then the inner circles, each by their first-rank power's figure — so the TOP_N who
+// carry a structural template are the heads of the strongest powers, not whichever members of the
+// strongest power the roster lists first (every member of a power shares its figure).
+const STANDING_WEIGHT = Object.freeze({ [STANDING.head]: 1000, [STANDING.inner]: 500 });
+function npcRelevanceScore(npc, powerFactions, standing) {
+  const fac = powerFactions.find(f => f.faction === standing.power);
+  let score = (STANDING_WEIGHT[standing.standing] || 0) + (fac?.power || 0);
   const role = (npc.role || '').toLowerCase();
   if (role.includes('mayor') || role.includes('governor') || role.includes('elder')) score += 25;
   if (role.includes('captain') || role.includes('commander'))                        score += 15;
@@ -424,18 +440,22 @@ export function enrichNPCsWithStructure(npcs, settlement) {
   /** @type {ReturnType<typeof factsOf> | null} */
   let facts = null;
 
-  const scored = npcs.map(n => ({ npc: n, score: npcRelevanceScore(n, powerFactions) }))
-                     .sort((a,b) => b.score - a.score);
+  const powerOrder      = powerOrderOf(settlement);
+  // the card's standing in its first-rank power (the people car): every card carries it
+  const scored = npcs.map(n => {
+    const standing = structuralStandingOf(n, powerOrder);
+    return { npc: n, standing, score: npcRelevanceScore(n, powerFactions, standing) };
+  }).sort((a,b) => b.score - a.score);
   // REVIEW-INTAKE-4: the roster's goals as they stand (in scored order). A template goal another
   // figure already carries is refused and the figure keeps its own goal; its structural position
   // and constraint are still its situation's. Draw-free.
   const goalsNow = scored.map(({ npc }) => npc?.goal?.short);
 
-  return scored.map(({ npc }, idx) => {
-    if (idx >= TOP_N) return npc;
+  return scored.map(({ npc, standing }, idx) => {
+    if (idx >= TOP_N) return { ...npc, structuralRank: standing.standing };
 
     const cat  = npc.category || 'other';
-    const rank = getRank(npc, powerFactions);
+    const rank = getRank(standing, powerFactions);
     const key  = `${cat}__${condition}__${rank}`;
     const looked = T[key] ? key : T[`${cat}__stable__${rank}`] ? `${cat}__stable__${rank}` : OTHER_STABLE_DOMINANT;
     // ⭐ CENSUS-1d unit 2 (the chair's R-A ruling of 2026-11-05 02:30; Appendix B item 3, kind T):
@@ -447,7 +467,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
       ? resolveDeclared(T[looked], { facts: facts ??= factsOf(settlement), tagged: true, poolId: `NPC_STRUCTURE.${looked}`, surface: 'npcs' }).line
       : null;
 
-    if (!tmpl) return npc;
+    if (!tmpl) return { ...npc, structuralRank: standing.standing };
 
     // activeGoal replaces goal.short on enriched NPCs so the DM sees one coherent goal.
     // The settlement-derived goal is more specific than the generic role goal.
@@ -465,7 +485,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
       structuralPosition: lineText(tmpl.position),
       activeConstraint:   lineText(tmpl.constraint),
       settlementCondition: condition,
-      structuralRank:     rank,
+      structuralRank:     standing.standing,
     };
   });
 }

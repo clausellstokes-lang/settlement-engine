@@ -10,7 +10,11 @@
  */
 
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
+  migrateV1toV2,
   migrateSettlementToLatest,
   listMigrations,
   diagnoseMigrationChain,
@@ -171,5 +175,134 @@ describe('Tier 1.4 — registry contract for future additions', () => {
       expect(typeof m.description).toBe('string');
       expect(m.description.length).toBeGreaterThan(10);
     }
+  });
+});
+
+// ── PEOPLE-5B (2026-11-07, the chair's ruling M-7): THE FIRST REAL STEP, v1 -> v2 ─────────────────────
+// The proof is PEOPLE-5-PREP's dry run promoted (docs/chair/2026-11-07/people-5-prep/migrate-dry-run.mjs):
+// (1) the four committed saves carry no faction field, so every card passes through BYTE-EQUAL with the
+// chain's schemaVersion 2 (the forward exhibit passes through unchanged); (2) the committed v1 fixture
+// `tests/fixtures/legacy-saves/people-car-v1-2026-11-07.json` — the dry run's 60 births + 6 planted DM
+// variants, born at the dry run's base 1031233a4 by docs/chair/2026-11-07/people-5b/write-v1-fixture.mjs —
+// migrates with PEOPLE-5-PREP §3.4's figures as its own (the six lock-map-only DM cards of §3.4's 24 live in
+// the save ENVELOPE, which this step never sees: 18 are found inside the settlement, the envelope's locks
+// are untouched by construction, and the arm proves both).
+const LEGACY = join(dirname(fileURLToPath(import.meta.url)), '../fixtures');
+const readEntries = (file) => JSON.parse(readFileSync(join(LEGACY, file), 'utf8'));
+const V1_FIELDS = ['factionAffiliation', 'secondaryAffiliation', 'linkedFactionIds', 'factionGoal', 'densityRungRole'];
+
+describe('M-7 — the v1 -> v2 step (PEOPLE-5B)', () => {
+  it('the four committed saves: every card byte-equal, schemaVersion 2 (the forward exhibit untouched)', () => {
+    const files = ['legacy-saves/april-2026-v1.json', 'save-museum/02-v2-draft-2026-06.json',
+      'save-museum/03-campaign-canon-2026-07.json', 'save-museum/04-forward-version-vNext.json'];
+    let cards = 0;
+    let forward = 0;
+    for (const file of files) {
+      for (const entry of readEntries(file)) {
+        const raw = entry.settlement || entry;
+        const before = JSON.parse(JSON.stringify(raw.npcs || []));
+        const out = normalizeSettlement(JSON.parse(JSON.stringify(raw)));
+        if (typeof raw.schemaVersion === 'number' && raw.schemaVersion > SCHEMA_VERSION) {
+          forward += 1;
+          expect(out.schemaVersion, `${file}: a forward save is never downgraded`).toBe(raw.schemaVersion);
+          continue;
+        }
+        expect(out.schemaVersion, file).toBe(2);
+        expect(out.npcs || [], `${file}: every card byte-equal`).toEqual(before);
+        expect('factions' in out, `${file}: no grouping`).toBe(false);
+        cards += before.length;
+      }
+    }
+    expect(cards, 'the committed cards the arm compared (PEOPLE-5-PREP §3.1: 6 people)').toBe(6);
+    expect(forward, 'the forward exhibit').toBe(1);
+  });
+
+  it('the committed v1 fixture migrates with PEOPLE-5-PREP §3.4\'s figures as its own', () => {
+    const entries = readEntries('legacy-saves/people-car-v1-2026-11-07.json');
+    expect(entries.length, '60 births + 6 planted').toBe(66);
+    const t = { cards: 0, keptOtherFields: 0, fieldsLeft: 0, dm: 0, dmWhy: {}, moved: { factionAffiliation: 0, secondaryAffiliation: 0, linkedFactionIds: 0 },
+      deleted: { factionGoal: 0, densityRungRole: 0 }, structuralRank: 0, houseLinked: 0, perCard: {}, unmapped: {},
+      grouping: 0, orphans: 0, ties: 0, tiesMoved: 0, outDegreeOver1: 0, reports: 0, notPowers: 0, dmInstitutionNotNull: 0 };
+    for (const entry of entries) {
+      const v1 = entry.settlement;
+      expect(v1.schemaVersion, `${entry.label}: a v1 save`).toBe(1);
+      const locksBefore = JSON.stringify(entry.campaignState);
+      const input = JSON.parse(JSON.stringify(v1));
+      const migrated = migrateSettlementToLatest(input);
+      expect(JSON.stringify(input), `${entry.label}: the input is not mutated`).toBe(JSON.stringify(v1));
+      expect(JSON.stringify(entry.campaignState), `${entry.label}: the envelope's locks are untouched`).toBe(locksBefore);
+      const { report } = migrateV1toV2(JSON.parse(JSON.stringify(v1)));
+      expect(migrated.schemaVersion).toBe(2);
+      expect('factions' in migrated, `${entry.label}: the grouping is dropped`).toBe(false);
+      const powers = new Set(migrated.powerStructure.factions.map((p) => p.faction || p.name));
+      v1.npcs.forEach((card, i) => {
+        const next = migrated.npcs[i];
+        t.cards += 1;
+        const kept = Object.keys(card).filter((k) => !V1_FIELDS.includes(k) && k !== 'institution');
+        if (kept.every((k) => JSON.stringify(next[k]) === JSON.stringify(card[k]))) t.keptOtherFields += 1;
+        t.fieldsLeft += V1_FIELDS.filter((k) => k in next).length;
+        for (const m of next.memberships || []) if (!powers.has(m.power)) t.notPowers += 1;
+      });
+      for (const d of report.dmCards) {
+        t.dm += 1;
+        for (const why of d.why) t.dmWhy[why] = (t.dmWhy[why] || 0) + 1;
+        if (migrated.npcs.find((n) => n.id === d.id).institution !== null) t.dmInstitutionNotNull += 1;
+      }
+      for (const k of Object.keys(t.moved)) t.moved[k] += report.moved[k];
+      t.deleted.factionGoal += report.deleted.factionGoal;
+      t.deleted.densityRungRole += report.deleted.densityRungRole;
+      t.structuralRank += report.structuralRankCarried;
+      t.houseLinked += report.houseLinked;
+      for (const [k, v] of Object.entries(report.membershipsPerCard)) t.perCard[k] = (t.perCard[k] || 0) + v;
+      for (const u of report.unmapped) { const k = `${u.field} (${u.names})`; t.unmapped[k] = (t.unmapped[k] || 0) + 1; }
+      t.grouping += report.groupingDropped;
+      t.orphans += report.groupingOrphans.length;
+      t.ties += report.ties;
+      t.tiesMoved += report.tiesMoved;
+      t.outDegreeOver1 += report.outDegreeOver1;
+      expect(migrated.relationships.length, `${entry.label}: every tie kept`).toBe(v1.relationships.length);
+      expect(migrated.relationships.every((r) => 'from' in r && 'to' in r && !('npc1Id' in r)), entry.label).toBe(true);
+      if (migrated.migrationReports) {
+        t.reports += 1;
+        expect(migrated.migrationReports.at(-1).unmapped, `${entry.label}: what was not mapped is on the record`)
+          .toEqual(report.unmapped);
+      }
+      // idempotent: a v2 record is not migrated again
+      expect(migrateSettlementToLatest(JSON.parse(JSON.stringify(migrated)))).toEqual(migrated);
+    }
+    expect(t).toEqual({
+      cards: 664, keptOtherFields: 664, fieldsLeft: 0,
+      dm: 18, dmWhy: { authored: 6, 'event-born': 6, 'entity-locked': 6 }, dmInstitutionNotNull: 0,
+      moved: { factionAffiliation: 655, secondaryAffiliation: 28, linkedFactionIds: 6 },
+      deleted: { factionGoal: 4, densityRungRole: 655 }, structuralRank: 209, houseLinked: 33,
+      perCard: { 0: 3, 1: 633, 2: 28 },
+      // REPORTED, never silently dropped: the corruption tie's house (14) and a word naming neither (59)
+      unmapped: { 'secondaryAffiliation (a house on the roster)': 14,
+        'secondaryAffiliation (neither a power nor a house on the roster)': 59 },
+      grouping: 238, orphans: 1, ties: 1486, tiesMoved: 1486, outDegreeOver1: 581, reports: 23, notPowers: 0,
+    });
+  });
+
+  it('a DM card keeps every field it had plus institution: null; the planted grouping-only faction is reported', () => {
+    const entries = readEntries('legacy-saves/people-car-v1-2026-11-07.json').filter((e) => e.label.startsWith('planted<'));
+    expect(entries.length).toBe(6);
+    const s0 = entries[0].settlement;
+    const out = migrateSettlementToLatest(JSON.parse(JSON.stringify(s0)));
+    const authored = s0.npcs[0];
+    expect(authored._authored, 'the planted DM edit (userEdits.js :: applyUserEdit)').toBe(true);
+    const migratedAuthored = out.npcs[0];
+    for (const key of Object.keys(authored).filter((k) => !V1_FIELDS.includes(k) && k !== 'institution')) {
+      expect(migratedAuthored[key], `authored card: ${key} kept`).toEqual(authored[key]);
+    }
+    expect(migratedAuthored.institution).toBeNull();
+    const born = s0.npcs.at(-1);
+    expect(born.createdByEventId, 'the planted event-born card').toBeTruthy();
+    expect(out.npcs.at(-1).memberships.length, 'its linkedFactionIds moved to a membership').toBe(1);
+    expect(out.npcs.at(-1).institution).toBeNull();
+    expect(s0.npcs[1].locked).toBe(true);
+    expect(out.npcs[1].locked, 'the entity lock is carried').toBe(true);
+    expect(out.npcs[1].institution).toBeNull();
+    expect(out.migrationReports.at(-1).groupingOrphans.map((g) => g.name), 'the grouping-only faction is on the record')
+      .toEqual(['Planted Grouping-Only Faction']);
   });
 });

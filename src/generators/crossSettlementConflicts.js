@@ -162,22 +162,19 @@ function buildFactionDesc(facA, facB, settA, settB, relType, rng) {
 
 /**
  * The factions a settlement engages with (GS-2, ODQ §934.101): its POWER factions, the set the
- * simulation runs and every other surface names, strongest first. A shape with no power roster
- * (the generator's own neighbour summary, a pre-pipeline save) falls back to its top-level
- * `factions`, which since GS-2 is itself a projection of the power set. A legacy save's minted
- * group names therefore never reach a new engagement when its power roster is present.
+ * simulation runs and every other surface names, strongest first. The NPC grouping is never read
+ * (PEOPLE-5A, M-2): a shape with no power roster engages with none. A neighbour summary carries
+ * its partner's powers under `powerStructure.factions` like any place.
  * @param {any} settlement
- * @returns {Array<{ name: string, dominantCategory: string }>}
+ * @returns {Array<{ name: string, category: string }>}
  */
 function engagingFactions(settlement) {
   const roster = settlement?.powerStructure?.factions;
-  if (Array.isArray(roster) && roster.length) {
-    return [...roster]
-      .sort((a, b) => (b?.power || 0) - (a?.power || 0))
-      .map((f) => ({ name: f?.faction || f?.name, dominantCategory: f?.category || 'other' }))
-      .filter((f) => f.name);
-  }
-  return Array.isArray(settlement?.factions) ? settlement.factions : [];
+  if (!Array.isArray(roster)) return [];
+  return [...roster]
+    .sort((a, b) => (b?.power || 0) - (a?.power || 0))
+    .map((f) => ({ name: f?.faction || f?.name, category: f?.category || 'other' }))
+    .filter((f) => f.name);
 }
 
 /**
@@ -265,9 +262,9 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
     let bestA = null, bestB = null;
     outer: for (const cat of cats) {
       for (const fa of factionsA) {
-        if (fa.dominantCategory !== cat) continue;
+        if (fa.category !== cat) continue;
         for (const fb of factionsB) {
-          if (fb.dominantCategory === cat) { bestA = fa; bestB = fb; break outer; }
+          if (fb.category === cat) { bestA = fa; bestB = fb; break outer; }
         }
       }
     }
@@ -281,15 +278,15 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
       const base  = { linkId, type: 'faction_engagement', relType };
       forA.push({
         ...base,
-        factionName: bestA.name, factionCategory: bestA.dominantCategory,
-        partnerFactionName: bestB.name, partnerFactionCategory: bestB.dominantCategory,
+        factionName: bestA.name, factionCategory: bestA.category,
+        partnerFactionName: bestB.name, partnerFactionCategory: bestB.category,
         partnerSettlement: settlementB.name,
         description: desc,
       });
       forB.push({
         ...base,
-        factionName: bestB.name, factionCategory: bestB.dominantCategory,
-        partnerFactionName: bestA.name, partnerFactionCategory: bestA.dominantCategory,
+        factionName: bestB.name, factionCategory: bestB.category,
+        partnerFactionName: bestA.name, partnerFactionCategory: bestA.category,
         partnerSettlement: settlementA.name,
         description: descB,
       });

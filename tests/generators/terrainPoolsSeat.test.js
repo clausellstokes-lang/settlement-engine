@@ -55,7 +55,10 @@ describe('the council case, hand-built (was soak1k-694)', () => {
   it('seats a named Mayor in the governing council, and the seat check is clean', () => {
     for (const s of cities) {
       const chain = rulingChainOf(s);
-      expect(chain.npc?.role).toBe('Mayor');
+      // 2026-11-07 PEOPLE-1 CAST (M-1b): the seat is the card ranked FIRST in the governing council; its role is its title
+      const seated = (s.npcs || []).find((n) => n.name === chain.npc?.name);
+      expect(seated?.role).toBe(seated?.title);
+      expect((seated?.memberships || []).some((m) => m.rank === 1 && m.power === String(chain.faction?.faction || chain.faction?.name || ''))).toBe(true);
       expect(String(chain.npc?.name || '')).not.toMatch(/^The /); // anchored: the line above pins the seat's Mayor live
       expect(seatHolderFindings(s)).toEqual([]);
     }

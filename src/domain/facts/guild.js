@@ -38,7 +38,6 @@ const namesGuild = (name) => typeof name === 'string' && GUILD_RE.test(name) && 
  * @param {{
  *   institutions?: unknown,
  *   powerStructure?: { factions?: unknown } | null,
- *   factions?: unknown,
  * } | null | undefined} record a settlement record
  * @returns {boolean}
  */
@@ -46,9 +45,8 @@ export function guildOf(record) {
   const roster = liveInstitutions(record)
     .filter((/** @type {unknown} */ inst) => !ACCESS_ONLY.test(String(nativeSemanticName(inst) || '')));
   if (roster.some(isCommerceGuild)) return true;
-  const factions = [
-    ...(Array.isArray(record?.powerStructure?.factions) ? record.powerStructure.factions : []),
-    ...(Array.isArray(record?.factions) ? record.factions : []),
-  ];
+  // MERGE-CAR: the powers alone — the NPC grouping `record.factions` is no longer built (PEOPLE-LAND M-2, the
+  // shim out), and its names were the powers' own, so reading the powers reads every name it held.
+  const factions = Array.isArray(record?.powerStructure?.factions) ? record.powerStructure.factions : [];
   return factions.some((/** @type {{ faction?: unknown, name?: unknown } | null | undefined} */ f) => namesGuild(f?.faction) || namesGuild(f?.name));
 }

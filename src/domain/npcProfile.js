@@ -25,6 +25,7 @@
 
 import { institutionMatchesRegex } from './institutionClassify.js';
 import { ARCANE_INST_TAGS, TRADE_INST_TAGS } from './arcaneInstitutionVocabulary.js';
+import { cardHouseOf, firstPowerOf, powerOrderOf } from './people/cardPowers.js';
 
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
@@ -267,7 +268,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
 // structuralRank would also crash `.toLowerCase()`. Translate in ONE place: map
 // 'subordinate' → 'secondary', String()-coerce the input, and collapse anything
 // unrecognized (including numbers and absent ranks) to 'minor'.
-const NPC_RANK_ALIASES = Object.freeze({ subordinate: 'secondary' });
+const NPC_RANK_ALIASES = Object.freeze({ subordinate: 'secondary', head: 'dominant', inner_circle: 'secondary' }); // + the people car's standings (PEOPLE-2, 2026-11-07): head = rank 1, inner_circle = ranks 2–3
 /**
  * @param {unknown} rank
  * @returns {import('./settlement.schema.js').NpcRank}
@@ -342,6 +343,11 @@ function inferInstitutionLink(npc, settlement) {
   if (!npc || !settlement) return null;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   if (institutions.length === 0) return null;
+
+  // The card's own house first (PEOPLE-5A: a representative IS its institution's face).
+  const house = cardHouseOf(npc);
+  const own = house ? institutions.find((inst) => inst && inst.name === house) : null;
+  if (own) return `institution.${snakeCase(own.name)}`;
 
   const hint = CATEGORY_INSTITUTION_HINTS[archetypeFromCategory(npc.category)];
   if (!hint) return null;
@@ -503,19 +509,26 @@ function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
   if (!npc?.id || rels.length === 0) return null;
 
-  // Find any relationship involving this NPC.
-  const candidates = rels.filter((r) => r.npc1Id === npc.id || r.npc2Id === npc.id);
+  // Find any relationship involving this NPC: its OWN directed tie first, then the ties naming
+  // it (PEOPLE-4 TIES, R-P7). TODO(PEOPLE-5): a v1 save's `npc1Id`/`npc2Id` pair is read as
+  // `from`/`to` by the migration.
+  // (One `filter` and `find`s, never a spread: the writer-reach resolver follows the tie's shape
+  // through these and credits every surface that prints this profile.)
+  const candidates = rels.filter((r) => r.from === npc.id || r.to === npc.id);
   if (candidates.length === 0) return null;
 
   // Prefer relationships with explicit tension over plain alliances —
-  // these are the more campaign-actionable connections.
-  const withTension = candidates.find((r) => typeof r.tension === 'string' && r.tension);
-  const chosen = withTension || candidates[0];
+  // these are the more campaign-actionable connections — the card's own tie before a caller's.
+  const tense = (r) => typeof r.tension === 'string' && r.tension;
+  const chosen = candidates.find((r) => r.from === npc.id && tense(r))
+    || candidates.find((r) => tense(r))
+    || candidates.find((r) => r.from === npc.id)
+    || candidates[0];
 
-  const otherId = chosen.npc1Id === npc.id ? chosen.npc2Id : chosen.npc1Id;
-  const otherName = chosen.npc1Id === npc.id
-    ? (chosen.npc2N || chosen.npc2Name || otherId)
-    : (chosen.npc1N || chosen.npc1Name || otherId);
+  const otherId = chosen.from === npc.id ? chosen.to : chosen.from;
+  const otherName = chosen.from === npc.id
+    ? (chosen.npc2Name || otherId)
+    : (chosen.npc1Name || otherId);
 
   return {
     otherId,
@@ -569,7 +582,7 @@ export function deriveNpcProfile(npc, settlement) {
 
     // Linkages
     institutionLink: inferInstitutionLink(npc, settlement),
-    factionLink:     factionIdFromName(npc.factionAffiliation),
+    factionLink:     factionIdFromName(firstPowerOf(npc, powerOrderOf(settlement))),
 
     // Public-facing markers
     publicReputation: firstNonEmpty(

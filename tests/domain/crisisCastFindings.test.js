@@ -18,8 +18,8 @@ const row = (role, id, name, reason = 'r') => ({ role, kind: 'npc', id, name, re
 const cast = (roles, stakes) => ({ nature: 'natural', rank: 1, roles, absent: [], stakes, levers: [], ifNothingIsDone: { residualEffects: [] }, playersSeeFirst: [], links: [] });
 const town = (stress, extra = []) => ({
   npcs: [
-    { id: 'a', name: 'Ada', factionAffiliation: 'Merchants' },
-    { id: 'b', name: 'Bran', factionAffiliation: 'Council' },
+    { id: 'a', name: 'Ada', memberships: [{ power: 'Merchants', rank: 1 }] },
+    { id: 'b', name: 'Bran', memberships: [{ power: 'Council', rank: 1 }] },
     ...extra,
   ],
   stress,

@@ -183,7 +183,7 @@ const NO_LIVE_ENGAGEMENTS = /** @type {ReadonlyArray<Record<string, unknown>>} *
  *
  * PURE: no clock, no ambient RNG, no store, no React.
  *
- * @param {{ _seed?: unknown, id?: unknown, name?: unknown, npcs?: unknown, factions?: unknown,
+ * @param {{ _seed?: unknown, id?: unknown, name?: unknown, npcs?: unknown, powerStructure?: unknown,
  *   neighborRelationship?: { id?: unknown, name?: unknown, relationshipType?: unknown,
  *     npcs?: unknown, factions?: unknown } | null } | null | undefined} settlement
  * @returns {ReadonlyArray<Record<string, unknown>>}
@@ -197,10 +197,12 @@ export function liveNeighbourEngagements(settlement) {
       id: settlement.id,
       name: settlement.name || '',
       npcs: settlement.npcs || [],
-      factions: settlement.factions || [],
+      // The POWERS on both sides (PEOPLE-5A, M-2): the NPC grouping is not copied.
+      powerStructure: { factions: /** @type {{ factions?: unknown[] } | undefined} */ (settlement.powerStructure)?.factions || [] },
     };
     const partner = {
-      id: nr.id, name: nr.name, npcs: nr.npcs || [], factions: nr.factions || [],
+      id: nr.id, name: nr.name, npcs: nr.npcs || [],
+      powerStructure: { factions: /** @type {{ powerStructure?: { factions?: unknown[] } }} */ (nr).powerStructure?.factions || [] },
     };
     const { forA } = generateCrossSettlementConflictsDeterministic(
       own, partner, nr.relationshipType || 'neutral', 'live',

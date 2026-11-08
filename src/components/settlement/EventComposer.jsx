@@ -58,6 +58,7 @@ import {
 import { applyRefusalPayload, applyRefusalMessage, batchApplyOutcome, batchRefusalText } from './eventComposer/applyOutcome.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+import { firstPowerOf, powerOrderOf } from '../../domain/people/cardPowers.js';
 
 // onLink (= SettlementDetail's handleLink) is threaded in only so the folded
 // LINK_NEIGHBOUR pseudo-event can delegate to the neighbour-link cascade. With no
@@ -207,21 +208,19 @@ export default function EventComposer({ onLink = null }) {
       .map(([key, def]) => ({ id: key, name: def.label || key }))
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [settlement?.config?.nearbyResources]);
-  // PROMOTE_NPC / DEMOTE_NPC — NPCs grouped by faction affiliation, keeping
-  // only factions with at least two members (the swap needs a counterpart).
+  // PROMOTE/DEMOTE_NPC — NPCs by FIRST-RANK power (PEOPLE-5A), powers of two or more only.
   const npcSwapGroups = useMemo(() => {
     const byFaction = new Map();
     for (const npc of settlement?.npcs || []) {
-      const faction = npc?.factionAffiliation;
+      const faction = firstPowerOf(npc, powerOrderOf({ powerStructure: settlement?.powerStructure }));
       if (!faction || !npc?.name) continue;
-      if (!byFaction.has(faction)) byFaction.set(faction, []);
-      byFaction.get(faction).push({ id: String(npc.id || npc.name), name: npc.name });
+      (byFaction.get(faction) || byFaction.set(faction, []).get(faction)).push({ id: String(npc.id || npc.name), name: npc.name });
     }
     return [...byFaction.entries()]
       .filter(([, npcs]) => npcs.length >= 2)
       .map(([faction, npcs]) => ({ faction, npcs }))
       .sort((a, b) => a.faction.localeCompare(b.faction));
-  }, [settlement?.npcs]);
+  }, [settlement?.npcs, settlement?.powerStructure]);
   // IMPOSE_CORRUPTION — the manifest's wrap over readCorruptionClimate: the
   // EXACT list the imposeCorruption handler resolves against (the old inline
   // comment-mirror filter is retired — same-function law).

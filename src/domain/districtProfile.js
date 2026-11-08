@@ -257,7 +257,7 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
  * @returns {Map<string, string>}
  */
 function canonicalArchetypesById(settlement) {
-  const factions = settlement?.powerStructure?.factions || settlement?.factions || [];
+  const factions = settlement?.powerStructure?.factions || [];
   /** @type {Map<string, string>} */
   const out = new Map();
   if (!Array.isArray(factions)) return out;

@@ -12,7 +12,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
 import { composeCrisisPage } from '../../src/domain/crisis/crisisPage.js';
 import { effectiveCastOf, CAST_EDIT_PATH } from '../../src/domain/crisis/crisisCast.js';
-import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { esc, buildJournalPages } from '../../src/foundry/journalPages.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { CrisisSections } from '../../src/pdf/sections/CrisisSections.jsx';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
@@ -108,7 +108,10 @@ describe('the print block and the journal page print the Crisis tab\'s cast', ()
       if (!crisisPage) throw new Error('no Crisis journal page');
       for (const section of page) {
         for (const r of section.cast) {
-          if (!crisisPage.markdown.includes(r.name)) throw new Error(`journal misses ${r.name}`);
+          // 2026-11-07 PEOPLE-1 CAST: the journal page is MARKDOWN, and the cast now surfaces names the rung roster
+          // never did — a HOUSE row "Inns and taverns (district)" and a person "Nessa O'Dwyer" — whose parentheses and
+          // apostrophes the page escapes; the comparison reads the page with its escapes removed, the claim unchanged.
+          if (!crisisPage.markdown.includes(esc(r.name))) throw new Error(`journal misses ${r.name}`);
           if (!printed.includes(`${r.roleLabel}: ${r.name}. ${r.reason}.`)) throw new Error(`print misses ${r.roleLabel} ${r.name}`);
         }
         if (!printed.includes(section.line)) throw new Error(`print misses ${section.line}`);

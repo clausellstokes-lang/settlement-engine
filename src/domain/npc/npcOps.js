@@ -68,9 +68,13 @@ export function applyEditNpcFacet(npc, facetKind, value) {
 /** The SEAT-HELD fields — the seat the NPC vacates on reassignment (they change to
  *  the new posting; the old seat becomes a vacancy the role-fill machinery refills).
  *  @type {readonly string[]} */
+// PEOPLE-5B (2026-11-07, M-7): `factionAffiliation` and `linkedFactionIds` LEFT — a v2 card's standing in the
+// powers is its ranked `memberships` ([{ power, rank, share }], each power ∈ powerStructure.factions) and its
+// house is `institution` ({ kind, key, family, title } | null). The three mirrors of this list (here,
+// pendingEditIntents.js :: SEAT_FIELDS, store/settlementPendingEditWriters.js :: SEAT_FIELDS) move together.
 export const SEAT_HELD_FIELDS = Object.freeze([
-  'institutionId', 'factionLink', 'factionAffiliation', 'settlementId', 'role',
-  'linkedInstitutionIds', 'linkedFactionIds',
+  'institutionId', 'factionLink', 'settlementId', 'role',
+  'linkedInstitutionIds', 'memberships', 'institution',
 ]);
 
 /**

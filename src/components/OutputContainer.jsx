@@ -558,7 +558,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // TAB_GROUPS.world + renderTab but was never registered here, so the resolver
     // dropped it and only the narrower Neighbours tab rendered. Shown when the
     // settlement surfaces any relational content.
-    ...(rawSettlement?.relationships?.length || rawSettlement?.factions?.length
+    ...(rawSettlement?.relationships?.length || rawSettlement?.powerStructure?.factions?.length
       || rawSettlement?.neighbourNetwork?.length || rawSettlement?.neighborRelationship?.name
       // Reuses the already-bundled Users glyph (relationships = people/factions)
       // so registering the tab adds no new icon to the first-paint vendor-icons
