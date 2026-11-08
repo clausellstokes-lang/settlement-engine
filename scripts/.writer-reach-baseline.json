@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "9c2724ecbbe2b30ef783efcbfa30bca8fecde4d8",
+ "frozenAtSha": "501c974123fd3e73f4368bae29566c9d6d8c5e6d",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -22,9 +22,9 @@
   "originCount": 14338,
   "transitionCount": 21984
  },
- "shapesDigest": "e3e094c7fe1ea56d9362f2892c2767871a55d153c6791b7c2eb5c54e9a906d28",
- "detectorDigest": "ab71e92531ff38fac314aeaa6df126530ad98603fcf7441470b0e5c80479eaec",
- "verdictDigest": "9eab47cfcd4f6e87eb3e6ac01ea0b49ffae457fe9e2825609979079d737df087",
+ "shapesDigest": "d241e95259c7314d0baf182731d6270627b259896b71aa0c461d5fe396b265b6",
+ "detectorDigest": "91ba8fa256abfed0e28b13b846a62236237dadbb194cadbae9edb0e812ca034e",
+ "verdictDigest": "9b034ea0239d77bea456d2716ce8239a41c0b3d955676414fd21040ca36e6f3a",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 11997,
-  "lit": 655,
+  "lit": 656,
   "litName": 9970,
-  "dark": 1372,
+  "dark": 1371,
   "thinKeys": 17280,
   "thinShapes": 1203,
   "knownShapes": 517
  },
  "scanStats": {
   "files": 1748,
-  "sites": 41350,
-  "propRead": 39165,
+  "sites": 41364,
+  "propRead": 39179,
   "elemRead": 0,
   "destructure": 2169,
   "inOp": 16,
-  "rGrades": 6499,
-  "nGrades": 1623993,
-  "resolvedReceivers": 7399
+  "rGrades": 6506,
+  "nGrades": 1624613,
+  "resolvedReceivers": 7406
  },
- "registerDigest": "ab0b445e2cc5fbedba7a1307fe9775fd69b981ceea89835abbcb88d6b842bae5",
+ "registerDigest": "a86430bcd6b878d6377910814065e4627236c67538671117d6216aca4300e670",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 385,
+ "reviewableDarkCount": 384,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -6457,7 +6457,7 @@
    "identity": "templateType on historicalEvents",
    "key": "templateType",
    "shape": "historicalEvents",
-   "rows": 2217
+   "rows": 2218
   },
   {
    "identity": "terrainA on segments",
@@ -9682,7 +9682,7 @@
   "warEconomy on metadata": "",
   "warRulingRead on metadata": "web-transitive=R",
   "criticalIssueCount on metrics": "dossier-pdf=R web-display=R",
-  "dependencyCount on metrics": "",
+  "dependencyCount on metrics": "dossier-pdf=R foundry=R web-display=R",
   "foodBalance on metrics": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "tradeAccess on metrics": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "warningCount on metrics": "",
