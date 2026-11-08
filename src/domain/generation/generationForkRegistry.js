@@ -245,7 +245,7 @@ export const GENERATION_CHANNELS = Object.freeze({
   mints: Object.freeze({ instrument: 'src/kernel/prng.js#createPRNG', direct: 4, rootSeedPrefixed: true }),
   // 2026-10-31, tension variety (GS-1, ODQ §934.101): 6 -> 15, the tie-prose draw's per-archetype offsets (measured).
   // 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16, FOOD-3 (food diversity) opens one more offset (measured).
-  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 15 /* MERGE-234: 18 (lane 1) / 16 (lane 4) -> 15, MEASURED by A6 at the 1+2+3+4 tip: the seam mint's `::tie` draw (the retired pair generator's tie prose) is retired, one tie writer */ }),
+  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 16 /* MERGE-234: 18 (lane 1) / 16 (lane 4) -> 15, MEASURED by A6 at the 1+2+3+4 tip: the seam mint's `::tie` draw (the retired pair generator's tie prose) is retired, one tie writer. The rung-2 side's 15 -> 32 (census-4 R3 596cb8b1b +9, R12 acd70a977 +8) composed at MERGE-CAR: 15 -> 16, MEASURED by A6 at the merged tree — R12's fitter retired with its hashes (SC-1), R3's tie rule (resolveTieKey) now hashing at the one tie writer, people/ties.js; PLAUSIBLE, not bisected */ }),
 });
 
 /**

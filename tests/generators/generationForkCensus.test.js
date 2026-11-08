@@ -219,7 +219,11 @@ const PICK_VARIANT_CALLS = 31;
 // (15 at this lane's base, never re-keyed by PEOPLE-1) moves to the same measured figure.
 // RE-KEYED by MERGE-234 (one tie writer, the chair's ruling): 16 -> 15, measured by A6 at the 1+2+3+4 tip — the
 // seam mint's tie no longer hashes its prose through the retired pair generator; drawTies writes it.
-const FNV_EXTERNAL_CALLS = 15;
+// RE-KEYED at MERGE-CAR (2026-11-07; the people car merged into the integration branch over the rung-2 landing's 32
+// above): 15 -> 16, MEASURED by this arm at the merged tree. R12's fitter (acd70a977) is retired with its hashes (the
+// chair's SC-1 ruling); R3's tie rule (596cb8b1b, resolveTieKey) is ported into the one tie writer (people/ties.js ::
+// drawTies), one tie per card. PLAUSIBLE attribution, not bisected. The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 16;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
