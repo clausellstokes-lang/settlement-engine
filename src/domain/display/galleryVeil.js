@@ -65,11 +65,11 @@
 import { galleryMemberKey, toPublicSafe } from './publicSafe.js';
 import { deriveDefenseVulnerabilities } from './defenseDisplay.js';
 import { entityIdFor, eventIdFor, slugifyEntity } from '../dossier/entityLinks.js';
-import { facetOf } from '../spatial/cohesionWeave.js';
 import { deepClone } from '../clone.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
+import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -347,32 +347,9 @@ export const GROUPING_REMOVERS = Object.freeze({
 
 // ── THE HOUSE CLASSES (the defaults read them; X-21e admits their cards) ──────────
 
-/** @param {Rec} inst @returns {boolean} */
-function isCriminalInstitution(inst) {
-  return str(inst.category).toLowerCase() === 'criminal' || str(inst.priorityCategory).toLowerCase() === 'criminal';
-}
-
-/**
- * The declared clandestine/hidden flags the data carries, read through the ONE facet
- * chokepoint (cohesionWeave.js facetOf): the catalog's `clandestine` kind, the custom
- * `institutionFunction: 'clandestine'` spelling, and the `subterranean` kind (the
- * catalog's underground network, catacomb sanctuary and black-market bazaar rows).
- * @param {Rec} inst @returns {boolean}
- */
-function isClandestineInstitution(inst) {
-  return facetOf(inst, 'clandestine') === 'clandestine'
-    || facetOf(inst, 'institutionFunction') === 'clandestine'
-    || facetOf(inst, 'subterranean') === 'subterranean';
-}
-
-/**
- * X-21e: the one class of card that may be hidden whole. Criminal by the classifier
- * category, clandestine by a declared facet, or an illegal brokerage by the catalog.
- * @param {Rec} inst @returns {boolean}
- */
-function isHideableHouse(inst) {
-  return isCriminalInstitution(inst) || isClandestineInstitution(inst) || brokerageLegalityOf(inst) === 'illegal';
-}
+// FIX-PUBLIC-VEIL (2026-11-07, the chair's ruling, shape (a): one source for the fact): the three house
+// predicates — isCriminalInstitution, isClandestineInstitution, isHideableHouse — moved byte for byte to
+// src/domain/people/cardVeil.js, the module every writer of a card's `institution` stamps its veil bit from.
 
 // ── ADDRESSES ─────────────────────────────────────────────────────────────────────
 

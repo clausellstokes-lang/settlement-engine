@@ -20,6 +20,7 @@ import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution 
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
 import { SEAT_CARD_ID, YIELDS_TO, seatHouseOf } from '../../../src/generators/people/representatives.js';
 import { seatMintTitleFor } from '../../../src/generators/people/mintTitles.js';
+import { isVeiledPower, veiledOfInstitution } from '../../../src/domain/people/cardVeil.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /**
@@ -69,6 +70,9 @@ function assertCast(s, label) {
     expect(card.id, `${label}: ids derive from the house, never an index`).toMatch(/^npc_[a-z][a-z0-9_]*$/);
     // today's record body, every field the surfaces read
     expect(card.role, `${label}: ${card.id} role is the title (M-1b)`).toBe(card.title);
+    // FIX-PUBLIC-VEIL: the veil bit is stamped at birth, a boolean, and equal to the one predicate read on the FINAL record
+    expect(typeof card.institution.veiled, `${label}: ${card.id} carries the veil bit`).toBe('boolean');
+    expect(card.institution.veiled, `${label}: ${card.id}'s bit is the predicate's on the record`).toBe(veiledOfInstitution(card.institution, s));
     for (const key of ['name', 'gender', 'role', 'category', 'personality', 'physical', 'plotHooks', 'influence', 'power', 'presentation']) {
       expect(card, `${label}: ${card.id} carries ${key}`).toHaveProperty(key);
     }
@@ -86,7 +90,9 @@ function assertCast(s, label) {
     if (seat) expect(mint, `${label}: no seat mint beside a seat house`).toBeUndefined();
     else {
       expect(mint.id).toBe(SEAT_CARD_ID);
-      expect(mint.institution).toEqual({ kind: 'power', key: governing, family: null, title: seatMintTitleFor(governing).title });
+      // FIX-PUBLIC-VEIL (re-keyed with the cause): the mint's institution carries its veil bit, the governing power's
+      expect(mint.institution).toEqual({ kind: 'power', key: governing, family: null, title: seatMintTitleFor(governing).title,
+        veiled: isVeiledPower(governingFactionOf(s)) });
     }
     if (seat?.kind === 'hall') expect(seated[0].title, `${label}: the hall's face is the seat, titled from the power`).toBe(seatMintTitleFor(governing).title);
   }

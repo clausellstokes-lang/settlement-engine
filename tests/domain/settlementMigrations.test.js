@@ -306,3 +306,31 @@ describe('M-7 — the v1 -> v2 step (PEOPLE-5B)', () => {
       .toEqual(['Planted Grouping-Only Faction']);
   });
 });
+
+describe('FIX-PUBLIC-VEIL — the v1 -> v2 step stamps the veil bits where it builds a house or a membership', () => {
+  const v1 = () => ({
+    schemaVersion: 1,
+    institutions: [{ name: 'Parish church', category: 'Religious' }, { name: 'Rookery', category: 'criminal' }],
+    powerStructure: { factions: [
+      { faction: 'The Parish', category: 'religious', power: 30 },
+      { faction: 'The Quiet Hand', category: 'other', power: 15, hidden: true },
+      { faction: 'The Night Market', category: 'criminal', power: 20 },
+    ] },
+    npcs: [
+      { id: 'n.priest', name: 'Robert Thomas', role: 'Priest', institution: 'Parish church', factionAffiliation: 'The Parish', secondaryAffiliation: 'The Quiet Hand' },
+      { id: 'n.boss', name: 'Corvin Vale', role: 'Boss', institution: 'Rookery', factionAffiliation: 'The Night Market' },
+    ],
+  });
+
+  it('a house linked from a legacy string carries the house\'s bit; each built membership carries its power\'s', () => {
+    const { settlement: out } = migrateV1toV2(v1());
+    const [priest, boss] = out.npcs;
+    expect(priest.institution).toEqual({ kind: 'house', key: 'Parish church', family: null, title: null, veiled: false });
+    expect(boss.institution).toEqual({ kind: 'house', key: 'Rookery', family: null, title: null, veiled: true });
+    expect(priest.memberships).toEqual([
+      { power: 'The Parish', rank: null, share: null, veiled: false },
+      { power: 'The Quiet Hand', rank: null, share: null, veiled: true },
+    ]);
+    expect(boss.memberships).toEqual([{ power: 'The Night Market', rank: null, share: null, veiled: true }]);
+  });
+});

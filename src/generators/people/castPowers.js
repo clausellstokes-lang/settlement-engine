@@ -50,6 +50,7 @@ import { isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { hookPoolFor } from './poolMap.js';
 import { drawCardHooks, HOOKS_FORK_LABEL, mintPowerFace, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
+import { isVeiledPower } from '../../domain/people/cardVeil.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 
 /** The keyed fork the late mints and the ranks draw under (declared in the fork census). */
@@ -100,6 +101,8 @@ export function assignCastPowers(settlement, cards, rng) {
   const powers = factions.map((f) => nameOf(f)).filter(Boolean);
   if (!powers.length || !Array.isArray(cards)) return cards;
   const powerSet = new Set(powers);
+  /** @type {Set<string>} the powers a membership may not name publicly (domain/people/cardVeil.js) */
+  const veiledPowers = new Set(factions.filter((f) => isVeiledPower(f)).map((f) => nameOf(f)));
   const governing = nameOf(governingFactionOf(settlement)) || null;
   const stream = rng && typeof rng.fork === 'function' ? rng.fork(POWERS_FORK_LABEL) : null;
   // ONE mint per label (the fork census counts every stream minted): the two families are forked
@@ -118,7 +121,9 @@ export function assignCastPowers(settlement, cards, rng) {
   /** @param {Record<string, any>} card @param {string} power @param {number} share @param {number | null} weight @param {boolean} largest @param {number} at */
   const join = (card, power, share, weight, largest, at) => {
     if (!powerSet.has(power)) return;
-    card.memberships.push({ power, rank: null, share: round4(share) });
+    // FIX-PUBLIC-VEIL (the chair's ruling: the same law per entry): each membership carries the veil bit
+    // of THAT power at birth — a membership in a hidden or criminal power is never published.
+    card.memberships.push({ power, rank: null, share: round4(share), veiled: veiledPowers.has(power) });
     members.get(power).push({ card, share, weight, largest, at });
   };
 
@@ -187,7 +192,8 @@ export function assignCastPowers(settlement, cards, rng) {
       card.id = id;
       card.title = row.title;
       card.role = row.title; // M-1b
-      card.institution = { kind: 'power', key: name, family: null, title: row.title };
+      // FIX-PUBLIC-VEIL: the veil bit at birth — a hidden power's mint (the stress infiltrator) or a criminal one's
+      card.institution = { kind: 'power', key: name, family: null, title: row.title, veiled: isVeiledPower(f) };
       card.memberships = [];
       // a name a card already bears takes the mint's TITLE as its qualifier — the MINT's name moves,
       // never an existing card's (the population step's ties store the names they were drawn with)

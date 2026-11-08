@@ -11,6 +11,7 @@
 import { validateNpcFacet } from '../domain/npc/npcFacetContract.js';
 import { recordCanonFlavorEntryImpl } from './settlementRenameHelpers.js';
 import { nameOf } from '../domain/rulingPower.js';
+import { stampMembershipsVeil, stampVeil } from '../domain/people/cardVeil.js';
 
 const TABLE_SOURCE = 'table';
 // The CLOSED set of engine events a table record may reach. Closedness is the
@@ -124,14 +125,19 @@ export function applyNpcOp(get, set, edit) {
           return;
         }
       }
-      const hasChange = Object.entries(target).some(
+      // FIX-PUBLIC-VEIL: the reassigned house and each membership carry their veil bits, stamped against this
+      // record (people/cardVeil.js).
+      const stamped = { ...target };
+      if ('institution' in target) stamped.institution = stampVeil(target.institution, state.settlement);
+      if ('memberships' in target) stamped.memberships = stampMembershipsVeil(target.memberships, state.settlement);
+      const hasChange = Object.entries(stamped).some(
         ([field, value]) => JSON.stringify(npc[field]) !== JSON.stringify(value),
       );
       if (!hasChange) {
         reason = 'no_effect';
         return;
       }
-      Object.assign(npc, target);
+      Object.assign(npc, stamped);
     } else if (kind === 'stasis-npc') {
       if (!STASIS_REASONS.has(payload.reason)) {
         reason = 'stasis_reason_invalid';

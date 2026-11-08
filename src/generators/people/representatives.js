@@ -52,6 +52,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { hookPoolFor, poolFor, seatPoolFor } from './poolMap.js';
 import { seatMintTitleFor } from './mintTitles.js';
+import { isHideableHouse, isVeiledPower } from '../../domain/people/cardVeil.js';
 
 /** The keyed fork every card is drawn under (declared in the fork census). */
 export const FACES_FORK_LABEL = 'people-faces';
@@ -99,7 +100,7 @@ export function mintPowerFace(row, ctx, options = {}) {
 }
 
 /** @typedef {{ name?: string, isCustom?: boolean, source?: string }} RosterRow */
-/** @typedef {{ kind: 'house' | 'power', key: string, family: string | null, title: string }} CardInstitution */
+/** @typedef {{ kind: 'house' | 'power', key: string, family: string | null, title: string, veiled: boolean }} CardInstitution */
 
 /**
  * The house that carries the SEAT on this roster, or null where none does (the mint's case):
@@ -303,11 +304,14 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
       // governing power.
       if (!isSeat) return;
       const { title } = seatMintTitleFor(governingName || '');
-      birth(cardIdFor(key, taken), seatPoolFor(tier), title, { kind: 'house', key, family: family?.key ?? null, title }, hookPoolFor(title, null, { seat: true }).pool);
+      birth(cardIdFor(key, taken), seatPoolFor(tier), title, { kind: 'house', key, family: family?.key ?? null, title, veiled: isHideableHouse(house) },
+        hookPoolFor(title, null, { seat: true }).pool);
       return;
     }
     const pool = isSeat ? seatPoolFor(tier) : poolFor(face, family?.shelf ?? null);
-    birth(cardIdFor(key, taken), pool, face, { kind: 'house', key, family: family?.key ?? null, title: face },
+    // FIX-PUBLIC-VEIL (the chair's ruling, shape (a)): the veil bit stamped at birth from the ONE predicate
+    // (domain/people/cardVeil.js): a hideable house's face is never named on a public card.
+    birth(cardIdFor(key, taken), pool, face, { kind: 'house', key, family: family?.key ?? null, title: face, veiled: isHideableHouse(house) },
       hookPoolFor(face, family?.shelf ?? null, { seat: isSeat }).pool);
   });
 
@@ -315,7 +319,8 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   if (!seat && governingName) {
     const { title } = seatMintTitleFor(governingName);
     taken.add(SEAT_CARD_ID);
-    birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title }, hookPoolFor(title, null, { seat: true }).pool);
+    birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title, veiled: isVeiledPower(governing) },
+      hookPoolFor(title, null, { seat: true }).pool);
   }
 
   // R-P4: the `other` powers' faces are minted at the coherence seam (castPowers.js), where the
