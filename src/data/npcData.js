@@ -1436,17 +1436,25 @@ const pairProse = (salt, variants) => Object.assign((r, s, variant, force) => cl
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
 const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
+/**
+ * W5 HIS (the owner's style law, 2026-11-08): the tie is DIRECTED (people/ties.js :: drawTies), so `r` is
+ * the `from` card and `s` the `to` card whatever their categories. A line that gives each end its part
+ * (the merchant's books, the crew's money, the pulpit, the soldiers) reads the two cards' categories and
+ * takes the kind's own order; it swaps only when BOTH cards say so, and a card without a category (the
+ * ledger's stand-ins) keeps the drawn order.
+ */
+const endsOf = (r, s, first, second) => (r?.category === second && s?.category === first ? [s, r] : [r, s]);
 
 export const STRESS_ECONOMIC_EFFECTS = {
   econ_crim_blur: {
     label: 'Commercial Complicity',
     desc: pairProse('d', [
-      { line: (r, s) =>
-        `${r.name} and ${s.name} maintain a relationship that exists in legal grey territory. ${r.name} provides legitimate cover, ${s.name} ensures market access that official channels wouldn't permit.`, colour: true },
-      { line: (r, s) =>
-        `The books of ${r.name} are clean because ${s.name} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.`, colour: true },
-      { line: (r, s) =>
-        `What ${r.name} sells is respectability, and ${s.name} is a steady customer. Goods move through channels no inspector has thought to draw on a map.`, colour: true },
+      { line: (r, s) => { const [m, c] = endsOf(r, s, 'economy', 'criminal');
+        return `${m.name} lends ${c.name}'s business an honest name, and ${c.name} gets ${m.name}'s goods into markets the law keeps closed.`; }, colour: true },
+      { line: (r, s) => { const [m, c] = endsOf(r, s, 'economy', 'criminal');
+        return `${m.name}'s account books look clean because ${c.name} keeps certain sales out of them. Both of them grow richer for it.`; }, colour: true },
+      { line: (r, s) => { const [m, c] = endsOf(r, s, 'economy', 'criminal');
+        return `${c.name} pays ${m.name} for a respectable name, and ${c.name}'s goods travel under it, past inspectors who never look inside.`; }, colour: true },
       (r, s) =>
         `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`,
       { line: (r, s) =>
@@ -1481,8 +1489,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name}'s operation charges ${r.name} a "security fee" that is, in practice, a protection racket. ${r.name} pays without complaint because the alternative is worse.`, colour: true },
       { line: (r, s) =>
         `Every month ${r.name} pays ${s.name} for protection against dangers that would, on inspection, trace back to ${s.name}. Both sides account for it as a cost of doing business.`, colour: true },
-      { line: (r, s) =>
-        `The "security fee" ${s.name} collects from ${r.name} buys exactly one thing: the absence of ${s.name}. It is paid punctually.`, colour: true },
+      { line: (r, s) => { const [m, c] = endsOf(r, s, 'economy', 'criminal');
+        return `${c.name} collects a "security fee" from ${m.name}, and what it buys is that ${c.name}'s people stay away. ${m.name} pays on the day it falls due.`; }, colour: true },
       { line: (r, s) =>
         `${r.name} pays ${s.name} a tenth of every sale. The one season ${r.name} paid late, a storehouse burned.`, colour: true },
       { line: (r, s) =>
@@ -1517,8 +1525,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} receives regular payments from ${s.name}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.`, colour: true },
       { line: (r, s) =>
         `${s.name}'s operation runs on a schedule ${r.name} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.`, colour: true },
-      { line: (r, s) =>
-        `${r.name}'s clearance record looks respectable because ${s.name} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.`, colour: true },
+      { line: (r, s) => { const [k, c] = endsOf(r, s, 'military', 'criminal');
+        return `${k.name}'s arrest record looks good because ${c.name} chooses which crimes get solved, and ${c.name}'s silver pays for the favour.`; }, colour: true },
       { line: (r, s) =>
         `${r.name} takes ${s.name}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.`, colour: true },
       { line: (r, s) =>
@@ -1584,8 +1592,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
   econ_mil_contract: {
     label: 'Security Contract',
     desc: pairProse('d', [
-      (r, s) =>
-        `${s.name}'s company is retained by ${r.name}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.`,
+      (r, s) => { const [m, k] = endsOf(r, s, 'economy', 'military');
+        return `${m.name} pays ${k.name}'s fighters to guard ${m.name}'s goods and nobody else's. It has gone on so long that no one in authority asks about it any more.`; },
       { line: (r, s) =>
         `${r.name} pays ${s.name}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.`, colour: true },
       { line: (r, s) =>
@@ -1620,12 +1628,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
   rel_mil_crusader: {
     label: 'Sacred Commission',
     desc: pairProse('d', [
-      { line: (r, s) =>
-        `${r.name} and ${s.name} operate as a unified authority: temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`, colour: true },
-      { line: (r, s, f) =>
-        `Between ${r.name}'s pulpit and ${s.name}'s ${f.body}, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`, colour: true },
-      { line: (r, s) =>
-        `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`, colour: true },
+      { line: (r, s) => { const [p, k] = endsOf(r, s, 'religious', 'military');
+        return `${p.name} preaches and ${k.name} enforces, so whoever crosses one of them answers to both.`; }, colour: true },
+      { line: (r, s, f) => { const [p, k] = endsOf(r, s, 'religious', 'military');
+        return `What ${p.name} preaches from the pulpit on the holy day, ${k.name}'s ${f.body} enforces in the street that week.`; }, colour: true },
+      { line: (r, s, f) => { const [p, k] = endsOf(r, s, 'religious', 'military');
+        return `${p.name} blesses whatever ${k.name}'s ${f.body} enforces, and nobody dares ask which of the two has the final word.`; }, colour: true },
       { line: (r, s, f) =>
         `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`, needs: ["institution: temple"] },
       { line: (r, s, f) =>
@@ -1656,12 +1664,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
   rel_crim_fraud: {
     label: 'Institutional Cover',
     desc: pairProse('d', [
-      { line: (r, s) =>
-        `${r.name}'s religious position provides ${s.name}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.`, colour: true },
-      { line: (r, s) =>
-        `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`, colour: true },
-      { line: (r, s) =>
-        `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.`, colour: true },
+      { line: (r, s) => { const [p, c] = endsOf(r, s, 'religious', 'criminal');
+        return `${p.name}'s good name gives ${c.name}'s crew a respectable face, a room to meet in, and a reason for money nobody could otherwise explain.`; }, colour: true },
+      { line: (r, s) => { const [p, c] = endsOf(r, s, 'religious', 'criminal');
+        return `${c.name}'s money goes into ${p.name}'s alms box and comes out clean, and nobody checks ${p.name}'s accounts.`; }, colour: true },
+      { line: (r, s) => { const [p, c] = endsOf(r, s, 'religious', 'criminal');
+        return `${p.name} lends the holiness and ${c.name} brings the money, and the faithful, knowing nothing, provide the cover.`; }, colour: true },
       { line: (r, s) =>
         `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`, needs: ["institution: temple"] },
       { line: (r, s) =>
@@ -1692,8 +1700,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
   mag_crim_market: {
     label: 'Arcane Supplier',
     desc: pairProse('d', [
-      { line: (r, s) =>
-        `${r.name} provides ${s.name}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.`, colour: true },
+      { line: (r, s) => { const [g, c] = endsOf(r, s, 'magic', 'criminal');
+        return `${g.name} supplies ${c.name}'s people with reagents, false papers and the odd forgery only a trained hand could make.`; }, colour: true },
       { line: (r, s) =>
         `When ${s.name}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through ${r.name} and is never signed.`, colour: true },
       { line: (r, s) =>
@@ -1728,10 +1736,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
   gov_econ_dependence: {
     label: 'Financial Dependence',
     desc: pairProse('d', [
-      { line: (r, s) =>
-        `The settlement's civic functions run on credit extended by ${s.name}. ${r.name} cannot take any action that seriously threatens ${s.name}'s interests, and ${s.name} does not let this be forgotten.`, colour: true },
-      { line: (r, s) =>
-        `${s.name} holds the settlement's debts and therefore, in every way that matters, its agenda; ${r.name} governs within the margin ${s.name} allows.`, colour: true },
+      { line: (r, s) => { const [g, m] = endsOf(r, s, 'government', 'economy');
+        return `${g.name} pays for the common works with money borrowed from ${m.name}. ${g.name} cannot cross ${m.name}, and ${m.name} makes sure ${g.name} remembers it.`; }, colour: true },
+      { line: (r, s) => { const [g, m] = endsOf(r, s, 'government', 'economy');
+        return `${m.name} holds the debts ${g.name} has run up, and so ${m.name} decides what ${g.name} can afford to do.`; }, colour: true },
       { line: (r, s) =>
         `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`, colour: true },
       { line: (r, s) =>
@@ -1764,12 +1772,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
   gov_mil_friction: {
     label: 'Jurisdictional Tension',
     desc: pairProse('d', [
-      { line: (r, s) =>
-        `${r.name} and ${s.name} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.`, colour: true },
-      { line: (r, s) =>
-        `${r.name} issues orders ${s.name} regards as suggestions, and ${s.name} takes actions ${r.name} regards as insubordination; the settlement runs in the gap between.`, colour: true },
-      { line: (r, s) =>
-        `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times and honoured never. Each keeps the map that favours them.`, colour: true },
+      { line: (r, s) => { const [g, k] = endsOf(r, s, 'government', 'military');
+        return `${g.name} and ${k.name} have argued for years over where ${g.name}'s authority ends and ${k.name}'s begins, and neither has given ground.`; }, colour: true },
+      { line: (r, s) => { const [g, k] = endsOf(r, s, 'government', 'military');
+        return `${g.name} gives orders that ${k.name} treats as advice, and ${k.name} acts in ways ${g.name} calls disobedience.`; }, colour: true },
+      { line: (r, s) => { const [g, k] = endsOf(r, s, 'government', 'military');
+        return `The line between ${g.name}'s authority and ${k.name}'s has been redrawn four times, and each of them still follows whichever version suits them.`; }, colour: true },
       { line: (r, s, f) =>
         `${r.name} controls the ${f.body}'s pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`, colour: true },
       { line: (r, s) =>
