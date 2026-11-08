@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 149,
+      "dated": 150,
       "sha-pin": 2,
       "tree": 109
     },
@@ -320,6 +320,7 @@
     "_rosterGrowth2026-11-07-chair-veil-brief": "ONE document JOINED the roster by being BORN into it (the chair, on the integration branch, on FIX-EXPORT-KEYS's finding that a hidden power's minted face prints its title on a public card): `dated` 136 -> 137, docs/chair/2026-11-07/BRIEF-FIX-PUBLIC-VEIL-2026-11-07.md, born dated, 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-08-merge-car": "MERGE-CAR (the people car merged into the integration branch, 8dff691f3): the roster is the UNION of both sides', measured once by this walker: `dated` 93 (the base 262e8b255) + 44 (the integration side's documents born dated after the base) + 11 (the car's) = 148; `tree` 95 + 5 (the rung-2 landing's five signed records) + 9 (the car's nine) = 109; `banner` 9 and `sha-pin` 1 unmoved. No document changed class; each entered its class when it was born on its own side. pastEofCitationsExcluded is UNCHANGED at 377.",
     "_rosterGrowth2026-11-08-allegiance-design": "ONE document JOINED the roster by being BORN into it (ALLEGIANCE-DESIGN, the allegiance train's design seat, a child of the cloud chair under the owner's delegation of 2026-11-06, on lane/allegiance-design-2026-11-08 cut from the integration tip 8308f13f8, measured once with this walker's own arm): `dated` 148 -> 149, docs/allegiance/ALLEGIANCE_DESIGN_2026-11-08.md, the design record, born dated (its citations are `path :: symbol` at 8308f13f8), 0 past-EOF; nothing changed class.",
+    "_rosterGrowth2026-11-08-allegiance-rulings": "ONE document JOINED the roster by being BORN into it (the chair, on the allegiance design branch): `dated` 149 -> 150, docs/allegiance/ALLEGIANCE_RULINGS_2026-11-08.md, born dated, 0 past-EOF; nothing changed class.",
     "_rosterMove2026-11-08-merge-car": "ONE document changed class, by the chair's ruling of 2026-11-08 (MERGE-CAR, option (a)): docs/chair/2026-11-07/people-5-prep/walker-draft-at-base.txt joined `sha-pin` (1 -> 2) with the header `**Snapshot base:** 1031233a4`. CAUSE: the people car shortened narrativeGenerator.js (1,035 -> 1,016 lines) and factionDedup.js (217 -> 122) under a listing frozen at 1031233a4; the listing changed class from live to snapshot, pastEofCitationsExcluded 377 -> 382; no row re-addressed."
   },
   "rows": []
