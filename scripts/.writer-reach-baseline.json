@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "3ebfbfa68f5e5b3361b47b320fed38517dc62d6f",
+ "frozenAtSha": "c895540cf44c949d9c4b6842d989f11a4503972e",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 21984
  },
  "shapesDigest": "3d5f894219f7b28cb1c469a523a4931e9bc54da28a6852eaca106ccfa85735ba",
- "detectorDigest": "6de1fcb17cc758e4e0ddb8d549ea9a65bd69d25c05668ca68b37bc193bd19c1e",
- "verdictDigest": "ecbfd8875cad59ead659304500c544bf9758080fbc66e92385c16be9ccd596e7",
+ "detectorDigest": "78232c0e77e20d3979f6a62c7f68cbc5659ff7401315a02d8d915efe4715d058",
+ "verdictDigest": "9ae012681b66a4d3d808f0fcb46a2fa741111eb26dca3e398f9cff27ca2e75b1",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 11997,
-  "lit": 597,
+  "lit": 598,
   "litName": 9966,
-  "dark": 1434,
+  "dark": 1433,
   "thinKeys": 17280,
   "thinShapes": 1203,
   "knownShapes": 517
  },
  "scanStats": {
   "files": 1747,
-  "sites": 41115,
-  "propRead": 38934,
+  "sites": 41131,
+  "propRead": 38949,
   "elemRead": 0,
-  "destructure": 2165,
+  "destructure": 2166,
   "inOp": 16,
-  "rGrades": 6342,
-  "nGrades": 1618639,
-  "resolvedReceivers": 7223
+  "rGrades": 6349,
+  "nGrades": 1618873,
+  "resolvedReceivers": 7230
  },
- "registerDigest": "511672c01b1b5660c194a2a586e43e5be1455ab7f6cf1c888113258e54a0dc6e",
+ "registerDigest": "14bf65573000212178ddda65ecf4aa6364c2317e67cc9a84835add497130a84c",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 447,
+ "reviewableDarkCount": 446,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -10018,7 +10018,7 @@
   "warEconomy on metadata": "",
   "warRulingRead on metadata": "web-transitive=R",
   "criticalIssueCount on metrics": "dossier-pdf=R web-display=R",
-  "dependencyCount on metrics": "",
+  "dependencyCount on metrics": "dossier-pdf=R foundry=R web-display=R",
   "foodBalance on metrics": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "tradeAccess on metrics": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "warningCount on metrics": "",
