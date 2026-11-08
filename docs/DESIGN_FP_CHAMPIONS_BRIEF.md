@@ -18,9 +18,13 @@
 8. "Also, we should be able to author and emergently organically as with closing the gates ban champions from certain regions, kingdoms or settlements"
 9. "What else should we add to deepen the emergency behavior, cohesive, and coherent and agent self of the champions and villains in accordance with our systems?"
 
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH"; census §7, §9) — the owner's words stand verbatim. Message 1's "unlike NPCs that are effectively institution based" is AFFIRMED by the people car: every named NPC is now an institution's representative (one face per face-bearing house, PEOPLE-RULINGS §0), with a title, memberships in the powers its house backs, and at most a hidden allegiance; a champion is the more agentic person beside them. Message 2's "meeting with handlers" is the owner's prose; the role it names is the LIAISON (§2's bracket). Message 6's "no on a successor" and the death rule are now one law with the owner's ruling of 2026-11-08 (census §9): no named person dies by the simulation's hand.]
+
 ---
 
 ## §2 THE SHAPE AS DISCUSSED (the chair's proposals the owner responded to; none is ruled yet)
+
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH"; census §7, §8 decision 4, §9) — the shape presumed the pre-car person ("a person the estate already models" in factions), a "handler" from the home court, and death as a recommendation → (1) THE PERSON a champion marks is a card: institution and title, `memberships[{power, rank, share}]`, the hidden `allegiance`, `goal.intent`; a champion with NO MEMBERSHIP is UNAFFILIATED (`src/domain/people/membership.js :: structuralStandingOf` → `unaffiliated`) — the brief's reading of the CH volume's "residents with no faction" (that passage lives in `DESIGN_FP_ARCH_CH.md`, outside this seat's files). (2) THE LIAISON: the home court's officer a bound operative meets at the edge is the LIAISON; "handler" in this brief's prose meant that liaison and is swapped below. The word "handler" now belongs to the ALLEGIANCE (the criminal face a hidden agent answers to, `allegiance.handler`, the allegiance design §1.5), so the two are never one word (the fold's §5 registers the homonym). (3) DEATH: "Death is never the engine's" is now the owner's law for every named person, not a recommendation (census §9): the engine wounds, captures, exiles, demotes, ruins, disgraces; death is the DM's decree alone.]
 
 **Entry.** Champions and villains enter ONLY through custom content, authored by the DM like deities. The engine never creates one.
 
@@ -45,23 +49,23 @@
 
 **The mind.** A calling (archetype); the full standard NPC traits and goals with one bolstered trait; moods that build and fade (fatigue, restlessness, weariness of a region — "tired of the north", homesickness, fear after capture, grief, pride and shame); memory of places and people (who paid, who betrayed, a nemesis); beliefs (it acts on what it has heard, Law One); HABITS (owner, message 3) learned with the habit program's own curve at person grain inside this program (consistent with OD-FC-42: court habits stay court-level), shaping whether it acts, where it goes and whom it serves — and readable ("has made a habit of wintering in Tolle").
 
-**The weekly choice.** Stay and work · go to a known place · take or leave work · meet a handler · rest · go home · chase a nemesis. A seeded draw (exact replay); a commitment held until something clearly better appears ("until a better deal or reason comes along"); every choice keeps its top reasons for the dossier. Drift (the owner's "mutations"): traits shift slowly with experience.
+**The weekly choice.** Stay and work · go to a known place · take or leave work · meet a liaison · rest · go home · chase a nemesis. A seeded draw (exact replay); a commitment held until something clearly better appears ("until a better deal or reason comes along"); every choice keeps its top reasons for the dossier. Drift (the owner's "mutations"): traits shift slowly with experience.
 
 **Bound and free (owner: distinct but related).** BOUND = an office, so always employed: moves on its own initiative inside its employer's lands (a town, or a whole kingdom); outside only on the court's errand or with an army or column the court sends; leaving on its own is resigning (it becomes free; priced; heard). FREE = goes where its goals lead; may take temporary contracts that last while goals and pay align; breaking one costs trust with future employers.
 
 **Employment both ways.** Free characters seek work where they are needed and values or pay fit; courts seek characters they have HEARD of, sending a recruiter to where they believe the character is (who may have gone). Offers are hearings; two courts may bid.
 
-**The line home (owner's handlers).** A bound operative abroad (spymaster, deceiver, provocateur, agitator) meets a handler from its home court at a rendezvous on the edge of home territory: orders and the true state of home in, its findings out, both pictures refreshed; the meeting can be caught by the target's counter-intelligence. Envoys keep the line by dispatches, saints by their mother house.
+**The line home (owner's handlers; the LIAISON).** A bound operative abroad (spymaster, deceiver, provocateur, agitator) meets a liaison from its home court at a rendezvous on the edge of home territory: orders and the true state of home in, its findings out, both pictures refreshed; the meeting can be caught by the target's counter-intelligence. Envoys keep the line by dispatches, saints by their mother house.
 
 **Targeting.** The saint's ripeness is the faith contest's own conversion odds as the saint believes them (hardship, low prosperity, a weak seated patron, a foothold of believers help; a far creed, a large population, persecution risk slow or endanger it; the patron's recorded axes set priorities — the followers act, the god does not). The doctor goes where plague is worst and no doctor is. The saint in a migrant column changes the column's faith (needs wayfare's faith cargo).
 
 **Contests.** A champion and villain of one domain in one town contest it (a hearing); repeated contests make a nemesis arc.
 
 **The owner's rulings (message 6).**
-- **Death is never the engine's.** A champion may fail, lose renown and be captured; dying is the DM's alone.
+- **Death is never the engine's.** A champion may fail, lose renown and be captured; dying is the DM's alone. [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH"; census §9) — the champion-scoped rule → the owner's law for EVERY named person (champion, villain, representative, general): the simulation may wound, capture, exile, demote, ruin or disgrace, never kill; death enters only by the DM's decree.]
 - **The number is the DM's.** No engine cap; the DM authors as many as the story wants.
 - **No successor.** A champion leaves no heir, apprentice or name-bearer: that is the fate area.
-- **Courts may hire villains, clandestinely.** The hire is a SECRET of the employing court. It can leak through the information and espionage systems: rumor; an enemy spy's `confirm` product (one of ES's three landed products, `acquire · confirm · refute`); a handler's meeting caught at the territory's edge; the villain itself, captured, giving up its employer by its own nature (loyal or greedy). Exposure is a SCANDAL: the employer's standing falls at home and with every court that comes to believe it, and the court the villain worked against gains a grievance. The confirmation is belief-decided, so a court can be accused by rumor before it is confirmed, and a deceiver can fake the trail.
+- **Courts may hire villains, clandestinely.** The hire is a SECRET of the employing court. It can leak through the information and espionage systems: rumor; an enemy spy's `confirm` product (one of ES's three landed products, `acquire · confirm · refute`); a liaison's meeting caught at the territory's edge; the villain itself, captured, giving up its employer by its own nature (loyal or greedy). Exposure is a SCANDAL: the employer's standing falls at home and with every court that comes to believe it, and the court the villain worked against gains a grievance. The confirmation is belief-decided, so a court can be accused by rumor before it is confirmed, and a deceiver can fake the trail.
 
 **Relations (owner, message 7) — the chair's reading, to design.** Champions (and deities, through their followers) hold RELATIONS with kingdoms, settlements, NPCs, other champions and villains, and deities. (a) AUTHORED at formation in custom content (the baseline: "sworn enemy of Merewick's crown", "devoted to the Lantern", "old comrade of Captain Vey") and EMERGENT afterwards from deeds (served together, betrayed, refused at a gate, paid well, slandered, saved a town). (b) One regard idiom for every person relation: a banded regard (hatred · enmity · wary · neutral · warm · loyal · devoted) with a short memory of reasons, held as the spine's banded stock with a half-life (SP-A's idiom, no new decay law): emergent regard decays toward neutral, authored regard decays toward its authored baseline, repeated contact reinforces — "dynamic over a set amount of time". (c) Two-sided: the champion's regard of X, and X's regard of the champion (a court's regard is belief-side, from the deeds it has heard of — the per-court regard proposed earlier). (d) PROXIMITY: when a champion is in or near anything it is related to, the relation enters its weekly choice as a term, and its PERSONALITY sets the response's direction and strength (the owner's "foiled by their personalities"): enmity makes a brave captain confront, a cautious one take the long road, a vengeful one seek it out; love of a town makes a charitable saint linger and a restless one move on regretfully. A bounded lean, never a compulsion; the DM may author or override any relation (Edit Mode). (e) DEITIES stay under the deity doctrine — THE FOLLOWERS ACT, THE GOD DOES NOT: authored pantheon relations (rival, allied, disfavoured) shape the believers, the champions of those gods, the faith contest's conversion odds and the courts whose patrons they are; the emergent layer is the CREEDS' relation, written by their followers' history ("the faithful of the Lantern and the Ash have hated each other since the burning of Tolle"), never a change in a god's mind and never a silent edit of the DM's authored pantheon. (f) Sparse by construction: no relation without an authored seed or an event; decay prunes; a cap on tracked emergent relations per champion. (g) Legible: the dossier lists each champion's relations with their reasons, and proximity choices carry them ("passing near Merewick, she took the long road around"). Research: how pantheon relations are represented today; the person-memory shape the generals design uses; `bandedStock.js`.
 
@@ -85,6 +89,8 @@
 ---
 
 ## §4 THE NEXT SESSION'S RESEARCH (before any design is compiled)
+
+[RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH"; census §8 ledger) — item 1 presumed today's NPC trait-and-goal system lives in `npcAgency.js`, `npcLadderGoals.js` and the 23-key goal catalogue → the agency is rebuilt on memberships, allegiances and car 4's KEYED INTENTS (`goal.intent.key`, the allegiance design §6.3); `npcAgency.js` is an FPZ file and the rung-role ladder seed (`npcLadderGoals.mintGoal({ faction, rungIndex })`) and the role-keyed goal pools retire. The research reads the new card and its families, not the retired pools.]
 
 1. The standard NPC trait and goal system in code (`npcGenerator`, `npcAgency.js`, `npcLadderGoals.js`, `npcGrowthKernel.js`, W-LIVES) — what "the full personality traits and goals system" is today.
 2. The deity custom-content pipeline as the template for a new authored entity type (the custom content promotion contract).
@@ -110,7 +116,7 @@
 **Social life.**
 6. **Debts and favours.** A court that ransomed a champion is owed; favours are called in (WC's cost-memory idiom). Obligations make choices non-trivial.
 7. **Fellowships and rivalries.** Characters travel together after shared deeds (a warden and a doctor), and rivals duel; both through the relations' one regard idiom.
-8. **Entanglement in court factions.** Factions inside a court court a famous champion and the champion backs one (faction competition is lit); a captain can become a coup's muscle only through the existing intervention terms (the coup budget is full).
+8. **Entanglement in court factions.** [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH"; census §7) — "factions inside a court" presumed the retired grouping → the POWERS of the court court a famous champion through their ranked faces, and "the champion backs one" is read as the champion's REGARD toward a power (the one regard idiom, RN's) — never a membership the engine writes (a champion holds a membership only where the DM authors one; with none it is unaffiliated). The coup-muscle rule stands.] Factions inside a court court a famous champion and the champion backs one (faction competition is lit); a captain can become a coup's muscle only through the existing intervention terms (the coup budget is full).
 
 **Knowledge.**
 9. **Their own picture of the world.** They hear and spread rumours, carry news into the towns they enter (wayfare's carried word), and can be DECEIVED: a deceiver can lure a hero away with a false report.
@@ -124,7 +130,7 @@
 
 **Villains.**
 15. **Schemes as staged plans.** Infiltrate, corrupt, strike — each stage an errand the spy system can detect; foiling a stage is a champion's deed.
-16. **Networks.** Villains turn ordinary NPCs into agents through the existing corruption web; a network can be rolled up thread by thread.
+16. **Networks.** Villains turn ordinary NPCs into agents through the existing corruption web; a network can be rolled up thread by thread. [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH"; census §8 decision 4) — "the existing corruption web" turning ordinary NPCs presumed the local corruption mark (`corrupt`, `corruptTies`, retired by the allegiance train's car 1) → A VILLAIN'S NETWORK = ALLEGIANCES PLUS HANDLER TIES: inside a town the agents are cards carrying a hidden `allegiance` (read only through `allegianceOf`), each tied by its one outgoing tie to a HANDLER (a criminal face; the covert `handler_*` tie kinds, the allegiance design §1.5), and a villain's network is the set of allegiances and handler ties it holds or has turned; ABROAD, a turned person is ES's FOREIGN axis (the web's foreign leash, written at tick). Rolling up a network is exposure, thread by thread (a revealed allegiance, a handler named) — never a death.]
 
 **Legibility.**
 17. **Named arcs.** Sustained patterns become named arcs in the Herald and dossier (a feud, a pilgrimage, a fall, a redemption).
@@ -132,10 +138,28 @@
 
 **The owner's doctrine (2026-10-17) governs every proposal above:** "Remember that we are building something that is mostly going to be behind the scenes in regard to the simulator. The DM wants emergent experience that only when scrutinized upon shows coherence. Not the other way around we’re not trying to show the full machinery." Characters' reasons are told as story on the surface ("she turned south"), their mechanics only on scrutiny. REFINED the same day: "Caravan should be shown on the map and condition words yes. But as toggles on the Caravan piece. What I’m trying to say is is that things that can build immersion should be shown. Things that are just very complex should not be unless viewed upon intentionally." — what builds immersion is shown behind toggles; what is merely complex only when looked at on purpose.
 
-**Guardrails for all of the above:** closed vocabularies; bounded leans; belief, never truth; receipts on every choice; no fate; existing writers only (relations, banded stocks, the habit curve, rumour, errands, the corruption web, the treasury, stressors, faction competition, the hearing registry).
+**Guardrails for all of the above:** closed vocabularies; bounded leans; belief, never truth; receipts on every choice; no fate; existing writers only (relations, banded stocks, the habit curve, rumour, errands, the corruption web, the treasury, stressors, faction competition, the hearing registry). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-LARGE; the census §2 row "CH") — "the corruption web" and "faction competition" in this list read as: the ALLEGIANCE's writer for the local hand and ES's web for the foreign axis; the powers' competition (`factionCompetition`, a LANDED name).]
 
 **Renown for every NPC (owner, 2026-10-17):** champions' renown is one instance of the ONE fame-and-regard model for every person — see `DESIGN_FP_PARTY_BRIEF.md` §5.
 
 **Meeting the party (owner, 2026-10-17):** champions and villains may seek out the party, with a purpose (employment, history, relationship or regard) or from curiosity alone, "Just for meeting"; designed with the owner's words in `DESIGN_FP_PARTY_BRIEF.md` §6, which also records the owner's delegation ("I leave all judgment to you") for this brief's design calls.
 
 **Inherent value (owner, 2026-10-17):** every champion's and villain's act carries the inherent value of `DESIGN_FP_PARTY_BRIEF.md` §8 (derived from what the act does and to whom), read by every actor through its alignment and personality; one model with the party's.
+
+---
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-LARGE (Opus 5.5), under `docs/chair/2026-11-08/BRIEF-FP-REBASE-2026-11-08.md` and the census `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md` (§2 row "CH"; §7, §8, §9). A brief stays a brief: nothing is ruled here that the owner's words did not rule. The owner's quoted words are untouched.
+
+| § | bracket | old presumption → what stands | census row answered |
+|---|---|---|---|
+| §1 | affirmation | — → "effectively institution based" affirmed (one face per house); "handlers" read as the liaison; the death law | CH row ("effectively institution based") |
+| §2 | head bracket + three word swaps | a person in factions; "handler" from home; death as a recommendation → a card (no membership = unaffiliated); "liaison" (meet a liaison · meets a liaison · a liaison's meeting); the owner's death law | CH row ("no faction" → no membership; "handler" → "liaison") |
+| §2 owner's rulings | death | champion-scoped → every named person | §9 ruling 2 |
+| §4 | research targets | `npcAgency`, `npcLadderGoals`, the 23 keys → memberships, allegiances, keyed intents | §8 decision 2, ledger |
+| §5 item 8 | powers | factions inside a court → the court's powers through their ranked faces; backing as regard | §7 |
+| §5 item 16 | the network | the corruption web turning NPCs → allegiances plus handler ties; abroad, ES's foreign axis | CH row (capability 16); §8 decision 4 |
+| §5 guardrails | writers | the corruption web, faction competition → the allegiance, ES's web, the powers' competition | §8 decision 4 |
+
+**Not this seat's, named for the verifier:** the CH volume's own literals — `DESIGN_FP_ARCH_CH.md`'s unaffiliates row ("lists residents with no faction") and its "'handler' is the prose word" registry row — are in a file no FP-REBASE seat owns. This brief states the answer (no membership = unaffiliated; the liaison), and the CH volume still owes its own bracket.
