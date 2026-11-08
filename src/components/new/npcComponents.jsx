@@ -260,7 +260,7 @@ export function NPCInlineCard({
   // PEOPLE-6 LINKS step 2 (the owner's word): a face's heading is its full name alone, and its
   // role is the honorific of its institution's title, on its own row under the door. The card's
   // `role`/`title` (the title itself, M-1b) is not printed beside it; a DM's person keeps both.
-  const honorific = cardHonorificOf(npc);
+  const honorific = cardHonorificOf(npc, settlement); // MERGE-CAR: the place's coast picks the pool (A-11)
   const nativeRole = cardDoor ? '' : NPC_ROLE_ARCHETYPES.includes(npc.role)
     ? humanizeNpcFacet(npc.role)
     : (npc.role || '');

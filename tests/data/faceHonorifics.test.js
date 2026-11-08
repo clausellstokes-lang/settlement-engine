@@ -6,7 +6,8 @@
  * registry names no title that no face can carry. The owner's and the chair's named forms are pinned.
  */
 import { describe, it, expect } from 'vitest';
-import { FACE_HONORIFICS, honorificOfTitle } from '../../src/data/faceHonorifics.js';
+import { FACE_HONORIFICS, FACE_HONORIFICS_INLAND, honorificOfTitle } from '../../src/data/faceHonorifics.js';
+import { cardHonorificOf } from '../../src/domain/people/cardDoor.js';
 import { faceRows } from '../../src/data/institutionalCatalog.js';
 import { SEAT_MINT_TITLES, OTHER_MINT_ROWS, headOf } from '../../src/generators/people/mintTitles.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -76,5 +77,34 @@ describe('the honorific registry', () => {
     expect(honorificOfTitle('the ferry-warden')).toBe('Ferry-warden');
     expect(honorificOfTitle('')).toBe('');
     expectAbsentWithAnchor(Object.keys(FACE_HONORIFICS), 'the ferry-warden', 'the ferryman', 'an unregistered title');
+  });
+});
+
+// MERGE-CAR (the chair's ruling on the soak's A-11 mover at the people car's tip: "Master of the Harbour" printed for the
+// harbour master's face on LANDLOCKED metropolises): the pick is guarded by the settlement's coast, display-only.
+describe("the harbour master's pool is the one its coast admits (A-11)", () => {
+  const harbourCard = { id: 'npc_h', name: 'Ada Reed', institution: { kind: 'house', key: "Harbour master's office", name: "Harbour master's office", title: 'the harbour master' } };
+  const place = (terrainType, tradeRouteAccess) => ({ config: { terrainType, tradeRouteAccess }, institutions: [] });
+  const seeds = Array.from({ length: 40 }, (_, i) => `seed-${i}`);
+  it('a settlement with NO coast (inland, or a river port) reads Dockmaster or Wharfinger, never a harbour form', () => {
+    expect(FACE_HONORIFICS_INLAND['the harbour master']).toEqual(['Dockmaster', 'Wharfinger']);
+    const inland = new Set(seeds.map((seed) => honorificOfTitle('the harbour master', null, seed, { coastal: false })));
+    expect([...inland].sort()).toEqual(['Dockmaster', 'Wharfinger']);
+    // the card resolver reads the coast from the record: a river port is not a coast
+    for (const s of [place('plains', 'river'), place('mountains', 'road')]) {
+      const h = cardHonorificOf(harbourCard, s);
+      expect(['Dockmaster', 'Wharfinger'], JSON.stringify(s.config)).toContain(h);
+    }
+    // anchored: the harbour forms exist in the registry, and the inland pick names neither
+    expectAbsentWithAnchor([...inland], 'Master of the Harbour', 'Dockmaster', 'a harbour form an inland harbour master never reads');
+    expectAbsentWithAnchor([...inland], 'Harbourmaster', 'Wharfinger', 'a harbour form an inland harbour master never reads');
+  });
+  it('a COASTAL settlement, and a card read with no place, keep the registry\'s pool: Harbourmaster or Master of the Harbour', () => {
+    const coastal = new Set(seeds.map((seed) => honorificOfTitle('the harbour master', null, seed, { coastal: true })));
+    expect([...coastal].sort()).toEqual(['Harbourmaster', 'Master of the Harbour']);
+    expect(['Harbourmaster', 'Master of the Harbour']).toContain(cardHonorificOf(harbourCard, place('coastal', 'port')));
+    expect(['Harbourmaster', 'Master of the Harbour']).toContain(cardHonorificOf(harbourCard));
+    // the guard is the harbour's alone: an inland place leaves every other title's pool as the registry holds it
+    expect(Object.keys(FACE_HONORIFICS_INLAND)).toEqual(['the harbour master']);
   });
 });

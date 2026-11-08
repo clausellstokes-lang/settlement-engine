@@ -93,6 +93,28 @@ export function groupHooksBySource(hooks) {
   return groups;
 }
 
+/**
+ * ONE HOOK SENTENCE ONCE (X-50, "boilerplate once"; MERGE-CAR, the chair's ruling on tabSentencesOnce, the
+ * people car's lane 3: one hook per card, so in a city or metropolis two cards of one kind can draw the
+ * same line once their pools run dry). Within a page group, a hook whose TEXT an earlier hook already
+ * holds folds into it: the line is printed once, its source naming every card that holds it ("A · B"),
+ * in the collector's order of first appearance. Display-only: no record, field or golden moves.
+ * @param {Array<{source:string, text:string}>} hooks
+ * @returns {Array<{source:string, text:string}>}
+ */
+export function foldSharedHookText(hooks) {
+  const out = [];
+  const byText = new Map();
+  for (const hook of hooks) {
+    const text = String(hook?.text ?? '').trim();
+    const seen = text ? byText.get(text) : undefined;
+    if (!seen) { const copy = { ...hook }; out.push(copy); if (text) byText.set(text, { hook: copy, sources: [String(hook?.source ?? '')] }); continue; }
+    const source = String(hook?.source ?? '');
+    if (!seen.sources.includes(source)) { seen.sources.push(source); seen.hook.source = seen.sources.join(' · '); }
+  }
+  return out;
+}
+
 /** One source, several hooks: the name once, then each hook on its own line. */
 export function PlotHookSourceCard({ source, hooks }) {
   const mobile = useIsMobile();
@@ -134,7 +156,7 @@ export default function PlotHooksTab({ settlement }) {
   return (
     <div style={{ ...FLUSH_PAGE, ...FLUSH_STACK }}>
       {groups.map(({ page, hooks }) => {
-        const sourceGroups = groupHooksBySource(hooks);
+        const sourceGroups = groupHooksBySource(foldSharedHookText(hooks));
         return (
         <section key={page.id} data-testid={`plot-hooks-from-${page.id}`} style={FLUSH_RULED}>
           <div style={{ ...literaryTitle(FS.sm), color: INK, marginBottom: 6 }}>{page.label}</div>

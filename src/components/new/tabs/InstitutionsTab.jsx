@@ -230,7 +230,7 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
  * car 3) marks the place rather than a house: no Backs line and no editor.
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, settlement = null }) {
   const mobile = useIsMobile();
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
@@ -272,7 +272,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
           face shows no row. */}
       {face && face.name && (
         <div data-testid="institution-face" style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
-          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={faceNameOf(face)} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={faceNameOf(face, settlement)} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
         </div>
       )}
       {/* THE BACKS LINE (X-40, X-45): who the house contributes to, each name a door to the Power
@@ -346,7 +346,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
         {houses.map(({ inst, category, label, services, backs, authored, face }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} authored={authored} sets={sets}
-            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} />
+            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} settlement={settlement} />
         ))}
       </div>
       {/* THE FABRIC OF THE PLACE (X-46 car 3): the dwellings, the well, the church walk — the place

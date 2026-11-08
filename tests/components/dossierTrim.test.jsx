@@ -14,7 +14,7 @@ import React from 'react';
 import { describe, it, expect, afterEach } from 'vitest';
 import { render, cleanup, screen, within } from '@testing-library/react';
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
-import PlotHooksTab, { groupHooksBySource } from '../../src/components/new/tabs/PlotHooksTab.jsx';
+import PlotHooksTab, { foldSharedHookText, groupHooksBySource } from '../../src/components/new/tabs/PlotHooksTab.jsx';
 
 afterEach(() => cleanup());
 
@@ -67,5 +67,34 @@ describe('Plot Hooks — a source is named once over all of its hooks', () => {
     expect(container.textContent.split('Fenghua Guo').length - 1).toBe(1);
     expect(container.textContent).toContain('meeting privately');
     expect(container.textContent).toContain('publicly supports');
+  });
+});
+
+// MERGE-CAR (the chair's ruling on tabSentencesOnce, X-50): the people car's one hook per card can hand two cards of one
+// kind the same line in a city; the tab prints that line ONCE, under every card that holds it.
+describe('Plot Hooks — a hook sentence two cards hold is printed once (X-50)', () => {
+  it('folds a repeated text into its first appearance, naming both holders; distinct texts stay apart', () => {
+    const folded = foldSharedHookText([
+      { source: 'Eva Titov', text: 'They overheard something they should not have.', category: 'npc' },
+      { source: 'Anna Korolev', text: 'Someone they trust has changed.', category: 'npc' },
+      { source: 'Yelena Jankovic', text: 'They overheard something they should not have.', category: 'npc' },
+    ]);
+    expect(folded.map((h) => h.source)).toEqual(['Eva Titov · Yelena Jankovic', 'Anna Korolev']);
+    // anchored: a hook held once keeps its own source untouched
+    expect(folded[1]).toMatchObject({ source: 'Anna Korolev', text: 'Someone they trust has changed.' });
+  });
+  it('the rendered tab prints the shared sentence once', () => {
+    const line = 'A shipment they were not expecting arrived and is now in their warehouse.';
+    const settlement = { name: 'Testholm', tier: 'city', npcs: [
+      { id: 'a', name: 'Toirdelbach Burke', role: 'the exchange master', plotHooks: [line] },
+      { id: 'b', name: 'Naomhan Nolan', role: 'the whisper broker', plotHooks: [line] },
+      { id: 'c', name: 'Peig Donnell', role: 'the toll-keeper', plotHooks: ['A contract they signed has a clause they did not read.'] },
+    ] };
+    const { container } = render(<PlotHooksTab settlement={settlement} />);
+    expect(container.textContent.split(line).length - 1).toBe(1);
+    expect(container.textContent).toContain('Toirdelbach Burke');
+    expect(container.textContent).toContain('Naomhan Nolan');
+    // anchored: the line held once is printed once too
+    expect(container.textContent.split('A contract they signed has a clause they did not read.').length - 1).toBe(1);
   });
 });

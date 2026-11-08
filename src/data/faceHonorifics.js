@@ -242,19 +242,34 @@ export const FACE_HONORIFICS = Object.freeze({
   "the journeymen's warden": ["Warden"],
 });
 
+/**
+ * THE HARBOUR'S WORDS GUARDED BY THE COAST (the chair's ruling of 2026-11-08 on the soak's A-11
+ * sea-words-landlocked mover at the people car's tip, MERGE-CAR): a harbour master's office on a
+ * settlement with NO COAST — inland, or a river port — is a dock, not a harbour, so its pool there
+ * is this one; on a coastal settlement (and where the place is not known) the registry's own pool
+ * above stands. The coast is the fact the generator already holds (domain/facts/water.js ::
+ * waterOf, from the terrain and the trade route); display-only, no draw, no golden moves.
+ * @type {Readonly<Record<string, readonly Honorific[]>>}
+ */
+export const FACE_HONORIFICS_INLAND = Object.freeze({
+  "the harbour master": ["Dockmaster", "Wharfinger"],
+});
+
 /** The seat mint's fallback title, "the head of <power>" (mintTitles.js :: headOf). */
 const HEAD_OF = /^the head of (.+)$/i;
 
 /**
  * THE HONORIFIC OF A TITLE: the form `seed` picks from the title's pool (index 0 for no seed), by
  * gender; "the head of X" → "Head of X"; a title the registry does not name (a DM's own, a future
- * row) → the title without its article, capitalised. '' for no title.
- * @param {unknown} title @param {unknown} [gender] @param {string} [seed] @returns {string}
+ * row) → the title without its article, capitalised. '' for no title. `place.coastal === false` (a
+ * settlement with no coast) reads FACE_HONORIFICS_INLAND first; any other place reads the registry.
+ * @param {unknown} title @param {unknown} [gender] @param {string} [seed]
+ * @param {{ coastal?: boolean | null }} [place] @returns {string}
  */
-export function honorificOfTitle(title, gender, seed) {
+export function honorificOfTitle(title, gender, seed, place = {}) {
   const t = String(title ?? '').trim();
   if (!t) return '';
-  const pool = FACE_HONORIFICS[t];
+  const pool = (place?.coastal === false && FACE_HONORIFICS_INLAND[t]) || FACE_HONORIFICS[t];
   if (pool) {
     const h = /** @type {Honorific} */ (pickVariant(pool, seed));
     return typeof h === 'string' ? h : gender === 'female' ? h.female : h.male;
