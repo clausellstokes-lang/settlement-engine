@@ -763,7 +763,7 @@ The 16 that read the NPC FIELD (`.corrupt`, `corruptTies`, `corruptionVector`):
 
 **The list.** Car 1 writes a dormant list `tests/lint/legacyCorruptReaders/dormant-list.json`, the union of those 37 names (about 30 distinct; the census writes the exact set). It follows `tests/lint/legacyFactionReaders/fpz-list.json`'s shape: `{ file, reads, reason }`. The walker of I-15 reads it.
 
-**When the simulation unfreezes.** `npcAgency.js :: ensureNpcStates` treats a non-boolean `corrupt` as a legacy save and RE-ROLLS corruption with `spawnCorruptionChance`. A v3 card carries no `corrupt`, so the unfrozen simulation would double-corrupt the town. The dormant list's row for `npcAgency.js` names this: the reader must read `allegianceOf` when FPZ rebuilds it (⚖ J-19, recorded, nothing to build now). The simulator keeps "compromised" for cross-settlement espionage, as the owner ruled.
+**When the simulation unfreezes.** `npcAgency.js :: ensureNpcStates` treats a non-boolean `corrupt` as a legacy save and RE-ROLLS corruption with `spawnCorruptionChance`. A v3 card carries no `corrupt`, so the unfrozen simulation would double-corrupt the town. The dormant list's row for `npcAgency.js` names this: the reader must read `allegianceOf` when FPZ rebuilds it (⚖ J-19, recorded, nothing to build now). [AMENDED BY CAUSE, ALLEGIANCE-CAR1, the chair's ruling of 2026-11-08: a certified band (`tests/property/statecraftExposureBand.test.js`) runs the simulation and exposed the double read at car 1's tip (fp-read-2, twenty years: 38 scandals against the ceiling 29; base 22). `ensureNpcStates` was cured at the car (`d131ab158`: `corruptionLeash.js :: corruptMarkOf`; a v3 card is never re-rolled; the draw is kept), so that reader leaves this risk; the rest of the dormant list stands. "Dormant" means "silently changed at the tip when the simulation is lit": car 3 measures each dormant reader base-against-tip in a lit run before it re-points it.] The simulator keeps "compromised" for cross-settlement espionage, as the owner ruled.
 
 ---
 
@@ -853,7 +853,7 @@ Each is measured on the 1,000 (the §5 band) and the 525, with each cause's gold
 | **J-16** | Item 15? | No goals by title. Secrets and presentations by title for the 76 that fire; the tail by category. |
 | **J-17** | Rename the fingerprint's `corrupt_count`? | Rename it to `allegiance_count`. |
 | **J-18** | Does the migration add handler ties? | No. The handler is kept on the field; the tie is a birth rule. |
-| **J-19** | The simulation's double-corruption on unfreeze? | Recorded on the dormant list's `npcAgency` row; nothing is built now. |
+| **J-19** | The simulation's double-corruption on unfreeze? | Recorded on the dormant list's `npcAgency` row; nothing is built now. [AMENDED BY CAUSE at car 1: cured in `ensureNpcStates`; §7.3's note.] |
 | **J-20** | Is the capture state on the public page? | Measure it in car 1's proof walk. If it is there, it is pre-existing and goes with the owner's queued server-side veil. |
 
 **Risks.**
