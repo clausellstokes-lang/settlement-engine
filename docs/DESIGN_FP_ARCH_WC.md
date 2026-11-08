@@ -1,5 +1,7 @@
 # DESIGN_FP_ARCH_WC -- THE WAR-CIRCULATION VOLUME
 
+[RE-READ 2026-11-08 (FP-REBASE) — unaffected by the people car and the allegiance train except §4.4's leash owners (bracketed there): this volume is counts-grain and court-grain — anonymous blocks, ledgers, columns and occupations — and its one person-grain line, "NEVER RESOLVE A NAMED CHARACTER'S FATE", already keeps the owner's death law of 2026-11-08 (a named person's death the DM's alone; war's deaths fall in the masses' conserved counts); the "named general's standing" of 1.2.2's GENERALS-fold bracket reads, from the re-basing on, the general's rank and share in the Military/Guard power (`DESIGN_FP_GENERALS.md`, FPR-LARGE's re-basing).]
+
 ⏱ **THE BANNER BELOW IS PRESERVED AS WRITTEN, AND ITS MEASUREMENT IS SUPERSEDED
 BY EVENT — RE-DERIVE, DO NOT INHERIT.** Folded here from the build-branch copy at
 the docs unfork (lane UF-1) so the build side keeps it. Its LAW half stands
@@ -4920,6 +4922,7 @@ WC-12, WC-13, WC-16 for that checklist to consume.
   [ADDED 2026-10-20 (fp-final P6c; WS-r1-3 · RULINGS-P6 B.3 · `cure/D-WS-r1.md` §4 WC · `cure/D-WS-r2.md` §4 WC · `cure/D-WS-r3.md` §5 WC/W-PEACE — the latest wins) — THE WAR's CLOSERS AND ADDRESS, FOR THE WAY OF WAR. (i) THE WITHDRAWAL CLOSER (`warDeployment.js`'s "if (verdict.forcedLift || !verdictPermitsSiege(…))") HAS NO THRESHOLD INPUT — no volume may lean it; harassment rides C4 G2 (ii)'s `WITHDRAW_SHIFT` only once C4 rules its physics. (ii) WS's P4 addresses the live war by the FOE — the pair from the court's side (deployments either way, `warFrontsFrom`/`warFrontsInto`); `warIdFor` is deployment-grain and NOT P4's key (WS-V2; REPLACES D-WS-r1's "confirm the live war's opened tick for `warIdFor`"). (iii) P4's early drop reads `treatyEnforcement.js :: treatyBlocksWar(worldState, aId, bId, tick)` — CONFIRMED at master (exported, l.117); D-WS-r2's "confirm the treaty ledger's pair addressing" route is CLOSED.]
   [ADDED 2026-10-20 (fp-final P6c; FS-Vm2 · `cure/D-FS-r2.md` §5 WC as re-worded by `cure/D-FS-r3.md` §5 WC) — WR-4's HOME FRONT, CITE ONLY (no design change): the coffers component can lengthen a war the court ATTACKS (the attacker's home front only) whose wages are THE FISCAL SEAT's demand (`DESIGN_FP_ARCH_FS.md` §7.5; ≤ 0.117 of the continuation headroom, executed by FS's lane). The loop is the war layer's own (`warCosts.js :: readWarHomeFront` → `warTermination.js`); W-COIN's anti-loop law stands unamended (RULINGS-P6 A.8).]
   [ADDED 2026-10-20 (fp-final P6c; RULINGS-P6 A.8 · WS-r1-2 · `cure/D-WS-r1.md` §4 WC) — THE DOCTRINES' OWNERS, NAMED: W-DOCTRINE-1 (`worldPulse/supplyWebWarfare.js` — `scoreCampaignEV` · `instrumentFit` · `expectedBloodyShare` · `chooseInstrument`, the landed direct-vs-indirect chooser by archetype and alignment) is owned by `DESIGN_SUPPLY_WEB_WARFARE.md` (the module's header: "W-DOCTRINE-1: SUPPLY-WEB WARFARE (the indirect-war doctrine — DESIGN_SUPPLY_WEB_WARFARE.md)"); W-DOCTRINE-3 (`corruptionLeash.js :: resolveLeash`, "THE RESOLVER CHOKEPOINT (W-DOCTRINE-3 §1)") and W-DOCTRINE-3b (`worldPulse/corruptionWeb.js :: foreignGripOf`, "THE FOREIGN LANES (DESIGN_CORRUPTION_WEB.md …)") by `DESIGN_CORRUPTION_WEB.md` — measured at master `81f1cd963`. THE WAY OF WAR DERIVES `way_logistics` · `way_raiding` · `way_subversion` from `scoreCampaignEV`'s balance and `instrumentFit` (HBF-16), so there is ONE personality→method map (A.8); this volume adds no second doctrine.]
+  [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-COMPROMISE; the census §2 row "WC" (the brief §2: "§4.4's leash owners re-pointed")) — the owners named above presumed the leash rides the per-NPC corruption mark (`corruptTies.leash` / `.foreignPatron` / `.criminalInstitution`, the generator's local mark and the web's foreign leash on one substrate). → The OWNERS stand (W-DOCTRINE-3 and 3b by `DESIGN_CORRUPTION_WEB.md`); what they own is re-pointed onto THE TWO AXES (`DESIGN_FP_ARCH_ES.md` §1's bracket): `corruptionLeash.js :: resolveLeash` stays THE ONE leash reader, its sources now the one carried field `allegiance.leash` (the allegiance design's §7.1 re-point, `foreignPatron` carried beside it by the v2 → v3 migration) and the web's tick-side `npcStates` sidecar, its local arms reading the LOCAL allegiance's house through `allegianceOf`; `corruptionWeb.js :: foreignGripOf` is the FOREIGN axis alone — the web's leashes, foreign only, minted at tick, never at birth, its recruit filter reading `allegianceOf(card) === null`. `way_subversion`'s derivation from `scoreCampaignEV`/`instrumentFit` is unchanged: it prices the method, not the person.]
 
 ## 4.5 TRADITIONS, DEMOGRAPHICS, AND THE INTERIOR
 
@@ -7073,3 +7076,14 @@ commit is WC-1; its first owner-visible drama is WC-2's stance chip;
 its showcase is K4's dueling envelopes at WC-10; its launch-copy
 sentence is WC-14's: the world generates its own adventuring class,
 with reasons.
+
+## RE-BASED 2026-11-08 (FP-REBASE) — what moved in this volume
+
+Seat FPR-COMPROMISE, on the brief §2's WC row ("§4.4's leash owners re-pointed; otherwise the `[RE-READ]` bracket") and the census §2's last row (WC among the volumes needing nothing). Design text only.
+
+| Where | What moved | Census row answered |
+|---|---|---|
+| the header | `[RE-READ 2026-11-08 (FP-REBASE)]` — counts- and court-grain; the fate line already keeps the owner's death law; the GENERALS-fold "standing" reads rank and share | the census §2 last row; §9 ruling 2 |
+| §4.4, THE DOCTRINES' OWNERS | the owners stand; `resolveLeash` re-pointed onto the carried field `allegiance.leash` and the web's tick sidecar, its local arm through `allegianceOf`; `foreignGripOf` the FOREIGN axis alone | the brief §2 WC row; §8 decision 4 |
+
+No judgment call beyond ES's; no passage needed a STOP.
