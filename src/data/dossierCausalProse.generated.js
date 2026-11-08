@@ -2055,7 +2055,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "emptying"
           ],
-          "text": "Nobody ordered anyone out of {settlement}: the households left one at a time, and only the tax collector noticed the street had emptied.",
+          "text": "No one was told to leave {settlement}: the households went one at a time, and only the tax collector noticed the street had emptied.",
           "slots": [
             "settlement"
           ]
@@ -2263,7 +2263,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "reader"
           ],
-          "text": "{settlement} still thinks of {counterpart}'s faith as it was years ago; the picture is out of date, and the next decision will be made on it.",
+          "text": "{settlement} still thinks of {counterpart}'s faith as it was long since; the picture is out of date, and the next decision will be made on it.",
           "slots": [
             "settlement",
             "counterpart"

@@ -688,7 +688,7 @@ no creed ever orders a column. Population moves on push, pull and flight physics
 only, and no variant below has anyone commanding a departure.
 
 1. `[ledger · emptying]` {settlement} has its quiet, and it has {band} shuttered houses on the temple street; the rite was put down here, the keeping of it cost more than the leaving, and the congregation walked.
-2. `[street · emptying]` Nobody ordered anyone out of {settlement}: the households left one at a time, and only the tax collector noticed the street had emptied.
+2. `[street · emptying]` No one was told to leave {settlement}: the households went one at a time, and only the tax collector noticed the street had emptied.
 3. `[visitor · receiving]` {settlement} carries a grudge it had no part in earning, along with the households and the trades that brought it: the town took in the persecuted out of {counterpart}.
 4. `[street · receiving]` The shrine road at {settlement} fills for the feast and empties after it: this town earns from the beds, {counterpart} from the offerings.
 5. `[unfolding · emptying]` The temple street at {settlement} has not refilled {timeband_since}, and the tax roll is where the town first learned it would not.
@@ -729,7 +729,7 @@ deliberate — dramatic irony is the product.
 2. `[street · misread]` Letters from {counterpart} still greet {settlement} as a devout town, and nobody here has written to say the old altar is gone.
 3. `[visitor · reader]` {counterpart} sits in {settlement}'s books as a house of the faithful, on the strength of a report that said so and has not been renewed; it was honest when it was written, is stale now, and will be acted on regardless.
 4. `[elder · misread]` {settlement}'s shrine is shut and stands in {counterpart}'s books as full: the report that said so was honest and is {timeband_age}, and the doors closed after it was written.
-5. `[unfolding · reader]` {settlement} still thinks of {counterpart}'s faith as it was years ago; the picture is out of date, and the next decision will be made on it.
+5. `[unfolding · reader]` {settlement} still thinks of {counterpart}'s faith as it was long since; the picture is out of date, and the next decision will be made on it.
 6. `[counterforce · misread]` {counterpart} has {settlement} written down exactly as {settlement} is: a party came through after the patron changed, wrote what it found at {temple}, and the picture on that side has not had time to go stale.
 
 ---

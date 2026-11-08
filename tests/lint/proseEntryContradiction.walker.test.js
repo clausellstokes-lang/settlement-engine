@@ -513,8 +513,11 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // `eventProvenance: false`; NOT-EXECUTABLE without the flag) — measured on that one entry.
     // 47 -> 46 (both) at the chair's 07:1x ruling: the boom line's undated clause ("coin moves
     // freely and work is easy to find") makes no dated claim, so the entry leaves the class.
-    expect(notExecutable).toBe(46);
-    expect(fails).toBe(46);
+    // 46 -> 45 (both) at W7 HOOKS (2026-11-07, the owner's style law): JF-CPL-18b / v04's rewrite ("…what the hall
+    // wanted to build sits unbuilt") drops the old line's actor verb "founded", so the entry leaves the class; W7's two
+    // other new lexicon hits ("ordered", "years ago") were re-worded before landing. Measured on the causal leaf.
+    expect(notExecutable).toBe(45);
+    expect(fails).toBe(45);
     // PRESENT-THEN-ABSENT on one of them, so the arm is proved rather than counted.
     const anchor = corpus.find((entry) => walkEntry(entry, withEntryContext(base, { eventProvenance: false }))
       .fails.some((f) => f.klass === 'C3'));
