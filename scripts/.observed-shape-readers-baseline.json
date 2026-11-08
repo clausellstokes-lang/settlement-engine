@@ -177,14 +177,14 @@
  "digests": {
   "corpusMeta": "1a4216a0fb4db8841e27ac3e2c45851c67d411b6aae8da02ab3145b4076a224d",
   "inventory": "8a95fac189c16a52417124e88e0b8b5ba7139f93e9bb12e4b82df75644898011",
-  "manifests": "34a3f38f42e0add9a087e9c95e5bc99983127495fd17067514834ac602a6d422",
+  "manifests": "5bf2d49df8e2c1b48d8050febaf412c410aadd136d94d52cb547d6e18f72bb3f",
   "migrationReview": "0f122dc60cecf83441c50da0d0e3438d854564666edaf4fefc9dd41f6712666d",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
   "scanStats": "78ea92e7aa7c0a67c78573f5cb786a341af24284466f0e0aee53d995be021331",
   "sentinel": "b2106f95d2357a2e491d31c4c2519d8acca538904dd941e4eb24537c8b2663ff"
  },
  "frozen": "2026-11-08",
- "frozenAtSha": "f03484a8e8bf72778eecd8ad5c7fbdeba76097d8",
+ "frozenAtSha": "f8f200eb7558add1724c6eaddbae3b5388916c67",
  "identities": 1548,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2684,7 +2684,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "bbfb6f84c352d442efbccbe57f886719871dd424e1d7ad7eec03f7ac37c1a512",
+   "digest": "7876601d108d0d4ed825cbaa300ff3321135f02b5f95c2cb3287380da43d0b17",
    "entries": [
     {
      "mode": "100644",
@@ -8366,8 +8366,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisBlindFindings.js",
-     "sha256": "ea07747e2b70d5b115f15ce1783e200426f7da8c6939d7aad86c72aa563664ea",
-     "size": 10910,
+     "sha256": "78e934470a98a433e261a9675f4bf5fcdb5b79e6da8a0474bd6e0428a0d52cf3",
+     "size": 11000,
      "type": "file"
     },
     {
@@ -16598,8 +16598,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcStructure.js",
-     "sha256": "28a5a3f9c51e005fbe113c4da97da5fc871ca8be5f0ecc4ae6a1c7b29548e5e5",
-     "size": 43376,
+     "sha256": "bd29ce7195912e7c1ec497f0f7d2e33166b405f1a9d1f768f67839675281b54d",
+     "size": 43470,
      "type": "file"
     },
     {
@@ -19854,7 +19854,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "515948731f5dcc133334bedb13ebf3d03660ade5d7373c477ea32bc5a9954566",
+   "digest": "de6a4d6c2d5859fe456489469127f97ad3bf05e6d6b811189ad3e7b95cdc38e2",
    "entries": [
     {
      "mode": "100644",
@@ -25382,8 +25382,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisBlindFindings.js",
-     "sha256": "ea07747e2b70d5b115f15ce1783e200426f7da8c6939d7aad86c72aa563664ea",
-     "size": 10910,
+     "sha256": "78e934470a98a433e261a9675f4bf5fcdb5b79e6da8a0474bd6e0428a0d52cf3",
+     "size": 11000,
      "type": "file"
     },
     {
@@ -33579,8 +33579,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcStructure.js",
-     "sha256": "28a5a3f9c51e005fbe113c4da97da5fc871ca8be5f0ecc4ae6a1c7b29548e5e5",
-     "size": 43376,
+     "sha256": "bd29ce7195912e7c1ec497f0f7d2e33166b405f1a9d1f768f67839675281b54d",
+     "size": 43470,
      "type": "file"
     },
     {
@@ -36828,7 +36828,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "ae72fe2ffcfc9510619723faebc82db6cf6e0533d01908abeff0f47ec6ef6b2f",
+   "digest": "913e27667d2abdca1e6f2b81bace10d78593eb64744ade3e3621ae65b64cd952",
    "entries": [
     {
      "mode": "100644",
@@ -42440,8 +42440,8 @@
     {
      "mode": "100644",
      "path": "src/domain/coherence/crisisBlindFindings.js",
-     "sha256": "ea07747e2b70d5b115f15ce1783e200426f7da8c6939d7aad86c72aa563664ea",
-     "size": 10910,
+     "sha256": "78e934470a98a433e261a9675f4bf5fcdb5b79e6da8a0474bd6e0428a0d52cf3",
+     "size": 11000,
      "type": "file"
     },
     {
@@ -50672,8 +50672,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcStructure.js",
-     "sha256": "28a5a3f9c51e005fbe113c4da97da5fc871ca8be5f0ecc4ae6a1c7b29548e5e5",
-     "size": 43376,
+     "sha256": "bd29ce7195912e7c1ec497f0f7d2e33166b405f1a9d1f768f67839675281b54d",
+     "size": 43470,
      "type": "file"
     },
     {
@@ -54244,9 +54244,9 @@
  },
  "scannerProvenance": {
   "detectorDigest": "cb5dac5989089c789d38f0689a859a2dd8e64d78bb3f378a7aab1e0a255d1de5",
-  "executionTreeDigest": "bbfb6f84c352d442efbccbe57f886719871dd424e1d7ad7eec03f7ac37c1a512",
-  "scanTreeDigest": "515948731f5dcc133334bedb13ebf3d03660ade5d7373c477ea32bc5a9954566",
-  "sourceTreeDigest": "ae72fe2ffcfc9510619723faebc82db6cf6e0533d01908abeff0f47ec6ef6b2f",
+  "executionTreeDigest": "7876601d108d0d4ed825cbaa300ff3321135f02b5f95c2cb3287380da43d0b17",
+  "scanTreeDigest": "de6a4d6c2d5859fe456489469127f97ad3bf05e6d6b811189ad3e7b95cdc38e2",
+  "sourceTreeDigest": "913e27667d2abdca1e6f2b81bace10d78593eb64744ade3e3621ae65b64cd952",
   "unscannedInputDigest": "6fc9faaaf4f3a9b181cffa9a55ffd45d1d2e9acbd5088e63472abe013ab495de"
  },
  "schema": 32,
