@@ -673,10 +673,17 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // census readers over the rung-2 landing). The merged tip keeps the car's re-dealt year (the cast, lanes 1-5B) and
     // composes the integration side's census / WIRING-W0 / REVIEW-INTAKE lines into it, an INTERACTION of -4/-7/-4 (PLAUSIBLE
     // as attributed; not bisected per step). c12c28af0 moved registers only, so the merge commit measures the same.
+    // 2026-11-08 (ALLEGIANCE-CAR1, FIX-PUBLIC-VEIL merged over MERGE-CAR, 744c22d74; re-keyed by identity at the schema-33
+    // veil-merge rung): final 395 → 390, accumulated 2511 → 2486, unique 396 → 391, regional 81/81 → 82/82. The parents'
+    // own pins: the integration side e376ee6a3 395/2511/396/81 (this pin), the veil eb18cb458 394/2493/395/82 (its one
+    // cause: a veiled face is born with an opaque id, people/cardVeil.js :: veiledCardIdFor, and its keyed forks re-deal).
+    // The merged tip runs the year over the veil's re-dealt cast under the integration side's lines: the veil's own
+    // -5/-25/-5/+1 at its lane, measured here as -5/-25/-5/+1 again (CONFIRMED by this arm's one corpus build at the merged
+    // tree; the composition adds nothing of its own).
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 395,
-      wizardNewsAccumulatedEntries: 2511,
+      wizardNewsFinalEntries: 390,
+      wizardNewsAccumulatedEntries: 2486,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -686,7 +693,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 396,
+      wizardNewsUnique: 391,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -694,11 +701,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 81, // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80
+      regionalEventLog: 82, // 2026-11-08 ALLEGIANCE-CAR1 (the veil merged): 81 → 82; 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 81,
+      regionalEventLogUnique: 82,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
