@@ -1147,7 +1147,7 @@ runs with dispositionChannelsEnabled dark to isolate WR-2's deltas at the
 same two sites.
 
 **#9 GR-1 — THE OATH-HOLDER IDENTITY** (flag `oathHolderEnabled`;
-EARLY-ELIGIBLE). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "GR / GRAMMAR (GR-1)") — the charter composed `governingFactionOf -> npcInFaction -> codepoint-stable pick` and pinned the JSON-alias round-trip of a roster object → the oath-holder is THE SEAT'S RANK-1 FACE: `governingFactionOf` → the governing power's rank-1 face through §1 L11 (`membersOf`/`rankIn`), NO PICK; null (no rank-1 face) = no stamp = seat-voice, as before; `sworn.npcId` names the card by its id and the alias pin is retired with the trap (§4); `oathHolder.js` is on the FPZ list (`tests/lint/legacyFactionReaders/fpz-list.json`) and is re-pointed at its rebuild; `DESIGN_FP_ARCH_GR.md` and `DESIGN_FP_GRAMMAR.md` carry the same bracket] `oathHolder.js` composes EXACTLY governingFactionOf ->
+EARLY-ELIGIBLE). [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "GR / GRAMMAR (GR-1)") — the charter composed `governingFactionOf -> npcInFaction -> codepoint-stable pick` and pinned the JSON-alias round-trip of a roster object → the oath-holder is THE SEAT'S RANK-1 FACE: `governingFactionOf` → the governing power's rank-1 face through §1 L11 (`membersOf`/`rankIn`), NO PICK; null (no rank-1 face) = no stamp = seat-voice, as before; `sworn.npcId` names the card by its id and the alias pin is retired with the trap (§4); `oathHolder.js` is on the FP dormant-reader list (`tests/lint/legacyFactionReaders/fpz-list.json`) and is re-pointed at its rebuild; `DESIGN_FP_ARCH_GR.md` and `DESIGN_FP_GRAMMAR.md` carry the same bracket] `oathHolder.js` composes EXACTLY governingFactionOf ->
 npcInFaction -> codepoint-stable pick -> durableIdForRoster; null = no stamp
 = seat-voice. Stamps at THREE mint doors (war mint, carried-sheet, sale —
 the tree grew a third since the volume; stamp totality walker across all
@@ -1292,7 +1292,7 @@ SEND-TWO consumes sendTwoDivergence.js (the one-home contract — a source
 scan proves no second implementation); suspicionOf derives from live
 conditions/deception grievances/caught intercepts/mirror gap (degrades
 dark); the house sub-program supplies projectPatronBindings' `exposed`
-parameter at last [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "IN / INFORMATION"; the fold §3.2.24) — the brokerage patronage (`brokeragePatronage.js`, on the FPZ list) computed a patronage of its own from the grouping → it becomes a READER of the derived `patronageOf` (renamed at its rebuild if its own name would read as a second patronage); the sweep targets real veiled agents through `allegianceOf`; the volume's own brackets are FPR-COMPROMISE's]; PLANT_REFUSALS grows six->SEVEN with `too_hot`
+parameter at last [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "IN / INFORMATION"; the fold §3.2.24) — the brokerage patronage (`brokeragePatronage.js`, on the FP dormant-reader list) computed a patronage of its own from the grouping → it becomes a READER of the derived `patronageOf` (renamed at its rebuild if its own name would read as a second patronage); the sweep targets real veiled agents through `allegianceOf`; the volume's own brackets are FPR-COMPROMISE's]; PLANT_REFUSALS grows six->SEVEN with `too_hot`
 (QUERY_REFUSALS asserted unchanged); the witch-hunt counterforce with
 no-fates wording; the Watch panel (sightPostures' first UI consumer, DM-only
 fail-closed). Edit-verb: the SWEEP DM verb (same store-action discipline).
@@ -1677,7 +1677,7 @@ the receipt naming the stock read.
 (formation/ruin-latch/rename + load-time normalizer — the dormant-with-books
 shape round-trips from old saves) + houseActs (threshold chooser over the
 closed verb set, import-pinned: no relationship graph, no target lists) +
-deterministic factor casting + news [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — factor casting read `npc.factionAffiliation === house` (`houseLedger.js`, on the FPZ list) → a factor is cast from the MEMBERS OF THE MERCHANT POWER (`membersOf`, rank and share) or the house's LINKED FACE (the institution card's representative, R-P8); `DESIGN_FP_ARCH_TR.md` carries the same bracket]. Eligibility ONLY via factionArchetype()
+deterministic factor casting + news [RE-BASED 2026-11-08 (FP-REBASE, seat FPR-CONSTITUTION; the census §2 row "TR") — factor casting read `npc.factionAffiliation === house` (`houseLedger.js`, on the FP dormant-reader list) → a factor is cast from the MEMBERS OF THE MERCHANT POWER (`membersOf`, rank and share) or the house's LINKED FACE (the institution card's representative, R-P8); `DESIGN_FP_ARCH_TR.md` carries the same bracket]. Eligibility ONLY via factionArchetype()
 (the name-regex fallback makes rename-sensitivity real — the rename
 round-trip pin is mandatory). Ruin reachable from the top band; formation
 determinism (codepoint decides, same-seed identical); no-undead-house
@@ -3359,3 +3359,4 @@ Seat FPR-CONSTITUTION, against `docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-0
 - The chair's additions: §1 L12 THE COMMISSION (one reader `commissionOf`, one table office → competent power; the owner's law, the fold §3.2.26, OD-FC-148); §4's person model gains the dark `faith` field (OD-FC-147).
 - The chair's further addition: §1 L13 THE CHAMBER (`formOf` a derived reader; the four dials H · R · P · C registered constants; the fold § THE CHAMBER LAW, OD-FC-150).
 - FPR-VERIFY F7 — §2a CLASS 5's goal-pool item: the pools retire, the extended catalogue's keys stay, read through `goal.intent.key`.
+- FPZ READ AS FP (the owner, read 22:07 UTC, verbatim: "Separate everything that is FP related also know that FPZ was a typo to FP"): every "FPZ" this seat wrote in this volume today now reads "FP" ("the FP dormant-reader list" is `tests/lint/legacyFactionReaders/fpz-list.json`, whose file name is NOT renamed until the FP's own first commit); the fold §5's `FPZ` row.
