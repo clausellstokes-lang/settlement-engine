@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "8308f13f89de61998b70e43e4c656faa9d87e81d",
+ "frozenAtSha": "1ae1a1bb7ea916fa364ce337af41f144929b6ecb",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "e3e094c7fe1ea56d9362f2892c2767871a55d153c6791b7c2eb5c54e9a906d28",
  "detectorDigest": "6de1fcb17cc758e4e0ddb8d549ea9a65bd69d25c05668ca68b37bc193bd19c1e",
- "verdictDigest": "ecbfd8875cad59ead659304500c544bf9758080fbc66e92385c16be9ccd596e7",
+ "verdictDigest": "5fcb26f4e7e5cf5c999feb507bada55741983d35bc23b6c4a4bb85b76f983b98",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 11997,
-  "lit": 597,
-  "litName": 9966,
-  "dark": 1434,
+  "lit": 621,
+  "litName": 9962,
+  "dark": 1414,
   "thinKeys": 17280,
   "thinShapes": 1203,
   "knownShapes": 517
  },
  "scanStats": {
   "files": 1747,
-  "sites": 41122,
-  "propRead": 38938,
+  "sites": 41205,
+  "propRead": 39021,
   "elemRead": 0,
   "destructure": 2168,
   "inOp": 16,
-  "rGrades": 6342,
-  "nGrades": 1618679,
-  "resolvedReceivers": 7223
+  "rGrades": 6399,
+  "nGrades": 1620633,
+  "resolvedReceivers": 7287
  },
  "registerDigest": "511672c01b1b5660c194a2a586e43e5be1455ab7f6cf1c888113258e54a0dc6e",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 447,
+ "reviewableDarkCount": 427,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -238,12 +238,6 @@
    "rows": 371
   },
   {
-   "identity": "activeChainsCount on foodSecurity",
-   "key": "activeChainsCount",
-   "shape": "foodSecurity",
-   "rows": 472
-  },
-  {
    "identity": "activity on osr001",
    "key": "activity",
    "shape": "osr001",
@@ -350,12 +344,6 @@
    "key": "annotation",
    "shape": "legacyAnnotations",
    "rows": 957
-  },
-  {
-   "identity": "arcaneBlackMarket on flags",
-   "key": "arcaneBlackMarket",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "arcane_orders on leaderNpcIds",
@@ -704,18 +692,6 @@
    "key": "chainModifiers",
    "shape": "defenseProfile",
    "rows": 472
-  },
-  {
-   "identity": "clandestine on facets",
-   "key": "clandestine",
-   "shape": "facets",
-   "rows": 40
-  },
-  {
-   "identity": "clandestine on institutions",
-   "key": "clandestine",
-   "shape": "institutions",
-   "rows": 19641
   },
   {
    "identity": "clay on reasons",
@@ -1864,18 +1840,6 @@
    "rows": 1400
   },
   {
-   "identity": "failedSource on foodRecord",
-   "key": "failedSource",
-   "shape": "foodRecord",
-   "rows": 472
-  },
-  {
-   "identity": "famineCutPct on foodRecord",
-   "key": "famineCutPct",
-   "shape": "foodRecord",
-   "rows": 472
-  },
-  {
    "identity": "feudal_stewardship on leaderNpcIds",
    "key": "feudal_stewardship",
    "shape": "leaderNpcIds",
@@ -2176,12 +2140,6 @@
    "rows": 2794
   },
   {
-   "identity": "hasBank on inst",
-   "key": "hasBank",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
    "identity": "hasBlackMarket on inst",
    "key": "hasBlackMarket",
    "shape": "inst",
@@ -2230,26 +2188,8 @@
    "rows": 944
   },
   {
-   "identity": "hasGuild on inst",
-   "key": "hasGuild",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
    "identity": "hasMagesGuild on inst",
    "key": "hasMagesGuild",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasMarket on inst",
-   "key": "hasMarket",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasMerchantGuild on inst",
-   "key": "hasMerchantGuild",
    "shape": "inst",
    "rows": 944
   },
@@ -2268,12 +2208,6 @@
   {
    "identity": "hasThievesGuild on inst",
    "key": "hasThievesGuild",
-   "shape": "inst",
-   "rows": 944
-  },
-  {
-   "identity": "hasWarehouse on inst",
-   "key": "hasWarehouse",
    "shape": "inst",
    "rows": 944
   },
@@ -2980,21 +2914,9 @@
    "rows": 472
   },
   {
-   "identity": "magicInfluence on compound",
-   "key": "magicInfluence",
-   "shape": "compound",
-   "rows": 944
-  },
-  {
    "identity": "magicMilitarized on flags",
    "key": "magicMilitarized",
    "shape": "flags",
-   "rows": 472
-  },
-  {
-   "identity": "magicPct on foodRecord",
-   "key": "magicPct",
-   "shape": "foodRecord",
    "rows": 472
   },
   {
@@ -5470,12 +5392,6 @@
    "rows": 409
   },
   {
-   "identity": "prosperityMod on foodSecurity",
-   "key": "prosperityMod",
-   "shape": "foodSecurity",
-   "rows": 472
-  },
-  {
    "identity": "proud on npcGrowth",
    "key": "proud",
    "shape": "npcGrowth",
@@ -5920,12 +5836,6 @@
    "rows": 446
   },
   {
-   "identity": "religionInfluence on compound",
-   "key": "religionInfluence",
-   "shape": "compound",
-   "rows": 944
-  },
-  {
    "identity": "religious on stocks",
    "key": "religious",
    "shape": "stocks",
@@ -6036,12 +5946,6 @@
   {
    "identity": "resourceChains on resourceAnalysis",
    "key": "resourceChains",
-   "shape": "resourceAnalysis",
-   "rows": 472
-  },
-  {
-   "identity": "resourceConditions on resourceAnalysis",
-   "key": "resourceConditions",
    "shape": "resourceAnalysis",
    "rows": 472
   },
@@ -6736,18 +6640,6 @@
    "rows": 9946
   },
   {
-   "identity": "subterranean on facets",
-   "key": "subterranean",
-   "shape": "facets",
-   "rows": 40
-  },
-  {
-   "identity": "subterranean on institutions",
-   "key": "subterranean",
-   "shape": "institutions",
-   "rows": 19641
-  },
-  {
    "identity": "supersessionReason on proposals",
    "key": "supersessionReason",
    "shape": "proposals",
@@ -6830,12 +6722,6 @@
    "key": "textiles",
    "shape": "osr015",
    "rows": 371
-  },
-  {
-   "identity": "theocraticEconomy on flags",
-   "key": "theocraticEconomy",
-   "shape": "flags",
-   "rows": 472
   },
   {
    "identity": "thievesGuild on corruptTies",
@@ -7124,12 +7010,6 @@
    "key": "updatedByPulse",
    "shape": "factions",
    "rows": 8104
-  },
-  {
-   "identity": "upstreamWeak on activeChains",
-   "key": "upstreamWeak",
-   "shape": "activeChains",
-   "rows": 8017
   },
   {
    "identity": "urbanFabric on settlement",
@@ -8505,7 +8385,7 @@
   "processingInstitutions on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "resource on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=R",
   "resourceActive on activeChains": "",
-  "resourceCondition on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "resourceCondition on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "resourceDepleted on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "resourceIcon on activeChains": "web-display=N web-transitive=N",
   "resourceInputAvailable on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
@@ -8518,7 +8398,7 @@
   "upstreamChains on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "upstreamMissing on activeChains": "dossier-pdf=N web-display=N web-transitive=N",
   "upstreamNote on activeChains": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
-  "upstreamWeak on activeChains": "",
+  "upstreamWeak on activeChains": "dossier-pdf=R web-display=R",
   "affectedSystems on activeConditions": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "archetype on activeConditions": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=R",
   "causes on activeConditions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
@@ -8873,10 +8753,10 @@
   "criminalEffective on compound": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "economyOutput on compound": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "inst on compound": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
-  "magicInfluence on compound": "",
+  "magicInfluence on compound": "dossier-pdf=R web-display=R",
   "militaryEffective on compound": "web-display=R",
   "raw on compound": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
-  "religionInfluence on compound": "",
+  "religionInfluence on compound": "dossier-pdf=R web-display=R",
   "ageBand on compromiseLifecycle": "web-display=R web-transitive=R",
   "causeClass on compromiseLifecycle": "dossier-pdf=N foundry=N web-display=R web-transitive=R",
   "exposedTick on compromiseLifecycle": "web-transitive=R",
@@ -9393,8 +9273,8 @@
   "lastPower on fac.town_council": "dossier-pdf=N foundry=N web-transitive=N",
   "powerModifier on fac.town_council": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "rungs on fac.town_council": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "clandestine on facets": "",
-  "subterranean on facets": "",
+  "clandestine on facets": "dossier-pdf=R web-display=R",
+  "subterranean on facets": "dossier-pdf=R web-display=R",
   "incidents on factionPairStates": "web-transitive=N",
   "resentment on factionPairStates": "dossier-pdf=N foundry=N web-transitive=N",
   "trust on factionPairStates": "dossier-pdf=N foundry=N web-transitive=N",
@@ -9470,7 +9350,7 @@
   "evidence on findings": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "path on findings": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "anyActive on flags": "",
-  "arcaneBlackMarket on flags": "",
+  "arcaneBlackMarket on flags": "dossier-pdf=R web-display=R",
   "crimeIsGovt on flags": "",
   "crusaderSynthesis on flags": "",
   "heresyIntensity on flags": "",
@@ -9484,7 +9364,7 @@
   "secularBrutalism on flags": "",
   "stateCrime on flags": "",
   "stateCrimeIntensity on flags": "",
-  "theocraticEconomy on flags": "",
+  "theocraticEconomy on flags": "dossier-pdf=R web-display=R",
   "authority on flowProfile": "web-display=N web-transitive=N",
   "information on flowProfile": "",
   "security on flowProfile": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
@@ -9506,21 +9386,21 @@
   "stressModifier on foodBalance": "dossier-pdf=R foundry=R web-display=R",
   "surplus on foodBalance": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=N",
   "band on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
-  "failedSource on foodRecord": "",
-  "famineCutPct on foodRecord": "",
+  "failedSource on foodRecord": "dossier-pdf=R web-display=R",
+  "famineCutPct on foodRecord": "dossier-pdf=R web-display=R",
   "foodSources on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "foodwaysLine on foodRecord": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
   "gapPct on foodRecord": "",
   "grownPct on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "growsMoreThanEats on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "hasGranary on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
-  "magicPct on foodRecord": "",
+  "magicPct on foodRecord": "dossier-pdf=R web-display=R",
   "normalImportPct on foodRecord": "dossier-pdf=R foundry=R web-display=R",
   "storageMonths on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "storesHeld on foodRecord": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "surplusPct on foodRecord": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "activeChains on foodSecurity": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "activeChainsCount on foodSecurity": "",
+  "activeChainsCount on foodSecurity": "dossier-pdf=R web-display=R",
   "bg on foodSecurity": "dossier-pdf=N web-display=N",
   "chains on foodSecurity": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "color on foodSecurity": "campaign-pdf=N dossier-pdf=N foundry=N web-display=R web-transitive=N world-book=N",
@@ -9547,7 +9427,7 @@
   "magicOffset on foodSecurity": "dossier-pdf=N web-display=N",
   "magicSupplement on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "magicTradeChannel on foodSecurity": "dossier-pdf=R foundry=R web-transitive=R",
-  "prosperityMod on foodSecurity": "",
+  "prosperityMod on foodSecurity": "dossier-pdf=R web-display=R",
   "rawDeficit on foodSecurity": "dossier-pdf=N foundry=N web-display=N",
   "resilienceScore on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "stockpile on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
@@ -9671,7 +9551,7 @@
   "summary on impactDigest": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "tags on impactDigest": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "critical on imports": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
-  "reasons on imports": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
+  "reasons on imports": "campaign-pdf=N dossier-pdf=R foundry=N news=N web-display=R web-transitive=N world-book=N",
   "recommended on imports": "dossier-pdf=R web-display=R",
   "sev on incidents": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "tick on incidents": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
@@ -9689,7 +9569,7 @@
   "institution on information": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "name on information": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "hasAlchemist on inst": "",
-  "hasBank on inst": "",
+  "hasBank on inst": "dossier-pdf=R web-display=R",
   "hasBlackMarket on inst": "",
   "hasCathedral on inst": "",
   "hasCharterHall on inst": "",
@@ -9701,13 +9581,13 @@
   "hasGarrison on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "hasGates on inst": "",
   "hasGranary on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
-  "hasGuild on inst": "",
+  "hasGuild on inst": "dossier-pdf=R web-display=R",
   "hasHospital on inst": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=R",
   "hasMagesGuild on inst": "",
   "hasMagicInst on inst": "dossier-pdf=R web-display=R",
-  "hasMarket on inst": "web-transitive=N",
+  "hasMarket on inst": "dossier-pdf=R web-display=R web-transitive=N",
   "hasMercenary on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
-  "hasMerchantGuild on inst": "",
+  "hasMerchantGuild on inst": "dossier-pdf=R web-display=R",
   "hasMilitaryInst on inst": "dossier-pdf=R web-display=R",
   "hasMilitia on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "hasMonastery on inst": "",
@@ -9717,7 +9597,7 @@
   "hasSmuggling on inst": "",
   "hasThievesGuild on inst": "",
   "hasWalls on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "hasWarehouse on inst": "",
+  "hasWarehouse on inst": "dossier-pdf=R web-display=R",
   "hasWatch on inst": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "hasWizardTower on inst": "",
   "names on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -9743,13 +9623,13 @@
   "category on institutions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=R world-book=R",
   "causeEventId on institutions": "dossier-pdf=R foundry=R web-transitive=R",
   "charter on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "clandestine on institutions": "",
+  "clandestine on institutions": "dossier-pdf=N web-display=N",
   "coherenceRepair on institutions": "",
   "desc on institutions": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=N",
   "description on institutions": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "exclusiveGroup on institutions": "web-display=N web-transitive=N",
   "exclusiveGroupCoexists on institutions": "",
-  "facets on institutions": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
+  "facets on institutions": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "factionSource on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "forbiddenResources on institutions": "web-transitive=R",
   "forbiddenTradeRoutes on institutions": "web-transitive=N",
@@ -9769,7 +9649,7 @@
   "source on institutions": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "stateRead on institutions": "news=N web-transitive=N",
   "status on institutions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
-  "subterranean on institutions": "",
+  "subterranean on institutions": "dossier-pdf=N web-display=N",
   "tags on institutions": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "terrainAccess on institutions": "web-transitive=N",
   "terrainRequired on institutions": "web-transitive=N",
@@ -9984,7 +9864,7 @@
   "probabilityMult on metadata": "web-transitive=N",
   "randomDepletionEligible on metadata": "dossier-pdf=N foundry=N web-transitive=N",
   "reason on metadata": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "recoveryMode on metadata": "dossier-pdf=N foundry=N web-transitive=N",
+  "recoveryMode on metadata": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "relationshipType on metadata": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "renewability on metadata": "",
   "residualEffects on metadata": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
@@ -19565,7 +19445,7 @@
   "tick on proposals": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "updatedAt on proposals": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "reason on prosperityMod": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "type on prosperityMod": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
+  "type on prosperityMod": "campaign-pdf=N dossier-pdf=R foundry=N json-export=N news=N web-display=R web-transitive=N world-book=N",
   "value on prosperityMod": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "deposits on proud": "web-transitive=N",
   "lastDepositTick on proud": "web-transitive=N",
@@ -19861,7 +19741,7 @@
   "imports on resourceAnalysis": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "priorityNotes on resourceAnalysis": "dossier-pdf=R foundry=R web-display=R",
   "resourceChains on resourceAnalysis": "",
-  "resourceConditions on resourceAnalysis": "",
+  "resourceConditions on resourceAnalysis": "dossier-pdf=R web-display=R",
   "strategicValue on resourceAnalysis": "dossier-pdf=R foundry=R web-display=R web-transitive=N",
   "terrain on resourceAnalysis": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "chainKey on resourceChains": "dossier-pdf=N foundry=N web-display=N",
@@ -19872,12 +19752,12 @@
   "processingInstitutions on resourceChains": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "processingTags on resourceChains": "web-display=N",
   "rawResource on resourceChains": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "condition on resourceConditions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "condition on resourceConditions": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "conditionDescription on resourceConditions": "dossier-pdf=N foundry=N web-transitive=N",
   "key on resourceConditions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "label on resourceConditions": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
+  "label on resourceConditions": "campaign-pdf=N dossier-pdf=R foundry=N json-export=N news=N web-display=R web-transitive=N world-book=N",
   "randomDepletionEligible on resourceConditions": "dossier-pdf=N foundry=N web-transitive=N",
-  "recoveryMode on resourceConditions": "dossier-pdf=N foundry=N web-transitive=N",
+  "recoveryMode on resourceConditions": "dossier-pdf=R foundry=N web-display=R web-transitive=N",
   "type on resourceConditions": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "depletedSince on resourceDynamics": "web-transitive=N",
   "discoveryAcc on resourceDynamics": "web-transitive=N",
@@ -19888,7 +19768,7 @@
   "kind on resourceTaxonomy": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "label on resourceTaxonomy": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "randomDepletionEligible on resourceTaxonomy": "dossier-pdf=N foundry=N web-transitive=N",
-  "recoveryMode on resourceTaxonomy": "dossier-pdf=N foundry=N web-transitive=N",
+  "recoveryMode on resourceTaxonomy": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "renewability on resourceTaxonomy": "",
   "type on resourceTaxonomy": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "ambitionHeat on rivalPatch": "dossier-pdf=N foundry=N web-transitive=N",
@@ -19934,11 +19814,11 @@
   "npcId on rungs": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "standing on rungs": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=R",
   "blackMarketCapture on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "compound on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
+  "compound on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "crimeTypes on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "criminalInstitutions on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "economicDragDesc on safetyProfile": "web-display=R",
-  "flags on safetyProfile": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "flags on safetyProfile": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "guardEffectivenessDesc on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
   "plotHooks on safetyProfile": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "safetyDesc on safetyProfile": "dossier-pdf=R web-display=R",
