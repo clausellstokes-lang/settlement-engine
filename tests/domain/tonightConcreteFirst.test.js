@@ -17,11 +17,18 @@ import { crisisCastSenseFindings } from '../../src/domain/coherence/crisisFactFi
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SEEDS = [20, 26, 55, 57];
+// RE-KEYED BY IDENTITY (MERGE-CAR-2, 2026-11-08): the people car re-deals the seat card, so soak1k-26's seat is
+// Morrigan MacDonald at the composed tip, with a voiceable goal ("get the seat obeyed again …") — the empty-seat
+// case no longer arises there. The case pinned — the seat is the crisis's TARGET, its goal abstract, its own
+// crisis secret withheld, no temperament: voiced with nothing — measured over soak1k-0..2499 at the tip: 13 empty
+// seat lines, two of them exactly this case (soak1k-868, insurgency; -1968); the first is pinned. Was soak1k-26,
+// Rhiannon Sullivan (the revolt's target).
+const EMPTY_SEAT_SEED = 868;
 /** @type {Record<number, any>} */
 const born = {};
 beforeAll(async () => {
   await ensureLaws();
-  for (const i of SEEDS) born[i] = birth(i).settlement;
+  for (const i of [...SEEDS, EMPTY_SEAT_SEED]) born[i] = birth(i).settlement;
 }, 300_000);
 
 describe('R11 · the Tonight sheet prefers the concrete', () => {
@@ -37,9 +44,9 @@ describe('R11 · the Tonight sheet prefers the concrete', () => {
     expectNoSeedFailures(failures, 'every printed want is voiceable');
   });
 
-  it('soak1k-26: the seat (the revolt\'s target) with an abstract goal, the crisis secret withheld and no temperament on the record is voiced with nothing, never the abstract goal', () => {
-    const seat = composeTonightSheet(born[26]).people.find((p) => p.why === 'seat');
-    expect(seat).toMatchObject({ name: 'Rhiannon Sullivan', says: 'want', line: '' });
+  it('soak1k-868: the seat (the insurgency\'s target) with an abstract goal, the crisis secret withheld and no temperament on the record is voiced with nothing, never the abstract goal', () => {
+    const seat = composeTonightSheet(born[EMPTY_SEAT_SEED]).people.find((p) => p.why === 'seat');
+    expect(seat).toMatchObject({ name: 'Slavica Smirnov', says: 'want', line: '' });
   });
 
   it('soak1k-26 and -55: a crisis target whose own line falls back never voices that crisis\'s secret (F13 target_runs_plot)', () => {

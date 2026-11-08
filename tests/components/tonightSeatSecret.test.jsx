@@ -7,7 +7,7 @@
  * "Wants to". No `goal.short` held a sentence (0 of 597 NPCs). The sheet now says what the line
  * is (`says`), and the three renderers print a secret as a secret (`printsAsWant`).
  *
- * Seeds: the twelve seam settlements of the base sixty, born the soak's way.
+ * Seeds: the first twelve seam settlements of the composed corpus (MERGE-CAR-2 re-key, below), born the soak's way.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import React from 'react';
@@ -21,7 +21,14 @@ import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '.
 import { tonightWantsFindings } from '../../src/domain/coherence/readerBattery.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
-const SEAM_SEEDS = [2, 10, 14, 18, 22, 37, 38, 42, 45, 51, 53, 59];
+// MERGE-CAR-2 (2026-11-08, re-keyed BY IDENTITY — the seam, never a seed number): the people car re-deals the
+// seat card and the cast (373a2947b), so at the composed tip 8 of the base's twelve (10, 14, 18, 22, 37, 51, 53,
+// 59) voice the crisis secret through a keeper who is not the seat-holder — no seam there. The seam itself stands:
+// measured over soak1k-0..239, 33 seam settlements at the tip (50 at the integration parent 7b3ffb6ee). The set
+// is the FIRST TWELVE seam settlements at the tip, still twelve cases; the Foundry arm reads the first of them.
+// Was [2, 10, 14, 18, 22, 37, 38, 42, 45, 51, 53, 59] (the base sixty's seam).
+const SEAM_SEEDS = [2, 16, 31, 36, 38, 39, 42, 43, 45, 62, 69, 74];
+const FOUNDRY_SEED = 2;
 /** @type {Record<number, any>} */
 const born = {};
 beforeAll(async () => {
@@ -48,7 +55,7 @@ describe('R11 · R7: a kept secret never prints after "Wants to"', () => {
   });
 
   it('the Foundry journal prints the kept secret as a secret too', () => {
-    const s = born[22];
+    const s = born[FOUNDRY_SEED];
     const seat = composeTonightSheet(s).people.find((p) => p.why === 'seat');
     const page = JSON.stringify(buildJournalPages(buildViewModel({ settlement: s }))).replace(/\\'|&#39;|&#x27;/g, "'");
     expect(page).toContain(`${TONIGHT_COPY.secret}: ${seat.line.slice(0, 40)}`);

@@ -54,12 +54,19 @@ describe('the one-NPC thorps of rung 2', () => {
   // drawDeclared callers keyed on the settlement, so the argmax's tie-break reads this settlement's identity).
   // Measured: the old line at 24ca3ee49^ (60101f360), the new at 24ca3ee49 and at the tip; narrative_quality
   // passes at both.
-  it('soak1k-1248: the {npc} secret is refused; the slot prints the gate\'s resolution and narrative_quality passes', () => {
-    const s = birth(1248).settlement;
+  // RE-KEYED BY IDENTITY (MERGE-CAR-2, 2026-11-08): the people car re-deals the cast — one face per face-bearing
+  // institution — so soak1k-1248 is born with TWO cards at the composed tip (the reeve and the boat-headman; its
+  // `{npc}` secret now names the other card, as it should). The case pinned is the ONE-NPC thorp under
+  // recently_betrayed, whose `{npc}` lines (`needs: ['other npc']`) the declaration refuses: measured over
+  // soak1k-0..9999 at the tip, the first is soak1k-312, its secret one of the pool's admitted lines (the same
+  // STRESS_INSTITUTION_EFFECTS.recently_betrayed pool), narrative_quality clean. Was soak1k-1248, "Has the actual
+  // evidence of who committed the betrayal, …" / "The evidence also implicates Feudal Stewardship, …".
+  it('soak1k-312: the {npc} secret is refused; the slot prints the gate\'s resolution and narrative_quality passes', () => {
+    const s = birth(312).settlement;
     expect(s.npcs).toHaveLength(1);
     expect(s.npcs[0].secret).toEqual({
-      what: 'Has the actual evidence of who committed the betrayal. They found it accidentally and immediately hid it',
-      stakes: 'The evidence also implicates Feudal Stewardship, which means the fallout would be much larger than anyone currently expects',
+      what: 'Knows who did it and has said nothing. The betrayer is someone they owe a significant debt to',
+      stakes: 'The debt is called in if they speak. The settlement suffers if they don\'t. They\'ve been choosing themselves for six weeks',
     });
     expect(JSON.stringify(s.npcs[0].secret)).not.toMatch(/\bSomeone\b/); // anchored: the secret is pinned to its exact text above
     expect(narrativeQuality(s)?.findings).toEqual([]);
