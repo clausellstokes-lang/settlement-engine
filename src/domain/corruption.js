@@ -368,11 +368,16 @@ function pressureRateMult(mult) {
 /**
  * Generation-time corruption probability for an ELIGIBLE NPC with a criminal
  * institution present. Caller must check eligibility + criminal presence first.
+ * `extra` (ALLEGIANCE-CAR1, J-5) is a term added to the sum BEFORE the clamp — the hidden
+ * allegiance's organized-crime term (domain/people/allegiance.js); 0 (every other caller) is
+ * byte-identical.
  * @param {{crime?:number, security?:number, prosperity?:number}} climate
+ * @param {number} [extra]
  */
-export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 0.5 } = {}) {
+export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 0.5 } = {}, extra = 0) {
   const t = CORRUPTION_TUNING.spawn;
-  const p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity;
+  const p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity
+    + (Number.isFinite(extra) ? extra : 0);
   return clamp(p, t.min, t.max);
 }
 

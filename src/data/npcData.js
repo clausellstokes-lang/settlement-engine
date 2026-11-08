@@ -2,6 +2,7 @@
 // All constants exported for use by npcGenerator.js
 
 import { pickVariant } from '../kernel/proseHash.js';
+import { HANDLER_TIE_LINES } from './people/handlerTieLines.js';
 
 export const MANNERISMS = [
   'drums fingers on surfaces when thinking',
@@ -2066,6 +2067,20 @@ export const STRESS_ECONOMIC_EFFECTS = {
     type: 'enemy',
   },
 };
+
+// THE HANDLER TIE'S ARCHETYPES (the allegiance train, car 1, ALLEGIANCE-CAR1, 2026-11-08; the design §1.5): an
+// agent's one outgoing tie runs to its handler, its kind from the vector on the card (never re-rolled; fear's four
+// leverage sub-kinds drawn on the agent's tie fork). WRITE-PEOPLE's lines (data/people/handlerTieLines.js, every
+// one for the owner's veto) wrapped in THIS file's own pairProse, so the one-index draw
+// (relationshipArchetypes.js :: createTieProseDraw) holds unchanged; each styles as an existing
+// RELATIONSHIP_STRENGTHS type. A table BESIDE STRESS_ECONOMIC_EFFECTS, never inside it: the stress table's roll
+// (computeRelTension) and its census declarations stay exactly as they were.
+export const HANDLER_TIE_ARCHETYPES = Object.freeze(Object.fromEntries(Object.entries(HANDLER_TIE_LINES).map(([key, row]) => [key, Object.freeze({
+  label: row.label,
+  desc: pairProse('d', row.desc),
+  tension: pairProse('t', row.tension),
+  type: row.type,
+})])));
 
 // TRAIT_AGGRESSION (belligerent↔pacific) and TRAIT_ALIGNMENT (good↔evil) — the two light
 // signed-weight maps over the AUTHORED personality vocabulary — now live in the zero-import

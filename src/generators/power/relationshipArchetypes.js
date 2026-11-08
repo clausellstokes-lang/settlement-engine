@@ -5,7 +5,7 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
-import { STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
+import { HANDLER_TIE_ARCHETYPES, STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
 import { drawDeclared } from '../../domain/facts/drawDeclared.js';
 
 export const computeRelTension = (factionA, factionB, stressFlags, instFlags) => {
@@ -100,6 +100,28 @@ export const computeRelTension = (factionA, factionB, stressFlags, instFlags) =>
   return STRESS_ECONOMIC_EFFECTS.wary_alliance;
 };
 
+/**
+ * THE HANDLER TIE'S KIND (ALLEGIANCE-CAR1, the design §1.5): from the vector already on the agent's card, never
+ * re-rolled — greed and hunger for status a SILENT PARTNERSHIP, forbidden patron THE PATRON NO ONE NAMES,
+ * fanaticism SWORN TO THE CAUSE, fear HELD OVER THEM by one of four leverage sub-kinds (drawn by the caller on the
+ * agent's own tie fork).
+ */
+export const HANDLER_LEVERAGE_KINDS = Object.freeze(['debt', 'secret', 'crime', 'loved']);
+/**
+ * @param {string} vector the allegiance's vector @param {string} [leverage] one of HANDLER_LEVERAGE_KINDS (fear only)
+ * @returns {any} a HANDLER_TIE_ARCHETYPES entry
+ */
+export const handlerArchetypeFor = (vector, leverage = 'debt') => {
+  if (vector === 'fear') return HANDLER_TIE_ARCHETYPES[`handler_leverage_${HANDLER_LEVERAGE_KINDS.includes(leverage) ? leverage : 'debt'}`];
+  if (vector === 'forbidden_patron') return HANDLER_TIE_ARCHETYPES.handler_patron;
+  if (vector === 'fanaticism') return HANDLER_TIE_ARCHETYPES.handler_cause;
+  return HANDLER_TIE_ARCHETYPES.handler_partnership;
+};
+
+/** The archetype's key in either table (the stress table's first; the handler table's beside it). @param {unknown} archetype @returns {string | undefined} */
+const archetypeKeyOf = (archetype) => Object.entries(STRESS_ECONOMIC_EFFECTS).find(([, value]) => value === archetype)?.[0]
+  ?? Object.entries(HANDLER_TIE_ARCHETYPES).find(([, value]) => value === archetype)?.[0];
+
 /** Two stand-in names no generated NPC carries, for reading which lines name both parties. */
 const PARTY_A = { name: 'Party-A-of-the-tie' };
 const PARTY_B = { name: 'Party-B-of-the-tie' };
@@ -179,7 +201,7 @@ export const createTieProseDraw = (force, facts = null) => {
   /** @type {Map<unknown, {base: number, used: number}>} */
   const draws = new Map();
   return (archetype, npc, partner) => {
-    const archetypeKey = Object.entries(STRESS_ECONOMIC_EFFECTS).find(([, value]) => value === archetype)?.[0];
+    const archetypeKey = archetypeKeyOf(archetype);
     let draw = draws.get(archetype);
     if (!draw) {
       draw = { base: fnv1a32(`${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`), used: 0 };
@@ -194,7 +216,7 @@ export const createTieProseDraw = (force, facts = null) => {
     const pool = tiePairPool(archetype);
     const resolved = drawDeclared(pool, {
       draw: (p) => p[drawnVariant], facts, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
-      poolId: `npcData:STRESS_ECONOMIC_EFFECTS.${archetypeKey ?? archetype?.label}`, surface: 'relationships', drawKind: 'H',
+      poolId: `npcData:${archetypeKey && Object.hasOwn(HANDLER_TIE_ARCHETYPES, archetypeKey) ? 'HANDLER_TIE_ARCHETYPES' : 'STRESS_ECONOMIC_EFFECTS'}.${archetypeKey ?? archetype?.label}`, surface: 'relationships', drawKind: 'H',
     });
     const proseVariant = resolved.line ? resolved.line.id : drawnVariant;
     return {

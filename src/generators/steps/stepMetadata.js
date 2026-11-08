@@ -158,12 +158,6 @@ export const STEP_METADATA = Object.freeze({
       return n ? `${n} NPC${n === 1 ? '' : 's'} named` : null;
     },
   },
-  corruptionPass: {
-    summary: (ctx) => {
-      const n = (ctx.npcs || []).filter(npc => npc?.corrupt === true).length;
-      return n ? `${n} corrupted figure${n === 1 ? '' : 's'}` : 'No corruption climate';
-    },
-  },
   generateNarratives: {
     summary: () => null,
   },
@@ -210,7 +204,6 @@ export const STEP_PRESENTATION = Object.freeze({
   powerEconomyReconcilePass: { label: 'Finalize power against the economy', description: 'Replay the original political intent against the final economic facts without reopening institution pulls.' },
   structuralValidationPass: { label: 'Validate structure', description: 'Check the FINAL roster for tier, dependency, and access contradictions: the coherence receipt.' },
   generatePopulation: { label: 'Generate NPCs', description: 'Cast the named NPCs: rulers, faction heads, plot-hook owners, and the merchant your players will ask about.' },
-  corruptionPass: { label: 'Seed corruption', description: 'Where a criminal institution exists, roll which flawed NPCs were already corrupted at generation.' },
   generateNarratives: { label: 'Compose narratives', description: 'Write the prose layer: history, defense, daily-life, and per-faction asides.' },
   assembleSettlement: { label: 'Assemble dossier', description: 'Bundle every layer into the final settlement object the dossier renders from.' },
   resolveCrisisCast: { label: 'Cast the crisis', description: 'Name who each active crisis touches, from the people, houses and institutions already in the dossier.' },
