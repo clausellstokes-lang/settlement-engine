@@ -57,3 +57,30 @@ When the FP unparks: one re-basing design pass sized from this census (the large
 ## 7. THE OWNER'S UNIFICATION LAW (2026-11-08, ~19:5x UTC, verbatim): "So in my view we simply integrate much of what is attributed to factions to the powers as a whole, isn't that correct? … Treating the powers as a whole as semi-factions where appropriate for FP to retire factions outright?"
 
 RULED by the chair, parked with the FP, vetoable: THREE GRAINS AND ONE HINGE. The POWER holds strategy (strength, legitimacy, pacts, war, capture, patronage, competition); the INSTITUTION holds the economy and the offices (a house backs powers with shares through `houseBacksOf`, has a face, keeps books; habit stays institution-grain); the PERSON holds agency (goals, ties, deeds, verdicts, the hidden allegiance). The hinge is the MEMBERSHIP, a person's rank and share in a power. The retired grouping was a fourth grain duplicating the power with a roster; rank-and-file membership is a share with no rank, the ranked three are the leadership the grouping picked by roll — nothing is lost. EVERY faction mechanic in the FP maps onto a power plus a derived read: members = the cards whose memberships name the power (`membersOf(power)`); leader = the rank-1 face; a person's standing = `rankIn(card, power)`; a person's home power = the first-rank or largest-share membership; roster helpers = ONE reader module (three or four functions) under the allegiance's one-reader law — the spine of the 38-file re-pointing. WHERE A PERSON MUST STAND: the person stage (RN, CH, PT, OP — OD-FC-86 "only focus on named NPCs"), the oath-holder, the double agent and the allegiance, and the ladder as rank MOVEMENT within a power (person-level, derived from the hinge, never rolled). THE VOCABULARY, ruled now: "power" is the word and "faction" its retired synonym in the fold's §5; every FP volume reads "faction" as "power" from the re-basing on; the persisted key `powerStructure.factions` is NOT renamed by the re-basing (saves, the public sanitizer's `is_npc_obj` guard on `powerStructure.factions[].members`, every golden) — a migration window's act, the owner's by the persisted-shape gate.
+
+## 8. What remains for decisions, and what is left to retire (the owner's question of ~20:0x UTC, verbatim: "So what remains after that for decisions and what is left to retire?")
+
+**Decisions remaining (two the owner's by gate; the rest the chair's at the unpark, each vetoable):**
+1. THE OWNER'S — the persisted key `powerStructure.factions` → `powers`, a persisted-shape change at a migration window (saves, the sanitizer's `is_npc_obj` guard, every golden).
+2. THE OWNER'S — OD-FC-61: the person substrate lit in the default preset?
+3. The agency's input: car 4's keyed intents (`goal.intent.key`), not the 23-key catalogue — the chair rules intents unless vetoed.
+4. The two axes of compromise: the LOCAL allegiance and ES's FOREIGN compromised mark meet in one carried field (`allegiance.leash` / a foreign patron); the web's recruit filter reads the allegiance (never the guild's own agent, J-19's family); the compromised general's foreign leash born at birth or at tick (G10 has no birth source today); CH's "handler" (a home-court liaison) renamed so the word means one thing.
+5. One patronage: the train's derived `patronageOf` is the fact; IN-3's brokerage patronage becomes its reader or is renamed.
+6. The census law binds time: a constitutional requirement (the fold's §1, requirement 25) that every event, news and hearing line declares the facts it presumes in the census vocabulary; a TIME LADDER (a thousand towns advanced a year, stop on contradiction, tune, climb) before any chain lights.
+7. Two measurements that may become decisions: bloc warmth under one outgoing tie per card (R-P7) — if it thins, warmth read from shared memberships, not ties; OP's freed captive keyed by card id, not roster position, if the position does not survive regeneration.
+8. The first felt core: C0 THE HEARING WEEK → C0.5 THE CAUSE WALK → the agency rebuilt on memberships, allegiances and intents → C1 STATECRAFT; the crown after (the chair's recommendation; the fold's order otherwise stands).
+
+**The retirement ledger (data retired by the people car and car 1; mechanisms retired by the re-basing):**
+- the six per-person faction fields and the three roster helpers (`factionAffiliation`, `secondaryAffiliation`, `npcHomeInstitution`, `linkedFactionIds`, the grouping's `members[]` and `dominantCategory`; `factionRosterOf`, the grouping's `npcInFaction` arm, the roster pick) — gone at birth; their 38 simulation readers (`fpz-list.json`) re-pointed through ONE reader module (`membersOf`, `rankIn`, the home power, the ranked three);
+- the local corruption mark (`corrupt`, `corruptionVector`, `corruptTies`) and `corruptionPass` — car 1; the simulation keeps only the FOREIGN "compromised" tag (the owner's word) and `corruptionLeash`'s foreign arm;
+- the density law's rung roles (`densityRungRole`, `RUNG_ROLE_FIELD`) and its rung dispersal and succession (`disperseNamedRoster`, `claimantsFor`);
+- the rung-role ladder seed (`npcLadderGoals.mintGoal({ faction, rungIndex })`) and the ladder's rungs everywhere → rank movement within a power;
+- `FACTION_SEAT_ROLES` and the `leader_champion` seat (BD §9.11, RN §5.3) → the ranked three;
+- `generators/factionRoles.js`'s roles (`warden` …) as PR's hunt-leader key → institution faces and titles;
+- `genesisPatronOf` → `houseBacksOf`;
+- every codepoint-stable seat pick (`oathHolderOf`, the GENERALS garrison commander) → rank 1;
+- CH's faction-seating admission; the JSON-alias trap clause (CW §4); `npcAgency`'s corruption re-roll;
+- the role-keyed goal pools (`NPC_FACTION_GOALS`, 23 pools) and the 23-key `NPC_GOAL_CATALOG` the agency ran on → car 4's families and keyed intents;
+- the word "faction" → a retired synonym of "power" in the fold's §5.
+
+**Owed to the second act, not a retirement:** the simulation-origin dark facts of the writer-reach register (the war pulse's 41 among them), deferred by the owner until after FPZ.
