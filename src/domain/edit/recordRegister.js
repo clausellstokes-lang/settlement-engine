@@ -107,6 +107,12 @@ export const SAVED_KEY_WRITERS = Object.freeze([
     key: 'migrationReports', file: 'src/domain/settlementMigrations.js', symbol: 'migrateV1toV2',
     sites: 1, spelling: 'assign', reachedFromSrc: true,
   }),
+  // ALLEGIANCE-CAR1 (2026-11-08): the v2 -> v3 migration (the allegiance's) reports what it could not move — its one
+  // `migrationReports` write (settlementMigrations.js :: migrateV2toV3), reached through the chain's v2 -> v3 step.
+  Object.freeze({
+    key: 'migrationReports', file: 'src/domain/settlementMigrations.js', symbol: 'migrateV2toV3',
+    sites: 1, spelling: 'assign', reachedFromSrc: true,
+  }),
   Object.freeze({
     key: 'dmLayer', file: 'src/store/editSlice.js', symbol: 'applyCascadeEdit',
     sites: 1, spelling: 'assign', reachedFromSrc: true,

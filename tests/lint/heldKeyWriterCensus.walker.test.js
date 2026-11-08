@@ -126,7 +126,13 @@ const ROSTER = Object.freeze([
   { symbol: 'mergeNPCLists', file: 'src/generators/npcGenerator.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   // 2026-11-07 PEOPLE-1 CAST (R-P2/R-P3): `disperseNamedRoster` is RETIRED from birth — the cast is the roster's faces;
   // the powers' people are written by `assignCastPowers` in the same named child stream, through the same seam.
-  { symbol: 'assignCastPowers', file: 'src/generators/people/castPowers.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
+  // ALLEGIANCE-CAR1 (2026-11-08): `assignCastPowers` -> its two halves plus the allegiance's two writers, by measurement:
+  // the seam now calls `landMemberships` (A1) -> `dealAllegiances` (A2, writes `allegiance` on the cards) -> `rankPowers`
+  // (A3) -> `assignHandlers` (A4, writes `allegiance.handler`), all inside enrichNpcCoherence's one named child stream.
+  { symbol: 'landMemberships', file: 'src/generators/people/castPowers.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
+  { symbol: 'rankPowers', file: 'src/generators/people/castPowers.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
+  { symbol: 'dealAllegiances', file: 'src/domain/people/allegiance.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
+  { symbol: 'assignHandlers', file: 'src/domain/people/allegiance.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   { symbol: 'enrichNPCsWithStructure', file: 'src/generators/npcStructure.js', cls: 'enricher', stream: NAMED_CHILD, via: 'generateCoherence' },
   // 2026-11-07 PEOPLE-LAND (M-2, the shim out): `relinkFactionMembers`, the one MIRROR, left with the NPC grouping.
   { symbol: 'ensureFactionStructuralNpcs', file: 'src/generators/factionRoles.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
@@ -224,6 +230,9 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'resolveGenerationWorldLaw', reason: 'a pure resolver of the generation world law from the context and config; it writes nothing.' },
   { symbol: 'settleCrimeLinesToSignal', reason: 'rewrites the safety profile crime-line descs inside economicState from the final crime signal; economicState is not a held key.' },
   // CENSUS-2c unit 1a (6dda5f72c), composed at the pool census's merge; classed by LANDING-R2 seat E.
+  // ALLEGIANCE-CAR1 (2026-11-08): the allegiance receipts' two calls in the assembly body, measured.
+  { symbol: 'recordTrace', reason: 'appends a receipt to `simulationTrace` through the run\'s deterministic clock, the sanctioned cross-cutting ledger, never a held key.' },
+  { symbol: 'takeAllegianceReceipts', reason: 'takes (and forgets) the receipts the seam left in a module WeakMap keyed by the settlement; it writes no key on the record.' },
   { symbol: 'factsOf', reason: 'a pure READ of the record\'s declared facts, handed to renderStressSummary as its facts bag; it returns a new object and writes nothing at all.' },
 ]);
 
@@ -258,13 +267,14 @@ function liveStepRows() {
 // `settlement`), so the STEP registry names no writer of either; the writers are held at the
 // FUNCTION level instead (ROSTER, `generateFactions` and `generateConflicts`), the shape `name`
 // already had. The writer-step count is unmoved at 12: both retiring steps still write `npcs`.
+// ALLEGIANCE-CAR1 (2026-11-08): 14 -> 13, `corruptionPass|npcs|mutates` RETIRED with the step (J-2): the allegiance
+// is dealt at the coherence seam, inside assembleSettlement (whose row names `npcs` through generateCoherence), measured.
 const STEP_ROSTER = Object.freeze([
   'assembleInstitutions|institutions|provides',
   'assembleSettlement|powerStructure|mutates',
   'assembleSettlement|relationships|mutates', // 2026-11-07 PEOPLE-1 CAST: the coherence seam appends the `other` mints' ties (people/castPowers.js)
   'cascadePass|institutions|mutates',
   'coherenceRepairPass|institutions|mutates',
-  'corruptionPass|npcs|mutates',
   'factionCorrelationPass|institutions|mutates',
   'generatePopulation|npcs|provides',
   'generatePopulation|relationships|provides',
@@ -526,8 +536,8 @@ describe('EM-R1 — the writer census of every held key', () => {
 
     expect(live, 'a held-key writer step appeared or retired').toEqual([...STEP_ROSTER]);
     const writerSteps = [...new Set(STEP_ROSTER.map((row) => row.split('|')[0]))];
-    expect(writerSteps).toHaveLength(12);
-    expect(getStepMeta()).toHaveLength(23); // 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03); its roster write is gated on chooseOrPin(pins, 'npcs')
+    expect(writerSteps).toHaveLength(11); // ALLEGIANCE-CAR1 (2026-11-08): 12 -> 11, corruptionPass left the registry (J-2), measured
+    expect(getStepMeta()).toHaveLength(22); // ALLEGIANCE-CAR1 (2026-11-08): 23 -> 22, corruptionPass retired (J-2), measured; 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03); its roster write is gated on chooseOrPin(pins, 'npcs')
   });
 
   it('A3 — the FUNCTION-LEVEL roster is live and exact, and its discovery set is closed', () => {
@@ -538,7 +548,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(17); // 18 + 15 -> 17 (MERGE-CAR): the union of both sides less fitFactionRoster (CENSUS-4 R12, retired by the chair's SC-1 ruling): the car's 15 plus the rung-2 landing's resolveFactionLabelsAtClose and fishTradeTwinned; 16 -> 15 (PEOPLE-LAND): relinkFactionMembers and generateFactions left (M-2), truePersonHooks joined (lane 3's); with the grouping; 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
+    expect(ROSTER).toHaveLength(20); // ALLEGIANCE-CAR1 (2026-11-08): 17 -> 20, assignCastPowers -> landMemberships, rankPowers, dealAllegiances, assignHandlers (measured at the seam); 18 + 15 -> 17 (MERGE-CAR): the union of both sides less fitFactionRoster (CENSUS-4 R12, retired by the chair's SC-1 ruling): the car's 15 plus the rung-2 landing's resolveFactionLabelsAtClose and fishTradeTwinned; 16 -> 15 (PEOPLE-LAND): relinkFactionMembers and generateFactions left (M-2), truePersonHooks joined (lane 3's); with the grouping; 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -650,7 +660,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(inside.filter((symbol) => !called(enrichmentBody, symbol)),
       'a named-child row is not called from the one named child stream').toEqual([]);
     expect(inside).toEqual([
-      'assignCastPowers', 'buildPoliticalNarrative', 'enrichNPCsWithStructure', 'mergeNPCLists',
+      // ALLEGIANCE-CAR1 (2026-11-08): assignCastPowers -> the four writers the seam now calls (measured).
+      'assignHandlers', 'buildPoliticalNarrative', 'dealAllegiances', 'enrichNPCsWithStructure', 'landMemberships', 'mergeNPCLists', 'rankPowers',
     ]);
 
     // A SECOND named child stream around a held writer reds BY NAME: the substream label set is
@@ -762,7 +773,8 @@ describe('EM-R1 — the writer census of every held key', () => {
     // `stageSealDecreeIntent` and EM-F3d (b5d5ca71f) added `scrubDeletedCounterparty`, two more `decrees`
     // writes in editSlice.js (the register's two new rows name them).
     // PEOPLE-5B (M-7): 12 -> 13, migrateV1toV2's one `migrationReports` write.
-    expect(totalSites, 'the measured write sites of the governed keys').toBe(13);
+    // ALLEGIANCE-CAR1 (2026-11-08): 13 -> 14, migrateV2toV3's one `migrationReports` write (measured).
+    expect(totalSites, 'the measured write sites of the governed keys').toBe(14);
 
     // (c2) ⭐ NOTE-14's SECOND MEASUREMENT: a DECLARED writer is not a LIVE one. `reachedFromSrc`
     // is re-derived from the call graph, so the register can never imply that `peaceOffers` is
@@ -781,7 +793,8 @@ describe('EM-R1 — the writer census of every held key', () => {
       // RE-RECORDED AT THE TRAIN TIP (2026-09-23, the chair): 6 → 8 — E4d's stageSealDecreeIntent and
       // F3d's scrubDeletedCounterparty are both reached from src/ (the seal click; the delete).
       // PEOPLE-5B (M-7): 8 -> 9, migrateV1toV2 (reached through the v1 -> v2 step of the migration chain).
-      'every other writer is reached from src/').toBe(9);
+      // ALLEGIANCE-CAR1 (2026-11-08): 9 -> 10, migrateV2toV3 (the chain's v2 -> v3 step), measured.
+      'every other writer is reached from src/').toBe(10);
 
     // (d) EVERY NON-WRITER CARRIES A WRITTEN REASON, so the exempt table cannot become a silent
     // allow-list. anchored: the table is asserted non-empty first, so this is not a vacuous every.
