@@ -729,7 +729,7 @@ deliberate — dramatic irony is the product.
 2. `[street · misread]` Letters from {counterpart} still greet {settlement} as a devout town, and nobody here has written to say the old altar is gone.
 3. `[visitor · reader]` {counterpart} sits in {settlement}'s books as a house of the faithful, on the strength of a report that said so and has not been renewed; it was honest when it was written, is stale now, and will be acted on regardless.
 4. `[elder · misread]` {settlement}'s shrine is shut and stands in {counterpart}'s books as full: the report that said so was honest and is {timeband_age}, and the doors closed after it was written.
-5. `[unfolding · reader]` {settlement} still thinks of {counterpart}'s faith as it was long since; the picture is out of date, and the next decision will be made on it.
+5. `[unfolding · reader]` {settlement} still thinks of {counterpart}'s faith as it used to be; the picture is out of date, and the next decision will be made on it.
 6. `[counterforce · misread]` {counterpart} has {settlement} written down exactly as {settlement} is: a party came through after the patron changed, wrote what it found at {temple}, and the picture on that side has not had time to go stale.
 
 ---

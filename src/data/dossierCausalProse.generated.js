@@ -2263,7 +2263,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "reader"
           ],
-          "text": "{settlement} still thinks of {counterpart}'s faith as it was long since; the picture is out of date, and the next decision will be made on it.",
+          "text": "{settlement} still thinks of {counterpart}'s faith as it used to be; the picture is out of date, and the next decision will be made on it.",
           "slots": [
             "settlement",
             "counterpart"
