@@ -983,7 +983,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "{npc} holds the seat at {settlement} by a war and not by a following: the seat was weak when it was taken, {counterpart} is the answer to a question nobody here had asked, and the answer is still being paid for.",
+          "text": "{npc} holds {settlement}'s seat because of the war, not a following: the seat was weak when {npc} took it, the war with {counterpart} made it look strong, and the town is still paying for the war.",
           "slots": [
             "npc",
             "settlement",
@@ -1647,7 +1647,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
             "market",
             "dm-only"
           ],
-          "text": "{settlement}'s book carries the buying before the saying and each entry proper on its own page: {npc} had the {good} up before the word came, and the word came on schedule.",
+          "text": "{settlement}'s market books show {npc} bought up the {good} before the talk of a shortage began; the talk came right on time, and the town has been paying shortage prices for a shortage that never came.",
           "slots": [
             "settlement",
             "npc",
@@ -4186,7 +4186,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "host"
           ],
-          "text": "A stranger at {settlement} is introduced to {npc} by a title that matches no hall in this settlement. The town has been housing the title, and the title is the argument.",
+          "text": "Visitors to {settlement} are introduced to {npc} by a title that matches no hall in this town: the town shelters a claimant, and the title is its case for war.",
           "slots": [
             "settlement",
             "npc"
@@ -6391,7 +6391,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
             "seat",
             "dm-only"
           ],
-          "text": "The channel {faction} trusts at {settlement} is {house}'s and was theirs before the errand was: {npc} carries the cargo off the {route} road to {house} first and to {counterpart} after, and the divergence sits exactly where the detour is.",
+          "text": "The messenger {faction} trusts at {settlement} works for {house}: {npc} takes the reports off the {route} to {house} first and to {counterpart} after.",
           "slots": [
             "faction",
             "settlement",

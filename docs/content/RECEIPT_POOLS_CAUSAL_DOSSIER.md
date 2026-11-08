@@ -489,7 +489,7 @@ offered by default; the second is where a section composer may also draw.
 2. `[street · home]` Another levy has gone out of {settlement} for a war the town is not winning, and the hall will not hear the war spoken of kindly; when {faction} moves, the war is the thing it will move on.
 3. `[visitor · home]` {settlement}'s assembly is arguing about a climb-down rather than a defeat: the seat took the terms at {counterpart}'s gate rather than spend another season, and the town read that as the loss.
 4. `[counterforce · home]` {settlement}'s rulers are hated for the war in every quarter, but {faction}, which carries the anger, has never had the votes to bring them down.
-5. `[unfolding · home]` {npc} holds the seat at {settlement} by a war and not by a following: the seat was weak when it was taken, {counterpart} is the answer to a question nobody here had asked, and the answer is still being paid for.
+5. `[unfolding · home]` {npc} holds {settlement}'s seat because of the war, not a following: the seat was weak when {npc} took it, the war with {counterpart} made it look strong, and the town is still paying for the war.
 6. `[elder · home]` The hall at {settlement} has not spoken well of a war {timeband_since}: the last war cost its ruler the seat, and every ruler since has counted votes before counting enemies.
 
 ---
@@ -602,7 +602,7 @@ offered by default; the second is where a section composer may also draw.
 3. `[visitor · market]` {house}'s doors at {settlement} are shut and the books were sound: the word ran that the house was over-extended, the depositors came for their credit at once, and it could not pay what it never owed.
 4. `[counterforce · market]` The stalls at {settlement} are quoting {house} at the terms they quoted last season: the rumour ran its course in the taverns and never reached the book that sets the price.
 5. `[unfolding · market]` `[dm-only]` {faction} at {settlement} announced that the {good} was running short, though no cargo list ever showed it, and each season people trust its word less.
-6. `[elder · market]` `[dm-only]` {settlement}'s book carries the buying before the saying and each entry proper on its own page: {npc} had the {good} up before the word came, and the word came on schedule.
+6. `[elder · market]` `[dm-only]` {settlement}'s market books show {npc} bought up the {good} before the talk of a shortage began; the talk came right on time, and the town has been paying shortage prices for a shortage that never came.
 
 ---
 
@@ -1107,7 +1107,7 @@ the reader.
 
 1. `[ledger · host]` {settlement} keeps a claimant to {counterpart}'s seat as a guest, and the guest is why the town's war has a name it can say out loud.
 2. `[street · host]` There is a household in {settlement}'s upper town that everybody treats as a court; it has no town to be a court of, which is the point of keeping it.
-3. `[visitor · host]` A stranger at {settlement} is introduced to {npc} by a title that matches no hall in this settlement. The town has been housing the title, and the title is the argument.
+3. `[visitor · host]` Visitors to {settlement} are introduced to {npc} by a title that matches no hall in this town: the town shelters a claimant, and the title is its case for war.
 4. `[counterforce · host]` {settlement} has sheltered a losing claimant through {timeband_span} and never gone to war for the claim.
 5. `[unfolding · host]` The seat {settlement} restored at {counterpart} is now the seat disputing {settlement}'s terms; the restoring bought a gratitude that is spent and a rival that is not.
 6. `[elder · host]` The old hands remember which families came to {settlement} with the exiles and stayed; the upper town still speaks with {counterpart}'s vowels, and the quarrel has outlived the reason anybody came.
@@ -1564,7 +1564,7 @@ the reader.
 3. `[visitor · seat]` {settlement} sends two now, and reads them together, and pays for both.
 4. `[elder · seat]` The town still lives beside both families: the hunt for the traitor caught the real channel and an innocent neighbour too, and the neighbour's name has never recovered.
 5. `[unfolding · seat]` The seat acted on {reason} and learned better, and the acting cannot be taken back. No one lied here; the road was simply faster with one telling than with the other.
-6. `[counterforce · seat]` `[dm-only]` The channel {faction} trusts at {settlement} is {house}'s and was theirs before the errand was: {npc} carries the cargo off the {route} road to {house} first and to {counterpart} after, and the divergence sits exactly where the detour is.
+6. `[counterforce · seat]` `[dm-only]` The messenger {faction} trusts at {settlement} works for {house}: {npc} takes the reports off the {route} to {house} first and to {counterpart} after.
 
 ---
 

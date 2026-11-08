@@ -101,7 +101,7 @@ const PROPERTY_LINES = Object.freeze([
   (a, b, issue) => `An inventory of ${issue} came up short, and ${a} and ${b} each say the other took the difference.`,
   (a, b, issue) => `${b} has produced an old deed bearing on ${issue}; it is good enough for ${a} to take seriously and old enough for ${a} to doubt.`,
   (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a} and ${b} assume the other arranged it.`,
-  (a, b, issue) => `${a} has offered to split ${issue} rather than argue it, and the offer has split ${b} instead.`,
+  (a, b, issue) => `${a} has offered to split ${issue} down the middle, and ${b}'s own members cannot agree whether to take it.`,
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
@@ -138,7 +138,7 @@ const STANDING_LINES = Object.freeze([
   (a, b, issue) => `${b} is waiting for ${a} to overreach on ${issue}, and has arranged for it to be witnessed when it happens.`,
   (a, b, issue) => `An old debt between ${a} and ${b} has been called in over ${issue}, years after both sides had stopped mentioning it.`,
   (a, b, issue) => `Someone has been feeding ${a} and ${b} the same warning about each other over ${issue}, and neither has asked who.`,
-  (a, b, issue) => `${a} has offered ${b} terms on ${issue} that are better than ${b} expected, which is why ${b} has not accepted them.`,
+  (a, b, issue) => `${a} has offered ${b} better terms on ${issue} than ${b} expected, and ${b} is looking for the catch before it answers.`,
 ]);
 
 /** @type {Readonly<Record<string, ReadonlyArray<HookLine>>>} */

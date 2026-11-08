@@ -75,13 +75,14 @@ const PLAIN_NOUN = 'crisis';
  * @type {Readonly<Record<string, (holder: string) => string>>}
  */
 export const LINE_ROLE_CLAUSE = Object.freeze({
-  brunt: (h) => `the brunt falls on ${h}`,
-  lever: (h) => `the lever is held by ${h}`,
-  instigator: (h) => `the hand stirring it is ${h}`,
+  // W7 HOOKS (the owner's style law of 2026-11-07; worklist rows 262, 272): the holder first, in plain verbs.
+  brunt: (h) => `${h} takes the worst of it`,
+  lever: (h) => `${h} holds the key to it`,
+  instigator: (h) => `${h} is stirring it`,
   target: (h) => `it is aimed at ${h}`,
-  defender: (h) => `the defence is led by ${h}`,
-  treater: (h) => `the one who would come to terms is ${h}`,
-  face: (h) => `the occupier's local face is ${h}`,
+  defender: (h) => `${h} leads the defence`,
+  treater: (h) => `${h} is the one who would come to terms`,
+  face: (h) => `${h} speaks for the occupier here`,
 });
 
 /** @param {unknown} v @returns {string} */
@@ -150,9 +151,11 @@ const castSentence = (noun, clause, reason) => `In the ${noun}, ${clause}: ${rea
  */
 function leverSentence(noun, house, holder, loser) {
   const run = holder ? `, run by ${holder}` : '';
+  // W7 HOOKS (rows 263, 271): what the crisis turns on and who loses, in plain words; "the players can push
+  // on" was machinery (the DM decides what the players push on).
   return loser
-    ? `In the ${noun}, the players can push on the ${house}${run}; ${loser.factionId} loses most if it gives, because ${loser.reason}.`
-    : `In the ${noun}, the players can push on the ${house}${run}; whoever moves it moves the crisis.`;
+    ? `The ${noun} turns on the ${house}${run}: if it gives way, ${loser.factionId} loses most, because ${loser.reason}.`
+    : `The ${noun} turns on the ${house}${run}: whoever wins it over decides how the ${noun} goes.`;
 }
 
 /**
