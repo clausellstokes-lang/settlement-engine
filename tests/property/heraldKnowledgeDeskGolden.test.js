@@ -110,7 +110,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 8 fewer items (478 → 470).
     // 470 → 434 at MERGE-CAR RECORD A, THE RUNG-2 LANDING'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, MERGE-CAR, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json): the pool census composed (the rung-2 landing's merge 10b8f09b4) re-deals the year's news over the car's cast; 470 -> 434 keys against the carried car bytes (435 -> 434 against record 0b's post-state)
     // 36 fewer items (470 → 434).
-    expect(Object.keys(manifest)).toHaveLength(434);
+    // 434 → 470 at MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, MERGE-CAR, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json): one face per institution re-casts the year's news over the pool census; 434 -> 470 keys against record A's post-state
+    // 36 more items (434 → 470).
+    expect(Object.keys(manifest)).toHaveLength(470);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -165,10 +167,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the cast re-deals the year; the year's misjudgment beats are now 1 (4), on knowledge.
       // Re-dealt at MERGE-CAR RECORD A, THE RUNG-2 LANDING'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json):
       // the pool census composed re-deals the year at the stage of 572c15018; the year's misjudgment beats are now 3 (4, 15, 42), all on knowledge.
+      // Re-dealt at MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json):
+      // the car's cast re-deals the year over the pool census at the stage of 8dff691f3; the year's misjudgment beats are now 1 (4), on knowledge.
       expect(misjudged).toEqual([
-        'wizard_news.15.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.42.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');
