@@ -177,7 +177,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
             <View style={{ marginBottom: 6 }}>
               <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Enforcement ratio</Text>
               <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second }}>
-                {smart(o.safetyRatio)} watch:pop
+                {enforcementWords(o.safetyRatio)}
               </Text>
             </View>
           )}
@@ -557,3 +557,16 @@ function FoodBalanceBar({ fb }) {
 }
 
 export default Overview;
+
+/**
+ * The enforcement ratio in words (W7 HOOKS, the owner's style law of 2026-11-07). The figure is
+ * safetyProfile.js's order-keeping strength over criminal strength, not a watch-per-head count, so
+ * "0.2 watch:pop" was machinery AND wrong; the label above it stays.
+ * @param {number} ratio @returns {string}
+ */
+function enforcementWords(ratio) {
+  if (!Number.isFinite(ratio)) return 'Not measured.';
+  if (ratio >= 2) return 'Those who keep order clearly outmatch the criminals.';
+  if (ratio >= 1) return 'Those who keep order roughly match the criminals.';
+  return 'The criminals outmatch those who keep order.';
+}

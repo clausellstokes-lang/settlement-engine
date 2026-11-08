@@ -117,10 +117,10 @@ export function recordBatteryJudgment(settlement) {
   const findings = Object.freeze(recordBatteryFindings(settlement));
   return Object.freeze({
     id: 'record_coherence_battery',
-    label: 'The record does not contradict itself',
+    label: 'The dossier\'s lines agree with each other',
     status: findings.length ? 'needs_review' : 'pass',
     scope: 'single_settlement',
-    summary: 'A stored sentence the record contradicts is a defect; the page may not vouch for a record this judgment does not pass.',
+    summary: 'Where one line in this dossier disagrees with another, check both before play; the dossier does not vouch for itself until they agree.',
     findings,
     evidence: Object.freeze([Object.freeze({
       path: 'coherenceBattery',

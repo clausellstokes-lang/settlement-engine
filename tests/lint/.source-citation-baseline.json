@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 162,
+      "dated": 163,
       "sha-pin": 2,
       "tree": 139
     },
@@ -170,7 +170,8 @@
         "docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md",
         "docs/tuning-signatures/2026-11-06-v1.json",
         "docs/WIRING_W1_2026-11-07.md",
-        "docs/WIRING_W5_2026-11-07.md"
+        "docs/WIRING_W5_2026-11-07.md",
+        "docs/WIRING_W7_2026-11-07.md"
       ],
       "sha-pin": [
         "docs/SETTLEMENT_CAPABILITY_ATLAS.md",
@@ -367,7 +368,9 @@
     "_rosterGrowth2026-11-08-merge-wave-w4": "ONE document JOINED the roster at the W4 PEOPLE merge (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): `dated` 160 -> 161, docs/WIRING_W4_2026-11-07.md, W4 PEOPLE's lane record, born dated on its lane without a roster row (the lane's side never moved the count); counted once by the walker at the merged tip; nothing changed class; pastEofCitationsExcluded unchanged. And `tree` 133 -> 135, the walker's own measurement at the merged tip: W4 PEOPLE brings three signed lane records (w4-01..w4-03, components of the W4 composition); the count moves by two, the third not traced here.",
     "_rosterGrowth2026-11-07-w5": "FIVE documents JOINED the roster by being BORN into it (W5 HIS, the writing wave's history lane): `dated` 131 -> 132, docs/WIRING_W5_2026-11-07.md, the lane's record, born dated, 0 past-EOF citations; `tree` 100 -> 104, the lane's four signed composed-prose-manifest records docs/shift-records/2026-11-07-w5-01 .. -04. A GROWTH, not a re-classification.",
     "_rosterGrowth2026-11-08-w5-merge": "W5 HIS second seat (the lane's merge of the integration branch at ffafe2a0e, 2026-11-08): the roster is the UNION of both sides', measured once by this walker: `dated` 148 (the integration side, MERGE-CAR's union) + 1 (the lane's record docs/WIRING_W5_2026-11-07.md) = 149; `tree` 109 + 4 (the lane's four signed composed-prose-manifest records docs/shift-records/2026-11-07-w5-01 .. -04) + 1 (docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json, MERGE-CAR's record A, born on the integration side after its own 109 was measured) = 114; `banner` 9 and `sha-pin` 2 unmoved. No document changed class; both sides' notes kept.",
-    "_rosterGrowth2026-11-08-merge-wave-w5": "THE UNION AT THE W5 HIS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 161 -> 162 (docs/WIRING_W5_2026-11-07.md), `tree` 135 -> 139 (W5 HIS's four signed lane records w5-01..w5-04, components of the W5 composition; its side's own 109 -> 114 also counted MERGE-CAR's record A, which this side already holds); the count measured once by the walker; nothing changed class."
+    "_rosterGrowth2026-11-08-merge-wave-w5": "THE UNION AT THE W5 HIS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 161 -> 162 (docs/WIRING_W5_2026-11-07.md), `tree` 135 -> 139 (W5 HIS's four signed lane records w5-01..w5-04, components of the W5 composition; its side's own 109 -> 114 also counted MERGE-CAR's record A, which this side already holds); the count measured once by the walker; nothing changed class.",
+    "_rosterGrowth2026-11-07-w7": "ONE document JOINED the roster by being BORN into it (W7 HOOKS, a writing lane of the cloud chair, on lane/w7-hooks-2026-11-07): `dated` 131 -> 132 on the lane; re-measured ONCE by this walker at the lane's merge of the people car's integration tip (ffafe2a0e): the integration's 148 -> 149 with this one document, docs/WIRING_W7_2026-11-07.md, the lane's hand-back record (every rewritten line old -> new for the owner's veto), born dated, its citations addressing the lane's own tip. A GROWTH, not a re-classification. The same single measurement at the merged tip also counts `tree` 109 -> 110: docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json (MERGE-CAR's signed record A, born on the integration branch after MERGE-CAR's own roster note was measured), born archival by the tree rule, a JSON signature with no path:line citation of its own; a GROWTH, not a re-classification.",
+    "_rosterGrowth2026-11-08-merge-wave-w7": "THE UNION AT THE W7 HOOKS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 162 -> 163 (docs/WIRING_W7_2026-11-07.md); `tree` holds at 139; the count measured once by the walker; nothing changed class."
   },
   "rows": []
 }

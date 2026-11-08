@@ -101,7 +101,7 @@ const PROPERTY_LINES = Object.freeze([
   (a, b, issue) => `An inventory of ${issue} came up short, and ${a} and ${b} each say the other took the difference.`,
   (a, b, issue) => `${b} has produced an old deed bearing on ${issue}; it is good enough for ${a} to take seriously and old enough for ${a} to doubt.`,
   (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a} and ${b} assume the other arranged it.`,
-  (a, b, issue) => `${a} has offered to split ${issue} rather than argue it, and the offer has split ${b} instead.`,
+  (a, b, issue) => `${a} has offered to split ${issue} down the middle, and ${b}'s own members cannot agree whether to take it.`,
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
@@ -138,7 +138,7 @@ const STANDING_LINES = Object.freeze([
   (a, b, issue) => `${b} is waiting for ${a} to overreach on ${issue}, and has arranged for it to be witnessed when it happens.`,
   (a, b, issue) => `An old debt between ${a} and ${b} has been called in over ${issue}, years after both sides had stopped mentioning it.`,
   (a, b, issue) => `Someone has been feeding ${a} and ${b} the same warning about each other over ${issue}, and neither has asked who.`,
-  (a, b, issue) => `${a} has offered ${b} terms on ${issue} that are better than ${b} expected, which is why ${b} has not accepted them.`,
+  (a, b, issue) => `${a} has offered ${b} better terms on ${issue} than ${b} expected, and ${b} is looking for the catch before it answers.`,
 ]);
 
 /** @type {Readonly<Record<string, ReadonlyArray<HookLine>>>} */
@@ -163,9 +163,9 @@ const CONFLICT_LINES = Object.freeze({
  */
 const FOOD_GAP_LINES = Object.freeze([
   { text: 'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.', excludes: ['crisis: under_siege'] },
-  { text: 'Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than the carts.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
+  { text: 'Enough food arrives to keep the place fed, and whoever runs the carts has started asking favours in return.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
   'A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms have changed.',
-  { text: 'The last two consignments were short by the same amount, and the measure is being blamed rather than the measurer.', excludes: ['crisis: under_siege'] },
+  { text: 'The last two deliveries were short by the same amount; the supplier blames the scales, and nobody has checked the supplier.', excludes: ['crisis: under_siege'] },
   { text: 'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.', needs: ['market'] },
   'A merchant has offered to cover the whole gap from one source, which would solve this season and hand them next season.',
 ]);

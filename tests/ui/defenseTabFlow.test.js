@@ -255,7 +255,7 @@ describe('DS-DEF-2 at defense.threatAssessment — each sentence under ITS OWN b
     const drawn = defenseThreatProse(port, opts(port));
     const { container } = render(e(DefenseTab, { settlement: port, narrativeNote: null }));
     const caption = [...container.querySelectorAll('div')]
-      .find((el) => el.textContent.startsWith('Each bar shows how ready'));
+      .find((el) => el.textContent.startsWith('Each bar shows how ready the settlement'));
     expect(caption, 'the Threat Assessment caption is gone').toBeTruthy();
     // STRUCTURAL: the caption is followed IMMEDIATELY by the bar list. The retired stack was
     // the element in between, so its return moves this sibling and reds here.

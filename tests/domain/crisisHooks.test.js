@@ -32,7 +32,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', CAST_REASONS.bruntBase.food_security)]) };
     const [hook] = crisisHooksOf(town(), entry);
     expect(hook).toEqual({
-      text: 'In the famine, the brunt falls on Mara Vell of Millers’ Guild: the hunger falls first on its people.',
+      text: 'In the famine, Mara Vell of Millers’ Guild takes the worst of it: the hunger falls first on its people.',
       bound: 'cast',
       link: { kind: 'npc', id: 'n1', label: 'Mara Vell' },
     });
@@ -42,9 +42,9 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', CAST_REASONS.bruntBase.food_security)]) };
     const s = town();
     s.npcs[0] = { ...s.npcs[0], memberships: [{ power: 'Town Council', rank: 3 }, { power: 'Millers’ Guild', rank: 1 }] };
-    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, the brunt falls on Mara Vell of Millers’ Guild: the hunger falls first on its people.');
+    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, Mara Vell of Millers’ Guild takes the worst of it: the hunger falls first on its people.');
     s.npcs[0] = { ...s.npcs[0], memberships: [] };
-    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, the brunt falls on Mara Vell: the hunger falls first on its people.');
+    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, Mara Vell takes the worst of it: the hunger falls first on its people.');
   });
 
   it('the lever hook names the house the players can push, its holder, and the faction that loses with the reason', () => {
@@ -54,7 +54,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
         [{ factionId: 'Merchants', stake: 'gains', reason: STAKE_REASONS.gainsHolds }, { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses }]),
     };
     expect(crisisHooksOf(town(), entry)).toEqual([{
-      text: 'In the famine, the players can push on the Town granary, run by Mara Vell; Town Council loses most if it gives, because the crisis hits its base.',
+      text: 'The famine turns on the Town granary, run by Mara Vell: if it gives way, Town Council loses most, because the crisis hits its base.',
       bound: 'lever',
       link: { kind: 'faction', id: 'Town Council', label: 'Town Council' },
     }]);
@@ -80,7 +80,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const fed = town({ economicState: { foodSecurity: { label: 'Secure' } } });
     const entry = { type: 'famine', cast: cast([npcRow('lever', 'n1', 'Mara Vell', CAST_REASONS.leverRuns)]) };
     const [hook] = crisisHooksOf(fed, entry);
-    expect(hook.text).toBe('In the crisis, the lever is held by Mara Vell of Millers’ Guild: holds the office the crisis turns on.');
+    expect(hook.text).toBe('In the crisis, Mara Vell of Millers’ Guild holds the key to it: holds the office the crisis turns on.');
     expect(hookTruthViolations(hook.text, settlementHookFacts(fed))).toEqual([]);
   });
 
@@ -88,7 +88,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const hamlet = town({ tier: 'hamlet' });
     const entry = { type: 'under_siege', cast: cast([{ role: 'defender', kind: 'institution', id: 'Watch house', name: 'Watch house', reason: CAST_REASONS.defenderInstitution, temporary: false }]) };
     const [hook] = crisisHooksOf(hamlet, entry);
-    expect(hook.text).toBe("In the siege, the defence is led by the Watch house: the hamlet's defence, with no one on the roster leading it.");
+    expect(hook.text).toBe("In the siege, the Watch house leads the defence: the hamlet's defence, with no one on the roster leading it.");
     expect(hookTruthViolations(hook.text, settlementHookFacts(hamlet))).toEqual([]);
   });
 

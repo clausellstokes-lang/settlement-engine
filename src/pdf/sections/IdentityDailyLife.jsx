@@ -341,8 +341,13 @@ function GenerationCoherence({ receipt }) {
       ? 'warn'
       : 'bad';
   const failed = receipt.checks.filter(check => check.status === 'fail');
+  // THE RECORD'S SELF-CHECK IS THE DM'S RECEIPT'S ALONE (the chair's ruling of 2026-11-08, on W7's open
+  // question: an internal check is machinery, so it prints only on the DM's own "why" layer, the record's
+  // history page — components/settlement/VersionsTab.jsx :: GenerationReceipt). This chapter is the dossier's
+  // narrative, so the `record_coherence_battery` judgment's label and summary never print here; the record,
+  // the counts and the receipt are untouched (display only).
   const reviewJudgments = receipt.judgments.filter(
-    judgment => judgment.status === 'needs_review',
+    judgment => judgment.status === 'needs_review' && judgment.id !== 'record_coherence_battery',
   );
   const summary = [
     `${receipt.passedChecks}/${receipt.totalChecks} checks passed`,

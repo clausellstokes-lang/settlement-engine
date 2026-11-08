@@ -34,9 +34,9 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?": declaredSet(
     "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?", ['navigable'],
     "Something is killing the forest the timber comes from, and the settlement's building trades stall without it. Find another supplier, or find out what is in those woods?"),
-  'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.': declaredSet(
-    'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.', ['institution: smith'],
-    'War breaks out. Metal suppliers prioritize military contracts, and the iron for tools and repairs stops arriving. Economy suffers, population discontent grows.'),
+  'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.': declaredSet(
+    'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.', ['institution: smith'],
+    'War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops arriving. Work slows, and people are starting to complain.'),
   // CENSUS-3g unit 5 (R-AM read; R-U, R-G — the chair's rulings recorded in the lane doc): the
   // original presumes only the famine band ("Villagers" left the text: its `tier` read false on 110
   // of the 1,000); the moderate gap (Import-Dependent / Pressured, the chair's ruling 1 of

@@ -22,6 +22,7 @@
 // THE ONE markdown/HTML escaper, shared with the standalone world importer. It
 // lives under foundry-module/ because that folder IS the shipped Foundry module
 // and must stay self-contained, so the dependency runs app → module.
+import { stripViabilityToken } from '../domain/display/viabilityFilter.js';
 import { escapeMarkdown } from '../../foundry-module/scripts/markdownEscape.js';
 import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from '../pdf/variants.js';
 import {
@@ -201,20 +202,25 @@ function notableNpcPage(n) {
   ) || null;
 }
 
+/** The hook groups a reader knows, for the catalogue's category keys. */
+const HOOK_GROUP_WORDS = Object.freeze({ npc: 'People', npcs: 'People' });
+
 function plotHooksPage(vm) {
   const all = vm.hooks.all || [];
   if (!all.length) return null;
   const byCategory = new Map();
   for (const h of all) {
     const cat = h.category || h.source || 'other';
+    // The category key is the catalogue's ("npc"); the page prints the group a reader knows.
     if (!byCategory.has(cat)) byCategory.set(cat, []);
     byCategory.get(cat).push(h);
   }
   return md(
     lede(hooksHeadline(vm.hooks)),
     [...byCategory.entries()].map(([cat, hooks]) => md(
-      '', `## ${esc(cap(humanize(cat)))}`,
-      hooks.map(h => `- ${esc(hookText(h.hook))} *(${esc(h.sourceName)}${h.priority ? ` · ${esc(h.priority)}` : ''})*`),
+      '', `## ${esc(HOOK_GROUP_WORDS[String(cat).toLowerCase()] || cap(humanize(cat)))}`,
+      // The source in words, no priority key (the owner's style law of 2026-11-07: the machinery out).
+      hooks.map(h => `- ${esc(hookText(h.hook))}${h.sourceName ? ` *(${esc(cap(humanize(h.sourceName)))})*` : ''}`),
     )),
   );
 }
@@ -228,9 +234,11 @@ function powerPage(vm) {
     kv('Stability', typeof p.stability === 'object' ? (p.stability?.label ?? p.stability?.value) : p.stability),
     p.legitimacy?.score != null ? kv('Public legitimacy', p.legitimacy.score) : null,
     p.factions.length ? md('', '## Factions', p.factions.map(f =>
-      `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}: power ${esc(f.power)}${f.description ? `. ${esc(f.description)}` : ''}`)) : null,
+      // No "power N": the score is the engine's, not the reader's (the owner's style law of 2026-11-07).
+      `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
-      `- **${esc(tn.label || 'Tension')}**${tn.severity ? ` (${esc(tn.severity)})` : ''}${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
+      // The tension's key in words ("Resource scarcity"), no severity range ("minor / major").
+      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
     p.conflicts.length ? md('', '## Conflicts', p.conflicts.map(c =>
       `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? `: ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
   );
@@ -252,10 +260,15 @@ function identityPage(vm, settlement = vm.raw) {
 
 function servicesPage(vm) {
   const s = vm.services;
-  const avail = Object.entries(s.available || {}).filter(([, v]) => v);
+  // A category is listed only where something is on offer: every category key is present on the
+  // slice, most as an empty list, so a truthiness filter printed all eleven (Magic in a world
+  // without it) (W7 HOOKS, the owner's style law of 2026-11-07).
+  const avail = Object.entries(s.available || {}).filter(([, v]) => (Array.isArray(v) ? v.length > 0 : !!v));
   return md(
     lede(servicesHeadline(s)),
-    avail.length ? md('', '## Available services', avail.map(([k]) => bullet(humanize(k)))) : null,
+    // The category only: the service rows themselves are the catalogue's, and some name a food
+    // source the place does not hold (coh:food-words convicted 183 of 1,000 when they were listed).
+    avail.length ? md('', '## Available services', avail.map(([k]) => bullet(cap(humanize(k))))) : null,
     (s.notableAbsences || []).length ? md('', '## Notably absent for the tier',
       s.notableAbsences.map(a => bullet(typeof a === 'string' ? humanize(a) : (a?.label || a?.name || '')))) : null,
   ) || null;
@@ -363,7 +376,8 @@ function viabilityPage(vm) {
     lede(viabilityHeadline(v)),
     '',
     kv('Verdict', v.verdict ? humanize(v.verdict) : null),
-    v.summary ? md('', esc(v.summary)) : null,
+    // The summary without its opening verdict token: the Verdict row above is the label (W7 HOOKS).
+    v.summary ? md('', esc(stripViabilityToken(v.summary))) : null,
     (v.issues || []).length ? md('', '## Issues', v.issues.map(i =>
       `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(i.description)}` : ''}`)) : null,
   );

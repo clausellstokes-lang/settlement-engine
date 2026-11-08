@@ -152,7 +152,8 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
   // §69.4: `num()` returns an UNGROUPED String(Math.round(n)), so the cover read
   // `8000` while Overview.jsx:39 in the SAME DOCUMENT read `8,000` via formatCount.
   const popValue = formatCount(ident.population);
-  const popSub = ident.tier ? `${ident.tier}-tier` : null;
+  // The tier word alone ("Thorpe"), one spelling everywhere (ODQ §934.63 F14); "-tier" was machinery.
+  const popSub = ident.tier || null;
 
   const prosperity = overview.prosperity || null;
   const prosperityTone = overview.prosperityTone || 'muted';

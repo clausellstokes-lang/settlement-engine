@@ -1068,12 +1068,6 @@
     "snippet": "Math.round(population)"
   },
   {
-    "path": "src/pdf/lib/headlines.js",
-    "line": 206,
-    "category": "floatInterpolation",
-    "snippet": "`${total} named figure${total === 1 ? '' : 's'}: ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`"
-  },
-  {
     "path": "src/pdf/primitives/Visuals.jsx",
     "line": 75,
     "category": "floatInterpolation",

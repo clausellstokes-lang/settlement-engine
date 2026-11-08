@@ -122,7 +122,7 @@ function WarLaunchTeaser({ name }) {
     <div data-testid="war-teaser" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: '14px 16px', ...FLUSH }}>
       <AvailableAtLaunchPill />
       <p style={{ margin: '8px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile), lineHeight: 1.6 }}>
-        {`From here, this dossier becomes the control center for ${name}'s troops and units out in the world: raise them, deploy them, recall them, and read what came home, as the simulator runs.`}
+        {`From here you raise ${name}'s troops, send them out, call them home, and read what they report back.`}
       </p>
     </div>
   );

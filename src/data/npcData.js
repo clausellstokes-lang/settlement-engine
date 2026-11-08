@@ -1161,7 +1161,7 @@ export const NPC_FACTION_LOYALTY = {
     "A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.",
     "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.",
     "One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.",
-    'A merchant they publicly opposed is now publicly supporting them. No explanation offered.',
+    'A merchant they spoke against has started praising them in public, and will not say why.',
     "Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.",
     { text: "They know who committed a crime the guard is currently investigating. They're not telling the guard.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "Someone has been leaving anonymous notes in their office pointing to a colleague's corruption. The notes are accurate.",
@@ -1190,7 +1190,7 @@ export const NPC_FACTION_LOYALTY = {
     "A novice has the gift. They know what that means for the novice. They're not sure what to do.",
     'They received a directive from the hierarchy that contradicts their own theology. Compliance is expected.',
     "A healing they performed was successful in a way they cannot explain. It's happened twice now.",
-    "The previous holder of their position left a letter, sealed, to be opened after their death. It wasn't.",
+    "Their predecessor left a sealed letter to be opened at their death; it never was, and it is still where it was left.",
     'A member of their congregation is systematically working against the faith. From inside it.',
     'They have been asked to perform a ceremony they have theological objections to. The person asking has leverage.',
     "A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.",
@@ -1212,33 +1212,33 @@ export const NPC_FACTION_LOYALTY = {
   criminal: [
     { text: "One of their people is talking to the guard. They don't know which one yet. They're watching.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     'A valuable item came through their network recently. Three different parties have asked about it quietly.',
-    "Someone in the legitimate government is playing both sides. That's useful, until it isn't.",
+    "Someone in the government takes their money and someone else's, and they do not know which side will be sold first.",
     'A job went wrong in a way that suggests information was leaked. They have three suspects.',
     "They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.",
-    'A new face has appeared in three separate incidents involving their operations. Coincidence or surveillance?',
+    'The same new face has turned up at three of their jobs, and they have put someone on to follow the newcomer.',
     { text: 'The guard captain has a file. They know because someone who works for the guard captain also works for them.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
-    "Someone tried to rob one of their fronts. The attempt was professional. That's more worrying than amateur.",
+    "Someone tried to rob one of their fronts, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.",
   ],
   magic: [
     "An experiment failed in a way that shouldn't be possible. The results have been sealed. They're still thinking.",
-    "A student asked a question three weeks ago that they haven't been able to answer. That's new.",
+    "A student asked them a question three weeks ago that they still cannot answer, and the student has not asked again.",
     { text: 'Something in the settlement is absorbing ambient magical energy. The readings are increasing.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     "They've been approached by someone who knows things about their research that were never made public.",
     'An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.',
-    { text: 'The magical ward they placed on the vaults was bypassed. Not broken. Bypassed. That requires inside knowledge.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
+    { text: 'The ward on their vaults was not broken but bypassed, which only someone who knew how it was made could do.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     { text: 'They have two competing theories about what is happening to magic in this region. Both are alarming.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     'Someone has been making inquiries about their past research. Not the published work, the unpublished work.',
   ],
   other: [
-    "They overheard something they shouldn't have and don't know what to do with the information.",
+    "They overheard two people they know settle a bribe, and do not know whom to tell.",
     "A regular customer has stopped coming. The reason they've been given doesn't make sense.",
     "Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious.",
     'Three different people have asked them the same unusual question. None of them knew each other.',
     "They found something hidden in a place it shouldn't be. They put it back. They haven't told anyone.",
-    'A stranger passed through, asked specific questions, and left before they could follow up.',
-    'Something they were told was destroyed is apparently not destroyed.',
-    "They know something small that connects to something much larger. They haven't realised the connection. Yet.",
-    "Someone they trust completely has started behaving in ways that don't add up.",
+    'A traveller passed through asking which nights their door is left unbarred, and was gone by morning.',
+    'Something they were told had been burned has turned up for sale.',
+    "They have seen the same unmarked cart pass their door three nights running, and have not wondered why.",
+    "Their oldest friend has started paying for drinks with new silver and will not say where it came from.",
     "They've been offered money to not ask questions about something they hadn't even started asking about.",
     'A document they were asked to witness contained a clause they noticed at the time and said nothing about.',
     "Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.",

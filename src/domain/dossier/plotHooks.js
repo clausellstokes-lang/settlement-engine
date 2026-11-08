@@ -276,7 +276,7 @@ function dedupeHooks(sorted) {
 // the writer gives them, so a flag-conditioned conflict hook (which IS specific, and true)
 // passes through untouched. SWITCH THIS to a drawn library at the writer when the engine
 // side opens; the matcher is this lane's door, not a preference.
-const FIXED_CONFLICT_HOOK = /^Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions\.$|^A neutral figure is being pressured by both .+ to take a side before .+\.$/;
+const FIXED_CONFLICT_HOOK = /^Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions\.$|^A letter has turned up showing that someone outside both factions paid for the last clash between them\.$|^A neutral figure is being pressured by both .+ to take a side before .+\.$/;
 
 /**
  * @param {PlotHook[]} out

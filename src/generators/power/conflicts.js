@@ -33,11 +33,11 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
         : 'the next council session',
     hooks = [
       `A neutral figure is being pressured by both ${factionA.name} and ${factionB.name} to take a side before ${arbitrationVenue}.`,
-      'Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions.',
+      'A letter has turned up showing that someone outside both factions paid for the last clash between them.',
     ];
   if (stressFlags.merchantCriminalBlur)
     hooks.push(
-      'The dispute is complicated by the fact that key members of both factions share business interests that neither wants exposed during arbitration.'
+      'Leading members of both factions are partners in the same business, one that skirts the law, and neither side wants that said aloud during arbitration.'
     );
   if (stressFlags.stateCrime)
     hooks.push(

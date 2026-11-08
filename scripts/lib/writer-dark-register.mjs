@@ -446,22 +446,10 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
       + 'W6, section ECO), consumer PLAUSIBLE at src/generators/steps/assembleInstitutions.js:286',
   }),
-  Object.freeze({
-    identity: 'dependencyCount on metrics',
-    key: 'dependencyCount',
-    shape: 'metrics',
-    writer: 'src/generators/economy/viability.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/domain/edit/recordInvariants.js',
-      symbol: 'the V-DEPCOUNT invariant, which checks the stored count against the dependency list it counts',
-    }),
-    why: 'A count of a list printed in its own right (the viability dependencies). The record invariants read '
-      + 'it (recordInvariants.js:337, V-DEPCOUNT) to prove the stored count still agrees with the list after '
-      + 'an edit; a consistency check, not a customer fact, since the list itself is what a player reads.',
-    charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section ECO), consumer CONFIRMED at src/domain/edit/recordInvariants.js:337',
-  }),
+  // W7 HOOKS (2026-11-07, the owner's style law of 2026-11-07, WAVE-RULINGS item 1): `dependencyCount on metrics` LEFT
+  // this register. The PDF and Foundry viability headline (src/pdf/lib/headlines.js :: viabilityHeadline) now says the
+  // count in words ("Viable, as long as the two trade routes it depends on stay open"), so the identity is LIT on
+  // dossier-pdf, foundry and web-display (clause S: a row that outlives its darkness is struck). Retired with that cause.
   Object.freeze({
     identity: 'warningCount on metrics',
     key: 'warningCount',

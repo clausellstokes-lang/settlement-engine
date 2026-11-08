@@ -704,13 +704,13 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push(`Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is ${crimeRef}.`);
   }
   if (stress.arcaneBlackMarket) {
-    plotHooks.push("A wizard's tower component went missing. The black market has it. Getting it back means either paying their price or taking it. Both have consequences.");
+    plotHooks.push("A part from the wizard's tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay.");
   }
   if (stress.religiousFraud) {
     plotHooks.push("A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.");
   }
   if (stress.merchantCriminalBlur) {
-    plotHooks.push("A guild merchant hired the party, then asked them to do something the guild officially forbids. The job was lucrative. The question is who else knows.");
+    plotHooks.push("A guild merchant hired the party, then asked for something the guild forbids; the pay is good, and someone else in the guild already knows.");
   }
   if (inst.hasSmuggling) {
     plotHooks.push("The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.");

@@ -38,7 +38,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
   ifNothing: 'If nothing is done',
   hook: 'Hook',
   nobody: 'nobody',
-  noLevers: 'No house it turns on stands here.',
+  noLevers: 'Nobody here controls what this crisis turns on.',
   edited: '✎ YOU',
   editedTitle: 'Named by you',
   edit: '✎ Edit',

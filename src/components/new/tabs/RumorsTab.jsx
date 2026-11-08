@@ -187,7 +187,7 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
         <div data-testid="rumors-teaser" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: '14px 16px' }}>
           <AvailableAtLaunchPill />
           <p style={{ margin: '8px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile), lineHeight: 1.6 }}>
-            {`What ${name} hears from the rest of the realm, as it believes it, as word moves along the roads.`}
+            {`What ${name} has heard from the rest of the realm, true or not, as the news reaches it.`}
             {dmView && <span data-testid="rumors-teaser-dm">{' Beside each telling, what the DM knows to be true.'}</span>}
           </p>
         </div>

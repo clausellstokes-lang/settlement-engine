@@ -127,7 +127,7 @@ describe('Appendix B row 94 — the crisis line-role clauses (kind T)', () => {
       roles: [{ role: 'brunt', kind: 'npc', id: 'n1', name: 'Mara Vell', reason: 'the hunger falls first on its people', temporary: false }] } };
     const out = withPresumptionLedger(() => crisisHooksOf(town, entry));
     expect(out.result).toEqual(crisisHooksOf(town, entry));
-    expect(out.result[0].text).toContain('the brunt falls on Mara Vell');
+    expect(out.result[0].text).toContain('Mara Vell takes the worst of it');
     expect(out.ledger.map((e) => [e.pool, e.drawKind, e.surface])).toEqual([['LINE_ROLE_CLAUSE.brunt', 'T', 'crisis']]);
   });
 });
