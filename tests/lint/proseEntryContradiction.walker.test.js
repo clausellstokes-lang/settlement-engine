@@ -692,7 +692,8 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // rewrites drop the "; …" afterthought from four power variants (measured on the leaves). Report-only, still a minority.
     // 341 -> 340 at the owner's reading of 2026-11-07 (WAVE-RULINGS item 16, the ledger vantage names the record and its
     // cost): DS-POW-6 duty evasion v1 is two sentences now, not a "; …" list.
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(340);
+    // 340 -> 335 at the car rows of WIRING W3 (2026-11-08, the owner's style law over DS-POW-3 and DS-POW-4, after the people car): five ladder and succession lines lose their "; …" afterthought.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(335);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

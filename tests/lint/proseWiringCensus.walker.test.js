@@ -717,10 +717,12 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(33);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 482 -> 486.
     // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: two power pools leave THIN at the rewrite (measured): 486 -> 484.
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(484);
+    // 484 -> 483 at the car rows of WIRING W3 (2026-11-08, the owner's style law over DS-POW-3 and DS-POW-4, after the people car) (measured).
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(483);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 227 -> 231.
     // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7: the same two pools land COVERED: 231 -> 233.
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(233);
+    // 233 -> 234 at the same cause.
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(234);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(spines.length);
     for (const row of tiers) {

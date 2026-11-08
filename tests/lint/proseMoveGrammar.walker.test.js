@@ -127,11 +127,12 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 114 -> 115.
     // 115 -> 118 at the second seat (measured on the leaves): three power pools' rewritten variants now repeat
     // an opener inside their pool. Calibration, not a ceiling; arm E is red on it either way (the control).
-    expect(repeatedOpener).toBe(118);
+    // 118 -> 119 at the car rows of WIRING W3 (2026-11-08, the owner's style law over DS-POW-3 and DS-POW-4, after the people car) (measured on the leaves).
+    expect(repeatedOpener).toBe(119);
     // 0.570 / 0.161 -> 0.565 / 0.160 at WIRING W3 (2026-11-07): 405 / 717 and 115 / 717.
     // 0.565 -> 0.572 at the second seat: 410 / 717.
     expect(uniformSegments / cells.size).toBeCloseTo(0.568, 3); // 0.572 -> 0.568: 407 / 717.
-    expect(repeatedOpener / cells.size).toBeCloseTo(0.165, 3); // 0.160 -> 0.165 at the second seat: 118 / 717.
+    expect(repeatedOpener / cells.size).toBeCloseTo(0.166, 3); // 0.165 -> 0.166: 119 / 717. // 0.160 -> 0.165 at the second seat: 118 / 717.
   });
 
   it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
@@ -159,7 +160,7 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // taken over 717 pools, and reads 405 / 115 as the calibration above does.
     // WIRING W3 second seat (2026-11-07), the owner's style law over DS-POW-1/-2/-5/-6/-7 (measured at the tip): 405 -> 410, as the calibration above.
     expect(Math.round(figures.uniformSegmentShare * 717)).toBe(407); // 410 -> 407, as the calibration above.
-    expect(Math.round(figures.repeatedOpenerShare * 717)).toBe(118); // 115 -> 118 at the second seat, as above.
+    expect(Math.round(figures.repeatedOpenerShare * 717)).toBe(119); // 115 -> 118 at the second seat, as above.
   });
 
   it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {

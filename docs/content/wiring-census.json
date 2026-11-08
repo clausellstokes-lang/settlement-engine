@@ -37,8 +37,8 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 33,
-      "THIN": 484,
-      "COVERED": 233,
+      "THIN": 483,
+      "COVERED": 234,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -27514,7 +27514,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "reading.instability",
@@ -28155,7 +28155,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -28201,12 +28201,13 @@
         "settlement"
       ],
       "slotsNamed": [
+        "seat",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -57376,7 +57377,7 @@
       "subject": "low instability, long-held order",
       "fields": [],
       "readingFunction": "ladderPoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {faction, npc, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {faction, npc, settlement}"
     },
     {
       "tier": "COVERED",
@@ -57462,15 +57463,15 @@
       "subject": "previousGovernments present with a recorded cause",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 4 grammar(s) · slots {seat, settlement, timeband_age}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement, timeband_age}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-POW-4",
       "subject": "previousGovernments empty (no recorded lineage)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",

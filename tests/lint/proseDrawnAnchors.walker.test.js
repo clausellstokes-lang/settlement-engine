@@ -133,7 +133,8 @@ const FIXTURE_INPUT_FILES = Object.freeze([
  *     module"). It is looking for the string in `src/`, which is the opposite direction.
  *   envoyKindPools:55 — RETIRED at WIRING W3's second seat (2026-11-07): the power-leaf variant its
  *     authored list coincided with was rewritten under the owner's style law, so the row is spent.
- *   warRemembranceReader:136 — a UI HEADING used as an `expectAbsentWithAnchor` anchor, which
+ *   warRemembranceReader:136 — RETIRED at the car rows of WIRING W3 (2026-11-08, the owner's style law over DS-POW-3 and DS-POW-4, after the people car): the power-leaf variant its heading coincided with was
+ *     rewritten, so the row is spent.
  *     the matcher aligns against a power-leaf variant by coincidence. Not corpus prose.
  *   treatyVoiceCure:157 — ADDED 2026-10-01 (the urban-band chair, a base red picked up under the
  *     owner's "do it all"; vetoable). A NEWS HEADLINE minted by a code template
@@ -150,7 +151,6 @@ const FROZEN_LITERAL_ANCHORS = Object.freeze({
   'tests/domain/treatyVoiceCure.test.js': 1,
   'tests/lint/dossierMountRegistry.walker.test.js': 1,
   'tests/lint/economyReadModelCoverage.walker.test.js': 1,
-  'tests/ui/warRemembranceReader.test.jsx': 1,
 });
 
 /**

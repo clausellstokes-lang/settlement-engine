@@ -1206,7 +1206,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger dealing with {faction} at {settlement} is passed upward exactly once and then is dealing with {npc}, which is as simple as these arrangements get.",
+          "text": "Deal with {faction} at {settlement} and you are sent up once, to {npc}, and there the matter is settled.",
           "slots": [
             "faction",
             "settlement",
@@ -1237,7 +1237,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Nothing at the top of {faction} has changed at {settlement} and the standings sit so close together that nothing needs to change for it to.",
+          "text": "The people at the top of {faction} at {settlement} stand so close together that the lead could change hands without anything else happening first.",
           "slots": [
             "faction",
             "settlement"
@@ -1248,7 +1248,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "high instability (churn at the top)": [
         {
           "angle": "ledger",
-          "text": "The top of {faction} at {settlement} has changed hands more than once lately, and the faction is weaker for it. A house that keeps re-learning who it answers to gets less done than its weight suggests.",
+          "text": "The head of {faction} at {settlement} has changed more than once lately, and the faction gets less done for it: each new head spends a season learning who answers to whom.",
           "slots": [
             "faction",
             "settlement"
@@ -1266,7 +1266,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger who dealt with {faction} at {settlement} within the year finds the arrangement void and the person gone from the rung, and has to begin again.",
+          "text": "Anyone who struck a bargain with {faction} at {settlement} within the year may find that person off the rung and the bargain gone with them, and has to start again.",
           "slots": [
             "faction",
             "settlement"
@@ -1286,7 +1286,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "low instability, long-held order": [
         {
           "angle": "ledger",
-          "text": "The order inside {faction} at {settlement} is settled rather than contested; the standings sit far enough apart that the rungs read as places rather than as positions being fought for.",
+          "text": "The order inside {faction} at {settlement} is settled. The people on its top rungs stand well apart, and nobody is fighting for a higher rung.",
           "slots": [
             "faction",
             "settlement"
@@ -1316,7 +1316,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "shallow ladder (few rungs recorded)": [
         {
           "angle": "ledger",
-          "text": "{faction} at {settlement} has a head and very little structure beneath. The ladder is short because the faction is, not because the climbing has finished.",
+          "text": "{faction} at {settlement} is small: a head, and very little beneath it.",
           "slots": [
             "faction",
             "settlement"
@@ -1335,7 +1335,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger dealing with {faction} at {settlement} finds there is nobody to be passed to; {npc} is the arrangement, and the rest are people {npc} knows.",
+          "text": "Deal with {faction} at {settlement} and there is nobody else to be sent to. {npc} decides, and the others are people {npc} knows.",
           "slots": [
             "faction",
             "settlement",
@@ -1459,7 +1459,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "no crisis: unrest"
           ],
-          "text": "Nobody at {settlement} is positioned to take the {seat}. What {faction} holds it holds without a rival on the rolls, and the succession question is not a live one here.",
+          "text": "Nobody at {settlement} is in a position to take the {seat}. {faction} has no rival for it, and the succession question is not a live one here.",
           "slots": [
             "settlement",
             "seat",
@@ -1486,7 +1486,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "no unrest"
           ],
-          "text": "There is discontent at {settlement} and no contender to carry it; the {seat} is safe for the plainest reason a seat can be safe.",
+          "text": "People at {settlement} grumble, but nobody stands ready to lead them; the {seat} is safe for the plainest reason a seat can be safe.",
           "slots": [
             "settlement",
             "seat"
@@ -1535,17 +1535,17 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "riskLabel: Holding": [
         {
           "angle": "ledger",
-          "text": "{faction} outweighs everyone who wants the {seat} at {settlement}, and the wanting is on the record. The hold is real and it is not comfortable.",
+          "text": "{faction} outweighs everyone at {settlement} who wants the {seat}, and they make no secret of wanting it. The hold is real, and it is not comfortable.",
           "slots": [
             "faction",
-            "seat",
-            "settlement"
+            "settlement",
+            "seat"
           ],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "{settlement} has people who would take the hall if they could, and they cannot, and everybody involved understands the arrangement precisely.",
+          "text": "{settlement} has people who would take the hall if they could. They cannot, and everyone involved knows it.",
           "slots": [
             "settlement"
           ],
@@ -1576,7 +1576,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} is no longer certain the hall belongs to {faction}, and neither, from the way it governs, is {faction}.",
+          "text": "{settlement} is no longer sure the hall belongs to {faction}, and {faction} governs as though it is not sure either.",
           "slots": [
             "settlement",
             "faction"
@@ -1585,7 +1585,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The advantage at {settlement} has passed to the challenger and the {seat} has not yet passed with it; what happens next is a matter of nerve rather than arithmetic.",
+          "text": "The challenger at {settlement} is now the stronger side, but the {seat} has not changed hands yet. What happens next depends on who moves first.",
           "slots": [
             "settlement",
             "seat"
@@ -1594,7 +1594,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} is quietly advised to be civil to two houses rather than one, and is not told why in so many words.",
+          "text": "Visitors to {settlement} are quietly told to stay polite to two houses, not one, and nobody explains why.",
           "slots": [
             "settlement"
           ],
@@ -1604,7 +1604,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "riskLabel: Critical. The seat could fall": [
         {
           "angle": "ledger",
-          "text": "Nothing at {settlement} is now protecting the {seat}. {counterpart} has the weight, the {seat} has the office, and the office is the thinner of the two.",
+          "text": "Nothing at {settlement} protects the {seat} now. {counterpart} has the strength, and the {seat} has only the office.",
           "slots": [
             "settlement",
             "seat",
@@ -1622,10 +1622,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The {seat} at {settlement} is exposed and the exposure is not a secret; what has not happened yet is a decision by somebody able to make it.",
+          "text": "Everyone at {settlement} can see the {seat} is exposed. What has not happened yet is a move by someone able to make it.",
           "slots": [
-            "seat",
-            "settlement"
+            "settlement",
+            "seat"
           ],
           "vid": 3
         }
@@ -1633,7 +1633,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "legitimacyHold: public backing hardens the hold": [
         {
           "angle": "street",
-          "text": "The town is behind whoever sits at {settlement}, and a ruler with the town behind them can do things a ruler without it cannot attempt.",
+          "text": "The town stands behind whoever sits at {settlement}, and that lets its ruler do things a ruler without the town could not try.",
           "slots": [
             "settlement"
           ],
@@ -1641,10 +1641,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Public backing at {settlement} is hardening the {seat}'s grip; what would be a contest elsewhere is an inconvenience here.",
+          "text": "The town's backing makes the {seat}'s hold at {settlement} hard to shake; a challenge that would be serious elsewhere is a nuisance here.",
           "slots": [
-            "settlement",
-            "seat"
+            "seat",
+            "settlement"
           ],
           "vid": 2
         },
@@ -1680,7 +1680,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "The {seat} at {settlement} is carrying its own weight and no more; a shift in the town's regard in either direction would be felt immediately, because there is nothing else cushioning the grip.",
+          "text": "The {seat} at {settlement} stands on its own strength alone. If the town's mood turned either way, the {seat} would feel it at once.",
           "slots": [
             "seat",
             "settlement"
@@ -1709,7 +1709,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "What the {seat} has lost at {settlement} it has lost to the town rather than to a rival, and no rival was required.",
+          "text": "The {seat} at {settlement} has lost the town's support, and no rival had to take it.",
           "slots": [
             "seat",
             "settlement"
@@ -1720,7 +1720,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "previousGovernments present with a recorded cause": [
         {
           "angle": "elder",
-          "text": "{settlement} has changed governments before, and the last change is still legible in how the hall is arranged. The present {seat} was built to not fall the way that one did.",
+          "text": "{settlement} has changed governments before, and people still remember how the last one fell. The present {seat} was set up so as not to fall the same way.",
           "slots": [
             "settlement",
             "seat"
@@ -1729,9 +1729,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The lineage at {settlement} records what took each prior government out of the hall; the causes are on the rolls, and none of them was age.",
+          "text": "The town chronicle at {settlement} lists what brought down each government before this one, and none of them simply grew old. The present {seat} knows what it has to guard against.",
           "slots": [
-            "settlement"
+            "settlement",
+            "seat"
           ],
           "vid": 2
         },
@@ -1757,9 +1758,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "previousGovernments empty (no recorded lineage)": [
         {
           "angle": "ledger",
-          "text": "{settlement} has no record of a government before this one. Whatever came earlier was not the kind of thing the rolls kept.",
+          "text": "{settlement} keeps no record of any government before this one, so nobody can say what the present {seat} replaced.",
           "slots": [
-            "settlement"
+            "settlement",
+            "seat"
           ],
           "vid": 1
         },
@@ -1773,7 +1775,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger asking at {settlement} what came before the present arrangement is told there was nothing worth the name, and is told it without embarrassment.",
+          "text": "Ask at {settlement} what came before the present arrangement and you are told there was nothing worth the name, without any embarrassment.",
           "slots": [
             "settlement"
           ],
