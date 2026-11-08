@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "75df41336adb5ef57b39d1ad2e6038c6d6169c25",
-  "measuredBy": "PEOPLE-LAND (the people car landing seat, under the chair)",
-  "date": "2026-11-07",
-  "note": "Register VII v2 (M-5); the npcGenerator win 70 -> 60 (lane 1 and the shim out) banked; lane 4 ties.js growth declared",
+  "measuredAtSha": "2cffe66cd14cb1a4b0e3866baaccd3a5bf056df8",
+  "measuredBy": "MERGE-CAR",
+  "date": "2026-11-08",
+  "note": "the people car merged into the integration branch (8dff691f3): both sides inventories composed at the merged tree (Register VII v2 stands; the rung-2 landing registered dials stay)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -61,6 +61,7 @@
         "src/domain/edit/pools.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/facts/populationBand.js",
         "src/domain/highWater.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/magicFilter.js",
@@ -318,6 +319,34 @@
       },
       "dependents": [
         "src/domain/certification/warConvergenceContract.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/coherence/crisisFactFindings.js#FAMINE_STORES_HELD_MONTHS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 94,
+      "spanDigest": "42cba822df4a8ecb71503a445184626bef2ef7ad321e9814d269397056f9ec97",
+      "leaves": {
+        "value": 6
+      },
+      "dependents": [
+        "src/domain/coherence/coherenceBattery.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/coherence/crisisFactFindings.js#FEW_WEEKS_AS_MONTHS": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 97,
+      "spanDigest": "d40adbe17add3b7a21a86063de313b25e7b09f1baca71e01cb51ffebf26a3f22",
+      "leaves": {
+        "value": 0.5
+      },
+      "dependents": [
+        "src/domain/coherence/coherenceBattery.js"
       ],
       "namedDependents": []
     },
@@ -991,7 +1020,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 439,
+      "line": 441,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -1005,7 +1034,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 440,
+      "line": 442,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -1019,7 +1048,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 940,
+      "line": 943,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -1034,7 +1063,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 364,
+      "line": 366,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
@@ -1049,7 +1078,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 580,
+      "line": 582,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1064,7 +1093,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 582,
+      "line": 584,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1079,7 +1108,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 584,
+      "line": 586,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1094,7 +1123,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 586,
+      "line": 588,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -1109,7 +1138,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 279,
+      "line": 281,
       "spanDigest": "7ba947e7a8eeeeaf7c1099788047bdabcfe31b570173434bd82b0f9d83263184",
       "leaves": {
         "value": 0.25
@@ -1807,7 +1836,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 898,
+      "line": 899,
       "spanDigest": "e17c17028a479e164380a608b2851e8aed39d2de911749869dd35201c7536787",
       "leaves": {
         "BASE_PRICE": 1,
@@ -2175,6 +2204,31 @@
       "namedDependents": [
         "src/domain/display/tradeFlowEconomics.js"
       ]
+    },
+    "src/domain/summary/tonightSheet.js#WANT_MAX_WORDS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 112,
+      "spanDigest": "00c0e1f99fc53d650cd628cdac047d1e9e3d7d94218abe8ed2eed18c7a49b8ea",
+      "leaves": {
+        "value": 18
+      },
+      "dependents": [
+        "src/components/TableView.jsx",
+        "src/components/TonightSheet.jsx",
+        "src/components/new/tabs/EconomicsTab.jsx",
+        "src/components/new/tabs/OverviewTab.jsx",
+        "src/components/session/SessionMode.jsx",
+        "src/domain/coherence/crisisFactFindings.js",
+        "src/domain/coherence/readerBattery.js",
+        "src/domain/crisis/crisisPage.js",
+        "src/domain/summary/settlementQuickGuide.js",
+        "src/foundry/journalPages.js",
+        "src/pdf/SettlementPDF.jsx",
+        "src/pdf/sections/TonightAtTheTable.jsx"
+      ],
+      "namedDependents": []
     },
     "src/domain/townCartography/cartographyTuning.js#TOWN_CARTOGRAPHY_TUNING": {
       "exported": true,
@@ -4585,7 +4639,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 10,
-      "line": 79,
+      "line": 84,
       "spanDigest": "a50681cfa0c67338904a4d7f9d73d67602a8cd9e78925d765bce166f28f62196",
       "leaves": {
         "fillRate": 0.6,
@@ -8042,6 +8096,70 @@
       ],
       "namedDependents": []
     },
+    "src/generators/economy/foodBalance.js#FAMINE_HELD_STORE_MONTHS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 89,
+      "spanDigest": "5d423d06ea6e3cf77788e82c97fa0946ae7c7fbf8d6e6830cb848773ffb8cd0c",
+      "leaves": {
+        "value": 6
+      },
+      "dependents": [
+        "src/generators/economy/economicState.js",
+        "src/generators/economy/viability.js",
+        "src/generators/foodGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/foodGenerator.js#FAMINE_MONTHS_RUN": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 58,
+      "spanDigest": "80a30b61941b4ce767eb70294da0e598be1b01e5d109279817fa9898c18c919a",
+      "leaves": {
+        "value": 12
+      },
+      "dependents": [
+        "src/generators/economy/economicState.js",
+        "src/generators/economy/prosperity.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/foodGenerator.js#SMALLEST_ONE_DECIMAL_MONTHS": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 60,
+      "spanDigest": "d70a3c36f3d2b697eda6a63ffcd293fc11e35364c9d6dc4619e552583b9f41a9",
+      "leaves": {
+        "value": 0.1
+      },
+      "dependents": [
+        "src/generators/economy/economicState.js",
+        "src/generators/economy/prosperity.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/foodGenerator.js#FAMINE_DRAWDOWN": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 61,
+      "spanDigest": "d2e49a612404d3d5836706cd0d20b875f6f1f6758ac155284dcebb2f44a36782",
+      "leaves": {
+        "rationFloorPct": 5,
+        "maxReleaseFraction": 0.5,
+        "reserveTitheDeficitCap": 25,
+        "reserveTitheFloorMonths": 1
+      },
+      "dependents": [
+        "src/generators/economy/economicState.js",
+        "src/generators/economy/prosperity.js"
+      ],
+      "namedDependents": []
+    },
     "src/generators/people/castPowers.js#CAST_POWERS_TUNING": {
       "exported": true,
       "idiom": "literal",
@@ -8054,6 +8172,20 @@
       },
       "dependents": [
         "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/power/stressFactions.js#MIGRATION_GOVERNING_DAMP": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 52,
+      "spanDigest": "d10115379d15db065531f35da0cda4eee0e18371ba912cf4b17d88afe788735f",
+      "leaves": {
+        "value": 0.85
+      },
+      "dependents": [
+        "src/generators/power/rulingStructure.js"
       ],
       "namedDependents": []
     },
@@ -8668,7 +8800,7 @@
     "src/generators/power/relationshipArchetypes.js": 13,
     "src/generators/power/rulingStructure.js": 13,
     "src/generators/power/settlementNarrative.js": 3,
-    "src/generators/power/stressFactions.js": 35,
+    "src/generators/power/stressFactions.js": 34,
     "src/generators/priorityHelpers.js": 80,
     "src/generators/safetyProfile.js": 18,
     "src/generators/services/institutionServices.js": 10,
@@ -8686,11 +8818,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 263,
-    "keys": 2211,
+    "tables": 271,
+    "keys": 2222,
     "unregisteredNamed": 536,
-    "bareDecimals": 6935,
+    "bareDecimals": 6934,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 172
+    "zeroNamedDependentTables": 180
   }
 }
