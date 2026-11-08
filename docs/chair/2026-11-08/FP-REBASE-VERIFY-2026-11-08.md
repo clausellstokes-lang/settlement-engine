@@ -138,3 +138,27 @@ Counts (the third pass): **checks 3 · rows 5 · CONFIRMED 2 · RED 3 · fixed 0
 **Gates at cc654bf19 with this section** (each through `scripts/gate-tail.sh`): the three record walkers 3 files / 111 tests, exit 0; the FP-reading test files 47 files / 1,706 tests, exit 0.
 
 **CONFIRMED vs PLAUSIBLE (the third pass).** Every verdict rests on a line grepped verbatim at cc654bf19 or in the record at `origin/lane/chair-2026-11-08`. No PLAUSIBLE row.
+
+## 8. CLOSING PASS over 96d274826..84c1ec9b5 — the third pass's findings cured (2026-11-08 22:24 UTC, read from `date`)
+
+**What changed.** The range is one commit, 84c1ec9b5 (FPR-CONSTITUTION), touching 16 design volumes; this report is untouched in that range. This seat read it whole. No fix was made in this pass; nothing qualified under §2.6.
+
+| Item | Verdict | The quoted line |
+|---|---|---|
+| H1 no sentence counts the FP's flag | CONFIRMED. "Until all three hold" is gone from the fold OD-FC-151, the FAITH head and the ARCH_WF head (grep: 0). OD-FC-147's bracket now reads two conditions. Every remaining "FAITH FLAG lit" sits beside its "[CORRECTED … not a condition]" | OD-FC-147: "AMENDED by OD-FC-151 and OD-FC-152: the row is absent until the premium tier and an assigned custom deity both hold (the FP owns only the drift)"; the three heads: "[FPR-VERIFY H1, OD-FC-152 — two conditions: PREMIUM and an ASSIGNED DEITY; the FP owns only the drift] the `faith` row is ABSENT from every card" |
+| H2 the draw's time | CONFIRMED at FAITH (1), I-F5 and ARCH_WF's lifecycle | I-F5: "the draw reads the ASSIGNED PANTHEON — at each assignment for every born card, and at birth for a card born after it, on each card's own fork, deterministic"; FAITH (1): "the draw RE-DERIVES for EVERY born card when a deity is assigned (before canonization and advancing time)" |
+| H5 "FPZ" | CONFIRMED. 47 "FPZ [read as FP]" brackets in the twelve volumes, matching the count of §7. The only other hits are the §5 row, the file name `fpz-list.json`, the "read as FP" end-section lines and the twelve "THE FPZ SWEEP" end-section lines that name the sweep | "THE FPZ SWEEP (seat FPR-CONSTITUTION, on FPR-VERIFY H5; …" |
+| ARCH §4 person model | CONFIRMED | "THE GATE (OD-FC-151/152): the row exists only for a PREMIUM user and a settlement with an ASSIGNED custom deity, `faithOf(card, settlement)` null otherwise" |
+| the same-seed sentence | CONFIRMED in FAITH § THE BUILD; **NOTE (J1)** in the fold | FAITH: "[FPR-VERIFY note — read: the shift happens ONLY when a deity is assigned, by the premium user's own act, and is deterministic from then on; …" |
+| the time labels | CONFIRMED for OD-FC-152 ("read 22:1x UTC", the record's 22:15); **NOTE (J2)** for OD-FC-151 | — |
+
+Counts (the closing pass): **items 6 · CONFIRMED 6 (two with a residual NOTE) · RED 0 · fixed 0**.
+
+**Residual NOTEs (wording only):**
+- **J1.** The fold OD-FC-147's consequence column still reads "a same-seed shift on every born world when the birth draw lands (signed at its door)". FAITH § THE BUILD carries the re-reading bracket; this column does not.
+- **J2.** OD-FC-151's word is still labelled "read 22:07 UTC" in 26 places across 21 volumes (the fold ×4, FAITH ×2, ARCH_WF ×2, one each in the other eighteen). The record says "read at 22:09 UTC, the message minutes before". The chair's own messages also say 22:07, so the chair should say which label stands.
+
+**Gates at the tip with this section** (each through `scripts/gate-tail.sh`): the three record walkers 3 files / 111 tests, exit 0; the FP-reading test files 47 files / 1,706 tests, exit 0.
+
+**CONFIRMED vs PLAUSIBLE (the closing pass).** Every verdict rests on a line grepped verbatim at 84c1ec9b5. No PLAUSIBLE row. **The verification is closed from this seat's side:** RED 0 across the three passes' findings, with J1 and J2 left as wording for the chair.
+
