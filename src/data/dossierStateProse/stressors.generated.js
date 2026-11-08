@@ -3121,7 +3121,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: stable · CRISIS: indebted": [
         {
           "angle": "trade",
-          "text": "Every season the same share of {settlement}'s earnings goes to its creditor, and nothing is left over to build with.",
+          "text": "Every season the same share of {settlement}'s earnings goes to its creditor, and there is never enough left to build with.",
           "slots": [
             "settlement"
           ],

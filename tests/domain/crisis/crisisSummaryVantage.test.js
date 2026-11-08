@@ -31,8 +31,8 @@ describe('#29 — the crisis summary, one vantage per surface', () => {
       for (const line of lines) {
         expect(typeof line === 'string' && line.includes('{name}'), `${kind}: ${line}`).toBe(true);
         // a vantage claims no defence the record may lack, and no figure (the digit ban)
-        expect(line).not.toMatch(/\b(?:garrison|soldiers?|walls?|walled|hospitals?)\b/i);
-        expect(line).not.toMatch(/[0-9]/);
+        expect(line).not.toMatch(/\b(?:garrison|soldiers?|walls?|walled|hospitals?)\b/i); // anchored: the line above pins this same string as a real line with its {name} slot
+        expect(line).not.toMatch(/[0-9]/); // anchored: the same string, pinned two lines above
       }
       expect(new Set(lines).size, `${kind}: four different vantages`).toBe(4);
     });

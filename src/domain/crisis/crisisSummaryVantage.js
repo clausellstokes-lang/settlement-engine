@@ -36,10 +36,12 @@ export const SUMMARY_VANTAGE_OF_SURFACE = Object.freeze({
   tonight: 'official',
 });
 
+/** @typedef {Readonly<Record<string, string>>} VantageLines one crisis's line per vantage */
+
 /**
  * crisis kind → vantage → line (`{name}` = the settlement's name). `mass_migration` is keyed by
  * its declared direction first (WAVE-RULINGS item 8: both sets written, never one for both).
- * @type {Readonly<Record<string, Readonly<Record<string, any>>>>}
+ * @type {Readonly<Record<string, VantageLines | Readonly<Record<'arrivals' | 'departures', VantageLines>>>>}
  */
 export const CRISIS_SUMMARY_VANTAGES = Object.freeze({
   under_siege: Object.freeze({
@@ -160,7 +162,9 @@ export function crisisSummaryVantage(entry, name, vantage) {
   const set = kind ? CRISIS_SUMMARY_VANTAGES[kind] : undefined;
   if (!set || !place) return stored;
   // the census's one reader of W0's field (influx | exodus), the facts' own direction
-  const lines = kind === 'mass_migration' ? set[migrationDirectionOf(entry) === 'exodus' ? 'departures' : 'arrivals'] : set;
+  const lines = kind === 'mass_migration'
+    ? /** @type {Readonly<Record<'arrivals' | 'departures', VantageLines>>} */ (set)[migrationDirectionOf(entry) === 'exodus' ? 'departures' : 'arrivals']
+    : /** @type {VantageLines} */ (set);
   const line = lines ? clean(lines[vantage]) : '';
   return line ? line.replace(/\{name\}/g, place) : stored;
 }

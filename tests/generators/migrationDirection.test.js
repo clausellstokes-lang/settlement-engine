@@ -179,7 +179,7 @@ describe('the readers at a DEPARTURES record', () => {
     const toward = tensionDescription(template, { stressTypes: ['mass_migration'] });
     expect(away).toBe(template.descriptionByDirection.departures);
     expect(toward).toBe(template.descriptionByDirection.arrivals);
-    expect(`${away} ${toward}`).not.toMatch(/or both|arrived and left|gained and lost/);
+    expect(`${away} ${toward}`).not.toMatch(/or both|arrived and left|gained and lost/); // anchored: both halves pinned by toBe to their catalogue texts above
   });
 
   it('the viability note prints the one half the record names', () => {
@@ -194,8 +194,8 @@ describe('the readers at a DEPARTURES record', () => {
     expect(note.endsWith(`If people leave: ${departures.charAt(0).toLowerCase()}${departures.slice(1)}`)).toBe(true);
     expect(departures).toMatch(/^Taxes will fall short/);
     expect(arrivals).toMatch(/^Food will run short/);
-    expect(departures).not.toMatch(/newcomers|arrive/i);
-    expect(arrivals).not.toMatch(/leave|empty/i);
+    expect(departures).not.toMatch(/newcomers|arrive/i); // anchored: pinned by its opening two lines above
+    expect(arrivals).not.toMatch(/leave|empty/i); // anchored: pinned by its opening two lines above
   });
 });
 

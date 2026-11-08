@@ -4577,7 +4577,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 2. `[official]` Each payment leaves {settlement} deeper in debt, and its leaders have started selling what they cannot buy back.
 
 **DIRECTION: `stable` · CRISIS: `indebted`** {crisis: indebted}
-1. `[trade]` Every season the same share of {settlement}'s earnings goes to its creditor, and nothing is left over to build with.
+1. `[trade]` Every season the same share of {settlement}'s earnings goes to its creditor, and there is never enough left to build with.
 2. `[official]` {settlement}'s leaders pay the creditor on time and pay nothing off, so the debt never grows smaller.
 3. `[local]` The debt over {settlement} is neither growing nor shrinking: wages stay low, and the creditor's agent is a familiar face.
 4. `[newcomer]` Newcomers to {settlement} soon learn who the town owes, and that their own dues will go to paying it.

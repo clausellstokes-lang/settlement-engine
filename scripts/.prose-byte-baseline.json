@@ -79,8 +79,8 @@
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147470,
-      "gzip": 20773,
+      "raw": 147476,
+      "gzip": 20772,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
@@ -355,6 +355,14 @@
       "toRaw": 147470,
       "gzipAfter": 20773,
       "reason": "+62 B raw (gzip level 9: 20,851 -> 20,773, smaller): DS-STR-2's 30 style rows (lifecycle, counterforce, synergy and origin lines) rewritten in the plain register; no pool, variant, mark or slot added. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
+    },
+    {
+      "car": "W4 PEOPLE second seat (merging the people car, 2026-11-08): DS-CND-1 DIRECTION: stable · CRISIS: indebted v1 re-worded off a test literal",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147470,
+      "toRaw": 147476,
+      "gzipAfter": 20772,
+      "reason": "+6 B raw (gzip level 9: 20,773 -> 20,772): one line re-worded ('nothing is left over' -> 'there is never enough left') because proseDrawnAnchors read an unrelated assertion message in proseWiringCensus.walker.test.js as a literal anchor on it; no pool, variant, mark or slot added. Projected through node scripts/generate-dossier-state-prose.mjs; --check exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -15,6 +15,7 @@
  * reads), so no mocks are needed — the caller owns the flag/pref gating.
  */
 
+import { CRISIS_SUMMARY_VANTAGES } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, cleanup, fireEvent, screen } from '@testing-library/react';
 
@@ -49,7 +50,10 @@ describe('TableView', () => {
 
   it('opens on the active crisis when the record carries one', () => {
     render(<TableView settlement={{ ...fixture(), stress: [{ type: 'famine', label: 'Famine' }] }} onClose={onClose} />);
-    expect(screen.getByText('Hollowmere: Famine')).toBeTruthy();
+    // W4 PEOPLE second seat (#29, WAVE-RULINGS item 2): Tonight prints the crisis from the OFFICIAL vantage,
+    // `<type>. <line>`, read from the vantage table so a re-wording moves the pin with it.
+    const official = CRISIS_SUMMARY_VANTAGES.famine.official.replace(/\{name\}/g, 'Hollowmere');
+    expect(screen.getByText(`Famine. ${official}`)).toBeTruthy();
   });
 
   it('a bare record renders the sheet with nothing invented', () => {

@@ -179,7 +179,10 @@ describe('CAR 5(c) — the licensed level-1 members per block, on the COMPOSED f
     // different method (resolving every composer bag from source). The list is printed above
     // so the chair can diff it rather than take either number on trust.
     expect(settlementOnly.length).toBe(22);
-    expect(oneMember.length).toBe(33);
+    // W4 PEOPLE (2026-11-07; re-measured at the people car's merge, 2026-11-08): 33 -> 34. DS-FTH-4 is MOUNTED at
+    // faith.templeGround, so it gains a composed fill (it had no bag); its slots (cleric, counterpart, creed, faction,
+    // houses, observance, rival_creed, settlement, term) license only the bare PRESENT.
+    expect(oneMember.length).toBe(34);
   });
 });
 
