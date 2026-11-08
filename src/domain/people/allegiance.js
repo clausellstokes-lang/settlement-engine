@@ -66,8 +66,9 @@ export const ALLEGIANCE_FORK_LABEL = 'people-allegiance';
  * powerBonus fraction01 · share share · frontWeight multiplier.
  */
 export const ALLEGIANCE_TUNING = Object.freeze({
-  /** organized crime's weight on the birth chance, added inside the spawn clamp (J-5) */
-  organizedCrime: 0.10,
+  /** organized crime's weight on the birth chance, added inside the spawn clamp (J-5); 0.10 → 0.05 by
+   *  ALLEGIANCE-CAR3's measured band (towns with no criminal power within ±3 points of the base, §5) */
+  organizedCrime: 0.05,
   /** the summed criminal-house backing weight at which organized crime reads 1 */
   organizedFull: 8,
   /** organized crime's step when an independent criminal power stands */
