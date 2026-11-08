@@ -580,7 +580,19 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //   Brotli 279,545 + 5,405 + 2,642 - 195 - 80 + 210 = 287,527. (The compressed figures drift by tens of bytes across
 //   environments at an equal raw closure — measured: the tip's gzip read 341,663 in the archive build and 341,647 here; the
 //   checkout's figures are recorded, as the gate reads them.)
-const CLOSURE_BUDGET_BYTES = 1_072_488; // 2026-11-08: re-recorded AT the measured merged tip, MERGE-CAR (note above); was 1_051_166 (PEOPLE-LAND) / 1_062_940 (LANDING-R2)
+// 2026-11-08, FIX-ARROW-SECTIONS (the owner's word: "The spacing between the sections ( represented by the banded thread
+// red) are not equally spaced and scales as such can you do that for me?"; the chair's ruling, session
+// session_01FbPLbejcfwX5nii12VM673, under the owner's delegation; VETOABLE BY THE OWNER): the three first-paint budgets
+// re-recorded AT the measured lane tip after every trim that moves no output byte (record
+// docs/chair/2026-11-08/FIX-ARROW-SECTIONS-RECORD-2026-11-08.md §5). The only module that differs from the parent
+// 82cc9b88 is src/components/nav/arrowGeometry.js (sourcemap attribution of the entry chunk). MEASURED by `npm run build`
+// and this file's own arms, each part by a build without it:
+//   raw    1,072,488 + 169 (Compendium's glow clip) + 57 (its two fe-5 cuts, tones and the per-cut fe) - 110 (the
+//          water-fill allocation, smaller than the shares/threshold/tile machinery it replaced) = 1,072,604.
+//   gzip   341,647 + 90 + 38 + 66 = 341,841.
+//   Brotli 287,527 + 83 + 107 - 83 = 287,634.
+// (Compressed parts do not add exactly; each is measured as the tip minus a build without it, the remainder named.)
+const CLOSURE_BUDGET_BYTES = 1_072_604; // 2026-11-08: re-recorded AT the measured lane tip, FIX-ARROW-SECTIONS (note above); was 1_072_488 (MERGE-CAR) / 1_051_166 (PEOPLE-LAND)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -610,8 +622,8 @@ const CLOSURE_BUDGET_BYTES = 1_072_488; // 2026-11-08: re-recorded AT the measur
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 341_647; // 2026-11-08: re-recorded AT the measured merged tip, MERGE-CAR (note above); was 338_535 (MERGE-R2) / 336_286 (PEOPLE-LAND)
-const CLOSURE_BROTLI_BUDGET_BYTES = 287_527; // 2026-11-08: re-recorded AT the measured merged tip, MERGE-CAR (note above); was 284_950 (MERGE-R2) / 282_346 (PEOPLE-LAND)
+const CLOSURE_GZIP_BUDGET_BYTES = 341_841; // 2026-11-08: re-recorded AT the measured lane tip, FIX-ARROW-SECTIONS (note at the raw budget); was 341_647 (MERGE-CAR) / 338_535 (MERGE-R2)
+const CLOSURE_BROTLI_BUDGET_BYTES = 287_634; // 2026-11-08: re-recorded AT the measured lane tip, FIX-ARROW-SECTIONS (note at the raw budget); was 287_527 (MERGE-CAR) / 284_950 (MERGE-R2)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -1811,9 +1823,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_072_488); // MERGE-CAR, 2026-11-08 (note at the constant); PEOPLE-LAND 1_051_166 / LANDING-R2 1_062_940 before
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(341_647); // MERGE-CAR, 2026-11-08
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(287_527); // MERGE-CAR, 2026-11-08
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_072_604); // FIX-ARROW-SECTIONS, 2026-11-08 (note at the constant); MERGE-CAR 1_072_488 / PEOPLE-LAND 1_051_166 before
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(341_841); // FIX-ARROW-SECTIONS, 2026-11-08; MERGE-CAR 341_647 before
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(287_634); // FIX-ARROW-SECTIONS, 2026-11-08; MERGE-CAR 287_527 before
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP

@@ -82,7 +82,19 @@ Measured in the built page from the six nav controls' `getBoundingClientRect`. `
 | (2) further trims tried by probe: CUTS as 13 literals (+12 gzip, rejected); `stripPx` dropped (−12, test-read, not taken) | | | | each about ±10 gzip |
 | (3) zero-behaviour buy-back: every top-level binding in the entry chunk parsed (acorn) for references and export-list membership | | | | **none found**: 0 unreferenced, unexported bindings; Rollup keeps nothing dead at binding level |
 
-After (1)–(3) the entry is still over by **+116 raw, +194 gzip and +107 Brotli**, and none of the chair's three doors closes it. The ceiling is not raised and nothing is lazy-loaded; the chair rules next.
+After (1)–(3) the entry is still over by **+116 raw, +194 gzip and +107 Brotli**, and none of the chair's three doors closes it. The ceiling was not raised and nothing was lazy-loaded at this stage.
+
+**The chair's third ruling (the ceiling law, corrected): RE-RECORDED at the measured tip, every byte attributed.** The glow clip is kept. Each part was measured as the tip minus an `npm run build` without that part, read by this file's own arms:
+
+| | raw | gzip | Brotli |
+|---|---|---|---|
+| parent `82cc9b88` (old budget) | 1,072,488 | 341,647 | 287,527 |
+| + Compendium's glow clip (tip − build without it: 1,072,435 / 341,751 / 287,551) | +169 | +90 | +83 |
+| + Compendium's two fe-5 cuts, their tones and the per-cut fe (tip − build without them: 1,072,547 / 341,803 / 287,527) | +57 | +38 | +107 |
+| + the water-fill allocation, the remainder (replaces shares, threshold and tile zone) | −110 | +66 | −83 |
+| **= the lane tip, re-recorded in `tests/build/vendorPdfLazy.test.js`** | **1,072,604** | **341,841** | **287,634** |
+
+Compressed parts don't add exactly; each is measured, and the remainder is named. The pin's comment carries the same attribution. Under the chair's ruling this lane is MERGE-WAVE's eleventh lane, merged last, and its figure is re-measured at the wave's final tip.
 
 **Superseded**, the first step-(c) candidate (refused by the chair): lazy-load `src/domain/aiOverlayVerifier.js`, which is 4,943 B raw and 1,680 B gzip in the entry chunk. Its sole importer is `store/aiOverlayLifecycle.js :: runOverlayVerifier`; one of its three callers, `setAiSettlement`, is synchronous. I examined and set aside `staleDeploy.js` and `customContentAdmission.js` (eager by design) and the event pipeline (a structural change).
 
