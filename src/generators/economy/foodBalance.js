@@ -507,7 +507,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         });
         plotHooks.push({
           category: 'Trade Disruption',
-          hook: `The ${effectiveRoute} trade route is cut off by bandits, war, or weather. The settlement has ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food left. Famine follows within weeks.`,
+          hook: `The ${effectiveRoute} trade route is cut, and nothing has come along it in days. The town has ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food left, and no one knows when the next load will come.`,
           severity: 'high',
         });
       }
@@ -777,25 +777,25 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
         category: 'Trade Monopoly',
         // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
         // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
-        hook: 'A single importer controls the grain coming in and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
+        hook: 'One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.',
         severity: 'high',
       });
       if (route === 'river')
         hooks.push({
           category: 'River Control',
-          hook: 'Upstream settlement builds dam or diverts river. Threatens water access AND grain shipments. Diplomacy or war?',
+          hook: 'A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and the town must choose between talking and fighting.',
           severity: 'high',
         });
       if (route === 'port' && resolveTerrain(config) === 'coastal')
         hooks.push({
           category: 'Naval Blockade',
-          hook: `An enemy fleet or a pirate squadron blockades the port. The settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves, and nothing enters or leaves until that changes.`,
+          hook: `Ships sit across the harbour mouth, an enemy's or pirates', and nothing enters or leaves. The town has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves.`,
           severity: 'high',
         });
       if (route === 'road' && hasDeficit)
         hooks.push({
           category: 'Bandit Raids',
-          hook: 'Bandits are taking the food caravans, and the settlement has posted a bounty for clearing the trade road. But are the "bandits" refugees driven here from somewhere worse?',
+          hook: 'Bandits are taking the food caravans, and the town has posted a bounty for clearing the trade road; the carters who got away say the "bandits" looked like families who had fled somewhere worse.',
           severity: 'medium',
         });
     }
@@ -834,7 +834,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
         if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
           hooks.push({
             category: 'Strategic Resource',
-            hook: 'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.',
+            hook: 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.',
             severity: 'medium',
           });
       }
