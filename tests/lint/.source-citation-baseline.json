@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 156,
+      "dated": 157,
       "sha-pin": 2,
       "tree": 112
     },
@@ -328,7 +328,8 @@
     "_rosterGrowth2026-11-08-fp-rebase-census": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, measured once with this walker's own arm): `dated` 152 -> 153, docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md, the three census seats' read of the FP corpus against the people car and the allegiance train, born dated (citations `path :: heading`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-08-fp-rebase-brief": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, on the owner's word of 2026-11-08 to fix the FP architecture in the documents now while the FP stays parked behind the plat): `dated` 153 -> 154, docs/chair/2026-11-08/BRIEF-FP-REBASE-2026-11-08.md, the four-seat docs program's brief, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-08-fp-rebase-verify-brief": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, 2026-11-08 20:3x UTC): docs/chair/2026-11-08/BRIEF-FP-REBASE-VERIFY-2026-11-08.md, the adversarial verifier's brief for the FP re-base (one seat after the four writing seats' hand-backs; docs only). dated 155 -> 156; born dated, 0 past-EOF. The archival-at-freeze figure grows by exactly the documents born dated; nothing already counted moved.",
-    "_rosterGrowth2026-11-08-fix-arrow-sections-brief": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, on the owner's word of 2026-11-08 that the painted arrow header's sections are not equally spaced): `dated` 154 -> 155, docs/chair/2026-11-08/BRIEF-FIX-ARROW-SECTIONS-2026-11-08.md, the fix lane's brief, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382."
+    "_rosterGrowth2026-11-08-fix-arrow-sections-brief": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, on the owner's word of 2026-11-08 that the painted arrow header's sections are not equally spaced): `dated` 154 -> 155, docs/chair/2026-11-08/BRIEF-FIX-ARROW-SECTIONS-2026-11-08.md, the fix lane's brief, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
+    "_rosterGrowth2026-11-08-merge-wave": "ONE document JOINED the roster by being BORN into it (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24, on the integration branch at step 0, the brief's record commit): `dated` 156 -> 157, docs/INTEGRATION_MERGE_WAVE_2026-11-07.md, the merge seat's record, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382."
   },
   "rows": []
 }
