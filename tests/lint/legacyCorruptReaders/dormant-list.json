@@ -1,0 +1,122 @@
+{
+ "_": "ALLEGIANCE-CAR1 2026-11-08 (the allegiance design \u00a77.3, I-15): the files that may still read the retired NPC mark \u2014 `corrupt`, `corruptTies`, `corruptionVector` \u2014 after car 1: the simulation's readers (M-6, frozen: the owner kept 'compromised' for the simulator) and the one eager first-paint module that feeds only the simulation. MEASURED by tests/lint/noLegacyCorruptReaders.walker.test.js's own syntax-tree pass at the car's tip: every file the pass finds reading the mark that is not re-pointed through allegianceOf, minus the two declared classes (the veil's retired-key drop, the v2 -> v3 migration). The design's \u00a77.3 union of 37 names (21 files containing `compromised`, 16 reading the field) MEASURED: 15 of its 16 field readers read the mark (npcVerdictTable.js reads it only through corruptionLeash.js :: resolveLeash, re-pointed, so it is no reader of its own), none of the `compromised`-only files reads the card field (they read the simulation's WORLD roster), and corruption.js joins them (its re-point is refused for the first-paint closure, its row says why): 16 files.",
+ "base": "ALLEGIANCE-CAR1",
+ "files": [
+  {
+   "file": "src/domain/corruption.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "compromisedSecurityInstitutions: the covert stooge's home institution, read only by the simulation (worldPulse/causeVocabulary.js, npcAgency.js and the espionage gauntlet through patronageSecurityDrag); corruption.js is an EAGER first-paint module, so it does not import the allegiance reader (its module graph carries the catalog). Its in-file npcHomeInstitution is FPZ's (fpz-list.json). Re-point to allegianceOf when FPZ rebuilds the simulation's corruption loop (M-6)."
+  },
+  {
+   "file": "src/domain/worldPulse/applyWorldPulseBetrayal.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's betrayal seed (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/assizeKernel.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's assize (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/beliefMap.js",
+   "reads": [
+    "corruptionVector"
+   ],
+   "reason": "the simulation's belief map (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/causeLifecycle.js",
+   "reads": [
+    "corrupt",
+    "corruptTies"
+   ],
+   "reason": "the simulation's cause lifecycle (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/clergyTraitPlane.js",
+   "reads": [
+    "corruptTies"
+   ],
+   "reason": "the simulation's clergy trait plane (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/commonsVoiceKernel.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's commons voice (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/corruptionImpair.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's corruption impairments (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/corruptionWeb.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's corruption web (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/factionCapture.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's faction capture (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "reads": [
+    "corrupt",
+    "corruptTies",
+    "corruptionVector"
+   ],
+   "reason": "J-19, THE DOUBLE-CORRUPTION RISK ON UNFREEZE: npcAgency.js :: ensureNpcStates treats a non-boolean `corrupt` as a legacy save and RE-ROLLS corruption with spawnCorruptionChance. A v3 card carries no `corrupt` (its hidden allegiance is `allegiance`), so an unfrozen simulation would corrupt the town a second time over the allegiances birth already dealt. The reader must read allegianceOf when FPZ rebuilds it (the chair's ruling J-19: recorded, nothing built now)."
+  },
+  {
+   "file": "src/domain/worldPulse/npcGrowthKernel.js",
+   "reads": [
+    "corrupt",
+    "corruptTies"
+   ],
+   "reason": "the simulation's growth kernel (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderChallenge.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's ladder challenge (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderKernel.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's ladder kernel (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/religionLegitimacy.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's religion legitimacy (M-6, frozen)"
+  },
+  {
+   "file": "src/domain/worldPulse/settlementPolitics.js",
+   "reads": [
+    "corrupt"
+   ],
+   "reason": "the simulation's settlement politics (M-6, frozen)"
+  }
+ ]
+}
