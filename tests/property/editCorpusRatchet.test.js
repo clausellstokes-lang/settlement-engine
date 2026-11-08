@@ -377,7 +377,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-07 (the people landing; re-keyed BY IDENTITY, this census probed at each lane's tree): not idle 277 -> 276
     // PEOPLE-1 CAST dc655f712 -> 271 CAST-DERIVED 3aa160a70 -> 305 TIES c7d552370 -> 306 5B EDIT a725df7e4, unmoved to the
     // tip; groups judged 133 at every stage. mixedOutside and settledLive stay empty at every stage.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(306);
+    // 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the people car's merge
+    // over the integration branch; re-keyed BY IDENTITY, this census probed on git-archive trees): not idle 306 -> 312. By
+    // stage: the merge base 262e8b255 reads 277; the car's tip 373a2947b 306 (+29, its pin above); the integration tip
+    // 7b3ffb6ee 283 (+6; LANDING-R2's 280 was taken on the rung-2 lane before it composed); the merged tip 2c7437030 312 =
+    // 277 + 29 + 6, additive, no interaction. Groups judged 133 at every stage; mixedOutside and settledLive stay empty.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(312);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -516,7 +521,13 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // (f4f765b72) -> 1810 the census-4 merge (950b75014) -> 1806 census-1h R-AU (d035cf840) -> E1 712 census-1i R-AW
     // (ba7887862). The census tip e36e4916f reads [712, 66, 1806], as does the composed tip; against rung 1's 1810 the
     // census's E6 -8 lands as -4, an interaction of +4 with rung 1's own -4 (record 28's cure, the same summary leaves).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([712, 66, 1806]);
+    // 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the people car's merge
+    // over the integration branch; re-keyed BY IDENTITY, this census probed on git-archive trees): [712, 66, 1806] ->
+    // [656, 262, 2060]. By stage: the merge base 262e8b255 reads [709, 66, 1826]; the car's tip 373a2947b [642, 254, 2048]
+    // (the people car moved this arm, E5 +188 and E6 +222, and its pin [709, 66, 1821] stood red there); the integration tip 7b3ffb6ee [753, 66, 1815] (LANDING-R2's figure was taken on the
+    // rung-2 lane before it composed); the merged tip 2c7437030 [656, 262, 2060], against the additive [686, 254, 2037] an
+    // interaction of [-30, +8, +23] between the car's cast and the rung-2 census (not traced leaf by leaf).
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([656, 262, 2060]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
@@ -524,7 +535,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-07 (LANDING-R2 seat C2, measured by this arm on git-archive trees): 28 → 31 at census-1i unit 1 R-AW
     // (ba7887862: the close-time relabel runs the rename cascade over the crisis cast; 28 at its parent 7e31beeb6, 31 at
     // it). Merge base and rung 1's final tip read 28, the census tip and the composed tip 31: no interaction.
-    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([31, 0, 0]);
+    // 2026-11-08, MERGE-CAR (as above; masked behind the first figure until it was re-keyed): 31 -> 49. By stage: merge base
+    // 262e8b255 28, the car's tip 35 (+7), the integration tip 34 (+6), the merged tip 49 (additive 41: interaction +8). The
+    // two dormant membership edits still reach none.
+    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([49, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
     // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
@@ -539,7 +553,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // → [31, 31] X-46 car 3 (90dc22f18, the institution budget) → [24, 24] PLACE-NOT-TIER (6129c300d) → [27, 27] PINS
     // (37b1e746d) → [21, 21] car 3 I7 (6ca454d2b), unmoved to the tip (F6, F1, F10, the residual tick bc2a64000, the
     // summary-hook cure c1cf38bbb). Chains and leaves stay equal: every ride-along chain carries exactly one leaf.
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([21, 21]);
+    // 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the people car's merge
+    // over the integration branch; re-keyed BY IDENTITY, masked behind A7's first figures until they were re-keyed): [21, 21]
+    // -> [70, 72], measured by this file's own chain census at the merged tip 2c7437030. Chains and leaves are no longer
+    // equal: two of the seventy ride-along chains carry two leaves. NOT attributed by stage (the chain census was not probed
+    // on the car's and the integration's trees; both tips read A7 red at their first figure, so neither side's pin was live).
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([70, 72]);
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {

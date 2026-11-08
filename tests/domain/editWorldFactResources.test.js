@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '6c8e521c5f80586eb259d5db267c5d4349f8e5c8d56fdbb1d3b5b2b5b29ea3ef',
-    replay: '69c0d62324d0e671dd1c8df27b826cb32667ee0f3446f94067cd51b0db390788',
+    derived: '2c5389ddec4c0713b2a36a0d552343f75b92b5db3f8dc84de9d6800025cf6ef2',
+    replay: 'ff15041645ef7997c65d9494e56df51b91848c0a6e8b17d20cc9af8d031efe7d',
   }),
   21: Object.freeze({
-    derived: 'b933a9c0cc863c7cdd5a806b5d593d0c996675973b251dcc0839a83bab8bc7ce',
-    replay: '10b257acf49d8135cb34644cd261c0adbb8f11b902b329c676065f626ce01c78',
+    derived: '882e592f4fb18052d4936695d3714658365fa133af6a55313eab5867335f1521',
+    replay: 'ec6de9f8186472abc16a4f026de67a5c3a1c69f30e738fa3d8b6dd79437f693a',
   }),
   42: Object.freeze({
-    derived: '0b8e96c8f6f46b2f696355c46dd962d3ea5e3a03dd72dcccf10dc2a864e073c8',
-    replay: 'fb4f85af237ac129c5f669d406beca033807670d10d77c696dd7499405baacbc',
+    derived: '063432463fdde016cac3e7395e4521becb80e9a287f1be6f8abf6791b5b93d0e',
+    replay: '6c58173e70ef360cd38746d02a5c1e8469868504cdfe1f872fa8a7f82d7af9a3',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -218,6 +218,17 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // planted over a COPY of this tree at 1dd31a377 (a detached probe worktree, never this checkout), and the planted step
 // and the live step produced the SAME six digests, so EM-B2b2 still moves no byte of the no-edit path; on every row the
 // fresh generation equals the dormant re-derivation.
+// ── RE-CAPTURED 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the people
+// car's merge over the integration branch; docs/shift-records/2026-11-08-merge-car-{a-rung2,b-people-car}-composition.json),
+// BY THE SAME PLANT ── All six digests moved. MEASURED by stage on git-archive trees: the W0 lane tip eb4c508e1 reads the
+// W0 block's six byte for byte; the W0 lane's merge into the integration branch fc834a6bd moves all six, as does the merge
+// base 262e8b255, so the car's tip 373a2947b (which carried W0's six) and the integration tip 7b3ffb6ee (which carried
+// LANDING-R2's) each read red, every digest moving on each side; the people car's merge 8dff691f3 moves all six against
+// either side, and the merged tip 2c7437030 equals the merge. Re-captured: the pre-EM-B2b2 step (12c437de4, sha256
+// 62e16d59...) planted over a COPY of 2c7437030 (a scratch archive, never this checkout) and the live step produced the
+// SAME six digests, so EM-B2b2 still moves no byte of the no-edit path; on every row the fresh generation equals the
+// dormant re-derivation (twice and equal). Row 21's `derived` (882e592f) is record B's golden control row
+// (generationForkCensus GOLDEN_CONTROL_HASH).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

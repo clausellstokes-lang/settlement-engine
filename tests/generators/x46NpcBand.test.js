@@ -178,7 +178,16 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // the census side f5dc50c6b red; the all-row mover on its own lineage, 73fa1a1e7 (reader-tonight-wants R11 unit 3, the 76
   // registry goals rewritten in the house register) against its parent 7f0632463, moves 60 of 60 by itself. Re-captured at
   // the tip dd2aab21d, twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
-  const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
+  // RE-KEYED BY IDENTITY 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the
+  // people car's merge over the integration branch; docs/shift-records/2026-11-08-merge-car-{a-rung2,b-people-car}-
+  // composition.json): 60 of 60 moved. MEASURED by this file's recipe on git-archive trees, by stage: the car's side
+  // carried W0's sixty (the W0 lane tip eb4c508e1 reads them byte for byte), and the W0 lane's merge into the integration
+  // branch fc834a6bd already moves 60 of 60, as does the merge base 262e8b255, so the car's tip 373a2947b read red (base ->
+  // car moves 60 more); the integration tip 7b3ffb6ee read LANDING-R2's sixty red (base -> integration moves 60); the
+  // people car's merge 8dff691f3 moves 60 against either side, and nothing after it moves any: 2c7437030, 4c39885fc and,
+  // through the car's seam cure b19740ab3 (moves none of the sixty) and record C, the tip 3f95e3484 all read the merge's
+  // sixty. Re-captured at 3f95e3484, twice and equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
+  const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
 

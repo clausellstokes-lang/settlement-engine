@@ -65,67 +65,82 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // all-row mover on its own lineage, 73fa1a1e7 (reader-tonight-wants R11 unit 3, the 76 registry goals rewritten in the
 // house register) against its parent 7f0632463, moves 60 of 60 by itself. Re-captured at the tip dd2aab21d with the factor
 // forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the
+// people car's merge over the integration branch; docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json and
+// docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json): 60 of 60 moved, none by the budget (densityFactor
+// is still forced to 1). MEASURED, this file's own loop on git-archive trees, by stage: the car's side carried W0's sixty
+// (c30a69cf2; the W0 lane tip eb4c508e1 reads them byte for byte), and the W0 lane's merge into the integration branch
+// fc834a6bd (composed over review-intake's generator changes) already moves 60 of 60, as does the merge base 262e8b255, so
+// the car's tip 373a2947b read red (base -> car moves 60 more). The rung-2 side carried LANDING-R2's sixty (captured at
+// dd2aab21d, on the rung-2 lane), which the integration tip 7b3ffb6ee also reads red (base -> integration moves 60). The
+// people car's merge 8dff691f3 moves 60 against either side; the merged tip 2c7437030 equals the merge (its post-merge src
+// fixes move none). Re-captured at 2c7437030 with the factor forced to 1.0, twice and equal.
+// THEN 3 of 60 moved by the car's seam cure b19740ab3 (MERGE-CAR: the car's birth seams carry `_government` into the
+// goal draw, and crisisCast refuses a seat-house member as instigator), seeds 21 (dccc50cde44307e5 -> 463e8f7a3e88d12f),
+// 27 (ee38718de1b929c9 -> 9057c386767a53ef) and 43 (a57cae4ca1a8eaf8 -> 20d12b33835a0846): measured by this file's own
+// loop, 4c39885fc reads the sixty as captured at 2c7437030 and the tip 3f95e3484 moves exactly these three; between them only b19740ab3 touches generation (9fd906c23 is display-only,
+// record C 3f95e3484 is fence-only). Re-captured at 3f95e3484 with the factor forced to 1.0, twice and equal.
 const BEFORE = Object.freeze([
-  'd3907bbcf4a47a3e', // 0
-  '1b1be5b33abaa994', // 1
-  '98a545ca5410795d', // 2
-  '3efbbe65e505e370', // 3
-  'a93910b620b5e8a0', // 4
-  '2cd628dfc5f9ad5c', // 5
-  '02a140a6c31d79a4', // 6
-  'd6cfa9236c28e148', // 7
-  'a6957733fc9637ac', // 8
-  '2e6e79205f5bc4e8', // 9
-  '68680158b811cc0c', // 10
-  'c2e607a6d3b2aab0', // 11
-  '4ecdf7dd0ef5df48', // 12
-  '4cb56c27c8089413', // 13
-  '5e9f28dcfb01930b', // 14
-  'b41b5befbb667036', // 15
-  'fc97d9fa3531f623', // 16
-  '98e9f02a5f82bf8d', // 17
-  'dd620ec0f3813f37', // 18
-  '5572403f817dc4fc', // 19
-  'f3e847f64d556d7e', // 20
-  'd5cd6c379b96f2da', // 21
-  '2b0dd71f02c29498', // 22
-  'e6b22bd962be039c', // 23
-  '7cbdaf58c6f3f294', // 24
-  '41e40ae02e5236ed', // 25
-  '4314cbfc8a2219d8', // 26
-  '71720481c9cb6b5c', // 27
-  '444ccdd021a13938', // 28
-  'd6443b3c0dfa3764', // 29
-  'aa33f54e600076b8', // 30
-  '38594deea820d18f', // 31
-  '3678534195830eec', // 32
-  'c0fa0cc0fa336909', // 33
-  'e0549f7fedcf38f4', // 34
-  '820691a64e512879', // 35
-  'c0ca90d43ce2a48e', // 36
-  'd52ccf2109512092', // 37
-  '44489cede99fb32d', // 38
-  '5177841cf995b34f', // 39
-  '902a9cd54c1e34a1', // 40
-  'ec246c1b8e3d2ced', // 41
-  'b4687a4f25d6a0fe', // 42
-  '96e5a94299e04f25', // 43
-  '29b5c593b26c9887', // 44
-  '19d9eac6f4c2f90d', // 45
-  '537e78c8a50cbf10', // 46
-  'c29a3d7b8b268b9d', // 47
-  'edd82e5cfaf2fc2e', // 48
-  '8dc39ae2ecfa821c', // 49
-  'c769f5ed5024b428', // 50
-  'c84b6d952d5686ec', // 51
-  'ea4d78a814f5d624', // 52
-  'd9f17d8bf42a5152', // 53
-  '6788271d980c17dc', // 54
-  'cebc0aaa3ef37fd9', // 55
-  'f76de55f1128abb5', // 56
-  '3a987b742c698b4c', // 57
-  'ab43a6c2028b032c', // 58
-  '9c73b6483bdec76e', // 59
+  'a218c33e0b07fdbf', // 0
+  'e54bcb6a762cd333', // 1
+  '3c1040b8606c57a5', // 2
+  '8ec0881d50b4ced1', // 3
+  '612ab7970edcea30', // 4
+  '05dff2518f76c0ea', // 5
+  '2416408d696a144a', // 6
+  'c85d6c3fb548276f', // 7
+  '20a4d9e836903d88', // 8
+  '81ac6cd106e8bd44', // 9
+  '05a98c1fbc272d66', // 10
+  '9b6f9b9f0584580f', // 11
+  '12affc0a0fcd136a', // 12
+  '59ed1a5564aca2c4', // 13
+  'e69dccaa1d7a6cb2', // 14
+  '346f5628f55d761a', // 15
+  '01ec7ed5f56b5c9a', // 16
+  '056d359c2e6e8544', // 17
+  '51db271e4ef6e8b0', // 18
+  '7157dfc6f8a8da56', // 19
+  'ae6b07d20ab1f304', // 20
+  '463e8f7a3e88d12f', // 21
+  'c7162439da1debef', // 22
+  '314029460c5b6b15', // 23
+  'a87a741e59a35fbe', // 24
+  '2e8b03858f465561', // 25
+  '5a5d83c4d318d68f', // 26
+  '9057c386767a53ef', // 27
+  'e8bfebc77f27f23f', // 28
+  'b934701f5e9a2021', // 29
+  '78e56e6b81505156', // 30
+  'fe4b466ac7c79ed4', // 31
+  'b16cba79d26e9918', // 32
+  'c4e552994de08e8a', // 33
+  '79fe65f6003eefa7', // 34
+  '0801f635bca220ad', // 35
+  '5b434f746a4628bd', // 36
+  '284523bee3281a86', // 37
+  '6ae4fb2965cebb14', // 38
+  '2c77009c8b2eb986', // 39
+  '5e7ebade242e392a', // 40
+  'dd364453155de218', // 41
+  '4b44cdd1845ac7a2', // 42
+  '20d12b33835a0846', // 43
+  'e8713ee6471a6254', // 44
+  '0b925ad0ec0b04ec', // 45
+  '18232e2beeb3393c', // 46
+  '24e494c6b58e84bc', // 47
+  'eb8018f81482688c', // 48
+  '5c529604051af62a', // 49
+  '27eb2c526291d1a8', // 50
+  'a520a9b640464baa', // 51
+  'a697e52552f7fa30', // 52
+  '5fc78ebcfde32be7', // 53
+  'ff9d6533e474a67a', // 54
+  '0f587f30e28a0c69', // 55
+  '20b1d41950121bec', // 56
+  'b821cb47cbc4e625', // 57
+  'd95cd1565227f122', // 58
+  '97d1424a0a11724d', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);
