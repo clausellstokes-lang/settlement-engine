@@ -74,6 +74,7 @@ export function NPCCategoryGroup({
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
+  settlement = null, // MERGE-CAR: the tab's own settlement, for the place-guarded honorific (A-11)
 }) {
   const [open, setOpen] = useState(true);
   const mobile = useIsMobile();
@@ -114,6 +115,7 @@ export function NPCCategoryGroup({
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
           canAuthorNpc={canAuthorNpc}
+          settlement={settlement}
         />
       ))}
     </div>
@@ -191,6 +193,7 @@ export function NPCInlineCard({
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
+  settlement: placeSettlement = null, // MERGE-CAR: the settlement the card is shown in (the tab's); the store's when absent
 }) {
   // Tier 5.4 — manual prose editing. The save/revert handlers resolve only a
   // unique durable id at edit time, so duplicate legacy names and roster
@@ -198,7 +201,8 @@ export function NPCInlineCard({
   const editMode             = useStore(s => s.editMode);
   const applyUserEditAction  = useStore(s => s.applyUserEditAction);
   const revertUserEditAction = useStore(s => s.revertUserEditAction);
-  const settlement           = useStore(s => s.settlement);
+  const storeSettlement      = useStore(s => s.settlement);
+  const settlement           = placeSettlement || storeSettlement;
   const savedSettlements     = useStore(s => s.savedSettlements);
   const focusEntity          = useStore(s => s.focusEntity);
   // DESIGN_THE_ROADS §12 — the ONE dossier whereabouts line + short badge (display-read only;

@@ -138,6 +138,7 @@ export function NPCsTab({
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
           canAuthorNpc={canAuthorNpc}
+          settlement={settlement}
         />
       ))}
 
