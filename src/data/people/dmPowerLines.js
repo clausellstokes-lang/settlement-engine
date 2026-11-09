@@ -133,6 +133,21 @@ export function criminalsOf(f) {
 }
 
 /**
+ * STYLE-2 SW-7 (the refusal line): the open patron's go-between line, keyed by the patron's PLACE in the ruling
+ * power (its rank, or the steward of an empty seat), so the one frame "When @ wants something from @, @ is the one who
+ * asks for it." (168 towns on the 1,000 at dc5684e66) splits four ways by the record; the share words split it further.
+ * Every variant names the patron, the ruler and the power, and states only the rank and the share it receives.
+ * @param {PatronFacts} f
+ */
+function askerLine(f) {
+  const share = shareWords(f.share);
+  if (f.rank === 1) return `${f.name} heads ${f.ruler} and also holds ${share} in ${f.power}, so what ${f.power} wants from ${f.ruler} goes straight to the top.`;
+  if (f.rank === 2) return `${f.power} brings its requests to ${f.ruler} through ${f.name}, second in ${f.ruler}, who holds ${share} in ${f.power}.`;
+  if (f.rank === 3) return `${f.name} is third in ${f.ruler} and holds ${share} in ${f.power}, and carries ${f.power}'s requests to the two above.`;
+  return `While the seat of ${f.ruler} stands empty, its steward ${f.name} holds ${share} in ${f.power}, and ${f.power}'s requests go through ${f.name}.`;
+}
+
+/**
  * STYLE-2 SW-7: the DM page's boosts row in words the record holds (the boost against the power's own strength), in
  * place of "{base} on its own, +{boost}, {effective} in all". @param {number} base @param {number} boost @returns {string}
  */
@@ -153,7 +168,7 @@ export const PATRONAGE_LINES = Object.freeze({
   // the face's open membership in another power (the boost is shown on the DM layer only, J-9)
   open: Object.freeze([
     (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${f.power}, and that lends ${f.power} weight it would not have on its own.`,
-    (f) => `When ${f.power} wants something from ${f.ruler}, ${f.name} is the one who asks for it. ${f.name} is ${patronPlace(f.rank, f.ruler)} and holds ${shareWords(f.share)} in ${f.power}.`,
+    (f) => askerLine(f),
     (f) => `${f.name} serves ${f.ruler} and ${f.power} at once. While ${f.name} holds both places, ${f.power} counts for more here than its own members would make it.`,
   ]),
   // the face's hidden allegiance to a criminal power (DM-only; the public page shows base strength)
