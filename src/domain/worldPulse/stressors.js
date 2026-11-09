@@ -1,4 +1,5 @@
 import { stablePart } from './worldState.js';
+import { pickLine } from './proseSelection.js';
 import { activeChannelsFrom, REGIONAL_CHANNEL_TYPES } from '../region/index.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { counterforceAssessment, synergyAssessment, interpretStressorOrigin } from './stressorDynamics.js';
@@ -110,6 +111,52 @@ const ORIGIN_REASON_SENTENCES = Object.freeze({
 
 const READER_MODEL_TOKEN = /(?:\d+(?:\.\d+)?\s*%|\b\d+\.\d+\b|×|\b(?:score|chance|roll|multiplier|weight|gate|causal state|regional channel|ticks?)\b|[_→])/i;
 
+// STYLE-2 C2 (SW-12 third seat): the pressure row's "active condition: a, b" names the
+// conditions pressureModel matched (humanized archetype ids). Each archetype is said in its
+// own words — the closed sets of pressureModel.js (FOOD … CRIME_ARCHETYPES) — and the list
+// is joined with its own grammar; an archetype outside the map prints its humanized label.
+/** @type {Readonly<Record<string, string>>} */
+const ACTIVE_CONDITION_WORDS = Object.freeze({
+  famine: 'the famine',
+  food_anchor_lost: 'the loss of its main food supply',
+  regional_import_shortage: 'a shortage of goods from outside',
+  regional_migration_pressure: 'the crowding of newcomers',
+  plague: 'the plague',
+  war_pressure: 'the strain of war',
+  regional_conflict_pressure: 'the fighting nearby',
+  regional_protection_gap: 'a defence stretched too thin',
+  trade_route_cut: 'a cut trade road',
+  regional_route_disruption: 'trouble on the roads',
+  regional_export_market_loss: 'the loss of a market for its goods',
+  regional_tax_revenue_disruption: 'the loss of tax money',
+  cold_war_sanctions: 'the weight of cold-war sanctions',
+  vassal_extraction: 'what its overlord takes from it',
+  vassal_trade_coercion: "its overlord's grip on its trade",
+  regional_authority_instability: "unrest among the region's rulers",
+  corruption_exposed: 'the corruption that has come to light',
+  dominant_npc_removed: 'the loss of its leading figure',
+  regional_information_shock: 'unsettling news from abroad',
+  regional_religious_pressure: 'religious strife in the region',
+  government_overthrown: 'the fall of its government',
+  rebellion: 'the rebellion',
+});
+
+/** Three orders of one fact; seeded by the place and the conditions, never the tick. */
+const ACTIVE_CONDITION_FRAMES = Object.freeze([
+  (/** @type {{ place: string, list: string, many: boolean }} */ x) => `${upperFirst(x.place)} is already living with ${x.list}.`,
+  (/** @type {{ place: string, list: string, many: boolean }} */ x) => `${upperFirst(x.list)} already ${x.many ? 'weigh' : 'weighs'} on ${x.place}.`,
+  (/** @type {{ place: string, list: string, many: boolean }} */ x) => `In ${x.place}, ${x.list} ${x.many ? 'are' : 'is'} already a burden.`,
+]);
+
+/** @param {string} humanList @param {unknown} placeName */
+function activeConditionSentence(humanList, placeName) {
+  const phrases = humanList.split(',').map((part) => part.trim()).filter(Boolean)
+    .map((label) => ACTIVE_CONDITION_WORDS[label.toLowerCase().replace(/\s+/g, '_')] || label.toLowerCase());
+  const list = phrases.length > 1 ? `${phrases.slice(0, -1).join(', ')} and ${phrases[phrases.length - 1]}` : phrases[0] || '';
+  const place = placeName ? String(placeName) : 'this place';
+  return pickLine(ACTIVE_CONDITION_FRAMES, `${place}:${humanList.toLowerCase()}`, { place, list, many: phrases.length > 1 });
+}
+
 /** @param {unknown} value */
 function upperFirst(value) {
   const text = String(value || '').trim();
@@ -128,7 +175,7 @@ export function readerPressureReasons(pressure, { fallback = true } = {}) {
   return (Array.isArray(pressure?.reasons) ? pressure.reasons : []).map((/** @type {unknown} */ raw) => {
     const reason = String(raw || '').trim();
     const active = /^active condition:\s*(.+)$/i.exec(reason);
-    if (active) return `${upperFirst(active[1])} already burdens the settlement.`;
+    if (active) return activeConditionSentence(active[1], placeName);
     // STYLE-2 C2 (SW-12, A2·65): the fallback holds no fact beyond the pressure itself, so it
     // says little — and names the place where the pressure row carries its name.
     if (!PRESSURE_REASON_SENTENCES[reason] && !fallback) return '';

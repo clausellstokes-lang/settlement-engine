@@ -514,7 +514,12 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // (the two reasons and the roll explanations' gate lines that copy them); 0 keys added or lost; no id, tick, number or
 // rumour seed moved. stressorGates.js, deploymentReturn.js, resourceTaxonomy.js, institutionLifecycle.js,
 // moralInstitutionPressure.js and relationshipHierarchy.js leave this arm byte-identical.
-const BASE_PULSE_HASH = '60470ac9591808231ca904659479a73c2bdfac747e3dabb800ba34c56d31bd24';
+// 2026-11-09 (STYLE-2 C2, lane SW-12's third seat, §6l): 60470ac9... -> bd7c4e79..., ONE cause, TEXT ONLY: stressors.js ::
+// readerPressureReasons (an active condition said in its own words, three orders seeded by the place and the conditions).
+// Leaf-diffed against the parent c3a5ee49d in a clean worktree: 61 string leaves (the roll explanations' gate lines and the
+// reasons that copy "Regional import shortage already burdens the settlement."); 0 keys added or lost; no id, tick, number
+// or rumour seed moved. Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = 'bd7c4e79a2d7ebf5a6fab88b41748e565eedb45217303fdf66ddab74fec49872';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

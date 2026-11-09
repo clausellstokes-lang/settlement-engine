@@ -10,6 +10,7 @@ import {
   recurringConditionRecordMode,
 } from '../../src/domain/worldPulse/conditionRefreshRecordMode.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
+import { readerPressureReasons } from '../../src/domain/worldPulse/stressors.js';
 
 const STATIC_RULES = SIMULATION_RULE_PRESETS.static_campaign.rules;
 
@@ -401,7 +402,18 @@ describe('STYLE-2 C2 (SW-12, A2·74): an organic pressure condition prints the r
     const condition = generateWorldPulseCandidates({ pressures: [pressure], tick: 3 })
       .find((c) => c.candidateType === 'food_pressure');
     expect(condition, 'the planted pressure mints its condition').toBeTruthy();
-    expect(condition.reasons).toEqual(['Famine already burdens the settlement.', 'The deep winter tightens the granaries.']);
+    // Re-keyed by identity (SW-12's third seat): the condition is said in its own words, with the place.
+    expect(condition.reasons).toEqual(['The famine already weighs on Ashford.', 'The deep winter tightens the granaries.']);
     expect(condition.reasons.join(' ')).not.toMatch(/active condition:|derived from causal state/); // anchored: the toEqual above proves the reasons are the condition's own
+  });
+
+  test('two active conditions read as one list, each in its own words, with a plural verb (SW-12 third seat)', () => {
+    const pressure = {
+      kind: 'legitimacy', score: 0.6, settlementId: 'c', settlementName: 'Crownhold',
+      reasons: ['active condition: dominant npc removed, corruption exposed'],
+    };
+    // Crownhold's seed picks the frame whose verb agrees with its subject list.
+    const reasons = readerPressureReasons(pressure, { fallback: false });
+    expect(reasons).toEqual(['In Crownhold, the loss of its leading figure and the corruption that has come to light are already a burden.']);
   });
 });
