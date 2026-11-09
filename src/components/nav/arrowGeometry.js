@@ -35,22 +35,6 @@
  * painting darkens toward the arrowhead while the filler is one tone, so each slot's filler
  * is toned to the painted wood beside its cut (SLOT_TONE).
  *
- * THE PLATE IS CENTRED BETWEEN ITS BINDINGS (owner, 2026-11-09, amending the header law for this one
- * cut: "Centring it horizontally means moving the plate in the strip image and re-measuring the
- * plate, rivets and slip from the new painting ... say the word and a seat does it."). The
- * painting set the blank plate [1623, 1877) between binding 7 [1530, 1566) and the arrowhead's
- * binding [1889, 1958): 57 columns of plain wood on its left and 12 of shaded wood on its right,
- * its centre 1750 against the span's 1727.5. FIX-ARROW-PLAQUE re-cut the strip (one q90 WebP
- * encode of the moved pixels, as the first cut was): every column carrying the plate, ornament tip
- * to ornament tip with its shadow, the slip's field and the wood above and below it, moved 22
- * columns LEFT; the 22 columns dropped are plain wood of the left run, joined by a 10-column
- * linear crossfade centred on column 1586; the 22 columns vacated beside the right tip are the
- * left run's own wood mirrored about the old left tip, each row's colour scaled to the shaded gap's
- * wood and pinned at both ends to the two columns that stood side by side there, with their alpha.
- * The plate is now [1601, 1855), centre 1728, half a column from the span's centre (35 columns of
- * wood on its left, 34 on its right). Every plate number below moved by exactly -22; the bindings,
- * the words, the feather and the arrowhead did not move.
- *
  * THE SIX SECTIONS ARE EQUAL (owner, 2026-11-08: "The spacing between the sections
  * ( represented by the banded thread red) are not equally spaced and scales as such can you
  * do that for me?"). A section is the shaft between two consecutive red bindings, 1 to 7,
@@ -210,14 +194,9 @@ export const WOOD_RUNS = /* @__PURE__ */ Object.freeze([
   /* @__PURE__ */ Object.freeze({ x0: 1219, x1: 1250 }),
   /* @__PURE__ */ Object.freeze({ x0: 1337, x1: 1364 }),
   /* @__PURE__ */ Object.freeze({ x0: 1397, x1: 1431 }),
-  // 1503 until the re-cut (2026-11-09): the plain-wood test is relative to each row's median
-  // across the shaft up to the plate, and the plate's move took 22 columns of wood out of that
-  // median, so column 1502 (one grain fleck) now reads plain. Its pixels did not change.
-  /* @__PURE__ */ Object.freeze({ x0: 1502, x1: 1529 }),
-  // Binding 7 to the blank plate (the run's last columns carry the plate's one-pixel tip): 1566
-  // to 1628 in the painting, 1566 to 1605 since the plate moved 22 columns left (FIX-ARROW-PLAQUE,
-  // 2026-11-09; the re-encode's noise gives the tip's fifth column, 1605, a second dark pixel).
-  /* @__PURE__ */ Object.freeze({ x0: 1566, x1: 1605 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1503, x1: 1529 }),
+  // Binding 7 to the blank plate (the run's last five columns carry the plate's one-pixel tip).
+  /* @__PURE__ */ Object.freeze({ x0: 1566, x1: 1628 }),
 ]);
 
 /**
@@ -231,14 +210,11 @@ export const COMPENDIUM_FE = 5;
  * wood on both sides (the crossfade width there). Two per painted word beside its bindings,
  * one before and one after the lettering, so a word's hit region widens by its own slots;
  * Compendium's two sit in its narrow gaps at COMPENDIUM_FE; the last is before the blank
- * plate. The other ten are the columns the kit's canvas prototype rendered seamlessly. The plate's
- * cut was 1596 until the plate moved 22 columns left (2026-11-09): its crossfade [1586, 1606) would
- * then have faded the plate's tip at 1601, so it sits at 1586, ten columns clear of the tip and
- * twenty of binding 7, in the run 1566 to 1605.
+ * plate. The other ten are the columns the kit's canvas prototype rendered seamlessly.
  * @type {ReadonlyArray<Readonly<{ x: number, fe: number }>>}
  */
 export const CUTS = /* @__PURE__ */ Object.freeze(
-  [558, 657, 713, 825, 881, 982, 1032, 1181, 1234, 1350, 1413, 1516, 1586].map((x) => Object.freeze({
+  [558, 657, 713, 825, 881, 982, 1032, 1181, 1234, 1350, 1413, 1516, 1596].map((x) => Object.freeze({
     x, fe: x === 1032 || x === 1181 ? COMPENDIUM_FE : FE,
   })),
 );
@@ -256,20 +232,16 @@ export const CUTS = /* @__PURE__ */ Object.freeze(
  */
 export const SLOT_TONE = /* @__PURE__ */ Object.freeze({
   558: 1.047, 657: 1.027, 713: 1.044, 825: 1.014, 881: 1.035, 982: 1.019, 1032: 1.050,
-  1181: 0.975, 1234: 0.994, 1350: 0.955, 1413: 0.981, 1516: 0.923,
-  // The plate's cut: 1596 at 0.802 over the run [1566, 1628) until the re-cut; 1586 at 0.810
-  // over [1566, 1605) after it (FIX-ARROW-PLAQUE, 2026-11-09).
-  1586: 0.810,
+  1181: 0.975, 1234: 0.994, 1350: 0.955, 1413: 0.981, 1516: 0.923, 1596: 0.802,
 });
 
 /**
  * THE COMPACT JOIN. The brand crop ends at column 558 and the tail crop starts at column
- * 1586, both inside wood runs with FE of margin (the tail crop started at 1596 until the plate
- * moved 22 columns left on 2026-11-09; it moved with the plate's cut, for the same reason). (A join at column 511, right against the
+ * 1596, both inside wood runs with FE of margin. (A join at column 511, right against the
  * first binding, has five columns of wood to its left and none to its right, so the brand
  * crop carries the first binding and 10 columns of wood.)
  */
-export const COMPACT_JOIN = /* @__PURE__ */ Object.freeze({ left: 558, right: 1586 });
+export const COMPACT_JOIN = /* @__PURE__ */ Object.freeze({ left: 558, right: 1596 });
 
 /** The compact arrow's natural width, strip px (the two crops without a slot). */
 export const COMPACT_W = COMPACT_JOIN.left + (STRIP_W - COMPACT_JOIN.right);
@@ -402,9 +374,7 @@ export const NAV_WORD = /* @__PURE__ */ Object.freeze({
   realm: /* @__PURE__ */ Object.freeze({ x0: 896, x1: 968 }),
   compendium: /* @__PURE__ */ Object.freeze({ x0: 1037, x1: 1176 }),
   gallery: /* @__PURE__ */ Object.freeze({ x0: 1250, x1: 1336 }),
-  // 1502 until the re-cut (2026-11-09): column 1501, the e's last faint stroke, carried three
-  // ink pixels against the old shaft median and carries two against the new one (WOOD_RUNS).
-  'about-what-this-is': /* @__PURE__ */ Object.freeze({ x0: 1432, x1: 1500 }),
+  'about-what-this-is': /* @__PURE__ */ Object.freeze({ x0: 1432, x1: 1502 }),
 });
 
 /**
@@ -445,32 +415,26 @@ export const WORD_ROWS = /* @__PURE__ */ Object.freeze({ top: 19, baseline: 41, 
  * focus affordances, not a current-page mark.
  */
 
-/**
- * The blank brass plate, ornament tip to ornament tip (the account's home at every width): the
- * first column past the left run with a dark shaft pixel (the left tip's one-pixel point) to the
- * column after the right tip's outline. [1623, 1877) in the painting; [1601, 1855) since the
- * re-cut (2026-11-09), centred between BINDINGS[6].x1 and BINDINGS[7].x0 within one column.
- */
-export const PLATE = /* @__PURE__ */ Object.freeze({ x0: 1601, x1: 1855 });
+/** The blank brass plate, ornament tip to ornament tip (the account's home at every width). */
+export const PLATE = /* @__PURE__ */ Object.freeze({ x0: 1623, x1: 1877 });
 
-/** The plate's flat field inside its engraved frame ([1672, 1833) before the re-cut). */
-export const PLATE_FIELD = /* @__PURE__ */ Object.freeze({ x0: 1650, x1: 1811, y0: 11, y1: 51 });
+/** The plate's flat field inside its engraved frame. */
+export const PLATE_FIELD = /* @__PURE__ */ Object.freeze({ x0: 1672, x1: 1833, y0: 11, y1: 51 });
 
 /**
- * The plate's two rivets, inside the flat field's ends (1664 and 1829 before the re-cut).
+ * The plate's two rivets, inside the flat field's ends.
  * @type {ReadonlyArray<Readonly<Box>>}
  */
 export const PLATE_RIVETS = /* @__PURE__ */ Object.freeze([
-  /* @__PURE__ */ Object.freeze({ x0: 1642, x1: 1657, y0: 25, y1: 37 }),
-  /* @__PURE__ */ Object.freeze({ x0: 1807, x1: 1821, y0: 25, y1: 37 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1664, x1: 1679, y0: 25, y1: 37 }),
+  /* @__PURE__ */ Object.freeze({ x0: 1829, x1: 1843, y0: 25, y1: 37 }),
 ]);
 
 /**
  * THE SLIP: the parchment label's field on the plate, between the rivets and inside the
- * frame, with no engraved line or rivet under it ([1683, 1825) before the re-cut; its rows and
- * width did not change, so neither did its type).
+ * frame, with no engraved line or rivet under it.
  */
-export const SLIP = /* @__PURE__ */ Object.freeze({ x0: 1661, x1: 1803, y0: 13, y1: 49 });
+export const SLIP = /* @__PURE__ */ Object.freeze({ x0: 1683, x1: 1825, y0: 13, y1: 49 });
 
 /**
  * THE SLIP'S TYPE SIZE, which is a fact about the PAINTING and so lives with the
@@ -481,21 +445,19 @@ export const SLIP = /* @__PURE__ */ Object.freeze({ x0: 1661, x1: 1803, y0: 13, 
  * EXCEPTION rather than an oversight (ODQ §934.26; the row is in
  * tests/components/publicChromeFloor.census.test.js, where the floor is enforced).
  *
- * The compact arrow's scale is clientWidth / 1145 (1135 until the plate's re-cut moved the
- * tail crop's join from 1596 to 1586, 2026-11-09). MEASURED by executing layoutArrow()
+ * The compact arrow's scale is clientWidth / 1135. MEASURED by executing layoutArrow()
  * over the shipped geometry — the slip's CONTENT box, after its 1 px border and 3 px
  * side padding:
  *
- *     cw=320  s=0.2795  font 10  31.69 x  8.06 css px
- *     cw=375  s=0.3275  font 10  38.51 x  9.79 css px
- *     cw=391  s=0.3415  font 10  40.49 x 10.29 css px
- *     cw=430  s=0.3755  font 10  45.33 x 11.52 css px
+ *     cw=320  s=0.2819  font 10  32.04 x  8.15 css px
+ *     cw=375  s=0.3304  font 10  38.92 x  9.89 css px
+ *     cw=391  s=0.3445  font 10  40.92 x 10.40 css px
+ *     cw=430  s=0.3789  font 10  45.80 x 11.64 css px
  *
  * A 12 px line at lineHeight 1 needs 12 px of HEIGHT, and the slip is under 12 px tall at
  * every one of those widths; "SIGN IN" at 12 px bold uppercase would want roughly 50 px
- * of the 38.51 available at 375. Raising the type means growing the plate, which means
- * re-cutting the owner's painting, and the header law forbids that (the owner amended it
- * once, on 2026-11-09, to MOVE the plate, not to grow it). The word keeps the
+ * of the 38.92 available at 375. Raising the type means growing the plate, which means
+ * re-cutting the owner's painting, and the header law forbids that. The word keeps the
  * painting's own size; the CONTROL is the whole plate, padded to at least 44 x 44 on a
  * phone (`padTarget`), so the target is usable even where the word is small.
  *

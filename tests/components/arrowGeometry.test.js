@@ -34,11 +34,7 @@
  *       tone at each end);
  *   (i) THE FEATHER HIDES ON SCROLL (owner, 2026-09-17): the state logic, and the feather's
  *       columns end before every cut, so its layer holds the first segment alone;
- *   (j) the hover glow boxes sit inside their controls;
- *   (b2) THE PLATE IS CENTRED BETWEEN ITS BINDINGS (owner, 2026-11-09, amending the header law
- *       for this one cut): the blank plate's centre is the centre of the span from binding 7's
- *       right edge to the arrowhead's binding's left edge, within one column, and the slip, the
- *       field and the rivets moved with it (FIX-ARROW-PLAQUE).
+ *   (j) the hover glow boxes sit inside their controls.
  */
 import { describe, expect, it } from 'vitest';
 import {
@@ -161,10 +157,7 @@ describe('(b) the measured tables agree with each other', () => {
       // One cut before the lettering and one after, so a word's two slots sit either side of it.
       expect(cuts.map((x) => x < word.x0), id).toEqual([true, false]);
     }
-    // The plate's cut moved from 1596 to 1586 with the plate (FIX-ARROW-PLAQUE, 2026-11-09): at
-    // 1596 its crossfade would reach the moved tip at 1601.
-    expect(CUTS[CUTS.length - 1]).toEqual({ x: 1586, fe: FE });
-    expect(CUTS[CUTS.length - 1].x + FE).toBeLessThanOrEqual(PLATE.x0);
+    expect(CUTS[CUTS.length - 1]).toEqual({ x: 1596, fe: FE });
     expect(CUTS[CUTS.length - 1].x).toBeLessThan(PLATE.x0);
   });
 
@@ -205,28 +198,6 @@ describe('(b) the measured tables agree with each other', () => {
     }
   });
 
-  it('(b2) the blank plate is centred between binding 7 and the arrowhead\'s binding, within one column', () => {
-    // Red at the painting as first cut: the plate [1623, 1877) centred at 1750 against the span
-    // [1566, 1889)'s 1727.5, 22.5 columns toward the arrowhead. The re-cut moved it 22 columns.
-    const span = (BINDINGS[6].x1 + BINDINGS[7].x0) / 2;
-    const plate = (PLATE.x0 + PLATE.x1) / 2;
-    expect(Math.abs(plate - span), `plate centre ${plate}, span centre ${span}`).toBeLessThanOrEqual(1);
-    // The wood either side differs by at most one column, so the centring is not an artefact of
-    // the bindings' own widths.
-    expect(Math.abs((PLATE.x0 - BINDINGS[6].x1) - (BINDINGS[7].x0 - PLATE.x1))).toBeLessThanOrEqual(1);
-    // The slip, the field and the rivets moved with the plate, column for column: each keeps the
-    // offset from the plate's left tip it had in the painting (the field, the rivets and the slip
-    // sit 2.5 to 4 columns right of the tip-to-tip centre there, and still do).
-    expect([SLIP.x0, SLIP.x1, PLATE_FIELD.x0, PLATE_FIELD.x1, PLATE_RIVETS[0].x0, PLATE_RIVETS[1].x1].map((x) => x - PLATE.x0))
-      .toEqual([1683, 1825, 1672, 1833, 1664, 1843].map((x) => x - 1623));
-    expect([SLIP.y0, SLIP.y1, PLATE_FIELD.y0, PLATE_FIELD.y1]).toEqual([13, 49, 11, 51]);
-  });
-
-  it('CONTROL: the centring pin convicts the plate where the painting first set it', () => {
-    const span = (BINDINGS[6].x1 + BINDINGS[7].x0) / 2;
-    expect(Math.abs((1623 + 1877) / 2 - span)).toBeGreaterThan(1);
-  });
-
   it('the slip sits inside the plate field, clear of both rivets', () => {
     expect(SLIP.x0 >= PLATE_FIELD.x0 && SLIP.x1 <= PLATE_FIELD.x1).toBe(true);
     expect(SLIP.y0 >= PLATE_FIELD.y0 && SLIP.y1 <= PLATE_FIELD.y1).toBe(true);
@@ -238,8 +209,7 @@ describe('(b) the measured tables agree with each other', () => {
 
   it('the word floor sets the switch', () => {
     expect(FULL_MIN_VIEWPORT).toBe(Math.ceil(STRIP_W * WORD_FLOOR));
-    // The tail crop starts at the plate's cut, 1586 since the plate moved (it was 1596).
-    expect(COMPACT_W).toBe(558 + (STRIP_W - 1586));
+    expect(COMPACT_W).toBe(558 + (STRIP_W - 1596));
   });
 });
 
@@ -709,9 +679,7 @@ describe('(k) the touch target overhangs the painted band, and the overhang is c
     // a reader deserves to be told which world they are in.
     const band = layoutArrow({ clientWidth: 375, full: false }).bandPx;
     expect(band).toBeLessThan(TOUCH);
-    // 22.47 until the re-cut (2026-11-09): the compact arrow's tail crop starts at 1586, not
-    // 1596, since the plate moved, so its natural width is 1105 strip px and its scale cw / 1145.
-    expect(Number(band.toFixed(2)), "the review's 22px header box").toBe(22.27);
+    expect(Number(band.toFixed(2)), "the review's 22px header box").toBe(22.47);
   });
 
   it('the overhang never reaches the first line of content, at any narrow width', () => {
