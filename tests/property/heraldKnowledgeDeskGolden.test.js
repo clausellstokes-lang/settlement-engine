@@ -118,7 +118,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 25 fewer items (475 → 450).
     // 450 → 448 at MERGE-TRAIN RECORD 2, THE ALLEGIANCE-CAR2 MERGE OVER THE INTEGRATION BRANCH (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-2-car2.json): the guild's push re-deals two agents' goals (bbb1a4abc, 450 -> 448 on its lane); 2 moved, +0/-2 keys against record 1's post-state.
     // 2 fewer items (450 → 448).
-    expect(Object.keys(manifest)).toHaveLength(448);
+    // 448 → 441 at MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE OVER THE INTEGRATION BRANCH (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-3-car3.json): car 3's organizedCrime 0.05 re-deals the agents and the year's news (e9070d614, 450 -> 443 on its lane); 2 moved, +45/-52 keys against record 2's post-state.
+    // 7 fewer items (448 → 441).
+    expect(Object.keys(manifest)).toHaveLength(441);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -177,8 +179,11 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the car's cast re-deals the year over the pool census at the stage of 8dff691f3; the year's misjudgment beats are now 1 (4), on knowledge.
       // Re-dealt at MERGE-TRAIN RECORD 1, THE ALLEGIANCE-CAR1 MERGE (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-1-car1.json):
       // the hidden allegiance and J-19's lit pulse re-deal the year at the stage of e5f88930b; the year's misjudgment beats are now 2 (15, 4), all on knowledge.
+      // Re-dealt at MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-3-car3.json):
+      // organizedCrime 0.05 and the round-robin deal re-deal the year at the stage of c6ded8e3a; the year's misjudgment beats are now 3 (15, 19, 4), all on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.15.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.19.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
