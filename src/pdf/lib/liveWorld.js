@@ -192,7 +192,7 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
           };
         })
     : [];
-  const flowDriftRaw = id ? flowDerivedDependency({ worldState, economicState: s?.economicState, settlementId: id }) : null;
+  const flowDriftRaw = id ? flowDerivedDependency({ worldState, economicState: s?.economicState, settlementId: id, tier: s?.tier }) : null;
   const flowDrift = flowDriftRaw
     ? { band: flowDriftRaw.band, label: flowDriftRaw.label, headline: flowDriftRaw.headline, inbound: flowDriftRaw.inbound, outbound: flowDriftRaw.outbound }
     : null;

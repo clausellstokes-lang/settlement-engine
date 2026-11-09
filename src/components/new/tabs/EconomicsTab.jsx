@@ -309,7 +309,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
     if (!sid || !Array.isArray(campaigns)) return null;
     const campaign = campaigns.find(c => (c?.settlementIds || []).map(String).includes(sid));
     if (!campaign) return null;
-    return flowDerivedDependency({ worldState: campaign.worldState, economicState: eco, settlementId: sid });
+    return flowDerivedDependency({ worldState: campaign.worldState, economicState: eco, settlementId: sid, tier: s?.tier });
   }, [saveId, s, campaigns, eco]);
   // MARKET PRICES (round-21 Wave 7; §776 price-heuristics law) — the crier's
   // MOVEMENTS against the settlement's own usual prices (never absolute coin), a

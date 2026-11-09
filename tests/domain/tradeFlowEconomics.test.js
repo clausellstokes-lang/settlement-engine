@@ -92,3 +92,14 @@ describe('M6d hasTradeFlow + isTradeDependent gates', () => {
     expect(isTradeDependent(null)).toBe(false);
   });
 });
+
+describe('the drift headline speaks the settlement\'s own tier noun (SW-9, the audit\'s A11 tier-noun row)', () => {
+  it('a choked thorp reads "what the thorp depends on"; no tier keeps the corpus line', () => {
+    const args = { worldState: world({ forge: { in: 0.1, out: 0.1, lastTick: 5 } }), economicState: DEP_ECO, settlementId: 'forge' };
+    expect(flowDerivedDependency({ ...args, tier: 'thorp' }).headline)
+      .toBe('The roads have gone quiet. Little reaches the markets, and what the thorp depends on is not arriving.');
+    expect(flowDerivedDependency(args).headline)
+      .toBe('The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.');
+  });
+});
+
