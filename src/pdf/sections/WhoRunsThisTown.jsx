@@ -23,7 +23,7 @@ export function WhoRunsThisTown({ dm }) {
   if (!dm) return null;
   return (
     <View style={{ marginTop: space.sm }}>
-      <Callout tone="bad" kicker="FOR THE DM ONLY" title="Who really runs this town">
+      <Callout tone="bad" kicker="FOR THE DM ONLY" title={`Who really runs this ${dm.tierNoun}`}>
         <Text style={headStyle}>{`THE RULING THREE OF ${dm.ruler.toUpperCase()}`}</Text>
         {dm.rulingThree.map((f) => (
           <View key={f.id} wrap={false}>

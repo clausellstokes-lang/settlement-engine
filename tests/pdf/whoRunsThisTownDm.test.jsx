@@ -36,7 +36,7 @@ describe('the DM view in the PDF, never the Foundry journal', () => {
     const secrets = [
       ...view.boosts.map((b) => b.line),
       ...view.rulingThree.filter((f) => f.answersTo).map((f) => `answers to ${f.answersTo.guild}`),
-      'Who really runs this town',
+      'Who really runs this',
     ];
     const vm = buildViewModel({ settlement: s });
     const text = JSON.stringify(buildFoundryModuleFiles({ settlement: s, vm }).files.map((f) => String(f.data)));

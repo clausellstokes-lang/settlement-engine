@@ -37,6 +37,10 @@ describe('who really runs this town — the DM layer only', () => {
     expect(panel).toBeTruthy();
     const text = panel?.textContent || '';
     for (const h of ['The ruling three of', 'Who answers to whom', 'The hall', 'The boosts']) expect(text).toContain(h);
+    // the title names the settlement by its own tier (the soak's coh:tier-noun: never "town" for a metropolis)
+    expect(s.tier).toBe('metropolis');
+    expect(text).toContain('Who really runs this metropolis');
+    expect(text).not.toMatch(/\btown\b/);
     const v = dmPowerViewOf(s);
     const hidden = v?.boosts.find((b) => b.hidden);
     expect(text).toContain(String(hidden?.line));
@@ -50,7 +54,7 @@ describe('who really runs this town — the DM layer only', () => {
     const secrets = [
       ...v.boosts.filter((b) => b.hidden).map((b) => b.line),
       ...v.rulingThree.filter((f) => f.answersTo).map((f) => `answers to ${f.answersTo.guild}`),
-      'Who really runs this town',
+      'Who really runs this',
     ];
     for (const props of [{ playerView: true }, { publicDossier: true }, { playerView: true, publicDossier: true }]) {
       const c = tab(props);

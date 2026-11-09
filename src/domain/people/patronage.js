@@ -288,5 +288,7 @@ export function dmPowerViewOf(settlement) {
   });
 
   // the DM view names a power `powerName` (a WORD), never `power` (the prose-numerics walker's float token)
-  return { ruler, rulingThree, answers, fronts, hall: hallOf(s, ruler, three), boosts, hunts: null };
+  // the panel's title names the settlement by its own tier ("who really runs this thorp"), never a fixed "town"
+  const tierNoun = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].includes(String(s.tier)) ? String(s.tier) : 'place';
+  return { ruler, tierNoun, rulingThree, answers, fronts, hall: hallOf(s, ruler, three), boosts, hunts: null };
 }

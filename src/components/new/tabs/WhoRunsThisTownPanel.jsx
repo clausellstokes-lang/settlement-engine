@@ -40,7 +40,7 @@ export default function WhoRunsThisTownPanel({ settlement }) {
   if (!view) return null;
   return (
     <div data-testid="who-runs-this-town" data-layer="dm" style={box}>
-      <div style={{ ...LITERARY_TITLE, color: swatch.inkMag, marginBottom: 2 }}>Who really runs this town</div>
+      <div style={{ ...LITERARY_TITLE, color: swatch.inkMag, marginBottom: 2 }}>{`Who really runs this ${view.tierNoun}`}</div>
       <div style={{ fontSize: FS.xxs, color: MUTED, marginBottom: 4 }}>For the DM only. Nothing here appears on a player view or a shared page.</div>
 
       <div style={head}>The ruling three of {view.ruler}</div>
