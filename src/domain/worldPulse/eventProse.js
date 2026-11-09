@@ -212,6 +212,81 @@ export function npcAmbitionWord(ambition) {
   return Number(ambition) >= NPC_AMBITION_BAND_CUT ? 'hungry' : 'steady';
 }
 
+/**
+ * The role an NPC acts from, in plain words (STYLE-2-PULSE-FOLLOWUP, A2·169). The key is
+ * npcAgency's `roleArchetype`, read from the card's own title text, `civic` when nothing
+ * else matched — so `civic` says "a citizen", never an office the card may not hold.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const NPC_ROLE_NOUN = Object.freeze({
+  ruler: 'a ruler',
+  heir: 'an heir',
+  military: 'a soldier',
+  merchant: 'a merchant',
+  religious: 'a person of the faith',
+  criminal: 'someone outside the law',
+  arcane: 'a person of learning',
+  civic: 'a citizen',
+  healer: 'a healer',
+  labor_resource: 'a working hand',
+  diplomat_outsider: 'someone with ties abroad',
+  dissident: 'a dissenter',
+});
+
+/** @param {string} s @returns {string} */
+const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/**
+ * Why this kind of person makes this move — four tellings of the one fact (the role's
+ * preferred move), so no single sentence stands under every citizen's move in the realm.
+ * @type {readonly ((x: { name: string, role: string }) => string)[]}
+ */
+export const NPC_ROLE_REASON = Object.freeze([
+  (x) => `It is the kind of move ${x.role} makes.`,
+  (x) => `${capitalize(x.role)} reaches for this sooner than most.`,
+  (x) => `${x.name} acts as ${x.role} would.`,
+  (x) => `This is how ${x.role} answers trouble.`,
+]);
+
+/**
+ * What pushed them to it — four tellings, each with the FOUR fixed band spellings
+ * (pressure well clear / barely over; ambition hungry / steady), so the metronome
+ * de-duplicator still sees one string per band for one NPC and one move.
+ * @type {readonly ((x: { name: string, hard: boolean, hungry: boolean }) => string)[]}
+ */
+export const NPC_DRIVE_REASON = Object.freeze([
+  (x) => `${x.hard ? `Hard times pushed ${x.name} to it` : `Hard times only just pushed ${x.name} to it`}, ${x.hungry ? `${x.hard ? 'and' : 'but'} they are hungry to rise` : 'and their ambition is steady'}.`,
+  (x) => `${x.hard ? `The times pressed hard on ${x.name}` : `The times pressed only lightly on ${x.name}`}; ${x.hungry ? 'they want to rise' : 'their ambition holds steady'}.`,
+  (x) => `${x.hard ? `With times this hard, ${x.name} had little choice` : `${x.name} was only just driven to it`}, ${x.hungry ? 'and they are hungry for more' : 'and their ambition is steady'}.`,
+  (x) => `${x.hard ? `Trouble crowded ${x.name} toward it` : `Trouble only nudged ${x.name} toward it`}; ${x.hungry ? 'a hungry ambition did the rest' : 'a steady ambition did the rest'}.`,
+]);
+
+/**
+ * The three reasons under an NPC's move on the news card (A2·169–171, STYLE-2-PULSE-
+ * FOLLOWUP): what kind of person makes this move, what pushed them to it, and what they hold
+ * to. Plain words for the engine's own causes — the role's preferred move, the pressure and
+ * ambition bands, the ideal. The telling is seeded on the NPC and the move (never the tick),
+ * so one NPC's repeated move prints the same words and the metronome still fires. The ideal
+ * label stays a label; a corrupted card's ideal is said once, in words (A2·171).
+ * @param {{ npcId?: string, name?: string, roleArchetype?: string, ambition?: number, ideal?: unknown, corruption?: boolean }} state
+ * @param {number} pressure
+ * @param {string} [actionFamily]
+ * @returns {string[]}
+ */
+export function npcCandidateReasons(state, pressure, actionFamily = '') {
+  const name = String(state?.name || 'They');
+  const role = NPC_ROLE_NOUN[String(state?.roleArchetype || '')] || NPC_ROLE_NOUN.civic;
+  const hard = npcPressureWord(pressure) === 'well clear of';
+  const hungry = npcAmbitionWord(/** @type {number} */ (state?.ambition)) === 'hungry';
+  const ideal = plainTrait(state?.ideal);
+  const seed = `${state?.npcId || name}:${actionFamily}`;
+  return [
+    pickLine(NPC_ROLE_REASON, `${seed}:role`, { name, role }),
+    pickLine(NPC_DRIVE_REASON, `${seed}:drive`, { name, hard, hungry }),
+    state?.corruption ? `${name} believes in ${ideal}, but in a twisted form.` : `Ideal: ${ideal}.`,
+  ];
+}
+
 // ════════════════════════════════════════════════════════════════════════════════════
 // CALAMITY (CRITICAL — bucket-neutral by constitution). Title keeps "Great Calamity"
 // + name + year; summary/reasons never assert a kind and speak the bucket.

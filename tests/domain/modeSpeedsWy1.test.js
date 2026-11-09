@@ -482,7 +482,11 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // e36e4916f) at exactly that commit (change-point search over census-1b's first parent, into census-2 through the merge
 // 2b31f33f3); at the composed tip with 38d1b4c05's src reverse-applied the arm reads 865193cf, rung 1's value, so the two
 // lineages' moves compose with no interaction. Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = '5b6a1e518bf3cd5f62212a2872b1422a0cdf5ce203ca97c6a18aa76b87c16432';
+// 2026-11-09 (STYLE-2-PULSE-FOLLOWUP, A2·169–170, ruling C2): 5b6a1e51... -> 95f4af4f..., TEXT ONLY, one cause: npcAgency's
+// candidate reasons in plain words (eventProse.js :: npcCandidateReasons). Leaf-diffed in a clean worktree at bd07005b9 (the parent d4e8d0487 reads the same hash) — in a
+// word: 152 string leaves moved (88 reasons, 64 gate reasons), 0 non-string, 0 keys added or lost; no id, tick
+// or number moved. Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = '95f4af4fd61c1b220d9f610cb6b7bb33b934c7ff9bff675e0b1bafb94fabeefc';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
