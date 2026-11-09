@@ -27,7 +27,10 @@ describe('SW-B1 · DS-GEN-11: the coherence line never vouches above a by-design
       economicViability: { ...s.economicViability, issues: (s.economicViability.issues || []).filter((/** @type {any} */ i) => i?.severity !== 'by_design') },
     };
     expect(byDesignItemsOf(clean.economicViability, clean)).toHaveLength(0);
-    expect(lines(clean), 'the positive control: a clean, passing record is vouched for').toMatch(VOUCHES);
+    const battery = (/** @type {any} */ rec) => (rec.generationCoherenceReceipt?.judgments || []).find((/** @type {any} */ j) => j?.id === 'record_coherence_battery')?.status;
+    expect(battery(clean), 'the record the zero pool once vouched over: the battery passes').toBe('pass');
+    // anchored: the battery is asserted 'pass' above; SW-B2's 3e9de356e (the chair's STOP 1) took the vouching zero pool out
+    expect(lines(clean), 'a clean, passing record prints no vouching line: the pool left at SW-B2').not.toMatch(VOUCHES);
   }, 60_000);
 
   it('soak1k-9 (Shangjin): one by-design item on the tab, no vouching line above it', async () => {
@@ -35,6 +38,7 @@ describe('SW-B1 · DS-GEN-11: the coherence line never vouches above a by-design
     const s = birth(9).settlement;
     expect(byDesignItemsOf(s.economicViability, s).length).toBeGreaterThan(0);
     const lines = generalDeskLines(s, { tier: s.tier }).viability.verdictLines.map((/** @type {any} */ l) => (typeof l === 'string' ? l : l?.sentence ?? l?.text ?? JSON.stringify(l))).join(' ');
+    // anchored: the by-design list is asserted non-empty above, the state the line must not vouch over
     expect(lines).not.toMatch(VOUCHES);
   }, 60_000);
 });
