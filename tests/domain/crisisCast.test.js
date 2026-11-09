@@ -422,3 +422,14 @@ describe('STAKE_REASONS in plain words (SW-6)', () => {
     expect(Object.values(STAKE_REASONS).join(' ')).not.toMatch(/\bbase\b|outranks/);
   });
 });
+
+describe('the selector-rule reasons in plain words (SW-6 second seat)', () => {
+  it('the contested seat, the scapegoats and the merchant who would treat say what the person faces, never the rule', () => {
+    const rule = [CAST_REASONS.targetSeatContested, CAST_REASONS.scapegoatSeat, CAST_REASONS.scapegoatLever, CAST_REASONS.treaterMerchant];
+    expect(rule.every((r) => /in dispute/.test(r))).toBe(true);
+    // anchored: the subject is the four constants asserted positively above (each says the dispute in plain words)
+    expect(rule.join(' ')).not.toMatch(/legitimacy|contested|\blever\b|being contested/);
+    // anchored: the same constant; membersOf reads any member of a merchant house, so the line claims no leadership
+    expect(CAST_REASONS.treaterMerchant).not.toMatch(/^leads/);
+  });
+});

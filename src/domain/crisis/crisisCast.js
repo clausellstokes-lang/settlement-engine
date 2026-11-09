@@ -166,19 +166,19 @@ export const CAST_REASONS = Object.freeze({
   instigatorGains: 'its faction gains from the crisis',
   instigatorLinked: 'drawn from the house that bore the famine',
   targetSeat: 'holds the seat',
-  targetSeatContested: 'holds the seat, with legitimacy already contested',
+  targetSeatContested: 'holds the seat, and the right to it is already in dispute', // SW-6 second seat (B3): the rule's word "legitimacy" out
   targetGoverning: 'the governing house',
   targetLinked: "the occupation's resistance turns on its local face",
   exploiterCorrupt: 'corrupt, with ties to the underworld',
   exploiterTrait: 'grasping by nature, in a faction that gains',
   exploiterPower: 'the most powerful of a faction that gains',
   exploiterLinked: "the siege's profiteer, still selling what the siege cut off",
-  scapegoatSeat: 'holds the seat, blamed while legitimacy is contested',
-  scapegoatLever: 'holds the lever, blamed while legitimacy is contested',
+  scapegoatSeat: 'holds the seat, and takes the blame while the right to it is in dispute', // SW-6 second seat (B3)
+  scapegoatLever: 'runs the office the crisis turns on, and takes the blame while the seat is in dispute', // SW-6 second seat (B3): "the lever" is the engine's word
   defenderMilitary: 'leads the military',
   defenderOffice: "holds the garrison's office",
   defenderInstitution: "the town's defence, with no one on the roster leading it",
-  treaterMerchant: 'leads the merchants, the seat being contested',
+  treaterMerchant: 'a merchant, with the seat itself in dispute', // SW-6 second seat (B3): any member of a merchant house, so no "leads"
   treaterSeat: 'holds the seat',
   collaboratorCorrupt: 'corrupt, with ties to the underworld',
   collaboratorAmbition: 'the most ambitious of a faction that gains',
