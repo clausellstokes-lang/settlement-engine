@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 165,
+      "dated": 166,
       "sha-pin": 2,
       "tree": 112
     },
@@ -338,7 +338,8 @@
     "_rosterGrowth2026-11-08-fp-rebase-census": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on the integration branch, measured once with this walker's own arm): `dated` 152 -> 153, docs/chair/2026-11-08/FP-REBASE-CENSUS-2026-11-08.md, the three census seats' read of the FP corpus against the people car and the allegiance train, born dated (citations `path :: heading`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-08-write-goals": "ONE document JOINED the roster by being BORN into it (WRITE-GOALS, the allegiance train's writing seat A, a child of the cloud chair, on lane/write-goals-2026-11-08 cut from the integration tip e376ee6a3 with the allegiance design branch merged, measured once with this walker's own arm): `dated` 153 -> 154, docs/allegiance/WRITE_GOALS_2026-11-08.md, the seat's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-08-write-people": "ONE document JOINED the roster by being BORN into it (WRITE-PEOPLE, the allegiance train's writing seat B, a child of the cloud chair under the owner's delegation, on lane/write-people-2026-11-08): `dated` 153 -> 154, docs/allegiance/WRITE_PEOPLE_2026-11-08.md, the seat's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class. The `tree` count (112 on disk against 109) is MERGE-CAR's line, untouched.",
-    "_rosterGrowth2026-11-09-allegiance-car4-merge-write-people-3": "TWO documents JOINED the roster by MERGE (ALLEGIANCE-CAR4, session session_01FbPLbccUzaWmQYhp6feW9L, on lane/allegiance-car4-2026-11-08, measured once with this walker's own arm): `dated` 163 -> 165 at the merge of origin/lane/write-people-3-2026-11-08 at 5ee39a56c, docs/allegiance/WRITE_PEOPLE_2026-11-08.md (WRITE-PEOPLE's record, its lane's note kept beside) and docs/allegiance/WRITE_PEOPLE_3_2026-11-08.md (WRITE-PEOPLE-3's record, which its lane bore uncounted), each born dated, 0 past-EOF; nothing changed class."
+    "_rosterGrowth2026-11-09-allegiance-car4-merge-write-people-3": "TWO documents JOINED the roster by MERGE (ALLEGIANCE-CAR4, session session_01FbPLbccUzaWmQYhp6feW9L, on lane/allegiance-car4-2026-11-08, measured once with this walker's own arm): `dated` 163 -> 165 at the merge of origin/lane/write-people-3-2026-11-08 at 5ee39a56c, docs/allegiance/WRITE_PEOPLE_2026-11-08.md (WRITE-PEOPLE's record, its lane's note kept beside) and docs/allegiance/WRITE_PEOPLE_3_2026-11-08.md (WRITE-PEOPLE-3's record, which its lane bore uncounted), each born dated, 0 past-EOF; nothing changed class.",
+    "_rosterGrowth2026-11-09-allegiance-car4-record": "ONE document JOINED the roster by being BORN into it (ALLEGIANCE-CAR4, session session_01FbPLbccUzaWmQYhp6feW9L, on lane/allegiance-car4-2026-11-08, measured once with this walker's own arm): `dated` 165 -> 166, docs/allegiance/ALLEGIANCE_CAR4_2026-11-08.md, the car's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class."
   },
   "rows": []
 }
