@@ -145,8 +145,8 @@ describe('goal families — the cells of design §6.6', () => {
 
   test('the data file is plain data: it imports nothing', () => {
     const src = readFileSync(new URL('../../src/data/people/goalFamilies.js', import.meta.url), 'utf8');
-    expect(src).not.toMatch(/^\s*import\b/m);
-    expect(src).not.toMatch(/\brequire\(/);
+    expect(src).not.toMatch(/^\s*import\b/m); // anchored: src is the data file's own text, read on the line above; every other arm here asserts its exports live
+    expect(src).not.toMatch(/\brequire\(/); // anchored: src is the data file's own text, read two lines above; every other arm here asserts its exports live
   });
 });
 
@@ -160,7 +160,7 @@ describe('goal families — the slots', () => {
 
   test('no struck slot is also an allowed slot', () => {
     for (const [family, struck] of Object.entries(GOAL_SLOTS_STRUCK)) {
-      for (const s of Object.keys(struck)) expect(GOAL_SLOTS[family]).not.toContain(s);
+      for (const s of Object.keys(struck)) expect(GOAL_SLOTS[family]).not.toContain(s); // anchored: GOAL_SLOTS[family] is asserted non-empty for every family by the slot arms above
     }
   });
 });

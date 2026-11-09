@@ -441,6 +441,10 @@
     "tests/data/catalogTagGovernance.test.js": {
       "kind": "uncovered"
     },
+    "tests/data/goalFamilies.test.js": {
+      "kind": "rationale",
+      "rationale": "THE GOAL FAMILIES' LINES (WRITE-GOALS 82796628e, merged by ALLEGIANCE-CAR4; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: six CONTROL arms plant a bad slot, a tic, a duplicate / article / possessive / agreement fault, an unknown tie type, a dropped type and a bad target, and an ungated line, and assert each check reds, so a disarmed check fails this file."
+    },
     "tests/data/handlerTieLines.test.js": {
       "kind": "rationale",
       "rationale": "THE HANDLER TIE LINES (WRITE-PEOPLE's data, ALLEGIANCE-CAR1's tier-neutral rewording 61d065e9e; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'a planted control reds the checks (one fault of each kind)' plants one fault per check (an unfilled slot, a struck tic, a repeat, a tier noun) and asserts each check reds, so a disarmed check fails this file."
@@ -3546,6 +3550,10 @@
       "rationale": "CENSUS-1g unit 5 (1425ac790): the wiring census's declared columns equal a fresh annex reading and the registers' reading of the leaves (docs/content/wiring-census.json, the annex, the six generated leaves). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): one row's undeclared 1 -> 0 in docs/content/wiring-census.json -> 1 failed / 9. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
     },
     "tests/generators/people/castDerived.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/people/goals.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
