@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d0d046029eda9292faa49eca15ae0e4190577a4f",
-  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR4 merge point)",
+  "measuredAtSha": "fa606451064a5b5e255b8c2c397f6edcbf5b8cbe",
+  "measuredBy": "STYLE-2-PULSE-FOLLOWUP",
   "date": "2026-11-09",
-  "note": "car 4 composed: the goals, the title secrets, write-goals and write-people-3 suites",
-  "files": 3138,
+  "note": "the lane pin file tests/domain/npcAgencyNewsLines.test.js (+1 file, its titles) and the re-keyed pins of causes d4e8d0487..af0087de2",
+  "files": 3139,
   "parked": 387,
-  "credited": 2751,
-  "titles": 28822,
-  "suiteTitles": 7752
+  "credited": 2752,
+  "titles": 28834,
+  "suiteTitles": 7757
 }
