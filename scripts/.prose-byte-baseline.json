@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 232862,
-      "gzip": 31654,
+      "raw": 232856,
+      "gzip": 31652,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -67,32 +67,32 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 278684,
+      "raw": 278682,
       "gzip": 35421,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 123080,
+      "raw": 123067,
       "gzip": 17456,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147476,
-      "gzip": 20772,
+      "raw": 147483,
+      "gzip": 20773,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 178233,
+      "raw": 178226,
       "gzip": 24601,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
     "src/data/dossierCausalProse.generated.js": {
-      "raw": 200027,
-      "gzip": 33970,
+      "raw": 200017,
+      "gzip": 33745,
       "ceilingRaw": 210260,
       "ceilingGzip": 36700
     },
@@ -515,6 +515,14 @@
       "toRaw": 287856,
       "gzipAfter": 36900,
       "reason": "+4564 B raw (gzip level 9: 36,445 -> 36,900), one commit: DS-GEN-16 gains LIVING-MEMORY and four LEGACY-* pools, two variants each (10 variants), reading history.siegeNarrative and history.legacyAnnotations[]; projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0. RE-CHAINED at MERGE-WAVE's W5 HIS merge (2026-11-08): the lane measured 272147 -> 276711 over the base; composed over W1 ECO's and W4 PEOPLE's general-leaf rows (272147 -> 283292) the same +4564 stands from 283292. The lane's later style-law rewrites shrink the leaf with no declaration owed; the committed figure is the composed leaf's."
+    },
+    {
+      "car": "STYLE-2 SW-8 RENAME-POWERS C8 e63c6aae6 (2026-11-09, the owner's map Appendix G1): the retired word leaves 28 composed annex lines",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147476,
+      "toRaw": 147483,
+      "gzipAfter": 20773,
+      "reason": "+7 B raw (gzip level 9: 20,772 -> 20,773): C8's word-only swaps in the stressors annex lines ('faction' -> 'power' and the map's hand wordings, Appendix X) projected through node scripts/generate-dossier-state-prose.mjs; no pool, variant, mark or slot added. The same commit SHRANK five leaves (defense -6, general -2, power -13, warFaith -7, the causal leaf -10), lowered in the same register commit. Measured per commit over bd07005b9..e63c6aae6: every leaf unmoved until e63c6aae6."
     }
   ],
   "ceilingTransfersNewLeaves": [
