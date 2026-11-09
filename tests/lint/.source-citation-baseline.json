@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 210,
+      "dated": 211,
       "sha-pin": 2,
       "tree": 168
     },
@@ -477,7 +477,9 @@
     "_rosterGrowth2026-11-09-style-2-merge-record-19": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): `tree` 166 -> 167, docs/shift-records/2026-11-09-style-2-merge-19-sw10.json, record 19, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-pulse-followup": "ONE document JOINED the roster by being BORN into it (STYLE-2-PULSE-FOLLOWUP, session session_01FbPLbeNzSCGcvS25GjfrY3, on lane/style-2-pulse-followup-2026-11-09, measured once with this walker's own arm): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-PULSE-FOLLOWUP-2026-11-09.md, the lane's record, born dated; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-record-20": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): `tree` 167 -> 168, docs/shift-records/2026-11-09-style-2-merge-20-pulse-followup.json, record 20, born into the tree class; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-pulse-followup": "THE UNION AT THE PULSE-FOLLOW-UP MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 209 -> 210 (docs/chair/2026-11-09/STYLE-2-PULSE-FOLLOWUP-2026-11-09.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-09-style-2-merge-pulse-followup": "THE UNION AT THE PULSE-FOLLOW-UP MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 209 -> 210 (docs/chair/2026-11-09/STYLE-2-PULSE-FOLLOWUP-2026-11-09.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-09-fix-section-regen": "ONE document JOINED the roster by being BORN into it (FIX-SECTION-REGEN, session session_01FbPLbf5ncRhMmR9LGUhdsH, on lane/fix-section-regen-2026-11-09 cut from bd07005b9, measured once with this walker's own arm): `dated` 189 -> 190, docs/chair/2026-11-09/FIX-SECTION-REGEN-2026-11-09.md, the lane's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-fix-section-regen": "THE UNION AT THE FIX-SECTION-REGEN MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 210 -> 211 (docs/chair/2026-11-09/FIX-SECTION-REGEN-2026-11-09.md, the lane's record, born dated)."
   },
   "rows": []
 }

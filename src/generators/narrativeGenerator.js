@@ -908,13 +908,16 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
 /**
  * A6 (ALLEGIANCE-CAR2, the design §3.4, J-13): the settlement's power structure with the hall-capture state derived
  * from `npcs` (their ranks and hidden allegiances) and the classifier's climate rung over the current roster — written
- * by its ONE writer, domain/people/hallCapture.js :: writeHallCapture. Draw-free.
- * @param {*} settlement @param {Array<Record<string, any>>} npcs @returns {*} the new power structure
+ * by its ONE writer, domain/people/hallCapture.js :: writeHallCapture. Draw-free. EXPORTED for the NPC section
+ * regeneration (FIX-SECTION-REGEN, 2026-11-09): generators/generateSettlementPipeline.js :: regenNPCsPipeline
+ * re-derives the BORN record's hall over its final cast through this same seam (`opts.rederive`), never a private copy.
+ * @param {*} settlement @param {Array<Record<string, any>>} npcs @param {{ rederive?: boolean }} [opts]
+ * @returns {*} the new power structure
  */
-const withHallCapture = (settlement, npcs) => {
+export const withHallCapture = (settlement, npcs, opts = {}) => {
   const hall = hallCaptureOf(settlement, { npcs, climate: captureClimateOf(settlement) });
   // the capture rows of the relation matrix READ the one state (the chair's ruling on car 2's STOP 3)
-  return withCaptureRelations(writeHallCapture(settlement.powerStructure, hall), hall.state);
+  return withCaptureRelations(writeHallCapture(settlement.powerStructure, hall, opts), hall.state);
 };
 
 /**
