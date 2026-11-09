@@ -35,6 +35,7 @@
 
 import { sanitizePublicValue } from './publicSafe.js';
 import { deityNameFromSnapshots } from './deityNames.js';
+import { ascendancyArc, twilightArc, siegeArc, tradeWarArc } from './realmArcSentences.js';
 
 /** The snapshot schema version — bumped on any breaking shape change so a stored
  *  public snapshot can be migrated/rejected by version, independent of the
@@ -537,25 +538,11 @@ function publicRealmArcLines(pantheon, sieges, tradeWars, maxArcs) {
   const lines = [];
   const majors = pantheon.filter(d => d.tier === 'major' && d.seats > 0)
     .sort((a, b) => (b.seats - a.seats) || codepoint(a.deityId, b.deityId));
-  for (const major of majors) {
-    lines.push(`The Ascendancy of ${major.name} (${major.seats} settlement${major.seats === 1 ? ' holds' : 's hold'} the faith).`);
-  }
-  for (const cult of pantheon.filter(d => d.tier === 'cult' && d.seats === 0)) {
-    lines.push(`The Twilight of ${cult.name} (its altars stand abandoned).`);
-  }
-  for (const siege of sieges) {
-    if (siege.coalitionNames.length >= 2) {
-      const named = siege.coalitionNames.length > 2
-        ? `${siege.coalitionNames.slice(0, 2).join(', ')} +${siege.coalitionNames.length - 2}`
-        : siege.coalitionNames.join(' and ');
-      lines.push(`The War of ${siege.targetName}, where a coalition of ${named} besiege the walls.`);
-    } else {
-      lines.push(`The War of ${siege.targetName}, where ${siege.coalitionNames[0] || 'an army'} lays siege.`);
-    }
-  }
-  for (const war of tradeWars) {
-    lines.push(`The ${war.commodityLabel} Trade War, where ${war.winnerName} seizes ${war.buyerName}'s market.`);
-  }
+  // THE WORDS ARE realmArcSentences.js's (one writer, SW-9); the selection stays this file's own.
+  for (const major of majors) lines.push(ascendancyArc(major.name, major.seats));
+  for (const cult of pantheon.filter(d => d.tier === 'cult' && d.seats === 0)) lines.push(twilightArc(cult.name));
+  for (const siege of sieges) lines.push(siegeArc(siege.targetName, siege.coalitionNames));
+  for (const war of tradeWars) lines.push(tradeWarArc(war.commodityLabel, war.winnerName, war.buyerName));
   return lines.slice(0, maxArcs);
 }
 

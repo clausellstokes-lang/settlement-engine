@@ -156,6 +156,9 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //     six, TE-CH-4's one, TE-CAP's two and T7's seven: path, category and snippet are
 //     byte-identical on all eight, and the whole baseline diff is sixteen lines, eight -/+
 //     pairs, verified by grepping the diff for any changed line that is not a `"line"` value.
+// SW-9 (2026-11-09, ruling A11's one writer): worldSnapshotPublic.js's realm-arc sentences move
+// to realmArcSentences.js, shortening the file above its one row: worldSnapshotPublic 628 -> 615,
+// path, category and snippet byte-identical; the whole baseline diff is one -/+ pair. ADDRESS ROT.
 // The census ends at 227 against a 227 ceiling — the seven additions net out against nothing,
 // because they were cured rather than counted. No ceiling moved in either direction.
 // TAIL-F · W-FAITH LANDING (the F5c->F6c->F7c consist) — ONE ROW THAT WAS NEVER DEBT, CURED
