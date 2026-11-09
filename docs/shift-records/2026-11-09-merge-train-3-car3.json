@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 3 OF THE TRAIN (MERGE-TRAIN), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-MERGE-TRAIN §0.1): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE ALLEGIANCE-CAR3 MERGE OVER THE INTEGRATION BRANCH — lane/allegiance-car3-2026-11-08 at 6ea8fb318 merged at c6ded8e3a (MERGE-TRAIN point 3), the conflicts composed; its lane signed nothing, its three UNSIGNED causes are the components signed here with the lane's own figures (docs/allegiance/ALLEGIANCE_CAR3_2026-11-08.md §8): e9070d614 the bands' cause, ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05, gm 170 · fence 128 · herald 450 -> 443 · prose 46; 8567f490d J-10's handler deal round the pool, fence 11; 2f89aaeef J-10's boss-last in its fallback sense (the boss joins above 4), fence 1; every other commit 0 (the DM panel, the PDF's DM section behind the opt-in dmView, the bought watch): what the merge moved beyond record 2's post-state (the stage of f51058995). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against record 2's post-state (the stage of f51058995): the generator golden master 170 of 525 rows (town 2, city 84, metropolis 84) -> daedf3c6..; the espionage fence's driven corpus 128 of 360 rows -> 2298c333..; 360/360 distinct; the herald knowledge desk 2 moved, +45/-52 keys (448 -> 441); the PDF snapshot 0 and the witness 0. The prose manifest's movement at this point (113 of 1,050 rows) is NOT written here: it is signed ONCE at the train's final tip, this point named in its cause list. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the train MERGE-TRAIN, 2026-11-09)",
+  "cause": "THE ALLEGIANCE-CAR3 MERGE OVER THE INTEGRATION BRANCH — lane/allegiance-car3-2026-11-08 at 6ea8fb318 merged at c6ded8e3a (MERGE-TRAIN point 3), the conflicts composed; its lane signed nothing, its three UNSIGNED causes are the components signed here with the lane's own figures (docs/allegiance/ALLEGIANCE_CAR3_2026-11-08.md §8): e9070d614 the bands' cause, ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05, gm 170 · fence 128 · herald 450 -> 443 · prose 46; 8567f490d J-10's handler deal round the pool, fence 11; 2f89aaeef J-10's boss-last in its fallback sense (the boss joins above 4), fence 1; every other commit 0 (the DM panel, the PDF's DM section behind the opt-in dmView, the bought watch): what the merge moved beyond record 2's post-state (the stage of f51058995)",
+  "seat": "MERGE-TRAIN (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at c6ded8e3a",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 441,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

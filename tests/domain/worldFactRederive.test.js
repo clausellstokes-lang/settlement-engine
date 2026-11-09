@@ -495,8 +495,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the generator master 5f77f02f.. -> eb2db45f.. (525 of 525 rows).
     // Record 2 of the train, the ALLEGIANCE-CAR2 merge over the integration branch (2026-11-09-merge-train-2-car2.json), from the stage at f51058995:
     // the generator master eb2db45f.. -> 38229dd6.. (101 of 525 rows).
+    // Record 3 of the train, the ALLEGIANCE-CAR3 merge over the integration branch (2026-11-09-merge-train-3-car3.json), from the stage at c6ded8e3a:
+    // the generator master 38229dd6.. -> daedf3c6.. (170 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('38229dd6519a84302390f5dfaf981053fcce12668905b1da1feb4b94e00ce2a6');
+      .toBe('daedf3c6ad2c5699eb5cc0bf7924f67ff649f7756f99dd5a7dfac96af5ecb5e5');
     // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
     // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')

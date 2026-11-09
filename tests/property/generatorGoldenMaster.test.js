@@ -18,6 +18,12 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE TRAIN, MERGE-TRAIN;
+ *   record docs/shift-records/2026-11-09-merge-train-3-car3.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   170 of 525 rows (town 2, city 84, metropolis 84) against record 2's post-state. THE CAUSE, ONE (first-parent
+ *   step c6ded8e3a): the ALLEGIANCE-CAR3 merge over the integration branch (lane/allegiance-car3-2026-11-08 at 6ea8fb318; its unsigned causes the components: e9070d614 organizedCrime 0.10 -> 0.05 170 (fence 128), 8567f490d the round-robin deal (fence 11), 2f89aaeef the boss joins above 4 (fence 1) — the lane's own stage-to-stage figures). ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the
+ *   staged tree ST3 (the tree of c6ded8e3a with the door paths carried from the branch). 38229dd6.. -> daedf3c6..
+ *
  * 2026-11-09 — MERGE-TRAIN RECORD 2, THE ALLEGIANCE-CAR2 MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE TRAIN, MERGE-TRAIN;
  *   record docs/shift-records/2026-11-09-merge-train-2-car2.json; the cloud chair signs under the owner's delegation, vetoable).
  *   101 of 525 rows (city 32, metropolis 69) against record 1's post-state. THE CAUSE, ONE (first-parent
