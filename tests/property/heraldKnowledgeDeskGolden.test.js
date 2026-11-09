@@ -112,7 +112,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 36 fewer items (470 → 434).
     // 434 → 470 at MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, MERGE-CAR, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json): one face per institution re-casts the year's news over the pool census; 434 -> 470 keys against record A's post-state
     // 36 more items (434 → 470).
-    expect(Object.keys(manifest)).toHaveLength(470);
+    // 470 → 475 at MERGE-WAVE RECORD 8, THE FIX-PUBLIC-VEIL MERGE (ODQ §934.105, THE WAVE, MERGE-WAVE, 2026-11-08; record docs/shift-records/2026-11-08-merge-wave-8-public-veil.json): a veiled face's opaque id re-deals its keyed forks, which re-deals the year's news; 470 -> 475 keys against record 7's post-state (39 items added, 34 removed, 2 moved)
+    // 5 more items (470 → 475).
+    expect(Object.keys(manifest)).toHaveLength(475);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
