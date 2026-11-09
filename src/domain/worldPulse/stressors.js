@@ -117,11 +117,11 @@ function upperFirst(value) {
 }
 
 /**
- * @param {{ reasons?: unknown[], label?: unknown }|null|undefined} pressure
+ * @param {{ reasons?: unknown[], label?: unknown, settlementName?: unknown }|null|undefined} pressure
  * @param {{ fallback?: boolean }} [opts]  false ⇒ evidence sentences only (no fail-closed line)
  */
 function readerPressureReasons(pressure, { fallback = true } = {}) {
-  const placeName = /** @type {any} */ (pressure)?.settlementName;
+  const placeName = pressure?.settlementName;
   const placeWord = placeName ? String(placeName) + "'s" : 'the';
   return (Array.isArray(pressure?.reasons) ? pressure.reasons : []).map((/** @type {unknown} */ raw) => {
     const reason = String(raw || '').trim();
@@ -199,13 +199,13 @@ function resolutionContextFor(stressor, assessment, synergy) {
   // strengths' values stay on `leadingSources` for the machine, never in the sentence.
   /** @param {string[]} words */
   const andList = (words) => (words.length > 1 ? `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}` : words[0] || '');
-  const leaders = andList(leadingSources.map((/** @type {any} */ s) => String(s.source)));
+  const leaders = andList(leadingSources.map((/** @type {{ source: unknown }} */ s) => String(s.source)));
   const narrative = [
     leadingSources.length
       ? `${leaders[0].toUpperCase()}${leaders.slice(1)} did most to end it.`
       : 'The crisis ran its course.',
     companions.length
-      ? `It ended even while ${andList(companions.map((/** @type {any} */ c) => String(c).replace(/_/g, ' ')))} went on.`
+      ? `It ended even while ${andList(companions.map((/** @type {unknown} */ c) => String(c).replace(/_/g, ' ')))} went on.`
       : null,
   ].filter(Boolean).join(' ');
   return {
@@ -768,7 +768,7 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
       const strongestRow = (defaults.pressureKinds || [])
         .map((/** @type {any} */ kind) => pressureIdx.get?.(escalationOriginId, kind))
         .filter(Boolean)
-        .reduce((/** @type {any} */ best, /** @type {any} */ row) => (!best || (row.score || 0) > (best.score || 0) ? row : best), null);
+        .reduce((/** @type {{ score?: number, reasons?: unknown[], label?: unknown }|null} */ best, /** @type {{ score?: number, reasons?: unknown[], label?: unknown }} */ row) => (!best || (row.score || 0) > (best.score || 0) ? row : best), null);
       const severity = clamp01((stressor.severity + strongestPressure) / 2 + 0.08);
       candidates.push({
         id: `candidate.stressor.escalate.${stablePart(stressor.id)}.${tick}`,

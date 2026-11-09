@@ -13,6 +13,7 @@ import { stablePart } from './worldState.js';
 // STYLE-2 C2 (SW-12): the depletion summary's vantages, chosen by the house idiom — the
 // zero-import selection kernel keyed on the candidate's own stable id (no rng draw).
 import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string|number|boolean>} TierLineSlots */
 import { formatCount } from '../formatNumber.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 // CL-0: every candidate family consults the per-domain change-authority policy.
@@ -478,30 +479,30 @@ export function resourceEconomicRole(settlement, resource) {
 // STYLE-2 C2 (SW-12) — the tier change's streak receipt (pinned to stay in the receipt), in
 // words: how long the drift has held and how long the change needed.
 const STREAK_REASON = Object.freeze([
-  (/** @type {any} */ x) => `This has held for ${x.n} ${x.unit} in a row, and the change needed ${x.min}.`,
-  (/** @type {any} */ x) => `It has gone this way ${x.n} ${x.unit} running; ${x.min} were needed before the change.`,
-  (/** @type {any} */ x) => `For ${x.n} ${x.unit} it has kept on this way, and the change needed ${x.min}.`,
+  (/** @type {TierLineSlots} */ x) => `This has held for ${x.n} ${x.unit} in a row, and the change needed ${x.min}.`,
+  (/** @type {TierLineSlots} */ x) => `It has gone this way ${x.n} ${x.unit} running; ${x.min} were needed before the change.`,
+  (/** @type {TierLineSlots} */ x) => `For ${x.n} ${x.unit} it has kept on this way, and the change needed ${x.min}.`,
 ]);
 
 // STYLE-2 C2 (SW-12) — the depletion summary, four vantages on the same fact: the town takes
 // more from a resource than it gives back. The resource may be singular or plural ("stone
 // quarry", "grain fields"), so no line makes a verb agree with it.
 const DEPLETION_SUMMARY = Object.freeze([
-  (/** @type {any} */ x) => `${x.name} is taking more from its ${x.res} than the land can give back.`,
-  (/** @type {any} */ x) => `Those who work ${x.name}'s ${x.res} come back with less than they used to.`,
-  (/** @type {any} */ x) => `${x.name}'s rulers will soon need another source than its ${x.res}.`,
-  (/** @type {any} */ x) => `There is less to take from ${x.name}'s ${x.res} than there was, and still ${x.name} takes.`,
+  (/** @type {TierLineSlots} */ x) => `${x.name} is taking more from its ${x.res} than the land can give back.`,
+  (/** @type {TierLineSlots} */ x) => `Those who work ${x.name}'s ${x.res} come back with less than they used to.`,
+  (/** @type {TierLineSlots} */ x) => `${x.name}'s rulers will soon need another source than its ${x.res}.`,
+  (/** @type {TierLineSlots} */ x) => `There is less to take from ${x.name}'s ${x.res} than there was, and still ${x.name} takes.`,
 ]);
 const DEPLETION_DRAW_HEAVY = Object.freeze([
-  (/** @type {any} */ x) => `${x.name} is drawing heavily on its ${x.res}.`,
-  (/** @type {any} */ x) => `${x.name} takes hard from its ${x.res}.`,
-  (/** @type {any} */ x) => `Much is being taken from ${x.name}'s ${x.res}.`,
+  (/** @type {TierLineSlots} */ x) => `${x.name} is drawing heavily on its ${x.res}.`,
+  (/** @type {TierLineSlots} */ x) => `${x.name} takes hard from its ${x.res}.`,
+  (/** @type {TierLineSlots} */ x) => `Much is being taken from ${x.name}'s ${x.res}.`,
 ]);
 // The city floor's receipt (a city or larger depletes under a lighter draw).
 const DEPLETION_TIER = Object.freeze([
-  (/** @type {any} */ x) => `A ${x.tier} takes a great deal from the land around it.`,
-  (/** @type {any} */ x) => `A ${x.tier} the size of ${x.name} needs more than the land can easily give.`,
-  (/** @type {any} */ x) => `${x.name} is a ${x.tier}, and a ${x.tier} uses a great deal.`,
+  (/** @type {TierLineSlots} */ x) => `A ${x.tier} takes a great deal from the land around it.`,
+  (/** @type {TierLineSlots} */ x) => `A ${x.tier} the size of ${x.name} needs more than the land can easily give.`,
+  (/** @type {TierLineSlots} */ x) => `${x.name} is a ${x.tier}, and a ${x.tier} uses a great deal.`,
 ]);
 
 function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rng = null) {

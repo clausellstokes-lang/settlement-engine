@@ -71,6 +71,7 @@ import { makeCommercialPressureRead } from './commercialReasons.js';
 // idiom — the zero-import selection kernel keyed on the outcome's own stable id (no rng
 // draw, so the contest's and the escalation's draws are untouched).
 import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string>} TradeWarLineSlots */
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
@@ -111,22 +112,22 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 // market and for whom. Every slot is one the writer holds: the buyer, the new supplier,
 // the displaced one (or "its old supplier"), the good. Four vantages per intro pool.
 const REALIGN_SUMMARY = Object.freeze([
-  (/** @type {any} */ x) => `${x.buyer}'s ${x.good} now comes from ${x.winner}; ${x.defeated} has lost the trade.`,
-  (/** @type {any} */ x) => `${x.buyer}'s buyers have stopped dealing with ${x.defeated} and buy their ${x.good} from ${x.winner}.`,
-  (/** @type {any} */ x) => `${x.buyer} has given its ${x.good} trade to ${x.winner}, and ${x.defeated} has lost a market.`,
-  (/** @type {any} */ x) => `The ${x.good} on sale in ${x.buyer} now comes from ${x.winner}, not ${x.defeated}.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer}'s ${x.good} now comes from ${x.winner}; ${x.defeated} has lost the trade.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer}'s buyers have stopped dealing with ${x.defeated} and buy their ${x.good} from ${x.winner}.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer} has given its ${x.good} trade to ${x.winner}, and ${x.defeated} has lost a market.`,
+  (/** @type {TradeWarLineSlots} */ x) => `The ${x.good} on sale in ${x.buyer} now comes from ${x.winner}, not ${x.defeated}.`,
 ]);
 const WINDDOWN_HEADLINE = Object.freeze([
-  (/** @type {any} */ x) => `${x.defeated} loses its ${x.good} trade with ${x.buyer}`,
-  (/** @type {any} */ x) => `${x.buyer} stops buying ${x.defeated}'s ${x.good}`,
-  (/** @type {any} */ x) => `${x.defeated} loses ${x.buyer}'s ${x.good} trade to ${x.winner}`,
-  (/** @type {any} */ x) => `${x.buyer} takes its ${x.good} trade away from ${x.defeated}`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.defeated} loses its ${x.good} trade with ${x.buyer}`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer} stops buying ${x.defeated}'s ${x.good}`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.defeated} loses ${x.buyer}'s ${x.good} trade to ${x.winner}`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.buyer} takes its ${x.good} trade away from ${x.defeated}`,
 ]);
 const WINDDOWN_SUMMARY = Object.freeze([
-  (/** @type {any} */ x) => `${x.defeated}'s ${x.good} no longer sells in ${x.buyer}; ${x.winner} has the trade now.`,
-  (/** @type {any} */ x) => `${x.defeated}'s rulers have let ${x.buyer}'s ${x.good} market go without a fight.`,
-  (/** @type {any} */ x) => `In ${x.defeated} the ${x.good} sellers have lost ${x.buyer}'s custom to ${x.winner}.`,
-  (/** @type {any} */ x) => `${x.good[0].toUpperCase()}${x.good.slice(1)} from ${x.defeated} is no longer on sale in ${x.buyer}; ${x.winner}'s has taken its place.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.defeated}'s ${x.good} no longer sells in ${x.buyer}; ${x.winner} has the trade now.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.defeated}'s rulers have let ${x.buyer}'s ${x.good} market go without a fight.`,
+  (/** @type {TradeWarLineSlots} */ x) => `In ${x.defeated} the ${x.good} sellers have lost ${x.buyer}'s custom to ${x.winner}.`,
+  (/** @type {TradeWarLineSlots} */ x) => `${x.good[0].toUpperCase()}${x.good.slice(1)} from ${x.defeated} is no longer on sale in ${x.buyer}; ${x.winner}'s has taken its place.`,
 ]);
 
 /**
@@ -391,7 +392,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
   };
   // The good as a word inside a sentence ("iron", "salted fish"); the headline that names
   // it as a title keeps the label's own case.
-  const goodWordFor = (/** @type {any} */ commodityId) => String(commodityLabelFor(commodityId)).toLowerCase();
+  const goodWordFor = (/** @type {unknown} */ commodityId) => String(commodityLabelFor(commodityId)).toLowerCase();
 
   // ── Enumerate contests deterministically: every buyer C (codepoint), every
   //    imported commodity K (codepoint). ──────────────────────────────────────

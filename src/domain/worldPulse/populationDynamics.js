@@ -6,6 +6,7 @@ import { stablePart } from './worldState.js';
 // STYLE-2 C2 (SW-12): the population lines' vantages, chosen by the house idiom — the
 // zero-import selection kernel keyed on the candidate's own stable id (no rng draw).
 import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string|number|boolean>} PopulationLineSlots */
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 import { integerize } from './demographicsRates.js';
 import { residentNamedNpcCount } from './npcReplacement.js';
@@ -239,16 +240,16 @@ function relationshipWeight(snapshot, sourceId, destId) {
 // migrants were credited to other places); the strain receipt names only the pressures that
 // bite, by the same quarter bands as POPULATION_PRESSURE_WORDS, hardest band first.
 const POPULATION_LOSS_SUMMARY = Object.freeze([
-  (/** @type {any} */ x) => `${x.name} has lost about ${x.n} people${x.onward}.`,
-  (/** @type {any} */ x) => `About ${x.n} people are gone from ${x.name}${x.onward}.`,
-  (/** @type {any} */ x) => `${x.name}'s rulers count about ${x.n} fewer people than before${x.onward}.`,
-  (/** @type {any} */ x) => `Fewer people live in ${x.name} now, about ${x.n} fewer${x.onward}.`,
+  (/** @type {PopulationLineSlots} */ x) => `${x.name} has lost about ${x.n} people${x.onward}.`,
+  (/** @type {PopulationLineSlots} */ x) => `About ${x.n} people are gone from ${x.name}${x.onward}.`,
+  (/** @type {PopulationLineSlots} */ x) => `${x.name}'s rulers count about ${x.n} fewer people than before${x.onward}.`,
+  (/** @type {PopulationLineSlots} */ x) => `Fewer people live in ${x.name} now, about ${x.n} fewer${x.onward}.`,
 ]);
 const POPULATION_GROWTH_SUMMARY = Object.freeze([
-  (/** @type {any} */ x) => `${x.name} has about ${x.n} more people than it had.`,
-  (/** @type {any} */ x) => `About ${x.n} more people live in ${x.name} now.`,
-  (/** @type {any} */ x) => `${x.name}'s rulers count about ${x.n} more people than before.`,
-  (/** @type {any} */ x) => `${x.name} is growing: about ${x.n} more people than it had.`,
+  (/** @type {PopulationLineSlots} */ x) => `${x.name} has about ${x.n} more people than it had.`,
+  (/** @type {PopulationLineSlots} */ x) => `About ${x.n} more people live in ${x.name} now.`,
+  (/** @type {PopulationLineSlots} */ x) => `${x.name}'s rulers count about ${x.n} more people than before.`,
+  (/** @type {PopulationLineSlots} */ x) => `${x.name} is growing: about ${x.n} more people than it had.`,
 ]);
 /** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
 const MIGRATION_MODE_REASON = Object.freeze({

@@ -58,6 +58,7 @@ import { stablePart } from './worldState.js';
 // idiom — the zero-import selection kernel keyed on the candidate's own stable id (no rng
 // draw, so the chooser's softmax sample is untouched).
 import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string|number|boolean>} StrategyLineSlots */
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { chaosPullOf, fidelityFactor } from './fidelityNoise.js';
 import { rustOf } from './martialReadiness.js';
@@ -919,25 +920,25 @@ export function peaceSuitCandidate({ sId, name, target, snapshot, tick, worldSta
 // Every slot is one the writer holds: the town and its target. It is the decision only (the
 // war opener judges the march next tick), so no line says the army is already on the road.
 const DEPLOY_SUMMARY = Object.freeze([
-  (/** @type {any} */ x) => `${x.name} is calling up its army to march on ${x.target}.`,
-  (/** @type {any} */ x) => `${x.name}'s rulers mean to send the army against ${x.target}.`,
-  (/** @type {any} */ x) => `In ${x.name} the army is mustering, and its road leads to ${x.target}.`,
-  (/** @type {any} */ x) => `${x.target} has cause to watch its walls: ${x.name} means to march on it.`,
+  (/** @type {StrategyLineSlots} */ x) => `${x.name} is calling up its army to march on ${x.target}.`,
+  (/** @type {StrategyLineSlots} */ x) => `${x.name}'s rulers mean to send the army against ${x.target}.`,
+  (/** @type {StrategyLineSlots} */ x) => `In ${x.name} the army is mustering, and its road leads to ${x.target}.`,
+  (/** @type {StrategyLineSlots} */ x) => `${x.target} has cause to watch its walls: ${x.name} means to march on it.`,
 ]);
 // The chooser's receipt: the march won against the other moves open to the town (hold and
 // defend among them), said as a choice its rulers made.
 const DEPLOY_REASON = Object.freeze([
-  (/** @type {any} */ x) => `${x.name} weighed its other courses and chose to march.`,
-  (/** @type {any} */ x) => `Of all that ${x.name} could do, war looked best to its rulers.`,
-  (/** @type {any} */ x) => `${x.name}'s rulers judged the march worth more than waiting.`,
-  (/** @type {any} */ x) => `${x.name} could have waited; its rulers chose war.`,
+  (/** @type {StrategyLineSlots} */ x) => `${x.name} weighed its other courses and chose to march.`,
+  (/** @type {StrategyLineSlots} */ x) => `Of all that ${x.name} could do, war looked best to its rulers.`,
+  (/** @type {StrategyLineSlots} */ x) => `${x.name}'s rulers judged the march worth more than waiting.`,
+  (/** @type {StrategyLineSlots} */ x) => `${x.name} could have waited; its rulers chose war.`,
 ]);
 
 // The recall override's receipt: the order is not weighed against the other moves.
 const RECALL_REASON = Object.freeze([
-  (/** @type {any} */ x) => `Bringing the army home comes before every other plan ${x.name} had.`,
-  (/** @type {any} */ x) => `Nothing else ${x.name} might do is weighed until its army is home.`,
-  (/** @type {any} */ x) => `${x.name} calls its army home ahead of anything else.`,
+  (/** @type {StrategyLineSlots} */ x) => `Bringing the army home comes before every other plan ${x.name} had.`,
+  (/** @type {StrategyLineSlots} */ x) => `Nothing else ${x.name} might do is weighed until its army is home.`,
+  (/** @type {StrategyLineSlots} */ x) => `${x.name} calls its army home ahead of anything else.`,
 ]);
 
 function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null, termination = null, warCasusFor = null }) {
