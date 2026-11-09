@@ -36,7 +36,7 @@
  */
 
 import { allegianceOf } from './people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
-import { PATRONAGE_TUNING, SECURITY_INSTITUTION_RE } from './corruption.js';
+import { PATRONAGE_TUNING, isOustedNpc, securityImpairmentsOf } from './corruption.js';
 
 /** The set of leash kinds whose beneficiary sits in ANOTHER settlement/court —
  *  the ones whose exposure must NEVER impair a local organization. */
@@ -225,7 +225,7 @@ function nameMatches(a, b) {
  */
 function isLocalAgentInPlace(npc, settlement) {
   const a = allegianceOf(npc);
-  if (!a || !a.house || npc?.ousted) return false;
+  if (!a || !a.house || isOustedNpc(npc)) return false;
   return corruptMarkOf(npc, settlement) === true;
 }
 
@@ -241,24 +241,9 @@ function isLocalAgentInPlace(npc, settlement) {
  * @returns {{covert: string[], revealed: string[]}}
  */
 export function compromisedSecurityInstitutions(settlement) {
-  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  const securityInstitutions = institutions
-    .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
+  // the institution arm: corruption.js :: securityImpairmentsOf (a covert impairment hidden, a public one revealed)
+  const { securityInstitutions, covert, revealed } = securityImpairmentsOf(settlement);
   if (!securityInstitutions.length) return { covert: [], revealed: [] };
-
-  // A 'corruption'-typed impairment is PUBLIC record only when it is not flagged
-  // covert. A covert mark (an institution-scope Impose Corruption that quietly
-  // captured a node) is the hidden channel: it must NOT read as a public scandal,
-  // or it would wrongly drag exposure-proximity scrutiny onto the very NPC it was
-  // meant to conceal.
-  const revealed = new Set();
-  const covert = new Set();
-  for (const inst of securityInstitutions) {
-    const corruptionImps = (inst.impairments || []).filter((imp) => imp?.type === 'corruption');
-    if (!corruptionImps.length) continue;
-    if (corruptionImps.some((imp) => imp?.covert !== true)) revealed.add(inst.name);
-    else covert.add(inst.name);
-  }
 
   // THE PERSON ARM, LOCAL AXIS: the face of a security house that answers, unexposed, to a local house.
   for (const npc of settlement?.npcs || []) {

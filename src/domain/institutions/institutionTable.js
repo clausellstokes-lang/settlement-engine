@@ -182,7 +182,7 @@ export const COLUMN_SOURCES = Object.freeze({
   ]),
   whatItDoesNotDo: Object.freeze([
     Object.freeze({ source: 'status in {ruined, removed, destroyed, remnant}', cite: 'institutionRoster.js:30-41', read: true, note: 'read on every row, and STRUCTURALLY SILENT on a LIVE one, because `isLiveInstitution` removes exactly the rows that could carry it. Measured: held = 0 on all three census tiers.' }),
-    Object.freeze({ source: 'typed impairments', cite: 'corruptionLeash.js :: compromisedSecurityInstitutions', read: true }),
+    Object.freeze({ source: 'typed impairments', cite: 'corruption.js :: securityImpairmentsOf', read: true }),
     Object.freeze({ source: '_worldPulseInactive', cite: 'institutionRoster.js:40', read: true, note: 'read on every row, and unreachable for the same reason as the status: `isLiveInstitution` returns false the moment it is true.' }),
     Object.freeze({
       source: 'a service row with `on: false`',

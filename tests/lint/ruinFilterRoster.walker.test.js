@@ -166,7 +166,6 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // ── penalty-side: counts impaired/criminal for a PENALTY, not live crediting ─────
   'src/domain/corruption.js': 'penalty-side — criminal/corruption-impairment classifier (drag, not credit)',
   // ALLEGIANCE-CAR1 (2026-11-08): the retired corruptionPass's roster read moved here with the deal (J-2), measured.
-  'src/domain/corruptionLeash.js': 'penalty-side — the bought watch (compromisedSecurityInstitutions, moved here from corruption.js by ALLEGIANCE-CAR3) reads the roster\'s SECURITY houses for their corruption impairments and their faces\' allegiances (drag, not credit); it credits no provider capacity',
   'src/domain/people/allegiance.js': 'penalty-side — the allegiance deal reads the roster\'s CRIMINAL houses (isCriminalInstitution) for the corruption climate and organized-crime pressure (drag, not credit), as the retired corruptionPass did through corruption.js, and looks a card\'s house up by name (the handler pool, the `via` mark); it credits no provider capacity',
   'src/domain/state/deriveSystemState.js': 'penalty-side — countByStatus impaired/critical risk penalty (status-aware)',
   // ── mutation / write / undo: rewrites the roster ─────────────────────────────────
@@ -509,8 +508,7 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // FIX-PUBLIC-VEIL (2026-11-07): 101 -> 102, src/domain/people/cardVeil.js :: veiledOfInstitution's roster-name read (EXEMPT above).
     // ALLEGIANCE-CAR1 (2026-11-08, the veil merged over MERGE-CAR): 105 + 1 (cardVeil.js, EXEMPT) = 106, measured by this file's own scan.
     // ALLEGIANCE-CAR1 (2026-11-08): 106 -> 107, src/domain/people/allegiance.js (the deal's criminal-house read, EXEMPT above), measured by this file's own scan.
-    // ALLEGIANCE-CAR3 (2026-11-08): 107 -> 108, src/domain/corruptionLeash.js (the bought watch, moved from corruption.js, which keeps its own reads; EXEMPT above), measured by this file's own scan.
-    expect(readers.length).toBe(108);
+    expect(readers.length).toBe(107);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

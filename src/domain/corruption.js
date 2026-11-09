@@ -650,4 +650,35 @@ export function npcHomeInstitution(npc) {
 // to corruptionLeash.js (ALLEGIANCE-CAR3, 2026-11-08, the chair's late row 1): their person arm reads the
 // LOCAL axis through the hidden allegiance's one reader (allegianceOf), which this EAGER first-paint
 // module may not import (the catalog rides with it, and allegiance.js imports this file). Every caller
-// is the simulation's (lazy). The two names keep (landed tokens, ES §3.3); the dials above stay here.
+// is the simulation's (lazy). The two names keep (landed tokens, ES §3.3); the dials above stay here, and
+// so does the INSTITUTION arm (the impairment classifier below) and the ousted read, which are not the
+// allegiance's.
+
+/**
+ * The settlement's security institutions and how their 'corruption' impairments compromise them. A
+ * 'corruption'-typed impairment is PUBLIC record only when it is not flagged covert. A covert mark (an
+ * institution-scope Impose Corruption that quietly captured a node) is the hidden channel: it must NOT
+ * read as a public scandal, or it would wrongly drag exposure-proximity scrutiny onto the very NPC it was
+ * meant to conceal. The person arm (corruptionLeash.js :: compromisedSecurityInstitutions) adds to `covert`.
+ * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @returns {{ securityInstitutions: import('./settlement.schema.js').SimInstitution[], covert: Set<string>, revealed: Set<string> }}
+ */
+export function securityImpairmentsOf(settlement) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const securityInstitutions = institutions
+    .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
+  const revealed = new Set();
+  const covert = new Set();
+  for (const inst of securityInstitutions) {
+    const corruptionImps = (inst.impairments || []).filter((imp) => imp?.type === 'corruption');
+    if (!corruptionImps.length) continue;
+    if (corruptionImps.some((imp) => imp?.covert !== true)) revealed.add(inst.name);
+    else covert.add(inst.name);
+  }
+  return { securityInstitutions, covert, revealed };
+}
+
+/** True when the simulation has ousted the card (the exposure path's write). @param {import('./settlement.schema.js').SimNpc} npc */
+export function isOustedNpc(npc) {
+  return !!npc?.ousted;
+}
