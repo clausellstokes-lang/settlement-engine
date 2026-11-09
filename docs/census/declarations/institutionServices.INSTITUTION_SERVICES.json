@@ -2742,7 +2742,7 @@
     },
     {
       "id": "Weekly market|Tax collection",
-      "text": "Toll collected on goods sold. A percentage to the lord or municipality.",
+      "text": "Toll collected on goods sold. A share goes to the lord or municipality.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3192,7 +3192,7 @@
     },
     {
       "id": "Salt works|Cured goods",
-      "text": "Process fish and meat using produced salt. Vertical integration of the salt operation.",
+      "text": "Process fish and meat using the salt produced here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5489,7 +5489,7 @@
     },
     {
       "id": "Message network (high magic)|Instant messaging",
-      "text": "Near-instant magical message delivery to any node in the network.",
+      "text": "Near-instant magical message delivery to any station on the network.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5593,7 +5593,7 @@
     },
     {
       "id": "Monastery or friary|Education",
-      "text": "Teach reading, writing, and arithmetic. Often the only education available.",
+      "text": "Teach reading, writing, and reckoning. Often the only education available.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5963,7 +5963,7 @@
     },
     {
       "id": "Planar embassy|Extraplanar relations",
-      "text": "Formal diplomatic relations with extraplanar entities and factions.",
+      "text": "Formal diplomatic relations with extraplanar entities and powers.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -6011,7 +6011,7 @@
     },
     {
       "id": "Planar traders|Planar information",
-      "text": "Knowledge of other planes: geography, factions, and dangers.",
+      "text": "Knowledge of other planes: geography, powers, and dangers.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -7497,7 +7497,7 @@
     },
     {
       "id": "Local fence|Sell stolen goods",
-      "text": "Buy stolen items at 20-40% of value. No questions asked.",
+      "text": "Buy stolen items for a fraction of their worth. No questions asked.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -7675,7 +7675,7 @@
     },
     {
       "id": "Palisade or earthworks|Gated entry",
-      "text": "Controlled access through the perimeter. Strangers must state business.",
+      "text": "Controlled access through the perimeter. Anyone entering must state their business.",
       "needs": [
         "gate"
       ],
@@ -8039,7 +8039,7 @@
     },
     {
       "id": "Brothel|Neutral meeting space",
-      "text": "A place where parties from rival factions can meet quietly.",
+      "text": "A place where parties from rival powers can meet quietly.",
       "needs": [],
       "excludes": [],
       "crisis": [],

@@ -348,7 +348,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       const externalMillNote = externalMillOnly
         ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
           'Local food security is maintained but surplus flour cannot be exported: ' +
-          'the mill toll captures any excess. Loss of mill access would break this chain.'
+          'the mill toll takes any surplus. Without the lord\'s mill, there would be no flour at all.'
         : null;
       // An output a chain ties to one processor (`outputsRequiringProcessor`) is printed only
       // where that processor matched: the arena's spectacles need the arena (A-05).

@@ -204,7 +204,7 @@ export const generateAvailableServices = (
     [
       {
         name: 'Dispute resolution (guild)',
-        desc: 'The guild adjudicates conflicts. Their judgment is final; resistance is inadvisable.',
+        desc: 'The guild adjudicates conflicts. Its judgment is final, and resisting it is unwise.',
       },
       {
         name: 'Extortion (structured)',
@@ -212,7 +212,7 @@ export const generateAvailableServices = (
       },
       {
         name: 'Contraband licensing',
-        desc: 'The organization decides what flows through here. Operators without authorization are removed.',
+        desc: 'The organization decides what flows through here. Anyone who moves goods without its leave is removed.',
       },
     ].forEach((item) => {
       if (!buckets.criminal.some((existing) => existing.name === item.name)) {
@@ -231,7 +231,7 @@ export const generateAvailableServices = (
       },
       {
         name: 'Unlicensed enchantment',
-        desc: 'Practitioners working outside guild oversight: cheaper, less traceable, and legally inadvisable.',
+        desc: 'Practitioners working outside guild oversight: cheaper, harder to trace, and against the law.',
       },
       {
         name: 'Magical forgery',
@@ -281,7 +281,7 @@ export const generateAvailableServices = (
       },
       {
         name: 'Front company formation',
-        desc: 'Establish a legitimate face for operations that benefit from appearing above board.',
+        desc: 'Establish a legitimate face for work that needs to look above board.',
       },
     ].forEach((item) => {
       if (!buckets.criminal.some((existing) => existing.name === item.name)) {
@@ -352,7 +352,7 @@ export const generateAvailableServices = (
     );
   }
   if (crimeTypes.has('Organized guild crime')) {
-    addCrimeService('Fence (stolen goods)', 'Move recovered goods, no questions: expect 30-50% of value.', '(thieves guild)');
+    addCrimeService('Fence (stolen goods)', 'Move recovered goods, no questions: expect a third to half of their value.', '(thieves guild)');
   }
   if (crimeTypes.has('Background crime')) {
     addCrimeService(
