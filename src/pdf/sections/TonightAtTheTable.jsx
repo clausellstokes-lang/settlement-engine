@@ -18,10 +18,6 @@ import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 import { CrisisSections } from './CrisisSections.jsx';
-import { plotHookPlace } from '../lib/plotHookIndex.js';
-
-/** The pointer a hook's title carries to its home in the Plot Hooks chapter (label + number follow). */
-export const TONIGHT_HOOK_PLACE = 'In full in Plot Hooks (04):';
 
 /** @param {{ children: string, color: string }} props */
 function Eyebrow({ children, color }) {
@@ -32,12 +28,8 @@ function Eyebrow({ children, color }) {
   );
 }
 
-export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
+export function TonightAtTheTable({ settlement, narrativeMode }) {
   const sheet = composeTonightSheet(settlement);
-  // ⛔ THE KEEP-ON RULE FOR HOOKS (STYLE-0 §3; STYLE-RULINGS-2 B4, 2026-11-09): Plot Hooks (04) keeps
-  // each hook's text; this sheet prints the hook's title and where it sits in chapter 04. A hook with
-  // no title, or one the chapter does not print, keeps its text here. tests/pdf/restoredSubsections.test.js (B4)
-  const placeOf = (h) => (h.source && vm?.hooks?.all ? plotHookPlace(vm.hooks.all, h.text) : null);
   const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
 
   return (
@@ -102,17 +94,14 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
       {sheet.hooks.length > 0 ? (
         <View style={{ marginBottom: space.sm }}>
           <Eyebrow color={palette.gold}>{TONIGHT_COPY.hooks}</Eyebrow>
-          {sheet.hooks.map((h) => {
-            const place = placeOf(h);
-            return (
-              <View key={h.text} style={{ marginBottom: 4, paddingLeft: 8, borderLeft: `2pt solid ${palette.gold}` }} wrap={false}>
-                {h.source ? <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{h.source}</Text> : null}
-                {place
-                  ? <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>{`${TONIGHT_HOOK_PLACE} ${place.label} ${place.number}`}</Text>
-                  : <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>{h.text}</Text>}
-              </View>
-            );
-          })}
+          {/* THE OWNER'S VETO 3 (2026-11-09, "No." to the connective lines): the pointer into Plot Hooks is struck;
+              each hook prints its own text here, the prior state. */}
+          {sheet.hooks.map((h) => (
+            <View key={h.text} style={{ marginBottom: 4, paddingLeft: 8, borderLeft: `2pt solid ${palette.gold}` }} wrap={false}>
+              {h.source ? <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{h.source}</Text> : null}
+              <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>{h.text}</Text>
+            </View>
+          ))}
         </View>
       ) : null}
 

@@ -304,7 +304,8 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            {o.character && !historyPrinted ? 'CHARACTER & ORIGIN' : 'ORIGIN'}
+            {/* THE OWNER'S VETO 3 (2026-11-09, "No." to the ORIGIN heading): the prior label stands, whichever lines print under it. */}
+            CHARACTER & ORIGIN
           </Text>
           {o.character && !historyPrinted ? <Text style={{ ...type.prose, fontSize: pt['9.5'] }}>{o.character}</Text> : null}
           {o.character && historyPrinted ? (

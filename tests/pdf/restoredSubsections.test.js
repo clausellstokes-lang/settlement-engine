@@ -27,7 +27,7 @@ import { Overview } from '../../src/pdf/sections/Overview.jsx';
 import { PlotHooks } from '../../src/pdf/sections/PlotHooks.jsx';
 import { HistoryFounding } from '../../src/pdf/sections/HistoryFounding.jsx';
 import { Cover } from '../../src/pdf/sections/Cover.jsx';
-import { TonightAtTheTable, TONIGHT_HOOK_PLACE } from '../../src/pdf/sections/TonightAtTheTable.jsx';
+import { TonightAtTheTable } from '../../src/pdf/sections/TonightAtTheTable.jsx';
 import { plotHookPlace } from '../../src/pdf/lib/plotHookIndex.js';
 import { stakeLines, unprintedFacts } from '../../src/pdf/lib/crisisPrint.js';
 import { STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
@@ -335,16 +335,17 @@ describe('#19 ViabilityAssessment — MAGIC LEGALITY subsection (liveWorld && ma
 // sentence's full text; every other prints the label, or the label and where to read it. Each case
 // asserts the home still prints the text (so the absence elsewhere is not vacuous).
 describe('B4 — one home per sentence inside one export (the keep-on rules)', () => {
-  it('Tonight prints each hook\'s title and its number in chapter 04; Plot Hooks prints the text', () => {
+  // RE-KEYED BY IDENTITY at SW-B4's merge point (STYLE-2-MERGE, 2026-11-09): THE OWNER'S VETO 3 struck the pointer line
+  // ("In full in Plot Hooks (04):") and the prior state returned — the Tonight sheet prints each hook's own text.
+  it('Tonight prints each hook\'s own text (the owner\'s veto 3: no pointer into chapter 04); Plot Hooks prints it too', () => {
     const sheet = composeTonightSheet(settlement);
     const placed = sheet.hooks.filter((h) => h.source && plotHookPlace(vm.hooks.all, h.text));
     expect(placed.length, 'fixture premise: the sheet carries a titled hook chapter 04 lists').toBeGreaterThan(0);
     const tonight = joined(TonightAtTheTable({ settlement, vm }));
     const hooks = joined(PlotHooks({ settlement, vm }));
     for (const h of placed) {
-      const { label, number } = plotHookPlace(vm.hooks.all, h.text);
-      expect(tonight).toContain(`${TONIGHT_HOOK_PLACE} ${label} ${number}`);
-      expect(tonight).not.toContain(h.text.replace(/\.$/, '')); // anchored: the pointer for this hook is asserted one line above
+      expect(tonight).toContain(h.text.replace(/\.$/, ''));
+      expect(tonight).not.toContain('In full in Plot Hooks'); // anchored: the hook's own text is asserted on the line above
       expect(hooks).toContain(h.text.replace(/\.$/, ''));
     }
   });
@@ -384,7 +385,7 @@ describe('B4 — one home per sentence inside one export (the keep-on rules)', (
     expect(rel.split(line).length - 1, 'the line prints once, on its row').toBe(1);
   });
 
-  it('the untouched houses are one sentence; the two facts print once on the Tonight chapter', () => {
+  it('the untouched houses keep their own rows (the owner\'s veto 3); the two facts print once on the Tonight chapter', () => {
     const u = STAKE_REASONS.untouched;
     const out = stakeLines([
       { factionId: 'The Abbey', stake: 'gains', reason: STAKE_REASONS.gainsChurch },
@@ -392,10 +393,11 @@ describe('B4 — one home per sentence inside one export (the keep-on rules)', (
       { factionId: 'The Garrison', stake: 'split', reason: u },
       { factionId: 'Merchant Guild', stake: 'split', reason: u },
     ]);
-    expect(out.rows.map((k) => k.factionId)).toEqual(['The Abbey']);
-    expect(out.untouched).toBe('Noble Families, The Garrison and Merchant Guild are not touched yet; any of them could side with either camp.');
-    expect(stakeLines([{ factionId: 'Elder Council', stake: 'split', reason: u }]).untouched)
-      .toBe('Elder Council is not touched yet; it could side with either camp.');
+    // RE-KEYED BY IDENTITY at SW-B4's merge point (STYLE-2-MERGE, 2026-11-09): THE OWNER'S VETO 3 struck the joined
+    // sentence for the untouched houses; the prior state returned — every house keeps its own row.
+    expect(out.rows.map((k) => k.factionId)).toEqual(['The Abbey', 'Noble Families', 'The Garrison', 'Merchant Guild']);
+    expect(out.untouched).toBeNull();
+    expect(stakeLines([{ factionId: 'Elder Council', stake: 'split', reason: u }]).rows.map((k) => k.factionId)).toEqual(['Elder Council']);
     const facts = [{ id: 'food', label: 'Food', text: 'Pressured.' }, { id: 'defence', label: 'Defence', text: 'Palisade.' }];
     expect(unprintedFacts(facts, [{ id: 'food', text: 'Pressured.' }]).map((f) => f.id)).toEqual(['defence']);
   });

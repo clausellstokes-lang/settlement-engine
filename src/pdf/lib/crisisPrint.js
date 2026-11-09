@@ -4,27 +4,20 @@
  * src/foundry/journalPages.js), so the two cannot drift. Display only: the composer
  * (domain/crisis/crisisPage.js) and the record are untouched.
  */
-import { STAKE_REASONS } from '../../domain/crisis/crisisCast.js';
-
 /**
- * ⛔ THE STAKES ROWS, ONE SENTENCE FOR ALL UNTOUCHED HOUSES (STYLE-0 §3, approved STYLE-RULINGS §1(c)
+ * ⛔ THE STAKES ROWS, ONE ROW PER HOUSE (veto 3; STYLE-0 §3, approved STYLE-RULINGS §1(c)
  * 2026-11-07, applied by STYLE-RULINGS-2 B4 2026-11-09): every house the crisis has not touched printed
  * its own row with the same words ("{house}: split. not touched yet; it could side with either camp."),
- * four to six times on a town or city page. The houses with a stake keep their rows; the untouched
- * ones are named together in one sentence, the same fact. tests/pdf/restoredSubsections.test.js (B4)
+ * four to six times on a town or city page. B4 named the untouched ones together in one sentence; the
+ * owner vetoed that connective line (veto 3) and every house keeps its own row. tests/pdf/restoredSubsections.test.js
  * @param {Array<{ factionId: string, stake: string, reason: string }>} stakes
  * @returns {{ rows: typeof stakes, untouched: string | null }}
  */
 export function stakeLines(stakes) {
-  const isUntouched = (k) => k.reason === STAKE_REASONS.untouched;
-  const names = stakes.filter(isUntouched).map((k) => k.factionId);
-  const rows = stakes.filter((k) => !isUntouched(k));
-  if (!names.length) return { rows, untouched: null };
-  const list = names.length === 1 ? names[0] : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
-  const untouched = names.length === 1
-    ? `${list} is not touched yet; it could side with either camp.`
-    : `${list} are not touched yet; ${names.length === 2 ? 'either of them' : 'any of them'} could side with either camp.`;
-  return { rows, untouched };
+  // THE OWNER'S VETO 3 (2026-11-09, "No." to the connective lines; the chair's ruling of 08:1x, applied by
+  // STYLE-2-MERGE at SW-B4's point): the joined sentence for the untouched houses is struck and the prior
+  // state returns — every house keeps its own row. The shape { rows, untouched } stays for both exports.
+  return { rows: stakes, untouched: null };
 }
 
 /**
