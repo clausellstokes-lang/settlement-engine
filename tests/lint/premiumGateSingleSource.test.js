@@ -117,13 +117,11 @@ const REASON_CLASSES = {
 const EXEMPTIONS = {
   'src/App.jsx': 'route-guard',
   'src/AppViews.jsx': 'route-guard',
-  // R-5b: was 'documented-divergence' (npcAuthoringAllowed). That divergence is
-  // CLOSED — npcAuthoringAllowed now reads viewerCanAuthor, and the file is
-  // asserted below as a consumer of the single source. The row does NOT retire
-  // outright, because one raw comparison remains and asks a DIFFERENT question:
-  // `viewerIsPremium` (OutputContainer.jsx) gates War & Faith tab PRESENCE and
-  // deliberately omits the founder tier.
-  'src/components/OutputContainer.jsx': 'content-visibility',
+  // ⬇ TIER-PARITY-FIX V2 (2026-11-09, the owner's tier law) STRUCK the OutputContainer row.
+  // R-5b had kept it for one raw comparison, `viewerIsPremium`, the War & Faith tab-PRESENCE
+  // gate; V1 moved the War tone and the Relationships truth onto the view, and V2 the Faith
+  // tab's presence onto the embed and the view, so the read is DELETED and the file is a
+  // plain consumer of the single source (asserted below). The census shrinks by one.
   'src/components/PricingPage.jsx': 'sell-to-the-tier',
   'src/components/PurchaseModal.jsx': 'sell-to-the-tier',
   'src/components/SettlementsPanel.jsx': 'campaign-or-import-entitlement',

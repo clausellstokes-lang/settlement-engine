@@ -104,11 +104,16 @@ describe('FaithSection — tier gating', () => {
     expect(container.textContent).not.toMatch(/Awaken the pantheon/i);
   });
 
-  it('PREMIUM + a latent-only settlement (activation not fired) renders nothing — never the latent name', () => {
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V2, 2026-11-09, the owner's tier law): the HIDDEN
+  // mode withheld the engine-made faith line from premium. The constitutional claim — never
+  // the latent name — is the pin's cause and stays; the premium owner now reads the same
+  // nameless line the free owner reads, without the upsell.
+  it('PREMIUM + a latent-only settlement (activation not fired) reads the nameless faith line — never the latent name, no upsell', () => {
     useStore.__set({ auth: { tier: 'premium' } });
     const { container } = render(<FaithSection settlement={latentOnly()} />);
-    expect(container.firstChild).toBeNull();
-    expect(container.textContent).not.toContain(LATENT_NAME);
+    expect(screen.getByTestId('faith-teaser')).toBeTruthy();
+    expect(container.textContent).not.toContain(LATENT_NAME); // anchored: the teaser above rendered
+    expect(screen.queryByTestId('faith-upsell')).toBeNull();
   });
 
   it('an active patron renders the READ-ONLY panel to EVERYONE (a shared premium pantheon)', () => {

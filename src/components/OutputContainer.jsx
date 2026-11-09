@@ -273,15 +273,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // Pricing-moment opener — the recovery CTA on the insufficient-credits AI
   // error surfaces the pricing moment through DossierSessionNotices. (B1.)
   const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
-  // Phase 5 W4e — War & Faith tab presence inputs. Viewer tier + campaign
-  // membership decide whether the tab (war half + the GATED faith half) has
-  // anything to show. These gate PRESENCE, not content — they never read the live
-  // pantheon; faith content stays behind FaithSection's premium seam.
-  const viewerIsPremium = useStore(s => s.auth?.tier === 'premium' || (typeof s.isElevated === 'function' ? s.isElevated() : false));
   // The AUTHORING authority (premium / founder / elevated), read from the ONE
-  // spelling in src/lib/viewerAuthority.js — see npcAuthoringAllowed below. A
-  // DIFFERENT question from viewerIsPremium above, which gates War & Faith tab
-  // PRESENCE and deliberately omits the founder tier.
+  // spelling in src/lib/viewerAuthority.js — see npcAuthoringAllowed below.
+  // (TIER-PARITY-FIX, 2026-11-09: the `viewerIsPremium` presence read that sat here is
+  // DELETED — the War tone and Relationships truth key on the view (V1), the Faith tab's
+  // presence on the embed and the view (V2).)
   const viewerMayAuthor = useStore(viewerCanAuthor);
   const inCampaign = useStore(s => (saveId && typeof s.isSettlementClockBound === 'function') ? s.isSettlementClockBound(saveId) : false);
   // Lifecycle-stage input — top-level draft|canon phase enum. (A2.)
@@ -526,13 +522,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   });
   // §805 — the split presences. WAR is a campaign story: the tab registers only
   // for a clock-bound settlement (content self-gates to honest absence inside).
-  // FAITH keeps the old faith-half law exactly: it renders SOMETHING unless the
-  // viewer is premium/elevated with no deity embed (FaithSection's HIDDEN mode):
-  // an embed → the read-only panel for all; a non-premium owner → the generic
-  // teaser (names NO deity). Premium + deity-free ⇒ no tab; a public deity-free
-  // dossier stays clean. Presence is tier-gated the SAME way FaithSection's
-  // CONTENT is — it never leaks a name.
-  const hasFaithTab = !!(deityEmbed && typeof deityEmbed === 'object') || (!viewerIsPremium && !publicDossier);
+  // FAITH (TIER-PARITY-FIX V2, the owner's tier law, 2026-11-09): presence by the VIEW and
+  // the DATA, never the tier — an embed → the read-only panel for all; otherwise every owner
+  // view carries the engine-made faith line (names NO deity); a public deity-free dossier
+  // stays clean. FaithSection's HIDDEN mode, which withheld the line from premium, is retired.
+  const hasFaithTab = !!(deityEmbed && typeof deityEmbed === 'object') || !publicDossier;
   // THE CRISIS TAB (the owner, 2026-11-03: "the tab only appears when there is a crises"): registered
   // only while a stress entry is active, for the DM alone (its cast names who exploits and who is
   // blamed), painted with the criminal mark. The presence read stays inline: the page's composer

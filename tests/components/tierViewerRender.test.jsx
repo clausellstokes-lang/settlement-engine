@@ -110,9 +110,6 @@ function withoutUpsell(html) {
   return html.replace(/<div data-testid="faith-upsell"[\s\S]*?Awaken the pantheon →[\s\S]*?<\/button><\/div>/, '');
 }
 
-/** V2 (the Faith tab) is its own cause commit; its arms join there. */
-const V2_PENDING = new Set(['faith']);
-
 const TOWNS = [];
 const MODS = {};
 beforeAll(async () => {
@@ -134,7 +131,7 @@ describe('at birth, free ≡ premium on every dossier tab (the twelve soak towns
       for (const id of TAB_IDS) {
         const free = htmlToText(withoutUpsell(renderTab(id, s, VIEWERS.free)));
         const premium = htmlToText(withoutUpsell(renderTab(id, s, VIEWERS.premium)));
-        if (free !== premium && !V2_PENDING.has(id)) diffs.push(`town ${i} ${id}`);
+        if (free !== premium) diffs.push(`town ${i} ${id}`);
       }
     });
     expect(diffs).toEqual([]);
@@ -148,6 +145,33 @@ describe('at birth, free ≡ premium on every dossier tab (the twelve soak towns
       }
     });
   });
+});
+
+describe('the Faith tab is present for the free and the premium owner alike (V2)', () => {
+  async function tabIdsFor(s, view) {
+    window.matchMedia = vi.fn((query) => ({ media: query, matches: false, addEventListener: () => {}, removeEventListener: () => {}, addListener: () => {}, removeListener: () => {} }));
+    setViewer(view, { settlement: s });
+    vi.resetModules();
+    const OutputContainer = (await import('../../src/components/OutputContainer.jsx')).default;
+    const { container, unmount } = render(React.createElement(OutputContainer, { settlement: s, saveId: 'home' }));
+    await screen.findAllByRole('tab', { name: /Overview/ });
+    fireEvent.click(screen.getByRole('tab', { name: 'World' }));
+    await screen.findAllByRole('tab', { name: /War/ });
+    const ids = [...container.querySelectorAll('[role="tab"]')].map((t) => t.id);
+    unmount();
+    return ids;
+  }
+  it('twelve towns: sf-tab-faith registers for both owners', async () => {
+    const missing = [];
+    for (let i = 0; i < TOWNS.length; i += 1) {
+      for (const [name, view] of [['free', VIEWERS.free], ['premium', VIEWERS.premium]]) {
+        const ids = await tabIdsFor(TOWNS[i], view);
+        expect(ids).toContain('sf-tab-war'); // anchored: the World strip rendered
+        if (!ids.includes('sf-tab-faith')) missing.push(`town ${i} ${name}`);
+      }
+    }
+    expect(missing).toEqual([]);
+  }, 240000);
 });
 
 // ── THE PLANTED TRUTH (V1) — the War tab's DM truth on a campaign the owner holds ──────────────
