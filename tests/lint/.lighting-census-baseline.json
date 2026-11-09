@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d0d046029eda9292faa49eca15ae0e4190577a4f",
-  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR4 merge point)",
+  "measuredAtSha": "42ecf2e045b13eb3745cb0ddf7a6f6d0ddeb0cbe",
+  "measuredBy": "SW-10 HOOKS (lane/style-2-hooks-2026-11-09)",
   "date": "2026-11-09",
-  "note": "car 4 composed: the goals, the title secrets, write-goals and write-people-3 suites",
-  "files": 3138,
+  "note": "two new test files: tests/domain/dossier/conflictHookPlural.test.js (ce61aa3f5, the conflict hooks plural grammar, 3 titles) and tests/generators/people/personHookSpread.test.js (4ba2a241d..2a1051b81, the person hook pools, 2 titles)",
+  "files": 3140,
   "parked": 387,
-  "credited": 2751,
-  "titles": 28822,
-  "suiteTitles": 7752
+  "credited": 2753,
+  "titles": 28827,
+  "suiteTitles": 7754
 }
