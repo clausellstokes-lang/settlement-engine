@@ -177,6 +177,15 @@ const RULED = Object.freeze({
     'card — a ResourceChainCard, the partial variant of the same card.',
   'src/components/new/tabs/ResourcesTab.jsx :: fullExploited':
     'card — a ResourceChainCard, the fully-worked variant of the same card.',
+  // THE DM VIEW (ALLEGIANCE-CAR3, 2026-11-08; the allegiance design §9), the Power tab's DM panel:
+  'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: view.answers':
+    'card — a criminal power or house with its boss line and its handlers nested beneath.',
+  'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: g.handlers':
+    'card — a handler with its agents nested beneath.',
+  'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: h.agents':
+    'prose — the row carries the agent, its title, its house, what it brings and the tie in words.',
+  'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: view.fronts':
+    'prose — the row carries the house, its face, the guild it fronts for and its handler.',
   'src/components/new/tabs/power/PowerStrata.jsx :: ranked':
     'inline-run — a power\'s first, second and third run inline after its member count on one line (PEOPLE-5A).',
   'src/components/new/tabs/power/PowerStrata.jsx :: roster':

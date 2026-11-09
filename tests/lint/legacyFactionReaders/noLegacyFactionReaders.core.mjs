@@ -54,7 +54,8 @@ export const OTHER_SHAPES = Object.freeze({
   'src/foundry/journalPages.js': 'vm.power', 'src/generators/aiLayer.js': 'power labels',
   'src/generators/density/densityRoll.js': 'the band', 'src/generators/historyGenerator.js': 'a tension',
   'src/generators/power/economyReconciliation.js': 'the power projection', 'src/generators/power/governanceNarrative.js': 'the powers (param)',
-  'src/pdf/lib/viewModel.js:334': 'a tension', 'src/pdf/lib/viewModel.js:497': 'a tension', 'src/pdf/lib/viewModel.js:679': 'a tension',
+  // re-keyed by identity 334/497/679 -> 342/505/687 (ALLEGIANCE-CAR3: the same three tension reads, moved 8 lines by the DM view's import and opt-in)
+  'src/pdf/lib/viewModel.js:342': 'a tension', 'src/pdf/lib/viewModel.js:505': 'a tension', 'src/pdf/lib/viewModel.js:687': 'a tension',
   'src/pdf/sections/PowerStructure.jsx': 'vm.power',
   // density plan / ladder rows that PEOPLE-1 retires with the roster (kept so the draft is exact at the base):
   'src/generators/density/applyDensityLaw.js:269': 'the density plan', 'src/generators/density/applyDensityLaw.js:375': 'a powerStructure copy',
