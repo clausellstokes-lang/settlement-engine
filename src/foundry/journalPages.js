@@ -32,6 +32,9 @@ import {
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
 import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
+// ⛔ ONE HOME PER SENTENCE (STYLE-0 §3's keep-on rules, applied by STYLE-RULINGS-2 B4, 2026-11-09):
+// the crisis page's two print rules are the PDF's, from one module.
+import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import { displayTradeList, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
@@ -90,7 +93,7 @@ function notableNpcs(sorted) {
 
 // ── page builders (each: vm → markdown string or null) ──────────────────────
 
-function overviewPage(vm) {
+function overviewPage(vm, { historyPrinted = true } = {}) {
   const o = vm.overview; const id = vm.identity;
   return md(
     lede(overviewHeadline(o, id)),
@@ -108,7 +111,9 @@ function overviewPage(vm) {
     o.arrivalScene ? md('', '## Arrival', `> ${esc(o.arrivalScene)}`) : null,
     o.pressureSentence ? md('', `*${esc(o.pressureSentence)}*`) : null,
     o.settlementReason ? md('', '## Why this place exists', esc(o.settlementReason)) : null,
-    o.character ? md('', '## Character', esc(o.character)) : null,
+    // The historical character prints once per journal: on the History page where the variant has
+    // one, else here (the keep-on rule; the chair's B4 ruling (2), 2026-11-09).
+    !historyPrinted && o.character ? md('', '## Character', esc(o.character)) : null,
   );
 }
 
@@ -136,16 +141,22 @@ function statePage(vm) {
  * in, not read off `vm.raw`: the two are the same object, but a composer handed `vm.raw` reads
  * as fed by two record shapes, which hides its reads from the observed-shape instrument.
  */
-function tonightPage(settlement) {
+function tonightPage(settlement, vm) {
   const sheet = composeTonightSheet(settlement);
+  // ⛔ THE KEEP-ON RULE FOR HOOKS (B4): the Plot Hooks page keeps each hook's text; this page prints
+  // the hook's title and where to read it. A hook with no title, or one the Plot Hooks page does
+  // not list, keeps its text here. (The heading it sits under is not named: those headings are
+  // SW-8's labels, one of them the retired word.)
+  const hookLine = (h) => (h.source && plotHooksListed(vm, h.text)
+    ? `- **${esc(h.source)}**: in full on the Plot Hooks page.`
+    : `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`);
   const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
   return md(
     sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
     sheet.people.length ? md('', `## ${TONIGHT_COPY.people}`, sheet.people.map(p =>
       `- **${esc(p.name)}** (${esc([p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${!printsAsWant(p) ? esc([secretLeadOf(p), p.line].filter(Boolean).join(' ')) : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${esc(p.sameAs)}.` : `${TONIGHT_COPY.wants} ${esc(p.line)}`}` : ''}`)) : null,
     sheet.facts.length ? md('', `## ${TONIGHT_COPY.facts}`, sheet.facts.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
-    sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(h =>
-      `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`)) : null,
+    sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(hookLine)) : null,
   ) || null;
 }
 
@@ -157,12 +168,17 @@ function tonightPage(settlement) {
 function crisisJournalPage(settlement) {
   const sections = composeCrisisPage(settlement);
   if (!sections.length) return null;
-  return md(...sections.map(s => md(
+  // The two facts print once, on the Tonight page this page rides; the untouched houses are one
+  // sentence (the PDF's rules, pdf/lib/crisisPrint.js; B4).
+  const printedFacts = composeTonightSheet(settlement).facts;
+  return md(...sections.map(s => ({ ...s, stakeLines: stakeLines(s.stakes), seeFirst: unprintedFacts(s.seeFirst, printedFacts) })).map(s => md(
     '', `## ${esc(s.line)}`,
     s.summary ? esc(s.summary) : null,
     '', `### ${CRISIS_PAGE_COPY.cast}`,
     s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.name)}. ${esc(r.reason)}.`) : `- ${CRISIS_PAGE_COPY.nobody}`,
-    s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`, s.stakes.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`)) : null,
+    s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`,
+      s.stakeLines.rows.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
+      s.stakeLines.untouched ? `- ${esc(s.stakeLines.untouched)}` : null) : null,
     '', `### ${CRISIS_PAGE_COPY.levers}`,
     s.levers.length ? s.levers.map(l => `- ${esc(l.institution)}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
     s.seeFirst.length ? md('', `### ${CRISIS_PAGE_COPY.seeFirst}`, s.seeFirst.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
@@ -196,7 +212,8 @@ function notableNpcPage(n) {
     n.motivation ? md('', '## Wants', esc(n.motivation)) : null,
     n.secrets.length ? md('', '## Secrets (GM only)', n.secrets.map(s =>
       bullet(typeof s === 'string' ? s : (s.text || s.description || s.what || '')))) : null,
-    n.plotHooks.length ? md('', '## Hooks', n.plotHooks.map(h => bullet(hookText(h)))) : null,
+    // ⛔ An NPC's hooks print on the Plot Hooks page only, under People (the PDF's VERIFIER N6 rule
+    // and STYLE-0 §3's keep-on rule; STYLE-RULINGS-2 B4, 2026-11-09).
     n.relationships.length ? md('', '## Relationships', n.relationships.map(r =>
       bullet(typeof r === 'string' ? r : `${r.with || r.target || r.name || ''}${r.type ? `: ${r.type}` : ''}${r.description ? `. ${r.description}` : ''}`)) ) : null,
   ) || null;
@@ -204,6 +221,12 @@ function notableNpcPage(n) {
 
 /** The hook groups a reader knows, for the catalogue's category keys. */
 const HOOK_GROUP_WORDS = Object.freeze({ npc: 'People', npcs: 'People' });
+
+/** True when the Plot Hooks page lists a hook with this text. */
+function plotHooksListed(vm, text) {
+  const k = (t) => String(t ?? '').replace(/\s+/g, ' ').trim().replace(/[.!?]+$/, '').toLowerCase();
+  return !!k(text) && (vm?.hooks?.all || []).some((h) => k(hookText(h.hook)) === k(text));
+}
 
 function plotHooksPage(vm) {
   const all = vm.hooks.all || [];
@@ -232,7 +255,8 @@ function powerPage(vm) {
     '',
     kv('Government', p.governmentType),
     kv('Stability', typeof p.stability === 'object' ? (p.stability?.label ?? p.stability?.value) : p.stability),
-    p.legitimacy?.score != null ? kv('Public legitimacy', p.legitimacy.score) : null,
+    // The band in words, not the score (the machinery off the reader's page; B4).
+    p.legitimacy?.label ? kv('Public legitimacy', cap(p.legitimacy.label)) : null,
     p.factions.length ? md('', '## Factions', p.factions.map(f =>
       // No "power N": the score is the engine's, not the reader's (the owner's style law of 2026-11-07).
       `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
@@ -358,6 +382,8 @@ function historyPage(vm) {
   const f = h.founding || {};
   return md(
     lede(historyHeadline(h)),
+    // The historical character's one home in the journal, as in the PDF (the keep-on rule; B4).
+    h.historicalCharacter ? md('', esc(h.historicalCharacter)) : null,
     '',
     kv('Age', h.age),
     kv('Founded by', f.foundedBy),
@@ -423,8 +449,9 @@ function faithWarPage(vm) {
   if (!lw) return null;
   const deity = lw.deity;
   return md(
-    kv('Posture', lw.posture ? `${lw.posture.label} (aggression ×${lw.posture.value.toFixed(2)})` : null),
-    lw.exhaustion ? kv('War-weary', `${cap(lw.exhaustion.band)} (${lw.exhaustion.value.toFixed(2)})`) : null,
+    // The bands in words; the multiplier and the exhaustion figure are the engine's (B4).
+    kv('Posture', lw.posture ? lw.posture.label : null),
+    lw.exhaustion ? kv('War-weary', cap(lw.exhaustion.band)) : null,
     lw.standing ? kv('Standing', `${lw.standing.wins}W / ${lw.standing.losses}L (net ${lw.standing.score > 0 ? '+' : ''}${lw.standing.score})`) : null,
     (lw.besiegingTargets || []).length ? kv('At war', `its army besieges ${lw.besiegingTargets.join(', ')}`) : null,
     (lw.besiegedBy || []).length ? kv('Under siege', `${lw.besiegedBy.join(', ')} at the walls`) : null,
@@ -492,9 +519,9 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
     if (trimmed) pages.push({ name, markdown: trimmed });
   };
 
-  if (inc('overview'))            push('Overview', overviewPage(vm));
+  if (inc('overview'))            push('Overview', overviewPage(vm, { historyPrinted: inc('historyFounding') }));
   if (inc('systemState'))         push('Settlement State', statePage(vm));
-  if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(settlement));
+  if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(settlement, vm));
   if (inc('tonightAtTheTable'))   push(CRISIS_PAGE_COPY.tab, crisisJournalPage(settlement));
   if (inc('npcQuickRef'))         push('NPC Quick Reference', npcQuickRefPage(vm));
   if (inc('notableNpcs')) {

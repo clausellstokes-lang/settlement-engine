@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 196,
+      "dated": 197,
       "sha-pin": 2,
       "tree": 160
     },
@@ -442,7 +442,9 @@
     "_rosterGrowth2026-11-09-style-2-first-impressions": "ONE document JOINED the roster by being BORN into it (STYLE-2 FIRST-IMPRESSIONS, seat SW-B2, session session_01FbPLbd5cdXFca6ZZpkx8ET, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-first-impressions-2026-11-09 cut from the integration tip 0c93f0ca0, measured once with this walker's own arm): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-FIRST-IMPRESSIONS-2026-11-09.md (the seat's record), born dated. A GROWTH, not a re-classification. The `tree` arm (139 at this file, 147 measured) is red at the base by MERGE-WAVE's in-flight records and is NOT touched here.",
     "_rosterGrowth2026-11-08-merge-wave-fix-arrow":"THE UNION AT THE FIX-ARROW-SECTIONS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 167 -> 168 (docs/chair/2026-11-08/FIX-ARROW-SECTIONS-RECORD-2026-11-08.md); the count measured once by the walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-swb2": "THE UNION AT THE SW-B2 FIRST-IMPRESSIONS MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 195 -> 196 (docs/chair/2026-11-09/STYLE-2-FIRST-IMPRESSIONS-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-record-7": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 159 -> 160, docs/shift-records/2026-11-09-style-2-merge-7-swb2.json, record 7, born into the tree class; measured once by this walker; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-record-7": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 159 -> 160, docs/shift-records/2026-11-09-style-2-merge-7-swb2.json, record 7, born into the tree class; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-pdf-foundry": "ONE document JOINED the roster by being BORN into it (seat SW-B4 PDF-FOUNDRY, session session_01FbPLberW9uzNRqfNQgEeEJ, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-pdf-foundry-2026-11-09 cut from the integration tip 0c93f0ca0): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-PDF-FOUNDRY-2026-11-09.md, the lane's record, born dated; the count measured once by this walker's own arm; nothing changed class. The `tree` arm is red at the base by MERGE-WAVE's in-flight records and is not touched here.",
+    "_rosterGrowth2026-11-09-style-2-merge-swb4": "THE UNION AT THE SW-B4 PDF-FOUNDRY MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 196 -> 197 (docs/chair/2026-11-09/STYLE-2-PDF-FOUNDRY-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class."
   },
   "rows": []
 }

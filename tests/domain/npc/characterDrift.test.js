@@ -1027,9 +1027,13 @@ describe('THE AUTHORED CORE HAS ONE READER — and this census is what makes it 
       // ── NOT A SOUL: the SETTLEMENT's authored `character` PROSE field. A different
       //    key on a different record that happens to share a word, carried by three
       //    presentation surfaces. Enrolled so the census is TOTAL rather than scoped.
+      //    RE-COUNTED BY CAUSE (STYLE-RULINGS-2 B4 and the chair's ruling (2), 2026-11-09): the
+      //    settlement's historical character prints ONCE PER EXPORT — on History where the variant has
+      //    it, else on the Overview in full — so the Overview reads the key to choose (5: was 3) and the
+      //    Foundry Overview page reads it only when the journal carries no History page (2, unchanged).
       'src/components/organic/samples/DossierSample.jsx': 1,
       'src/foundry/journalPages.js': 2,
-      'src/pdf/sections/Overview.jsx': 3,
+      'src/pdf/sections/Overview.jsx': 5,
     };
     expect(readCensus()).toEqual(CENSUS);
   });

@@ -9,6 +9,8 @@
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, space, pt } from '../theme.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../../domain/crisis/crisisPage.js';
+// One home per sentence on the crisis page (B4): shared with the Foundry journal's crisis page.
+import { stakeLines, unprintedFacts } from '../lib/crisisPrint.js';
 
 /** @param {{ children: string }} props */
 function Label({ children }) {
@@ -20,23 +22,24 @@ function Line({ children }) {
   return <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>{children}</Text>;
 }
 
-export function CrisisSections({ settlement }) {
+export function CrisisSections({ settlement, printedFacts = [] }) {
   const sections = composeCrisisPage(settlement);
   if (!sections.length) return null;
   return (
     <View style={{ marginBottom: space.sm }}>
-      {sections.map((s) => (
+      {sections.map((s) => ({ s, stakes: stakeLines(s.stakes), seeFirst: unprintedFacts(s.seeFirst, printedFacts) })).map(({ s, stakes, seeFirst }) => (
         <View key={s.id} style={{ marginBottom: space.sm, padding: 6, borderLeft: `2pt solid ${palette.bad}` }}>
           <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10.5'] }}>{s.line}</Text>
           {s.summary ? <Line>{s.summary}</Line> : null}
           <Label>{CRISIS_PAGE_COPY.cast}</Label>
           {s.cast.length ? s.cast.map((r) => <Line key={`${r.role}-${r.id}`}>{`${r.roleLabel}: ${r.name}. ${r.reason}.`}</Line>) : <Line>{CRISIS_PAGE_COPY.nobody}</Line>}
           {s.stakes.length ? <Label>{CRISIS_PAGE_COPY.stakes}</Label> : null}
-          {s.stakes.map((k) => <Line key={k.factionId}>{`${k.factionId}: ${CRISIS_PAGE_COPY.stake[k.stake]}. ${k.reason}.`}</Line>)}
+          {stakes.rows.map((k) => <Line key={k.factionId}>{`${k.factionId}: ${CRISIS_PAGE_COPY.stake[k.stake]}. ${k.reason}.`}</Line>)}
+          {stakes.untouched ? <Line>{stakes.untouched}</Line> : null}
           <Label>{CRISIS_PAGE_COPY.levers}</Label>
           {s.levers.length ? s.levers.map((l) => <Line key={l.institution}>{l.holderName ? `${l.institution}, held by ${l.holderName}.` : `${l.institution}.`}</Line>) : <Line>{CRISIS_PAGE_COPY.noLevers}</Line>}
-          {s.seeFirst.length ? <Label>{CRISIS_PAGE_COPY.seeFirst}</Label> : null}
-          {s.seeFirst.map((f) => <Line key={f.id}>{`${f.label}: ${f.text}`}</Line>)}
+          {seeFirst.length ? <Label>{CRISIS_PAGE_COPY.seeFirst}</Label> : null}
+          {seeFirst.map((f) => <Line key={f.id}>{`${f.label}: ${f.text}`}</Line>)}
           {s.ifNothingIsDone ? <Label>{CRISIS_PAGE_COPY.ifNothing}</Label> : null}
           {s.ifNothingIsDone ? <Line>{s.ifNothingIsDone}</Line> : null}
         </View>

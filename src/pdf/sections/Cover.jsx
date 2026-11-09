@@ -186,8 +186,12 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
           <View style={{ flexDirection: 'row', gap: 6 }}>
             {/* Founder Edition mark — small parchment-gold pill, sits
                 to the left of the AI badge when both are present so
-                "Founder + AI" reads naturally rather than stacking. */}
-            {isFounder && (
+                "Founder + AI" reads naturally rather than stacking.
+                ⛔ ONE TIER WORD PER COVER (STYLE-RULINGS-2 B1(d), 2026-11-09): an anonymous export
+                is the free preview, and a founder is a signed-in account, so the two never name
+                one export; where a caller passes both, the cover prints the preview's word and
+                not this pill. tests/pdf/restoredSubsections.test.js (B4) */}
+            {isFounder && !isAnonymous && (
               <View
                 style={{
                   paddingHorizontal: 10, paddingVertical: 4,
