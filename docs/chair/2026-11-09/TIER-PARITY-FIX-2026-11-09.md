@@ -93,7 +93,21 @@ New red-first tests: `tierViewerRender` (12 towns × 4 viewers), `aiChronicleApp
 
 ## §8 The first-paint ceiling (STOP)
 
-`verify:dist`'s `vendorPdfLazy` Brotli row: the lane's entry closure measures 288,472 B against the budget of 288,452 B, which the base meets exactly (288,452 B, measured the same way at 2053a809c). The +20 B are all in the eager entry chunk `index-*.js` (128,131 → 128,151 B Brotli); every other closure chunk is byte-equal. Attribution: PENDING the bisect (this section is completed in the hand-back commit).
+`verify:dist`'s `vendorPdfLazy` Brotli row: the lane's entry closure measures 288,472 B against the budget of 288,452 B, which the base meets exactly (288,452 B, measured the same way at 2053a809c). The +20 B are all in the eager entry chunk `index-*.js` (128,131 → 128,151 B Brotli); every other closure chunk is byte-equal.
+
+THE BISECT (each point a fresh `npm run build` in a clean scratch worktree, the closure measured by the walker's own `entryTransferMeasurement`):
+
+| After commit | Closure Brotli (B) | vs budget 288,452 |
+|---|---|---|
+| base 2053a809c | 288,452 | 0 |
+| 0b355449c (V1–V5) | 288,370 | −82 |
+| a5fbd8241 (V6 en.js) | 288,252 | −200 |
+| f82e3c252 (V6 landing, six characters) | 288,440 | −12 |
+| 1180defb1 (the cap keep path) | 288,374 | −78 |
+| 82b8fbe0a (the Surveyor client, with the regen and HowToUse and email commits before it) | 288,153 | −299 |
+| 7d53efb2e (the Surveyor copy) | 288,472 | **+20** |
+
+The walk is not monotonic: a six-character copy edit moved the entry by +188 B. Most of the movement is the entry chunk's import map re-hashing every lazy chunk's name, which Brotli compresses differently each build. The commit that CROSSES is the Surveyor copy (+319 B on its parent; the landing Surveyor card's added "with Cartographer" is the eager part of it). This is a STOP under the brief: the chair is told, with the default that the +20 B is recorded as bytes OWED (the standard's zero-slack rule) and re-measured by the merge seat at the composed tip, where the train's cars re-hash the same import map.
 
 ## §9 CONFIRMED against PLAUSIBLE
 
