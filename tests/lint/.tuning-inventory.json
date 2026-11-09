@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "32c48e727171dc4eba2bc02da7965c36f7f24f0f",
-  "measuredBy": "STYLE-2-MERGE-2",
+  "measuredAtSha": "545285100bd7c6c6dac6de36b8cac7e2c85447d9",
+  "measuredBy": "STYLE-2-MERGE-4 (session_01FbPLbbT4fy8G4nTurhnGb3)",
   "date": "2026-11-09",
-  "note": "STYLE-2-MERGE-2 at the SW-12 PULSE-LINES merge point (point 18, 3f5cb1ff8): car 4 composed with SW-12 (institutionLifecycle struck its two odds lines and their bare 0.5s, eff5e88da)",
+  "note": "STYLE-2-MERGE point 23, the SW-B7b PROJECTION merge (7f352715b, merge 545285100): the inventory re-frozen at the merged tip; the dependents moved with the lane own desk-read modules (its ed60842de and 0df619ac6 on its lane); no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1083,7 +1083,7 @@
         "value": 0.15
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1098,7 +1098,7 @@
         "value": 3
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1113,7 +1113,7 @@
         "value": 0.35
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1128,7 +1128,7 @@
         "value": 0.08
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1143,7 +1143,7 @@
         "value": 0.15
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1158,7 +1158,7 @@
         "value": 0.25
       },
       "dependents": [
-        "src/components/new/tabs/OverviewTab.jsx",
+        "src/components/new/stressorsDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1697,7 +1697,7 @@
         "NATURAL_ENEMY.gate": 0.55
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
@@ -2303,7 +2303,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 112,
+      "line": 132,
       "spanDigest": "00c0e1f99fc53d650cd628cdac047d1e9e3d7d94218abe8ed2eed18c7a49b8ea",
       "leaves": {
         "value": 18
@@ -3112,7 +3112,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 77,
+      "line": 80,
       "spanDigest": "c660c4758dad012b0bbbd9b49c030a7f5bfad7dad7e6ef335e7c301b4857ce76",
       "leaves": {
         "SCORE_LOW": 40,
