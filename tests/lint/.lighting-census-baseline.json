@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "7348f10c0630b8487a3d351a9f34c61ec8ed2a69",
-  "measuredBy": "STYLE-2-MERGE (SW-11 PULSE-CARD merge point)",
+  "measuredAtSha": "29cd6817760a8ee4d9be330aad3903fa4a19bf15",
+  "measuredBy": "STYLE-2-MERGE (FIX-PULSE-DEFECTS merge point)",
   "date": "2026-11-09",
-  "note": "SW-11's two pin files and its re-keyed pulse pins, carried by the merge",
+  "note": "FIX-PULSE-DEFECTS' red-first pins, carried by the merge",
   "files": 3148,
   "parked": 387,
   "credited": 2761,
-  "titles": 28892,
+  "titles": 28897,
   "suiteTitles": 7773
 }
