@@ -251,10 +251,11 @@ export function criticalIssuesOf(v) {
  * @returns {any[]}
  */
 export function byDesignItemsOf(v, s) {
-  return [
+  /** @type {any[]} */ const rows = [
     ...arr(v?.issues).filter((i) => i?.severity === 'by_design'),
-    ...arr(s?.structuralViolations).filter((i) => i?.severity === 'by_design'),
-  ].filter((item, index, all) => all.findIndex((c) => (
+    ...arr(s?.structuralViolations).filter((/** @type {any} */ i) => i?.severity === 'by_design'),
+  ];
+  return rows.filter((item, index, all) => all.findIndex((c) => (
     c?.type === item?.type && c?.institution === item?.institution && c?.reason === item?.reason
   )) === index).sort((a, b) => compareCodepoint(a.institution || '', b.institution || '')); // the codepoint order (determinism lint), not the host's collation
 }
