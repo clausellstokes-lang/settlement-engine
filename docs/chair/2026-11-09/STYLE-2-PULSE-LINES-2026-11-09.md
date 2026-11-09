@@ -507,3 +507,11 @@ Pins: `autoplacementConsent.test.jsx` — the lock's last sentence (D·92) and t
 | D·49 causal-diff heading | `Causal shift in this entry` | "How things stand now, against before" (it sits under "What changed & why" on the same entry; the model's word "causal shift" leaves the second heading) |
 
 Pins: `chronicleScrollback.test.jsx` — the heading read inside `chronicle-causal-diff`; **red at the parent** (1 of 9), green here. Registers: none moved.
+
+### 9o. `HeraldWanderers.jsx` (D·57)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·57 origin / resting fallback (two sites) | `a place the record does not name` | "an unnamed place" (`heraldWanderers.js:259`'s "a place the register cannot name", the second vocabulary the audit notes, is in the file the third seat finished and is not a ledger D row; listed in §9's "what stays") |
+
+Pins: `heraldWanderersRegister.test.jsx` — a new render with the origin's save absent ("Came from an unnamed place", with an anchored negative); **red at the parent** (1 of 21), green here. Registers: none moved.

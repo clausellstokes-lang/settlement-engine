@@ -289,6 +289,17 @@ describe('W-H4 — the Herald door renders', () => {
     expect(screen.queryByText(/Resting at Greywatch/)).toBeNull();
   });
 
+  test('STYLE-2 SW-12 (ledger D·57): a place with no name on file reads "an unnamed place"', () => {
+    const { campaign } = campaignWithWanderer();
+    const noOrigin = SAVES.filter((s) => s.id !== 'sav_kelder');
+    storeState.savedSettlements = noOrigin;
+    render(<HeraldWanderers campaign={campaign} saves={noOrigin} />);
+    const row = screen.getByTestId('wanderer-row');
+    expect(row.textContent).toMatch(/Came from an unnamed place/);
+    expect(row.textContent).not.toMatch(/the record does not name/); // anchored: the same live row matched "Came from …" on the line above
+    storeState.savedSettlements = SAVES;
+  });
+
   test('EMPTY STATE: a realm that has exiled nobody says so, in world words', () => {
     const empty = { id: 'camp-2', settlementIds: ['sav_kelder'], worldState: { simulationRules: { npcConsequencesEnabled: true }, tick: 3 } };
     render(<HeraldWanderers campaign={empty} saves={SAVES} />);
