@@ -475,7 +475,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null, he
       },
       {
         short: 'Identify whether the attacks are opportunistic or directed',
-        long: 'Be the person who solved the problem rather than the person who reported it',
+        long: 'Be the person who solves the problem, and not only the one who reports it',
         driven_by: 'military',
       },
     ],
@@ -533,7 +533,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null, he
     mass_migration: [
       {
         needs: ['migration: influx'], short: 'Absorb the new arrivals into the labour market before resentment turns to violence', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
-        long: 'Make the changed settlement work rather than merely survive the change',
+        long: 'Make the changed settlement work for everyone in it',
         driven_by: 'protection',
       },
       {
@@ -749,7 +749,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
       },
       {
         what: `Owes ${otherNpc.name} a debt from before either of them held their current position: one that ${otherNpc.name} has never formally called in`,
-        stakes: 'The silence feels like patience rather than forgiveness',
+        stakes: 'The silence feels like patience, and it is not forgiveness',
       },
       {
         what: `Has been reading ${otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking`,
@@ -1140,12 +1140,12 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         wartime: {
           gov: {
             short: 'Satisfy the crown requisition order without stripping the settlement to the bone',
-            note: "The war has made every civic decision a military calculation. The crown's needs and the settlement's needs are not the same calculation.",
+            note: "Since the war began, every decision here comes back to the army, and the crown's requisition order asks for what the settlement itself needs to live.",
           },
           mil: {
             short:
               'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes',
-            note: "Every experienced soldier conscripted into the field army is a hole in local security that a substitute won't fill the same way.",
+            note: "Each experienced soldier sent to the field army is replaced by a frightened substitute who does not yet know the work.",
           },
           merchant: {
             short:
@@ -1594,7 +1594,7 @@ export const generateSettlementName = (r = 'germanic') => {
  * the complementary atom, and the site resolves a drawn key through `resolveSibling`. Retired from
  * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
  */
-export const NPC_GOAL_SIBLINGS = Object.freeze({ 'Identify the person inside the walls who is communicating with the besiegers': Object.freeze([ Object.freeze({ text: 'Identify the person inside the walls who is communicating with the besiegers', needs: Object.freeze(['walls']) }), Object.freeze({ text: 'Identify the person inside the settlement who is communicating with the besiegers', twinOf: 'Identify the person inside the walls who is communicating with the besiegers', excludes: Object.freeze(['walls']) }), ]), 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes': Object.freeze([ Object.freeze({ text: 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes', needs: Object.freeze(['soldiers']) }), Object.freeze({ text: 'Keep the defenders together as the call-up pulls away experienced hands and replaces them with frightened substitutes', twinOf: 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes', excludes: Object.freeze(['soldiers']) }), ]), 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.': Object.freeze([ Object.freeze({ text: 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.', needs: Object.freeze(['soldiers']) }), Object.freeze({ text: 'Every experienced hand called up into the field army is a hole in local security that a substitute won\'t fill the same way.', twinOf: 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.', excludes: Object.freeze(['soldiers']) }), ]), });
+export const NPC_GOAL_SIBLINGS = Object.freeze({ 'Identify the person inside the walls who is communicating with the besiegers': Object.freeze([ Object.freeze({ text: 'Identify the person inside the walls who is communicating with the besiegers', needs: Object.freeze(['walls']) }), Object.freeze({ text: 'Identify the person inside the settlement who is communicating with the besiegers', twinOf: 'Identify the person inside the walls who is communicating with the besiegers', excludes: Object.freeze(['walls']) }), ]), 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes': Object.freeze([ Object.freeze({ text: 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes', needs: Object.freeze(['soldiers']) }), Object.freeze({ text: 'Keep the defenders together as the call-up pulls away experienced hands and replaces them with frightened substitutes', twinOf: 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes', excludes: Object.freeze(['soldiers']) }), ]), 'Each experienced soldier sent to the field army is replaced by a frightened substitute who does not yet know the work.': Object.freeze([ Object.freeze({ text: 'Each experienced soldier sent to the field army is replaced by a frightened substitute who does not yet know the work.', needs: Object.freeze(['soldiers']) }), Object.freeze({ text: 'Each experienced hand called up into the field army is replaced by a frightened substitute who does not yet know the work.', twinOf: 'Each experienced soldier sent to the field army is replaced by a frightened substitute who does not yet know the work.', excludes: Object.freeze(['soldiers']) }), ]), });
 
 /**
  * A drawn NPC goal or hook line as this record can speak it: its declared sibling where the record
