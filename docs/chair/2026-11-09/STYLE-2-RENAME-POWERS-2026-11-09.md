@@ -121,3 +121,166 @@ The hand wordings are the map's Appendix X; the rest is the plain swap. Measure 
 - modeSpeedsWy1 as C5;
 - faithTeaserLicence as C8;
 - the 86 slot-only annex rows reading as names everywhere they print.
+
+---
+
+# Part 2 — the second seat (2026-11-09): the open reds, C9, C10 and the gates
+
+Seat SW-8 RENAME-POWERS, second seat (session `session_01FbPLbfriarzNt6WB5KmjMR`), a child of the chair `session_01FbPLbejcfwX5nii12VM673`. Same lane, same record. Base **`00c9eaba5`** (the first seat's tip, confirmed by `rev-parse` before the first edit). Every golden figure below was measured in a clean worktree at the cause's parent with the cause's patch applied, by the estate's own measuring tools: `scripts/audit/golden-master-stage.mjs` (gm /525), `scripts/audit/refence.mjs` (fence /360) and `scripts/prose-manifest-cells.mjs` with `scripts/prose-manifest-diff.mjs` (prose /1,050). All are UNSIGNED, for STYLE-2-MERGE.
+
+## §9 The causes, continued
+
+| # | commit | cause | gm /525 | fence /360 | prose | other |
+|---|---|---|---|---|---|---|
+| R1 | `14d613055` | the rumour pools' join: the legacy annex's 13 variants by id follow C5's live strings (+1 pin) | 0 | 0 | 0 | — |
+| R2 | `61b1ff2ec` | modeSpeedsWy1 A5 re-keyed `5b6a1e51` → `bce07bf5` | 0 | 0 | 0 | bisected to C5 alone; 15 string leaves |
+| R3 | `ac6e69a64` | surveyorShell PIN 2 re-keyed | 0 | 0 | 0 | — |
+| R4 | `8bd6c2a7a` | the prose byte baseline through its declared-row door for C8 | 0 | 0 | 0 | five leaves lowered, stressors +7 declared |
+| R5 | `91186994d` | faithTeaserLicence: the licensed word "factions" → "powers" | 0 | 0 | 0 | C8 CONFIRMED as the cause |
+| R6 | `efe5d087c` | the observed-shape register's governed `--write` (inputs only) | 0 | 0 | 0 | findings 2,190 / 1,531 / 431 unmoved |
+| C9-1 | `bfbaeaf2b` | the history and arrival pools (historyData, narrativeData) | **24** (village 12, city 12) | **96** (13/14/19/12/14/24) | 0 | ledger STRESS_DESCS ×2 |
+| C9-2 | `64377b197` | the NPC pools (npcData, the four lines SW-7 left) | 0 | 0 | 0 | ledgers ×4 |
+| C9-3 | `a898387af` | the stress data (stressInstitutionEffects, stressTypes, stressorSpinePhrases) | 0 | **40** (8/8/5/4/6/9) | 0 | ledgers ×11 |
+| C9-4 | `53d7f8a68` | the crisis cast, the defence note, the ruling chain, the want register | **515** (84/84/84/95/84/84) | **48** (13/12/7/7/3/6) | 0 | ledgers ×14; leaf-diff: "no faction gains" → "no power gains" |
+| C9-5 | `c85fd3f85` | the narrative generators (narrativeText, narrativeGenerator, settlementNarrative, stressNarrative) | 0 | **27** (3/5/4/5/2/8) | 0 | ledgers ×11 |
+| C9-6 | `d12e20112` | the power generators (conflicts, rulingStructure, stressFactions) | **512** (72/84/84/104/84/84) | **260** (11/32/38/59/60/60) | 0 | leaf-diff: the infiltrator's desc |
+| C9-7 | `b29b7e06c` | the NPC generators (npcGenerator, npcStructure ×2) | 0 | **1** (metropolis) | 0 | ledger ×3 |
+| C9-8 | `503fc64dd` | the safety profile | 0 | **19** (3/3/3/2/2/6) | 0 | — |
+| C9-9 | `a74b9d45d` | the founding seeds | 0 | 0 | 0 | — |
+| C10 | `65a21239f` | the "why" panels: the 11 traced strings a reader prints | **525** (all) | **360** (all) | 0 | **FENCE 4 `f80ebc32` → `89a770ab`** (below) |
+
+Fence tiers read thorp/hamlet/village/town/city/metropolis. Herald and witness: their failure output is byte-identical at `efe5d087c` and at `65a21239f`, so C9 and C10 moved neither (CONFIRMED). The PDF's `goldenViewModel` is green at the tip.
+
+**FENCE 4** (`tests/property/faithFieldDormancyFence.test.js`, `DORMANT_GOLDEN`, signed door only): moved by C10's `causalState.js` "No factions to evaluate." → "No powers to weigh.". The four corpus towns hold no power, so each carries that contributor. At C10, the corpus JSON holds the new reason 4 times; with the old reason substituted back, the digest is `f80ebc3290869df9` exactly. CONFIRMED text only. It is left red for the merge seat's signing.
+
+**The declaration ledgers.** `docs/census/declarations/*.json` hold some pools verbatim. They followed the live cells by id (the first seat's C2 precedent). The oracle is `census2dTables` / `census2eTables` "every ledger line is at its path, verbatim": red without the ledger move, green with it (C9-1). One row, `STRESS_NARRATIVE_RENDERERS.json` :104 ("Two or three factions each control part of the settlement …"), already differed from its live line at the parent. It is left as found.
+
+## §10 Every line, old → new (for the owner's veto)
+
+The commit bodies carry every line in full. The hand wordings are Appendix X's; the rest are the map table's plain swaps.
+
+- **R1** `docs/content/RECEIPT_POOLS_LEGACY.md`: faction_capture 1 "a faction seizing control" → "a power seizing control"; faction_exhaustion 1 "a faction spent and failing" → "a power spent and failing"; npc_ladder 1 "… rank within a faction" → "… within a power"; faction_institution_capture 1, 7; faction_institution_suppression 1, 3, 8; faction_law_preference_push 1, 8; faction_power_shift 1 "a shift of power between factions" → "a shift in who is strong among the powers", 3 "… on the faction rolls" → "… on the rolls of the powers"; faction_service_bolster 1. All are word for word with C5's live strings.
+- **C9-1** historyData: "the war faction is suppressing" → "the war party is suppressing" · "split between the old and young factions" → "split between the old guard and the young" · "the houses one faction wanted cleared" → "… one power …". narrativeData: "controlled by one faction, the western by another" → "… one power …" · "belonging to one faction or another" → "… one power or another".
+- **C9-2** npcData: "Root out the faction leaking tax figures to rivals" → "Root out whoever is leaking tax figures to rivals" · "… with a new criminal faction moving into their territory" → "… with a new gang …" · "between two factions of the mages' guild" → "between two camps within the mages' guild" · "A faction on the council wants the debt repudiated" → "One camp on the council wants …".
+- **C9-3** stressInstitutionEffects: "both factions" → "both powers"; "whichever faction wins" → "whichever power wins"; "the other faction" → "the other power"; "the faction they framed" → "the power they framed"; "the governing faction has refused" → "the governing power …". stressTypes: "between factions" → "between the powers"; "Three different factions" → "Three different powers"; "The governing faction" → "The governing power" ×3. stressorSpinePhrases: "factions that each hold part of the place" → "powers that each …".
+- **C9-4** crisisCast: "its faction gains from the crisis" → "its power gains …"; "in a faction that gains" → "in a power that gains"; "the most powerful of a faction that gains" → "the strongest figure in a power that gains" (X); "the most ambitious of a faction that gains" → "… of a power that gains"; "its faction could go either way" → "its power …"; "no faction gains" → "no power gains"; "no faction could go either way" → "no power …". defenseDisplay: "Multiple factions may be competing." → "Several gangs may be competing." (X). powerStrata: "… at the faction." → "… at the power.". tonightSheet's want-register detector entry: "the faction's position" → "the power's position" (not printed).
+- **C9-5** narrativeText ×17 (plain; :226 "Both sides hold services" X; :167 "the first power leader" from the map's table); narrativeGenerator and settlementNarrative fallbacks "the dominant/leading faction" → "… power"; settlementNarrative "at least one power is using the fear", "both powers resent it equally", "the power with the most to gain"; stressNarrative "Two or three powers each run part of", "A strong power in" (X), "Both sides claim the legitimate succession" (X), "The governing power has formally complied".
+- **C9-6** conflicts ×4 "both/one faction(s)" → "both/one power(s)". rulingStructure: "internal factions are constant" → "the council is always split into camps" (X); "factions lobby" → "the powers lobby"; "internal factions compete" → "camps within it compete" (X); "other factions" → "other powers" ×2. stressFactions: "at least two powers"; "Elite faction that has concluded" → "A group of the well-off who have concluded" (X); "this power"; "The power is divided" ×2; "The power is lobbying"; "One of two rival sides claiming" (X); "both sides of the faith" (X); "The breakaway side" (X); "the governing power"; "Not officially a power: … several other powers".
+- **C9-7** npcGenerator: "the governing faction" → "the governing power" ×3. npcStructure: "Stop any power buying their squad away", "Keep selling to every power".
+- **C9-8** safetyProfile: "which power controls a district"; "another criminal faction" → "another gang" (X); "Both the governing power and the insurgency"; "Both factions pay" → "Both sides pay" (X).
+- **C9-9** foundingSeeds: "sits among its factions" → "sits among its powers" ×2; "between the governing faction and the insurgency" → "… the governing power …".
+- **C10** causalState: "No factions to evaluate." → "No powers to weigh." (X). rulingPowerCoup: "No faction holds enough power to move against the seat." → "No power is strong enough to move against the seat." (X). deriveSystemState: "N active factions competing" → "N powers competing"; "Few factions: concentrated power" → "Few powers: rule is concentrated"; "N active faction conflict(s)" → "N quarrel(s) between powers" (X). factionCorrelationPass: "A dominant faction" → "A dominant power". generatePower and economyReconciliation: "As the governing faction, …" → "As the governing power, …". neighbourFactions: "… a mirror {type} faction here." / "… an opposition {type} faction." → "… power …".
+
+No line was struck under the census law. Every rewording states the same facts or fewer ("whoever is leaking" names no group).
+
+## §11 Pins re-keyed by identity (this seat)
+
+rumorFallbackPhrasePools "the 107 are byte-identical" (R1); modeSpeedsWy1 A5 `BASE_PULSE_HASH` (R2, dated note in the test); surveyorShell PIN 2 (R3, the retired word's absence asserted beside it); faithTeaserLicence LICENSED / CASE_BOUND (R5, the old word not kept, so the vocabulary does not widen); powerTabSupport "renders the chain as far as the data goes" (C9-4); sentenceSlotFallback "genSuccessionNarr … capital" (C9-5); stressFactionNames "the infiltrator takes the other pool's first unused name" (C9-6). Two tests feed the old conflict-hook text in as an input (plotHookParties, conflictHookDraw). They stay valid as written and were not touched. factionRename's stored-receipt fixture is also left alone, by design.
+
+## §12 The reader trace (C10): what prints and what is dead
+
+The trace followed the import graph to a render call and was spot-checked by hand.
+
+**PRINTS** (swapped in C10):
+- causalState :722, through `SystemStateSnapshot.jsx :: CausalSubstrate` (the Campaign State PDF).
+- rulingPowerCoup :154, through `coup.js` reasons → `WorldPulsePanel.jsx :: OutcomeCard` pills. The wiring is CONFIRMED; firing is PLAUSIBLE, because the gate refuses a coup with no challenger.
+- deriveSystemState :202/:205/:212, through `SystemStateBar.jsx`, the PDF `SystemStateSnapshot` and the Foundry `statePage` (drivers).
+- The build-trail reasons factionCorrelationPass :84, generatePower :119, economyReconciliation :393 and neighbourFactions :102/:140, through `PipelineRail.jsx :: StepRow`. These show only for a town generated in the session, with the step expanded.
+
+**NO READER** — dead rows, left untouched and named for the post-deploy dead-code census:
+- capacityModel ×6: `supplyContributors[].reason`. Its only reader is `explanation.js :: explainCapacity`.
+- contradictions ×2: `consequences[]`. Read only into the AI grounding payload, whose prompt (`supabase/functions/generate-narrative/prompts.ts`) keeps only `constraints.lockedEntities` and `userEdits`.
+- customContent :367: `classifyCustomEntity` has no importer.
+- galleryVeil :483: `VeilDefault.reason`. `resolveVeil` reads the address only.
+- explanation ×2: `explain*` is reached only through `counterfactual.js`, and nothing in `src/` imports that file (regenerationDelta and regenerationMode import only `entityCatalog`; checked).
+- factionRelationshipUpdate ×7: `factionRelationshipDeltas` is copied into the event log and never rendered.
+- magicProfile ×2: its readers copy bands and facets only.
+- npcProfile ×2: `consequenceIfRemoved.consequences` has no rendering reader.
+- threatProfile :167: `beneficiaries` is read only by explanation.js.
+- resolveStress :93: `downstreamEffects[].reason`. StepRow prints the target and the effect, not the reason.
+
+factionCompetition :848 was done in C5.
+
+## §13 The open reds and the STOPs, by file
+
+- `tests/lint/proseWiringCensus.walker.test.js` "custom-content reachability" (28 → 36; factions 2 → 10). **STOP sent; default taken (left red, named).** CONFIRMED cause: C7 renamed the custom-content manifest's display singular "Faction" → "Power". `wiringCensus.js :: customReachable` uses that singular as a bucket token, so "power" now matches the power desk's own root. The 8 new rows are DS-POW-2 ×2 and DS-POW-6 ×6, reading `power.stability`, `power.recentConflict` and `power.criminalCaptureState`; they are false reaches. Probe: the same census rows with the singular set back to "Faction" give factions 2. Options put to the chair: (A) re-key to 36 and name the 8 as false hits; (B, recommended) key the bucket token to the category's stored identity, as its own cause, and re-stamp the census back to 28.
+- `src/domain/causalState.js` :740 `${cond.label} destabilizes the faction system.` (a printed contributor reason, in neither the map nor X). **STOP sent; default taken (left as is).** Proposed wording: "${cond.label} unsettles the balance between the powers."
+- `tests/property/dossierProseManifest.test.js` DRIFT ARM: C8's 1,038 cells, left UNSIGNED as told. C9 and C10 move no prose cell.
+- The unsigned goldens red at the tip: generatorGoldenMaster, espionageDormancyFence, faithFieldDormancyFence FENCE 4 (C10), the herald desk (C1) and the witness (C2). The gm-stride pins are red with them, as listed in the first seat's §2 (worldFactRederive A7, pipelinePinnedChoosers A1, powerEconomyFreshness A4, rosterFinalUnderHeldRoster A1, editWorldFactResources A2/A6, generationForkCensus A1, …).
+- The base's own reds, each run at `bd07005b9` and red there: religionLegitimacyFactionKey "rulerLens reads the weak elected seat"; worldPulseFactionSeating ×2; layerBoundaries "dependency-cycle set"; densityLaw ×4; editCorpusRatchet ×4; institutionBudgetPromise.
+- `tests/lint/sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION": red at `00c9eaba5` and missing from the first seat's §6. Bisected: green at `bd07005b9`, red from C1 `a1b63f95e` on. C1's red-first arm added one live test title (28,822 → 28,823). **Cured** through the LIGHTING_CENSUS_REFREEZE ritual (R7 `2017aa4b6`).
+
+## §14 The gates, at the tip
+
+- **The style walker** (SW-0's `scripts/lib/style-law-scan.mjs` from `lane/style-2-walker-2026-11-09`, run over this tree): **223 in 71 files → 131 in 54 files.** C9 accounts for 89 of the drop. C10's strings mostly sit outside the walker's roots, as do foundingSeeds and deriveSystemState. The remainder is by file under §15.
+- **The 1,000** (`soak-review --count 1000 --workers 4`, at `bd07005b9` and at `65a21239f`): both exit 0, 1,000 settlements, 657 findings, 0 errors; the finding classes are identical. The twenty most-repeated frames are identical in skeleton and town count; the top forty have nothing new and nothing gone. `coh:tier-noun` is 0 at both. Hooks repetition 0.299 / 0.355 → 0.301 / 0.357 (all / same tier), PLAUSIBLY the reworded conflict and stress hook lines.
+- **The twelve** (`--count 12`): exit 0, 12 settlements, 6 findings, 0 errors.
+- **tsc --noEmit**: 167 errors at `bd07005b9`, 167 at `65a21239f`, text-equal modulo positions.
+- **eslint**: clean on every cause's files.
+- **tests/lint whole** at `efe5d087c` and at `65a21239f`: the same 2 of 3,061 red. One is proseWiringCensus (the open STOP); the other is sovereigntyLightingContract, now cured by R7.
+- **The three record walkers**: green before every push.
+
+## §15 What stays, BY FILE, at the hand-back
+
+**Other lanes' lines** (NOT-TOUCH: each lane's tip no longer holds the line, so the swap rides that lane's rewrite or the merge seat's composition):
+- SW-5 CRISIS-VANTAGES: crisisSummaryVantage ×6, causalState :732 :736 :1153, politicsRead ×3, stressInstitutionEffects :175.
+- SW-4 HOOKS-CONNECTIVE: hookEscalation ×11 (including :564), crossSettlementConflicts :95.
+- SW-3 REALM-PROSE: newsVoice ×5, decreeProsePools ×4, traditionProse :81.
+- SW-6 CRISIS-SURFACES: npcStructure ×6.
+- SW-12 PULSE-LINES: factionCompetition ×4.
+- SW-11 PULSE-CARD: heraldDeeds ×2, relationshipRulesAdversarial :164, relationshipRulesCore ×2.
+- SW-7 POWER-SIDE: factionStanding ×3, prosperity :79, legacyGenerator :192.
+- SW-2 INSTITUTIONS: institutionServices ×3.
+- SW-10 HOOKS: hookLines :214.
+- SW-B6 ECO-DEF-BLOCKS: defense.generated :6103.
+- SW-B1 CONTRADICTIONS: rulingStructure :409.
+- safetyProfile :638 (three lanes).
+
+**Keys and metadata the walker counts but no reader prints** (they stay; the walker's baseline door is the merge seat's):
+- the annex pool and block predicate names in general.generated ×7, power.generated ×8, proseNorms.generated, generalStateProse ×2, powerStateProse ×3 and printProse (e.g. "governing faction holds a DOMINANT share", "capture reached an AGENT of a faction");
+- the institution key "Multiple criminal factions" (institutionBacking, institutionDescVariants ×2, institutionLadders, institutionServiceKeys.generated, institutionServices, institutionalCatalog, spatialData, institutionDisplayName, institutionVocabulary ×2, calamityKernel, priorityHelpers, serviceCategoryTables). It prints through C1's display seam as "Rival Gangs";
+- **"Faction information"** (institutionServices :1156, serviceCategoryTables :788), a dormant criminal service key with no per-name display seam (the first seat's row, carried);
+- mintTitles' old names ×3, kept as silent aliases by the ruling;
+- recordBatteryFindings :85 (a detector label);
+- the registry and policy rationales in changeAuthorityPolicy ×3, decisionTier, habitForkRegistry ×3, npcVerdictApply ×4, pulseStageManifest and infiltrationDepth;
+- dailyLife ×2 (fact descriptors);
+- serviceRollMaterialization and servicesGenerator ("criminal faction" category keys).
+
+**The C10 dead rows** (§12; no reader; for the post-deploy dead-code census): capacityModel ×6, contradictions ×2, customContent :367, galleryVeil :483, explanation ×2, factionRelationshipUpdate ×7, magicProfile ×2, npcProfile ×2, threatProfile :167, resolveStress :93.
+
+**STOPs on their defaults:** the proseWiringCensus custom reachability (§13), and causalState :740 "destabilizes the faction system." (§13).
+
+**For STYLE-2-MERGE's signing:**
+- the gm, fence, prose and FENCE 4 deltas per cause (§9 and the first seat's §2);
+- the dossierProseManifest drift arm (C8's 1,038 cells);
+- the herald (C1) and the witness (C2);
+- the walker's `faction` baseline, down through its door at the merge.
+
+## §16 CONFIRMED against PLAUSIBLE (the second seat)
+
+**CONFIRMED** (executed):
+- every open red, red at its parent and green after;
+- R2's bisection and leaf diff;
+- R5's cause;
+- R6's unmoved findings;
+- R7's bisection;
+- every per-cause gm, fence and prose figure (re-driven in a clean worktree);
+- the three leaf diffs (C9-4, C9-6, C10) and FENCE 4's text-only proof;
+- the herald and witness unmoved by C9/C10;
+- the NOT-TOUCH test over every lane tip;
+- the reader trace's key claims (explanation.js unreachable; the SystemStateBar and PDF readers);
+- the base's own reds, each run at `bd07005b9`;
+- the walker 223 → 131;
+- tsc 167 = 167;
+- the 1,000 and the twelve.
+
+**PLAUSIBLE:**
+- rulingPowerCoup :154 actually firing;
+- the hooks repetition's +0.002 attributed to the reworded hook lines;
+- the trace's per-field chains I did not re-walk myself (factionRelationshipUpdate, magicProfile, npcProfile, galleryVeil), which rest on the trace's greps.
+
+## §17 Process notes (the second seat, honest)
+
+- I misreported the reader-trace split to the chair ("17 print, 24 none") and corrected it in the next message: 11 print, 24 none.
+- A comment edit in rumorFallbackPhrasePoolsEvents.js was made and reverted before R1. It could have moved a bundle input hash for no reader gain.
+- The lighting refreeze ran in a clean worktree at the tip's own commit, because the main tree held this record uncommitted. Its bytes were carried over unchanged.
