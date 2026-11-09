@@ -1247,7 +1247,7 @@
     },
     {
       "id": "gov_econ_dependence.tension#2",
-      "text": "A faction on the council wants the debt repudiated outright. {A} has stopped disagreeing in public.",
+      "text": "One camp on the council wants the debt repudiated outright. {A} has stopped disagreeing in public.",
       "needs": [],
       "excludes": [
         "ruler: lord",
