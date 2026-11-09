@@ -28,7 +28,7 @@ describe('HOOK_ESCALATION: refused lines take their twins in place, or leave the
     expect(hook.possibleResolutions[0]).toBe('Confront the external force directly, by arms or by talks.');
   });
   it('a line with no twin leaves the list when refused (no stores: no hoarded reserves to release)', () => {
-    const lines = ['Negotiate an emergency supply contract with a neighbouring settlement.', 'Expose hoarding and force the controller to release reserves.'];
+    const lines = ['Negotiate an emergency supply contract with a neighbouring settlement.', 'Expose the hoarding and force whoever holds the stores to release them.'];
     expect(spokenEscalationLines(lines, BARE)).toEqual([lines[0]]);
   });
   it('with no facts every line is kept (byte-identical)', () => {

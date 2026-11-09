@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 193,
+      "dated": 194,
       "sha-pin": 2,
       "tree": 158
     },
@@ -433,7 +433,9 @@
     "_rosterGrowth2026-11-09-style-2-merge-record-3": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 156 -> 157, docs/shift-records/2026-11-09-style-2-merge-3-sw2.json, record 3, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-realm-prose": "ONE document JOINED the roster by being BORN into it (seat SW-3 REALM-PROSE, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-realm-prose-2026-11-09, ruling A6 of STYLE-RULINGS-2-2026-11-09): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-REALM-PROSE-2026-11-09.md, the lane's record, born dated, 0 past-EOF. `tree` is untouched (red at the base by MERGE-WAVE's 9288badee).",
     "_rosterGrowth2026-11-09-style-2-merge-sw3": "THE UNION AT THE SW-3 REALM-PROSE MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 192 -> 193 (docs/chair/2026-11-09/STYLE-2-REALM-PROSE-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-record-4": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 157 -> 158, docs/shift-records/2026-11-09-style-2-merge-4-sw3.json, record 4, born into the tree class; measured once by this walker; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-record-4": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 157 -> 158, docs/shift-records/2026-11-09-style-2-merge-4-sw3.json, record 4, born into the tree class; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-hooks-connective": "ONE document JOINED the roster by being BORN into it (seat SW-4 HOOKS-FAITHWAR-CONNECTIVE, session session_01FbPLbf9hG6WievwZqTcasg, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-hooks-connective-2026-11-09, ruling A7 of STYLE-RULINGS-2): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-HOOKS-CONNECTIVE-2026-11-09.md, the lane's record, born dated, 0 past-EOF. `tree` untouched (147 against 139 frozen, measured at the base a7bc2e4ce and at this tip alike: MERGE-WAVE's records from 9288badee on).",
+    "_rosterGrowth2026-11-09-style-2-merge-sw4": "THE UNION AT THE SW-4 HOOKS-CONNECTIVE MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 193 -> 194 (docs/chair/2026-11-09/STYLE-2-HOOKS-CONNECTIVE-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class."
   },
   "rows": []
 }

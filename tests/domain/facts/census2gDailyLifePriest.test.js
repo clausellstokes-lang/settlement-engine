@@ -14,7 +14,7 @@ const ledgerLine = (id) => ledger.pools.flatMap((p) => p.lines).find((l) => l.li
 
 describe('DAILY_LIFE_TAB paragraph [1] — the priests declare `priest` (carried)', () => {
   const found = declaredLiteralsOf('src/components/new/tabs/DailyLifeTab.jsx');
-  const p1 = [...found.entries()].find(([k]) => k.startsWith('${food}. Work is divided'));
+  const p1 = [...found.entries()].find(([k]) => k.startsWith('${food}. Everyone knows their work')); // re-keyed by cause: STYLE-2 SW-4 (A7)
 
   it('the cell declares guardPresence and priest, crisis any, and keeps its words', () => {
     expect(p1?.[1]).toEqual([{ needs: ['guardPresence', 'priest'], excludes: [], crisis: ['any'] }]);

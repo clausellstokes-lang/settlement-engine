@@ -180,7 +180,7 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     // The frozen record's static explanation is correctly absent (the flag is false), and the
     // corpus line is present anyway — a finding, not an absence.
     // anchored: the assertion two lines above proves `text` carries the rendered sentence,
-    expect(text).not.toContain('relies on active magical infrastructure'); // so the container is live
+    expect(text).not.toContain('This place leans on its spellcasters'); // so the container is live
   });
 
   test('THE PUBLIC GATE: the magic tab stays silent for an anonymous viewer', () => {

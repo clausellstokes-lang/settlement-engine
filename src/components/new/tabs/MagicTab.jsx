@@ -166,10 +166,9 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               {magicLine
                 ? <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}>{magicLine}</p>
                 : magicFrozen && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: 0 }}>
-                  This settlement's resilience relies on active magical infrastructure. One or more supply
-                  chains are magically sustained, or stress conditions are being offset by arcane, divine,
-                  or druidic intervention. Losing those practitioners through conflict, plague, or
-                  political disruption would immediately expose critical vulnerabilities.
+                  This place leans on its spellcasters: some of what it eats or makes, or some of the
+                  trouble it keeps at bay, depends on their work. Lose them to war, plague or politics
+                  and the gap would show at once.
                 </p>}
               {magicFrozen && (settlement.economicState?.activeChains || []).filter(c => c.magicNote).map((c, i) => (
                 <div key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 6, paddingLeft: 8, borderLeft: `2px solid ${BORDER}`, fontStyle: 'italic' }}>

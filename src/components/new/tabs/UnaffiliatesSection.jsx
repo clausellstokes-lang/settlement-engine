@@ -128,7 +128,7 @@ export default function UnaffiliatesSection({ saveId = null, settlement = null, 
       {seesSecrets && campaignId && <WandererUndoControl campaignId={campaignId} />}
       {rows.total === 0 ? (
         <div style={{ border: `1px dashed ${BORDER}`, padding: 12, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: BODY, background: CARD_ALT }}>
-          Nobody is sheltering here who does not belong to something here.
+          Everyone here belongs to one house or another.
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>

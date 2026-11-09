@@ -1026,7 +1026,7 @@ export const en = Object.freeze({
   gallery: {
     // The tier's stock painting stands in for a settlement that has no picture of its own
     // (§934.32): the alt says so, so a reader is never told the painting IS the place.
-    stockImageAlt: 'A {tier} of the kind {name} is: the tier’s painting, not a picture of this settlement.',
+    stockImageAlt: 'A painting of a typical {tier}, not of {name} itself.',
     eyebrow:      'From the community',
     pageTitle:    'Gallery',
     pageSubtitle: 'Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.',

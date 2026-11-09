@@ -141,11 +141,11 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
   const treaties = Array.isArray(lw.treaties) ? lw.treaties : [];
   const postureTone = POSTURE_TONE[posture.label] || 'muted';
 
-  const headline = lw.atWar
-    ? 'This settlement is at war. The live front, the strategy posture, and the patron god.'
+  const headline = lw.atWar // A7: a god is named only when `deity` is read and present
+    ? (deity ? 'This settlement is at war. Below: where the fighting stands, how hard it means to press it, and the god it keeps.' : 'This settlement is at war. Below: where the fighting stands and how hard it means to press it.')
     : deity
-      ? 'The patron god and the live geopolitical standing of the settlement.'
-      : 'The live geopolitical standing of the settlement.';
+      ? 'The god this settlement keeps, and where it stands with its neighbours.'
+      : 'Where this settlement stands with its neighbours.';
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -205,7 +205,7 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
           {besiegedBy.length > 0 && (
             <Line label="Under siege." tone="bad">
               {besiegedBy.length >= 2
-                ? `A coalition of ${besiegedBy.join(', ')} holds the walls.`
+                ? `A coalition of ${besiegedBy.join(', ')} surrounds the walls.`
                 : `${besiegedBy[0]} lays siege.`}
             </Line>
           )}
@@ -248,7 +248,7 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
           {tradePressure.map((tie, i) => (
             <Line key={`tp-${i}`} label="Trade pressure." tone="muted">
               {tie.role === 'dependent'
-                ? `Dependent on ${tie.partnerName}. ${cap(tie.phrase)}; losing it would bite hard.`
+                ? `Depends on ${tie.partnerName}. ${cap(tie.phrase)}; losing it would hurt badly.`
                 : tie.role === 'supplier'
                   ? `Holds leverage over ${tie.partnerName}. ${cap(tie.phrase)} it relies on.`
                   : `${cap(tie.phrase)} with ${tie.partnerName}. War between them would be costly.`}
@@ -263,7 +263,7 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
           {tradeWars.map(prize => (
             <Line key={prize.prizeId} label="Trade war." tone="warn">
               {prize.role === 'market'
-                ? `Its ${prize.commodityLabel} market is a contested prize. ${prize.winner} now supplies it.`
+                ? `Rival suppliers competed for its ${prize.commodityLabel} market; ${prize.winner} now supplies it.`
                 : prize.role === 'supplier'
                   ? `Now the primary supplier of ${prize.commodityLabel} to ${prize.buyer}.`
                   : prize.role === 'displaced'

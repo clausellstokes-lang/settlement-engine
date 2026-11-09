@@ -76,7 +76,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
             Ancient ruin nearby
           </div>
           <div style={{ fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.4 }}>
-            The relic ruin of {ancient.name} stands nearby, a city fallen {formatCount(ancient.yearsAgo)} years ago, superstition-attracting.
+            The ruin of {ancient.name} stands nearby, a city that fell {formatCount(ancient.yearsAgo)} years ago, and the locals have plenty of superstitions about it.
           </div>
           {desk.ruinLine && <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginTop: 4 }}>{desk.ruinLine}</div>}
         </div>

@@ -54,7 +54,7 @@ export function NPCsTab({
   if (!npcs?.length) {
     return (
       <div>
-        <Empty message="No NPCs generated. Generate a settlement to see key figures."/>
+        <Empty message="No key figures are recorded for this settlement."/>
         {unaffiliates}
       </div>
     );
