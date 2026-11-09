@@ -61,6 +61,29 @@ function pickBody(pool, seed, cell) {
   return pool[fnv1a32(`${seed}::${cell}`) % pool.length];
 }
 
+/** The most sentences of the reader summary the card body prints. */
+const BODY_SENTENCES = 2;
+
+/**
+ * Split prose into its sentences (a terminal mark followed by a space or the end).
+ * @param {string} text
+ * @returns {string[]}
+ */
+function splitSentences(text) {
+  const t = String(text || '').trim();
+  if (!t) return [];
+  return (t.match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g) || [t]).map(x => x.trim()).filter(Boolean);
+}
+
+/**
+ * The first `n` sentences of `text`, joined; '' for empty prose.
+ * @param {string} text
+ * @param {number} n
+ */
+function leadSentences(text, n) {
+  return splitSentences(text).slice(0, n).join(' ');
+}
+
 /** @param {unknown} v @returns {number} */
 function clamp01(v) {
   const n = typeof v === 'number' && Number.isFinite(v) ? v : 0;
@@ -157,7 +180,15 @@ export const BODY_POOLS = Object.freeze({
  */
 export function newsBodyText(entry) {
   if (!entry) return '';
-  if (entry.familyId && String(entry.summary || '').trim()) return String(entry.summary).trim();
+  // THE CARD BODY STATES THE EVENT (STYLE-RULINGS-2 C1, SW-11 PULSE-CARD): every
+  // composer files a reader sentence — the event, the people, the consequence —
+  // and that sentence IS the body, read through the one reader of the summary
+  // (`newsReaderSummary`, which also closes the legacy climb-down wording). At
+  // most two sentences print; the rest stays in the tooltip (`newsCardTooltip`).
+  // The lifecycle pools below are the fallback for a legacy entry that filed no
+  // summary at all.
+  const told = leadSentences(newsReaderSummary(entry), BODY_SENTENCES);
+  if (told) return told;
   const kind = entry.kind || '';
   const scope = scopePhrase(entry.scope);
   const heavy = clamp01(entry.severity) >= 0.75;
@@ -253,4 +284,58 @@ export function newsReasonPhrases(entry) {
     out.push(phrase);
   }
   return out;
+}
+
+/** @param {string} v */
+function foldText(v) {
+  return String(v || '').toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * The card's hover title (STYLE-RULINGS-2 C1): ONE reader for one fact. When the
+ * body prints the whole reader summary the title is empty — the same sentence is
+ * never on the card twice (rule g); when the body printed only its lead sentences,
+ * the title keeps the full summary with the rest of the detail.
+ * @param {{ kind?: string|null, summary?: string|null }|null|undefined} entry
+ * @returns {string}
+ */
+export function newsCardTooltip(entry) {
+  if (!entry) return '';
+  const told = newsReaderSummary(entry).trim();
+  if (!told) return '';
+  return splitSentences(told).length > BODY_SENTENCES ? told : '';
+}
+
+/**
+ * The scoring reasons that restate what the card already says once its body is the
+ * event: how far it spread and where in its lifecycle it stands (the body names the
+ * source and the road; the status pill carries the lifecycle). Keyed by the legacy
+ * receipt token so the reader wording can change without this set drifting.
+ */
+const FACE_RESTATED_REASON_KEYS = Object.freeze([
+  'chain propagation', 'multi-settlement scope',
+  'effect took hold', 'delayed effect matured', 'major pressure resolved', 'threat window closed',
+]);
+
+/**
+ * The reason pills the card face prints: the reader phrases, less any that repeat
+ * the body (a rule-note reason filed as the summary prints once, as the body) and,
+ * when the body is the filed event, less the reach and lifecycle receipts it
+ * already states. At most three, as the panel has always shown.
+ * @param {{ kind?: string|null, summary?: string|null, reasons?: Array<string|null|undefined> }|null|undefined} entry
+ * @returns {string[]}
+ */
+export function newsCardReasons(entry) {
+  const phrases = newsReasonPhrases(entry);
+  const body = foldText(newsBodyText(entry));
+  const filed = Boolean(newsReaderSummary(entry).trim());
+  const restated = new Set(FACE_RESTATED_REASON_KEYS.map(k => REASON_PHRASES[k]));
+  return phrases
+    .filter((p) => {
+      const f = foldText(p);
+      if (!f) return false;
+      if (body && (body.includes(f) || f.includes(body))) return false;
+      return !(filed && restated.has(p));
+    })
+    .slice(0, 3);
 }

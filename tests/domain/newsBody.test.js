@@ -11,7 +11,7 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-  newsBodyText, newsReaderSummary, newsReasonPhrases, BODY_POOLS,
+  newsBodyText, newsReaderSummary, newsReasonPhrases, BODY_POOLS, newsCardReasons, newsCardTooltip,
 } from '../../src/domain/display/newsBody.js';
 
 const TRANSITIONS = ['queued', 'ready', 'applied', 'resolved', 'ignored', 'expired'];
@@ -173,5 +173,27 @@ describe('newsBody — VIEW-TIME variety (CONTENT-VT-2)', () => {
     for (const [cell, pool] of Object.entries(BODY_POOLS)) {
       expect(seen[cell].size, `${cell} fully reachable`).toBe(pool.length);
     }
+  });
+});
+
+describe('newsBody — the body states the filed event (STYLE-RULINGS-2 C1)', () => {
+  it('a filed summary IS the body, at most two sentences; the title holds the rest only when cut', () => {
+    const one = { id: 'x1', kind: 'applied', summary: 'Aldmark sends forty more men to the army outside Brackwater.' };
+    expect(newsBodyText(one)).toBe(one.summary);
+    expect(newsCardTooltip(one)).toBe('');
+    const three = { id: 'x2', kind: 'applied', summary: 'Aldmark marches. Brackwater shuts its gates. The harvest rots.' };
+    expect(newsBodyText(three)).toBe('Aldmark marches. Brackwater shuts its gates.');
+    expect(newsCardTooltip(three)).toBe(three.summary);
+  });
+
+  it('the pills drop a reason the body already prints and the reach/lifecycle receipts of a filed event', () => {
+    const entry = {
+      id: 'x3', kind: 'queued',
+      summary: 'Aldmark is bound by its alliance to stand with Brackwater.',
+      reasons: ['Aldmark is bound by its alliance to stand with Brackwater.', 'chain propagation', 'multi-settlement scope', 'high severity'],
+    };
+    expect(newsCardReasons(entry)).toEqual(['a heavy blow']);
+    // A legacy entry with no summary keeps every reader phrase.
+    expect(newsCardReasons({ kind: 'queued', reasons: ['chain propagation'] })).toEqual(newsReasonPhrases({ reasons: ['chain propagation'] }));
   });
 });

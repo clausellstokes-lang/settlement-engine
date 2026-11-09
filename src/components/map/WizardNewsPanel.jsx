@@ -1,7 +1,7 @@
 import { AlertTriangle, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
-import { newsBodyText, newsReaderSummary, newsReasonPhrases } from '../../domain/display/newsBody.js';
+import { newsBodyText, newsCardReasons, newsCardTooltip } from '../../domain/display/newsBody.js';
 import { humanizeToken, tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
@@ -109,13 +109,13 @@ function NewsEntry({ entry, compact = false }) {
   // null for out-of-scope news, so the quote only shows when it has something
   // to say.
   const voiceLine = newsVoiceLine(entry);
-  // The card body, re-composed in the house voice from the entry's structured
-  // fields (transition/scope/severity). Regional composers now also store an
-  // authored summary; the tooltip keeps that durable chronicle sentence available
-  // while the card body carries its shorter transition telling. (content-immersion-5)
+  // The card body STATES THE EVENT (STYLE-RULINGS-2 C1): the filed reader summary —
+  // the event, the people, the consequence — in at most two sentences; the title
+  // holds the rest only when the body was cut, and the reason pills drop what the
+  // body already says. A legacy entry with no summary falls back to its lifecycle line.
   const bodyText = newsBodyText(entry);
-  const reasonPhrases = newsReasonPhrases(entry);
-  const summaryTooltip = newsReaderSummary(entry);
+  const reasonPhrases = newsCardReasons(entry);
+  const summaryTooltip = newsCardTooltip(entry);
 
   return (
     <article style={{
@@ -219,7 +219,7 @@ function NewsEntry({ entry, compact = false }) {
           <MetaPill>{tickCalendarDetailLabel(entry.tick)}</MetaPill>
           <MetaPill>{humanizeToken(entry.kind)}</MetaPill>
           <MetaPill>Severity {severityBand(entry)}</MetaPill>
-          {reasonPhrases.slice(0, 3).map(reason => (
+          {reasonPhrases.map(reason => (
             <MetaPill key={reason} tone={major ? 'major' : 'neutral'} wrap>{reason}</MetaPill>
           ))}
         </div>
