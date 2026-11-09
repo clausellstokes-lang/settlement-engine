@@ -30,6 +30,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public what the adept sold when the patronage failed, and the commissions are being read out with their buyers attached.',
       "The dark work is out: the adept kept a list of every job taken after dark while no patron paid, and the town is reading it.",
+      "The people who bought the adept's after-dark work are hearing their own names read out in the street, next to what they paid for.",
     ],
     're-adjudicated': [
       'Whoever paid the adept before is gone, but now no patron pays for the tower, and the after-dark clients keep the adept in work.',
@@ -53,6 +54,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept\'s shelves were stocked by grave-robbers, and the families of the robbed are reading the inventory.',
       "It is out that the adept's work ran on goods from robbed graves while the roads were closed, and the town wants to know whose dead they were.",
+      'Families with graves outside the town are asking the adept to their face which of the goods on those shelves came from their own dead.',
     ],
     're-adjudicated': [
       "Whoever supplied the adept before is gone, but the roads are closed now, and whoever robs graves fills the adept's shelves.",
@@ -76,6 +78,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept cannibalized the town\'s wards and billed for their upkeep, and every household is asking what still protects it.',
       "It is out that the adept knew exactly where the town's wards had gaps, because the adept made them, and charged for the wards all the same.",
+      'Households that paid for ward upkeep are walking the lines themselves now, looking for the gaps the adept made.',
     ],
     're-adjudicated': [
       'Whoever paid the adept before is gone, but now the stores are empty, and the adept goes on stripping the wards for parts.',
@@ -99,6 +102,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept\'s wards blinded the customs inspectors, and every crate no one could open is being traced to the adept\'s seal.',
       "It is out that the adept hid smuggled cargo from the law, and the law is learning how much it missed.",
+      "The customs inspectors are opening every crate that went through under the adept's seal, and finding what they were kept from seeing.",
     ],
     're-adjudicated': [
       "Whoever paid the adept before is gone, but now an embargo chokes the trade, and whoever smuggles pays for the adept's seals.",
@@ -122,6 +126,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept sold the town\'s protection street by street while its soldiers were at war, and the unpaid streets are counting what they suffered.',
       "It is out that the wards guarded purses, not people, and the adept drew the lines between them.",
+      'The streets left unguarded while the soldiers were away want to know why the next street was protected and theirs was not.',
     ],
     're-adjudicated': [
       'Whoever paid the adept before is gone, but now the soldiers are away at war, and the adept goes on selling the wards street by street.',
@@ -145,6 +150,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept sold the map of the wards\' weaknesses while the garrison stood empty, and the town knows its wall had a merchant.',
       "The plans are out, with the adept's seal on them: every weak point in the town's wards, priced and sold to outsiders.",
+      "Every family by the wall knows now that its weak points were sold to outsiders, and that the seller was the town's own adept.",
     ],
     're-adjudicated': [
       "Whoever paid the adept before is gone, but now the garrison is thin, and the adept sells the plans of the wards' weak points to whoever asks.",
@@ -168,6 +174,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept armed both camps, and each army has learned its shields and its enemy\'s fire share an author.',
       "It is out that the adept sold to both sides of the war, and the town caught between them knows what each side paid.",
+      'Both armies now know the same adept made their shields and the fire thrown at them, and neither trusts anything the adept sold.',
     ],
     're-adjudicated': [
       'Whoever paid the adept before is gone, but now the war presses in, and the adept goes on selling to both camps.',
@@ -191,6 +198,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept scried on the town for the occupier, and every family is working out how the occupation knew what it knew.',
       "The list is out, in the adept's hand: the town's gifted, listed for the occupier, and the adept's own name left off.",
+      "The gifted families on the adept's list are asking why the occupier came to their doors first, and the answer is in the adept's hand.",
     ],
     're-adjudicated': [
       "Whoever paid the adept before is gone, but now the occupier is in control, and the adept scries for it.",
@@ -214,6 +222,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept\'s research served a dark patron, and everything the adept ever wrote is being read again.',
       "The sponsorship is out: the forbidden work was commissioned, and the town has seen the patron's terms in the adept's own files.",
+      'Anyone who ever paid the adept for a working is asking now whether a dark patron had a hand in that too.',
     ],
     're-adjudicated': [
       "Whoever paid the adept before is gone, but now a dark patron rewards the forbidden work, and the adept's research answers to it.",
@@ -237,6 +246,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the mission bought its miracles from the adept, and every sign that won a convert is being looked at again.',
       "It is out that the adept sold false omens to the rival faith, and both congregations want the true readings.",
+      'Converts who changed faith over a sign are learning that the sign was bought from the adept.',
     ],
     're-adjudicated': [
       'Whoever paid the adept before is gone, but now a rival faith presses in, and it pays the adept for omens.',
@@ -260,6 +270,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public what the adept did while no one enforced the pact, and the returning temple has made the craft its first question.',
       "It is out that the adept did and sold what the old pact forbade, and the town is learning why it was forbidden.",
+      'The returning priests have made one question their first: what the adept did while the pact went unenforced.',
     ],
     're-adjudicated': [
       "Whoever paid the adept before is gone, but now the faith has gone cold, and nothing limits the adept's work.",
@@ -283,6 +294,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept sold workings as wonders while the temple was disgraced, and the faithful are asking what they actually knelt to.',
       'It is out that the adept sold made-to-order wonders to a town hungry for the holy, and the faithful want their offerings back.',
+      'People who gave offerings for a wonder have learned the adept made it to order, and they want the offerings back.',
     ],
     're-adjudicated': [
       'Whoever paid the adept before is gone, but now the priesthood is disgraced, and the adept sells wonders to whoever wants them.',
@@ -306,6 +318,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept\'s craft served the underworld, and everyone whose lock opened oddly now knows why.',
       "It is out that the underworld held the adept by debt, and the town has learned how the debt was paid.",
+      'Households whose locks opened on their own know now that the adept worked for the underworld, paying off a debt.',
     ],
     're-adjudicated': [
       'Whoever held the adept\'s debt before is gone, but the underworld holds the offices now, and whoever runs them found and bought the debt.',
@@ -329,6 +342,7 @@ export const ARCANE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the adept blurred memories through the scandal, and no testimony from those months is trusted, including the innocent kind.',
       "It is out who paid the adept to forget, who paid to be believed, and what the adept charged each.",
+      "Nobody's word from the scandal months is taken now, because the adept was paid to blur what people remember.",
     ],
     're-adjudicated': [
       'Whoever paid the adept before is gone, but now a scandal has broken, and whoever fears it pays the adept for memory-work.',
