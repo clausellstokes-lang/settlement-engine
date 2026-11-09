@@ -24,7 +24,9 @@ const STRESSES = [
   'insurgency', 'religious_conversion', 'slave_revolt', 'wartime',
 ];
 /** A guard or a patrol as a NOUN (the verb "people guard their food" is not a claim of a force). */
-const FORCE_NOUN = /\b(?:guards|patrols?|watchm[ae]n)\b|\b(?:a|the|every|hungry|standing) guard\b/i;
+// The chair's STOP #2 ruling keeps the arm at FULL reach: guard, patrol, watch or rota. "There is no watch"
+// is the reader's own statement of the absence, so a watch is counted only as a force that acts ("the watch …").
+const FORCE_NOUN = /\b(?:guards|patrols?|watchm[ae]n|rotas?)\b|\b(?:a|the|every|hungry|standing) guard\b|\b(?:the|its|their) watch\b/i;
 
 /** Open every closed disclosure, so a line inside a fold is read too. */
 function expandAll(container) {

@@ -15,18 +15,16 @@
 | `3e1ae9401` | the referee's cure: three rewritten lines take the tier noun back so no frame rises on the 1,000 | annex · both leaves |
 | `2417e0f46` | the referee's cure 2: DS-DEF-8 viability-intact street/visitor lines carry the tier noun (the new line had inherited the struck frame's 15/60 towns) | annex · defense leaf |
 
-## 2. The `safetyProfile.js` split by row (named to the chair before writing, for SW-B5)
+## 2. The `safetyProfile.js` split by row — FINAL in the chair's form (ruled 2026-11-09 ~01:25 UTC, named identically in SW-B5's record)
 
-- **SW-B6 (this lane):** `generateSafetyProfile`'s STRESS safety lines that name guards or patrols (insurgency, slave revolt) and the rows they add to `SAFETY_LINE_SIBLINGS`, plus the revolt-violence twin's patrol sentence. The guard assessment's "There is no watch" stays the ONE reader of the force fact; this lane changed no guard-body wording.
-- **SW-B5:** every `guardEffectivenessDesc` branch's wording (frame #5/6 the old-families line, #17 `prisonNote`, #18 "standard patrol coverage"), the crime-type lines, the criminal-structure frames, `economicDragDesc`, the plot hooks.
+- **SW-B5 holds exactly three literals** in `generateSafetyProfile`'s guard block: (a) the `prisonNote` ternary and its siblings, (b) the final `else` standard-patrol line, (c) the thorp/hamlet/village no-watch line ("There is no watch. The old families keep the peace…"), which stays THE ONE READER of the watch fact.
+- **SW-B6 holds everything else its rows need:** the STRESS safety lines (`safetyDescs`), `wallNote`'s "smugglers have to get past the {lawRef}", `safetyDesc`, and the `SAFETY_LINE_SIBLINGS` rows it adds. This lane changed the two stress lines and the revolt-violence twin, and no wording of (a), (b) or (c). `wallNote` and `safetyDesc` were not changed (§12).
 
-## 3. STOPs sent to the chair (each with the default taken)
+## 3. STOPs sent to the chair — all three RULED as the defaults (vetoable)
 
-1. **The annex door closed at the base** — default: commit the one-line census restamp as its own first commit (`2b9273194`).
-2. **DS-DEF-3's COMPOUND insurgency / slave revolt pools** print patrols and guards on no-force tabs (not named in the manifest; same file, door and cause; B1's "the defence pairs that are not the cars' go to SW-B6 now") — default: taken into the lane.
-3. **The food sentence's figures were RULED** (economicsTabFlow: "the ruled figures verbatim … ODQ §934.15/§934.20") and the stat line did not carry the residual — default: the sentence goes to words and the stat line gains "Short: N lbs/day" on its existing physical line, so §934.20's sum still closes in the label row.
-
-No answer had arrived from the chair at the time of writing; every default is vetoable.
+1. **The annex door closed at the base** — RULED (~01:25 UTC): the one-line census re-stamp is the lane's OWN FIRST commit (`2b9273194`), made only through `node scripts/wiring-census.mjs`; SW-B2 and SW-B5 make the identical commit, MERGE-WAVE re-takes the census on the integration line as its own cause.
+2. **THE WIDENING (§0 of this lane): DS-DEF-3's COMPOUND insurgency and slave revolt pools** came into this lane — RULED (~01:38 UTC): same annex file, door and cause (the watch fact unread), B1's "defence pairs that are not the cars' go to SW-B6 now"; declared on `guardPresence` with colour lines, no variant added; the red-first kept at FULL reach (the 109 no-force towns, fifteen stresses: no guard, patrol, watch or rota word anywhere on the tab — the arm's regex carries all four (the follow-up commit after `69de36372`), still green).
+3. **The food sentence's figures** — RULED (~01:42 UTC): words in the sentence; "Short: N lbs/day" on the stat line's existing row so §934.20's sum (production + imports + provision + the residual = need) still closes in the label row. **ODQ §934.15's "the ruled figures verbatim in the sentence" (the chair's ruling on rows 325/326, W1 ECO second seat) is SUPERSEDED here by the owner's style law of 2026-11-07 (`docs/chair/2026-11-07/WIRING-RULINGS-2026-11-07.md` §5: "the farmers who fell … not the per cent"; STYLE-RULINGS-2 B6: "the per cent stays in the stat line")**; the figures stay where the law keeps them. `economicsTabFlow`'s pins re-keyed by identity, never loosened; the bar untouched.
 
 ## 4. Every line old → new (for the owner's veto)
 
@@ -501,5 +499,6 @@ Registers moved through their doors, pins re-keyed by identity and cause (never 
 
 - **DS-DEF-3 COMPOUND politically fractured** ("Which faction holds a district…", ×3) — the retired word; SW-8's rename, not this lane's pools.
 - **DS-ECO-12 TRADE PROFILE pools** — "columns" machinery in three lines; not drawn at `economics.commercialProfile` (T2-4); for SW-8/SW-B1 if a surface draws them.
-- **The guard body's frames** (#5/6, #17, #18) and "volunteers with day jobs, not soldiers" — SW-B5's rows by the split.
+- **The guard body's frames** (#5/6, #17, #18) — SW-B5's three literals by the final split. "volunteers with day jobs, not soldiers" (the militia branch) is held by neither lane's named rows and stays untouched.
+- **`wallNote`'s "smugglers have to get past the garrison"** (the D1/D24 pair: Al-karez "You can sail into Al-karez unchallenged") and `safetyDesc` — this lane's by the final split, NOT changed: the D24 side is DS-DEF-2/the sea-approach writer, outside this lane's pools, so the contradiction needs a read of the sea approach the guard block does not hold. For SW-B1.
 - **The audit's slotted compositions** that need a composer slot this lane's door does not reach (`{topIncomePlain}` and the stress event in the DS-ECO-1 lead; `{wall}`, `{seat}`, `{captain}` in DS-DEF-1/-8) — need `economyStateProse.js` / `defenseStateProse.js`, outside the manifest; for SW-B1.
