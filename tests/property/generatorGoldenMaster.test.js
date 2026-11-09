@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 9, THE SW-B5 FRAMES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-9-swb5.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   524 of 525 rows (thorp 84, hamlet 84, village 84, town 104, city 84, metropolis 84) against point 8's post-state. THE CAUSE, ONE (first-parent step 46e0121c2): the SW-B5 FRAMES merge (lane/style-2-frames-2026-11-09 at 09d2fd01d; its generator causes the components: 6a9cf348a the safetyProfile frames 524, d49a59f2c the key-goods leak 36 — the lane's own, 524 composed).
+ *   Written from the staged tree S9 (the tree of 46e0121c2 with the door paths carried from the branch). ab57c9db.. -> 3f587a09..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 7, THE SW-B2 FIRST-IMPRESSIONS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-09-style-2-merge-7-swb2.json; the cloud chair signs under the owner's delegation, vetoable).
  *   110 of 525 rows (thorp 24, hamlet 24, village 24, town 14, city 12, metropolis 12) against point 6's post-state. THE CAUSE, ONE (first-parent step 52da4542c): the SW-B2 FIRST-IMPRESSIONS merge (lane/style-2-first-impressions-2026-11-09 at 249773c5d; its A·O16 causes the components: 443cf4051, b6d48ec0e — the lane's own 147 over its base, 110 on the line; settlementReason alone, field-diffed).

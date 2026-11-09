@@ -177,7 +177,9 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // in record 9's golden-master act, the chair's note (3) of 09:2x).
 // -> f3e83c3c STYLE-2-MERGE record 3, the SW-2 INSTITUTIONS merge (the catalogue law's 80 identity-text swaps reach the control row's
 // institutions; taken in the same act as the golden re-record, the train's note-3 idiom).
-const GOLDEN_CONTROL_HASH = 'f3e83c3cc9b0ce862e45a57738e69ba389ca0e2ada1c2fe9e3666a9d57df996a';
+// -> 3818ab12 STYLE-2-MERGE record 9, the SW-B5 FRAMES merge (the safetyProfile frames re-deal the control row's guard and
+// criminal-structure lines; taken in the same act as the golden re-record).
+const GOLDEN_CONTROL_HASH = '3818ab12f29cf4a32430dd6bf966f16df09fdcb0480d12cbaa0f5276912e5e75';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
