@@ -82,6 +82,32 @@ describe('the chair\'s conditions (b) and (c), 2026-11-09', () => {
     expect(governanceAccountOf(vacant).text.startsWith('No one holds the seat at Polaovo. Noble Claimant Ivo and Noble Claimant Mira contend for it.')).toBe(true);
   });
 
+  it('(c) a fractured town NAMES the blocs the stress added, even with no relationship row, and drops the fractured line', () => {
+    // The blocs as the generator itself adds them (stressFactions.js :: applyStressEventFactions).
+    const factions = [{ faction: COUNCIL, power: 50, isGoverning: true, category: 'government' }];
+    applyStressEventFactions(factions, (t) => t === 'politically_fractured', COUNCIL, false, {}, [], []);
+    const blocs = factions.filter((f) => !f.isGoverning).map((f) => f.faction);
+    expect(blocs.length, 'fixture premise: the stress added its blocs').toBeGreaterThanOrEqual(2);
+    const s = planted({ recentConflict: FRACTURED_VIGNETTE, stress: ['politically_fractured'] });
+    s.powerStructure.factions = factions;
+    const g = governanceAccountOf(s);
+    for (const name of blocs) expect(g.text).toContain(powerNameInProse(name, true).replace(/^The /, ''));
+    expect(g.text).toContain('the right to rule by other means');
+    expect(g.text).toContain('Each side makes its own decisions now, and the others overturn them within days.');
+    expect(g.text, 'the fractured line is replaced by the names').not.toContain(FRACTURED_VIGNETTE.slice(0, 30));
+    expect(g.fallback).toBe(false);
+  });
+
+  it('(c) the royal pair is named too', () => {
+    const factions = [{ faction: 'Royal Authority', power: 50, isGoverning: true, category: 'government' }];
+    applyStressEventFactions(factions, (t) => t === 'politically_fractured', 'Royal Authority', false, {}, [], []);
+    const s = planted({ stress: ['politically_fractured'] });
+    s.powerStructure.factions = factions;
+    s.npcs = [];
+    const g = governanceAccountOf(s);
+    expect(g.text).toContain('The Loyalist Noble Bloc backs the crown for as long as its favours last.');
+    expect(g.text).toContain('The Reform Noble Bloc wants the old obligations renegotiated, and no longer cooperates.');
+  });
 });
 
 describe('the composed governance paragraph', () => {

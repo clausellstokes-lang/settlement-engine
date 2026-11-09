@@ -161,6 +161,48 @@ export function estrangedPowersOf(settlement, governing) {
 }
 
 /**
+ * THE BLOCS A FRACTURE ADDS (the chair's condition (c), 2026-11-09): a politically_fractured town's
+ * stress adds two powers to the roster (generators/power/stressFactions.js :: applyStressEventFactions)
+ * that hold no relationship row with the ruler, so the estrangement read cannot see them, and the
+ * fractured vignette said "two … have stopped coming to meetings" without a name. The record keeps each
+ * bloc's own description, which says what it is; each reading here is that description in plain words.
+ * Pinned against the generator's own writer (tests/domain/governanceAccount.test.js), so a reworded
+ * description reds there rather than silently dropping a name.
+ * @type {ReadonlyArray<{ desc: RegExp, withdrawn: boolean, line: (names: string, plural: boolean) => string }>}
+ */
+const FRACTURE_BLOCS = Object.freeze([
+  Object.freeze({ desc: /^Claims legitimate authority through different means/, withdrawn: true,
+    line: (n, pl) => `${n} ${pl ? 'claim' : 'claims'} the right to rule by other means, and no longer ${pl ? 'come' : 'comes'} to the hall's meetings.` }),
+  Object.freeze({ desc: /^Noble houses that want a renegotiation of feudal obligations/, withdrawn: true,
+    line: (n, pl) => `${n} ${pl ? 'want' : 'wants'} the old obligations renegotiated, and no longer ${pl ? 'cooperate' : 'cooperates'}.` }),
+  Object.freeze({ desc: /^Noble houses backing the current crown line/, withdrawn: false,
+    line: (n, pl) => `${n} ${pl ? 'back' : 'backs'} the crown for as long as its favours last.` }),
+  Object.freeze({ desc: /^Would support stability, if a price can be agreed/, withdrawn: false,
+    line: (n, pl) => `${n} will back whichever side meets ${pl ? 'their' : 'its'} price.` }),
+]);
+
+/**
+ * The fracture's blocs the record names, each reading once, in the order above.
+ * @param {Record<string, any>} s @param {Set<string>} already names the estrangement read has said
+ * @returns {{ lines: string[], withdrawn: boolean, names: string[] }}
+ */
+function fractureBlocsOf(s, already) {
+  const factions = Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions : [];
+  const lines = [];
+  const names = [];
+  let withdrawn = false;
+  for (const reading of FRACTURE_BLOCS) {
+    const of = factions.filter((f) => f && !f.isGoverning && reading.desc.test(text(f.desc)) && !already.has(text(f.faction)))
+      .map((f) => text(f.faction)).filter(Boolean);
+    if (!of.length) continue;
+    names.push(...of);
+    lines.push(reading.line(capFirst(listOf(of.map((n) => powerNameInProse(n)))), of.length > 1 || pluralPowerName(of[0])));
+    if (reading.withdrawn) withdrawn = true;
+  }
+  return { lines, withdrawn, names };
+}
+
+/**
  * THE PARAGRAPH, or null where the record names no governing power.
  * @param {unknown} settlement
  * @returns {{ text: string, estranged: Array<{ name: string, tie: string }>, fallback: boolean } | null}
@@ -223,6 +265,17 @@ export function governanceAccountOf(settlement) {
   else if (gravest === 'competitive') sentences.push('The hall still gives its orders, but it can no longer make them hold alone.');
   else if (gravest === 'tense') sentences.push('Nothing large is settled in the hall without bargaining with them first.');
 
+  // 4b. A FRACTURE'S BLOCS, NAMED (condition (c)): where the town is politically fractured and the
+  // record holds the blocs the stress added, they are named, and the fractured line's own consequence
+  // follows them; the unnamed fractured line is then not printed.
+  const stressTypes = (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
+    .map((x) => text(x && typeof x === 'object' ? x.type : x)).filter(Boolean);
+  const blocs = stressTypes.includes('politically_fractured')
+    ? fractureBlocsOf(s, new Set(estranged.map((e) => e.name)))
+    : { lines: [], withdrawn: false, names: [] };
+  sentences.push(...blocs.lines);
+  if (blocs.withdrawn) sentences.push('Each side makes its own decisions now, and the others overturn them within days.');
+
   // 5. THE VIGNETTE. The generator's vignette is its primary stress's (stressPriority.js's order, the
   // generator's own). Under a stress OTHER than politically_fractured it is the EVENT sentence the style
   // law asks for, and it closes the paragraph whatever else is named (the chair's ruling on the seat's
@@ -230,11 +283,9 @@ export function governanceAccountOf(settlement) {
   // ("two … have stopped coming to meetings") and the unstressed baseline line are the ones the names
   // replace: they print only as the fallback, where no estranged power is named.
   const vignette = text(s.powerStructure?.recentConflict);
-  const stresses = (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
-    .map((x) => text(x && typeof x === 'object' ? x.type : x)).filter(Boolean);
-  const primary = resolvePrimaryStress(stresses);
+  const primary = resolvePrimaryStress(stressTypes);
   const eventVignette = !!primary && primary !== 'politically_fractured';
-  const fallback = estranged.length === 0 && !!vignette;
+  const fallback = estranged.length === 0 && blocs.names.length === 0 && !!vignette;
   if (vignette && (eventVignette || fallback)) sentences.push(vignette);
 
   return { text: sentences.join(' '), estranged, fallback };
