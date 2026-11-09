@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 207,
       "sha-pin": 2,
-      "tree": 164
+      "tree": 165
     },
     "files": {
       "banner": [
@@ -467,7 +467,8 @@
     "_rosterGrowth2026-11-09-style-2-merge-record-16": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 163 -> 164, docs/shift-records/2026-11-09-style-2-merge-16-sw7.json, record 16, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-record": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `dated` 205 -> 206, docs/INTEGRATION_STYLE_2_2026-11-09.md, the merge record with the RULE 14 hand-back, born dated; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-contradictions": "ONE document JOINED the roster by being BORN into it (SW-B1 CONTRADICTIONS, session session_01FbPLbbgWZAEbwgH7Hx3jJx, a child of the cloud chair session_01FbPLbejcfwX5nii12VM673, on lane/style-2-contradictions-2026-11-09 cut from MERGE-TRAIN's final tip bd07005b9): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md, the lane's record, born dated (its citations are `path :: symbol`); measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-swb1": "THE UNION AT THE SW-B1 CONTRADICTIONS MERGE (STYLE-2-MERGE-2, session session_01FbPLbc8gtufq3JftaYsRGV): both sides' notes kept; `dated` 206 -> 207 (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-09-style-2-merge-swb1": "THE UNION AT THE SW-B1 CONTRADICTIONS MERGE (STYLE-2-MERGE-2, session session_01FbPLbc8gtufq3JftaYsRGV): both sides' notes kept; `dated` 206 -> 207 (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-09-style-2-merge-record-17": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-2, session session_01FbPLbc8gtufq3JftaYsRGV): `tree` 164 -> 165, docs/shift-records/2026-11-09-style-2-merge-17-swb1.json, record 17, born into the tree class; measured once by this walker; nothing changed class."
   },
   "rows": []
 }
