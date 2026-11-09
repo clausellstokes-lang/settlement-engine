@@ -295,53 +295,54 @@ reg('religious','stable',
 );
 
 // ── criminal ──────────────────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the crews' seat-holders in plain words, the machinery struck; the goals untouched.
 reg('criminal',GOVERNANCE_FRACTURED,
-  { position:  'Operates criminal interests in a settlement where governance is failing. A governance vacuum is the optimal environment for criminal operations to expand.',
+  { position:  'Heads the leading crew while the seat fails; whatever the seat stops watching is there to take.',
     goal:      'Take over whatever the seat has stopped watching, and dig in before it recovers.',
-    constraint:'Expanding too visibly during governance failure risks triggering a consolidation response specifically aimed at criminal interests.' },
-  { position:  'Operates within a criminal network as a position secondary to the dominant criminal interest in a settlement with failing governance.',
+    constraint:'Growing too openly now may make the crew the first thing a recovered seat goes after.' },
+  { position:  'Holds a place under the crew\'s boss while the seat fails.',
     goal:      'Climb over the boss\'s other lieutenants while nobody is enforcing anything.',
-    constraint:'Advancement within the hierarchy requires either demonstrating value to it or demonstrating threat to it. Both are visible to the hierarchy.' }
+    constraint:'Climbing means being worth more to the boss or being more of a danger, and the boss can see both.' }
 );
 reg('criminal','corruption',
-  { position:  'Has arrangements with enforcement that create unusual operational freedom. The position depends on those arrangements remaining stable.',
+  { position:  'Heads the crew that has bought some of those who keep order, and works freely while they stay bought.',
     goal:      'Keep the bribed officials paid and quiet, and keep proof of every payment in case they turn.',
-    constraint:'The arrangements are known to multiple parties. They are leverage over the operation as much as they are protection for it.' },
-  { position:  'Operates a position within a criminal network that benefits from the network\'s enforcement arrangements without being the architect of them.',
+    constraint:'Too many people know about the payments; they hold the crew as much as they shield it.' },
+  { position:  'Holds a place in a crew that has bought protection, without having arranged it.',
     goal:      'Use the bought protection while it lasts, and have a way out when it ends.',
-    constraint:'Operational independence from the arrangements while continuing to benefit from them requires a position the network may not tolerate.' }
+    constraint:'Living off the bought protection while keeping clear of it is a balance the crew may not allow.' }
 );
 reg('criminal','food_crisis',
-  { position:  'Controls informal distribution channels for goods that are in shortage. Supply crises create extraordinary criminal economic opportunity.',
+  { position:  'Heads the crew that moves goods on the side while food is short, and the shortage pays well.',
     goal:      'Sell food on the side at hungry prices, without becoming the face of the shortage.',
-    constraint:'Visible profiteering during a population-level crisis creates the moral clarity that even compromised enforcement cannot ignore.' },
-  { position:  'Operates a secondary position in a criminal network that is expanding into supply crisis opportunity.',
+    constraint:'Open profit from the hunger makes the crew a target even the bought officials cannot ignore.' },
+  { position:  'Holds a place in a crew that is moving into the black-market food trade.',
     goal:      'Get a cut of the black-market food before the boss shuts everyone else out.',
-    constraint:'Securing that role requires either offering something the dominant interest needs or accepting a subordinate position that leaves future leverage limited.' }
+    constraint:'A share of it means offering the boss something needed, or taking a small part and no say later.' }
 );
 reg('criminal','economic_stress',
-  { position:  'Operates in an economically pressured settlement where desperation expands the pool accessible to criminal recruitment and exploitation.',
+  { position:  'Heads the crew while money is short, and desperate people are easy to recruit and use.',
     goal:      'Sign up the desperate while they are cheap, and keep them once times get better.',
-    constraint:'Operations built on desperation are vulnerable to improvement in the economic conditions that created them.' },
-  { position:  'Holds a secondary position in a criminal network operating in an economically stressed settlement.',
+    constraint:'A crew built on desperation shrinks when times get better.' },
+  { position:  'Holds a place in a crew while money is short.',
     goal:      'Make themselves worth keeping to the crew for reasons that will survive good times.',
-    constraint:'A stable position within the network requires demonstrated value that survives changing conditions. This is harder to demonstrate during the conditions themselves.' }
+    constraint:'Staying worth keeping means showing a value that will last, which is hard to show in the middle of hard times.' }
 );
 reg('criminal','contested',
-  { position:  'Operates criminal interests in a contested political environment where enforcement attention is distracted.',
+  { position:  'Heads the crew while rivals fight over the seat and those who keep order look elsewhere.',
     goal:      'Move into new rackets while the claimants to the seat are busy with each other.',
-    constraint:'Both sides of a political contest may attempt to use criminal enforcement as a tool against the other. The current operational freedom is unpredictable.' },
-  { position:  'Holds a position within a criminal network that is attempting to expand during political contestation.',
+    constraint:'Either side may turn on the crew to hurt the other, so today\'s freedom could end without warning.' },
+  { position:  'Holds a place in a crew that is pushing into new ground while the seat is fought over.',
     goal:      'Grab their own share of the crew\'s new ground, so they keep it if the push fails.',
-    constraint:'Network position consolidated during an expansion that fails is exposed when the network contracts.' }
+    constraint:'Ground taken in a push that fails is the first to be lost when the crew pulls back.' }
 );
 reg('criminal','stable',
-  { tags: CALM_ONLY, position:  'Operates within a well-ordered settlement where enforcement is functional and operational space is defined by what enforcement chooses not to pursue.',
+  { tags: CALM_ONLY, position:  'Heads the crew in quiet times, working only where those who keep order choose not to look.',
     goal:      'Keep the rackets small and steady enough that the law never bothers to look.',
-    constraint:'Sustained operational success below the enforcement threshold makes the operation visible to those who look for the threshold.' },
-  { tags: CALM_ONLY, position:  'Holds a secondary position in a criminal network operating in a settled environment with functional enforcement.',
+    constraint:'Staying just under notice for too long draws the eye of anyone who looks for exactly that.' },
+  { tags: CALM_ONLY, position:  'Holds a place in a crew in quiet times, with order well kept around it.',
     goal:      'Prove to the boss they can be trusted with more, without the law learning their name.',
-    constraint:'Advancement within the network requires demonstrating capacity. Demonstration is visibility.' }
+    constraint:'Getting ahead in the crew means showing what one can do, and showing it is how one gets noticed.' }
 );
 
 // ── magic ─────────────────────────────────────────────────────────────────────

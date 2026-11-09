@@ -60,3 +60,4 @@ readsPlain('military', /enforcement|apparatus|operational|unilateral|neutrality/
 readsPlain('economy', /commercial|operat|infrastructure|regulatory|distribution channel/i);
 readsPlain('crafts', /commercial|operat|infrastructure|regulatory|distribution channel/i);
 readsPlain('religious', /pastoral|clerical|endorsement|intermediar|encroach|endowment|institution|welfare|stabiliz/i);
+readsPlain('criminal', /criminal interests|operat|optimal|hierarchy|enforcement|network|architect|threshold|profiteering|exploitation|moral clarity/i);
