@@ -628,7 +628,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // [20, 12] PEOPLE-5B EDIT a725df7e4 (the grouping walks and the affiliation rows leave); none declares `readable`.
     // ALLEGIANCE-CAR1 (2026-11-08, 4e55421ea, measured by import): [20, 12] -> [21, 12], the allegiance receipt's
     // `simulationTrace[].downstreamEffects[].target` row (it names the criminal power); it declares no `readable`.
-    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([21, 12]);
+    // ALLEGIANCE-CAR4 (2026-11-09, 03ff59084 THE GOALS REBUILT, measured by import): [21, 12] -> [21, 14], the card's
+    // `goal.short` and `goal.long` rows (npcs[].goal.*: the goal families name the people a goal binds; the durable join is
+    // goal.intent.*.target.id) declared non-cascaded for a PERSON rename, owner-gated prose; neither declares `readable`.
+    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([21, 14]);
     expect(declaring(FACTION_NON_CASCADED).length + declaring(NPC_NON_CASCADED_SURFACES).length).toBe(0);
     const importers = srcModules()
       .map((rel) => ({ rel, clause: /import\s*\{([^}]*)\}\s*from\s*'[^']*factionRename\.js'/s.exec(readFileSync(resolve(ROOT, 'src', rel), 'utf8')) }))
