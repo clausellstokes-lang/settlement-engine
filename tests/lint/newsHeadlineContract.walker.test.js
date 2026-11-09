@@ -153,7 +153,9 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // the working tree, byte-equal to the merge): 40/2/80/0/80/596/800 → 40/2/80/0/80/588/792; no home in or out; applied|tradition 22/22 →
     // 18/18 (both fields, the integration parent's own count), at news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE, not bisected. Every row stays indicative.
     // 2026-11-08 (MERGE-WAVE at the FIX-PUBLIC-VEIL merge, the veiled re-deal's year, at news-headline-contract.mjs's ADDRESS_TOTALS): one home arrives.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 41, fields: 2, identities: 82, prospectiveIdentities: 0, indicativeIdentities: 82, distinctValues: 596, occurrences: 782 });
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, e5f88930b; car 1's re-dealt year — the hidden allegiance 5902f1a4a, then J-19 d131ab158 —
+    // at news-headline-contract.mjs's ADDRESS_TOTALS): 41/2/82/0/82/596/782 → 43/2/86/0/86/606/792; four homes in and two out. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 43, fields: 2, identities: 86, prospectiveIdentities: 0, indicativeIdentities: 86, distinctValues: 606, occurrences: 792 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

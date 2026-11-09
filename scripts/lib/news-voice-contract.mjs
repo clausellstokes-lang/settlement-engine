@@ -186,8 +186,17 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
 // functions (the voice throw disabled in an untracked scratch copy only). 396/1/395/40 → 391/1/390/41, the same act as the headline and
 // prose-family contracts: one home arrives (applied|resource_depletion), indicative; the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR1 MERGE POINT (e5f88930b, car 1 = lane/allegiance-car1-2026-11-08 at
+// 7395b5dab; the news family re-recorded in ONE act, MERGE-WAVE's 460b1b0d9 form), the cause car 1's own generator moves re-dealing
+// the corpus's AO-0 year: the hidden allegiance (5902f1a4a, dealt at the seam on its own keyed forks) and chiefly J-19 (d131ab158:
+// ensureNpcStates reads the hidden allegiance, so the lit pulse's knowledge desk changes; herald 443 → 450 on its lane). ONE corpus
+// build at the merged tip, each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// 391/1/390/41 → 396/0/396/43 (equal to the observed-shape walker's rung-36 pin), the same act as the headline and prose-family
+// contracts: four homes arrive (applied|commons_gathering, applied|npc_verdict, queued|npc_sabotage, queued|trade_pressure) and two
+// leave (applied|resource_depletion, queued|npc_reform); the one retirement is gone (396 − 0 = 396). Every owned home reads
+// indicative (applied|npc_protect 17 → 18, applied|npc_reform 23 → 25); the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 391, retirements: 1, finalEntries: 390, homes: 41,
+  pulseRoots: 12, introductions: 396, retirements: 0, finalEntries: 396, homes: 43,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

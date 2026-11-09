@@ -239,16 +239,28 @@ const EXPECTED_ROOTS = new Map([
 // the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
 // functions (the voice throw disabled in an untracked scratch copy only). scalarRows 37359 → 37103; wizardNews 395/2511/396 →
 // 390/2486/391 (equal to the observed-shape walker's rung-35 pin); regional 81 → 82. Two identities ARRIVE (58 → 60).
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR1 MERGE POINT (e5f88930b, car 1 = lane/allegiance-car1-2026-11-08 at
+// 7395b5dab; the news family re-recorded in ONE act, MERGE-WAVE's 460b1b0d9 form), the cause car 1's own generator moves re-dealing
+// the corpus's AO-0 year: the hidden allegiance (5902f1a4a, dealt at the seam on its own keyed forks) and chiefly J-19 (d131ab158:
+// ensureNpcStates reads the hidden allegiance, so the lit pulse's knowledge desk changes; herald 443 → 450 on its lane). ONE corpus
+// build at the merged tip, each library's own functions (the voice throw disabled in an untracked scratch copy only). scalarRows
+// 37103 → 37664; wizardNews 390/2486/391 → 396/2525/396 and regional 82/82 → 80/80 (equal to the observed-shape walker's rung-36
+// pin). Identities HOLD at 60, two in and two out: pulseHistory[].consequenceOutcomes[].proposalPayload.reason 1/1 and
+// pulseHistory[].warAuthorityVerdicts[].kind 1/3 ARRIVE; pulseHistory[].selectedOutcomes[].metadata.resourceTaxonomy.{kind,type} 1/1
+// each LEAVE (the resource_depletion home's). pulseHistory 47/1050/5341 → 47/1040/5336 (20 surviving rows move a count; the
+// headline lanes selected 96/164 → 97/164, mechanical 26/50 → 25/50, consequence 79/188 → 78/187; corruptionEvents[].kind 1/22 →
+// 2/31); regionalLog 2/8/169 → 2/4/153 (changes[].kind 7/87 → 3/73, sourceEvent.type 1/82 → 1/80); chronicle and timeline hold.
+// Totals 60/1073/5529 → 60/1059/5508; bytes 7823 → 7798; digest f207dcfb → 8a4abd46. Reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 37103, canonEventLogEntries: 1, wizardNewsFinalEntries: 390,
-  wizardNewsAccumulatedEntries: 2486, wizardNewsUnique: 391, pulseHistory: 12,
-  regionalEventLog: 82, regionalEventLogUnique: 82, aiChronicle: 1,
+  scalarRows: 37664, canonEventLogEntries: 1, wizardNewsFinalEntries: 396,
+  wizardNewsAccumulatedEntries: 2525, wizardNewsUnique: 396, pulseHistory: 12,
+  regionalEventLog: 80, regionalEventLogUnique: 80, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 47, distinctValues: 1050, occurrences: 5341 },
-  { family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 169 },
+  { family: 'pulseHistory', identities: 47, distinctValues: 1040, occurrences: 5336 },
+  { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 153 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
 // 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"):
@@ -257,9 +269,9 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 60, distinctValues: 1073, occurrences: 5529 });
-const EXPECTED_ROWS_BYTES = 7823; // MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive
-const EXPECTED_ROWS_SHA256 = 'f207dcfbe448397297ad6cb0453902a1ef7150d0c897a44a57733c37d81bb5c2';
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 60, distinctValues: 1059, occurrences: 5508 });
+const EXPECTED_ROWS_BYTES = 7798; // MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out
+const EXPECTED_ROWS_SHA256 = '8a4abd460b62c9df6cf76751b259468bb1f1e5c71a5c3b67f7cf4f6739dcd34c';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;
