@@ -3645,8 +3645,8 @@ street, the unfolding).
 
 **override active, viability intact** {colour}
 1. `[ledger]` {settlement} should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
-2. `[street]` Life at {settlement} goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
-3. `[visitor]` A visitor would not guess at the trouble from {settlement}'s streets; the place is shaken but standing.
+2. `[street]` Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+3. `[visitor]` A visitor to {settlement} would not guess at the trouble from the streets; the town is shaken but standing.
 
 **multiple stresses, one posture shown** {colour}
 1. `[ledger]` More than one crisis presses on {settlement} at once, and its defence has to answer all of them.

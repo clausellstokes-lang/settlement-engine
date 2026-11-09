@@ -6603,15 +6603,13 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Life at {settlement} goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
-          "slots": [
-            "settlement"
-          ],
+          "text": "Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.",
+          "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "A visitor would not guess at the trouble from {settlement}'s streets; the place is shaken but standing.",
+          "text": "A visitor to {settlement} would not guess at the trouble from the streets; the town is shaken but standing.",
           "slots": [
             "settlement"
           ],
