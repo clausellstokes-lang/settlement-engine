@@ -42,6 +42,8 @@ import {
 } from './relationshipEvolution.js';
 import { computeAggressiveness } from './disposition.js';
 import { stablePart } from './worldState.js';
+// STYLE-2 C2 (SW-12): the reaction lines' variants, chosen by the house selection kernel.
+import { pickLine } from './proseSelection.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -300,8 +302,13 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
         negotiate: `${reactorName} opens negotiations`,
       })[move] || `${reactorName} reacts`;
       const summary = /** @type {Record<string, string>} */ ({
-        pre_empt: `Seeing ${mobName} mobilize, the belligerent ${reactorName} prepares a pre-emptive move.`,
-        fortify: `${reactorName} answers ${mobName}'s mobilization by hardening its own defences.`,
+        // STYLE-2 C2 (SW-12, A2·149): what the neighbour is doing about it, in plain words.
+        pre_empt: pickLine([
+          `${mobName} is arming, and ${reactorName} means to strike before it is ready.`,
+          `${reactorName} will not wait for ${mobName}'s army to be ready; it means to strike first.`,
+          `As ${mobName} gathers its army, ${reactorName} readies a blow of its own.`,
+        ], `candidate.mobilization_reaction.${move}.${stablePart(otherId)}.${stablePart(mobId)}.${tick}`),
+        fortify: `With ${mobName} arming, ${reactorName} is looking to its own walls and watch.`,
         seek_allies: `${reactorName} reaches for protection as ${mobName} gears for war.`,
         negotiate: `${reactorName} opens talks to defuse ${mobName}'s mobilization before it threatens trade.`,
       })[move] || `${reactorName} reacts to ${mobName} mobilizing.`;
@@ -324,6 +331,9 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
       // a scalar's NAME in an interpolation as a leak whatever it evaluates to, and it is
       // right to. `aggr` is centred on 1.0: above it the court answers in kind, below it
       // it shies off, and exactly at it the disposition decides nothing.
+      const reactionSeed = `candidate.mobilization_reaction.${move}.${stablePart(otherId)}.${stablePart(mobId)}.${tick}`;
+      const relWords = /** @type {Record<string, string>} */ ({ cold_war: 'is locked in a cold war with', hostile: 'is hostile to', rival: 'is a rival of' })[String(relType)]
+        || `is a ${String(relType).replace(/_/g, ' ')} of`;
       const leanWord = aggr > 1 ? 'toward answering in kind' : aggr < 1 ? 'away from confrontation' : 'neither way';
       byReactor.set(otherId, reactionCandidate({
         move,
@@ -333,10 +343,17 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
         severity: /** @type {Record<string, number>} */ (REACT_SEVERITY)[move],
         headline,
         summary,
+        // STYLE-2 C2 (SW-12, A2·150): the tie said in words (never a raw `cold_war` token), the
+        // court's temper in a sentence, and the bounded nudge's machinery struck.
         reasons: [
-          `${reactorName} is a ${relType} of the mobilizing ${mobName}.`,
-          `Its standing disposition leans ${leanWord}, and it chose to ${move.replace(/_/g, ' ')}.`,
-          ...(relationshipNudge ? [`A bounded ${Object.keys(relationshipNudge.relationshipPatch).join('/')} nudge (${relationshipNudge.incidentType}).`] : []),
+          pickLine([
+            `${reactorName} ${relWords} ${mobName}, which is arming.`,
+            `${mobName} is arming, and ${reactorName} ${relWords} it.`,
+            `${reactorName} ${relWords} ${mobName}, and ${mobName} is gathering its army.`,
+          ], `${reactionSeed}:tie`),
+          ...(leanWord === 'toward answering in kind'
+            ? [pickLine([`${reactorName} is quick to answer force with force.`, `${reactorName} has never been slow to meet force with force.`, `It is ${reactorName}'s way to answer arms with arms.`], `${reactionSeed}:lean`)]
+            : leanWord === 'away from confrontation' ? [`${reactorName} is slow to pick a fight.`] : []),
         ],
         relationshipNudge,
       }));
