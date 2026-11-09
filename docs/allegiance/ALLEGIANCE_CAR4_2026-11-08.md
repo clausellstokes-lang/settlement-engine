@@ -46,7 +46,8 @@ Per tier, the share with no goal at the base: thorp 3.4% · hamlet 4.6% · villa
 | `eabc93dfe` CAUSE 2 | ITEM 15: `poolMap.js :: titleLinesFor`; the 147 titles' secrets and presentations by title |
 | `0a18ff311` CAUSE 3 | the telemetry fingerprint, shape 2 (no generator move) |
 | `34ab636a7`, `70f08597d`, `e84071544`, `fcc77e526`, `ced60375a`, `e47e96415`, `9d293639b` | registers through their doors (§6) |
-| (the register seat's) | the observed-shape rung 37; writer reach (§6) |
+| `ce9b067ca`, `622f80120`, `dd1800956` (the register seat, this car's subagent) | the observed-shape rung 37; writer reach re-frozen (§6) |
+| `396b793d3` … `4e2ab3b98` (the pin seat, this car's subagent) | the ten pins that read the retired draws, re-keyed by identity and cause (§10) |
 
 ### 2.1 How A9 draws (design §6.2; the receipt names each step)
 
@@ -124,12 +125,15 @@ The blast is TOTAL as the design foresaw (every card's goal; item 15 every title
 - **The edge-shared bundles** rebuilt (`e47e96415`, engine sourceHash `2e0998d8d7980c1f` → `c1e5a2060003cda4`, 349 inputs; 955/957 edge tests).
 - **The landing fixture** re-emitted at `lf-033` (its two shown goals; receipts unchanged).
 - **The rename ledgers** (in cause 1): `factionRename.js` (goal.long prose; the power-kind intent targets as keys, a dotted parent), `institutionRename.js` (the house-kind targets; the exact-row pin 39 → 41), `goal.short/long` declared non-cascaded for a person rename (prose policy, owner-gated).
-- **The observed-shape rung 37 and writer reach**: <REGISTER-SEAT>.
-- **The fork census**: <FORK>.
+- **The observed-shape rung 37** (`ce9b067ca` act 1, `622f80120` act 2; review `docs/allegiance/osr-rung37-goals-review.json`): NEW 8 · GONE 19 · DECREASED 1 · SAME 1,514, each bisected (six scans: the parent `f6209c0c5` equals the schema-36 register; `eabc93dfe` and `34ab636a7` move nothing). NEW: 7 in `envoyEncounter.js` (cause 1: the envoy's own `intent` records now ground to the goal's `intent` shape) and 1 in `structuralFingerprint.js` (cause 3). GONE: 3 in `npcGenerator.js`, a lawful repair (the retired goal draw's reads gone; `_government` 3 → 1); **16 retired as UNCURED INSTRUMENT EROSION, the rung-32 precedent — a judgment call for the chair's veto**: 8 `facets` rows in `worldPulse/warSeatBooks.js` now also bind to the goals' `short` shape, and 8 `merchant` rows in `facts/drawDeclared.js` / `facts/factVocabulary.js` lost their binding when cause 1 moved the stress-override table; every one of the 16 reads still stands in source, none tagged, none class (a); curing them is a corpus or detector change, not this car's. The freeze: 2,177 findings · 1,523 identities · 428 files; bank 76/50.
+- **Writer reach** re-frozen through its shrink-only door (`dd1800956`, `--write`): cohort 1,418 → 1,418, 0 dark, 0 stale, nothing folded; the goals add 13 judged identities (12,233 → 12,246, lit 609 → 610). Both walkers + the four observed-shape suites 227/227.
+- **The fork census**: `people-goals` joins the coherence tail's labels (`059ea4b4f`, retired under a held roster); the hash channel's external fnv1a32 callers 14 → 15 (`b95d667fb`, traced caller by caller: both causes shift the birth stream, one card's `power` 1 → 2 and a tie draws a new archetype). The fork census's A1 control-row hash waits on the golden re-record (MERGE-TRAIN).
 
 ## 7. THE BYTES (STOP 3, reported to the chair)
 
-The generation worker bundle: base `f6209c0c5` **1,769,418 B** (already +33,537 over `WORKER_BUNDLE_CEILING_BYTES` 1,735,881 — a base red a dist-less clean run cannot see); tip **1,970,510 B** — this car adds **+201,092 B**, the two writers' data files now shipped in the worker (`goalFamilies.js`, `titleSecretsPresentations.js`). A rise is the owner's: the ceiling is untouched and the bytes are recorded **OWED**. Buy-back candidate: the title table lazy-split out of the worker.
+The generation worker bundle: base `f6209c0c5` **1,769,418 B** (already +33,537 over `WORKER_BUNDLE_CEILING_BYTES` 1,735,881 — a base red a dist-less clean run cannot see); tip **1,970,510 B** — this car adds **+201,092 B**, the two writers' data files now shipped in the worker (`goalFamilies.js`, `titleSecretsPresentations.js`). A rise is the owner's: the ceiling is untouched on this lane and the bytes are recorded **OWED**, attributed to the owner's content (the chair's ruling on STOP 3: MERGE-TRAIN re-records the worker ceiling once at its final tip, by car).
+
+The chair's two measures (no build): (a) **gzip** (the user pays gzip): the worker **566,965 B at the base, 630,311 B at the tip (+63,346)**; the two tables minified alone (esbuild `--minify`) — `goalFamilies.js` **45,319 B, 13,881 B gzip**; `titleSecretsPresentations.js` **150,003 B, 46,587 B gzip** — together about 60 KB of the 63 KB gzip rise, the rest the wiring. (b) **Lazy?** `goalFamilies.js`: **no** — A9 reads it synchronously inside the synchronous pipeline (`generateCoherence`), so a lazy load needs an async seam in the generator. `titleSecretsPresentations.js`: **no** for the same reason (`generateSingleNPC` draws from it at birth); either could only be split into a second chunk the worker ENTRY awaits before its first request, which moves the bytes to a second fetch, not out of the user's total. The buy-back, if any, is the train's or a post-train lane's.
 
 ## 8. Judgment calls (each the default applied; vetoable)
 
@@ -153,7 +157,18 @@ The generation worker bundle: base `f6209c0c5` **1,769,418 B** (already +33,537 
 
 ## 10. The proof
 
-<PROOF>
+- **The full vitest run** at `fcc77e526` in a clean worktree: 37,822 tests, 117 failed, against the base's 37,805 tests and 77 failed (82 lines, `base-reds.txt`). One base red is green at the tip (`regenPreservesUserCanon`: no secret names a displaced character). The tip-only reds, every one cured after that run or named:
+  - cured by the register commits that followed it: the engine bundle replay ×4, engineServiceCore, the edge-shared freshness and reproducibility ×7 (`e47e96415`), the landing fixture ×2 (`9d293639b`), the observed-shape walker ×3 and writer reach ×4 (`622f80120`, `dd1800956`), the holder census ×2 (`ced60375a`);
+  - cured by the pin seat, re-keyed by identity and cause (never loosened): stress-type registration (`396b793d3`: STRESS_GOALS is the siege rows by design), the allegiance integration's agent goal (`e6a096eb2`: the ALLEGIANCE family's), crisis-blind soak1k-1803 (`f1b2b441c`), the fork census A6 (`b95d667fb`), the held-roster A2 (`059ea4b4f`), the crime-signal writers (`a6ead1d4d`: item 15's title secrets do NOT bypass the substitution; the secret row re-pointed 52 → 255), the certification cohort 59 → 52 (`6e897d6f7`: the seven that left held only the retired role goal "Found an institution (a hospital…)"), self-vouch soak1k-178 (`a92dc1ed1`), terrain pools soak1k-921 (`7b298e7af`), the edit-corpus A8 [21, 12] → [21, 14] (`4e2ab3b98`);
+  - **STOP 4, left red** (4 arms of `tests/data/foundingSeeds.probe.test.js`): the showcase's receipt 3 read the Thieves' Guild head's structural template goal, which A9 overwrites under the chair's ruling (2); options sent to the chair;
+  - red at the base and the tip alike: the edit-corpus A3 / A7 (the base reads 328 and [668, 264, 2100] on its own archive; this car's share +0 and +2/+2/+8), the golden suites and the held-roster A1 / fork-census A1 (the pending re-records).
+- **The final run** at the composed tip: <FINAL>.
+- `npx eslint` on every JS file the lane touched (40; the generated edge bundles excluded): exit 0. `tsc -p tsconfig.full.json`: no new error in a touched file (the 11 in `npcGenerator.js`, `publicSafe.js`, `representatives.js` are the base's own).
+- `npm run build`: exit 0 (the worker bundle's bytes in §7).
+- **The soak 1,000** (`node scripts/audit/soak-review.mjs --count 1000 --workers 4`, each in a clean worktree): base `f6209c0c5` **CLIMB**, battery-would-not-vouch 698 · reader:tension-memory 61 · A-09 4 · reader:hook-pools 3, 0 errors; tip **CLIMB**, battery-would-not-vouch **653** · 61 · 4 · 3, 0 errors. cert and coh 0 at both, `coh:tier-noun` 0. The battery's 45 fewer non-vouching towns are the retired role goal's false presumptions gone.
+- **The invariants, red-first then green** (`tests/generators/people/goals.test.js`, 16 arms): I-8 / I-9 (a planted corrupt enforcer's warrant on its own guild's house, a suspicion on a clean card, a self-target — each reds the checker), I-11 (every target resolves), I-13 (removing a card leaves every card that read nothing of it byte-identical), the uncanny gate executed (the cap with magic on, 0 off), J-14 (the mark on exactly the six families, never the courthouse), J-16 (the module reads no title), item 15 (a table title draws its own lines, a mint keeps its category, a fully-held title falls back).
+- **The veil walk** (I-10 extended, `tests/security/allegianceVeil.pglite.test.js`, 7/7): on six generated criminal / organized / infiltrated cities, the generator's own WARRANT and SUSPICION goals, their `intent` and their targets reach 0 times the client projection, the SQL projection and the gallery payload; the control finds them on the raw records.
+- **Two notes from the pin seat, for the chair** (not this car's defects to cure here): a power mint's secret can still name "thieves' guild" in a crime-less place (3 at the base, 1 at the tip); twelve landlocked metropolises print an A9 goal naming their "airship docking" house (a true fact of the roster, high magic).
 
 ## 11. The seams for MERGE-TRAIN
 
