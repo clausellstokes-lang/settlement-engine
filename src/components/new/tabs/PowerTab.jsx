@@ -418,7 +418,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         )}
       </div>
 
-      {/* ── WHO RUNS IT, IN ONE PARAGRAPH (OWNER-WORDS-DOSSIER item 3, 2026-11-09) ──────────
+      {/* ── GOVERNANCE, IN ONE PARAGRAPH (OWNER-WORDS-DOSSIER item 3, 2026-11-09) ──────────
             The seat by name and title, the legitimacy band with the causes its breakdown names,
             the powers that have broken with the ruler NAMED from the record's relationships, the
             consequence in plain words, and the generator's vignette only where no estranged power is

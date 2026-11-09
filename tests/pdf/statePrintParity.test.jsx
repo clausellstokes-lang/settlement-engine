@@ -959,3 +959,13 @@ describe('THE CONSOLIDATION IN PRINT (chair rulings T1-2/T1-3/T1-6..T1-10, 2026-
     expect(Object.keys(hooks)).not.toContain('plot_hooks.framing'); // anchored: the overview half of the same build drew above
   });
 });
+
+describe('THE OWNER\'S VETOES OF 2026-11-09 03:5x in print (SW-9)', () => {
+  test('the governance Callout carries GOVERNANCE, never the vetoed "WHO RUNS IT" nor "RECENT EVENT"', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync(new URL('../../src/pdf/sections/PowerStructure.jsx', import.meta.url), 'utf8');
+    expect(src).toContain('<Callout tone="warn" kicker="GOVERNANCE">');
+    expect(src).not.toContain('kicker="WHO RUNS IT"');
+    expect(src).not.toContain('kicker="RECENT EVENT"');
+  });
+});

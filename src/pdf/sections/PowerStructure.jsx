@@ -4,7 +4,7 @@
  * Mirrors PowerTab.jsx in full:
  *   - Public legitimacy banner with breakdown chips
  *   - Stability + governing authority (with the governing modifier, STOP-1) + governance fractured warning
- *   - Who runs it: the screen's one governance paragraph (OWNER-WORDS-DOSSIER item 3)
+ *   - Governance: the screen's one governance paragraph (OWNER-WORDS-DOSSIER item 3)
  *   - Stacked power-distribution bar (all factions in one viz)
  *   - Per-faction full card: power meter, description, category, crisis note,
  *     modifiers with deltas, sub-faction members
@@ -106,17 +106,19 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
         )}
       </View>
 
-      {/* ── Who runs it, in one paragraph (OWNER-WORDS-DOSSIER item 3, 2026-11-09) ──────────
+      {/* ── Governance, in one paragraph (OWNER-WORDS-DOSSIER item 3, 2026-11-09) ──────────
           The screen's governance paragraph (domain/display/governanceAccount.js), printed where the
           standalone vignette printed: the seat, the standing and its causes, the estranged powers named,
           the consequence, and the vignette itself only where no estranged power is named. The
-          DS-POW-1/2 readings above glance at their registry rows, as on the screen. The kicker is
-          proposed for the owner's veto. */}
+          DS-POW-1/2 readings above glance at their registry rows, as on the screen. The proposed
+          kicker "WHO RUNS IT" was vetoed by the owner (2026-11-09 03:5x, "No."); the label is the
+          block's own, GOVERNANCE (the screen prints no heading over it; not "RECENT EVENT", which
+          the composed paragraph no longer is). SW-9. */}
       {(() => {
         const text = governanceAccountOf(settlement)?.text || '';
         if (!text.trim()) return null;
         return (
-          <Callout tone="warn" kicker="WHO RUNS IT">
+          <Callout tone="warn" kicker="GOVERNANCE">
             <EditableProse
               name="power.governance"
               defaultValue={text}
