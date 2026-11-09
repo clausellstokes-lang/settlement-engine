@@ -38,6 +38,7 @@ import { generalStateProse, GENERAL_STATE_PROSE_SILENT } from '../../domain/disp
 import { drawnAtMount } from '../../domain/display/stateProse/dossierMounts.js';
 import { resolvePrimaryStress } from '../../generators/stressPriority.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
+import { byDesignItemsOf } from '../../domain/display/validationOnPage.js'; // SW-B1 (B1(c)): the one reader of the by-design rows
 
 /**
  * The general desk's OVERVIEW positions. Bound once each: the registry's reachability arm
@@ -167,6 +168,12 @@ function recordCleanOf(r) {
   const verdict = Array.isArray(judgments)
     ? judgments.find((j) => j?.id === 'record_coherence_battery')?.status
     : undefined;
+  // SW-B1 (STYLE-RULINGS-2 B1(c), DS-GEN-11's by-design read arm): by-design contradictions are not
+  // battery findings, so a passing battery vouched "nothing about it fails to add up" above the tab's
+  // own "By-Design Contradictions (n)" (Shangjin, soak1k-9). A record with any by-design row — read
+  // from the tab's one reader, `byDesignItemsOf` — is not one the zero pool may vouch for: it reads
+  // as unasked (`undefined`), and DS-GEN-11's count line renders nothing.
+  if (verdict === 'pass' && byDesignItemsOf(r?.economicViability, r).length > 0) return undefined;
   return verdict === 'pass' ? true : verdict === 'needs_review' ? false : undefined;
 }
 
