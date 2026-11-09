@@ -29,6 +29,7 @@ import { economicsDeskArgs, impairedInstitutionOf, overviewStressesOf } from './
 import { generalDeskLines } from './generalDeskRead.js';
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
+import { isPhantomRecord } from '../../domain/edit/phantoms.js';
 
 
 /**
@@ -64,10 +65,14 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
  * @param {any} settlement the OWNER's record (seed and all)
  * @param {{publicDossier?: boolean}} [gate] the save boundary passes none: the owner draws. A
  *   caller that says `publicDossier: true` gets every site SILENT, as the readers' gate rules.
- * @returns {{v: string, blocks: Record<string, unknown>}|null}
+ * @returns {{v: string, blocks: Record<string, unknown>}|null} null with no record, or for a
+ *   phantom stub
  */
 export function composePublicProse(settlement, { publicDossier = false } = {}) {
   if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return null;
+  // A phantom counterparty is EM-F1's frozen five-key stub, not a dossier: nothing is shared
+  // from it, so the save stamps nothing and its persisted shape stays the mint's.
+  if (isPhantomRecord(settlement)) return null;
   /** @type {Record<string, unknown>} */
   const blocks = {};
   for (const [site, draw] of PUBLIC_PROSE_SITES) {
