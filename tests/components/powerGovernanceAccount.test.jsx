@@ -58,11 +58,11 @@ describe('the governance block is one paragraph', () => {
     // The three pieces are gone: the desk's own legitimacy and hall readings, and the vignette.
     const desk = powerStateProse(s, {}, { seed: 'polaovo', audience: 'dm' });
     for (const rung of [desk.legitimacyBanner, desk.legitimacyLens, desk.stabilityHeader]) {
-      if (rung?.sentence) expect(page, 'a DS-POW-1/2 sentence still prints').not.toContain(rung.sentence);
+      if (rung?.sentence) expect(page, 'a DS-POW-1/2 sentence still prints').not.toContain(rung.sentence); // anchored: the desk's sentence is asserted non-vacuous just below, and the page is the rendered tab
     }
     expect(desk.legitimacyBanner?.sentence, 'non-vacuity: the desk still draws its reading').toBeTruthy();
     expect(page.split(VIGNETTE).length - 1, 'the vignette is not the fallback here').toBe(0);
-    expect(page).not.toMatch(/two of the three|the gap widens|does not occupy/i);
+    expect(page).not.toMatch(/two of the three|the gap widens|does not occupy/i); // anchored: the page is the rendered Power tab, asserted to carry the paragraph above
   });
 
   it('no estranged power: the vignette closes the paragraph, once', () => {

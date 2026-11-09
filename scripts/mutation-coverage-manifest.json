@@ -380,6 +380,10 @@
       "label": "prose/spine frame word doubled into the body",
       "what": "Standing plant restores the frame word INSIDE deriveStrainedBy, which is the exact shape that shipped \"It is currently strained by / Strained by under Siege, infiltrated.\" to every first-run user. The frame belongs to SPINE_RUNGS and to nothing else; a deriver that authors one too makes the rail print it twice. Only a RENDER assertion can see the doubling, because it lives in the juncture between the component's <dt> and the deriver's <dd> and each half is well-formed alone. Mutation target src/domain/simulationSpine.js is tracked and clean as of lane PS's commit."
     },
+    "tests/components/powerGovernanceAccount.test.jsx": {
+      "kind": "rationale",
+      "rationale": "THE GOVERNANCE PARAGRAPH ON THE POWER TAB (OWNER-WORDS-DOSSIER item 3a; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the tab is rendered over a planted record and asserted to carry the paragraph and to print none of the retired DS-POW-1/2 sentences, with a non-vacuity arm proving the desk still draws them, so a mount that prints both or neither reds."
+    },
     "tests/components/privacyPolicyParity.test.js": {
       "kind": "uncovered"
     },
@@ -702,6 +706,10 @@
     "tests/domain/events/undoRoundTrip.test.js": {
       "kind": "mutation",
       "label": "domain.5/undo inverse round-trip"
+    },
+    "tests/domain/governanceAccount.test.js": {
+      "kind": "rationale",
+      "rationale": "THE GOVERNANCE PARAGRAPH (OWNER-WORDS-DOSSIER items 3a-3f; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: every arm composes the paragraph from a PLANTED record (two estranged powers, a vacant seat, a fractured town, the royal pair) and pins the exact names, their order and the retired word's absence, each negative anchored by a positive on the same text; the generator arm walks every vignette buildGovernanceLabels can write, so a composer or vignette regression changes an asserted string."
     },
     "tests/domain/governanceLedger.test.js": {
       "kind": "uncovered"

@@ -63,7 +63,7 @@ describe('the stress vignette is the event sentence (the chair\'s ruling on the 
   it('a fractured town with names prints the names and NOT the fractured line', () => {
     const g = governanceAccountOf(planted({ relationships: TWO_ESTRANGED, recentConflict: FRACTURED_VIGNETTE, stress: ['politically_fractured'] }));
     expect(g.text).toContain("The Thieves' Guild");
-    expect(g.text).not.toContain(FRACTURED_VIGNETTE.slice(0, 30));
+    expect(g.text).not.toContain(FRACTURED_VIGNETTE.slice(0, 30)); // anchored: g.text is asserted to name the Thieves' Guild on the line above
   });
 
   it('a fractured town under a graver stress closes on THAT stress\'s vignette (the vignette is the primary stress\'s)', () => {
@@ -94,7 +94,7 @@ describe('the chair\'s conditions (b) and (c), 2026-11-09', () => {
     for (const name of blocs) expect(g.text).toContain(powerNameInProse(name, true).replace(/^The /, ''));
     expect(g.text).toContain('the right to rule by other means');
     expect(g.text).toContain('Each side makes its own decisions now, and the others overturn them within days.');
-    expect(g.text, 'the fractured line is replaced by the names').not.toContain(FRACTURED_VIGNETTE.slice(0, 30));
+    expect(g.text, 'the fractured line is replaced by the names').not.toContain(FRACTURED_VIGNETTE.slice(0, 30)); // anchored: g.text is asserted to carry both bloc lines just above
     expect(g.fallback).toBe(false);
   });
 
@@ -155,8 +155,8 @@ describe('the composed governance paragraph', () => {
       + "Its arrests and its offices are no longer the hall's own to give, though it still sits.",
     );
     expect(g.text.startsWith('Polaovo is governed by the Corrupt Council, and Boleslav Davydov')).toBe(true);
-    expect(g.text).not.toMatch(/faction/i);
-    expect(g.text).not.toMatch(/two of the|the gap widens|does not occupy|rather than being overthrown/i);
+    expect(g.text).not.toMatch(/faction/i); // anchored: g.text is asserted to open on the seat by name on the line above
+    expect(g.text).not.toMatch(/two of the|the gap widens|does not occupy|rather than being overthrown/i); // anchored: g.text is asserted to open on the seat by name two lines above
   });
 
   it('a record that names no estranged power takes the vignette as the fallback, and it says "powers"', () => {
@@ -169,7 +169,7 @@ describe('the composed governance paragraph', () => {
     expect(g.text.endsWith(FRACTURED_VIGNETTE)).toBe(true);
     // OWNER-WORDS-DOSSIER item 3b: the generator's vignettes retire the word "faction" for "power".
     expect(g.text).toMatch(/\bpowers\b/);
-    expect(g.text).not.toMatch(/faction/i);
+    expect(g.text).not.toMatch(/faction/i); // anchored: g.text is asserted to say powers on the line above
   });
 
   it('no governance vignette the generator can write carries the retired word', () => {
@@ -186,7 +186,7 @@ describe('the composed governance paragraph', () => {
     for (const c of cases) {
       const { recentConflict } = buildGovernanceLabels({ ...base, ...c });
       expect(recentConflict, `${c.stressTypes[0]} drew a vignette`).toBeTruthy();
-      expect(recentConflict, `${c.stressTypes[0]} / ${c.governingFaction}`).not.toMatch(/faction/i);
+      expect(recentConflict, `${c.stressTypes[0]} / ${c.governingFaction}`).not.toMatch(/faction/i); // anchored: the vignette is asserted drawn (truthy) on the line above
     }
   });
 
