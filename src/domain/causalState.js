@@ -737,7 +737,7 @@ function deriveFactionPower(s) {
   }
 
   score += applyConditions(s, contributors, 'faction_power', {
-    scale: 15, mode: 'drain', effect: 'destabilized', tail: 'destabilizes the faction system.',
+    scale: 15, mode: 'drain', effect: 'destabilized', tail: 'unsettles the balance between the powers.',
   });
 
   return { score, contributors };
