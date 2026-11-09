@@ -311,3 +311,22 @@ describe('general:steadings stays SILENT on the shared page in this wave (the ch
     expect(drawn.filter((line) => b.includes(line))).toEqual([]);
   });
 });
+
+describe('the dossier search prints a found shipped block verbatim (SW-B7b item 3)', () => {
+  it.each([0, 4])('soak1k-%i: a defense lens line on the shared page renders as one paragraph of the carried text', async (i) => {
+    const { default: DossierSearchResults } = await import('../../src/components/dossier/DossierSearchResults.jsx');
+    const { shared } = towns[i];
+    const desk = /** @type {any} */ (publicProseOf(shared, 'defense:threat')) || {};
+    const line = desk.beasts?.sentence || desk.invasion?.sentence;
+    expect(line).toBeTruthy();
+    const { container, unmount } = render(
+      <DossierSearchResults settlement={shared} query={line} tabs={[{ id: 'defense', label: 'Defense' }]}
+        publicDossier playerView onOpenTab={() => {}} />,
+    );
+    const found = [...container.querySelectorAll('[data-search-object="prose"] p')].map((p) => p.textContent);
+    unmount();
+    // NO NEW WORDS: the paragraph is the carried strings, and the query's line is among them.
+    expect(found.length).toBe(1);
+    expect(found[0]).toContain(line);
+  });
+});
