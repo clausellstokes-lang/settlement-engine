@@ -810,28 +810,28 @@ the access.
 **SLOTS.** `{settlement}` `{access}` `{complexity}`
 
 **COMBINATION C1: a high rung on a working approach** {crisis-scoped}
-1. `[visitor]` Traffic on {settlement}'s {access} is steady, and the {complexity} keeps more hands busy than the town needs. Nobody here is waiting for work.
-2. `[ledger · crisis: any]` {settlement}'s books close with a margin, and the margin is broad rather than lucky. The {complexity} earns from several directions at once and the {access} carries all of it.
+1. `[visitor]` Traffic on {settlement}'s {access} is steady, and a {complexity} keeps everyone busy. Nobody here is waiting for work.
+2. `[ledger · crisis: any]` {settlement} lives on a {complexity} and ends each year with money to spare, and the traffic on its {access} keeps it that way.
 3. `[street · no hunger]` Nobody here talks about the price of bread. The town is well off, the {access} keeps it that way, and the talk is about what to build next.
 
 **COMBINATION C2: a high rung on a narrow approach (`isolated` / `mountain_pass`)**
-1. `[visitor · stores: >= 6]` {settlement} is richer than its road suggests. Nothing reaches it easily and the stores are deep and the halls are finished anyway.
-2. `[ledger · colour]` {settlement} has one way in and one way out, and its {complexity} still makes money. The road is narrow; the town is not poor.
-3. `[counterforce · colour]` A narrow way in has not kept {settlement} poor. Little comes in by the road, and the town is comfortable all the same.
+1. `[visitor · stores: >= 6]` {settlement} is richer than its road suggests. Nothing reaches it easily, yet its stores are deep and its halls are finished.
+2. `[ledger · colour]` Hard as {settlement} is to reach, it does well all the same on a {complexity}.
+3. `[counterforce · colour]` A narrow way in has not kept {settlement} poor. Little comes in by the road, and the people there are comfortable all the same.
 
 **COMBINATION C3: the middle rungs** {crisis-scoped}
-1. `[street · crisis: any]` {settlement} manages. The {complexity} covers what the town needs with a little left over, and every year people argue over how to spend it.
-2. `[ledger]` The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.
-3. `[visitor · no crisis · market]` There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
+1. `[street · crisis: any]` With a little left over each year, {settlement} gets by on a {complexity}, and every year people argue over how to spend it.
+2. `[ledger]` {settlement} pays its way on a thin margin. Nothing in its trade is failing, and nothing in it is spare.
+3. `[visitor · no crisis · market]` Nothing about {settlement} looks rich or poor: the {access} is busy enough, the market is open, and nobody is building or selling up.
 
 **COMBINATION C4: a low rung on a working approach**
-1. `[ledger · colour]` Traffic moves through {settlement}'s {access} every day, and little of the money stays. The market tolls bring in less than the town spends, so the coffers stay short.
-2. `[street]` The way into {settlement} is busy and the town is poor. That is the first complaint a visitor hears, and the one they hear most.
-3. `[visitor · market]` More goods come off the {access} at {settlement} than are ever sold there. The traffic is busy and the town stays poor.
+1. `[ledger · colour]` Traffic moves along {settlement}'s {access} every day, and little of its money stays. The place earns less than it spends.
+2. `[street]` Plenty passes through {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.
+3. `[visitor · market]` {settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.
 
 **COMBINATION C5: a low rung on a narrow approach**
 1. `[visitor]` {settlement} is poor, and the road to it is long and hard. What the road does not bring in, the people here go without.
-2. `[ledger]` The {complexity} at {settlement} feeds the town and no more, and the road in is too poor to bring anything extra.
+2. `[ledger]` {settlement} lives on a {complexity} that feeds it and no more, and the road in is too poor to bring anything extra.
 3. `[threshold]` {settlement} is too poor to mend its road, and the road brings in too little to make it richer. Nobody here expects that to change.
 
 ---
@@ -1740,48 +1740,48 @@ shape.
 **SLOTS.** `{settlement}` `{good}` `{faction}` `{institution}`
 
 **INCOME MIX: one source carries the town**
-1. `[ledger · colour]` Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name.
-2. `[street · colour]` There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it.
+1. `[ledger · colour]` More than half of what {settlement} earns comes from a single trade, and most households depend on it one way or another.
+2. `[street · colour]` Almost everyone's living at {settlement} depends on one trade, whether or not they work in it.
 3. `[threshold · no hunger]` {settlement} lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole town has a bad year.
 
 **INCOME MIX: two or three sources between them**
-1. `[ledger]` {settlement}'s earnings come from a handful of trades in roughly comparable portions, and no one of them could carry the town alone.
-2. `[street]` Ask what this town lives on and you will be given a short list rather than an answer.
-3. `[counterforce]` No single trade at {settlement} is large enough to dictate to the hall, and the town's politics are quieter for it.
+1. `[ledger]` {settlement} earns most of its living from two or three trades, and none of them could carry the place alone.
+2. `[street]` Ask what {settlement} lives on and you will hear two or three trades named, not one.
+3. `[counterforce]` No one trade earns half of what {settlement} makes, so a bad year in any one of them would hurt without ruining it.
 
 **INCOME MIX: a broad spread, no leader**
-1. `[ledger]` Nothing {settlement} does earns a real portion of the whole; the town's income is a great many small columns and no large one.
+1. `[ledger]` {settlement} lives on many small trades, and none of them brings in a real portion of its income.
 2. `[visitor]` {settlement} is not known for any one trade; it lives on many small ones.
 3. `[threshold]` {settlement} would hardly notice losing one trade, but could not stand losing several at once.
 
 **INCOME MIX: a criminal line is present** *(every variant `dm-only`)*
-1. `[ledger · dm-only]` A real portion of {settlement}'s money is made by people who keep it off the tax lists, so the town collects nothing on it and honest traders carry the tax alone.
-2. `[street · dm-only]` Some of this town's money has no honest account of itself, and the town's ordinary trades compete against it without being told.
-3. `[counterforce · dm-only]` The unlawful earnings at {settlement} are real and contained: {faction} takes its portion and has never reached for a second one.
+1. `[ledger · dm-only]` Some of {settlement}'s money is made by people who keep it off the tax lists, so the town collects nothing on it and honest traders carry the tax alone.
+2. `[street · dm-only]` Some of the money in {settlement} is made outside the law, and honest traders compete against it without knowing whom they are up against.
+3. `[counterforce · dm-only]` {faction} makes money at {settlement} outside the law, and nothing is collected on it.
 
 **INCOME MIX: the criminal line leads** *(every variant `dm-only`)*
-1. `[ledger · dm-only]` The largest single earner at {settlement} is the one that is not written down, and every lawful trade in the town is priced against it.
-2. `[street · dm-only]` What keeps {settlement} solvent is a trade nobody names aloud, because naming it would get someone hurt.
-3. `[visitor · dm-only]` Honest traders in {settlement} are up against the town's biggest business, and nobody has told them what it is.
+1. `[ledger · dm-only]` The biggest money at {settlement} is made outside the law, and every honest trade is undersold by it.
+2. `[street · dm-only]` Nobody at {settlement} names its biggest trade aloud, because naming it would get someone hurt.
+3. `[visitor · dm-only]` Honest traders in {settlement} are up against its biggest business, and nobody has told them what it is.
 
 **TRADE PROFILE: exports and imports both present**
 1. `[ledger · colour]` {settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.
 2. `[street · colour]` Everybody here knows what leaves and what arrives, because the same carts do both.
-3. `[visitor · market]` The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.
+3. `[visitor · market]` The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and nobody tells a visitor which is which.
 
 **TRADE PROFILE: no significant exports**
-1. `[ledger]` {settlement} sends nothing out worth recording. What the town makes, the town uses, and the outward column is empty rather than thin.
+1. `[ledger]` {settlement} sends nothing out worth recording. What the town makes, the town uses.
 2. `[street]` Nothing leaves this town but people, and not many of those.
 3. `[counterforce · no food: ≤ deficit]` {settlement} produces enough to feed and clothe itself and sells none of it, which is a decision the town has never had to revisit.
 
 **TRADE PROFILE: imports only, nothing outward**
 1. `[ledger]` More arrives at {settlement} than leaves it, and what pays for the difference is not in the trade columns.
-2. `[threshold]` The town buys what it needs and sells almost nothing, and the arrangement holds exactly as long as whatever is paying for it holds.
+2. `[threshold]` The town buys what it needs and sells almost nothing, and that lasts only as long as whatever pays for it lasts.
 3. `[street]` This town takes delivery and does not dispatch, and everybody here can name what the difference is bought with.
 
 **TRADE PROFILE: local production listed**
 1. `[ledger · walls]` A good portion of what {settlement} consumes is made inside its own walls, and never appears in either trade column.
-2. `[visitor · colour]` Much of what a stranger will buy at {settlement} was made within sight of where it is sold.
+2. `[visitor · colour]` Much of what a visitor will buy at {settlement} was made within sight of where it is sold.
 3. `[street · colour]` {settlement} makes its own everyday goods and buys in the rest.
 4. `[ledger · no walls]` A good portion of what {settlement} consumes is made within its own bounds, and never appears in either trade column.
 
@@ -1792,11 +1792,11 @@ shape.
 
 **CRITICAL IMPORT: a house needs what the land lacks** *(`resourceAnalysis.imports.critical[]` with its `reasons` entry naming the house; slots from that one import, never the export bag)*
 1. `[ledger · colour]` {settlement}'s {institution} cannot work without {good}, and the country around the town produces none, so the town buys from outside or the work stops.
-2. `[visitor · colour]` All the {good} that {settlement}'s {institution} uses comes in from elsewhere; a closed road would stop its work within the season.
+2. `[visitor · colour]` Every load of {good} that {settlement}'s {institution} uses comes in from elsewhere; a closed road would stop its work within the season.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*
 1. `[ledger · colour]` {settlement} has to buy its {good} from outside: the country around the town produces none.
-2. `[street · colour]` All the {good} used at {settlement} comes from elsewhere, because the country here produces none.
+2. `[street · colour]` Every load of {good} used at {settlement} comes from elsewhere, because the country here produces none.
 
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
 1. `[ledger · colour]` Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.
@@ -2697,25 +2697,25 @@ margin *arm*. They are different fields on different rows and both are kept;
 **PDF PARITY:** parity.
 
 **readiness `STRONG`** {crisis-scoped}
-1. `[visitor · crisis: any]` {settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
+1. `[visitor · crisis: any · guardPresence]` {settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
 2. `[ledger · crisis: any]` What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
 3. `[street · no threat · crisis: any · no crisis: unrest]` The town does not spend much time thinking about being attacked: its defences are in good order, and its people know it.
 4. `[counterforce · no threat]` Nothing presses {settlement} at present: its defences would make any attack costly, so raiders and rivals look elsewhere.
 
 **readiness `ADEQUATE`** {colour}
-1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.
+1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over; two troubles at once would be too many.
 2. `[visitor]` To anyone arriving, {settlement} looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.
 3. `[street]` People at {settlement} expect to hold against the usual trouble, and they claim no more than that.
-4. `[threshold]` {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
+4. `[threshold]` {settlement} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
 
 **readiness `WEAK`** {crisis-scoped}
-1. `[ledger · crisis: any]` The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth.
+1. `[ledger · crisis: any]` {settlement} could deal with a brawl or a thief, but the town could not hold off a raid.
 2. `[visitor · walls · crisis: any · no crisis: threat, unrest]` Much of {settlement}'s perimeter has nobody on it, and the people who live there seem used to that.
-3. `[unfolding · crisis: any · no crisis: threat, unrest]` {settlement} has not been tested lately and would struggle if it were. Its defences are thinning, and nothing now under way will mend them.
+3. `[unfolding · crisis: any · no crisis: threat, unrest]` {settlement} has not been attacked lately, and if it were, it would struggle to hold.
 
 **readiness `CRITICAL`** {crisis-scoped}
-1. `[ledger · crisis: any]` {settlement} is effectively undefended. There is no arrangement here that would slow a serious attempt on the town by more than the time it takes to walk in.
-2. `[street · crisis: any]` People at {settlement} know the town could not survive a serious attack, so they take care not to provoke anyone who could mount one.
+1. `[ledger · crisis: any]` {settlement} is all but undefended. Nothing in the town would stop a serious attack for long.
+2. `[street · crisis: any · no crisis: occupied, under_siege]` People at {settlement} know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
 3. `[visitor · crisis: any · no crisis: threat, unrest]` You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.
 
 **terrain FAVOURABLE to the defender** {colour}
@@ -2724,7 +2724,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[counterforce]` Any attack on {settlement} must first cross the approach, and bringing more fighters does not make that easier.
 
 **terrain EXPOSED** {colour}
-1. `[visitor]` {settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.
+1. `[visitor]` {settlement} sits open. No hill or river helps it, and every defence the town has had to be built by hand.
 2. `[ledger]` The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.
 3. `[street]` People at {settlement} know their ground gives them no help: there is no hill and no narrows, and whatever defends the town had to be built by hand.
 
@@ -2734,7 +2734,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[visitor]` Spend a day at {settlement} and you see why anyone would want it, and why its people are careful whom they offend.
 
 **strategic value LOW**
-1. `[counterforce · no crisis: under_siege, occupied]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything it has built.
+1. `[counterforce · no crisis: under_siege, occupied]` Nothing at {settlement} is worth an army's season, and that plain fact is the town's best defence.
 2. `[ledger · no crisis: under_siege, occupied]` {settlement} is not a prize: no map of the region marks it as worth taking, and that protects it better than anything the town has built.
 3. `[street · no crisis: under_siege, occupied]` People at {settlement} know the town is not worth taking, and they count on that more than on their own defences.
 4. `[counterforce · crisis: under_siege, occupied]` Nothing at {settlement} was worth an army's season by any sensible reckoning, and somebody has come for it anyway; the town's plainness is no defense now.
@@ -3020,15 +3020,15 @@ the ledger).
 2. `[visitor]` Parts of {settlement} are closed off against the sickness, and people cross the street to avoid anyone who coughs.
 3. `[ledger]` The burial register at {settlement} grows every day, and medicine and graves cost whatever the sellers ask, so the poorest go without both.
 
-**COMPOUND: insurgency** {colour}
-1. `[street]` Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.
-2. `[visitor]` Nobody at {settlement} will say whose side they are on, and visitors are asked their business at every turn.
-3. `[ledger]` The patrol routes at {settlement} skip districts they once covered, and whatever happens there now goes unrecorded and unpunished.
+**COMPOUND: insurgency**
+1. `[street · guardPresence]` Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.
+2. `[visitor · colour]` Nobody at {settlement} will say whose side they are on, and visitors are asked their business at every turn.
+3. `[ledger · colour]` Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.
 
-**COMPOUND: slave revolt** {colour}
-1. `[street]` Fighting between the rebels and the town's guards has closed whole streets of {settlement}.
-2. `[visitor]` People at {settlement} keep away from the streets where the revolt is being fought, and the usual patrols are gone.
-3. `[ledger]` The patrol rota at {settlement} has been emptied to fight the revolt, so the rest of the town keeps its own order.
+**COMPOUND: slave revolt**
+1. `[street · guardPresence]` Fighting between the rebels and the town's guards has closed whole streets of {settlement}.
+2. `[visitor · colour]` People at {settlement} keep away from the streets where the revolt is being fought, and nobody walks them after dark.
+3. `[ledger · colour]` Everyone at {settlement} who could keep order has gone to fight the revolt, so the rest of the town keeps its own order.
 
 **COMPOUND: wartime** {colour}
 1. `[street]` The war has made people at {settlement} wary of anyone they do not know, and prices and curfews are set by order.
@@ -3568,101 +3568,101 @@ variants are `dm-only`, as DS-DEF-10 rules, and one `[visitor]` line says no mor
 banner a player already sees, so the player face is not silent. Three vantages each (the ledger, the
 street, the unfolding).
 
-**override: ACTIVE SIEGE** {colour}
-1. `[ledger]` With an army outside, {settlement}'s defence is now about holding out: every guard and every store is counted against how long the siege can last.
-2. `[street]` Everyone at {settlement} who can hold a weapon has a place in the defence, and the town's whole day is arranged around the siege.
-3. `[unfolding]` Each week the siege lasts, {settlement} has less to hold out with, and its defence is a race against its stores.
+**override: ACTIVE SIEGE**
+1. `[ledger · guardPresence]` With an army outside, {settlement}'s defence is now about holding out: every guard and every store is counted against how long the siege can last.
+2. `[street · colour]` Everyone at {settlement} who can hold a weapon has a place in the defence, and the whole day is arranged around the siege.
+3. `[unfolding · colour]` Each week the siege lasts, {settlement} has less to hold out with, and its defence is a race against its stores.
 
-**override: INTERNAL PRESSURE (famine)** {colour}
-1. `[ledger]` The guards' rations at {settlement} are cut like everyone else's, and a hungry guard cannot be asked for much for long.
-2. `[street]` At {settlement} the defence is spent keeping order at the food stores, not watching the roads.
-3. `[unfolding]` The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.
+**override: INTERNAL PRESSURE (famine)**
+1. `[ledger · guardPresence]` The guards' rations at {settlement} are cut like everyone else's, and a hungry guard cannot be asked for much for long.
+2. `[street · colour]` At {settlement} the people who keep order spend their days at the food stores, not watching the roads.
+3. `[unfolding · colour]` The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.
 
 **override: UNDER OCCUPATION** {colour}
 1. `[ledger]` {settlement}'s defence answers to its occupiers now: the arms in the town are theirs, and whatever the townsfolk could raise themselves would be small beside them.
-2. `[street]` The occupiers' guards at {settlement} protect the town from everyone except the people who sent them.
+2. `[street]` The occupiers' troops at {settlement} protect it from everyone except the people who sent them.
 3. `[unfolding]` As long as the occupation lasts, {settlement} cannot defend itself on its own terms; its defence is someone else's to order.
 
-**override: COMMAND SPLIT** {colour}
-1. `[ledger]` More than one faction at {settlement} claims to command its defence, and orders are given twice and obeyed once.
-2. `[street]` Those standing guard at {settlement} get orders from two sides and have quietly chosen which to follow.
-3. `[unfolding]` Nothing at {settlement} has failed yet because of the split, but every order takes longer, and in an attack that delay would cost the town.
+**override: COMMAND SPLIT**
+1. `[ledger · colour]` More than one power at {settlement} claims to command its defence, and orders are given twice and obeyed once.
+2. `[street · guardPresence]` Those standing guard at {settlement} get orders from two sides and have quietly chosen which to follow.
+3. `[unfolding · colour]` Every order at {settlement} now takes longer to carry out, and in an attack that delay would cost lives.
 
-**override: UNDER TRIBUTE** {colour}
-1. `[ledger]` The town's accounts at {settlement} pay the creditors first and the defence with what is left, and what is left shrinks each year.
-2. `[street]` At {settlement} the debt is paid before the guards are, and every guard knows it.
-3. `[unfolding]` Every year the debt stands, less of {settlement}'s money reaches its defence.
+**override: UNDER TRIBUTE**
+1. `[ledger · colour]` {settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.
+2. `[street · guardPresence]` At {settlement} the debt is paid before the guards are, and every guard knows it.
+3. `[unfolding · colour]` Every year the debt stands, less of {settlement}'s money reaches its defence.
 
-**override: SECURITY COMPROMISED** {colour}
-1. `[ledger]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
-2. `[street]` The guards at {settlement} have changed their rounds and will not say why, and everyone can guess.
-3. `[unfolding]` Until {settlement} has changed everything the traitor knew, its defence is weaker than it looks.
+**override: SECURITY COMPROMISED**
+1. `[ledger · colour]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
+2. `[street · guardPresence]` The guards at {settlement} have changed their rounds and will not say why, and everyone can guess.
+3. `[unfolding · colour]` Until {settlement} has changed everything the traitor knew, its defence is weaker than it looks.
 
-**override: INFILTRATION ACTIVE** {colour}
-1. `[visitor]` Something has changed in how {settlement}'s guards work, and they will not say why; they watch each other as closely as they watch the roads.
-2. `[ledger · dm-only]` Someone inside {settlement}'s defence works for the other side, and nobody has found them yet.
-3. `[unfolding · dm-only]` Every precaution {settlement} takes is reported to the people it is meant to stop, until the spy is found.
-4. `[street · dm-only]` The guards at {settlement} have started keeping secrets from each other; it is the only defence they have against a spy they cannot name.
+**override: INFILTRATION ACTIVE**
+1. `[visitor · colour]` Something has changed at {settlement}: people watch each other as closely as they watch the roads, and nobody will say why.
+2. `[ledger · dm-only · colour]` Someone inside {settlement}'s defence works for the other side, and nobody has found them yet.
+3. `[unfolding · dm-only · colour]` Every precaution {settlement} takes is reported to the people it is meant to stop, until the spy is found.
+4. `[street · dm-only · guardPresence]` The guards at {settlement} have started keeping secrets from each other; it is the only defence they have against a spy they cannot name.
 
-**override: QUARANTINE ACTIVE** {colour}
-1. `[ledger]` {settlement} is closed against the sickness, not an army: the guards turn back travellers and traders alike.
-2. `[street]` Nobody comes into {settlement} and nobody leaves, and the guards are there to keep the sickness in, not an enemy out.
-3. `[unfolding]` Every week of quarantine costs {settlement} the trade and supplies the country would have brought.
+**override: QUARANTINE ACTIVE**
+1. `[ledger · guardPresence]` {settlement} is closed against the sickness, not an army: the guards turn back travellers and traders alike.
+2. `[street · colour]` Nobody comes into {settlement} and nobody leaves. The point now is to keep the sickness in, not an enemy out.
+3. `[unfolding · colour]` Every week of quarantine costs {settlement} the trade and supplies the country would have brought.
 
 **override: SUCCESSION CONTESTED** {colour}
 1. `[ledger]` Nobody has the clear right to command {settlement}'s defence, so it is kept by people following the last ruler's orders.
 2. `[street]` Several people at {settlement} could order the defence and none can do it alone, so they watch each other instead of the roads.
 3. `[unfolding]` {settlement}'s defence runs on habit until someone settles who rules, and habit will not answer a new threat.
 
-**override: BEAST PRESSURE** {colour}
-1. `[ledger]` Beasts come out of the country at {settlement} steadily, and the town loses guards and gear to them faster than it replaces them.
-2. `[street]` The guards at {settlement} watch the country, not the town, and they do not stand down.
-3. `[unfolding]` The beasts give {settlement} no rest between attacks, and each one costs the town something it cannot quickly replace.
+**override: BEAST PRESSURE**
+1. `[ledger · guardPresence]` Beasts come out of the country at {settlement} steadily, and the town loses guards and gear to them faster than it replaces them.
+2. `[street · guardPresence]` The guards at {settlement} watch the country, not the town, and they do not stand down.
+3. `[unfolding · colour]` The beasts give {settlement} no rest between attacks, and each one costs the town something it cannot quickly replace.
 
-**override: INSURGENCY ACTIVE** {colour}
-1. `[ledger]` {settlement} is defending itself against its own people, and its defence was never built for that.
-2. `[street]` The guards at {settlement} walk streets where they are not welcome, and that is more dangerous to them than any ambush outside.
-3. `[unfolding]` Each crackdown on the insurgents at {settlement} turns more of the town against its guards.
+**override: INSURGENCY ACTIVE**
+1. `[ledger · colour]` {settlement} is defending itself against its own people, and its defence was never built for that.
+2. `[street · guardPresence]` The guards at {settlement} walk streets where they are not welcome, and that is more dangerous to them than any ambush outside.
+3. `[unfolding · colour]` Each crackdown on the insurgents at {settlement} turns more of its people to their side.
 
 **override: RELIGIOUS UPHEAVAL** {colour}
 1. `[ledger]` Who may command {settlement}'s defence has become a question of faith, and until it is settled every order is questioned.
-2. `[street]` People who would stand guard together at {settlement} are no longer speaking, and the reason is their faith.
+2. `[street]` Neighbours who would defend {settlement} side by side are no longer speaking, and the reason is their faith.
 3. `[unfolding]` Until the quarrel over faith is settled at {settlement}, its defenders will not act as one.
 
 **override: REVOLT ACTIVE** {colour}
 1. `[ledger]` Part of {settlement}'s own people have risen, and the town's arms are turned inward against them.
-2. `[street]` Everyone at {settlement} holding a weapon knows exactly whom it is pointed at.
-3. `[unfolding]` How the revolt at {settlement} ends will decide what the town is afterwards, not only who holds it.
+2. `[street]` At {settlement} the people with weapons are watching their own neighbours, not the roads.
+3. `[unfolding]` When the revolt at {settlement} ends, the place has to live with whoever won it.
 
 **override: WAR FOOTING** {colour}
 1. `[ledger]` {settlement} is on a war footing: what it makes, what it stores and who is free to work are all decided by the war.
 2. `[street]` {settlement} has given up several ordinary things for the war, and people have stopped remarking on it.
 3. `[unfolding]` The war's demands at {settlement} keep reaching further, into trades and households that thought themselves untouched.
 
-**override: MIGRATION, arrivals** {colour}
-1. `[ledger]` More people are arriving at {settlement} than its defence was built to keep in order, so the guards spend their days on crowds, not on the roads.
-2. `[street]` {settlement} is fuller than it was, and there are no more guards than there were.
-3. `[unfolding]` Each new arrival at {settlement} adds to the crowds the guards cannot keep track of.
+**override: MIGRATION, arrivals**
+1. `[ledger · guardPresence]` More people are arriving at {settlement} than its guards can keep in order, so they spend their days on the crowds, not on the roads.
+2. `[street · no guardPresence]` There is no watch at {settlement}, and nobody can tell who has just arrived. Every quarrel over a roof or a meal is a fight no one is placed to stop.
+3. `[unfolding · colour]` Each week more newcomers arrive at {settlement}, and every quarrel over a roof or a meal is one more thing to keep in order.
 
-**override: MIGRATION, departures** {colour}
-1. `[ledger]` The guard rota at {settlement} has gaps where departed families used to stand, and the gaps are not being filled.
-2. `[street]` Families are leaving {settlement}, and every one that goes takes hands the defence will miss.
-3. `[unfolding]` As long as people keep leaving {settlement}, there will be fewer to defend it.
+**override: MIGRATION, departures**
+1. `[ledger · guardPresence]` The guard rota at {settlement} has gaps where departed families used to stand, and the gaps are not being filled.
+2. `[street · colour]` Families are leaving {settlement}, and every one that goes takes hands the defence will miss.
+3. `[unfolding · colour]` As long as people keep leaving {settlement}, there will be fewer to defend it.
 
 **override active, viability threatened** {colour}
-1. `[unfolding]` The crisis at {settlement} threatens the town itself, and its defences are being spent to keep it going.
-2. `[ledger]` By the town's own accounts at {settlement}, this crisis could end the town, and its defences are being spent to buy time.
-3. `[street]` The town is not arguing about its defenses at {settlement}; it is arguing about whether there will be a town to defend.
+1. `[unfolding]` The crisis could end {settlement}, and what it spends on its defence now goes to keeping it alive.
+2. `[ledger]` {settlement} may not come through this crisis, and what it spends on defence now only buys time.
+3. `[street]` Nobody at {settlement} argues about the defences any more. The talk now is whether there will be a place left to defend.
 
 **override active, viability intact** {colour}
-1. `[ledger]` By the town's own accounts at {settlement}, it will come through this crisis: the defence has changed its arrangements, and the town goes on.
-2. `[street]` The town is dealing with something serious and still goes about its ordinary business.
-3. `[counterforce]` The crisis has changed how {settlement} defends itself, not whether the town will last.
+1. `[ledger]` {settlement} should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
+2. `[street]` Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+3. `[visitor]` A visitor to {settlement} would not guess at the trouble from the streets; the town is shaken but standing.
 
 **multiple stresses, one posture shown** {colour}
-1. `[ledger]` More than one crisis presses on {settlement} at once, and the posture named is only one of them.
-2. `[unfolding]` The town is carrying several pressures together at {settlement}, and it is the combination rather than any single one that is doing the damage.
-3. `[street]` More than one thing is wrong at {settlement} at once, and the town names the loudest of them when asked and means all of them.
+1. `[ledger]` More than one crisis presses on {settlement} at once, and its defence has to answer all of them.
+2. `[unfolding]` {settlement} is carrying several troubles at once, and together they do more damage than any one would alone.
+3. `[street]` More than one thing is wrong at {settlement} at once; ask about one and you will hear about the others.
 
 ---
 

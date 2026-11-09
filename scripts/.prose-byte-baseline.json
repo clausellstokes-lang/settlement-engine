@@ -55,14 +55,14 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 232862,
-      "gzip": 31654,
+      "raw": 234453,
+      "gzip": 31731,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 170551,
-      "gzip": 24201,
+      "raw": 170255,
+      "gzip": 23958,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -523,6 +523,14 @@
       "toRaw": 170551,
       "gzipAfter": 24201,
       "reason": "+2190 B raw over the chain (2234 over the committed 168317; the leaf shrank 44 B undeclared since its last row) (gzip level 9: 23874 -> 24201), one commit: DS-ECO-8 STRUGGLING +4 (local, official, trade, newcomer) and DS-ECO-10 POSTURE: established +3 (trade, local, newcomer) — vantage variants appended with the next vid (the argmax draw moves only the towns that draw the new line), each declaring its siblings' facts; projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
+    },
+    {
+      "car": "SW-B6 ECO-DEF-BLOCKS 2026-11-09 (STYLE-RULINGS-2 B6; banked by STYLE-2-MERGE at its merge point)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 234278,
+      "toRaw": 234453,
+      "gzipAfter": 31731,
+      "reason": "+175 B raw over the chain (1591 over the committed 232862; the leaf had shrunk 1416 B undeclared since its last row) (gzip level 9: 31654 -> 31731): SW-B6's DS-DEF-1 and DS-DEF-8 rewrites and the DS-DEF-3 COMPOUND insurgency and slave-revolt pools (the lane's widening, ruled ~01:38 UTC), projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); the lane left the row undeclared, so its growth is banked here at the merged tree with the bytes the lane's tip carries (234453); no pool added."
     }
   ],
   "ceilingTransfersNewLeaves": [

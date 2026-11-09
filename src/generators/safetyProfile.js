@@ -180,16 +180,16 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Dangerous';
       safetyStrains.push({ strain: strainLabel, condition: 'Insurgency' });
       safetyDescs.push(
-        'Armed rebels are active. Patrols have changed their routes, some districts are closed off, ' +
-        'and nobody is sure whose side a neighbour is on.'
+        said('Armed rebels are active. Patrols have changed their routes, some districts are closed off, ' +
+        'and nobody is sure whose side a neighbour is on.')
       );
     }
     if (hasStress('slave_revolt')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Dangerous' : 'Critical';
       safetyStrains.push({ strain: strainLabel, condition: 'Slave Revolt' });
       safetyDescs.push(
-        'Rebels and guards are fighting in the contested districts. People keep off certain streets, ' +
-        'and the regular patrols have stopped.'
+        said('Rebels and guards are fighting in the contested districts. People keep off certain streets, ' +
+        'and the regular patrols have stopped.')
       );
     }
     if (hasStress('wartime')) {
@@ -816,7 +816,16 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
     'More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. Whoever keeps order cannot tell one stranger from the next.'),
   'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.': declaredSet(
     'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.', ['watch'],
-    'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. Normal patrol patterns have been abandoned.'),
+    'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets.'),
+  // SW-B6 (2026-11-09, STYLE-RULINGS-2 B1(a)/B6): the guard assessment's "There is no watch" is the ONE
+  // reader of the force fact; these two stress lines name guards and patrols, so they read it too —
+  // `guardPresence` (watch ∨ garrison ∨ militia ∨ hired company, `factsOf`), the twin where none stands.
+  'Armed rebels are active. Patrols have changed their routes, some districts are closed off, and nobody is sure whose side a neighbour is on.': declaredSet(
+    'Armed rebels are active. Patrols have changed their routes, some districts are closed off, and nobody is sure whose side a neighbour is on.', ['guardPresence'],
+    'Armed rebels are active. Some districts are closed off, and nobody is sure whose side a neighbour is on.'),
+  'Rebels and guards are fighting in the contested districts. People keep off certain streets, and the regular patrols have stopped.': declaredSet(
+    'Rebels and guards are fighting in the contested districts. People keep off certain streets, and the regular patrols have stopped.', ['guardPresence'],
+    'The rebels hold some districts. People keep off those streets, and nobody walks them after dark.'),
   'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.': declaredSet(
     'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.', ['watch'],
     'Street-level confrontations between insurgent supporters and those who keep order. Officially categorised as riot and disorder.'),

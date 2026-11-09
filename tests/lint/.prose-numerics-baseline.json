@@ -445,48 +445,6 @@
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 584,
-    "category": "floatInterpolation",
-    "snippet": "{foodDeficit ? fb.importCoverage>0 ? `What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 586,
-    "category": "floatInterpolation",
-    "snippet": "`What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people ne..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 586,
-    "category": "percentToken",
-    "snippet": "`What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people ne..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 587,
-    "category": "floatInterpolation",
-    "snippet": "`No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 587,
-    "category": "percentToken",
-    "snippet": "`No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 588,
-    "category": "floatInterpolation",
-    "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 588,
-    "category": "percentToken",
-    "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 668,
     "category": "percentToken",
     "snippet": "`Shadow Economy: ${bmc}% capture`"
