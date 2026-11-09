@@ -87,7 +87,7 @@ export function aftermathNewsEntries(resolved = [], tick = 0, now = null) {
     significance: (stressor.peakSeverity ?? stressor.severity ?? 0) >= 0.6 ? 'major' : 'notable',
     score: 50 + Math.round((stressor.peakSeverity ?? 0) * 30),
     headline: `${stressor.label} has passed`,
-    summary: `${stressor.label} is over, but it leaves ${residualText(stressor) || 'scars'}. It will be remembered for a while yet.`,
+    summary: `${stressor.label} is over, but it leaves ${residualText(stressor) || 'scars'} behind.`,
     kind: 'applied',
     impactKind: 'stressor_aftermath',
     channelType: null,
@@ -98,8 +98,8 @@ export function aftermathNewsEntries(resolved = [], tick = 0, now = null) {
     sourceEventId: stressor.id,
     tags: ['world_pulse', 'stressor', 'aftermath', stressor.type],
     reasons: [
-      stressor.resolutionReason || 'The crisis ran its course.',
-      `Echo begins: still in living memory until it fades.`,
+      stressor.resolutionReason || 'It ended on its own.',
+      'People still talk about it.',
     ],
     createdAt: now,
   }));
@@ -119,7 +119,7 @@ export function graduationNewsEntries(graduated = [], tick = 0, now = null) {
     significance: 'notable',
     score: 32,
     headline: `${stressor.label} passes into history`,
-    summary: `No one speaks of ${stressor.label.toLowerCase()} in the present tense anymore; it belongs to the settlement's story now.`,
+    summary: `${stressor.label} now belongs to the settlement's past.`,
     kind: 'applied',
     impactKind: 'stressor_graduated',
     channelType: null,
@@ -129,7 +129,7 @@ export function graduationNewsEntries(graduated = [], tick = 0, now = null) {
     channelIds: [],
     sourceEventId: stressor.id,
     tags: ['world_pulse', 'stressor', 'history', stressor.type],
-    reasons: ['The echo faded below living memory and was recorded as history.'],
+    reasons: ['Those who lived through it no longer speak of it as news.'],
     createdAt: now,
   }));
 }
@@ -160,7 +160,7 @@ export function withCampaignHistoryEvent(settlement, echo, tick) {
     yearsAgo: 0,
     name: echo.label,
     type: /** @type {Record<string, string>} */ (HISTORY_EVENT_TYPE)[echo.type] || 'external_threat',
-    description: `${echo.label} gripped the settlement during the campaign and has passed into memory${residualText(echo) ? `, and ${residualText(echo)} linger` : ''}.`,
+    description: `${echo.label} gripped the settlement not long ago and has passed into memory${residualText(echo) ? `, and ${residualText(echo)} linger` : ''}.`,
     severity: severityWord(peak),
     lastingEffects: residualList(echo),
     plotHooks: [],

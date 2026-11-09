@@ -84,9 +84,13 @@ describe('betrayal events — plumbing + cause chains', () => {
     // The betrayed settlement is the target; NO originContext ⇒ no traitor seeding.
     expect(o.targetSaveId).toBe('black');
     expect(o.stressor.originContext).toBeFalsy();   // null/absent ⇒ apply seeds no traitor
-    // Legibility law: a non-empty reasons chain naming both patrons' axes.
+    // Legibility law: a non-empty reasons chain naming both patrons — by name, in words
+    // (STYLE-RULINGS-2 C1, SW-11: the axes and the "betrayal hazard" were the engine's).
     expect(Array.isArray(o.reasons)).toBe(true);
-    expect(o.reasons[0]).toMatch(/betrayal hazard/i);
+    expect(o.reasons[0]).toMatch(/\bVorr\b/);
+    expect(o.reasons[0]).toMatch(/\bSkarn\b/);
+    // anchored: the same reason matched both patrons' names on the two lines above.
+    expect(o.reasons[0]).not.toMatch(/hazard|\/|\(/);
     expect(o.condition.causes.length).toBeGreaterThan(0);
     expect(o.condition.triggeredAt.sourceEventType).toBe('DEITY_PACT_BETRAYAL');
   });
@@ -104,7 +108,12 @@ describe('pact events — the positive lane (news only, no relationship weights 
     const o = events[0];
     expect(o.type).toBe('faith_pact');
     expect(o.ruleId).toBe('religious_pact_formation');
-    expect(o.reasons[0]).toMatch(/common ground/i);
+    // The pact reason names both towns and their faiths' fit (SW-11: no axis notation).
+    expect(o.reasons[0]).toMatch(/\bhigh\b/);
+    expect(o.reasons[0]).toMatch(/\briver\b/);
+    expect(o.reasons[0]).toMatch(/faiths/);
+    // anchored: the same reason matched both towns and "faiths" on the three lines above.
+    expect(o.reasons[0]).not.toMatch(/\//);
   });
 
   test('evil TRANSACTIONAL cooperation stays below the pact floor ⇒ no pact', () => {

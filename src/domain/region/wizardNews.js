@@ -241,15 +241,15 @@ const IMPACT_REASON_PHRASES = Object.freeze({
   high: 'a heavy blow',
   meaningful: 'a real blow',
   criticalImpact: 'a matter that cuts deep',
-  criticalChannel: 'carried along a vital road',
+  criticalChannel: 'carried by a tie the town depends on',
   cascade: 'spreading from town to town',
   broad: 'reaching across the country',
   criticalGoods: 'touching goods the country cannot do without',
   importantGoods: 'touching goods that matter',
   applied: 'the effect has taken hold',
-  ready: 'the long wait is over',
-  resolved: 'a great pressure lifted',
-  expired: 'the danger has passed',
+  ready: 'close at hand',
+  resolved: 'a great weight lifted',
+  expired: 'it never arrived',
   routine: 'a quiet matter',
 });
 
@@ -257,17 +257,17 @@ const IMPACT_REASON_PHRASES = Object.freeze({
 // same fact through a finite world vocabulary instead of printing an engine key.
 /** @type {Readonly<Record<string, string>>} */
 const CHANNEL_PHRASES = Object.freeze({
-  trade_dependency: 'through the trade that binds the two towns',
+  trade_dependency: 'along the trade road between them',
   export_market: 'through the markets they share',
   trade_route: 'along the trade roads',
   political_authority: 'through the chain of authority',
   tax_obligation: 'along the tax road',
-  military_protection: 'under the shield that joins them',
+  military_protection: 'through the defence pact between them',
   war_front: 'along the war front',
-  resource_competition: 'through their struggle over scarce goods',
+  resource_competition: 'through their quarrel over scarce goods',
   service_dependency: 'through the services one town owes the other',
-  religious_authority: 'through the temples that bind them',
-  criminal_corridor: 'along the hidden roads of the underworld',
+  religious_authority: 'through their temples',
+  criminal_corridor: "along the smugglers' roads",
   migration_pressure: 'along the roads taken by the displaced',
   information_flow: 'by rumour and messenger',
 });
@@ -355,6 +355,30 @@ function impactPhrase(kind) {
  */
 function leadCap(value) {
   return value ? value.charAt(0).toUpperCase() + value.slice(1) : value;
+}
+
+/**
+ * Lower-case a leading letter (a goods label mid-sentence: "Milled flour" → "milled flour").
+ * @param {string} value
+ * @returns {string}
+ */
+function lowerLead(value) {
+  return value ? value.charAt(0).toLowerCase() + value.slice(1) : value;
+}
+
+/**
+ * A stored settlement name the reader may see: refused when it is only one of the
+ * impact's own settlement ids (an id minted into a name field upstream), or a
+ * one-character token no settlement is named.
+ * @param {unknown} name
+ * @param {WizardRegionalImpact} impact
+ * @returns {string}
+ */
+function readerName(name, impact) {
+  const n = String(name || '').trim();
+  if (n.length < 2) return '';
+  const ids = new Set([impact.sourceSettlementId, impact.targetSettlementId, ...pathSettlementIds(impact)].filter(Boolean).map(String));
+  return ids.has(n) ? '' : n;
 }
 
 /**
@@ -545,7 +569,7 @@ function headlineForImpact(impact, transition, names) {
   const phrase = impactPhrase(impact.kind);
   // C2 (bar 4): the neutral fallback speaks the world's register, never the
   // software's — "a far settlement". Raw ids still never leak (finding-11's law).
-  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'a far settlement';
+  const target = names.get(String(impact.targetSettlementId)) || readerName(impact.targetSettlementName, impact) || 'a far settlement';
   // THE NAMED TOWN IS THE GRAMMATICAL SUBJECT of every frame below. It is the only
   // address in the headline ON PURPOSE: `sourceSettlementId` is optional on a
   // hand-built impact, so a frame that named a source would ASSERT an origin the
@@ -562,14 +586,17 @@ function headlineForImpact(impact, transition, names) {
   // BY CONSTRUCTION. Variety belongs at render, where it is byte-inert by contract.
   const town = leadCap(target);
 
-  if ((impact.waveDepth || 0) > 0 && (transition === 'queued' || transition === 'ready')) {
-    return `${town} feels the trouble spreading from town to town`;
-  }
+  // A wave (an effect passed on from a neighbour) takes the same frames as a direct
+  // effect: the headline says WHAT is coming, and the body says where it comes from
+  // (STYLE-RULINGS-2 C1, SW-11; the old frame "feels the trouble spreading from town
+  // to town" named nothing on 1,292 cards of the measured run).
   // [domain-events-region-7] G1d — relief reads as a POSITIVE beat (pressure eases),
-  // not "faces relief" / "relief takes hold". Frozen byte-identically.
+  // not "faces relief" / "relief takes hold"; help still travelling is "on its way",
+  // help that never arrived "never came" (A1·19: "Relief reaches" printed on expired cards).
   if (impact.kind === 'relief') {
     if (transition === 'applied' || transition === 'resolved') return `Pressure eases in ${target}`;
-    return `Relief reaches ${target}`;
+    if (transition === 'expired' || transition === 'ignored') return `The help meant for ${target} never came`;
+    return `Help is on its way to ${target}`;
   }
   if (transition === 'ready') return `${town} braces for ${phrase}`;
   if (transition === 'applied') return `${town} wakes to ${phrase}`;
@@ -589,45 +616,46 @@ function headlineForImpact(impact, transition, names) {
 function summaryForImpact(impact, transition, names, channels) {
   // Both stand-ins speak the world's register rather than the software's, and both
   // sit MID-SENTENCE in every frame below, so both stay lowercase — the same
-  // one-literal-serves-every-position law the headline's fallback follows. The two
-  // that used to sit here, 'A regional source' and 'the target', were the software
-  // naming its own parameters inside diegetic copy.
-  const source = names.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || 'a neighbouring town';
-  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'a far settlement';
+  // one-literal-serves-every-position law the headline's fallback follows. A stored
+  // source NAME that is only a settlement id (a wave's source minted upstream from an
+  // id) is not a name and falls to the stand-in (A1·38, finding-11's law).
+  const source = names.get(String(impact.sourceSettlementId)) || readerName(impact.sourceSettlementName, impact) || 'a neighbouring town';
+  const target = names.get(String(impact.targetSettlementId)) || readerName(impact.targetSettlementName, impact) || 'a far settlement';
   const channel = channels.get(String(impact.channelId));
   const channelType = String(impact.channelType || channel?.type || '');
   const road = CHANNEL_PHRASES[channelType] || 'across the region';
-  const goods = (impact.goods || [])
+  const goodsList = (impact.goods || [])
+    // Goods print in sentence case mid-sentence ("milled flour", "bulk grain"), not as
+    // title-cased catalogue labels (A1·28).
     .map((good) => {
-      if (typeof good === 'string') return human(good);
-      return good?.label || human(good?.id);
+      if (typeof good === 'string') return human(good).toLowerCase();
+      return good?.label ? lowerLead(String(good.label)) : human(good?.id).toLowerCase();
     })
     .filter(Boolean)
-    .slice(0, 3)
-    .join(', ');
-  const goodsPart = goods ? `, with ${goods} caught in the balance` : '';
+    .slice(0, 3);
+  const goods = goodsList.length > 1
+    ? `${goodsList.slice(0, -1).join(', ')} and ${goodsList[goodsList.length - 1]}`
+    : (goodsList[0] || '');
+  const atStake = goods ? `; ${goods} ${goodsList.length > 1 ? 'are' : 'is'} at stake` : '';
   const phrase = impactPhrase(impact.kind);
   const town = leadCap(target);
-  // [domain-events-region-7] G1d, EXTENDED TO THE SUMMARY. The headline has read
-  // relief as a positive beat since that wave; the summary one line below it still
-  // ran the negative frames, so one entry carried both signs. The interception is
-  // what makes `relief` unreachable in IMPACT_LABELS, and the walker proves it.
+  const what = leadCap(phrase);
+  // [domain-events-region-7] G1d, EXTENDED TO THE SUMMARY: relief is a positive beat on
+  // both lines. The summary is the card's BODY (STYLE-RULINGS-2 C1): it states who sent
+  // what, by which road, and how it stands, without restating the headline's words.
   if (impact.kind === 'relief') {
     if (transition === 'applied' || transition === 'resolved') {
-      return `${town} feels the pressure easing, with help come from ${source} ${road}${goodsPart}.`;
+      return `Help from ${source} has reached ${target} ${road}${goods ? `, bringing ${goods}` : ''}.`;
     }
-    return `${town} has word of relief on the road from ${source} ${road}${goodsPart}.`;
+    if (transition === 'expired' || transition === 'ignored') return `${leadCap(source)} sent help ${road}, but it never reached ${target}.`;
+    return `${leadCap(source)} is sending help to ${target} ${road}${goods ? `, bringing ${goods}` : ''}.`;
   }
-  // THE NAMED TOWN IS THE SUBJECT here too, and the verbs are the headline's, so the
-  // lede and the detail read as one desk. Each frame adds what the headline withheld:
-  // the SOURCE, the ROAD it travelled and the GOODS caught in it — the address chain
-  // the record has always carried in `settlementIds` and never spoke aloud.
-  if (transition === 'ready') return `${town} braces for ${phrase}, come from ${source} ${road}${goodsPart}.`;
-  if (transition === 'applied') return `${town} wakes to ${phrase}, come from ${source} ${road}${goodsPart}.`;
-  if (transition === 'resolved') return `${town} has seen the last of ${phrase}, which came from ${source} ${road}${goodsPart}.`;
-  if (transition === 'ignored') return `${town} pays no heed to ${phrase}, come from ${source} ${road}${goodsPart}.`;
-  if (transition === 'expired') return `${town} is spared ${phrase}, which ${source} sent ${road}${goodsPart}.`;
-  return `${town} has word of ${phrase}, on the way from ${source} ${road}${goodsPart}.`;
+  if (transition === 'ready') return `${what} is close to reaching ${target}, coming from ${source} ${road}${atStake}.`;
+  if (transition === 'applied') return `${what} has reached ${target} from ${source} ${road}${atStake}.`;
+  if (transition === 'resolved') return `${town} is through ${phrase} that came from ${source}.`;
+  if (transition === 'ignored') return `${town} paid no heed to ${phrase} from ${source}.`;
+  if (transition === 'expired') return `${what} from ${source} died out before it reached ${target}.`;
+  return `Word has come to ${target} of ${phrase} in ${source}, travelling ${road}${atStake}.`;
 }
 
 /**

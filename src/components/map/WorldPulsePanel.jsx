@@ -44,6 +44,8 @@ import RealmDocket from './RealmDocket.jsx';
 import RealmVerbComposer from './RealmVerbComposer.jsx';
 import { politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
 import { t } from '../../copy/index.js';
+// The succession question's ids put into words at the print site (STYLE-RULINGS-2 C1, C2·26).
+import { readerHeadline, readerSummary } from '../../domain/display/newsBody.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 
@@ -356,8 +358,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 return (
                   <OutcomeCard
                     key={id}
-                    heading={major.headline || major.outcome?.headline || 'A major turn awaits your word'}
-                    summary={major.summary || major.outcome?.summary || ''}
+                    heading={readerHeadline(major.headline ? major : (major.outcome || major), nameById) || 'A major turn awaits your word'}
+                    summary={readerSummary(major.summary ? major : (major.outcome || major), nameById)}
                     severity={typeof major.severity === 'number' ? major.severity : 0.8}
                     reasons={major.reasons || major.outcome?.reasons || []}
                     details={proposalDetails(major.outcome || major)}
@@ -404,8 +406,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {pending.map(proposal => (
                 <OutcomeCard
                   key={proposal.id}
-                  heading={proposal.headline}
-                  summary={proposal.summary}
+                  heading={readerHeadline(proposal, nameById)}
+                  summary={readerSummary(proposal, nameById)}
                   severity={proposal.severity}
                   reasons={proposal.reasons}
                   details={proposalDetails(proposal.outcome)}
@@ -520,8 +522,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {appliedOutcomes.slice(0, 10).map(outcome => (
                 <OutcomeCard
                   key={outcome.id}
-                  heading={outcome.headline || human(outcome.candidateType)}
-                  summary={outcome.summary}
+                  heading={readerHeadline(outcome, nameById) || human(outcome.candidateType)}
+                  summary={readerSummary(outcome, nameById)}
                   severity={outcome.severity}
                   reasons={outcome.reasons}
                   details={outcomeDetails(outcome, nameById)}
@@ -560,8 +562,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {impactDigest.slice(0, 12).map(entry => (
                 <OutcomeCard
                   key={entry.id}
-                  heading={entry.headline}
-                  summary={entry.summary}
+                  heading={readerHeadline(entry, nameById)}
+                  summary={readerSummary(entry, nameById)}
                   severity={entry.severity ?? Math.min(1, (entry.score || 0) / 100)}
                   reasons={entry.reasons}
                   details={digestDetails(entry, nameById)}

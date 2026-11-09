@@ -485,7 +485,13 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // 2026-11-09 (STYLE-2 SW-4, ruling A7, the clock stages in plain words): 5b6a1e51... -> d798e730..., TEXT ONLY, leaf-diffed
 // against the parent a7bc2e4ce: 12 leaves, all one pulse-summary string — the legitimacy clock's stage 2 "A rival faction
 // publicly questions the governing faction." -> "A rival power publicly questions the ruling power." No id, tick or number moved.
-const BASE_PULSE_HASH = 'd798e730844bb78a5b709fdc839d326c2b695e822a971e4a61cfa8a94f91c140';
+// 2026-11-09 (SW-11 PULSE-CARD, STYLE-RULINGS-2 C1, UNSIGNED for STYLE-2-MERGE): 5b6a1e51... -> d8118b6a..., TEXT ONLY,
+// leaf-diffed against 2053a809c: 28,711 leaves on both sides, the same paths, 252 moved, every one a string (summary 79,
+// reasons 75, gates 61, reason 26, headline 7, postureReasons 4) — the A1 rows' named sentences (deityStanceLane,
+// religiousContest, the relationship rules, warHomeCosts). No id, tick or number moved. Still no datum: the absent arm holds.
+// STYLE-2-MERGE at the SW-11 merge (2026-11-09): the two lanes' text-only moves composed (SW-4's clock stage and SW-11's A1 sentences);
+// the hash re-measured at the merged tree: d798e730... / d8118b6a... -> b709ee7a... (each lane leaf-diffed TEXT ONLY on its own base).
+const BASE_PULSE_HASH = 'b709ee7a7922d3fac76c003c6a02cc8b15730ba741ffbf58999ab5eaed91dc6a';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
