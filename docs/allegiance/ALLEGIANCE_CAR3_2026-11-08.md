@@ -29,6 +29,15 @@ Seat: ALLEGIANCE-CAR3 (session `session_01FbPLbfazXvhVK4gcHY4yCa`), a child of t
 | `880cc6217` | the edge-shared bundles rebuilt after `8567f490d` |
 | `2f89aaeef` | **J-10's boss-last in its fallback sense** (the chair's ruling on the residue): the boss joins the round only when every other handler would carry more than `ALLEGIANCE_TUNING.bossJoinsAbove` (4) — exactly one town of the 1,000 changes (soak1k-537: 5 → 3 / 2); the design §5 band amended |
 | `412ec2d87`, `2f6b60c1e` | the tuning inventory refrozen; the edge-shared bundles rebuilt |
+| `18cbcd25b` | the PDF opt-in renamed `dmLayer` → `dmView` (`dmLayer` is a held settlement key; the held-key census) |
+| `5ec82cc55` | the panel's four list sites ruled (the name-list census); viewModel.js's three tension reads re-keyed by line (+8) |
+| `26c5aa3ca`, `4be2ed56b` | the DM view names a power `powerName` (the prose-numerics walker reads `.power` as a float); six legacy rows re-keyed by line |
+| `fb4408faa` | the bought watch's institution arm and ousted read stay in corruption.js (`securityImpairmentsOf`, `isOustedNpc`) — no observed-shape rung needed |
+| `1a522aaf4`, `18a315ee2` | the observed-shape register's governed `--write` (a lawful shrink, 2,203 / 1,546 → 2,194 / 1,540); the walker's corpus pins re-keyed with the cause |
+| `fdbdfbcc3`, `d003640ff`, `6e24d6032` | writer reach: `archetypeKey on relationships` struck by clause S (42 → 41); re-banked through its door (cohort 1,408 → 1,417) |
+| `e268f6365` | the edge-shared bundles rebuilt after the refactor |
+| `144e1dacb` | the panel's title names the settlement's own tier (the soak's `coh:tier-noun`, 833 towns) |
+| `1e943482c` | three WRITE-PEOPLE capture lines reworded tier-neutral (the soak's `coh:tier-noun`, 31 towns), a red-first guard |
 
 ## 2. The strength-reader census (J-9), with a denominator
 
@@ -84,7 +93,7 @@ The instrument is car 1's (agents ÷ eligible; its tip figures reproduced exactl
 | no criminal power, crime low / mid / high | 2.6 / 9.3 / 28.4 | 5.7 / 14.4 / 36.6 | **4.5 / 10.7 / 31.2** | base ±3 | **inside** (+1.9 / +1.4 / +2.8) |
 | where organized crime reads 1 (210 towns) | — | 30.6% | 25.9% (+4.5 over the term's zero) | up to +10 | inside |
 | `via` front / office / retainer | — | 48.1 / 19.9 / 32.0 | 48.5 / 19.9 / 31.7 | front **40–50** (TARGET CORRECTED by the chair's ruling; was 30–45), office 20–30 | front inside the corrected target; office 0.1 under |
-| agents per handler, median / max | 1 / 3 (§0.8) | 1 / 10 | 1 / 8; **after `8567f490d` (round the pool): 1 / 5**, handlers above 4 in 32 → 21 → **2** towns | max ≤ 4 | J-10 AMENDED BY CAUSE (the chair's ruling); the 2 residual towns are a STOP (below) |
+| agents per handler, median / max | 1 / 3 (§0.8) | 1 / 10 | 1 / 8; **after `8567f490d` (round the pool): 1 / 5**, handlers above 4 in 32 → 21 → 2 → **1** town (`2f89aaeef`, the boss joins above 4) | max ≤ 4, except where the town's criminal faces cannot supply it (amended) | inside the amended band: soak1k-849 named (5, supply-bound) |
 
 THE TERMS: in the 230 no-power towns organized crime reads 0.66 / 0.81 / 0.87 (eligible-weighted, by crime band) from the criminal HOUSES alone (76 read 1), so J-5's own formula lifts towns the ±3 band assumed it would not; 75 of the 106 low-crime towns sit at the spawn floor (0.02) without the term, where any term multiplies the rate. Expected rates by the dial (the per-card chance summed): 0.10 → 5.4 / 16.0 / 35.4; 0.05 → 4.1 / 12.2 / 31.1; 0.03 → 3.7 / 10.7 / 29.4; 0 → 3.3 / 8.7 / 26.8. Re-born at 0.05 and at 0.04 (4.4 / 10.1 / 30.5): **0.05 chosen**, the largest round value inside ±3 on all three, realized. THE HANDLER MAXIMUM is the dealing rule: 15 agents over 6 handlers deal 1, 1, 1, 1, 1, 10 (soak1k-100); 32 towns hold a handler above 4 at 0.10, 21 at 0.05. THE CHAIR'S RULINGS: the dial landed; the front target moves to 40–50 (J-7's table is the design's own: a target correction, not a tune; bracketed in the design §5); the handler maximum does NOT move — J-10 is amended by cause to deal ROUND the pool (bracketed in the design §1.5), landed at `8567f490d`. **THE RESIDUE (a STOP; RULED by the chair, vetoable by the owner — 537 by the boss-capacity reading at `2f89aaeef`, 849 named here as supply-bound, max 5, the band amended in the design §5; nothing tuned to make the number):** two towns still hold a handler with 5 agents — soak1k-537 (a pool of ONE non-boss handler; the guild's boss sits out under J-10's boss-last rule; a "the boss joins when one handler would carry more than 4" reading would make it 3 / 2) and soak1k-849 (the guild's boss is the town's ONLY criminal face: a supply limit no dealing rule cures).
 
@@ -120,7 +129,45 @@ The PDF golden view-model snapshot does not move: the DM rows ride the opt-in `d
 
 ## 9. The proof
 
-PROOF_SECTION
+**The full vitest run** (`--reporter=json`, each in a clean worktree), compared failed test by failed test:
+
+| tree | tests | failed | tip-only | cured |
+|---|---|---|---|---|
+| base `7395b5dab` | 37,755 | 77 (54 files) | — | — |
+| `b0dbfe4b2` (the first tip run) | 37,790 | 88 | 14 (all walkers / registers) | 2 |
+| `6e24d6032` (after the 14 cured through their doors) | 37,790 | 82 | 7 (all the edge bundles' freshness / reproducibility: the refactor) | 2 |
+| `e268f6365` (the edge bundles rebuilt) | — | — | tests/edgeFunctions green whole | — |
+| `1e943482c` (final) | FINAL_TESTS | FINAL_FAILED | FINAL_ONLY | FINAL_CURED |
+
+The 2 cured base reds: `tests/generators/urbanBandInstitutions.test.js` (Beast trainers rolled natively in towns, cities and metropolises) and `tests/lint/proseFamilyContract.walker.test.js` (A6 reaches the regional audit log) — PLAUSIBLY the re-dealt year of the generator causes; not traced. No test was skipped, disabled, quarantined or loosened; every register moved through its own door.
+
+**eslint** on every touched file: 0 errors (2 pre-existing warnings, `corruptionLeash.js :: resolveLeash`'s reserved arguments).
+
+**`npm run build`** exit 0. **`verify:dist`** (a fresh build of each tree): the same rows red at the base and the tip, and no new one —
+
+| row | base `7395b5dab` | tip `1e943482c`'s code (`e268f6365` build) | delta |
+|---|---|---|---|
+| first-paint closure, raw | 1,095,961 | 1,095,707 | **−254** (the bought watch's person arm left the eager module) |
+| first paint, gzip / Brotli | 348,522 / 292,420 | 348,436 / 292,233 | −86 / −187 |
+| the generation worker | 1,762,294 | 1,762,369 | **+75** |
+| the lazy engine chunk (`remains large`, its ceiling 722,205) | 722,737 | 722,737 | 0 (red at the base too) |
+
+The ceilings stay as the chair ruled for car 1: re-recorded once at MERGE-TRAIN's merged tip, every byte attributed by car; none raised here.
+
+**The soak 1,000** (`node scripts/audit/soak-review.mjs --count 1000 --workers 3`, each in a clean worktree):
+
+| tree | verdict | battery-would-not-vouch | reader:tension-memory | A-09 | reader:hook-pools | coh:tier-noun | errors |
+|---|---|---|---|---|---|---|---|
+| base `7395b5dab` | CLIMB | 698 | 61 | 4 | 3 | 0 | 0 |
+| `e268f6365` | STOP | 698 | 61 | 4 | 3 | **1,728** (833 towns: the panel's title) | 0 |
+| `144e1dacb` | STOP | 698 | 61 | 4 | 3 | **62** (31 towns: one capture line) | 0 |
+| `1e943482c` | **CLIMB** | 698 | 61 | 4 | 3 | **0** | 0 |
+
+At the tip the findings equal the base's, class for class; cert and coh 0.
+
+**The veil walk** (§4): 0 on the 1,000 and the 525.
+
+**The handler maximum, named (the chair's ruling):** soak1k-849 holds max 5 — its guild's boss is the town's only criminal face; every other town of the 1,000 is at or under 4.
 
 ## 10. Judgment calls (each with the default applied; vetoable)
 
@@ -131,6 +178,8 @@ PROOF_SECTION
 5. **`dmPowerViewOf` lives in `patronage.js`** (in the manifest), not a new module.
 6. **The PDF mount lines outside the manifest**: `SettlementPDF.jsx` (the opt-in) and `PowerStructure.jsx` (the mount) — over a `vm` field every caller carries, since Foundry builds from the same view model.
 7. **The bands**: `organizedCrime` 0.05 tuned (§6); the front split and the handler maximum sent to the chair, RULED (§6).
+12. **The tier-neutral rewording of three WRITE-PEOPLE capture lines** (car 1's judgment 13's class), listed in `1e943482c`'s message FOR THE OWNER'S VETO.
+13. **The view-model option `dmView`, not `dmLayer`** (a held key).
 11. **The round-robin's slice arm reads the pool size from the handlers the agents were dealt** (a pool deals to its first min(agents, handlers)), so the check needs no generator import.
 8. **The bought watch moved module** (corruption.js → corruptionLeash.js) rather than an injected reader: the eager module may not import the allegiance reader; first paint loses the two functions.
 9. **The leash-only card: the sidecar** (§7).
