@@ -536,3 +536,11 @@ Pins: `realmVerbComposerTranslation.test.jsx` — the footnote, with an anchored
 **The golden is nevertheless RED at this lane's base, and was before this seat** (STOP sent to the chair): the committed fixture holds `9e5ddbdb…`, which the projection reproduces at the lane's cut `2053a809c`; it reads `288a67b9…` at `aff902eb9` and `258d28e3…` at `45773294d` and at `96efb3b00`. Earlier seats' content causes moved the herald's printed text (their pulse writers feed the Herald's items) while their records say "none moved"; the third seat's "D·12–13 move it 9e5ddbdb → 258d28e3" was that drift, measured over a base that had already moved. The commits that move it are named in §9r (a bisection over all forty lane commits) for STYLE-2-MERGE's signing; none of this seat's commits moves it (258d28e3 at every one, measured at `96efb3b00`, `ba15f9332`, `22795b8c6`, `5e256442e` and here).
 
 Pins: `heraldFeedSources.test.js` — a new test building the feed with an unlabelled resolved stressor and an unlabelled echo; **red at the parent** (1 of 5), green here. Gates: the fourteen suites naming `buildHeraldFeed` / `heraldFeed` green except `heraldKnowledgeDeskGolden` (red at the parent with the same received hash), the standard six green, eslint clean.
+
+### 9s. `RealmDocket.jsx` (D·85) — §8k's remainder past the charge's list begins here
+
+| row | OLD | NEW |
+|---|---|---|
+| D·85 docket footnote | `Every entry stays editable (from its settlement's dossier) and cancelable until the tick consumes it. Realm orders queue separately as pending proposals above.` | "Every entry stays editable (from its settlement's dossier) and can be cancelled until the next advance carries it out. Realm orders wait separately, as proposals above." |
+
+Pins: a new `tests/components/realmDocketWords.test.jsx` (the footnote, with an anchored negative); **red at the parent**, green here. Registers: none moved.
