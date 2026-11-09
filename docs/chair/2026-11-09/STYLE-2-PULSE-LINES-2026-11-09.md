@@ -456,3 +456,12 @@ Pins: `relationshipChronicleSection.test.jsx` — the empty observer re-keyed (D
 | D·35 resolved-log tags (two writers, one vocabulary) | `by autoresolve` · `superseded by upgrade` (the pulse log) beside `superseded` (the RealmItem log) | "settled by the realm itself" · "replaced by a newer version" — both writers now say "replaced by a newer version" for a superseded row, and the autoresolved row matches the other writer's "… by the realm itself" |
 
 Pins: `heraldCommandDecisions.test.jsx` — the three receipts and the tombstone tag re-keyed; **red at the parent** (4 of 7), green here. D·34 has no fixture for the three refusals: PLAUSIBLE. Registers: none moved.
+
+### 9i. `WorldMapToolbar.jsx` (D·74–75)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·74 Undo title (after the lead) | `Restores the pre-pulse world and every settlement. This undo is available for the current session only. The advance cannot be undone after the page reloads.` | "Puts the world and every settlement back as they stood before it. This undo lasts only for this session: after a page reload the advance stays." (the lead "Undo the last realm advance ({interval})." unchanged) |
+| D·75 control help | `Advances the living world by the interval you choose above (a week through a year). Each advance runs a pulse whose changes wait for your review.` · `Opens the simulation rules: the dials and engine waves that shape how the realm evolves.` | "Moves the living world forward by the interval you choose above (a week through a year). What needs your word waits in the World Pulse panel." (the old line's no-evidence claim struck: under Full or Routine autonomy most changes do not wait) · "Opens the simulation rules: the settings that decide how the realm changes." |
+
+Pins: `advanceMultiTickToolbar.test.jsx` ("the session-only caveat is preserved verbatim" re-keyed by identity to the new closing sentence, anchored at the title's end) and `mapToolbarControlHelp.test.jsx` (the Undo title; the two help lines, with an anchored negative); **red at the parent** (3 of 9), green here. The help panel's own Undo line ("Available for the current session only; …") is not a ledger D row and stays. Registers: none moved.
