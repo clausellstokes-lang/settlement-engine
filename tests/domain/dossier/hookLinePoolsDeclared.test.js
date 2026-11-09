@@ -25,6 +25,18 @@ describe('HOOK_LINE_POOLS: the declared lines', () => {
       expect(line.includes('has posted guards')).toBe(false);
     }
   });
+  it('FIX-HOOK-OBJECT (2026-11-09): where a guard stands, a property conflict that draws "posted guards" prints the sentence, never "[object Object]"', () => {
+    // soak1k-10 (Olympambelos) printed "[object Object]" under "Religious Authorities vs Merchant
+    // Guilds": line 0 is the declared form around a template, and its text was read as the row.
+    const lines = [];
+    for (let k = 0; k < 40; k++) {
+      lines.push(createConflictHookDraw(GUARDED)({ parties: [`A${k}`, `B${k}`], issue: 'A land claim on the mill' })[0]);
+    }
+    expect(lines.filter((l) => typeof l !== 'string' || l.includes('[object Object]'))).toEqual([]);
+    const guarded = lines.filter((l) => l.includes('has posted guards'));
+    expect(guarded.length).toBeGreaterThan(0);
+    for (const l of guarded) expect(l).toMatch(/^A\d+ has posted guards on what it says is its own, and B\d+ says a land claim on the mill was never A\d+'s to hold\.$/);
+  });
   it('the food-gap lines that say grain or food is coming in are refused under a siege; the forward-buying line needs a market', () => {
     const fg = HOOK_LINE_POOLS.foodGap;
     expect(fg[0]).toMatchObject({ excludes: ['crisis: under_siege'] });
