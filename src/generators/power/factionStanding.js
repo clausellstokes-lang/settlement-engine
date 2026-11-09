@@ -48,18 +48,18 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             (topTwoGap <= 6
               ? (standing = topFactionName
                   ? 'The gap between them and ' +
-                    (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                    (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
                     ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.'
                   : 'The dominant order is genuinely contested; a single shift in circumstance could reorder everything.')
               : topTwoGap <= 14
                 ? (standing = topFactionName
                     ? 'They operate in the shadow of ' +
-                      (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                      (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
                       ' but not comfortably: they are watching for leverage, not deferring.'
                     : 'Close enough to the top to resist, far enough behind to be cautious.')
                 : (standing = topFactionName
                     ? 'Behind ' +
-                      (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                      (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
                       ' by enough margin that direct challenge is not viable: they route their influence through procedure, not confrontation.'
                     : 'The hierarchy is settled for now; their energy goes into consolidating second place, not chasing first.')),
           rank === 2 &&
