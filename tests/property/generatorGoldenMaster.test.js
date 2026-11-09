@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 19, THE SW-10 HOOKS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-19-sw10.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 18's post-state. THE CAUSE, ONE (first-parent step 856de8427): the SW-10 HOOKS merge (lane/style-2-hooks-2026-11-09 at f50b7b047; its generator causes the components: the eight person-hook pool causes 4ba2a241d..2a1051b81). FIELD-DIFFED: npcs[].plotHooks[] 525 rows, string leaves only.
+ *   Written from the staged tree S19 (the tree of 856de8427 with the door paths carried from the branch). 21b50e30.. -> 16c01856..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 17, THE SW-B1 CONTRADICTIONS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-09-style-2-merge-17-swb1.json; the cloud chair signs under the owner's delegation, vetoable).
  *   464 of 525 rows (thorp 65, hamlet 84, village 84, town 63, city 84, metropolis 84) against record 16's post-state. THE CAUSE, ONE (first-parent step 0f2cb865c): the SW-B1 CONTRADICTIONS merge (lane/style-2-contradictions-2026-11-09 at 8c650338d; its generator causes the components: P50/P51/powerSiblings 447, P71 29). FIELD-DIFFED: powerStructure.factions[].desc 447 rows and economicViability.metrics.foodBalance.importChannel 29 rows, string leaves only.
