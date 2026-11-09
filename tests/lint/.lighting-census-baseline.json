@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "9823009dd05910ebe7c8b969d9310c98c80ead8b",
-  "measuredBy": "STYLE-2-MERGE (TIER-PARITY-FIX merge point)",
+  "measuredAtSha": "506304ef5997f339fdbcd482097659b9e0956d0d",
+  "measuredBy": "STYLE-2-MERGE (SW-9 ODD-ROWS merge point)",
   "date": "2026-11-09",
-  "note": "TIER-PARITY-FIX's red-first suites (tierViewerRender, aiChronicleAppendOneLimit, sectionRerollBoundary, surveyorPremiumOnly and its pglite twin), carried by the merge",
+  "note": "SW-9's vetoes' and odd rows' pins, carried by the merge",
   "files": 3153,
   "parked": 390,
   "credited": 2763,
-  "titles": 28905,
-  "suiteTitles": 7777
+  "titles": 28916,
+  "suiteTitles": 7785
 }
