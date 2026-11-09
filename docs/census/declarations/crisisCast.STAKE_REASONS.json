@@ -46,7 +46,7 @@
     },
     {
       "id": "gainsRival",
-      "text": "outranks the seat while it weakens",
+      "text": "already carries more weight than whoever holds the seat",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -78,7 +78,7 @@
     },
     {
       "id": "loses",
-      "text": "the crisis hits its base",
+      "text": "its own people feel the crisis first",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -102,7 +102,7 @@
     },
     {
       "id": "untouched",
-      "text": "not touched yet; it could side with either camp",
+      "text": "it could side with either camp",
       "needs": [],
       "excludes": [],
       "crisis": [],
