@@ -65,13 +65,13 @@ A scratch copy of `scripts/audit/simulate-world.mjs` (imports made absolute; one
 
 ## 2. Golden surfaces — UNSIGNED, for STYLE-2-MERGE's signing
 
-| cause | herald desk (`rr-fresh-full|1`, 439 items) | gm /525 | fence /360 | prose /1,050 | witness | pdf |
+| cause | herald desk (row rr-fresh-full, 1 year; 439 items) | gm /525 | fence /360 | prose /1,050 | witness | pdf |
 |---|---|---|---|---|---|---|
 | d4e8d0487 A2·171 | a6b2c25b → d4f24935 · 2 items text-moved | 0 | 0 | 0 | 0 | 0 |
-| 930b611cd A2·169–171 | d4f24935 → dbef759e · 66 | 0 | 0 | 0 | 0 | 0 |
-| f7a455e36 B·2–4 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 0e8c9308c B·8–10 | dbef759e → 07906080 · 12 | 0 | 0 | 0 | 0 | 0 |
-| 92787493b A2·41 | 07906080 → aafcffa0 · 3 | 0 | 0 | 0 | 0 | 0 |
+| 930b611cd A2·169–171 | d4f24935 → dbef759e · 66 | 0 | 0 | 0 | 7/8 rows (text) | 0 |
+| f7a455e36 B·2–4 | 0 | 0 | 0 | 0 | same 7 rows (text) | 0 |
+| 0e8c9308c B·8–10 | dbef759e → 07906080 · 12 | 0 | 0 | 0 | same 7 rows (text) | 0 |
+| 92787493b A2·41 | 07906080 → aafcffa0 · 3 | 0 | 0 | 0 | same 7 rows (text) | 0 |
 | 6969dda79, af0087de2 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 How it was measured:
@@ -106,7 +106,13 @@ How it was measured:
 ## 6. Figures at the close
 
 - **The 1,000** (`soak-review.mjs --count 1000 --workers 2`, at `bd07005b9` and at the tip `d59b6ce80`): 1,000 settlements, 657 findings, 0 errors, CLIMB at both. That is the train's own result (657; repetition story 0.035, hooks 0.299). **Every aggregate, `repetition-prose.json` included, is byte-equal, and `settlements.jsonl` (the story hashes) is byte-equal across all 1,000.** The twenty frames are not raised and no new frame enters the top forty; only `run.json` (timing and sha) differs. `coh:tier-noun` is untouched: no line here prints on a dossier.
-- **The full suite:** see the closing addendum below.
+- **The full suite** (`npx vitest run`, JSON reporter):
+  - **Base `bd07005b9`**, clean worktree: 37,962 tests, 28 red in 15 files, all the base's own. They are layerBoundaries 1, readerValidationOnPage 1, densityLaw 4, institutionBudgetPromise 1, regenNpcEnrichment 1, x46NpcBand 1, editCorpusRatchet 4, clergyTraitPlane 2, composeStateProse 1, deityStanceLane 1, editWorldFactResources 2, religionLegitimacyFactionKey 1, worldPulseFactionSeating 2, killNpcDoubleImpair 3 and characterConsumers 3.
+  - **Tip `1976bde48`:** 37,974 tests, 31 red in 18 files. That is the same 15 files at the same counts, plus three:
+    - `worldPulseExpansion` 1, a pin on the old field names, re-keyed by identity in 08fc207e0 (15/15);
+    - `heraldKnowledgeDeskGolden` 1, the UNSIGNED herald move of §2;
+    - `presetLightingWitness` 1, the UNSIGNED witness move below.
+  - **The witness** (`tests/simulation/presetLightingWitness.test.js`): 7 of 8 rows move their `wizardNewsSha256` and `worldStateSha256` only, and no count or figure moves. Measured at each commit in a clean worktree: 0 rows at bd07005b9 and d4e8d0487; 7 from 930b611cd on, because the candidate reasons live in the pulse record. The later text causes move the same seven rows. Left red for the signed door.
 
 ## 7. CONFIRMED against PLAUSIBLE
 
@@ -117,6 +123,8 @@ How it was measured:
 - the WY-1 arm's text-only leaf diff;
 - the prose-family base reproduction and its five moved rows;
 - the writer-reach diff by field;
+- the witness move, attributed by commit;
+- the full suite at base and tip, compared file by file;
 - each new pin red at its parent;
 - tsc text-equal.
 
