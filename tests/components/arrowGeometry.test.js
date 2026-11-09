@@ -606,11 +606,10 @@ describe('(h) each slot is toned to the wood beside its cut', () => {
     // Each end takes the tone of the painting it joins: the plate's drop joins 1586 to 1608 (one
     // run, one tone), every other cut joins a column to itself (2026-11-09).
     expect(fillers.map((f) => [f.toneL, f.toneR])).toEqual(CUTS.map((c) => [SLOT_TONE[c.x], SLOT_TONE[c.x + (c.drop ?? 0)]]));
-    // The plain wood's tones; the plate's fixed fill joins the arrowhead's binding's shade, the
-    // darkest wood on the shaft (0.526 measured over SHADED_GAP).
-    expect(Object.entries(SLOT_TONE).filter(([x]) => Number(x) !== 1881).every(([, k]) => k > 0.7 && k < 1.2)).toBe(true);
-    expect(SLOT_TONE[1881]).toBeGreaterThan(0.45);
-    expect(SLOT_TONE[1881]).toBeLessThan(Math.min(...Object.values(SLOT_TONE).filter((k) => k !== SLOT_TONE[1881])));
+    expect(Object.values(SLOT_TONE).every((k) => k > 0.7 && k < 1.2)).toBe(true);
+    // The plate's fixed fill continues the plate's band of lit wood: the tone of the run its
+    // drop sits in, not the binding's shade it joins (2026-11-09).
+    expect(SLOT_TONE[1881]).toBe(SLOT_TONE[1586]);
   });
 
   it('the compact slot takes its left cut\'s tone at its left end and its right cut\'s at its right end', () => {

@@ -43,7 +43,7 @@
  * plate's band is re-composed at EVERY width, the uncut one included: PLATE_SHIFT columns of the
  * plain run before the plate are DROPPED at the stretch cut (the next range starts PLATE_SHIFT
  * columns on, joined by the cut's own crossfade over its filler), and PLATE_SHIFT columns of
- * filler are ADDED at a FIXED join in the shaded gap after it, toned to that gap. The page width
+ * filler are ADDED at a FIXED join in the shaded gap after it, toned to the plate's lit wood. The page width
  * is unchanged (one drop, one fill of the same width), and the plate sits 35 columns from binding
  * 7 and 34 from the arrowhead's binding. Above S_MAX the plate's one part of the extra width is
  * split in two halves, one at each of its joins, so it stays centred as the band grows.
@@ -273,8 +273,11 @@ export const SLOT_TONE = /* @__PURE__ */ Object.freeze({
   558: 1.047, 657: 1.027, 713: 1.044, 825: 1.014, 881: 1.035, 982: 1.019, 1032: 1.050,
   1181: 0.975, 1234: 0.994, 1350: 0.955, 1413: 0.981, 1516: 0.923,
   // The plate's joins (2026-11-09): both sides of the drop are the run [1566, 1628), the tone
-  // its old cut 1596 had; the fixed fill takes the shaded gap's own wood, [1877, 1885).
-  1586: 0.802, 1608: 0.802, 1881: 0.526,
+  // its old cut 1596 had. The fixed fill takes the SAME tone: it continues the plate's band of
+  // lit wood, while the gap's shade (0.526 over [1877, 1885)) belongs to the arrowhead's
+  // binding and stays painted beside it. At 0.526 the fill read as a flat dark patch that grew
+  // with the page (the seat's screenshots at 1024 and 1920, 2026-11-09).
+  1586: 0.802, 1608: 0.802, 1881: 0.802,
   // The compact arrow's tail crop still starts at 1596, in the same run.
   1596: 0.802,
 });

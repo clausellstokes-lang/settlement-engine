@@ -424,13 +424,15 @@ describe('(e) the filler tile', () => {
     const sorted = [...tile].sort((a, b) => a - b);
     const median = (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
     // Every column a join's filler meets: a cut's own, the far side of the plate's drop (1608,
-    // 2026-11-09) and the compact join's two. The plate's fixed fill (1881) is toned to the
-    // shaded gap it sits in, measured over SHADED_GAP by the same formula.
+    // 2026-11-09) and the compact join's two. The plate's fixed fill (1881) continues the
+    // plate's lit band, so its tone is measured over the run the plate's drop sits in, not over
+    // the shaded gap it joins (0.526 there; it read as a dark patch, the seat's screenshots).
     const cuts = [...CUTS.flatMap((c) => (c.drop ? [c.x, c.x + c.drop] : [c.x])), COMPACT_JOIN.left, COMPACT_JOIN.right];
     expect(Object.keys(SLOT_TONE).map(Number).sort((a, b) => a - b)).toEqual([...new Set(cuts)].sort((a, b) => a - b));
     const failures = [];
     for (const x of cuts) {
-      const run = WOOD_RUNS.find((r) => r.x0 <= x && x < r.x1) ?? (x >= SHADED_GAP.x0 && x < SHADED_GAP.x1 ? SHADED_GAP : null);
+      const at = CUTS.find((c) => c.x === x && c.fixed) ? CUTS.find((c) => c.drop).x : x;
+      const run = WOOD_RUNS.find((r) => r.x0 <= at && at < r.x1);
       let sum = 0;
       let n = 0;
       for (const col of columns(run)) for (let y = 6; y < 60; y += 1) { sum += luma601(px(strip, col, y)); n += 1; }
@@ -439,7 +441,6 @@ describe('(e) the filler tile', () => {
     }
     expect(failures).toEqual([]);
     // The table darkens toward the arrowhead the way the painting does.
-    expect(SLOT_TONE[1881]).toBeLessThan(SLOT_TONE[1586]);
     expect(SLOT_TONE[1586]).toBeLessThan(SLOT_TONE[1516]);
     expect(SLOT_TONE[1516]).toBeLessThan(SLOT_TONE[558]);
   });
