@@ -501,8 +501,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the generator master daedf3c6.. -> e8901fee.. (525 of 525 rows).
     // Record 1 of the style wave's merge, the chair's words at SW-0's point (2026-11-09-style-2-merge-1-sw0.json), from the stage at ca15421ff:
     // the generator master e8901fee.. -> c46e7d69.. (1 of 525 rows).
+    // Record 3 of the style wave's merge, the sw-2 institutions merge over the integration branch (2026-11-09-style-2-merge-3-sw2.json), from the stage at ef4645832:
+    // the generator master c46e7d69.. -> 13d47ef6.. (369 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('c46e7d697ff3de894f3ba93e885318d00d5f790e695d352cc06de4421c3d6411');
+      .toBe('13d47ef6f58e90fe7e9082c77c8dda9bcedac9814b6422a4d2d78467143208cd');
     // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
     // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
     // Record 10 of the train, the composed-prose manifest signed ONCE at the train's final tip (2026-11-09-merge-train-10-

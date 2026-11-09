@@ -175,7 +175,9 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // hidden allegiance re-shape the control row).
 // -> 6f0047b6 record 9, the ALLEGIANCE-CAR4 merge (the goals A9 and item 15's title-secret draw re-deal the control row; taken
 // in record 9's golden-master act, the chair's note (3) of 09:2x).
-const GOLDEN_CONTROL_HASH = '6f0047b6150b1c9ec4c5744bbc77fe7a8b8ffa076265b5b948e9619681fbd540';
+// -> f3e83c3c STYLE-2-MERGE record 3, the SW-2 INSTITUTIONS merge (the catalogue law's 80 identity-text swaps reach the control row's
+// institutions; taken in the same act as the golden re-record, the train's note-3 idiom).
+const GOLDEN_CONTROL_HASH = 'f3e83c3cc9b0ce862e45a57738e69ba389ca0e2ada1c2fe9e3666a9d57df996a';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
