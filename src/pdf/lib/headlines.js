@@ -61,11 +61,43 @@ function coverageWords(pct) {
 }
 
 // ── Overview ────────────────────────────────────────────────────────────────
+/**
+ * THE CRISIS AS A THING SEEN, NEVER A KEY (STYLE-2-SURFACES D·P5 / D·F1; STYLE-RULINGS-2 B2).
+ * The lead printed the crisis LABEL dropped in as a noun ("you hear of one thing: recently
+ * betrayed"). Each crisis the slice names by its label (`o.stress[].label`, the stressTypes
+ * label) now has a plain noun for the list and one clause of what a visitor sees or hears.
+ * Every clause states only what the crisis kind itself guarantees — the discipline of
+ * `crisisSummaryVantage.js`: no walls, gates, garrison or market (facts of their own), no hunger
+ * outside a famine, a war line true for a town that gains by the war and one that pays for it,
+ * a migration line true for arrivals and departures alike (the slice keeps no direction).
+ * A label this table does not know (an authored custom crisis) is "the crisis", with no clause.
+ * Every line is FOR THE OWNER'S VETO (docs/chair/2026-11-09/STYLE-2-FIRST-IMPRESSIONS-2026-11-09.md).
+ * @type {Readonly<Record<string, Readonly<{ noun: string, seen: string }>>>}
+ */
+const CRISIS_SEEN = Object.freeze({
+  'under siege': Object.freeze({ noun: 'the siege', seen: 'nothing comes in by road without the besiegers\' leave' }),
+  famine: Object.freeze({ noun: 'the famine', seen: 'people queue for what food is handed out, and every meal is smaller than the last' }),
+  'under occupation': Object.freeze({ noun: 'the occupation', seen: 'foreign officials give the orders, and the locals say as little as they can' }),
+  'politically fractured': Object.freeze({ noun: 'the quarrel over who rules', seen: 'no order is obeyed by everyone, and each side has its own following' }),
+  'indebted to outside power': Object.freeze({ noun: 'the debt to outsiders', seen: 'what is owed abroad is paid before anything the people here need' }),
+  'recently betrayed': Object.freeze({ noun: 'the betrayal', seen: 'someone they trusted sold them out, and neighbours watch each other' }),
+  infiltrated: Object.freeze({ noun: 'the spies among them', seen: 'people lower their voices and wonder who is listening' }),
+  'disease outbreak': Object.freeze({ noun: 'the sickness', seen: 'the sick are kept indoors, and people keep their distance from each other' }),
+  'succession void': Object.freeze({ noun: 'the empty seat', seen: 'no one holds the seat of power, and those who want it are counting their friends' }),
+  'beast & raider threat': Object.freeze({ noun: 'the beasts and raiders', seen: 'no one travels the roads alone or after dark' }),
+  insurgency: Object.freeze({ noun: 'the rising', seen: 'armed bands defy those in charge, and people are careful whom they are seen with' }),
+  'religious conversion': Object.freeze({ noun: 'the change of faith', seen: 'more people take up the new gods every week, and families argue over which to keep' }),
+  'slave revolt': Object.freeze({ noun: 'the revolt', seen: 'the enslaved have risen against their masters, and no one knows how far it will spread' }),
+  wartime: Object.freeze({ noun: 'the war', seen: 'everyone has a view on what the fighting costs and who gains by it' }),
+  'mass migration': Object.freeze({ noun: 'the families on the move', seen: 'carts piled with bundles crowd the roads' }),
+});
+
 export function overviewHeadline(o, identity) {
   if (!o) return null;
-  // THE LABEL FIRST ("Struggling."), then the town, its size and the trouble it is in, in the
-  // crisis's own label. The safety label and the chip count were machinery (STYLE-AUDIT §2a #1).
-  // The crisis is named and never described, so the line holds for arrivals and departures alike.
+  // THE LABEL FIRST ("Struggling."), then the town, its size and the trouble it is in as a thing
+  // seen (CRISIS_SEEN above). The safety label and the chip count were machinery (STYLE-AUDIT §2a
+  // #1). No clause judges the season: "Comfortable … in a hard season" set the lead against its own
+  // label (D·P5), so the prosperity label is the one judgment the line makes.
   const name = identity?.name || null;
   // "Thorpe" on every reader surface (ODQ §934.63 F14): the tier LABEL, never the token.
   const tierWord = (identity?.tier || identity?.tierKey || '').toLowerCase() || null;
@@ -75,21 +107,30 @@ export function overviewHeadline(o, identity) {
     : (name || null);
   if (!place && !o.prosperity) return null;
   const lead = o.prosperity ? `${cap(String(o.prosperity).toLowerCase())}. ` : '';
-  const crises = (o.stress || []).map((x) => String(x?.label || '').toLowerCase()).filter(Boolean);
+  const crises = (o.stress || [])
+    .map((x) => String(x?.label || '').trim().toLowerCase())
+    .filter(Boolean)
+    .map((key) => (Object.hasOwn(CRISIS_SEEN, key) ? CRISIS_SEEN[key] : { noun: 'the crisis', seen: null }))
+    .filter((c, i, all) => all.findIndex((d) => d.noun === c.noun) === i);
   const where = place || 'the place';
   let body;
   if (crises.length) {
-    const what = listOf(crises);
-    const one = crises.length === 1;
+    const what = listOf(crises.map((c) => c.noun));
+    const seen = crises[0].seen;
+    // One crisis: the clause follows a colon. Several: the nouns are listed and the first crisis's
+    // clause is its own sentence, so the colon never pins one crisis's evidence on the list.
+    const after = seen ? (crises.length === 1 ? `: ${seen}` : `. ${capFirst(seen)}`) : '';
     const variants = [
-      // [traveller · F] what you walk into
-      () => `You reach ${where} in a hard season, with ${one ? 'one trouble' : `${countWord(crises.length)} troubles`} on it: ${what}`,
-      // [local · F] how daily life talks about it
-      () => `In ${where} the talk in every house is of ${one ? 'one thing' : `${countWord(crises.length)} things`}: ${what}`,
-      // [official · F] what those in charge must manage
-      () => `${capFirst(where)} has ${one ? 'one crisis' : `${countWord(crises.length)} crises`} to manage this season: ${what}`,
-      // [newcomer · F] what you hear when you ask
-      () => `Ask in ${where} what is wrong and you hear of ${one ? 'one thing' : `${countWord(crises.length)} things`}: ${what}`,
+      // [traveller · S] what you walk into
+      () => (crises.length === 1 && seen
+        ? `You reach ${where} and it shows at once: ${seen}`
+        : `You reach ${where} in the middle of ${what}${after}`),
+      // [local · S] what every house talks about
+      () => `In ${where} the talk is all of ${what}${after}`,
+      // [official · S] what those in charge have to deal with
+      () => `Those in charge of ${where} have ${what} on their hands${after}`,
+      // [newcomer · S] what you hear when you ask
+      () => `Ask in ${where} what is wrong and you hear of ${what}${after}`,
     ];
     body = seedPick(name || tierWord || '', variants)();
   } else {
