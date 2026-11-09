@@ -153,6 +153,34 @@ describe('I-10 — no hidden allegiance, handler tie, pursuit goal or hidden boo
     for (const r of records) expect(JSON.stringify(r)).not.toMatch(/patronage(Receipt|Boost)/i);
   });
 
+  // J-20 (ALLEGIANCE-CAR2, the chair's ruling of 2026-11-08 ~23:47 UTC): THE HALL'S HOLD IS DM-ONLY. Red-first: with the client
+  // strip alone (no migration 207) the SQL arm and the parity arm red; 207's twin greens them.
+  it('J-20: the capture state, the power rows\' seed and the capture relation rows are on no public page (client and SQL)', async () => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    const captureLeaks = (json) => {
+      const text = JSON.stringify(json);
+      const rels = json?.powerStructure?.factionRelationships || [];
+      return {
+        captureKeys: text.split('aptureState"').length - 1,
+        corruptedRows: rels.filter((r) => r?.type === 'corrupted').length,
+        captureRows: rels.filter((r) => r && Object.hasOwn(r, 'captureState')).length,
+        frontWords: text.split(' is a front.').length - 1,
+      };
+    };
+    const NONE = { captureKeys: 0, corruptedRows: 0, captureRows: 0, frontWords: 0 };
+    let rawRows = 0;
+    for (const rec of records) {
+      const before = JSON.stringify(rec);
+      const raw = captureLeaks(rec);
+      expect(raw.captureKeys, 'THE CONTROL: the raw record carries its capture state').toBeGreaterThanOrEqual(1);
+      rawRows += raw.captureRows;
+      expect(captureLeaks(toPublicSafe(rec)), 'client').toEqual(NONE);
+      expect(captureLeaks(await sanitize(rec)), 'server').toEqual(NONE);
+      expect(JSON.stringify(rec), 'the projection never touches the record').toBe(before);
+    }
+    expect(rawRows, 'anchored: the six towns carry capture relation rows on the raw record').toBeGreaterThan(0);
+  });
+
   it('the client projection carries every count at 0, and client == server', async () => {
     const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
     for (const rec of records) {
