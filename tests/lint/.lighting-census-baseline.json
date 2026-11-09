@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "5cc6a81597b9b34fd9ff20a0f8998e7818506687",
+  "measuredAtSha": "d7f981d21623f7be70d6d469f93f43d47659ae33",
   "measuredBy": "SW-B7a PARTY-LINK",
   "date": "2026-11-09",
-  "note": "four new test files (partyLinkView, partyLinkClient, partyLinkShareDialog, partyLinkRedirect) and the re-keyed galleryUnlisted pglite pins",
+  "note": "the bar-caption pin (one title) after the chair ruled UnlistedShareBar.jsx into the manifest",
   "files": 3127,
   "parked": 384,
   "credited": 2743,
-  "titles": 28711,
-  "suiteTitles": 7723
+  "titles": 28712,
+  "suiteTitles": 7724
 }
