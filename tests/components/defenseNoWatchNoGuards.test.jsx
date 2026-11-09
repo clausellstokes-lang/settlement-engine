@@ -1,0 +1,75 @@
+/** @vitest-environment jsdom */
+/**
+ * SW-B6 · ECO-DEF-BLOCKS (2026-11-09; STYLE-RULINGS-2 B1(a) and B6; the SURFACES audit's C·D1/C·D5):
+ * ONE READER OF THE WATCH FACT. The Defense tab's guard assessment says "There is no watch" where the
+ * roster holds no force (`safetyProfile.js :: generateSafetyProfile`, the `guardEffectivenessDesc`
+ * no-force branches); on the same tab DS-DEF-8 said "the guards cannot keep track", DS-DEF-3 said
+ * "Fighting between the rebels and the town's guards" and the stress safety lines said "the regular
+ * patrols have stopped". Every writer of a guard or a patrol now reads the same fact — `guardPresence`
+ * (watch ∨ garrison ∨ militia ∨ hired company, `factsOf`) — and prints its twin where none stands.
+ *
+ * RED-FIRST, measured on these 120 planted places at the parent (0c93f0ca0): 77 guard/patrol sentences
+ * on the 109 no-force tabs; after the cure, none. A planted place with no force prints no guard and no
+ * patrol anywhere on its Defense tab, every disclosure opened.
+ */
+import { afterEach, beforeAll, describe, expect, test } from 'vitest';
+import { cleanup, fireEvent, render } from '@testing-library/react';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+
+const STRESSES = [
+  'mass_migration', 'famine', 'under_siege', 'occupied', 'politically_fractured', 'indebted',
+  'recently_betrayed', 'infiltrated', 'plague_onset', 'succession_void', 'monster_pressure',
+  'insurgency', 'religious_conversion', 'slave_revolt', 'wartime',
+];
+/** A guard or a patrol as a NOUN (the verb "people guard their food" is not a claim of a force). */
+const FORCE_NOUN = /\b(?:guards|patrols?|watchm[ae]n)\b|\b(?:a|the|every|hungry|standing) guard\b/i;
+
+/** Open every closed disclosure, so a line inside a fold is read too. */
+function expandAll(container) {
+  for (let pass = 0; pass < 4; pass += 1) {
+    const shut = [...container.querySelectorAll('[aria-expanded="false"]')];
+    if (shut.length === 0) return;
+    for (const b of shut) fireEvent.click(b);
+  }
+}
+
+const TABS = [];
+beforeAll(() => {
+  for (const tier of ['thorp', 'hamlet']) {
+    for (const stress of STRESSES) {
+      for (let i = 0; i < 4; i += 1) {
+        const seed = `sw6-guards-${tier}-${stress}-${i}`;
+        const s = generateSettlementPipeline({ settType: tier, stressTypes: [stress] }, null, { seed, customContent: {} });
+        if (factsOf(s).guardPresence !== false) continue;
+        const { container } = render(<DefenseTab settlement={s} />);
+        expandAll(container);
+        for (const dialog of [...container.querySelectorAll('[role="dialog"]')]) dialog.remove();
+        TABS.push({ seed, text: container.textContent || '' });
+        cleanup();
+      }
+    }
+  }
+}, 600000);
+afterEach(cleanup);
+
+describe('one reader of the watch fact on the Defense tab', () => {
+  test('the planted places carry no force, and the guard assessment says so', () => {
+    expect(TABS.length, 'too few no-force places to read').toBeGreaterThan(80);
+    // 103 of the 109 measured: the other six keep a charter hall or a warding, which the guard
+    // assessment describes in its own words (`inst.hasMilitaryInst`) and which is no watch either.
+    const saying = TABS.filter(({ text }) => /There is no watch/.test(text)).length;
+    expect(saying, 'the guard assessment no longer reads the absence').toBeGreaterThan(TABS.length * 0.9);
+  });
+
+  test('a place with no force prints no guard and no patrol anywhere on the tab', () => {
+    const offenders = [];
+    for (const { seed, text } of TABS) {
+      for (const m of text.matchAll(/[^.]*\.?/g)) {
+        if (FORCE_NOUN.test(m[0])) offenders.push(`${seed}: ${m[0].trim().slice(0, 160)}`);
+      }
+    }
+    expect(offenders, offenders.join('\n')).toEqual([]);
+  });
+});
