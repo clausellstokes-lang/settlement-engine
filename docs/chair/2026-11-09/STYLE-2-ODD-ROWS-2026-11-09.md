@@ -109,6 +109,8 @@ Each was measured at the parent `8b75f466a` in a clean worktree with the same fa
 
 This record is born dated: `dated` 185 → 186, `_rosterGrowth2026-11-09-style-2-odd-rows` in `tests/lint/.source-citation-baseline.json` and the header line of `tests/lint/sourceCitationIntegrity.walker.test.js`, both by the Edit tool. The three record walkers through `sh scripts/gate-tail.sh` before the push, at the record's final commit: see §6a.
 
+**§6a. The walkers and the registers at `7caedc7f5`.** `sh scripts/gate-tail.sh npx vitest run` over `testRatchet`, `ledgerCitationIntegrity` (with the local ref `review-fixes-2026-07-08` created from origin) and `sourceCitationIntegrity`: 3 files, 111 tests, exit 0. `tree` is green at this base. The whole `tests/lint` folder: 207 files and 3,061 tests green, the same as the parent. The registers moved through their doors, one commit each: the prose-numerics baseline (`5310af5fa`, one address); the wiring census re-taken by its writer (producerIndexFiles 1313 → 1314, the new leaf); the lighting census refrozen by `LIGHTING_CENSUS_REFREEZE` (titles 28,810 → 28,821, suite titles 7,748 → 7,756; no test file added, so the testRatchet register is untouched); one past-EOF packet citation re-addressed to its symbol (`c82bbaa25`). The lint walkers caught the new negative anchors and the quoted drift sentence at their commits; both are cured in `bf4faff48`.
+
 ## 7. What stays — for SW-9b (the chair, 08:3x: one writer per line; SW-9b is cut from STYLE-2-MERGE's tip; the merge seat composes and writes no new text)
 
 Each row: file · the owning lane · the cure in one line.
