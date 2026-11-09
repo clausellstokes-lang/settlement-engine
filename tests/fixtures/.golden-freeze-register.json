@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "cbe5276d8fc55cbbdd2cbf300fb743ecd18e697f1e9080f55b0271fbc96c4dfb",
+      "sha256": "a52070bf4ea2031f97305d256640749b9e7f2d719e31aacda206c34d9d7301a1",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the train MERGE-TRAIN, 2026-11-09)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
