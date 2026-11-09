@@ -3,6 +3,7 @@
 Seat: STYLE-2-MERGE, under the cloud chair (session `session_01FbPLbejcfwX5nii12VM673`), by the owner's delegation (`Owner-Signed: §934.105`).
 Line: `lane/integration-2026-11-07`, cut from base `bd07005b9`.
 **Hand-back tip (first seat): `a52f7b8f3`. SECOND HAND-BACK (STYLE-2-MERGE-2, session `session_01FbPLbc8gtufq3JftaYsRGV`, RULE 14 at ~580k context): the commit that carries this section, after point 18. §2 below is rewritten for the third seat; §1 carries points 1–18.**
+**THIRD HAND-BACK (STYLE-2-MERGE-3, session `session_01FbPLbfL5qqV4cXN7ykvbtJ`, RULE 14 at ~500k context, at the point-22 boundary because point 23 would cross ~600k): the commit that carries this line, after point 22 (42d01edce). §1 carries points 19–22 (rows above row 17); §2a below is the order remaining for the fourth seat; Appendix B quotes the third seat's helpers.**
 
 This record is the hand-back under the chair's RULE 14 (19:3x and 19:4x). The closing acts below are not done. The record is unfinished until a later seat writes them; "THE STYLE WAVE IS IN" has not been said.
 
@@ -100,6 +101,26 @@ Points 17 and 18 are done (§1). The third seat merges, in this order:
 - The door's `predictedRows` is the manifest's ROW COUNT (gm 525, herald 441, witness 15, fence 1), not the moved count.
 - Stage reds after the acts: re-key `tests/domain/worldFactRederive.test.js`'s A7 gm-sha pin, `generationForkCensus`'s GOLDEN_CONTROL_HASH (read the full hash from the assertion's diff) and `generatorGoldenMaster.test.js`'s header block in the stage. Commit them there, then pass `extraPaths` on the gm surface in the act config.
 - The helpers are quoted in Appendix A.
+
+## 2a. The order remaining for the fourth seat (written at the third hand-back, after point 22)
+
+Points 19–22 are done (§1). The line's tip is the commit carrying this section; the last measured stage is point 22's (merge ac1442a3d; signed gm 2908b7a3, fence aaa515df, herald 580c5908 register sha / row d5c5b9d3, witness 7/8 from record 20). `/tmp` does not survive: rebuild the previous measurement by staging the current tip (`landing-stage.sh build HEAD <s>` then `measure <s> <m22>`) — it reads 0 on all six against the committed fixtures.
+
+- **23 · SW-B7b PROJECTION** at 7f352715b — the chair's notes in §2 stand verbatim. Measured by `git merge-tree` at the third hand-back, its conflicts against the line: docs/DEPLOY.md; scripts/.observed-shape-readers-baseline.json, scripts/.writer-reach-baseline.json (registers: ours, then the doors); scripts/ops/migrationRehearsalCore.mjs and tests/ops/migrationRehearsal.test.js (210 composes onto 208 and 209: confirm 204–210 contiguous, the gap arm's list gains [210, 210]); src/components/new/generalDeskRead.js, src/components/new/tabs/EconomicsTab.jsx, FaithTab.jsx (point 22 left FaithTab equal to the integration side — see the STOP below), PowerTab.jsx; tests/components/phoneChromeFloor.census.test.js (re-measure by the census, re-key by cause); tests/lint/.prose-numerics-baseline.json (by line), .tuning-inventory.json (its ritual); the roster (roster.py). saves.js did NOT conflict.
+- **24 · SW-8 RENAME-POWERS** at b951ce7da — §2's notes stand. Message the chair the tip at once.
+- **25 · URBAN-FIX** — NAMED by the chair at **9ee7df1ba** (lane/urban-fix-2026-11-09, 11 commits on fe55408b9; record docs/chair/2026-11-09/URBAN-FIX-2026-11-09.md §3 deltas, §5 gates, §7 what stays; roster 206 → 207 on its lane). The chair's message of 22:04, in substance: five src files — stateProseKernel.js (one TIER_NOUN_KEPT row), historyData.js (byMemory.dated and .unanchored; SW-8's plot-hook line sits beside the great_fire row, so compose after 24), historyGenerator.js, recordBatteryFindings.js, assembleSettlement.js; seven tests; writer reach through --write; the source-citation baseline. UNSIGNED per cause (gm /525 · fence /360): B-P1 1b3436acd gm 168 (receipt field only; 143 flip to pass) · fence 113; C-1 935c961fd gm 297 (culturalIdentity 297, receipt 63) · fence 360; D-1 55a93144a gm 1 (history) · fence 7; D-1b 65a7b35a0 gm 0 · fence 9; prose, witness, herald, PDF, prose-numerics 0 at every cause. FIELD-DIFF the gm as text-only on receipt / culturalIdentity / history string leaves. Lighting titles +8 (files unmoved). REDS: editCorpusRatchet A3/A4/A7/A8 are the BASE's (correction to the lane record's §5); pipelinePinnedChoosers A1 and dmLayerGoldenIsolation A7 move with the lane's gm — re-record at the point; composeStateProse "THE CELL ARM" and the DRIFT arm red at the base. The chair's own 200-settlement spot-check was running; a contradiction would come as a STOP before this point.
+- **26 · SW-9b-A** at ddafd06c3 (§2). **27 · SW-9b-B**, cut by the chair from the point-24 tip, named later.
+- **The closing acts** as in §2, with **proseFamilyContract ×3** run with the news contracts (§3).
+
+**OPEN STOP for the chair (sent 2026-11-09 ~23:3x, the default carried):** point 22's FaithTab.jsx — SW-6's hint hunk sat inside the `!faithWillRender` block that TIER-PARITY-FIX V2 deleted; the default keeps the block deleted (the hint reaches the same viewers through FaithSection's composed teaser). If the chair rules otherwise, a new commit, never a rewrite.
+
+**The third seat's addendum to the gate (read with the second's):**
+
+- `git checkout --ours <file>` takes the WHOLE file: use it only for generated files and registers that are re-derived after (bundles, writer reach, lighting, wiring census). For a SOURCE file with one conflicting hunk, resolve that hunk alone (the third seat's helper rewrites only the `<<<<<<<` blocks; `git checkout -m <file>` restores the conflict if you slip — point 20 did, and caught it on the scene-context test).
+- The lint sweep after each merge is not optional: at point 22 it found a lane's own red (plotHookParties, red on SW-6's tip) and an unenrolled invariant file.
+- writer reach --write that moves only `frozenAtSha` is not kept (point 21).
+- After `npm run build:edge-shared`, restore every bundle whose `sourceHash` did not move (the loop in Appendix B's notes).
+- The A7 pin, the fork control hash and the gm suite header are re-keyed in the stage by `stagepins.py` (Appendix B) before `suites`; pass `extraPaths` for the two pin files on the gm act.
 
 ## 3. The running tables
 
@@ -396,4 +417,137 @@ a=' *   tree (%d)   docs/review-r2/**, docs/shift-records/** ('%old
 assert w.count(a)==1
 w=w.replace(a,' *   tree (%d)   docs/review-r2/**, docs/shift-records/** (2026-11-09, STYLE-2-MERGE record %s, the %s merge, %d -> %d: %s; '%(new,n,lane,old,new,rec))
 open(W,'w').write(w); print(old,'->',new)
+```
+
+## 8. The third seat: CONFIRMED against PLAUSIBLE (points 19–22)
+
+**CONFIRMED** (executed and read in the third seat's session):
+
+- Every point's six-surface measurement stage to stage (m18 → m19 → m20 → m21 → m22); m18 read 0 on all six against the committed fixtures at 9ae41c2fa.
+- The gm field-diffs at points 19 and 22 (string leaves only, the paths in §1); the herald row at point 20 rendered and diffed (0 non-text moves; all 135 new strings traced to PULSE-FOLLOW-UP's added lines); the witness at point 20 (the two shas only).
+- Every door write and transplant for records 19, 20, 22; the stage suites 471/473 (the DRIFT pair) at each.
+- typecheck 167, eslint 0 on the composed files, the three record walkers, tests/scripts green, at every point; the governing runs as §1 records.
+- proseFamilyContract ×3 red since point 18: green at 3ce63ccc6, red at the stage of 9ae41c2fa.
+- plotHookParties red on SW-6's own tip 828ade53f before the re-key.
+
+**PLAUSIBLE** (not executed to a receipt):
+
+- The WY-1 BASE_PULSE_HASH composition at point 20 (5b023789): each side leaf-diffed on its own base by its lane; the composition not leaf-diffed.
+- That FaithSection's composed teaser serves every viewer FaithTab's dropped hint row served (the tests that pin the hint are green; no render of a premium no-embed dossier was taken).
+- The CENSUS-4 extract door's reproduction of SW-6's four pools at the merged tree (not run; the chair's note made it optional).
+
+## Appendix B. The third seat's helpers (outside scripts/; recreate them from these quotes)
+
+They lived in `/home/user/rec3/` beside the worktree `/home/user/wt-merge3`. `roster.py` and `tree.py` are Appendix A's with a `SEAT` constant; set it to your own seat and session. `govfiles.sh` is Appendix A's with the worktree path changed.
+
+After `npm run build:edge-shared`, keep only the bundles whose sourceHash moved:
+```sh
+for f in supabase/functions/_shared/*.meta.json; do d=$(git diff -- $f | grep -cE '^[-+].*sourceHash'); [ "$d" = 0 ] && git checkout -q -- $f ${f%.meta.json}.js 2>/dev/null; done
+```
+
+`mkrec.py <params.json>`: writes the record JSON into the stage and the act config for `landing-act.mjs` (params: n, step, carry, stepSubject, label, cause, record, against, move, recSurfaces, receiptFiles, actSurfaces, gmPins).
+```python
+#!/usr/bin/env python3
+# usage: mkrec.py <params.json>  — writes the record json into the stage and the act config (STYLE-2-MERGE-3)
+import json,sys
+P=json.load(open(sys.argv[1]))
+n=P['n']; stage='/tmp/claude-0/stages/s%d'%n
+doc=("RECORD %d OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its third seat STYLE-2-MERGE-3), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). "
+"THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: %s. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against %s: %s Built through the guard with no STOP.")%(n,P['cause'],P['against'],P['move'])
+rec={"_doc":doc,"ownerWords":"I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+"ownerDate":"2026-11-06","odqRow":"§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+"cause":P['cause'],"seat":"STYLE-2-MERGE-3 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at %s"%P['step'][:9],
+"surfaces":P['recSurfaces']}
+open('%s/%s'%(stage,P['record']),'w').write(json.dumps(rec,indent=2,ensure_ascii=False)+'\n')
+cfg={"n":n,"stage":stage,"scratch":"/tmp/claude-0/rec","step":P['step'],"stepSubject":P['stepSubject'],"label":P['label'],"cause":P['cause'],
+"record":P['record'],"carry":P['carry'],"seat":"STYLE-2-MERGE-3 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673",
+"session":"https://claude.ai/code/session_01FbPLbfL5qqV4cXN7ykvbtJ","receiptFiles":P['receiptFiles'],"receipt":"RECEIPT","log":"/tmp/claude-0/rec/log%d.json"%n,
+"surfaces":P['actSurfaces'],"gmPins":P.get('gmPins')}
+json.dump(cfg,open('/tmp/claude-0/rec/cfg%d.json'%n,'w'),indent=1,ensure_ascii=False)
+print('ok')
+```
+
+`stagepins.py <cfg.json> [--control <hash>]` (run inside the stage after `landing-act.mjs run`): the gm suite's header block, worldFactRederive's A7 pin, and with `--control` the fork census control hash (read it from `npx vitest run tests/generators/generationForkCensus.test.js`'s `Received:` line). Commit in the stage, then `landing-stage.sh suites`.
+```python
+#!/usr/bin/env python3
+# usage (inside the stage): stagepins.py <cfg.json> [--control <newhash>]
+# Writes the gm suite's header block, worldFactRederive's A7 pin, and (with --control) the fork census control hash.
+import json,sys,re
+cfg=json.load(open(sys.argv[1])); g=cfg['gmPins']
+n=cfg['n']; recbase=cfg['record'].split('/')[-1]
+# 1. the gm suite header block, newest first
+p='tests/property/generatorGoldenMaster.test.js'; t=open(p).read()
+anchor=' * 2026-11-09 — STYLE-2-MERGE RECORD '
+i=t.index(anchor)
+block=(' * 2026-11-09 — STYLE-2-MERGE RECORD %s, %s, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE\'S MERGE, STYLE-2-MERGE;\n'
+       ' *   record %s; the cloud chair signs under the owner\'s delegation, vetoable).\n'
+       ' *   %s against record %s\'s post-state. THE CAUSE, ONE (first-parent step %s): %s FIELD-DIFFED: %s\n'
+       ' *   Written from the staged tree S%s (the tree of %s with the door paths carried from the branch). %s.. -> %s..\n'
+       ' *\n')%(n,g['titleCaps'],cfg['record'],g['rowsText'],g['prevRecord'],cfg['step'][:9],g['causeShort'],g['fieldDiff'],n,cfg['step'][:9],g['from'][:8],g['to'][:8])
+if ('RECORD %s,'%n) not in t:
+    t=t[:i]+block+t[i:]; open(p,'w').write(t)
+# 2. worldFactRederive's A7 pin
+p='tests/domain/worldFactRederive.test.js'; t=open(p).read()
+if ("      .toBe('%s');"%g['to']) in t: t=None
+if t is not None:
+    old="      .toBe('%s');"%g['from']
+    assert t.count(old)==1, 'A7 pin not found once'
+    pos=t.index(old)
+    exp="    expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')\n"
+    assert t[:pos].endswith(exp)
+    pre=t[:pos-len(exp)]
+    lines=('    // Record %s of the style wave\'s merge, %s (%s), from the stage at %s:\n'
+           '    // the generator master %s.. -> %s.. (%s).\n')%(n,g['titleLower'],recbase,cfg['step'][:9],g['from'][:8],g['to'][:8],g['rowsShort'])
+    t=pre+lines+exp+"      .toBe('%s');"%g['to']+t[pos+len(old):]
+    open(p,'w').write(t)
+# 3. the fork census control hash
+if '--control' in sys.argv:
+    new=sys.argv[sys.argv.index('--control')+1]
+    p='tests/generators/generationForkCensus.test.js'; t=open(p).read()
+    m=re.search(r"const GOLDEN_CONTROL_HASH = '([0-9a-f]{64})';",t); old=m.group(1)
+    if old!=new:
+        note=g['controlNote'].replace('{new}',new[:8])
+        t=t[:m.start()]+note+"const GOLDEN_CONTROL_HASH = '%s';"%new+t[m.end():]
+        open(p,'w').write(t)
+    print('control',old[:8],'->',new[:8])
+print('pins written')
+```
+
+`heralddiff.py <before.json> <after.json> <lane-added-lines>`: the herald row's rendered diff (from `herald-row-text.mjs` at each stage); lists any new string with no 18-character run in the lane's added source lines (`git diff <base> <lane tip> -- src | grep '^+'`) — read every one listed by hand.
+```python
+import json,sys,difflib
+a=json.load(open(sys.argv[1])); b=json.load(open(sys.argv[2])); add=open(sys.argv[3]).read()
+A={x['id']:x for x in a}; B={x['id']:x for x in b}
+assert set(A)==set(B), 'ids differ'
+nontext=0; moved=0; new=set(); old=set()
+T=('headline','summary','reasons')
+def strs(x):
+    out=[]
+    for f in T:
+        v=x.get(f); out+= v if isinstance(v,list) else [v]
+    return [s for s in out if isinstance(s,str)]
+for k in A:
+    x,y=A[k],B[k]
+    if any(json.dumps(x.get(f))!=json.dumps(y.get(f)) for f in x if f not in T): nontext+=1
+    if any(json.dumps(x.get(f))!=json.dumps(y.get(f)) for f in T):
+        moved+=1; sx=set(strs(x)); sy=set(strs(y)); new|=sy-sx; old|=sx-sy
+def lcs(s):
+    m=difflib.SequenceMatcher(None,s,add,autojunk=False).find_longest_match(0,len(s),0,len(add))
+    return m.size
+weak=[s for s in sorted(new) if lcs(s)<min(18,len(s))]
+print(json.dumps({'items':len(B),'nonTextMoves':nontext,'itemsTextMoved':moved,'newStrings':len(new),'untraced':len(weak)}))
+for s in weak[:20]: print('  UNTRACED:',s[:200])
+```
+
+`gate.sh <n> <govfile>`: typecheck, the tests/lint sweep, tests/scripts and the governing files, each through gate-tail, the summary in `/tmp/claude-0/gate<n>.sum`. Never stage while it runs.
+```sh
+#!/bin/sh
+# usage: gate.sh <n> <govfile>  — the point's gate, each line its own log; summary in /tmp/claude-0/gate<n>.sum
+n=$1; gov=$2; S=/tmp/claude-0/gate$n.sum; : > $S
+cd /home/user/wt-merge3
+sh scripts/gate-tail.sh npm run typecheck:ratchet > /tmp/claude-0/g$n-tsc.log 2>&1; echo "tsc exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=3 tests/lint > /tmp/claude-0/g$n-lint.log 2>&1; echo "lint exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=3 tests/scripts > /tmp/claude-0/g$n-scripts.log 2>&1; echo "scripts exit $?" >> $S
+if [ -s "$gov" ]; then sh scripts/gate-tail.sh npx vitest run --maxWorkers=3 $(cat $gov | tr '\n' ' ') > /tmp/claude-0/g$n-gov.log 2>&1; echo "gov exit $?" >> $S; fi
+echo DONE >> $S
 ```
