@@ -189,6 +189,15 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-09, THE ALLEGIANCE-CAR2 MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE TRAIN (MERGE-TRAIN RECORD 2) ──
+ * THE EIGHTY-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the train (BRIEF-MERGE-TRAIN §0.1, the law of the chain); the
+ * record is docs/shift-records/2026-11-09-merge-train-2-car2.json. THE MOVER, FOUND: the ALLEGIANCE-CAR2 merge f51058995 (46715e751 into the integration branch); its three unsigned causes the components (A3 the guild's push bbb1a4abc, A6 the hall-capture state ce90cf16e, the capture rows aca93cbc5; ALLEGIANCE_CAR2_2026-11-08.md §4).
+ * On THIS corpus 80 of 360 rows (town 3, city 35, metropolis 42) move against record 1's post-state
+ * (`a4e0fef3…`); 360/360 hashes stay distinct. Written from the staged tree (f51058995 with the door
+ * paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `a4e0fef3…` -> `76bb033d…`.
+ *
+ *
  * ── 2026-11-09, THE ALLEGIANCE-CAR1 MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE TRAIN (MERGE-TRAIN RECORD 1) ──
  * THE EIGHTY-EIGHTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the train (BRIEF-MERGE-TRAIN §0.1, the law of the chain); the
@@ -1116,7 +1125,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'a4e0fef305c3eb77c828b9e9eb91e21f197ea8e5425e154e34f75d383446360f';
+const PRE_COUPLING_CORPUS_SHA = '76bb033d0d24b9cb71cf286e3be0fedbdd11f64e5b3e3ee476dbc07bf9a6d9af';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
