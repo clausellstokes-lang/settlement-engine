@@ -163,10 +163,14 @@
   "(one rung, two causes, every row with one): the corpus gains producer 1b′ (the infiltrated topology; no",
   "row moves) and the veiled re-deal ADMITS 4 `covert on impairments` rows and retires 13; nothing is declared",
   "and the bank is 76/50 (RETIRED).",
-  "SCHEMA 36 = schema 35's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the",
+  "SCHEMA 36 (RETIRED) held schema 35's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the",
   "ALLEGIANCE-CAR1 merge (one rung, two causes, every row with one; the car's own 33, the veil merge, is not",
   "re-minted): the hidden allegiance (5902f1a4a) ADMITS 11 rows, retires 17 and raises 1; the J-19 re-deal",
-  "(d131ab158) ADMITS 13; nothing is declared and the bank is 76/50.",
+  "(d131ab158) ADMITS 13; nothing is declared and the bank is 76/50 (RETIRED).",
+  "SCHEMA 37 = schema 36's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the",
+  "ALLEGIANCE-CAR2 merge (one rung, one cause): the guild's push (bbb1a4abc) re-deals the year and retires 13",
+  "rows (nearbyResourcesState on config, resourceHistory on settlement); nothing is new, nothing is declared",
+  "and the bank is 76/50.",
   "Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
   "subset of declared. This envelope banks 76 banked read(s) across 50 tagged address(es).",
@@ -177,31 +181,31 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–35 are the RETIRED numeric predecessors."
+  "Schemas 4–36 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
   "generations": 16,
-  "originCount": 14349,
+  "originCount": 14342,
   "pulseIntervals": 12,
   "seeds": 4,
-  "shapeCount": 1729,
+  "shapeCount": 1734,
   "simulationFlagsLit": 92,
   "steadingsMinted": 12,
-  "transitionCount": 22031
+  "transitionCount": 22025
  },
  "digests": {
-  "corpusMeta": "54bb1b3a9f6eb938c1db4d18806dfba1d413e25d01ff72486241de755f459e24",
-  "inventory": "2ed599ffe9461883d33c50d60c5f3925b95a6e1b4b78e28fcd8e4853c9df3fcb",
-  "manifests": "e8773c32869ed5e7e96e8032ee254cb02082dae0cc17a987bf8316569da06bda",
-  "migrationReview": "8fa1cfcde46d0cd8b131a1d255f7b6f1447539bd4722705886a96a13b24c8a7b",
+  "corpusMeta": "23880ebc17b2996ed946bc11ac4dd0a476064fa27c6c857acc6f7cea0a86bf31",
+  "inventory": "5c018c90e583b442bd867bf51d247f1a0b2f872582d9c6f11653f5ec2505d459",
+  "manifests": "8caa1bf05edf04dac72c17e718f016f70e06626b567a3637fe4cebd2ef3772b0",
+  "migrationReview": "61bd11f49041fca05d6961a9ab5892b33035907a078de3e6ad79d91335b90fed",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "6dfcede73a59f9e53749d0fcc8b14e09e26301898875265878db8ba1967c1014",
-  "sentinel": "4cc45959af7666c5fe232d5f1f4be290fdafcb931b08c394f240aeac61dac45c"
+  "scanStats": "106daef9294a00edfa983f61d7918c0b0eb9ae00591d961cddcab73395df2c47",
+  "sentinel": "7c880d67b6cdec98f34f944c9257ca3761af04c2b505fcdafaefcfe2e190045a"
  },
  "frozen": "2026-11-09",
- "frozenAtSha": "d6a04a625ebeebf03cd24ac849f566aaed69e627",
- "identities": 1548,
+ "frozenAtSha": "921465b30d2761c1f7017444da56f05119504e1b",
+ "identities": 1535,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -857,7 +861,6 @@
    "cultDeitySnapshots on config": 2,
    "id on factions": 3,
    "name on factions": 6,
-   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "primaryDeitySnapshot on config": 1,
@@ -907,7 +910,6 @@
    "customTradeGoods on config": 1,
    "good on economicState": 1,
    "name on economicState": 1,
-   "nearbyResourcesState on config": 4,
    "resourceEdits on config": 1
   },
   "src/domain/events/realmManifest.js": {
@@ -918,7 +920,6 @@
    "type on settlement": 1
   },
   "src/domain/events/targetRosters.js": {
-   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "resources on settlement": 1
@@ -1086,9 +1087,6 @@
    "name on factions": 1,
    "name on institution": 1
   },
-  "src/domain/provenance/rosterProvenance.js": {
-   "resourceHistory on settlement": 1
-  },
   "src/domain/realm/heraldRouting.js": {
    "impactKind on stressors": 2,
    "outcome on stressors": 3,
@@ -1151,9 +1149,6 @@
    "terrain on config": 1,
    "terrain on settlement": 1
   },
-  "src/domain/resourceSemantics.js": {
-   "nearbyResourcesState on config": 1
-  },
   "src/domain/roads/state.js": {
    "recall on whereabouts": 1
   },
@@ -1210,7 +1205,6 @@
    "reliefRefusedByThem01 on history": 1
   },
   "src/domain/state/deriveSystemState.js": {
-   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "safetyProfile on settlement": 1
@@ -1581,8 +1575,7 @@
   },
   "src/domain/worldPulse/institutionLifecycleResourceRead.js": {
    "nearbyResources on settlement": 1,
-   "nearbyResourcesDepleted on settlement": 2,
-   "nearbyResourcesState on config": 1
+   "nearbyResourcesDepleted on settlement": 2
   },
   "src/domain/worldPulse/institutionStatusLifecycle.js": {
    "covert on impairments": 1
@@ -1813,9 +1806,7 @@
   "src/domain/worldPulse/resourceDynamicsKernel.js": {
    "id on institutions": 1,
    "magicExists on config": 2,
-   "nearbyResourcesState on config": 1,
    "resourceEdits on config": 5,
-   "resourceHistory on settlement": 2,
    "resourceMembership on outcome": 1,
    "tradeRoute on settlement": 1
   },
@@ -1914,10 +1905,8 @@
    "intermediateGoods on chains": 1,
    "nearbyResources on settlement": 1,
    "nearbyResourcesDepleted on settlement": 2,
-   "nearbyResourcesState on config": 2,
    "outputs on chains": 1,
    "rawInputs on chains": 1,
-   "resourceHistory on settlement": 2,
    "tradeRoute on settlement": 1
   },
   "src/domain/worldPulse/tradeSalience.js": {
@@ -2088,9 +2077,6 @@
   "src/generators/factionRoles.js": {
    "id on institutions": 1
   },
-  "src/generators/foodGenerator.js": {
-   "nearbyResourcesState on config": 1
-  },
   "src/generators/generationContext.js": {
    "contentProfileId on config": 1,
    "cultureProfileId on config": 1
@@ -2203,7 +2189,6 @@
    "essential on raw": 1,
    "localUid on raw": 1,
    "nearbyResourcesRandom on config": 3,
-   "nearbyResourcesState on config": 3,
    "resourceEdits on config": 1
   },
   "src/generators/steps/resolveStress.js": {
@@ -2619,7 +2604,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
+   "digest": "aa4e83815598d58d98a591b3a603a7229e57536f304a2aae5a7073b82b759ef1",
    "entries": [
     {
      "mode": "100644",
@@ -2638,8 +2623,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "f086ec5bb8cc7599661a680ab23fd2702a2c199f02aaeb1e9ccc4f8af904c338",
-     "size": 212958,
+     "sha256": "261ab83bc7d3221879fe96545928a502cde968c52072ba70310c29a1b4a440f1",
+     "size": 213725,
      "type": "file"
     },
     {
@@ -2659,8 +2644,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "7ef5bdc079e78f201855d13c3f2e6c60f5db731fd432e4f172fd4517ef59a554",
-     "size": 89579,
+     "sha256": "75c62704db051e747a8d8003abe01f1d9e1482037f876fa13886a7ebdcf104ce",
+     "size": 91035,
      "type": "file"
     },
     {
@@ -2687,8 +2672,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "3657af4da3e73fce3e48879d9221dffe0a7de2724427cb714bbee5ee1046d91f",
-     "size": 259196,
+     "sha256": "a5280dba819fd5e3d3f208f0e63dcd782dc452a7e610236fdb021884fba13fa1",
+     "size": 263286,
      "type": "file"
     },
     {
@@ -2702,7 +2687,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "9f66b5fca0680e38e9ab470d475bc86c9b3621250244f6e3d1a2303661572a9c",
+   "digest": "4718df4b909f2fe2f7be4b9d5ebc2414645989e4cfe4d0f79cbefe9e0afac7db",
    "entries": [
     {
      "mode": "100644",
@@ -2721,8 +2706,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "f086ec5bb8cc7599661a680ab23fd2702a2c199f02aaeb1e9ccc4f8af904c338",
-     "size": 212958,
+     "sha256": "261ab83bc7d3221879fe96545928a502cde968c52072ba70310c29a1b4a440f1",
+     "size": 213725,
      "type": "file"
     },
     {
@@ -2742,8 +2727,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "7ef5bdc079e78f201855d13c3f2e6c60f5db731fd432e4f172fd4517ef59a554",
-     "size": 89579,
+     "sha256": "75c62704db051e747a8d8003abe01f1d9e1482037f876fa13886a7ebdcf104ce",
+     "size": 91035,
      "type": "file"
     },
     {
@@ -2770,8 +2755,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "3657af4da3e73fce3e48879d9221dffe0a7de2724427cb714bbee5ee1046d91f",
-     "size": 259196,
+     "sha256": "a5280dba819fd5e3d3f208f0e63dcd782dc452a7e610236fdb021884fba13fa1",
+     "size": 263286,
      "type": "file"
     },
     {
@@ -7362,8 +7347,8 @@
     {
      "mode": "100644",
      "path": "src/data/foundingSeeds.js",
-     "sha256": "132724bccf031b8e61f846ba25636f2d44f5b2080b74b499774d2632b2ed5c8c",
-     "size": 11245,
+     "sha256": "2807072f988bed338c6b6c5fd102c9c30b0989769a5a0a25612d085d0f27dcb2",
+     "size": 11189,
      "type": "file"
     },
     {
@@ -7525,6 +7510,13 @@
      "path": "src/data/npcTraitWeights.js",
      "sha256": "38001c26fa6b4832eb2d033cd888dc192043c3386a8ffa4aadf2c17affddf59e",
      "size": 7332,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/people/dmPowerLines.js",
+     "sha256": "8f3c3ab1afb755c0eff8cdcfa61b8a8174b294c19e9e7b4f415403fea31e24df",
+     "size": 12551,
      "type": "file"
     },
     {
@@ -8874,8 +8866,8 @@
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "09477909d0b7c7aa9490a053a3bf8b2498bc4c59908368a5d03c98bd2a14065e",
-     "size": 10978,
+     "sha256": "fa200415089830f5cc1cbafe913faa035c12d43b286506115f0c4184c5fc7628",
+     "size": 11061,
      "type": "file"
     },
     {
@@ -9637,8 +9629,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "2033aa4ee6e4a017e51af3713c3e947c042304b4707b17b404f342437d9c1d2d",
-     "size": 40958,
+     "sha256": "92006ae25955ecbe484e8e5d7df3a2f048afaab3181bb387066a870d9cfcca40",
+     "size": 42158,
      "type": "file"
     },
     {
@@ -10785,8 +10777,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "00577e73ef16f937ec45b01f38d994a56e35213322f7354636a7cefd0f2a2070",
-     "size": 41920,
+     "sha256": "1710f73ba125f6312e00d391bafe3ed334b2f0938ee804805955b777ebab4dca",
+     "size": 42485,
      "type": "file"
     },
     {
@@ -11268,8 +11260,8 @@
     {
      "mode": "100644",
      "path": "src/domain/people/allegiance.js",
-     "sha256": "a611fea482fd0dbe595e50050857c7617e124abbe75f3f4dd1a80c8e02a00d84",
-     "size": 23609,
+     "sha256": "fce60b3e6d94e4912c9e18ca1f32aafe737c6f0d2efe2e7d98d2298f7d3d5375",
+     "size": 23834,
      "type": "file"
     },
     {
@@ -11291,6 +11283,13 @@
      "path": "src/domain/people/cardVeil.js",
      "sha256": "e4e51367596bb5f556d708e95297d53883157fab7117ab37063a44271703b90a",
      "size": 7979,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/hallCapture.js",
+     "sha256": "f8a537968904f75b3157ed15314f5149bb34124b5eefde0975caaada8efde475",
+     "size": 10197,
      "type": "file"
     },
     {
@@ -11352,8 +11351,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "ed7e55d7417a4ea8c449fcb96ec4e39209aa3d52e628c8606006816f76f2cdb5",
-     "size": 48392,
+     "sha256": "70756bdf4d03c43ea98359fb9e96ae7f134d234281f6d3b35c7d8c91a602965c",
+     "size": 48546,
      "type": "file"
     },
     {
@@ -16406,8 +16405,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionDynamics.js",
-     "sha256": "5a06fe638683f47474e5101829e57a1826aa37cafbaa6f370e9e13424810543b",
-     "size": 30157,
+     "sha256": "f080bd6d909f1995e99041ab58d9740695546329c5ac7519ada47347f24313cb",
+     "size": 32626,
      "type": "file"
     },
     {
@@ -16574,8 +16573,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "d078a6d8facd8a1c0271853c62cf22c521b3c2d90e6352681774bafd6a6cd8a0",
-     "size": 52718,
+     "sha256": "b261b006095c039935fa75fcdc3fb0608f54a9b669f726ead21b833d98b23eb9",
+     "size": 54235,
      "type": "file"
     },
     {
@@ -16658,8 +16657,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
-     "size": 20589,
+     "sha256": "cc91a0661c738668b02d9e7af58561bbe7c3045ea228350f515a0a510b68ee4b",
+     "size": 24393,
      "type": "file"
     },
     {
@@ -16714,8 +16713,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/economyReconciliation.js",
-     "sha256": "0106cf341329ef425077acfcd6bed5ee65e89f7f6fe19927729036d338946eaf",
-     "size": 16199,
+     "sha256": "1bf774b2e155f9711b5497ef9534a25011830a2eef0003c2b004f03e2ca72f89",
+     "size": 16351,
      "type": "file"
     },
     {
@@ -16770,8 +16769,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/rulingStructure.js",
-     "sha256": "c1298f5c6a4c4e423d879df3e9df3aca2fdb85a4579d86b524ede64a44475bc7",
-     "size": 46716,
+     "sha256": "db3fcf02acdbe9eb85690f430b480ebdbacf95d878f3bc23ade6cb45cdb27693",
+     "size": 47449,
      "type": "file"
     },
     {
@@ -19900,7 +19899,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "50511dedc1a7289a409006223c991b100216e63dd95b29b7cee7704800c1392f",
+   "digest": "c88b76f2abc9dd0714ad218d3b32de044059a89599ddd68495f5cda4ae890231",
    "entries": [
     {
      "mode": "100644",
@@ -24427,8 +24426,8 @@
     {
      "mode": "100644",
      "path": "src/data/foundingSeeds.js",
-     "sha256": "132724bccf031b8e61f846ba25636f2d44f5b2080b74b499774d2632b2ed5c8c",
-     "size": 11245,
+     "sha256": "2807072f988bed338c6b6c5fd102c9c30b0989769a5a0a25612d085d0f27dcb2",
+     "size": 11189,
      "type": "file"
     },
     {
@@ -24583,6 +24582,13 @@
      "path": "src/data/npcTraitWeights.js",
      "sha256": "38001c26fa6b4832eb2d033cd888dc192043c3386a8ffa4aadf2c17affddf59e",
      "size": 7332,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/people/dmPowerLines.js",
+     "sha256": "8f3c3ab1afb755c0eff8cdcfa61b8a8174b294c19e9e7b4f415403fea31e24df",
+     "size": 12551,
      "type": "file"
     },
     {
@@ -25890,8 +25896,8 @@
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "09477909d0b7c7aa9490a053a3bf8b2498bc4c59908368a5d03c98bd2a14065e",
-     "size": 10978,
+     "sha256": "fa200415089830f5cc1cbafe913faa035c12d43b286506115f0c4184c5fc7628",
+     "size": 11061,
      "type": "file"
     },
     {
@@ -26646,8 +26652,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "2033aa4ee6e4a017e51af3713c3e947c042304b4707b17b404f342437d9c1d2d",
-     "size": 40958,
+     "sha256": "92006ae25955ecbe484e8e5d7df3a2f048afaab3181bb387066a870d9cfcca40",
+     "size": 42158,
      "type": "file"
     },
     {
@@ -27794,8 +27800,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "00577e73ef16f937ec45b01f38d994a56e35213322f7354636a7cefd0f2a2070",
-     "size": 41920,
+     "sha256": "1710f73ba125f6312e00d391bafe3ed334b2f0938ee804805955b777ebab4dca",
+     "size": 42485,
      "type": "file"
     },
     {
@@ -28277,8 +28283,8 @@
     {
      "mode": "100644",
      "path": "src/domain/people/allegiance.js",
-     "sha256": "a611fea482fd0dbe595e50050857c7617e124abbe75f3f4dd1a80c8e02a00d84",
-     "size": 23609,
+     "sha256": "fce60b3e6d94e4912c9e18ca1f32aafe737c6f0d2efe2e7d98d2298f7d3d5375",
+     "size": 23834,
      "type": "file"
     },
     {
@@ -28300,6 +28306,13 @@
      "path": "src/domain/people/cardVeil.js",
      "sha256": "e4e51367596bb5f556d708e95297d53883157fab7117ab37063a44271703b90a",
      "size": 7979,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/hallCapture.js",
+     "sha256": "f8a537968904f75b3157ed15314f5149bb34124b5eefde0975caaada8efde475",
+     "size": 10197,
      "type": "file"
     },
     {
@@ -28361,8 +28374,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "ed7e55d7417a4ea8c449fcb96ec4e39209aa3d52e628c8606006816f76f2cdb5",
-     "size": 48392,
+     "sha256": "70756bdf4d03c43ea98359fb9e96ae7f134d234281f6d3b35c7d8c91a602965c",
+     "size": 48546,
      "type": "file"
     },
     {
@@ -33415,8 +33428,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionDynamics.js",
-     "sha256": "5a06fe638683f47474e5101829e57a1826aa37cafbaa6f370e9e13424810543b",
-     "size": 30157,
+     "sha256": "f080bd6d909f1995e99041ab58d9740695546329c5ac7519ada47347f24313cb",
+     "size": 32626,
      "type": "file"
     },
     {
@@ -33583,8 +33596,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "d078a6d8facd8a1c0271853c62cf22c521b3c2d90e6352681774bafd6a6cd8a0",
-     "size": 52718,
+     "sha256": "b261b006095c039935fa75fcdc3fb0608f54a9b669f726ead21b833d98b23eb9",
+     "size": 54235,
      "type": "file"
     },
     {
@@ -33667,8 +33680,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
-     "size": 20589,
+     "sha256": "cc91a0661c738668b02d9e7af58561bbe7c3045ea228350f515a0a510b68ee4b",
+     "size": 24393,
      "type": "file"
     },
     {
@@ -33723,8 +33736,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/economyReconciliation.js",
-     "sha256": "0106cf341329ef425077acfcd6bed5ee65e89f7f6fe19927729036d338946eaf",
-     "size": 16199,
+     "sha256": "1bf774b2e155f9711b5497ef9534a25011830a2eef0003c2b004f03e2ca72f89",
+     "size": 16351,
      "type": "file"
     },
     {
@@ -33779,8 +33792,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/rulingStructure.js",
-     "sha256": "c1298f5c6a4c4e423d879df3e9df3aca2fdb85a4579d86b524ede64a44475bc7",
-     "size": 46716,
+     "sha256": "db3fcf02acdbe9eb85690f430b480ebdbacf95d878f3bc23ade6cb45cdb27693",
+     "size": 47449,
      "type": "file"
     },
     {
@@ -36902,7 +36915,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "0edd6c7d4acbb3bfb26a4a00b57627dcf868632d46965b02b2bfa48a6354041a",
+   "digest": "508bcf068d3b45e9748f0b0bc46ac4244f0d5f23f8199f081fa96396e49df1be",
    "entries": [
     {
      "mode": "100644",
@@ -41492,8 +41505,8 @@
     {
      "mode": "100644",
      "path": "src/data/foundingSeeds.js",
-     "sha256": "132724bccf031b8e61f846ba25636f2d44f5b2080b74b499774d2632b2ed5c8c",
-     "size": 11245,
+     "sha256": "2807072f988bed338c6b6c5fd102c9c30b0989769a5a0a25612d085d0f27dcb2",
+     "size": 11189,
      "type": "file"
     },
     {
@@ -41655,6 +41668,13 @@
      "path": "src/data/npcTraitWeights.js",
      "sha256": "38001c26fa6b4832eb2d033cd888dc192043c3386a8ffa4aadf2c17affddf59e",
      "size": 7332,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/people/dmPowerLines.js",
+     "sha256": "8f3c3ab1afb755c0eff8cdcfa61b8a8174b294c19e9e7b4f415403fea31e24df",
+     "size": 12551,
      "type": "file"
     },
     {
@@ -43004,8 +43024,8 @@
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "09477909d0b7c7aa9490a053a3bf8b2498bc4c59908368a5d03c98bd2a14065e",
-     "size": 10978,
+     "sha256": "fa200415089830f5cc1cbafe913faa035c12d43b286506115f0c4184c5fc7628",
+     "size": 11061,
      "type": "file"
     },
     {
@@ -43767,8 +43787,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "2033aa4ee6e4a017e51af3713c3e947c042304b4707b17b404f342437d9c1d2d",
-     "size": 40958,
+     "sha256": "92006ae25955ecbe484e8e5d7df3a2f048afaab3181bb387066a870d9cfcca40",
+     "size": 42158,
      "type": "file"
     },
     {
@@ -44915,8 +44935,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "00577e73ef16f937ec45b01f38d994a56e35213322f7354636a7cefd0f2a2070",
-     "size": 41920,
+     "sha256": "1710f73ba125f6312e00d391bafe3ed334b2f0938ee804805955b777ebab4dca",
+     "size": 42485,
      "type": "file"
     },
     {
@@ -45398,8 +45418,8 @@
     {
      "mode": "100644",
      "path": "src/domain/people/allegiance.js",
-     "sha256": "a611fea482fd0dbe595e50050857c7617e124abbe75f3f4dd1a80c8e02a00d84",
-     "size": 23609,
+     "sha256": "fce60b3e6d94e4912c9e18ca1f32aafe737c6f0d2efe2e7d98d2298f7d3d5375",
+     "size": 23834,
      "type": "file"
     },
     {
@@ -45421,6 +45441,13 @@
      "path": "src/domain/people/cardVeil.js",
      "sha256": "e4e51367596bb5f556d708e95297d53883157fab7117ab37063a44271703b90a",
      "size": 7979,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/hallCapture.js",
+     "sha256": "f8a537968904f75b3157ed15314f5149bb34124b5eefde0975caaada8efde475",
+     "size": 10197,
      "type": "file"
     },
     {
@@ -45482,8 +45509,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "ed7e55d7417a4ea8c449fcb96ec4e39209aa3d52e628c8606006816f76f2cdb5",
-     "size": 48392,
+     "sha256": "70756bdf4d03c43ea98359fb9e96ae7f134d234281f6d3b35c7d8c91a602965c",
+     "size": 48546,
      "type": "file"
     },
     {
@@ -50536,8 +50563,8 @@
     {
      "mode": "100644",
      "path": "src/generators/factionDynamics.js",
-     "sha256": "5a06fe638683f47474e5101829e57a1826aa37cafbaa6f370e9e13424810543b",
-     "size": 30157,
+     "sha256": "f080bd6d909f1995e99041ab58d9740695546329c5ac7519ada47347f24313cb",
+     "size": 32626,
      "type": "file"
     },
     {
@@ -50704,8 +50731,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "d078a6d8facd8a1c0271853c62cf22c521b3c2d90e6352681774bafd6a6cd8a0",
-     "size": 52718,
+     "sha256": "b261b006095c039935fa75fcdc3fb0608f54a9b669f726ead21b833d98b23eb9",
+     "size": 54235,
      "type": "file"
     },
     {
@@ -50788,8 +50815,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
-     "size": 20589,
+     "sha256": "cc91a0661c738668b02d9e7af58561bbe7c3045ea228350f515a0a510b68ee4b",
+     "size": 24393,
      "type": "file"
     },
     {
@@ -50844,8 +50871,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/economyReconciliation.js",
-     "sha256": "0106cf341329ef425077acfcd6bed5ee65e89f7f6fe19927729036d338946eaf",
-     "size": 16199,
+     "sha256": "1bf774b2e155f9711b5497ef9534a25011830a2eef0003c2b004f03e2ca72f89",
+     "size": 16351,
      "type": "file"
     },
     {
@@ -50900,8 +50927,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/rulingStructure.js",
-     "sha256": "c1298f5c6a4c4e423d879df3e9df3aca2fdb85a4579d86b524ede64a44475bc7",
-     "size": 46716,
+     "sha256": "db3fcf02acdbe9eb85690f430b480ebdbacf95d878f3bc23ade6cb45cdb27693",
+     "size": 47449,
      "type": "file"
     },
     {
@@ -54023,30 +54050,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "f14c362088667f014af1a43772353a04f5ee07b41fe92af43404776624561bca",
-  "corpusDigest": "48499f394ecda548d26292286c0aaff596fc56f01f3c8ca9a809e92b65991600",
-  "currentArtifactDigest": "8194b648183dbc5af0b465e26636930b100ff42bd690f481137b37f24365a059",
-  "currentDetectorDigest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
-  "currentFindingsDigest": "a798331b2af0be94afedd606adef4f337cf1b3cebce65f892eb3dbb09b97bb2c",
-  "currentScannerSha": "d6a04a625ebeebf03cd24ac849f566aaed69e627",
-  "currentScannerToolDigest": "fb7d379093a7dc984f6a477b74353596b21a3f9739a615a1a9582c1a4d620664",
-  "detectorTreeDigest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
-  "executionTreeDigest": "9f66b5fca0680e38e9ab470d475bc86c9b3621250244f6e3d1a2303661572a9c",
+  "bundleDigest": "d212620dd28bcead22c509c0db31eb290aecfff70f2777bd2b1d27c71944843e",
+  "corpusDigest": "c606de47a4ba053593490214538c13a79097f493fade2379f587894605caa175",
+  "currentArtifactDigest": "65339adb1dbff821a1cf37a0de0b34122610a44abfd51453fdea6d843b8cc266",
+  "currentDetectorDigest": "aa4e83815598d58d98a591b3a603a7229e57536f304a2aae5a7073b82b759ef1",
+  "currentFindingsDigest": "b02337263847e0dc1ad94611dace3b3b825bab409cbd4a254c0f7bb2f34fbec7",
+  "currentScannerSha": "921465b30d2761c1f7017444da56f05119504e1b",
+  "currentScannerToolDigest": "c00d62e7dd526c1ab7c0658484f3d5f46d92f08609abf4db0672e3b2645c7f8c",
+  "detectorTreeDigest": "aa4e83815598d58d98a591b3a603a7229e57536f304a2aae5a7073b82b759ef1",
+  "executionTreeDigest": "4718df4b909f2fe2f7be4b9d5ebc2414645989e4cfe4d0f79cbefe9e0afac7db",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "8194b648183dbc5af0b465e26636930b100ff42bd690f481137b37f24365a059",
-  "legacyDetectorDigest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
-  "legacyScannerSha": "d6a04a625ebeebf03cd24ac849f566aaed69e627",
-  "legacyScannerToolDigest": "fb7d379093a7dc984f6a477b74353596b21a3f9739a615a1a9582c1a4d620664",
-  "predecessorBaselineDigest": "b07585384d4d21dec7a5f3108b3f499a17bcbca6e4bf626b13379e08f8d55824",
-  "predecessorBaselineTextSha256": "e4089a66b3d6917ae681ddd8c4187e2f5355a8c79dde5f26e164d52f42a0426d",
-  "predecessorInventoryDigest": "e88967d7aa56f66e8a80bb25b648d43a5ae990a798915656b90cfebb9c37e792",
-  "reportDigest": "a538ba140dfe2b3e617a3761558f2d505725eb882f0b0954a23299dc9caab2ec",
-  "reviewDigest": "eb31863bc313a655a2b06c7450186acf228ec00b5c638955c77555250c26aaa5",
+  "legacyArtifactDigest": "65339adb1dbff821a1cf37a0de0b34122610a44abfd51453fdea6d843b8cc266",
+  "legacyDetectorDigest": "aa4e83815598d58d98a591b3a603a7229e57536f304a2aae5a7073b82b759ef1",
+  "legacyScannerSha": "921465b30d2761c1f7017444da56f05119504e1b",
+  "legacyScannerToolDigest": "c00d62e7dd526c1ab7c0658484f3d5f46d92f08609abf4db0672e3b2645c7f8c",
+  "predecessorBaselineDigest": "625db28c2b071fd8296e93ae24c299061f0e29129f0d62142f256f86d18c0e51",
+  "predecessorBaselineTextSha256": "44802ebb3b1182caa4cf921ba5abb52074fe2bcbe911e8eafd9d566b4100ae77",
+  "predecessorInventoryDigest": "2ed599ffe9461883d33c50d60c5f3925b95a6e1b4b78e28fcd8e4853c9df3fcb",
+  "reportDigest": "d8981fb30da76a7fe806b25d081b716c7ed3a033701257dccbf6e7b082323a3b",
+  "reviewDigest": "007267e7806569d37729616f0767f9e59657591614effc30838b6876be00ff6f",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "50511dedc1a7289a409006223c991b100216e63dd95b29b7cee7704800c1392f",
-  "sourceTreeDigest": "0edd6c7d4acbb3bfb26a4a00b57627dcf868632d46965b02b2bfa48a6354041a",
-  "subjectSha": "d6a04a625ebeebf03cd24ac849f566aaed69e627",
-  "targetInventoryDigest": "2ed599ffe9461883d33c50d60c5f3925b95a6e1b4b78e28fcd8e4853c9df3fcb"
+  "scanTreeDigest": "c88b76f2abc9dd0714ad218d3b32de044059a89599ddd68495f5cda4ae890231",
+  "sourceTreeDigest": "508bcf068d3b45e9748f0b0bc46ac4244f0d5f23f8199f081fa96396e49df1be",
+  "subjectSha": "921465b30d2761c1f7017444da56f05119504e1b",
+  "targetInventoryDigest": "5c018c90e583b442bd867bf51d247f1a0b2f872582d9c6f11653f5ec2505d459"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -54339,23 +54366,23 @@
   }
  },
  "scanStats": {
-  "files": 2428,
-  "reads": 139651,
-  "resolved": 11198,
-  "unresolved": 128453
+  "files": 2430,
+  "reads": 139869,
+  "resolved": 11254,
+  "unresolved": 128615
  },
  "scannerProvenance": {
-  "detectorDigest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
-  "executionTreeDigest": "9f66b5fca0680e38e9ab470d475bc86c9b3621250244f6e3d1a2303661572a9c",
-  "scanTreeDigest": "50511dedc1a7289a409006223c991b100216e63dd95b29b7cee7704800c1392f",
-  "sourceTreeDigest": "0edd6c7d4acbb3bfb26a4a00b57627dcf868632d46965b02b2bfa48a6354041a",
+  "detectorDigest": "aa4e83815598d58d98a591b3a603a7229e57536f304a2aae5a7073b82b759ef1",
+  "executionTreeDigest": "4718df4b909f2fe2f7be4b9d5ebc2414645989e4cfe4d0f79cbefe9e0afac7db",
+  "scanTreeDigest": "c88b76f2abc9dd0714ad218d3b32de044059a89599ddd68495f5cda4ae890231",
+  "sourceTreeDigest": "508bcf068d3b45e9748f0b0bc46ac4244f0d5f23f8199f081fa96396e49df1be",
   "unscannedInputDigest": "2a8cd80b054d65dc5c1c9ebde1d33232cb37d0cb12d896c6497605969bfec9d0"
  },
- "schema": 36,
+ "schema": 37,
  "sentinel": {
-  "resolvedReads": 11198,
-  "totalKeys": 12236,
-  "usableShapes": 529
+  "resolvedReads": 11254,
+  "totalKeys": 12233,
+  "usableShapes": 528
  },
- "total": 2205
+ "total": 2184
 }
