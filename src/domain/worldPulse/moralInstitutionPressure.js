@@ -30,6 +30,7 @@ import { pietyMoralBleedOf, pietyLawBleedOf } from './piety.js';
 import { readinessOf } from './martialReadiness.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { stablePart } from './stablePart.js';
+import { pickLine } from './proseSelection.js';
 // W-C3 item 1: the MORAL FOUNDING catalog — the lifecycle-only benevolent/exploitative
 // institutions the founding lane can raise. A golden-inert worldPulse leaf generation
 // never imports (proven byte-identical by generatorGoldenMaster). Its `lean` is the
@@ -254,10 +255,12 @@ function abolitionCause(inst, deity) {
   // opposition after negation), above a small threshold.
   const cruelOffense = -(lean.cruelty * patronCruelty) > 0.2;
   const disorderOffense = -(lean.disorder * patronDisorder) > 0.2;
-  if (cruelOffense && disorderOffense) return 'its cruelty and disorder offend the seat';
-  if (cruelOffense) return 'the seat will no longer abide its cruelty';
-  if (disorderOffense) return 'the seat will no longer abide its disorder';
-  return 'it sits ill with the settlement\'s patron';
+  // STYLE-2 C2 (SW-12 third seat, A2·179): the cause names the offence, never the patron —
+  // the summary already names who objects ("Under Aurum … the settlement's patron" said it twice).
+  if (cruelOffense && disorderOffense) return 'it is cruel, and it breeds disorder';
+  if (cruelOffense) return 'it is thought too cruel';
+  if (disorderOffense) return 'it is thought to breed disorder';
+  return 'it does not sit well with the faith';
 }
 
 /**
@@ -370,12 +373,12 @@ export function evaluateMoralInstitutionPressure(worldState, snapshot, context =
           : `${item.name || item.id} abolishes its ${instName}`,
         summary: best.martial
           ? `Long peace under ${patronName} is letting the ${instName} lapse.`
-          : `Under ${patronName}, ${instName} faces abolition: ${cause}.`,
+          : pickLine(ABOLITION_SUMMARY, `${stablePart(cid)}:${best.key}`, { name: String(item.name || item.id), inst: instName, cause, faithful: prescriber && prescriber.name ? `${prescriber.name}'s faithful` : 'the faithful' }),
         reasons: [
           best.martial
             ? `A demilitarizing town no longer sustains the ${instName}.`
             : `${String((prescriber && prescriber.name) || 'A reaching faith')} leads the abolition: ${cause}.`,
-          'The case against it has been building for seasons rather than arriving in a single ruling: an arc, not a decree.',
+          best.martial ? 'It has stood idle through seasons of peace.' : 'The faithful have spoken against it for seasons.',
         ],
         institutionPatch: {
           saveId: item.id,
@@ -531,7 +534,7 @@ export function evaluateMoralInstitutionFounding(worldState, snapshot, context =
         summary: `Under ${patronName}, ${nameLower} rises because ${cause}.`,
         reasons: [
           `${String(patron.name || 'The patron')} raises the ${nameLower}: ${cause}.`,
-          'The case for it has been building for years rather than arriving in a single ruling: an arc, not a decree.',
+          'The faithful have asked for it for years.',
         ],
         institutionPatch: {
           saveId: item.id,
@@ -567,3 +570,19 @@ export function evaluateMoralInstitutionFounding(worldState, snapshot, context =
 }
 
 export { readinessOf };
+
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string>} MoralLineSlots */
+/** @param {string} text */
+const capFirst = (text) => text.charAt(0).toUpperCase() + text.slice(1);
+
+/**
+ * The moral abolition's summary (A2·179), four vantages of one fact — the patron's faithful
+ * want the institution shut, for the cause `abolitionCause` names; seeded by the town and the
+ * institution, never the tick. A nameless prescriber reads as plain "the faithful".
+ */
+const ABOLITION_SUMMARY = Object.freeze([
+  (/** @type {MoralLineSlots} */ x) => `${x.name}'s rulers mean to shut the ${x.inst}, at the urging of ${x.faithful}: ${x.cause}.`,
+  (/** @type {MoralLineSlots} */ x) => `${capFirst(x.faithful)} want the ${x.inst} in ${x.name} closed: ${x.cause}.`,
+  (/** @type {MoralLineSlots} */ x) => `${capFirst(x.faithful)} have turned ${x.name} against its ${x.inst}: ${x.cause}.`,
+  (/** @type {MoralLineSlots} */ x) => `Those who keep ${x.name}'s ${x.inst} running have been told it must close: ${x.cause}.`,
+]);
