@@ -397,7 +397,7 @@
    "lines": [
     {
      "lineId": "STRESS_DESCS.politically_fractured[0]",
-     "text": "{name} has two gates. The eastern one is controlled by one faction, the western by another. You can tell by the pennants. The road you are on leads to the eastern gate.",
+     "text": "{name} has two gates. The eastern one is controlled by one power, the western by another. You can tell by the pennants. The road you are on leads to the eastern gate.",
      "needs": [
       "gate"
      ],
@@ -427,7 +427,7 @@
     },
     {
      "lineId": "STRESS_DESCS.politically_fractured[2]",
-     "text": "The road into {name} has been marked. Symbols painted on fence posts and milestone stones: the same symbol, repeated, belonging to one faction or another. Someone has been doing this recently; the paint is fresh.",
+     "text": "The road into {name} has been marked. Symbols painted on fence posts and milestone stones: the same symbol, repeated, belonging to one power or another. Someone has been doing this recently; the paint is fresh.",
      "needs": [],
      "excludes": [],
      "crisis": [

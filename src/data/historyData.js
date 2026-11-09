@@ -1197,7 +1197,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The threat is being exaggerated by someone who profits from wartime contracts',
-      'A diplomatic channel exists that the war faction is suppressing',
+      'A diplomatic channel exists that the war party is suppressing',
       'The threat has an agent already inside the settlement',
     ],
     severity: ['major', 'catastrophic'],
@@ -1252,7 +1252,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'The young want to change how things are done, and the old will not let them',
     factions: ['Traditionalists', 'Progressives', 'Pragmatic middle'],
     lastingEffects: [
-      'Council seats now formally split between the old and young factions',
+      'Council seats now formally split between the old guard and the young',
       'A youth assembly won a permanent advisory voice in the aftermath',
     ],
     plotHooks: [
@@ -1430,7 +1430,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A fire that began in {location} consumed {building_type} across whole districts before it could be checked',
     factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'],
     plotHooks: [
-      'The fire spared exactly the houses one faction wanted cleared, and nobody believes it was chance',
+      'The fire spared exactly the houses one power wanted cleared, and nobody believes it was chance',
       'A confession was extracted from a scapegoat; the real arsonist still lives in town',
       'Rebuilding uncovered something in the ashes that predates the settlement',
     ],
