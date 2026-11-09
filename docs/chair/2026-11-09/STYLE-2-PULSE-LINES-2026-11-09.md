@@ -667,3 +667,11 @@ Pins: no fixture opens the layer's note: unpinned, PLAUSIBLE; every suite naming
 | D·100 the stopped catch-up | `The catch-up stopped early, before the record was complete. Advance the realm to resume.` | "The catch-up stopped early, before it had covered all the time that passed. Advance the realm to resume." |
 
 Pins: `whileYouWereAway.test.jsx` — the failure test reads the new sentence; **red at the parent**, green here. Registers: none moved.
+
+### 9af. `PerspectiveStandings.jsx` (D·103)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·103 a standing-less observer | `{name} records no standing toward another settlement: no siege, no treaty(, no modelled belief).` | "{name} has no siege or treaty with another settlement yet(, and holds no belief about its neighbours)." — **census strike:** the audit's "has no dealings with another settlement" claims more than the writer reads (it checks sieges, treaties and beliefs, not trade or roads), so the line names only those |
+
+Pins: `warFaithSurfacing.test.jsx` — the honest-nothing assertion re-keyed by identity; **red at the parent**, green here. Registers: none moved.
