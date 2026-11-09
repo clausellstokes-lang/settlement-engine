@@ -225,7 +225,8 @@ describe('echoes: resolution leaves recent memory', () => {
     expect(birth).toBeTruthy();
     expect(birth.severity).toBeGreaterThan(0.7); // pressure + echo warmth
     expect(birth.stressor.id).toBe(echo.id);     // same stable id: rebirth overwrites the echo
-    expect(birth.reasons).toContain("The settlement's present condition gives food pressure room to grow.");
+    // STYLE-2 C2 (SW-12, A2·65): the fail-closed fallback says little, and names the place.
+    expect(birth.reasons).toContain("Nothing in Ashford's present state stands in its way.");
     // anchored: the exact fail-closed pressure phrase above proves the reader reasons are live.
     expect(birth.reasons.join(' ')).not.toMatch(/0\.70|\b(?:score|gate|echo)\b|_/i);
     expect(birth.metadata.pressureEvidence).toEqual({

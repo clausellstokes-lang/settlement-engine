@@ -487,7 +487,10 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // Leaf-diffed against 2053a809c: 70 string leaves and 56 array-tail keys where a struck reason shortened a list; no id,
 // tick or number moved. tradeWar.js and causeLifecycle.js (the lane's other causes) leave this arm byte-identical.
 // Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = 'b716843d83e322c20932ca2613d2912e116c52acdb6123321d2333e63b09d62b';
+// 2026-11-09 (STYLE-2 C2, lane SW-12, the next cause): b716843d... -> a55e7cd3..., ONE cause, TEXT ONLY: stressors.js (the
+// birth summary by type, its pressure fallback, the escalation summary and its evidence reasons, the recovery receipt in
+// words). Leaf-diffed against the parent: 110 string leaves and 35 array-tail keys; no id, tick or number moved.
+const BASE_PULSE_HASH = 'a55e7cd322eaf7dbe04961e2a29f455f0643f912403196f98c636787d4c105ef';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
