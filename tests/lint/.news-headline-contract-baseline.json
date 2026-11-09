@@ -5,7 +5,7 @@
     "introductions": 396,
     "retirements": 0,
     "finalEntries": 396,
-    "homes": 43
+    "homes": 44
   },
   "addressTotality": {
     "rows": [
@@ -181,15 +181,15 @@
         "home": "applied|npc_reform",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 25,
-        "occurrences": 25
+        "distinctValues": 24,
+        "occurrences": 24
       },
       {
         "home": "applied|npc_reform",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 25,
-        "occurrences": 25
+        "distinctValues": 24,
+        "occurrences": 24
       },
       {
         "home": "applied|npc_suppress",
@@ -218,6 +218,20 @@
         "voiceClass": "indicative",
         "distinctValues": 1,
         "occurrences": 3
+      },
+      {
+        "home": "applied|resource_depletion",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "applied|resource_depletion",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
       },
       {
         "home": "applied|rival_sabotage",
@@ -612,13 +626,13 @@
         "occurrences": 1
       }
     ],
-    "rowsSha256": "f497abf47de50bdd115e397c6ab356cc846edfb70d8915632e317c41b1d8174d",
+    "rowsSha256": "9e1867d4eeb7db4d28efda2f3357d8ed866565cb2de4665cec0abed3db76adca",
     "totals": {
-      "homes": 43,
+      "homes": 44,
       "fields": 2,
-      "identities": 86,
+      "identities": 88,
       "prospectiveIdentities": 0,
-      "indicativeIdentities": 86,
+      "indicativeIdentities": 88,
       "distinctValues": 606,
       "occurrences": 792
     }
@@ -630,12 +644,12 @@
         {
           "field": "mechanicalOutcomes",
           "capPerPulse": 8,
-          "headlineOccurrences": 50,
-          "distinctValues": 25,
+          "headlineOccurrences": 52,
+          "distinctValues": 26,
           "prospectiveOccurrences": 0,
           "prospectiveDistinctValues": 0,
-          "indicativeOccurrences": 50,
-          "indicativeDistinctValues": 25
+          "indicativeOccurrences": 52,
+          "indicativeDistinctValues": 26
         },
         {
           "field": "selectedOutcomes",
@@ -649,11 +663,11 @@
         }
       ],
       "union": {
-        "headlineOccurrences": 214,
+        "headlineOccurrences": 216,
         "distinctValues": 97,
         "prospectiveOccurrences": 0,
         "prospectiveDistinctValues": 0,
-        "indicativeOccurrences": 214,
+        "indicativeOccurrences": 216,
         "indicativeDistinctValues": 97
       }
     },

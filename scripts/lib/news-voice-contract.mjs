@@ -195,8 +195,15 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // contracts: four homes arrive (applied|commons_gathering, applied|npc_verdict, queued|npc_sabotage, queued|trade_pressure) and two
 // leave (applied|resource_depletion, queued|npc_reform); the one retirement is gone (396 − 0 = 396). Every owned home reads
 // indicative (applied|npc_protect 17 → 18, applied|npc_reform 23 → 25); the voice debt stays EMPTY.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR2 MERGE POINT (f51058995, car 2 = lane/allegiance-car2-2026-11-08 at
+// 46715e751; record 2, rung 37; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 2's own: the guild's push
+// (bbb1a4abc, GUILD_PUSH_TUNING / guildPushOf, the one draw line in rankPowers) re-deals the corpus's AO-0 year, with A6 the hall
+// (ce90cf16e) and the capture rows read from the one state (aca93cbc5) beside it (docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md §4).
+// ONE corpus build at the merged tip (562582982), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// 396/0/396/43 → 396/0/396/44, the same act as the headline and prose-family contracts: applied|resource_depletion returns and
+// no home leaves; every owned home reads indicative (applied|npc_reform 25 → 24); the voice debt stays EMPTY.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 396, retirements: 0, finalEntries: 396, homes: 43,
+  pulseRoots: 12, introductions: 396, retirements: 0, finalEntries: 396, homes: 44,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([
