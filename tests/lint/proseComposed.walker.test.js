@@ -1308,9 +1308,9 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
   const CAPTURED_TREASURY_TOWN = Object.freeze({
     config: {
       settType: 'town',
-      tradeRouteAccess: 'port',
-      monsterThreat: 'heartland',
-      culture: 'arabic',
+      tradeRouteAccess: 'road',
+      monsterThreat: 'frontier',
+      culture: 'south_asian',
       terrainOverride: 'desert',
     },
     // rate-9-2 -> rate-11-9 on 2026-09-30, with tests/fixtures/tasteTowns.js INTERESTED_TOWNS: the
@@ -1325,7 +1325,11 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
     // to rate-93-0 by the X-46 compose) met at the merge onto rung 1's tip; the same scan in
     // rateGrid's order at the merged tip names rate-69-0 (index 276) first of three (rate-93-0,
     // rate-135-1). The arm returns to the grid shape. The assertions are unchanged.
-    seed: 'rate-69-0',
+    // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2), with INTERESTED_TOWNS and by identity with its cause: the
+    // capture state is derived from the ruling three's agents (J-13), and rate-69-0's strengths-only hall reads
+    // 'equilibrium'. The same scan at the car's tip names rate-105-2 (index 422) first of two (rate-165-1). The assertions
+    // are unchanged.
+    seed: 'rate-105-2',
   });
 
   it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {

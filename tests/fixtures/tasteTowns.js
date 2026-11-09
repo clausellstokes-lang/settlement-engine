@@ -75,9 +75,14 @@ export const INTERESTED_TOWNS = Object.freeze([
   Object.freeze({
     label: 'captured',
     // was 'rate-11-9' (town/road/random_threat/germanic/hills); re-keyed 2026-11-07, cause above.
-    seed: 'rate-69-0',
+    // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2), by identity with its cause: the hall-capture state is
+    // DERIVED (domain/people/hallCapture.js, J-13), so a strengths-only 'corrupted' hall with no agent in the ruling three
+    // reads 'equilibrium' at most, and rate-69-0's did. The same rule re-applied in rateGrid's order at the car's tip names
+    // rate-105-2 (index 422; road/frontier/south_asian/desert) first of two (rate-165-1) holding every captured
+    // precondition. The control is unchanged.
+    seed: 'rate-105-2',
     config: Object.freeze({
-      settType: 'town', tradeRouteAccess: 'port', monsterThreat: 'heartland', culture: 'arabic', terrainOverride: 'desert',
+      settType: 'town', tradeRouteAccess: 'road', monsterThreat: 'frontier', culture: 'south_asian', terrainOverride: 'desert',
     }),
   }),
   Object.freeze({

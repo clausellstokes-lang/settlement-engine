@@ -904,7 +904,8 @@ describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T
     // Re-keyed by identity 2026-11-07 (REVIEW-INTAKE-LAND): the captured town is rate-69-0 and the
     // control rate-9-2 at the merged tip of the review-intake lane and rung 1, the two 2026-11-06
     // causes composed (tests/fixtures/tasteTowns.js names the scan).
-    expect(captured.standing, 'rate-69-0 is the captured town').toBe('INTERESTED');
+    // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2, the derived capture state; tests/fixtures/tasteTowns.js).
+    expect(captured.standing, 'rate-105-2 is the captured town').toBe('INTERESTED');
     expect(clean.standing, 'rate-9-2 is the control and it is NOT interested').toBe('LICENSED');
     expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
   });
