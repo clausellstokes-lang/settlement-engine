@@ -48,17 +48,22 @@ beforeAll(async () => {
 }, 120_000);
 
 describe('the record battery prints on the DM receipt only', () => {
-  test('the PDF chapter keeps its coherence box and omits the record battery judgment', () => {
+  // RE-KEYED BY CAUSE (STYLE-RULINGS-2 B4, 2026-11-09): the whole coherence box left the chapter
+  // ("GENERATION COHERENCE · 17/17 checks passed" is the engine's self-check, machinery on the reader's
+  // page), so the battery judgment's absence is now asserted beside the box's absence, on a chapter the
+  // test proves rendered by its own heading.
+  test('the PDF chapter prints no coherence box and no record battery judgment', () => {
     const { label, summary } = recordBatteryJudgment({});
     for (const { i, s, text } of ROWS) {
       const judgment = (s.generationCoherenceReceipt?.judgments || []).find((j) => j?.id === 'record_coherence_battery');
       // the record still carries the judgment, needing review on these seeds (so the cut is live, not vacuous)
       expect(judgment?.status, `soak1k-${i}`).toBe('needs_review');
-      expect(text, `soak1k-${i}`).toContain('GENERATION COHERENCE');
-      // anchored: the chapter text is asserted to carry its coherence box one line above
-      expect(text, `soak1k-${i}`).not.toContain(label);
-      // anchored: the same chapter text, non-empty by the assertion above
-      expect(text, `soak1k-${i}`).not.toContain(summary);
+      expect(text, `soak1k-${i}`).toContain('Identity & Daily Life');
+      // anchored: the chapter text is asserted to carry its heading one line above
+      expect(text, `soak1k-${i}`).not.toContain('GENERATION COHERENCE');
+      expect(text, `soak1k-${i}`).not.toContain('checks passed'); // anchored: same chapter text
+      expect(text, `soak1k-${i}`).not.toContain(label); // anchored: same chapter text
+      expect(text, `soak1k-${i}`).not.toContain(summary); // anchored: same chapter text
     }
   });
 });

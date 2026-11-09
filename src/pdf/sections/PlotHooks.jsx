@@ -17,9 +17,9 @@ import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { cap, hookText, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
-// The screen's grouping, from the same domain leaf (already in this bundle through
-// viewModel.js's collectPlotHooks import, so it costs the worker nothing).
-import { groupPlotHooksBySourcePage } from '../../domain/dossier/plotHooks.js';
+// The screen's grouping, from the same domain leaf, through the index the Tonight chapter
+// reads to point here (one grouping, one numbering: pdf/lib/plotHookIndex.js).
+import { plotHookPrintGroups } from '../lib/plotHookIndex.js';
 
 // THE CARDS ARE GROUPED BY THE PAGE THEIR SOURCE FACT LIVES ON, as on the screen (chair
 // ruling, RULINGS-T1 Plot Hooks, 2026-10-30): domain/dossier/plotHooks.js ::
@@ -37,10 +37,8 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
   const hooks = vm.hooks?.all || [];
   const tensions = vm.hooks?.tensions || [];
 
-  // Group by source
-  const groups = groupPlotHooksBySourcePage(
-    hooks.map((row) => ({ row, category: row.category, source: row.sourceName })),
-  ).map(({ page, hooks: members }) => ({ page, list: members.map((m) => m.row) }));
+  // Group by source page, the hooks with text only, as the Tonight chapter numbers them.
+  const groups = plotHookPrintGroups(hooks);
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -65,10 +63,8 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
       )}
 
       {/* ── Source groups ────────────────────────────────────── */}
-      {groups.map(({ page, list: members }) => {
+      {groups.map(({ page, list }) => {
         const source = page.id;
-        const list = members.filter(h => hookText(h?.hook).trim().length > 0);
-        if (!list.length) return null;
         return (
           <View key={`grp-${source}`} style={{ marginBottom: space.sm }}>
             <View
@@ -109,7 +105,9 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
                 <Text style={{ ...type.body_em, color: palette.ink }}>
                   {humanize(t.label || t.type || 'Tension')}
                 </Text>
-                {t.description ? `  ${t.description}` : ''}
+                {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3, STYLE-RULINGS-2 B4, 2026-11-09): the description
+                    prints on History › Live tensions only; this list keeps the labels, and the
+                    tension's hooks above are the content. tests/pdf/restoredSubsections.test.js (B4) */}
               </Text>
             </View>
           ))}

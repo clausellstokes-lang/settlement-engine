@@ -224,7 +224,7 @@ function ChainCard({ chain }) {
   const meta = [
     chain.needLabel ? { label: 'NEED', value: chain.needLabel } : null,
     chain.exportable ? { label: 'EXPORT', value: 'yes' } : null,
-    chain.activatedByResource ? { label: 'BY', value: 'local resource' } : null,
+    // "BY local resource" left (B4, 2026-11-09): the engine's activation flag; the flow line names the resource.
   ].filter(Boolean);
 
   const note = chain.externalMillNote || chain.entrepotNote;

@@ -1027,9 +1027,10 @@ describe('THE AUTHORED CORE HAS ONE READER — and this census is what makes it 
       // ── NOT A SOUL: the SETTLEMENT's authored `character` PROSE field. A different
       //    key on a different record that happens to share a word, carried by three
       //    presentation surfaces. Enrolled so the census is TOTAL rather than scoped.
+      //    SHRUNK BY CAUSE (STYLE-RULINGS-2 B4, 2026-11-09): the PDF Overview (3 reads) and the
+      //    Foundry Overview page (2) no longer print the settlement's historical character; its one
+      //    home is the History chapter and page, which read `historicalCharacter`, another key.
       'src/components/organic/samples/DossierSample.jsx': 1,
-      'src/foundry/journalPages.js': 2,
-      'src/pdf/sections/Overview.jsx': 3,
     };
     expect(readCensus()).toEqual(CENSUS);
   });
