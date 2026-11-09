@@ -40,8 +40,12 @@ describe('Surveyor entitlement predicate parity (door vs account copies)', () =>
     // null/undefined auth: both fail closed.
     expect(surveyorEntitled(null)).toBe(isSurveyorTier(null));
     expect(surveyorEntitled(undefined)).toBe(isSurveyorTier(undefined));
-    // and a Cartographer premium is excluded by both (the discriminator).
-    expect(isSurveyorTier({ tier: 'premium' })).toBe(false);
-    expect(surveyorEntitled({ tier: 'premium' })).toBe(false);
+    // RE-KEYED BY CAUSE (TIER-PARITY-FIX, 2026-11-09; the owner: the Surveyor is "Premium
+    // only"): the discriminator is now the tier itself — a Cartographer premium is ADMITTED by
+    // both, and a free account with no grant is refused by both.
+    expect(isSurveyorTier({ tier: 'premium' })).toBe(true);
+    expect(surveyorEntitled({ tier: 'premium' })).toBe(true);
+    expect(isSurveyorTier({ tier: 'free' })).toBe(false);
+    expect(surveyorEntitled({ tier: 'free' })).toBe(false);
   });
 });

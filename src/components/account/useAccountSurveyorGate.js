@@ -19,10 +19,11 @@ import { supabase } from '../../lib/supabase.js';
 // stay byte-identical to surveyor/surveyorGate.js#isSurveyorTier — the pin
 // tests/components/surveyorGateParity.test.js fails if the two ever diverge.
 export const surveyorEntitled = (auth) =>
-  !!auth && (auth.hasSurveyorEntitlement === true
+  !!auth && (auth.tier === 'premium'
     || auth.isFounder === true
     || auth.role === 'admin'
-    || auth.role === 'developer');
+    || auth.role === 'developer'
+    || auth.hasSurveyorEntitlement === true);
 
 /** @type {Map<string, boolean>} */
 const cache = new Map();
@@ -45,6 +46,7 @@ async function fetchEntitled(userId) {
 /** @returns {boolean} whether the current account may reach the Surveyor AI surface. */
 export function useAccountSurveyorGate() {
   const userId = useStore((s) => s.auth.user?.id || null);
+  const tier = useStore((s) => s.auth.tier);
   const isFounder = useStore((s) => s.auth.isFounder);
   const role = useStore((s) => s.auth.role);
   const [fetched, setFetched] = useState({ userId: null, entitled: false });
@@ -56,5 +58,5 @@ export function useAccountSurveyorGate() {
   }, [userId]);
 
   const hasSurveyorEntitlement = fetched.userId === userId && fetched.entitled;
-  return surveyorEntitled({ hasSurveyorEntitlement, isFounder, role });
+  return surveyorEntitled({ tier, hasSurveyorEntitlement, isFounder, role });
 }

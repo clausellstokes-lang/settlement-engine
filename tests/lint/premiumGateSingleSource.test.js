@@ -107,6 +107,12 @@ const REASON_CLASSES = {
     'Campaign management, gallery import, or cloud sync entitlement — spelled with the '
     + 'ROLE literals (developer/admin) rather than isElevated(). A separate convergence '
     + 'candidate with its own owner queue entry; not this lane.',
+  'surveyor-entitlement':
+    'Access to the Surveyor, the AI control surface — law (7) of the owner\'s tier law '
+    + '(2026-11-09: "Premium only"): premium (Founders folded in) OR staff OR the server\'s '
+    + 'own has_surveyor_entitlement() answer (migration 209). It deliberately omits nothing the '
+    + 'server admits and admits nothing the server refuses; the two lazy-chunk copies are kept '
+    + 'byte-identical by tests/components/surveyorGateParity.test.js.',
 };
 
 /**
@@ -127,6 +133,9 @@ const EXEMPTIONS = {
   'src/components/SettlementsPanel.jsx': 'campaign-or-import-entitlement',
   'src/components/account/AccountDataPrivacySection.jsx': 'quota-or-limit',
   'src/components/account/AccountSubscriptionSection.jsx': 'sell-to-the-tier',
+  // TIER-PARITY-FIX (2026-11-09): the Surveyor is premium only; the account's inlined twin of
+  // isSurveyorTier now reads the tier (see the surveyorGate.js row).
+  'src/components/account/useAccountSurveyorGate.js': 'surveyor-entitlement',
   'src/components/gallery/GalleryCampaigns.jsx': 'campaign-or-import-entitlement',
   'src/components/gallery/GalleryDetail.jsx': 'campaign-or-import-entitlement',
   'src/components/gallery/GalleryMaps.jsx': 'campaign-or-import-entitlement',
@@ -161,6 +170,9 @@ const EXEMPTIONS = {
   // (revert included, the chair's ruling), the `isPaid` read DELETED. The census shrinks by one.
   'src/components/settlementDetail/resolveExportSeam.js': 'content-visibility',
   'src/components/settlements/SaveQuotaMeter.jsx': 'quota-or-limit',
+  // TIER-PARITY-FIX (2026-11-09): THE Surveyor predicate (isSurveyorTier) admits an active
+  // premium tier, as the server's 209 does — law (7). A different question from authoring.
+  'src/components/surveyor/surveyorGate.js': 'surveyor-entitlement',
   'src/hooks/useCustomContentCloudSync.js': 'campaign-or-import-entitlement',
   'src/hooks/useFounderTileEligible.js': 'sell-to-the-tier',
   'src/hooks/useReferralIntent.js': 'sell-to-the-tier',
