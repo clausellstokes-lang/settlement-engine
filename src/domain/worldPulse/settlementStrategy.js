@@ -1157,7 +1157,9 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
           ctx.homeBesieged
             ? `${name} is besieged at home while its army is committed against ${deployment.targetId}.`
             : null,
-          pickLine(RECALL_REASON, `candidate.strategy.return_home.${stablePart(sId)}.${tick}`, { name }),
+          // Seeded by the town, never the tick: the recall carries no condition or patch, so it is
+          // a drift outcome and its reasons are the feed's metronome key (isMetronomeRepeat).
+          pickLine(RECALL_REASON, `candidate.strategy.return_home.${stablePart(sId)}`, { name }),
         ].filter(Boolean),
       }));
       continue; // exactly one candidate for S; skip the sample.
