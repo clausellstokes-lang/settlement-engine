@@ -76,7 +76,7 @@ export const PERSON_HOOKS_BY_TITLE = Object.freeze({
     'Someone has been grinding at night, using their stones, and leaving the floor swept.',
   ],
   'the pit boss': [
-    'A fighting dog that never loses has been seen being fed by a stranger\'s hand the night before.',
+    'A fighting dog that never loses has been seen being fed by someone nobody knows, the night before a bout.',
     'The takings are short by the same sum every week, and only two people handle the money.',
     'A bout they fixed went the wrong way, and the man who lost on it wants his money back from them.',
   ],
