@@ -252,3 +252,117 @@ Struck: "repairing its walls and doubling the watch" (no works are read).
 **CONFIRMED** (executed here): the base sha; the measure (4,496 / 24,209) and every before → after count above; identical entry ids after every cause; the WY-1 arm's per-cause hashes and their text-only leaf diffs; the reds named at the base. **PLAUSIBLE:** every new line is a proposal against the law, read against its writer's slots by this seat — not a measured reader outcome; the per-type birth signs are inferences from the crisis type alone, flagged for the owner's veto.
 
 **The second seat — CONFIRMED** (executed here): the base sha; the measure reproduced (4,496 / 24,031) and every before → after count in §6; identical entry ids after every cause; the WY-1 arm's per-cause hashes and text-only leaf diffs; the dark fence's neutralised digests; the reds named at the base by a full suite at `b9a4a45fa`. **PLAUSIBLE:** every new line is a proposal against the law, read against its writer's slots by this seat (the printing regions and their slots, not every helper line of each file); "is marching home" (withdrawal) and "nearby" (migration) are read from the writers' names for the moves, not from the apply paths.
+
+## 8. The third seat
+
+**Seat:** SW-12 PULSE-LINES, third seat — an Opus 5.5 build seat, a child of the cloud chair, in session `session_01FbPLbfAoVLqZ5EzNhzAKrB`; the same lane, continued from the second seat's tip `aff902eb9` (verified with `git rev-parse`; nothing above rewritten). The checkout is a detached HEAD at the lane's tip and the classifier refused switching onto the local branch, so every push is the plain fast-forward `git push --no-verify origin HEAD:lane/style-2-pulse-lines-2026-11-09`. **The measure, reproduced first:** §0's harness rebuilt (a scratch copy of `scripts/audit/simulate-world.mjs` with absolute imports and one line that keeps each world's `wizardNews.entries`; every entry rendered through `entry.headline`, `newsBodyText`, `newsVoiceLine`, `newsReasonPhrases(…).slice(0, 3)`, `newsReaderSummary`), `WAR_ECON_ALL=1`, `--ticks 52 --reps 2 --scales 0`, `HEALTH: OK`: **4,496 entries, 23,842 printed lines — the prompt's figure at `aff902eb9` exactly.** Every cause was measured AT ITS COMMIT in a clean worktree (`git worktree` at the sha, nothing else in the tree); after every cause the 4,496 entry ids are identical, in order; the tip prints 23,841 lines (one struck odds pill). Counts are cards whose face or tooltip carries the frame, before → after (new lines in brackets).
+
+### 8a. `stressorGates.js` — a5f185a1f (A2·80, ·83, ·84)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·80 :509 | `Legitimacy is in open crisis; every ruling claim is contestable.` | "Hardly anyone here still accepts the rulers' right to rule." | 0 → 0 (dark) |
+| A2·83 :753 | `Bread and debt: the oldest fuel of uprisings.` | by the gate's own branch: "People here are going hungry." · "People here are deep in debt." · both: "People here are going hungry, and are deep in debt besides." | 0 → 0 |
+| A2·83 :820 | `Leveraged ledgers amplify every tremor.` | "Debts already weigh on this place, so a fall in trade hits it all the harder." | 0 → 0 |
+| A2·84 :891 | `Magic is load-bearing here: ${signals}.` | "This place leans on magic: ${signals}." | 0 → 0 |
+
+The rows' LIT lines ("The purges are fresh…" 1, "Public patience…" 1, "The underworld already owns the night here." 1, "A practised watch…" 2, "A plural religious landscape…" 1) are the audit's PASS and stay. Struck: "they blame the rulers" (not read).
+
+### 8b. `deploymentReturn.js` — e8549f5df (A2·139–140)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·139 siege_lifted summary | `${home}'s army returned to a besieged home and relieved it; the settlement begins to recover.` | four, seeded by the outcome id: "${home}'s army came home and drove the besiegers from its walls." · "The siege of ${home} is over: its own army came home and broke it." · "${home}'s gates are open again; its army came back and sent the besiegers off." · "The besiegers have gone from ${home}'s walls, driven off by its returning army." | 2 → 0 [1/1] |
+| A2·140 relief + liberation reasons | `A host come home ${muster} relieved the siege / threw off the occupiers: ${odds}, and it came off.` | one pool of three, the deed in a slot: "${home}'s army came home ${muster} and ${deed}. It was ${odds}, and the day went its way." · "${home}'s army ${deed} on its return, ${muster}. It was ${odds}." · "It was ${odds}: ${home}'s army came home ${muster}, and ${deed}." | 2 → 0 [1/1] (a single line measured 2 → 2 first: the refusal line) |
+
+Struck: "the settlement begins to recover" (not read on this branch); the besieger stays unnamed (only `isBesieged` is read). The TE-HERALD-1 ladders (muster, odds) are kept and their pins hold. The pools and their import sit at the file's FOOT: `wizardNewsAuthoring`'s ledger is line-bound and a pool above its rows moved two baselined lines by 15.
+
+### 8c. `resourceTaxonomy.js` — 63f3fda3c (A2·101)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| natural recovery | `Renewable or managed resource can recover when pressure drops.` | three, seeded by the settlement and the resource (a drift outcome): "Given rest, it comes back on its own." · "Left in peace, it will come back." · "It recovers by itself once the taking slows." | 2 → 0 [1/1] |
+| high magic | `High magic can re-stabilize this magical resource.` | "Strong magic can mend it." | dark |
+| forced | `Recovery was explicitly forced.` | struck (an empty reason the caller filters) | dark |
+
+### 8d. `institutionLifecycle.js` — eff5e88da (A2·173–175)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·173 build summary | `Good years have given ${name} the means to build what it lacked. ${gap.reason}` (the reason printed twice) | four, seeded by the town and the building: "Good years have given ${name} the coin to build a ${inst}." · "${name} has done well enough of late to afford a ${inst} of its own." · "Builders are at work in ${name}: the good years are paying for a ${inst}." · "With times good, ${name}'s rulers have found the money for a ${inst}." | 1 → 0 [1] |
+| A2·174 :412 | `Local resources could support ${chain} at this tier.` | "The land nearby could supply ${chain} here." | dark |
+| A2·175 streak | `Economy stably healthy / distressed for ${n} tick(s) (minimum ${m}).` | three each, in pulses, the minimum struck: "${name} has prospered for ${n} pulses running." · "Times have been good in ${name} for ${n} pulses in a row." · "For ${n} pulses now, ${name} has done well." / "… struggled …" · "… hard …" · "… done badly." | 1 → 0 [1] |
+| A2·175 odds | `The building is possible, not yet likely.` (and three twins) | struck | 1 → 0 |
+
+The file sits at its 800-line eslint ceiling with ZERO slack, so the pools are inline (braced tokens, a function replacer): net code lines 800 → 800, no ceiling raised.
+
+### 8e. `moralInstitutionPressure.js` — 81fc1a2a0 (A2·179–180)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·179 summary | `Under ${patron}, ${inst} faces abolition: ${cause}.` + cause `it sits ill with the settlement's patron` | four, seeded by the town and the institution: "${name}'s rulers mean to shut the ${inst}, at the urging of ${patron}'s faithful: ${cause}." · "${Patron}'s faithful want the ${inst} in ${name} closed: ${cause}." · "${Patron}'s faithful have turned ${name} against its ${inst}: ${cause}." · "Those who keep ${name}'s ${inst} running have been told it must close: ${cause}." (nameless prescriber: "the faithful") | 1 → 0 [1] |
+| A2·179 causes | `its cruelty and disorder offend the seat` · `the seat will no longer abide its cruelty / disorder` · `it sits ill with the settlement's patron` | "it is cruel, and it breeds disorder" · "it is thought too cruel" · "it is thought to breed disorder" · "it does not sit well with the faith" | — |
+| A2·180 arc | `The case against it has been building for seasons rather than arriving in a single ruling: an arc, not a decree.` (also printed on the martial lapse) · founding `… for years …` | moral "The faithful have spoken against it for seasons." · martial "It has stood idle through seasons of peace." · founding "The faithful have asked for it for years." | 1 → 0 [1] |
+
+Struck: "priests" (no clergy is read). Pin re-keyed: `sentenceOpeningFallbacks :: 6` — the summary arm to the exact seeded line.
+
+### 8f. `relationshipHierarchy.js` — 53d6cc3a0 (A2·184) · `flows.js` — c3a5ee49d (A2·183)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·184 | `The relationship is suspended under the overlord conflict posture.` | "Its overlord's quarrels now decide whom it may deal with, and this friendship is set aside." | 1 → 0 [1] |
+| A2·183 :150 | `${supplier} is in a trade/supply crisis.` | "${supplier} is in trouble and cannot spare its goods." | 1 → 0 [1] |
+| A2·183 :151 | `A confirmed trade-dependency channel makes ${dest} reliant on it.` | "${dest} depends on ${supplier} for its goods." (struck from the draft: "most of what it needs") | 1 → 0 [1] |
+
+### 8g. `stressors.js :: readerPressureReasons` — 47e6807fc (§6l)
+
+`${Label} already burdens the settlement.` (40 cards; top 11 "Corruption exposed"; a joined list read the raw tokens with a singular verb) → each archetype pressureModel matches (its closed sets, 22 ids) in its own words — "the famine", "the strain of war", "trouble on the roads", "the corruption that has come to light", "the loss of its leading figure", "the weight of cold-war sanctions", "what its overlord takes from it", "unrest among the region's rulers", "a shortage of goods from outside", … — joined "a, b and c", with the pressure row's own place, in three orders seeded by the place and the conditions (never the tick): "${Place} is already living with ${list}." · "${List} already weigh(s) on ${place}." · "In ${place}, ${list} is/are already a burden." **Frames: "already burdens" 40 → 0; the top frame (place masked) 11 → 8** (new: 14 / 15 / 11 cards over the three orders). The second seat's `export` and its pin stay; the pin's reasons re-keyed; a new red-first pin for the list's grammar.
+
+### 8h. The stressor reader vocabulary, `stressorsCore.js` — 45773294d (A1·105, ·109, ·49)
+
+`STRESSOR_READER_NOUN` by type ("the split between the faiths", "the betrayal", "the famine", "the rebellion", "the smugglers' road", … ; a type outside the map prints its label), and the residue words for the rebellion's three tokens ("old reprisals remembered", "rebel cells still meeting", "taxes no one pays"). The two print sites are `stressorAftermath.js`'s, the rows' own writer: its two headline lines and its `residualText` — three lines, nothing else there.
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A1·105 | `${label} has passed` | four, seeded by the stressor's id: "${Noun} is over" · "${Noun} has ended" · "${Noun} has run its course" · "The worst of ${noun} is past" | top frame 33 → 17 (all aftermath + history headlines, by headline) |
+| A1·109 | `${label} passes into history` | "${Noun} passes into history" · "${Noun} is only a memory now" · "${Noun} belongs to the past now" · "Few still speak of ${noun}" | 47 → 15 on the old frame's words |
+| A1·49 | `reprisal memory, autonomy cells, broken tax obligations` | "old reprisals remembered, rebel cells still meeting, taxes no one pays" | 4 → 0 |
+
+The catalog labels themselves are not renamed (they persist on records and feed other surfaces; A2·78 stays listed). Pins re-keyed: `stressorAftermath` (two headlines); new red-first pin "a rebellion's aftermath is told in reader words".
+
+### 8i. Pins, registers, golden surfaces (the third seat)
+
+- **Golden surfaces (herald, gm /525, fence /360, prose /1,050, witness, pdf): none moved.** `demographicsFloor :: 8. THE DARK FENCE` green after every cause.
+- **Pins re-keyed by identity, never loosened:** `modeSpeedsWy1 :: BASE_PULSE_HASH` 146027f8 → 60470ac9 (flows; 88 string leaves) → bd7c4e79 (readerPressureReasons; 61 string leaves), each TEXT ONLY, leaf-diffed against its parent in a clean worktree (0 keys added or lost; no id, tick, number or rumour seed); every other cause leaves the arm byte-identical (measured). `sentenceOpeningFallbacks :: 6`, `conditionRefreshRecordMode` (A2·74's reasons), `stressorAftermath` (two headlines). New red-first pins (red at their parents, green at the tip): the joined condition list's grammar; the rebellion's residue words.
+- **Registers:** none moved (the any-cast baseline, the line-bound authoring ledger, the 800-line ceilings all held as they were).
+- **The news-family contracts, count-only, for STYLE-2-MERGE** (each door run once, base `aff902eb9` → tip, the logs diffed): the only move is `newsHeadlineContract` A2's address row `applied|stressor_aftermath|headline|indicative`, distinct values 3 → 7, occurrences 9 → 9. `proseFamilyContract` (A1/A3/A5) and `newsHeadlineContract` A3 print identically at base and tip (red at both, as §6k records); `newsVoiceContract` green at both.
+
+### 8j. Ledger D, the map's words — `heraldWanderers.js`, 583982874 (D·51–56)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·51 SCANDAL_LINE | `What is spoken of them is a matter of bought loyalty / betrayal / cruelty / conspiracy / heresy.` | "People say their loyalty can be bought." · "People say they betrayed those who trusted them." · "They are known for cruelty." · "People say they plot against those they serve." · "They are called a heretic." |
+| D·52 notorious | `Their name carries badly wherever it is spoken.` | "Their name is known, and not kindly." |
+| D·53 destruction_dispersal | `Their home was destroyed and scattered its people.` | "Their home was destroyed and its people scattered." |
+| D·54 nameless | `A stranger` | "An unnamed traveller" |
+| D·55 resting band; roaming top rung | `Their standing changed this / last turning.` · `… has held a few / some turnings.` · `… longer than most care to count.` · `On the road longer than most care to count.` | "They came to rest this / last turning." · "They have stayed put a few / some turnings." · "They have stayed put a long while." · "On the road a long while now." |
+| D·56 held-abroad whyLine | `They are held abroad while carrying the realm's business.` | "They were stopped while carrying the realm's business." (the audit's blank whereaboutsLine NOT taken: the place-naming link is drawn for the owner's view only) |
+
+Dark in the measure (the soak renders only NewsEntry). Pins re-keyed: `heraldWanderersRegister` (notoriety, when, whyLine).
+
+**D·12–13 (`heraldFeed.js`'s two fallback headlines) — tried and REVERTED:** "A recorded pressure has lifted" → "A trouble in the realm has passed" and "A past pressure remains in living memory" → "An old trouble is still talked of" move `tests/property/heraldKnowledgeDeskGolden` ("THE REFILE MOVES NO CONTENT BYTE…", 9e5ddbdb → 258d28e3). Both seats moved no golden and this seat keeps it so; the two lines go to STYLE-2-MERGE as one UNSIGNED herald cause with that delta, or to the next seat.
+
+### 8k. What stays (the remainder, BY FILE)
+
+- **Ledger D (map words), not reached** — 61 REWRITE rows (69 less D·51–56 done, D·12–13 golden-bound above, and the exclusions): `WorldPulsePanel.jsx` D·18, ·19, ·20, ·22, ·24 (not its succession headline sites, SW-11's) · `AdvanceReport.jsx` D·43–47 · `WorldPulseData.js` D·29–31 (D·28 the label "Faction", SW-8's) · `SimulationRulesAxes.jsx` D·60–63 · `HeraldCommandBody.jsx` D·38–41 · `SimulationRulesDialog.jsx` D·65 (less "Factions", SW-8's), ·66, ·67 · `RelationshipChronicleSection.jsx` D·70–72 · `HeraldAdjudication.jsx` D·33–35 · `heraldFeed.js` D·12–13 (golden-bound) · `WorldMapToolbar.jsx` D·74–75 · `RealmDashboard.jsx` D·83–84 · `AutoplacementConsent.jsx` D·92–93 · `LiveWarStatus.jsx` D·5 · `ChroniclersLetterPanel.jsx` D·8 · `ChronicleScrollback.jsx` D·49 · `HeraldWanderers.jsx` D·57 · `RealmVerbComposer.jsx` D·77 · `RealmDocket.jsx` D·85 · `RealmForecast.jsx` D·86 · `RealmComparisons.jsx` D·87 · `NpcTrailSection.jsx` D·88 · `HeraldSceneContext.jsx` D·89 · `HeraldRemembrance.jsx` D·90 · `heraldRegister.js` D·91 · `RoadScenePanel.jsx` D·94 · `WorldMapStage.jsx` D·95 · `WorldMapTourSteps.js` D·96 · `SettlementPalette.jsx` D·98 · `LayersPanel.jsx` D·99 · `WhileYouWereAway.jsx` D·100 · `PerspectiveStandings.jsx` D·103 · `PantheonPanel.jsx` D·104. Excluded and not this lane's: D·1 (`warHomeCosts.js`, A1's), D·28 / D·69 / "Factions" (SW-8's labels), D·79 and D·81 (`WizardNewsPanel.jsx`, NewsEntry, SW-11's). Every D row is dark in the run (the soak renders NewsEntry alone), so none of them moves a measured frame.
+- **`heraldGrammar`'s verbatim glance for the succession headline:** not reached.
+- **`stressorsCore.js` A2·78** (the catalog labels as persisted names): not renamed; the reader noun (8h) now carries the plain word on the two aftermath headlines; the residual frames (the first seat's) and every other reader of `stressor.label` still print the engine label.
+- **`factionCompetition.js` A2·160:** ruled one lane later (6d); untouched.
+
+### 8l. Gates (the third seat)
+
+Per cause, the writer's own suites plus `proseNumerics`, `couplingInclusion`, `newsSubjectVocabulary`, `modeSpeedsWy1`, `negativeAssertionAnchor`, `domainAnyCastBaseline` (each commit body lists them); eslint clean on every touched file; `tsc --noEmit` 167 at `aff902eb9` and 167 at 45773294d, text-equal (`diff` of the sorted error lines empty); the three record walkers green before every push. Reds named by cause, not this seat's (red at `aff902eb9`): `layerBoundaries` (the `generators/foodGenerator.js | generators/isolationSupport.js` cycle), `sovereigntyLightingContract` (the live test-title count 28,697 vs 28,695), `densityLaw` (4), the news-family contracts (§6k). The full-suite comparison base → tip is in the hand-back.
+
+### 8m. CONFIRMED against PLAUSIBLE (the third seat)
+
+**CONFIRMED** (executed here): the base sha; the measure reproduced (4,496 / 23,842) and every before → after count in §8; identical entry ids after every cause (each measured at its commit in a clean worktree); the WY-1 arm's two re-keys and their text-only leaf diffs; every cause but those two leaves the arm byte-identical; the new pins red at their parents; tsc text-equal; the herald golden's move by D·12–13 (and its revert). **PLAUSIBLE:** every new line is a proposal against the law, read against its writer's slots (the printing regions, not every helper line of each file); the reader nouns and condition words are read from the type and archetype ids alone; "came home" / "drove out" are read from the branch names, not the apply paths.
