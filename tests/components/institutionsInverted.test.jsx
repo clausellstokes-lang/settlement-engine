@@ -244,6 +244,9 @@ describe('7. the backs editor (X-45): the DM adds, removes or changes who a hous
     const { container } = render(<Live />);
     fireEvent.click(within(cardOf(container, 'Granary')).getByRole('button', { name: 'Edit who Granary backs' }));
     const editor = cardOf(container, 'Granary').querySelector('[data-testid="institution-backs-editor"]');
+    // the editor's hint names what the DM's choice does, without the machinery (SW-9; audit row InstitutionsTab:221)
+    expect(editor.textContent).toContain('Who this house stands behind. Your choice replaces the original.');
+    expect(editor.textContent).not.toMatch(/the engine derived/); // anchored: the hint is asserted present on the line above
     // the chips are the roster, the derived backer already pressed
     expect(within(editor).getByRole('button', { name: 'Merchant Council' }).getAttribute('aria-pressed')).toBe('true');
     expect(within(editor).getByRole('button', { name: 'Town Council' }).getAttribute('aria-pressed')).toBe('false');
