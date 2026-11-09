@@ -643,3 +643,11 @@ Pins: no fixture renders the legend (it shows while placing): unpinned, PLAUSIBL
 | D·96 the History tour step | `Every advance is remembered. Open History to walk back to any earlier point in the campaign: a byte-exact return, not a guess.` | "Every advance is remembered. Open History to go back to any earlier point in the campaign, exactly as it was." |
 
 Pins: `worldMapTourSteps.test.js` — the step's body pinned whole; **red at the parent**, green here. Registers: none moved.
+
+### 9ac. `SettlementPalette.jsx` (D·98)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·98 a settlement card's trouble tooltip | `Active stressor: {stressLabel}` | "Trouble now: {stressLabel}" |
+
+Pins: no fixture renders a card under a live stressor: unpinned, PLAUSIBLE; every suite naming the file green. Registers: none moved.
