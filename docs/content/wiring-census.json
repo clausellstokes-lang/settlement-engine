@@ -54136,7 +54136,7 @@
       "name": "NPC_FACTION_LOYALTY",
       "drawKind": "R",
       "drawSite": "npcGenerator.js:659/683/687 drawLoyalty → drawUnique (NPC plot-hook titles, keyed by category)",
-      "lines": 81,
+      "lines": 175,
       "declares": [],
       "lineDeclares": {
         "guardPresence": 9,
@@ -54146,7 +54146,7 @@
         "navigable": 1,
         "no navigable": 1
       },
-      "undeclared": 65,
+      "undeclared": 159,
       "crisisScoped": false
     },
     {
