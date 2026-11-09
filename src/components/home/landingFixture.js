@@ -153,7 +153,7 @@ export const fixture = {
       {
         "week": "Week 4",
         "season": "the spring of year 1",
-        "headline": "Religious conversion fracture has passed",
+        "headline": "The split between the faiths is over",
         "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet."
       },
       {
