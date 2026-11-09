@@ -872,7 +872,7 @@ export const NPC_CRIMINAL_SECRETS_BY_HOLDER = {
     ],
     personal: [
       {
-        secret: 'Has a second family in another settlement that neither family knows about',
+        secret: 'Has a second family elsewhere that neither family knows about',
         stakes: 'Both relationships collapse, along with any claim to moral authority',
       },
       {
@@ -906,7 +906,7 @@ export const NPC_CRIMINAL_SECRETS_BY_HOLDER = {
     ],
     political: [
       {
-        secret: 'Has been feeding strategic intelligence to a rival settlement',
+        secret: 'Has been feeding strategic intelligence to outsiders who pay for it',
         stakes: 'Treason charges; execution or exile in most jurisdictions',
       },
       {
