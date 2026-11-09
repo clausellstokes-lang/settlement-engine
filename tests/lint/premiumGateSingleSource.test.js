@@ -133,47 +133,13 @@ const EXEMPTIONS = {
   'src/components/gallery/GalleryDetail.jsx': 'campaign-or-import-entitlement',
   'src/components/gallery/GalleryMaps.jsx': 'campaign-or-import-entitlement',
   'src/components/instant/InstantWorldEntry.jsx': 'quota-or-limit',
-  'src/components/map/BeliefDivergenceBand.jsx': 'content-visibility',
-  // Joined 2026-08-04 by FP wave GR-0's DM true-state chip. The comparison is
-  // BeliefDivergenceBand's line VERBATIM, two files away — `tier === 'premium' ||
-  // elevated` — and it asks that file's question exactly: may this viewer be shown
-  // GROUND TRUTH, which is the reason class's own first example. Routing it through
-  // viewerCanAuthor would admit the founder tier to a surface premium-or-elevated
-  // currently defines, i.e. a paid-surface behaviour change, which this walker's header
-  // records as owner-gated. Recorded rather than converged, for that reason.
-  // ⚠ AND THE CHIP IS NOT DARK. treatyTrueStateChip is fail-closed on this AUTHORITY
-  // and NOT on treatyLifecycleVoiceEnabled: driven with the flag absent and lit it
-  // returns the identical sentence (executed 2026-08-04). GR-0's sibling surface, the
-  // longevity age line, IS flag-gated and returns null dark. So this row banks a live
-  // premium content surface, not a dormant one — reported to the chair as a stop, and
-  // this comment is where the next reader finds it.
-  'src/components/map/TreatyPanel.jsx': 'content-visibility',
-  // DESK-4 (T11 car 8): the believed half of the perspective-standings view is
-  // BeliefDivergenceBand's question verbatim, two files away — may this viewer
-  // be shown GROUND-TRUTH-ADJACENT DM knowledge (a settlement's private belief
-  // model). Same spelling, same reason class, same non-convergence rationale as
-  // that row above.
-  'src/components/map/PerspectiveStandings.jsx': 'content-visibility',
-  // LT39 car 4: the relationship chronicle's covert half. The comparison is
-  // PerspectiveStandings' line VERBATIM, in the file mounted directly beneath it
-  // in the same War door, and it asks that file's question exactly: may this
-  // viewer be shown DM knowledge — here the quiet business (spies, sabotage,
-  // bought men) the engine records against a relationship with no visibility
-  // field of its own. Routing it through viewerCanAuthor would admit the founder
-  // tier to a surface premium-or-elevated currently defines, i.e. a paid-surface
-  // behaviour change, which this walker's header records as owner-gated.
-  // ⚠ AND NOTE WHERE THE GATE ACTUALLY LIVES: this comparison only chooses what
-  // to ASK FOR. The withholding is done inside domain/display/relationshipChronicle.js,
-  // which drops every line that is not explicitly `public` — an unclassified type
-  // included — so a bug in this one line cannot open the secrets seam by itself.
-  'src/components/map/RelationshipChronicleSection.jsx': 'content-visibility',
-  // LT39 car 5: the NPC trail — the ladder's dated contests and seat changes.
-  // Same line, same door, same question as the two rows above: may this viewer be
-  // shown DM knowledge. A contest the loser never learned of is the loser's
-  // secret, so there is no player-facing form of that page at all, and the
-  // withholding is done inside domain/display/npcInteriorityRead.js, whose
-  // groundTruth block is fail-closed by its own constitution.
-  'src/components/map/NpcTrailSection.jsx': 'content-visibility',
+  // ⬇ TIER-PARITY-FIX V1-map (2026-11-09, the owner's tier law) STRUCK five rows here:
+  // BeliefDivergenceBand, TreatyPanel, PerspectiveStandings, RelationshipChronicleSection and
+  // NpcTrailSection. Each spelled `tier === 'premium' || elevated` to ask "may this viewer see
+  // DM knowledge", but each mounts only inside the world map's campaign Herald, whose outer gate
+  // (useWorldMapCampaignModel, the row below) already carries law (6): the inner term mirrored
+  // it, and it is DELETED (`includeGroundTruth = true`). The withholding still lives in each
+  // read model, fail-closed by default. The census shrinks by five.
   'src/components/map/useWorldMapCampaignModel.js': 'campaign-or-import-entitlement',
   // ⬇ TIER-PARITY-FIX V1 (2026-11-09, the owner's tier law) STRUCK the RumorsTab and WarTab
   // rows: their DM truth now keys on the view and the data (`!playerView && !publicDossier`),

@@ -313,13 +313,23 @@ describe('PerspectiveStandings — one observer, plain words, DM-gated beliefs',
     expect(screen.getAllByLabelText(/DM knowledge/).length).toBeGreaterThan(0);
   });
 
-  test('a free session keeps the public facts and NEVER the believed half (fail closed)', async () => {
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V1-map, 2026-11-09, the owner's tier law): the
+  // believed half's inner tier term only mirrored the world map's outer gate (law (6):
+  // useWorldMapCampaignModel hands a viewer without the world map NO campaign), so it was
+  // deleted; the panel is the DM's whatever the session's tier field reads. What stays
+  // fail-closed is the read model's player projection (empty) and the no-campaign page.
+  test('the believed half is the DM\'s page: any owner session reads it; the player projection is empty; no campaign, no page', async () => {
     storeState = { auth: { tier: 'free' }, isElevated: () => false };
     const { default: PerspectiveStandings } = await import('../../src/components/map/PerspectiveStandings.jsx');
-    render(<PerspectiveStandings campaign={campaignFixture()} nameById={NAMES} />);
+    const { settlementBeliefs } = await import('../../src/domain/display/settlementBeliefs.js');
+    const first = render(<PerspectiveStandings campaign={campaignFixture()} nameById={NAMES} />);
     const block = screen.getByTestId('perspective-standings');
     expect(block.textContent).toMatch(/campaigns beside Palmere/);
-    expect(block.textContent).not.toMatch(/believes/); // anchored: the same block just matched the public coalition fact, so the surface lives; the absent believes-line is the fail-closed claim.
+    expect(block.textContent).toMatch(/believes/);
+    first.unmount();
+    expect(settlementBeliefs({ worldState: campaignFixture().worldState, observerId: 'obs', includeGroundTruth: false })).toEqual([]);
+    const { container } = render(<PerspectiveStandings campaign={null} nameById={NAMES} />);
+    expect(container.innerHTML).toBe('');
   });
 
   test('switching the observer re-anchors the page; a standing-less observer reads an honest nothing', async () => {

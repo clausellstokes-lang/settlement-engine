@@ -57,9 +57,13 @@ afterEach(() => { cleanup(); vi.clearAllMocks(); });
 beforeEach(() => { storeState = {}; });
 
 describe('NpcTrailSection — ⛔ the fail-closed gate', () => {
-  test('a viewer WITHOUT ground truth gets nothing at all — there is no player form of this page', () => {
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V1-map, 2026-11-09, the owner's tier law): the
+  // panel's inner tier term only mirrored the world map's outer gate (law (6):
+  // useWorldMapCampaignModel hands a viewer without the world map NO campaign), so it was
+  // deleted. What stays closed is what the outer gate hands this page: no campaign, nothing.
+  test('a viewer the world map hands no campaign gets nothing at all — there is no player form of this page', () => {
     asPlayer();
-    const { container } = render(<NpcTrailSection campaign={campaign()} />);
+    const { container } = render(<NpcTrailSection campaign={null} />);
     expect(container.innerHTML).toBe('');
   });
 
