@@ -465,3 +465,12 @@ Pins: `heraldCommandDecisions.test.jsx` — the three receipts and the tombstone
 | D·75 control help | `Advances the living world by the interval you choose above (a week through a year). Each advance runs a pulse whose changes wait for your review.` · `Opens the simulation rules: the dials and engine waves that shape how the realm evolves.` | "Moves the living world forward by the interval you choose above (a week through a year). What needs your word waits in the World Pulse panel." (the old line's no-evidence claim struck: under Full or Routine autonomy most changes do not wait) · "Opens the simulation rules: the settings that decide how the realm changes." |
 
 Pins: `advanceMultiTickToolbar.test.jsx` ("the session-only caveat is preserved verbatim" re-keyed by identity to the new closing sentence, anchored at the title's end) and `mapToolbarControlHelp.test.jsx` (the Undo title; the two help lines, with an anchored negative); **red at the parent** (3 of 9), green here. The help panel's own Undo line ("Available for the current session only; …") is not a ledger D row and stays. Registers: none moved.
+
+### 9j. `RealmDashboard.jsx` (D·83–84)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·83 conflict delta | `+{n} conflict event(s) this tick` / `Quiet last tick` | "+{n} clash / clashes this advance" / "Quiet last advance" |
+| D·84 sphere stat's definition (title) | `A center holding three or more tributary, compelled, or puppet ties forms a sphere, an unnamed empire the topology exhibits. Its name is the DM's to give.` | "A settlement that holds three or more others as tributaries, subjects, or puppets forms a sphere: an empire in all but name. Its name is the DM's to give." (the stat's label and "No hegemony has formed" stay) |
+
+Pins: `realmHub.test.jsx` — the sphere title (D·84) with a negative on "topology", and a new test over the delta's two states (D·83); **red at the parent** (2 of 8), green here. Registers: none moved (the tuning inventory names the file as a dependent only; its walker green).
