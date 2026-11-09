@@ -295,9 +295,11 @@ function ActiveFaith({ model }) {
  * nothing) rather than a fixed sentence that denied the church on every generated settlement.
  * The upsell stands apart from it, below a rule: selling copy never reads as a fact about
  * the place.
- * @param {{ lines: ReadonlyArray<string>, publicDossier?: boolean, showUpsell?: boolean }} props
+ * SW-6 (R5): the DM's hint (`hint`, the model's) prints UNDER the line, in its own muted row,
+ * never joined into it: it is a note to the DM, not a fact about the place.
+ * @param {{ lines: ReadonlyArray<string>, hint?: string|null, publicDossier?: boolean, showUpsell?: boolean }} props
  */
-function FaithTeaser({ lines, publicDossier, showUpsell }) {
+function FaithTeaser({ lines, hint = null, publicDossier, showUpsell }) {
   // THE PHONE PROSE FLOOR — the true-neutral line and the upgrade prompt, the
   // two passages this teaser exists to carry.
   const mobile = useIsMobile();
@@ -328,6 +330,11 @@ function FaithTeaser({ lines, publicDossier, showUpsell }) {
       <div data-testid="faith-line" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         {lines.join(' ')}
       </div>
+      {hint && (
+        <div data-testid="faith-hint" style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.45 }}>
+          {hint}
+        </div>
+      )}
       {showUpsell && !publicDossier && (
         <div data-testid="faith-upsell" style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', borderTop: `1px solid ${BORDER}`, paddingTop: 8, marginTop: 4 }}>
           <span style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
@@ -363,5 +370,5 @@ export default function FaithSection({ settlement, publicDossier = false }) {
   if (model.hasEmbed) return <ActiveFaith model={model} />;
   // TEASER — no embeds: the faith line (names NO deity) for every owner; the upsell apart,
   // only for the viewer who does not hold what it sells.
-  return <FaithTeaser lines={model.line || []} publicDossier={publicDossier} showUpsell={!isPremium} />;
+  return <FaithTeaser lines={model.line || []} hint={model.hint} publicDossier={publicDossier} showUpsell={!isPremium} />;
 }

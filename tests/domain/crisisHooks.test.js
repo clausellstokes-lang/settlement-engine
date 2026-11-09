@@ -54,7 +54,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
         [{ factionId: 'Merchants', stake: 'gains', reason: STAKE_REASONS.gainsHolds }, { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses }]),
     };
     expect(crisisHooksOf(town(), entry)).toEqual([{
-      text: 'The famine turns on the Town granary, run by Mara Vell: if it gives way, Town Council loses most, because the crisis hits its base.',
+      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, Town Council loses most, because its own people feel the crisis first.',
       bound: 'lever',
       link: { kind: 'faction', id: 'Town Council', label: 'Town Council' },
     }]);
@@ -80,7 +80,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const fed = town({ economicState: { foodSecurity: { label: 'Secure' } } });
     const entry = { type: 'famine', cast: cast([npcRow('lever', 'n1', 'Mara Vell', CAST_REASONS.leverRuns)]) };
     const [hook] = crisisHooksOf(fed, entry);
-    expect(hook.text).toBe('In the crisis, Mara Vell of Millers’ Guild holds the key to it: holds the office the crisis turns on.');
+    expect(hook.text).toBe('In the crisis, Mara Vell of Millers’ Guild holds the key to it: runs the office that decides how the crisis goes.');
     expect(hookTruthViolations(hook.text, settlementHookFacts(fed))).toEqual([]);
   });
 
@@ -144,5 +144,70 @@ describe('slotCrisisHook: the catalog sentence gains a {holder} slot only where 
     const c = cast([npcRow('lever', 'n1', 'Mara Vell', 'r')]);
     expect(slotCrisisHook('mass_migration', STRESS_TYPE_MAP.mass_migration.crisisHook, c)).toBe(STRESS_TYPE_MAP.mass_migration.crisisHook);
     expect(slotCrisisHook('famine', 'The DM’s own words.', c)).toBe('The DM’s own words.');
+  });
+});
+
+// SW-6 CRISIS-SURFACES (W4 row 262; STYLE-RULINGS-2 B3): the garbled casting lines — "Occupation Authority
+// speaks for the occupier here: leads the occupying power" (soak1k-2), "leads the defence: leads the military"
+// (soak1k-5). The clause says the role; a reason that only echoes it is not printed after it.
+describe('crisisHooksOf: a cast hook never echoes its own clause', () => {
+  const occupier = { role: 'face', kind: 'faction', id: 'Occupation Authority', name: 'Occupation Authority', reason: CAST_REASONS.face, temporary: false };
+  it('the occupier\'s house as its own face reads as one plain sentence', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'occupied', cast: { ...cast([occupier]), nature: 'external' } });
+    expect(hook.text).toBe('In the occupation, the occupier\'s orders come through Occupation Authority.');
+  });
+  it('a defender who leads the military is not told twice that they lead it', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'wartime', cast: { ...cast([npcRow('defender', 'n2', 'Oswin Hale', CAST_REASONS.defenderMilitary)]), nature: 'external' } });
+    expect(hook.text).toBe('In the war, Oswin Hale of Town Council leads the defence.');
+  });
+});
+
+// SW-6 CRISIS-SURFACES (W4 rows 266, 267; STYLE-RULINGS-2 B3): "The raids turns on the Professional city watch …
+// decides how the raids goes" (soak1k-4); "The war turns on the Blacksmiths (3-10)" (soak1k-5); "the Inns and
+// taverns (district)" (soak1k-0). The verb agrees with the noun, and the house reads as prose.
+describe('crisisHooksOf: the lever hook in plain grammar', () => {
+  const lever = (institution, holderName = null) => ({ institution, holderId: holderName ? 'n2' : null, holderName });
+  it('a plural crisis noun takes a plural verb, and the catalogue\'s capital does not print mid-sentence', () => {
+    const hooks = crisisHooksOf(town(), { type: 'monster_pressure', cast: cast([], [lever('Professional city watch', 'Oswin Hale')]) });
+    expect(hooks.map((h) => h.text)).toEqual(['The raids turn on the professional city watch, run by Oswin Hale: whoever wins it over decides how the raids go.']);
+  });
+  it('the roster\'s count and district tags never print in the sentence', () => {
+    const loser = { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses };
+    const war = crisisHooksOf(town(), { type: 'wartime', cast: { ...cast([], [lever('Blacksmiths (3-10)', 'Oswin Hale')], [loser]), nature: 'external' } });
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(war.map((h) => h.text).join(' ')).not.toMatch(/\(|\)/);
+    expect(war[0].text).toMatch(/^The war turns on the blacksmiths, run by Oswin Hale: /);
+    const inns = crisisHooksOf(town(), { type: 'mass_migration', cast: cast([], [lever('Inns and taverns (district)')]) });
+    expect(inns[0].text).toBe('The migration turns on the inns and taverns: whoever wins it over decides how the migration goes.');
+  });
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3): "Nawal al-Aziz of Guild Council takes the worst of it: it takes the
+// blame, and its good name pays for the crisis" (soak1k-3) — "it" for a person. The reason speaks of the house.
+describe('crisisHooksOf: a person is never "it"', () => {
+  it('the legitimacy brunt\'s reason names the house that takes the blame, for a person or the house alike', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'famine', cast: cast([npcRow('brunt', 'n2', 'Oswin Hale', CAST_REASONS.bruntBase.public_legitimacy)]) });
+    expect(hook.text).toBe('In the famine, Oswin Hale of Town Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.');
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(hook.text).not.toMatch(/: it takes/);
+  });
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3; C·P1, soak1k-7): "In the factional split, …" carried the retired word.
+describe('CRISIS_NOUN: no retired word', () => {
+  it('no crisis is spoken of with "faction"', () => {
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(Object.values(CRISIS_NOUN).join(' ')).not.toMatch(/faction/i);
+    expect(CRISIS_NOUN.politically_fractured).toBe('split');
+  });
+});
+
+// SW-6 (SW-10's referral, the chair 12:59): "if it gives way, Religious Authorities loses most, because … its …".
+describe('crisisHooksOf: a plural power agrees', () => {
+  it('a plural losing power takes "lose" and "their"; a singular one keeps "loses" and "its"', () => {
+    const lever = { institution: 'Temple', holderId: null, holderName: null };
+    const hookFor = (factionId) => crisisHooksOf(town(), { type: 'plague_onset', cast: cast([], [lever], [{ factionId, stake: 'loses', reason: STAKE_REASONS.loses }]) })[0].text;
+    expect(hookFor('Religious Authorities')).toMatch(/Religious Authorities lose most, because their own people feel the crisis first\.$/);
+    expect(hookFor('Town Council')).toMatch(/Town Council loses most, because its own people feel the crisis first\.$/);
   });
 });

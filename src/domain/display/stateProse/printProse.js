@@ -677,6 +677,9 @@ export function buildPrintProse(settlement, ctx = {}) {
     ...(faithModel.hasEmbed ? [] : [(faithModel.line || []).join(' ')]),
     printed('faith.teaser', faith.faithTeaser),
   ]);
+  // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 A1 R5; the chair's ruling of 14:4x): the DM's hint (the god and the
+  // church's name are theirs to set) prints UNDER the teaser as its own kicker-less position, never woven in.
+  if (!faithModel.hasEmbed && faithModel.hint) put('faith', 'faith.hint', [faithModel.hint]);
   if (faithSeam) put('faith', 'faith.creedStanding', [
     printed('faith.creedStanding', faith.creedStanding),
     printed('faith.creedStanding', faith.creedLegitimacy),
@@ -696,5 +699,12 @@ export function buildPrintProse(settlement, ctx = {}) {
     Object.entries(out).map(([tab, rows]) => [tab, Object.freeze(rows)]),
   ));
 }
+
+/**
+ * The print-native positions (SW-6, R5): a note the page prints under a desk position, not a desk
+ * block, so the mount registry routes none of them. `faith.hint` is the only one.
+ * @type {ReadonlyArray<string>}
+ */
+export const PRINT_NATIVE_POSITIONS = Object.freeze(['faith.hint']);
 
 export default buildPrintProse;

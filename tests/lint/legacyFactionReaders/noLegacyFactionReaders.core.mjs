@@ -43,7 +43,7 @@ export const OTHER_SHAPES = Object.freeze({
   'src/components/settlement/EventComposer.jsx:179': 'the DM\'s custom powers',
   'src/components/dossier/CascadePreviewPanel.jsx:288': 'the preview\'s powers count (MERGE-5AB ruling 1: the preview is the edit layer\'s)',
   'src/lib/editFingerprint.js:63': 'the preview\'s powers count (MERGE-5AB ruling 1)',
-  'src/domain/dossier/plotHooks.js:452': 'a tension\'s camps', // re-keyed by identity 445 -> 452 at MERGE-WAVE's FIX-EXPORT-KEYS point: W7 HOOKS's conflict hooks (fdf41ee95) sit above it
+  'src/domain/dossier/plotHooks.js:462': 'a tension\'s camps', // re-keyed by identity 445 -> 452 at MERGE-WAVE's FIX-EXPORT-KEYS point: W7 HOOKS's conflict hooks (fdf41ee95) sit above it; 452 -> 462 at SW-6 CRISIS-SURFACES (91622ea6f): the import and `titleOfToken` sit above it
   'src/domain/aiGrounding.js': 'the powers\' profiles', 'src/domain/coherence/readerBattery.js:307': 'a tension',
   'src/domain/density/densityBands.js': 'the signed band', 'src/domain/display/defenseDisplay.js': 'the crime signal',
   'src/domain/dossier/dossierSearch.js:329': 'the search index', 'src/domain/dossier/realmEntityWeb.js:163': 'the search index',

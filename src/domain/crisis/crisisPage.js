@@ -19,7 +19,7 @@
 
 import { crisisHookFor } from './crisisHooks.js';
 import { crisisContainer } from '../facts/crisisKind.js';
-import { CRISIS_ROLE_LABEL, effectiveCastOf } from './crisisCast.js';
+import { CRISIS_ROLE_LABEL, STAKE_REASONS, effectiveCastOf } from './crisisCast.js';
 import { composeTonightSheet } from '../summary/tonightSheet.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
@@ -49,7 +49,9 @@ export const CRISIS_PAGE_COPY = Object.freeze({
   add: 'Add',
   pointer: 'Open the Crisis tab',
   begunByYou: 'begun by your event',
-  stake: Object.freeze({ gains: 'gains', loses: 'loses', split: 'split' }),
+  // SW-6 CRISIS-SURFACES (B3, A·C4: "split. not touched yet" contradicted itself on every untouched row): a power
+  // the crisis has not touched prints as having no stake yet, never as split.
+  stake: Object.freeze({ gains: 'gains', loses: 'loses', split: 'split', untouched: 'no stake yet' }),
   // STYLE-AUDIT row 21 (W4 PEOPLE, second seat, 2026-11-07): the event line prints the kind as its
   // heading; the cast's classification (natural, social, engineered, external) is machinery and is
   // no longer printed. A migration says which way it runs (WAVE-RULINGS item 8: both sets).
@@ -74,7 +76,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
  * @typedef {Object} CrisisPageStake
  * @property {string} factionId
  * @property {string} doorId
- * @property {'gains' | 'loses' | 'split'} stake
+ * @property {'gains' | 'loses' | 'split' | 'untouched'} stake  'untouched': the record's split stake with the untouched reason
  * @property {string} reason
  *
  * @typedef {Object} CrisisPageLever
@@ -164,6 +166,16 @@ function eventLine(label, entry, noun) {
 }
 
 /**
+ * The stake the page prints: the record's own, except a split that is the untouched power's (the record keeps
+ * `split` for the waverer's rule; the reader is told the power has no stake yet).
+ * @param {{ stake: 'gains' | 'loses' | 'split', reason: string }} k
+ * @returns {'gains' | 'loses' | 'split' | 'untouched'}
+ */
+function stakeShown(k) {
+  return k.stake === 'split' && k.reason === STAKE_REASONS.untouched ? 'untouched' : k.stake;
+}
+
+/**
  * Compose the whole page: one section per active crisis, worst first.
  * @param {PageSettlement | null | undefined} settlement
  * @returns {CrisisPageSection[]}
@@ -210,7 +222,7 @@ export function composeCrisisPage(settlement) {
       })),
       absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) })),
       edited,
-      stakes: (entry.cast?.stakes || []).map((k) => ({ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: k.stake, reason: speak(k.reason) })),
+      stakes: (entry.cast?.stakes || []).map((k) => ({ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: stakeShown(k), reason: speak(k.reason) })),
       levers: (entry.cast?.levers || []).map((l) => ({
         institution: l.institution,
         doorId: castDoorId(s, 'institution', l.institution),

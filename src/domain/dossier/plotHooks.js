@@ -9,6 +9,7 @@ import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.j
 import { crisisHooksOf, leverAndLoserOf } from '../crisis/crisisHooks.js';
 import { effectiveCastOf } from '../crisis/crisisCast.js';
 import { firstPowerOf as cardFirstPowerOf, powerOrderOf } from '../people/cardPowers.js';
+import { humanizeToken } from '../display/humanizeEngineTokens.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -22,6 +23,15 @@ const TENSION_LABELS = Object.freeze({
   resource_scarcity: 'Resource Scarcity',
   succession_crisis: 'Succession Crisis',
 });
+
+/**
+ * A tension type the label map does not hold, titled in words: `corruption_scandal` →
+ * `Corruption Scandal`. '' for a non-string or an empty key.
+ * @param {unknown} token @returns {string}
+ */
+function titleOfToken(token) {
+  return humanizeToken(token).replace(/\b[a-z]/g, (c) => c.toUpperCase());
+}
 
 const EVENT_LABELS = Object.freeze({
   disaster: 'Disaster',
@@ -550,7 +560,8 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   });
 
   (settlement.history?.currentTensions || []).forEach((tension) => {
-    const label = TENSION_LABELS[/** @type {keyof typeof TENSION_LABELS} */ (tension.type)] || tension.type || 'Tension';
+    // SW-6 CRISIS-SURFACES (B3): a type the map lacks is titled in words, never its raw key ("corruption_scandal").
+    const label = TENSION_LABELS[/** @type {keyof typeof TENSION_LABELS} */ (tension.type)] || titleOfToken(tension.type) || 'Tension';
     (tension.plotHooks || []).forEach((hook) => push(hooks, {
       text: plotHookText(hook),
       source: label,

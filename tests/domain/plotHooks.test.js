@@ -150,7 +150,7 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
       links: [{ kind: 'npc', id: 'n1', label: 'Mara Vell' }],
     });
     expect(hooks[1]).toMatchObject({
-      text: 'The famine turns on the Town granary, run by Mara Vell: if it gives way, Town Council loses most, because the crisis hits its base.',
+      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, Town Council loses most, because the crisis hits its base.',
       crisis: 'famine', links: [{ kind: 'faction', id: 'Town Council', label: 'Town Council' }],
     });
     // the place's own hooks follow, in the order they always had: the count above them is a floor
@@ -182,5 +182,27 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
     };
     expect(hookTruthFindings(armed)).toEqual([]);
     expect(collectPlotHooks(armed).map((h) => h.text)).toEqual(OWN);
+  });
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, 2026-11-09): a tension type the label map does not
+// hold printed its raw engine key as the hook's title ("corruption_scandal" on Tonight and Plot
+// Hooks, soak1k-6). A title is never a snake_case key.
+describe('collectPlotHooks tension titles', () => {
+  test('a tension type missing from the label map is titled in words, never as its raw key', () => {
+    const hooks = collectPlotHooks({
+      history: {
+        currentTensions: [{
+          type: 'corruption_scandal',
+          description: 'The tax ledgers were found altered.',
+          plotHooks: ['Someone paid the clerk to alter the ledgers.'],
+        }],
+      },
+    });
+    const sources = hooks.map((hook) => hook.source);
+    expect(sources).toHaveLength(1);
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(sources[0]).not.toMatch(/_/);
+    expect(sources[0]).toBe('Corruption Scandal');
   });
 });

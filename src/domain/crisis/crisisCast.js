@@ -148,7 +148,7 @@ export const CAST_REASONS = Object.freeze({
     labor_capacity: 'its people do the work the crisis needs most',
     trade_connectivity: 'its trade is cut',
     defense_readiness: 'its people stand on the walls',
-    public_legitimacy: 'it takes the blame, and its good name pays for the crisis',
+    public_legitimacy: 'the blame falls on the house, and its good name pays for the crisis', // SW-6 (B3): never "it" for a person
     healing_capacity: 'its people tend the sick',
     tax_revenue: 'its income dries up first',
     housing_pressure: 'its people take in the newcomers',
@@ -157,27 +157,28 @@ export const CAST_REASONS = Object.freeze({
     law_order: 'its people keep an order that is failing',
     criminal_opportunity: 'its streets are where the crime lands',
   })),
-  bruntLeast: 'the least powerful of the house the crisis hits',
-  leverRuns: 'holds the office the crisis turns on',
+  // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 A1, R1–R3): the fragments in the cast's own voice, no gender, no unread noun.
+  bruntLeast: 'the one with the least say in the house the crisis hits',
+  leverRuns: 'runs the office that decides how the crisis goes',
   leverInstitution: 'whoever runs it decides how the crisis goes, and nobody named here runs it',
   leverTemporary: 'nobody here could, so this one stepped in for the crisis',
-  instigatorRival: 'outranks the seat while it weakens',
+  instigatorRival: 'already carries more weight than whoever holds the seat, and gains as the seat weakens',
   instigatorGains: 'its faction gains from the crisis',
   instigatorLinked: 'drawn from the house that bore the famine',
   targetSeat: 'holds the seat',
-  targetSeatContested: 'holds the seat, with legitimacy already contested',
+  targetSeatContested: 'holds the seat, and the right to it is already in dispute', // SW-6 second seat (B3): the rule's word "legitimacy" out
   targetGoverning: 'the governing house',
   targetLinked: "the occupation's resistance turns on its local face",
   exploiterCorrupt: 'corrupt, with ties to the underworld',
   exploiterTrait: 'grasping by nature, in a faction that gains',
   exploiterPower: 'the most powerful of a faction that gains',
   exploiterLinked: "the siege's profiteer, still selling what the siege cut off",
-  scapegoatSeat: 'holds the seat, blamed while legitimacy is contested',
-  scapegoatLever: 'holds the lever, blamed while legitimacy is contested',
+  scapegoatSeat: 'holds the seat, and takes the blame while the right to it is in dispute', // SW-6 second seat (B3)
+  scapegoatLever: 'runs the office the crisis turns on, and takes the blame while the seat is in dispute', // SW-6 second seat (B3): "the lever" is the engine's word
   defenderMilitary: 'leads the military',
   defenderOffice: "holds the garrison's office",
   defenderInstitution: "the town's defence, with no one on the roster leading it",
-  treaterMerchant: 'leads the merchants, the seat being contested',
+  treaterMerchant: 'a merchant, with the seat itself in dispute', // SW-6 second seat (B3): any member of a merchant house, so no "leads"
   treaterSeat: 'holds the seat',
   collaboratorCorrupt: 'corrupt, with ties to the underworld',
   collaboratorAmbition: 'the most ambitious of a faction that gains',
@@ -211,14 +212,14 @@ export const STAKE_REASONS = Object.freeze({
   gainsChurch: 'the church gains while the seat struggles',
   gainsMerchants: 'the merchants gain while the seat is endorsed',
   gainsCrime: 'crime gains from the disorder',
-  gainsRival: 'outranks the seat while it weakens',
+  gainsRival: 'already carries more weight than whoever holds the seat', // SW-6 (B3 C4): R3's fact, without the echo of "gains"
   gainsClaim: 'a rival claim to govern gains by it',
   gainsHolds: 'holds what the crisis makes scarce',
   gainsOccupier: 'the occupier gains by it',
-  loses: 'the crisis hits its base',
+  loses: 'its own people feel the crisis first', // SW-6 (B3 C4): "its base" was the rule's word
   losesSeat: 'the seat bears the blame',
   split: 'gains and loses by it at once',
-  untouched: 'not touched yet; it could side with either camp',
+  untouched: 'it could side with either camp', // SW-6 (B3 A·C4): the page's label says "no stake yet"
 });
 
 // ── The levers: the houses each kind turns on, and the faces that run them ─────────────────

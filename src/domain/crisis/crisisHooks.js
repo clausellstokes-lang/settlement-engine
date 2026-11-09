@@ -32,10 +32,12 @@
  */
 
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
-import { effectiveCastOf, requiredRolesOf } from './crisisCast.js';
+import { CAST_REASONS, effectiveCastOf, requiredRolesOf } from './crisisCast.js';
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
+import { institutionDisplayName } from '../display/institutionDisplayName.js';
+import { pluralPowerName } from '../display/governanceAccount.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -52,7 +54,7 @@ export const CRISIS_NOUN = Object.freeze(/** @type {Record<string, string>} */ (
   under_siege: 'siege',
   famine: 'famine',
   occupied: 'occupation',
-  politically_fractured: 'factional split',
+  politically_fractured: 'split', // SW-6 CRISIS-SURFACES (B3, C·P1): "In the factional split" carried the retired word
   indebted: 'debt crisis',
   recently_betrayed: 'betrayal',
   infiltrated: 'infiltration',
@@ -69,6 +71,21 @@ export const CRISIS_NOUN = Object.freeze(/** @type {Record<string, string>} */ (
 /** The noun of last resort: an unknown kind, or a noun the record contradicts. */
 const PLAIN_NOUN = 'crisis';
 
+/** The crisis nouns that take a plural verb ("the raids turn"; B3: "The raids turns on …"). */
+const PLURAL_NOUNS = Object.freeze(new Set(['raids']));
+
+/**
+ * A house as a sentence speaks it (SW-6 CRISIS-SURFACES, B3: "the Blacksmiths (3-10)", "the Inns and taverns
+ * (district)", "the Professional city watch"): the setting-neutral label (`institutionDisplayName`), without the
+ * roster's count or district tag, and lower-led where the catalogue's sentence case would put a capital mid-
+ * sentence. A name with a capital past its first letter (a DM's own "Stormwatch Keep") keeps its case.
+ * @param {string} name @returns {string}
+ */
+export function houseInProse(name) {
+  const label = institutionDisplayName(name).replace(/\s*\((?:\d+(?:\s*[-–]\s*\d+)?|district)\)\s*$/i, '').trim();
+  return /^[A-Z][^A-Z]*$/.test(label) ? label[0].toLowerCase() + label.slice(1) : label;
+}
+
 /**
  * The line roles as a clause naming their holder. PROPOSAL C1 (the lane's report): one clause per
  * line role, the holder's name in it, so a house or an institution reads as well as a person.
@@ -82,8 +99,18 @@ export const LINE_ROLE_CLAUSE = Object.freeze({
   target: (h) => `it is aimed at ${h}`,
   defender: (h) => `${h} leads the defence`,
   treater: (h) => `${h} is the one who would come to terms`,
-  face: (h) => `${h} speaks for the occupier here`,
+  // SW-6 CRISIS-SURFACES (W4 row 262; B3's garbled line "Occupation Authority speaks for the occupier here: leads
+  // the occupying power"): the occupier's orders reach the place through the holder, a person or the house itself.
+  face: (h) => `the occupier's orders come through ${h}`,
 });
+
+/**
+ * The reasons a line role's clause already says (SW-6 CRISIS-SURFACES, B3: "leads the defence: leads the
+ * military"; "speaks for the occupier here: leads the occupying power"). Where the holder's reason is one of
+ * these, the cast hook is the clause alone, never the clause and its echo.
+ * @type {ReadonlySet<string>}
+ */
+const CLAUSE_SAYS = new Set([CAST_REASONS.face, CAST_REASONS.defenderMilitary]);
 
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v : '');
@@ -143,7 +170,7 @@ export function leverAndLoserOf(cast) {
  * The cast hook's sentence for a noun. PROPOSAL C1.
  * @param {string} noun @param {string} clause @param {string} reason
  */
-const castSentence = (noun, clause, reason) => `In the ${noun}, ${clause}: ${reason}.`;
+const castSentence = (noun, clause, reason) => (CLAUSE_SAYS.has(reason) ? `In the ${noun}, ${clause}.` : `In the ${noun}, ${clause}: ${reason}.`);
 
 /**
  * The lever hook's sentence for a noun. PROPOSAL L1 (with a loser) and L2 (none loses).
@@ -151,11 +178,25 @@ const castSentence = (noun, clause, reason) => `In the ${noun}, ${clause}: ${rea
  */
 function leverSentence(noun, house, holder, loser) {
   const run = holder ? `, run by ${holder}` : '';
+  // SW-6 CRISIS-SURFACES (W4 rows 266, 267; B3): the verb agrees with a plural noun, and the house reads as prose.
+  const [turns, goes] = PLURAL_NOUNS.has(noun) ? ['turn', 'go'] : ['turns', 'goes'];
+  const place = houseInProse(house);
   // W7 HOOKS (rows 263, 271): what the crisis turns on and who loses, in plain words; "the players can push
   // on" was machinery (the DM decides what the players push on).
   return loser
-    ? `The ${noun} turns on the ${house}${run}: if it gives way, ${loser.factionId} loses most, because ${loser.reason}.`
-    : `The ${noun} turns on the ${house}${run}: whoever wins it over decides how the ${noun} goes.`;
+    ? `The ${noun} ${turns} on the ${place}${run}: if it gives way, ${loserClause(loser)}.`
+    : `The ${noun} ${turns} on the ${place}${run}: whoever wins it over decides how the ${noun} ${goes}.`;
+}
+
+/**
+ * The losing power's clause (SW-6, SW-10's referral 2026-11-09: "Religious Authorities loses most … its"): a plural
+ * power (`governanceAccount.js :: pluralPowerName`, the head word) takes a plural verb and "their".
+ * @param {import('./crisisCast.js').CastStake} loser @returns {string}
+ */
+function loserClause(loser) {
+  const plural = pluralPowerName(loser.factionId);
+  const reason = plural ? loser.reason.replace(/\bits\b/g, 'their') : loser.reason;
+  return `${loser.factionId} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
 }
 
 /**

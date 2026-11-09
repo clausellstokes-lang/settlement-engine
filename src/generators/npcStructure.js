@@ -87,323 +87,332 @@ function reg(cat, cond, dom, sub) {
 }
 
 // ── government ────────────────────────────────────────────────────────────────
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B10(b); STYLE-2-SURFACES §7·F F1/F2): the seat-holders' position and
+// constraint in plain words — what a visitor would see and what binds the holder — the "Formal title … not the
+// same thing" coda struck. The goals are untouched (retired by car 4's A9; dead text until a post-deploy packet).
 reg('government',GOVERNANCE_FRACTURED,
-  { position:  'Holds nominal governing authority where the legitimacy of that position is in active question. Formal title and real decision-making power are not the same thing.',
+  { position:  'Holds the seat in name, but fewer people come when called, and some orders go unanswered.',
     goal:      'Get the seat obeyed again before the week is out, or find a quiet way out of it.',
-    constraint:'Cannot take the action most likely to restore legitimacy without exposing the informal arrangements that currently keep governance functional.' },
-  { position:  'Occupies a civic position whose authority depends on a governing structure that is itself under question. Institutional standing is borrowed from above.',
+    constraint:'Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.' },
+  { position:  'Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.',
     goal:      'Keep their office through the collapse without being seen with the failing seat or its rivals.',
-    constraint:'Acting to protect the position looks like opportunism; doing nothing risks being caught in the collapse of the structure this position depends on.' }
+    constraint:'Moving to protect the office looks like a grab; standing still means falling with the seat.' }
 );
 reg('government','corruption',
-  { position:  'Governs within or alongside informal arrangements with criminal interests. Official and actual authority are partially different systems.',
+  { position:  'Holds the seat while criminals pay for favours close to it; some orders that matter are settled elsewhere.',
     goal:      'Keep the seat running without crossing the people whose payments keep it running.',
-    constraint:'Cannot act decisively against criminal interests without dismantling arrangements the governance structure currently relies on.' },
-  { position:  'Holds a civic position inside a governance structure with compromised elements, not the source of the corruption, but operating within it.',
+    constraint:'Cannot move against the criminals without cutting off the payments the seat now runs on.' },
+  { position:  'Holds an office among officials who take bribes; not one of the takers, but working beside them.',
     goal:      'Show their own books are clean while the people above them take payments.',
-    constraint:'Any investigation or challenge to the corrupt arrangements requires the cooperation of institutions that are themselves compromised.' }
+    constraint:'Any honest inquiry needs the help of officials who are themselves on the take.' }
 );
 reg('government','food_crisis',
-  { position:  'Holds governing authority during supply failure. Civic order and governing legitimacy are both contingent on how this crisis resolves.',
+  { position:  'Holds the seat while the food runs short; how the hunger ends will decide whether the seat is kept.',
     goal:      'Get food to every door before a rival for the seat does it first.',
-    constraint:'Cannot distribute what does not exist, and cannot admit the full scale of shortage without accelerating the loss of confidence this role depends on.' },
-  { position:  'Occupies a civic position with limited direct control over supply. Accountable for crisis conditions without the authority to address them.',
+    constraint:'Cannot hand out food that is not there, and cannot say how short it is without frightening people further.' },
+  { position:  'Holds an office that is blamed for the shortage but has little say over the food.',
     goal:      'Be seen handing out what little there is, and let the blame for the rest go upward.',
-    constraint:'Visible effort without visible results extends accountability rather than resolving it.' }
+    constraint:'Being seen to work hard while the food stays short only spreads the blame.' }
 );
 reg('government','economic_stress',
-  { position:  'Governs a settlement under persistent economic pressure. The faction\'s legitimacy depends partly on economic performance it cannot currently deliver.',
+  { position:  'Holds the seat while money is short, and people judge the seat by what it can no longer pay for.',
     goal:      'Win the people back with things that cost nothing: fair hearings and quick answers.',
-    constraint:'Cannot make the structural investments that would address the economic situation without resources the settlement does not have.' },
-  { position:  'Holds a civic position in an economically pressured settlement where governance capacity is reduced along with fiscal capacity.',
+    constraint:'Cannot pay for the repairs and relief people want without coin the place does not have.' },
+  { position:  'Holds an office whose purse shrinks with everyone else\'s.',
     goal:      'Become the one person who signs off on every coin the seat still spends.',
-    constraint:'Indispensability in a resource-constrained environment means competing with other civic positions for the same shrinking share.' }
+    constraint:'Every office is after the same few coins; making this one needed means taking from the others.' }
 );
 reg('government','contested',
-  { position:  'Holds governing authority that is contested. The position is held but not secured.',
+  { position:  'Holds the seat, but a rival claims it, and the matter is not settled.',
     goal:      'Win the doubters back before the challenger to the seat wins them first.',
-    constraint:'Every move to consolidate the position risks galvanizing opposition; every inaction gives the opposition time to consolidate instead.' },
-  { position:  'Occupies a civic position whose institutional standing depends on a governing authority that is itself under challenge.',
+    constraint:'Every hard move wins the rival new supporters; every delay gives the rival time.' },
+  { position:  'Holds an office that hangs on a seat someone else is trying to take.',
     goal:      'Stay off both sides of the fight for the seat until it is plain who wins.',
-    constraint:'Delayed commitment reduces the value of the eventual alignment without reducing the cost of having waited.' }
+    constraint:'Waiting to see who wins keeps the office safe today and earns no thanks from the winner.' }
 );
 reg('government','stable',
-  { tags: CALM_ONLY, position:  'Holds governing authority in a settlement with functional legitimacy. The position is secure enough to act from rather than defend.',
+  { tags: CALM_ONLY, position:  'Holds the seat, and people accept it; there is room to act, not just to hold on.',
     goal:      "Find and mend the seat's weak spot before a rival finds it first.", // W3 POW (the owner's style law of 2026-11-07; STYLE-AUDIT #211): the CLAIMS 'current stability' row re-anchored
-    constraint:'Stability reduces the sense of urgency that would justify the resources and disruption required to address those vulnerabilities.' },
-  { tags: CALM_ONLY, position:  'Holds a civic position in a well-functioning settlement. The role is defined by administration rather than crisis.',
+    constraint:'With nothing pressing, it is hard to win support for mending the weak spots before they break.' },
+  { tags: CALM_ONLY, position:  'Holds an office that runs from day to day, with no crisis to answer.',
     goal:      'Do every task the seat hands them so well that the seat cannot do without them.',
-    constraint:'Credible administration is expected, not rewarded. The upside is limited and the downside of failure is disproportionate.' }
+    constraint:'Good work is expected and goes unnoticed; a mistake is remembered.' }
 );
 
 // ── military ──────────────────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the armed seat-holders in plain words, the machinery struck; the goals untouched.
 reg('military',GOVERNANCE_FRACTURED,
-  { position:  'Commands enforcement capacity where civilian governance is failing. The military\'s relationship with civilian authority is under pressure.',
+  { position:  'Commands those under arms while the seat loses its hold; whoever gives the orders next will want them.',
     goal:      'Keep the people under their command together, whoever ends up giving the orders.',
-    constraint:'Cannot act unilaterally to fill the governance vacuum without becoming a political actor in ways that compromise the institutional neutrality the role requires.' },
-  { position:  'Commands a subordinate enforcement unit in a settlement where institutional authority is fragmented. Orders may be coming from multiple competing sources.',
+    constraint:'Cannot step in to keep order without taking a side in the fight over the seat.' },
+  { position:  'Leads a squad that now takes orders from more than one master.',
     goal:      'Stop any faction buying their squad away from them while the seat is broken.',
-    constraint:'Institutional loyalty in a fragmented governance environment requires active management that cannot be publicly acknowledged as such.' }
+    constraint:'Keeping the squad in hand takes quiet favours that no one can be told about.' }
 );
 reg('military','corruption',
-  { position:  'Leads enforcement in a settlement where criminal interests have arrangements with parts of the security apparatus.',
+  { position:  'Commands those under arms while criminals pay some of the people in their ranks.',
     goal:      'Find out which of their own officers are on the take, before the payers notice.',
-    constraint:'Investigating the arrangements exposes the investigators to the same pressures that created them.' },
-  { position:  'Commands a subordinate enforcement unit inside a structure where corruption is known to have reached some levels.',
+    constraint:'Anyone sent to look into the payments is offered the same coin.' },
+  { position:  'Leads a squad in a force where some officers are known to take bribes.',
     goal:      'Keep their own hands clean without catching the eye of the bribers or the inquiry.',
-    constraint:'Visibility in either direction (too compliant or too resistant) creates risk the unit cannot currently afford.' }
+    constraint:'Going along too easily or pushing back too hard both draw notice the squad cannot afford.' }
 );
 reg('military','food_crisis',
-  { position:  'Responsible for public order during supply failure: the conditions that most reliably produce civil disorder are currently present.',
+  { position:  'Keeps order while the food runs short, when hungry crowds are quickest to riot.',
     goal:      'Keep the hungry from rioting without striking anyone the crowd will remember.',
-    constraint:'Enforcement sufficient to prevent disorder may be enforcement sufficient to generate resentment. The threshold is not visible in advance.' },
-  { position:  'Commands a subordinate enforcement unit during a supply crisis. Responsible for a sector where the pressure is acutely felt.',
+    constraint:'Enough force to stop a riot can be enough to start the next, and nobody knows beforehand how much is too much.' },
+  { position:  'Leads a squad that keeps order among people who are going hungry.',
     goal:      'Hold their patch quiet with too few hands, and start no fight they cannot finish.',
-    constraint:'The resources available are not sufficient for the conditions present. Performance is being evaluated against a standard the conditions make unachievable.' }
+    constraint:'Has too few hands for the work, and is judged as though it had enough.' }
 );
 reg('military','economic_stress',
-  { position:  'Maintains order in a settlement under economic pressure, where enforcement is more necessary and less funded than at other times.',
+  { position:  'Keeps order while money is short, when trouble grows and the pay for stopping it shrinks.',
     goal:      'Be seen enough to stop trouble, and not so much that people start to hate them.',
-    constraint:'Underfunding of enforcement is itself a product of the economic conditions that make enforcement more necessary.' },
-  { position:  'Commands a subordinate enforcement unit in an economically stressed settlement where unit resources, morale, and staffing are all under pressure.',
+    constraint:'The same lack of coin that stirs the trouble cuts the pay of those sent to stop it.' },
+  { position:  'Leads a squad that is short of pay, gear and hands.',
     goal:      'Hide how short of pay and gear their squad has become before someone tests it.',
-    constraint:'Visible deterioration invites exactly the disorder it signals the inability to contain.' }
+    constraint:'If anyone sees how thin the squad has worn, they will test it.' }
 );
 reg('military','contested',
-  { position:  'Commands enforcement in a settlement where competing political claims create pressure on the loyalty of the security forces.',
+  { position:  'Commands those under arms while rivals fight over the seat, and each side wants them.',
     goal:      'Keep everyone under their command out of the fight for the seat until it is settled.',
-    constraint:'Both sides of the contest want enforcement on their side. Neutrality requires active management that cannot be acknowledged publicly.' },
-  { position:  'Leads a subordinate enforcement unit whose institutional loyalties are being tested by the political contest above it.',
+    constraint:'Keeping those under arms out of the fight takes quiet work that cannot be owned in public.' },
+  { position:  'Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.',
     goal:      'Stop their squad splitting into two camps before the fight for the seat is over.',
-    constraint:'Unit members have personal loyalties that do not necessarily align with institutional neutrality.' }
+    constraint:'Some of the squad have loyalties of their own, and they do not all point the same way.' }
 );
 reg('military','stable',
-  { tags: CALM_ONLY, position:  'Commands enforcement in a well-ordered settlement. The role is preventive rather than responsive, and authority derives from institutional legitimacy.',
+  { tags: CALM_ONLY, position:  'Commands those under arms in quiet times; the work is keeping trouble from starting.',
     goal:      'Keep the drills, the patrols and the pay going, and the old hands in charge of them.',
-    constraint:'Stable conditions make it harder to justify the resources and authority that would be needed if conditions changed.' },
-  { tags: CALM_ONLY, position:  'Leads a subordinate enforcement unit in a stable settlement. The role is routine, the risks are low, and advancement requires distinguishing the unit in conditions that offer few distinctions.',
+    constraint:'With nothing threatening, it is hard to win the coin and the say that would be needed if trouble came.' },
+  { tags: CALM_ONLY, position:  'Leads a squad in quiet times, where the work is routine and the risks are low.',
     goal:      'Get their squad noticed for doing the dull work well, and earn a patron by it.',
-    constraint:'Routine excellence is expected and unremarkable; meaningful advancement requires either a crisis or a patron.' }
+    constraint:'Steady work earns no notice; getting ahead takes a crisis or a patron.' }
 );
 
 // ── economy / crafts ──────────────────────────────────────────────────────────
 for (const cat of ['economy','crafts']) {
+// SW-6 second seat (B10(b)): the trade's seat-holders in plain words, the machinery struck; the goals untouched.
 reg(cat,GOVERNANCE_FRACTURED,
-  { position:  'Controls organized commercial infrastructure in a settlement where governance is failing. Economic institutions are currently more functional than civic ones.',
+  { position:  'Heads the leading house in the trade while the seat fails; deals still get done where orders do not.',
     goal:      'Get their trade\'s new freedoms written down before whoever takes the seat next takes them back.',
-    constraint:'Formalizing commercial independence too visibly invites a reconsolidated governing authority to treat it as a threat rather than an asset.' },
-  { position:  'Operates commercial interests from a position secondary to the dominant commercial faction in a settlement with failing governance.',
+    constraint:'Taking new freedoms too openly makes whoever next holds the seat see the house as a threat.' },
+  { position:  'Runs a smaller house behind the leading one in the trade while the seat fails.',
     goal:      'Take customers from the biggest house in the trade while the seat is too weak to care.',
-    constraint:'The governance instability that creates opportunity also creates uncertainty. The same conditions that allow advancement can reverse it.' }
+    constraint:'The disorder that lets the house get ahead can just as quickly knock it back.' }
 );
 reg(cat,'corruption',
-  { position:  'Operates in a commercial environment where criminal interests have informal arrangements with enforcement. The line between legitimate and accommodated commerce is blurred.',
+  { position:  'Heads the leading house in the trade where criminals have deals with those who keep order; honest and protected business are hard to tell apart.',
     goal:      'Keep trading without paying the gangs, and without needing their protection either.',
-    constraint:'The informal arrangements with enforcement make legitimate commerce partially reliant on the same corruption it must avoid.' },
-  { position:  'Operates smaller commercial interests within a commercial environment compromised by criminal accommodation.',
+    constraint:'Some of the trade\'s own dealings lean on the same bought officials it must keep clear of.' },
+  { position:  'Runs a smaller house in a trade where many pay the criminals to be left alone.',
     goal:      'Be known as the honest dealer without the crooks deciding to make an example of them.',
-    constraint:'Visible distinction from the corruption draws attention; accommodation normalizes it. Neither option is cost-free.' }
+    constraint:'Standing apart from the crooked dealing draws the crooks\' eye; going along makes it everyone\'s habit.' }
 );
 reg(cat,'food_crisis',
-  { position:  'Controls distribution infrastructure for a critical resource at a moment when that resource is in shortage. The position carries unusual leverage and unusual risk.',
+  { position:  'Heads the leading house in the trade while food is short; what it sells, and to whom, is now watched.',
     goal:      'Sell what food they hold at a price nobody will hold against them after the shortage.',
-    constraint:'Any pricing or allocation decision during a shortage is a political act, regardless of intent.' },
-  { position:  'Operates commercial interests in a supply crisis from a position without control over the primary distribution channel.',
+    constraint:'Every price it sets during the shortage is taken as a side chosen, whatever was meant.' },
+  { position:  'Runs a smaller house in the trade while food is short, with no hand in who gets the food.',
     goal:      'Find something else to sell while the food runs short and the big dealers hold it.',
-    constraint:'Alternative commercial positions during a supply crisis are defined by what the crisis displaces. The opportunity and the instability are the same thing.' }
+    constraint:'What can be sold now depends on what the shortage has pushed aside, and that can change overnight.' }
 );
 reg(cat,'economic_stress',
-  { position:  'Operates in a settlement under persistent economic pressure. The commercial position is maintained but not growing.',
+  { position:  'Heads the leading house in the trade while money is short; it holds on, but does not grow.',
     goal:      'Work out which buyers will still pay next year, and drop the rest before they drag them down.',
-    constraint:'Selective consolidation requires visibly abandoning some positions, creating vulnerability in the ones being retained.' },
-  { position:  'Operates smaller commercial interests in an economically stressed settlement where consolidation by larger commercial interests reduces operational space.',
+    constraint:'Keeping the best buyers means dropping others in plain view, and rivals notice the gaps.' },
+  { position:  'Runs a smaller house while money is short and the bigger houses take more of the trade.',
     goal:      'Find the small trade the big houses will not bother to fight them for.',
-    constraint:'Niches that larger interests do not contest are typically ones with limited growth potential.' }
+    constraint:'The work the big houses leave alone is the work that pays least.' }
 );
 reg(cat,'contested',
-  { position:  'Holds commercial structural influence in a settlement where governing authority is contested. Commercial interests are positioned to benefit from or be damaged by how the contest resolves.',
+  { position:  'Heads the leading house in the trade while rivals fight over the seat; whoever wins can make or break it.',
     goal:      'Lend to both sides of the fight for the seat, so whoever wins owes them.',
-    constraint:'Cultivating relationships with both sides requires that neither side trusts you fully.' },
-  { position:  'Operates commercial interests that are positioned between the competing factions in a contested settlement.',
+    constraint:'Keeping friends on both sides means neither side fully trusts the house.' },
+  { position:  'Runs a smaller house that sells to both sides in the fight for the seat.',
     goal:      'Keep selling to every faction without any of them treating their goods as its own.',
-    constraint:'Commercial neutrality looks like either timidity or calculation to the factions seeking commitment.' }
+    constraint:'To both sides, staying out of it looks like fear or scheming.' }
 );
 reg(cat,'stable',
-  { tags: CALM_ONLY, position:  'Controls organized commercial infrastructure in a functioning settlement. The position is secure and the leverage is real.',
+  { tags: CALM_ONLY, position:  'Heads the leading house in the trade in quiet times; its hold is secure and its say is real.',
     goal:      'Turn their hold on the trade into a charter, a seat at the table, or a monopoly.',
-    constraint:'Visible accumulation of institutional advantage invites regulatory and political attention.' },
-  { tags: CALM_ONLY, position:  'Operates commercial interests in a stable settlement from a position secondary to the dominant commercial faction.',
+    constraint:'Every new privilege it gathers in plain sight draws the eye of the seat and of its rivals.' },
+  { tags: CALM_ONLY, position:  'Runs a smaller house behind the leading one in quiet times.',
     goal:      'Win more custom without treading on the biggest house in the trade.',
-    constraint:'Growth that encroaches on the dominant interest\'s commercial territory invites a response; growth that doesn\'t stays marginal.' }
+    constraint:'Growing into the leading house\'s trade invites a reply; staying out of it means staying small.' }
 );
 }
 
 // ── religious ─────────────────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the faith's seat-holders in plain words, the machinery struck; the goals untouched.
 reg('religious',GOVERNANCE_FRACTURED,
-  { position:  'Holds institutional religious authority in a settlement where civic governance is failing. Religious institutions often absorb civic functions when secular authority contracts.',
+  { position:  'Leads the faith while the seat fails, and people bring it the quarrels the seat no longer settles.',
     goal:      'Settle the disputes the seat has stopped settling, in the faith\'s name, and keep doing it afterwards.',
-    constraint:'Civic engagement that appears opportunistic risks being reversed by a reconsolidated authority that resents the encroachment.' },
-  { position:  'Serves a religious position secondary to the dominant religious institution in a settlement with failing civic governance.',
+    constraint:'Whatever the faith takes on now, whoever next holds the seat firmly may resent and take back.' },
+  { position:  'Serves the faith under its leaders while the seat fails around them.',
     goal:      'Keep marrying, burying and comforting their flock while the seat fails around them.',
-    constraint:'Pastoral relevance without institutional authority is difficult to convert into institutional standing when the governance reconsolidates.' }
+    constraint:'The flock\'s trust is easy to earn now, but it buys no say once someone holds the seat firmly again.' }
 );
 reg('religious','corruption',
-  { position:  'Holds institutional religious authority in a settlement where civic institutions are compromised. The church\'s moral authority depends on distance from the corruption.',
+  { position:  'Leads the faith among officials who take bribes; its good name rests on keeping clear of them.',
     goal:      'Keep the faith\'s name clean while every other office in the place takes payments.',
-    constraint:'The institution depends on civic structures for land rights and legal standing. Complete separation from compromised institutions is unavailable.' },
-  { position:  'Holds a religious position that must maintain pastoral credibility in a community aware of institutional corruption in the settlement\'s civic structures.',
+    constraint:'The faith still needs those same officials for its lands and its rights, so it cannot cut them off.' },
+  { position:  'Serves the faith among people who know their officials take bribes.',
     goal:      'Earn their flock\'s trust face to face, so it outlasts their trust in the crooked seat.',
-    constraint:'Pastoral trust built in opposition to civic institutions is vulnerable to any reconsolidation that restores civic legitimacy.' }
+    constraint:'Trust won by standing against the crooked officials can fade once honest ones return.' }
 );
 reg('religious','food_crisis',
-  { position:  'Leads a religious institution with direct welfare capacity during a supply crisis. Charitable infrastructure becomes a primary social stabilizer.',
+  { position:  'Leads the faith while the food runs short, and its alms are among the few things holding people together.',
     goal:      'Feed the hungry from the faith\'s stores, and make sure everyone knows who fed them.',
-    constraint:'The institution\'s charitable capacity is finite; prioritizing distribution for institutional benefit rather than need creates the scandal that outlasts the crisis.' },
-  { position:  'Serves a religious position with limited independent welfare capacity during a supply crisis.',
+    constraint:'The faith\'s stores will run out; feeding its own first, or for show, would be a scandal remembered long after the hunger.' },
+  { position:  'Serves the faith with little of its own to give while the food runs short.',
     goal:      'Get their own flock a share of whatever relief there is, and be thanked for it.',
-    constraint:'Intermediary standing depends on the reliability of what is being intermediated: if the relief infrastructure fails, the position loses credibility along with it.' }
+    constraint:'Its standing rests on the relief it passes on; if the relief fails, the blame falls on it too.' }
 );
 reg('religious','economic_stress',
-  { position:  'Holds religious authority in a settlement under economic pressure. The church\'s land holdings and endowments are both assets and targets.',
+  { position:  'Leads the faith while money is short; its lands and alms are both a help and a target.',
     goal:      'Keep the faith\'s lands and coin intact without looking rich while the people go short.',
-    constraint:'Any use of institutional resources to protect institutional interests during population-level hardship is visible.' },
-  { position:  'Holds a religious position secondary to the dominant institution in an economically stressed settlement where religious endowment is under pressure.',
+    constraint:'Anything it does to guard its own wealth while people go short is seen by all.' },
+  { position:  'Serves the faith on shrinking alms while money is short.',
     goal:      'Keep their small charge going on half the alms and none of the help.',
-    constraint:'Reduced resources reduce the pastoral capacity that justifies the position\'s existence.' }
+    constraint:'With less to give, there is less reason for the post to exist.' }
 );
 reg('religious','contested',
-  { position:  'Holds institutional religious authority during political contestation. Both sides of a political contest typically want clerical endorsement.',
+  { position:  'Leads the faith while rivals fight over the seat, and both sides want its blessing.',
     goal:      'Give no blessing to either claimant until it is plain which one will hold the seat.',
-    constraint:'The longer neutrality is maintained, the less valuable the eventual endorsement becomes.' },
-  { position:  'Serves a religious position under the dominant religious institution during political contestation.',
+    constraint:'The longer it waits to bless one side, the less the blessing will be worth.' },
+  { position:  'Serves the faith under its leaders while rivals fight over the seat.',
     goal:      'Back whichever claimant their superiors bless, and be seen to have waited for the word.',
-    constraint:'Following the institutional alignment requires having subordinated personal judgment to institutional authority. The cost is the same regardless of whether the alignment was correct.' }
+    constraint:'Following the leaders\' choice means setting aside one\'s own judgment, and paying for it whether they chose well or not.' }
 );
 reg('religious','stable',
-  { tags: CALM_ONLY, position:  'Leads an established religious institution in a settlement with functional civic order.',
+  { tags: CALM_ONLY, position:  'Leads the faith in quiet times, at peace with the seat beside it.',
     goal:      'Keep the faith at every naming, wedding and burial, and out of the seat\'s quarrels.',
-    constraint:'Institutional stability tends toward complacency. The challenges that would justify institutional expansion are currently absent.' },
-  { tags: CALM_ONLY, position:  'Serves a religious position secondary to the dominant institution in a stable settlement.',
+    constraint:'With nothing pressing, it is easy to grow comfortable and hard to argue for growing.' },
+  { tags: CALM_ONLY, position:  'Serves the faith under its leaders in quiet times.',
     goal:      'Serve their flock so faithfully that their superiors cannot pass them over again.',
-    constraint:'Excellence within the dominant institution\'s frame does not distinguish the position; deviation from it invites institutional friction.' }
+    constraint:'Doing the work well, the leaders\' way, goes unnoticed; doing it another way brings trouble.' }
 );
 
 // ── criminal ──────────────────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the crews' seat-holders in plain words, the machinery struck; the goals untouched.
 reg('criminal',GOVERNANCE_FRACTURED,
-  { position:  'Operates criminal interests in a settlement where governance is failing. A governance vacuum is the optimal environment for criminal operations to expand.',
+  { position:  'Heads the leading crew while the seat fails; whatever the seat stops watching is there to take.',
     goal:      'Take over whatever the seat has stopped watching, and dig in before it recovers.',
-    constraint:'Expanding too visibly during governance failure risks triggering a consolidation response specifically aimed at criminal interests.' },
-  { position:  'Operates within a criminal network as a position secondary to the dominant criminal interest in a settlement with failing governance.',
+    constraint:'Growing too openly now may make the crew the first thing a recovered seat goes after.' },
+  { position:  'Holds a place under the crew\'s boss while the seat fails.',
     goal:      'Climb over the boss\'s other lieutenants while nobody is enforcing anything.',
-    constraint:'Advancement within the hierarchy requires either demonstrating value to it or demonstiting threat to it. Both are visible to the hierarchy.' }
+    constraint:'Climbing means being worth more to the boss or being more of a danger, and the boss can see both.' }
 );
 reg('criminal','corruption',
-  { position:  'Has arrangements with enforcement that create unusual operational freedom. The position depends on those arrangements remaining stable.',
+  { position:  'Heads the crew that has bought some of those who keep order, and works freely while they stay bought.',
     goal:      'Keep the bribed officials paid and quiet, and keep proof of every payment in case they turn.',
-    constraint:'The arrangements are known to multiple parties. They are leverage over the operation as much as they are protection for it.' },
-  { position:  'Operates a position within a criminal network that benefits from the network\'s enforcement arrangements without being the architect of them.',
+    constraint:'Too many people know about the payments; they hold the crew as much as they shield it.' },
+  { position:  'Holds a place in a crew that has bought protection, without having arranged it.',
     goal:      'Use the bought protection while it lasts, and have a way out when it ends.',
-    constraint:'Operational independence from the arrangements while continuing to benefit from them requires a position the network may not tolerate.' }
+    constraint:'Living off the bought protection while keeping clear of it is a balance the crew may not allow.' }
 );
 reg('criminal','food_crisis',
-  { position:  'Controls informal distribution channels for goods that are in shortage. Supply crises create extraordinary criminal economic opportunity.',
+  { position:  'Heads the crew that moves goods on the side while food is short, and the shortage pays well.',
     goal:      'Sell food on the side at hungry prices, without becoming the face of the shortage.',
-    constraint:'Visible profiteering during a population-level crisis creates the moral clarity that even compromised enforcement cannot ignore.' },
-  { position:  'Operates a secondary position in a criminal network that is expanding into supply crisis opportunity.',
+    constraint:'Open profit from the hunger makes the crew a target even the bought officials cannot ignore.' },
+  { position:  'Holds a place in a crew that is moving into the black-market food trade.',
     goal:      'Get a cut of the black-market food before the boss shuts everyone else out.',
-    constraint:'Securing that role requires either offering something the dominant interest needs or accepting a subordinate position that leaves future leverage limited.' }
+    constraint:'A share of it means offering the boss something needed, or taking a small part and no say later.' }
 );
 reg('criminal','economic_stress',
-  { position:  'Operates in an economically pressured settlement where desperation expands the pool accessible to criminal recruitment and exploitation.',
+  { position:  'Heads the crew while money is short, and desperate people are easy to recruit and use.',
     goal:      'Sign up the desperate while they are cheap, and keep them once times get better.',
-    constraint:'Operations built on desperation are vulnerable to improvement in the economic conditions that created them.' },
-  { position:  'Holds a secondary position in a criminal network operating in an economically stressed settlement.',
+    constraint:'A crew built on desperation shrinks when times get better.' },
+  { position:  'Holds a place in a crew while money is short.',
     goal:      'Make themselves worth keeping to the crew for reasons that will survive good times.',
-    constraint:'A stable position within the network requires demonstrated value that survives changing conditions. This is harder to demonstrate during the conditions themselves.' }
+    constraint:'Staying worth keeping means showing a value that will last, which is hard to show in the middle of hard times.' }
 );
 reg('criminal','contested',
-  { position:  'Operates criminal interests in a contested political environment where enforcement attention is distracted.',
+  { position:  'Heads the crew while rivals fight over the seat and those who keep order look elsewhere.',
     goal:      'Move into new rackets while the claimants to the seat are busy with each other.',
-    constraint:'Both sides of a political contest may attempt to use criminal enforcement as a tool against the other. The current operational freedom is unpredictable.' },
-  { position:  'Holds a position within a criminal network that is attempting to expand during political contestation.',
+    constraint:'Either side may turn on the crew to hurt the other, so today\'s freedom could end without warning.' },
+  { position:  'Holds a place in a crew that is pushing into new ground while the seat is fought over.',
     goal:      'Grab their own share of the crew\'s new ground, so they keep it if the push fails.',
-    constraint:'Network position consolidated during an expansion that fails is exposed when the network contracts.' }
+    constraint:'Ground taken in a push that fails is the first to be lost when the crew pulls back.' }
 );
 reg('criminal','stable',
-  { tags: CALM_ONLY, position:  'Operates within a well-ordered settlement where enforcement is functional and operational space is defined by what enforcement chooses not to pursue.',
+  { tags: CALM_ONLY, position:  'Heads the crew in quiet times, working only where those who keep order choose not to look.',
     goal:      'Keep the rackets small and steady enough that the law never bothers to look.',
-    constraint:'Sustained operational success below the enforcement threshold makes the operation visible to those who look for the threshold.' },
-  { tags: CALM_ONLY, position:  'Holds a secondary position in a criminal network operating in a settled environment with functional enforcement.',
+    constraint:'Staying just under notice for too long draws the eye of anyone who looks for exactly that.' },
+  { tags: CALM_ONLY, position:  'Holds a place in a crew in quiet times, with order well kept around it.',
     goal:      'Prove to the boss they can be trusted with more, without the law learning their name.',
-    constraint:'Advancement within the network requires demonstrating capacity. Demonstration is visibility.' }
+    constraint:'Getting ahead in the crew means showing what one can do, and showing it is how one gets noticed.' }
 );
 
 // ── magic ─────────────────────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the casters' seat-holders in plain words, the machinery struck; the goals untouched.
 reg('magic',GOVERNANCE_FRACTURED,
-  { position:  'Holds arcane institutional authority in a settlement with failing civic governance. Arcane services may hold leverage if structurally necessary.',
+  { position:  'Heads the casters while the seat fails; if the seat needs their spells, it now owes them.',
     goal:      'Turn every favour the seat now begs of their spells into a right it cannot take back.',
-    constraint:'Arcane authority claimed during a governance crisis is typically the first thing a reconsolidated government constrains.' },
-  { position:  'Practices arcane arts in a secondary institutional position in a settlement with failing governance.',
+    constraint:'Rights won from a weak seat are the first a recovered seat takes back.' },
+  { position:  'Works spells under the senior casters while the seat fails.',
     goal:      'Keep working spells for anyone who pays while refusing to be counted on any side.',
-    constraint:'Neutrality in a crisis that affects all institutions is difficult to sustain without appearing to have calculated it.' }
+    constraint:'Staying on no side while everyone suffers is hard to do without looking like a calculation.' }
 );
 reg('magic','corruption',
-  { position:  'Maintains arcane operations in a settlement with compromised institutions. Arcane services used for concealment create leverage and obligation.',
+  { position:  'Heads the casters among bribe-taking officials, where spells that hide things buy favour and debt.',
     goal:      'Stop casting concealments for the crooks before the crooks own them outright.',
-    constraint:'Arcane services used for concealment create relationships that are difficult to exit.' },
-  { position:  'Practices arcane arts in a position secondary to the dominant arcane institution in a compromised institutional environment.',
+    constraint:'Once their spells have hidden someone\'s dealings, getting free of those people is hard.' },
+  { position:  'Works spells under the senior casters, among officials who take bribes.',
     goal:      'Take the spellwork their seniors turn down, and ask no questions about why it was refused.',
-    constraint:'Services not dominated by the primary institution tend to be those the primary institution has declined: often for reasons.' }
+    constraint:'The work the seniors turn down is often turned down for a reason.' }
 );
 reg('magic','food_crisis',
-  { position:  'Holds arcane institutional authority in a supply crisis. Magical production or preservation capacity, if available, becomes a critical resource.',
+  { position:  'Heads the casters while food is short, and any spell that grows or keeps food is suddenly worth a great deal.',
     goal:      'Save what food magic can save, and make the seat pay for it in rights.',
-    constraint:'Arcane solutions to supply crises create expectations that cannot be sustained indefinitely.' },
-  { position:  'Practices arcane arts in a position that could contribute to crisis response but lacks the institutional authority to deploy independently.',
+    constraint:'People fed by spells once will expect it again, and it cannot go on for ever.' },
+  { position:  'Works spells that could help with the shortage, but cannot use them without the seniors\' leave.',
     goal:      'Offer their spells for the shortage through their seniors, and see their own name on it.',
-    constraint:'Contributing through channels that constrain the contribution limits both the impact and the credit.' }
+    constraint:'Helping through the seniors limits both what the help can do and who gets the credit.' }
 );
 reg('magic','economic_stress',
-  { position:  'Maintains arcane institutional operations in an economically pressured settlement. Arcane services are among the first to face budget reduction.',
+  { position:  'Heads the casters while money is short, and spellwork is among the first things people stop paying for.',
     goal:      'Work out which spells people will still pay for when the coin runs short, and keep those.',
-    constraint:'Demonstrating indispensability may require deploying services in ways that reduce their scarcity and therefore their leverage.' },
-  { position:  'Practices arcane arts in a secondary institutional position in an economically pressured settlement where arcane patronage is declining.',
+    constraint:'Proving the spells are needed may mean casting them so often that they lose their price.' },
+  { position:  'Works spells under the senior casters while money is short and patrons drop away.',
     goal:      'Find the plain, needed spellwork that people buy even when they buy nothing else.',
-    constraint:'Necessity-level arcane services are typically lower-status and lower-compensation than the services economic pressure eliminates.' }
+    constraint:'The spells people still buy in hard times are the humble ones that pay least.' }
 );
 reg('magic','contested',
-  { position:  'Holds arcane authority in a contested political environment. Arcane capacity is a resource both sides want access to.',
+  { position:  'Heads the casters while rivals fight over the seat, and both sides want their spells.',
     goal:      'Refuse every claimant who wants their spells, so whoever takes the seat cannot call them traitors.',
-    constraint:'Maintaining neutrality requires declining requests from both sides, which generates resentment from both.' },
-  { position:  'Practices arcane arts in a secondary position in a contested political environment.',
+    constraint:'Staying out of it means refusing both sides, and both will remember.' },
+  { position:  'Works spells under the senior casters while rivals fight over the seat.',
     goal:      'Be useful to whoever wins the seat, and promise nothing to anyone before then.',
-    constraint:'Value to multiple competing factions requires keeping the scope of arcane services narrow enough that none of them perceive a conflict of interest.' }
+    constraint:'Serving more than one side means keeping the work small enough that none of them sees a betrayal.' }
 );
 reg('magic','stable',
-  { tags: CALM_ONLY, position:  'Leads established arcane institutions in a functional settlement. The position is secure, the services are in demand.',
+  { tags: CALM_ONLY, position:  'Heads the casters in quiet times; their place is secure and their spells are in demand.',
     goal:      'Win more of the seat\'s work for their spells, and more of everyone else\'s.',
-    constraint:'Arcane authority in stable conditions faces gradual bureaucratic containment. Institutionalization brings limits alongside legitimacy.' },
-  { tags: CALM_ONLY, position:  'Practices arcane arts in a secondary institutional position in a stable settlement.',
+    constraint:'In quiet times the seat slowly hems the casters in with rules; recognition comes with limits.' },
+  { tags: CALM_ONLY, position:  'Works spells under the senior casters in quiet times.',
     goal:      'Become the caster people ask for by name, whatever their seniors think of them.',
-    constraint:'Practical standing without institutional authority is vulnerable to institutional decisions about who is permitted to practice.' }
+    constraint:'Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.' }
 );
 
 // ── other (noble, etc.) ───────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the old families' seat-holders in plain words, the machinery struck; the goals untouched. The stable rows also serve the four conditions below, so they claim no calm of their own.
 reg('other',GOVERNANCE_FRACTURED,
-  { position:  'Holds hereditary or traditional status in a settlement where formal governance is under pressure. Traditional authority often gains relative standing when formal authority loses it.',
+  { position:  'Heads an old family while the seat fails, and old names count for more when the seat counts for less.',
     goal:      'Take back the old family rights the seat stripped away, while it is too weak to refuse.',
-    constraint:'Traditional claims that would have been dismissed under stable governance invite more scrutiny under conditions where everyone is watching for illegitimate power grabs.' },
-  { position:  'Holds traditional status secondary to the dominant traditional interest in a settlement with failing governance.',
+    constraint:'Old claims that would once have been laughed off are now watched by everyone looking for a grab at power.' },
+  { position:  'Belongs to a lesser family behind the leading one while the seat fails.',
     goal:      'Catch up with the greater family while the seat is too busy to keep them apart.',
-    constraint:'Advancing relative to the dominant traditional interest during a crisis positions the advance as opportunistic rather than earned.' }
+    constraint:'Getting ahead of the greater family now will look like seizing a chance, not earning a place.' }
 );
 reg('other','stable',
-  { tags: CALM_ONLY, position:  'Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.',
+  { tags: CALM_ONLY, position:  'Heads an old family while the seat\'s offices take up more of what the family once did.',
     goal:      'Keep the family\'s name honoured at every feast while the new offices take its old work.',
-    constraint:'Traditional authority in stable conditions is in slow structural decline relative to institutional authority.' },
-  { tags: CALM_ONLY, position:  'Holds a secondary traditional or hereditary position in a stable settlement.',
+    constraint:'The family\'s say slowly shrinks beside the offices that run things.' },
+  { tags: CALM_ONLY, position:  'Belongs to a lesser old family, behind the leading one.',
     goal:      'Marry, lend or befriend their way into the offices that now run things.',
-    constraint:'Usefulness to institutional actors defines the scope of permitted influence, not the traditional claim itself.' }
+    constraint:'The family has as much say as the offices find it useful to give, whatever its old claim.' }
 );
 // Fill remaining conditions for 'other' with stable variants
 for (const cond of ['corruption','food_crisis','economic_stress','contested']) {

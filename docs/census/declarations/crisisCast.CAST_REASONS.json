@@ -48,7 +48,7 @@
     },
     {
       "id": "bruntBase.public_legitimacy",
-      "text": "it takes the blame, and its good name pays for the crisis",
+      "text": "the blame falls on the house, and its good name pays for the crisis",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -114,7 +114,7 @@
     },
     {
       "id": "bruntLeast",
-      "text": "the least powerful of the house the crisis hits",
+      "text": "the one with the least say in the house the crisis hits",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -122,7 +122,7 @@
     },
     {
       "id": "leverRuns",
-      "text": "holds the office the crisis turns on",
+      "text": "runs the office that decides how the crisis goes",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -146,7 +146,7 @@
     },
     {
       "id": "instigatorRival",
-      "text": "outranks the seat while it weakens",
+      "text": "already carries more weight than whoever holds the seat, and gains as the seat weakens",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -180,7 +180,7 @@
     },
     {
       "id": "targetSeatContested",
-      "text": "holds the seat, with legitimacy already contested",
+      "text": "holds the seat, and the right to it is already in dispute",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -240,7 +240,7 @@
     },
     {
       "id": "scapegoatSeat",
-      "text": "holds the seat, blamed while legitimacy is contested",
+      "text": "holds the seat, and takes the blame while the right to it is in dispute",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -248,7 +248,7 @@
     },
     {
       "id": "scapegoatLever",
-      "text": "holds the lever, blamed while legitimacy is contested",
+      "text": "runs the office the crisis turns on, and takes the blame while the seat is in dispute",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -284,7 +284,7 @@
     },
     {
       "id": "treaterMerchant",
-      "text": "leads the merchants, the seat being contested",
+      "text": "a merchant, with the seat itself in dispute",
       "needs": [],
       "excludes": [],
       "crisis": [],

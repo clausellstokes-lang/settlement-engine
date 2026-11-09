@@ -332,7 +332,10 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-09, STYLE-2-MERGE (found at TIER-PARITY-FIX's point, bisected by stage to SW-B7a PARTY-LINK's merge 21f4b031f):
   // the party-link components' change (ShareToGallery/UnlistedShareBar/PartyLinkView; the exact site not isolated) — `floored` -1 on
   // /create and /settlements, 621 -> 620, 867 -> 866; `bare` unmoved; re-measured by this census.
-  '/create':                { roots: 1, files: 162, floored: 620, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-09, STYLE-2-MERGE-3 at SW-6 CRISIS-SURFACES' point (point 22): SW-6's R5 faith hint (one `proseFontSize` row) — the lane's
+  // +2 on /create, /settlements, /gallery was FaithSection's hint row and FaithTab's; FaithTab's fell with the honest-absence block
+  // TIER-PARITY-FIX V2 retired (642e76af8), so the composed tree measures +1 on each: 620 -> 621, 866 -> 867, 665 -> 666; `bare` unmoved.
+  '/create':                { roots: 1, files: 162, floored: 621, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -380,7 +383,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
-  '/settlements':           { roots: 1, files: 206, floored: 866, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 867, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
@@ -395,7 +398,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
-  '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 666, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

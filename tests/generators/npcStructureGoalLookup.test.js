@@ -46,7 +46,7 @@ describe('npcStructure registry goal lookup (CENSUS-1e unit 1)', () => {
   it('(b) under calm the stable entry is admitted, byte-identical, and noted with its atom', () => {
     const { result, ledger } = enrich({});
     expect(result[0].goal.short).toBe("Find and mend the seat's weak spot before a rival finds it first."); // W3 POW: re-keyed with the goal's words
-    expect(result[0].structuralPosition).toMatch(/^Holds governing authority in a settlement with functional legitimacy/);
+    expect(result[0].structuralPosition).toMatch(/^Holds the seat, and people accept it; there is room to act/); // SW-6 (B10(b)): re-keyed by identity with the plain line
     expect(result[0].settlementCondition).toBe('stable');
     expect(Object.keys(result[0].goal)).toEqual(['short', 'long']);
     const rows = ledger.filter((e) => String(e.pool).startsWith('NPC_STRUCTURE.'));

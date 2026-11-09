@@ -411,3 +411,25 @@ describe('the defence stands: a closed house is never the defender (the ruin fil
     expect(houses).toBeGreaterThan(40);
   }, 240000);
 });
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, the crisis page's Stakes, A·C4): the stake reasons print as plain
+// clauses — never the rule's own word ("the crisis hits its base") nor R3's old echo ("outranks the seat").
+describe('STAKE_REASONS in plain words (SW-6)', () => {
+  it('the losing house and the outranking rival are told in what the reader can see', () => {
+    expect(STAKE_REASONS.loses).toBe('its own people feel the crisis first');
+    expect(STAKE_REASONS.gainsRival).toBe('already carries more weight than whoever holds the seat');
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(Object.values(STAKE_REASONS).join(' ')).not.toMatch(/\bbase\b|outranks/);
+  });
+});
+
+describe('the selector-rule reasons in plain words (SW-6 second seat)', () => {
+  it('the contested seat, the scapegoats and the merchant who would treat say what the person faces, never the rule', () => {
+    const rule = [CAST_REASONS.targetSeatContested, CAST_REASONS.scapegoatSeat, CAST_REASONS.scapegoatLever, CAST_REASONS.treaterMerchant];
+    expect(rule.every((r) => /in dispute/.test(r))).toBe(true);
+    // anchored: the subject is the four constants asserted positively above (each says the dispute in plain words)
+    expect(rule.join(' ')).not.toMatch(/legitimacy|contested|\blever\b|being contested/);
+    // anchored: the same constant; membersOf reads any member of a merchant house, so the line claims no leadership
+    expect(CAST_REASONS.treaterMerchant).not.toMatch(/^leads/);
+  });
+});

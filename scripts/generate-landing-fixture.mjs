@@ -311,8 +311,13 @@ export function advanceTimelineFor(news, townId = 't', limit = ADVANCE_ENTRIES) 
  * sentence is that Hector Gallagher and Inghean MacCarthy are about to be on opposite sides of a
  * significant decision. The mistake-and-report sentence, no longer derived, is DELETED; the third and
  * fourth sentences are redrafted from those two fields, the first two are unchanged.
+ *
+ * SW-6 CRISIS-SURFACES (2026-11-09; STYLE-RULINGS-2 A1 R6, WAVE-RULINGS item 13; an OWNER VETO POINT): the
+ * fourth sentence's "bound by something neither speaks of" was an aphorism no field holds (the census law);
+ * struck. The sentence keeps only the pressure sentence's fact: the two are about to be on opposite sides of
+ * a significant decision.
  */
-const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to win the people back with what costs nothing: fair hearings and quick answers. Hector Gallagher and Inghean MacCarthy are bound by something neither speaks of, and they are about to stand on opposite sides of a decision that matters.';
+const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to win the people back with what costs nothing: fair hearings and quick answers. Hector Gallagher and Inghean MacCarthy are about to stand on opposite sides of an important decision.';
 
 /**
  * The frozen fixture object for one seed — every selection COMPUTED from engine
