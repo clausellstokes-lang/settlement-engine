@@ -175,7 +175,7 @@
   },
   {
     "path": "src/components/map/BeliefDivergenceBand.jsx",
-    "line": 78,
+    "line": 77,
     "category": "floatInterpolation",
     "snippet": "{CONFIDENCE_LABEL[belief.confidence] || belief.confidence}"
   },
