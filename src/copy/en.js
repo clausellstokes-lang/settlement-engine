@@ -218,9 +218,9 @@ export const en = Object.freeze({
     // Guide's reference row. Only these auth strings and the checklist said
     // "Neighbourhood System", which is a different phrase for the same feature on
     // the two surfaces a new account meets first.
-    subtitle: 'Saves, larger settlements, and the Neighbour System.',
-    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbour System.',
-    signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbour System.',
+    subtitle: 'Saves and every settlement size.',
+    signinSubtitle: 'Sign in to keep your work: saves and every settlement size.',
+    signupSubtitle: 'Create a free {tier} account to save your work and reach every settlement size.',
     resetPageSubtitle: 'We will email you a secure link to set a new password.',
     discord: {
       label:       'Continue with Discord',
@@ -579,7 +579,7 @@ export const en = Object.freeze({
           'Campaigns: link settlements into one living world',
           'The self-ending war layer + the living pantheon',
           'Custom content + import settlements from the Gallery',
-          'Unlimited saves + cloud sync',
+          'Unlimited saves',
           'Unlimited PDF and JSON export of every settlement',
           '30 narrative credits every month, then pay-per-use packs',
         ],
@@ -665,7 +665,7 @@ export const en = Object.freeze({
             'The living pantheon: deities contest converts and rise',
             'Campaigns + a chronicle that writes itself',
             'Custom content + import settlements from the Gallery',
-            'Unlimited saves + cloud sync',   // secondary bullet — storage stays
+            'Unlimited saves',   // secondary bullet — storage stays
             'Unlimited PDF and JSON export of every settlement',
             '30 narrative credits every month, then pay-per-use packs',
           ],
@@ -702,7 +702,7 @@ export const en = Object.freeze({
       tries: {
         eyebrow: 'Try it',
         tier:    'No account',
-        body:    'Generate a coherent town up to town size, no signup. See the moat before you commit.',
+        body:    'Generate a coherent town, no signup. See the moat before you commit.',
         cta:     'Forge a settlement',
       },
       saves: {
@@ -1453,7 +1453,7 @@ export const en = Object.freeze({
   moments: {
     first_canonize: {
       headline: 'You just made a town part of your campaign.',
-      body:     'Upgrade adds canon snapshots, timeline export variants, and narrative refinement. The free tier continues to work, just with the basics.',
+      body:     'Cartographer adds editing after generation, the living realm, and unlimited export. Everything else works the same on the free tier.',
     },
     first_ai_use: {
       headline: 'Narrative refinement costs credits per pass.',
@@ -1461,11 +1461,7 @@ export const en = Object.freeze({
     },
     first_canon_export: {
       headline: 'Canon dossiers are the deliverable DMs print.',
-      body:     'Upgrade unlocks unlimited canon-mode exports and the timeline-packet variant.',
-    },
-    cloud_save: {
-      headline: 'Save your campaign across devices.',
-      body:     'Upgrade syncs your settlements, drafts, and canon timelines to your account.',
+      body:     'Upgrade unlocks unlimited exports.',
     },
     first_save: {
       headline: 'Save it. Come back tomorrow.',
@@ -1480,11 +1476,11 @@ export const en = Object.freeze({
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
-      body:     'Save this settlement and keep its PDF for $2.99, yours to re-download. Cartographer exports every settlement, unlimited, with cloud sync.',
+      body:     'Save this settlement and keep its PDF for $2.99, yours to re-download. Cartographer exports every settlement, unlimited.',
     },
     third_save: {
       headline: 'You’re building a campaign.',
-      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, cloud sync, the neighbour network, and full export.',
+      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, the neighbour network, and full export.',
     },
     regen_burst: {
       headline: 'You’re pushing the engine.',
