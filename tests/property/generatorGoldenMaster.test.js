@@ -18,6 +18,15 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — MERGE-TRAIN RECORD 1, THE ALLEGIANCE-CAR1 MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE TRAIN, MERGE-TRAIN;
+ *   record docs/shift-records/2026-11-09-merge-train-1-car1.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against the wave's final post-state. THE CAUSE, ONE (first-parent
+ *   step e5f88930b): the ALLEGIANCE-CAR1 merge over the integration branch (lane/allegiance-car1-2026-11-08 at 7395b5dab; its six unsigned
+ *   causes the components: 5902f1a4a the hidden allegiance 258, 5e4f43bb7 the v3 save migration 525 (schemaVersion 3 on every record),
+ *   ec9698796 the receipt's gate 170, 61d065e9e the tie lines' tier words 80, 1515f0b19 the receipt's reason 170 — the lane's own
+ *   stage-to-stage figures). ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree ST1 (the tree of e5f88930b with the
+ *   door paths carried from the branch). 5f77f02f.. -> eb2db45f..
+ *
  * 2026-11-08 — MERGE-WAVE RECORD 10, THE DOCKS READ (W5 HIS #10's GATE), THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
  *   record docs/shift-records/2026-11-08-merge-wave-10-docks-read.json; the cloud chair signs under the owner's delegation, vetoable).
  *   37 of 525 rows (town 13, city 12, metropolis 12) against the final tip's (records 8 and 9's post-state). THE CAUSE, ONE (first-parent
