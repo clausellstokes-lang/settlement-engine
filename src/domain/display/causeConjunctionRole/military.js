@@ -30,6 +30,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       "It is out: the captain covered the garrison's short pay with bought coin, and the town now knows which doors the watch was paid not to guard.",
       "The captain's second paymaster is public. The shortfall was real, which is the defense; the men are asking what else went with the gate rota.",
+      'The men of the watch know now that their short pay was made up with bought coin, and which doors they were kept from guarding for it.',
     ],
     're-adjudicated': [
       "Whoever paid the captain before is gone, but now the pay runs short, and the captain takes coin from whoever will cover it.",
@@ -53,6 +54,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the captain provisioned the garrison through smugglers and paid them in escort duty; every run they made under guard is being counted.',
       'The town knows now why the garrison never went hungry while the roads were dead: the captain dealt with smugglers, and the smugglers wrote it all down.',
+      'The soldiers who rode escort for the smugglers know now what they were guarding, and the town is counting every run.',
     ],
     're-adjudicated': [
       "Whoever supplied the captain before is gone, but now the supply line is cut, and whoever moves goods on it now holds the garrison's debt.",
@@ -76,6 +78,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'It is known now that the captain sold armory requisitions while the stores ran dry, and the militiamen who drilled with rust want the tally read.',
       'The empty stores have a scandal attached: the captain collected on every issued blade, and the town is asking where the coin went.',
+      'The militiamen who drilled with rusted blades know now that the captain sold the good ones off the requisitions.',
     ],
     're-adjudicated': [
       'Whoever bought from the captain before is gone, but now the stores are empty, and the captain sells what is left in the armory to whoever pays.',
@@ -99,6 +102,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'It is public: while trade was strangled, the captain sold passage through the night gate, and the merchants who obeyed the embargo know what obedience cost them.',
       "The night traffic through the gate has come out with the captain's name on it, and so has the toll the captain took on every wagon.",
+      'Merchants who kept the embargo know now that the captain took a toll on every wagon let through the night gate.',
     ],
     're-adjudicated': [
       'Whoever backed the captain before is gone, but now the embargo chokes the routes, and the captain opens the night gate to whoever pays the toll.',
@@ -122,6 +126,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'The returning companies have heard what the captain did while they were at war, and the exemptions the captain sold after curfew are being read out by name.',
       'It is out that the captain ran the empty town for profit, and the companies that marched away are home and angriest of all.',
+      'The companies home from the war are reading the names of those who bought exemptions from the captain while they were gone.',
     ],
     're-adjudicated': [
       "Whoever paid the captain before is gone, but now the strength is levied away, and with no one watching, the captain carries on.",
@@ -145,6 +150,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the captain drew pay for soldiers who do not exist, and the muster roll is being read against the pay chest line by line.',
       'The hollow garrison broke open as a scandal: the captain kept dead men on the muster and pocketed their wages.',
+      "The garrison is hearing the dead men's names read off the captain's muster, with the wages drawn in their names.",
     ],
     're-adjudicated': [
       "Whoever split the missing soldiers' pay with the captain is gone, but now the garrison is hollow, and the captain draws the pay alone.",
@@ -168,6 +174,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the captain sold passage while the town stood under the war, and the families of those who could not pay are at the front of the crowd.',
       'The safe-conduct trade is public: the captain charged for escape during the fighting, and the survivors no longer trust the captain\'s word.',
+      'Families who could not pay the captain to escape the fighting are at the front of the crowd, with the survivors who could.',
     ],
     're-adjudicated': [
       'Whoever traded passage with the captain before is gone, but now the war presses in, and the captain sells safe-conducts to whoever can pay.',
@@ -191,6 +198,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the captain fed patrol schedules to the occupier, and every arrest made on those nights is being laid at the captain\'s door.',
       "The word is collaboration now, said in the open: the captain served the occupier's order, and the town remembers whose doors were left unbarred.",
+      "Families arrested on nights the captain gave the occupier the patrol schedules are laying each arrest at the captain's door.",
     ],
     're-adjudicated': [
       "Whoever paid the captain before is gone, but now the occupier holds the gates, and its garrison gives the captain orders.",
@@ -214,6 +222,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the captain's cruelties were paid devotion to a dark patron, and the town is deciding which is worse, the faith or the fee.",
       'It is out that a patron rewarded what the captain did on duty, and the town knows now that the beatings were paid for.',
+      'The people the captain beat on duty know now that a dark patron paid for every beating.',
     ],
     're-adjudicated': [
       "Whoever paid the captain before is gone, but now the patron that rewards the deed stands over the town, and it pays for the captain's cruelty in favor.",
@@ -237,6 +246,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       "It is out that the captain took the rival faith's coin to clear their path, and neither congregation trusts the captain now.",
       'The retainer is public: the rival mission paid the captain for empty streets, and every conversion in those wards is being re-read as bought ground.',
+      'People in the wards the captain kept empty for the rival mission are learning their streets were bought.',
     ],
     're-adjudicated': [
       "Whoever ran the retainer before is gone, but now the rival faith presses in, and its money pays the captain directly.",
@@ -260,6 +270,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'It is public what the captain did while the altars stood empty, and the reviving congregation names the captain aloud.',
       'The town knows now that when the faith went cold the captain went with it; what the captain took in that season is out, and the broken oath is remembered.',
+      'The reviving congregation is naming what the captain took while the faith was cold, and the broken oath with it.',
     ],
     're-adjudicated': [
       "Whoever paid the captain before is gone, but now the faith has gone cold, and no oath stands that could stop the captain.",
@@ -283,6 +294,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       "It is out that the captain was paid to keep the watch away from the temple, and both disgraces, the priests' and the captain's, are being read together.",
       'The town knows now why the vestry was never searched: the captain priced the not-searching, and the tainted clergy paid it gladly.',
+      'The faithful know now that the temple paid the captain to keep the watch away from the vestry.',
     ],
     're-adjudicated': [
       'Whoever held the captain before is gone, but now the priesthood is tainted, and the temple pays the captain to keep the watch away.',
@@ -306,6 +318,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the captain's raids were sold in advance, and every empty room the watch ever broke into is being counted against the captain.",
       'The capture has the captain\'s face on it now: the town knows its watch answered to the underworld, and knows who carried the answers.',
+      "The watchmen who broke into empty rooms on the captain's raids know now the raids were sold in advance.",
     ],
     're-adjudicated': [
       'Whoever owned the captain before is gone, but now the underworld holds the offices, and whoever holds them now kept the captain on.',
@@ -329,6 +342,7 @@ export const MILITARY_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the captain sold silence through the scandal, and the town has learned that its evidence room had a price list.',
       'The scandal has reached the captain by name: what surfaced and what sank in the watch house is being audited, and the pattern points one way.',
+      'People whose evidence sank in the watch house are learning the captain sold it, at prices on a list.',
     ],
     're-adjudicated': [
       'Whoever paid the captain before is gone, but now the scandal has broken, and the captain sells silence to whoever is afraid.',
