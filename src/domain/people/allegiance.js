@@ -36,7 +36,7 @@
  * THE HANDLERS (A4, `assignHandlers`), after the rank deal, DRAW-FREE (J-10), so a save's migration
  * and a birth pick the same handler: agents by standing (best rank, importance, roster order) dealt
  * in order to handlers (the criminal power's second, third, other members, then the crim-house faces
- * by house weight, the boss last and only when no one else can); the remainder goes to the last.
+ * by house weight, the boss last and only when no one else can); the deal goes round the pool (J-10 amended).
  *
  * Pure apart from the keyed draws; no clock, no Math.random.
  */
@@ -366,8 +366,11 @@ export function handlerPoolOf(cards, power, crimHouses) {
  * A4 — THE HANDLERS, DRAW-FREE (J-10). Every allegiance on the cast whose handler is unset (or names
  * no card on the roster) is dealt one: per pool (the allegiance's power, else the houses), the agents
  * by standing — best rank (1 < 2 < 3 < none), importance (pillar > key > notable > minor), roster
- * order — go in order to the pool's handlers; when agents outnumber handlers the remainder goes to
- * the last. Returns the cards it dealt a handler to. Mutates `allegiance.handler` in place.
+ * order — go in order to the pool's handlers; when agents outnumber handlers the deal goes ROUND
+ * the pool again (J-10 AMENDED BY CAUSE, the chair's ruling of 2026-11-08 on ALLEGIANCE-CAR3's band
+ * census: "the remainder to the last" piled ten agents on one handler beside five with one each, which
+ * fails the owner's law of plausibility), so no handler of a pool carries more than
+ * ceil(agents / handlers). Returns the cards it dealt a handler to. Mutates `allegiance.handler` in place.
  * @param {Rec[]} cards @param {unknown} settlement @returns {Rec[]}
  */
 export function assignHandlers(cards, settlement) {
@@ -392,7 +395,7 @@ export function assignHandlers(cards, settlement) {
     if (!handlers.length) continue;
     group.sort((x, y) => (bestRank(x.card) - bestRank(y.card)) || (importanceKey(x.card) - importanceKey(y.card)) || (x.at - y.at));
     group.forEach((x, i) => {
-      const handler = handlers[Math.min(i, handlers.length - 1)];
+      const handler = handlers[i % handlers.length];
       rec(x.card.allegiance).handler = String(handler.id);
       dealt.push(x.card);
     });
