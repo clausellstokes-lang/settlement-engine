@@ -4,17 +4,28 @@
 
 import { describe, test, expect } from 'vitest';
 import {
-  CHRONICLE_LIMITS,
+  CHRONICLE_LIMIT,
   createChronicleEntry,
   rotateToSummary,
   appendChronicleEntry,
 } from '../../src/lib/chronicle.js';
 
-describe('CHRONICLE_LIMITS', () => {
-  test('exposes the canonical tier caps', () => {
-    expect(CHRONICLE_LIMITS.free).toBe(5);
-    expect(CHRONICLE_LIMITS.premium).toBe(Infinity);
-    expect(CHRONICLE_LIMITS.elevated).toBe(Infinity);
+// RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V4, 2026-11-09, the owner's tier law): the three
+// tier caps (free 5 / premium ∞ / elevated ∞) were a tier lever on the owner's own credit-paid
+// narrations; there is ONE limit now. The census probe (free kept full×5 + summary×3 of eight;
+// premium full×8) is kept as the pin: every account keeps all eight full.
+describe('CHRONICLE_LIMIT', () => {
+  test('is one limit for every tier: unlimited', () => {
+    expect(CHRONICLE_LIMIT).toBe(Infinity);
+  });
+
+  test('the census probe: eight appends under the one limit keep eight FULL entries', () => {
+    let chronicle = [];
+    for (let i = 0; i < 8; i += 1) {
+      chronicle = appendChronicleEntry(chronicle, createChronicleEntry({ reason: 'regenerate', aiSettlement: { thesis: `T${i}` }, aiDailyLife: { d: i } }), { limit: CHRONICLE_LIMIT });
+    }
+    expect(chronicle.map((e) => e.mode)).toEqual(Array(8).fill('full'));
+    expect(chronicle.every((e) => e.aiSettlement && e.aiDailyLife)).toBe(true);
   });
 });
 

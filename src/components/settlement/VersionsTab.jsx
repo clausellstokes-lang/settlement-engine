@@ -28,8 +28,10 @@
  * copy and the shipped surface can never drift apart again in EITHER
  * direction.
  *
- * Cartographer-gated. Wanderer/Free users see a locked-state preview
- * with a Cartographer upgrade pitch.
+ * AT PARITY (the owner's tier law, 2026-11-09; the chair's ruling V3): the timeline,
+ * compare, manual snapshot AND revert are every owner's. A revert restores the engine's
+ * or the owner's own earlier state and authors nothing; law (1) is read narrowly as the
+ * editor. The store records snapshots tier-blind (settlementSlice recordSnapshot).
  *
  * Self-gates on `versionHistory` flag. Wraps the existing campaignState
  * data — no schema migration needed.
@@ -39,8 +41,6 @@ import { useState, useMemo, lazy, Suspense } from 'react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
-import { EVENTS } from '../../lib/analytics.js';
-import LockedDestination from '../primitives/LockedDestination.jsx';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch, EMPTY_VALUE, RED, GREEN_DEEP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -248,12 +248,8 @@ export default function VersionsTab({ save }) {
 function VersionsTimeline({ save }) {
   const mobile = useIsMobile();
   const enabled = flag('versionHistory');
-  const tier = useStore(s => s.auth.tier);
   const revertToSnapshot = useStore(s => s.revertToSnapshot);
   const recordSnapshot = useStore(s => s.recordSnapshot);
-  // 'premium' is the only paid tier value auth ever resolves (resolveTier maps
-  // elevated roles to it too); Cartographer is the PLAN name, not a tier value.
-  const isPaid = tier === 'premium';
   const [confirmRevert, setConfirmRevert] = useState(null);
   const [revertError, setRevertError] = useState(null);
   const [snapshotLabel, setSnapshotLabel] = useState('');
@@ -331,29 +327,10 @@ function VersionsTimeline({ save }) {
         padding: SP.lg, color: MUTED, fontFamily: sans, fontSize: FS.sm,
         fontStyle: 'italic',
       }}>
-        Version history is a Cartographer-tier feature, currently behind the
+        Version history is currently behind the
         <code style={{ marginLeft: 4, fontFamily: 'monospace' }}>versionHistory</code>
         {' '}flag. Flip the flag to preview.
       </div>
-    );
-  }
-
-  if (!isPaid) {
-    // Locked-state: locked features should render
-    // destinations that sell themselves, not modal walls or quiet toasts.
-    // We now route this through the shared LockedDestination primitive so
-    // every locked surface speaks one voice (and gets the mount-once
-    // analytics + a live "See Cartographer" CTA that opens the purchase
-    // modal — the old hand-rolled button was inert).
-    return (
-      <LockedDestination
-        feature="Version history"
-        eyebrow="Cartographer · Version history"
-        headline="Every change, on a timeline you can roll back."
-        body="Take a snapshot whenever you want, name it, and put any two of them side by side to see what changed. Auto-snapshot before every committed change and every revert, on a timeline with your canonize, export, and save milestones. Revert creates a new snapshot from the old state. Never destructive. The campaign-running worldbuilder's safety net."
-        ctaLabel="See Cartographer"
-        trackEvent={EVENTS.LOCKED_DESTINATION_SHOWN}
-      />
     );
   }
 

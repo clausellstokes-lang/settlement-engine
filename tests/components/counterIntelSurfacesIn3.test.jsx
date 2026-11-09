@@ -5,10 +5,16 @@
  *
  * THE WATCH PANEL (`sightPostures`' first UI consumer) and THE HOUSES BLOCK
  * (`projectPatronBindings`' first non-test consumer, with the exposure producer supplying its
- * `exposed` list). Pins: the DM reading sees the truth; every other reading (a non-premium
- * viewer, the player view, a public dossier) renders NOTHING and throws nothing; a world where
+ * `exposed` list). Pins: the DM reading sees the truth; every other reading (the player view, a
+ * public dossier) renders NOTHING and throws nothing; a world where
  * the counter-game is dark renders nothing; and the Houses block tells the town's knowledge apart
  * from the DM's truth exactly where the producer says a patron stands exposed.
+ *
+ * RE-KEYED BY CAUSE (lane TIER-PARITY-FIX, 2026-11-09, the owner's tier law): the DM reading is
+ * the OWNER's reading of the owner's own world state, whatever the tier — the seam keys on the
+ * view and the data, never the tier, so the `viewerIsPremium` prop is gone. The fail-closed arm
+ * that named "a non-premium viewer" is re-keyed to its cause: what stays closed is the player
+ * view, the public dossier, the dark world and no world at all.
  */
 import { describe, test, expect, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
@@ -48,19 +54,18 @@ const nameFor = (id) => names[id] || id;
 
 describe('IN-3 — the Watch panel: DM truth, fail-closed', () => {
   test('the DM reading sees whom the town watches, who watches it, its suspicion band and its gates', () => {
-    const { getByTestId, getAllByTestId } = render(<WatchPanel {...world({ scarred: true })} nameFor={nameFor} viewerIsPremium />);
+    const { getByTestId, getAllByTestId } = render(<WatchPanel {...world({ scarred: true })} nameFor={nameFor} />);
     const rows = getAllByTestId('watch-row').map((row) => row.textContent);
     expect(rows).toEqual(['Velden (open watch)', 'Westmark (covert eyes)']);
     expect(getByTestId('watch-suspicion').textContent).toBe('The court\'s suspicion reads decisive; its gates stand closed.');
   });
 
-  test('FAIL-CLOSED: a non-premium viewer, the player view, a public dossier and a dark world render nothing and throw nothing', () => {
+  test('FAIL-CLOSED: the player view, a public dossier and a dark world render nothing and throw nothing', () => {
     for (const props of [
-      { ...world(), viewerIsPremium: false },
-      { ...world(), viewerIsPremium: true, playerView: true },
-      { ...world(), viewerIsPremium: true, publicDossier: true },
-      { ...world({ lit: false }), viewerIsPremium: true },
-      { viewerIsPremium: true },
+      { ...world(), playerView: true },
+      { ...world(), publicDossier: true },
+      { ...world({ lit: false }) },
+      {},
     ]) {
       const { container } = render(<WatchPanel {...props} nameFor={nameFor} />);
       expect(container.innerHTML).toBe('');
@@ -71,7 +76,7 @@ describe('IN-3 — the Watch panel: DM truth, fail-closed', () => {
 
 describe('IN-3 — the Houses block: the truth beside what the town knows', () => {
   test('a covert patron reads not known until the exposure producer turns it up, and named once it has', () => {
-    const quiet = render(<HousesBlock {...world()} viewerIsPremium />);
+    const quiet = render(<HousesBlock {...world()} />);
     expect(quiet.getAllByTestId('house-row')).toHaveLength(1);
     expect(quiet.getByTestId('houses-block').textContent).toContain('Serves Ashwater Syndicate.');
     expect(quiet.getByTestId('house-known').textContent).toBe('The town does not know whom it serves.');
@@ -81,17 +86,16 @@ describe('IN-3 — the Houses block: the truth beside what the town knows', () =
     const hot = world({ scarred: true });
     const exposed = exposedPatronInstitutions({ worldState: hot.worldState, snapshot: { byId: new Map([['h', { id: 'h', settlement: hot.settlement }]]), regionalGraph: hot.regionalGraph }, item: { id: 'h', settlement: hot.settlement } });
     expect(exposed).toEqual(['whisper_market']);
-    const loud = render(<HousesBlock {...hot} viewerIsPremium />);
+    const loud = render(<HousesBlock {...hot} />);
     expect(loud.getByTestId('house-known').textContent).toBe('The town now knows it serves Ashwater Syndicate.');
   });
 
   test('FAIL-CLOSED: every reading but the DM\'s, and a dark world, renders nothing and throws nothing', () => {
     for (const props of [
-      { ...world(), viewerIsPremium: false },
-      { ...world(), viewerIsPremium: true, playerView: true },
-      { ...world(), viewerIsPremium: true, publicDossier: true },
-      { ...world({ lit: false }), viewerIsPremium: true },
-      { viewerIsPremium: true },
+      { ...world(), playerView: true },
+      { ...world(), publicDossier: true },
+      { ...world({ lit: false }) },
+      {},
     ]) {
       const { container } = render(<HousesBlock {...props} />);
       expect(container.innerHTML).toBe('');

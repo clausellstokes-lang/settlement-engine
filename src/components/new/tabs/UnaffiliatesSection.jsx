@@ -16,10 +16,12 @@
  * realm with an empty list still gets its calm in-world sentence, because "nobody is
  * sheltering here" is a fact about the town rather than a blank.
  *
- * AUDIENCE, THROUGH THE ONE SPELLING. The covert half (whose leash a compromised official
- * was on) and the DM verbs are built ONLY for a DM-owner reading: never on a player view,
- * never on a public or shared dossier. The entitlement half of that reading is asked
- * through `viewerCanAuthor` (src/lib/viewerAuthority.js) rather than by re-spelling
+ * AUDIENCE, SPLIT BY WHAT EACH HALF IS (the owner's tier law, 2026-11-09). The covert half
+ * (whose leash a compromised official was on) is DM TRUTH, a READ of the owner's own world
+ * state: it keys on the view and the data alone — never on a player view, never on a public
+ * or shared dossier, and never on the tier. The DM verbs are world WRITES (the simulator,
+ * law (2)): their entitlement half is asked through `viewerCanAuthor`
+ * (src/lib/viewerAuthority.js) rather than by re-spelling
  * `tier === 'premium' || elevated` here, because these verbs WRITE THE WORLD — settling,
  * killing and pardoning are authoring in the strongest sense the predicate names, and a
  * hand-copied gate on a paid surface is the exact drift the single-source law exists to
@@ -101,17 +103,19 @@ export default function UnaffiliatesSection({ saveId = null, settlement = null, 
     : (settlement?.id != null ? String(settlement.id) : null);
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
-  // ONE SPELLING of the authoring authority (see the header), narrowed by the render path.
+  // The covert READ keys on the render path alone; the verbs (world writes) add the ONE
+  // SPELLING of the authoring authority (see the header).
+  const seesCovert = !playerView && !publicDossier;
   const canAuthor = useStore(viewerCanAuthor);
-  const seesSecrets = canAuthor && !playerView && !publicDossier;
+  const seesSecrets = canAuthor && seesCovert;
 
   const view = useMemo(() => {
     if (!sid || !Array.isArray(campaigns)) return null;
     const campaign = campaigns.find(c => (c.settlementIds || []).map(String).includes(sid));
     if (!campaign || !wanderersDoorOpen(campaign)) return null;
-    const rows = unaffiliateRows({ campaign, settlementId: sid, saves: savedSettlements, seesSecrets });
+    const rows = unaffiliateRows({ campaign, settlementId: sid, saves: savedSettlements, seesSecrets: seesCovert });
     return { campaignId: campaign.id == null ? '' : String(campaign.id), rows };
-  }, [sid, campaigns, savedSettlements, seesSecrets]);
+  }, [sid, campaigns, savedSettlements, seesCovert]);
 
   // The lane is dark for this realm: no rubric, no empty block, no tab noise.
   if (!view) return null;

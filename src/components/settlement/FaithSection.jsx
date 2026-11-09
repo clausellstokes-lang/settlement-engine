@@ -13,12 +13,14 @@
  *     the key, a lapsed account's owned data, or a SHARED premium pantheon):
  *     the full panel renders READ-ONLY to EVERYONE. A shared pantheon is
  *     premium's best advertisement.
- *   • TEASER — no embeds AND the viewer is not premium: the STATIC GENERIC
- *     true-neutral line (naming NO deity) + a quiet upgrade prompt. This is what
- *     a FREE dossier shows — it can never name a latent deity because the model
- *     never reads config.latentPantheon.
- *   • HIDDEN — premium / elevated with no embeds (faith:'none' / deity-free):
- *     nothing renders.
+ *   • TEASER — no embeds: the engine-made faith line (naming NO deity), for EVERY
+ *     owner whatever the tier (the owner's tier law, 2026-11-09: the line is
+ *     generated data every account holds). It can never name a latent deity
+ *     because the model never reads config.latentPantheon. The quiet upgrade
+ *     prompt below it sells the simulator and custom content, so it shows only
+ *     to a viewer who does not hold them (never on a public dossier).
+ *   • HIDDEN — retired 2026-11-09 (TIER-PARITY-FIX V2): it withheld the faith
+ *     line from premium, the inverted parity the census measured.
  *
  * Pure presentational over faithPanelModel; the only store reads are the viewer
  * tier + the upsell seam (setActivePricingMoment / setPurchaseModalOpen).
@@ -293,9 +295,9 @@ function ActiveFaith({ model }) {
  * nothing) rather than a fixed sentence that denied the church on every generated settlement.
  * The upsell stands apart from it, below a rule: selling copy never reads as a fact about
  * the place.
- * @param {{ lines: ReadonlyArray<string>, publicDossier?: boolean }} props
+ * @param {{ lines: ReadonlyArray<string>, publicDossier?: boolean, showUpsell?: boolean }} props
  */
-function FaithTeaser({ lines, publicDossier }) {
+function FaithTeaser({ lines, publicDossier, showUpsell }) {
   // THE PHONE PROSE FLOOR — the true-neutral line and the upgrade prompt, the
   // two passages this teaser exists to carry.
   const mobile = useIsMobile();
@@ -326,7 +328,7 @@ function FaithTeaser({ lines, publicDossier }) {
       <div data-testid="faith-line" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         {lines.join(' ')}
       </div>
-      {!publicDossier && (
+      {showUpsell && !publicDossier && (
         <div data-testid="faith-upsell" style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', borderTop: `1px solid ${BORDER}`, paddingTop: 8, marginTop: 4 }}>
           <span style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             Awaken a living pantheon (a patron god, rival cults, and the rising and ebbing of devotion) with a premium campaign.
@@ -359,8 +361,7 @@ export default function FaithSection({ settlement, publicDossier = false }) {
 
   // ACTIVE — the settlement owns live embeds: show the full panel to everyone.
   if (model.hasEmbed) return <ActiveFaith model={model} />;
-  // HIDDEN — premium/elevated, deity-free (faith:'none'): render nothing.
-  if (isPremium) return null;
-  // TEASER — free/anon, no embeds: the faith line (names NO deity) and the upsell apart.
-  return <FaithTeaser lines={model.line || []} publicDossier={publicDossier} />;
+  // TEASER — no embeds: the faith line (names NO deity) for every owner; the upsell apart,
+  // only for the viewer who does not hold what it sells.
+  return <FaithTeaser lines={model.line || []} publicDossier={publicDossier} showUpsell={!isPremium} />;
 }

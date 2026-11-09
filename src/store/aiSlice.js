@@ -1009,11 +1009,8 @@ export const createAiSlice = (set, get) => ({
    * from store state — so callers should invoke this BEFORE clearing those
    * fields (e.g. before the revert nulls them).
    *
-   * Chronicle cap is tier-based:
-   *   • elevated (dev/admin) → unlimited full entries
-   *   • premium              → unlimited full entries
-   *   • free / anon          → CHRONICLE_LIMITS.free (5) full entries, older
-   *                            full entries rotate to `summary` mode
+   * Chronicle cap: ONE limit for every tier, CHRONICLE_LIMIT (unlimited full entries;
+   *   the owner's tier law, 2026-11-09 — no tier read).
    *
    * Persist failure is logged but non-fatal: the generation/revert itself
    * succeeded from the user's perspective; only cross-session history is

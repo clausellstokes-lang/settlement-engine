@@ -34,7 +34,6 @@
 
 import { useMemo, useState } from 'react';
 
-import { useStore } from '../../store/index.js';
 import { relationshipChronicle } from '../../domain/display/relationshipChronicle.js';
 import {
   humanizeToken, incidentPhrase, tickCalendarDetailLabel,
@@ -143,11 +142,10 @@ function ChronicleRow({ row, nameFor }) {
  */
 export default function RelationshipChronicleSection({ campaign, nameById }) {
   const mobile = useIsMobile();
-  const tier = useStore(s => s.auth?.tier);
-  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
-  // The covert half is DM knowledge — BeliefDivergenceBand's and
-  // PerspectiveStandings' question verbatim, and its census row says so.
-  const includeGroundTruth = tier === 'premium' || elevated;
+  // V1-map (the owner's tier law, 2026-11-09): the panel mounts only inside the world map's
+  // campaign Herald, whose outer gate carries law (6); the inner tier term mirrored it and is
+  // deleted. The data gate is the read's own (beliefs, ledgers) — no behaviour change.
+  const includeGroundTruth = true;
 
   const ids = useMemo(() => (campaign?.settlementIds || []).map(String), [campaign]);
   const nameFor = useMemo(() => (id) => nameById?.get(String(id)) || String(id), [nameById]);

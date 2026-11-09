@@ -107,6 +107,12 @@ const REASON_CLASSES = {
     'Campaign management, gallery import, or cloud sync entitlement — spelled with the '
     + 'ROLE literals (developer/admin) rather than isElevated(). A separate convergence '
     + 'candidate with its own owner queue entry; not this lane.',
+  'surveyor-entitlement':
+    'Access to the Surveyor, the AI control surface — law (7) of the owner\'s tier law '
+    + '(2026-11-09: "Premium only"): premium (Founders folded in) OR staff OR the server\'s '
+    + 'own has_surveyor_entitlement() answer (migration 209). It deliberately omits nothing the '
+    + 'server admits and admits nothing the server refuses; the two lazy-chunk copies are kept '
+    + 'byte-identical by tests/components/surveyorGateParity.test.js.',
 };
 
 /**
@@ -117,72 +123,37 @@ const REASON_CLASSES = {
 const EXEMPTIONS = {
   'src/App.jsx': 'route-guard',
   'src/AppViews.jsx': 'route-guard',
-  // R-5b: was 'documented-divergence' (npcAuthoringAllowed). That divergence is
-  // CLOSED — npcAuthoringAllowed now reads viewerCanAuthor, and the file is
-  // asserted below as a consumer of the single source. The row does NOT retire
-  // outright, because one raw comparison remains and asks a DIFFERENT question:
-  // `viewerIsPremium` (OutputContainer.jsx) gates War & Faith tab PRESENCE and
-  // deliberately omits the founder tier.
-  'src/components/OutputContainer.jsx': 'content-visibility',
+  // ⬇ TIER-PARITY-FIX V2 (2026-11-09, the owner's tier law) STRUCK the OutputContainer row.
+  // R-5b had kept it for one raw comparison, `viewerIsPremium`, the War & Faith tab-PRESENCE
+  // gate; V1 moved the War tone and the Relationships truth onto the view, and V2 the Faith
+  // tab's presence onto the embed and the view, so the read is DELETED and the file is a
+  // plain consumer of the single source (asserted below). The census shrinks by one.
   'src/components/PricingPage.jsx': 'sell-to-the-tier',
   'src/components/PurchaseModal.jsx': 'sell-to-the-tier',
   'src/components/SettlementsPanel.jsx': 'campaign-or-import-entitlement',
   'src/components/account/AccountDataPrivacySection.jsx': 'quota-or-limit',
   'src/components/account/AccountSubscriptionSection.jsx': 'sell-to-the-tier',
+  // TIER-PARITY-FIX (2026-11-09): the Surveyor is premium only; the account's inlined twin of
+  // isSurveyorTier now reads the tier (see the surveyorGate.js row).
+  'src/components/account/useAccountSurveyorGate.js': 'surveyor-entitlement',
   'src/components/gallery/GalleryCampaigns.jsx': 'campaign-or-import-entitlement',
   'src/components/gallery/GalleryDetail.jsx': 'campaign-or-import-entitlement',
   'src/components/gallery/GalleryMaps.jsx': 'campaign-or-import-entitlement',
   'src/components/instant/InstantWorldEntry.jsx': 'quota-or-limit',
-  'src/components/map/BeliefDivergenceBand.jsx': 'content-visibility',
-  // Joined 2026-08-04 by FP wave GR-0's DM true-state chip. The comparison is
-  // BeliefDivergenceBand's line VERBATIM, two files away — `tier === 'premium' ||
-  // elevated` — and it asks that file's question exactly: may this viewer be shown
-  // GROUND TRUTH, which is the reason class's own first example. Routing it through
-  // viewerCanAuthor would admit the founder tier to a surface premium-or-elevated
-  // currently defines, i.e. a paid-surface behaviour change, which this walker's header
-  // records as owner-gated. Recorded rather than converged, for that reason.
-  // ⚠ AND THE CHIP IS NOT DARK. treatyTrueStateChip is fail-closed on this AUTHORITY
-  // and NOT on treatyLifecycleVoiceEnabled: driven with the flag absent and lit it
-  // returns the identical sentence (executed 2026-08-04). GR-0's sibling surface, the
-  // longevity age line, IS flag-gated and returns null dark. So this row banks a live
-  // premium content surface, not a dormant one — reported to the chair as a stop, and
-  // this comment is where the next reader finds it.
-  'src/components/map/TreatyPanel.jsx': 'content-visibility',
-  // DESK-4 (T11 car 8): the believed half of the perspective-standings view is
-  // BeliefDivergenceBand's question verbatim, two files away — may this viewer
-  // be shown GROUND-TRUTH-ADJACENT DM knowledge (a settlement's private belief
-  // model). Same spelling, same reason class, same non-convergence rationale as
-  // that row above.
-  'src/components/map/PerspectiveStandings.jsx': 'content-visibility',
-  // LT39 car 4: the relationship chronicle's covert half. The comparison is
-  // PerspectiveStandings' line VERBATIM, in the file mounted directly beneath it
-  // in the same War door, and it asks that file's question exactly: may this
-  // viewer be shown DM knowledge — here the quiet business (spies, sabotage,
-  // bought men) the engine records against a relationship with no visibility
-  // field of its own. Routing it through viewerCanAuthor would admit the founder
-  // tier to a surface premium-or-elevated currently defines, i.e. a paid-surface
-  // behaviour change, which this walker's header records as owner-gated.
-  // ⚠ AND NOTE WHERE THE GATE ACTUALLY LIVES: this comparison only chooses what
-  // to ASK FOR. The withholding is done inside domain/display/relationshipChronicle.js,
-  // which drops every line that is not explicitly `public` — an unclassified type
-  // included — so a bug in this one line cannot open the secrets seam by itself.
-  'src/components/map/RelationshipChronicleSection.jsx': 'content-visibility',
-  // LT39 car 5: the NPC trail — the ladder's dated contests and seat changes.
-  // Same line, same door, same question as the two rows above: may this viewer be
-  // shown DM knowledge. A contest the loser never learned of is the loser's
-  // secret, so there is no player-facing form of that page at all, and the
-  // withholding is done inside domain/display/npcInteriorityRead.js, whose
-  // groundTruth block is fail-closed by its own constitution.
-  'src/components/map/NpcTrailSection.jsx': 'content-visibility',
+  // ⬇ TIER-PARITY-FIX V1-map (2026-11-09, the owner's tier law) STRUCK five rows here:
+  // BeliefDivergenceBand, TreatyPanel, PerspectiveStandings, RelationshipChronicleSection and
+  // NpcTrailSection. Each spelled `tier === 'premium' || elevated` to ask "may this viewer see
+  // DM knowledge", but each mounts only inside the world map's campaign Herald, whose outer gate
+  // (useWorldMapCampaignModel, the row below) already carries law (6): the inner term mirrored
+  // it, and it is DELETED (`includeGroundTruth = true`). The withholding still lives in each
+  // read model, fail-closed by default. The census shrinks by five.
   'src/components/map/useWorldMapCampaignModel.js': 'campaign-or-import-entitlement',
-  'src/components/new/tabs/RumorsTab.jsx': 'content-visibility',
-  // §805 split: the WarFaithTab row became two. WarTab spells the RumorsTab
-  // includeGroundTruth line verbatim (may this viewer see GROUND TRUTH — unit
-  // positions' true picture + the belief band); FaithTab mirrors FaithSection's
-  // mode resolution to decide the honest-absence note. Both are the same
-  // content-visibility question the old combined tab carried.
+  // ⬇ TIER-PARITY-FIX V1 (2026-11-09, the owner's tier law) STRUCK the RumorsTab and WarTab
+  // rows: their DM truth now keys on the view and the data (`!playerView && !publicDossier`),
+  // the tier read DELETED, so neither file spells a premium comparison. The census shrinks.
+  // §805 split: FaithTab mirrors FaithSection's mode resolution to decide the honest-absence
+  // note — the content-visibility question the old combined tab carried.
   'src/components/new/tabs/FaithTab.jsx': 'content-visibility',
-  'src/components/new/tabs/WarTab.jsx': 'content-visibility',
   // ⬇ ROW O-16 STRUCK THIS ROW, AND THE STRIKE IS THE WIN, NOT A WAIVER.
   // src/components/pricing/FounderTile.jsx used to spell `tier !== 'premium'`
   // itself, in a copy of the same three-condition gate that
@@ -195,9 +166,13 @@ const EXEMPTIONS = {
   'src/components/pricing/PricingTierCards.jsx': 'sell-to-the-tier',
   'src/components/session/SessionMode.jsx': 'content-visibility',
   'src/components/settlement/FaithSection.jsx': 'content-visibility',
-  'src/components/settlement/VersionsTab.jsx': 'quota-or-limit',
+  // ⬇ TIER-PARITY-FIX V3 (2026-11-09) STRUCK the VersionsTab row: version history is at parity
+  // (revert included, the chair's ruling), the `isPaid` read DELETED. The census shrinks by one.
   'src/components/settlementDetail/resolveExportSeam.js': 'content-visibility',
   'src/components/settlements/SaveQuotaMeter.jsx': 'quota-or-limit',
+  // TIER-PARITY-FIX (2026-11-09): THE Surveyor predicate (isSurveyorTier) admits an active
+  // premium tier, as the server's 209 does — law (7). A different question from authoring.
+  'src/components/surveyor/surveyorGate.js': 'surveyor-entitlement',
   'src/hooks/useCustomContentCloudSync.js': 'campaign-or-import-entitlement',
   'src/hooks/useFounderTileEligible.js': 'sell-to-the-tier',
   'src/hooks/useReferralIntent.js': 'sell-to-the-tier',
@@ -212,10 +187,9 @@ const EXEMPTIONS = {
   'src/store/campaignWorldPulseSlice.js': 'quota-or-limit',
   'src/store/galleryImportMap.js': 'campaign-or-import-entitlement',
   'src/store/galleryImportSettlement.js': 'campaign-or-import-entitlement',
-  // W-F6's activateFaithIfEntitled — the raw comparison this exemption covers —
-  // moved here from settlementSlice.js under THE DECOMPOSITION WAVE (lane D),
-  // byte-identical. The exemption follows the CODE, not the filename.
-  'src/store/settlementLifecycleHelpers.js': 'content-visibility',
+  // ⬇ TIER-PARITY-FIX V5 (2026-11-09) STRUCK the settlementLifecycleHelpers row: W-F6's
+  // activateFaithIfEntitled lost its tier arm (premade gods are engine content, not custom
+  // content), so the file spells no premium comparison. The census shrinks by one.
 };
 
 /** Strip block + line comments so a signature named in prose is not a hit. */

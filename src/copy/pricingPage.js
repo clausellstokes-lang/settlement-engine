@@ -33,8 +33,8 @@ export const pricingPage = {
     surveyor: {
       name: 'Surveyor',
       badge: 'AI · early access',
-      lead: 'The optional AI workshop, priced per task.',
-      body: 'An analyst for your world, prose briefs, session interpretation, and construction from intent. Every task has a flat price below. No subscription required. It proposes; only the engine writes canon.',
+      lead: 'The AI workshop, with Cartographer. Each task has its own price.',
+      body: 'An analyst for your world, prose briefs, session interpretation, and construction from intent, for Cartographer accounts. Every task has a flat price below. It proposes; only the engine writes canon.',
       byok: 'Bring your own key: connect your own Anthropic or OpenAI key and pay your provider directly for inference. Tasks then run without touching your credit balance.',
       menuLink: 'See the task menu',
     },
@@ -152,11 +152,11 @@ export const pricingPage = {
     // ⛔ SURVEYOR SITS IN THE TIER ROW AND HAD NO COLUMN HERE, so a reader who
     // compared the plans met two columns and was left to guess what happened to the
     // third band above. It gets a NOTE rather than a column because it is not a
-    // plan: THE ENTITLEMENT LADDER's own `surveyor-stages` row already reads
-    // 'per task' under BOTH plan columns (config/entitlementLadder.js), which is
-    // the whole fact. A third column would have repeated one value down an empty
-    // table and implied a subscription that does not exist.
-    surveyorNote: 'Surveyor has no column here because it is not a plan: its AI tasks are priced per task, on either plan, with no subscription.',
+    // plan: THE ENTITLEMENT LADDER's own `surveyor-stages` row reads 'per task' under
+    // the Cartographer column and no under the free one (config/entitlementLadder.js; the
+    // owner, 2026-11-09: the Surveyor is "Premium only"). A third column would repeat the
+    // Cartographer column.
+    surveyorNote: 'Surveyor has no column here because it comes with Cartographer: its AI tasks are priced per task.',
   },
 
   // ── Band 5 — the objection-first FAQ ─────────────────────────────────────

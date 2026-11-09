@@ -584,11 +584,9 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
 
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
-  const tier = useStore(s => s.auth?.tier);
-  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
-  // The DM truth reveal (the includeGroundTruth convention, RumorsTab verbatim):
-  // never on the player view, never on a public/shared dossier.
-  const includeGroundTruth = (tier === 'premium' || elevated) && !playerView && !publicDossier;
+  // The DM truth reveal (the includeGroundTruth convention, RumorsTab verbatim): the VIEW
+  // and the DATA, never the tier — never on the player view, never on a public/shared dossier.
+  const includeGroundTruth = !playerView && !publicDossier;
 
   const nameFor = useMemo(() => {
     const byId = new Map();

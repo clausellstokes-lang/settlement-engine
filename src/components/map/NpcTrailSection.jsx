@@ -89,12 +89,11 @@ function TrailCard({ name, rows }) {
  */
 export default function NpcTrailSection({ campaign }) {
   const mobile = useIsMobile();
-  const tier = useStore(s => s.auth?.tier);
-  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const saves = useStore(s => s.savedSettlements);
-  // The court's dated record is DM knowledge — BeliefDivergenceBand's question
-  // verbatim, and this file's census row says so.
-  const includeGroundTruth = tier === 'premium' || elevated;
+  // V1-map (the owner's tier law, 2026-11-09): the panel mounts only inside the world map's
+  // campaign Herald, whose outer gate carries law (6); the inner tier term mirrored it and is
+  // deleted. The data gate is the read's own (beliefs, ledgers) — no behaviour change.
+  const includeGroundTruth = true;
 
   const people = useMemo(() => {
     if (!includeGroundTruth) return [];

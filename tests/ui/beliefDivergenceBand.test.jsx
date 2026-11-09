@@ -13,6 +13,7 @@
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
+import { settlementBeliefs } from '../../src/domain/display/settlementBeliefs.js';
 
 afterEach(cleanup);
 
@@ -93,11 +94,20 @@ describe('BeliefDivergenceBand', () => {
       .queryByTestId('belief-divergence-band')).toBeTruthy();
   });
 
-  test('ADVERSARIAL: an anon / free viewer sees NOTHING — no belief, no deity name leaks', () => {
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V1-map, 2026-11-09, the owner's tier law): the
+  // band's inner tier term only mirrored the world map's outer gate (law (6):
+  // useWorldMapCampaignModel hands a viewer without the world map NO campaign), so it was
+  // deleted. The fail-closed claim keeps both of its real homes: the read model's PLAYER
+  // projection is empty (no belief, no deity name), and a viewer the map hands no campaign
+  // meets nothing at all.
+  test('ADVERSARIAL: the player projection is empty and a viewer with no campaign sees NOTHING — no belief, no deity name leaks', () => {
+    const c = beliefCampaign();
+    // anchored: the DM projection of the same ledger carries the beliefs, so the empty player one is a withholding.
+    expect(settlementBeliefs({ worldState: c.worldState, observerId: 'alderport', includeGroundTruth: true }).length).toBeGreaterThan(0);
+    expect(settlementBeliefs({ worldState: c.worldState, observerId: 'alderport', includeGroundTruth: false })).toEqual([]);
     setStore({ auth: { tier: 'anon' }, isElevated: () => false });
-    const { queryByTestId, container } = render(<BeliefDivergenceBand campaign={beliefCampaign()} nameById={nameById} />);
+    const { queryByTestId, container } = render(<BeliefDivergenceBand campaign={null} nameById={nameById} />);
     expect(queryByTestId('belief-divergence-band')).toBeNull();
-    // Fail-closed: the DM-only ledger (deity names, believed strength) never renders.
     expect(container.textContent).not.toMatch(/Old Sea-God/);
     expect(container.textContent).not.toMatch(/negligible/);
   });

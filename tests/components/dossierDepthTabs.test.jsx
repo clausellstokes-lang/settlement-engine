@@ -96,14 +96,19 @@ describe('FaithTab — the constitutional gate (free/anon see NO deity names)', 
     expect(screen.getByTestId('faith-patron').textContent).toMatch(/Sunlord Aurelian/);
   });
 
-  it('a premium, deity-free town renders the honest absence note (never a blank body)', () => {
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V2, 2026-11-09, the owner's tier law): the
+  // premium owner of a deity-free town reads the SAME faith line the free owner reads, in
+  // FaithSection's teaser (its HIDDEN mode is retired), without the upsell that sells what
+  // premium already holds. The honest-absence branch that re-printed the line is gone.
+  it('a premium, deity-free town reads the faith line every owner reads (never a blank body), and no upsell', () => {
     useStore.__set({ auth: { tier: 'premium' } });
     const { container } = render(<FaithTab settlement={{ name: 'Quietford', config: {} }} />);
     expect(screen.queryByTestId('faith-section')).toBeNull();
-    expect(screen.queryByTestId('faith-teaser')).toBeNull();
-    // LANE FAITH (2026-11-03): the absence note is the faith line, read off the one faith
-    // reading; a town with nothing of a church keeps the quiet-observances line.
-    expect(screen.getByTestId('faith-desk-teaser').textContent).toMatch(/quiet observances/);
+    // LANE FAITH (2026-11-03): the line is read off the one faith reading; a town with
+    // nothing of a church keeps the quiet-observances line.
+    expect(screen.getByTestId('faith-line').textContent).toMatch(/quiet observances/);
+    expect(screen.queryByTestId('faith-desk-teaser')).toBeNull(); // anchored: the faith line above is on this page, printed once
+    expect(screen.queryByTestId('faith-upsell')).toBeNull(); // anchored: the same teaser rendered its line above
     expect(container.textContent.length).toBeGreaterThan(0);
   });
 });
@@ -276,16 +281,22 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(wars.textContent).toMatch(/attacking/i);
   });
 
-  it('the DM belief band renders for the premium owner and NEVER for anon / playerView', () => {
-    asWarOwner();
-    const first = render(<WarTab settlement={homeTown()} saveId="home" />);
-    expect(screen.getByTestId('war-beliefs').textContent).toMatch(/Foehold: believed slight, in the field/);
-    first.unmount();
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX, 2026-11-09, the owner's tier law): the DM truth
+  // keys on the VIEW and the DATA, never the tier. The arm that read "NEVER for anon" pinned a
+  // tier; its cause is the audience, so it is re-keyed to the public dossier, and the free owner
+  // of the same world state now reads the band as the premium owner does.
+  it('the DM belief band renders for the owner of the world state, any tier, and NEVER on the public dossier or the player view', () => {
+    for (const tier of ['premium', 'free']) {
+      asWarOwner(tier);
+      const owner = render(<WarTab settlement={homeTown()} saveId="home" />);
+      expect(screen.getByTestId('war-beliefs').textContent).toMatch(/Foehold: believed slight, in the field/);
+      owner.unmount();
+    }
 
-    // Fail-closed: an anon viewer keeps the believed unit picture (the player
+    // Fail-closed: the public reader keeps the believed unit picture (the player
     // half of §805) but no truth disclosure and no belief band.
-    useStore.__set({ auth: { tier: 'anon' }, campaigns: [warCampaign()], savedSettlements: WAR_SAVES });
-    const second = render(<WarTab settlement={homeTown()} saveId="home" />);
+    asWarOwner();
+    const second = render(<WarTab settlement={homeTown()} saveId="home" publicDossier />);
     expect(screen.getByTestId('war-units')).toBeTruthy();
     expect(screen.queryByTestId('war-beliefs')).toBeNull();
     expect(screen.queryByTestId('war-unit-truth')).toBeNull();
@@ -570,12 +581,13 @@ describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
     // LANE FAITH (2026-11-03): a premium viewer of a deity-free town with a parish church sees
     // the faith line (the church, and the god and the name left to the DM). DS-FTH-2's PRIVATE
     // DOSSIER pool denies an organised faith, so beside a church its lens is silent.
-    // FaithSection renders NOTHING here (its HIDDEN mode).
+    // RE-KEYED (TIER-PARITY-FIX V2, 2026-11-09): FaithSection prints the line for every owner
+    // (its HIDDEN mode retired), so the line is FaithSection's, printed once.
     useStore.__set({ auth: { tier: 'premium' } });
     const town = { id: 'quiet', name: 'Quietford', tier: 'village', config: {}, institutions: [{ name: 'Parish church', category: 'Religious' }] };
     const { container } = render(<FaithTab settlement={town} />);
-    // The position carries the line alone: the PRIVATE DOSSIER lens is stood down.
-    expect(screen.getByTestId('faith-desk-teaser').textContent).toBe(faithPanelModel(town).line.join(' '));
+    // The line alone: the PRIVATE DOSSIER lens is not drawn.
+    expect(screen.getByTestId('faith-line').textContent).toBe(faithPanelModel(town).line.join(' '));
     // The standing message carries no call to action (chair ruling F8) and no denial.
     expectAbsentWithAnchor(container.textContent, 'Assign a patron deity', 'A parish church keeps the faith in the village.', 'F8 call to action');
     expect(faithDenialFindings(town, container.textContent)).toEqual([]);

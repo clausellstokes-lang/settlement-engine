@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 208;
+export const MIGRATION_TRAIN_REPO_HEAD = 209;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -771,6 +771,38 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({ kind: 'function', name: 'get_unlisted_dossier' }),
       Object.freeze({ kind: 'function', name: 'list_my_unlisted_dossiers' }),
       Object.freeze({ kind: 'table', name: 'settlements' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'surveyor-premium-only',
+    from: 209,
+    to: 209,
+    purpose: 'TIER-PARITY-FIX (the owner, 2026-11-09: the Surveyor is "Premium only"; law (7) of the '
+      + 'owner\'s tier law): ONE re-stated SECURITY DEFINER function. public.has_surveyor_entitlement() '
+      + 'is 201\'s body with the row test narrowed and one disjunct added: staff first (201, unchanged), '
+      + 'then an active premium tier through 024\'s current_user_has_premium_access() (tier premium or '
+      + 'is_founder — Founders as lifetime premium), then an active surveyor_entitlements row whose '
+      + 'source is \'grant\' (the admin concierge path) — a purchased \'subscription\' row no longer '
+      + 'admits by itself. It is the gate the nine AI-control edge functions and the BYOK RPCs (159, '
+      + '191) route through, so the client\'s isSurveyorTier and the server agree by construction. It '
+      + 'creates no table, no column, no policy and no row, mints and deletes no entitlement, and '
+      + 'leaves the surveyor_stage_enabled() kill switch, the per-task metering and the dark '
+      + 'SURVEYOR_PLAN untouched. DEPLOYMENT remains the owner\'s manual act (`supabase db push` plus '
+      + 'the applied-head bump in that same act), after 207 and 208.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 201, this wave is one re-stated function and its own @rollback annotation spells the '
+        + 'whole reversal out: re-run 201\'s body verbatim (staff OR any active row) — which is why 209 '
+        + 'classifies as documented-manual-reversal rather than taking the wave policy. Nothing is '
+        + 'destroyed on reversal: the function holds no state and no row was minted or deleted; the '
+        + 'only consequence is that a bare Cartographer and a Founder are refused on the AI layer again '
+        + 'and a purchased row admits again.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: 'has_surveyor_entitlement' }),
     ]),
   }),
 ]);

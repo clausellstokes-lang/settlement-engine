@@ -240,8 +240,8 @@ function QuickStart() {
   const quickSteps = (
     <>
       <SubHead size={FS.lg}>First settlement in 60 seconds</SubHead>
-      <Step n={1}>On the Create tab, pick a <strong>mode</strong> - <strong>Basic Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
-      <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode (no account) reaches up to {ANON_MAX_SIZE_LABEL}; sign in to unlock City and Metropolis.</Step>
+      <Step n={1}>Signed in, pick a <strong>mode</strong> on the Create tab - <strong>Basic Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
+      <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Without an account you forge a {ANON_MAX_SIZE_LABEL} only; sign in free for every size.</Step>
       <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong>. Forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
       <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
         <div style={{ width:6, height:6, borderRadius:'50%', background:swatch['#B8860B'], flexShrink:0, marginTop:7 }}/>
@@ -249,7 +249,7 @@ function QuickStart() {
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>Overview</strong> tab first. It gives you the town at a glance, ready for the table.</Step>
       <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and (where relevant) legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
-      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
+      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> a print-ready PDF briefing (unlimited with Cartographer; on a free account, $2.99 keeps a saved settlement's PDF), or copy the Narrative AI Prompt for any AI assistant.</Step>
       <Tip>You don't need to read every section before the session starts. The Overview and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
     </>
   );
@@ -296,20 +296,20 @@ function PowerUser() {
         <Step n={2}>Pick a relationship type: Trade Partner, Allied, Patron, Client, Rival, Cold War, or Hostile. The relationship is bidirectional and both settlements update immediately.</Step>
         <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and faction weights before generation.</Step>
         <Step n={4}>Open either settlement's <strong>Relationships</strong> tab to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
-        <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
+        <Step n={5}>With Cartographer, use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
         <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and seeds embedded agents and saboteur factions. A Patron creates dependency chains in the client's economy. A Cold War seeds clandestine intelligence factions (deep-cover operatives, commercial fronts) on both sides.</Tip>
       </div>
 
       <div style={{ ...NO_BREAK, marginBottom:18 }}>
         <SubHead>Managing Saved Settlements &amp; Campaigns</SubHead>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
-          The Settlements tab is your campaign library. Saves, campaigns, linking, and map placement all live here.
+          The Settlements tab is your campaign library. Your saves live here; campaigns, linking, and map placement come with Cartographer.
         </p>
         <Step n={1}><strong>Save</strong> after generating to store a settlement in your library.</Step>
-        <Step n={2}><strong>Campaigns</strong>. Group settlements into named campaign folders directly inside the Settlements tab. Use the arrow button on any saved settlement to move it between campaigns. Export a campaign to PDF for a complete campaign dossier.</Step>
+        <Step n={2}><strong>Campaigns</strong> (Cartographer). Group settlements into named campaign folders directly inside the Settlements tab. Use the arrow button on any saved settlement to move it between campaigns. Export a campaign to PDF for a complete campaign dossier.</Step>
         <Step n={3}><strong>Export PDF</strong> from the detail view header for a print-ready settlement brief, or export a full campaign PDF from the campaign folder.</Step>
         <Step n={4}><strong>Narrative AI Prompt</strong> and <strong>Map AI Prompt</strong> exports are also available in the detail view. Use these to feed your settlement into an AI assistant for session fiction or map generation.</Step>
-        <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
+        <Step n={5}><strong>Edit Names</strong> (Cartographer) lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
         <Step n={6}><strong>World Map</strong>. Drag any saved settlement onto the embedded fantasy map to place it geographically. Click a placed burg to see its linked settlement data. Toggle relationships and supply-chain overlays from the map toolbar.</Step>
       </div>
     </div>
@@ -362,8 +362,8 @@ function Reference() {
   const sections = [
     { heading: 'Navigation', rows: [
       ['Create','The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).'],
-      ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
-      ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
+      ['Settlements','Your saved settlement library. With Cartographer, group into campaigns, link as neighbours, edit, rename, and export without limit.'],
+      ['World Map','Embedded fantasy map. With Cartographer, drag saved settlements onto it to place them and toggle the relationship and supply-chain overlays.'],
       ['Compendium','The reference spine: every catalog rendered live from the engine. See the deep-links below.'],
       // V-18 the DM Screen is a REAL DM-facing surface (letter, dossier, session
       // ledger, auspice, and a player-safe face you can turn to the table), and it
@@ -390,10 +390,10 @@ function Reference() {
       ['Relationships','Ties between people, active conflicts, and linked settlements with their contacts.'],
     ]},
     { heading: 'Settlement Workflow', rows: [
-      ['Campaigns','Create named campaign folders in the Settlements tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.'],
-      ['Link Neighbour','In the Settlements tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).'],
+      ['Campaigns','With Cartographer, create named campaign folders in the Settlements tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.'],
+      ['Link Neighbour','With Cartographer: in the Settlements tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).'],
       ['Set as Neighbour','Tell the generator to bias a new settlement against an existing one. Opens the Create tab with the neighbour active.'],
-      ['Edit Names','Rename any NPC or faction. Changes cascade bidirectionally to linked partners.'],
+      ['Edit Names','With Cartographer, rename any NPC or faction. Changes cascade bidirectionally to linked partners.'],
       ['Export PDF','Print-ready settlement briefing. Cover page, index, relationship diagram, NPC cards, and economic appendix.'],
     ]},
     { heading: 'World Map', rows: [
@@ -415,9 +415,9 @@ function Reference() {
         </p>
         {COMPENDIUM_TABS.map(([tab, label, desc]) => <CompendiumLink key={tab} tab={tab} label={label} desc={desc} />)}
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:'8px 0 0' }}>
-          Build your own institutions, resources, stressors, and presets under{' '}
+          With Cartographer, build your own institutions, resources, stressors, and presets under{' '}
           <a href="/compendium?mode=custom" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>My Custom Content</a>.
-          Custom items appear in the Settlement Editor catalog and persist to your browser.
+          Custom items appear in the Settlement Editor catalog and sync to your account.
         </p>
       </div>
       {sections.map(s => <RefSection key={s.heading} heading={s.heading} rows={s.rows} />)}

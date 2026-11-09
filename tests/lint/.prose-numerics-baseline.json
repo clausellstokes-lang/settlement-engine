@@ -13,7 +13,7 @@
   },
   {
     "path": "src/components/OutputContainer.jsx",
-    "line": 994,
+    "line": 991,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },
@@ -175,7 +175,7 @@
   },
   {
     "path": "src/components/map/BeliefDivergenceBand.jsx",
-    "line": 78,
+    "line": 77,
     "category": "floatInterpolation",
     "snippet": "{CONFIDENCE_LABEL[belief.confidence] || belief.confidence}"
   },
@@ -613,49 +613,49 @@
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 54,
+    "line": 56,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 54,
+    "line": 56,
     "category": "percentToken",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 58,
+    "line": 60,
     "category": "floatInterpolation",
     "snippet": "`${label}: ${pct} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 58,
+    "line": 60,
     "category": "percentToken",
     "snippet": "`${label}: ${pct} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 240,
+    "line": 242,
     "category": "floatInterpolation",
     "snippet": "{d.standing}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 244,
+    "line": 246,
     "category": "floatInterpolation",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 244,
+    "line": 246,
     "category": "percentToken",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 254,
+    "line": 256,
     "category": "percentToken",
     "snippet": "{unaffiliated}"
   },

@@ -6,9 +6,9 @@
  * The DM asking "is anyone spying on my town?" finds it here: whom the town watches, who watches
  * the town (DM TRUTH), the town's own suspicion band, and whether its gates stand closed.
  *
- * ⛔ DM-ONLY, FAIL-CLOSED. The DM seam is composed from props the container already holds (the
- * RelationshipsTab convention: `viewerIsPremium && !playerView && !publicDossier`), so no second
- * premium comparison is minted here. Any other reader renders NOTHING and throws nothing, and a
+ * ⛔ DM-ONLY, FAIL-CLOSED. The DM seam is composed from the render path alone (the
+ * RelationshipsTab convention: `!playerView && !publicDossier` — the view and the data, never the
+ * tier, the owner's tier law of 2026-11-09). Any other reader renders NOTHING and throws nothing, and a
  * world where the counter-game is dark renders nothing either (the layer's surface lights with the
  * layer). The read is `counterIntelSweep.js :: watchRowsFor`, the DM-truth side; the suspicion
  * band inside it never read truth.
@@ -44,11 +44,11 @@ function WatchList({ label, rows, empty, nameFor }) {
 
 /**
  * @param {{ worldState?: any, settlement?: any, regionalGraph?: any, nameFor?: (id: string) => string,
- *   viewerIsPremium?: boolean, playerView?: boolean, publicDossier?: boolean }} props
+ *   playerView?: boolean, publicDossier?: boolean }} props
  */
-export default function WatchPanel({ worldState = null, settlement = null, regionalGraph = null, nameFor = (id) => id, viewerIsPremium = false, playerView = false, publicDossier = false }) {
+export default function WatchPanel({ worldState = null, settlement = null, regionalGraph = null, nameFor = (id) => id, playerView = false, publicDossier = false }) {
   const mobile = useIsMobile();
-  const includeGroundTruth = viewerIsPremium && !playerView && !publicDossier;
+  const includeGroundTruth = !playerView && !publicDossier;
   const id = settlement && settlement.id != null ? String(settlement.id) : '';
   const rows = useMemo(() => {
     if (!includeGroundTruth || !id || !counterIntelActive(worldState)) return null;

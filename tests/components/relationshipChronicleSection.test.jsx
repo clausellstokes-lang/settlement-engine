@@ -17,6 +17,7 @@ let storeState = {};
 vi.mock('../../src/store/index.js', () => ({ useStore: (selector) => selector(storeState) }));
 
 import RelationshipChronicleSection from '../../src/components/map/RelationshipChronicleSection.jsx';
+import { relationshipChronicle } from '../../src/domain/display/relationshipChronicle.js';
 
 const NAMES = new Map([['ash', 'Ashford'], ['calder', 'Calder'], ['dunmar', 'Dunmar']]);
 
@@ -107,14 +108,24 @@ describe('RelationshipChronicleSection — the page a GM reads', () => {
 });
 
 describe('RelationshipChronicleSection — ⛔ the fail-closed secrets seam', () => {
-  test('a viewer WITHOUT ground truth never meets the covert line', () => {
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V1-map, 2026-11-09, the owner's tier law): the
+  // section's inner tier term only mirrored the world map's outer gate (law (6):
+  // useWorldMapCampaignModel hands a viewer without the world map NO campaign), so it was
+  // deleted and the section asks for the DM projection. The withholding itself lives in the
+  // read model and stays fail-closed: asked WITHOUT includeCovert, it never yields the covert
+  // line — pinned there, on the same fixture; and a viewer the map hands no campaign meets
+  // nothing at all.
+  test('a reading WITHOUT ground truth never meets the covert line (the read model\'s seam)', () => {
+    const c = campaign();
+    const open = relationshipChronicle({ worldState: c.worldState, regionalGraph: c.regionalGraph || c.worldState?.regionalGraph, includeCovert: false });
+    const all = relationshipChronicle({ worldState: c.worldState, regionalGraph: c.regionalGraph || c.worldState?.regionalGraph, includeCovert: true });
+    const covertOf = (rows) => rows.flatMap((r) => (r.lines || r.entries || [])).filter((l) => l.disclosure === 'covert');
+    // anchored: the DM projection of the same fixture carries the covert line, so its absence below is a withholding.
+    expect(covertOf(all).length).toBeGreaterThan(0);
+    expect(covertOf(open)).toEqual([]);
     player();
-    const { container } = render(<RelationshipChronicleSection campaign={campaign()} nameById={NAMES} />);
-    expect(container.textContent).toContain('A raid crossed the border');
-    // anchored: the public clause one line above proves the section rendered for this viewer, so the covert clause's absence is a WITHHOLDING and not a missing page.
-    expect(container.textContent).not.toContain('Something was wrecked in the dark');
-    expect(screen.queryAllByTestId('relationship-chronicle-line')).toHaveLength(2);
-    expect(container.textContent).toContain('Quiet business is not shown here.');
+    const { container } = render(<RelationshipChronicleSection campaign={null} nameById={NAMES} />);
+    expect(container.innerHTML).toBe('');
   });
 
   test('…and a DM on the SAME fixture does — the gate is a gate, not a blank page', () => {
@@ -141,10 +152,9 @@ describe('RelationshipChronicleSection — ⛔ the fail-closed secrets seam', ()
       regionalGraph: { edges: [{ from: 'ash', to: 'calder' }] },
       worldState: { tick: 20, relationshipStates: { 'rel.ash.calder': { relationshipType: 'rival', recentIncidents: [{ tick: 4, type: 'espionage' }] } } },
     };
-    player();
-    const { container } = render(<RelationshipChronicleSection campaign={covertOnly} nameById={NAMES} />);
-    expect(container.innerHTML).toBe('');
-    cleanup();
+    // RE-KEYED (V1-map): the player form is the read model's (asked without includeCovert);
+    // the panel itself is the DM's, behind the world map's outer gate.
+    expect(relationshipChronicle({ worldState: covertOnly.worldState, regionalGraph: covertOnly.regionalGraph, includeCovert: false })).toEqual([]);
     dm();
     const asDm = render(<RelationshipChronicleSection campaign={covertOnly} nameById={NAMES} />);
     // anchored: the DM render below proves the fixture really carries a line, so the player's empty page above is a withholding and not an empty fixture.
