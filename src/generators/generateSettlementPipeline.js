@@ -17,7 +17,7 @@ import { generateRepresentatives } from './people/representatives.js';
 import { dealGoals } from './people/goals.js';
 import { generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
-import { enrichNpcCoherence } from './narrativeGenerator.js'; // MERGE-CAR: CENSUS-4 R12's fitFactionRoster retired (the chair's SC-1 ruling: superseded by construction — memberships born by rank)
+import { enrichNpcCoherence, withHallCapture } from './narrativeGenerator.js'; // MERGE-CAR: CENSUS-4 R12's fitFactionRoster retired (the chair's SC-1 ruling: superseded by construction — memberships born by rank)
 import { enrichHistoryCoherence } from './narrative/historyCoherence.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
 // THE whole-word substitution, shared with the faction-rename convergence. The
@@ -587,6 +587,12 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // ALLEGIANCE-CAR4 (A9, the design §2): the regenerated cast's goals, dealt over the FINAL roster and its ties on this
     // regen's own keyed family, as birth deals them (people/goals.js); a preserved keeper's goal is the user's and is kept.
     const goaledRoster = dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) });
+    // FIX-SECTION-REGEN (2026-11-09; car 2's finding): the hall-capture state is DERIVED from the cast, so a new cast
+    // re-derives it, and the record must hold it — the seam above derives it on this regen's private view, which is
+    // dropped. It is re-derived here over the FINAL roster (the user's canon merged in) through the full generation's
+    // own seam and ONE writer (narrativeGenerator.js :: withHallCapture → hallCapture.js :: writeHallCapture), from the
+    // RECORD's power structure, re-reading the writer's own birth seed (`rederive`) — draw-free, so it moves no draw.
+    const powerStructure = withHallCapture({ ...settlement, config, npcs: goaledRoster }, goaledRoster, { rederive: true });
     // the record's trace keeps every other step's run; the subject's run is the regeneration's (re-stamped on the
     // trace's own clock, ts = position). Dormant: a record with no allegiance before or after carries no new key.
     const priorTrace = Array.isArray(/** @type {any} */ (settlement).simulationTrace) ? /** @type {any} */ (settlement).simulationTrace : [];
@@ -598,6 +604,9 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       npcs: goaledRoster,
       relationships: finalRelationships,
       conflicts,
+      // the derived hall, returned so the record holds what a full generation of this cast holds (absent on a record
+      // with no power structure, so its parts keep the key set they always had)
+      ...(powerStructure ? { powerStructure } : {}),
       ...traceParts,
       _regenSeed: seed,
       // The preservation REPORT, out of band of the settlement parts. A keeper

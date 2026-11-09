@@ -188,6 +188,26 @@ describe('the derivation (§3.4) on fixtures', () => {
     expect(low.criminalCaptureState).toBe('adversarial');
     expect('captureState' in low.factions[0]).toBe(false);
   });
+
+  it('the re-derivation (FIX-SECTION-REGEN): a born record\'s own seed is re-derived as birth derives it; a moved seed is kept', async () => {
+    const { writeHallCapture } = await import('../../../src/domain/people/hallCapture.js');
+    const ps = { factions: [{ faction: 'Elder Council', isGoverning: true, powerLabel: 'Strong', legitimacyCrisis: false }, { faction: 'X' }], factionRelationships: [], powerProjectionVersion: 1 };
+    const born = /** @type {any} */ (writeHallCapture(ps, { state: 'equilibrium' }));
+    const frozen = JSON.stringify(born);
+    // a new cast earns a lower hall: the writer's own seed goes, as a full generation of that cast leaves none
+    const lower = /** @type {any} */ (writeHallCapture(born, { state: 'adversarial' }, { rederive: true }));
+    expect(JSON.stringify(born)).toBe(frozen);
+    expect(lower).toEqual(writeHallCapture(ps, { state: 'adversarial' }));
+    expect('captureState' in lower.factions[0]).toBe(false);
+    // a higher hall: re-stamped in its place, byte-equal to birth's
+    const higher = /** @type {any} */ (writeHallCapture(born, { state: 'capture' }, { rederive: true }));
+    expect(JSON.stringify(higher)).toBe(JSON.stringify(writeHallCapture(ps, { state: 'capture' })));
+    // without the option the seed stands, as before (the held-roster arm and every birth)
+    expect(/** @type {any} */ (writeHallCapture(born, { state: 'capture' })).factions[0].captureState).toBe('equilibrium');
+    // a seed another hand moved (it no longer equals the prior state) is not the writer's to lift
+    const moved = { ...born, factions: [{ ...born.factions[0], captureState: 'corrupted' }, born.factions[1]] };
+    expect(/** @type {any} */ (writeHallCapture(moved, { state: 'adversarial' }, { rederive: true })).factions[0].captureState).toBe('corrupted');
+  });
 });
 
 describe('J-13 — ONE writer of the hall-capture state on the birth path', () => {
@@ -218,10 +238,42 @@ describe('J-13 — ONE writer of the hall-capture state on the birth path', () =
     expect(sites[0].startsWith('src/domain/people/hallCapture.js:')).toBe(true);
   });
 
+  /**
+   * RE-KEYED BY IDENTITY (FIX-SECTION-REGEN, 2026-11-09; cause: the writer's re-derivation for a section regen lifts its
+   * own birth seed before it stamps afresh — a second seed-write LINE inside the same function). J-13 is a law of the
+   * FUNCTION ("ONE function owns the state and is its only writer"), so the seed's sites are held to the body of
+   * hallCapture.js :: writeHallCapture by its line span, not to a line count; a site anywhere else still reds.
+   * @returns {[number, number]} the first and last line (1-based) of writeHallCapture
+   */
+  const writerSpan = () => {
+    const lines = readFileSync(join(ROOT, 'src/domain/people/hallCapture.js'), 'utf8').split('\n');
+    const start = lines.findIndex((l) => l.startsWith('export function writeHallCapture(')) + 1;
+    const end = lines.findIndex((l, n) => n >= start && l === '}') + 1;
+    return [start, end];
+  };
+  /** @param {string} site `file:line:code` @param {[number, number]} span */
+  const inWriter = (site, [start, end]) => {
+    const m = /^src\/domain\/people\/hallCapture\.js:(\d+):/.exec(site);
+    return !!m && Number(m[1]) >= start && Number(m[1]) <= end;
+  };
+  /** @param {RegExp} re @returns {string[]} `file:line:code` */
+  const NUMBERED = (re) => [join(ROOT, 'src/generators'), join(ROOT, 'src/domain/people')].flatMap(walk).flatMap((file) =>
+    readFileSync(file, 'utf8').split('\n').map((line, n) => ({ file: relative(ROOT, file), n: n + 1, line: code(line) }))
+      .filter((x) => re.test(x.line)).map((x) => `${x.file}:${x.n}:${x.line.trim()}`));
+
   it('the governing row\'s captureState seed is written at exactly one site, the same function', () => {
-    const sites = SITES(SEED_WRITE);
-    expect(sites).toHaveLength(1);
-    expect(sites[0].startsWith('src/domain/people/hallCapture.js:')).toBe(true);
+    const span = writerSpan();
+    expect(span[0]).toBeGreaterThan(0);
+    const sites = NUMBERED(SEED_WRITE);
+    expect(sites.length).toBeGreaterThan(0);
+    expect(sites.filter((s) => !inWriter(s, span))).toEqual([]);
+  });
+
+  it('the control: a seed write outside writeHallCapture\'s body is refused', () => {
+    const span = writerSpan();
+    expect(inWriter(`src/domain/people/hallCapture.js:${span[0] + 1}:x`, span)).toBe(true);
+    expect(inWriter(`src/domain/people/hallCapture.js:${span[1] + 1}:x`, span)).toBe(false);
+    expect(inWriter('src/generators/generateSettlementPipeline.js:600:x', span)).toBe(false);
   });
 
   it('the control: each scan finds a planted second writer', () => {

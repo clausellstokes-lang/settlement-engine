@@ -141,18 +141,30 @@ export function hallReceipt(state, facts) {
  * is stamped when the state is equilibrium or above and the row carries none (the play-time ladder's first
  * rung, the rule the power step applied before; after `powerLabel`, its place). Never mutates its input.
  *
+ * THE RE-DERIVATION (FIX-SECTION-REGEN, 2026-11-09): with `opts.rederive` the writer re-reads a BORN record — a
+ * section regeneration re-derives the hall over its new cast (generators/generateSettlementPipeline.js ::
+ * regenNPCsPipeline). The governing row's seed this writer stamped at birth equals the record's prior
+ * `criminalCaptureState`; that seed is the writer's own and is re-derived as birth derives it (stamped at
+ * equilibrium and above, absent below), so the record ends exactly as a full generation of the same cast. A seed
+ * that differs from the prior state was moved by another hand (the play-time ladder) and is kept.
+ *
  * @param {unknown} powerStructure @param {{ state: CaptureRung }} hall
+ * @param {{ rederive?: boolean }} [opts]
  * @returns {Rec | unknown} the new power structure (the input itself when it is not an object)
  */
-export function writeHallCapture(powerStructure, hall) {
+export function writeHallCapture(powerStructure, hall, opts = {}) {
   if (!powerStructure || typeof powerStructure !== 'object' || Array.isArray(powerStructure)) return powerStructure;
   const ps = /** @type {Rec} */ (powerStructure);
   const state = hall.state;
   const seed = ['equilibrium', 'corrupted', 'capture'].includes(state);
+  const prior = opts.rederive === true ? str(ps.criminalCaptureState) : '';
   const factions = Array.isArray(ps.factions)
     ? ps.factions.map((f) => {
-      const row = rec(f);
-      if (!seed || row.isGoverning !== true || row.captureState) return f;
+      const born = rec(f);
+      // the writer's own birth seed, on a re-derivation: lifted, so the rule below stamps it afresh (or leaves none)
+      const { captureState: own, ...unseeded } = born;
+      const row = prior && born.isGoverning === true && own === prior ? unseeded : born;
+      if (!seed || row.isGoverning !== true || row.captureState) return row === born ? f : row;
       return insertAfter(row, 'powerLabel', { captureState: state });
     })
     : ps.factions;
