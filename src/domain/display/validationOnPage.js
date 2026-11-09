@@ -35,6 +35,7 @@ import { isTradeRouteDisconnected } from '../tradeRouteSemantics.js';
 import { institutionHasAnyTag } from '../../lib/entities.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
+import { compareCodepoint } from '../deterministicSort.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -239,6 +240,24 @@ export function resourceGapLines(s) {
  */
 export function criticalIssuesOf(v) {
   return arr(v?.issues).filter((i) => str(i?.severity).toLowerCase() === 'critical');
+}
+
+/**
+ * The by-design contradictions the Viability tab lists (SW-B1, STYLE-RULINGS-2 B1(c)): the viability
+ * issues and the structural violations marked `by_design`, one row per (type, institution, reason),
+ * sorted by institution name (codepoint order). ONE reader of the fact: the tab prints this list and the DS-GEN-11 desk reads
+ * its length, so the coherence line can never vouch above a by-design row the tab shows.
+ * @param {ViabilityRecord} v the economicViability record @param {any} s the settlement
+ * @returns {any[]}
+ */
+export function byDesignItemsOf(v, s) {
+  /** @type {any[]} */ const rows = [
+    ...arr(v?.issues).filter((i) => i?.severity === 'by_design'),
+    ...arr(s?.structuralViolations).filter((/** @type {any} */ i) => i?.severity === 'by_design'),
+  ];
+  return rows.filter((item, index, all) => all.findIndex((c) => (
+    c?.type === item?.type && c?.institution === item?.institution && c?.reason === item?.reason
+  )) === index).sort((a, b) => compareCodepoint(a.institution || '', b.institution || '')); // the codepoint order (determinism lint), not the host's collation
 }
 
 /**

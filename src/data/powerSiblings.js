@@ -81,10 +81,26 @@ const declaredSet = (text, needs, twin) => Object.freeze([
 export const FACTION_DESC_SIBLINGS = Object.freeze({
   'Town watch and militia; enforce ordinances, manage disorder, and report to the council.': declaredSet(
     'Town watch and militia; enforce ordinances, manage disorder, and report to the council.', ['watch']),
-  'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.': declaredSet(
-    'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.', ['watch']),
+  'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.': declaredSet(
+    'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.', ['watch']),
   'City watch; law enforcement and external defence, stretched between multiple responsibilities.': declaredSet(
     'City watch; law enforcement and external defence, stretched between multiple responsibilities.', ['watch']),
-  'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.': declaredSet(
-    'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.', ['market']),
+  'A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.': declaredSet(
+    'A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.', ['market']),
+});
+
+/**
+ * SW-B1 CONTRADICTIONS (STYLE-RULINGS-2 B1(b), the SURFACES audit's P50; 2026-11-09): the government
+ * line of the seats that neither of `rulingStructure.js`'s two tables names. They fell back to the Mixed
+ * Council's "Power is distributed across multiple factions without a clear dominant authority." — a claim
+ * the writer never read (Haifeng's Household Council beside a Dominant 63). Each line says only what the
+ * seat's name holds. A table here, not there, by R-AB's precedent (the power module's line ceiling).
+ */
+export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
+  'Elder Consensus': 'The elders of the hamlet decide things together, and people follow them out of respect.',
+  'Free Elder Council': 'The elders of the hamlet decide things together, and no lord stands over them.',
+  "Headman's Authority": 'A headman settles disputes and gives the orders here.',
+  'Priestly Guidance': 'The priest guides the community, and disputes are brought to the priest to settle.',
+  'Town Mayor': "A mayor runs the town's day-to-day business.",
+  'Grand Guild Council': 'The guilds of the metropolis govern together; the richer the guild, the more say it has.',
 });

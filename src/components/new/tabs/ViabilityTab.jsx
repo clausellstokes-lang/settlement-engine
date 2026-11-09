@@ -9,7 +9,7 @@ import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/viabilityFilter.js';
 // READER-R1 (the chair's rulings 1, 2 and 4): one critical list, the stress effects that are
 // not in it, an issue's text read against the route, and the generator's checks for staff only.
-import { criticalIssuesOf, stressEffectsOf, viabilityIssueText, staffValidationRows } from '../../../domain/display/validationOnPage.js';
+import { byDesignItemsOf, criticalIssuesOf, stressEffectsOf, viabilityIssueText, staffValidationRows } from '../../../domain/display/validationOnPage.js';
 import { useStore } from '../../../store/index.js';
 
 
@@ -106,20 +106,9 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // Structural violations from root. The non-by-design rows are the validator's rule text and
   // print only on the staff panel below (READER-R1 ruling 1); the by-design rows are authored
   // plot seeds and stay in their collapsed section.
-  const structuralReceiptItems = s.structuralViolations || [];
   const staffRows = showStaffChecks ? staffValidationRows(s) : [];
-  const structuralByDesign = structuralReceiptItems.filter(item => item?.severity === 'by_design');
-  // Critical issues vs lower-severity
-  const byDesignIssues = [
-    ...(v.issues||[]).filter(i => i.severity==='by_design'),
-    ...structuralByDesign,
-  ].filter((item, index, all) => (
-    all.findIndex(candidate => (
-      candidate?.type === item?.type
-      && candidate?.institution === item?.institution
-      && candidate?.reason === item?.reason
-    )) === index
-  )).sort((a,b)=>(a.institution||'').localeCompare(b.institution||''));
+  // SW-B1 (B1(c)): the by-design rows from their ONE reader, the list the DS-GEN-11 desk also reads.
+  const byDesignIssues = byDesignItemsOf(v, s);
   // ONE COUNT, ONE HOME: the record's critical issues, the list `metrics.criticalIssueCount` and
   // the summary sentence count (a critical stress consequence included).
   const criticalIssues = [...criticalIssuesOf(v)].sort((a,b)=>(a.title||'').localeCompare(b.title||''));

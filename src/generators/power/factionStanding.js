@@ -48,18 +48,18 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             (topTwoGap <= 6
               ? (standing = topFactionName
                   ? 'The gap between them and ' +
-                    (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                    (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
                     ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.'
                   : 'No one clearly leads here; one scandal or one lost ally could change who does.')
               : topTwoGap <= 14
                 ? (standing = topFactionName
                     ? 'They operate in the shadow of ' +
-                      (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                      (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
                       ' but not comfortably: they are waiting for a chance to push back.'
                     : 'They are strong enough to resist those above them, but too far behind to risk an open fight.')
                 : (standing = topFactionName
                     ? 'Behind ' +
-                      (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
+                      (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
                       ' by too much to challenge openly, so they get their way through petitions and procedure instead.'
                     : 'The order is settled for now; they are busy holding on to second place and make no move on first.')),
           rank === 2 &&

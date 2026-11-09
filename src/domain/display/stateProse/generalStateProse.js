@@ -1035,6 +1035,15 @@ export function originRoutePoolKey(tradeRouteAccess) {
 }
 
 /**
+ * SW-B1 (DS-GEN-6): the route pool key, or null where it is the port pool over a record whose
+ * institution flags say there are no docks.
+ * @param {string|null} key @param {unknown} inst @returns {string|null}
+ */
+export function portLineStruck(key, inst) {
+  return key === 'port' && /** @type {any} */ (inst)?.hasPort === false ? null : key;
+}
+
+/**
  * DS-GEN-6's TIER OVERLAY pool — the second sentence, composed AFTER the route line and
  * never instead of it. This is the registry's one written exception to the one-fact-one-
  * sentence law: one mount renders two sentences from two POOLS of one block, which is one
@@ -1875,7 +1884,13 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     }), [])
     : null);
   const origin = [
-    originLine(originRoutePoolKey(readings.tradeRouteAccess)),
+    // ⛔ THE PORT LINE READS THE DOCKS (SW-B1, STYLE-RULINGS-2 B1(b); DS-GEN-6, SW-B2's leftover by the
+    // chair's ruling of 02:5x): every port line says the town lives off its quay and harbour, and the
+    // route alone does not hold that (Albamunicipium, soak1k-0: a port route on a mountain thorp with no
+    // docks). The docks are the desk's `inst` reading (`economicState.compound.inst.hasPort`, the flag
+    // generateNarratives.js's #10 gate reads); with no docks the port line is struck and the tier line
+    // stands alone. An unasked record (no flag) reads as before.
+    originLine(portLineStruck(originRoutePoolKey(readings.tradeRouteAccess), readings.inst)),
     originLine(originTierPoolKey(readings.tier)),
   ].filter((line) => line && line.sentence);
 

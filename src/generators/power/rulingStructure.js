@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 
@@ -33,13 +33,13 @@ import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export {
 // Math.round(NaN) = NaN corrupts every share, the sort, and the standing
 // annotation — it degrades to 0 shares instead. Byte-identical on the normal
 // path (totalPower > 0). Exported for the focused degenerate-roster test.
-export const normalizeAndAnnotateFactions = (factions, force) => {
+export const normalizeAndAnnotateFactions = (factions, force, { annotate = true } = {}) => { // SW-B1 (P51): generatePowerStructure annotates after its last power write
   const totalPower = factions.reduce((sum, faction) => sum + (faction.power || 0), 0);
   factions.forEach((faction) => {
     faction.power = totalPower > 0 ? Math.round(((faction.power || 0) / totalPower) * 100) : 0;
   });
   factions.sort((a, b) => (a.isGoverning ? -1 : b.isGoverning ? 1 : b.power - a.power));
-  annotateFactionStanding(factions, force);
+  if (annotate) annotateFactionStanding(factions, force);
   return factions;
 };
 
@@ -406,14 +406,14 @@ export const generatePowerStructure = (
       'Shadowed Council':
         'Criminal influence shapes decisions behind the scenes; officials are systematically compromised.',
       'Arcane Council': 'Mages govern, and their magic is their claim to rule.',
-      'Mixed Council': 'Power is distributed across multiple factions without a clear dominant authority.',
+      'Mixed Council': 'This body holds the seat of government here.', // SW-B1 (P50): the fallback claims only the seat it read
       'Elder Council': 'The oldest heads of the community decide things together; people follow them out of respect and custom, not law.',
       'Town Council':
         'An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.',
     },
     // R-AM (CENSUS-1g): resolved where it is CHOSEN, not inside the table (an eager `said` noted a
     // description no birth printed); `said` hands every non-key back untouched, so nothing moves.
-    govDesc = said(govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByFaction['Mixed Council']),
+    govDesc = said(govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table
     priorityBonus = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
     govPower = [
       'Theocratic Council',
@@ -469,7 +469,7 @@ export const generatePowerStructure = (
                   : 'Established merchant community; fund civic works and expect council access in return.'
               : merchantAdjPower >= 10
                 ? 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.'
-                : said('A small trader community present at market days; politically active in minor disputes, limited in broader leverage.'),
+                : said('A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.'),
       merchantLabel =
         (economicState == null ? void 0 : economicState.prosperity) === 'Wealthy' ||
         (economicState == null ? void 0 : economicState.prosperity) === 'Thriving'
@@ -508,7 +508,7 @@ export const generatePowerStructure = (
       nobleDesc =
         hasNobleInst && nobleGoverns
           ? priorityToCategory(priorities.military) === 'very_high'
-            ? 'Hereditary landowners who are the governing authority here; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.'
+            ? `Hereditary landowners behind the ${governingFaction}; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.` // SW-B1 (§2·D #7): one governing card, not two
             : noblePower > 20
               ? 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.'
               : noblePower > 10
@@ -560,7 +560,7 @@ export const generatePowerStructure = (
               : tier === 'town'
                 ? 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.'
                 : militaryPower > 18
-                  ? 'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.'
+                  ? 'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.'
                   : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'),
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
@@ -677,7 +677,7 @@ export const generatePowerStructure = (
       : (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
   applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []);
-  normalizeAndAnnotateFactions(factions, forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions }))); // F1: the standing lines name the force that stands
+  const standingForce = forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })); normalizeAndAnnotateFactions(factions, standingForce, { annotate: false }); // F1: the standing lines name the force that stands; SW-B1 (P51): annotated below, after the last power write
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {
     if (!f.category) f.category = inferFactionCategory(f.faction || '');
@@ -734,6 +734,7 @@ export const generatePowerStructure = (
 
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
+  annotateFactionStanding(factions, standingForce); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort
 
   const safetyRatio = safetyRatioOf(instFlags);
   // ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13 — ONE writer): the hall-capture state is
