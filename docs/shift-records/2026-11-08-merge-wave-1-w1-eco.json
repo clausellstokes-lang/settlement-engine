@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 1 OF THE WAVE (MERGE-WAVE), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-MERGE-WAVE §1 step 2): the integration branch's first-parent line is the golden chain; a lane's own records are components. THE CAUSE, ONE: THE W1 ECO MERGE OVER THE INTEGRATION BRANCH — lane/w1-eco-2026-11-07 at b7e54f1b4 merged at ea0e269a9 (MERGE-WAVE step 1), the conflicts composed; its lane records the components (docs/shift-records/2026-11-07-w1-01-construction.json .. -w1-12-style-ds-eco-6-scalenote.json (the lane's twelve)): what the merge moved beyond MERGE-CAR record C's post-state (the stage of b19740ab3; the wave's base 7b86cd07a measured equal on all six surfaces). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against MERGE-CAR record C's post-state (the stage of b19740ab3; the wave's base 7b86cd07a measured equal on all six surfaces): the generator golden master 210 of 525 rows (thorp 12, hamlet 12, village 12, town 6, city 84, metropolis 84) -> 0580a38d..; the espionage fence's driven corpus 227 of 360 rows -> 10b302f1..; 360/360 distinct; the herald 0; the PDF snapshot 0 and the witness 0. The prose manifest's movement at this point is NOT written here: it is signed ONCE at step 3 (the composed-prose manifest), this point named in its cause list. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the wave MERGE-WAVE, 2026-11-08)",
+  "cause": "THE W1 ECO MERGE OVER THE INTEGRATION BRANCH — lane/w1-eco-2026-11-07 at b7e54f1b4 merged at ea0e269a9 (MERGE-WAVE step 1), the conflicts composed; its lane records the components (docs/shift-records/2026-11-07-w1-01-construction.json .. -w1-12-style-ds-eco-6-scalenote.json (the lane's twelve)): what the merge moved beyond MERGE-CAR record C's post-state (the stage of b19740ab3; the wave's base 7b86cd07a measured equal on all six surfaces)",
+  "seat": "MERGE-WAVE (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at ea0e269a9",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

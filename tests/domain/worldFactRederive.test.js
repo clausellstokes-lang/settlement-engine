@@ -471,8 +471,12 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // (1,050 of 1,050 rows against record 0b's post-state). Record B, the people car's merge (docs/shift-records/2026-11-08-
     // merge-car-b-people-car-composition.json), from the stage at 8dff691f3: the generator master 6d651bde.. -> 9be37cae..
     // (525 of 525 rows) and the prose manifest 1a6351f1.. -> f2d3410b.. (832 of 1,050 rows).
+    // Then the wave (MERGE-WAVE, ODQ §934.105, 2026-11-08), the same law: one record per moving first-parent merge point,
+    // restated here in the same act; the prose manifest is signed ONCE at the wave's step 3.
+    // Record 1, the W1 ECO merge (2026-11-08-merge-wave-1-w1-eco.json), from the stage at ea0e269a9:
+    // the generator master 9be37cae.. -> 0580a38d.. (210 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('9be37cae1ba04e0c06ea01066364960c1ee01b82f0d13c7048ab6156b9f93f9c');
+      .toBe('0580a38d6049240a10a7b017fae6602ab7203f8da473c016d877399d12fc34ff');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('f2d3410b20c0b4757a48f03afd96598a643d861bd763c6a9172c5a466ef9728e');
 

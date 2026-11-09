@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-08 — MERGE-WAVE RECORD 1, THE W1 ECO MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-1-w1-eco.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   210 of 525 rows (thorp 12, hamlet 12, village 12, town 6, city 84, metropolis 84) against MERGE-CAR record C's post-state. THE CAUSE, ONE (first-parent
+ *   step ea0e269a9): the W1 ECO merge over the integration branch (lane/w1-eco-2026-11-07 at b7e54f1b4; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW1 (the tree of ea0e269a9 with the door paths carried from
+ *   the branch, the previous record's writes committed). 9be37cae.. -> 0580a38d..
+ *
  * 2026-11-08 — MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE INTEGRATION LANDING, MERGE-CAR;
  *   record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record A's post-state. THE CAUSE, ONE (first-parent
