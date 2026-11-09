@@ -62,37 +62,37 @@ export const STAGE_TEMPLATES = Object.freeze({
     'What turned this {role} was that {cause}.',
   ],
   're-caused': [
-    'The old pressure eased, but the habit found a new home: now {cause}, and it sustains the arrangement.',
-    'Need became appetite. The compromise re-formed around a new reason: {cause}.',
-    'One cause closed and another opened; {cause}, and the {role} carries on.',
+    'The first reason passed, but then {cause}, and the {role} kept on dealing.',
+    'The first reason passed, but then {cause}, and that gave the {role} a new reason to carry on.',
+    'The {role} might have stopped when the first trouble ended, but then {cause}, and the dealing went on.',
   ],
   reformed: [
     'The pressure lifted and the {role} came clean; the compromise is over.',
-    'With the cause resolved, this {role} reformed. The arrangement is finished.',
-    'Sole-cause corruption, ended: the reason passed, and so did the compromise.',
+    'Once the trouble ended, this {role} stopped dealing and came clean.',
+    'The reason passed, and the dealing stopped with it.',
   ],
   historicized: [
-    'The compromise persists, but its origin is past now: {cause}, once, and the habit outlived the reason.',
-    'What began when {cause} endures out of habit; the ledger never closed.',
-    'The originating cause is history now; the corruption carries on regardless.',
+    'It began when {cause}. That trouble is over, but the {role} has not stopped.',
+    'That trouble has passed, but what began when {cause} goes on.',
+    'Whatever started it is over, but the {role} carries on dealing all the same.',
   ],
   'exposed-public': [
-    'The compromise is public now: {cause} was only the beginning; this is a scandal.',
-    'Once covert, now revealed: the arrangement that began when {cause} has broken into the open.',
-    'The quiet is over. What started when {cause} is a public reckoning.',
+    'It is public now: it began when {cause}, and now everyone knows.',
+    'What began when {cause} is out in the open now, and people are talking.',
+    'It is out: what started when {cause} is common talk now.',
   ],
   're-adjudicated': [
-    'The paymaster is gone; the compromise was re-judged from scratch, and now {cause}.',
-    'With the sustaining institution destroyed, the arrangement re-formed on a new footing: {cause}.',
-    'The old infrastructure fell, and the compromise was re-adjudicated around {cause}.',
+    'Whoever paid the {role} before is gone, but by then {cause}, and the dealing went on.',
+    'Whoever kept the {role} paid was destroyed, but by then {cause}, and that gave the dealing a new reason.',
+    'The deal lost the one who paid for it, but by then {cause}, and it carried on.',
   ],
 });
 
 /** The register-tuned historicize voice for the YEARS-PAST band (the constitution's
  *  PIN: "the lean years" language is impossible below years-past). */
 const HISTORICIZE_YEARS_PAST = Object.freeze([
-  'It began in the lean years ({cause}), and though that is long past, the habit endures. The ledger never closed.',
-  'Years ago, {cause}. The reason is history; the corruption is not.',
+  'It began in the lean years, when {cause}. That is long past, but the {role} has kept at it.',
+  'Years ago, {cause}. That trouble is over, but the dealing still goes on.',
 ]);
 
 /** Per-stage short BADGE label + tone for the dossier marker. `null` badge = the
@@ -152,7 +152,7 @@ export function causeLifecyclePhrase({ stage, causeClass, role, ageBand, variant
   if (st === 'historicized' && ageBand === HISTORICIZE_BAND) { templates = HISTORICIZE_YEARS_PAST; poolId = 'CAUSE_LIFECYCLE.historicize-years-past'; }
   if (!templates || !templates.length) {
     // Defensive floor-of-the-floor: an unknown stage still renders something honest.
-    return `This ${roleNoun(role)}'s compromise (${st || 'active'}) roots in ${cause}.`;
+    return `This ${roleNoun(role)} is compromised, and it began when ${cause}.`;
   }
   const drawn = drawDeclared(templates, {
     draw: (p) => p[Number.isInteger(variant)
