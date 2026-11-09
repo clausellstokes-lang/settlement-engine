@@ -87,53 +87,56 @@ function reg(cat, cond, dom, sub) {
 }
 
 // ── government ────────────────────────────────────────────────────────────────
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B10(b); STYLE-2-SURFACES §7·F F1/F2): the seat-holders' position and
+// constraint in plain words — what a visitor would see and what binds the holder — the "Formal title … not the
+// same thing" coda struck. The goals are untouched (retired by car 4's A9; dead text until a post-deploy packet).
 reg('government',GOVERNANCE_FRACTURED,
-  { position:  'Holds nominal governing authority where the legitimacy of that position is in active question. Formal title and real decision-making power are not the same thing.',
+  { position:  'Holds the seat in name, but fewer people come when called, and some orders go unanswered.',
     goal:      'Get the seat obeyed again before the week is out, or find a quiet way out of it.',
-    constraint:'Cannot take the action most likely to restore legitimacy without exposing the informal arrangements that currently keep governance functional.' },
-  { position:  'Occupies a civic position whose authority depends on a governing structure that is itself under question. Institutional standing is borrowed from above.',
+    constraint:'Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.' },
+  { position:  'Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.',
     goal:      'Keep their office through the collapse without being seen with the failing seat or its rivals.',
-    constraint:'Acting to protect the position looks like opportunism; doing nothing risks being caught in the collapse of the structure this position depends on.' }
+    constraint:'Moving to protect the office looks like a grab; standing still means falling with the seat.' }
 );
 reg('government','corruption',
-  { position:  'Governs within or alongside informal arrangements with criminal interests. Official and actual authority are partially different systems.',
+  { position:  'Holds the seat while criminals pay for favours close to it; some orders that matter are settled elsewhere.',
     goal:      'Keep the seat running without crossing the people whose payments keep it running.',
-    constraint:'Cannot act decisively against criminal interests without dismantling arrangements the governance structure currently relies on.' },
-  { position:  'Holds a civic position inside a governance structure with compromised elements, not the source of the corruption, but operating within it.',
+    constraint:'Cannot move against the criminals without cutting off the payments the seat now runs on.' },
+  { position:  'Holds an office among officials who take bribes; not one of the takers, but working beside them.',
     goal:      'Show their own books are clean while the people above them take payments.',
-    constraint:'Any investigation or challenge to the corrupt arrangements requires the cooperation of institutions that are themselves compromised.' }
+    constraint:'Any honest inquiry needs the help of officials who are themselves on the take.' }
 );
 reg('government','food_crisis',
-  { position:  'Holds governing authority during supply failure. Civic order and governing legitimacy are both contingent on how this crisis resolves.',
+  { position:  'Holds the seat while the food runs short; how the hunger ends will decide whether the seat is kept.',
     goal:      'Get food to every door before a rival for the seat does it first.',
-    constraint:'Cannot distribute what does not exist, and cannot admit the full scale of shortage without accelerating the loss of confidence this role depends on.' },
-  { position:  'Occupies a civic position with limited direct control over supply. Accountable for crisis conditions without the authority to address them.',
+    constraint:'Cannot hand out food that is not there, and cannot say how short it is without frightening people further.' },
+  { position:  'Holds an office that is blamed for the shortage but has little say over the food.',
     goal:      'Be seen handing out what little there is, and let the blame for the rest go upward.',
-    constraint:'Visible effort without visible results extends accountability rather than resolving it.' }
+    constraint:'Being seen to work hard while the food stays short only spreads the blame.' }
 );
 reg('government','economic_stress',
-  { position:  'Governs a settlement under persistent economic pressure. The faction\'s legitimacy depends partly on economic performance it cannot currently deliver.',
+  { position:  'Holds the seat while money is short, and people judge the seat by what it can no longer pay for.',
     goal:      'Win the people back with things that cost nothing: fair hearings and quick answers.',
-    constraint:'Cannot make the structural investments that would address the economic situation without resources the settlement does not have.' },
-  { position:  'Holds a civic position in an economically pressured settlement where governance capacity is reduced along with fiscal capacity.',
+    constraint:'Cannot pay for the repairs and relief people want without coin the place does not have.' },
+  { position:  'Holds an office whose purse shrinks with everyone else\'s.',
     goal:      'Become the one person who signs off on every coin the seat still spends.',
-    constraint:'Indispensability in a resource-constrained environment means competing with other civic positions for the same shrinking share.' }
+    constraint:'Every office is after the same few coins; making this one needed means taking from the others.' }
 );
 reg('government','contested',
-  { position:  'Holds governing authority that is contested. The position is held but not secured.',
+  { position:  'Holds the seat, but a rival claims it, and the matter is not settled.',
     goal:      'Win the doubters back before the challenger to the seat wins them first.',
-    constraint:'Every move to consolidate the position risks galvanizing opposition; every inaction gives the opposition time to consolidate instead.' },
-  { position:  'Occupies a civic position whose institutional standing depends on a governing authority that is itself under challenge.',
+    constraint:'Every hard move wins the rival new supporters; every delay gives the rival time.' },
+  { position:  'Holds an office that hangs on a seat someone else is trying to take.',
     goal:      'Stay off both sides of the fight for the seat until it is plain who wins.',
-    constraint:'Delayed commitment reduces the value of the eventual alignment without reducing the cost of having waited.' }
+    constraint:'Waiting to see who wins keeps the office safe today and earns no thanks from the winner.' }
 );
 reg('government','stable',
-  { tags: CALM_ONLY, position:  'Holds governing authority in a settlement with functional legitimacy. The position is secure enough to act from rather than defend.',
+  { tags: CALM_ONLY, position:  'Holds the seat, and people accept it; there is room to act, not just to hold on.',
     goal:      "Find and mend the seat's weak spot before a rival finds it first.", // W3 POW (the owner's style law of 2026-11-07; STYLE-AUDIT #211): the CLAIMS 'current stability' row re-anchored
-    constraint:'Stability reduces the sense of urgency that would justify the resources and disruption required to address those vulnerabilities.' },
-  { tags: CALM_ONLY, position:  'Holds a civic position in a well-functioning settlement. The role is defined by administration rather than crisis.',
+    constraint:'With nothing pressing, it is hard to win support for mending the weak spots before they break.' },
+  { tags: CALM_ONLY, position:  'Holds an office that runs from day to day, with no crisis to answer.',
     goal:      'Do every task the seat hands them so well that the seat cannot do without them.',
-    constraint:'Credible administration is expected, not rewarded. The upside is limited and the downside of failure is disproportionate.' }
+    constraint:'Good work is expected and goes unnoticed; a mistake is remembered.' }
 );
 
 // ── military ──────────────────────────────────────────────────────────────────
