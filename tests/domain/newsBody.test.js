@@ -213,12 +213,12 @@ describe('newsBody — the dateline names the place a body leaves unnamed (STYLE
   const nameById = new Map([['s1', 'Kleinwalde'], ['s2', 'Bergburg']]);
   it('leads with the entry\'s place only when the filed sentence names none', () => {
     const unnamed = { id: 'd1', kind: 'applied', settlementIds: ['s1'], summary: 'Betrayal shock is over.' };
-    expect(newsBodyText(unnamed, { nameById })).toBe('Kleinwalde — Betrayal shock is over.');
+    expect(newsBodyText(unnamed, { nameById })).toBe('Kleinwalde: Betrayal shock is over.');
     const named = { id: 'd2', kind: 'applied', settlementIds: ['s1'], summary: 'Kleinwalde mobilizes.' };
     expect(newsBodyText(named, { nameById })).toBe('Kleinwalde mobilizes.');
     // A travelling effect is datelined at its destination, the last of its path.
     const wave = { id: 'd3', kind: 'queued', impactIds: ['i'], settlementIds: ['s1', 's2'], summary: 'Word has come of unrest.' };
-    expect(newsBodyText(wave, { nameById })).toBe('Bergburg — Word has come of unrest.');
+    expect(newsBodyText(wave, { nameById })).toBe('Bergburg: Word has come of unrest.');
     // Without the panel's name map the sentence prints as filed.
     expect(newsBodyText(unnamed)).toBe('Betrayal shock is over.');
   });

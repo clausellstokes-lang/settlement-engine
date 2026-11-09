@@ -84,7 +84,7 @@ function leadSentences(text) {
 /**
  * THE DATELINE (STYLE-RULINGS-2 C1): a card body names WHERE. When the filed sentence
  * names none of the entry's own places (an older writer that speaks of "the settlement"),
- * the body leads with the place the entry is about, as a dispatch does: "Kleinwalde —
+ * the body leads with the place the entry is about, as a dispatch does: "Kleinwalde:
  * …". The place is the last of a travelling effect's path (its destination) and the
  * first of any other entry's. Without a name map, or when the sentence already names a
  * place, the sentence prints as filed.
@@ -100,7 +100,7 @@ function withDateline(told, entry, nameById) {
     .filter(n => typeof n === 'string' && n.trim().length > 1);
   if (!names.length || names.some(n => told.includes(n))) return told;
   const travelling = Array.isArray(entry.impactIds) && entry.impactIds.length > 0;
-  return `${travelling ? names[names.length - 1] : names[0]} — ${told}`;
+  return `${travelling ? names[names.length - 1] : names[0]}: ${told}`;
 }
 
 /** @param {unknown} v @returns {number} */
