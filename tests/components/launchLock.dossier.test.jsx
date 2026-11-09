@@ -231,7 +231,15 @@ describe('launch lock (dossier): NextActionRail', () => {
     expect(document.getElementById(exportRung.getAttribute('aria-describedby')).textContent).toBe(PILL);
     expect(document.getElementById(edit.getAttribute('aria-describedby')).textContent)
       .toBe(`Manual editing is a Cartographer feature. Click to upgrade.${PILL}`);
-    expect(exportRung.getAttribute('title')).toBe(PILL);
+    // THE OWNER (2026-11-09): the pill alone says "Available at launch". The row's tooltip is its
+    // label, not the words a second time, so the reason is said once (name + title + description).
+    for (const [rung, label] of [[edit, 'Edit (Cartographer)'], [exportRung, 'Export Dossier']]) {
+      expect(rung.getAttribute('title')).toBe(label);
+      const said = [rung.getAttribute('aria-label'), rung.getAttribute('title'),
+        document.getElementById(rung.getAttribute('aria-describedby')).textContent].join(' | ');
+      expect(said.match(/Available at launch/g)).toHaveLength(1);
+      expect(rung.querySelectorAll('[data-launch-pill]')).toHaveLength(1);
+    }
     fireEvent.click(edit);
     fireEvent.click(exportRung);
     expect(handlers.onEdit).toHaveBeenCalledTimes(0);
