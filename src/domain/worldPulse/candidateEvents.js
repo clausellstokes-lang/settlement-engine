@@ -285,10 +285,9 @@ function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any}
     // pressures ("stores run low…"); its presence IS the gate — absent
     // flag-off, so the legacy summary bytes are untouched.
     summary: `${voice.fact(pressure.settlementName)}${pressure.seasonNote ? ` ${pressure.seasonNote}` : ''}`,
-    reasons: [
-      ...pressure.reasons,
-      'Organic settlement drift is conservative: pressure must pass a gate before it can roll.',
-    ],
+    // STYLE-2 C2 (SW-12, A2·75): the gate's rule text ("Organic settlement drift is conservative:
+    // pressure must pass a gate before it can roll.") is the engine's, not the town's: struck.
+    reasons: [...pressure.reasons],
     condition: {
       archetype,
       label: labelByKind[/** @type {keyof typeof labelByKind} */ (pressure.kind)],

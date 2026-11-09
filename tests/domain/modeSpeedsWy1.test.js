@@ -500,7 +500,11 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // factionCompetition.js (the power-action summary per kind, the challenge and institution receipts in words; the rule-text
 // receipt struck). Leaf-diffed against the parent in a clean worktree: 121 string leaves and 25 array-tail keys; no id, tick,
 // number or rumour seed moved. Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = '1123201b0cc503bc3ba6721e9007e6f40cab1b4aa8955debf95b5e7a51096097';
+// 2026-11-09 (STYLE-2 C2, lane SW-12's second seat, the next cause): 1123201b... -> ed80ff1d..., ONE cause, TEXT ONLY:
+// candidateEvents.js (the organic pressure gate's rule text struck from the condition receipts). Leaf-diffed against the
+// parent in a clean worktree: 0 string leaves and 171 array-tail keys (the struck line); no id, tick, number or rumour
+// seed moved. occupation.js, warDeployment.js, feasibilityGate.js and realmEvents.js leave this arm byte-identical.
+const BASE_PULSE_HASH = 'ed80ff1d72ab5293f594d7fc6f44977e6f8821555f9a3d823c492a0424e96660';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
