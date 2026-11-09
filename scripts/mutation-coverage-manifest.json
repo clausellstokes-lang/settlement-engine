@@ -3561,6 +3561,10 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/regenDerivedState.test.js": {
+      "kind": "rationale",
+      "rationale": "FIX-SECTION-REGEN (2026-11-09; docs/chair/2026-11-09/FIX-SECTION-REGEN-2026-11-09.md). Its catching power is EXECUTED, not claimed: written red-first, it ran against the uncured tree twice — at bd07005b9 (the regen derived the hall on a private view and returned no powerStructure) the hall arms failed (2 failed | 1 passed), and at 8047c02cd (the conflicts written at the root only) the dual-address arm failed (1 failed | 3 passed); both are the planted regressions, reverting either cure re-creates them. A standing sweep plant is not offered: the subject is the composed generation pipeline (generateSettlementPipeline.js, narrativeGenerator.js), shared modules a concurrent lane may hold uncommitted work in, which check_caught's `git checkout --` revert would discard — the reason the generators tree's other subject-coupled files carry rationales."
+    },
     "tests/generators/people/personHooks.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"

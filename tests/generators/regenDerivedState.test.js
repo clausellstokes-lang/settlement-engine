@@ -16,6 +16,7 @@
  */
 import { describe, expect, test } from 'vitest';
 import { generateSettlementPipeline, regenNPCsPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const TIERS = ['village', 'town', 'city', 'metropolis'];
 /** the planted seeds: the measurement's index i reads tier TIERS[i % 4] */
@@ -42,36 +43,36 @@ const governingSeed = (s) => (s?.powerStructure?.factions || []).find((/** @type
 const captureRows = (s) => (s?.powerStructure?.factionRelationships || []).filter((/** @type {any} */ r) => r && r.captureState !== undefined);
 
 describe('FIX-SECTION-REGEN — an NPC section regen derives the hall-capture state the full generation derives', () => {
-  test('every derived field of the hall: the state, the governing seed, the capture rows', { timeout: 240_000 }, () => {
-    for (const { seed, record, full } of planted()) {
+  test('every derived field of the hall: the state, the governing seed, the capture rows', () => {
+    expectNoSeedFailures(collectSeedFailures(planted(), ({ seed, record, full }) => {
       expect(`${seed} ${record.powerStructure?.criminalCaptureState}`).toBe(`${seed} ${full.powerStructure?.criminalCaptureState}`);
       expect(`${seed} ${governingSeed(record)}`).toBe(`${seed} ${governingSeed(full)}`);
       expect([seed, captureRows(record)]).toEqual([seed, captureRows(full)]);
-    }
-  });
+    }), 'the regenerated record holds the full generation\'s hall');
+  }, 240_000);
 
-  test('the whole power structure but the conflicts address agrees with the full generation', { timeout: 240_000 }, () => {
-    for (const { seed, record, full } of planted()) {
+  test('the whole power structure but the conflicts address agrees with the full generation', () => {
+    expectNoSeedFailures(collectSeedFailures(planted(), ({ seed, record, full }) => {
       const { conflicts: _a, ...regen } = record.powerStructure || {};
       const { conflicts: _b, ...reference } = full.powerStructure || {};
       expect([seed, regen]).toEqual([seed, reference]);
-    }
-  });
+    }), 'the regenerated power structure equals the full generation\'s but for the conflicts address');
+  }, 240_000);
 
-  test('the conflicts\' two addresses are one list, as the full generation dual-writes them', { timeout: 240_000 }, () => {
+  test('the conflicts\' two addresses are one list, as the full generation dual-writes them', () => {
     // Cause 2 (measured at bd07005b9: 36/40 seeds held the regen's conflicts at the root and the BORN cast's on
     // powerStructure.conflicts — the address aiLayer, dailyLifeLogic and the generate-narrative edge function read).
-    for (const { seed, born, parts, record, full } of planted()) {
+    expectNoSeedFailures(collectSeedFailures(planted(), ({ seed, born, parts, record, full }) => {
       expect([seed, full.powerStructure?.conflicts]).toEqual([seed, full.conflicts]);
       expect([seed, record.powerStructure?.conflicts]).toEqual([seed, record.conflicts]);
       expect([seed, record.conflicts]).toEqual([seed, parts.conflicts]);
       expect(born.powerStructure?.conflicts).toEqual(born.conflicts);
-    }
-  });
+    }), 'the conflicts\' two addresses hold one list after a regen');
+  }, 240_000);
 
-  test('not vacuous: on every planted seed the regenerated cast earns a different hall than the born one', { timeout: 240_000 }, () => {
-    for (const { seed, born, full } of planted()) {
+  test('not vacuous: on every planted seed the regenerated cast earns a different hall than the born one', () => {
+    expectNoSeedFailures(collectSeedFailures(planted(), ({ seed, born, full }) => {
       expect(`${seed} ${full.powerStructure?.criminalCaptureState}`).not.toBe(`${seed} ${born.powerStructure?.criminalCaptureState}`);
-    }
-  });
+    }), 'the regenerated cast earns a different hall on every planted seed');
+  }, 240_000);
 });
