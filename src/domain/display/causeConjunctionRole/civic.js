@@ -97,7 +97,7 @@ export const CIVIC_ROLE_CONTENT = {
       'The embargo is over, but the official still sells exemption stamps to any merchant who pays.',
     ],
     'exposed-public': [
-      'It is public that the embargo had a price list at the records office, and the merchants who obeyed the law are reading the buyers\' names.',
+      'It is public that the embargo had a price list in the clerk\'s office, and the merchants who obeyed the law are reading the buyers\' names.',
       'It is out that the official sold exemptions from the embargo, and every stamped exemption is being checked again.',
     ],
     're-adjudicated': [

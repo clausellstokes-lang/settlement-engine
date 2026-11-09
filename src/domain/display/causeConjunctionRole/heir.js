@@ -282,7 +282,7 @@ export const HEIR_ROLE_CONTENT = {
     ],
     'exposed-public': [
       'It is out that the claimant bought consecrations from the tainted clergy, and every blessing on the succession is being re-examined.',
-      "The receipts are public: the claimant paid disgraced priests to sanctify the claim, and the town now doubts the holy and the legal parts alike.",
+      "The papers are public: the claimant paid disgraced priests to sanctify the claim, and the town now doubts the holy and the legal parts alike.",
     ],
     're-adjudicated': [
       "Whoever brokered the claimant's blessings before is gone, but now the priesthood is disgraced, and the claimant buys its blessings directly.",

@@ -166,7 +166,7 @@ export const HEALER_ROLE_CONTENT = {
       'The war has moved on, but the healer still sells places in the sickroom queue.',
     ],
     'exposed-public': [
-      'It is public that the healer sold places in the war queue, and the families of those who waited and died have the receipts of those who did not.',
+      'It is public that the healer sold places in the war queue, and the families of those who waited and died have the papers showing who paid.',
       'It is out that the healer sold places at the sickroom door through the fighting, and families are working out who died waiting.',
     ],
     're-adjudicated': [

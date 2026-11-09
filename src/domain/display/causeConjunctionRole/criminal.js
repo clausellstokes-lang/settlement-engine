@@ -159,14 +159,14 @@ export const CRIMINAL_ROLE_CONTENT = {
       "The boss's first reason is gone, but now the war presses in, and both camps use the boss as their courier.",
     ],
     reformed: [
-      'The war receded and the boss burned both sets of receipts in front of witnesses from both camps; the courier trade closed with the lines.',
+      'The war receded and the boss burned both sets of papers in front of witnesses from both camps; the courier trade closed with the lines.',
       'With the pressure lifted, the boss ended it; the last messages were delivered unread, and the retainers returned to both paymasters.',
     ],
     historicized: [
       'The war has moved on, but both armies still hold proof of the boss\'s runs, and the boss still takes orders from both.',
     ],
     'exposed-public': [
-      'It is out that the boss couriered for both camps through the fighting, and each army has published the other\'s receipts.',
+      'It is out that the boss couriered for both camps through the fighting, and each army has made the other\'s papers public.',
       "The double courier trade is public: the boss carried messages for both sides, and the whole town wonders who else the boss would sell.",
     ],
     're-adjudicated': [

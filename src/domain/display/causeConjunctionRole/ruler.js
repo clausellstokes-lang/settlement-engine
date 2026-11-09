@@ -166,7 +166,7 @@ export const RULER_ROLE_CONTENT = {
       'The war has moved on, but the ruler still collects the emergency levies and keeps part of them for the seat.',
     ],
     'exposed-public': [
-      'It is out that the ruler skimmed the war levies, and the town is measuring its walls against its receipts.',
+      'It is out that the ruler skimmed the war levies, and the town is measuring its walls against what it paid for them.',
       'The defense accounts are public now and they come up short: the ruler spent the war levies on the seat, and the town can see it.',
     ],
     're-adjudicated': [

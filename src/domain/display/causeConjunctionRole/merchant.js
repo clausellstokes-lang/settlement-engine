@@ -268,13 +268,13 @@ export const MERCHANT_ROLE_CONTENT = {
   'clergy-scandal': {
     attributed: [
       "The disgraced temple needed its money moved quietly, and the guildmaster moved it; the tithe walks out as trade goods and comes home as clean coin, minus the guildmaster's commission.",
-      "The clergy's shame has a banker: the guildmaster, who launders the temple's hush money and holds the receipts as insurance.",
+      "The clergy's shame has a banker: the guildmaster, who launders the temple's hush money and holds the papers as insurance.",
     ],
     're-caused': [
       "The guildmaster's first reason is gone, but now the priesthood is tainted and needs a banker, and the temple's quiet accounts keep the guildmaster paid.",
     ],
     reformed: [
-      'The priesthood was cleansed and the guildmaster closed the quiet accounts; the receipts went to the new hierarch, not the market.',
+      'The priesthood was cleansed and the guildmaster closed the quiet accounts; the papers went to the new hierarch, not the market.',
       "With the clergy's scandal resolved, the guildmaster came clean; the laundered tithe was traced back and restored to the altar.",
     ],
     historicized: [

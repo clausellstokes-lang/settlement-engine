@@ -52,7 +52,7 @@ export const MILITARY_ROLE_CONTENT = {
     ],
     'exposed-public': [
       'It is public that the captain provisioned the garrison through smugglers and paid them in escort duty; every run they made under guard is being counted.',
-      'The town knows now why the garrison never went hungry while the roads were dead: the captain dealt with smugglers, and the smugglers kept receipts.',
+      'The town knows now why the garrison never went hungry while the roads were dead: the captain dealt with smugglers, and the smugglers wrote it all down.',
     ],
     're-adjudicated': [
       "Whoever supplied the captain before is gone, but now the supply line is cut, and whoever moves goods on it now holds the garrison's debt.",
