@@ -258,10 +258,10 @@ function calamityWhereBeat(sub, stamps, sid, town, tick, now) {
   }
   const spared = sparedId ? districtOf(sub, sparedId) : null;
   const worstCat = worst ? worst.cat : 'stricken';
-  const sparedClause = spared ? ` the ${spared.cat} quarter was spared the worst of it.` : '';
+  const sparedClause = spared ? `; the ${spared.cat} quarter was spared the worst of it` : '';
   return spatialBeat(sid, 'calamity_where', {
     headline: `The calamity fell hardest on ${town}'s ${worstCat} quarter`,
-    summary: `The disaster did not fall evenly on ${town}: the ${worstCat} quarter bore the worst of the toll, the harm running along the crowded, timber-close lots;${sparedClause}`,
+    summary: `The disaster did not fall evenly on ${town}: the ${worstCat} quarter bore the worst of the toll, the harm running along the crowded, timber-close lots${sparedClause}.`,
     reason: 'The spatial substrate distributed the calamity toll by district adjacency and flammability. WHERE the harm fell, never HOW MUCH (the totals are unchanged); the disaster kind is never asserted (bucket-neutral).',
     tag: 'calamity_where',
   }, tick, now);
