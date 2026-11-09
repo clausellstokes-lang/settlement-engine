@@ -20,7 +20,7 @@ import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
-import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
+import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
 
@@ -97,7 +97,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   config = {},
   institutions = [],
   hookRegistry,
-  generationContext = null, options = {}, // options.hook === false: the birth seam draws the card's one hook itself
+  generationContext = null, options = {}, // options.hook === false: the birth seam draws the card's one hook itself; options.title: the face's title (item 15)
 ) => {
   const gender = _rng() > 0.5 ? 'male' : 'female';
   const fullName = pickFirst(culture, gender, true, tier);
@@ -118,7 +118,12 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   // REVIEW-INTAKE-4: both draws refuse a text the roster already holds (hookRegistry.goals /
   // .secrets), falling through their pool in seed order with no further roll; a pool with every
   // row held leaves this figure without one rather than repeating it.
-  const secret = generateFactionLeaderSecret(
+  // ITEM 15 (ALLEGIANCE-CAR4, the design §6.5, J-16): a face whose title the title table writes (people/poolMap.js ::
+  // titleLinesFor, the 147 fallback titles) draws its secret from its title's own lines, an unheld one (REVIEW-INTAKE-4);
+  // every other face — and a titled face whose three are all held — draws by its role and category, as before.
+  const titled = titleLinesFor(options.title);
+  const titleSecrets = titled ? titled.secrets.filter((row) => !hookRegistry?.secrets?.has(String(row.secret).trim())) : [];
+  const secret = titleSecrets.length ? pickFromArray(titleSecrets) : generateFactionLeaderSecret(
     config,
     institutions,
     worldLaw, role, // CENSUS-1i R-AX: the holder's role keys both rolls (the type and the row)
@@ -156,7 +161,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
     plotHooks,
     influence: powerLevel.level,
     power: powerLevel.power,
-    presentation: pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw)),
+    presentation: titled && titled.presentations.length ? { ...pickFromArray(titled.presentations) } : pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw)), // ITEM 15: the title's own first impression
   };
 };
 

@@ -23,6 +23,10 @@ import { NPC_GOALS } from '../../../src/domain/npc/npcFacetContract.js';
 import { allegianceOf, criminalHousesOf } from '../../../src/domain/people/allegiance.js';
 import { INSTITUTION_FAMILIES, isLawEnforcementInstitution } from '../../../src/data/institutionalCatalog.js';
 import { GOAL_FAMILY_LINES } from '../../../src/data/people/goalFamilies.js';
+import { TITLE_PRESENTATIONS, TITLE_SECRETS } from '../../../src/data/people/titleSecretsPresentations.js';
+import { generateSingleNPC } from '../../../src/generators/npcGenerator.js';
+import { onStream } from '../../../src/generators/people/representatives.js';
+import { titleLinesFor } from '../../../src/generators/people/poolMap.js';
 
 const SEEDS = Array.from({ length: 30 }, (_, k) => k); // five of each tier (TIER_ORDER[i mod 6])
 /** @type {any[]} */
@@ -240,5 +244,39 @@ describe('the fills (WRITE-GOALS §6, bound exactly) and J-16', () => {
       const ctx = goalContextOf(s, s.npcs, s.relationships);
       for (const c of s.npcs) if (isLawFace(c, ctx)) expect(c.institution.kind).toBe('house');
     }
+  });
+});
+
+describe('ITEM 15 (the design §6.5, J-16): the secret and the presentation by title, through the pool map', () => {
+  const face = (title, held = new Set()) => onStream(createPRNG(`item15::${title}`), () => generateSingleNPC(
+    'Master Craftsman', 'master', 'other', 'germanic', 'town', {}, [], { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set(), goals: new Set(), secrets: held }, null, { hook: false, title },
+  ));
+  it('a title the table writes draws its own secret and presentation; any other title keeps the category pool', () => {
+    expect(Object.keys(TITLE_SECRETS)).toHaveLength(147);
+    for (const title of ['the miller', 'the cooper', 'the scribe']) {
+      const card = face(title);
+      expect(TITLE_SECRETS[title].map((r) => r.secret), title).toContain(card.secret.what);
+      expect(TITLE_PRESENTATIONS[title].map((r) => r.impression), title).toContain(card.presentation.impression);
+      expect(card.goal, 'no goal by title (J-16): the goal is A9\'s').toBeNull();
+    }
+    expect(titleLinesFor('the head of Elder Council'), 'a mint\'s title keeps its category').toBeNull();
+    const other = face('the head of Elder Council');
+    const all = Object.values(TITLE_SECRETS).flat().map((r) => r.secret);
+    expect(all, 'anchored: a title outside the table draws no title line').not.toContain(other.secret?.what);
+  });
+  it('REVIEW-INTAKE-4: a title whose three secrets the roster already holds falls back to its category, never repeats one', () => {
+    const held = new Set(TITLE_SECRETS['the miller'].map((r) => r.secret));
+    const card = face('the miller', held);
+    expect(TITLE_SECRETS['the miller'].map((r) => r.secret)).not.toContain(card.secret?.what);
+  });
+  it('on the slice, every titled face born with its own presentation keeps a title line (the secret-driven modes apart)', () => {
+    let titled = 0; let own = 0;
+    for (const s of towns) for (const c of s.npcs) {
+      if (!TITLE_PRESENTATIONS[c.title]) continue;
+      titled += 1;
+      if (TITLE_PRESENTATIONS[c.title].some((r) => r.impression === c.presentation?.impression)) own += 1;
+    }
+    expect(titled, 'anti-vacuity').toBeGreaterThan(300);
+    expect(own / titled, 'the title\'s own first impression reaches nine in ten titled faces').toBeGreaterThan(0.9);
   });
 });

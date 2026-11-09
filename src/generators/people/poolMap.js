@@ -35,6 +35,7 @@
  */
 
 import { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY } from '../../data/npcData.js';
+import { TITLE_PRESENTATIONS, TITLE_SECRETS } from '../../data/people/titleSecretsPresentations.js';
 
 /** The seven categories the pools are keyed by. */
 export const POOL_CATEGORIES = Object.freeze(['government', 'military', 'religious', 'economy', 'criminal', 'magic', 'other']);
@@ -340,4 +341,23 @@ export function hookPoolFor(title, shelf, options = {}) {
   const { category, via } = poolFor(title, shelf);
   const pool = HOOK_POOLS.includes(category) ? category : 'other';
   return { pool, via, fallback: via !== 'title' || pool !== category };
+}
+
+// ── ITEM 15: THE SECRET AND THE PRESENTATION BY TITLE (the allegiance train, car 4, ALLEGIANCE-CAR4, 2026-11-09;
+// the design §6.5, the chair's ruling J-16; the writers' records WRITE_PEOPLE_2026-11-08.md and
+// WRITE_PEOPLE_3_2026-11-08.md) ──────────────────────────────────────────────────────────────────────────────────
+// The 147 fallback titles' lines (data/people/titleSecretsPresentations.js) are reached HERE, by the face's title: a
+// title the table holds draws its secret and its presentation from its own three; every other title — the house
+// titles that hold their own pools, the mints' titles, a stranger's house — keeps its CATEGORY pool, as today. NO GOAL
+// BY TITLE (J-16): the goal is the goal families' (people/goals.js), which read the house and its record, never this.
+
+/**
+ * The secret and presentation lines a face's title holds, or null for a title the table does not write.
+ * @param {string | null | undefined} title the face's title ("the miller")
+ * @returns {{ secrets: ReadonlyArray<Readonly<{ secret: string, stakes: string }>>, presentations: ReadonlyArray<Readonly<{ impression: string, disposition: string, behaviour: string }>> } | null}
+ */
+export function titleLinesFor(title) {
+  const key = typeof title === 'string' ? title : '';
+  if (!key || !Object.prototype.hasOwnProperty.call(TITLE_SECRETS, key)) return null;
+  return { secrets: TITLE_SECRETS[key], presentations: TITLE_PRESENTATIONS[key] || [] };
 }
