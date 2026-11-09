@@ -482,7 +482,12 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // e36e4916f) at exactly that commit (change-point search over census-1b's first parent, into census-2 through the merge
 // 2b31f33f3); at the composed tip with 38d1b4c05's src reverse-applied the arm reads 865193cf, rung 1's value, so the two
 // lineages' moves compose with no interaction. Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = '5b6a1e518bf3cd5f62212a2872b1422a0cdf5ce203ca97c6a18aa76b87c16432';
+// 2026-11-09 (STYLE-2 C2, lane SW-12 PULSE-LINES): 5b6a1e51... -> b716843d..., ONE cause, TEXT ONLY: stressorsCore.js ::
+// residualOutcome (the residual headline and summary in plain words; the two pills that restated them struck).
+// Leaf-diffed against 2053a809c: 70 string leaves and 56 array-tail keys where a struck reason shortened a list; no id,
+// tick or number moved. tradeWar.js and causeLifecycle.js (the lane's other causes) leave this arm byte-identical.
+// Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = 'b716843d83e322c20932ca2613d2912e116c52acdb6123321d2333e63b09d62b';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

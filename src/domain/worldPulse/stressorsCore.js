@@ -23,6 +23,31 @@
  */
 import { stablePart } from './stablePart.js';
 import { clamp01, effectiveStressorSeverity } from './stressorSeverity.js';
+// STYLE-2 C2 (SW-12): the zero-import selection kernel (no rng; keyed on the outcome id).
+import { pickLine } from './proseSelection.js';
+
+// STYLE-2 C2 (SW-12) — the aftermath of a resolved crisis, said as what it left behind.
+// The slots are the writer's own: the crisis label and its residual effects (catalog
+// tokens, humanised). No settlement name is held here (only the target id), so no line
+// names the place; no watch or office is claimed. Four vantages per intro pool.
+/** @typedef {{ label: string, effect1: string, effects: string }} ResidualSlots */
+const RESIDUAL_HEADLINE = Object.freeze([
+  (/** @type {ResidualSlots} */ x) => `${x.label} is over, but not forgotten`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} has passed; ${x.effect1} remains`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} has ended, leaving ${x.effect1}`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} is done, and ${x.effect1} is what it left`,
+]);
+const RESIDUAL_SUMMARY = Object.freeze([
+  (/** @type {ResidualSlots} */ x) => `${x.label} is over, but people still live with ${x.effects}.`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} has ended; the rulers are left with ${x.effects} to mend.`,
+  (/** @type {ResidualSlots} */ x) => `A visitor can still see what ${x.label.toLowerCase()} left behind: ${x.effects}.`,
+  (/** @type {ResidualSlots} */ x) => `${x.label} has run its course; what remains is ${x.effects}.`,
+]);
+/** "a, b and c" from residual-effect tokens. @param {string[]} tokens */
+function effectsPhrase(tokens) {
+  const words = tokens.map((t) => String(t).replace(/_/g, ' '));
+  return words.length > 1 ? `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}` : (words[0] || 'its scars');
+}
 
 export const STRESSOR_POLICIES = Object.freeze({
   transient: { baseResolutionChance: 0.46, decay: 0.18, maxAge: 2 },
@@ -424,13 +449,21 @@ export function residualOutcome(stressor, tick) {
     // severityBySettlement stamp), not the record's origin severity.
     const experienced = effectiveStressorSeverity(stressor, targetSaveId);
     const residualSeverity = Math.max(0.15, experienced * 0.45);
+    const id = `world_outcome.residual.${tick}.${stablePart(stressor.id)}.${stablePart(targetSaveId)}`;
+    const effectTokens = (stressor.residualEffects || []).slice(0, 3);
+    /** @type {ResidualSlots} */
+    const slots = {
+      label: String(stressor.label),
+      effect1: effectTokens.length ? String(effectTokens[0]).replace(/_/g, ' ') : 'its scars',
+      effects: effectsPhrase(effectTokens),
+    };
     return {
       // The id carries the resolution's tick, as every minted world outcome's does: a stressor id
       // that resolves twice at one settlement (the same pressure rising again) would otherwise mint
       // one id twice, and the regional event log would carry a duplicate record id. The tick sits
       // FIRST, not last: the regional event id is cut to 80 characters (propagation.js :: idPart),
       // and a trailing tick behind a long stressor id would be cut away with the tail.
-      id: `world_outcome.residual.${tick}.${stablePart(stressor.id)}.${stablePart(targetSaveId)}`,
+      id,
       type: 'condition',
       candidateType: 'stressor_residual',
       ruleId: `stressor_${stressor.type}_residual`,
@@ -440,11 +473,10 @@ export function residualOutcome(stressor, tick) {
       targetSaveId,
       severity: residualSeverity,
       score: Math.round(experienced * 45),
-      headline: `${stressor.label} leaves aftereffects`,
-      summary: `${stressor.label} is no longer the active crisis, but its consequences remain visible.`,
+      headline: pickLine(RESIDUAL_HEADLINE, `${id}:headline`, slots),
+      summary: pickLine(RESIDUAL_SUMMARY, `${id}:summary`, slots),
+      // STYLE-2 C2 (SW-12): the residual effects are named in the summary, so no pill restates them.
       reasons: [
-        'A time-bounded stressor resolved.',
-        `Residual effects remain: ${stressor.residualEffects.slice(0, 3).join(', ').replace(/_/g, ' ')}.`,
         // The resolution receipt: why the crisis ended (counterforce-led
         // recovery, what it outlasted) — same explainability bar as births.
         ...(stressor.resolutionContext?.narrative ? [stressor.resolutionContext.narrative] : []),
