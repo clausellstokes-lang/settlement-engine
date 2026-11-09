@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d0d046029eda9292faa49eca15ae0e4190577a4f",
-  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR4 merge point)",
+  "measuredAtSha": "3a4124a60a2496c9da0d11441b2e1d0e09fdf9c3",
+  "measuredBy": "SW-6 CRISIS-SURFACES second seat (session_01FbPLbfTQsYVkkk1eaWnuh4)",
   "date": "2026-11-09",
-  "note": "car 4 composed: the goals, the title secrets, write-goals and write-people-3 suites",
-  "files": 3138,
-  "parked": 387,
-  "credited": 2751,
-  "titles": 28822,
-  "suiteTitles": 7752
+  "note": "SW-6 CRISIS-SURFACES first seat added three test files (tonightCastTail, npcStructureSeatPlain, crisisFactFindings.wants); the census counts them",
+  "files": 3141,
+  "parked": 388,
+  "credited": 2753,
+  "titles": 28840,
+  "suiteTitles": 7764
 }
