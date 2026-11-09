@@ -182,8 +182,8 @@ describe('W-H4 — the register reads as prose, never as engine tokens', () => {
     expect(row.name).toBe('Maera Voss');
     expect(row.title).toBe('former harbourmaster');
     expect(row.whyLine).toBe('They were put out by an edict.');
-    expect(row.notorietyLine).toBe('Their name carries badly wherever it is spoken.');
-    expect(row.whenLine).toBe('On the road longer than most care to count.');
+    expect(row.notorietyLine).toBe('Their name is known, and not kindly.'); // re-keyed by identity (STYLE-2 C2, SW-12 third seat, D·52)
+    expect(row.whenLine).toBe('On the road a long while now.'); // re-keyed (D·55)
     expect(row.doorsLine).toBe('Kelder will not have them back.');
     expect(row.originName).toBe('Kelder');
     expect(row.restingName).toBe('Thornreach');
@@ -217,7 +217,7 @@ describe('W-H4 — the register reads as prose, never as engine tokens', () => {
 
     expect(dm).toMatchObject({
       heldAbroad: true,
-      whyLine: 'They are held abroad while carrying the realm\'s business.',
+      whyLine: 'They were stopped while carrying the realm\'s business.', // re-keyed (D·56)
       whenLine: 'Their journey waits on a foreign gaoler.',
       whereaboutsLine: 'They are held abroad at Greywatch.',
       restingId: 'sav_captor',
