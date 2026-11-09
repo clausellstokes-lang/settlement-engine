@@ -199,7 +199,12 @@ The three sibling keys move with their text and their twin; the `needs` and the 
 
 ## 5. The referee (the 1,000, `soak-review.mjs --count 1000 --workers 4`, parent and tip)
 
-(The figures land in the next commit of this record, from the two runs in flight at this commit.)
+Both runs exit 0 (parent in a clean worktree at `a7bc2e4ce`, tip at `909783378`; the code tip, which this record does not move). CONFIRMED:
+
+- **The twenty most-repeated frames** (`aggregates/repetition-prose.json` `top`): every one has the same town count at the parent and the tip (1000, 1000, 1000, 439, 367, 306, 306, 297, 293, 263, 260, 232, 225, 225, 208, 206, 203, 203, 199, 199). None is sourced from this lane's files, at the parent or the tip: **not raised**.
+- distinct skeletons 4,048 → 4,048; skeletons in ten per cent of towns 104 → 104; the median town's share in them 0.255 → 0.255.
+- **`coh:tier-noun`**: 1 mention in `finding-classes.json` at the parent and the tip (soak1k-16's record battery, not a line of this lane); **0 on this lane's lines**. The four audit drafts that would have printed "the town" in a thorp were struck (†).
+- In the 60 sampled dossiers this lane's rewritten lines are dark at both trees (as the audit found: 0 lit of these rows). The clock stages print after a world pulse, which is the WY-1 arm's leaf in §4.
 
 **The family's walker phrases** (this lane's 14 files; string literals and JSX text, comments blanked; a scratch scan with the §3 list, word-bounded):
 
