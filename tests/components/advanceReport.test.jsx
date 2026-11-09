@@ -172,6 +172,11 @@ describe('AdvanceReport — decree section (§5 / §5b)', () => {
     // The conflict is named, and both decrees live inside the ONE cluster.
     expect(within(clusters[0]).getByText(/conflicting/i)).toBeTruthy();
     expect(within(clusters[0]).getAllByTestId('chronicle-decree')).toHaveLength(2);
+    // STYLE-2 SW-12 (ledger D·43): a decree's reach reads "things followed from it",
+    // never the provenance model's "downstream effects (… cone)".
+    expect(clusters[0].textContent).toMatch(/\d+ things? followed from it \((traced|likely)\)/);
+    // anchored: the same textContent matched the new words on the line above
+    expect(clusters[0].textContent).not.toMatch(/downstream effects?|cone\)/);
   });
 
   test('a decree with no downstream effect is reported as an honest null', () => {
@@ -241,6 +246,16 @@ describe('AdvanceReport — receipts clickable', () => {
     };
     render(<AdvanceReport campaign={campaign} />);
     expect(screen.queryByTestId('cause-walk-trigger')).toBeNull();
-    expect(screen.getByText(/causal links between events are inferred/i)).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·47): the footer says what a link is in plain words;
+    // no "engine", no "provenance ledger", no "receipt" on the face.
+    expect(screen.getByText(/links between events are guesses from the places and people they share/i)).toBeTruthy();
+    expect(screen.queryByText(/provenance ledger|compresses, never truncates|click any receipt/i)).toBeNull();
+  });
+
+  test('the empty report reads in the reader\'s words (ledger D·46)', () => {
+    const { unmount } = render(<AdvanceReport campaign={{ id: 'c-empty', settlementIds: [], worldState: { pulseHistory: [] } }} />);
+    expect(screen.getByTestId('advance-report-empty').textContent).toMatch(/what\s+happened in that time: the headline, its chapters and threads, the events\s+beneath them/);
+    expect(screen.queryByText(/unfolded in the span|the receipts/)).toBeNull();
+    unmount();
   });
 });
