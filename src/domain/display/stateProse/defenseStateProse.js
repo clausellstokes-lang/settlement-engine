@@ -2054,13 +2054,13 @@ export function magicFlagPoolKey(flags) {
  * the spine car's composition takes these over when it lands; nothing waits on the spine).
  * The unit keeps its own pool and angle; the said line rides as a second piece, so the
  * composed-prose manifest reads the cell as ADDITIVE (the spine held, a piece grew).
- * @param {object|null} unit a composed unit
- * @param {object|null} said a composed unit from the same block, or null
+ * @param {{text?: string, pieces?: ReadonlyArray<object>}|null} unit a composed unit
+ * @param {{text?: string, pieces?: ReadonlyArray<object>}|null} said a composed unit from the same block, or null
  * @returns {object|null}
  */
 export function withSaid(unit, said) {
-  const base = /** @type {any} */ (unit);
-  const extra = /** @type {any} */ (said);
+  const base = unit;
+  const extra = said;
   if (!base || !extra || !extra.text) return unit;
   return Object.freeze({
     ...base,

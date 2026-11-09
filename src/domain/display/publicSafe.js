@@ -355,8 +355,8 @@ function maskHiddenNames(value, names) {
 
 /**
  * The root pass over a projected settlement (206 twin).
- * @param {Record<string, any>} pub @param {string[]} hiddenNames @param {string[]} veiledIds
- * @returns {Record<string, any>}
+ * @param {Record<string, unknown>} pub @param {string[]} hiddenNames @param {string[]} veiledIds
+ * @returns {Record<string, unknown>}
  */
 function publicVeilPass(pub, hiddenNames, veiledIds) {
   const veiled = new Set(veiledIds);
@@ -370,17 +370,19 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
     });
   }
   if (!hiddenNames.length) return pub;
+  /** @type {Set<unknown>} */
   const hidden = new Set(hiddenNames);
+  /** @param {unknown} v @returns {v is Record<string, unknown>} */
   const isRow = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
   const ps = pub.powerStructure;
   if (isRow(ps) && Array.isArray(ps.factions)) {
     ps.factions = ps.factions.filter((f) => !(isRow(f) && (f.hidden === true || hidden.has(f.faction))));
   }
-  /** @param {any[]} list a conflicts array of the public JSON (the caller checked Array.isArray) */
+  /** @param {unknown[]} list a conflicts array of the public JSON (the caller checked Array.isArray) */
   const dropConflicts = (list) => list.filter((c) => !(isRow(c) && Array.isArray(c.parties) && c.parties.some((p) => hidden.has(p))));
   if (Array.isArray(pub.conflicts)) pub.conflicts = dropConflicts(pub.conflicts);
   if (isRow(ps) && Array.isArray(ps.conflicts)) ps.conflicts = dropConflicts(ps.conflicts);
-  /** @param {Record<string, any>} entry a stress entry of the public JSON (`isRow` below refuses any other shape) */
+  /** @param {unknown} entry a stress entry of the public JSON (`isRow` below refuses any other shape) */
   const dropStakes = (entry) => {
     if (!(isRow(entry) && isRow(entry.cast) && Array.isArray(entry.cast.stakes))) return entry;
     return { ...entry, cast: { ...entry.cast, stakes: entry.cast.stakes.filter((st) => !(isRow(st) && hidden.has(st.factionId))) } };
@@ -389,7 +391,7 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
     if (Array.isArray(pub[key])) pub[key] = pub[key].map(dropStakes);
     else if (isRow(pub[key])) pub[key] = dropStakes(pub[key]);
   }
-  return /** @type {Record<string, any>} */ (maskHiddenNames(pub, hiddenNames));
+  return /** @type {Record<string, unknown>} */ (maskHiddenNames(pub, hiddenNames));
 }
 
 /**

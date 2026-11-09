@@ -92,6 +92,8 @@ const VIABILITY_LABEL = Object.freeze({
  * Structural view of the settlement fields the display model reads.
  * @typedef {Object} DossierSettlementView
  * @property {string} [name] the town's own name (W2 DEF #36: the viability verdict says it)
+ * @property {unknown} [_seed] the generation seed (the viability draw's key)
+ * @property {unknown} [id] the saved settlement's id (the key's fallback)
  * @property {{ metrics?: { foodBalance?: FoodBalanceRecord | null, tradeAccess?: string } | null, summary?: string | null, viable?: boolean | null, dependencies?: unknown[] } | null} [economicViability]
  * @property {EconStateView | null} [economicState]
  * @property {{ tradeRouteAccess?: string } | null} [config]
@@ -355,7 +357,7 @@ function viabilityName(settlement) {
 
 /** @param {DossierSettlementView | null | undefined} settlement @returns {string} */
 function viabilitySeed(settlement) {
-  const s = /** @type {any} */ (settlement);
+  const s = settlement;
   const seed = s?._seed ?? s?.id ?? s?.name ?? '';
   return seed ? `${seed}|viability` : '';
 }

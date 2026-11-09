@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "4c7859fbaf2f41b51e1239b4ed1643c88a4180db57d98f8e95a03b20d435073e",
       "src/domain/display/stateProse/powerStateProse.js": "af9935cf52a1efb0c55a292538334d4f239b916ad92b01898a51e53f780fa8af",
       "src/domain/display/stateProse/economyStateProse.js": "1f730c5bac18dd1491b979cd16cded450c80ad9f832e5dc8bdda85cc89ad65c9",
-      "src/domain/display/stateProse/defenseStateProse.js": "171ab22d8a173465d4eaf31555e214ff0b589bbf786b95ba6d611dc7ba10eda6",
+      "src/domain/display/stateProse/defenseStateProse.js": "5199d1ba9d1405374cc20ab3d07e3d0ae86c802d3df5d9548eae89fc046659a7",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
       "src/domain/display/stateProse/warFaithStateProse.js": "cd457c6496e5d84828e782f46c8a242c395c3636d62b0096469d14c3a1e1e3df",
       "src/domain/display/stateProse/dossierMounts.js": "1c5557a2e848a496d9a20099634bf5d1e894d60fc6110743083c87cf7ce20d2d"
