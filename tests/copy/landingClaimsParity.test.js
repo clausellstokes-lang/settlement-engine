@@ -67,7 +67,11 @@ describe('landing copy — claims-vs-enforcement parity (bar 13)', () => {
   it('the anon size ceiling in §01 Forge matches tierFacts (the enforced gate label)', () => {
     // forge.ceiling hand-writes the anon max size; TIER_GATE.anon.maxTier is the
     // enforcement, tierFacts.ANON_MAX_SIZE_LABEL its pinned display label.
-    expect(landing.forge.ceiling).toContain(`up to a ${ANON_MAX_SIZE_LABEL}`);
+    // RE-KEYED BY CAUSE (TIER-PARITY-FIX V6, 2026-11-09): anon forges a Town ONLY
+    // (ANON_SIZES = ['town'] since 2026-10-30), so "up to a" was stale copy; the pin keeps
+    // its identity — the hand-written size IS the enforced label — in the true phrase.
+    expect(landing.forge.ceiling).toContain(`forge a ${ANON_MAX_SIZE_LABEL}`);
+    expect(landing.forge.ceiling).not.toContain('up to'); // anchored: the enforced label matched in this same string just above
   });
 
   it('the anon size ceiling is actually RENDERED in §01 Forge, not merely stored (§363.1)', () => {

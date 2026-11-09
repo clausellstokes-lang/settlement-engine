@@ -71,7 +71,7 @@ export const landing = {
     // hand-off to the next stop, in the estate's caps-link idiom.
     readOn: 'Read on: the voice',
     micro: 'No account needed',
-    ceiling: 'Without an account, forge up to a Town. Sign in free for every size, saving, and full Basic / Advanced control.',
+    ceiling: 'Without an account, forge a Town. Sign in free for every size, saving, and full Basic / Advanced control.',
     draftTitle: 'Instant draft',
     draftHint:  'pick a size and go',
     // Population bands mirror the engine canon (src/data/constants.js
