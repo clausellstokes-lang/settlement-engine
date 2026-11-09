@@ -7,13 +7,25 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **35**: schema 34's tagged numeric heuristic-leaf envelope, tag law and roster,
+ * `BASELINE_SCHEMA` is **36**: schema 35's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR1 MERGE (e5f88930b; the
+ * chair's ruling of 2026-11-09, the public-veil option-B idiom): ONE rung, TWO causes, every moved row with
+ * exactly one. The car minted three rungs after schema 32: its 33 IS the veil merge this line already
+ * minted as 35 and is NOT re-minted; its 34 and 35 are re-minted here as one. Cause 1, the hidden
+ * allegiance (5902f1a4a, the car's rung 34): 11 rows ADMITTED (the allegiance's sub-fields read on the
+ * allegiance; the retired mark's readers), 17 GONE (the same sub-fields on corruptTies; the year over the
+ * new cast), 1 INCREASED (`migrationReports on settlement`, 2 -> 4). Cause 2, the J-19 cure (d131ab158,
+ * the car's rung 35: the corpus's year re-dealt): 13 rows ADMITTED (`nearbyResourcesState on config`,
+ * `resourceHistory on settlement`). Nothing is declared; the bank holds at 76/50. Its full rationale lives
+ * beside `TRAIN_CAR1_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_WAVE_VEIL_BASELINE_SCHEMA` is **35**: schema 34's tagged numeric heuristic-leaf envelope, tag law and roster,
  * re-governed to MERGE-WAVE AT THE FIX-PUBLIC-VEIL MERGE (7e65c7bec; the chair's ruling of 2026-11-08,
  * option B): ONE rung, TWO causes, every row with exactly one. Cause 1, the corpus definition gains
  * producer 1b′ (the infiltrated topology, the veil lane's own rung 32), which moves no row (measured
  * NEW 0 · GONE 0 on the lane). Cause 2, the veiled re-deal (the veil lane's rung 33): 4 rows ADMITTED
  * (`covert on impairments`), 13 GONE (the re-dealt year now observes nearbyResourcesState and
- * resourceHistory). Nothing is declared; the bank holds at 76/50. Its full rationale lives beside
+ * resourceHistory). Nothing is declared; the bank holds at 76/50 (RETIRED). Its full rationale lives beside
  * `WAVE_VEIL_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
  *
  * `RETIRED_WAVE_FOOD_BASELINE_SCHEMA` is **34**: schema 33's tagged numeric heuristic-leaf envelope, tag law, roster
@@ -550,7 +562,11 @@ export const RETIRED_WAVE_W2_BASELINE_SCHEMA = 33;
  *  at the FIX-PUBLIC-VEIL merge (the corpus's producer 1b′ and the veiled re-deal). Never redefined, never
  *  deleted, so a schema-34 PREDECESSOR is still validated as schema 34. */
 export const RETIRED_WAVE_FOOD_BASELINE_SCHEMA = 34;
-export const BASELINE_SCHEMA = 35;
+/** The RETIRED public-veil definition — schema 36's predecessor. Schema 36 re-governs it to MERGE-TRAIN at
+ *  the ALLEGIANCE-CAR1 merge (the hidden allegiance and the J-19 re-deal). Never redefined, never deleted,
+ *  so a schema-35 PREDECESSOR is still validated as schema 35. */
+export const RETIRED_WAVE_VEIL_BASELINE_SCHEMA = 35;
+export const BASELINE_SCHEMA = 36;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1285,10 +1301,20 @@ export function validateSchema34Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 35's tagged envelope (MERGE-WAVE, FIX-PUBLIC-VEIL), re-governed by
+ *  schema 36 to MERGE-TRAIN at the ALLEGIANCE-CAR1 merge. Re-bound to its own LITERAL. */
+export function validateSchema35Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_WAVE_VEIL_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema35Baseline(baseline) {
+export function validateSchema36Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
