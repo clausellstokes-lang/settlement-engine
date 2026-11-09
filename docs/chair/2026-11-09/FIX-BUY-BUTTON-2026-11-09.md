@@ -30,14 +30,22 @@ pricing page. None of those changed. On both buttons, "Available at launch" alre
 the pill. Once the price is gone, each button's own text is exactly its label, and the accessible name
 is that label followed by the pill's words, said once. **CONFIRMED** by the pin below.
 
-## The other controls that wear the pill (named for the chair; nothing changed)
+## The rail's locked rungs (RULED IN by the chair, 2026-11-09; its own commit, e52c3c137)
 
-- **NextActionRail `lockForLaunch`** (the "Edit (Cartographer)" rung, and "Export Dossier" when export
-  is a purchase): `disabledReason: AVAILABLE_AT_LAUNCH` becomes the row's native `title` tooltip,
-  while the pill sits on the hint line. **This duplicates the words visually (tooltip and pill).** The
-  accessible description goes through `aria-describedby` to the hint, so assistive tech announces the
-  reason once (PLAUSIBLE: from the accname rule that `title` is not used for the description when
-  `aria-describedby` is present; not separately pinned here).
+| control | before | after |
+|---|---|---|
+| NextActionRail "Edit (Cartographer)" (free owner, pre-launch) `title` | "Available at launch" | "Edit (Cartographer)" |
+| NextActionRail "Export Dossier" (export is a purchase, pre-launch) `title` | "Available at launch" | "Export Dossier" |
+| the pill on each rung's hint line | "Available at launch" | unchanged. Still the one place. |
+
+`lockForLaunch` no longer sets `disabledReason: AVAILABLE_AT_LAUNCH`, so `ActionRail` falls back to
+the label for the row's `title`. The accessible name is the label (`aria-label`). The description is
+the hint, which holds the pill, reached through `aria-describedby`. **CONFIRMED by the pin:** across
+`aria-label`, `title` and the described-by text, "Available at launch" occurs exactly once on each
+rung, and each row holds exactly one pill. Red-first: before the fix it failed with
+`Received: "Available at launch"`.
+
+## The other controls that wear the pill (named for the chair; nothing changed)
 - **PurchaseModal** pack buttons (:236) and the save-card control (:296): the `aria-label` appends
   ", Available at launch" and the pill is visible inside. The `aria-label` replaces the content for the
   accessible name, so it is said once and seen once. No duplication.
