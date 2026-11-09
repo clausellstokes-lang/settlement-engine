@@ -759,12 +759,13 @@ SLOT NOTE (STYLE-2-PULSE-FOLLOWUP, 2026-11-09, B·2): {aim} is the worded long g
 CADENCE: notable → floor 6 · live 4 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a change of ambitions" · headline · contextReason · personalityReason pools, ×4 each [J-LEG-2]
-1. {npc}'s goals shift because the settlement context changed. `[live, verbatim]`
-2. A changed settlement has forced {npc} to reconsider what comes next. `[live, verbatim]`
-3. {npc} keeps the same character, but new circumstances now demand different aims. `[live, verbatim]`
-4. New conditions in the settlement have turned {npc}'s effort toward another end. `[live, verbatim]`
-5. {npc} has set the old aim down; the settlement is not the place it was when that aim was chosen.
-6. What {npc} wants has moved with the town, and the old design has been left quietly where it stood.
+SLOT NOTE (STYLE-2-PULSE-FOLLOWUP, 2026-11-09, B·8): {oldAim} and {aim} are the worded goals (heraldDeeds.js :: NPC_AIMS) of the one goal that actually changed, the long goal first.
+1. {npc} has given up trying to {oldAim} and now means to {aim}. `[live, verbatim]`
+2. {npc} no longer works to {oldAim}; now they mean to {aim}. `[live, verbatim]`
+3. {npc} has set the old aim aside, to {oldAim}, and taken up a new one: to {aim}. `[live, verbatim]`
+4. People who know {npc} say they have stopped trying to {oldAim} and now mean to {aim}. `[live, verbatim]`
+5. {npc} has set down the old aim, to {oldAim}; what matters now is to {aim}.
+6. Things have changed around {npc}, and so has the aim: no longer to {oldAim}, but to {aim}.
 
 ---
 # §3 — THE AUTHORED SUBJECT-PHRASE POOLS (R1)

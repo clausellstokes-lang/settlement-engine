@@ -140,11 +140,13 @@ export const NPC_GOAL_NEWS = Object.freeze({
       (x) => `${x.name} redirects a long design`,
       (x) => `${x.name}'s aims turn with the times`,
     ],
+    // B·8 (STYLE-2-PULSE-FOLLOWUP): the summary names the aim given up and the aim taken up,
+    // in words (`oldAim` / `aim`, npcAgency's worded goals — the one that actually changed).
     summary: [
-      (x) => `${x.name}'s goals shift because the settlement context changed.`, // canonical
-      (x) => `A changed settlement has forced ${x.name} to reconsider what comes next.`,
-      (x) => `${x.name} keeps the same character, but new circumstances now demand different aims.`,
-      (x) => `New conditions in the settlement have turned ${x.name}'s effort toward another end.`,
+      (x) => `${x.name} has given up trying to ${x.oldAim} and now means to ${x.aim}.`, // canonical
+      (x) => `${x.name} no longer works to ${x.oldAim}; now they mean to ${x.aim}.`,
+      (x) => `${x.name} has set the old aim aside, to ${x.oldAim}, and taken up a new one: to ${x.aim}.`,
+      (x) => `People who know ${x.name} say they have stopped trying to ${x.oldAim} and now mean to ${x.aim}.`,
     ],
     // CURE-P1 U3 (FPQ-23) — THE REGISTER LEAVES THE PAGE. `previous` / `next` are npcAgency's
     // goal-branch KEY (contextForNpc's `tier|relationship|conditions`: archetype ids SORTED and
@@ -154,17 +156,21 @@ export const NPC_GOAL_NEWS = Object.freeze({
     // famine passed that is still there. The Herald prints this line as the events desk's
     // "Origin:", so it now states the true cause in words; the two keys stay on the record
     // (metadata.previousContext / nextContext, npcPatch.contextSignature) for the instruments.
+    // B·9 (STYLE-2-PULSE-FOLLOWUP): plain words, and still no condition named — the context
+    // key's diff is lossy (CURE-P1 U3 above), so the line says the place changed, not how.
     contextReason: [
-      (x) => `The settlement's circumstances have changed since ${x.name}'s aims were set.`, // canonical
-      (x) => `The settlement around ${x.name} is no longer the one those aims were made for.`,
-      (x) => `${x.name}'s old aims answered circumstances the settlement has since left behind.`,
-      (x) => `A shift in the settlement's footing overtook the aims ${x.name} had set.`,
+      (x) => `${x.name}'s old aim was made for a place that has since changed.`, // canonical
+      (x) => `Things at home have changed since ${x.name} first chose that aim.`,
+      (x) => `${x.name} chose the old aim when times were different.`,
+      (x) => `What ${x.name} once wanted no longer fits the way things stand.`,
     ],
+    // B·10: the character-sheet field names ("ideal", "flaw") leave the page; the traits are
+    // said as what drives the person and what they are given to.
     personalityReason: [
-      (x) => `Personality remains anchored by ideal ${x.ideal} and flaw ${x.flaw}.`, // canonical
-      (x) => `${x.name}'s ${x.ideal} ideal and ${x.flaw} flaw remain unchanged beneath the new aims.`,
-      (x) => `The ambitions turn, but ${x.ideal} and ${x.flaw} still anchor ${x.name}.`,
-      (x) => `New goals do not rewrite ${x.name}: the ${x.ideal} ideal and ${x.flaw} flaw still hold.`,
+      (x) => `${x.name} is still the same person: still driven by ${x.ideal}, still given to ${x.flaw}.`, // canonical
+      (x) => `The aims are new, but ${x.name} still cares most for ${x.ideal} and is still given to ${x.flaw}.`,
+      (x) => `${x.name} has not changed at heart: ${x.ideal} still matters most, and ${x.flaw} still gets the better of them.`,
+      (x) => `Underneath, ${x.name} is unchanged, still holding to ${x.ideal} and still prone to ${x.flaw}.`,
     ],
   },
 });

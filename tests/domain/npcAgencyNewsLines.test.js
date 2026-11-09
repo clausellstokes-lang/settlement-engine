@@ -158,3 +158,39 @@ describe('B·2–4 — a long ambition achieved, said in words', () => {
     }
   });
 });
+
+/** The NPC's context has changed (a famine arrived), so the goal rebranch fires. */
+function rebranchOf(overrides = {}, tick = 5) {
+  const snap = actorSnapshot({ contextSignature: 'village|local|', ...overrides });
+  snap.settlements[0].activeConditions = [{ archetype: 'famine', label: 'Famine pressure' }];
+  const r = evaluateNpcRules(snap, PRESSURE, { tick }).find((x) => x.candidateType === 'npc_goal_rebranch');
+  expect(r, 'the rebranch fires').toBeTruthy();
+  return r;
+}
+
+describe('B·8–10 — a change of ambition, said in words', () => {
+  const MACHINERY = /context|circumstances|footing|ideal|flaw|Personality|anchored|_/i;
+
+  it('the summary names the aim given up and the aim taken up, in words, on every telling', () => {
+    for (let tick = 0; tick < 24; tick += 1) {
+      const r = rebranchOf({}, tick);
+      const turned = r.npcPatch.longGoal !== 'secure_office' ? 'longGoal' : 'shortGoal';
+      const oldAim = turned === 'longGoal' ? 'secure an office' : "win the public's trust";
+      expect(r.summary, r.summary).toContain(oldAim);
+      expect(r.summary).toContain('Ilse Brandt');
+      for (const line of [r.summary, ...r.reasons]) {
+        expect(line).toContain('Ilse Brandt');
+        // anchored: the toContain above proves the line live.
+        expect(line, line).not.toMatch(MACHINERY);
+      }
+    }
+  });
+
+  it('the traits are said once, without the corrupted_ token', () => {
+    const r = rebranchOf({ ideal: 'corrupted_justice', flaw: 'corrupted_greed', corruption: true });
+    expect(r.reasons[1]).toMatch(/justice/);
+    expect(r.reasons[1]).toMatch(/greed/);
+    // anchored: the two toMatch above prove the line live and holding both traits.
+    expect(r.reasons[1]).not.toMatch(/corrupted/);
+  });
+});

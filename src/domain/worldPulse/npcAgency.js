@@ -17,7 +17,7 @@ import { allegianceOf } from '../people/allegiance.js';
 import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 // H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
 import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
-import { NPC_GOAL_NEWS, NPC_ROLE_MEANS, npcCandidateReasons, pickLine } from './eventProse.js';
+import { NPC_GOAL_NEWS, NPC_ROLE_MEANS, npcCandidateReasons, pickLine, plainTrait } from './eventProse.js';
 import { branchedGoalsFor } from './npcGoalBranches.js';
 import { NPC_AIMS, TARGETED_NPC_DEEDS, UNTARGETED_NPC_DEEDS } from './heraldDeeds.js';
 
@@ -1067,6 +1067,8 @@ function npcGoalCulmination(state, tick) {
 function npcGoalRebranch(state, context, tick) {
   const goals = branchedGoals(state, context);
   if (!goals) return null;
+  const turned = goals.longGoal !== state.longGoal ? 'longGoal' : 'shortGoal';
+  const aimOf = (/** @type {any} */ g) => NPC_AIMS[g] || String(g || '').replace(/_/g, ' ');
   return {
     id: `candidate.npc.goal_rebranch.${stablePart(state.npcId)}.${tick}`,
     type: 'npc',
@@ -1082,10 +1084,10 @@ function npcGoalRebranch(state, context, tick) {
     // A context signature/reset is still applied and audited, but only an actual
     // change of short/long intent earns a Chronicle beat.
     headline: pickLine(NPC_GOAL_NEWS.rebranch.headline, `${state.npcId}:${tick}:rebranch:headline`, { name: state.name }),
-    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name }),
+    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name, aim: aimOf(goals[turned]), oldAim: aimOf(state[turned]) }),
     reasons: [
       pickLine(NPC_GOAL_NEWS.rebranch.contextReason, `${state.npcId}:${tick}:rebranch:context`, { name: state.name, previous: state.contextSignature || 'unknown', next: context.signature }),
-      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: String(state.ideal || 'unknown').replace(/_/g, ' '), flaw: String(state.flaw || 'unknown').replace(/_/g, ' ') }),
+      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: plainTrait(state.ideal), flaw: plainTrait(state.flaw) }),
     ],
     npcPatch: {
       ...goals,
