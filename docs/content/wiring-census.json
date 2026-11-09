@@ -37,8 +37,8 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 617,
-      "COVERED": 240,
+      "THIN": 616,
+      "COVERED": 241,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -34375,6 +34375,7 @@
       ],
       "slotsNamed": [
         "counterpart",
+        "faction",
         "seat",
         "settlement"
       ],
@@ -34828,7 +34829,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -36060,12 +36061,13 @@
         "settlement"
       ],
       "slotsNamed": [
+        "seat",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "breakdown.safety",
@@ -54631,7 +54633,7 @@
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
       "variants": 6,
-      "grammars": 4,
+      "grammars": 5,
       "blocks": [
         "DS-POW-6"
       ]
@@ -54643,7 +54645,7 @@
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
       "variants": 6,
-      "grammars": 4,
+      "grammars": 5,
       "blocks": [
         "DS-POW-6"
       ]
@@ -70867,7 +70869,7 @@
         "label (via RISK_POOL_OF in powerStateProse.js)"
       ],
       "readingFunction": "RISK_POOL_OF",
-      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, seat, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, faction, seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -70927,7 +70929,7 @@
       "subject": "council",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -71084,7 +71086,7 @@
       "count": "4 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-POW-6",
       "subject": "capture pressure ADVANCING (weak security, poor prosperity)",
       "fields": [
@@ -71092,7 +71094,7 @@
         "breakdown.prosperity"
       ],
       "readingFunction": "capturePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",

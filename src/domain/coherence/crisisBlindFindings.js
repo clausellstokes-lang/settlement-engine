@@ -73,13 +73,15 @@ const CLAIMS = Object.freeze([
   { claim: 'nobody without bread', re: /\bNobody is going without bread\b/, family: 'hunger' },
   { claim: 'nobody talks about bread', re: /\bNobody here talks about the price of bread\b/, family: 'hunger' },
   // succession: succession void, politically fractured
-  { claim: 'the succession is not live', re: /\bthe succession question is not a live one\b/, family: 'succession' },
+  // SW-7 POWER-SIDE (STYLE-2 B7, 2026-11-09): DS-POW-4 Stable v1 and v3 reworded under the owner's style law; the
+  // claims kept, re-anchored to the new words (v3's twice, below and under unrest).
+  { claim: 'the succession is not live', re: /\bnobody is asking who comes next\b/, family: 'succession' },
   { claim: 'nobody would replace the seat', re: /\bdoes not come up, because there is nobody the \p{L}+ would name\b/u, family: 'succession' },
-  { claim: 'the seat is safe', re: /\bsafe for the plainest reason a seat can be safe\b/, family: 'succession' },
+  { claim: 'the seat is safe', re: /\bis safe in the hall\b/, family: 'succession' },
   // unrest: insurgency, slave revolt, wartime
   // Rung 2D unit 2 (the chair's ruling): an insurgency or a revolt denies the seat's safety as
   // surely as an open succession (rung 2C §3c: `soak1k-1` slave revolt, `-3001` insurgency).
-  { claim: 'the seat is safe', re: /\bsafe for the plainest reason a seat can be safe\b/, family: 'unrest' },
+  { claim: 'the seat is safe', re: /\bis safe in the hall\b/, family: 'unrest' },
   { claim: 'very little street violence', re: /\bvery little street violence\b/, family: 'unrest' },
   { claim: 'random violence is put down', re: /\brandom violence is put down\b/, family: 'unrest' },
   // crisis: any active crisis
