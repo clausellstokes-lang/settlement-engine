@@ -42,7 +42,7 @@ export const SPEECH_PATTERNS = [
   'Verbose and elaborate; takes three sentences where one would do',
   'Peppers speech with trade or craft jargon even in unrelated contexts',
   'Speaks softly, forcing others to lean in',
-  'Asks rhetorical questions to make points rather than stating them',
+  'Makes every point as a question they do not expect answered',
   "Uses the formal royal 'we' (old habit from a previous station)",
   'Pauses mid-sentence to choose words with visible care',
   'Deflects personal questions with philosophical tangents',
@@ -233,7 +233,7 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'transactional',
     },
     {
-      impression: 'Relaxed in a way that reads as confidence rather than carelessness.',
+      impression: 'Relaxed and sure of themselves, and not careless with it.',
       disposition: 'welcoming',
     },
     {
@@ -273,7 +273,7 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'welcoming',
     },
     {
-      impression: 'Cautious with newcomers. The wariness is professional rather than personal.',
+      impression: 'Cautious with newcomers, because the work requires it; it is nothing personal.',
       disposition: 'cautious',
     },
   ],
@@ -540,7 +540,7 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: "Identify which of their officers is on the thieves' guild payroll", // CENSUS-4b: NOT declared — F4's writer (npcGenerator, crimeSignalOf) rewrites the guild to 'a powerful outside interest' where no crime signal stands, so the printed line presumes nothing (tests/generators/npcCrimeSignalWriters.test.js soak1k-531)
-      long: 'Die in bed rather than in the street (unusual ambition for the role)',
+      long: 'Die old, in their own bed (an unusual ambition for the role)',
       driven_by: 'personal',
     },
   ],
@@ -1313,7 +1313,7 @@ export const NPC_SECRETS = {
     },
     {
       short: 'Find who betrayed them before they do it again',
-      long: 'Accumulate enough to make legitimacy a choice rather than an aspiration',
+      long: 'Put enough by that going straight is a choice they can make',
       driven_by: 'wealth',
     },
   ],
