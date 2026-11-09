@@ -737,13 +737,10 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
 
   // 25% chance: NPC knows something compromising about another NPC
   if (random01(0.25) && allNpcs.length > 1) {
-    const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex));
+    const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex)), rosterNames = allNpcs.map((n) => n?.name).filter(Boolean).sort((x, y) => y.length - x.length), frameOf = (t) => rosterNames.reduce((acc, nm) => acc.split(nm).join('@'), String(t ?? '')).trim(), heldFrames = held && held.size ? new Set([...held].map(frameOf)) : held; // STYLE-2 SW-7 (B10(b)): the held key is the frame
     // STYLE-2 SW-7 (STYLE-RULINGS-2 B10(b)): NO FRAME TWICE IN ONE DOSSIER. The held refusal reads the FRAME,
     // every roster name masked, so a second figure cannot carry the same secret under another name (the twelve
     // at dc5684e66: one frame ten times in one town). Every frame held -> no roll, and the figure keeps its own.
-    const rosterNames = allNpcs.map((n) => n?.name).filter(Boolean).sort((x, y) => y.length - x.length);
-    const frameOf = (t) => rosterNames.reduce((acc, nm) => acc.split(nm).join('@'), String(t ?? '')).trim();
-    const heldFrames = held && held.size ? new Set([...held].map(frameOf)) : held;
     return drawDeclared([
       {
         what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows, and has been deciding for months whether to use it`,
