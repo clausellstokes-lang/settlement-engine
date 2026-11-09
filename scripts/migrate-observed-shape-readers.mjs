@@ -197,7 +197,11 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 36 -> 37 (LIVE)   MERGE-TRAIN AT THE ALLEGIANCE-CAR2 MERGE (f51058995): one rung, one cause — the
+ *   schema 37 -> 38 (LIVE)   MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (c6ded8e3a): one rung, two causes — the
+ *     dial e9070d614 re-deals the year (13 admitted, 5 gone) and the bought watch a63effa93 (1 gone); none
+ *     declared, the bank 76/50. Its full rationale lives beside `TRAIN_CAR3_TARGET_SCHEMA`.
+ *
+ *   schema 36 -> 37 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR2 MERGE (f51058995): one rung, one cause — the
  *     guild's push (bbb1a4abc, A3) re-deals the year: 13 gone, none new; none declared, the bank 76/50. Its full
  *     rationale lives beside `TRAIN_CAR2_TARGET_SCHEMA`.
  *
@@ -353,6 +357,7 @@ import {
   validateSchema34Baseline,
   validateSchema35Baseline,
   validateSchema36Baseline,
+  validateSchema37Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1639,6 +1644,43 @@ export const TRAIN_CAR1_TARGET_SCHEMA = 36;
  *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR2_SCANNER_DELTA_PATHS`. */
 export const TRAIN_CAR2_TARGET_SCHEMA = 37;
 
+/* ⭐⭐ THE SCHEMA 37 → 38 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (one rung, two causes, every moved
+ *  row with exactly one: the chair's ruling of 2026-11-09)
+ *
+ *  The merge commit c6ded8e3a merged lane/allegiance-car3-2026-11-08 (6ea8fb318, cut from car 1's 7395b5dab)
+ *  into the integration branch; this line's observed-shape tooling, register and walker were taken whole
+ *  (rung 37 live). The car took NO rung on its lane: a governed --write shrink (1a522aaf4: 2,203 / 1,546 ->
+ *  2,194 / 1,540, six identities gone) and the walker's pins re-keyed (18a315ee2), its year re-dealt by its
+ *  generator causes (e9070d614, 8567f490d, 2f89aaeef; the split there PLAUSIBLE, not bisected). Minted here
+ *  as rung 38 on the merged tip, predecessor 37. The corpus DEFINITION is unchanged.
+ *
+ *  MEASURED at the merged tip against the schema-37 register (scan vs inventory): NEW 13 · GONE 6 ·
+ *  INCREASED 0 · DECREASED 0 · SAME 1,529.
+ *  CAUSE 1 — the dial e9070d614 (ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05: fewer agents dealt on
+ *    their keyed forks, so the corpus's year re-deals): 18 rows. BISECTED, CONFIRMED: a scratch tree of the
+ *    merged tip with that one constant reverted to 0.10 scans NEW 0 · GONE 1 against the schema-37 register
+ *    (only cause 2's row moves) and its corpus year equals the rung-37 pins, so 8567f490d and 2f89aaeef
+ *    (fence-only) move no row here.
+ *    NEW, ADMITTED with attribution (13) — the re-dealt year no longer reaches the writers rung 37 saw:
+ *      `nearbyResourcesState on config` in events/affordanceManifest.js, events/mutateWorld.js (4),
+ *      events/targetRosters.js, resourceSemantics.js, state/deriveSystemState.js,
+ *      worldPulse/institutionLifecycleResourceRead.js, worldPulse/resourceDynamicsKernel.js,
+ *      worldPulse/tierResourceDynamics.js (2), generators/steps/resolveResources.js (3) and
+ *      generators/foodGenerator.js; `resourceHistory on settlement` in provenance/rosterProvenance.js,
+ *      resourceDynamicsKernel.js (2) and tierResourceDynamics.js (2).
+ *    GONE, retired with that cause (5) — the re-dealt year reaches their writers (the car's own shrink rows):
+ *      `factionName on stressors` (4) and `settlementIds on stressors` in components/map/WorldPulseData.js,
+ *      `targetId on outcome` in worldPulse/proposalAdmission.js, `attackerId` / `targetId on outcome` in
+ *      worldPulse/warCoalitionEvidence.js.
+ *  CAUSE 2 — the bought watch a63effa93: 1 row GONE, `ousted on npcs` in src/domain/corruption.js — the read
+ *    left the file (the person arm now reads it through corruptionLeash.js :: isOustedNpc, where the
+ *    detector binds no npcs shape); it moves with the dial reverted too.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those nineteen rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR3_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR3_TARGET_SCHEMA = 38;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1714,6 +1756,8 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [TRAIN_CAR1_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
   // HELD at 37 (MERGE-TRAIN, ALLEGIANCE-CAR2): no moved row is on a declared identity.
   [TRAIN_CAR2_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 38 (MERGE-TRAIN, ALLEGIANCE-CAR3): no moved row is on a declared identity.
+  [TRAIN_CAR3_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2326,6 +2370,14 @@ export const TRAIN_CAR2_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-37 → 38 delta: the THREE bookkeeping paths (the corpus definition is unchanged; car 3's dial
+ *  moves the corpus's year, not its builder). */
+export const TRAIN_CAR3_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2396,6 +2448,8 @@ const TRAIN_CAR1_SCANNER_TRANSITION_POLICY =
   'schema-35-to-36-hidden-allegiance-and-j19-redeal-v1';
 const TRAIN_CAR2_SCANNER_TRANSITION_POLICY =
   'schema-36-to-37-guild-push-redeal-v1';
+const TRAIN_CAR3_SCANNER_TRANSITION_POLICY =
+  'schema-37-to-38-car3-redeal-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2451,6 +2505,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [WAVE_VEIL_TARGET_SCHEMA]: WAVE_FOOD_TARGET_SCHEMA,
   [TRAIN_CAR1_TARGET_SCHEMA]: WAVE_VEIL_TARGET_SCHEMA,
   [TRAIN_CAR2_TARGET_SCHEMA]: TRAIN_CAR1_TARGET_SCHEMA,
+  [TRAIN_CAR3_TARGET_SCHEMA]: TRAIN_CAR2_TARGET_SCHEMA,
 });
 
 /**
@@ -2556,6 +2611,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [WAVE_VEIL_TARGET_SCHEMA]: validateSchema35Baseline,
   // The schema-37 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR1), validated as schema 36.
   [TRAIN_CAR1_TARGET_SCHEMA]: validateSchema36Baseline,
+  // The schema-38 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR2), validated as schema 37.
+  [TRAIN_CAR2_TARGET_SCHEMA]: validateSchema37Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -3079,6 +3136,12 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR3_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR3_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR3_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
   [TRAIN_CAR2_TARGET_SCHEMA, Object.freeze({
@@ -4256,7 +4319,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : TRAIN_CAR2_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : TRAIN_CAR3_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4271,8 +4334,9 @@ export function run(argv = process.argv.slice(2)) {
     FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
     PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA,
-    TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${TRAIN_CAR2_TARGET_SCHEMA} (live allegiance-car2 leaf),`
+    TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${TRAIN_CAR3_TARGET_SCHEMA} (live allegiance-car3 leaf),`
+      + ` ${TRAIN_CAR2_TARGET_SCHEMA} (retired allegiance-car2 leaf),`
       + ` ${TRAIN_CAR1_TARGET_SCHEMA} (retired allegiance-car1 leaf),`
       + ` ${WAVE_VEIL_TARGET_SCHEMA} (retired public-veil leaf),`
       + ` ${WAVE_FOOD_TARGET_SCHEMA} (retired food-isolation leaf),`

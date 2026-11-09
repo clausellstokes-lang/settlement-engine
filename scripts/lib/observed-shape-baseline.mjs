@@ -7,12 +7,22 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **37**: schema 36's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * `BASELINE_SCHEMA` is **38**: schema 37's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (c6ded8e3a; the
+ * chair's ruling of 2026-11-09): ONE rung, TWO causes, every moved row with exactly one. Cause 1, the dial
+ * e9070d614 (ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05, the corpus's year re-dealt; CONFIRMED by a
+ * single-revert scan of the merged tip): 13 rows ADMITTED (`nearbyResourcesState on config`,
+ * `resourceHistory on settlement`, the rows rung 37 retired) and 5 GONE (pulse reads whose writers the
+ * re-dealt year reaches). Cause 2, the bought watch a63effa93 (the read moved behind isOustedNpc): 1 GONE,
+ * `ousted on npcs` at corruption.js. Nothing is declared; the bank holds at 76/50. Its full rationale
+ * lives beside `TRAIN_CAR3_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_TRAIN_CAR2_BASELINE_SCHEMA` is **37**: schema 36's tagged numeric heuristic-leaf envelope, tag law, roster and
  * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR2 MERGE (f51058995; the
  * chair's ruling of 2026-11-09): ONE rung, ONE cause. The car's own rung 36 (the guild's push, bbb1a4abc,
  * A3: castPowers.js weights hidden agents in the rank deal, so the corpus's year re-deals) is re-minted
  * here: 13 rows GONE (`nearbyResourcesState on config`, `resourceHistory on settlement` — the re-dealt year
- * reaches their writers again); nothing new, nothing declared, the bank holds at 76/50. Its full rationale
+ * reaches their writers again); nothing new, nothing declared, the bank holds at 76/50 (RETIRED). Its full rationale
  * lives beside `TRAIN_CAR2_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
  *
  * `RETIRED_TRAIN_CAR1_BASELINE_SCHEMA` is **36**: schema 35's tagged numeric heuristic-leaf envelope, tag law, roster and
@@ -578,7 +588,11 @@ export const RETIRED_WAVE_VEIL_BASELINE_SCHEMA = 35;
  *  at the ALLEGIANCE-CAR2 merge (the guild's push re-dealing the year). Never redefined, never deleted, so a
  *  schema-36 PREDECESSOR is still validated as schema 36. */
 export const RETIRED_TRAIN_CAR1_BASELINE_SCHEMA = 36;
-export const BASELINE_SCHEMA = 37;
+/** The RETIRED allegiance-car2 definition — schema 38's predecessor. Schema 38 re-governs it to MERGE-TRAIN
+ *  at the ALLEGIANCE-CAR3 merge (car 3's dial re-dealing the year; the bought watch). Never redefined, never
+ *  deleted, so a schema-37 PREDECESSOR is still validated as schema 37. */
+export const RETIRED_TRAIN_CAR2_BASELINE_SCHEMA = 37;
+export const BASELINE_SCHEMA = 38;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1333,10 +1347,20 @@ export function validateSchema36Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 37's tagged envelope (MERGE-TRAIN, ALLEGIANCE-CAR2), re-governed by
+ *  schema 38 to MERGE-TRAIN at the ALLEGIANCE-CAR3 merge. Re-bound to its own LITERAL. */
+export function validateSchema37Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema37Baseline(baseline) {
+export function validateSchema38Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
