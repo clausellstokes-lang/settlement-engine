@@ -14,7 +14,7 @@ describe('SW-B1 · P73: a crisis label on the food supply agrees with the surplu
     const fb = v.metrics.foodBalance;
     const cut = (v.issues || []).filter((/** @type {any} */ i) => i?.type === 'stress_consequence' && i?.category === 'Food Supply');
     expect(cut.length, 'the stress note is on the record').toBeGreaterThan(0);
-    expect(fb.deficit || 0, 'Lundey grows more than it eats').toBe(0);
+    expect(fb.deficit || 0, 'soak1k-1 (Lundey): foodBalance.deficit is 0').toBe(0);
     for (const i of cut) expect(i.title).not.toBe('Crisis Cutting the Food Supply');
   }, 60_000);
 });
