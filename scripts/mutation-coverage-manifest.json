@@ -3588,6 +3588,14 @@
     "tests/data/faceHonorifics.test.js": {
       "kind": "rationale",
       "rationale": "THE HONORIFIC REGISTRY (PEOPLE-6 LINKS step 2; the A-11 harbour guard at MERGE-CAR). Owed at MERGE-CAR (2026-11-08): the people car's links lane added it where the integration side's enumeration rule now reaches it. The subject is authored DATA (src/data/faceHonorifics.js) plus one pure resolver, and the suite's catching power is in its own arms: totality both ways against the LIVE census (every title a face can be born with — the catalogue's faceRows and the two mint tables — and no other), the canonical form pinned per named title, the deterministic pick reaching every form, the gendered forms by card gender, and the coast guard's two arms, each with an anchored negative (expectAbsentWithAnchor) so a vacuous pool cannot pass. A sweep plant would mutate src/data/institutionalCatalog.js or the registry, files nearly every generation suite imports and a concurrent lane may hold; the sweep's revert is a `git checkout --`."
+    },
+    "tests/domain/newsCardFace.pin.test.js": {
+      "kind": "rationale",
+      "rationale": "THE NEWS CARD'S FACE STATES AN EVENT AND NAMES ITS PEOPLE (SW-11 PULSE-CARD, STYLE-RULINGS-2 C1; enrolled by STYLE-2-MERGE at the SW-11 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane: at the base the face printed the lifecycle-only line and the pipeline's state word, and the pin's three arms red on those assertions, not on an import (the file's own fallback face is the base face)."
+    },
+    "tests/domain/successionQuestionPrint.pin.test.js": {
+      "kind": "rationale",
+      "rationale": "THE SUCCESSION QUESTION PRINTS NAMES, NEVER IDS (SW-11 PULSE-CARD, the audit's C2·26; enrolled by STYLE-2-MERGE at the SW-11 merge point, 2026-11-09). Its catching power is EXECUTED red-first on the lane: a planted succession outcome printed the question's ids at both print sites before the cure."
     }
   },
   "meta": {
