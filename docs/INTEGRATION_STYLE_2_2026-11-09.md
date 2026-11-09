@@ -30,6 +30,8 @@ This record is the hand-back under the chair's RULE 14 (19:3x and 19:4x). The cl
 | 14 | TIER-PARITY-FIX (7cd959baf) | bb986ebc6 | Migration 209 as a FILE; rehearsal 207→208→209. 0 all six. Pins found 8e76af6ff. **+20 B Brotli owed at the ceilings.** |
 | 15 | SW-9 ODD-ROWS (ec4fd3ab7) | ff552d87c | The unnamed-seat sentence keeps the chair's words. 0 all six. Wiring census producer index 1,314→1,315. |
 | 16 | SW-7 POWER-SIDE (be1f2d6b3) | a3062d919 | See below. |
+| — | hygiene after the hand-back (second seat) | — | STOP 5 d3760f77f (the dateline colon; two pins re-keyed). Point 16 leftovers: 266256671 (the anchor walker on SW-7's 8957313b3), fe55408b9 (the power leaf's prose bytes, 124207→124264, no declaration owed under §934.101). 0 all six (m16 → m16b). |
+| 17 | SW-B1 CONTRADICTIONS (8c650338d) | 0f2cb865c | factionStanding.js composed line by line. Record 17: gm 464 (→21b50e30), field-diffed: `factions[].desc` 447 + `foodBalance.importChannel` 29, string leaves only. Fence 272 (→03fc50e3). Fork control 3e522ac1→003d51a5. Prose 72 (final tip). Cures: e49d89d27 (it.each → loops), 77c4f4238 (SW-B2's pool removal composed), 1028367f8 (anchors), 6b84bfa3a (five any-holes typed), 53265aa92 (three files enrolled in the mutation manifest), c35ee987b (a message that aligned with DS-GEN-3). Governing 71 files: 8 red, all base or golden-tied (green after signing). tests/lint has only the carried OSR ×3; tests/scripts is green. |
 
 Point 16 (SW-7) in detail:
 
@@ -106,7 +108,7 @@ Point 16 (SW-7) in detail:
   - **At the final tip:** drop the phrase path if membership alone reads > 0.9.
 - **STOP 3:** the wave entry for 208 (28997691b); then 209 composed at point 14. REPO_HEAD 209.
 - **STOP 4:** the OSR rose by +1 at point 12. See the OSR table.
-- **STOP 5** (the voiceMechanics em dash in SW-11's newsBody dateline): ruled at 19:2x. **NOT YET APPLIED.**
+- **STOP 5** (the voiceMechanics em dash in SW-11's newsBody dateline): ruled at 19:2x. **APPLIED at d3760f77f** by the second seat (voiceMechanics green, em 0).
   - The join becomes a colon: `${place}: ${told}`. Make it a hygiene commit named to 306a8dce4.
   - Re-key, by identity, any pin that holds the joined string. The ratchet stays em 0.
 
@@ -117,6 +119,10 @@ Point 16 (SW-7) in detail:
 | 12 | `newsBody.js` `itemSettlementIds` reads `outcome.outcome` | BLIND SPOT: convergence.js:1106 writes it. Fix the detector at the final tip. |
 
 - Consequence of the blind spot: `--write` refuses, so input-only drift waits on it. Point 16 added one such input (`power.generated.js`).
+- Point 17 (second seat): `--write` at 141585ce0 refused on this row alone ("NEW outcome on outcome"); SW-B1 adds no row. The chair ruled a detector cure now (20:5x); measured: the live scan walks executed run objects by container name and the reader scanner is byte-frozen, so the one-write-shape cure does not apply. Fallen back to the default (both rows carried); the instrument's remedies put to the chair (an explained-writer entry, a reader re-spell, or a virtual-dormant entry).
+- The chair ruled the virtual-dormant door (21:0x). Measured: its clause 1 is shape-scoped (`writeShapesOnShapeIn`: the key inside an `outcome = {` / `outcome: {` literal), and convergence.js spells `outcome` inside `mintedProposals.push({ … })`, so the entry is UNVERIFIABLE.
+- **FINAL RULING (21:2x): a TRUE schema change, admitted by the ONE rung at the final tip.** Schema 40 → 41 admits a new writer class, "played-worlds writer" (a writer that runs only in campaign time and is dormant in the birth corpus). Its first entry is convergence.js:1101's minted-proposal `outcome`, as the writer behind `newsBody.js :: itemSettlementIds`'s read of `item.outcome?.affectedSettlementIds`. Gate-0 evidence: the shorthand spelling probe. Why: "a reader bound to the walked outcome shape; the writer a proposal record minted behind interventionActive; chair ruling 21:2x". SW-7's input drift and every later inputs-only drift are re-frozen in the same two-act migration, each attributed to its lane. If the schema bump cannot carry a new class, that is the one STOP left on this row, raised at the final tip with the schema's exact fields.
+- **For the post-deploy inbox (not this wave's):** convergence.js's comments contradict each other on whether `interventionEnabled` is virtual (:23) or preset-lit (:96).
 
 **Reds carried (base reds):**
 
