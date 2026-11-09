@@ -30,6 +30,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the permit queue was auctioned while the bureau starved, and everyone who waited honestly knows now what the waiting bought.',
       'It is out that the official pocketed fines while wages ran short, and people in the square are counting what went missing from the strongbox.',
+      'Those who stood in the permit queue without paying know now why they waited, and where the fines went while the office went short.',
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the office is short of money, and the queue money keeps coming.',
@@ -53,6 +54,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the official forged the requisition papers, and every file with that stamp is being checked against what happened.',
       'It is out that the official made contraband look lawful on paper, and the auditors are undoing it form by form.',
+      "Merchants holding papers with the official's stamp are waiting to hear whether their goods were ever lawful.",
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the supply lines are cut, and the official forges papers for whoever brings goods in.',
@@ -76,6 +78,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the dole list was sold by the name while the stores ran dry, and the struck-off are reading the register aloud.',
       'It is out that the official sold places on the dole list, and the town is matching the names struck off to the graves.',
+      'Families struck off the dole list while the stores ran dry are standing in the square with the names of those who bought their places.',
     ],
     're-adjudicated': [
       'Whoever held the official before is gone, but now the relief stores are empty, and the official sells places on the dole list to whoever pays.',
@@ -99,6 +102,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the embargo had a price list in the clerk\'s office, and the merchants who obeyed the law are reading the buyers\' names.',
       'It is out that the official sold exemptions from the embargo, and every stamped exemption is being checked again.',
+      'Merchants who kept the embargo and lost trade by it are reading out who bought an exemption from the official.',
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the embargo holds, and whoever pays gets the same stamp.',
@@ -122,6 +126,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'The returned auditors have compared the files to the facts, and it is public: the official sold corrections the whole time the town stood unwatched.',
       'It is now known that the archive was for sale during the levy, and every deed and debt from that time is being proved again from scratch.',
+      'Anyone who bought, borrowed or inherited while the levy was away must prove it again, because the official sold the archive.',
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the auditors are away at war, and the official goes on selling changes to the files.',
@@ -145,6 +150,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the official sold verdicts nobody would enforce, and the shelved judgments are being read out.',
       "It is out that the official's justice was for show, and the official took money for keeping it that way.",
+      'People whose cases were decided and never enforced are learning the official was paid to keep it that way.',
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the garrison is thin, and whoever wants a ruling left unenforced pays the official.',
@@ -168,6 +174,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the ration books were kept crooked through the war, and the short-weighted households are presenting their pages.',
       'It is out that the official sold the war\'s bread by the signature, and the town has kept every stub.',
+      "Households that went short through the war are bringing their ration pages to the square to set beside the official's books.",
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the war presses in, and the official sells the ration books to whoever pays.',
@@ -191,6 +198,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the census went to the occupier annotated, and every family the occupation visited is finding its entry.',
       'It is out, in the official\'s own hand: the town\'s households, graded by how far they complied, and the collections that followed each grade.',
+      "Families the occupier visited are finding their own names in the official's census, each with a mark beside it.",
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the occupier rules, and the official hands the noted census to the occupier.',
@@ -214,6 +222,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the bench\'s cruel verdicts were offerings to a dark patron, and every one is being heard again.',
       'The sponsorship is out: a dark patron paid for injustice from this office, and the wronged are lining up with their case numbers.',
+      'Everyone the bench treated cruelly can now bring the case back, because a dark patron paid for those verdicts.',
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now a dark patron rewards the cruel verdicts, and the bench answers to it.',
@@ -237,6 +246,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the rival mission\'s paperwork jumped every queue for a fee, and the registry\'s dates tell the story plainly.',
       'It is out that the official sold the rival faith faster filings, and both congregations are checking the deeds.',
+      "The town's own families who waited months at the registry are learning the rival mission paid to go ahead of them.",
     ],
     're-adjudicated': [
       "Whoever paid the official before is gone, but now the rival faith presses in, and its fees reach the official's desk.",
@@ -260,6 +270,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that sworn testimony was sold while the oath meant nothing, and every verdict from that time is being appealed.',
       'It is out that the official sold the court\'s testimony while the faith was cold, and the returning congregation wants answers.',
+      'Anyone judged on sworn testimony while the faith was cold is appealing, because the official sold that testimony.',
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the faith has gone cold, and the testimony trade goes on with no oath to stop it.',
@@ -283,6 +294,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the official hid the clergy\'s files for pay, and the drawers are being opened in front of witnesses.',
       "It is out that the official took the temple's money for silence, and the town is reading what was hidden.",
+      "The clergy's hidden files are being read out before witnesses, and the official who kept them for pay is being asked why.",
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now the priesthood is disgraced, and whoever fears the files pays to keep the drawers locked.',
@@ -306,6 +318,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that warrants leaked from this desk and cases died in it, and the third drawer has been opened in front of the town.',
       "It is out that the official ran the office on the underworld's schedule, and the cases left in the third drawer are being opened.",
+      "People whose cases went quiet at the official's desk are coming to see what was left in the third drawer.",
     ],
     're-adjudicated': [
       'Whoever ran the desk before is gone, but now the underworld holds the offices, and the third drawer swallows cases for whoever holds the desk.',
@@ -329,6 +342,7 @@ export const CIVIC_ROLE_CONTENT = {
     'exposed-public': [
       "It is now known that the scandal's papers were sold at the archive, and people are reading the list of fees.",
       'It is out that the official sold the archive\'s files to the frightened, and the town is reading who paid to be left out.',
+      'The frightened who paid the official to keep their names out of the archive are finding their names on the list of fees.',
     ],
     're-adjudicated': [
       'Whoever paid the official before is gone, but now a scandal has broken, and the official sells the files to whoever is named in them.',
