@@ -70,7 +70,7 @@ const TABS = {
  * family not yet lit (or a line the projection's own field set strips) is pinned per family
  * below instead, and joins this list in the cause that completes it.
  */
-const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history', 'defense', 'magic'];
+const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history', 'defense', 'magic', 'viability'];
 
 /**
  * THE LIT FAMILIES' SITES, by tab: every string the save shipped at these sites that the owner's

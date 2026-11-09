@@ -5,7 +5,6 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
-import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/viabilityFilter.js';
 // READER-R1 (the chair's rulings 1, 2 and 4): one critical list, the stress effects that are
 // not in it, an issue's text read against the route, and the generator's checks for staff only.
@@ -19,7 +18,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { generalDeskLines } from '../generalDeskRead.js';
 // DS-DEF-12 (W2 DEF, 2026-11-07): the isolation-support finding, a defense-leaf block that speaks
 // here, read through its gated reader (shared with the public prose composer, SW-B7b).
-import { isolationDeskRead } from '../viabilityDeskRead.js';
+import { isolationDeskRead, viabilityVerdictRead } from '../viabilityDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18): the verdict's three lenses are one
 // paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
@@ -82,7 +81,9 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since
   // this tab supplies its own coherence badge.
-  const vmViability = flag('canonicalViewModel') ? deriveViability(s) : null;
+  // The verdict's variant is SEEDED (viabilitySeed): a shared page prints the summary the owner's
+  // view drew, shipped at the save (`viewModel:viability`), and an unstamped record is silent.
+  const vmViability = flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier }) : null;
   const summaryClean = trimViabilitySummary(vmViability
     ? vmViability.summary.replace(/^[^:]+:\s*/, '').trim()
     : (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim());

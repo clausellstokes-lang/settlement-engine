@@ -15,6 +15,7 @@
  * @enforced-by tests/components/publicProseEquality.test.jsx (`viability`, `viewModel:viability`)
  */
 import { defenseIsolationSupportProse } from '../../domain/display/stateProse/defenseStateProse.js';
+import { deriveViability } from '../../domain/display/dossierViewModel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { publicProseOf } from '../../domain/display/publicProse.js';
 
@@ -41,4 +42,22 @@ export function isolationDeskRead(settlement, options = {}) {
     audience: options.playerView ? 'player' : 'dm',
     tierNoun: tierNounFor(settlement.tier),
   });
+}
+
+/**
+ * The reconciled viability verdict (§1f), gated: the owner's draw, or on a shared page the
+ * summary shipped at `viewModel:viability` — and, unstamped, an EMPTY summary (silence), never
+ * a re-draw of the seeded variant.
+ * @param {any} settlement @param {{publicDossier?: boolean}} [options]
+ * @returns {{summary: string}|null} null with no settlement
+ */
+export function viabilityVerdictRead(settlement, options = {}) {
+  if (!settlement) return null;
+  if (options.publicDossier) {
+    const shipped = publicProseOf(settlement, 'viewModel:viability');
+    const summary = shipped && typeof shipped === 'object' ? /** @type {Record<string, unknown>} */ (shipped).summary : null;
+    return { summary: typeof summary === 'string' ? summary : '' };
+  }
+  const verdict = deriveViability(settlement);
+  return { summary: String(verdict?.summary ?? '') };
 }

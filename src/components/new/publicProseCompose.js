@@ -31,7 +31,8 @@ import { stressorsDeskRead } from './stressorsDeskRead.js';
 import { defenseDeskRead, DEFENSE_LENSES } from './defenseDeskRead.js';
 import { faithDeskReadings, warFaithDeskRungs } from './tabs/WarFaithDesk.jsx';
 import { magicDeskRead } from './magicDeskRead.js';
-import { isolationDeskRead } from './viabilityDeskRead.js';
+import { isolationDeskRead, viabilityVerdictRead } from './viabilityDeskRead.js';
+import { flag } from '../../lib/flags.js';
 import { POWER_BLOC_RUNGS, governanceAccountRead, powerDeskRead, powerDeskReadings, powerLadderRead, powerLadderRowsOf } from './powerDeskRead.js';
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
@@ -103,6 +104,9 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   ['magic', (s, publicDossier) => magicDeskRead(s, { publicDossier, playerView: true })],
   // THE VIABILITY TAB's DS-DEF-12 isolation lens (viabilityDeskRead.js).
   ['viability', (s, publicDossier) => isolationDeskRead(s, { publicDossier, playerView: true })],
+  // `deriveViability`'s SEEDED verdict (viabilitySeed), shipped as `{summary}` text; behind
+  // canonicalViewModel exactly as ViabilityTab reads it (off, the tab prints the record's datum).
+  ['viewModel:viability', (s, publicDossier) => (flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier }) : null)],
 ].map((entry) => Object.freeze(entry)));
 
 /**
