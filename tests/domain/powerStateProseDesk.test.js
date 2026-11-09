@@ -1296,6 +1296,16 @@ describe('DS-POW-5 — the seat\'s lens (SW-7 POWER-SIDE, STYLE-2 B7): the rulin
       { seed: 'seat-vacant', audience: 'dm' });
     expect(String(heldOut.successionRisk?.sentence ?? '')).not.toBe('');
   });
+  it('the birth roster\'s coarse seat categories: economy is the merchant seat; a category the table cannot place says nothing', () => {
+    // soak1k-3 Guild Council [economy], soak1k-2 Elected Reeve [other] (measured on the twelve at 0f2e6c097).
+    const seated = (category) => ({ name: 'T', powerStructure: { governingName: 'Seat', factions: [
+      { faction: 'Seat', category, power: 30, isGoverning: true }, { faction: 'Occupation Authority', category: 'military', power: 37 },
+    ] } });
+    expect(seatLensOf(seated('economy'))?.rulingPower).toBe('merchant_league');
+    expect(seatLensOf(seated('other'))).toBeUndefined();
+    expect(powerStateProse(seated('other'), { structuralLens: seatLensOf(seated('other')) }, { seed: 'reeve', audience: 'dm' })
+      .rulingStructure).toBeNull();
+  });
   it('with no governing row it answers the strongest faction\'s lens, as before', () => {
     const s = { name: 'T', powerStructure: { factions: [{ category: 'merchant', power: 60 }, { category: 'noble', power: 40 }] } };
     expect(seatLensOf(s).rulingPower).toBe(structuralLensOf(s).rulingPower);

@@ -296,17 +296,29 @@ export function structuralLensOf(settlement) {
  * person". This reads the governing faction (`isGoverning`, the roster's own seat flag) and maps it through the SAME
  * table; with no governing row it answers the strongest faction's lens, as before. `structuralLensOf` and its generosity
  * consumer are untouched.
+ *
+ * The birth roster's categories are COARSER than the table's archetypes (measured on the twelve: `economy`, `government`,
+ * `other`, `magic` beside `military`, `religious`, `noble`, `criminal`). `economy` is the merchant seat (a Guild Council, a
+ * Grand Merchant Oligarchy); a category the table cannot place (an Elected Reeve's `other`, a `magic` seat) answers NO
+ * lens, so the ruling pools say nothing rather than call one reeve "several kinds of power" through the `mixed` default.
  * @param {{powerStructure?: {factions?: ReadonlyArray<{power?: unknown, category?: unknown, isGoverning?: unknown}>|null}|null
  *   }|null|undefined} settlement
- * @returns {StructuralLens}
+ * @returns {StructuralLens|undefined}
  */
 export function seatLensOf(settlement) {
   const factions = Array.isArray(settlement?.powerStructure?.factions)
     ? settlement.powerStructure.factions
     : [];
   const seat = factions.find((f) => f?.isGoverning === true);
-  return seat ? structuralLens({ governingArchetype: String(seat.category || '') }) : structuralLensOf(settlement);
+  if (!seat) return structuralLensOf(settlement);
+  const category = String(seat.category || '').toLowerCase();
+  const ruling = /** @type {Record<string, string>} */ (ARCHETYPE_TO_RULING)[category]
+    || /** @type {Record<string, string>} */ (SEAT_CATEGORY_TO_RULING)[category];
+  return ruling ? structuralLens({ rulingPower: ruling }) : undefined;
 }
+
+/** The birth roster's coarse seat categories the archetype table does not name (seatLensOf). */
+const SEAT_CATEGORY_TO_RULING = Object.freeze({ economy: 'merchant_league' });
 
 // ── §I THE FACET LAW — the entity-classification CHOKEPOINT (owner-ratified 2026-07-14) ──
 // docs/DESIGN_COHESION_WEAVE.md §I: "DECLARED OVER INFERRED." Every coherence consumer that
