@@ -2108,8 +2108,10 @@ describe('the defense desk\'s paid-surface gate — every caller, found by impor
       // RE-KEYED BY CAUSE (SW-B7b fourth seat, STYLE-RULINGS-2 B10(a)): DefenseTab's eight reads
       // moved into the defense desk's ONE caller, `components/new/defenseDeskRead.js`, shared with
       // the public prose composer; each read is still gated in its own statement.
+      // RE-KEYED BY CAUSE again (the magic family): MagicTab's DS-DEF-9 read moved into
+      // `components/new/magicDeskRead.js`, shared with the composer; still gated in its statement.
       .toEqual([
-        'components/new/defenseDeskRead.js', 'components/new/tabs/MagicTab.jsx',
+        'components/new/defenseDeskRead.js', 'components/new/magicDeskRead.js',
         'components/new/tabs/ViabilityTab.jsx',
       ]);
     for (const path of importers) {

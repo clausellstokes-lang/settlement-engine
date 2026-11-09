@@ -37,6 +37,8 @@ import { defenseDeskRead, DEFENSE_LENSES } from '../../src/components/new/defens
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
+import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
+import { magicDeskRead } from '../../src/components/new/magicDeskRead.js';
 import { faithDeskReadings, warFaithDeskRungs } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { powerDeskRead, powerDeskReadings, governanceAccountRead } from '../../src/components/new/powerDeskRead.js';
 
@@ -59,6 +61,7 @@ const TABS = {
   defense: (s, gate) => <DefenseTab settlement={s} narrativeNote={null} {...gate} />,
   power: (s, gate) => <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} {...gate} />,
   faith: (s, gate) => <FaithTab settlement={s} {...gate} />,
+  magic: (s, gate) => <MagicTab settlement={s} {...gate} />,
 };
 
 /**
@@ -66,7 +69,7 @@ const TABS = {
  * family not yet lit (or a line the projection's own field set strips) is pinned per family
  * below instead, and joins this list in the cause that completes it.
  */
-const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history', 'defense'];
+const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history', 'defense', 'magic'];
 
 /**
  * THE LIT FAMILIES' SITES, by tab: every string the save shipped at these sites that the owner's
@@ -180,6 +183,7 @@ const DRAWN = {
     tab: 'faith',
     draw: (o) => warFaithDeskRungs({ settlement: o, publicDossier: false, playerView: true, readings: faithDeskReadings(o) }),
   },
+  magic: { tab: 'magic', draw: (o) => magicDeskRead(o, { playerView: true }) },
 };
 
 /** Every sentence-length string in a drawn desk, at any depth (provenance skipped). */

@@ -10,16 +10,14 @@
  * only — no store reads, no worldState, no leak surface.
  */
 
-import { deriveMagicPosture, deriveMagicRelianceView, magicRelianceDeskSettlement } from '../../../domain/display/dossierViewModel.js';
+import { deriveMagicPosture, deriveMagicRelianceView } from '../../../domain/display/dossierViewModel.js';
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
-import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { magicDeskRead } from '../magicDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
-import { magicWorksAt } from '../../../domain/worldPulse/magicWorksAt.js';
 import { FLUSH } from '../../../design/flush.js';
 
 /**
@@ -73,8 +71,8 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
 
   // ── MAGIC DEPENDENCE: ONE BLOCK, THE ROLES' FRAMING (T2-15 MERGE + MOVE, R2/R3) ──────────
   // The frozen `magicDependency` record (its title and its chain notes) and DS-DEF-9's reading
-  // are one idea. DS-DEF-9 REPLACES the static explanation where the desk speaks; the static
-  // explanation stands on public. The block draws on a FALSE flag too when DS-DEF-9 has its
+  // are one idea. DS-DEF-9 REPLACES the static explanation where the desk speaks (on a shared page, where the
+  // owner's draw speaks); the static explanation stands where it is silent. The block draws on a FALSE flag too when DS-DEF-9 has its
   // `magicDependency false` reading (a finding, not an absence). Where magic does not function
   // nothing here is true (T2-24), so the desk is not drawn and the block does not render.
   // The block carries the page's only first-survey stamp: `magicDependency` is a G5
@@ -88,13 +86,9 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   // reading (relied-upon or integral ⇒ true), and the block's own fallback reads the same.
   // The siege/famine/plague flag no longer decides anything on this tab.
   const reliance = deriveMagicRelianceView(settlement);
-  const magicProse = publicDossier || magicWorksAt({ settlement }) === false
-    ? Object.freeze({ arcaneReliance: null })
-    : defenseMagicDependencyProse(magicRelianceDeskSettlement(settlement), {
-      seed: String(settlement?._seed ?? settlement?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-      tierNoun: tierNounFor(settlement.tier),
-    });
+  // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the
+  // owner's player view drew, shipped at the save (`magic`); unstamped, SILENT (magicDeskRead.js).
+  const magicProse = magicDeskRead(settlement, { publicDossier, playerView });
   const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
   const magicFrozen = posture.magicExists && reliance.reliesOnMagic;
 

@@ -30,6 +30,7 @@ import { generalDeskLines } from './generalDeskRead.js';
 import { stressorsDeskRead } from './stressorsDeskRead.js';
 import { defenseDeskRead, DEFENSE_LENSES } from './defenseDeskRead.js';
 import { faithDeskReadings, warFaithDeskRungs } from './tabs/WarFaithDesk.jsx';
+import { magicDeskRead } from './magicDeskRead.js';
 import { POWER_BLOC_RUNGS, governanceAccountRead, powerDeskRead, powerDeskReadings, powerLadderRead, powerLadderRowsOf } from './powerDeskRead.js';
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
@@ -97,6 +98,8 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   ['warFaith:faith', (s, publicDossier) => warFaithDeskRungs({
     settlement: s, publicDossier, playerView: true, readings: faithDeskReadings(s),
   })],
+  // THE MAGIC TAB's DS-DEF-9 lens (magicDeskRead.js); nothing ships where magic does not function.
+  ['magic', (s, publicDossier) => magicDeskRead(s, { publicDossier, playerView: true })],
 ].map((entry) => Object.freeze(entry)));
 
 /**
