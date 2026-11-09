@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "5f8f76238944cfca4c36df99bf176c8f1279517b",
+ "frozenAtSha": "fef2045b7716b291dc5684037142ae0f1c26147d",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "7d19477857eadfdbea0bb2015288230b8a599a9d00a31528741d3f24984f4147",
  "detectorDigest": "fad740c985aa98cf5f24825232fb047fdafa175a7921ed2612b56fd4449f2575",
- "verdictDigest": "0013b9d77b0f261e2d42f67ffe62f73749aeb2ebba1021f708c8024d6e344437",
+ "verdictDigest": "dd092f71e94554c1bdab0941cbe7f107260eeb72a583fe4031417bb80f0aa697",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 755,
+  "web-display": 756,
   "web-transitive": 998,
-  "dossier-pdf": 507,
+  "dossier-pdf": 508,
   "campaign-pdf": 138,
   "world-book": 155,
   "foundry": 414,
@@ -83,23 +83,23 @@
  },
  "population": {
   "judged": 12201,
-  "lit": 669,
-  "litName": 10136,
+  "lit": 670,
+  "litName": 10135,
   "dark": 1396,
   "thinKeys": 17148,
   "thinShapes": 1202,
   "knownShapes": 528
  },
  "scanStats": {
-  "files": 1754,
-  "sites": 41973,
-  "propRead": 39745,
+  "files": 1755,
+  "sites": 42028,
+  "propRead": 39800,
   "elemRead": 0,
   "destructure": 2210,
   "inOp": 18,
-  "rGrades": 6668,
-  "nGrades": 1685115,
-  "resolvedReceivers": 7575
+  "rGrades": 6699,
+  "nGrades": 1688496,
+  "resolvedReceivers": 7606
  },
  "registerDigest": "dd15a12aa7cc43e119c0888f44d73cb89e70b3c5a4a3a7c5527ab52d9f5f3124",
  "pendingSurfaceCeiling": 0,
@@ -9235,13 +9235,13 @@
   "resentment on factionPairStates": "dossier-pdf=N foundry=N web-transitive=N",
   "trust on factionPairStates": "dossier-pdf=N foundry=N web-transitive=N",
   "week on factionPairStates": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "captureState on factionRelationships": "dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
+  "captureState on factionRelationships": "dossier-pdf=R foundry=N json-export=N web-display=R web-transitive=N world-book=N",
   "direction on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "dmNote on factionRelationships": "dossier-pdf=R web-display=R",
   "narrative on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "pair on factionRelationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
+  "pair on factionRelationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "ratio on factionRelationships": "dossier-pdf=N foundry=N web-transitive=N",
-  "type on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N json-export=R news=N web-display=R web-transitive=N world-book=R",
+  "type on factionRelationships": "campaign-pdf=N dossier-pdf=R foundry=N json-export=R news=N web-display=R web-transitive=N world-book=R",
   "_timePressure on factions": "web-transitive=R",
   "appliedAt on factions": "campaign-pdf=N dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=N",
   "captureState on factions": "dossier-pdf=R foundry=R json-export=N web-display=N web-transitive=R world-book=N",
