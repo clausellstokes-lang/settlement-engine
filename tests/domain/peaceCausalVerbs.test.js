@@ -68,6 +68,17 @@ describe('DECLARE_CASUS — the war-side forceable verb', () => {
     expect(warReasonsFor(r.worldState, 'b', 'a'), 'the decree is directional').toBeNull();
   });
 
+  // FIX-PULSE-DEFECTS (audit B·27): the default receipt printed the snake_case reason token and
+  // the target's raw id ("Declared by decree: resource_pressure against b.").
+  it('a decree\'s default receipt reads the cause as words and the target by name, never the token or the id', () => {
+    const named = declareCasus(litWorld(), { fromId: 'a', toId: 'b', type: 'resource_pressure', tick: 5, toName: 'Brindle' });
+    const receipt = String(warReasonsFor(named.worldState, 'a', 'b').reasons.resource_pressure.receipt);
+    expect(receipt).toMatch(/resource pressure/);
+    expect(receipt).toMatch(/Brindle/);
+    const unnamed = declareCasus(litWorld(), { fromId: 'a', toId: 'b', type: 'resource_pressure', tick: 5 });
+    expect(String(warReasonsFor(unnamed.worldState, 'a', 'b').reasons.resource_pressure.receipt)).not.toMatch(/_|\bb\b/);
+  });
+
   it('DIAL CLAMP (clampAtCommit): severity clamps into [MIN_SCORE, 1] — no ghosts, no overshoot', () => {
     const low = declareCasus(litWorld(), { fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.001, tick: 1 });
     expect(warReasonsFor(low.worldState, 'a', 'b').reasons.grievance.score).toBeCloseTo(REASON_TUNING.MIN_SCORE, 5);
