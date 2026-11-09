@@ -33,6 +33,7 @@ import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
 import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
+import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -175,7 +176,7 @@ const HOOK_COUNT = 3;
  * @property {string} type          the crisis's own label (e.g. 'Under Siege'), every active one joined
  * @property {string} place         the settlement's name
  * @property {string | null} person the worst crisis's named person (the cast's); null where no cast names one
- * @property {Array<{ name: string, role: string, roleLabel: string, crisis: string }>} persons every crisis's person, worst first, each once
+ * @property {Array<{ name: string, role: string, roleLabel: string, crisis: string, kind?: string }>} persons every crisis's person, worst first, each once
  * @property {string} line          the one line the sheet opens on
  *
  * @typedef {Object} TonightPerson
@@ -301,13 +302,13 @@ function crisisOf(source) {
   if (labels.length === 0) return null;
   const type = labels.join(' and ');
   const place = clean(source.name);
-  /** @type {Array<{ name: string, role: string, roleLabel: string, crisis: string }>} */
+  /** @type {Array<{ name: string, role: string, roleLabel: string, crisis: string, kind: string }>} */
   const persons = [];
-  for (const { label, cast } of castsOf(source)) {
+  for (const { label, kind, cast } of castsOf(source)) {
     for (const role of LINE_ROLES[cast.nature] || []) {
       const row = cast.roles.find((r) => r.role === role && r.kind === 'npc' && clean(r.name));
       if (!row) continue;
-      if (!persons.some((p) => p.name === clean(row.name))) persons.push({ name: clean(row.name), role, roleLabel: CRISIS_ROLE_LABEL[role], crisis: label });
+      if (!persons.some((p) => p.name === clean(row.name))) persons.push({ name: clean(row.name), role, roleLabel: CRISIS_ROLE_LABEL[role], crisis: label, kind });
       break;
     }
   }
@@ -319,9 +320,40 @@ function crisisOf(source) {
   const official = lead && place ? crisisSummaryForSurface(lead, place, 'tonight') : null;
   const said = official && official !== clean(lead?.summary) ? official : null;
   const head = said ? `${type}. ${said}` : place ? `${place}: ${type}` : type;
-  const tail = persons.length ? `${persons.map((p) => `${p.name} (${p.roleLabel})`).join('; ')}.` : '';
+  const tail = castTail(persons);
   const line = tail ? `${said ? head : `${head}.`} ${tail}` : head;
   return { type, place, person: persons[0]?.name || null, persons, line };
+}
+
+/**
+ * THE CAST TAIL (SW-6 CRISIS-SURFACES; STYLE-RULINGS-2 A1 R4, W4 PEOPLE row 271): who the crisis lands on, in
+ * the hooks' own clauses (`crisisHooks.js :: LINE_ROLE_CLAUSE`), never the cast's role tag printed as prose
+ * ("Macrina Denter (bears the brunt); Hortensia Denter (bears the brunt)."). Each person is attributed to their
+ * own crisis only where the sheet carries more than one (each person was read off that crisis's cast).
+ * @param {Array<{ name: string, role: string, kind?: string }>} persons
+ * @returns {string}
+ */
+function castTail(persons) {
+  if (!persons.length) return '';
+  const several = new Set(persons.map((p) => p.kind || '')).size > 1;
+  /** @param {{ kind?: string }} p */
+  const nounOf = (p) => CRISIS_NOUN[/** @type {keyof typeof CRISIS_NOUN} */ (p.kind || '')] || 'crisis';
+  if (persons.every((p) => p.role === 'brunt')) {
+    return several
+      ? `The worst of it falls on ${persons.map((p) => `${p.name} in the ${nounOf(p)}`).join(' and on ')}.`
+      : `The worst of it falls on ${listOf(persons.map((p) => p.name))}.`;
+  }
+  const parts = persons.map((p) => {
+    const clause = /** @type {Record<string, (h: string) => string>} */ (LINE_ROLE_CLAUSE)[p.role];
+    const said = clause ? clause(p.name) : p.name;
+    return several ? `in the ${nounOf(p)}, ${said}` : said;
+  });
+  return sentence(parts.join('; '));
+}
+
+/** @param {string[]} names @returns {string} "A", "A and B", "A, B and C" */
+function listOf(names) {
+  return names.length <= 1 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
 }
 
 /**
