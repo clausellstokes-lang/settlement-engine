@@ -189,6 +189,16 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-08, THE W4 PEOPLE MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE WAVE (MERGE-WAVE RECORD 4) ──
+ * THE EIGHTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the wave (BRIEF-MERGE-WAVE §1 step 2, the law of the chain); the
+ * record is docs/shift-records/2026-11-08-merge-wave-4-w4-people.json. THE MOVER, FOUND: the W4 PEOPLE merge
+ * 66c23bfea (665817eae into the integration branch), its conflicts composed; its lane records the components.
+ * On THIS corpus 264 of 360 rows (thorp 37, hamlet 43, village 39, town 48, city 47, metropolis 50) move against record 3's post-state
+ * (`26df526b…`); 360/360 hashes stay distinct. Written from the staged tree (66c23bfea with the door paths carried from
+ * the integration branch), measured by scripts/audit/refence.mjs before the write. `26df526b…` -> `86938165…`.
+ *
+ *
  * ── 2026-11-08, THE W3 POW MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE WAVE (MERGE-WAVE RECORD 3) ──
  * THE EIGHTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the wave (BRIEF-MERGE-WAVE §1 step 2, the law of the chain); the
@@ -1044,7 +1054,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '26df526bec5d84af000e5f435ff36af2cffda9e0435d4d55793b82e807b782f5';
+const PRE_COUPLING_CORPUS_SHA = '869381652b84d83cc57cac83058df16cf2108a6186654f04f10e9af07c24b125';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
