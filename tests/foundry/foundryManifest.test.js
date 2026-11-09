@@ -115,7 +115,7 @@ describe('variant chapter inclusion (shared with the PDF)', () => {
 
   it('canon_dossier carries the full page set', () => {
     const names = namesFor('canon_dossier');
-    for (const expected of ['Overview', 'NPC Quick Reference', 'Plot Hooks', 'Power & Factions', 'History & Founding']) {
+    for (const expected of ['Overview', 'NPC Quick Reference', 'Plot Hooks', 'Power', 'History & Founding']) {
       expect(names).toContain(expected);
     }
     expect(names.filter(n => n.startsWith('NPC — '))).not.toHaveLength(0);
@@ -124,7 +124,7 @@ describe('variant chapter inclusion (shared with the PDF)', () => {
   it('timeline_packet is the lean recap — no NPC / hook / power pages', () => {
     const names = namesFor('timeline_packet', { eventLog: [{ event: { type: 'FIRE', description: 'The mill burns' }, narrativeSummary: 'Smoke over the river ward.' }] });
     expect(names).toContain('Timeline');
-    for (const absent of ['NPC Quick Reference', 'Plot Hooks', 'Power & Factions', 'Overview']) {
+    for (const absent of ['NPC Quick Reference', 'Plot Hooks', 'Power', 'Overview']) {
       expect(names).not.toContain(absent);
     }
   });
