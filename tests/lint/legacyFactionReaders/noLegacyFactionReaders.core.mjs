@@ -54,7 +54,8 @@ export const OTHER_SHAPES = Object.freeze({
   'src/foundry/journalPages.js': 'vm.power', 'src/generators/aiLayer.js': 'power labels',
   'src/generators/density/densityRoll.js': 'the band', 'src/generators/historyGenerator.js': 'a tension',
   'src/generators/power/economyReconciliation.js': 'the power projection', 'src/generators/power/governanceNarrative.js': 'the powers (param)',
-  'src/pdf/lib/viewModel.js:337': 'a tension', 'src/pdf/lib/viewModel.js:500': 'a tension', 'src/pdf/lib/viewModel.js:682': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
+  // re-keyed by identity 337/500/682 -> 345/508/690 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: the same three tension reads, moved 8 lines by car 3's dmPowerViewOf import and the opt-in dmView, composed over the integration's +3)
+  'src/pdf/lib/viewModel.js:345': 'a tension', 'src/pdf/lib/viewModel.js:508': 'a tension', 'src/pdf/lib/viewModel.js:690': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
   'src/pdf/sections/PowerStructure.jsx': 'vm.power',
   // density plan / ladder rows that PEOPLE-1 retires with the roster (kept so the draft is exact at the base):
   'src/generators/density/applyDensityLaw.js:269': 'the density plan', 'src/generators/density/applyDensityLaw.js:375': 'a powerStructure copy',
