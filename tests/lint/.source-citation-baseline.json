@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 191,
       "sha-pin": 2,
-      "tree": 155
+      "tree": 156
     },
     "files": {
       "banner": [
@@ -426,7 +426,8 @@
     "_rosterGrowth2026-11-09-style-2-walker": "ONE document JOINED the roster by being BORN into it (seat SW-0 STYLE-WALKER, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-walker-2026-11-09 cut from the integration tip a7bc2e4ce, measured once with this walker's own arm): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-WALKER-2026-11-09.md, the lane's record, born dated, 0 past-EOF; nothing changed class. `tree` stays 139 here: it reads 147 at the tip, MERGE-WAVE's eight signed records docs/shift-records/2026-11-08-merge-wave-{1..8}-*.json (9288badee .. d8007f696, no roster bump), inherited, not this lane's.",
     "_rosterGrowth2026-11-09-style-2-merge-sw0": "THE UNION AT THE SW-0 STYLE-WALKER MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 189 -> 190 (docs/chair/2026-11-09/STYLE-2-WALKER-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-cause-conjunction": "ONE document JOINED the roster by being BORN into it (STYLE-2 SW-1 CAUSE-CONJUNCTION, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-cause-conjunction-2026-11-09 cut from the integration tip a7bc2e4ce): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-CAUSE-CONJUNCTION-2026-11-09.md, the lane's record, born dated. A GROWTH, not a re-classification: no document changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-sw1": "THE UNION AT THE SW-1 CAUSE-CONJUNCTION MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 190 -> 191 (docs/chair/2026-11-09/STYLE-2-CAUSE-CONJUNCTION-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-sw1": "THE UNION AT THE SW-1 CAUSE-CONJUNCTION MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 190 -> 191 (docs/chair/2026-11-09/STYLE-2-CAUSE-CONJUNCTION-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-record-1": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 155 -> 156, docs/shift-records/2026-11-09-style-2-merge-1-sw0.json, the style wave's merge record 1, born into the tree class; measured once by this walker; 0 past-EOF of its own; nothing changed class."
   },
   "rows": []
 }
