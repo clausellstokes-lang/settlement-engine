@@ -335,7 +335,7 @@ function alliedRules(ctx) {
           hesitation < 1
             ? "The ally supports cold-war pressure through sanctions or intelligence, but hesitates because the target is also tied to them."
             : "The ally supports cold-war pressure with sanctions, intelligence, or proxy aid.",
-          `Cold-war third party: ${supportedColdWar.thirdPartyId}.`,
+          `Cold-war third party: ${itemFor(ctx.snapshot, supportedColdWar.thirdPartyId)?.name || 'a rival court'}.`,
         ],
         relationshipPatch: {
           militaryBurden: clamp01(relState.militaryBurden + 0.04 * hesitation),
@@ -652,7 +652,7 @@ function vassalRules(ctx) {
         probability: clamp01(0.08 + relState.leverage * 0.16 + relState.pactStrength * 0.12),
         reasons: [
           "A vassal is expected to aid the overlord's cold war with sanctions, scouts, supplies, or legal pressure.",
-          `Cold-war third party: ${overlordColdWar.thirdPartyId}.`,
+          `Cold-war third party: ${itemFor(ctx.snapshot, overlordColdWar.thirdPartyId)?.name || 'a rival court'}.`,
         ],
         relationshipPatch: {
           obligationFatigue: clamp01(relState.obligationFatigue + 0.06),
