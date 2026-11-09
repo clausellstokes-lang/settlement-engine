@@ -47,6 +47,32 @@ import { t } from '../../copy/index.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 
+// The reader's words for the panel's three engine figures (STYLE-2 SW-12, ledger D):
+// an echo's memory and a lifted trouble's odds read as bands, never a raw per cent;
+// the exact roll stays in Roll Explanations.
+function echoMemoryLabel(echo) {
+  const s = Number(echo?.memoryStrength) || 0;
+  if (s >= 0.6) return 'memory: fresh';
+  if (s >= 0.3) return 'memory: fading';
+  return 'memory: faint';
+}
+
+function chanceBand(chance) {
+  const c = Number(chance) || 0;
+  if (c < 0.35) return 'a slim chance';
+  if (c < 0.65) return 'about an even chance';
+  return 'a good chance';
+}
+
+function pulseCountsLine({ autoAppliedCount, proposalCount, candidateCount }) {
+  const n = autoAppliedCount || 0;
+  const p = proposalCount || 0;
+  const c = candidateCount || 0;
+  return `${n} ${n === 1 ? 'change' : 'changes'} took hold on ${n === 1 ? 'its' : 'their'} own, `
+    + `${p} ${p === 1 ? 'waits' : 'wait'} for your word, `
+    + `${c} ${c === 1 ? 'was' : 'were'} weighed this advance.`;
+}
+
 export default function WorldPulsePanel({ campaign, advancing = false }) {
   const mobile = useIsMobile();
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
@@ -439,10 +465,10 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section heading="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
+        <Section heading="Troubles now, and troubles remembered" count={activeStressors.length + echoes.length}>
           {activeStressors.length + echoes.length === 0 ? (
             <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
-              No active stressors. The realm is quiet, for now.
+              No trouble is stirring in the realm just now.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -494,9 +520,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 <OutcomeCard
                   key={`echo-${stressor.id}`}
                   heading={`${stressor.label || human(stressor.type)}, in living memory`}
-                  summary="Resolved, not forgotten: this echo still colors new events and can re-ignite while warm."
+                  summary="It is over, but people still speak of it, and while the memory is fresh it can flare up again."
                   severity={stressor.memoryStrength ?? 0}
-                  details={[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}
+                  details={[echoMemoryLabel(stressor), human(stressor.type)]}
                   involved={involvedEntities(stressor, nameById)}
                 />
               ))}
@@ -513,7 +539,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <OutcomeCard
                 heading={`Tick ${latestPulse.tick} advanced`}
-                summary={`${latestPulse.autoAppliedCount || 0} drift item(s), ${latestPulse.proposalCount || 0} proposal(s), ${latestPulse.candidateCount || 0} candidate(s).`}
+                summary={pulseCountsLine(latestPulse)}
                 severity={Math.min(1, selected / 8)}
                 reasons={[latestPulse.interval, latestPulse.calendar?.season, `${rolls.length} rolls`].filter(Boolean)}
               />
@@ -535,9 +561,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 <OutcomeCard
                   key={stressor.id}
                   heading={`${stressor.label} resolved`}
-                  summary={`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`}
+                  summary={`It had ${chanceBand(stressor.resolutionChance)} to lift this advance, and it did.`}
                   severity={stressor.resolutionChance}
-                  reasons={['time bounded stressor', human(stressor.type)]}
+                  reasons={['ran its course', human(stressor.type)]}
                   involved={involvedEntities(stressor, nameById)}
                   affectedIds={collectSettlementIds(stressor)}
                 />

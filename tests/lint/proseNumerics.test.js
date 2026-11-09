@@ -567,10 +567,15 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // W7 HOOKS (2026-11-08) — THE DEBT FELL BY ONE AND THE CEILINGS FOLLOW IT DOWN. 205 -> 204, floatInterpolation
 // 138 -> 137: src/pdf/lib/headlines.js :: npcsHeadline's "(power ${top.power})" left the prose (the people by name,
 // title and first rank; the owner's style law of 2026-11-07), so its row leaves the baseline as a CURE.
-const REVIEWED_TOTAL_CEILING = 204;
+// STYLE-2 SW-12 fourth seat (2026-11-09) — THE DEBT FELL BY FOUR AND THE CEILINGS FOLLOW IT DOWN. 204 -> 200,
+// floatInterpolation 137 -> 134, percentToken 50 -> 49: src/components/map/WorldPulsePanel.jsx (ledger D·20, D·24)
+// — the echo's "memory {percent}" chip (three rows) and the lifted trouble's "Resolution roll {percent} against
+// {percent} chance." (one row) left the card face for banded words; the exact roll stays in Roll Explanations.
+// Every other moved row is a pure line move (path, category, snippet byte-identical).
+const REVIEWED_TOTAL_CEILING = 200;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 137,
-  percentToken: 50,
+  floatInterpolation: 134,
+  percentToken: 49,
   multiplier: 8,
   twoDecimalScore: 9,
   pushIndirection: 0,
@@ -911,8 +916,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 205 exceeds reviewed ceiling 204',
-      'floatInterpolation 138 exceeds reviewed ceiling 137',
+      'total 201 exceeds reviewed ceiling 200',
+      'floatInterpolation 135 exceeds reviewed ceiling 134',
     ]);
   });
 

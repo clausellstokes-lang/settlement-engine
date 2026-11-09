@@ -259,61 +259,37 @@
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "floatInterpolation",
-    "snippet": "`memory ${percent(stressor.memoryStrength ?? 0)}`"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "floatInterpolation",
-    "snippet": "{[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "percentToken",
-    "snippet": "{[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 538,
-    "category": "floatInterpolation",
-    "snippet": "`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 604,
+    "line": 630,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.roll)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 604,
+    "line": 630,
     "category": "percentToken",
     "snippet": "{percent(roll.roll)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 605,
+    "line": 631,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.probability)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 605,
+    "line": 631,
     "category": "percentToken",
     "snippet": "{percent(roll.probability)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 606,
+    "line": 632,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.severity)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 606,
+    "line": 632,
     "category": "percentToken",
     "snippet": "{percent(roll.severity)}"
   },
