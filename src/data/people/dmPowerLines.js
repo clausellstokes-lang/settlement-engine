@@ -178,16 +178,16 @@ export const CAPTURE_LINES = Object.freeze({
     (f) => (f.agents.length
       ? `${namedAnswerClause(f)}. ${byRank(f)[0].name} can slow what ${f.ruler} decides against ${criminalsOf(f)}, but cannot stop it alone.`
       : `${f.ruler} knows what ${criminalsOf(f)} does and lets most of it go. ${criminalsOf(f)} keeps its business quiet enough to be let go.`),
-    (f) => `${f.ruler} still rules, and ${criminalsOf(f)} still works the town. The two have settled on what each will put up with from the other.`,
+    (f) => `${f.ruler} still rules, and ${criminalsOf(f)} still works the streets. The two have settled on what each will put up with from the other.`,
   ]),
   // an agent head; or the second and the third; or a criminal ruling power, with or without an agent
   corrupted: Object.freeze([
     (f) => (f.agents.length
       ? `${answerClause(f)}.${f.rulerCriminal ? ` ${f.ruler} itself is run as a criminal concern.` : ''}`
-      : `${f.ruler} is itself run as a criminal concern, so the people who make the town's laws are the ones who profit from breaking them.`),
+      : `${f.ruler} is itself run as a criminal concern, so the people who make the laws here are the ones who profit from breaking them.`),
     (f) => (f.agents.length
       ? `${namedAnswerClause(f)}. Whatever ${f.ruler} decides, ${criminalsOf(f)} has usually decided first.`
-      : `The heads of ${f.ruler} take their share of the town's crime and see that nobody else takes it from them.`),
+      : `The heads of ${f.ruler} take their share of the crime here and see that nobody else takes it from them.`),
     (f) => (f.agents.length
       ? `${f.ruler} still holds the seat, but it does not act against ${criminalsOf(f)}. A case that touches ${criminalsOf(f)}'s business goes nowhere.`
       : `Nobody in ${f.ruler} will act against crime that pays ${f.ruler}. A case that touches its business goes nowhere.`),
