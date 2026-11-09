@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "ced9793fd5ab846cb0bcf54391d66dfa9e0c81b9",
-  "measuredBy": "SW-12-second-seat",
+  "measuredAtSha": "993eba27c5b6ecdfc85ad40dafbfe5fe31e7cb2a",
+  "measuredBy": "SW-12 third seat",
   "date": "2026-11-09",
-  "note": "STYLE-2 SW-12 (1aad33c36): tierResourceDynamics struck the tier odds line, and its bare 0.5 with it (40 -> 39); a shrink banked, no value proposed",
+  "note": "STYLE-2 C2: institutionLifecycle struck its two odds lines and their bare 0.5s (eff5e88da)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -4955,7 +4955,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 7,
-      "line": 82,
+      "line": 83,
       "spanDigest": "d3c62cf5484d9ffcb88f33ab78dcf1cb7bafe07335e8da5d00ad37c5c63747d6",
       "leaves": {
         "thresholds.prosperous": 0.62,
@@ -5618,7 +5618,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 12,
-      "line": 44,
+      "line": 45,
       "spanDigest": "b2e6323b207c85c58ad5133e15bdec03f366d8ed9337ffcedb107fc2203f80fd",
       "leaves": {
         "MAX_STEP": 0.12,
@@ -8657,7 +8657,7 @@
     "src/domain/worldPulse/habit/habitCurve.js": 7,
     "src/domain/worldPulse/hegemony.js": 2,
     "src/domain/worldPulse/informationStatecraft.js": 24,
-    "src/domain/worldPulse/institutionLifecycle.js": 17,
+    "src/domain/worldPulse/institutionLifecycle.js": 15,
     "src/domain/worldPulse/lawWord.js": 2,
     "src/domain/worldPulse/lineageNews.js": 3,
     "src/domain/worldPulse/magicSubstitution.js": 10,
@@ -8826,7 +8826,7 @@
     "tables": 271,
     "keys": 2222,
     "unregisteredNamed": 539,
-    "bareDecimals": 6934,
+    "bareDecimals": 6932,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 180
   }
