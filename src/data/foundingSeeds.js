@@ -91,12 +91,12 @@ export const FOUNDING_SEEDS = Object.freeze([
     archetype: 'besieged_holdout',
     settType: 'town',
     synopsis:
-      "A plague is taking hold in this town, and it has thinned the hands that work the fields, so the harvests come in short. A quarantine council sits among its factions. Between the sickness and the short harvests, the guild council holds a title the streets no longer honour, and the crisis has lifted the thieves' guild above it; that guild's master stands over ground the failing seat has stopped watching, and the one thing that could close the town's ranks against the guild is taking it in the open. The coup here is not a rumour. It is a matter of not being seen.",
+      "A plague is taking hold in this town, and it has thinned the hands that work the fields, so the harvests come in short. A quarantine council sits among its powers. Between the sickness and the short harvests, the guild council holds a title the streets no longer honour, and the crisis has lifted the thieves' guild above it; that guild's master stands over ground the failing seat has stopped watching, and the one thing that could close the town's ranks against the guild is taking it in the open. The coup here is not a rumour. It is a matter of not being seen.",
     firstDecade:
       "Opens in a legitimacy crisis: fractured governance, a plague at its onset, and the thieves' guild's master standing over the ground a guild council, its title no longer honoured in the streets, has stopped watching.",
     receipts: Object.freeze([
       "Its legitimacy reads 'Legitimacy Crisis', with governance fractured.",
-      'Plague is at its onset, and a quarantine council sits among its factions.',
+      'Plague is at its onset, and a quarantine council sits among its powers.',
       "The thieves' guild's master heads the power the crisis lifted, on ground the failing seat has stopped watching, and can take it only unseen.",
     ]),
     links: Object.freeze([
@@ -135,7 +135,7 @@ export const FOUNDING_SEEDS = Object.freeze([
     synopsis:
       'The ore comes up clean; nothing else here does. A government survives by never looking too hard at the arrangements it rests on; an uprising still smoulders, eight years young; and every officer and merchant is deciding which side to stand on before the choice is made for them. Contested ground, where the honest question is simply who will still be standing.',
     firstDecade:
-      'Contested authority riddled with informal power: a recent uprising, criminal arrangements the government dares not confront, and figures caught between the governing faction and the insurgency.',
+      'Contested authority riddled with informal power: a recent uprising, criminal arrangements the government dares not confront, and figures caught between the governing power and the insurgency.',
     receipts: Object.freeze([
       "Its legitimacy reads 'Contested'.",
       'An uprising of the first rank sits within the last fifteen years.',
