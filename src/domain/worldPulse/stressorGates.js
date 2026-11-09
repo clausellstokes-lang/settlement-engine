@@ -1016,7 +1016,7 @@ function coupSpawnGate(snapshot, pressure) {
     reasons: [
       'Legitimacy is openly contested; the seat stands exposed.',
       `Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'}.`,
-      `Factions with the power to move: ${challengers.map(c => c.name).join(', ')}.`,
+      `Powers strong enough to move: ${challengers.map(c => c.name).join(', ')}.`,
     ],
   };
 }

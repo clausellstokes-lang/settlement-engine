@@ -903,11 +903,11 @@ export const FALLBACK_CANONICALS = Object.freeze({
   // told, in the only words the surface gives them, about the kind that was NOT firing.
   // The repair names the actor in the faction pair and drops it in the institution pair,
   // which is what makes the two readable as different beats.
-  faction_institution_capture: "a faction's capture of a hall",
-  faction_institution_suppression: "a faction's silencing of a hall",
-  faction_law_preference_push: "a faction's push for the law it wants",
-  faction_power_shift: 'a shift of power between factions',
-  faction_service_bolster: 'a faction propping up a service',
+  faction_institution_capture: "a power's capture of a hall",
+  faction_institution_suppression: "a power's silencing of a hall",
+  faction_law_preference_push: "a power's push for the law it wants",
+  faction_power_shift: 'a shift in who is strong among the powers',
+  faction_service_bolster: 'a power propping up a service',
   institution_capture: 'a captured hall',
   institution_suppression: 'a silenced hall',
   npc_action: "one person's act",

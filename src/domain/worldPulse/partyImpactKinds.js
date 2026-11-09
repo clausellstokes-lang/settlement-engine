@@ -27,8 +27,8 @@ export const PARTY_IMPACT_KINDS = Object.freeze({
   inflame_relationship:{ targets: ['relationshipKey'],          defaultMagnitude: 0.6,  label: 'Inflame a feud',   note: 'The party escalated a relationship between two settlements.' },
   clear_condition:     { targets: ['settlementId', 'condition'],defaultMagnitude: 1.0,  label: 'Resolve a condition', note: 'The party removed an active condition from a settlement.' },
   impose_condition:    { targets: ['settlementId', 'archetype'],defaultMagnitude: 0.6,  label: 'Cause a condition', note: 'The party caused a new active condition.' },
-  bolster_faction:     { targets: ['settlementId', 'factionId'],defaultMagnitude: 0.5,  label: 'Empower a faction', note: 'The party strengthened a faction\'s standing.' },
-  undermine_faction:   { targets: ['settlementId', 'factionId'],defaultMagnitude: 0.5,  label: 'Undermine a faction', note: 'The party weakened a faction\'s standing.' },
+  bolster_faction:     { targets: ['settlementId', 'factionId'],defaultMagnitude: 0.5,  label: 'Strengthen a power', note: 'The party strengthened a power\'s standing.' },
+  undermine_faction:   { targets: ['settlementId', 'factionId'],defaultMagnitude: 0.5,  label: 'Weaken a power', note: 'The party weakened a power\'s standing.' },
   empower_npc:         { targets: ['settlementId', 'npcId'],    defaultMagnitude: 0.5,  label: 'Aid an NPC',        note: 'The party advanced an NPC\'s position.' },
   remove_npc:          { targets: ['settlementId', 'npcId'],    defaultMagnitude: 1.0,  label: 'Remove an NPC',     note: 'The party removed a key NPC (killed, exiled, captured).' },
 });

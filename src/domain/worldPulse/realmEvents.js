@@ -30,7 +30,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     summary: 'Hunger, plague, and a fracturing faith feed one another. Flagellants walk the streets, scapegoats are named from pulpits, and prophets nobody ordained gather the desperate.',
     hooks: [
       'A flagellant movement marches between the afflicted settlements.',
-      'A minority faction is being blamed from the pulpits.',
+      'A minority is being blamed from the pulpits.',
       'A false prophet is gathering the desperate.',
     ],
   },
@@ -50,7 +50,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     types: ['siege', 'famine'],
     summary: 'The blockade holds and the granaries empty. Surrender pressure mounts with every meal that does not come.',
     hooks: [
-      'A surrender faction is counting the remaining stores aloud.',
+      'Those who want to surrender are counting the remaining stores aloud.',
       'Smugglers name their price for a way through the lines.',
     ],
   },
@@ -69,7 +69,7 @@ const COMPOUND_SIGNATURES = Object.freeze([
     label: 'The Shadow Court',
     types: ['criminal_corridor', 'infiltration'],
     requiresCapture: true,
-    summary: 'The corridor moves the goods, the agents hold the offices, and the captured factions sign whatever is put in front of them.',
+    summary: 'The corridor moves the goods, the agents hold the offices, and the captured powers sign whatever is put in front of them.',
     hooks: [
       'Petitions to the council are answered faster through the guild.',
       'An honest clerk has a ledger that maps the whole arrangement.',

@@ -141,7 +141,7 @@ export function applyFactionPayloadEffect(settlement, outcome, state, { now, tic
         severity: INSTITUTION_SUPPRESSION_SEVERITY,
         causeEventId: `faction_suppression:${pay.factionId}:${pay.institutionId}`,
         appliedAt: now ?? null,
-        description: `${factionName || 'A rival faction'} suppressed ${inst.name || pay.institutionName}.`,
+        description: `${factionName || 'A rival power'} suppressed ${inst.name || pay.institutionName}.`,
       });
       return { ...settlement, institutions: institutions.map((i) => (i === inst ? /** @type {SimInstitution} */ (impaired) : i)) };
     }
