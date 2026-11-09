@@ -603,10 +603,15 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         type: 'stress_consequence',
         category: 'Food Supply',
         severity: isCritical ? 'critical' : 'implausible',
-        title: 'Crisis Cutting the Food Supply',
+        // SW-B1 (STYLE-RULINGS-2 B1(b), the SURFACES audit's P73): the label read no surplus, so a town that
+        // still grows more than it eats (Lundey, soak1k-1, +17) printed "Cutting the Food Supply" beside
+        // "it feeds itself". The label and its note now read the surplus beside the cut.
+        title: surplus >= 0 ? 'Crisis Thinning the Harvest' : 'Crisis Cutting the Food Supply',
         message: note,
         description: note,
-        priorityNote: 'The crisis is cutting into the food supply now.',
+        priorityNote: surplus >= 0
+          ? 'The crisis has cut the harvest, but what is grown still covers what is eaten.'
+          : 'The crisis is cutting into the food supply now.',
       });
     });
   }
