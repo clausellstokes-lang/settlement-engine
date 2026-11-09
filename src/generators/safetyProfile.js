@@ -902,7 +902,7 @@ function STANDARD_PATROL(lawRef) {
 }
 
 /** #5–6: a thorp, hamlet or village with no watch, no force and no court. */
-const NO_WATCH_SMALL = Object.freeze([
+export const NO_WATCH_SMALL = Object.freeze([ // exported for the no-watch pin (STYLE-2-MERGE at SW-B6's point): test visibility, no behaviour
   'There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; ' +
     'when the families fall out among themselves, nobody keeps it.',
   'There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word.',

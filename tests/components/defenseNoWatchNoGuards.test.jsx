@@ -17,6 +17,7 @@ import { cleanup, fireEvent, render } from '@testing-library/react';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 
 const STRESSES = [
   'mass_migration', 'famine', 'under_siege', 'occupied', 'politically_fractured', 'indebted',
@@ -61,7 +62,10 @@ describe('one reader of the watch fact on the Defense tab', () => {
     expect(TABS.length, 'too few no-force places to read').toBeGreaterThan(80);
     // 103 of the 109 measured: the other six keep a charter hall or a warding, which the guard
     // assessment describes in its own words (`inst.hasMilitaryInst`) and which is no watch either.
-    const saying = TABS.filter(({ text }) => /There is no watch/.test(text)).length;
+    // RE-KEYED BY IDENTITY at SW-B6's point (STYLE-2-MERGE; the chair's ruling on STOP 2, 16:5x): SW-B5's vantage variants
+    // (NO_WATCH_SMALL) say the absence in four ways, one not opening "There is no watch"; a tab says it when its text holds
+    // a member of the pool WHOLE (each member renders as one text node, so no member is split across nodes).
+    const saying = TABS.filter(({ text }) => /There is no watch/.test(text) || NO_WATCH_SMALL.some((member) => text.includes(member))).length;
     expect(saying, 'the guard assessment no longer reads the absence').toBeGreaterThan(TABS.length * 0.9);
   });
 
