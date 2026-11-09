@@ -404,3 +404,14 @@ Pins: `advanceReport.test.jsx` (the no-edge footer re-keyed; the decree cluster'
 | D·31 live trouble chips | `resilience {n%}: recovering fast / wallowing / holding (a pillar is missing)` · `cannot lift while blocked` · `human(durationPolicy)` | "recovering fast" / "not recovering" / "holding" · "missing something it needs to recover" (its own chip) · "held in place by another trouble"; the duration-policy chip ("episodic" / "structural" / "transient") struck. **Census strike:** the audit's "held in place by {companion}" (companion = `synergy.companions[0]`) is NOT taken — `companions` lists every co-located trouble, and the synergy records no field saying which one blocks, so the line names none (the "entangled with …" chip beside it already names them) |
 
 Pins: `worldPulseTranslation.test.jsx` (one new test over all three helpers) and `worldPulsePanel.test.jsx` (the siege card's `resilience 31%` / "a pillar is missing" re-keyed to "not recovering" / "missing something it needs to recover", with a negative); **red at the parent** (2 of 13), green here. Registers: none moved (`proseNumerics` re-emission byte-identical: the resilience chip was never in the baseline).
+
+### 9d. `SimulationRulesAxes.jsx` (D·60–63)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·60 DRIFT_REASON | `Needs Diplomacy: war is a relationship dynamic, so a frozen web cannot raise fronts.` | "Needs Diplomacy: wars start from the ties between settlements, and with Diplomacy off those ties never change." |
+| D·61 WAR_DM_DEFERRED | `War by-your-leave arrives with the war-layer rework. Off still lets you narrate wars yourself; the engine just never starts one.` | "War cannot ask your leave yet. With War off you can still narrate wars yourself; the realm simply never starts one." |
+| D·62 SEASONS_DM | `The year turns of its own accord. There is no leave to ask of winter.` | "The seasons turn on their own; they cannot wait for your leave." |
+| D·63 dm_only option | `The world computes consequences; every new move awaits your word.` | "The world works out what follows; every new move awaits your word." |
+
+Pins: `simulationRulesDialog.test.jsx` — a new describe rendering `DomainRows` (the three reasons read from the chips' titles) and reading the `dm_only` option from `AXES`; **red at the parent** (2 of 8), green here. Registers: none moved. **A twin outside the manifest, not touched:** `src/components/settlements/LivingWorldGates.jsx:76` carries its own `DRIFT_REASON` ("Needs Relationship drift: war is a relationship dynamic, so a frozen web cannot raise fronts.") — not a ledger D file; listed in §9-what-stays for the chair to slot.

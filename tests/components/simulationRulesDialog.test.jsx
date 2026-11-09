@@ -3,6 +3,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import SimulationRulesDialog from '../../src/components/map/SimulationRulesDialog.jsx';
+import { AXES, DomainRows } from '../../src/components/map/SimulationRulesAxes.jsx';
 
 const actions = {
   previewCampaignWorldPulse: vi.fn(),
@@ -205,5 +206,24 @@ describe('SimulationRulesDialog', () => {
       expect(actions.updateCampaignSimulationRules).toHaveBeenCalledWith('camp-2', expect.anything());
       expect(onClose).toHaveBeenCalled();
     });
+  });
+});
+
+describe('STYLE-2 SW-12 — the world-law axes speak in the reader\'s words (ledger D·60–63)', () => {
+  test('"Your word only" says the world works out what follows, never that it "computes" (D·63)', () => {
+    const autonomy = AXES.find((axis) => axis.options.some(([value]) => value === 'dm_only'));
+    const [, , description] = autonomy.options.find(([value]) => value === 'dm_only');
+    expect(description).toBe('The world works out what follows; every new move awaits your word.');
+  });
+
+  test('the domain rows\' reasons name no engine, rework or frozen web (D·60–62)', () => {
+    const { unmount } = render(<DomainRows draft={{ relationshipDynamicsEnabled: false }} advanceBlocked={false} onSetDomain={() => {}} />);
+    expect(screen.getByTestId('domain-war-off').title)
+      .toBe('Needs Diplomacy: wars start from the ties between settlements, and with Diplomacy off those ties never change.');
+    expect(screen.getByTestId('domain-war-dm').title)
+      .toBe('War cannot ask your leave yet. With War off you can still narrate wars yourself; the realm simply never starts one.');
+    expect(screen.getByTestId('domain-seasons-dm').title)
+      .toBe('The seasons turn on their own; they cannot wait for your leave.');
+    unmount();
   });
 });
