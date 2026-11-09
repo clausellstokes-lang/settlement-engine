@@ -175,6 +175,7 @@ describe('gallery public-JSON sanitizer — net-current execution (pglite)', () 
     expect('factions' in out).toBe(false);
     expect('factionAffiliation' in out.npcs[0]).toBe(false);
     expect('secondaryAffiliation' in out.npcs[0]).toBe(false);
+    // anchored: out carries the open power and the NPC, both pinned exactly above
     expect(JSON.stringify(out)).not.toContain('The Harbour Bench');
   });
 
@@ -347,7 +348,9 @@ describe('206 — the card\'s veil bit: a face\'s house is public only where vei
     expect(npc.personality).toBe('wary');
     for (const k of ['institution', 'title', 'role', 'memberships', 'goal', 'secret', 'power']) expect(k in npc, k).toBe(false);
     const { id: _id, ...rest } = npc;
+    // anchored: the face is asserted to keep its name and personality above, so `rest` is non-empty
     expect(JSON.stringify(rest)).not.toContain("bloc's speaker");
+    // anchored: the face is asserted to keep its name and personality above, so `rest` is non-empty
     expect(JSON.stringify(rest)).not.toContain('Independent Bloc');
   });
 
@@ -358,7 +361,9 @@ describe('206 — the card\'s veil bit: a face\'s house is public only where vei
     // the card's `id` is the house slug and stays public (the identity floor, the gallery member key —
     // recorded in docs/FIX_PUBLIC_VEIL_2026-11-07.md for the chair); every OTHER field is clean
     const { id: _id, ...rest } = npc;
+    // anchored: the face is asserted to keep its name above, so `rest` is non-empty
     expect(JSON.stringify(rest)).not.toMatch(/thieves/i);
+    // anchored: the face is asserted to keep its name above, so `rest` is non-empty
     expect(JSON.stringify(rest)).not.toContain('Night Market');
   });
 
@@ -376,7 +381,9 @@ describe('206 — the card\'s veil bit: a face\'s house is public only where vei
     const npc = (await sanitizeV({ npcs: [MAGISTRATE] })).npcs[0];
     expect(npc.institution.key).toBe('Multiple court buildings');
     expect(npc.memberships).toEqual([{ power: 'The Crown', rank: 1, share: 0.6, veiled: false }]);
+    // anchored: npc is asserted to carry its institution and its open membership just above
     expect(JSON.stringify(npc)).not.toContain('The Quiet Hand');
+    // anchored: npc is asserted to carry its institution and its open membership just above
     expect(JSON.stringify(npc)).not.toContain('The Old Guard');
     // a memberships that is not an array is dropped whole (fail-closed)
     const odd = (await sanitizeV({ npcs: [{ ...MAGISTRATE, memberships: { power: 'The Quiet Hand' } }] })).npcs[0];
@@ -477,8 +484,11 @@ describe('206 (second seat) — the hidden power is not public, and a veiled fac
   it('the hidden power\'s name appears nowhere in the sanitized JSON; the stress type stays', async () => {
     const out = await sanitizeH(RECORD);
     const text = JSON.stringify(out);
+    // anchored: the open powers, conflict and stress type are pinned present just below
     expect(text).not.toContain(HIDDEN);
+    // anchored: the open powers, conflict and stress type are pinned present just below
     expect(text).not.toContain('The Free Alliance'); // the second hidden row goes too
+    // anchored: the open powers, conflict and stress type are pinned present just below
     expect(text).not.toContain('Its presence is not known');
     // anchored: the open powers, the open conflict and the stress type are all still there
     expect(out.powerStructure.factions.map((f) => f.faction)).toEqual(['Elder Council', 'Merchant Guilds']);
@@ -500,6 +510,7 @@ describe('206 (second seat) — the hidden power is not public, and a veiled fac
     expect(b.npc2Role).toBe('the eldest');
     const ids = new Set(out.npcs.map((n) => n.id));
     for (const tie of out.relationships) { expect(ids.has(tie.from)).toBe(true); expect(ids.has(tie.to)).toBe(true); }
+    // anchored: out's ties and NPCs are asserted present and joined just above
     expect(JSON.stringify(out)).not.toContain('bloc\'s speaker');
   });
 
@@ -517,6 +528,7 @@ describe('206 (second seat) — the hidden power is not public, and a veiled fac
       const server = await sanitizeH(rec);
       const client = JSON.parse(JSON.stringify(toPublicSafe(rec)));
       expect(client).toEqual(server);
+      // anchored: server equals the client projection of a generated city, asserted on the line above
       for (const name of hidden) expect(JSON.stringify(server)).not.toContain(name);
       // FIX-PUBLIC-VEIL (option (B)): a veiled face is born with an opaque id; on the public payload no
       // face path spells its house, and every tie to it still resolves
@@ -526,6 +538,7 @@ describe('206 (second seat) — the hidden power is not public, and a veiled fac
       for (const n of veiledFaces) {
         expect(ids.has(n.id)).toBe(true);
         const slug = String(n.institution.key).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+        // anchored: each NPC id is asserted present in the server JSON on the lines above
         expect(JSON.stringify({ npcs: server.npcs, relationships: server.relationships, stress: server.stress, stressors: server.stressors })).not.toContain(slug);
       }
       for (const tie of server.relationships || []) { expect(ids.has(tie.from)).toBe(true); expect(ids.has(tie.to)).toBe(true); }

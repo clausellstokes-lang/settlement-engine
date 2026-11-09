@@ -108,6 +108,7 @@ describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)
       expect(npc.has(k), `the retired NPC field '${k}' must not be public`).toBe(false);
     }
     expect(PUBLIC_TOPLEVEL_KEYS).toContain('powerStructure');
+    // anchored: the list is asserted to carry powerStructure on the line above
     expect(PUBLIC_TOPLEVEL_KEYS).not.toContain('factions');
   });
 

@@ -170,6 +170,7 @@ describe('FIX-PUBLIC-VEIL (the second seat) — a veiled face\'s opaque id is sa
     const shared = a.filter(([key]) => bByKey.has(key));
     expect(shared.length, 'anchored: the two seeds share a veiled house').toBeGreaterThan(0);
     for (const [key, id] of shared) expect(bByKey.get(key), `${key}: another seed, another id`).not.toBe(id);
+    // anchored: `a` is the veiled cards' id list, non-empty by the shared-house assertion above
     for (const [key, id] of a) expect(id).not.toContain(String(key).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)[0]);
   });
 });

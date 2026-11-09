@@ -51,7 +51,9 @@ describe('stressTypesMeta drift', () => {
   test('the direction-bearing kind declares exactly one half per direction, and neither hedges', () => {
     const halves = STRESS_TYPE_META.mass_migration.viabilityNoteByDirection;
     expect(Object.keys(halves).sort()).toEqual(['arrivals', 'departures']);
+    // anchored: the halves' key set is pinned exactly just above, so the arrivals text exists to be read
     expect(halves.arrivals).not.toMatch(/Emigration/);
+    // anchored: the halves' key set is pinned exactly two lines above, so the departures text exists to be read
     expect(halves.departures).not.toMatch(/Immigration/);
   });
 });

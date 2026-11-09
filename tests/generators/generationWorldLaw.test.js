@@ -418,6 +418,7 @@ describe('full-pipeline world-law enforcement', () => {
     // #10 (W5 HIS 2026-11-07): this city's roster carries no docks institution, so its port route takes the
     // river arm; the reason stays river-specific and never claims the sea.
     expect(settlement.settlementReason.join(' ')).toMatch(/river port|barges|\briver\b/i);
+    // anchored: the same reason text is asserted to name the river just above, so it is non-empty prose
     expect(settlement.settlementReason.join(' ')).not.toMatch(/\bsea\b|seaport|coastal|tide/i);
     expect(settlement.spatialLayout.tradeAccess).toBe(
       'Inland river port (wharves and barge docks)',
