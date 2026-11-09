@@ -1,10 +1,10 @@
 # STYLE-2-FRAMES — lane SW-B5 FRAMES (2026-11-09): the frames get vantages, the slot leak closed
 
-**Seat:** SW-B5 · FRAMES, session `session_01FbPLbemRZPR6JPWkRugats`, a child of the cloud chair (`session_01FbPLbejcfwX5nii12VM673`). **Law:** the owner's style law (`docs/chair/2026-11-07/WIRING-RULINGS-2026-11-07.md` §5–§8; §7 is this lane's charge), STYLE-RULINGS-2 B5 (with A0, A12 and B0), BRIEF-STYLE-2-WAVE §0 and §2 (SW-B5). **Worklist:** STYLE-AUDIT-2-SURFACES §3b. **Branch:** `lane/style-2-frames-2026-11-09`, cut from `lane/integration-2026-11-07` at `0c93f0ca0` (a7bc2e4ce is an ancestor). The seat signs nothing: every golden move below is UNSIGNED, measured for STYLE-2-MERGE.
+**Seat:** SW-B5 · FRAMES, session `session_01FbPLbemRZPR6JPWkRugats`, a child of the cloud chair (`session_01FbPLbejcfwX5nii12VM673`). **Law:** the owner's style law (`docs/chair/2026-11-07/WIRING-RULINGS-2026-11-07.md` §5–§8; §7 is this lane's charge), STYLE-RULINGS-2 B5 (with A0, A12 and B0), BRIEF-STYLE-2-WAVE §0 and §2 (SW-B5). **Worklist:** STYLE-AUDIT-2-SURFACES §3b. **The `safetyProfile.js` split (§6):** SW-B5 holds `generateSafetyProfile`'s (a) `prisonNote`, (b) standard-patrol else and (c) small-tier no-watch line; SW-B6 everything else. **Branch:** `lane/style-2-frames-2026-11-09`, cut from `lane/integration-2026-11-07` at `0c93f0ca0` (a7bc2e4ce is an ancestor). The seat signs nothing: every golden move below is UNSIGNED, measured for STYLE-2-MERGE.
 
 ## 1. Outcome
 
-Every live frame in the audit's §3b table that sits inside this lane's manifest now prints in FEWER towns of the 1,000. All frames passed the refusal line on the first measured try, and no rewrite was refused. The two criminal-structure frames (#12–15) are the exception: their writer is outside the manifest. That was a STOP, sent to the chair at once; it is in §6. The slot leak "key goods" is gone (177 → 0). The twenty most-repeated story frames overall fell at every rank (see §3). No other top-40 skeleton rose. The two generator causes move the generator golden master (524/525) and the espionage dormancy fence (278/360). The fence's own message calls that a STOP outside a chartered window. The mover is attributed with zero residue in §4, and whether the wave is that window is the merge seat's and the chair's to rule. Nothing is re-recorded here.
+Every live frame in the audit's §3b table now prints in FEWER towns of the 1,000. All frames passed the refusal line on the first measured try, and no rewrite was refused. The four criminal-structure frames (#12–15) were first a STOP: their writer is `src/domain/display/defenseDisplay.js`, outside the brief's manifest. The chair's ruling, which reached this seat after the first hand-back, widened the manifest to that one note, and the frames were then cured the same way (306 → 73; §6). The slot leak "key goods" is gone (177 → 0). The twenty most-repeated story frames overall fell at every rank (see §3). No other top-40 skeleton rose. The two generator causes move the generator golden master (524/525) and the espionage dormancy fence (278/360). The fence's own message calls that a STOP outside a chartered window. The mover is attributed with zero residue in §4, and whether the wave is that window is the merge seat's and the chair's to rule. Nothing is re-recorded here.
 
 **The method, by frame.** The B5 cure is "slotted or varied". In practice, slotting a NAME does not lower a frame's count on the referee: the soak masks the settlement's name, every NPC name and every power name as `@` before it counts a skeleton (`scripts/audit/soak-review.mjs`, the story loop). So "goes to {faction}" and "the families by name" read as one frame in every town. Two cures are left:
 - **Vantage variants** carrying the same facts, chosen by the seed (§8). This is used on every annex pool and on `safetyProfile.js`.
@@ -49,6 +49,11 @@ Each pool keeps its original line(s) untouched at their old position. The lines 
 - Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
 - There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.
 
+**#12–15 — `src/domain/display/defenseDisplay.js :: CRIM_STRUCTURE_DATA.organized.note`** (`ORGANIZED_RING_NOTES`; index 0 is the original "One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; …"). Chosen by the record's `_seed` through the kernel's `hashKey`; seedless records print the original; `key`, `label` and the colours never vary.
+- Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and the officials it pays, and anyone who needs something from it can bargain.
+- Shopkeepers here pay one ring for protection, and the ring pays officials in turn. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.
+- Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and bribed officials.
+
 **#17 — the same, `prisonNote`, court and prison** (`COURT_AND_PRISON`; index 0 "A functioning court and prison mean crimes carry real consequences.")
 - A wrong done here goes before the court, and the guilty can be locked up for it.
 - Offenders the {force} catches are tried at the court and held in the prison.
@@ -82,7 +87,7 @@ DS-GEN-18 v4 printed "incense and votive candles goes out"; it was re-worded so 
 |---|---|---|---|
 | #3 "…the plan @ was laid out to." | 439 | 145 | lowered |
 | #5–6 "the old families keep the peace…" | 367 | 103 | lowered |
-| #12–15 "one criminal ring decides…" / "its rules are predictable…" | 306 / 306 | 306 / 306 | **STOP — writer outside the manifest (§6)** |
+| #12–15 "one criminal ring decides…" / "its rules are predictable…" | 306 / 306 | 73 / 73 (at `a681e18e4`) | lowered, after the chair widened the manifest (§6) |
 | #16 "anything official at @ goes to @…" | 297 | 124 | lowered |
 | #17 "a functioning court and prison…" | 293 | 72 | lowered |
 | #17's sibling "a court exists, though the prison system is limited." | 206 | 64 | lowered |
@@ -97,9 +102,10 @@ DS-GEN-18 v4 printed "incense and votive candles goes out"; it was re-worded so 
 
 **The twenty most-repeated story frames (non-chrome), towns at each rank:**
 - BEFORE: 439, 367, 306, 306, 297, 293, 263, 260, 232, 225, 225, 208, 206, 203, 203, 199, 199, 195, 195, 194.
-- AFTER: 306, 306, 263, 203, 203, 195, 195, 190, 190, 188, 188, 186, 185, 185, 180, 172, 170, 168, 167, 167.
+- AFTER (`d49a59f2c`): 306, 306, 263, 203, 203, 195, 195, 190, 190, 188, 188, 186, 185, 185, 180, 172, 170, 168, 167, 167.
+- AFTER the ring note (`a681e18e4`): 263, 203, 203, 195, 195, 190, 190, 188, 188, 186, 185, 185, 180, 172, 170, 168, 167, 167, 166, 166.
 
-None rose. The two at the top are #12–15 (§6). #10's successor ("everyone comes and goes by the gates…", 263) is `safetyProfile.js`'s `wallNote`, which is SW-B6's row.
+None rose. The ring's new lines print in 70–86 towns each. The overlaps at `a681e18e4`: exact 0.040 / 0.079, story 0.027 / 0.068, skeleton 0.098 / 0.171; 4,100 distinct skeletons, 93 in ≥ 10% of towns. #10's successor ("everyone comes and goes by the gates…", 263) is `safetyProfile.js`'s `wallNote`, which is SW-B6's row.
 
 **The overlaps** (`repetition-prose.json`), BEFORE → AFTER:
 
@@ -118,7 +124,7 @@ None rose. The two at the top are #12–15 (§6). #10's successor ("everyone com
 
 Measured in clean worktrees at each commit and its parent: `tests/property`, `tests/pdf`, `tests/foundry` and `tests/simulation/presetLightingWitness.test.js` through the JSON reporter, plus `scripts/prose-manifest-cells.mjs` and `scripts/prose-manifest-diff.mjs` for the manifest's cells.
 
-| instrument | `84617f81a` annex frames | `6a9cf348a` safetyProfile frames | `d49a59f2c` key-goods leak | composed, parent → tip |
+| instrument | `84617f81a` annex frames | `6a9cf348a` safetyProfile frames | `d49a59f2c` key-goods leak | composed, parent → `d49a59f2c` |
 |---|---|---|---|---|
 | composed-prose manifest (/1,050 rows, 74,482 cells) | **1,050 rows, 2,950 cells RE-INDEXED**, 0 replaced, 0 added, 0 removed | 0 | 0 | 1,050 rows · 2,950 cells |
 | generator golden master (/525) | 0 | **524** (every row but `town|germanic|auto|random_trade|civilized|gm-seed-a`) | **36** | 524 |
@@ -127,6 +133,8 @@ Measured in clean worktrees at each commit and its parent: `tests/property`, `te
 | herald knowledge desk | 0 | 0 | 0 | 0 (green at every tree) |
 | preset lighting witness | 0 | 0 | 0 | 0 (green at every tree) |
 | PDF snapshot and `tests/pdf` · `tests/foundry` | 0 | 0 | 0 | 0 (green at every tree) |
+
+**`a681e18e4` (the ring note), measured against `d49a59f2c`: nothing moves.** The generator golden master's bytes are identical (`golden-master-stage`), the fence rows are identical (`refence`), the manifest moves 0 of 74,482 cells, and the property/pdf/foundry/witness family shows the same 12 reds, none new. The note is display-only (it is never stored on the record), so no generator instrument can see it, and no manifest cell reads it. That is measured, not inferred.
 
 **Why the gm moves almost whole on the safetyProfile cause.** The gm configs share one seed per family (`golden-master-v3`, `gm-seed-a/b/c`), so a seed-hashed pool lands on ONE index across a family. Where that index is not the original, every config through that branch moves at once. The soak towns have a seed each, and there the pools spread (§3). The manifest likewise moves all 1,050 rows on the annex cause, for the same reason. Every manifest cell moves TO a new variant, as the argmax promises: the manifest's `vid` column is the 0-based pool index (`composeStateProse.js :: drawPiece`), so manifest "v2 → v3" is annex vid 3 → vid 4.
 
@@ -161,12 +169,19 @@ All of these are in commit `84617f81a` (the annex cause):
 
 ## 6. STOP, and the row split
 
-**STOP (#12–15), sent to the chair at once with a default:** the four criminal-structure frames (306 towns each) are written by `src/domain/display/defenseDisplay.js :: CRIM_STRUCTURE_DATA` (`organized.note`), not by `safetyProfile.js` as the brief placed them. That file is outside this manifest. Default: untouched here and listed under "What stays". The cure, if the chair widens the manifest to that one note: per-seed vantage variants. Slotting the ring's name alone is masked by the soak.
+**STOP (#12–15), sent to the chair at once with a default, and RULED.** The four criminal-structure frames (306 towns each) are written by `src/domain/display/defenseDisplay.js :: CRIM_STRUCTURE_DATA` (`organized.note`), not by `safetyProfile.js` as the brief placed them. The chair's ruling (1) widened the manifest to `CRIM_STRUCTURE_DATA.organized.note` ONLY, with per-seed vantage variants as the cure. That ruling was sent at 01:23 UTC and read by this seat after the first hand-back. The cure landed in `a681e18e4`: the pool, a helper and one import are appended at the file's end, and one return line routes `organized` through them. No other note, label or key is touched.
 
-**The `safetyProfile.js` row split with SW-B6** (named to the chair before writing):
+**The cure each frame took, and why (the chair's ruling (2)).** The soak masks power and NPC names as `@`, so a slot that holds a masked name cannot lower a count.
+- **Variants:** #3, #5–6, #12–15, #16, #17, #18, #19 and the DS-ECO frames. Their pools hold no unmasked record noun for the slot: no seen feature of the founding, and a hall or ring known only by its power's name.
+- **Leaving the clause out:** the "key goods" leak, because no commodity is held.
+- **Slotted:** none. The one unmasked noun on offer, `{good}`, is not filled by the composer in the two pools that declare it (measured: drafts that used it printed 0 times).
+
+**The `safetyProfile.js` row split with SW-B6 — the chair's FINAL ruling (3), worded as in SW-B6's record:**
 - SW-B5 holds three literals in `generateSafetyProfile`'s guard block: the `prisonNote` ternary's court arms (#17 and its sibling), the standard-patrol else (#18), and the thorp/hamlet/village no-watch line (#5–6).
 - Every other line of the file is SW-B6's: the other guard arms, `wallNote` (the D1/D24 contradiction), `safetyDesc`, and any single reader of the watch fact.
-- If SW-B6's reader must rewrite the no-watch line, this lane yields it: the pool sits whole at the file's end as `NO_WATCH_SMALL`.
+- (c) stays THE ONE READER of the watch fact. It is reworded into seed-keyed variants with the same read, no second reader, and no new `said` door: the original line never took one. SW-B6 changes no wording of (a), (b) or (c). Arms neither lane names stay untouched.
+
+(An earlier, broader note from the chair, which gave this lane every `guardEffectivenessDesc` branch, the crime-type lines, `economicDragDesc` and the hooks, was superseded two minutes later by ruling (3). This lane touched only (a), (b) and (c).)
 
 ## 7. CONFIRMED against PLAUSIBLE
 
@@ -183,7 +198,6 @@ All of these are in commit `84617f81a` (the annex cause):
 
 ## What stays
 
-- **#12–15** (`defenseDisplay.js :: CRIM_STRUCTURE_DATA.organized.note`, 306 towns): this needs the chair's manifest ruling (§6).
 - **#10's successor** "everyone comes and goes by the gates, so smugglers have to get past …" (263): `safetyProfile.js`'s `wallNote`, SW-B6's row.
 - `tests/generators/historyNoUndefinedProse.test.js` carries a stale comment ("commodity falls back to 'key goods'"). Its assertions read the tension type and still pass; the comment is outside this manifest.
 
