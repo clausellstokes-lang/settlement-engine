@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-09T00:25:39.235Z",
+  "generatedAt": "2026-11-09T00:43:24.501Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "b875ec7de832c94a",
+  "sourceHash": "4394a703e76fdad7",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/seedrandom.js",
