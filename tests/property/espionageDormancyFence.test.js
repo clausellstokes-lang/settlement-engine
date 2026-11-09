@@ -189,6 +189,15 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-09, THE SW-7 POWER-SIDE MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 16) ──
+ * THE HUNDREDTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the style wave's merge (BRIEF-STYLE-2-WAVE §3, the law of the chain); the
+ * record is docs/shift-records/2026-11-09-style-2-merge-16-sw7.json. THE MOVER, FOUND: the SW-7 POWER-SIDE merge a3062d919 (be1f2d6b3 into the integration branch); its generator causes the components (df6a9bb9c 186, 3728083ef 314, d41435ecd 360, 4c5614d27 196, fb712a8d7 211, 640378639 293, effda57d6 230, 4bf93741b 192, 6f340466f 122, 936d4ec06/cbba52029 337, 7e1009be5 1 — STYLE-2-POWER-SIDE-2026-11-09.md §5 and §7.5, the lane's own; 360 composed).
+ * On THIS corpus 360 of 360 rows (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60) move against point 15's post-state (the stage of ff552d87c, SW-9 ODD-ROWS; record 12 the last signed before it)
+ * (`214dbbb1…`); 360/360 hashes stay distinct. Written from the staged tree (a3062d919 with the door
+ * paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `214dbbb1…` -> `22134e2a…`.
+ *
+ *
  * ── 2026-11-09, THE SW-B6 ECO-DEF-BLOCKS MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 10) ──
  * THE NINETY-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the style wave's merge (BRIEF-STYLE-2-WAVE §3, the law of the chain); the
@@ -1215,7 +1224,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '214dbbb18dd69f9661b6be153c9346835bbe4dba8f025a4a6207cf397cd6b16c';
+const PRE_COUPLING_CORPUS_SHA = '22134e2a8da766f6d59cb75103a115bc9cc6da2457b21001e2a404e0e309c8f5';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
