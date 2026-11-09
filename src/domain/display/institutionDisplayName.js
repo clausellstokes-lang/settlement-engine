@@ -101,6 +101,10 @@ export const INSTITUTION_DISPLAY_NAMES = Object.freeze({
   // (`minPopulation: 10000`; `requiresAny: ['Town walls']`), so a reader needs the noun only.
   'Cathedral (10,000+ only)':   'Cathedral',
   'Gates (if walled)':          'Town gates',
+  // SW-8 RENAME-POWERS (2026-11-09, the owner's map row A12): the retired word left the reader's
+  // page. The key stays the identifier every table joins on; a saved world renders the new label
+  // at read, by this seam's own law (the chair's acceptance of the plan, 05:4x).
+  'Multiple criminal factions': 'Rival gangs',
 });
 
 /** Case-insensitive index, mirroring `identityForInstitution`'s tolerance. */

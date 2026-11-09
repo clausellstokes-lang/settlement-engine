@@ -208,7 +208,7 @@ export function generateFactionStructuralNpcs(
   const worldLaw = resolveGenerationWorldLaw(generationContext);
   const defs = (FACTION_ROLES[arch] || []).filter(worldLaw.allowsRole);
   // The placeholder's power is its membership, named by the seat's display name (PEOPLE-LAND, M-2).
-  const factionName = factionDisplayNameOf(faction) || 'Unknown faction';
+  const factionName = factionDisplayNameOf(faction) || 'Unnamed power';
   return defs.map((def, i) => {
     // ── ONE-TIME CORRECTION, 2026-08-11 (owner-approved) ────────────────────
     // The bare `?.id` read the WRONG IDENTITY: a generated institution carries no

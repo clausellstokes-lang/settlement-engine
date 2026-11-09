@@ -470,14 +470,14 @@ export const generatePowerStructure = (
               : merchantAdjPower >= 10
                 ? 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.'
                 : said('A small trader community present at market days; politically active in minor disputes, limited in broader leverage.'),
-      merchantLabel =
+      // SW-8: "(dominant)" left the name (it printed); the cap reads the dominance itself.
+      merchantDominant =
         (economicState == null ? void 0 : economicState.prosperity) === 'Wealthy' ||
-        (economicState == null ? void 0 : economicState.prosperity) === 'Thriving'
-          ? 'Merchant Guilds (dominant)'
-          : 'Merchant Guilds',
+        (economicState == null ? void 0 : economicState.prosperity) === 'Thriving',
+      merchantLabel = 'Merchant Guilds',
       merchantFinalPower = merchantAdjPower,
       govFullPower = (govPower || baseGovPower) + (priorityBonus || 0),
-      merchantCap = merchantLabel.includes('dominant') ? Math.round(govFullPower * 0.88) : 9999;
+      merchantCap = merchantDominant ? Math.round(govFullPower * 0.88) : 9999;
     factions.push({
       faction: merchantLabel,
       power: Math.min(merchantFinalPower, merchantCap),

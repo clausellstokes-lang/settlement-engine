@@ -363,7 +363,7 @@ export function classifyCustomInstitution(rawEntity, settlement) {
 
 /** @param {RawCustomEntity} rawEntity */
 function classifyCustomFaction(rawEntity) {
-  const name = String(rawEntity.name || rawEntity.label || 'Unnamed faction');
+  const name = String(rawEntity.name || rawEntity.label || 'Unnamed power');
   const contributors = [{ source: 'category_inference', effect: 'faction', reason: `"${name}" classified as faction.` }];
   return {
     type: 'faction',

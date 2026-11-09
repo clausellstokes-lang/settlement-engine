@@ -635,7 +635,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     "thieves' guild chapter":      "Thieves' Guild Chapter",
     "thieves' guild (powerful)":   "Thieves' Guild (Powerful)",
     "assassins' guild":            "Assassins' Guild",
-    'multiple criminal factions':  'Multiple Criminal Factions',
+    'multiple criminal factions':  'Rival Gangs',
     'black market':                'Black Market',
     'black market bazaar':         'Black Market Bazaar',
     'smuggling operation':         'Smuggling Operation',

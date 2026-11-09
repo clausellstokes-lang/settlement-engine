@@ -1160,7 +1160,7 @@ export const HISTORICAL_EVENTS_DATA = [
   {
     type: 'religious_tension',
     description: 'Different faiths or interpretations competed for influence and converts',
-    factions: ['Orthodox believers', 'Reformists', 'Secular faction'],
+    factions: ['Orthodox believers', 'Reformists', 'Secular camp'],
     lastingEffects: [
       "Two rival congregations still divide the settlement's faithful",
       'Public preaching restricted to licensed grounds after the unrest',

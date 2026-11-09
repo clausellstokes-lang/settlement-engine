@@ -293,7 +293,7 @@ export function ensureFactionStates(worldState, snapshot, rng) {
       factionStates[id] = {
         factionId: id,
         settlementId: item.id,
-        name: faction.faction || faction.name || faction.label || `Faction ${index + 1}`,
+        name: faction.faction || faction.name || faction.label || `Unnamed power ${index + 1}`,
         archetype,
         governmentPreference: faction.governmentPreference || (/** @type {any} */ (GOVERNMENT_BY_ARCHETYPE))[archetype] || pick(local, GOVERNMENT_PREFERENCES),
         powerBases: [...powerBases],

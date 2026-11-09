@@ -19,7 +19,7 @@ import { FACTION_DESCRIPTORS } from '../../src/data/powerData.js';
 import { applyStressEventFactions } from '../../src/generators/power/stressFactions.js';
 import { applyFactionRenameToSettlement } from '../../src/domain/factionRename.js';
 
-const PLACEHOLDER = /\b(?:Bloc|Faction) [A-Z]\b|Unknown Faction/;
+const PLACEHOLDER = /\b(?:Bloc|Faction) [A-Z]\b|Unknown Faction|^Unnamed power(?: \d+)?$/;
 const names = (s) => (s.powerStructure?.factions || []).map((f) => f.faction);
 
 function inject(stress, roster, governing = 'Council of Elders') {
@@ -46,8 +46,10 @@ describe('stress factions take the role pool\'s first unused name', () => {
   });
 
   it('under a Royal Authority the authored names stay', () => {
+    // SW-8 RENAME-POWERS (the owner's map, 2026-11-09): "Noble Claimant" stays; its bracket's
+    // retired word moved to "Reform Line", the pair of its rival's "Senior Line". Re-keyed by identity.
     const added = inject('succession_void', [], 'Royal Authority').map((f) => f.faction);
-    expect(added).toEqual(['Noble Claimant (Senior Line)', 'Noble Claimant (Reform Faction)']);
+    expect(added).toEqual(['Noble Claimant (Senior Line)', 'Noble Claimant (Reform Line)']);
   });
 
   it('the infiltrator takes the other pool\'s first unused name and keeps hidden: true', () => {

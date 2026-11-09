@@ -83,10 +83,17 @@ export const OTHER_MINT_ROWS = Object.freeze({
   // a power whose archetype the backing catalogue has no row for (occupation): no house can
   // back it, so it mints like a stress-born power (4 firings on the 1,000)
   'Occupation Authority': row('the occupying governor', 'Governor', 'government', 'mayor'),
+  // SW-8 RENAME-POWERS (2026-11-09, the owner's map): the three stress-born names that carried the
+  // retired word now mint under their new names. The old keys above stay as SILENT ALIASES, never
+  // printed: a town saved before the rename keeps its power's name (no save migration, the chair's
+  // ruling 1), and a re-mint on such a save must still find its title.
+  'Reform Movement': row('the reformer', 'Council Member', 'government', 'council'),
+  'The Inquiry': row('the investigator', 'Chief Magistrate', 'government', 'magistrate'),
+  'Peace Movement': row('the peacemaker', 'Council Member', 'government', 'council'),
 });
 
 /** The row an `other` power the table does not name takes: the fallback title, the generic pools. */
-const OTHER_FALLBACK = Object.freeze({ role: 'Faction Leader', category: 'other', titleKey: 'lord' });
+const OTHER_FALLBACK = Object.freeze({ role: 'Leader', category: 'other', titleKey: 'lord' });
 
 /**
  * The seat mint's title for a governing power, and whether the fallback fired.

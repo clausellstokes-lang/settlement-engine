@@ -137,7 +137,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       })),
     ke('recently_betrayed') &&
       (factions.push({
-        faction: 'Investigation Faction',
+        faction: 'The Inquiry',
         power: 12,
         desc: 'Informal coalition demanding answers; politically inconvenient to governance; growing.',
       }),
@@ -171,7 +171,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           desc: 'A noble house with a plausible hereditary claim; controls several key military levies. Legally strongest. Not universally liked.',
         }),
         factions.push({
-          faction: 'Noble Claimant (Reform Faction)',
+          faction: 'Noble Claimant (Reform Line)',
           power: 17,
           desc: 'A rival noble house backed by popular sentiment and merchant capital; weaker bloodline claim but stronger coalition. Moving fast.',
         }))
@@ -238,7 +238,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ? 'Loyalist Noble Opposition'
             : P && P.includes('Feudal')
               ? "Reform Stewards' Coalition"
-              : 'Reformist Faction';
+              : 'Reform Movement';
         factions.push({
           faction: he,
           power: ye ? 18 : 22,
@@ -335,7 +335,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           }),
           ye ||
             factions.push({
-              faction: 'Peace Faction',
+              faction: 'Peace Movement',
               power: 10,
               desc: 'Merchants, clergy, and common voices arguing that the cost of continued war exceeds any achievable gain. Not traitors: pragmatists. Growing.',
             }));
