@@ -40,6 +40,7 @@ describe('who really runs this town — the DM layer only', () => {
     // the title names the settlement by its own tier (the soak's coh:tier-noun: never "town" for a metropolis)
     expect(s.tier).toBe('metropolis');
     expect(text).toContain('Who really runs this metropolis');
+    // anchored: the same text is asserted to carry the panel's metropolis title on the line above
     expect(text).not.toMatch(/\btown\b/);
     const v = dmPowerViewOf(s);
     const hidden = v?.boosts.find((b) => b.hidden);
@@ -59,6 +60,7 @@ describe('who really runs this town — the DM layer only', () => {
     for (const props of [{ playerView: true }, { publicDossier: true }, { playerView: true, publicDossier: true }]) {
       const c = tab(props);
       expect(c.querySelector('[data-testid="who-runs-this-town"]'), JSON.stringify(props)).toBeNull();
+      // anchored: the secrets are the DM view's own lines, and the DM render is asserted to show them in the arm above
       for (const x of secrets) expect(c.textContent, `${JSON.stringify(props)}: ${x}`).not.toContain(x);
       cleanup();
     }

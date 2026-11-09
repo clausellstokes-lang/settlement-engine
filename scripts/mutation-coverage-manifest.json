@@ -3453,6 +3453,10 @@
       "kind": "rationale",
       "rationale": "CENSUS-4f unit 2 (3cb986142): the Military/Guard label declares guardPresence and its one twin excludes it (src/data/factionLabelSiblings.js). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): the twin's text 'Military Party' -> 'Military Guard Party' -> 3 failed / 4 (a, b, c). File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
     },
+    "tests/data/titleSecretsPresentations.test.js": {
+      "kind": "rationale",
+      "rationale": "THE TITLE SECRETS AND PRESENTATIONS (WRITE-PEOPLE's data, merged by ALLEGIANCE-CAR3 with ac6c44316; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'a planted control reds the checks' plants a fault of each kind and asserts every check reds, so a disarmed check fails this file."
+    },
     "tests/data/tradeGoodsAuthorNotes.test.js": {
       "kind": "rationale",
       "rationale": "CENSUS-3b R-A (416bafa6b): no tradeGoodsData text prints an author condition '(if ...)' / '(where ...)' / '(only ...)' (src/data/tradeGoodsData.js, every exported string walked). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): CRAFT_GUILDS_5_15 'Craft guilds (5-15)' -> 'Craft guilds (if 5-15)' -> 1 failed / 1. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."

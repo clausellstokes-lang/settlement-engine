@@ -40,6 +40,7 @@ describe('the DM view in the PDF, never the Foundry journal', () => {
     ];
     const vm = buildViewModel({ settlement: s });
     const text = JSON.stringify(buildFoundryModuleFiles({ settlement: s, vm }).files.map((f) => String(f.data)));
+    // anchored: the control just below asserts the DM view of the same town holds these strings
     for (const x of secrets) expect(text, x).not.toContain(x);
     // the control: the strings the scan looks for are real (the DM view of the same town holds them)
     expect(JSON.stringify(view)).toContain(secrets[0]);

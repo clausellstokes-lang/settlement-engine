@@ -210,6 +210,7 @@ describe('I-10 — no hidden allegiance, handler tie, pursuit goal or hidden boo
       const secrets = dmStrings(view);
       checked += secrets.length;
       const pub = [JSON.stringify(toPublicSafe(rec)), JSON.stringify(await sanitize(rec))];
+      // anchored: the control just below plants these strings on a public row and counts them on both projections
       for (const x of secrets) for (const text of pub) expect(text, x).not.toContain(x);
       // the control: the same strings planted on a public row are counted on both projections
       if (secrets.length) {
