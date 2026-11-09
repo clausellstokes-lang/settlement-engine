@@ -35,6 +35,19 @@
  * painting darkens toward the arrowhead while the filler is one tone, so each slot's filler
  * is toned to the painted wood beside its cut (SLOT_TONE).
  *
+ * THE PLATE IS CENTRED IN ITS BAND, BY COMPOSITION (owner, 2026-11-09: "Centring it horizontally
+ * ..."; the chair's method ruling, 2026-11-09: the painting stays byte-identical and the plate moves
+ * the way the slots already move wood). The painting set the blank plate [1623, 1877) between
+ * binding 7's right edge (1566) and the arrowhead's binding (1889): 57 columns of plain wood on
+ * its left, 12 of shaded wood on its right, its centre 22.5 columns toward the head. So the
+ * plate's band is re-composed at EVERY width, the uncut one included: PLATE_SHIFT columns of the
+ * plain run before the plate are DROPPED at the stretch cut (the next range starts PLATE_SHIFT
+ * columns on, joined by the cut's own crossfade over its filler), and PLATE_SHIFT columns of
+ * filler are ADDED at a FIXED join in the shaded gap after it, toned to the plate's lit wood. The page width
+ * is unchanged (one drop, one fill of the same width), and the plate sits 35 columns from binding
+ * 7 and 34 from the arrowhead's binding. Above S_MAX the plate's one part of the extra width is
+ * split in two halves, one at each of its joins, so it stays centred as the band grows.
+ *
  * THE SIX SECTIONS ARE EQUAL (owner, 2026-11-08: "The spacing between the sections
  * ( represented by the banded thread red) are not equally spaced and scales as such can you
  * do that for me?"). A section is the shaft between two consecutive red bindings, 1 to 7,
@@ -205,19 +218,45 @@ export const WOOD_RUNS = /* @__PURE__ */ Object.freeze([
  */
 export const COMPENDIUM_FE = 5;
 
+/** The columns the plate's re-composition moves it left by: dropped before it, filled after it. */
+export const PLATE_SHIFT = 22;
+
+/**
+ * THE SHADED GAP between the plate's right tip (its outline ends at column 1876) and the
+ * arrowhead's binding: columns [1877, 1885) are ink-free, cord-free wood in the binding's
+ * shade (12 to 21 pixels per column under half the shaft's row median, so not "plain" by the
+ * plain-wood test), and the binding's own shadow starts at 1885. The plate's fixed fill joins
+ * the painting in its middle with a 4-column crossfade (PLATE_FILL_FE) on each side.
+ */
+export const SHADED_GAP = /* @__PURE__ */ Object.freeze({ x0: 1877, x1: 1885 });
+
+/** The plate's fixed fill's crossfade width: half the shaded gap. */
+export const PLATE_FILL_FE = 4;
+
 /**
  * THE CUT TABLE (full arrow). Each cut is a column of plain wood with `fe` columns of plain
  * wood on both sides (the crossfade width there). Two per painted word beside its bindings,
  * one before and one after the lettering, so a word's hit region widens by its own slots;
- * Compendium's two sit in its narrow gaps at COMPENDIUM_FE; the last is before the blank
- * plate. The other ten are the columns the kit's canvas prototype rendered seamlessly.
- * @type {ReadonlyArray<Readonly<{ x: number, fe: number }>>}
+ * Compendium's two sit in its narrow gaps at COMPENDIUM_FE. The other ten are the columns the
+ * kit's canvas prototype rendered seamlessly.
+ *
+ * THE PLATE'S TWO JOINS (2026-11-09; the plate's one cut was 1596 until then). 1586, in the
+ * middle of the run [1566, 1628), DROPS PLATE_SHIFT columns: the next range starts at 1608, and
+ * the crossfade shows [1586, 1596) from the left and [1598, 1608) from the right, all plain wood,
+ * fifteen columns clear of the plate's tip. 1881, in the middle of SHADED_GAP, adds a FIXED
+ * PLATE_SHIFT columns of filler (times s) at every width. Each takes half the plate's part.
+ * @type {ReadonlyArray<Readonly<{ x: number, fe: number, drop?: number, fixed?: number }>>}
  */
-export const CUTS = /* @__PURE__ */ Object.freeze(
-  [558, 657, 713, 825, 881, 982, 1032, 1181, 1234, 1350, 1413, 1516, 1596].map((x) => Object.freeze({
+export const CUTS = /* @__PURE__ */ Object.freeze([
+  ...[558, 657, 713, 825, 881, 982, 1032, 1181, 1234, 1350, 1413, 1516].map((x) => Object.freeze({
     x, fe: x === 1032 || x === 1181 ? COMPENDIUM_FE : FE,
   })),
-);
+  /* @__PURE__ */ Object.freeze({ x: 1586, fe: FE, drop: PLATE_SHIFT }),
+  /* @__PURE__ */ Object.freeze({ x: 1881, fe: PLATE_FILL_FE, fixed: PLATE_SHIFT }),
+]);
+
+/** The plate's two joins alone: the composition below S_MAX, where no other slot opens. */
+const PLATE_CUTS = CUTS.slice(-2);
 
 /**
  * SLOT_TONE: the CSS brightness each slot's filler takes, keyed by cut column. The painting
@@ -232,7 +271,15 @@ export const CUTS = /* @__PURE__ */ Object.freeze(
  */
 export const SLOT_TONE = /* @__PURE__ */ Object.freeze({
   558: 1.047, 657: 1.027, 713: 1.044, 825: 1.014, 881: 1.035, 982: 1.019, 1032: 1.050,
-  1181: 0.975, 1234: 0.994, 1350: 0.955, 1413: 0.981, 1516: 0.923, 1596: 0.802,
+  1181: 0.975, 1234: 0.994, 1350: 0.955, 1413: 0.981, 1516: 0.923,
+  // The plate's joins (2026-11-09): both sides of the drop are the run [1566, 1628), the tone
+  // its old cut 1596 had. The fixed fill takes the SAME tone: it continues the plate's band of
+  // lit wood, while the gap's shade (0.526 over [1877, 1885)) belongs to the arrowhead's
+  // binding and stays painted beside it. At 0.526 the fill read as a flat dark patch that grew
+  // with the page (the seat's screenshots at 1024 and 1920, 2026-11-09).
+  1586: 0.802, 1608: 0.802, 1881: 0.802,
+  // The compact arrow's tail crop still starts at 1596, in the same run.
+  1596: 0.802,
 });
 
 /**
@@ -350,16 +397,17 @@ export function waterLevel(wood) {
  * The slot at each cut of the full arrow, CSS px, for one part of the extra width (`part`)
  * at scale s. The six sections' share (six parts) water-fills to the level L, so a section's
  * width is max(painted, L) x s and each of its two slots takes half of what it gained; the
- * plate's cut (in no section) takes one part.
+ * plate's two joins (in no section) take half a part each, and the fixed fill its PLATE_SHIFT
+ * columns.
  * @param {number} part
  * @param {number} s
  * @returns {number[]}
  */
 export function fullSlots(part, s) {
   const level = waterLevel((6 * part) / s);
-  return CUTS.map(({ x }) => {
+  return CUTS.map(({ x, fixed = 0 }) => {
     const hit = Object.values(NAV_HIT).find((h) => x > h.x0 && x < h.x1);
-    return hit ? (Math.max(0, level - hit.x1 + hit.x0) * s) / 2 : part;
+    return hit ? (Math.max(0, level - hit.x1 + hit.x0) * s) / 2 : part / 2 + fixed * s;
   });
 }
 
@@ -518,19 +566,20 @@ function composition(mode, share, s) {
       joins: [[COMPACT_JOIN.left, COMPACT_JOIN.right, FE]],
     };
   }
-  if (share <= 0) return { ranges: [[0, STRIP_W]], slots: [], joins: [] };
+  // Below S_MAX only the plate's two joins open: its drop and its fixed fill.
+  const cuts = share > 0 ? CUTS : PLATE_CUTS;
   /** @type {Array<[number, number]>} */
   const ranges = [];
   let from = 0;
-  for (const cut of CUTS) {
+  for (const cut of cuts) {
     ranges.push([from, cut.x]);
-    from = cut.x;
+    from = cut.x + (cut.drop ?? 0);
   }
   ranges.push([from, STRIP_W]);
   return {
     ranges,
-    slots: fullSlots(share, s),
-    joins: CUTS.map((cut) => [cut.x, cut.x, cut.fe]),
+    slots: share > 0 ? fullSlots(share, s) : cuts.map((c) => (c.fixed ?? 0) * s),
+    joins: cuts.map((cut) => [cut.x, cut.x + (cut.drop ?? 0), cut.fe]),
   };
 }
 

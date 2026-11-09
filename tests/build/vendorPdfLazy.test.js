@@ -607,7 +607,17 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // (The compressed steps at an equal raw closure — W1, W2, W3, W5, A0b, FOOD, KEYS, 140b8f333, GREEN-BASE, 5c14aac4a,
 // bcf3e7f8a — are chunk-hash and module-order drift of tens of bytes, measured, not traced further; the real growth is
 // the veil's +1,088 / +690 and the arrow's +200 / +214.)
-const CLOSURE_BUDGET_BYTES = 1_075_589; // 2026-11-09: re-recorded AT the measured final tip, MERGE-WAVE step 4 (note above); was 1_072_604 (FIX-ARROW-SECTIONS) / 1_072_488 (MERGE-CAR)
+// 2026-11-09, FIX-ARROW-PLAQUE (the owner's word that the blank plate be centred; the chair's ruling (a), given at
+// 03:2x, 03:3x and 03:34 UTC, the FIX-ARROW-SECTIONS precedent named; VETOABLE BY THE OWNER): the three first-paint
+// budgets re-recorded AT the lane's measured tip 575e8b5e5, a fresh `npm run build` read by this file's own arms
+// (VERIFY_DIST=1), against the parent d46ce9503's 1,075,589 / 342,846 / 288,452 measured the same way:
+//   raw +169, gzip +129, Brotli +18, every byte src/components/nav/arrowGeometry.js, the plate's composition: CUTS'
+//   `drop` and `fixed` literals (and the spread that builds CUTS), PLATE_CUTS, the share-0 branch that composes the
+//   plate's two joins, fullSlots' half part and fixed fill, three SLOT_TONE keys (1586, 1608, 1881), PLATE_SHIFT and
+//   PLATE_FILL_FE. No buy-back (the chair: "a hunt for bytes elsewhere to pay for a feature is the wrong motion");
+//   measured and rejected: running the full composition at share 0 (zero-width fillers under 13 crossfades bleed the
+//   filler into the uncut painting) and `?? 0` -> `| 0` trims (tens of bytes; the type floor refuses them).
+const CLOSURE_BUDGET_BYTES = 1_075_758; // 2026-11-09: re-recorded AT FIX-ARROW-PLAQUE's measured tip (note above); was 1_075_589 (MERGE-WAVE step 4) / 1_072_604 (FIX-ARROW-SECTIONS)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -637,8 +647,8 @@ const CLOSURE_BUDGET_BYTES = 1_075_589; // 2026-11-09: re-recorded AT the measur
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 342_846; // 2026-11-09: re-recorded AT the measured final tip, MERGE-WAVE step 4 (note at the raw budget); was 341_841 (FIX-ARROW-SECTIONS) / 341_647 (MERGE-CAR)
-const CLOSURE_BROTLI_BUDGET_BYTES = 288_452; // 2026-11-09: re-recorded AT the measured final tip, MERGE-WAVE step 4 (note at the raw budget); was 287_634 (FIX-ARROW-SECTIONS) / 287_527 (MERGE-CAR)
+const CLOSURE_GZIP_BUDGET_BYTES = 342_975; // 2026-11-09: re-recorded AT FIX-ARROW-PLAQUE's measured tip (note at the raw budget); was 342_846 (MERGE-WAVE step 4) / 341_841 (FIX-ARROW-SECTIONS)
+const CLOSURE_BROTLI_BUDGET_BYTES = 288_470; // 2026-11-09: re-recorded AT FIX-ARROW-PLAQUE's measured tip (note at the raw budget); was 288_452 (MERGE-WAVE step 4) / 287_634 (FIX-ARROW-SECTIONS)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -1838,9 +1848,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_075_589); // MERGE-WAVE step 4, 2026-11-09 (note at the constant); FIX-ARROW-SECTIONS 1_072_604 / MERGE-CAR 1_072_488 before
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(342_846); // MERGE-WAVE step 4, 2026-11-09; FIX-ARROW-SECTIONS 341_841 before
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(288_452); // MERGE-WAVE step 4, 2026-11-09; FIX-ARROW-SECTIONS 287_634 before
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_075_758); // FIX-ARROW-PLAQUE, 2026-11-09 (note at the constant); MERGE-WAVE step 4 1_075_589 / FIX-ARROW-SECTIONS 1_072_604 before
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(342_975); // FIX-ARROW-PLAQUE, 2026-11-09; MERGE-WAVE step 4 342_846 before
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(288_470); // FIX-ARROW-PLAQUE, 2026-11-09; MERGE-WAVE step 4 288_452 before
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP

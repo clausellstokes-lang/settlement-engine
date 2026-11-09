@@ -34,11 +34,15 @@
  *       tone at each end);
  *   (i) THE FEATHER HIDES ON SCROLL (owner, 2026-09-17): the state logic, and the feather's
  *       columns end before every cut, so its layer holds the first segment alone;
- *   (j) the hover glow boxes sit inside their controls.
+ *   (j) the hover glow boxes sit inside their controls;
+ *   (b2) THE PLATE IS CENTRED IN ITS BAND (owner, 2026-11-09: "Centring it horizontally ...";
+ *       the chair's method ruling: by composition, the painting byte-identical): on the page,
+ *       the plate's centre is the centre of the band from binding 7's right edge to the
+ *       arrowhead's binding's left edge, within one CSS px, at every full width.
  */
 import { describe, expect, it } from 'vitest';
 import {
-  BAND_H, BARB_HANG_H, BINDINGS, COMPACT_JOIN, COMPACT_MIN_SLOT, COMPACT_W, COMPENDIUM_FE, CUTS, EQUAL_EXTRA,
+  BAND_H, BARB_HANG_H, BINDINGS, COMPACT_JOIN, PLATE_FILL_FE, PLATE_SHIFT, SHADED_GAP, COMPACT_MIN_SLOT, COMPACT_W, COMPENDIUM_FE, CUTS, EQUAL_EXTRA,
   FE, FEATHER_FROM, FEATHER_RAMP, FEATHER_X1, FILLER_W, FULL_MIN_VIEWPORT, GLOW_PAD, GLOW_ROWS, HANG_H, HOME,
   LOGO_PLATE, NAV_HIT, NAV_WORD, PARTS, SECTION_W_MEAN, SECTION_W_SORTED, waterLevel, PLATE, PLATE_FIELD, PLATE_RIVETS, S_MAX, SECTION_W, SECTION_W_MAX,
   SHORT_CAP, SLIP, SLOT_TONE, STRIP_W, WOOD_RUNS, WORD_FLOOR, WORD_ROWS, SEAM_BAND_TO, SEAM_HANG_FROM,
@@ -59,14 +63,20 @@ const CATCH_UP = 1379.9;
 
 /**
  * Every cut that lacks its own `fe` (FE when it names none) columns of plain wood on either
- * side, as readable strings.
- * @param {ReadonlyArray<{ x: number, fe?: number }>} cuts
+ * side, as readable strings. A cut that DROPS columns shows [x, x + fe) from the left and
+ * [x + drop - fe, x + drop) from the right (the plate's drop, 2026-11-09), so both must be in
+ * one run; the plate's FIXED fill alone joins the painting in the measured SHADED_GAP instead.
+ * @param {ReadonlyArray<{ x: number, fe?: number, drop?: number, fixed?: number }>} cuts
  */
 function cutViolations(cuts) {
   return cuts
-    .filter(({ x, fe = FE }) => !WOOD_RUNS.some((run) => run.x0 <= x - fe && x + fe <= run.x1))
+    .filter(({ x, fe = FE, drop = 0, fixed = 0 }) => ![...WOOD_RUNS, ...(fixed ? [SHADED_GAP] : [])]
+      .some((run) => run.x0 <= (drop ? x : x - fe) && (drop ? x + drop : x + fe) <= run.x1))
     .map(({ x, fe = FE }) => `cut ${x} has no ${fe}-column margin of plain wood on both sides`);
 }
+
+/** The joins a full layout carries: every cut once the slots open, the plate's two below. */
+const fullCuts = (layout) => (layout.segments.length === CUTS.length + 1 ? CUTS : CUTS.filter((c) => c.drop || c.fixed));
 
 /** The six sections' CSS widths, binding 1 to binding 7, in a layout. */
 const sectionWidths = ({ mapX }) => BINDINGS.slice(0, 6).map((b, i) => mapX(BINDINGS[i + 1].x0) - mapX(b.x1));
@@ -77,7 +87,7 @@ function layoutFailures(layout) {
   const { s, width, segments, fillers } = layout;
   const tag = `${layout.mode} ${width}`;
   // Each join's crossfade width, strip px: its cut's own `fe` on the full arrow, FE at the compact join.
-  const fes = layout.mode === 'compact' ? [FE] : CUTS.map((c) => c.fe);
+  const fes = layout.mode === 'compact' ? [FE] : fullCuts(layout).map((c) => c.fe);
   const last = segments[segments.length - 1];
   if (Math.abs(last.coreX + last.coreW - width) > 0.01) out.push(`${tag}: ends at ${last.coreX + last.coreW}`);
   if (Math.abs(segments[0].coreX) > EPS) out.push(`${tag}: starts at ${segments[0].coreX}`);
@@ -133,11 +143,13 @@ describe('(b) the measured tables agree with each other', () => {
     ]);
   });
 
-  it('the cuts are ordered, two per painted word beside its bindings, two on Compendium at fe 5, the plate\'s cut last', () => {
+  it('the cuts are ordered, two per painted word beside its bindings, two on Compendium at fe 5, the plate\'s two joins last', () => {
     const xs = CUTS.map((c) => c.x);
     expect([...xs].sort((a, b) => a - b)).toEqual(xs);
     expect(PARTS).toBe(7);
-    expect(CUTS.filter((c) => c.fe !== FE)).toEqual([{ x: 1032, fe: COMPENDIUM_FE }, { x: 1181, fe: COMPENDIUM_FE }]);
+    expect(CUTS.filter((c) => c.fe !== FE)).toEqual([
+      { x: 1032, fe: COMPENDIUM_FE }, { x: 1181, fe: COMPENDIUM_FE }, { x: 1881, fe: PLATE_FILL_FE, fixed: PLATE_SHIFT },
+    ]);
     const perWord = Object.fromEntries(Object.entries(NAV_HIT).map(([id, hit]) => [
       id, xs.filter((x) => x >= hit.x0 && x < hit.x1),
     ]));
@@ -157,8 +169,16 @@ describe('(b) the measured tables agree with each other', () => {
       // One cut before the lettering and one after, so a word's two slots sit either side of it.
       expect(cuts.map((x) => x < word.x0), id).toEqual([true, false]);
     }
-    expect(CUTS[CUTS.length - 1]).toEqual({ x: 1596, fe: FE });
-    expect(CUTS[CUTS.length - 1].x).toBeLessThan(PLATE.x0);
+    // The plate's one cut was { x: 1596, fe: FE } until the plate was centred by composition
+    // (2026-11-09): now a drop before it, clear of its tip by its crossfade, and a fixed fill in
+    // the shaded gap after it, clear of its right tip's outline (1876) and of the arrowhead's
+    // binding's shadow (from 1885).
+    expect(CUTS.slice(-2)).toEqual([{ x: 1586, fe: FE, drop: PLATE_SHIFT }, { x: 1881, fe: PLATE_FILL_FE, fixed: PLATE_SHIFT }]);
+    expect(1586 + PLATE_SHIFT + FE).toBeLessThanOrEqual(PLATE.x0);
+    expect([1881 - PLATE_FILL_FE, 1881 + PLATE_FILL_FE]).toEqual([SHADED_GAP.x0, SHADED_GAP.x1]);
+    expect(SHADED_GAP.x0).toBe(PLATE.x1);
+    expect(SHADED_GAP.x1).toBeLessThan(BINDINGS[7].x0);
+    expect(CUTS.filter((c) => c.drop || c.fixed).every((c) => !Object.values(NAV_HIT).some((h) => c.x > h.x0 && c.x < h.x1))).toBe(true);
   });
 
   it("Compendium's two gaps are narrower than an FE pair but hold a COMPENDIUM_FE pair, one cut in each", () => {
@@ -213,14 +233,41 @@ describe('(b) the measured tables agree with each other', () => {
   });
 });
 
+describe('(b2) the blank plate is centred in its band on the page', () => {
+  const offCentre = (cw) => {
+    const { mapX } = layoutArrow({ clientWidth: cw, full: true });
+    const band = (mapX(BINDINGS[6].x1) + mapX(BINDINGS[7].x0)) / 2;
+    const plate = (mapX(PLATE.x0) + mapX(PLATE.x1)) / 2;
+    return plate - band;
+  };
+
+  it('within one CSS px at the screenshot widths, and at every full width from 1024 to 3840', () => {
+    // Red at the painting as first composed (d46ce9503): 1024 +10.8, 1440 +24.94, 1920 +59.23,
+    // 3840 +196.37 CSS px toward the head. With the drop and the fixed fill but the plate's whole
+    // part at the drop (865fdcd26): 1440 +11.74, 1920 +46.03, 2560 +91.74, 3840 +183.17.
+    const named = [1024, 1279, 1280, 1440, 1920, 2560, 3840].map((cw) => [cw, Number(offCentre(cw).toFixed(2))]);
+    expect(named.filter(([, d]) => Math.abs(d) > 1)).toEqual([]);
+    const off = [];
+    for (let cw = FULL_MIN_VIEWPORT; cw <= 3840; cw += 1) if (Math.abs(offCentre(cw)) > 1) off.push(cw);
+    expect(off).toEqual([]);
+  });
+
+  it('CONTROL: the same measure convicts the plate where the painting set it', () => {
+    // Read straight off the strip, no re-composition: 22.5 columns toward the head.
+    expect((PLATE.x0 + PLATE.x1) / 2 - (BINDINGS[6].x1 + BINDINGS[7].x0) / 2).toBe(22.5);
+  });
+});
+
 describe('(c) every width from 320 to 3840 px, both compositions', () => {
   it('the full arrow tiles exactly at every width', () => {
     const failures = [];
     for (let cw = 320; cw <= 3840; cw += 1) {
       const layout = layoutArrow({ clientWidth: cw, full: true });
       failures.push(...layoutFailures(layout));
-      const slotted = layout.segments.length > 1;
+      // Below S_MAX only the plate's two joins open (its drop and its fixed fill, 2026-11-09).
+      const slotted = layout.segments.length > 3;
       if (slotted !== cw >= UNCUT_BELOW) failures.push(`full ${cw}: slotted=${slotted}`);
+      if (!slotted && layout.segments.length !== 3) failures.push(`full ${cw}: ${layout.segments.length} uncut segments`);
       if (slotted && layout.segments.length !== CUTS.length + 1) failures.push(`full ${cw}: ${layout.segments.length} segments`);
       if (layout.s > S_MAX + EPS) failures.push(`full ${cw}: s ${layout.s} past S_MAX`);
     }
@@ -255,15 +302,24 @@ describe('(c) every width from 320 to 3840 px, both compositions', () => {
     expect(layoutFailures(broken)).toEqual(['full 1920: filler 6 does not span its slot plus both crossfades']);
   });
 
-  it('the mode follows the full flag, and the uncut arrow is one segment with no fade', () => {
+  it('the mode follows the full flag, and the uncut arrow is the painting but for the plate\'s two joins', () => {
     expect(layoutArrow({ clientWidth: 1280, full: true }).mode).toBe('full');
     expect(layoutArrow({ clientWidth: 1280, full: false }).mode).toBe('compact');
+    // One segment with no fade until the plate was centred by composition (2026-11-09). Now the
+    // uncut arrow is the painting up to the plate's drop at 1586, the plate's band from 1608 to
+    // its fixed fill at 1881, and the rest: every column outside [1586, 1608) still shows, at
+    // its painted position left of the drop and PLATE_SHIFT columns left of it up to the fill.
     const uncut = layoutArrow({ clientWidth: 1279, full: true });
-    expect(uncut.segments).toHaveLength(1);
-    const [only] = uncut.segments;
-    expect([only.x, only.from, only.to, only.fadeL, only.fadeR, only.coreX]).toEqual([0, 0, STRIP_W, 0, 0, 0]);
-    expect(only.w).toBeCloseTo(1279, 9);
-    expect(uncut.fillers).toEqual([]);
+    const s = 1279 / STRIP_W;
+    expect(uncut.segments.map((g) => [g.from, g.to])).toEqual([[0, 1596], [1598, 1885], [1877, STRIP_W]]);
+    expect(uncut.segments[0].x).toBe(0);
+    expect(uncut.segments[0].fadeL).toBe(0);
+    expect(uncut.segments[2].fadeR).toBe(0);
+    expect(uncut.fillers.map((f) => f.slot)).toEqual([0, PLATE_SHIFT * s]);
+    expect(uncut.mapX(1000)).toBeCloseTo(1000 * s, 9);
+    expect(uncut.mapX(1700)).toBeCloseTo((1700 - PLATE_SHIFT) * s, 9);
+    expect(uncut.mapX(1950)).toBeCloseTo(1950 * s, 9);
+    expect(uncut.segments[2].coreX + uncut.segments[2].coreW).toBeCloseTo(1279, 9);
   });
 });
 
@@ -296,9 +352,12 @@ describe('(c2) the six sections are equal between their red bindings, and grow t
         expect(own[0]).toBeCloseTo(own[1], 9);
         expect(w[k]).toBeCloseTo(SECTION_W[k] * layout.s + own[0] + own[1], 9);
       });
-      // The plate's slot is one part in seven of the extra: one section's growth on average.
+      // The plate's slot is one part in seven of the extra, one section's growth on average,
+      // split in halves either side of the plate since 2026-11-09 (the fill after it also
+      // carries its fixed PLATE_SHIFT columns).
       const extra = cw - STRIP_W * layout.s;
-      expect(layout.fillers[CUTS.length - 1].slot).toBeCloseTo(extra / PARTS, 9);
+      expect(layout.fillers[CUTS.length - 2].slot).toBeCloseTo(extra / PARTS / 2, 9);
+      expect(layout.fillers[CUTS.length - 1].slot).toBeCloseTo(extra / PARTS / 2 + PLATE_SHIFT * layout.s, 9);
     }
   });
 
@@ -430,7 +489,8 @@ describe('(e) the hit rectangles', () => {
       });
       for (const id of ids) {
         const span = NAV_HIT[id];
-        const own = fillers.reduce((n, f, i) => (CUTS[i].x > span.x0 && CUTS[i].x < span.x1 ? n + f.slot : n), 0);
+        const cuts = fullCuts({ segments: fillers.concat([0]) });
+        const own = fillers.reduce((n, f, i) => (cuts[i].x > span.x0 && cuts[i].x < span.x1 ? n + f.slot : n), 0);
         const want = (span.x1 - span.x0) * s + own;
         if (Math.abs(hits.nav[id].w - want) > EPS) failures.push(`${cw}: ${id} width ${hits.nav[id].w} vs ${want}`);
         if (hits.nav[id].w < 24) failures.push(`${cw}: ${id} narrower than 24 px`);
@@ -543,8 +603,13 @@ describe('(g) the width store in a windowless environment', () => {
 describe('(h) each slot is toned to the wood beside its cut', () => {
   it('the full arrow\'s fillers carry their cut\'s tone at both ends, in cut order', () => {
     const { fillers } = layoutArrow({ clientWidth: 1920, full: true });
-    expect(fillers.map((f) => [f.toneL, f.toneR])).toEqual(CUTS.map((c) => [SLOT_TONE[c.x], SLOT_TONE[c.x]]));
+    // Each end takes the tone of the painting it joins: the plate's drop joins 1586 to 1608 (one
+    // run, one tone), every other cut joins a column to itself (2026-11-09).
+    expect(fillers.map((f) => [f.toneL, f.toneR])).toEqual(CUTS.map((c) => [SLOT_TONE[c.x], SLOT_TONE[c.x + (c.drop ?? 0)]]));
     expect(Object.values(SLOT_TONE).every((k) => k > 0.7 && k < 1.2)).toBe(true);
+    // The plate's fixed fill continues the plate's band of lit wood: the tone of the run its
+    // drop sits in, not the binding's shade it joins (2026-11-09).
+    expect(SLOT_TONE[1881]).toBe(SLOT_TONE[1586]);
   });
 
   it('the compact slot takes its left cut\'s tone at its left end and its right cut\'s at its right end', () => {
