@@ -38,7 +38,7 @@ describe('CauseWalkPanel', () => {
 
   it('shows the graceful line at a root cause', () => {
     render(<CauseWalkPanel worldState={worldState} rootId="A" seesSecrets />);
-    expect(screen.getByText(/no deeper memory/i)).toBeTruthy();
+    expect(screen.getByText(/nothing earlier is known to have caused this/i)).toBeTruthy();
   });
 
   it('does not leak a covert hop to a non-DM viewer', () => {
@@ -92,6 +92,6 @@ describe('CauseWalkPanel — 3c discourse dormancy', () => {
     render(<CauseWalkPanel worldState={ws} rootId="C" seesSecrets={false} />);
     const text = screen.getByTestId('cause-walk-prose').textContent || '';
     expect(text).not.toContain('B happened');
-    expect(text).toContain('a cause the ledger keeps hidden');
+    expect(text).toContain('a cause kept hidden');
   });
 });

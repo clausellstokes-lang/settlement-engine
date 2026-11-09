@@ -100,7 +100,7 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
       },
     };
     const { container } = render(<ChronicleScrollback campaign={momentumCampaign} nameFor={nameFor} />);
-    expect(container.textContent).toContain('The court held to the war too long; reversing course carried a real political price.');
+    expect(container.textContent).toContain('The court held to the war too long, and backing out of it now has cost its rulers dearly.');
     // anchored: the exact authored projection above proves the selected headline body rendered.
     expect(container.textContent).not.toMatch(/3\.2|0\.62|×|\b(?:commitment|cliff)\b/i);
   });

@@ -279,8 +279,9 @@ describe('the decree cause walker — every authored line declares its cause', (
     const counted = Object.values(DECREE_PROSE_BLOCKS)
       .flatMap((block) => Object.values(block)).reduce((n, pool) => n + pool.length, 0);
     // EM-E2 landed 51; EM-E6 added 21 event sentences over the catalogue's seven families
-    // and 24 deed sentences over the party vocabulary's twelve kinds.
-    expect(counted, 'the authored variant count this walker stands over').toBe(96);
+    // and 24 deed sentences over the party vocabulary's twelve kinds; STYLE-2 SW-3 added
+    // the fourth §8 vantage to each of the seven event families (vids 97–103).
+    expect(counted, 'the authored variant count this walker stands over').toBe(103);
     expect(DECREE_LINE_CAUSES, 'and the vocabulary is design §16\'s two').toEqual(['party', 'table']);
   });
 
@@ -352,7 +353,7 @@ describe('the decree cause walker — no line is free text', () => {
     expect(sentenceLiteralsOf(CATALOGUE_REL)).toEqual([]);
     // ⛔ THE CONTROL, so the scan is not simply blind. The pools file is nothing BUT
     // sentences, and the detector finds them all.
-    expect(sentenceLiteralsOf(POOLS_REL).length, 'the detector sees authored sentences').toBe(96);
+    expect(sentenceLiteralsOf(POOLS_REL).length, 'the detector sees authored sentences').toBe(103);
     // ⛔ THE PLANT, in the only form this arm can take without writing to the tree: the
     // innocent fallback, run through the same parser and the same predicate.
     const planted = [

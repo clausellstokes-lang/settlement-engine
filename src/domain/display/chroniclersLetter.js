@@ -171,10 +171,10 @@ const GREETINGS = Object.freeze([
   'To the keeper of this realm, greetings. Since last I wrote, the following came to pass.',
   'My lord, my lady, the season has turned, and with it these tidings.',
   'Word from the realm, set down faithfully as it reached me.',
-  'Herewith the record of what has stirred since you last read my hand.',
+  'Herewith what has stirred since you last read my hand.',
 ]);
 const CLOSINGS = Object.freeze([
-  'And so the ledger stands. Your faithful chronicler.',
+  'And so things stand. Your faithful chronicler.',
   'Thus the account, until the next turning. Ever your chronicler.',
   'This is the whole of it, honestly kept. Your chronicler.',
   'Here I lay down the pen until more comes to pass. Your chronicler.',
@@ -184,12 +184,12 @@ const QUIET = Object.freeze([
   'A still season: no war, no crowning, no calamity worth the ink. All held.',
   'The days ran on without event worth the setting-down. Peace, of a kind.',
 ]);
-const DEEPENED_LEAD = 'The world itself has deepened since last we spoke. New currents now run beneath it:';
+const DEEPENED_LEAD = 'Since last I wrote, the realm has more to tell; these now come into my letters:';
 
 /** C2 (bar 97, "claims completeness it cannot keep"): the honest line the letter
  *  carries when the capped feed has provably shed beats older than the read floor.
  *  Rendered only when `truncated` is true (both pinned fixtures: never). */
-const TRUNCATION_NOTE = 'Some older matters outran my pages before this letter was writ; the record here begins where my keeping does.';
+const TRUNCATION_NOTE = 'Some older matters outran my pages before this letter was writ; what follows begins where my keeping does.';
 
 /** The feed's entry cap — mirrors wizardNews.js MAX_ENTRIES (the display sidecar
  *  idiom: no engine import; the test pins the two constants against drift). */
@@ -428,7 +428,7 @@ export function composeChroniclersLetter({ wizardNews, lastReadTick = 0, simulat
 export function letterToPlainText(letter) {
   const lines = [];
   lines.push('THE CHRONICLER’S LETTER');
-  lines.push(`(the record from ${tickCalendarLabel(letter.sinceTick)} through ${tickCalendarLabel(letter.throughTick)})`);
+  lines.push(`(what passed from ${tickCalendarLabel(letter.sinceTick)} through ${tickCalendarLabel(letter.throughTick)})`);
   lines.push('');
   lines.push(letter.greeting);
   if (letter.deepened) {

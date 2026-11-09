@@ -67,7 +67,7 @@ describe('V-2 — the diff, grouping, and priority', () => {
     };
     const projected = composeChroniclersLetter({ wizardNews: momentum, lastReadTick: 0 });
     const line = projected.sections.flatMap(section => section.lines)[0];
-    expect(line.summary).toBe('The court held to the war too long; reversing course carried a real political price.');
+    expect(line.summary).toBe('The court held to the war too long, and backing out of it now has cost its rulers dearly.');
     // anchored: the exact projected line above proves the letter included this beat.
     expect(letterToPlainText(projected)).not.toMatch(/3\.2|0\.62|×|\b(?:commitment|cliff)\b/i);
   });

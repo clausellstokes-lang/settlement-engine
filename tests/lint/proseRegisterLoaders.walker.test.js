@@ -167,7 +167,7 @@ describe('the registers, in the wave\'s order — each loaded, each counted', ()
     // contributed ZERO before and which PROBE_ALL's file set nonetheless names.
     const fromWalk = rows.filter((row) => row.file.endsWith('causeWalk.js'));
     expect(fromWalk.length).toBe(3);
-    expect(fromWalk.map((row) => row.text)).toContain('The ledger holds no deeper memory of this.');
+    expect(fromWalk.map((row) => row.text)).toContain('Nothing earlier is known to have caused this.');
     // The per-file split, so the 53 can be argued with rather than taken.
     /** @type {Record<string, number>} */
     const byFile = {};

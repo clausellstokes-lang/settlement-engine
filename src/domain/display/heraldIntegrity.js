@@ -54,31 +54,31 @@ export const INTEGRITY_STATES = Object.freeze(['clean', 'worn', 'planted', 'plan
  */
 export const DISCLOSURE_LINES = Object.freeze({
   clean: Object.freeze([
-    'The record carries this as it happened.',
+    'This news arrived as it happened, unchanged on the road.',
     'No hand touched this on the road; it arrived as it left.',
     'What was said is what was so.',
   ]),
   worn: Object.freeze([
     'The tale grew in the carrying; nobody grew it on purpose.',
     'Worn in the telling: each mouth added a little, and no mouth owned it.',
-    'What left as a report arrived as a story; the road charges no one.',
+    'What left as a report arrived as a story, and no one changed it on purpose.',
     'The drift here is the ordinary kind: distance, seasons, and retelling.',
   ]),
   planted: Object.freeze([
-    'Planted by {house}, to {purpose}. The record holds the sowing.',
-    "This did not spring up; it was set. {house}'s hand, {timeband_since}, and the purpose is entered: {purpose}.",
-    'A bought tale: {npc} carried it, {house} paid for it, and what it was for is on the record, {purpose}.',
-    'The seed is signed. {house} planted this at {settlement} to {purpose}, and the ledger has held the receipt since.',
+    'Planted by {house}, to {purpose}.',
+    "This did not spring up; it was set. {house} set it going, {timeband_since}, to {purpose}.",
+    'A bought tale: {npc} carried it, {house} paid for it, and it was meant to {purpose}.',
+    'The seed is {house}\'s: it was planted at {settlement} to {purpose}.',
   ]),
   planted_worn: Object.freeze([
-    'Planted by {house} to {purpose}, and grown in the carrying into something its planter never wrote. The record charges the sowing; the rest is the road’s.',
+    'Planted by {house} to {purpose}, and grown in the carrying into something its planter never wrote. The planting was deliberate; the rest grew on the road.',
     "The seed was {house}'s; the harvest is nobody's design. What was set as a whisper walks now as a tale twice its size.",
     'Begun on purpose, finished by accident: {house} set it, {timeband_since}, and every mouth since has made it stranger.',
-    'The intent is on the record: {house}, to {purpose}. What the tale became after is wear, and wear has no author.',
+    '{house} set this going, to {purpose}. What the tale became after is something its planter never wrote.',
   ]),
   unknown: Object.freeze([
-    'The record cannot say where this began; it is old, and its first carrier is not entered.',
-    'Provenance ends here. What stands before this link was never receipted, and the paper will not invent it.',
+    'No one can say where this began; it is old, and who first carried it is not known.',
+    'The trail ends here. Where this came from before was never written down, and we will not guess.',
     'Unknown, and marked so, because a guessed culprit would be a second manipulation.',
   ]),
 });

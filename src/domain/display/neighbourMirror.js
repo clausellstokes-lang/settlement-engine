@@ -166,7 +166,7 @@ function standingSentence(counterpartName, band, staleness, sealed, seed) {
   const composed = receipt
     ? receipt.line
     : `${counterpartName} has been shown ${shown}, ${wordOf(MIRROR_STALENESS_WORDS, staleness)}.`;
-  return composed + (sealed ? ' Nothing has left our hand since.' : '');
+  return composed + (sealed ? ' We have told them nothing since.' : '');
 }
 
 /**

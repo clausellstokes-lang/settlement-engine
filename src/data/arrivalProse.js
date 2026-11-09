@@ -65,7 +65,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       (n) => `The hammering echoes through all of ${n}, and the place plainly lives by its forges.`,
       () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.',
       () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.',
-      (n) => `${n} works iron the way other places breathe: the clang of it is in every lane.`,
+      (n) => `${n} lives by its forges: the clang of iron is in every lane.`,
     ] },
   // ARMS speaks only where the settlement EXPORTS weapons or armour (no `lines`, so it is never a candidate on a
   // smithy alone): the owner's own example, "if a big part of their output is in making military weapons".
@@ -303,7 +303,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   celtic: [
     { text: () => 'A poet holds a small crowd by the well, and nobody hurries the telling along.', crisis: ['any'] },
-    { text: () => 'A household feeds strangers at its door, and makes sure everyone sees it doing so.', excludes: ['crisis: hunger'], crisis: ['any'] },
+    { text: () => 'A household feeds passing travellers at its door, and makes sure everyone sees it doing so.', excludes: ['crisis: hunger'], crisis: ['any'] },
     { text: () => 'Greetings are called across the lane, and every greeting comes with a question about family.', crisis: ['any'] },
     { text: () => 'An old judge listens to two neighbours by a gate and says nothing until both are finished.', crisis: ['any'] },
   ],
@@ -357,7 +357,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   mixed: [
     { text: () => 'You hear three languages in as many steps, and nobody seems to find it strange.', crisis: ['any'] },
-    { text: () => 'People here greet strangers with open curiosity, and ask where you have come from before your name.', excludes: ['crisis: threat', 'crisis: plague_onset', 'crisis: recently_betrayed', 'crisis: infiltrated'], crisis: ['any'] },
+    { text: () => 'People here greet newcomers with open curiosity, and ask where you have come from before your name.', excludes: ['crisis: threat', 'crisis: plague_onset', 'crisis: recently_betrayed', 'crisis: infiltrated'], crisis: ['any'] },
     { text: () => 'A cook at a doorway mixes the spices of two different homelands into one pot.', crisis: ['any'] },
     { text: () => 'Neighbours bargain in a trade tongue that belongs to no one and works for everyone.', crisis: ['any'] },
   ],
@@ -384,13 +384,13 @@ export const ARRIVAL_TENSIONS = Object.freeze({
   ],
   unsafe: [
     () => 'Doors are barred early here, and nobody lingers outside after dark.',
-    () => 'People keep their purses close and their eyes on strangers.',
+    () => 'People keep their purses close and watch anyone they do not know.',
     () => 'Every shutter has a stout bar, and every bar looks used.',
-    () => 'People walk quickly and do not stop to talk to strangers.',
+    () => 'People walk quickly and do not stop to talk to anyone they do not know.',
   ],
   poor: [
     () => 'Patched roofs and patched clothes say money is short here.',
-    () => 'People mend what they have rather than buy anything new.',
+    () => 'People mend what they have, and nobody seems to buy anything new.',
     () => 'Children in outgrown clothes run errands for a copper.',
     () => 'The goods on offer are mostly second-hand, and even those go slowly.',
   ],
@@ -459,7 +459,7 @@ export const ARRIVAL_MEMORIES = Object.freeze({
   tyranny: [
     () => 'People still lower their voices near the old seat of power, though the one they feared is gone.',
     () => 'A defaced statue stands on its plinth, its face chiselled smooth.',
-    () => 'Older folk stop talking when a stranger asks about the bad years, and change the subject.',
+    () => 'Older folk stop talking when you ask about the bad years, and change the subject.',
   ],
   market_crash: [
     () => 'Merchants here count their coin twice and trust a handshake less, a habit from the bad years.',

@@ -112,7 +112,7 @@ export const BODY_POOLS = Object.freeze({
     'It is being felt {scope} now.',
     'Its effects are being felt {scope} now.',
     'It makes itself felt {scope} now.',
-    'The mark of it is on things {scope} now.',
+    'The effects of it show {scope} now.',
   ]),
   resolved: Object.freeze([
     'It has, for the present, run its course.',
@@ -225,7 +225,7 @@ const MOMENTUM_CLIMB_DOWN_REASONS = Object.freeze([
 export function newsReaderSummary(entry) {
   if (!entry) return '';
   if (entry.kind === 'momentum_climb_down') {
-    return 'The court held to the war too long; reversing course carried a real political price.';
+    return 'The court held to the war too long, and backing out of it now has cost its rulers dearly.';
   }
   return String(entry.summary || '');
 }

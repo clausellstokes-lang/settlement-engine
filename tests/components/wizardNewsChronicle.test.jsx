@@ -113,7 +113,7 @@ describe('WizardNewsPanel chronicle', () => {
     // anchored: both fixed climb-down reason phrases above prove the card projection is live.
     expect(prose).not.toMatch(/3\.2|0\.62|38%|\bstock\b/i);
     const body = container.querySelector('p[title]');
-    expect(body?.getAttribute('title')).toBe('The court held to the war too long; reversing course carried a real political price.');
+    expect(body?.getAttribute('title')).toBe('The court held to the war too long, and backing out of it now has cost its rulers dearly.');
   });
 
   it('grounds the chronicle on the latest entry tick, not the skewed feed clock', async () => {
