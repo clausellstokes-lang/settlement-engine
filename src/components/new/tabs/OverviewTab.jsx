@@ -366,12 +366,14 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             {crisisDoor&&<Button variant="ghost" size="sm" onClick={()=>onNavigateTab('crisis')} style={{marginLeft:'auto',color:swatch['#C04040'],fontWeight:800}}>{CRISIS_POINTER}</Button>}
           </div>
         </div>
-        {!crisisDoor&&stresses.map((v,i)=>(
+        {/* "Hook:" prints only over a hook (STYLE-RULINGS-2 B10(a)): the public projection strips
+            the entry's crisisHook (a hook is DM content), and the label stood over an empty line. */}
+        {!crisisDoor&&stresses.map((v,i)=>{ const hook=crisisHookFor(r,v); return (
           <div key={i} style={{border:`2px solid ${v.colour}`,padding:'10px 14px',...FLUSH}}>
-            <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
-            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{crisisHookFor(r,v)}</p>
+            <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:hook?'0 0 4px':0}}>{v.summary}</p>
+            {hook&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{hook}</p>}
           </div>
-        ))}
+        );})}
         {(conditionCardLine||pressureLine)&&<div style={{padding:'0 14px 8px',...FLUSH}}>
           {conditionCardLine&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{conditionCardLine}</p>}
           {pressureLine&&<p data-testid="overview-crisis-pressure" style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0'}}>{pressureLine}</p>}
