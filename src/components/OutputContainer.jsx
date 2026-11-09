@@ -463,7 +463,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // The deity embed is read ONCE here (the observed-shape instrument banks this file's read of
   // `config.primaryDeitySnapshot`); the hook and the faith tab's presence below take the value.
   const deityEmbed = rawSettlement?.config?.primaryDeitySnapshot;
-  const teasers = useLaunchTones({ settlement: rawSettlement, deityEmbed, saveId, viewerIsPremium, playerView, publicDossier });
+  const teasers = useLaunchTones({ settlement: rawSettlement, deityEmbed, saveId, playerView, publicDossier });
   const launchTone = (teaser) => (teaser ? { tone: LAUNCH_TONE } : {});
   // NPC authoring is an explicit owner capability supplied by SettlementDetail,
   // not an inference from the process-wide editMode flag. Intersect it again
@@ -757,7 +757,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
       case 'dm_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="dm" />;
       case 'ai_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="ai" />;
-      case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} saveId={saveId} viewerIsPremium={viewerIsPremium} playerView={playerView} publicDossier={publicDossier} />;
+      case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       default:           return <div />;
     }
   };

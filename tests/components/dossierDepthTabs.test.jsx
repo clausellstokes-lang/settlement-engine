@@ -276,16 +276,22 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(wars.textContent).toMatch(/attacking/i);
   });
 
-  it('the DM belief band renders for the premium owner and NEVER for anon / playerView', () => {
-    asWarOwner();
-    const first = render(<WarTab settlement={homeTown()} saveId="home" />);
-    expect(screen.getByTestId('war-beliefs').textContent).toMatch(/Foehold: believed slight, in the field/);
-    first.unmount();
+  // RE-KEYED BY CAUSE (lane TIER-PARITY-FIX, 2026-11-09, the owner's tier law): the DM truth
+  // keys on the VIEW and the DATA, never the tier. The arm that read "NEVER for anon" pinned a
+  // tier; its cause is the audience, so it is re-keyed to the public dossier, and the free owner
+  // of the same world state now reads the band as the premium owner does.
+  it('the DM belief band renders for the owner of the world state, any tier, and NEVER on the public dossier or the player view', () => {
+    for (const tier of ['premium', 'free']) {
+      asWarOwner(tier);
+      const owner = render(<WarTab settlement={homeTown()} saveId="home" />);
+      expect(screen.getByTestId('war-beliefs').textContent).toMatch(/Foehold: believed slight, in the field/);
+      owner.unmount();
+    }
 
-    // Fail-closed: an anon viewer keeps the believed unit picture (the player
+    // Fail-closed: the public reader keeps the believed unit picture (the player
     // half of §805) but no truth disclosure and no belief band.
-    useStore.__set({ auth: { tier: 'anon' }, campaigns: [warCampaign()], savedSettlements: WAR_SAVES });
-    const second = render(<WarTab settlement={homeTown()} saveId="home" />);
+    asWarOwner();
+    const second = render(<WarTab settlement={homeTown()} saveId="home" publicDossier />);
     expect(screen.getByTestId('war-units')).toBeTruthy();
     expect(screen.queryByTestId('war-beliefs')).toBeNull();
     expect(screen.queryByTestId('war-unit-truth')).toBeNull();

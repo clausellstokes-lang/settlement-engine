@@ -28,7 +28,7 @@ export const relationshipTypeStyle=(t)=>({
   family:{color:'#6a3a1a',bg:'#faf4ee',border:'#d8b898'},
 }[t]||{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'});
 
-export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
+export function RelationshipsTab({ settlement:r, saveId=null, playerView=false, publicDossier=false }) {
   const mobile = useIsMobile();
   const [typeFilter,setTypeFilter]=useState('all');
   const [fromFilter,setFromFilter]=useState('all');
@@ -36,12 +36,11 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
   // What our OWN durable record says each counterpart has been shown of us. The
   // one gate stands a layer down at the collector, so nothing here reads it:
   // dark, the read-model answers an empty list by identity and no Section
-  // renders at all. The DM seam is composed HERE from props the container
-  // already had (the landed RumorsTab convention), so no second premium
-  // comparison is minted anywhere on this surface.
+  // renders at all. The DM seam is composed HERE from the render path alone
+  // (the landed RumorsTab convention): the view and the data, never the tier.
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
-  const includeGroundTruth = viewerIsPremium && !playerView && !publicDossier;
+  const includeGroundTruth = !playerView && !publicDossier;
   // `sid` is derived OUTSIDE the memo deliberately: it keeps `r` out of the memo
   // body entirely, so the inferred dependency is this one string rather than the
   // whole settlement object that re-allocates on unrelated state changes.

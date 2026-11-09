@@ -175,14 +175,12 @@ const EXEMPTIONS = {
   // groundTruth block is fail-closed by its own constitution.
   'src/components/map/NpcTrailSection.jsx': 'content-visibility',
   'src/components/map/useWorldMapCampaignModel.js': 'campaign-or-import-entitlement',
-  'src/components/new/tabs/RumorsTab.jsx': 'content-visibility',
-  // §805 split: the WarFaithTab row became two. WarTab spells the RumorsTab
-  // includeGroundTruth line verbatim (may this viewer see GROUND TRUTH — unit
-  // positions' true picture + the belief band); FaithTab mirrors FaithSection's
-  // mode resolution to decide the honest-absence note. Both are the same
-  // content-visibility question the old combined tab carried.
+  // ⬇ TIER-PARITY-FIX V1 (2026-11-09, the owner's tier law) STRUCK the RumorsTab and WarTab
+  // rows: their DM truth now keys on the view and the data (`!playerView && !publicDossier`),
+  // the tier read DELETED, so neither file spells a premium comparison. The census shrinks.
+  // §805 split: FaithTab mirrors FaithSection's mode resolution to decide the honest-absence
+  // note — the content-visibility question the old combined tab carried.
   'src/components/new/tabs/FaithTab.jsx': 'content-visibility',
-  'src/components/new/tabs/WarTab.jsx': 'content-visibility',
   // ⬇ ROW O-16 STRUCK THIS ROW, AND THE STRIKE IS THE WIN, NOT A WAIVER.
   // src/components/pricing/FounderTile.jsx used to spell `tier !== 'premium'`
   // itself, in a copy of the same three-condition gate that

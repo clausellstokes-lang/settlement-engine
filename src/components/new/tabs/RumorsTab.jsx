@@ -130,11 +130,10 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
 
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
-  const tier = useStore(s => s.auth?.tier);
-  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
-  // DM truth is a premium/DM-owner reveal (the includeGroundTruth convention):
-  // never on the player view, never on a public/shared dossier.
-  const includeGroundTruth = (tier === 'premium' || elevated) && !playerView && !publicDossier;
+  // DM truth is the owner's reveal of the owner's own world state (the includeGroundTruth
+  // convention): keyed on the VIEW and the DATA, never the tier — never on the player view,
+  // never on a public/shared dossier (the owner's tier law, 2026-11-09).
+  const includeGroundTruth = !playerView && !publicDossier;
 
   const nameFor = useMemo(() => {
     const byId = new Map();
