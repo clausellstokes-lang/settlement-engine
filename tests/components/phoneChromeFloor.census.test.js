@@ -265,6 +265,11 @@ const CENSUS = (() => {
  * ⭐ BUILD-T3 (dossier consolidation, 2026-10-30): chair-ruled CUTS in the World group remove floored lines with their blocks, never a site that stopped being floored. U2+U3 (NPCs footer, per-group tally; Relationships intros, slider sentence, crossConns, Known Contacts, conflict desc/hooks): /create 750 -> 738, /settlements 991 -> 979, /gallery 794 -> 782. U4 (History count span, Recent Events, banner, legend mark, inline hooks): 738 -> 727, 979 -> 968, 782 -> 771. U5 (Rumors second sentence, Daily Life marketing line, Traditions footer and placeholders): 727 -> 725, 968 -> 966, 771 -> 769. U6 Faith (the patron-seat block and the niche block merged into FaithSection's patron line and one creed list): 725 -> 719, 966 -> 960, 769 -> 763. U6c War ROSE by one: the army's condition line moved into the units-abroad entry as its own floored row (W6): 719 -> 720, 960 -> 961, 763 -> 764. Glance rows (DS-REL-1 network line render removed): 720 -> 719, 961 -> 960, 764 -> 763.
  */
 const ROUTE_BASELINE = Object.freeze({
+  // ⭐ RE-MEASURED 2026-11-09 (SW-B7b fourth seat; the cause is f913f8b28, the faith desk's public branch): the
+  // public prose composer (reached from the save path's lazy edge in the shell) imports the faith desk's one
+  // caller, `tabs/WarFaithDesk.jsx`, whose two floored sites (`proseFontSize`, `chromeFontSize`) now count on
+  // every route whose closure holds the shell: floored +2 on (shell) and 18 routes; `bare` and `files` hold. The
+  // dossier routes already held the file. Measured at f913f8b28 against its parent ad98f7f02 in a clean worktree.
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
   // owns these three surfaces in its own branch. Every site counted here is in
   // src/components/generate, src/components/home, src/components/pricing or the
@@ -330,7 +335,7 @@ const ROUTE_BASELINE = Object.freeze({
   // {guild}, through {handler}", npcComponents.jsx, 4e55421ea) printed 12px PROSE at phone width (dossierPhoneFloorAllViews' floors arm);
   // floored through `proseFontSize` — `floored` +1 on the three rows: 620 -> 621, 866 -> 867, 664 -> 665; `bare` unmoved.
   '/create':                { roots: 1, files: 162, floored: 621, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
-  '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
+  '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
   // ⭐ RE-MEASURED AT THE TRAIN TIP (2026-09-23, the chair; U25): /realm and /map floored 484 -> 485 —
@@ -344,8 +349,8 @@ const ROUTE_BASELINE = Object.freeze({
   // one edge brings the toolbar's ALREADY-FLOORED sites (8) and its two written rulings into
   // the map's closure. `bare` holds at 0 on both rows — nothing sub-floor shipped, and not one
   // fontSize was written, moved or ruled by this unit.
-  '/realm':                 { roots: 2, files: 153, floored: 493, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
-  '/map':                   { roots: 2, files: 153, floored: 493, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/realm':                 { roots: 2, files: 153, floored: 495, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/map':                   { roots: 2, files: 153, floored: 495, ruled: 3, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
 
   // floored 991 -> 992 (review wave 2 car 3, 2026-09-19): the Library's sample fork used to
   // answer EVERY null with the purchase modal, so it now renders the estate's refusal notice
@@ -371,7 +376,7 @@ const ROUTE_BASELINE = Object.freeze({
   // and unreported, and now they are on `proseFontSize` and still uncounted. That half of
   // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
   // PROSE-floor arm over a named pricing roster for exactly this gap.
-  '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
+  '/pricing':               { roots: 1, files: 14, floored: 19, ruled: 3, bare: 0 },
   // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card. 861 -> 859 (2026-11-07): see /create.
   // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card.
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
@@ -380,41 +385,41 @@ const ROUTE_BASELINE = Object.freeze({
   '/settlements':           { roots: 1, files: 206, floored: 867, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
-  '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
-  '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
-  '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
-  '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
+  '/compendium':            { roots: 1, files: 50, floored: 208, ruled: 3, bare: 0 },
+  '/about/what-this-is':    { roots: 1, files: 16, floored: 7, ruled: 1, bare: 0 },
+  '/about/guide':           { roots: 1, files: 12, floored: 13, ruled: 3, bare: 0 },
+  '/account':               { roots: 1, files: 46, floored: 107, ruled: 5, bare: 0 },
   // floored 86 -> 87 (GREEN-BASE, 2026-11-08, re-measured; red at the base 262e8b255 and on every wave lane): ENGINE-5's
   // engine-cost dashboard line (4b2310b44, AdminAnalyticsPanel.jsx, one floored site, 0 bare).
-  '/admin':                 { roots: 2, files: 29, floored: 87, ruled: 1, bare: 0 },
+  '/admin':                 { roots: 2, files: 29, floored: 89, ruled: 1, bare: 0 },
   // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card. 659 -> 657 (2026-11-07): see /create.
   // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card.
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
   '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
-  '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
+  '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
   // files 4 -> 7, floored 5 -> 6 (GREEN-BASE, 2026-11-08, re-measured; red at the base 262e8b255 and on every wave lane):
   // ENGINE-5 unit 2 (fc8a82704) — WorldPage says a build without an engine, importing the launch pill
   // (primitives/AvailableAtLaunchPill.jsx -> Pill.jsx, one floored site) and the export gate; 0 bare.
-  '/world':                 { roots: 1, files: 7, floored: 6, ruled: 1, bare: 0 },
+  '/world':                 { roots: 1, files: 7, floored: 8, ruled: 1, bare: 0 },
   '/terms':                 { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/privacy':               { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/refunds':               { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/covenant':              { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
   '/bounty':                { roots: 1, files: 5, floored: 2, ruled: 0, bare: 0 },
-  '/screen':                { roots: 1, files: 14, floored: 31, ruled: 3, bare: 0 },
+  '/screen':                { roots: 1, files: 14, floored: 33, ruled: 3, bare: 0 },
     // ⭐ floored 4 -> 5 on 2026-09-20 (REVIEW-P F10): the sign-in surface now raises the
     // guarded route's reason through primitives/RefusalNotice.jsx, and ClerkNote's rubric
     // is a chrome line that takes the phone floor. A NEW floored line, not a cured bare one.
-  '/signin':                { roots: 1, files: 11, floored: 5, ruled: 1, bare: 0 },
-  '/register':              { roots: 1, files: 11, floored: 4, ruled: 1, bare: 0 },
-  '/reset-password':        { roots: 1, files: 11, floored: 4, ruled: 1, bare: 0 },
-  '/set-new-password':      { roots: 1, files: 7, floored: 3, ruled: 1, bare: 0 },
-  '/verify-email':          { roots: 1, files: 7, floored: 3, ruled: 1, bare: 0 },
-  '/confirm-email':         { roots: 1, files: 7, floored: 3, ruled: 1, bare: 0 },
+  '/signin':                { roots: 1, files: 11, floored: 7, ruled: 1, bare: 0 },
+  '/register':              { roots: 1, files: 11, floored: 6, ruled: 1, bare: 0 },
+  '/reset-password':        { roots: 1, files: 11, floored: 6, ruled: 1, bare: 0 },
+  '/set-new-password':      { roots: 1, files: 7, floored: 5, ruled: 1, bare: 0 },
+  '/verify-email':          { roots: 1, files: 7, floored: 5, ruled: 1, bare: 0 },
+  '/confirm-email':         { roots: 1, files: 7, floored: 5, ruled: 1, bare: 0 },
   '/checkout/success':      { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
 
   // The retired redirect surfaces. Their ROUTES entries exist so old links still
@@ -466,7 +471,7 @@ const ROUTE_BASELINE = Object.freeze({
   // (shell) floored 128 -> 135 (W2-SURVEYOR, the chair's ruling: the Interview keeps a way in
   // BY PHRASE, so the door mounts InterviewPanel again and its SEVEN floored sites return; the
   // U1 note's "eight" counted the shell's retired route hint with them). `bare` holds.
-  '(shell)':                { roots: 1, files: 61, floored: 135, ruled: 3, bare: 0 },
+  '(shell)':                { roots: 1, files: 61, floored: 137, ruled: 3, bare: 0 },
 });
 
 /**
