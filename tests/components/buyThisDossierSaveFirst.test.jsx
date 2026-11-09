@@ -110,7 +110,9 @@ describe('BuyThisDossier "save first" rung', () => {
     );
 
     // Anonymous path shows the ladder-opening "Buy" button, never the save rung.
-    const buy = screen.getByRole('button', { name: /buy this dossier for/i });
+    // The label is the bare "Buy this dossier" (the owner, 2026-11-09); the price rides the title.
+    const buy = screen.getByRole('button', { name: /^buy this dossier$/i });
+    expect(buy.getAttribute('title')).toMatch(/\$2\.99/);
     fireEvent.click(buy);
     const createAccount = await screen.findByRole('button', { name: /ladder-create-account/i });
     fireEvent.click(createAccount);
