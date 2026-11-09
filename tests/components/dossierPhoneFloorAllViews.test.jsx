@@ -592,6 +592,8 @@ const desktopShape = (perView) => Object.fromEntries(
 // rated `strategicValue` line left, DS-ECO-11's draw stands in its place). No token moved.
 // ── RE-MEASURED 2026-11-09 (SW-B7b, the general desk's public branch lit, the same stamped walk): Overview 11/10 -> 12/11,
 // Economics 46 -> 47, Outlook 2 -> 3, History 13 -> 15. No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the stressors desk's public branch lit, `stressors:overview`): Overview
+// 12/11 -> 13/12 (the crisis card's condition line). No token moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -601,7 +603,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // (8dff691f3: World/NPCs 23 -> 220, World/Relationships 61 -> 178, Summary/Plot Hooks 37 -> 88 with the car's one hook per face)
   // and the wave's lines (Systems/Power 22 -> 30, Services 109 -> 104, Resources 2 -> 1, Outlook 1 -> 2; World/Daily Life 1 -> 0,
   // WAVE-RULINGS #37). Per-view attribution to single lanes is PLAUSIBLE (not bisected per view). No desktop FS token moved.
-  "Summary/Overview":    { measured: 12, sub14: 11 },
+  "Summary/Overview":    { measured: 13, sub14: 12 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
   "Summary/Foundations": { measured: 1, sub14: 1 },
   // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
@@ -714,6 +716,8 @@ const DESKTOP_BASELINE = Object.freeze({
 // the food-security line took the tab's prose floor (proseFontSize), so sub12 stays zero and the floors arm is green.
 // ── RE-MEASURED 2026-11-09 (SW-B7b, the general desk's public branch lit): Overview prose 10 -> 11, Economics 38 -> 39
 // (DS-GEN-18's craft line), Outlook 2 -> 3, History 13 -> 15; chrome and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the stressors desk's public branch lit): Overview prose 11 -> 12 (the
+// crisis card's condition line); chrome and both sub-floor counts hold.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -722,7 +726,7 @@ const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-WAVE's GREEN-BASE point (2026-11-08, GREEN-BASE §4.4), the same walk at 375px: the people car's
   // rows (8dff691f3) and GREEN-BASE's 27b858fd9 (the car's rows on the PROSE floor) with the wave's lines; World/Relationships
   // chrome 3 -> 39 (the car's tie cards' chrome rows, all >= 12px). sub12 stays 0 in every view; the floors arm reads 0 violations.
-  "Summary/Overview":    { prose: 11, chrome: 1, sub14: 0, sub12: 0 },
+  "Summary/Overview":    { prose: 12, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/Foundations": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.

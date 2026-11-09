@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { crisisHookFor } from '../../../domain/crisis/crisisHooks.js';
-import { stressorsStateProse } from '../../../domain/display/stateProse/stressorsStateProse.js';
+// THE STRESSORS DESK IS REACHED THROUGH ITS ONE CALLER (ARM 2), shared with the public prose
+// composer (SW-B7b): the reader owns the public branch and the conditions read.
+import { stressorsDeskRead } from '../stressorsDeskRead.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
 // owns the §885.3 public gate and the desk's own primary-stress read.
@@ -8,8 +10,6 @@ import { generalDeskLines } from '../generalDeskRead.js';
 import { overviewStressesOf } from '../deskHostArgs.js';
 import { populationTrendBand } from '../../../domain/display/trendLens.js'; // DS-POP-3 · the annex's own named reader
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
-import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
 // normalizer costs no additional bytes. Its sibling `stressorDynamics.js` is NOT — that one
 // drags 29 modules / 602 KB, which is why the synergy and counterforce lenses stay dark.
@@ -190,36 +190,20 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const ra = r.resourceAnalysis || {};
   const scopeLine = cultureScopeLine(r);
   const governs = governsLine(r);
-  // THE STRESSOR DESK, read ONCE per render and routed by the mount registry. THE PUBLIC
-  // GATE (§885.3): a public gallery dossier is a PAID surface and the `overview` tab is not
-  // filtered off one, so the desk is NOT DRAWN there and every rung is null ⇒ drawnAtMount
-  // answers null at both mounts. The DATUM is untouched either way — the banner's label,
-  // summary and hook never read the desk. The audience follows kernel law 2's fail-closed
-  // default: an unstated audience reads as the player's, so it is stated.
-  const deskAudience = playerView ? 'player' : 'dm';
-  // The settlement's own noun, resolved once for both of this tab's desk reads: the corpus
-  // writes 'the town' about a settlement of any size, and the desk speaks it (§934.22).
-  const deskTierNoun = tierNounFor(r?.tier);
-  const deskSeed = String(r?._seed ?? r?.id ?? '');
-  const stressorProse = publicDossier
-    ? Object.freeze({
-      crisisArity: null, crisisFraming: null, conditionSeverity: null,
-      conditionDirection: null, conditionArchetype: null, conditionProvenance: null,
-      conditionDuration: null, worldStressorLifecycle: null, worldStressorOrigin: null,
-    })
-    : stressorsStateProse(
-      r,
-      {
-        banners: stresses,
-        conditions: deriveAllActiveConditions(r),
-        // DS-STR-2. The CALLER selects — a world stressor is keyed to the settlement by
-        // `affectedSettlementIds`, which is selection rather than classification — and
-        // normalizes through the kernel's own `normalizeStressor` so the desk sees the
-        // shape the simulation writes. Dark at birth: no generator writes worldState.
-        worldStressor: worldStressorFor(worldState, r?.id),
-      },
-      { seed: deskSeed, audience: deskAudience, tierNoun: deskTierNoun },
-    );
+  // THE STRESSOR DESK, read ONCE per render through its one caller and routed by the mount
+  // registry. THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the rungs
+  // the owner's player view drew here, shipped at the owner's save (`stressors:overview`); an
+  // unstamped record is the SILENT desk. The DATUM is untouched either way — the banner's
+  // label and summary never read the desk, and print on the owner's player view too.
+  const stressorProse = stressorsDeskRead(r, {
+    publicDossier, playerView, publicSite: 'stressors:overview', stresses, tier: r?.tier,
+    // DS-STR-2. The CALLER selects — a world stressor is keyed to the settlement by
+    // `affectedSettlementIds`, which is selection rather than classification — and
+    // normalizes through the kernel's own `normalizeStressor` so the desk sees the
+    // shape the simulation writes. Dark at birth: no generator writes worldState.
+    // Campaign-only, so the shared page never prints it (owner-only, the chair's ruling).
+    worldStressor: worldStressorFor(worldState, r?.id),
+  });
   // ⛔ THE DESK'S `crisisFraming` RUNG IS NOT DRAWN HERE, and it must never be. It is the
   // annex's "ARITY — no banner" line ("There is no crisis on the books…"), which speaks only
   // when `stresses` is EMPTY, and this list renders only inside the ACTIVE CRISIS block below,

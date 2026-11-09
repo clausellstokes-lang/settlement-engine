@@ -27,6 +27,7 @@ import { PUBLIC_PROSE_VERSION, aliasRepeatedRungs, shippedProseOf } from '../../
 import { economyDeskRead } from './economyDeskRead.js';
 import { economicsDeskArgs, impairedInstitutionOf, overviewStressesOf } from './deskHostArgs.js';
 import { generalDeskLines } from './generalDeskRead.js';
+import { stressorsDeskRead } from './stressorsDeskRead.js';
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
 import { isPhantomRecord } from '../../domain/edit/phantoms.js';
@@ -58,6 +59,11 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   ['general:history', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).history],
   ['general:viability', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).viability],
   ['general:economics', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).economics],
+  // THE STRESSORS DESK (stressorsDeskRead.js is its one caller): the Overview's crisis and
+  // condition positions. The world stressor is campaign-only and ships null (owner-only).
+  ['stressors:overview', (s, publicDossier) => stressorsDeskRead(s, {
+    publicDossier, playerView: true, stresses: overviewStressesOf(s), tier: s?.tier, worldStressor: null,
+  })],
 ].map((entry) => Object.freeze(entry)));
 
 /**

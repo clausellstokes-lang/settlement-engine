@@ -31,6 +31,8 @@ import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
+import { stressorsDeskRead } from '../../src/components/new/stressorsDeskRead.js';
+import { overviewStressesOf } from '../../src/components/new/deskHostArgs.js';
 
 afterEach(cleanup);
 
@@ -67,7 +69,7 @@ const SITES = {
   services: ['economy:services'],
   resources: ['economy:resources'],
   daily_life: ['economy:daily_life'],
-  overview: ['general:overview'],
+  overview: ['general:overview', 'stressors:overview'],
   history: ['general:history'],
   viability: ['general:viability'],
 };
@@ -141,6 +143,51 @@ describe('each lit family: what the owner\'s player view prints from it, the sha
       }
     }
   });
+});
+
+/**
+ * THE OWNER'S OWN DRAW, read through each later family's one caller exactly as its host tab calls
+ * it on the owner's player view (never through the composer, so the pin does not grade the
+ * composer by itself): every sentence of that draw the owner's page prints, the shared page
+ * prints. RED-FIRST per family: before its cause the shared page drew SILENT at the site.
+ * @type {Record<string, {tab: string, draw: (owner: any) => unknown}>}
+ */
+const DRAWN = {
+  'stressors:overview': {
+    tab: 'overview',
+    draw: (o) => stressorsDeskRead(o, { playerView: true, stresses: overviewStressesOf(o), tier: o.tier }),
+  },
+};
+
+/** Every sentence-length string in a drawn desk, at any depth (provenance skipped). */
+function drawnStrings(desk) {
+  const out = [];
+  const walk = (v, key) => {
+    if (key === 'provenance') return;
+    if (typeof v === 'string') { if (v.split(' ').length >= 4) out.push(v); return; }
+    if (v && typeof v === 'object') Object.entries(v).forEach(([k, c]) => walk(c, k));
+  };
+  walk(desk, '');
+  return out;
+}
+
+describe('each later family, from the owner\'s own draw: what the owner\'s player view prints, the shared page prints', () => {
+  for (const [site, { tab, draw }] of Object.entries(DRAWN)) {
+    it.each(TOWNS)(`${site} on ${tab}, soak1k-%i`, (i) => {
+      const { owner, shared } = towns[i];
+      const a = proseLines(TABS[tab](owner, { playerView: true })).join('\n');
+      const b = proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })).join('\n');
+      const printed = drawnStrings(draw(owner)).filter((str) => a.includes(str));
+      expect(printed.filter((str) => !b.includes(str))).toEqual([]);
+    });
+    it(`${site}: not vacuous, the owner's page prints its draw on the twelve`, () => {
+      const hits = TOWNS.filter((i) => {
+        const a = proseLines(TABS[tab](towns[i].owner, { playerView: true })).join('\n');
+        return drawnStrings(draw(towns[i].owner)).some((str) => a.includes(str));
+      });
+      expect(hits.length).toBeGreaterThan(0);
+    });
+  }
 });
 
 describe('RULE 1, rendered: an unstamped record prints silence where the desk speaks', () => {
