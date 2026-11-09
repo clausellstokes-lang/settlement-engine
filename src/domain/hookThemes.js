@@ -135,7 +135,7 @@ export function hookThemeKey(text) {
  * @type {ReadonlyArray<readonly [string, string]>}
  */
 const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [string, string]>} */ ([
-  // ── government (11) ──
+  // ── government (24) ──
   ["A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.", 'forbidden_knowledge'],
   ["They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.", 'corruption'],
   ["One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.", 'old_wound'],
@@ -147,6 +147,19 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['A routine appointment they made three weeks ago has been rescheduled four times. Each time they initiated the change.', 'hidden_debt'],
   ['Someone who publicly supports them is being paid by someone who opposes them. They know this.', 'betrayal'],
   ['They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.', 'divided_loyalty'],
+  ["A clerk in their office has been copying letters at night, and the copies have turned up in a rival's hands.", 'betrayal'],
+  ['They signed an order last month on bad information, and the family it ruined has learned whose seal is on it.', 'old_wound'],
+  ['A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.', 'rivalry'],
+  ['Someone is collecting fees in their name, and the people paying think the receipts are honest.', 'corruption'],
+  ['Their deputy has started answering questions meant for them, and people have begun going to the deputy first.', 'ambition'],
+  ["An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.", 'old_wound'],
+  ['They promised the same post to two people, and both have already told their families.', 'rivalry'],
+  ['A ledger they swore was complete is missing the pages for one season, and an auditor is coming to read it.', 'corruption'],
+  ['Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most.', 'corruption'],
+  ['They were seen leaving a house they had no business in, on the night its owner disappeared.', 'vanished_person'],
+  ['A rule they wrote to stop one abuse has opened the door to another, and the people using it are their friends.', 'corruption'],
+  ['Someone has forged their seal well enough to fool their own staff, and three orders went out under it before anyone noticed.', 'betrayal'],
+  ['They owe their post to a patron who has started asking for repayment in favours they cannot grant openly.', 'hidden_debt'],
   // ── military (11) ──
   ['Three guards have gone missing in the same district on night patrol. The report filed says they deserted.', 'vanished_person'],
   ['Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.', 'smuggling'],
