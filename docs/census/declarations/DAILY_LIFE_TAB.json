@@ -531,23 +531,17 @@
    "poolCrisis": null,
    "crisisScoped": false,
    "colour": false,
-   "ruling": "The fallback speaks exactly when the roster lists nothing — the births least likely to hold a market or a watch. Asserts no calm: stays out. Its one line needs both, so it carries a twin.",
+   "ruling": "The fallback speaks exactly when the roster lists nothing — the births least likely to hold a market or a watch. Asserts no calm: stays out. Its one line needs both, so it carries a twin. Re-read 2026-11-09 (SW-9b-A): the line the file prints since f3558f539 is that twin, \"the wells, the lanes, and the common ground\", which presumes no market, watch, shrine or workshop; its needs and stops are struck.",
    "drawKind": "T",
    "drawSite": "DailyLifeTab.jsx:309",
    "lines": [
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.anchors[fallback]",
-     "text": "the market, shrine, workshop, and watch post",
-     "needs": [
-      "market",
-      "watch"
-     ],
+     "text": "the wells, the lanes, and the common ground",
+     "needs": [],
      "excludes": [],
      "colour": false,
-     "stop": [
-      "shrine (faith)",
-      "workshop"
-     ]
+     "stop": []
     }
    ],
    "twins": [
