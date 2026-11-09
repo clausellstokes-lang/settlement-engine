@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-09T22:39:09.835Z",
+  "generatedAt": "2026-11-09T23:18:45.635Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "282cd5eb7d25da97",
-  "engineVersion": "b663f48530a695aa",
-  "builtFromCommit": "e870d7ca96a5bd31012ba33fef03c6d0c19f3a58",
+  "sourceHash": "d27f2a4d08a3687d",
+  "engineVersion": "78e182aa89a1f48c",
+  "builtFromCommit": "ac1442a3d57d2b60cb89aca01812989878050d2e",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -113,6 +113,7 @@
     "src/domain/deterministicSort.js",
     "src/domain/display/defenseDisplay.js",
     "src/domain/display/defenseScoreBands.js",
+    "src/domain/display/governanceAccount.js",
     "src/domain/display/institutionBackingFaction.js",
     "src/domain/display/institutionDisplayName.js",
     "src/domain/display/numberWords.js",
