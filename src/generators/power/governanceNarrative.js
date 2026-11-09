@@ -571,11 +571,12 @@ const buildStressNarratives = ({
     occupied:
       `An occupying officer arrested a local elder for "seditious speech". ${governingFactionName}` +
       ' filed a formal protest. The protest was returned unread.',
+    // OWNER-WORDS-DOSSIER item 3b (2026-11-09): the word "faction" is retired from the page; "power".
     politically_fractured:
       hasCivicInstitution ||
       hasMilitaryInstitution ||
       hasUrbanCommerceInstitution
-        ? 'Two factions have stopped coming to council meetings. Each makes its own decisions now, and the others overturn them within days.'
+        ? 'Two powers have stopped coming to council meetings. Each makes its own decisions now, and the others overturn them within days.'
         : 'The community is split. Two households are not speaking to each other or to anyone who sides with the other. Everything requiring collective decision has stopped.',
     indebted:
       hasRoyalAuthority && hasNoblePower
@@ -593,7 +594,7 @@ const buildStressNarratives = ({
     succession_void: hasRoyalAuthority
       ? hasNoblePower
         ? 'Two noble houses are contesting the succession. Both have legal arguments. Both have soldiers. The settlement is watching which house the other noble families back, because that is what will decide it.'
-        : 'The throne is vacant and the council of succession has deadlocked. Every faction that benefits from the current stalemate is quietly prolonging it.'
+        : 'The throne is vacant and the council of succession has deadlocked. Every power that benefits from the current stalemate is quietly prolonging it.'
       : hasCivicInstitution
         ? 'Two candidates for the vacant position each held separate public assemblies on the same day. Both claimed the other was illegal.'
         : 'The elder who kept the peace is gone. No one has stepped forward to take that role. Small disputes that would have been settled quickly are now sitting open.',

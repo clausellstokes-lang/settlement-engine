@@ -70,7 +70,7 @@ describe('the composed governance paragraph', () => {
     expect(g.text).not.toMatch(/two of the|the gap widens|does not occupy|rather than being overthrown/i);
   });
 
-  it('a record that names no estranged power takes the vignette as the fallback', () => {
+  it('a record that names no estranged power takes the vignette as the fallback, and it says "powers"', () => {
     const g = governanceAccountOf(planted({
       relationships: [{ pair: [COUNCIL, 'Merchant Guilds'], type: 'dependent' }],
       recentConflict: FRACTURED_VIGNETTE,
@@ -78,6 +78,27 @@ describe('the composed governance paragraph', () => {
     expect(g.estranged).toEqual([]);
     expect(g.fallback).toBe(true);
     expect(g.text.endsWith(FRACTURED_VIGNETTE)).toBe(true);
+    // OWNER-WORDS-DOSSIER item 3b: the generator's vignettes retire the word "faction" for "power".
+    expect(g.text).toMatch(/\bpowers\b/);
+    expect(g.text).not.toMatch(/faction/i);
+  });
+
+  it('no governance vignette the generator can write carries the retired word', () => {
+    const base = {
+      factions: [{ faction: COUNCIL, power: 30, isGoverning: true }], config: {}, stressFlags: {}, instFlags: {},
+      neighbourRelationship: null, priorities: {}, tier: 'town', hasNobleInstitution: false, fallbackStressType: null,
+    };
+    const cases = [
+      { instNames: ['town council hall'], governingFaction: COUNCIL, stressTypes: ['politically_fractured'] },
+      { instNames: [], governingFaction: COUNCIL, stressTypes: ['politically_fractured'] },
+      { instNames: [], governingFaction: 'Royal Authority', stressTypes: ['succession_void'] },
+      { instNames: ['town council hall'], governingFaction: COUNCIL, stressTypes: ['succession_void'] },
+    ];
+    for (const c of cases) {
+      const { recentConflict } = buildGovernanceLabels({ ...base, ...c });
+      expect(recentConflict, `${c.stressTypes[0]} drew a vignette`).toBeTruthy();
+      expect(recentConflict, `${c.stressTypes[0]} / ${c.governingFaction}`).not.toMatch(/faction/i);
+    }
   });
 
   it('a vacant seat and an unrecorded one are said plainly; no governing power is silence', () => {
