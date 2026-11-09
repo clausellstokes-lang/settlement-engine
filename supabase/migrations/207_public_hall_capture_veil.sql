@@ -20,6 +20,12 @@
 -- ONE block in the root pass, before the hidden-power pass. Pinned field for field to the client
 -- (publicSafe.js :: publicVeilPass) by tests/security/allegianceVeil.pglite.test.js and the gallery
 -- sanitizer suites. APPLYING THIS FILE IS THE OWNER'S HAND, at the deploy (operating standard rule 17).
+-- Depends on: 206 (the net-current body), 093 (_gallery_apply_member_overrides, which calls this by
+-- name). Re-runnable (`create or replace`, no signature change, no re-grant).
+-- @rollback: recreate 206's body verbatim — i.e. this same function without the hall-capture block.
+--   Nothing is destroyed on reversal: the function holds no state and mints no row; the only
+--   consequence is that the capture state, the power rows' seed and the capture relation rows project
+--   publicly again, as at 206.
 -- ════════════════════════════════════════════════════════════════════════════
 
 create or replace function public._gallery_sanitize_public_json(value jsonb, path text[] default '{}')
