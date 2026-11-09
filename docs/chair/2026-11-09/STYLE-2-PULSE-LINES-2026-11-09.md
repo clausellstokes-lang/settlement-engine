@@ -544,3 +544,11 @@ Pins: `heraldFeedSources.test.js` — a new test building the feed with an unlab
 | D·85 docket footnote | `Every entry stays editable (from its settlement's dossier) and cancelable until the tick consumes it. Realm orders queue separately as pending proposals above.` | "Every entry stays editable (from its settlement's dossier) and can be cancelled until the next advance carries it out. Realm orders wait separately, as proposals above." |
 
 Pins: a new `tests/components/realmDocketWords.test.jsx` (the footnote, with an anchored negative); **red at the parent**, green here. Registers: none moved.
+
+### 9t. `RealmForecast.jsx` (D·86)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·86 forecast footnote | `This is a deterministic, bounded projection from the recorded snapshot through the selected interval. It includes the current docket and organic realm changes, assumes no later edits or party actions, and uses defaults where the world would await your word. A queued party action's wider realm ripple is not included, so this is guidance rather than a guaranteed outcome.` | "This forecast runs the realm forward from where it stands now, over the interval you chose. It counts the orders on the docket and the realm's own changes, assumes you make no further edits and the party does nothing, and takes the default wherever the world would wait for your word. It leaves out the wider ripples of a queued party action, so treat it as guidance, not a promise." |
+
+Pins: `realmForecastHonesty.test.jsx` — its two honesty assertions ("deterministic, bounded projection", "wider realm ripple is not included") re-keyed by identity to the same two facts in the new words; **red at the parent** (1 of 1), green here. Registers: none moved.
