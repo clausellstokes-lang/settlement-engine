@@ -611,3 +611,11 @@ Pins: `heraldSceneContext.test.jsx` — its "has not guessed a story identity" a
 | D·90 sealed receipts | `The keeper's record of the cause is sealed to this reader.` | "What caused it is for the DM's eyes only." (census: printed exactly when `row.receiptsRedacted`, the fail-closed seam for a session without ground truth — the DM's view carries the cause) |
 
 Pins: `heraldRegisterDoors.test.jsx` — the secrets seam's `/record of the cause is sealed/` re-keyed to the new line (still two rows); **red at the parent** (1 of 22), green here. Registers: none moved.
+
+### 9y. `heraldRegister.js` (D·91)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·91 undated fall | `The record does not set down when it fell.` | "When it fell is not known." (the turning bands and the two epitaphs PASS and stay) |
+
+Pins: `heraldRegisterDoors.test.jsx` — a new test reading `remembranceRows` for a realm with no clock (every remnant's `whenLabel`); **red at the parent** (1 of 23), green here. Registers: none moved (the tuning inventory and the economy read-model walker green).

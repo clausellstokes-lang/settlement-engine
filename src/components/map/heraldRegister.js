@@ -205,7 +205,7 @@ const UNKNOWN_GRADE = Object.freeze({ label: 'Remnant', epitaph: 'The realm reco
  * @returns {string}
  */
 function turningsAgoLabel(diedAtTick, nowTick) {
-  if (diedAtTick == null || nowTick == null) return 'The record does not set down when it fell.';
+  if (diedAtTick == null || nowTick == null) return 'When it fell is not known.';
   const elapsed = nowTick - diedAtTick;
   if (elapsed <= 0) return 'Fell this turning.';
   if (elapsed === 1) return 'Fell last turning.';

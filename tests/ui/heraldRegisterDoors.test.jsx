@@ -211,6 +211,13 @@ describe('RUINS & REMEMBRANCE — the graveyard', () => {
     expect(screen.getByText('Brookhollow was destroyed: swallowed by the marsh.')).toBeTruthy();
   });
 
+  test('STYLE-2 SW-12 (ledger D·91): a fall with no date on file says so plainly', () => {
+    const undated = { ...CAMPAIGN, worldState: { ...(CAMPAIGN.worldState || {}), tick: undefined } };
+    const remnants = remembranceRows({ campaign: undated, saves: SAVES }).filter((row) => row.kind === 'remnant');
+    expect(remnants.length).toBeGreaterThan(0);
+    for (const row of remnants) expect(row.whenLabel).toBe('When it fell is not known.');
+  });
+
   test('THE SECRETS SEAM — an unproven session gets the fallen but never the receipts', () => {
     storeState.auth = null; // anonymous / shared / unproven: fail closed
     render(<HeraldRemembrance campaign={CAMPAIGN} saves={SAVES} />);
