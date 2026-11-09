@@ -32,12 +32,13 @@ import {
   setActiveRng,
 } from '../kernel/rngContext.js';
 import { landMemberships, rankPowers } from './people/castPowers.js';
-import { CORRUPT_SHORT_GOAL, assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
+import { assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
 import { hallCaptureOf, writeHallCapture } from '../domain/people/hallCapture.js';
 import { captureClimateOf } from './power/rulingStructure.js';
 import { withCaptureRelations } from './factionDynamics.js';
 import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
+import { dealGoals } from './people/goals.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
@@ -929,19 +930,8 @@ export const enrichNpcCoherence = (settlement) => {
   const rng = getActiveRng();
   const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null);
   const dealt = dealAllegiances(settlement, landed.all, rng);
-  // the retired pass's compromised short goal, KEPT verbatim until car 4 (REVIEW-INTAKE-4: a goal another figure
-  // carries is refused, and the figure keeps its own). Draw-free, in roster order.
-  if (dealt.length) {
-    const goalsNow = landed.all.map((n) => n?.goal?.short);
-    for (const { card } of dealt) {
-      const k = landed.all.indexOf(card);
-      const corruptGoal = CORRUPT_SHORT_GOAL[card.allegiance.vector] || CORRUPT_SHORT_GOAL.greed;
-      if (card.goal && typeof card.goal === 'object' && !heldByOthers(goalsNow, k).has(corruptGoal)) {
-        card.goal = { ...card.goal, short: corruptGoal };
-        goalsNow[k] = corruptGoal;
-      }
-    }
-  }
+  // (ALLEGIANCE-CAR4: the retired pass's compromised short goal is gone — the agent's goal is the ALLEGIANCE
+  // family's, dealt at A9 with every other card's, people/goals.js :: dealGoals.)
   const withPowers = rankPowers(settlement, landed);
   assignHandlers(withPowers, settlement);
   leaveAllegianceReceipts(settlement, dealt);
@@ -1021,7 +1011,13 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
     { config: settlement.config || {}, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null },
     coherenceRng?.fork ? coherenceRng : getActiveRng(),
   ));
-  const withTies = { ...settlement, npcs: mergedNpcs, relationships };
+  // ── A9, THE GOALS (the allegiance train, car 4; the design §2 and §6): every card's SHORT and LONG goal, drawn at the
+  // END of the seam — after the ranks, the agents, the handlers and the ties the families bind — on the seam's own keyed
+  // family (`people-goals::<card id>`, people/goals.js), from the families each card's record supports. A held `npcs`
+  // key is the DM's cast: its goals are not redrawn.
+  const npcsHeld = !!pins && Object.prototype.hasOwnProperty.call(pins, 'npcs');
+  const goaledNpcs = npcsHeld ? mergedNpcs : dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng());
+  const withTies = { ...settlement, npcs: goaledNpcs, relationships };
 
   const history = settlement.history || {};
 
@@ -1062,7 +1058,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
 
   return {
     ...settlement,
-    npcs: mergedNpcs,
+    npcs: goaledNpcs,
     relationships,
     prominentRelationship,
     coherenceNotes,

@@ -53,7 +53,10 @@ describe('the goal draw is handed the government only', () => {
     const failures = collectSeedFailures([224, 842, 878], (i) => {
       const ledger = [];
       const { result } = withPresumptionLedger(() => birth(i), ledger);
-      const goals = ledger.filter((e) => /^npc(Data|Generator):(NPC_FACTION_GOALS|STRESS_GOALS)$/.test(e.pool));
+      // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 2026-11-09): the role pool retired; a card's goal is drawn at A9 from the goal
+      // families (`goalFamilies:<family>.<kind>.<vantage>`) and the CRISIS family's kept pools — the same law, every NPC goal
+      // the birth prints, read against the final record.
+      const goals = ledger.filter((e) => /^(npc(Data|Generator):(NPC_FACTION_GOALS|STRESS_GOALS|STRESS_GOAL_OVERRIDES\..*)|goalFamilies:.*)$/.test(e.pool));
       expect(goals.length, `soak1k-${i}`).toBeGreaterThan(0);
       expect(presumptionFindings(result.settlement, goals), `soak1k-${i}`).toEqual([]);
     });

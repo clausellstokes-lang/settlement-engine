@@ -1,7 +1,8 @@
 /**
  * allegianceVeil.pglite.test.js — I-10, THE HIDDEN ALLEGIANCE NEVER REACHES A PUBLIC PAGE (the allegiance train, car 1,
  * ALLEGIANCE-CAR1, 2026-11-08; docs/allegiance/ALLEGIANCE_DESIGN_2026-11-08.md §8; built on
- * gallerySanitizer.pglite.test.js's harness, extended by car 4).
+ * gallerySanitizer.pglite.test.js's harness, extended by car 4: the generator's own WARRANT, SUSPICION and allegiance goals,
+ * their intent and their targets, on no public page and not in the gallery).
  *
  * On generated cities — criminal (the criminal slider high), organized (many criminal houses) and infiltrated — with a
  * PLANTED allegiance, a covert handler tie, a WARRANT and a SUSPICION goal with intent, and a hidden-power boost
@@ -179,6 +180,40 @@ describe('I-10 — no hidden allegiance, handler tie, pursuit goal or hidden boo
       expect(JSON.stringify(rec), 'the projection never touches the record').toBe(before);
     }
     expect(rawRows, 'anchored: the six towns carry capture relation rows on the raw record').toBeGreaterThan(0);
+  });
+
+  // ALLEGIANCE-CAR4 (2026-11-09; the design §6.4, I-10 extended): THE GENERATOR'S OWN PURSUIT GOALS. A9 deals WARRANT and
+  // SUSPICION goals with a target (`goal.intent.*.target`), and an agent's serve / escape goal names its guild and its
+  // handler. None reaches a public page or the gallery: the NPC allowlist drops `goal` whole (and `intent` inside it).
+  // RED-FIRST, BY ITS CONTROL: the raw records carry the generated pursuit goals and their targets.
+  it('car 4: no generated WARRANT or SUSPICION goal, no intent and no hidden target on a public page or the gallery', async () => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    const { galleryPayloadFor } = await import('../../src/domain/display/galleryVeil.js');
+    const pursuitOf = (rec) => (rec.npcs || []).flatMap((n) => ['short', 'long']
+      .map((v) => ({ n, v, it: n?.goal?.intent?.[v] }))
+      .filter(({ it }) => it && (it.kind === 'warrant' || it.kind === 'suspicion' || it.family === 'ALLEGIANCE')));
+    const leaks = (json, rec) => {
+      const text = JSON.stringify(json);
+      const texts = pursuitOf(rec).map(({ n, v }) => n.goal[v]).filter((t) => typeof t === 'string' && t.length > 12);
+      return {
+        goalKeys: (json?.npcs || []).filter((n) => n && Object.hasOwn(n, 'goal')).length,
+        intents: text.split('"intent"').length - 1,
+        targets: text.split('"target":{').length - 1,
+        pursuitTexts: texts.filter((t) => text.includes(t)).length,
+      };
+    };
+    const NONE = { goalKeys: 0, intents: 0, targets: 0, pursuitTexts: 0 };
+    let raw = 0; let rawTargets = 0;
+    for (const rec of records) {
+      const p = pursuitOf(rec);
+      raw += p.filter(({ it }) => it.kind === 'warrant' || it.kind === 'suspicion').length;
+      rawTargets += p.filter(({ it }) => it.target && it.target.id).length;
+      expect(leaks(toPublicSafe(rec), rec), 'client').toEqual(NONE);
+      expect(leaks(await sanitize(rec), rec), 'server').toEqual(NONE);
+      expect(leaks(galleryPayloadFor(rec), rec), 'gallery').toEqual(NONE);
+    }
+    expect(raw, 'THE CONTROL: the six towns carry generated WARRANT or SUSPICION goals on the raw record').toBeGreaterThan(0);
+    expect(rawTargets, 'THE CONTROL: the raw goals carry their targets').toBeGreaterThan(0);
   });
 
   it('the client projection carries every count at 0, and client == server', async () => {

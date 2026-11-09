@@ -85,7 +85,7 @@ const ROW_KEYS = Object.freeze([
 const GUARD_KEYS = Object.freeze(['minPopulation', 'requiresAny']);
 /** The registry-only marks a tier entry may declare (the fabric and the rarity, X-46 car 3; the face
  *  and its no-power flag, the people car); never on a row. */
-const MARK_KEYS = Object.freeze(['fabric', 'rare', 'face', 'noPower', 'front']); const NOTE_KEYS = Object.freeze(['thresholdNote']); // CENSUS-4 R8: the designer's threshold note ("viable above 5,000 souls"), registry-only, never on a row or a page
+const MARK_KEYS = Object.freeze(['fabric', 'rare', 'face', 'noPower', 'front', 'lawEnforcement']); const NOTE_KEYS = Object.freeze(['thresholdNote']); // CENSUS-4 R8: the designer's threshold note ("viable above 5,000 souls"), registry-only, never on a row or a page
 /**
  * THE FRONT MARK (the allegiance train, car 1, ALLEGIANCE-CAR1, 2026-11-08; the design §1.4 and the
  * chair's ruling J-7): a legitimate family whose house's face can carry a hidden allegiance AS A FRONT
@@ -98,6 +98,14 @@ const MARK_KEYS = Object.freeze(['fabric', 'rare', 'face', 'noPower', 'front']);
  * tests/generators/people/allegiance.test.js for the chair.
  */
 export const FRONT_CLASSES = Object.freeze(['prime', 'front']);
+/**
+ * THE LAW MARK (the allegiance train, car 4, ALLEGIANCE-CAR4, 2026-11-09; the design §3.5 and the chair's
+ * ruling J-14): `lawEnforcement: true` on the families whose face HUNTS — the militia and the watches,
+ * the barracks and garrisons, the citadel, the warden's lodge and the prison — never the courthouse (a
+ * magistrate judges and does not hunt). Registry-only, like the face and the front (read through
+ * `isLawEnforcementInstitution`); never on a row or a save. The law's pursuit reads it
+ * (`generators/people/goals.js`).
+ */
 /** The one word a `face` mark may carry besides a title or null: the seat's building (R-P1 c). */
 export const FACE_SEAT = 'seat';
 const ENTRY_KEYS = new Set(['name', ...ROW_KEYS, ...GUARD_KEYS, ...MARK_KEYS, ...NOTE_KEYS]);
@@ -1183,7 +1191,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { face: 'the gaoler', baseChance: 0.7, tags: ['legal', 'law_enforcement'], priorityCategory: 'infrastructure' },
+      shared: { lawEnforcement: true, face: 'the gaoler', baseChance: 0.7, tags: ['legal', 'law_enforcement'], priorityCategory: 'infrastructure' },
       at: {
         town: { name: 'Small prison/stocks', desc: 'Holding cells and public punishment.' },
         city: { face: 'the prison warden', name: 'Large prison', desc: 'Debtors, criminals, political prisoners.' },
@@ -1243,7 +1251,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     // The town Citizen militia row (0 of 200 towns: blocked by the required Town watch in its own
     // group) is retired; the militia is the hamlet and village rung.
     {
-      shared: { name: 'Citizen militia', face: 'the militia captain', desc: 'Full-time law enforcement. ~1% of population.', tags: ['defense', 'military'], priorityCategory: 'military' },
+      shared: { lawEnforcement: true, name: 'Citizen militia', face: 'the militia captain', desc: 'Full-time law enforcement. ~1% of population.', tags: ['defense', 'military'], priorityCategory: 'military' },
       at: {
         thorp: { face: null, name: 'Household levy', baseChance: 0.18, desc: 'One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.' },
         hamlet: { baseChance: 0.15, desc: 'Able-bodied residents drill and muster against local threats. Part-time service.' },
@@ -1257,13 +1265,13 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     // the military slider like every defence row (`institutionProbability.js :: getBaseChance`, the
     // `watch` name). Name and text VETOABLE (the owner's content class).
     {
-      shared: { name: 'Village watch', face: 'the watch sergeant', desc: 'Householders who take turns walking the lanes after dark, keep a lantern at the crossroads, and raise the alarm. Unpaid; the rota is their own.', tags: ['law_enforcement', 'defense'], priorityCategory: 'military' },
+      shared: { lawEnforcement: true, name: 'Village watch', face: 'the watch sergeant', desc: 'Householders who take turns walking the lanes after dark, keep a lantern at the crossroads, and raise the alarm. Unpaid; the rota is their own.', tags: ['law_enforcement', 'defense'], priorityCategory: 'military' },
       at: {
         village: { baseChance: 0.2 },
       },
     },
     {
-      shared: { face: 'the garrison commander', tags: ['military', 'defense'], priorityCategory: 'military' },
+      shared: { lawEnforcement: true, face: 'the garrison commander', tags: ['military', 'defense'], priorityCategory: 'military' },
       at: {
         town: { name: 'Barracks', baseChance: 0.3, desc: 'Housing for guards or small garrison.', tags: ['military'] },
         city: { name: 'Garrison', required: true, desc: 'Professional soldiers. Noble or royal.' },
@@ -1271,7 +1279,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Citadel', face: 'the castellan', desc: 'Inner fortress. Last refuge in siege.', tags: ['fortification', 'defense'], priorityCategory: 'military' },
+      shared: { lawEnforcement: true, name: 'Citadel', face: 'the castellan', desc: 'Inner fortress. Last refuge in siege.', tags: ['fortification', 'defense'], priorityCategory: 'military' },
       at: {
         town: { baseChance: 0.2 },
         city: { baseChance: 0.4 },
@@ -1299,7 +1307,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // Licensed `none` (TE-CH-5): a ranger station needs no magic. Filed on Magic until 2026-09-30.
     {
-      shared: { name: "Warden's Lodge", face: 'the warden' },
+      shared: { lawEnforcement: true, name: "Warden's Lodge", face: 'the warden' },
       at: {
         town: { baseChance: 0.2, desc: 'A ranger station. They monitor the surrounding wilderness, maintain trails, and keep tabs on beast migrations. In times of crisis they serve as emergency scouts and trackers.', tags: ['military'], magicLicense: 'none', priorityCategory: 'military' },
       },
@@ -1715,7 +1723,7 @@ const clonePlain = (value) => (value && typeof value === 'object' ? JSON.parse(J
  * One family's entry at one tier, as the catalog row every reader takes. Throws on an unknown
  * key so a typo'd field can never ride silently into generation.
  * @param {InstitutionFamily} fam @param {string} tier
- * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null, fabric: boolean, rare: boolean, face: string | null, noPower: boolean, front: string | null }}
+ * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null, fabric: boolean, rare: boolean, face: string | null, noPower: boolean, front: string | null, lawEnforcement: boolean }}
  */
 function deriveRow(fam, tier) {
   const merged = { ...(fam.shared || {}), ...fam.at[tier] };
@@ -1731,6 +1739,7 @@ function deriveRow(fam, tier) {
   }
   if (merged.noPower !== undefined && merged.noPower !== true) throw new Error(`institutionalCatalog: noPower on ${tier} / ${name} must be true or absent`);
   if (merged.noPower === true && !(typeof face === 'string' && face !== FACE_SEAT)) throw new Error(`institutionalCatalog: noPower on ${tier} / ${name} needs a titled face`);
+  if (merged.lawEnforcement !== undefined && merged.lawEnforcement !== true) throw new Error(`institutionalCatalog: lawEnforcement on ${tier} / ${name} must be true or absent`);
   if (merged.front !== undefined && !FRONT_CLASSES.includes(/** @type {string} */ (merged.front))) throw new Error(`institutionalCatalog: front on ${tier} / ${name} must be 'prime', 'front' or absent`);
   const row = /** @type {Record<string, unknown>} */ ({});
   row.required = merged.required === true;
@@ -1745,7 +1754,7 @@ function deriveRow(fam, tier) {
   }
   // A FABRIC ROW HAS NO FACE WHATEVER ITS FAMILY SAYS (R-P1 a): the walk to another's mill is not a miller.
   const fabric = merged.fabric === true;
-  return { name, row, guards, fabric, rare: merged.rare === true, face: fabric ? null : /** @type {string | null} */ (face), noPower: merged.noPower === true, front: typeof merged.front === 'string' ? merged.front : null };
+  return { name, row, guards, fabric, rare: merged.rare === true, face: fabric ? null : /** @type {string | null} */ (face), noPower: merged.noPower === true, front: typeof merged.front === 'string' ? merged.front : null, lawEnforcement: merged.lawEnforcement === true };
 }
 
 /**
@@ -1773,6 +1782,8 @@ const FACE_BY_NAME = new Map();
 const NO_POWER_NAMES = new Set();
 /** THE FRONT MARK by name (ALLEGIANCE-CAR1, J-7): 'prime' | 'front'. Registry-only. @type {Map<string, string>} */
 const FRONT_BY_NAME = new Map();
+/** THE LAW MARK by name (ALLEGIANCE-CAR4, J-14). Registry-only. @type {Set<string>} */
+const LAW_NAMES = new Set();
 
 /** @returns {Record<string, Record<string, Record<string, Record<string, any>>>>} */
 function buildCatalog() {
@@ -1784,7 +1795,7 @@ function buildCatalog() {
     for (const shelf of SHELF_ORDER) {
       for (const fam of INSTITUTION_FAMILIES) {
         if (fam.shelf !== shelf || !fam.at[tier]) continue;
-        const { name, row, guards, fabric, rare, face, noPower, front } = deriveRow(fam, tier);
+        const { name, row, guards, fabric, rare, face, noPower, front, lawEnforcement } = deriveRow(fam, tier);
         if (guards) GUARDS_BY_ROW.set(guardKey(tier, name), Object.freeze(guards));
         if (fabric) { FABRIC_ROWS.add(guardKey(tier, name)); FABRIC_NAMES.add(name); }
         if (rare) RARE_ROWS.add(guardKey(tier, name));
@@ -1795,6 +1806,7 @@ function buildCatalog() {
         FACE_BY_NAME.set(name, face);
         if (noPower) NO_POWER_NAMES.add(name);
         if (front) FRONT_BY_NAME.set(name, front);
+        if (lawEnforcement) LAW_NAMES.add(name);
         if (!block[shelf]) block[shelf] = {};
         for (const other of Object.values(block)) {
           if (other[name]) throw new Error(`institutionalCatalog: "${name}" listed twice at ${tier}`);
@@ -1984,6 +1996,17 @@ export function frontClassOfInstitution(institution) {
  */
 export function isFrontCapableInstitution(institution) {
   return frontClassOfInstitution(institution) !== null;
+}
+
+/**
+ * Is this roster row's house a LAW house (J-14: its family carries the `lawEnforcement` mark)? False for a
+ * custom or DM-authored house and for a name the catalogue does not place.
+ * @param {{ name?: unknown, isCustom?: unknown, source?: unknown } | null | undefined} institution
+ * @returns {boolean}
+ */
+export function isLawEnforcementInstitution(institution) {
+  if (isStrangerHouse(institution)) return false;
+  return LAW_NAMES.has(String(institution?.name ?? ''));
 }
 
 /** family key (the name the generator writes at the family's first tier) and shelf, by any tier name. @type {Map<string, { key: string, shelf: string }>} */

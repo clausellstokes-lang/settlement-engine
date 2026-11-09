@@ -104,6 +104,18 @@ export const NPC_AIMS = Object.freeze({
   punish_rivals:         'make their rivals pay',
   mobilize_defenses:     'ready the walls and the watch',
   consolidate_power:     'tighten their grip on power',
+  // the goals rebuilt (ALLEGIANCE-CAR4, 2026-11-09): the car's new catalog keys, as the world would say them (data only)
+  secure_supply:         'keep their supplies coming',
+  repay_debt:            'pay off what they owe',
+  collect_debt:          'collect what they are owed',
+  protect_ally:          'stand by someone close to them',
+  serve_patron:          'serve the people they answer to',
+  escape_patron:         'get free of the people they answer to',
+  keep_agent:            'keep someone in line',
+  pursue_warrant:        'bring someone to justice',
+  prove_allegiance:      'prove who someone really answers to',
+  indulge_trait:         'live as they please',
+  answer_the_uncanny:    'deal with something uncanny',
 });
 
 /**
