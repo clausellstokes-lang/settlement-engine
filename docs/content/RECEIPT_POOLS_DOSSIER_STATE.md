@@ -1748,7 +1748,7 @@ shape.
 3. `[threshold]` {settlement} would hardly notice losing one trade, but could not stand losing several at once.
 
 **INCOME MIX: a criminal line is present** *(every variant `dm-only`)*
-1. `[ledger · dm-only]` Some of {settlement}'s money is made by people who keep it off the tax lists, so nothing is collected on it and honest traders carry the tax alone.
+1. `[ledger · dm-only]` Some of {settlement}'s money is made by people who keep it off the tax lists, so the town collects nothing on it and honest traders carry the tax alone.
 2. `[street · dm-only]` Some of the money in {settlement} is made outside the law, and honest traders compete against it without knowing whom they are up against.
 3. `[counterforce · dm-only]` {faction} makes money at {settlement} outside the law, and nothing is collected on it.
 
@@ -2698,12 +2698,12 @@ margin *arm*. They are different fields on different rows and both are kept;
 4. `[threshold]` {settlement} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
 
 **readiness `WEAK`** {crisis-scoped}
-1. `[ledger · crisis: any]` {settlement} could deal with a brawl or a thief, but not with a raid.
+1. `[ledger · crisis: any]` {settlement} could deal with a brawl or a thief, but the town could not hold off a raid.
 2. `[visitor · walls · crisis: any · no crisis: threat, unrest]` Much of {settlement}'s perimeter has nobody on it, and the people who live there seem used to that.
 3. `[unfolding · crisis: any · no crisis: threat, unrest]` {settlement} has not been attacked lately, and if it were, it would struggle to hold.
 
 **readiness `CRITICAL`** {crisis-scoped}
-1. `[ledger · crisis: any]` {settlement} is all but undefended. Nothing here would stop a serious attack for long.
+1. `[ledger · crisis: any]` {settlement} is all but undefended. Nothing in the town would stop a serious attack for long.
 2. `[street · crisis: any · no crisis: occupied, under_siege]` People at {settlement} know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
 3. `[visitor · crisis: any · no crisis: threat, unrest]` You can walk into the centre of {settlement} without being stopped, challenged or counted by anybody at all.
 

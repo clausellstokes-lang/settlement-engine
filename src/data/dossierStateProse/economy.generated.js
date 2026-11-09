@@ -5578,7 +5578,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Some of {settlement}'s money is made by people who keep it off the tax lists, so nothing is collected on it and honest traders carry the tax alone.",
+          "text": "Some of {settlement}'s money is made by people who keep it off the tax lists, so the town collects nothing on it and honest traders carry the tax alone.",
           "slots": [
             "settlement"
           ],

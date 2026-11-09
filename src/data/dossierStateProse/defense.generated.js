@@ -103,7 +103,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "{settlement} could deal with a brawl or a thief, but not with a raid.",
+          "text": "{settlement} could deal with a brawl or a thief, but the town could not hold off a raid.",
           "slots": [
             "settlement"
           ],
@@ -141,7 +141,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any"
           ],
-          "text": "{settlement} is all but undefended. Nothing here would stop a serious attack for long.",
+          "text": "{settlement} is all but undefended. Nothing in the town would stop a serious attack for long.",
           "slots": [
             "settlement"
           ],
