@@ -63,13 +63,19 @@ const POPULATION_KEYS = ['npcs', 'relationships'];
  *  (`people/ties.js :: drawTies`, ONE outgoing tie per card over the final cast), forked after the
  *  roster and skipped under a held `relationships` key — the population step provides `[]` now. */
 const COHERENCE_LABELS = [
-  'npc-enrichment', 'people-ties', 'historical-character', 'prominent-relationship',
+  'npc-enrichment', 'people-ties', 'people-goals', 'historical-character', 'prominent-relationship',
   'coherence-notes', 'siege-capability',
 ];
+// RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): six -> seven. `people-goals` is the goals' own
+// family (`people/goals.js :: dealGoals`, A9, each card's SHORT and LONG goal on `people-goals::<card id>`), forked after
+// `people-ties` at the seam's end and skipped under a held `npcs` key (a held roster's goals are its own) — so it joins
+// the labels a held roster retires, beside the ties.
 /** The label the held roster retires. Read from the register in A7, spelled here for the forks. */
 const HELD_ROSTER_LABEL = 'npc-enrichment';
 /** The ties' family, skipped under the held `relationships` key every bag here carries with the roster. */
 const HELD_TIES_LABEL = 'people-ties';
+/** The goals' family (A9), skipped under the held `npcs` key (ALLEGIANCE-CAR4). */
+const HELD_GOALS_LABEL = 'people-goals';
 /** A sibling label that travels the SAME fork path, so an absence cannot pass vacuously. */
 const ANCHOR_LABEL = 'prominent-relationship';
 /** Planted by the arms; it appears nowhere in the generator's own vocabulary. */
@@ -226,9 +232,12 @@ describe('EM-R2 — the roster is final inside enrichNpcCoherence under a held r
       'a skipped child stream takes no draw at all').toBeUndefined();
     // The other four are forked in the same order and take the SAME counts, which is A3's
     // subject and is re-asserted here so this arm cannot pass by having broken them.
-    expect(gated.record.labels).toEqual(COHERENCE_LABELS.filter((l) => l !== HELD_ROSTER_LABEL && l !== HELD_TIES_LABEL));
+    expectAbsentWithAnchor(gated.record.labels, HELD_GOALS_LABEL, ANCHOR_LABEL,
+      'A2: a held roster deals no goals (A9 is skipped under a held npcs key)');
+    expect(unpinned.record.draws[HELD_GOALS_LABEL], 'the unpinned A9 draws on its own family').toBeGreaterThan(0);
+    expect(gated.record.labels).toEqual(COHERENCE_LABELS.filter((l) => l !== HELD_ROSTER_LABEL && l !== HELD_TIES_LABEL && l !== HELD_GOALS_LABEL));
     const sameCounts = COHERENCE_LABELS
-      .filter((label) => label !== HELD_ROSTER_LABEL && label !== HELD_TIES_LABEL)
+      .filter((label) => label !== HELD_ROSTER_LABEL && label !== HELD_TIES_LABEL && label !== HELD_GOALS_LABEL)
       .map((label) => [label, unpinned.record.draws[label], gated.record.draws[label]]);
     expect(sameCounts.filter(([, u, g]) => u !== g), 'a sibling stream moved').toEqual([]);
     expect(before.prominentRelationship).toBeDefined();
