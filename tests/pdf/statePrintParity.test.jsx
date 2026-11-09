@@ -213,7 +213,7 @@ function screenProse(s, faithUnlocked = false) {
   const out = {};
   const set = (mount, p) => { if (p) out[mount] = p; };
 
-  set('overview.ground', screenWeave(s, general.overview.siteLines));
+  set('overview.market', screenWeave(s, general.overview.siteLines)); // the woven block's first speaking mount since the ground glances (OWNER-WORDS-DOSSIER item 2)
   set('overview.crisisBanners', screenParagraph(s, 'overview.crisisBanners', [st.crisisArity]));
   set('overview.stressorLifecycle', screenParagraph(s, 'overview.stressorLifecycle',
     [st.worldStressorLifecycle, st.worldStressorOrigin]));
@@ -901,7 +901,7 @@ describe('SILENCE — no corpus, no Callout', () => {
     expect(render({ stateProse: undefined, tab: 'overview' })).toBeNull();
     expect(render({ stateProse: {}, tab: 'overview' })).toBeNull();
     expect(render({ stateProse: { overview: {} }, tab: 'overview' })).toBeNull();
-    expect(render({ stateProse: { overview: { 'overview.ground': '' } }, tab: 'overview' })).toBeNull();
+    expect(render({ stateProse: { overview: { 'overview.market': '' } }, tab: 'overview' })).toBeNull();
     // A settlement with no corpus at all yields no tabs, so every chapter renders nothing.
     for (const tab of ['overview', 'power', 'defense', 'economics', 'history', 'faith', 'war']) {
       expect(render({ stateProse: buildPrintProse(null, {}), tab })).toBeNull();
@@ -910,7 +910,7 @@ describe('SILENCE — no corpus, no Callout', () => {
 
   test('NON-VACUITY: one paragraph renders exactly one Callout, kicker and all', () => {
     const el = render({
-      stateProse: { overview: { 'overview.ground': 'The village keeps to itself.' } },
+      stateProse: { overview: { 'overview.market': 'The village keeps to itself.' } },
       tab: 'overview',
     });
     expect(React.isValidElement(el)).toBe(true);
@@ -921,8 +921,10 @@ describe('SILENCE — no corpus, no Callout', () => {
     // typography lane, 2026-09-18). It is rendered as the Callout's first child rather than
     // through the `kicker` slot, whose `type.label` would upper-case it.
     const [kickerNode, proseNode] = React.Children.toArray(callouts[0].props.children);
-    // "The place" since the chair's ruling T1-2 (2026-10-30): the site lines are THE PLACE's.
-    expect(kickerNode.props.children).toBe('The place');
+    // "The place" since the chair's ruling T1-2 (2026-10-30); "Trade and the houses" since the
+    // owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 2b): the place ends on the arrival scene and
+    // the site lines stand under their own heading, on the screen and in print.
+    expect(kickerNode.props.children).toBe('Trade and the houses');
     expect(kickerNode.props.style.textTransform, 'the page would shout a heading the screen speaks')
       .toBe('none');
     expect(proseNode.props.children).toBe('The village keeps to itself.');

@@ -357,13 +357,16 @@ describe('the power desk — THE PROMISE and the mount wiring', () => {
     expect(crisis.legitimacyLens.sentence).toBeTruthy();
   });
 
-  it('the registry mounts DS-POW-1 once, as a sentence, on the power tab', () => {
+  // Re-keyed OWNER-WORDS-DOSSIER item 3 (the owner, 2026-11-09: "The governance description itself seemed
+  // disconnected"): DS-POW-1 stays MOUNTED once on the power tab, at a GLANCE row; the governance block is
+  // one paragraph read off the record (domain/display/governanceAccount.js).
+  it('the registry mounts DS-POW-1 once, at a glance, on the power tab', () => {
     const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === BLOCK);
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({
-      mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', rung: 'sentence',
+      mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', rung: 'glance',
     });
-    expect(sentenceMountForBlock(BLOCK)?.mount).toBe('power.legitimacyBanner');
+    expect(sentenceMountForBlock(BLOCK), 'DS-POW-1 speaks again beside the governance paragraph').toBeNull();
     expectAbsentWithAnchor(
       UNMOUNTED_BLOCKS, BLOCK, A_DARK_SIBLING, 'DS-POW-1 is mounted, so the dark half must not name it',
     );
@@ -371,9 +374,13 @@ describe('the power desk — THE PROMISE and the mount wiring', () => {
 
   it('the mount ROUTES: flipping the row to glance would silence both readings together', () => {
     const drawn = powerStateProse(town(legit('Contested', { safety: -20 })), { seed: 's' });
-    // As mounted (sentence), both readings reach the page.
-    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyBanner).sentence).toBeTruthy();
-    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyLens).sentence).toBeTruthy();
+    // The desk draws both readings; as mounted (a glance since OWNER-WORDS-DOSSIER item 3), the row silences
+    // them TOGETHER, and the glance keeps the band word.
+    expect(drawn.legitimacyBanner.sentence, 'the desk draws the ladder line').toBeTruthy();
+    expect(drawn.legitimacyLens.sentence, 'and the lens line').toBeTruthy();
+    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyBanner).sentence).toBeNull();
+    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyLens).sentence).toBeNull();
+    expect(drawnAtMount('power.legitimacyBanner', drawn.legitimacyBanner).glance).toBe('Contested');
     // A glance row strips the sentence AND its provenance from whatever it is handed —
     // the control proving the component is routed rather than merely naming a string.
     const asGlance = drawnAtMount('economics.economyTile', drawn.legitimacyBanner);
@@ -617,11 +624,12 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     expect(drawn.stabilityHeader.sentence).toBeTruthy();
   });
 
-  it('the registry mounts DS-POW-2 once, as a sentence, on the power tab', () => {
+  // Re-keyed OWNER-WORDS-DOSSIER item 3 (2026-11-09): DS-POW-2 stays MOUNTED once, at a GLANCE row.
+  it('the registry mounts DS-POW-2 once, at a glance, on the power tab', () => {
     const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW2);
     expect(rows).toHaveLength(1);
-    expect(rows[0]).toMatchObject({ mount: 'power.stabilityHeader', tab: 'power', desk: 'power', rung: 'sentence' });
-    expect(sentenceMountForBlock(POW2)?.mount).toBe('power.stabilityHeader');
+    expect(rows[0]).toMatchObject({ mount: 'power.stabilityHeader', tab: 'power', desk: 'power', rung: 'glance' });
+    expect(sentenceMountForBlock(POW2), 'DS-POW-2 speaks again beside the governance paragraph').toBeNull();
     expectAbsentWithAnchor(
       UNMOUNTED_BLOCKS, POW2, A_DARK_SIBLING, 'DS-POW-2 is mounted, so the dark half must not name it',
     );

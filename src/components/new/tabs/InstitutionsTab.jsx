@@ -269,9 +269,11 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
       {/* THE FACE ROW (PEOPLE-6 LINKS, the owner's word of 2026-11-07): the house's representative
           as "Pastor Robert Thomas" — the honorific of its title (src/data/faceHonorifics.js), then
           the full name — a door to its NPC card (EntityLink, by the card's own id). A house with no
-          face shows no row. */}
+          face shows no row. The row opens on the word "Connection:" (the owner, 2026-11-09,
+          OWNER-WORDS-DOSSIER item 1), outside the door, so the link's name stays the face's alone. */}
       {face && face.name && (
         <div data-testid="institution-face" style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
+          <span data-testid="institution-face-label">Connection:</span>{' '}
           <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={faceNameOf(face, settlement)} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
         </div>
       )}

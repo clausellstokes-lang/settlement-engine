@@ -18,6 +18,7 @@ import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/poli
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
+import { governanceAccountOf } from '../../../domain/display/governanceAccount.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). The four positions below mapped
 // their drawn sentences to one `<p>` EACH; ProseBlock weaves each position into one
 // paragraph. The DRAW is unchanged — these are the same strings `drawnAtMount` ruled on.
@@ -197,7 +198,6 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const {
     factions:pf = [],
     stability:m,
-    recentConflict:h,
     publicLegitimacy:leg,
     criminalCaptureState:crimCapture,
   } = r;
@@ -259,9 +259,15 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
     : powerStateProse(s, deskReadings, {
       seed: String(s?._seed ?? s?.id ?? ''), audience, tierNoun: tierNounFor(s?.tier),
     });
+  // OWNER-WORDS-DOSSIER item 3 (the owner, 2026-11-09: "The governance description itself seemed
+  // disconnected and not to our standard"): the DS-POW-1 reading, the DS-POW-2 hall line and the
+  // standalone vignette became ONE paragraph read off the record (governanceAccount.js). Both mounts
+  // GLANCE at their registry rows, so these draws hand back no sentence; they stay routed (the rows are
+  // still mounted, the reachability arm still counts one literal each) and restoring them is that word.
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
+  const governanceAccount = publicDossier ? null : governanceAccountOf(s);
   const drawnReading  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.legitimacyReading);
   const drawnCapture  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.captureReading);
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
@@ -356,7 +362,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
               pools of DS-POW-1 at ONE position, which is the C3 law rather than an
               exception to it (see dossierMounts.js). Both are routed through the same
               mount, so flipping that row to `glance` silences the pair together instead
-              of leaving half a reading on the page. Neither displaces a datum above. */}
+              of leaving half a reading on the page. Neither displaces a datum above.
+              The row GLANCES since OWNER-WORDS-DOSSIER item 3 (2026-11-09): silent here. */}
           {(drawnBanner?.sentence || drawnLens?.sentence) && (
             <div style={{marginTop:10,borderTop:`1px solid ${leg.color}30`,paddingTop:8}}>
               {/* ⭐ ONE PARAGRAPH, not a ladder line and a lens line stacked (owner finding
@@ -395,9 +402,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
             </div>
           )}
         </div>
-        {h && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3A10'],lineHeight:1.5,margin:'8px 0 0',borderTop:`1px solid ${isCritical?'#e8c0c0':isStable?'#c8e8c8':'#e0c860'}`,paddingTop:8,fontStyle:'italic'}}>{h}</p>}
+        {/* The standalone vignette (`recentConflict`) left this box at OWNER-WORDS-DOSSIER item 3: it is
+            the governance paragraph's fallback below, where the record names no estranged power. */}
         {/* DS-POW-2: the stability ladder line, then its lens — two pools of one block at
-            ONE position, routed through one mount, exactly as the legitimacy banner above. */}
+            ONE position, routed through one mount, exactly as the legitimacy banner above.
+            The row GLANCES since OWNER-WORDS-DOSSIER item 3 (2026-11-09): silent here. */}
         {drawnStab?.sentence && (
           <div style={{marginTop:10,borderTop:`1px solid ${stabilityColor}30`,paddingTop:8}}>
             {/* The ladder line alone: the DS-POW-2 lens was one boilerplate sentence on 991 of
@@ -408,6 +417,19 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           </div>
         )}
       </div>
+
+      {/* ── WHO RUNS IT, IN ONE PARAGRAPH (OWNER-WORDS-DOSSIER item 3, 2026-11-09) ──────────
+            The seat by name and title, the legitimacy band with the causes its breakdown names,
+            the powers that have broken with the ruler NAMED from the record's relationships, the
+            consequence in plain words, and the generator's vignette only where no estranged power is
+            named (domain/display/governanceAccount.js). After the figure tiles above, which stay as
+            data: the facts before the prose that couples them (X-16). Dark on a public dossier
+            (§885.3), as the readings it replaces were. */}
+      {governanceAccount?.text && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:`4px solid ${stabilityColor}`,padding:'10px 14px',...FLUSH}}>
+          <p data-testid="power-governance-account" style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.65,margin:0}}>{governanceAccount.text}</p>
+        </div>
+      )}
 
       {/* ── THE THREE STRATA (owner order 2026-07-22) ─────────────────────────
           The flat "Power Distribution" list is replaced by three semantically

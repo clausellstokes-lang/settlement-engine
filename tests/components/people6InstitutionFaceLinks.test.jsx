@@ -93,10 +93,24 @@ describe('2. the Institutions card: the face row is a door to the NPC card', () 
     const setActiveTab = vi.fn();
     const { container } = render(<Dossier settlement={SETTLEMENT} setActiveTab={setActiveTab}><InstitutionsTab settlement={SETTLEMENT} /></Dossier>);
     const row = within(cardOf(container, 'Mill')).getByTestId('institution-face');
-    expect(row.textContent).toBe('Master Miller Edda Marl'); // the pool's pick for npc_mill::Mill
+    expect(row.textContent).toBe('Connection: Master Miller Edda Marl'); // the pool's pick for npc_mill::Mill; re-keyed OWNER-WORDS-DOSSIER item 1 (the row opens on "Connection:")
     fireEvent.click(within(row).getByRole('button', { name: 'Go to Edda Marl' }));
     expect(setActiveTab).toHaveBeenCalledWith('npcs', 'entity_link');
     expect(useStore.getState().focusedEntity?.id).toBe(entityIdFor('npc', MILLER));
+  });
+
+  // OWNER-WORDS-DOSSIER item 1 (the owner, 2026-11-09: "In the institution card, before each NPC, say
+  // 'Contact:'", amended minutes later: "Actually rather than contact, I would say 'Connection:'"): the
+  // face row opens on the word, and the word is not part of the door (the link's name is the face's alone).
+  it('the face row opens on "Connection:" before the face, outside the door', () => {
+    const { container } = render(<Dossier settlement={SETTLEMENT} setActiveTab={vi.fn()}><InstitutionsTab settlement={SETTLEMENT} /></Dossier>);
+    const row = within(cardOf(container, 'Mill')).getByTestId('institution-face');
+    const label = within(row).getByTestId('institution-face-label');
+    expect(label.textContent).toBe('Connection:');
+    expect(row.textContent.startsWith('Connection: ')).toBe(true);
+    const door = within(row).getByRole('button', { name: 'Go to Edda Marl' });
+    expect(door.textContent).toBe('Master Miller Edda Marl');
+    expect(door.contains(label)).toBe(false);
   });
 
   it('a house with no face shows no row', () => {
@@ -203,7 +217,7 @@ describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the ins
     const setActiveTab = vi.fn();
     const { container } = render(<Dossier settlement={CHURCHED} setActiveTab={setActiveTab}><InstitutionsTab settlement={CHURCHED} /></Dossier>);
     const row = within(cardOf(container, 'Stone and a bell.')).getByTestId('institution-face');
-    expect(row.textContent).toBe('Pastor Robert Thomas');
+    expect(row.textContent).toBe('Connection: Pastor Robert Thomas'); // re-keyed OWNER-WORDS-DOSSIER item 1 (the row opens on "Connection:")
     fireEvent.click(within(row).getByRole('button', { name: 'Go to Robert Thomas' }));
     expect(useStore.getState().focusedEntity?.id).toBe(entityIdFor('npc', PASTOR));
   });

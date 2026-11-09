@@ -341,12 +341,14 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             2026-09-18). Under the block law it is the page's ANSWER, class (1), not
             coupling prose (chair ruling X-25a): it stays directly under the identity strip
             and the routing line, before the crisis card. */}
-      {(r.arrivalScene||siteLines.length>0)&&(
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
+      {/* THE PLACE ENDS ON THE ARRIVAL SCENE (the owner, 2026-11-09, OWNER-WORDS-DOSSIER item 2: "In
+          'the place' the second paragraph seems redundant. The first was amazing."). The woven site
+          lines moved below the Systems Health section, under their own heading (TRADE AND THE HOUSES
+          below); the ground lens that re-introduced the place glances at its registry row. */}
+      {r.arrivalScene&&(
+        <div data-testid="overview-place" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
           <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The place</div>
-          {r.arrivalScene&&<p className="oc-dropcap-prose" data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:siteLines.length>0?'0 0 6px':0,fontStyle:'italic'}}>{r.arrivalScene}</p>}
-          <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.lg,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+          <p className="oc-dropcap-prose" data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
         </div>
       )}
 
@@ -457,6 +459,20 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             re-homed later, one by one, through the mount registry. Pinned in the DOM by
             tests/ui/generalDeskTabFlow.test.js. */}
       </Section>
+
+      {/* ── TRADE AND THE HOUSES (OWNER-WORDS-DOSSIER item 2, 2026-11-09) ──────
+            The woven block that followed the arrival scene in THE PLACE, moved here whole: DS-GEN-13
+            market, commerce and warehouses, then DS-GEN-17 roster, cathedral and monastery, each
+            trimmed to its first clause by the reader (generalDeskRead.js :: siteClause). Its sentences
+            have no other home on the page. The heading is proposed for the owner's veto. Dark on a
+            public dossier (§885.3), as before. */}
+      {siteLines.length>0&&(
+        <div data-testid="overview-trade-houses" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Trade and the houses</div>
+          <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+        </div>
+      )}
 
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}
       {(hist.currentTensions?.length>0||(r.conflicts||[]).length>0)&&<Section title="Tensions & Conflicts" collapsible defaultOpen accent="#b8860b" help={SECTION_HELP.tensions}>

@@ -592,13 +592,13 @@ const DESKTOP_BASELINE = Object.freeze({
   // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
   "Summary/Plot Hooks":  { measured: 88, sub14: 88 },
   "Systems/Services":    { measured: 104, sub14: 104 },
-  "Systems/Institutions": { measured: 62, sub14: 62 }, // T1-14, measured 2026-10-30 by this walk
+  "Systems/Institutions": { measured: 71, sub14: 71 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   "Systems/Economics":   { measured: 42, sub14: 42 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
-  "Systems/Power":       { measured: 30, sub14: 29 },
+  "Systems/Power":       { measured: 29, sub14: 28 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
   // 28 -> 27 (2026-10-30, UX consolidation U6, T2-20..T2-23): the duplicate order headline, the first-survey
   // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
   // 27 -> 26 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the fixture town's one order & crime plot
@@ -703,11 +703,11 @@ const MOBILE_BASELINE = Object.freeze({
   // line more (X-26a); both sub-floor counts stay where they were.
   "Summary/Plot Hooks":  { prose: 88, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Institutions": { prose: 61, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 70, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 34, chrome: 8, sub14: 8, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
-  "Systems/Power":       { prose: 29, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Power":       { prose: 28, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
   // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
   // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
