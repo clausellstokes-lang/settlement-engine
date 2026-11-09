@@ -439,7 +439,7 @@ export function NPCInlineCard({
                 }}>Exposed</span>
               )}
               {allegianceGuild && (
-                <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>answers to <MentionText text={allegianceGuild} structural/>{allegianceHandler && <>, through <MentionText text={allegianceHandler} structural/></>}</span>
+                <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,fontStyle:'italic'}}>answers to <MentionText text={allegianceGuild} structural/>{allegianceHandler && <>, through <MentionText text={allegianceHandler} structural/></>}</span>
               )}
             </div>
           )}
