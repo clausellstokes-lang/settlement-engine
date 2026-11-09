@@ -107,9 +107,11 @@ describe('DM power lines (WRITE-PEOPLE, design §9)', () => {
     }
     for (const rung of ['none', 'adversarial']) {
       for (const line of CAPTURE_LINES[rung]) {
+        // anchored: the arm above asserts every capture line clean and naming the ruler on every path, so line(f) is live prose
         for (const f of PATHS[rung]) expect(line(f)).not.toMatch(/Guild-One|Guild-Two|Agent-/);
       }
     }
+    // anchored: the same arm above asserts each none line names the ruler on this fixture's path, so the text exists to be read
     for (const line of CAPTURE_LINES.none) expect(line(fx([], { underworld: UNDER }))).not.toContain(UNDER);
   });
 
