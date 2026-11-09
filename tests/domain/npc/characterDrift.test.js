@@ -1033,7 +1033,9 @@ describe('THE AUTHORED CORE HAS ONE READER — and this census is what makes it 
       //    Foundry Overview page reads it only when the journal carries no History page (2, unchanged).
       'src/components/organic/samples/DossierSample.jsx': 1,
       'src/foundry/journalPages.js': 2,
-      'src/pdf/sections/Overview.jsx': 5,
+      // STYLE-2-MERGE at SW-B4's point (2026-11-09): 5 -> 4 — THE OWNER'S VETO 3 restores the fixed CHARACTER & ORIGIN
+      // heading (cc1395b34), so the heading's own `o.character` test leaves; the reads of the character line stay.
+      'src/pdf/sections/Overview.jsx': 4,
     };
     expect(readCensus()).toEqual(CENSUS);
   });
