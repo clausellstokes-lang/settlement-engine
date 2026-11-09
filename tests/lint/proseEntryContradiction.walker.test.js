@@ -477,9 +477,15 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     const base = estateGround({ officeRoster: deriveOfficeRoster() });
     const ladder = await loadNpcLadder();
     const male = ladder.filter((row) => /\bhis\b/i.test(row.text) && !/\bher\b/i.test(row.text));
-    // The anchor is SHIPPED material, and there is a lot of it: 121 male-pronoun rows of
-    // 1,662. A single hand-picked line would be a fixture wearing a corpus's coat.
-    expect(male.length).toBeGreaterThan(50);
+    // The anchor is SHIPPED material. A single hand-picked line would be a fixture
+    // wearing a corpus's coat.
+    // RE-KEYED by STYLE-2 SW-1 (ruling A5, 2026-11-09): the cure struck he/his from every
+    // R6 line that PRINTS (121 -> 29 rows of 1,662). The 29 that remain are all the
+    // `reformed` stage, which the lane left byte-identical because a reformed bearer's
+    // card never prints the line (reform clears `npc.corrupt`). So the anchor is now
+    // keyed to that identity, and pinned EXACTLY: a further strike re-keys it by its cause.
+    expect(male.length).toBe(29);
+    expect(male.every((row) => /\.reformed$/.test(String(row.pool)))).toBe(true);
     const anchor = male[0];
     // PRESENT-THEN-ABSENT: the bearer's typed gender contradicts the pronoun and the arm
     // fails; the matching gender and the same shipped line falls silent.
