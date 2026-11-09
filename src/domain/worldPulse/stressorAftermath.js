@@ -21,6 +21,7 @@
  */
 
 import { resolveCrisisLocally } from '../crisisLifecycle.js';
+import { residualEffectWords, stressorAftermathHeadline, stressorHistoryHeadline } from './stressorsCore.js';
 
 // Stressor type -> the history event-type vocabulary the generators already
 // use (historyData EVENT_TYPE_NAMES). Unmapped types fall back to
@@ -61,7 +62,7 @@ function severityWord(peak) {
 
 /** @param {import('../settlement.schema.js').SimStressor} stressor */
 function residualText(stressor) {
-  return (stressor.residualEffects || []).slice(0, 3).join(', ').replace(/_/g, ' ');
+  return (stressor.residualEffects || []).slice(0, 3).map(residualEffectWords).join(', ');
 }
 
 // History consumers (HistoryTab, pdf HistoryFounding, historyBeats) expect
@@ -86,7 +87,7 @@ export function aftermathNewsEntries(resolved = [], tick = 0, now = null) {
     scope: (stressor.affectedSettlementIds || []).length >= 3 ? 'realm' : 'regional',
     significance: (stressor.peakSeverity ?? stressor.severity ?? 0) >= 0.6 ? 'major' : 'notable',
     score: 50 + Math.round((stressor.peakSeverity ?? 0) * 30),
-    headline: `${stressor.label} has passed`,
+    headline: stressorAftermathHeadline(stressor),
     summary: `${stressor.label} is over, but it leaves ${residualText(stressor) || 'scars'}. It will be remembered for a while yet.`,
     kind: 'applied',
     impactKind: 'stressor_aftermath',
@@ -118,7 +119,7 @@ export function graduationNewsEntries(graduated = [], tick = 0, now = null) {
     scope: 'settlement',
     significance: 'notable',
     score: 32,
-    headline: `${stressor.label} passes into history`,
+    headline: stressorHistoryHeadline(stressor),
     summary: `No one speaks of ${stressor.label.toLowerCase()} in the present tense anymore; it belongs to the settlement's story now.`,
     kind: 'applied',
     impactKind: 'stressor_graduated',
