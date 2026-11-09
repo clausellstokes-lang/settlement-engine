@@ -13,7 +13,7 @@ import { PowerStrata } from './power/PowerStrata.jsx'; // X-50: one line, so no 
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
 import { governingFactionOf } from '../../../domain/rulingPower.js';
-import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
+import { seatLensOf } from '../../../domain/spatial/cohesionWeave.js'; // SW-7 (STYLE-2 B7): DS-POW-5 reads the seat
 import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/politicsRead.js';
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
@@ -242,7 +242,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   // Both derivations are the CALLER'S, handed over rather than reached for by the desk.
   const deskReadings = publicDossier ? {} : {
     ...(contenders ? { contenders, riskLabel: coupRiskLabel(contenders) } : {}),
-    structuralLens: structuralLensOf(s),
+    structuralLens: seatLensOf(s),
     // DS-POW-7. The DISPLAY projection, never the 61.9 KB kernel module. `includeCovert`
     // honours the projection's own secrets filter — a conspiracy does not enter a player's
     // projection at all — while `includeGroundTruth` hands over the raw end/glue tokens the

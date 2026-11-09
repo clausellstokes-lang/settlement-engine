@@ -9,7 +9,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, pt, space } from '../theme.js';
-import { pointWords } from '../../data/people/dmPowerLines.js';
+import { boostWords } from '../../data/people/dmPowerLines.js';
 
 const PLACE = Object.freeze({ 1: 'Head', 2: 'Second', 3: 'Third', steward: 'Steward' });
 const RANK_WORD = Object.freeze({ 1: 'first', 2: 'second', 3: 'third' });
@@ -64,7 +64,7 @@ export function WhoRunsThisTown({ dm }) {
         {dm.boosts.length > 0 && <Text style={headStyle}>THE BOOSTS</Text>}
         {dm.boosts.map((b) => (
           <View key={b.powerName} wrap={false}>
-            <Text style={rowStyle}>{`${b.powerName} · ${pointWords(b.base)} on its own, +${pointWords(b.boost)}, ${pointWords(b.effective)} in all`}</Text>
+            <Text style={rowStyle}>{`${b.powerName} · ${boostWords(b.base, b.boost)}`}</Text>
             <Text style={lineStyle}>{b.line}</Text>
           </View>
         ))}

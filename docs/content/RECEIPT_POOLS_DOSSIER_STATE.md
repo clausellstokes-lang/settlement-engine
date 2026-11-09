@@ -2270,28 +2270,28 @@ did not die.
 **PDF PARITY:** parity.
 
 **`riskLabel: Stable` (no challengers)**
-1. `[ledger · succession settled · no crisis: unrest]` Nobody at {settlement} is in a position to take the {seat}. {faction} has no rival for it, and the succession question is not a live one here.
+1. `[ledger · succession settled · no crisis: unrest]` Nobody at {settlement} is in a position to take {faction}'s place; it has no rival, and nobody in the town is asking who comes next.
 2. `[street · succession settled · no crisis: unrest]` The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.
-3. `[counterforce · succession settled · no unrest]` People at {settlement} grumble, but nobody stands ready to lead them; the {seat} is safe for the plainest reason a seat can be safe.
+3. `[counterforce · succession settled · no unrest]` People at {settlement} grumble, but nobody in the town stands ready to lead them, so {faction} is safe in the hall.
 4. `[ledger · succession open]` No contender stands at {settlement} to take the {seat}, and the absence settles nothing: who governs is an open question, and nobody is strong enough to close it.
 5. `[street · succession open]` The {seat} at {settlement} has no rival and no secure holder either; the town asks who governs and gets no answer it can act on.
-6. `[ledger · succession settled · unrest]` No rival stands at {settlement} to take the {seat}, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting itself, not a contender for the hall.
+6. `[ledger · succession settled · unrest]` No rival stands at {settlement} to take {faction}'s place, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting across the town.
 
 **`riskLabel: Holding`** {colour}
-1. `[ledger]` {faction} outweighs everyone at {settlement} who wants the {seat}, and they make no secret of wanting it. The hold is real, and it is not comfortable.
+1. `[ledger]` {faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.
 2. `[street]` {settlement} has people who would take the hall if they could. They cannot, and everyone involved knows it.
 3. `[unfolding]` The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season.
 
 **`riskLabel: Contested`** {colour}
-1. `[ledger]` {counterpart} now outweighs the {seat} at {settlement}, and what keeps {faction} in the hall is the office rather than the strength behind it.
+1. `[ledger]` {counterpart} now has more people behind it than {faction} at {settlement}; {faction} keeps the hall only because the office is still its own.
 2. `[street]` {settlement} is no longer sure the hall belongs to {faction}, and {faction} governs as though it is not sure either.
 3. `[unfolding]` The challenger at {settlement} is now the stronger side, but the {seat} has not changed hands yet. What happens next depends on who moves first.
-4. `[visitor]` Visitors to {settlement} are quietly told to stay polite to two houses, not one, and nobody explains why.
+4. `[visitor]` Visitors to {settlement} are quietly told to stay polite to {counterpart} as well as to {faction}, and nobody says why.
 
 **`riskLabel: Critical. The seat could fall`** {colour}
 1. `[ledger]` Nothing at {settlement} protects the {seat} now. {counterpart} has the strength, and the {seat} has only the office.
 2. `[street]` {settlement} is waiting. The hall could change hands within the season and the town has already begun arranging itself for both answers.
-3. `[unfolding]` Everyone at {settlement} can see the {seat} is exposed. What has not happened yet is a move by someone able to make it.
+3. `[unfolding]` Everyone at {settlement} can see {faction} could lose the hall, and {counterpart} has not yet moved to take it.
 
 **`legitimacyHold`: public backing hardens the hold** {colour}
 1. `[street]` The town stands behind whoever sits at {settlement}, and that lets its ruler do things a ruler without the town could not try.
@@ -2347,26 +2347,26 @@ and never an assertion that the feared thing is happening.
 
 **`autocrat`** {colour}
 1. `[ledger]` One person decides at {settlement} and decides quickly; what comes out of the {seat} arrives whole and can change entirely between one season and the next.
-2. `[street]` The town does not wait long for an answer and does not always like the answer it gets, and has no procedure for getting a different one.
-3. `[unfolding]` The {seat} at {settlement} answers to one person, and that person's danger is the people closest to them, not the town.
+2. `[street]` At {settlement} one person gives the answer, and gives it quickly, and there is nobody to ask for a different one.
+3. `[unfolding]` The {seat} at {settlement} answers to one person, and if that person falls it will be at the hands of someone close to them.
 4. `[visitor]` At {settlement} one audience with the {seat} gets a decision, good or bad, and there is nobody to appeal to afterwards.
 
 **`council`** {colour}
 1. `[ledger]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
-2. `[street]` The town's business goes to a body rather than a person, and everybody has learned how long a body takes.
+2. `[street]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
 3. `[unfolding]` The {seat} at {settlement} worries less about rivals than about the town turning on it.
 4. `[counterforce]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
 
 **`theocracy`** {colour}
 1. `[ledger]` The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.
-2. `[street]` The town takes its civic questions to the same place it takes its spiritual ones, and does not experience the two as separate.
-3. `[unfolding]` What threatens the {seat} at {settlement} is heresy rather than opposition. A rival creed is a challenge to the right to govern, and everybody involved understands it that way.
+2. `[street]` The town takes its quarrels over land and law to the same people it takes its prayers to.
+3. `[unfolding]` What threatens the {seat} at {settlement} is heresy more than any rival: a rival creed challenges its right to govern, and everybody involved knows it.
 4. `[visitor]` At {settlement} the same people run the {institution} and the hall; only the hours differ.
 
 **`merchant_league`** {colour}
 1. `[ledger]` The {seat} at {settlement} is run by the houses that keep the account books, and it decides things the way a business does: by what pays.
-2. `[street]` The town is run by people who are also its creditors, and the two roles are not kept meaningfully apart.
-3. `[unfolding]` What the {seat} at {settlement} fears is running out of money, not being overthrown, and every decision is made with that in mind.
+2. `[street]` The people who run {settlement} are also the people it owes money to, and they do not keep the two apart.
+3. `[unfolding]` What the {seat} at {settlement} fears most is running out of money, and every decision is made with that in mind.
 4. `[counterforce]` The {seat} at {settlement} has let quarrels drop that it could have won, because winning would have cost more than it was worth.
 
 **`criminal`** {colour}
@@ -2375,9 +2375,9 @@ and never an assertion that the feared thing is happening.
 3. `[unfolding · dm-only]` The {seat} at {settlement} rules by fear and favours, not consent, so its real danger is one of its own people turning on it.
 
 **`mixed`** {colour}
-1. `[ledger]` Nothing at {settlement} governs cleanly. The {seat} is an arrangement between kinds of power, and it decides at the pace of whichever of them is least willing.
-2. `[street]` Power at {settlement} is shared between several kinds of people, and no one of them is in charge.
-3. `[unfolding]` No part of the {seat} at {settlement} can rule alone, so they rule together. If one grows strong enough to go it alone, the arrangement ends.
+1. `[ledger]` Nothing at {settlement} governs cleanly: the {seat} is several kinds of power sitting together, and the town waits on the most reluctant of them.
+2. `[street]` At {settlement} no one power is in charge, and the town gets only what the {seat}'s members can agree on.
+3. `[unfolding]` No part of the {seat} at {settlement} can rule alone, so they rule the town together, and each watches for the day one of them can do without the others.
 
 **`economicBase: extraction`** {colour}
 1. `[ledger]` {settlement} lives on what it takes out of the ground, and everything about the town (its rhythm, its politics, its fear) follows the yield.
@@ -2473,9 +2473,9 @@ own entailment and licenses nothing about who runs it.
 4. `[ledger · no walls]` Nothing at {settlement} is moving the town's view of its rulers: not the harvest, not the watch, not the roads. The {seat} stands on the bare fact of being the {seat}.
 
 **capture pressure ADVANCING (weak security, poor prosperity)** *(every variant `dm-only`)* {colour}
-1. `[unfolding · dm-only]` Criminals are buying their way into the hall at {settlement}. The town is poor and its streets poorly guarded, so a bribe goes a long way.
-2. `[ledger · dm-only]` Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and nobody is fixing either.
-3. `[street · dm-only]` Money is being spent at {settlement} on people who cannot account for having it, and the accounting is not being asked for.
+1. `[unfolding · dm-only]` Criminal money is reaching the officials of {settlement} one at a time, because the town is poor and its streets are badly watched, and a bribe goes a long way here.
+2. `[ledger · dm-only]` Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and nobody in the {seat} is mending either.
+3. `[street · dm-only]` Officials at {settlement} are spending money their posts never paid them, and nobody in the town asks where it came from.
 
 **capture pressure RECOVERING (strong security, prosperity)** *(every variant `dm-only`)*
 1. `[unfolding · dm-only · colour]` The criminals at {settlement} are losing their grip on the hall: the town is doing well again and its streets are guarded.
@@ -2532,8 +2532,8 @@ own entailment and licenses nothing about who runs it.
 2. `[counterforce · dm-only · commander]` Treat the commander at {settlement} as a power, not a servant: the {seat} cannot act against the soldiers' wishes, and anyone who wins the commander over wins the town's muscle.
 
 **GM ADVISORY: officials with criminal arrangements** *(WIRING W3 C1: `factionRelationships[].dmNote` on a governing-criminal pair whose capture state is past adversarial; every variant `dm-only`)*
-1. `[ledger · dm-only · colour]` Settle before play which officials of the {seat} at {settlement} have an understanding with {faction}, and what each one owes; every name is a thread the party can pull.
-2. `[street · dm-only · colour]` Some of the {seat}'s people at {settlement} are in {faction}'s pocket. Decide who they are and what they would lose if it came out, and the hooks write themselves.
+1. `[ledger · dm-only · colour]` Some officials of the {seat} at {settlement} have an understanding with {faction}, and each owes it something different; every one of them is a thread the party can pull.
+2. `[street · dm-only · colour]` Some of the {seat}'s people at {settlement} are in {faction}'s pocket, and each of them has something to lose if it comes out.
 
 ---
 

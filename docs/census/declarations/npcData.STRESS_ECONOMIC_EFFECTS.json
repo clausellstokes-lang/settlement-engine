@@ -107,7 +107,7 @@
     },
     {
       "id": "econ_crim_blur.tension#0",
-      "text": "If either is investigated, the other is implicated. Both know this. Neither mentions it.",
+      "text": "If {A} is investigated, {B} is implicated, and the other way round. Both know it, and neither mentions it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -115,7 +115,7 @@
     },
     {
       "id": "econ_crim_blur.tension#1",
-      "text": "A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.",
+      "text": "A clerk has begun checking {A}'s ledgers against each other. Neither {A} nor {B} has decided what to do about it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -381,7 +381,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#0",
-      "text": "A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.",
+      "text": "A new superior has started asking {A} awkward questions about how few arrests are made. {A} or {B} will have to act before the other does.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -397,7 +397,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#2",
-      "text": "The payments have started arriving late. In this trade, late is a message.",
+      "text": "{B}'s payments to {A} have started arriving late. In this trade, late is a message.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -677,7 +677,7 @@
     },
     {
       "id": "econ_mil_contract.tension#2",
-      "text": "The last shipment was short, and each side privately blames the other. The next one will settle the question.",
+      "text": "The last shipment was short, and {A} and {B} each privately blame the other. The next one will settle the question.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -804,7 +804,7 @@
     },
     {
       "id": "rel_mil_crusader.tension#0",
-      "text": "They disagree on a fundamental question of method that neither will put into writing.",
+      "text": "{A} and {B} disagree on a question of method that neither will put into writing.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -812,7 +812,7 @@
     },
     {
       "id": "rel_mil_crusader.tension#1",
-      "text": "A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.",
+      "text": "A penitent has brought {A} a case that pits doctrine against {B}'s order. It has not been resolved, and it will not stay private.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1384,7 +1384,7 @@
     },
     {
       "id": "gov_mil_friction.tension#0",
-      "text": "An incident is coming that will force the issue. Both are positioning for it.",
+      "text": "An incident is coming that will force the issue between {A} and {B}, and both are positioning for it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1392,7 +1392,7 @@
     },
     {
       "id": "gov_mil_friction.tension#1",
-      "text": "A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.",
+      "text": "A prisoner is held under {A}'s authority and {B}'s at once, and neither will release the paperwork first.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1530,7 +1530,7 @@
     },
     {
       "id": "peer_rivalry.tension#0",
-      "text": "A decision coming in the next season will advantage one significantly. The other knows this.",
+      "text": "A decision coming next season will favour {A} or {B} heavily, and both of them know it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1538,7 +1538,7 @@
     },
     {
       "id": "peer_rivalry.tension#1",
-      "text": "A mutual patron has let it be known there is room for only one of them at the next table.",
+      "text": "A patron they share has let it be known there is room for only {A} or {B} at the next table.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1546,7 +1546,7 @@
     },
     {
       "id": "peer_rivalry.tension#2",
-      "text": "One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.",
+      "text": "{A} has recently broken an unwritten rule of the contest. {B} is deciding what that permits.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1805,7 +1805,7 @@
     },
     {
       "id": "mutual_leverage.tension#0",
-      "text": "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
+      "text": "The balance between {A} and {B} has recently shifted. {B} has noticed; {A} has not, yet.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1813,7 +1813,7 @@
     },
     {
       "id": "mutual_leverage.tension#1",
-      "text": "A document each believed only they possessed has surfaced in a third set of hands.",
+      "text": "A document {A} and {B} each believed only they possessed has turned up in someone else's hands.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1944,7 +1944,7 @@
     },
     {
       "id": "wary_alliance.tension#0",
-      "text": "A third party is actively working to change that calculation.",
+      "text": "Someone else is working to pull {A} and {B} apart.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1952,7 +1952,7 @@
     },
     {
       "id": "wary_alliance.tension#1",
-      "text": "The threat that made the alliance necessary is gone. Neither has said so aloud.",
+      "text": "The threat that brought {A} and {B} together is gone. Neither has said so aloud.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2083,7 +2083,7 @@
     },
     {
       "id": "genuine_respect.tension#0",
-      "text": "They are about to be on opposite sides of a significant decision.",
+      "text": "{A} and {B} are about to be on opposite sides of an important decision.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2091,7 +2091,7 @@
     },
     {
       "id": "genuine_respect.tension#1",
-      "text": "One of them is being pressured to act against the other, and has not yet mentioned it.",
+      "text": "{A} is being pressed to act against {B}, and has not mentioned it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2099,7 +2099,7 @@
     },
     {
       "id": "genuine_respect.tension#2",
-      "text": "The respect is real and the interests are diverging. Both can read a map.",
+      "text": "{A} and {B} still respect each other, but what each of them wants is pulling apart, and both can see it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2238,7 +2238,7 @@
     },
     {
       "id": "old_debt.tension#2",
-      "text": "A third party has learned what the original favour was. The debt just changed hands.",
+      "text": "Someone else has learned what favour {A} owes {B}, and now has a hold on {A} too.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2358,7 +2358,7 @@
     },
     {
       "id": "family_complication.tension#0",
-      "text": "An inheritance, title, or secret is about to make the connection impossible to ignore.",
+      "text": "An inheritance, a title or a secret is about to make the tie between {A} and {B} impossible to ignore.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2366,7 +2366,7 @@
     },
     {
       "id": "family_complication.tension#1",
-      "text": "A younger relative has begun trading on the connection both of them refuse to use.",
+      "text": "A younger relative has begun trading on the connection {A} and {B} both refuse to use.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2374,7 +2374,7 @@
     },
     {
       "id": "family_complication.tension#2",
-      "text": "The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.",
+      "text": "The family has taken a side in a quarrel between {A} and {B}, and both of them think it is the wrong side.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2494,7 +2494,7 @@
     },
     {
       "id": "bitter_history.tension#0",
-      "text": "The circumstances that caused the original rupture are repeating. Both of them know it.",
+      "text": "What first broke {A} and {B} apart is happening again, and both of them know it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2502,7 +2502,7 @@
     },
     {
       "id": "bitter_history.tension#1",
-      "text": "An apology is owed in one direction and expected in the other, and they disagree about which.",
+      "text": "{A} and {B} each think the other owes the apology.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2510,7 +2510,7 @@
     },
     {
       "id": "bitter_history.tension#2",
-      "text": "A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.",
+      "text": "A newcomer keeps trying to reconcile {A} and {B}, and is about to learn why nobody else does.",
       "needs": [],
       "excludes": [],
       "crisis": [],

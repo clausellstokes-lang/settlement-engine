@@ -569,7 +569,7 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.celtic.builtForm[0]",
-     "text": "Older round or oval compounds sit among later rectangular halls, linked by lanes rather than a rigid grid.",
+     "text": "Older round or oval compounds sit among later rectangular halls, linked by winding lanes with no set grid.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -2712,7 +2712,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.steppe.socialTexture[1]",
-     "text": "The settlement is a meeting point between mobile and sedentary expectations rather than the whole society.",
+     "text": "The settlement is where mobile and settled ways of life meet, and much of the society lives beyond it.",
      "needs": [],
      "excludes": [],
      "colour": true,

@@ -467,7 +467,11 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${merc.faction} buys the materials, sets the prices and sells the goods; ${craft.faction} only makes them, and its masters are becoming hired hands in all but name.`;
     } else if (ratio >= 0.7) {
       type = 'tense';
-      narrative = `${merc.faction} and ${craft.faction} vote together against the landlords, then fight over who keeps the profit.`;
+      // STYLE-2 B7 (SW-7, P9): "the landlords" was a fixed noun the roster did not hold; the line names the
+      // landholding power when one stands, and otherwise names none.
+      narrative = noble && noble !== merc && noble !== craft
+        ? `${merc.faction} and ${craft.faction} vote together against ${noble.faction}, then fight over who keeps the profit.`
+        : `${merc.faction} and ${craft.faction} vote together whenever trade is at stake, then fight over who keeps the profit.`;
     } else {
       type = 'tense';
       narrative = `Only the masters of ${craft.faction} know how to make what ${merc.faction} sells, so the merchants pay their price.`;

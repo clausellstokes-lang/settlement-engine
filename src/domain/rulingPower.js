@@ -189,18 +189,18 @@ const ALT_GOVERNMENT_LABELS = Object.freeze({
 
 /** @type {Readonly<Record<string, string>>} */
 const GOVERNMENT_DESCS = Object.freeze({
-  [A.MILITARY]:   'Officers govern; security doctrine sets policy and the chain of command is the chain of authority.',
-  [A.RELIGIOUS]:  'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.',
-  [A.MERCHANT]:   'Commercial power governs; ledgers decide policy and civic access tracks net worth.',
-  [A.NOBLE]:      'A noble line governs; precedence, patronage, and inheritance structure every decision.',
-  [A.ARCANE]:     'Magical practitioners govern; arcane power legitimises political authority.',
+  [A.MILITARY]:   'Officers rule; orders come down the chain of command, and keeping the place safe comes first.',
+  [A.RELIGIOUS]:  'Clergy rule; their faith gives them the right to, and the temple\'s calendar sets the year.',
+  [A.MERCHANT]:   'The merchants rule; money decides policy, and the richer you are, the more say you have.',
+  [A.NOBLE]:      'A noble family rules; rank, favour and inheritance decide everything.',
+  [A.ARCANE]:     'Mages rule, and their magic is what gives them the right to.',
   [A.CRAFT]:      'The craft guilds govern; charters, standards, and apprenticeships double as civic law.',
   [A.LABOR]:      'The working commons govern; assemblies of labourers and smallholders hold the final word.',
   [A.CIVIC]:      'An elected or appointed council governs; prominent families and guilds compete for seats.',
   [A.GOVERNMENT]: 'An elected or appointed council governs; prominent families and guilds compete for seats.',
-  [A.OUTSIDER]:   'A foreign power administers the settlement through appointed intermediaries.',
+  [A.OUTSIDER]:   'A foreign power rules here through officials it appoints.',
   [A.OCCUPATION]: 'An occupying force governs at spearpoint; local institutions persist on sufferance.',
-  [A.CRIMINAL]:   'Criminal influence governs openly; protection is policy and the racket is the treasury.',
+  [A.CRIMINAL]:   'Criminals rule openly; protection money takes the place of taxes, and the gangs keep it.',
   [A.OTHER]:      'A new authority governs; its institutions are still taking shape.',
 });
 
@@ -704,8 +704,8 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
  * @type {Readonly<Record<string, ReadonlyArray<{ text: string, needs?: ReadonlyArray<string>, crisis?: ReadonlyArray<string> }>>>}
  */
 export const RULING_POWER_SIBLINGS = Object.freeze({
-  'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.': Object.freeze([
-    Object.freeze({ text: 'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.', needs: Object.freeze(['temple']) }),
+  'Clergy rule; their faith gives them the right to, and the temple\'s calendar sets the year.': Object.freeze([
+    Object.freeze({ text: 'Clergy rule; their faith gives them the right to, and the temple\'s calendar sets the year.', needs: Object.freeze(['temple']) }),
   ]),
   'Stable: a fresh mandate, still finding its footing': Object.freeze([
     Object.freeze({ text: 'Stable: a fresh mandate, still finding its footing', crisis: Object.freeze(['calm']) }),

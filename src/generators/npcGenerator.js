@@ -40,7 +40,7 @@ import {
   NPC_FEATURES,
   NPC_WANTS,
   NPC_FACTION_LOYALTY,
-  NPC_PLOT_HOOKS_DATA,
+  dealingLineFor,
   NPC_PRESENTATION_MODES, NPC_HOOK_SIBLINGS,
 } from '../data/npcData.js';
 
@@ -161,7 +161,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
     plotHooks,
     influence: powerLevel.level,
     power: powerLevel.power,
-    presentation: titled && titled.presentations.length ? { ...pickFromArray(titled.presentations) } : pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw)), // ITEM 15: the title's own first impression
+    presentation: titled && titled.presentations.length ? { ...pickFromArray(titled.presentations) } : pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw), religion), // ITEM 15: the title's own first impression; STYLE-2 SW-7 (B10(b)): else the card's own traits key "How they deal"
   };
 };
 
@@ -544,12 +544,12 @@ export const drawPersonHook = (hookPool, config = {}, hookRegistry, place = {}) 
 };
 
 // pickTitle
-const pickTitle = (r, facts = null) => {
+const pickTitle = (r, facts = null, personality = null) => {
   const s = drawDeclared(NPC_PLOT_HOOKS[r] || NPC_PLOT_HOOKS.other, { draw: pick, facts, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_PLOT_HOOKS`, poolId: 'npcData:NPC_PLOT_HOOKS', surface: 'npcs', drawKind: 'R' }).line || {}; // CENSUS-1c unit 2
   return {
     impression: s.impression,
     disposition: s.disposition,
-    behaviour: NPC_PLOT_HOOKS_DATA[s.disposition] || NPC_PLOT_HOOKS_DATA.transactional,
+    behaviour: dealingLineFor(s.disposition, personality), // STYLE-2 SW-7 (B10(b)): keyed to the card's traits, draw-free (npcData.js :: dealingLineFor)
   };
 };
 
@@ -587,7 +587,10 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
 
   // 25% chance: NPC knows something compromising about another NPC
   if (random01(0.25) && allNpcs.length > 1) {
-    const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex));
+    const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex)), rosterNames = allNpcs.map((n) => n?.name).filter(Boolean).sort((x, y) => y.length - x.length), frameOf = (t) => rosterNames.reduce((acc, nm) => acc.split(nm).join('@'), String(t ?? '')).trim(), heldFrames = held && held.size ? new Set([...held].map(frameOf)) : held; // STYLE-2 SW-7 (B10(b)): the held key is the frame
+    // STYLE-2 SW-7 (STYLE-RULINGS-2 B10(b)): NO FRAME TWICE IN ONE DOSSIER. The held refusal reads the FRAME,
+    // every roster name masked, so a second figure cannot carry the same secret under another name (the twelve
+    // at dc5684e66: one frame ten times in one town). Every frame held -> no roll, and the figure keeps its own.
     return drawDeclared([
       {
         what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows, and has been deciding for months whether to use it`,
@@ -605,7 +608,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
         what: `Has been reading ${otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking`,
         stakes: 'The intermediary has recently started asking for more money',
       },
-    ], { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::npcGenerator:CRIME_KNOWLEDGE`, poolId: 'npcGenerator:CRIME_KNOWLEDGE', surface: 'npcs', drawKind: 'R', held, heldKey: (s) => s.what }).line; // MERGE-R2: REVIEW-INTAKE-4's held secrets refused before the draw
+    ], { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::npcGenerator:CRIME_KNOWLEDGE`, poolId: 'npcGenerator:CRIME_KNOWLEDGE', surface: 'npcs', drawKind: 'R', held: heldFrames, heldKey: (s) => frameOf(s.what) }).line; // MERGE-R2: REVIEW-INTAKE-4's held secrets refused before the draw
   }
 
   // 45% chance: stress-driven institutional secret

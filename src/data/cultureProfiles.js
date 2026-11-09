@@ -145,7 +145,7 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Celtic-inspired',
     scope: 'Kin districts and open assemblies, with pasture and earthworks around them.',
     builtForm: [
-      'Older round or oval compounds sit among later rectangular halls, linked by lanes rather than a rigid grid.',
+      'Older round or oval compounds sit among later rectangular halls, linked by winding lanes with no set grid.',
       'A dispersed settlement has grown inward around an assembly green, defended height, or sacred enclosure.',
     ],
     civicPattern: [
@@ -471,7 +471,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     socialTexture: [
       'Clan, household, herd ownership, alliance, military following, and hospitality obligations organize public standing.',
-      'The settlement is a meeting point between mobile and sedentary expectations rather than the whole society.',
+      'The settlement is where mobile and settled ways of life meet, and much of the society lives beyond it.',
     ],
     architecturalDetails: [
       'corrals and open assembly ground occupy as much space as the permanent halls',

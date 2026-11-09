@@ -82,9 +82,13 @@ describe('FOOD-1 — one food record', () => {
     const fsAt = (deficitPct) => ({ deficitPct, foodRecord: deriveFoodRecord({ dailyNeed: 100, dailyProduction: 50, importCoverage: 50 - deficitPct, magicOffset: 0, deficitPct, surplusPct: 0, stressFamine: false, storageMonths: 1, hasGranary: false }) });
     const cfg = { tier: 'town', tradeRouteAccess: 'road' };
     const at18 = deriveEconomicSituationDesc(cfg, 'town', [], fsAt(18));
-    expect(at18).toMatch(/18% of daily need/);
-    expect(at18).toMatch(/after imports/i);
-    expect(deriveEconomicSituationDesc(cfg, 'town', [], fsAt(FOOD_SECURITY_CUTS.importDependent))).not.toMatch(/of daily need/); // anchored: at the cut the band is Pressured
+    // RE-KEYED 2026-11-09 (STYLE-2 SW-7, STYLE-RULINGS-2 A2: the per-cent slot leaves the sentence; the record's
+    // band speaks): Import-Dependent (over 15) reads "part of", Deficit (over 40) "much of"; "after imports" is
+    // "even with what is brought in". Was /18% of daily need/ and /after imports/i.
+    expect(at18).toMatch(/go short of part of the food they need each day/);
+    expect(at18).toMatch(/even with what is brought in/i);
+    expect(deriveEconomicSituationDesc(cfg, 'town', [], fsAt(45))).toMatch(/go short of much of the food/);
+    expect(deriveEconomicSituationDesc(cfg, 'town', [], fsAt(FOOD_SECURITY_CUTS.importDependent))).not.toMatch(/the food they need each day/); // anchored: at the cut the band is Pressured
   });
 
   it('the prosperity modifier cuts the gap where the band does', () => {

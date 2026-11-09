@@ -132,6 +132,34 @@ export function criminalsOf(f) {
   return f.underworld || 'the criminal houses';
 }
 
+/**
+ * STYLE-2 SW-7 (the refusal line): the open patron's go-between line, keyed by the patron's PLACE in the ruling
+ * power (its rank, or the steward of an empty seat), so the one frame "When @ wants something from @, @ is the one who
+ * asks for it." (168 towns on the 1,000 at dc5684e66) splits four ways by the record; the share words split it further.
+ * Every variant names the patron, the ruler and the power, and states only the rank and the share it receives.
+ * @param {PatronFacts} f
+ */
+function askerLine(f) {
+  const share = shareWords(f.share);
+  if (f.rank === 1) return `${f.name} heads ${f.ruler} and also holds ${share} in ${f.power}, so what ${f.power} wants from ${f.ruler} goes straight to the top.`;
+  if (f.rank === 2) return `${f.power} brings its requests to ${f.ruler} through ${f.name}, second in ${f.ruler}, who holds ${share} in ${f.power}.`;
+  if (f.rank === 3) return `${f.name} is third in ${f.ruler} and holds ${share} in ${f.power}, and carries ${f.power}'s requests to the two above.`;
+  return `While the seat of ${f.ruler} stands empty, its steward ${f.name} holds ${share} in ${f.power}, and ${f.power}'s requests go through ${f.name}.`;
+}
+
+/**
+ * STYLE-2 SW-7: the DM page's boosts row in words the record holds (the boost against the power's own strength), in
+ * place of "{base} on its own, +{boost}, {effective} in all". @param {number} base @param {number} boost @returns {string}
+ */
+export function boostWords(base, boost) {
+  const b = Number(base) || 0;
+  const r = b > 0 ? (Number(boost) || 0) / b : Infinity;
+  if (r < 0.2) return 'a little stronger than its own members make it';
+  if (r < 0.6) return 'much stronger than its own members make it';
+  if (r < 1.5) return 'about twice as strong as its own members make it';
+  return 'far stronger than its own members could make it';
+}
+
 /** @typedef {(f: PatronFacts) => string} PatronLine */
 /** @typedef {(f: CaptureFacts) => string} CaptureLine */
 
@@ -139,21 +167,23 @@ export function criminalsOf(f) {
 export const PATRONAGE_LINES = Object.freeze({
   // the face's open membership in another power (the boost is shown on the DM layer only, J-9)
   open: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${f.power}, and that lends ${f.power} +${pointWords(f.boost)} in strength.`,
-    (f) => `When ${f.power} wants something from ${f.ruler}, ${f.name} is the one who asks for it. ${f.name} is ${patronPlace(f.rank, f.ruler)} and holds ${shareWords(f.share)} in ${f.power}.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${f.power}, and that lends ${f.power} weight it would not have on its own.`,
+    (f) => askerLine(f),
     (f) => `${f.name} serves ${f.ruler} and ${f.power} at once. While ${f.name} holds both places, ${f.power} counts for more here than its own members would make it.`,
   ]),
   // the face's hidden allegiance to a criminal power (DM-only; the public page shows base strength)
   hidden: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${f.power}, and that lends ${f.power} +${pointWords(f.boost)} in strength that nobody outside the arrangement can see.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${f.power}, and that lends ${f.power} strength nobody outside the arrangement can see.`,
     (f) => `${f.power} has its own voice in ${f.ruler}: ${f.name}, ${patronPlace(f.rank, f.ruler)}. The others there hear it as ${f.name}'s own opinion.`,
-    (f) => `Anyone who weighs ${f.power} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${f.power} stands +${pointWords(f.boost)} stronger.`,
+    (f) => `Anyone who weighs ${f.power} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${f.power} is stronger than it looks.`,
   ]),
 });
 
 /** The five rungs' labels (the skimmable skeleton printed beside the line). */
 export const CAPTURE_RUNG_LABELS = Object.freeze({
-  none: 'None', adversarial: 'Adversarial', equilibrium: 'Equilibrium', corrupted: 'Corrupted', capture: 'Capture',
+  // STYLE-2 SW-7 (FOR THE OWNER'S VETO, the census law: a proposal): the state machine's tokens printed plain; the keys stay.
+  // Was 'None' · 'Adversarial' · 'Equilibrium' · 'Corrupted' · 'Capture'.
+  none: 'Free of the criminals', adversarial: 'Fighting the criminals', equilibrium: 'Living with the criminals', corrupted: 'Partly in criminal hands', capture: 'Run by the criminals',
 });
 
 /** @type {Readonly<Record<'none' | 'adversarial' | 'equilibrium' | 'corrupted' | 'capture', readonly CaptureLine[]>>} */

@@ -60,62 +60,62 @@ export const deriveEconomicSituationDesc = (
     : null;
 
   if (primaryStress === 'under_siege')
-    return 'All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies.';
+    return 'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.';
   if (primaryStress === 'famine')
-    return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense. Prices are simply at levels that exclude most of the population.';
+    return 'Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate.';
   if (primaryStress === 'occupied') {
     const extractionChannel = worldLaw.supportsMaritime()
       ? 'maritime levies'
       : worldLaw.supportsRiverTrade()
         ? 'river tolls and cargo seizures'
         : 'road tolls and seizure powers';
-    return `Revenue flows outward to the occupying authority via ${extractionChannel} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
+    return `The occupiers take their share through ${extractionChannel}, with forced assessments on top. Local trade goes on under their eye, and things are worse than the official word admits.`;
   }
   if (primaryStress === 'indebted')
-    return "Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned.";
+    return "Much of what the settlement takes in goes on its debts before anything can be spent at home, and the creditor's agent can block any spending. People still work and trade, but part of what they earn is owed before they earn it.";
   if (primaryStress === 'plague_onset')
-    return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis. As it is, each problem is making the other worse.";
+    return "Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.";
   if (primaryStress === 'politically_fractured')
-    return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but it is slower and more expensive than it should be.';
+    return 'Trading now means picking a way between rival powers that did not exist a year ago. Some merchants have taken sides. Trade between the sides goes on, but it is slower and dearer than it should be.';
 
   // The gap is the food record's (FOOD-1): what remains AFTER imports and magic, cut where
   // the band cuts it (a private 25 before), and said as what it is.
   const foodGapPct = Number(foodSecurity?.foodRecord?.gapPct ?? foodSecurity?.deficitPct) || 0;
   if (foodGapPct > FOOD_SECURITY_CUTS.importDependent) {
-    return `After imports, ${Math.round(foodGapPct)}% of daily need goes uncovered. Rationing and outside supply are economic necessities; commercial strength in other sectors cannot cover that gap.`;
+    return `Even with what is brought in, people here go short of ${foodGapPct > FOOD_SECURITY_CUTS.deficit ? 'much of' : 'part of'} the food they need each day. The settlement has to ration and buy from outside, and no other trade it has can make that up.`;
   }
 
   if (isolated) {
     const isTownPlus = getTradeRouteFeatures(config?.tier || config?.settType || 'village');
     const hasMagicTrade = hasTeleportationInfra(institutions, config);
     if (isTownPlus && !hasMagicTrade)
-      return 'This settlement is too large to survive in true isolation. Without trade routes, specialist goods cannot be sourced, surpluses cannot be sold, and population density cannot be sustained. The economy is structurally broken.';
+      return 'The settlement is too big to live cut off. With no trade routes it cannot buy what it does not make or sell what it has spare, and it cannot keep this many people fed.';
     if (isTownPlus && hasMagicTrade)
-      return 'Trade flows through magical channels. Teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.';
+      return 'Goods come and go by magic: teleportation circles and planar contacts do the work of roads. Trade works, but only as long as the circles do.';
     if (stress.stateCrime)
-      return 'Internal production is suppressed by institutional extraction. What little surplus exists flows upward rather than into communal welfare.';
+      return 'Those in power take so much that little gets made, and what little is left over goes to them.';
     if (econCat === 'very_high' || econCat === 'high')
-      return 'Despite isolation, internal production is well-organised. Skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.';
+      return 'Cut off as it is, the settlement runs itself well: skilled crafts, well-worked fields and shared stores keep it fed and supplied.';
     if (econCat === 'low' || econCat === 'very_low')
-      return 'The settlement struggles to sustain itself without outside trade. Resources are tightly rationed and growth is impossible.';
-    return 'The settlement meets its own needs without external trade, though surpluses are modest and specialist goods are unavailable.';
+      return 'With no outside trade, the settlement struggles to feed and supply itself. Everything is rationed, and there is nothing to spare for growing.';
+    return 'The settlement feeds and supplies itself without outside trade, but it has little to spare and cannot get what it does not make.';
   }
 
   if (stress.theocraticEconomy)
     return 'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.';
   if (stress.merchantCriminalBlur)
-    return 'Commerce is vigorous and the distinction between legitimate trade and criminal enterprise is largely academic. The wealthiest operators play both sides.';
+    return 'Trade is brisk, and it is hard to say where honest business ends and crime begins. The richest traders work both sides.';
   if (stress.stateCrime)
-    return 'The official economy appears functional. The reality is that institutional extraction (confiscations, forced sales, and selective taxation) suppresses productive activity.';
+    return "On paper the settlement's trade looks healthy. In fact, seizures, forced sales and unfair taxes keep people from making or selling much.";
   if (econCat === 'very_high')
-    return 'Commerce is the lifeblood of this settlement. Markets are active at all hours and guild influence reaches every trade.';
+    return 'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.';
   if (econCat === 'high')
-    return 'Trade is vigorous and the guilds are well-organized, generating steady civic revenue.';
+    return "Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.";
   if (econCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
   if (econCat === 'very_low')
-    return 'The economy is barely functional. Barter replaces coin and few outsiders bother to trade here.';
+    return 'Little coin changes hands here; people barter, and few outsiders bother to come and trade.';
   if (crimeCat === 'high' || crimeCat === 'very_high')
-    return 'Official commerce is moderate but a thriving shadow economy undercuts legitimate trade.';
+    return 'Honest trade gets by, but a busy black market undercuts it.';
   return 'Trade proceeds at an ordinary pace for a settlement of this size.';
 };
 

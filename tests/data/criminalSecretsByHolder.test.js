@@ -19,7 +19,10 @@ import {
 } from '../../src/data/npcData.js';
 import { classOfRole } from '../../src/domain/roles/roleClass.js';
 
-const BASE_SHA = '4b3d62d6455f7f1958caf0807b615479d0b3795a002aaebb0ef68f23f7f845c0';
+// STYLE-2 SW-7 (STYLE-RULINGS-2 B10(b), 2026-11-09): re-keyed by cause — two secrets name no neighbour the
+// realm may not hold ("in another settlement" → "elsewhere"; "to a rival settlement" → "to outsiders who pay
+// for it"); the table's shape and order unchanged. Was 4b3d62d6455f7f1958caf0807b615479d0b3795a002aaebb0ef68f23f7f845c0.
+const BASE_SHA = 'ba46807b06ed2cc08e0f8a40f635e2884366272a552ac616bfb0f11937f9bedd';
 const secretsOf = (/** @type {Array<{secret: string}>} */ rows) => rows.map((r) => r.secret);
 
 describe('NPC_CRIMINAL_SECRETS keyed by the holder (R-AX)', () => {

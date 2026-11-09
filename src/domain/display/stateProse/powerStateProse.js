@@ -516,6 +516,17 @@ export function riskPoolKey(riskLabel) {
 }
 
 /**
+ * Whether the governing row carries the `vacant` modifier — the same fact `powerStrata.js :: rulingChainOf` reads.
+ * @param {unknown} factions @returns {boolean}
+ */
+export function seatVacantOf(factions) {
+  if (!Array.isArray(factions)) return false;
+  const seat = factions.find((f) => f && typeof f === 'object' && /** @type {{isGoverning?: unknown}} */ (f).isGoverning === true);
+  const mods = seat ? /** @type {{modifiers?: unknown}} */ (seat).modifiers : null;
+  return Array.isArray(mods) && mods.includes('vacant');
+}
+
+/**
  * DS-POW-4's hold lens, read off the band's own multiplier.
  * @param {unknown} govMultiplier
  * @returns {string|null}
@@ -1073,7 +1084,11 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // DS-POW-4. The risk label is the caller's reading; the hold is the band's own multiplier;
   // the lineage is the settlement's own record. {counterpart} is the top challenger — the
   // corpus's own reading of it ("{counterpart} now outweighs the {seat}").
-  const riskKey = riskPoolKey(readings.riskLabel);
+  // SW-7 POWER-SIDE (STYLE-2 B7, "the seat's vacancy first"): a governing row carrying `vacant` (the stressor's
+  // own mark) is said FIRST by the ruling chain above ("The seat · Stands empty; the succession is unsettled",
+  // powerStrata :: rulingChainOf). Every risk pool speaks of a HOLDER ("keeps the hall", "the {seat} is exposed"), and
+  // an empty seat has none, so the block is silent there rather than contradict the chain an inch above it.
+  const riskKey = seatVacantOf(power.factions) ? null : riskPoolKey(readings.riskLabel);
   const holdKey = legitimacyHoldPoolKey(legitimacy.govMultiplier);
   const challenger = properFill(text(readings.contenders?.challengers?.[0]?.name));
 

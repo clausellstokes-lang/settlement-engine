@@ -62,7 +62,7 @@
     },
     {
       "id": "military#2.impression",
-      "text": "Relaxed in a way that reads as confidence rather than carelessness.",
+      "text": "Relaxed and sure of themselves, and not careless with it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -134,7 +134,7 @@
     },
     {
       "id": "economy#3.impression",
-      "text": "Cautious with newcomers. The wariness is professional rather than personal.",
+      "text": "Cautious with newcomers, because the work requires it; it is nothing personal.",
       "needs": [],
       "excludes": [],
       "crisis": [],

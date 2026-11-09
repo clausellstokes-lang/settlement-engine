@@ -51,6 +51,9 @@ describe('R11 · the Tonight sheet prefers the concrete', () => {
 
   it('soak1k-78: the seat (the crisis\'s target) with an abstract goal, the crisis secret withheld and no temperament on the record is voiced with nothing, never the abstract goal', () => {
     const seat = composeTonightSheet(born[EMPTY_SEAT_SEED]).people.find((p) => p.why === 'seat');
+    // COMPOSED 2026-11-09 (STYLE-2-MERGE, SW-7 point): SW-7 re-keyed this arm at its own base seed (868, Slavica
+    // Smirnov -> 'secret') under fb712a8d7's frame-keyed refusal; car 4 had already moved the arm to soak1k-78. Measured at
+    // the merged tree, soak1k-78's seat still says 'want' with nothing: the frame refusal does not reach this roster.
     expect(seat).toMatchObject({ name: 'Geta Aquila', says: 'want', line: '' });
   });
 

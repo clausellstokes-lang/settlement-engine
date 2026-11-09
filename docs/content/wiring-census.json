@@ -2,8 +2,8 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "4c7859fbaf2f41b51e1239b4ed1643c88a4180db57d98f8e95a03b20d435073e",
-      "src/domain/display/stateProse/powerStateProse.js": "af9935cf52a1efb0c55a292538334d4f239b916ad92b01898a51e53f780fa8af",
+      "src/domain/display/stateProse/generalStateProse.js": "2c5f8068c9204dc61338a2b412e518c30085ac8aaa89304ca2163e681a56d29d",
+      "src/domain/display/stateProse/powerStateProse.js": "523abd0abf701f5398a4f4e54f11724ea674325edbf3b141bc768a7f3d60b569",
       "src/domain/display/stateProse/economyStateProse.js": "1f730c5bac18dd1491b979cd16cded450c80ad9f832e5dc8bdda85cc89ad65c9",
       "src/domain/display/stateProse/defenseStateProse.js": "5199d1ba9d1405374cc20ab3d07e3d0ae86c802d3df5d9548eae89fc046659a7",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
@@ -37,8 +37,8 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 616,
-      "COVERED": 240,
+      "THIN": 615,
+      "COVERED": 241,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -34351,6 +34351,7 @@
       ],
       "slotsNamed": [
         "counterpart",
+        "faction",
         "seat",
         "settlement"
       ],
@@ -34804,7 +34805,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -36036,12 +36037,13 @@
         "settlement"
       ],
       "slotsNamed": [
+        "seat",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "breakdown.safety",
@@ -54607,7 +54609,7 @@
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
       "variants": 6,
-      "grammars": 4,
+      "grammars": 5,
       "blocks": [
         "DS-POW-6"
       ]
@@ -54619,7 +54621,7 @@
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
       "variants": 6,
-      "grammars": 4,
+      "grammars": 5,
       "blocks": [
         "DS-POW-6"
       ]
@@ -70834,7 +70836,7 @@
         "label (via RISK_POOL_OF in powerStateProse.js)"
       ],
       "readingFunction": "RISK_POOL_OF",
-      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, seat, settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, faction, seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -70894,7 +70896,7 @@
       "subject": "council",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -71051,7 +71053,7 @@
       "count": "4 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-POW-6",
       "subject": "capture pressure ADVANCING (weak security, poor prosperity)",
       "fields": [
@@ -71059,7 +71061,7 @@
         "breakdown.prosperity"
       ],
       "readingFunction": "capturePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "THIN",

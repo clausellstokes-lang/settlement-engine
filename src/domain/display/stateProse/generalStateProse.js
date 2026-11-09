@@ -677,7 +677,8 @@ export function eventRecordPoolKey(events) {
  * ("As of the founding survey, …", W0 cause 5). That text is machinery (it says
  * "structurally embedded"), so this desk never prints it: it reads WHICH of the generator's
  * three relationships the top annotation states — the generator's own fixed clauses,
- * matched here verbatim — and says that relationship plainly. A row whose clause matches
+ * matched here verbatim (STYLE-2 SW-7, A11: the plain clauses of 2026-11-09, the old ones kept so a saved
+ * world's annotation still keys) — and says that relationship plainly. A row whose clause matches
  * none of the three is still a link, and draws the plain LINKED line.
  * @param {unknown} annotations @returns {{key: string, row: {eventName?: unknown, yearsAgo?: unknown}}|null}
  */
@@ -685,9 +686,9 @@ export function legacyPoolKey(annotations) {
   const top = Array.isArray(annotations) ? annotations[0] : null;
   const said = text(/** @type {{annotation?: unknown}} */ (top)?.annotation);
   if (!top || !said) return null;
-  const key = / created pressure that has not been fully resolved: /.test(said) ? 'LEGACY-UNRESOLVED'
-    : / was a disruption the settlement has since moved through: /.test(said) ? 'LEGACY-RECOVERED'
-      : / established conditions that have since shifted: /.test(said) ? 'LEGACY-SHIFTED'
+  const key = / (?:left trouble that has never been put right|created pressure that has not been fully resolved): /.test(said) ? 'LEGACY-UNRESOLVED'
+    : / (?:hit the settlement hard, and it has since recovered|was a disruption the settlement has since moved through): /.test(said) ? 'LEGACY-RECOVERED'
+      : / (?:set up ways of doing things that have since changed|established conditions that have since shifted): /.test(said) ? 'LEGACY-SHIFTED'
         : 'LEGACY-LINKED';
   return CORPUS['DS-GEN-16'].pools[key] ? { key, row: top } : null;
 }
