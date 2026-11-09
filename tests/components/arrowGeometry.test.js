@@ -241,13 +241,14 @@ describe('(b2) the blank plate is centred in its band on the page', () => {
     return plate - band;
   };
 
-  it('within one CSS px at every full width below S_MAX, 1024 to 1279', () => {
+  it('within one CSS px at the screenshot widths, and at every full width from 1024 to 3840', () => {
     // Red at the painting as first composed (d46ce9503): 1024 +10.8, 1440 +24.94, 1920 +59.23,
-    // 3840 +196.37 CSS px toward the head.
-    const named = [1024, 1279].map((cw) => [cw, Number(offCentre(cw).toFixed(2))]);
+    // 3840 +196.37 CSS px toward the head. With the drop and the fixed fill but the plate's whole
+    // part at the drop (865fdcd26): 1440 +11.74, 1920 +46.03, 2560 +91.74, 3840 +183.17.
+    const named = [1024, 1279, 1280, 1440, 1920, 2560, 3840].map((cw) => [cw, Number(offCentre(cw).toFixed(2))]);
     expect(named.filter(([, d]) => Math.abs(d) > 1)).toEqual([]);
     const off = [];
-    for (let cw = FULL_MIN_VIEWPORT; cw < 1280; cw += 1) if (Math.abs(offCentre(cw)) > 1) off.push(cw);
+    for (let cw = FULL_MIN_VIEWPORT; cw <= 3840; cw += 1) if (Math.abs(offCentre(cw)) > 1) off.push(cw);
     expect(off).toEqual([]);
   });
 
@@ -351,11 +352,12 @@ describe('(c2) the six sections are equal between their red bindings, and grow t
         expect(own[0]).toBeCloseTo(own[1], 9);
         expect(w[k]).toBeCloseTo(SECTION_W[k] * layout.s + own[0] + own[1], 9);
       });
-      // The plate's slot is one part in seven of the extra, one section's growth on average, at
-      // its drop; its fixed fill carries PLATE_SHIFT columns (2026-11-09).
+      // The plate's slot is one part in seven of the extra, one section's growth on average,
+      // split in halves either side of the plate since 2026-11-09 (the fill after it also
+      // carries its fixed PLATE_SHIFT columns).
       const extra = cw - STRIP_W * layout.s;
-      expect(layout.fillers[CUTS.length - 2].slot).toBeCloseTo(extra / PARTS, 9);
-      expect(layout.fillers[CUTS.length - 1].slot).toBeCloseTo(PLATE_SHIFT * layout.s, 9);
+      expect(layout.fillers[CUTS.length - 2].slot).toBeCloseTo(extra / PARTS / 2, 9);
+      expect(layout.fillers[CUTS.length - 1].slot).toBeCloseTo(extra / PARTS / 2 + PLATE_SHIFT * layout.s, 9);
     }
   });
 

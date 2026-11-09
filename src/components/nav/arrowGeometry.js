@@ -45,8 +45,8 @@
  * columns on, joined by the cut's own crossfade over its filler), and PLATE_SHIFT columns of
  * filler are ADDED at a FIXED join in the shaded gap after it, toned to that gap. The page width
  * is unchanged (one drop, one fill of the same width), and the plate sits 35 columns from binding
- * 7 and 34 from the arrowhead's binding. Above S_MAX the plate's one part of the extra width
- * opens at its drop.
+ * 7 and 34 from the arrowhead's binding. Above S_MAX the plate's one part of the extra width is
+ * split in two halves, one at each of its joins, so it stays centred as the band grows.
  *
  * THE SIX SECTIONS ARE EQUAL (owner, 2026-11-08: "The spacing between the sections
  * ( represented by the banded thread red) are not equally spaced and scales as such can you
@@ -243,8 +243,8 @@ export const PLATE_FILL_FE = 4;
  * THE PLATE'S TWO JOINS (2026-11-09; the plate's one cut was 1596 until then). 1586, in the
  * middle of the run [1566, 1628), DROPS PLATE_SHIFT columns: the next range starts at 1608, and
  * the crossfade shows [1586, 1596) from the left and [1598, 1608) from the right, all plain wood,
- * fifteen columns clear of the plate's tip; it takes the plate's part. 1881, in the middle of
- * SHADED_GAP, adds a FIXED PLATE_SHIFT columns of filler (times s) at every width.
+ * fifteen columns clear of the plate's tip. 1881, in the middle of SHADED_GAP, adds a FIXED
+ * PLATE_SHIFT columns of filler (times s) at every width. Each takes half the plate's part.
  * @type {ReadonlyArray<Readonly<{ x: number, fe: number, drop?: number, fixed?: number }>>}
  */
 export const CUTS = /* @__PURE__ */ Object.freeze([
@@ -394,7 +394,8 @@ export function waterLevel(wood) {
  * The slot at each cut of the full arrow, CSS px, for one part of the extra width (`part`)
  * at scale s. The six sections' share (six parts) water-fills to the level L, so a section's
  * width is max(painted, L) x s and each of its two slots takes half of what it gained; the
- * plate's drop (in no section) takes one part, and its fixed fill its PLATE_SHIFT columns.
+ * plate's two joins (in no section) take half a part each, and the fixed fill its PLATE_SHIFT
+ * columns.
  * @param {number} part
  * @param {number} s
  * @returns {number[]}
@@ -403,7 +404,7 @@ export function fullSlots(part, s) {
   const level = waterLevel((6 * part) / s);
   return CUTS.map(({ x, fixed = 0 }) => {
     const hit = Object.values(NAV_HIT).find((h) => x > h.x0 && x < h.x1);
-    return hit ? (Math.max(0, level - hit.x1 + hit.x0) * s) / 2 : (fixed ? fixed * s : part);
+    return hit ? (Math.max(0, level - hit.x1 + hit.x0) * s) / 2 : part / 2 + fixed * s;
   });
 }
 
