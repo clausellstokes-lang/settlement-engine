@@ -586,3 +586,12 @@ Also measured at this seat's commits: `96efb3b00`, `ba15f9332`, `22795b8c6`, `5e
 | D·87 comparisons footnote | `Each picture answers one question, from the register's own rows. A quiet ledger asks nothing.` | "Each picture answers one question from the register's rows. A picture with nothing to show is left out." (census: read against the writer — the whole block returns nothing for no rows, the tier and prosperity pictures always have rows when it renders, and the exhaustion picture is drawn only when it has a band: the line states what the code does) |
 
 Pins: a new `tests/components/realmComparisonsWords.test.jsx` (the footnote, and the empty exhaustion picture left out); **red at the parent**, green here. Registers: none moved.
+
+### 9v. `NpcTrailSection.jsx` (D·88, and D·71's twin at :76)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·88 trail footnote | `Every line is a contest the ladder opened or a seat that actually changed hands. A figure who has left every rung is no longer listed here, and where one appears in someone else's line it goes unnamed rather than shown as a record key.` | "Every line is a challenge for a seat, or a seat that changed hands. Someone who no longer holds or seeks any seat drops off this list, and where they appear in another's line they go unnamed." |
+| D·71's twin (:76) undated line | `at a time the record does not fix` | "undated" (the same string the relationship chronicle took in 9g; the audit's "one cure for both", landed in this writer's own commit) |
+
+Pins: `npcTrailSection.test.jsx` — the footnote, with an anchored negative on "ladder" / "rung" / "record key"; **red at the parent** (1 of 7), green here. The undated twin has no fixture: PLAUSIBLE. Registers: none moved.

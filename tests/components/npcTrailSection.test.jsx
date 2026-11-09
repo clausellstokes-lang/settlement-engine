@@ -94,6 +94,10 @@ describe('NpcTrailSection — legibility and the empty state', () => {
     expect(container.textContent).not.toContain('ash:');
     // anchored: same live page as the calendar assertions two lines up; a blank render would have failed there first.
     expect(container.textContent).not.toMatch(/faction_challenge|seatTransitions|contest\./);
+    // STYLE-2 SW-12 (ledger D·88): the footnote names no ladder, rung or record key.
+    expect(container.textContent).toMatch(/Every line is a challenge for a seat, or a seat that changed hands\. Someone who no longer\s+holds or seeks any seat drops off this list/);
+    // anchored: the same live page matched the new footnote on the line above.
+    expect(container.textContent).not.toMatch(/contest the ladder opened|left every rung|record key/);
   });
 
   test('a realm whose ladder recorded nothing renders NOTHING', () => {
