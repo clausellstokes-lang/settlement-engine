@@ -140,9 +140,9 @@ reg('government','stable',
 );
 
 // ── military ──────────────────────────────────────────────────────────────────
-// SW-6 second seat (B10(b)): the soldiers' seat-holders in plain words, the machinery struck; the goals untouched.
+// SW-6 second seat (B10(b)): the armed seat-holders in plain words, the machinery struck; the goals untouched.
 reg('military',GOVERNANCE_FRACTURED,
-  { position:  'Commands the soldiers while the seat loses its hold; whoever gives the orders next will want them.',
+  { position:  'Commands those under arms while the seat loses its hold; whoever gives the orders next will want them.',
     goal:      'Keep the people under their command together, whoever ends up giving the orders.',
     constraint:'Cannot step in to keep order without taking a side in the fight over the seat.' },
   { position:  'Leads a squad that now takes orders from more than one master.',
@@ -150,7 +150,7 @@ reg('military',GOVERNANCE_FRACTURED,
     constraint:'Keeping the squad in hand takes quiet favours that no one can be told about.' }
 );
 reg('military','corruption',
-  { position:  'Commands the soldiers while criminals pay some of those who wear their colours.',
+  { position:  'Commands those under arms while criminals pay some of the people in their ranks.',
     goal:      'Find out which of their own officers are on the take, before the payers notice.',
     constraint:'Anyone sent to look into the payments is offered the same coin.' },
   { position:  'Leads a squad in a force where some officers are known to take bribes.',
@@ -174,15 +174,15 @@ reg('military','economic_stress',
     constraint:'If anyone sees how thin the squad has worn, they will test it.' }
 );
 reg('military','contested',
-  { position:  'Commands the soldiers while rivals fight over the seat, and each side wants them.',
+  { position:  'Commands those under arms while rivals fight over the seat, and each side wants them.',
     goal:      'Keep everyone under their command out of the fight for the seat until it is settled.',
-    constraint:'Keeping the soldiers out of the fight takes quiet work that cannot be owned in public.' },
+    constraint:'Keeping those under arms out of the fight takes quiet work that cannot be owned in public.' },
   { position:  'Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.',
     goal:      'Stop their squad splitting into two camps before the fight for the seat is over.',
     constraint:'Some of the squad have loyalties of their own, and they do not all point the same way.' }
 );
 reg('military','stable',
-  { tags: CALM_ONLY, position:  'Commands the soldiers in quiet times; the work is keeping trouble from starting.',
+  { tags: CALM_ONLY, position:  'Commands those under arms in quiet times; the work is keeping trouble from starting.',
     goal:      'Keep the drills, the patrols and the pay going, and the old hands in charge of them.',
     constraint:'With nothing threatening, it is hard to win the coin and the say that would be needed if trouble came.' },
   { tags: CALM_ONLY, position:  'Leads a squad in quiet times, where the work is routine and the risks are low.',

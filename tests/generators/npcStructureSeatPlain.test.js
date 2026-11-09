@@ -10,6 +10,10 @@ import { describe, expect, it } from 'vitest';
 import { enrichNPCsWithStructure } from '../../src/generators/npcStructure.js';
 
 const MACHINERY = /legitimacy|institutional|governance|governing|structur|faction|civic|rather than|Formal title|contingent|consolidat|accountab|capacity|settlement/i;
+// The census law, held by the record battery's own defence words (coherence/defenseWordsFindings.js): the pool
+// reads only the category, the condition and the rank, so no line may name soldiers, a garrison, walls or a
+// hospital the record may lack (the 1,000 at the second seat's tip: battery.defense-words 653 -> 679 on "soldiers").
+const DEFENCE_WORDS = /\bsoldiers?\b|\bgarrison|\b(?:walls|walled)\b|\bhospitals?\b|Guard Captain/i;
 const head = (category) => ({ name: 'Oswin Hale', role: 'Mayor', category, memberships: [{ power: 'Seat', rank: 1, share: 1 }], goal: { short: 'g', long: 'g' } });
 const clerk = (category) => ({ name: 'Ada Venn', role: 'Clerk', category, memberships: [{ power: 'Seat', rank: 3, share: 1 }], goal: { short: 'h', long: 'h' } });
 const place = (category, { legitimacy = {}, capture = 'none', food = '', prosperity = 'Comfortable' } = {}) => ({
@@ -49,6 +53,8 @@ function readsPlain(category, own) {
           expect(text).not.toMatch(MACHINERY);
           // anchored: the same text as above
           if (own) expect(text).not.toMatch(own);
+          // anchored: the same text as above
+          expect(text).not.toMatch(DEFENCE_WORDS);
         }
       });
     }
