@@ -109,11 +109,12 @@ import {
   RETIRED_WAVE_W2_BASELINE_SCHEMA,
   RETIRED_WAVE_FOOD_BASELINE_SCHEMA,
   RETIRED_WAVE_VEIL_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema36Baseline,
+  validateSchema37Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -267,7 +268,10 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 36 = schema 35's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the
  *     ALLEGIANCE-CAR1 merge (one rung, two causes, every row with one; the car's own 33 is the veil
  *     merge 35 already minted, not re-minted): the hidden allegiance admits 11 rows, retires 17 and
- *     raises 1; the J-19 re-deal admits 13; nothing declared, the bank 76/50. THE LIVE AUTHORITY.
+ *     raises 1; the J-19 re-deal admits 13; nothing declared, the bank 76/50 (RETIRED).
+ * 37 = schema 36's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the
+ *     ALLEGIANCE-CAR2 merge (one rung, one cause): the guild's push (bbb1a4abc) re-deals the year and
+ *     retires 13 rows; nothing new, nothing declared, the bank 76/50. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -299,6 +303,7 @@ export {
   RETIRED_WAVE_W2_BASELINE_SCHEMA,
   RETIRED_WAVE_FOOD_BASELINE_SCHEMA,
   RETIRED_WAVE_VEIL_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1610,7 +1615,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema36Baseline(baseline);
+  validateSchema37Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3135,10 +3140,14 @@ export function baselineOf({
       '(one rung, two causes, every row with one): the corpus gains producer 1b\u2032 (the infiltrated topology; no',
       'row moves) and the veiled re-deal ADMITS 4 `covert on impairments` rows and retires 13; nothing is declared',
       'and the bank is 76/50 (RETIRED).',
-      'SCHEMA 36 = schema 35\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
+      'SCHEMA 36 (RETIRED) held schema 35\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
       'ALLEGIANCE-CAR1 merge (one rung, two causes, every row with one; the car\'s own 33, the veil merge, is not',
       're-minted): the hidden allegiance (5902f1a4a) ADMITS 11 rows, retires 17 and raises 1; the J-19 re-deal',
-      '(d131ab158) ADMITS 13; nothing is declared and the bank is 76/50.',
+      '(d131ab158) ADMITS 13; nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 37 = schema 36\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
+      'ALLEGIANCE-CAR2 merge (one rung, one cause): the guild\'s push (bbb1a4abc) re-deals the year and retires 13',
+      'rows (nearbyResourcesState on config, resourceHistory on settlement); nothing is new, nothing is declared',
+      'and the bank is 76/50.',
       'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3149,7 +3158,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–35 are the RETIRED numeric predecessors.',
+      'Schemas 4–36 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3323,7 +3332,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema36Baseline,
+    validateBaseline: validateSchema37Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

@@ -95,6 +95,7 @@ import {
   validateSchema34Baseline,
   validateSchema35Baseline,
   validateSchema36Baseline,
+  validateSchema37Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -127,6 +128,7 @@ import {
   WAVE_FOOD_TARGET_SCHEMA,
   WAVE_VEIL_TARGET_SCHEMA,
   TRAIN_CAR1_TARGET_SCHEMA,
+  TRAIN_CAR2_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1618,7 +1620,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(declaredBankOf(WAVE_FOOD_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(WAVE_VEIL_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(TRAIN_CAR1_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(TRAIN_CAR1_TARGET_SCHEMA));
+    expect(declaredBankOf(TRAIN_CAR2_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(TRAIN_CAR2_TARGET_SCHEMA));
     expect(declaredBankOf(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
     expect(declaredBankOf(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
@@ -1710,7 +1713,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ SCHEMA 28: THE TIER-CHANGE COVERAGE PASS (the chair's corpus-coverage ruling of 2026-11-06, the militia precedent): schema 27's envelope, tag law, roster and register UNCHANGED, re-governed to a corpus builder whose producer 2b pulses one town generated over the city cut so the stamp law mints the tier candidate R-B1 took from producer 2; its reconciliation must be, and measurably is, EMPTY.
     // ⭐ SCHEMA 29: THE MIGRATION-DIRECTION DECLARATION (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): schema 28's envelope, tag law, corpus and register re-governed to ONE declaration of the fifth class, `migrationDirection on config` (the roster 13 -> 14, the bank 77/51); its one new row is admitted tagged and nothing else moves.
     // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing declared, the bank 77/51.
-    expect(BASELINE_SCHEMA).toBe(36); // the allegiance-car1 rung, 2026-11-09 (MERGE-TRAIN)
+    expect(BASELINE_SCHEMA).toBe(37); // the allegiance-car2 rung, 2026-11-09 (MERGE-TRAIN)
     expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
     expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
@@ -1739,7 +1742,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema36Baseline(live)).toBe(live); // the allegiance-car1 rung (36), 2026-11-09 (MERGE-TRAIN)
+    expect(validateSchema37Baseline(live)).toBe(live); // the allegiance-car2 rung (37), 2026-11-09 (MERGE-TRAIN)
+    expect(() => validateSchema36Baseline(live)).toThrow(/is not schema 36/);
     expect(() => validateSchema35Baseline(live)).toThrow(/is not schema 35/);
     expect(() => validateSchema34Baseline(live)).toThrow(/is not schema 34/);
     expect(() => validateSchema33Baseline(live)).toThrow(/is not schema 33/);
@@ -1893,7 +1897,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(36); // the allegiance-car1 rung, 2026-11-09 (MERGE-TRAIN)
+    expect(BASELINE_SCHEMA).toBe(37); // the allegiance-car2 rung, 2026-11-09 (MERGE-TRAIN)
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 
