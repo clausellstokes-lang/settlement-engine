@@ -62,6 +62,10 @@ import { ROOT } from '../helpers/dossierCorpus.js';
  */
 const MOUNTS_THE_CORPUS_DOES_NOT_REACH = Object.freeze({
   'defense.criminalStructure': 'DS-DEF-4 fires on no town of either corpus',
+  // MERGE-WAVE record 9 (2026-11-08): W4 PEOPLE mounted DS-FTH-4 at `faith.templeGround` (86a30fdf2); measured at the final tip.
+  'faith.templeGround': 'DS-FTH-4 fires on no town of either corpus (its five flag pools, crusaderSynthesis,'
+    + ' heresySuppression hunted/preached, religiousFraud and mageTheocracy, read null on the RATE grid; its four'
+    + ' standing pools are WIRING-UNRESOLVED in the census)',
   'economics.tradeFlow': 'DS-ECO-3 reads `flowDrift`, which EconomicsTab derives from the OWNING'
     + ' CAMPAIGN\'s worldState; a headless corpus town belongs to no campaign, so the shipped tab'
     + ' answers null here too',
@@ -193,11 +197,15 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 67,802 -> 67,674 (378/366/358 -> 380/368/358) at MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json).
     // Towns unmoved at 516/3/3/3.
+    // 67,674 -> 73,292 (380/368/358 -> 408/394/388) at MERGE-WAVE RECORD 9, THE COMPOSED-PROSE MANIFEST AT THE WAVE'S FINAL TIP (ODQ §934.105, THE WAVE, MERGE-WAVE, 2026-11-08; record docs/shift-records/2026-11-08-merge-wave-9-composed-prose-manifest.json, the manifest signed once), measured
+    // at every merge point's stage: W1 ECO +3,668 (380/368/358 -> 402/388/382), W2 DEF +146, W3 POW 0, W4 PEOPLE +312, W5 HIS +1,152
+    // (-> 408/394/388), W1-A0b 0, W7 HOOKS 0, FIX-FOOD-ISOLATION +52, EXPORT-KEYS 0, FIX-PUBLIC-VEIL +288, the rest 0.
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_674, towns: 516 },
-      'gm-seed-a': { cells: 380, towns: 3 },
-      'gm-seed-b': { cells: 368, towns: 3 },
-      'gm-seed-c': { cells: 358, towns: 3 },
+      'golden-master-v3': { cells: 73_292, towns: 516 },
+      'gm-seed-a': { cells: 408, towns: 3 },
+      'gm-seed-b': { cells: 394, towns: 3 },
+      'gm-seed-c': { cells: 388, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
@@ -394,9 +402,13 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
       .toEqual(reasoned);
     // 56 -> 57 and 42 -> 43 (W2 DEF third seat, 2026-11-07): `viability.isolationSupport` (DS-DEF-12) is registered and
     // recorded — the recipe's defense call list (`prose-rate-corpus.mjs :: deskReturns`) composes its desk.
-    expect(registered.length, 'the registry\'s distinct mounts').toBe(57);
+    // 57 -> 60 and 43 -> 45 at MERGE-WAVE RECORD 9 (ODQ §934.105, THE WAVE, MERGE-WAVE, 2026-11-08; record docs/shift-records/2026-11-08-merge-wave-9-composed-prose-manifest.json, the manifest signed once), measured at every merge point's stage:
+    // `economics.upstreamSupply` (DS-SUP-2, W1 ECO 725b62eb5) and `history.legacy` (W5 HIS) are registered and recorded;
+    // `faith.templeGround` (DS-FTH-4, W4 PEOPLE 86a30fdf2) is registered and, firing on no town of the RATE grid, carries
+    // its measured reason above. (`viability.isolationSupport`, W2's, was already in the 57.)
+    expect(registered.length, 'the registry\'s distinct mounts').toBe(60);
     expect(registered.filter((m) => recorded.has(m)).length, 'and the manifest records this many')
-      .toBe(43);
+      .toBe(45);
     // ⛔ AND THE REASONS ARE RE-MEASURED, NEVER TAKEN ON FAITH: every reasoned mount sits on a
     // block that fires on NO town of the RATE grid either, so its silence here is the world's
     // and not this recipe's. A block that starts speaking reds this arm until someone re-states
@@ -545,7 +557,10 @@ describe('the two controls no one-audience manifest can see', () => {
     // audience only, which is a leak in the other direction and has no lawful reading.
     expect(playerOnly, 'a position on the PLAYER face only, which no audience filter can produce')
       .toEqual([]);
-    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(36);
+    // 36 -> 194 at MERGE-WAVE RECORD 9 (ODQ §934.105, THE WAVE, MERGE-WAVE, 2026-11-08; record docs/shift-records/2026-11-08-merge-wave-9-composed-prose-manifest.json, the manifest signed once), measured at every merge point's stage: all +158 at the
+    // W1 ECO merge (ea0e269a9), `DS-ECO-6 :: FACET: an underground house` (158 positions, a covert facet the player's audience
+    // filter empties, the lawful direction); DS-POW-6's capture-pressure 36 unmoved; 194 from W1 to the tip, no other point moves it.
+    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(194);
     // The paired control on the direction split itself, so it cannot go vacuous.
     const synthetic = new Map([['a', { dm: {} }], ['b', { player: {} }], ['c', { dm: {}, player: {} }]]);
     expect([...synthetic].filter(([, seat]) => seat.player && !seat.dm).map(([at]) => at),
