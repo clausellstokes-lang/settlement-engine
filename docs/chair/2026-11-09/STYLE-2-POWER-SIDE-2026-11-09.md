@@ -267,3 +267,370 @@ This lane's charge, not reached in this seat's budget — for a second seat, by 
 - SURFACES P50 (the Mixed Council government-type line "Power is distributed across multiple factions…" against a Dominant rival on the same chapter): its writer is `rulingStructure.js` (:409–410), outside this lane's list — for SW-B1 with P51's order fault (§2.6).
 - RULED by the chair (08:5x): council v2 31 → 33 KEPT (the lens cure's routing; PLAUSIBLE attributed); the merchant arm's lighting ACCEPTED. Follow-up, not this lane's: DS-POW-5's `mixed` arm is silent at the tip (v1–v3 at 0: no birth seat is placed there) — either the lens's `mixed` definition is revisited or the three lines go to the post-deploy dead-code census.
 - Named, not this lane's: the DM panel's rung labels and "The boosts" figure line, and the PATRONAGE_LINES frame "when @ wants something from @, @ is the one who asks for it." (168 towns) — `src/data/people/dmPowerLines.js`, WRITE-PEOPLE's (§2.9); the "(dominant)" suffix inside minted faction names (SW-8).
+
+
+## 7. The second seat
+
+**Seat:** SW-7 POWER-SIDE, second seat (Claude Opus 5.5), session `session_01FbPLbdMQQTVchJUyvHuFQJ`, a child of the cloud chair (`session_01FbPLbejcfwX5nii12VM673`). It continues on the same lane from the first seat's hand-back, `dc5684e66` (verified as the checkout's HEAD), with nothing rebased or rewritten. **Worklist:** "What stays (by file)" above, in the chair's order, plus the chair's item 10 (`dmPowerLines.js`, WRITE-PEOPLE's file; that lane is closed and merged). Every line below is old → new for the owner's veto. Merged by STYLE-2-MERGE; this lane signs nothing.
+
+### 7.0 The measurement at the base (`dc5684e66`)
+
+- **The twelve** (`soak1k-0 … 11`, birthed by the soak's own `corpus.mjs :: birth`; scratch `npcmeas.mjs`): 405 NPC cards and 403 printed ties. "How they deal": **three lines on 371 of 405 cards in 11 towns** (128 / 123 / 120), confirming B10(b). Secret frames repeating twice or more in one dossier: **20** (the largest is "Knows something about @ that @ believes no one else knows …", 30 cards in 6 towns and ten times in one town), all four from `npcGenerator.js`'s inline CRIME_KNOWLEDGE pool, not npcData. Tie tension lines that name neither party: **81 of 403**.
+- **The 1,000** at the base: exit 0, 1,000 settlements, 0 errors, 702 findings, CLIMB. The twenty frames read exactly as §0 records (439 … 194).
+- **The full suite** at the base, run once in a clean worktree: 41 files / 63 tests red (3,133 files; 4,351 s). Every red named in this section is checked against that list.
+- **tsc --noEmit**: 167 errors at the base and 167 at the npcData tip.
+- **Golden-master tool**: a scratch re-hash over `tests/helpers/goldenMasterCorpus.js` with the test's own `generateSettlementPipeline` call, per top-level field (`gm.mjs`). At `dc5684e66` it differs from the committed fixture on 429 of 525 rows. These are the first seat's unsigned causes; §5 recorded 441, measured with a different tool. Every gm delta below is parent → commit with this one tool, so the base offset cancels. The fence corpus is driven row by row by its test's own loop (`fence.mjs`); prose cells come from `scripts/prose-manifest-cells.mjs --out` → `prose-manifest-diff.mjs`.
+
+### 7.1 The commits, one cause each
+
+| commit | file(s) | cause |
+|---|---|---|
+| `d41435ecd` | npcData.js · npcGenerator.js (pickTitle's argument) · generationForkCensus (a line re-key) | B10(b): "How they deal" keyed to the card's own traits, draw-free |
+| `4c5614d27` | npcData.js · the CENSUS-4 ledger · criminalSecretsByHolder's sha | B10(b): two secrets name no neighbour the realm may not hold |
+| `fb712a8d7` | npcGenerator.js :: generateCrimeLevel | B10(b): no secret frame twice in one dossier (the held refusal reads the frame) |
+| `640378639` | npcData.js · the CENSUS-4 ledger | B10(b): the 26 nameless tie tension lines read the pair's names |
+| `effda57d6` | npcData.js · four CENSUS-4 ledgers | A9: npcData's last five "rather than" |
+| `4bf93741b` | institutionalCatalog.js | A3 · A9: 17 rows by minimal swaps + the ceiling reason's "rather than" |
+| `6f340466f` | prosperity.js · foodRecord / foodModelSingleWriter pins | A2: 19 rows; "arithmetic" and the per-cent slot go (the band speaks) |
+| `936d4ec06` | legacyGenerator.js | A2: the 19 SOURCES §2.5 rows only (the A11 wrapper left for SW-9) |
+| `7e1009be5` | governingStressVignettes.js | A2: the conversion vignette's variant 0 only |
+| `4296505ed` | cultureProfiles.js · CULTURE_PROFILES_DAILY ledger | A9: the two printed "rather than" |
+| `ee5d994fb` | safetyProfile.js | A9: the revolt line's "rather than" (neither SW-B5 nor SW-B6 touches it) |
+| `efe1294e4` | allegiance.js · the CORRUPT_SHORT_GOAL ledger | the fanaticism goal (the audit's corruptionPass.js row) |
+| `d8739f6e3` | dmPowerLines.js | item 10(a): the hall's rung labels in plain words (a PROPOSAL) |
+| `b26d35d0a` | dmPowerLines.js · WhoRunsThisTownPanel.jsx · pdf/sections/WhoRunsThisTown.jsx | item 10(b): the boosts row in words; "+N in strength" leaves three patron lines |
+| `6cda3ce68` | dmPowerLines.js | item 10(c): the refusal line, the go-between frame split by the patron's place |
+| `cbba52029` | legacyGenerator.js · generalStateProse.js (legacyPoolKey) · generalStateProseDesk test | A11: the annotation wrapper's three clauses in plain words (routed here 09:0x) |
+| `969e95133` | npcGenerator.js | follow-up of `fb712a8d7`: the declarations folded onto one line; the size ratchet back at 1192 (behaviour byte-identical) |
+| `c8c760142` | tonightConcreteFirst test | follow-up of `fb712a8d7`: soak1k-868's seat arm re-keyed by identity |
+| `1d1369095` | worldFactRederive test | follow-up of `6f340466f`: prosperity.js leaves A4's culture-reader set (it matched only "agriculture") |
+| `417acb424` | scripts/.writer-reach-baseline.json | register, its shrink-only `--write` door (cohort 1362 → 1362) |
+| `8ab5972db` | docs/content/wiring-census.json | register, its door: generalStateProse.js re-stamped |
+
+**Outside the first list, taken under the STOP's default sent to the chair:** `npcGenerator.js` (SW-5's file) for two draw-site edits B10(b) cannot be made without. One is pickTitle's personality argument; the other is the frame-keyed held refusal in generateCrimeLevel. SW-5's pushed hunks in that file (its goal longs, the CRIME_KNOWLEDGE stakes line, the wartime notes, NPC_GOAL_SIBLINGS) do not overlap either site. `WhoRunsThisTownPanel.jsx` and `src/pdf/sections/WhoRunsThisTown.jsx` get one call-site line each for item 10(b). The PDF file is in SW-B4's directory, and SW-B4's pushed tip leaves it unchanged, so it composes cleanly.
+
+### 7.2 Every line, old → new
+
+#### 7.2.1 `d41435ecd` — "How they deal" (`npcData.js :: dealingLineFor`, `NPC_DEALING_BY_TRAIT`, `DEALING_TRAIT_FAMILY`)
+
+The line reads the card's disposition and the first of its traits (flaw, then dominant, then modifier) that names a family. A card whose traits name none keeps its disposition line, and the welcoming fallback loses its "rather than": "Offers information freely; asks questions that seem like interest rather than interrogation." → "Offers information freely, and asks questions that sound like interest, not prying." Census law: each line states only what the disposition and the trait word say. No roll is added or moved: the twelve's 809 card and tie rows are identical except for this line.
+
+| disposition | family | NEW line |
+|---|---|---|
+| welcoming | straight | Glad to talk, and says plainly what they know and what they don't. |
+| welcoming | warm | Makes you welcome, finds you a seat, and helps without counting the cost. |
+| welcoming | careful | Friendly, but takes their time; hears the whole question before answering it. |
+| welcoming | sharp | Friendly and quick; by the end of the talk they know more about you than you do about them. |
+| welcoming | dutiful | Open with you until your business touches the people they answer for; then they close up. |
+| welcoming | price | Free with talk and small favours, and remembers every one when they want something back. |
+| welcoming | lofty | Gracious in the way of someone doing you a kindness, and expects to be thanked for it. |
+| welcoming | guarded | Friendly on the surface, but soon asks where you are staying and who sent you. |
+| welcoming | slippery | Tells you what you want to hear, and the story changes with who else is listening. |
+| welcoming | hard | Pleasant until crossed; then the warmth goes at once and does not come back. |
+| welcoming | shirking | Promises help easily, and is hard to find when the time comes to give it. |
+| welcoming | dealmaker | Friendly and useful, and already working out what you might be worth to them. |
+| transactional | straight | Names a fair price, keeps to it, and expects you to keep to yours. |
+| transactional | warm | Strikes a bargain, then gives a little more than was agreed. |
+| transactional | careful | Wants every term settled before anything changes hands, and writes it down. |
+| transactional | sharp | Bargains well, and spots a weak offer before you finish making it. |
+| transactional | dutiful | Deals fairly with you, but never against the people they serve. |
+| transactional | price | Everything has a price, and the price rises the more you seem to need it. |
+| transactional | lofty | Deals with you as a favour, and lets you know the terms are theirs to set. |
+| transactional | guarded | Trades in coin, not talk; asks nothing about you and says nothing of their own business. |
+| transactional | slippery | Agrees quickly, and the terms are never quite what you remember agreeing to. |
+| transactional | hard | Holds you to every word of a deal and collects in full, whatever it costs you. |
+| transactional | shirking | Takes the deal, then does as little as the deal allows. |
+| transactional | dealmaker | Helps you as far as it pays them to, and no further. |
+| cautious | straight | Answers what you ask truthfully, and offers nothing beyond it. |
+| cautious | warm | Kind but careful; helps once they know who you are and why you came. |
+| cautious | careful | Answers slowly, checks what you say against what they know, and gives little at a first meeting. |
+| cautious | sharp | Says little, watches closely, and notices what you leave out. |
+| cautious | dutiful | Asks your business first, and weighs it against the people they look after. |
+| cautious | price | Says little until it is clear what you can offer. |
+| cautious | lofty | Keeps you at a distance, and makes you prove you are worth their time. |
+| cautious | guarded | Answers questions without volunteering anything, and watches who you talk to next. |
+| cautious | slippery | Gives careful answers that are true as far as they go, and they never go far. |
+| cautious | hard | Treats every question as a possible threat, and remembers who asked it. |
+| cautious | shirking | Keeps out of trouble by keeping away from you, and sends you to someone else when they can. |
+| cautious | dealmaker | Holds back until they see what knowing you might get them. |
+| dismissive | straight | Brief and blunt; tells you what they think of your request and goes back to work. |
+| dismissive | warm | Busy, but not unkind; points you to someone who can help. |
+| dismissive | careful | Polite, brief and busy; asks you to come back when they have time. |
+| dismissive | sharp | Hears you out for a moment, decides you are not worth more, and says so. |
+| dismissive | dutiful | Has no time for strangers while their own people need them. |
+| dismissive | price | Has no time for you unless you are buying. |
+| dismissive | lofty | Barely looks up; you are plainly beneath their notice. |
+| dismissive | guarded | Cuts the talk short and gives no reason. |
+| dismissive | slippery | Agrees with everything you say, to be rid of you sooner. |
+| dismissive | hard | Curt to the point of rudeness, and does not care how it lands. |
+| dismissive | shirking | Waves you off; whatever you need is somebody else's job. |
+| dismissive | dealmaker | Polite but brief, until you mention something they want. |
+
+The families (trait words → family): **straight** honest, candid, forthright, plain-dealing, principled, incorruptible, fair-minded, equitable · **warm** compassionate, generous, warm-hearted, hospitable, merciful, magnanimous, good-humoured, gracious, courteous, charismatic, optimistic, humble · **careful** patient, methodical, prudent, level-headed, temperate, diligent, conscientious, dependable, steadfast, stalwart, tenacious, unflappable, perfectionist · **sharp** clever, astute, discerning, perceptive, intuitive, wise, scholarly, resourceful, diplomatic · **dutiful** loyal, protective, brave, pious, traditionalist, zealous · **price** greedy, self-serving, corrupt, hedonistic · **lofty** arrogant, vain, imperious, domineering, overbearing, dismissive, proud, theatrical · **guarded** suspicious, paranoid, secretive, cautious, reserved, inscrutable, detached · **slippery** deceitful, manipulative, mendacious, hypocritical · **hard** cruel, callous, cold-blooded, ruthless, vindictive, vengeful, wrathful, bitter · **shirking** lazy, cowardly, reckless, envious, stubborn, petty, volatile · **dealmaker** pragmatic, ambitious, calculating, opportunistic.
+
+
+#### 7.2.2 `4c5614d27` — two secrets (`NPC_CRIMINAL_SECRETS_BY_HOLDER.any`)
+
+| OLD | NEW |
+|---|---|
+| Has a second family in another settlement that neither family knows about | Has a second family elsewhere that neither family knows about |
+| Has been feeding strategic intelligence to a rival settlement | Has been feeding strategic intelligence to outsiders who pay for it |
+
+The writer (`factionLeaderSecret` → this table) reads no neighbour, so the line names none. "feeding" is kept because `getStressHistory`'s dangerous-surface key reads it. Re-keyed by cause: `criminalSecretsByHolder`'s flat-table sha `4b3d62d6…` → `ba46807b…`, shape and order unchanged.
+
+#### 7.2.3 `fb712a8d7` — no secret frame twice in one dossier (`npcGenerator.js :: generateCrimeLevel`)
+
+No new words. The CRIME_KNOWLEDGE draw's held refusal now reads the FRAME, with every roster name masked, where it used to read the full text, in which the other figure's name made every repeat look new. Each of the four frames prints at most once per dossier. With all four held the pool draws nothing, so no roll is spent, and the figure keeps its own secret. On the twelve: repeats in one town **20 → 0**; the largest frame **30 → 9** cards; cards with a secret 314 → 280, because a figure the pool refuses keeps its birth secret or none.
+
+
+#### 7.2.4 `640378639` — the tie tension lines (STRESS_ECONOMIC_EFFECTS; `r` = the archetype's first end, `s` the second)
+
+| # | OLD | NEW |
+|---|---|---|
+| 1 | If either is investigated, the other is implicated. Both know this. Neither mentions it. | If {r} is investigated, {s} is implicated, and the other way round. Both know it, and neither mentions it. |
+| 2 | A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it. | A clerk has begun checking {r}'s ledgers against each other. Neither {r} nor {s} has decided what to do about it. |
+| 3 | A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does. | A new superior has started asking {r} awkward questions about how few arrests are made. {r} or {s} will have to act before the other does. |
+| 4 | The payments have started arriving late. In this trade, late is a message. | {s}'s payments to {r} have started arriving late. In this trade, late is a message. |
+| 5 | The last shipment was short, and each side privately blames the other. The next one will settle the question. | The last shipment was short, and {r} and {s} each privately blame the other. The next one will settle the question. |
+| 6 | They disagree on a fundamental question of method that neither will put into writing. | {r} and {s} disagree on a question of method that neither will put into writing. |
+| 7 | A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private. | A penitent has brought {r} a case that pits doctrine against {s}'s order. It has not been resolved, and it will not stay private. |
+| 8 | An incident is coming that will force the issue. Both are positioning for it. | An incident is coming that will force the issue between {r} and {s}, and both are positioning for it. |
+| 9 | A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first. | A prisoner is held under {r}'s authority and {s}'s at once, and neither will release the paperwork first. |
+| 10 | A decision coming in the next season will advantage one significantly. The other knows this. | A decision coming next season will favour {r} or {s} heavily, and both of them know it. |
+| 11 | A mutual patron has let it be known there is room for only one of them at the next table. | A patron they share has let it be known there is room for only {r} or {s} at the next table. |
+| 12 | One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits. | {r} has recently broken an unwritten rule of the contest. {s} is deciding what that permits. |
+| 13 | The balance of leverage has recently shifted. One party has noticed; the other hasn't yet. | The balance between {r} and {s} has recently shifted. {s} has noticed; {r} has not, yet. |
+| 14 | A document each believed only they possessed has surfaced in a third set of hands. | A document {r} and {s} each believed only they possessed has turned up in someone else's hands. |
+| 15 | A third party is actively working to change that calculation. | Someone else is working to pull {r} and {s} apart. |
+| 16 | The threat that made the alliance necessary is gone. Neither has said so aloud. | The threat that brought {r} and {s} together is gone. Neither has said so aloud. |
+| 17 | They are about to be on opposite sides of a significant decision. | {r} and {s} are about to be on opposite sides of an important decision. |
+| 18 | One of them is being pressured to act against the other, and has not yet mentioned it. | {r} is being pressed to act against {s}, and has not mentioned it. |
+| 19 | The respect is real and the interests are diverging. Both can read a map. | {r} and {s} still respect each other, but what each of them wants is pulling apart, and both can see it. |
+| 20 | A third party has learned what the original favour was. The debt just changed hands. | Someone else has learned what favour {r} owes {s}, and now has a hold on {r} too. |
+| 21 | An inheritance, title, or secret is about to make the connection impossible to ignore. | An inheritance, a title or a secret is about to make the tie between {r} and {s} impossible to ignore. |
+| 22 | A younger relative has begun trading on the connection both of them refuse to use. | A younger relative has begun trading on the connection {r} and {s} both refuse to use. |
+| 23 | The family has taken a side in a dispute between them. It is the wrong side, in both their opinions. | The family has taken a side in a quarrel between {r} and {s}, and both of them think it is the wrong side. |
+| 24 | The circumstances that caused the original rupture are repeating. Both of them know it. | What first broke {r} and {s} apart is happening again, and both of them know it. |
+| 25 | An apology is owed in one direction and expected in the other, and they disagree about which. | {r} and {s} each think the other owes the apology. |
+| 26 | A newcomer keeps trying to reconcile them, and is about to learn why nobody else does. | A newcomer keeps trying to reconcile {r} and {s}, and is about to learn why nobody else does. |
+
+#### 7.2.5 `effda57d6` — npcData's last five "rather than" (A9)
+
+| # | OLD | NEW |
+|---|---|---|
+| 1 | Asks rhetorical questions to make points rather than stating them | Makes every point as a question they do not expect answered |
+| 2 | Relaxed in a way that reads as confidence rather than carelessness. | Relaxed and sure of themselves, and not careless with it. |
+| 3 | Cautious with newcomers. The wariness is professional rather than personal. | Cautious with newcomers, because the work requires it; it is nothing personal. |
+| 4 | Die in bed rather than in the street (unusual ambition for the role) | Die old, in their own bed (an unusual ambition for the role) |
+| 5 | Accumulate enough to make legitimacy a choice rather than an aspiration | Put enough by that going straight is a choice they can make |
+
+#### 7.2.6 `4bf93741b` — `institutionalCatalog.js` (A3, the catalogue law: minimal swaps)
+
+The SOURCES audit's 17 rows (its NEW used as the draft) plus the hunter's lodge's ceiling reason (a "rather than"; the last row). **Struck under the census law:** the contract killer's "in a place too small to keep an assassins guild". The row stands at city and metropolis, and size is not a reason the record holds, so it becomes "with no guild behind it". The file's two remaining "rather than" are in comments.
+
+| audit line | code | OLD | NEW |
+|---|---|---|---|
+| 116 | machinery-leak | Each household farms ~12-16 acres for survival. | Each household farms just enough land to feed itself. |
+| 282 | machinery-leak | Central plaza for weekly markets and fairs. 50-100 yards per side. | Central plaza for weekly markets and fairs. |
+| 368 | machinery-leak | The city-scale version: permanent offices where caravan masters, merchants, and armed escorts transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution. | Permanent offices where caravan masters, merchants, and armed escorts transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution. |
+| 572 | machinery-leak | The guild form of the listening house: paid correspondents on several roads, an archive that cross-checks one road against another, and a standing rate for a written answer. Expensive to keep, and the only counter in the city where a claim is graded before it is sold. | A guild house for news: paid correspondents on several roads, an archive that cross-checks one road against another, and a standing rate for a written answer. Expensive to keep, and the only counter in the city where a claim is graded before it is sold. |
+| 914 | machinery-leak | Walk 2-5km to the village house of worship for services. | A walk of a few miles to the village house of worship for services. |
+| 915 | machinery-leak | Travel to the village house of worship. 2-5km distance typical. | Services mean the walk to the village house of worship, usually a few miles off. |
+| 927 | retired-word | Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite keeps to the day of the death rather than waiting on a clergyman who comes through, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it. | Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on the day of the death, with no wait for a travelling clergyman, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it. |
+| 1234 | machinery-leak | Full-time law enforcement. ~1% of population. | Full-time law enforcement. About one officer for every hundred people. |
+| 1504 | mechanism-first | A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standing criminal organization can protect a loft like this, so one never appears without that backing. | A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standing criminal organization can protect a loft like this. |
+| 1514 | machinery-leak | The covert guild form: brokers who buy and sell knowledge by the piece, grade what they sell, and will manufacture a claim for a patron who pays enough. It sites itself where the talk already is, among the fences, the late houses, and the inns that ask nothing. | A covert guild of brokers who buy and sell knowledge by the piece, grade what they sell, and will manufacture a claim for a patron who pays enough. It sites itself where the talk already is, among the fences, the late houses, and the inns that ask nothing. |
+| 371 | machinery-leak | Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here. The town-scale predecessor to the city's Caravan masters' exchange. | Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here. |
+| 564 | mechanism-first | A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, which is why it appears wherever traffic does and nowhere that it does not. | A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, and found wherever the roads bring traffic. |
+| 779 | retired-word | Cuts and sews finished cloth into garments. Serves the middle tier between home seamstress and master clothier. | Cuts and sews finished cloth into garments. Serves the middling sort between home seamstress and master clothier. |
+| 926 | retired-word | A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household rather than by standing, which is custom here rather than poverty. | A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household, whatever their standing. That is the custom here, and has nothing to do with being poor. |
+| 1044 | retired-word | A single respected figure acts as de facto authority. Not elected, not appointed, simply acknowledged. Decisions are practical rather than formal. | A single respected figure acts as de facto authority. Not elected, not appointed, simply acknowledged. Decisions are practical, made without ceremony. |
+| 1140 | machinery-leak | Well or spring. 2-4 gallons/person/day minimum. | Well or spring. At least a bucketful a person each day. |
+| 1528 | machinery-leak | An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable. | An individual or small cell with no guild behind it. Accepts contracts through criminal intermediaries. Less reliable but deniable. |
+| 271 (ceiling reason) | rather-than | Cities buy game and pelts through the furriers rather than keeping their own hunters. | Cities buy game and pelts through the furriers and keep no hunters of their own. |
+
+#### 7.2.7 `6f340466f` — `prosperity.js :: deriveEconomicSituationDesc` (A2)
+
+The function reads no tier word, so the audit's "the town" became "the settlement". The food line's per-cent slot became the record's band: `FOOD_SECURITY_CUTS`, "much of" over 40 and "part of" over 15. 96's "who takes (the governing name)" is a need the function does not read, so it is not written in. Dark at the twelve; every branch is lit by the scratch probe `prosprobe.mjs` (fourteen configs, each prints its new line). The occupation line's double "and" is mended to "…, with forced assessments on top".
+
+| audit line | code | OLD | NEW |
+|---|---|---|---|
+| 63 | mannered,mechanism-first | All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies. | The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last. |
+| 65 | mechanism-first | The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense. Prices are simply at levels that exclude most of the population. | Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate. |
+| 72 | mechanism-first,aphorism | Revenue flows outward to the occupying authority via ${extractionChannel} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one. | The occupiers take their share through ${extractionChannel}, with forced assessments on top. Local trade goes on under their eye, and things are worse than the official word admits. |
+| 75 | mechanism-first | Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned. | Much of what the settlement takes in goes on its debts before anything can be spent at home, and the creditor's agent can block any spending. People still work and trade, but part of what they earn is owed before they earn it. |
+| 77 | mechanism-first | Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis. As it is, each problem is making the other worse. | Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse. |
+| 79 | retired-word,mechanism-first | Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but it is slower and more expensive than it should be. | Trading now means picking a way between rival powers that did not exist a year ago. Some merchants have taken sides. Trade between the sides goes on, but it is slower and dearer than it should be. |
+| 85 | machinery-leak,mechanism-first | After imports, ${Math.round(foodGapPct)}% of daily need goes uncovered. Rationing and outside supply are economic necessities; commercial strength in other sectors cannot cover that gap. | Even with what is brought in, people here go short of ${foodGapPct > FOOD_SECURITY_CUTS.deficit ? 'much of' : 'part of'} the food they need each day. The settlement has to ration and buy from outside, and no other trade it has can make that up. |
+| 92 | mechanism-first,machinery-leak | This settlement is too large to survive in true isolation. Without trade routes, specialist goods cannot be sourced, surpluses cannot be sold, and population density cannot be sustained. The economy is structurally broken. | The settlement is too big to live cut off. With no trade routes it cannot buy what it does not make or sell what it has spare, and it cannot keep this many people fed. |
+| 94 | mechanism-first | Trade flows through magical channels. Teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure. | Goods come and go by magic: teleportation circles and planar contacts do the work of roads. Trade works, but only as long as the circles do. |
+| 96 | mechanism-first,mannered | Internal production is suppressed by institutional extraction. What little surplus exists flows upward rather than into communal welfare. | Those in power take so much that little gets made, and what little is left over goes to them. |
+| 98 | mechanism-first | Despite isolation, internal production is well-organised. Skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient. | Cut off as it is, the settlement runs itself well: skilled crafts, well-worked fields and shared stores keep it fed and supplied. |
+| 100 | mechanism-first | The settlement struggles to sustain itself without outside trade. Resources are tightly rationed and growth is impossible. | With no outside trade, the settlement struggles to feed and supply itself. Everything is rationed, and there is nothing to spare for growing. |
+| 101 | mechanism-first | The settlement meets its own needs without external trade, though surpluses are modest and specialist goods are unavailable. | The settlement feeds and supplies itself without outside trade, but it has little to spare and cannot get what it does not make. |
+| 107 | mannered | Commerce is vigorous and the distinction between legitimate trade and criminal enterprise is largely academic. The wealthiest operators play both sides. | Trade is brisk, and it is hard to say where honest business ends and crime begins. The richest traders work both sides. |
+| 109 | mechanism-first | The official economy appears functional. The reality is that institutional extraction (confiscations, forced sales, and selective taxation) suppresses productive activity. | On paper the settlement's trade looks healthy. In fact, seizures, forced sales and unfair taxes keep people from making or selling much. |
+| 111 | mannered | Commerce is the lifeblood of this settlement. Markets are active at all hours and guild influence reaches every trade. | Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft. |
+| 113 | mechanism-first | Trade is vigorous and the guilds are well-organized, generating steady civic revenue. | Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily. |
+| 116 | mechanism-first | The economy is barely functional. Barter replaces coin and few outsiders bother to trade here. | Little coin changes hands here; people barter, and few outsiders bother to come and trade. |
+| 118 | mechanism-first | Official commerce is moderate but a thriving shadow economy undercuts legitimate trade. | Honest trade gets by, but a busy black market undercuts it. |
+
+#### 7.2.8 `936d4ec06` — `legacyGenerator.js` (A2, the 19 SOURCES §2.5 rows)
+
+"the town" became "the settlement" or "here" (the function reads no tier word). 160's and 180's needs (the governing name, what the town came to depend on) are not read, so they are not written in.
+
+| audit line | code | OLD | NEW |
+|---|---|---|---|
+| 83 | machinery-leak | The lasting consequence (${effect.charAt(0).toLowerCase() + effect.slice(1)}) remains structurally embedded. | What it left behind (${effect.charAt(0).toLowerCase() + effect.slice(1)}) is still part of the place. |
+| 108 | machinery-leak,mechanism-first | the institutions founded in its wake carry embedded civic status that traces to the authority established then. | the institutions founded after it still hold the authority they were given then. |
+| 114 | mechanism-first,machinery-leak | the settlement\'s relationship between the scholars who studied it and civic governance has been uncertain since. | the scholars who studied it and the settlement's rulers have never settled which of them has the say. |
+| 160 | machinery-leak,mechanism-first | the governing authority\'s current legitimacy deficit has structural roots that precede the present situation. | people's distrust of those who rule today began here, before the present troubles. |
+| 164 | machinery-leak,mannered | the present contestation of governing authority echoes rather than resolves that earlier disruption. | the quarrel over who should rule today is the same quarrel, never settled. |
+| 168 | mechanism-first | the current stability was built partly through reconstruction following that disruption. | the present calm was partly built in the rebuilding that followed. |
+| 172 | mechanism-first | the governing arrangements in place today carry the shape of what was settled then. | the way the settlement is ruled today was largely settled then. |
+| 180 | machinery-leak,mechanism-first | current economic pressure has structural antecedents. The present situation reflects dependencies established then. | the present money troubles began then, in what the settlement came to depend on. |
+| 184 | machinery-leak | the supply vulnerabilities visible today have historical antecedents in this disruption. | the food shortages of today began with it. |
+| 188 | mechanism-first | current commercial strength is accumulated recovery. The present prosperity was built on what was reconstructed. | the trade that keeps the settlement prosperous today was rebuilt, piece by piece, after it. |
+| 192 | machinery-leak,retired-word,mannered | commercial interests have held structural relevance since. The present merchant faction\'s strength is accumulated rather than sudden. | the merchants have mattered here ever since, and their power today was built up slowly over the years. |
+| 196 | machinery-leak,mechanism-first | commercial interests have since lost the structural position they held. The present weakness reflects that displacement. | the merchants lost the place they held then, and have never won it back. |
+| 204 | mechanism-first | the settlement has not fully insulated itself from the pressures that calamity revealed. | the settlement is still exposed to the hardships that calamity showed it. |
+| 208 | machinery-leak | the institutional adaptations built during that crisis remain part of the settlement\'s structural character. | the changes made to get through that crisis are still how the place works today. |
+| 218 | machinery-leak | the religious institution\'s structural prominence has declined significantly since. The settlement\'s current secular character reflects a long displacement. | the faith has lost much of its hold here since, and the settlement now runs its affairs with little say from the clergy. |
+| 222 | machinery-leak,mannered | religious institutional prominence has been sustained since. The present strength is accumulated rather than recent. | the faith has kept its hold here ever since, and its strength today was built up over the years. |
+| 226 | mechanism-first | the tension between religious and secular authority it created has not been conclusively settled. | the quarrel it started between the clergy and the settlement's rulers has never been settled. |
+| 243 | machinery-leak | arcane institutions carry embedded civic status that traces to the authority established then. | the arcane houses still hold the standing in public affairs they were given then. |
+| 249 | mechanism-first,machinery-leak | the settlement\'s relationship between arcane practitioners and civic governance has been uncertain since. | the mages and the settlement's rulers have never settled which of them has the say. |
+
+#### 7.2.8a `cbba52029` — `legacyGenerator.js :: annotationBody`, the A11 wrapper (routed here by the chair, 09:0x)
+
+| OLD | NEW |
+|---|---|
+| {event} ({n} years ago) created pressure that has not been fully resolved: … | {event} ({n} years ago) left trouble that has never been put right: … |
+| … was a disruption the settlement has since moved through: … | … hit the settlement hard, and it has since recovered: … |
+| … established conditions that have since shifted: … | … set up ways of doing things that have since changed: … |
+
+"As of the founding survey, " stays: it is W0 cause 5's dated opening, pinned by `w0WriterAgreement`, and the first-survey vintage label is the owner's (queue #28). The one reader keyed on these words, `generalStateProse.js :: legacyPoolKey` (DS-GEN-16's pool key), matches the new clause OR the old one, so a saved world's annotation still keys. The desk never prints the annotation, and the key is unchanged, so no prose cell moves. `generalStateProseDesk`'s fixture is re-keyed to the new clauses, and a new arm pins that the old three still key.
+
+#### 7.2.9 `7e1009be5` — the conversion vignette, variant 0 (A2)
+
+| OLD | NEW |
+|---|---|
+| … The old institution has the building, the records, the accumulated donations, and a congregation that is quietly redistributing itself. Neither party is ready to force a confrontation. Both are watching the numbers. | … The old faith has the building, the records, the donations of generations, and a congregation that is quietly slipping away to the new one. Neither side is ready to force a confrontation, and both are counting who comes on holy days. |
+
+#### 7.2.10 `4296505ed` · `ee5d994fb` · `efe1294e4` — the three single rows
+
+| file | OLD | NEW |
+|---|---|---|
+| cultureProfiles.js (celtic builtForm) | … linked by lanes rather than a rigid grid. | … linked by winding lanes with no set grid. |
+| cultureProfiles.js (steppe socialTexture) | The settlement is a meeting point between mobile and sedentary expectations rather than the whole society. | The settlement is where mobile and settled ways of life meet, and much of the society lives beyond it. |
+| safetyProfile.js (revolt, public order) | Some residents have left rather than be forced to choose. | Some residents have already left, so they will not be forced to choose. |
+| allegiance.js (fanaticism goal) | Bend every rule for the cause and call the corruption devotion. | Bend every rule for the cause, and call it devotion. |
+
+safetyProfile.js: neither SW-B5's pushed tip (hunks at 356 / 400 / 839+) nor SW-B6's (180 / 816+) touches this line, so it was taken here and there is no collision. The file's other two "rather than" (the desperation-theft const and the territorial-gangs desc) do not print on the audit's twelve and are not this lane's rows.
+
+#### 7.2.11 `d8739f6e3` · `b26d35d0a` · `6cda3ce68` — `dmPowerLines.js` (item 10)
+
+**(a) The hall's rung labels: a PROPOSAL for the owner's veto.** The keys stay; only the printed labels move.
+
+| key | OLD label | NEW label |
+|---|---|---|
+| none | None | Free of the criminals |
+| adversarial | Adversarial | Fighting the criminals |
+| equilibrium | Equilibrium | Living with the criminals |
+| corrupted | Corrupted | Partly in criminal hands |
+| capture | Capture | Run by the criminals |
+
+**(b) The boosts.** The row "{power} · {base} on its own, +{boost}, {effective} in all" (screen and PDF) becomes "{power} · " + `boostWords(base, boost)`: "a little stronger" (boost under a fifth of base), "much stronger" (under three fifths), "about twice as strong as" (under one and a half times), or "far stronger than its own members could make it". The three patron lines keep their facts without the figure:
+
+| line | OLD | NEW |
+|---|---|---|
+| open[0] | …, also holds {share} in {power}, and that lends {power} +{boost} in strength. | …, also holds {share} in {power}, and that lends {power} weight it would not have on its own. |
+| hidden[0] | …, secretly answers to {power}, and that lends {power} +{boost} in strength that nobody outside the arrangement can see. | …, secretly answers to {power}, and that lends {power} strength nobody outside the arrangement can see. |
+| hidden[2] | … Counting {name}, {power} stands +{boost} stronger. | … Counting {name}, {power} is stronger than it looks. |
+
+**(c) The refusal line.** open[1], "When {power} wants something from {ruler}, {name} is the one who asks for it. {name} is {place} and holds {share} in {power}.", is now keyed by the patron's place:
+
+| place | NEW |
+|---|---|
+| head | {name} heads {ruler} and also holds {share} in {power}, so what {power} wants from {ruler} goes straight to the top. |
+| second | {power} brings its requests to {ruler} through {name}, second in {ruler}, who holds {share} in {power}. (The panel gives the second the third line, so this branch is reached only through the table.) |
+| third | {name} is third in {ruler} and holds {share} in {power}, and carries {power}'s requests to the two above. |
+| steward | While the seat of {ruler} stands empty, its steward {name} holds {share} in {power}, and {power}'s requests go through {name}. |
+
+### 7.3 Pins and registers re-keyed by cause (never loosened)
+
+- `tests/generators/generationForkCensus.test.js` — the hash-site row `npcData.js:1436` → `:1537`, a pure line move (`d41435ecd`).
+- `tests/data/criminalSecretsByHolder.test.js` — the flat-table sha `4b3d62d6…` → `ba46807b…` (`4c5614d27`).
+- `tests/generators/foodRecord.test.js` "the situation sentence names the gap …": `/18% of daily need/` → the Import-Dependent band words, with a Deficit arm added at 45; the anchor at the cut is kept. `tests/generators/foodModelSingleWriter.test.js` "keeps the audited isolated-village verdict …": the 26% → the band words, and the rationing clause re-anchored (`6f340466f`).
+- `tests/domain/generalStateProseDesk.test.js` — the legacy clauses re-keyed, with an arm pinning the old three (`cbba52029`).
+- The CENSUS-4 declaration ledgers (`docs/census/declarations/`), texts re-spelled with ids, needs and colour unchanged: `npcData.NPC_CRIMINAL_SECRETS` (2), `npcData.STRESS_ECONOMIC_EFFECTS` (26), `npcData.SPEECH_PATTERNS`, `.NPC_PLOT_HOOKS` (2), `.NPC_FACTION_GOALS`, `.NPC_SECRETS`, `CULTURE_PROFILES_DAILY` (2), `corruptionPass.CORRUPT_SHORT_GOAL`. `census4Ledger` and `census2dTables` are green. (`census4-extract-pools.mjs` throws at this base, so the ledgers were re-spelled row by row against the source's AST rendering, `{A}`/`{B}` for the pair.)
+- `tests/domain/tonightConcreteFirst.test.js` soak1k-868 (`c8c760142`), `tests/domain/worldFactRederive.test.js` A4 (`1d1369095`), the size ratchet held by folding, not raising (`969e95133`), and the two registers through their doors (`417acb424`, `8ab5972db`).
+- `node scripts/wiring-census.mjs --check` passes at the npcData tip (857 pools / 2,764 variants), so no census re-write is owed. The new exports `NPC_DEALING_BY_TRAIT` and `DEALING_TRAIT_FAMILY` are not enrolled in `scripts/lib/table-pools.mjs` (a hand list); this is named for the merge seat as an enrolment it may want.
+
+### 7.4 The referee
+
+**The twelve** (npc cards, scratch `npcmeas.mjs`): "How they deal" top three **371 → 81** cards (54 distinct lines; the largest single line 28). Secret frames twice or more in one dossier **20 → 0**; the largest frame **30 → 9**. Tie tension lines naming nobody: **81 → 0**. These lines print on the opened cards (`<div>` rows), which the soak's story set (`<p>` sentences) does not count, so the twelve is their measure.
+
+**The 1,000** at `effda57d6` (after npcData) and at `6cda3ce68` (after item 10): exit 0, 1,000 settlements, 0 errors, 702 findings, CLIMB, both. **The twenty frames: none raised.** All twenty read exactly their base counts at both tips (439 … 194). **Nothing new or risen in the top forty** at `effda57d6`. At `6cda3ce68`, two frames enter the top forty at 166 (economy.generated.js "others want @ for what it controls."; defense.generated.js "if you are wronged at @, there is nowhere to take it …"). The base's top-forty list ends with a tie at 166, so neither is risen; they moved up when the 168-town frame below left. Neither is this lane's writer.
+
+**The refusal line on this lane's own frame**, counted by the DM view's own builder (`patronage.js :: dmPowerViewOf`) over the 1,000 births at each sha, with every roster and power name masked (scratch `patron.mjs`):
+
+| frame | base `dc5684e66` | tip `6cda3ce68` | verdict |
+|---|---|---|---|
+| "when @ wants something from @, @ is the one who asks for it." | 168 | 0 | falls |
+| its largest successor ("@ heads @ and also holds a large share in @, so what @ wants from @ goes straight to the top.") | — | 64 | the split by place and share |
+| "counting @, @ is stronger than it looks." (hidden[2]'s successor) | split by its figure at the base ("… stands +N stronger.") | 7 | the figure leaves; the line is now one frame of 7, far below the top forty |
+
+### 7.5 The deltas, for STYLE-2-MERGE's signing (UNSIGNED)
+
+Measured in clean detached worktrees at each parent and commit (`/home/user/sw7-base`, `/home/user/sw7-m-<sha>`), parent → commit, with the same tools as §7.0.
+
+| commit | gm /525 (fields) | fence /360 | prose /1,050 | witness | herald · pdf |
+|---|---|---|---|---|---|
+| `d41435ecd` | 525 (npcs) | 360 | 0 | 0 | 0 · 0 |
+| `4c5614d27` | 280 (npcs) | 196 | 0 | 0 | 0 · 0 |
+| `fb712a8d7` | 272 (npcs) | 211 | 0 | 0 | 0 · 0 |
+| `640378639` | 450 (relationships 450, prominentRelationship 138, pressureSentence 1) | 293 | 0 | 0 | 0 · 0 |
+| `effda57d6` | 333 (npcs) | 230 | 0 | 0 | 0 · 0 |
+| `4bf93741b` | 218 (institutions) | 192 | 0 | **2 of 8 rows** (`settlementUpdatesSha256`) | 0 · 0 |
+| `6f340466f` | 74 (economicState) | 122 | 0 | 0 | 0 · 0 |
+| `936d4ec06` | 525 (history 525, generationCoherenceReceipt 50) | 337 | 0 | 0 | 0 · 0 |
+| `7e1009be5` | 0 | 1 | 0 | 0 | 0 · 0 |
+| `4296505ed` · `ee5d994fb` · `efe1294e4` | 0 · 0 · 0 | 0 · 0 · 0 | 0 | 0 | 0 · 0 |
+| `d8739f6e3` · `b26d35d0a` · `6cda3ce68` | 0 · 0 · 0 (the DM lines are composed at view time) | 0 | 0 | 0 | 0 · 0 |
+| `cbba52029` | 525 (history) | 337 | 0 | 0 | 0 · 0 |
+
+Per tier: `d41435ecd` thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84; `4c5614d27` 65 / 12 / 12 / 96 / 58 / 37; `fb712a8d7` town 104, city 84, metropolis 84; `640378639` 38 / 73 / 67 / 104 / 84 / 84; `effda57d6` hamlet 48, village 12, town 105, city 84, metropolis 84; `4bf93741b` thorp 84, town 62, city 28, metropolis 44; `6f340466f` 12 per tier (town 14); `936d4ec06` every row. The witness is green at `effda57d6` and red from `4bf93741b`; the tip carries the same two hashes, so no later cause moves it. Herald and PDF are green at the tip (`heraldKnowledgeDeskGolden`, `goldenViewModel`).
+
+**The reds that move with these goldens** (green with the merge seat's re-record): `generatorGoldenMaster`, `espionageDormancyFence` THE DRIVEN GOLDEN, `presetLightingWitness`, and the gm-stride pins the first seat named (`pipelinePinnedChoosers` A1, `pipelinePinnedMode`, `generationForkCensus` A1, …), each already red at `dc5684e66`. **The full suite at the tip** against the base's 41 files / 63 tests: 44 files / 72 tests red at `cbba52029` against the base's 41 / 63. Of the ten tests red at the tip and not at the base: `presetLightingWitness` is the witness golden (`4bf93741b`, unsigned, above); the other nine were cured on the lane by cause in `969e95133` (sizeBaseline: npcGenerator.js 1195 > frozen 1192, folded back to 1192, never raised), `c8c760142` (tonightConcreteFirst soak1k-868), `1d1369095` (worldFactRederive A4), `417acb424` (writerReach, its shrink-only door) and `8ab5972db` (the wiring census stamp, which also turned `dossierStateProseProjection`'s two arms and `proseWiringCensus`'s two green). Three base reds are green at the tip (foodDiversity, ledgerCitationIntegrity with the ledger ref present, provenanceMap); none is this lane's cure. Every remaining red at the tip is in the base's list or moves with a golden this lane names..
+
+### 7.6 Merge notes for STYLE-2-MERGE
+
+- **npcGenerator.js** (SW-5's file, SW-5 closed): SW-5's hunks are at :478, :536, :752, :1143 and :1597; SW-7's sites are :160 and :697 (pickTitle) and the CRIME_KNOWLEDGE held key (around :740–:760, below SW-5's stakes line at :752). They do not overlap (the chair's ruling of 09:0x).
+- **pdf/sections/WhoRunsThisTown.jsx** (SW-B4's directory): one line and the import. SW-B4's pushed tip leaves the file unchanged.
+- **generalStateProse.js** (`legacyPoolKey`'s three regexes) and **generalStateProseDesk.test.js** (:1196): SW-B2's and SW-9's hunks in that test sit elsewhere (:116 / :823 / :1340 / :1349; :714 / :761).
+- **safetyProfile.js**: split by row with SW-B5 and SW-B6. This lane's one row (the revolt line) is not in either lane's hunks.
+
+### 7.7 CONFIRMED against PLAUSIBLE
+
+CONFIRMED:
+- The base `dc5684e66`, verified.
+- The twelve's counts before and after, from the same births.
+- The 1,000 at the base and at two lane tips (exit 0, 0 errors), the twenty frames, and the refusal-line count.
+- Every gm / fence / prose / witness delta, from clean worktrees at parent and commit.
+- Every pin re-key, run red and then green.
+- Each suite's reds, matched to the base's full run.
+- tsc 167 = 167 at the npcData tip.
+- The three record walkers at the push.
+
+PLAUSIBLE:
+- That each new line reads better under the owner's law (the owner's veto decides), the rung labels above all.
+- That the dealing families map each trait word as a reader would.
+
+## What stays (by file), after the second seat
+
+- `src/data/powerSiblings.js` :85 / :89 — **not landed (STOP, ruled 10:1x: to SW-B1).** The declaration census binds each key to the line `rulingStructure.js` prints (`census5bOffCensusDeclarations`, `census5dGarrisonReword` red when only this side moves). SW-B1 takes the four strings together with P50 / P51, re-spelled byte for byte: "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority." and "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them."
+- `src/data/npcData.js` — a tension frame can still repeat for several pairs in one dossier. The tie pools hold eight lines and a town carries more ties of one archetype than that, so a cure is pool growth or the draw in `people/ties.js`, outside this lane.
+- `tests/domain/tonightConcreteFirst.test.js` — the "voiced with nothing" branch (a seat with an abstract goal, no secret, no temperament) lost its natural witness at soak1k-868 (`c8c760142`); a planted witness, or a seed that still carries one, is owed.
+- `scripts/lib/table-pools.mjs` — the enrolment of `NPC_DEALING_BY_TRAIT` / `DEALING_TRAIT_FAMILY`, if the merge seat wants the census to see them.
+- Named, not this lane's (unchanged from the first seat): `neighbourFactions.js`'s two tokens and the "(dominant)" suffix (SW-8); `rulingStructure.js` P50 and P51 (SW-B1); DS-POW-5's `mixed` arm's silence (the follow-up).
