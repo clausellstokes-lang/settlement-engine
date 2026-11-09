@@ -127,7 +127,7 @@ export const ENTITLEMENT_LADDER = Object.freeze([
   Object.freeze({
     area: 'ai',
     rows: Object.freeze([
-      Object.freeze({ id: 'surveyor-stages', free: 'per task', cartographer: 'per task', axis: 'account', enforcement: 'SURVEYOR_AI_COSTS' }),
+      Object.freeze({ id: 'surveyor-stages', free: false, cartographer: 'per task', axis: 'account', enforcement: 'isSurveyorTier' }),
     ]),
   }),
 ]);

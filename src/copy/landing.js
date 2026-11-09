@@ -276,7 +276,7 @@ export const landing = {
     tiers: [
       { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library with up to {freeSaves} saves, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, and gallery import. Unlimited saves and unlimited exports.', accent: true },
-      { name: 'Surveyor',     badge: 'AI · early access', body: 'The optional AI workshop: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve. It never writes canon. Bring your own key.', aiWall: true },
+      { name: 'Surveyor',     badge: 'AI · early access', body: 'The AI workshop, with Cartographer: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve. It never writes canon. Bring your own key.', aiWall: true },
       // ⛔ AN INVITATION-ONLY TIER LEAVES THE PUBLIC PATH (owner, ODQ §934.24
       // addendum). The Founders' Hall is given and never sold, so advertising it
       // to a logged-out visitor on the page whose job is to get them forging is
