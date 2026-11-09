@@ -77,7 +77,7 @@ export const fixture = {
     "tier": "village",
     "eyebrow": "road village · mountain",
     "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Étaín Sullivan and Lasair Hayes are connected by something neither discusses openly: Étaín Sullivan and Lasair Hayes will both present proposals at the next council session. Only one will be accepted.",
+    "pressure": "Étaín Sullivan and Lasair Hayes will both present proposals at the next council session. Only one will be accepted.",
     "hooks": [
       {
         "kind": "NPC",
