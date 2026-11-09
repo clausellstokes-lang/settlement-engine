@@ -576,7 +576,7 @@
    "lines": [
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.stress[active]",
-     "text": "The talk of the day keeps returning to {stresses}.",
+     "text": "Most talk in the street comes back to the same trouble: {stresses}.",
      "needs": [],
      "excludes": [],
      "crisis": [
@@ -587,7 +587,7 @@
     },
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.stress[none]",
-     "text": "The place is not peaceful so much as practiced: people know its routines and work around its frictions.",
+     "text": "No single trouble hangs over the place just now. People keep to their routines and work around the small ones.",
      "needs": [],
      "excludes": [],
      "crisis": "calm",
@@ -612,7 +612,7 @@
    "lines": [
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[0]",
-     "text": "Morning starts around {anchors}. {terrain} and {trade} shape the pace: carts, tools, and gossip move where the ground and roads allow, while {culture} gives even routine bargains a recognizable local rhythm.",
+     "text": "Morning starts around {anchors}. {terrain} and {trade} set the pace: carts, tools and news move only as fast as the ground and the roads allow, and {culture} shapes even the smallest bargain.",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -623,7 +623,7 @@
     },
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[1]",
-     "text": "{food}. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.",
+     "text": "{food}. Everyone knows their work without being told. Farmers, haulers, priests, guards, and tradespeople know which shortages they can live with and which will start a quarrel before sundown.",
      "needs": [
       "guardPresence",
       "priest"
@@ -636,7 +636,7 @@
     },
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[2][stability<45]",
-     "text": "Power is felt through {govFaction | \"whoever can make orders stick this week\"}. Promises are weighed carefully because yesterday's bargain may not survive tomorrow. {order}.",
+     "text": "Orders come from {govFaction | \"whoever can make them stick this week\"}. People weigh every promise, since yesterday's bargain may not hold tomorrow. {order}.",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -645,7 +645,7 @@
     },
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[2][stability>=45]",
-     "text": "Power is felt through {govFaction | \"whoever can make orders stick this week\"}. Most residents know where authority lives and how to petition it without making themselves memorable. {order}.",
+     "text": "Orders come from {govFaction | \"whoever can make them stick this week\"}. Most residents know whom to petition, and how to do it without drawing notice. {order}.",
      "needs": [],
      "excludes": [
       "crisis: succession"
@@ -657,14 +657,12 @@
     },
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[3]",
-     "text": "{stress} By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.",
+     "text": "{stress} By evening the lamps are lit, families eat together, debts are remembered, and news goes from door to door. People stay because leaving would cost them more.",
      "needs": [],
      "excludes": [],
      "crisis": "any",
      "colour": false,
-     "stop": [
-      "meta (\"a map marker\")"
-     ]
+     "stop": []
     }
    ],
    "twins": [
