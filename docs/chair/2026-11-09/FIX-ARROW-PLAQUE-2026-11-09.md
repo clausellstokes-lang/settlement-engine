@@ -11,7 +11,7 @@
 **STATUS:**
 - The plate is centred on the page within 0.30 CSS px at every full width from 1024 to 3840.
 - The painting, the brand marks and the PDF are untouched, and the generator deltas are 0.
-- **The first-paint budgets are over** (§6). That is a STOP with the chair; nothing has moved.
+- The first-paint budgets were over by a measured +169 / +129 / +18 bytes. They are re-recorded at the measured tip, in its own commit (`6d92889a5`), on the chair's ruling (a) (§6).
 
 ## 1. What was measured first, and why the method changed
 
@@ -60,7 +60,8 @@ The plate's one cut, `{ x: 1596, fe: FE }`, became two joins. Both are open at e
 | `865fdcd26` | the composition: the drop and the fixed fill, the pin below S_MAX |
 | `aa0c76581` | the plate's part split in halves; the pin to 3840 |
 | `575e8b5e5` | the fixed fill's tone: 0.526 → 0.802, by the look |
-| (this commit) | the record, the composite and `dated` 168 → 169 |
+| `dc8d1a471` | the record, the composite and `dated` 168 → 169 |
+| `6d92889a5` | the three first-paint budgets re-recorded at the measured tip, the chair's ruling (a) |
 
 ## 4. Pins (re-keyed by identity and cause; none loosened)
 
@@ -134,7 +135,7 @@ The six sections are unchanged at every width (104.6 at 1440, 173.2 at 1920).
 
 The inherited roster `tree` red the brief named did not show at this base.
 
-**THE FIRST-PAINT BUDGETS: a STOP, with the chair.** These are `tests/build/vendorPdfLazy.test.js` with `VERIFY_DIST=1`, after a fresh build at `575e8b5e5`; the parent is green at the budgets.
+**THE FIRST-PAINT BUDGETS: re-recorded at the measured tip** (`6d92889a5`). The chair's ruling (a) was given at 03:2x, 03:3x and 03:34 UTC, with the FIX-ARROW-SECTIONS precedent named; the owner may veto. The figures are from `tests/build/vendorPdfLazy.test.js` with `VERIFY_DIST=1`, after a fresh build at `575e8b5e5`. The parent was green at the old budgets, and the tip is green at the new ones.
 
 | | budget (parent) | tip | Δ |
 |---|---|---|---|
@@ -144,8 +145,8 @@ The inherited roster `tree` red the brief named did not show at this base.
 
 - **What the bytes are.** The only module that differs in the entry is `arrowGeometry.js`: the two join objects and the spread that builds CUTS, `PLATE_CUTS`, the share-0 branch that now composes the plate's joins, the half part plus the fixed fill in `fullSlots`, three SLOT_TONE keys and two constants. None of it is dead code.
 - **No zero-behaviour buy-back of that size exists in the module.** Running the full composition at share 0 would put zero-width fillers under 13 crossfades and bleed the filler into the uncut painting by up to 25%, a visible change. Trims of `?? 0` are worth tens of bytes and fail the type floor.
-- **The ruling is the chair's:** (a) re-record at the measured tip, attributed; (b) a named buy-back elsewhere in the entry; or (c) a lazy-load the chair chooses.
+- **The ruling:** (a), re-record at the measured tip, attributed. The constants and the ARCH car 2 pin moved together: raw 1,075,758, gzip 342,975, Brotli 288,470. The rejected buy-backs above are recorded as measured.
 
 **CONFIRMED against PLAUSIBLE.**
-- **CONFIRMED:** the centring, in the geometry (red-first, twice) and on the page; the sections unchanged; the painting byte-identical; deltas 0; the first-paint overrun, measured.
+- **CONFIRMED:** the centring, in the geometry (red-first, twice) and on the page; the sections unchanged; the painting byte-identical; deltas 0; the first-paint figures, measured and re-recorded.
 - **PLAUSIBLE:** that the owner reads the 0.802 fill and the 4-column crossfades as the painting's own wood; `BINDINGS[7].x0` = 1889.
