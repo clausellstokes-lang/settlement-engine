@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 208,
+      "dated": 209,
       "sha-pin": 2,
       "tree": 166
     },
@@ -471,7 +471,9 @@
     "_rosterGrowth2026-11-09-style-2-merge-record-17": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-2, session session_01FbPLbc8gtufq3JftaYsRGV): `tree` 164 -> 165, docs/shift-records/2026-11-09-style-2-merge-17-swb1.json, record 17, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-pulse-lines": "ONE document JOINED the roster by being BORN into it (lane SW-12 PULSE-LINES, STYLE-RULINGS-2 Part C2, a child of the chair session session_01FbPLbejcfwX5nii12VM673, session session_01FbPLbebSnQz5gSdc8bP7NB, on lane/style-2-pulse-lines-2026-11-09 cut from the wave's clean final tip 2053a809c): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-PULSE-LINES-2026-11-09.md, the lane's record of its lit-line cures, born dated. The bump is from the tip's measured 168; the sibling style lanes bump the same count on their lanes and STYLE-2-MERGE reconciles by measuring the walker's count at the merged tree.",
     "_rosterGrowth2026-11-09-style-2-merge-record-18": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-2, session session_01FbPLbc8gtufq3JftaYsRGV): `tree` 165 -> 166, docs/shift-records/2026-11-09-style-2-merge-18-sw12.json, record 18, born into the tree class; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-sw12": "THE UNION AT THE SW-12 PULSE-LINES MERGE (STYLE-2-MERGE-2, session session_01FbPLbc8gtufq3JftaYsRGV): both sides' notes kept; `dated` 207 -> 208 (docs/chair/2026-11-09/STYLE-2-PULSE-LINES-2026-11-09.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-09-style-2-merge-sw12": "THE UNION AT THE SW-12 PULSE-LINES MERGE (STYLE-2-MERGE-2, session session_01FbPLbc8gtufq3JftaYsRGV): both sides' notes kept; `dated` 207 -> 208 (docs/chair/2026-11-09/STYLE-2-PULSE-LINES-2026-11-09.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-09-style-2-hooks": "ONE document JOINED the roster by being BORN into it (seat SW-10 HOOKS, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-hooks-2026-11-09 cut from bd07005b9): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md, the lane's record, born dated (its citations are `path :: symbol`); measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-sw10": "THE UNION AT THE SW-10 HOOKS MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 208 -> 209 (docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md, the lane's record, born dated)."
   },
   "rows": []
 }
