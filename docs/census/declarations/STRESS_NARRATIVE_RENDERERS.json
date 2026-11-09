@@ -305,7 +305,7 @@
       "lines": [
         {
           "lineId": "RENDERERS.insurgency",
-          "text": "A powerful faction in ${name} has decided the current government is illegitimate. The challenge is quiet, institutional, and dangerous, not street fighting but the systematic withdrawal of cooperation.",
+          "text": "A strong power in ${name} has decided the current government is illegitimate. The challenge is quiet, institutional, and dangerous, not street fighting but the systematic withdrawal of cooperation.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -366,7 +366,7 @@
       "lines": [
         {
           "lineId": "RENDERERS.religious_conversion(name%3=1)",
-          "text": "The religious community of ${name} has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither.",
+          "text": "The religious community of ${name} has fractured. Both sides claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither.",
           "needs": [
             "institution: temple"
           ],
@@ -398,7 +398,7 @@
       "lines": [
         {
           "lineId": "RENDERERS.religious_conversion(name%3=2)",
-          "text": "An outside authority is requiring ${name} to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows.",
+          "text": "An outside authority is requiring ${name} to convert. The governing power has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows.",
           "needs": [],
           "excludes": [],
           "crisis": [
