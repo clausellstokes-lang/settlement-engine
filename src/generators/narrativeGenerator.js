@@ -875,6 +875,14 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
  *  - Current tensions string
  */
 /**
+ * A6 (ALLEGIANCE-CAR2, the design §3.4, J-13): the settlement's power structure with the hall-capture state derived
+ * from `npcs` (their ranks and hidden allegiances) and the classifier's climate rung over the current roster — written
+ * by its ONE writer, domain/people/hallCapture.js :: writeHallCapture. Draw-free.
+ * @param {*} settlement @param {Array<Record<string, any>>} npcs @returns {*} the new power structure
+ */
+const withHallCapture = (settlement, npcs) => writeHallCapture(settlement.powerStructure, hallCaptureOf(settlement, { npcs, climate: captureClimateOf(settlement) }));
+
+/**
  * The NPC coherence-enrichment sub-pass: faction/secret overlays
  * (buildPoliticalNarrative) → faction-structure merge (mergeNPCLists) →
  * structural positions/goals/constraints (enrichNPCsWithStructure). Extracted so
@@ -932,7 +940,7 @@ export const enrichNpcCoherence = (settlement) => {
   const withPowers = rankPowers(settlement, landed);
   assignHandlers(withPowers, settlement);
   leaveAllegianceReceipts(settlement, dealt);
-  settlement.powerStructure = writeHallCapture(settlement.powerStructure, hallCaptureOf(settlement, { npcs: withPowers, climate: captureClimateOf(settlement) })); // A6 (car 2, J-13): the hall-capture state DERIVED, its ONE writer — after the ranks and handlers it reads, before the structural pass that reads it
+  settlement.powerStructure = withHallCapture(settlement, withPowers); // A6 (car 2, J-13): the hall-capture state DERIVED, its ONE writer — after the ranks and handlers it reads, before the structural pass that reads it
   return enrichNPCsWithStructure(withPowers, settlement);
 };
 
@@ -994,6 +1002,9 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
       }
     },
   ));
+
+  // A6 on a HELD roster (car 2): the enrichment above did not run, so the state is derived from the held cast here
+  if (pins && Object.prototype.hasOwnProperty.call(pins, 'npcs')) settlement.powerStructure = withHallCapture(settlement, mergedNpcs);
 
   // ── THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): ONE OUTGOING TIE PER CARD, drawn HERE over
   // the final cast — after the memberships the target rule reads ("× 3 when the two share a
