@@ -26,6 +26,9 @@ import { staffUnlocksPaidFeatures } from '../../lib/staffEntitlements.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const PublicDossierView = React.lazy(() => import('../PublicDossierView.jsx'));
+// The players' page (SW-B7 row (b)): a party link renders here, never the gallery's
+// social chrome below.
+const PartyLinkView = React.lazy(() => import('../PartyLinkView.jsx'));
 
 function StatusMessage({ tone = 'info', children }) {
   const mobile = useIsMobile();
@@ -123,6 +126,24 @@ export default function GalleryDetail({
           {error || 'This settlement is not available.'}
         </div>
       </div>
+    );
+  }
+
+  // THE PLAYERS' PAGE (the owner's word, SW-B7 row (b)): a party link (an unlisted
+  // slug) is not a gallery listing — no votes, comments, reactions, view count,
+  // share-to-social, Import or "more by this creator". PartyLinkView keeps the
+  // title, the author's name, the dossier in the player view and a quiet Report.
+  if (dossier.unlisted) {
+    const statusLine = (actionError || actionNotice) ? (
+      <>
+        {actionError && <StatusMessage tone="danger">{actionError}</StatusMessage>}
+        {actionNotice && <StatusMessage tone="success">{actionNotice}</StatusMessage>}
+      </>
+    ) : null;
+    return (
+      <React.Suspense fallback={<p role="status" style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, textAlign: 'center' }}>Opening settlement...</p>}>
+        <PartyLinkView dossier={dossier} auth={auth} onReport={onReport} reportBusy={reportBusy} statusLine={statusLine} />
+      </React.Suspense>
     );
   }
 

@@ -140,7 +140,8 @@ export default function ShareToGallery({
   const [isPublic, setIsPublic] = useState(Boolean(isPublicProp));
   const [slug, setSlug]         = useState(slugProp || null);
   // V-20 unlisted (party-link) state.
-  const [isUnlisted, setIsUnlisted]   = useState(visibilityProp === 'unlisted');
+  // SW-B7 row (g): the party link is independent of the listing — linked iff a slug exists.
+  const [isUnlisted, setIsUnlisted]   = useState(Boolean(unlistedSlugProp) || visibilityProp === 'unlisted');
   const [unlistedSlug, setUnlistedSlug] = useState(unlistedSlugProp || null);
   const [unlistedCopied, setUnlistedCopied] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(!isPublicProp);
@@ -381,9 +382,8 @@ export default function ShareToGallery({
     try {
       const newSlug = await shareSettlementUnlisted(saveId);
       setUnlistedSlug(newSlug);
-      setIsUnlisted(true);
-      setIsPublic(false); // sharing unlisted removes it from the public gallery
-      try { updateSavedSettlement?.(saveId, { is_public: false, visibility: 'unlisted', unlisted_slug: newSlug }); } catch { /* non-fatal */ }
+      setIsUnlisted(true); // row (g): the listing is untouched — a town may be listed and linked at once
+      try { updateSavedSettlement?.(saveId, { visibility: 'unlisted', unlisted_slug: newSlug }); } catch { /* non-fatal */ }
     } catch (e) {
       setError(e.message || 'Could not create the unlisted link');
     } finally {
@@ -585,19 +585,11 @@ export default function ShareToGallery({
     />
   );
 
-  // V-20 UNLISTED state — party link: copy + rotate (revoke) + stop sharing.
-  if (isUnlisted && unlistedSlug) {
-    return (
-      <UnlistedShareBar
-        copied={unlistedCopied}
-        busy={busy}
-        error={error}
-        onCopy={handleCopyUnlisted}
-        onRotate={handleRotateUnlisted}
-        onStop={handleStopUnlisted}
-      />
-    );
-  }
+  // V-20 party link, independent of the listing (SW-B7 row (g)): the link's bar (copy,
+  // rotate, stop) when one exists, else the button that makes one — in BOTH states.
+  const partyControl = (isUnlisted && unlistedSlug)
+    ? <UnlistedShareBar copied={unlistedCopied} busy={busy} error={error} onCopy={handleCopyUnlisted} onRotate={handleRotateUnlisted} onStop={handleStopUnlisted} />
+    : <Button variant="secondary" size="sm" onClick={handleShareUnlisted} busy={busy} title="Make a private link for your players" icon={<Link2 size={12} />}>Unlisted link</Button>;
 
   // Published state — show "Public" badge + copy link + unshare.
   if (isPublic && slug) {
@@ -648,8 +640,9 @@ export default function ShareToGallery({
             time, so their event log is visible retroactively. */}
         <span style={{ flexBasis: '100%', fontSize: chromeFontSize(FS.xs, mobile), color: INK, opacity: 0.75 }}>
           Your settlement's event chronicle (event titles and summaries) is publicly
-          visible on the gallery page. Remove from gallery to take it down.
+          visible on the gallery page. Remove from gallery to take it down. A town can be listed in the gallery and have an unlisted link at the same time.
         </span>
+        {partyControl}
         {managePanel}
       </div>
     );
@@ -673,15 +666,7 @@ export default function ShareToGallery({
         {busy ? 'Exporting…' : 'Export to gallery'}
       </Button>
       {modeToggle}
-      <Button
-        variant="secondary"
-        size="sm"
-        onClick={handleShareUnlisted}
-        busy={busy}
-        icon={<Link2 size={12} />}
-      >
-        Unlisted link
-      </Button>
+      {partyControl}
       <Button
         variant="ghost"
         size="sm"
@@ -703,7 +688,7 @@ export default function ShareToGallery({
       }}>
         {canonReady
           ? "Public dossiers appear in the gallery. Your name and email stay private. Your settlement's event chronicle (event titles and summaries) is publicly visible on the gallery page."
-          : `${t('canon.startWorldClock')} before sharing the dossier publicly.`}
+          : `${t('canon.startWorldClock')} before sharing the dossier publicly.`}{' '}An unlisted link is for your players. It stays the same for as long as this settlement exists, and it always shows your latest changes. Rotate it to get a new link. A town can be listed in the gallery and have an unlisted link at the same time.
       </span>
       {aiOverlayNote}
       {detailsForm}
