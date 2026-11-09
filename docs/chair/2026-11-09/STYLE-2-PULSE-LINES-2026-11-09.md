@@ -515,3 +515,11 @@ Pins: `chronicleScrollback.test.jsx` — the heading read inside `chronicle-caus
 | D·57 origin / resting fallback (two sites) | `a place the record does not name` | "an unnamed place" (`heraldWanderers.js:259`'s "a place the register cannot name", the second vocabulary the audit notes, is in the file the third seat finished and is not a ledger D row; listed in §9's "what stays") |
 
 Pins: `heraldWanderersRegister.test.jsx` — a new render with the origin's save absent ("Came from an unnamed place", with an anchored negative); **red at the parent** (1 of 21), green here. Registers: none moved.
+
+### 9p. `RealmVerbComposer.jsx` (D·77)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·77 composer footnote | `Every order stages as a pending proposal and applies through the world's own machinery on approval: the walls hold even under force, and a refused order says why.` | "Every order waits as a proposal until you approve it. Even a forced order must keep to the realm's own limits, and an order the realm refuses says why." |
+
+Pins: `realmVerbComposerTranslation.test.jsx` — the footnote, with an anchored negative; **red at the parent** (1 of 1), green here. Registers: none moved.
