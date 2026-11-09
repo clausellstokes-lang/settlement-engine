@@ -686,10 +686,16 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // re-dealt the year to 406/2561/407/80 (measured at 888636ce8 by this arm's corpus build); the J-19 cure (d131ab158:
     // ensureNpcStates no longer re-rolls a v3 card's corruption) re-dealt it to 396/2525/396/80 (measured at the tip by
     // this arm). Attribution of the second step CONFIRMED by the register scan at d131ab158 and its parent.
+    // 2026-11-09 (ALLEGIANCE-CAR3, re-keyed by identity, no rung: the register's --write at 1a522aaf4 was a lawful shrink):
+    // final 396 → 394, accumulated 2525 → 2515, unique 396 → 395, regional 80/80 → 81/81 — the corpus year re-dealt by the
+    // car's three generator causes (e9070d614 organizedCrime 0.05: fewer agents dealt on their keyed forks; 8567f490d and
+    // 2f89aaeef: the handler deal round the pool, so the forced handler ties land on other cards). CONFIRMED at the car's
+    // tip by this arm's corpus build; the split between the three causes is PLAUSIBLE (not bisected). Car 3's other
+    // causes (patronage, the DM view, the bought watch) write nothing the corpus reads.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 396,
-      wizardNewsAccumulatedEntries: 2525,
+      wizardNewsFinalEntries: 394,
+      wizardNewsAccumulatedEntries: 2515,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -699,7 +705,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 396,
+      wizardNewsUnique: 395,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -707,11 +713,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 80, // 2026-11-08 ALLEGIANCE-CAR1 (the car's cause, then the J-19 pulse cure): 82 → 80; 2026-11-08 ALLEGIANCE-CAR1 (the veil merged): 81 → 82; 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80
+      regionalEventLog: 81, // 2026-11-09 ALLEGIANCE-CAR3 (the car's generator causes, see the note above): 80 → 81; 2026-11-08 ALLEGIANCE-CAR1 (the car's cause, then the J-19 pulse cure): 82 → 80; 2026-11-08 ALLEGIANCE-CAR1 (the veil merged): 81 → 82; 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 80,
+      regionalEventLogUnique: 81,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
@@ -1875,7 +1881,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // government challenge, so `factionName` left the `stressors` family the corpus observes; the four reads at
       // src/components/map/WorldPulseData.js (`factionName on stressors` ×4) left the CLEARED set and are one of the 19
       // ordinary rows the rung admitted (a NEW row of its reconciliation): exactly −1 identity / −4 counts, the file unmoved.
-      files: 1, identities: 17, counts: 44,
+      // 1/17/44 → 1/19/49 (ALLEGIANCE-CAR3, 2026-11-09), RE-DERIVED AND NAMED: no filter's CODE moved, its INPUT did — the
+      // corpus year re-dealt by the car's generator causes (the note at the executed-corpus arm) now carries a writer for two
+      // more identities in the cohort's file (WorldPulseData.js: factionName and settlementIds on stressors, 5 reads), so the
+      // filters clear them; the register's --write (1a522aaf4) dropped the same rows from the filtered side.
+      files: 1, identities: 19, counts: 49,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
