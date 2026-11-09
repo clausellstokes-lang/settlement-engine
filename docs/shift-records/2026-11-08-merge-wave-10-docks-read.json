@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 10 OF THE WAVE (MERGE-WAVE), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: THE DOCKS WERE NEVER READ: W5 HIS's #10 gate afc024f67 read the flag at the wrong depth, `hasDocks` false on every birth (src/generators/steps/generateNarratives.js:59, getInstFlags(...).hasPort -> .inst.hasPort; the cause commit bcf3e7f8a, the chair's ruling (a) of 2026-11-09). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against the final tip's (the stage of 2c76c6177, records 8 and 9's post-state): the generator golden master 37 of 525 rows (town 13, city 12, metropolis 12) -> 5f77f02f..; the espionage fence's driven corpus 45 of 360 rows (town 15, city 15, metropolis 15) -> 5bc02d54..; 360/360 distinct; the herald 0, the prose manifest 0, the PDF snapshot 0, the witness 0. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the wave MERGE-WAVE, 2026-11-08)",
+  "cause": "THE DOCKS WERE NEVER READ: W5 HIS's #10 gate afc024f67 read the flag at the wrong depth, `hasDocks` false on every birth (src/generators/steps/generateNarratives.js:59, getInstFlags(...).hasPort -> .inst.hasPort; the cause commit bcf3e7f8a, the chair's ruling (a) of 2026-11-09)",
+  "seat": "MERGE-WAVE (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at bcf3e7f8a",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

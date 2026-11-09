@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-08 — MERGE-WAVE RECORD 10, THE DOCKS READ (W5 HIS #10's GATE), THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-10-docks-read.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   37 of 525 rows (town 13, city 12, metropolis 12) against the final tip's (records 8 and 9's post-state). THE CAUSE, ONE (first-parent
+ *   step bcf3e7f8a): the docks were never read: W5 HIS's #10 gate afc024f67 read the flag at the wrong depth, `hasDocks` false on every birth (bcf3e7f8a, generateNarratives.js `.inst.hasPort`). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW10 (the tree of bcf3e7f8a with the door paths carried from
+ *   the branch, the previous record's writes committed). b35d56c0.. -> 5f77f02f..
+ *
  * 2026-11-08 — MERGE-WAVE RECORD 8, THE FIX-PUBLIC-VEIL MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
  *   record docs/shift-records/2026-11-08-merge-wave-8-public-veil.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 7's post-state. THE CAUSE, ONE (first-parent
