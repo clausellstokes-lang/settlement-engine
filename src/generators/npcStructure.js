@@ -346,53 +346,54 @@ reg('criminal','stable',
 );
 
 // ── magic ─────────────────────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the casters' seat-holders in plain words, the machinery struck; the goals untouched.
 reg('magic',GOVERNANCE_FRACTURED,
-  { position:  'Holds arcane institutional authority in a settlement with failing civic governance. Arcane services may hold leverage if structurally necessary.',
+  { position:  'Heads the casters while the seat fails; if the seat needs their spells, it now owes them.',
     goal:      'Turn every favour the seat now begs of their spells into a right it cannot take back.',
-    constraint:'Arcane authority claimed during a governance crisis is typically the first thing a reconsolidated government constrains.' },
-  { position:  'Practices arcane arts in a secondary institutional position in a settlement with failing governance.',
+    constraint:'Rights won from a weak seat are the first a recovered seat takes back.' },
+  { position:  'Works spells under the senior casters while the seat fails.',
     goal:      'Keep working spells for anyone who pays while refusing to be counted on any side.',
-    constraint:'Neutrality in a crisis that affects all institutions is difficult to sustain without appearing to have calculated it.' }
+    constraint:'Staying on no side while everyone suffers is hard to do without looking like a calculation.' }
 );
 reg('magic','corruption',
-  { position:  'Maintains arcane operations in a settlement with compromised institutions. Arcane services used for concealment create leverage and obligation.',
+  { position:  'Heads the casters among bribe-taking officials, where spells that hide things buy favour and debt.',
     goal:      'Stop casting concealments for the crooks before the crooks own them outright.',
-    constraint:'Arcane services used for concealment create relationships that are difficult to exit.' },
-  { position:  'Practices arcane arts in a position secondary to the dominant arcane institution in a compromised institutional environment.',
+    constraint:'Once their spells have hidden someone\'s dealings, getting free of those people is hard.' },
+  { position:  'Works spells under the senior casters, among officials who take bribes.',
     goal:      'Take the spellwork their seniors turn down, and ask no questions about why it was refused.',
-    constraint:'Services not dominated by the primary institution tend to be those the primary institution has declined: often for reasons.' }
+    constraint:'The work the seniors turn down is often turned down for a reason.' }
 );
 reg('magic','food_crisis',
-  { position:  'Holds arcane institutional authority in a supply crisis. Magical production or preservation capacity, if available, becomes a critical resource.',
+  { position:  'Heads the casters while food is short, and any spell that grows or keeps food is suddenly worth a great deal.',
     goal:      'Save what food magic can save, and make the seat pay for it in rights.',
-    constraint:'Arcane solutions to supply crises create expectations that cannot be sustained indefinitely.' },
-  { position:  'Practices arcane arts in a position that could contribute to crisis response but lacks the institutional authority to deploy independently.',
+    constraint:'People fed by spells once will expect it again, and it cannot go on for ever.' },
+  { position:  'Works spells that could help with the shortage, but cannot use them without the seniors\' leave.',
     goal:      'Offer their spells for the shortage through their seniors, and see their own name on it.',
-    constraint:'Contributing through channels that constrain the contribution limits both the impact and the credit.' }
+    constraint:'Helping through the seniors limits both what the help can do and who gets the credit.' }
 );
 reg('magic','economic_stress',
-  { position:  'Maintains arcane institutional operations in an economically pressured settlement. Arcane services are among the first to face budget reduction.',
+  { position:  'Heads the casters while money is short, and spellwork is among the first things people stop paying for.',
     goal:      'Work out which spells people will still pay for when the coin runs short, and keep those.',
-    constraint:'Demonstrating indispensability may require deploying services in ways that reduce their scarcity and therefore their leverage.' },
-  { position:  'Practices arcane arts in a secondary institutional position in an economically pressured settlement where arcane patronage is declining.',
+    constraint:'Proving the spells are needed may mean casting them so often that they lose their price.' },
+  { position:  'Works spells under the senior casters while money is short and patrons drop away.',
     goal:      'Find the plain, needed spellwork that people buy even when they buy nothing else.',
-    constraint:'Necessity-level arcane services are typically lower-status and lower-compensation than the services economic pressure eliminates.' }
+    constraint:'The spells people still buy in hard times are the humble ones that pay least.' }
 );
 reg('magic','contested',
-  { position:  'Holds arcane authority in a contested political environment. Arcane capacity is a resource both sides want access to.',
+  { position:  'Heads the casters while rivals fight over the seat, and both sides want their spells.',
     goal:      'Refuse every claimant who wants their spells, so whoever takes the seat cannot call them traitors.',
-    constraint:'Maintaining neutrality requires declining requests from both sides, which generates resentment from both.' },
-  { position:  'Practices arcane arts in a secondary position in a contested political environment.',
+    constraint:'Staying out of it means refusing both sides, and both will remember.' },
+  { position:  'Works spells under the senior casters while rivals fight over the seat.',
     goal:      'Be useful to whoever wins the seat, and promise nothing to anyone before then.',
-    constraint:'Value to multiple competing factions requires keeping the scope of arcane services narrow enough that none of them perceive a conflict of interest.' }
+    constraint:'Serving more than one side means keeping the work small enough that none of them sees a betrayal.' }
 );
 reg('magic','stable',
-  { tags: CALM_ONLY, position:  'Leads established arcane institutions in a functional settlement. The position is secure, the services are in demand.',
+  { tags: CALM_ONLY, position:  'Heads the casters in quiet times; their place is secure and their spells are in demand.',
     goal:      'Win more of the seat\'s work for their spells, and more of everyone else\'s.',
-    constraint:'Arcane authority in stable conditions faces gradual bureaucratic containment. Institutionalization brings limits alongside legitimacy.' },
-  { tags: CALM_ONLY, position:  'Practices arcane arts in a secondary institutional position in a stable settlement.',
+    constraint:'In quiet times the seat slowly hems the casters in with rules; recognition comes with limits.' },
+  { tags: CALM_ONLY, position:  'Works spells under the senior casters in quiet times.',
     goal:      'Become the caster people ask for by name, whatever their seniors think of them.',
-    constraint:'Practical standing without institutional authority is vulnerable to institutional decisions about who is permitted to practice.' }
+    constraint:'Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.' }
 );
 
 // ── other (noble, etc.) ───────────────────────────────────────────────────────
