@@ -745,7 +745,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         onRerollNPCs={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('npcs') : null} pinnedIds={pinnedIds}
         onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed}
         saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
-      case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} publicDossier={publicDossier} playerView={playerView} />;
+      // THE REGENERATION BOUNDARY (the owner, 2026-11-09: regenerating a SECTION of a generated
+      // settlement is post-generation editing, law (1)): the History reroll takes the NPC
+      // reroll's gate, the authoring authority. Whole-settlement rerolls stay generation.
+      case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('history') : null} publicDossier={publicDossier} playerView={playerView} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
