@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "94906a722681564605eb9e35c212fdab001773c1",
+  "measuredAtSha": "ad98f7f0226630f8af2d06b7c78ed939f195f47d",
   "measuredBy": "SW-B7b fourth seat",
   "date": "2026-11-09",
-  "note": "SW-B7b stressors desk (94906a722): stressorsStateProse.js is now imported by its one caller components/new/stressorsDeskRead.js; WIND_DOWN_FRACTION dependents moved, no value moved",
+  "note": "SW-B7b power desk (ad98f7f02): powerStateProse.js is now imported by its one caller components/new/powerDeskRead.js; its constants' dependents moved, no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1083,7 +1083,7 @@
         "value": 0.15
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1098,7 +1098,7 @@
         "value": 3
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1113,7 +1113,7 @@
         "value": 0.35
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1128,7 +1128,7 @@
         "value": 0.08
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1143,7 +1143,7 @@
         "value": 0.15
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
@@ -1697,7 +1697,7 @@
         "NATURAL_ENEMY.gate": 0.55
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx",
+        "src/components/new/powerDeskRead.js",
         "src/domain/display/stateProse/printProse.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
