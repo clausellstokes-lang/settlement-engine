@@ -222,7 +222,8 @@ function nameMatches(a, b) {
  * True when the card is a LOCAL agent still in place: it holds a hidden allegiance to a local criminal
  * house (a foreign leash with no house is the other axis), it is not ousted, and the simulation has not
  * exposed it (its own write-back `corrupt: false` sticks, corruptMarkOf's rule).
- * @param {any} npc @param {any} settlement @returns {boolean}
+ * @param {import('./settlement.schema.js').SimNpc} npc @param {{ schemaVersion?: unknown } | null | undefined} settlement
+ * @returns {boolean}
  */
 function isLocalAgentInPlace(npc, settlement) {
   const a = allegianceOf(npc);

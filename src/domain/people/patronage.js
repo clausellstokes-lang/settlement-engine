@@ -261,7 +261,7 @@ export function dmPowerViewOf(settlement) {
   // who answers to whom: per criminal power (or the houses, where the allegiance names none) the boss,
   // then each handler with its agents
   const agents = cards.map((card) => ({ card, a: allegianceOf(card) })).filter((x) => x.a);
-  /** @type {Map<string, { guild: string, kind: 'power' | 'house', boss: ReturnType<typeof faceOf> | null, handlers: Map<string, any> }>} */
+  /** @type {Map<string, { guild: string, kind: 'power' | 'house', boss: ReturnType<typeof faceOf> | null, handlers: Map<string, Rec & { agents: Rec[] }> }>} */
   const groups = new Map();
   for (const { card, a } of agents) {
     if (!a) continue;
@@ -270,11 +270,11 @@ export function dmPowerViewOf(settlement) {
       const boss = a.power ? cards.find((c) => membershipsOf(c).some((m) => m.power === a.power && m.rank === 1)) : null;
       groups.set(guild, { guild, kind: a.power ? 'power' : 'house', boss: boss ? faceOf(boss) : null, handlers: new Map() });
     }
-    const g = /** @type {{ handlers: Map<string, any> }} */ (groups.get(guild));
+    const g = /** @type {{ handlers: Map<string, Rec & { agents: Rec[] }> }} */ (groups.get(guild));
     const hid = a.handler || '';
     const h = byId.get(hid);
     if (!g.handlers.has(hid)) g.handlers.set(hid, { ...(h ? faceOf(h) : { id: hid, name: '', title: '', house: '' }), agents: [] });
-    g.handlers.get(hid).agents.push({ ...faceOf(card), via: a.via, brings: VIA_WORDS[a.via], tie: tieWords(String(card.id ?? ''), hid) });
+    /** @type {Rec & { agents: Rec[] }} */ (g.handlers.get(hid)).agents.push({ ...faceOf(card), via: a.via, brings: VIA_WORDS[a.via], tie: tieWords(String(card.id ?? ''), hid) });
   }
   const answers = [...groups.values()].map((g) => ({ guild: g.guild, kind: g.kind, boss: g.boss, handlers: [...g.handlers.values()] }));
 
