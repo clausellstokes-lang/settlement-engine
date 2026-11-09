@@ -107,7 +107,7 @@ export const landing = {
     // village the road reaches" says. tests/copy/landingProseGrounding.test.js
     // reds when a regenerated fixture leaves this sentence behind.
     body:    'This is Cnocby: eighty-two people, a mountain village the road reaches, and a bakehouse already on its second bake when you arrive. The Summary tab is your session prep. Systems, factions and history sit one tab deeper, for when the party starts digging.',
-    library: 'Sign in free to keep every town in your Library, organized by campaign.',
+    library: 'Sign in free to keep your towns in your Library.',
     // ⛔ `cta` ('Forge a settlement') and `link` ('Read on: the voice') ARE
     // DELETED. Neither was rendered anywhere — the brief block feeds §01's
     // MiniDossierCard, which has never had a section ask — and the read-on line
@@ -117,7 +117,7 @@ export const landing = {
     population: 'Population {n}',
     more:    '+{n} more in the dossier',
     save:     'Save to Library',
-    saveNote: 'free account · keeps every draft',
+    saveNote: 'free account · saves to your Library',
     // The one interactive artifact control (owner addition W-L2/5): replays the
     // fixture's exact seed + config through the SAME forge action as every
     // other generation — same anon cap, no special path. Determinism, quietly.
