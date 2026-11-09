@@ -281,7 +281,7 @@ const EXPECTED_CORPUS = Object.freeze({
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 51, distinctValues: 1063, occurrences: 5356 },
+  { family: 'pulseHistory', identities: 51, distinctValues: 1309, occurrences: 5356 },
   { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 158 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
@@ -291,9 +291,17 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 64, distinctValues: 1082, occurrences: 5533 });
-const EXPECTED_ROWS_BYTES = 8401; // MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out; (ALLEGIANCE-CAR2 merge): 7798 → 8098, two in; (ALLEGIANCE-CAR3 merge): 8098 → 8401, four in and two out
-const EXPECTED_ROWS_SHA256 = '9bd27a797783bed194638999c79990c87f999ea3b3ad0f26634053c30f97ac07';
+// 2026-11-09 (STYLE-2-PULSE-FOLLOWUP, ruling C2; RE-RECORDED at 4edce0c76 through this library's own functions, one corpus
+// build per tree in an untracked scratch test): the clean worktree at bd07005b9 reproduces every frozen figure EXACTLY
+// (37645; 394/2525/395; 81/81; 64/1082/5533; 8401; 9bd27a79). At the lane's tip the corpus, the 64 identities and every
+// occurrence HOLD; FIVE rows move a distinct count only, all npcAgency's candidate reasons, which now carry four tellings
+// seeded on npc id + move (930b611cd, the refusal line: a single telling held its frame at the old rate):
+// pulseHistory[].consequenceOutcomes[].reasons[] 69 → 128, impactDigest[].reasons[] 77 → 146, mechanicalOutcomes[].reasons[]
+// 17 → 46, mechanicalRumorSeeds[].reasons[] 16 → 36, selectedOutcomes[].reasons[] 77 → 146. pulseHistory 51/1063/5356 →
+// 51/1309/5356; totals 64/1082/5533 → 64/1328/5533; bytes 8401 → 8404 (digit widths); digest 9bd27a79 → bc2f448a.
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 64, distinctValues: 1328, occurrences: 5533 });
+const EXPECTED_ROWS_BYTES = 8404; // MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out; (ALLEGIANCE-CAR2 merge): 7798 → 8098, two in; (ALLEGIANCE-CAR3 merge): 8098 → 8401, four in and two out; STYLE-2-PULSE-FOLLOWUP: 8401 → 8404, distinct counts only
+const EXPECTED_ROWS_SHA256 = 'bc2f448a77c4449c70fd891610c2e5ee4f73f280960c07e46e4cdb0823bbd1d0';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

@@ -197,9 +197,13 @@ describe('RUINS & REMEMBRANCE — the graveyard', () => {
     expect(screen.getByText('Old Keep, once a great city, dwindled to a final thorp and died.')).toBeTruthy();
     // The age of the fall is BANDED into turnings; the tick never reaches the page.
     expect(screen.getByText('Fell a few turnings back.')).toBeTruthy();
-    // The receipts the provenance already carries.
+    // The receipts the provenance already carries — in words: the engine's outcome id stays in
+    // the record and never reaches the page (D2·14, STYLE-2-PULSE-FOLLOWUP; re-keyed by cause).
     expect(screen.getByText('The Fall of Old Keep')).toBeTruthy();
-    expect(screen.getByText('lifecycle.death.oldkeep.5')).toBeTruthy();
+    expect(screen.getByText('Ruled by the realm')).toBeTruthy();
+    expect(screen.getByText('It fell in the course of the world, not by the DM’s hand.')).toBeTruthy();
+    // anchored: the two getByText above prove the receipt rendered before the negative reads it.
+    expect(screen.getByTestId('herald-remembrance').textContent).not.toMatch(/lifecycle\.death\.oldkeep/);
   });
 
   test('a library row with the Destroyed rubric joins the same roll, with its cause', () => {

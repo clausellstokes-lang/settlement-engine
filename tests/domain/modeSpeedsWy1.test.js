@@ -531,7 +531,14 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // STYLE-2-MERGE-2 at the SW-12 merge (2026-11-09): the two lines' text-only moves composed (the integration side's
 // b709ee7a... and SW-12's bd7c4e79..., each leaf-diffed TEXT ONLY on its own base); the hash re-measured at the merged tree:
 // b709ee7a... / bd7c4e79... -> aabbf48b...
-const BASE_PULSE_HASH = 'aabbf48b69c9c207926a12a8d1c18abb34a745d0083c7479acf9d34715fffc0d';
+// 2026-11-09 (STYLE-2-PULSE-FOLLOWUP, A2·169–170, ruling C2): 5b6a1e51... -> 95f4af4f..., TEXT ONLY, one cause: npcAgency's
+// candidate reasons in plain words (eventProse.js :: npcCandidateReasons). Leaf-diffed in a clean worktree at bd07005b9 (the parent d4e8d0487 reads the same hash) — in a
+// word: 152 string leaves moved (88 reasons, 64 gate reasons), 0 non-string, 0 keys added or lost; no id, tick
+// or number moved. Still no datum: the absent arm holds.
+// STYLE-2-MERGE-3 at the PULSE-FOLLOW-UP merge (2026-11-09, point 20): the two lines' text-only moves composed (the integration
+// side's aabbf48b... and PULSE-FOLLOW-UP's 95f4af4f..., each leaf-diffed TEXT ONLY on its own base); the hash re-measured at the
+// merged tree: aabbf48b... / 95f4af4f... -> 5b023789...
+const BASE_PULSE_HASH = '5b0237899af2533959ed9a8c74f46a66bdd63f5585b858eedbaeeaa07b7ea4f5';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

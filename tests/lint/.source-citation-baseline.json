@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 209,
+      "dated": 210,
       "sha-pin": 2,
       "tree": 167
     },
@@ -474,7 +474,9 @@
     "_rosterGrowth2026-11-09-style-2-merge-sw12": "THE UNION AT THE SW-12 PULSE-LINES MERGE (STYLE-2-MERGE-2, session session_01FbPLbc8gtufq3JftaYsRGV): both sides' notes kept; `dated` 207 -> 208 (docs/chair/2026-11-09/STYLE-2-PULSE-LINES-2026-11-09.md, the lane's record, born dated).",
     "_rosterGrowth2026-11-09-style-2-hooks": "ONE document JOINED the roster by being BORN into it (seat SW-10 HOOKS, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-hooks-2026-11-09 cut from bd07005b9): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md, the lane's record, born dated (its citations are `path :: symbol`); measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-sw10": "THE UNION AT THE SW-10 HOOKS MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 208 -> 209 (docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md, the lane's record, born dated).",
-    "_rosterGrowth2026-11-09-style-2-merge-record-19": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): `tree` 166 -> 167, docs/shift-records/2026-11-09-style-2-merge-19-sw10.json, record 19, born into the tree class; measured once by this walker; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-record-19": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): `tree` 166 -> 167, docs/shift-records/2026-11-09-style-2-merge-19-sw10.json, record 19, born into the tree class; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-pulse-followup": "ONE document JOINED the roster by being BORN into it (STYLE-2-PULSE-FOLLOWUP, session session_01FbPLbeNzSCGcvS25GjfrY3, on lane/style-2-pulse-followup-2026-11-09, measured once with this walker's own arm): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-PULSE-FOLLOWUP-2026-11-09.md, the lane's record, born dated; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-pulse-followup": "THE UNION AT THE PULSE-FOLLOW-UP MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 209 -> 210 (docs/chair/2026-11-09/STYLE-2-PULSE-FOLLOWUP-2026-11-09.md, the lane's record, born dated)."
   },
   "rows": []
 }

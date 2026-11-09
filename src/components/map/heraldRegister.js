@@ -241,7 +241,9 @@ function remnantRow(save, settlement, grade, nowTick, seesSecrets) {
     const stamped = (Array.isArray(settlement?.lifecycleHistory) ? settlement.lifecycleHistory : [])
       .find((e) => e?.event === 'terminal_death');
     if (stamped?.outcomeId) {
-      receipts.push({ id: 'outcome', label: 'Ruled by the realm', detail: String(stamped.outcomeId) });
+      // D2·14 (STYLE-2-PULSE-FOLLOWUP): the face says what the stamp means in words; the
+      // engine's outcome id stays on the row (`ref`) for the record and is never printed.
+      receipts.push({ id: 'outcome', label: 'Ruled by the realm', detail: 'It fell in the course of the world, not by the DM’s hand.', ref: String(stamped.outcomeId) });
     }
   }
   return {

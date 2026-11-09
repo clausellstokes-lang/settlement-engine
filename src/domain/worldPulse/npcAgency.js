@@ -17,7 +17,7 @@ import { allegianceOf } from '../people/allegiance.js';
 import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 // H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
 import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
-import { NPC_GOAL_NEWS, npcAmbitionWord, npcPressureWord, pickLine } from './eventProse.js';
+import { NPC_GOAL_NEWS, NPC_ROLE_MEANS, npcCandidateReasons, pickLine, plainTrait } from './eventProse.js';
 import { branchedGoalsFor } from './npcGoalBranches.js';
 import { NPC_AIMS, TARGETED_NPC_DEEDS, UNTARGETED_NPC_DEEDS } from './heraldDeeds.js';
 
@@ -917,11 +917,7 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     headline: `${state.name} ${deed.underway}`,
     appliedHeadline: `${state.name} ${deed.done}`,
     summary: `${state.name} is out to ${aim}.`,
-    reasons: [
-      `${state.roleArchetype.replace(/_/g, ' ')} role favors ${actionFamily.replace(/_/g, ' ')}.`,
-      `Pressure sat ${npcPressureWord(pressure)} the gate, and the ambition behind it is ${npcAmbitionWord(state.ambition)}.`,
-      state.corruption ? `Rare corrupted ${state.ideal.replace(/_/g, ' ')} ideal modifies behavior.` : `Ideal: ${state.ideal.replace(/_/g, ' ')}.`,
-    ],
+    reasons: npcCandidateReasons(state, pressure, actionFamily),
     npcPatch: {
       momentum: clamp01((state.momentum || 0) + (action.patch.momentum || 0)),
       loyalty: clamp01((state.loyalty ?? 0.5) + (action.patch.loyalty || 0)),
@@ -1021,6 +1017,7 @@ const GOAL_CULMINATION_THRESHOLD = 0.8;
 function npcGoalCulmination(state, tick) {
   const nextRank = Math.min(3, (state.dotRank || 1) + 1);
   const goal = String(state.longGoal || 'expand_influence').replace(/_/g, ' ');
+  const aim = NPC_AIMS[state.longGoal || 'expand_influence'] || goal;
   return {
     id: `candidate.npc.goal_culmination.${stablePart(state.npcId)}.${tick}`,
     type: 'npc',
@@ -1033,11 +1030,11 @@ function npcGoalCulmination(state, tick) {
     severity: 0.85,
     probability: 0.9,
     applyMode: 'auto',
-    headline: pickLine(NPC_GOAL_NEWS.culmination.headline, `${state.npcId}:${tick}:culmination:headline`, { name: state.name, goal }),
-    summary: pickLine(NPC_GOAL_NEWS.culmination.summary, `${state.npcId}:${tick}:culmination:summary`, { name: state.name, goal }),
+    headline: pickLine(NPC_GOAL_NEWS.culmination.headline, `${state.npcId}:${tick}:culmination:headline`, { name: state.name, goal, aim }),
+    summary: pickLine(NPC_GOAL_NEWS.culmination.summary, `${state.npcId}:${tick}:culmination:summary`, { name: state.name, goal, aim }),
     reasons: [
-      pickLine(NPC_GOAL_NEWS.culmination.progressReason, `${state.npcId}:${tick}:culmination:progress`, { name: state.name, goal }),
-      pickLine(NPC_GOAL_NEWS.culmination.roleReason, `${state.npcId}:${tick}:culmination:role`, { name: state.name, goal, role: state.roleArchetype.replace(/_/g, ' ') }),
+      pickLine(NPC_GOAL_NEWS.culmination.progressReason, `${state.npcId}:${tick}:culmination:progress`, { name: state.name, goal, aim }),
+      pickLine(NPC_GOAL_NEWS.culmination.roleReason, `${state.npcId}:${tick}:culmination:role`, { name: state.name, goal, aim, means: NPC_ROLE_MEANS[state.roleArchetype] || NPC_ROLE_MEANS.civic }),
     ],
     npcPatch: {
       goalProgress: { short: 0, long: 0 },
@@ -1070,6 +1067,8 @@ function npcGoalCulmination(state, tick) {
 function npcGoalRebranch(state, context, tick) {
   const goals = branchedGoals(state, context);
   if (!goals) return null;
+  const turned = goals.longGoal !== state.longGoal ? 'longGoal' : 'shortGoal';
+  const aimOf = (/** @type {unknown} */ g) => NPC_AIMS[/** @type {keyof typeof NPC_AIMS} */ (String(g))] || String(g || '').replace(/_/g, ' ');
   return {
     id: `candidate.npc.goal_rebranch.${stablePart(state.npcId)}.${tick}`,
     type: 'npc',
@@ -1085,10 +1084,10 @@ function npcGoalRebranch(state, context, tick) {
     // A context signature/reset is still applied and audited, but only an actual
     // change of short/long intent earns a Chronicle beat.
     headline: pickLine(NPC_GOAL_NEWS.rebranch.headline, `${state.npcId}:${tick}:rebranch:headline`, { name: state.name }),
-    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name }),
+    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name, aim: aimOf(goals[turned]), oldAim: aimOf(state[turned]) }),
     reasons: [
       pickLine(NPC_GOAL_NEWS.rebranch.contextReason, `${state.npcId}:${tick}:rebranch:context`, { name: state.name, previous: state.contextSignature || 'unknown', next: context.signature }),
-      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: String(state.ideal || 'unknown').replace(/_/g, ' '), flaw: String(state.flaw || 'unknown').replace(/_/g, ' ') }),
+      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: plainTrait(state.ideal), flaw: plainTrait(state.flaw) }),
     ],
     npcPatch: {
       ...goals,

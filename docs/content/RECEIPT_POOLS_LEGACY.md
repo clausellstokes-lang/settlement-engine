@@ -747,23 +747,25 @@ CADENCE: notable → floor 6 · live 4 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a long design come to a head" · headline · progressReason · roleReason · conditionDescription · causeReason pools, ×4 each [J-LEG-2]
 LAW ONE: a culmination changes a standing, never a fate.
-1. {npc} has worked toward "{goal}" for a long while, and now seizes it. `[live, verbatim]`
-2. After a long pursuit of "{goal}", {npc} has at last made it real. `[live, verbatim]`
-3. {npc}'s patient work toward "{goal}" has paid off; the prize is now in hand. `[live, verbatim]`
-4. The long design to "{goal}" has borne fruit for {npc}. `[live, verbatim]`
-5. {npc} has held to "{goal}" through a long run of setbacks and has now closed a hand on it.
-6. The work {npc} has been doing toward "{goal}" is finished, and the town will learn shortly what that means for it.
+SLOT NOTE (STYLE-2-PULSE-FOLLOWUP, 2026-11-09, B·2): {aim} is the worded long goal (heraldDeeds.js :: NPC_AIMS, an infinitive phrase: "secure an office"), never the quoted goal token.
+1. {npc} has worked a long while to {aim}, and now it is done. `[live, verbatim]`
+2. After long work, {npc} has managed to {aim}. `[live, verbatim]`
+3. Those who watched {npc} work so long to {aim} now see it done. `[live, verbatim]`
+4. {npc} set out long ago to {aim}, and the others who hold sway must now reckon with it. `[live, verbatim]`
+5. {npc} held on through a long run of setbacks, and has now managed to {aim}.
+6. {npc} has managed at last to {aim}, and everyone will learn soon enough what that means.
 
 ### npc_goal_rebranch — R3 news summary — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 4 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a change of ambitions" · headline · contextReason · personalityReason pools, ×4 each [J-LEG-2]
-1. {npc}'s goals shift because the settlement context changed. `[live, verbatim]`
-2. A changed settlement has forced {npc} to reconsider what comes next. `[live, verbatim]`
-3. {npc} keeps the same character, but new circumstances now demand different aims. `[live, verbatim]`
-4. New conditions in the settlement have turned {npc}'s effort toward another end. `[live, verbatim]`
-5. {npc} has set the old aim down; the settlement is not the place it was when that aim was chosen.
-6. What {npc} wants has moved with the town, and the old design has been left quietly where it stood.
+SLOT NOTE (STYLE-2-PULSE-FOLLOWUP, 2026-11-09, B·8): {oldAim} and {aim} are the worded goals (heraldDeeds.js :: NPC_AIMS) of the one goal that actually changed, the long goal first.
+1. {npc} has given up trying to {oldAim} and now means to {aim}. `[live, verbatim]`
+2. {npc} no longer works to {oldAim}; now they mean to {aim}. `[live, verbatim]`
+3. {npc} has set the old aim aside, to {oldAim}, and taken up a new one: to {aim}. `[live, verbatim]`
+4. People who know {npc} say they have stopped trying to {oldAim} and now mean to {aim}. `[live, verbatim]`
+5. {npc} has set down the old aim, to {oldAim}; what matters now is to {aim}.
+6. Things have changed around {npc}, and so has the aim: no longer to {oldAim}, but to {aim}.
 
 ---
 # §3 — THE AUTHORED SUBJECT-PHRASE POOLS (R1)
