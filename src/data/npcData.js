@@ -1571,8 +1571,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} holds the licence, ${s.name} supplies the goods, and the profit is split in a back room on the first of every month.`, colour: true },
     ], ['economy', 'criminal']),
     tension: pairProse('t', [
-      { line: (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.', colour: true },
-      { line: (r, s) => 'A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.', colour: true },
+      { line: (r, s) => `If ${r.name} is investigated, ${s.name} is implicated, and the other way round. Both know it, and neither mentions it.`, colour: true },
+      { line: (r, s) => `A clerk has begun checking ${r.name}'s ledgers against each other. Neither ${r.name} nor ${s.name} has decided what to do about it.`, colour: true },
       { line: (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`, colour: true },
       { line: (r, s) =>
         `${s.name} wants to move a larger cargo through ${r.name}'s warehouse next month. ${r.name} has not agreed and has not refused.`, colour: true },
@@ -1644,9 +1644,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
     ], ['military', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) =>
-        'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.', colour: true },
+        `A new superior has started asking ${r.name} awkward questions about how few arrests are made. ${r.name} or ${s.name} will have to act before the other does.`, colour: true },
       { line: (r, s) => `An honest sergeant has been transferred into ${r.name}'s command. Both parties consider this a problem.`, colour: true },
-      { line: (r, s) => 'The payments have started arriving late. In this trade, late is a message.', colour: true },
+      { line: (r, s) => `${s.name}'s payments to ${r.name} have started arriving late. In this trade, late is a message.`, colour: true },
       { line: (r, s) =>
         `${r.name} was promoted last month, and ${s.name} expects the price of silence to stay the same. ${r.name} does not.`, colour: true },
       { line: (r, s) =>
@@ -1717,7 +1717,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`, colour: true },
       { line: (r, s) => `${s.name}'s men have started asking what exactly they are guarding. ${r.name} prefers them incurious.`, colour: true },
-      { line: (r, s) => 'The last shipment was short, and each side privately blames the other. The next one will settle the question.', colour: true },
+      { line: (r, s) => `The last shipment was short, and ${r.name} and ${s.name} each privately blame the other. The next one will settle the question.`, colour: true },
       { line: (r, s) =>
         `${r.name} has cut ${s.name}'s fee by a fifth. ${s.name}'s company still guards the wagons, but more slowly.`, colour: true },
       { line: (r, s) => `${s.name}'s company has taken on a second client, and ${r.name} has learned the client's name.`, colour: true },
@@ -1750,8 +1750,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} carries ${r.name}'s banner on every patrol. Crossing ${s.name} is treated as heresy, and heresy is punished by ${s.name}.`, colour: true },
     ], ['religious', 'military']),
     tension: pairProse('t', [
-      { line: (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.', colour: true },
-      { line: (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.', colour: true },
+      { line: (r, s) => `${r.name} and ${s.name} disagree on a question of method that neither will put into writing.`, colour: true },
+      { line: (r, s) => `A penitent has brought ${r.name} a case that pits doctrine against ${s.name}'s order. It has not been resolved, and it will not stay private.`, colour: true },
       { line: (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`, colour: true },
       { line: (r, s, f) =>
         `${r.name} has declared a holy day on which no ${f.member} may bear arms. ${s.name} has a patrol scheduled for it.`, colour: true },
@@ -1894,8 +1894,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} answers ${r.name}'s summons late and leaves early. ${r.name} now issues them in writing so the delays are on record.`, colour: true },
     ], ['government', 'military']),
     tension: pairProse('t', [
-      { line: (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.', colour: true },
-      { line: (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.', colour: true },
+      { line: (r, s) => `An incident is coming that will force the issue between ${r.name} and ${s.name}, and both are positioning for it.`, colour: true },
+      { line: (r, s) => `A prisoner is held under ${r.name}'s authority and ${s.name}'s at once, and neither will release the paperwork first.`, colour: true },
       (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
       { line: (r, s, f) =>
         `${r.name} has cut the ${f.body}'s pay to fund the market repairs. ${s.name} has told the ${f.members} who signed the order.`, needs: ["market"] },
@@ -1931,9 +1931,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.', colour: true },
-      { line: (r, s) => 'A mutual patron has let it be known there is room for only one of them at the next table.', colour: true },
-      { line: (r, s) => 'One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.', colour: true },
+      { line: (r, s) => `A decision coming next season will favour ${r.name} or ${s.name} heavily, and both of them know it.`, colour: true },
+      { line: (r, s) => `A patron they share has let it be known there is room for only ${r.name} or ${s.name} at the next table.`, colour: true },
+      { line: (r, s) => `${r.name} has recently broken an unwritten rule of the contest. ${s.name} is deciding what that permits.`, colour: true },
       { line: (r, s) => `${r.name} has hired away ${s.name}'s best assistant. ${s.name} has said nothing about it, to anyone.`, colour: true },
       { line: (r, s) => `A post opens at midsummer, and only ${r.name} or ${s.name} can fill it.`, colour: true },
       { line: (r, s) =>
@@ -1996,8 +1996,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} sit on opposite sides of most questions and vote together on the few that touch their shared interests.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.", colour: true },
-      { line: (r, s) => 'A document each believed only they possessed has surfaced in a third set of hands.', colour: true },
+      { line: (r, s) => `The balance between ${r.name} and ${s.name} has recently shifted. ${s.name} has noticed; ${r.name} has not, yet.`, colour: true },
+      { line: (r, s) => `A document ${r.name} and ${s.name} each believed only they possessed has turned up in someone else's hands.`, colour: true },
       { line: (r, s) => `${s.name} has recently secured something that makes ${r.name}'s hold obsolete. The politeness continues, for now.`, colour: true },
       { line: (r, s) => `${r.name} has asked ${s.name} for a second favour before repaying the first.`, colour: true },
       { line: (r, s) => `${s.name} has found a new source for what ${r.name} supplies. ${r.name} has not been told.`, colour: true },
@@ -2027,8 +2027,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are allies with separate interests. They meet to coordinate and leave by different doors.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'A third party is actively working to change that calculation.', colour: true },
-      { line: (r, s) => 'The threat that made the alliance necessary is gone. Neither has said so aloud.', colour: true },
+      { line: (r, s) => `Someone else is working to pull ${r.name} and ${s.name} apart.`, colour: true },
+      { line: (r, s) => `The threat that brought ${r.name} and ${s.name} together is gone. Neither has said so aloud.`, colour: true },
       { line: (r, s) => `${r.name} has taken a precaution against ${s.name} that ${s.name} was not meant to discover. ${s.name} has discovered it.`, colour: true },
       { line: (r, s) => `${s.name} has been dining with ${r.name}'s rivals. ${r.name} heard about it from a servant.`, colour: true },
       { line: (r, s) =>
@@ -2063,9 +2063,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} trusts ${s.name}'s word over any written contract. ${s.name} has never given a reason to regret it.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'They are about to be on opposite sides of a significant decision.', colour: true },
-      { line: (r, s) => 'One of them is being pressured to act against the other, and has not yet mentioned it.', colour: true },
-      { line: (r, s) => 'The respect is real and the interests are diverging. Both can read a map.', colour: true },
+      { line: (r, s) => `${r.name} and ${s.name} are about to be on opposite sides of an important decision.`, colour: true },
+      { line: (r, s) => `${r.name} is being pressed to act against ${s.name}, and has not mentioned it.`, colour: true },
+      { line: (r, s) => `${r.name} and ${s.name} still respect each other, but what each of them wants is pulling apart, and both can see it.`, colour: true },
       { line: (r, s) => `${r.name} has learned something about ${s.name}'s family that ${s.name} does not know.`, colour: true },
       { line: (r, s) => `${s.name} has been offered ${r.name}'s post by people who want ${r.name} gone.`, colour: true },
       { line: (r, s) => `${r.name} has made a mistake that ${s.name} is bound to report. ${s.name} has not reported it.`, colour: true },
@@ -2097,7 +2097,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
     tension: pairProse('t', [
       { line: (r, s) => `${s.name} is about to call it in.`, colour: true },
       { line: (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`, colour: true },
-      { line: (r, s) => 'A third party has learned what the original favour was. The debt just changed hands.', colour: true },
+      { line: (r, s) => `Someone else has learned what favour ${r.name} owes ${s.name}, and now has a hold on ${r.name} too.`, colour: true },
       { line: (r, s) =>
         `${s.name} has asked ${r.name} for a vote against ${r.name}'s own interests. It is the first payment ${s.name} has asked for.`, colour: true },
       { line: (r, s) => `${r.name} has started repaying the debt in coin. ${s.name} wants it repaid in favours.`, colour: true },
@@ -2127,9 +2127,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} is godparent to ${s.name}'s eldest child. The tie was made before their careers set them against each other.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.', colour: true },
-      { line: (r, s) => 'A younger relative has begun trading on the connection both of them refuse to use.', colour: true },
-      { line: (r, s) => 'The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.', colour: true },
+      { line: (r, s) => `An inheritance, a title or a secret is about to make the tie between ${r.name} and ${s.name} impossible to ignore.`, colour: true },
+      { line: (r, s) => `A younger relative has begun trading on the connection ${r.name} and ${s.name} both refuse to use.`, colour: true },
+      { line: (r, s) => `The family has taken a side in a quarrel between ${r.name} and ${s.name}, and both of them think it is the wrong side.`, colour: true },
       { line: (r, s) => `${r.name}'s child wants to marry into ${s.name}'s household. Neither parent has given an answer.`, colour: true },
       { line: (r, s) =>
         `${s.name} has gone into business against ${r.name}'s partners, and the family expects ${r.name} to keep the peace.`, colour: true },
@@ -2162,9 +2162,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} fought a duel in their youth. Both survived, and the scar is on ${s.name}'s face.`, colour: true },
     ]),
     tension: pairProse('t', [
-      { line: (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.', colour: true },
-      { line: (r, s) => 'An apology is owed in one direction and expected in the other, and they disagree about which.', colour: true },
-      { line: (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.', colour: true },
+      { line: (r, s) => `What first broke ${r.name} and ${s.name} apart is happening again, and both of them know it.`, colour: true },
+      { line: (r, s) => `${r.name} and ${s.name} each think the other owes the apology.`, colour: true },
+      { line: (r, s) => `A newcomer keeps trying to reconcile ${r.name} and ${s.name}, and is about to learn why nobody else does.`, colour: true },
       (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
       { line: (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`, colour: true },
       { line: (r, s) =>
