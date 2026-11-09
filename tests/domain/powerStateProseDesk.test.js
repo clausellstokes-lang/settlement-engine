@@ -1279,6 +1279,23 @@ describe('DS-POW-5 — the seat\'s lens (SW-7 POWER-SIDE, STYLE-2 B7): the rulin
       { seed: 'seat-lens', audience: 'dm' });
     expect(String(out.rulingStructure?.sentence ?? '')).not.toMatch(/faith|doctrine|heresy/i);
   });
+  it('rule and succession is silent on an empty seat, which the ruling chain names first (soak1k-8, Achileia: "Stands empty")', () => {
+    const vacantSeat = { name: 'Tarvel', powerStructure: { governingName: "Headman's Authority", factions: [
+      { faction: "Headman's Authority", category: 'government', power: 30, isGoverning: true, modifiers: ['vacant'] },
+      { faction: 'Religious Authorities', category: 'religious', power: 45 },
+    ] } };
+    const contenders = { incumbent: { name: "Headman's Authority", gated: true }, challengers: [{ name: 'Religious Authorities', weight: 45 }] };
+    const out = powerStateProse(vacantSeat, { contenders, riskLabel: 'Contested', structuralLens: seatLensOf(vacantSeat) },
+      { seed: 'seat-vacant', audience: 'dm' });
+    // The ruling chain says "Stands empty" first; the contest pools speak of a holder, so the block is silent.
+    expect(out.successionRisk).toBeNull();
+    // Non-vacuity: the same town with its seat held draws the Contested line.
+    const held = { ...vacantSeat, powerStructure: { ...vacantSeat.powerStructure,
+      factions: vacantSeat.powerStructure.factions.map((f) => ({ ...f, modifiers: [] })) } };
+    const heldOut = powerStateProse(held, { contenders, riskLabel: 'Contested', structuralLens: seatLensOf(held) },
+      { seed: 'seat-vacant', audience: 'dm' });
+    expect(String(heldOut.successionRisk?.sentence ?? '')).not.toBe('');
+  });
   it('with no governing row it answers the strongest faction\'s lens, as before', () => {
     const s = { name: 'T', powerStructure: { factions: [{ category: 'merchant', power: 60 }, { category: 'noble', power: 40 }] } };
     expect(seatLensOf(s).rulingPower).toBe(structuralLensOf(s).rulingPower);
