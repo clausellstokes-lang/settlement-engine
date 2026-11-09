@@ -422,7 +422,20 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   · 140b8f333, GREEN-BASE ee663bd9f, 59d723a37, FIX-ARROW-SECTIONS 2c76c6177, 5c14aac4a, 642f1796c 0 each ·
 //   the docks read bcf3e7f8a +5. The sum closes exactly: 1,735,881 + 50 - 1,495 - 2,376 - 3,500 - 860 + 13,069 + 1,151
 //   + 4,626 + 5 = 1,746,551, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1746551;
+// 1,746,551 -> 1,976,655 (2026-11-09, MERGE-TRAIN, the allegiance train's nine merge points; the W0-CLOSE idiom, the chair's
+// ruling of 2026-11-08 20:4x and of 2026-11-09 09:2x — the ceiling re-recorded ONCE at the final tip at the measured figure,
+// every byte attributed by car, NO buy-back and NO lazy seam (car 4 measured its two tables as synchronous reads); VETOABLE BY
+// THE OWNER): A RISE OF 230,104 B. MEASURED by a fresh `npm run build` of a git archive of every merge point's tip, read by
+// this file's own arm; the train's base 2053a809c reads 1,746,551 (the ceiling, exactly):
+//   ALLEGIANCE-CAR1 e5f88930b +21,787 (the tie lines +12,830, allegiance.js +6,390, the v3 migration +1,939, the catalog +903,
+//   the renames +490, archetypes +338, corruptionPass retired -1,835 — car 1's record §8) · CAR2 f51058995 +7,124 (hallCapture.js,
+//   the guild's push, the capture rows) · CAR3 c6ded8e3a +74 · WRITE-TITLES-14 0 · OWNER-WORDS-DOSSIER -4 · FIX-HOOK-OBJECT +40 ·
+//   FIX-BUY-BUTTON 0 · FIX-ARROW-PLAQUE 0 · CAR4 824a8ce2f +201,083 — THE OWNER'S CONTENT: the two writers' tables
+//   (src/data/people/goalFamilies.js, WRITE-GOALS 82796628e, and src/data/people/titleSecretsPresentations.js, WRITE-PEOPLE-3
+//   5ee39a56c; ~60 KB of the car's gzip rise) and people/goals.js's dealer · the boundary cure, the landing fixture, the floor
+//   and type fixes 0. The sum closes exactly: 1,746,551 + 21,787 + 7,124 + 74 - 4 + 40 + 201,083 = 1,976,655, the final tip's
+//   worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1976655;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
