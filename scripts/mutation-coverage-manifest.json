@@ -3596,6 +3596,10 @@
     "tests/domain/successionQuestionPrint.pin.test.js": {
       "kind": "rationale",
       "rationale": "THE SUCCESSION QUESTION PRINTS NAMES, NEVER IDS (SW-11 PULSE-CARD, the audit's C2·26; enrolled by STYLE-2-MERGE at the SW-11 merge point, 2026-11-09). Its catching power is EXECUTED red-first on the lane: a planted succession outcome printed the question's ids at both print sites before the cure."
+    },
+    "tests/security/surveyorPremiumOnly.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
     }
   },
   "meta": {
