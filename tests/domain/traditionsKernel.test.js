@@ -294,7 +294,7 @@ describe('the owner line names an institution as a place, never a "who" (SW-9; S
     for (const prosperity of ['Comfortable', 'Subsistence']) {
       const beat = beatOf(rec, prosperity);
       expect(beat).toContain('Common grazing land');
-      expect(beat, 'an institution is no who').not.toMatch(/Common grazing land, who answer|Common grazing land keep it|kept by Common grazing land/);
+      expect(beat, 'an institution is no who').not.toMatch(/Common grazing land, who answer|Common grazing land keep it|kept by Common grazing land/); // anchored: beat is asserted to contain 'Common grazing land' on the line above
     }
     expect(beatOf(rec)).toContain('It is held at Common grazing land.');
   });

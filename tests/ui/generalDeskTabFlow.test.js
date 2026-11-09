@@ -320,8 +320,8 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     // The owner vetoed the proposed heading (2026-11-09 03:5x, "No."; SW-9): the block carries none.
     expect(block.textContent.startsWith(firstSite), 'the moved block opens on its first site line, no heading').toBe(true);
     const text = container.textContent || '';
-    expect(text, 'the vetoed heading is gone').not.toContain('Trade and the houses');
-    expect(text, 'its struck alternative never lands').not.toContain('Trade and institutions');
+    expect(text, 'the vetoed heading is gone').not.toContain('Trade and the houses'); // anchored: the block is asserted to open on its first site line above
+    expect(text, 'its struck alternative never lands').not.toContain('Trade and institutions'); // anchored: the block is asserted to open on its first site line above
     expect(text.indexOf('Systems Health'), 'the block follows the Systems Health section').toBeLessThan(text.indexOf(firstSite));
     expect(text.split(firstSite).length - 1, 'the site lines print once').toBe(1);
   });

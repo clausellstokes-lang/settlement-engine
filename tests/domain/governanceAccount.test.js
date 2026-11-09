@@ -157,7 +157,7 @@ describe('the composed governance paragraph', () => {
       + "Its arrests and its offices are no longer the hall's own to give, though it still sits.",
     );
     expect(g.text.startsWith('Polaovo is governed by the Corrupt Council. Boleslav Davydov')).toBe(true);
-    expect(g.text, 'no connective joins the seat to the ruler or the band to its causes (SW-9)').not.toMatch(/, and Boleslav|, now that|, which governs|, earned by|, won over by|Until it is filled/);
+    expect(g.text, 'no connective joins the seat to the ruler or the band to its causes (SW-9)').not.toMatch(/, and Boleslav|, now that|, which governs|, earned by|, won over by|Until it is filled/); // anchored: g.text is asserted to open on the seat by name on the line above
     expect(g.text).not.toMatch(/faction/i); // anchored: g.text is asserted to open on the seat by name on the line above
     expect(g.text).not.toMatch(/two of the|the gap widens|does not occupy|rather than being overthrown/i); // anchored: g.text is asserted to open on the seat by name two lines above
   });

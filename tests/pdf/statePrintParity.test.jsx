@@ -965,8 +965,8 @@ describe('THE OWNER\'S VETOES OF 2026-11-09 03:5x in print (SW-9)', () => {
     const { readFileSync } = await import('node:fs');
     const src = readFileSync(new URL('../../src/pdf/sections/PowerStructure.jsx', import.meta.url), 'utf8');
     expect(src).toContain('<Callout tone="warn" kicker="GOVERNANCE">');
-    expect(src).not.toContain('kicker="WHO RUNS IT"');
-    expect(src).not.toContain('kicker="RECENT EVENT"');
+    expect(src).not.toContain('kicker="WHO RUNS IT"'); // anchored: src is asserted to carry the GOVERNANCE Callout on the line above
+    expect(src).not.toContain('kicker="RECENT EVENT"'); // anchored: src is asserted to carry the GOVERNANCE Callout two lines above
   });
 });
 
@@ -978,7 +978,7 @@ describe('the war-weary near-peace line, one sentence on two surfaces (SW-9; SW-
     const web = readFileSync(new URL('../../src/components/new/tabs/WarTab.jsx', import.meta.url), 'utf8');
     expect(pdf).toContain(`'near peace': '${LINE}'`);
     expect(web).toContain(`. ${LINE}</span>`);
-    expect(pdf + web).not.toContain('The scar is healing');
+    expect(pdf + web).not.toContain('The scar is healing'); // anchored: both files are asserted to carry the new line above
   });
 });
 
