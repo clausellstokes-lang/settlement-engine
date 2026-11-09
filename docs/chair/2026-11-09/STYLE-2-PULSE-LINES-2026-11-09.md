@@ -499,3 +499,11 @@ Pins: `autoplacementConsent.test.jsx` — the lock's last sentence (D·92) and t
 | D·8 letter span header | `tick {sinceTick} → {throughTick}` | "{tickCalendarDetailLabel(sinceTick)} to {tickCalendarDetailLabel(throughTick)}" — e.g. "week 3 of spring, year 1 to week 7 of spring, year 1" (the DETAIL label, not the audit's season-level `tickCalendarLabel`: the in-file note called the window the DM's read-floor control, so it keeps the week) |
 
 **Register, through its door:** the §69.3 allowance (`tick 1`) struck with its site; `proseLeak`'s register ceilings fall again — tick 10 → 9, files 11 → 10 (measured after: tick 9, week 6). D·9 (SW-3's line at :118) untouched. Pins: a new `tests/components/chroniclersLetterSpanWords.test.jsx`; **red at the parent**, green here. The letter's own text export (`chroniclersLetter.js`, already calendar-worded) and its golden do not move.
+
+### 9n. `ChronicleScrollback.jsx` (D·49)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·49 causal-diff heading | `Causal shift in this entry` | "How things stand now, against before" (it sits under "What changed & why" on the same entry; the model's word "causal shift" leaves the second heading) |
+
+Pins: `chronicleScrollback.test.jsx` — the heading read inside `chronicle-causal-diff`; **red at the parent** (1 of 9), green here. Registers: none moved.
