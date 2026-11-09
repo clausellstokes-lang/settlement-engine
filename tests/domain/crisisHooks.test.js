@@ -180,3 +180,13 @@ describe('crisisHooksOf: the lever hook in plain grammar', () => {
     expect(inns[0].text).toBe('The migration turns on the inns and taverns: whoever wins it over decides how the migration goes.');
   });
 });
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3): "Nawal al-Aziz of Guild Council takes the worst of it: it takes the
+// blame, and its good name pays for the crisis" (soak1k-3) — "it" for a person. The reason speaks of the house.
+describe('crisisHooksOf: a person is never "it"', () => {
+  it('the legitimacy brunt\'s reason names the house that takes the blame, for a person or the house alike', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'famine', cast: cast([npcRow('brunt', 'n2', 'Oswin Hale', CAST_REASONS.bruntBase.public_legitimacy)]) });
+    expect(hook.text).toBe('In the famine, Oswin Hale of Town Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.');
+    expect(hook.text).not.toMatch(/: it takes/);
+  });
+});

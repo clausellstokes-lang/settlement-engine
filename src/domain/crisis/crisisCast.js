@@ -148,7 +148,7 @@ export const CAST_REASONS = Object.freeze({
     labor_capacity: 'its people do the work the crisis needs most',
     trade_connectivity: 'its trade is cut',
     defense_readiness: 'its people stand on the walls',
-    public_legitimacy: 'it takes the blame, and its good name pays for the crisis',
+    public_legitimacy: 'the blame falls on the house, and its good name pays for the crisis', // SW-6 (B3): never "it" for a person
     healing_capacity: 'its people tend the sick',
     tax_revenue: 'its income dries up first',
     housing_pressure: 'its people take in the newcomers',
