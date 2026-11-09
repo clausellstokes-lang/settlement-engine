@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 199,
       "sha-pin": 2,
-      "tree": 161
+      "tree": 162
     },
     "files": {
       "banner": [
@@ -449,7 +449,8 @@
     "_rosterGrowth2026-11-09-style-2-merge-swb5": "THE UNION AT THE SW-B5 FRAMES MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 197 -> 198 (docs/chair/2026-11-09/STYLE-2-FRAMES-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-record-9": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 160 -> 161, docs/shift-records/2026-11-09-style-2-merge-9-swb5.json, record 9, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-eco-def-blocks": "ONE document JOINED the roster by being BORN into it (seat SW-B6 ECO-DEF-BLOCKS, session session_01FbPLbcoU36mKdWvRzoQ9MP, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-eco-def-blocks-2026-11-09 cut from lane/integration-2026-11-07 @ 0c93f0ca0): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-ECO-DEF-BLOCKS-2026-11-09.md, the lane's record, born dated, measured by this walker. `tree` reads 147 against the frozen 139 at the base, MERGE-WAVE's in-flight records, and is NOT touched here.",
-    "_rosterGrowth2026-11-09-style-2-merge-swb6": "THE UNION AT THE SW-B6 ECO-DEF-BLOCKS MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 198 -> 199 (docs/chair/2026-11-09/STYLE-2-ECO-DEF-BLOCKS-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-swb6": "THE UNION AT THE SW-B6 ECO-DEF-BLOCKS MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 198 -> 199 (docs/chair/2026-11-09/STYLE-2-ECO-DEF-BLOCKS-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-record-10": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 161 -> 162, docs/shift-records/2026-11-09-style-2-merge-10-swb6.json, record 10, born into the tree class; measured once by this walker; nothing changed class."
   },
   "rows": []
 }
