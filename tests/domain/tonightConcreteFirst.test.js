@@ -46,7 +46,14 @@ describe('R11 · the Tonight sheet prefers the concrete', () => {
 
   it('soak1k-868: the seat (the insurgency\'s target) with an abstract goal, the crisis secret withheld and no temperament on the record is voiced with nothing, never the abstract goal', () => {
     const seat = composeTonightSheet(born[EMPTY_SEAT_SEED]).people.find((p) => p.why === 'seat');
-    expect(seat).toMatchObject({ name: 'Slavica Smirnov', says: 'want', line: '' });
+    // RE-KEYED 2026-11-09 (STYLE-2 SW-7, fb712a8d7 — no secret frame twice in one dossier): the frame-keyed refusal
+    // leaves one CRIME_KNOWLEDGE draw unrolled earlier in this roster, so the seat now holds a concrete secret of its own
+    // and the sheet voices THAT (the concrete first). Was { says: 'want', line: '' }. The law of this arm holds: the
+    // abstract goal is never what the seat says. The "voiced with nothing" branch lost its natural witness on this
+    // seed; it is named in the SW-7 record's "What stays" for a planted one.
+    expect(seat).toMatchObject({ name: 'Slavica Smirnov', says: 'secret', line: "Runs a protection scheme targeting the very merchants they're supposed to serve." });
+    const card = born[EMPTY_SEAT_SEED].npcs.find((n) => n.name === 'Slavica Smirnov');
+    expect(seat.line).not.toBe(String(card?.goal?.short ?? '').trim());
   });
 
   it('soak1k-26 and -55: a crisis target whose own line falls back never voices that crisis\'s secret (F13 target_runs_plot)', () => {
