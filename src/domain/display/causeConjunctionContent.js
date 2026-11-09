@@ -49,7 +49,7 @@ export const FULL_CONTENT = Object.freeze({
     'compromised-covert': {
       underfunded: {
         attributed: [
-          "The garrison's pay has run short for too many seasons, and the captain has quietly started taking outside coin to make up the muster. The men are paid, the gate watches bend, and no one has asked why yet.",
+          "The garrison's pay has run short for too many seasons, and the captain has quietly started taking outside coin to make up the muster. The soldiers are paid, the gate watches bend, and no one has asked why yet.",
           'Watch the captain on pay day: the chest is light, the men are made whole anyway, and the difference walks in through a side door after dark. The garrison is bought and does not know it.',
         ],
       },
