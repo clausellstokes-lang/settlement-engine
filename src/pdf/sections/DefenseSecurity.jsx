@@ -283,7 +283,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
               {/* T2-20: name and band only; the faction's description prints on its Power
                   Structure card. */}
               <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.bad }}>
-                Criminal faction: {d.criminalFaction.faction || d.criminalFaction.name}
+                Underworld: {d.criminalFaction.faction || d.criminalFaction.name}
                 {d.criminalFaction.powerLabel ? ` · ${d.criminalFaction.powerLabel}` : ''}
               </Text>
             </View>

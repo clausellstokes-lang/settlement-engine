@@ -126,7 +126,7 @@ export function powerHeadline(power, _identity) {
   if (bits.length && challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
     bits.push(`, with ${challenger.name} pressing close behind`);
   } else if (bits.length && factions.length > 2) {
-    bits.push(`, with ${factions.length - 1} other faction${factions.length - 1 === 1 ? '' : 's'} competing for influence`);
+    bits.push(`, with ${factions.length - 1} other power${factions.length - 1 === 1 ? '' : 's'} competing for influence`);
   }
   if (!bits.length) return null;
   return bits.join('') + '.';

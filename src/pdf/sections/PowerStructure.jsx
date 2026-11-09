@@ -147,7 +147,7 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse, prim
 
       {/* ── Faction cards ─────────────────────────────────────────── */}
       <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3, marginTop: space.sm }}>
-        FACTIONS
+        POWERS
       </Text>
       {p.factions.map((f, i) => (
         <FactionCard key={`f-${i}`} faction={f} index={i} entityIndex={index} />
@@ -280,7 +280,7 @@ function FactionCard({ faction, index, entityIndex }) {
       )}
       {f.subFactions?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>SUB-FACTIONS / GROUPS</Text>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>GROUPS WITHIN</Text>
           {f.subFactions.map((sf, si) => (
             <Text key={`sf-${index}-${si}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second }}>
               · {label(sf)}
