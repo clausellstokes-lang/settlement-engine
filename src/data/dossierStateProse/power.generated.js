@@ -1470,7 +1470,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "no crisis: unrest"
           ],
-          "text": "Nobody at {settlement} is in a position to take {faction}'s place; it has no rival, and nobody is asking who comes next.",
+          "text": "Nobody at {settlement} is in a position to take {faction}'s place; it has no rival, and nobody in the town is asking who comes next.",
           "slots": [
             "settlement",
             "faction"
@@ -1496,7 +1496,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "no unrest"
           ],
-          "text": "People at {settlement} grumble, but nobody stands ready to lead them, so {faction} is safe in the hall.",
+          "text": "People at {settlement} grumble, but nobody in the town stands ready to lead them, so {faction} is safe in the hall.",
           "slots": [
             "settlement",
             "faction"
@@ -1533,7 +1533,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "unrest"
           ],
-          "text": "No rival stands at {settlement} to take {faction}'s place, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting itself.",
+          "text": "No rival stands at {settlement} to take {faction}'s place, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting across the town.",
           "slots": [
             "settlement",
             "faction"
@@ -1544,7 +1544,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "riskLabel: Holding": [
         {
           "angle": "ledger",
-          "text": "{faction} outweighs everyone at {settlement} who wants its place, and they make no secret of wanting it. {faction} holds on, but has to watch them.",
+          "text": "{faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.",
           "slots": [
             "faction",
             "settlement"
@@ -2159,7 +2159,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "mixed": [
         {
           "angle": "ledger",
-          "text": "Nothing at {settlement} governs cleanly: the {seat} is several kinds of power sitting together, and it moves only as fast as the most reluctant of them.",
+          "text": "Nothing at {settlement} governs cleanly: the {seat} is several kinds of power sitting together, and the town waits on the most reluctant of them.",
           "slots": [
             "settlement",
             "seat"
@@ -2168,7 +2168,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "At {settlement} no one power is in charge; the {seat} decides only what its members can agree on.",
+          "text": "At {settlement} no one power is in charge, and the town gets only what the {seat}'s members can agree on.",
           "slots": [
             "settlement",
             "seat"
@@ -2177,7 +2177,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "No part of the {seat} at {settlement} can rule alone, so they rule together, and each watches for the day one of them can do without the others.",
+          "text": "No part of the {seat} at {settlement} can rule alone, so they rule the town together, and each watches for the day one of them can do without the others.",
           "slots": [
             "seat",
             "settlement"
@@ -2949,7 +2949,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Officials at {settlement} are spending money their posts never paid them, and nobody is asking where it came from.",
+          "text": "Officials at {settlement} are spending money their posts never paid them, and nobody in the town asks where it came from.",
           "slots": [
             "settlement"
           ],

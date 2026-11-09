@@ -75,7 +75,7 @@ const CLAIMS = Object.freeze([
   // succession: succession void, politically fractured
   // SW-7 POWER-SIDE (STYLE-2 B7, 2026-11-09): DS-POW-4 Stable v1 and v3 reworded under the owner's style law; the
   // claims kept, re-anchored to the new words (v3's twice, below and under unrest).
-  { claim: 'the succession is not live', re: /\bnobody is asking who comes next\b/, family: 'succession' },
+  { claim: 'the succession is not live', re: /\bis asking who comes next\b/, family: 'succession' },
   { claim: 'nobody would replace the seat', re: /\bdoes not come up, because there is nobody the \p{L}+ would name\b/u, family: 'succession' },
   { claim: 'the seat is safe', re: /\bis safe in the hall\b/, family: 'succession' },
   // unrest: insurgency, slave revolt, wartime

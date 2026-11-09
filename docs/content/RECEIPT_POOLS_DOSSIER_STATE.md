@@ -2259,15 +2259,15 @@ did not die.
 **PDF PARITY:** parity.
 
 **`riskLabel: Stable` (no challengers)**
-1. `[ledger · succession settled · no crisis: unrest]` Nobody at {settlement} is in a position to take {faction}'s place; it has no rival, and nobody is asking who comes next.
+1. `[ledger · succession settled · no crisis: unrest]` Nobody at {settlement} is in a position to take {faction}'s place; it has no rival, and nobody in the town is asking who comes next.
 2. `[street · succession settled · no crisis: unrest]` The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.
-3. `[counterforce · succession settled · no unrest]` People at {settlement} grumble, but nobody stands ready to lead them, so {faction} is safe in the hall.
+3. `[counterforce · succession settled · no unrest]` People at {settlement} grumble, but nobody in the town stands ready to lead them, so {faction} is safe in the hall.
 4. `[ledger · succession open]` No contender stands at {settlement} to take the {seat}, and the absence settles nothing: who governs is an open question, and nobody is strong enough to close it.
 5. `[street · succession open]` The {seat} at {settlement} has no rival and no secure holder either; the town asks who governs and gets no answer it can act on.
-6. `[ledger · succession settled · unrest]` No rival stands at {settlement} to take {faction}'s place, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting itself.
+6. `[ledger · succession settled · unrest]` No rival stands at {settlement} to take {faction}'s place, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting across the town.
 
 **`riskLabel: Holding`** {colour}
-1. `[ledger]` {faction} outweighs everyone at {settlement} who wants its place, and they make no secret of wanting it. {faction} holds on, but has to watch them.
+1. `[ledger]` {faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.
 2. `[street]` {settlement} has people who would take the hall if they could. They cannot, and everyone involved knows it.
 3. `[unfolding]` The {seat} at {settlement} holds because {faction} is still the heavier of the two, and the weighing is done again every season.
 
@@ -2364,9 +2364,9 @@ and never an assertion that the feared thing is happening.
 3. `[unfolding · dm-only]` The {seat} at {settlement} rules by fear and favours, not consent, so its real danger is one of its own people turning on it.
 
 **`mixed`** {colour}
-1. `[ledger]` Nothing at {settlement} governs cleanly: the {seat} is several kinds of power sitting together, and it moves only as fast as the most reluctant of them.
-2. `[street]` At {settlement} no one power is in charge; the {seat} decides only what its members can agree on.
-3. `[unfolding]` No part of the {seat} at {settlement} can rule alone, so they rule together, and each watches for the day one of them can do without the others.
+1. `[ledger]` Nothing at {settlement} governs cleanly: the {seat} is several kinds of power sitting together, and the town waits on the most reluctant of them.
+2. `[street]` At {settlement} no one power is in charge, and the town gets only what the {seat}'s members can agree on.
+3. `[unfolding]` No part of the {seat} at {settlement} can rule alone, so they rule the town together, and each watches for the day one of them can do without the others.
 
 **`economicBase: extraction`** {colour}
 1. `[ledger]` {settlement} lives on what it takes out of the ground, and everything about the town (its rhythm, its politics, its fear) follows the yield.
@@ -2464,7 +2464,7 @@ own entailment and licenses nothing about who runs it.
 **capture pressure ADVANCING (weak security, poor prosperity)** *(every variant `dm-only`)* {colour}
 1. `[unfolding · dm-only]` Criminal money is reaching the officials of {settlement} one at a time, because the town is poor and its streets are badly watched, and a bribe goes a long way here.
 2. `[ledger · dm-only]` Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and nobody in the {seat} is mending either.
-3. `[street · dm-only]` Officials at {settlement} are spending money their posts never paid them, and nobody is asking where it came from.
+3. `[street · dm-only]` Officials at {settlement} are spending money their posts never paid them, and nobody in the town asks where it came from.
 
 **capture pressure RECOVERING (strong security, prosperity)** *(every variant `dm-only`)*
 1. `[unfolding · dm-only · colour]` The criminals at {settlement} are losing their grip on the hall: the town is doing well again and its streets are guarded.
