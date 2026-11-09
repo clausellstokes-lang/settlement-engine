@@ -116,7 +116,7 @@ const BLOCK_POOLS = Object.freeze({
   // The history chapter (DESK-GEN2 car 1).
   'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 10,
   // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
-  'DS-GEN-11': 6, 'DS-HK-1': 11,
+  'DS-GEN-11': 5, 'DS-HK-1': 11, // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool leaves (6 -> 5)
   // The notable connection (DESK-GEN2 car 4).
   'DS-REL-2': 3,
   // Why these workshops (DESK-GEN3 car 1).
@@ -1340,7 +1340,10 @@ describe('the viability verdict and the hook framing', () => {
     expect(criticalIssuePoolKey(2, true)).toBe('criticalIssueCount: critical contradictions on the record');
     // The zero pool vouches for the record, so it needs the receipt's battery judgment
     // (lane SELF-VOUCH): passed → zero; contradicted → the contradiction pool; unasked → nothing.
-    expect(criticalIssuePoolKey(0, true)).toBe('criticalIssueCount zero');
+    // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool LEAVES — beside a by-design
+    // list it vouched falsely, and on a clean record the header already says COHERENT; the key
+    // resolves to no pool, so a battery-clean record prints no coherence line.
+    expect(criticalIssuePoolKey(0, true)).toBeNull();
     expect(criticalIssuePoolKey(0, false)).toBe('criticalIssueCount: critical contradictions on the record');
     expect(criticalIssuePoolKey(0), 'a record the battery never read vouched for').toBeNull();
     expect(criticalIssuePoolKey(undefined), 'an unmeasured record read as zero').toBeNull();
@@ -1349,7 +1352,7 @@ describe('the viability verdict and the hook framing', () => {
     // TOTAL the other way: the six pools are claimed by these three lenses and no other.
     expect([...new Set([
       viabilityVerdictPoolKey(true), viabilityVerdictPoolKey(false), viabilityVerdictPoolKey(undefined),
-      criticalIssuePoolKey(1), criticalIssuePoolKey(0, true), 'THE FIRST-SURVEY QUALIFICATION',
+      criticalIssuePoolKey(1), 'THE FIRST-SURVEY QUALIFICATION',
     ])].sort()).toEqual(poolsOf('DS-GEN-11').sort());
   });
 

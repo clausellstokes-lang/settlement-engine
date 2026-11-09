@@ -45,10 +45,12 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
   });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a record the battery finds clean that prints this line): was soak1k-278. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
-  it('soak1k-6: a record the battery finds clean still prints the line', () => {
+  // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the vouching zero pool LEAVES (STYLE-RULINGS-2
+  // B1(c), "the line reads the battery's verdict or leaves"): a clean record prints no vouch.
+  it('soak1k-6: a record the battery finds clean prints no vouching line', () => {
     const { settlement } = birth(6);
     expect(battery(settlement)).toMatchObject({ status: 'pass', findings: [] });
-    expect(verdict(settlement)).toMatch(VOUCH);
+    expect(verdict(settlement)).not.toMatch(VOUCH); // anchored: the battery passes on the line above, and the next case proves the same seed's verdict path is live
   });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (the clean record above): was soak1k-278.

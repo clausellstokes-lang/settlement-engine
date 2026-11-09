@@ -21,13 +21,13 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2764
+          "value": 2761
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "b81de52bf9a610bead169b6bb806e679af6ceb3aaf85922baeed2043594bc3ad"
+          "value": "6af1bab20f7e01e19271a795847dc023d5a06ffd1d7ade1421fef7599a2ca155"
         }
       ]
     },
@@ -42,7 +42,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2764
+          "value": 2761
         },
         {
           "kind": "integer",
@@ -53,7 +53,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "0bec69aa86038ba4e7009f1d5ba4c3282dafa7b34936ec49a4428ce4ecccf2f0"
+          "value": "589a6319cec5aeafbcaacaab64cb847f92b4a8f158084a177b9d53e9ee9616bd"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "7668e9caa3eeaf758f9642dfb8702f20e2c9defd233bd246691ab93cd6bdc155"
+          "value": "a388b9de90da09af672244864a9f153005b2b25b1e7750492c333529116df474"
         }
       ]
     },
@@ -83,7 +83,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "`${block} :: ${pool}` for all 708 pools, in order",
-          "value": "67c7ea11d435a9f9d42731c71d80626b5d0e0d01412e2524f07190a80cab1e80"
+          "value": "3041eef3e4ab1f59028c975a91a0215a00fc55f3cceaf0e28134679c15649ad1"
         }
       ]
     },
@@ -116,7 +116,7 @@
         {
           "kind": "integer",
           "over": "the number of pools carrying a measured bit",
-          "value": 271
+          "value": 270
         },
         {
           "kind": "integer",
@@ -132,7 +132,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "the norm leaf's rows as `${key} ${departure}`",
-          "value": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d"
+          "value": "e2e1d222966389d99e4709c05b259c2f9f759d887c2ef3d0eabaf271a49ce286"
         }
       ]
     },
@@ -152,7 +152,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.attach per pool, joined by pipes",
-          "value": "6d5b0689ea4a46c4a16b79aa54460db3ad146d33e46571c6421404d779c19172"
+          "value": "d7a8157c8af1e458895fcf4ddd43f80f2b1fe22e0e99ce28f37f154cdf023ef2"
         }
       ]
     },

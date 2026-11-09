@@ -6657,10 +6657,7 @@ unchanged.
 2. `[visitor]` What {settlement} says about itself does not match the rest in {band} of places.
 3. `[street]` A handful of things about this town cannot all be true at once, and everyone here has their own explanation.
 
-**`criticalIssueCount` zero** · **THE GOOD STATE (R-DST-G)** {colour}
-1. `[ledger]` Everything you hear about {settlement} holds up; its story is clean, with nothing contradicting anything else.
-2. `[visitor]` Look as closely as you like at {settlement}: nothing about it fails to add up.
-3. `[counterforce]` {settlement} is under real pressure, yet its account of itself stays clean.
+*THE GOOD STATE LEAVES (STYLE-2 FIRST-IMPRESSIONS, 2026-11-09; STYLE-2-SURFACES B·#28, STYLE-RULINGS-2 B1(c) "the line reads the battery's verdict or leaves"). The `criticalIssueCount zero` pool — "Everything you hear about {settlement} holds up; its story is clean, with nothing contradicting anything else." · "Look as closely as you like at {settlement}: nothing about it fails to add up." · "{settlement} is under real pressure, yet its account of itself stays clean." — vouched for the record over a tab that lists its own By-Design Contradictions (Shangjin, 12 of 12 printing a coherence line): the battery passes a record whose by-design items are not battery findings, and no fact the desk reads names a by-design item. On a clean record the tab's header already says COHERENT, so the line restated it; beside a by-design list it was false. It is struck, for the owner's veto; a reader of the by-design list may bring a line back that names the oddity.*
 
 **THE FIRST-SURVEY QUALIFICATION** *(standing; composed with the verdict, never instead of it)* {colour}
 1. `[ledger]` This is {settlement} as first described; later changes are not shown here.

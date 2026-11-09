@@ -21,10 +21,10 @@
     "producerIndexFiles": 1310
   },
   "totals": {
-    "pools": 857,
+    "pools": 856,
     "blocks": 69,
-    "variants": 2764,
-    "resolved": 489,
+    "variants": 2761,
+    "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
     "resolvedWithCleanPredicate": 317,
@@ -37,7 +37,7 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 617,
+      "THIN": 616,
       "COVERED": 240,
       "MISSING-AT-TIER": 45
     },
@@ -47,17 +47,17 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 112,
-    "mountedRows": 726,
+    "mountedRows": 725,
     "absent": {
-      "measured": 583,
+      "measured": 582,
       "default": 3,
-      "not-produced": 71,
+      "not-produced": 70,
       "method-call": 18
     },
     "zeroK": 85,
-    "kExecutable": 489,
+    "kExecutable": 488,
     "kNotExecutable": 368,
-    "branchGrainRows": 456,
+    "branchGrainRows": 455,
     "functionGrainRows": 401,
     "customReachableRows": 28,
     "relationRows": 165,
@@ -118,12 +118,12 @@
         4
       ]
     ],
-    "sourceLicensedRows": 132,
+    "sourceLicensedRows": 131,
     "sourceOfficeRows": 3,
     "sourceUnresolvedRows": 722,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 857,
+    "declaredColumnRows": 856,
     "tablePools": 50
   },
   "rows": [
@@ -29282,72 +29282,6 @@
       "attach": [],
       "k": 1,
       "rateBp": 2057,
-      "departure": null,
-      "source": {
-        "kind": "treasury",
-        "kinds": [
-          "treasury"
-        ],
-        "fields": {
-          "readings.criticalIssueCount": "treasury",
-          "readings.recordClean": ""
-        },
-        "holder": null,
-        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
-        "standing": "LICENSED",
-        "twoSource": false,
-        "stateOrgan": true
-      },
-      "declares": [],
-      "lineDeclares": {},
-      "undeclared": 0,
-      "crisisScoped": false
-    },
-    {
-      "block": "DS-GEN-11",
-      "pool": "criticalIssueCount zero",
-      "slotsFilled": [
-        "settlement"
-      ],
-      "slotsNamed": [
-        "settlement"
-      ],
-      "slotsWithoutProvider": [],
-      "hasBag": true,
-      "variants": 3,
-      "grammars": 1,
-      "predicate": [],
-      "branchReads": [
-        "readings.criticalIssueCount",
-        "readings.recordClean"
-      ],
-      "fieldsRead": [
-        "readings.criticalIssueCount",
-        "readings.recordClean"
-      ],
-      "status": "RESOLVED",
-      "reason": "",
-      "keyFunction": "criticalIssuePoolKey",
-      "rung": "literal",
-      "reads": [
-        "readings.criticalIssueCount",
-        "readings.recordClean"
-      ],
-      "readsGrain": "branch",
-      "narrowed": false,
-      "absent": {
-        "readings.criticalIssueCount": "measured",
-        "readings.recordClean": "not-produced"
-      },
-      "covert": false,
-      "objectClasses": [],
-      "objectClass": null,
-      "sites": [
-        "viability.verdict"
-      ],
-      "attach": [],
-      "k": 1,
-      "rateBp": 7878,
       "departure": null,
       "source": {
         "kind": "treasury",
@@ -58631,10 +58565,10 @@
     },
     {
       "block": "DS-GEN-11",
-      "spines": 5,
+      "spines": 4,
       "facts": 3,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5333
+      "meanReachBp": 5833
     },
     {
       "block": "DS-GEN-12",
@@ -61287,10 +61221,10 @@
     },
     {
       "block": "DS-GEN-11",
-      "spines": 5,
+      "spines": 4,
       "facts": 3,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5333,
+      "meanReachBp": 5833,
       "byFact": [
         {
           "field": "readings.criticalIssueCount",
@@ -61311,8 +61245,7 @@
         {
           "field": "readings.viable",
           "attach": [
-            "criticalIssueCount: critical contradictions on the record",
-            "criticalIssueCount zero"
+            "criticalIssueCount: critical contradictions on the record"
           ]
         }
       ]
@@ -62823,7 +62756,7 @@
   ],
   "factBudget": {
     "zeroK": 85,
-    "executable": 489,
+    "executable": 488,
     "notExecutable": 368,
     "byBlock": [
       [
@@ -63110,7 +63043,7 @@
         "DS-GEN-11",
         {
           "zeroK": 0,
-          "spines": 5
+          "spines": 4
         }
       ],
       [
@@ -63247,7 +63180,7 @@
       ],
       [
         1,
-        104
+        103
       ],
       [
         2,
@@ -63258,7 +63191,7 @@
   "grains": {
     "branch": {
       "zeroK": 85,
-      "executable": 489,
+      "executable": 488,
       "notExecutable": 368,
       "histogram": [
         [
@@ -63295,7 +63228,7 @@
         ],
         [
           1,
-          104
+          103
         ],
         [
           2,
@@ -63323,7 +63256,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 849,
+      "readPaths": 847,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -63381,7 +63314,7 @@
     },
     "function": {
       "zeroK": 169,
-      "executable": 489,
+      "executable": 488,
       "notExecutable": 368,
       "histogram": [
         [
@@ -63410,7 +63343,7 @@
         ],
         [
           1,
-          103
+          102
         ],
         [
           2,
@@ -63441,7 +63374,7 @@
         "DS-SUP-2",
         "DS-WAR-3"
       ],
-      "readPaths": 1148,
+      "readPaths": 1146,
       "modifierEligibleFactsByTab": [
         [
           "economics",
@@ -63834,14 +63767,14 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 132,
+        "LICENSED": 131,
         "OFFICE": 3,
         "SOURCE-UNRESOLVED": 722
       },
       "fields": {
-        "LICENSED": 234,
+        "LICENSED": 233,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 850
+        "SOURCE-UNRESOLVED": 849
       },
       "byKind": [
         [
@@ -63857,11 +63790,11 @@
           48
         ],
         [
-          "treasury",
-          22
+          "court",
+          21
         ],
         [
-          "court",
+          "treasury",
           21
         ],
         [
@@ -63886,7 +63819,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 850,
+        "no-mapping": 849,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -70197,14 +70130,6 @@
       "fields": [],
       "readingFunction": "criticalIssuePoolKey",
       "count": "3 variant(s) · 1 grammar(s) · slots {band, settlement}"
-    },
-    {
-      "tier": "THIN",
-      "block": "DS-GEN-11",
-      "subject": "criticalIssueCount zero",
-      "fields": [],
-      "readingFunction": "criticalIssuePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
