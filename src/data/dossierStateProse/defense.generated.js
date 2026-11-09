@@ -201,7 +201,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "terrain EXPOSED": [
         {
           "angle": "visitor",
-          "text": "{settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.",
+          "text": "{settlement} sits open. No hill or river helps it, and every defence the town has had to be built by hand.",
           "slots": [
             "settlement"
           ],
@@ -256,7 +256,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege, occupied"
           ],
-          "text": "Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything it has built.",
+          "text": "Nothing at {settlement} is worth an army's season, and that plain fact is the town's best defence.",
           "slots": [
             "settlement"
           ],

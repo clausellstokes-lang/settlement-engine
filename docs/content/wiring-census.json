@@ -406,7 +406,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [
         {
           "field": "text(terrain) (via TERRAIN_DEFENCE_OF in defenseStateProse.js)",
@@ -55687,7 +55687,7 @@
         "DS-DEF-1 :: terrain EXPOSED"
       ],
       "variants": 6,
-      "grammars": 4,
+      "grammars": 5,
       "blocks": [
         "DS-DEF-1"
       ]
@@ -66193,7 +66193,7 @@
         "text(terrain) (via TERRAIN_DEFENCE_OF in defenseStateProse.js)"
       ],
       "readingFunction": "TERRAIN_DEFENCE_OF",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

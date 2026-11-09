@@ -1760,7 +1760,7 @@ shape.
 **TRADE PROFILE: exports and imports both present**
 1. `[ledger · colour]` {settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.
 2. `[street · colour]` Everybody here knows what leaves and what arrives, because the same carts do both.
-3. `[visitor · market]` The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.
+3. `[visitor · market]` The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and nobody tells a visitor which is which.
 
 **TRADE PROFILE: no significant exports**
 1. `[ledger]` {settlement} sends nothing out worth recording. What the town makes, the town uses.
@@ -1774,7 +1774,7 @@ shape.
 
 **TRADE PROFILE: local production listed**
 1. `[ledger · walls]` A good portion of what {settlement} consumes is made inside its own walls, and never appears in either trade column.
-2. `[visitor · colour]` Much of what a stranger will buy at {settlement} was made within sight of where it is sold.
+2. `[visitor · colour]` Much of what a visitor will buy at {settlement} was made within sight of where it is sold.
 3. `[street · colour]` {settlement} makes its own everyday goods and buys in the rest.
 4. `[ledger · no walls]` A good portion of what {settlement} consumes is made within its own bounds, and never appears in either trade column.
 
@@ -2713,7 +2713,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[counterforce]` Any attack on {settlement} must first cross the approach, and bringing more fighters does not make that easier.
 
 **terrain EXPOSED** {colour}
-1. `[visitor]` {settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.
+1. `[visitor]` {settlement} sits open. No hill or river helps it, and every defence the town has had to be built by hand.
 2. `[ledger]` The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.
 3. `[street]` People at {settlement} know their ground gives them no help: there is no hill and no narrows, and whatever defends the town had to be built by hand.
 
@@ -2723,7 +2723,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[visitor]` Spend a day at {settlement} and you see why anyone would want it, and why its people are careful whom they offend.
 
 **strategic value LOW**
-1. `[counterforce · no crisis: under_siege, occupied]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything it has built.
+1. `[counterforce · no crisis: under_siege, occupied]` Nothing at {settlement} is worth an army's season, and that plain fact is the town's best defence.
 2. `[ledger · no crisis: under_siege, occupied]` {settlement} is not a prize: no map of the region marks it as worth taking, and that protects it better than anything the town has built.
 3. `[street · no crisis: under_siege, occupied]` People at {settlement} know the town is not worth taking, and they count on that more than on their own defences.
 4. `[counterforce · crisis: under_siege, occupied]` Nothing at {settlement} was worth an army's season by any sensible reckoning, and somebody has come for it anyway; the town's plainness is no defense now.

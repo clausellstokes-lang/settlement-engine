@@ -5670,7 +5670,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market"
           ],
-          "text": "The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.",
+          "text": "The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and nobody tells a visitor which is which.",
           "slots": [
             "settlement"
           ],
@@ -5743,7 +5743,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Much of what a stranger will buy at {settlement} was made within sight of where it is sold.",
+          "text": "Much of what a visitor will buy at {settlement} was made within sight of where it is sold.",
           "slots": [
             "settlement"
           ],
