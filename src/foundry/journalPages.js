@@ -93,7 +93,7 @@ function notableNpcs(sorted) {
 
 // ── page builders (each: vm → markdown string or null) ──────────────────────
 
-function overviewPage(vm) {
+function overviewPage(vm, { historyPrinted = true } = {}) {
   const o = vm.overview; const id = vm.identity;
   return md(
     lede(overviewHeadline(o, id)),
@@ -111,7 +111,9 @@ function overviewPage(vm) {
     o.arrivalScene ? md('', '## Arrival', `> ${esc(o.arrivalScene)}`) : null,
     o.pressureSentence ? md('', `*${esc(o.pressureSentence)}*`) : null,
     o.settlementReason ? md('', '## Why this place exists', esc(o.settlementReason)) : null,
-    // The historical character prints on the History page only (the keep-on rule; B4).
+    // The historical character prints once per journal: on the History page where the variant has
+    // one, else here (the keep-on rule; the chair's B4 ruling (2), 2026-11-09).
+    !historyPrinted && o.character ? md('', '## Character', esc(o.character)) : null,
   );
 }
 
@@ -517,7 +519,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
     if (trimmed) pages.push({ name, markdown: trimmed });
   };
 
-  if (inc('overview'))            push('Overview', overviewPage(vm));
+  if (inc('overview'))            push('Overview', overviewPage(vm, { historyPrinted: inc('historyFounding') }));
   if (inc('systemState'))         push('Settlement State', statePage(vm));
   if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(settlement, vm));
   if (inc('tonightAtTheTable'))   push(CRISIS_PAGE_COPY.tab, crisisJournalPage(settlement));

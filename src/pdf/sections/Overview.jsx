@@ -5,8 +5,7 @@
  *   - Identity strip
  *   - Active crises (chips + per-crisis hook + summary)
  *   - Systems Health Dashboard (5 score bars, prosperity/safety, food)
- *   - Tensions & Conflicts: each tension's label and parties only (its description: History › Live
- *     tensions; its hooks: the Plot Hooks chapter, X-2)
+ *   - Tensions & Conflicts: label and parties (description: History, or here without it; hooks: Plot Hooks)
  *   - Situation prose (arrival scene + pressure sentence in AI mode)
  *   - Settlement origin
  *   - Prominent relationship
@@ -37,7 +36,10 @@ import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 
-export function Overview({ settlement, narrativeMode, vm, stateProse }) {
+export function Overview({ settlement, narrativeMode, vm, stateProse, historyPrinted = true }) {
+  // ONE HOME PER EXPORT (the chair's B4 ruling (2), 2026-11-09): with History in the variant, the tension
+  // descriptions and the historical character live there; without it (campaign_state), here in full.
+  const historyAt = 'History & Founding (17)';
   const o = vm.overview;
   const id = vm.identity;
 
@@ -206,6 +208,8 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             TENSIONS & CONFLICTS
           </Text>
+          {historyPrinted && o.tensions.some((t) => t.description) ? <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
+            {`Each tension in full: ${historyAt}.`}</Text> : null}
           {o.tensions.map((t, i) => (
             <View
               key={`t-${i}`}
@@ -232,12 +236,11 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   {humanize(t.label || t.type || 'Tension')}
                 </Text>
               </View>
-              {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3, approved STYLE-RULINGS §1(c) 2026-11-07, applied by
-                  STYLE-RULINGS-2 B4, 2026-11-09): a tension's description prints on History › Live
-                  tensions only; the Overview keeps the label and the parties. Measured on the twelve
-                  at the base: each description printed three times inside one PDF (here, Plot Hooks'
-                  Underlying tensions, History), in 11 of 12 dossiers.
-                  tests/pdf/restoredSubsections.test.js (B4) */}
+              {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3; B4): the description prints once per export, on History
+                  where the variant has it, else here. tests/pdf/restoredSubsections.test.js (B4) */}
+              {!historyPrinted && t.description ? (
+                <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>{t.description}</Text>
+              ) : null}
               {t.parties?.length > 0 && (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1 }}>
                   {t.parties.map(label).filter(Boolean).join(' / ')}
@@ -295,20 +298,22 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
       )}
 
       {/* ── Character / origin ────────────────────────────────────── */}
-      {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3, STYLE-RULINGS-2 B4): the historical character prints on
-          the History chapter's lead only; the Overview keeps the origin line. It printed twice in
-          all twelve PDFs at the base (here as "CHARACTER & ORIGIN", and History's "Historical
-          character"); the heading now names what is under it. */}
-      {o.settlementReason && (
+      {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3; B4): the historical character prints once per export, on
+          the History lead where the variant has it (here, the label and the chapter), else here. */}
+      {(o.settlementReason || o.character) && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            ORIGIN
+            {o.character && !historyPrinted ? 'CHARACTER & ORIGIN' : 'ORIGIN'}
           </Text>
-          <Text style={{ ...type.body, fontSize: pt['9'] }}>
+          {o.character && !historyPrinted ? <Text style={{ ...type.prose, fontSize: pt['9.5'] }}>{o.character}</Text> : null}
+          {o.character && historyPrinted ? (
+            <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>{`Historical character: ${historyAt}.`}</Text>
+          ) : null}
+          {o.settlementReason ? <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 3 }}>
             <Text style={{ color: palette.muted }}>Reason settled: </Text>
             {o.settlementReason}
-          </Text>
+          </Text> : null}
         </View>
       )}
 
@@ -325,12 +330,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
             </Text>
             <Pill tone="cool">{prominentType(o.prominentRelationship) || 'linked'}</Pill>
           </View>
-          {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3, STYLE-RULINGS-2 B4): the tie's own lines print in the
-              Relationships chapter; the Overview keeps the names and the tie's label. At the base
-              the tie's line printed three times in one PDF (here, the Relationships banner, and
-              the tie's own row), in 9 of 12 dossiers. A DM who wants the tie's detail turns to
-              chapter 14, where the banner and the row sit together (and the Overview stays a
-              page of labels to skim). */}
+          {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3; B4): the tie's own line prints in Relationships (14). */}
         </View>
       )}
 

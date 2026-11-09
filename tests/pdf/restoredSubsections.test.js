@@ -409,6 +409,26 @@ describe('B4 — one home per sentence inside one export (the keep-on rules)', (
     expect(via).not.toContain('mountain_pass'); // anchored: same block
   });
 
+  // ONE HOME PER EXPORT (the chair's B4 ruling (2), 2026-11-09): the home is History where the variant
+  // prints it; a variant without History (campaign_state) carries the full text on the Overview.
+  it('each tension description and the historical character print exactly once per export, in every variant', () => {
+    const descs = (settlement.history?.currentTensions || []).map((t) => t?.description).filter(Boolean);
+    const character = settlement.history?.historicalCharacter;
+    expect(descs.length, 'fixture premise: the city carries live tensions with descriptions').toBeGreaterThan(0);
+    expect(character, 'fixture premise: the city carries a historical character').toBeTruthy();
+    const count = (text, needle) => text.split(needle).length - 1;
+    for (const variant of ['canon_dossier', 'draft_brief', 'campaign_state']) {
+      const text = joined(SettlementPDF({ settlement, variant, phase: 'canon' }));
+      for (const d of descs) expect(count(text, d), `${variant}: ${d}`).toBe(1);
+      expect(count(text, character), `${variant}: the historical character`).toBe(1);
+    }
+    const lean = joined(Overview({ settlement, vm, historyPrinted: false }));
+    for (const d of descs) expect(lean, 'campaign_state: the Overview is the home').toContain(d);
+    const full = joined(Overview({ settlement, vm, historyPrinted: true }));
+    expect(full).toContain('Each tension in full: History & Founding (17).');
+    for (const d of descs) expect(full).not.toContain(d); // anchored: the pointer to History is asserted one line above
+  });
+
   it('the cover prints one tier word: the free preview\'s where the export is anonymous', () => {
     const both = joined(Cover({ settlement, vm, isFounder: true, isAnonymous: true }));
     expect(both).toContain('Free preview');

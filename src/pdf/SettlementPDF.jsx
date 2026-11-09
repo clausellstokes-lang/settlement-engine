@@ -182,7 +182,10 @@ export function SettlementPDF({
     >
       {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} now={now} />}
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
-      {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {/* ⛔ ONE HOME PER EXPORT (STYLE-RULINGS-2 B4, the chair's ruling (2) of 2026-11-09): a variant
+          without History (campaign_state) prints the tension descriptions and the historical
+          character on the Overview in full; with it, the Overview carries their labels. */}
+      {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} historyPrinted={inc('historyFounding')} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
