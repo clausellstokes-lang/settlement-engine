@@ -317,6 +317,47 @@ describe('the public prose projection carries no private text (SW-B7b)', async (
   });
 });
 
+describe('the veil drops a shipped rung whose block address is hidden (SW-B7b item 2)', async () => {
+  const { birth, ensureLaws } = await import('../../scripts/audit/soak-review/corpus.mjs');
+  const { composePublicProse } = await import('../../src/components/new/publicProseCompose.js');
+  const { withPublicProse, publicProseOf } = await import('../../src/domain/display/publicProse.js');
+  const { applyVeil } = await import('../../src/domain/display/galleryVeil.js');
+  await ensureLaws();
+  const sentences = (v) => {
+    const out = [];
+    const walk = (x) => { if (typeof x === 'string') { if (x.split(' ').length >= 6) out.push(x); } else if (x && typeof x === 'object') Object.values(x).forEach(walk); };
+    walk(v);
+    return out;
+  };
+  /** @type {Array<[string, string, (p: any) => unknown]>} the block address and the shipped text it covers */
+  const COVERED = [
+    ['block:defense.criminalStructure', 'defense:criminal', (p) => publicProseOf(p, 'defense:criminal')],
+    ['block:power.criminalUnderside', 'power:desk', (p) => {
+      const d = /** @type {any} */ (publicProseOf(p, 'power:desk')) || {};
+      return [d.legitimacyReading, d.captureReading, d.operationReading, d.gmAdvisory];
+    }],
+  ];
+  for (const [address, site, covered] of COVERED) {
+    test(`${address} hides ${site}'s rungs on the twelve, and nothing else`, () => {
+      let hits = 0;
+      for (const i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) {
+        const owner = birth(i).settlement;
+        const projected = toPublicSafe(withPublicProse(owner, composePublicProse(owner)));
+        const lines = sentences(covered(applyVeil(projected, [])));
+        if (!lines.length) continue;
+        hits += 1;
+        const veiled = applyVeil(projected, [address]);
+        const text = JSON.stringify(veiled.publicProse);
+        // anchored: the unveiled projection of this same town ships these lines (above), and the
+        // veiled one still carries the other sites (the general desk's overview group)
+        expect(text).toContain('general:overview');
+        for (const line of lines) expect(text.includes(line), `${address}: ${line.slice(0, 40)}`).toBe(false);
+      }
+      expect(hits, `${site} ships on none of the twelve, so this arm would be vacuous`).toBeGreaterThan(0);
+    });
+  }
+});
+
 /** The member is absent from a text whose anchor is present. */
 function expectAbsentWithAnchorText(text, member, anchor) {
   expect(text).toContain(anchor);
