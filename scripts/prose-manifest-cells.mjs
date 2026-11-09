@@ -196,7 +196,12 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' 2026-11-08 (THE PEOPLE CAR’S MERGE OVER THE INTEGRATION BRANCH, RECORD B OF THE INTEGRATION LANDING, docs/'
     + 'shift-records/2026-11-08-merge-car-b-people-car-composition.json, ODQ §934.105): re-recorded at the stage of'
     + ' 8dff691f3 (the people car merged, the conflicts composed) because one face per institution re-casts the towns'
-    + ' over the pool census; against record A’s post-state 832 of the 1,050 rows move, 0 added, 0 removed.',
+    + ' over the pool census; against record A’s post-state 832 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-08 (THE COMPOSED-PROSE MANIFEST AT THE WAVE’S FINAL TIP, RECORD 9 OF THE WAVE, docs/shift-records/'
+    + '2026-11-08-merge-wave-9-composed-prose-manifest.json, ODQ §934.105): re-recorded ONCE at the stage of the final'
+    + ' tip 0c93f0ca0 because the wave’s ten lanes (W1, W2, W3, W4, W5 with W1-A0b, W7, FIX-FOOD-ISOLATION, EXPORT-KEYS,'
+    + ' FIX-PUBLIC-VEIL, GREEN-BASE, FIX-ARROW-SECTIONS) moved the composed prose, each point’s cells named in the record;'
+    + ' against record B’s post-state 1050 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
