@@ -52,7 +52,7 @@ describe('the chrome headlines — plain, label first, no machinery', () => {
     expect(h.startsWith('Struggling. ')).toBe(true);
     expect(h).toMatch(/Albamunicipium, a thorpe of 24/);
     // STYLE-2 FIRST-IMPRESSIONS (D·P5): the label is not dropped in as a noun; the clause of what is seen is.
-    expect(h).not.toMatch(/mass migration/i);
+    expect(h).not.toMatch(/mass migration/i); // anchored: h is asserted two lines above to begin "Struggling. " and name the town
     expect(h).toMatch(/carts piled with bundles crowd the roads\.$/);
     expect(h).not.toMatch(/chip|tense|strain/i); // anchored: h is the one headline string, asserted to begin "Struggling. " and to carry the town two lines above
     // the seed chooses: the same town prints the same variant forever
@@ -68,14 +68,14 @@ describe('the chrome headlines — plain, label first, no machinery', () => {
     for (const label of labels) {
       for (const name of towns) {
         const h = overviewHeadline({ prosperity: 'Comfortable', stress: [{ label }] }, { name, tierKey: 'town', population: 1867 });
-        expect(h.toLowerCase()).not.toContain(`: ${label.toLowerCase()}`);
-        expect(h).not.toMatch(/hard season/i);
+        expect(h.toLowerCase()).not.toContain(`: ${label.toLowerCase()}`); // anchored: h is asserted two lines below to match the whole Comfortable headline
+        expect(h).not.toMatch(/hard season/i); // anchored: h is asserted on the next line to match the whole Comfortable headline
         expect(h).toMatch(/^Comfortable\. .+[a-z]\.$/);
       }
     }
     // the record Shangjin's lead claimed: one crisis, recently betrayed — now a thing heard, not the key
     const shangjin = overviewHeadline({ prosperity: 'Struggling', stress: [{ label: 'Recently Betrayed' }] }, { name: 'Shangjin', tierKey: 'town', population: 1867 });
-    expect(shangjin).not.toMatch(/recently betrayed/i);
+    expect(shangjin).not.toMatch(/recently betrayed/i); // anchored: the next line proves the headline carries the betrayal clause
     expect(shangjin).toMatch(/sold them out/);
     // two crises: both named plainly, the first one's clause its own sentence
     const two = overviewHeadline({ prosperity: 'Poor', stress: [{ label: 'Beast & Raider Threat' }, { label: 'Mass Migration' }] }, { name: 'Portaminus', tierKey: 'city', population: 3597 });
@@ -83,7 +83,7 @@ describe('the chrome headlines — plain, label first, no machinery', () => {
     expect(two).toMatch(/\. No one travels the roads alone or after dark\.$/);
     // an authored crisis the table does not know is "the crisis", never its key
     const custom = overviewHeadline({ prosperity: 'Poor', stress: [{ label: 'Dragon Tithe' }] }, { name: 'Lundey', tierKey: 'hamlet', population: 78 });
-    expect(custom).not.toMatch(/dragon tithe/i);
+    expect(custom).not.toMatch(/dragon tithe/i); // anchored: the next line proves the headline carries "the crisis"
     expect(custom).toMatch(/the crisis/);
   });
 

@@ -515,7 +515,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // ALLEGIANCE-CAR1 (2026-11-08): 106 -> 107, src/domain/people/allegiance.js (the deal's criminal-house read, EXEMPT above), measured by this file's own scan.
     // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09): the integration side's 107 (cardVeil.js + hiddenHouseRow) + car 1's
     // allegiance.js (EXEMPT; the lane's 107 counted cardVeil.js once with it) = 108, measured by this file's own scan at the merged tip.
-    expect(readers.length).toBe(108);
+    // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): 108 -> 109, src/domain/summary/settlementQuickGuide.js :: scopeAgainstRecord's
+    // roster read (SW-B2's 966709f9c, A·O2: the identity line reads the institutions), COMPLIANT (liveInstitutions), measured by this file's own scan.
+    expect(readers.length).toBe(109);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

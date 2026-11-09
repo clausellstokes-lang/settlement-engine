@@ -46,7 +46,7 @@ describe('the Greek culture line inland (hand-built)', () => {
   });
   it('keeps the harbour on the coast; a river town has no harbour (STYLE-2 A·O2: the sea only)', () => {
     expect(cultureScopeLine({ culturalIdentity: GREEK, config: { terrainType: 'coastal', tradeRouteAccess: 'road' } })).toMatch(/harbour/);
-    expect(cultureScopeLine({ culturalIdentity: GREEK, config: { terrainType: 'plains', tradeRouteAccess: 'river' } })).not.toMatch(/harbou?r/);
+    expect(cultureScopeLine({ culturalIdentity: GREEK, config: { terrainType: 'plains', tradeRouteAccess: 'river' } })).not.toMatch(/harbou?r/); // anchored: the coastal call above proves cultureScopeLine returns the live scope sentence
     // soak1k-10, Olympambelos: a road city on riverside ground printed "the agora and the harbour, on hillside ground"
     expect(cultureScopeLine({ culturalIdentity: GREEK, config: { terrainType: 'riverside', tradeRouteAccess: 'road' } }))
       .toBe('Greek-inspired, built around the agora, on riverside ground, and run by civic association.');

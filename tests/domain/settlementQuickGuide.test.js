@@ -459,7 +459,7 @@ describe('composeSettlementQuickGuide', () => {
       const line = cultureScopeLine({ ...greek, _seed: `soak1k-${i}` });
       expect(line).toBe(cultureScopeLine({ ...greek, _seed: `soak1k-${i}` }));
       expect(line).toMatch(/^Greek-inspired\b.*agora, on riverside ground, and run by civic association\.$/i);
-      expect(line).not.toMatch(/harbou?r|hillside/);
+      expect(line).not.toMatch(/harbou?r|hillside/); // anchored: the toMatch above proves `line` is the live scope sentence
       lines.add(line);
     }
     expect(lines.size).toBe(5);
