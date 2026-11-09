@@ -53,7 +53,7 @@ export const CRISIS_NOUN = Object.freeze(/** @type {Record<string, string>} */ (
   under_siege: 'siege',
   famine: 'famine',
   occupied: 'occupation',
-  politically_fractured: 'factional split',
+  politically_fractured: 'split', // SW-6 CRISIS-SURFACES (B3, C·P1): "In the factional split" carried the retired word
   indebted: 'debt crisis',
   recently_betrayed: 'betrayal',
   infiltrated: 'infiltration',

@@ -190,3 +190,11 @@ describe('crisisHooksOf: a person is never "it"', () => {
     expect(hook.text).not.toMatch(/: it takes/);
   });
 });
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3; C·P1, soak1k-7): "In the factional split, …" carried the retired word.
+describe('CRISIS_NOUN: no retired word', () => {
+  it('no crisis is spoken of with "faction"', () => {
+    expect(Object.values(CRISIS_NOUN).join(' ')).not.toMatch(/faction/i);
+    expect(CRISIS_NOUN.politically_fractured).toBe('split');
+  });
+});
