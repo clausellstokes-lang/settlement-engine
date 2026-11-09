@@ -195,9 +195,10 @@ const faceOf = (card) => ({
 });
 
 /**
- * The hall's rung and its one plain line, read from today's stored `criminalCaptureState` and the ruling
- * three's agents. ⚠ RE-READ AT CAR 2'S TIP: car 2's `hallCaptureOf` becomes the one writer of the
- * rung and its receipt (J-13); this block then reads that receipt in place of the stored classifier.
+ * The hall's rung and its one plain line, read from the stored `criminalCaptureState` and the ruling
+ * three's agents. COMPOSED AT MERGE-TRAIN's car-3 point (2026-11-09): the stored state is now written by car 2's
+ * ONE writer (`hallCapture.js :: writeHallCapture`, J-13) from the same agents, so this block reads the derived
+ * state, never the retired classifier; `source` names that writer.
  * @param {Rec} s @param {string} ruler @param {Array<{ card: Rec, rank: PatronRank }>} three
  */
 function hallOf(s, ruler, three) {
@@ -213,7 +214,7 @@ function hallOf(s, ruler, three) {
   // variant 0 is the receipt in rank words (§9's example); every 'capture' variant but the last names an
   // agent, so a capture the stored classifier reads with no agent in the three takes the last
   const variant = rung === 'capture' && !agents.length ? 2 : 0;
-  return { rung, label: CAPTURE_RUNG_LABELS[rung], line: CAPTURE_LINES[rung][variant](facts), source: 'criminalCaptureState' };
+  return { rung, label: CAPTURE_RUNG_LABELS[rung], line: CAPTURE_LINES[rung][variant](facts), source: 'hallCapture.js :: writeHallCapture' };
 }
 
 /**
