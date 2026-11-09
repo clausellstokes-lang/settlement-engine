@@ -30,6 +30,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the ruler sold offices against the empty treasury, and every appointee now wears a price tag in the town\'s eyes.',
       "The town has learned what the ruler's signature cost during the shortfall, and the men who bought their charters are as exposed as the hand that sold them.",
+      'The men who bought their offices from the ruler while the treasury stood empty are learning that the whole town knows the price.',
     ],
     're-adjudicated': [
       'Whoever paid the ruler before is gone, but now the treasury is short, and the ruler sells signatures to fill it.',
@@ -53,6 +54,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the ruler sold the emergency contracts while the town went short, and the donor list is being read against the delivery records.',
       'The town knows now who paid for the right to feed it during the shortage, and knows the ruler set the price.',
+      'Households that went short are reading who paid the ruler for the contracts to feed them, and what came of the deliveries.',
     ],
     're-adjudicated': [
       'Whoever held the ruler before is gone, but now the supply roads are cut, and the ruler answers to whoever can fill the emergency contracts.',
@@ -76,6 +78,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the ruler fed loyalty first while the reserve ran dry, and the households that went hungry are reading the lists.',
       "The distribution lists are out in the ruler's own hand: rations went to the loyal first, and the town knows who went hungry.",
+      "Households that went hungry while the reserve ran dry can see from the ruler's own lists that the loyal ate first.",
     ],
     're-adjudicated': [
       'Whoever paid the ruler before is gone, but now the reserve is empty, and the ruler hands out rations for favors.',
@@ -99,6 +102,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the ruler sold exemptions from the embargo they enforced, and the merchants who starved lawfully are the loudest in the square.',
       'It is out that the ruler kept the embargo strict so the exemptions would sell high, and the town has the sealed grants to prove it.',
+      "Merchants who kept the ruler's embargo and starved by it have seen the sealed grants the ruler sold to others.",
     ],
     're-adjudicated': [
       "Whoever held the ruler before is gone, but now the embargo holds, and the exemption money goes to whoever holds the ruler's debts.",
@@ -122,6 +126,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'The returned companies have learned what the ruler decreed while they were away, and the wartime seizures are being read out at the cross.',
       "It is public that the ruler governed the empty town for the seat's own gain, and the veterans want back what was taken in their absence.",
+      'The veterans want back what the ruler seized while they were at war, and the decrees are being read out at the cross.',
     ],
     're-adjudicated': [
       'Whoever paid the ruler before is gone, but now the fighters are away at the war, and the ruler takes powers the council never granted.',
@@ -145,6 +150,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the ruler paid for order with legal blindness, and the crimes the law overlooked are being listed beside the decrees it enforced.',
       "The town knows now whose hands carried the ruler's law while the garrison stood empty, and what those hands were allowed in return.",
+      'People wronged by crimes the law overlooked while the garrison stood empty know now the ruler allowed it for the order it bought.',
     ],
     're-adjudicated': [
       'Whoever paid the ruler before is gone, but now the garrison is half empty, and the ruler owes the same debt to whoever does the enforcing.',
@@ -168,6 +174,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the ruler skimmed the war levies, and the town is measuring its walls against what it paid for them.',
       'The defense accounts are public now and they come up short: the ruler spent the war levies on the seat, and the town can see it.',
+      'Families who paid the war levies are looking at the walls and the seat, and they can see where the money went.',
     ],
     're-adjudicated': [
       'Whoever held the ruler before is gone, but now the war presses in, and the ruler skims the levies alongside whoever collects them.',
@@ -191,6 +198,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public what the ruler signed to keep the seat under the occupier, and each requisition now has families attached to it.',
       "Collaboration is said openly of the ruler now; the occupier's records marched away, but copies stayed, and they are being read.",
+      "Families named in the occupier's requisitions are reading the copies, with the ruler's signature on each.",
     ],
     're-adjudicated': [
       "Whoever paid the ruler before is gone, but now the ruler keeps the seat by the occupier's leave and answers to its officials.",
@@ -214,6 +222,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the ruler's oppressions were offerings to a dark patron, and the town is naming each decree it endured as one.",
       'It is out that the ruler served a dark patron that paid for cruelty, and every judgment from the seat is being heard again.',
+      "Everyone who suffered under the ruler's decrees is bringing them back to be heard, now that a dark patron is known to have paid.",
     ],
     're-adjudicated': [
       'Whoever held the ruler before is gone, but now a dark patron rewards each cruel decree, and the ruler serves it.',
@@ -237,6 +246,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the rival faith paid the seat for its edicts, and both congregations are re-reading every ruling of the tenure.',
       'The patronage is public: the ruler sold the tilt of the law to the rival mission, and the sold rulings are being listed at the temple doors.',
+      "The town's own congregation is reading the rulings the ruler sold to the rival mission, posted at the temple doors.",
     ],
     're-adjudicated': [
       "Whoever paid the ruler before is gone, but now the rival faith presses in, and its money buys the ruler's edicts.",
@@ -260,6 +270,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public what the ruler did while the god of the oath went unfeared, and the reviving faithful read the tenure as one long trespass.',
       'The town knows now that when the faith went cold the ruler went with it; what the ruler did that season is out.',
+      'The reviving faithful are listing what the ruler did while the oath went unfeared, season by season.',
     ],
     're-adjudicated': [
       'Whoever held the ruler before is gone, but now the faith has gone cold, and no oath holds the ruler back.',
@@ -283,6 +294,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       "It is out that the ruler farmed the temple's disgrace for tithe and obedience, and priest and prince are now disgraced together.",
       "The town has learned the seat blackmailed the altar; the clergy's scandal was the ruler's revenue, and both books are open.",
+      'The faithful know now that the ruler took tithe and obedience from the temple by holding its disgrace over it.',
     ],
     're-adjudicated': [
       'Whoever paid the ruler before is gone, but now the priesthood is disgraced, and whoever trades in its silence has a hold on the ruler too.',
@@ -306,6 +318,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the seat answered to the underworld, and every appointment of the tenure is being traced to its true author.',
       'The capture has reached the ruler by name: the town knows its decrees were drafted below, and knows whose hand signed them anyway.',
+      'Everyone the ruler appointed is being traced back to the underworld that chose them.',
     ],
     're-adjudicated': [
       'Whoever owned the seat before is gone, but now the underworld holds the offices, and the ruler signs for whoever holds them.',
@@ -329,6 +342,7 @@ export const RULER_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the ruler sold pardons through the scandal, and the town is matching verdicts to payments in the open.',
       'The scandal has reached the ruler: the trials themselves were for sale, and the ruler sold them.',
+      'The people convicted in the scandal are setting their verdicts beside the pardons the ruler sold to others.',
     ],
     're-adjudicated': [
       'Whoever paid the ruler before is gone, but now a scandal has broken, and the ruler sells mercy to whoever can pay.',
