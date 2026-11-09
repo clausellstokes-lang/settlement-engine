@@ -509,7 +509,12 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // parent in a clean worktree: 64 string leaves (reasons and the roll explanations' gate lines that copy them) and 120
 // array-tail keys (phrases with no reader sentence, dropped); no id, tick, number or rumour seed moved. warRecordMode.js and
 // mobilizationReactions.js leave this arm byte-identical.
-const BASE_PULSE_HASH = '146027f8a9441fcaddc6c19b5d27a13b99e7eed1985582beeba4aea2576b6f1c';
+// 2026-11-09 (STYLE-2 C2, lane SW-12's third seat, A2·183): 146027f8... -> 60470ac9..., ONE cause, TEXT ONLY: flows.js (the
+// trade-scarcity receipts in plain words). Leaf-diffed against the parent 53d6cc3a0 in a clean worktree: 88 string leaves
+// (the two reasons and the roll explanations' gate lines that copy them); 0 keys added or lost; no id, tick, number or
+// rumour seed moved. stressorGates.js, deploymentReturn.js, resourceTaxonomy.js, institutionLifecycle.js,
+// moralInstitutionPressure.js and relationshipHierarchy.js leave this arm byte-identical.
+const BASE_PULSE_HASH = '60470ac9591808231ca904659479a73c2bdfac747e3dabb800ba34c56d31bd24';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

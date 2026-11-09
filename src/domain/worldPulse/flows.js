@@ -147,8 +147,8 @@ function tradeScarcityFlows(snapshot, tick, requireProposal) {
         headline: `Supply from ${item.name || supplierId} fails ${dest?.name || destId}`,
         summary: `${item.name || supplierId} can no longer meet its trade obligation; prices climb in ${dest?.name || destId}.`,
         reasons: [
-          `${item.name || supplierId} is in a trade/supply crisis.`,
-          `A confirmed trade-dependency channel makes ${dest?.name || destId} reliant on it.`,
+          `${item.name || supplierId} is in trouble and cannot spare its goods.`,
+          `${dest?.name || destId} depends on ${item.name || supplierId} for its goods.`,
         ],
         condition: deriveActiveCondition({
           archetype: 'regional_import_shortage',
