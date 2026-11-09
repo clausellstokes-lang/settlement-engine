@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "64aa02832b7e6fbca6272619cd881700fa28070f",
-  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR1 merge point)",
+  "measuredAtSha": "75ffe536dda4a17a9f6053f0359626c89da4721d",
+  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR2 merge point)",
   "date": "2026-11-09",
-  "note": "car 1 composed over the wave: ALLEGIANCE_TUNING and its dependents",
+  "note": "car 2 composed: GUILD_PUSH_TUNING and HALL_CAPTURE_TUNING",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1239,11 +1239,13 @@
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
         "src/domain/npcProfile.js",
+        "src/domain/people/hallCapture.js",
         "src/domain/settlementMigrations.js",
         "src/domain/tableLedger.js",
         "src/domain/worldPulse/npcAgency.js",
         "src/generators/generateSettlementPipeline.js",
         "src/generators/narrativeGenerator.js",
+        "src/generators/people/castPowers.js",
         "src/generators/people/ties.js",
         "src/generators/steps/assembleSettlement.js",
         "src/lib/structuralFingerprint.js"
@@ -1252,6 +1254,25 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/settlementMigrations.js"
       ]
+    },
+    "src/domain/people/hallCapture.js#HALL_CAPTURE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 55,
+      "spanDigest": "2bb0ffc6f86418b17fecd53db76d3a9ffd3bff8a351df2e8962216a0a9a50aa0",
+      "leaves": {
+        "weight.1": 3,
+        "weight.2": 2,
+        "weight.3": 1,
+        "captureScore": 5,
+        "corruptedScore": 3,
+        "climateCap": 2
+      },
+      "dependents": [
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
     },
     "src/domain/realm/autoplacement.js#AUTOPLACEMENT_TUNING": {
       "exported": true,
@@ -8210,11 +8231,28 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 67,
+      "line": 68,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
         "WEIGHT_ZERO_HOUSE": 0.5
+      },
+      "dependents": [
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/people/castPowers.js#GUILD_PUSH_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 86,
+      "spanDigest": "a163ac8776fc0929e33ec0597e5327711e48c4ce474f669233879f93a30401d7",
+      "leaves": {
+        "strength": 0.6,
+        "strengthFull": 30,
+        "organized": 0.4,
+        "max": 2
       },
       "dependents": [
         "src/generators/narrativeGenerator.js"
@@ -8865,11 +8903,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 272,
-    "keys": 2228,
+    "tables": 274,
+    "keys": 2236,
     "unregisteredNamed": 539,
     "bareDecimals": 6935,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 180
+    "zeroNamedDependentTables": 182
   }
 }
