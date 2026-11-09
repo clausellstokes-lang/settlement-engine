@@ -437,6 +437,10 @@
     "tests/data/catalogTagGovernance.test.js": {
       "kind": "uncovered"
     },
+    "tests/data/handlerTieLines.test.js": {
+      "kind": "rationale",
+      "rationale": "THE HANDLER TIE LINES (WRITE-PEOPLE's data, ALLEGIANCE-CAR1's tier-neutral rewording 61d065e9e; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'a planted control reds the checks (one fault of each kind)' plants one fault per check (an unfilled slot, a struck tic, a repeat, a tier noun) and asserts each check reds, so a disarmed check fails this file."
+    },
     "tests/data/categoryGovernance.test.js": {
       "kind": "mutation",
       "label": "data-schema.4/dead priorityCategory"
@@ -1498,6 +1502,10 @@
       "ref": "pglite-executed"
     },
     "tests/security/aiSpendSafety.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/allegianceVeil.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
     },
@@ -3525,9 +3533,17 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/people/allegiance.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
     "tests/generators/people/ties.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/lint/noLegacyCorruptReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "I-15, THE RETIRED CORRUPT MARK'S READERS (ALLEGIANCE-CAR1 41a39975a, red-first at 5902f1a4a with 25 sites in 11 files; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'POSITIVE CONTROL: a planted read of every refused shape is caught; the other meanings are not' plants each refused read and asserts the scan reds on it, so a disarmed scan fails this file."
     },
     "tests/lint/noLegacyFactionReaders.walker.test.js": {
       "kind": "rationale",

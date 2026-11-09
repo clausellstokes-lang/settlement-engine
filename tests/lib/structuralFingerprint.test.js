@@ -150,6 +150,7 @@ describe('structuralFingerprint — redaction canary', () => {
     // generation-roster sub-block (settlement.npcs)
     // ALLEGIANCE-CAR1 (2026-11-08, J-17): corrupt_count -> allegiance_count, re-keyed with the cause
     expect(fp.npc.allegiance_count).toBe(0);
+    // anchored: fp.npc is asserted to carry allegiance_count on the line above, so the block exists to be read
     expect(fp.npc).not.toHaveProperty('corrupt_count');
     // sim-state evolution sub-block (campaign worldState.npcStates)
     expect(fp.npc.role_archetype_dist).toEqual({ heir: 1, criminal: 1 });
