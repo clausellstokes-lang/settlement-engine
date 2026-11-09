@@ -40,15 +40,17 @@ import { computeChainSets } from './tabHelpers.js';
 import { isPhantomRecord } from '../../domain/edit/phantoms.js';
 
 
+/** @typedef {readonly [string, (settlement: any, publicDossier: boolean) => any]} PublicProseSite */
+
 /**
  * THE SITES: one entry per desk call site whose public branch reads `publicProseOf(r, site)`.
  * Each composes the owner's player-view draw for that site from the owner's record: every call
  * hands its desk reader the `publicDossier` this module RECEIVES (false at the save boundary,
  * so the reader draws; the mount registry's ARM 3 reads the flag at the call) and
  * `playerView: true` (the shared pages are player audiences).
- * @type {ReadonlyArray<readonly [string, (settlement: any, publicDossier: boolean) => any]>}
+ * @type {ReadonlyArray<PublicProseSite>}
  */
-export const PUBLIC_PROSE_SITES = Object.freeze([
+export const PUBLIC_PROSE_SITES = Object.freeze(/** @type {PublicProseSite[]} */ ([
   // THE ECONOMY DESK, one site per host (economyDeskRead.js is its one caller).
   ['economy:economics', (s, publicDossier) => economyDeskRead(s, { publicDossier, playerView: true, tier: s?.tier, ...economicsDeskArgs(s) })],
   ['economy:services', (s, publicDossier) => economyDeskRead(s, {
@@ -114,7 +116,7 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   // `deriveViability`'s SEEDED verdict (viabilitySeed), shipped as `{summary}` text; behind
   // canonicalViewModel exactly as ViabilityTab reads it (off, the tab prints the record's datum).
   ['viewModel:viability', (s, publicDossier) => (flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier }) : null)],
-].map((entry) => Object.freeze(entry)));
+]).map((entry) => /** @type {PublicProseSite} */ (Object.freeze(entry))));
 
 /**
  * A drawn desk with the named rungs nulled (an owner-only lens the save must not ship).
