@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-09T06:08:18.011Z",
+  "generatedAt": "2026-11-09T06:45:43.225Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "1840c23cdf99a4b0",
+  "sourceHash": "9eed08e3ee32eb33",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/seedrandom.js",
