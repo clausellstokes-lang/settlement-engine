@@ -523,3 +523,16 @@ Pins: `heraldWanderersRegister.test.jsx` — a new render with the origin's save
 | D·77 composer footnote | `Every order stages as a pending proposal and applies through the world's own machinery on approval: the walls hold even under force, and a refused order says why.` | "Every order waits as a proposal until you approve it. Even a forced order must keep to the realm's own limits, and an order the realm refuses says why." |
 
 Pins: `realmVerbComposerTranslation.test.jsx` — the footnote, with an anchored negative; **red at the parent** (1 of 1), green here. Registers: none moved.
+
+### 9q. `heraldFeed.js` (D·12–13) — the herald golden measured: this cause moves it by NOTHING
+
+| row | OLD | NEW |
+|---|---|---|
+| D·12 unlabelled lifted trouble | `A recorded pressure has lifted` (labelled: `{label} has lifted`, unchanged) | "A trouble in the realm has passed" |
+| D·13 unlabelled echo | `A past pressure remains in living memory` (labelled: `{label}, in living memory`, unchanged) | "An old trouble is still talked of" |
+
+**The herald desk golden's delta, measured** (a scratch copy of the suite's own projection — `tests/helpers/heraldDeskGolden.js :: heraldDeskProjection` over `READER_CORPUS_ROSTER` — in a clean worktree): at the parent `5e256442e` the row `rr-fresh-full|1` projects contentSha256 `258d28e3…` (473 items); with this cause, `258d28e3…` (473 items) — **identical: delta 0.** Every stressor in the golden's realm carries a label, so neither fallback fires there. The chair's ruling expected an unsigned move; there is none to carry.
+
+**The golden is nevertheless RED at this lane's base, and was before this seat** (STOP sent to the chair): the committed fixture holds `9e5ddbdb…`, which the projection reproduces at the lane's cut `2053a809c`; it reads `288a67b9…` at `aff902eb9` and `258d28e3…` at `45773294d` and at `96efb3b00`. Earlier seats' content causes moved the herald's printed text (their pulse writers feed the Herald's items) while their records say "none moved"; the third seat's "D·12–13 move it 9e5ddbdb → 258d28e3" was that drift, measured over a base that had already moved. The commits that move it are named in §9r (a bisection over all forty lane commits) for STYLE-2-MERGE's signing; none of this seat's commits moves it (258d28e3 at every one, measured at `96efb3b00`, `ba15f9332`, `22795b8c6`, `5e256442e` and here).
+
+Pins: `heraldFeedSources.test.js` — a new test building the feed with an unlabelled resolved stressor and an unlabelled echo; **red at the parent** (1 of 5), green here. Gates: the fourteen suites naming `buildHeraldFeed` / `heraldFeed` green except `heraldKnowledgeDeskGolden` (red at the parent with the same received hash), the standard six green, eslint clean.
