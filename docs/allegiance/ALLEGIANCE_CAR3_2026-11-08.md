@@ -137,7 +137,9 @@ The PDF golden view-model snapshot does not move: the DM rows ride the opt-in `d
 | `b0dbfe4b2` (the first tip run) | 37,790 | 88 | 14 (all walkers / registers) | 2 |
 | `6e24d6032` (after the 14 cured through their doors) | 37,790 | 82 | 7 (all the edge bundles' freshness / reproducibility: the refactor) | 2 |
 | `e268f6365` (the edge bundles rebuilt) | — | — | tests/edgeFunctions green whole | — |
-| `1e943482c` (final) | FINAL_TESTS | FINAL_FAILED | FINAL_ONLY | FINAL_CURED |
+| `1e943482c` (final) | 37,791 | 76 | 1 — the worker-ceiling row, which runs only where a `dist/` exists (this worktree held a build; the base's run had none): the base's own `verify:dist` reads it red too (1,762,294 B against 1,735,881), so it is a base red | 2 |
+
+**At the tip, the reds are the base's minus 2 cured: 75 of the base's 77, plus the dist-only worker row that is red at the base by its own `verify:dist`.**
 
 The 2 cured base reds: `tests/generators/urbanBandInstitutions.test.js` (Beast trainers rolled natively in towns, cities and metropolises) and `tests/lint/proseFamilyContract.walker.test.js` (A6 reaches the regional audit log) — PLAUSIBLY the re-dealt year of the generator causes; not traced. No test was skipped, disabled, quarantined or loosened; every register moved through its own door.
 
