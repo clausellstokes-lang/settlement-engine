@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 9 OF THE TRAIN (MERGE-TRAIN), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-MERGE-TRAIN §0.1): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE ALLEGIANCE-CAR4 MERGE OVER THE INTEGRATION BRANCH — lane/allegiance-car4-2026-11-08 at ea012f42d merged at 824a8ce2f (MERGE-TRAIN point 9, the last), the conflicts composed; its components lane/write-goals-2026-11-08 at 82796628e and lane/write-people-3-2026-11-08 at 5ee39a56c merged on the car first; its lane signed nothing, its two UNSIGNED causes are the components signed here with the lane's own figures (docs/allegiance/ALLEGIANCE_CAR4_2026-11-08.md): 03ff59084 A9, every card a short and a long goal dealt by one dealer (people/goals.js :: dealGoals; the retired compromised-goal rewrite gone), gm 525 · fence 360 · prose 168 · herald 0; eabc93dfe item 15, the fallback title's secret and presentation drawn from WRITE-PEOPLE-3's table, gm 525 · fence 360 · prose 0; the structural fingerprint's shape 2 (0a18ff311) a telemetry row, no golden byte: what the merge moved beyond point 8's post-state (the stage of 6c18ceb24). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against point 8's post-state (the stage of 6c18ceb24, FIX-ARROW-PLAQUE; record 5 and the zero-move points 6-8 before it): the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) -> e8901fee..; the espionage fence's driven corpus 360 of 360 rows -> 8c92b87d..; 360/360 distinct; the herald knowledge desk 0; the PDF snapshot 0 and the witness 0. The prose manifest's movement at this point (168 of 1,050 rows) is NOT written here: it is signed ONCE at the train's final tip, this point named in its cause list. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the train MERGE-TRAIN, 2026-11-09)",
+  "cause": "THE ALLEGIANCE-CAR4 MERGE OVER THE INTEGRATION BRANCH — lane/allegiance-car4-2026-11-08 at ea012f42d merged at 824a8ce2f (MERGE-TRAIN point 9, the last), the conflicts composed; its components lane/write-goals-2026-11-08 at 82796628e and lane/write-people-3-2026-11-08 at 5ee39a56c merged on the car first; its lane signed nothing, its two UNSIGNED causes are the components signed here with the lane's own figures (docs/allegiance/ALLEGIANCE_CAR4_2026-11-08.md): 03ff59084 A9, every card a short and a long goal dealt by one dealer (people/goals.js :: dealGoals; the retired compromised-goal rewrite gone), gm 525 · fence 360 · prose 168 · herald 0; eabc93dfe item 15, the fallback title's secret and presentation drawn from WRITE-PEOPLE-3's table, gm 525 · fence 360 · prose 0; the structural fingerprint's shape 2 (0a18ff311) a telemetry row, no golden byte: what the merge moved beyond point 8's post-state (the stage of 6c18ceb24)",
+  "seat": "MERGE-TRAIN (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at 824a8ce2f",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

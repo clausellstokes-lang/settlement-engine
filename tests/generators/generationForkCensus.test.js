@@ -173,7 +173,9 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-11-09, the train (MERGE-TRAIN, ODQ §934.105), traced the same way: d88f930b holds through the wave's record 10
 // (7a33ae253) -> 772bcdc9 record 1, the ALLEGIANCE-CAR1 merge (c88cc75dd; the v3 save migration's schemaVersion 3 and the
 // hidden allegiance re-shape the control row).
-const GOLDEN_CONTROL_HASH = '772bcdc989f0c60ff267c7f57cbf7e5e5923b9840369d09f23930687759915c0';
+// -> 6f0047b6 record 9, the ALLEGIANCE-CAR4 merge (the goals A9 and item 15's title-secret draw re-deal the control row; taken
+// in record 9's golden-master act, the chair's note (3) of 09:2x).
+const GOLDEN_CONTROL_HASH = '6f0047b6150b1c9ec4c5744bbc77fe7a8b8ffa076265b5b948e9619681fbd540';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -196,7 +198,10 @@ const CHOOSER_KEYS = ['npcs', 'relationships'];
 // merged tree. The car's person-hook draws now run through the rung-2 landing's declared draw (drawDeclared over the
 // census's facts, the held set refusing inside it — MERGE-R2's ruling 2: nothing left, no roll), the composition of
 // silent breaks 1 and 2. PLAUSIBLE, not bisected.
-const POPULATION_UNPINNED_DRAWS = 547;
+// RE-KEYED at MERGE-TRAIN record 9 (2026-11-09, the ALLEGIANCE-CAR4 merge, 824a8ce2f): 547 -> 512, measured by this arm at the
+// merged tree (547 at the point-8 tip 8b75f466a): car 4's A9 (03ff59084) retires the population step's goal draw — the goals are
+// dealt at the seam by people/goals.js :: dealGoals — so 35 fewer unpinned draws reach the population stream on this row.
+const POPULATION_UNPINNED_DRAWS = 512;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -343,7 +348,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 547 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 512 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
@@ -506,7 +511,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 2026-11-09, the train (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, this arm's census at the merged tree): 110 -> 118, car 1's
     // hidden allegiance (5902f1a4a, domain/people/allegiance.js :: dealAllegiances): one `allegiance` family fork and one keyed
     // fork per eligible card on this row (+8); direct 4, foreign 0. Re-keyed to the measured figure, never above it.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(118);
+    // 2026-11-09, MERGE-TRAIN record 9 (the ALLEGIANCE-CAR4 merge, this arm's census at the merged tree): 118 -> 138, car 4's A9
+    // (03ff59084, people/goals.js :: dealGoals): one `people-goals` family fork and one keyed fork per card on this row (+20);
+    // direct 4, foreign 0. Re-keyed to the measured figure, never above it.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(138);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
