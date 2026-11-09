@@ -1269,6 +1269,16 @@ export const NPC_FACTION_LOYALTY = {
     'The same new face has turned up at three of their jobs, and they have put someone on to follow the newcomer.',
     { text: 'The guard captain has a file. They know because someone who works for the guard captain also works for them.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "Someone tried to rob one of their fronts, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.",
+    'Two of their people have started running jobs of their own, and are telling newer hands that the old boss is finished.',
+    'A debt they called in was paid by someone they have never met, and that person now wants to meet.',
+    'A load of theirs was taken on the road by people who knew the day, the route and the password.',
+    'Someone has been using their name to frighten shopkeepers, and the shopkeepers have begun paying the wrong people.',
+    'A child they pay to carry messages has stopped coming, and the last message never arrived.',
+    'An honest official they have never managed to buy has started asking about one of their fronts by name.',
+    'They are holding goods for someone who has stopped answering, and the goods are beginning to draw attention.',
+    'A rival crew has offered peace, and the offer arrived on the same day one of their people went missing.',
+    'Someone in their own crew has been skimming, and the sum matches exactly what a rival is now spending.',
+    'A family they once ruined has a son who has just come of age, and he has started asking where they sleep.',
   ],
   magic: [
     "An experiment failed in a way that shouldn't be possible. The results have been sealed. They're still thinking.",

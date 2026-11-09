@@ -229,7 +229,7 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['They have quietly stopped paying a supplier who cannot afford to take them to law.', 'hidden_debt'],
   ['A crate came to them by mistake, and the people who meant to receive it have started asking around for it.', 'smuggling'],
   ['Their apprentice has been offered a partnership by a rival, on condition that the apprentice brings the recipes.', 'betrayal'],
-  // ── criminal (8) ──
+  // ── criminal (18) ──
   ["One of their people is talking to the guard. They don't know which one yet. They're watching.", 'betrayal'],
   ['A valuable item came through their network recently. Three different parties have asked about it quietly.', 'smuggling'],
   ["Someone in the government takes their money and someone else's, and they do not know which side will be sold first.", 'corruption'],
@@ -238,6 +238,16 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['The same new face has turned up at three of their jobs, and they have put someone on to follow the newcomer.', 'outsider_suspicion'],
   ['The guard captain has a file. They know because someone who works for the guard captain also works for them.', 'corruption'],
   ['Someone tried to rob one of their fronts, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.', 'looming_threat'],
+  ['Two of their people have started running jobs of their own, and are telling newer hands that the old boss is finished.', 'ambition'],
+  ['A debt they called in was paid by someone they have never met, and that person now wants to meet.', 'hidden_debt'],
+  ['A load of theirs was taken on the road by people who knew the day, the route and the password.', 'betrayal'],
+  ['Someone has been using their name to frighten shopkeepers, and the shopkeepers have begun paying the wrong people.', 'crime_ring'],
+  ['A child they pay to carry messages has stopped coming, and the last message never arrived.', 'vanished_person'],
+  ['An honest official they have never managed to buy has started asking about one of their fronts by name.', 'looming_threat'],
+  ['They are holding goods for someone who has stopped answering, and the goods are beginning to draw attention.', 'smuggling'],
+  ['A rival crew has offered peace, and the offer arrived on the same day one of their people went missing.', 'rivalry'],
+  ['Someone in their own crew has been skimming, and the sum matches exactly what a rival is now spending.', 'betrayal'],
+  ['A family they once ruined has a son who has just come of age, and he has started asking where they sleep.', 'old_wound'],
   // ── magic (8) ──
   ["An experiment failed in a way that shouldn't be possible. The results have been sealed. They're still thinking.", 'forbidden_knowledge'],
   ['A student asked them a question three weeks ago that they still cannot answer, and the student has not asked again.', 'forbidden_knowledge'],
