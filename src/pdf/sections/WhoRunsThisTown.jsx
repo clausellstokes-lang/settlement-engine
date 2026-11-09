@@ -29,10 +29,10 @@ export function WhoRunsThisTown({ dm }) {
           <View key={f.id} wrap={false}>
             <Text style={rowStyle}>
               {`${PLACE[f.rank]} · ${f.name}${f.title ? `, ${f.title}` : ''}`}
-              {f.openPowers.length ? ` · also ${f.openPowers.map((m) => (m.rank ? `${RANK_WORD[m.rank]} in ${m.power}` : `in ${m.power}`)).join(', ')}` : ''}
+              {f.openPowers.length ? ` · also ${f.openPowers.map((m) => (m.rank ? `${RANK_WORD[m.rank]} in ${m.powerName}` : `in ${m.powerName}`)).join(', ')}` : ''}
               {f.answersTo ? ` · answers to ${f.answersTo.guild}${f.answersTo.handler ? ` through ${f.answersTo.handler}` : ''}` : ''}
             </Text>
-            {f.lends.map((l) => <Text key={l.power} style={lineStyle}>{l.line}</Text>)}
+            {f.lends.map((l) => <Text key={l.powerName} style={lineStyle}>{l.line}</Text>)}
           </View>
         ))}
 
@@ -63,8 +63,8 @@ export function WhoRunsThisTown({ dm }) {
 
         {dm.boosts.length > 0 && <Text style={headStyle}>THE BOOSTS</Text>}
         {dm.boosts.map((b) => (
-          <View key={b.power} wrap={false}>
-            <Text style={rowStyle}>{`${b.power} · ${pointWords(b.base)} on its own, +${pointWords(b.boost)}, ${pointWords(b.effective)} in all`}</Text>
+          <View key={b.powerName} wrap={false}>
+            <Text style={rowStyle}>{`${b.powerName} · ${pointWords(b.base)} on its own, +${pointWords(b.boost)}, ${pointWords(b.effective)} in all`}</Text>
             <Text style={lineStyle}>{b.line}</Text>
           </View>
         ))}

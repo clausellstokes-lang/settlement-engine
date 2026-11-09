@@ -248,10 +248,10 @@ export function dmPowerViewOf(settlement) {
     const id = String(card.id ?? '');
     const lends = patronage.powers.flatMap((p) => p.patrons.filter((pt) => pt.id === id && pt.boost > 0)
       // the rank-2 face takes the third line, every other place the second (variant 0 is the boosts block's)
-      .map((pt) => ({ power: p.power, kind: pt.kind, share: pt.share, boost: pt.boost, line: patronLine(pt, p.power, rank === 2 ? 2 : 1) })));
+      .map((pt) => ({ powerName: p.power, kind: pt.kind, share: pt.share, boost: pt.boost, line: patronLine(pt, p.power, rank === 2 ? 2 : 1) })));
     return {
       rank, ...faceOf(card),
-      openPowers: membershipsOf(card).filter((m) => m.power !== ruler).map((m) => ({ power: m.power, rank: m.rank })),
+      openPowers: membershipsOf(card).filter((m) => m.power !== ruler).map((m) => ({ powerName: m.power, rank: m.rank })),
       answersTo: a ? { guild: a.power || a.house, handler: handler ? String(handler.name ?? '') : null } : null,
       lends,
     };
@@ -284,8 +284,9 @@ export function dmPowerViewOf(settlement) {
 
   const boosts = patronage.powers.filter((p) => p.boost > 0).map((p) => {
     const lead = [...p.patrons].sort((x, y) => y.boost - x.boost)[0];
-    return { power: p.power, base: p.base, boost: p.boost, effective: p.effective, bound: p.bound, hidden: p.hidden, line: patronLine(lead, p.power, 0) };
+    return { powerName: p.power, base: p.base, boost: p.boost, effective: p.effective, bound: p.bound, hidden: p.hidden, line: patronLine(lead, p.power, 0) };
   });
 
+  // the DM view names a power `powerName` (a WORD), never `power` (the prose-numerics walker's float token)
   return { ruler, rulingThree, answers, fronts, hall: hallOf(s, ruler, three), boosts, hunts: null };
 }
