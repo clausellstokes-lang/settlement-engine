@@ -4,7 +4,7 @@ Seat SW-3 · REALM-PROSE (Opus 5.5), a child of the cloud chair (session `sessio
 
 ## §0 What was done, in one paragraph
 
-All **169 rows** were taken (newsVoice 59, decreeProsePools 49, traditionProse 11, heraldIntegrity 10, warRemembrance 8, arrivalProse 7, roadsProse 6, chroniclersLetter 5, treatyDocument 4, causeWalk 2, newsBody 2, and warResolve, neighbourMirror, giftsAndDebtsRead, decreeTracker, warStatus and CharterRoadCard 1 each). Every OLD was found at the tip. **168 are rewritten and one is LEFT** (`chroniclersLetter.js:446`, whose JSX twin sits outside the manifest; reported to the chair as a STOP with that default). **14 more lines** in the same files were cured under A6's tic cure where the audit had passed them (§4b). **Variants by vantage** were added to the tradition summaries (both pools now four variants: the plain line, the traveller, the local, the newcomer) and to the decree chronicle's repeated skeleton (a fourth §8 vantage appended to each of the seven event families, vids 97–103) (§4c). The walker's phrases in these 17 files fell **44 → 1** (§8).
+All **169 rows** were taken (newsVoice 59, decreeProsePools 49, traditionProse 11, heraldIntegrity 10, warRemembrance 8, arrivalProse 7, roadsProse 6, chroniclersLetter 5, treatyDocument 4, causeWalk 2, newsBody 2, and warResolve, neighbourMirror, giftsAndDebtsRead, decreeTracker, warStatus and CharterRoadCard 1 each). Every OLD was found at the tip. **All 169 are rewritten.** `chroniclersLetter.js:446` was first left by a STOP, because its JSX twin sits outside the manifest. The chair then widened the manifest to that one twin line, `src/components/map/ChroniclersLetterPanel.jsx:118`, and both halves of the letter moved together as their own cause (§11). **14 more lines** in the same files were cured under A6's tic cure where the audit had passed them (§4b). **Variants by vantage** were added to the tradition summaries (both pools now four variants: the plain line, the traveller, the local, the newcomer) and to the decree chronicle's repeated skeleton (a fourth §8 vantage appended to each of the seven event families, vids 97–103) (§4c). The walker's phrases in these 17 files fell **44 → 1** (§8).
 
 ## §1 The cure, by A6's clauses
 
@@ -71,7 +71,7 @@ The crier pools (`newsVoice.js`) read only the entry's category and beat. The tr
 | 4 | `domain/display/chroniclersLetter.js:177` | And so the ledger stands. Your faithful chronicler. | And so things stand. Your faithful chronicler. | the audit's NEW |
 | 5 | `domain/display/chroniclersLetter.js:187` | The world itself has deepened since last we spoke. New currents now run beneath it: | Since last I wrote, the realm has more to tell; these now come into my letters: | the audit's NEW |
 | 6 | `domain/display/chroniclersLetter.js:192` | Some older matters outran my pages before this letter was writ; the record here begins where my keeping does. | Some older matters outran my pages before this letter was writ; what follows begins where my keeping does. | the audit's NEW |
-| 7 | `domain/display/chroniclersLetter.js:446` | In this my earlier record returns, from ${l.recalls.when}: ${l.recalls.headline}. | (unchanged) | LEFT (twin in `ChroniclersLetterPanel.jsx:118`, outside the manifest; What stays) |
+| 7 | `domain/display/chroniclersLetter.js:446` | In this my earlier record returns, from ${l.recalls.when}: ${l.recalls.headline}. | This echoes what I wrote of ${l.recalls.when}: ${l.recalls.headline}. | the audit's NEW, with its twin `ChroniclersLetterPanel.jsx:118` (§11) |
 | 8 | `domain/display/decreeTracker.js:237` | This decree produced no measurable downstream effect this span. | Nothing that happened this time can be traced to this decree. | the audit's NEW |
 | 9 | `domain/display/giftsAndDebtsRead.js:120` | a debt believed, but the aid was freely given. A war brews over a kindness misremembered | a debt believed, but the aid was freely given: a kindness misremembered, and resented for it | seat-corrected: an instrument word kept (see §2) |
 | 10 | `domain/display/heraldIntegrity.js:57` | The record carries this as it happened. | This news arrived as it happened, unchanged on the road. | the audit's NEW |
@@ -376,7 +376,7 @@ Beyond the walker's list: "breath(e)" 7 → 0 in the crier pools, and "stranger(
 ## §10 CONFIRMED against PLAUSIBLE
 
 - **CONFIRMED** (executed here, receipts above):
-  - 169 rows found and taken (168 rewritten, 1 left by STOP), plus 14 added lines and 15 new variant lines;
+  - 169 rows found and taken, all rewritten (446 with its twin, §11), plus 14 added lines and 15 new variant lines;
   - every instrument word of §2 kept, each read by the named test;
   - the pins re-keyed, each at its old strictness;
   - every test importing or quoting the 17 files is green, apart from the reds of §7 and §9 (184 files at the first run; the widened run took in `tests/lint` and `tests/copy`, 361 files);
@@ -389,9 +389,28 @@ Beyond the walker's list: "breath(e)" 7 → 0 in the crier pools, and "stranger(
   - that the decree chronicle reads the same in the app as through `decreeChronicleLine` (the proof drew it directly; the soak's advance stages no decree);
   - every NEW line's voice: the owner's veto is the measure, and this seat's reading is not.
 
+## §11 The chair's two additions (rulings received 01:17 and 01:36 UTC)
+
+**The letter's twin (one cause, `git log` names it).** The plain-text letter (`chroniclersLetter.js:446`) and the map panel (`ChroniclersLetterPanel.jsx:118`, the only line touched under `src/components/map`) both now read: "This echoes what I wrote of {when}: {headline}." The pin `tests/domain/chroniclersLetter.test.js:248` is re-keyed to that line. `chroniclersLetterGolden` was already red from §4 (unsigned) and remains so.
+
+**"Amerchant" (a defect row from OWNER-WORDS-DOSSIER's intake) — FOUND, NOT CURED HERE: a STOP to the chair.**
+- **The text is whole at the source.** The line is `src/data/narrativeData.js:73`, "A merchant argues with a carter…". `speakTierNoun` keeps the space in all six tiers (measured).
+- **Where the space is lost: the Overview's drop-cap.** `src/components/new/tabs/OverviewTab.jsx:347` renders the arrival scene in `<p className="oc-dropcap-prose">`, and `src/styles/organic.css:149-163` raises the first letter (`initial-letter: 2`, with a float fallback). When the first word is one letter long, the space after the raised initial collapses at the start of the line.
+- **CONFIRMED in Chromium** with the repo's `organic.css` and a range measurement:
+  - "A merchant…": the space is 0.0px wide, and the "m" begins 1.8px after the A.
+  - "The road…": the space is 5.0px wide.
+  - The screenshot reads "Amerchant".
+- **Reach.** Every arrival line opening on "A " prints this way on the Overview. The Summary tab and the PDF have no drop-cap.
+- **The cure** lives in two files outside this manifest. The default put to the chair:
+  - a `--lone` class on the paragraph when the scene matches `/^[A-Za-z]\s/`;
+  - a word-space margin on that class's `::first-letter`;
+  - red-first: a jsdom class test plus the Chromium gap measure.
+- Rewording the lines is not the cure.
+
 ## What stays
 
-- **`src/domain/display/chroniclersLetter.js:446`** with its JSX twin **`src/components/map/ChroniclersLetterPanel.jsx:118`** ("In this my earlier record returns, from …"). Proposed for both together: "This echoes what I wrote of {when}: {headline}." The `tests/domain/chroniclersLetter.test.js:248` C2 pin goes with them.
+- **The "Amerchant" drop-cap cure** (§11): `OverviewTab.jsx:347` and `src/styles/organic.css`, pending the chair's ruling.
+
 - **`src/domain/worldPulse/traditionsKernel.js:513`**, the `ownerBit` ("It is kept by {named}, who answer for its fortune."). It prints after every tradition summary that has a keeper, names a pasture or a fish market as one (§6), and carries "who answer for its fortune", an aphorism. Outside this manifest.
 - **The DEC-EVENT and DEC-PARTY pages:** both blocks print on no page today. Their fourth vantages (§4c) wait for the page that reaches them, and that page must declare vid 54 `market` (the census2g pin says so).
 - **The tradition hooks** (`TRAD_HOOKS`, six pools of three): these are plot-hook seeds, not intro pools, so they were not given vantages; their rows of the audit were taken.
