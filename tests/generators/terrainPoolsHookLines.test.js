@@ -56,7 +56,17 @@ describe('soak1k-921, a town in the hills on a road', () => {
     expect(waterAccessKind(s.config?.terrainType, s.config?.tradeRouteAccess)).toBe('none');
     const lines = (s.npcs || []).flatMap((n) => [n?.goal?.short, n?.goal?.long, ...(n?.plotHooks || [])]).filter((x) => typeof x === 'string');
     expect(lines.filter((x) => WET_HOOK_WORD.test(x))).toEqual([]);
-    const captain = (s.npcs || []).find((n) => /three unsolved/.test(String(n?.goal?.short)));
-    expect(captain, 'the Guard Captain keeps the goal\'s beat, three killings').toBeTruthy();
+    // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): the anti-vacuity read the Guard Captain's
+    // three-killings goal, a row of the retired role pool (NPC_FACTION_GOALS) that took its dry twin here; A9 draws every
+    // goal from the families the record supports, so no card draws that row. The same law on the pool writer that still
+    // draws a wet line with a twin — the economy loyalty hook (NPC_FACTION_LOYALTY's "lost at sea" cargo, its twin "lost
+    // on the road") — read on soak1k-33, a town in the mountains on a road (landlocked), the first landlocked town of the
+    // 1,000 at the car's tip whose cast draws it: no wet line, and the hook printed is the dry twin.
+    const t = birth(33).settlement;
+    expect(waterAccessKind(t.config?.terrainType, t.config?.tradeRouteAccess)).toBe('none');
+    const tLines = (t.npcs || []).flatMap((n) => [n?.goal?.short, n?.goal?.long, ...(n?.plotHooks || [])]).filter((x) => typeof x === 'string');
+    expect(tLines.filter((x) => WET_HOOK_WORD.test(x))).toEqual([]);
+    const wetCargo = 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.';
+    expect(tLines.filter((x) => x.includes(twinOf(wetCargo))).length, 'soak1k-33: the loyalty hook keeps its beat, the cargo, dry').toBeGreaterThan(0);
   });
 });
