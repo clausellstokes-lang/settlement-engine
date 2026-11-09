@@ -140,53 +140,54 @@ reg('government','stable',
 );
 
 // ── military ──────────────────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the soldiers' seat-holders in plain words, the machinery struck; the goals untouched.
 reg('military',GOVERNANCE_FRACTURED,
-  { position:  'Commands enforcement capacity where civilian governance is failing. The military\'s relationship with civilian authority is under pressure.',
+  { position:  'Commands the soldiers while the seat loses its hold; whoever gives the orders next will want them.',
     goal:      'Keep the people under their command together, whoever ends up giving the orders.',
-    constraint:'Cannot act unilaterally to fill the governance vacuum without becoming a political actor in ways that compromise the institutional neutrality the role requires.' },
-  { position:  'Commands a subordinate enforcement unit in a settlement where institutional authority is fragmented. Orders may be coming from multiple competing sources.',
+    constraint:'Cannot step in to keep order without taking a side in the fight over the seat.' },
+  { position:  'Leads a squad that now takes orders from more than one master.',
     goal:      'Stop any faction buying their squad away from them while the seat is broken.',
-    constraint:'Institutional loyalty in a fragmented governance environment requires active management that cannot be publicly acknowledged as such.' }
+    constraint:'Keeping the squad in hand takes quiet favours that no one can be told about.' }
 );
 reg('military','corruption',
-  { position:  'Leads enforcement in a settlement where criminal interests have arrangements with parts of the security apparatus.',
+  { position:  'Commands the soldiers while criminals pay some of those who wear their colours.',
     goal:      'Find out which of their own officers are on the take, before the payers notice.',
-    constraint:'Investigating the arrangements exposes the investigators to the same pressures that created them.' },
-  { position:  'Commands a subordinate enforcement unit inside a structure where corruption is known to have reached some levels.',
+    constraint:'Anyone sent to look into the payments is offered the same coin.' },
+  { position:  'Leads a squad in a force where some officers are known to take bribes.',
     goal:      'Keep their own hands clean without catching the eye of the bribers or the inquiry.',
-    constraint:'Visibility in either direction (too compliant or too resistant) creates risk the unit cannot currently afford.' }
+    constraint:'Going along too easily or pushing back too hard both draw notice the squad cannot afford.' }
 );
 reg('military','food_crisis',
-  { position:  'Responsible for public order during supply failure: the conditions that most reliably produce civil disorder are currently present.',
+  { position:  'Keeps order while the food runs short, when hungry crowds are quickest to riot.',
     goal:      'Keep the hungry from rioting without striking anyone the crowd will remember.',
-    constraint:'Enforcement sufficient to prevent disorder may be enforcement sufficient to generate resentment. The threshold is not visible in advance.' },
-  { position:  'Commands a subordinate enforcement unit during a supply crisis. Responsible for a sector where the pressure is acutely felt.',
+    constraint:'Enough force to stop a riot can be enough to start the next, and nobody knows beforehand how much is too much.' },
+  { position:  'Leads a squad that keeps order among people who are going hungry.',
     goal:      'Hold their patch quiet with too few hands, and start no fight they cannot finish.',
-    constraint:'The resources available are not sufficient for the conditions present. Performance is being evaluated against a standard the conditions make unachievable.' }
+    constraint:'Has too few hands for the work, and is judged as though it had enough.' }
 );
 reg('military','economic_stress',
-  { position:  'Maintains order in a settlement under economic pressure, where enforcement is more necessary and less funded than at other times.',
+  { position:  'Keeps order while money is short, when trouble grows and the pay for stopping it shrinks.',
     goal:      'Be seen enough to stop trouble, and not so much that people start to hate them.',
-    constraint:'Underfunding of enforcement is itself a product of the economic conditions that make enforcement more necessary.' },
-  { position:  'Commands a subordinate enforcement unit in an economically stressed settlement where unit resources, morale, and staffing are all under pressure.',
+    constraint:'The same lack of coin that stirs the trouble cuts the pay of those sent to stop it.' },
+  { position:  'Leads a squad that is short of pay, gear and hands.',
     goal:      'Hide how short of pay and gear their squad has become before someone tests it.',
-    constraint:'Visible deterioration invites exactly the disorder it signals the inability to contain.' }
+    constraint:'If anyone sees how thin the squad has worn, they will test it.' }
 );
 reg('military','contested',
-  { position:  'Commands enforcement in a settlement where competing political claims create pressure on the loyalty of the security forces.',
+  { position:  'Commands the soldiers while rivals fight over the seat, and each side wants them.',
     goal:      'Keep everyone under their command out of the fight for the seat until it is settled.',
-    constraint:'Both sides of the contest want enforcement on their side. Neutrality requires active management that cannot be acknowledged publicly.' },
-  { position:  'Leads a subordinate enforcement unit whose institutional loyalties are being tested by the political contest above it.',
+    constraint:'Keeping the soldiers out of the fight takes quiet work that cannot be owned in public.' },
+  { position:  'Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.',
     goal:      'Stop their squad splitting into two camps before the fight for the seat is over.',
-    constraint:'Unit members have personal loyalties that do not necessarily align with institutional neutrality.' }
+    constraint:'Some of the squad have loyalties of their own, and they do not all point the same way.' }
 );
 reg('military','stable',
-  { tags: CALM_ONLY, position:  'Commands enforcement in a well-ordered settlement. The role is preventive rather than responsive, and authority derives from institutional legitimacy.',
+  { tags: CALM_ONLY, position:  'Commands the soldiers in quiet times; the work is keeping trouble from starting.',
     goal:      'Keep the drills, the patrols and the pay going, and the old hands in charge of them.',
-    constraint:'Stable conditions make it harder to justify the resources and authority that would be needed if conditions changed.' },
-  { tags: CALM_ONLY, position:  'Leads a subordinate enforcement unit in a stable settlement. The role is routine, the risks are low, and advancement requires distinguishing the unit in conditions that offer few distinctions.',
+    constraint:'With nothing threatening, it is hard to win the coin and the say that would be needed if trouble came.' },
+  { tags: CALM_ONLY, position:  'Leads a squad in quiet times, where the work is routine and the risks are low.',
     goal:      'Get their squad noticed for doing the dull work well, and earn a patron by it.',
-    constraint:'Routine excellence is expected and unremarkable; meaningful advancement requires either a crisis or a patron.' }
+    constraint:'Steady work earns no notice; getting ahead takes a crisis or a patron.' }
 );
 
 // ── economy / crafts ──────────────────────────────────────────────────────────
