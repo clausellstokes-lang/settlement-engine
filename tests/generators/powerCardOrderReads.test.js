@@ -89,3 +89,14 @@ describe('SW-B1 · P50: the government line is the seat\'s own, never the unread
     expect(gov.desc).not.toContain('without a clear dominant authority');
   }, 60_000);
 });
+
+describe('SW-B1 · §2·D #7: one card governs — the noble houses name the seat they stand behind', () => {
+  it.each([4, 10])('soak1k-%i: no non-governing card claims to be "the governing authority here"', async (i) => {
+    await ensureLaws();
+    const factions = birth(i).settlement.powerStructure.factions;
+    const gov = factions.find((/** @type {any} */ f) => f.isGoverning);
+    for (const f of factions) if (!f.isGoverning) expect(f.desc, f.faction).not.toMatch(/the governing authority here/);
+    const noble = factions.find((/** @type {any} */ f) => /^Hereditary landowners behind the /.test(f.desc || ''));
+    if (noble) expect(noble.desc).toContain(`behind the ${gov.faction};`);
+  }, 60_000);
+});

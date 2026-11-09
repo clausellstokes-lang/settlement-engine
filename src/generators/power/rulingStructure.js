@@ -508,7 +508,7 @@ export const generatePowerStructure = (
       nobleDesc =
         hasNobleInst && nobleGoverns
           ? priorityToCategory(priorities.military) === 'very_high'
-            ? 'Hereditary landowners who are the governing authority here; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.'
+            ? `Hereditary landowners behind the ${governingFaction}; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.` // SW-B1 (§2·D #7): one governing card, not two
             : noblePower > 20
               ? 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.'
               : noblePower > 10
