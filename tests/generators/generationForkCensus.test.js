@@ -185,7 +185,9 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // order, P51/P50, and re-deal the control row's faction descriptions; taken in the same act as the golden re-record).
 // -> 5b81ba52 STYLE-2-MERGE record 19, the SW-10 HOOKS merge (the grown person-hook pools re-deal the control row's plot hooks;
 // taken in the same act as the golden re-record).
-const GOLDEN_CONTROL_HASH = '5b81ba52749976d306ec999b9eed3b4bd6349bd4116fcfe6767d1ad26c441d7a';
+// -> b480bb65 STYLE-2-MERGE record 22, the SW-6 CRISIS-SURFACES merge (the crisis cast's reasons and npcStructure's pools re-deal
+// the control row; taken in the same act as the golden re-record).
+const GOLDEN_CONTROL_HASH = 'b480bb659e7f46679f2a44b5ce97ac730a7d595c04d22d05e19b775ca5df051f';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',

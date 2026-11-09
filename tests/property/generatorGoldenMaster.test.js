@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 22, THE SW-6 CRISIS-SURFACES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-22-sw6.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 19's post-state. THE CAUSE, ONE (first-parent step ac1442a3d): the SW-6 CRISIS-SURFACES merge (lane/style-2-crisis-surfaces-2026-11-09 at 828ade53f; its generator causes the components: the crisis cast's reasons and npcStructure's position and constraint pools). FIELD-DIFFED: stress/stressors cast.roles[].reason and cast.stakes[].reason 516 rows, npcs[].structuralPosition and npcs[].activeConstraint 255 rows, string leaves only.
+ *   Written from the staged tree S22 (the tree of ac1442a3d with the door paths carried from the branch). 16c01856.. -> 2908b7a3..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 19, THE SW-10 HOOKS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-09-style-2-merge-19-sw10.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 18's post-state. THE CAUSE, ONE (first-parent step 856de8427): the SW-10 HOOKS merge (lane/style-2-hooks-2026-11-09 at f50b7b047; its generator causes the components: the eight person-hook pool causes 4ba2a241d..2a1051b81). FIELD-DIFFED: npcs[].plotHooks[] 525 rows, string leaves only.
