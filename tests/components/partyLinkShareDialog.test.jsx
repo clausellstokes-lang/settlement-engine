@@ -80,6 +80,6 @@ describe("the party link's bar caption (row (g), the chair's ruling)", () => {
     expect(caption.textContent).toMatch(/stays the same for as long as this\s+settlement exists/);
     expect(caption.textContent).toMatch(/Listing the town in the gallery\s+neither ends nor changes it/);
     expect(caption.textContent).toMatch(/Rotate it for a new link; Stop sharing ends it/);
-    expect(caption.textContent).not.toMatch(/never appears in the public gallery/);
+    expect(caption.textContent).not.toMatch(/never appears in the public gallery/); // anchored: the caption is asserted above to carry the new copy's three clauses
   });
 });

@@ -2,7 +2,7 @@
 
 > **BANKED 2026-07-26 (THE BANKING FOLD).** Everything this document describes as
 > "uncommitted integration" is now committed on claude/composite-r4 as 12 lane
-> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 207 at
+> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 208 at
 > HEAD. Governance home: the ledger branch (review-fixes-2026-07-08) — owner
 > decisions live in ONE surface, `docs/OWNER_DECISION_QUEUE.md` there; the
 > 2026-07-26 ledger rows carry the pivot ratification, the golden-regen
@@ -76,7 +76,7 @@ evidence must be checked independently.
 
 ## Current release blockers
 
-1. **Migration train.** Working-tree migration head 207 is 4 migrations ahead
+1. **Migration train.** Working-tree migration head 208 is 5 migrations ahead
    of the live-verified production head 203 (`supabase/applied-head.json`; the
    owner applied 122–200 to production on 2026-09-16 and 201–203 on 2026-09-20:
    201 — the staff unlock of ODQ §934.28 — 202 — design §12.4's gallery-scanner
@@ -84,13 +84,15 @@ evidence must be checked independently.
    `decrees` — and 203 — the client-mirror totality of that same gallery
    scanner, adding the three hard-denied conditional ledgers
    (`factionPairStates`, `envoyErrands`, `concludedWars`) that landed on the
-   client after 136 froze the SQL array). Four wait on the owner's `supabase db
+   client after 136 froze the SQL array). Five wait on the owner's `supabase db
    push`, in order: 204 (ENGINE-5's `report_engine_generations`), 205 (the public
    sanitizer drops the people car's three retired keys, FIX-EXPORT-KEYS) and 206
    (the public sanitizer reads the card's veil bit, FIX-PUBLIC-VEIL;
    docs/FIX_PUBLIC_VEIL_2026-11-07.md, THE DEPLOY STEP) and 207 (the public
    sanitizer drops the hall-capture state, ALLEGIANCE-CAR2's J-20;
-   docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md). Both
+   docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md) and 208 (the party link:
+   idempotent, veiled, owner-aware, independent of the listing, SW-B7a;
+   docs/chair/2026-11-09/STYLE-2-PARTY-LINK-2026-11-09.md). Both
    figures are derived by the freshness pin rather than kept by hand. The eleven
    declared waves need clone rehearsal, wave receipts, rollback practice, and then
    an authorized deployment.

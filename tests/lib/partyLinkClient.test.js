@@ -69,7 +69,7 @@ describe('the party link honours the veil on the client (row (d))', () => {
     const printed = JSON.stringify(linked.settlement);
     expect(printed).toContain('patient-with-apprentices');
     expect(printed).toContain('Bo Marsh');
-    expect(printed).not.toContain('sly-and-grasping'); // the veil reached the players
+    expect(printed).not.toContain('sly-and-grasping'); // anchored: the two toContain lines above prove `printed` is the live card text; the veil reached the players
   });
 
   it('the DM\'s "Reveal DM content" switch travels: the players\' page renders as the gallery copy does', async () => {
