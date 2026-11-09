@@ -100,7 +100,7 @@
       "observedTicks": 52,
       "status": "complete",
       "worldStateSha256": "1f3f73b9f5082ef3adfe8db20fff03c663d6935fb87c636cebb408954bf0d911",
-      "wizardNewsSha256": "6e2aeb3c5311cefc1d4f6f4ab68ad5e40016298a85e202061555bab323c93492",
+      "wizardNewsSha256": "ee42110dc53480993130b6a32d165962bd5d0f57a570abd3a3ce91bb1c32edc9",
       "settlementUpdatesSha256": "2e79c36f0db53db8e5814ce41eb2d9a2c0238153b5d32545534045897acbfacc",
       "regionalGraphSha256": "4c5afe6d69649df4b437b6ba1554663cafeef9832df41677b91aa5072c7a2448"
     },
@@ -116,7 +116,7 @@
       "observedTicks": 52,
       "status": "complete",
       "worldStateSha256": "40033f3e76da9b242d3f18f97d8cd44db4c5d0571b3b5486993cf99abb2c2000",
-      "wizardNewsSha256": "8d30e7bc3b4c4fe4694ffb27e389a1da3c4f47e332f9c4b5be0c2b85573e1915",
+      "wizardNewsSha256": "5443628bf1c4973eaa41170379e490d25a44ec053db777015c78f30b8c8ec6ef",
       "settlementUpdatesSha256": "bbcc17dabcb6c95158a09a685491dcb8a1def9c50948196ef29726a969d2426e",
       "regionalGraphSha256": "edf21734db2302e651ab0364ac001f4de886baf3a0dc93a09acc1da45ed619d3"
     },
@@ -164,7 +164,7 @@
       "observedTicks": 52,
       "status": "complete",
       "worldStateSha256": "e8cb9404bc0de5e033ab455e7bd41be7f73ff18c78ab72c4803d8adf2565fe7c",
-      "wizardNewsSha256": "4dbfc03c832eddbe95f139f01e81437ea1b394c544c5d211050dc645db7967cd",
+      "wizardNewsSha256": "a044bf6a40a4074f13514a7c8452cedb940d0f2a34ff37503a0a38fdbb3a2854",
       "settlementUpdatesSha256": "dbc595fdd028582c41d0245601f97a82ed7cc67e08ea54a05ed24d5082b92961",
       "regionalGraphSha256": "1122ffb6ae5ce4f561ea043c899dc89c655769e2c2e268fd525efe3087aa9898"
     },
@@ -180,7 +180,7 @@
       "observedTicks": 52,
       "status": "complete",
       "worldStateSha256": "c462f252ff4a7935d8b04fff3c345dff38f533cb18ce0d766d46585861ed8acf",
-      "wizardNewsSha256": "4b1a6984aa1631e082d9c8c201214d078ecdc513b3fc04df3f277d535c54c930",
+      "wizardNewsSha256": "6ada99e612c2589da9edf76f9c8b904ce3fa1df36798027314cdc6c866750945",
       "settlementUpdatesSha256": "b5a4a2a115b0be9bc1cfcbebce142fea4b364f5530e8771a7d166ab9cb0461ce",
       "regionalGraphSha256": "8bc4478549f19b5b084db1120f4ab626f494c2b507940215544cffe0a5c497fa"
     }
