@@ -603,3 +603,11 @@ Pins: `npcTrailSection.test.jsx` — the footnote, with an anchored negative on 
 | D·89 scene-context footnote | `These are the portrait compiler's recorded references. The Herald has not guessed a story identity for this place.` | "These are the notes the settlement's portrait was built from. The Herald has not guessed which story this place belongs to." (the "Recorded reference: {…}" label stays) |
 
 Pins: `heraldSceneContext.test.jsx` — its "has not guessed a story identity" assertion re-keyed by identity to the whole new footnote; **red at the parent** (1 of 2), green here. Registers: none moved.
+
+### 9x. `HeraldRemembrance.jsx` (D·90)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·90 sealed receipts | `The keeper's record of the cause is sealed to this reader.` | "What caused it is for the DM's eyes only." (census: printed exactly when `row.receiptsRedacted`, the fail-closed seam for a session without ground truth — the DM's view carries the cause) |
+
+Pins: `heraldRegisterDoors.test.jsx` — the secrets seam's `/record of the cause is sealed/` re-keyed to the new line (still two rows); **red at the parent** (1 of 22), green here. Registers: none moved.

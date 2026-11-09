@@ -217,7 +217,8 @@ describe('RUINS & REMEMBRANCE — the graveyard', () => {
     // The fallen themselves still read — a ruin is a landmark, not a secret.
     expect(screen.getAllByTestId('remembrance-row')).toHaveLength(2);
     expect(screen.getByRole('button', { name: 'Go to Old Keep' })).toBeTruthy();
-    expect(screen.getAllByText(/record of the cause is sealed/).length).toBe(2);
+    // STYLE-2 SW-12 (ledger D·90): the seal said plainly.
+    expect(screen.getAllByText('What caused it is for the DM’s eyes only.').length).toBe(2);
     const body = screen.getByTestId('herald-remembrance').textContent;
     // anchored: the SAME textContent is asserted to still carry 'Old Keep' below, proving the roll rendered.
     expect(body).not.toMatch(/swallowed by the marsh|lifecycle\.death\.oldkeep/);
