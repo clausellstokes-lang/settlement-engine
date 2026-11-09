@@ -41,21 +41,23 @@ describe('SW-B1 · P51: a power card names a power above it only when that power
     for (const i of [2, 3, 7, 8]) born[i] = birth(i).settlement;
   }, 120_000);
 
-  it.each([2, 3, 7, 8])('soak1k-%i: every "behind / in the shadow of" names a stronger power', (i) => {
-    const factions = born[i].powerStructure.factions;
-    let read = 0;
-    for (const f of factions) {
-      for (const { re, rel } of FRAMES) {
-        const m = re.exec(f.desc || '');
-        if (!m) continue;
-        const target = resolveNamed(factions, m[1]);
-        expect(target, `${f.faction} names "${m[1]}", which is not on the roster`).toBeTruthy();
-        if (rel === 'above') expect(target.power, `${f.faction} (${f.power}) "${m[0]}" above ${target.faction} (${target.power})`).toBeGreaterThan(f.power);
-        else expect(target.power, `${f.faction} (${f.power}) "${m[0]}" beside ${target.faction} (${target.power})`).toBeGreaterThanOrEqual(f.power);
-        read += 1;
+  it('soak1k-2, -3, -7, -8: every "behind / in the shadow of" names a stronger power', () => {
+    for (const i of [2, 3, 7, 8]) {
+      const factions = born[i].powerStructure.factions;
+      let read = 0;
+      for (const f of factions) {
+        for (const { re, rel } of FRAMES) {
+          const m = re.exec(f.desc || '');
+          if (!m) continue;
+          const target = resolveNamed(factions, m[1]);
+          expect(target, `soak1k-${i}: ${f.faction} names "${m[1]}", which is not on the roster`).toBeTruthy();
+          if (rel === 'above') expect(target.power, `soak1k-${i}: ${f.faction} (${f.power}) "${m[0]}" above ${target.faction} (${target.power})`).toBeGreaterThan(f.power);
+          else expect(target.power, `soak1k-${i}: ${f.faction} (${f.power}) "${m[0]}" beside ${target.faction} (${target.power})`).toBeGreaterThanOrEqual(f.power);
+          read += 1;
+        }
       }
+      expect(read, `soak1k-${i}`).toBeGreaterThanOrEqual(0);
     }
-    expect(read).toBeGreaterThanOrEqual(0);
   });
 
   it('"the governing council" is said of the governing seat only', () => {
@@ -70,33 +72,39 @@ describe('SW-B1 · P51: a power card names a power above it only when that power
 });
 
 describe('SW-B1 · P50: the government line is the seat\'s own, never the unread "no dominant authority"', () => {
-  it.each([
-    ['thorp', { priorityEconomy: 80 }, 'Household Council'],
-    ['thorp', { priorityMilitary: 80 }, "Headman's Authority"],
-    ['thorp', { priorityReligion: 80 }, 'Priestly Guidance'],
-    ['town', { priorityEconomy: 40, priorityMilitary: 40 }, 'Town Mayor'],
-  ])('a %s seated as %j prints its own line (%s)', (tier, prio, seat) => {
-    const config = { priorityMilitary: 20, priorityReligion: 20, priorityEconomy: 20, priorityCriminal: 10, priorityMagic: 10, tradeRouteAccess: 'road', ...prio };
-    const result = generatePowerStructure(tier, { prosperity: 'Moderate' }, null, config, []);
-    const gov = result.factions.find((f) => f.isGoverning);
-    expect(gov?.faction).toBe(seat);
-    expect(gov.desc.startsWith(MIXED), gov.desc).toBe(false);
+  it('a thorp seated as economy, military or religion and a town as economy-and-military each print their own line', () => {
+    for (const [tier, prio, seat] of /** @type {Array<[string, Record<string, number>, string]>} */ ([
+      ['thorp', { priorityEconomy: 80 }, 'Household Council'],
+      ['thorp', { priorityMilitary: 80 }, "Headman's Authority"],
+      ['thorp', { priorityReligion: 80 }, 'Priestly Guidance'],
+      ['town', { priorityEconomy: 40, priorityMilitary: 40 }, 'Town Mayor'],
+    ])) {
+      const config = { priorityMilitary: 20, priorityReligion: 20, priorityEconomy: 20, priorityCriminal: 10, priorityMagic: 10, tradeRouteAccess: 'road', ...prio };
+      const result = generatePowerStructure(tier, { prosperity: 'Moderate' }, null, config, []);
+      const gov = result.factions.find((f) => f.isGoverning);
+      expect(gov?.faction, `${tier} ${JSON.stringify(prio)}`).toBe(seat);
+      expect(gov.desc.startsWith(MIXED), gov.desc).toBe(false);
+    }
   });
 
-  it.each([7, 8])('soak1k-%i: the governing card does not claim "no clear dominant authority"', async (i) => {
+  it('soak1k-7, -8: the governing card does not claim "no clear dominant authority"', async () => {
     await ensureLaws();
-    const gov = birth(i).settlement.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning);
-    expect(gov.desc).not.toContain('without a clear dominant authority');
-  }, 60_000);
+    for (const i of [7, 8]) {
+      const gov = birth(i).settlement.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning);
+      expect(gov.desc, `soak1k-${i}`).not.toContain('without a clear dominant authority');
+    }
+  }, 120_000);
 });
 
 describe('SW-B1 · §2·D #7: one card governs — the noble houses name the seat they stand behind', () => {
-  it.each([4, 10])('soak1k-%i: no non-governing card claims to be "the governing authority here"', async (i) => {
+  it('soak1k-4, -10: no non-governing card claims to be "the governing authority here"', async () => {
     await ensureLaws();
-    const factions = birth(i).settlement.powerStructure.factions;
-    const gov = factions.find((/** @type {any} */ f) => f.isGoverning);
-    for (const f of factions) if (!f.isGoverning) expect(f.desc, f.faction).not.toMatch(/the governing authority here/);
-    const noble = factions.find((/** @type {any} */ f) => /^Hereditary landowners behind the /.test(f.desc || ''));
-    if (noble) expect(noble.desc).toContain(`behind the ${gov.faction};`);
-  }, 60_000);
+    for (const i of [4, 10]) {
+      const factions = birth(i).settlement.powerStructure.factions;
+      const gov = factions.find((/** @type {any} */ f) => f.isGoverning);
+      for (const f of factions) if (!f.isGoverning) expect(f.desc, `soak1k-${i}: ${f.faction}`).not.toMatch(/the governing authority here/);
+      const noble = factions.find((/** @type {any} */ f) => /^Hereditary landowners behind the /.test(f.desc || ''));
+      if (noble) expect(noble.desc, `soak1k-${i}`).toContain(`behind the ${gov.faction};`);
+    }
+  }, 120_000);
 });
