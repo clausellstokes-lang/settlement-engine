@@ -80,7 +80,7 @@ function annotationBody(ev, relationship, suffix) {
 
   // relationship: 'unresolved' | 'recovery' | 'drift'
   const effectClause = effect
-    ? ` The lasting consequence (${effect.charAt(0).toLowerCase() + effect.slice(1)}) remains structurally embedded.`
+    ? ` What it left behind (${effect.charAt(0).toLowerCase() + effect.slice(1)}) is still part of the place.`
     : '';
 
   if (relationship === 'unresolved') {
@@ -105,13 +105,13 @@ function annotationBody(ev, relationship, suffix) {
 // functions is byte-identical.
 const MUNDANE_LEGACY_VOICE = {
   drift: [
-    'the institutions founded in its wake carry embedded civic status that traces to the authority established then.',
+    'the institutions founded after it still hold the authority they were given then.',
     'the offices raised to answer it never gave the standing back. That authority is still theirs.',
     'the families who took charge of it kept the charge, and the town still defers to them.',
     'the emergency powers of that season quietly became the ordinary order of the place.',
   ],
   unresolved: [
-    'the settlement\'s relationship between the scholars who studied it and civic governance has been uncertain since.',
+    'the scholars who studied it and the settlement\'s rulers have never settled which of them has the say.',
     'no one ever settled who answers for it, and the question surfaces again in every hard year.',
     'the records of it are contested, and so is the authority that rests on them.',
     'the town has never agreed whether what happened then was a warning or a windfall.',
@@ -157,19 +157,19 @@ function scoreEvent(ev, legState, prosState, foodState, factions, magicFunctions
   if (type === 'political') {
     if (legState === 'fractured' && yrs <= maxAge('political', 'legitimacy')) {
       relationship = 'unresolved';
-      suffix = 'the governing authority\'s current legitimacy deficit has structural roots that precede the present situation.';
+      suffix = 'people\'s distrust of those who rule today began here, before the present troubles.';
       score = 90 + sevBonus;
     } else if (legState === 'contested' && yrs <= maxAge('political', 'legitimacy')) {
       relationship = 'unresolved';
-      suffix = 'the present contestation of governing authority echoes rather than resolves that earlier disruption.';
+      suffix = 'the quarrel over who should rule today is the same quarrel, never settled.';
       score = 70 + sevBonus;
     } else if (prosState === 'prosperous' && yrs <= maxAge('political', 'institutional')) {
       relationship = 'recovery';
-      suffix = 'the current stability was built partly through reconstruction following that disruption.';
+      suffix = 'the present calm was partly built in the rebuilding that followed.';
       score = 45;
     } else if (yrs <= maxAge('political', 'governing_model')) {
       relationship = 'drift';
-      suffix = 'the governing arrangements in place today carry the shape of what was settled then.';
+      suffix = 'the way the settlement is ruled today was largely settled then.';
       score = 30;
     }
   }
@@ -177,23 +177,23 @@ function scoreEvent(ev, legState, prosState, foodState, factions, magicFunctions
   if (type === 'economic') {
     if (prosState === 'stressed' && yrs <= maxAge('economic', 'current_economy')) {
       relationship = 'unresolved';
-      suffix = 'current economic pressure has structural antecedents. The present situation reflects dependencies established then.';
+      suffix = 'the present money troubles began then, in what the settlement came to depend on.';
       score = 85 + sevBonus;
     } else if (foodState === 'crisis' && yrs <= maxAge('economic', 'current_food')) {
       relationship = 'unresolved';
-      suffix = 'the supply vulnerabilities visible today have historical antecedents in this disruption.';
+      suffix = 'the food shortages of today began with it.';
       score = 80;
     } else if (prosState === 'prosperous' && yrs <= maxAge('economic', 'institutional')) {
       relationship = 'recovery';
-      suffix = 'current commercial strength is accumulated recovery. The present prosperity was built on what was reconstructed.';
+      suffix = 'the trade that keeps the settlement prosperous today was rebuilt, piece by piece, after it.';
       score = 50;
     } else if (['Dominant','Strong'].includes(mercPow) && yrs <= maxAge('economic', 'faction_balance')) {
       relationship = 'drift';
-      suffix = 'commercial interests have held structural relevance since. The present merchant faction\'s strength is accumulated rather than sudden.';
+      suffix = 'the merchants have mattered here ever since, and their power today was built up slowly over the years.';
       score = 40;
     } else if (['Minor','Suppressed'].includes(mercPow) && yrs > 20 && yrs <= maxAge('economic', 'faction_balance')) {
       relationship = 'drift';
-      suffix = 'commercial interests have since lost the structural position they held. The present weakness reflects that displacement.';
+      suffix = 'the merchants lost the place they held then, and have never won it back.';
       score = 35;
     }
   }
@@ -201,11 +201,11 @@ function scoreEvent(ev, legState, prosState, foodState, factions, magicFunctions
   if (type === 'disaster') {
     if (prosState === 'stressed' && yrs <= maxAge('disaster', 'current_economy')) {
       relationship = 'unresolved';
-      suffix = 'the settlement has not fully insulated itself from the pressures that calamity revealed.';
+      suffix = 'the settlement is still exposed to the hardships that calamity showed it.';
       score = 80 + sevBonus;
     } else if (legState !== 'fractured' && prosState !== 'stressed' && yrs <= maxAge('disaster', 'institutional')) {
       relationship = 'recovery';
-      suffix = 'the institutional adaptations built during that crisis remain part of the settlement\'s structural character.';
+      suffix = 'the changes made to get through that crisis are still how the place works today.';
       score = 40;
     }
   }
@@ -215,15 +215,15 @@ function scoreEvent(ev, legState, prosState, foodState, factions, magicFunctions
     const isStrong = ['Dominant','Strong'].includes(relPow);
     if (isWeak && yrs > 60 && yrs <= maxAge('religious', 'institutional')) {
       relationship = 'drift';
-      suffix = 'the religious institution\'s structural prominence has declined significantly since. The settlement\'s current secular character reflects a long displacement.';
+      suffix = 'the faith has lost much of its hold here since, and the settlement now runs its affairs with little say from the clergy.';
       score = 55;
     } else if (isStrong && yrs > 60 && yrs <= maxAge('religious', 'institutional')) {
       relationship = 'drift';
-      suffix = 'religious institutional prominence has been sustained since. The present strength is accumulated rather than recent.';
+      suffix = 'the faith has kept its hold here ever since, and its strength today was built up over the years.';
       score = 45;
     } else if (yrs <= maxAge('religious', 'faction_balance')) {
       relationship = 'unresolved';
-      suffix = 'the tension between religious and secular authority it created has not been conclusively settled.';
+      suffix = 'the quarrel it started between the clergy and the settlement\'s rulers has never been settled.';
       score = 35;
     }
   }
@@ -240,13 +240,13 @@ function scoreEvent(ev, legState, prosState, foodState, factions, magicFunctions
     if (['Dominant','Strong'].includes(arcPow) && yrs <= maxAge('magical', 'institutional')) {
       relationship = 'drift';
       suffix = arcaneVoice
-        ? 'arcane institutions carry embedded civic status that traces to the authority established then.'
+        ? 'the arcane houses still hold the standing in public affairs they were given then.'
         : mundaneLegacyVoice(ev, 'drift');
       score = 50;
     } else if (yrs <= maxAge('magical', 'institutional')) {
       relationship = 'unresolved';
       suffix = arcaneVoice
-        ? 'the settlement\'s relationship between arcane practitioners and civic governance has been uncertain since.'
+        ? 'the mages and the settlement\'s rulers have never settled which of them has the say.'
         : mundaneLegacyVoice(ev, 'unresolved');
       score = 30;
     }
