@@ -66,3 +66,19 @@ describe('the per-section rerolls are the premium owner\'s (law (1))', () => {
     }, 60000);
   }
 });
+
+// THE NARRATIVE FAMILY STAYS AT PARITY (the chair's ruling, 2026-11-09): the narrative re-rolls
+// rewrite no settlement data — they re-tell the record in credit-metered AI prose (metering,
+// not access) — so the free owner holds them as the premium owner does. Pinned as they are.
+describe('the narrative re-rolls stay open to every owner (metering, not access)', () => {
+  test('Daily Life: the free and the premium owner both hold the (re)generate button, no tier read', async () => {
+    const { DailyLifeTab } = await import('../../src/components/new/tabs/DailyLifeTab.jsx');
+    for (const tier of ['premium', 'free']) {
+      setViewer(tier);
+      Object.assign(mocks.state, { aiDailyLife: { morningScene: 'Bells over the square.' }, requestDailyLife: vi.fn() });
+      render(React.createElement(DailyLifeTab, { settlement: town(), saveId: 's1', onRequestDailyLife: () => {} }));
+      expect(screen.getByRole('button', { name: /Generate Daily Life/ }), tier).toBeTruthy();
+      cleanup();
+    }
+  });
+});
