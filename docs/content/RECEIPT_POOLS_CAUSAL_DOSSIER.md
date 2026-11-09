@@ -815,7 +815,7 @@ the reader.
 3. `[visitor · home]` Ask in {settlement} where to make an offering and you get two answers and a pause: since the ruler pressed the tithe question, the town cannot agree which house speaks for {creed}.
 4. `[elder · home]` The old hands at {settlement} can name the season the argument stopped being about revenue. It has been {timeband_span}, and the two halves still keep separate feasts, which is how the town knows the split took.
 5. `[counterforce · home]` The tithe at {settlement} is where it was and {temple} still has one congregation: the hall pushed, the temple held, and the hall lost support for nothing.
-6. `[unfolding · home]` The stain the church quarrel left on {settlement}'s seat is fading, slowly and on its own schedule, and the faction that lost the contest is waiting it out rather than conceding it.
+6. `[unfolding · home]` The stain the church quarrel left on {settlement}'s seat is fading, slowly and on its own schedule, and the power that lost the contest is waiting it out rather than conceding it.
 
 ---
 
@@ -956,10 +956,10 @@ the reader.
 
 1. `[ledger · split]` {settlement}'s council is split over which threat is the real one and has been {timeband_since}; both halves are reading the same reports, and neither will move first.
 2. `[street · split]` Two answers come back to any question at {settlement} about {counterpart}, depending on which door it was asked at; the hall has not been of one mind since the reports stopped agreeing.
-3. `[visitor · split]` Travellers at {settlement} are asked, carefully, what they saw on the road, and then asked again by someone else: both factions want eyes they can trust.
+3. `[visitor · split]` Travellers at {settlement} are asked, carefully, what they saw on the road, and then asked again by someone else: both powers want eyes they can trust.
 4. `[ledger · split]` {house} is finished at {settlement} and the seat that acted on its account is not much better off: the exposure charged the buyer as heavily as the maker, and both entries are still on the books.
 5. `[counterforce · split]` {settlement}'s council knew what was coming and did nothing: the warning was heard, and nothing was decided.
-6. `[unfolding · split]` The faction shouted down at {settlement} was right, and it has gained support with every event since; the ruler who overruled it is losing it.
+6. `[unfolding · split]` The power shouted down at {settlement} was right, and it has gained support with every event since; the ruler who overruled it is losing it.
 
 ---
 
@@ -1004,7 +1004,7 @@ the reader.
 
 1. `[ledger · successor]` {settlement} keeps a treaty its present seat never swore; the signature belongs to the government before this one, and nobody has yet said aloud whether that matters.
 2. `[street · successor]` The hall at {settlement} is in new hands and the terms are in the old ones. What the seat before this one promised {counterpart} is still being delivered, by people who describe it as somebody else's promise.
-3. `[visitor · successor]` The treaty displayed at {settlement} bears a name found nowhere else in town: the faction that signed it is long gone, and the town kept the paper.
+3. `[visitor · successor]` The treaty displayed at {settlement} bears a name found nowhere else in town: the power that signed it is long gone, and the town kept the paper.
 4. `[unfolding · successor]` {settlement}'s new hall read the inherited compact, kept it, and has been earning off the keeping ever since. The credibility that came back is worth more than the clause it honoured.
 5. `[counterforce · successor]` {settlement} still keeps every treaty term from before its ruler fell: no new ruler has chosen to break them.
 6. `[elder · successor]` {settlement}'s repudiation is {timeband_age} and it still costs. The town disavowed a dead government's signature, was understood for it, and has been quietly paying a smaller price at every table since.
@@ -1143,7 +1143,7 @@ the reader.
 3. `[visitor · home]` Nobody from {temple} stands beside {settlement}'s rulers at the hall's announcements any more, and the whole town has noticed.
 4. `[counterforce · home]` {settlement}'s ruler keeps no patron, so the temple's disfavour changed nothing: it was public, and the hall lost no support by it.
 5. `[elder · home]` This has happened at {settlement} before and the seat it happened to did not last; the old hands are not predicting anything, they are counting, and the counting is public.
-6. `[unfolding · home]` Support for {settlement}'s ruler has fallen low enough that the factions who were waiting have stopped waiting; the temple's withdrawal unseated nobody, but it made the unseating easy.
+6. `[unfolding · home]` Support for {settlement}'s ruler has fallen low enough that the powers who were waiting have stopped waiting; the temple's withdrawal unseated nobody, but it made the unseating easy.
 
 ---
 

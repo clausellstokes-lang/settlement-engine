@@ -2210,7 +2210,7 @@ life.
 **PDF PARITY:** parity.
 
 **clear top rung, low instability** {colour}
-1. `[ledger]` {npc} sits at the top of {faction} at {settlement} with a clear gap below, and the gap has held long enough that the faction plans as though it will keep holding.
+1. `[ledger]` {npc} sits at the top of {faction} at {settlement} with a clear gap below, and the gap has held long enough that the power plans as though it will keep holding.
 2. `[street]` Inside {faction} at {settlement} there is one person to see and everybody knows who; the rungs below are for people who are waiting rather than climbing.
 3. `[visitor]` Deal with {faction} at {settlement} and you are sent up once, to {npc}, and there the matter is settled.
 
@@ -2220,14 +2220,14 @@ life.
 3. `[unfolding]` The people at the top of {faction} at {settlement} stand so close together that the lead could change hands without anything else happening first.
 
 **high instability (churn at the top)** {colour}
-1. `[ledger]` The head of {faction} at {settlement} has changed more than once lately, and the faction gets less done for it: each new head spends a season learning who answers to whom.
+1. `[ledger]` The head of {faction} at {settlement} has changed more than once lately, and the power gets less done for it: each new head spends a season learning who answers to whom.
 2. `[street]` {faction} at {settlement} keeps replacing whoever leads it, and the town has stopped bothering to learn the name until it has lasted a season.
 3. `[visitor]` Anyone who struck a bargain with {faction} at {settlement} within the year may find that person off the rung and the bargain gone with them, and has to start again.
-4. `[unfolding]` Turnover at the head of {faction} at {settlement} is eating the faction's real reach; each new arrangement at the top costs it another season of whatever the last one was building.
+4. `[unfolding]` Turnover at the head of {faction} at {settlement} is eating the power's real reach; each new arrangement at the top costs it another season of whatever the last one was building.
 
 **low instability, long-held order** {colour}
 1. `[ledger]` The order inside {faction} at {settlement} is settled. The people on its top rungs stand well apart, and nobody is fighting for a higher rung.
-2. `[elder]` Nobody has moved on the top rung of {faction} at {settlement} in a long while, and the faction's weight in the hall reflects the steadiness.
+2. `[elder]` Nobody has moved on the top rung of {faction} at {settlement} in a long while, and the power's weight in the hall reflects the steadiness.
 3. `[counterforce]` There are people below {npc} in {faction} at {settlement} with the standing to try, and none of them tries; the settled order is worth more to them than the rung would be.
 
 **shallow ladder (few rungs recorded)** {colour}
@@ -2559,7 +2559,7 @@ and therefore a `[counterforce]` cell.
 cell in this shape.
 
 **layer DORMANT (no ledger materialized)** {colour}
-1. `[ledger]` The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.
+1. `[ledger]` The hall at {settlement} is not organized into sides. The powers sit apart, and nothing binds any two of them into anything larger.
 2. `[street]` There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.
 3. `[visitor]` Nobody at {settlement} is allied with anybody; each house acts alone.
 
@@ -2621,7 +2621,7 @@ cell in this shape.
 
 **end `patron`** {colour}
 1. `[ledger · dm-only]` What the combination at {settlement} serves is somebody's interest rather than the town's, and the somebody is not always in the town.
-2. `[street · dm-only]` The combination at {settlement} serves an interest, and the interest is not a faction of this town and is not always in it.
+2. `[street · dm-only]` The combination at {settlement} serves an interest, and the interest is not one of this town's powers and is not always in it.
 3. `[unfolding · dm-only]` The governing houses at {settlement} take their orders from someone who never comes to the hall.
 
 **receipt `formed`** {colour}
@@ -3025,9 +3025,9 @@ the ledger).
 3. `[ledger]` War orders at {settlement} fix prices and set curfews, and they are enforced whenever someone is looking.
 
 **COMPOUND: political fracture** {colour}
-1. `[street]` Which faction holds a district of {settlement} decides which rules apply there.
-2. `[visitor]` Cross a street at {settlement} and you may cross from one faction's rules into another's.
-3. `[ledger]` Each faction at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+1. `[street]` Which power holds a district of {settlement} decides which rules apply there.
+2. `[visitor]` Cross a street at {settlement} and you may cross from one power's rules into another's.
+3. `[ledger]` Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
 
 **COMPOUND: succession crisis** {colour}
 1. `[street]` With nobody clearly in charge at {settlement}, those who keep order are unsure whose orders to follow, and petty crime has risen in the gap.
@@ -4639,9 +4639,9 @@ draws at most one of each.
 7. `[street · no walls]` The occupiers are quartered inside the town, and the town's business is conducted around them.
 
 **POLITICALLY FRACTURED** · `politically_fractured`
-1. `[ledger]` Nothing is decided. The factions each hold enough to block and none hold enough to rule, so the work of governing sits unattended.
+1. `[ledger]` Nothing is decided. The powers each hold enough to block and none hold enough to rule, so the work of governing sits unattended.
 2. `[unfolding]` Authority here is divided past the point of use. Repairs, judgments and appointments all wait on a consensus that does not arrive.
-3. `[street]` Each faction runs its own part of the town, and nothing that needs all of them gets decided.
+3. `[street]` Each power runs its own part of the town, and nothing that needs all of them gets decided.
 4. `[street]` Ask who runs {settlement} and you get two or three different names.
 5. `[ledger]` Two sets of instructions circulate in {settlement} and the clerks have quietly decided which to obey.
 6. `[visitor]` In {settlement} people want to know whose side you are on before they answer a simple question.
@@ -4919,7 +4919,7 @@ the mechanism behind it.
 3. `[visitor]` The seat is contested from within its own institution; there is no rebellion here, only two governments wearing the same name.
 
 **ORIGIN: `popular_revolt`**
-1. `[street]` The streets rose on their own. No faction owns this yet, which is what makes it dangerous to everyone.
+1. `[street]` The streets rose on their own. No power owns this yet, which is what makes it dangerous to everyone.
 2. `[visitor · market]` The market square empties at the same hour every evening; somewhere people are meeting, and nobody organized them from above.
 3. `[unfolding]` A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popular, and genuinely leaderless.
 
@@ -5044,18 +5044,18 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 2. `[official]` {settlement}'s own leaders have been handed back the small matters of governing.
 
 **DIRECTION: `worsening` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
-1. `[local]` The quarrel among {settlement}'s factions grows sharper each week, and neighbours who took different sides have stopped speaking.
-2. `[official]` Each faction in {settlement} now blocks the others more often than it acts, and less gets decided every season.
+1. `[local]` The quarrel among {settlement}'s powers grows sharper each week, and neighbours who took different sides have stopped speaking.
+2. `[official]` Each power in {settlement} now blocks the others more often than it acts, and less gets decided every season.
 3. `[traveller]` Ask who governs {settlement} and you get a different answer in every street, and the answers are angrier than they were.
-4. `[watch]` Fights between {settlement}'s factions break out more often now, and each side keeps its own people close at hand.
+4. `[watch]` Fights between {settlement}'s powers break out more often now, and each side keeps its own people close at hand.
 
 **DIRECTION: `stable` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
-1. `[local]` {settlement}'s factions have settled into a stand-off: none gains ground, and none gives any.
-2. `[official]` Nothing gets decided in {settlement} that more than one faction must agree to, and that has been so for months.
+1. `[local]` {settlement}'s powers have settled into a stand-off: none gains ground, and none gives any.
+2. `[official]` Nothing gets decided in {settlement} that more than one power must agree to, and that has been so for months.
 
 **DIRECTION: `easing` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
-1. `[local]` {settlement}'s factions have begun talking again, and some matters are being settled without a quarrel.
-2. `[official]` One by one, {settlement}'s factions are agreeing on small things, and the business of governing is moving again.
+1. `[local]` {settlement}'s powers have begun talking again, and some matters are being settled without a quarrel.
+2. `[official]` One by one, {settlement}'s powers are agreeing on small things, and the business of governing is moving again.
 
 **DIRECTION: `worsening` · CRISIS: `indebted`** {crisis: indebted}
 1. `[trade]` {settlement}'s debt is growing faster than it can pay, and the creditor asks for more each time.
@@ -5143,7 +5143,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 
 **DIRECTION: `worsening` · CRISIS: `insurgency`** {crisis: insurgency}
 1. `[official]` Each week more of {settlement}'s officials stop answering to those in charge, and their orders go unheeded.
-2. `[local]` More of {settlement}'s households side openly with the faction against the government now, and stop paying it their dues.
+2. `[local]` More of {settlement}'s households side openly with the power that defies the government now, and stop paying it their dues.
 3. `[trade]` Fewer merchants in {settlement} pay what the government asks, and more pay its rivals instead.
 4. `[watch]` Those in charge of {settlement} trust fewer of their own officers each week, and cannot tell which have changed sides.
 
@@ -5153,7 +5153,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 
 **DIRECTION: `easing` · CRISIS: `insurgency`** {crisis: insurgency}
 1. `[official]` Officials who had turned away from {settlement}'s government are coming back to it one by one.
-2. `[local]` Fewer households in {settlement} side with the faction now, and the dues are being paid again.
+2. `[local]` Fewer households in {settlement} side with the power that defies the government now, and the dues are being paid again.
 
 **DIRECTION: `worsening` · CRISIS: `religious_conversion`** {crisis: religious_conversion}
 1. `[local]` The quarrel over {settlement}'s faith is turning bitter: families split, and old friends no longer pray together.
@@ -5456,7 +5456,7 @@ is `reading.seniorCleric.role`; `{faction}` is `reading.religiousFaction.name`;
 **PRIVATE DOSSIER** {colour}
 1. `[street]` In {settlement} the faith is kept at {houses}.
 2. `[ledger]` The senior cleric in {settlement} holds the rank of {cleric}.
-3. `[visitor]` Among the factions of {settlement}, the faith's party is the {faction}.
+3. `[visitor]` Among {settlement}'s powers, the faith's party is the {faction}.
 4. `[elder]` Folk in {settlement} keep their observances {observance}.
 
 **PUBLIC / SHARED DOSSIER** {colour}
@@ -6256,7 +6256,7 @@ unchanged.
 1. `[ledger · dm-only]` {faction} holds {band} of the power in {settlement}, a town goods pass through; part of what passes is smuggled, so more trade moves than the market tallies show, and the town collects nothing on the rest.
 2. `[street · dm-only]` More moves through {settlement} than is written down, and someone takes a cut of the difference.
 3. `[visitor]` {settlement} handles more goods than its books show; some leakage is normal in a crossing town, but here it is large.
-4. `[counterforce]` {faction} is strong in {settlement} and the transit trade is clean; whatever the faction takes, it does not take it off the road.
+4. `[counterforce]` {faction} is strong in {settlement} and the transit trade is clean; whatever the power takes, it does not take it off the road.
 
 **`power_economic`: powerful criminal faction in a prosperous settlement** {crisis-scoped}
 1. `[ledger · dm-only · crisis: any]` {faction} holds {band} of the power in {settlement}, and much of the town's wealth never reaches the tax lists, so the treasury is poorer than the town looks.

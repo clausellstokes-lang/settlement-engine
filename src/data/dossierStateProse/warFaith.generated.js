@@ -5117,7 +5117,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Among the factions of {settlement}, the faith's party is the {faction}.",
+          "text": "Among {settlement}'s powers, the faith's party is the {faction}.",
           "slots": [
             "settlement",
             "faction"

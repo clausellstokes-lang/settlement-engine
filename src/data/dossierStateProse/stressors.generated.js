@@ -241,7 +241,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "POLITICALLY FRACTURED": [
         {
           "angle": "ledger",
-          "text": "Nothing is decided. The factions each hold enough to block and none hold enough to rule, so the work of governing sits unattended.",
+          "text": "Nothing is decided. The powers each hold enough to block and none hold enough to rule, so the work of governing sits unattended.",
           "slots": [],
           "vid": 1
         },
@@ -253,7 +253,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Each faction runs its own part of the town, and nothing that needs all of them gets decided.",
+          "text": "Each power runs its own part of the town, and nothing that needs all of them gets decided.",
           "slots": [],
           "vid": 3
         },
@@ -2020,7 +2020,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: popular_revolt": [
         {
           "angle": "street",
-          "text": "The streets rose on their own. No faction owns this yet, which is what makes it dangerous to everyone.",
+          "text": "The streets rose on their own. No power owns this yet, which is what makes it dangerous to everyone.",
           "slots": [],
           "vid": 1
         },
@@ -3033,7 +3033,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: worsening · CRISIS: politically_fractured": [
         {
           "angle": "local",
-          "text": "The quarrel among {settlement}'s factions grows sharper each week, and neighbours who took different sides have stopped speaking.",
+          "text": "The quarrel among {settlement}'s powers grows sharper each week, and neighbours who took different sides have stopped speaking.",
           "slots": [
             "settlement"
           ],
@@ -3041,7 +3041,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "official",
-          "text": "Each faction in {settlement} now blocks the others more often than it acts, and less gets decided every season.",
+          "text": "Each power in {settlement} now blocks the others more often than it acts, and less gets decided every season.",
           "slots": [
             "settlement"
           ],
@@ -3057,7 +3057,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "watch",
-          "text": "Fights between {settlement}'s factions break out more often now, and each side keeps its own people close at hand.",
+          "text": "Fights between {settlement}'s powers break out more often now, and each side keeps its own people close at hand.",
           "slots": [
             "settlement"
           ],
@@ -3067,7 +3067,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: stable · CRISIS: politically_fractured": [
         {
           "angle": "local",
-          "text": "{settlement}'s factions have settled into a stand-off: none gains ground, and none gives any.",
+          "text": "{settlement}'s powers have settled into a stand-off: none gains ground, and none gives any.",
           "slots": [
             "settlement"
           ],
@@ -3075,7 +3075,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "official",
-          "text": "Nothing gets decided in {settlement} that more than one faction must agree to, and that has been so for months.",
+          "text": "Nothing gets decided in {settlement} that more than one power must agree to, and that has been so for months.",
           "slots": [
             "settlement"
           ],
@@ -3085,7 +3085,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: easing · CRISIS: politically_fractured": [
         {
           "angle": "local",
-          "text": "{settlement}'s factions have begun talking again, and some matters are being settled without a quarrel.",
+          "text": "{settlement}'s powers have begun talking again, and some matters are being settled without a quarrel.",
           "slots": [
             "settlement"
           ],
@@ -3093,7 +3093,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "official",
-          "text": "One by one, {settlement}'s factions are agreeing on small things, and the business of governing is moving again.",
+          "text": "One by one, {settlement}'s powers are agreeing on small things, and the business of governing is moving again.",
           "slots": [
             "settlement"
           ],
@@ -3531,7 +3531,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "local",
-          "text": "More of {settlement}'s households side openly with the faction against the government now, and stop paying it their dues.",
+          "text": "More of {settlement}'s households side openly with the power that defies the government now, and stop paying it their dues.",
           "slots": [
             "settlement"
           ],
@@ -3583,7 +3583,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "local",
-          "text": "Fewer households in {settlement} side with the faction now, and the dues are being paid again.",
+          "text": "Fewer households in {settlement} side with the power that defies the government now, and the dues are being paid again.",
           "slots": [
             "settlement"
           ],
