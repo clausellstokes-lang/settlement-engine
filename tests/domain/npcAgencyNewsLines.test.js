@@ -17,7 +17,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { evaluateNpcRules, pressureIndex } from '../../src/domain/worldPulse/index.js';
-import { NPC_DRIVE_REASON, NPC_ROLE_NOUN, NPC_ROLE_REASON, npcCandidateReasons } from '../../src/domain/worldPulse/eventProse.js';
+import { NPC_DRIVE_REASON, NPC_GOAL_NEWS, NPC_ROLE_MEANS, NPC_ROLE_NOUN, NPC_ROLE_REASON, npcCandidateReasons } from '../../src/domain/worldPulse/eventProse.js';
 import { NPC_ROLE_ARCHETYPES } from '../../src/domain/worldPulse/npcAgency.js';
 
 /** One NPC under heavy legitimacy pressure, so its preferred reform/expose move fires. */
@@ -52,7 +52,9 @@ describe('A2·171 — the ideal prints once, without the state token', () => {
     const action = actionOf({ ideal: 'corrupted_mercy', corruption: true });
     const all = action.reasons.join(' ');
     expect(all, 'the ideal is in the reasons').toContain('mercy');
+    // anchored: the toContain above proves the joined reasons live and holding the ideal.
     expect(all, 'no doubled word').not.toMatch(/corrupted corrupted/i);
+    // anchored: the same live string as the line above.
     expect(all, 'no state token').not.toMatch(/corrupted_/);
   });
 
@@ -60,6 +62,7 @@ describe('A2·171 — the ideal prints once, without the state token', () => {
     const action = actionOf({ ideal: 'corrupted_order', corruption: false });
     const all = action.reasons.join(' ');
     expect(all, 'the ideal is in the reasons').toContain('order');
+    // anchored: the toContain above proves the joined reasons live and holding the ideal.
     expect(all, 'the token never prints').not.toMatch(/corrupted/i);
   });
 });
@@ -116,5 +119,42 @@ describe("A2·169–171 — the move's reasons in plain words", () => {
     // and the four tellings of the four bands are sixteen distinct sentences
     const all = new Set(NPC_DRIVE_REASON.flatMap((v) => BANDS.map(([p, a]) => v({ name: 'N', hard: p > 0.66, hungry: a > 0.7 }))));
     expect(all.size).toBe(16);
+  });
+});
+
+/** A long ambition at its threshold, so the culmination beat fires. */
+function culminationOf(overrides = {}) {
+  const out = evaluateNpcRules(actorSnapshot({ goalProgress: { short: 0, long: 0.9 }, ...overrides }), PRESSURE, { tick: 5 });
+  const c = out.find((x) => x.candidateType === 'npc_goal_culmination');
+  expect(c, 'the culmination fires').toBeTruthy();
+  return c;
+}
+
+describe('B·2–4 — a long ambition achieved, said in words', () => {
+  const MACHINERY = /goal progress|threshold|Role: |; goal:|the \w+ role|path gave|"|_/;
+
+  it('the aim is the worded goal, never the quoted token, on every telling of every cell', () => {
+    for (let tick = 0; tick < 24; tick += 1) {
+      const c = evaluateNpcRules(actorSnapshot({ goalProgress: { short: 0, long: 0.9 } }), PRESSURE, { tick })
+        .find((x) => x.candidateType === 'npc_goal_culmination');
+      expect(c.summary).toContain('secure an office');
+      for (const line of [c.summary, ...c.reasons]) {
+        expect(line).toContain('Ilse Brandt');
+        // anchored: the toContain above proves the line live.
+        expect(line, line).not.toMatch(MACHINERY);
+      }
+    }
+  });
+
+  it('the role is said as the means the NPC worked through, for every role', () => {
+    expect(Object.keys(NPC_ROLE_MEANS).sort()).toEqual(Object.keys(NPC_ROLE_ARCHETYPES).sort());
+    const c = culminationOf({ roleArchetype: 'merchant' });
+    expect(c.reasons[1]).toContain(NPC_ROLE_MEANS.merchant);
+  });
+
+  it('the four tellings of each cell stay four (a pool size move shifts every pick)', () => {
+    for (const cell of ['headline', 'summary', 'progressReason', 'roleReason']) {
+      expect(NPC_GOAL_NEWS.culmination[cell], cell).toHaveLength(4);
+    }
   });
 });

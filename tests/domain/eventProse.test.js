@@ -35,6 +35,8 @@ const SAMPLE_INTERP = Object.freeze({
   // W-E (J-D4) — the sampled ground the lifecycle.founded.summary_site pool names.
   place: 'the river bank',
   goal: 'secure office', role: 'heir', previous: 'town|local|',
+  // STYLE-2-PULSE-FOLLOWUP B·2–4: the culmination's worded aim and the role's means.
+  aim: 'secure an office', means: 'on the strength of their claim',
   next: 'town|vassal|war pressure', ideal: 'order', flaw: 'pride',
   // THE ROADS tokens (ENGINE LIFT #5) — the roads.* pools read these.
   npc: 'Sir Aldric', home: 'Ashford', dest: 'Briar', captor: 'Corvin', purpose: 'trade',

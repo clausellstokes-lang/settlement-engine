@@ -99,23 +99,26 @@ export const NPC_GOAL_NEWS = Object.freeze({
       (x) => `${x.name} claims a long-sought prize`,
       (x) => `${x.name} brings a long ambition to its end`,
     ],
+    // B·2–4 (STYLE-2-PULSE-FOLLOWUP): the aim is said in words (`aim`, npcAgency's worded
+    // long goal, never the quoted token), the meter and the role token leave the page, and the
+    // role is said as the means the NPC worked through (`means`, NPC_ROLE_MEANS).
     summary: [
-      (x) => `${x.name} has worked toward "${x.goal}" for a long while, and now seizes it.`, // canonical
-      (x) => `After a long pursuit of "${x.goal}", ${x.name} has at last made it real.`,
-      (x) => `${x.name}'s patient work toward "${x.goal}" has paid off; the prize is now in hand.`,
-      (x) => `The long design to "${x.goal}" has borne fruit for ${x.name}.`,
+      (x) => `${x.name} has worked a long while to ${x.aim}, and now it is done.`, // canonical
+      (x) => `After long work, ${x.name} has managed to ${x.aim}.`,
+      (x) => `Those who watched ${x.name} work so long to ${x.aim} now see it done.`,
+      (x) => `${x.name} set out long ago to ${x.aim}, and the others who hold sway must now reckon with it.`,
     ],
     progressReason: [
-      (x) => `${x.name}'s long-term goal progress reached its culmination.`, // canonical
-      (x) => `${x.name}'s long design had ripened into action.`,
-      (x) => `The accumulated work toward "${x.goal}" could no longer be deferred.`,
-      (x) => `Patient effort finally carried ${x.name}'s ambition across the threshold.`,
+      (x) => `${x.name} had been working toward this for a long while.`, // canonical
+      (x) => `It came after a long stretch of patient work by ${x.name}.`,
+      (x) => `${x.name} kept at it, move after move, until it came.`,
+      (x) => `Many small moves by ${x.name} led here.`,
     ],
     roleReason: [
-      (x) => `Role: ${x.role}; goal: ${x.goal}.`, // canonical
-      (x) => `${x.name} pursued "${x.goal}" from the position of ${x.role}.`,
-      (x) => `The ${x.role} path gave ${x.name} the means to pursue "${x.goal}".`,
-      (x) => `For ${x.name}, "${x.goal}" had become the defining aim of the ${x.role} role.`,
+      (x) => `${x.name} got there ${x.means}.`, // canonical
+      (x) => `${x.name} did it ${x.means}.`,
+      (x) => `${x.name} reached it ${x.means}.`,
+      (x) => `${x.name} won it ${x.means}.`,
     ],
     conditionDescription: [
       (x) => `${x.name} has consolidated power, shifting the local balance.`, // canonical
@@ -219,18 +222,27 @@ export function npcAmbitionWord(ambition) {
  * @type {Readonly<Record<string, string>>}
  */
 export const NPC_ROLE_NOUN = Object.freeze({
-  ruler: 'a ruler',
-  heir: 'an heir',
-  military: 'a soldier',
-  merchant: 'a merchant',
-  religious: 'a person of the faith',
-  criminal: 'someone outside the law',
-  arcane: 'a person of learning',
-  civic: 'a citizen',
-  healer: 'a healer',
-  labor_resource: 'a working hand',
-  diplomat_outsider: 'someone with ties abroad',
-  dissident: 'a dissenter',
+  ruler: 'a ruler', heir: 'an heir',
+  military: 'a soldier', merchant: 'a merchant',
+  religious: 'a person of the faith', criminal: 'someone outside the law',
+  arcane: 'a person of learning', civic: 'a citizen',
+  healer: 'a healer', labor_resource: 'a working hand',
+  diplomat_outsider: 'someone with ties abroad', dissident: 'a dissenter',
+});
+
+/**
+ * How an NPC of each role gets what it works for, said as a means (B·4, STYLE-2-PULSE-
+ * FOLLOWUP): the role's own influence basis in plain words. `civic` is npcAgency's default
+ * when no other title matched, so it claims no office.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const NPC_ROLE_MEANS = Object.freeze({
+  ruler: 'through the authority they hold', heir: 'on the strength of their claim',
+  military: 'with armed followers behind them', merchant: 'with money and trade at their back',
+  religious: 'with the faith behind them', criminal: 'through crooked dealings',
+  arcane: 'on the strength of their learning', civic: 'through the people they deal with every day',
+  healer: 'through the trust their healing has earned', labor_resource: 'with the working hands who stand with them',
+  diplomat_outsider: 'through their ties abroad', dissident: 'with the crowd behind them',
 });
 
 /** @param {string} s @returns {string} */

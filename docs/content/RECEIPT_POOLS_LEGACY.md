@@ -747,12 +747,13 @@ CADENCE: notable → floor 6 · live 4 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a long design come to a head" · headline · progressReason · roleReason · conditionDescription · causeReason pools, ×4 each [J-LEG-2]
 LAW ONE: a culmination changes a standing, never a fate.
-1. {npc} has worked toward "{goal}" for a long while, and now seizes it. `[live, verbatim]`
-2. After a long pursuit of "{goal}", {npc} has at last made it real. `[live, verbatim]`
-3. {npc}'s patient work toward "{goal}" has paid off; the prize is now in hand. `[live, verbatim]`
-4. The long design to "{goal}" has borne fruit for {npc}. `[live, verbatim]`
-5. {npc} has held to "{goal}" through a long run of setbacks and has now closed a hand on it.
-6. The work {npc} has been doing toward "{goal}" is finished, and the town will learn shortly what that means for it.
+SLOT NOTE (STYLE-2-PULSE-FOLLOWUP, 2026-11-09, B·2): {aim} is the worded long goal (heraldDeeds.js :: NPC_AIMS, an infinitive phrase: "secure an office"), never the quoted goal token.
+1. {npc} has worked a long while to {aim}, and now it is done. `[live, verbatim]`
+2. After long work, {npc} has managed to {aim}. `[live, verbatim]`
+3. Those who watched {npc} work so long to {aim} now see it done. `[live, verbatim]`
+4. {npc} set out long ago to {aim}, and the others who hold sway must now reckon with it. `[live, verbatim]`
+5. {npc} held on through a long run of setbacks, and has now managed to {aim}.
+6. {npc} has managed at last to {aim}, and everyone will learn soon enough what that means.
 
 ### npc_goal_rebranch — R3 news summary — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 4 · +2
