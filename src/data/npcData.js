@@ -1157,6 +1157,10 @@ export const FACTION_CONFLICT_TYPES = {
   other: ['economy', 'government'],
 };
 
+// SW-10 HOOKS (2026-11-09): the category pools grown to the measured size (other 40; government, economy,
+// military 24; religious, criminal, small_settlement 18) so a city's cards stop reprinting one town's hooks in the
+// next — the 1,000's hooks figure 0.299 / 0.355 → 0.154 / 0.202; every new line (each pool's tail) is a proposal
+// for the owner's veto, listed in docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md.
 export const NPC_FACTION_LOYALTY = {
   government: [
     "A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.",
@@ -1243,6 +1247,34 @@ export const NPC_FACTION_LOYALTY = {
     "They've been offered money to not ask questions about something they hadn't even started asking about.",
     'A document they were asked to witness contained a clause they noticed at the time and said nothing about.',
     "Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.",
+    'A neighbour has accused them of moving a fence, and the neighbour has witnesses who were not there.',
+    "They lent their savings to a friend who has since left, and the friend's family says there was no loan.",
+    'Their landlord has doubled the rent and will lower it only if they report on the family next door.',
+    'A letter addressed to them was opened before it arrived, and the sender says it carried money.',
+    'Their son has been seen at night with people who do not work, and comes home with coin.',
+    'A customer paid them with a ring that someone else has reported stolen.',
+    'They saw an accident that was no accident, and the person responsible knows they saw it.',
+    "An inheritance they did not expect has arrived from a relative they never met, along with that relative's debts.",
+    'Their spouse has been making payments to someone every month for years, and will not say who.',
+    'Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.',
+    'They told a lie to protect a friend, and the friend is now repeating it to people who matter.',
+    'A child they took in as a favour has family who want the child back, and want paying for the years.',
+    "Their best customer owes them a year's takings and has started avoiding their street.",
+    'Someone has been asking the neighbours what time they leave in the morning and when they come home.',
+    'A tool they lent out came back broken, and the borrower insists it was broken when it left.',
+    'They have been invited to the wedding of someone who once ruined their family, and refusing would be noticed.',
+    'A purse they found and kept has a rightful owner, and that owner has started asking around.',
+    'Their partner in a small venture has disappeared with the takings and left the debts in their name.',
+    'A family they look after has stopped answering the door, and the shutters have stayed closed for a week.',
+    'They agreed to hold a parcel for a traveller, and two different people have since come to collect it.',
+    'An old letter of theirs, written in anger years ago, has been shown to the person it was about.',
+    'Their apprentice has been talking to a rival, and came back with an offer to buy them out.',
+    'Someone keeps paying off their small debts around the place before they can, and has left no name.',
+    'A cousin has arrived to stay without warning, and spends every day watching one particular house.',
+    'They found a name scratched into their door overnight, and it belongs to someone who died last winter.',
+    'Their savings were hidden in a place only one other person knew, and the savings are gone.',
+    "A neighbour's quarrel with them has gone before the people who settle disputes, and the hearing is next week.",
+    'Someone close to them has been ill in a way nobody can name, and recovers whenever one particular visitor stays away.',
   ],
   small_settlement: [
     'Everyone in the settlement is behaving slightly differently toward a visitor from outside. Not unfriendly, careful.',
