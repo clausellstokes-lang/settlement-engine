@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 168,
+      "dated": 169,
       "sha-pin": 2,
       "tree": 149
     },
@@ -394,6 +394,7 @@
     "_rosterGrowth2026-11-08-merge-wave-fix-arrow": "THE UNION AT THE FIX-ARROW-SECTIONS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 167 -> 168 (docs/chair/2026-11-08/FIX-ARROW-SECTIONS-RECORD-2026-11-08.md); the count measured once by the walker; nothing changed class.",
     "_rosterGrowth2026-11-08-merge-wave-chain": "EIGHT documents JOINED the roster by being BORN into it (MERGE-WAVE step 2, the chain; session session_01FbPLbdbKovNtK8Fx32oQ24): `tree` 139 -> 147, measured once by this walker at 0c93f0ca0: docs/shift-records/2026-11-08-merge-wave-1-w1-eco.json, -2-w2-def, -3-w3-pow, -4-w4-people, -5-w5-his, -6-w7-hooks, -7-food-isolation and -8-public-veil, the wave's eight signed chain records, born into the tree class. GROWTHS that hid nothing: 0 past-EOF of their own; pastEofCitationsExcluded unchanged. The bump was owed in each record's own commit (9288badee onward) and is carried here, the chair's ruling of 2026-11-09.",
     "_rosterGrowth2026-11-09-merge-wave-manifest": "ONE document JOINED the roster by being BORN into it (MERGE-WAVE step 3, the manifest once; session session_01FbPLbdbKovNtK8Fx32oQ24): `tree` 147 -> 148, measured by this walker: docs/shift-records/2026-11-08-merge-wave-9-composed-prose-manifest.json, the wave's record 9, born into the tree class, carried in the push that lands it. A GROWTH that hid nothing: 0 past-EOF of its own.",
+    "_rosterGrowth2026-11-09-fix-buy-button": "ONE document JOINED the roster by being BORN into it (seat FIX-BUY-BUTTON, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/fix-buy-button-2026-11-09 cut at 464887416, on the owner's word of 2026-11-09 to drop the price from the dossier buy button): `dated` 168 -> 169, docs/chair/2026-11-09/FIX-BUY-BUTTON-2026-11-09.md, the lane's record, born dated, 0 past-EOF.",
     "_rosterGrowth2026-11-09-merge-wave-docks": "ONE document JOINED the roster by being BORN into it (MERGE-WAVE record 10, the docks read, the chair's ruling (a) of 2026-11-09; session session_01FbPLbdbKovNtK8Fx32oQ24): `tree` 148 -> 149, measured by this walker: docs/shift-records/2026-11-08-merge-wave-10-docks-read.json, born into the tree class, carried in the push that lands it. A GROWTH that hid nothing: 0 past-EOF of its own."
   },
   "rows": []
