@@ -98,7 +98,7 @@ export const CORRUPT_SHORT_GOAL = Object.freeze({
   hunger_for_status: 'Trade quiet favours upward, buying a seat above their station.',
   fear: 'Stay useful to the wrong people so they stay breathing.',
   forbidden_patron: 'Answer, in secret, to a patron no one is meant to know.',
-  fanaticism: 'Bend every rule for the cause and call the corruption devotion.',
+  fanaticism: 'Bend every rule for the cause, and call it devotion.',
 });
 
 const IMPORTANCE_ORDER = Object.freeze(['pillar', 'key', 'notable', 'minor']);
