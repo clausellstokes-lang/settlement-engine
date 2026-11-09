@@ -22,6 +22,7 @@ import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 // their drawn sentences to one `<p>` EACH; ProseBlock weaves each position into one
 // paragraph. The DRAW is unchanged — these are the same strings `drawnAtMount` ruled on.
 import ProseBlock from '../ProseBlock.jsx';
+import WhoRunsThisTownPanel from './WhoRunsThisTownPanel.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
@@ -462,6 +463,12 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
+
+      {/* ── WHO REALLY RUNS THIS TOWN (allegiance design §9, car 3) ─────────────
+          The DM's view beneath the criminal underside: the ruling three, who answers to whom,
+          the fronts, the hall and the boosts. DM LAYER ONLY — never on a player view or a
+          public dossier (the W7 receipt ruling); it names hidden allegiances. */}
+      {!publicDossier && !playerView && <WhoRunsThisTownPanel settlement={s} />}
 
       {/* ── BLOCS AND THE DIVIDED COURT (DS-POW-7) ───────────────────────────
           Whether the hall is organized into sides at all, what binds the first

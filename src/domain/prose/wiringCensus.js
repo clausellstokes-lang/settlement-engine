@@ -1250,6 +1250,7 @@ export function censusSummary(rows, held) {
  * @type {ReadonlyArray<string>}
  */
 export const COVERT_SOURCES = Object.freeze([
+  // the bought watch (corruptionLeash.js since ALLEGIANCE-CAR3: the LOCAL axis, a security face's hidden allegiance)
   'compromisedSecurityInstitutions',
   'npc.corrupt',
   'corruptNpc',

@@ -25,9 +25,9 @@
  * (corruption, clergy plane) — no religion-engine cycle.
  */
 
-import {
-  hasCorruptingDeity, compromisedSecurityInstitutions,
-} from '../corruption.js';
+import { hasCorruptingDeity } from '../corruption.js';
+// the bought watch on the LOCAL axis (ALLEGIANCE-CAR3): moved beside the allegiance reader, a lazy leaf
+import { compromisedSecurityInstitutions } from '../corruptionLeash.js';
 import { readClergyPlane } from './clergyTraitPlane.js';
 
 /** @typedef {'economic'|'war'|'faith'|'corruption'} CauseFamily */

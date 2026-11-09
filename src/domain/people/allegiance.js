@@ -36,7 +36,7 @@
  * THE HANDLERS (A4, `assignHandlers`), after the rank deal, DRAW-FREE (J-10), so a save's migration
  * and a birth pick the same handler: agents by standing (best rank, importance, roster order) dealt
  * in order to handlers (the criminal power's second, third, other members, then the crim-house faces
- * by house weight, the boss last and only when no one else can); the remainder goes to the last.
+ * by house weight, the boss last and only when no one else can); the deal goes round the pool (J-10 amended).
  *
  * Pure apart from the keyed draws; no clock, no Math.random.
  */
@@ -66,8 +66,9 @@ export const ALLEGIANCE_FORK_LABEL = 'people-allegiance';
  * powerBonus fraction01 · share share · frontWeight multiplier.
  */
 export const ALLEGIANCE_TUNING = Object.freeze({
-  /** organized crime's weight on the birth chance, added inside the spawn clamp (J-5) */
-  organizedCrime: 0.10,
+  /** organized crime's weight on the birth chance, added inside the spawn clamp (J-5); 0.10 → 0.05 by
+   *  ALLEGIANCE-CAR3's measured band (towns with no criminal power within ±3 points of the base, §5) */
+  organizedCrime: 0.05,
   /** the summed criminal-house backing weight at which organized crime reads 1 */
   organizedFull: 8,
   /** organized crime's step when an independent criminal power stands */
@@ -78,6 +79,9 @@ export const ALLEGIANCE_TUNING = Object.freeze({
   frontWeight: 1,
   /** a weight-0 criminal house's backing weight in the organized-crime sum (the design's "0 → 0.5") */
   weightZeroHouse: 0.5,
+  /** the boss joins the handlers' round only when every other handler would otherwise carry more than this
+   *  many agents (J-10's boss-last, its fallback sense; the chair's ruling of 2026-11-08, ALLEGIANCE-CAR3) */
+  bossJoinsAbove: 4,
 });
 
 export const ALLEGIANCE_VECTORS = Object.freeze(['greed', 'hunger_for_status', 'fear', 'forbidden_patron', 'fanaticism']);
@@ -333,12 +337,15 @@ const importanceKey = (card) => { const i = IMPORTANCE_ORDER.indexOf(str(rec(car
 /**
  * The handler pool of a criminal power or house, in dealing order (§1.5, J-10): the power's rank 2,
  * rank 3, its other members (roster order), then the crim-house faces by house weight descending
- * (roster order) — the boss (the power's rank 1) last and only when no one else can. Never a card
- * holding an allegiance.
+ * (roster order) — the boss (the power's rank 1) last and only when no one else can: when the pool holds
+ * no one else, or (given `agentCount`) when every other handler would otherwise carry more than
+ * `ALLEGIANCE_TUNING.bossJoinsAbove` agents (the chair's ruling, ALLEGIANCE-CAR3). Never a card holding an
+ * allegiance.
  * @param {Rec[]} cards @param {string | null} power @param {Map<string, Rec>} crimHouses
+ * @param {number} [agentCount] the agents the pool is to handle (omitted: the boss joins only an empty pool)
  * @returns {Rec[]}
  */
-export function handlerPoolOf(cards, power, crimHouses) {
+export function handlerPoolOf(cards, power, crimHouses, agentCount = 0) {
   const free = cards.filter((c) => c && c.id != null && !allegianceOf(c));
   /** @type {Rec[]} */
   const order = [];
@@ -363,15 +370,20 @@ export function handlerPoolOf(cards, power, crimHouses) {
     .filter(({ card }) => rec(card.institution).kind === 'house' && crimHouses.has(str(rec(card.institution).key)))
     .sort((a, b) => (weightOf(b.card) - weightOf(a.card)) || (a.at - b.at))
     .forEach(({ card }) => { if (!order.includes(card) && card !== boss) order.push(card); });
-  return order.length ? order : (boss ? [boss] : []);
+  if (!order.length) return boss ? [boss] : [];
+  if (boss && Math.ceil(agentCount / order.length) > ALLEGIANCE_TUNING.bossJoinsAbove) order.push(boss);
+  return order;
 }
 
 /**
  * A4 — THE HANDLERS, DRAW-FREE (J-10). Every allegiance on the cast whose handler is unset (or names
  * no card on the roster) is dealt one: per pool (the allegiance's power, else the houses), the agents
  * by standing — best rank (1 < 2 < 3 < none), importance (pillar > key > notable > minor), roster
- * order — go in order to the pool's handlers; when agents outnumber handlers the remainder goes to
- * the last. Returns the cards it dealt a handler to. Mutates `allegiance.handler` in place.
+ * order — go in order to the pool's handlers; when agents outnumber handlers the deal goes ROUND
+ * the pool again (J-10 AMENDED BY CAUSE, the chair's ruling of 2026-11-08 on ALLEGIANCE-CAR3's band
+ * census: "the remainder to the last" piled ten agents on one handler beside five with one each, which
+ * fails the owner's law of plausibility), so no handler of a pool carries more than
+ * ceil(agents / handlers). Returns the cards it dealt a handler to. Mutates `allegiance.handler` in place.
  * @param {Rec[]} cards @param {unknown} settlement @returns {Rec[]}
  */
 export function assignHandlers(cards, settlement) {
@@ -392,11 +404,11 @@ export function assignHandlers(cards, settlement) {
   /** @type {Rec[]} */
   const dealt = [];
   for (const [key, group] of pools) {
-    const handlers = handlerPoolOf(cards, key.startsWith('power:') ? key.slice(6) : null, crimHouses);
+    const handlers = handlerPoolOf(cards, key.startsWith('power:') ? key.slice(6) : null, crimHouses, group.length);
     if (!handlers.length) continue;
     group.sort((x, y) => (bestRank(x.card) - bestRank(y.card)) || (importanceKey(x.card) - importanceKey(y.card)) || (x.at - y.at));
     group.forEach((x, i) => {
-      const handler = handlers[Math.min(i, handlers.length - 1)];
+      const handler = handlers[i % handlers.length];
       rec(x.card.allegiance).handler = String(handler.id);
       dealt.push(x.card);
     });

@@ -146,6 +146,75 @@ describe('the checks are live — each reds on a planted violation (the controls
   });
 });
 
+/**
+ * J-10 AMENDED BY CAUSE (the chair's ruling, 2026-11-08, on ALLEGIANCE-CAR3's band census): THE ROUND-ROBIN DEAL.
+ * The remainder is dealt around the pool's handlers, never piled on the last — no handler of a pool carries more than
+ * ceil(the pool's agents / its handlers). Read on the raw record: each agent's pool is its allegiance's power (else the
+ * houses), and the pool's handler count is the distinct handlers its agents were dealt (a pool deals to its first
+ * min(agents, handlers) handlers, so that count is the pool size the deal used).
+ * @param {any} s @returns {string[]}
+ */
+export function roundRobinFindings(s) {
+  const pools = new Map();
+  for (const n of s?.npcs || []) {
+    const a = n?.allegiance;
+    if (!a || typeof a.handler !== 'string') continue;
+    const key = a.power ? `power:${a.power}` : 'houses';
+    if (!pools.has(key)) pools.set(key, new Map());
+    const load = pools.get(key);
+    load.set(a.handler, (load.get(a.handler) || 0) + 1);
+  }
+  const out = [];
+  for (const [key, load] of pools) {
+    const agents = [...load.values()].reduce((x, y) => x + y, 0);
+    const cap = Math.ceil(agents / load.size);
+    for (const [h, n] of load) if (n > cap) out.push(`J-10 ${key}: handler ${h} carries ${n} of ${agents} agents over ${load.size} handlers (cap ${cap})`);
+  }
+  return out;
+}
+
+describe('J-10 amended — the round-robin deal (no handler above ceil(agents / handlers) in its pool)', () => {
+  it('holds on every town of the slice, and the slice holds a pool with more agents than handlers (anti-vacuity)', async () => {
+    const towns = await born();
+    expect(towns.flatMap(({ i, s }) => roundRobinFindings(s).map((f) => `soak1k-${i} ${f}`))).toEqual([]);
+    const crowded = towns.filter(({ s }) => {
+      const per = new Map();
+      for (const n of s.npcs || []) if (n?.allegiance?.handler) { const k = n.allegiance.power || 'houses'; per.set(k, (per.get(k) || new Set()).add(n.allegiance.handler)); }
+      const agents = new Map();
+      for (const n of s.npcs || []) if (n?.allegiance?.handler) { const k = n.allegiance.power || 'houses'; agents.set(k, (agents.get(k) || 0) + 1); }
+      return [...agents].some(([k, a]) => a > 2 * per.get(k).size);
+    });
+    expect(crowded.length).toBeGreaterThan(0);
+  }, 300_000);
+
+  // THE RESIDUE, RULED (the chair, 2026-11-08, vetoable by the owner): soak1k-537's shape — five agents, a pool of ONE
+  // non-boss handler (the guild's second) and the boss sitting out under J-10's boss-last rule. The boss joins the round
+  // ONLY when every other handler would otherwise carry more than ALLEGIANCE_TUNING.bossJoinsAbove (4): the fallback sense
+  // of boss-last and nothing more. (soak1k-849 — the boss the town's only criminal face — is supply-bound: named in the record.)
+  it('the boss joins the round only when every other handler would carry more than 4 (a planted 537-shaped record)', async () => {
+    const { assignHandlers } = await import('../../../src/domain/people/allegiance.js');
+    const settlement = {
+      institutions: [{ name: 'Street gang' }, { name: 'Front businesses' }],
+      powerStructure: { factions: [{ faction: 'Town Council', power: 70, isGoverning: true }, { faction: "Thieves' Guild", power: 30, category: 'criminal' }] },
+    };
+    const boss = { id: 'boss', institution: { kind: 'house', key: 'Street gang' }, memberships: [{ power: "Thieves' Guild", rank: 1, share: 1 }] };
+    const second = { id: 'second', institution: { kind: 'house', key: 'Front businesses' }, memberships: [{ power: "Thieves' Guild", rank: 2, share: 0.7 }] };
+    const agent = (i) => ({ id: `a${i}`, institution: { kind: 'house', key: `House ${i}` }, memberships: [],
+      allegiance: { power: "Thieves' Guild", house: 'Street gang', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true } });
+    const deal = (n) => { const cards = [boss, second, ...Array.from({ length: n }, (_, i) => agent(i))].map((c) => JSON.parse(JSON.stringify(c))); assignHandlers(cards, settlement); return cards.filter((c) => c.allegiance).map((c) => c.allegiance.handler); };
+    const load = (hs) => hs.reduce((m, h) => ((m[h] = (m[h] || 0) + 1), m), {});
+    // five agents: the second alone would carry 5 > 4, so the boss joins the round
+    expect(load(deal(5))).toEqual({ second: 3, boss: 2 });
+    // four agents: the second carries 4, not more than 4 — the boss stays out (boss-last holds)
+    expect(load(deal(4))).toEqual({ second: 4 });
+  });
+
+  it('the control: ten agents piled on the last of six handlers read as a finding', () => {
+    const npcs = Array.from({ length: 15 }, (_, i) => ({ id: `a${i}`, allegiance: { power: 'G', handler: `h${Math.min(i, 5)}` } }));
+    expect(roundRobinFindings({ npcs }).length).toBe(1);
+  });
+});
+
 describe('I-13 — keyed determinism: removing a card moves no other card\'s roll', () => {
   it('the deal over a born cast with one card removed leaves every other card\'s allegiance byte-identical', async () => {
     const { dealAllegiances } = await import('../../../src/domain/people/allegiance.js');

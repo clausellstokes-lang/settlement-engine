@@ -45,6 +45,7 @@ import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './v
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { dmPowerViewOf } from '../../domain/people/patronage.js';
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -130,7 +131,12 @@ export function buildViewModel({
   // anon export is byte-identical (the Faith & War chapter renders nothing, and
   // SettlementPDF additionally gates it on the faith premium seam).
   campaign = null,
-} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any }} */ ({})) {
+  // THE DM LAYER (the allegiance train, car 3, design §9): "who really runs this town" — hidden
+  // allegiances, handlers, covert ties, a hidden power's boost. Built ONLY when the caller asks
+  // (SettlementPDF, the DM's own dossier); the Foundry journal and every other caller leave it off,
+  // and the view model then carries no `dm` key at all (byte-identical).
+  dmView = false,
+} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any, dmView?: boolean }} */ ({})) {
   const raw = settlement || {};
   const ai = aiSettlement || null;
   const useAi = !!(narrativeMode && ai);
@@ -175,6 +181,8 @@ export function buildViewModel({
     hooks:         hooksSlice(active),
     relationships: relationshipsSlice(active),
     aiAppendix:    useAi ? appendixSlice(ai) : null,
+    // read from the canonical save (`raw`): the allegiance and the ranks are owner facts
+    ...(dmView ? { dm: dmPowerViewOf(raw) } : {}),
   };
 }
 

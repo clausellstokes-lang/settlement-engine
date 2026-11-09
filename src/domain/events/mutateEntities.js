@@ -835,9 +835,9 @@ function imposeCorruption(s, event) {
   // Scope: 'individual_institution' captures the NPC's home institution too —
   // a COVERT 'corruption' impairment, not a public legitimacy hit (that is the
   // exposure consequence). It marks the institution as compromised in-chain:
-  // compromisedSecurityInstitutions reads a 'corruption'-typed impairment as
-  // 'revealed', so we keep this covert by stamping covert:true and letting the
-  // dossier surface it honestly. The NPC alone already homes the covert drag;
+  // compromisedSecurityInstitutions (corruptionLeash.js, the LOCAL axis since ALLEGIANCE-CAR3) reads a
+  // 'corruption'-typed impairment as 'revealed', so we keep this covert by stamping covert:true and letting
+  // the dossier surface it honestly. A security house's FACE holding the allegiance already homes the covert drag;
   // this extends a tangible institutional marker for the bigger scope.
   if (event.payload?.scope === 'individual_institution') {
     const homeName = npcHomeInstitution(corrupted);

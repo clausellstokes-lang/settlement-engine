@@ -30,7 +30,7 @@ import { join } from 'node:path';
 
 import { ROOT } from '../helpers/dossierCorpus.js';
 import { closureCost } from '../../scripts/lib/module-closure.mjs';
-import { compromisedSecurityInstitutions } from '../../src/domain/corruption.js';
+import { compromisedSecurityInstitutions } from '../../src/domain/corruptionLeash.js'; // moved by ALLEGIANCE-CAR3
 import { deskReturns } from '../../scripts/prose-rate-corpus.mjs';
 import {
   PAIRED_TOWN, securityInstitutionsOf, tasteTown, withCorruption,

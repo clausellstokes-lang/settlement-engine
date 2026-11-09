@@ -143,3 +143,37 @@ describe('DM power lines (WRITE-PEOPLE, design §9)', () => {
     expect(faultsOfText('', [])).toEqual(['empty']);
   });
 });
+
+/**
+ * NO TIER NOUN (ALLEGIANCE-CAR3, 2026-11-09; car 1's guard on the handler-tie lines, 61d065e9e): the DM view prints these
+ * lines in every tier, so none may name a tier ("the town's laws" in a city reads the soak's coh:tier-noun — 31 towns at
+ * car 3's tip). Every capture line over every agent shape, and every patronage line, is walked.
+ */
+describe('no line names a tier (the soak\'s coh:tier-noun)', () => {
+  const TIER = /\b(thorp|hamlet|village|town|city|metropolis)s?\b/i;
+  const shapes = [[], [A1], [A2], [A3], [A2, A3], [A1, A2], [A1, A2, A3]];
+  it('every capture and patronage line, under every agent shape, is tier-neutral', () => {
+    const hits = [];
+    for (const rung of CAPTURE_RUNGS) {
+      for (const agents of shapes) {
+        for (const rulerCriminal of [false, true]) {
+          CAPTURE_LINES[rung].forEach((line, v) => {
+            // a shape a rung's derivation never produces (a 'capture' line with no agent) is not this arm's to judge
+            let text;
+            try { text = line({ ruler: RULER, agents, rulerCriminal, underworld: UNDER }); } catch { return; }
+            if (TIER.test(text)) hits.push(`${rung}[${v}]: ${text}`);
+          });
+        }
+      }
+    }
+    for (const kind of /** @type {const} */ (['open', 'hidden'])) {
+      PATRONAGE_LINES[kind].forEach((line, v) => {
+        for (const rank of /** @type {const} */ ([1, 2, 3, 'steward'])) {
+          const text = line({ name: 'Face-One', rank, ruler: RULER, power: GUILD, share: 0.5, boost: 1.5 });
+          if (TIER.test(text)) hits.push(`${kind}[${v}]: ${text}`);
+        }
+      });
+    }
+    expect([...new Set(hits)]).toEqual([]);
+  });
+});
