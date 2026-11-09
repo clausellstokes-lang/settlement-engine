@@ -201,6 +201,7 @@ describe('collectPlotHooks tension titles', () => {
     });
     const sources = hooks.map((hook) => hook.source);
     expect(sources).toHaveLength(1);
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(sources[0]).not.toMatch(/_/);
     expect(sources[0]).toBe('Corruption Scandal');
   });

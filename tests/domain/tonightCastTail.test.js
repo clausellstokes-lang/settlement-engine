@@ -20,6 +20,7 @@ describe('the Tonight cast tail', () => {
       { type: 'monster_pressure', label: 'Beast & Raider Threat', cast: castOf('natural', 1, [row('brunt', 'a', 'Macrina Denter')]) },
       { type: 'mass_migration', label: 'Mass Migration', cast: castOf('natural', 2, [row('brunt', 'b', 'Hortensia Denter')]) },
     ]));
+    // anchored: the subject is the exact text asserted positively beside it (SW-6), so it cannot have drifted away
     expect(sheet.opening).not.toMatch(/\(bears the brunt\)/);
     expect(sheet.opening).toMatch(/The worst of it falls on Macrina Denter in the raids and on Hortensia Denter in the migration\.$/);
   });
@@ -30,6 +31,7 @@ describe('the Tonight cast tail', () => {
   it('a social crisis names its instigator in the hooks\' clause, never "the worst of it"', () => {
     const sheet = composeTonightSheet(town([{ type: 'recently_betrayed', label: 'Recently Betrayed', cast: castOf('social', 1, [row('instigator', 'c', 'Chae Liu')]) }]));
     expect(sheet.opening).toMatch(/Chae Liu is stirring it\.$/);
+    // anchored: the subject is the exact text asserted positively beside it (SW-6), so it cannot have drifted away
     expect(sheet.opening).not.toMatch(/\(instigator\)/);
   });
 });

@@ -33,6 +33,7 @@ describe('the seat-holders in plain words', () => {
       expect(enriched.length).toBeGreaterThan(0);
       for (const n of enriched) {
         expect(n.settlementCondition).toBe(condition);
+        // anchored: the subject is the exact text asserted positively beside it (SW-6), so it cannot have drifted away
         expect(`${n.structuralPosition} ${n.activeConstraint}`).not.toMatch(MACHINERY);
       }
     });

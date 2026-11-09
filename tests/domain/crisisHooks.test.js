@@ -174,6 +174,7 @@ describe('crisisHooksOf: the lever hook in plain grammar', () => {
   it('the roster\'s count and district tags never print in the sentence', () => {
     const loser = { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses };
     const war = crisisHooksOf(town(), { type: 'wartime', cast: { ...cast([], [lever('Blacksmiths (3-10)', 'Oswin Hale')], [loser]), nature: 'external' } });
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(war.map((h) => h.text).join(' ')).not.toMatch(/\(|\)/);
     expect(war[0].text).toMatch(/^The war turns on the blacksmiths, run by Oswin Hale: /);
     const inns = crisisHooksOf(town(), { type: 'mass_migration', cast: cast([], [lever('Inns and taverns (district)')]) });
@@ -187,6 +188,7 @@ describe('crisisHooksOf: a person is never "it"', () => {
   it('the legitimacy brunt\'s reason names the house that takes the blame, for a person or the house alike', () => {
     const [hook] = crisisHooksOf(town(), { type: 'famine', cast: cast([npcRow('brunt', 'n2', 'Oswin Hale', CAST_REASONS.bruntBase.public_legitimacy)]) });
     expect(hook.text).toBe('In the famine, Oswin Hale of Town Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.');
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(hook.text).not.toMatch(/: it takes/);
   });
 });
@@ -194,6 +196,7 @@ describe('crisisHooksOf: a person is never "it"', () => {
 // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3; C·P1, soak1k-7): "In the factional split, …" carried the retired word.
 describe('CRISIS_NOUN: no retired word', () => {
   it('no crisis is spoken of with "faction"', () => {
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(Object.values(CRISIS_NOUN).join(' ')).not.toMatch(/faction/i);
     expect(CRISIS_NOUN.politically_fractured).toBe('split');
   });

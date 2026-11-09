@@ -418,6 +418,7 @@ describe('STAKE_REASONS in plain words (SW-6)', () => {
   it('the losing house and the outranking rival are told in what the reader can see', () => {
     expect(STAKE_REASONS.loses).toBe('its own people feel the crisis first');
     expect(STAKE_REASONS.gainsRival).toBe('already carries more weight than whoever holds the seat');
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(Object.values(STAKE_REASONS).join(' ')).not.toMatch(/\bbase\b|outranks/);
   });
 });

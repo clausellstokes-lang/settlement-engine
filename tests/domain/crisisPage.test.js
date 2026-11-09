@@ -81,6 +81,7 @@ describe('the Crisis page: an untouched power is never "split"', () => {
     for (const section of composeCrisisPage(s)) {
       for (const k of section.stakes) {
         const printed = `${k.factionId}: ${CRISIS_PAGE_COPY.stake[k.stake]}. ${k.reason}.`;
+        // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
         expect(printed).not.toMatch(/split\. not touched/);
         if (/either camp/.test(k.reason)) expect(CRISIS_PAGE_COPY.stake[k.stake]).toBe('no stake yet');
       }

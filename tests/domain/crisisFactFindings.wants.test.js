@@ -19,7 +19,9 @@ describe('the cast want reads the crisis and the house (SW-6, #40)', () => {
   it('the want names the person\'s house or the crisis\'s scarce good, never a fixed line', () => {
     const want = castWantOf('brunt', 'p', 'mass_migration', '', 'Elder Council');
     expect(want).toMatch(/the people of the Elder Council|shelter/);
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(want).not.toMatch(/\{/);
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(Object.values(CAST_WANTS).flat().join(' ')).not.toMatch(/rather than/);
   });
   it('the checker passes the house-filled want and refuses another role\'s', () => {

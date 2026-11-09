@@ -12,7 +12,7 @@ import { MIGRATION_HOOK_BY_DIRECTION } from '../../src/generators/stressNarrativ
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { hookTruthViolations, settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
-import { crisisHookFor, crisisHooksOf } from '../../src/domain/crisis/crisisHooks.js';
+import { crisisHookFor, crisisHooksOf, houseInProse } from '../../src/domain/crisis/crisisHooks.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 import { CAST_EDIT_PATH, formatCastRoles } from '../../src/domain/crisis/crisisCast.js';
 import { composeCrisisPage } from '../../src/domain/crisis/crisisPage.js';
@@ -79,7 +79,7 @@ describe('a generated crisis adds the hooks its cast derives', () => {
     expect(hooks[0].text).toContain(holder.name);
     expect(hooks[0].text).toContain(holder.reason);
     expect(hooks[1].crisis).toBe('famine');
-    expect(hooks[1].text).toContain(entry.cast.levers[0].institution);
+    expect(hooks[1].text).toContain(houseInProse(entry.cast.levers[0].institution)); // SW-6 (4b1827494): re-keyed by identity — the house prints as prose
     expect('plotHooks' in entry).toBe(false); // read off the cast, never stored
   });
 
