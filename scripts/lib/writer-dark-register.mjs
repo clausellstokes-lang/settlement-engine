@@ -170,6 +170,26 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'index selected, never the index.',
     charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
+  // SW-B7b PROJECTION (2026-11-09, STYLE-RULINGS-2 B10(a)): the Economics tab's legacy `situationDesc` fallback LEFT with
+  // the economy desk's public branch (the shared page prints the owner's shipped DS-ECO-1 draw), so the key's one
+  // web-display read is gone. Its writer is its own lane's; what remains are the engine's own reads, named here.
+  Object.freeze({
+    identity: 'situationDesc on economicState',
+    key: 'situationDesc',
+    shape: 'economicState',
+    writer: 'src/generators/economy/economicState.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/narrativeGenerator.js',
+      symbol: 'the church-controls test, which reads the situation description to find a church-run economy',
+    }),
+    why: 'The generator\'s one-line economic situation was the public Economics lead only while the economy desk was '
+      + 'silent on a shared page. The desk now speaks there (the owner\'s player-view draw, shipped at the save), and '
+      + 'no owner view reached the line (0 of 300 towns), so the page reads DS-ECO-1 everywhere. The key stays written '
+      + 'for the engine: the narrative generator reads it for the church-run economy, and the coherence battery '
+      + 'reads it, both inside src/generators behind the closure STOP. Retiring the writer is its own lane\'s act.',
+    charter: 'ODQ §885.3 as lifted by STYLE-RULINGS-2 B10(a) (the chair, 2026-11-09 12:5x; SW-B7b item 6: the legacy fallbacks leave in their desks\' causes)',
+  }),
   // W2 DEF (2026-11-07, construction C3–C5, the third seat): the three §12 WRW-2 pending-surface rows —
   // `isolationSupport on settlement`, `magicDependent on isolationSupport`, `requiredCapacity on isolationSupport` —
   // LEFT this register. WIRING-RULINGS R-W1 (ODQ §934.105) ruled the finding SAID, and the new block DS-DEF-12

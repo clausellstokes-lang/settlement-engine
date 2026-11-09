@@ -75,7 +75,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const ctx = extractSettlementContext(r);
   // THE ECONOMY DESK, through its one caller. DS-ECO-8 — the prosperity rung read ON ITS
   // OWN — speaks HERE, and this is the only page-set position where it does.
-  const deskProse = economyDeskRead(r, { publicDossier, playerView, tier: r?.tier });
+  const deskProse = economyDeskRead(r, { publicDossier, playerView, publicSite: 'economy:daily_life', tier: r?.tier });
 
   const loading = isConfigured ? storeAiLoading : localLoading;
   const regenerating = isConfigured ? storeAiRegenerating : false;

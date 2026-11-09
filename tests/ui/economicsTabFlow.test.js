@@ -211,11 +211,14 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expectPresentThenAbsent(privText, pubText, FOOD_SENTENCE, 'public dossier gate: the DS-ECO-9 food-security sentence');
   });
 
-  test('the gate removes ONLY the corpus sentences — the header prose and every datum tile survive', () => {
+  test('the gate removes ONLY the corpus sentences — every datum tile survives, and the legacy lead has LEFT', () => {
     useStore.setState({ campaigns: [] });
     const { container } = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true }));
-    // The generator's own header prose is a DATUM, not corpus state prose: it stays.
-    expect(container.textContent).toContain('The market square keeps its hours.');
+    // RE-KEYED BY CAUSE (SW-B7b, STYLE-RULINGS-2 B10(a)): the generator's `situationDesc` was the
+    // public lead only because the desk was silent there. The shared page now prints the owner's
+    // shipped DS-ECO-1 draw, and an UNSTAMPED record (this one) prints silence, never the legacy
+    // line (no owner view reached it: 0 of 300 towns). The tiles below anchor the render.
+    expectAbsentWithAnchor(container.textContent, 'The market square keeps its hours.', 'lbs/day', 'the legacy situationDesc lead');
     // The glance tiles and their sub-lines are untouched.
     expect(container.textContent).toContain('Comfortable');
     expect(container.textContent).toContain('a market town');
@@ -668,13 +671,15 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
       expect(privText, `the cut ${lens} lens is on the page`).not.toContain(line); // anchored: the worth/workings lenses were asserted present on this render above
       expect(privText, `the cut ${lens} lens is on the page, stood down`).not.toContain(line.slice(GROUND.name.length)); // anchored: same render as above
     }
-    // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
-    // generator's own strategic-value line are the page's and are not corpus prose.
+    // The DATUM is untouched by the gate — the terrain word and the strengths chips are the
+    // page's and are not corpus prose.
     expect(pubText).toContain('Plains');
     expect(pubText).toContain('Grain production');
-    expect(pubText).toContain('agricultural heartland');
-    // ONE strategic-value sentence: where DS-ECO-11 speaks it, the generator's line yields.
-    expect(privText).not.toContain('agricultural heartland'); // anchored: toContain on pubText above, the same fixture
+    // ONE strategic-value sentence, DS-ECO-11's: the generator's rated line LEFT (SW-B7b; no owner
+    // view reached it, 0 of 300 towns), so it is on neither page; the record still carries it.
+    expect(GROUND.resourceAnalysis.strategicValue).toContain('agricultural heartland');
+    expectAbsentWithAnchor(pubText, 'agricultural heartland', 'Plains', 'the rated line, public');
+    expectAbsentWithAnchor(privText, 'agricultural heartland', GROUND_LINES.worth.slice(-24), 'the rated line, private');
   });
 
   test('services.catalogStanding: the gap sentence renders, and a public dossier renders none', () => {
@@ -1042,13 +1047,14 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     expect(container.textContent).toContain('mountain pass');
   });
 
-  test('T2-3: ONE header paragraph — DS-ECO-1 replaces situationDesc where the desk speaks; situationDesc stands on public', () => {
+  test('T2-3: ONE header paragraph — DS-ECO-1, and the legacy situationDesc lead on no view (SW-B7b)', () => {
     useStore.setState({ campaigns: [] });
     const priv = render(e(EconomicsTab, { settlement: SPEAKING, saveId: 'forge_town', publicDossier: false })).container.textContent;
     cleanup();
     const pub = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true })).container.textContent;
     expect(priv, 'the DM header speaks DS-ECO-1').toContain(HEADER_SENTENCE);
-    expectPresentThenAbsent(pub, priv, 'The market square keeps its hours.', 'situationDesc stands on public and yields to DS-ECO-1 on the DM view');
+    expectAbsentWithAnchor(priv, 'The market square keeps its hours.', HEADER_SENTENCE, 'situationDesc yields to DS-ECO-1 on the DM view');
+    expectAbsentWithAnchor(pub, 'The market square keeps its hours.', 'lbs/day', 'situationDesc no longer stands on an unstamped public page');
   });
 
   test('T2-4: the commercial profile draws no trade-profile lens, and the food narrative drops its generic trade-dependence sentence', () => {

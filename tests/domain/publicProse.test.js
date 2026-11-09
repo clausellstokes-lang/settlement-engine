@@ -10,7 +10,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  PUBLIC_PROSE_VERSION, publicProseOf, shippedProseOf, withPublicProse,
+  PUBLIC_PROSE_VERSION, aliasRepeatedRungs, publicProseOf, shippedProseOf, withPublicProse,
 } from '../../src/domain/display/publicProse.js';
 import { composePublicProse, PUBLIC_PROSE_SITES } from '../../src/components/new/publicProseCompose.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
@@ -75,5 +75,21 @@ describe('the composer', () => {
     const blocks = Object.fromEntries(sites.map((site) => [site, desk]));
     const projected = toPublicSafe({ name: 'x', publicProse: { v: PUBLIC_PROSE_VERSION, blocks } });
     expect(projected.publicProse).toEqual({ v: PUBLIC_PROSE_VERSION, blocks });
+  });
+});
+
+describe('the alias: a rung drawn identically at an earlier site is stored once', () => {
+  it('aliasRepeatedRungs + publicProseOf round-trip every site exactly', () => {
+    const other = { sentence: 'Other.' };
+    const blocks = { 'economy:economics': { a: desk, b: other }, 'economy:services': { a: desk, b: null }, 'economy:resources': { a: { sentence: 'New.' }, b: other } };
+    const stored = aliasRepeatedRungs(blocks);
+    expect(stored['economy:services'].a).toEqual({ '@': 'economy:economics' });
+    expect(stored['economy:resources'].b).toEqual({ '@': 'economy:economics' });
+    const r = { publicProse: { v: PUBLIC_PROSE_VERSION, blocks: stored } };
+    for (const site of Object.keys(blocks)) expect(publicProseOf(r, site)).toEqual(blocks[site]);
+  });
+  it('an alias to a site the record does not carry reads null, never another rung', () => {
+    const r = { publicProse: { v: PUBLIC_PROSE_VERSION, blocks: { 'economy:services': { a: { '@': 'economy:economics' } } } } };
+    expect(publicProseOf(r, 'economy:services')).toEqual({ a: null });
   });
 });

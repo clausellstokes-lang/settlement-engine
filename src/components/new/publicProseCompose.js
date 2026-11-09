@@ -23,31 +23,49 @@
  * Each desk family registers its sites below in its own cause, with its public branch lit in
  * the same commit.
  */
-import { PUBLIC_PROSE_VERSION, shippedProseOf } from '../../domain/display/publicProse.js';
+import { PUBLIC_PROSE_VERSION, aliasRepeatedRungs, shippedProseOf } from '../../domain/display/publicProse.js';
+import { economyDeskRead } from './economyDeskRead.js';
+import { economicsDeskArgs, impairedInstitutionOf } from './deskHostArgs.js';
+import { computeChainSets } from './tabHelpers.js';
+
 
 /**
  * THE SITES: one entry per desk call site whose public branch reads `publicProseOf(r, site)`.
- * Each composes the owner's player-view draw for that site from the owner's record.
- * @type {ReadonlyArray<readonly [string, (settlement: any) => any]>}
+ * Each composes the owner's player-view draw for that site from the owner's record: every call
+ * hands its desk reader the `publicDossier` this module RECEIVES (false at the save boundary,
+ * so the reader draws; the mount registry's ARM 3 reads the flag at the call) and
+ * `playerView: true` (the shared pages are player audiences).
+ * @type {ReadonlyArray<readonly [string, (settlement: any, publicDossier: boolean) => any]>}
  */
-export const PUBLIC_PROSE_SITES = Object.freeze([]);
+export const PUBLIC_PROSE_SITES = Object.freeze([
+  // THE ECONOMY DESK, one site per host (economyDeskRead.js is its one caller).
+  ['economy:economics', (s, publicDossier) => economyDeskRead(s, { publicDossier, playerView: true, tier: s?.tier, ...economicsDeskArgs(s) })],
+  ['economy:services', (s, publicDossier) => economyDeskRead(s, {
+    publicDossier, playerView: true, tier: s?.tier,
+    impairedInstitution: impairedInstitutionOf(s?.availableServices, computeChainSets(s).impaired),
+  })],
+  ['economy:resources', (s, publicDossier) => economyDeskRead(s, { publicDossier, playerView: true, tier: s?.tier })],
+  ['economy:daily_life', (s, publicDossier) => economyDeskRead(s, { publicDossier, playerView: true, tier: s?.tier })],
+].map((entry) => Object.freeze(entry)));
 
 /**
  * The projection for one owner record, or null with no record.
  * @param {any} settlement the OWNER's record (seed and all)
+ * @param {{publicDossier?: boolean}} [gate] the save boundary passes none: the owner draws. A
+ *   caller that says `publicDossier: true` gets every site SILENT, as the readers' gate rules.
  * @returns {{v: string, blocks: Record<string, unknown>}|null}
  */
-export function composePublicProse(settlement) {
+export function composePublicProse(settlement, { publicDossier = false } = {}) {
   if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return null;
   /** @type {Record<string, unknown>} */
   const blocks = {};
   for (const [site, draw] of PUBLIC_PROSE_SITES) {
     try {
-      const shipped = shippedProseOf(draw(settlement));
+      const shipped = shippedProseOf(draw(settlement, publicDossier));
       if (shipped !== null && shipped !== undefined) blocks[site] = shipped;
     } catch {
       // The site prints SILENT on the public page; the owner's own view is untouched.
     }
   }
-  return { v: PUBLIC_PROSE_VERSION, blocks };
+  return { v: PUBLIC_PROSE_VERSION, blocks: aliasRepeatedRungs(blocks) };
 }

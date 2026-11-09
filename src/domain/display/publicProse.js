@@ -46,7 +46,58 @@ export function publicProseOf(settlement, site) {
   const blocks = projection.blocks;
   if (!blocks || typeof blocks !== 'object') return null;
   const shipped = blocks[site];
-  return shipped === undefined ? null : shipped;
+  if (shipped === undefined) return null;
+  if (!shipped || typeof shipped !== 'object' || Array.isArray(shipped)) return shipped;
+  // THE ALIAS (one hop): a rung the save drew identically at an earlier site is stored once,
+  // as `{'@': <that site>}`, and resolved here to that site's rung under the same key.
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const [key, rung] of Object.entries(shipped)) {
+    const from = aliasOf(rung);
+    const target = from === null ? null : blocks[from];
+    out[key] = from === null ? rung
+      : (target && typeof target === 'object' && !Array.isArray(target)
+        ? (/** @type {Record<string, unknown>} */ (target)[key] ?? null) : null);
+  }
+  return out;
+}
+
+/**
+ * The site a stored rung aliases, or null when it is a rung itself.
+ * @param {unknown} rung @returns {string|null}
+ */
+function aliasOf(rung) {
+  if (!rung || typeof rung !== 'object' || Array.isArray(rung)) return null;
+  const keys = Object.keys(rung);
+  const from = /** @type {Record<string, unknown>} */ (rung)['@'];
+  return keys.length === 1 && typeof from === 'string' ? from : null;
+}
+
+/**
+ * The composer's half of the alias: every object-valued rung that an EARLIER site stored with
+ * the same key and the same text is replaced by `{'@': <that site>}`. Sites are visited in the
+ * blocks' own order, so an alias always points at a real rung.
+ * @param {Record<string, unknown>} blocks @returns {Record<string, unknown>}
+ */
+export function aliasRepeatedRungs(blocks) {
+  /** @type {Map<string, string>} */
+  const first = new Map();
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const [site, shipped] of Object.entries(blocks)) {
+    if (!shipped || typeof shipped !== 'object' || Array.isArray(shipped)) { out[site] = shipped; continue; }
+    /** @type {Record<string, unknown>} */
+    const rungs = {};
+    for (const [key, rung] of Object.entries(shipped)) {
+      if (!rung || typeof rung !== 'object') { rungs[key] = rung; continue; }
+      const id = `${key}\u0000${JSON.stringify(rung)}`;
+      const from = first.get(id);
+      if (from === undefined) first.set(id, site);
+      rungs[key] = from === undefined ? rung : { '@': from };
+    }
+    out[site] = rungs;
+  }
+  return out;
 }
 
 /**

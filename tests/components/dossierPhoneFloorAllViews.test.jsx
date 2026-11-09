@@ -88,6 +88,8 @@ vi.mock('../../src/lib/analytics.js', () => ({
 
 import OutputContainer from '../../src/components/OutputContainer.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { withPublicProse } from '../../src/domain/display/publicProse.js';
+import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
 
 /** A line long enough to be READ rather than glanced at — `chromeFontSize`'s own bound. */
 const MIN_CHARS = 45;
@@ -166,6 +168,11 @@ beforeAll(() => {
       },
     },
   };
+  // ⭐ STAMPED AS A SAVE STAMPS IT (SW-B7b, STYLE-RULINGS-2 B10(a)). `readOnly` with no saveId is
+  // the SHARED page, which prints the owner's player-view draws shipped at the save
+  // (`data.publicProse`); an unstamped town there is silent where a desk speaks. So the walk
+  // measures the shared page a viewer actually meets: the town as its save path writes it.
+  town = withPublicProse(town, composePublicProse(town));
 }, 120_000);
 
 /**
@@ -580,6 +587,9 @@ const desktopShape = (perView) => Object.fromEntries(
 // field; reached census-1b by the merge 950b75014) Institutions 65 -> 62 · b8fdcd3d5 (census-1e unit 1, the registry goal
 // lookup resolves through the one rule: a stable entry under an active crisis is refused and the NPC keeps its role
 // goal) NPCs 31 -> 23. sub14 follows measured.
+// ── RE-MEASURED 2026-11-09 (SW-B7b, the economy desk's public branch lit; the walk is the SHARED page, `readOnly` with no
+// saveId, so the fixture is stamped as its save stamps it): Economics 42 -> 46, Daily Life 0 -> 1; Resources holds (the
+// rated `strategicValue` line left, DS-ECO-11's draw stands in its place). No token moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -599,7 +609,7 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Institutions": { measured: 71, sub14: 71 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
-  "Systems/Economics":   { measured: 42, sub14: 42 },
+  "Systems/Economics":   { measured: 46, sub14: 46 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
   "Systems/Power":       { measured: 29, sub14: 28 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
@@ -630,7 +640,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 178, sub14: 176 },
   "World/Faith":         { measured: 1, sub14: 1 },
-  "World/Daily Life":    { measured: 0, sub14: 0 },
+  "World/Daily Life":    { measured: 1, sub14: 1 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
   "World/Traditions":    { measured: 1, sub14: 1 },
@@ -697,6 +707,9 @@ const DESKTOP_BASELINE = Object.freeze({
 // ── RE-MEASURED 2026-11-07 (LANDING-R2, the pool census composed): content moved, no token did; sub12 stays zero and the
 // floors arm is green. The same two steps as the desktop note: e152ee220 census-4 R8 (Institutions prose 64 -> 61) and
 // b8fdcd3d5 census-1e unit 1 (NPCs prose 30 -> 22); chrome and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b, the economy desk's public branch lit; the fixture now STAMPED as its save stamps it):
+// Economics prose 34 -> 38 (the desk's shipped lines; the legacy situationDesc lead left), Daily Life 0 -> 1 (DS-ECO-8);
+// the food-security line took the tab's prose floor (proseFontSize), so sub12 stays zero and the floors arm is green.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -713,7 +726,7 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 70, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
-  "Systems/Economics":   { prose: 34, chrome: 8, sub14: 8, sub12: 0 },
+  "Systems/Economics":   { prose: 38, chrome: 8, sub14: 8, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 28, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
@@ -733,7 +746,7 @@ const MOBILE_BASELINE = Object.freeze({
   "World/NPCs":          { prose: 283, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 139, chrome: 39, sub14: 39, sub12: 0 },
   "World/Faith":         { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Daily Life":    { prose: 0, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },

@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "22e017d5aad33248974bafe143fab1dda163345e",
+ "frozenAtSha": "4b6d182b0fe93e57436aba09950c60852fdfb0c0",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 22053
  },
  "shapesDigest": "a6129059778032a4c6a22653215aaa2492ba986fbb2e4c277eeb7595ea5b481c",
- "detectorDigest": "94ff9a2eac03cdbcc4781cb83d3a16da517a86cd8ba6ed874566e115af658568",
- "verdictDigest": "0d8531d91b3fd41608c11cae77bca91af953e9524e5c3e34d9b5e8dcd307217e",
+ "detectorDigest": "f645adf82830068476ab13a6442f0e716a77e3b3d0f3113bb5ef989a58e19cbe",
+ "verdictDigest": "a4731900e29faf72fd43e834a6bd6bc657e6b3c36f1a4272102d2eb643846cc3",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 756,
+  "web-display": 759,
   "web-transitive": 999,
-  "dossier-pdf": 509,
+  "dossier-pdf": 510,
   "campaign-pdf": 139,
   "world-book": 156,
   "foundry": 414,
@@ -84,26 +84,26 @@
  "population": {
   "judged": 12214,
   "lit": 671,
-  "litName": 10147,
-  "dark": 1396,
+  "litName": 10146,
+  "dark": 1397,
   "thinKeys": 17148,
   "thinShapes": 1202,
   "knownShapes": 532
  },
  "scanStats": {
-  "files": 1756,
-  "sites": 42062,
-  "propRead": 39832,
+  "files": 1759,
+  "sites": 42071,
+  "propRead": 39838,
   "elemRead": 0,
-  "destructure": 2212,
+  "destructure": 2215,
   "inOp": 18,
-  "rGrades": 6700,
-  "nGrades": 1698470,
-  "resolvedReceivers": 7605
+  "rGrades": 6699,
+  "nGrades": 1698546,
+  "resolvedReceivers": 7604
  },
- "registerDigest": "dd15a12aa7cc43e119c0888f44d73cb89e70b3c5a4a3a7c5527ab52d9f5f3124",
+ "registerDigest": "02d18ae944f371b18d1ba707c4e4a8559a97d24824117b30202143aca2c81a28",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 397,
+ "reviewableDarkCount": 398,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -9084,7 +9084,7 @@
   "priorities on economicState": "",
   "prosperity on economicState": "campaign-pdf=R dossier-pdf=R foundry=R news=R web-display=R web-transitive=R world-book=R",
   "safetyProfile on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "situationDesc on economicState": "web-display=N web-transitive=R",
+  "situationDesc on economicState": "web-transitive=R",
   "tier on economicState": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "tradeAccess on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "tradeDependencies on economicState": "dossier-pdf=R foundry=R web-display=R",
