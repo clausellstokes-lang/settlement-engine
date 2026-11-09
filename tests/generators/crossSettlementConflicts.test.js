@@ -18,6 +18,8 @@ import {
   generateCrossSettlementConflicts,
   generateCrossSettlementConflictsDeterministic,
   stableIdOf,
+  CONFLICT_NATURE_PLAIN,
+  plainConflictNature,
 } from '../../src/generators/crossSettlementConflicts.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -160,5 +162,36 @@ describe('crossSettlementConflicts — no ambient RNG (source pin)', () => {
     // anchored scans above, which prove `code` still holds executable body.
     // anchored: the two expectAbsentWithAnchor scans above pin `code` as live.
     expect(code).not.toMatch(/from\s+['"][^'"]*rngContext/);
+  });
+});
+
+describe('crossSettlementConflicts — the nature keys in plain words (STYLE-2 SW-4, A7)', () => {
+  const raw = readFileSync(
+    fileURLToPath(new URL('../../src/generators/crossSettlementConflicts.js', import.meta.url)),
+    'utf8',
+  );
+  const table = raw.slice(raw.indexOf('const CONFLICT_NATURE = {'), raw.indexOf('THE PLAIN WORDS FOR EACH CONFLICT NATURE'));
+  const keys = [...new Set([...table.matchAll(/'([^']+)'/g)].map((m) => m[1])), 'jurisdictional dispute'];
+
+  test('every nature key the table can draw (and the fallback) has its plain words, and nothing else does', () => {
+    expect(keys.length).toBeGreaterThan(50);
+    expect(keys.filter((k) => !CONFLICT_NATURE_PLAIN[k])).toEqual([]);
+    expect(Object.keys(CONFLICT_NATURE_PLAIN).sort()).toEqual([...keys].sort());
+    expect(plainConflictNature('supply chain dependency tension'))
+      .toBe('grievance over how much one side depends on the other for its goods');
+  });
+
+  test('every plain phrase takes the templates\' "a" (it starts on a consonant)', () => {
+    expect(Object.values(CONFLICT_NATURE_PLAIN).filter((v) => /^[aeiou]/i.test(v))).toEqual([]);
+  });
+
+  test('the description prints the plain words; the stored conflictNature stays the key', () => {
+    const out = generateCrossSettlementConflictsDeterministic(makeSettlement('A', 'seed-a'), makeSettlement('B', 'seed-b'), 'rival', 'l');
+    const rows = out.forA.filter((c) => c.type === 'conflict');
+    expect(rows.length).toBeGreaterThan(0);
+    for (const row of rows) {
+      expect(keys).toContain(row.conflictNature);
+      expect(row.description).toContain(CONFLICT_NATURE_PLAIN[row.conflictNature]);
+    }
   });
 });
