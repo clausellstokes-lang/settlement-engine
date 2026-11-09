@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "86ea40298bc29991cb896056008c9de0c6208d68",
-  "measuredBy": "MERGE-WAVE (FIX-PUBLIC-VEIL merge point)",
-  "date": "2026-11-08",
-  "note": "the FIX-PUBLIC-VEIL merge at 7e65c7bec: the veil lane re-shapes the card mints and the migrations; refrozen at the merged tip, Register VII v2 stands",
+  "measuredAtSha": "64aa02832b7e6fbca6272619cd881700fa28070f",
+  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR1 merge point)",
+  "date": "2026-11-09",
+  "note": "car 1 composed over the wave: ALLEGIANCE_TUNING and its dependents",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -389,6 +389,8 @@
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -406,8 +408,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/worldPulse/npcAgency.js"
@@ -432,6 +433,8 @@
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -449,8 +452,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/display/deityEffects.js"
@@ -476,6 +478,8 @@
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -493,8 +497,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/causalState.js",
@@ -505,7 +508,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 485,
+      "line": 490,
       "spanDigest": "46dfbf0bcd35ae64408fa01882b20e375d0fbaf356c2772c76dce112f190b3cf",
       "leaves": {
         "advance.base": 0.05,
@@ -527,6 +530,8 @@
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -544,8 +549,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": []
     },
@@ -553,7 +557,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 514,
+      "line": 519,
       "spanDigest": "8b5da2da126aac3dbd4cc464fa1c170614cc9a73aef82131bf1d8c984c405f6f",
       "leaves": {
         "powerRate": 0.9,
@@ -570,6 +574,8 @@
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -587,8 +593,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/worldPulse/thievesGuild.js"
@@ -598,7 +603,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 632,
+      "line": 637,
       "spanDigest": "1eda2a9a19616521403191b4fa770f2d1f9010a2f4e4b978917f9fc9a3aad5d6",
       "leaves": {
         "dragPerInstitution": 0.15,
@@ -612,6 +617,8 @@
         "src/domain/display/glossary.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
+        "src/domain/people/allegiance.js",
+        "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
         "src/domain/undercity/monotoneComponents.js",
         "src/domain/undercity/sewerDerivation.js",
@@ -629,8 +636,7 @@
         "src/domain/worldPulse/npcVerdictTable.js",
         "src/domain/worldPulse/religionLegitimacy.js",
         "src/domain/worldPulse/roadsKernel.js",
-        "src/domain/worldPulse/thievesGuild.js",
-        "src/generators/steps/corruptionPass.js"
+        "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
         "src/domain/worldPulse/npcAgency.js"
@@ -640,7 +646,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 2,
-      "line": 47,
+      "line": 48,
       "spanDigest": "6b3d0a1b34604e0b09ffa63b1642dffa44a7552fa114d2ca602253156c8db98e",
       "leaves": {
         "rates.exploiter": {
@@ -1210,6 +1216,42 @@
         "src/domain/npc/livedExperienceSources.js"
       ],
       "namedDependents": []
+    },
+    "src/domain/people/allegiance.js#ALLEGIANCE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 6,
+      "line": 68,
+      "spanDigest": "bdc4407d93dfb082d17719ba435ca434e433f36a95c24609a342ccdbf1e86563",
+      "leaves": {
+        "organizedCrime": 0.1,
+        "organizedFull": 8,
+        "powerBonus": 0.25,
+        "share": 0.15,
+        "frontWeight": 1,
+        "weightZeroHouse": 0.5
+      },
+      "dependents": [
+        "src/components/new/npcComponents.jsx",
+        "src/domain/corruptionLeash.js",
+        "src/domain/crisis/crisisCast.js",
+        "src/domain/display/npcInteriorityRead.js",
+        "src/domain/events/affordanceManifest.js",
+        "src/domain/events/mutateEntities.js",
+        "src/domain/npcProfile.js",
+        "src/domain/settlementMigrations.js",
+        "src/domain/tableLedger.js",
+        "src/domain/worldPulse/npcAgency.js",
+        "src/generators/generateSettlementPipeline.js",
+        "src/generators/narrativeGenerator.js",
+        "src/generators/people/ties.js",
+        "src/generators/steps/assembleSettlement.js",
+        "src/lib/structuralFingerprint.js"
+      ],
+      "namedDependents": [
+        "src/domain/events/mutateEntities.js",
+        "src/domain/settlementMigrations.js"
+      ]
     },
     "src/domain/realm/autoplacement.js#AUTOPLACEMENT_TUNING": {
       "exported": true,
@@ -8823,8 +8865,8 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 271,
-    "keys": 2222,
+    "tables": 272,
+    "keys": 2228,
     "unregisteredNamed": 539,
     "bareDecimals": 6935,
     "zeroDependentTables": 10,
