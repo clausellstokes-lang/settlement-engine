@@ -134,7 +134,7 @@ export function criminalsOf(f) {
 
 /**
  * STYLE-2 SW-7 (the refusal line): the open patron's go-between line, keyed by the patron's PLACE in the ruling
- * power (its rank, or the steward of an empty seat), so the one frame "When @ wants something from @, @ is the one who
+ * power (its rank, or the steward of an empty seat), so the one frame "When [@] wants something from [@], [@] is the one who
  * asks for it." (168 towns on the 1,000 at dc5684e66) splits four ways by the record; the share words split it further.
  * Every variant names the patron, the ruler and the power, and states only the rank and the share it receives.
  * @param {PatronFacts} f
