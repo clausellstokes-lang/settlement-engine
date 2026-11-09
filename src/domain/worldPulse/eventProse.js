@@ -180,6 +180,17 @@ export const NPC_GOAL_NEWS = Object.freeze({
 // only at ≥ 0.42. A ladder cut at, say, 0.25 would have a permanently dead rung.
 // ════════════════════════════════════════════════════════════════════════════════════
 
+/**
+ * A character-sheet trait (ideal, flaw) as a plain word. A card corrupted at generation
+ * carries its traits as `corrupted_<trait>` — the corruption is the card's STATE (the
+ * `corruption` flag says whether it holds now), not a word for the page: printed, the
+ * prefix doubled the reason's own "corrupted" (A2·171, STYLE-2-PULSE-FOLLOWUP).
+ * @param {unknown} trait @returns {string}
+ */
+export function plainTrait(trait) {
+  return String(trait || '').replace(/^corrupted_/, '').replace(/_/g, ' ');
+}
+
 /** The pressure cut. Above it the gate was cleared comfortably; at or below, only just. */
 export const NPC_PRESSURE_BAND_CUT = 0.66;
 /** The ambition cut. Both bands are reachable: the gate admits ambition from 0.42 up. */

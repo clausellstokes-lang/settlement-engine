@@ -17,7 +17,7 @@ import { allegianceOf } from '../people/allegiance.js';
 import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 // H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
 import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
-import { NPC_GOAL_NEWS, npcAmbitionWord, npcPressureWord, pickLine } from './eventProse.js';
+import { NPC_GOAL_NEWS, npcAmbitionWord, npcPressureWord, pickLine, plainTrait } from './eventProse.js';
 import { branchedGoalsFor } from './npcGoalBranches.js';
 import { NPC_AIMS, TARGETED_NPC_DEEDS, UNTARGETED_NPC_DEEDS } from './heraldDeeds.js';
 
@@ -920,7 +920,7 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     reasons: [
       `${state.roleArchetype.replace(/_/g, ' ')} role favors ${actionFamily.replace(/_/g, ' ')}.`,
       `Pressure sat ${npcPressureWord(pressure)} the gate, and the ambition behind it is ${npcAmbitionWord(state.ambition)}.`,
-      state.corruption ? `Rare corrupted ${state.ideal.replace(/_/g, ' ')} ideal modifies behavior.` : `Ideal: ${state.ideal.replace(/_/g, ' ')}.`,
+      state.corruption ? `Rare corrupted ${plainTrait(state.ideal)} ideal modifies behavior.` : `Ideal: ${plainTrait(state.ideal)}.`,
     ],
     npcPatch: {
       momentum: clamp01((state.momentum || 0) + (action.patch.momentum || 0)),
