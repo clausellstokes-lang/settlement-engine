@@ -474,3 +474,12 @@ Pins: `advanceMultiTickToolbar.test.jsx` ("the session-only caveat is preserved 
 | D·84 sphere stat's definition (title) | `A center holding three or more tributary, compelled, or puppet ties forms a sphere, an unnamed empire the topology exhibits. Its name is the DM's to give.` | "A settlement that holds three or more others as tributaries, subjects, or puppets forms a sphere: an empire in all but name. Its name is the DM's to give." (the stat's label and "No hegemony has formed" stay) |
 
 Pins: `realmHub.test.jsx` — the sphere title (D·84) with a negative on "topology", and a new test over the delta's two states (D·83); **red at the parent** (2 of 8), green here. Registers: none moved (the tuning inventory names the file as a dependent only; its walker green).
+
+### 9k. `AutoplacementConsent.jsx` (D·92–93)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·92 canonized lock | `This realm is canonized. Its settlements have taken their places for good, and the map no longer moves them. A seed is a world, and this one is written.` | "This realm is canonized. Its settlements have taken their places for good, and the map no longer moves them." (the closing aphorism struck: it carries no fact) |
+| D·93 re-terrain note | `{label}. {warning} This is a separate decision and this button will not take it for you.` | "{label}. {warning} This button will not do it for you; choose it yourself." |
+
+Pins: `autoplacementConsent.test.jsx` — the lock's last sentence (D·92) and the re-terrain note's close (D·93, re-keyed from `/separate decision/`); **red at the parent** (2 of 10), green here. Registers: none moved.
