@@ -503,8 +503,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
       .toBe('e8901fee7d0991b4c8975fed96254832e4ad09153943242b053102d24f4285b3');
     // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
     // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
+    // Record 10 of the train, the composed-prose manifest signed ONCE at the train's final tip (2026-11-09-merge-train-10-
+    // composed-prose-manifest.json), from the stage at 09c4435e0: the prose manifest 7bdc431e.. -> 083c8dd7.. (181 of 1,050 rows).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('7bdc431eb4624b94d4b1d5a8baa3f282ea1ffb16cb524d589f77311e2184064a');
+      .toBe('083c8dd77cd9b0dbce65b99628b178df105d7f2a3f917b4838e65bae3269633b');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

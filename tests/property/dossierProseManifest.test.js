@@ -201,8 +201,11 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // at every merge point's stage: W1 ECO +3,668 (380/368/358 -> 402/388/382), W2 DEF +146, W3 POW 0, W4 PEOPLE +312, W5 HIS +1,152
     // (-> 408/394/388), W1-A0b 0, W7 HOOKS 0, FIX-FOOD-ISOLATION +52, EXPORT-KEYS 0, FIX-PUBLIC-VEIL +288, the rest 0.
     // Towns unmoved at 516/3/3/3.
+    // 73,292 -> 73,469 (408/394/388 unmoved) at MERGE-TRAIN RECORD 10, THE COMPOSED-PROSE MANIFEST AT THE ALLEGIANCE TRAIN'S FINAL TIP (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-10-composed-prose-manifest.json), bisected
+    // at every merge point's stage: ALLEGIANCE-CAR1 0, CAR2 +15, CAR3 -6, WRITE-TITLES-14 0, OWNER-WORDS-DOSSIER 0, the three small lanes 0, CAR4 +168.
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 73_292, towns: 516 },
+      'golden-master-v3': { cells: 73_469, towns: 516 },
       'gm-seed-a': { cells: 408, towns: 3 },
       'gm-seed-b': { cells: 394, towns: 3 },
       'gm-seed-c': { cells: 388, towns: 3 },
@@ -560,7 +563,10 @@ describe('the two controls no one-audience manifest can see', () => {
     // 36 -> 194 at MERGE-WAVE RECORD 9 (ODQ §934.105, THE WAVE, MERGE-WAVE, 2026-11-08; record docs/shift-records/2026-11-08-merge-wave-9-composed-prose-manifest.json, the manifest signed once), measured at every merge point's stage: all +158 at the
     // W1 ECO merge (ea0e269a9), `DS-ECO-6 :: FACET: an underground house` (158 positions, a covert facet the player's audience
     // filter empties, the lawful direction); DS-POW-6's capture-pressure 36 unmoved; 194 from W1 to the tip, no other point moves it.
-    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(194);
+    // 194 -> 203 at MERGE-TRAIN RECORD 10 (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-10-composed-prose-manifest.json), bisected at
+    // every merge point's stage: ALLEGIANCE-CAR2 +15 (the guild's push re-deals which towns' hidden facets the player filter empties), CAR3 -6, every other point 0;
+    // the lawful direction still (the player-only list stays empty).
+    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(203);
     // The paired control on the direction split itself, so it cannot go vacuous.
     const synthetic = new Map([['a', { dm: {} }], ['b', { player: {} }], ['c', { dm: {}, player: {} }]]);
     expect([...synthetic].filter(([, seat]) => seat.player && !seat.dm).map(([at]) => at),
