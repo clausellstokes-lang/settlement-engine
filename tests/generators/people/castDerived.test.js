@@ -162,8 +162,8 @@ describe('step 3 — the structural standing is the first-rank power\'s (825 bor
     expect(by.mayor.structuralRank).toBe('head');
     expect(by.reeve.structuralRank).toBe('inner_circle');
     expect(by.drifter.structuralRank).toBe('unaffiliated');
-    expect(by.mayor.structuralPosition).toMatch(/^Holds governing authority/);
-    expect(by.reeve.structuralPosition).toMatch(/^Occupies a civic position|^Holds a civic position/);
+    expect(by.mayor.structuralPosition).toMatch(/^Holds the seat\b/); // re-keyed by identity (SW-6 cause 11, 165049330): the government seat's dominant row in plain words
+    expect(by.reeve.structuralPosition).toMatch(/^Holds an office\b/); // re-keyed by identity (SW-6 cause 11): the subordinate row
     expect(by.reeve.structuralPosition).not.toBe(by.mayor.structuralPosition); // anchored: both carry a position (the two lines above)
   });
 });
