@@ -11,7 +11,7 @@
  * four to six times on a town or city page. B4 named the untouched ones together in one sentence; the
  * owner vetoed that connective line (veto 3) and every house keeps its own row. tests/pdf/restoredSubsections.test.js
  * @param {Array<{ factionId: string, stake: string, reason: string }>} stakes
- * @returns {{ rows: typeof stakes, untouched: string | null }}
+ * @returns {{ rows: Array<{ factionId: string, stake: string, reason: string }>, untouched: string | null }}
  */
 export function stakeLines(stakes) {
   // THE OWNER'S VETO 3 (2026-11-09, "No." to the connective lines; the chair's ruling of 08:1x, applied by
