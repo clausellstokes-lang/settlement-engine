@@ -73,9 +73,10 @@ const SCREEN_KICKER = Object.freeze({
   // the place passage's; the print Overview already has one place passage. The kickers of
   // `overview.origin`, `overview.conflicts` and `overview.warnings` are gone with their
   // sentences (those rows glance since the same rulings, so print draws nothing there).
-  // Keyed on `overview.market` since the ground row glances, and titled "Trade and the houses" since the
-  // place ends on the arrival scene (OWNER-WORDS-DOSSIER item 2, 2026-11-09; the heading is for the veto).
-  'overview.market': 'Trade and the houses',
+  // Keyed on `overview.market` since the ground row glances (OWNER-WORDS-DOSSIER item 2, 2026-11-09).
+  // The proposed heading "Trade and the houses" was vetoed by the owner (2026-11-09 03:5x, "No."):
+  // the prior label returns (SW-9).
+  'overview.market': 'The place',
   'overview.stressorLifecycle': 'The pressure from outside',
   'overview.activeConditions': 'What the town is living through',
   // PowerTab.jsx

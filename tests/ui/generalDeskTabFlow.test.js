@@ -305,7 +305,7 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
   test('THE PLACE ends on the arrival scene; the woven block moves below Systems Health (OWNER-WORDS-DOSSIER item 2b)', () => {
     // The owner, 2026-11-09: "In 'the place' the second paragraph seems redundant. The first was
     // amazing." The block is NOT deleted (its sentences have no other home on the page): it stands
-    // under its own heading after the Systems Health section.
+    // after the Systems Health section with no heading of its own (the heading vetoed, SW-9).
     const ARRIVAL = 'Arrival scene fixture: a bell rings twice, then stops.';
     const town = { ...SPEAKING, arrivalScene: ARRIVAL };
     const { container, getByTestId } = render(e(OverviewTab, {
@@ -316,11 +316,13 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expect(place.textContent, 'The place is its title and the arrival scene alone').toBe(`The place${ARRIVAL}`);
     const desk = generalDeskLines(town, { publicDossier: false, stresses: [] }).overview;
     const firstSite = onPage(siteClause(MARKET), desk.siteLines, town);
-    const block = getByTestId('overview-trade-houses');
-    expect(block.textContent.startsWith('Trade and the houses'), 'the moved block carries its heading').toBe(true);
-    expect(block.textContent).toContain(firstSite);
+    const block = getByTestId('overview-site-lines');
+    // The owner vetoed the proposed heading (2026-11-09 03:5x, "No."; SW-9): the block carries none.
+    expect(block.textContent.startsWith(firstSite), 'the moved block opens on its first site line, no heading').toBe(true);
     const text = container.textContent || '';
-    expect(text.indexOf('Systems Health'), 'the block follows the Systems Health section').toBeLessThan(text.indexOf('Trade and the houses'));
+    expect(text, 'the vetoed heading is gone').not.toContain('Trade and the houses');
+    expect(text, 'its struck alternative never lands').not.toContain('Trade and institutions');
+    expect(text.indexOf('Systems Health'), 'the block follows the Systems Health section').toBeLessThan(text.indexOf(firstSite));
     expect(text.split(firstSite).length - 1, 'the site lines print once').toBe(1);
   });
 
