@@ -73,11 +73,14 @@ describe('(a) paint order: opaque fillers first, only segments fade', () => {
     expect(segmentMask(fe, 0)).toBe(last);
     expect(segmentMask(0, 0)).toBeUndefined();
     const masks = [...html.matchAll(/(?<!-webkit-)mask-image:([^;"]+)/g)].map((m) => m[1]);
-    // Each segment fades by its cut's own crossfade width (Compendium's two cuts at 5 columns).
+    // Each segment fades by its cut's own crossfade width (Compendium's two cuts at 5 columns;
+    // the plate's fixed fill at 4, since 2026-11-09, so the plate's segment and the last differ).
     const fes = CUTS.map((c) => c.fe * layout.s);
-    expect(masks).toEqual([first, ...fes.slice(1).map((r, i) => segmentMask(fes[i], r)), last]);
-    // The ends, and the three segments beside Compendium's cuts, differ from the uniform middle.
-    expect(masks.map((m, i) => (m === middle ? null : i)).filter((i) => i !== null)).toEqual([0, 6, 7, 8, CUTS.length]);
+    expect(masks).toEqual([first, ...fes.slice(1).map((r, i) => segmentMask(fes[i], r)), segmentMask(fes[fes.length - 1], 0)]);
+    // The ends, the three segments beside Compendium's cuts and the plate's segment differ from
+    // the uniform middle; the last is no longer the uniform last.
+    expect(masks.map((m, i) => (m === middle ? null : i)).filter((i) => i !== null)).toEqual([0, 6, 7, 8, CUTS.length - 1, CUTS.length]);
+    expect(masks[CUTS.length]).not.toBe(last);
     expect([...html.matchAll(/-webkit-mask-image:/g)]).toHaveLength(CUTS.length + 1);
     // Every mask sits on a segment: the filler elements' own style strings carry none.
     const fillerStyles = [...html.matchAll(/<div data-sf-arrow-filler="" style="([^"]*)"/g)].map((m) => m[1]);
@@ -97,11 +100,17 @@ describe('(a) paint order: opaque fillers first, only segments fade', () => {
     expect(fillers[1].style.backgroundPosition).toBe(`${-layout.fillers[1].phase}px 0px`);
   });
 
-  test('the uncut arrow is one unmasked image, and the compact arrow is two crops around one filler', () => {
+  test('the uncut arrow is the painting around the plate\'s two joins, and the compact arrow is two crops around one filler', () => {
     // 1279: the last whole width below STRIP_W x S_MAX (1279.8), where the slots open (2026-11-08).
-    const uncut = paint(layoutArrow({ clientWidth: 1279, full: true }), 'band');
-    expect(uncut.children).toHaveLength(1);
-    expect(renderToStaticMarkup(<ArrowPaint layout={layoutArrow({ clientWidth: 1279, full: true })} />).includes('mask-image')).toBe(false);
+    // One unmasked image until the plate was centred by composition (2026-11-09): now the
+    // plate's drop and fixed fill are two fillers under three segments at every width.
+    const uncutLayout = layoutArrow({ clientWidth: 1279, full: true });
+    const uncut = paint(uncutLayout, 'band');
+    expect(uncut.children.map((el) => (el.hasAttribute('data-sf-arrow-filler') ? 'filler' : 'segment')))
+      .toEqual(['filler', 'filler', 'segment', 'segment', 'segment']);
+    const masks = [...renderToStaticMarkup(<ArrowPaint layout={uncutLayout} />).matchAll(/(?<!-webkit-)mask-image:([^;"]+)/g)].map((m) => m[1]);
+    expect(masks).toEqual(uncutLayout.segments.map((g) => segmentMask(g.fadeL, g.fadeR)));
+    expect(uncutLayout.segments[0].fadeL).toBe(0);
     cleanup();
     const compact = paint(layoutArrow({ clientWidth: 390, full: false }), 'band');
     expect(compact.children.map((el) => (el.hasAttribute('data-sf-arrow-filler') ? 'filler' : 'segment'))).toEqual(['filler', 'segment', 'segment']);
@@ -114,6 +123,8 @@ describe('(a2) tone: the wood inserted matches the wood beside it', () => {
     const { children } = paint(layout, 'band');
     const fillers = children.filter((el) => el.hasAttribute('data-sf-arrow-filler'));
     expect(fillers.map((el) => el.style.filter)).toEqual(CUTS.map((c) => `brightness(${SLOT_TONE[c.x]})`));
+    // The plate's drop joins 1586 to 1608, one run at one tone, so it needs no second layer either.
+    expect(SLOT_TONE[1586]).toBe(SLOT_TONE[1608]);
     expect(fillers.every((el) => el.children.length === 0)).toBe(true);
   });
 
