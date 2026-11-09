@@ -14,6 +14,8 @@
  */
 import { useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 import { LITERARY_TITLE } from '../labelLadder.js';
 import { FLUSH } from '../../../design/flush.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
@@ -25,7 +27,7 @@ const PLACE = Object.freeze({ 1: 'Head', 2: 'Second', 3: 'Third', steward: 'Stew
 const RANK_WORD = Object.freeze({ 1: 'first', 2: 'second', 3: 'third' });
 
 const box = { background: swatch['#FAF8F4'], border: '1px solid #d8c090', borderLeft: '4px solid #4a1a4a', padding: '10px 14px', ...FLUSH };
-const head = { fontSize: FS.xs, fontWeight: 800, color: swatch.inkMag3, margin: '10px 0 4px' };
+const head = { fontWeight: 800, color: swatch.inkMag3, margin: '10px 0 4px' };
 const row = { fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, margin: '2px 0' };
 const line = { fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.55, margin: '2px 0 6px 12px', fontStyle: 'italic' };
 
@@ -37,13 +39,16 @@ function Face({ face }) {
 /** @param {{ settlement: any }} props */
 export default function WhoRunsThisTownPanel({ settlement }) {
   const view = useMemo(() => dmPowerViewOf(settlement), [settlement]);
+  const mobile = useIsMobile();
+  // the phone chrome floor (MERGE-TRAIN at the OWNER-WORDS-DOSSIER point: car 3's two sub-floor sizes floored by the helper)
+  const headStyle = { ...head, fontSize: chromeFontSize(FS.xs, mobile) };
   if (!view) return null;
   return (
     <div data-testid="who-runs-this-town" data-layer="dm" style={box}>
       <div style={{ ...LITERARY_TITLE, color: swatch.inkMag, marginBottom: 2 }}>{`Who really runs this ${view.tierNoun}`}</div>
-      <div style={{ fontSize: FS.xxs, color: MUTED, marginBottom: 4 }}>For the DM only. Nothing here appears on a player view or a shared page.</div>
+      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 4 }}>For the DM only. Nothing here appears on a player view or a shared page.</div>
 
-      <div style={head}>The ruling three of {view.ruler}</div>
+      <div style={headStyle}>The ruling three of {view.ruler}</div>
       {view.rulingThree.map((f) => (
         <div key={f.id} data-testid="dm-ruling-face">
           <div style={row}>
@@ -56,7 +61,7 @@ export default function WhoRunsThisTownPanel({ settlement }) {
       ))}
 
       {view.answers.length > 0 && <>
-        <div style={head}>Who answers to whom</div>
+        <div style={headStyle}>Who answers to whom</div>
         {view.answers.map((g) => (
           <div key={g.guild} data-testid="dm-answers-group" style={{ marginBottom: 6 }}>
             <div style={row}><strong>{g.guild}</strong>{g.boss && <>{' · led by '}<Face face={g.boss} />{g.boss.title ? `, ${g.boss.title}` : ''}</>}</div>
@@ -76,7 +81,7 @@ export default function WhoRunsThisTownPanel({ settlement }) {
       </>}
 
       {view.fronts.length > 0 && <>
-        <div style={head}>The fronts</div>
+        <div style={headStyle}>The fronts</div>
         {view.fronts.map((f) => (
           <div key={f.id} style={row}>
             <strong>{f.house}</strong>{' · '}<Face face={f} />{` · fronts for ${f.guild}`}{f.handler ? ` · handled by ${f.handler}` : ''}
@@ -84,11 +89,11 @@ export default function WhoRunsThisTownPanel({ settlement }) {
         ))}
       </>}
 
-      <div style={head}>The hall</div>
+      <div style={headStyle}>The hall</div>
       <div style={row} data-testid="dm-hall"><strong>{view.hall.label}</strong>{'. '}{view.hall.line}</div>
 
       {view.boosts.length > 0 && <>
-        <div style={head}>The boosts</div>
+        <div style={headStyle}>The boosts</div>
         {view.boosts.map((b) => (
           <div key={b.powerName} data-testid="dm-boost">
             <div style={row}>
