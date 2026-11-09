@@ -635,3 +635,11 @@ Pins: `roadScenePanel.test.jsx` — the note read off the panel; **red at the pa
 | D·95 the placement legend | `Settlements land at the nearest valid cell. Trade-route candidates auto-link to neighbours within 2 days.` | "Settlements land on the nearest open ground. Trade routes link up on their own to neighbours within two days' travel." |
 
 Pins: no fixture renders the legend (it shows while placing): unpinned, PLAUSIBLE; every suite naming the file green; one pre-existing eslint warning (`react-hooks/refs`, :309), not this cause's. Registers: none moved.
+
+### 9ab. `WorldMapTourSteps.js` (D·96)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·96 the History tour step | `Every advance is remembered. Open History to walk back to any earlier point in the campaign: a byte-exact return, not a guess.` | "Every advance is remembered. Open History to go back to any earlier point in the campaign, exactly as it was." |
+
+Pins: `worldMapTourSteps.test.js` — the step's body pinned whole; **red at the parent**, green here. Registers: none moved.
