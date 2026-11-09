@@ -481,8 +481,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the generator master 8e80cd6a.. -> 20eca11e.. (525 of 525 rows).
     // Record 4, the W4 PEOPLE merge (2026-11-08-merge-wave-4-w4-people.json), from the stage at 66c23bfea:
     // the generator master 20eca11e.. -> 3873f90e.. (523 of 525 rows).
+    // Record 5, the W5 HIS merge (2026-11-08-merge-wave-5-w5-his.json), from the stage at e510409b1:
+    // the generator master 3873f90e.. -> 0fa3e014.. (525 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('3873f90e628f848ec2c24f5d086e921369c08a4914b16f3170c99b94dc960db3');
+      .toBe('0fa3e0149809c0499104031ff3a072a7e9c3abebfcd8650063ba0d7500c89356');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('f2d3410b20c0b4757a48f03afd96598a643d861bd763c6a9172c5a466ef9728e');
 
