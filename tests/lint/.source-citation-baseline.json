@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 203,
+      "dated": 204,
       "sha-pin": 2,
       "tree": 163
     },
@@ -459,7 +459,9 @@
     "_rosterGrowth2026-11-09-fix-pulse-defects": "ONE document JOINED the roster by being BORN into it (seat FIX-PULSE-DEFECTS, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/fix-pulse-defects-2026-11-09 cut from 2053a809c; this session session_01FbPLbfdAk6akvmpjXeK45r): `dated` 168 -> 169, docs/chair/2026-11-09/FIX-PULSE-DEFECTS-2026-11-09.md, the lane's record (the code defects of the second pulse audit, before -> after, the pins, the deltas unsigned, the STOPs), born dated, measured by this walker. A GROWTH that hid nothing: 0 past-EOF of its own.",
     "_rosterGrowth2026-11-09-style-2-merge-fix-pulse-defects": "THE UNION AT THE FIX-PULSE-DEFECTS MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 201 -> 202 (docs/chair/2026-11-09/FIX-PULSE-DEFECTS-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
     "_rosterGrowth2026-11-09-tier-parity-fix": "ONE document JOINED the roster by being BORN into it (TIER-PARITY-FIX, a build seat, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbekXj1M4E9fSmE6Y54; on lane/tier-parity-fix-2026-11-09 cut from 2053a809c): `dated` 168 -> 169, measured by this walker at the lane tip: docs/chair/2026-11-09/TIER-PARITY-FIX-2026-11-09.md, the lane's record (the owner's tier law of 2026-11-09 applied: every row's before -> after, the twelve towns' four-viewer render, the regeneration census, the Surveyor's rows, the deltas per cause), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382.",
-    "_rosterGrowth2026-11-09-style-2-merge-tier-parity-fix": "THE UNION AT THE TIER-PARITY-FIX MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 202 -> 203 (docs/chair/2026-11-09/TIER-PARITY-FIX-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-tier-parity-fix": "THE UNION AT THE TIER-PARITY-FIX MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 202 -> 203 (docs/chair/2026-11-09/TIER-PARITY-FIX-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-odd-rows": "ONE document JOINED the roster by being BORN into it (seat SW-9 ODD-ROWS, session session_01FbPLbcpKsVsbxh1AwqunUs, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-odd-rows-2026-11-09 cut from 8b75f466a): `dated` 185 -> 186, measured once by this walker at the lane's tip: docs/chair/2026-11-09/STYLE-2-ODD-ROWS-2026-11-09.md, the lane's record, born dated, 0 past-EOF; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-sw9": "THE UNION AT THE SW-9 ODD-ROWS MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 203 -> 204 (docs/chair/2026-11-09/STYLE-2-ODD-ROWS-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class."
   },
   "rows": []
 }

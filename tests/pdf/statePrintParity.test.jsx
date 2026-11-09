@@ -921,10 +921,9 @@ describe('SILENCE — no corpus, no Callout', () => {
     // typography lane, 2026-09-18). It is rendered as the Callout's first child rather than
     // through the `kicker` slot, whose `type.label` would upper-case it.
     const [kickerNode, proseNode] = React.Children.toArray(callouts[0].props.children);
-    // "The place" since the chair's ruling T1-2 (2026-10-30); "Trade and the houses" since the
-    // owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 2b): the place ends on the arrival scene and
-    // the site lines stand under their own heading, on the screen and in print.
-    expect(kickerNode.props.children).toBe('Trade and the houses');
+    // "The place" since the chair's ruling T1-2 (2026-10-30). OWNER-WORDS-DOSSIER item 2b proposed
+    // "Trade and the houses"; the owner vetoed it (2026-11-09 03:5x, "No."), so the prior label returns.
+    expect(kickerNode.props.children).toBe('The place');
     expect(kickerNode.props.style.textTransform, 'the page would shout a heading the screen speaks')
       .toBe('none');
     expect(proseNode.props.children).toBe('The village keeps to itself.');
@@ -960,3 +959,26 @@ describe('THE CONSOLIDATION IN PRINT (chair rulings T1-2/T1-3/T1-6..T1-10, 2026-
     expect(Object.keys(hooks)).not.toContain('plot_hooks.framing'); // anchored: the overview half of the same build drew above
   });
 });
+
+describe('THE OWNER\'S VETOES OF 2026-11-09 03:5x in print (SW-9)', () => {
+  test('the governance Callout carries GOVERNANCE, never the vetoed "WHO RUNS IT" nor "RECENT EVENT"', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync(new URL('../../src/pdf/sections/PowerStructure.jsx', import.meta.url), 'utf8');
+    expect(src).toContain('<Callout tone="warn" kicker="GOVERNANCE">');
+    expect(src).not.toContain('kicker="WHO RUNS IT"'); // anchored: src is asserted to carry the GOVERNANCE Callout on the line above
+    expect(src).not.toContain('kicker="RECENT EVENT"'); // anchored: src is asserted to carry the GOVERNANCE Callout two lines above
+  });
+});
+
+describe('the war-weary near-peace line, one sentence on two surfaces (SW-9; SW-4\'s routed FaithWar:54 + WarTab:187)', () => {
+  test('the PDF and the War tab print the same plain line; the "scar" figure is gone from both', async () => {
+    const { readFileSync } = await import('node:fs');
+    const LINE = 'The worst of the fighting is over; this realm leans toward peace.';
+    const pdf = readFileSync(new URL('../../src/pdf/sections/FaithWar.jsx', import.meta.url), 'utf8');
+    const web = readFileSync(new URL('../../src/components/new/tabs/WarTab.jsx', import.meta.url), 'utf8');
+    expect(pdf).toContain(`'near peace': '${LINE}'`);
+    expect(web).toContain(`. ${LINE}</span>`);
+    expect(pdf + web).not.toContain('The scar is healing'); // anchored: both files are asserted to carry the new line above
+  });
+});
+

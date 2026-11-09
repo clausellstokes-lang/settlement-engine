@@ -305,7 +305,7 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
   test('THE PLACE ends on the arrival scene; the woven block moves below Systems Health (OWNER-WORDS-DOSSIER item 2b)', () => {
     // The owner, 2026-11-09: "In 'the place' the second paragraph seems redundant. The first was
     // amazing." The block is NOT deleted (its sentences have no other home on the page): it stands
-    // under its own heading after the Systems Health section.
+    // after the Systems Health section with no heading of its own (the heading vetoed, SW-9).
     const ARRIVAL = 'Arrival scene fixture: a bell rings twice, then stops.';
     const town = { ...SPEAKING, arrivalScene: ARRIVAL };
     const { container, getByTestId } = render(e(OverviewTab, {
@@ -316,12 +316,32 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expect(place.textContent, 'The place is its title and the arrival scene alone').toBe(`The place${ARRIVAL}`);
     const desk = generalDeskLines(town, { publicDossier: false, stresses: [] }).overview;
     const firstSite = onPage(siteClause(MARKET), desk.siteLines, town);
-    const block = getByTestId('overview-trade-houses');
-    expect(block.textContent.startsWith('Trade and the houses'), 'the moved block carries its heading').toBe(true);
-    expect(block.textContent).toContain(firstSite);
+    const block = getByTestId('overview-site-lines');
+    // The owner vetoed the proposed heading (2026-11-09 03:5x, "No."; SW-9): the block carries none.
+    expect(block.textContent.startsWith(firstSite), 'the moved block opens on its first site line, no heading').toBe(true);
     const text = container.textContent || '';
-    expect(text.indexOf('Systems Health'), 'the block follows the Systems Health section').toBeLessThan(text.indexOf('Trade and the houses'));
+    expect(text, 'the vetoed heading is gone').not.toContain('Trade and the houses'); // anchored: the block is asserted to open on its first site line above
+    expect(text, 'its struck alternative never lands').not.toContain('Trade and institutions'); // anchored: the block is asserted to open on its first site line above
+    expect(text.indexOf('Systems Health'), 'the block follows the Systems Health section').toBeLessThan(text.indexOf(firstSite));
     expect(text.split(firstSite).length - 1, 'the site lines print once').toBe(1);
+  });
+
+  test('a scene opening on a one-letter word takes the --lone drop-cap; "The road…" does not (SW-9, the "Amerchant" cure)', () => {
+    const lone = render(e(OverviewTab, {
+      settlement: { ...SPEAKING, arrivalScene: 'A merchant argues with a carter at the gate.' },
+      narrativeNote: null, onNavigateTab: () => {}, publicDossier: false, playerView: false, worldState: null,
+    }));
+    const p1 = lone.getByTestId('overview-place-arrival');
+    expect(p1.textContent).toBe('A merchant argues with a carter at the gate.');
+    expect(p1.className.split(' ')).toEqual(['oc-dropcap-prose', 'oc-dropcap-prose--lone']);
+    lone.unmount();
+    const plain = render(e(OverviewTab, {
+      settlement: { ...SPEAKING, arrivalScene: 'The road narrows at the gate.' },
+      narrativeNote: null, onNavigateTab: () => {}, publicDossier: false, playerView: false, worldState: null,
+    }));
+    const p2 = plain.getByTestId('overview-place-arrival');
+    expect(p2.textContent).toBe('The road narrows at the gate.');
+    expect(p2.className, 'a many-letter first word keeps the plain drop-cap').toBe('oc-dropcap-prose');
   });
 
   test('the identity strip carries the culture scope phrase and who governs (X-5 / T1-1)', () => {

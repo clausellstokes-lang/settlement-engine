@@ -51,7 +51,7 @@ const ALIGN_TONE = { evil: 'bad', good: 'good', neutral: 'muted' };
  * honest statement, so `sub` is undefined and Stat renders no caption line.
  */
 const WAR_WEARY_CAUSE = Object.freeze({
-  'near peace': 'The scar is healing; this realm leans toward peace.',
+  'near peace': 'The worst of the fighting is over; this realm leans toward peace.',
   exhausted: 'Sustained fighting is pushing it to sue for peace.',
 });
 

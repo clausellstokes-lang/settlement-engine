@@ -218,7 +218,7 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
       <Button variant="primary" size="sm" onClick={() => onDone(powers.filter((name) => chosen.has(name)))} aria-label={`Done editing who ${label} backs`}>Done</Button>
       {authored && <Button variant="ghost" size="sm" onClick={onRevert}>As the engine has it</Button>}
       <Button variant="ghost" size="sm" onClick={onClose} aria-label={`Stop editing who ${label} backs`}>Cancel</Button>
-      <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexBasis: '100%' }}>Who this house stands behind. Your choice replaces what the engine derived.</span>
+      <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexBasis: '100%' }}>Who this house stands behind. Your choice replaces the original.</span>
     </div>
   );
 }

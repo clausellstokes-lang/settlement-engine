@@ -430,7 +430,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         institution: instName,
         reason:      authoredReason(
           instName,
-          `${instName} requires ${gate.minTier} tier minimum. ${gate.reason}`,
+          `${instName} is found only in a ${gate.minTier} or larger; this is a ${tier}. ${gate.reason}`,
         ),
         severity:    authoredSeverity(instName, 'warning'),
       });

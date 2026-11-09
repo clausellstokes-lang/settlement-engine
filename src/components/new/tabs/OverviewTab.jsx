@@ -343,12 +343,15 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             and the routing line, before the crisis card. */}
       {/* THE PLACE ENDS ON THE ARRIVAL SCENE (the owner, 2026-11-09, OWNER-WORDS-DOSSIER item 2: "In
           'the place' the second paragraph seems redundant. The first was amazing."). The woven site
-          lines moved below the Systems Health section, under their own heading (TRADE AND THE HOUSES
+          lines moved below the Systems Health section, with no heading of their own (THE SITE LINES
           below); the ground lens that re-introduced the place glances at its registry row. */}
       {r.arrivalScene&&(
         <div data-testid="overview-place" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
           <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The place</div>
-          <p className="oc-dropcap-prose" data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
+          {/* A scene opening on a one-letter word ("A merchant…") loses the space after the raised
+              initial, so it printed "Amerchant" (SW-3's diagnosis, ruled to SW-9 2026-11-09 02:18): the
+              --lone modifier gives that initial a word-space (organic.css). The words are not touched. */}
+          <p className={/^[A-Za-z]\s/.test(r.arrivalScene)?'oc-dropcap-prose oc-dropcap-prose--lone':'oc-dropcap-prose'} data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
         </div>
       )}
 
@@ -460,15 +463,16 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             tests/ui/generalDeskTabFlow.test.js. */}
       </Section>
 
-      {/* ── TRADE AND THE HOUSES (OWNER-WORDS-DOSSIER item 2, 2026-11-09) ──────
+      {/* ── THE SITE LINES (OWNER-WORDS-DOSSIER item 2, 2026-11-09) ──────────────
             The woven block that followed the arrival scene in THE PLACE, moved here whole: DS-GEN-13
             market, commerce and warehouses, then DS-GEN-17 roster, cathedral and monastery, each
             trimmed to its first clause by the reader (generalDeskRead.js :: siteClause). Its sentences
-            have no other home on the page. The heading is proposed for the owner's veto. Dark on a
-            public dossier (§885.3), as before. */}
+            have no other home on the page. It carries NO heading of its own: the proposed heading
+            ("Trade and the houses", and "Trade and institutions" with it) was vetoed by the owner
+            (2026-11-09 03:5x, "No."; SW-9). It is not put inside Systems Health above, which keeps
+            no sentence list (owner order 2026-09-17). Dark on a public dossier (§885.3), as before. */}
       {siteLines.length>0&&(
-        <div data-testid="overview-trade-houses" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Trade and the houses</div>
+        <div data-testid="overview-site-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
           <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>

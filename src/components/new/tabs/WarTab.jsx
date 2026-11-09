@@ -184,7 +184,7 @@ function WarBlock({ war, nameFor, unitAbroad = false }) {
       {exhaustionRaw > 0 && (
         <Line strong="War-weary.">
           {exhaustionBand}
-          {exhaustionBand === 'near peace' && <span style={{ color: MUTED }}>. The scar is healing; this realm leans toward peace.</span>}
+          {exhaustionBand === 'near peace' && <span style={{ color: MUTED }}>. The worst of the fighting is over; this realm leans toward peace.</span>}
           {exhaustionBand === 'exhausted' && <span style={{ color: MUTED }}>. Sustained fighting is pushing it to sue for peace.</span>}
         </Line>
       )}

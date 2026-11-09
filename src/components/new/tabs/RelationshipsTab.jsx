@@ -249,8 +249,11 @@ export function RelationshipsTab({ settlement:r, saveId=null, playerView=false, 
         {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
       </Section>}
 
-      {!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>
-        Generate a settlement to see relationship data.
+      {/* The empty state says what the record holds, not an instruction to generate: it printed
+          "Generate a settlement to see relationship data." on a generated thorp (STYLE-RULINGS-2
+          B10(b); SW-9). `hasAny` reads exactly the three lists the line names. */}
+      {!hasAny&&<div data-testid="relationships-empty" style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>
+        No neighbours, ties between people or conflicts are recorded for this settlement.
       </div>}
     </div>
   );
