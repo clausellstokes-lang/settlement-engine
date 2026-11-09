@@ -184,8 +184,10 @@ describe('WorldPulsePanel', () => {
     // The active siege card: severity, counterforce explanation, entanglement,
     // origin variant, and the DM-named attacker force.
     expect(screen.getByText('Siege pressure')).toBeTruthy();
-    expect(screen.getByText(/resilience 31%/)).toBeTruthy();
-    expect(screen.getByText(/a pillar is missing/)).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·31): how the place copes, in words — no per cent, no "pillar".
+    expect(screen.getByText('not recovering')).toBeTruthy();
+    expect(screen.getByText('missing something it needs to recover')).toBeTruthy();
+    expect(screen.queryByText(/resilience \d+%|a pillar is missing/)).toBeNull();
     expect(screen.getByText(/entangled with famine/)).toBeTruthy();
     expect(screen.getByText('The Red Fang warband')).toBeTruthy();
     // The echo card: living-memory framing with fading strength.
