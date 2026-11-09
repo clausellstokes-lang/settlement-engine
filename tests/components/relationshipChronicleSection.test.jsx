@@ -80,6 +80,9 @@ describe('RelationshipChronicleSection — the page a GM reads', () => {
     expect(block.textContent).toContain('A raid crossed the border');
     expect(block.textContent).toContain('The standing between them changed');
     expect(block.textContent).toContain('(neutral → allied)');
+    // STYLE-2 SW-12 (ledger D·70): the span reads "First noted …", not "The record runs from …".
+    expect(block.textContent).toMatch(/First noted \S/);
+    expect(block.textContent).not.toMatch(/The record (runs from|does not date)/); // anchored: same live block carries the dated entries asserted above
   });
 
   test('not one engine token reaches the reader', () => {
@@ -101,7 +104,8 @@ describe('RelationshipChronicleSection — the page a GM reads', () => {
     expect(block.textContent).toContain('What Dunmar has survived');
     // Dunmar's own edge has no record, and the surface says so honestly rather
     // than showing Ashford's history under Dunmar's name.
-    expect(block.textContent).toMatch(/Dunmar has come through nothing the record kept/);
+    // STYLE-2 SW-12 (ledger D·72): said plainly, no "the record".
+    expect(block.textContent).toMatch(/Nothing has passed between Dunmar and its neighbours yet\. Other\s+settlements have a history/);
     expect(screen.queryAllByTestId('relationship-chronicle-row')).toHaveLength(0);
   });
 });

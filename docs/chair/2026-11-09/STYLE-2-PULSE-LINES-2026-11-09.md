@@ -436,3 +436,13 @@ Pins: `heraldCommandBrief.test.jsx` — the quiet briefing (D·39), the lost sub
 | D·67 full_simulation preset | `The whole engine: war, faith, trade, and politics act on their own.` | "The whole living world: war, faith, trade, and politics act on their own." |
 
 Pins: `simulationRulesDialog.test.jsx` — one new render test (the preset line, the summary, the three labels behind "Detail toggles", and a negative); **red at the parent** (1 of 9), green here. Registers: none moved.
+
+### 9g. `RelationshipChronicleSection.jsx` (D·70–72)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·70 row span | `The record runs from {calendar}` / `The record does not date what it holds` | "First noted {calendar}" / "No dates were kept" |
+| D·71 undated line · unnamed standing | `at a time the record does not fix` · `a standing the record does not name` | "undated" · "an unnamed standing" (the twin in `NpcTrailSection.jsx:76` is another writer file, cured with its own row, not here) |
+| D·72 empty observer | `{name} has come through nothing the record kept. Other settlements have; pick one of them above.` | "Nothing has passed between {name} and its neighbours yet. Other settlements have a history; pick one of them above." |
+
+Pins: `relationshipChronicleSection.test.jsx` — the empty observer re-keyed (D·72); the span "First noted …" with an anchored negative (D·70); **red at the parent** (2 of 9), green here. D·71 has no undated fixture: PLAUSIBLE. Registers: none moved.
