@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-08 — MERGE-WAVE RECORD 8, THE FIX-PUBLIC-VEIL MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-8-public-veil.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 7's post-state. THE CAUSE, ONE (first-parent
+ *   step 7e65c7bec): the FIX-PUBLIC-VEIL merge over the integration branch (lane/fix-public-veil-2026-11-07 at eb18cb458; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW8 (the tree of 7e65c7bec with the door paths carried from
+ *   the branch, the previous record's writes committed). 3c3ba783.. -> b35d56c0..
+ *
  * 2026-11-08 — MERGE-WAVE RECORD 7, THE FIX-FOOD-ISOLATION MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
  *   record docs/shift-records/2026-11-08-merge-wave-7-food-isolation.json; the cloud chair signs under the owner's delegation, vetoable).
  *   73 of 525 rows (thorp 12, hamlet 12, village 12, town 13, city 12, metropolis 12) against record 6's post-state. THE CAUSE, ONE (first-parent
