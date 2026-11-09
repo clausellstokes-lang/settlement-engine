@@ -90,6 +90,39 @@ describe('I-1 — a captured or corrupted hall has a criminal in the ruling thre
   }, 120_000);
 });
 
+/** J-13 read with the chair's ruling on STOP 3: every relation row carrying a capture rung reads the one state. @param {any} s */
+function relationFindings(s) {
+  const state = s?.powerStructure?.criminalCaptureState;
+  return (s?.powerStructure?.factionRelationships || [])
+    .filter((r) => r && Object.hasOwn(r, 'captureState') && r.captureState !== state)
+    .map((r) => `${(r.pair || []).join(' / ')}: row '${r.captureState}' (${r.type}) under the hall's '${state}'`);
+}
+
+describe('J-13 — the relation matrix\'s capture rows read the one state (STOP 3, ruled)', () => {
+  it('over the soak slice: every row carrying a capture rung equals the derived state, its type and words following', async () => {
+    const rows = await born();
+    const found = rows.flatMap(({ i, s }) => relationFindings(s).map((f) => `${i} ${f}`));
+    expect(found).toEqual([]);
+    const carrying = rows.filter(({ s }) => (s.powerStructure.factionRelationships || []).some((r) => Object.hasOwn(r, 'captureState')));
+    expect(carrying.length, 'the slice holds capture rows').toBeGreaterThan(10);
+    // the words follow the rung: an "is a front" row only under a captured hall
+    for (const { i, s } of carrying) {
+      for (const r of s.powerStructure.factionRelationships) {
+        if (/ is a front\./.test(String(r.narrative || ''))) expect(`${i} ${s.powerStructure.criminalCaptureState}`).toBe(`${i} capture`);
+      }
+    }
+  }, 120_000);
+
+  it('the control: a planted row that disagrees with the hall reds the check', async () => {
+    const rows = await born();
+    const { s } = rows.find(({ s }) => (s.powerStructure.factionRelationships || []).some((r) => Object.hasOwn(r, 'captureState')));
+    const other = s.powerStructure.criminalCaptureState === 'capture' ? 'none' : 'capture';
+    const planted = { ...s, powerStructure: { ...s.powerStructure, factionRelationships: s.powerStructure.factionRelationships
+      .map((r) => (Object.hasOwn(r, 'captureState') ? { ...r, captureState: other } : r)) } };
+    expect(relationFindings(planted).length).toBeGreaterThan(0);
+  }, 120_000);
+});
+
 describe('the derivation (§3.4) on fixtures', () => {
   const powers = (gov = { faction: 'Elder Council', category: 'government', power: 40, isGoverning: true }) => ({
     factionRelationships: [], factions: [gov, { faction: "Thieves' Guild", category: 'criminal', power: 20 }],
