@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "86ea40298bc29991cb896056008c9de0c6208d68",
-  "measuredBy": "MERGE-WAVE (FIX-PUBLIC-VEIL merge point)",
-  "date": "2026-11-08",
-  "note": "the FIX-PUBLIC-VEIL merge at 7e65c7bec: the veil lane re-shapes the card mints and the migrations; refrozen at the merged tip, Register VII v2 stands",
+  "measuredAtSha": "f93ead0d7291c29e08897470258162fd6a7c1a10",
+  "measuredBy": "SW-B4 PDF-FOUNDRY (session_01FbPLberW9uzNRqfNQgEeEJ)",
+  "date": "2026-11-09",
+  "note": "STYLE-RULINGS-2 B4, 2026-11-09: src/pdf/lib/crisisPrint.js (new) imports STAKE_REASONS from crisisCast.js to fold the untouched houses into one stakes sentence on the PDF and Foundry crisis pages; one new dependent, no tuning value moved.",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -671,7 +671,8 @@
         "src/domain/crisis/crisisPage.js",
         "src/domain/dossier/plotHooks.js",
         "src/domain/summary/tonightSheet.js",
-        "src/generators/steps/resolveCrisisCast.js"
+        "src/generators/steps/resolveCrisisCast.js",
+        "src/pdf/lib/crisisPrint.js"
       ],
       "namedDependents": [
         "src/domain/coherence/crisisCastFindings.js"
