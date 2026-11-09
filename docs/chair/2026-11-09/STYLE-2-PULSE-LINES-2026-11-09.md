@@ -212,6 +212,24 @@ Struck: the audit's named list of towns (only ids are held here), "only the old 
 
 **A2·74, STOPPED to the chair:** the pressure row's own reasons still print raw ("active condition: …" 26, "… derived from causal state" 31, the raw pressureModel keys). The audit's cure is wiring through `stressors.js :: readerPressureReasons`, which is not exported, in a file the first seat finished; the default asked is one `export` keyword there and one call here, as its own cause.
 
+### 6i-2. `warRecordMode.js` — c1bcd443d (A2·146)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·146 clearance summary | `The war scar no longer renews its grip on ${name}, though its aftereffects continue fading.` | four: "The worst of the war's weariness is over in ${name}; what is left will fade with time." · "${name} is still tired of the war, but the weariness no longer deepens." · "In ${name} the war still weighs, but a little less as time goes on." · "${name}'s war-weariness has begun to ease, though its marks will take time to fade." | 13 → 0 [2/5/1/5] |
+| A2·146 clearance reason | `The war's weariness has fallen below the level at which it renews itself; what is left only fades.` | struck (restated the summary) | 13 → 0 |
+
+Struck: "fewer homes mourn", "raise taxes and men again without riots", "the market is busier and the black armbands fewer", "the levy is filling".
+
+### 6i-3. `mobilizationReactions.js` — 40df143b1 (A2·149–150)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·149 summaries | `Seeing ${mob} mobilize, the belligerent ${reactor} prepares a pre-emptive move.` · `${reactor} answers ${mob}'s mobilization by hardening its own defences.` | pre-empt, three: "${mob} is arming, and ${reactor} means to strike before it is ready." · "${reactor} will not wait for ${mob}'s army to be ready; it means to strike first." · "As ${mob} gathers its army, ${reactor} readies a blow of its own." · fortify: "With ${mob} arming, ${reactor} is looking to its own walls and watch." | 4 → 0 [2/1/1] |
+| A2·150 reasons | `${reactor} is a ${relType} of the mobilizing ${mob}.` · `Its standing disposition leans ${lean}, and it chose to ${move}.` · `A bounded ${keys} nudge (${incident}).` | the tie in words (rival · hostile · cold war), three: "${reactor} ${tie} ${mob}, which is arming." · "${mob} is arming, and ${reactor} ${tie} it." · "${reactor} ${tie} ${mob}, and ${mob} is gathering its army." · the temper, three ("${reactor} is quick to answer force with force." · "… has never been slow to meet force with force." · "It is ${reactor}'s way to answer arms with arms."; slow: "${reactor} is slow to pick a fight.") · the nudge struck | 4 → 0 [1/2/1]; 4 → 0 [0/3/1] |
+
+Struck: "repairing its walls and doubling the watch" (no works are read).
+
 ### 6j. Two lane hygiene commits
 
 - **3ddbc6b56** — the first seat's two negative pins (`causeResolutionLifecycle`, `stressorResolutionReceipts`) take the walker's one-line `anchored:` marker: `negativeAssertionAnchor` was red at `b9a4a45fa` (6 over a ceiling of 5; 1 over 0).
@@ -226,7 +244,7 @@ Struck: the audit's named list of towns (only ids are held here), "only the old 
 
 ### 6l. What stays (the remainder, BY FILE, for a third seat)
 
-**A2 lit rows not reached:** `warRecordMode.js` A2·146 (13) · `mobilizationReactions.js` A2·149–150 (4) · `stressorGates.js` A2·80 (3), ·83–84 (2) · `deploymentReturn.js` A2·139–140 (2) · `resourceTaxonomy.js` A2·101 (2) · `institutionLifecycle.js` A2·173–175 (1) · `moralInstitutionPressure.js` A2·179–180 (1) · `relationshipHierarchy.js` A2·184 (1) · `flows.js` A2·183 (1) · `pressureModel.js` A2·74 (26 + 31; STOPPED, 6i) · `factionCompetition.js` A2·160 (the capture headline; STOPPED, 6d) · `stressorsCore.js` A2·78 (the catalog labels; not in the first seat's list either).
+**A2 lit rows not reached:** `stressorGates.js` A2·80 (3), ·83–84 (2) · `deploymentReturn.js` A2·139–140 (2) · `resourceTaxonomy.js` A2·101 (2) · `institutionLifecycle.js` A2·173–175 (1) · `moralInstitutionPressure.js` A2·179–180 (1) · `relationshipHierarchy.js` A2·184 (1) · `flows.js` A2·183 (1) · `pressureModel.js` A2·74 (26 + 31; STOPPED, 6i) · `factionCompetition.js` A2·160 (the capture headline; STOPPED, 6d) · `stressorsCore.js` A2·78 (the catalog labels; not in the first seat's list either).
 **Not reached:** A1·105, A1·109 and A1·49 (the stressor reader vocabulary in `stressorsCore.js`, one cause); ledger D's sixty-nine map-word rows (less its three labels, SW-8's, and the succession-headline sites, SW-11's); `heraldGrammar`'s verbatim glance for the succession headline.
 
 ## 7. CONFIRMED against PLAUSIBLE
