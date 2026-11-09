@@ -259,3 +259,66 @@ describe('the seam itself — negative controls', () => {
     expect(veilPublicPayload(clean)).toBe(clean);
   });
 });
+
+// ── THE PUBLIC PROSE PROJECTION'S LEAK ARM (STYLE-RULINGS-2 B10(a); SW-B7b item 8, PUBLIC-VEIL's law) ──
+// The save ships the owner's player-view desk draws as TEXT (`data.publicProse`). On the twelve fixture towns,
+// stamped as the save stamps them and projected as the shared page projects them: no NPC secret or goal, no
+// `_seed` (key or value), and no HIDDEN power's name survives in the projected text. The hidden power is planted on
+// the power whose name the shipped text speaks, so the masking arm is anchored, never vacuous.
+describe('the public prose projection carries no private text (SW-B7b)', async () => {
+  const { birth, ensureLaws } = await import('../../scripts/audit/soak-review/corpus.mjs');
+  const { composePublicProse } = await import('../../src/components/new/publicProseCompose.js');
+  const { withPublicProse } = await import('../../src/domain/display/publicProse.js');
+  await ensureLaws();
+  const towns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => ({ i, owner: birth(i).settlement }));
+
+  test.each(towns.map(({ i }) => [i]))('soak1k-%i: no secret, goal, seed or hidden power name in the shipped text', (i) => {
+    const owner = towns.find((t) => t.i === i).owner;
+    const shippedText = JSON.stringify(composePublicProse(owner));
+    const spoken = (owner.powerStructure?.factions || []).find((f) => f?.faction && shippedText.includes(f.faction));
+    const planted = spoken ? {
+      ...owner,
+      powerStructure: {
+        ...owner.powerStructure,
+        factions: owner.powerStructure.factions.map((f) => (f === spoken ? { ...f, hidden: true } : f)),
+      },
+    } : owner;
+    const projected = JSON.stringify(toPublicSafe(withPublicProse(planted, composePublicProse(planted))).publicProse);
+    expect(projected.length).toBeGreaterThan(100);
+    expect(projected.includes('"_seed"')).toBe(false); // anchored: the projection is non-empty (above)
+    if (owner._seed) expect(projected.includes(String(owner._seed))).toBe(false); // anchored: same non-empty projection
+    for (const npc of owner.npcs || []) {
+      for (const field of ['secret', 'goal']) {
+        const text = typeof npc?.[field] === 'string' ? npc[field] : '';
+        if (text.length >= 12) expect(projected.includes(text), `npcs[].${field}`).toBe(false); // anchored: non-empty projection
+      }
+    }
+    // anchored: the unplanted shipped text speaks this name (the `spoken` find above)
+    if (spoken) expect(projected.includes(spoken.faction)).toBe(false);
+  });
+
+  test('a shipped sentence naming a HIDDEN power is masked on the way out (the whole-projection mask covers publicProse)', () => {
+    const owner = towns[0].owner;
+    const power = (owner.powerStructure?.factions || []).find((f) => f?.faction);
+    expect(power).toBeTruthy();
+    const line = `The town answers to ${power.faction} in all but name.`;
+    const planted = {
+      ...owner,
+      powerStructure: {
+        ...owner.powerStructure,
+        factions: owner.powerStructure.factions.map((f) => (f === power ? { ...f, hidden: true } : f)),
+      },
+      publicProse: { v: 'pp-1', blocks: { 'general:overview': { situationLine: line } } },
+    };
+    const shown = JSON.stringify(toPublicSafe({ ...planted, powerStructure: owner.powerStructure }).publicProse);
+    expect(shown).toContain(power.faction); // the control: unhidden, the name prints
+    const projected = JSON.stringify(toPublicSafe(planted).publicProse);
+    expectAbsentWithAnchorText(projected, power.faction, 'in all but name');
+  });
+});
+
+/** The member is absent from a text whose anchor is present. */
+function expectAbsentWithAnchorText(text, member, anchor) {
+  expect(text).toContain(anchor);
+  expect(text.includes(member)).toBe(false); // anchored: the anchor above is in the same text
+}
