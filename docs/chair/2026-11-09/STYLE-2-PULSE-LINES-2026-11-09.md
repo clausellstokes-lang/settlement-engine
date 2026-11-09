@@ -619,3 +619,11 @@ Pins: `heraldRegisterDoors.test.jsx` — the secrets seam's `/record of the caus
 | D·91 undated fall | `The record does not set down when it fell.` | "When it fell is not known." (the turning bands and the two epitaphs PASS and stay) |
 
 Pins: `heraldRegisterDoors.test.jsx` — a new test reading `remembranceRows` for a realm with no clock (every remnant's `whenLabel`); **red at the parent** (1 of 23), green here. Registers: none moved (the tuning inventory and the economy read-model walker green).
+
+### 9z. `RoadScenePanel.jsx` (D·94)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·94 the road scene's note | `… The road is read from truth. Staging it writes nothing.` | "… The road shows the world as it really is, and staging it changes nothing." |
+
+Pins: `roadScenePanel.test.jsx` — the note read off the panel; **red at the parent**, green here. Registers: none moved.
