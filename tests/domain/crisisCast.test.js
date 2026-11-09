@@ -411,3 +411,13 @@ describe('the defence stands: a closed house is never the defender (the ruin fil
     expect(houses).toBeGreaterThan(40);
   }, 240000);
 });
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, the crisis page's Stakes, A·C4): the stake reasons print as plain
+// clauses — never the rule's own word ("the crisis hits its base") nor R3's old echo ("outranks the seat").
+describe('STAKE_REASONS in plain words (SW-6)', () => {
+  it('the losing house and the outranking rival are told in what the reader can see', () => {
+    expect(STAKE_REASONS.loses).toBe('its own people feel the crisis first');
+    expect(STAKE_REASONS.gainsRival).toBe('already carries more weight than whoever holds the seat');
+    expect(Object.values(STAKE_REASONS).join(' ')).not.toMatch(/\bbase\b|outranks/);
+  });
+});

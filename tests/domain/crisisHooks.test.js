@@ -54,7 +54,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
         [{ factionId: 'Merchants', stake: 'gains', reason: STAKE_REASONS.gainsHolds }, { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses }]),
     };
     expect(crisisHooksOf(town(), entry)).toEqual([{
-      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, Town Council loses most, because the crisis hits its base.',
+      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, Town Council loses most, because its own people feel the crisis first.',
       bound: 'lever',
       link: { kind: 'faction', id: 'Town Council', label: 'Town Council' },
     }]);

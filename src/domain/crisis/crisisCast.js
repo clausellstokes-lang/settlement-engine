@@ -212,11 +212,11 @@ export const STAKE_REASONS = Object.freeze({
   gainsChurch: 'the church gains while the seat struggles',
   gainsMerchants: 'the merchants gain while the seat is endorsed',
   gainsCrime: 'crime gains from the disorder',
-  gainsRival: 'outranks the seat while it weakens',
+  gainsRival: 'already carries more weight than whoever holds the seat', // SW-6 (B3 C4): R3's fact, without the echo of "gains"
   gainsClaim: 'a rival claim to govern gains by it',
   gainsHolds: 'holds what the crisis makes scarce',
   gainsOccupier: 'the occupier gains by it',
-  loses: 'the crisis hits its base',
+  loses: 'its own people feel the crisis first', // SW-6 (B3 C4): "its base" was the rule's word
   losesSeat: 'the seat bears the blame',
   split: 'gains and loses by it at once',
   untouched: 'not touched yet; it could side with either camp',
