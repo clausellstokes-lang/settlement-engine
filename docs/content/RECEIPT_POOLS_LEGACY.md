@@ -1214,7 +1214,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### faction_capture — R1 subject phrase — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
-1. a faction seizing control `[live, verbatim]`
+1. a power seizing control `[live, verbatim]`
 2. one interest holding every seat that matters
 3. a body whose members all answer the same way
 4. decisions arriving already made
@@ -1224,7 +1224,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 ### faction_exhaustion — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. a faction spent and failing `[live, verbatim]`
+1. a power spent and failing `[live, verbatim]`
 2. a hall that used to be full at meetings
 3. dues unpaid and rolls unrenewed
 4. an interest that will not be able to answer the next call
@@ -1338,7 +1338,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### npc_ladder — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
-1. a change in who holds rank within a faction `[live, verbatim]`
+1. a change in who holds rank within a power `[live, verbatim]`
 2. a new order of precedence at the table
 3. rank entered afresh on the house roll
 4. who has to be asked first, changed
@@ -2316,44 +2316,44 @@ LAW ONE: OUT OF THE SEAT — never a resolved fate.
 ### faction_institution_capture — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. a faction's capture of a hall `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "institution capture" — was the de-underscored spelling of the DISTINCT kind institution_capture; the actor is now named]`
+1. a power's capture of a hall `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "institution capture" — was the de-underscored spelling of the DISTINCT kind institution_capture; the actor is now named]`
 2. an interest taking a hall for its own
 3. an entry on the roll naming the interest the hall now answers to
 4. an office whose decisions now have an owner
 5. a public thing quietly become a private one
 6. business that goes one way whoever brings it
-7. travellers told which faction to approach about the hall
+7. travellers told which power to approach about the hall
 8. a takeover conducted entirely in appointments
 
 ### faction_institution_suppression — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. a faction's silencing of a hall `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "institution suppression" — was the de-underscored spelling of the DISTINCT kind institution_suppression; the actor is now named]`
+1. a power's silencing of a hall `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "institution suppression" — was the de-underscored spelling of the DISTINCT kind institution_suppression; the actor is now named]`
 2. an interest closing a hall it could not hold
-3. a suppression entered against the hall under a faction's name
+3. a suppression entered against the hall under a power's name
 4. an office prevented from doing its work
 5. a rival's foothold taken away rather than taken over
 6. doors shut by people who do not own them
 7. travellers sent away from a hall that is open in name
-8. a dismantling done in a faction's name and entered in no minute book
+8. a dismantling done in a power's name and entered in no minute book
 
 ### faction_law_preference_push — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. a faction's push for the law it wants `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "law preference push"]`
+1. a power's push for the law it wants `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "law preference push"]`
 2. an interest pressing for the law it wants
 3. a preference entered on the council's own record
 4. rules proposed by the people they would suit
 5. a statute with a beneficiary on its face
 6. a council asked, again, to see it one way
 7. travellers finding the same argument in every tavern
-8. a season of one faction's drafting
+8. a season of one power's drafting
 
 ### faction_power_shift — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
-1. a shift of power between factions `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "power shift"]`
+1. a shift in who is strong among the powers `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "power shift"]`
 2. weight moving from one interest to another
-3. a shift entered on the faction rolls
+3. a shift entered on the rolls of the powers
 4. rooms that used to be full emptying into other rooms
 5. the list of people worth persuading, rewritten
 6. an old balance that no longer holds
@@ -2363,7 +2363,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ### faction_service_bolster — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. a faction propping up a service `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "service bolster"]`
+1. a power propping up a service `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "service bolster"]`
 2. an interest paying to keep a service standing
 3. a payment entered where a levy would normally stand
 4. a hall kept open by somebody's money
