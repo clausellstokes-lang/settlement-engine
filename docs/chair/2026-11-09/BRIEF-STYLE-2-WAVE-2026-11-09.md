@@ -84,4 +84,4 @@ Notes for the merge seat (added as the lanes hand back):
 - **SW-6 (note, car 4's STOP ruled 04:4x):** `npcStructure.js`'s SEAT-GOAL pool is RETIRED by car 4's A9 (the family goal from the keyed intent overwrites the top-N template goal); SW-6 composes the POSITION and CONSTRAINT pools only, with the coda struck.
 - **SW-12 (status 06:51):** first seat CLOSED at b9a4a45fa; second seat session_01FbPLbekNJoQvhbYjni4ao7 continues on the same lane with the §4 remainder; npcAgency's rows and ledger B's eight to the after-train follow-up.
 - **SW-9 (note, 06:59):** TIER-PARITY-FIX's two leftovers outside its manifest join SW-9's copy rows — AccountSubscriptionSection's "cloud sync" line and viewerAuthority.js's stale comment.
-- **TIER-PARITY-FIX (status):** HANDED BACK and CLOSED at 53ea051ac; merged by STYLE-2-MERGE after the train.
+- **TIER-PARITY-FIX (status):** HANDED BACK and CLOSED at 7cd959baf; merged by STYLE-2-MERGE after the train.
