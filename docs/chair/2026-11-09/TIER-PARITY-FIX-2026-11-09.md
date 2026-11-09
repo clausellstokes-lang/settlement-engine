@@ -107,7 +107,7 @@ THE BISECT (each point a fresh `npm run build` in a clean scratch worktree, the 
 | 82b8fbe0a (the Surveyor client, with the regen and HowToUse and email commits before it) | 288,153 | −299 |
 | 7d53efb2e (the Surveyor copy) | 288,472 | **+20** |
 
-The walk is not monotonic: a six-character copy edit moved the entry by +188 B. Most of the movement is the entry chunk's import map re-hashing every lazy chunk's name, which Brotli compresses differently each build. The commit that CROSSES is the Surveyor copy (+319 B on its parent; the landing Surveyor card's added "with Cartographer" is the eager part of it). This is a STOP under the brief: the chair is told, with the default that the +20 B is recorded as bytes OWED (the standard's zero-slack rule) and re-measured by the merge seat at the composed tip, where the train's cars re-hash the same import map.
+The walk is not monotonic: a six-character copy edit moved the entry by +188 B. Most of the movement is the entry chunk's import map re-hashing every lazy chunk's name, which Brotli compresses differently each build. The commit that CROSSES is the Surveyor copy (+319 B on its parent; the landing Surveyor card's added "with Cartographer" is the eager part of it). This was a STOP under the brief. RULED by the chair (06:59 UTC): the default stands — the +20 B Brotli is recorded as bytes OWED, attributed to this lane's Surveyor copy (7d53efb2e), the crossing being the import map's chunk-name re-hash and not the words; no lane moves a ceiling and no copy is trimmed to pay for a hash ("with Cartographer" stays); STYLE-2-MERGE re-records the first-paint figures once at its composed tip, attributed by lane.
 
 ## §9 CONFIRMED against PLAUSIBLE
 
