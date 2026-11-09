@@ -2,8 +2,9 @@
 
 > **BANKED 2026-07-26 (THE BANKING FOLD).** Everything this document describes as
 > "uncommitted integration" is now committed on claude/composite-r4 as 12 lane
-> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 206 at
-> HEAD. Governance home: the ledger branch (review-fixes-2026-07-08) — owner
+> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 209 at
+> HEAD (on lane/tier-parity-fix-2026-11-09, 207 and 208 arrive at its merge: the
+> allegiance cars' public-hall veil and the party link). Governance home: the ledger branch (review-fixes-2026-07-08) — owner
 > decisions live in ONE surface, `docs/OWNER_DECISION_QUEUE.md` there; the
 > 2026-07-26 ledger rows carry the pivot ratification, the golden-regen
 > adjudication, and the Wave-8 confirmation. This file remains the honest
@@ -76,7 +77,7 @@ evidence must be checked independently.
 
 ## Current release blockers
 
-1. **Migration train.** Working-tree migration head 206 is 3 migrations ahead
+1. **Migration train.** Working-tree migration head 209 is 6 migrations ahead
    of the live-verified production head 203 (`supabase/applied-head.json`; the
    owner applied 122–200 to production on 2026-09-16 and 201–203 on 2026-09-20:
    201 — the staff unlock of ODQ §934.28 — 202 — design §12.4's gallery-scanner
@@ -84,11 +85,14 @@ evidence must be checked independently.
    `decrees` — and 203 — the client-mirror totality of that same gallery
    scanner, adding the three hard-denied conditional ledgers
    (`factionPairStates`, `envoyErrands`, `concludedWars`) that landed on the
-   client after 136 froze the SQL array). Three wait on the owner's `supabase db
+   client after 136 froze the SQL array). Six wait on the owner's `supabase db
    push`, in order: 204 (ENGINE-5's `report_engine_generations`), 205 (the public
    sanitizer drops the people car's three retired keys, FIX-EXPORT-KEYS) and 206
    (the public sanitizer reads the card's veil bit, FIX-PUBLIC-VEIL;
-   docs/FIX_PUBLIC_VEIL_2026-11-07.md, THE DEPLOY STEP). Both
+   docs/FIX_PUBLIC_VEIL_2026-11-07.md, THE DEPLOY STEP), and after 207 and 208
+   (their lanes' own), 209 (the Surveyor premium only: has_surveyor_entitlement
+   admits premium, Founders and staff, and staff grants; lane TIER-PARITY-FIX,
+   docs/chair/2026-11-09/TIER-PARITY-FIX-2026-11-09.md). Both
    figures are derived by the freshness pin rather than kept by hand. The eleven
    declared waves need clone rehearsal, wave receipts, rollback practice, and then
    an authorized deployment.

@@ -105,8 +105,10 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(206);
-    expect(plan.pendingCount).toBe(85);
+    // TIER-PARITY-FIX (2026-11-09): written for the MERGED chain — 207 (the allegiance cars) and
+    // 208 (the party link) land with their lanes; this lane adds 209 (the Surveyor premium only).
+    expect(plan.repoHead).toBe(209);
+    expect(plan.pendingCount).toBe(88);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -133,13 +135,14 @@ describe('bounded migration rehearsal plan', () => {
       [204, 204],
       [205, 205],
       [206, 206],
+      [209, 209],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 85 }, (_, index) => 122 + index),
+      Array.from({ length: 88 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
@@ -416,6 +419,18 @@ describe('bounded migration rehearsal plan', () => {
     const veilBit = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 206);
     expect(veilBit.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
     expect(veilBit.rollback.note).toMatch(/recreate 205's body verbatim/i);
+    // ⭐ THE SURVEYOR WAVE (209, TIER-PARITY-FIX, the owner, 2026-11-09: "Premium only"): one
+    // re-stated function, has_surveyor_entitlement — staff, an active premium tier, a staff grant.
+    // No table, no column, no policy, no row. Its own @rollback annotation spells the reversal.
+    expect(plan.waves.find((wave) => wave.id === 'surveyor-premium-only')).toMatchObject({
+      id: 'surveyor-premium-only',
+      from: 209,
+      to: 209,
+      expectedObjects: [{ kind: 'function', name: 'has_surveyor_entitlement' }],
+    });
+    const surveyorPremium = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 209);
+    expect(surveyorPremium.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(surveyorPremium.rollback.note).toMatch(/re-run 201's body verbatim/i);
     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
     // policy — but for the opposite reason: 197's data half is deliberately unscripted,
     // while 199's whole reversal IS one scripted statement. Both are
@@ -557,7 +572,7 @@ describe('bounded migration rehearsal plan', () => {
       rollbackDirectory: ROLLBACK,
       appliedHead: 200,
     });
-    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 206, pendingCount: 6 });
+    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 209, pendingCount: 9 });
     expect(fromWave200.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
       ['staff-unlock-surveyor-entitlement', 201, 201],
       ['edit-registry-public-denylist', 202, 202],
@@ -565,6 +580,7 @@ describe('bounded migration rehearsal plan', () => {
       ['engine-generation-report', 204, 204],
       ['retired-faction-public-keys', 205, 205],
       ['public-card-veil-bit', 206, 206],
+      ['surveyor-premium-only', 209, 209],
     ]);
     // ⭐⭐ THE LEDGER'S OWN HEAD IS ASSERTED RELATIONALLY AND MUST NEVER BE A LITERAL AGAIN.
     // `supabase/applied-head.json` is bumped in the same act as the owner's `supabase db
