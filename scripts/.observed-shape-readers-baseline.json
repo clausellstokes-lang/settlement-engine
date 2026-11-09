@@ -159,10 +159,14 @@
   "FIX-FOOD-ISOLATION merge (one rung per cause): ONE row ADMITTED by cause, `nearbyResourcesState on config` at",
   "foodGenerator.js, its own existing read observed on the isolation receipt's call path; nothing goes,",
   "nothing is declared and the bank is 76/50 (RETIRED).",
-  "SCHEMA 35 = schema 34's topology, tag law and roster, re-governed to MERGE-WAVE at the FIX-PUBLIC-VEIL merge",
+  "SCHEMA 35 (RETIRED) held schema 34's topology, tag law and roster, re-governed to MERGE-WAVE at the FIX-PUBLIC-VEIL merge",
   "(one rung, two causes, every row with one): the corpus gains producer 1b′ (the infiltrated topology; no",
   "row moves) and the veiled re-deal ADMITS 4 `covert on impairments` rows and retires 13; nothing is declared",
-  "and the bank is 76/50.",
+  "and the bank is 76/50 (RETIRED).",
+  "SCHEMA 36 = schema 35's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the",
+  "ALLEGIANCE-CAR1 merge (one rung, two causes, every row with one; the car's own 33, the veil merge, is not",
+  "re-minted): the hidden allegiance (5902f1a4a) ADMITS 11 rows, retires 17 and raises 1; the J-19 re-deal",
+  "(d131ab158) ADMITS 13; nothing is declared and the bank is 76/50.",
   "Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
   "subset of declared. This envelope banks 76 banked read(s) across 50 tagged address(es).",
@@ -173,31 +177,31 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–34 are the RETIRED numeric predecessors."
+  "Schemas 4–35 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
   "generations": 16,
-  "originCount": 14338,
+  "originCount": 14349,
   "pulseIntervals": 12,
   "seeds": 4,
-  "shapeCount": 1720,
+  "shapeCount": 1729,
   "simulationFlagsLit": 92,
   "steadingsMinted": 12,
-  "transitionCount": 21985
+  "transitionCount": 22031
  },
  "digests": {
-  "corpusMeta": "a38f67f25927fa83aaea7a8a50163799229ca355a157842191648785bde4edea",
-  "inventory": "e88967d7aa56f66e8a80bb25b648d43a5ae990a798915656b90cfebb9c37e792",
-  "manifests": "13d80c844a3e053e2e3fa3d9a8266050c4c25fa04ee22481e78a4822beb2bfdf",
-  "migrationReview": "fa639629cec3d79c90bdb143215e3521eddba91ea563d24d1a579ab1f101b2cb",
+  "corpusMeta": "54bb1b3a9f6eb938c1db4d18806dfba1d413e25d01ff72486241de755f459e24",
+  "inventory": "2ed599ffe9461883d33c50d60c5f3925b95a6e1b4b78e28fcd8e4853c9df3fcb",
+  "manifests": "e8773c32869ed5e7e96e8032ee254cb02082dae0cc17a987bf8316569da06bda",
+  "migrationReview": "8fa1cfcde46d0cd8b131a1d255f7b6f1447539bd4722705886a96a13b24c8a7b",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "64ecf2b1d8ca36179e3ed5a9a3159e9dceb919360a3d4b27f8809fdec3691df6",
-  "sentinel": "d53691a27b5c0c64d3b501ad3d3985cd56c521c465c96511b88c4c23719d4942"
+  "scanStats": "6dfcede73a59f9e53749d0fcc8b14e09e26301898875265878db8ba1967c1014",
+  "sentinel": "4cc45959af7666c5fe232d5f1f4be290fdafcb931b08c394f240aeac61dac45c"
  },
- "frozen": "2026-11-08",
- "frozenAtSha": "e13c6982d551f2de07b6fcd6662c827de846c732",
- "identities": 1541,
+ "frozen": "2026-11-09",
+ "frozenAtSha": "d6a04a625ebeebf03cd24ac849f566aaed69e627",
+ "identities": 1548,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -607,18 +611,17 @@
   },
   "src/domain/corruption.js": {
    "covert on impairments": 1,
-   "factionAffiliation on npcs": 1,
-   "factionLink on npcs": 1,
    "flaw on npcs": 1,
-   "institutionId on npcs": 1,
    "ousted on npcs": 1,
    "primaryDeitySnapshot on config": 2,
    "safetyProfile on settlement": 1
   },
   "src/domain/corruptionLeash.js": {
-   "conspiracy on corruptTies": 4,
-   "foreignPatron on corruptTies": 2,
-   "leash on corruptTies": 3
+   "conspiracy on allegiance": 4,
+   "corruptTies on npcs": 2,
+   "criminalInstitution on allegiance": 3,
+   "foreignPatron on allegiance": 2,
+   "leash on allegiance": 3
   },
   "src/domain/counterfactual.js": {
    "id on activeChains": 1,
@@ -661,9 +664,6 @@
    "name on raw": 1,
    "rankAxis on raw": 1,
    "temperamentAxis on raw": 1
-  },
-  "src/domain/density/factionLifecycle.js": {
-   "factionAffiliation on npcs": 1
   },
   "src/domain/density/seatKey.js": {
    "name on factions": 1
@@ -857,6 +857,7 @@
    "cultDeitySnapshots on config": 2,
    "id on factions": 3,
    "name on factions": 6,
+   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "primaryDeitySnapshot on config": 1,
@@ -906,17 +907,18 @@
    "customTradeGoods on config": 1,
    "good on economicState": 1,
    "name on economicState": 1,
+   "nearbyResourcesState on config": 4,
    "resourceEdits on config": 1
   },
   "src/domain/events/realmManifest.js": {
    "lifecycleStatus on config": 1
   },
   "src/domain/events/registry.js": {
-   "factionAffiliation on npcs": 2,
    "severity on settlement": 1,
    "type on settlement": 1
   },
   "src/domain/events/targetRosters.js": {
+   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "resources on settlement": 1
@@ -1077,9 +1079,15 @@
    "aiSettlement on settlement": 1,
    "narrativeNotes on settlement": 1
   },
+  "src/domain/people/allegiance.js": {
+   "leash on allegiance": 1
+  },
   "src/domain/people/cardPowers.js": {
    "name on factions": 1,
    "name on institution": 1
+  },
+  "src/domain/provenance/rosterProvenance.js": {
+   "resourceHistory on settlement": 1
   },
   "src/domain/realm/heraldRouting.js": {
    "impactKind on stressors": 2,
@@ -1143,6 +1151,9 @@
    "terrain on config": 1,
    "terrain on settlement": 1
   },
+  "src/domain/resourceSemantics.js": {
+   "nearbyResourcesState on config": 1
+  },
   "src/domain/roads/state.js": {
    "recall on whereabouts": 1
   },
@@ -1166,12 +1177,13 @@
   },
   "src/domain/settlementMigrations.js": {
    "_userEdits on npcs": 2,
-   "factionAffiliation on npcs": 4,
+   "corruptTies on npcs": 2,
    "factions on settlement": 2,
    "linkedFactionIds on npcs": 2,
    "locked on npcs": 1,
-   "migrationReports on settlement": 2,
+   "migrationReports on settlement": 4,
    "name on factions": 1,
+   "ousted on npcs": 1,
    "pinned on npcs": 1,
    "secondaryAffiliation on npcs": 5
   },
@@ -1198,6 +1210,7 @@
    "reliefRefusedByThem01 on history": 1
   },
   "src/domain/state/deriveSystemState.js": {
+   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "safetyProfile on settlement": 1
@@ -1396,10 +1409,10 @@
    "calamityHistory on settlement": 2
   },
   "src/domain/worldPulse/causeLifecycle.js": {
+   "corruptTies on npcs": 1,
    "corruptionImpaired on npcs": 1,
    "law_order on scores": 1,
    "ousted on npcs": 2,
-   "revealed on corruptTies": 1,
    "secondaryAffiliation on npcs": 1
   },
   "src/domain/worldPulse/causeVocabulary.js": {
@@ -1412,8 +1425,8 @@
   },
   "src/domain/worldPulse/clergyTraitPlane.js": {
    "archetype on factions": 2,
-   "corruptionImpaired on npcs": 1,
-   "revealed on corruptTies": 1
+   "corruptTies on npcs": 1,
+   "corruptionImpaired on npcs": 1
   },
   "src/domain/worldPulse/commonsVoiceKernel.js": {
    "ousted on npcs": 1
@@ -1545,7 +1558,6 @@
    "primaryIndustry on economicState": 1
   },
   "src/domain/worldPulse/houseLedger.js": {
-   "factionAffiliation on npcs": 1,
    "factions on settlement": 1
   },
   "src/domain/worldPulse/informationStatecraft.js": {
@@ -1569,7 +1581,8 @@
   },
   "src/domain/worldPulse/institutionLifecycleResourceRead.js": {
    "nearbyResources on settlement": 1,
-   "nearbyResourcesDepleted on settlement": 2
+   "nearbyResourcesDepleted on settlement": 2,
+   "nearbyResourcesState on config": 1
   },
   "src/domain/worldPulse/institutionStatusLifecycle.js": {
    "covert on impairments": 1
@@ -1651,9 +1664,9 @@
    "lastMajorWeek on settlement": 1
   },
   "src/domain/worldPulse/npcAgency.js": {
+   "corruptTies on npcs": 2,
    "influenceBasis on civic": 1,
    "label on npcs": 1,
-   "leash on corruptTies": 1,
    "nextContext on metadata": 1,
    "preferredActions on civic": 1,
    "previousContext on metadata": 1,
@@ -1661,9 +1674,6 @@
   },
   "src/domain/worldPulse/npcCirculationTable.js": {
    "factions on settlement": 1
-  },
-  "src/domain/worldPulse/npcGrowthKernel.js": {
-   "revealed on corruptTies": 1
   },
   "src/domain/worldPulse/npcLadderKernel.js": {
    "label on factions": 1,
@@ -1803,7 +1813,9 @@
   "src/domain/worldPulse/resourceDynamicsKernel.js": {
    "id on institutions": 1,
    "magicExists on config": 2,
+   "nearbyResourcesState on config": 1,
    "resourceEdits on config": 5,
+   "resourceHistory on settlement": 2,
    "resourceMembership on outcome": 1,
    "tradeRoute on settlement": 1
   },
@@ -1874,11 +1886,6 @@
    "cultDeitySnapshots on config": 1,
    "primaryDeitySnapshot on config": 1
   },
-  "src/domain/worldPulse/successorNpc.js": {
-   "factionAffiliation on npcs": 1,
-   "factionLink on npcs": 1,
-   "institutionId on npcs": 1
-  },
   "src/domain/worldPulse/supplyCompleteness.js": {
    "economy on settlement": 1,
    "exports on economicState": 1
@@ -1907,8 +1914,10 @@
    "intermediateGoods on chains": 1,
    "nearbyResources on settlement": 1,
    "nearbyResourcesDepleted on settlement": 2,
+   "nearbyResourcesState on config": 2,
    "outputs on chains": 1,
    "rawInputs on chains": 1,
+   "resourceHistory on settlement": 2,
    "tradeRoute on settlement": 1
   },
   "src/domain/worldPulse/tradeSalience.js": {
@@ -2079,6 +2088,9 @@
   "src/generators/factionRoles.js": {
    "id on institutions": 1
   },
+  "src/generators/foodGenerator.js": {
+   "nearbyResourcesState on config": 1
+  },
   "src/generators/generationContext.js": {
    "contentProfileId on config": 1,
    "cultureProfileId on config": 1
@@ -2191,6 +2203,7 @@
    "essential on raw": 1,
    "localUid on raw": 1,
    "nearbyResourcesRandom on config": 3,
+   "nearbyResourcesState on config": 3,
    "resourceEdits on config": 1
   },
   "src/generators/steps/resolveStress.js": {
@@ -2606,7 +2619,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "4e02c2d6d2fa0f27f3ebe4da2b6db07da3888d6fff64767c718a32d9f646e025",
+   "digest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
    "entries": [
     {
      "mode": "100644",
@@ -2625,8 +2638,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "ae0ad2f3543a43955abd3f6b5b9e9ef62a682f7ffe475b8b8a3a1e7179991cb4",
-     "size": 212046,
+     "sha256": "f086ec5bb8cc7599661a680ab23fd2702a2c199f02aaeb1e9ccc4f8af904c338",
+     "size": 212958,
      "type": "file"
     },
     {
@@ -2646,8 +2659,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "c70983d33b9dfb6022647ca15a3a29b426ba632a309721ae43ffef4c44daf54d",
-     "size": 87724,
+     "sha256": "7ef5bdc079e78f201855d13c3f2e6c60f5db731fd432e4f172fd4517ef59a554",
+     "size": 89579,
      "type": "file"
     },
     {
@@ -2674,8 +2687,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "bc740d9b35f482b754d8feab0001d6ba8650c578104e566376408fd28a85c7b5",
-     "size": 253129,
+     "sha256": "3657af4da3e73fce3e48879d9221dffe0a7de2724427cb714bbee5ee1046d91f",
+     "size": 259196,
      "type": "file"
     },
     {
@@ -2689,7 +2702,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "365b8e0d5406cc193ecfe8c1657f35ddbd60179a58a8ea2f61d413348ed96b32",
+   "digest": "9f66b5fca0680e38e9ab470d475bc86c9b3621250244f6e3d1a2303661572a9c",
    "entries": [
     {
      "mode": "100644",
@@ -2708,8 +2721,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "ae0ad2f3543a43955abd3f6b5b9e9ef62a682f7ffe475b8b8a3a1e7179991cb4",
-     "size": 212046,
+     "sha256": "f086ec5bb8cc7599661a680ab23fd2702a2c199f02aaeb1e9ccc4f8af904c338",
+     "size": 212958,
      "type": "file"
     },
     {
@@ -2729,8 +2742,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "c70983d33b9dfb6022647ca15a3a29b426ba632a309721ae43ffef4c44daf54d",
-     "size": 87724,
+     "sha256": "7ef5bdc079e78f201855d13c3f2e6c60f5db731fd432e4f172fd4517ef59a554",
+     "size": 89579,
      "type": "file"
     },
     {
@@ -2757,8 +2770,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "bc740d9b35f482b754d8feab0001d6ba8650c578104e566376408fd28a85c7b5",
-     "size": 253129,
+     "sha256": "3657af4da3e73fce3e48879d9221dffe0a7de2724427cb714bbee5ee1046d91f",
+     "size": 259196,
      "type": "file"
     },
     {
@@ -4619,8 +4632,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "9f32fff073ad1d022b61c58a9336ecd3114ee889908ff7e2ac60699c32864246",
-     "size": 8803,
+     "sha256": "b1b6d59de56a7bbf8686b8eacb74a347880690801f533c4dcef1f58f0e5c662c",
+     "size": 8716,
      "type": "file"
     },
     {
@@ -5718,8 +5731,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "a1dfd99bc90d40278ec98b696c3b22624df14b00acc4ee5fdcfedce07fcd80fc",
-     "size": 32398,
+     "sha256": "881dfb70eff78fcb21ffb8bc0c2a6c3897b1cd263be240653b819cd5b388727d",
+     "size": 33046,
      "type": "file"
     },
     {
@@ -7468,8 +7481,8 @@
     {
      "mode": "100644",
      "path": "src/data/institutionalCatalog.js",
-     "sha256": "d9d0479dd004684ec94f2449ada599e8192e434f626152fef438d110c8be35d4",
-     "size": 132290,
+     "sha256": "9fee5e57c7d7edc4eeb3315b4cc89524209a443f4e88a8a2c3e69d2602592629",
+     "size": 135243,
      "type": "file"
     },
     {
@@ -7503,8 +7516,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "7132aeaa560295e73064c819b59c54b9dcd5ee0fdef462eeb65222af073ce274",
-     "size": 122931,
+     "sha256": "a8cbf1f0495d7103bc7e3f3168b8ce118c1f8ba7492fcc5d5168baaee0369665",
+     "size": 123984,
      "type": "file"
     },
     {
@@ -7512,6 +7525,13 @@
      "path": "src/data/npcTraitWeights.js",
      "sha256": "38001c26fa6b4832eb2d033cd888dc192043c3386a8ffa4aadf2c17affddf59e",
      "size": 7332,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/people/handlerTieLines.js",
+     "sha256": "dc47ec8edf8435ad397b0bc5e58c2c8d09fa8b4e2c43d48f61d325ab3c959f28",
+     "size": 17244,
      "type": "file"
     },
     {
@@ -8847,15 +8867,15 @@
     {
      "mode": "100644",
      "path": "src/domain/corruption.js",
-     "sha256": "2e0a239c543bcff558302c6e8fbd6be16d9d588f55872ace152fb297817cd0d4",
-     "size": 39558,
+     "sha256": "bbd54e6e7ffa15f6c908a50c6291f4a9b77533b593df37abef8d2f6c46c7db2f",
+     "size": 39845,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "8373302c932e43a95d9f0fe8849144ad244032e0dec5ac4ca8574458b0bc4af1",
-     "size": 9050,
+     "sha256": "09477909d0b7c7aa9490a053a3bf8b2498bc4c59908368a5d03c98bd2a14065e",
+     "size": 10978,
      "type": "file"
     },
     {
@@ -8882,8 +8902,8 @@
     {
      "mode": "100644",
      "path": "src/domain/crisis/crisisCast.js",
-     "sha256": "0666b550e71accc343e56a92b458069b02e056a0e11e12d1d7600884797a2241",
-     "size": 57688,
+     "sha256": "e02ba4d17c5ce14c2a0409d769f68d72a2638baddd4beef6bf29e29f636169a3",
+     "size": 57808,
      "type": "file"
     },
     {
@@ -9323,8 +9343,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "b77579a3e8a830a50a426edddeb2a13a1e0c1b94c1c9739868638b8f14abc84e",
-     "size": 37447,
+     "sha256": "51f5a1db7ee098592ae9beae0d44dcffb0ec319efbacf1444ae28ee92ed7673e",
+     "size": 37672,
      "type": "file"
     },
     {
@@ -9386,8 +9406,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "106c82a0cf002bcfebff988f25da8b5dbf0b312838a952e27d36c185cd51c873",
-     "size": 55675,
+     "sha256": "3ede39d5b2ca14fca262933af4c81bf76763740809c8bac0357c70c6ad45de13",
+     "size": 55944,
      "type": "file"
     },
     {
@@ -9568,8 +9588,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/npcInteriorityRead.js",
-     "sha256": "5e07a14c9f105d1d8feb91884e764a39b91f1ed0a53779d90222102d2a29e8b1",
-     "size": 16417,
+     "sha256": "c82bce0b0595bbd2a656b2290b127ed52d8b36787cb7f4a710c14bb6c60e8820",
+     "size": 16597,
      "type": "file"
     },
     {
@@ -9617,8 +9637,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "ccacb8f39ac113d8cb6c72c4d7321fd4cc10aa84d89d14f990487efe75f762d6",
-     "size": 40700,
+     "sha256": "2033aa4ee6e4a017e51af3713c3e947c042304b4707b17b404f342437d9c1d2d",
+     "size": 40958,
      "type": "file"
     },
     {
@@ -9757,8 +9777,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
-     "size": 125301,
+     "sha256": "5199d1ba9d1405374cc20ab3d07e3d0ae86c802d3df5d9548eae89fc046659a7",
+     "size": 125628,
      "type": "file"
     },
     {
@@ -9799,8 +9819,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "dd46142547f9877c9df953d83c4845e35a75a192addc449f468d1d07dac0c540",
-     "size": 123526,
+     "sha256": "4c7859fbaf2f41b51e1239b4ed1643c88a4180db57d98f8e95a03b20d435073e",
+     "size": 123689,
      "type": "file"
     },
     {
@@ -10268,8 +10288,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/recordRegister.js",
-     "sha256": "1c4ebf45c72194652a2d92697cd2b0dde1e167a7d1acd47f98650c14bf904b1e",
-     "size": 22547,
+     "sha256": "862f2dea0fdd2e464d8ea2c592d38eabab204c04e4aa0745cb10450ddf0d4456",
+     "size": 23200,
      "type": "file"
     },
     {
@@ -10282,8 +10302,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/tracePartition.js",
-     "sha256": "6c56b3d7d8e584a8c07f02add83b9d8e2ff91dbac83848a910fa62451fc33985",
-     "size": 8087,
+     "sha256": "6dbc9ce23b58989974307aa4bfa195641579e4d4923f3715736c09030fc8d8d6",
+     "size": 8413,
      "type": "file"
     },
     {
@@ -10338,8 +10358,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/affordanceManifest.js",
-     "sha256": "19b55c75240a95db5696fcb2a4229a0e9901b692f27a98a436f1fbe9dd43502d",
-     "size": 41804,
+     "sha256": "5acee0b47ee3eb080f09ad790cc8cbef682a9da4700c44ae769a3278e1391fea",
+     "size": 41937,
      "type": "file"
     },
     {
@@ -10401,8 +10421,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/mutateEntities.js",
-     "sha256": "29ead6abf41fe22391f07a51a35d779db3165633163880dfeb55a91ea94e4e16",
-     "size": 52077,
+     "sha256": "6c16ed5ea46e1f4f27c2fccee3934da477c77c480822bee69af7e3e45db4fd92",
+     "size": 53003,
      "type": "file"
     },
     {
@@ -10548,8 +10568,8 @@
     {
      "mode": "100644",
      "path": "src/domain/factionRename.js",
-     "sha256": "5a62213ad3ea2b363ec2f4b8323d85e9905865adb85711f901f85cec2fc3aefd",
-     "size": 67253,
+     "sha256": "e81d160a9ecefd1860ecd046f6e86b2d5c355245db0247c1af985be06647916b",
+     "size": 67990,
      "type": "file"
     },
     {
@@ -10765,8 +10785,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "0fae3a324876802d2632e7fd95d36cc21e4809efc01767e7682183c3f6792af2",
-     "size": 41990,
+     "sha256": "00577e73ef16f937ec45b01f38d994a56e35213322f7354636a7cefd0f2a2070",
+     "size": 41920,
      "type": "file"
     },
     {
@@ -10891,8 +10911,8 @@
     {
      "mode": "100644",
      "path": "src/domain/institutionRename.js",
-     "sha256": "d58c5e906ce222406cbe547db07e0b42e30de4f24afaaf02eddaa2ac0f8e2494",
-     "size": 28265,
+     "sha256": "3363546498cb1a7ec84327389bd7a3eaa1cb26980e70089e91f409b7221a2caf",
+     "size": 28347,
      "type": "file"
     },
     {
@@ -11164,8 +11184,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npc/livedExperienceSources.js",
-     "sha256": "1ff0ddaa6a2f62fc22694045801c1cafd58d9876e5764a7dd47f75fb0c817e85",
-     "size": 52681,
+     "sha256": "85a4069fa830e4c2063dfb56c3aeda5c14b735f61940c823cc647646dd445d5b",
+     "size": 52759,
      "type": "file"
     },
     {
@@ -11213,8 +11233,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npcProfile.js",
-     "sha256": "3cdd957dec16693d71682e26a12628a77646c5bb13bb621b5b403dd9d6a3cc57",
-     "size": 31088,
+     "sha256": "c77179425b8fb9eafa9ad6dd5738dc92d29f9acba620677190348b1507e5f71f",
+     "size": 31266,
      "type": "file"
     },
     {
@@ -11243,6 +11263,13 @@
      "path": "src/domain/pendingEditsPreview.js",
      "sha256": "1f006df5cd1696675dc0905d5d5c3c292e40136688135b0478991c70bf95dfb2",
      "size": 15006,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/allegiance.js",
+     "sha256": "a611fea482fd0dbe595e50050857c7617e124abbe75f3f4dd1a80c8e02a00d84",
+     "size": 23609,
      "type": "file"
     },
     {
@@ -11325,8 +11352,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "bb3f1a8eeb67e6ffc89ae3c44653d92de2731e05a23be891edbbaadbf3847e38",
-     "size": 48376,
+     "sha256": "ed7e55d7417a4ea8c449fcb96ec4e39209aa3d52e628c8606006816f76f2cdb5",
+     "size": 48392,
      "type": "file"
     },
     {
@@ -11766,15 +11793,15 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "28cccd065778b89ec99a9d949dbdc9ecc5091926f26d3896eee3217ff33f57fc",
-     "size": 81038,
+     "sha256": "645f0211873ddb8ee0b6ac49ff39ee34af0e7e9b46c9dc6af59c366c1d36749f",
+     "size": 81627,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/settlementMigrations.js",
-     "sha256": "29a04e5d985c915fe401a01928f4630cb31f2d5d5a1755345ec0a0992f27018d",
-     "size": 19600,
+     "sha256": "22deb4d8063490ab01cf6f2c3ec1a2bd0dd9d46285a1dd53f0beeeaca3647dbe",
+     "size": 25496,
      "type": "file"
     },
     {
@@ -12116,8 +12143,8 @@
     {
      "mode": "100644",
      "path": "src/domain/tableLedger.js",
-     "sha256": "9ad971735184ef3edec7d3972930b0d4a64cb92f5ce65d4b52b4ad9cdbd77194",
-     "size": 17816,
+     "sha256": "b1b5bbae724792bc5012df9c42f13ed59dd32dd5cfc36a21536e5794b8d7055a",
+     "size": 17937,
      "type": "file"
     },
     {
@@ -14524,8 +14551,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcAgency.js",
-     "sha256": "a41b36c675946c5ed4c3a5ae7ded7b879abcede2b11f14d2539d8293c2254a59",
-     "size": 59377,
+     "sha256": "8e05f847b2158d541e26d6c60d5620c1c822588cf738482a5a77852aa314573a",
+     "size": 59645,
      "type": "file"
     },
     {
@@ -16400,8 +16427,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "8d99137e655a7292434513cad47a8355144f8bbf255f444ab345ad60d286442a",
-     "size": 37598,
+     "sha256": "3c28908dde911da973f9db761141867cb073a6d9a9ec58dc68bc7951baf3bc48",
+     "size": 38729,
      "type": "file"
     },
     {
@@ -16533,8 +16560,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrative/settlementOriginProse.js",
-     "sha256": "7d42713ba81e9a7cd454c262a743131d4e96216a4333c14a4cca852a18c27ffd",
-     "size": 14181,
+     "sha256": "4cd3071d3734d9d885bc60e594f1a659036a7494dfe083a2a92bf1437da0b9b3",
+     "size": 14201,
      "type": "file"
     },
     {
@@ -16547,8 +16574,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "61cf1072d639712888b5b0d81cb8090c8de3b40fa4230acf94ad692ad015e142",
-     "size": 51069,
+     "sha256": "d078a6d8facd8a1c0271853c62cf22c521b3c2d90e6352681774bafd6a6cd8a0",
+     "size": 52718,
      "type": "file"
     },
     {
@@ -16617,8 +16644,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "533358edf55964f6f855a331f77cd36a8f6a798371eee0187177a953bda7d6ab",
-     "size": 84351,
+     "sha256": "1ae1851f7c83d9795b695b3e217435b9bbe6ef1a4a9c84b4e0887f752b849062",
+     "size": 84370,
      "type": "file"
     },
     {
@@ -16631,8 +16658,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "a3a1d575fb0975c71c1cdc7632ad3a8f66b3348d87a7545c48ea7bea8efb7cb9",
-     "size": 18519,
+     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
+     "size": 20589,
      "type": "file"
     },
     {
@@ -16645,8 +16672,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/personHooks.js",
-     "sha256": "6180f95719518bf470f650bec11bb31dd266637a8edc28e015b4cb31330a299c",
-     "size": 3963,
+     "sha256": "18652c4199d3da017f55b0b1ce149e1185785b704ca2ab0630914af945177647",
+     "size": 3986,
      "type": "file"
     },
     {
@@ -16659,15 +16686,15 @@
     {
      "mode": "100644",
      "path": "src/generators/people/representatives.js",
-     "sha256": "2192551976fbe4c39e77777c7c7004a27a71f626c200d6894a5c51a5d3cd9e99",
-     "size": 23537,
+     "sha256": "6e5697dd424ad28376c69374704f17776cdb43ad3fb6a60464eaae83cf4f2493",
+     "size": 23600,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/people/ties.js",
-     "sha256": "fca24dee61a43b188519766545a79ee36eb628bf5b4ff35f91df1f0e94998725",
-     "size": 9431,
+     "sha256": "5ea63e9a43d63de03b11629f63e19588ad148a443fb63ea69d94c1e9c37943ca",
+     "size": 10697,
      "type": "file"
     },
     {
@@ -16729,8 +16756,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/relationshipArchetypes.js",
-     "sha256": "be2067eccff3df9550b5ecc18347974cf98076af437ab0e43530977db4f34a15",
-     "size": 10638,
+     "sha256": "dd3247c93e4d4f87ad246c868bbe6445da1a27a26b60e9597c4da20814af105f",
+     "size": 12144,
      "type": "file"
     },
     {
@@ -16862,8 +16889,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "86e3dd9a261cdf7f0bc8ffea9f8c13dd5d473dff61841c52744cce0efc7a7c37",
-     "size": 26698,
+     "sha256": "81ee802a769f94cb1b9b3a00a5ca31d20d8d2085f689a31e274e3e0a8d38819b",
+     "size": 27238,
      "type": "file"
     },
     {
@@ -16885,13 +16912,6 @@
      "path": "src/generators/steps/coherenceRepairPass.js",
      "sha256": "560ace0abef337998f30ea02fea949b8e45592e7876f4c9ce2d3597724b4859e",
      "size": 21220,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/generators/steps/corruptionPass.js",
-     "sha256": "306845f28f243df9480e2dd60e5f2f09b092d9524f9e7d43ac7b140e735a243e",
-     "size": 5892,
      "type": "file"
     },
     {
@@ -16918,8 +16938,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/generateNarratives.js",
-     "sha256": "ccf7917de5ef740f37e12f853e9a9a52c6335ac8889f82c6cf30d83f061eadb7",
-     "size": 6280,
+     "sha256": "786fcd19b659a491e3e23d4820646f4ad79713d2228ba69b4211e31d35c91b5b",
+     "size": 6499,
      "type": "file"
     },
     {
@@ -16939,8 +16959,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/index.js",
-     "sha256": "3846e15ca04a83f7e73cccc91029e880e468f9dfed1c7a9b3358c4e5071a3266",
-     "size": 992,
+     "sha256": "3aed1b7a42eea88b68df5897953b7126c5dd96b00317e6084401753a8b8ad47f",
+     "size": 962,
      "type": "file"
     },
     {
@@ -17009,8 +17029,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/stepMetadata.js",
-     "sha256": "9f5865982d4196ef71960a2882231d6fdb9aed8a600754c469b236db8bd86ad5",
-     "size": 12985,
+     "sha256": "07cf52b360b7a2d28954ae2a0c7dd9717111fd0f52dd98681e4e2916fcc7d3f9",
+     "size": 12600,
      "type": "file"
     },
     {
@@ -18633,8 +18653,8 @@
     {
      "mode": "100644",
      "path": "src/lib/structuralFingerprint.js",
-     "sha256": "c95eb5aac052ba1a96768baeb937a2a17ea7626a43c7fbaa5b68af362b240077",
-     "size": 19502,
+     "sha256": "61815cd8f65de3ed2e7ec6463bbcdceb9786f884497e111c4feb041ebb8f3963",
+     "size": 19726,
      "type": "file"
     },
     {
@@ -19880,7 +19900,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "0052b3252fca3705f2f6f93f9ddae21ea3ffdd336051362867afb4c189249d26",
+   "digest": "50511dedc1a7289a409006223c991b100216e63dd95b29b7cee7704800c1392f",
    "entries": [
     {
      "mode": "100644",
@@ -21740,8 +21760,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "9f32fff073ad1d022b61c58a9336ecd3114ee889908ff7e2ac60699c32864246",
-     "size": 8803,
+     "sha256": "b1b6d59de56a7bbf8686b8eacb74a347880690801f533c4dcef1f58f0e5c662c",
+     "size": 8716,
      "type": "file"
     },
     {
@@ -22839,8 +22859,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "a1dfd99bc90d40278ec98b696c3b22624df14b00acc4ee5fdcfedce07fcd80fc",
-     "size": 32398,
+     "sha256": "881dfb70eff78fcb21ffb8bc0c2a6c3897b1cd263be240653b819cd5b388727d",
+     "size": 33046,
      "type": "file"
     },
     {
@@ -24519,8 +24539,8 @@
     {
      "mode": "100644",
      "path": "src/data/institutionalCatalog.js",
-     "sha256": "d9d0479dd004684ec94f2449ada599e8192e434f626152fef438d110c8be35d4",
-     "size": 132290,
+     "sha256": "9fee5e57c7d7edc4eeb3315b4cc89524209a443f4e88a8a2c3e69d2602592629",
+     "size": 135243,
      "type": "file"
     },
     {
@@ -24554,8 +24574,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "7132aeaa560295e73064c819b59c54b9dcd5ee0fdef462eeb65222af073ce274",
-     "size": 122931,
+     "sha256": "a8cbf1f0495d7103bc7e3f3168b8ce118c1f8ba7492fcc5d5168baaee0369665",
+     "size": 123984,
      "type": "file"
     },
     {
@@ -24563,6 +24583,13 @@
      "path": "src/data/npcTraitWeights.js",
      "sha256": "38001c26fa6b4832eb2d033cd888dc192043c3386a8ffa4aadf2c17affddf59e",
      "size": 7332,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/people/handlerTieLines.js",
+     "sha256": "dc47ec8edf8435ad397b0bc5e58c2c8d09fa8b4e2c43d48f61d325ab3c959f28",
+     "size": 17244,
      "type": "file"
     },
     {
@@ -25856,15 +25883,15 @@
     {
      "mode": "100644",
      "path": "src/domain/corruption.js",
-     "sha256": "2e0a239c543bcff558302c6e8fbd6be16d9d588f55872ace152fb297817cd0d4",
-     "size": 39558,
+     "sha256": "bbd54e6e7ffa15f6c908a50c6291f4a9b77533b593df37abef8d2f6c46c7db2f",
+     "size": 39845,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "8373302c932e43a95d9f0fe8849144ad244032e0dec5ac4ca8574458b0bc4af1",
-     "size": 9050,
+     "sha256": "09477909d0b7c7aa9490a053a3bf8b2498bc4c59908368a5d03c98bd2a14065e",
+     "size": 10978,
      "type": "file"
     },
     {
@@ -25891,8 +25918,8 @@
     {
      "mode": "100644",
      "path": "src/domain/crisis/crisisCast.js",
-     "sha256": "0666b550e71accc343e56a92b458069b02e056a0e11e12d1d7600884797a2241",
-     "size": 57688,
+     "sha256": "e02ba4d17c5ce14c2a0409d769f68d72a2638baddd4beef6bf29e29f636169a3",
+     "size": 57808,
      "type": "file"
     },
     {
@@ -26325,8 +26352,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "b77579a3e8a830a50a426edddeb2a13a1e0c1b94c1c9739868638b8f14abc84e",
-     "size": 37447,
+     "sha256": "51f5a1db7ee098592ae9beae0d44dcffb0ec319efbacf1444ae28ee92ed7673e",
+     "size": 37672,
      "type": "file"
     },
     {
@@ -26388,8 +26415,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "106c82a0cf002bcfebff988f25da8b5dbf0b312838a952e27d36c185cd51c873",
-     "size": 55675,
+     "sha256": "3ede39d5b2ca14fca262933af4c81bf76763740809c8bac0357c70c6ad45de13",
+     "size": 55944,
      "type": "file"
     },
     {
@@ -26570,8 +26597,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/npcInteriorityRead.js",
-     "sha256": "5e07a14c9f105d1d8feb91884e764a39b91f1ed0a53779d90222102d2a29e8b1",
-     "size": 16417,
+     "sha256": "c82bce0b0595bbd2a656b2290b127ed52d8b36787cb7f4a710c14bb6c60e8820",
+     "size": 16597,
      "type": "file"
     },
     {
@@ -26619,8 +26646,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "ccacb8f39ac113d8cb6c72c4d7321fd4cc10aa84d89d14f990487efe75f762d6",
-     "size": 40700,
+     "sha256": "2033aa4ee6e4a017e51af3713c3e947c042304b4707b17b404f342437d9c1d2d",
+     "size": 40958,
      "type": "file"
     },
     {
@@ -26759,8 +26786,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
-     "size": 125301,
+     "sha256": "5199d1ba9d1405374cc20ab3d07e3d0ae86c802d3df5d9548eae89fc046659a7",
+     "size": 125628,
      "type": "file"
     },
     {
@@ -26801,8 +26828,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "dd46142547f9877c9df953d83c4845e35a75a192addc449f468d1d07dac0c540",
-     "size": 123526,
+     "sha256": "4c7859fbaf2f41b51e1239b4ed1643c88a4180db57d98f8e95a03b20d435073e",
+     "size": 123689,
      "type": "file"
     },
     {
@@ -27270,8 +27297,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/recordRegister.js",
-     "sha256": "1c4ebf45c72194652a2d92697cd2b0dde1e167a7d1acd47f98650c14bf904b1e",
-     "size": 22547,
+     "sha256": "862f2dea0fdd2e464d8ea2c592d38eabab204c04e4aa0745cb10450ddf0d4456",
+     "size": 23200,
      "type": "file"
     },
     {
@@ -27284,8 +27311,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/tracePartition.js",
-     "sha256": "6c56b3d7d8e584a8c07f02add83b9d8e2ff91dbac83848a910fa62451fc33985",
-     "size": 8087,
+     "sha256": "6dbc9ce23b58989974307aa4bfa195641579e4d4923f3715736c09030fc8d8d6",
+     "size": 8413,
      "type": "file"
     },
     {
@@ -27340,8 +27367,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/affordanceManifest.js",
-     "sha256": "19b55c75240a95db5696fcb2a4229a0e9901b692f27a98a436f1fbe9dd43502d",
-     "size": 41804,
+     "sha256": "5acee0b47ee3eb080f09ad790cc8cbef682a9da4700c44ae769a3278e1391fea",
+     "size": 41937,
      "type": "file"
     },
     {
@@ -27403,8 +27430,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/mutateEntities.js",
-     "sha256": "29ead6abf41fe22391f07a51a35d779db3165633163880dfeb55a91ea94e4e16",
-     "size": 52077,
+     "sha256": "6c16ed5ea46e1f4f27c2fccee3934da477c77c480822bee69af7e3e45db4fd92",
+     "size": 53003,
      "type": "file"
     },
     {
@@ -27550,8 +27577,8 @@
     {
      "mode": "100644",
      "path": "src/domain/factionRename.js",
-     "sha256": "5a62213ad3ea2b363ec2f4b8323d85e9905865adb85711f901f85cec2fc3aefd",
-     "size": 67253,
+     "sha256": "e81d160a9ecefd1860ecd046f6e86b2d5c355245db0247c1af985be06647916b",
+     "size": 67990,
      "type": "file"
     },
     {
@@ -27767,8 +27794,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "0fae3a324876802d2632e7fd95d36cc21e4809efc01767e7682183c3f6792af2",
-     "size": 41990,
+     "sha256": "00577e73ef16f937ec45b01f38d994a56e35213322f7354636a7cefd0f2a2070",
+     "size": 41920,
      "type": "file"
     },
     {
@@ -27893,8 +27920,8 @@
     {
      "mode": "100644",
      "path": "src/domain/institutionRename.js",
-     "sha256": "d58c5e906ce222406cbe547db07e0b42e30de4f24afaaf02eddaa2ac0f8e2494",
-     "size": 28265,
+     "sha256": "3363546498cb1a7ec84327389bd7a3eaa1cb26980e70089e91f409b7221a2caf",
+     "size": 28347,
      "type": "file"
     },
     {
@@ -28166,8 +28193,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npc/livedExperienceSources.js",
-     "sha256": "1ff0ddaa6a2f62fc22694045801c1cafd58d9876e5764a7dd47f75fb0c817e85",
-     "size": 52681,
+     "sha256": "85a4069fa830e4c2063dfb56c3aeda5c14b735f61940c823cc647646dd445d5b",
+     "size": 52759,
      "type": "file"
     },
     {
@@ -28215,8 +28242,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npcProfile.js",
-     "sha256": "3cdd957dec16693d71682e26a12628a77646c5bb13bb621b5b403dd9d6a3cc57",
-     "size": 31088,
+     "sha256": "c77179425b8fb9eafa9ad6dd5738dc92d29f9acba620677190348b1507e5f71f",
+     "size": 31266,
      "type": "file"
     },
     {
@@ -28245,6 +28272,13 @@
      "path": "src/domain/pendingEditsPreview.js",
      "sha256": "1f006df5cd1696675dc0905d5d5c3c292e40136688135b0478991c70bf95dfb2",
      "size": 15006,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/allegiance.js",
+     "sha256": "a611fea482fd0dbe595e50050857c7617e124abbe75f3f4dd1a80c8e02a00d84",
+     "size": 23609,
      "type": "file"
     },
     {
@@ -28327,8 +28361,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "bb3f1a8eeb67e6ffc89ae3c44653d92de2731e05a23be891edbbaadbf3847e38",
-     "size": 48376,
+     "sha256": "ed7e55d7417a4ea8c449fcb96ec4e39209aa3d52e628c8606006816f76f2cdb5",
+     "size": 48392,
      "type": "file"
     },
     {
@@ -28768,15 +28802,15 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "28cccd065778b89ec99a9d949dbdc9ecc5091926f26d3896eee3217ff33f57fc",
-     "size": 81038,
+     "sha256": "645f0211873ddb8ee0b6ac49ff39ee34af0e7e9b46c9dc6af59c366c1d36749f",
+     "size": 81627,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/settlementMigrations.js",
-     "sha256": "29a04e5d985c915fe401a01928f4630cb31f2d5d5a1755345ec0a0992f27018d",
-     "size": 19600,
+     "sha256": "22deb4d8063490ab01cf6f2c3ec1a2bd0dd9d46285a1dd53f0beeeaca3647dbe",
+     "size": 25496,
      "type": "file"
     },
     {
@@ -29118,8 +29152,8 @@
     {
      "mode": "100644",
      "path": "src/domain/tableLedger.js",
-     "sha256": "9ad971735184ef3edec7d3972930b0d4a64cb92f5ce65d4b52b4ad9cdbd77194",
-     "size": 17816,
+     "sha256": "b1b5bbae724792bc5012df9c42f13ed59dd32dd5cfc36a21536e5794b8d7055a",
+     "size": 17937,
      "type": "file"
     },
     {
@@ -31526,8 +31560,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcAgency.js",
-     "sha256": "a41b36c675946c5ed4c3a5ae7ded7b879abcede2b11f14d2539d8293c2254a59",
-     "size": 59377,
+     "sha256": "8e05f847b2158d541e26d6c60d5620c1c822588cf738482a5a77852aa314573a",
+     "size": 59645,
      "type": "file"
     },
     {
@@ -33402,8 +33436,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "8d99137e655a7292434513cad47a8355144f8bbf255f444ab345ad60d286442a",
-     "size": 37598,
+     "sha256": "3c28908dde911da973f9db761141867cb073a6d9a9ec58dc68bc7951baf3bc48",
+     "size": 38729,
      "type": "file"
     },
     {
@@ -33535,8 +33569,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrative/settlementOriginProse.js",
-     "sha256": "7d42713ba81e9a7cd454c262a743131d4e96216a4333c14a4cca852a18c27ffd",
-     "size": 14181,
+     "sha256": "4cd3071d3734d9d885bc60e594f1a659036a7494dfe083a2a92bf1437da0b9b3",
+     "size": 14201,
      "type": "file"
     },
     {
@@ -33549,8 +33583,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "61cf1072d639712888b5b0d81cb8090c8de3b40fa4230acf94ad692ad015e142",
-     "size": 51069,
+     "sha256": "d078a6d8facd8a1c0271853c62cf22c521b3c2d90e6352681774bafd6a6cd8a0",
+     "size": 52718,
      "type": "file"
     },
     {
@@ -33619,8 +33653,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "533358edf55964f6f855a331f77cd36a8f6a798371eee0187177a953bda7d6ab",
-     "size": 84351,
+     "sha256": "1ae1851f7c83d9795b695b3e217435b9bbe6ef1a4a9c84b4e0887f752b849062",
+     "size": 84370,
      "type": "file"
     },
     {
@@ -33633,8 +33667,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "a3a1d575fb0975c71c1cdc7632ad3a8f66b3348d87a7545c48ea7bea8efb7cb9",
-     "size": 18519,
+     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
+     "size": 20589,
      "type": "file"
     },
     {
@@ -33647,8 +33681,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/personHooks.js",
-     "sha256": "6180f95719518bf470f650bec11bb31dd266637a8edc28e015b4cb31330a299c",
-     "size": 3963,
+     "sha256": "18652c4199d3da017f55b0b1ce149e1185785b704ca2ab0630914af945177647",
+     "size": 3986,
      "type": "file"
     },
     {
@@ -33661,15 +33695,15 @@
     {
      "mode": "100644",
      "path": "src/generators/people/representatives.js",
-     "sha256": "2192551976fbe4c39e77777c7c7004a27a71f626c200d6894a5c51a5d3cd9e99",
-     "size": 23537,
+     "sha256": "6e5697dd424ad28376c69374704f17776cdb43ad3fb6a60464eaae83cf4f2493",
+     "size": 23600,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/people/ties.js",
-     "sha256": "fca24dee61a43b188519766545a79ee36eb628bf5b4ff35f91df1f0e94998725",
-     "size": 9431,
+     "sha256": "5ea63e9a43d63de03b11629f63e19588ad148a443fb63ea69d94c1e9c37943ca",
+     "size": 10697,
      "type": "file"
     },
     {
@@ -33731,8 +33765,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/relationshipArchetypes.js",
-     "sha256": "be2067eccff3df9550b5ecc18347974cf98076af437ab0e43530977db4f34a15",
-     "size": 10638,
+     "sha256": "dd3247c93e4d4f87ad246c868bbe6445da1a27a26b60e9597c4da20814af105f",
+     "size": 12144,
      "type": "file"
     },
     {
@@ -33864,8 +33898,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "86e3dd9a261cdf7f0bc8ffea9f8c13dd5d473dff61841c52744cce0efc7a7c37",
-     "size": 26698,
+     "sha256": "81ee802a769f94cb1b9b3a00a5ca31d20d8d2085f689a31e274e3e0a8d38819b",
+     "size": 27238,
      "type": "file"
     },
     {
@@ -33887,13 +33921,6 @@
      "path": "src/generators/steps/coherenceRepairPass.js",
      "sha256": "560ace0abef337998f30ea02fea949b8e45592e7876f4c9ce2d3597724b4859e",
      "size": 21220,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/generators/steps/corruptionPass.js",
-     "sha256": "306845f28f243df9480e2dd60e5f2f09b092d9524f9e7d43ac7b140e735a243e",
-     "size": 5892,
      "type": "file"
     },
     {
@@ -33920,8 +33947,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/generateNarratives.js",
-     "sha256": "ccf7917de5ef740f37e12f853e9a9a52c6335ac8889f82c6cf30d83f061eadb7",
-     "size": 6280,
+     "sha256": "786fcd19b659a491e3e23d4820646f4ad79713d2228ba69b4211e31d35c91b5b",
+     "size": 6499,
      "type": "file"
     },
     {
@@ -33941,8 +33968,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/index.js",
-     "sha256": "3846e15ca04a83f7e73cccc91029e880e468f9dfed1c7a9b3358c4e5071a3266",
-     "size": 992,
+     "sha256": "3aed1b7a42eea88b68df5897953b7126c5dd96b00317e6084401753a8b8ad47f",
+     "size": 962,
      "type": "file"
     },
     {
@@ -34011,8 +34038,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/stepMetadata.js",
-     "sha256": "9f5865982d4196ef71960a2882231d6fdb9aed8a600754c469b236db8bd86ad5",
-     "size": 12985,
+     "sha256": "07cf52b360b7a2d28954ae2a0c7dd9717111fd0f52dd98681e4e2916fcc7d3f9",
+     "size": 12600,
      "type": "file"
     },
     {
@@ -35635,8 +35662,8 @@
     {
      "mode": "100644",
      "path": "src/lib/structuralFingerprint.js",
-     "sha256": "c95eb5aac052ba1a96768baeb937a2a17ea7626a43c7fbaa5b68af362b240077",
-     "size": 19502,
+     "sha256": "61815cd8f65de3ed2e7ec6463bbcdceb9786f884497e111c4feb041ebb8f3963",
+     "size": 19726,
      "type": "file"
     },
     {
@@ -36875,7 +36902,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "747d6cdb722d2d4f899b2f6033353c35822b07dfa18469028d7a0491442806b9",
+   "digest": "0edd6c7d4acbb3bfb26a4a00b57627dcf868632d46965b02b2bfa48a6354041a",
    "entries": [
     {
      "mode": "100644",
@@ -38735,8 +38762,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "9f32fff073ad1d022b61c58a9336ecd3114ee889908ff7e2ac60699c32864246",
-     "size": 8803,
+     "sha256": "b1b6d59de56a7bbf8686b8eacb74a347880690801f533c4dcef1f58f0e5c662c",
+     "size": 8716,
      "type": "file"
     },
     {
@@ -39834,8 +39861,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "a1dfd99bc90d40278ec98b696c3b22624df14b00acc4ee5fdcfedce07fcd80fc",
-     "size": 32398,
+     "sha256": "881dfb70eff78fcb21ffb8bc0c2a6c3897b1cd263be240653b819cd5b388727d",
+     "size": 33046,
      "type": "file"
     },
     {
@@ -41584,8 +41611,8 @@
     {
      "mode": "100644",
      "path": "src/data/institutionalCatalog.js",
-     "sha256": "d9d0479dd004684ec94f2449ada599e8192e434f626152fef438d110c8be35d4",
-     "size": 132290,
+     "sha256": "9fee5e57c7d7edc4eeb3315b4cc89524209a443f4e88a8a2c3e69d2602592629",
+     "size": 135243,
      "type": "file"
     },
     {
@@ -41619,8 +41646,8 @@
     {
      "mode": "100644",
      "path": "src/data/npcData.js",
-     "sha256": "7132aeaa560295e73064c819b59c54b9dcd5ee0fdef462eeb65222af073ce274",
-     "size": 122931,
+     "sha256": "a8cbf1f0495d7103bc7e3f3168b8ce118c1f8ba7492fcc5d5168baaee0369665",
+     "size": 123984,
      "type": "file"
     },
     {
@@ -41628,6 +41655,13 @@
      "path": "src/data/npcTraitWeights.js",
      "sha256": "38001c26fa6b4832eb2d033cd888dc192043c3386a8ffa4aadf2c17affddf59e",
      "size": 7332,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/data/people/handlerTieLines.js",
+     "sha256": "dc47ec8edf8435ad397b0bc5e58c2c8d09fa8b4e2c43d48f61d325ab3c959f28",
+     "size": 17244,
      "type": "file"
     },
     {
@@ -42963,15 +42997,15 @@
     {
      "mode": "100644",
      "path": "src/domain/corruption.js",
-     "sha256": "2e0a239c543bcff558302c6e8fbd6be16d9d588f55872ace152fb297817cd0d4",
-     "size": 39558,
+     "sha256": "bbd54e6e7ffa15f6c908a50c6291f4a9b77533b593df37abef8d2f6c46c7db2f",
+     "size": 39845,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "8373302c932e43a95d9f0fe8849144ad244032e0dec5ac4ca8574458b0bc4af1",
-     "size": 9050,
+     "sha256": "09477909d0b7c7aa9490a053a3bf8b2498bc4c59908368a5d03c98bd2a14065e",
+     "size": 10978,
      "type": "file"
     },
     {
@@ -42998,8 +43032,8 @@
     {
      "mode": "100644",
      "path": "src/domain/crisis/crisisCast.js",
-     "sha256": "0666b550e71accc343e56a92b458069b02e056a0e11e12d1d7600884797a2241",
-     "size": 57688,
+     "sha256": "e02ba4d17c5ce14c2a0409d769f68d72a2638baddd4beef6bf29e29f636169a3",
+     "size": 57808,
      "type": "file"
     },
     {
@@ -43439,8 +43473,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/dossierViewModel.js",
-     "sha256": "b77579a3e8a830a50a426edddeb2a13a1e0c1b94c1c9739868638b8f14abc84e",
-     "size": 37447,
+     "sha256": "51f5a1db7ee098592ae9beae0d44dcffb0ec319efbacf1444ae28ee92ed7673e",
+     "size": 37672,
      "type": "file"
     },
     {
@@ -43502,8 +43536,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "106c82a0cf002bcfebff988f25da8b5dbf0b312838a952e27d36c185cd51c873",
-     "size": 55675,
+     "sha256": "3ede39d5b2ca14fca262933af4c81bf76763740809c8bac0357c70c6ad45de13",
+     "size": 55944,
      "type": "file"
     },
     {
@@ -43684,8 +43718,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/npcInteriorityRead.js",
-     "sha256": "5e07a14c9f105d1d8feb91884e764a39b91f1ed0a53779d90222102d2a29e8b1",
-     "size": 16417,
+     "sha256": "c82bce0b0595bbd2a656b2290b127ed52d8b36787cb7f4a710c14bb6c60e8820",
+     "size": 16597,
      "type": "file"
     },
     {
@@ -43733,8 +43767,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "ccacb8f39ac113d8cb6c72c4d7321fd4cc10aa84d89d14f990487efe75f762d6",
-     "size": 40700,
+     "sha256": "2033aa4ee6e4a017e51af3713c3e947c042304b4707b17b404f342437d9c1d2d",
+     "size": 40958,
      "type": "file"
     },
     {
@@ -43873,8 +43907,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/defenseStateProse.js",
-     "sha256": "27538b1c57b2a0afd445d348027c92e047973e442c0cbfd4b8665df48383dea0",
-     "size": 125301,
+     "sha256": "5199d1ba9d1405374cc20ab3d07e3d0ae86c802d3df5d9548eae89fc046659a7",
+     "size": 125628,
      "type": "file"
     },
     {
@@ -43915,8 +43949,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "dd46142547f9877c9df953d83c4845e35a75a192addc449f468d1d07dac0c540",
-     "size": 123526,
+     "sha256": "4c7859fbaf2f41b51e1239b4ed1643c88a4180db57d98f8e95a03b20d435073e",
+     "size": 123689,
      "type": "file"
     },
     {
@@ -44384,8 +44418,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/recordRegister.js",
-     "sha256": "1c4ebf45c72194652a2d92697cd2b0dde1e167a7d1acd47f98650c14bf904b1e",
-     "size": 22547,
+     "sha256": "862f2dea0fdd2e464d8ea2c592d38eabab204c04e4aa0745cb10450ddf0d4456",
+     "size": 23200,
      "type": "file"
     },
     {
@@ -44398,8 +44432,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/tracePartition.js",
-     "sha256": "6c56b3d7d8e584a8c07f02add83b9d8e2ff91dbac83848a910fa62451fc33985",
-     "size": 8087,
+     "sha256": "6dbc9ce23b58989974307aa4bfa195641579e4d4923f3715736c09030fc8d8d6",
+     "size": 8413,
      "type": "file"
     },
     {
@@ -44454,8 +44488,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/affordanceManifest.js",
-     "sha256": "19b55c75240a95db5696fcb2a4229a0e9901b692f27a98a436f1fbe9dd43502d",
-     "size": 41804,
+     "sha256": "5acee0b47ee3eb080f09ad790cc8cbef682a9da4700c44ae769a3278e1391fea",
+     "size": 41937,
      "type": "file"
     },
     {
@@ -44517,8 +44551,8 @@
     {
      "mode": "100644",
      "path": "src/domain/events/mutateEntities.js",
-     "sha256": "29ead6abf41fe22391f07a51a35d779db3165633163880dfeb55a91ea94e4e16",
-     "size": 52077,
+     "sha256": "6c16ed5ea46e1f4f27c2fccee3934da477c77c480822bee69af7e3e45db4fd92",
+     "size": 53003,
      "type": "file"
     },
     {
@@ -44664,8 +44698,8 @@
     {
      "mode": "100644",
      "path": "src/domain/factionRename.js",
-     "sha256": "5a62213ad3ea2b363ec2f4b8323d85e9905865adb85711f901f85cec2fc3aefd",
-     "size": 67253,
+     "sha256": "e81d160a9ecefd1860ecd046f6e86b2d5c355245db0247c1af985be06647916b",
+     "size": 67990,
      "type": "file"
     },
     {
@@ -44881,8 +44915,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "0fae3a324876802d2632e7fd95d36cc21e4809efc01767e7682183c3f6792af2",
-     "size": 41990,
+     "sha256": "00577e73ef16f937ec45b01f38d994a56e35213322f7354636a7cefd0f2a2070",
+     "size": 41920,
      "type": "file"
     },
     {
@@ -45007,8 +45041,8 @@
     {
      "mode": "100644",
      "path": "src/domain/institutionRename.js",
-     "sha256": "d58c5e906ce222406cbe547db07e0b42e30de4f24afaaf02eddaa2ac0f8e2494",
-     "size": 28265,
+     "sha256": "3363546498cb1a7ec84327389bd7a3eaa1cb26980e70089e91f409b7221a2caf",
+     "size": 28347,
      "type": "file"
     },
     {
@@ -45280,8 +45314,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npc/livedExperienceSources.js",
-     "sha256": "1ff0ddaa6a2f62fc22694045801c1cafd58d9876e5764a7dd47f75fb0c817e85",
-     "size": 52681,
+     "sha256": "85a4069fa830e4c2063dfb56c3aeda5c14b735f61940c823cc647646dd445d5b",
+     "size": 52759,
      "type": "file"
     },
     {
@@ -45329,8 +45363,8 @@
     {
      "mode": "100644",
      "path": "src/domain/npcProfile.js",
-     "sha256": "3cdd957dec16693d71682e26a12628a77646c5bb13bb621b5b403dd9d6a3cc57",
-     "size": 31088,
+     "sha256": "c77179425b8fb9eafa9ad6dd5738dc92d29f9acba620677190348b1507e5f71f",
+     "size": 31266,
      "type": "file"
     },
     {
@@ -45359,6 +45393,13 @@
      "path": "src/domain/pendingEditsPreview.js",
      "sha256": "1f006df5cd1696675dc0905d5d5c3c292e40136688135b0478991c70bf95dfb2",
      "size": 15006,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/people/allegiance.js",
+     "sha256": "a611fea482fd0dbe595e50050857c7617e124abbe75f3f4dd1a80c8e02a00d84",
+     "size": 23609,
      "type": "file"
     },
     {
@@ -45441,8 +45482,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "bb3f1a8eeb67e6ffc89ae3c44653d92de2731e05a23be891edbbaadbf3847e38",
-     "size": 48376,
+     "sha256": "ed7e55d7417a4ea8c449fcb96ec4e39209aa3d52e628c8606006816f76f2cdb5",
+     "size": 48392,
      "type": "file"
     },
     {
@@ -45882,15 +45923,15 @@
     {
      "mode": "100644",
      "path": "src/domain/settlement.schema.js",
-     "sha256": "28cccd065778b89ec99a9d949dbdc9ecc5091926f26d3896eee3217ff33f57fc",
-     "size": 81038,
+     "sha256": "645f0211873ddb8ee0b6ac49ff39ee34af0e7e9b46c9dc6af59c366c1d36749f",
+     "size": 81627,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/domain/settlementMigrations.js",
-     "sha256": "29a04e5d985c915fe401a01928f4630cb31f2d5d5a1755345ec0a0992f27018d",
-     "size": 19600,
+     "sha256": "22deb4d8063490ab01cf6f2c3ec1a2bd0dd9d46285a1dd53f0beeeaca3647dbe",
+     "size": 25496,
      "type": "file"
     },
     {
@@ -46232,8 +46273,8 @@
     {
      "mode": "100644",
      "path": "src/domain/tableLedger.js",
-     "sha256": "9ad971735184ef3edec7d3972930b0d4a64cb92f5ce65d4b52b4ad9cdbd77194",
-     "size": 17816,
+     "sha256": "b1b5bbae724792bc5012df9c42f13ed59dd32dd5cfc36a21536e5794b8d7055a",
+     "size": 17937,
      "type": "file"
     },
     {
@@ -48640,8 +48681,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/npcAgency.js",
-     "sha256": "a41b36c675946c5ed4c3a5ae7ded7b879abcede2b11f14d2539d8293c2254a59",
-     "size": 59377,
+     "sha256": "8e05f847b2158d541e26d6c60d5620c1c822588cf738482a5a77852aa314573a",
+     "size": 59645,
      "type": "file"
     },
     {
@@ -50516,8 +50557,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "8d99137e655a7292434513cad47a8355144f8bbf255f444ab345ad60d286442a",
-     "size": 37598,
+     "sha256": "3c28908dde911da973f9db761141867cb073a6d9a9ec58dc68bc7951baf3bc48",
+     "size": 38729,
      "type": "file"
     },
     {
@@ -50649,8 +50690,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrative/settlementOriginProse.js",
-     "sha256": "7d42713ba81e9a7cd454c262a743131d4e96216a4333c14a4cca852a18c27ffd",
-     "size": 14181,
+     "sha256": "4cd3071d3734d9d885bc60e594f1a659036a7494dfe083a2a92bf1437da0b9b3",
+     "size": 14201,
      "type": "file"
     },
     {
@@ -50663,8 +50704,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "61cf1072d639712888b5b0d81cb8090c8de3b40fa4230acf94ad692ad015e142",
-     "size": 51069,
+     "sha256": "d078a6d8facd8a1c0271853c62cf22c521b3c2d90e6352681774bafd6a6cd8a0",
+     "size": 52718,
      "type": "file"
     },
     {
@@ -50733,8 +50774,8 @@
     {
      "mode": "100644",
      "path": "src/generators/npcGenerator.js",
-     "sha256": "533358edf55964f6f855a331f77cd36a8f6a798371eee0187177a953bda7d6ab",
-     "size": 84351,
+     "sha256": "1ae1851f7c83d9795b695b3e217435b9bbe6ef1a4a9c84b4e0887f752b849062",
+     "size": 84370,
      "type": "file"
     },
     {
@@ -50747,8 +50788,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "a3a1d575fb0975c71c1cdc7632ad3a8f66b3348d87a7545c48ea7bea8efb7cb9",
-     "size": 18519,
+     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
+     "size": 20589,
      "type": "file"
     },
     {
@@ -50761,8 +50802,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/personHooks.js",
-     "sha256": "6180f95719518bf470f650bec11bb31dd266637a8edc28e015b4cb31330a299c",
-     "size": 3963,
+     "sha256": "18652c4199d3da017f55b0b1ce149e1185785b704ca2ab0630914af945177647",
+     "size": 3986,
      "type": "file"
     },
     {
@@ -50775,15 +50816,15 @@
     {
      "mode": "100644",
      "path": "src/generators/people/representatives.js",
-     "sha256": "2192551976fbe4c39e77777c7c7004a27a71f626c200d6894a5c51a5d3cd9e99",
-     "size": 23537,
+     "sha256": "6e5697dd424ad28376c69374704f17776cdb43ad3fb6a60464eaae83cf4f2493",
+     "size": 23600,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/generators/people/ties.js",
-     "sha256": "fca24dee61a43b188519766545a79ee36eb628bf5b4ff35f91df1f0e94998725",
-     "size": 9431,
+     "sha256": "5ea63e9a43d63de03b11629f63e19588ad148a443fb63ea69d94c1e9c37943ca",
+     "size": 10697,
      "type": "file"
     },
     {
@@ -50845,8 +50886,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/relationshipArchetypes.js",
-     "sha256": "be2067eccff3df9550b5ecc18347974cf98076af437ab0e43530977db4f34a15",
-     "size": 10638,
+     "sha256": "dd3247c93e4d4f87ad246c868bbe6445da1a27a26b60e9597c4da20814af105f",
+     "size": 12144,
      "type": "file"
     },
     {
@@ -50978,8 +51019,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/assembleSettlement.js",
-     "sha256": "86e3dd9a261cdf7f0bc8ffea9f8c13dd5d473dff61841c52744cce0efc7a7c37",
-     "size": 26698,
+     "sha256": "81ee802a769f94cb1b9b3a00a5ca31d20d8d2085f689a31e274e3e0a8d38819b",
+     "size": 27238,
      "type": "file"
     },
     {
@@ -51001,13 +51042,6 @@
      "path": "src/generators/steps/coherenceRepairPass.js",
      "sha256": "560ace0abef337998f30ea02fea949b8e45592e7876f4c9ce2d3597724b4859e",
      "size": 21220,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/generators/steps/corruptionPass.js",
-     "sha256": "306845f28f243df9480e2dd60e5f2f09b092d9524f9e7d43ac7b140e735a243e",
-     "size": 5892,
      "type": "file"
     },
     {
@@ -51034,8 +51068,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/generateNarratives.js",
-     "sha256": "ccf7917de5ef740f37e12f853e9a9a52c6335ac8889f82c6cf30d83f061eadb7",
-     "size": 6280,
+     "sha256": "786fcd19b659a491e3e23d4820646f4ad79713d2228ba69b4211e31d35c91b5b",
+     "size": 6499,
      "type": "file"
     },
     {
@@ -51055,8 +51089,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/index.js",
-     "sha256": "3846e15ca04a83f7e73cccc91029e880e468f9dfed1c7a9b3358c4e5071a3266",
-     "size": 992,
+     "sha256": "3aed1b7a42eea88b68df5897953b7126c5dd96b00317e6084401753a8b8ad47f",
+     "size": 962,
      "type": "file"
     },
     {
@@ -51125,8 +51159,8 @@
     {
      "mode": "100644",
      "path": "src/generators/steps/stepMetadata.js",
-     "sha256": "9f5865982d4196ef71960a2882231d6fdb9aed8a600754c469b236db8bd86ad5",
-     "size": 12985,
+     "sha256": "07cf52b360b7a2d28954ae2a0c7dd9717111fd0f52dd98681e4e2916fcc7d3f9",
+     "size": 12600,
      "type": "file"
     },
     {
@@ -52749,8 +52783,8 @@
     {
      "mode": "100644",
      "path": "src/lib/structuralFingerprint.js",
-     "sha256": "c95eb5aac052ba1a96768baeb937a2a17ea7626a43c7fbaa5b68af362b240077",
-     "size": 19502,
+     "sha256": "61815cd8f65de3ed2e7ec6463bbcdceb9786f884497e111c4feb041ebb8f3963",
+     "size": 19726,
      "type": "file"
     },
     {
@@ -53989,30 +54023,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "1f631abeb9f658f549d2c6e25d0c3bf7a96aedd915427808d7ce3ebcaf87e6e5",
-  "corpusDigest": "4f0059fc667f2fe0e093fd6687c25f194e95e18bacd0c086a76a67d6189325f0",
-  "currentArtifactDigest": "b5136b65051583e73c2f318cfd7724e6deebda75ff12d73c678f34761e05f302",
-  "currentDetectorDigest": "4e02c2d6d2fa0f27f3ebe4da2b6db07da3888d6fff64767c718a32d9f646e025",
-  "currentFindingsDigest": "b4ebf5e7be48b1b73d166cc7f5945c9299f9c2d9f73586b788418e4570f00fd1",
-  "currentScannerSha": "c7357f6714cf56b9839e8793908a9ac898c0c13c",
-  "currentScannerToolDigest": "8c37df6fb063ef529af1a944756b849b14b3590cf01f42c412d3f0d8b6df4560",
-  "detectorTreeDigest": "4e02c2d6d2fa0f27f3ebe4da2b6db07da3888d6fff64767c718a32d9f646e025",
-  "executionTreeDigest": "377e68853022bf5e4b4c96fb5232a1b9bd00e3998c456cd9764a031aeda45d36",
+  "bundleDigest": "f14c362088667f014af1a43772353a04f5ee07b41fe92af43404776624561bca",
+  "corpusDigest": "48499f394ecda548d26292286c0aaff596fc56f01f3c8ca9a809e92b65991600",
+  "currentArtifactDigest": "8194b648183dbc5af0b465e26636930b100ff42bd690f481137b37f24365a059",
+  "currentDetectorDigest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
+  "currentFindingsDigest": "a798331b2af0be94afedd606adef4f337cf1b3cebce65f892eb3dbb09b97bb2c",
+  "currentScannerSha": "d6a04a625ebeebf03cd24ac849f566aaed69e627",
+  "currentScannerToolDigest": "fb7d379093a7dc984f6a477b74353596b21a3f9739a615a1a9582c1a4d620664",
+  "detectorTreeDigest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
+  "executionTreeDigest": "9f66b5fca0680e38e9ab470d475bc86c9b3621250244f6e3d1a2303661572a9c",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "b5136b65051583e73c2f318cfd7724e6deebda75ff12d73c678f34761e05f302",
-  "legacyDetectorDigest": "4e02c2d6d2fa0f27f3ebe4da2b6db07da3888d6fff64767c718a32d9f646e025",
-  "legacyScannerSha": "c7357f6714cf56b9839e8793908a9ac898c0c13c",
-  "legacyScannerToolDigest": "8c37df6fb063ef529af1a944756b849b14b3590cf01f42c412d3f0d8b6df4560",
-  "predecessorBaselineDigest": "62f0f222a47d0c9cb7144782b83d7ebfd07563bad2e9c7beb1a8fac126a821e5",
-  "predecessorBaselineTextSha256": "73c1bfae471e4d87dd676d7e7505f6c763b37554da7c6b113466a1b47d376b14",
-  "predecessorInventoryDigest": "48d7d9e53b67208bdc4779e82d6b5e866d9012abd651f36e79cb8f396fffc37c",
-  "reportDigest": "4819ffad3d315d684fe018b0b060a4b9841390afbbd4bec55455a7a5a83e3684",
-  "reviewDigest": "94915a6cab746bac89e0fe85f3388e4c49591730a2969f03d42e7904a49a0ea3",
+  "legacyArtifactDigest": "8194b648183dbc5af0b465e26636930b100ff42bd690f481137b37f24365a059",
+  "legacyDetectorDigest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
+  "legacyScannerSha": "d6a04a625ebeebf03cd24ac849f566aaed69e627",
+  "legacyScannerToolDigest": "fb7d379093a7dc984f6a477b74353596b21a3f9739a615a1a9582c1a4d620664",
+  "predecessorBaselineDigest": "b07585384d4d21dec7a5f3108b3f499a17bcbca6e4bf626b13379e08f8d55824",
+  "predecessorBaselineTextSha256": "e4089a66b3d6917ae681ddd8c4187e2f5355a8c79dde5f26e164d52f42a0426d",
+  "predecessorInventoryDigest": "e88967d7aa56f66e8a80bb25b648d43a5ae990a798915656b90cfebb9c37e792",
+  "reportDigest": "a538ba140dfe2b3e617a3761558f2d505725eb882f0b0954a23299dc9caab2ec",
+  "reviewDigest": "eb31863bc313a655a2b06c7450186acf228ec00b5c638955c77555250c26aaa5",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "7433e5658595dfd5103db1e7d5c99369d098a4b0dbe98e1f4e9d7b65ecb36727",
-  "sourceTreeDigest": "951682f59f83551463e46214196e4908859aa1b91a451a6edaee3aedd6768230",
-  "subjectSha": "c7357f6714cf56b9839e8793908a9ac898c0c13c",
-  "targetInventoryDigest": "e88967d7aa56f66e8a80bb25b648d43a5ae990a798915656b90cfebb9c37e792"
+  "scanTreeDigest": "50511dedc1a7289a409006223c991b100216e63dd95b29b7cee7704800c1392f",
+  "sourceTreeDigest": "0edd6c7d4acbb3bfb26a4a00b57627dcf868632d46965b02b2bfa48a6354041a",
+  "subjectSha": "d6a04a625ebeebf03cd24ac849f566aaed69e627",
+  "targetInventoryDigest": "2ed599ffe9461883d33c50d60c5f3925b95a6e1b4b78e28fcd8e4853c9df3fcb"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -54305,23 +54339,23 @@
   }
  },
  "scanStats": {
-  "files": 2427,
-  "reads": 139178,
-  "resolved": 11120,
-  "unresolved": 128058
+  "files": 2428,
+  "reads": 139651,
+  "resolved": 11198,
+  "unresolved": 128453
  },
  "scannerProvenance": {
-  "detectorDigest": "4e02c2d6d2fa0f27f3ebe4da2b6db07da3888d6fff64767c718a32d9f646e025",
-  "executionTreeDigest": "365b8e0d5406cc193ecfe8c1657f35ddbd60179a58a8ea2f61d413348ed96b32",
-  "scanTreeDigest": "0052b3252fca3705f2f6f93f9ddae21ea3ffdd336051362867afb4c189249d26",
-  "sourceTreeDigest": "747d6cdb722d2d4f899b2f6033353c35822b07dfa18469028d7a0491442806b9",
+  "detectorDigest": "885a8efe942eb32224ee20465eaf190c7b6032db0fda8166f90090439706e970",
+  "executionTreeDigest": "9f66b5fca0680e38e9ab470d475bc86c9b3621250244f6e3d1a2303661572a9c",
+  "scanTreeDigest": "50511dedc1a7289a409006223c991b100216e63dd95b29b7cee7704800c1392f",
+  "sourceTreeDigest": "0edd6c7d4acbb3bfb26a4a00b57627dcf868632d46965b02b2bfa48a6354041a",
   "unscannedInputDigest": "2a8cd80b054d65dc5c1c9ebde1d33232cb37d0cb12d896c6497605969bfec9d0"
  },
- "schema": 35,
+ "schema": 36,
  "sentinel": {
-  "resolvedReads": 11120,
-  "totalKeys": 12068,
-  "usableShapes": 520
+  "resolvedReads": 11198,
+  "totalKeys": 12236,
+  "usableShapes": 529
  },
- "total": 2187
+ "total": 2205
 }
