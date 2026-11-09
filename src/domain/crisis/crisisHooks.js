@@ -37,6 +37,7 @@ import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
+import { pluralPowerName } from '../display/governanceAccount.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -183,8 +184,19 @@ function leverSentence(noun, house, holder, loser) {
   // W7 HOOKS (rows 263, 271): what the crisis turns on and who loses, in plain words; "the players can push
   // on" was machinery (the DM decides what the players push on).
   return loser
-    ? `The ${noun} ${turns} on the ${place}${run}: if it gives way, ${loser.factionId} loses most, because ${loser.reason}.`
+    ? `The ${noun} ${turns} on the ${place}${run}: if it gives way, ${loserClause(loser)}.`
     : `The ${noun} ${turns} on the ${place}${run}: whoever wins it over decides how the ${noun} ${goes}.`;
+}
+
+/**
+ * The losing power's clause (SW-6, SW-10's referral 2026-11-09: "Religious Authorities loses most … its"): a plural
+ * power (`governanceAccount.js :: pluralPowerName`, the head word) takes a plural verb and "their".
+ * @param {import('./crisisCast.js').CastStake} loser @returns {string}
+ */
+function loserClause(loser) {
+  const plural = pluralPowerName(loser.factionId);
+  const reason = plural ? loser.reason.replace(/\bits\b/g, 'their') : loser.reason;
+  return `${loser.factionId} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
 }
 
 /**

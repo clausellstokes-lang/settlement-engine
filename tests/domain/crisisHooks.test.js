@@ -198,3 +198,13 @@ describe('CRISIS_NOUN: no retired word', () => {
     expect(CRISIS_NOUN.politically_fractured).toBe('split');
   });
 });
+
+// SW-6 (SW-10's referral, the chair 12:59): "if it gives way, Religious Authorities loses most, because … its …".
+describe('crisisHooksOf: a plural power agrees', () => {
+  it('a plural losing power takes "lose" and "their"; a singular one keeps "loses" and "its"', () => {
+    const lever = { institution: 'Temple', holderId: null, holderName: null };
+    const hookFor = (factionId) => crisisHooksOf(town(), { type: 'plague_onset', cast: cast([], [lever], [{ factionId, stake: 'loses', reason: STAKE_REASONS.loses }]) })[0].text;
+    expect(hookFor('Religious Authorities')).toMatch(/Religious Authorities lose most, because their own people feel the crisis first\.$/);
+    expect(hookFor('Town Council')).toMatch(/Town Council loses most, because its own people feel the crisis first\.$/);
+  });
+});
