@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "75ffe536dda4a17a9f6053f0359626c89da4721d",
-  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR2 merge point)",
+  "measuredAtSha": "22dd2339ab0fa528d4711b016287c95c294d1053",
+  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR3 merge point)",
   "date": "2026-11-09",
-  "note": "car 2 composed: GUILD_PUSH_TUNING and HALL_CAPTURE_TUNING",
+  "note": "car 3 composed: RULING_PATRONAGE_TUNING, organizedCrime 0.05, bossJoinsAbove",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -384,6 +384,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -428,6 +429,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -473,6 +475,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -525,6 +528,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -569,6 +573,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -612,6 +617,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -639,6 +645,7 @@
         "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
+        "src/domain/corruptionLeash.js",
         "src/domain/worldPulse/npcAgency.js"
       ]
     },
@@ -1220,16 +1227,17 @@
     "src/domain/people/allegiance.js#ALLEGIANCE_TUNING": {
       "exported": true,
       "idiom": "literal",
-      "keys": 6,
+      "keys": 7,
       "line": 68,
-      "spanDigest": "bdc4407d93dfb082d17719ba435ca434e433f36a95c24609a342ccdbf1e86563",
+      "spanDigest": "0534913bf7da44d769d779cf750b6934ec7ab9ae94925492cb9a6a1344dbfcdf",
       "leaves": {
-        "organizedCrime": 0.1,
+        "organizedCrime": 0.05,
         "organizedFull": 8,
         "powerBonus": 0.25,
         "share": 0.15,
         "frontWeight": 1,
-        "weightZeroHouse": 0.5
+        "weightZeroHouse": 0.5,
+        "bossJoinsAbove": 4
       },
       "dependents": [
         "src/components/new/npcComponents.jsx",
@@ -1240,6 +1248,7 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/npcProfile.js",
         "src/domain/people/hallCapture.js",
+        "src/domain/people/patronage.js",
         "src/domain/settlementMigrations.js",
         "src/domain/tableLedger.js",
         "src/domain/worldPulse/npcAgency.js",
@@ -1271,6 +1280,26 @@
       },
       "dependents": [
         "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/people/patronage.js#RULING_PATRONAGE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 55,
+      "spanDigest": "9acdd8bbb6d33f13f0160b4fb859db40ed62562fc613d4cd950fa2f3358584d1",
+      "leaves": {
+        "byRank.1": 0.15,
+        "byRank.2": 0.1,
+        "byRank.3": 0.05,
+        "steward": 0.1,
+        "cap": 0.25,
+        "ceilingGap": 1
+      },
+      "dependents": [
+        "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+        "src/pdf/lib/viewModel.js"
       ],
       "namedDependents": []
     },
@@ -4256,7 +4285,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 175,
+      "line": 176,
       "spanDigest": "a5da95dcebc47ef008491d904306a7794fbd2c92eb510eadee04d12cfba2f3b0",
       "leaves": {
         "DWELL_INTERVAL_TICKS": 2,
@@ -8903,11 +8932,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 274,
-    "keys": 2236,
+    "tables": 275,
+    "keys": 2241,
     "unregisteredNamed": 539,
     "bareDecimals": 6935,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 182
+    "zeroNamedDependentTables": 183
   }
 }
