@@ -601,6 +601,8 @@ describe('IN-0a — the take, and the market named at the collapse', () => {
     // FIX-PULSE-DEFECTS (audit C2·25): the patron printed as its raw faction-state key
     // ("… bought by aaa:ashwater_syndicate."). The patron is a POWER, so the caller's
     // faction-ledger read names it; without one, the key never prints.
+    expect(lines[1]).toBe('The lineage holds all the way back to the counter: the order was bought by a power that paid in secret.');
+    // anchored: lines[1] is pinned verbatim on the line above, so the line is present and live.
     expect(lines[1]).not.toContain(envelope.receipt.patronId);
     const named = plantExposureReasons(folded.record, (/** @type {string} */ id) => id,
       (/** @type {string} */ id) => (id === envelope.receipt.patronId ? 'the Ashwater Syndicate' : ''));

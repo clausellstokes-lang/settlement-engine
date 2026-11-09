@@ -286,6 +286,8 @@ describe('THE REFUSAL, REMEMBERED — and what it deliberately does not do', () 
     // FIX-PULSE-DEFECTS (audit C1b·112): the turning point printed the courts' raw ids
     // ("B would not treat with A …"). An unnamed fixture reads neutral nouns; a named one
     // reads the names.
+    expect(points[0].summary).toMatch(/^One court would not treat with another over /);
+    // anchored: the same summary is matched on the line above, so it is present and live.
     expect(points[0].summary).not.toMatch(/\b[AB]\b/);
     const named = openThenAnswer(bound, namedSnapshot()).second.worldState.relationshipStates[relKey('A', 'B')];
     expect(named.turningPoints[0].summary).toMatch(/^Irontown would not treat with Ashford over /);
@@ -624,6 +626,8 @@ describe('THE DRAFT LENS — the rung ladders, and what an occasion has earned',
     }
     // A sheet drafted without names never prints an id.
     for (const term of draft('faith_communion', 0.45, true).terms) {
+      expect(String(term.receipt)).toMatch(/^(one court|the other court) promises /);
+      // anchored: the same receipt is matched on the line above, so it is present and live.
       expect(String(term.receipt)).not.toMatch(/\b[AB]\b/);
     }
     // NEITHER transfer term is ever emitted symmetric, which is what makes the ruling

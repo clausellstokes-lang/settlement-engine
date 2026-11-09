@@ -834,6 +834,7 @@ describe('WR-6 pairwise peace', () => {
     // are what the departing court settled on, and the fronts simply stand.
     const signed = (result.newsEntries || []).find((entry) => entry.kind === 'treaty_signed');
     expect(signed?.summary).toMatch(/ settles only its own edge with .+ on terms of .+, leaving the allied fronts standing\.$/);
+    // anchored: the same summary is matched on the line above, so it is present and live.
     expect(signed?.summary).not.toMatch(/standing under/);
     expect(result.coalitionEvidence).toHaveLength(1);
     expect(result.coalitionEvidence[0]).toMatchObject({

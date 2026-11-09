@@ -322,6 +322,8 @@ describe('W-OPS O1 — the candidate rides the EXISTING grammar, and stays a pro
     expect(named.appliedHeadline).toBe('Ashford sends to learn the truth about Brindle');
     expect(named.summary).toBe('Ashford wants what is said of Brindle confirmed before acting on it.');
     const bare = dispatch([staleDemand('d1', 'court.b')]).candidates[0];
+    expect(bare.headline).toBe('A court is sending to learn the truth about a rival court');
+    // anchored: the bare headline is pinned verbatim on the line above, so the prose is live.
     expect(`${bare.headline} ${bare.appliedHeadline} ${bare.summary}`).not.toMatch(/court\.[ab]/);
   });
 

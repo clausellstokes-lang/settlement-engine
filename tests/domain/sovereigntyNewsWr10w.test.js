@@ -106,6 +106,7 @@ describe('WR-10 sovereignty news — the address chain', () => {
       reasons: ['asset_town is a steading of seller_seat, and a steading is property that may change hands.'],
     });
     expect(entry.reasons).toContain('Ashford is a steading of Irontown, and a steading is property that may change hands.');
+    // anchored: the same reasons are asserted to carry the named line on the line above.
     expect(entry.reasons.join(' ')).not.toMatch(/asset_town|seller_seat|buyer_seat/);
   });
 

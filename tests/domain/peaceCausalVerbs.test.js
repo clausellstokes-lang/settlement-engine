@@ -76,7 +76,10 @@ describe('DECLARE_CASUS — the war-side forceable verb', () => {
     expect(receipt).toMatch(/resource pressure/);
     expect(receipt).toMatch(/Brindle/);
     const unnamed = declareCasus(litWorld(), { fromId: 'a', toId: 'b', type: 'resource_pressure', tick: 5 });
-    expect(String(warReasonsFor(unnamed.worldState, 'a', 'b').reasons.resource_pressure.receipt)).not.toMatch(/_|\bb\b/);
+    const bare = String(warReasonsFor(unnamed.worldState, 'a', 'b').reasons.resource_pressure.receipt);
+    expect(bare).toMatch(/resource pressure .*its rival|its rival/);
+    // anchored: the same receipt is matched on the line above, so it is present and live.
+    expect(bare).not.toMatch(/_|\bb\b/);
   });
 
   it('DIAL CLAMP (clampAtCommit): severity clamps into [MIN_SCORE, 1] — no ghosts, no overshoot', () => {
