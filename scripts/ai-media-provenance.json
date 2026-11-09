@@ -871,20 +871,20 @@
       "agent": "OpenAI",
       "generated": "2026-09-16",
       "credit": null,
-      "mapped_by": "the owner supplied the master on 2026-09-16; this strip is cut from it (a subject mask, integer column shifts at the cord bindings to level the shaft, a crop at the top of the wooden shaft), then one q90 WebP encode",
+      "mapped_by": "the owner supplied the master on 2026-09-16; this strip is cut from it (a subject mask, integer column shifts at the cord bindings to level the shaft, a crop at the top of the wooden shaft), then one q90 WebP encode; re-cut 2026-11-09 on the owner's word (FIX-ARROW-PLAQUE: the blank brass plate moved 22 columns left to centre it between its bindings, the vacated columns filled with the painting's own wood), then a second q90 WebP encode",
       "manifest_when": "2026-09-17T00:00:00Z in the master's C2PA manifest (UTC; 2026-09-16 about 20:15 EDT by the master's filename), signed by OpenAI OpCo, LLC for the OpenAI Media Service API",
       "require": [
         "<x:xmpmeta",
         "trainedAlgorithmicMedia",
         "NOT a C2PA manifest",
         "openai:gpt-image@2026-09-16",
-        "sfp:restoredOn=\"2026-09-16\""
+        "sfp:restoredOn=\"2026-11-09\""
       ],
       "forbid": [
         "urn:c2pa",
         "Made with Google AI"
       ],
-      "restored": "2026-09-16"
+      "restored": "2026-11-09"
     },
     "public/brand/plaque.png": {
       "origin": "openai:gpt-image@2026-09-16",

@@ -122,7 +122,7 @@ describe('(a2) tone: the wood inserted matches the wood beside it', () => {
     const { children } = paint(layout, 'band');
     const [filler] = children.filter((el) => el.hasAttribute('data-sf-arrow-filler'));
     const kL = SLOT_TONE[558];
-    const kR = SLOT_TONE[1596];
+    const kR = SLOT_TONE[1586]; // the tail crop's cut, 1596 until the plate moved (2026-11-09)
     expect(filler.style.filter).toBe(`brightness(${kL})`);
     const copy = filler.querySelector('[data-sf-arrow-filler-tone]');
     expect(copy).not.toBeNull();

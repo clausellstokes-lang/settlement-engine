@@ -31,8 +31,8 @@
  *       and on a phone sits inside a 44 x 44 plate while the painted slip stays put
  *       (ODQ §934.26 — the slip's sub-floor type is a registered exception, executed in
  *       tests/components/publicChromeFloor.census.test.js);
- *   (h) the menu stays on the page: at 320 px it shifts right just far enough to clear the
- *       page's left edge, and at 390 and 1440 it stays right-aligned to the plate.
+ *   (h) the menu stays on the page: at 320 and 390 px it shifts right just far enough to clear
+ *       the page's left edge, and at 400 and 1440 it stays right-aligned to the plate.
  */
 import React from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
@@ -392,8 +392,12 @@ describe('(g) the slip shows the signed-in name, readable', () => {
 });
 
 describe('(h) the menu stays on the page', () => {
-  test('at 320 px it shifts right just far enough to keep MENU_W clear of the left edge; at 390 and 1440 it is right-aligned to the plate', () => {
-    for (const [cw, full, wantShift] of [[320, false, true], [390, false, false], [1440, true, false]]) {
+  test('at 320 and 390 px it shifts right just far enough to keep MENU_W clear of the left edge; at 400 and 1440 it is right-aligned to the plate', () => {
+    // 390 joined the shifting widths with the plate's re-cut (FIX-ARROW-PLAQUE, 2026-11-09): the
+    // plate moved 22 strip columns left, so on a 390 px phone its padded right edge is 295.31 px
+    // (it was about 302), short of the 300 a right-aligned 292 px menu needs, and the menu shifts
+    // 4.69 px. From 397 px the plate's right edge clears 300 again; 400 holds that side.
+    for (const [cw, full, wantShift] of [[320, false, true], [390, false, true], [400, false, false], [1440, true, false]]) {
       const l = layoutArrow({ clientWidth: cw, full });
       const plateBox = full ? l.hits.plate : padTarget(l.hits.plate, 44, l.width);
       const right = plateBox.x + plateBox.w;

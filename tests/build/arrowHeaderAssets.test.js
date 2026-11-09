@@ -83,10 +83,15 @@ const percentile = (values, p) => {
   return sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))];
 };
 
-/** Each shaft row's median luma across the shaft [520, 1620): the lighting the ink test is relative to. */
+/**
+ * Each shaft row's median luma across the shaft [520, 1598): the lighting the ink test is
+ * relative to. The window runs from the first binding to three columns short of the blank
+ * plate's left tip: [520, 1620) until FIX-ARROW-PLAQUE moved the plate 22 columns left
+ * (2026-11-09), when the old window would have taken the moved brass into the median.
+ */
 const ROW_MEDIAN = Array.from({ length: BAND_H + 2 }, (_, y) => {
   const values = [];
-  for (let x = 520; x < 1620; x += 1) values.push(luma(px(strip, x, y)));
+  for (let x = 520; x < PLATE.x0 - 3; x += 1) values.push(luma(px(strip, x, y)));
   return percentile(values, 0.5);
 });
 /** Dark shaft pixels (under half the row's median) in rows [4, 63) of a column. */
@@ -137,13 +142,18 @@ function withoutXmp(buf) {
 }
 
 const FILES = {
+  // FIX-ARROW-PLAQUE's re-cut (2026-11-09, the owner's word): the blank plate moved 22 columns
+  // left, then one q90 WebP encode (effort 5, smart subsampling: of the 56 q90 settings searched, the one
+  // under which every table here and the brand test's wax seal re-measure as on the unencoded
+  // re-cut but binding 1's cord runs, which read as one), 67,726 B,
+  // plus the credit. The first cut was 70,230 B; the ceiling is unchanged.
   [STRIP_REL]: {
     size: [STRIP_W, STRIP_H],
-    bytes: 70230,
+    bytes: 69650,
     ceiling: 70500,
-    sha256: '427f9d98fb9a714c443f074b233ab9ec9cf494e2bd6f096b67d2691c08502dd2',
-    kitSha256: 'e2f7dc00d11a83af2618a553ff013782dcef28b8fc2b5aa0761f108756544dbf',
-    restored: '2026-09-16',
+    sha256: 'c5a723f7a96d95df0440c032beb24d1331e71c15a7cea386f2ba7f7b23e159f2',
+    kitSha256: 'f644a84d1dd311711cbab8310b0cbf9767cf8445e05107eacadf45471c96155c',
+    restored: '2026-11-09',
   },
   // The chair's re-cut (2026-09-17): the kit's arrow-filler-v3.q90.webp (6,366 B) plus the
   // credit. Its ceiling moved with the file (5,200 for the 5,024 B first cut), by that ruling.
@@ -358,7 +368,11 @@ describe('(e) the filler tile', () => {
     let min = 255;
     for (let y = 1; y < 63; y += 1) for (let x = 0; x < FILLER_W; x += 1) min = Math.min(min, alpha(filler, x, y));
     expect(min).toBe(255);
-    // The anti-aliased edge, rows 63 to 69: row-mean alpha within 20 of the wood runs' (measured at most 17).
+    // The anti-aliased edge, rows 63 to 69: row-mean alpha within 23 of the wood runs'. Within 20
+    // (measured at most 17) until the re-cut (2026-11-09) took 23 columns out of the run before
+    // the plate (now [1566, 1605), it was [1566, 1628)), whose edge sits highest of all the runs
+    // (row 67: alpha 61 against the tile's 110): the gap measures 22.24 at row 67 (15.3 before).
+    // The tile and every kept wood column are unchanged; the bound moved with its reference set.
     const gaps = [];
     for (let y = 63; y < FILLER_H; y += 1) {
       let tile = 0;
@@ -368,7 +382,7 @@ describe('(e) the filler tile', () => {
       gaps.push(Math.abs(tile - wood));
     }
     expect(gaps).toHaveLength(7);
-    expect(Math.max(...gaps)).toBeLessThanOrEqual(20);
+    expect(Math.max(...gaps)).toBeLessThanOrEqual(23);
   });
 
   it("matches the painting's plain wood row by row (mean colour within 9 per channel; measured 7.46)", () => {
@@ -414,7 +428,7 @@ describe('(e) the filler tile', () => {
     }
     expect(failures).toEqual([]);
     // The table darkens toward the arrowhead the way the painting does.
-    expect(SLOT_TONE[1596]).toBeLessThan(SLOT_TONE[1516]);
+    expect(SLOT_TONE[1586]).toBeLessThan(SLOT_TONE[1516]);
     expect(SLOT_TONE[1516]).toBeLessThan(SLOT_TONE[558]);
   });
 });
@@ -442,8 +456,11 @@ describe('(f2) the hover glow boxes sit on the plates and words, clear of the co
       if (heavy && start < 0) start = x;
       if (!heavy && start >= 0) { cordRuns.push([start, x]); start = -1; }
     }
-    // The nock's binding, the plate's red wax seal (inside the plate) and binding 1 (two runs).
-    expect(cordRuns).toEqual([[79, 118], [368, 407], [514, 536], [537, 544]]);
+    // The nock's binding, the plate's red wax seal (inside the plate) and binding 1: two runs,
+    // [514, 536) and [537, 544), on the first cut's encode; one, [514, 545), since the re-cut's
+    // (2026-11-09), whose noise lifts columns 536 and 544 to three cord pixels. The binding's
+    // table (BINDINGS[0], [512, 547)) is unchanged.
+    expect(cordRuns).toEqual([[79, 118], [368, 407], [514, 545]]);
     expect(LOGO_PLATE.x0).toBeGreaterThanOrEqual(118);
     expect(LOGO_PLATE.x1).toBeLessThanOrEqual(BINDINGS[0].x0);
     const failures = [];
@@ -466,9 +483,12 @@ describe('(g) contrast on real wood pixels', () => {
   });
   const rowsWhere = (pick) => rows.map((r, y) => (pick(r) ? y : -1)).filter((y) => y >= 0);
 
-  it('INK clears 3:1 on the upper band, rows 4 to 23, and nowhere below row 23', () => {
+  it('INK clears 3:1 on the upper band, rows 4 to 23 and row 26, and nowhere else', () => {
     expect(legacy.INK).toBe('#1B1408');
-    expect(rowsWhere(([ink]) => ink >= 3)).toEqual(Array.from({ length: 20 }, (_, i) => 4 + i));
+    // Row 26 joined on 2026-11-09: the re-cut took 22 columns out of the plain wood these
+    // rows are read over (WOOD_COLUMNS, the run before the plate), and the darkest 1% of row
+    // 26's remaining wood is light enough for INK. No pixel of the other runs changed.
+    expect(rowsWhere(([ink]) => ink >= 3)).toEqual([...Array.from({ length: 20 }, (_, i) => 4 + i), 26]);
   });
 
   it('PARCH_100 clears 3:1 on the lower band, rows 37 to 66, and nowhere above row 37', () => {
@@ -476,8 +496,9 @@ describe('(g) contrast on real wood pixels', () => {
     expect(rowsWhere(([, parch]) => parch >= 3)).toEqual(Array.from({ length: 30 }, (_, i) => 37 + i));
   });
 
-  it('NEGATIVE: on rows 24 to 36 neither clears 3:1, so a one-colour mark cannot span the band; the INK and PARCH_100 pair does (15:1 against each other)', () => {
-    expect(rowsWhere(([ink, parch]) => ink < 3 && parch < 3)).toEqual([0, 1, 2, 3, ...Array.from({ length: 13 }, (_, i) => 24 + i), 67]);
+  it('NEGATIVE: on rows 24 to 36 but row 26 neither clears 3:1, so a one-colour mark cannot span the band; the INK and PARCH_100 pair does (15:1 against each other)', () => {
+    // Row 26 left this list with the re-cut (2026-11-09; the INK arm above says why).
+    expect(rowsWhere(([ink, parch]) => ink < 3 && parch < 3)).toEqual([0, 1, 2, 3, 24, 25, ...Array.from({ length: 10 }, (_, i) => 27 + i), 67]);
     expect(contrast(INK, PARCH_100)).toBeGreaterThan(15);
   });
 

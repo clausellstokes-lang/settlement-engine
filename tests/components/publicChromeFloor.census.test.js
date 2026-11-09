@@ -376,14 +376,19 @@ describe('THE PHONE FLOORS ON THE PUBLIC CHROME — the bottom nav and /create',
     }
 
     // ⛔ THE EXCEPTION IS BOUNDED, AND THE BOUNDARY IS MEASURED. slipFont reaches the
-    // floor at s >= 0.55, which is clientWidth >= 0.55 x 1135 = 624.25 — inside the phone
+    // floor at s >= 0.55, which is clientWidth >= 0.55 x 1145 = 629.75 — inside the phone
     // band but above every phone this claims. A re-cut that moved that crossover DOWN
-    // would silently widen the exception, so the crossover itself is pinned.
-    expect(slipFont(layoutArrow({ clientWidth: 624, full: false }).s)).toBeLessThan(PHONE_CHROME_FLOOR);
-    expect(slipFont(layoutArrow({ clientWidth: 625, full: false }).s)).toBe(PHONE_CHROME_FLOOR);
+    // would silently widen the exception, so the crossover itself is pinned. (0.55 x 1135 =
+    // 624.25 until FIX-ARROW-PLAQUE's re-cut, 2026-11-09: the compact tail crop starts at
+    // the plate's moved cut, 1586 not 1596, so the compact arrow is ten strip px wider and
+    // the crossover moved UP by 5.5 px; the exception did not widen to a single phone.)
+    expect(slipFont(layoutArrow({ clientWidth: 629, full: false }).s)).toBeLessThan(PHONE_CHROME_FLOOR);
+    expect(slipFont(layoutArrow({ clientWidth: 630, full: false }).s)).toBe(PHONE_CHROME_FLOOR);
     // …and the sizes really are the four lane 28 measured, not a different ladder.
     expect(measured.map((m) => m.font)).toEqual([10, 10, 10, 10]);
-    expect(measured.map((m) => Number(m.slipW.toFixed(2)))).toEqual([32.04, 38.92, 40.92, 45.8]);
+    // [32.04, 38.92, 40.92, 45.8] until the re-cut (2026-11-09): the same 142-column slip at
+    // the compact scale cw / 1145 (it was cw / 1135).
+    expect(measured.map((m) => Number(m.slipW.toFixed(2)))).toEqual([31.69, 38.51, 40.49, 45.33]);
   });
 
   test('THE PROSE FLOOR: every prose-shaped size on a rostered surface passes through proseFontSize', () => {
