@@ -2,7 +2,7 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "ec0b23d7e4b91abab2820151f21e6de41cf5a14ce900f3846cc70c04271fef71",
+      "src/domain/display/stateProse/generalStateProse.js": "9ee1a2839c2b9ec561ac8c89d96bbd3f16dc56614f468e615c33db393873d14c",
       "src/domain/display/stateProse/powerStateProse.js": "523abd0abf701f5398a4f4e54f11724ea674325edbf3b141bc768a7f3d60b569",
       "src/domain/display/stateProse/economyStateProse.js": "1f730c5bac18dd1491b979cd16cded450c80ad9f832e5dc8bdda85cc89ad65c9",
       "src/domain/display/stateProse/defenseStateProse.js": "5199d1ba9d1405374cc20ab3d07e3d0ae86c802d3df5d9548eae89fc046659a7",

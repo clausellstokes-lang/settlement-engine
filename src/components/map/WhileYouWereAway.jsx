@@ -119,7 +119,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
           {/* C2 (misc): the sentence stays in the register; the raw diagnostic is
               set apart beneath it, never spliced mid-sentence. */}
           <span style={{ display: 'grid', gap: 3 }}>
-            <span>The catch-up stopped early, before the record was complete. Advance the realm to resume.</span>
+            <span>The catch-up stopped early, before it had covered all the time that passed. Advance the realm to resume.</span>
             <span style={{ color: MUTED, fontWeight: 700 }}>({String(error)})</span>
           </span>
         </div>

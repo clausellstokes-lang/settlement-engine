@@ -423,7 +423,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
             )}
             {stressLabel && (
               <span
-                title={`Active stressor: ${stressLabel}`}
+                title={`Trouble now: ${stressLabel}`}
                 style={{
                   fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
                   color: swatch['#8A5A20'],

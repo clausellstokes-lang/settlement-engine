@@ -350,7 +350,7 @@ describe('PerspectiveStandings — one observer, plain words, DM-gated beliefs',
     storeState = { auth: { tier: 'premium' }, isElevated: () => false };
     render(<PerspectiveStandings campaign={{ id: 'c0', settlementIds: ['obs', 'pal'], worldState: { tick: 1 } }} nameById={NAMES} />);
     expect(screen.getByTestId('perspective-standings').textContent)
-      .toMatch(/records no standing toward another settlement/);
+      .toMatch(/Obsford has no siege or treaty with another settlement yet/); // STYLE-2 SW-12 (ledger D·103)
   });
 
   test('no settlements ⇒ no standpoint ⇒ nothing renders (the door tests above stay quiet)', async () => {

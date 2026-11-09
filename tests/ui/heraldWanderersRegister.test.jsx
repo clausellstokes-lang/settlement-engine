@@ -182,8 +182,8 @@ describe('W-H4 — the register reads as prose, never as engine tokens', () => {
     expect(row.name).toBe('Maera Voss');
     expect(row.title).toBe('former harbourmaster');
     expect(row.whyLine).toBe('They were put out by an edict.');
-    expect(row.notorietyLine).toBe('Their name carries badly wherever it is spoken.');
-    expect(row.whenLine).toBe('On the road longer than most care to count.');
+    expect(row.notorietyLine).toBe('Their name is known, and not kindly.'); // re-keyed by identity (STYLE-2 C2, SW-12 third seat, D·52)
+    expect(row.whenLine).toBe('On the road a long while now.'); // re-keyed (D·55)
     expect(row.doorsLine).toBe('Kelder will not have them back.');
     expect(row.originName).toBe('Kelder');
     expect(row.restingName).toBe('Thornreach');
@@ -217,7 +217,7 @@ describe('W-H4 — the register reads as prose, never as engine tokens', () => {
 
     expect(dm).toMatchObject({
       heldAbroad: true,
-      whyLine: 'They are held abroad while carrying the realm\'s business.',
+      whyLine: 'They were stopped while carrying the realm\'s business.', // re-keyed (D·56)
       whenLine: 'Their journey waits on a foreign gaoler.',
       whereaboutsLine: 'They are held abroad at Greywatch.',
       restingId: 'sav_captor',
@@ -287,6 +287,17 @@ describe('W-H4 — the Herald door renders', () => {
     expect(screen.getByText(/Held abroad at/)).toBeTruthy();
     expect(screen.getByText(/Kelder as the captor/)).toBeTruthy();
     expect(screen.queryByText(/Resting at Greywatch/)).toBeNull();
+  });
+
+  test('STYLE-2 SW-12 (ledger D·57): a place with no name on file reads "an unnamed place"', () => {
+    const { campaign } = campaignWithWanderer();
+    const noOrigin = SAVES.filter((s) => s.id !== 'sav_kelder');
+    storeState.savedSettlements = noOrigin;
+    render(<HeraldWanderers campaign={campaign} saves={noOrigin} />);
+    const row = screen.getByTestId('wanderer-row');
+    expect(row.textContent).toMatch(/Came from an unnamed place/);
+    expect(row.textContent).not.toMatch(/the record does not name/); // anchored: the same live row matched "Came from …" on the line above
+    storeState.savedSettlements = SAVES;
   });
 
   test('EMPTY STATE: a realm that has exiled nobody says so, in world words', () => {

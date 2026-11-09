@@ -43,7 +43,8 @@ describe('Herald settlement-portrait context', () => {
     expect(screen.getByText('institution: market')).toBeTruthy();
     expect(screen.getByText(/regional-grain: river terrace/)).toBeTruthy();
     expect(screen.getByText('Recorded reference: provenance:missing-detail')).toBeTruthy();
-    expect(screen.getByText(/has not guessed a story identity/i)).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·89): the same honesty, in plain words — no "compiler", no "story identity".
+    expect(screen.getByText(/These are the notes the settlement’s portrait was built from\. The Herald has\s+not guessed which story this place belongs to\./)).toBeTruthy();
 
     fireEvent.click(screen.getByRole('button', {
       name: 'Dismiss settlement portrait context',

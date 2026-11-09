@@ -241,7 +241,7 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
           {phase === 'canonized' && (
             <div style={{ padding: SP.lg, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
               This realm is canonized. Its settlements have taken their places for good, and the map
-              no longer moves them. A seed is a world, and this one is written.
+              no longer moves them.
             </div>
           )}
 
@@ -338,7 +338,7 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
                       >
                         <strong style={{ color: INK, fontWeight: 700 }}>{m.options.reterrain.label}.</strong>{' '}
                         {m.options.reterrain.warning}{' '}
-                        This is a separate decision and this button will not take it for you.
+                        This button will not do it for you; choose it yourself.
                       </div>
                     </div>
                   ))}

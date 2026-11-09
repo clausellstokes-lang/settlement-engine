@@ -132,7 +132,7 @@ export default function PerspectiveStandings({ campaign, nameById }) {
       </div>
       {rows.length === 0 ? (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5 }}>
-          {nameFor(observerId)} records no standing toward another settlement: no siege, no treaty{includeGroundTruth ? ', no modelled belief' : ''}.
+          {nameFor(observerId)} has no siege or treaty with another settlement yet{includeGroundTruth ? ', and holds no belief about its neighbours' : ''}.
         </div>
       ) : (
         <div style={{ display: 'grid', gap: 4 }}>

@@ -73,7 +73,7 @@ function TrailCard({ name, rows }) {
           <span aria-hidden="true" style={{ color: SECOND, fontWeight: 900, flexShrink: 0 }}>•</span>
           <span>
             <span style={{ color: MUTED, fontWeight: 800 }}>
-              {row.week == null ? 'at a time the record does not fix' : tickCalendarDetailLabel(row.week)}
+              {row.week == null ? 'undated' : tickCalendarDetailLabel(row.week)}
             </span>
             {': '}
             {row.text}
@@ -137,9 +137,9 @@ export default function NpcTrailSection({ campaign }) {
         {people.map(person => <TrailCard key={person.nid} name={person.name} rows={person.rows} />)}
       </div>
       <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5 }}>
-        Every line is a contest the ladder opened or a seat that actually changed hands. A figure
-        who has left every rung is no longer listed here, and where one appears in someone else&rsquo;s
-        line it goes unnamed rather than shown as a record key.
+        Every line is a challenge for a seat, or a seat that changed hands. Someone who no longer
+        holds or seeks any seat drops off this list, and where they appear in another&rsquo;s line
+        they go unnamed.
       </div>
     </section>
   );

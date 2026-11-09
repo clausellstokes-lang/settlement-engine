@@ -137,8 +137,8 @@ export default function HeraldSceneContext({ context, onDismiss }) {
       )}
 
       <p style={{ margin: 0, color: SECOND, fontSize: proseFontSize(FS.micro, mobile) }}>
-        These are the portrait compiler’s recorded references. The Herald has
-        not guessed a story identity for this place.
+        These are the notes the settlement’s portrait was built from. The Herald has
+        not guessed which story this place belongs to.
       </p>
     </section>
   );

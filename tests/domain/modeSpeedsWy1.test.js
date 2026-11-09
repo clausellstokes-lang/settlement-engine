@@ -491,7 +491,47 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // religiousContest, the relationship rules, warHomeCosts). No id, tick or number moved. Still no datum: the absent arm holds.
 // STYLE-2-MERGE at the SW-11 merge (2026-11-09): the two lanes' text-only moves composed (SW-4's clock stage and SW-11's A1 sentences);
 // the hash re-measured at the merged tree: d798e730... / d8118b6a... -> b709ee7a... (each lane leaf-diffed TEXT ONLY on its own base).
-const BASE_PULSE_HASH = 'b709ee7a7922d3fac76c003c6a02cc8b15730ba741ffbf58999ab5eaed91dc6a';
+// 2026-11-09 (STYLE-2 C2, lane SW-12 PULSE-LINES): 5b6a1e51... -> b716843d..., ONE cause, TEXT ONLY: stressorsCore.js ::
+// residualOutcome (the residual headline and summary in plain words; the two pills that restated them struck).
+// Leaf-diffed against 2053a809c: 70 string leaves and 56 array-tail keys where a struck reason shortened a list; no id,
+// tick or number moved. tradeWar.js and causeLifecycle.js (the lane's other causes) leave this arm byte-identical.
+// Still no datum: the absent arm holds.
+// 2026-11-09 (STYLE-2 C2, lane SW-12, the next cause): b716843d... -> a55e7cd3..., ONE cause, TEXT ONLY: stressors.js (the
+// birth summary by type, its pressure fallback, the escalation summary and its evidence reasons, the recovery receipt in
+// words). Leaf-diffed against the parent: 110 string leaves and 35 array-tail keys; no id, tick or number moved.
+// 2026-11-09 (STYLE-2 C2, lane SW-12's second seat): a55e7cd3... -> 12ac14ad..., ONE cause, TEXT ONLY: populationDynamics.js
+// (the population summary as people gained or lost, four vantages; the strain receipt in plain clauses; the interval and
+// migration-mode machinery struck). Leaf-diffed against the parent in a clean worktree: 78 string leaves and 39 array-tail
+// keys (the struck interval line); no id, tick, number or rumour seed moved. The strain receipt is seeded by the town, never
+// the tick, because a drift outcome's reasons are the metronome key (worldPulseFeedCuration.js :: isMetronomeRepeat): a
+// tick-seeded first draft added two hidden rumour seeds here and was refused by this arm. Still no datum: the absent arm holds.
+// 2026-11-09 (STYLE-2 C2, lane SW-12's second seat, the next cause): 12ac14ad... -> 1123201b..., ONE cause, TEXT ONLY:
+// factionCompetition.js (the power-action summary per kind, the challenge and institution receipts in words; the rule-text
+// receipt struck). Leaf-diffed against the parent in a clean worktree: 121 string leaves and 25 array-tail keys; no id, tick,
+// number or rumour seed moved. Still no datum: the absent arm holds.
+// 2026-11-09 (STYLE-2 C2, lane SW-12's second seat, the next cause): 1123201b... -> ed80ff1d..., ONE cause, TEXT ONLY:
+// candidateEvents.js (the organic pressure gate's rule text struck from the condition receipts). Leaf-diffed against the
+// parent in a clean worktree: 0 string leaves and 171 array-tail keys (the struck line); no id, tick, number or rumour
+// seed moved. occupation.js, warDeployment.js, feasibilityGate.js and realmEvents.js leave this arm byte-identical.
+// 2026-11-09 (STYLE-2 C2, lane SW-12's second seat, A2·74): ed80ff1d... -> 146027f8..., ONE cause, TEXT ONLY: the organic
+// pressure condition's reasons read through stressors.js :: readerPressureReasons (evidence only). Leaf-diffed against the
+// parent in a clean worktree: 64 string leaves (reasons and the roll explanations' gate lines that copy them) and 120
+// array-tail keys (phrases with no reader sentence, dropped); no id, tick, number or rumour seed moved. warRecordMode.js and
+// mobilizationReactions.js leave this arm byte-identical.
+// 2026-11-09 (STYLE-2 C2, lane SW-12's third seat, A2·183): 146027f8... -> 60470ac9..., ONE cause, TEXT ONLY: flows.js (the
+// trade-scarcity receipts in plain words). Leaf-diffed against the parent 53d6cc3a0 in a clean worktree: 88 string leaves
+// (the two reasons and the roll explanations' gate lines that copy them); 0 keys added or lost; no id, tick, number or
+// rumour seed moved. stressorGates.js, deploymentReturn.js, resourceTaxonomy.js, institutionLifecycle.js,
+// moralInstitutionPressure.js and relationshipHierarchy.js leave this arm byte-identical.
+// 2026-11-09 (STYLE-2 C2, lane SW-12's third seat, §6l): 60470ac9... -> bd7c4e79..., ONE cause, TEXT ONLY: stressors.js ::
+// readerPressureReasons (an active condition said in its own words, three orders seeded by the place and the conditions).
+// Leaf-diffed against the parent c3a5ee49d in a clean worktree: 61 string leaves (the roll explanations' gate lines and the
+// reasons that copy "Regional import shortage already burdens the settlement."); 0 keys added or lost; no id, tick, number
+// or rumour seed moved. Still no datum: the absent arm holds.
+// STYLE-2-MERGE-2 at the SW-12 merge (2026-11-09): the two lines' text-only moves composed (the integration side's
+// b709ee7a... and SW-12's bd7c4e79..., each leaf-diffed TEXT ONLY on its own base); the hash re-measured at the merged tree:
+// b709ee7a... / bd7c4e79... -> aabbf48b...
+const BASE_PULSE_HASH = 'aabbf48b69c9c207926a12a8d1c18abb34a745d0083c7479acf9d34715fffc0d';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

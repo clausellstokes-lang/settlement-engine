@@ -191,7 +191,7 @@ function canonicalResolvedRows(items) {
       : status === 'refused'
         ? 'refused by the realm'
         : status === 'superseded' || status === 'expired'
-          ? 'superseded'
+          ? 'replaced by a newer version'
           : (engine ? 'applied by the realm itself' : 'applied by you');
     rows.push({
       id,
@@ -237,17 +237,17 @@ function proposalActionState(row, action, paused, locallyResolved) {
   if (row.item?.identity?.interactive === false) {
     return {
       available: false,
-      reason: text(row.item?.identity?.reason) || 'This decision has ambiguous identity and cannot be invoked safely.',
+      reason: text(row.item?.identity?.reason) || 'This decision cannot be told apart from another, so it cannot be taken from here.',
     };
   }
   const descriptor = action === 'apply' ? row.applyAction : row.dismissAction;
   const expectedAdapter = action === 'apply'
     ? 'applyWorldPulseProposal' : 'dismissWorldPulseProposal';
   if (!descriptor || descriptor.adapterKey !== expectedAdapter) {
-    return { available: false, reason: 'The canonical decision does not expose this action.' };
+    return { available: false, reason: 'This choice is not offered for this decision.' };
   }
   if (text(descriptor?.target?.sourceId) !== row.sourceId) {
-    return { available: false, reason: 'The decision action no longer targets this proposal.' };
+    return { available: false, reason: 'This decision has changed since it was raised; close and reopen the desk.' };
   }
   const availability = descriptor.availability || {};
   return availability.available === true
@@ -406,7 +406,7 @@ export default function HeraldAdjudication({
           by: p.status === 'refused'
             ? 'refused by the realm'
             : p.status === 'superseded'
-              ? 'superseded by upgrade'
+              ? 'replaced by a newer version'
               : `${p.status} by you`,
           tick: p.tick,
           recordedTime: recordedTime(p.updatedAt ?? p.appliedAt ?? p.dismissedAt ?? p.supersededAt),
@@ -416,7 +416,7 @@ export default function HeraldAdjudication({
         .map(o => ({
           id: `auto-${o.id}`,
           headline: o.headline || human(o.candidateType) || 'A turn',
-          by: 'by autoresolve',
+          by: 'settled by the realm itself',
           tick: latestPulse?.tick,
           recordedTime: recordedTime(o.updatedAt ?? o.appliedAt),
         }))),
@@ -470,12 +470,12 @@ export default function HeraldAdjudication({
       }
 
       const message = status === 'dismissed'
-        ? `Dismissed “${heading}”. The authoritative proposal is recorded as dismissed.`
+        ? `Dismissed “${heading}”. It will not happen.`
         : status === 'refused'
-          ? `“${heading}” was not applied. The authoritative proposal is recorded as refused.`
+          ? `“${heading}” was not carried out: the realm refused it.`
           : status === 'superseded'
-            ? `“${heading}” was not applied. An upgrade made this proposal obsolete, so it is recorded as superseded.`
-          : `Applied “${heading}”. The authoritative proposal is recorded as applied.`;
+            ? `“${heading}” was set aside: a newer version of it took its place.`
+          : `Applied “${heading}”. It is now part of the realm's story.`;
       setActionReceipt({ proposalId, status, message });
       setLocallyResolvedProposalIds(previous => {
         const next = new Set(previous);

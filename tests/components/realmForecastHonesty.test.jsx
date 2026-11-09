@@ -95,8 +95,10 @@ describe('Realm forecast epistemic boundary', () => {
       /Ashford: remove trade good\. Reason: trade good not found/i,
     )).toBeTruthy();
     expect(screen.getByText(/Moon sugar is no longer imported/i)).toBeTruthy();
-    expect(screen.getByText(/deterministic, bounded projection/i)).toBeTruthy();
-    expect(screen.getByText(/wider realm ripple is not included/i)).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·86): the same two honesty facts, in plain words — where it
+    // starts and over what interval, and what it leaves out.
+    expect(screen.getByText(/runs the realm forward from where it stands now, over the interval you chose/i)).toBeTruthy();
+    expect(screen.getByText(/leaves out the wider\s+ripples of a queued party action, so treat it as guidance, not a promise/i)).toBeTruthy();
 
     const text = document.body.textContent;
     expect(text).not.toMatch(/exact if nothing else changes/i);

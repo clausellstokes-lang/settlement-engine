@@ -6,6 +6,9 @@ import {
   selectWarDecisionIncident,
 } from './factionPairLedger.js';
 import { stablePart } from './worldState.js';
+// STYLE-2 C2 (SW-12): the power-action summaries carry variants by vantage, chosen by the house
+// idiom — the zero-import selection kernel keyed on the candidate's own stable id (no rng draw).
+import { pickLine } from './proseSelection.js';
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
 import { governingCoalition } from './beliefMap.js';
 import { memoryWeaveActive } from './relationshipEvolution.js';
@@ -718,10 +721,39 @@ function factionVerbPhrase(candidateType) {
   return { doing: `is acting on its ${stem}`, did: `acts on its ${stem}` };
 }
 
-function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, recordMode = null, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
+// STYLE-2 C2 (SW-12) — what each power action IS, said per kind (the old single line, "sees an
+// opening to press … interests", printed under a capture, a challenge and a rivalry alike).
+// Every slot is one the writers hold: the power, its town, the institution (capture and
+// suppression), the preferred rule (challenge), the law (law push), the rival's name where the
+// rival's state is read. Four vantages where a kind printed in the measured run.
+/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+const POWER_ACTION_SUMMARY = Object.freeze({
+  faction_institution_capture: ["{name} means to put its own people in charge of {town}'s {target}.", "In {town}, {name}'s people are moving in on the {target}.", "Control of {town}'s {target} is passing to {name}.", "Whoever works at {town}'s {target} will soon answer to {name}."],
+  faction_institution_suppression: ["{name} is working to break the {target}'s standing in {town}."],
+  faction_government_challenge: ["{name} is challenging {town}'s rulers, and wants {pref} in their place.", "In {town}, {name} is gathering support to replace the rulers with {pref}.", "{town}'s rulers face a challenge from {name}, who want {pref}.", "{name} has turned against the rulers of {town} and is pressing for {pref}."],
+  faction_service_bolster: ['{name} is doing more for the people of {town} while times are hard.'],
+  faction_law_preference_push: ['{name} is pushing for {law} in {town}.'],
+  faction_exhaustion: ["{name}'s people are worn out and are holding back for now."],
+  faction_rival_power_contest: ["{name} is working to win over {rival}'s supporters in {town}.", 'In {town}, {name} and {rival} are fighting for the same supporters.', "{name} is out to weaken {rival}'s hold on {town}.", "{rival}'s friends in {town} are being courted by {name}."],
+});
+/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+const CHALLENGE_BAND_REASON = Object.freeze({ crisis: ["Few in {town} still accept the rulers' right to rule.", 'Most of {town} no longer accepts its rulers.', "In {town} the rulers have lost the people's trust."], contested: ['The rulers of {town} are only tolerated.', 'In {town} the rulers are put up with, not trusted.', 'The people of {town} doubt their rulers.'], stable: ['The rulers of {town} still hold, but the war has cost them support.'] });
+const CHALLENGE_RANK_REASON = Object.freeze(['{name} is one of the three strongest powers in {town}.', 'Few powers in {town} are stronger than {name}.', '{name} stands among the three strongest powers in {town}.']);
+// The institution move's receipt: the town's worst trouble (legitimacy, trade or crime) is the opening.
+const INSTITUTION_MOVE_REASON = Object.freeze(["{town}'s troubles have given {name} its chance.", "{name} has seen its chance in {town}'s troubles.", 'With {town} in trouble, {name} has room to move.']);
+/** @param {string} line @param {Record<string, string>} x */
+const fillLine = (line, x) => line.replace(/\{(\w+)\}/g, (_, k) => x[k]);
+/** @param {{ name?: string, id?: unknown, settlement?: { name?: string } }} item */
+const townNameOf = (item) => item?.name || item?.settlement?.name || String(item?.id);
+
+function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, recordMode = null, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [], say = {} }) {
   const verb = factionVerbPhrase(candidateType);
+  const id = `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}.${tick}`;
+  const pool = POWER_ACTION_SUMMARY[candidateType];
+  const fill = { name: state.name, town: townNameOf(item), pref: state.governmentPreference.replace(/_/g, ' '), target: 'institution', rival: 'its rival', law: 'its own laws', ...say };
+  const summary = pool ? fillLine(pickLine(pool, id), fill) : `${state.name} ${verb.doing} in ${fill.town}.`;
   return {
-    id: `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}.${tick}`,
+    id,
     type: 'faction',
     candidateType,
     ruleId,
@@ -735,7 +767,7 @@ function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateT
     headline: `${state.name} ${verb.doing}`,
     // The applied twin (the de-hedger reads outcome.appliedHeadline first).
     appliedHeadline: `${state.name} ${verb.did}`,
-    summary: `${state.name} sees an opening to press ${state.governmentPreference.replace(/_/g, ' ')} interests.`,
+    summary,
     reasons,
     factionPatch,
     proposalPayload,
@@ -806,11 +838,12 @@ function governmentChallenge(item, entry, state, tick, legitimacyPressure, confl
       + severity * (band === 'crisis' ? 0.34 : 0.22)
       + warPressure * 0.08,
     applyMode: 'proposal',
+    // STYLE-2 C2 (SW-12): the legitimacy band in words; the rule text ("changes preserve
+    // existing institutions…") struck — it is the engine's, not the town's.
     reasons: [
-      `Government legitimacy is ${band}.`,
-      `${state.name} is one of the top three factions and prefers ${state.governmentPreference.replace(/_/g, ' ')}.`,
-      ...(warPressure > 0 ? ['A recent war decision has organized this faction against the governing seat.'] : []),
-      'Government changes preserve existing institutions unless a separate institution event changes them.',
+      fillLine(pickLine(CHALLENGE_BAND_REASON[band] || CHALLENGE_BAND_REASON.stable, `faction.challenge.${stablePart(state.factionId)}.${tick}:band`), { town: townNameOf(item) }),
+      fillLine(pickLine(CHALLENGE_RANK_REASON, `faction.challenge.${stablePart(state.factionId)}.${tick}:rank`), { name: state.name, town: townNameOf(item) }),
+      ...(warPressure > 0 ? [`The war has turned ${state.name} against the rulers.`] : []),
     ],
     factionPatch: {
       momentum: clamp01((state.momentum || 0) + severity * 0.18),
@@ -900,9 +933,12 @@ function institutionCandidate(item, entry, state, tick, legitimacyPressure, trad
     applyMode: asksForApproval ? 'proposal' : 'auto',
     recordMode: suppressionLive && !suppressionBandChanged ? 'state_only' : null,
     reasons: [
-      `${state.name} can convert pressure into institution ${criminalSuppression ? 'suppression' : 'control'}.`,
+      // Seeded without the tick: an auto capture is a drift outcome, whose reasons are the metronome key.
+      fillLine(pickLine(INSTITUTION_MOVE_REASON, `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}:why`), { name: state.name, town: townNameOf(item) }),
       `Target institution: ${target.name}.`,
     ],
+    // The catalogue name, lower-cased to sit inside a sentence ("Steinhafen's mill").
+    say: { target: `${String(target.name).charAt(0).toLowerCase()}${String(target.name).slice(1)}` },
     factionPatch: {
       controlledInstitutions: criminalSuppression ? state.controlledInstitutions || [] : [...new Set([...(state.controlledInstitutions || []), target.id])],
       suppressedInstitutions: criminalSuppression ? [...new Set([...(state.suppressedInstitutions || []), target.id])] : state.suppressedInstitutions || [],
@@ -945,9 +981,10 @@ function serviceOrLawCandidate(item, entry, state, tick, food, disease, trade) {
     applyMode: severity >= 0.74 ? 'proposal' : 'auto',
     reasons: [
       supportMove
-        ? `${state.name} can bolster services to convert crisis response into influence.`
-        : `${state.name} can use pressure to push ${lawPreference.replace(/_/g, ' ')}.`,
+        ? `${state.name} is feeding and tending people through the hard times, and they will remember who helped.`
+        : `${state.name} has the weight now to push for ${lawPreference.replace(/_/g, ' ')}.`,
     ],
+    say: { law: lawPreference.replace(/_/g, ' ') },
     factionPatch: {
       momentum: clamp01((state.momentum || 0) + severity * 0.1),
       legitimacyClaim: clamp01((state.legitimacyClaim || 0) + (supportMove ? severity * 0.08 : severity * 0.03)),
@@ -969,7 +1006,7 @@ function serviceOrLawCandidate(item, entry, state, tick, food, disease, trade) {
 
 /** @param {any} item @param {any} entry @param {any} state @param {any} tick
  *  @param {any} legitimacyPressure 0..1, HIGH IS BAD @param {any} conflict */
-function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacyPressure, conflict) {
+function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacyPressure, conflict, rivalName = null) {
   if ((state.exhaustion || 0) > 0.62) {
     const severity = clamp01(0.28 + state.exhaustion * 0.44);
     return candidateBase({
@@ -982,7 +1019,7 @@ function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacyPressu
       severity,
       probability: 0.14 + severity * 0.24,
       applyMode: 'auto',
-      reasons: ['Faction campaigning, aid, and crisis response create exhaustion that slows future moves.'],
+      reasons: [`${state.name}'s people are worn out from campaigning and handing out aid.`],
       factionPatch: {
         momentum: clamp01((state.momentum || 0) - 0.08),
         exhaustion: clamp01((state.exhaustion || 0) - 0.1),
@@ -1007,7 +1044,8 @@ function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacyPressu
     severity,
     probability: 0.08 + severity * 0.3,
     applyMode: severity >= 0.7 ? 'proposal' : 'auto',
-    reasons: [`${state.name} can contest a rival faction's influence basis.`],
+    reasons: [`With ${townNameOf(item)} unsettled, ${state.name} sees its chance against ${rivalName || 'its rival'}.`],
+    say: { rival: rivalName || 'its rival' },
     factionPatch: {
       momentum: clamp01((state.momentum || 0) + severity * 0.1),
       exhaustion: clamp01((state.exhaustion || 0) + severity * 0.06),
@@ -1080,7 +1118,8 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
           pendingInstitutionIntentByFaction.has(String(state.factionId)),
         ),
         serviceOrLawCandidate(item, entry, state, tick, food, disease, trade),
-        rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacyPressure, conflict),
+        rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacyPressure, conflict,
+          snapshot.worldState.factionStates?.[String(state.rivals?.[0])]?.name || null),
       ].filter(Boolean);
       out.push(...candidates);
     }

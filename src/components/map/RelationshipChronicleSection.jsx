@@ -55,7 +55,7 @@ const TERM_HELP = Object.freeze({
 
 /** The date a line carries, in the reader's own calendar; honest when undated. */
 function whenLabel(tick) {
-  return tick == null ? 'at a time the record does not fix' : tickCalendarDetailLabel(tick);
+  return tick == null ? 'undated' : tickCalendarDetailLabel(tick);
 }
 
 /** One dated entry. The disclosure word rides an aria-label, never a bare badge. */
@@ -91,7 +91,7 @@ function ChronicleLine({ line }) {
 function standingWords(row) {
   if (row.postureLabel) return row.postureLabel;
   const type = humanizeToken(row.relationshipType);
-  return type ? `${type} standing` : 'a standing the record does not name';
+  return type ? `${type} standing` : 'an unnamed standing';
 }
 
 /** One relationship: who, where it stands now, and everything it has been through. */
@@ -101,8 +101,8 @@ function ChronicleRow({ row, nameFor }) {
   const shown = open ? row.lines : row.lines.slice(0, LINES_SHOWN);
   const hidden = row.lines.length - shown.length;
   const span = row.firstTick == null
-    ? 'The record does not date what it holds'
-    : `The record runs from ${tickCalendarDetailLabel(row.firstTick)}`;
+    ? 'No dates were kept'
+    : `First noted ${tickCalendarDetailLabel(row.firstTick)}`;
   return (
     <div
       data-testid="relationship-chronicle-row"
@@ -190,8 +190,8 @@ export default function RelationshipChronicleSection({ campaign, nameById }) {
       </div>
       {mine.length === 0 ? (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5 }}>
-          {nameFor(observerId)} has come through nothing the record kept. Other settlements have;
-          pick one of them above.
+          Nothing has passed between {nameFor(observerId)} and its neighbours yet. Other
+          settlements have a history; pick one of them above.
         </div>
       ) : (
         <div style={{ display: 'grid', gap: 5 }}>

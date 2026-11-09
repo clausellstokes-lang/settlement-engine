@@ -102,7 +102,9 @@ describe('6. moralInstitutionPressure openers', () => {
   it('a nameless prescriber leads the abolition as "A reaching faith"', () => {
     const fired = drive(evaluateMoralInstitutionPressure, settlement({ alignmentAxis: 'good', lawAxis: 'lawful' }, [{ name: 'Slave market', status: 'active' }]), 40);
     expect(fired?.reasons[0]).toMatch(/^A reaching faith leads the abolition: /);
-    expect(fired?.summary).toMatch(/^Under a reaching faith, /);
+    // Re-keyed by identity (STYLE-2 C2, SW-12 third seat, A2·179): the summary is a four-vantage
+    // pool now; the nameless prescriber's seeded line opens on the sentence-cased fallback.
+    expect(fired?.summary).toBe('The faithful want the Slave market in s1 closed: it is thought too cruel.');
   });
   it('a nameless patron raises the founding as "The patron"', () => {
     const fired = drive(evaluateMoralInstitutionFounding, settlement({ alignmentAxis: 'good', lawAxis: 'lawful' }, []), 400);

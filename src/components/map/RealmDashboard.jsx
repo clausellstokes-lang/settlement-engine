@@ -177,11 +177,11 @@ function lastTickConflictDelta(worldState) {
   for (const d of digest) {
     if (d?.channelType === 'war_front' || WAR_SHAPED_TYPES.has(d?.impactKind)) count += 1;
   }
-  if (count <= 0) return { rising: false, tone: 'calm', text: 'Quiet last tick' };
+  if (count <= 0) return { rising: false, tone: 'calm', text: 'Quiet last advance' };
   return {
     rising: true,
     tone: count >= 3 ? 'crisis' : 'hot',
-    text: `+${count} conflict event${count === 1 ? '' : 's'} this tick`,
+    text: `+${count} ${count === 1 ? 'clash' : 'clashes'} this advance`,
   };
 }
 
@@ -414,7 +414,7 @@ export default function RealmDashboard({
           label="Spheres of influence"
           value={hegemony.spheres.length ? hegemony.spheres.length : '–'}
           sub={topSphere ? topSphere.brief : 'No hegemony has formed'}
-          subTitle="A center holding three or more tributary, compelled, or puppet ties forms a sphere, an unnamed empire the topology exhibits. Its name is the DM's to give."
+          subTitle="A settlement that holds three or more others as tributaries, subjects, or puppets forms a sphere: an empire in all but name. Its name is the DM's to give."
         />
       </div>
 

@@ -94,6 +94,15 @@ export function involvedEntities(item = {}, nameById = new Map()) {
   return out;
 }
 
+// A person's standing as the reader sees it: risen, fallen or held, never the
+// rank's dot count (STYLE-2 SW-12, ledger D·29).
+function standingShift(before, after) {
+  const b = Number(before);
+  const a = Number(after);
+  if (!Number.isFinite(b) || !Number.isFinite(a) || a === b) return 'standing holds';
+  return a > b ? 'standing rises' : 'standing falls';
+}
+
 export function proposalDetails(outcome = {}) {
   const payload = outcome.proposalPayload || {};
   if (payload.kind === 'tier_change') {
@@ -109,7 +118,7 @@ export function proposalDetails(outcome = {}) {
     return [
       humanizeToken(payload.actionFamily),
       payload.dotRankBefore && payload.dotRankAfter
-        ? `${payload.dotRankBefore} dot → ${payload.dotRankAfter} dot`
+        ? standingShift(payload.dotRankBefore, payload.dotRankAfter)
         : humanizeToken(payload.roleArchetype),
     ].filter(Boolean);
   }
@@ -147,8 +156,8 @@ export function outcomeDetails(outcome = {}, nameById = new Map()) {
   if (outcome.resourcePatch) {
     details.push(`${human(outcome.resourcePatch.resource)} ${human(outcome.resourcePatch.state)}`);
   }
-  if (outcome.npcPatch?.shortGoal) details.push(`short: ${human(outcome.npcPatch.shortGoal)}`);
-  if (outcome.npcPatch?.longGoal) details.push(`long: ${human(outcome.npcPatch.longGoal)}`);
+  if (outcome.npcPatch?.shortGoal) details.push(`wants now: ${humanizeToken(outcome.npcPatch.shortGoal)}`);
+  if (outcome.npcPatch?.longGoal) details.push(`wants in time: ${humanizeToken(outcome.npcPatch.longGoal)}`);
   if (outcome.stressor?.type) details.push(human(outcome.stressor.type));
   if (outcome.metadata?.economicRole) details.push(human(outcome.metadata.economicRole));
   if (outcome.metadata?.transferMode) details.push(`migration ${human(outcome.metadata.transferMode)}`);
@@ -161,11 +170,12 @@ export function digestDetails(entry = {}, nameById = new Map()) {
   const settlementDetail = names.length
     ? `${names.slice(0, 3).join(', ')}${names.length > 3 ? ` +${names.length - 3}` : ''}`
     : (entry.settlementIds?.length ? `${entry.settlementIds.length} settlement${entry.settlementIds.length === 1 ? '' : 's'}` : null);
+  // entry.kind is the news lifecycle word ("applied" / "queued"), not a fact a
+  // reader can use, so it stays off the chips (STYLE-2 SW-12, ledger D·30).
   return unique([
-    human(entry.scope),
-    human(entry.kind),
-    human(entry.impactKind),
-    human(entry.channelType),
+    humanizeToken(entry.scope),
+    humanizeToken(entry.impactKind),
+    humanizeToken(entry.channelType),
     settlementDetail,
   ]).slice(0, 5);
 }
@@ -184,16 +194,19 @@ export function rollIsDeterministic(roll = {}) {
 export const ACTIVE_UI_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 
 export function stressorDetails(stressor = {}) {
-  const details = [human(stressor.lifecycleStage || 'active'), human(stressor.durationPolicy)];
+  // The reader's words (STYLE-2 SW-12, ledger D·31): how the place is coping,
+  // never the engine's resilience per cent, "pillar" or duration policy.
+  const details = [human(stressor.lifecycleStage || 'active')];
   const cf = stressor.counterforce;
   if (cf && Number.isFinite(cf.score)) {
-    const trend = cf.score > 0.55 ? 'recovering fast' : cf.score < 0.45 ? 'wallowing' : 'holding';
-    details.push(`resilience ${percent(cf.score)}: ${trend}${cf.floorsMet === false ? ' (a pillar is missing)' : ''}`);
+    details.push(cf.score > 0.55 ? 'recovering fast' : cf.score < 0.45 ? 'not recovering' : 'holding');
+    if (cf.floorsMet === false) details.push('missing something it needs to recover');
   }
   if (stressor.synergy?.companions?.length) {
     details.push(`entangled with ${stressor.synergy.companions.slice(0, 2).map(human).join(', ')}`);
   }
-  if (stressor.synergy?.blocksResolution) details.push('cannot lift while blocked');
+  // The synergy does not record WHICH companion blocks, so the line names none.
+  if (stressor.synergy?.blocksResolution) details.push('held in place by another trouble');
   if (stressor.originContext?.variant) details.push(human(stressor.originContext.variant));
   return unique(details).slice(0, 5);
 }

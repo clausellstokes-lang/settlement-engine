@@ -148,6 +148,8 @@ describe('EM-E3 · the advance report at N applied decrees', () => {
     expect(within(rows[0]).getByText('rename faction')).toBeTruthy();
     expect(within(rows[1]).getByText('seat holder')).toBeTruthy();
     expect(within(rows[2]).getByText('set field')).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·45): the section heading says "advance", never "tick".
+    expect(within(section).getByText('Orders carried out this advance')).toBeTruthy();
 
     // The chronicle link is the mount's, one per row, in the same order.
     const links = within(section).getAllByTestId('decree-chronicle-link');

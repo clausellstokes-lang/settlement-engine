@@ -7,7 +7,7 @@
  * affected node, and a fresh campaign self-gates to the empty state.
  */
 import { afterEach, describe, expect, test, vi, beforeEach } from 'vitest';
-import { cleanup, render, screen, fireEvent } from '@testing-library/react';
+import { cleanup, render, screen, fireEvent, within } from '@testing-library/react';
 
 const setSelectedSettlementId = vi.fn();
 let STORE = { setSelectedSettlementId };
@@ -160,6 +160,8 @@ describe('ChronicleScrollback — per-tick compareCausalState diff', () => {
     ]);
     render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} causalByTick={causalByTick} />);
     expect(screen.getByTestId('chronicle-causal-diff')).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·49): the diff's heading in plain words, not the model's "causal shift".
+    expect(within(screen.getByTestId('chronicle-causal-diff')).getByText('How things stand now, against before')).toBeTruthy();
     expect(screen.getAllByText(/social trust/i).length).toBeGreaterThan(0);
   });
 

@@ -409,8 +409,8 @@ function WorldMapStageImpl({
                     Drop to place
                   </div>
                   <div style={{ color: swatch['#C8B098'] }}>
-                    Settlements land at the nearest valid cell. Trade-route
-                    candidates auto-link to neighbours within 2 days.
+                    Settlements land on the nearest open ground. Trade routes
+                    link up on their own to neighbours within two days&apos; travel.
                   </div>
                 </div>
               )}

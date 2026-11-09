@@ -89,6 +89,10 @@ describe('RealmDashboard — live summary (premium)', () => {
     expect(screen.getByText('Realm contest record')).toBeTruthy();
     // re-keyed by identity to SW-3 REALM-PROSE's REALM_CONTEST_RECORD_HELP (0991cc9e5), STYLE-2-MERGE (found at point 14)
     expect(screen.getByText('2W / 1L').getAttribute('title')).toContain('not time at war or the dead');
+    // STYLE-2 SW-12 (ledger D·83, D·84): the conflict delta says "advance", and the sphere's
+    // definition names no "topology"; the stat keeps its label.
+    expect(document.querySelector('[title^="A settlement that holds three or more others as tributaries, subjects, or puppets forms a sphere: an empire in all but name."]')).toBeTruthy();
+    expect(document.querySelector('[title*="topology"]')).toBeNull();
     // The war-weariest power surfaces from warExhaustionStandings. This render
     // passes no nameById, so the name lookup misses — and the fallback must be
     // the in-fiction generic, never the raw id (C3 finding 12; this line used
@@ -98,6 +102,21 @@ describe('RealmDashboard — live summary (premium)', () => {
     // No locked teaser / no pricing moment for premium.
     expect(screen.queryByTestId('realm-dashboard-locked')).toBeNull();
     expect(triggerSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe('RealmDashboard — STYLE-2 SW-12 (ledger D·83): the conflict delta counts clashes this advance', () => {
+  test('one war-front entry reads "+1 clash this advance"; none reads "Quiet last advance"', () => {
+    const withPulse = (impactDigest) => ({
+      ...simulatedCampaign,
+      worldState: { ...simulatedCampaign.worldState, pulseHistory: [{ tick: 7, selectedOutcomes: [], impactDigest }] },
+    });
+    const { unmount } = render(<RealmDashboard campaign={withPulse([{ channelType: 'war_front' }])} canManageCampaigns tier="premium" />);
+    expect(screen.getByText('+1 clash this advance')).toBeTruthy();
+    unmount();
+    render(<RealmDashboard campaign={withPulse([])} canManageCampaigns tier="premium" />);
+    expect(screen.getByText('Quiet last advance')).toBeTruthy();
+    expect(screen.queryByText(/tick/)).toBeNull();
   });
 });
 
