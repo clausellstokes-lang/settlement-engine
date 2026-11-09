@@ -232,7 +232,7 @@ const SCOPE_LINE_FRAMES = Object.freeze([
   // [newcomer] what you are told when you ask
   (label, phrase) => `${label}. Ask about the place and you are told it is ${phrase}`,
   // [official] the plain description, headed
-  (label, phrase) => `${label}: ${upperLead(phrase)}`,
+  (label, phrase) => `${label}: ${phrase}`,
 ]);
 
 /**
