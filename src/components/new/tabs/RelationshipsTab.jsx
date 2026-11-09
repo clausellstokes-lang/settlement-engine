@@ -12,6 +12,7 @@ import {NeighbourLinkCard} from '../neighbourComponents';
 import { useStore } from '../../../store/index.js';
 import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
 import { relationshipsDeskLists } from '../../../domain/display/stateProse/relationshipsDeskRead.js'; // DS-REL-1 · the two lists, assembled ONCE
+import { plainConflictNature } from '../../../generators/crossSettlementConflicts.js'; // SW-9b-A: the pill speaks the description's plain words
 
 /** A tie's card palette by its type (the NPC relationship cards and the neighbour cards), hoisted
  *  from the tab (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search styles a tie as
@@ -189,7 +190,7 @@ export function RelationshipsTab({ settlement:r, saveId=null, playerView=false, 
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerName}</span>
                       <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>({c.partnerRole}, {c.partnerSettlement})</span></>}
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:col,background:`${col}18`,border:`1px solid ${col}40`,padding:'1px 7px',marginLeft:'auto',flexShrink:0}}>
-                  {isFaction ? 'faction' : (c.conflictNature||'conflict')}
+                  {isFaction ? 'faction' : (c.conflictNature ? plainConflictNature(c.conflictNature) : 'conflict')}
                 </span>
               </div>
               {c.description&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
