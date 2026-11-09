@@ -27,7 +27,14 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 // measured over soak1k-0..239, 33 seam settlements at the tip (50 at the integration parent 7b3ffb6ee). The set
 // is the FIRST TWELVE seam settlements at the tip, still twelve cases; the Foundry arm reads the first of them.
 // Was [2, 10, 14, 18, 22, 37, 38, 42, 45, 51, 53, 59] (the base sixty's seam).
-const SEAM_SEEDS = [2, 16, 31, 36, 38, 39, 42, 43, 45, 62, 69, 74];
+// MERGE-TRAIN (2026-11-09, re-keyed BY IDENTITY at the ALLEGIANCE-CAR4 merge, 824a8ce2f — the MERGE-CAR-2 idiom): car 4's
+// birth stream (A9's goals, 03ff59084; item 15, eabc93dfe) re-deals the cast's powers, so at the train's tip 6 of the twelve
+// (16, 36, 39, 45, 69, 74) voice the crisis secret through a keeper who is not the seat-holder — no seam there (measured: a
+// separate `secret` row). The six that still hold (2, 31, 38, 42, 43, 62) are kept; the next six seam settlements at the
+// tip whose seat's own line is a voiceable want overridden by the crisis secret (80, 90, 97, 114, 127, 134) join them.
+// Measured over soak1k-0..239: 25 seats voiced with the secret and no separate keeper row (19 of them with a want overridden).
+// Was [2, 16, 31, 36, 38, 39, 42, 43, 45, 62, 69, 74].
+const SEAM_SEEDS = [2, 31, 38, 42, 43, 62, 80, 90, 97, 114, 127, 134];
 const FOUNDRY_SEED = 2;
 /** @type {Record<number, any>} */
 const born = {};

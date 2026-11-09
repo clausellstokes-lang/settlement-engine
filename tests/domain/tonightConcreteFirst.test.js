@@ -23,7 +23,12 @@ const SEEDS = [20, 26, 55, 57];
 // crisis secret withheld, no temperament: voiced with nothing — measured over soak1k-0..2499 at the tip: 13 empty
 // seat lines, two of them exactly this case (soak1k-868, insurgency; -1968); the first is pinned. Was soak1k-26,
 // Rhiannon Sullivan (the revolt's target).
-const EMPTY_SEAT_SEED = 868;
+// MERGE-TRAIN (2026-11-09, re-keyed BY IDENTITY at the ALLEGIANCE-CAR4 merge, 824a8ce2f): car 4's A9 (03ff59084) deals
+// soak1k-868's mayor a concrete, voiceable goal ("Ask Gavril Popov for a favour that settles a share of the debt."), so that
+// seat no longer meets this arm's premise and is rightly voiced with it. Measured over soak1k-0..999 at the train's tip:
+// five seats are voiced with nothing; soak1k-78 is the first, the slave revolt's target (Geta Aquila) with the crisis's
+// abstract goal, the crisis secret withheld and no temperament on the record — the same premise. Was 868 (Slavica Smirnov).
+const EMPTY_SEAT_SEED = 78;
 /** @type {Record<number, any>} */
 const born = {};
 beforeAll(async () => {
@@ -44,9 +49,9 @@ describe('R11 · the Tonight sheet prefers the concrete', () => {
     expectNoSeedFailures(failures, 'every printed want is voiceable');
   });
 
-  it('soak1k-868: the seat (the insurgency\'s target) with an abstract goal, the crisis secret withheld and no temperament on the record is voiced with nothing, never the abstract goal', () => {
+  it('soak1k-78: the seat (the crisis\'s target) with an abstract goal, the crisis secret withheld and no temperament on the record is voiced with nothing, never the abstract goal', () => {
     const seat = composeTonightSheet(born[EMPTY_SEAT_SEED]).people.find((p) => p.why === 'seat');
-    expect(seat).toMatchObject({ name: 'Slavica Smirnov', says: 'want', line: '' });
+    expect(seat).toMatchObject({ name: 'Geta Aquila', says: 'want', line: '' });
   });
 
   it('soak1k-26 and -55: a crisis target whose own line falls back never voices that crisis\'s secret (F13 target_runs_plot)', () => {

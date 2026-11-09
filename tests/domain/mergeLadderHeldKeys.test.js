@@ -381,7 +381,11 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // conflicts the post-pass restates) and +15 more from the composition, which no single lane shows against its own base
     // (GREEN-BASE: W1/W2/FOOD 5, W3-W7 26, EXPORT-KEYS 27, PUBLIC-VEIL 29); MEASURED at the merge points: 26 at the W1, W2, W4
     // and W7 points, so the rise lands at FOOD-ISOLATION, EXPORT-KEYS or PUBLIC-VEIL (named in MERGE-WAVE's record). `foreign` stays empty.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(43);
+    // RE-KEYED at the train (2026-11-09, MERGE-TRAIN, this arm's received value read at every merge point's stage): 43 at every
+    // point through FIX-ARROW-PLAQUE (8b75f466a) -> 62 at the ALLEGIANCE-CAR4 merge 824a8ce2f: car 4's birth stream (A9's goals
+    // 03ff59084 and item 15's title-secret draw eabc93dfe leave a face's fork before its power roll) re-deals the ties whose
+    // conflicts the post-pass restates (+19); the cures after it 0. `foreign` stays empty.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(62);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
