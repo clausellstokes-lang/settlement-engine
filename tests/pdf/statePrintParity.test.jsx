@@ -213,7 +213,7 @@ function screenProse(s, faithUnlocked = false) {
   const out = {};
   const set = (mount, p) => { if (p) out[mount] = p; };
 
-  set('overview.ground', screenWeave(s, general.overview.siteLines));
+  set('overview.market', screenWeave(s, general.overview.siteLines)); // the woven block's first speaking mount since the ground glances (OWNER-WORDS-DOSSIER item 2)
   set('overview.crisisBanners', screenParagraph(s, 'overview.crisisBanners', [st.crisisArity]));
   set('overview.stressorLifecycle', screenParagraph(s, 'overview.stressorLifecycle',
     [st.worldStressorLifecycle, st.worldStressorOrigin]));
@@ -901,7 +901,7 @@ describe('SILENCE — no corpus, no Callout', () => {
     expect(render({ stateProse: undefined, tab: 'overview' })).toBeNull();
     expect(render({ stateProse: {}, tab: 'overview' })).toBeNull();
     expect(render({ stateProse: { overview: {} }, tab: 'overview' })).toBeNull();
-    expect(render({ stateProse: { overview: { 'overview.ground': '' } }, tab: 'overview' })).toBeNull();
+    expect(render({ stateProse: { overview: { 'overview.market': '' } }, tab: 'overview' })).toBeNull();
     // A settlement with no corpus at all yields no tabs, so every chapter renders nothing.
     for (const tab of ['overview', 'power', 'defense', 'economics', 'history', 'faith', 'war']) {
       expect(render({ stateProse: buildPrintProse(null, {}), tab })).toBeNull();
@@ -910,7 +910,7 @@ describe('SILENCE — no corpus, no Callout', () => {
 
   test('NON-VACUITY: one paragraph renders exactly one Callout, kicker and all', () => {
     const el = render({
-      stateProse: { overview: { 'overview.ground': 'The village keeps to itself.' } },
+      stateProse: { overview: { 'overview.market': 'The village keeps to itself.' } },
       tab: 'overview',
     });
     expect(React.isValidElement(el)).toBe(true);

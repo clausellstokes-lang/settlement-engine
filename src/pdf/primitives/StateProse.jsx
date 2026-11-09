@@ -73,7 +73,8 @@ const SCREEN_KICKER = Object.freeze({
   // the place passage's; the print Overview already has one place passage. The kickers of
   // `overview.origin`, `overview.conflicts` and `overview.warnings` are gone with their
   // sentences (those rows glance since the same rulings, so print draws nothing there).
-  'overview.ground': 'The place',
+  // Keyed on `overview.market` since the ground row glances (OWNER-WORDS-DOSSIER item 2, 2026-11-09).
+  'overview.market': 'The place',
   'overview.stressorLifecycle': 'The pressure from outside',
   'overview.activeConditions': 'What the town is living through',
   // PowerTab.jsx

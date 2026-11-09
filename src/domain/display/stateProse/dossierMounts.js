@@ -370,8 +370,14 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'glance',
   }),
+  // ⛔ THE GROUND GLANCES (the owner, 2026-11-09, OWNER-WORDS-DOSSIER item 2: "In 'the place' the second
+  // paragraph seems redundant. The first was amazing."). DS-GEN-12's lenses ("In {settlement} the water
+  // comes first…", "{settlement} sits where the ground let it stand…") opened the woven block by
+  // re-introducing the place the arrival scene above it had just drawn. Struck here, at the door: the
+  // screen and the print both read this row, the desk and the corpus are untouched, the block stays
+  // MOUNTED (never parked dark), and restoring it is this one word.
   Object.freeze({
-    mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'sentence',
+    mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.market', tab: 'overview', desk: 'general', blockId: 'DS-GEN-13', rung: 'sentence',

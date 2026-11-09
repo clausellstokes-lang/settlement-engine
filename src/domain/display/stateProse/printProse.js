@@ -465,7 +465,9 @@ export function buildPrintProse(settlement, ctx = {}) {
   // here — the reader consumed it. Only ONE general-desk cell is deferred (DS-REL-2's
   // emergent banner) and it is resolved at its own position below; the other two deferred
   // general positions are whole mounts and are simply never put.
-  put('overview', 'overview.ground', g.siteLines);
+  // Keyed on `overview.market`, the woven block's first SPEAKING mount, since the ground row glances
+  // (OWNER-WORDS-DOSSIER item 2, 2026-11-09): a printed key is a sentence-rung position.
+  put('overview', 'overview.market', g.siteLines);
   put('overview', 'overview.crisisBanners', [printed('overview.crisisBanners', stressor.crisisArity)]);
   put('overview', 'overview.stressorLifecycle', [
     printed('overview.stressorLifecycle', stressor.worldStressorLifecycle),

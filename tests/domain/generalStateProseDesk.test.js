@@ -714,7 +714,8 @@ describe('the general desk — the mount registry', () => {
     // GLANCES (the stacked sentence list under the bars was removed), so it has no speaking
     // position until its lenses are re-homed. Pinned just below this loop.
     const expected = {
-      'DS-GEN-12': 'overview.ground',
+      // DS-GEN-12 left this table at the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 2): its one
+      // row, overview.ground, GLANCES — the ground lens re-introduced the place the arrival scene draws.
       'DS-GEN-13': 'overview.market',
       'DS-GEN-17': 'overview.institutions',
       // DESK-GEN3 car 1 — the general desk's first position off the overview/history pages.
@@ -761,6 +762,13 @@ describe('the general desk — the mount registry', () => {
       expect(drawnAtMount(mount, r).glance, `${mount} keeps its glance`).toBe('x');
       expect(drawnAtMount(mount, r).sentence, `${mount} draws no sentence`).toBeNull();
     }
+    // OWNER-WORDS-DOSSIER item 2 (the owner, 2026-11-09: "In 'the place' the second paragraph seems
+    // redundant"): DS-GEN-12 stays MOUNTED at overview.ground, a glance row that strips the sentence.
+    expect(sentenceMountForBlock('DS-GEN-12'), 'DS-GEN-12 speaks again: the ground re-introduces the place').toBeNull();
+    expectAbsentWithAnchor(UNMOUNTED_BLOCKS, 'DS-GEN-12', UNMOUNTED_BLOCKS[0], 'DS-GEN-12 was parked dark instead of glanced');
+    const ground = { glance: 'x', sentence: 'y', detail: [], provenance: { blockId: 'DS-GEN-12', poolKey: 'p', angle: 'a' } };
+    expect(drawnAtMount('overview.ground', ground).glance, 'overview.ground keeps its glance').toBe('x');
+    expect(drawnAtMount('overview.ground', ground).sentence, 'overview.ground draws no sentence').toBeNull();
   });
 });
 
