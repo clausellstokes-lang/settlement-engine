@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 183,
+      "dated": 184,
       "sha-pin": 2,
       "tree": 153
     },
@@ -414,7 +414,8 @@
     "_rosterGrowth2026-11-09-merge-train-owner-words": "THE UNION AT THE OWNER-WORDS-DOSSIER MERGE AND ITS RECORD (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 180 -> 182, docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md (the lane's record, born dated on its lane) and docs/chair/2026-11-09/MERGE-TRAIN-OWNER-WORDS-2026-11-09.md (the train's points 4-5 record); `tree` 152 -> 153, docs/shift-records/2026-11-09-merge-train-5-owner-words.json, record 5; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-fix-hook-object": "ONE document JOINED the roster by being BORN into it (seat FIX-HOOK-OBJECT, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/fix-hook-object-2026-11-09 cut at 46f7525cc): `dated` 168 -> 169, docs/chair/2026-11-09/FIX-HOOK-OBJECT-2026-11-09.md, the lane's record, born dated, 0 past-EOF; nothing changed class. `tree` stays 139 here: it reads 145 at the base by MERGE-WAVE's cause, recorded and untouched.",
     "_rosterGrowth2026-11-09-merge-train-fix-hook-object": "ONE document JOINED the roster at the FIX-HOOK-OBJECT merge (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 182 -> 183, docs/chair/2026-11-09/FIX-HOOK-OBJECT-2026-11-09.md, the lane's record, born dated on its lane; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-09-fix-buy-button": "ONE document JOINED the roster by being BORN into it (seat FIX-BUY-BUTTON, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/fix-buy-button-2026-11-09 cut at 464887416, on the owner's word of 2026-11-09 to drop the price from the dossier buy button): `dated` 168 -> 169, docs/chair/2026-11-09/FIX-BUY-BUTTON-2026-11-09.md, the lane's record, born dated, 0 past-EOF."
+    "_rosterGrowth2026-11-09-fix-buy-button": "ONE document JOINED the roster by being BORN into it (seat FIX-BUY-BUTTON, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/fix-buy-button-2026-11-09 cut at 464887416, on the owner's word of 2026-11-09 to drop the price from the dossier buy button): `dated` 168 -> 169, docs/chair/2026-11-09/FIX-BUY-BUTTON-2026-11-09.md, the lane's record, born dated, 0 past-EOF.",
+    "_rosterGrowth2026-11-09-merge-train-fix-buy-button": "ONE document JOINED the roster at the FIX-BUY-BUTTON merge (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 183 -> 184, docs/chair/2026-11-09/FIX-BUY-BUTTON-2026-11-09.md, the lane's record, born dated on its lane; measured once by this walker; nothing changed class."
   },
   "rows": []
 }
