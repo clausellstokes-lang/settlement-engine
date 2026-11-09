@@ -483,3 +483,11 @@ Pins: `realmHub.test.jsx` — the sphere title (D·84) with a negative on "topol
 | D·93 re-terrain note | `{label}. {warning} This is a separate decision and this button will not take it for you.` | "{label}. {warning} This button will not do it for you; choose it yourself." |
 
 Pins: `autoplacementConsent.test.jsx` — the lock's last sentence (D·92) and the re-terrain note's close (D·93, re-keyed from `/separate decision/`); **red at the parent** (2 of 10), green here. Registers: none moved.
+
+### 9l. `LiveWarStatus.jsx` (D·5)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·5 deployment row | `Deployed since tick {sinceTick}; home garrison thinned, war chest bleeding.` | "In the field since {tickCalendarDetailLabel(sinceTick)}. Fewer guards stand at home, and the war is costing {home} its savings." ({home} = `nameFor(nameById, dep.homeId)`, already read for the heading; the audit's `tickCalendarLabel` gives only the season, so the DETAIL label is taken — "week 5 of spring, year 1" — which keeps the week the in-file note said the DM counts forward from) |
+
+**Register, through its door:** the §69.3 prose-leak allowance (`prose-leak-allowance: tick 1`) outlived its site and is struck (the in-file note now says why); `tests/copy/proseLeak.test.js`'s register ceilings follow it down — tick allowances 11 → 10, files carrying one 12 → 11 (measured after: tick 10, week 6, 9 files; the week and file ceilings were already slack and are not this cause's). Pins: a new `tests/components/liveWarStatusWords.test.jsx` (the row's words, and a negative on the raw tick); **red at the parent**, green here.

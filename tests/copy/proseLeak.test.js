@@ -567,8 +567,10 @@ describe('E-E adjacency arm — the counter labels the flat scan could not see (
       { tick: 0, week: 0 },
     );
     const files = ADJACENCY_ROWS.filter((r) => r.allowed.tick > 0 || r.allowed.week > 0);
-    expect(totals.tick, 'tick allowances').toBeLessThanOrEqual(11);
+    // STYLE-2 SW-12 fourth seat (2026-11-09): the live-war deployment row cured to the
+    // calendar's week phrase (ledger D·5) and its grant was struck — 11 -> 10 tick, 12 -> 11 files.
+    expect(totals.tick, 'tick allowances').toBeLessThanOrEqual(10);
     expect(totals.week, 'week allowances').toBeLessThanOrEqual(9);
-    expect(files.length, 'files carrying an allowance').toBeLessThanOrEqual(12);
+    expect(files.length, 'files carrying an allowance').toBeLessThanOrEqual(11);
   });
 });
