@@ -627,3 +627,11 @@ Pins: `heraldRegisterDoors.test.jsx` — a new test reading `remembranceRows` fo
 | D·94 the road scene's note | `… The road is read from truth. Staging it writes nothing.` | "… The road shows the world as it really is, and staging it changes nothing." |
 
 Pins: `roadScenePanel.test.jsx` — the note read off the panel; **red at the parent**, green here. Registers: none moved.
+
+### 9aa. `WorldMapStage.jsx` (D·95)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·95 the placement legend | `Settlements land at the nearest valid cell. Trade-route candidates auto-link to neighbours within 2 days.` | "Settlements land on the nearest open ground. Trade routes link up on their own to neighbours within two days' travel." |
+
+Pins: no fixture renders the legend (it shows while placing): unpinned, PLAUSIBLE; every suite naming the file green; one pre-existing eslint warning (`react-hooks/refs`, :309), not this cause's. Registers: none moved.
