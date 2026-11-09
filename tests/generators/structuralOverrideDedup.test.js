@@ -32,6 +32,9 @@ describe('structuralValidator — out-of-tier override dedup', () => {
     const tierViolations = violations.filter(v => v.type === 'tier_violation' && v.institution === 'Smuggling operation');
     expect(tierViolations).toHaveLength(1);
     expect(tierViolations[0].severity).toBe('warning');
+    // The reason states the plain fact, not the ladder's key (SW-9, ruling A11).
+    expect(tierViolations[0].reason.startsWith('Smuggling operation is found only in a town or larger; this is a village.')).toBe(true);
+    expect(tierViolations[0].reason).not.toMatch(/tier minimum/); // anchored: the reason is asserted to open on the plain fact above
   });
 
   it('a below-tier institution forced into a metropolis yields ZERO out_of_tier by_design entries', () => {
