@@ -1285,6 +1285,8 @@ describe('DS-POW-5 — the seat\'s lens (SW-7 POWER-SIDE, STYLE-2 B7): the rulin
     expect(rulingPowerPoolKey(seatLensOf(nobleSeatClergyStrong))).toBe('autocrat');
     const out = powerStateProse(nobleSeatClergyStrong, { structuralLens: seatLensOf(nobleSeatClergyStrong) },
       { seed: 'seat-lens', audience: 'dm' });
+    expect(String(out.rulingStructure?.sentence ?? '').length).toBeGreaterThan(0);
+    // anchored: the sentence is asserted non-empty on the line above and the pool key is pinned 'autocrat'
     expect(String(out.rulingStructure?.sentence ?? '')).not.toMatch(/faith|doctrine|heresy/i);
   });
   it('rule and succession is silent on an empty seat, which the ruling chain names first (soak1k-8, Achileia: "Stands empty")', () => {
