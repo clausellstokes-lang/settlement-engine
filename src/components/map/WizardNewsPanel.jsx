@@ -83,7 +83,7 @@ function MetaPill({ children, tone = 'neutral', wrap = false }) {
   );
 }
 
-function NewsEntry({ entry, compact = false }) {
+function NewsEntry({ entry, compact = false, nameById = null }) {
   const mobile = useIsMobile();
   const major = entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR;
   const color = statusColor(entry.kind, major);
@@ -115,7 +115,7 @@ function NewsEntry({ entry, compact = false }) {
   // body already says. A legacy entry with no summary falls back to its lifecycle line.
   // The status pill says where a travelling effect stands in a plain word, or nothing
   // where the body says it; never the pipeline's state token.
-  const { body: bodyText, tooltip: summaryTooltip, status: statusWord, reasons: reasonPhrases } = newsCardFace(entry);
+  const { body: bodyText, tooltip: summaryTooltip, status: statusWord, reasons: reasonPhrases } = newsCardFace(entry, { nameById });
 
   return (
     <article style={{

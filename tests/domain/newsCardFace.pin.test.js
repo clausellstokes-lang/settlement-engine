@@ -11,9 +11,11 @@
  * THE PIN, on a planted run (named towns, named graph nodes, the war, faith and relationship layers
  * on, the regional graph propagating): for every entry the run files, the face NewsEntry prints
  *   1. has a body, and the body is not a lifecycle-only line (an EVENT, not "it");
- *   2. the body names a party the world holds (a town, a person or a god, by name);
+ *   2. the body names a party the world holds (a town, a person, a power or a god, by name),
+ *      read with the panel's own save-name map (the body's dateline is part of the face);
  *   3. no face word is a state-machine token (queued · ready · applied · resolved · ignored ·
- *      expired), in the status pill or anywhere in the body or the reason pills.
+ *      expired): the status pill never prints one, and no pill is one (the English verb inside
+ *      a sentence — "the quarrel resolved" — is prose, not the pipeline's word).
  *
  * The face is read through `newsCardFace` (domain/display/newsBody.js), the one function the panel
  * renders. Before that function existed the panel printed `newsBodyText`, `humanizeToken(kind)` and
@@ -29,11 +31,13 @@ import * as newsBody from '../../src/domain/display/newsBody.js';
 import { humanizeToken } from '../../src/domain/display/humanizeEngineTokens.js';
 
 const STATE_TOKENS = /\b(queued|ready|applied|resolved|ignored|expired)\b/i;
+/** A pill that IS a state token (the English verb inside a sentence is not one). */
+const STATE_WORD = /^(queued|ready|applied|resolved|ignored|expired)$/i;
 const LIFECYCLE_ONLY = /^(it|its|word of it|rumou?r of it|the first whispers of it|the mark of it|the effects of it|the weight of it|talk of it|for the present|in the end|nothing came of it)\b/i;
 
-/** @param {any} entry */
-function faceOf(entry) {
-  if (typeof newsBody.newsCardFace === 'function') return newsBody.newsCardFace(entry);
+/** @param {any} entry @param {Map<string, string>} nameById the panel's save-name map */
+function faceOf(entry, nameById) {
+  if (typeof newsBody.newsCardFace === 'function') return newsBody.newsCardFace(entry, { nameById });
   return {
     body: newsBody.newsBodyText(entry),
     status: humanizeToken(entry.kind),
@@ -103,27 +107,31 @@ function plantWorld(seedBase) {
   };
 }
 
-/** Every name the planted world holds: towns, their people, the gods. */
-function worldNames(saves) {
-  const names = new Set(DEITIES.map(d => d.name));
+/** Every name the planted world has held, into `names`: towns, their people, their powers, the gods. */
+function collectNames(saves, names) {
+  for (const d of DEITIES) names.add(d.name);
   for (const s of saves) {
     if (s.name) names.add(String(s.name));
     for (const npc of s.settlement?.npcs || []) if (npc?.name) names.add(String(npc.name));
+    for (const f of s.settlement?.powerStructure?.factions || []) if (f?.faction) names.add(String(f.faction));
   }
-  return [...names].filter(n => n.length >= 3);
 }
 
 describe('the news card face — an event, its people, no state-machine word (C1)', () => {
   it('on a planted run, every card body names a party and states an event; no face word is a state token', () => {
     let { saves, campaign } = plantWorld('newscard-pin');
     const seen = new Map();
+    const held = new Set();
+    collectNames(saves, held);
     for (let t = 0; t < 16; t++) {
       const r = advanceCampaignWorld({ campaign, saves, interval: 'one_week', now: `2026-03-01T00:00:${String(t).padStart(2, '0')}.000Z` });
       campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph, wizardNews: r.wizardNews };
       saves = saves.map(s => { const u = r.settlementUpdates?.find(x => String(x.saveId) === String(s.id)); return u ? { ...s, settlement: u.settlement } : s; });
       for (const e of r.wizardNews?.entries || []) seen.set(String(e.id), e);
+      collectNames(saves, held);
     }
-    const names = worldNames(saves);
+    const names = [...held].filter(n => n.length >= 3);
+    const nameById = new Map(saves.map(s => [String(s.id), String(s.name)]));
     const entries = [...seen.values()];
     // Anti-vacuity: the planted run must file a real feed, regional impacts and pulse events both.
     expect(entries.length).toBeGreaterThan(40);
@@ -132,15 +140,14 @@ describe('the news card face — an event, its people, no state-machine word (C1
 
     const faults = [];
     for (const e of entries) {
-      const face = faceOf(e);
+      const face = faceOf(e, nameById);
       const body = String(face.body || '');
       const why = [];
       if (!body.trim()) why.push('no body');
       if (LIFECYCLE_ONLY.test(body.trim())) why.push('lifecycle-only body');
       if (!names.some(n => body.includes(n))) why.push('no named party');
       if (face.status && STATE_TOKENS.test(face.status)) why.push(`state pill "${face.status}"`);
-      if (STATE_TOKENS.test(body)) why.push('state token in body');
-      for (const r of face.reasons || []) if (STATE_TOKENS.test(r)) why.push(`state token in pill "${r}"`);
+      for (const r of face.reasons || []) if (STATE_WORD.test(String(r).trim())) why.push(`state-token pill "${r}"`);
       if (why.length) faults.push(`${e.id} :: ${why.join(', ')} :: "${body}"`);
     }
     expect(faults.slice(0, 12), `${faults.length} of ${entries.length} card faces fail`).toEqual([]);

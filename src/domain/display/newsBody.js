@@ -81,6 +81,28 @@ function leadSentences(text) {
   return splitSentences(text).slice(0, 2).join(' ');
 }
 
+/**
+ * THE DATELINE (STYLE-RULINGS-2 C1): a card body names WHERE. When the filed sentence
+ * names none of the entry's own places (an older writer that speaks of "the settlement"),
+ * the body leads with the place the entry is about, as a dispatch does: "Kleinwalde —
+ * …". The place is the last of a travelling effect's path (its destination) and the
+ * first of any other entry's. Without a name map, or when the sentence already names a
+ * place, the sentence prints as filed.
+ * @param {string} told
+ * @param {{ settlementIds?: unknown[]|null, impactIds?: unknown[]|null }} entry
+ * @param {Map<string, string> | null | undefined} nameById
+ * @returns {string}
+ */
+function withDateline(told, entry, nameById) {
+  if (!nameById || typeof nameById.get !== 'function') return told;
+  const names = (Array.isArray(entry.settlementIds) ? entry.settlementIds : [])
+    .map(id => nameById.get(String(id)))
+    .filter(n => typeof n === 'string' && n.trim().length > 1);
+  if (!names.length || names.some(n => told.includes(n))) return told;
+  const travelling = Array.isArray(entry.impactIds) && entry.impactIds.length > 0;
+  return `${travelling ? names[names.length - 1] : names[0]} — ${told}`;
+}
+
 /** @param {unknown} v @returns {number} */
 function clamp01(v) {
   const n = typeof v === 'number' && Number.isFinite(v) ? v : 0;
@@ -172,10 +194,13 @@ export const BODY_POOLS = Object.freeze({
  * for legacy/unregistered entries. This also keeps the repetition instrument and
  * the words a reader actually sees on the same projection.
  * @param {{ id?: string|number|null, kind?: string|null, scope?: string|null,
- *   severity?: number|null,summary?:string|null,familyId?:string|null }|null|undefined} entry
+ *   severity?: number|null,summary?:string|null,familyId?:string|null,
+ *   settlementIds?: unknown[]|null, impactIds?: unknown[]|null }|null|undefined} entry
+ * @param {{ nameById?: Map<string, string> | null }} [options]  the panel's save-name map;
+ *   with it, a body that names none of the entry's places is datelined with the one it is about
  * @returns {string}
  */
-export function newsBodyText(entry) {
+export function newsBodyText(entry, options = {}) {
   if (!entry) return '';
   // THE CARD BODY STATES THE EVENT (STYLE-RULINGS-2 C1, SW-11 PULSE-CARD): every
   // composer files a reader sentence — the event, the people, the consequence —
@@ -185,7 +210,7 @@ export function newsBodyText(entry) {
   // The lifecycle pools below are the fallback for a legacy entry that filed no
   // summary at all.
   const told = leadSentences(newsReaderSummary(entry));
-  if (told) return told;
+  if (told) return withDateline(told, entry, options.nameById);
   const kind = entry.kind || '';
   const scope = scopePhrase(entry.scope);
   const heavy = clamp01(entry.severity) >= 0.75;
@@ -321,12 +346,13 @@ const FACE_RESTATED_REASON_KEYS = Object.freeze([
  * the body (a rule-note reason filed as the summary prints once, as the body) and,
  * when the body is the filed event, less the reach and lifecycle receipts it
  * already states. At most three, as the panel has always shown.
- * @param {{ kind?: string|null, summary?: string|null, reasons?: Array<string|null|undefined> }|null|undefined} entry
+ * @param {any} entry
+ * @param {{ nameById?: Map<string, string> | null }} [options]
  * @returns {string[]}
  */
-export function newsCardReasons(entry) {
+export function newsCardReasons(entry, options = {}) {
   const phrases = newsReasonPhrases(entry);
-  const body = foldText(newsBodyText(entry));
+  const body = foldText(newsBodyText(entry, options));
   const filed = Boolean(newsReaderSummary(entry).trim());
   const restated = new Set(FACE_RESTATED_REASON_KEYS.map(k => REASON_PHRASES[k]));
   return phrases
@@ -368,13 +394,14 @@ export function newsStatusWord(entry) {
  * Everything the news card prints about one entry, from the one set of readers:
  * the body, its title, the status word and the reason pills.
  * @param {any} entry
+ * @param {{ nameById?: Map<string, string> | null }} [options]  the panel's save-name map
  * @returns {{ body: string, tooltip: string, status: string, reasons: string[] }}
  */
-export function newsCardFace(entry) {
+export function newsCardFace(entry, options = {}) {
   return {
-    body: newsBodyText(entry),
+    body: newsBodyText(entry, options),
     tooltip: newsCardTooltip(entry),
     status: newsStatusWord(entry),
-    reasons: newsCardReasons(entry),
+    reasons: newsCardReasons(entry, options),
   };
 }
