@@ -91,6 +91,8 @@ describe('SW-B1 · P50: the government line is the seat\'s own, never the unread
     await ensureLaws();
     for (const i of [7, 8]) {
       const gov = birth(i).settlement.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning);
+      expect(gov.desc.length, `soak1k-${i}: the governing card has a line`).toBeGreaterThan(0);
+      // anchored: the governing card's line is asserted non-empty on the line above
       expect(gov.desc, `soak1k-${i}`).not.toContain('without a clear dominant authority');
     }
   }, 120_000);
@@ -102,6 +104,8 @@ describe('SW-B1 · §2·D #7: one card governs — the noble houses name the sea
     for (const i of [4, 10]) {
       const factions = birth(i).settlement.powerStructure.factions;
       const gov = factions.find((/** @type {any} */ f) => f.isGoverning);
+      expect(factions.filter((/** @type {any} */ f) => !f.isGoverning && f.desc).length, `soak1k-${i}: non-governing cards with lines`).toBeGreaterThan(0);
+      // anchored: non-governing cards with lines are asserted present on the line above
       for (const f of factions) if (!f.isGoverning) expect(f.desc, `soak1k-${i}: ${f.faction}`).not.toMatch(/the governing authority here/);
       const noble = factions.find((/** @type {any} */ f) => /^Hereditary landowners behind the /.test(f.desc || ''));
       if (noble) expect(noble.desc, `soak1k-${i}`).toContain(`behind the ${gov.faction};`);

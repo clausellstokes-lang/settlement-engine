@@ -23,6 +23,8 @@ describe('SW-B1 · P71: the food import channel says "by sea" only over docks', 
   it('its import channel is not "port trade", and its verdict names no sea', () => {
     expect(s.economicViability.metrics.foodBalance.importChannel).not.toBe('port trade');
     const v = deriveViability(s);
+    expect(JSON.stringify(v).length, 'the verdict is derived, not empty').toBeGreaterThan(2);
+    // anchored: the derived verdict is asserted non-empty on the line above
     expect(JSON.stringify(v)).not.toMatch(/by sea|port trade/);
   });
 });

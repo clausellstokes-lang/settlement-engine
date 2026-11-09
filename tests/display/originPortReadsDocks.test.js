@@ -25,6 +25,7 @@ describe('SW-B1 · DS-GEN-6: the port origin pool is drawn only over real docks'
       tier: s.tier, tradeRouteAccess: 'port', inst: { ...s.economicState.compound.inst, hasPort: hasDocks }, foodBalance: s.economicViability?.metrics?.foodBalance,
     }).overview.origin.map((/** @type {any} */ l) => l?.provenance?.poolKey);
     expect(read(true), 'the positive control: over docks the port pool is drawn').toContain('port');
+    // anchored: the positive control on the line above draws 'port' over docks through the same reader
     expect(read(false)).not.toContain('port');
     expect(read(false).length, 'the tier line still stands').toBeGreaterThan(0);
   }, 60_000);
