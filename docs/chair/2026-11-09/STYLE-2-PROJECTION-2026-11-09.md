@@ -200,3 +200,81 @@ CONFIRMED by executed measurement:
 PLAUSIBLE:
 - The canon-command stale refusal (read from 193's SQL, not executed).
 - §6.3 item 4's campaign-town divergence (read from the code; the twelve carry no campaign).
+
+## 7. The third seat
+
+**Seat:** SW-B7b PROJECTION, the third seat (session `session_01FbPLbbpYzd8XKBiTgAuZuQ`), on this lane from `bf6575d95`. The lane stop, rule 14: what is landed is pushed; the remainder is listed BY FILE in §7.5. The writer and the admission landed first, so a town's shared page lights at its first save after the client ships.
+
+### 7.1 The causes landed
+
+| commit | cause | public before → after | pins (red at the parent) |
+|---|---|---|---|
+| `adbd413a6` | item 1: the writer, with the store's adoption, as one cause | an unstamped record (SILENT at every lit site) → `data.publicProse` (and `ai_data.aiSettlement.publicProse`) written at every cloud save | `tests/store/publicProseAdoption.test.js` (NEW, 5 arms): 5/5 red at the parent, and the two stale arms red with only the adopter disabled. Re-keyed by cause: `saves.smoke` "save shapes the row"; `phantomPromotion` C7 (the composer is the discriminant's fourth reader, by addition, and writes no row); `snapshotPromotion.census` (+1 FORWARD row, `adoptPublicProseAck`) |
+| `8ad1df506` | item 2, act 1: the observed-shape rung 39 → 40, one save-time-writer declaration `publicProse on settlement` (writer `src/lib/saves.js`), roster 14 → 15, bank 76/50 → 77/51 | — | the four rung suites 128/128; the walker declared red until act 2 |
+| `840e40d92` | item 2, act 2: the governed re-mint (scan → migrate → review → bundle → `--write`) | — | New 1 · Same 1,531 · nothing else; review `docs/chair/2026-11-09/osr-rung40-public-prose-review.json` (a builder that refuses anything but the one row; negative control refused); froze 2,191 findings / 1,532 identities, bank 77/51; walker 47/47; the gate exits 0 |
+
+**The writer, as built.** `src/lib/saves.js` has five pieces. `loadPublicProseCompose()` is lazy, a dynamic import beside `loadNeighbourBackLink`. `publicProseForRow(entry)` returns `{data, ai}`, composed from `entry.settlement` and from `entry.aiData.aiSettlement`, each from its own record; it returns null when neither is a record, or when the composer cannot load or throws. `mutationRow(entry, includeId, publicProse)` stays SYNC and writes `withPublicProse(…)` and `aiDataWithPublicProse(…)`. The stamp is awaited at `supabaseSave` (its own row literal), `supabaseUpsert`, `supabaseUpdate` (its own `updates`) and `supabaseMutateBatch` (`Promise.all` over updates and creates, with the owner/session fence re-asserted after that await). The local backend is untouched: it has no gallery and no CAS. A phantom stub composes null (`isPhantomRecord`), so EM-F1's five keys persist as minted, and `phantomCloudId` stays green and unmoved.
+
+**The adoption, as measured, and the STOP sent.** `outbox.js` is store-agnostic by its own contract, and ten `save()` callers sit outside the slice's create path. So the ack is ONE seam: every confirmed cloud write calls the `saves.onPublicProseAck` listeners. `settlementSlice.js :: adoptPublicProseAck` writes the stamp into the cached row (`settlement`, `aiData.aiSettlement`) and into the live record, but ONLY where they are byte-equal, less the stamp, to the record written. So an older write's ack never lands on a newer edit, and the newer edit's own write stamps it. It is wired by one line in `src/store/index.js`, a file beyond the grant's list; this was the STOP, sent with this default. `outbox.js` is unchanged, because the acks it drains reach the same seam.
+
+**`canonEventCommandPersistence.js`: measured, and NOT stamped.** Migration 183's envelope (`CUT_TRADE_ROUTE changed an unrelated settlement field`) and 193's `create_route_envelope_violation` refuse any top-level change to `data` outside their named keys. A restamp of `p_next_data` would therefore be refused. The command's next record carries the adopted stamp forward unchanged, and the store adopts the server's returned row through the command's own projection. **The limit, written plainly:** after a canon command the shared text is the pre-command text until the owner's next save. This is §1's staleness, and it is never a wrong re-draw.
+
+**Campaign readings are OWNER-ONLY in this wave (the chair's ruling on §6.3).** The composer draws from what the save holds. A lens that needs the campaign (flow drift, the politics blocs, the steadings' campaign ledger, WarTab) prints NOTHING on the shared page; it never prints a different reading. The equality law reads against the SAVED record's player view, not against the live campaign overlay. A campaign-aware projection is a named post-deploy follow-up.
+
+### 7.2 Gates and receipts
+
+- **The governing suites of item 1** (every test file naming `saves.js`, `settlementSlice`, `store/index` or the composer, 475 files): 471 green. Four files were red. Two of them were this cause's pins (C7 and the census), now re-keyed above. The other two are INHERITED: they are red at `bf6575d95` too, run in a clean worktree at the parent. They are `readerValidationOnPage` soak1k-24 and `architectureFreshness`'s migration count/head, the lane's 208/209 composition gap that §4 declares.
+- eslint is clean on every touched file. `tsc --noEmit` gives 167, the base figure, with none in the touched files.
+- **The observed-shape register:** the rung suites 128/128 at act 1; walker 47/47 and the checker's gate exit 0 at act 2.
+- **The wide run at the tip** (`tests/lint`, `tests/architecture`, `tests/security`, the equality suite, the leaf suite): see §7.4.
+- **Golden surfaces:** no generator file was touched. The owner view moves by 0 text: the adopter changes no line a page prints, only the hidden `publicProse` key on the store's record. The public snapshot does not move in these causes, because no new site is lit; the writer makes the already-lit families' text reach a real saved row.
+- **The full vitest at the base** was started in a clean worktree before the first edit (`--maxWorkers=2`). Its figure is in §7.4 if it concluded inside the lane.
+
+### 7.3 The STOPs (sent; the defaults are recorded)
+
+1. **The adoption seam.** The default is built as above: one ack seam, one wiring line in `src/store/index.js`, and `outbox.js` unchanged.
+2. **The stressors family.** `OverviewTab.jsx :: crisisDoor` is `!publicDossier && !playerView && …`, so the `!crisisDoor` crisis card prints `v.summary` on the owner's PLAYER view as well as on the shared page. Under the law, removing it from the shared page alone breaks byte-equality, and removing it from the player view moves an owner surface. DEFAULT, not built: ship `stressorsStateProse`'s rungs as `stressors:overview`, and KEEP `v.summary` on both views (it is the datum, not a desk line) until the chair rules.
+
+### 7.4 Measured at the tip
+
+The wide run at `840e40d92` covered `tests/lint`, `tests/architecture`, `tests/security`, `tests/components/publicProseEquality.test.jsx` and `tests/domain/publicProse.test.js`: 378 files, 5,463 tests passed, 4 red. **All four reds are INHERITED**: each was run red at the parent `bf6575d95` in a clean worktree.
+- `migrationSequenceAll`'s gapless arm (208 is absent on this lane; the declared composition red of §4).
+- `layerBoundaries`' cycle set, the SAME extra cycle at the parent (`generators/foodGenerator.js | generators/isolationSupport.js`, not this lane's).
+- `sovereigntyLightingContract`'s each-family park debt (109 against 108 at the parent and the tip alike).
+- The same walker's estate file count (3,138 pinned; **3,141 at the parent, 3,142 here**). The +1 is this seat's new suite `tests/store/publicProseAdoption.test.js`, an UNSIGNED census delta for STYLE-2-MERGE's re-measure. The pin is not re-worded here.
+
+The three record walkers: 111/111 (`review-fixes-2026-07-08` fetched). The full vitest at the base did not conclude inside the lane, so it is not counted, as at the first seat.
+
+### 7.5 What stays — BY FILE, for the next seat (in this order)
+
+1. **The remaining desk families**, each ONE cause in the economy idiom (`economyDeskRead.js` / `deskHostArgs.js` / `publicProseCompose.js :: PUBLIC_PROSE_SITES` / the equality suite's `SITES`, plus `COMPLETE` when every family on the tab is lit; ARM 2 of `tests/lint/dossierMountRegistry.walker.test.js` re-keyed by cause where a desk's one caller moves into a `<desk>DeskRead` module):
+   - `src/components/new/tabs/OverviewTab.jsx :: stressorProse` → `stressors:overview`, pending §7.3 STOP 2. `worldStressor` is campaign-only and ships null, by the owner-only ruling.
+   - `src/components/new/tabs/DefenseTab.jsx`, its eight calls (`defense:state`, `defense:criminal`, and the threat, forces, posture, status, wall and supporting lenses), with the T2-20 static line out. The line prints on the owner's player view whenever `criminalLines` is empty; measure its owner reach first, as the economy fallbacks were measured.
+   - `src/components/new/tabs/PowerTab.jsx :: powerStateProse` with `deskReadings` (`power:desk`); the ladder rows and `governanceAccountOf` gated on `publicDossier`. `politicsBlocsOf` needs a worldState, so it is owner-only and ships nothing.
+   - `src/components/new/tabs/WarFaithDesk.jsx :: warFaithDeskRungs` from FaithTab (`warFaith:faith`). WarTab is owner-only.
+   - `src/components/new/tabs/MagicTab.jsx` (`magic`).
+   - `src/components/new/tabs/ViabilityTab.jsx`, as two sites. The first is `isolationProse` → `viability`: `defenseIsolationSupportProse`'s callers are ViabilityTab and `printProse.js`, the PDF, which is not public. The second is `deriveViability`'s seeded verdict → `viewModel:viability`, shipped as text (`vmViability.summary`, behind `canonicalViewModel`).
+   - `src/components/new/tabs/SteadingsSection.jsx` (`general:steadings`). The campaign ledger is owner-only.
+   - The Overview's culture / "Governed by" line (`settlementQuickGuide.js :: cultureScopeLine` / `governsLine`), a site composed owner-side and shipped, never read from stripped fields in public.
+   - The crisis "Hook:" lines are veiled rows; the pins treat them as stripped.
+2. **`src/domain/display/galleryVeil.js :: applyVeil`**: drop a site's rung where its block address is hidden.
+3. **`src/domain/dossier/dossierSearch.js`**: index `publicProseOf`'s strings on the player-view enumeration.
+4. **The bytes, again**, at the last family, against §6.2 (mean 6.7 KB with economy and general lit).
+
+### 7.6 The deploy step's terms (unchanged from §6.6)
+
+The owner runs `supabase db push` with 208, 209 and 210 in that order; no lane applies any of them. The shared page lights for a town at its FIRST SAVE after the client ships the writer (`adbd413a6`). One save per shared town is owed. Name it to the owner, and never script it.
+
+### 7.7 CONFIRMED against PLAUSIBLE
+
+CONFIRMED by executed measurement:
+- The writer stamps both records.
+- After a save and after an update, the live record, the cache and the stored row are one record: the store's entry check and the CAS's compare are both equal, on a modelled table.
+- An older ack never lands on a newer edit.
+- A failed composer writes no stamp and the page reads null.
+- The canon envelopes refuse a restamp, read from 183's and 193's SQL text.
+- The rung's reconciliation is exactly one row.
+
+PLAUSIBLE:
+- That the real RPC compares equal end to end: the CAS was modelled as deep jsonb equality, not run under pglite.
+- That no save path outside `saves.js` writes `data`: grep-measured. `canonEventCommandPersistence.js` is the one other writer and is handled above.
