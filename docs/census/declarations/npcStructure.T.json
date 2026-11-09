@@ -325,7 +325,7 @@
     },
     {
       "id": "military__governance_fractured__dominant.position",
-      "text": "Commands the soldiers while the seat loses its hold; whoever gives the orders next will want them.",
+      "text": "Commands those under arms while the seat loses its hold; whoever gives the orders next will want them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -373,7 +373,7 @@
     },
     {
       "id": "military__corruption__dominant.position",
-      "text": "Commands the soldiers while criminals pay some of those who wear their colours.",
+      "text": "Commands those under arms while criminals pay some of the people in their ranks.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -517,7 +517,7 @@
     },
     {
       "id": "military__contested__dominant.position",
-      "text": "Commands the soldiers while rivals fight over the seat, and each side wants them.",
+      "text": "Commands those under arms while rivals fight over the seat, and each side wants them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -533,7 +533,7 @@
     },
     {
       "id": "military__contested__dominant.constraint",
-      "text": "Keeping the soldiers out of the fight takes quiet work that cannot be owned in public.",
+      "text": "Keeping those under arms out of the fight takes quiet work that cannot be owned in public.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -565,7 +565,7 @@
     },
     {
       "id": "military__stable__dominant.position",
-      "text": "Commands the soldiers in quiet times; the work is keeping trouble from starting.",
+      "text": "Commands those under arms in quiet times; the work is keeping trouble from starting.",
       "needs": [],
       "excludes": [
         "crisis"
