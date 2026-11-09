@@ -774,20 +774,15 @@ export const generatePowerStructure = (
   };
 };
 
-/**
- * The power step's safety ratio: the military's effective weight over the criminal's (floored at 8), 1
- * where the institution flags are absent.
- * @param {any} instFlags getInstFlags' result @returns {number}
- */
+/** The power step's safety ratio (military over criminal, floored at 8; 1 with no flags). @param {any} instFlags @returns {number} */
 function safetyRatioOf(instFlags) {
   return instFlags?.inst ? instFlags.militaryEffective / Math.max(8, instFlags.criminalEffective) : 1.0;
 }
 
 /**
- * THE CLIMATE RUNG (ALLEGIANCE-CAR2, the design §3.4): the power step's strengths-only classifier
- * (factionDynamics.js :: computeCriminalCaptureState) over a settlement's CURRENT roster — its powers, its
- * institutions and its config, the same inputs the power step reads. Draw-free. The coherence seam hands
- * it to domain/people/hallCapture.js :: hallCaptureOf, which caps it at 'equilibrium'.
+ * THE CLIMATE RUNG (ALLEGIANCE-CAR2, the design §3.4): the strengths-only classifier (factionDynamics.js ::
+ * computeCriminalCaptureState) over a settlement's CURRENT powers, institutions and config; draw-free. The
+ * seam hands it to domain/people/hallCapture.js :: hallCaptureOf, which caps it at 'equilibrium'.
  * @param {{ config?: any, institutions?: any[], powerStructure?: { factions?: any[] } }} settlement
  * @returns {'none'|'adversarial'|'equilibrium'|'corrupted'|'capture'}
  */
