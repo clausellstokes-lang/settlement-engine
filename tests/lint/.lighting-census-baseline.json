@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "11b16bf66dee41b62a87e172144983850c868f40",
-  "measuredBy": "STYLE-2-MERGE (SW-0 STYLE-WALKER merge point)",
+  "measuredAtSha": "ffe7ddeb4a8db552cbf747826f1a2fc2e5862c24",
+  "measuredBy": "STYLE-2-MERGE (SW-4 HOOKS-CONNECTIVE merge point)",
   "date": "2026-11-09",
-  "note": "SW-0's one new test file (tests/lint/styleLaw.walker.test.js), carried by the merge",
-  "files": 3139,
+  "note": "the merged lanes' new test files and titles (SW-1..SW-4) and the two pins re-keyed at point 5",
+  "files": 3140,
   "parked": 387,
-  "credited": 2752,
-  "titles": 28842,
-  "suiteTitles": 7756
+  "credited": 2753,
+  "titles": 28848,
+  "suiteTitles": 7758
 }
