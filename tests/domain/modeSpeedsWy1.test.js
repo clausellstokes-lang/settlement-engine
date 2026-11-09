@@ -496,7 +496,11 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // keys (the struck interval line); no id, tick, number or rumour seed moved. The strain receipt is seeded by the town, never
 // the tick, because a drift outcome's reasons are the metronome key (worldPulseFeedCuration.js :: isMetronomeRepeat): a
 // tick-seeded first draft added two hidden rumour seeds here and was refused by this arm. Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = '12ac14adf93a42ad04315e0815b80e3a6003172bf74ca8af0479c4b42b6e471a';
+// 2026-11-09 (STYLE-2 C2, lane SW-12's second seat, the next cause): 12ac14ad... -> 1123201b..., ONE cause, TEXT ONLY:
+// factionCompetition.js (the power-action summary per kind, the challenge and institution receipts in words; the rule-text
+// receipt struck). Leaf-diffed against the parent in a clean worktree: 121 string leaves and 25 array-tail keys; no id, tick,
+// number or rumour seed moved. Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = '1123201b0cc503bc3ba6721e9007e6f40cab1b4aa8955debf95b5e7a51096097';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

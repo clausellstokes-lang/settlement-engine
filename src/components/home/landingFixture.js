@@ -166,7 +166,7 @@ export const fixture = {
         "week": "Week 9",
         "season": "the spring of year 1",
         "headline": "Elder Council captures an institution",
-        "text": "Elder Council sees an opening to press council rule interests."
+        "text": "Control of Cnocby's multiple water sources is passing to Elder Council."
       },
       {
         "week": "Week 12",
