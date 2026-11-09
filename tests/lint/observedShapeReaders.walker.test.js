@@ -680,10 +680,15 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // from the step stream), 406/2561/407/80 at 888636ce8; cause 2, the J-19 cure (d131ab158: ensureNpcStates no longer
     // re-rolls a v3 card's corruption), 396/2525/396/80. MEASURED at the merged tip by this arm's corpus build: equal to
     // the car's own pins exactly (no interaction term measured at the merge).
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, f51058995; re-keyed by identity at the schema-37 rung, one
+    // cause): accumulated 2525 → 2535, regional 80/80 → 81/81; final 396 and unique 396 HOLD. The guild's push
+    // (bbb1a4abc, A3: castPowers.js weights hidden agents in the rank deal) re-deals the year — car 2's own pins at
+    // 7017f5096, measured there per sha (6694756af 396/2525/396/80 → bbb1a4abc = ce90cf16e = its tip 396/2535/396/81).
+    // MEASURED at the merged tip by this arm's corpus build: equal to car 2's pins exactly.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 396, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 390)
-      wizardNewsAccumulatedEntries: 2525, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 2486)
+      wizardNewsAccumulatedEntries: 2535, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 2486) // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (2026-11-09, rung 37): the guild's push re-deals the year (bbb1a4abc) (2525 → 2535)
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -701,11 +706,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 80, // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80 // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (82 → 80)
+      regionalEventLog: 81, // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (2026-11-09, rung 37): the guild's push re-deals the year (bbb1a4abc) (80 → 81) // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80 // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (82 → 80)
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 80, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 82)
+      regionalEventLogUnique: 81, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 82) // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (2026-11-09, rung 37): the guild's push re-deals the year (bbb1a4abc) (80 → 81)
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
