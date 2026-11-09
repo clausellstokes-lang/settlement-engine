@@ -1,5 +1,7 @@
 # THE OWNER'S DEPLOY STEP — this release, with the engine service turned ON (draft of 2026-11-08; final at the integration pull request)
 
+> **THE ORDER, by the owner's word of 2026-11-09 ("Do it before deploy"):** this step runs AFTER the second style wave (STYLE-2: the audit of every writer and every printed block against the owner's style law, the chair's rulings, the correction lanes and the style walker — `../2026-11-09/BRIEF-STYLE-2-AUDIT-2026-11-09.md`) has merged onto the integration branch, after MERGE-TRAIN and before the CI push; the deploy waits for it.
+
 **Written by the chair** (session `session_01FbPLbejcfwX5nii12VM673`) on the owner's words of 2026-11-08: "Pre deploy*" (the allegiance train before the one deploy), "Yeah do those before deploy" (items 14 and 15), and "Turn it on please. Or tell me the process to turn it on" (the engine service). **The source of the procedure:** [`../../DEPLOY.md`](../../DEPLOY.md) — "Turning the engine service on", "Edge function — manual", "Post-deploy verification"; the design `docs/DESIGN_ENGINE_SERVICE.md` "What the owner does". **What the chair cannot do:** none of this runs from a chair session — there is no Supabase or Vercel credential or CLI in the cloud container, and the deploy guide makes every backend step an attended command. The chair prepares; the owner executes.
 
 ## 0. What is new in this release that the servers must learn
