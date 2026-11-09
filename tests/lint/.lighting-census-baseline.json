@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "fc98c1fa0b0f445cf57affd6ebc1097b071fab3f",
-  "measuredBy": "STYLE-2-MERGE (SW-B6 ECO-DEF-BLOCKS merge point)",
+  "measuredAtSha": "67b736115dc6ba789f767ebf9df50782b5f9821b",
+  "measuredBy": "STYLE-2-MERGE (SW-B7a PARTY-LINK merge point)",
   "date": "2026-11-09",
-  "note": "SW-B6's new no-watch and income-lead tests, carried by the merge",
-  "files": 3142,
+  "note": "SW-B7a's party-link tests (the players' page, the redirect, the dialog, the client, the pglite harness), carried by the merge",
+  "files": 3146,
   "parked": 387,
-  "credited": 2755,
-  "titles": 28867,
-  "suiteTitles": 7761
+  "credited": 2759,
+  "titles": 28884,
+  "suiteTitles": 7768
 }
