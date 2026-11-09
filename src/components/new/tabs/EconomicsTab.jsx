@@ -566,7 +566,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
             {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
             {fb.magicFoodOffset>0&&<span style={{color:swatch.info}}>+ {formatCount(fb.magicFoodOffset)} by {foodBar.magicChannel} provision</span>}
-            <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>
+            <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>{fb.deficit>0&&<span style={{color:swatch.danger}}>Short: {formatCount(fb.deficit)} lbs/day</span>}
           </div>
           <div style={{height:10,background:swatch['#E8DCC8'],overflow:'hidden',position:'relative'}}>
             <div style={{height:'100%',width:`${foodBar.production}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a'}}/>
@@ -581,12 +581,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         </div>
         {/* Narrative */}
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',...edged(`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,`3px solid ${foodColor}`),padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
-          {foodDeficit
-            ? fb.importCoverage>0
-              ? `What is grown here covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of the food people need. Trade brings in about ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the rest, and ${fbal.deficitPct}% of what people need still goes unmet.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
-              : `No trade brings food in here, and ${fbal.deficitPct}% of what people need goes unmet.`+(fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:'')
-            : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'What is grown here and brought in covers each day\'s food, with nothing to spare against a bad year.'
-          }
+          {foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus)}
+          {/* SW-B6 (2026-11-09, STYLE-RULINGS-2 B6; the SURFACES audit's B·#6): the food account in
+              WORDS — what is grown, what the carts bring, who goes short, the season ahead. The per
+              cent stays in the stat line above, which is the label; `foodSentence` (below the tab)
+              is the one composer. The six lines of the old template are kept as six, because the
+              prose-numerics baseline keys this file by line. */}
         </div>
         {drawnFoodGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodGlance.sentence}</p>}
         {/* ── THE STORES, ONE HOME (FOOD-1, chair addendum 2; the owner 2026-11-03: "Do add storehouse
@@ -756,6 +756,40 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
     </div>
   );
+}
+
+/** A share of the whole as plain words, by the first band it falls under. @param {number} x @param {ReadonlyArray<[number, string]>} bands @param {string} top */
+const shareWords = (x, bands, top) => (bands.find(([under]) => x < under) || [0, top])[1];
+const GROWN_BANDS = Object.freeze([[0.18, 'less than a fifth'], [0.23, 'about a fifth'], [0.29, 'about a quarter'], [0.42, 'about a third'], [0.58, 'about half'], [0.71, 'about two parts in three'], [0.82, 'about three parts in four']]);
+const BROUGHT_BANDS = Object.freeze([[0.4, 'a little of the rest'], [0.6, 'about half the rest'], [0.9, 'most of the rest']]);
+/** @param {number} pct the record's residual share of the need left unmet; a whole sentence, the season ahead last */
+const shortWords = (pct) => (pct <= 0 ? 'Between them, nobody goes short.'
+  : pct <= 5 ? 'A few households still go short, and a bad season would leave more of them hungry.'
+  : pct <= 15 ? 'Some households still go short, and a bad season would leave more of them hungry.'
+  : pct <= 35 ? 'Many households go short, and a bad season would bring real hunger.'
+  : 'Most households go short, and hunger is already here.');
+
+/**
+ * SW-B6 (2026-11-09) — the Food Security sentence, in words (B·#6; the owner's law, WIRING-RULINGS §5:
+ * "the farmers who fell … the winter ahead hard", not the per cent). Reads exactly what the old template
+ * read — production against need, the import cover of the gap, the record's residual share
+ * (`deriveFoodBalance`), the magic offset — plus the place's name and its approach for the carriers'
+ * noun. No figure prints: the stat line above carries every number.
+ */
+function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
+  const name = s?.name || 'This place';
+  const carriers = eco?.tradeAccess === 'port' ? 'ships' : eco?.tradeAccess === 'river' ? 'boats' : 'carts';
+  const magic = fb.magicFoodOffset > 0 ? ` ${foodBar.magicChannel.charAt(0).toUpperCase()}${foodBar.magicChannel.slice(1)} provision makes up a little more.` : '';
+  if (!foodDeficit) {
+    if (!foodSurplus) return 'What is grown here and brought in covers each day\'s food, with nothing to spare against a bad year.';
+    const over = fb.surplus / Math.max(1, fb.dailyNeed);
+    return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
+  }
+  const short = shortWords(fbal.deficitPct);
+  if (!(fb.importCoverage > 0)) return `No food comes into ${name} by trade.${magic} ${short}`;
+  const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
+  const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
+  return `${name} grows ${grown} of what it eats, and ${carriers} bring in ${brought}.${magic} ${short}`;
 }
 
 export default React.memo(EconomicsTab);
