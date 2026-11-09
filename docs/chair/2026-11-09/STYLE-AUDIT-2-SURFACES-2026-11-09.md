@@ -14,7 +14,7 @@
   - **eight frames were reworded and still repeat at the same rate**;
   - **the PDF's duplicate map barely moved** (61 → 57);
   - the crisis page, the Tonight hooks, the PDF and Foundry Overview lead, the tension descriptions and the Power tab below the governance block print engine fragments, contradictions and lines that use none of the people named an inch above.
-- Of **288 block types judged, 57 PASS and 231 REWRITE.**
+- Of **288 block types judged, 57 PASS and 231 REWRITE.** With the §7 addendum (the opened cards; the public and player views), the totals are **305 · 62 · 243**.
 
 ## §0 Method, base, the twelve
 
@@ -45,6 +45,11 @@
   4. runs `src/domain/worldPulse/advanceCampaignWorld.js :: advanceCampaignWorld` **26 times at `one_week`** (26 ticks, 0 throws, 367 news entries). It carries `worldState`, `regionalGraph`, `wizardNews` and `settlementUpdates` forward as `scripts/audit/simulate-world.mjs` does;
   5. renders Copanucan (village, seed 2) and Portaminus (city, seed 4). The Chronicle comes from `src/components/OutputContainer.jsx :: collectChronicle` into `ChronicleTab.jsx`. History gets `recentEvents`. Rumors, Relationships and War render under the reader stub at premium tier.
   - **Limit:** no rumour ledger was born in 26 weeks (`worldState.spatialLedgers.rumorLedgers` was absent), so the Rumors tab printed its launch teaser and the tellings are unjudged.
+- **The addendum (§7, the chair's second pass, 2026-11-09).**
+  - The opened NPC and relationship cards: scratch `opened.mjs`, a vite alias to a scratch copy of `npcComponents.jsx` with its card toggles defaulted open.
+  - The public and player views: scratch `views.mjs`, `projectShareVeil(toPublicSafe(s))` with `publicDossier`, and `toPublicSafe(s)` with `playerView`, diffed against the owner screen.
+  - The rumours: `advance.mjs` at 52 one-week ticks.
+  - No product byte moved for any of them.
 - **The unit.** A block is one heading's prose on one surface: a tab section, a PDF section, a Foundry page section, a card's body. Each block TYPE (template position) is judged across every town it prints in, as ONE statement, against the brief's (a)–(g):
   - (a) evidence before judgment;
   - (b) the people on the page used;
@@ -1148,10 +1153,76 @@ The order is the reach (first impression, towns of 12, surfaces) × the depth of
 - The attribution of the hooks overlap's rise (0.157 → 0.299) to the crisis-casting hooks.
 - E·E4's "a far settlement": the harness's name map may be what failed, not the product's.
 
-## What stays (for a second seat, BY SURFACE)
+## §7 ADDENDUM: THE OPENED CARDS, THE RUMOURS AT 52 WEEKS, AND THE PUBLIC AND PLAYER VIEWS (2026-11-09)
 
-- **Screen › NPCs, the card bodies** (wants, how they deal, secrets) and **Relationships, the row bodies**. The screen export prints them collapsed, so they are unjudged on the screen. Their PDF mirrors (D, the Notable NPCs and Relationships chapters) and the Foundry NPC pages are judged.
-- **Screen › Defense › Supporting Capabilities.** The fold is closed and prints nothing on the screen. Its PDF mirror is judged in D.
-- **After the advance › Rumors, the tellings.** No rumour ledger was born in 26 weeks. A longer advance (or the rumour path the WizardNews panel uses), read under the block law, is owed. The News bodies were also not read beyond their headlines: the harness read `headline` and `body`/`text`, and the bodies came back empty.
-- **The Tonight famine stores (A·T5, Al-karez: "Active Famine" with "a granary, five months of grain") and A·C6.** Both need the full record, not the soak summary.
-- **Public dossier and player view.** All three exports were read at the owner and canon view. The public gallery projection and the player view were not rendered.
+The chair asked for this pass after the hand-back at `26775d668`: the three surfaces §"What stays" listed. The method is in §0's last bullets, repeated here so the addendum stands alone:
+- **Opened cards.** A scratch harness, `opened.mjs`, boots a vite SSR server with the soak harness's own configuration, plus ONE alias: the tabs' import `../npcComponents` resolves to a scratch copy of `src/components/new/npcComponents.jsx`. In the copy, the three `useState(false)` card toggles read `useState(true)` and the relative imports are made absolute; nothing else changes and no product byte moves. It renders the NPCs and Relationships tabs for the twelve, owner view: 5,563 lines, against 2,981 collapsed.
+- **The public and player views.** A scratch harness, `views.mjs`, renders the twenty tabs for the twelve twice:
+  - PUBLIC: `projectShareVeil(toPublicSafe(settlement))`, the projection `src/lib/gallery.js` publishes, with `publicDossier: true`;
+  - PLAYER: `toPublicSafe(settlement)`, the projection `src/domain/dossier/dossierSearch.js` uses for the player view, with `playerView: true`.
+
+  Each is diffed line by line against the owner screen of the same town. The PDF has no player or public variant (`src/pdf/variants.js`: draft_brief, canon_dossier, timeline_packet, campaign_state), so these views are screen-only.
+- **Rumours.** `advance.mjs` re-run at **52 one-week ticks**: 52 ran, 0 throws, 602 news entries, `spatialLedgers.rumorLedgers` still absent. The pool is **dormant by design in a realm with no map**. `src/domain/spatial/rumorNetwork.js :: advanceRumorLedgers` returns unchanged unless the world has an active spatial digest (`activeSpatialDigest`) and `simulationRules.infoMode` is `perfect_delayed` or `unreliable`; a realm built from save rows and edges, as the soak's are, has no digest. The tellings can only be read on a mapped campaign with a live info mode. That stays, with the recipe, under What stays.
+
+### §7·F The opened NPC and relationship cards (screen, owner view, the twelve)
+
+| # | block | towns (of 12) | writers | BEFORE (seed · town) | verdict · codes | proposed COMPOSITION (owner's voice) | needs |
+|---|---|---|---|---|---|---|---|
+| F1 | NPC card · structural position (the italic sentence under the role) | 12 | `src/generators/npcStructure.js` (position and constraint pools by seat and governance state) | soak1k-0 · Paullus Severus · "Holds nominal governing authority where the legitimacy of that position is in active question. Formal title and real decision-making power are not the same thing." | REWRITE · mechanism-first · machinery-leak · aphorism · duplicate-surface (the same two sentences on Yum Caan, soak1k-2, and on every seat-holder whose legitimacy is in crisis) | Paullus Severus still calls the families together, but fewer come each week, and the ones who stay away send no word. | the seat's own fact (who stopped coming; the legitimacy band in words); the "Formal title … not the same thing" coda struck |
+| F2 | NPC card · Constraint | 10 | `src/generators/npcStructure.js` | soak1k-2 · Kisin Kin · "Constraint: Pastoral relevance without institutional authority is difficult to convert into institutional standing when the governance reconsolidates." | REWRITE · mechanism-first · machinery-leak ("governance reconsolidates", "institutional standing") | Kisin Kin is trusted at every graveside in Copanucan, but holds no office, and when the Reeve's council finds its feet again the druids will be told to go back to their groves. | the named rival institution; the season |
+| F3 | NPC card · Wants (seat goals) | 12 | `src/generators/npcStructure.js` (seat goals), `src/data/npcData.js` (goal pools) | soak1k-2 · Yum Caan · "Wants Get the seat obeyed again before the week is out, or find a quiet way out of it." (the same line for every crisis seat-holder: soak1k-0, -1, -2, -3, -4, -6, -8) | REWRITE · duplicate-surface · no-evidence (b) | Yum Caan wants the occupying officers to hear the village's protests through the Reeve again, and not over his head. | the seat's crisis (occupation, migration…) and its counterpart |
+| F4 | NPC card · How they deal | 11 | `src/data/npcData.js` (the dealing-style pool) | soak1k-2 · "How they deal Offers information freely; asks questions that seem like interest rather than interrogation." | REWRITE · duplicate-surface · mannered · (struck tic "rather than") | Plain and per person, keyed to the card's own traits ("Flaw: bitter · Temperament: generous"): "Yum Caan gives away more than he means to and resents you for it afterwards." | a pool keyed to the traits already on the card; **three lines cover 371 cards in 11 towns**: "Cooperative within clear limits…" 128, "Offers information freely…" 123, "Answers questions without volunteering…" 120 |
+| F5 | NPC card · Secret | 12 | `src/data/npcData.js` (secret pools), `src/generators/npcGenerator.js` (the `{faction}` and `{commodity}` substitution) | soak1k-2 · Itzcuintli May · "Secret: Has been feeding strategic intelligence to a rival settlement" | PASS for most (concrete, playable). REWRITE · no-evidence where the secret names nobody on the page ("a rival settlement" when the realm has none; "someone who doesn't know they exist") and duplicate-surface where one secret frame repeats inside a dossier ("knows something about @ that @ believes no one else knows…" 31 times in 6 towns) | Itzcuintli May has been sending word of the occupiers' patrols to Lundey, and Lundey has not yet said what it will pay. | a named neighbour or a named person on the roster; no frame twice in one dossier |
+| F6 | NPC card · Disposition / Flaw / Temperament | 12 | the NPC trait fields | soak1k-2 · "Flaw: bitter Temperament: generous · Disposition generous, commanding" | PASS (labels) | — | — |
+| F7 | Relationship card · the tie sentence | 11 (the thorp prints "Generate a settlement to see relationship data.") | `src/data/npcData.js` (pair prose by tie type) via `src/components/new/npcComponents.jsx :: NPCRelCard2` | soak1k-2 · "Itzcuintli May knows enough to ruin Teyacapan Itza, and Teyacapan Itza holds enough to finish Itzcuintli May, so the two of them work together very carefully." | PASS (evidence, both names, a consequence) | — | — |
+| F8 | Relationship card · the turn sentence (the second line) | 11 | `src/data/npcData.js` (the pair "twist" pool) | soak1k-2 · "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet." · "A document each believed only they possessed has surfaced in a third set of hands." | REWRITE · no-evidence (b) · duplicate-surface (the same twist for several pairs in one dossier: "trained together … keeps score" 12 in 6 towns) | Yum Caan has stopped answering Water Lily Chi's letters, and the priest has noticed. | the pair's names in the twist (the pool receives them and does not read them, as A·O17 found); one twist per dossier |
+| F9 | Relationships · empty state | 1 (soak1k-0) | `src/components/new/tabs/RelationshipsTab.jsx` | soak1k-0 · "Generate a settlement to see relationship data." | REWRITE · machinery-leak · no-evidence (the settlement IS generated; it has two people and no tie) | "Paullus Severus and Geminus Severus share a name and a thorp; nothing more between them is written down yet." | whether the two share a house; the empty state per tier |
+
+**Counts (§7·F):** 9 block types · PASS 3 (F6, F7, and F5 in most towns) · REWRITE 6 · duplicate-surface 5 · no-evidence 5 · mechanism-first 2 · machinery-leak 3 · mannered 1 · aphorism 1.
+
+**The tics behind the folds.** Opened, the twelve's NPC and Relationships tabs carry **129 "rather than" in 11 towns** (10.8 per dossier; the collapsed screen printed none of them) and **30 "faction" in 8 towns**: NPC goals, secrets and the "member of" lines. The screen's tic figure in §3a counts only what prints collapsed; a reader who opens the cards meets ten times the tic.
+
+### §7·G The public gallery projection and the player view (screen, the twelve)
+
+What differs from the owner screen of the same town, by tab. The count is owner prose lines of six or more words absent in the view:
+
+| tab | public | player | why (read) |
+|---|---|---|---|
+| Plot Hooks | 548 absent | 548 absent | the §1k strip: hooks are DM-only (by design) |
+| Defense | 114 | 81 | the state-prose lenses (DS-DEF) are missing or drawn differently |
+| Power | 77 | 56 | the governance block's DS-POW lines and the lower Power blocks drop out (public) or redraw (player) |
+| Economics | 76 | 53 | the DS-ECO lead is replaced by the legacy `economicState.description` (public) |
+| Relationships | 50 | 50 | the NPC ties are stripped |
+| Overview | 47 | 44 | the crisis card prints the legacy stress summary under a "Hook:" label |
+
+| # | block | towns (of 12) | writers | BEFORE (seed · town) | verdict · codes | proposed COMPOSITION (owner's voice) | needs |
+|---|---|---|---|---|---|---|---|
+| G1 | Overview › Active crisis card, public and player | 11 | `src/generators/stressGenerator.js` (the stress summary and its "Hook:" field), `src/components/new/tabs/OverviewTab.jsx` (the public/player branch) | soak1k-0 · public · "Albamunicipium is taking in more people than it has houses or work for. Newcomers arrive faster than housing and work can be found for them. The old residents and the new ones keep apart. / Hook: / Every season brings more households to Albamunicipium and no more work. The newcomers camp where they can, and Elder Council is counting heads it has no plan for." | REWRITE · duplicate-surface (two sentences, one fact; and the crisis page's summary again) · machinery-leak (the "Hook:" label over a line that is not a hook) · disconnected | The owner view's vantage pair, unchanged, for the player: "Each week the Elder Council has more families to house and nothing to house them with. Every season brings more households to Albamunicipium and no more work…" | the vantage composer to run on the projected record; the "Hook:" label only over a hook |
+| G2 | Economics › lead, public | 12 | `src/generators/economy/prosperity.js` (the legacy economy description), shown when the DS-ECO lead is absent | soak1k-3 · Al-karez · public · "The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense. Prices are simply at levels that exclude most of the population." | REWRITE · mechanism-first · mannered ("in a technical sense") · no-evidence (b) | Bread in Al-karez costs what a day's wage earns, and the Grain Holders decide who eats; the fishmongers' stalls stand empty since the catch failed. | the projection to carry what DS-ECO-1 reads; until then this legacy line is the public lead, unaudited by STYLE-0 or this audit's owner view |
+| G3 | Power › governance and lower blocks, public | 12 | `src/domain/display/publicSafe.js :: toPublicSafe` (what it strips), `src/domain/display/galleryVeil.js :: projectShareVeil`, `src/components/new/tabs/PowerTab.jsx` | soak1k-3 · public · the legitimacy figure, then only the stability vignette "Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with."; the shape of authority, rule and succession, and crime and the hall do not print; "The Factions (3)" does | REWRITE · retired-word (the heading still prints) · no-evidence (b) (the seat named an inch above is not used) | The public reader gets the composed governance block (the in-hand rewrite, A·P4) from the same record: the seat by name, the powers by name, what the hall still does. | whether the composed block reads only public fields (the in-hand seat's composition must run on the projection) |
+| G4 | Defense › criminal architecture, public | 3 | `src/components/new/tabs/DefenseTab.jsx` (the static fallback) | soak1k-0 · public · "No organized criminal infrastructure detected. Crime exists at a petty, individual level." | REWRITE · machinery-leak ("detected", "infrastructure") | "Nobody runs the thieving in Albamunicipium; what goes missing goes one hen and one coat at a time." | the petty-crime fact the owner view's DS-DEF-4 lens already reads |
+| G5 | the owner and the player read DIFFERENT sentences about the same town | 12 | the state-prose draw (`src/data/dossierStateProse/*.generated.js` through their desks) run on the projected record | soak1k-0 · owner "Albamunicipium sits where the ground let it stand, not where it was easy." · player "Everything in Albamunicipium must be hauled uphill."; soak1k-3 Economics, Power and Defense lines differ in the same way (Δ above) | REWRITE · disconnected (across views) | The draw is the seed's and the record's, so the player view should print the owner view's sentence wherever the line is not DM-only. | which record fields the projection strips that the draws read (PLAUSIBLE: the draw keys on fields `toPublicSafe` removes) |
+| G6 | Resources › strategic value, public | 12 | `src/data/geographyData.js` (the terrain catalogue) | soak1k-0 · public · "High - defensible position, controls mountain passes, mineral wealth" | REWRITE · machinery-leak (the rating prefix "High -" printed as prose) | "The pass above Albamunicipium is the only road through the mountains for a day's walk either way." | (the owner view prints the DS-ECO-11 line instead) |
+| G7 | Rumors teaser, public and player | 12 | `src/components/new/tabs/RumorsTab.jsx` | soak1k-3 · "What Al-karez has heard from the rest of the realm, true or not, as the news reaches it." (the DM-truth sentence correctly drops) | PASS | — | — |
+| G8 | Plot Hooks and the NPC ties, stripped | 12 | `src/domain/display/publicSafe.js` (§1k) | (empty) | PASS (by design; the heading keeps its place per the frame law) | — | — |
+
+**Counts (§7·G):** 8 block types · PASS 2 · REWRITE 6 · machinery-leak 4 · no-evidence 3 · disconnected 2 · duplicate-surface 1 · mechanism-first 1 · mannered 1 · retired-word 1.
+
+**The addendum's reading.**
+- The two views a PLAYER sees are where the law holds least. The public lead and several public blocks fall back to legacy generator prose that neither audit's owner view printed: `prosperity.js`'s economy description, `stressGenerator.js`'s summary under a "Hook:" label, `geographyData.js`'s rated catalogue line.
+- The player view redraws the state prose, so the DM and the table read different sentences about one town.
+- The fix is upstream of wording: the projection must carry what the composers read, or the composers must read only public fields.
+- **CONFIRMED** on the renders: the figures, the tics and the quoted BEFOREs. **PLAUSIBLE**:
+  - G5's cause (which stripped fields move the draw);
+  - G1 for the live app, since the harness reproduces the projection path but not the gallery's server copy (migration 093's server-side overrides);
+  - every composition.
+
+**Addendum totals:** 17 block types (9 + 8) · PASS 5 · REWRITE 12. **The audit's totals with the addendum:** 305 block types · PASS 62 · REWRITE 243.
+
+## What stays (for a second seat, BY SURFACE; revised after the §7 addendum)
+
+- **After the advance › Rumors, the tellings.** These are dormant without a map. A second seat needs a mapped campaign (a world with an active spatial digest, `rumorNetwork.js :: activeSpatialDigest`) and `simulationRules.infoMode` set to `perfect_delayed` or `unreliable`, advanced until `spatialLedgers.rumorLedgers` exists. It then reads the Rumors tab at premium tier under the block law. The soak's save-and-edge realm cannot light them (52 weeks measured).
+- **After the advance › News, the entry bodies.** The harness read the headlines; the bodies come from `src/domain/display/newsBody.js` at render and were not composed here.
+- **The Tonight famine stores (A·T5) and A·C6.** Both need the full record.
+- **The public view as the GALLERY SERVES it.** The harness reproduces the client projection (`toPublicSafe` + `projectShareVeil`) but not the server copy, with migration 093's per-member overrides and `gallery_share_dm` full mode. A gallery row with the DM view shared (full mode) is unread.
+- **The opened INSTITUTION and DEFENSE folds** (the Supporting Capabilities fold and any other `useState(false)` section outside `npcComponents.jsx`). §7 opened only the NPC and relationship cards; the PDF mirrors of those folds are judged in D.
