@@ -288,6 +288,7 @@ describe('W-C5 the three covert paths (forced)', () => {
       expect(evt, stage).toBeTruthy();
       expect(evt.summary.startsWith(npc.name), `${stage}: ${evt.summary}`).toBe(true);
       // The fixture's causes (underfunded → siege-scarred): neither label may lead the line.
+      // anchored: the startsWith(npc.name) assertion above proves this summary is the event's own line
       expect(evt.summary, stage).not.toMatch(/^(funds run short|the pressure of the war)/i);
     }
   });

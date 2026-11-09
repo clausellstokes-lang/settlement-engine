@@ -53,7 +53,7 @@ describe('resolution receipts', () => {
     expect(receipt.leadingSources.map(s => s.source)).toContain('healing capacity');
     // STYLE-2 C2 (SW-12, A2·59): the strengths are named in words, with no numbers.
     expect(receipt.narrative).toMatch(/^Healing capacity\b.* did most to end it\./);
-    expect(receipt.narrative).not.toMatch(/\d/);
+    expect(receipt.narrative).not.toMatch(/\d/); // anchored: the toMatch above proves the narrative is the receipt's own line
 
     // The residual outcome prints the same receipt — the dossier's "why it
     // ended" reads from here.
