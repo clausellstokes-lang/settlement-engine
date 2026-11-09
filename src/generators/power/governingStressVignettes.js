@@ -51,7 +51,7 @@ export const buildReligiousConversionNarrative = (governingFactionName) => {
   // Keep that deterministic selector until a seeded narrative selector owns it.
   const variant = governingFactionName ? governingFactionName.length % 3 : 0;
   if (variant === 0) {
-    return 'The new faith does not yet have a building. It has kitchens, meeting rooms in private homes, and a preacher who travels a circuit. The old institution has the building, the records, the accumulated donations, and a congregation that is quietly redistributing itself. Neither party is ready to force a confrontation. Both are watching the numbers.';
+    return 'The new faith does not yet have a building. It has kitchens, meeting rooms in private homes, and a preacher who travels a circuit. The old faith has the building, the records, the donations of generations, and a congregation that is quietly slipping away to the new one. Neither side is ready to force a confrontation, and both are counting who comes on holy days.';
   }
   if (variant === 1) {
     return (
