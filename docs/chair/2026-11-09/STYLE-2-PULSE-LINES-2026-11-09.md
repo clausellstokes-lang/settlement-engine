@@ -578,3 +578,11 @@ One clean worktree walked every one of the forty commits from the lane's cut `20
 | `45773294d` | `258d28e3` | `535d3206` |
 
 Also measured at this seat's commits: `96efb3b00`, `ba15f9332`, `22795b8c6`, `5e256442e` and `4b5d5a6fe` all project `258d28e3…` — this seat moves the herald by nothing. The other golden surfaces (gm /525, fence /360, prose /1,050, witness, pdf) are read from the full-suite comparison in §9-gates.
+
+### 9u. `RealmComparisons.jsx` (D·87)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·87 comparisons footnote | `Each picture answers one question, from the register's own rows. A quiet ledger asks nothing.` | "Each picture answers one question from the register's rows. A picture with nothing to show is left out." (census: read against the writer — the whole block returns nothing for no rows, the tier and prosperity pictures always have rows when it renders, and the exhaustion picture is drawn only when it has a band: the line states what the code does) |
+
+Pins: a new `tests/components/realmComparisonsWords.test.jsx` (the footnote, and the empty exhaustion picture left out); **red at the parent**, green here. Registers: none moved.
