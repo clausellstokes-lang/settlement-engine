@@ -209,7 +209,7 @@ export function newsBodyText(entry, options = {}) {
   // most two sentences print; the rest stays in the tooltip (`newsCardTooltip`).
   // The lifecycle pools below are the fallback for a legacy entry that filed no
   // summary at all.
-  const told = leadSentences(newsReaderSummary(entry));
+  const told = leadSentences(readerSummary(entry, options.nameById));
   if (told) return withDateline(told, entry, options.nameById);
   const kind = entry.kind || '';
   const scope = scopePhrase(entry.scope);
@@ -346,7 +346,7 @@ const FACE_RESTATED_REASON_KEYS = Object.freeze([
  * the body (a rule-note reason filed as the summary prints once, as the body) and,
  * when the body is the filed event, less the reach and lifecycle receipts it
  * already states. At most three, as the panel has always shown.
- * @param {any} entry
+ * @param {NewsCardEntry|null|undefined} entry
  * @param {{ nameById?: Map<string, string> | null }} [options]
  * @returns {string[]}
  */
@@ -364,6 +364,13 @@ export function newsCardReasons(entry, options = {}) {
     })
     .slice(0, 3);
 }
+
+/**
+ * The fields of a wizard-news entry the card face reads.
+ * @typedef {{ id?: string|number|null, kind?: string|null, scope?: string|null, severity?: number|null,
+ *   summary?: string|null, familyId?: string|null, headline?: string|null,
+ *   reasons?: Array<string|null|undefined>|null, settlementIds?: unknown[]|null, impactIds?: unknown[]|null }} NewsCardEntry
+ */
 
 /** The lifecycle in a plain word, for the card's status pill. */
 const STATUS_WORDS = Object.freeze({
@@ -393,15 +400,90 @@ export function newsStatusWord(entry) {
 /**
  * Everything the news card prints about one entry, from the one set of readers:
  * the body, its title, the status word and the reason pills.
- * @param {any} entry
+ * @param {NewsCardEntry|null|undefined} entry
  * @param {{ nameById?: Map<string, string> | null }} [options]  the panel's save-name map
- * @returns {{ body: string, tooltip: string, status: string, reasons: string[] }}
+ * @returns {{ headline: string, body: string, tooltip: string, status: string, reasons: string[] }}
  */
 export function newsCardFace(entry, options = {}) {
   return {
+    headline: readerHeadline(entry, options.nameById ?? null),
     body: newsBodyText(entry, options),
     tooltip: newsCardTooltip(entry),
     status: newsStatusWord(entry),
     reasons: newsCardReasons(entry, options),
   };
+}
+
+/**
+ * THE SUCCESSION QUESTION AT ITS PRINT SITES (STYLE-RULINGS-2 C1; the audit's C2·26, added to SW-11 by
+ * the chair). The outcome treatySuccessionDecision.js :: outcomeFor files is persisted and deep-validated
+ * with its two strings pinned to the question's ids ("Succession oath decision for {settlementId}", "Apply
+ * to disavow the oath to {otherId}; …"), and the question carries no names. So the stored strings keep
+ * their ids and every page that prints them reads them through these two readers, which put the towns'
+ * names in. A string is recast only when its id is one of the item's own settlements; anything else
+ * passes through unchanged.
+ */
+/**
+ * An outcome, a docket proposal or a news entry, as a page prints it.
+ * @typedef {{ headline?: string|null, summary?: string|null, kind?: string|null, targetSaveId?: unknown,
+ *   affectedSettlementIds?: unknown[]|null, settlementIds?: unknown[]|null,
+ *   outcome?: { affectedSettlementIds?: unknown[]|null } | null }} PrintItem
+ */
+const SUCCESSION_HEADLINE = /^Succession oath decision for (\S+)$/;
+const SUCCESSION_SUMMARY = /^Apply to disavow the oath to (\S+); dismissing or leaving it unanswered honors the oath\.$/;
+
+/**
+ * @param {PrintItem} item
+ * @returns {string[]}
+ */
+function itemSettlementIds(item) {
+  const ids = item.affectedSettlementIds || item.settlementIds || item.outcome?.affectedSettlementIds || [];
+  return [...(Array.isArray(ids) ? ids : []), item.targetSaveId].filter(x => x != null && x !== '').map(String);
+}
+
+/**
+ * @param {Map<string, string>|null|undefined} nameById @param {string} id @param {string} standIn
+ * @returns {string}
+ */
+function placeName(nameById, id, standIn) {
+  const name = nameById && typeof nameById.get === 'function' ? nameById.get(id) : '';
+  return typeof name === 'string' && name.trim() ? name : standIn;
+}
+
+/**
+ * The headline a page prints for an outcome, proposal or news entry: the stored headline, with the
+ * succession question's id put into words.
+ * @param {PrintItem|null|undefined} item
+ * @param {Map<string, string>|null} [nameById]
+ * @returns {string}
+ */
+export function readerHeadline(item, nameById = null) {
+  const headline = String(item?.headline || '');
+  const m = SUCCESSION_HEADLINE.exec(headline);
+  if (!m) return headline;
+  const ids = itemSettlementIds(item || {});
+  if (!ids.includes(m[1])) return headline;
+  const otherId = ids.find(id => id !== m[1]);
+  const town = placeName(nameById, m[1], 'A town');
+  return otherId
+    ? `${town}'s new ruler must decide whether to keep the oath to ${placeName(nameById, otherId, 'its partner')}`
+    : `${town}'s new ruler must decide whether to keep the old oath`;
+}
+
+/**
+ * The summary a page prints for an outcome, proposal or news entry: the reader summary, with the
+ * succession question's id put into words.
+ * @param {PrintItem|null|undefined} item
+ * @param {Map<string, string>|null} [nameById]
+ * @returns {string}
+ */
+export function readerSummary(item, nameById = null) {
+  const summary = newsReaderSummary(item);
+  const m = SUCCESSION_SUMMARY.exec(summary);
+  if (!m) return summary;
+  const ids = itemSettlementIds(item || {});
+  if (!ids.includes(m[1])) return summary;
+  const townId = ids.find(id => id !== m[1]);
+  const town = townId ? placeName(nameById, townId, 'the town') : 'the town';
+  return `Apply to break ${town}'s oath to ${placeName(nameById, m[1], 'its partner')}; dismiss it, or leave it unanswered, and the oath holds.`;
 }

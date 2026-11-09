@@ -115,7 +115,7 @@ function NewsEntry({ entry, compact = false, nameById = null }) {
   // body already says. A legacy entry with no summary falls back to its lifecycle line.
   // The status pill says where a travelling effect stands in a plain word, or nothing
   // where the body says it; never the pipeline's state token.
-  const { body: bodyText, tooltip: summaryTooltip, status: statusWord, reasons: reasonPhrases } = newsCardFace(entry, { nameById });
+  const { headline, body: bodyText, tooltip: summaryTooltip, status: statusWord, reasons: reasonPhrases } = newsCardFace(entry, { nameById });
 
   return (
     <article style={{
@@ -156,7 +156,7 @@ function NewsEntry({ entry, compact = false, nameById = null }) {
             fontWeight: 900,
             overflowWrap: 'anywhere',
           }}>
-            {entry.headline}
+            {headline}
           </h4>
           <MetaPill tone={major ? 'major' : 'neutral'}>{scopeLabel(entry.scope)}</MetaPill>
         </div>

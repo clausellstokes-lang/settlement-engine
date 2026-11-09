@@ -38,7 +38,9 @@ describe('the succession question at its print sites (C2·26)', () => {
     const lines = [headlineOf(outcome), summaryOf(outcome)].join(' ');
     expect(lines).toContain('Kleinwalde');
     expect(lines).toContain('Bergburg');
+    // anchored: the same lines contain both towns' names (the two lines above).
     expect(lines).not.toContain(SETTLEMENT);
+    // anchored: the same lines contain both towns' names (above).
     expect(lines).not.toContain(OTHER);
   });
 
@@ -47,7 +49,9 @@ describe('the succession question at its print sites (C2·26)', () => {
     const face = typeof newsBody.newsCardFace === 'function' ? newsBody.newsCardFace(entry, { nameById }) : { body: entry.summary };
     const printed = [face.headline ?? entry.headline, face.body].join(' ');
     expect(printed).toContain('Kleinwalde');
+    // anchored: the same printed face contains the town's name (the line above).
     expect(printed).not.toContain(SETTLEMENT);
+    // anchored: the same printed face contains the town's name (above).
     expect(printed).not.toContain(OTHER);
   });
 
