@@ -89,6 +89,7 @@ describe('betrayal events — plumbing + cause chains', () => {
     expect(Array.isArray(o.reasons)).toBe(true);
     expect(o.reasons[0]).toMatch(/\bVorr\b/);
     expect(o.reasons[0]).toMatch(/\bSkarn\b/);
+    // anchored: the same reason matched both patrons' names on the two lines above.
     expect(o.reasons[0]).not.toMatch(/hazard|\/|\(/);
     expect(o.condition.causes.length).toBeGreaterThan(0);
     expect(o.condition.triggeredAt.sourceEventType).toBe('DEITY_PACT_BETRAYAL');
@@ -111,6 +112,7 @@ describe('pact events — the positive lane (news only, no relationship weights 
     expect(o.reasons[0]).toMatch(/\bhigh\b/);
     expect(o.reasons[0]).toMatch(/\briver\b/);
     expect(o.reasons[0]).toMatch(/faiths/);
+    // anchored: the same reason matched both towns and "faiths" on the three lines above.
     expect(o.reasons[0]).not.toMatch(/\//);
   });
 

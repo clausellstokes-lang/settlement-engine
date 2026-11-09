@@ -21,7 +21,7 @@ const WEAKNESS_MEMORY_COOLDOWN = 3;
  * towns it is about, read from the snapshot the rule already holds (the headline's own read,
  * relationshipRuleHelpers :: relationshipDeedHeadlines). A town the snapshot cannot name takes
  * the world's stand-in, never its id.
- * @param {any} ctx @param {unknown} id @returns {string}
+ * @param {{ snapshot?: unknown }} ctx @param {unknown} id @returns {string}
  */
 export function townName(ctx, id) {
   return itemFor(ctx.snapshot, id)?.name || 'a neighbouring town';
@@ -30,7 +30,7 @@ export function townName(ctx, id) {
 /**
  * The pair in SAVE-ID order, as the headline orders it: authoring A->B or B->A must print the
  * same words (relationshipOrientationInvariance.test.js).
- * @param {any} ctx @returns {[string, string]}
+ * @param {{ snapshot?: unknown, edge?: unknown }} ctx @returns {[string, string]}
  */
 export function pairNames(ctx) {
   const { from, to } = getRelationshipSettlements(ctx.edge);
