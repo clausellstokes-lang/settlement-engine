@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e5ac1fb92c09cfea78caed9fd9f68cf0c5318695",
+  "measuredAtSha": "afd314dce2ff1312218d664b8789c54c27da0287",
   "measuredBy": "SW-B4 PDF-FOUNDRY (session_01FbPLberW9uzNRqfNQgEeEJ)",
   "date": "2026-11-09",
-  "note": "STYLE-RULINGS-2 B4, 2026-11-09: eight test titles added in tests/pdf/restoredSubsections.test.js (the \"B4 — one home per sentence\" describe block, the red-first pins of the keep-on rules); one renamed in tests/pdf/recordBatteryReceiptOnly.test.jsx and one in tests/pdf/generationContractsViewModel.test.jsx, re-keyed by cause.",
+  "note": "the chair's B4 ruling (2), 2026-11-09: one test title added in tests/pdf/restoredSubsections.test.js (each tension description and the historical character print exactly once per export, in every variant).",
   "files": 3123,
   "parked": 384,
   "credited": 2739,
-  "titles": 28703,
+  "titles": 28704,
   "suiteTitles": 7718
 }
