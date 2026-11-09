@@ -837,5 +837,8 @@ describe('C2 strategy chooser — return_home carries the recall target', () => 
     const recall = out.find(c => c.candidateType === 'strategy_return_home');
     expect(recall).toBeTruthy();
     expect(recall.metadata.recallTargetId).toBe('weak');
+    // FIX-PULSE-DEFECTS (audit A2·22): the reason printed the raw target id ("… committed
+    // against weak."); it names the abandoned front.
+    expect(recall.reasons[0]).toBe('Ironhold is besieged at home while its army is committed against Thornmere.');
   });
 });
