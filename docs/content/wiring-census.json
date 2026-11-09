@@ -59,7 +59,7 @@
     "kNotExecutable": 368,
     "branchGrainRows": 456,
     "functionGrainRows": 401,
-    "customReachableRows": 28,
+    "customReachableRows": 36,
     "relationRows": 165,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
@@ -63501,6 +63501,10 @@
   "customReachable": {
     "byKind": [
       [
+        "factions",
+        10
+      ],
+      [
         "institutions",
         7
       ],
@@ -63518,10 +63522,6 @@
       ],
       [
         "tradeGoods",
-        2
-      ],
-      [
-        "factions",
         2
       ],
       [
@@ -63704,6 +63704,13 @@
       },
       {
         "block": "DS-POW-2",
+        "pool": "siege matched",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "power"
+      },
+      {
+        "block": "DS-POW-2",
         "pool": "governing faction holds a DOMINANT share",
         "kind": "factions",
         "via": "bucket",
@@ -63715,6 +63722,55 @@
         "kind": "factions",
         "via": "bucket",
         "on": "factions"
+      },
+      {
+        "block": "DS-POW-2",
+        "pool": "recentConflict present",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "power"
+      },
+      {
+        "block": "DS-POW-6",
+        "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "power"
+      },
+      {
+        "block": "DS-POW-6",
+        "pool": "capture pressure RECOVERING (strong security, prosperity)",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "power"
+      },
+      {
+        "block": "DS-POW-6",
+        "pool": "capture reached an AGENT of a faction",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "power"
+      },
+      {
+        "block": "DS-POW-6",
+        "pool": "capture reached a LEADER",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "power"
+      },
+      {
+        "block": "DS-POW-6",
+        "pool": "GM ADVISORY: the commander is a political actor",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "power"
+      },
+      {
+        "block": "DS-POW-6",
+        "pool": "GM ADVISORY: officials with criminal arrangements",
+        "kind": "factions",
+        "via": "bucket",
+        "on": "power"
       },
       {
         "block": "DS-CND-1",
