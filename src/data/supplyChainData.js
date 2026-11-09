@@ -762,7 +762,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Silk is not produced locally at any tier. Port cities control import; crossroads cities control inland distribution.',
+          'Silk is not produced locally anywhere. Port cities control import; crossroads cities control inland distribution.',
         minTier: 'city',
       },
       {
@@ -1213,7 +1213,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Planar goods are extreme-value entrepôt items. Only metropolis-level settlements can support the infrastructure.',
+          'Planar goods are extreme-value entrepôt items. Only a metropolis can support the infrastructure.',
         // Was 'city' — but 'Planar traders' carries its own minTier:'metropolis'
         // gate in the catalog and 'Planar embassy' lives in the metropolis
         // section, so no city settlement can generate a processor. metropolis
@@ -1308,7 +1308,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: false,
         minTier: 'hamlet',
-        note: 'Holy sites generate economic activity through pilgrim spending: effectively a non-trade income stream.',
+        note: 'Holy sites bring in money through what pilgrims spend: income that does not depend on trade.',
       },
     ],
   },
@@ -1410,7 +1410,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         entrepotNote:
-          'Smuggling is the dark entrepôt model. Goods that cannot be taxed or declared flow through criminal infrastructure.',
+          'Smuggling is the entrepôt trade run in the dark. Goods that cannot be taxed or declared flow through criminal networks.',
         minTier: 'thorp',
       },
       {

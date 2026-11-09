@@ -548,7 +548,7 @@ export const INSTITUTION_SERVICES = {
 
   "Weekly market": {
     "General trade": { on: true,  p: 1.0, desc: "Agricultural produce, household goods, livestock. The economic heartbeat of the week." },
-    "Tax collection": { on: true, p: 0.9, desc: "Toll collected on goods sold. A percentage to the lord or municipality." },
+    "Tax collection": { on: true, p: 0.9, desc: "Toll collected on goods sold. A share goes to the lord or municipality." },
     "Price reporting": { on: false, p: 0.6, desc: "Written record of prevailing prices sent to larger markets and guild registers." }
   },
 
@@ -653,7 +653,7 @@ export const INSTITUTION_SERVICES = {
 
   "Salt works": {
     "Salt production": { on: true,  p: 1.0, desc: "Evaporation, boiling, or mining to produce raw salt. Essential preservative." },
-    "Cured goods": { on: false, p: 0.5, desc: "Process fish and meat using produced salt. Vertical integration of the salt operation." }
+    "Cured goods": { on: false, p: 0.5, desc: "Process fish and meat using the salt produced here." }
   },
 
   "Stone quarry": {
@@ -1113,7 +1113,7 @@ export const INSTITUTION_SERVICES = {
     "Political influence": { on: false, p: 0.4, desc: "The oligarchy shapes policy. Access to their network has value." }
   },
   "Message network (high magic)": {
-    "Instant messaging": { on: true,  p: 1.0, desc: "Near-instant magical message delivery to any node in the network." },
+    "Instant messaging": { on: true,  p: 1.0, desc: "Near-instant magical message delivery to any station on the network." },
     [SECURE_COMMUNICATIONS]: { on: true, p: 0.8, desc: "Encrypted or warded messages that cannot be intercepted." },
     "Magical courier": { on: false, p: 0.5, desc: "Physical items transported via magical means on the network." }
   },
@@ -1132,7 +1132,7 @@ export const INSTITUTION_SERVICES = {
     "Hospitality": { on: true, p: 0.8, desc: "Food and shelter for travelers and pilgrims. Often free or by donation." },
     "Copyist services": { on: true, p: 0.7, desc: "Copy manuscripts and documents. Primary source of book production." },
     "Herbalism and healing": { on: false, p: 0.5, desc: "Monastic herb gardens and healing knowledge serve the local population." },
-    "Education": { on: false, p: 0.4, desc: "Teach reading, writing, and arithmetic. Often the only education available." }
+    "Education": { on: false, p: 0.4, desc: "Teach reading, writing, and reckoning. Often the only education available." }
   },
   "Money changers": {
     "Currency exchange": { on: true,  p: 1.0, desc: "Convert between different currencies at posted rates. Margin taken on each transaction." },
@@ -1212,7 +1212,7 @@ export const INSTITUTION_SERVICES = {
     "Peat fuel supply": { on: true,  p: 1.0, desc: "Cut and dried peat blocks for fuel. Important where wood is scarce." }
   },
   "Planar embassy": {
-    "Extraplanar relations": { on: true,  p: 1.0, desc: "Formal diplomatic relations with extraplanar entities and factions." },
+    "Extraplanar relations": { on: true,  p: 1.0, desc: "Formal diplomatic relations with extraplanar entities and powers." },
     "Portal access": { on: false, p: 0.5, desc: "Access to planar portals for travel and trade. Restricted and regulated." },
     "Planar trade brokerage": { on: false, p: 0.4, desc: "Broker trade deals for extraplanar goods and services." }
   },
@@ -1220,7 +1220,7 @@ export const INSTITUTION_SERVICES = {
     "Exotic extraplanar goods": { on: true,  p: 1.0, desc: "Goods from other planes unavailable by any other means." },
     "Rare materials": { on: true, p: 0.8, desc: "Planar components: stardust, shadow silk, elemental crystals." },
     "Dimensional storage": { on: false, p: 0.5, desc: "Bag of holding and portable hole services. Useful for merchants." },
-    "Planar information": { on: false, p: 0.4, desc: "Knowledge of other planes: geography, factions, and dangers." }
+    "Planar information": { on: false, p: 0.4, desc: "Knowledge of other planes: geography, powers, and dangers." }
   },
   "Priest (resident)": {
     [RELIGIOUS_SERVICES]: { on: true,  p: 1.0, desc: "Daily prayers, blessings, and religious counsel." },
@@ -1549,7 +1549,7 @@ export const INSTITUTION_SERVICES = {
     "Reliquary access": { on: false, p: 0.4, desc: "Access to venerated relics and shrines for pilgrims." }
   },
   "Local fence": {
-    "Sell stolen goods": { on: true, p: 0.9, desc: "Buy stolen items at 20-40% of value. No questions asked." },
+    "Sell stolen goods": { on: true, p: 0.9, desc: "Buy stolen items for a fraction of their worth. No questions asked." },
     "Appraisal (unofficial)": { on: true, p: 0.7, desc: "Assess the black-market value of items. Discretion guaranteed." },
     "Buyer introductions": { on: false, p: 0.4, desc: "Connect sellers with specific buyers for higher-value items." }
   },
@@ -1586,7 +1586,7 @@ export const INSTITUTION_SERVICES = {
     "Criminal arbitration": { on: false, p: 0.5, desc: "Resolve disputes between criminal parties without involving authorities." }
   },
   "Palisade or earthworks": {
-    "Gated entry": { on: true, p: 1.0, desc: "Controlled access through the perimeter. Strangers must state business.", needs: ["gate"] },
+    "Gated entry": { on: true, p: 1.0, desc: "Controlled access through the perimeter. Anyone entering must state their business.", needs: ["gate"] },
     "Night watch": { on: true, p: 0.8, desc: "Basic patrol of the perimeter after dark.", needs: ["watch"] },
     "Emergency shelter": { on: false, p: 0.5, desc: "Refuge for the rural population during raids or attacks." }
   },
@@ -1655,7 +1655,7 @@ export const INSTITUTION_SERVICES = {
     "Companionship": { on: true, p: 1.0, desc: "Paid companionship services." },
     "Private rooms": { on: true, p: 0.8, desc: "Secure, discreet rooms for meetings requiring privacy." },
     "Rumour brokering": { on: false, p: 0.6, desc: "Information gathered from indiscreet clients. Valuable currency." },
-    "Neutral meeting space": { on: false, p: 0.4, desc: "A place where parties from rival factions can meet quietly." }
+    "Neutral meeting space": { on: false, p: 0.4, desc: "A place where parties from rival powers can meet quietly." }
   },
   "Opera house": {
     "Performance tickets": { on: true, p: 1.0, desc: "Purchase tickets for scheduled performances." },
