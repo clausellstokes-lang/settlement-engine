@@ -134,7 +134,7 @@ describe('U65 - every guard fulfil offer is an op the catalogue accepts', () => 
     expect(judged(fired.fulfil), 'and the catalogue accepts it').toEqual([true, []]);
     expect(fired.message,
       'while the MESSAGE still reads the whole rebalanced roster, because one op cannot say it and the DM must see it')
-      .toBe('The factions hold 97 points of power between them, not 100. Rebalanced they would read: Court 38, Guild 62.');
+      .toBe("The powers' shares add up to 97, not 100. Rebalanced they would read: Court 38, Guild 62.");
     const elsewhere = entryOf('f2', 'rebalance-power', { kind: 'power', id: 'Nobody' }, payloadFor('rebalance-power', CITADEL));
     expect(fire('totality', ctxOf(elsewhere, rosterOf(SHORT))).fulfil.payload,
       'an act against a faction the folded roster does not hold falls back to the first row in codepoint order')

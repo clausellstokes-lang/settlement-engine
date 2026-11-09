@@ -332,7 +332,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   },
 
   IMPAIR_FACTION: {
-    label: 'Impair faction',
+    label: 'Weaken a power',
     requiresTarget: true,
     stateDeltas(event) {
       const sev = sev01(event.payload?.severity, 0.5);
@@ -345,21 +345,21 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   },
 
   RESTORE_FACTION: {
-    label: 'Restore faction',
+    label: 'Restore a power',
     requiresTarget: true,
     stateDeltas() { return { volatility: -5 }; },
     narrate(event) { return `${labelOf(event.targetId)} recovered.`; },
   },
 
   ADD_FACTION: {
-    label: 'Add faction',
+    label: 'Add a power',
     requiresTarget: true,
     stateDeltas() {
       // A new organized power center adds friction until the balance settles.
       return { volatility: 5 };
     },
     narrate(event) {
-      return `A new faction, ${labelOf(event.targetId)}, has formed.`;
+      return `A new power, ${labelOf(event.targetId)}, has formed.`;
     },
   },
 
@@ -802,7 +802,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = npc?.factionAffiliation || 'their faction';
+      const faction = npc?.factionAffiliation || 'their power';
       return `${name} rises within ${faction}, displacing a rival on the way up.`;
     },
   },
@@ -817,7 +817,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = npc?.factionAffiliation || 'their faction';
+      const faction = npc?.factionAffiliation || 'their power';
       return `${name} is pushed down the ranks of ${faction}.`;
     },
   },

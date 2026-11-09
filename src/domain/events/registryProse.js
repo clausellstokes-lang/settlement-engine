@@ -27,7 +27,7 @@
  */
 export const EVENT_PROSE = {
   ADD_INSTITUTION: {
-    description: 'A new institution is established. New civic capacity, new factional weight.',
+    description: 'A new institution is established. New civic capacity, new weight among the powers.',
     targetPrompt: 'Institution name (e.g. "Granary", "Temple of Mercy")',
   },
   REMOVE_INSTITUTION: {
@@ -59,7 +59,7 @@ export const EVENT_PROSE = {
     targetPrompt: 'NPC name (or "role @ institution", e.g. "High Priestess @ Temple")',
   },
   KILL_NPC: {
-    description: 'An NPC dies, is exiled, or otherwise leaves play. Linked institutions and factions are affected.',
+    description: 'An NPC dies, is exiled, or otherwise leaves play. Linked institutions and powers are affected.',
     targetPrompt: 'NPC name to remove',
   },
   ASSIGN_NPC_TO_ROLE: {
@@ -75,35 +75,35 @@ export const EVENT_PROSE = {
     targetPrompt: 'Institution name',
   },
   IMPAIR_FACTION: {
-    description: 'A faction loses leadership, legitimacy, wealth, or another dimension.',
-    targetPrompt: 'Faction name',
+    description: 'A power loses leadership, legitimacy, wealth, or another dimension.',
+    targetPrompt: 'Name of the power',
   },
   RESTORE_FACTION: {
-    description: 'A faction recovers from a prior impairment.',
-    targetPrompt: 'Faction name',
+    description: 'A power recovers from a prior impairment.',
+    targetPrompt: 'Name of the power',
   },
   ADD_FACTION: {
-    description: 'A new faction forms or arrives: a guild, cult, syndicate, or noble bloc. A fresh contender for power and influence.',
-    targetPrompt: 'Faction name (e.g. "Dockworkers Guild", "Ashen Hand")',
+    description: 'A new power forms or arrives: a guild, cult, syndicate, or noble bloc. A fresh contender for power and influence.',
+    targetPrompt: 'Name of the power (e.g. "Dockworkers Guild", "Ashen Hand")',
   },
   KILL_LEADER: {
-    description: 'The settlement\'s ruling figure dies, is exiled, or is removed. Major consequences for legitimacy and faction balance.',
+    description: 'The settlement\'s ruling figure dies, is exiled, or is removed. Major consequences for legitimacy and the balance between the powers.',
     targetPrompt: 'Leader\'s name (NPC)',
   },
   EXPOSE_CORRUPTION: {
-    description: 'A corrupt NPC is publicly revealed (or a faction/institution). The NPC is cleaned + scarred, and both the criminal institution they answered to and their home institution are tarnished; legitimacy collapses and rivals exploit the vacuum.',
-    targetPrompt: 'Corrupt NPC, faction, or institution name',
+    description: 'A corrupt NPC is publicly revealed (or a power/institution). The NPC is cleaned + scarred, and both the criminal institution they answered to and their home institution are tarnished; legitimacy collapses and rivals exploit the vacuum.',
+    targetPrompt: 'Corrupt NPC, power, or institution name',
   },
   IMPOSE_CORRUPTION: {
-    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes COVERTLY corrupt and tied to that organization, so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
+    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes COVERTLY corrupt and tied to that organization, so the dossier flags them, power capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
     targetPrompt: 'Clean NPC to turn (pick the organization below)',
   },
   REFUGEE_WAVE: {
-    description: 'A surge of refugees arrives. Population spikes; food security and infrastructure strain. Faction politics shift.',
+    description: 'A surge of refugees arrives. Population spikes; food security and infrastructure strain. Power politics shift.',
     targetPrompt: 'Optional: source region (e.g. "the eastern border")',
   },
   PLAGUE: {
-    description: 'A disease outbreak. Population pressure on healing institutions; quarantine erodes order; faction responses diverge sharply.',
+    description: 'A disease outbreak. Population pressure on healing institutions; quarantine erodes order; power responses diverge sharply.',
     targetPrompt: 'Optional: disease name (e.g. "Red Cough")',
   },
   RAID_OR_MONSTER_ATTACK: {
@@ -136,7 +136,7 @@ export const EVENT_PROSE = {
   },
   CHANGE_RULING_POWER: {
     description: "Hand the government to a different authoritative power: coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
-    targetPrompt: 'Faction that takes power',
+    targetPrompt: 'The power that takes the seat',
   },
   RESOLVE_STRESSOR: {
     description: 'An active crisis ends. Pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
@@ -168,11 +168,11 @@ export const EVENT_PROSE = {
     targetPrompt: 'Nearby resource to remove',
   },
   PROMOTE_NPC: {
-    description: 'An NPC rises within their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction. The peer is displaced downward.',
+    description: 'An NPC rises within their power, swapping standing (importance, influence, structural rank) with a chosen peer of the same power. The peer is displaced downward.',
     targetPrompt: 'NPC who rises',
   },
   DEMOTE_NPC: {
-    description: 'An NPC is pushed down the ranks of their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction who steps over them.',
+    description: 'An NPC is pushed down the ranks of their power, swapping standing (importance, influence, structural rank) with a chosen peer of the same power who steps over them.',
     targetPrompt: 'NPC who falls',
   },
   FORCE_RELIEF: {

@@ -324,7 +324,7 @@ function impairFaction(s, event) {
     type: event.payload?.dimension || 'public_support',
     severity: sev01(event.payload?.severity, 0.5),
     causeEventId: event.id,
-    description: event.description || `Faction setback: ${event.payload?.dimension || 'public_support'}`,
+    description: event.description || `Power setback: ${event.payload?.dimension || 'public_support'}`,
   });
   let next = replaceFaction(s, faction, withImpairment(faction, impairment));
   next = propagateImpairment({
