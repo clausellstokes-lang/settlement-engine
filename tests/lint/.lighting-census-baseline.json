@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "2c76c617725be42b19230bdaa5823378711617c4",
-  "measuredBy": "MERGE-WAVE (FIX-ARROW-SECTIONS merge point)",
-  "date": "2026-11-08",
-  "note": "the FIX-ARROW-SECTIONS merge, the last lane: its arrow suites into the integration branch, with GREEN-BASE and its class-(b) commits; refrozen at the merged tip",
-  "files": 3123,
-  "parked": 384,
-  "credited": 2739,
-  "titles": 28695,
-  "suiteTitles": 7717
+  "measuredAtSha": "cf4d0e61efa4ff0db17c98615c3c5652e480d1e6",
+  "measuredBy": "TIER-PARITY-FIX",
+  "date": "2026-11-09",
+  "note": "lane TIER-PARITY-FIX (2026-11-09): five new test files (tierViewerRender, aiChronicleAppendOneLimit, sectionRerollBoundary, surveyorPremiumOnly and its pglite twin) and the re-keyed pins of the owner tier law; measured on the clean lane tip",
+  "files": 3128,
+  "parked": 387,
+  "credited": 2741,
+  "titles": 28703,
+  "suiteTitles": 7721
 }
