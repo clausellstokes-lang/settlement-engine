@@ -155,7 +155,8 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/computeActiveChains.js',
   'src/generators/demandProfile.js',
   'src/generators/economy/foodBalance.js',
-  'src/generators/economy/prosperity.js',
+  // 2026-11-09 (STYLE-2 SW-7, 6f340466f): economy/prosperity.js LEFT the set. It was a "reader" only through the word
+  // "agriculture" in one situation line ("efficient agriculture"), which the A2 rewrite replaced; it reads no culture.
   'src/generators/foodGenerator.js',
   'src/generators/generateSettlementPipeline.js',
   'src/generators/generationCoherence.js',
