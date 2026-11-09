@@ -22,14 +22,14 @@
 
 import { Suspense, lazy, useMemo } from 'react';
 import FaithSection from '../../settlement/FaithSection.jsx';
-import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../settlement/faithPanelModel.js';
+import { faithPanelModel, trimFaithDeskToPanel } from '../../settlement/faithPanelModel.js';
 import { hasPantheon } from '../../map/PantheonPanel.jsx';
 // THE WAR & FAITH DESK, drawn through its one gated call site (WarFaithDesk.jsx). This tab
 // does NOT call the desk itself — `warFaith` is one corpus leaf spanning this tab and the
 // war tab, and the mount walker admits exactly one caller per desk so the public-dossier
 // gate lives in one place for both.
 import {
-  FaithCreedLines, FaithGroundLines, FaithNicheGlance, FaithSeatLines, FaithTeaserLines, warFaithDeskRungs,
+  FaithCreedLines, FaithGroundLines, FaithNicheGlance, FaithSeatLines, FaithTeaserLines, faithDeskReadings, warFaithDeskRungs,
 } from './WarFaithDesk.jsx';
 import { useStore } from '../../../store/index.js';
 import { BORDER, CARD, FS, GREEN, INK, MUTED, RED, SECOND, BODY, sans } from '../../theme.js';
@@ -118,28 +118,12 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
     settlement,
     publicDossier,
     playerView,
-    readings: {
-      faith: model,
-      // The panel model's own answer for "does this town keep a named faith at all".
-      hasPatron: !!model.hasEmbed,
-      // The TYPED CAUSE of a seat that changed hands. The model exposes the finished
-      // SENTENCE and not the token, and a desk must key on the token — so the token is
-      // recovered by inverting the producer's OWN exported map, whose keys are exactly
-      // `PATRON_FALL_CAUSES` (faithPanelModel's acceptance battery asserts that equality,
-      // so a fifth cause reds there rather than going silently unmapped here).
-      //
-      // ⚠ WHY NOT READ `config.faithProfile.patronFall.cause` DIRECTLY, which is shorter:
-      // the reader-with-no-writer walker convicts that read as "a key no writer produces".
-      // The verdict is false about the code — `projectReligionStateOntoSettlement` writes
-      // it — and true about the walker's OBSERVATION CORPUS, which is deity-free, so no
-      // observed settlement carries the key. Inverting an exported map adds no observed
-      // read at all, and it keeps the token's vocabulary owned by the producer.
-      patronFallCause: model.patronFallSentence
-        ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === model.patronFallSentence)
-        : undefined,
-      // DS-FTH-4's generation lens (W4 PEOPLE, 2026-11-07): the birth-time stress flags.
-      faithFlags: settlement?.economicState?.safetyProfile?.flags || null,
-    },
+    // THE PUBLIC BRANCH (SW-B7b): a shared page prints the desk the owner's player view drew here.
+    publicSite: 'warFaith:faith',
+    // The readings (WarFaithDesk.jsx :: faithDeskReadings): the panel model, the patron, the
+    // fall's typed cause and the birth-time stress flags — one derivation, shared with the
+    // public prose composer.
+    readings: faithDeskReadings(settlement, model),
   });
 
   // THE DESK SPEAKS ONLY WHERE THE PANEL IS SILENT (chair rulings F2 and F4, 2026-10-30).

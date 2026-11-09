@@ -598,6 +598,8 @@ const desktopShape = (perView) => Object.fromEntries(
 // 35/35 (the eight lenses' shipped lines; T2-20's static line left). No token moved.
 // ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the power desk's public branch lit, `power:desk` / `power:governance`):
 // Power 29/28 -> 33/32. No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the faith desk's public branch lit, `warFaith:faith`): Faith 1/1 ->
+// 2/2. No token moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -647,7 +649,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 178, sub14: 176 },
-  "World/Faith":         { measured: 1, sub14: 1 },
+  "World/Faith":         { measured: 2, sub14: 2 },
   "World/Daily Life":    { measured: 1, sub14: 1 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
@@ -726,6 +728,8 @@ const DESKTOP_BASELINE = Object.freeze({
 // and both sub-floor counts hold.
 // ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the power desk's public branch lit): Power prose 28 -> 32; chrome and
 // both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the faith desk's public branch lit): Faith prose 1 -> 2; chrome and
+// both sub-floor counts hold.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -761,7 +765,7 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Magic":       { prose: 3, chrome: 1, sub14: 1, sub12: 0 },
   "World/NPCs":          { prose: 283, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 139, chrome: 39, sub14: 39, sub12: 0 },
-  "World/Faith":         { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },

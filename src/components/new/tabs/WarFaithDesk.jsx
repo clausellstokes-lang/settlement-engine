@@ -56,6 +56,8 @@
 import { warFaithStateProse } from '../../../domain/display/stateProse/warFaithStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
+import { publicProseOf } from '../../../domain/display/publicProse.js';
+import { FALL_SENTENCE, faithPanelModel } from '../../settlement/faithPanelModel.js';
 import { BODY, BORDER, CARD, FS, MUTED, sans } from '../../theme.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -103,18 +105,57 @@ const SILENT = Object.freeze({
  *   return them — this desk derives none of them.
  * @param {boolean} [args.publicDossier] DEFAULTS CLOSED; see the docblock.
  * @param {boolean} [args.playerView]
+ * @param {string|null} [args.publicSite] the call site's key in the public prose projection
  * @returns {Record<string, any>}
  */
 export function warFaithDeskRungs({
-  settlement, readings = {}, publicDossier = true, playerView = false,
+  settlement, readings = {}, publicDossier = true, playerView = false, publicSite = null,
 }) {
   const audience = playerView ? 'player' : 'dm';
+  // ⭐ THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the desk the
+  // owner's player view drew at this call site (`publicSite`, e.g. `warFaith:faith`), shipped
+  // as text at the owner's save; no site (WarTab: campaign-only, owner-only) or an unstamped
+  // record is the SILENT desk, never a re-draw. Still IN the read's own statement (ARM 3).
   return publicDossier
-    ? SILENT
+    ? publicWarFaithDesk(settlement, publicSite)
     : warFaithStateProse(settlement, readings, {
       seed: String(settlement?._seed ?? settlement?.id ?? ''), audience,
       tierNoun: tierNounFor(settlement?.tier),
     });
+}
+
+/**
+ * The shipped desk at one site, every key the SILENT desk names and nothing else.
+ * @param {any} settlement @param {unknown} site @returns {Record<string, any>}
+ */
+function publicWarFaithDesk(settlement, site) {
+  const shipped = typeof site === 'string' ? publicProseOf(settlement, site) : null;
+  if (!shipped || typeof shipped !== 'object') return SILENT;
+  const rungs = /** @type {Record<string, unknown>} */ (shipped);
+  return Object.freeze(Object.fromEntries(Object.keys(SILENT).map((key) => [key, rungs[key] ?? null])));
+}
+
+/**
+ * THE FAITH TAB'S DESK READINGS, EXTRACTED (one derivation for FaithTab and the public prose
+ * composer). The panel model is the ONLY reading handed over: the faith tab holds no worldState
+ * by §805's constitution, so the war half of the leaf is absent and every war rung is null.
+ *
+ * `patronFallCause` is the TYPED cause of a seat that changed hands, recovered by inverting the
+ * producer's OWN exported map (whose keys are exactly `PATRON_FALL_CAUSES`), never by reading
+ * `config.faithProfile.patronFall.cause` (the reader-with-no-writer walker's observation corpus
+ * is deity-free). DS-FTH-4's generation lens reads the birth-time stress flags.
+ * @param {any} settlement @param {any} [model] the tab's memoised `faithPanelModel(settlement)`
+ * @returns {Record<string, unknown>}
+ */
+export function faithDeskReadings(settlement, model = faithPanelModel(settlement)) {
+  return {
+    faith: model,
+    hasPatron: !!model.hasEmbed,
+    patronFallCause: model.patronFallSentence
+      ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === model.patronFallSentence)
+      : undefined,
+    faithFlags: settlement?.economicState?.safetyProfile?.flags || null,
+  };
 }
 
 /**

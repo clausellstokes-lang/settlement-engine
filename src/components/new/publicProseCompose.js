@@ -29,6 +29,7 @@ import { criminalStructureOf, economicsDeskArgs, impairedInstitutionOf, overview
 import { generalDeskLines } from './generalDeskRead.js';
 import { stressorsDeskRead } from './stressorsDeskRead.js';
 import { defenseDeskRead, DEFENSE_LENSES } from './defenseDeskRead.js';
+import { faithDeskReadings, warFaithDeskRungs } from './tabs/WarFaithDesk.jsx';
 import { POWER_BLOC_RUNGS, governanceAccountRead, powerDeskRead, powerDeskReadings, powerLadderRead, powerLadderRowsOf } from './powerDeskRead.js';
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
@@ -90,6 +91,12 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
       .filter((row) => row.rung);
     return rows.length ? rows : null;
   }],
+  // THE WAR & FAITH DESK from FaithTab (WarFaithDesk.jsx :: warFaithDeskRungs is its one caller):
+  // the panel model's readings, no world, so every war rung is null. WarTab is campaign-only and
+  // owner-only: it names no site, so its shared page is SILENT.
+  ['warFaith:faith', (s, publicDossier) => warFaithDeskRungs({
+    settlement: s, publicDossier, playerView: true, readings: faithDeskReadings(s),
+  })],
 ].map((entry) => Object.freeze(entry)));
 
 /**

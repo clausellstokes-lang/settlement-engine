@@ -36,6 +36,8 @@ import { overviewStressesOf, criminalStructureOf } from '../../src/components/ne
 import { defenseDeskRead, DEFENSE_LENSES } from '../../src/components/new/defenseDeskRead.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
+import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
+import { faithDeskReadings, warFaithDeskRungs } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { powerDeskRead, powerDeskReadings, governanceAccountRead } from '../../src/components/new/powerDeskRead.js';
 
 afterEach(cleanup);
@@ -56,6 +58,7 @@ const TABS = {
   viability: (s, gate) => <ViabilityTab settlement={s} narrativeNote={null} {...gate} />,
   defense: (s, gate) => <DefenseTab settlement={s} narrativeNote={null} {...gate} />,
   power: (s, gate) => <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} {...gate} />,
+  faith: (s, gate) => <FaithTab settlement={s} {...gate} />,
 };
 
 /**
@@ -173,6 +176,10 @@ const DRAWN = {
     draw: (o) => powerDeskRead(o, { playerView: true, readings: powerDeskReadings(o, { playerView: true }) }),
   },
   'power:governance': { tab: 'power', draw: (o) => governanceAccountRead(o) },
+  'warFaith:faith': {
+    tab: 'faith',
+    draw: (o) => warFaithDeskRungs({ settlement: o, publicDossier: false, playerView: true, readings: faithDeskReadings(o) }),
+  },
 };
 
 /** Every sentence-length string in a drawn desk, at any depth (provenance skipped). */
