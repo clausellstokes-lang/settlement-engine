@@ -192,53 +192,54 @@ reg('military','stable',
 
 // ── economy / crafts ──────────────────────────────────────────────────────────
 for (const cat of ['economy','crafts']) {
+// SW-6 second seat (B10(b)): the trade's seat-holders in plain words, the machinery struck; the goals untouched.
 reg(cat,GOVERNANCE_FRACTURED,
-  { position:  'Controls organized commercial infrastructure in a settlement where governance is failing. Economic institutions are currently more functional than civic ones.',
+  { position:  'Heads the leading house in the trade while the seat fails; deals still get done where orders do not.',
     goal:      'Get their trade\'s new freedoms written down before whoever takes the seat next takes them back.',
-    constraint:'Formalizing commercial independence too visibly invites a reconsolidated governing authority to treat it as a threat rather than an asset.' },
-  { position:  'Operates commercial interests from a position secondary to the dominant commercial faction in a settlement with failing governance.',
+    constraint:'Taking new freedoms too openly makes whoever next holds the seat see the house as a threat.' },
+  { position:  'Runs a smaller house behind the leading one in the trade while the seat fails.',
     goal:      'Take customers from the biggest house in the trade while the seat is too weak to care.',
-    constraint:'The governance instability that creates opportunity also creates uncertainty. The same conditions that allow advancement can reverse it.' }
+    constraint:'The disorder that lets the house get ahead can just as quickly knock it back.' }
 );
 reg(cat,'corruption',
-  { position:  'Operates in a commercial environment where criminal interests have informal arrangements with enforcement. The line between legitimate and accommodated commerce is blurred.',
+  { position:  'Heads the leading house in the trade where criminals have deals with those who keep order; honest and protected business are hard to tell apart.',
     goal:      'Keep trading without paying the gangs, and without needing their protection either.',
-    constraint:'The informal arrangements with enforcement make legitimate commerce partially reliant on the same corruption it must avoid.' },
-  { position:  'Operates smaller commercial interests within a commercial environment compromised by criminal accommodation.',
+    constraint:'Some of the trade\'s own dealings lean on the same bought officials it must keep clear of.' },
+  { position:  'Runs a smaller house in a trade where many pay the criminals to be left alone.',
     goal:      'Be known as the honest dealer without the crooks deciding to make an example of them.',
-    constraint:'Visible distinction from the corruption draws attention; accommodation normalizes it. Neither option is cost-free.' }
+    constraint:'Standing apart from the crooked dealing draws the crooks\' eye; going along makes it everyone\'s habit.' }
 );
 reg(cat,'food_crisis',
-  { position:  'Controls distribution infrastructure for a critical resource at a moment when that resource is in shortage. The position carries unusual leverage and unusual risk.',
+  { position:  'Heads the leading house in the trade while food is short; what it sells, and to whom, is now watched.',
     goal:      'Sell what food they hold at a price nobody will hold against them after the shortage.',
-    constraint:'Any pricing or allocation decision during a shortage is a political act, regardless of intent.' },
-  { position:  'Operates commercial interests in a supply crisis from a position without control over the primary distribution channel.',
+    constraint:'Every price it sets during the shortage is taken as a side chosen, whatever was meant.' },
+  { position:  'Runs a smaller house in the trade while food is short, with no hand in who gets the food.',
     goal:      'Find something else to sell while the food runs short and the big dealers hold it.',
-    constraint:'Alternative commercial positions during a supply crisis are defined by what the crisis displaces. The opportunity and the instability are the same thing.' }
+    constraint:'What can be sold now depends on what the shortage has pushed aside, and that can change overnight.' }
 );
 reg(cat,'economic_stress',
-  { position:  'Operates in a settlement under persistent economic pressure. The commercial position is maintained but not growing.',
+  { position:  'Heads the leading house in the trade while money is short; it holds on, but does not grow.',
     goal:      'Work out which buyers will still pay next year, and drop the rest before they drag them down.',
-    constraint:'Selective consolidation requires visibly abandoning some positions, creating vulnerability in the ones being retained.' },
-  { position:  'Operates smaller commercial interests in an economically stressed settlement where consolidation by larger commercial interests reduces operational space.',
+    constraint:'Keeping the best buyers means dropping others in plain view, and rivals notice the gaps.' },
+  { position:  'Runs a smaller house while money is short and the bigger houses take more of the trade.',
     goal:      'Find the small trade the big houses will not bother to fight them for.',
-    constraint:'Niches that larger interests do not contest are typically ones with limited growth potential.' }
+    constraint:'The work the big houses leave alone is the work that pays least.' }
 );
 reg(cat,'contested',
-  { position:  'Holds commercial structural influence in a settlement where governing authority is contested. Commercial interests are positioned to benefit from or be damaged by how the contest resolves.',
+  { position:  'Heads the leading house in the trade while rivals fight over the seat; whoever wins can make or break it.',
     goal:      'Lend to both sides of the fight for the seat, so whoever wins owes them.',
-    constraint:'Cultivating relationships with both sides requires that neither side trusts you fully.' },
-  { position:  'Operates commercial interests that are positioned between the competing factions in a contested settlement.',
+    constraint:'Keeping friends on both sides means neither side fully trusts the house.' },
+  { position:  'Runs a smaller house that sells to both sides in the fight for the seat.',
     goal:      'Keep selling to every faction without any of them treating their goods as its own.',
-    constraint:'Commercial neutrality looks like either timidity or calculation to the factions seeking commitment.' }
+    constraint:'To both sides, staying out of it looks like fear or scheming.' }
 );
 reg(cat,'stable',
-  { tags: CALM_ONLY, position:  'Controls organized commercial infrastructure in a functioning settlement. The position is secure and the leverage is real.',
+  { tags: CALM_ONLY, position:  'Heads the leading house in the trade in quiet times; its hold is secure and its say is real.',
     goal:      'Turn their hold on the trade into a charter, a seat at the table, or a monopoly.',
-    constraint:'Visible accumulation of institutional advantage invites regulatory and political attention.' },
-  { tags: CALM_ONLY, position:  'Operates commercial interests in a stable settlement from a position secondary to the dominant commercial faction.',
+    constraint:'Every new privilege it gathers in plain sight draws the eye of the seat and of its rivals.' },
+  { tags: CALM_ONLY, position:  'Runs a smaller house behind the leading one in quiet times.',
     goal:      'Win more custom without treading on the biggest house in the trade.',
-    constraint:'Growth that encroaches on the dominant interest\'s commercial territory invites a response; growth that doesn\'t stays marginal.' }
+    constraint:'Growing into the leading house\'s trade invites a reply; staying out of it means staying small.' }
 );
 }
 
