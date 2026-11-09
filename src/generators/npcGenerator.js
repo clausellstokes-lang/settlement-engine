@@ -42,7 +42,7 @@ import {
   NPC_FACTION_GOALS,
   NPC_FACTION_LOYALTY,
   NPC_SECRETS,
-  NPC_PLOT_HOOKS_DATA,
+  dealingLineFor,
   NPC_PRESENTATION_MODES, NPC_HOOK_SIBLINGS,
 } from '../data/npcData.js';
 
@@ -157,7 +157,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
     plotHooks,
     influence: powerLevel.level,
     power: powerLevel.power,
-    presentation: pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw)),
+    presentation: pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw), religion), // STYLE-2 SW-7 (B10(b)): the card's own traits key "How they deal"
   };
 };
 
@@ -694,12 +694,12 @@ export const drawPersonHook = (hookPool, config = {}, hookRegistry, place = {}) 
 };
 
 // pickTitle
-const pickTitle = (r, facts = null) => {
+const pickTitle = (r, facts = null, personality = null) => {
   const s = drawDeclared(NPC_PLOT_HOOKS[r] || NPC_PLOT_HOOKS.other, { draw: pick, facts, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_PLOT_HOOKS`, poolId: 'npcData:NPC_PLOT_HOOKS', surface: 'npcs', drawKind: 'R' }).line || {}; // CENSUS-1c unit 2
   return {
     impression: s.impression,
     disposition: s.disposition,
-    behaviour: NPC_PLOT_HOOKS_DATA[s.disposition] || NPC_PLOT_HOOKS_DATA.transactional,
+    behaviour: dealingLineFor(s.disposition, personality), // STYLE-2 SW-7 (B10(b)): keyed to the card's traits, draw-free (npcData.js :: dealingLineFor)
   };
 };
 

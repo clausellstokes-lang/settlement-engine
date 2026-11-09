@@ -1344,11 +1344,112 @@ export const NPC_SECRETS = {
 };
 
 export const NPC_PLOT_HOOKS_DATA = {
-  welcoming: 'Offers information freely; asks questions that seem like interest rather than interrogation.',
+  welcoming: 'Offers information freely, and asks questions that sound like interest, not prying.',
   transactional: 'Cooperative within clear limits; every exchange has an implicit value.',
   cautious: 'Answers questions without volunteering; watches who you talk to next.',
   dismissive: 'Polite but brief; makes clear their time is limited.',
 };
+
+/**
+ * STYLE-2 SW-7 (STYLE-RULINGS-2 B10(b)): "How they deal" keyed to the card's OWN traits. Three
+ * disposition lines covered 371 of 405 cards on the twelve; the line now reads the disposition AND
+ * the card's personality (`npcGenerator.js :: generateReligionType` — the flaw first, then the
+ * dominant trait, then the modifier), each trait word mapped to the family of dealing it names. Draw-free:
+ * no roll is added or moved; a card whose traits name no family keeps its disposition line above.
+ * Every line states only what the disposition and the trait word say; nothing else is presumed.
+ */
+export const DEALING_TRAIT_FAMILY = Object.freeze({
+  honest: 'straight', candid: 'straight', forthright: 'straight', 'plain-dealing': 'straight', principled: 'straight', incorruptible: 'straight', 'fair-minded': 'straight', equitable: 'straight',
+  compassionate: 'warm', generous: 'warm', 'warm-hearted': 'warm', hospitable: 'warm', merciful: 'warm', magnanimous: 'warm', 'good-humoured': 'warm', gracious: 'warm', courteous: 'warm', charismatic: 'warm', optimistic: 'warm', humble: 'warm',
+  patient: 'careful', methodical: 'careful', prudent: 'careful', 'level-headed': 'careful', temperate: 'careful', diligent: 'careful', conscientious: 'careful', dependable: 'careful', steadfast: 'careful', stalwart: 'careful', tenacious: 'careful', unflappable: 'careful', perfectionist: 'careful',
+  clever: 'sharp', astute: 'sharp', discerning: 'sharp', perceptive: 'sharp', intuitive: 'sharp', wise: 'sharp', scholarly: 'sharp', resourceful: 'sharp', diplomatic: 'sharp',
+  loyal: 'dutiful', protective: 'dutiful', brave: 'dutiful', pious: 'dutiful', traditionalist: 'dutiful', zealous: 'dutiful',
+  greedy: 'price', 'self-serving': 'price', corrupt: 'price', hedonistic: 'price',
+  arrogant: 'lofty', vain: 'lofty', imperious: 'lofty', domineering: 'lofty', overbearing: 'lofty', dismissive: 'lofty', proud: 'lofty', theatrical: 'lofty',
+  suspicious: 'guarded', paranoid: 'guarded', secretive: 'guarded', cautious: 'guarded', reserved: 'guarded', inscrutable: 'guarded', detached: 'guarded',
+  deceitful: 'slippery', manipulative: 'slippery', mendacious: 'slippery', hypocritical: 'slippery',
+  cruel: 'hard', callous: 'hard', 'cold-blooded': 'hard', ruthless: 'hard', vindictive: 'hard', vengeful: 'hard', wrathful: 'hard', bitter: 'hard',
+  lazy: 'shirking', cowardly: 'shirking', reckless: 'shirking', envious: 'shirking', stubborn: 'shirking', petty: 'shirking', volatile: 'shirking',
+  pragmatic: 'dealmaker', ambitious: 'dealmaker', calculating: 'dealmaker', opportunistic: 'dealmaker',
+});
+
+/** disposition → trait family → the "How they deal" line (FOR THE OWNER'S VETO; SW-7's record §7). */
+export const NPC_DEALING_BY_TRAIT = Object.freeze({
+  welcoming: Object.freeze({
+    straight: "Glad to talk, and says plainly what they know and what they don't.",
+    warm: 'Makes you welcome, finds you a seat, and helps without counting the cost.',
+    careful: 'Friendly, but takes their time; hears the whole question before answering it.',
+    sharp: 'Friendly and quick; by the end of the talk they know more about you than you do about them.',
+    dutiful: 'Open with you until your business touches the people they answer for; then they close up.',
+    price: 'Free with talk and small favours, and remembers every one when they want something back.',
+    lofty: 'Gracious in the way of someone doing you a kindness, and expects to be thanked for it.',
+    guarded: 'Friendly on the surface, but soon asks where you are staying and who sent you.',
+    slippery: 'Tells you what you want to hear, and the story changes with who else is listening.',
+    hard: 'Pleasant until crossed; then the warmth goes at once and does not come back.',
+    shirking: 'Promises help easily, and is hard to find when the time comes to give it.',
+    dealmaker: 'Friendly and useful, and already working out what you might be worth to them.',
+  }),
+  transactional: Object.freeze({
+    straight: 'Names a fair price, keeps to it, and expects you to keep to yours.',
+    warm: 'Strikes a bargain, then gives a little more than was agreed.',
+    careful: 'Wants every term settled before anything changes hands, and writes it down.',
+    sharp: 'Bargains well, and spots a weak offer before you finish making it.',
+    dutiful: 'Deals fairly with you, but never against the people they serve.',
+    price: 'Everything has a price, and the price rises the more you seem to need it.',
+    lofty: 'Deals with you as a favour, and lets you know the terms are theirs to set.',
+    guarded: 'Trades in coin, not talk; asks nothing about you and says nothing of their own business.',
+    slippery: 'Agrees quickly, and the terms are never quite what you remember agreeing to.',
+    hard: 'Holds you to every word of a deal and collects in full, whatever it costs you.',
+    shirking: 'Takes the deal, then does as little as the deal allows.',
+    dealmaker: 'Helps you as far as it pays them to, and no further.',
+  }),
+  cautious: Object.freeze({
+    straight: 'Answers what you ask truthfully, and offers nothing beyond it.',
+    warm: 'Kind but careful; helps once they know who you are and why you came.',
+    careful: 'Answers slowly, checks what you say against what they know, and gives little at a first meeting.',
+    sharp: 'Says little, watches closely, and notices what you leave out.',
+    dutiful: 'Asks your business first, and weighs it against the people they look after.',
+    price: 'Says little until it is clear what you can offer.',
+    lofty: 'Keeps you at a distance, and makes you prove you are worth their time.',
+    guarded: 'Answers questions without volunteering anything, and watches who you talk to next.',
+    slippery: 'Gives careful answers that are true as far as they go, and they never go far.',
+    hard: 'Treats every question as a possible threat, and remembers who asked it.',
+    shirking: 'Keeps out of trouble by keeping away from you, and sends you to someone else when they can.',
+    dealmaker: 'Holds back until they see what knowing you might get them.',
+  }),
+  dismissive: Object.freeze({
+    straight: 'Brief and blunt; tells you what they think of your request and goes back to work.',
+    warm: 'Busy, but not unkind; points you to someone who can help.',
+    careful: 'Polite, brief and busy; asks you to come back when they have time.',
+    sharp: 'Hears you out for a moment, decides you are not worth more, and says so.',
+    dutiful: 'Has no time for strangers while their own people need them.',
+    price: 'Has no time for you unless you are buying.',
+    lofty: 'Barely looks up; you are plainly beneath their notice.',
+    guarded: 'Cuts the talk short and gives no reason.',
+    slippery: 'Agrees with everything you say, to be rid of you sooner.',
+    hard: 'Curt to the point of rudeness, and does not care how it lands.',
+    shirking: 'Waves you off; whatever you need is somebody else\'s job.',
+    dealmaker: 'Polite but brief, until you mention something they want.',
+  }),
+});
+
+/**
+ * The card's "How they deal" line: the disposition's line for the first of the card's traits (flaw,
+ * dominant, modifier) that names a family, else the disposition's own line. Pure; no draw.
+ * @param {string} disposition
+ * @param {{ flaw?: string|null, dominant?: string|null, modifier?: string|null } | null | undefined} personality
+ * @returns {string}
+ */
+export function dealingLineFor(disposition, personality) {
+  const byFamily = NPC_DEALING_BY_TRAIT[disposition];
+  const base = NPC_PLOT_HOOKS_DATA[disposition] || NPC_PLOT_HOOKS_DATA.transactional;
+  if (!byFamily || !personality) return base;
+  for (const trait of [personality.flaw, personality.dominant, personality.modifier]) {
+    const family = trait ? DEALING_TRAIT_FAMILY[trait] : null;
+    if (family && byFamily[family]) return byFamily[family];
+  }
+  return base;
+}
 
 export const NPC_PRESENTATION_MODES = {
   dangerous_presents_safe: [
