@@ -409,9 +409,18 @@ Beyond the walker's list: "breath(e)" 7 → 0 in the crier pools, and "stranger(
 
 ## What stays
 
-- **The "Amerchant" drop-cap cure** (§11): `OverviewTab.jsx:347` and `src/styles/organic.css`, pending the chair's ruling.
+- **The "Amerchant" drop-cap cure → SW-9, after the train** (the chair, 02:18 UTC). `OverviewTab.jsx:347` sits in the region OWNER-WORDS-DOSSIER rewrote, which is final at `af2d80d62`.
+  - **Diagnosis:** §11.
+  - **Scope:** any arrival line opening on "A " (any one-letter first word), on the Overview only. The Summary tab and the PDF have no drop-cap and are unaffected.
+  - **The cure, in three steps:**
+    1. `OverviewTab.jsx:347` adds `oc-dropcap-prose--lone` to the drop-cap paragraph when the scene matches `/^[A-Za-z]\s/`.
+    2. `src/styles/organic.css` gives `.oc-dropcap-prose--lone::first-letter` a word-space margin, about 0.3em on the `initial-letter` path and 0.25em under the float fallback.
+    3. Red-first: a jsdom pin shows the class on a planted "A merchant…" scene and absent on "The road…". The Chromium range measure takes the gap after the initial from 0 px to more than 4 px.
+  - The arrival lines are NOT reworded.
+- **Placed by the chair (02:17 UTC):**
+  - the census ledgers' verbatim copies (DECREE_PROSE and the four ARRIVAL_*) → SW-9's hand re-key batch;
+  - the kernel's `ownerBit` naming an institution as a "who" → SW-9, as a grammar defect;
+  - `warRemembrance.js:365` "In the ledger" is a LABEL and goes to the walker's allow-list by name.
 
-- **`src/domain/worldPulse/traditionsKernel.js:513`**, the `ownerBit` ("It is kept by {named}, who answer for its fortune."). It prints after every tradition summary that has a keeper, names a pasture or a fish market as one (§6), and carries "who answer for its fortune", an aphorism. Outside this manifest.
 - **The DEC-EVENT and DEC-PARTY pages:** both blocks print on no page today. Their fourth vantages (§4c) wait for the page that reaches them, and that page must declare vid 54 `market` (the census2g pin says so).
 - **The tradition hooks** (`TRAD_HOOKS`, six pools of three): these are plot-hook seeds, not intro pools, so they were not given vantages; their rows of the audit were taken.
-- **The docs copies of these lines:** `docs/census/declarations/DECREE_PROSE.json` and `ARRIVAL_SENSES.json`, `ARRIVAL_PEOPLE.json`, `ARRIVAL_TENSIONS.json`, `ARRIVAL_MEMORIES.json` carry the OLD texts verbatim. No test reads that text (measured: every test reading those ledgers is green at the tip), so they were left out of this manifest for the merge seat or the census owner to refresh. `DECREE_PROSE.json` also lacks lines for vids 97–103.
