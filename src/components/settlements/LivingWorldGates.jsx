@@ -73,7 +73,7 @@ export const LIVING_WORLD_GATES = Object.freeze([
   }),
 ]);
 
-const DRIFT_REASON = 'Needs Relationship drift: war is a relationship dynamic, so a frozen web cannot raise fronts.';
+const DRIFT_REASON = 'Needs Relationship drift: wars start from the ties between settlements, and with Relationship drift off those ties never change.';
 // GUIDE-2b — the geography control's teaching, surfaced in the in-theme help
 // panel below (was a native title= OS tooltip; the deep title tranche migrates
 // text-bearing controls off foreign chrome onto the study's own cloth).
