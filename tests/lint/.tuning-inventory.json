@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "e9070d614bd6775fee74d2ce70a4fc083d2a2af0",
+  "measuredAtSha": "2f89aaeef718ea9fbd62c4a2c43defd4743e5e5c",
   "measuredBy": "ALLEGIANCE-CAR3",
-  "date": "2026-11-08",
-  "note": "ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05 (the measured no-power band)",
+  "date": "2026-11-09",
+  "note": "ALLEGIANCE_TUNING.bossJoinsAbove born (4, count; the chair ruling on J-10 residue)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -384,6 +384,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -428,6 +429,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -473,6 +475,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -525,6 +528,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -569,6 +573,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -612,6 +617,7 @@
       },
       "dependents": [
         "src/domain/causalState.js",
+        "src/domain/corruptionLeash.js",
         "src/domain/crimeSignal.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
@@ -639,6 +645,7 @@
         "src/domain/worldPulse/thievesGuild.js"
       ],
       "namedDependents": [
+        "src/domain/corruptionLeash.js",
         "src/domain/worldPulse/npcAgency.js"
       ]
     },
@@ -1220,16 +1227,17 @@
     "src/domain/people/allegiance.js#ALLEGIANCE_TUNING": {
       "exported": true,
       "idiom": "literal",
-      "keys": 6,
+      "keys": 7,
       "line": 68,
-      "spanDigest": "b593f44d8657d5fbd857d8916d4ee220c7b9e396f01c7883b3ebead3986f370a",
+      "spanDigest": "0534913bf7da44d769d779cf750b6934ec7ab9ae94925492cb9a6a1344dbfcdf",
       "leaves": {
         "organizedCrime": 0.05,
         "organizedFull": 8,
         "powerBonus": 0.25,
         "share": 0.15,
         "frontWeight": 1,
-        "weightZeroHouse": 0.5
+        "weightZeroHouse": 0.5,
+        "bossJoinsAbove": 4
       },
       "dependents": [
         "src/components/new/npcComponents.jsx",
@@ -1258,7 +1266,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 54,
+      "line": 55,
       "spanDigest": "9acdd8bbb6d33f13f0160b4fb859db40ed62562fc613d4cd950fa2f3358584d1",
       "leaves": {
         "byRank.1": 0.15,
@@ -1268,7 +1276,10 @@
         "cap": 0.25,
         "ceilingGap": 1
       },
-      "dependents": [],
+      "dependents": [
+        "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+        "src/pdf/lib/viewModel.js"
+      ],
       "namedDependents": []
     },
     "src/domain/realm/autoplacement.js#AUTOPLACEMENT_TUNING": {
@@ -4253,7 +4264,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 175,
+      "line": 176,
       "spanDigest": "a5da95dcebc47ef008491d904306a7794fbd2c92eb510eadee04d12cfba2f3b0",
       "leaves": {
         "DWELL_INTERVAL_TICKS": 2,
@@ -8880,10 +8891,10 @@
   "unclosed": [],
   "totals": {
     "tables": 273,
-    "keys": 2232,
+    "keys": 2233,
     "unregisteredNamed": 536,
     "bareDecimals": 6934,
-    "zeroDependentTables": 11,
+    "zeroDependentTables": 10,
     "zeroNamedDependentTables": 181
   }
 }
