@@ -35,7 +35,7 @@ import { statusCase } from '../../domain/display/labelCase.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
-
+import { factsOf } from '../../domain/facts/factsOf.js';
 export function Overview({ settlement, narrativeMode, vm, stateProse, historyPrinted = true }) {
   // ONE HOME PER EXPORT (the chair's B4 ruling (2), 2026-11-09): with History in the variant, the tension
   // descriptions and the historical character live there; without it (campaign_state), here in full.
@@ -180,7 +180,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
             <View style={{ marginBottom: 6 }}>
               <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Enforcement ratio</Text>
               <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second }}>
-                {enforcementWords(o.safetyRatio)}
+                {enforcementWords(o.safetyRatio, settlement ? factsOf(settlement).guardPresence : true)}
               </Text>
             </View>
           )}
@@ -563,9 +563,13 @@ export default Overview;
  * The enforcement ratio in words (W7 HOOKS, the owner's style law of 2026-11-07). The figure is
  * safetyProfile.js's order-keeping strength over criminal strength, not a watch-per-head count, so
  * "0.2 watch:pop" was machinery AND wrong; the label above it stays.
- * @param {number} ratio @returns {string}
+ * SW-9b-A (STYLE-2-CONTRADICTIONS §8, P9): where no force stands (`factsOf(record).guardPresence`, the
+ * fact the safety lines read since SW-B6's ba0dc7cf9), the line says so in the guard assessment's own
+ * words instead of setting "those who keep order" against the criminals.
+ * @param {number} ratio @param {boolean} [guarded] @returns {string}
  */
-function enforcementWords(ratio) {
+export function enforcementWords(ratio, guarded = true) {
+  if (!guarded) return 'There is no watch.';
   if (!Number.isFinite(ratio)) return 'Not measured.';
   if (ratio >= 2) return 'Those who keep order clearly outmatch the criminals.';
   if (ratio >= 1) return 'Those who keep order roughly match the criminals.';
