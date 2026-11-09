@@ -182,7 +182,13 @@ export function governanceAccountOf(settlement) {
       ? `${place} is governed by ${ruler}, and ${text(chain.npc.name)}, ${role}, holds its seat.`
       : `${place} is governed by ${ruler}, and ${text(chain.npc.name)} holds its seat.`);
   } else if (chain.absence?.kind === 'missing_seat') {
-    sentences.push(`${place} is governed by ${ruler}, but its seat stands empty.`);
+    // THE VACANCY IS THE FIRST FACT (the chair's condition (b), 2026-11-09): 65 of the 1,000. Then what
+    // fills the gap, from the record: the claimants it names, else the power governing without a head.
+    sentences.push(`No one holds the seat at ${place}.`);
+    const claimants = Array.isArray(chain.absence.claimants) ? chain.absence.claimants.map(text).filter(Boolean) : [];
+    sentences.push(claimants.length
+      ? `${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`
+      : `Until it is filled, ${ruler} governs without a head.`);
   } else {
     sentences.push(`${place} is governed by ${ruler}, and the record names no one in its seat.`);
   }

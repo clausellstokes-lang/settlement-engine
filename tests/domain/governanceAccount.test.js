@@ -10,6 +10,7 @@ import {
   governanceAccountOf, estrangedPowersOf, legitimacyCausesOf, powerNameInProse, pluralPowerName,
 } from '../../src/domain/display/governanceAccount.js';
 import { buildGovernanceLabels } from '../../src/generators/power/governanceNarrative.js';
+import { applyStressEventFactions } from '../../src/generators/power/stressFactions.js';
 
 const COUNCIL = 'Corrupt Council';
 const SEAT = {
@@ -71,6 +72,18 @@ describe('the stress vignette is the event sentence (the chair\'s ruling on the 
   });
 });
 
+describe('the chair\'s conditions (b) and (c), 2026-11-09', () => {
+  it('(b) a vacant seat is the FIRST fact, and what fills the gap follows from the record', () => {
+    const vacant = planted();
+    vacant.powerStructure.factions[0].modifiers = ['vacant'];
+    const g = governanceAccountOf(vacant);
+    expect(g.text.startsWith('No one holds the seat at Polaovo. Until it is filled, the Corrupt Council governs without a head.')).toBe(true);
+    vacant.powerStructure.factions.push({ faction: 'Noble Claimant Ivo', power: 10 }, { faction: 'Noble Claimant Mira', power: 9 });
+    expect(governanceAccountOf(vacant).text.startsWith('No one holds the seat at Polaovo. Noble Claimant Ivo and Noble Claimant Mira contend for it.')).toBe(true);
+  });
+
+});
+
 describe('the composed governance paragraph', () => {
   it('a record with two estranged powers NAMES them, the seat first, the causes before the band', () => {
     const s = planted({
@@ -130,7 +143,7 @@ describe('the composed governance paragraph', () => {
   it('a vacant seat and an unrecorded one are said plainly; no governing power is silence', () => {
     const vacant = planted();
     vacant.powerStructure.factions[0].modifiers = ['vacant'];
-    expect(governanceAccountOf(vacant).text.startsWith('Polaovo is governed by the Corrupt Council, but its seat stands empty.')).toBe(true);
+    expect(governanceAccountOf(vacant).text.startsWith('No one holds the seat at Polaovo.')).toBe(true); // re-keyed by condition (b), 2026-11-09
     const unrecorded = { ...planted(), npcs: [] };
     expect(governanceAccountOf(unrecorded).text.startsWith('Polaovo is governed by the Corrupt Council, and the record names no one in its seat.')).toBe(true);
     expect(governanceAccountOf({ name: 'Nowhere', powerStructure: { factions: [] } })).toBeNull();
