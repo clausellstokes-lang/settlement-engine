@@ -160,7 +160,7 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['A rule they wrote to stop one abuse has opened the door to another, and the people using it are their friends.', 'corruption'],
   ['Someone has forged their seal well enough to fool their own staff, and three orders went out under it before anyone noticed.', 'betrayal'],
   ['They owe their post to a patron who has started asking for repayment in favours they cannot grant openly.', 'hidden_debt'],
-  // ── military (11) ──
+  // ── military (24) ──
   ['Three guards have gone missing in the same district on night patrol. The report filed says they deserted.', 'vanished_person'],
   ['Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.', 'smuggling'],
   ["They received orders from above that contradict what they know to be right. They haven't acted on either yet.", 'divided_loyalty'],
@@ -172,6 +172,19 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['A recruit they turned away has since joined a different outfit. The different outfit is now paying them to monitor this one.', 'rivalry'],
   ['They are carrying out orders they believe are wrong. They have not yet decided at what point they stop carrying them out.', 'divided_loyalty'],
   ["A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.", 'smuggling'],
+  ['Two of the people under their command have been settling a private quarrel with drawn steel, and the rest are picking sides.', 'rivalry'],
+  ['An old comrade has turned up asking for a favour that could cost them their post if anyone learns of it.', 'divided_loyalty'],
+  ['They signed for supplies that never arrived, and the merchant who sold them is already spending the money.', 'corruption'],
+  ['Someone under their command has been selling duty rosters to people who want to know when the roads are empty.', 'betrayal'],
+  ['A report they wrote years ago blamed the wrong person for a death, and the right one has just come back.', 'old_wound'],
+  ['Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.', 'ambition'],
+  ['A deserter they let go quietly has been caught elsewhere and is telling everyone who let them walk.', 'divided_loyalty'],
+  ['They have been ordered to clear a family off land the family has worked for generations, and the order is lawful.', 'divided_loyalty'],
+  ['The pay chest came up short again this month, and the only other key belongs to someone they trust.', 'betrayal'],
+  ['A local family has been feeding the people under their command for free, and now expects a favour in return.', 'hidden_debt'],
+  ['One of their best people has asked to be released, and will not say what they are afraid of.', 'looming_threat'],
+  ['Tracks they were told to ignore lead from the edge of the fields to a camp nobody has reported.', 'looming_threat'],
+  ['They lost a wager to someone who now wants payment as a closed eye on one particular night.', 'hidden_debt'],
   // ── religious (11) ──
   ['A parishioner confessed something to them three months ago. The information is dangerous. They cannot act on it.', 'forbidden_knowledge'],
   ['The holy relic in their keeping is not what everyone believes it is. Only they know this.', 'faith_crisis'],
