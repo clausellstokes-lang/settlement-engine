@@ -320,7 +320,8 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // member copy — no shape carries the identity once the grouping leaves the record.
     // MERGE-CAR (2026-11-07): both sides' strikes composed — MERGE-R2's two (growsMoreThanEats, randomDepletionEligible)
     // and PEOPLE-5B's one (generatedAs on members): 45 -> 42.
-    expect(WRITER_DARK_REGISTER.length).toBe(42);
+    // 2026-11-09 (ALLEGIANCE-CAR3): `archetypeKey on relationships` struck by clause S (the DM view prints the tie's kind): 42 -> 41.
+    expect(WRITER_DARK_REGISTER.length).toBe(41);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
