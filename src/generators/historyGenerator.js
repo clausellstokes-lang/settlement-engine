@@ -433,7 +433,7 @@ const buildHistoricalEvent = (
     if ((economicViability.issues?.length || 0) > 0) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'resource_scarcity');
       if (tmpl && _rng() > 0.4) {
-        const commodity = deriveTradeCommodity(economicState) || 'key goods';
+        const commodity = deriveTradeCommodity(economicState); // SW-B5: no 'key goods' fallback; no commodity, no clause
         // Viability issues carry `.description` canonically; only stress-derived ones
         // also set `.message`. Reading `.message` alone interpolated the literal
         // 'undefined' into dossier/PDF/AI-grounding prose for every description-only
@@ -445,10 +445,10 @@ const buildHistoricalEvent = (
         // W1 ECO second seat (the owner's style law, 2026-11-07): the lead names what the place lives
         // by (its first export) and says that trade is strained; the top issue that follows is the
         // evidence (on a migration it is the ARRIVALS food note; a departures record writes none).
-        const lead = `Life here runs mostly on the ${commodity} trade, and that trade is under strain.`;
+        const lead = commodity ? `Life here runs mostly on the ${commodity} trade, and that trade is under strain.` : '';
         selected.push({
           ...tmpl,
-          description: issueText ? `${lead} ${issueText}` : lead,
+          description: [lead, issueText].filter(Boolean).join(' ') || tmpl.description,
           specificIssue: issueText,
         });
         usedTypes.add('resource_scarcity');

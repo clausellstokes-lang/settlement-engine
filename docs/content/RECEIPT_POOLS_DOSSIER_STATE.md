@@ -1215,6 +1215,10 @@ contradict** it (R-DST-C).
 1. `[street · colour]` {settlement} is short more often than not. Some needs are met and some are postponed, and which is which changes month to month.
 2. `[ledger · colour]` The town never quite makes ends meet. Every month something it needs waits for money that does not come.
 3. `[visitor · market]` The shortage at {settlement} shows in small things: a repair not made, a stall not restocked, a hall not heated.
+4. `[local · colour]` Families in {settlement} mend what they have and put off buying anything new.
+5. `[official · colour]` Whoever keeps {settlement}'s purse pays the most pressing debt each month and lets the rest wait.
+6. `[trade · colour]` Sellers at {settlement} give credit more often than they would like, and are paid late.
+7. `[newcomer · colour]` A newcomer to {settlement} soon learns that most people here are owed money and owe some too.
 
 **POOR** — *getting by, no surplus* {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
@@ -1542,6 +1546,9 @@ note that carries it on the six wired surfaces.
 1. `[ledger · no hunger]` {settlement} sends several different goods out to market; if one trade fails, the others still go.
 2. `[visitor · colour]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
 3. `[street · colour]` There is always something going out. If one trade is quiet, another is not.
+4. `[trade · colour]` The carts that leave {settlement} carry several kinds of goods, not one.
+5. `[local · colour]` People in {settlement} work at more than one trade, so a bad year for one is not a bad year for everyone.
+6. `[newcomer · colour]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
 
 **SCARCITY: `shortage`**
 1. `[ledger · market]` {good} is scarce in {settlement} and its price has risen.
@@ -2172,6 +2179,10 @@ causal clause; the stability string alone does not.
 1. `[ledger]` {faction} holds the hall at {settlement} and the town's affairs run through it.
 2. `[street]` The {seat} at {settlement} is {faction}'s, and the town takes its questions there.
 3. `[visitor]` Anything official at {settlement} goes to {faction}, and people say little more than that.
+4. `[newcomer]` A newcomer at {settlement} with a petition is sent to {faction}; nobody else there can grant it.
+5. `[official]` Every decision about {settlement} is taken by {faction}, and every answer comes from there.
+6. `[local]` Disputes at {settlement} that the neighbours cannot settle go up to {faction}.
+7. `[trade]` A trader with a complaint at {settlement} takes it to {faction}.
 
 **governing faction holds a DOMINANT share** {colour}
 1. `[ledger]` {faction} outweighs every other power at {settlement} put together. The other houses are consulted out of courtesy, and they know it.
@@ -6812,6 +6823,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 1. `[elder]` {settlement} was made for a purpose, and that purpose is {timeband_age}; the town has been added to every year since.
 2. `[ledger]` {settlement} still knows why it was first built, and the town has grown well past that since.
 3. `[visitor]` Generations of patching and rebuilding have nearly hidden the plan {settlement} was laid out to.
+4. `[traveller]` The oldest houses in {settlement} stand at its middle, and everything newer has been built outward from them.
+5. `[local]` Families in {settlement} still point out where the first houses stood, though few of them look as they first did.
+6. `[newcomer]` Ask in {settlement} why it is here and people will tell you its first reason, though the place has long outgrown it.
+7. `[official]` {settlement} has been added to so often that little of its first building is left standing.
 
 **`GROWN-UNRECORDED`** {colour}
 1. `[elder]` Nobody wrote down how {settlement} began; people found it a handy place to stop, and more kept coming.
@@ -7153,6 +7168,9 @@ no compass word, no real-world place, no named analogy.*
 1. `[ledger]` {settlement} works {good} it cannot produce; it buys the raw stuff in, and always has.
 2. `[visitor]` {settlement} buys in what it cannot make, and the trading keeps as many people busy as the making would.
 3. `[street]` {institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
+4. `[trade]` Carts bring {settlement} what its workshops need, and carry the worked {good} away again.
+5. `[local]` Much of the work in {settlement}'s workshops begins with unloading a cart.
+6. `[newcomer]` Anyone looking for work at {settlement} finds it in carrying, weighing and selling as often as in making.
 
 **`UNWORKED`** {colour}
 1. `[counterforce]` The {resource} around {settlement} goes unworked; no house takes it up.
