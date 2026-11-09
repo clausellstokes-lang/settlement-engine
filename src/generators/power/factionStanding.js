@@ -50,36 +50,36 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
                   ? 'The gap between them and ' +
                     (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
                     ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.'
-                  : 'The dominant order is genuinely contested; a single shift in circumstance could reorder everything.')
+                  : 'No one clearly leads here; one scandal or one lost ally could change who does.')
               : topTwoGap <= 14
                 ? (standing = topFactionName
                     ? 'They operate in the shadow of ' +
                       (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
-                      ' but not comfortably: they are watching for leverage, not deferring.'
-                    : 'Close enough to the top to resist, far enough behind to be cautious.')
+                      ' but not comfortably: they are waiting for a chance to push back.'
+                    : 'They are strong enough to resist those above them, but too far behind to risk an open fight.')
                 : (standing = topFactionName
                     ? 'Behind ' +
                       (topFactionName && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topFactionName) +
-                      ' by enough margin that direct challenge is not viable: they route their influence through procedure, not confrontation.'
-                    : 'The hierarchy is settled for now; their energy goes into consolidating second place, not chasing first.')),
+                      ' by too much to challenge openly, so they get their way through petitions and procedure instead.'
+                    : 'The order is settled for now; they are busy holding on to second place and make no move on first.')),
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
               ? (standing =
-                  'Genuinely three-way territory: no faction has decisively broken from the pack; every council vote is negotiated.')
+                  'Three powers stand almost level here, and no one leads; every council vote has to be bargained for.')
               : gapAbove <= 10
                 ? (standing =
                     'Close enough to the two above that their support is worth buying; they play ' +
-                    (higherNeighbor ? higherNeighbor.faction : 'the second faction') +
+                    (higherNeighbor ? higherNeighbor.faction : 'the second power') +
                     ' and ' +
-                    (factions[0] ? factions[0].faction : 'the top faction') +
+                    (factions[0] ? factions[0].faction : 'the leading power') +
                     ' against each other when they can.')
                 : (standing =
-                    'A reliable third presence: too significant to exclude from negotiations, not strong enough to set their own terms.')),
+                    'They are always at the table, but cannot set their own terms.')),
           rank === factions.length - 1 &&
             power < 7 &&
             gapAbove >= 5 &&
             (standing =
-              'Their leverage is narrow and issue-specific; on broader questions they follow whoever is willing to deal with them that week.'),
+              'They have a say on only a few matters; on everything else they side with whoever will deal with them that week.'),
           hasMerchant && hasCraftGuild)
         ) {
           if (nameLower.includes('merchant')) {
@@ -89,7 +89,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             if (craftGuildRival) {
               var craftGuildNote =
                 craftGuildRival.power > power
-                  ? 'The craft guilds currently outweigh them in raw political numbers. An uncomfortable inversion the merchants are working to correct.'
+                  ? 'The craft guilds currently carry more weight than they do, and the merchants are working to change that.'
                   : craftGuildRival.power > power - 8
                     ? 'The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.'
                     : 'The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.';
@@ -103,7 +103,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             if (merchantRival) {
               var merchantNote =
                 merchantRival.power > power + 8
-                  ? 'The merchants consistently outvote them on pricing and labour standards. Craft masters have learned to attach riders to deals rather than fight directly.'
+                  ? 'The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.'
                   : merchantRival.power > power
                     ? 'Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.'
                     : 'Ahead of the merchant guilds in current influence: an unusual position they intend to hold.';
@@ -119,10 +119,10 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             if (guardRival) {
               var thievesGuardNote =
                 guardRival.power > power + 10
-                  ? `The ${force.body} outweighs them institutionally. They survive by corrupting the lower ranks and making enforcement selectively unprofitable.`
+                  ? `The ${force.body} is far stronger. They survive by bribing the lower ranks and making it costly to arrest the wrong people.`
                   : guardRival.power < power - 10
-                    ? 'They currently outflank the military in real leverage; there are officers on payroll and commanders who know better than to ask questions.'
-                    : `Running roughly even with the military in actual influence: the ${force.body} can arrest individuals, the guild can make the investigation expensive.`;
+                    ? 'They have more real pull than the military right now: officers on their payroll, and commanders who know better than to ask questions.'
+                    : `They are roughly even with the military: the ${force.body} can arrest their people, and the guild can make every investigation costly.`;
               standing = standing ? standing + ' ' + thievesGuardNote : thievesGuardNote;
             }
           }
@@ -133,10 +133,10 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             if (thievesRival) {
               var guardThievesNote =
                 thievesRival.power > power + 10
-                  ? 'The guild has more real leverage than they do. Selective enforcement is the only tool that still works, and everyone knows it.'
+                  ? 'The guild is stronger than they are. They can only make arrests where it is safe to, and everyone knows it.'
                   : thievesRival.power < power - 10
-                    ? 'They outmatch the guild institutionally, which keeps the criminal operation suppressed rather than eliminated. There is a difference.'
-                    : 'Running a slow institutional war with the guild: arrests happen, networks rebuild, deals are struck and quietly violated.';
+                    ? 'They are stronger than the guild, enough to keep it down but not to stamp it out.'
+                    : 'A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.';
               standing = standing ? standing + ' ' + guardThievesNote : guardThievesNote;
             }
           }
@@ -148,8 +148,8 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
           if (thievesRivalForMerchant && thievesRivalForMerchant.power > 10) {
             var merchantThievesNote =
               thievesRivalForMerchant.power > power
-                ? 'The criminal network has more operational reach than the merchant guilds right now. Some merchants are paying protection; others have become silent partners.'
-                : "They tolerate the guild's cut because fighting it costs more than paying it; the arrangement is not advertised.";
+                ? 'The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.'
+                : "They tolerate the guild's cut because fighting it costs more than paying it, and nobody says so aloud.";
             standing = standing ? standing + ' ' + merchantThievesNote : merchantThievesNote;
           }
         }
@@ -168,9 +168,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
           if (merchantRivalForNoble) {
             var nobleMerchantNote =
               merchantRivalForNoble.power > power + 12
-                ? 'The merchant guilds now hold more functional leverage: the noble families retain title, hereditary land, and social precedence, but the money has moved.'
+                ? 'The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the money has moved.'
                 : merchantRivalForNoble.power > power
-                  ? 'The merchants are closing the gap; the noble families are using every legal and social mechanism to slow a transition that looks increasingly inevitable.'
+                  ? 'The merchants are closing the gap, and the noble families are using every law and every social tie they have to slow them down.'
                   : 'Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.';
             standing = standing ? standing + ' ' + nobleMerchantNote : nobleMerchantNote;
           }
@@ -187,16 +187,16 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
               stewardNote =
                 stewardRival.power > power + 10
                   ? stewardVariant === 0
-                    ? "The steward administers in the lord's name. The household is the source of that authority, not a rival to it, but the practical question of who signs what has become genuinely complicated."
-                    : 'The steward holds the day-to-day authority; the household provides the legitimacy. In practice the line between them blurs whenever a petitioner finds one more receptive than the other.'
+                    ? "The steward rules in the lord's name, and the household is where that right comes from, but who signs what has become a tangle."
+                    : 'The steward runs things day to day; the household gives the steward the right to. When a petitioner finds one of them more willing than the other, the line between them blurs.'
                   : stewardRival.power < power - 10
                     ? stewardVariant === 0
                       ? 'They hold more direct influence than the steward appointed to govern in their name, which raises questions about why the steward exists at all.'
-                      : 'The steward nominally governs but defers here more than the arrangement was designed to allow.'
+                      : 'The steward governs in name, but gives way to them more often than was ever intended.'
                     : stewardVariant === 0
-                      ? 'Overlapping claims with the steward create an ambiguity that everyone exploits: petitioners approach whichever authority is more likely to give the answer they want.'
+                      ? 'They and the steward both claim the same authority, so petitioners go to whichever is likelier to say yes.'
                       : stewardVariant === 1
-                        ? 'The steward and the household have developed a working arrangement, but its terms are renegotiated whenever something important is at stake.'
+                        ? 'The steward and the household have worked out who does what, but they bargain it again whenever something important is at stake.'
                         : 'Which one actually governs depends on the day and the question; both would say themselves.';
             standing = standing ? standing + ' ' + stewardNote : stewardNote;
           }
@@ -209,7 +209,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             if (arcaneRival) {
               var religiousArcaneNote =
                 arcaneRival.power > power
-                  ? 'The arcane orders currently hold more practical influence, which the clergy finds spiritually troubling and politically unacceptable.'
+                  ? 'The arcane orders have more say right now, and the clergy cannot accept it.'
                   : "The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.";
               standing = standing ? standing + ' ' + religiousArcaneNote : religiousArcaneNote;
             }
@@ -221,7 +221,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             if (religiousRival) {
               var arcaneReligiousNote =
                 religiousRival.power > power
-                  ? 'The clergy hold more civic influence: the arcane orders operate by navigating rather than challenging religious authority.'
+                  ? 'The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.'
                   : 'Ahead of the religious authorities in current influence, which they hold carefully: too much visible power invites accusations that they prefer to avoid.';
               standing = standing ? standing + ' ' + arcaneReligiousNote : arcaneReligiousNote;
             }
@@ -234,7 +234,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
           if (thievesRivalForReligious && thievesRivalForReligious.power > 10) {
             var religiousThievesNote =
               thievesRivalForReligious.power > power
-                ? "The criminal network currently outweighs them. The clergy's moral authority is loud and largely unheeded."
+                ? 'The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.'
                 : 'They denounce the guild from the pulpit; the guild funds two charitable institutions and makes the denunciations look selective.';
             standing = standing ? standing + ' ' + religiousThievesNote : religiousThievesNote;
           }
@@ -245,7 +245,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
           });
           if (religiousRivalForGuard && Math.abs(religiousRivalForGuard.power - power) < 10) {
             var guardReligiousNote =
-              `They and the religious authorities operate parallel systems of social control. The ${force.body} handles bodies, the clergy handles minds, and both would prefer the other operated at lower volume.`;
+              `They and the religious authorities both keep people in line. The ${force.body} deals with bodies and the clergy with minds, and each wishes the other would keep quieter.`;
             standing = standing ? standing + ' ' + guardReligiousNote : guardReligiousNote;
           }
         }
