@@ -304,8 +304,9 @@ describe('living-world signals — dormancy-quiet', async () => {
     const pip = screen.getByText('won 2, lost 1');
     expect(container.firstChild).not.toBeNull();
     expect(pip.getAttribute('title')).toContain('Realm contest record');
-    expect(pip.getAttribute('title')).toContain('primary-supplier-flip');
-    expect(pip.getAttribute('title')).toContain('not time at war or casualties');
+    // re-keyed by identity to SW-3 REALM-PROSE's REALM_CONTEST_RECORD_HELP (0991cc9e5), STYLE-2-MERGE point 5
+    expect(pip.getAttribute('title')).toContain('markets taken from a rival supplier');
+    expect(pip.getAttribute('title')).toContain('not time at war or the dead');
   });
 
   test('healthPip is null-safe (no settlement → null)', () => {

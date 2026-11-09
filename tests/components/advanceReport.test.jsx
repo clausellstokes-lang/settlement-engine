@@ -188,7 +188,8 @@ describe('AdvanceReport — decree section (§5 / §5b)', () => {
       },
     };
     render(<AdvanceReport campaign={campaign} />);
-    expect(screen.getByText(/no measurable downstream effect/i)).toBeTruthy();
+    // re-keyed by identity to SW-3 REALM-PROSE's line (0991cc9e5, decreeTracker.js's honest-null finding), STYLE-2-MERGE point 5
+    expect(screen.getByText(/Nothing that happened this time can be traced to this decree\./)).toBeTruthy();
   });
 });
 
