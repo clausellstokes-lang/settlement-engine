@@ -77,7 +77,8 @@ describe('the chair\'s conditions (b) and (c), 2026-11-09', () => {
     const vacant = planted();
     vacant.powerStructure.factions[0].modifiers = ['vacant'];
     const g = governanceAccountOf(vacant);
-    expect(g.text.startsWith('No one holds the seat at Polaovo. Until it is filled, the Corrupt Council governs without a head.')).toBe(true);
+    // Re-keyed by SW-9 (the owner's veto of the connective copy, 2026-11-09 03:5x): "Until it is filled," struck.
+    expect(g.text.startsWith('No one holds the seat at Polaovo. The Corrupt Council governs without a head.')).toBe(true);
     vacant.powerStructure.factions.push({ faction: 'Noble Claimant Ivo', power: 10 }, { faction: 'Noble Claimant Mira', power: 9 });
     expect(governanceAccountOf(vacant).text.startsWith('No one holds the seat at Polaovo. Noble Claimant Ivo and Noble Claimant Mira contend for it.')).toBe(true);
   });
@@ -148,13 +149,15 @@ describe('the composed governance paragraph', () => {
     expect(g.fallback, 'the vignette is the fallback only where no estranged power is named').toBe(false);
     expect(g.text).toBe(
       // Re-keyed by condition (e), 2026-11-09: the arrangement this record's seed chooses (identity, not wording loosened).
-      'Polaovo is governed by the Corrupt Council, and Boleslav Davydov, the first councillor, holds its seat. '
-      + "Few in Polaovo still accept the Corrupt Council's right to rule, now that poverty and crime have cost it its standing. "
+      // Re-keyed by SW-9 (the owner's veto of the connective copy, 2026-11-09 03:5x): the joined sentences stand in sequence.
+      'Polaovo is governed by the Corrupt Council. Boleslav Davydov, the first councillor, holds its seat. '
+      + "Few in Polaovo still accept the Corrupt Council's right to rule. Poverty and crime have cost it its standing. "
       + "The Thieves' Guild has bought people inside the hall. "
       + 'The hall is at odds with the Religious Authorities. '
       + "Its arrests and its offices are no longer the hall's own to give, though it still sits.",
     );
-    expect(g.text.startsWith('Polaovo is governed by the Corrupt Council, and Boleslav Davydov')).toBe(true);
+    expect(g.text.startsWith('Polaovo is governed by the Corrupt Council. Boleslav Davydov')).toBe(true);
+    expect(g.text, 'no connective joins the seat to the ruler or the band to its causes (SW-9)').not.toMatch(/, and Boleslav|, now that|, which governs|, earned by|, won over by|Until it is filled/);
     expect(g.text).not.toMatch(/faction/i); // anchored: g.text is asserted to open on the seat by name on the line above
     expect(g.text).not.toMatch(/two of the|the gap widens|does not occupy|rather than being overthrown/i); // anchored: g.text is asserted to open on the seat by name two lines above
   });
@@ -195,7 +198,7 @@ describe('the composed governance paragraph', () => {
     vacant.powerStructure.factions[0].modifiers = ['vacant'];
     expect(governanceAccountOf(vacant).text.startsWith('No one holds the seat at Polaovo.')).toBe(true); // re-keyed by condition (b), 2026-11-09
     const unrecorded = { ...planted(), npcs: [] };
-    expect(governanceAccountOf(unrecorded).text.startsWith('Polaovo is governed by the Corrupt Council, and the record names no one in its seat.')).toBe(true);
+    expect(governanceAccountOf(unrecorded).text.startsWith('Polaovo is governed by the Corrupt Council. The record names no one in its seat.')).toBe(true);
     expect(governanceAccountOf({ name: 'Nowhere', powerStructure: { factions: [] } })).toBeNull();
     expect(governanceAccountOf(null)).toBeNull();
   });

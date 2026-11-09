@@ -120,34 +120,33 @@ export function arrangementOf(seed, slot, n) {
 function standingSentence(label, causes, place, ruler, pick) {
   const one = causes.length === 1;
   const by = capFirst(listOf(causes));
-  const list = listOf(causes);
   const a = pick(`standing:${label}:${causes.length ? 'causes' : 'bare'}`, causes.length ? 2 : 1);
   switch (label) {
     case 'Legitimacy Crisis':
       if (!causes.length) return `Few in ${place} still accept ${possessive(ruler)} right to rule.`;
       return a === 0
-        ? `${by} ${one ? 'has' : 'have'} cost ${ruler} its standing, and few in ${place} still accept its right to rule.`
-        : `Few in ${place} still accept ${possessive(ruler)} right to rule, now that ${list} ${one ? 'has' : 'have'} cost it its standing.`;
+        ? `${by} ${one ? 'has' : 'have'} cost ${ruler} its standing. Few in ${place} still accept its right to rule.`
+        : `Few in ${place} still accept ${possessive(ruler)} right to rule. ${by} ${one ? 'has' : 'have'} cost it its standing.`;
     case 'Contested':
       if (!causes.length) return `${capFirst(possessive(ruler))} right to rule is contested in ${place}.`;
       return a === 0
         ? `${by} ${one ? 'has' : 'have'} left ${possessive(ruler)} right to rule contested in ${place}.`
-        : `In ${place}, ${possessive(ruler)} right to rule is contested, and ${list} ${one ? 'is' : 'are'} the reason.`;
+        : `In ${place}, ${possessive(ruler)} right to rule is contested. ${by} ${one ? 'is' : 'are'} the reason.`;
     case 'Tolerated':
       if (!causes.length) return `${place} tolerates ${ruler}, and no more.`;
       return a === 0
         ? `${by} ${one ? 'keeps' : 'keep'} ${place} from more than tolerating ${ruler}.`
-        : `${place} tolerates ${ruler} and no more, and ${list} ${one ? 'is' : 'are'} the reason.`;
+        : `${place} tolerates ${ruler} and no more. ${by} ${one ? 'is' : 'are'} the reason.`;
     case 'Approved':
       if (!causes.length) return `${place} approves of ${ruler}.`;
       return a === 0
         ? `${by} ${one ? 'has' : 'have'} earned ${ruler} the approval of ${place}.`
-        : `${capFirst(ruler)} has the approval of ${place}, earned by ${list}.`;
+        : `${capFirst(ruler)} has the approval of ${place}. ${by} earned it.`;
     case 'Endorsed':
       if (!causes.length) return `${place} stands behind ${ruler}.`;
       return a === 0
         ? `${by} ${one ? 'has' : 'have'} won ${ruler} the backing of ${place}.`
-        : `${place} stands behind ${ruler}, won over by ${list}.`;
+        : `${place} stands behind ${ruler}. ${by} won it over.`;
     default:
       return '';
   }
@@ -250,15 +249,20 @@ export function governanceAccountOf(settlement) {
   /** @param {string} slot @param {number} n */
   const pick = (slot, n) => arrangementOf(seed, slot, n);
 
+  // THE CONNECTIVE COPY IS STRUCK (the owner, 2026-11-09 03:5x, "No." to the joining phrases proposed by
+  // OWNER-WORDS-DOSSIER item 3; SW-9): the seat, the band and its causes, the estranged powers and the
+  // consequence stand as plain sentences in sequence under the block law. No clause joins two of them
+  // (", and …", ", which governs …", ", now that …", ", earned by …", ", won over by …", "Until it is
+  // filled, …"); nothing else of the paragraph changed.
   // 1. THE SEAT.
   if (chain.npc && text(chain.npc.name)) {
     const role = text(chain.npc.role);
     const who = role ? `${text(chain.npc.name)}, ${role},` : text(chain.npc.name);
     const whoEnd = role ? `${text(chain.npc.name)}, ${role}` : text(chain.npc.name);
     sentences.push([
-      `${place} is governed by ${ruler}, and ${who} holds its seat.`,
-      `${who} holds the seat of ${ruler}, which governs ${place}.`,
-      `The seat of ${ruler}, which governs ${place}, is held by ${whoEnd}.`,
+      `${place} is governed by ${ruler}. ${who} holds its seat.`,
+      `${who} holds the seat of ${ruler}. ${capFirst(ruler)} governs ${place}.`,
+      `${capFirst(ruler)} governs ${place}. Its seat is held by ${whoEnd}.`,
     ][pick('seat', 3)]);
   } else if (chain.absence?.kind === 'missing_seat') {
     // THE VACANCY IS THE FIRST FACT (the chair's condition (b), 2026-11-09): 65 of the 1,000. Then what
@@ -267,9 +271,9 @@ export function governanceAccountOf(settlement) {
     const claimants = Array.isArray(chain.absence.claimants) ? chain.absence.claimants.map(text).filter(Boolean) : [];
     sentences.push(claimants.length
       ? `${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`
-      : `Until it is filled, ${ruler} governs without a head.`);
+      : `${capFirst(ruler)} governs without a head.`);
   } else {
-    sentences.push(`${place} is governed by ${ruler}, and the record names no one in its seat.`);
+    sentences.push(`${place} is governed by ${ruler}. The record names no one in its seat.`);
   }
 
   // 2. THE STANDING.
