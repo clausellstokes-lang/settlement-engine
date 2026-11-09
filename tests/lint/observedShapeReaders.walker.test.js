@@ -686,10 +686,15 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // re-dealt the year to 406/2561/407/80 (measured at 888636ce8 by this arm's corpus build); the J-19 cure (d131ab158:
     // ensureNpcStates no longer re-rolls a v3 card's corruption) re-dealt it to 396/2525/396/80 (measured at the tip by
     // this arm). Attribution of the second step CONFIRMED by the register scan at d131ab158 and its parent.
+    // 2026-11-09 (ALLEGIANCE-CAR2, re-keyed by identity at the schema-36 guild-push rung): accumulated 2525 → 2535,
+    // regional 80/80 → 81/81; final 396 and unique 396 HOLD. ONE cause: the guild's push (bbb1a4abc: castPowers.js
+    // weights hidden agents in the rank deal) re-deals the year. MEASURED by this arm's corpus builder per sha: the
+    // causes' parent 6694756af 396/2525/396/80, bbb1a4abc 396/2535/396/81, ce90cf16e (the derived hall) and the tip
+    // 396/2535/396/81 — the hall adds nothing of its own. Attribution CONFIRMED by the register scan at the same shas.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 396,
-      wizardNewsAccumulatedEntries: 2525,
+      wizardNewsAccumulatedEntries: 2535,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -707,11 +712,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 80, // 2026-11-08 ALLEGIANCE-CAR1 (the car's cause, then the J-19 pulse cure): 82 → 80; 2026-11-08 ALLEGIANCE-CAR1 (the veil merged): 81 → 82; 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80
+      regionalEventLog: 81, // 2026-11-09 ALLEGIANCE-CAR2 (the guild's push): 80 → 81; 2026-11-08 ALLEGIANCE-CAR1 (the car's cause, then the J-19 pulse cure): 82 → 80; 2026-11-08 ALLEGIANCE-CAR1 (the veil merged): 81 → 82; 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 80,
+      regionalEventLogUnique: 81,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);

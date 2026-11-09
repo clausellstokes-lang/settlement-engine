@@ -7,7 +7,12 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **35**: schema 34's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
+ * `BASELINE_SCHEMA` is **36**: schema 35's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
+ * definition UNCHANGED, re-governed to THE GUILD'S PUSH AND THE DERIVED HALL (ALLEGIANCE-CAR2, 2026-11-09): the rank
+ * deal weights hidden agents and the hall-capture state is derived at the coherence seam, so the corpus's year
+ * re-deals. Its full rationale lives beside `GUILD_PUSH_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_J19_PULSE_BASELINE_SCHEMA` is **35**: schema 34's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
  * definition UNCHANGED, re-governed to THE J-19 PULSE CURE (ALLEGIANCE-CAR1, 2026-11-08): the simulation no longer
  * re-rolls a v3 card's corruption, and the corpus's year re-deals. Its full rationale lives beside
  * `J19_PULSE_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
@@ -537,7 +542,10 @@ export const RETIRED_VEIL_MERGE_BASELINE_SCHEMA = 33;
 /** The RETIRED allegiance definition — schema 35's predecessor. Never redefined, never deleted, so a schema-34
  *  PREDECESSOR is still validated as schema 34. */
 export const RETIRED_ALLEGIANCE_BASELINE_SCHEMA = 34;
-export const BASELINE_SCHEMA = 35;
+/** The RETIRED J-19 pulse definition — schema 36's predecessor. Never redefined, never deleted, so a schema-35
+ *  PREDECESSOR is still validated as schema 35. */
+export const RETIRED_J19_PULSE_BASELINE_SCHEMA = 35;
+export const BASELINE_SCHEMA = 36;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1272,10 +1280,20 @@ export function validateSchema34Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 35's tagged envelope (the J-19 pulse cure), re-governed by schema 36 to the guild's
+ *  push and the derived hall. Re-bound to its own LITERAL now that the authority has moved to 36. */
+export function validateSchema35Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_J19_PULSE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema35Baseline(baseline) {
+export function validateSchema36Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
