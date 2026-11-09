@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d0d046029eda9292faa49eca15ae0e4190577a4f",
-  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR4 merge point)",
+  "measuredAtSha": "65a21239f3c12da601e290a47bdcf8d188e3f597",
+  "measuredBy": "SW-8 RENAME-POWERS second seat (session_01FbPLbfriarzNt6WB5KmjMR)",
   "date": "2026-11-09",
-  "note": "car 4 composed: the goals, the title secrets, write-goals and write-people-3 suites",
+  "note": "SW-8 C1 a1b63f95e added one live test title (tests/generators/recordBatteryUnnamed.test.js, the red-first arm for the Unnamed power detector): titles 28822 -> 28823; bisected: green at bd07005b9, red from a1b63f95e on, the figure unmoved by C2-C10",
   "files": 3138,
   "parked": 387,
   "credited": 2751,
-  "titles": 28822,
+  "titles": 28823,
   "suiteTitles": 7752
 }
