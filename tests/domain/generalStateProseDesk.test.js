@@ -116,7 +116,7 @@ const BLOCK_POOLS = Object.freeze({
   // The history chapter (DESK-GEN2 car 1).
   'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 10,
   // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
-  'DS-GEN-11': 6, 'DS-HK-1': 11,
+  'DS-GEN-11': 5, 'DS-HK-1': 11, // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool leaves (6 -> 5)
   // The notable connection (DESK-GEN2 car 4).
   'DS-REL-2': 3,
   // Why these workshops (DESK-GEN3 car 1).
@@ -831,17 +831,26 @@ describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dime
     expect(routePools.length).toBe(5);
     const armToPool = new Map();
     for (const route of ['crossroads', 'river', 'port', 'isolated', 'road', 'mountain_pass', 'mountain_road', 'desert_road', '']) {
-      for (const terrainType of [null, 'riverside', 'coastal']) {
+      for (const terrainType of [null, 'riverside', 'coastal', 'mountain']) {
         for (const hasFoodDeficit of [true, false]) {
+          // STYLE-2 FIRST-IMPRESSIONS (A·O16, 2026-11-09): the docks flag is a producer input too —
+          // a port with no docks founds on the `ground` arm (or the river's, or the road's).
+          // (A no-docks port also lands on the river and road arms; those are mapped by their own
+          // routes, so only the arm it alone reaches is recorded from it.)
           const arm = originArmKey({ route, terrainType, hasFoodDeficit });
           armToPool.set(arm, originRoutePoolKey(route));
+          const noDocks = originArmKey({ route, terrainType, hasFoodDeficit, hasDocks: false });
+          if (noDocks === 'ground') armToPool.set(noDocks, originRoutePoolKey(route));
         }
       }
     }
     expect([...armToPool.keys()].sort()).toEqual([...ORIGIN_ARMS].sort());
     expect([...new Set(armToPool.values())].sort()).toEqual(routePools.sort());
-    // Each producer arm folds to the pool its own prefix names.
-    for (const [arm, pool] of armToPool) expect(pool, arm).toBe(arm.split('.')[0]);
+    // Each producer arm folds to the pool its own prefix names. ⚠ The `ground` arm (a port route
+    // with no docks) folds to DS-GEN-6's `port` pool, because the desk reads the ROUTE only — the
+    // same unread docks fact, at a second writer; recorded in STYLE-2-FIRST-IMPRESSIONS's
+    // "What stays" for SW-B1 (generalStateProse.js is outside that lane's manifest).
+    for (const [arm, pool] of armToPool) expect(pool, arm).toBe(arm === 'ground' ? 'port' : arm.split('.')[0]);
   });
 
   it('THE DEFICIT DIMENSION: both values fire, and an unmeasured town is neither', () => {
@@ -1348,7 +1357,10 @@ describe('the viability verdict and the hook framing', () => {
     expect(criticalIssuePoolKey(2, true)).toBe('criticalIssueCount: critical contradictions on the record');
     // The zero pool vouches for the record, so it needs the receipt's battery judgment
     // (lane SELF-VOUCH): passed → zero; contradicted → the contradiction pool; unasked → nothing.
-    expect(criticalIssuePoolKey(0, true)).toBe('criticalIssueCount zero');
+    // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool LEAVES — beside a by-design
+    // list it vouched falsely, and on a clean record the header already says COHERENT; the key
+    // resolves to no pool, so a battery-clean record prints no coherence line.
+    expect(criticalIssuePoolKey(0, true)).toBeNull();
     expect(criticalIssuePoolKey(0, false)).toBe('criticalIssueCount: critical contradictions on the record');
     expect(criticalIssuePoolKey(0), 'a record the battery never read vouched for').toBeNull();
     expect(criticalIssuePoolKey(undefined), 'an unmeasured record read as zero').toBeNull();
@@ -1357,7 +1369,7 @@ describe('the viability verdict and the hook framing', () => {
     // TOTAL the other way: the six pools are claimed by these three lenses and no other.
     expect([...new Set([
       viabilityVerdictPoolKey(true), viabilityVerdictPoolKey(false), viabilityVerdictPoolKey(undefined),
-      criticalIssuePoolKey(1), criticalIssuePoolKey(0, true), 'THE FIRST-SURVEY QUALIFICATION',
+      criticalIssuePoolKey(1), 'THE FIRST-SURVEY QUALIFICATION',
     ])].sort()).toEqual(poolsOf('DS-GEN-11').sort());
   });
 

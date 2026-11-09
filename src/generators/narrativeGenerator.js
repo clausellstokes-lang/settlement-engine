@@ -789,8 +789,9 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
     _config.magicExists !== false
     && Number(_config.priorityMagic ?? 50) > 0
   )
-    ? 'magical transport, sanctioned caravans, seasonal access, or patronage'
-    : 'sanctioned caravans, seasonal access, patronage, or emergency rationing';
+    // STYLE-2 FIRST-IMPRESSIONS (A·O16): the support list in plain words, not the channel names.
+    ? 'carriage by magic, the caravans that still come, the roads in a good season, or the favour of a patron'
+    : 'the caravans that still come, the roads in a good season, or the favour of a patron';
   lines.push(selectOriginBody({
     route,
     terrainType: _config.terrainType ?? null,

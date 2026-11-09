@@ -61,6 +61,39 @@ describe('#10 — the port reason is gated on a docks or wharf institution', () 
       expect(PORT_BODIES.has(reason), `terrain ${terrainType}: ${reason}`).toBe(false);
     }
   });
+  it('STYLE-2 A·O16: a port route without docks founds on the ground the record names, never "roadside"', () => {
+    // soak1k-0 (a mountain thorp), soak1k-5 (a metropolis on the plains), soak1k-7 (a desert hamlet):
+    // each printed a road reason ("Founded roadside…", "A road settlement…") under the strip's "port"
+    const cases = [['thorp', 'mountain', 'on the mountainside'], ['metropolis', 'plains', 'out on the open plain'], ['hamlet', 'desert', 'in the desert'], ['village', 'coastal', 'on the shore']];
+    for (const [tier, terrainType, ground] of cases) {
+      for (const seed of ['soak1k-0', 'soak1k-5', 'soak1k-7', 'a', 'b']) {
+        const [reason] = generateSettlementReason(tier, 'port', null, { terrainType, _seed: seed }, null, { hasDocks: false });
+        expect(reason, `${terrainType} ${seed}`).toContain(ground);
+        expect(reason).toMatch(/wharf|docks/);
+        expect(ORIGIN_POOLS.road.includes(reason), `${terrainType} ${seed}: a road reason`).toBe(false);
+      }
+    }
+  });
+  it('STYLE-2 A·O16 THROUGH THE PIPELINE: the port reason prints exactly where the roster holds docks (the flag was never read)', async () => {
+    // generateNarratives read `getInstFlags(...).hasPort`, which is undefined (the flag lives at
+    // `.inst.hasPort`), so hasDocks was false on every birth: a coastal town WITH "Docks/port
+    // facilities" printed a road reason. Both directions, over the real roster.
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const PORT_INFRA = /\b(?:port|docks?|harbou?r|shipyard|navy)\b/i;
+    const portBodies = new Set(Object.entries(ORIGIN_POOLS).filter(([arm]) => arm.startsWith('port.')).flatMap(([, pool]) => pool));
+    let withDocks = 0; let without = 0;
+    for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city']) {
+      for (let i = 0; i < 4; i++) {
+        const s = generateSettlementPipeline({ settType: tier, tier, tradeRouteAccess: 'port', culture: 'germanic' }, null, { seed: `sw-b2-docks-${tier}-${i}` });
+        const docks = (s.institutions || []).some((x) => PORT_INFRA.test(String(x?.name || '')));
+        const [reason] = s.settlementReason;
+        if (docks) { withDocks += 1; expect(portBodies.has(reason), `${tier} ${i} has docks: ${reason}`).toBe(true); }
+        else { without += 1; expect(portBodies.has(reason), `${tier} ${i} has no docks: ${reason}`).toBe(false); }
+      }
+    }
+    expect(withDocks, 'the corpus holds a port with docks').toBeGreaterThan(0);
+    expect(without, 'the corpus holds a port without docks').toBeGreaterThan(0);
+  }, 120_000);
   it('a riverside port route without docks takes the river reason', () => {
     const [reason] = generateSettlementReason('village', 'port', null, { terrainType: 'riverside' }, null, { hasDocks: false });
     expect(ORIGIN_POOLS.river).toContain(reason);

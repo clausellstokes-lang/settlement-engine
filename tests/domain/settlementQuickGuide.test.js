@@ -438,9 +438,31 @@ describe('composeSettlementQuickGuide', () => {
     }).identitySentence).toBe(
       'Testholm is a Norse-inspired town of 1,200 people, built around the Town hall and the water, on assembly and what the season allows.',
     );
-    // a culture whose phrase never says "the hall" is untouched by a seat
+    // a culture whose phrase never says "the hall" is untouched by a seat; STYLE-2 A·O2: a roster
+    // with no guild prints no guild (the record is read before the line speaks)
     expect(cultureScopeLine({ culturalIdentity: { key: 'germanic', label: 'Germanic-inspired' }, institutions: [{ name: 'Town hall' }] }))
-      .toBe('Germanic-inspired, built in timber and stone, and run by guild and estate.');
+      .toBe('Germanic-inspired, built in timber and stone, and run by its estates.');
+  });
+
+  it('STYLE-2 A·O2: the culture scope line reads tier, terrain and route before it speaks, and the seed picks its frame', () => {
+    // soak1k-11, Gankhuushari: a steppe metropolis of 93,360 printed "a pastoral life half-settled and half-moving"
+    const metropolis = cultureScopeLine({ tier: 'metropolis', culturalIdentity: { key: 'steppe', label: 'Steppe-inspired' }, config: { terrainType: 'mountain', tradeRouteAccess: 'mountain_pass' } });
+    expect(metropolis).toBe('Steppe-inspired, built on clan lines, held by clan and caravan.');
+    expect(cultureScopeLine({ tier: 'hamlet', culturalIdentity: { key: 'steppe', label: 'Steppe-inspired' } })).toMatch(/pastoral life/);
+    // soak1k-3, Al-karez: an Arabic river port read "the caravan road"
+    expect(cultureScopeLine({ tier: 'town', culturalIdentity: { key: 'arabic', label: 'Arabic-inspired' }, config: { terrainType: 'riverside', tradeRouteAccess: 'port' } }))
+      .toMatch(/on endowed institutions and the river trade\.$/);
+    // the seed chooses: frame 0 without one; the same seed the same frame forever; the facts never move
+    const greek = { culturalIdentity: { key: 'greek', label: 'Greek-inspired' }, config: { terrainType: 'riverside', tradeRouteAccess: 'road' } };
+    const lines = new Set();
+    for (let i = 0; i < 40; i++) {
+      const line = cultureScopeLine({ ...greek, _seed: `soak1k-${i}` });
+      expect(line).toBe(cultureScopeLine({ ...greek, _seed: `soak1k-${i}` }));
+      expect(line).toMatch(/^Greek-inspired\b.*agora, on riverside ground, and run by civic association\.$/i);
+      expect(line).not.toMatch(/harbou?r|hillside/);
+      lines.add(line);
+    }
+    expect(lines.size).toBe(5);
   });
 
   it('states how a settlement lives as a sentence, over every food-security label', () => {

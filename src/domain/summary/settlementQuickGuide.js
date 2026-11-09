@@ -20,6 +20,8 @@ import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
+import { resolveTerrain } from '../resolveTerrain.js';
+import { pickVariant } from '../../kernel/proseHash.js';
 import { voicedLineOf } from './tonightSheet.js';
 
 const INFLUENCE_RANK = Object.freeze({
@@ -199,11 +201,116 @@ function composeIdentity(settlement) {
  */
 export function cultureScopeLine(settlement) {
   const source = settlement && typeof settlement === 'object' ? settlement : {};
-  const phrase = seatIntoPhrase(scopePhrase(cleanText(source.culturalIdentity?.key), source), source);
+  const phrase = scopeAgainstRecord(
+    seatIntoPhrase(scopePhrase(cleanText(source.culturalIdentity?.key), source), source),
+    source,
+  );
   if (!phrase) return '';
   // `culturalIdentity` only: a second `culture` read would join the writerReach culture class.
   const label = cleanText(source.culturalIdentity?.label);
-  return sentence(label ? `${label}, ${phrase}` : upperLead(phrase));
+  if (!label) return sentence(upperLead(phrase));
+  // THE SEED CHOOSES (WIRING-RULINGS §8(3)): the same town prints the same frame forever; a record
+  // with no seed (every hand-built caller) gets frame 0, the line as it always read.
+  const seed = cleanText(/** @type {{ _seed?: unknown }} */ (source)._seed);
+  return sentence(pickVariant(SCOPE_LINE_FRAMES, seed ? `${seed}::culture-scope-line` : null)(label, phrase));
+}
+
+/**
+ * THE IDENTITY LINE'S FRAMES (STYLE-2-SURFACES A·O2; STYLE-RULINGS-2 B2): five vantages over the
+ * same two facts, the culture and its scope phrase as the record allows it. Five, not four: a
+ * power-of-two pool aliases under the FNV pick (the origin pools' own pin). Index 0 is the line
+ * as it always read. Every frame is FOR THE OWNER'S VETO.
+ * @type {ReadonlyArray<(label: string, phrase: string) => string>}
+ */
+const SCOPE_LINE_FRAMES = Object.freeze([
+  // [plain] the line as it always read
+  (label, phrase) => `${label}, ${phrase}`,
+  // [traveller] what shows on arrival
+  (label, phrase) => `${label}, and it shows: ${phrase}`,
+  // [local] where people live
+  (label, phrase) => `${label}; people here live in a place ${phrase}`,
+  // [newcomer] what you are told when you ask
+  (label, phrase) => `${label}. Ask about the place and you are told it is ${phrase}`,
+  // [official] the plain description, headed
+  (label, phrase) => `${label}: ${phrase}`,
+]);
+
+/**
+ * The ground a settlement stands on, in the scope line's words, from the ONE terrain read.
+ * @type {Readonly<Record<string, string>>}
+ */
+const SCOPE_GROUND = Object.freeze({
+  plains: 'on the open plain',
+  hills: 'on hillside ground',
+  forest: 'in forest country',
+  riverside: 'on riverside ground',
+  coastal: 'on the coast',
+  mountain: 'on mountain ground',
+  desert: 'on desert ground',
+});
+
+/** The tiers a herding life still fits (A·O2: "pastoral life half-moving" for a metropolis of 93,000). */
+const SMALL_TIERS = new Set(['thorp', 'hamlet', 'village']);
+
+/**
+ * THE SCOPE PHRASE READ AGAINST THE RECORD BEFORE IT SPEAKS (STYLE-2-SURFACES A·O2, the census law):
+ * each clause that claims a fact of the place — a harbour, the ground, the season, a herding life,
+ * a guild, a caravan road, earthworks — prints only where the record holds that fact, and is
+ * replaced by the record's own fact or struck where it does not. A record with no config is legacy
+ * and unread, as `isLandlocked` reads it: its phrase stands as it always did. Display-time only.
+ * @param {string} phrase @param {SettlementQuickGuideSource} source @returns {string}
+ */
+function scopeAgainstRecord(phrase, source) {
+  if (!phrase) return phrase;
+  const config = /** @type {{ config?: { terrainType?: string | null, terrainOverride?: string | null, tradeRouteAccess?: string | null } | null }} */ (source)?.config;
+  const tier = cleanText(source?.tier).toLowerCase();
+  const roster = Array.isArray(/** @type {{ institutions?: unknown }} */ (source)?.institutions);
+  let out = phrase;
+  // the tier: a herding life, and pasture, belong to the small places only
+  if (tier && !SMALL_TIERS.has(tier)) {
+    out = out.replace('built for a pastoral life half-settled and half-moving', 'built on clan lines')
+      .replace(', on pasture and earthwork', '');
+  }
+  // the guild: "guild and estate" only where the roster holds a guild
+  if (roster && out.includes('run by guild and estate') && !factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).guild) {
+    out = out.replace('run by guild and estate', 'run by its estates');
+  }
+  // earthworks: a defence fact of their own
+  if (roster && out.includes('on pasture and earthwork') && !factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).defence.walls) {
+    out = out.replace('on pasture and earthwork', 'on pasture');
+  }
+  if (!config || typeof config !== 'object') return out;
+  const terrain = resolveTerrain(config);
+  const water = waterAccessKind(terrain, config.tradeRouteAccess);
+  const route = cleanText(config.tradeRouteAccess).toLowerCase();
+  // the harbour: the sea only (a river town on a road has a landing at most, and the record names none)
+  if (water !== 'maritime') out = out.replace('the agora and the harbour', 'the agora');
+  // the ground: the record's terrain, never a fixed "hillside"
+  if (out.includes('on hillside ground and civic association')) {
+    const ground = terrain && Object.hasOwn(SCOPE_GROUND, terrain) ? `${SCOPE_GROUND[terrain]}, ` : '';
+    out = out.replace('on hillside ground and civic association', `${ground}and run by civic association`);
+  }
+  // the season has no record field (factsOf's own note): the Norse water line keeps its kin and oath
+  out = out.replace('on assembly and what the season allows', 'on kin, oath and the assembly');
+  // the river and the forest: each only where the record holds it
+  if (out.includes('between river and forest')) {
+    const forest = terrain === 'forest';
+    const by = water === 'river'
+      ? (forest ? 'between river and forest' : 'by the river')
+      : (forest ? 'between the sea and the forest' : 'by the sea');
+    out = out.replace('between river and forest', by);
+  }
+  // the caravan road: the road the record's route names
+  if (out.includes('and the caravan road')) {
+    out = route === 'isolated'
+      ? out.replace(' and the caravan road', '')
+      : water === 'maritime' && route === 'port'
+        ? out.replace('the caravan road', 'the sea trade')
+        : route === 'port' || route === 'river'
+          ? out.replace('the caravan road', 'the river trade')
+          : out;
+  }
+  return out;
 }
 
 /**
