@@ -456,6 +456,7 @@
       "key": "institutions",
       "label": "Institutions",
       "singular": "Institution",
+      "root": "institution",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -735,6 +736,7 @@
       "key": "services",
       "label": "Services",
       "singular": "Service",
+      "root": "service",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -948,6 +950,7 @@
       "key": "resources",
       "label": "Resources",
       "singular": "Resource",
+      "root": "resource",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -1109,6 +1112,7 @@
       "key": "stressors",
       "label": "Stressors",
       "singular": "Stressor",
+      "root": "stressor",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -1194,6 +1198,7 @@
       "key": "tradeGoods",
       "label": "Trade Goods",
       "singular": "Trade Good",
+      "root": "tradegood",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -1339,6 +1344,7 @@
       "key": "deities",
       "label": "Deities",
       "singular": "Deity",
+      "root": "deity",
       "lane": "living",
       "authorable": true,
       "fields": [
@@ -1544,6 +1550,7 @@
       "key": "traditions",
       "label": "Traditions",
       "singular": "Tradition",
+      "root": "tradition",
       "lane": "living",
       "authorable": true,
       "fields": [
@@ -1602,6 +1609,7 @@
       "key": "factions",
       "label": "Powers",
       "singular": "Power",
+      "root": "faction",
       "lane": "living",
       "authorable": true,
       "fields": [
@@ -1764,6 +1772,7 @@
       "key": "supplyChains",
       "label": "Supply Chains",
       "singular": "Supply Chain",
+      "root": "supplychain",
       "lane": "settlement",
       "authorable": false,
       "discovered": true,
