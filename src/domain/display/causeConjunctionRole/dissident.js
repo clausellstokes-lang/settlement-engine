@@ -14,324 +14,324 @@
 export const DISSIDENT_ROLE_CONTENT = {
   underfunded: {
     attributed: [
-      'The movement went broke, and the agitator found a patron; the crowds still gather at the agitator\'s call, but the call comes when the patron\'s interests need a crowd.',
-      'Outrage is expensive to organize, and someone else pays for it now; the agitator\'s targets have narrowed, oddly, to the patron\'s rivals.',
+      'The movement ran out of money, and the agitator found a patron. The crowds still come when the agitator calls, but the calls now come when the patron needs a crowd.',
+      'A patron pays for the movement\'s rallies now, and the agitator\'s targets have narrowed to the patron\'s rivals.',
     ],
     're-caused': [
-      'What first leashed the agitator has passed; the empty movement chest leashes them now, and the patron\'s coin decides where the anger points.',
+      'The agitator\'s first reason is gone, but now the movement\'s chest runs empty, and the patron\'s coin decides where the anger points.',
     ],
     reformed: [
       'The movement\'s funds recovered and the agitator returned the patron\'s money; the next speech named the patron and the targets bought, in order.',
       'With the chest refilled, the agitator came clean before the crowd; the aimed rallies were confessed, and the aim taken back.',
     ],
     historicized: [
-      'The movement can fund itself now, but the patron\'s coin still arrives and the targets still narrow; the poverty that excused it is over.',
+      'The movement can pay its own way again, but the agitator still takes the patron\'s coin and still aims the crowds at the patron\'s rivals.',
     ],
     'exposed-public': [
       'It is public that the crowds were aimed for a patron\'s coin, and the people who marched are learning whose errand they ran.',
-      'The funding is out: the agitator\'s outrage had an owner, and the owner\'s rivals have the receipts of every rally.',
+      'It is out that the agitator\'s outrage was paid for, and the patron\'s rivals know every rally that was aimed at them.',
     ],
     're-adjudicated': [
-      'The patron who held the movement is destroyed, but the chest is still empty, and a new purse has already reached the agitator.',
+      "Whoever paid the agitator before is gone, but now the movement's chest runs empty, and the agitator takes money from whoever offers it.",
     ],
   },
   'chain-starved': {
     attributed: [
-      'Paper and ink stopped arriving with everything else, and the movement\'s press runs on a stranger\'s supply; the pamphlets print what they always printed, minus whatever the supplier strikes out.',
-      'The press cannot run without stock, and only one hand still provides it; the agitator\'s sentences have been growing careful in places, and the places map to the supplier\'s interests.',
+      'Paper and ink stopped coming with everything else, and the movement\'s press now runs on one outside supplier. The pamphlets print what they always did, minus whatever the supplier strikes out.',
+      'The press cannot run without paper, and only one supplier still provides it. The agitator\'s pamphlets have grown careful in places, and those places are the supplier\'s business.',
     ],
     're-caused': [
-      "The agitator's first leash has passed; the starved press leashes them now, and the supplier's pencil edits what the movement may say.",
+      "The agitator's first reason is gone, but now the press runs short of paper, and the supplier cuts what the movement may print.",
     ],
     reformed: [
       'The supply lines reopened and the agitator bought stock at market; the struck passages were reprinted first, in their original words.',
       'With paper flowing again, the agitator came clean; the edited pamphlets were listed, and the censored lines read aloud at the next gathering.',
     ],
     historicized: [
-      'The supply lines are mended, but the pamphlets still avoid the old places; the supplier\'s pencil is gone and the caution stayed.',
+      'The supply roads are open again, but the agitator\'s pamphlets still steer around the supplier\'s business.',
     ],
     'exposed-public': [
       'It is public that the movement\'s pamphlets were edited by their paper supplier, and the readers are comparing editions.',
-      'The struck passages are out: the agitator traded the movement\'s voice for its ink, and the strikeouts spell the supplier\'s name.',
+      'It is out that the agitator let the paper supplier cut the movement\'s pamphlets in exchange for ink, and the cut passages all point to the supplier.',
     ],
     're-adjudicated': [
-      'The old supplier is destroyed, but the lines are still cut, and the press\'s new stock arrives with a new pencil attached.',
+      'Whoever supplied the agitator before is gone, but now the supply roads are cut, and whoever sells the paper decides what the pamphlets leave out.',
     ],
   },
   depleted: {
     attributed: [
-      'The strike fund ran dry, and the agitator settled with the masters in a back room; the strike continues in public, theatrical and doomed, while the settlement pays its leader privately.',
-      'There is nothing left to sustain the resistance, so the agitator sold its ending; the masters know the strike\'s last day already, because they bought the date.',
+      'The strike fund ran dry, and the agitator settled with the masters in a back room. The strike goes on in public, and it will fail, while the settlement pays its leader in private.',
+      'With nothing left to keep the strike going, the agitator sold its ending. The masters already know the strike\'s last day, because they bought it.',
     ],
     're-caused': [
-      "The agitator's first leash passed; the empty fund leashes them now, and the sold settlement keeps paying its private installments.",
+      "The agitator's first reason is gone, but now the strike fund runs dry, and the masters' private payments keep coming.",
     ],
     reformed: [
       'The fund was replenished and the agitator tore up the private settlement in front of the crowd it had betrayed, and named the masters who bought it.',
       'With the movement funded again, the agitator came clean; the sold ending was unsold, and the strike became real again at its leader\'s cost.',
     ],
     historicized: [
-      'The fund recovered, but the private settlement stands; the desperation that signed it has passed and the installments continue.',
+      'The strike fund has recovered, but the private settlement stands, and the masters still pay the agitator to lose.',
     ],
     'exposed-public': [
       'It is public that the strike\'s ending was sold in a back room, and the strikers who starved for it know the date their leader set.',
-      'The settlement is out: the agitator was paid to lose, and the movement is reading the terms of its own defeat.',
+      'It is out that the agitator was paid to lose the strike, and the strikers are reading the terms of their own defeat.',
     ],
     're-adjudicated': [
-      'The buyers are destroyed, but the fund is still empty, and the settlement\'s installments have new payers and the same payee.',
+      "Whoever paid the agitator before is gone, but now the strike fund runs dry, and the masters' settlement money keeps coming.",
     ],
   },
   'trade-strangled': {
     attributed: [
-      'The embargo\'s misery feeds the movement, and the embargo\'s profiteers feed the agitator; the rage is real, and it is aimed, carefully, at everyone except the men running the blockade market.',
-      'Someone profits from the strangled trade, and that someone pays the agitator; the speeches burn the council, the merchants, the neighbors, and never once the blockade\'s beneficiaries.',
+      "The embargo's hardship feeds the movement, and the embargo's profiteers pay the agitator. The anger is real, and it is aimed at everyone except those running the blockade market.",
+      'Someone profits from the embargo, and that someone pays the agitator. The speeches attack the council, the merchants and the neighbors, and never those profiting from the blockade.',
     ],
     're-caused': [
-      "The agitator's first leash passed; the embargo's profiteers hold it now, and their coin keeps the crowd's anger pointed elsewhere.",
+      "The agitator's first reason is gone, but now the embargo chokes the trade, and its profiteers pay to keep the crowd's anger pointed elsewhere.",
     ],
     reformed: [
       'The embargo lifted and the agitator named the paymasters from the platform; the aimed-away speeches were confessed with the aim.',
       'When trade reopened, the agitator came clean; the profiteers lost their deflector, and the movement heard where its anger should have gone.',
     ],
     historicized: [
-      'The embargo is over, but the speeches still swerve around certain names; the coin that taught the swerve stopped coming.',
+      'The embargo is over, but the agitator\'s speeches still steer around the profiteers\' names.',
     ],
     'exposed-public': [
-      'It is public that the embargo\'s profiteers paid the agitator to aim the anger away, and the crowd is recalculating its old targets.',
-      'The deflection is out: the movement\'s rage was rented by the men it should have burned, and the rental receipts are circulating.',
+      'It is now known that the embargo\'s profiteers paid the agitator to aim the anger away from them, and the crowd is looking again at its old targets.',
+      'It is out that the people the movement should have turned on paid the agitator for its anger, and the word is going round the town.',
     ],
     're-adjudicated': [
-      'The old profiteers are destroyed, but the trade is still strangled, and the blockade\'s new beneficiaries have re-rented the deflection.',
+      'Whoever paid the agitator before is gone, but now the embargo chokes the trade, and whoever profits from it pays the agitator to steer the anger away.',
     ],
   },
   'levied-away': {
     attributed: [
-      'The agitator hides the levy\'s runaways and reports them too; the hiding earns the movement\'s trust and the reporting earns the muster\'s bounty, and the same names appear in both ledgers.',
-      'Every draft-dodger in town knows the agitator\'s safe houses, and so does the muster office; the agitator collects gratitude from one side and bounties from the other, in strict rotation.',
+      'The agitator hides the levy\'s runaways and reports them too. The hiding earns the movement\'s trust, the reporting earns the muster\'s bounty, and the same names are in both books.',
+      'Every draft-dodger in town knows the agitator\'s safe houses, and so does the muster office. The agitator is thanked by one and paid bounties by the other.',
     ],
     're-caused': [
-      "The agitator's first leash passed; the levy's bounties hold them now, and the safe houses keep filling with what the muster office pays for.",
+      "The agitator's first reason is gone, but now the levy calls the young away, and the safe houses fill with runaways the muster office pays for.",
     ],
     reformed: [
       'The companies came home and the agitator confessed both ledgers; the collected bounties went to the betrayed, whatever mercy followed.',
       'When the levy ended, the agitator came clean; the reported runaways were named an apology each, and the safe houses made safe in fact.',
     ],
     historicized: [
-      'The levy is over, but the agitator still keeps both ledgers by habit; the bounties that filled one have stopped.',
+      'The levy is over, but the agitator still keeps a list of every runaway who hid in the safe houses.',
     ],
     'exposed-public': [
       'It is public that the safe houses reported to the muster office, and the runaways who trusted them are back and asking questions.',
-      'The double ledger is out: the agitator sold the hidden to the hunters, and the movement is reading its own casualty list.',
+      'It is out that the agitator sold hidden runaways to the muster office, and the movement is counting who was taken.',
     ],
     're-adjudicated': [
-      'The syndicate fell, but the levy still musters, and the safe-house bounties have been re-funded by the new collectors.',
+      'Whoever paid the agitator before is gone, but now the levy calls the young away, and the muster office pays the bounties on the safe houses.',
     ],
   },
   'garrison-drained': {
     attributed: [
-      'With the garrison hollow, nothing stops a riot but the agitator\'s word, and the word is for sale; calm is invoiced to the frightened, and unrest to their rivals, at separate rates.',
-      'The watch cannot hold the square, so the agitator holds it instead, and rents it out; whether the town burns on any given night is a transaction now.',
+      'With the garrison emptied, nothing stops a riot but the agitator\'s word, and the word is for sale: calm to the frightened, unrest against their rivals, each at its own price.',
+      'The watch cannot hold the square, so the agitator holds it and rents it out. Whether the town burns on a given night depends on who has paid.',
     ],
     're-caused': [
-      "The agitator's first leash passed, but the garrison hollowed after, and the riot-or-calm trade now anchors the arrangement.",
+      "The agitator's first reason is gone, but now the garrison is hollowed out, and the agitator sells riots and calm by the night.",
     ],
     reformed: [
       'The garrison was refilled and the agitator retired the trade; the invoiced calm was refunded, and the square went back to belonging to no one.',
       'With the watch restored, the agitator came clean; the priced riots were confessed, and the movement chose its nights freely again.',
     ],
     historicized: [
-      'The garrison stands full again, but the agitator still prices the square; the vacuum that set the rates is filled.',
+      'The garrison is back to strength, but the agitator still sells riots and calm in the square.',
     ],
     'exposed-public': [
       'It is public that the town\'s riots and calms were invoiced, and the buyers of both are as exposed as the seller.',
-      'The rate card is out: the agitator sold unrest by the night while the garrison stood empty, and the burned streets have the dates.',
+      'It is out that the agitator sold riots by the night while the garrison stood empty, and the people of the burned streets have the dates.',
     ],
     're-adjudicated': [
-      'The old clients are destroyed, but the garrison is still drained, and the riot trade has new customers holding the agitator\'s calendar.',
+      "Whoever bought the agitator's riots before is gone, but now the garrison is hollowed out, and the agitator sells riots by the night to whoever pays.",
     ],
   },
   'siege-scarred': {
     attributed: [
-      'The war has the town on edge, and the agitator\'s speeches tip it on schedule; the schedule belongs to a paymaster whose grain and land deals ripen exactly when the panics do.',
-      'Fear moves markets, and the agitator moves fear; the war supplies the kindling, the speeches supply the spark, and a quiet purse supplies the timing.',
+      'The war has the town on edge, and the agitator\'s speeches set off panics on a schedule. A paymaster sets the schedule, and the paymaster\'s grain and land deals come due when the panics do.',
+      'The war gives the town reason to be afraid, and a quiet paymaster tells the agitator which days to stir the fear.',
     ],
     're-caused': [
-      "The agitator's first leash cleared, but the war pressed in, and the timed panics now finance the arrangement.",
+      "The agitator's first reason is gone, but now the war presses in, and a paymaster pays for each panic the speeches set off.",
     ],
     reformed: [
       'The war receded and the agitator published the schedule beside the paymaster\'s purchases; the correlation was the confession.',
       'With the pressure lifted, the agitator came clean; the timed speeches were owned, and the movement\'s voice unhitched from the market.',
     ],
     historicized: [
-      'The war moved on, but the speeches still track someone\'s ledger; the panics that paid have quieted.',
+      'The war has moved on, but the agitator\'s speeches still stir panics on the days the paymaster\'s deals need them.',
     ],
     'exposed-public': [
       'It is public that the wartime panics were scheduled, and the town is matching the agitator\'s speeches to the paymaster\'s purchases.',
-      'The timing is out: fear was produced to order while the war pressed, and the order forms carry the agitator\'s dates.',
+      'It is out that the panics were stirred up to order while the war pressed, and the agitator\'s speeches match the dates.',
     ],
     're-adjudicated': [
-      'The syndicate is broken, but the war still presses, and the panic schedule has been re-commissioned by new speculators.',
+      'Whoever paid for the panics before is gone, but now the war presses in, and whoever gains from a panic pays the agitator to set one off.',
     ],
   },
   occupation: {
     attributed: [
-      'The resistance follows the agitator, and the occupier follows the resistance, because the agitator draws them both the map; the movement is real, its leader is theirs, and the raids always come the night after the planning.',
-      'The occupation tolerates exactly one resistance, the agitator\'s, and the tolerance is not charity; controlled opposition is a service, and the fee is every serious plan reported before it ripens.',
+      'The resistance follows the agitator, and the occupier follows the resistance, because the agitator tells it where to look. The raids always come the night after the planning.',
+      'The occupation allows one resistance, the agitator\'s, and not out of kindness: the agitator reports every serious plan before it can happen.',
     ],
     're-caused': [
-      "What first leashed the agitator is gone; the occupier's tolerance leashes them now, and the reported plans are the rent.",
+      "The agitator's first reason is gone, but now the occupier holds the town and lets the movement stand, and the reported plans pay for it.",
     ],
     reformed: [
       'The occupier withdrew and the agitator stood before the movement with the whole account; the reported plans, the tolerated rallies, and the resignation offered with them.',
       'With the occupation ended, the agitator came clean; the movement learned why its boldest nights had always failed, from the one who sold them.',
     ],
     historicized: [
-      'The occupier is gone, but the agitator still leads as if reporting upward; the reader of the reports has marched away.',
+      'The occupier is gone, but the agitator still writes down every serious plan the movement makes, as if for the occupier.',
     ],
     'exposed-public': [
       'It is public that the resistance\'s plans reached the occupier before they ripened, and the survivors of the failed nights know the courier now.',
-      'The controlled opposition is out: the movement was the occupier\'s instrument with the agitator\'s hand on it, and the movement has read the fee schedule.',
+      'It is out that the movement was the occupier\'s tool with the agitator in charge, and the members now know what the agitator was paid.',
     ],
     're-adjudicated': [
-      "The agitator's old paymaster is destroyed, but the occupier remains, and the tolerance has been re-extended on the standing terms.",
+      "Whoever paid the agitator before is gone, but now the occupier holds the town, and it lets the movement stand for the same reported plans.",
     ],
   },
   'conduct-drift': {
     attributed: [
-      'A dark patron loves the mob\'s work, and the agitator supplies it; the fires are called justice from the platform, and the patron pays for each one in favor and following.',
-      'The movement\'s violence has a sponsor now; a patron that counts the burnings as offerings rewards the agitator, and the targets have started serving the theology more than the cause.',
+      'A dark patron rewards the mob\'s fires, and the agitator supplies them. From the platform they are called justice, and the patron pays for each one in favor and followers.',
+      'A patron that counts the burnings as offerings rewards the agitator, and the targets now suit the patron more than the movement\'s grievances.',
     ],
     're-caused': [
-      "The agitator's first cause resolved, but a patron that rewards the deed adopted the mob, and its favor now picks the nights.",
+      "The agitator's first reason is gone, but now a dark patron rewards the fires, and its favor picks the nights.",
     ],
     reformed: [
       "The patron's shadow lifted and the agitator called off the fires; unsponsored, they read as arson, and the platform said so.",
       'With the rewarding patron gone, the agitator came clean; the offered burnings were confessed, and the movement\'s anger unhitched from the altar.',
     ],
     historicized: [
-      'The patron is gone, but the mob still burns on the old calendar; the theology lapsed and the appetite did not.',
+      'The dark patron is gone, but the agitator still sends the mob out to burn on the patron\'s nights.',
     ],
     'exposed-public': [
-      'It is public that the mob\'s fires were offerings, and the town is re-reading each burning as liturgy with the agitator presiding.',
-      'The sponsorship is out: a dark patron paid for the riots\' worst nights, and the movement has learned what its justice was feeding.',
+      'It is now known that the mob\'s fires were offerings, with the agitator leading them, and the town is looking again at every burning.',
+      "It is out that a dark patron paid for the riots' worst nights, and the movement knows now who it was burning for.",
     ],
     're-adjudicated': [
-      "The syndicate fell, but the patron that rewards the deed still stands, and the mob's calendar passed into its keeping.",
+      "Whoever paid the agitator before is gone, but now a dark patron rewards the fires, and the agitator sends the mob out on its nights.",
     ],
   },
   'conversion-pressure': {
     attributed: [
-      'The rival faith funds the dissent, and the dissent has learned its donor\'s accent; the grievances are local, the pamphlets\' doctrine is not, and the agitator is paid to not notice the difference.',
-      'The movement\'s money crosses the border with its new ideas; the rival mission underwrites the agitator, and the sermons inside the speeches grow less subtle by the month.',
+      'The rival faith funds the movement. The grievances are local, the pamphlets\' doctrine is the mission\'s, and the agitator is paid not to mention it.',
+      'The movement\'s money comes from across the border with new ideas. The rival mission pays the agitator, and the speeches sound more like sermons each month.',
     ],
     're-caused': [
-      "The agitator's first leash passed; the rival faith's underwriting replaced it, and the imported doctrine keeps arriving with the funds.",
+      "The agitator's first reason is gone, but now a rival faith presses in, and its money comes with its doctrine.",
     ],
     reformed: [
       'The rival faith withdrew and the agitator returned the underwriting; the borrowed doctrine was cut from the pamphlets, publicly, page by page.',
       'When the conversion pressure broke, the agitator came clean; the funded sermons were confessed, and the movement\'s grievances spoke in their own accent again.',
     ],
     historicized: [
-      'The rival faith gave up the town, but the pamphlets still carry its accent; the underwriting ended and the doctrine settled in.',
+      'The rival faith has given up on the town, but the agitator\'s pamphlets still preach its doctrine to the movement.',
     ],
     'exposed-public': [
-      'It is public that the dissent was underwritten by the rival mission, and the marchers are re-reading their own slogans for the foreign hand.',
-      'The underwriting is out: the movement\'s voice was rented to a conversion, and both congregations recognize the phrasing now.',
+      'It is now known that the rival mission paid for the movement, and the marchers see that their slogans were its words.',
+      'It is out that the movement spoke for a foreign faith for pay, and both congregations now recognize the words.',
     ],
     're-adjudicated': [
-      'The old patron is gone, but the rival faith still presses, and the underwriting has resumed from a successor purse.',
+      'Whoever paid the agitator before is gone, but now a rival faith presses in, and its money for the movement has started coming.',
     ],
   },
   secularization: {
     attributed: [
-      'The movement swears its members on things no one believes anymore, and the agitator counts on it; the common purse leaks toward its keeper, because the oath over it is furniture now.',
-      'With the faith gone cold, the movement\'s vows bind no one, least of all its leader; the agitator spends the common fund like a private one, and the accounting is rhetorical.',
+      'The movement swears its members on a faith no one keeps anymore, and the agitator counts on it: the common purse leaks into the agitator\'s pocket, because the oath over it means nothing now.',
+      'With the faith gone cold, the movement\'s vows bind no one, least of all its leader. The agitator spends the common fund as a private one, and no one keeps count.',
     ],
     're-caused': [
-      "The agitator's first cause resolved, but the faith went cold behind it, and with the vows dead, the purse simply kept leaking.",
+      "The agitator's first reason is gone, but now the faith has gone cold, the vows mean nothing, and the agitator keeps taking from the purse.",
     ],
     reformed: [
       'The faith revived and the vows with it; the agitator restored the leaked funds and re-swore the oath over the purse, witnessed.',
       'When belief returned, the agitator came clean; the private spending was confessed to the movement, and the purse given a second keeper.',
     ],
     historicized: [
-      'The faith warmed again, but the purse still leaks; the cold season that excused the keeper has passed.',
+      'The faith has warmed again, but the agitator still takes from the movement\'s purse.',
     ],
     'exposed-public': [
-      'It is public that the movement\'s funds fed its leader while the vows meant nothing, and the members are auditing the years of speeches about greed.',
-      'The leak is out: the agitator preached sacrifice and practiced allowance, and the reviving congregation counts the movement\'s purse among its inquiries.',
+      'It is now known that the movement\'s money fed its leader while the vows meant nothing, and the members are going back over all those speeches about greed.',
+      'It is out that the agitator preached sacrifice and lived well on the movement\'s purse, and the returning congregation is asking questions.',
     ],
     're-adjudicated': [
-      "The agitator's paymaster fell, but the faith is still cold, and no revived vow guards the purse from its keeper.",
+      "Whoever paid the agitator before is gone, but now the faith has gone cold, and no vow keeps the agitator out of the purse.",
     ],
   },
   'clergy-scandal': {
     attributed: [
-      'The clergy\'s scandal is the agitator\'s best material, and the temple pays to keep it material only; the attacks stay rhetorical by arrangement, and the arrangement is priced monthly.',
-      'The agitator leads the outrage against the tainted priests and moderates it too; the temple pays for the moderation, and the crowd never learns why the marches stop at the temple square.',
+      'The clergy scandal is the agitator\'s best material, and the temple pays each month to keep the attacks to speeches.',
+      'The agitator leads the outrage against the disgraced priests and holds it back too. The temple pays for that, and the crowd never learns why the marches stop at the temple square.',
     ],
     're-caused': [
-      "The agitator's first leash resolved, but the tainted priesthood offered a steadier one, and the moderation fees now hold the arrangement.",
+      "The agitator's first reason is gone, but now the priesthood is tainted, and the temple pays the agitator to stop the marches short of its doors.",
     ],
     reformed: [
       'The priesthood was cleansed and the agitator confessed the moderation; the fees were returned, and the last march went all the way to the doors.',
       "With the clergy's scandal resolved, the agitator came clean; the priced restraint was owned before the crowd that had wondered at it.",
     ],
     historicized: [
-      'The temple was set in order, but the moderation fees still arrive; the outrage they blunted has burned out on its own.',
+      'The temple has been set in order and the outrage has burned out, but the temple\'s payments to the agitator still come.',
     ],
     'exposed-public': [
       'It is public that the temple paid the agitator to blunt the marches, and the crowd knows now why its anger always stopped at the square.',
-      'The moderation is out: the agitator sold the movement\'s restraint to its target, and both invoice books are open.',
+      'It is out that the agitator took the temple\'s money to hold the movement back, and both sets of accounts are open.',
     ],
     're-adjudicated': [
-      "The syndicate is gone, but the priesthood's taint remains, and the moderation retainer has been assumed by new hands.",
+      'Whoever paid the agitator before is gone, but now the priesthood is tainted, and the temple pays the agitator to keep the unrest small.',
     ],
   },
   captured: {
     attributed: [
-      'The syndicate owns the mob the way it owns the offices; the agitator\'s riots bloom wherever the crews need the watch looking elsewhere, and the timing is never the movement\'s idea.',
-      'The movement believes it chooses its nights; the syndicate chooses them, and pays the agitator for the belief; every march is a diversion first and a cause second.',
+      'The underworld owns the mob as it owns the offices. The agitator\'s riots break out wherever the crews need the watch looking elsewhere.',
+      'The movement believes it chooses its nights. The underworld chooses them and pays the agitator, and every march covers a crime first.',
     ],
     're-caused': [
-      "The agitator's old leash resolved, but the underworld holds the town now, and a crowd it can aim is not an asset it releases.",
+      "The agitator's first reason is gone, but now the underworld holds the offices, and it will not let go of a crowd it can aim.",
     ],
     reformed: [
       'The capture was broken and the agitator confessed the diversions; the movement learned which of its nights had been cover, and for what.',
       "With the syndicate's grip broken, the agitator came clean; the aimed marches were named, and the movement's calendar returned to its own hands.",
     ],
     historicized: [
-      'The capture was broken, but the marches still bloom on useful nights; the crews that used them are gone and the pattern persists.',
+      'The underworld\'s hold on the offices is broken, but the agitator still calls marches on nights that suit a thief.',
     ],
     'exposed-public': [
       'It is public that the riots were diversions for the syndicate\'s work, and the movement is matching its proudest nights to the burglaries.',
-      'The aimed crowd is out: the agitator rented the movement to the underworld by the night, and the town has both calendars.',
+      'It is out that the agitator rented the movement to the underworld by the night, and the town can match the marches to the crimes.',
     ],
     're-adjudicated': [
-      'The syndicate that aimed the crowds is destroyed, but the offices are still captured, and the new holders have already booked a march.',
+      "Whoever aimed the agitator's crowds before is gone, but now the underworld holds the offices, and the agitator calls marches on its nights.",
     ],
   },
   scandal: {
     attributed: [
-      'The scandal handed the agitator a sword, and the agitator sells the not-swinging; the implicated pay to stay out of the speeches, and the speeches grow strangely selective.',
-      'Exposure is the movement\'s weapon, and its leader has priced it; the scandal\'s names come out of the agitator\'s mouth or stay in the agitator\'s strongbox, depending on the week\'s receipts.',
+      'The scandal gave the agitator names to shout, and the agitator sells silence instead. Those implicated pay to stay out of the speeches.',
+      'The agitator decides whose names from the scandal are spoken from the platform, and whose stay locked in the agitator\'s strongbox, by who has paid that week.',
     ],
     're-caused': [
-      "The agitator's first leash cleared, but the scandal broke behind it, and the not-naming trade now sustains the arrangement.",
+      "The agitator's first reason is gone, but now a scandal has broken, and the agitator sells silence to the names in it.",
     ],
     reformed: [
       'The scandal burned out and the agitator emptied the strongbox from the platform; every withheld name, and the fee that had withheld it.',
       'When the scandal settled, the agitator came clean; the selective speeches were confessed, and the protected names read at last.',
     ],
     historicized: [
-      'The scandal is old news, but the strongbox still takes deposits; the fear that filled it has thinned.',
+      'The scandal has died down, but people still pay the agitator to keep their names out of the speeches.',
     ],
     'exposed-public': [
       'It is public that the scandal\'s names were priced out of the speeches, and the crowd is learning who paid for its ignorance.',
-      'The not-naming trade is out: the agitator monetized the movement\'s silence, and the protected are as furious as the deceived.',
+      'It is out that the agitator sold the movement\'s silence, and those who paid are as angry as those who were fooled.',
     ],
     're-adjudicated': [
-      "The syndicate is broken, but the scandal's economy survives, and the strongbox has new depositors and the same keeper.",
+      'Whoever paid the agitator before is gone, but now a scandal has broken, and whoever is named in it pays the agitator to keep their names unspoken.',
     ],
   },
 };
