@@ -54,8 +54,12 @@ export function recordTextSurfaces(settlement) {
   return { all: [...rest, ...town].join('\n'), town: [...town].join('\n') };
 }
 
-/** A placeholder faction name ("Claimant Bloc A", "Rival Faction B", "Unknown Faction"), the soak's A-10 reading. */
-const PLACEHOLDER_FACTION = /\b(?:Bloc|Faction) [A-Z]\b|Unknown Faction/;
+/**
+ * A placeholder faction name ("Claimant Bloc A", "Rival Faction B", "Unknown Faction"), the soak's A-10
+ * reading; and the stand-in the owner's rename map gave them all (SW-8 RENAME-POWERS, 2026-11-09):
+ * "Unnamed power" (with or without a trailing number). The old spellings stay matched for saved towns.
+ */
+const PLACEHOLDER_FACTION = /\b(?:Bloc|Faction) [A-Z]\b|Unknown Faction|^Unnamed power(?: \d+)?$/;
 /** A role standing where a name should be ("The Guildmaster"), the soak's A-10 reading. */
 const ROLE_ONLY_NAME = /^The [A-Z]/;
 
