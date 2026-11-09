@@ -645,17 +645,17 @@ function summaryForImpact(impact, transition, names, channels) {
   // what, by which road, and how it stands, without restating the headline's words.
   if (impact.kind === 'relief') {
     if (transition === 'applied' || transition === 'resolved') {
-      return `Help from ${source} has reached ${town} ${road}${goods ? `, bringing ${goods}` : ''}.`;
+      return `Help from ${source} has reached ${target} ${road}${goods ? `, bringing ${goods}` : ''}.`;
     }
-    if (transition === 'expired' || transition === 'ignored') return `${leadCap(source)} sent help ${road}, but it never reached ${town}.`;
-    return `${leadCap(source)} is sending help to ${town} ${road}${goods ? `, bringing ${goods}` : ''}.`;
+    if (transition === 'expired' || transition === 'ignored') return `${leadCap(source)} sent help ${road}, but it never reached ${target}.`;
+    return `${leadCap(source)} is sending help to ${target} ${road}${goods ? `, bringing ${goods}` : ''}.`;
   }
-  if (transition === 'ready') return `${what} is close to reaching ${town}, coming from ${source} ${road}${atStake}.`;
-  if (transition === 'applied') return `${what} has reached ${town} from ${source} ${road}${atStake}.`;
+  if (transition === 'ready') return `${what} is close to reaching ${target}, coming from ${source} ${road}${atStake}.`;
+  if (transition === 'applied') return `${what} has reached ${target} from ${source} ${road}${atStake}.`;
   if (transition === 'resolved') return `${town} is through ${phrase} that came from ${source}.`;
   if (transition === 'ignored') return `${town} paid no heed to ${phrase} from ${source}.`;
-  if (transition === 'expired') return `${what} from ${source} died out before it reached ${town}.`;
-  return `Word has come to ${town} of ${phrase} in ${source}, travelling ${road}${atStake}.`;
+  if (transition === 'expired') return `${what} from ${source} died out before it reached ${target}.`;
+  return `Word has come to ${target} of ${phrase} in ${source}, travelling ${road}${atStake}.`;
 }
 
 /**
