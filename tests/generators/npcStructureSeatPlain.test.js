@@ -62,3 +62,4 @@ readsPlain('crafts', /commercial|operat|infrastructure|regulatory|distribution c
 readsPlain('religious', /pastoral|clerical|endorsement|intermediar|encroach|endowment|institution|welfare|stabiliz/i);
 readsPlain('criminal', /criminal interests|operat|optimal|hierarchy|enforcement|network|architect|threshold|profiteering|exploitation|moral clarity/i);
 readsPlain('magic', /arcane|institution|indispensab|bureaucra|leverage|deploy|scope of/i);
+readsPlain('other', /hereditary|traditional (status|authority|claims|interest)|institution|opportunistic|illegitimate|scope of/i);

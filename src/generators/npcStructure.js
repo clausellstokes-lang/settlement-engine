@@ -397,21 +397,22 @@ reg('magic','stable',
 );
 
 // ── other (noble, etc.) ───────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the old families' seat-holders in plain words, the machinery struck; the goals untouched. The stable rows also serve the four conditions below, so they claim no calm of their own.
 reg('other',GOVERNANCE_FRACTURED,
-  { position:  'Holds hereditary or traditional status in a settlement where formal governance is under pressure. Traditional authority often gains relative standing when formal authority loses it.',
+  { position:  'Heads an old family while the seat fails, and old names count for more when the seat counts for less.',
     goal:      'Take back the old family rights the seat stripped away, while it is too weak to refuse.',
-    constraint:'Traditional claims that would have been dismissed under stable governance invite more scrutiny under conditions where everyone is watching for illegitimate power grabs.' },
-  { position:  'Holds traditional status secondary to the dominant traditional interest in a settlement with failing governance.',
+    constraint:'Old claims that would once have been laughed off are now watched by everyone looking for a grab at power.' },
+  { position:  'Belongs to a lesser family behind the leading one while the seat fails.',
     goal:      'Catch up with the greater family while the seat is too busy to keep them apart.',
-    constraint:'Advancing relative to the dominant traditional interest during a crisis positions the advance as opportunistic rather than earned.' }
+    constraint:'Getting ahead of the greater family now will look like seizing a chance, not earning a place.' }
 );
 reg('other','stable',
-  { tags: CALM_ONLY, position:  'Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.',
+  { tags: CALM_ONLY, position:  'Heads an old family while the seat\'s offices take up more of what the family once did.',
     goal:      'Keep the family\'s name honoured at every feast while the new offices take its old work.',
-    constraint:'Traditional authority in stable conditions is in slow structural decline relative to institutional authority.' },
-  { tags: CALM_ONLY, position:  'Holds a secondary traditional or hereditary position in a stable settlement.',
+    constraint:'The family\'s say slowly shrinks beside the offices that run things.' },
+  { tags: CALM_ONLY, position:  'Belongs to a lesser old family, behind the leading one.',
     goal:      'Marry, lend or befriend their way into the offices that now run things.',
-    constraint:'Usefulness to institutional actors defines the scope of permitted influence, not the traditional claim itself.' }
+    constraint:'The family has as much say as the offices find it useful to give, whatever its old claim.' }
 );
 // Fill remaining conditions for 'other' with stable variants
 for (const cond of ['corruption','food_crisis','economic_stress','contested']) {
