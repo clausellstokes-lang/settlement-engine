@@ -41,6 +41,7 @@ import {
   RETIRED_WAVE_VEIL_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -81,6 +82,7 @@ import {
   validateSchema36Baseline,
   validateSchema37Baseline,
   validateSchema38Baseline,
+  validateSchema39Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -390,7 +392,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 36: MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (one rung, two causes: the hidden allegiance and the J-19 re-deal; the car's own 33, the veil merge, is not re-minted).
     // ⭐ SCHEMA 37: MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (one rung, one cause: the guild's push re-deals the year, 13 rows retired).
     // ⭐ SCHEMA 38: MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (one rung, two causes: car 3's dial re-deals the year, 13 admitted and 5 retired; the bought watch retires 1).
-    expect(BASELINE_SCHEMA).toBe(38);
+    // ⭐ SCHEMA 39: MERGE-TRAIN at the ALLEGIANCE-CAR4 merge (one rung, two causes: the goals rebuilt — 7 admitted, 4 repaired, 16 uncured instrument erosion — and the fingerprint re-based, 1 admitted).
+    expect(BASELINE_SCHEMA).toBe(39);
+    expect(RETIRED_TRAIN_CAR3_BASELINE_SCHEMA).toBe(38);
     expect(RETIRED_TRAIN_CAR2_BASELINE_SCHEMA).toBe(37);
     expect(RETIRED_TRAIN_CAR1_BASELINE_SCHEMA).toBe(36);
     expect(RETIRED_WAVE_VEIL_BASELINE_SCHEMA).toBe(35);
@@ -772,6 +776,13 @@ function validSchema37Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-38 envelope, pinned to its own LITERAL number (the allegiance-car4 rung). */
+function validSchema38Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_TRAIN_CAR3_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -1107,9 +1118,14 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // ⭐ 37 IS RETIRED at the schema-38 rung (MERGE-TRAIN, ALLEGIANCE-CAR3) and validates its OWN literal.
     const trainCar2 = validSchema37Baseline_fixture();
     expect(validateSchema37Baseline(trainCar2)).toBe(trainCar2);
-    expect(validateSchema38Baseline(live)).toBe(live);
     expect(() => validateSchema37Baseline(live)).toThrow(/is not schema 37/);
     expect(() => validateSchema38Baseline(trainCar2)).toThrow(/is not schema 38/);
+    // ⭐ 38 IS RETIRED at the schema-39 rung (MERGE-TRAIN, ALLEGIANCE-CAR4) and validates its OWN literal.
+    const trainCar3 = validSchema38Baseline_fixture();
+    expect(validateSchema38Baseline(trainCar3)).toBe(trainCar3);
+    expect(validateSchema39Baseline(live)).toBe(live);
+    expect(() => validateSchema38Baseline(live)).toThrow(/is not schema 38/);
+    expect(() => validateSchema39Baseline(trainCar3)).toThrow(/is not schema 39/);
     expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema31Baseline(peopleCast)).toThrow(/is not schema 31/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);
