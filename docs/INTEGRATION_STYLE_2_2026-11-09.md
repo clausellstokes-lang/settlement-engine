@@ -112,7 +112,7 @@ Points 19–22 are done (§1). The line's tip is the commit carrying this sectio
 - **26 · SW-9b-A** at ddafd06c3 (§2). **27 · SW-9b-B**, cut by the chair from the point-24 tip, named later.
 - **The closing acts** as in §2, with **proseFamilyContract ×3** run with the news contracts (§3).
 
-**OPEN STOP for the chair (sent 2026-11-09 ~23:3x, the default carried):** point 22's FaithTab.jsx — SW-6's hint hunk sat inside the `!faithWillRender` block that TIER-PARITY-FIX V2 deleted; the default keeps the block deleted (the hint reaches the same viewers through FaithSection's composed teaser). If the chair rules otherwise, a new commit, never a rewrite.
+**The point-22 FaithTab STOP — RULED by the chair (23:20 UTC): option (a), the default, STANDS.** SW-6's R5 put the hint in both readers; its FaithTeaser already printed `hint` for every viewer, so the composed FaithTeaser is SW-6's surviving reader, not a substitute; option (b) refused (it would re-create the retired HIDDEN mirror); the phone floors' +1 re-key by cause ACCEPTED (the lane's +2 counted FaithTab's row, which fell with the block). For the record only, not a change: FaithTeaser prints the DM's authoring hint on the public dossier too (SW-6's own behaviour); whether `publicDossier` gates it is a SW-9b-B row the chair measures.
 
 **The third seat's addendum to the gate (read with the second's):**
 
