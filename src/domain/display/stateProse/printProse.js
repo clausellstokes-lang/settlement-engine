@@ -89,7 +89,7 @@ import { deriveFoodBalance, deriveGranaryOutlook } from '../dossierViewModel.js'
 import { populationTrendBand } from '../trendLens.js';
 import { normalizeStressor } from '../../worldPulse/stressorsCore.js';
 import { coupContenders, coupRiskLabel } from '../../rulingPowerCoup.js';
-import { structuralLensOf } from '../../spatial/cohesionWeave.js';
+import { seatLensOf } from '../../spatial/cohesionWeave.js'; // SW-7 (STYLE-2 B7): DS-POW-5 reads the seat
 import { collectPlotHooks } from '../../dossier/plotHooks.js';
 import { deriveEscalationClocks } from '../../hookEscalation.js';
 // The two desk readers the screen uses, imported rather than re-derived. See the docblock.
@@ -405,7 +405,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   const contenders = coupContenders(r);
   const power = powerStateProse(r, {
     ...(contenders ? { contenders, riskLabel: coupRiskLabel(contenders) } : {}),
-    structuralLens: structuralLensOf(r),
+    structuralLens: seatLensOf(r),
   }, opts);
 
   // ── THE DEFENSE DESK — mirrors DefenseTab.jsx:119-215 and ViabilityTab.jsx:47-52 ────

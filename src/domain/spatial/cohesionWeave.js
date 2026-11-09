@@ -286,6 +286,28 @@ export function structuralLensOf(settlement) {
   return structuralLens({ governingArchetype });
 }
 
+/**
+ * THE LENS OF THE SEAT — what kind of body HOLDS the seat, for the reader that says so in words.
+ *
+ * SW-7 POWER-SIDE (STYLE-2 B7, 2026-11-09). DS-POW-5's ruling-power pools are sentences about the SEAT ("The {seat} at
+ * {settlement} rules by its faith", "answers to one person"), and they were keyed off `structuralLensOf`, which reads the
+ * STRONGEST faction's category — the generosity kernel's question, not the seat's. On the twelve, a Noble Governorship
+ * whose strongest power was the clergy printed "rules by its faith", and a Grand Merchant Oligarchy "answers to one
+ * person". This reads the governing faction (`isGoverning`, the roster's own seat flag) and maps it through the SAME
+ * table; with no governing row it answers the strongest faction's lens, as before. `structuralLensOf` and its generosity
+ * consumer are untouched.
+ * @param {{powerStructure?: {factions?: ReadonlyArray<{power?: unknown, category?: unknown, isGoverning?: unknown}>|null}|null
+ *   }|null|undefined} settlement
+ * @returns {StructuralLens}
+ */
+export function seatLensOf(settlement) {
+  const factions = Array.isArray(settlement?.powerStructure?.factions)
+    ? settlement.powerStructure.factions
+    : [];
+  const seat = factions.find((f) => f?.isGoverning === true);
+  return seat ? structuralLens({ governingArchetype: String(seat.category || '') }) : structuralLensOf(settlement);
+}
+
 // ── §I THE FACET LAW — the entity-classification CHOKEPOINT (owner-ratified 2026-07-14) ──
 // docs/DESIGN_COHESION_WEAVE.md §I: "DECLARED OVER INFERRED." Every coherence consumer that
 // must classify a CUSTOM entity resolves it HERE (declared ?? inferred ?? kind-default),

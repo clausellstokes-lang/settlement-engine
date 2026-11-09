@@ -39,7 +39,7 @@ import { CRIMINAL_OP_ROLES, criminalOpEcon } from '../../src/domain/criminalOpRo
 import { COUP_RISK_LABELS, coupRiskLabel } from '../../src/domain/rulingPowerCoup.js';
 import { mirrorOf } from '../../src/domain/worldPulse/npcLadderState.js';
 import {
-  ECONOMIC_BASES, RULING_POWERS, structuralLens, structuralLensOf,
+  ECONOMIC_BASES, RULING_POWERS, structuralLens, structuralLensOf, seatLensOf,
 } from '../../src/domain/spatial/cohesionWeave.js';
 import { hasLadder, ladderInstabilityOf, ladderRungsOf } from '../../src/domain/townMap/ladderRead.js';
 import { hasPolitics, settlementBlocs as politicsBlocsOf } from '../../src/domain/display/politicsRead.js';
@@ -1259,6 +1259,29 @@ describe('DS-POW-5 — structuralLensOf is the ONE derivation, and it matches it
     expect(reachedBase.size).toBeGreaterThan(3);
     // The highest-power faction wins, not the first — the case the loop exists for.
     expect(structuralLensOf(cases[5]).rulingPower).toBe('criminal');
+  });
+});
+
+describe('DS-POW-5 — the seat\'s lens (SW-7 POWER-SIDE, STYLE-2 B7): the ruling pools speak of the body that HOLDS the seat', () => {
+  // soak1k-10 (Olympambelos) at 0f2e6c097: "The Noble Governorship at Olympambelos rules by its faith" — the strongest
+  // power was the clergy, the seat a noble governor's. The pools are sentences about the {seat}.
+  const nobleSeatClergyStrong = { name: 'Tarvel', powerStructure: { governingName: 'Noble Governorship', factions: [
+    { faction: 'Noble Governorship', category: 'noble', power: 30, isGoverning: true },
+    { faction: 'Religious Authorities', category: 'religious', power: 45 },
+  ] } };
+  it('reads the governing row, not the strongest; structuralLensOf keeps its own answer', () => {
+    expect(seatLensOf(nobleSeatClergyStrong).rulingPower).toBe('autocrat');
+    expect(structuralLensOf(nobleSeatClergyStrong).rulingPower).toBe('theocracy');
+  });
+  it('the desk on the seat\'s lens draws the autocrat pool, never the theocracy pool', () => {
+    expect(rulingPowerPoolKey(seatLensOf(nobleSeatClergyStrong))).toBe('autocrat');
+    const out = powerStateProse(nobleSeatClergyStrong, { structuralLens: seatLensOf(nobleSeatClergyStrong) },
+      { seed: 'seat-lens', audience: 'dm' });
+    expect(String(out.rulingStructure?.sentence ?? '')).not.toMatch(/faith|doctrine|heresy/i);
+  });
+  it('with no governing row it answers the strongest faction\'s lens, as before', () => {
+    const s = { name: 'T', powerStructure: { factions: [{ category: 'merchant', power: 60 }, { category: 'noble', power: 40 }] } };
+    expect(seatLensOf(s).rulingPower).toBe(structuralLensOf(s).rulingPower);
   });
 });
 
