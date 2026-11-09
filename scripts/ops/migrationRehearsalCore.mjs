@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 207;
+export const MIGRATION_TRAIN_REPO_HEAD = 208;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -733,6 +733,44 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'party-link-independent-idempotent-veiled',
+    from: 208,
+    to: 208,
+    // THE ENTRY THE LANE OMITTED (SW-B7a PARTY-LINK; written by STYLE-2-MERGE at its merge point on the chair's ruling of
+    // 17:2x): the purpose QUOTES the migration's own header, trimmed by elision only.
+    purpose: 'SW-B7a PARTY-LINK, from the migration\'s own header: "208 — the party link: idempotent, veiled, owner-aware, '
+      + 'independent of the listing … Recreates the five settlement party-link RPCs of migration 168 and derives 168\'s '
+      + '`visibility` column from the slug. The map RPCs … are untouched." (c) "an existing slug is returned unchanged with '
+      + 'no write at all; only rotate_settlement_unlisted_slug mints anew, only revoke_settlement_unlisted ends it." (d) '
+      + '"the read builds the dossier EXACTLY as get_gallery_dossier (147, 093\'s security model) does … and returns '
+      + 'gallery_share_dm and gallery_member_overrides." (f) "get_unlisted_dossier returns is_owner = (s.user_id = '
+      + 'auth.uid()), false for anon." (g) "share no longer touches is_public, is_featured or visibility-as-listing … The '
+      + 'column `visibility` is DERIVED: \'unlisted\' exactly when unlisted_slug is not null, held by a check constraint '
+      + 'after a backfill." The backfill UPDATE and the check constraint settlements_visibility_derived have no kind of '
+      + 'their own in this manifest; the constraint is carried on its table. DEPLOYMENT remains the owner\'s manual act '
+      + '(`supabase db push` plus the applied-head bump in that same act), after 207.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202–207, this wave\'s own @rollback annotation spells the whole reversal out, quoted: "re-create '
+        + 'share_settlement_unlisted, rotate_settlement_unlisted_slug, revoke_settlement_unlisted, get_unlisted_dossier '
+        + 'and list_my_unlisted_dossiers at their migration-168 bodies, and `alter table public.settlements drop '
+        + 'constraint if exists settlements_visibility_derived`. No data is lost either way: the backfill only re-states '
+        + 'visibility from unlisted_slug, and no slug is minted, moved or dropped by this migration." — which is why 208 '
+        + 'classifies as documented-manual-reversal rather than taking the wave policy.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: 'share_settlement_unlisted' }),
+      Object.freeze({ kind: 'function', name: 'rotate_settlement_unlisted_slug' }),
+      Object.freeze({ kind: 'function', name: 'revoke_settlement_unlisted' }),
+      Object.freeze({ kind: 'function', name: 'get_unlisted_dossier' }),
+      Object.freeze({ kind: 'function', name: 'list_my_unlisted_dossiers' }),
+      Object.freeze({ kind: 'table', name: 'settlements' }),
     ]),
   }),
 ]);
