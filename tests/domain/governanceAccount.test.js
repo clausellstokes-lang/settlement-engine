@@ -18,9 +18,9 @@ const SEAT = {
 };
 
 /** A planted record: the council governs; its ties to the other powers are the case's own. */
-function planted({ relationships = [], recentConflict = null, label = 'Legitimacy Crisis', breakdown = { prosperity: -20, safety: -12, defense: -1, food: 0 } } = {}) {
+function planted({ relationships = [], recentConflict = null, label = 'Legitimacy Crisis', breakdown = { prosperity: -20, safety: -12, defense: -1, food: 0 }, stress = [] } = {}) {
   return {
-    id: 'settlement.polaovo', name: 'Polaovo', tier: 'town', npcs: [SEAT],
+    id: 'settlement.polaovo', name: 'Polaovo', tier: 'town', npcs: [SEAT], stress: stress.map((type) => ({ type })),
     powerStructure: {
       governingName: COUNCIL,
       factions: [
@@ -44,6 +44,32 @@ const FRACTURED_VIGNETTE = (() => buildGovernanceLabels({
   governingFaction: COUNCIL, hasNobleInstitution: false,
   stressTypes: ['politically_fractured'], fallbackStressType: null,
 }).recentConflict)();
+
+const FAMINE_VIGNETTE = 'Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.';
+const TWO_ESTRANGED = [
+  { pair: [COUNCIL, "Thieves' Guild"], type: 'corrupted', captureState: 'corrupted' },
+  { pair: [COUNCIL, 'Religious Authorities'], type: 'tense' },
+];
+
+describe('the stress vignette is the event sentence (the chair\'s ruling on the STOP, 2026-11-09)', () => {
+  it('a famine town with two estranged powers prints the names AND the famine vignette, the vignette last', () => {
+    const g = governanceAccountOf(planted({ relationships: TWO_ESTRANGED, recentConflict: FAMINE_VIGNETTE, stress: ['famine'] }));
+    expect(g.text).toContain("The Thieves' Guild");
+    expect(g.text).toContain('The Religious Authorities');
+    expect(g.text.endsWith(FAMINE_VIGNETTE)).toBe(true);
+  });
+
+  it('a fractured town with names prints the names and NOT the fractured line', () => {
+    const g = governanceAccountOf(planted({ relationships: TWO_ESTRANGED, recentConflict: FRACTURED_VIGNETTE, stress: ['politically_fractured'] }));
+    expect(g.text).toContain("The Thieves' Guild");
+    expect(g.text).not.toContain(FRACTURED_VIGNETTE.slice(0, 30));
+  });
+
+  it('a fractured town under a graver stress closes on THAT stress\'s vignette (the vignette is the primary stress\'s)', () => {
+    const g = governanceAccountOf(planted({ relationships: TWO_ESTRANGED, recentConflict: FAMINE_VIGNETTE, stress: ['politically_fractured', 'famine'] }));
+    expect(g.text.endsWith(FAMINE_VIGNETTE)).toBe(true);
+  });
+});
 
 describe('the composed governance paragraph', () => {
   it('a record with two estranged powers NAMES them, the seat first, the causes before the band', () => {

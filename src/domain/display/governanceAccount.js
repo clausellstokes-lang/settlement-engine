@@ -15,8 +15,9 @@
  *      `corrupted` pair (bought, or captured), a `competitive` one (no longer answers to it), a `tense`
  *      one (at odds with it). Never a count without a name; the word "faction" is not used.
  *   4. THE CONSEQUENCE, in plain words, from the gravest of those ties.
- *   5. THE FALLBACK: where the record names no estranged power, the generator's own vignette
- *      (`powerStructure.recentConflict`) closes the paragraph instead.
+ *   5. THE VIGNETTE (`powerStructure.recentConflict`): under a stress other than politically_fractured it
+ *      closes the paragraph as its event sentence; the fractured and the unstressed lines print only as
+ *      the fallback, where the record names no estranged power.
  *
  * No contradicted-decision sentence is written: the record holds no named decision, and inventing one is
  * the thing this composer exists to refuse. Pure, zero-draw, total: the same record reads the same words
@@ -24,6 +25,7 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
+import { resolvePrimaryStress } from '../../generators/stressPriority.js';
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
@@ -215,10 +217,19 @@ export function governanceAccountOf(settlement) {
   else if (gravest === 'competitive') sentences.push('The hall still gives its orders, but it can no longer make them hold alone.');
   else if (gravest === 'tense') sentences.push('Nothing large is settled in the hall without bargaining with them first.');
 
-  // 5. THE FALLBACK: the record's own vignette, only where no estranged power is named.
+  // 5. THE VIGNETTE. The generator's vignette is its primary stress's (stressPriority.js's order, the
+  // generator's own). Under a stress OTHER than politically_fractured it is the EVENT sentence the style
+  // law asks for, and it closes the paragraph whatever else is named (the chair's ruling on the seat's
+  // STOP, 2026-11-09: 470 of the 1,000 lost theirs under the first reading). The fractured line
+  // ("two … have stopped coming to meetings") and the unstressed baseline line are the ones the names
+  // replace: they print only as the fallback, where no estranged power is named.
   const vignette = text(s.powerStructure?.recentConflict);
+  const stresses = (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
+    .map((x) => text(x && typeof x === 'object' ? x.type : x)).filter(Boolean);
+  const primary = resolvePrimaryStress(stresses);
+  const eventVignette = !!primary && primary !== 'politically_fractured';
   const fallback = estranged.length === 0 && !!vignette;
-  if (fallback) sentences.push(vignette);
+  if (vignette && (eventVignette || fallback)) sentences.push(vignette);
 
   return { text: sentences.join(' '), estranged, fallback };
 }
