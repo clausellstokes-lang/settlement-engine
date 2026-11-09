@@ -186,7 +186,7 @@ export const landing = {
     // 2026-11-07 (the people car's landing, PEOPLE-LAND second seat; an OWNER VETO POINT): re-grounded on the
     // timeline the cast derives (the priest's order, a rally for an institution, the fracture passed, the war
     // footing, the capture, the broken routes).
-    body2: 'Then advance time. In Cnocby’s first twelve weeks Étaín Sullivan set out to restore order and Fearghus O’Brien rallied supporters to take control of an institution; the religious conversion fracture passed, leaving its sectarian memory behind; by week five the village was on a war footing, by week nine the Elder Council had captured an institution, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
+    body2: 'Then advance time. In Cnocby’s first twelve weeks the village turned to the faith of Vael and Étaín Sullivan set out to restore order; by week two the village was on a war footing; the religious conversion fracture passed, leaving its sectarian memory behind; by week ten crime had taken hold of its streets, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause.',
     // The chronicle beside the realm map is the REGION's band, not the town's —
     // two cards that now say different things, and a reader needs to be told why.
     regionLine: 'Beside it, the region: what the neighbours did while Cnocby was busy.',

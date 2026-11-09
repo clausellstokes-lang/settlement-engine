@@ -134,10 +134,16 @@ export const fixture = {
         "from": "strained",
         "to": "critical",
         "tone": "danger",
-        "reason": "Public legitimacy 14 colors trust. Criminal pressure erodes communal trust."
+        "reason": "Public legitimacy 11 colors trust. Criminal pressure erodes communal trust."
       }
     ],
     "advance": [
+      {
+        "week": "Week 1",
+        "season": "the spring of year 1",
+        "headline": "Cnocby turns to the faith of Vael",
+        "text": "After a long contest of devotion, Vael has become the patron creed of Cnocby."
+      },
       {
         "week": "Week 2",
         "season": "the spring of year 1",
@@ -145,10 +151,10 @@ export const fixture = {
         "text": "Étaín Sullivan is out to restore order."
       },
       {
-        "week": "Week 3",
+        "week": "Week 2",
         "season": "the spring of year 1",
-        "headline": "Fearghus O'Brien rallies supporters",
-        "text": "Fearghus O'Brien is out to take control of an institution."
+        "headline": "Cnocby goes onto a war footing",
+        "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
         "week": "Week 4",
@@ -157,16 +163,10 @@ export const fixture = {
         "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet."
       },
       {
-        "week": "Week 5",
+        "week": "Week 10",
         "season": "the spring of year 1",
-        "headline": "Cnocby goes onto a war footing",
-        "text": "Cnocby is mustering its levies and doubling its watch."
-      },
-      {
-        "week": "Week 9",
-        "season": "the spring of year 1",
-        "headline": "Elder Council captures an institution",
-        "text": "Elder Council sees an opening to press council rule interests."
+        "headline": "Crime takes hold of Cnocby",
+        "text": "Thieves and racketeers are working Cnocby's streets in the open."
       },
       {
         "week": "Week 12",
@@ -185,8 +185,8 @@ export const fixture = {
       {
         "kind": "stressor",
         "tone": "war",
-        "week": "Week 4",
-        "text": "The faith of Korl broke its pact with Keshigordu, a betrayal its patron's nature made only a matter of time."
+        "week": "Week 2",
+        "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
         "kind": "trade",
