@@ -173,6 +173,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 3,
+        "guardPresence": 1,
         "no crisis: unrest": 1,
         "no threat": 2
       },
@@ -325,6 +326,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 3,
+        "no crisis: occupied, under_siege": 1,
         "no crisis: threat, unrest": 1
       },
       "undeclared": 0,
@@ -3197,7 +3199,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -3259,7 +3264,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8238,7 +8246,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8300,7 +8311,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8424,7 +8438,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8486,7 +8503,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8548,7 +8568,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8610,7 +8633,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 3,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8672,7 +8698,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8796,7 +8825,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 1,
+        "guardPresence": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -8858,7 +8890,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -9060,7 +9095,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "stress"
@@ -9102,7 +9137,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 1,
+        "guardPresence": 1,
+        "no guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -9160,7 +9199,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 2,
+        "guardPresence": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -67402,7 +67444,7 @@
       "subject": "override: MIGRATION, arrivals",
       "fields": [],
       "readingFunction": "militaryOverridePoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
