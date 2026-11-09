@@ -1,5 +1,7 @@
 import { deriveActiveCondition } from '../activeConditions.js';
 import { slugify } from '../../kernel/slugify.js';
+// STYLE-2 C2 (SW-12): the clearance summary's vantages, chosen by the house selection kernel.
+import { pickLine } from './proseSelection.js';
 
 /** @typedef {import('./pulseShapes.js').PulseOutcome} PulseOutcome */
 /** @typedef {import('./pulseShapes.js').PulseSnapshot} PulseSnapshot */
@@ -115,6 +117,13 @@ export function recurringWarConditionRecordMode({
  *   floor: number, tick: number }} args
  * @returns {PulseOutcome|null}
  */
+const CLEARED_SUMMARY = Object.freeze([
+  (/** @type {Record<string, string>} */ x) => `The worst of the war's weariness is over in ${x.name}; what is left will fade with time.`,
+  (/** @type {Record<string, string>} */ x) => `${x.name} is still tired of the war, but the weariness no longer deepens.`,
+  (/** @type {Record<string, string>} */ x) => `In ${x.name} the war still weighs, but a little less as time goes on.`,
+  (/** @type {Record<string, string>} */ x) => `${x.name}'s war-weariness has begun to ease, though its marks will take time to fade.`,
+]);
+
 export function warExhaustionClearanceOutcome({
   homeId,
   name,
@@ -135,8 +144,10 @@ export function warExhaustionClearanceOutcome({
     targetSaveId: String(homeId),
     severity: floor,
     headline: `${name}'s war exhaustion begins to lift`,
-    summary: `The war scar no longer renews its grip on ${name}, though its aftereffects continue fading.`,
-    reasons: ["The war's weariness has fallen below the level at which it renews itself; what is left only fades."],
+    // STYLE-2 C2 (SW-12, A2·146): the clearance in plain words, four vantages on one fact (the
+    // weariness no longer renews; what is left fades). The receipt restated the summary: struck.
+    summary: pickLine(CLEARED_SUMMARY, `world_outcome.war_exhaustion_cleared.${clearanceIdPart(homeId)}.${tick}`, { name }),
+    reasons: [],
     generatedAtTick: tick,
   };
 }
