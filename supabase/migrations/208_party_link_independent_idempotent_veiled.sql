@@ -4,7 +4,8 @@
 -- WRITTEN-NOT-DEPLOYED (standing law; applies via `supabase db push` at the deploy
 -- step, never from a lane). SW-B7a PARTY-LINK (the chair's brief STYLE-2-WAVE
 -- 2026-11-09, SW-B7 rows (c), (d), (f), (g); the owner's words of 2026-11-09 in the
--- running record ODQ-934.105). Recreates settlement party-link RPCs of migration 168. The map RPCs
+-- running record ODQ-934.105). Recreates the five settlement party-link RPCs of
+-- migration 168 and derives 168's `visibility` column from the slug. The map RPCs
 -- (share/rotate/revoke/get/list_my *_map_unlisted) are untouched.
 --
 -- (c) THE LINK IS IDEMPOTENT. The owner: "make sure that the link persists as long
@@ -31,13 +32,43 @@
 --     auth.uid()), false for anon, so the client routes the owner to the library
 --     view instead of the players' page (the owner's redirect).
 --
+-- (g) BOTH AT ONCE. The party link is a capability independent of the gallery
+--     listing: share no longer touches is_public, is_featured or visibility-as-
+--     listing; get_unlisted_dossier keys on unlisted_slug alone; revoke nulls the slug
+--     alone; list_my_unlisted_dossiers keys on the slug's presence; rotate keys on the
+--     slug's presence. publish_settlement (105) and unpublish_settlement (059) never
+--     touched the slug and are NOT recreated (pinned by execution). The column
+--     `visibility` is DERIVED: 'unlisted' exactly when unlisted_slug is not null, held
+--     by a check constraint after a backfill; it no longer means "absent from the
+--     gallery" (is_public alone says that). Its writers (these RPCs, 171's moderation
+--     path) already write it in step with the slug.
+--
 -- Pinned by execution: tests/security/galleryUnlisted.pglite.test.js.
 --
--- @rollback: re-create the recreated functions at their migration-168 bodies. No data
---   is lost either way: no slug is minted, moved or dropped by this migration.
+-- @rollback: re-create share_settlement_unlisted, rotate_settlement_unlisted_slug,
+--   revoke_settlement_unlisted, get_unlisted_dossier and list_my_unlisted_dossiers at
+--   their migration-168 bodies, and `alter table public.settlements drop constraint
+--   if exists settlements_visibility_derived`. No data is lost either way: the
+--   backfill only re-states visibility from unlisted_slug, and no slug is minted,
+--   moved or dropped by this migration. A row that is listed AND linked under 208
+--   stays both under 168's read (168's get_unlisted_dossier keys on visibility, which
+--   the backfill keeps 'unlisted' for every linked row).
 -- ════════════════════════════════════════════════════════════════════════════
 
--- ── 2. share — idempotent (c) ────────────────────────────────────────────────
+-- ── 1. visibility derived from the slug (g) ──────────────────────────────────
+update public.settlements
+   set visibility = case when unlisted_slug is null then 'public' else 'unlisted' end
+ where visibility is distinct from (case when unlisted_slug is null then 'public' else 'unlisted' end);
+
+alter table public.settlements drop constraint if exists settlements_visibility_derived;
+alter table public.settlements
+  add constraint settlements_visibility_derived
+  check ((visibility = 'unlisted') = (unlisted_slug is not null));
+
+comment on column public.settlements.visibility is
+  'DERIVED (208): ''unlisted'' exactly when unlisted_slug is not null (a party link exists), else ''public''. It says nothing about the gallery listing — is_public alone governs that, and a settlement may be listed and linked at once.';
+
+-- ── 2. share — idempotent, independent of the listing (c, g) ─────────────────
 create or replace function public.share_settlement_unlisted(target_id uuid)
 returns text
 language plpgsql security definer set search_path = public, pg_temp
@@ -54,13 +85,14 @@ begin
   -- with no write. Only rotate mints anew; only revoke ends it.
   if existing_slug is not null then return existing_slug; end if;
 
-  -- Mint, retrying on the (astronomically unlikely) unique collision.
+  -- (g) The listing is not touched: is_public, is_featured and public_slug stay as
+  -- they are. Mint, retrying on the (astronomically unlikely) unique collision.
   loop
     new_slug := public._make_unlisted_slug();
     begin
       update public.settlements
-        set visibility = 'unlisted', is_public = false, is_featured = false,
-            unlisted_slug = new_slug, published_at = coalesce(published_at, now())
+        set visibility = 'unlisted', unlisted_slug = new_slug,
+            published_at = coalesce(published_at, now())
         where id = target_id and user_id = auth.uid();
       exit;
     exception when unique_violation then
@@ -72,7 +104,50 @@ end;
 $$;
 grant execute on function public.share_settlement_unlisted(uuid) to authenticated;
 
--- ── 5. the by-slug read — the veil's twin, the owner bit (d, f) ─────────────
+-- ── 3. rotate — keyed on the slug's presence (g) ─────────────────────────────
+create or replace function public.rotate_settlement_unlisted_slug(target_id uuid)
+returns text
+language plpgsql security definer set search_path = public, pg_temp
+as $$
+declare new_slug text; has_link boolean;
+begin
+  if auth.uid() is null then raise exception 'not authenticated'; end if;
+  if not public.account_is_active(auth.uid()) then raise exception 'account is not active'; end if;
+  select (unlisted_slug is not null) into has_link
+    from public.settlements where id = target_id and user_id = auth.uid();
+  if has_link is null then raise exception 'Not found or not owned by caller'; end if;
+  if not has_link then raise exception 'Settlement is not shared as unlisted'; end if;
+
+  loop
+    new_slug := public._make_unlisted_slug();
+    begin
+      update public.settlements set unlisted_slug = new_slug
+        where id = target_id and user_id = auth.uid();
+      exit;
+    exception when unique_violation then
+    end;
+  end loop;
+  return new_slug;
+end;
+$$;
+grant execute on function public.rotate_settlement_unlisted_slug(uuid) to authenticated;
+
+-- ── 4. revoke — nulls the slug alone (g) ─────────────────────────────────────
+-- The listing (is_public, public_slug) is untouched; visibility follows the slug.
+create or replace function public.revoke_settlement_unlisted(target_id uuid)
+returns void
+language plpgsql security definer set search_path = public, pg_temp
+as $$
+begin
+  if auth.uid() is null then raise exception 'not authenticated'; end if;
+  update public.settlements set unlisted_slug = null, visibility = 'public'
+    where id = target_id and user_id = auth.uid();
+  if not found then raise exception 'Not found or not owned by caller'; end if;
+end;
+$$;
+grant execute on function public.revoke_settlement_unlisted(uuid) to authenticated;
+
+-- ── 5. the by-slug read — the veil's twin, the owner bit, the slug alone (d, f, g) ──
 -- The dossier is built EXACTLY as get_gallery_dossier (147) builds `data`: the
 -- narrated copy when the owner chose it, the settlement-level projection by
 -- gallery_share_dm, then the per-member overrides (093's model: a member reveal never
@@ -110,8 +185,19 @@ as $$
       else s.data
     end as j
   ) base
-  where s.unlisted_slug = p_slug and s.visibility = 'unlisted'
+  where s.unlisted_slug = p_slug
   limit 1;
 $$;
 grant execute on function public.get_unlisted_dossier(text) to authenticated, anon;
 
+-- ── 6. the owner's list — keyed on the slug's presence (g) ───────────────────
+create or replace function public.list_my_unlisted_dossiers()
+returns table (id uuid, unlisted_slug text, name text, tier text, published_at timestamptz)
+language sql stable security definer set search_path = public, pg_temp
+as $$
+  select id, unlisted_slug, name, tier, published_at
+    from public.settlements
+    where user_id = auth.uid() and unlisted_slug is not null
+    order by published_at desc nulls last;
+$$;
+grant execute on function public.list_my_unlisted_dossiers() to authenticated;

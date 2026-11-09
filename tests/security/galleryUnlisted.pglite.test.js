@@ -327,6 +327,39 @@ describe.runIf(present)('the party link — execution against the real SQL (pgli
     expect((await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j.is_owner).toBe(false);
   });
 
+  // ── (g) both at once ─────────────────────────────────────────────────────────
+  it('share unlisted keeps the listing: is_public, is_featured and public_slug stand', async () => {
+    await asUser(ADMIN);
+    await db.query(`select public.set_featured('${S_PUBLIC}', true, 1)`);
+    await asUser(OWNER);
+    const slug = await share(S_PUBLIC);
+    const row = await scalar(`select is_public, is_featured, public_slug, visibility, unlisted_slug from public.settlements where id = '${S_PUBLIC}'`);
+    expect(row).toMatchObject({ is_public: true, is_featured: true, public_slug: 'highkeep01', visibility: 'unlisted', unlisted_slug: slug });
+    expect((await rows(`select id from public.list_featured_dossiers()`)).map((x) => x.id)).toContain(S_PUBLIC);
+    await asAnon();
+    // both doors open at once, each keyed on its own slug
+    expect((await scalar(`select count(*)::int n from public.get_gallery_dossier('highkeep01')`)).n).toBe(1);
+    expect((await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j.id).toBe(S_PUBLIC);
+    await asUser(OWNER);
+    expect((await rows(`select id from public.list_my_unlisted_dossiers()`)).map((x) => x.id)).toContain(S_PUBLIC);
+  });
+
+  it('revoke nulls the slug alone: the listing stands and the link dies', async () => {
+    const slug = await share(S_PUBLIC);
+    await db.query(`select public.revoke_settlement_unlisted('${S_PUBLIC}')`);
+    const row = await scalar(`select is_public, public_slug, visibility, unlisted_slug from public.settlements where id = '${S_PUBLIC}'`);
+    expect(row).toMatchObject({ is_public: true, public_slug: 'highkeep01', visibility: 'public', unlisted_slug: null });
+    await asAnon();
+    expect((await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j).toBeNull();
+    expect((await scalar(`select count(*)::int n from public.get_gallery_dossier('highkeep01')`)).n).toBe(1);
+  });
+
+  it('visibility is derived from the slug: a write that breaks the pairing is refused', async () => {
+    await expect(db.query(`update public.settlements set visibility = 'unlisted' where id = '${S_UNLISTED}'`)).rejects.toThrow(/settlements_visibility_derived/);
+    await share(S_UNLISTED);
+    await expect(db.query(`update public.settlements set visibility = 'public' where id = '${S_UNLISTED}'`)).rejects.toThrow(/settlements_visibility_derived/);
+  });
+
   // ── maps (a shared campaign IS a map_with_campaign row; untouched by 208) ────
   it('MAPS: unlisted share/list/by-slug honor the same RLS pair', async () => {
     const { slug } = await scalar(`select public.share_map_unlisted('${M_UNLISTED}') as slug`);
