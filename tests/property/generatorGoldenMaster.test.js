@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 16, THE SW-7 POWER-SIDE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-16-sw7.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against point 15's post-state. THE CAUSE, ONE (first-parent step a3062d919): the SW-7 POWER-SIDE merge (lane/style-2-power-side-2026-11-09 at be1f2d6b3; its generator causes the components: the power cards' standing sentences and the Web's narratives, the people's dealing lines, secrets and tie tensions, the catalogue swaps, the economic line and the legacy annotations — the lane's own, 525 composed).
+ *   Written from the staged tree S16 (the tree of a3062d919 with the door paths carried from the branch). 3f587a09.. -> 25824515..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 9, THE SW-B5 FRAMES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-09-style-2-merge-9-swb5.json; the cloud chair signs under the owner's delegation, vetoable).
  *   524 of 525 rows (thorp 84, hamlet 84, village 84, town 104, city 84, metropolis 84) against point 8's post-state. THE CAUSE, ONE (first-parent step 46e0121c2): the SW-B5 FRAMES merge (lane/style-2-frames-2026-11-09 at 09d2fd01d; its generator causes the components: 6a9cf348a the safetyProfile frames 524, d49a59f2c the key-goods leak 36 — the lane's own, 524 composed).
