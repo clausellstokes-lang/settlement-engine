@@ -32,7 +32,9 @@ import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import { stressorsDeskRead } from '../../src/components/new/stressorsDeskRead.js';
-import { overviewStressesOf } from '../../src/components/new/deskHostArgs.js';
+import { overviewStressesOf, criminalStructureOf } from '../../src/components/new/deskHostArgs.js';
+import { defenseDeskRead, DEFENSE_LENSES } from '../../src/components/new/defenseDeskRead.js';
+import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 
 afterEach(cleanup);
 
@@ -50,6 +52,7 @@ const TABS = {
   overview: (s, gate) => <OverviewTab settlement={s} narrativeNote={null} {...gate} />,
   history: (s, gate) => <HistoryTab settlement={s} narrativeNote={null} {...gate} />,
   viability: (s, gate) => <ViabilityTab settlement={s} narrativeNote={null} {...gate} />,
+  defense: (s, gate) => <DefenseTab settlement={s} narrativeNote={null} {...gate} />,
 };
 
 /**
@@ -57,7 +60,7 @@ const TABS = {
  * family not yet lit (or a line the projection's own field set strips) is pinned per family
  * below instead, and joins this list in the cause that completes it.
  */
-const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history'];
+const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history', 'defense'];
 
 /**
  * THE LIT FAMILIES' SITES, by tab: every string the save shipped at these sites that the owner's
@@ -157,6 +160,10 @@ const DRAWN = {
     tab: 'overview',
     draw: (o) => stressorsDeskRead(o, { playerView: true, stresses: overviewStressesOf(o), tier: o.tier }),
   },
+  ...Object.fromEntries(DEFENSE_LENSES.map((lens) => [`defense:${lens}`, {
+    tab: 'defense',
+    draw: (o) => defenseDeskRead(o, { playerView: true, tier: o.tier, crimStructure: criminalStructureOf(o)?.key ?? null })[lens],
+  }])),
 };
 
 /** Every sentence-length string in a drawn desk, at any depth (provenance skipped). */
@@ -208,6 +215,9 @@ describe('the legacy fallbacks have left: the shared page never reaches them (it
   const FALLBACKS = {
     'prosperity.js situationDesc (the Economics lead)': { tab: 'economics', text: (o) => o.economicState?.situationDesc },
     'geographyData.js rated line (strategicValue)': { tab: 'resources', text: (o) => o.resourceAnalysis?.strategicValue },
+    // T2-20's static line: owner reach 0 of 300 (player and DM, measured before the cause), shared
+    // page 37 of 300 (soak1k-6 first) — a shared-page-only composition, so it GOES (15:2x's test).
+    'DefenseTab.jsx T2-20 static line': { tab: 'defense', text: () => 'No organized criminal infrastructure detected' },
   };
   for (const [name, { tab, text }] of Object.entries(FALLBACKS)) {
     it.each(TOWNS)(`${name}, soak1k-%i: on neither the stamped nor the unstamped shared page`, (i) => {

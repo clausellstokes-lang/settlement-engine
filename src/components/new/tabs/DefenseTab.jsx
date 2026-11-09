@@ -5,14 +5,16 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment, disasterReadinessScore} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { arcaneDefenseOf, blockListsCrime, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
+import { arcaneDefenseOf, blockListsCrime, criminalOpNote, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { statusCase } from '../labelLadder.js';
-import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+// THE DEFENSE DESK IS REACHED THROUGH ITS ONE CALLER (ARM 2), shared with the public prose
+// composer (SW-B7b): the reader owns all eight reads, each gated in its own statement.
+import { defenseDeskRead } from '../defenseDeskRead.js';
+import { criminalStructureOf } from '../deskHostArgs.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
@@ -179,22 +181,21 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const readiness = d.readiness || {label:'Unknown',color:'#9c8068',background:'#faf8f4',border:'#e0d0b0'};
   const inst = d.institutions || {};
   const sp = r.economicState?.safetyProfile || {};
-  // ⭐ THE DESK'S OPTION BAG, SPELLED ONCE (ODQ §934.22 addendum). This tab reads eight
-  // defense blocks and every one of them was spelling the same three-line literal, so a
-  // field added to the bag had eight places to be forgotten — which is how the screen and
-  // the desk came to disagree about what to call a metropolis. `tierNoun` is the settlement's
-  // own noun: the desk speaks it, and the tab renders the sentence the desk returned.
-  const deskOpts = {
-    seed: String(r?._seed ?? r?.id ?? ''),
-    audience: playerView ? 'player' : 'dm',
-    tierNoun: tierNounFor(r.tier),
-  };
-  // THE DEFENSE DESK. THE PUBLIC GATE (§885.3): a public gallery dossier is a PAID surface
-  // and the `defense` tab is not filtered off one, so the desk is NOT DRAWN there. The
-  // audience follows kernel law 2's fail-closed default, stated rather than defaulted.
-  const deskProse = publicDossier
-    ? Object.freeze({ publicOrder: null, firstSurvey: null })
-    : defenseStateProse(r, deskOpts);
+  // THE GALLERY VEIL (X-21c): a visitor's copy whose criminal architecture is veiled keeps the
+  // identity facts this block derives from (house names, the faction roster), so the block
+  // reads the grouping list beside the copy and says nothing: no classification, no
+  // "no organized crime" line, no faction line. Public order stays.
+  const crimeVeiled = isVeiled(r, 'block:defense.criminalStructure');
+  // Criminal structure classification (shared with the PDF viewModel, and handed to the desk)
+  const csd = criminalStructureOf(r, crimeVeiled);
+  const crimStructure = csd?.key || null;
+  // THE DEFENSE DESK, its eight lenses read ONCE through the one caller. THE PUBLIC BRANCH
+  // (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lenses the owner's player view
+  // drew here, shipped at the owner's save (`defense:<lens>`); an unstamped record is SILENT at
+  // every lens. The audience follows kernel law 2's fail-closed default, stated in the reader.
+  // The criminal lens is handed the SAME structure key the card below renders from.
+  const desk = defenseDeskRead(r, { publicDossier, playerView, tier: r.tier, crimStructure, crimeVeiled });
+  const deskProse = desk.state;
   // `drawnAtMount` routes the RUNG the projection carries; the `beside` line is only
   // rendered when the registry lets that rung speak, so flipping the row to `glance`
   // silences the machine line and leaves the DM's field untouched.
@@ -204,9 +205,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // caption is this page's one vintage label.
   // DS-DEF-2, the five readiness rows. Same public gate as the banner above; DS-DEF-2
   // frames no DM-editable field, so these are plain rungs rather than projections.
-  const threatProse = publicDossier
-    ? Object.freeze({ beasts: null, invasion: null, internal: null, economic: null, disaster: null })
-    : defenseThreatProse(r, deskOpts);
+  const threatProse = desk.threat;
   // The sentence that belongs to ONE readiness row, or null. The registry still rules on
   // every rung exactly as it did when these were a flat list — flipping `defense.threatAssessment`
   // to `glance` silences all five together, under every bar at once.
@@ -216,17 +215,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   };
   // DS-DEF-5, the armed-forces lenses. Same public gate as above, stated rather than
   // defaulted; DS-DEF-5 frames no DM-editable field, so these are plain rungs too.
-  const forcesProse = publicDossier
-    ? Object.freeze({ fortification: null, force: null, contracted: null, charter: null, arcane: null })
-    : defenseForcesProse(r, deskOpts);
+  const forcesProse = desk.forces;
   const forceLines = ['fortification', 'force', 'contracted', 'charter', 'arcane']
     .map((k) => drawnAtMount(FORCES_MOUNT, forcesProse[k])?.sentence).filter(Boolean);
   // DS-DEF-1, the posture header. Same public gate; it frames no DM-editable field either
   // (`guardEffectivenessDesc` is not a DM path), so these are plain rungs that sit BESIDE
   // the Guard Assessment paragraph rather than over it.
-  const postureProse = publicDossier
-    ? Object.freeze({ posture: null, terrain: null, prize: null })
-    : defensePostureProse(r, deskOpts);
+  const postureProse = desk.posture;
   // ⚠ Like the public-order banner, these arrive already PROJECTED BESIDE the DM's field —
   // `guardEffectivenessDesc`, which `deriveGuardAssessment` returns verbatim just above. The
   // `beside` line is only taken when the registry lets that rung SPEAK, so flipping the row
@@ -238,22 +233,16 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       ? postureProse[k].beside : null)).filter(Boolean);
   // DS-DEF-8, the military-status banner. Same public gate; it frames no DM-editable field
   // (the banner renders generator-authored `summary` / `viabilityNote`), so plain rungs.
-  const statusProse = publicDossier
-    ? Object.freeze({ override: null, viability: null })
-    : defenseMilitaryStatusProse(r, deskOpts);
+  const statusProse = desk.status;
   const statusLines = ['override', 'viability']
     .map((k) => drawnAtMount(MILITARY_STATUS_MOUNT, statusProse[k])?.sentence).filter(Boolean);
   // DS-DEF-11, why the wall and why not. Same public gate; no DM-editable field, plain rung.
-  const wallProse = publicDossier
-    ? Object.freeze({ rationale: null })
-    : defenseWallRationaleProse(r, deskOpts);
+  const wallProse = desk.wall;
   const wallLine = drawnAtMount(WALL_RATIONALE_MOUNT, wallProse.rationale)?.sentence || null;
   // DS-DEF-6, the supporting capabilities. Same public gate as every other mount on this
   // tab; no DM-editable field, so plain rungs. Only the logistics and naval lenses are
   // read — the desk states, and the suite pins, why the other four must stay silent.
-  const supportingProse = publicDossier
-    ? Object.freeze({ logistics: null, naval: null })
-    : defenseSupportingProse(r, deskOpts);
+  const supportingProse = desk.supporting;
   const supportingLines = ['logistics', 'naval']
     .map((k) => drawnAtMount(SUPPORTING_MOUNT, supportingProse[k])?.sentence).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
@@ -289,11 +278,6 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const hasAnyForce = mainForces.length||mercForces.length||charterForces.length||magicDef.length;
   const hasAnyFort = walls.length > 0;
 
-  // THE GALLERY VEIL (X-21c): a visitor's copy whose criminal architecture is veiled keeps the
-  // identity facts this block derives from (house names, the faction roster), so the block
-  // reads the grouping list beside the copy and says nothing: no classification, no
-  // "no organized crime" line, no faction line. Public order stays.
-  const crimeVeiled = isVeiled(r, 'block:defense.criminalStructure');
   // Criminal architecture data
   const crimInsts  = sp.criminalInstitutions || [];
   const crimeTypes = sp.crimeTypes || [];
@@ -308,15 +292,10 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const safetyLabel = sp.safetyLabel || '';
   const _bmc         = sp.blackMarketCapture || 0;
 
-  // Criminal structure classification (shared with the PDF viewModel)
-  const csd = crimeVeiled ? null : deriveCriminalStructure(r);
-  const crimStructure = csd?.key || null;
   // DS-DEF-4, the criminal architecture. Same public gate as every other mount on this tab;
   // the desk is handed the SAME structure key the card below renders from, so the sentence
   // and the classification beneath it cannot be about two different readings.
-  const criminalProse = publicDossier || crimeVeiled
-    ? Object.freeze({ structure: null, capture: null })
-    : defenseCriminalProse(r, crimStructure, deskOpts);
+  const { criminal: criminalProse } = desk;
   // T2-20: the capture lens is cut (Power owns capture; Defense owns the structure).
   // R-D2 (RUNG-2 LANDING phase D; F9's law extended): with no structure the lens is a DENIAL
   // ("No criminal infrastructure has been identified"), so it is never read beside the block's
@@ -496,12 +475,10 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             <p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 
-          {/* T2-20: the static no-organised-crime line stands where the DS-DEF-4 structure lens
-              does not speak (public); the lens says it in the town's voice elsewhere. R-D2: like
-              the lens, never beside the block's own crime patterns or operations. */}
-          {!crimeVeiled&&!crimStructure&&criminalLines.length===0&&!criminalDenialListed&&<div style={{background:swatch['#F0FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'8px 13px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch.success}}>
-            No organized criminal infrastructure detected. Crime exists at a petty, individual level.
-          </div>}
+          {/* T2-20's static "No organized criminal infrastructure detected…" line LEFT (SW-B7b,
+              B10(a) item 6 by 15:2x's test): measured on 300 towns it printed on the shared page
+              alone (37) and on no owner view (0, player and DM); the shared page now prints the
+              owner's own DS-DEF-4 lens, shipped at the save. */}
 
           {/* Criminal institutions as power structures */}
           {crimInsts.length>0&&<div>

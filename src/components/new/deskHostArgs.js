@@ -14,6 +14,7 @@
 import { flowDerivedDependency } from '../../domain/display/tradeFlowEconomics.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../../domain/display/dossierViewModel.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
+import { deriveCriminalStructure } from '../../domain/display/defenseDisplay.js';
 
 /**
  * M6d FLOW-DERIVED ECONOMICS: the owning campaign's live arrivals tally projected through the
@@ -71,4 +72,14 @@ export function impairedInstitutionOf(services, impaired) {
  */
 export function overviewStressesOf(settlement) {
   return (Array.isArray(settlement?.stress) ? settlement.stress : settlement?.stress ? [settlement.stress] : []).filter(Boolean);
+}
+
+/**
+ * The Defense tab's criminal structure reading (the card's classification), or null where the
+ * gallery veil covers the block. The defense desk's criminal lens is handed `.key` of this, so
+ * the sentence and the card beneath it read one classification on every page.
+ * @param {any} settlement @param {boolean} [crimeVeiled] @returns {any}
+ */
+export function criminalStructureOf(settlement, crimeVeiled = false) {
+  return crimeVeiled ? null : deriveCriminalStructure(settlement);
 }

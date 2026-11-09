@@ -594,6 +594,8 @@ const desktopShape = (perView) => Object.fromEntries(
 // Economics 46 -> 47, Outlook 2 -> 3, History 13 -> 15. No token moved.
 // ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the stressors desk's public branch lit, `stressors:overview`): Overview
 // 12/11 -> 13/12 (the crisis card's condition line). No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the defense desk's public branch lit, `defense:*`): Defense 25/25 ->
+// 35/35 (the eight lenses' shipped lines; T2-20's static line left). No token moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -623,7 +625,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // hook left the Defense page for the Plot Hooks tab; no token moved (bisected: 317307cc green, 987602c0 moves it).
   // 25 -> 26 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance line
   // (8e9de64b9, the siege reading of the stores) adds one prose line on WIRING-2's re-measure; no token moved.
-  "Systems/Defense":     { measured: 25, sub14: 25 },
+  "Systems/Defense":     { measured: 35, sub14: 35 },
   // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
   // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
   "Systems/Resources":   { measured: 1, sub14: 1 },
@@ -718,6 +720,8 @@ const DESKTOP_BASELINE = Object.freeze({
 // (DS-GEN-18's craft line), Outlook 2 -> 3, History 13 -> 15; chrome and both sub-floor counts hold.
 // ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the stressors desk's public branch lit): Overview prose 11 -> 12 (the
 // crisis card's condition line); chrome and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the defense desk's public branch lit): Defense prose 23 -> 33; chrome
+// and both sub-floor counts hold.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -742,7 +746,7 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
   // prose 23 -> 24 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance
   // line (8e9de64b9) adds one prose line on WIRING-2's re-measure; the sub-floor counts hold.
-  "Systems/Defense":     { prose: 23, chrome: 2, sub14: 2, sub12: 0 },
+  "Systems/Defense":     { prose: 33, chrome: 2, sub14: 2, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.

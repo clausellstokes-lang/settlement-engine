@@ -25,9 +25,10 @@
  */
 import { PUBLIC_PROSE_VERSION, aliasRepeatedRungs, shippedProseOf } from '../../domain/display/publicProse.js';
 import { economyDeskRead } from './economyDeskRead.js';
-import { economicsDeskArgs, impairedInstitutionOf, overviewStressesOf } from './deskHostArgs.js';
+import { criminalStructureOf, economicsDeskArgs, impairedInstitutionOf, overviewStressesOf } from './deskHostArgs.js';
 import { generalDeskLines } from './generalDeskRead.js';
 import { stressorsDeskRead } from './stressorsDeskRead.js';
+import { defenseDeskRead, DEFENSE_LENSES } from './defenseDeskRead.js';
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
 import { isPhantomRecord } from '../../domain/edit/phantoms.js';
@@ -64,6 +65,12 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   ['stressors:overview', (s, publicDossier) => stressorsDeskRead(s, {
     publicDossier, playerView: true, stresses: overviewStressesOf(s), tier: s?.tier, worldStressor: null,
   })],
+  // THE DEFENSE DESK (defenseDeskRead.js is its one caller): one site per lens, the Defense
+  // tab's eight reads. The owner's record carries no veil, so the criminal lens is drawn on the
+  // owner's own classification; a veiled block is dropped on the way out (galleryVeil.js).
+  ...DEFENSE_LENSES.map((lens) => /** @type {const} */ ([`defense:${lens}`, (/** @type {any} */ s, /** @type {boolean} */ publicDossier) => defenseDeskRead(s, {
+    publicDossier, playerView: true, tier: s?.tier, crimStructure: criminalStructureOf(s)?.key ?? null,
+  })[lens]])),
 ].map((entry) => Object.freeze(entry)));
 
 /**
