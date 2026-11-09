@@ -737,7 +737,7 @@ const STRUCK_PENDING_ROWS = Object.freeze([
     surface: 'web-display',
     car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
     carArtifact: 'docs/GENERATION_CONTRACTS.md',
-    why: 'Whether a settlement depends on magic to stay supplied is a striking fact about the place, and it is one '
+    why: 'Whether a settlement relies on magic to stay supplied is a striking fact about the place, and it is one '
       + 'of only two keys on the isolation-support shape that no surface reads even at name level — its seven '
       + 'siblings all read LIT-NAME. That asymmetry is the evidence it was overlooked rather than declined: a '
       + 'surface that shows the status and the tier is already in front of this fact and does not print it. The '
