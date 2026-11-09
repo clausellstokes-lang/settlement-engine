@@ -91,3 +91,19 @@ describe('ruling 4 — "lower town" is a district of a city, kept for city and m
     expect(tierNounFindings({ tier }, line)).toHaveLength(1);
   });
 });
+
+describe('URBAN-FIX B-P1 — "old town" is a district of a larger place, kept for city and metropolis ONLY', () => {
+  // The Shadows District quarter's location, read from its writer: the one stored string behind every urban
+  // tier-noun finding on the 1,000 (URBAN-AUDIT §2, B-1). The twin of ruling 4's "lower town" (the chair's ruling 1).
+  const quarter = generateSpatialLayout('city', [{ name: 'Thieves\' guild' }], 'road', 'plains').quarters
+    .find((q) => q.name === 'Shadows District');
+  const line = quarter?.location;
+  it('the underworld quarter names it', () => expect(line).toBe('Old town or slums'));
+  it.each(['city', 'metropolis'])('is kept on a %s', (tier) => expectKept(line, tier));
+  it.each(['thorp', 'hamlet', 'village', 'town'])('the control on a %s: the licence reads the tier', (tier) => {
+    // anchored: invented wording; a smaller place has no old town of its own
+    const expected = tier === 'town' ? 0 : 1;
+    expect(tierNounFindings({ tier }, 'The shrine stands in the old town.')).toHaveLength(expected);
+    expect(tierNounFindings({ tier }, line)).toHaveLength(expected);
+  });
+});
