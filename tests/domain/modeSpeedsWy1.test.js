@@ -482,7 +482,10 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // e36e4916f) at exactly that commit (change-point search over census-1b's first parent, into census-2 through the merge
 // 2b31f33f3); at the composed tip with 38d1b4c05's src reverse-applied the arm reads 865193cf, rung 1's value, so the two
 // lineages' moves compose with no interaction. Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = '5b6a1e518bf3cd5f62212a2872b1422a0cdf5ce203ca97c6a18aa76b87c16432';
+// 2026-11-09 (STYLE-2 SW-4, ruling A7, the clock stages in plain words): 5b6a1e51... -> d798e730..., TEXT ONLY, leaf-diffed
+// against the parent a7bc2e4ce: 12 leaves, all one pulse-summary string — the legitimacy clock's stage 2 "A rival faction
+// publicly questions the governing faction." -> "A rival power publicly questions the ruling power." No id, tick or number moved.
+const BASE_PULSE_HASH = 'd798e730844bb78a5b709fdc839d326c2b695e822a971e4a61cfa8a94f91c140';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
