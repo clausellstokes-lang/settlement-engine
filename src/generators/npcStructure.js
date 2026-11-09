@@ -142,7 +142,7 @@ reg('military',GOVERNANCE_FRACTURED,
     goal:      'Keep the people under their command together, whoever ends up giving the orders.',
     constraint:'Cannot act unilaterally to fill the governance vacuum without becoming a political actor in ways that compromise the institutional neutrality the role requires.' },
   { position:  'Commands a subordinate enforcement unit in a settlement where institutional authority is fragmented. Orders may be coming from multiple competing sources.',
-    goal:      'Stop any faction buying their squad away from them while the seat is broken.',
+    goal:      'Stop any power buying their squad away from them while the seat is broken.',
     constraint:'Institutional loyalty in a fragmented governance environment requires active management that cannot be publicly acknowledged as such.' }
 );
 reg('military','corruption',
@@ -225,7 +225,7 @@ reg(cat,'contested',
     goal:      'Lend to both sides of the fight for the seat, so whoever wins owes them.',
     constraint:'Cultivating relationships with both sides requires that neither side trusts you fully.' },
   { position:  'Operates commercial interests that are positioned between the competing factions in a contested settlement.',
-    goal:      'Keep selling to every faction without any of them treating their goods as its own.',
+    goal:      'Keep selling to every power without any of them treating their goods as its own.',
     constraint:'Commercial neutrality looks like either timidity or calculation to the factions seeking commitment.' }
 );
 reg(cat,'stable',

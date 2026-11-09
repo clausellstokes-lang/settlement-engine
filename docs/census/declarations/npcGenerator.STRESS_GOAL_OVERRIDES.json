@@ -108,7 +108,7 @@
     },
     {
       "id": "insurgency.rel.short",
-      "text": "Avoid being forced to publicly declare support for either the governing faction or the insurgency, and run out of reasons before the pressure does",
+      "text": "Avoid being forced to publicly declare support for either the governing power or the insurgency, and run out of reasons before the pressure does",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -126,7 +126,7 @@
     },
     {
       "id": "mass_migration.gov.note",
-      "text": "The governing faction is caught between two constituencies that want incompatible things, and both know it.",
+      "text": "The governing power is caught between two constituencies that want incompatible things, and both know it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -174,7 +174,7 @@
     },
     {
       "id": "slave_revolt.gov.short",
-      "text": "End the revolt without either full suppression or formal negotiation: both options set precedents the governing faction cannot afford",
+      "text": "End the revolt without either full suppression or formal negotiation: both options set precedents the governing power cannot afford",
       "needs": [],
       "excludes": [],
       "crisis": [],
