@@ -235,26 +235,26 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
   if (tradeRoute === 'isolated') {
     return hasTeleportationInfra(institutions, config)
       ? { buffered: true,  strength: 'moderate',
-          note: 'Magical trade infrastructure (teleportation) enables limited craft imports despite isolation.' }
+          note: 'No trade route reaches this place, but magic brings in a little of what its crafts need.' }
       : { buffered: false, strength: 'none',
-          note: 'No trade pipeline: isolated settlement cannot import raw materials.' };
+          note: 'No trade route reaches this place, so its crafts get no materials from outside.' };
   }
 
   if (effectiveEconomy < 40) {
     return { buffered: false, strength: 'none',
-      note: `Economy too weak (≈${Math.round(effectiveEconomy)}/100) to sustain craft imports at scale.` };
+      note: 'Trade here is too weak to bring in craft materials in any quantity.' };
   }
   if ((tradeRoute === 'port' || tradeRoute === 'crossroads') && effectiveEconomy >= 55) {
     const label = tradeRoute === 'port' ? 'Port' : 'Crossroads';
     return { buffered: true, strength: 'strong',
-      note: `${label} trade at strong economy (≈${Math.round(effectiveEconomy)}/100) sustains craft via imported materials.` };
+      note: `${label} trade is strong, and it brings in the materials the crafts work.` };
   }
   if ((tradeRoute === 'river' || tradeRoute === 'road') && effectiveEconomy >= 65) {
     return { buffered: true, strength: 'moderate',
-      note: `${tradeRoute} trade at solid economy (≈${Math.round(effectiveEconomy)}/100) sustains craft via consistent imports.` };
+      note: `The ${tradeRoute} trade is steady, and it brings in enough for the crafts to keep working.` };
   }
   return { buffered: false, strength: 'none',
-    note: `Trade route (${tradeRoute}) and economy (≈${Math.round(effectiveEconomy)}/100) insufficient to sustain craft without local resources.` };
+    note: `The ${String(tradeRoute).replace(/_/g, ' ')} trade is too thin to keep the crafts supplied without materials of their own.` };
 };
 
 // ─── Core influence scoring ──────────────────────────────────────────────────
