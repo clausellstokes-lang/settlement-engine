@@ -117,7 +117,7 @@
       "status": "complete",
       "worldStateSha256": "40033f3e76da9b242d3f18f97d8cd44db4c5d0571b3b5486993cf99abb2c2000",
       "wizardNewsSha256": "b18d61870783e0a369016914b50ba0b5c1a649a8b4ba14c572d359a8ace5552c",
-      "settlementUpdatesSha256": "0d3f274e038c015da91812f50556abf22869fb15316ec91723afc7ba365234a2",
+      "settlementUpdatesSha256": "c3aea18c8dc06c11ac523d0c878853c48cdfdf3d3810d628f40047fc6213a87e",
       "regionalGraphSha256": "edf21734db2302e651ab0364ac001f4de886baf3a0dc93a09acc1da45ed619d3"
     },
     {
@@ -181,7 +181,7 @@
       "status": "complete",
       "worldStateSha256": "28fe304ad323710c2cc186e7b55f8e7eb426ff6bb8a2b3cb58d085e770b07c4c",
       "wizardNewsSha256": "044b212daf6c7dcc0ef636fd83c6c140b024bbed2c3f1411f97ed2748dfce4f6",
-      "settlementUpdatesSha256": "6dc82a6649a30f38cc29d974a4dcc825dc10933d39838eab370979001c8afcb5",
+      "settlementUpdatesSha256": "b27179985cbac0f0f1ff75cfec057ec6e1968adf3da5df04bf92ff40e0571651",
       "regionalGraphSha256": "8bc4478549f19b5b084db1120f4ab626f494c2b507940215544cffe0a5c497fa"
     }
   ]
