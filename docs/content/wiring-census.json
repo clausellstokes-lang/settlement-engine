@@ -23,7 +23,7 @@
   "totals": {
     "pools": 857,
     "blocks": 69,
-    "variants": 2764,
+    "variants": 2782,
     "resolved": 489,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -14369,7 +14369,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 7,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -14404,7 +14404,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 6,
         "market": 1
       },
       "undeclared": 0,
@@ -16784,8 +16784,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 1,
+      "variants": 6,
+      "grammars": 2,
       "predicate": [
         {
           "field": "readings.exportPosture.status",
@@ -16837,7 +16837,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 5,
         "no hunger": 1
       },
       "undeclared": 0,
@@ -30513,7 +30513,7 @@
         "timeband_age"
       ],
       "hasBag": true,
-      "variants": 3,
+      "variants": 7,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -32427,8 +32427,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 3,
+      "variants": 6,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -33543,7 +33543,7 @@
         "seat"
       ],
       "hasBag": true,
-      "variants": 3,
+      "variants": 7,
       "grammars": 3,
       "predicate": [],
       "branchReads": [],
@@ -55165,8 +55165,8 @@
         "DS-ECO-10 :: POSTURE: import_dependent",
         "DS-ECO-10 :: POSTURE: established"
       ],
-      "variants": 18,
-      "grammars": 8,
+      "variants": 21,
+      "grammars": 9,
       "blocks": [
         "DS-ECO-10"
       ]
@@ -68128,7 +68128,7 @@
       "subject": "STRUGGLING",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "7 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68450,7 +68450,7 @@
         "readings.exportPosture.status"
       ],
       "readingFunction": "exportPosturePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -70359,7 +70359,7 @@
       "subject": "FOUNDED-OLD",
       "fields": [],
       "readingFunction": "foundedPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement, timeband_age}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {settlement, timeband_age}"
     },
     {
       "tier": "THIN",
@@ -70607,7 +70607,7 @@
       "subject": "BOUGHT-IN",
       "fields": [],
       "readingFunction": "craftReasonPoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {good, institution, settlement}"
+      "count": "6 variant(s) · 4 grammar(s) · slots {good, institution, settlement}"
     },
     {
       "tier": "COVERED",
@@ -70761,7 +70761,7 @@
       "subject": "no token matched: unclassified (the plain-description floor)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {faction, seat, settlement}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {faction, seat, settlement}"
     },
     {
       "tier": "COVERED",

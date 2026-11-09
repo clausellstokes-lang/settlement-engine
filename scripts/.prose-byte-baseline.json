@@ -61,20 +61,20 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 168317,
-      "gzip": 23874,
+      "raw": 170551,
+      "gzip": 24201,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 278684,
-      "gzip": 35421,
+      "raw": 280639,
+      "gzip": 35770,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 123080,
-      "gzip": 17456,
+      "raw": 124207,
+      "gzip": 17620,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -515,6 +515,14 @@
       "toRaw": 287856,
       "gzipAfter": 36900,
       "reason": "+4564 B raw (gzip level 9: 36,445 -> 36,900), one commit: DS-GEN-16 gains LIVING-MEMORY and four LEGACY-* pools, two variants each (10 variants), reading history.siegeNarrative and history.legacyAnnotations[]; projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0. RE-CHAINED at MERGE-WAVE's W5 HIS merge (2026-11-08): the lane measured 272147 -> 276711 over the base; composed over W1 ECO's and W4 PEOPLE's general-leaf rows (272147 -> 283292) the same +4564 stands from 283292. The lane's later style-law rewrites shrink the leaf with no declaration owed; the committed figure is the composed leaf's."
+    },
+    {
+      "car": "SW-B5 FRAMES 2026-11-09 (STYLE-RULINGS-2 B5; the owner's style law, WIRING-RULINGS §7-§8): the frames get vantage variants",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 168361,
+      "toRaw": 170551,
+      "gzipAfter": 24201,
+      "reason": "+2190 B raw over the chain (2234 over the committed 168317; the leaf shrank 44 B undeclared since its last row) (gzip level 9: 23874 -> 24201), one commit: DS-ECO-8 STRUGGLING +4 (local, official, trade, newcomer) and DS-ECO-10 POSTURE: established +3 (trade, local, newcomer) — vantage variants appended with the next vid (the argmax draw moves only the towns that draw the new line), each declaring its siblings' facts; projected through `node scripts/generate-dossier-state-prose.mjs`; `--check` exit 0."
     }
   ],
   "ceilingTransfersNewLeaves": [
