@@ -6,6 +6,8 @@
  *     veil's deltas ride their reserved key), so a planted veil hides the same rows
  *     on the party link as on the gallery copy. The server twin is pinned by
  *     execution in tests/security/galleryUnlisted.pglite.test.js.
+ * (f) THE OWNER IS TOLD: the read's is_owner travels as `isOwner` (the redirect's
+ *     server word; false when absent).
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
@@ -77,5 +79,15 @@ describe('the party link honours the veil on the client (row (d))', () => {
     } });
     const linked = await fetchPublicDossier('u'.repeat(42));
     expect(linked.shareDm).toBe(true);
+  });
+});
+
+describe('the owner bit travels to the client (row (f))', () => {
+  it('is_owner true → isOwner true; absent → false', async () => {
+    const row = { id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true, dossier: SETTLEMENT };
+    serve({ galleryRow: null, unlistedRow: { ...row, is_owner: true } });
+    expect((await fetchPublicDossier('u'.repeat(42))).isOwner).toBe(true);
+    serve({ galleryRow: null, unlistedRow: row });
+    expect((await fetchPublicDossier('u'.repeat(42))).isOwner).toBe(false);
   });
 });

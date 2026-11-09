@@ -317,6 +317,16 @@ describe.runIf(present)('the party link — execution against the real SQL (pgli
     expect(link.dossier.npcs.find((n) => n.id === 'n2').secret).toBeUndefined();
   });
 
+  // ── (f) the owner is told ────────────────────────────────────────────────────
+  it('the owner is told is_owner; another user and anon are not', async () => {
+    const slug = await share(S_UNLISTED);
+    expect((await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j.is_owner).toBe(true);
+    await asUser(OTHER);
+    expect((await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j.is_owner).toBe(false);
+    await asAnon();
+    expect((await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j.is_owner).toBe(false);
+  });
+
   // ── maps (a shared campaign IS a map_with_campaign row; untouched by 208) ────
   it('MAPS: unlisted share/list/by-slug honor the same RLS pair', async () => {
     const { slug } = await scalar(`select public.share_map_unlisted('${M_UNLISTED}') as slug`);

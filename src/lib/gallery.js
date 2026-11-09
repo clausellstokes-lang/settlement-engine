@@ -489,6 +489,9 @@ export async function fetchPublicDossier(slug) {
       unlisted: true,
       // The players' page names who shared the town (SW-B7 row (b)); the author's
       // public identity leaves through the one veil seam like every public field.
+      // The owner's redirect (SW-B7 row (f)): the server says whether the viewer owns
+      // the settlement behind the link (migration 208's is_owner; false for anon).
+      isOwner: unlisted.is_owner === true,
       authorName: veilPublicPayload({ authorName: typeof unlisted.author_name === 'string' ? unlisted.author_name : '' }).authorName || '',
     };
   }

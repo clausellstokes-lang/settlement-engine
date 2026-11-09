@@ -27,6 +27,10 @@
 --     gallery_member_overrides so src/lib/gallery.js's unlisted branch runs
 --     sanitizeDossier (toPublicSafe + projectShareVeil) as the public branch does.
 --
+-- (f) THE OWNER IS TOLD. get_unlisted_dossier returns is_owner = (s.user_id =
+--     auth.uid()), false for anon, so the client routes the owner to the library
+--     view instead of the players' page (the owner's redirect).
+--
 -- Pinned by execution: tests/security/galleryUnlisted.pglite.test.js.
 --
 -- @rollback: re-create the recreated functions at their migration-168 bodies. No data
@@ -68,7 +72,7 @@ end;
 $$;
 grant execute on function public.share_settlement_unlisted(uuid) to authenticated;
 
--- ── 5. the by-slug read — the veil's twin (d) ───────────────────────────────
+-- ── 5. the by-slug read — the veil's twin, the owner bit (d, f) ─────────────
 -- The dossier is built EXACTLY as get_gallery_dossier (147) builds `data`: the
 -- narrated copy when the owner chose it, the settlement-level projection by
 -- gallery_share_dm, then the per-member overrides (093's model: a member reveal never
@@ -85,6 +89,7 @@ as $$
     'slug', s.unlisted_slug,
     'unlisted', true,
     'author_name', ap.external_name,
+    'is_owner', coalesce(s.user_id = auth.uid(), false),
     'gallery_share_dm', coalesce(s.gallery_share_dm, false),
     'gallery_member_overrides', s.gallery_member_overrides,
     'dossier', public._gallery_apply_member_overrides(
