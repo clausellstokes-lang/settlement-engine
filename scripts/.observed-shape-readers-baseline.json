@@ -160,7 +160,11 @@
   "attribution, 28 retired with cause, 1 increase; nothing is declared and the bank holds at 76/50 (RETIRED).",
   "SCHEMA 35 = schema 34's topology, tag law, roster and corpus definition, re-governed to THE J-19 PULSE CURE (ALLEGIANCE-CAR1):",
   "the simulation no longer re-rolls a v3 card's corruption and the corpus's year re-deals; 23 new rows ADMITTED",
-  "with attribution, none go, none move; nothing is declared and the bank holds at 76/50.",
+  "with attribution, none go, none move; nothing is declared and the bank holds at 76/50 (RETIRED).",
+  "SCHEMA 36 = schema 35's topology, tag law, roster and corpus definition, re-governed to THE GUILD'S PUSH AND THE",
+  "DERIVED HALL (ALLEGIANCE-CAR2): the rank deal weights hidden agents and the hall-capture state is derived at the",
+  "coherence seam, so the corpus's year re-deals; none admitted, 12 rows retired with cause, none move; nothing is",
+  "declared and the bank holds at 76/50.",
   "Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
   "subset of declared. This envelope banks 76 banked read(s) across 50 tagged address(es).",
@@ -171,31 +175,31 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–34 are the RETIRED numeric predecessors."
+  "Schemas 4–35 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
   "generations": 16,
-  "originCount": 14349,
+  "originCount": 14342,
   "pulseIntervals": 12,
   "seeds": 4,
-  "shapeCount": 1729,
+  "shapeCount": 1734,
   "simulationFlagsLit": 92,
   "steadingsMinted": 12,
-  "transitionCount": 22031
+  "transitionCount": 22025
  },
  "digests": {
-  "corpusMeta": "54bb1b3a9f6eb938c1db4d18806dfba1d413e25d01ff72486241de755f459e24",
-  "inventory": "3ab4fe14a4d0e2caa39dfb1710bec700545befb96474ead532bdac6cf6688235",
-  "manifests": "0786933628f70da19dbaec4db6055412051389304fdaeda737eadd82f3da08a0",
-  "migrationReview": "b226e16464224901bde13ece548e5db0592848662a8ef69c41c25ec377308cf0",
+  "corpusMeta": "23880ebc17b2996ed946bc11ac4dd0a476064fa27c6c857acc6f7cea0a86bf31",
+  "inventory": "6686b9e2ee5412ee66c350660be776374e26ce505540b15a7839d14a1965cf9e",
+  "manifests": "c6617642bcf14d3471dd3199691dc53f7f2ad21079c9aafc49b9679074fe7f63",
+  "migrationReview": "b51e0fd582a4150ed65604ccfec71727f87a37526ac7909e84c5646fd7891e14",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "be1867ae7e38a1ef2cc975dd4b86ab16c2fbb4a956d2110fbfbca1fdc9484f66",
-  "sentinel": "ea5fbfae45f492b6fdf4c6db6510e92780febd54e4373003971ba86f673164f7"
+  "scanStats": "32e4b0cb36819639c112d21eb1a92c7c0b41ed1bfcc4ca016ef108ab75290d40",
+  "sentinel": "2a26503513fbde8f6ac52546fb26a4e0a03ca3dcabf3103b08b531cb4d2a1ea6"
  },
- "frozen": "2026-11-08",
- "frozenAtSha": "837adcf73d424fd8d4811f9d19be565b3c7f212a",
- "identities": 1546,
+ "frozen": "2026-11-09",
+ "frozenAtSha": "7017f50968cbba6b86c36f8c4c6dbf9edb909854",
+ "identities": 1534,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -851,7 +855,6 @@
    "cultDeitySnapshots on config": 2,
    "id on factions": 3,
    "name on factions": 6,
-   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "primaryDeitySnapshot on config": 1,
@@ -901,7 +904,6 @@
    "customTradeGoods on config": 1,
    "good on economicState": 1,
    "name on economicState": 1,
-   "nearbyResourcesState on config": 4,
    "resourceEdits on config": 1
   },
   "src/domain/events/realmManifest.js": {
@@ -912,7 +914,6 @@
    "type on settlement": 1
   },
   "src/domain/events/targetRosters.js": {
-   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "resources on settlement": 1
@@ -1079,9 +1080,6 @@
    "name on factions": 1,
    "name on institution": 1
   },
-  "src/domain/provenance/rosterProvenance.js": {
-   "resourceHistory on settlement": 1
-  },
   "src/domain/realm/heraldRouting.js": {
    "impactKind on stressors": 2,
    "outcome on stressors": 3,
@@ -1144,9 +1142,6 @@
    "terrain on config": 1,
    "terrain on settlement": 1
   },
-  "src/domain/resourceSemantics.js": {
-   "nearbyResourcesState on config": 1
-  },
   "src/domain/roads/state.js": {
    "recall on whereabouts": 1
   },
@@ -1203,7 +1198,6 @@
    "reliefRefusedByThem01 on history": 1
   },
   "src/domain/state/deriveSystemState.js": {
-   "nearbyResourcesState on config": 1,
    "neighbourLinks on settlement": 1,
    "neighbourNetwork on settlement": 1,
    "safetyProfile on settlement": 1
@@ -1574,8 +1568,7 @@
   },
   "src/domain/worldPulse/institutionLifecycleResourceRead.js": {
    "nearbyResources on settlement": 1,
-   "nearbyResourcesDepleted on settlement": 2,
-   "nearbyResourcesState on config": 1
+   "nearbyResourcesDepleted on settlement": 2
   },
   "src/domain/worldPulse/institutionStatusLifecycle.js": {
    "covert on impairments": 1
@@ -1806,9 +1799,7 @@
   "src/domain/worldPulse/resourceDynamicsKernel.js": {
    "id on institutions": 1,
    "magicExists on config": 2,
-   "nearbyResourcesState on config": 1,
    "resourceEdits on config": 5,
-   "resourceHistory on settlement": 2,
    "resourceMembership on outcome": 1,
    "tradeRoute on settlement": 1
   },
@@ -1907,10 +1898,8 @@
    "intermediateGoods on chains": 1,
    "nearbyResources on settlement": 1,
    "nearbyResourcesDepleted on settlement": 2,
-   "nearbyResourcesState on config": 2,
    "outputs on chains": 1,
    "rawInputs on chains": 1,
-   "resourceHistory on settlement": 2,
    "tradeRoute on settlement": 1
   },
   "src/domain/worldPulse/tradeSalience.js": {
@@ -2193,7 +2182,6 @@
    "essential on raw": 1,
    "localUid on raw": 1,
    "nearbyResourcesRandom on config": 3,
-   "nearbyResourcesState on config": 3,
    "resourceEdits on config": 1
   },
   "src/generators/steps/resolveStress.js": {
@@ -2609,7 +2597,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "dbadea7c0d9341f9f0d5aae43dfaf372712c22f3323641eb62d41e860b62fa8d",
+   "digest": "d660cb480b957d7ce7bb2fd750f52cd0b92f710db261cc74e804afbc97f7ad3f",
    "entries": [
     {
      "mode": "100644",
@@ -2628,8 +2616,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "18fa4ab6f0bcee2cfce2abb8a2c73cf673c677d96c3e648fab321b94ca21e1bb",
-     "size": 212114,
+     "sha256": "6f3dcaae7796afacdca5b2e79108f761cd9019449e4f60ce596dced62c2483e8",
+     "size": 213048,
      "type": "file"
     },
     {
@@ -2649,8 +2637,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "e3e84924d4ffe1865cff862f268e3b47b2850e8277c09bc8383434d27af542bd",
-     "size": 86473,
+     "sha256": "32f30dede35be9fcefce2cff3571bec2e57abaa5ae1161f52ec216a9a0a29331",
+     "size": 87557,
      "type": "file"
     },
     {
@@ -2677,8 +2665,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "ca2436e7fdb06ac46d615af04198aa135b38fc54631343a490c26a4988e04d53",
-     "size": 257421,
+     "sha256": "f95809b77d9d06952e5fb68be21a9e245506de33d76f3183c28d40426e835b8a",
+     "size": 261808,
      "type": "file"
     },
     {
@@ -2692,7 +2680,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "7a39fc0acc11565dda31f4fff8b246e017e6537b2ba4efadf763d609ff6b6627",
+   "digest": "50400e587156c95c298cab5bcc7fefb9f049f332a39a22910810fb971dea2acc",
    "entries": [
     {
      "mode": "100644",
@@ -2711,8 +2699,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "18fa4ab6f0bcee2cfce2abb8a2c73cf673c677d96c3e648fab321b94ca21e1bb",
-     "size": 212114,
+     "sha256": "6f3dcaae7796afacdca5b2e79108f761cd9019449e4f60ce596dced62c2483e8",
+     "size": 213048,
      "type": "file"
     },
     {
@@ -2732,8 +2720,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "e3e84924d4ffe1865cff862f268e3b47b2850e8277c09bc8383434d27af542bd",
-     "size": 86473,
+     "sha256": "32f30dede35be9fcefce2cff3571bec2e57abaa5ae1161f52ec216a9a0a29331",
+     "size": 87557,
      "type": "file"
     },
     {
@@ -2760,8 +2748,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "ca2436e7fdb06ac46d615af04198aa135b38fc54631343a490c26a4988e04d53",
-     "size": 257421,
+     "sha256": "f95809b77d9d06952e5fb68be21a9e245506de33d76f3183c28d40426e835b8a",
+     "size": 261808,
      "type": "file"
     },
     {
@@ -7519,6 +7507,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/data/people/dmPowerLines.js",
+     "sha256": "8f3c3ab1afb755c0eff8cdcfa61b8a8174b294c19e9e7b4f415403fea31e24df",
+     "size": 12551,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/data/people/handlerTieLines.js",
      "sha256": "dc47ec8edf8435ad397b0bc5e58c2c8d09fa8b4e2c43d48f61d325ab3c959f28",
      "size": 17244,
@@ -10761,8 +10756,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "c1e112c0785c375ae73ec8d8b095b76a07989eb288a93c56b12be6803f7d6a5b",
-     "size": 42070,
+     "sha256": "bbb027b2ba6e9d7cc7c3c036b7659bd8537e1e41294e1a5134f0ac9adef42b20",
+     "size": 42635,
      "type": "file"
     },
     {
@@ -11271,6 +11266,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/people/hallCapture.js",
+     "sha256": "f8a537968904f75b3157ed15314f5149bb34124b5eefde0975caaada8efde475",
+     "size": 10197,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/people/membership.js",
      "sha256": "50a9bb33a84185fdb9617986049f3363ddd9ec68951b059ee0a8739fbe248564",
      "size": 6120,
@@ -11328,8 +11330,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "68065458fe5d0f3746f0c79c680321f8d214b57ae2eb0101433a10ff88ae019b",
-     "size": 48463,
+     "sha256": "634cc5c81c5fa8af0ecec7976ccc9e4e488c06f1c17d47f5df1a29f34a018074",
+     "size": 48773,
      "type": "file"
     },
     {
@@ -16550,8 +16552,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "11a73419a08f490a7cd254eb2d2ca7b5b13115c4b8ecfc1d440f7464449de6f9",
-     "size": 50828,
+     "sha256": "916132a84eea4e3aeca20f7a743cabe7fe81ab7ce9d710e3226a7ae70b11b5e8",
+     "size": 52051,
      "type": "file"
     },
     {
@@ -16634,8 +16636,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
-     "size": 20589,
+     "sha256": "cc91a0661c738668b02d9e7af58561bbe7c3045ea228350f515a0a510b68ee4b",
+     "size": 24393,
      "type": "file"
     },
     {
@@ -16690,8 +16692,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/economyReconciliation.js",
-     "sha256": "0106cf341329ef425077acfcd6bed5ee65e89f7f6fe19927729036d338946eaf",
-     "size": 16199,
+     "sha256": "1bf774b2e155f9711b5497ef9534a25011830a2eef0003c2b004f03e2ca72f89",
+     "size": 16351,
      "type": "file"
     },
     {
@@ -16746,8 +16748,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/rulingStructure.js",
-     "sha256": "cf51e3d54a20349a7ee77deed0369550c62550735cddee8004e4e290c60e657c",
-     "size": 46941,
+     "sha256": "2bdedd9f0e817367b2816595f1cdbf09d62092ddb1c8f436c37d4cdc1ca2cc79",
+     "size": 47674,
      "type": "file"
     },
     {
@@ -19876,7 +19878,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "289c9d1e7e47aefc63029d6966e89769ce16d6addbccb940cedd13d4a0fa5f72",
+   "digest": "8517dfeb7cb373384ec16b50879dae191970f73cfb159a850fe8b04d6655e82f",
    "entries": [
     {
      "mode": "100644",
@@ -24563,6 +24565,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/data/people/dmPowerLines.js",
+     "sha256": "8f3c3ab1afb755c0eff8cdcfa61b8a8174b294c19e9e7b4f415403fea31e24df",
+     "size": 12551,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/data/people/handlerTieLines.js",
      "sha256": "dc47ec8edf8435ad397b0bc5e58c2c8d09fa8b4e2c43d48f61d325ab3c959f28",
      "size": 17244,
@@ -27756,8 +27765,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "c1e112c0785c375ae73ec8d8b095b76a07989eb288a93c56b12be6803f7d6a5b",
-     "size": 42070,
+     "sha256": "bbb027b2ba6e9d7cc7c3c036b7659bd8537e1e41294e1a5134f0ac9adef42b20",
+     "size": 42635,
      "type": "file"
     },
     {
@@ -28266,6 +28275,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/people/hallCapture.js",
+     "sha256": "f8a537968904f75b3157ed15314f5149bb34124b5eefde0975caaada8efde475",
+     "size": 10197,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/people/membership.js",
      "sha256": "50a9bb33a84185fdb9617986049f3363ddd9ec68951b059ee0a8739fbe248564",
      "size": 6120,
@@ -28323,8 +28339,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "68065458fe5d0f3746f0c79c680321f8d214b57ae2eb0101433a10ff88ae019b",
-     "size": 48463,
+     "sha256": "634cc5c81c5fa8af0ecec7976ccc9e4e488c06f1c17d47f5df1a29f34a018074",
+     "size": 48773,
      "type": "file"
     },
     {
@@ -33545,8 +33561,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "11a73419a08f490a7cd254eb2d2ca7b5b13115c4b8ecfc1d440f7464449de6f9",
-     "size": 50828,
+     "sha256": "916132a84eea4e3aeca20f7a743cabe7fe81ab7ce9d710e3226a7ae70b11b5e8",
+     "size": 52051,
      "type": "file"
     },
     {
@@ -33629,8 +33645,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
-     "size": 20589,
+     "sha256": "cc91a0661c738668b02d9e7af58561bbe7c3045ea228350f515a0a510b68ee4b",
+     "size": 24393,
      "type": "file"
     },
     {
@@ -33685,8 +33701,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/economyReconciliation.js",
-     "sha256": "0106cf341329ef425077acfcd6bed5ee65e89f7f6fe19927729036d338946eaf",
-     "size": 16199,
+     "sha256": "1bf774b2e155f9711b5497ef9534a25011830a2eef0003c2b004f03e2ca72f89",
+     "size": 16351,
      "type": "file"
     },
     {
@@ -33741,8 +33757,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/rulingStructure.js",
-     "sha256": "cf51e3d54a20349a7ee77deed0369550c62550735cddee8004e4e290c60e657c",
-     "size": 46941,
+     "sha256": "2bdedd9f0e817367b2816595f1cdbf09d62092ddb1c8f436c37d4cdc1ca2cc79",
+     "size": 47674,
      "type": "file"
     },
     {
@@ -36864,7 +36880,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a02f0fc440bb9b6e1f221e79013af6d76a860cf005660985035bb3f01568ab16",
+   "digest": "9cd37f855b287b73c6305bf1e25e3d00ea479ebc1ac4ed2ff73f87df3e29e434",
    "entries": [
     {
      "mode": "100644",
@@ -41621,6 +41637,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/data/people/dmPowerLines.js",
+     "sha256": "8f3c3ab1afb755c0eff8cdcfa61b8a8174b294c19e9e7b4f415403fea31e24df",
+     "size": 12551,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/data/people/handlerTieLines.js",
      "sha256": "dc47ec8edf8435ad397b0bc5e58c2c8d09fa8b4e2c43d48f61d325ab3c959f28",
      "size": 17244,
@@ -44863,8 +44886,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "c1e112c0785c375ae73ec8d8b095b76a07989eb288a93c56b12be6803f7d6a5b",
-     "size": 42070,
+     "sha256": "bbb027b2ba6e9d7cc7c3c036b7659bd8537e1e41294e1a5134f0ac9adef42b20",
+     "size": 42635,
      "type": "file"
     },
     {
@@ -45373,6 +45396,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/people/hallCapture.js",
+     "sha256": "f8a537968904f75b3157ed15314f5149bb34124b5eefde0975caaada8efde475",
+     "size": 10197,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/people/membership.js",
      "sha256": "50a9bb33a84185fdb9617986049f3363ddd9ec68951b059ee0a8739fbe248564",
      "size": 6120,
@@ -45430,8 +45460,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/holderTable.js",
-     "sha256": "68065458fe5d0f3746f0c79c680321f8d214b57ae2eb0101433a10ff88ae019b",
-     "size": 48463,
+     "sha256": "634cc5c81c5fa8af0ecec7976ccc9e4e488c06f1c17d47f5df1a29f34a018074",
+     "size": 48773,
      "type": "file"
     },
     {
@@ -50652,8 +50682,8 @@
     {
      "mode": "100644",
      "path": "src/generators/narrativeGenerator.js",
-     "sha256": "11a73419a08f490a7cd254eb2d2ca7b5b13115c4b8ecfc1d440f7464449de6f9",
-     "size": 50828,
+     "sha256": "916132a84eea4e3aeca20f7a743cabe7fe81ab7ce9d710e3226a7ae70b11b5e8",
+     "size": 52051,
      "type": "file"
     },
     {
@@ -50736,8 +50766,8 @@
     {
      "mode": "100644",
      "path": "src/generators/people/castPowers.js",
-     "sha256": "d6c742177843e6a06451b12a1bb73382616a652011ffb443768a3ee988f905a4",
-     "size": 20589,
+     "sha256": "cc91a0661c738668b02d9e7af58561bbe7c3045ea228350f515a0a510b68ee4b",
+     "size": 24393,
      "type": "file"
     },
     {
@@ -50792,8 +50822,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/economyReconciliation.js",
-     "sha256": "0106cf341329ef425077acfcd6bed5ee65e89f7f6fe19927729036d338946eaf",
-     "size": 16199,
+     "sha256": "1bf774b2e155f9711b5497ef9534a25011830a2eef0003c2b004f03e2ca72f89",
+     "size": 16351,
      "type": "file"
     },
     {
@@ -50848,8 +50878,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/rulingStructure.js",
-     "sha256": "cf51e3d54a20349a7ee77deed0369550c62550735cddee8004e4e290c60e657c",
-     "size": 46941,
+     "sha256": "2bdedd9f0e817367b2816595f1cdbf09d62092ddb1c8f436c37d4cdc1ca2cc79",
+     "size": 47674,
      "type": "file"
     },
     {
@@ -53971,30 +54001,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "cb38c2921d359f9530b70cfb79c8113313e1cf46f05d58b0cf21e77a5a9b68d9",
-  "corpusDigest": "c22d5f95af20d2860ff7d4dfb3eb72a39bad1beed56b1172899d499fa4324c14",
-  "currentArtifactDigest": "46c048763759ce1d59fbd2f9c4309b8d24f78dc788e4ea4b4c7853416e5c61d7",
-  "currentDetectorDigest": "dbadea7c0d9341f9f0d5aae43dfaf372712c22f3323641eb62d41e860b62fa8d",
-  "currentFindingsDigest": "7da8e36d055c9bcf72771d25ad5856c4e44d2f773c8f0742dbff18756fbfd73e",
-  "currentScannerSha": "837adcf73d424fd8d4811f9d19be565b3c7f212a",
-  "currentScannerToolDigest": "56ca9a0314f8dce02f23490b03fd01b3e9708f0515dbc41f1499ed673268b4c2",
-  "detectorTreeDigest": "dbadea7c0d9341f9f0d5aae43dfaf372712c22f3323641eb62d41e860b62fa8d",
-  "executionTreeDigest": "7a39fc0acc11565dda31f4fff8b246e017e6537b2ba4efadf763d609ff6b6627",
+  "bundleDigest": "0c7c13e4137ba70004b54847719d0279a02471a4c845811f4d506e049be77e37",
+  "corpusDigest": "c43ab278b2bedaecb883a033ab3dd5613362c93eb97580e20062999e84c61963",
+  "currentArtifactDigest": "035386dec5ce1229b49297597c888bfd3f530d6931d1b9a57eb16a9c921e6115",
+  "currentDetectorDigest": "d660cb480b957d7ce7bb2fd750f52cd0b92f710db261cc74e804afbc97f7ad3f",
+  "currentFindingsDigest": "ca4dba460e92f1ee9c565018f6390b4a981955c605eb14b8b33fc71b1aad4dda",
+  "currentScannerSha": "7017f50968cbba6b86c36f8c4c6dbf9edb909854",
+  "currentScannerToolDigest": "51d0b7ee438f604c50a82b85646896021a94bcf7c7629594a8ebddd28b1cf2cf",
+  "detectorTreeDigest": "d660cb480b957d7ce7bb2fd750f52cd0b92f710db261cc74e804afbc97f7ad3f",
+  "executionTreeDigest": "50400e587156c95c298cab5bcc7fefb9f049f332a39a22910810fb971dea2acc",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "46c048763759ce1d59fbd2f9c4309b8d24f78dc788e4ea4b4c7853416e5c61d7",
-  "legacyDetectorDigest": "dbadea7c0d9341f9f0d5aae43dfaf372712c22f3323641eb62d41e860b62fa8d",
-  "legacyScannerSha": "837adcf73d424fd8d4811f9d19be565b3c7f212a",
-  "legacyScannerToolDigest": "56ca9a0314f8dce02f23490b03fd01b3e9708f0515dbc41f1499ed673268b4c2",
-  "predecessorBaselineDigest": "dca5663890edc1685d11445f31312f481e355b95753822038888fbdfa8a99e92",
-  "predecessorBaselineTextSha256": "c24df833d5671ae9267dc79d9ccef011408491f9a1a43f3657ae58cfd2897b9c",
-  "predecessorInventoryDigest": "1ebf69432d742c689ada61ca3946b162784484847ff586cd9ec6fa6198db73fd",
-  "reportDigest": "503d33d2a838cb3ebf8afeefae78c72cc1731b0dc6b9a791db48030e33144464",
-  "reviewDigest": "8cdf14e568fe3530dfa7fd2065dbf1c071c72da79316f72d2fc19fbea5fa218f",
+  "legacyArtifactDigest": "035386dec5ce1229b49297597c888bfd3f530d6931d1b9a57eb16a9c921e6115",
+  "legacyDetectorDigest": "d660cb480b957d7ce7bb2fd750f52cd0b92f710db261cc74e804afbc97f7ad3f",
+  "legacyScannerSha": "7017f50968cbba6b86c36f8c4c6dbf9edb909854",
+  "legacyScannerToolDigest": "51d0b7ee438f604c50a82b85646896021a94bcf7c7629594a8ebddd28b1cf2cf",
+  "predecessorBaselineDigest": "0cdb67c412c3460e42e424cafb2d14a5472aef69015c1f758cd437f40dbdf37b",
+  "predecessorBaselineTextSha256": "1ba4bb99eb504c5dc0763c53e2049b586901e5dbea1a3af5923d76f92eb620ca",
+  "predecessorInventoryDigest": "3ab4fe14a4d0e2caa39dfb1710bec700545befb96474ead532bdac6cf6688235",
+  "reportDigest": "16455e2e20cff44b7852bec30048815c38cc2a88d2c176e1eaa5a3331a28678a",
+  "reviewDigest": "64ecf26b768ddc540de1d90fe9633864f14cc7c8aa80c7afb902bb054bc3ba99",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "289c9d1e7e47aefc63029d6966e89769ce16d6addbccb940cedd13d4a0fa5f72",
-  "sourceTreeDigest": "a02f0fc440bb9b6e1f221e79013af6d76a860cf005660985035bb3f01568ab16",
-  "subjectSha": "837adcf73d424fd8d4811f9d19be565b3c7f212a",
-  "targetInventoryDigest": "3ab4fe14a4d0e2caa39dfb1710bec700545befb96474ead532bdac6cf6688235"
+  "scanTreeDigest": "8517dfeb7cb373384ec16b50879dae191970f73cfb159a850fe8b04d6655e82f",
+  "sourceTreeDigest": "9cd37f855b287b73c6305bf1e25e3d00ea479ebc1ac4ed2ff73f87df3e29e434",
+  "subjectSha": "7017f50968cbba6b86c36f8c4c6dbf9edb909854",
+  "targetInventoryDigest": "6686b9e2ee5412ee66c350660be776374e26ce505540b15a7839d14a1965cf9e"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -54287,23 +54317,23 @@
   }
  },
  "scanStats": {
-  "files": 2426,
-  "reads": 139213,
-  "resolved": 11003,
-  "unresolved": 128210
+  "files": 2428,
+  "reads": 139407,
+  "resolved": 11040,
+  "unresolved": 128367
  },
  "scannerProvenance": {
-  "detectorDigest": "dbadea7c0d9341f9f0d5aae43dfaf372712c22f3323641eb62d41e860b62fa8d",
-  "executionTreeDigest": "7a39fc0acc11565dda31f4fff8b246e017e6537b2ba4efadf763d609ff6b6627",
-  "scanTreeDigest": "289c9d1e7e47aefc63029d6966e89769ce16d6addbccb940cedd13d4a0fa5f72",
-  "sourceTreeDigest": "a02f0fc440bb9b6e1f221e79013af6d76a860cf005660985035bb3f01568ab16",
+  "detectorDigest": "d660cb480b957d7ce7bb2fd750f52cd0b92f710db261cc74e804afbc97f7ad3f",
+  "executionTreeDigest": "50400e587156c95c298cab5bcc7fefb9f049f332a39a22910810fb971dea2acc",
+  "scanTreeDigest": "8517dfeb7cb373384ec16b50879dae191970f73cfb159a850fe8b04d6655e82f",
+  "sourceTreeDigest": "9cd37f855b287b73c6305bf1e25e3d00ea479ebc1ac4ed2ff73f87df3e29e434",
   "unscannedInputDigest": "aecc87d791729dcfa00a43ef5df515d9a0f817235d08efe5db16c4f7b5c0b8ad"
  },
- "schema": 35,
+ "schema": 36,
  "sentinel": {
-  "resolvedReads": 11003,
-  "totalKeys": 12236,
-  "usableShapes": 529
+  "resolvedReads": 11040,
+  "totalKeys": 12233,
+  "usableShapes": 528
  },
- "total": 2203
+ "total": 2183
 }
