@@ -181,7 +181,9 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // criminal-structure lines; taken in the same act as the golden re-record).
 // -> 3e522ac1 STYLE-2-MERGE record 16, the SW-7 POWER-SIDE merge (the people's dealing lines, secrets and the power cards'
 // sentences re-deal the control row; taken in the same act as the golden re-record).
-const GOLDEN_CONTROL_HASH = '3e522ac17849995cba800836da69b7e6f42f7b3169402d7237bf5775eaa07f0e';
+// -> 003d51a5 STYLE-2-MERGE record 17, the SW-B1 CONTRADICTIONS merge (the power cards' standing sentences read the power
+// order, P51/P50, and re-deal the control row's faction descriptions; taken in the same act as the golden re-record).
+const GOLDEN_CONTROL_HASH = '003d51a51ed16425ceea6fd5e9d3e1dd2a21d46cbd1a0f533eb8db12ed3b0601';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
