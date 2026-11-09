@@ -105,8 +105,8 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(207);
-    expect(plan.pendingCount).toBe(86);
+    expect(plan.repoHead).toBe(210);
+    expect(plan.pendingCount).toBe(89);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -134,13 +134,14 @@ describe('bounded migration rehearsal plan', () => {
       [205, 205],
       [206, 206],
       [207, 207],
+      [210, 210],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 86 }, (_, index) => 122 + index),
+      Array.from({ length: 89 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
@@ -429,6 +430,20 @@ describe('bounded migration rehearsal plan', () => {
     const hallVeil = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 207);
     expect(hallVeil.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
     expect(hallVeil.rollback.note).toMatch(/recreate 206's body verbatim/i);
+    // ⭐ THE NEW TAIL WAVE (210, SW-B7b PROJECTION, STYLE-RULINGS-2 B10(a), the chair's ruling of 2026-11-09 12:5x):
+    // one re-stated function, the public dossier sanitizer, 207's body plus ONE top-level allowlist token,
+    // 'publicProse'. No table, no column, no policy, no row. Its own @rollback annotation spells the reversal.
+    // (On SW-B7b's lane alone 208 and 209 are absent, so the gap arm above reads 208–209 there; their lanes'
+    // entries close it at the merge.)
+    expect(plan.waves.find((wave) => wave.id === 'public-prose-text-projection')).toMatchObject({
+      id: 'public-prose-text-projection',
+      from: 210,
+      to: 210,
+      expectedObjects: [{ kind: 'function', name: '_gallery_sanitize_public_json' }],
+    });
+    const publicProseWave = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 210);
+    expect(publicProseWave.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(publicProseWave.rollback.note).toMatch(/re-apply 207's body verbatim.*falls silent where the composed blocks stood/i);
     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
     // policy — but for the opposite reason: 197's data half is deliberately unscripted,
     // while 199's whole reversal IS one scripted statement. Both are
