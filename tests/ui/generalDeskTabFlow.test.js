@@ -326,6 +326,24 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expect(text.split(firstSite).length - 1, 'the site lines print once').toBe(1);
   });
 
+  test('a scene opening on a one-letter word takes the --lone drop-cap; "The road…" does not (SW-9, the "Amerchant" cure)', () => {
+    const lone = render(e(OverviewTab, {
+      settlement: { ...SPEAKING, arrivalScene: 'A merchant argues with a carter at the gate.' },
+      narrativeNote: null, onNavigateTab: () => {}, publicDossier: false, playerView: false, worldState: null,
+    }));
+    const p1 = lone.getByTestId('overview-place-arrival');
+    expect(p1.textContent).toBe('A merchant argues with a carter at the gate.');
+    expect(p1.className.split(' ')).toEqual(['oc-dropcap-prose', 'oc-dropcap-prose--lone']);
+    lone.unmount();
+    const plain = render(e(OverviewTab, {
+      settlement: { ...SPEAKING, arrivalScene: 'The road narrows at the gate.' },
+      narrativeNote: null, onNavigateTab: () => {}, publicDossier: false, playerView: false, worldState: null,
+    }));
+    const p2 = plain.getByTestId('overview-place-arrival');
+    expect(p2.textContent).toBe('The road narrows at the gate.');
+    expect(p2.className, 'a many-letter first word keeps the plain drop-cap').toBe('oc-dropcap-prose');
+  });
+
   test('the identity strip carries the culture scope phrase and who governs (X-5 / T1-1)', () => {
     const town = {
       ...SPEAKING,

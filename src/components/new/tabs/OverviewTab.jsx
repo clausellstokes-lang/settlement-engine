@@ -348,7 +348,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
       {r.arrivalScene&&(
         <div data-testid="overview-place" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
           <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The place</div>
-          <p className="oc-dropcap-prose" data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
+          {/* A scene opening on a one-letter word ("A merchant…") loses the space after the raised
+              initial, so it printed "Amerchant" (SW-3's diagnosis, ruled to SW-9 2026-11-09 02:18): the
+              --lone modifier gives that initial a word-space (organic.css). The words are not touched. */}
+          <p className={/^[A-Za-z]\s/.test(r.arrivalScene)?'oc-dropcap-prose oc-dropcap-prose--lone':'oc-dropcap-prose'} data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
         </div>
       )}
 
