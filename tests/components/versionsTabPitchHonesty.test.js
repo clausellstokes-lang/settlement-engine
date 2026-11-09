@@ -27,6 +27,12 @@
  *   - STILL NEGATIVE: canonize snapshots remain unbuilt, so that claim stays
  *     dead. If someone builds it, they flip this pin in the same change.
  *
+ * RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V3, 2026-11-09, the owner's tier law; the chair's
+ * ruling V3): version history is every owner's — timeline, compare, manual snapshot and
+ * revert — so the LOCKED PITCH IS STRUCK: there is nothing to sell. The claim halves below
+ * are re-keyed to their cause (no pitch sells what every owner holds); the mechanism halves
+ * stand unchanged, so a lever deleted from the tab still reds.
+ *
  * Copy is one-string vetoable. Idiom: comment-stripped source scans
  * (tests/components/frozenTenseDefenseCopy.test.js).
  */
@@ -49,17 +55,17 @@ const DIFF_VIEW = 'src/components/settlement/VersionDiffView.jsx';
 const SETTLEMENT_SLICE = 'src/store/settlementSlice.js';
 
 describe('VersionsTab locked pitch — sells only what ships (atlas queue #18)', () => {
-  test('the pitch describes the real snapshot cadence (commit checkpoint + pre-revert)', () => {
+  test('no locked pitch sells version history: it is every owner\'s (V3), and revert stays non-destructive', () => {
     const src = read(VERSIONS_TAB);
-    expect(src).toMatch(/Auto-snapshot before every committed change and every revert/);
-    // The true, still-promised half stays promised: non-destructive revert.
-    expect(src).toMatch(/Revert creates a new snapshot from the old state/);
+    expect(src).toMatch(/useStore\(s => s\.revertToSnapshot\)/); // anchored: the tab is the real one
+    expect(src).not.toMatch(/LockedDestination/); // anchored: the revert lever matched in this same source just above
+    expect(src).not.toMatch(/Cartographer/); // anchored: the revert lever matched in this same source just above
+    // Non-destructive revert is the store's: a revert records the pre-revert snapshot first.
+    expect(read(SETTLEMENT_SLICE)).toMatch(/revertToSnapshot/);
   });
 
   test('the manual-snapshot promise is backed by a real recordSnapshot lever', () => {
     const src = read(VERSIONS_TAB);
-    // The claim.
-    expect(src).toMatch(/Take a snapshot whenever you want/);
     // The mechanism: the store action is selected, called with the manual kind,
     // and there is a control whose label pulls the lever.
     expect(src).toMatch(/useStore\(s => s\.recordSnapshot\)/);
@@ -70,8 +76,6 @@ describe('VersionsTab locked pitch — sells only what ships (atlas queue #18)',
 
   test('the side-by-side promise is backed by a real comparison view', () => {
     const src = read(VERSIONS_TAB);
-    // The claim.
-    expect(src).toMatch(/put any two of them side by side/);
     // The mechanism: the lazy leaf exists, the tab lazy-imports it, and a
     // control exists to pick the two entries it compares.
     expect(fs.existsSync(path.join(ROOT, DIFF_VIEW))).toBe(true);

@@ -157,7 +157,8 @@ const EXEMPTIONS = {
   'src/components/pricing/PricingTierCards.jsx': 'sell-to-the-tier',
   'src/components/session/SessionMode.jsx': 'content-visibility',
   'src/components/settlement/FaithSection.jsx': 'content-visibility',
-  'src/components/settlement/VersionsTab.jsx': 'quota-or-limit',
+  // ⬇ TIER-PARITY-FIX V3 (2026-11-09) STRUCK the VersionsTab row: version history is at parity
+  // (revert included, the chair's ruling), the `isPaid` read DELETED. The census shrinks by one.
   'src/components/settlementDetail/resolveExportSeam.js': 'content-visibility',
   'src/components/settlements/SaveQuotaMeter.jsx': 'quota-or-limit',
   'src/hooks/useCustomContentCloudSync.js': 'campaign-or-import-entitlement',
