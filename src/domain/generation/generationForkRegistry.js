@@ -213,7 +213,12 @@ export const GENERATION_TIER2 = Object.freeze(/** @type {GenerationTier2Row[]} *
   // title → role map) and the v1 structural placeholder's STATUS is the appender's; neither moves under the
   // population step's perturbed stream any more (measured 0/42 on the probe grid), so both are `computed`.
   // The NAME still draws on the card's own keyed fork of this step's stream (42/42).
-  { cardShape: 'npc', outputKey: 'npcs[].role', forkId: 'generatePopulation', step: 'generatePopulation', key: 'npcs', module: 'src/generators/steps/generatePopulation.js', symbol: 'generatePopulation', origin: 'computed' },
+  // RE-KEYED 2026-11-08 (ALLEGIANCE-CAR2, the guild's push, A3), by identity with its cause: `npcs[].role` moves 7/42 on the
+  // probe grid under the population step's perturbed stream again (measured by A8e at bbb1a4abc; 0/42 at its parent). The
+  // flaws drawn on that stream decide the hidden agents (car 1), and the push now weights the agents in the rank deal, so the
+  // ranks, the importance band and the cards the faction coupling appends after the seam move with them (PLAUSIBLE: the
+  // chain argued from the code, the 7/42 measured). So it is `drawn`.
+  { cardShape: 'npc', outputKey: 'npcs[].role', forkId: 'generatePopulation', step: 'generatePopulation', key: 'npcs', module: 'src/generators/steps/generatePopulation.js', symbol: 'generatePopulation', origin: 'drawn' },
   { cardShape: 'npc', outputKey: 'npcs[].status', forkId: 'generatePopulation', step: 'generatePopulation', key: 'npcs', module: 'src/generators/steps/generatePopulation.js', symbol: 'generatePopulation', origin: 'computed' },
   { cardShape: 'faction', outputKey: 'powerStructure.factions[].faction', forkId: 'generatePower', step: 'generatePower', key: 'powerStructure', module: 'src/generators/steps/generatePower.js', symbol: 'generatePower', origin: 'computed' },
   { cardShape: 'faction', outputKey: 'powerStructure.factions[].category', forkId: 'generatePower', step: 'generatePower', key: 'powerStructure', module: 'src/generators/steps/generatePower.js', symbol: 'generatePower', origin: 'computed' },

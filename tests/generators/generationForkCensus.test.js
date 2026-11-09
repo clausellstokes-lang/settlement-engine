@@ -768,8 +768,11 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(wrongOrigin, 'a declared origin disagrees with its holding-step perturbation').toEqual([]);
     // RE-KEYED 2026-11-07 (the people car): 5 -> 7. The NPC's role and the placeholder's status no longer move
     // under the population step's perturbed stream (a card's role is its house's), so they are `computed` too.
+    // RE-KEYED 2026-11-08 (ALLEGIANCE-CAR2, the guild's push): 7 -> 6. The role list moves under the population step's
+    // perturbed stream again (7/42, measured by ARM C above): the flaws drawn there decide the hidden agents, whom the push
+    // now weights in the rank deal (src/domain/generation/generationForkRegistry.js names the chain), so it is `drawn`.
     expect(GENERATION_TIER2.filter((row) => row.origin === 'computed').length,
-      'the power structure consumes zero draws, the role and status are the house\'s, and all ten rows stay editable anyway').toBe(7);
+      'the power structure consumes zero draws, the placeholder\'s status is the appender\'s, and all ten rows stay editable anyway').toBe(6);
 
     // ── THE ANCHORED NEGATIVE. `powerStructure.seats[].holder` is the path the version-2 design
     // joined on and it exists NOWHERE; `powerStructure.governingName` is the real seat and
