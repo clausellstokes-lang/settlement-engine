@@ -1341,6 +1341,16 @@ export const NPC_FACTION_LOYALTY = {
     'A child has been asking questions about a person no one has heard of, insisting this person lived here recently.',
     'The well gives good water. The spring above it dried up three years ago. No one mentions this.',
     "They buried someone last season that they refer to only as 'the traveller'. They will not say more.",
+    'The family that has always mended the common track says it is theirs to close, and has closed it.',
+    "A cow belonging to one family was found dead in another family's field, and the two families no longer speak.",
+    'Someone has been moving the boundary stones at night, a little each time, always in the same direction.',
+    'A young couple from two families who do not speak have been seen together, and both families have noticed.',
+    'The person who settled every quarrel here has died, and two neighbours both expect to take their place.',
+    'A pedlar who comes every spring did not come this year, and the goods everyone ordered were paid for in advance.',
+    'Someone has been taking eggs and bread from doorsteps, a little at a time, and nobody has caught them.',
+    'An outsider has offered to buy the best field for twice what it is worth, and the owner is tempted.',
+    'The oldest family has started keeping its children indoors after dark, and will not say what they saw.',
+    'A letter came for a neighbour who has been dead for years, and the seal on it is one nobody here knows.',
   ],
 };
 

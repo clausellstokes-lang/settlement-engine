@@ -298,7 +298,7 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['Their savings were hidden in a place only one other person knew, and the savings are gone.', 'betrayal'],
   ["A neighbour's quarrel with them has gone before the people who settle disputes, and the hearing is next week.", 'rivalry'],
   ['Someone close to them has been ill in a way nobody can name, and recovers whenever one particular visitor stays away.', 'looming_threat'],
-  // ── small_settlement (8) ──
+  // ── small_settlement (18) ──
   ['Everyone in the settlement is behaving slightly differently toward a visitor from outside. Not unfriendly, careful.', 'outsider_suspicion'],
   ['There is a building no one talks about, goes into, or mentions. It is clearly maintained. No one will say by whom.', 'forbidden_knowledge'],
   ['The oldest resident refuses to speak about a specific year. Others confirm the year exists. No one remembers what happened.', 'old_wound'],
@@ -307,6 +307,16 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['A child has been asking questions about a person no one has heard of, insisting this person lived here recently.', 'vanished_person'],
   ['The well gives good water. The spring above it dried up three years ago. No one mentions this.', 'looming_threat'],
   ["They buried someone last season that they refer to only as 'the traveller'. They will not say more.", 'grief'],
+  ['The family that has always mended the common track says it is theirs to close, and has closed it.', 'rivalry'],
+  ["A cow belonging to one family was found dead in another family's field, and the two families no longer speak.", 'rivalry'],
+  ['Someone has been moving the boundary stones at night, a little each time, always in the same direction.', 'rivalry'],
+  ['A young couple from two families who do not speak have been seen together, and both families have noticed.', 'forbidden_love'],
+  ['The person who settled every quarrel here has died, and two neighbours both expect to take their place.', 'succession'],
+  ['A pedlar who comes every spring did not come this year, and the goods everyone ordered were paid for in advance.', 'vanished_person'],
+  ['Someone has been taking eggs and bread from doorsteps, a little at a time, and nobody has caught them.', 'scarcity_pressure'],
+  ['An outsider has offered to buy the best field for twice what it is worth, and the owner is tempted.', 'outsider_suspicion'],
+  ['The oldest family has started keeping its children indoors after dark, and will not say what they saw.', 'looming_threat'],
+  ['A letter came for a neighbour who has been dead for years, and the seal on it is one nobody here knows.', 'forbidden_knowledge'],
 ]));
 
 /**
