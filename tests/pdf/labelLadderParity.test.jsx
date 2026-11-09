@@ -352,7 +352,7 @@ describe('the paid document descends the same label ladder as the screen', () =>
       const words = leaves.map((leaf) => rendered(leaf));
       expectAbsentWithAnchor(
         words,
-        'State snapshot unavailable for this settlement (load and re-save to populate).',
+        'No picture of how this settlement stands was saved with it; save it again to add one.',
         'Resilience',
         `${town}: the state chapter rendered its empty shell, so the band arms are vacuous`,
       );

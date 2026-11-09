@@ -101,10 +101,10 @@ describe('DAILY_LIFE_TAB — LOAD_MSGS and the local narrative (carried through 
     }
   });
   it('paragraph [1] needs guardPresence (the parked guards stop); paragraph [2]\'s settled-authority sentence denies a succession crisis', () => {
-    const p1 = [...found.entries()].find(([k]) => k.startsWith('${food}. Work is divided'));
+    const p1 = [...found.entries()].find(([k]) => k.startsWith('${food}. Everyone knows their work')); // re-keyed by cause: STYLE-2 SW-4 (A7) reworded the line, its declaration untouched
     // CENSUS-2g unit 3 (the chair's answer 3): + `priest`, re-keyed by cause.
     expect(p1?.[1]).toEqual([{ needs: ['guardPresence', 'priest'], excludes: [], crisis: ['any'] }]);
-    expect(found.get('Most residents know where authority lives and how to petition it without making themselves memorable.')).toEqual([{ needs: [], excludes: ['crisis: succession'], crisis: ['any'] }]);
+    expect(found.get('Most residents know whom to petition, and how to do it without drawing notice.')).toEqual([{ needs: [], excludes: ['crisis: succession'], crisis: ['any'] }]);
   });
   it('the anchors fallback names nothing the place must hold (R-W)', () => {
     const src = readFileSync(new URL('../../../src/components/new/tabs/DailyLifeTab.jsx', import.meta.url), 'utf8');

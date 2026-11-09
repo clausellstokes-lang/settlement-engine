@@ -149,7 +149,7 @@ export default function PlotHooksTab({ settlement }) {
 
   if (!groups.length) {
     return (
-      <Empty message="No structural plot hooks surfaced yet." />
+      <Empty message="This settlement has no plot hooks yet." />
     );
   }
 

@@ -319,7 +319,7 @@ describe('W-H4 — the dossier unaffiliates section', () => {
     const { campaign } = campaignWithWanderer({ resting: 'sav_thorn' });
     storeState.campaigns = [campaign];
     render(<UnaffiliatesSection saveId="sav_kelder" />);
-    expect(screen.getByText(/Nobody is sheltering here/)).toBeTruthy();
+    expect(screen.getByText(/Everyone here belongs to one house or another/)).toBeTruthy();
     expect(screen.queryByTestId('unaffiliate-row')).toBeNull();
   });
 

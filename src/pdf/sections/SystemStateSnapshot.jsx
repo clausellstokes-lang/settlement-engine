@@ -64,7 +64,7 @@ export function SystemStateSnapshot({ settlement, narrativeMode, vm, causalDetai
           accent={narrativeMode ? palette.ai : palette.gold}
         />
         <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
-          State snapshot unavailable for this settlement (load and re-save to populate).
+          No picture of how this settlement stands was saved with it; save it again to add one.
         </Text>
       </PageChrome>
     );

@@ -69,7 +69,7 @@ describe('the gallery card', () => {
     expect(paintedSources(container)).toContain(TIER_STOCK_IMAGES.village);
     // And the alt text does not claim the picture is OF this town.
     const img = container.querySelector('img');
-    expect(img.getAttribute('alt')).toMatch(/of the kind/i);
+    expect(img.getAttribute('alt')).toMatch(/a painting of a typical/i);
     expect(img.getAttribute('loading'), 'the card image is not lazy').toBe('lazy');
   });
 
