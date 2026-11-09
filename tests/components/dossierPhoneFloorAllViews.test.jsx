@@ -592,7 +592,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
   "Summary/Plot Hooks":  { measured: 88, sub14: 88 },
   "Systems/Services":    { measured: 104, sub14: 104 },
-  "Systems/Institutions": { measured: 62, sub14: 62 }, // T1-14, measured 2026-10-30 by this walk
+  "Systems/Institutions": { measured: 71, sub14: 71 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   "Systems/Economics":   { measured: 42, sub14: 42 },
@@ -703,7 +703,7 @@ const MOBILE_BASELINE = Object.freeze({
   // line more (X-26a); both sub-floor counts stay where they were.
   "Summary/Plot Hooks":  { prose: 88, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Institutions": { prose: 61, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 70, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 34, chrome: 8, sub14: 8, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
