@@ -1040,7 +1040,7 @@ export function originRoutePoolKey(tradeRouteAccess) {
  * @param {string|null} key @param {unknown} inst @returns {string|null}
  */
 export function portLineStruck(key, inst) {
-  return key === 'port' && /** @type {any} */ (inst)?.hasPort === false ? null : key;
+  return key === 'port' && /** @type {{ hasPort?: unknown } | null | undefined} */ (inst)?.hasPort === false ? null : key;
 }
 
 /**

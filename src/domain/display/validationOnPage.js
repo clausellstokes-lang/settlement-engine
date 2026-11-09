@@ -247,17 +247,18 @@ export function criticalIssuesOf(v) {
  * issues and the structural violations marked `by_design`, one row per (type, institution, reason),
  * sorted by institution name (codepoint order). ONE reader of the fact: the tab prints this list and the DS-GEN-11 desk reads
  * its length, so the coherence line can never vouch above a by-design row the tab shows.
- * @param {ViabilityRecord} v the economicViability record @param {any} s the settlement
- * @returns {any[]}
+ * @param {ViabilityRecord} v the economicViability record
+ * @param {{ structuralViolations?: ReadonlyArray<ViabilityIssue | null> | null } | null | undefined} s the settlement
+ * @returns {ViabilityIssue[]}
  */
 export function byDesignItemsOf(v, s) {
-  /** @type {any[]} */ const rows = [
+  /** @type {ViabilityIssue[]} */ const rows = [
     ...arr(v?.issues).filter((i) => i?.severity === 'by_design'),
-    ...arr(s?.structuralViolations).filter((/** @type {any} */ i) => i?.severity === 'by_design'),
+    ...arr(s?.structuralViolations).filter((i) => i?.severity === 'by_design').map((i) => /** @type {ViabilityIssue} */ (i)),
   ];
   return rows.filter((item, index, all) => all.findIndex((c) => (
     c?.type === item?.type && c?.institution === item?.institution && c?.reason === item?.reason
-  )) === index).sort((a, b) => compareCodepoint(a.institution || '', b.institution || '')); // the codepoint order (determinism lint), not the host's collation
+  )) === index).sort((a, b) => compareCodepoint(/** @type {string} */ (a.institution || ''), /** @type {string} */ (b.institution || ''))); // the codepoint order (determinism lint), not the host's collation
 }
 
 /**
