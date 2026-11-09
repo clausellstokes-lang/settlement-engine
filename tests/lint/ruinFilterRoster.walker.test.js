@@ -513,7 +513,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // FIX-PUBLIC-VEIL (2026-11-07): 101 -> 102, src/domain/people/cardVeil.js :: veiledOfInstitution's roster-name read (EXEMPT above).
     // ALLEGIANCE-CAR1 (2026-11-08, the veil merged over MERGE-CAR): 105 + 1 (cardVeil.js, EXEMPT) = 106, measured by this file's own scan.
     // ALLEGIANCE-CAR1 (2026-11-08): 106 -> 107, src/domain/people/allegiance.js (the deal's criminal-house read, EXEMPT above), measured by this file's own scan.
-    expect(readers.length).toBe(107);
+    // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09): the integration side's 107 (cardVeil.js + hiddenHouseRow) + car 1's
+    // allegiance.js (EXEMPT; the lane's 107 counted cardVeil.js once with it) = 108, measured by this file's own scan at the merged tip.
+    expect(readers.length).toBe(108);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

@@ -170,7 +170,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // holds through record 1 (W1, 9288badee) and record 2 (W2, 35f9a29c6) -> 0bbb38b0 record 3, W3 (9cf847535) -> 7d900165 record 4,
 // W4 (b2ca867ac) -> 38c21132 record 5, W5 (c895df2dc) -> f776c5dd record 6, W7 (7f374ca60), holding through record 7, FOOD
 // (90950a7d8) -> d88f930b record 8, FIX-PUBLIC-VEIL (d8007f696).
-const GOLDEN_CONTROL_HASH = 'd88f930ba1913b48bdb1b783133cd54b2017f109e5fd095b126b4f2632b9d0b5';
+// 2026-11-09, the train (MERGE-TRAIN, ODQ §934.105), traced the same way: d88f930b holds through the wave's record 10
+// (7a33ae253) -> 772bcdc9 record 1, the ALLEGIANCE-CAR1 merge (c88cc75dd; the v3 save migration's schemaVersion 3 and the
+// hidden allegiance re-shape the control row).
+const GOLDEN_CONTROL_HASH = '772bcdc989f0c60ff267c7f57cbf7e5e5923b9840369d09f23930687759915c0';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -490,7 +493,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // keyed forks; fnv1a32External 15 -> 18) -> 91 PEOPLE-3 HOOKS (0f930ce95: 'people-hooks' and each card's hook fork) ->
     // 110 PEOPLE-4 TIES (c7d552370: each card's tie on its own keyed fork, R-P7; fnv1a32External 18 -> 15), unmoved to the
     // tip; direct 4, foreign 0 throughout. The bound is re-keyed to the tip's figure, never above it.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(110);
+    // 2026-11-09, the train (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, this arm's census at the merged tree): 110 -> 118, car 1's
+    // hidden allegiance (5902f1a4a, domain/people/allegiance.js :: dealAllegiances): one `allegiance` family fork and one keyed
+    // fork per eligible card on this row (+8); direct 4, foreign 0. Re-keyed to the measured figure, never above it.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(118);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
