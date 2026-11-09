@@ -32,7 +32,7 @@
  */
 
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
-import { effectiveCastOf, requiredRolesOf } from './crisisCast.js';
+import { CAST_REASONS, effectiveCastOf, requiredRolesOf } from './crisisCast.js';
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
@@ -82,8 +82,18 @@ export const LINE_ROLE_CLAUSE = Object.freeze({
   target: (h) => `it is aimed at ${h}`,
   defender: (h) => `${h} leads the defence`,
   treater: (h) => `${h} is the one who would come to terms`,
-  face: (h) => `${h} speaks for the occupier here`,
+  // SW-6 CRISIS-SURFACES (W4 row 262; B3's garbled line "Occupation Authority speaks for the occupier here: leads
+  // the occupying power"): the occupier's orders reach the place through the holder, a person or the house itself.
+  face: (h) => `the occupier's orders come through ${h}`,
 });
+
+/**
+ * The reasons a line role's clause already says (SW-6 CRISIS-SURFACES, B3: "leads the defence: leads the
+ * military"; "speaks for the occupier here: leads the occupying power"). Where the holder's reason is one of
+ * these, the cast hook is the clause alone, never the clause and its echo.
+ * @type {ReadonlySet<string>}
+ */
+const CLAUSE_SAYS = new Set([CAST_REASONS.face, CAST_REASONS.defenderMilitary]);
 
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v : '');
@@ -143,7 +153,7 @@ export function leverAndLoserOf(cast) {
  * The cast hook's sentence for a noun. PROPOSAL C1.
  * @param {string} noun @param {string} clause @param {string} reason
  */
-const castSentence = (noun, clause, reason) => `In the ${noun}, ${clause}: ${reason}.`;
+const castSentence = (noun, clause, reason) => (CLAUSE_SAYS.has(reason) ? `In the ${noun}, ${clause}.` : `In the ${noun}, ${clause}: ${reason}.`);
 
 /**
  * The lever hook's sentence for a noun. PROPOSAL L1 (with a loser) and L2 (none loses).

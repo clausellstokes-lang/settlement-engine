@@ -146,3 +146,18 @@ describe('slotCrisisHook: the catalog sentence gains a {holder} slot only where 
     expect(slotCrisisHook('famine', 'The DM’s own words.', c)).toBe('The DM’s own words.');
   });
 });
+
+// SW-6 CRISIS-SURFACES (W4 row 262; STYLE-RULINGS-2 B3): the garbled casting lines — "Occupation Authority
+// speaks for the occupier here: leads the occupying power" (soak1k-2), "leads the defence: leads the military"
+// (soak1k-5). The clause says the role; a reason that only echoes it is not printed after it.
+describe('crisisHooksOf: a cast hook never echoes its own clause', () => {
+  const occupier = { role: 'face', kind: 'faction', id: 'Occupation Authority', name: 'Occupation Authority', reason: CAST_REASONS.face, temporary: false };
+  it('the occupier\'s house as its own face reads as one plain sentence', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'occupied', cast: { ...cast([occupier]), nature: 'external' } });
+    expect(hook.text).toBe('In the occupation, the occupier\'s orders come through Occupation Authority.');
+  });
+  it('a defender who leads the military is not told twice that they lead it', () => {
+    const [hook] = crisisHooksOf(town(), { type: 'wartime', cast: { ...cast([npcRow('defender', 'n2', 'Oswin Hale', CAST_REASONS.defenderMilitary)]), nature: 'external' } });
+    expect(hook.text).toBe('In the war, Oswin Hale of Town Council leads the defence.');
+  });
+});
