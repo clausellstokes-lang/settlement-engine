@@ -1,0 +1,749 @@
+{
+  "_doc": "THE STYLE WALKER'S BASELINE (STYLE-2-WAVE SW-0, ruling A10): per file, per phrase, the count of the audit's §3 phrases in the reader-facing units the scanner reads. ONLY-SHRINKS: tests/lint/styleLaw.walker.test.js fails when any count rises and when a phrase whose total is 0 appears anywhere. Written ONLY by `node scripts/lib/style-law-scan.mjs --record`; never hand-edited (the digest is checked). The rules are the scanner's header.",
+  "door": "node scripts/lib/style-law-scan.mjs --record",
+  "measuredAtSha": "a7bc2e4ceaaff0b946e12fcb89eb2dde0e42ee74",
+  "phrases": [
+    "faction",
+    "rather-than",
+    "the-record",
+    "the-ledger",
+    "the-engine",
+    "a-stranger",
+    "arithmetic",
+    "per-cent",
+    "on-the-roster",
+    "not-merely",
+    "legitimacy-score",
+    "the-gap-widens",
+    "the-space-its-authority-does-not-occupy",
+    "two-different-things",
+    "a-separate-question",
+    "nothing-has-broken-yet",
+    "which-is-the-kind-of"
+  ],
+  "scannedFiles": 1096,
+  "totals": {
+    "faction": 345,
+    "rather-than": 323,
+    "the-record": 102,
+    "the-ledger": 41,
+    "the-engine": 13,
+    "a-stranger": 31,
+    "arithmetic": 27,
+    "per-cent": 8,
+    "on-the-roster": 9,
+    "not-merely": 3,
+    "legitimacy-score": 1,
+    "the-gap-widens": 1,
+    "the-space-its-authority-does-not-occupy": 0,
+    "two-different-things": 0,
+    "a-separate-question": 0,
+    "nothing-has-broken-yet": 0,
+    "which-is-the-kind-of": 0
+  },
+  "digest": "6936041590cdeaba5e3940f4664a0799813c172cb05a9fe1642b953eb331e978",
+  "files": {
+    "src/components/map/AdvanceReport.jsx": {
+      "the-record": 1,
+      "the-engine": 1
+    },
+    "src/components/map/HeraldWanderers.jsx": {
+      "the-record": 2
+    },
+    "src/components/map/NpcTrailSection.jsx": {
+      "rather-than": 1,
+      "the-record": 1
+    },
+    "src/components/map/PantheonPanel.jsx": {
+      "per-cent": 1
+    },
+    "src/components/map/PerspectiveStandings.jsx": {
+      "the-ledger": 1
+    },
+    "src/components/map/RealmForecast.jsx": {
+      "rather-than": 1
+    },
+    "src/components/map/RealmIntrigue.jsx": {
+      "faction": 1
+    },
+    "src/components/map/RelationshipChronicleSection.jsx": {
+      "the-record": 6
+    },
+    "src/components/map/SimulationRulesAxes.jsx": {
+      "the-engine": 1
+    },
+    "src/components/map/WhileYouWereAway.jsx": {
+      "the-record": 1
+    },
+    "src/components/map/WorldMapToolbar.jsx": {
+      "the-engine": 2
+    },
+    "src/components/map/WorldMapTourSteps.js": {
+      "the-engine": 1
+    },
+    "src/components/map/heraldRegister.js": {
+      "the-record": 1
+    },
+    "src/components/map/heraldWanderers.js": {
+      "a-stranger": 1
+    },
+    "src/components/new/tabs/DailyLifeTab.jsx": {
+      "the-engine": 2
+    },
+    "src/components/new/tabs/DefenseTab.jsx": {
+      "faction": 1
+    },
+    "src/components/new/tabs/InstitutionsTab.jsx": {
+      "the-engine": 2
+    },
+    "src/components/new/tabs/NPCsTab.jsx": {
+      "faction": 2
+    },
+    "src/components/new/tabs/PowerTab.jsx": {
+      "faction": 2
+    },
+    "src/components/new/tabs/SubstrateTab.jsx": {
+      "faction": 1
+    },
+    "src/components/new/tabs/WatchPanel.jsx": {
+      "the-record": 1
+    },
+    "src/components/new/tabs/power/PowerStrata.jsx": {
+      "faction": 3,
+      "per-cent": 1
+    },
+    "src/components/settlementDetail/CharterRoadCard.jsx": {
+      "rather-than": 1
+    },
+    "src/components/settlementDetail/SettlementDetailEditNames.jsx": {
+      "faction": 5
+    },
+    "src/copy/en.js": {
+      "faction": 5,
+      "the-record": 1
+    },
+    "src/data/arrivalProse.js": {
+      "rather-than": 1,
+      "a-stranger": 1
+    },
+    "src/data/cultureProfiles.js": {
+      "rather-than": 2
+    },
+    "src/data/dossierCausalProse.generated.js": {
+      "faction": 5,
+      "rather-than": 19,
+      "the-record": 6,
+      "the-ledger": 3,
+      "a-stranger": 3
+    },
+    "src/data/dossierStateProse/defense.generated.js": {
+      "faction": 4,
+      "rather-than": 23,
+      "a-stranger": 1
+    },
+    "src/data/dossierStateProse/economy.generated.js": {
+      "rather-than": 18,
+      "a-stranger": 10,
+      "on-the-roster": 2
+    },
+    "src/data/dossierStateProse/general.generated.js": {
+      "faction": 8,
+      "rather-than": 17,
+      "the-record": 3,
+      "a-stranger": 3,
+      "arithmetic": 4
+    },
+    "src/data/dossierStateProse/power.generated.js": {
+      "faction": 15,
+      "rather-than": 15
+    },
+    "src/data/dossierStateProse/stressors.generated.js": {
+      "faction": 12,
+      "rather-than": 8
+    },
+    "src/data/dossierStateProse/warFaith.generated.js": {
+      "faction": 1,
+      "rather-than": 26,
+      "the-record": 1
+    },
+    "src/data/historyData.js": {
+      "faction": 4
+    },
+    "src/data/institutionBacking.js": {
+      "faction": 1
+    },
+    "src/data/institutionDescVariants.js": {
+      "faction": 2,
+      "rather-than": 8,
+      "not-merely": 1
+    },
+    "src/data/institutionLadders.js": {
+      "faction": 1
+    },
+    "src/data/institutionServiceKeys.generated.js": {
+      "faction": 1
+    },
+    "src/data/institutionServices.js": {
+      "faction": 5,
+      "arithmetic": 1
+    },
+    "src/data/institutionalCatalog.js": {
+      "faction": 1,
+      "rather-than": 5
+    },
+    "src/data/narrativeData.js": {
+      "faction": 2,
+      "a-stranger": 2
+    },
+    "src/data/npcData.js": {
+      "faction": 4,
+      "rather-than": 6,
+      "a-stranger": 1
+    },
+    "src/data/personHooksByTitle.js": {
+      "a-stranger": 1
+    },
+    "src/data/powerData.js": {
+      "the-ledger": 1
+    },
+    "src/data/proseNorms.generated.js": {
+      "faction": 1,
+      "the-record": 1,
+      "arithmetic": 2
+    },
+    "src/data/spatialData.js": {
+      "faction": 1
+    },
+    "src/data/stressInstitutionEffects.js": {
+      "faction": 6
+    },
+    "src/data/stressTypes.js": {
+      "faction": 5
+    },
+    "src/data/stressorSpinePhrases.js": {
+      "faction": 1
+    },
+    "src/data/traditionProse.js": {
+      "faction": 1,
+      "the-record": 1
+    },
+    "src/domain/activeConditions.js": {
+      "faction": 2,
+      "rather-than": 1
+    },
+    "src/domain/causalState.js": {
+      "faction": 6,
+      "legitimacy-score": 1
+    },
+    "src/domain/content/customContentManifest.generated.js": {
+      "faction": 4
+    },
+    "src/domain/crisis/crisisCast.js": {
+      "faction": 7,
+      "on-the-roster": 2
+    },
+    "src/domain/crisis/crisisHooks.js": {
+      "faction": 1
+    },
+    "src/domain/crisis/crisisPage.js": {
+      "the-engine": 1
+    },
+    "src/domain/crisis/crisisSummaryVantage.js": {
+      "faction": 6
+    },
+    "src/domain/dailyLife.js": {
+      "faction": 2
+    },
+    "src/domain/display/causeConjunctionContent.js": {
+      "the-record": 1
+    },
+    "src/domain/display/causeConjunctionRole/civic.js": {
+      "the-record": 1,
+      "arithmetic": 1
+    },
+    "src/domain/display/causeConjunctionRole/criminal.js": {
+      "the-ledger": 1
+    },
+    "src/domain/display/causeConjunctionRole/diplomatOutsider.js": {
+      "the-record": 1
+    },
+    "src/domain/display/causeConjunctionRole/dissident.js": {
+      "a-stranger": 1
+    },
+    "src/domain/display/causeConjunctionRole/healer.js": {
+      "the-ledger": 2
+    },
+    "src/domain/display/causeConjunctionRole/laborResource.js": {
+      "the-ledger": 2
+    },
+    "src/domain/display/causeConjunctionRole/merchant.js": {
+      "the-ledger": 1,
+      "arithmetic": 2
+    },
+    "src/domain/display/causeConjunctionRole/military.js": {
+      "on-the-roster": 2
+    },
+    "src/domain/display/causeConjunctionRole/religious.js": {
+      "the-record": 2
+    },
+    "src/domain/display/causeConjunctionRole/ruler.js": {
+      "the-record": 1,
+      "arithmetic": 2
+    },
+    "src/domain/display/causeLifecycleVocabulary.js": {
+      "the-ledger": 2
+    },
+    "src/domain/display/causeWalk.js": {
+      "the-ledger": 2
+    },
+    "src/domain/display/chroniclersLetter.js": {
+      "the-record": 3,
+      "the-ledger": 1
+    },
+    "src/domain/display/defenseDisplay.js": {
+      "faction": 1
+    },
+    "src/domain/display/galleryVeil.js": {
+      "faction": 4
+    },
+    "src/domain/display/heraldCausalGrammar.js": {
+      "the-record": 3
+    },
+    "src/domain/display/heraldIndex.js": {
+      "faction": 1
+    },
+    "src/domain/display/heraldIntegrity.js": {
+      "the-record": 6,
+      "the-ledger": 1
+    },
+    "src/domain/display/humanizeEngineTokens.js": {
+      "the-record": 2
+    },
+    "src/domain/display/institutionVocabulary.js": {
+      "faction": 2,
+      "rather-than": 7
+    },
+    "src/domain/display/newsVoice.js": {
+      "faction": 5,
+      "the-ledger": 4
+    },
+    "src/domain/display/politicsRead.js": {
+      "faction": 3
+    },
+    "src/domain/display/rumorFallbackPhrasePools.js": {
+      "faction": 5,
+      "rather-than": 8,
+      "the-record": 7,
+      "the-ledger": 1,
+      "arithmetic": 2
+    },
+    "src/domain/display/rumorFallbackPhrasePoolsEvents.js": {
+      "faction": 5,
+      "rather-than": 9,
+      "the-record": 3
+    },
+    "src/domain/display/rumorPhrasePools.js": {
+      "rather-than": 2,
+      "the-record": 7,
+      "the-ledger": 1,
+      "arithmetic": 1
+    },
+    "src/domain/display/settlementRumors.js": {
+      "faction": 3
+    },
+    "src/domain/display/stateProse/decreeProsePools.js": {
+      "faction": 4,
+      "the-record": 4
+    },
+    "src/domain/display/stateProse/generalStateProse.js": {
+      "faction": 2,
+      "the-record": 1,
+      "arithmetic": 2
+    },
+    "src/domain/display/stateProse/powerStateProse.js": {
+      "faction": 3
+    },
+    "src/domain/display/stateProse/printProse.js": {
+      "faction": 1
+    },
+    "src/domain/display/tracePresentation.js": {
+      "faction": 1
+    },
+    "src/domain/display/warAndRoadNames.js": {
+      "the-ledger": 1
+    },
+    "src/domain/display/warRemembrance.js": {
+      "the-record": 7,
+      "the-ledger": 1
+    },
+    "src/domain/display/warResolve.js": {
+      "rather-than": 1
+    },
+    "src/domain/dossier/hookLines.js": {
+      "faction": 1
+    },
+    "src/domain/dossier/powerStrata.js": {
+      "faction": 1,
+      "the-record": 1
+    },
+    "src/domain/explanation.js": {
+      "faction": 2
+    },
+    "src/domain/hookEscalation.js": {
+      "faction": 12
+    },
+    "src/domain/magicProfile.js": {
+      "faction": 2
+    },
+    "src/domain/npc/characterReadModel.js": {
+      "a-stranger": 1
+    },
+    "src/domain/npcProfile.js": {
+      "faction": 2
+    },
+    "src/domain/summary/tonightSheet.js": {
+      "faction": 1,
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/applyWorldPulseFactionRoster.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/bandFamilies.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/calamityKernel.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/causeLifecycle.js": {
+      "the-ledger": 1
+    },
+    "src/domain/worldPulse/changeAuthorityPolicy.js": {
+      "faction": 3
+    },
+    "src/domain/worldPulse/commercialReasonsNews.js": {
+      "the-record": 2
+    },
+    "src/domain/worldPulse/commercialReceiptPools.js": {
+      "the-ledger": 1
+    },
+    "src/domain/worldPulse/commonsVoiceKernel.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/conquestFeasibility.js": {
+      "the-record": 2
+    },
+    "src/domain/worldPulse/counterIntelSweep.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/decisionTier.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/deityFlaws.js": {
+      "rather-than": 2
+    },
+    "src/domain/worldPulse/demographicsHerald.js": {
+      "rather-than": 4
+    },
+    "src/domain/worldPulse/demographicsKernel.js": {
+      "per-cent": 1
+    },
+    "src/domain/worldPulse/demographicsPlans.js": {
+      "per-cent": 2
+    },
+    "src/domain/worldPulse/demographicsRates.js": {
+      "rather-than": 3,
+      "per-cent": 1
+    },
+    "src/domain/worldPulse/envoyChanceMeeting.js": {
+      "arithmetic": 1
+    },
+    "src/domain/worldPulse/envoyChanceMeetingStage.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/envoyInbound.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/envoyNews.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/envoyTaskCatalog.js": {
+      "rather-than": 2,
+      "the-ledger": 1
+    },
+    "src/domain/worldPulse/espionage/infiltrationDepth.js": {
+      "faction": 1,
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/espionage/infiltrationDrift.js": {
+      "rather-than": 1,
+      "arithmetic": 1
+    },
+    "src/domain/worldPulse/espionage/operationsVoice.js": {
+      "rather-than": 1,
+      "the-record": 1
+    },
+    "src/domain/worldPulse/factionCompetition.js": {
+      "faction": 7
+    },
+    "src/domain/worldPulse/faithTuningSurface.js": {
+      "rather-than": 1,
+      "per-cent": 1
+    },
+    "src/domain/worldPulse/generosityNews.js": {
+      "the-ledger": 1
+    },
+    "src/domain/worldPulse/grammarReceiptPools.js": {
+      "the-record": 1,
+      "the-ledger": 2
+    },
+    "src/domain/worldPulse/habitForkRegistry.js": {
+      "faction": 3,
+      "rather-than": 64,
+      "the-record": 1,
+      "arithmetic": 1
+    },
+    "src/domain/worldPulse/heraldDeeds.js": {
+      "faction": 2
+    },
+    "src/domain/worldPulse/houseActs.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/infoLure.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/informationReceiptPools.js": {
+      "the-record": 1,
+      "a-stranger": 1
+    },
+    "src/domain/worldPulse/institutionStatusLifecycle.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/magicSubstitution.js": {
+      "per-cent": 1
+    },
+    "src/domain/worldPulse/moralInstitutionPressure.js": {
+      "rather-than": 2
+    },
+    "src/domain/worldPulse/npcCirculation.js": {
+      "the-engine": 1,
+      "a-stranger": 2
+    },
+    "src/domain/worldPulse/npcDmVerbRecords.js": {
+      "a-stranger": 1
+    },
+    "src/domain/worldPulse/npcGoalBranches.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/npcVerdictApply.js": {
+      "faction": 4
+    },
+    "src/domain/worldPulse/operations/operationGrammar.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/pactProposals.js": {
+      "the-ledger": 1
+    },
+    "src/domain/worldPulse/partyImpactKinds.js": {
+      "faction": 4
+    },
+    "src/domain/worldPulse/pulseKernel.js": {
+      "faction": 3
+    },
+    "src/domain/worldPulse/pulseStageManifest.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/razing.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/realmEvents.js": {
+      "faction": 3,
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/realmVerbExecution.js": {
+      "the-ledger": 1
+    },
+    "src/domain/worldPulse/relationshipMemory.js": {
+      "rather-than": 1,
+      "arithmetic": 1
+    },
+    "src/domain/worldPulse/relationshipRulesAdversarial.js": {
+      "faction": 1,
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/relationshipRulesCore.js": {
+      "faction": 2,
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/routeNetworkDecay.js": {
+      "the-record": 1
+    },
+    "src/domain/worldPulse/settlementLifecycleFirstClass.js": {
+      "the-engine": 1
+    },
+    "src/domain/worldPulse/settlementStrategy.js": {
+      "rather-than": 5
+    },
+    "src/domain/worldPulse/simulationProfile.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/sovereigntyReceiptPools.js": {
+      "the-record": 5,
+      "the-ledger": 1
+    },
+    "src/domain/worldPulse/stressorDynamics.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/stressorGates.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/stressors.js": {
+      "faction": 1
+    },
+    "src/domain/worldPulse/temperamentPresets.js": {
+      "the-engine": 1
+    },
+    "src/domain/worldPulse/tradeWar.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/treatyLifecycleVoice.js": {
+      "rather-than": 1,
+      "the-record": 1
+    },
+    "src/domain/worldPulse/warCoalitionRefusal.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/warReceiptPools.js": {
+      "rather-than": 3,
+      "the-record": 8,
+      "the-ledger": 6,
+      "a-stranger": 1,
+      "arithmetic": 5,
+      "the-gap-widens": 1
+    },
+    "src/domain/worldPulse/warRulingsNews.js": {
+      "faction": 1,
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/warSiegeVerdict.js": {
+      "rather-than": 1
+    },
+    "src/domain/worldPulse/warTermination.js": {
+      "the-record": 2
+    },
+    "src/foundry/journalPages.js": {
+      "faction": 4
+    },
+    "src/generators/crossSettlementConflicts.js": {
+      "faction": 1
+    },
+    "src/generators/economy/prosperity.js": {
+      "faction": 3,
+      "rather-than": 1,
+      "arithmetic": 1
+    },
+    "src/generators/economy/viability.js": {
+      "rather-than": 2
+    },
+    "src/generators/factionRoles.js": {
+      "faction": 1
+    },
+    "src/generators/isolationGenerator.js": {
+      "not-merely": 1
+    },
+    "src/generators/legacyGenerator.js": {
+      "faction": 1,
+      "rather-than": 3
+    },
+    "src/generators/narrative/settlementOriginProse.js": {
+      "rather-than": 3
+    },
+    "src/generators/narrativeGenerator.js": {
+      "faction": 1,
+      "a-stranger": 1
+    },
+    "src/generators/narrativeText.js": {
+      "faction": 18,
+      "rather-than": 5,
+      "the-ledger": 1
+    },
+    "src/generators/neighbourGenerator.js": {
+      "faction": 2
+    },
+    "src/generators/npcGenerator.js": {
+      "faction": 10,
+      "rather-than": 3
+    },
+    "src/generators/npcStructure.js": {
+      "faction": 8,
+      "rather-than": 7
+    },
+    "src/generators/people/mintTitles.js": {
+      "faction": 4
+    },
+    "src/generators/power/conflicts.js": {
+      "faction": 4
+    },
+    "src/generators/power/factionStanding.js": {
+      "faction": 3,
+      "rather-than": 3
+    },
+    "src/generators/power/governanceNarrative.js": {
+      "faction": 2,
+      "rather-than": 1
+    },
+    "src/generators/power/rulingStructure.js": {
+      "faction": 6,
+      "rather-than": 3,
+      "not-merely": 1
+    },
+    "src/generators/power/settlementNarrative.js": {
+      "faction": 6
+    },
+    "src/generators/power/stressFactions.js": {
+      "faction": 16
+    },
+    "src/generators/priorityHelpers.js": {
+      "faction": 1
+    },
+    "src/generators/recordBatteryFindings.js": {
+      "faction": 1
+    },
+    "src/generators/safetyProfile.js": {
+      "faction": 6,
+      "rather-than": 3
+    },
+    "src/generators/services/serviceCategoryTables.js": {
+      "faction": 2
+    },
+    "src/generators/services/serviceRollMaterialization.js": {
+      "faction": 1
+    },
+    "src/generators/servicesGenerator.js": {
+      "faction": 1
+    },
+    "src/generators/steps/cascadePass.js": {
+      "on-the-roster": 3
+    },
+    "src/generators/steps/neighbourFactions.js": {
+      "faction": 2
+    },
+    "src/generators/stressNarrative.js": {
+      "faction": 4
+    },
+    "src/pdf/lib/headlines.js": {
+      "faction": 1
+    },
+    "src/pdf/primitives/StateProse.jsx": {
+      "the-record": 1
+    },
+    "src/pdf/sections/DefenseSecurity.jsx": {
+      "faction": 1
+    },
+    "src/pdf/sections/NPCQuickRef.jsx": {
+      "faction": 1
+    },
+    "src/pdf/sections/PowerStructure.jsx": {
+      "faction": 1
+    }
+  }
+}
