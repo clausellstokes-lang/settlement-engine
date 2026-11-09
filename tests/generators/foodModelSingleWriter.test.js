@@ -253,11 +253,13 @@ describe('generators-domain-4 — single-writer food model', () => {
     const balance = settlement.economicViability.metrics.foodBalance;
 
     expect(balance.deficitPercent).toBe(26);
+    // RE-KEYED 2026-11-09 (STYLE-2 SW-7, A2): the band's words for 26 (Import-Dependent) in place of the per cent.
+    // Was /After imports, 26% of daily need goes uncovered/i.
     expect(settlement.economicState.situationDesc).toMatch(
-      /After imports, 26% of daily need goes uncovered/i,
+      /Even with what is brought in, people here go short of part of the food they need each day/i,
     );
     expect(settlement.economicState.situationDesc).toMatch(
-      /rationing and outside supply/i,
+      /has to ration and buy from outside/i, // RE-KEYED 2026-11-09 (SW-7, A2): was /rationing and outside supply/i
     );
     // The 26%-uncovered figure and the rationing clause are both pinned on this
     // same string above, so this exclusion measures wording, not absence.
