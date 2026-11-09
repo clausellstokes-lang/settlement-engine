@@ -482,7 +482,12 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // e36e4916f) at exactly that commit (change-point search over census-1b's first parent, into census-2 through the merge
 // 2b31f33f3); at the composed tip with 38d1b4c05's src reverse-applied the arm reads 865193cf, rung 1's value, so the two
 // lineages' moves compose with no interaction. Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = '5b6a1e518bf3cd5f62212a2872b1422a0cdf5ce203ca97c6a18aa76b87c16432';
+// 2026-11-09 (STYLE-2 SW-8 RENAME-POWERS, the owner's map, Part B4): 5b6a1e51... -> bce07bf5..., ONE cause, TEXT ONLY:
+// C5 e1a550158 (the world pulse's words). Bisected over the lane bd07005b9..e63c6aae6: unmoved through 417ca5cbe, moved
+// at e1a550158, unmoved after. Leaf-diffed 417ca5cbe -> e1a550158: 15 leaves, all strings — "Factions with the power to
+// move: …" -> "Powers strong enough to move: …" (x9), the label "Faction challenge" -> "Challenge to the rulers" (x3), its
+// reason line (x3); no id, tick or number moved. Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = 'bce07bf58a3abb0227753f59bb5da8282a6f0c805b3ebb4e5f0f66da0e978f55';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
