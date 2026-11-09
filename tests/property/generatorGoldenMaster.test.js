@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 7, THE SW-B2 FIRST-IMPRESSIONS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-7-swb2.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   110 of 525 rows (thorp 24, hamlet 24, village 24, town 14, city 12, metropolis 12) against point 6's post-state. THE CAUSE, ONE (first-parent step 52da4542c): the SW-B2 FIRST-IMPRESSIONS merge (lane/style-2-first-impressions-2026-11-09 at 249773c5d; its A·O16 causes the components: 443cf4051, b6d48ec0e — the lane's own 147 over its base, 110 on the line; settlementReason alone, field-diffed).
+ *   Written from the staged tree S7 (the tree of 52da4542c with the door paths carried from the branch). b9a9e693.. -> ab57c9db..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 6, THE SW-5 CRISIS-VANTAGES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-09-style-2-merge-6-sw5.json; the cloud chair signs under the owner's delegation, vetoable).
  *   192 of 525 rows (town 24, city 84, metropolis 84) against point 5's post-state. THE CAUSE, ONE (first-parent step a7770ecfe): the SW-5 CRISIS-VANTAGES merge (lane/style-2-crisis-vantages-2026-11-09 at 794846ba5; its unsigned cause the component: e249e565f, npcGenerator's wartime notes and three 'rather than' — the lane's own 194, 192 on the line after car 4's A9 retired two goal lines).
