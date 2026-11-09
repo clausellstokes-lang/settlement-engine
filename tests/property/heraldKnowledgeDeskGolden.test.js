@@ -116,7 +116,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 5 more items (470 → 475).
     // 475 → 450 at MERGE-TRAIN RECORD 1, THE ALLEGIANCE-CAR1 MERGE (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-1-car1.json): the hidden allegiance re-writes the agents' goals and ties (5902f1a4a, 475 -> 443 on its lane) and J-19 lights the pulse's knowledge desk (d131ab158, 443 -> 450); 2 moved, +131/-156 keys against the wave's final post-state.
     // 25 fewer items (475 → 450).
-    expect(Object.keys(manifest)).toHaveLength(450);
+    // 450 → 448 at MERGE-TRAIN RECORD 2, THE ALLEGIANCE-CAR2 MERGE OVER THE INTEGRATION BRANCH (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-2-car2.json): the guild's push re-deals two agents' goals (bbb1a4abc, 450 -> 448 on its lane); 2 moved, +0/-2 keys against record 1's post-state.
+    // 2 fewer items (450 → 448).
+    expect(Object.keys(manifest)).toHaveLength(448);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
