@@ -237,7 +237,9 @@ function FactionCard({ faction, index, entityIndex }) {
         value={f.power}
         max={100}
         label={f.powerLabel || 'Influence'}
-        sublabel={f.rawPower != null ? `raw ${f.rawPower}` : null}
+        // SW-7 POWER-SIDE (STYLE-2 B4/B7, SURFACES P49): "raw 76" was a machinery figure on the reader's page; the
+        // bar's own band word stays, and no second number is printed beside it.
+        sublabel={null}
         tone={f.isGoverning ? 'gold' : 'muted'}
         height={3}
       />
