@@ -72,3 +72,14 @@ describe('the share dialog — listed and linked at once (row (g))', () => {
     expect(screen.getByText(/listed in the gallery and have an unlisted link at the same time/)).toBeTruthy();
   });
 });
+
+describe("the party link's bar caption (row (g), the chair's ruling)", () => {
+  test('says what the link does now: exact link, lasts the settlement, listing leaves it alone, Rotate and Stop', async () => {
+    await renderDialog({ isPublic: true, publicSlug: 'highkeep01', unlistedSlug: 'u'.repeat(42) });
+    const caption = screen.getByText(/Only people with this exact link can open it/);
+    expect(caption.textContent).toMatch(/stays the same for as long as this\s+settlement exists/);
+    expect(caption.textContent).toMatch(/Listing the town in the gallery\s+neither ends nor changes it/);
+    expect(caption.textContent).toMatch(/Rotate it for a new link; Stop sharing ends it/);
+    expect(caption.textContent).not.toMatch(/never appears in the public gallery/);
+  });
+});
