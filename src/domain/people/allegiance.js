@@ -251,6 +251,11 @@ export function takeAllegianceReceipts(settlement) {
 }
 
 /**
+ * The draw surface the deal reads from the seam's stream (a kernel PRNG): a keyed child, a chance, a pick.
+ * @typedef {{ fork: (label: string) => DealStream, chance: (p: number) => boolean, pick: (xs: string[]) => unknown }} DealStream
+ */
+
+/**
  * A2 — THE DEAL. Writes `allegiance` (no handler yet) onto the cards the roll turns (the seam rewrites
  * their short goal from CORRUPT_SHORT_GOAL, as the retired pass did), and returns the receipts' working rows (completed by
  * `assignHandlers`). A card already holding a well-formed allegiance (a held DM card) keeps it and
@@ -258,7 +263,7 @@ export function takeAllegianceReceipts(settlement) {
  *
  * @param {Rec} settlement the settlement-shaped object at the coherence seam
  * @param {Rec[]} cards the cast, memberships landed (rank null)
- * @param {{ fork: (label: string) => any } | null} rng the seam's stream; null deals nothing
+ * @param {DealStream | null} rng the seam's stream; null deals nothing
  * @returns {Array<{ card: Rec, flaw: string, p: number, organized: number, climate: Rec }>}
  */
 export function dealAllegiances(settlement, cards, rng) {

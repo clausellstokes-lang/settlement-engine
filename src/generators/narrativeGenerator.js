@@ -948,7 +948,7 @@ export const enrichNpcCoherence = (settlement) => {
     const goalsNow = landed.all.map((n) => n?.goal?.short);
     for (const { card } of dealt) {
       const k = landed.all.indexOf(card);
-      const corruptGoal = CORRUPT_SHORT_GOAL[card.allegiance.vector] || CORRUPT_SHORT_GOAL.greed;
+      const corruptGoal = CORRUPT_SHORT_GOAL[/** @type {{ vector: keyof typeof CORRUPT_SHORT_GOAL }} */ (card.allegiance).vector] || CORRUPT_SHORT_GOAL.greed;
       if (card.goal && typeof card.goal === 'object' && !heldByOthers(goalsNow, k).has(corruptGoal)) {
         card.goal = { ...card.goal, short: corruptGoal };
         goalsNow[k] = corruptGoal;
