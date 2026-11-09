@@ -111,7 +111,7 @@ Measured stage to stage with `scripts/audit/landing-stage.sh measure` in a clean
 | `e9070d614` organizedCrime 0.05 (vs `62cc95004`) | **170** (town 2, city 84, metropolis 84) | **128** (village 2, town 13, city 54, metropolis 59) | rows 450 → 443: 2 moved, 44 added, 51 removed | **46** | 0 | 0 |
 | `e9070d614..60a9fa111` the merge, the panel, the PDF section (vs `e9070d614`) | 0 | 0 | 0 / 443 | 0 | 0 | **0** |
 | `a63effa93` the bought watch (vs `60a9fa111`) | 0 | 0 | 0 / 443 | 0 | 0 | 0 |
-| `8567f490d` the round-robin deal (vs `a63effa93`; nothing between moves the generator) | RR_GM | RR_FENCE | RR_HERALD | RR_PROSE | RR_WITNESS | RR_PDF |
+| `8567f490d` the round-robin deal (vs `a63effa93`; nothing between moves the generator) | 0 | **11** (town 2, city 6, metropolis 3) | 0 / 443 | 0 | 0 | 0 |
 
 The PDF golden view-model snapshot does not move: the DM rows ride the opt-in `dmLayer`, which the snapshot (and Foundry) leave off.
 
