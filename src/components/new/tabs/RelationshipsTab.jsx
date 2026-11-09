@@ -190,7 +190,7 @@ export function RelationshipsTab({ settlement:r, saveId=null, playerView=false, 
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerName}</span>
                       <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>({c.partnerRole}, {c.partnerSettlement})</span></>}
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:col,background:`${col}18`,border:`1px solid ${col}40`,padding:'1px 7px',marginLeft:'auto',flexShrink:0}}>
-                  {isFaction ? 'faction' : (c.conflictNature ? plainConflictNature(c.conflictNature) : 'conflict')}
+                  {isFaction ? 'power' : (c.conflictNature ? plainConflictNature(c.conflictNature) : 'conflict')}
                 </span>
               </div>
               {c.description&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
