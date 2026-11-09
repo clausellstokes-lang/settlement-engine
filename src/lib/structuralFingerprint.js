@@ -23,6 +23,31 @@ import { deriveCausalState, SYSTEM_VARIABLES } from '../domain/causalState.js';
 import { normalizeGood } from '../domain/region/goodsCatalog.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { allegianceOf } from '../domain/people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
+import { TITLE_ORDER } from '../data/people/titleSecretsPresentations.js'; // ALLEGIANCE-CAR4: the 147 fallback titles (item 15), counted, never copied
+
+/**
+ * THE FINGERPRINT'S SHAPE (ALLEGIANCE-CAR4, 2026-11-09, the chair's row on the owner's question): 2 adds the card's
+ * rank distribution, the fallback-title count and the keyed goal's family counts to the `npc` block, so a research row
+ * tells the new card shape from the old (a row without the key is shape 1). Bumped by the cause that changes the shape.
+ */
+export const FINGERPRINT_SHAPE = 2;
+const FALLBACK_TITLES = new Set(TITLE_ORDER);
+
+/** The card's best rank in any power, as an enum: 'rank1' | 'rank2' | 'rank3' | 'unranked'. @param {any} n */
+function bestRankOf(n) {
+  const ranks = arr(n?.memberships).map(m => m?.rank).filter(r => r === 1 || r === 2 || r === 3);
+  return ranks.length ? `rank${Math.min(...ranks)}` : 'unranked';
+}
+
+/** The keyed goal's family counts (the SHORT and the LONG vantage): enums only, never the goal's text or target. @param {any[]} npcs */
+function intentFamilyDist(npcs) {
+  const out = { short: {}, long: {} };
+  for (const n of npcs) for (const v of ['short', 'long']) {
+    const f = str(n?.goal?.intent?.[v]?.family);
+    if (f) out[v][f] = (out[v][f] || 0) + 1;
+  }
+  return out;
+}
 
 // ── Banding helpers ──────────────────────────────────────────────────────────
 export function populationBand(pop) {
@@ -103,6 +128,11 @@ function npcDistributions(settlement, save, opts = {}) {
     influence_dist: countByCategory(npcs, 'influence'),
     structural_rank_dist: countByCategory(npcs, 'structuralRank'),
     allegiance_count: npcs.filter(n => allegianceOf(n)).length, // ALLEGIANCE-CAR1 (J-17): corrupt_count -> allegiance_count, the hidden allegiance's count
+    // ALLEGIANCE-CAR4 (shape 2): coarse counts only — the membership ranks per card, the faces whose title is one of
+    // the 147 fallback titles, and the keyed goal's family per vantage (no name, no id, no text)
+    membership_rank_dist: countBy(npcs, bestRankOf),
+    fallback_title_count: npcs.filter(n => FALLBACK_TITLES.has(str(n?.title))).length,
+    intent_family_dist: intentFamilyDist(npcs),
   };
   if (states.length) {
     block.role_archetype_dist = countByCategory(states, 'roleArchetype');
@@ -193,6 +223,7 @@ export function extractSettlementFingerprint(settlement, save = null, opts = {})
 
   const fp = {
     // identity / versioning
+    fingerprint_shape: FINGERPRINT_SHAPE,
     schemaVersion: str(settlement.schemaVersion),
     generatorVersion: str(settlement.generatorVersion),
     seed: str(settlement._seed) || str(settlement.config?._seed), // research-tier; replays procedural output, never user edits

@@ -34,6 +34,9 @@ const SENSITIVE = [
   'Voss family heirloom daggers',     // user-authored trade good (ADD_TRADE_GOOD)
   'Blackmire ancestor ash',           // user-authored trade good, entrepôt form
   'voss_family_heirloom_daggers',     // its custom.<slug> id form must not leak either
+  'Bring Corvin Ashe of the black market in', // ALLEGIANCE-CAR4: a shape-2 card's goal TEXT (a pursuit naming a person)
+  'npc_target_corvin',                // ... its keyed intent's target ID
+  'Corvin Ashe',                      // ... the second card's name
 ];
 
 const settlement = {
@@ -69,6 +72,14 @@ const settlement = {
     // every fingerprint ever captured and this fixture was the only shape in which
     // it did not. It now sits at a live address the canonical collector walks.
     plotHooks: [{ text: 'A masked merchant seeks passage through the marsh.' }],
+  }, {
+    // ALLEGIANCE-CAR4 (shape 2): a card of the new shape — a fallback title, a ranked membership and a keyed goal whose
+    // text and target must never leave; only the counts (rank, title class, intent family) may.
+    id: 'npc_target_corvin', name: 'Corvin Ashe', importance: 'minor', title: 'the miller',
+    memberships: [{ power: 'The Hidden Hand', rank: 2, share: 1 }],
+    goal: { short: 'Bring Corvin Ashe of the black market in before the season is out.', long: 'Be free of the debt.',
+      intent: { short: { family: 'ALLEGIANCE', kind: 'warrant', key: 'pursue_warrant', target: { kind: 'npc', id: 'npc_target_corvin' } },
+        long: { family: 'TIES', kind: 'debtor', key: 'repay_debt', target: null } } },
   }],
   neighbourNetwork: [{ name: 'Greycairn', relationshipType: 'rival' }],
   history: 'Founded by exiles fleeing the Salt War, long ago.',
@@ -120,12 +131,12 @@ describe('structuralFingerprint — redaction canary', () => {
     expect(fp.config.culture).toBe('germanic');
     expect(fp.power.factions).toHaveLength(1);
     expect(fp.power.factions[0]).toEqual({ idx: 'f0', category: 'criminal', power_band: 'b3' });
-    expect(fp.npc_count).toBe(1);
+    expect(fp.npc_count).toBe(2);
     // hook_count is counted through the canonical collector. It read
     // `settlement.plotHooks || settlement.hooks` until 2026-08-11 — two keys no
     // writer produces on a settlement root — so it was 0 on every real capture.
     expect(fp.hook_count).toBe(1);
-    expect(fp.npc_importance_dist).toEqual({ pillar: 1 });
+    expect(fp.npc_importance_dist).toEqual({ pillar: 1, minor: 1 });
     expect(fp.institutions_by_category).toEqual({ tavern: 1 });
     expect(fp.conditions[0]).toMatchObject({ archetype: 'famine_risk', status: 'active', severityBand: 'high' });
     expect(fp.neighbours).toEqual(['rival']);
@@ -151,6 +162,13 @@ describe('structuralFingerprint — redaction canary', () => {
     // ALLEGIANCE-CAR1 (2026-11-08, J-17): corrupt_count -> allegiance_count, re-keyed with the cause
     expect(fp.npc.allegiance_count).toBe(0);
     expect(fp.npc).not.toHaveProperty('corrupt_count');
+    // ALLEGIANCE-CAR4 (shape 2, the chair's row): the card's rank, the fallback-title count and the keyed goal's family
+    // per vantage — counts and enums only; the shape is versioned so a research row tells old from new
+    expect(fp.fingerprint_shape).toBe(2);
+    expect(fp.npc.membership_rank_dist).toEqual({ unranked: 1, rank2: 1 });
+    expect(fp.npc.fallback_title_count).toBe(1);
+    expect(fp.npc.intent_family_dist).toEqual({ short: { ALLEGIANCE: 1 }, long: { TIES: 1 } });
+    expect(stableStringify(fp.npc), 'no kind, key or target leaves with the family').not.toMatch(/warrant|pursue_warrant|repay_debt|"target"/);
     // sim-state evolution sub-block (campaign worldState.npcStates)
     expect(fp.npc.role_archetype_dist).toEqual({ heir: 1, criminal: 1 });
     expect(fp.npc.seat_dist).toEqual({ lieutenant_operator: 1, agent_protege: 1 });
@@ -171,7 +189,7 @@ describe('structuralFingerprint — redaction canary', () => {
     const fp = extractReducedFingerprint(settlement);
     expect(fp).toMatchObject({
       tier: 'town', population_band: 'town_2k_10k', culture: 'germanic',
-      prosperity: 'struggling', npc_count: 1, faction_count: 1,
+      prosperity: 'struggling', npc_count: 2, faction_count: 1,
       institution_count: 1, condition_count: 1,
     });
   });
