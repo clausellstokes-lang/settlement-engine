@@ -491,3 +491,11 @@ Pins: `autoplacementConsent.test.jsx` — the lock's last sentence (D·92) and t
 | D·5 deployment row | `Deployed since tick {sinceTick}; home garrison thinned, war chest bleeding.` | "In the field since {tickCalendarDetailLabel(sinceTick)}. Fewer guards stand at home, and the war is costing {home} its savings." ({home} = `nameFor(nameById, dep.homeId)`, already read for the heading; the audit's `tickCalendarLabel` gives only the season, so the DETAIL label is taken — "week 5 of spring, year 1" — which keeps the week the in-file note said the DM counts forward from) |
 
 **Register, through its door:** the §69.3 prose-leak allowance (`prose-leak-allowance: tick 1`) outlived its site and is struck (the in-file note now says why); `tests/copy/proseLeak.test.js`'s register ceilings follow it down — tick allowances 11 → 10, files carrying one 12 → 11 (measured after: tick 10, week 6, 9 files; the week and file ceilings were already slack and are not this cause's). Pins: a new `tests/components/liveWarStatusWords.test.jsx` (the row's words, and a negative on the raw tick); **red at the parent**, green here.
+
+### 9m. `ChroniclersLetterPanel.jsx` (D·8)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·8 letter span header | `tick {sinceTick} → {throughTick}` | "{tickCalendarDetailLabel(sinceTick)} to {tickCalendarDetailLabel(throughTick)}" — e.g. "week 3 of spring, year 1 to week 7 of spring, year 1" (the DETAIL label, not the audit's season-level `tickCalendarLabel`: the in-file note called the window the DM's read-floor control, so it keeps the week) |
+
+**Register, through its door:** the §69.3 allowance (`tick 1`) struck with its site; `proseLeak`'s register ceilings fall again — tick 10 → 9, files 11 → 10 (measured after: tick 9, week 6). D·9 (SW-3's line at :118) untouched. Pins: a new `tests/components/chroniclersLetterSpanWords.test.jsx`; **red at the parent**, green here. The letter's own text export (`chroniclersLetter.js`, already calendar-worded) and its golden do not move.
