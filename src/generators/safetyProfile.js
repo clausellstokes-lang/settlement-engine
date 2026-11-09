@@ -599,7 +599,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     addCrimeIfMissing('escape networks',
       'Organised infrastructure helping enslaved persons escape. Safe houses, forged papers, passage out of the settlement. The same network that was small and cautious is now large and urgent.');
     addCrimeIfMissing('informant pressure',
-      'Both the authorities and the revolt leadership are pressing people for information. Silence is being interpreted as allegiance. Some residents have left rather than be forced to choose.');
+      'Both the authorities and the revolt leadership are pressing people for information. Silence is being interpreted as allegiance. Some residents have already left, so they will not be forced to choose.');
     addCrimeIfMissing('weapons trade',
       'Stolen and improvised weapons circulating in the revolt-held districts. Some are being smuggled in from outside. The black market is very active.');
   }
