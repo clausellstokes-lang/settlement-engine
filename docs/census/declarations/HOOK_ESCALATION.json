@@ -28,7 +28,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.ifIgnored[1]",
-     "text": "Smuggling fills the gap; criminal faction gains leverage.",
+     "text": "Smugglers fill the gap, and the local criminals grow stronger on it.",
      "needs": [],
      "excludes": [],
      "colour": false,
@@ -38,7 +38,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.ifIgnored[2]",
-     "text": "Public legitimacy erodes as the council fails to stabilize supply.",
+     "text": "People lose faith in the council as it fails to keep goods coming in.",
      "needs": [
       "ruler: council"
      ],
@@ -82,7 +82,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.possibleResolutions[1]",
-     "text": "Expose hoarding and force the controller to release reserves.",
+     "text": "Expose the hoarding and force whoever holds the stores to release them.",
      "needs": [
       "stores: > 0"
      ],
@@ -92,7 +92,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.chain.possibleResolutions[2]",
-     "text": "Subsidize the chain through temple charity or council intervention.",
+     "text": "Pay to keep the trade going, through temple charity or the council's purse.",
      "needs": [],
      "excludes": [],
      "colour": false,
@@ -126,7 +126,7 @@
    "lines": [
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.factionConflict.ifIgnored[0]",
-     "text": "One faction makes a unilateral move; the others retaliate.",
+     "text": "One power acts alone; the others strike back.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -206,7 +206,7 @@
    "lines": [
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.ifIgnored[0]",
-     "text": "The institution becomes impaired. Services it provides degrade.",
+     "text": "The institution stops working properly, and the people who rely on it go without.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -214,7 +214,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.ifIgnored[1]",
-     "text": "Dependent factions / chains lose their anchor.",
+     "text": "The powers and trades that depend on it are left without support.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -262,7 +262,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.institution.possibleResolutions[2]",
-     "text": "Accept the loss and let the dependent systems reorganize.",
+     "text": "Accept the loss and let those who depended on it find other ways.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -292,7 +292,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.npc.ifIgnored[1]",
-     "text": "Their faction or institution loses leadership and capacity.",
+     "text": "Their power or institution loses its leader and much of its strength.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -452,7 +452,7 @@
    "lines": [
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.ifIgnored[0]",
-     "text": "The pressure boils over into a discrete crisis (riot, strike, abandonment).",
+     "text": "The pressure boils over into open trouble: a riot, a strike, or people leaving.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -460,7 +460,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.ifIgnored[1]",
-     "text": "Stress markers propagate to adjacent subsystems.",
+     "text": "The trouble spreads to the trades and offices around it.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -470,7 +470,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.ORIGIN_CONSEQUENCES.pressure.ifIgnored[2]",
-     "text": "Public legitimacy strains; faction realignment becomes likely.",
+     "text": "People lose faith in their rulers, and the powers start changing sides.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -686,7 +686,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[1]",
-     "text": "{controller} loses revenue; tax base shrinks.",
+     "text": "{controller} takes in less, and so does the tax collector.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -716,7 +716,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[4]",
-     "text": "A criminal faction consolidates the new routes.",
+     "text": "A criminal power takes over the new routes.",
      "needs": [],
      "excludes": [],
      "colour": false,
@@ -726,7 +726,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.smuggling_rise.stages[5]",
-     "text": "Public legitimacy of the governing faction collapses.",
+     "text": "People stop accepting the ruling power's right to govern.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -767,7 +767,7 @@
     },
     {
      "lineId": "HOOK_ESCALATION.CLOCK_TEMPLATES.legitimacy_crisis.stages[1]",
-     "text": "A rival faction publicly questions {governing}.",
+     "text": "A rival power publicly questions {governing}.",
      "needs": [],
      "excludes": [],
      "colour": true,
