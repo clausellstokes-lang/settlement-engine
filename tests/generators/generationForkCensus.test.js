@@ -166,7 +166,11 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-11-08, the integration landing (MERGE-CAR, ODQ §934.105), traced the same way at each record's golden-master
 // commit: b58f9562 (the car's, carried) -> 2432ade0 record A, the rung-2 landing's merge (4e22bb6ad) -> 882e592f record B,
 // the people car's merge (6196cdec8).
-const GOLDEN_CONTROL_HASH = '882e592f4fb18052d4936695d3714658365fa133af6a55313eab5867335f1521';
+// 2026-11-08, the wave (MERGE-WAVE, ODQ §934.105), traced the same way at each record's golden-master commit: 882e592f
+// holds through record 1 (W1, 9288badee) and record 2 (W2, 35f9a29c6) -> 0bbb38b0 record 3, W3 (9cf847535) -> 7d900165 record 4,
+// W4 (b2ca867ac) -> 38c21132 record 5, W5 (c895df2dc) -> f776c5dd record 6, W7 (7f374ca60), holding through record 7, FOOD
+// (90950a7d8) -> d88f930b record 8, FIX-PUBLIC-VEIL (d8007f696).
+const GOLDEN_CONTROL_HASH = 'd88f930ba1913b48bdb1b783133cd54b2017f109e5fd095b126b4f2632b9d0b5';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
