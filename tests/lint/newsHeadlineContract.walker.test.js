@@ -157,7 +157,9 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // at news-headline-contract.mjs's ADDRESS_TOTALS): 41/2/82/0/82/596/782 → 43/2/86/0/86/606/792; four homes in and two out. Every row stays indicative.
     // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, f51058995; the guild's push bbb1a4abc re-dealing the year, at news-headline-contract.mjs's
     // ADDRESS_TOTALS): 43/2/86/0/86/606/792 → 44/2/88/0/88/606/792; applied|resource_depletion returns, none leaves. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 606, occurrences: 792 });
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, c6ded8e3a; e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at
+    // news-headline-contract.mjs's ADDRESS_TOTALS): 44/2/88/0/88/606/792 → 43/2/86/0/86/602/790; one home in, two out. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 43, fields: 2, identities: 86, prospectiveIdentities: 0, indicativeIdentities: 86, distinctValues: 602, occurrences: 790 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

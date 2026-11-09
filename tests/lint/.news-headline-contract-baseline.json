@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "corpus": {
     "pulseRoots": 12,
-    "introductions": 396,
-    "retirements": 0,
-    "finalEntries": 396,
-    "homes": 44
+    "introductions": 395,
+    "retirements": 1,
+    "finalEntries": 394,
+    "homes": 43
   },
   "addressTotality": {
     "rows": [
@@ -41,15 +41,15 @@
         "home": "applied|cause_lifecycle",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 8,
-        "occurrences": 9
+        "distinctValues": 6,
+        "occurrences": 7
       },
       {
         "home": "applied|cause_lifecycle",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 8,
-        "occurrences": 9
+        "distinctValues": 6,
+        "occurrences": 7
       },
       {
         "home": "applied|commons_gathering",
@@ -84,14 +84,14 @@
         "field": "headline",
         "voiceClass": "indicative",
         "distinctValues": 3,
-        "occurrences": 8
+        "occurrences": 9
       },
       {
         "home": "applied|conflict_pressure",
         "field": "summary",
         "voiceClass": "indicative",
         "distinctValues": 3,
-        "occurrences": 8
+        "occurrences": 9
       },
       {
         "home": "applied|flourishing",
@@ -220,20 +220,6 @@
         "occurrences": 3
       },
       {
-        "home": "applied|resource_depletion",
-        "field": "headline",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
-      },
-      {
-        "home": "applied|resource_depletion",
-        "field": "summary",
-        "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
-      },
-      {
         "home": "applied|rival_sabotage",
         "field": "headline",
         "voiceClass": "indicative",
@@ -514,6 +500,20 @@
         "occurrences": 2
       },
       {
+        "home": "queued|npc_reform",
+        "field": "headline",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
+        "home": "queued|npc_reform",
+        "field": "summary",
+        "voiceClass": "indicative",
+        "distinctValues": 1,
+        "occurrences": 1
+      },
+      {
         "home": "queued|npc_sabotage",
         "field": "headline",
         "voiceClass": "indicative",
@@ -531,43 +531,29 @@
         "home": "queued|npc_seek_promotion",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 4,
-        "occurrences": 4
+        "distinctValues": 3,
+        "occurrences": 3
       },
       {
         "home": "queued|npc_seek_promotion",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 4,
-        "occurrences": 4
-      },
-      {
-        "home": "queued|strategy_sue_for_peace",
-        "field": "headline",
-        "voiceClass": "indicative",
         "distinctValues": 3,
         "occurrences": 3
       },
       {
         "home": "queued|strategy_sue_for_peace",
-        "field": "summary",
-        "voiceClass": "indicative",
-        "distinctValues": 3,
-        "occurrences": 3
-      },
-      {
-        "home": "queued|trade_pressure",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
+        "distinctValues": 5,
+        "occurrences": 5
       },
       {
-        "home": "queued|trade_pressure",
+        "home": "queued|strategy_sue_for_peace",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 1,
-        "occurrences": 1
+        "distinctValues": 5,
+        "occurrences": 5
       },
       {
         "home": "realm|realm_insurgency",
@@ -626,15 +612,15 @@
         "occurrences": 1
       }
     ],
-    "rowsSha256": "9e1867d4eeb7db4d28efda2f3357d8ed866565cb2de4665cec0abed3db76adca",
+    "rowsSha256": "6609353c257dda1ef61862e5092a6508750c810b686a8ca2d43a313600516b71",
     "totals": {
-      "homes": 44,
+      "homes": 43,
       "fields": 2,
-      "identities": 88,
+      "identities": 86,
       "prospectiveIdentities": 0,
-      "indicativeIdentities": 88,
-      "distinctValues": 606,
-      "occurrences": 792
+      "indicativeIdentities": 86,
+      "distinctValues": 602,
+      "occurrences": 790
     }
   },
   "rewriteLiveness": {
@@ -644,30 +630,30 @@
         {
           "field": "mechanicalOutcomes",
           "capPerPulse": 8,
-          "headlineOccurrences": 52,
-          "distinctValues": 26,
+          "headlineOccurrences": 50,
+          "distinctValues": 25,
           "prospectiveOccurrences": 0,
           "prospectiveDistinctValues": 0,
-          "indicativeOccurrences": 52,
-          "indicativeDistinctValues": 26
+          "indicativeOccurrences": 50,
+          "indicativeDistinctValues": 25
         },
         {
           "field": "selectedOutcomes",
           "capPerPulse": 24,
-          "headlineOccurrences": 164,
+          "headlineOccurrences": 165,
           "distinctValues": 97,
           "prospectiveOccurrences": 0,
           "prospectiveDistinctValues": 0,
-          "indicativeOccurrences": 164,
+          "indicativeOccurrences": 165,
           "indicativeDistinctValues": 97
         }
       ],
       "union": {
-        "headlineOccurrences": 216,
+        "headlineOccurrences": 215,
         "distinctValues": 97,
         "prospectiveOccurrences": 0,
         "prospectiveDistinctValues": 0,
-        "indicativeOccurrences": 216,
+        "indicativeOccurrences": 215,
         "indicativeDistinctValues": 97
       }
     },
