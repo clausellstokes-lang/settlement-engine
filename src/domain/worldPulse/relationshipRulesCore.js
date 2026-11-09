@@ -557,7 +557,7 @@ function clientRules(ctx) {
         ruleId: "client_autonomy_bid",
         severity: 0.42 + autonomyPressure * 0.34,
         probability: 0.08 + autonomyPressure * 0.2,
-        reasons: ["A pressured client can produce autonomy movements or resistance factions."],
+        reasons: ["A pressured client can produce autonomy movements or resistance among its powers."],
         relationshipPatch: {
           resentment: clamp01(relState.resentment + 0.07),
           trust: clamp01(relState.trust - 0.04),

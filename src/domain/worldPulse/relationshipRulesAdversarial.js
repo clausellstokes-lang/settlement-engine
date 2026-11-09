@@ -648,7 +648,7 @@ function tradeLeverageCandidate(/** @type {any} */ ctx) {
       severity: sev,
       probability: clamp01(0.06 + info.salience * 0.14),
       reasons: [
-        "A critical-supplier dependency is leverage: the supplier extracts concessions or preferential terms rather than risk war over the relationship.",
+        "A critical-supplier dependency is leverage: the supplier presses for concessions or better terms and stops short of war over it.",
         `What the trade is worth to them is ${relationLevelWordFor(info.salience)}, and there is no other supplier of consequence.`,
       ],
       relationshipPatch: {
