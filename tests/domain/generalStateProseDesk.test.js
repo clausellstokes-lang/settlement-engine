@@ -1194,8 +1194,10 @@ describe('the history chapter', () => {
       eventRecordPoolKey([blow(true, 5), blow(true, 9)]), eventRecordPoolKey([blow(false, 5)]),
       // W5 HIS construction (2026-11-07): the legacy link, keyed by the relationship clause the
       // generator's own templates write, and the living-memory pairing.
-      ...[' created pressure that has not been fully resolved: ', ' was a disruption the settlement has since moved through: ',
-        ' established conditions that have since shifted: ', ': '].map((clause) => legacyPoolKey(
+      // STYLE-2 SW-7 (A11, 2026-11-09): the generator's clauses re-keyed to its plain words; the old clauses
+      // still key (a saved world's annotation), pinned below.
+      ...[' left trouble that has never been put right: ', ' hit the settlement hard, and it has since recovered: ',
+        ' set up ways of doing things that have since changed: ', ': '].map((clause) => legacyPoolKey(
         [{ annotation: `As of the founding survey, the siege (40 years ago)${clause}x.`, eventName: 'The Siege', yearsAgo: 40 }],
       )?.key),
       livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [{}] })
@@ -1203,6 +1205,10 @@ describe('the history chapter', () => {
     ])].sort()).toEqual(poolsOf('DS-GEN-16').sort());
     expect(legacyPoolKey([])).toBeNull();
     expect(legacyPoolKey([{ annotation: '' }])).toBeNull();
+    expect([' created pressure that has not been fully resolved: ', ' was a disruption the settlement has since moved through: ',
+      ' established conditions that have since shifted: '].map((clause) => legacyPoolKey(
+      [{ annotation: `As of the founding survey, the siege (40 years ago)${clause}x.`, eventName: 'The Siege', yearsAgo: 40 }],
+    )?.key), 'a saved world\'s old clause still keys').toEqual(['LEGACY-UNRESOLVED', 'LEGACY-RECOVERED', 'LEGACY-SHIFTED']);
     expect(livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [] }),
       'no current tension, no quarrel to speak of').toBeNull();
     expect(livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [{}] }))

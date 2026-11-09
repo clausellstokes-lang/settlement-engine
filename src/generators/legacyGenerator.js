@@ -84,13 +84,13 @@ function annotationBody(ev, relationship, suffix) {
     : '';
 
   if (relationship === 'unresolved') {
-    return `${name} (${ev.yearsAgo} years ago) created pressure that has not been fully resolved: ${suffix}${effectClause}`;
+    return `${name} (${ev.yearsAgo} years ago) left trouble that has never been put right: ${suffix}${effectClause}`;
   }
   if (relationship === 'recovery') {
-    return `${name} (${ev.yearsAgo} years ago) was a disruption the settlement has since moved through: ${suffix}${effectClause}`;
+    return `${name} (${ev.yearsAgo} years ago) hit the settlement hard, and it has since recovered: ${suffix}${effectClause}`;
   }
   if (relationship === 'drift') {
-    return `${name} (${ev.yearsAgo} years ago) established conditions that have since shifted: ${suffix}${effectClause}`;
+    return `${name} (${ev.yearsAgo} years ago) set up ways of doing things that have since changed: ${suffix}${effectClause}`;
   }
   return `${name} (${ev.yearsAgo} years ago): ${suffix}${effectClause}`;
 }
