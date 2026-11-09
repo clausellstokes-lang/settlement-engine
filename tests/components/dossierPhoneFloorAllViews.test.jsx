@@ -581,6 +581,10 @@ const desktopShape = (perView) => Object.fromEntries(
 // lookup resolves through the one rule: a stable entry under an active crisis is refused and the NPC keeps its role
 // goal) NPCs 31 -> 23. sub14 follows measured.
 const DESKTOP_BASELINE = Object.freeze({
+  // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
+  // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
+  // (the hidden-allegiance badge rows, 4e55421ea), CAR2/CAR3 -1, CAR4 +62 (every card's short and long goal, A9 03ff59084); every other
+  // view and point 0. The floors arm read one violation first (car 1's badge line at 12px prose), cured before this pin moved.
   // RE-MEASURED ONCE at MERGE-WAVE's GREEN-BASE point (2026-11-08, GREEN-BASE §4.4), the final merged tree: the people car's rows
   // (8dff691f3: World/NPCs 23 -> 220, World/Relationships 61 -> 178, Summary/Plot Hooks 37 -> 88 with the car's one hook per face)
   // and the wave's lines (Systems/Power 22 -> 30, Services 109 -> 104, Resources 2 -> 1, Outlook 1 -> 2; World/Daily Life 1 -> 0,
@@ -621,7 +625,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // instead of the siege/famine/plague flag, so the fixture's block renders on the public walk: its title
   // (chrome), its static explanation and its chain notes (prose). No token moved.
   "Systems/Magic":       { measured: 4, sub14: 4 },
-  "World/NPCs":          { measured: 220, sub14: 220 },
+  "World/NPCs":          { measured: 284, sub14: 284 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 178, sub14: 176 },
@@ -694,6 +698,10 @@ const DESKTOP_BASELINE = Object.freeze({
 // floors arm is green. The same two steps as the desktop note: e152ee220 census-4 R8 (Institutions prose 64 -> 61) and
 // b8fdcd3d5 census-1e unit 1 (NPCs prose 30 -> 22); chrome and both sub-floor counts hold.
 const MOBILE_BASELINE = Object.freeze({
+  // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
+  // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
+  // (the hidden-allegiance badge rows, 4e55421ea), CAR2/CAR3 -1, CAR4 +62 (every card's short and long goal, A9 03ff59084); every other
+  // view and point 0. The floors arm read one violation first (car 1's badge line at 12px prose), cured before this pin moved.
   // RE-MEASURED ONCE at MERGE-WAVE's GREEN-BASE point (2026-11-08, GREEN-BASE §4.4), the same walk at 375px: the people car's
   // rows (8dff691f3) and GREEN-BASE's 27b858fd9 (the car's rows on the PROSE floor) with the wave's lines; World/Relationships
   // chrome 3 -> 39 (the car's tie cards' chrome rows, all >= 12px). sub12 stays 0 in every view; the floors arm reads 0 violations.
@@ -722,7 +730,7 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 0 -> 3, chrome 0 -> 1 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
   "Systems/Magic":       { prose: 3, chrome: 1, sub14: 1, sub12: 0 },
-  "World/NPCs":          { prose: 219, chrome: 1, sub14: 0, sub12: 0 },
+  "World/NPCs":          { prose: 283, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 139, chrome: 39, sub14: 39, sub12: 0 },
   "World/Faith":         { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose: 0, chrome: 0, sub14: 0, sub12: 0 },
