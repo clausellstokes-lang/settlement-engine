@@ -29,6 +29,7 @@ import { criminalStructureOf, economicsDeskArgs, impairedInstitutionOf, overview
 import { generalDeskLines } from './generalDeskRead.js';
 import { stressorsDeskRead } from './stressorsDeskRead.js';
 import { defenseDeskRead, DEFENSE_LENSES } from './defenseDeskRead.js';
+import { POWER_BLOC_RUNGS, governanceAccountRead, powerDeskRead, powerDeskReadings, powerLadderRead, powerLadderRowsOf } from './powerDeskRead.js';
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
 import { isPhantomRecord } from '../../domain/edit/phantoms.js';
@@ -71,7 +72,34 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   ...DEFENSE_LENSES.map((lens) => /** @type {const} */ ([`defense:${lens}`, (/** @type {any} */ s, /** @type {boolean} */ publicDossier) => defenseDeskRead(s, {
     publicDossier, playerView: true, tier: s?.tier, crimStructure: criminalStructureOf(s)?.key ?? null,
   })[lens]])),
+  // THE POWER DESK (powerDeskRead.js is its one caller). The blocs (DS-POW-7) read the played
+  // world's politics ledger: campaign-only, so their rungs are never shipped (owner-only).
+  ['power:desk', (s, publicDossier) => withoutRungs(powerDeskRead(s, {
+    publicDossier, playerView: true, readings: powerDeskReadings(s, { playerView: true }),
+  }), POWER_BLOC_RUNGS)],
+  // The governance account paragraph (OWNER-WORDS-DOSSIER item 3), as text.
+  ['power:governance', (s, publicDossier) => governanceAccountRead(s, { publicDossier })],
+  // DS-POW-3, one line per faction with a ladder, as a list (a faction's NAME never becomes a
+  // key, so the projection's key denylist cannot strip one).
+  ['power:ladder', (s, publicDossier) => {
+    const rows = powerLadderRowsOf(s, s?.powerStructure?.factions)
+      .map(({ f, rungs, instab }) => ({
+        faction: f.faction,
+        rung: powerLadderRead(s, { publicDossier, playerView: true, factionName: f.faction, rungs, instability: instab }),
+      }))
+      .filter((row) => row.rung);
+    return rows.length ? rows : null;
+  }],
 ].map((entry) => Object.freeze(entry)));
+
+/**
+ * A drawn desk with the named rungs nulled (an owner-only lens the save must not ship).
+ * @param {any} desk @param {ReadonlyArray<string>} keys @returns {any}
+ */
+function withoutRungs(desk, keys) {
+  if (!desk || typeof desk !== 'object') return desk;
+  return { ...desk, ...Object.fromEntries(keys.map((key) => [key, null])) };
+}
 
 /**
  * The projection for one owner record, or null with no record.

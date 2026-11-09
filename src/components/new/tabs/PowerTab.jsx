@@ -8,18 +8,14 @@ import { NarrativeNote } from '../NarrativeNote';
 import { FACTION_COLORS } from '../tabConstants';
 import { useStore } from '../../../store/index.js';
 import { factionIdFromName } from '../../../lib/entities.js';
-import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../../domain/townMap/ladderRead.js';
+import { hasLadder } from '../../../domain/townMap/ladderRead.js';
 import { PowerStrata } from './power/PowerStrata.jsx'; // X-50: one line, so no cited line moves
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
-import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
 import { governingFactionOf } from '../../../domain/rulingPower.js';
-import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
-import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/politicsRead.js';
-import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
+// THE POWER DESK IS REACHED THROUGH ITS ONE CALLER (ARM 2), shared with the public prose
+// composer (SW-B7b): the reader owns the desk, the ladder rung and the governance paragraph.
+import { powerDeskRead, powerDeskReadings, powerLadderRead, powerLadderRowsOf, governanceAccountRead } from '../powerDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
-import { governanceAccountOf, governanceStressTypesOf } from '../../../domain/display/governanceAccount.js';
-import { resolvePrimaryStress } from '../../../generators/stressPriority.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). The four positions below mapped
 // their drawn sentences to one `<p>` EACH; ProseBlock weaves each position into one
 // paragraph. The DRAW is unchanged — these are the same strings `drawnAtMount` ruled on.
@@ -63,15 +59,6 @@ const LADDER_MOUNT = 'power.factionLadder';
 
 /** Ruling structure: the ruling-power word, the economic base, and the body's own title. */
 const STRUCTURE_MOUNT = 'power.rulingStructure';
-// The public dossier draws no corpus prose (§885.3): every rung null. WIRING W3 (2026-11-07)
-// added `structureFlag` and `gmAdvisory` and lifted the record here, out of the gated call.
-const PUBLIC_DOSSIER_PROSE = Object.freeze({
-  legitimacyBanner: null, legitimacyLens: null, stabilityHeader: null, stabilityLens: null,
-  legitimacyReading: null, captureReading: null, operationReading: null,
-  successionRisk: null, successionHold: null,
-  rulingStructure: null, governingTitle: null, structureFlag: null, gmAdvisory: null,
-  blocPresence: null, blocGlue: null, blocEnd: null,
-});
 
 /** Blocs and the divided court. Three draws at one position. */
 const BLOCS_MOUNT = 'power.blocs';
@@ -223,8 +210,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   // sentence, forever. THE PUBLIC GATE (§885.3, the carve-out the economy desk already
   // holds): a public gallery dossier is a PAID SURFACE, and the `power` tab is NOT filtered
   // off one — only dm_notes/ai_notes are — so without this line the corpus would light on a
-  // free/anon visitor's view. The desk is not drawn there and both rungs are null ⇒
-  // drawnAtMount answers null at the mount ⇒ no corpus sentence renders. The DATUM is
+  // free/anon visitor's view. Since B10(a) (SW-B7b) the shared page prints the desk the owner's
+  // player view drew, shipped at the save; an unstamped record is SILENT at every mount. The DATUM is
   // untouched either way: the score, the label, the breakdown chips and the fracture note
   // never read the desk.
   // ⚠ THE AUDIENCE IS LOAD-BEARING, AND OMITTING IT SILENTLY DARKENS AUTHORED CONTENT.
@@ -233,33 +220,19 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   // so a desk called without one can never draw them, and the block would ship mounted with
   // four pools no world could reach. The corpus authored them FOR the DM; the DM's own
   // dossier is where they belong, and the player view truncates them to silence rather than
-  // to a hint. `publicDossier` still nulls everything before this ever matters.
-  const audience = playerView ? 'player' : 'dm';
-  // THE CALLER'S OWN DERIVATION, handed to the desk rather than reached for by it: the desk
-  // stays a pure display leaf and rulingPowerCoup's 13.9 KB stays out of its import graph.
-  // Skipped entirely on a public dossier, where the desk is not drawn at all.
-  const contenders = publicDossier ? null : coupContenders(s);
-  // Both derivations are the CALLER'S, handed over rather than reached for by the desk.
-  const deskReadings = publicDossier ? {} : {
-    ...(contenders ? { contenders, riskLabel: coupRiskLabel(contenders) } : {}),
-    structuralLens: structuralLensOf(s),
-    // DS-POW-7. The DISPLAY projection, never the 61.9 KB kernel module. `includeCovert`
-    // honours the projection's own secrets filter — a conspiracy does not enter a player's
-    // projection at all — while `includeGroundTruth` hands over the raw end/glue tokens the
-    // desk needs to ROUTE. The corpus's own dm-only marks then gate the SENTENCE under
-    // kernel law 2, so a player routed to a covert pool gets silence rather than a secret.
-    politics: politicsBlocsOf({
-      worldState,
-      settlementId: s?.id ?? saveIdOfSettlement(s),
-      includeGroundTruth: !playerView,
-      includeCovert: !playerView,
-    }),
-  };
-  const deskProse = publicDossier
-    ? PUBLIC_DOSSIER_PROSE
-    : powerStateProse(s, deskReadings, {
-      seed: String(s?._seed ?? s?.id ?? ''), audience, tierNoun: tierNounFor(s?.tier),
-    });
+  // to a hint. The reader states it (powerDeskRead.js); a shared page reads the shipped desk.
+  // Both derivations are the CALLER'S (powerDeskRead.js :: powerDeskReadings, one derivation
+  // shared with the public prose composer), handed over rather than reached for by the desk.
+  // DS-POW-7's politics is the DISPLAY projection, never the 61.9 KB kernel module:
+  // `includeCovert` honours the projection's own secrets filter, `includeGroundTruth` hands over
+  // the raw end/glue tokens the desk needs to ROUTE, and the corpus's own dm-only marks then
+  // gate the SENTENCE under kernel law 2. Skipped on a shared page, which reads the shipped desk.
+  const deskReadings = publicDossier ? {} : powerDeskReadings(s, {
+    playerView, worldState, settlementId: s?.id ?? saveIdOfSettlement(s),
+  });
+  // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the desk the
+  // owner's player view drew, shipped at the save (`power:desk`); unstamped, SILENT.
+  const deskProse = powerDeskRead(s, { publicDossier, playerView, readings: deskReadings });
   // OWNER-WORDS-DOSSIER item 3 (the owner, 2026-11-09: "The governance description itself seemed
   // disconnected and not to our standard"): the DS-POW-1 reading, the DS-POW-2 hall line and the
   // standalone vignette became ONE paragraph read off the record (governanceAccount.js). Both mounts
@@ -268,7 +241,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
-  const governanceAccount = publicDossier ? null : governanceAccountOf(s, { primaryStress: resolvePrimaryStress(governanceStressTypesOf(s)) });
+  const governanceAccount = governanceAccountRead(s, { publicDossier }); // `power:governance` on a shared page
   const drawnReading  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.legitimacyReading);
   const drawnCapture  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.captureReading);
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
@@ -514,12 +487,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           §13 secrets seam). Absent mirror ⇒ hasLadder false ⇒ section hidden ⇒ a dark
           world renders byte-identically. Lazy chunk (PowerTab is lazy). [game-feel-1] */}
       {hasLadder(s) && (() => {
-        const rows = pf
-          .map((f, i) => {
-            const key = ladderFactionKeyOf(f);
-            return { f, i, rungs: ladderRungsOf(s, key), instab: ladderInstabilityOf(s, key) };
-          })
-          .filter((row) => row.rungs.length > 0);
+        const rows = powerLadderRowsOf(s, pf);
         if (!rows.length) return null;
         return (
           <Section title="The Ladder" collapsible defaultOpen>
@@ -546,24 +514,12 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                     {(() => {
                       // DS-POW-3, per faction. The desk takes the canonical readers' OUTPUTS
                       // (this loop already computed them) so it reads no npcLadder shape of
-                      // its own. Skipped on a public dossier with the rest of the desk.
-                      //
-                      // ⛔ AN EMPTY DESK SEED MUST STAY EMPTY THROUGH THE JOIN — the same
-                      // guard OverviewTab's crisis banner carries, and for the same reason.
-                      // The seed expression admits `''`, and `${''}::${f.faction}` is TRUTHY,
-                      // so the kernel's seedless line (`if (!seed) return eligible[0]`, law 4
-                      // — canonical-at-zero) would be skipped and the ladder line drawn by a
-                      // hash of a bare faction name. Measured on the shipped DS-POW-3 corpus:
-                      // 26 of 40 pool x faction-name cells draw a vid other than the canonical
-                      // 1 that way. No read moves today — every production path stamps an id,
-                      // so the seed is non-empty — so this closes the trap, it does not move
-                      // the page.
-                      const deskSeed = String(s?._seed ?? s?.id ?? '');
-                      const drawn = publicDossier ? null : drawnAtMount(LADDER_MOUNT, powerLadderRung(
-                        s,
-                        { factionName: f.faction, rungs, instability: instab },
-                        { seed: deskSeed ? `${deskSeed}::${f.faction}` : '', audience },
-                      ));
+                      // its own.
+                      // ⛔ The empty-seed join guard lives in the reader (powerLadderRead), with
+                      // the public branch: a shared page prints the owner's drawn line (`power:ladder`).
+                      const drawn = drawnAtMount(LADDER_MOUNT, powerLadderRead(s, {
+                        publicDossier, playerView, factionName: f.faction, rungs, instability: instab,
+                      }));
                       return drawn?.sentence ? (
                         <p style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 5px 15px',fontStyle:'italic'}}>{drawn.sentence}</p>
                       ) : null;

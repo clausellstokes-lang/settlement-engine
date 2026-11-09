@@ -35,6 +35,8 @@ import { stressorsDeskRead } from '../../src/components/new/stressorsDeskRead.js
 import { overviewStressesOf, criminalStructureOf } from '../../src/components/new/deskHostArgs.js';
 import { defenseDeskRead, DEFENSE_LENSES } from '../../src/components/new/defenseDeskRead.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
+import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
+import { powerDeskRead, powerDeskReadings, governanceAccountRead } from '../../src/components/new/powerDeskRead.js';
 
 afterEach(cleanup);
 
@@ -53,6 +55,7 @@ const TABS = {
   history: (s, gate) => <HistoryTab settlement={s} narrativeNote={null} {...gate} />,
   viability: (s, gate) => <ViabilityTab settlement={s} narrativeNote={null} {...gate} />,
   defense: (s, gate) => <DefenseTab settlement={s} narrativeNote={null} {...gate} />,
+  power: (s, gate) => <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} {...gate} />,
 };
 
 /**
@@ -164,6 +167,12 @@ const DRAWN = {
     tab: 'defense',
     draw: (o) => defenseDeskRead(o, { playerView: true, tier: o.tier, crimStructure: criminalStructureOf(o)?.key ?? null })[lens],
   }])),
+  // The saved record's player view: no played world, so the blocs are dormant (owner-only).
+  'power:desk': {
+    tab: 'power',
+    draw: (o) => powerDeskRead(o, { playerView: true, readings: powerDeskReadings(o, { playerView: true }) }),
+  },
+  'power:governance': { tab: 'power', draw: (o) => governanceAccountRead(o) },
 };
 
 /** Every sentence-length string in a drawn desk, at any depth (provenance skipped). */

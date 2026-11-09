@@ -596,6 +596,8 @@ const desktopShape = (perView) => Object.fromEntries(
 // 12/11 -> 13/12 (the crisis card's condition line). No token moved.
 // ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the defense desk's public branch lit, `defense:*`): Defense 25/25 ->
 // 35/35 (the eight lenses' shipped lines; T2-20's static line left). No token moved.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the power desk's public branch lit, `power:desk` / `power:governance`):
+// Power 29/28 -> 33/32. No token moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -618,7 +620,7 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Economics":   { measured: 47, sub14: 47 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
-  "Systems/Power":       { measured: 29, sub14: 28 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
+  "Systems/Power":       { measured: 33, sub14: 32 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
   // 28 -> 27 (2026-10-30, UX consolidation U6, T2-20..T2-23): the duplicate order headline, the first-survey
   // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
   // 27 -> 26 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the fixture town's one order & crime plot
@@ -722,6 +724,8 @@ const DESKTOP_BASELINE = Object.freeze({
 // crisis card's condition line); chrome and both sub-floor counts hold.
 // ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the defense desk's public branch lit): Defense prose 23 -> 33; chrome
 // and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the power desk's public branch lit): Power prose 28 -> 32; chrome and
+// both sub-floor counts hold.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -740,7 +744,7 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 39, chrome: 8, sub14: 8, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
-  "Systems/Power":       { prose: 28, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
+  "Systems/Power":       { prose: 32, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
   // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
   // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
