@@ -226,4 +226,15 @@ describe('STYLE-2 SW-12 — the world-law axes speak in the reader\'s words (led
       .toBe('The seasons turn on their own; they cannot wait for your leave.');
     unmount();
   });
+
+  test('the dialog\'s preset line, detail summary and switch labels name no engine or subsystem (D·65–67)', () => {
+    render(<SimulationRulesDialog open campaign={{ id: 'camp-style', name: 'Realm', worldState: { simulationRules: {} } }} onClose={() => {}} />);
+    expect(screen.getByText('The whole living world: war, faith, trade, and politics act on their own.')).toBeTruthy();
+    expect(screen.getByText('How far events spread, how eventful the realm is, migration, and eight finer switches.')).toBeTruthy();
+    fireEvent.click(screen.getByText('Detail toggles'));
+    expect(screen.getByText('Surprise events')).toBeTruthy();
+    expect(screen.getByText('Lasting troubles')).toBeTruthy();
+    expect(screen.getByText('Towns rise and fall in size')).toBeTruthy();
+    expect(screen.queryByText(/^(Emergents|Stressors|Promotion\/demotion)$|The whole engine|subsystem switches/)).toBeNull();
+  });
 });

@@ -426,3 +426,13 @@ Pins: `simulationRulesDialog.test.jsx` — a new describe rendering `DomainRows`
 | D·41 story pills | `item.temporal.phase` · `item.resolution.state` printed raw | the two closed token sets of `realmItemReadModel.js` (`TemporalPhase`, `ResolutionState`) in words: historical → "past", current → "now", emerging → "rising", planned → "planned"; unresolved → "open", resolved → "settled", dismissed → "set aside", superseded → "overtaken"; an unknown token falls back to `humanizeToken` (the audit's bare `humanizeToken` leaves all eight unchanged — measured — so it would not have cured the row) |
 
 Pins: `heraldCommandBrief.test.jsx` — the quiet briefing (D·39), the lost subject (D·40), a new bare-cause story (D·40), the pills "past" / "settled" with a negative on the raw tokens (D·41); **red at the parent** (4 of 13), green here. D·38's fallback has no fixture (every briefing item carries a reason): PLAUSIBLE. **Not this file's, listed:** the domain writes its own missing-cause reason, `realmItemReadModel.js:375` "No recorded cause receipt is available for this source.", which prints ahead of D·40's fallback on most stories — the same machinery words, outside the manifest.
+
+### 9f. `SimulationRulesDialog.jsx` (D·65 less "Factions", ·66, ·67)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·65 detail switch labels | `Emergents` · `Stressors` · `Promotion/demotion` | "Surprise events" · "Lasting troubles" · "Towns rise and fall in size" (the label `Factions` left for SW-8; "NPC agency", "Population", "Resources", "Institution lifecycle" PASS as labels) |
+| D·66 detail summary | `Propagation, intensity, migration, and the eight subsystem switches.` | "How far events spread, how eventful the realm is, migration, and eight finer switches." (the field labels "Propagation" / "Intensity" stay as the skeleton) |
+| D·67 full_simulation preset | `The whole engine: war, faith, trade, and politics act on their own.` | "The whole living world: war, faith, trade, and politics act on their own." |
+
+Pins: `simulationRulesDialog.test.jsx` — one new render test (the preset line, the summary, the three labels behind "Detail toggles", and a negative); **red at the parent** (1 of 9), green here. Registers: none moved.

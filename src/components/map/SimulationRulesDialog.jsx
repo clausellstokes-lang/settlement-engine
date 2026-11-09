@@ -57,13 +57,13 @@ const MIGRATION_OPTIONS = [
 // trade, migration, faith, war, and ambition moved UP into the tri-state
 // domain rows; the approval flag moved up into the "Who decides" axis.
 const TOGGLES = [
-  ['emergentEventsEnabled', 'Emergents'],
-  ['stressorsEnabled', 'Stressors'],
+  ['emergentEventsEnabled', 'Surprise events'],
+  ['stressorsEnabled', 'Lasting troubles'],
   ['npcAgencyEnabled', 'NPC agency'],
   ['factionCompetitionEnabled', 'Factions'],
   ['populationDynamicsEnabled', 'Population'],
   ['resourceDriftEnabled', 'Resources'],
-  ['tierDriftEnabled', 'Promotion/demotion'],
+  ['tierDriftEnabled', 'Towns rise and fall in size'],
   ['institutionLifecycleEnabled', 'Institution lifecycle'],
 ];
 
@@ -77,7 +77,7 @@ const GRID_PRESETS = [
   ['static_campaign', 'A recorded world: nothing moves unless you move it.'],
   ['narrative_campaign', 'An authored world that reacts and proposes, but never takes over.'],
   ['living_realm', 'Routine life runs itself; the major turns still ask you first.'],
-  ['full_simulation', 'The whole engine: war, faith, trade, and politics act on their own.'],
+  ['full_simulation', 'The whole living world: war, faith, trade, and politics act on their own.'],
 ];
 
 function human(value) {
@@ -504,7 +504,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
               onToggle={() => setDetailOpen(o => !o)}
               regionId={`${titleId}-detail`}
               title="Detail toggles"
-              summary="Propagation, intensity, migration, and the eight subsystem switches."
+              summary="How far events spread, how eventful the realm is, migration, and eight finer switches."
             />
             {detailOpen && (
               <div id={`${titleId}-detail`} style={{ display: 'grid', gap: SP.lg }}>
