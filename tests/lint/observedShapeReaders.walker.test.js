@@ -685,10 +685,17 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // (bbb1a4abc, A3: castPowers.js weights hidden agents in the rank deal) re-deals the year — car 2's own pins at
     // 7017f5096, measured there per sha (6694756af 396/2525/396/80 → bbb1a4abc = ce90cf16e = its tip 396/2535/396/81).
     // MEASURED at the merged tip by this arm's corpus build: equal to car 2's pins exactly.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, c6ded8e3a; re-keyed by identity at the schema-38 rung):
+    // final 396 → 394, accumulated 2535 → 2525, unique 396 → 395; regional 81/81 HOLDS. ONE cause, CONFIRMED BY BISECT:
+    // the dial e9070d614 (ALLEGIANCE_TUNING.organizedCrime 0.10 → 0.05: fewer agents dealt on their keyed forks) — a
+    // scratch tree of the merged tip with only that constant reverted measures the rung-37 pins 396/2535/396/81 exactly,
+    // so 8567f490d / 2f89aaeef (fence-only) move none of them. MEASURED at the merged tip, NOT taken from either side: car
+    // 3's own pins (18a315ee2, over car 1's year) read 394/2515/395/81; the merged tip is consistent with the guild's push (+10
+    // accumulated at rung 37) plus the dial's -10 (PLAUSIBLE arithmetic, not bisected): 2525; final 394 and unique 395 agree with car 3.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 396, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 390)
-      wizardNewsAccumulatedEntries: 2535, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 2486) // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (2026-11-09, rung 37): the guild's push re-deals the year (bbb1a4abc) (2525 → 2535)
+      wizardNewsFinalEntries: 394, // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (2026-11-09, rung 38): car 3's dial e9070d614 re-deals the year (396 → 394) // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 390)
+      wizardNewsAccumulatedEntries: 2525, // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (2026-11-09, rung 38): car 3's dial e9070d614 re-deals the year (2535 → 2525) // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 2486) // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (2026-11-09, rung 37): the guild's push re-deals the year (bbb1a4abc) (2525 → 2535)
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -698,7 +705,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 396, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 391)
+      wizardNewsUnique: 395, // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (2026-11-09, rung 38): car 3's dial e9070d614 re-deals the year (396 → 395) // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 391)
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -1875,7 +1882,12 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // government challenge, so `factionName` left the `stressors` family the corpus observes; the four reads at
       // src/components/map/WorldPulseData.js (`factionName on stressors` ×4) left the CLEARED set and are one of the 19
       // ordinary rows the rung admitted (a NEW row of its reconciliation): exactly −1 identity / −4 counts, the file unmoved.
-      files: 1, identities: 17, counts: 44,
+      // ⭐ 1/17/44 → 1/19/49 AT THE SCHEMA-38 RUNG (2026-11-09, MERGE-TRAIN at the ALLEGIANCE-CAR3 merge), RE-DERIVED AND
+      // NAMED: no filter's CODE moved, its INPUT did — car 3's dial e9070d614 re-deals the year (CONFIRMED by the
+      // single-revert scratch tree, which measures 1/17/44), and the re-dealt year carries a writer for two more identities
+      // in the cohort's file (WorldPulseData.js: `factionName on stressors` ×4, `settlementIds on stressors` ×1), so the
+      // filters clear them; they are two of the rung's GONE rows. Car 3's own pin (18a315ee2) reads the same 1/19/49.
+      files: 1, identities: 19, counts: 49,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
