@@ -552,3 +552,29 @@ Pins: a new `tests/components/realmDocketWords.test.jsx` (the footnote, with an 
 | D·86 forecast footnote | `This is a deterministic, bounded projection from the recorded snapshot through the selected interval. It includes the current docket and organic realm changes, assumes no later edits or party actions, and uses defaults where the world would await your word. A queued party action's wider realm ripple is not included, so this is guidance rather than a guaranteed outcome.` | "This forecast runs the realm forward from where it stands now, over the interval you chose. It counts the orders on the docket and the realm's own changes, assumes you make no further edits and the party does nothing, and takes the default wherever the world would wait for your word. It leaves out the wider ripples of a queued party action, so treat it as guidance, not a promise." |
 
 Pins: `realmForecastHonesty.test.jsx` — its two honesty assertions ("deterministic, bounded projection", "wider realm ripple is not included") re-keyed by identity to the same two facts in the new words; **red at the parent** (1 of 1), green here. Registers: none moved.
+
+### 9r. The herald desk golden's drift on this lane, bisected (for STYLE-2-MERGE's signing; none of it this seat's)
+
+One clean worktree walked every one of the forty commits from the lane's cut `2053a809c` to `96efb3b00`, projecting `rr-fresh-full|1` through the suite's own helper (`tests/helpers/heraldDeskGolden.js`; at the cut it reproduces the committed fixture `9e5ddbdb…` exactly, and at the base vitest itself receives `258d28e3…`). Seventeen commits move the content hash; the other twenty-three leave it where they found it. Every move is a cause commit of the first three seats (pulse writers whose lines the Herald prints), each carried without a delta named — so each is an UNSIGNED herald move, listed here so the merge seat can sign the one re-record at the lane tip (`258d28e3…`; 473 items in the fixture and at the base — the bisection read the hash only):
+
+| commit | contentSha256 (first 8) | from |
+|---|---|---|
+| `0ad288756` | `bc8feba2` | `9e5ddbdb` |
+| `1e05cafba` | `6ab12b88` | `bc8feba2` |
+| `cb6c77832` | `bab07def` | `6ab12b88` |
+| `29e9f4737` | `c855262b` | `bab07def` |
+| `78a425f6b` | `9c2ffe53` | `c855262b` |
+| `1aad33c36` | `95387c94` | `9c2ffe53` |
+| `75ecda249` | `2f74e194` | `95387c94` |
+| `67b3f7451` | `c1c54549` | `2f74e194` |
+| `34d80d56b` | `0dc6c8a1` | `c1c54549` |
+| `2fc55046f` | `37ca7882` | `0dc6c8a1` |
+| `23bcf212b` | `1518407d` | `37ca7882` |
+| `40df143b1` | `7af4c7bd` | `1518407d` |
+| `8100cc2f7` | `288a67b9` | `7af4c7bd` |
+| `eff5e88da` | `58e1b7ba` | `288a67b9` |
+| `c3a5ee49d` | `d69914de` | `58e1b7ba` |
+| `47e6807fc` | `535d3206` | `d69914de` |
+| `45773294d` | `258d28e3` | `535d3206` |
+
+Also measured at this seat's commits: `96efb3b00`, `ba15f9332`, `22795b8c6`, `5e256442e` and `4b5d5a6fe` all project `258d28e3…` — this seat moves the herald by nothing. The other golden surfaces (gm /525, fence /360, prose /1,050, witness, pdf) are read from the full-suite comparison in §9-gates.
