@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 6, THE SW-5 CRISIS-VANTAGES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-6-sw5.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   192 of 525 rows (town 24, city 84, metropolis 84) against point 5's post-state. THE CAUSE, ONE (first-parent step a7770ecfe): the SW-5 CRISIS-VANTAGES merge (lane/style-2-crisis-vantages-2026-11-09 at 794846ba5; its unsigned cause the component: e249e565f, npcGenerator's wartime notes and three 'rather than' — the lane's own 194, 192 on the line after car 4's A9 retired two goal lines).
+ *   Written from the staged tree S6 (the tree of a7770ecfe with the door paths carried from the branch). 3bb1c433.. -> b9a9e693..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 4, THE SW-3 REALM-PROSE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-09-style-2-merge-4-sw3.json; the cloud chair signs under the owner's delegation, vetoable).
  *   34 of 525 rows (thorp 1, hamlet 6, village 6, town 7, city 7, metropolis 7; the celtic culture, the arrival line) against point 3's post-state. THE CAUSE, ONE (first-parent step 1ef46ca30): the SW-3 REALM-PROSE merge (lane/style-2-realm-prose-2026-11-09 at d96ae7a41; its unsigned cause the component: 0991cc9e5, ruling A6, the realm prose — the lane's own 34).
