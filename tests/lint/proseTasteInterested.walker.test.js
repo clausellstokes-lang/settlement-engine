@@ -38,7 +38,9 @@ describe('the two fixture towns are the ones §R c-22 names, taken as the genera
     // Re-keyed by identity 2026-11-07 (REVIEW-INTAKE-LAND, the merge onto rung 1's tip): both
     // sides' 2026-11-06 re-keys (rate-57-3 / rate-93-0) compose at the merged tip into rate-69-0
     // and the control rate-9-2, by the rule and scan named in tests/fixtures/tasteTowns.js.
-    expect(INTERESTED_TOWNS[0].seed).toBe('rate-69-0');
+    // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2): the capture state derived from the ruling three's agents
+    // (J-13); the same rule and scan, tests/fixtures/tasteTowns.js names the cause.
+    expect(INTERESTED_TOWNS[0].seed).toBe('rate-105-2');
     expect(INTERESTED_TOWNS[1].seed).toBe('rate-9-2');
     expect(captured.powerStructure?.criminalCaptureState, 'the chair\'s own worked example').toBe('corrupted');
     expect(clean.powerStructure?.criminalCaptureState, 'and the control').toBe('none');

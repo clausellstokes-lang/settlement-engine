@@ -96,7 +96,7 @@ export const INTERESTED = 'INTERESTED';
  * ⛔ THE GROUND, AND WHY IT IS FOUR AND NOT TWELVE. Car 5b reported capture "structurally
  * absent at birth" and measured INTERESTED at 0 on all 768 RATE towns. The figure was right
  * and the ground was false: every generated town carries `powerStructure.criminalCaptureState`
- * (`src/generators/power/rulingStructure.js :: generatePowerStructure` — the write this table maps to the WATCH),
+ * (`src/domain/people/hallCapture.js :: writeHallCapture` since ALLEGIANCE-CAR2, the power step before it — the write this table maps to the WATCH),
  * on the same five-rung ladder `standingOf` already consumes, reading none 495 · adversarial
  * 194 · equilibrium 64 · corrupted 15 over the corpus, with 79 towns carrying a non-`none`
  * `captureState` on a faction entry. The car reported the fact ABSENT rather than asking
@@ -213,7 +213,7 @@ export const HOLDER_SOURCES = Object.freeze({
       + ' grain: the muster roll counts men under arms, and the watch keeps its own count.',
   }),
   blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:732', read: true }),
-  criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js :: generatePowerStructure', read: true }),
+  criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/domain/people/hallCapture.js :: writeHallCapture', read: true }), // ALLEGIANCE-CAR2 (J-13): re-cited to the state's ONE writer, the derivation at the coherence seam
   safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:839', read: true }),
 
   // ── the court: the seat, its legitimacy, the blocs under it and the treaties it signs ──
@@ -243,7 +243,7 @@ export const HOLDER_SOURCES = Object.freeze({
   // ── the office itself: the record's own audit of the record ──
   structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:137', read: true }),
   structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:138', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1076', read: true }), // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge: re-cited to the merged write site (1051 integration / 1048 car 1 -> 1076)
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js :: generateCoherence', read: true }), // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge: car 2's symbol citation taken (rule 32); the write site cited by the integration at :1076
 });
 
 /**

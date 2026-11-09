@@ -2513,6 +2513,14 @@
       "band": null,
       "note": "ALLEGIANCE-CAR1 (2026-11-08, the allegiance design §3.1, J-5, J-8): the hidden allegiance's dials — organizedCrime (probability, 0.10: organized crime's weight on the birth chance, inside the spawn clamp), organizedFull (points, 8: the summed criminal-house backing weight at which organized crime reads 1), powerBonus (fraction01, 0.25: the step for an independent criminal power), share (share, 0.15: the allegiance's weight for patronage and the push, outside the open shares' sum), frontWeight (multiplier, 1: a PRIME front's roll weight, RESERVED, J-8), weightZeroHouse (multiplier, 0.5: a weight-0 criminal house's backing weight in the organized-crime sum, the design's '0 -> 0.5'); registered as a draft the day the dial was born, not signed."
     },
+    "src/domain/people/hallCapture.js#HALL_CAPTURE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13): the derived hall-capture state's dials — weight.1 / .2 / .3 (points, 3 / 2 / 1: an agent's weight by its rank in the ruling three), captureScore (points, 5: the lord and the second), corruptedScore (points, 3: the second and the third, or the lord alone), climateCap (rank, 2: the highest rung of CAPTURE_LADDER the strengths-only climate can reach, 'equilibrium'); registered as a draft the day the dial was born, not signed."
+    },
     "src/generators/people/castPowers.js#CAST_POWERS_TUNING": {
       "role": null,
       "status": "draft",
@@ -2520,6 +2528,14 @@
       "unit": null,
       "band": null,
       "note": "PEOPLE-1 CAST (2026-11-07, R-P5): the ranks a power seats (3) and the roll weight of a weight-0 house (0.5); registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/castPowers.js#GUILD_PUSH_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.2, J-11): the guild's push on a hidden agent's roll weight in its legitimate powers' rank deal — strength (multiplier, 0.6: the criminal power's pull at full strength), strengthFull (points, 30: the criminal power's strength at which the pull is full), organized (multiplier, 0.4: organized crime's pull), max (multiplier, 2.0: the cap); the floors never read it; registered as a draft the day the dial was born, not signed."
     },
     "src/lib/townScene/adaptiveQuality.js#GOVERNOR_TUNING": {
       "role": null,

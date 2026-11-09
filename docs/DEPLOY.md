@@ -271,7 +271,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `206_public_card_veil_bit.sql`** (this
+**Current migration head: `207_public_hall_capture_veil.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->

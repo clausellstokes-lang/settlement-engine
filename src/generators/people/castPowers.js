@@ -53,6 +53,7 @@ import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
 import { isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
+import { allegianceOf, isCriminalPower, organizedCrimeOf } from '../../domain/people/allegiance.js';
 
 /** The keyed fork the late mints and the ranks draw under (declared in the fork census). */
 export const POWERS_FORK_LABEL = 'people-powers';
@@ -66,6 +67,54 @@ export { OTHER_CARD_PREFIX };
  */
 export const CAST_POWERS_TUNING = Object.freeze({ RANKS: 3, WEIGHT_ZERO_HOUSE: 0.5 });
 export const RANKS = CAST_POWERS_TUNING.RANKS;
+
+/**
+ * THE GUILD'S PUSH (the allegiance train, car 2, ALLEGIANCE-CAR2, 2026-11-08; the design §3.2, the
+ * chair's J-11). The owner (2026-11-08, verbatim): "if a legitimate business has ties with the thieves
+ * guild and scaling with the thieves guild influence abd strenght abd amount or quality of organized
+ * crime, they would try to push that individual to higher ranks within their respective powers. It may
+ * not get them to the top three to be a face it it may that simply depends on the ranks after the maths."
+ * A multiplier on a hidden agent's ROLL weight in each of its LEGITIMATE powers, a sum with a final clamp
+ * (corruption.js's pressure-cap style):
+ *   push = clamp(1 + strength·n01(criminalStrength ÷ strengthFull) + organized·organizedCrime, 1, max)
+ * `criminalStrength` the points of `allegiance.power` (0 where the allegiance names no criminal power),
+ * `organizedCrime` domain/people/allegiance.js :: organizedCrimeOf. The floors sort on raw house weight
+ * and never read it (J-11): only the weighted ranks move. DRAFT rows in tests/lint/.tuning-register.json
+ * until the owner signs the estate. Units: strength multiplier · strengthFull points · organized
+ * multiplier · max multiplier.
+ */
+export const GUILD_PUSH_TUNING = Object.freeze({
+  /** the criminal power's pull, at full strength */
+  strength: 0.6,
+  /** the criminal power's strength (points of 100) at which its pull is full */
+  strengthFull: 30,
+  /** organized crime's pull */
+  organized: 0.4,
+  /** the cap on the push (the same cap as corruption.js's pressure) */
+  max: 2.0,
+});
+
+/** @param {number} x @returns {number} */
+const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
+
+/**
+ * The guild's push on one card (the design §3.2): 1 for a card with no hidden allegiance; else the
+ * clamped sum. Pure and per card (I-13: removing a card never moves another card's push).
+ * @param {unknown} card @param {Record<string, any>} settlement
+ * @param {{ organized?: number, tuning?: typeof GUILD_PUSH_TUNING }} [opts] `organized` precomputed per town
+ * @returns {number}
+ */
+export function guildPushOf(card, settlement, opts = {}) {
+  const a = allegianceOf(card);
+  if (!a) return 1;
+  const T = opts.tuning || GUILD_PUSH_TUNING;
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  const crim = a.power ? factions.find((f) => nameOf(f) === a.power) : null;
+  const criminalStrength = crim ? Number(crim.power) || 0 : 0;
+  const organized = typeof opts.organized === 'number' ? opts.organized : organizedCrimeOf(settlement);
+  const raw = 1 + T.strength * n01(criminalStrength / T.strengthFull) + T.organized * n01(organized);
+  return Math.max(1, Math.min(T.max, raw));
+}
 
 const powerSlug = (name) => slugify(name, { sep: '_', max: 60, fallback: 'power', empty: 'power' });
 const round4 = (x) => Math.round(x * 10000) / 10000;
@@ -266,10 +315,20 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
  * @param {Record<string, any>} settlement @param {Landed} landed
  * @returns {Array<Record<string, any>>}
  */
-export function rankPowers(settlement, landed) {
+export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
   const { all, plan } = landed;
   if (!plan) return all;
   const { powers, members, governing, seatKey, rankStream } = plan;
+  // THE GUILD'S PUSH (car 2, A3): read once per town; a criminal power's own deal is never pushed
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  const criminalPowers = new Set(factions.filter((f) => isCriminalPower(f)).map((f) => nameOf(f)));
+  const organized = organizedCrimeOf(settlement);
+  /** @type {Map<Record<string, any>, number>} */
+  const pushes = new Map();
+  const pushOf = (/** @type {Record<string, any>} */ card) => {
+    if (!pushes.has(card)) pushes.set(card, guildPushOf(card, settlement, { organized, tuning: pushTuning }));
+    return /** @type {number} */ (pushes.get(card));
+  };
   // ── The three (R-P5), per power ──────────────────────────────────────────────────────────
   for (const power of powers) {
     const pool = members.get(power);
@@ -293,10 +352,12 @@ export function rankPowers(settlement, landed) {
         .sort((x, y) => (y.weight - x.weight) || (y.share - x.share) || (x.at - y.at))[0];
       take(landmark);
     }
-    // the roll, without replacement, on the power's own fork
+    // the roll, without replacement, on the power's own fork — each agent's weight × the guild's push in a
+    // legitimate power (car 2, J-11: the floors above sorted on raw house weight and never read it)
     const fork = rankStream ? rankStream.fork(powerSlug(power)) : null;
+    const pushed = !criminalPowers.has(power);
     while (chosen.length < RANKS && remaining.length) {
-      const weights = remaining.map((m) => Math.max(rollWeightOf(m.share, m.weight), 1e-6));
+      const weights = remaining.map((m) => Math.max(rollWeightOf(m.share, m.weight) * (pushed ? pushOf(m.card) : 1), 1e-6));
       const pick = fork ? fork.weightedPick(remaining, weights) : remaining[0];
       take(pick);
     }

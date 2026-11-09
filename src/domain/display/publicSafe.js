@@ -369,12 +369,23 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
       return out;
     });
   }
-  if (!hiddenNames.length) return pub;
-  /** @type {Set<unknown>} */
-  const hidden = new Set(hiddenNames);
   /** @param {unknown} v @returns {v is Record<string, unknown>} */
   const isRow = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
   const ps = pub.powerStructure;
+  // 207 twin (ALLEGIANCE-CAR2, J-20, the chair's ruling of 2026-11-08 ~23:47 UTC): THE HALL'S HOLD IS DM-ONLY. The
+  // capture state is derived from the ruling three's HIDDEN allegiances (domain/people/hallCapture.js), so on a public
+  // page it would name what the veil hides: the state leaves the power structure, the governing row's seed leaves every
+  // power row, and every relation row that carries a capture rung (its type, narrative and DM note are the rung's: "X is
+  // a front …") or is typed `corrupted` is DROPPED whole — never re-typed. The DM layer keeps them. Character for character
+  // the SQL's root branch in _gallery_sanitize_public_json (207).
+  if (isRow(ps)) {
+    delete ps.criminalCaptureState;
+    if (Array.isArray(ps.factions)) ps.factions = ps.factions.map((/** @type {Record<string, unknown>} */ f) => { if (!isRow(f) || !Object.hasOwn(f, 'captureState')) return f; const { captureState: _drop, ...rest } = f; return rest; });
+    if (Array.isArray(ps.factionRelationships)) ps.factionRelationships = ps.factionRelationships.filter((/** @type {Record<string, unknown>} */ r) => !(isRow(r) && (Object.hasOwn(r, 'captureState') || r.type === 'corrupted')));
+  }
+  if (!hiddenNames.length) return pub;
+  /** @type {Set<unknown>} */
+  const hidden = new Set(hiddenNames);
   if (isRow(ps) && Array.isArray(ps.factions)) {
     ps.factions = ps.factions.filter((f) => !(isRow(f) && (f.hidden === true || hidden.has(f.faction))));
   }

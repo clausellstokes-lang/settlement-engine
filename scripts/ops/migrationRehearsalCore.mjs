@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 206;
+export const MIGRATION_TRAIN_REPO_HEAD = 207;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -703,6 +703,32 @@ export const MIGRATION_WAVES = Object.freeze([
         + 'documented-manual-reversal rather than taking the wave policy. Nothing is destroyed on '
         + 'reversal: the function holds no state and no row was minted; the only consequence is that '
         + 'every face\'s title and role project publicly again and no face\'s institution or memberships do.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'public-hall-capture-veil',
+    from: 207,
+    to: 207,
+    purpose: 'ALLEGIANCE-CAR2, J-20 (the chair\'s ruling of 2026-11-08): the hall-capture state is derived from the '
+      + 'ruling three\'s HIDDEN allegiances (src/domain/people/hallCapture.js), so the public dossier carries none of '
+      + 'it. ONE re-stated function: public._gallery_sanitize_public_json is 206\'s body VERBATIM plus one root-pass '
+      + 'block — powerStructure.criminalCaptureState and every factions[].captureState are stripped, and every '
+      + 'factionRelationships[] row carrying a captureState or typed corrupted is dropped whole. It creates no '
+      + 'table, no column, no policy and no row; _gallery_world_snapshot_is_safe is untouched. DEPLOYMENT remains '
+      + 'the owner\'s manual act after 206 (`supabase db push` plus the applied-head bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202, 203, 205 and 206, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: recreate 206\'s body verbatim, i.e. the same function without the '
+        + 'hall-capture block — which is why 207 classifies as documented-manual-reversal rather than taking the '
+        + 'wave policy. Nothing is destroyed on reversal: the function holds no state and no row was minted; the '
+        + 'only consequence is that the capture state and the capture relation rows project publicly again.',
       ].join(' '),
     }),
     expectedObjects: Object.freeze([

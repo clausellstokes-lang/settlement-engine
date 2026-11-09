@@ -275,7 +275,9 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       .toEqual(seenShapes.flatMap((shape) => GENERATION_TIER2.filter((row) => row.cardShape === shape).map(() => shape)));
     // 2026-11-07 PEOPLE-1 CAST: 5 -> 7 — `npcs[].role` and `npcs[].status` are COMPUTED from the face registry and the
     // ranks (M-1b: the role is the institution's title; the status follows the rank), no longer drawn by the step.
+    // 2026-11-08 ALLEGIANCE-CAR2 (the guild's push): 7 -> 6 — `npcs[].role` is `drawn` again (7/42 under the population
+    // step's perturbation; src/domain/generation/generationForkRegistry.js names the cause, 7f111daa7).
     expect(GENERATION_TIER2.filter((row) => row.origin === 'computed').length,
-      'seven rows are computed, and all ten stay editable: origin is recorded, never a gate').toBe(7);
+      'six rows are computed, and all ten stay editable: origin is recorded, never a gate').toBe(6);
   });
 });

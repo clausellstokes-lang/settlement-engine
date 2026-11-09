@@ -64,6 +64,10 @@ export const KIND_OF = Object.freeze({
   // ALLEGIANCE-CAR1 (2026-11-08; the allegiance design I-2, I-3): a hidden allegiance whose handler is missing, off the
   // roster, itself, an agent, or no criminal face — a contradiction about WHO, keyed with the people family.
   'coh:allegiance-handler': 7,
+  // ALLEGIANCE-CAR2 (2026-11-08; the allegiance design I-1, J-13): a hall read 'capture' or 'corrupted' with no agent in
+  // the ruling three and no criminal governing power (or a 'capture' hall whose lord is no agent) — the strengths-only
+  // state the derivation retired. A certification failure: STOP from the first.
+  'coh:capture-without-agent': -1,
   'A-05:lacks-access-lines': -2,
   // CENSUS-1b wave 1 (2026-11-04): the runtime self-check (`facts/presumptionCheck.js`) — a drawn
   // line's declared atom the FINAL record contradicts. A certification failure: STOP from the
@@ -380,6 +384,25 @@ export function allegianceHandlerFindings(s) {
   }
   return out;
 }
+/**
+ * ALLEGIANCE-CAR2 (I-1): a captured or corrupted hall has a criminal in the ruling three — an agent (a card holding an
+ * allegiance, ranked 1–3 in the governing power) or a criminal governing power; a 'capture' hall's lord is an agent.
+ * Reads the record's raw fields.
+ * @param {object} s @returns {Array<{ state: string, detail: string }>}
+ */
+export function captureWithoutAgentFindings(s) {
+  const state = s?.powerStructure?.criminalCaptureState;
+  if (state !== 'capture' && state !== 'corrupted') return [];
+  const gov = (s?.powerStructure?.factions || []).find((f) => f?.isGoverning) || null;
+  const ruler = gov ? String(gov.faction || gov.name || '') : '';
+  const ranks = (s?.npcs || []).filter((n) => allegianceOf(n))
+    .map((n) => (n.memberships || []).find((m) => m?.power === ruler && [1, 2, 3].includes(m?.rank))?.rank)
+    .filter(Boolean);
+  const rulerCriminal = !!gov && (String(gov.category || '').toLowerCase() === 'criminal' || /thie/i.test(ruler));
+  if (state === 'capture' && !ranks.includes(1)) return [{ state, detail: `a 'capture' hall whose lord (${ruler}) is no agent` }];
+  if (!ranks.length && !rulerCriminal) return [{ state, detail: `a '${state}' hall with no agent in ${ruler}'s ruling three and no criminal governing power` }];
+  return [];
+}
 const secretTextOf = (npc) => (typeof npc?.secret === 'string' ? npc.secret : npc?.secret?.what);
 const goalTextOf = (npc) => (typeof npc?.goal === 'string' ? npc.goal : npc?.goal?.short);
 
@@ -409,6 +432,7 @@ export function reviewSettlement(s, config, r) {
     if (dup) add(check, 'record', dup.text, `${dup.first} and ${dup.second}; ${dup.repeated} text(s) repeat on this roster`);
   }
   for (const f of allegianceHandlerFindings(s)) add('coh:allegiance-handler', 'record', f.card, f.detail);
+  for (const f of captureWithoutAgentFindings(s)) add('coh:capture-without-agent', 'record', f.state, f.detail);
 
   // ── coh:migration-direction (lane WIRING-W0, 2026-11-07, R-W7 e): a mass migration runs ONE way.
   // The crisis text, the pressure line (the Tonight opening when no crisis line exists), the Power
