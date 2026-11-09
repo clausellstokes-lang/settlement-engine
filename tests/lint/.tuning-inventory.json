@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "08cc27dac38bf3d3c1900bed22759f206cf0c3ca",
-  "measuredBy": "ALLEGIANCE-CAR2",
+  "measuredAtSha": "70f08597dcfbb400b678347b2dfeadde6399ebf3",
+  "measuredBy": "ALLEGIANCE-CAR4",
   "date": "2026-11-09",
-  "note": "GUILD_PUSH_TUNING (castPowers.js, A3) and HALL_CAPTURE_TUNING (hallCapture.js, A6) born as draft tables; the inventory re-measured",
+  "note": "ALLEGIANCE-CAR4 (2026-11-09): GOAL_FAMILY_TUNING and LAW_PURSUIT_TUNING born draft in src/generators/people/goals.js; the retired role-goal draw left npcGenerator.js (its bare decimals with it); ALLEGIANCE_TUNING dependents moved (goals.js reads organizedCrimeOf)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1246,6 +1246,7 @@
         "src/generators/generateSettlementPipeline.js",
         "src/generators/narrativeGenerator.js",
         "src/generators/people/castPowers.js",
+        "src/generators/people/goals.js",
         "src/generators/people/ties.js",
         "src/generators/steps/assembleSettlement.js",
         "src/lib/structuralFingerprint.js"
@@ -8256,6 +8257,78 @@
       ],
       "namedDependents": []
     },
+    "src/generators/people/goals.js#GOAL_FAMILY_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 3,
+      "line": 65,
+      "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
+      "leaves": {
+        "base.RANK": 1,
+        "base.POWER": 1,
+        "base.INSTITUTION": 1,
+        "base.SUPPLY": 1,
+        "base.TIES": 1,
+        "base.PERSONALITY": 1,
+        "base.ALLEGIANCE": 1,
+        "base.CRISIS": 1,
+        "fit.rankClimb": 1.5,
+        "fit.powerFirst": 1.3,
+        "fit.supplyTrade": 1.5,
+        "fit.institutionImpaired": 1.3,
+        "fit.allegianceAgentShort": 3,
+        "fit.allegianceHandler": 2,
+        "fit.crisisStress": 2,
+        "fit.personality": 0.6,
+        "uncanny.perCard.thorp": 0.003,
+        "uncanny.perCard.hamlet": 0.004,
+        "uncanny.perCard.village": 0.006,
+        "uncanny.perCard.town": 0.008,
+        "uncanny.perCard.city": 0.011,
+        "uncanny.perCard.metropolis": 0.013,
+        "uncanny.capPerSettlement": 2,
+        "uncanny.vantage": "short"
+      },
+      "dependents": [
+        "src/generators/generateSettlementPipeline.js",
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/generators/people/goals.js#LAW_PURSUIT_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 5,
+      "line": 90,
+      "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
+      "leaves": {
+        "strengthFull": 30,
+        "warrant.base": 0.2,
+        "warrant.enforcer": 0.4,
+        "warrant.guild": 0.25,
+        "warrant.min": 0.05,
+        "warrant.max": 0.6,
+        "suspicion.base": 0.1,
+        "suspicion.enforcer": 0.3,
+        "suspicion.guild": 0.2,
+        "suspicion.organized": 0.1,
+        "suspicion.min": 0.02,
+        "suspicion.max": 0.4,
+        "exposure.open": 1,
+        "exposure.front": 0.5,
+        "exposure.office": 0.75,
+        "exposure.retainer": 0.4,
+        "importance.pillar": 4,
+        "importance.key": 3,
+        "importance.notable": 2,
+        "importance.minor": 1
+      },
+      "dependents": [
+        "src/generators/generateSettlementPipeline.js",
+        "src/generators/narrativeGenerator.js"
+      ],
+      "namedDependents": []
+    },
     "src/generators/power/stressFactions.js#MIGRATION_GOVERNING_DAMP": {
       "exported": false,
       "idiom": "literal",
@@ -8875,7 +8948,7 @@
     "src/generators/narrativeGenerator.js": 2,
     "src/generators/neighbourGenerator.js": 43,
     "src/generators/npc/factionLeaderSecret.js": 48,
-    "src/generators/npcGenerator.js": 60,
+    "src/generators/npcGenerator.js": 59,
     "src/generators/npcStructure.js": 2,
     "src/generators/people/ties.js": 1,
     "src/generators/power/relationshipArchetypes.js": 13,
@@ -8899,11 +8972,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 274,
-    "keys": 2236,
+    "tables": 276,
+    "keys": 2244,
     "unregisteredNamed": 536,
-    "bareDecimals": 6934,
+    "bareDecimals": 6933,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 182
+    "zeroNamedDependentTables": 184
   }
 }
