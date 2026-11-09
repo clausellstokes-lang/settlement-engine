@@ -175,13 +175,19 @@
   "ALLEGIANCE-CAR3 merge (one rung, two causes, every row with one): the dial e9070d614 (organizedCrime",
   "0.10 -> 0.05) re-deals the year, ADMITTING 13 rows and retiring 5; the bought watch (a63effa93) retires",
   "`ousted on npcs` at corruption.js; nothing is declared and the bank is 76/50 (RETIRED).",
-  "SCHEMA 39 = schema 38's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the",
+  "SCHEMA 39 (RETIRED) held schema 38's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the",
   "ALLEGIANCE-CAR4 merge (one rung, two causes, every row with one and its class): the goals rebuilt (03ff59084)",
   "ADMIT 7 `on intent` rows, retire 4 by repair and lose 16 to UNCURED INSTRUMENT EROSION (recorded as such, not",
-  "a cure); the fingerprint re-based (0a18ff311) ADMITS 1; nothing is declared and the bank is 76/50.",
-  "Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`",
+  "a cure); the fingerprint re-based (0a18ff311) ADMITS 1; nothing is declared and the bank is 76/50 (RETIRED).",
+  "SCHEMA 40 = schema 39's topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER'S",
+  "ADMISSION (lane SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): the cloud row builder",
+  "(src/lib/saves.js) stamps `publicProse` on the record at every save, and its one guarded read",
+  "(src/domain/display/publicProse.js) has no observed writer because the corpus never runs the save path.",
+  "The save-time-writer class explains it: ONE declaration, `publicProse on settlement`, the roster 14 -> 15;",
+  "the one new row is admitted TAGGED and nothing else moves.",
+  "Of the fifteen declared bank entries FOURTEEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
-  "subset of declared. This envelope banks 76 banked read(s) across 50 tagged address(es).",
+  "subset of declared. This envelope banks 77 banked read(s) across 51 tagged address(es).",
   "The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —",
   "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
   "language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside",
@@ -189,7 +195,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–38 are the RETIRED numeric predecessors."
+  "Schemas 4–39 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -204,16 +210,16 @@
  },
  "digests": {
   "corpusMeta": "eb4978bf864776f71b6960994c4763488e6089ae99e2568547fc9686ca15e2c1",
-  "inventory": "cbb638eef2249e99909d7a5b6470ef774305836880e9c2de2493f5ee77a198fd",
-  "manifests": "62021603e180f22cf12cf193efc52102bad55b522aa3e7d5d83de1d7be6fca95",
-  "migrationReview": "aca91b757969bc1fe62f862bac25cfabb6d812c68fab2e1d0021995ff50cc598",
-  "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "009d4cd72863a2783e552f2e227f0ada9a6da5f9bf7d3e90a867c9f73fe2bad3",
-  "sentinel": "1f6cf9b7eb587e1fcd758dd247a97b5cd7cedbc3b99fd7e3dd882fe88220ab93"
+  "inventory": "882979533693c53df7fec7f53a41c316b1eea16879337d399a88e0efc852d709",
+  "manifests": "e96ec1ca0895a5a9f6090e00258d63b9a90bd634f7aeedb15612174891b11432",
+  "migrationReview": "77ef46069ac36ffe68f3c6e958461a27284ca969433eaa9fdc380e4e9848fc46",
+  "rowTags": "47181a3a0f6e8c2cfb9bacfac07a1dc2ce38e90daa3c8767eb0eddf2692e6600",
+  "scanStats": "c7b56ab8ad4239e536c42960ee55b3d0be5d1a41b886e0732c72d8f9221dc430",
+  "sentinel": "eabdde99e33d1ac4b42a552ab135fd55dbbcfb763966ef22be6ffe82d97b5086"
  },
  "frozen": "2026-11-09",
- "frozenAtSha": "b1a0be08501c7f91c4b3058f901873a636b1ea29",
- "identities": 1531,
+ "frozenAtSha": "8ad1df506194f1417dab8da539bcdd484f377565",
+ "identities": 1532,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -742,6 +748,9 @@
    "ambitions on personality": 1,
    "ideal on personality": 1,
    "ideals on personality": 1
+  },
+  "src/domain/display/publicProse.js": {
+   "publicProse on settlement": 1
   },
   "src/domain/display/publicSafe.js": {
    "covert on settlement": 1
@@ -2612,7 +2621,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "d8ce5622883b34d6c8744ef2da1421f401a9b13a7752f410b4389afad4410195",
+   "digest": "87573bf769f012c96ba4b232228409bf9c3bdcd9cbb3f914b8f0a29255c8410b",
    "entries": [
     {
      "mode": "100644",
@@ -2631,8 +2640,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "c3099a603da9ac66e69ec2ea32db7e76d19025b2d9f846fc73d7a67fd7423bba",
-     "size": 215562,
+     "sha256": "e87954549152c72500aa4f00877df68bc1bca46e63da6c09bf2bb8844b487885",
+     "size": 218061,
      "type": "file"
     },
     {
@@ -2652,8 +2661,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "47662b9a57dbaa374726c7b5ed7f3fecbf5564ea69fbfcfc2adfa2516fdab46d",
-     "size": 94389,
+     "sha256": "cd81311442067a1148636066ee1bce5386544c735ec9db827fb52ef104218a19",
+     "size": 95865,
      "type": "file"
     },
     {
@@ -2680,8 +2689,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "6ec7f7e250fbb1c7409e9c788448b06c283718201b5c502dd4e308060d9010a1",
-     "size": 272693,
+     "sha256": "f086931efd0a74ec368d0e4019cb651133206d1b8d97114803fb05a9cde13f2a",
+     "size": 276039,
      "type": "file"
     },
     {
@@ -2695,7 +2704,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "4a0a6d3fc6f4e7a7f65df2c6459cddc60ff3cf53535215a832e87b9aa0bea4dd",
+   "digest": "74845e9ddb346c1951c6f949c6b2ad8b83ffaac6a85368aef3ed1973309c68fb",
    "entries": [
     {
      "mode": "100644",
@@ -2714,8 +2723,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "c3099a603da9ac66e69ec2ea32db7e76d19025b2d9f846fc73d7a67fd7423bba",
-     "size": 215562,
+     "sha256": "e87954549152c72500aa4f00877df68bc1bca46e63da6c09bf2bb8844b487885",
+     "size": 218061,
      "type": "file"
     },
     {
@@ -2735,8 +2744,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "47662b9a57dbaa374726c7b5ed7f3fecbf5564ea69fbfcfc2adfa2516fdab46d",
-     "size": 94389,
+     "sha256": "cd81311442067a1148636066ee1bce5386544c735ec9db827fb52ef104218a19",
+     "size": 95865,
      "type": "file"
     },
     {
@@ -2763,8 +2772,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "6ec7f7e250fbb1c7409e9c788448b06c283718201b5c502dd4e308060d9010a1",
-     "size": 272693,
+     "sha256": "f086931efd0a74ec368d0e4019cb651133206d1b8d97114803fb05a9cde13f2a",
+     "size": 276039,
      "type": "file"
     },
     {
@@ -4625,8 +4634,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "f3e9be71a68cf60f747cab00ad45330e4297a3b72d784c09e8462525a85962bf",
-     "size": 8761,
+     "sha256": "d90362e39ca5796f929c5604726c9e799c1f8aa2862f62fc3ab78c0118214c9b",
+     "size": 8716,
      "type": "file"
     },
     {
@@ -5695,16 +5704,23 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/new/deskHostArgs.js",
+     "sha256": "4f19d5cfa7bcb569098a3b3747ee8086833a228e62f4ed28d226c0f501b9206a",
+     "size": 4147,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/new/economyDeskRead.js",
-     "sha256": "61bedbde8e596c0c42e34609bf9092a13c66104637474ed1c8f87d7e83bcf8f6",
-     "size": 7888,
+     "sha256": "7ced04e7f0bf712b6703d8fccc9f56e396ffe4b66186a878b99dc90a3cc1232b",
+     "size": 8917,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/generalDeskRead.js",
-     "sha256": "bd025eb05b66f439329f8995cd4d145793fdaa973254b276ac1facbfc37afe8b",
-     "size": 20990,
+     "sha256": "5c30a385f0c4983c6492e14aa47e5a950005512a97375c36ea0ba45eefde919e",
+     "size": 22723,
      "type": "file"
     },
     {
@@ -5724,8 +5740,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "881dfb70eff78fcb21ffb8bc0c2a6c3897b1cd263be240653b819cd5b388727d",
-     "size": 33046,
+     "sha256": "c2c6251496ef238188e95f212d77e8e2d9822e7ba1fad9c4aad1c3566b91b75d",
+     "size": 33084,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/new/publicProseCompose.js",
+     "sha256": "8899d8589767a31c76229140135429b0497e132370c6503b48089afaaf19945c",
+     "size": 5429,
      "type": "file"
     },
     {
@@ -5773,8 +5796,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DailyLifeTab.jsx",
-     "sha256": "b10ec0d9ecfefab734bb6a38dd32648f0751813d202a775b6cef77834c0e61d8",
-     "size": 19051,
+     "sha256": "ff68cf8166eb6876d8fd383ba060fb38f9bf0536f81cddd853393dc5148dbfa0",
+     "size": 19085,
      "type": "file"
     },
     {
@@ -5787,15 +5810,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsGlance.jsx",
-     "sha256": "0a43a794d9bade381e7461bcbcb3818fb6b45a62c73cab75072456ea031cb908",
-     "size": 13767,
+     "sha256": "9603208290805f64b28a56806591de5c0f6a02ebb8a84797d7905164ec3a7393",
+     "size": 13763,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsTab.jsx",
-     "sha256": "a95af69c92526acba0650a551e1009f1162cc8fc83987ec82897cb7d2defb02a",
-     "size": 57363,
+     "sha256": "28581b3c52be6438e6aa7051d90bcb328c6afd2adb18537c5cfa5798eef84778",
+     "size": 57212,
      "type": "file"
     },
     {
@@ -5808,8 +5831,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "edd464fb5a40110711fb56822be03a50f2661efd25ae0b296e88007ccaf30462",
-     "size": 20128,
+     "sha256": "2e631f8103724c969318cea694875494b1d161c6759fbc1cc126c96de34a36a3",
+     "size": 20159,
      "type": "file"
     },
     {
@@ -5857,8 +5880,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "4c59f6bd5aced5842cbaa5d97e2dd395c21a2cc3a1d9ae062819e750b9489a3a",
-     "size": 45415,
+     "sha256": "c8450caa8f53c52186cb6c3a64d898f586e77db11cf8a2f4a7b83bd082d9c775",
+     "size": 45754,
      "type": "file"
     },
     {
@@ -5871,8 +5894,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "0880b45df1db889312068bd5cb03fdf55db275e6b07a504dc5731feb57b3123d",
-     "size": 37375,
+     "sha256": "206ccf86c7718a84276df6f99a9b1f504c61bbc19f72a32a5fe5775e876f9a4e",
+     "size": 37547,
      "type": "file"
     },
     {
@@ -5885,8 +5908,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ResourcesTab.jsx",
-     "sha256": "c6435ac0b7f57b790a874ba6451a25d7e3b59e408fee1ae97645d0b1e23e3029",
-     "size": 19199,
+     "sha256": "f6adf7d15015f4b9b77548ac2aa514088b4f24746f5fb7eda710561ccefbc464",
+     "size": 18751,
      "type": "file"
     },
     {
@@ -5899,8 +5922,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ServicesTab.jsx",
-     "sha256": "b562341a93452295673af63a4804836119045c2f927a2bdd540250f23cb71e13",
-     "size": 24526,
+     "sha256": "c3ae25386c9d51da884a662f8029933b585189fcf2de9753385167225714221a",
+     "size": 24417,
      "type": "file"
     },
     {
@@ -5934,8 +5957,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "40afcb491c48cde2578ca139f50d6e8708084f1cae17eba150b4524e8ff26701",
-     "size": 22519,
+     "sha256": "bb941e0296cd0620cbf9529ed5527d68ebe3dcd986e645988c214ed2ce713271",
+     "size": 22552,
      "type": "file"
     },
     {
@@ -7159,8 +7182,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "da476ce71dc9db29ea2aab44e6a64158df5b86bd76d3835f7fb324f804d1a958",
-     "size": 23643,
+     "sha256": "1a93dad9265588287bf192893dcfd0880186f24409aae533e0e9e2fe14c9093b",
+     "size": 23599,
      "type": "file"
     },
     {
@@ -8895,8 +8918,8 @@
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "c0a8e7c120cadf84a25423fa090cc184ada61780ddce5bf3d2388b4353f104bc",
-     "size": 15443,
+     "sha256": "5785b882a5dd649d0d4b610f6acb663bcb522445f08289c544b939e08f78a818",
+     "size": 15491,
      "type": "file"
     },
     {
@@ -9448,8 +9471,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/governanceAccount.js",
-     "sha256": "bd4758ccbe4822913a2ac3cf0dc8db94c6af78401534a9fadd07247c1e91bfd3",
-     "size": 20689,
+     "sha256": "71193c482de9762ded9960d2cc72f22186738586455087e0e5b471c917ad7e64",
+     "size": 21802,
      "type": "file"
     },
     {
@@ -9664,9 +9687,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/publicProse.js",
+     "sha256": "31a389b8b3bf1565e3aeb65d9748a153d571003403f31a6a8cc6639f54db306b",
+     "size": 6698,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "92006ae25955ecbe484e8e5d7df3a2f048afaab3181bb387066a870d9cfcca40",
-     "size": 42158,
+     "sha256": "1cc6173198d0e77cb41e4ea3a1569b3450264f7be555f89239a392eca14d56d0",
+     "size": 42424,
      "type": "file"
     },
     {
@@ -18576,8 +18606,8 @@
     {
      "mode": "100644",
      "path": "src/lib/saves.js",
-     "sha256": "b3b84d3747292149d7470b8dad944b860772330a1d9b311f715dee2bb9dfd126",
-     "size": 49461,
+     "sha256": "304e81083f28cfa3bfeb48c16eb448da63f952451e9e1033e086be8c4d5ff22e",
+     "size": 54572,
      "type": "file"
     },
     {
@@ -18821,8 +18851,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/SettlementPDF.jsx",
-     "sha256": "85eb12db0f7cb44496f5b826719f61b810ebe4ab4dca21861b392f2b3c7620f0",
-     "size": 14788,
+     "sha256": "59ab0da7cdcf032dcac51cebcfb6272de65e062aaeafa4f9a2b20049da0a4d9d",
+     "size": 15139,
      "type": "file"
     },
     {
@@ -19101,8 +19131,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "346959aa5d1850f84c797de472ed913b8a132d0b6ce99981a8dbb22de886df7f",
-     "size": 13377,
+     "sha256": "2cdac035110c5550b2303910c88626cfa7511f1f25b8cf54ef5cdb1aeba112c6",
+     "size": 13418,
      "type": "file"
     },
     {
@@ -19598,8 +19628,8 @@
     {
      "mode": "100644",
      "path": "src/store/index.js",
-     "sha256": "40623a9a0c34e5d17d993d86a809ed20501faa199c53c97a9d4e83898ce0590d",
-     "size": 16789,
+     "sha256": "99bc1d497f025f6717c657484e4471ed7ca7fbeb0a0d113ace305f12c5f50471",
+     "size": 17067,
      "type": "file"
     },
     {
@@ -19801,8 +19831,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementSlice.js",
-     "sha256": "c92629f147d10e0c62916344bc39f4d4aa9883b907186e5846f53d25d8698f5e",
-     "size": 87464,
+     "sha256": "9332d23efbac0a7007ef8706b9ac8e00e3a728a9f1830e1dda22bd8ef9a3df50",
+     "size": 90007,
      "type": "file"
     },
     {
@@ -19857,8 +19887,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateSettlementPDF.js",
-     "sha256": "6953e9e1bbd5c9672ec1785f8638591e7f65a53c8368c36dda53d1df0b867ad5",
-     "size": 18720,
+     "sha256": "a1cf823a5302d05b56ecf282264dfd020deecb93db1e2d55e29572ca0d75207e",
+     "size": 19073,
      "type": "file"
     },
     {
@@ -19956,7 +19986,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "8bbcd2ce66e292fc948960d1bb81a5d00580c9d1c68f90f85bc533da59975fc5",
+   "digest": "9b81c98611f7228e19f270708ef0dd32317ddc7227f0b46a74dafbc46bbaf552",
    "entries": [
     {
      "mode": "100644",
@@ -21816,8 +21846,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "f3e9be71a68cf60f747cab00ad45330e4297a3b72d784c09e8462525a85962bf",
-     "size": 8761,
+     "sha256": "d90362e39ca5796f929c5604726c9e799c1f8aa2862f62fc3ab78c0118214c9b",
+     "size": 8716,
      "type": "file"
     },
     {
@@ -22886,16 +22916,23 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/new/deskHostArgs.js",
+     "sha256": "4f19d5cfa7bcb569098a3b3747ee8086833a228e62f4ed28d226c0f501b9206a",
+     "size": 4147,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/new/economyDeskRead.js",
-     "sha256": "61bedbde8e596c0c42e34609bf9092a13c66104637474ed1c8f87d7e83bcf8f6",
-     "size": 7888,
+     "sha256": "7ced04e7f0bf712b6703d8fccc9f56e396ffe4b66186a878b99dc90a3cc1232b",
+     "size": 8917,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/generalDeskRead.js",
-     "sha256": "bd025eb05b66f439329f8995cd4d145793fdaa973254b276ac1facbfc37afe8b",
-     "size": 20990,
+     "sha256": "5c30a385f0c4983c6492e14aa47e5a950005512a97375c36ea0ba45eefde919e",
+     "size": 22723,
      "type": "file"
     },
     {
@@ -22915,8 +22952,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "881dfb70eff78fcb21ffb8bc0c2a6c3897b1cd263be240653b819cd5b388727d",
-     "size": 33046,
+     "sha256": "c2c6251496ef238188e95f212d77e8e2d9822e7ba1fad9c4aad1c3566b91b75d",
+     "size": 33084,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/new/publicProseCompose.js",
+     "sha256": "8899d8589767a31c76229140135429b0497e132370c6503b48089afaaf19945c",
+     "size": 5429,
      "type": "file"
     },
     {
@@ -22964,8 +23008,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DailyLifeTab.jsx",
-     "sha256": "b10ec0d9ecfefab734bb6a38dd32648f0751813d202a775b6cef77834c0e61d8",
-     "size": 19051,
+     "sha256": "ff68cf8166eb6876d8fd383ba060fb38f9bf0536f81cddd853393dc5148dbfa0",
+     "size": 19085,
      "type": "file"
     },
     {
@@ -22978,15 +23022,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsGlance.jsx",
-     "sha256": "0a43a794d9bade381e7461bcbcb3818fb6b45a62c73cab75072456ea031cb908",
-     "size": 13767,
+     "sha256": "9603208290805f64b28a56806591de5c0f6a02ebb8a84797d7905164ec3a7393",
+     "size": 13763,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsTab.jsx",
-     "sha256": "a95af69c92526acba0650a551e1009f1162cc8fc83987ec82897cb7d2defb02a",
-     "size": 57363,
+     "sha256": "28581b3c52be6438e6aa7051d90bcb328c6afd2adb18537c5cfa5798eef84778",
+     "size": 57212,
      "type": "file"
     },
     {
@@ -22999,8 +23043,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "edd464fb5a40110711fb56822be03a50f2661efd25ae0b296e88007ccaf30462",
-     "size": 20128,
+     "sha256": "2e631f8103724c969318cea694875494b1d161c6759fbc1cc126c96de34a36a3",
+     "size": 20159,
      "type": "file"
     },
     {
@@ -23048,8 +23092,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "4c59f6bd5aced5842cbaa5d97e2dd395c21a2cc3a1d9ae062819e750b9489a3a",
-     "size": 45415,
+     "sha256": "c8450caa8f53c52186cb6c3a64d898f586e77db11cf8a2f4a7b83bd082d9c775",
+     "size": 45754,
      "type": "file"
     },
     {
@@ -23062,8 +23106,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "0880b45df1db889312068bd5cb03fdf55db275e6b07a504dc5731feb57b3123d",
-     "size": 37375,
+     "sha256": "206ccf86c7718a84276df6f99a9b1f504c61bbc19f72a32a5fe5775e876f9a4e",
+     "size": 37547,
      "type": "file"
     },
     {
@@ -23076,8 +23120,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ResourcesTab.jsx",
-     "sha256": "c6435ac0b7f57b790a874ba6451a25d7e3b59e408fee1ae97645d0b1e23e3029",
-     "size": 19199,
+     "sha256": "f6adf7d15015f4b9b77548ac2aa514088b4f24746f5fb7eda710561ccefbc464",
+     "size": 18751,
      "type": "file"
     },
     {
@@ -23090,8 +23134,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ServicesTab.jsx",
-     "sha256": "b562341a93452295673af63a4804836119045c2f927a2bdd540250f23cb71e13",
-     "size": 24526,
+     "sha256": "c3ae25386c9d51da884a662f8029933b585189fcf2de9753385167225714221a",
+     "size": 24417,
      "type": "file"
     },
     {
@@ -23125,8 +23169,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "40afcb491c48cde2578ca139f50d6e8708084f1cae17eba150b4524e8ff26701",
-     "size": 22519,
+     "sha256": "bb941e0296cd0620cbf9529ed5527d68ebe3dcd986e645988c214ed2ce713271",
+     "size": 22552,
      "type": "file"
     },
     {
@@ -24350,8 +24394,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "da476ce71dc9db29ea2aab44e6a64158df5b86bd76d3835f7fb324f804d1a958",
-     "size": 23643,
+     "sha256": "1a93dad9265588287bf192893dcfd0880186f24409aae533e0e9e2fe14c9093b",
+     "size": 23599,
      "type": "file"
     },
     {
@@ -25974,8 +26018,8 @@
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "c0a8e7c120cadf84a25423fa090cc184ada61780ddce5bf3d2388b4353f104bc",
-     "size": 15443,
+     "sha256": "5785b882a5dd649d0d4b610f6acb663bcb522445f08289c544b939e08f78a818",
+     "size": 15491,
      "type": "file"
     },
     {
@@ -26520,8 +26564,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/governanceAccount.js",
-     "sha256": "bd4758ccbe4822913a2ac3cf0dc8db94c6af78401534a9fadd07247c1e91bfd3",
-     "size": 20689,
+     "sha256": "71193c482de9762ded9960d2cc72f22186738586455087e0e5b471c917ad7e64",
+     "size": 21802,
      "type": "file"
     },
     {
@@ -26736,9 +26780,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/publicProse.js",
+     "sha256": "31a389b8b3bf1565e3aeb65d9748a153d571003403f31a6a8cc6639f54db306b",
+     "size": 6698,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "92006ae25955ecbe484e8e5d7df3a2f048afaab3181bb387066a870d9cfcca40",
-     "size": 42158,
+     "sha256": "1cc6173198d0e77cb41e4ea3a1569b3450264f7be555f89239a392eca14d56d0",
+     "size": 42424,
      "type": "file"
     },
     {
@@ -35648,8 +35699,8 @@
     {
      "mode": "100644",
      "path": "src/lib/saves.js",
-     "sha256": "b3b84d3747292149d7470b8dad944b860772330a1d9b311f715dee2bb9dfd126",
-     "size": 49461,
+     "sha256": "304e81083f28cfa3bfeb48c16eb448da63f952451e9e1033e086be8c4d5ff22e",
+     "size": 54572,
      "type": "file"
     },
     {
@@ -35893,8 +35944,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/SettlementPDF.jsx",
-     "sha256": "85eb12db0f7cb44496f5b826719f61b810ebe4ab4dca21861b392f2b3c7620f0",
-     "size": 14788,
+     "sha256": "59ab0da7cdcf032dcac51cebcfb6272de65e062aaeafa4f9a2b20049da0a4d9d",
+     "size": 15139,
      "type": "file"
     },
     {
@@ -36173,8 +36224,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "346959aa5d1850f84c797de472ed913b8a132d0b6ce99981a8dbb22de886df7f",
-     "size": 13377,
+     "sha256": "2cdac035110c5550b2303910c88626cfa7511f1f25b8cf54ef5cdb1aeba112c6",
+     "size": 13418,
      "type": "file"
     },
     {
@@ -36670,8 +36721,8 @@
     {
      "mode": "100644",
      "path": "src/store/index.js",
-     "sha256": "40623a9a0c34e5d17d993d86a809ed20501faa199c53c97a9d4e83898ce0590d",
-     "size": 16789,
+     "sha256": "99bc1d497f025f6717c657484e4471ed7ca7fbeb0a0d113ace305f12c5f50471",
+     "size": 17067,
      "type": "file"
     },
     {
@@ -36873,8 +36924,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementSlice.js",
-     "sha256": "c92629f147d10e0c62916344bc39f4d4aa9883b907186e5846f53d25d8698f5e",
-     "size": 87464,
+     "sha256": "9332d23efbac0a7007ef8706b9ac8e00e3a728a9f1830e1dda22bd8ef9a3df50",
+     "size": 90007,
      "type": "file"
     },
     {
@@ -36929,8 +36980,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateSettlementPDF.js",
-     "sha256": "6953e9e1bbd5c9672ec1785f8638591e7f65a53c8368c36dda53d1df0b867ad5",
-     "size": 18720,
+     "sha256": "a1cf823a5302d05b56ecf282264dfd020deecb93db1e2d55e29572ca0d75207e",
+     "size": 19073,
      "type": "file"
     },
     {
@@ -37021,7 +37072,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "3ee10203f455b99ccd2f2cae9b080a9682690d0c4222d36f877a33a6271830e9",
+   "digest": "23265e764ff389c5b0617a14641cfef05db87c12ee7d3492ca69e54e86082c29",
    "entries": [
     {
      "mode": "100644",
@@ -38881,8 +38932,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "f3e9be71a68cf60f747cab00ad45330e4297a3b72d784c09e8462525a85962bf",
-     "size": 8761,
+     "sha256": "d90362e39ca5796f929c5604726c9e799c1f8aa2862f62fc3ab78c0118214c9b",
+     "size": 8716,
      "type": "file"
     },
     {
@@ -39951,16 +40002,23 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/new/deskHostArgs.js",
+     "sha256": "4f19d5cfa7bcb569098a3b3747ee8086833a228e62f4ed28d226c0f501b9206a",
+     "size": 4147,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/new/economyDeskRead.js",
-     "sha256": "61bedbde8e596c0c42e34609bf9092a13c66104637474ed1c8f87d7e83bcf8f6",
-     "size": 7888,
+     "sha256": "7ced04e7f0bf712b6703d8fccc9f56e396ffe4b66186a878b99dc90a3cc1232b",
+     "size": 8917,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/generalDeskRead.js",
-     "sha256": "bd025eb05b66f439329f8995cd4d145793fdaa973254b276ac1facbfc37afe8b",
-     "size": 20990,
+     "sha256": "5c30a385f0c4983c6492e14aa47e5a950005512a97375c36ea0ba45eefde919e",
+     "size": 22723,
      "type": "file"
     },
     {
@@ -39980,8 +40038,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "881dfb70eff78fcb21ffb8bc0c2a6c3897b1cd263be240653b819cd5b388727d",
-     "size": 33046,
+     "sha256": "c2c6251496ef238188e95f212d77e8e2d9822e7ba1fad9c4aad1c3566b91b75d",
+     "size": 33084,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/new/publicProseCompose.js",
+     "sha256": "8899d8589767a31c76229140135429b0497e132370c6503b48089afaaf19945c",
+     "size": 5429,
      "type": "file"
     },
     {
@@ -40029,8 +40094,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DailyLifeTab.jsx",
-     "sha256": "b10ec0d9ecfefab734bb6a38dd32648f0751813d202a775b6cef77834c0e61d8",
-     "size": 19051,
+     "sha256": "ff68cf8166eb6876d8fd383ba060fb38f9bf0536f81cddd853393dc5148dbfa0",
+     "size": 19085,
      "type": "file"
     },
     {
@@ -40043,15 +40108,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsGlance.jsx",
-     "sha256": "0a43a794d9bade381e7461bcbcb3818fb6b45a62c73cab75072456ea031cb908",
-     "size": 13767,
+     "sha256": "9603208290805f64b28a56806591de5c0f6a02ebb8a84797d7905164ec3a7393",
+     "size": 13763,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsTab.jsx",
-     "sha256": "a95af69c92526acba0650a551e1009f1162cc8fc83987ec82897cb7d2defb02a",
-     "size": 57363,
+     "sha256": "28581b3c52be6438e6aa7051d90bcb328c6afd2adb18537c5cfa5798eef84778",
+     "size": 57212,
      "type": "file"
     },
     {
@@ -40064,8 +40129,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "edd464fb5a40110711fb56822be03a50f2661efd25ae0b296e88007ccaf30462",
-     "size": 20128,
+     "sha256": "2e631f8103724c969318cea694875494b1d161c6759fbc1cc126c96de34a36a3",
+     "size": 20159,
      "type": "file"
     },
     {
@@ -40113,8 +40178,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "4c59f6bd5aced5842cbaa5d97e2dd395c21a2cc3a1d9ae062819e750b9489a3a",
-     "size": 45415,
+     "sha256": "c8450caa8f53c52186cb6c3a64d898f586e77db11cf8a2f4a7b83bd082d9c775",
+     "size": 45754,
      "type": "file"
     },
     {
@@ -40127,8 +40192,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "0880b45df1db889312068bd5cb03fdf55db275e6b07a504dc5731feb57b3123d",
-     "size": 37375,
+     "sha256": "206ccf86c7718a84276df6f99a9b1f504c61bbc19f72a32a5fe5775e876f9a4e",
+     "size": 37547,
      "type": "file"
     },
     {
@@ -40141,8 +40206,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ResourcesTab.jsx",
-     "sha256": "c6435ac0b7f57b790a874ba6451a25d7e3b59e408fee1ae97645d0b1e23e3029",
-     "size": 19199,
+     "sha256": "f6adf7d15015f4b9b77548ac2aa514088b4f24746f5fb7eda710561ccefbc464",
+     "size": 18751,
      "type": "file"
     },
     {
@@ -40155,8 +40220,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ServicesTab.jsx",
-     "sha256": "b562341a93452295673af63a4804836119045c2f927a2bdd540250f23cb71e13",
-     "size": 24526,
+     "sha256": "c3ae25386c9d51da884a662f8029933b585189fcf2de9753385167225714221a",
+     "size": 24417,
      "type": "file"
     },
     {
@@ -40190,8 +40255,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "40afcb491c48cde2578ca139f50d6e8708084f1cae17eba150b4524e8ff26701",
-     "size": 22519,
+     "sha256": "bb941e0296cd0620cbf9529ed5527d68ebe3dcd986e645988c214ed2ce713271",
+     "size": 22552,
      "type": "file"
     },
     {
@@ -41415,8 +41480,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "da476ce71dc9db29ea2aab44e6a64158df5b86bd76d3835f7fb324f804d1a958",
-     "size": 23643,
+     "sha256": "1a93dad9265588287bf192893dcfd0880186f24409aae533e0e9e2fe14c9093b",
+     "size": 23599,
      "type": "file"
     },
     {
@@ -43151,8 +43216,8 @@
     {
      "mode": "100644",
      "path": "src/domain/corruptionLeash.js",
-     "sha256": "c0a8e7c120cadf84a25423fa090cc184ada61780ddce5bf3d2388b4353f104bc",
-     "size": 15443,
+     "sha256": "5785b882a5dd649d0d4b610f6acb663bcb522445f08289c544b939e08f78a818",
+     "size": 15491,
      "type": "file"
     },
     {
@@ -43704,8 +43769,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/governanceAccount.js",
-     "sha256": "bd4758ccbe4822913a2ac3cf0dc8db94c6af78401534a9fadd07247c1e91bfd3",
-     "size": 20689,
+     "sha256": "71193c482de9762ded9960d2cc72f22186738586455087e0e5b471c917ad7e64",
+     "size": 21802,
      "type": "file"
     },
     {
@@ -43920,9 +43985,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/publicProse.js",
+     "sha256": "31a389b8b3bf1565e3aeb65d9748a153d571003403f31a6a8cc6639f54db306b",
+     "size": 6698,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/publicSafe.js",
-     "sha256": "92006ae25955ecbe484e8e5d7df3a2f048afaab3181bb387066a870d9cfcca40",
-     "size": 42158,
+     "sha256": "1cc6173198d0e77cb41e4ea3a1569b3450264f7be555f89239a392eca14d56d0",
+     "size": 42424,
      "type": "file"
     },
     {
@@ -52832,8 +52904,8 @@
     {
      "mode": "100644",
      "path": "src/lib/saves.js",
-     "sha256": "b3b84d3747292149d7470b8dad944b860772330a1d9b311f715dee2bb9dfd126",
-     "size": 49461,
+     "sha256": "304e81083f28cfa3bfeb48c16eb448da63f952451e9e1033e086be8c4d5ff22e",
+     "size": 54572,
      "type": "file"
     },
     {
@@ -53077,8 +53149,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/SettlementPDF.jsx",
-     "sha256": "85eb12db0f7cb44496f5b826719f61b810ebe4ab4dca21861b392f2b3c7620f0",
-     "size": 14788,
+     "sha256": "59ab0da7cdcf032dcac51cebcfb6272de65e062aaeafa4f9a2b20049da0a4d9d",
+     "size": 15139,
      "type": "file"
     },
     {
@@ -53357,8 +53429,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "346959aa5d1850f84c797de472ed913b8a132d0b6ce99981a8dbb22de886df7f",
-     "size": 13377,
+     "sha256": "2cdac035110c5550b2303910c88626cfa7511f1f25b8cf54ef5cdb1aeba112c6",
+     "size": 13418,
      "type": "file"
     },
     {
@@ -53854,8 +53926,8 @@
     {
      "mode": "100644",
      "path": "src/store/index.js",
-     "sha256": "40623a9a0c34e5d17d993d86a809ed20501faa199c53c97a9d4e83898ce0590d",
-     "size": 16789,
+     "sha256": "99bc1d497f025f6717c657484e4471ed7ca7fbeb0a0d113ace305f12c5f50471",
+     "size": 17067,
      "type": "file"
     },
     {
@@ -54057,8 +54129,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementSlice.js",
-     "sha256": "c92629f147d10e0c62916344bc39f4d4aa9883b907186e5846f53d25d8698f5e",
-     "size": 87464,
+     "sha256": "9332d23efbac0a7007ef8706b9ac8e00e3a728a9f1830e1dda22bd8ef9a3df50",
+     "size": 90007,
      "type": "file"
     },
     {
@@ -54113,8 +54185,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateSettlementPDF.js",
-     "sha256": "6953e9e1bbd5c9672ec1785f8638591e7f65a53c8368c36dda53d1df0b867ad5",
-     "size": 18720,
+     "sha256": "a1cf823a5302d05b56ecf282264dfd020deecb93db1e2d55e29572ca0d75207e",
+     "size": 19073,
      "type": "file"
     },
     {
@@ -54205,30 +54277,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "d0703721d7351cba639e41dc12abe4149c58bb47d0fb084d5b501963d3f7c9b5",
+  "bundleDigest": "b87e7e4f4a448fe1b5283c0434ed039be074b5e7818d77a39604b40d8ad15d20",
   "corpusDigest": "548386031b83046b6dc72e7651b7d56c78da950ab4da56646317338c73398c72",
-  "currentArtifactDigest": "a29a94384d5587aa665eb56cccc30c2f96b068848fbea7632594ca8dd4026f5e",
-  "currentDetectorDigest": "d8ce5622883b34d6c8744ef2da1421f401a9b13a7752f410b4389afad4410195",
-  "currentFindingsDigest": "b3e00bce724775e22f87c108c465eda3abf52c49bd14f762348a837cd1bcbf94",
-  "currentScannerSha": "b1a0be08501c7f91c4b3058f901873a636b1ea29",
-  "currentScannerToolDigest": "65565380e8c44a31732c81a47dc8b9ea02f7ca408369cbcad5fba512fc78e6ca",
-  "detectorTreeDigest": "d8ce5622883b34d6c8744ef2da1421f401a9b13a7752f410b4389afad4410195",
-  "executionTreeDigest": "4a0a6d3fc6f4e7a7f65df2c6459cddc60ff3cf53535215a832e87b9aa0bea4dd",
+  "currentArtifactDigest": "ff402dbedcbe73dfe7c31ceb0103785799b275af290ae064ddde880b2baf2755",
+  "currentDetectorDigest": "87573bf769f012c96ba4b232228409bf9c3bdcd9cbb3f914b8f0a29255c8410b",
+  "currentFindingsDigest": "70774b76a0f89cf63d1899fcca4dbb3db8891f81c74cf27bbd7eabeed5e010c0",
+  "currentScannerSha": "8ad1df506194f1417dab8da539bcdd484f377565",
+  "currentScannerToolDigest": "0298e7ad70f3aa572c0815ff854e7c704f4fd62cae44d5349c3c08603d138f27",
+  "detectorTreeDigest": "87573bf769f012c96ba4b232228409bf9c3bdcd9cbb3f914b8f0a29255c8410b",
+  "executionTreeDigest": "74845e9ddb346c1951c6f949c6b2ad8b83ffaac6a85368aef3ed1973309c68fb",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "a29a94384d5587aa665eb56cccc30c2f96b068848fbea7632594ca8dd4026f5e",
-  "legacyDetectorDigest": "d8ce5622883b34d6c8744ef2da1421f401a9b13a7752f410b4389afad4410195",
-  "legacyScannerSha": "b1a0be08501c7f91c4b3058f901873a636b1ea29",
-  "legacyScannerToolDigest": "65565380e8c44a31732c81a47dc8b9ea02f7ca408369cbcad5fba512fc78e6ca",
-  "predecessorBaselineDigest": "3630ac3f115c0b9504e6afbdc5c12489ece8d32d0b145707d3f65ff206df2762",
-  "predecessorBaselineTextSha256": "96027a64e9353034d39d813878d8ab9269384a416a129522ea326a5c65270faf",
-  "predecessorInventoryDigest": "cd3158d513e2db3bffe249df1bc1760454cb64cb6a79b478fada83ef22b7b2df",
-  "reportDigest": "fe1bc5e83b7a32f570fb46105afed050d25080bfb9fa20f372dfbb07dcb2f0a4",
-  "reviewDigest": "6bdf1ee6411061749b48f281917989f358be136fdd93f5d8341752277e8eeab5",
+  "legacyArtifactDigest": "ff402dbedcbe73dfe7c31ceb0103785799b275af290ae064ddde880b2baf2755",
+  "legacyDetectorDigest": "87573bf769f012c96ba4b232228409bf9c3bdcd9cbb3f914b8f0a29255c8410b",
+  "legacyScannerSha": "8ad1df506194f1417dab8da539bcdd484f377565",
+  "legacyScannerToolDigest": "0298e7ad70f3aa572c0815ff854e7c704f4fd62cae44d5349c3c08603d138f27",
+  "predecessorBaselineDigest": "4b6d389324c2183a4038ec0eb8f4682d4ffeed3514348c3229a63959420a2899",
+  "predecessorBaselineTextSha256": "8ac0f3bd62cec329149ea8b1ac8427da962af08d9d9609a9034210c035f4f67f",
+  "predecessorInventoryDigest": "cbb638eef2249e99909d7a5b6470ef774305836880e9c2de2493f5ee77a198fd",
+  "reportDigest": "4792268c179ec952be2ed83600948d68e1bc3bbc7af051dcf97774fdc11c7c9a",
+  "reviewDigest": "498631d21d92154d64bcc28e19fd64b5768c7302083a1428a54b86f440478336",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "8bbcd2ce66e292fc948960d1bb81a5d00580c9d1c68f90f85bc533da59975fc5",
-  "sourceTreeDigest": "3ee10203f455b99ccd2f2cae9b080a9682690d0c4222d36f877a33a6271830e9",
-  "subjectSha": "b1a0be08501c7f91c4b3058f901873a636b1ea29",
-  "targetInventoryDigest": "cbb638eef2249e99909d7a5b6470ef774305836880e9c2de2493f5ee77a198fd"
+  "scanTreeDigest": "9b81c98611f7228e19f270708ef0dd32317ddc7227f0b46a74dafbc46bbaf552",
+  "sourceTreeDigest": "23265e764ff389c5b0617a14641cfef05db87c12ee7d3492ca69e54e86082c29",
+  "subjectSha": "8ad1df506194f1417dab8da539bcdd484f377565",
+  "targetInventoryDigest": "882979533693c53df7fec7f53a41c316b1eea16879337d399a88e0efc852d709"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -54320,6 +54392,12 @@
    },
    "temporary on npcs": {
     "reason": "LANDING-2b — the chair's ruling 2 of 2026-11-04 (the crisis set as measured)",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/display/publicProse.js": {
+   "publicProse on settlement": {
+    "reason": "SW-B7b PROJECTION — the chair's grant of 2026-11-09 13:5x (STYLE-RULINGS-2 B10(a))",
     "rule": "explained-writer"
    }
   },
@@ -54521,23 +54599,23 @@
   }
  },
  "scanStats": {
-  "files": 2437,
-  "reads": 140736,
-  "resolved": 11351,
-  "unresolved": 129385
+  "files": 2440,
+  "reads": 140819,
+  "resolved": 11355,
+  "unresolved": 129464
  },
  "scannerProvenance": {
-  "detectorDigest": "d8ce5622883b34d6c8744ef2da1421f401a9b13a7752f410b4389afad4410195",
-  "executionTreeDigest": "4a0a6d3fc6f4e7a7f65df2c6459cddc60ff3cf53535215a832e87b9aa0bea4dd",
-  "scanTreeDigest": "8bbcd2ce66e292fc948960d1bb81a5d00580c9d1c68f90f85bc533da59975fc5",
-  "sourceTreeDigest": "3ee10203f455b99ccd2f2cae9b080a9682690d0c4222d36f877a33a6271830e9",
+  "detectorDigest": "87573bf769f012c96ba4b232228409bf9c3bdcd9cbb3f914b8f0a29255c8410b",
+  "executionTreeDigest": "74845e9ddb346c1951c6f949c6b2ad8b83ffaac6a85368aef3ed1973309c68fb",
+  "scanTreeDigest": "9b81c98611f7228e19f270708ef0dd32317ddc7227f0b46a74dafbc46bbaf552",
+  "sourceTreeDigest": "23265e764ff389c5b0617a14641cfef05db87c12ee7d3492ca69e54e86082c29",
   "unscannedInputDigest": "2a8cd80b054d65dc5c1c9ebde1d33232cb37d0cb12d896c6497605969bfec9d0"
  },
- "schema": 39,
+ "schema": 40,
  "sentinel": {
-  "resolvedReads": 11351,
+  "resolvedReads": 11355,
   "totalKeys": 12214,
   "usableShapes": 532
  },
- "total": 2190
+ "total": 2191
 }
