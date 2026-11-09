@@ -36,6 +36,20 @@ beforeAll(() => {
     const ops = settlement.economicState?.safetyProfile?.criminalInstitutions || [];
     ROWS.push({ seed, leaves, notes: [...new Set(ops.map((n) => criminalOpNote(n)).filter(Boolean))], ops });
   }
+  // SW-8 RENAME-POWERS (2026-11-09) re-keyed the anti-vacuity by identity: the corpus's only shared
+  // note was "Multiple Criminal Factions" + "Red Light District" on the catch-all; the owner's map
+  // renamed the first "Rival Gangs", which now (rightly) takes the gang note, so no generated town
+  // shares a note any more. The guard keeps its case by PLANTING it: seed 11's own record with a
+  // street gang beside its rival gangs, two operations that fall to the one gang note.
+  {
+    const settlement = generateSettlementPipeline(SEEDS[11].config, null, { seed: SEEDS[11].seed, customContent: {} });
+    const sp = settlement.economicState.safetyProfile;
+    sp.criminalInstitutions = [...sp.criminalInstitutions, 'Street Gang'];
+    const vm = buildViewModel({ settlement });
+    const leaves = deepText(DefenseSecurity({ settlement, narrativeMode: false, vm, stateProse: null }));
+    const ops = sp.criminalInstitutions;
+    ROWS.push({ seed: `${SEEDS[11].seed}+street-gang`, leaves, notes: [...new Set(ops.map((n) => criminalOpNote(n)).filter(Boolean))], ops });
+  }
 }, 600000);
 
 describe('X-50: the PDF Defense chapter prints each criminal note once', () => {
