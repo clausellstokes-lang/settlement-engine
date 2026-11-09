@@ -2,8 +2,14 @@
  * Exact, session-only context carried from the settlement portrait.
  *
  * This card is intentionally not a RealmItem card. Scene semantics and Herald
- * stories have different identity vocabularies; presenting the recorded scene
- * references directly is more honest than guessing which story "must" match.
+ * stories have different identity vocabularies; presenting what the portrait
+ * noted is more honest than guessing which story "must" match.
+ *
+ * D2·12 + D·89 (STYLE-2-PULSE-FOLLOWUP, 2026-11-09, the chair's ruling): the face
+ * prints plain words — the kind and the cause family humanized, no scene id, no
+ * canonical record id, no raw provenance reference. The ids stay in the record:
+ * the context object is untouched and the card carries them as data attributes
+ * (`data-scene-id`, `data-canonical-ref`) for anyone who inspects it.
  */
 
 import {
@@ -18,19 +24,26 @@ import Button from '../primitives/Button.jsx';
 import { heraldDestinationForSceneAction } from './heraldCommandNavigation.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+import { humanizeToken } from '../../domain/display/humanizeEngineTokens.js';
 
 /** @param {unknown} value @returns {string} */
 function text(value) {
   return typeof value === 'string' ? value : '';
 }
 
-function causeText(cause, reference) {
+/** @param {unknown} value @returns {string} a token in words, first letter raised */
+function words(value) {
+  const w = humanizeToken(text(value));
+  return w ? w.charAt(0).toUpperCase() + w.slice(1) : '';
+}
+
+function causeText(cause) {
   const displayText = text(cause?.displayText);
   if (displayText) return displayText;
-  const effect = text(cause?.effect);
+  const effect = words(cause?.effect);
   const sourceRef = text(cause?.sourceRef);
   if (effect && sourceRef) return `${effect}: ${sourceRef}`;
-  return effect || sourceRef || `Recorded reference: ${reference}`;
+  return effect || sourceRef || 'A cause the portrait noted, without a description.';
 }
 
 export default function HeraldSceneContext({ context, onDismiss }) {
@@ -51,6 +64,8 @@ export default function HeraldSceneContext({ context, onDismiss }) {
     <section
       aria-label="Settlement portrait context"
       data-testid="herald-scene-context"
+      data-scene-id={text(context.sceneId) || undefined}
+      data-canonical-ref={canonicalKind && canonicalId ? `${canonicalKind}:${canonicalId}` : undefined}
       style={{
         display: 'grid',
         gap: 8,
@@ -74,7 +89,7 @@ export default function HeraldSceneContext({ context, onDismiss }) {
             From the settlement portrait
           </div>
           <h2 style={{ margin: '3px 0 0', fontSize: FS.md }}>
-            {text(context.label) || context.sceneId}
+            {text(context.label) || words(context.entityKind) || 'A place in the portrait'}
           </h2>
         </div>
         {onDismiss && (
@@ -101,20 +116,10 @@ export default function HeraldSceneContext({ context, onDismiss }) {
       >
         <dt style={{ color: INK, fontWeight: 800 }}>Action</dt>
         <dd style={{ margin: 0 }}>{destination.label}</dd>
-        <dt style={{ color: INK, fontWeight: 800 }}>Scene</dt>
-        <dd style={{ margin: 0, overflowWrap: 'anywhere' }}>{context.sceneId}</dd>
-        {context.entityKind && (
+        {words(context.entityKind) && (
           <>
             <dt style={{ color: INK, fontWeight: 800 }}>Kind</dt>
-            <dd style={{ margin: 0 }}>{context.entityKind}</dd>
-          </>
-        )}
-        {canonicalKind && canonicalId && (
-          <>
-            <dt style={{ color: INK, fontWeight: 800 }}>Canonical record</dt>
-            <dd style={{ margin: 0, overflowWrap: 'anywhere' }}>
-              {canonicalKind}: {canonicalId}
-            </dd>
+            <dd style={{ margin: 0 }}>{words(context.entityKind)}</dd>
           </>
         )}
       </dl>
@@ -127,8 +132,8 @@ export default function HeraldSceneContext({ context, onDismiss }) {
               const cause = causeById.get(reference);
               return (
                 <li key={reference} style={{ marginBottom: 3 }}>
-                  {causeText(cause, reference)}
-                  {cause?.family ? ` · ${cause.family}` : ''}
+                  {causeText(cause)}
+                  {words(cause?.family) ? ` · ${words(cause?.family)}` : ''}
                 </li>
               );
             })}
@@ -137,8 +142,8 @@ export default function HeraldSceneContext({ context, onDismiss }) {
       )}
 
       <p style={{ margin: 0, color: SECOND, fontSize: proseFontSize(FS.micro, mobile) }}>
-        These are the portrait compiler’s recorded references. The Herald has
-        not guessed a story identity for this place.
+        These are the notes the settlement’s portrait was built from. The Herald
+        has not guessed which story this place belongs to.
       </p>
     </section>
   );
