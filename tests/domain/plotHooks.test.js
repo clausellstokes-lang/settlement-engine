@@ -150,7 +150,7 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
       links: [{ kind: 'npc', id: 'n1', label: 'Mara Vell' }],
     });
     expect(hooks[1]).toMatchObject({
-      text: 'The famine turns on the Town granary, run by Mara Vell: if it gives way, Town Council loses most, because the crisis hits its base.',
+      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, Town Council loses most, because the crisis hits its base.',
       crisis: 'famine', links: [{ kind: 'faction', id: 'Town Council', label: 'Town Council' }],
     });
     // the place's own hooks follow, in the order they always had: the count above them is a floor

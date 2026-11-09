@@ -36,6 +36,7 @@ import { CAST_REASONS, effectiveCastOf, requiredRolesOf } from './crisisCast.js'
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
+import { institutionDisplayName } from '../display/institutionDisplayName.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -68,6 +69,21 @@ export const CRISIS_NOUN = Object.freeze(/** @type {Record<string, string>} */ (
 
 /** The noun of last resort: an unknown kind, or a noun the record contradicts. */
 const PLAIN_NOUN = 'crisis';
+
+/** The crisis nouns that take a plural verb ("the raids turn"; B3: "The raids turns on …"). */
+const PLURAL_NOUNS = Object.freeze(new Set(['raids']));
+
+/**
+ * A house as a sentence speaks it (SW-6 CRISIS-SURFACES, B3: "the Blacksmiths (3-10)", "the Inns and taverns
+ * (district)", "the Professional city watch"): the setting-neutral label (`institutionDisplayName`), without the
+ * roster's count or district tag, and lower-led where the catalogue's sentence case would put a capital mid-
+ * sentence. A name with a capital past its first letter (a DM's own "Stormwatch Keep") keeps its case.
+ * @param {string} name @returns {string}
+ */
+export function houseInProse(name) {
+  const label = institutionDisplayName(name).replace(/\s*\((?:\d+(?:\s*[-–]\s*\d+)?|district)\)\s*$/i, '').trim();
+  return /^[A-Z][^A-Z]*$/.test(label) ? label[0].toLowerCase() + label.slice(1) : label;
+}
 
 /**
  * The line roles as a clause naming their holder. PROPOSAL C1 (the lane's report): one clause per
@@ -161,11 +177,14 @@ const castSentence = (noun, clause, reason) => (CLAUSE_SAYS.has(reason) ? `In th
  */
 function leverSentence(noun, house, holder, loser) {
   const run = holder ? `, run by ${holder}` : '';
+  // SW-6 CRISIS-SURFACES (W4 rows 266, 267; B3): the verb agrees with a plural noun, and the house reads as prose.
+  const [turns, goes] = PLURAL_NOUNS.has(noun) ? ['turn', 'go'] : ['turns', 'goes'];
+  const place = houseInProse(house);
   // W7 HOOKS (rows 263, 271): what the crisis turns on and who loses, in plain words; "the players can push
   // on" was machinery (the DM decides what the players push on).
   return loser
-    ? `The ${noun} turns on the ${house}${run}: if it gives way, ${loser.factionId} loses most, because ${loser.reason}.`
-    : `The ${noun} turns on the ${house}${run}: whoever wins it over decides how the ${noun} goes.`;
+    ? `The ${noun} ${turns} on the ${place}${run}: if it gives way, ${loser.factionId} loses most, because ${loser.reason}.`
+    : `The ${noun} ${turns} on the ${place}${run}: whoever wins it over decides how the ${noun} ${goes}.`;
 }
 
 /**
