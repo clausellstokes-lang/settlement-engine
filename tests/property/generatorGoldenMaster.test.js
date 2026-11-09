@@ -25,13 +25,6 @@
  *   CONSTRUCTION: written from the staged tree SW2 (the tree of 82a4e2856 with the door paths carried from
  *   the branch, the previous record's writes committed). 0580a38d.. -> 8e80cd6a..
  *
- * 2026-11-08 — MERGE-WAVE RECORD 2, THE W2 DEF MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
- *   record docs/shift-records/2026-11-08-merge-wave-2-w2-def.json; the cloud chair signs under the owner's delegation, vetoable).
- *   422 of 525 rows (thorp 84, hamlet 84, village 84, town 2, city 84, metropolis 84) against record 1's post-state. THE CAUSE, ONE (first-parent
- *   step 82a4e2856): the W2 DEF merge over the integration branch (lane/w2-def-2026-11-07 at 091b23bb3; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
- *   CONSTRUCTION: written from the staged tree SW2 (the tree of 82a4e2856 with the door paths carried from
- *   the branch, the previous record's writes committed). 0580a38d.. -> 8e80cd6a..
- *
  * 2026-11-08 — MERGE-WAVE RECORD 1, THE W1 ECO MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
  *   record docs/shift-records/2026-11-08-merge-wave-1-w1-eco.json; the cloud chair signs under the owner's delegation, vetoable).
  *   210 of 525 rows (thorp 12, hamlet 12, village 12, town 6, city 84, metropolis 84) against MERGE-CAR record C's post-state. THE CAUSE, ONE (first-parent
