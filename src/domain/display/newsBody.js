@@ -339,3 +339,43 @@ export function newsCardReasons(entry) {
     })
     .slice(0, 3);
 }
+
+/** The lifecycle in a plain word, for the card's status pill. */
+const STATUS_WORDS = Object.freeze({
+  queued: 'coming',
+  ready: 'coming',
+  applied: 'in effect',
+  resolved: 'past',
+  ignored: 'past',
+  expired: 'past',
+});
+
+/**
+ * The status pill's word (STYLE-RULINGS-2 C1): never the pipeline's state token.
+ * A regional effect still travelling between towns prints where it stands in a
+ * plain word ("coming · in effect · past"); every other entry prints nothing, because
+ * its body already says what happened in its own tense.
+ * @param {{ kind?: string|null, impactIds?: unknown[]|null }|null|undefined} entry
+ * @returns {string}
+ */
+export function newsStatusWord(entry) {
+  if (!entry) return '';
+  const travelling = Array.isArray(entry.impactIds) && entry.impactIds.length > 0;
+  if (!travelling) return '';
+  return STATUS_WORDS[/** @type {keyof typeof STATUS_WORDS} */ (String(entry.kind || ''))] || '';
+}
+
+/**
+ * Everything the news card prints about one entry, from the one set of readers:
+ * the body, its title, the status word and the reason pills.
+ * @param {any} entry
+ * @returns {{ body: string, tooltip: string, status: string, reasons: string[] }}
+ */
+export function newsCardFace(entry) {
+  return {
+    body: newsBodyText(entry),
+    tooltip: newsCardTooltip(entry),
+    status: newsStatusWord(entry),
+    reasons: newsCardReasons(entry),
+  };
+}

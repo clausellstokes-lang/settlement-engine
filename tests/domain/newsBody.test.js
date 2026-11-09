@@ -11,7 +11,7 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-  newsBodyText, newsReaderSummary, newsReasonPhrases, BODY_POOLS, newsCardReasons, newsCardTooltip,
+  newsBodyText, newsReaderSummary, newsReasonPhrases, BODY_POOLS, newsCardReasons, newsCardTooltip, newsStatusWord,
 } from '../../src/domain/display/newsBody.js';
 
 const TRANSITIONS = ['queued', 'ready', 'applied', 'resolved', 'ignored', 'expired'];
@@ -195,5 +195,16 @@ describe('newsBody — the body states the filed event (STYLE-RULINGS-2 C1)', ()
     expect(newsCardReasons(entry)).toEqual(['a heavy blow']);
     // A legacy entry with no summary keeps every reader phrase.
     expect(newsCardReasons({ kind: 'queued', reasons: ['chain propagation'] })).toEqual(newsReasonPhrases({ reasons: ['chain propagation'] }));
+  });
+});
+
+describe('newsBody — the status pill is a plain word or nothing (STYLE-RULINGS-2 C1)', () => {
+  it('a travelling regional effect says coming / in effect / past; every other entry prints no pill', () => {
+    const travelling = (kind) => newsStatusWord({ kind, impactIds: ['impact.1'] });
+    expect(['queued', 'ready', 'applied', 'resolved', 'ignored', 'expired'].map(travelling))
+      .toEqual(['coming', 'coming', 'in effect', 'past', 'past', 'past']);
+    expect(newsStatusWord({ kind: 'applied', impactIds: [] })).toBe('');
+    expect(newsStatusWord({ kind: 'pantheon' })).toBe('');
+    expect(newsStatusWord(null)).toBe('');
   });
 });
