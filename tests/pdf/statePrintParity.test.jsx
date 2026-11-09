@@ -969,3 +969,16 @@ describe('THE OWNER\'S VETOES OF 2026-11-09 03:5x in print (SW-9)', () => {
     expect(src).not.toContain('kicker="RECENT EVENT"');
   });
 });
+
+describe('the war-weary near-peace line, one sentence on two surfaces (SW-9; SW-4\'s routed FaithWar:54 + WarTab:187)', () => {
+  test('the PDF and the War tab print the same plain line; the "scar" figure is gone from both', async () => {
+    const { readFileSync } = await import('node:fs');
+    const LINE = 'The worst of the fighting is over; this realm leans toward peace.';
+    const pdf = readFileSync(new URL('../../src/pdf/sections/FaithWar.jsx', import.meta.url), 'utf8');
+    const web = readFileSync(new URL('../../src/components/new/tabs/WarTab.jsx', import.meta.url), 'utf8');
+    expect(pdf).toContain(`'near peace': '${LINE}'`);
+    expect(web).toContain(`. ${LINE}</span>`);
+    expect(pdf + web).not.toContain('The scar is healing');
+  });
+});
+
