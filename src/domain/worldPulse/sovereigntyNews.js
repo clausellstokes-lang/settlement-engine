@@ -244,7 +244,7 @@ function readerText(value) {
 
 /** An id as a whole token (never inside a longer id or word). @param {string} id @returns {RegExp} */
 function idToken(id) {
-  return new RegExp(`(?<![\\w-])${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`, 'g');
+  return new RegExp(`(^|[^\\w-])${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=$|[^\\w-])`, 'g');
 }
 
 /** @param {unknown} value @returns {number|null} */
@@ -448,7 +448,7 @@ export function sovereigntyNewsEntry({ evidence = null, snapshot = null, now = n
     .filter(([id, name]) => id && name && id !== name)
     .sort((a, b) => b[0].length - a[0].length);
   /** @param {unknown} entry @returns {string} */
-  const withNames = (entry) => namedIds.reduce((line, [id, name]) => line.replace(idToken(id), () => name), text(entry));
+  const withNames = (entry) => namedIds.reduce((line, [id, name]) => line.replace(idToken(id), (_whole, lead) => `${lead}${name}`), text(entry));
   const suppliedReasons = (Array.isArray(row.reasons) ? row.reasons : [])
     .map((entry) => readerText(withNames(entry)))
     .filter(Boolean);
