@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 182,
+      "dated": 183,
       "sha-pin": 2,
       "tree": 153
     },
@@ -412,7 +412,8 @@
     "_rosterGrowth2026-11-09-merge-train-car3": "THE UNION AT THE ALLEGIANCE-CAR3 MERGE AND ITS RECORD (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 177 -> 180, docs/allegiance/ALLEGIANCE_CAR3_2026-11-08.md (car 3's lane record), docs/allegiance/WRITE_PEOPLE_2026-11-08.md (WRITE-PEOPLE's record, merged by car 3) and docs/chair/2026-11-09/MERGE-TRAIN-CAR3-2026-11-09.md (the train's point-3 record), each born dated; `tree` 151 -> 152, docs/shift-records/2026-11-09-merge-train-3-car3.json, record 3; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-owner-words-dossier-record": "ONE document JOINED the roster by being BORN into it (seat OWNER-WORDS-DOSSIER, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/owner-words-dossier-2026-11-09 cut from the integration tip a74715dda, on the owner's three words of 2026-11-09 on the dossier as it reads): `dated` 168 -> 169 (the brief named 165 -> 166 on the chair's branch; this tree measured 168), docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md, the seat's record, born dated, 0 past-EOF.",
     "_rosterGrowth2026-11-09-merge-train-owner-words": "THE UNION AT THE OWNER-WORDS-DOSSIER MERGE AND ITS RECORD (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 180 -> 182, docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md (the lane's record, born dated on its lane) and docs/chair/2026-11-09/MERGE-TRAIN-OWNER-WORDS-2026-11-09.md (the train's points 4-5 record); `tree` 152 -> 153, docs/shift-records/2026-11-09-merge-train-5-owner-words.json, record 5; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-09-fix-hook-object": "ONE document JOINED the roster by being BORN into it (seat FIX-HOOK-OBJECT, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/fix-hook-object-2026-11-09 cut at 46f7525cc): `dated` 168 -> 169, docs/chair/2026-11-09/FIX-HOOK-OBJECT-2026-11-09.md, the lane's record, born dated, 0 past-EOF; nothing changed class. `tree` stays 139 here: it reads 145 at the base by MERGE-WAVE's cause, recorded and untouched."
+    "_rosterGrowth2026-11-09-fix-hook-object": "ONE document JOINED the roster by being BORN into it (seat FIX-HOOK-OBJECT, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/fix-hook-object-2026-11-09 cut at 46f7525cc): `dated` 168 -> 169, docs/chair/2026-11-09/FIX-HOOK-OBJECT-2026-11-09.md, the lane's record, born dated, 0 past-EOF; nothing changed class. `tree` stays 139 here: it reads 145 at the base by MERGE-WAVE's cause, recorded and untouched.",
+    "_rosterGrowth2026-11-09-merge-train-fix-hook-object": "ONE document JOINED the roster at the FIX-HOOK-OBJECT merge (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 182 -> 183, docs/chair/2026-11-09/FIX-HOOK-OBJECT-2026-11-09.md, the lane's record, born dated on its lane; measured once by this walker; nothing changed class."
   },
   "rows": []
 }
