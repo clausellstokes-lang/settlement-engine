@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 4, THE SW-3 REALM-PROSE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-09-style-2-merge-4-sw3.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   34 of 525 rows (thorp 1, hamlet 6, village 6, town 7, city 7, metropolis 7; the celtic culture, the arrival line) against point 3's post-state. THE CAUSE, ONE (first-parent step 1ef46ca30): the SW-3 REALM-PROSE merge (lane/style-2-realm-prose-2026-11-09 at d96ae7a41; its unsigned cause the component: 0991cc9e5, ruling A6, the realm prose — the lane's own 34).
+ *   Written from the staged tree S4 (the tree of 1ef46ca30 with the door paths carried from the branch). 13d47ef6.. -> 3bb1c433..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 3, THE SW-2 INSTITUTIONS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-09-style-2-merge-3-sw2.json; the cloud chair signs under the owner's delegation, vetoable).
  *   369 of 525 rows (thorp 12, hamlet 84, town 105, city 84, metropolis 84) against point 2's post-state. THE CAUSE, ONE (first-parent step ef4645832): the SW-2 INSTITUTIONS merge (lane/style-2-institutions-2026-11-09 at 1614661ad; its one unsigned cause the component: 8b38ac2f3, the catalogue law A3, 80 minimal swaps in the institution identity text — the lane's own 369).
