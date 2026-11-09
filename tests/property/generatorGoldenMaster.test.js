@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-08 — MERGE-WAVE RECORD 4, THE W4 PEOPLE MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
+ *   record docs/shift-records/2026-11-08-merge-wave-4-w4-people.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   523 of 525 rows (thorp 84, hamlet 84, village 84, town 103, city 84, metropolis 84) against record 3's post-state. THE CAUSE, ONE (first-parent
+ *   step 66c23bfea): the W4 PEOPLE merge over the integration branch (lane/w4-people-2026-11-07 at 665817eae; its lane records the components). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree SW4 (the tree of 66c23bfea with the door paths carried from
+ *   the branch, the previous record's writes committed). 20eca11e.. -> 3873f90e..
+ *
  * 2026-11-08 — MERGE-WAVE RECORD 3, THE W3 POW MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, THE WAVE, MERGE-WAVE;
  *   record docs/shift-records/2026-11-08-merge-wave-3-w3-pow.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 2's post-state. THE CAUSE, ONE (first-parent
