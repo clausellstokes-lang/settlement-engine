@@ -27,13 +27,13 @@
     {
       "surface": "preset-lighting-witness",
       "action": "re-record",
-      "predictedRows": 8,
+      "predictedRows": 15,
       "proofForm": "derived-artefact"
     },
     {
       "surface": "chroniclers-letter-golden",
       "action": "re-record",
-      "predictedRows": 1,
+      "predictedRows": 4,
       "proofForm": "derived-artefact"
     }
   ]

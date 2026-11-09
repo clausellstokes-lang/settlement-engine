@@ -218,11 +218,11 @@
       "suite": "tests/property/chroniclersLetterGolden.test.js",
       "recordEnv": "UPDATE_LETTER_GOLDEN",
       "proofForm": null,
-      "sha256": "2009cf7f2e81f4e653e51544ce7124c8f50c4f43dcb7b887df339243c7e9c932",
+      "sha256": "98b4e6fa52272aa16e48d511621fa722b57c2ef456e112557725958bf143fa4b",
       "rows": 4,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
