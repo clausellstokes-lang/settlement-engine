@@ -18,7 +18,7 @@ import { describe, expect, it } from 'vitest';
 import { NPC_FACTION_LOYALTY } from '../../../src/data/npcData.js';
 
 /** The pool floors the measure sized (the magic pool is walked by a magic face alone and is not grown). */
-const POOL_FLOOR = Object.freeze({ other: 40, government: 24, economy: 24, military: 24 });
+const POOL_FLOOR = Object.freeze({ other: 40, government: 24, economy: 24, military: 24, religious: 18 });
 
 describe('the person hooks wear across towns', () => {
   it('every category pool grown so far holds at least its measured floor (the title pools and the spread land with the last pool)', () => {

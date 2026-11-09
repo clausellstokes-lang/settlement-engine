@@ -1226,6 +1226,13 @@ export const NPC_FACTION_LOYALTY = {
     'They have been asked to perform a ceremony they have theological objections to. The person asking has leverage.',
     "A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.",
     'They know which of the current leadership will be the next to fall from grace. They are waiting.',
+    'A family has asked them to bury someone the faith forbids burying, and has offered a gift too large to refuse quietly.',
+    'The offerings have doubled this season, and they cannot find out who is giving or why.',
+    'A preacher from outside has been drawing their congregation away, and saying things about them that are partly true.',
+    "They married a couple in secret at one family's request, and the other family has just found out.",
+    'A child in their care claims to hear the god speak, and the child has been right three times.',
+    'They have stopped believing, have told no one, and still lead the prayers every week.',
+    'Someone has been reading the private letters kept in their care, and two of those letters were confessions.',
   ],
   economy: [
     "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.",

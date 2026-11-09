@@ -185,7 +185,7 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['One of their best people has asked to be released, and will not say what they are afraid of.', 'looming_threat'],
   ['Tracks they were told to ignore lead from the edge of the fields to a camp nobody has reported.', 'looming_threat'],
   ['They lost a wager to someone who now wants payment as a closed eye on one particular night.', 'hidden_debt'],
-  // ── religious (11) ──
+  // ── religious (18) ──
   ['A parishioner confessed something to them three months ago. The information is dangerous. They cannot act on it.', 'forbidden_knowledge'],
   ['The holy relic in their keeping is not what everyone believes it is. Only they know this.', 'faith_crisis'],
   ["Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed.", 'looming_threat'],
@@ -197,6 +197,13 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['They have been asked to perform a ceremony they have theological objections to. The person asking has leverage.', 'blackmail'],
   ["A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.", 'hidden_debt'],
   ['They know which of the current leadership will be the next to fall from grace. They are waiting.', 'succession'],
+  ['A family has asked them to bury someone the faith forbids burying, and has offered a gift too large to refuse quietly.', 'faith_crisis'],
+  ['The offerings have doubled this season, and they cannot find out who is giving or why.', 'hidden_debt'],
+  ['A preacher from outside has been drawing their congregation away, and saying things about them that are partly true.', 'rivalry'],
+  ["They married a couple in secret at one family's request, and the other family has just found out.", 'forbidden_love'],
+  ['A child in their care claims to hear the god speak, and the child has been right three times.', 'faith_crisis'],
+  ['They have stopped believing, have told no one, and still lead the prayers every week.', 'faith_crisis'],
+  ['Someone has been reading the private letters kept in their care, and two of those letters were confessions.', 'blackmail'],
   // ── economy (24) ──
   ["A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.", 'smuggling'],
   ["A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.", 'rivalry'],
