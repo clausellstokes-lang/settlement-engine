@@ -1,0 +1,69 @@
+# FIX-PULSE-DEFECTS — the code defects of the second pulse audit (2026-11-09)
+
+**Seat:** FIX-PULSE-DEFECTS, an Opus 5.5 build seat, child of the cloud chair (`session_01FbPLbejcfwX5nii12VM673`); this session `session_01FbPLbfdAk6akvmpjXeK45r`. **Charge:** the chair's `STYLE-RULINGS-2-2026-11-09.md` Part C, C3, and `BRIEF-STYLE-2-WAVE-2026-11-09.md` §0 (both on `origin/lane/chair-2026-11-08`); the worklist is §3 of `STYLE-AUDIT-2-PULSE-2026-11-09.md` (on `origin/lane/style-2-pulse-r2-2026-11-09`) and the ledger rows it cites. **Base:** `lane/fix-pulse-defects-2026-11-09` cut from `2053a809c` exactly (verified), built in its own worktree; the integration checkout was not touched. **Pushed** as transport; no pull request; merged by STYLE-2-MERGE.
+
+These are CODE defects, not style: each cure is the mechanism (the name read where an id was passed, the case kept, the filter reading what exists), never the wording. Every line's wording stays SW-11's and SW-12's.
+
+## 1. The defects, one cause commit each, red-first
+
+Each pin was red at `2053a809c` (the received text quoted below) and is green at its commit. "Planted" = the test's fixture name that proves the read.
+
+| # | Audit row | File :: symbol | Before (received at the base) | After | Pin | Commit |
+|---|---|---|---|---|---|---|
+| 1 | A2·22 | `settlementStrategy.js :: evaluateSettlementStrategyRules` (return_home reason) | "Ironhold is besieged at home while its army is committed against weak." | "… committed against Thornmere." (snapshot.byId read, as the march candidate does; unnamed: "a distant front") | `tests/domain/settlementStrategy.test.js` "the recall decision is machine-readable…" | `1a3952615` |
+| 2 | A1·42 | `relationshipRulesCore.js :: alliedRules` + its vassal twin | "Cold-war third party: c." | "Cold-war third party: Crowmarsh." (itemFor read; unnamed: "a rival court") | `tests/domain/relationshipDynamics.test.js` two cold-war tests | `493b41942` |
+| 3 | C2·25 | `brokeragePlantHandoff.js :: plantExposureReasons` + its caller `informationStatecraft.js :: processLies` | "… the order was bought by aaa:ashwater_syndicate." | "… bought by ashwater_syndicate." (the faction ledger's name; unnamed: "a power that paid in secret") | `tests/domain/brokeragePlantHandoffPins.test.js` "THE CORROBORATED MARK…" (end to end) and "the exposure beat NAMES THE MARKET…" | `9db845139` |
+| 4 | C2·52 | `operations/missionDispatcher.js :: operationCandidate` | "court.a is sending to learn the truth about court.b" | "Ashford is sending to learn the truth about Brindle" (optional `nameFor`; unnamed: "A court" / "a rival court") | `tests/domain/missionDispatcher.test.js` "the candidate's prose names the courts…" | `6c34504f1` |
+| 5 | C1b·46, ·48 | `npcCirculation.js :: rejectionNewsItem`, `:: arrivalNewsItem`, via `:: attemptRehost` | "They came from a." / "… over the matter at a." | "They came from Ashford." / "… at Ashford." (optional `nameFor` on attemptRehost; unnamed: "the road" / "their last home") | `tests/domain/npcCirculation.test.js` two tests (one pin re-keyed: `toContain('a')` was satisfied by the id itself) | `28ac60523` |
+| 6 | C1b·59 | `razingExecution.js :: razingDecisionFor` → `razing.js :: razingGate` | "Karrow took Thornwall and means to burn it…" with ids `Karrow`/`Thornwall` (this file's ids ARE names, which hid it) | "the Karrow Marches took Thornwall Keep and means to burn it…" (the emission's held names; unnamed: the gate's own "The victor" / "the defeated") | `tests/domain/razingExecutionWr8.test.js` "the razing verdict pill names the courts…" | `9b47d5af9` |
+| 7 | C1b·112, ·113 | `pactFormation.js :: rememberRefusal`, `:: draftPactSheet` | "B would not treat with A over trade demand." / "B promises pilgrim's road to A for 5 years." | "Irontown would not treat with Ashford over …" / "Irontown promises … to Ashford …" (courtNameOf; unnamed: "One court" / "another"; "one court" / "the other court") | `tests/domain/pactFormation.test.js` "a refusal mints NO grievance…" and the §6.7 direction pin (re-keyed by identity to the names) | `de6f6029a` |
+| 8 | B·27 | `warReasons.js :: declareCasus` (+ `realmVerbExecution.js` DECLARE_CASUS passes the name) | "By decree, resource_pressure is declared against b." | "… resource pressure … against Brindle." (type as words; unnamed: "its rival") | `tests/domain/peaceCausalVerbs.test.js` "a decree's default receipt reads the cause as words…" | `ebdec6297` |
+| 9 | C1·28 | `coup.js :: coupVerdictOutcomes` (coup_succeeded summary) | "The town council fell. The Garrison now commands…" | "Town Council fell. …" (held name as written; nameless: "The ruling power fell.") | `tests/domain/rulingPower.test.js` "a fallen seat emits a power_transfer outcome…" | `88af36138` |
+| 10 | C1·69 | `demographicsHerald.js :: demographicNewsEntries` | "several hundred left Ashford and took the road to Brill." | "Several hundred left Ashford …" (headline and both summary arms) | `tests/domain/demographicsWorldsHand.test.js` two pins that held the lower-case lead, re-keyed | `a455a8596` |
+| 11 | C1·93 | `peaceTermsDrafting.js :: draftReceipt` (non_aggression) | "A non-aggression pact 3 years: …" | "A non-aggression pact for 3 years: …" | `tests/domain/warCostHeraldWords.test.js` "a non-aggression pact runs FOR its years" | `2747ce7b9` |
+| 12 | C1b·115 | `peaceTerms.js :: mintTreaty` coalition arm + the carried-sheet twin | "Member settles only its own edge with Enemy, leaving the allied fronts standing under compelled alliance, non-aggression pact." | "… with Enemy on terms of compelled alliance, non-aggression pact, leaving the allied fronts standing." | `tests/domain/warCoalitionSettlement.test.js` "mints a separate bilateral treaty…" | `f2d268151` |
+| 13 | A2·34, ·36, ·39 | `causeLifecycle.js :: advanceCauseLifecycle` (re-cause, reform, historicize) | "funds run short has eased, and cap, who turned to graft…" (and the two siblings) | "Funds run short has eased, …" (causeLead where the label opens a sentence; mid-sentence labels keep their case) | `tests/domain/causeResolutionLifecycle.test.js` the three forced paths | `f23b92b5a` |
+| 14 | C1c·55 | `spatialConsequenceKernel.js` (calamity_where beat) | "… the crowded, timber-close lots;" (no spared district) | "… timber-close lots." (the separator travels with the spared clause; with a spared quarter the line is byte-identical) | `tests/domain/spatialConsequenceKernel.test.js` "a calamity with no spared quarter…" | `0dc69f8ea` |
+| 15 | C2·53 | `sovereigntyNews.js :: sovereigntyNewsEntry` (the reader filter over `sovereigntyAssets.js :: readSovereigntyAsset`'s id-built receipt) | the reason dropped (reasons held only the governed line) | "Ashford is a steading of Irontown, and a steading is property that may change hands." (each party id read to its name as a whole token BEFORE the filter) | `tests/domain/sovereigntyNewsWr10w.test.js` "the no-trade reason built from the asset read…" | `6ebab1e8a` |
+
+Then `4a0aff9d6` (C2·53's follow-up: the id-token guard spelled without a "!" for the voice-mechanics ratchet) and `c8e7527c3` (the anchor walker's frozen ceilings: the seven negative assertions this lane added each stand beside a positive pin on the same string; tests only).
+
+## 2. Pins re-keyed by cause (never loosened)
+
+- `tests/domain/infoLureIn2.test.js` PRE_IN2_DARK_DIGEST `7d96b62a…3f373e1d` → `f9588cf1…8721b8909` (cause 3). Control: with the patron fallback set back to the raw key the head answers the old digest exactly.
+- `tests/domain/pactRenegotiationGr5c.test.js` verb + answer digests; `pactRenewalGr5b.test.js` verb + tick + dark digests; `pactRenewalOrganic.test.js` verb + dark digests (cause 7). Control: with the receipt fallback set back to the raw id the three VERB digests pass unchanged; the other four move with the named courts' and the refusal memory's prose (the same cause). Each comment carries the old value.
+- `tests/domain/realmVerbExecution.test.js` force ≡ organic twin passes the same printed name the arm reads (cause 8).
+- `tests/domain/peaceTerms.test.js` mintPact passes its fixture's names (its ids) to the drafter (cause 7).
+
+## 3. STOPs to the chair (each with its default, carried)
+
+1. **A2·171 "corrupted corrupted"** sits in `npcAgency.js` (car 3's file). Default: not touched; listed below.
+2. **C2·26** `treatySuccessionDecision.js :: outcomeFor` — the headline/summary are part of a PERSISTED outcome that `successionQuestionPayloadTuple` deep-validates to the exact id-built text; the question carries no names. The cure is a persisted-shape change, a validator loosening (forbidden) or a print-site read in the pulse card's files. Default: not touched; listed below.
+3. **D2·12 / D2·14** are DECIDED designs, not code defects (rule 10): `heraldRegister.js :: remnantRow`'s raw outcome id is pinned on purpose (`tests/ui/heraldRegisterDoors.test.jsx` expects `lifecycle.death.oldkeep.5` under "The receipts the provenance already carries", hidden from non-owners by the secrets seam); `HeraldSceneContext.jsx`'s header rules the raw scene references "more honest than guessing", and the audit itself marks D2·12 "owner: whether the DM wants the raw ids kept as a debug view". Default: not touched; listed below.
+
+## 4. Deltas (unsigned, for STYLE-2-MERGE)
+
+Measured per commit in a clean worktree at each parent (`tests/property/heraldKnowledgeDeskGolden.test.js` run at `2053a809c` and at every lane commit in turn), and over the whole suite at the tip.
+
+- **Herald (the knowledge desk golden) — MOVES, by ONE cause, UNSIGNED:** `f23b92b5a` (A2·34/·36/·39, the cause label's capital): `rr-fresh-full|1|contentSha256` `9e5ddbdbc05ecb539d9ad8609e52869db434a98e98616c5299ca336284b84f91` → `12be5d68174c50893828dd585bc33bc02520aa14c69538e246fbbacbb539fc80`; itemCount and every desk unchanged (only the content hash's assertion reds). Green at every commit before it, red at it and after. Not re-recorded here: the golden door needs a signed record, which is STYLE-2-MERGE's.
+- **gm /525** (`tests/property/generatorGoldenMaster.test.js`), **fence /360**, **prose /1,050** (`tests/property/dossierProseManifest.test.js`), **witness**, **pdf**: green at the tip, no cell moved.
+- **Registers moved through their doors:** `tests/lint/.lighting-census-baseline.json` titles 28,695 → 28,700 (`d6ab7aac5`, the refreeze ritual: five new pins); the edge-shared bundles re-emitted (`4bca4adfe`: A1·42's file is an aiGrounding input; source hash only); the dated roster 168 → 169 (this record).
+- **Hash pins re-keyed by cause** (in the cause commits, each with its control): §2 above.
+
+## 5. Reds named
+
+The whole suite at the tip (`npx vitest run`, less the nine-minute `tests/property/editCorpusRatchet.test.js`, run separately at the base): every red below is red IDENTICALLY at `2053a809c` (each re-run at the base in its own worktree), so none is this lane's:
+`tests/architecture/layerBoundaries`, `tests/components/readerValidationOnPage`, `tests/domain/clergyTraitPlane` (2), `composeStateProse` (1), `deityStanceLane` (1), `editWorldFactResources` (2), `events/killNpcDoubleImpair` (3), `npc/characterConsumers` (3), `religionLegitimacyFactionKey` (1), `worldPulseFactionSeating` (2), `tests/generators/densityLaw` (4), `institutionBudgetPromise`, `regenNpcEnrichment`, `x46NpcBand`, `tests/lint/domainAnyCastBaseline` (1), `tests/property/editCorpusRatchet` (A3, A4, A7, A8), and the environment reds `tests/lint/ledgerCitationIntegrity` (needs the branch ref `review-fixes-2026-07-08`) and `tests/scripts/provenanceMap` (0 tests collected).
+
+This lane's own reds, all cured at the tip: the anchor walker's seven new negatives (`c8e7527c3`), the lighting census (`d6ab7aac5`), the voice-mechanics bang count on `sovereigntyNews.js` (`4a0aff9d6`, the C2·53 follow-up), the aiGrounding bundle freshness (`4bca4adfe`). The one move left red for signing is the herald desk golden (§4).
+
+## What stays (by file, for the after-train follow-up or the owner)
+
+- `src/domain/worldPulse/npcAgency.js :: candidateForAction` — A2·171 "corrupted corrupted": the ideal token already carries `corrupted_`; strip the prefix before printing (car 3's file).
+- `src/domain/worldPulse/treatySuccessionDecision.js :: outcomeFor` / `:: successionQuestionPayloadTuple` — C2·26: needs a ruling between (a) names in the persisted question (QUESTION_KEYS, identity, schemaVersion), (b) a print-site read at `WorldPulsePanel.jsx` and `worldPulseFeedCuration` (SW-11's files).
+- `src/components/map/heraldRegister.js :: remnantRow` and `src/components/map/HeraldSceneContext.jsx` — D2·14, D2·12: the owner's call on whether the DM's provenance ids stay.
+- Noted in passing, not in the charge (the wording lanes'): `npcCirculation.js :: rejectionNewsItem`'s "a verdict of ${cause}" prints a raw cause token; `realmVerbExecution.js` DECLARE_CASUS's own summary prints "(${type})" raw; `razingExecution.js :: razingSiegeEmission`'s headline falls back to the id when no name is held; `missionDispatcher.js`'s first reason prints "dispatch_and_wait" and the demand id.
+
+## CONFIRMED against PLAUSIBLE
+
+**CONFIRMED** (executed here): the base sha; every pin red at `2053a809c` with the received text quoted in §1 and green at its commit; the four hash controls of §2; the herald desk golden's single moving cause (per-commit measurement); the base-identity of every other red (§5). **PLAUSIBLE**: that the cures read right on a lit soak town — the pins drive the writers directly with planted names, not the 1,000-town referee (not run: this lane writes no prose, so §0.4's frame counts are not its measure); and the files the cures touched were read by the functions changed and their callers, not every large file whole (`settlementStrategy.js`, `pactFormation.js`, `peaceTerms.js`, `warReasons.js`, `realmVerbExecution.js`, `informationStatecraft.js` by region).
