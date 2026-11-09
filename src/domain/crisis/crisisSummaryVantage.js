@@ -143,7 +143,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   politically_fractured: pools({
     cover: {
-      traveller: '{name} has no one in charge: each part of it answers to a different power, and each tells you a different story about who rules.',
+      traveller: 'Each part of {name} answers to a different power, and each tells you a different story about who rules; no one is in charge of the whole.',
       newcomer: 'Newcomers to {name} are asked, sooner or later, whose side they are on.',
       trade: 'Doing business in {name} means knowing whose ground you stand on, and dealing with the power that holds it.',
       watch: 'The rival powers in {name} each keep an eye on their own ground and on whoever crosses it.',
@@ -169,7 +169,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   indebted: pools({
     cover: {
-      traveller: '{name} owes more than it can ever pay, and the creditor\'s agents are as much at home in its streets as its own people.',
+      traveller: 'The creditor\'s agents walk {name}\'s streets as if they owned them, and in a way they do: the place owes more than it can ever pay.',
       newcomer: 'In {name}, a newcomer is asked straight away whether they come from the creditor.',
       trade: 'Much of what {name} earns goes straight to its creditor, and nothing is left over to build with.',
       watch: 'The creditor\'s agents in {name} keep a close eye on every cart that leaves and every coin that changes hands.',
@@ -195,7 +195,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   recently_betrayed: pools({
     cover: {
-      traveller: '{name} is wary of new faces since someone trusted sold it out; questions come before help.',
+      traveller: 'In {name}, doors close as you pass and every question you ask is met with one of theirs: someone trusted sold the place out, and help now comes after questions.',
       newcomer: 'A newcomer to {name} gets polite answers and no help until someone local will vouch for them.',
       trade: 'In {name} deals that once ran on a handshake now want witnesses, and some have stopped altogether.',
       watch: 'In {name} every unfamiliar face is noted, and somebody always asks who let them in.',
@@ -273,7 +273,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   succession_void: pools({
     cover: {
-      traveller: '{name}\'s last leader is dead and nobody has taken their place; everyone you meet has a view on who should.',
+      traveller: 'Everyone you meet in {name} has a view on who should take the dead leader\'s seat, and nobody has taken it yet.',
       newcomer: 'Newcomers to {name} are courted by every claimant to the empty seat, each hoping to count one more friend.',
       trade: 'Big business waits in {name} until a new leader is chosen, and the merchants hold back their coin.',
       watch: 'In {name} the followers of rival claimants eye each other across the street, waiting for the first push.',

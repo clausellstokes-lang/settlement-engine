@@ -4,7 +4,8 @@ Seat SW-5 · CRISIS-VANTAGES (Opus 5.5), a child of the cloud chair `session_01F
 
 ## 1. Outcome
 
-- **The §8 floor is met for the crisis text.** 16 crisis sets (15 kinds; migration's arrivals and departures apart) × 4 surface pools (cover · Overview · Defence · Tonight) × 4 vantages = **256 lines**, 64 kept from #29 (6 of them with the retired word swapped) and **192 new**. Each surface pool holds four different vantages of §8's six; the four pools are a Latin square, so a town's four surfaces always print four different vantages and four different lines (#29's duplicate stays cured by construction); column 0 is #29's own assignment. The seed chooses: column = `fnv1a32(name::kind) % 4` (`kernel/proseHash.js`, zero draws).
+- **The §8 floor is met for the crisis text.** 16 crisis sets (15 kinds; migration's arrivals and departures apart) × 4 surface pools (cover · Overview · Defence · Tonight) × 4 vantages = **256 lines**: 64 carried from #29 (55 unchanged, 6 with the retired word swapped, 4 cover lines rewritten evidence-first for B2, one line counted in both) and **192 new**. Each surface pool holds four different vantages of §8's six; the four pools are a Latin square, so a town's four surfaces always print four different vantages and four different lines (#29's duplicate stays cured by construction); column 0 is #29's own assignment. The seed chooses: column = `fnv1a32(name::kind) % 4` (`kernel/proseHash.js`, zero draws).
+- **The PDF cover (ruling B2, the chair's widening):** four cover lines that opened on a judgment are rewritten evidence-first; the twelve covers before and after are in §4b.
 - **The other 52 rows** of §2.7: 46 applied, **6 struck** (§5), plus four small additions named in §6.
 - **The referee (the 1,000 at the tip vs the base):** the crisis frames' cross-town repeat FELL (most-repeated frame 105 → 33 towns; mean share of its crisis's towns 1.000 → 0.250); the twenty most-repeated story frames did not move (0 rises; the top 20 identical); `coh:tier-noun` 0 → 0.
 - **Golden deltas (clean worktrees, each cause against its parent):** gm 194/525 (npcGenerator only), fence 35/360 (stressInstitutionEffects) + 220/360 (npcGenerator), herald 0, prose 0/1,050, witness 0/8, pdf 0/18. All text-only (measured on 60 births: only `npcs[].secret.*`, `npcs[].goal.long`, `npcs[].stressNote` differ). **UNSIGNED — for STYLE-2-MERGE.**
@@ -19,7 +20,8 @@ Seat SW-5 · CRISIS-VANTAGES (Opus 5.5), a child of the cloud chair `session_01F
 | 4 | a81d0513b | priorityHelpers: craft-import notes | generator | 0 | 0 | 0 | 0 | 0 | 0 |
 | 5 | e249e565f | npcGenerator: wartime notes + 3 "rather than" | generator | **194** | **220** | 0 | 0 | 0 | 0 |
 | 6 | 15d5e280f | display swaps (market, Tonight red flag, neighbour, blocs) | 4 display files + 3 pins | 0 | 0 | 0 | 0 | 0 | 0 |
-| 7 | (this commit) | the record, the roster `dated` 168 → 169 | record + roster + walker header | — | — | — | — | — | — |
+| 7 | b9b687970 | the record, the roster `dated` 168 → 169 | record + roster + walker header | — | — | — | — | — | — |
+| 8 | (next commit) | B2: four cover lines evidence-first + this record's §4b | `crisisSummaryVantage.js` + record | 0 (display only, as cause 1) | 0 | 0 | 0 | 0 | 0 (goldenViewModel green) |
 
 Method: `sh scripts/audit/landing-stage.sh measure <stage> <out> <prev>` per commit, each stage a clean `git worktree` at the commit, the base measured first (gm 0 moved against its committed fixture: the base is green). Every moved cell is listed in §9.
 
@@ -94,6 +96,25 @@ Eleven of the twelve carry a crisis (soak1k-11 none); three crises are shown, tw
 | soak1k-3 | overview | Every family in Al-karez is eating less than it did, and those with stores put by are not sharing. | The harvest in Al-karez has failed, and its leaders are rationing what is left while they decide whom to feed first. |
 | soak1k-3 | defence | Hunger has made Al-karez tense: what food is stored is watched day and night, and every quarrel over food turns ugly fast. | In Al-karez stealing food is the crime of the season, and neighbours who once shared now bar their doors. |
 | soak1k-3 | tonight | Al-karez has lost a second harvest. Its leaders have begun rationing, while the families who can afford it hoard what they have. | Anyone who comes to Al-karez with food to sell is welcome; anyone who comes to eat is not. |
+### 4b. The PDF cover's crisis line in the twelve, before and after (the chair's widening, ruling B2)
+
+The cover is the FIRST line a reader sees. Its pool holds four lines, all seen through an arriving eye: the traveller, the newcomer, the trade (what moves at the market) and the watch (who is watching the road). The seed picks one. This seat reads B2's "four traveller variants" as four variants seen by someone arriving; the chair's approval of the Latin square (2026-11-09 01:17 UTC) holds that design. Four of the kept traveller lines opened on a judgment and were rewritten evidence-first (commit 8, the same cause): recently_betrayed (doors close, questions answered with questions), indebted (the creditor's agents in the streets first), succession_void (the views of everyone you meet first), politically_fractured (the rival stories first; the retired word already gone). **The three migration covers below still print one sentence:** all three names hash to column 0. The approved seed chose that, a 1-in-16 chance; across the 1,000 the four migration covers split 25 · 20 · 16 · 10 towns. Recorded, not forced.
+
+| town | crisis | cover before | cover after |
+|---|---|---|---|
+| soak1k-0 | mass_migration/arrivals | Walking into Albamunicipium, you pass tents on both sides of the road: newcomers looking for a place to call home. | Walking into Albamunicipium, you pass tents on both sides of the road: newcomers looking for a place to call home. |
+| soak1k-1 | slave_revolt | Work has stopped across Lundey: the enslaved have downed their tools, and their owners stand by not knowing what to do. | Work has stopped across Lundey: the enslaved have downed their tools, and their owners stand by not knowing what to do. |
+| soak1k-2 | occupied | Foreign officials run Copanucan now; the locals answer their questions politely and say as little as they can. | Newcomers to Copanucan are questioned by the occupiers' officials before any local will say a word to them. |
+| soak1k-3 | famine | In Al-karez you see hungry children at the doors, and long queues wherever food is handed out. | In Al-karez food costs more every week, and people spend every coin they have on it. |
+| soak1k-4 | monster_pressure | The roads around Portaminus are dangerous now: carts have gone missing, and a farmstead went up in flames last week. | Lookouts around Portaminus watch the roads and the edges of the fields, and nobody lingers outside once the light goes. |
+| soak1k-4 | mass_migration/arrivals | Walking into Portaminus, you pass tents on both sides of the road: newcomers looking for a place to call home. | Walking into Portaminus, you pass tents on both sides of the road: newcomers looking for a place to call home. |
+| soak1k-5 | wartime | Suryanagar is in a kingdom at war: army carts pass through, and the war is all anyone talks about. | Suryanagar watches its roads for deserters and spies, now that the kingdom is at war. |
+| soak1k-6 | recently_betrayed | Becanchihua is wary of new faces since someone trusted sold it out; questions come before help. | In Becanchihua every unfamiliar face is noted, and somebody always asks who let them in. |
+| soak1k-7 | politically_fractured | Haifeng has no one in charge: each part of it answers to a different faction, and each tells you a different story about who rules. | Each part of Haifeng answers to a different power, and each tells you a different story about who rules; no one is in charge of the whole. |
+| soak1k-8 | succession_void | Achileia's last leader is dead and nobody has taken their place; everyone you meet has a view on who should. | In Achileia the followers of rival claimants eye each other across the street, waiting for the first push. |
+| soak1k-9 | recently_betrayed | Shangjin is wary of new faces since someone trusted sold it out; questions come before help. | In Shangjin, doors close as you pass and every question you ask is met with one of theirs: someone trusted sold the place out, and help now comes after questions. |
+| soak1k-10 | mass_migration/arrivals | Walking into Olympambelos, you pass tents on both sides of the road: newcomers looking for a place to call home. | Walking into Olympambelos, you pass tents on both sides of the road: newcomers looking for a place to call home. |
+
 ## 5. Rows struck under the census law (6), with the reason
 
 `stressInstitutionEffects.js` 73, 131, 151, 340, 393, 515 — the audit's NEW was "(the swap: faction → power)" on `{faction}`. **Struck:** `{faction}` is a SLOT, not a printed word: `npcGenerator.js :: generateSecret` fills it through `fillSentenceSlots(effect.stakes, { faction: govFaction, … })` with the governing power's NAME, so the dossier prints a name, never the word. The swap would rename a template key that 13 rows of the file and the generator share — a code identifier, which A8 says never moves. Default: left as is; the walker (SW-0) will count `{faction}` as "faction" — the chair may allow-list the slot token by name or rule a key rename as one SW-8 cause.
@@ -185,7 +206,7 @@ Eleven of the twelve carry a crisis (soak1k-11 none); three crises are shown, tw
 
 | surface | k | vantage | line | was |
 |---|---|---|---|---|
-| cover | 0 | traveller | {name} has no one in charge: each part of it answers to a different power, and each tells you a different story about who rules. | {name} has no one in charge: each part of it answers to a different faction, and each tells you a different story about who rules. |
+| cover | 0 | traveller | Each part of {name} answers to a different power, and each tells you a different story about who rules; no one is in charge of the whole. | {name} has no one in charge: each part of it answers to a different faction, and each tells you a different story about who rules. |
 | cover | 1 | newcomer | Newcomers to {name} are asked, sooner or later, whose side they are on. | new |
 | cover | 2 | trade | Doing business in {name} means knowing whose ground you stand on, and dealing with the power that holds it. | new |
 | cover | 3 | watch | The rival powers in {name} each keep an eye on their own ground and on whoever crosses it. | new |
@@ -206,7 +227,7 @@ Eleven of the twelve carry a crisis (soak1k-11 none); three crises are shown, tw
 
 | surface | k | vantage | line | was |
 |---|---|---|---|---|
-| cover | 0 | traveller | {name} owes more than it can ever pay, and the creditor's agents are as much at home in its streets as its own people. | kept |
+| cover | 0 | traveller | The creditor's agents walk {name}'s streets as if they owned them, and in a way they do: the place owes more than it can ever pay. | {name} owes more than it can ever pay, and the creditor's agents are as much at home in its streets as its own people. |
 | cover | 1 | newcomer | In {name}, a newcomer is asked straight away whether they come from the creditor. | new |
 | cover | 2 | trade | Much of what {name} earns goes straight to its creditor, and nothing is left over to build with. | new |
 | cover | 3 | watch | The creditor's agents in {name} keep a close eye on every cart that leaves and every coin that changes hands. | new |
@@ -216,7 +237,7 @@ Eleven of the twelve carry a crisis (soak1k-11 none); three crises are shown, tw
 | overview | 3 | newcomer | A newcomer with coin is welcome in {name}, where every household is short of it. | new |
 | defence | 0 | watch | The creditor keeps its own people in {name}, watching where every coin goes. | kept |
 | defence | 1 | official | Those who keep order in {name} must keep it for the creditor too, and the people know it. | new |
-| defence | 2 | local | People in {name} hide what little they have put by, in case the creditor's agents come asking. | new |
+| defence | 2 | local | People in {name} hide what little they have saved, in case the creditor's agents come asking. | new |
 | defence | 3 | traveller | Passing through {name}, you meet the creditor's agents before you meet its own officials. | new |
 | tonight | 0 | official | Every plan {name}'s leaders make must first pass the creditor, and most of them do not. | kept |
 | tonight | 1 | watch | The creditor's people in {name} are watching for anything worth taking in place of payment. | new |
@@ -227,7 +248,7 @@ Eleven of the twelve carry a crisis (soak1k-11 none); three crises are shown, tw
 
 | surface | k | vantage | line | was |
 |---|---|---|---|---|
-| cover | 0 | traveller | {name} is wary of new faces since someone trusted sold it out; questions come before help. | kept |
+| cover | 0 | traveller | In {name}, doors close as you pass and every question you ask is met with one of theirs: someone trusted sold the place out, and help now comes after questions. | {name} is wary of new faces since someone trusted sold it out; questions come before help. |
 | cover | 1 | newcomer | A newcomer to {name} gets polite answers and no help until someone local will vouch for them. | new |
 | cover | 2 | trade | In {name} deals that once ran on a handshake now want witnesses, and some have stopped altogether. | new |
 | cover | 3 | watch | In {name} every unfamiliar face is noted, and somebody always asks who let them in. | new |
@@ -290,7 +311,7 @@ Eleven of the twelve carry a crisis (soak1k-11 none); three crises are shown, tw
 
 | surface | k | vantage | line | was |
 |---|---|---|---|---|
-| cover | 0 | traveller | {name}'s last leader is dead and nobody has taken their place; everyone you meet has a view on who should. | kept |
+| cover | 0 | traveller | Everyone you meet in {name} has a view on who should take the dead leader's seat, and nobody has taken it yet. | {name}'s last leader is dead and nobody has taken their place; everyone you meet has a view on who should. |
 | cover | 1 | newcomer | Newcomers to {name} are courted by every claimant to the empty seat, each hoping to count one more friend. | new |
 | cover | 2 | trade | Big business waits in {name} until a new leader is chosen, and the merchants hold back their coin. | new |
 | cover | 3 | watch | In {name} the followers of rival claimants eye each other across the street, waiting for the first push. | new |
