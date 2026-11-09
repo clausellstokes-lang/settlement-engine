@@ -43,7 +43,9 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     // car's tip carries all three findings with no critical issue (probed), so the identity is kept and its findings are
     // re-measured EXACTLY (an exact list, not a superset): the battery still finds two contradictions, and the page still
     // does not vouch (below).
-    expect(judgment.findings.map((f) => f.path)).toEqual(['battery.food-words', 'battery.tier-noun']);
+    // RE-KEYED BY CAUSE (URBAN-FIX B-P1, 1b3436acd): the tier-noun finding was the Shadows District's "Old town or
+    // slums" on this city, the instrument's false positive the licence row cured; one contradiction remains.
+    expect(judgment.findings.map((f) => f.path)).toEqual(['battery.food-words']);
     expect(verdict(settlement)).not.toMatch(VOUCH); // anchored: the next line pins the live contradiction verdict
     expect(verdict(settlement)).toMatch(/cannot all be true/);
   });
