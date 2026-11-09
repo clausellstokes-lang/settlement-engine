@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-09T20:47:51.725Z",
+  "generatedAt": "2026-11-09T21:37:32.302Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "ce8a9cecf0d08664",
-  "engineVersion": "1b04cd8faab48003",
-  "builtFromCommit": "0f2cb865ceb9d9256caa5bea23421c90799dabbf",
+  "sourceHash": "9276d7d607faa80a",
+  "engineVersion": "3da61454a8207158",
+  "builtFromCommit": "8acfc52f184f6843903fc550c1c5bdb9e60168e8",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -213,6 +213,7 @@
     "src/domain/worldPulse/faithChannelBindings.js",
     "src/domain/worldPulse/magicWorksAt.js",
     "src/domain/worldPulse/npcLadderFactionMembership.js",
+    "src/domain/worldPulse/proseSelection.js",
     "src/domain/worldPulse/stablePart.js",
     "src/domain/worldPulse/stressorSeverity.js",
     "src/domain/worldPulse/stressorsCore.js",

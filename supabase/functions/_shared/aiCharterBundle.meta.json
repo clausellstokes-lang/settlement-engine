@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-09T19:54:42.665Z",
+  "generatedAt": "2026-11-09T21:37:32.029Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "66d7c0f32ae942c7",
+  "sourceHash": "2f44252870b6b4d3",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/seedrandom.js",
@@ -102,6 +102,7 @@
     "src/domain/worldPulse/namedPersonTransit.js",
     "src/domain/worldPulse/partyImpactKinds.js",
     "src/domain/worldPulse/pressureModel.js",
+    "src/domain/worldPulse/proseSelection.js",
     "src/domain/worldPulse/provenanceKernel.js",
     "src/domain/worldPulse/relationshipCompatibility.js",
     "src/domain/worldPulse/relationshipState.js",

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-09T19:54:42.575Z",
+  "generatedAt": "2026-11-09T21:37:31.942Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "448666b93f66c998",
+  "sourceHash": "054d232d38daf4cd",
   "inputs": [
     "src/data/bandLadders.js",
     "src/data/constants.js",
@@ -109,6 +109,7 @@
     "src/domain/worldPulse/heraldDeeds.js",
     "src/domain/worldPulse/intervalWeeks.js",
     "src/domain/worldPulse/magicWorksAt.js",
+    "src/domain/worldPulse/proseSelection.js",
     "src/domain/worldPulse/pulseHelpers.js",
     "src/domain/worldPulse/relationshipCompatibility.js",
     "src/domain/worldPulse/relationshipEvolution.js",
