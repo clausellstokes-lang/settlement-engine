@@ -446,3 +446,13 @@ Pins: `simulationRulesDialog.test.jsx` — one new render test (the preset line,
 | D·72 empty observer | `{name} has come through nothing the record kept. Other settlements have; pick one of them above.` | "Nothing has passed between {name} and its neighbours yet. Other settlements have a history; pick one of them above." |
 
 Pins: `relationshipChronicleSection.test.jsx` — the empty observer re-keyed (D·72); the span "First noted …" with an anchored negative (D·70); **red at the parent** (2 of 9), green here. D·71 has no undated fixture: PLAUSIBLE. Registers: none moved.
+
+### 9h. `HeraldAdjudication.jsx` (D·33–35)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·33 action receipts | `Dismissed "{h}". The authoritative proposal is recorded as dismissed.` · `"{h}" was not applied. The authoritative proposal is recorded as refused.` · `"{h}" was not applied. An upgrade made this proposal obsolete, so it is recorded as superseded.` · `Applied "{h}". The authoritative proposal is recorded as applied.` | "Dismissed "{h}". It will not happen." · ""{h}" was not carried out: the realm refused it." · ""{h}" was set aside: a newer version of it took its place." · "Applied "{h}". It is now part of the realm's story." (the status word drives the variant as before) |
+| D·34 Apply/Dismiss tooltips | `This decision has ambiguous identity and cannot be invoked safely.` · `The canonical decision does not expose this action.` · `The decision action no longer targets this proposal.` | "This decision cannot be told apart from another, so it cannot be taken from here." · "This choice is not offered for this decision." · "This decision has changed since it was raised; close and reopen the desk." |
+| D·35 resolved-log tags (two writers, one vocabulary) | `by autoresolve` · `superseded by upgrade` (the pulse log) beside `superseded` (the RealmItem log) | "settled by the realm itself" · "replaced by a newer version" — both writers now say "replaced by a newer version" for a superseded row, and the autoresolved row matches the other writer's "… by the realm itself" |
+
+Pins: `heraldCommandDecisions.test.jsx` — the three receipts and the tombstone tag re-keyed; **red at the parent** (4 of 7), green here. D·34 has no fixture for the three refusals: PLAUSIBLE. Registers: none moved.
