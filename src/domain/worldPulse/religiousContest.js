@@ -438,7 +438,8 @@ function conversionOutcome({ id, targetSaveId, severity, headline, summary, reas
       archetype: 'religious_conversion_fracture',
       severity,
       triggeredAt: { tick, sourceEventType: 'RELIGIOUS_CONVERSION', sourceEventTargetId },
-      causes: [{ source: sourceEventTargetId, effect: 'religious_conversion_fracture', reason: `${sourceEventTargetId} converted ${targetSaveId}.` }],
+      // The cause reads the outcome's own reader sentence, never the two raw ids (A1·69).
+      causes: [{ source: sourceEventTargetId, effect: 'religious_conversion_fracture', reason: summary || 'The town has taken a new patron creed.' }],
     },
     conflictTags: [`stressor:religious_conversion_fracture:${targetSaveId}`, `settlement:${targetSaveId}:stressor_birth`],
   };
@@ -974,9 +975,9 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         // announced within FOOTHOLD_COOLDOWN_TICKS does not re-print every tick.
         if (footholdCooldownSet && footholdCooldownSet.has(footholdCooldownKey(cid, f.rivalRef, f.npcId))) continue;
         const reasons = [
-          `${f.npcName}, a minister of ${nameFor(cid)}, leans toward ${f.rivalName} and away from ${patronForFoothold?.name || 'the patron'}, opening a foothold for the rival creed.`,
+          `${f.npcName} sits among ${nameFor(cid)}'s ministers, so the faith of ${f.rivalName} now has a voice in the town's government.`,
         ];
-        if (pietyMult > 1) reasons.push('Deep local devotion makes the schism louder than the numbers alone would.');
+        if (pietyMult > 1) reasons.push(`${nameFor(cid)}'s people hold hard to their faith, so the quarrel is loud in the streets.`);
         outcomes.push(footholdOutcome({
           cid,
           cityName: nameFor(cid),
@@ -1007,8 +1008,11 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       // severity scales with the target's piety (0.5 exactly when no record). The
       // amplifier tag (localMult/realmMult) rides the receipt for legibility.
       const amplifiers = amplifierTag(settlement);
-      const reasons = [`${newPatron?.name || 'A rising faith'} overtook the former patron to become ${nameFor(cid)}'s patron creed.`];
-      if (amplifiers && pietyMult !== 1) reasons.push('Deep local devotion sharpened the upheaval beyond what the numbers alone would.');
+      const prevPatronName = state.deities?.[prevPatron]?.snapshot?.name || '';
+      const reasons = [prevPatronName
+        ? `${prevPatronName} has lost its hold on ${nameFor(cid)}, and ${newPatron?.name || 'a rising faith'} now has the most followers there.`
+        : `${newPatron?.name || 'A rising faith'} now has the most followers in ${nameFor(cid)}.`];
+      if (amplifiers && pietyMult !== 1) reasons.push(`${nameFor(cid)} is a devout town, so the change of creed cuts deep.`);
       if (newPatron) outcomes.push(conversionOutcome({
         cause: occupations?.[cid]?.occupierId ? 'occupation' : 'contest',
         id: `world_stressor.religious_conversion_fracture.${stablePart(cid)}`,

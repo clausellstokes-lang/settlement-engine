@@ -202,7 +202,9 @@ function betrayalOutcome({ pairKey, source, target, sourceName, targetName, sour
     targetSaveId: target,
     severity,
     headline: `${sourceName} turns on ${targetName}`,
-    summary: `The faith of ${sourceDeity?.name || sourceName} broke its pact with ${targetName}, a betrayal its patron's nature made only a matter of time.`,
+    summary: sourceDeity?.name
+      ? `${sourceName}, a town of ${sourceDeity.name}, has broken its faith pact with ${targetName}.`
+      : `${sourceName} has broken its faith pact with ${targetName}.`,
     reasons,
     stressor,
     metadata: {
@@ -247,7 +249,11 @@ function pactOutcome({ pairKey, a, b, aName, bName, aDeity, bDeity, tick, reason
     targetSaveId: a,
     severity: 0.2,
     headline: `${aName} and ${bName} find common cause in faith`,
-    summary: `The kindred creeds of ${aDeity?.name || aName} and ${bDeity?.name || bName} drew ${aName} and ${bName} into a pact of shared purpose.`,
+    summary: aDeity?.name && aDeity.name === bDeity?.name
+      ? `${aName} and ${bName}, both towns of ${aDeity.name}, have sworn to stand together in their faith.`
+      : aDeity?.name && bDeity?.name
+        ? `${aName} (${aDeity.name}) and ${bName} (${bDeity.name}) have sworn to stand together in their faith.`
+        : `${aName} and ${bName} have sworn to stand together in their faith.`,
     reasons,
     metadata: {
       conversionCause: 'deity_pact_formation',
@@ -287,7 +293,7 @@ export function footholdOutcome({ cid, cityName, npcId, npcName, rivalRef, rival
     targetSaveId: cid,
     severity: 0.3,
     headline: `${rivalName} finds an ear in ${cityName}`,
-    summary: `${npcName}, whose temper leans to ${rivalName} and away from ${patronName}, has become the creed's foothold within ${cityName}.`,
+    summary: `${npcName} of ${cityName} now speaks for ${rivalName}, though the town keeps ${patronName} as its patron.`,
     reasons,
     metadata: {
       conversionCause: 'targeted_foothold',
@@ -368,9 +374,9 @@ export function evaluateDeityStanceLane({ pairs, deityOf, pietyMultOf, nameFor, 
       const pMult = pietyMultOf(source);
       const severity = clamp01(T.BETRAYAL_SEVERITY * Math.min(T.PIETY_CAP, pMult));
       const reasons = [
-        `${nameFor(source)} broke its pact with ${nameFor(target)}: its patron ${sourceDeity?.name || 'creed'} (${sourceDeity?.alignmentAxis || 'neutral'}/${sourceDeity?.lawAxis || 'neutral'}) carries a standing betrayal hazard toward ${targetDeity?.name || 'its partner'} (${targetDeity?.alignmentAxis || 'neutral'}/${targetDeity?.lawAxis || 'neutral'}).`,
+        `${nameFor(source)} worships ${sourceDeity?.name || 'a creed'}, a creed that does not keep faith with the followers of ${targetDeity?.name || 'its partner'}.`,
       ];
-      if (pMult > 1) reasons.push('Local devotion sharpened the treachery; the faithful took it personally.');
+      if (pMult > 1) reasons.push(`${nameFor(source)} is a devout town, and its faithful pushed for the break.`);
       const amplifiers = pMult !== 1 ? { localMult: pMult, realmMult: 1 } : null;
       outcomes.push(betrayalOutcome({ pairKey, source, target, sourceName: nameFor(source), targetName: nameFor(target), sourceDeity, targetDeity, severity, tick, reasons, amplifiers }));
       betrayed.push({ pairKey, source, target });
@@ -389,9 +395,9 @@ export function evaluateDeityStanceLane({ pairs, deityOf, pietyMultOf, nameFor, 
       pactsThisTick += 1;
       const pMult = pietyMultOf(a);
       const reasons = [
-        `${nameFor(a)} and ${nameFor(b)} were drawn together: the kindred creeds ${dA?.name || 'a faith'} (${dA?.alignmentAxis || 'neutral'}/${dA?.lawAxis || 'neutral'}) and ${dB?.name || 'a faith'} (${dB?.alignmentAxis || 'neutral'}/${dB?.lawAxis || 'neutral'}) share common ground.`,
+        `${nameFor(a)} and ${nameFor(b)} hold to faiths that sit easily together.`,
       ];
-      if (pMult > 1) reasons.push('Local devotion deepened the bond; the faithful took it personally.');
+      if (pMult > 1) reasons.push(`${nameFor(a)} is a devout town, and its faithful welcomed the pact.`);
       const amplifiers = pMult !== 1 ? { localMult: pMult, realmMult: 1 } : null;
       outcomes.push(pactOutcome({ pairKey, a, b, aName: nameFor(a), bName: nameFor(b), aDeity: dA, bDeity: dB, tick, reasons, amplifiers }));
       pacts.push({ pairKey, a, b });

@@ -65,7 +65,7 @@ export const UNTARGETED_NPC_DEEDS = Object.freeze({
   reform:          { underway: 'is pushing for reform',                    done: 'pushes through reforms' },
   suppress:        { underway: 'is cracking down on dissent',              done: 'cracks down on dissent' },
   bargain:         { underway: 'is striking a bargain',                    done: 'strikes a bargain' },
-  defect:          { underway: 'is breaking with their faction',           done: 'breaks with their faction' },
+  defect:          { underway: 'is breaking with the power they served',   done: 'breaks with the power they served' },
   expose:          { underway: 'is digging up secrets',                    done: 'drags a secret into the open' },
   hoard:           { underway: 'is hoarding stores',                       done: 'hoards stores' },
   mobilize:        { underway: 'is rallying supporters',                   done: 'rallies supporters' },
@@ -133,5 +133,5 @@ export const RELATIONSHIP_TURNS = Object.freeze({
 export const RELATIONS_MOVE = Object.freeze({
   escalation:    { underway: 'are souring',  done: 'sour' },
   de_escalation: { underway: 'are warming',  done: 'warm' },
-  neutral:       { underway: 'are changing', done: 'change' },
+  neutral:       { underway: 'are being tested', done: 'are put to the test' },
 });
