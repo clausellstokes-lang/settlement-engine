@@ -181,8 +181,10 @@ describe('force ≡ organic at the arm (byte-compared against the kernel functio
     const applied = applyWorldPulseProposal({
       campaign: withPending, saves: SAVES, proposalId: minted.proposalId, now: '2026-01-02T00:00:00.000Z',
     });
-    // The organic twin: the pure decree on the same input world at the same tick.
-    const direct = declareCasus(campaign.worldState, { fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.8, tick: 4 });
+    // The organic twin: the pure decree on the same input world at the same tick — and the same
+    // printed target name the arm reads from its snapshot (FIX-PULSE-DEFECTS, audit B·27: the
+    // default receipt names the target, never its id).
+    const direct = declareCasus(campaign.worldState, { fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.8, tick: 4, toName: 'Brackwater' });
     expect(warReasonsFor(applied.worldState, 'a', 'b'))
       .toEqual(warReasonsFor(direct.worldState, 'a', 'b'));
     const p = applied.worldState.proposals.find((/** @type {any} */ x) => x.id === minted.proposalId);

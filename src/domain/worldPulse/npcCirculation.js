@@ -431,9 +431,11 @@ export function turncoatDestination({ wnpcId, roleArchetype, sphereSettlementIds
  * @param {string} args.reason a REJECTION_REASONS member
  * @param {import('./npcLedgerFacets.js').ReputationFacets} args.believed
  * @param {number} args.tick
+ * @param {string} [args.originName] the origin settlement's printed name (the caller's read;
+ *   the record holds only its id, which never prints)
  * @returns {Record<string, unknown>}
  */
-export function rejectionNewsItem({ settlementId, settlementName, wnpcId, roamer, reason, believed, tick }) {
+export function rejectionNewsItem({ settlementId, settlementName, wnpcId, roamer, reason, believed, tick, originName = '' }) {
   const record = asObject(roamer);
   const identity = asObject(record.identityFacets);
   const origin = asObject(record.originRef);
@@ -461,7 +463,7 @@ export function rejectionNewsItem({ settlementId, settlementName, wnpcId, roamer
     headline: `${who} is turned away at the gates of ${where}.`,
     summary: `The story that put them on the road reached ${where} before they did.`,
     reasons: Object.freeze([
-      `The gate was shut against them over the matter at ${originId || 'their last home'}.`,
+      `The gate was shut against them over the matter at ${text(originName) || 'their last home'}.`,
       scandal === 'none'
         ? 'The house that refused them gave no cause beyond their standing.'
         : `What is spoken of them here is a matter of ${scandal}.`,
@@ -477,9 +479,11 @@ export function rejectionNewsItem({ settlementId, settlementName, wnpcId, roamer
  * @param {string} args.wnpcId @param {unknown} args.roamer
  * @param {AdmissionResult} args.admission
  * @param {number} args.tick
+ * @param {string} [args.originName] the origin settlement's printed name (the caller's read;
+ *   the record holds only its id, which never prints)
  * @returns {Record<string, unknown>}
  */
-export function arrivalNewsItem({ settlementId, settlementName, wnpcId, roamer, admission, tick }) {
+export function arrivalNewsItem({ settlementId, settlementName, wnpcId, roamer, admission, tick, originName = '' }) {
   const record = asObject(roamer);
   const identity = asObject(record.identityFacets);
   const origin = asObject(record.originRef);
@@ -509,7 +513,7 @@ export function arrivalNewsItem({ settlementId, settlementName, wnpcId, roamer, 
       founded
         ? `${admission.factionName} had no seat left, so a sibling house stands under the same power.`
         : `${admission.factionName} had a seat open at the bottom.`,
-      `They came from ${text(origin.settlementId) || 'the road'}.`,
+      `They came from ${text(originName) || 'the road'}.`,
     ]),
   });
 }
@@ -553,10 +557,12 @@ function noRehost(worldState, attempted) {
  * @param {number} args.tick
  * @param {boolean} [args.force]  skip the pressure roll (a DM verb, or a caller that
  *   already decided); the exclusion filter and the table still run.
+ * @param {(id: string) => unknown} [args.nameFor] the caller's settlement id -> name read, for
+ *   the roamer's ORIGIN (the record holds only its id; an id never prints)
  * @returns {RehostResult}
  */
 export function attemptRehost({
-  worldState, settlement, settlementId, settlementName = '', wnpcId, tick, force = false,
+  worldState, settlement, settlementId, settlementName = '', wnpcId, tick, force = false, nameFor,
 }) {
   if (!npcConsequencesActive(worldState)) return noRehost(worldState, false);
   const id = text(wnpcId);
@@ -571,6 +577,8 @@ export function attemptRehost({
   if (isExcludedFrom(worldState, id, settlementId, tick)) return noRehost(worldState, true);
 
   const admission = admissionFor({ worldState, settlement, settlementId, wnpcId: id, roamer, tick });
+  const originId = text(asObject(asObject(roamer).originRef).settlementId);
+  const originName = originId && typeof nameFor === 'function' ? text(nameFor(originId)) : '';
 
   if (admission.outcome === 'rejected') {
     const cooldown = {
@@ -584,7 +592,7 @@ export function attemptRehost({
       admission,
       news: rejectionNewsItem({
         settlementId, settlementName, wnpcId: id, roamer,
-        reason: text(admission.reason), believed: admission.believed, tick,
+        reason: text(admission.reason), believed: admission.believed, tick, originName,
       }),
       cooldown,
       attempted: true,
@@ -605,7 +613,7 @@ export function attemptRehost({
   return {
     worldState: moved.worldState,
     admission,
-    news: arrivalNewsItem({ settlementId, settlementName, wnpcId: id, roamer, admission, tick }),
+    news: arrivalNewsItem({ settlementId, settlementName, wnpcId: id, roamer, admission, tick, originName }),
     cooldown: null,
     attempted: true,
     changed: moved.changed,

@@ -276,11 +276,18 @@ describe('GR-RENEWAL U1 — the organic renewal proposer: the world asks to rene
 
   it('U1-A8: the DM\'s verb path is byte-identical to the base, hashed; and dark means byte-identical at the stage', () => {
     // Recorded at the base 90cbf7963 by this same harness, before a line of U1 existed.
-    expect(verbDigest(), 'every word on the dial, staged and applied against a peacetime and a war instrument').toBe('e71967020e268f62d8b78b149d2b9fbcb18f558d332cd44064a8852029e020e8');
+    // RE-RECORDED 2026-11-09 by FIX-PULSE-DEFECTS (audit C1b·113, one cause): a drafted clause's receipt printed the
+    // courts' raw ids; the DM's unnamed verb path now reads "one court" / "the other court". Was
+    // e71967020e268f62d8b78b149d2b9fbcb18f558d332cd44064a8852029e020e8; with the receipt's fallback set back to the
+    // raw id it passes (executed), so the move is this cause's alone.
+    expect(verbDigest(), 'every word on the dial, staged and applied against a peacetime and a war instrument').toBe('a79fa7dea7fe2ca1c78585fac8e833c6984fa41c467e30321bbc285779c15e66');
     // RE-RECORDED 2026-10-02 by cure lane PACT-REASK (FPQ-72, one cause): with renewal dark the pact layer is
     // still lit, and each window's instrument holds the clause the crossings draft, so they now pass it over
     // (`pact_not_asked`) instead of re-asking it. Was cb16785778a4308f78a1612a72b978de23a2c495bcc64f6c977af9e1120d2293;
     // the skip-removal mutant restores exactly that value (executed), so the move is the skip's alone.
-    expect(darkDigest(), 'the stage on each window\'s opening day with the renewal layer absent, then false').toBe('c9257c1ea952cd871af16d5381eeb81c9fd777997407fc3ed147e139a6c2e811');
+    // RE-RECORDED 2026-11-09 by FIX-PULSE-DEFECTS (audit C1b·112/·113, one cause): the pact layer is lit here, and a
+    // drafted clause's receipt and a refusal's memory now print names or the neutral nouns, never ids. Was
+    // c9257c1ea952cd871af16d5381eeb81c9fd777997407fc3ed147e139a6c2e811.
+    expect(darkDigest(), 'the stage on each window\'s opening day with the renewal layer absent, then false').toBe('9dc119b428e48411c0db1384b9e5f3e2c2e08fe92bb5d21f952043f1b04aa8a9');
   });
 });

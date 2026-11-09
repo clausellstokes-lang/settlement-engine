@@ -151,6 +151,7 @@ describe('relationship dynamics rulebook', () => {
         'edge.o.v': { relationshipType: 'vassal', dependency: 0.8, leverage: 0.75, pactStrength: 0.55, resentment: 0.32 },
         'edge.o.c': { relationshipType: 'cold_war', resentment: 0.78, fear: 0.62 },
       },
+      items: { c: item('c', { name: 'Crowmarsh' }) },
     });
 
     const candidates = evaluateRelationshipRules(snap, pressureIndex(pressureRows(['o', 'v', 'c'])), { tick: 9 });
@@ -158,6 +159,10 @@ describe('relationship dynamics rulebook', () => {
 
     expect(support).toBeTruthy();
     expect(support.metadata).toMatchObject({ overlordSaveId: 'o', vassalSaveId: 'v', thirdPartyId: 'c' });
+    // FIX-PULSE-DEFECTS (audit A1·42, the vassal twin): the pill printed the raw id ("… party: c.").
+    // RE-KEYED BY IDENTITY at FIX-PULSE-DEFECTS' merge point (STYLE-2-MERGE, 2026-11-09): SW-11 owns the A1 rows and its
+    // named sentence carries the third party by name; the separate "Cold-war third party:" line is not composed in.
+    expect(support.reasons.join(' ')).toContain('in its cold war with Crowmarsh.');
   });
 
   test('weak overlords accumulate independence pressure in strong vassals', () => {
@@ -217,6 +222,7 @@ describe('relationship dynamics rulebook', () => {
         'edge.b.c': { relationshipType: 'cold_war', resentment: 0.76, fear: 0.62 },
         'edge.a.c': { relationshipType: 'trade_partner', trust: 0.7 },
       },
+      items: { c: item('c', { name: 'Crowmarsh' }) },
     });
 
     const candidates = evaluateRelationshipRules(snap, pressureIndex(pressureRows(['a', 'b', 'c'])), { tick: 9 });
@@ -224,6 +230,10 @@ describe('relationship dynamics rulebook', () => {
 
     expect(support).toBeTruthy();
     expect(support.metadata.hesitation).toBeLessThan(1);
+    // FIX-PULSE-DEFECTS (audit A1·42): the pill printed the raw id ("Cold-war third party: j." in the soak).
+    // RE-KEYED BY IDENTITY at FIX-PULSE-DEFECTS' merge point (STYLE-2-MERGE, 2026-11-09): SW-11's named sentence carries
+    // the third party by name (the hesitant arm: "… against Crowmarsh, but warily …").
+    expect(support.reasons.join(' ')).toContain('against Crowmarsh, but warily');
   });
 
   // Reconciled with H16 (R3 decided): patronage forms from the STRONGER side

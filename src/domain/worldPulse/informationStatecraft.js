@@ -622,7 +622,7 @@ export function processLies({
           // IN-0a: a BOUGHT lie names its seller here, and its buyer where the lineage
           // still carries one. Empty for a court's own bluff ⇒ byte-identical for every
           // exposure a world without both information flags lit can produce.
-          ...plantExposureReasons(rec, name),
+          ...plantExposureReasons(rec, name, (/** @type {string} */ id) => String(asObject(asObject(asObject(worldState).factionStates)[id]).name || '')),
           // IN-2 BLUFF AGAINST BLUFF: an aged-out bluff whose audience's own bluff was standing.
           ...(lureLit ? bluffCollisionReasons(rec, { contradicted, agedOut }, priorDisinfo, name) : []),
         ],

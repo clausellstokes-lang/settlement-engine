@@ -168,4 +168,11 @@ describe('TE-HERALD-1 — the treaty receipts carry world words and no engine sc
     expect(small).toContain(TERM_SHARE_WORDS[0]);
     expect(large).toContain(TERM_SHARE_WORDS[2]);
   });
+
+  // FIX-PULSE-DEFECTS (audit C1·93): the non-aggression receipt dropped its "for"
+  // ("A non-aggression pact 3 years: …").
+  test('a non-aggression pact runs FOR its years', () => {
+    expect(draftReceipt('non_aggression', { good: 'iron' }, 3, 0.3))
+      .toBe('A non-aggression pact for 3 years: no war between these courts while it stands.');
+  });
 });

@@ -208,7 +208,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       applyMode: authorityFor(rules, 'coup_succeeded', 'auto'),
       severity: clamp(0.45, 1, severity),
       headline: `${verdict.winner.name} seizes power in ${settlementName}`,
-      summary: `The ${String(incumbentName).toLowerCase()} fell. ${verdict.winner.name} now commands the government, and the settlement holds its breath.`,
+      summary: `${verdict.incumbent?.name ? String(incumbentName) : 'The ruling power'} fell. ${verdict.winner.name} now commands the government, and the settlement holds its breath.`,
       reasons: [
         verdict.reason,
         'The contest broke against the ruling seat.',
