@@ -64,7 +64,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // TIER_STAMP_CUTS (dense >= 2,250, adequate >= 350, thin < 88), which this corpus's 900 / 1,500 /
 // 4,200 / 8,000 rows straddle. A legitimate behaviour shift with its record, not a regression; the
 // field itself is still dormant (the arm below this one, unmoved, says so).
-const DORMANT_GOLDEN = 'f80ebc3290869df9';
+// RE-RECORDED 2026-11-09 (STYLE-2-MERGE, point 6), f80ebc3290869df9 -> b1684128845660c5, under the signed shift
+// record docs/shift-records/2026-11-09-style-2-merge-6-sw5.json (ODQ §934.105) as a restated act: bisected by first-parent
+// stage to the SW-5 CRISIS-VANTAGES merge a7770ecfe (the stages of points 0-5 hold f80ebc32) and, inside the lane, to the
+// ONE file src/domain/causalState.js (d52d451fe, the "why" grid said without numbers: the stage of a7770ecfe with point
+// 5's causalState.js restored hashes f80ebc32 again). A text-only shift of deriveCausalState's prose, which this digest
+// carries; the field itself is still dormant (the arm below this one, unmoved, says so).
+const DORMANT_GOLDEN = 'b1684128845660c5';
 
 /**
  * The module set this car landed, as REPO-RELATIVE PATHS.
