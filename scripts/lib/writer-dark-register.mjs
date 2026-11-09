@@ -93,6 +93,13 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * so the row is struck rather than kept alive on a constructed dial (dead stays dead), and the identity is now
  * judged normally.
  *
+ * ⭐ `archetypeKey on relationships` IS STRUCK BY CLAUSE S (2026-11-09, ALLEGIANCE-CAR3; the allegiance design §9, the chair's
+ * dispatch): the DM view "who really runs this town" (domain/people/patronage.js :: dmPowerViewOf, mounted by the Power
+ * tab's DM panel and the PDF's Power Structure chapter) reads a covert handler tie's archetype key and prints the tie's
+ * kind in plain words (HANDLER_TIE_WORDS: "a silent partnership", "held over them: a debt" …). The key now reaches a
+ * customer surface (the DM's), so the identity is LIT-NAME, not DARK; the row's premise ("never the key") has gone with it.
+ * The row's dark-cohort arithmetic follows: forty-two became forty-one.
+ *
  * ⭐ THE SIXTH ROW IS RETIRED BY CLAUSE S (2026-11-05, LANDING-5 under the cloud chair's ruling 3, ODQ §934.105),
  * with the cause as measured: the executed corpus's 327 proposals carry no `supersessionReason` at all, the writer
  * (proposalAdmission.js, last changed by CURE-PEACE-2 400e8e5a6 / d5eda0aa0) is unchanged, and the identity left
@@ -144,24 +151,6 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'on the campaign PDF, the dossier, the world book and the web display. The key beside it is the seed of that '
       + 'name, and showing a profile key to a player would be showing them the engine.',
     charter: '§7 WRWALKER, the drafted register row 3, adjudicated DARK by Car 0 at C-prime',
-  }),
-  Object.freeze({
-    identity: 'archetypeKey on relationships',
-    key: 'archetypeKey',
-    shape: 'relationships',
-    writer: 'src/generators/people/ties.js', // PEOPLE-4 TIES (2026-11-07, R-P7): the tie writer moved here; npcGenerator.js :: generateRelationships retired
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/generateSettlementPipeline.js',
-      symbol: 'the rename path, which re-renders a tie\'s description and tension from its archetype key',
-    }),
-    why: 'The relationship archetype KEY is the seed of the tie\'s description and tension prose: the generator '
-      + 'writes it so the rename path can re-render both sentences for new names, and that read sits inside '
-      + 'src/generators, behind the closure STOP. Its one surface read was the Plot Hooks collector, which used it to '
-      + 'theme relationship-tension cards; the chair\'s ruling X-2 (2026-10-30, under the owner\'s delegation) moved '
-      + 'a tie\'s tension back to the Relationships tab beside its tie and dropped that card category, so what a '
-      + 'player is shown is the tension and type name the key produced, never the key.',
-    charter: 'ODQ §934.101 (the chair, 2026-10-30, ruling X-2 in docs/UX_CONSOLIDATION_2026-10-30.md), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
   Object.freeze({
     identity: 'proseVariant on relationships',

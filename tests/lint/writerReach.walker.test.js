@@ -522,7 +522,9 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
     // 2026-11-07 (PEOPLE-5B EDIT, M-7): `generatedAs on members` left with the grouping: forty-five became forty-four.
     // MERGE-CAR: 45 -> 42, both sides' strikes composed (MERGE-R2's two, PEOPLE-5B's one).
-    expect(registeredAndDark.length).toBe(42);
+    // 2026-11-09 (ALLEGIANCE-CAR3): `archetypeKey on relationships` struck by clause S — the DM view prints a handler
+    // tie's kind from its archetype key (scripts/lib/writer-dark-register.mjs names the strike): forty-two became forty-one.
+    expect(registeredAndDark.length).toBe(41);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
