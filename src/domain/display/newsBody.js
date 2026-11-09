@@ -224,15 +224,15 @@ const REASON_PHRASES = Object.freeze({
   'high severity': 'a heavy blow',
   'meaningful severity': 'a real blow',
   'critical impact type': 'a matter that cuts deep',
-  'critical regional channel': 'carried along a vital road',
+  'critical regional channel': 'carried by a tie the town depends on',
   'chain propagation': 'spreading from town to town',
   'multi-settlement scope': 'reaching across the country',
   'critical goods involved': 'touching goods the country cannot do without',
   'important goods involved': 'touching goods that matter',
   'effect took hold': 'the effect has taken hold',
-  'delayed effect matured': 'the long wait is over',
-  'major pressure resolved': 'a great pressure lifted',
-  'threat window closed': 'the danger has passed',
+  'delayed effect matured': 'close at hand',
+  'major pressure resolved': 'a great weight lifted',
+  'threat window closed': 'it never arrived',
   'routine regional update': 'a quiet matter',
   border_raid: 'a raid across the border',
   food_pressure: 'food stores under strain',
@@ -276,10 +276,12 @@ export function newsReasonPhrases(entry) {
     const key = String(raw || '').trim();
     if (!key) continue;
     const normalizedKey = humanizeToken(key);
+    // A bare engine token with no reader phrase prints NO pill (A1·13): a
+    // de-underscored slug ("Border raid") is the engine's word, not the world's.
     const phrase = REASON_PHRASES[key.toLowerCase()]
       || REASON_PHRASES[normalizedKey]
-      || (/^[a-z][a-z0-9_-]*$/.test(key) ? humanizeToken(key) : key);
-    if (seen.has(phrase)) continue;
+      || (/^[a-z][a-z0-9_-]*$/.test(key) ? '' : key);
+    if (!phrase || seen.has(phrase)) continue;
     seen.add(phrase);
     out.push(phrase);
   }

@@ -55,7 +55,7 @@ describe('newsBody — reasons recast into fiction', () => {
     };
     const phrases = newsReasonPhrases(entry);
     expect(phrases).toContain('a heavy blow');
-    expect(phrases).toContain('carried along a vital road');
+    expect(phrases).toContain('carried by a tie the town depends on');
     expect(phrases).toContain('spreading from town to town');
     // The engine receipt vocabulary is gone.
     for (const p of phrases) {
@@ -77,7 +77,7 @@ describe('newsBody — reasons recast into fiction', () => {
     })).toEqual([
       'a raid across the border',
       'a matter that cuts deep',
-      'unmapped reason',
+      // A1·13 (SW-11): an unregistered bare token prints no pill at all.
     ]);
   });
 
