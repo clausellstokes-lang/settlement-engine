@@ -56,7 +56,9 @@ registerStep('generateNarratives', {
   // so it is stamped on here. Without it the rung falls back to canonical-at-zero and
   // every settlement on a route shares one sentence, which is the defect lane RR closed.
   // #10 (W5 HIS 2026-11-07): the port reason reads whether a docks or wharf institution exists.
-  const hasDocks = Boolean(getInstFlags(effectiveConfig, institutions).hasPort);
+  // STYLE-2 A·O16 (2026-11-09): the flag lives at `.inst.hasPort` (getInstFlags returns `{ …, inst }`);
+  // the top-level `.hasPort` read undefined, so hasDocks was false on EVERY birth and #10 never read the docks.
+  const hasDocks = Boolean(getInstFlags(effectiveConfig, institutions).inst?.hasPort);
   const settlementReason = generateSettlementReason(
     tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed },
     economicViability?.metrics?.foodBalance || null,

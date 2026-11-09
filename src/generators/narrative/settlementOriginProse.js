@@ -152,7 +152,7 @@ export const ORIGIN_POOLS = Object.freeze({
     `Built ${GROUND_TOKEN}. It has no wharf of its own.`,
     `The first families built ${GROUND_TOKEN}, and no one has ever built a wharf here.`,
     `It stands ${GROUND_TOKEN}; ask for the docks and you are told there are none.`,
-    `Founded ${GROUND_TOKEN}. Whatever comes by water has no wharf to land at here.`,
+    `Founded ${GROUND_TOKEN}; the place has no wharf.`,
     `It was built ${GROUND_TOKEN} and has never had a wharf.`,
   ]),
 

@@ -823,17 +823,26 @@ describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dime
     expect(routePools.length).toBe(5);
     const armToPool = new Map();
     for (const route of ['crossroads', 'river', 'port', 'isolated', 'road', 'mountain_pass', 'mountain_road', 'desert_road', '']) {
-      for (const terrainType of [null, 'riverside', 'coastal']) {
+      for (const terrainType of [null, 'riverside', 'coastal', 'mountain']) {
         for (const hasFoodDeficit of [true, false]) {
+          // STYLE-2 FIRST-IMPRESSIONS (A·O16, 2026-11-09): the docks flag is a producer input too —
+          // a port with no docks founds on the `ground` arm (or the river's, or the road's).
+          // (A no-docks port also lands on the river and road arms; those are mapped by their own
+          // routes, so only the arm it alone reaches is recorded from it.)
           const arm = originArmKey({ route, terrainType, hasFoodDeficit });
           armToPool.set(arm, originRoutePoolKey(route));
+          const noDocks = originArmKey({ route, terrainType, hasFoodDeficit, hasDocks: false });
+          if (noDocks === 'ground') armToPool.set(noDocks, originRoutePoolKey(route));
         }
       }
     }
     expect([...armToPool.keys()].sort()).toEqual([...ORIGIN_ARMS].sort());
     expect([...new Set(armToPool.values())].sort()).toEqual(routePools.sort());
-    // Each producer arm folds to the pool its own prefix names.
-    for (const [arm, pool] of armToPool) expect(pool, arm).toBe(arm.split('.')[0]);
+    // Each producer arm folds to the pool its own prefix names. ⚠ The `ground` arm (a port route
+    // with no docks) folds to DS-GEN-6's `port` pool, because the desk reads the ROUTE only — the
+    // same unread docks fact, at a second writer; recorded in STYLE-2-FIRST-IMPRESSIONS's
+    // "What stays" for SW-B1 (generalStateProse.js is outside that lane's manifest).
+    for (const [arm, pool] of armToPool) expect(pool, arm).toBe(arm === 'ground' ? 'port' : arm.split('.')[0]);
   });
 
   it('THE DEFICIT DIMENSION: both values fire, and an unmeasured town is neither', () => {
