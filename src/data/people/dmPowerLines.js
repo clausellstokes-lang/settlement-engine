@@ -153,7 +153,9 @@ export const PATRONAGE_LINES = Object.freeze({
 
 /** The five rungs' labels (the skimmable skeleton printed beside the line). */
 export const CAPTURE_RUNG_LABELS = Object.freeze({
-  none: 'None', adversarial: 'Adversarial', equilibrium: 'Equilibrium', corrupted: 'Corrupted', capture: 'Capture',
+  // STYLE-2 SW-7 (FOR THE OWNER'S VETO, the census law: a proposal): the state machine's tokens printed plain; the keys stay.
+  // Was 'None' · 'Adversarial' · 'Equilibrium' · 'Corrupted' · 'Capture'.
+  none: 'Free of the criminals', adversarial: 'Fighting the criminals', equilibrium: 'Living with the criminals', corrupted: 'Partly in criminal hands', capture: 'Run by the criminals',
 });
 
 /** @type {Readonly<Record<'none' | 'adversarial' | 'equilibrium' | 'corrupted' | 'capture', readonly CaptureLine[]>>} */
