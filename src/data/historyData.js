@@ -1306,7 +1306,9 @@ export const HISTORICAL_EVENTS_DATA = [
       'New generation wanting to move on',
     ],
     // URBAN-FIX D-1: the tension's words when its own event sits on the timeline older than 80 years (historyGenerator.js :: tensionByMemory)
-    byMemory: { dated: { description: 'The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
+    byMemory: { dated: { description: 'The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] },
+      // URBAN-FIX D-1b: the words when the timeline holds no occupation at all: the template's own lasting effects, naming no past event
+      unanchored: { description: 'Collaborator and resistance families still keep to separate quarters, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
     lastingEffects: [
       'Collaborator and resistance families still keep to separate quarters',
       'Wartime property seizures remain legally unresolved',

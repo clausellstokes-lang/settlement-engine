@@ -14,6 +14,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { bootHarness, renderSurfaces } from '../../scripts/audit/soak-review/renderHarness.mjs';
 import { readerBattery } from '../../src/domain/coherence/readerBattery.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { migrationOf } from '../../src/domain/facts/migration.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
 import { TENSION_TEMPLATE_DECLARATIONS } from '../../src/generators/historyGenerator.js';
@@ -93,15 +94,40 @@ describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () 
     });
     const fresh = await import('../../scripts/audit/soak-review/corpus.mjs');
     await fresh.ensureLaws();
+    // RE-KEYED BY CAUSE (URBAN-FIX D-1b): a birth's words change exactly where it holds a tension whose template
+    // carries memory words for what its timeline holds — dated (own event older than 80 years) or unanchored (none).
+    const memoryOf = new Map(HISTORICAL_EVENTS_DATA.filter((t) => t.byMemory).map((t) => [t.type, t.byMemory]));
+    const changes = (s) => s.history.currentTensions.some((t) => {
+      const words = memoryOf.get(t.type);
+      const own = s.history.historicalEvents.find((e) => e.templateType === t.type);
+      return Boolean(words && (own ? own.yearsAgo > 80 && words.dated : words.unanchored));
+    });
     let differing = 0;
     const failures = collectSeedFailures(seeds, (i) => {
       const bare = fresh.birth(i).settlement;
       expect(strip(bare), `soak1k-${i}: one record but for the tensions' words`).toBe(strip(shipped.get(i)));
-      if (JSON.stringify(bare.history.currentTensions) !== JSON.stringify(shipped.get(i).history.currentTensions)) differing += 1;
+      const moved = JSON.stringify(bare.history.currentTensions) !== JSON.stringify(shipped.get(i).history.currentTensions);
+      expect(moved, `soak1k-${i}: the words move exactly where the memory table speaks`).toBe(changes(shipped.get(i)));
+      if (moved) differing += 1;
     });
     vi.doUnmock('../../src/data/historyData.js');
     expectNoSeedFailures(failures, 'the memory table moves no draw');
-    // live, not vacuous: exactly the eight flagged births change their words
-    expect(differing).toBe(FLAGGED.length);
+    // live, not vacuous: every one of the eight flagged births changes its words
+    expect(differing).toBeGreaterThanOrEqual(FLAGGED.length);
   }, 300_000);
+
+  it('D-1b: a tension whose own event is ABSENT from the timeline names no past event (the template\'s lasting effects)', async () => {
+    await ensureLaws();
+    // births below city (and one city, one metropolis) holding an occupation tension with no Occupation on the timeline
+    const UNANCHORED = [24, 37, 38, 27, 142, 71];
+    const failures = collectSeedFailures(UNANCHORED, (i) => {
+      const s = birth(i).settlement;
+      const t = s.history.currentTensions.find((x) => x.type === 'occupation_legacy');
+      expect(t, `soak1k-${i}: an occupation tension`).toBeTruthy();
+      expect(s.history.historicalEvents.some((e) => e.templateType === 'occupation_legacy'), `soak1k-${i}: no Occupation on the timeline`).toBe(false);
+      expect(t.description, `soak1k-${i}: names no past event`).not.toMatch(/\boccupation\b|\bended\b/i);
+      expect(t.factions.filter((f) => /^Former\b/.test(f)), `soak1k-${i}: no former participants`).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'an unanchored tension names no past event');
+  }, 120_000);
 });

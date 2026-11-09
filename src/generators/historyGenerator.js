@@ -1072,7 +1072,8 @@ function speakFounding(founding, noun) {
 /**
  * A selected tension template with its memory table taken off (the table is the template's, never
  * the record's) and, where the template carries one, the DATED words in place of its own: its own
- * event sits on the timeline older than 80 years, so no living participant is named.
+ * event sits on the timeline older than 80 years, so no living participant is named. URBAN-FIX D-1b:
+ * where the timeline holds NO event of its template, the UNANCHORED words, which name no past event.
  * @param {any} tmpl a selected template copy
  * @param {ReadonlyArray<any>} timeline the history's events, built before the tensions
  * @returns {any}
@@ -1083,6 +1084,6 @@ function tensionByMemory(tmpl, timeline) {
   const own = (Array.isArray(timeline) ? timeline : []).find((e) => e?.templateType === tension.type);
   // 80: the page's Ancient boundary (HistoryTab.jsx :: recencyLabel, up to 80 years is "Last century"), the
   // same line generateEventNarrative draws for the hooks of living memory
-  const words = own && Number(own.yearsAgo) > 80 ? byMemory.dated : null;
+  const words = !own ? byMemory.unanchored : Number(own.yearsAgo) > 80 ? byMemory.dated : null;
   return words ? { ...tension, ...words } : tension;
 }
