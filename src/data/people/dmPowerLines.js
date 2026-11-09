@@ -132,6 +132,19 @@ export function criminalsOf(f) {
   return f.underworld || 'the criminal houses';
 }
 
+/**
+ * STYLE-2 SW-7: the DM page's boosts row in words the record holds (the boost against the power's own strength), in
+ * place of "{base} on its own, +{boost}, {effective} in all". @param {number} base @param {number} boost @returns {string}
+ */
+export function boostWords(base, boost) {
+  const b = Number(base) || 0;
+  const r = b > 0 ? (Number(boost) || 0) / b : Infinity;
+  if (r < 0.2) return 'a little stronger than its own members make it';
+  if (r < 0.6) return 'much stronger than its own members make it';
+  if (r < 1.5) return 'about twice as strong as its own members make it';
+  return 'far stronger than its own members could make it';
+}
+
 /** @typedef {(f: PatronFacts) => string} PatronLine */
 /** @typedef {(f: CaptureFacts) => string} CaptureLine */
 
@@ -139,15 +152,15 @@ export function criminalsOf(f) {
 export const PATRONAGE_LINES = Object.freeze({
   // the face's open membership in another power (the boost is shown on the DM layer only, J-9)
   open: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${f.power}, and that lends ${f.power} +${pointWords(f.boost)} in strength.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${f.power}, and that lends ${f.power} weight it would not have on its own.`,
     (f) => `When ${f.power} wants something from ${f.ruler}, ${f.name} is the one who asks for it. ${f.name} is ${patronPlace(f.rank, f.ruler)} and holds ${shareWords(f.share)} in ${f.power}.`,
     (f) => `${f.name} serves ${f.ruler} and ${f.power} at once. While ${f.name} holds both places, ${f.power} counts for more here than its own members would make it.`,
   ]),
   // the face's hidden allegiance to a criminal power (DM-only; the public page shows base strength)
   hidden: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${f.power}, and that lends ${f.power} +${pointWords(f.boost)} in strength that nobody outside the arrangement can see.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${f.power}, and that lends ${f.power} strength nobody outside the arrangement can see.`,
     (f) => `${f.power} has its own voice in ${f.ruler}: ${f.name}, ${patronPlace(f.rank, f.ruler)}. The others there hear it as ${f.name}'s own opinion.`,
-    (f) => `Anyone who weighs ${f.power} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${f.power} stands +${pointWords(f.boost)} stronger.`,
+    (f) => `Anyone who weighs ${f.power} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${f.power} is stronger than it looks.`,
   ]),
 });
 

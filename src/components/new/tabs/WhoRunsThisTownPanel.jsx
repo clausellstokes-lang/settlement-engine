@@ -19,7 +19,7 @@ import { FLUSH } from '../../../design/flush.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { entityIdFor } from '../../../domain/dossier/entityLinks.js';
 import { dmPowerViewOf } from '../../../domain/people/patronage.js';
-import { pointWords } from '../../../data/people/dmPowerLines.js';
+import { boostWords } from '../../../data/people/dmPowerLines.js';
 
 const PLACE = Object.freeze({ 1: 'Head', 2: 'Second', 3: 'Third', steward: 'Steward' });
 const RANK_WORD = Object.freeze({ 1: 'first', 2: 'second', 3: 'third' });
@@ -93,7 +93,7 @@ export default function WhoRunsThisTownPanel({ settlement }) {
           <div key={b.powerName} data-testid="dm-boost">
             <div style={row}>
               <strong>{b.powerName}</strong>
-              <span style={{ color: MUTED }}>{` · ${pointWords(b.base)} on its own, +${pointWords(b.boost)}, ${pointWords(b.effective)} in all`}</span>
+              <span style={{ color: MUTED }}>{` · ${boostWords(b.base, b.boost)}`}</span>
             </div>
             <p style={line}>{b.line}</p>
           </div>
