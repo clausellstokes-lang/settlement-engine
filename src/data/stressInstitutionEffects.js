@@ -172,7 +172,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Their public neutrality is a cover. They are actively funding one faction's operations through a third party",
+        "Their public neutrality is a cover. They are actively funding one power's operations through a third party",
       stakes:
         "{npc} traced one payment. They came to ask about it. They accepted the explanation. They didn't believe it",
       needs: ["other npc"],
@@ -229,7 +229,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Knows who did it and has said nothing. The betrayer is someone they owe a significant debt to",
       stakes:
-        "The debt is called in if they speak. The settlement suffers if they don't. They've been choosing themselves for six weeks",
+        "The debt is called in if they speak. The settlement suffers if they don't. For six weeks they have kept quiet to save themselves",
     },
     {
       secret:
@@ -321,7 +321,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "Knows the deceased's actual wishes regarding succession. They were told privately and have chosen not to share them",
       stakes:
-        "The wishes favour neither of the current claimants. Sharing them would destabilise everything and serve justice simultaneously",
+        "The wishes favour neither of the current claimants. Telling the truth would be the just thing, and it would throw the succession open again",
     },
     {
       secret:
@@ -356,7 +356,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret:
         "The {commodity} operation they authorised six months ago disturbed a nesting site. The attacks started three weeks later",
-      stakes: "The connection is in the geographic data. Someone with the right maps will make it",
+      stakes: "The connection shows on the maps. Anyone who reads them closely will make it",
     },
     {
       secret:
@@ -400,7 +400,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       // [D6 THE UNDERWAYS] the insurgency uses the tunnels — content integration.
       secret: "Has been moving insurgent fighters and sealed messages through the underways (the dug tunnels beneath the settlement), one cellar-mouth at a time",
-      stakes: "The warren has no map, but {npc} has walked it. If the authority ever forces one, this person's own route becomes the confession",
+      stakes: "The warren has no map, but {npc} has walked it. If the authority ever has one drawn, this person's own route through it will give them away",
       needs: ["other npc"],
     },
   ],
@@ -438,7 +438,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       // (ODQ §934.101); it tells the arrival now. Same slot, so no draw moves.
       direction: "arrivals",
       secret: "Has been quietly buying up the houses the newcomers need, through a third party, and letting them at a price that rises with every arrival",
-      stakes: "The tenants have begun comparing what they pay. The third party's name will not survive the first honest question",
+      stakes: "The tenants have begun comparing what they pay. The first one to ask who the third party really is will find this person behind it",
       needs: ["migration: influx"],
     },
     {
@@ -446,7 +446,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       // `stress[].direction` is 'departures' (npcGenerator.js; domain/migrationDirection.js).
       direction: "departures",
       secret: "Has been quietly buying up the emptied properties of those who fled, through a third party, at a fraction of their worth",
-      stakes: "Some of the departed intend to return. The purchases will not survive their claims, or their questions",
+      stakes: "Some of the departed intend to return. When they do, they will want their houses back and will ask who bought them so cheaply",
       needs: ["migration: exodus"],
     },
     {
@@ -499,7 +499,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret: "Engineered the 'miracle' that tipped the settlement toward the new faith, and knows exactly how it was done",
-      stakes: "The apparatus still exists, hidden. Anyone who found it would unmake the conversion and every career built on it",
+      stakes: "The apparatus still exists, hidden. Anyone who found it could prove the miracle a fake, and every career built on the conversion would fall with it",
     },
     {
       secret: "Was a senior figure in the old faith and surrendered its secrets (its finances, its sanctuary lists, its private sins) to the new one to secure a place",
