@@ -302,7 +302,9 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       publicDossier: true, playerView: false, worldState: null,
     }));
     const line = container.querySelector('[data-testid="overview-identity-line"]')?.textContent || '';
-    expect(line).toContain('Germanic-inspired, built in timber and stone, and run by guild and estate.');
+    // STYLE-2 FIRST-IMPRESSIONS (A·O2, 2026-11-09): the fixture's seed picks the official frame, and
+    // its roster holds no guild, so the line says what the record holds
+    expect(line).toContain('Germanic-inspired: built in timber and stone, and run by its estates.');
     expect(line).toContain('The Burgher Council · Stable');
     // The governing name is generated text: it wraps like the sentence it closes, never held on
     // one line by a nowrap that would push a long council name past a phone's edge (ODQ §934.23).
