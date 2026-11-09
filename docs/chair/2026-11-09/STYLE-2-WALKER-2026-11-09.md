@@ -2,7 +2,7 @@
 
 Seat SW-0 · STYLE-WALKER (Opus 5.5), a child of the cloud chair (session `session_01FbPLbejcfwX5nii12VM673`), on `lane/style-2-walker-2026-11-09`, cut at `a7bc2e4ce` (= `origin/lane/integration-2026-11-07` HEAD, of which `5b267578c` is an ancestor). The brief is `BRIEF-STYLE-2-WAVE-2026-11-09.md` §1 SW-0, and the ruling is `STYLE-RULINGS-2-2026-11-09.md` A10, both on `lane/chair-2026-11-08`. The worklist is `STYLE-AUDIT-2-SOURCES-2026-11-09.md` §0, §3, §3a and §4 on `lane/style-2-sources-2026-11-09`. Time labels are from `date` (first measurement 01:21 UTC).
 
-**No product byte moved.** The lane writes five files:
+**No product byte moved.** The lane writes six files: the five below, and the lighting census `tests/lint/.lighting-census-baseline.json`, refrozen through its door for the one new test file (§5).
 - `scripts/lib/style-law-scan.mjs`, the scanner (a pure module and its `--record` door);
 - `tests/lint/styleLaw.walker.test.js`, the walker;
 - `tests/lint/.style-law-baseline.json`, the baseline (written only by the door);
@@ -196,6 +196,15 @@ Every (file, phrase) row that differs is below (35 rows; audit → walker). Four
 - **`mutationCoverageManifest.test.js` at the tip:** 1 failed / 9. The TOTALITY arm lists the base's same three files: `tests/edgeFunctions/promptsNpcFaction.test.js`, `tests/generators/historicalCharacterMajorEvents.test.js`, `tests/generators/stressNoteDirection.test.js`. The new walker is not among them. This red is the base's, unchanged, and not this lane's.
 - **The three record walkers** (`sh scripts/gate-tail.sh npx vitest run tests/lint/sourceCitationIntegrity.walker.test.js tests/lint/ledgerCitationIntegrity.test.js tests/lint/testRatchet.test.js`, with `review-fixes-2026-07-08` fetched locally): green except the inherited roster red. `tree` reads **147** against 139 frozen at this base, not the 140 the brief names. The cause is all MERGE-WAVE's: the eight signed records `docs/shift-records/2026-11-08-merge-wave-{1..8}-*.json`, from `9288badee` (record 1, w1-eco, the brief's 140) through `d8007f696` (record 8, public-veil), none with a roster bump. The 147 was measured at the base before this lane wrote a byte. `tree` is not touched here. `dated` was 168 at the tip and is 169 with this record (`_rosterGrowth2026-11-09-style-2-walker`).
 - **eslint** on the two code files: 0 errors, 0 warnings.
+- **The lighting census (`tests/lint/.lighting-census-baseline.json`), the second register the new file moves.** The whole `tests/lint` + `tests/scripts` run at `ce347b95a` (222 files, 3,242 tests) found `sovereigntyLightingContract.walker.test.js`'s census arm red: the estate's test-file count read 3,124 against 3,123. The extra file is this lane's.
+  - It was re-measured through the register's own door on the clean tree (`LIGHTING_CENSUS_REFREEZE='SW-0 STYLE-WALKER …' LIGHTING_CENSUS_NOTE=…`; the door exits non-zero by design): 3,123/384/2,739/28,695/7,717 → **3,124/384/2,740/28,715/7,721**.
+  - That is +1 file, +1 credited, +20 titles and +4 suite titles, exactly the walker's 20 tests in 4 suites. Parked is unchanged at 384: every title is spelled as a literal.
+  - The walker run plainly afterwards: green (54/54 with this file).
+  - This is a separate commit on top of `ce347b95a`, because the door measures a committed tree.
+- **The rest of that wide run: 11 red tests in 6 files, every one the base's.**
+  - `sourceCitationIntegrity` 1: `tree` 147 vs 139, MERGE-WAVE's, above.
+  - `mutationCoverageManifest` 1: the base's three files.
+  - The other eight tests (`domainAnyCastBaseline` 4, `negativeAssertionAnchor.walker` 2, `proseWiringCensus.walker` 2) red identically in a detached worktree at the base `a7bc2e4ce` (8 failed / 106, the same titles). The offenders they name are `src/domain/display/*` any-casts, five test files' un-anchored negatives, and the prose census's stale stamp. None is this lane's.
 
 ## §6 CONFIRMED against PLAUSIBLE
 
