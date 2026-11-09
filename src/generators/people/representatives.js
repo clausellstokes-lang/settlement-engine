@@ -86,7 +86,7 @@ export const YIELDS_TO = Object.freeze({ 'Priest (resident)': 'Access to parish 
  * (castPowers.js), which decides WHICH powers are minted once the powers are final.
  * @param {{ role: string, titleKey: string, category: string }} row the title table's row
  * @param {{ tier: string, culture: string, config: Record<string, any>, economicState: Record<string, any> | null | undefined,
- *   powerStructure: { factions?: Array<{ faction?: string }> } | null | undefined, institutions: RosterRow[],
+ *   powerStructure: { factions?: Array<{ faction?: string }>, government?: unknown } | null | undefined, institutions: RosterRow[],
  *   hookRegistry: Record<string, Set<string>>, worldLaw: any }} ctx
  * @param {{ hook?: boolean }} [options] `{ hook: false }`: the seam draws the card's one hook itself
  *   (lane 3's `drawCardHooks`; MERGE-234, one writer per fact)
@@ -229,7 +229,7 @@ export function hookOffsetOf(key) {
 /**
  * Where a card's hook lines are drawn: the world law (its port kind), the roster and the tier — the
  * facts the census's declared rows read (MERGE-CAR).
- * @typedef {{ worldLaw?: { portKind?: string | null } | null, institutions?: unknown[], tier?: string }} HookPlace
+ * @typedef {{ worldLaw?: { portKind?: 'none'|'maritime'|'river' | null } | null, institutions?: unknown[], tier?: string }} HookPlace
  */
 
 /**
@@ -263,7 +263,7 @@ export function spareHookLine(pools, held, key, place = {}, accept = () => true)
 /**
  * THE CAST: one card per face-bearing house in roster order, the seat always faced.
  *
- * @param {{ tier?: string, institutions?: RosterRow[], powerStructure?: { factions?: Array<Record<string, unknown>> } | null,
+ * @param {{ tier?: string, institutions?: RosterRow[], powerStructure?: { factions?: Array<Record<string, unknown>>, government?: unknown } | null,
  *   economicState?: Record<string, any> | null, _seed?: unknown }} settlement the roster and the powers as they
  *   stand, and the record's seed (the salt of a veiled face's opaque id)
  * @param {string} culture

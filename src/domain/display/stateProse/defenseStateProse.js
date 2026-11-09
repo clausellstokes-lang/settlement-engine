@@ -679,7 +679,7 @@ function chainArm(chainModifiers, arm) {
  * why a ruined citadel does not read here as standing walls.
  *
  * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
- *   defenseProfile?: {scores?: {economic?: unknown}|null}|null,
+ *   defenseProfile?: {scores?: {economic?: unknown}|null, chainModifiers?: unknown}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{beasts: object|null, invasion: object|null, internal: object|null,
@@ -992,7 +992,8 @@ export function criminalCapturePoolKey(captureState) {
  * beneath it cannot be about two different classifications.
  *
  * @param {{name?: string, powerStructure?: {government?: unknown,
- *   criminalCaptureState?: unknown}|null}|null|undefined} settlement
+ *   criminalCaptureState?: unknown}|null,
+ *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {unknown} structureKey
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{structure: object|null, capture: object|null}>}
@@ -1478,7 +1479,8 @@ export function arcaneDefensePoolKey(forces, magicWorks) {
  * the odd one out. A cure that plants a red in a shared module is not a cure.
  *
  * @param {{name?: string, institutions?: unknown,
- *   config?: {monsterThreat?: unknown}|null}|null|undefined} settlement
+ *   config?: {monsterThreat?: unknown}|null, defenseProfile?: Record<string, unknown>|null,
+ *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{fortification: object|null, force: object|null, contracted: object|null,
  *   charter: object|null, arcane: object|null}>}
@@ -1592,7 +1594,7 @@ export function freeCompanyFixturePoolKey(inst) {
  * it likes, including in the position the DM's field occupies. Handing back the projection
  * means the only thing the caller can do with the machine line is put it BESIDE.
  *
- * @param {{name?: string, economicState?: {safetyProfile?: {safetyLabel?: unknown,
+ * @param {{name?: string, stress?: unknown, economicState?: {safetyProfile?: {safetyLabel?: unknown,
  *   safetyDesc?: unknown}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{publicOrder: object|null, firstSurvey: object|null}>}
@@ -1995,7 +1997,7 @@ export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent 
  * contortion to dodge the scanner.
  *
  * @param {{name?: string, defenseProfile?: {magicDependency?: unknown}|null,
- *   economicState?: {activeChains?: unknown}|null}|null|undefined} settlement
+ *   economicState?: {activeChains?: unknown, safetyProfile?: {flags?: unknown}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{arcaneReliance: object|null}>}
  */

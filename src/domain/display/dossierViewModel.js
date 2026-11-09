@@ -91,6 +91,7 @@ const VIABILITY_LABEL = Object.freeze({
 /**
  * Structural view of the settlement fields the display model reads.
  * @typedef {Object} DossierSettlementView
+ * @property {string} [name] the town's own name (W2 DEF #36: the viability verdict says it)
  * @property {{ metrics?: { foodBalance?: FoodBalanceRecord | null, tradeAccess?: string } | null, summary?: string | null, viable?: boolean | null, dependencies?: unknown[] } | null} [economicViability]
  * @property {EconStateView | null} [economicState]
  * @property {{ tradeRouteAccess?: string } | null} [config]

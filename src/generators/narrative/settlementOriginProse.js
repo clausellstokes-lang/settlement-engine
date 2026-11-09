@@ -203,7 +203,7 @@ export const originVariantKey = ({ seed, arm, terrainType = null, hasFoodDeficit
 /**
  * THE ONE ENTRY POINT. Returns the origin sentence for a founding state.
  *
- * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean,
+ * @param {{ route?: string, terrainType?: string|null, hasFoodDeficit?: boolean, hasDocks?: boolean,
  *           supportChannels?: string, specialResources?: readonly string[]|null,
  *           seed?: string|null }} state
  * @returns {string}

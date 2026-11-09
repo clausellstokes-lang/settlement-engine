@@ -376,11 +376,11 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
   if (isRow(ps) && Array.isArray(ps.factions)) {
     ps.factions = ps.factions.filter((f) => !(isRow(f) && (f.hidden === true || hidden.has(f.faction))));
   }
-  /** @param {unknown} list */
+  /** @param {any[]} list a conflicts array of the public JSON (the caller checked Array.isArray) */
   const dropConflicts = (list) => list.filter((c) => !(isRow(c) && Array.isArray(c.parties) && c.parties.some((p) => hidden.has(p))));
   if (Array.isArray(pub.conflicts)) pub.conflicts = dropConflicts(pub.conflicts);
   if (isRow(ps) && Array.isArray(ps.conflicts)) ps.conflicts = dropConflicts(ps.conflicts);
-  /** @param {unknown} entry */
+  /** @param {Record<string, any>} entry a stress entry of the public JSON (`isRow` below refuses any other shape) */
   const dropStakes = (entry) => {
     if (!(isRow(entry) && isRow(entry.cast) && Array.isArray(entry.cast.stakes))) return entry;
     return { ...entry, cast: { ...entry.cast, stakes: entry.cast.stakes.filter((st) => !(isRow(st) && hidden.has(st.factionId))) } };

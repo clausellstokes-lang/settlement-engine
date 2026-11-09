@@ -30,7 +30,7 @@ import { plotHookText as textOf } from '../../lib/proseSeams.js';
  * its own pool. Returns the SAME array when no card changes.
  * @template {Record<string, any>} T
  * @param {{ npcs?: T[], [key: string]: unknown }} settlement the assembled record (after the truth check)
- * @param {string | null | undefined} portKind the world law's port kind (the wet line's declared sibling, CENSUS-1c)
+ * @param {'none' | 'maritime' | 'river' | null | undefined} portKind the world law's port kind (the wet line's declared sibling, CENSUS-1c)
  * @returns {T[] | undefined}
  */
 export function truePersonHooks(settlement, portKind) {

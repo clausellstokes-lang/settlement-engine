@@ -1730,6 +1730,8 @@ export function populationDirectionPoolKey(trend, tradeRouteAccess) {
  *   commerce: LegibilityRung|null,
  *   warehouses: LegibilityRung|null,
  *   institutions: LegibilityRung|null,
+ *   cathedral: LegibilityRung|null,
+ *   monastery: LegibilityRung|null,
  *   notableConnection: ReadonlyArray<LegibilityRung|null>,
  *   populationDirection: LegibilityRung|null,
  * }>, history: Readonly<{
@@ -1814,6 +1816,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   exploitation?: {fullyExploited?: unknown, partiallyExploited?: unknown,
  *     unexploited?: unknown}|null,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
+ *     legacyAnnotations?: unknown, siegeNarrative?: unknown, currentTensions?: unknown,
  *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
  *     historicalEvents?: Array<{type?: unknown, name?: unknown, yearsAgo?: unknown,
  *       anchored?: unknown, lastingEffects?: unknown}|null>|null}|null}} [readings]

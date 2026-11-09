@@ -686,7 +686,7 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry, facts =
  * MERGE-CAR: the people car's one hook per person (PEOPLE-3) composed with the rung-2 landing's declared
  * draw (the facts the census gives the loyalty pool, the sibling resolution the twin table became).
  * @param {string} hookPool @param {Record<string, any>} config @param {any} hookRegistry
- * @param {{ worldLaw?: { portKind?: string | null } | null, institutions?: unknown[], tier?: string }} [place]
+ * @param {{ worldLaw?: { portKind?: 'none'|'maritime'|'river' | null } | null, institutions?: unknown[], tier?: string }} [place]
  * @returns {string} */
 export const drawPersonHook = (hookPool, config = {}, hookRegistry, place = {}) => {
   const { worldLaw = null, institutions = [], tier } = place || {};
