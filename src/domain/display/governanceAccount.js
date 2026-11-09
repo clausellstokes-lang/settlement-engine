@@ -171,7 +171,7 @@ export function estrangedPowersOf(settlement, governing) {
     if (!rel || typeof rel !== 'object') continue;
     const pair = Array.isArray(rel.pair) ? rel.pair.map(text) : [];
     if (!governing || !pair.includes(governing)) continue;
-    const other = pair.find((n) => n && n !== governing);
+    const other = pair.find((/** @type {string} */ n) => n && n !== governing);
     if (!other) continue;
     const tie = rel.type === 'corrupted' ? (rel.captureState === 'capture' ? 'capture' : 'corrupted')
       : rel.type === 'competitive' ? 'competitive'
@@ -196,13 +196,13 @@ export function estrangedPowersOf(settlement, governing) {
  */
 const FRACTURE_BLOCS = Object.freeze([
   Object.freeze({ desc: /^Claims legitimate authority through different means/, withdrawn: true,
-    line: (n, pl) => `${n} ${pl ? 'claim' : 'claims'} the right to rule by other means, and no longer ${pl ? 'come' : 'comes'} to the hall's meetings.` }),
+    line: (/** @type {string} */ n, /** @type {boolean} */ pl) => `${n} ${pl ? 'claim' : 'claims'} the right to rule by other means, and no longer ${pl ? 'come' : 'comes'} to the hall's meetings.` }),
   Object.freeze({ desc: /^Noble houses that want a renegotiation of feudal obligations/, withdrawn: true,
-    line: (n, pl) => `${n} ${pl ? 'want' : 'wants'} the old obligations renegotiated, and no longer ${pl ? 'cooperate' : 'cooperates'}.` }),
+    line: (/** @type {string} */ n, /** @type {boolean} */ pl) => `${n} ${pl ? 'want' : 'wants'} the old obligations renegotiated, and no longer ${pl ? 'cooperate' : 'cooperates'}.` }),
   Object.freeze({ desc: /^Noble houses backing the current crown line/, withdrawn: false,
-    line: (n, pl) => `${n} ${pl ? 'back' : 'backs'} the crown for as long as its favours last.` }),
+    line: (/** @type {string} */ n, /** @type {boolean} */ pl) => `${n} ${pl ? 'back' : 'backs'} the crown for as long as its favours last.` }),
   Object.freeze({ desc: /^Would support stability, if a price can be agreed/, withdrawn: false,
-    line: (n, pl) => `${n} will back whichever side meets ${pl ? 'their' : 'its'} price.` }),
+    line: (/** @type {string} */ n, /** @type {boolean} */ pl) => `${n} will back whichever side meets ${pl ? 'their' : 'its'} price.` }),
 ]);
 
 /**
@@ -222,7 +222,7 @@ function fractureBlocsOf(s, already) {
   let withdrawn = false;
   for (const reading of FRACTURE_BLOCS) {
     const of = factions.filter((f) => f && !f.isGoverning && reading.desc.test(text(f.desc)) && !already.has(text(f.faction)))
-      .map((f) => text(f.faction)).filter(Boolean);
+      .map((f) => text(/** @type {{ faction?: unknown }} */ (f).faction)).filter(Boolean);
     if (!of.length) continue;
     names.push(...of);
     lines.push(reading.line(capFirst(listOf(of.map((n) => powerNameInProse(n)))), of.length > 1 || pluralPowerName(of[0])));
@@ -292,7 +292,7 @@ export function governanceAccountOf(settlement, opts = {}) {
   const leg = s.powerStructure?.publicLegitimacy;
   const label = leg && typeof leg === 'object' ? text(leg.label) : '';
   if (label) {
-    const standing = standingSentence(label, legitimacyCausesOf(leg.breakdown, ADVERSE_BANDS.has(label)), place, ruler, pick);
+    const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label)), place, ruler, pick);
     if (standing) sentences.push(standing);
   }
 

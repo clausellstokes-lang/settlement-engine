@@ -252,7 +252,7 @@ export function compromisedSecurityInstitutions(settlement) {
     const inst = npc?.institution;
     if (!inst || inst.kind !== 'house' || !isLocalAgentInPlace(npc, settlement)) continue;
     const match = securityInstitutions.find((s) => nameMatches(s.name, inst.key));
-    if (match && !revealed.has(match.name)) covert.add(match.name);
+    if (match && !revealed.has(/** @type {string} */ (match.name))) covert.add(/** @type {string} */ (match.name));
   }
 
   return { covert: [...covert], revealed: [...revealed] };
