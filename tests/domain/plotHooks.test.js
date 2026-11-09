@@ -184,3 +184,24 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
     expect(collectPlotHooks(armed).map((h) => h.text)).toEqual(OWN);
   });
 });
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, 2026-11-09): a tension type the label map does not
+// hold printed its raw engine key as the hook's title ("corruption_scandal" on Tonight and Plot
+// Hooks, soak1k-6). A title is never a snake_case key.
+describe('collectPlotHooks tension titles', () => {
+  test('a tension type missing from the label map is titled in words, never as its raw key', () => {
+    const hooks = collectPlotHooks({
+      history: {
+        currentTensions: [{
+          type: 'corruption_scandal',
+          description: 'The tax ledgers were found altered.',
+          plotHooks: ['Someone paid the clerk to alter the ledgers.'],
+        }],
+      },
+    });
+    const sources = hooks.map((hook) => hook.source);
+    expect(sources).toHaveLength(1);
+    expect(sources[0]).not.toMatch(/_/);
+    expect(sources[0]).toBe('Corruption Scandal');
+  });
+});
