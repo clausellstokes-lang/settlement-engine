@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "e292479245d27e6eaaecb7243232f655c37df3cb",
-  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR4 merge point)",
+  "measuredAtSha": "32c48e727171dc4eba2bc02da7965c36f7f24f0f",
+  "measuredBy": "STYLE-2-MERGE-2",
   "date": "2026-11-09",
-  "note": "car 4 composed: GOAL_FAMILY_TUNING and LAW_PURSUIT_TUNING",
+  "note": "STYLE-2-MERGE-2 at the SW-12 PULSE-LINES merge point (point 18, 3f5cb1ff8): car 4 composed with SW-12 (institutionLifecycle struck its two odds lines and their bare 0.5s, eff5e88da)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1062,7 +1062,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 983,
+      "line": 984,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -1092,7 +1092,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 583,
+      "line": 594,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1107,7 +1107,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 585,
+      "line": 596,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1122,7 +1122,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 587,
+      "line": 598,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1137,7 +1137,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 589,
+      "line": 600,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -3089,7 +3089,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 10,
-      "line": 104,
+      "line": 107,
       "spanDigest": "dbfcfab0b85ba11ba37df86f68c8a9d37aa788b3f5ec60b8be4eb7d9065dee53",
       "leaves": {
         "RESOLUTION_HOLD_TICKS": 4,
@@ -4458,7 +4458,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 452,
+      "line": 455,
       "spanDigest": "bfb9f3afad0fbf5a97b4267b6097e8e11f95abf8950fc1e2b5ff9ad9cc7133ec",
       "leaves": {
         "YEAR_WEEKS": 52,
@@ -4666,7 +4666,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 9,
-      "line": 338,
+      "line": 353,
       "spanDigest": "37a1bc4094de284a2324ceb0b235fa40705f16fc96c789ba973a7bdfed1ade87",
       "leaves": {
         "PLAUSIBLE_FLOOR": {
@@ -5048,7 +5048,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 7,
-      "line": 82,
+      "line": 83,
       "spanDigest": "d3c62cf5484d9ffcb88f33ab78dcf1cb7bafe07335e8da5d00ad37c5c63747d6",
       "leaves": {
         "thresholds.prosperous": 0.62,
@@ -5525,7 +5525,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 11,
-      "line": 511,
+      "line": 530,
       "spanDigest": "7061eadeb2ee83e8b5629b7de376192218aa48ca400a1b1359702038c688986a",
       "leaves": {
         "RAMP_BASE_RATE": {
@@ -5576,7 +5576,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 3,
-      "line": 349,
+      "line": 366,
       "spanDigest": "8126b0186c8d8295f80dc5cbc055b5ac1d7272d21d8c57291b08e5ce954d4765",
       "leaves": {
         "REACT_SEVERITY": {
@@ -5711,7 +5711,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 12,
-      "line": 44,
+      "line": 45,
       "spanDigest": "b2e6323b207c85c58ad5133e15bdec03f366d8ed9337ffcedb107fc2203f80fd",
       "leaves": {
         "MAX_STEP": 0.12,
@@ -6054,7 +6054,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 17,
-      "line": 1615,
+      "line": 1666,
       "spanDigest": "0f3911d51b455117b7b82ce58ac87d572ada6ecc2f80814f3976a5355f931b84",
       "leaves": {
         "STATE_LADDER": {
@@ -7320,7 +7320,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 3,
-      "line": 1307,
+      "line": 1339,
       "spanDigest": "eb5d52fecaa15a2aacf6803f04e7dc8dd4c5d7422aa0757424f18cf39d0ab480",
       "leaves": {
         "STRATEGY_K": {
@@ -8194,7 +8194,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 89,
+      "line": 90,
       "spanDigest": "5d423d06ea6e3cf77788e82c97fa0946ae7c7fbf8d6e6830cb848773ffb8cd0c",
       "leaves": {
         "value": 6
@@ -8839,7 +8839,7 @@
     "src/domain/worldPulse/habit/habitCurve.js": 7,
     "src/domain/worldPulse/hegemony.js": 2,
     "src/domain/worldPulse/informationStatecraft.js": 24,
-    "src/domain/worldPulse/institutionLifecycle.js": 17,
+    "src/domain/worldPulse/institutionLifecycle.js": 15,
     "src/domain/worldPulse/lawWord.js": 2,
     "src/domain/worldPulse/lineageNews.js": 3,
     "src/domain/worldPulse/magicSubstitution.js": 10,
@@ -8927,7 +8927,7 @@
     "src/domain/worldPulse/supplyKernel.js": 6,
     "src/domain/worldPulse/supplyWebWarfare.js": 56,
     "src/domain/worldPulse/thievesGuild.js": 2,
-    "src/domain/worldPulse/tierResourceDynamics.js": 40,
+    "src/domain/worldPulse/tierResourceDynamics.js": 39,
     "src/domain/worldPulse/tradeSalience.js": 25,
     "src/domain/worldPulse/tradeWar.js": 25,
     "src/domain/worldPulse/traditionsKernel.js": 5,
@@ -9008,7 +9008,7 @@
     "tables": 277,
     "keys": 2249,
     "unregisteredNamed": 539,
-    "bareDecimals": 6934,
+    "bareDecimals": 6931,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 185
   }
