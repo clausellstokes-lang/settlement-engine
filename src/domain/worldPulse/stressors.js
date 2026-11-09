@@ -120,7 +120,9 @@ function upperFirst(value) {
  * @param {{ reasons?: unknown[], label?: unknown, settlementName?: unknown }|null|undefined} pressure
  * @param {{ fallback?: boolean }} [opts]  false ⇒ evidence sentences only (no fail-closed line)
  */
-function readerPressureReasons(pressure, { fallback = true } = {}) {
+// STYLE-2 C2 (SW-12, A2·74): exported so the organic pressure condition (candidateEvents.js) reads
+// the same reader map the stressor births use — one reader for one fact.
+export function readerPressureReasons(pressure, { fallback = true } = {}) {
   const placeName = pressure?.settlementName;
   const placeWord = placeName ? String(placeName) + "'s" : 'the';
   return (Array.isArray(pressure?.reasons) ? pressure.reasons : []).map((/** @type {unknown} */ raw) => {

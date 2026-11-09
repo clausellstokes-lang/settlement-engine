@@ -504,7 +504,12 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // candidateEvents.js (the organic pressure gate's rule text struck from the condition receipts). Leaf-diffed against the
 // parent in a clean worktree: 0 string leaves and 171 array-tail keys (the struck line); no id, tick, number or rumour
 // seed moved. occupation.js, warDeployment.js, feasibilityGate.js and realmEvents.js leave this arm byte-identical.
-const BASE_PULSE_HASH = 'ed80ff1d72ab5293f594d7fc6f44977e6f8821555f9a3d823c492a0424e96660';
+// 2026-11-09 (STYLE-2 C2, lane SW-12's second seat, A2·74): ed80ff1d... -> 146027f8..., ONE cause, TEXT ONLY: the organic
+// pressure condition's reasons read through stressors.js :: readerPressureReasons (evidence only). Leaf-diffed against the
+// parent in a clean worktree: 64 string leaves (reasons and the roll explanations' gate lines that copy them) and 120
+// array-tail keys (phrases with no reader sentence, dropped); no id, tick, number or rumour seed moved. warRecordMode.js and
+// mobilizationReactions.js leave this arm byte-identical.
+const BASE_PULSE_HASH = '146027f8a9441fcaddc6c19b5d27a13b99e7eed1985582beeba4aea2576b6f1c';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
