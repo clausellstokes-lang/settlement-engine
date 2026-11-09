@@ -356,9 +356,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       inst.hasCharterHall? "adventurers' charter hall" : 'local guard';
 
     const prisonNote = inst.hasCourtSystem && inst.hasPrison
-      ? ' A functioning court and prison mean crimes carry real consequences.'
+      ? voiceOf('courtAndPrison', COURT_AND_PRISON(lawRef)) // SW-B5 FRAMES: the original is index 0
       : inst.hasCourtSystem
-      ? ' A court exists, though the prison system is limited.'
+      ? voiceOf('courtNoPrison', COURT_NO_PRISON(lawRef))
       : inst.hasPrison
       ? ' Offenders can be jailed, but without a working court system enforcement is arbitrary.'
       : ' Without courts or prison, enforcement relies entirely on fines, exile, or summary violence.';
@@ -400,16 +400,16 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       guardEffectivenessDesc = `The ${lawRef} is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. ` +
         `Effective in a fight; vulnerable to sustained corruption.${prisonNote}${wallNote}`;
     } else {
-      guardEffectivenessDesc = `The ${lawRef} maintains standard patrol coverage. Effective against opportunistic crime; ` +
-        `less effective against organized operations that can plan around patrol routes.${prisonNote}${wallNote}`;
+      guardEffectivenessDesc = voiceOf('standardPatrol', STANDARD_PATROL(lawRef)) + // SW-B5 FRAMES: the original is index 0
+        `${prisonNote}${wallNote}`;
     }
   } else if (inst.hasCourtSystem) {
     guardEffectivenessDesc = 'There is no watch, only a court. ' +
       'When a quarrel turns violent, the neighbours or whoever is strongest nearby step in.';
   } else {
     guardEffectivenessDesc = ['thorp', 'hamlet', 'village'].includes(tier)
-      ? 'There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; ' +
-        'when the families fall out among themselves, nobody keeps it.'
+      ? voiceOf('noWatchSmall', NO_WATCH_SMALL) // SW-B5 FRAMES: the original is index 0
+        /* the old families' line and its vantages: NO_WATCH_SMALL at the end of this file */
       : 'There is no watch and nobody in charge of order; people look after themselves and their own.';
   }
 
@@ -839,3 +839,64 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
     "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.", ['garrison'],
     "The settlement's chaplain also leads its armed men. He's authorizing military action for reasons that sound theological."),
 });
+
+// ─── SW-B5 FRAMES: the guard assessment's frames get vantages ────────────────
+// ⚠ AT THE END OF THE FILE ON PURPOSE: the prose wiring census's holder table cites this file's
+// producer writes by LINE, so nothing is inserted above them.
+import { hashKey } from '../domain/display/stateProse/stateProseKernel.js';
+import { getActiveRng } from '../kernel/rngContext.js';
+
+/**
+ * ⭐ THE FRAMES GET VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5; the owner's
+ * style law, WIRING-RULINGS §7–§8). Three guard-assessment lines printed word for word in 260 to
+ * 367 of the 1,000 towns (#5–6, #17 and #18 of STYLE-0's twenty frames). Each pool below keeps its
+ * ORIGINAL at index 0 and adds plainer lines that state the SAME facts as the branch that prints
+ * them. No new fact is read; `lawRef` is the branch's own force noun. The town's seed chooses
+ * without a draw: `hashKey(seed::pool)`, with the seed read off the active stream and no roll
+ * taken, so no other line of the birth moves. With no seed (a gallery or fixture call) the
+ * original prints. Index 0 is never reordered, and a new line is appended at the end.
+ * @param {string} poolId @param {ReadonlyArray<string>} pool @returns {string}
+ */
+function voiceOf(poolId, pool) {
+  const seed = getActiveRng()?.seed;
+  return seed ? pool[hashKey(`${seed}::safetyProfile:${poolId}`) % pool.length] : pool[0];
+}
+
+/** #17: a court AND a prison stand (the branch's two facts). @param {string} lawRef */
+function COURT_AND_PRISON(lawRef) {
+  return [
+    ' A functioning court and prison mean crimes carry real consequences.',
+    ' A wrong done here goes before the court, and the guilty can be locked up for it.',
+    ` Offenders the ${lawRef} catches are tried at the court and held in the prison.`,
+    ' Thieves here know that the court sits and the cells are real.',
+  ];
+}
+
+/** #17's sibling: a court and no prison. @param {string} lawRef */
+function COURT_NO_PRISON(lawRef) {
+  return [
+    ' A court exists, though the prison system is limited.',
+    ' The court can try a case, but there is little room to hold anyone it convicts.',
+    ` Offenders the ${lawRef} catches go before the court; there is little room to hold them after.`,
+  ];
+}
+
+/** #18: the force patrols at the ordinary standard. @param {string} lawRef */
+function STANDARD_PATROL(lawRef) {
+  return [
+    `The ${lawRef} maintains standard patrol coverage. Effective against opportunistic crime; ` +
+      'less effective against organized operations that can plan around patrol routes.',
+    `The ${lawRef} walks the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them.`,
+    `The ${lawRef} patrols on a regular round, so petty theft is often caught and planned crime seldom is.`,
+    `You will see the ${lawRef} on the rounds most hours of the day; it catches the careless and misses the careful.`,
+  ];
+}
+
+/** #5–6: a thorp, hamlet or village with no watch, no force and no court. */
+const NO_WATCH_SMALL = Object.freeze([
+  'There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; ' +
+    'when the families fall out among themselves, nobody keeps it.',
+  'There is no watch. When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word.',
+  'Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.',
+  'There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.',
+]);
