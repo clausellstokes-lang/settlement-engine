@@ -114,7 +114,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 36 more items (434 → 470).
     // 470 → 475 at MERGE-WAVE RECORD 8, THE FIX-PUBLIC-VEIL MERGE (ODQ §934.105, THE WAVE, MERGE-WAVE, 2026-11-08; record docs/shift-records/2026-11-08-merge-wave-8-public-veil.json): a veiled face's opaque id re-deals its keyed forks, which re-deals the year's news; 470 -> 475 keys against record 7's post-state (39 items added, 34 removed, 2 moved)
     // 5 more items (470 → 475).
-    expect(Object.keys(manifest)).toHaveLength(475);
+    // 475 → 450 at MERGE-TRAIN RECORD 1, THE ALLEGIANCE-CAR1 MERGE (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-1-car1.json): the hidden allegiance re-writes the agents' goals and ties (5902f1a4a, 475 -> 443 on its lane) and J-19 lights the pulse's knowledge desk (d131ab158, 443 -> 450); 2 moved, +131/-156 keys against the wave's final post-state.
+    // 25 fewer items (475 → 450).
+    expect(Object.keys(manifest)).toHaveLength(450);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -171,7 +173,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the pool census composed re-deals the year at the stage of 572c15018; the year's misjudgment beats are now 3 (4, 15, 42), all on knowledge.
       // Re-dealt at MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json):
       // the car's cast re-deals the year over the pool census at the stage of 8dff691f3; the year's misjudgment beats are now 1 (4), on knowledge.
+      // Re-dealt at MERGE-TRAIN RECORD 1, THE ALLEGIANCE-CAR1 MERGE (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-1-car1.json):
+      // the hidden allegiance and J-19's lit pulse re-deal the year at the stage of e5f88930b; the year's misjudgment beats are now 2 (15, 4), all on knowledge.
       expect(misjudged).toEqual([
+        'wizard_news.15.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
