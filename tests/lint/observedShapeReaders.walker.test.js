@@ -673,10 +673,17 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // census readers over the rung-2 landing). The merged tip keeps the car's re-dealt year (the cast, lanes 1-5B) and
     // composes the integration side's census / WIRING-W0 / REVIEW-INTAKE lines into it, an INTERACTION of -4/-7/-4 (PLAUSIBLE
     // as attributed; not bisected per step). c12c28af0 moved registers only, so the merge commit measures the same.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, e5f88930b; re-keyed by identity at the schema-36 rung, one
+    // rung, two causes): final 390 → 396, accumulated 2486 → 2525, unique 391 → 396, regional 82/82 → 80/80. The car's
+    // own pins at 837adcf73 (its rung 35, over the same veil merge) read 396/2525/396/80 by TWO measured steps — cause 1,
+    // the hidden allegiance (5902f1a4a: dealt at the seam on its own keyed forks, the retired corruptionPass's draws gone
+    // from the step stream), 406/2561/407/80 at 888636ce8; cause 2, the J-19 cure (d131ab158: ensureNpcStates no longer
+    // re-rolls a v3 card's corruption), 396/2525/396/80. MEASURED at the merged tip by this arm's corpus build: equal to
+    // the car's own pins exactly (no interaction term measured at the merge).
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 390, // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
-      wizardNewsAccumulatedEntries: 2486, // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
+      wizardNewsFinalEntries: 396, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 390)
+      wizardNewsAccumulatedEntries: 2525, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 2486)
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -686,7 +693,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 391, // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
+      wizardNewsUnique: 396, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 391)
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -694,11 +701,11 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 82, // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80 // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
+      regionalEventLog: 80, // 2026-11-07 PEOPLE-2 CAST-DERIVED step 3: 80 → 81 (see the note above); PEOPLE-1 CAST: 86 → 80 // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (82 → 80)
       // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
       // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
       // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
-      regionalEventLogUnique: 82, // MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08, rung 35): the veiled re-deal's year, the lane's own deltas composed
+      regionalEventLogUnique: 80, // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge (2026-11-09, rung 36): the hidden allegiance's year, then the J-19 re-deal (rung 35: 82)
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
@@ -1413,8 +1420,13 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // window's first-parent commits, the shape is observed through 79c442330 and gone from 90dc22f18 on — the compose
       // of lane/x46-3-budget, whose density factor stops every corpus world rolling a militia row. A corpus movement,
       // not a lost writer; no frozen row depended on it (the erasure guard holds).
-      'institutions', 'leadingSources', 'magicDef', 'mercenary', 'site', 'stress', 'stressors',
-      'walls', 'watch',
+      // ⭐ `pulseHistory` and `warAuthorityVerdicts` JOIN AT THE SCHEMA-36 RUNG (2026-11-09, MERGE-TRAIN at the
+      // ALLEGIANCE-CAR1 merge): the hidden allegiance's re-dealt year (cause 1) observes both carrying a `source`, as the
+      // car's own scan at f0f7d6a3b (J-19's parent) measured, which also observed `autoApplied`; the J-19 re-deal's year
+      // (cause 2, d131ab158) no longer reaches `autoApplied`. A corpus movement, not a new writer; no frozen row
+      // depended on either (the erasure guard holds).
+      'institutions', 'leadingSources', 'magicDef', 'mercenary', 'pulseHistory', 'site', 'stress', 'stressors',
+      'walls', 'warAuthorityVerdicts', 'watch',
     ]);
 
     // ⭐ EACH FILTER'S FOUNDING CASE, PRESENT RAW AND ABSENT FILTERED. Without
