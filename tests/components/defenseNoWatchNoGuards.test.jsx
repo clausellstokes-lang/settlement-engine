@@ -24,10 +24,11 @@ const STRESSES = [
   'recently_betrayed', 'infiltrated', 'plague_onset', 'succession_void', 'monster_pressure',
   'insurgency', 'religious_conversion', 'slave_revolt', 'wartime',
 ];
-/** A guard or a patrol as a NOUN (the verb "people guard their food" is not a claim of a force). */
+/** A guard or a patrol as a NOUN (the verb "people guard their food" is not a claim of a force; "guards" followed by an object word — its, their, his, her, our, your, the, a, an, each, every, nobody, no one, it, them, him, what, whoever — is that verb). */
 // The chair's STOP #2 ruling keeps the arm at FULL reach: guard, patrol, watch or rota. "There is no watch"
 // is the reader's own statement of the absence, so a watch is counted only as a force that acts ("the watch …").
-const FORCE_NOUN = /\b(?:guards|patrols?|watchm[ae]n|rotas?)\b|\b(?:a|the|every|hungry|standing) guard\b|\b(?:the|its|their) watch\b/i;
+// THE VERB EXEMPTION MADE EXACT (STYLE-2-MERGE at SW-B6's point; the chair's ruling on STOP 2, 16:5x): by grammar, not by a named line.
+const FORCE_NOUN = /\bguards\b(?!\s+(?:its|their|his|her|our|your|the|a|an|each|every|nobody|no one|it|them|him|what|whoever)\b)|\b(?:patrols?|watchm[ae]n|rotas?)\b|\b(?:a|the|every|hungry|standing) guard\b|\b(?:the|its|their) watch\b/i;
 
 /** Open every closed disclosure, so a line inside a fold is read too. */
 function expandAll(container) {
