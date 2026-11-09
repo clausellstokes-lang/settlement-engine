@@ -6118,7 +6118,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The occupiers' soldiers at {settlement} protect it from everyone except the people who sent them.",
+          "text": "The occupiers' troops at {settlement} protect it from everyone except the people who sent them.",
           "slots": [
             "settlement"
           ],

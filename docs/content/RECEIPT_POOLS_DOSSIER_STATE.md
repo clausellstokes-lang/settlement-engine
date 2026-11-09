@@ -3569,7 +3569,7 @@ street, the unfolding).
 
 **override: UNDER OCCUPATION** {colour}
 1. `[ledger]` {settlement}'s defence answers to its occupiers now: the arms in the town are theirs, and whatever the townsfolk could raise themselves would be small beside them.
-2. `[street]` The occupiers' soldiers at {settlement} protect it from everyone except the people who sent them.
+2. `[street]` The occupiers' troops at {settlement} protect it from everyone except the people who sent them.
 3. `[unfolding]` As long as the occupation lasts, {settlement} cannot defend itself on its own terms; its defence is someone else's to order.
 
 **override: COMMAND SPLIT**
