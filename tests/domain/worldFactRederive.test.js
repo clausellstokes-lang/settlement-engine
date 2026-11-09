@@ -491,8 +491,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the generator master 3c3ba783.. -> b35d56c0.. (525 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
       .toBe('b35d56c06bc653e8dedf5cb103aa9463e776edffd9801c03a80539792755465d');
+    // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
+    // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('f2d3410b20c0b4757a48f03afd96598a643d861bd763c6a9172c5a466ef9728e');
+      .toBe('7bdc431eb4624b94d4b1d5a8baa3f282ea1ffb16cb524d589f77311e2184064a');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
