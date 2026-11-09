@@ -677,7 +677,7 @@ export default function ShareToGallery({
         variant="secondary"
         size="sm"
         onClick={handleShareUnlisted}
-        busy={busy}
+        busy={busy} title="Make a private link for your players"
         icon={<Link2 size={12} />}
       >
         Unlisted link
@@ -703,7 +703,7 @@ export default function ShareToGallery({
       }}>
         {canonReady
           ? "Public dossiers appear in the gallery. Your name and email stay private. Your settlement's event chronicle (event titles and summaries) is publicly visible on the gallery page."
-          : `${t('canon.startWorldClock')} before sharing the dossier publicly.`}
+          : `${t('canon.startWorldClock')} before sharing the dossier publicly.`}{' '}An unlisted link is for your players. It stays the same for as long as this settlement exists, and it always shows your latest changes. Rotate it to get a new link.
       </span>
       {aiOverlayNote}
       {detailsForm}
