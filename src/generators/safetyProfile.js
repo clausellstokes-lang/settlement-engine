@@ -204,7 +204,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Volatile';
       safetyStrains.push({ strain: strainLabel, condition: 'Political Fracture' });
       safetyDescs.push(
-        'No stable governing authority. Enforcement is inconsistent; which faction controls a district determines what rules apply.'
+        'No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.'
       );
     }
     if (hasStress('succession_void')) {
@@ -337,7 +337,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       inst.hasGarrison  ? 'The garrison is a formality: present on paper, absent in practice.' :
       inst.hasWatch      ? 'The watch cannot respond effectively; reports are filed and forgotten.' :
       inst.hasMilitia    ? 'The militia musters for emergencies only; day-to-day crime is uncontested.' :
-      inst.hasMercenary  ? 'The mercenary company has effectively become another criminal faction.' :
+      inst.hasMercenary  ? 'The mercenary company has effectively become another gang.' :
                            'There is effectively no law enforcement.';
     const wallNote   = inst.hasWalls ? ' Even the walls provide limited protection. The threat is within.' : '';
     const courtNote  = inst.hasCourtSystem ? '' : ' With no court, quarrels are settled with fists and knives.';
@@ -589,9 +589,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
         ? said('Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.')
         : 'Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed.');
     addCrimeIfMissing('loyalty testing',
-      'Both the governing faction and the insurgency pressure individuals to declare allegiance. Refusal is dangerous. False declarations are common.');
+      'Both the governing power and the insurgency pressure individuals to declare allegiance. Refusal is dangerous. False declarations are common.');
     addCrimeIfMissing('information trade',
-      'Intelligence about the other side commands real money. Both factions pay for names, plans, and movements.');
+      'Intelligence about the other side commands real money. Both sides pay for names, plans, and movements.');
   }
   if (hasStress('slave_revolt')) {
     addCrimeIfMissing('revolt violence',
