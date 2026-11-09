@@ -61,9 +61,6 @@ function pickBody(pool, seed, cell) {
   return pool[fnv1a32(`${seed}::${cell}`) % pool.length];
 }
 
-/** The most sentences of the reader summary the card body prints. */
-const BODY_SENTENCES = 2;
-
 /**
  * Split prose into its sentences (a terminal mark followed by a space or the end).
  * @param {string} text
@@ -76,12 +73,12 @@ function splitSentences(text) {
 }
 
 /**
- * The first `n` sentences of `text`, joined; '' for empty prose.
+ * The lead of `text` the card body prints: its first two sentences, joined; '' for
+ * empty prose.
  * @param {string} text
- * @param {number} n
  */
-function leadSentences(text, n) {
-  return splitSentences(text).slice(0, n).join(' ');
+function leadSentences(text) {
+  return splitSentences(text).slice(0, 2).join(' ');
 }
 
 /** @param {unknown} v @returns {number} */
@@ -187,7 +184,7 @@ export function newsBodyText(entry) {
   // most two sentences print; the rest stays in the tooltip (`newsCardTooltip`).
   // The lifecycle pools below are the fallback for a legacy entry that filed no
   // summary at all.
-  const told = leadSentences(newsReaderSummary(entry), BODY_SENTENCES);
+  const told = leadSentences(newsReaderSummary(entry));
   if (told) return told;
   const kind = entry.kind || '';
   const scope = scopePhrase(entry.scope);
@@ -305,7 +302,7 @@ export function newsCardTooltip(entry) {
   if (!entry) return '';
   const told = newsReaderSummary(entry).trim();
   if (!told) return '';
-  return splitSentences(told).length > BODY_SENTENCES ? told : '';
+  return leadSentences(told) === splitSentences(told).join(' ') ? '' : told;
 }
 
 /**
