@@ -182,7 +182,7 @@ describe('ROW 2 — the live wiring: each bound channel moves its own variable a
     expect(rows.length, 'exactly one faith contributor, not zero and not two').toBe(1);
     expect(rows[0].effect).toBe('divine_boon');
     expect(rows[0].delta).toBeGreaterThan(0);
-    expect(rows[0].reason).toMatch(/blessing on harvest/);
+    expect(rows[0].reason).toMatch(/blessing falls on harvest/); // SW-5: the receipt's sentence re-worded (STYLE-RULINGS-2 A4)
     // The receipt's delta must BE the movement, not a decoration beside it.
     const base = driven({}).causal;
     expect(causal.scores.food_security - base.scores.food_security).toBe(rows[0].delta);

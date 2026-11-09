@@ -167,7 +167,7 @@ function applyFaithChannel(s, channel, contributors) {
     `faith.field.${channel}`,
     lift > 0 ? 'divine_boon' : 'divine_bane',
     lift,
-    `The pantheon's ${lift > 0 ? 'blessing' : 'blight'} on ${channel.replace(/_/g, ' ')} ${lift > 0 ? 'strengthens' : 'weakens'} ${label.toLowerCase()}.`,
+    `The gods' ${lift > 0 ? 'blessing' : 'blight'} falls on ${channel.replace(/_/g, ' ')}, and ${label.toLowerCase()} ${lift > 0 ? 'strengthens' : 'weakens'} with it.`,
   );
   return lift;
 }
@@ -594,7 +594,7 @@ function deriveLaborCapacity(s) {
 
   // Population scaling
   const pop = populationOf(s);
-  if (pop >= TIER_STAMP_CUTS.city) { score += 10; push(contributors, 'population', 'broad', +10, `Population ${pop} provides a deep labor pool.`); }
+  if (pop >= TIER_STAMP_CUTS.city) { score += 10; push(contributors, 'population', 'broad', +10, `${pop} people give the place plenty of hands for its work.`); }
   else if (pop >= TIER_STAMP_CUTS.town) { score += 5; push(contributors, 'population', 'adequate', +5, `Population ${pop} carries enough hands.`); }
   else if (pop > 0 && pop < TIER_STAMP_CUTS.village) { score -= 5; push(contributors, 'population', 'thin', -5, `Population ${pop} leaves little slack.`); }
 
@@ -636,7 +636,7 @@ function derivePublicLegitimacy(s) {
     if (led.present && led.readinessScore < 40) {
       score -= 6;
       push(contributors, 'config.monsterThreat', 'unprotected', -6,
-        `Monsters plague the region and defense readiness is ${led.readinessScore}. The crown cannot protect its people.`);
+        'Monsters plague the region, and its defences are too weak to answer them. The crown cannot protect its people.');
     }
   }
 
@@ -729,11 +729,11 @@ function deriveFactionPower(s) {
   if (dominantShare >= 0.55) {
     score += 8;
     push(contributors, 'powerStructure.factions', 'concentrated', +8,
-      `Top faction holds ${Math.round(dominantShare * 100)}% of power.`);
+      'The strongest power holds more than half of all the influence here.');
   } else if (dominantShare <= 0.30) {
     score -= 8;
     push(contributors, 'powerStructure.factions', 'fractured', -8,
-      `No faction holds clear primacy (top share ${Math.round(dominantShare * 100)}%).`);
+      'No power clearly leads; the strongest holds less than a third of the influence here.');
   }
 
   score += applyConditions(s, contributors, 'faction_power', {
@@ -761,7 +761,7 @@ function deriveTradeConnectivity(s) {
   if (tradeSem.connectivity !== 0) {
     score += tradeSem.connectivity;
     push(contributors, 'config.tradeRouteAccess', tradeSem.tier, tradeSem.connectivity,
-      tradeSem.isolated ? 'Settlement is isolated from regional trade.'
+      tradeSem.isolated ? 'No trade route reaches the settlement.'
         : tradeSem.tier === 'major' ? `Settlement sits on a major trade route (${trade}).`
         : `Settlement has ${trade} trade access.`);
   }
@@ -839,7 +839,7 @@ function deriveEconomicCapacity(s) {
     special: (cond) => {
       if (cond.archetype !== 'war_spoils') return null;
       const magnitude = Math.round(cond.severity * 12);
-      if (magnitude !== 0) push(contributors, cond.id, 'spoils', +magnitude, `${cond.label} sustains the war economy (capped).`);
+      if (magnitude !== 0) push(contributors, cond.id, 'spoils', +magnitude, `${cond.label} keeps the war economy going.`);
       return magnitude;
     },
   });
@@ -886,7 +886,7 @@ function deriveLawOrder(s) {
     if (c !== 0) {
       score += c;
       push(contributors, 'powerStructure.publicLegitimacy', gov.legitimacyLabel || 'measured', c,
-        `Governing legitimacy ${gov.legitimacyScore} underwrites the rule of law.`);
+        `${c > 0 ? 'People accept the government' : 'People doubt the government'}${gov.legitimacyLabel ? ` (${gov.legitimacyLabel.toLowerCase()})` : ''}, so its laws are ${c > 0 ? 'kept' : 'kept loosely'}.`);
     }
   }
 
@@ -915,7 +915,7 @@ function deriveLawOrder(s) {
     if (c !== 0) {
       score += c;
       push(contributors, 'defenseProfile.scores.internal', 'public_order', c,
-        `Internal-security score ${led.internal} reflects how well order is kept.`);
+        `Order in the streets is ${c > 0 ? 'well' : 'poorly'} kept.`);
     }
   }
 
@@ -926,11 +926,11 @@ function deriveLawOrder(s) {
   const institutions = liveInstitutions(s);
   const lawCount = institutions.filter(i => institutionIsLawOrder(/** @type {{ catalogId?: string, name?: string }} */ (i))).length;
   if (lawCount >= 2) {
-    score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} law-and-order institutions uphold the courts and the watch.`);
+    score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} offices of the law keep order here.`);
   } else if (lawCount === 1) {
-    score += 5; push(contributors, 'institutions', 'limited', +5, 'A single law-and-order institution maintains the peace.');
+    score += 5; push(contributors, 'institutions', 'limited', +5, 'One office of the law keeps the peace here.');
   } else if (institutions.length > 0) {
-    score -= 6; push(contributors, 'institutions', 'absent', -6, 'No courts or watch. Order rests on informal mechanisms.');
+    score -= 6; push(contributors, 'institutions', 'absent', -6, 'There is no court and no watch; neighbours keep order among themselves.');
   }
 
   // Criminal / corruption signals erode the rule of law. Black-market capture is
@@ -942,7 +942,7 @@ function deriveLawOrder(s) {
     if (c !== 0) {
       score -= c;
       push(contributors, 'safetyProfile.blackMarketCapture', 'crime', -c,
-        `Black-market capture at ${safety.blackMarketCapture}% undermines lawful order.`);
+        'The black market has taken trade from lawful dealers, and the law is weaker for it.');
     }
   }
   const profiles = cachedFactionProfiles(s);
@@ -951,7 +951,7 @@ function deriveLawOrder(s) {
     const c = Math.round((criminal.power - 30) * 0.35);
     if (c !== 0) {
       score -= c;
-      push(contributors, criminal.id, 'criminal_power', -c, `${criminal.name} (power ${criminal.power}) rivals the law.`);
+      push(contributors, criminal.id, 'criminal_power', -c, `${criminal.name} is strong enough to rival the law.`);
     }
   }
 
@@ -988,8 +988,8 @@ function deriveLawOrder(s) {
     const deity = s.config?.primaryDeitySnapshot;
     push(contributors, deity?._deityRef || 'primaryDeity', lawDir > 0 ? 'lawful_patron' : 'chaotic_patron', lift,
       `${deity?.name || 'The patron deity'} (${deity?.lawAxis}) ${lawDir > 0
-        ? 'strengthens law & order'
-        : 'erodes order and tolerates corruption'}${amp !== 1 ? ` (piety ×${amp.toFixed(2)})` : ''}.`);
+        ? 'stands behind the law'
+        : 'turns a blind eye to crime and corruption'}.`);
   }
 
   // W-FAITH F4c — the `order` channel, and it deliberately SITS BESIDE the law-axis term
@@ -1032,7 +1032,7 @@ function deriveHealingCapacity(s) {
   } else if (healers >= 1) {
     score += 6; push(contributors, 'institutions', 'limited', +6, `${healers} healing-capable institution(s).`);
   } else if (heal.careServices.length > 0) {
-    score -= 2; push(contributors, 'availableServices.healing', 'services_only', -2, `${heal.careServices.length} healing service(s) offered, but no dedicated institution.`);
+    score -= 2; push(contributors, 'availableServices.healing', 'services_only', -2, `${heal.careServices.length} kinds of healing are on offer, but no house of healing stands here.`);
   } else {
     score -= 10; push(contributors, 'institutions', 'absent', -10, 'No dedicated healing institutions found.');
   }
@@ -1150,7 +1150,7 @@ function deriveReligiousAuthority(s) {
     push(contributors, religious.id, 'religious_power', c, `${religious.name} carries power ${religious.power}.`);
   } else {
     score -= 5;
-    push(contributors, 'powerStructure', 'no_religious', -5, 'No religious faction in the power structure.');
+    push(contributors, 'powerStructure', 'no_religious', -5, 'No priesthood holds any power here.');
   }
 
   // Active conditions move religious authority live — the religion-layer seam
@@ -1180,7 +1180,7 @@ function deriveReligiousAuthority(s) {
     const lift = Math.round(rankLift * localMult);
     score += lift;
     push(contributors, deity._deityRef || 'primaryDeity', 'deity_patronage', lift,
-      `${deity.name || 'The patron deity'} (${deity.rankAxis}) anchors religious authority${localMult !== 1 ? ` (piety ×${localMult.toFixed(2)})` : ''}.`);
+      `${deity.name || 'The patron deity'} (${deity.rankAxis}) gives the priesthood its standing.`);
   }
 
   return { score, contributors };
@@ -1242,7 +1242,7 @@ function deriveInfrastructureCondition(s) {
     const c = Math.round((infra - 50) * 0.6);
     score += c;
     push(contributors, 'defenseProfile.scores', 'measured', c,
-      `Fortification + logistics scores imply infrastructure ~${Math.round(infra)}.`);
+      `Judging by the defences and supply lines, the roads and buildings are ${c > 0 ? 'well kept' : c < 0 ? 'poorly kept' : 'in middling repair'}.`);
   } else {
     // No defense profile (un-generated / legacy) — infer from LIVE institution count
     // (ruined rows must not inflate inferred infrastructure; ruin-filter class).
@@ -1268,8 +1268,8 @@ function deriveMagicalStability(s) {
   // stability exactly as before, while high lifts and low limits it.
   const m = magicLedger(s);
   const band = m.present ? m.magicLevel : 'low';
-  if (band === 'high') { score += 10; push(contributors, 'config.priorityMagic', 'high', +10, `High magic investment supports arcane stability.`); }
-  else if (band === 'low') { score -= 5; push(contributors, 'config.priorityMagic', 'low', -5, `Low magic investment limits arcane resilience.`); }
+  if (band === 'high') { score += 10; push(contributors, 'config.priorityMagic', 'high', +10, 'Magic is practised widely here, and that keeps it steady.'); }
+  else if (band === 'low') { score -= 5; push(contributors, 'config.priorityMagic', 'low', -5, 'Little magic is practised here, so there is little to steady it when it goes wrong.'); }
 
   // Arcane factions present?
   const profiles = cachedFactionProfiles(s);
@@ -1320,7 +1320,7 @@ function deriveSocialTrust(s) {
   const dominantNpcs = deriveAllNpcProfiles(s).filter(p => p.rank === 'dominant');
   if (dominantNpcs.length === 0) {
     score -= 4;
-    push(contributors, 'npcs', 'no_dominant', -4, 'No dominant figures anchor public confidence.');
+    push(contributors, 'npcs', 'no_dominant', -4, 'No one here stands out as a leader people look to.');
   }
 
   return { score, contributors };
