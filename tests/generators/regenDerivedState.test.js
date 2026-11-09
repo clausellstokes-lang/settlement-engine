@@ -58,6 +58,17 @@ describe('FIX-SECTION-REGEN — an NPC section regen derives the hall-capture st
     }
   });
 
+  test('the conflicts\' two addresses are one list, as the full generation dual-writes them', { timeout: 240_000 }, () => {
+    // Cause 2 (measured at bd07005b9: 36/40 seeds held the regen's conflicts at the root and the BORN cast's on
+    // powerStructure.conflicts — the address aiLayer, dailyLifeLogic and the generate-narrative edge function read).
+    for (const { seed, born, parts, record, full } of planted()) {
+      expect([seed, full.powerStructure?.conflicts]).toEqual([seed, full.conflicts]);
+      expect([seed, record.powerStructure?.conflicts]).toEqual([seed, record.conflicts]);
+      expect([seed, record.conflicts]).toEqual([seed, parts.conflicts]);
+      expect(born.powerStructure?.conflicts).toEqual(born.conflicts);
+    }
+  });
+
   test('not vacuous: on every planted seed the regenerated cast earns a different hall than the born one', { timeout: 240_000 }, () => {
     for (const { seed, born, full } of planted()) {
       expect(`${seed} ${full.powerStructure?.criminalCaptureState}`).not.toBe(`${seed} ${born.powerStructure?.criminalCaptureState}`);

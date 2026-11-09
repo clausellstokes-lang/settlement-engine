@@ -605,8 +605,11 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       relationships: finalRelationships,
       conflicts,
       // the derived hall, returned so the record holds what a full generation of this cast holds (absent on a record
-      // with no power structure, so its parts keep the key set they always had)
-      ...(powerStructure ? { powerStructure } : {}),
+      // with no power structure, so its parts keep the key set they always had). FIX-SECTION-REGEN cause 2: the
+      // conflicts are DUAL-WRITTEN as assembly writes them (steps/assembleSettlement.js, GS-2's seam fix), so the
+      // record's `powerStructure.conflicts` — the address aiLayer, dailyLifeLogic and generate-narrative read — is the
+      // regenerated list, not the born cast's.
+      ...(powerStructure ? { powerStructure: { ...powerStructure, conflicts } } : {}),
       ...traceParts,
       _regenSeed: seed,
       // The preservation REPORT, out of band of the settlement parts. A keeper
