@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "6c18ceb24facd88d925b48903a1e713efc09f675",
-  "measuredBy": "MERGE-TRAIN (FIX-ARROW-PLAQUE merge point)",
+  "measuredAtSha": "d0d046029eda9292faa49eca15ae0e4190577a4f",
+  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR4 merge point)",
   "date": "2026-11-09",
-  "note": "fix-arrow-plaque: the arrow suites and the plate-centre pin",
-  "files": 3136,
-  "parked": 384,
-  "credited": 2752,
-  "titles": 28810,
-  "suiteTitles": 7748
+  "note": "car 4 composed: the goals, the title secrets, write-goals and write-people-3 suites",
+  "files": 3138,
+  "parked": 387,
+  "credited": 2751,
+  "titles": 28822,
+  "suiteTitles": 7752
 }
