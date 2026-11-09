@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 206,
+      "dated": 207,
       "sha-pin": 2,
       "tree": 164
     },
@@ -465,7 +465,8 @@
     "_rosterGrowth2026-11-09-style-2-power-side": "ONE document JOINED the roster by being BORN into it (STYLE-2 POWER-SIDE, seat SW-7, session session_01FbPLbd7aiAGgCz7CpasFhU, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-power-side-2026-11-09 cut from the merge train's tip 0f2e6c097, measured once with this walker's own arm): `dated` 180 -> 181, docs/chair/2026-11-09/STYLE-2-POWER-SIDE-2026-11-09.md, the seat's record, born dated; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-sw7": "THE UNION AT THE SW-7 POWER-SIDE MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 204 -> 205 (docs/chair/2026-11-09/STYLE-2-POWER-SIDE-2026-11-09.md, the lane's record, born dated); `tree` unchanged.",
     "_rosterGrowth2026-11-09-style-2-merge-record-16": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 163 -> 164, docs/shift-records/2026-11-09-style-2-merge-16-sw7.json, record 16, born into the tree class; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-record": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `dated` 205 -> 206, docs/INTEGRATION_STYLE_2_2026-11-09.md, the merge record with the RULE 14 hand-back, born dated; measured once by this walker; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-record": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `dated` 205 -> 206, docs/INTEGRATION_STYLE_2_2026-11-09.md, the merge record with the RULE 14 hand-back, born dated; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-urban-fix": "ONE document JOINED the roster by being BORN into it (URBAN-FIX, a writing lane of the STYLE-2 wave, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbepMRKdedJnbrrmGaf; on lane/urban-fix-2026-11-09 cut from fe55408b9): `dated` 206 -> 207, measured by this walker at the lane tip: docs/chair/2026-11-09/URBAN-FIX-2026-11-09.md, the lane's record (the four urban causes old -> new, the unsigned deltas per cause, the referee before and after, What stays), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382. At the merge it composes with URBAN-AUDIT's own growth note (its lane, 203 -> 204 at its base)."
   },
   "rows": []
 }
