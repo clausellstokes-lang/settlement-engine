@@ -515,14 +515,16 @@ function traditionBeat(a) {
   // institution is a place or a body the observance is held at, and answers for nothing.
   const byPower = named && rec.ownerKind === 'faction';
   const ownerBit = !named ? '' : byPower ? ` It is kept by ${named}, who answer for its fortune.` : ` It is held at ${named}.`;
+  const keeper = byPower ? `${named} keep it` : `it is held at ${named}`;
+  const answerer = byPower ? `${named}, who answer for it` : named;
   const outcomeId = `tradition.${outcome}.${sid}.${year}`;
   const { phrase, summary } = traditionBeatProse({ outcome, name: rec.name, town: townName, ownerBit, seed: outcomeId });
   const headline = outcome === TRADITION_OUTCOME.CANCELLED
     ? `${townName} sets aside ${rec.name}`
     : `${rec.name} ${phrase} in ${townName}`;
   const reason = outcome === TRADITION_OUTCOME.CANCELLED
-    ? `Set aside under hard stress or a lean season. No observance was held, at a mild cost to ${named ? `the town's standing, borne lightly since ${byPower ? `${named} keep it` : `it is held at ${named}`}` : "the seat's standing"}.`
-    : `The observance was held and its fortune weighed: it ${positive ? 'lifted' : 'weighed on'} the town's trade and the standing of ${named ? (byPower ? `${named}, who answer for it` : named) : 'the seat'}.`;
+    ? `Set aside under hard stress or a lean season. No observance was held, at a mild cost to ${named ? `the town's standing, borne lightly since ${keeper}` : "the seat's standing"}.`
+    : `The observance was held and its fortune weighed: it ${positive ? 'lifted' : 'weighed on'} the town's trade and the standing of ${named ? answerer : 'the seat'}.`;
   return {
     id: `wizard_news.${tick}.tradition.${sid}.${rec.id}.${year}`,
     tick,

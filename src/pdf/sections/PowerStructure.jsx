@@ -110,10 +110,8 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
           The screen's governance paragraph (domain/display/governanceAccount.js), printed where the
           standalone vignette printed: the seat, the standing and its causes, the estranged powers named,
           the consequence, and the vignette itself only where no estranged power is named. The
-          DS-POW-1/2 readings above glance at their registry rows, as on the screen. The proposed
-          kicker "WHO RUNS IT" was vetoed by the owner (2026-11-09 03:5x, "No."); the label is the
-          block's own, GOVERNANCE (the screen prints no heading over it; not "RECENT EVENT", which
-          the composed paragraph no longer is). SW-9. */}
+          DS-POW-1/2 readings above glance at their registry rows, as on the screen. Kicker GOVERNANCE:
+          "WHO RUNS IT" vetoed by the owner (2026-11-09 03:5x, "No."; SW-9), not "RECENT EVENT". */}
       {(() => {
         const text = governanceAccountOf(settlement)?.text || '';
         if (!text.trim()) return null;
