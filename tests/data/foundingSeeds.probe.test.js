@@ -127,12 +127,15 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect(legitOf(t).label).toBe('Contested');
     // Receipt 2: an uprising of the first rank within the last fifteen years.
     expect(eventsOf(t).some((e) => /uprising/i.test(e.name) && e.severity === 'major' && e.yearsAgo <= 15)).toBe(true);
-    // Receipt 3: a figure holding the line around criminal/informal arrangements.
-    // R11 unit 3 (73fa1a1e7) re-worded the three rows this receipt reads, same registry rows (npcStructure.js):
-    // '... the informal arrangements it depends on' -> 'Keep the seat running without crossing the people whose
-    // payments keep it running.'; '... the criminal arrangements ...' -> 'Keep trading without paying the gangs ...';
-    // '... the corrupt interests ...' -> '... the bribers or the inquiry.'
-    expect(goalsOf(t).some((g) => /people whose payments keep it running|without paying the gangs|the bribers or the inquiry/i.test(g))).toBe(true);
+    // Receipt 3: figures in the town answer in secret to its criminal houses (the hidden allegiance, car 1's field).
+    // RE-WORDED 2026-11-09 by the owner's word ("Yes", ~03:5x UTC, relayed by the chair) under the chair's ruling on
+    // ALLEGIANCE-CAR2's STOP (claims-parity: a receipt says what the seed holds): the old receipt read npcStructure's
+    // corruption-condition goals, which printed while the strengths-only classifier called the hall 'corrupted'; the
+    // state is DERIVED from the hall's agents now (A6), and mini-3's ruling three hold no allegiance (its hall reads
+    // 'equilibrium', the climate's). Scanned mini-0..2999: no seed holds Contested + a major uprising + an agent in the
+    // ruling three, so the seed is kept and the receipt says what it holds: cards that carry an allegiance.
+    expect((Array.isArray(t.npcs) ? t.npcs : []).filter((n) => n?.allegiance && typeof n.allegiance === 'object' && n.allegiance.house).length,
+      'figures (plural) in the town answer in secret to its criminal houses').toBeGreaterThanOrEqual(2);
   });
 });
 

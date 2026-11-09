@@ -136,7 +136,7 @@ export const FOUNDING_SEEDS = Object.freeze([
     receipts: Object.freeze([
       "Its legitimacy reads 'Contested'.",
       'An uprising of the first rank sits within the last fifteen years.',
-      'A ranking figure means to hold the line without confronting the criminal or informal arrangements the town rests on.',
+      'Figures in the town answer in secret to its criminal houses.',
     ]),
   }),
 ]);
