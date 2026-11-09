@@ -28,6 +28,8 @@ describe('Herald translation floor', () => {
 
   test('reason slots share Wizard News fiction-register phrases', () => {
     expect(reasonOf({ reasons: ['critical_impact_type'] })).toBe('a matter that cuts deep');
-    expect(reasonOf({ reasons: ['unmapped-reason'] })).toBe('unmapped reason');
+    // RE-KEYED BY CAUSE (STYLE-2-MERGE, found at point 14, bisected to SW-11's point 12): SW-11's A1·13 (a9bf31e9b) — a bare
+    // engine token with no reader phrase prints NO pill; the de-underscored slug is the engine's word, not the world's.
+    expect(reasonOf({ reasons: ['unmapped-reason'] })).toBeNull();
   });
 });

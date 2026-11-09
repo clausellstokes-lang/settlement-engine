@@ -87,7 +87,8 @@ describe('RealmDashboard — live summary (premium)', () => {
     // Realm-wide W/L is explicitly a contest record, not a war-duration or
     // casualty counter; its tooltip carries the definition.
     expect(screen.getByText('Realm contest record')).toBeTruthy();
-    expect(screen.getByText('2W / 1L').getAttribute('title')).toContain('not time at war or casualties');
+    // re-keyed by identity to SW-3 REALM-PROSE's REALM_CONTEST_RECORD_HELP (0991cc9e5), STYLE-2-MERGE (found at point 14)
+    expect(screen.getByText('2W / 1L').getAttribute('title')).toContain('not time at war or the dead');
     // The war-weariest power surfaces from warExhaustionStandings. This render
     // passes no nameById, so the name lookup misses — and the fallback must be
     // the in-fiction generic, never the raw id (C3 finding 12; this line used
