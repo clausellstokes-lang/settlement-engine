@@ -44,6 +44,7 @@ import { isMaterializedCustomContent } from '../content/customContentSemanticAut
 import { hasCascadeProvenance, hasOwnRequiredContract } from '../generationOwnership.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import { stablePart } from './worldState.js';
+import { pickLine } from './proseSelection.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
 import { normalizeSimulationRules, intensityMultiplier } from './simulationRules.js';
 import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './tierResourceDynamics.js';
@@ -409,7 +410,7 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
           addGap(entry, 'downstream',
             upstreamActive
               ? `Local production already feeds ${catalogChain.label.toLowerCase()} but nothing works it further.`
-              : `Local resources could support ${catalogChain.label.toLowerCase()} at this tier.`,
+              : `The land nearby could supply ${catalogChain.label.toLowerCase()} here.`,
             { chainId: catalogChain.id, needKey });
           break;
         }
@@ -770,12 +771,12 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
         // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
         headline: `${item.name || item.id} is raising a ${gap.name}`,
         appliedHeadline: `${item.name || item.id} raises a ${gap.name}`,
-        summary: `Good years have given ${item.name || item.id} the means to build what it lacked. ${gap.reason}`,
-        reasons: [
-          gap.reason,
-          `Economy stably healthy for ${drift.streak} tick(s) (minimum ${t.requiredStreak}).`,
-          probability >= 0.5 ? 'The building is now likelier than not.' : 'The building is possible, not yet likely.',
-        ],
+        // STYLE-2 C2 (SW-12 third seat, A2·173, ·175): the summary names the deed in four vantages
+        // and leaves the gap's reason to its pill (it printed twice); the streak in words without
+        // the minimum; the odds line struck. Seeded by identity, never the tick (a drift outcome).
+        // The pools sit inline because this file is at its 800-line ceiling with zero slack.
+        summary: pickLine([`Good years have given {name} the coin to build {inst}.`, `{name} has done well enough of late to afford {inst} of its own.`, `Builders are at work in {name}: the good years are paying for {inst}.`, `With times good, {name}'s rulers have found the money for {inst}.`], `${stablePart(item.id)}:${stablePart(gap.name)}`).replace(/\{(name|inst)\}/g, (_, k) => (k === 'name' ? String(item.name || item.id) : `${/^[aeiou]/i.test(gap.name) ? 'an' : 'a'} ${gap.name.toLowerCase()}`)),
+        reasons: [gap.reason, pickLine([`{name} has prospered for {n} running.`, `Times have been good in {name} for {n} in a row.`, `For {n} now, {name} has done well.`], `${stablePart(item.id)}:build`).replace(/\{(name|n)\}/g, (_, k) => (k === 'name' ? String(item.name || item.id) : `${drift.streak} ${drift.streak === 1 ? 'pulse' : 'pulses'}`))],
         institutionPatch: {
           saveId: item.id,
           action: 'build',
@@ -843,9 +844,8 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
         headline: `${closing} is closing its doors`, appliedHeadline: `${closing} closes its doors`,
         summary: 'Sustained economic decline is squeezing out the institutions the settlement leans on least.',
         reasons: [
-          `Economy stably distressed for ${drift.streak} tick(s) (minimum ${t.requiredStreak}).`,
+          pickLine([`{name} has struggled for {n} running.`, `Times have been hard in {name} for {n} in a row.`, `For {n} now, {name} has done badly.`], `${stablePart(item.id)}:close`).replace(/\{(name|n)\}/g, (_, k) => (k === 'name' ? String(item.name || item.id) : `${drift.streak} ${drift.streak === 1 ? 'pulse' : 'pulses'}`)),
           target.impairment > target.contribution ? 'It costs the settlement more than it returns.' : 'It still returns something, but not enough to be missed.',
-          probability >= 0.5 ? 'The doors are likelier than not to close.' : 'Closure is possible, not yet likely.',
         ],
         institutionPatch: {
           saveId: item.id,
