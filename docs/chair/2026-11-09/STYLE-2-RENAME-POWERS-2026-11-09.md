@@ -41,6 +41,8 @@ Each delta was measured against its parent. For gm and the fence, each corpus is
 | `0da9265f9` + `60442334a` | C7 help, compendium, site (+ the wiring census re-stamped at `0da9265f9` through its door) | 0 | 0 | — | census customReachableRows 28 → 36 |
 | `e63c6aae6` | C8 annexes (28 lines) | 0 | 0 | **1,038 WORDING-ONLY in 519 towns** | — |
 
+> **CORRECTION, DATED 2026-11-09 (the second seat, under the chair's ruling (B) of 17:2x; the row above left as written):** the C7 row's "census customReachableRows 28 → 36" was not the census's honest reading of the renamed manifest. It was **eight false reaches**. `wiringCensus.js :: customReachable` read the display singular as a bucket token, so C7's "Faction" → "Power" made the power desk's own `power.*` root count as custom-content reach (DS-POW-2 ×2, DS-POW-6 ×6). The instrument was cured by stored identity at `8aa770d93` and re-stamped at `d66a0be24`. The count is back to 28, equal to the base's rows by identity (§13).
+
 **The gm-stride pins** red with the golden master from C1 on: generationForkCensus A1, nameHeldThroughAssembly, pipelinePinnedChoosers, pipelinePinnedMode ×3, powerEconomyFreshness A4, rosterFinalUnderHeldRoster, dmLayerGoldenIsolation A7, worldFactRederive A7. **The base's own reds** (identical at `bd07005b9`, not this lane's): 11 in the generator/property suites, including the densityLaw arms, regenNpcEnrichment, editCorpusRatchet, x46NpcBand and institutionBudgetPromise.
 
 ## §3 The statecraft band, re-keyed (the chair's ruling 13:4x)
@@ -148,6 +150,11 @@ Seat SW-8 RENAME-POWERS, second seat (session `session_01FbPLbfriarzNt6WB5KmjMR`
 | C9-8 | `503fc64dd` | the safety profile | 0 | **19** (3/3/3/2/2/6) | 0 | — |
 | C9-9 | `a74b9d45d` | the founding seeds | 0 | 0 | 0 | — |
 | C10 | `65a21239f` | the "why" panels: the 11 traced strings a reader prints | **525** (all) | **360** (all) | 0 | **FENCE 4 `f80ebc32` → `89a770ab`** (below) |
+| R7 | `2017aa4b6` | the lighting census refrozen through its ritual for C1's one new test title | 0 | 0 | 0 | titles 28,822 → 28,823 |
+| C11 | `8aa770d93` | the census cure, the chair's ruling (B): bucket tokens keyed to the stored `root`, never the display singular | 0 | 0 | 0 | probe arm red-first; runtime manifest artifacts byte-identical |
+| C11r | `d66a0be24` | the wiring census re-stamped through its door | 0 | 0 | 0 | customReachableRows 36 → 28, equal to the base's 28 by row identity |
+| C10b | `3f67a2f8c` | causalState's faction_power condition tail, the chair's ruling (18:4x) | 0 | 0 | 0 | FENCE 4 unmoved (`89a770ab`) |
+| R8 | `f699a8f7c` | the lighting census refrozen for the probe arm's one new title | 0 | 0 | 0 | titles 28,823 → 28,824 (C10b's pin moved no counted title) |
 
 Fence tiers read thorp/hamlet/village/town/city/metropolis. Herald and witness: their failure output is byte-identical at `efe5d087c` and at `65a21239f`, so C9 and C10 moved neither (CONFIRMED). The PDF's `goldenViewModel` is green at the tip.
 
@@ -170,6 +177,8 @@ The commit bodies carry every line in full. The hand wordings are Appendix X's; 
 - **C9-8** safetyProfile: "which power controls a district"; "another criminal faction" → "another gang" (X); "Both the governing power and the insurgency"; "Both factions pay" → "Both sides pay" (X).
 - **C9-9** foundingSeeds: "sits among its factions" → "sits among its powers" ×2; "between the governing faction and the insurgency" → "… the governing power …".
 - **C10** causalState: "No factions to evaluate." → "No powers to weigh." (X). rulingPowerCoup: "No faction holds enough power to move against the seat." → "No power is strong enough to move against the seat." (X). deriveSystemState: "N active factions competing" → "N powers competing"; "Few factions: concentrated power" → "Few powers: rule is concentrated"; "N active faction conflict(s)" → "N quarrel(s) between powers" (X). factionCorrelationPass: "A dominant faction" → "A dominant power". generatePower and economyReconciliation: "As the governing faction, …" → "As the governing power, …". neighbourFactions: "… a mirror {type} faction here." / "… an opposition {type} faction." → "… power …".
+
+- **C10b, a row ADDED to the owner's map under the chair's ruling (18:4x).** causalState :740, the faction_power condition tail: `${cond.label} destabilizes the faction system.` → `${cond.label} unsettles the balance between the powers.` (the seat's proposed words, granted; the plain swap "the power system" was refused as machinery). It sits in the owner's veto list with the others.
 
 No line was struck under the census law. Every rewording states the same facts or fewer ("whoever is leaking" names no group).
 
@@ -203,21 +212,21 @@ factionCompetition :848 was done in C5.
 
 ## §13 The open reds and the STOPs, by file
 
-- `tests/lint/proseWiringCensus.walker.test.js` "custom-content reachability" (28 → 36; factions 2 → 10). **STOP sent; default taken (left red, named).** CONFIRMED cause: C7 renamed the custom-content manifest's display singular "Faction" → "Power". `wiringCensus.js :: customReachable` uses that singular as a bucket token, so "power" now matches the power desk's own root. The 8 new rows are DS-POW-2 ×2 and DS-POW-6 ×6, reading `power.stability`, `power.recentConflict` and `power.criminalCaptureState`; they are false reaches. Probe: the same census rows with the singular set back to "Faction" give factions 2. Options put to the chair: (A) re-key to 36 and name the 8 as false hits; (B, recommended) key the bucket token to the category's stored identity, as its own cause, and re-stamp the census back to 28.
-- `src/domain/causalState.js` :740 `${cond.label} destabilizes the faction system.` (a printed contributor reason, in neither the map nor X). **STOP sent; default taken (left as is).** Proposed wording: "${cond.label} unsettles the balance between the powers."
+- `tests/lint/proseWiringCensus.walker.test.js` "custom-content reachability" (28 → 36; factions 2 → 10). **RULED (B) by the chair at 17:2x and CURED: C11 `8aa770d93` + C11r `d66a0be24`.** The bucket tokens are the category key and a STORED `root` added to each category of `schema/custom-content.manifest.json`, never the display singular. Key-only tokens would have lost the base's two institutions rows, which were reached through "institution". The generator requires `root` and strips it from every runtime artifact (`validate:custom-content-manifest` exit 0; a deleted root is refused). The probe arm was red-first. The re-stamped census's 28 rows equal `bd07005b9`'s 28 field for field and in order; the walker's pin is untouched. The STOP as first sent: CONFIRMED cause: C7 renamed the custom-content manifest's display singular "Faction" → "Power". `wiringCensus.js :: customReachable` uses that singular as a bucket token, so "power" now matches the power desk's own root. The 8 new rows are DS-POW-2 ×2 and DS-POW-6 ×6, reading `power.stability`, `power.recentConflict` and `power.criminalCaptureState`; they are false reaches. Probe: the same census rows with the singular set back to "Faction" give factions 2. Options put to the chair: (A) re-key to 36 and name the 8 as false hits; (B, recommended) key the bucket token to the category's stored identity, as its own cause, and re-stamp the census back to 28.
+- `src/domain/causalState.js` :740 `${cond.label} destabilizes the faction system.` (a printed contributor reason, in neither the map nor X). **GRANTED by the chair at 18:4x with the proposed words and APPLIED: C10b `3f67a2f8c`**, with a red-first pin in causalStateConditionScan.
 - `tests/property/dossierProseManifest.test.js` DRIFT ARM: C8's 1,038 cells, left UNSIGNED as told. C9 and C10 move no prose cell.
 - The unsigned goldens red at the tip: generatorGoldenMaster, espionageDormancyFence, faithFieldDormancyFence FENCE 4 (C10), the herald desk (C1) and the witness (C2). The gm-stride pins are red with them, as listed in the first seat's §2 (worldFactRederive A7, pipelinePinnedChoosers A1, powerEconomyFreshness A4, rosterFinalUnderHeldRoster A1, editWorldFactResources A2/A6, generationForkCensus A1, …).
-- The base's own reds, each run at `bd07005b9` and red there: religionLegitimacyFactionKey "rulerLens reads the weak elected seat"; worldPulseFactionSeating ×2; layerBoundaries "dependency-cycle set"; densityLaw ×4; editCorpusRatchet ×4; institutionBudgetPromise.
+- **Inherited base reds**, each run at `bd07005b9` and red there: religionLegitimacyFactionKey "rulerLens reads the weak elected seat"; worldPulseFactionSeating ×2; layerBoundaries "dependency-cycle set"; densityLaw ×4; editCorpusRatchet ×4; institutionBudgetPromise. These are among the 28 base reds the train record lists as "the base's own, unchanged and line for line" at `2053a809c` (`docs/INTEGRATION_MERGE_TRAIN_2026-11-09.md` on the integration line, the list under the final run's table; the chair's attribution, 18:3x and 18:4x). They are not findings.
 - `tests/lint/sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION": red at `00c9eaba5` and missing from the first seat's §6. Bisected: green at `bd07005b9`, red from C1 `a1b63f95e` on. C1's red-first arm added one live test title (28,822 → 28,823). **Cured** through the LIGHTING_CENSUS_REFREEZE ritual (R7 `2017aa4b6`).
 
 ## §14 The gates, at the tip
 
-- **The style walker** (SW-0's `scripts/lib/style-law-scan.mjs` from `lane/style-2-walker-2026-11-09`, run over this tree): **223 in 71 files → 131 in 54 files.** C9 accounts for 89 of the drop. C10's strings mostly sit outside the walker's roots, as do foundingSeeds and deriveSystemState. The remainder is by file under §15.
+- **The style walker** (SW-0's `scripts/lib/style-law-scan.mjs` from `lane/style-2-walker-2026-11-09`, run over this tree): **223 in 71 files → 130 in 54 files** (131 after C10; C10b one less). C9 accounts for 89 of the drop. C10's strings mostly sit outside the walker's roots, as do foundingSeeds and deriveSystemState. The remainder is by file under §15.
 - **The 1,000** (`soak-review --count 1000 --workers 4`, at `bd07005b9` and at `65a21239f`): both exit 0, 1,000 settlements, 657 findings, 0 errors; the finding classes are identical. The twenty most-repeated frames are identical in skeleton and town count; the top forty have nothing new and nothing gone. `coh:tier-noun` is 0 at both. Hooks repetition 0.299 / 0.355 → 0.301 / 0.357 (all / same tier), PLAUSIBLY the reworded conflict and stress hook lines.
 - **The twelve** (`--count 12`): exit 0, 12 settlements, 6 findings, 0 errors.
-- **tsc --noEmit**: 167 errors at `bd07005b9`, 167 at `65a21239f`, text-equal modulo positions.
+- **The typecheck ratchet** (`npm run typecheck:ratchet`, per file against tsconfig.full.json; the chair's gate, 17:4x): OK at `3f67a2f8c`, "no type regressions (167 error(s), ceiling 167)". A raw `tsc --noEmit` also reads 167 at `bd07005b9` and 167 at `65a21239f`, text-equal modulo positions.
 - **eslint**: clean on every cause's files.
-- **tests/lint whole** at `efe5d087c` and at `65a21239f`: the same 2 of 3,061 red. One is proseWiringCensus (the open STOP); the other is sovereigntyLightingContract, now cured by R7.
+- **tests/lint whole** at `efe5d087c` and at `65a21239f`: the same 2 of 3,061 red, proseWiringCensus and sovereigntyLightingContract. Both are now cured (C11/C11r and R7). The re-run at the final tip is in §18.
 - **The three record walkers**: green before every push.
 
 ## §15 What stays, BY FILE, at the hand-back
@@ -248,7 +257,7 @@ factionCompetition :848 was done in C5.
 
 **The C10 dead rows** (§12; no reader; for the post-deploy dead-code census): capacityModel ×6, contradictions ×2, customContent :367, galleryVeil :483, explanation ×2, factionRelationshipUpdate ×7, magicProfile ×2, npcProfile ×2, threatProfile :167, resolveStress :93.
 
-**STOPs on their defaults:** the proseWiringCensus custom reachability (§13), and causalState :740 "destabilizes the faction system." (§13).
+**STOPs:** none open. Both were ruled and applied (C11/C11r; C10b).
 
 **For STYLE-2-MERGE's signing:**
 - the gm, fence, prose and FENCE 4 deltas per cause (§9 and the first seat's §2);
@@ -281,6 +290,14 @@ factionCompetition :848 was done in C5.
 
 ## §17 Process notes (the second seat, honest)
 
+- I read the chair's rulings late. Six messages (17:2x–18:4x) sat unread in the notification queue while I worked and handed back, so I twice reported the census STOP as "on its default" after it had been ruled. Both rulings were applied before the re-hand-back (C11/C11r, C10b), and so was the chair's typecheck-ratchet correction.
 - I misreported the reader-trace split to the chair ("17 print, 24 none") and corrected it in the next message: 11 print, 24 none.
 - A comment edit in rumorFallbackPhrasePoolsEvents.js was made and reverted before R1. It could have moved a bundle input hash for no reader gain.
 - The lighting refreeze ran in a clean worktree at the tip's own commit, because the main tree held this record uncommitted. Its bytes were carried over unchanged.
+
+## §18 The re-hand-back (after the chair's rulings)
+
+- **tests/lint whole at `3f67a2f8c`:** 1 of 3,062 red, the lighting census's title count, from the census probe arm's new title. It was cured by R8 `f699a8f7c` through the ritual (34/34 after). proseWiringCensus is green: 28 rows by identity, the pin untouched.
+- **The typecheck ratchet at `3f67a2f8c`:** OK, 167 against the ceiling of 167.
+- **C10b, measured** (clean worktree at its parent `d66a0be24`): gm 0/525 · fence 0/360 · prose 0/1,050.
+- **C11, C11r, R7 and R8: 0 by construction, not measured.** They change instruments, registers and tests. The manifest's runtime artifacts are byte-identical (`validate:custom-content-manifest`), so no generator input moved.
