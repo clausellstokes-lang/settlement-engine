@@ -30,7 +30,7 @@ import { governingFactionOf } from '../../domain/rulingPower.js';
 import { WhoRunsThisTown } from './WhoRunsThisTown.jsx';
 import { governanceAccountOf } from '../../domain/display/governanceAccount.js';
 
-export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
+export function PowerStructure({ settlement, narrativeMode, vm, stateProse, primaryStress = null }) {
   const p = vm.power;
   const index = vm.entityIndex; // Phase-D id»card resolver
   const governing = p.factions.find(f => f.isGoverning);
@@ -113,7 +113,7 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
           DS-POW-1/2 readings above glance at their registry rows, as on the screen. The kicker is
           proposed for the owner's veto. */}
       {(() => {
-        const text = governanceAccountOf(settlement)?.text || '';
+        const text = governanceAccountOf(settlement, { primaryStress })?.text || '';
         if (!text.trim()) return null;
         return (
           <Callout tone="warn" kicker="WHO RUNS IT">

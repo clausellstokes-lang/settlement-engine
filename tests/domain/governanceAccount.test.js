@@ -7,9 +7,13 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  governanceAccountOf, estrangedPowersOf, legitimacyCausesOf, powerNameInProse, pluralPowerName, arrangementOf,
+  governanceAccountOf as accountOf, governanceStressTypesOf, estrangedPowersOf, legitimacyCausesOf, powerNameInProse, pluralPowerName, arrangementOf,
 } from '../../src/domain/display/governanceAccount.js';
 import { buildGovernanceLabels } from '../../src/generators/power/governanceNarrative.js';
+import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
+
+/** The surfaces' call (PowerTab, PowerStructure): the primary stress ranked by the caller, MERGE-TRAIN's boundary cure. @param {unknown} s */
+const governanceAccountOf = (s) => accountOf(s, { primaryStress: resolvePrimaryStress(governanceStressTypesOf(s)) });
 import { applyStressEventFactions } from '../../src/generators/power/stressFactions.js';
 
 const COUNCIL = 'Corrupt Council';

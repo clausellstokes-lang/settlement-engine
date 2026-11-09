@@ -9,7 +9,11 @@
 import { describe, it, expect, afterEach, beforeAll } from 'vitest';
 import { render, cleanup, within } from '@testing-library/react';
 import PowerTab from '../../src/components/new/tabs/PowerTab.jsx';
-import { governanceAccountOf } from '../../src/domain/display/governanceAccount.js';
+import { governanceAccountOf as accountOf, governanceStressTypesOf } from '../../src/domain/display/governanceAccount.js';
+import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
+
+/** The tab's own call: the primary stress ranked by the caller (MERGE-TRAIN's boundary cure). @param {unknown} s */
+const governanceAccountOf = (s) => accountOf(s, { primaryStress: resolvePrimaryStress(governanceStressTypesOf(s)) });
 import { powerStateProse } from '../../src/domain/display/stateProse/powerStateProse.js';
 
 afterEach(cleanup);

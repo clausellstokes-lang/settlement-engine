@@ -109,6 +109,10 @@ export function SettlementPDF({
   // caller — the campaign book, the foundry module, every hand-built test document —
   // byte-identical, because each chapter renders nothing for an absent map.
   stateProse = null,
+  // The governance paragraph's primary stress, ranked by the CALLER (generators/stressPriority.js), as stateProse is:
+  // src/pdf may not reach src/generators (the print boundary) and the domain may not either (MERGE-TRAIN, 2026-11-09).
+  // Null: the paragraph takes the record's first stress.
+  primaryStress = null,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -192,7 +196,7 @@ export function SettlementPDF({
       {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('resourcesProduction') && <ResourcesProduction  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} primaryStress={primaryStress} />}
       {inc('defenseSecurity')     && <DefenseSecurity      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('viabilityAssessment') && <ViabilityAssessment  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}

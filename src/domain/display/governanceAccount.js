@@ -25,7 +25,6 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
-import { resolvePrimaryStress } from '../../generators/stressPriority.js';
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
@@ -233,11 +232,28 @@ function fractureBlocsOf(s, already) {
 }
 
 /**
+ * The record's active stress types, in the record's order — what the caller ranks for `opts.primaryStress`.
+ * @param {unknown} settlement @returns {string[]}
+ */
+export function governanceStressTypesOf(settlement) {
+  const s = settlement && typeof settlement === 'object' ? /** @type {GovernedRecord} */ (settlement) : null;
+  if (!s) return [];
+  return (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
+    .map((x) => text(x && typeof x === 'object' ? x.type : x)).filter(Boolean);
+}
+
+/**
  * THE PARAGRAPH, or null where the record names no governing power.
+ *
+ * The primary stress is the CALLER's reading (the generalStateProse idiom: domain code takes it in rather than
+ * importing the generators' ranking — the domain → generators boundary stays at its frozen five). The two surfaces
+ * pass `resolvePrimaryStress(governanceStressTypesOf(settlement))` (generators/stressPriority.js); with none passed,
+ * the record's first stress stands in.
  * @param {unknown} settlement
+ * @param {{ primaryStress?: string | null }} [opts]
  * @returns {{ text: string, estranged: Array<{ name: string, tie: string }>, fallback: boolean } | null}
  */
-export function governanceAccountOf(settlement) {
+export function governanceAccountOf(settlement, opts = {}) {
   const s = settlement && typeof settlement === 'object' ? /** @type {GovernedRecord} */ (settlement) : null;
   if (!s) return null;
   const chain = rulingChainOf(/** @type {import('../dossier/powerStrata.js').RulingChainSettlement} */ (/** @type {unknown} */ (s)));
@@ -335,8 +351,7 @@ export function governanceAccountOf(settlement) {
   // 4b. A FRACTURE'S BLOCS, NAMED (condition (c)): where the town is politically fractured and the
   // record holds the blocs the stress added, they are named, and the fractured line's own consequence
   // follows them; the unnamed fractured line is then not printed.
-  const stressTypes = (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
-    .map((x) => text(x && typeof x === 'object' ? x.type : x)).filter(Boolean);
+  const stressTypes = governanceStressTypesOf(s);
   const blocs = stressTypes.includes('politically_fractured')
     ? fractureBlocsOf(s, new Set(estranged.map((e) => e.name)))
     : { lines: [], withdrawn: false, names: [] };
@@ -353,7 +368,7 @@ export function governanceAccountOf(settlement) {
   // ("two … have stopped coming to meetings") and the unstressed baseline line are the ones the names
   // replace: they print only as the fallback, where no estranged power is named.
   const vignette = text(s.powerStructure?.recentConflict);
-  const primary = resolvePrimaryStress(stressTypes);
+  const primary = typeof opts?.primaryStress === 'string' ? opts.primaryStress : (stressTypes[0] ?? null);
   const eventVignette = !!primary && primary !== 'politically_fractured';
   const fallback = estranged.length === 0 && blocs.names.length === 0 && !!vignette;
   if (vignette && (eventVignette || fallback)) sentences.push(vignette);

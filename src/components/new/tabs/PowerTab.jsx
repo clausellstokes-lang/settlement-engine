@@ -18,7 +18,8 @@ import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/poli
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
-import { governanceAccountOf } from '../../../domain/display/governanceAccount.js';
+import { governanceAccountOf, governanceStressTypesOf } from '../../../domain/display/governanceAccount.js';
+import { resolvePrimaryStress } from '../../../generators/stressPriority.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). The four positions below mapped
 // their drawn sentences to one `<p>` EACH; ProseBlock weaves each position into one
 // paragraph. The DRAW is unchanged — these are the same strings `drawnAtMount` ruled on.
@@ -267,7 +268,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
-  const governanceAccount = publicDossier ? null : governanceAccountOf(s);
+  const governanceAccount = publicDossier ? null : governanceAccountOf(s, { primaryStress: resolvePrimaryStress(governanceStressTypesOf(s)) });
   const drawnReading  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.legitimacyReading);
   const drawnCapture  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.captureReading);
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
