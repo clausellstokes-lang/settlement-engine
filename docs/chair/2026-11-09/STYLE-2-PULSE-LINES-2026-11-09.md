@@ -415,3 +415,14 @@ Pins: `worldPulseTranslation.test.jsx` (one new test over all three helpers) and
 | D·63 dm_only option | `The world computes consequences; every new move awaits your word.` | "The world works out what follows; every new move awaits your word." |
 
 Pins: `simulationRulesDialog.test.jsx` — a new describe rendering `DomainRows` (the three reasons read from the chips' titles) and reading the `dm_only` option from `AXES`; **red at the parent** (2 of 8), green here. Registers: none moved. **A twin outside the manifest, not touched:** `src/components/settlements/LivingWorldGates.jsx:76` carries its own `DRIFT_REASON` ("Needs Relationship drift: war is a relationship dynamic, so a frozen web cannot raise fronts.") — not a ledger D file; listed in §9-what-stays for the chair to slot.
+
+### 9e. `HeraldCommandBody.jsx` (D·38–41)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·38 briefing "Why here" fallback | `No promotion reason was recorded.` | "No reason was given for raising it." (the "Why here" label stays as the skeleton) |
+| D·39 quiet briefing | `The realm asks nothing of you just now. No recorded condition has been promoted above the routine record.` | "The realm asks nothing of you just now. Nothing needs your attention ahead of the ordinary news." |
+| D·40 story fallbacks | `Deeper provenance is unavailable for this recorded source.` · `{label}. The original route is no longer available.` | "The causes behind this story were not kept." · "{label} can no longer be opened from here." |
+| D·41 story pills | `item.temporal.phase` · `item.resolution.state` printed raw | the two closed token sets of `realmItemReadModel.js` (`TemporalPhase`, `ResolutionState`) in words: historical → "past", current → "now", emerging → "rising", planned → "planned"; unresolved → "open", resolved → "settled", dismissed → "set aside", superseded → "overtaken"; an unknown token falls back to `humanizeToken` (the audit's bare `humanizeToken` leaves all eight unchanged — measured — so it would not have cured the row) |
+
+Pins: `heraldCommandBrief.test.jsx` — the quiet briefing (D·39), the lost subject (D·40), a new bare-cause story (D·40), the pills "past" / "settled" with a negative on the raw tokens (D·41); **red at the parent** (4 of 13), green here. D·38's fallback has no fixture (every briefing item carries a reason): PLAUSIBLE. **Not this file's, listed:** the domain writes its own missing-cause reason, `realmItemReadModel.js:375` "No recorded cause receipt is available for this source.", which prints ahead of D·40's fallback on most stories — the same machinery words, outside the manifest.
