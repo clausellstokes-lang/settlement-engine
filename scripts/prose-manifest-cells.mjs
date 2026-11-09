@@ -201,7 +201,12 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '2026-11-08-merge-wave-9-composed-prose-manifest.json, ODQ §934.105): re-recorded ONCE at the stage of the final'
     + ' tip 0c93f0ca0 because the wave’s ten lanes (W1, W2, W3, W4, W5 with W1-A0b, W7, FIX-FOOD-ISOLATION, EXPORT-KEYS,'
     + ' FIX-PUBLIC-VEIL, GREEN-BASE, FIX-ARROW-SECTIONS) moved the composed prose, each point’s cells named in the record;'
-    + ' against record B’s post-state 1050 of the 1,050 rows move, 0 added, 0 removed.',
+    + ' against record B’s post-state 1050 of the 1,050 rows move, 0 added, 0 removed.'
+    + ' 2026-11-09 (THE COMPOSED-PROSE MANIFEST AT THE ALLEGIANCE TRAIN’S FINAL TIP, RECORD 10 OF THE TRAIN, docs/shift-records/'
+    + '2026-11-09-merge-train-10-composed-prose-manifest.json, ODQ §934.105): re-recorded ONCE at the stage of the final'
+    + ' tip 09c4435e0 because the train’s nine merge points (ALLEGIANCE-CAR1, CAR2, CAR3, WRITE-TITLES-14, OWNER-WORDS-'
+    + 'DOSSIER, FIX-HOOK-OBJECT, FIX-BUY-BUTTON, FIX-ARROW-PLAQUE, CAR4) moved the composed prose, each point’s cells named in'
+    + ' the record; against the wave’s record 9 post-state 181 of the 1,050 rows move, 0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
