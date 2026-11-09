@@ -31,6 +31,7 @@ import { stressorsDeskRead } from './stressorsDeskRead.js';
 import { defenseDeskRead, DEFENSE_LENSES } from './defenseDeskRead.js';
 import { faithDeskReadings, warFaithDeskRungs } from './tabs/WarFaithDesk.jsx';
 import { magicDeskRead } from './magicDeskRead.js';
+import { isolationDeskRead } from './viabilityDeskRead.js';
 import { POWER_BLOC_RUNGS, governanceAccountRead, powerDeskRead, powerDeskReadings, powerLadderRead, powerLadderRowsOf } from './powerDeskRead.js';
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
@@ -100,6 +101,8 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   })],
   // THE MAGIC TAB's DS-DEF-9 lens (magicDeskRead.js); nothing ships where magic does not function.
   ['magic', (s, publicDossier) => magicDeskRead(s, { publicDossier, playerView: true })],
+  // THE VIABILITY TAB's DS-DEF-12 isolation lens (viabilityDeskRead.js).
+  ['viability', (s, publicDossier) => isolationDeskRead(s, { publicDossier, playerView: true })],
 ].map((entry) => Object.freeze(entry)));
 
 /**

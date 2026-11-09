@@ -2110,9 +2110,11 @@ describe('the defense desk\'s paid-surface gate — every caller, found by impor
       // the public prose composer; each read is still gated in its own statement.
       // RE-KEYED BY CAUSE again (the magic family): MagicTab's DS-DEF-9 read moved into
       // `components/new/magicDeskRead.js`, shared with the composer; still gated in its statement.
+      // And the viability family: ViabilityTab's DS-DEF-12 read moved into
+      // `components/new/viabilityDeskRead.js`, shared with the composer; still gated.
       .toEqual([
         'components/new/defenseDeskRead.js', 'components/new/magicDeskRead.js',
-        'components/new/tabs/ViabilityTab.jsx',
+        'components/new/viabilityDeskRead.js',
       ]);
     for (const path of importers) {
       const code = codeOnly(readFileSync(path, 'utf8'));

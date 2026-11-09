@@ -18,10 +18,9 @@ import {NarrativeNote} from '../NarrativeNote';
 // §885.3 paid-surface gate — corpus prose never draws for a free gallery viewer.
 import { generalDeskLines } from '../generalDeskRead.js';
 // DS-DEF-12 (W2 DEF, 2026-11-07): the isolation-support finding, a defense-leaf block that speaks
-// here, gated on the paid surface exactly as the Magic tab gates DS-DEF-9.
-import { defenseIsolationSupportProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+// here, read through its gated reader (shared with the public prose composer, SW-B7b).
+import { isolationDeskRead } from '../viabilityDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18): the verdict's three lenses are one
 // paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
 import ProseBlock from '../ProseBlock.jsx';
@@ -73,13 +72,9 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   const metrics = v.metrics || {};
   // DS-DEF-12: whether a place with no dependable road, river or port can keep itself supplied.
   // Silent on a connected town and on a free viewer's dossier (§885.3).
-  const isolationProse = publicDossier
-    ? Object.freeze({ isolationSupply: null })
-    : defenseIsolationSupportProse(s, {
-      seed: String(s?._seed ?? s?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-      tierNoun: tierNounFor(s.tier),
-    });
+  // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the owner's
+  // player view drew, shipped at the save (`viability`); unstamped, SILENT (viabilityDeskRead.js).
+  const isolationProse = isolationDeskRead(s, { publicDossier, playerView });
   const isolationLine = drawnAtMount(ISOLATION_SUPPORT_MOUNT, isolationProse.isolationSupply)?.sentence || null;
   // DS-DEF-9 and the frozen magicDependency record moved to the Magic tab as the Roles
   // section's framing (UX consolidation 2026-10-30, RULINGS-T2 T2-15); see MagicTab.jsx.

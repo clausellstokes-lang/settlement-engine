@@ -39,6 +39,7 @@ import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
 import { magicDeskRead } from '../../src/components/new/magicDeskRead.js';
+import { isolationDeskRead } from '../../src/components/new/viabilityDeskRead.js';
 import { faithDeskReadings, warFaithDeskRungs } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { powerDeskRead, powerDeskReadings, governanceAccountRead } from '../../src/components/new/powerDeskRead.js';
 
@@ -184,6 +185,7 @@ const DRAWN = {
     draw: (o) => warFaithDeskRungs({ settlement: o, publicDossier: false, playerView: true, readings: faithDeskReadings(o) }),
   },
   magic: { tab: 'magic', draw: (o) => magicDeskRead(o, { playerView: true }) },
+  viability: { tab: 'viability', draw: (o) => isolationDeskRead(o, { playerView: true }) },
 };
 
 /** Every sentence-length string in a drawn desk, at any depth (provenance skipped). */
