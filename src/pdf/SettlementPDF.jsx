@@ -115,7 +115,7 @@ export function SettlementPDF({
     settlement, aiSettlement, aiDailyLife, narrativeMode,
     systemState, eventLog, phase, campaign,
     // the DM's own dossier carries the DM view (Power Structure's last block; design §9)
-    dmLayer: true,
+    dmView: true,
   });
   const useAi = vm.narrativeMode;
   const variantSpec = PDF_VARIANTS[variant] || PDF_VARIANTS.canon_dossier;

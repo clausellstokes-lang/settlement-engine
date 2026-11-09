@@ -18,7 +18,7 @@ Seat: ALLEGIANCE-CAR3 (session `session_01FbPLbfazXvhVK4gcHY4yCa`), a child of t
 | `6ce72a3ce` | the tuning inventory refrozen |
 | `7013bbb2f` | write-people merged |
 | `6bce9b415` | the DM panel: `patronage.js :: dmPowerViewOf`, `WhoRunsThisTownPanel.jsx`, the `PowerTab.jsx` mount; the W7 test and I-10's car-3 arm, red-first |
-| `60a9fa111` | the PDF's DM section (`WhoRunsThisTown.jsx`), `viewModel.js`'s opt-in `dmLayer` |
+| `60a9fa111` | the PDF's DM section (`WhoRunsThisTown.jsx`), `viewModel.js`'s opt-in `dmView` |
 | `a63effa93` | **the bought watch** on the local axis (late row 1); corruption.js leaves the dormant list |
 | `b0080394c` | the wiring census re-taken through its door |
 | `ea94d85c1` | the edge-shared bundles rebuilt after `e9070d614` |
@@ -60,7 +60,7 @@ The bands on the soak 1,000 at the tip (`scratchpad walk.mjs`, `patronageOf` its
 | I-6 / I-7 | `tests/domain/people/patronage.test.js` | the module storing its uncapped effective (`f.power = base + raw`): 3 of 6 red | 6 / 6 |
 | W7 surface | `tests/components/whoRunsThisTownPanel.test.jsx` | the mount's DM gate removed: 1 of 3 red | 3 / 3 |
 | I-10 (car 3) | `tests/security/allegianceVeil.pglite.test.js` | `dmPowerViewOf` writing its lines onto a power row: red | 6 / 6 |
-| the PDF layer | `tests/pdf/whoRunsThisTownDm.test.jsx` | `dmLayer` defaulted on: 1 of 3 red | 3 / 3; tests/pdf 502 / 502 |
+| the PDF layer | `tests/pdf/whoRunsThisTownDm.test.jsx` | `dmView` defaulted on: 1 of 3 red | 3 / 3; tests/pdf 502 / 502 |
 | the bought watch | `tests/domain/corruptionDuality.test.js` | the re-keyed file run against the parent's code: 4 red | 130 / 130 with the taste walker, the gauntlet, the I-15 walker |
 
 Car 1's veil pin (a receipt STORED on a power row is public) stays green and unloosened.
@@ -69,7 +69,7 @@ Car 1's veil pin (a receipt STORED on a power row is public) stays green and unl
 
 ## 5. The DM view (§9)
 
-The Power tab mounts `WhoRunsThisTownPanel` beneath the criminal underside (`PowerTab.jsx`'s touched lines, for MERGE-TRAIN beside OWNER-WORDS-DOSSIER's governance section: the import at line 25 and the mount block at lines 460–464 of this tip — the UNDERSIDE region only), only when `!publicDossier && !playerView`. The PDF prints the same blocks in the Power Structure chapter, from `vm.dm`, which `buildViewModel` builds only when the caller passes `dmLayer: true` (SettlementPDF, the DM's own dossier); the Foundry journal builds its own view model without it. The blocks: the ruling three · who answers to whom · the fronts · the hall · the boosts; "who hunts whom" (car 4) is a mounted, empty, hidden slot on screen and absent in the PDF.
+The Power tab mounts `WhoRunsThisTownPanel` beneath the criminal underside (`PowerTab.jsx`'s touched lines, for MERGE-TRAIN beside OWNER-WORDS-DOSSIER's governance section: the import at line 25 and the mount block at lines 460–464 of this tip — the UNDERSIDE region only), only when `!publicDossier && !playerView`. The PDF prints the same blocks in the Power Structure chapter, from `vm.dm`, which `buildViewModel` builds only when the caller passes `dmView: true` (SettlementPDF, the DM's own dossier); the Foundry journal builds its own view model without it. The blocks: the ruling three · who answers to whom · the fronts · the hall · the boosts; "who hunts whom" (car 4) is a mounted, empty, hidden slot on screen and absent in the PDF.
 
 **The hall block reads today's stored `criminalCaptureState`** with `CAPTURE_LINES`' rung line (variant 0, the receipt in rank words; a 'capture' rung with no agent in the three takes variant 2, the only one that names no agent). **RE-READ AT CAR 2'S TIP**: when car 2's `hallCaptureOf` owns the rung, `patronage.js :: hallOf` reads its receipt instead. Car 2 had not pushed at this car's proof.
 
@@ -116,7 +116,7 @@ Measured stage to stage with `scripts/audit/landing-stage.sh measure` in a clean
 | `8567f490d` the round-robin deal (vs `a63effa93`; nothing between moves the generator) | 0 | **11** (town 2, city 6, metropolis 3) | 0 / 443 | 0 | 0 | 0 |
 | `2f89aaeef` the boss joins above 4 (vs `8567f490d`) | 0 | **1** (city 1) | 0 / 443 | 0 | 0 | 0 |
 
-The PDF golden view-model snapshot does not move: the DM rows ride the opt-in `dmLayer`, which the snapshot (and Foundry) leave off.
+The PDF golden view-model snapshot does not move: the DM rows ride the opt-in `dmView`, which the snapshot (and Foundry) leave off.
 
 ## 9. The proof
 

@@ -134,8 +134,8 @@ export function buildViewModel({
   // allegiances, handlers, covert ties, a hidden power's boost. Built ONLY when the caller asks
   // (SettlementPDF, the DM's own dossier); the Foundry journal and every other caller leave it off,
   // and the view model then carries no `dm` key at all (byte-identical).
-  dmLayer = false,
-} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any, dmLayer?: boolean }} */ ({})) {
+  dmView = false,
+} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any, dmView?: boolean }} */ ({})) {
   const raw = settlement || {};
   const ai = aiSettlement || null;
   const useAi = !!(narrativeMode && ai);
@@ -181,7 +181,7 @@ export function buildViewModel({
     relationships: relationshipsSlice(active),
     aiAppendix:    useAi ? appendixSlice(ai) : null,
     // read from the canonical save (`raw`): the allegiance and the ranks are owner facts
-    ...(dmLayer ? { dm: dmPowerViewOf(raw) } : {}),
+    ...(dmView ? { dm: dmPowerViewOf(raw) } : {}),
   };
 }
 

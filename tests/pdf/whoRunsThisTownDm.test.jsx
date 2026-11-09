@@ -21,13 +21,13 @@ beforeAll(async () => { await ensureLaws(); s = birth(785).settlement; });
 describe('the DM view in the PDF, never the Foundry journal', () => {
   it('the view model carries `dm` only on the DM layer', () => {
     expect(Object.hasOwn(buildViewModel({ settlement: s }), 'dm')).toBe(false);
-    const vm = buildViewModel({ settlement: s, dmLayer: true });
+    const vm = buildViewModel({ settlement: s, dmView: true });
     expect(vm.dm).toEqual(dmPowerViewOf(s));
     expect(vm.dm?.boosts.some((b) => b.hidden)).toBe(true);
   });
 
   it('SettlementPDF asks for the DM layer and Power Structure mounts the section', () => {
-    expect(readFileSync('src/pdf/SettlementPDF.jsx', 'utf8')).toMatch(/dmLayer: true/);
+    expect(readFileSync('src/pdf/SettlementPDF.jsx', 'utf8')).toMatch(/dmView: true/);
     expect(readFileSync('src/pdf/sections/PowerStructure.jsx', 'utf8')).toMatch(/<WhoRunsThisTown dm=\{vm\?\.dm\} \/>/);
   });
 
