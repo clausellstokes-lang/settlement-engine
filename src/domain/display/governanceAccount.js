@@ -207,8 +207,13 @@ const FRACTURE_BLOCS = Object.freeze([
 ]);
 
 /**
+ * The fields of the record the paragraph reads (the rest reach the readers it calls as the record itself).
+ * @typedef {{ id?: unknown, name?: unknown, _seed?: unknown, stress?: unknown, powerStructure?: { factions?: Array<{ isGoverning?: unknown, desc?: unknown, faction?: unknown } | null>, publicLegitimacy?: { label?: unknown, breakdown?: unknown } | null, recentConflict?: unknown } }} GovernedRecord
+ */
+
+/**
  * The fracture's blocs the record names, each reading once, in the order above.
- * @param {Record<string, any>} s @param {Set<string>} already names the estrangement read has said
+ * @param {GovernedRecord} s @param {Set<string>} already names the estrangement read has said
  * @returns {{ lines: string[], withdrawn: boolean, names: string[] }}
  */
 function fractureBlocsOf(s, already) {
@@ -233,9 +238,9 @@ function fractureBlocsOf(s, already) {
  * @returns {{ text: string, estranged: Array<{ name: string, tie: string }>, fallback: boolean } | null}
  */
 export function governanceAccountOf(settlement) {
-  const s = settlement && typeof settlement === 'object' ? /** @type {Record<string, any>} */ (settlement) : null;
+  const s = settlement && typeof settlement === 'object' ? /** @type {GovernedRecord} */ (settlement) : null;
   if (!s) return null;
-  const chain = rulingChainOf(s);
+  const chain = rulingChainOf(/** @type {import('../dossier/powerStrata.js').RulingChainSettlement} */ (/** @type {unknown} */ (s)));
   const governing = text(chain.power?.name);
   if (!governing) return null;
   const place = text(s.name) || 'this place';
