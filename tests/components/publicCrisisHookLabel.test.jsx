@@ -37,11 +37,13 @@ function hookLines(container) {
 }
 
 describe('the public crisis card: "Hook:" only over a hook', () => {
-  it.each([0, 4])('soak1k-%i, the public page: no bare "Hook:" label', (i) => {
-    const pub = projectShareVeil(toPublicSafe(towns[i]), null);
-    expect([pub.stress].flat().filter(Boolean).length).toBeGreaterThan(0);
-    const { container } = render(<OverviewTab settlement={pub} publicDossier playerView />);
-    expect(hookLines(container).filter((line) => line === '')).toEqual([]);
+  it('soak1k-0, -4, the public page: no bare "Hook:" label', () => {
+    for (const i of [0, 4]) {
+      const pub = projectShareVeil(toPublicSafe(towns[i]), null);
+      expect([pub.stress].flat().filter(Boolean).length, `soak1k-${i}`).toBeGreaterThan(0);
+      const { container } = render(<OverviewTab settlement={pub} publicDossier playerView />);
+      expect(hookLines(container).filter((line) => line === ''), `soak1k-${i}`).toEqual([]);
+    }
   });
 
   it('soak1k-0, the DM-full share keeps the hook and its label', () => {
