@@ -61,6 +61,19 @@ describe('#10 — the port reason is gated on a docks or wharf institution', () 
       expect(PORT_BODIES.has(reason), `terrain ${terrainType}: ${reason}`).toBe(false);
     }
   });
+  it('STYLE-2 A·O16: a port route without docks founds on the ground the record names, never "roadside"', () => {
+    // soak1k-0 (a mountain thorp), soak1k-5 (a metropolis on the plains), soak1k-7 (a desert hamlet):
+    // each printed a road reason ("Founded roadside…", "A road settlement…") under the strip's "port"
+    const cases = [['thorp', 'mountain', 'on the mountainside'], ['metropolis', 'plains', 'out on the open plain'], ['hamlet', 'desert', 'in the desert'], ['village', 'coastal', 'on the shore']];
+    for (const [tier, terrainType, ground] of cases) {
+      for (const seed of ['soak1k-0', 'soak1k-5', 'soak1k-7', 'a', 'b']) {
+        const [reason] = generateSettlementReason(tier, 'port', null, { terrainType, _seed: seed }, null, { hasDocks: false });
+        expect(reason, `${terrainType} ${seed}`).toContain(ground);
+        expect(reason).toMatch(/wharf|docks/);
+        expect(ORIGIN_POOLS.road.includes(reason), `${terrainType} ${seed}: a road reason`).toBe(false);
+      }
+    }
+  });
   it('a riverside port route without docks takes the river reason', () => {
     const [reason] = generateSettlementReason('village', 'port', null, { terrainType: 'riverside' }, null, { hasDocks: false });
     expect(ORIGIN_POOLS.river).toContain(reason);

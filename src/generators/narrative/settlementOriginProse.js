@@ -60,6 +60,24 @@ import { pickVariant } from '../../kernel/proseHash.js';
 /** The `{channels}` token the isolated-deficit pool splices the support list into. */
 export const CHANNELS_TOKEN = '{channels}';
 
+/** The `{ground}` token the `ground` arm splices the record's terrain into. */
+export const GROUND_TOKEN = '{ground}';
+
+/**
+ * The terrain the `ground` arm names, in plain words, keyed by the resolved terrain
+ * (`config.terrainType`). Riverside is not here: a riverside port with no docks takes the river
+ * arm. A terrain not listed (or none) keeps the road arm, as before.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const GROUND_PHRASE = Object.freeze({
+  coastal: 'on the shore',
+  mountain: 'on the mountainside',
+  hills: 'in the hills',
+  forest: 'in the forest',
+  plains: 'out on the open plain',
+  desert: 'in the desert',
+});
+
 /**
  * The authored corpus, keyed by ARM. Index 0 of every pool is the exact
  * pre-widening sentence (law 2). Pool length is 5 everywhere (law 3).
@@ -75,7 +93,8 @@ export const ORIGIN_POOLS = Object.freeze({
   ]),
 
   crossroads: Object.freeze([
-    'Positioned at a major crossroads. Trade flows through here by geography, not by choice.',
+    // STYLE-2 FIRST-IMPRESSIONS (A·O16): the aphorism "by geography, not by choice" became the plain fact.
+    'Built at a major crossroads, and trade comes in on every road.',
     'Built where two busy roads cross, and laid out around the crossing.',
     'A crossroads settlement: every road brings it trade, and any of them can bring it trouble.',
     'Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.',
@@ -95,7 +114,7 @@ export const ORIGIN_POOLS = Object.freeze({
     'A port: the wharves are why the place exists, and everything else grew up behind them.',
     'Founded where the water runs deep enough to unload. That fact, and no other, put a settlement on this ground.',
     'A working port: its wealth is the cargo it unloads, and its worry is a season when the cargo does not come.',
-    'Built around a landing. Trade arrives by hull rather than by axle, and the whole economy is shaped to that difference.',
+    'Built around a landing: what it trades comes in by boat, and the place is laid out around the unloading.',
   ]),
 
   // ⚠️ EVERY VARIANT OF THIS ARM IS WORLD-LAW CONSTRAINED. An inland river port
@@ -110,7 +129,7 @@ export const ORIGIN_POOLS = Object.freeze({
   // tests/generators/settlementOriginProse.test.js against the REAL predicate.
   'port.riverside': Object.freeze([
     'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.',
-    'An inland river port: barges rather than hulls, and a working season that closes when the channel does.',
+    'An inland river port: barges, not ships, and a working season that closes when the channel does.',
     'A river port whose wharves face a moving current; the year is divided by what the channel will allow.',
     'A river port, founded where the water runs deep and steady enough to take a loaded barge. Rarer than it sounds, and worth more.',
     'An inland river port: cargo moves from barges to carts here, and the handling is its living.',
@@ -124,11 +143,24 @@ export const ORIGIN_POOLS = Object.freeze({
     'A seaport that lives by its ships: what they carry off matters more here than anything the land behind it grows.',
   ]),
 
+  // #10's GATE, FINALLY (STYLE-2-SURFACES A·O16; STYLE-RULINGS-2 B2): a port route whose roster
+  // holds no docks or wharf founds on the ground the record names, never on the road ("Founded
+  // roadside" printed under a port on a mountain, and under a port on the plains of a metropolis).
+  // `{ground}` is the terrain in the words of GROUND_PHRASE below; each variant states the terrain
+  // and the missing wharf, nothing else. A new arm: no pre-widening sentence, so index 0 is its own.
+  ground: Object.freeze([
+    `Built ${GROUND_TOKEN}. It has no wharf of its own.`,
+    `The first families built ${GROUND_TOKEN}, and no one has ever built a wharf here.`,
+    `It stands ${GROUND_TOKEN}; ask for the docks and you are told there are none.`,
+    `Founded ${GROUND_TOKEN}. Whatever comes by water has no wharf to land at here.`,
+    `It was built ${GROUND_TOKEN} and has never had a wharf.`,
+  ]),
+
   'isolated.sustained': Object.freeze([
     'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.',
     'Isolated from major trade routes. What the settlement needs, it makes; what it cannot make, it learns to do without.',
     'Set apart from the trade roads. The distance is why it was founded and why it has stayed small and whole.',
-    'Isolated by geography rather than by preference. The place feeds itself, and that is both its security and its ceiling.',
+    'Isolated by the lie of the land. The place feeds itself, and it cannot grow past what its own fields give.',
     'Off the trade routes entirely. Nothing arrives that was not sent for, and little is sent for.',
   ]),
 
@@ -144,7 +176,7 @@ export const ORIGIN_POOLS = Object.freeze({
     `Isolated from major trade routes, and short of what it eats. The gap is closed through ${CHANNELS_TOKEN} — at a price the settlement feels.`,
     `Set apart from the trade roads, on ground that does not quite feed it. What is missing comes in through ${CHANNELS_TOKEN} — when it comes at all.`,
     `Isolated, and running a shortfall it cannot farm its way out of. Survival here rests on ${CHANNELS_TOKEN} — every one of them fragile.`,
-    `Off the trade routes and under-fed by its own land. The shortfall is met through ${CHANNELS_TOKEN}, and the arrangement is renegotiated every season.`,
+    `Off the trade routes and under-fed by its own land. The shortfall is met through ${CHANNELS_TOKEN}, and every season the terms are bargained again.`,
   ]),
 });
 
@@ -166,7 +198,12 @@ export const originArmKey = ({ route, terrainType = null, hasFoodDeficit = false
   // roster's port-infrastructure flag; an EXPLICIT false takes the arm the terrain gives (the
   // river for a riverside town, else the road). An absent flag is a caller that did not say, and
   // keeps the port arm exactly as before.
-  if (route === 'port' && hasDocks === false) return terrainType === 'riverside' ? 'river' : 'road';
+  // STYLE-2 A·O16: with no docks the arm is the TERRAIN's — the river for a riverside town, the
+  // ground the record names for any other, the road only where the record names no terrain.
+  if (route === 'port' && hasDocks === false) {
+    if (terrainType === 'riverside') return 'river';
+    return terrainType && Object.hasOwn(GROUND_PHRASE, terrainType) ? 'ground' : 'road';
+  }
   if (route === 'port') {
     if (terrainType === 'riverside') return 'port.riverside';
     if (terrainType === 'coastal') return 'port.coastal';
@@ -211,7 +248,10 @@ export const originVariantKey = ({ seed, arm, terrainType = null, hasFoodDeficit
 export const selectOriginBody = (state) => {
   const arm = originArmKey(state);
   const pool = ORIGIN_POOLS[arm];
-  const body = pickVariant(pool, originVariantKey({ ...state, arm }));
+  const picked = pickVariant(pool, originVariantKey({ ...state, arm }));
+  const body = arm === 'ground'
+    ? picked.split(GROUND_TOKEN).join(GROUND_PHRASE[/** @type {string} */ (state.terrainType)])
+    : picked;
   return state.supportChannels
     ? body.split(CHANNELS_TOKEN).join(state.supportChannels)
     : body;
