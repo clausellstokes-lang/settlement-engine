@@ -153,25 +153,25 @@ export function writeHallCapture(powerStructure, hall) {
     ? ps.factions.map((f) => {
       const row = rec(f);
       if (!seed || row.isGoverning !== true || row.captureState) return f;
-      return insertAfter(row, 'powerLabel', 'captureState', state);
+      return insertAfter(row, 'powerLabel', { captureState: state });
     })
     : ps.factions;
-  const out = insertAfter({ ...ps, factions }, 'factionRelationships', 'criminalCaptureState', state);
-  return out;
+  return insertAfter({ ...ps, factions }, 'factionRelationships', { criminalCaptureState: state });
 }
 
 /**
- * A copy of `obj` with `key` set to `value`, placed right after `anchor` when `anchor` is present and `key` is
- * not (the record's key order is part of its bytes); else set in place.
- * @param {Rec} obj @param {string} anchor @param {string} key @param {unknown} value @returns {Rec}
+ * A copy of `obj` with the one entry of `entry` set, placed right after `anchor` when `anchor` is present and the
+ * key is not (the record's key order is part of its bytes); else set in place.
+ * @param {Rec} obj @param {string} anchor @param {Rec} entry one key and its value @returns {Rec}
  */
-function insertAfter(obj, anchor, key, value) {
-  if (Object.hasOwn(obj, key) || !Object.hasOwn(obj, anchor)) return { ...obj, [key]: value };
+function insertAfter(obj, anchor, entry) {
+  const [key] = Object.keys(entry);
+  if (Object.hasOwn(obj, key) || !Object.hasOwn(obj, anchor)) return { ...obj, ...entry };
   /** @type {Rec} */
   const out = {};
   for (const [k, v] of Object.entries(obj)) {
     out[k] = v;
-    if (k === anchor) out[key] = value;
+    if (k === anchor) Object.assign(out, entry);
   }
   return out;
 }

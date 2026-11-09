@@ -52,7 +52,7 @@ function hallFindings(s) {
 }
 
 describe('I-1 — a captured or corrupted hall has a criminal in the ruling three', () => {
-  it('over the soak slice, by the raw record: 0 findings, and the soak kind agrees', async () => {
+  it('I-1 on the soak slice (the raw record): no finding, and the soak kind agrees', async () => {
     const rows = await born();
     const found = rows.flatMap(({ i, s }) => hallFindings(s).map((f) => `${i} ${f}`));
     const soak = rows.flatMap(({ i, s }) => captureWithoutAgentFindings(s).map((f) => `${i} ${f.detail}`));
@@ -132,8 +132,12 @@ describe('the derivation (§3.4) on fixtures', () => {
 
   it('the receipt names the rung and who answers to whom, in one plain line', async () => {
     const { hallCaptureOf } = await import('../../../src/domain/people/hallCapture.js');
+    const { CAPTURE_LINES } = await import('../../../src/data/people/dmPowerLines.js');
     const hall = hallCaptureOf({ npcs: [clean('a', 1), agent('b', 2), agent('c', 3)], powerStructure: powers() }, { climate: 'none' });
-    expect(hall.receipt).toBe("Corrupted: The second and the third of Elder Council answer to Thieves' Guild.");
+    // the receipt is the rung's label and WRITE-PEOPLE's variant 0 over the record's facts (computed, never a literal anchor)
+    const facts = { ruler: 'Elder Council', rulerCriminal: false, underworld: "Thieves' Guild",
+      agents: [{ id: 'b', name: 'Card b', rank: 2, guild: "Thieves' Guild" }, { id: 'c', name: 'Card c', rank: 3, guild: "Thieves' Guild" }] };
+    expect(hall.receipt).toBe(`Corrupted: ${CAPTURE_LINES.corrupted[0](facts)}`);
     expect(hall.receipt.split('\n')).toHaveLength(1);
   });
 
@@ -162,8 +166,8 @@ describe('J-13 — ONE writer of the hall-capture state on the birth path', () =
   });
   /** a WRITE of the state: an assignment, an object key, a shorthand property, or the key as a literal (a computed write) */
   const STATE_WRITE = /(\.criminalCaptureState\s*=(?!=))|((?<![.?\w])criminalCaptureState\s*:)|(^\s*criminalCaptureState\s*,)|(['"`]criminalCaptureState['"`])/;
-  /** a WRITE of the governing row's seed: an assignment, or the key as a literal (a computed write) */
-  const SEED_WRITE = /(\.captureState\s*=(?!=))|(['"`]captureState['"`])/;
+  /** a WRITE of the governing row's seed: an assignment, an object key in a written entry, or the key as a literal */
+  const SEED_WRITE = /(\.captureState\s*=(?!=))|(\{\s*captureState\s*:)|(['"`]captureState['"`])/;
   /** code only: a whole-line comment, a JSDoc line and a trailing // comment are not code */
   const code = (line) => (/^\s*(\*|\/\/|\/\*)/.test(line) ? '' : line.replace(/\s\/\/.*$/, ''));
   /**
@@ -194,6 +198,7 @@ describe('J-13 — ONE writer of the hall-capture state on the birth path', () =
     expect(STATE_WRITE.test(code('  const crimCap = settlement.powerStructure?.criminalCaptureState || \'none\';'))).toBe(false);
     expect(SEED_WRITE.test(code('    if (govEntry && !govEntry.captureState) govEntry.captureState = criminalCaptureState;'))).toBe(true);
     expect(SEED_WRITE.test(code("  'captureState',"))).toBe(true);
+    expect(SEED_WRITE.test(code('      return insertAfter(row, \'powerLabel\', { captureState: state });'))).toBe(true);
     expect(SEED_WRITE.test(code('  if (faction.captureState === x) return;'))).toBe(false);
   });
 });

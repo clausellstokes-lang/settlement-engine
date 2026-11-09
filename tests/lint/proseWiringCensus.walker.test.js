@@ -1783,10 +1783,15 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // ⛔ AND THE SYMBOL FORM (`path :: declaration`, rule 32; LANDING-R2, ODQ §934.105) is held to
     // the same reader: the declaration that WRITES the token resolves, and a real declaration of
     // the same file that does not write it is refused.
-    expect((cites.get('criminalCaptureState') || []).includes('src/generators/power/rulingStructure.js :: generatePowerStructure'),
+    // RE-KEYED 2026-11-08 (ALLEGIANCE-CAR2, J-13), by identity with its cause: the token's ONE writer is the derivation at
+    // the coherence seam now (domain/people/hallCapture.js :: writeHallCapture); the power step writes it no longer, and
+    // its own module's reader `hallCaptureOf` is the real symbol that does not write it.
+    expect((cites.get('criminalCaptureState') || []).includes('src/domain/people/hallCapture.js :: writeHallCapture'),
       'the symbol that writes the token resolves').toBe(true);
-    expect((cites.get('criminalCaptureState') || []).includes('src/generators/power/rulingStructure.js :: normalizeAndAnnotateFactions'),
+    expect((cites.get('criminalCaptureState') || []).includes('src/domain/people/hallCapture.js :: hallCaptureOf'),
       'a real symbol that does not write it is refused').toBe(false);
+    expect((cites.get('criminalCaptureState') || []).includes('src/generators/power/rulingStructure.js :: generatePowerStructure'),
+      'and the retired birth writer resolves no longer').toBe(false);
   });
 
   test('the COLUMN_SOURCES arms convict this roster too: every kind is fully cited or names its gaps', () => {
