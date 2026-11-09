@@ -102,6 +102,135 @@ Struck: "drills daily", "sharper" (no drill read; the multiplier blends will, mo
 
 Per cause, the writer's own suites, `proseNumerics`, `couplingInclusion`, `newsSubjectVocabulary` and `modeSpeedsWy1` green (listed in each commit body); eslint clean on every touched file; `tsc --noEmit` adds no error. The three record walkers and the full-suite comparison are recorded in the hand-back message.
 
-## 6. CONFIRMED against PLAUSIBLE
+## 6. The second seat
+
+**Seat:** SW-12 PULSE-LINES, second seat — an Opus 5.5 build seat, a child of the cloud chair, in session `session_01FbPLbekNJoQvhbYjni4ao7`; the same lane, continued from the first seat's tip `b9a4a45fa` (verified with `git rev-parse`; nothing above rewritten). **The measure, reproduced first:** the same harness rebuilt from §0's description (a scratch copy of `scripts/audit/simulate-world.mjs`, absolute imports, the entries rendered through NewsEntry's own functions at each world's end), `WAR_ECON_ALL=1`, `--ticks 52 --reps 2 --scales 0`, `HEALTH: OK`: **4,496 entries, 24,031 printed lines — the first seat's tip figure exactly.** Each cause was measured in a clean worktree at its own staged tree (`git commit-tree` of the index; the shared checkout's other edits never in the run); after every cause the 4,496 entry ids are identical, in order. Counts are cards whose face or tooltip carries the frame, before → after (new lines' counts in brackets).
+
+**Two laws learned on the way, both now in the lane's lines:** (1) *a drift outcome's reasons are the feed's metronome key* — `worldPulseFeedCuration.js :: isDriftOnlyOutcome` / `isMetronomeRepeat` suppress a repeat by headline + reasons, so a receipt varied by the tick defeats the suppression (a tick-seeded first draft of the population strain line added hidden rumour seeds on the WY-1 arm and was refused there); every receipt of a drift outcome is seeded by identity, never the tick. (2) *`fnv1a32 mod 2` is parity-bound* — a two-line pool sent all four recall cards to one line; variant pools are three or four.
+
+### 6a. `settlementStrategy.js` — 78a425f6b, ee00c881a (A2·2–3, ·23–24)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·2 deploy summary | `${name} commits to an offensive posture against ${targetName}.` | four: "${name} is calling up its army to march on ${target}." · "${name}'s rulers mean to send the army against ${target}." · "In ${name} the army is mustering, and its road leads to ${target}." · "${target} has cause to watch its walls: ${name} means to march on it." | 78 → 0 [23/19/20/16] |
+| A2·3 deploy reason | `${name}'s strategy chooser selected an offensive deployment.` | four: "${name} weighed its other courses and chose to march." · "Of all that ${name} could do, war looked best to its rulers." · "${name}'s rulers judged the march worth more than waiting." · "${name} could have waited; its rulers chose war." | 78 → 0 [20/19/23/16] |
+| A2·23 vassal-recall reason | `${name} has an army abroad while a vassal is besieged (an emergency recall).` | struck (restated the summary; the vassal's id is not in scope) | 1 → 0 |
+| A2·24 override reason | `Hard override: deterministic, bypasses the softmax sample (probability 1).` | three, seeded by the town (a drift outcome): "Bringing the army home comes before every other plan ${name} had." · "Nothing else ${name} might do is weighed until its army is home." · "${name} calls its army home ahead of anything else." | 4 → 0 [1/1/2] |
+
+Struck: "columns are forming", "every household … is sending one", "before the season turns" (the deploy is the decision; the war opener judges the march). **Merge note:** FIX-PULSE-DEFECTS rewrites the line above A2·23 (the home-besieged reason's id → name); the resolution is both.
+
+### 6b. `tierResourceDynamics.js` — 1aad33c36 (A2·95–97, ·99–100, ·104–105)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·95 depletion summary | `${name} is consuming ${resource} faster than it recovers.` | four: "${name} is taking more from its ${res} than the land can give back." · "Those who work ${name}'s ${res} come back with less than they used to." · "${name}'s rulers will soon need another source than its ${res}." · "There is less to take from ${name}'s ${res} than there was, and still ${name} takes." | 37 → 0 [5/7/13/12] |
+| A2·96 draw reason | `The draw on it is heavy, and a settlement of this standing draws hard.` · (light) `… real but not yet heavy, though …` | heavy, three: "${name} is drawing heavily on its ${res}." · "${name} takes hard from its ${res}." · "Much is being taken from ${name}'s ${res}." · light: "${name} is drawing steadily, if not yet heavily, on its ${res}." | 37 → 0 [11/9/15; 2] |
+| A2·97 tiers reason | `Higher settlement tiers consume local resources more aggressively.` | only for a city or larger (the gate's city floor), three: "A ${tier} takes a great deal from the land around it." · "A ${tier} the size of ${name} needs more than the land can easily give." · "${name} is a ${tier}, and a ${tier} uses a great deal." | 37 → 0 [8/12/13] |
+| A2·99 recovery summary | `${name} consumes less ${res}, allowing it to become available again.` | "${name} is taking less from its ${res}, and the land is giving back." | 2 → 0 [2] |
+| A2·100 demotion reason | `Demotion pressure implies reduced consumption.` | "With ${name} shrinking, less is taken from it." | 1 → 0 [1] |
+| A2·104 eligibility | `${currentTier} is near ${nextTier} population and has sustained trade, defense, and legitimacy support.` · `${currentTier} is no longer supported by …` · `${currentTier} can no longer be fed or housed at its own scale: …` | "${name} has nearly the people of a ${next}, and the trade, walls and rule to keep them." · "${name} no longer has the people, trade, walls or rule a ${tier} needs." · "${name} can no longer be fed or housed as a ${tier}: …" (the lower-case-lead defect cured) | 4 / 5 → 0 [4 / 5] |
+| A2·105 streak, odds | `Minimum streak ${m}; current streak ${s}.` · `The change is now likelier than not.` / `… possible, not yet likely.` | the streak stays (the Voice Program's pin), three: "This has held for ${n} pulses in a row, and the change needed ${m}." · "It has gone this way ${n} pulses running; ${m} were needed before the change." · "For ${n} pulses it has kept on this way, and the change needed ${m}." · the odds line struck | 9 → 0 [5/1/3]; 8 + 1 → 0 |
+
+Struck: "they are spent", "buy what its resource used to supply" (no import read; a resource may be singular or plural, so no verb agrees with it).
+
+### 6c. `populationDynamics.js` — 7bd8e0b8b (A2·107–110)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·107 summary | `${name} loses about ${n} people from cumulative pressure; about ${m} may migrate onward.` · `${name} gains about ${n} people from favorable conditions.` | loss, four: "${name} has lost about ${n} people[; about ${m} of them have moved on]." · "About ${n} people are gone from ${name}[…]." · "${name}'s rulers count about ${n} fewer people than before[…]." · "Fewer people live in ${name} now, about ${n} fewer[…]." (the onward clause only where migrants were credited) · growth, four of the same shape | 32 → 0 [8/7/8/9] |
+| A2·108 strain | `Grain, safety and trade each pull on this: ${g} on the granary, ${w} on the walls, ${r} on the roads.` | only the pressures that bite, hardest first, by the same quarter bands: food "a little short / short / there is not enough food" · safety "people feel a little less safe / fear for their safety / fear for their lives" · trade "a little slow / poor / has all but stopped"; three lead-ins ("${List}." · "In ${name}, ${list}." · "In ${name} these days, ${list}."), seeded by the town for a drift outcome | top frame 20 → 11 |
+| A2·109 interval | `Interval ${interval} with ${intensity} intensity.` | struck | 32 → 0 |
+| A2·110 mode | `Migration mode resolved as ${mode}.` | concentrated, three: "They have all gone to the same place." · "The ones who left have made for a single place." · "Every one of them has settled in one place nearby." · distributed, three: "They have scattered to the places around." · "They have gone their separate ways to places nearby." · "They have spread out among the neighbouring places." · void: struck | 12 → 0 [5/3/4]; 12 → 0 [3/2/7]; 8 → 0 |
+
+Struck: "taken the road", "families with their goods on their backs", "died this season"; "towns" as a tier noun.
+
+### 6d. `factionCompetition.js` — 75ecda249 (A2·161–163, ·165; A2·160 STOPPED)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·161 summary (every kind) | `${name} sees an opening to press ${preference} interests.` | per kind — capture, four: "${name} means to put its own people in charge of ${town}'s ${target}." · "In ${town}, ${name}'s people are moving in on the ${target}." · "Control of ${town}'s ${target} is passing to ${name}." · "Whoever works at ${town}'s ${target} will soon answer to ${name}." · challenge, four: "${name} is challenging ${town}'s rulers, and wants ${pref} in their place." · "In ${town}, ${name} is gathering support to replace the rulers with ${pref}." · "${town}'s rulers face a challenge from ${name}, who want ${pref}." · "${name} has turned against the rulers of ${town} and is pressing for ${pref}." · rivalry, four (the rival's name read from its own state) · suppression, service, law push, exhaustion one each | 23 → 0 [capture 2/4/3/4; challenge 1/2/4/1; rival 1/1] |
+| A2·162 challenge reasons | `Government legitimacy is ${band}.` · `${name} is one of the top three factions and prefers ${pref}.` · `Government changes preserve existing institutions unless …` | band, three each (crisis: "Few in ${town} still accept the rulers' right to rule." · "Most of ${town} no longer accepts its rulers." · "In ${town} the rulers have lost the people's trust."; contested: "… are only tolerated." · "… put up with, not trusted." · "The people of ${town} doubt their rulers.") · rank, three ("${name} is one of the three strongest powers in ${town}." · "Few powers in ${town} are stronger than ${name}." · "${name} stands among the three strongest powers in ${town}.") · the rule text struck | 8 → 0 [3/3/2]; 8 → 0 [6 over two lines, 2]; 8 → 0 |
+| A2·163 capture reason | `${name} can convert pressure into institution control.` | three, seeded without the tick (an auto capture is a drift outcome): "${town}'s troubles have given ${name} its chance." · "${name} has seen its chance in ${town}'s troubles." · "With ${town} in trouble, ${name} has room to move." | 13 → 0 [4/4/5] |
+| A2·165 rival / exhaustion | `${name} can contest a rival faction's influence basis.` · `Faction campaigning, aid, and crisis response create exhaustion …` | "With ${town} unsettled, ${name} sees its chance against ${rival}." · "${name}'s people are worn out from campaigning and handing out aid." | 2 → 0 [2] |
+
+**A2·160, STOPPED to the chair:** naming the institution in the capture *headline* breaks `tests/copy/landingProseGrounding`'s pair "captures an institution", which binds the landing's owner prose (realm.body2); `FACTION_VERB_PHRASES` is untouched. **Register through its door:** `src/components/home/landingFixture.js` re-emitted (`generate-landing-fixture.mjs --seed lf-033 --emit`) — one line moves, the capture beat's text. Struck: "has the numbers and the backing", "says the rulers have lost the right to rule".
+
+### 6e. `occupation.js` — 67b3f7451 (A2·113–114, ·117–119, ·125–126)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·113 burden summary | `Garrisons, administrators, and suppression tie down ${occ}'s strength across ${n} occupation(s).` | four, the held places named from the ledger: "${occ} has soldiers and clerks tied up holding ${held}, and fewer to spare at home." · "Holding ${held} keeps ${occ}'s soldiers and officials busy far from home." · "${occ}'s garrisons in ${held} need men, pay and food that home must find." · "Every soldier ${occ} keeps in ${held} is one it cannot use elsewhere." | 15 → 0 [4/4/3/4] |
+| A2·114 burden reason | `${n} occupation(s) weigh ${word} on the occupier, and each one held makes the next dearer.` (the "1 … weigh" defect) | three: "Holding ${held} weighs ${word} on ${occ}[, and each one more costs dearer]." · "${held} weigh(s) ${word} on ${occ}[…]." · "The cost of holding ${held} bears ${word} on ${occ}[, and grows with each place held]." | 15 → 0 [6/≈5/4] |
+| A2·117 spoils summary | `Tribute, levies, and materiel from stabilized occupations sustain ${occ}'s war effort.` | four: "Tribute, men and supplies from the places ${occ} holds keep its war going." · "What ${occ} takes from ${held} helps pay for its war." · "${held} now send(s) ${occ} tribute, men and supplies for the war." · "${occ}'s war is fed in part by what ${held} must hand over." | 12 → 0 [3/3/4/2] |
+| A2·118 spoils reason | `… return ${word}, and what comes in eases the weariness of the war at home.` (top word "everything conquest can ever return") | three (the first kept); the top word "as much tribute as any conquest yields" | 12 → 5 [3/4] |
+| A2·119 vassalage summary | `${occ}'s occupation of ${town} has stabilized into formal vassalage. The occupied settlement now serves as a client state.` | "${town} has accepted ${occ} as its overlord, and will pay and obey as its vassal." | 3 → 0 [3] |
+| A2·125 resistance summary | `Sabotage, noncompliance, and an organizing resistance harry ${occ}'s grip on ${town}.` | four: "In ${town} people break tools, hide stores and will not do as ${occ}'s soldiers say." · "${occ}'s soldiers in ${town} find their orders ignored and their stores raided." · "${town} has not accepted ${occ}'s rule, and its people make every day of it hard." · "Those who hold ${town} for ${occ} cannot count on anyone there to obey." | 5 → 0 [1/2/1/1] |
+| A2·126 resistance reason | `The town is ${word}, and the occupation stands at ${state}.` | three, the rung said as the hold ("still in dispute · shaky · firm enough to take from it · settled · that of an overlord") | 5 → 0 [1/4] |
+
+Struck: "its soldiers are gone" (the vassal apply was not read), "burnt carts and broken gates", "cannot walk the streets alone at night".
+
+### 6f. `warDeployment.js` — 34d80d56b (A2·128–130, ·133, ·135–136)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·128 march summary | `${from} commits its army to a siege of ${target}. The campaign is opened.` | four: "${from}'s army has marched to lay siege to ${target}." · "${from}'s soldiers are on the road to ${target}, to put it under siege." · "${target} will soon have ${from}'s army at its walls." · "${from} has sent its army against ${target}, and means to besiege it." | 16 → 0 [2/5/4/5] |
+| A2·129 ready reason | `${from} is war-ready and ${target} is a feasible target.` | three, seeded without the tick: "${from}'s army is ready, and ${target} is within its reach." · "${from} has an army fit to march, and ${target} is a target it can hope to take." · "${from} is ready for war, and judges ${target} open to attack." | 16 → 0 [7/2/7] |
+| A2·130 rusty command | `A rusty command over-/under-committed the force[, and not by a little].` | three leads ("Its commanders, out of practice," · "Out of practice, its captains" · "Its rusty captains") + "sent [far] more soldiers than the march needs." / "sent [far] too few soldiers for the march." | 12 / 4 → 0 [7/3/6] |
+| A2·133 withdrawal | `${name}'s army can no longer plausibly take ${target}. It withdraws, the campaign abandoned.` | three: "… cannot take ${target} and is marching home." · "${name} has given up the siege of ${target}; its army is coming home." · "The siege of ${target} is over: …" | 3 → 0 [2/1] |
+| A2·135 conquest | `The siege of ${target} broke. ${occ}'s army holds the walls; an occupation authority now rules in the conqueror's name.` | three: "${target} has fallen. ${occ}'s soldiers hold its walls, and ${occ}'s governors now give the orders." · "${occ}'s army has taken ${target}, and rules it now in ${occ}'s name." · "The walls of ${target} are ${occ}'s now; its people answer to ${occ}'s officers." | 3 → 0 [1/2] |
+| A2·136 conquest reason lead | `Weighed against the walls, the besiegers were …` | "Against the walls of ${target}, the besiegers were …" (the clause words: 6g) | 3 → 0 [3] |
+
+Left dark for PULSE-DARK: A2·131–132 (the coalition lines), the thin-supply line.
+
+### 6g. `feasibilityGate.js` — 2fc55046f (A2·136 clauses, A2·137)
+
+| row | OLD | NEW |
+|---|---|---|
+| verdict clauses | plausible `the matchup alone made a storm worth trying` · auto_fail `the gate judged a storm impossible` · harassment `the gate allowed no more than a raid on the approaches` · require_coalition `the gate would not open a storm to one attacker alone` · require_betrayal `the storm was opened by the rot inside the defender, not by weight of arms` · require_magic `… by a decisive war-magic edge, not by weight of arms` | "strong enough to try a storm" · "far too weak for any storm to succeed" · "able to do no more than raid the roads around the walls" · "too weak to storm the walls alone" · "the defenders were divided among themselves, and the gates opened from within" · "their war-magic broke what their numbers could not" |
+| matchup receipt | `Weighed against the walls, the attacker is ${word}: the defender's home ground counted.` | three (keyed on the ratio; the gate holds no id): "Against these walls the attacker is ${word}; defenders fight hardest at home." · "Fighting on their own ground, the defenders make the attacker ${word}." · "The attacker is ${word} against walls whose defenders are fighting for their homes." |
+| verdict receipts | `Within the plausible band: the contest is decided by the siege roll.` · `Defender is internally fractured (coup / rebellion / legitimacy crisis); …` · `Attacker holds a decisive war-magic advantage; …` · `Too weak to break the town alone, but a coalition could, so the solo siege is blocked.` · `Even the coalition falls short of a plausible storm; …` · `Hopelessly outmatched; a siege deterministically fails, …` | "It could go either way." · "The defenders are divided among themselves; the gates may open from within." · "The attacker has war-magic enough to break walls its numbers could not." · three: "Alone it cannot break these walls; with allies it could, so it will not try alone." · "With allies it might take these walls; alone it will not try." · "These walls are too strong for it alone, though not for it and its allies together." · "Even together the attackers fall short of a storm; they can only raid." · "Hopelessly outmatched, it cannot take the walls, though it can still raid the roads." |
+
+Counts: "home ground counted" 3 → 0 [1/2]; "solo siege is blocked" 3 → 0 [1/2]; "matchup alone made" 2 → 0 [2]; "rot inside the defender" 1 → 0 [1].
+
+### 6h. `realmEvents.js` — 39a46b04b (A2·152–154, ·156–157)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·152 fallback headline | `Realm-wide ${human} grips the realm` | "${Human} spreads across the realm" (the labelled headlines untouched) | 3 → 0 [3] |
+| A2·153 summary | `${n} settlements are now caught in ${human}.` | four, the label leading, the count in words: "${Label} has taken hold in ${n} places at once." · "${Label} now reaches ${n} places across the realm." · "In ${n} places at once, people are living through ${label}." · "${Label} is no longer one place's trouble: ${n} places share it." | 12 → 0 [1/5/4/2] |
+| A2·154 reasons | `${n} settlements share an active ${human} stressor.` · `Promoted from settlement scope to a realm-wide arc.` | struck (both restated the summary) | 12 / 12 → 0 |
+| A2·156 last altar | `No settlement in the realm still keeps ${name}'s rite. … what survives of the faith is memory rather than practice.` · reason `… no tier remains for the creed to fall from.` | "No place in the realm still keeps ${name}'s rite. The last altar is cold, and its priests have gone to other temples." · "The last place that kept the rite has turned to another god." | dark in the run |
+| A2·157 pantheon reasons | `${name} crossed into the major tier of the pantheon.` + `A decisive lead in seats held has been sustained past the hysteresis dwell.` · `${name} fell to the cult tier of the pantheon.` + `Its seats held collapsed past the hysteresis dwell.` | ascendancy, three: "More places keep ${name}'s rite than any other god's." · "No other god is kept in as many places as ${name}." · "${name}'s rite is kept in more places than any rival's, and has been for some time." · twilight, three: "Few places still keep ${name}'s rite." · "${name}'s rite is kept in only a few places now." · "The places that kept ${name}'s rite have mostly turned to other gods." · the dwell lines struck | 4 → 0 [2/2]; 3 → 0 [2/1]; 7 → 0 |
+
+Struck: the audit's named list of towns (only ids are held here), "only the old folk remember the prayers". Pin re-keyed: `pantheon.test.js :: A1`'s lead ("No settlement …" → "No place …").
+
+### 6i. `candidateEvents.js` — 23bcf212b (A2·75; A2·74 STOPPED)
+
+| row | OLD | NEW | before → after |
+|---|---|---|---|
+| A2·75 gate reason | `Organic settlement drift is conservative: pressure must pass a gate before it can roll.` | struck | 52 → 0 |
+
+**A2·74, STOPPED to the chair:** the pressure row's own reasons still print raw ("active condition: …" 26, "… derived from causal state" 31, the raw pressureModel keys). The audit's cure is wiring through `stressors.js :: readerPressureReasons`, which is not exported, in a file the first seat finished; the default asked is one `export` keyword there and one call here, as its own cause.
+
+### 6j. Two lane hygiene commits
+
+- **3ddbc6b56** — the first seat's two negative pins (`causeResolutionLifecycle`, `stressorResolutionReceipts`) take the walker's one-line `anchored:` marker: `negativeAssertionAnchor` was red at `b9a4a45fa` (6 over a ceiling of 5; 1 over 0).
+- **7ba010c07** — the variant pools' slot bags typed (`TradeWarLineSlots`, `StrategyLineSlots`, `TierLineSlots`, `PopulationLineSlots`, then `OccupationLineSlots`, `WarDeploymentLineSlots`, `RealmLineSlots` in their causes; file-unique names, because `worldPulse/index.js` re-exports the modules and a shared typedef collides, TS2308), and the first seat's five helper casts in `stressors.js` given real types: `domainAnyCastBaseline` was red at `b9a4a45fa` (tradeWar 32/19, stressors 60/55); every touched file now sits exactly at its frozen allowance. No baseline moved.
+
+### 6k. Pins, registers and golden surfaces (the second seat)
+
+- **Golden surfaces (herald, gm /525, fence /360, prose /1,050, witness, pdf): none moved by these causes.**
+- **Pins re-keyed by identity, never loosened:** `modeSpeedsWy1 :: BASE_PULSE_HASH` a55e7cd3 → 12ac14ad (population) → 1123201b (factionCompetition) → ed80ff1d (candidateEvents), each TEXT ONLY, leaf-diffed against its parent in a clean worktree (78 + 39; 121 + 25; 0 + 171 string leaves + array-tail keys; no id, tick, number or rumour seed moved); every other cause leaves the arm byte-identical (measured). `demographicsFloor :: 8. THE DARK FENCE` re-recorded twice, TEXT ONLY, by TE-HERALD-1's method (the trace with every summary / reasons / reason leaf neutralised is equal at parent and cause; the parent's live run reproduced the old values). `tierResourceDynamics` (the streak in words), `pantheon` (the lead).
+- **Registers through their doors:** `landingFixture.js` (one line, 6d).
+- **Reds named by cause, not these causes:** `newsHeadlineContract` A2/A3 and `proseFamilyContract` (3) — red at `b9a4a45fa`: the news-family contracts count distinct headline and summary values, which the lane's variants raise; the precedent (MERGE-CAR ffafe2a0e, MERGE-WAVE 460b1b0d9) re-records the family **in one act at the merged tip**, so they are left for STYLE-2-MERGE. `worldPulseFactionSeating` (2) red at `2053a809c`. The full-suite comparison base → tip is in the hand-back.
+
+### 6l. What stays (the remainder, BY FILE, for a third seat)
+
+**A2 lit rows not reached:** `warRecordMode.js` A2·146 (13) · `mobilizationReactions.js` A2·149–150 (4) · `stressorGates.js` A2·80 (3), ·83–84 (2) · `deploymentReturn.js` A2·139–140 (2) · `resourceTaxonomy.js` A2·101 (2) · `institutionLifecycle.js` A2·173–175 (1) · `moralInstitutionPressure.js` A2·179–180 (1) · `relationshipHierarchy.js` A2·184 (1) · `flows.js` A2·183 (1) · `pressureModel.js` A2·74 (26 + 31; STOPPED, 6i) · `factionCompetition.js` A2·160 (the capture headline; STOPPED, 6d) · `stressorsCore.js` A2·78 (the catalog labels; not in the first seat's list either).
+**Not reached:** A1·105, A1·109 and A1·49 (the stressor reader vocabulary in `stressorsCore.js`, one cause); ledger D's sixty-nine map-word rows (less its three labels, SW-8's, and the succession-headline sites, SW-11's); `heraldGrammar`'s verbatim glance for the succession headline.
+
+## 7. CONFIRMED against PLAUSIBLE
 
 **CONFIRMED** (executed here): the base sha; the measure (4,496 / 24,209) and every before → after count above; identical entry ids after every cause; the WY-1 arm's per-cause hashes and their text-only leaf diffs; the reds named at the base. **PLAUSIBLE:** every new line is a proposal against the law, read against its writer's slots by this seat — not a measured reader outcome; the per-type birth signs are inferences from the crisis type alone, flagged for the owner's veto.
+
+**The second seat — CONFIRMED** (executed here): the base sha; the measure reproduced (4,496 / 24,031) and every before → after count in §6; identical entry ids after every cause; the WY-1 arm's per-cause hashes and text-only leaf diffs; the dark fence's neutralised digests; the reds named at the base by a full suite at `b9a4a45fa`. **PLAUSIBLE:** every new line is a proposal against the law, read against its writer's slots by this seat (the printing regions and their slots, not every helper line of each file); "is marching home" (withdrawal) and "nearby" (migration) are read from the writers' names for the moves, not from the apply paths.
