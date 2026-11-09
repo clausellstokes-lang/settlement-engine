@@ -184,7 +184,7 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ['They have been asked to perform a ceremony they have theological objections to. The person asking has leverage.', 'blackmail'],
   ["A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.", 'hidden_debt'],
   ['They know which of the current leadership will be the next to fall from grace. They are waiting.', 'succession'],
-  // ── economy (11) ──
+  // ── economy (24) ──
   ["A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.", 'smuggling'],
   ["A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.", 'rivalry'],
   ['One of their most reliable suppliers has gone dark. The goods are still arriving. Someone else is sending them.', 'smuggling'],
@@ -196,6 +196,19 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ["A contract they signed in difficult times has a clause they didn't fully read. Someone has read it.", 'hidden_debt'],
   ["They have been slowly acquiring a controlling interest in a competitor through intermediaries. The competitor hasn't noticed yet.", 'ambition'],
   ['A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.', 'smuggling'],
+  ['A buyer has paid them in advance for a whole season of goods, far above the price, and will not say what the goods are for.', 'smuggling'],
+  ['Their bookkeeper has been taking a little from every sale for years, and the books balance only because the bookkeeper wrote them.', 'betrayal'],
+  ["A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find.", 'hidden_debt'],
+  ['They sold a batch they knew was bad, and the customer it sickened is now asking who supplied it.', 'corruption'],
+  ['A rival has hired away their two best hands in one week, on wages the rival cannot afford for long.', 'rivalry'],
+  ['They have promised the same order to two buyers, and both are due to collect on the same morning.', 'scarcity_pressure'],
+  ['A lender has bought the note on their shop and wants it settled by the end of the month.', 'hidden_debt'],
+  ['Their scales were tested and found heavy in their favour, and they swear someone changed them overnight.', 'corruption'],
+  ['A family they put out of business has opened again under a new name, two doors down.', 'rivalry'],
+  ['Someone has been selling cheaper and worse goods under their mark, and customers are blaming them.', 'rivalry'],
+  ['They have quietly stopped paying a supplier who cannot afford to take them to law.', 'hidden_debt'],
+  ['A crate came to them by mistake, and the people who meant to receive it have started asking around for it.', 'smuggling'],
+  ['Their apprentice has been offered a partnership by a rival, on condition that the apprentice brings the recipes.', 'betrayal'],
   // ── criminal (8) ──
   ["One of their people is talking to the guard. They don't know which one yet. They're watching.", 'betrayal'],
   ['A valuable item came through their network recently. Three different parties have asked about it quietly.', 'smuggling'],
