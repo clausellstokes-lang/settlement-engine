@@ -19,6 +19,7 @@ import { describe, expect, it } from 'vitest';
 import { evaluateNpcRules, pressureIndex } from '../../src/domain/worldPulse/index.js';
 import { NPC_DRIVE_REASON, NPC_GOAL_NEWS, NPC_ROLE_MEANS, NPC_ROLE_NOUN, NPC_ROLE_REASON, npcCandidateReasons } from '../../src/domain/worldPulse/eventProse.js';
 import { NPC_ROLE_ARCHETYPES } from '../../src/domain/worldPulse/npcAgency.js';
+import { CAUSE_CLASS_IDS, CAUSE_LABEL_OF } from '../../src/domain/worldPulse/causeVocabulary.js';
 
 /** One NPC under heavy legitimacy pressure, so its preferred reform/expose move fires. */
 function actorSnapshot(overrides = {}) {
@@ -192,5 +193,32 @@ describe('B·8–10 — a change of ambition, said in words', () => {
     expect(r.reasons[1]).toMatch(/greed/);
     // anchored: the two toMatch above prove the line live and holding both traits.
     expect(r.reasons[1]).not.toMatch(/corrupted/);
+  });
+});
+
+describe('A2·41 — the cause labels the lifecycle lines slot are plain nouns', () => {
+  it('each label reads after "because of", and the class keys are untouched', () => {
+    expect([...CAUSE_CLASS_IDS]).toEqual([
+      'underfunded', 'chain-starved', 'depleted', 'trade-strangled',
+      'levied-away', 'garrison-drained', 'siege-scarred', 'occupation',
+      'conduct-drift', 'conversion-pressure', 'secularization', 'clergy-scandal',
+      'captured', 'scandal',
+    ]);
+    expect(CAUSE_LABEL_OF).toEqual({
+      underfunded: 'a shortage of money',
+      'chain-starved': 'supplies that stopped coming',
+      depleted: 'empty storehouses',
+      'trade-strangled': 'the loss of trade',
+      'levied-away': 'the fighters taken for the levy',
+      'garrison-drained': 'a half-empty garrison',
+      'siege-scarred': 'the hardship of the war',
+      occupation: 'the occupation',
+      'conduct-drift': 'a god that rewards wrongdoing',
+      'conversion-pressure': 'a rival faith pressing in',
+      secularization: 'the faith gone cold',
+      'clergy-scandal': 'a tainted priesthood',
+      captured: 'an institution in criminal hands',
+      scandal: 'a corruption scandal',
+    });
   });
 });
