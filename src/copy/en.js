@@ -1620,7 +1620,10 @@ export const en = Object.freeze({
     // whole per-settlement EXPORT BUNDLE (owner ruling): the dossier PDF + every
     // map export for this settlement.
     buySaved: {
-      cta:      'Unlock all exports for this settlement · {price}',
+      // The button's own words (the owner, 2026-11-09: "remove the for 2.99"): no price on
+      // the button. The price stays where a buyer sees it before paying: the dialog title.
+      cta:      'Unlock all exports for this settlement',
+      dialogTitle: 'Unlock all exports for this settlement · {price}',
       subline:  'A one-time purchase unlocks every export for this settlement: the dossier PDF, the town-map images (SVG/PNG/JPEG/WebP), the single-map PDF, and the VTT token map. Yours to re-download for as long as it stays in your library.',
       // The unlock pitch is a POPUP now (owner order 2026-07-22): `checkout` is
       // the popup's confirm CTA, `dismiss` its plain close.

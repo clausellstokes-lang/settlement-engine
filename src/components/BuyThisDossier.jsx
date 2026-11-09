@@ -229,7 +229,10 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
               ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
               : 'Payments are not configured in this environment.'}
           >
-            {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
+            {/* The owner (2026-11-09): no price on the button; the pill alone says
+                "Available at launch". The price stays in the title and on the ladder's
+                one-time rung, both seen before checkout. */}
+            Buy this dossier
             {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
           <span id={noteId} role="tooltip" style={{ ...pillStyle(mobile), opacity: captionHover ? 1 : 0 }}>
@@ -285,7 +288,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   // ── State: signed-in, no export gate, SAVED, not entitled → durable $2.99 ────
   // (access.reason === 'unpurchased'). Owner order (2026-07-22): the explainer no
   // longer sits as a static caption — the button opens the ExportUnlockDialog
-  // popup, which carries the same "Unlock all exports … $2.99" title + explainer
+  // popup, whose title carries the price ("Unlock all exports … $2.99") + explainer
   // and runs the durable checkout on confirm. Entitled owners never reach here
   // (access.allowed short-circuits to null above), so the export runs directly.
   return (
@@ -298,9 +301,9 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         disabled={!purchasesAreOpen || !isConfigured}
         onClick={() => { setError(null); setUnlockOpen(true); }}
         style={{ minHeight: 44, ...lockedButtonStyle }}
-        title={t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
+        title={t('dossierExport.buySaved.cta')}
       >
-        {t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
+        {t('dossierExport.buySaved.cta')}
         {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
       </Button>
       {error && <span style={errStyle(mobile)}>{error}</span>}
