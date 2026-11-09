@@ -3609,6 +3609,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/generators/npcStructureSeatPlain.test.js": {
+      "kind": "rationale",
+      "rationale": "THE SEAT-HOLDERS' POSITION AND CONSTRAINT PRINT IN PLAIN WORDS (SW-6 CRISIS-SURFACES, STYLE-RULINGS-2 B10(b); enrolled by STYLE-2-MERGE-3 at the SW-6 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane (docs/chair/2026-11-09/STYLE-2-CRISIS-SURFACES-2026-11-09.md §1 and §6.1): new at cause 11 (165049330), widened red-first per category (cause 18 MILITARY, 30a35a390: 6 red at the parent) and held to the record battery's defence words (cause 29, bb81f76db: 4 red at the parent)."
+    },
     "tests/generators/foodCutLabelReadsSurplus.test.js": {
       "kind": "rationale",
       "rationale": "THE CRISIS LABEL READS THE FOOD SURPLUS (SW-B1 CONTRADICTIONS, STYLE-RULINGS-2 B1; enrolled by STYLE-2-MERGE-2 at the SW-B1 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md: every cause cured red-first at bd07005b9): 1 red at the base (\"Crisis Cutting the Food Supply\" beside a surplus, P73), green at the cure ef7286a7a."
