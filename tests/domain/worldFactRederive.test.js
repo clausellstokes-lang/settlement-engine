@@ -485,8 +485,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the generator master 3873f90e.. -> 0fa3e014.. (525 of 525 rows).
     // Record 6, the W7 HOOKS merge (2026-11-08-merge-wave-6-w7-hooks.json), from the stage at 501c97412:
     // the generator master 0fa3e014.. -> ac300c3b.. (525 of 525 rows).
+    // Record 7, the FIX-FOOD-ISOLATION merge (2026-11-08-merge-wave-7-food-isolation.json), from the stage at c6e8a4ad6:
+    // the generator master ac300c3b.. -> 3c3ba783.. (73 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('ac300c3b3422aba8322ec839a5f20a172a421f3f601c06a996f47a9015d2f2dc');
+      .toBe('3c3ba783a61b98f00a752a2a1bc1bf438e9c88793d2dabe81e8cb75d8c349585');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('f2d3410b20c0b4757a48f03afd96598a643d861bd763c6a9172c5a466ef9728e');
 
