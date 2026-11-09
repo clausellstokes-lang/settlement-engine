@@ -49,7 +49,7 @@
       "banner": 9,
       "dated": 198,
       "sha-pin": 2,
-      "tree": 160
+      "tree": 161
     },
     "files": {
       "banner": [
@@ -446,7 +446,8 @@
     "_rosterGrowth2026-11-09-style-2-pdf-foundry": "ONE document JOINED the roster by being BORN into it (seat SW-B4 PDF-FOUNDRY, session session_01FbPLberW9uzNRqfNQgEeEJ, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-pdf-foundry-2026-11-09 cut from the integration tip 0c93f0ca0): `dated` 168 -> 169, docs/chair/2026-11-09/STYLE-2-PDF-FOUNDRY-2026-11-09.md, the lane's record, born dated; the count measured once by this walker's own arm; nothing changed class. The `tree` arm is red at the base by MERGE-WAVE's in-flight records and is not touched here.",
     "_rosterGrowth2026-11-09-style-2-merge-swb4": "THE UNION AT THE SW-B4 PDF-FOUNDRY MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 196 -> 197 (docs/chair/2026-11-09/STYLE-2-PDF-FOUNDRY-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-frames": "ONE document JOINED the roster by being BORN into it (lane SW-B5 FRAMES, session session_01FbPLbemRZPR6JPWkRugats, 2026-11-09): docs/chair/2026-11-09/STYLE-2-FRAMES-2026-11-09.md, the lane's record, born dated; `dated` 168 -> 169, measured once by the walker; 0 past-EOF (the record cites code by symbol); nothing changed class. The `tree` arm (139 committed, 147 measured) is red at the lane's base by MERGE-WAVE's in-flight records and is NOT touched here.",
-    "_rosterGrowth2026-11-09-style-2-merge-swb5": "THE UNION AT THE SW-B5 FRAMES MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 197 -> 198 (docs/chair/2026-11-09/STYLE-2-FRAMES-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-swb5": "THE UNION AT THE SW-B5 FRAMES MERGE (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): both sides' notes kept; `dated` 197 -> 198 (docs/chair/2026-11-09/STYLE-2-FRAMES-2026-11-09.md, the lane's record, born dated); the count measured once by this walker at the merged tree; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-record-9": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE, session session_01FbPLbcZKUz5mt8iVSnCh7G): `tree` 160 -> 161, docs/shift-records/2026-11-09-style-2-merge-9-swb5.json, record 9, born into the tree class; measured once by this walker; nothing changed class."
   },
   "rows": []
 }
