@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 189,
+      "dated": 190,
       "sha-pin": 2,
       "tree": 155
     },
@@ -422,7 +422,8 @@
     "_rosterGrowth2026-11-09-allegiance-car4-merge-write-people-3": "TWO documents JOINED the roster by MERGE (ALLEGIANCE-CAR4, session session_01FbPLbccUzaWmQYhp6feW9L, on lane/allegiance-car4-2026-11-08, measured once with this walker's own arm): `dated` 163 -> 165 at the merge of origin/lane/write-people-3-2026-11-08 at 5ee39a56c, docs/allegiance/WRITE_PEOPLE_2026-11-08.md (WRITE-PEOPLE's record, its lane's note kept beside) and docs/allegiance/WRITE_PEOPLE_3_2026-11-08.md (WRITE-PEOPLE-3's record, which its lane bore uncounted), each born dated, 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-09-allegiance-car4-record": "ONE document JOINED the roster by being BORN into it (ALLEGIANCE-CAR4, session session_01FbPLbccUzaWmQYhp6feW9L, on lane/allegiance-car4-2026-11-08, measured once with this walker's own arm): `dated` 165 -> 166, docs/allegiance/ALLEGIANCE_CAR4_2026-11-08.md, the car's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-09-merge-train-car4": "THE UNION AT THE ALLEGIANCE-CAR4 MERGE (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 185 -> 188, docs/allegiance/ALLEGIANCE_CAR4_2026-11-08.md (car 4's lane record), WRITE_GOALS_2026-11-08.md and WRITE_PEOPLE_3_2026-11-08.md (its two components' records), each born dated on its lane; `tree` 153 -> 154, docs/shift-records/2026-11-09-merge-train-9-car4.json, record 9; only what was merged is counted (SW-9's record is not on this line); measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-09-merge-train-record": "TWO documents JOINED the roster at the train's end (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 188 -> 189, docs/INTEGRATION_MERGE_TRAIN_2026-11-09.md, the train's record, born dated; `tree` 154 -> 155, docs/shift-records/2026-11-09-merge-train-10-composed-prose-manifest.json, record 10 (the manifest signed once); measured once by this walker; nothing changed class."
+    "_rosterGrowth2026-11-09-merge-train-record": "TWO documents JOINED the roster at the train's end (MERGE-TRAIN, session session_01FbPLbdoiwrRKttcJEP3a48): `dated` 188 -> 189, docs/INTEGRATION_MERGE_TRAIN_2026-11-09.md, the train's record, born dated; `tree` 154 -> 155, docs/shift-records/2026-11-09-merge-train-10-composed-prose-manifest.json, record 10 (the manifest signed once); measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-projection": "ONE document JOINED the roster by being BORN into it (SW-B7b PROJECTION, session session_01FbPLbdv5BoGUynY8ainpA5, on lane/style-2-projection-2026-11-09 cut from bd07005b9, measured once with this walker's own arm): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md, the lane's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class."
   },
   "rows": []
 }
