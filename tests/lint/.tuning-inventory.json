@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "86ea40298bc29991cb896056008c9de0c6208d68",
-  "measuredBy": "MERGE-WAVE (FIX-PUBLIC-VEIL merge point)",
-  "date": "2026-11-08",
-  "note": "the FIX-PUBLIC-VEIL merge at 7e65c7bec: the veil lane re-shapes the card mints and the migrations; refrozen at the merged tip, Register VII v2 stands",
+  "measuredAtSha": "ced9793fd5ab846cb0bcf54391d66dfa9e0c81b9",
+  "measuredBy": "SW-12-second-seat",
+  "date": "2026-11-09",
+  "note": "STYLE-2 SW-12 (1aad33c36): tierResourceDynamics struck the tier odds line, and its bare 0.5 with it (40 -> 39); a shrink banked, no value proposed",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -2996,7 +2996,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 10,
-      "line": 104,
+      "line": 107,
       "spanDigest": "dbfcfab0b85ba11ba37df86f68c8a9d37aa788b3f5ec60b8be4eb7d9065dee53",
       "leaves": {
         "RESOLUTION_HOLD_TICKS": 4,
@@ -4365,7 +4365,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 452,
+      "line": 455,
       "spanDigest": "bfb9f3afad0fbf5a97b4267b6097e8e11f95abf8950fc1e2b5ff9ad9cc7133ec",
       "leaves": {
         "YEAR_WEEKS": 52,
@@ -4573,7 +4573,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 9,
-      "line": 338,
+      "line": 353,
       "spanDigest": "37a1bc4094de284a2324ceb0b235fa40705f16fc96c789ba973a7bdfed1ade87",
       "leaves": {
         "PLAUSIBLE_FLOOR": {
@@ -5432,7 +5432,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 11,
-      "line": 511,
+      "line": 530,
       "spanDigest": "7061eadeb2ee83e8b5629b7de376192218aa48ca400a1b1359702038c688986a",
       "leaves": {
         "RAMP_BASE_RATE": {
@@ -5483,7 +5483,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 3,
-      "line": 349,
+      "line": 366,
       "spanDigest": "8126b0186c8d8295f80dc5cbc055b5ac1d7272d21d8c57291b08e5ce954d4765",
       "leaves": {
         "REACT_SEVERITY": {
@@ -5961,7 +5961,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 17,
-      "line": 1615,
+      "line": 1666,
       "spanDigest": "0f3911d51b455117b7b82ce58ac87d572ada6ecc2f80814f3976a5355f931b84",
       "leaves": {
         "STATE_LADDER": {
@@ -7227,7 +7227,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 3,
-      "line": 1307,
+      "line": 1339,
       "spanDigest": "eb5d52fecaa15a2aacf6803f04e7dc8dd4c5d7422aa0757424f18cf39d0ab480",
       "leaves": {
         "STRATEGY_K": {
@@ -8745,7 +8745,7 @@
     "src/domain/worldPulse/supplyKernel.js": 6,
     "src/domain/worldPulse/supplyWebWarfare.js": 56,
     "src/domain/worldPulse/thievesGuild.js": 2,
-    "src/domain/worldPulse/tierResourceDynamics.js": 40,
+    "src/domain/worldPulse/tierResourceDynamics.js": 39,
     "src/domain/worldPulse/tradeSalience.js": 25,
     "src/domain/worldPulse/tradeWar.js": 25,
     "src/domain/worldPulse/traditionsKernel.js": 5,
@@ -8826,7 +8826,7 @@
     "tables": 271,
     "keys": 2222,
     "unregisteredNamed": 539,
-    "bareDecimals": 6935,
+    "bareDecimals": 6934,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 180
   }
