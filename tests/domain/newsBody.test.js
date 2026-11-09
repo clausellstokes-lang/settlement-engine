@@ -98,7 +98,7 @@ describe('newsBody — reasons recast into fiction', () => {
       'the reversal exacted a real political price',
     ]);
     expect(newsReaderSummary(entry)).toBe(
-      'The court held to the war too long; reversing course carried a real political price.',
+      'The court held to the war too long, and backing out of it now has cost its rulers dearly.',
     );
     // anchored: the exact reader summary above proves the kind-specific projection fired.
     expect(newsReaderSummary(entry)).not.toMatch(/\d|%|×|\b(?:stock|commitment|cliff)\b/i);

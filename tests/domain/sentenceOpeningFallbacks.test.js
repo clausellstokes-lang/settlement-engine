@@ -192,10 +192,10 @@ describe('14. warRemembrance territory and cost lines', () => {
     } } },
     nameFor,
   })[0];
-  it('a nameless occupier or place opens on "A court the record no longer names"', () => {
+  it('a nameless occupier or place opens on "A court whose name has been lost"', () => {
     const row = rows(() => '');
-    expect(row.territory[0]).toBe('A court the record no longer names burned a court the record no longer names.');
-    expect(row.territory[1]).toBe('A court the record no longer names was held.');
+    expect(row.territory[0]).toBe('A court whose name has been lost burned a court whose name has been lost.');
+    expect(row.territory[1]).toBe('A court whose name has been lost was held.');
   });
   it('a held name is unchanged', () => {
     const row = rows((id) => ({ o: 'Marchmont', p: 'Thornwall', q: 'Fenby' }[id] || id));

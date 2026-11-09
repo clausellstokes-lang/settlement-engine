@@ -50,7 +50,7 @@ describe('decreeTracker — completeness (every decree once)', () => {
     const nullOne = section.nulls.find(d => d.decreeId.includes('rename'));
     expect(nullOne).toBeTruthy();
     expect(nullOne.honestNull).toBe(true);
-    expect(section.findings.some(f => f.decreeId === nullOne.decreeId && /no measurable downstream/.test(f.text))).toBe(true);
+    expect(section.findings.some(f => f.decreeId === nullOne.decreeId && /can be traced to this decree/.test(f.text))).toBe(true);
   });
 });
 

@@ -36,7 +36,7 @@ const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) 
 // label and definition shared across the Realm, Library, admin, and export
 // surfaces so W/L is never mistaken for time at war or casualty accounting.
 export const REALM_CONTEST_RECORD_LABEL = 'Realm contest record';
-export const REALM_CONTEST_RECORD_HELP = 'Resolved siege, defense, conquest, and primary-supplier-flip outcomes; not time at war or casualties.';
+export const REALM_CONTEST_RECORD_HELP = 'Counts sieges given up, defences held, towns conquered and markets taken from a rival supplier; not time at war or the dead.';
 
 /**
  * The LIVE war_front channels on a regional graph, as { from, to } pairs.

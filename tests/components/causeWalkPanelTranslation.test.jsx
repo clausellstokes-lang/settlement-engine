@@ -13,7 +13,7 @@ vi.mock('../../src/domain/display/causeWalk.js', () => ({
       settlementIds: [],
       redacted: false,
     }],
-    graceLine: 'The ledger holds no deeper memory of this.',
+    graceLine: 'Nothing earlier is known to have caused this.',
   }),
 }));
 

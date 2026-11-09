@@ -110,21 +110,21 @@ const SLOT_PREREQUISITE = Object.freeze(['prerequisite']);
 export const DECREE_HAND_POOLS = Object.freeze({
   dm: Object.freeze([
     Object.freeze({ vid: 1, angle: 'ledger', causes: TABLE, text: 'It was set down by the table\'s hand.' }),
-    Object.freeze({ vid: 2, angle: 'street', causes: TABLE, text: 'The table wrote this one into the record itself.' }),
+    Object.freeze({ vid: 2, angle: 'street', causes: TABLE, text: 'The table decided this one itself.' }),
     Object.freeze({ vid: 3, angle: 'visitor', causes: TABLE, text: 'This came from the table, plainly and on purpose.' }),
     Object.freeze({ vid: 4, angle: 'ledger', causes: PARTY, text: 'It came by the party\'s hand, and the table only wrote it down.' }),
-    Object.freeze({ vid: 5, angle: 'street', causes: PARTY, text: 'The party\'s hand moved first here, and the table kept the record.' }),
+    Object.freeze({ vid: 5, angle: 'street', causes: PARTY, text: 'The party\'s hand moved first here, and the table only noted it.' }),
   ]),
   guard: Object.freeze([
-    Object.freeze({ vid: 6, angle: 'ledger', causes: TABLE, text: 'The register offered this one, and the table took the offer.' }),
-    Object.freeze({ vid: 7, angle: 'street', causes: TABLE, text: 'It stands here because the register proposed it and nobody refused.' }),
-    Object.freeze({ vid: 8, angle: 'visitor', causes: TABLE, text: 'The register raised it, and the table let it into the order.' }),
-    Object.freeze({ vid: 9, angle: 'ledger', causes: PARTY, text: 'The register offered it, and the party\'s hand carried it through.' }),
-    Object.freeze({ vid: 10, angle: 'street', causes: PARTY, text: 'It reached the order through the register, with the party acting on it.' }),
+    Object.freeze({ vid: 6, angle: 'ledger', causes: TABLE, text: 'It was offered as a suggestion, and the table took it.' }),
+    Object.freeze({ vid: 7, angle: 'street', causes: TABLE, text: 'It stands here because it was suggested and nobody refused.' }),
+    Object.freeze({ vid: 8, angle: 'visitor', causes: TABLE, text: 'It was suggested, and the table let it stand.' }),
+    Object.freeze({ vid: 9, angle: 'ledger', causes: PARTY, text: 'It was suggested, and the party\'s hand carried it through.' }),
+    Object.freeze({ vid: 10, angle: 'street', causes: PARTY, text: 'It began as a suggestion, and the party acted on it.' }),
   ]),
   surveyor: Object.freeze([
     Object.freeze({ vid: 11, angle: 'ledger', causes: TABLE, text: 'The Surveyor drew this one up, and the table let it stand.' }),
-    Object.freeze({ vid: 12, angle: 'street', causes: TABLE, text: 'It arrived as a Surveyor\'s proposal, with its credit already spent.' }),
+    Object.freeze({ vid: 12, angle: 'street', causes: TABLE, text: 'It arrived as a Surveyor\'s proposal, and the table accepted it.' }),
     Object.freeze({ vid: 13, angle: 'visitor', causes: TABLE, text: 'The Surveyor\'s hand is on this one, and the table kept it.' }),
     Object.freeze({ vid: 14, angle: 'ledger', causes: PARTY, text: 'The Surveyor drew it up, and the party\'s hand carried it out.' }),
     Object.freeze({ vid: 15, angle: 'street', causes: PARTY, text: 'It began as a Surveyor\'s proposal and ended in the party\'s hands.' }),
@@ -141,18 +141,18 @@ export const DECREE_HAND_POOLS = Object.freeze({
 export const DECREE_STANDING_POOLS = Object.freeze({
   applied: Object.freeze([
     Object.freeze({ vid: 16, angle: 'ledger', causes: EITHER, text: 'It has happened, and the town has lived it.' }),
-    Object.freeze({ vid: 17, angle: 'street', causes: EITHER, text: 'The advance carried it out, and what followed followed from it.' }),
-    Object.freeze({ vid: 18, angle: 'visitor', causes: EITHER, text: 'It is done, and the record keeps it where the doing put it.' }),
+    Object.freeze({ vid: 17, angle: 'street', causes: EITHER, text: 'It has been carried out, and the town has felt what followed.' }),
+    Object.freeze({ vid: 18, angle: 'visitor', causes: EITHER, text: 'It is done, and the town carries the mark of it.' }),
   ]),
   pending: Object.freeze([
-    Object.freeze({ vid: 19, angle: 'ledger', causes: EITHER, text: 'It waits for the next advance, and nothing of it has happened yet.' }),
-    Object.freeze({ vid: 20, angle: 'street', causes: EITHER, text: 'Nothing has come of it yet; it sits in the order, waiting its turn.' }),
-    Object.freeze({ vid: 21, angle: 'visitor', causes: EITHER, text: 'The order holds it, unspent, until the town moves again.' }),
+    Object.freeze({ vid: 19, angle: 'ledger', causes: EITHER, text: 'It waits for time to move on, and nothing of it has happened yet.' }),
+    Object.freeze({ vid: 20, angle: 'street', causes: EITHER, text: 'Nothing has come of it yet; it waits its turn.' }),
+    Object.freeze({ vid: 21, angle: 'visitor', causes: EITHER, text: 'It is held back, unspent, until time moves on in the town.' }),
   ]),
   withdrawn: Object.freeze([
     Object.freeze({ vid: 22, angle: 'ledger', causes: EITHER, text: 'It was set aside before it could happen, and its words were kept.' }),
-    Object.freeze({ vid: 23, angle: 'street', causes: EITHER, text: 'Nothing came of it; the order let it go and kept what it said.' }),
-    Object.freeze({ vid: 24, angle: 'visitor', causes: EITHER, text: 'It was withdrawn, and the register still carries the sentence it would have been.' }),
+    Object.freeze({ vid: 23, angle: 'street', causes: EITHER, text: 'Nothing came of it; it was let go, though what it said is kept.' }),
+    Object.freeze({ vid: 24, angle: 'visitor', causes: EITHER, text: 'It was withdrawn, and what it would have said is still written here.' }),
   ]),
 });
 
@@ -172,12 +172,12 @@ export const DECREE_FORM_POOLS = Object.freeze({
   ]),
   'off-stage-phantom': Object.freeze([
     Object.freeze({ vid: 28, angle: 'ledger', causes: EITHER, text: 'It reaches past the town\'s roads, overnight, by means the town does not understand.' }),
-    Object.freeze({ vid: 29, angle: 'street', causes: EITHER, text: 'Whatever answers out there answers off the record; what returns is the town\'s own, and nothing else comes home.' }),
+    Object.freeze({ vid: 29, angle: 'street', causes: EITHER, text: 'What happens out there is not seen from here; only what the town sent comes back, and nothing else comes home.' }),
     Object.freeze({ vid: 30, angle: 'visitor', causes: EITHER, slots: SLOT_COUNTERPART, text: 'Against {counterpart} the town can only send and receive, and the rest is a story told here.' }),
   ]),
   'off-stage-real': Object.freeze([
     Object.freeze({ vid: 31, angle: 'ledger', causes: EITHER, text: 'It crosses to a neighbour that answers for itself, and the answer will be its own.' }),
-    Object.freeze({ vid: 32, angle: 'street', causes: EITHER, text: 'The far side of this is a place with its own record, and it will keep one.' }),
+    Object.freeze({ vid: 32, angle: 'street', causes: EITHER, text: 'The far side of this is a place with its own history, and it will remember.' }),
     Object.freeze({ vid: 33, angle: 'visitor', causes: EITHER, slots: SLOT_COUNTERPART, text: '{counterpart} stands on the far side of it, and will act as it sees fit.' }),
   ]),
 });
@@ -192,29 +192,29 @@ export const DECREE_FORM_POOLS = Object.freeze({
  */
 export const DECREE_OVERRIDE_POOLS = Object.freeze({
   connection: Object.freeze([
-    Object.freeze({ vid: 34, angle: 'ledger', causes: EITHER, text: 'The register had asked for a connection to be made first, and the table went on without it.' }),
-    Object.freeze({ vid: 35, angle: 'street', causes: EITHER, text: 'A connection the register wanted was never made, and the table proceeded anyway.' }),
-    Object.freeze({ vid: 36, angle: 'visitor', causes: EITHER, text: 'The register named a missing connection; the table heard it and moved on.' }),
+    Object.freeze({ vid: 34, angle: 'ledger', causes: EITHER, text: 'The table was warned that a connection should be made first, and went on without it.' }),
+    Object.freeze({ vid: 35, angle: 'street', causes: EITHER, text: 'A connection the table was warned about was never made, and it proceeded anyway.' }),
+    Object.freeze({ vid: 36, angle: 'visitor', causes: EITHER, text: 'The table was warned of a missing connection, heard it, and moved on.' }),
   ]),
   contention: Object.freeze([
-    Object.freeze({ vid: 37, angle: 'ledger', causes: EITHER, text: 'The register called it a contention with an earlier decree, and the table let this one stand.' }),
+    Object.freeze({ vid: 37, angle: 'ledger', causes: EITHER, text: 'The table was warned this one is in contention with an earlier decree, and let it stand.' }),
     Object.freeze({ vid: 38, angle: 'street', causes: EITHER, text: 'Two decrees were in contention over the same fact, and the table chose this one.' }),
-    Object.freeze({ vid: 39, angle: 'visitor', causes: EITHER, text: 'The register raised the contention, and the table answered by proceeding.' }),
+    Object.freeze({ vid: 39, angle: 'visitor', causes: EITHER, text: 'The table was warned of the contention and answered by proceeding.' }),
   ]),
   contradiction: Object.freeze([
-    Object.freeze({ vid: 40, angle: 'ledger', causes: EITHER, text: 'The register named the contradiction, and the table set the warning aside.' }),
+    Object.freeze({ vid: 40, angle: 'ledger', causes: EITHER, text: 'The table was warned of the contradiction and set the warning aside.' }),
     Object.freeze({ vid: 41, angle: 'street', causes: EITHER, text: 'A contradiction was on the page, and the table wrote past it.' }),
-    Object.freeze({ vid: 42, angle: 'visitor', causes: EITHER, text: 'The register saw a contradiction here, and the table proceeded regardless.' }),
+    Object.freeze({ vid: 42, angle: 'visitor', causes: EITHER, text: 'The table was warned of a contradiction here, and proceeded regardless.' }),
   ]),
   prerequisite: Object.freeze([
-    Object.freeze({ vid: 43, angle: 'ledger', causes: EITHER, text: 'The register named a prerequisite still wanting, and the table did not wait for it.' }),
+    Object.freeze({ vid: 43, angle: 'ledger', causes: EITHER, text: 'The table was warned a prerequisite was still wanting, and did not wait for it.' }),
     Object.freeze({ vid: 44, angle: 'street', causes: EITHER, text: 'A prerequisite was missing, and the table proceeded without it.' }),
-    Object.freeze({ vid: 45, angle: 'visitor', causes: EITHER, text: 'The register asked for a prerequisite first, and the table went ahead.' }),
+    Object.freeze({ vid: 45, angle: 'visitor', causes: EITHER, text: 'The table was asked for a prerequisite first, and went ahead.' }),
   ]),
   totality: Object.freeze([
-    Object.freeze({ vid: 46, angle: 'ledger', causes: EITHER, text: 'The register warned that the totality would not balance, and the table let it ride.' }),
-    Object.freeze({ vid: 47, angle: 'street', causes: EITHER, text: 'A totality the register keeps was left short, and the table proceeded.' }),
-    Object.freeze({ vid: 48, angle: 'visitor', causes: EITHER, text: 'The register raised the totality, and the table accepted the imbalance.' }),
+    Object.freeze({ vid: 46, angle: 'ledger', causes: EITHER, text: 'The table was warned that the totality would not balance, and let it ride.' }),
+    Object.freeze({ vid: 47, angle: 'street', causes: EITHER, text: 'A totality that should have balanced was left short, and the table proceeded.' }),
+    Object.freeze({ vid: 48, angle: 'visitor', causes: EITHER, text: 'The table was warned the totality was out of balance, and accepted it.' }),
   ]),
 });
 
@@ -227,7 +227,7 @@ export const DECREE_OVERRIDE_POOLS = Object.freeze({
  * @type {ReadonlyArray<DecreeProseVariant>}
  */
 export const DECREE_FOLLOWS_FROM_POOL = Object.freeze([
-  Object.freeze({ vid: 49, angle: 'ledger', causes: EITHER, slots: SLOT_PREREQUISITE, text: 'It follows from the decree recorded as {prerequisite}.' }),
+  Object.freeze({ vid: 49, angle: 'ledger', causes: EITHER, slots: SLOT_PREREQUISITE, text: 'It follows from {prerequisite}.' }),
   Object.freeze({ vid: 50, angle: 'street', causes: EITHER, slots: SLOT_PREREQUISITE, text: 'Read it beside {prerequisite}, which came first and made room for it.' }),
   Object.freeze({ vid: 51, angle: 'visitor', causes: EITHER, slots: SLOT_PREREQUISITE, text: 'It stands on {prerequisite}, and would not have stood alone.' }),
 ]);
@@ -250,43 +250,54 @@ export const DECREE_FOLLOWS_FROM_POOL = Object.freeze([
  * thirty-third verb would arrive mute. The family is the grain at which the herald
  * actually speaks: the reader learns what part of the town's life is already spoken for,
  * and the typed event itself stays a fact the registry carries rather than a sentence.
+ *
+ * THE FOURTH VANTAGE (STYLE-2 SW-3, the owner's style law of 2026-11-07 §8): each family's
+ * pool carries a fourth variant from §8's vocabulary (the trade, the local, the official, the
+ * traveller, the watch), the same fact as its three siblings, appended under the vid law.
  * @type {DecreeProseBlock}
  */
 export const DECREE_EVENT_POOLS = Object.freeze({
   Economy: Object.freeze([
-    Object.freeze({ vid: 52, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the town\'s trade and its keeping.' }),
-    Object.freeze({ vid: 53, angle: 'street', causes: EITHER, text: 'The order names a change in what the town makes, holds and sells, due when the turn comes round.' }),
+    Object.freeze({ vid: 52, angle: 'ledger', causes: EITHER, text: 'What is planned for the coming turn falls on the town\'s trade and its stores.' }),
+    Object.freeze({ vid: 53, angle: 'street', causes: EITHER, text: 'A change in what the town makes, holds and sells is due when the turn comes round.' }),
     Object.freeze({ vid: 54, angle: 'visitor', causes: EITHER, text: 'Something in the market\'s arrangement is already spoken for, and waits only on the day.' }),
+    Object.freeze({ vid: 97, angle: 'trade', causes: EITHER, text: 'The traders will feel it first: what the town buys and sells is due to change when the turn comes round.' }),
   ]),
   Faith: Object.freeze([
-    Object.freeze({ vid: 55, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on what the town keeps faith with.' }),
-    Object.freeze({ vid: 56, angle: 'street', causes: EITHER, text: 'The order names a change in the town\'s observances, due when the turn comes round.' }),
+    Object.freeze({ vid: 55, angle: 'ledger', causes: EITHER, text: 'What is planned for the coming turn falls on what the town keeps faith with.' }),
+    Object.freeze({ vid: 56, angle: 'street', causes: EITHER, text: 'A change in the town\'s observances is due when the turn comes round.' }),
     Object.freeze({ vid: 57, angle: 'visitor', causes: EITHER, text: 'What is honoured here is already spoken for, and waits only on the day.' }),
+    Object.freeze({ vid: 98, angle: 'local', causes: EITHER, text: 'Folk at the shrines will notice it soonest, for the town\'s observances are due to change when the turn comes round.' }),
   ]),
   People: Object.freeze([
-    Object.freeze({ vid: 58, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the people who live here by name.' }),
-    Object.freeze({ vid: 59, angle: 'street', causes: EITHER, text: 'The order names a change among the town\'s own folk, due when the turn comes round.' }),
+    Object.freeze({ vid: 58, angle: 'ledger', causes: EITHER, text: 'What is planned for the coming turn falls on particular people of the town.' }),
+    Object.freeze({ vid: 59, angle: 'street', causes: EITHER, text: 'A change among the town\'s own folk is due when the turn comes round.' }),
     Object.freeze({ vid: 60, angle: 'visitor', causes: EITHER, text: 'A life here is already spoken for, and waits only on the day.' }),
+    Object.freeze({ vid: 99, angle: 'local', causes: EITHER, text: 'It falls on particular households here, and it is due when the turn comes round.' }),
   ]),
   Power: Object.freeze([
-    Object.freeze({ vid: 61, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on who holds authority here.' }),
-    Object.freeze({ vid: 62, angle: 'street', causes: EITHER, text: 'The order names a change in who answers for the town, due when the turn comes round.' }),
+    Object.freeze({ vid: 61, angle: 'ledger', causes: EITHER, text: 'What is planned for the coming turn falls on who holds authority here.' }),
+    Object.freeze({ vid: 62, angle: 'street', causes: EITHER, text: 'A change in who answers for the town is due when the turn comes round.' }),
     Object.freeze({ vid: 63, angle: 'visitor', causes: EITHER, text: 'Who speaks for this place is already spoken for, and waits only on the day.' }),
+    Object.freeze({ vid: 100, angle: 'official', causes: EITHER, text: 'Whoever answers for the town has cause to watch the day: who holds authority here is due to change when the turn comes round.' }),
   ]),
   Realm: Object.freeze([
-    Object.freeze({ vid: 64, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the town\'s whole standing in the wider realm.' }),
-    Object.freeze({ vid: 65, angle: 'street', causes: EITHER, slots: SLOT_SETTLEMENT, text: 'The order names a change to what {settlement} itself is, due when the turn comes round.' }),
+    Object.freeze({ vid: 64, angle: 'ledger', causes: EITHER, text: 'What is planned for the coming turn falls on the town\'s whole standing in the wider realm.' }),
+    Object.freeze({ vid: 65, angle: 'street', causes: EITHER, slots: SLOT_SETTLEMENT, text: '{settlement} itself is due to change when the turn comes round.' }),
     Object.freeze({ vid: 66, angle: 'visitor', causes: EITHER, text: 'The town\'s own place in the world is already spoken for, and waits only on the day.' }),
+    Object.freeze({ vid: 101, angle: 'traveller', causes: EITHER, slots: SLOT_SETTLEMENT, text: 'A traveller who comes back to {settlement} after the turn will find it changed in what it is.' }),
   ]),
   Relations: Object.freeze([
-    Object.freeze({ vid: 67, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the town\'s dealings with its neighbours.' }),
-    Object.freeze({ vid: 68, angle: 'street', causes: EITHER, text: 'The order names a change between the town and those it lives beside, due when the turn comes round.' }),
+    Object.freeze({ vid: 67, angle: 'ledger', causes: EITHER, text: 'What is planned for the coming turn falls on the town\'s dealings with its neighbours.' }),
+    Object.freeze({ vid: 68, angle: 'street', causes: EITHER, text: 'A change between the town and those it lives beside is due when the turn comes round.' }),
     Object.freeze({ vid: 69, angle: 'visitor', causes: EITHER, text: 'How the town stands with its neighbours is already spoken for, and waits only on the day.' }),
+    Object.freeze({ vid: 102, angle: 'official', causes: EITHER, text: 'Those who treat with the neighbours have cause to watch the day, for how the town stands with them is due to change.' }),
   ]),
   War: Object.freeze([
-    Object.freeze({ vid: 70, angle: 'ledger', causes: EITHER, text: 'What was set down for the coming turn falls on the town as a trouble it must carry.' }),
-    Object.freeze({ vid: 71, angle: 'street', causes: EITHER, text: 'The order names a hardship the town will meet, due when the turn comes round.' }),
+    Object.freeze({ vid: 70, angle: 'ledger', causes: EITHER, text: 'What is planned for the coming turn is a trouble the town must carry.' }),
+    Object.freeze({ vid: 71, angle: 'street', causes: EITHER, text: 'A hardship the town must meet is due when the turn comes round.' }),
     Object.freeze({ vid: 72, angle: 'visitor', causes: EITHER, text: 'A trouble is already spoken for, and waits only on the day.' }),
+    Object.freeze({ vid: 103, angle: 'watch', causes: EITHER, text: 'The watch has a hardship to brace for, and it is due to fall on the town when the turn comes round.' }),
   ]),
 });
 
@@ -314,8 +325,8 @@ export const DECREE_EVENT_POOLS = Object.freeze({
  */
 export const DECREE_PARTY_DEED_POOLS = Object.freeze({
   bolster_faction: Object.freeze([
-    Object.freeze({ vid: 73, angle: 'ledger', causes: PARTY, text: 'A faction\'s standing here was raised by the party\'s hand.' }),
-    Object.freeze({ vid: 74, angle: 'street', causes: PARTY, text: 'One of the town\'s factions walks taller since the party took its side.' }),
+    Object.freeze({ vid: 73, angle: 'ledger', causes: PARTY, text: 'A power\'s standing here was raised by the party\'s hand.' }),
+    Object.freeze({ vid: 74, angle: 'street', causes: PARTY, text: 'One of the town\'s powers walks taller since the party took its side.' }),
   ]),
   broker_relationship: Object.freeze([
     Object.freeze({ vid: 75, angle: 'ledger', causes: PARTY, text: 'The quarrel between the two places was cooled by the party\'s hand.' }),
@@ -347,15 +358,15 @@ export const DECREE_PARTY_DEED_POOLS = Object.freeze({
   ]),
   remove_npc: Object.freeze([
     Object.freeze({ vid: 89, angle: 'ledger', causes: PARTY, text: 'A person was taken out of the town\'s affairs altogether by the party\'s hand.' }),
-    Object.freeze({ vid: 90, angle: 'street', causes: PARTY, text: 'One of the town\'s own is not in the reckoning any more, and the party is the reason.' }),
+    Object.freeze({ vid: 90, angle: 'street', causes: PARTY, text: 'One of the town\'s own has no say in its affairs any more, and the party is the reason.' }),
   ]),
   resolve_stressor: Object.freeze([
     Object.freeze({ vid: 91, angle: 'ledger', causes: PARTY, text: 'The trouble that had its grip on the town was ended by the party\'s hand.' }),
     Object.freeze({ vid: 92, angle: 'street', causes: PARTY, text: 'Whatever had been gnawing at the place, the party finished it, and the town knows whom to thank.' }),
   ]),
   undermine_faction: Object.freeze([
-    Object.freeze({ vid: 93, angle: 'ledger', causes: PARTY, text: 'A faction\'s standing here was cut down by the party\'s hand.' }),
-    Object.freeze({ vid: 94, angle: 'street', causes: PARTY, text: 'One of the town\'s factions lost ground, and the party is why.' }),
+    Object.freeze({ vid: 93, angle: 'ledger', causes: PARTY, text: 'A power\'s standing here was cut down by the party\'s hand.' }),
+    Object.freeze({ vid: 94, angle: 'street', causes: PARTY, text: 'One of the town\'s powers lost ground, and the party is why.' }),
   ]),
   worsen_stressor: Object.freeze([
     Object.freeze({ vid: 95, angle: 'ledger', causes: PARTY, text: 'The trouble was deepened by the party\'s hand, whether or not that was the intent.' }),

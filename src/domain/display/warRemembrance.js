@@ -130,7 +130,7 @@ export function warTurningBandKey(elapsed) {
 /** How long ago the war ended, in the Herald's own time word.
  * @type {Readonly<Record<string, string>>} */
 const ENDED_WORDS = Object.freeze({
-  unrecorded: 'The record does not set down when it ended.',
+  unrecorded: 'When it ended is not known.',
   this_turning: 'Ended this turning.',
   last_turning: 'Ended last turning.',
   a_few: 'Ended a few turnings back.',
@@ -161,20 +161,20 @@ const RAN_WORDS = Object.freeze({
  */
 export const WAR_ENDING_TELLINGS = Object.freeze({
   punitive_sack_vengeance: 'It ended in a sack, taken as the answer to a burning of its own.',
-  punitive_sack_initiation: 'It ended in a sack, and that burning was the opening of the reckoning, not its answer.',
+  punitive_sack_initiation: 'It ended in a sack, and that burning was the first blow, not an answer to one.',
   conquest: 'It ended in conquest: {victor} held what it had taken.',
-  annihilation: 'It ended with a seat that did not outlast the war.',
+  annihilation: 'It ended with one side\'s seat destroyed outright.',
   fragmentation: 'It ended piecemeal, the coalition falling apart into separate peaces.',
   ruler_change: 'It ended when a court changed hands and the new seat put the war down.',
   exhaustion: 'It ended in exhaustion, with neither court left willing to carry it.',
   terms: 'It ended at the table, with terms written down.',
-  not_a_closed_war: 'The record does not yet call this war closed.',
-  no_terminal_evidence: 'How it ended is not set down in the record.',
-  razing_road_unreconstructable: 'It ended with a burning the record cannot attribute, so the manner is left unsaid.',
+  not_a_closed_war: 'This war is not yet over.',
+  no_terminal_evidence: 'How it ended is not known.',
+  razing_road_unreconstructable: 'It ended with a burning no one can put a name to, so how it ended is left unsaid.',
 });
 
 /** The word for a war whose ending key this build does not recognise. */
-const UNKNOWN_ENDING_TELLING = 'How it ended is not set down in the record.';
+const UNKNOWN_ENDING_TELLING = 'How it ended is not known.';
 
 /** The territorial outcome kinds, as the sentence says them. Closed by the record.
  * @type {Readonly<Record<string, string>>} */
@@ -184,7 +184,7 @@ const TERRITORY_WORDS = Object.freeze({
 });
 
 /** The nameless filler where its slot opens a sentence (F11, rung 2B). */
-const REMEMBERED_LEAD = 'A court the record no longer names';
+const REMEMBERED_LEAD = 'A court whose name has been lost';
 
 /**
  * The name a place is remembered by: the LIVE name first, the name it carried at
@@ -197,7 +197,7 @@ const REMEMBERED_LEAD = 'A court the record no longer names';
  * @param {string} [fallback]  the nameless filler; a sentence-opening slot passes it sentence-cased
  * @returns {string}
  */
-function rememberedName(id, nameFor, labels, fallback = 'a court the record no longer names') {
+function rememberedName(id, nameFor, labels, fallback = 'a court whose name has been lost') {
   const key = text(id) || String(id ?? '');
   const live = text(nameFor(key)).trim();
   if (live && live !== key) return live;
@@ -388,7 +388,7 @@ function remembranceRow(record, nowTick, nameFor, seesSecrets) {
     staged,
     // A staged record is a war whose negotiated facts may still be arriving. Saying
     // so is honest; showing a sealed reading of it would not be.
-    stagedNote: staged ? 'The account of it is still being written down.' : '',
+    stagedNote: staged ? 'Its peace is not yet fully settled, so this account may still change.' : '',
     receipts,
     receiptsRedacted: !seesSecrets,
   };
