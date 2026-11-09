@@ -221,7 +221,7 @@ export function deriveCriminalStructure(settlement) {
     ?? (signal.factions.length ? 'organized'
       : signal.houses.length || listed ? 'semi-organized'
         : null);
-  return key ? CRIM_STRUCTURE_DATA[key] : null;
+  return key ? withRingVantage(CRIM_STRUCTURE_DATA[key], r) : null;
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
@@ -630,4 +630,39 @@ export function foodEnduranceLine(settlement) {
     after = ` ${carries} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}${held}.`;
   }
   return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
+}
+
+// ─── SW-B5 FRAMES: the criminal ring's note gets vantages ─────────────────────
+// ⚠ AT THE END OF THE FILE so no line above moves (lines of this module are cited elsewhere).
+import { hashKey } from './stateProse/stateProseKernel.js';
+
+/**
+ * ⭐ THE RING'S NOTE GETS VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5, the
+ * chair's widening of the lane's manifest to this one note; the owner's style law §7–§8). The
+ * `organized` note printed word for word in 306 of the 1,000 towns, as two frames (#12–15 of
+ * STYLE-0's twenty). Index 0 is the original; the others say the SAME facts — one ring decides
+ * what crime is allowed, it is predictable and can be bargained with, it puts down random
+ * violence because that brings the law, it lives on protection money and bought officials —
+ * from another vantage. No new fact is read. The settlement's own seed chooses (`_seed`, the
+ * birth's identity) through the kernel's avalanched `hashKey`, with no draw; a record with no seed prints the original. Only the note
+ * varies: `key`, `label` and the colours are the table's, so every reader of `key` is unmoved.
+ * @type {ReadonlyArray<string>}
+ */
+const ORGANIZED_RING_NOTES = Object.freeze([
+  CRIM_STRUCTURE_DATA.organized.note,
+  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and the officials it pays, and anyone who needs something from it can bargain.',
+  'Shopkeepers here pay one ring for protection, and the ring pays officials in turn. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
+  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and bribed officials.',
+]);
+
+/**
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
+ * @param {{ _seed?: unknown }} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function withRingVantage(row, settlement) {
+  const seed = settlement?._seed;
+  if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
+  const note = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
+  return note === row.note ? row : Object.freeze({ ...row, note });
 }
