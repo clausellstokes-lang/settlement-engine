@@ -56,7 +56,9 @@ registerStep('generateNarratives', {
   // so it is stamped on here. Without it the rung falls back to canonical-at-zero and
   // every settlement on a route shares one sentence, which is the defect lane RR closed.
   // #10 (W5 HIS 2026-11-07): the port reason reads whether a docks or wharf institution exists.
-  const hasDocks = Boolean(getInstFlags(effectiveConfig, institutions).hasPort);
+  // MERGE-WAVE record 10 (the chair's ruling (a), 2026-11-09): the flag lives on the institution-presence record, `.inst`;
+  // read at the top level it was undefined on every birth, so the docks were never read.
+  const hasDocks = Boolean(getInstFlags(effectiveConfig, institutions).inst.hasPort);
   const settlementReason = generateSettlementReason(
     tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed },
     economicViability?.metrics?.foodBalance || null,
