@@ -2537,6 +2537,22 @@
       "band": null,
       "note": "ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.2, J-11): the guild's push on a hidden agent's roll weight in its legitimate powers' rank deal — strength (multiplier, 0.6: the criminal power's pull at full strength), strengthFull (points, 30: the criminal power's strength at which the pull is full), organized (multiplier, 0.4: organized crime's pull), max (multiplier, 2.0: the cap); the floors never read it; registered as a draft the day the dial was born, not signed."
     },
+    "src/generators/people/goals.js#GOAL_FAMILY_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR4 (2026-11-09, the allegiance design §3.6 and §6.2, J-15): the goal families' weights — base.<family> (multiplier, 1 each: RANK, POWER, INSTITUTION, SUPPLY, TIES, PERSONALITY, ALLEGIANCE, CRISIS); fit.rankClimb 1.5 (a card ranked 2 or 3), fit.powerFirst 1.3 (a rank-1 face), fit.supplyTrade 1.5 (the Crafts and Economy shelves), fit.institutionImpaired 1.3 (the house processes an impaired chain), fit.allegianceAgentShort 3 (an agent's short goal), fit.allegianceHandler 2 (a handler), fit.crisisStress 2 (under its stress), fit.personality 0.6 (the floor); uncanny.perCard.<tier> (probability, thorp 0.003 · hamlet 0.004 · village 0.006 · town 0.008 · city 0.011 · metropolis 0.013: the owner's rare fantasy goals, magic on as the gate, WRITE-GOALS §8's drafts), uncanny.capPerSettlement (count, 2), uncanny.vantage ('short'); registered as a draft the day the dial was born, not signed."
+    },
+    "src/generators/people/goals.js#LAW_PURSUIT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": null,
+      "band": null,
+      "note": "ALLEGIANCE-CAR4 (2026-11-09, the allegiance design §3.5, J-14): the law's pursuit — strengthFull (points, 30: a power's strength at which the pull is full); warrant.base / .enforcer / .guild / .min / .max (probability, 0.20 / 0.40 / 0.25 / 0.05 / 0.60: an open criminal face's warrant, up with the enforcer's power, down with the guild's); suspicion.base / .enforcer / .guild / .organized / .min / .max (probability, 0.10 / 0.30 / 0.20 / 0.10 / 0.02 / 0.40: a hidden allegiance's suspicion, up with both strengths and organized crime); exposure.open / .front / .office / .retainer (multiplier, 1.0 / 0.5 / 0.75 / 0.4: a target's weight by its link); importance.pillar / .key / .notable / .minor (multiplier, 4 / 3 / 2 / 1); registered as a draft the day the dial was born, not signed."
+    },
     "src/lib/townScene/adaptiveQuality.js#GOVERNOR_TUNING": {
       "role": null,
       "status": "draft",

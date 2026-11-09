@@ -134,11 +134,13 @@ const DECOY_RECEIVERS = Object.freeze([
     occurrences: 1,
     why: 'the water-access verdict\'s own note, interpolated into a viability description',
   }),
+  // ALLEGIANCE-CAR4 (2026-11-09): the stress override bag MOVED with its reader, from npcGenerator.js :: mergeNPCLists
+  // (`override`, two reads) to the goal families' CRISIS family (goals.js, one read), re-keyed by cause
   Object.freeze({
-    file: 'src/generators/npcGenerator.js',
-    receiver: 'override',
-    occurrences: 2,
-    why: 'a CALLER-SUPPLIED override bag read before an npc exists; the write target is a separate key',
+    file: 'src/generators/people/goals.js',
+    receiver: 'row',
+    occurrences: 1,
+    why: 'a CALLER-SUPPLIED override bag (STRESS_GOAL_OVERRIDES\' row) read before the goal exists; the write target is the card\'s stressNote',
   }),
   Object.freeze({
     file: 'src/generators/structuralValidator.js',
@@ -150,7 +152,7 @@ const DECOY_RECEIVERS = Object.freeze([
 
 /** The SITE and OCCURRENCE totals the roster asserts beside its rows. */
 const DECOY_SITE_TOTAL = 6;
-const DECOY_OCCURRENCE_TOTAL = 8;
+const DECOY_OCCURRENCE_TOTAL = 7; // ALLEGIANCE-CAR4: 8 -> 7, the override bag's two reads in mergeNPCLists became one in goals.js
 
 /**
  * THE MEASURED DORMANCY SPLIT. Which card types carry a `free` row is a CLAIM about the

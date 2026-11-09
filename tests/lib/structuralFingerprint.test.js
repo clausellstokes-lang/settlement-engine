@@ -161,6 +161,7 @@ describe('structuralFingerprint — redaction canary', () => {
     // generation-roster sub-block (settlement.npcs)
     // ALLEGIANCE-CAR1 (2026-11-08, J-17): corrupt_count -> allegiance_count, re-keyed with the cause
     expect(fp.npc.allegiance_count).toBe(0);
+    // anchored: fp.npc is the live block: allegiance_count is pinned on the line above
     expect(fp.npc).not.toHaveProperty('corrupt_count');
     // ALLEGIANCE-CAR4 (shape 2, the chair's row): the card's rank, the fallback-title count and the keyed goal's family
     // per vantage — counts and enums only; the shape is versioned so a research row tells old from new
@@ -168,6 +169,7 @@ describe('structuralFingerprint — redaction canary', () => {
     expect(fp.npc.membership_rank_dist).toEqual({ unranked: 1, rank2: 1 });
     expect(fp.npc.fallback_title_count).toBe(1);
     expect(fp.npc.intent_family_dist).toEqual({ short: { ALLEGIANCE: 1 }, long: { TIES: 1 } });
+    // anchored: fp.npc carries intent_family_dist, pinned on the line above with its two families
     expect(stableStringify(fp.npc), 'no kind, key or target leaves with the family').not.toMatch(/warrant|pursue_warrant|repay_debt|"target"/);
     // sim-state evolution sub-block (campaign worldState.npcStates)
     expect(fp.npc.role_archetype_dist).toEqual({ heir: 1, criminal: 1 });

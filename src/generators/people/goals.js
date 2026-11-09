@@ -43,11 +43,12 @@ import { magicOf } from '../../domain/facts/magic.js';
 import { allegianceOf, criminalHousesOf, criminalPowersOf, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { NPC_GOAL_SIBLINGS, SIEGE_GOALS, STRESS_GOAL_OVERRIDES, stressBucketOf } from '../npcGenerator.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
+import { clamp, clamp01 } from '../../kernel/math.js';
 
 /** @typedef {Record<string, any>} Rec */
 /** @typedef {'short' | 'long'} Vantage */
 /** @typedef {{ kind: 'npc' | 'power' | 'house' | 'chain', id: string }} GoalTarget */
-/** @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], note?: string | null, notes?: Rec[] }} Candidate */
+/** @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[] }} Candidate */
 
 /** The keyed fork family the goals draw under (declared in the fork census). */
 export const GOALS_FORK_LABEL = 'people-goals';
@@ -159,10 +160,6 @@ const rec = (v) => (v && typeof v === 'object' && !Array.isArray(v) ? /** @type 
 const arr = (v) => (Array.isArray(v) ? v : []);
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v : '');
-/** @param {number} x @returns {number} */
-const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
-/** @param {number} x @param {number} lo @param {number} hi */
-const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
 
 /** A person slot: the name before any parenthetical ("Milko Solovyov (the lanista)" → "Milko Solovyov"). @param {unknown} card */
 export const personName = (card) => str(rec(card).name).replace(/\s*\(.*$/, '').trim();
@@ -340,7 +337,7 @@ function pursuitChances(card, ctx) {
   const T = LAW_PURSUIT_TUNING;
   const enf = Math.max(0, ...[...powersOfCard(card)].map((p) => ctx.strengthOf.get(p) || 0));
   const crim = ctx.crimPowers.length ? (Number(ctx.crimPowers[0].power) || 0) : 0;
-  const e = n01(enf / T.strengthFull); const g = n01(crim / T.strengthFull);
+  const e = clamp01(enf / T.strengthFull); const g = clamp01(crim / T.strengthFull);
   return {
     pWarrant: clamp(T.warrant.base + T.warrant.enforcer * e - T.warrant.guild * g, T.warrant.min, T.warrant.max),
     pSuspicion: clamp(T.suspicion.base + T.suspicion.enforcer * e + T.suspicion.guild * g + T.suspicion.organized * ctx.organized, T.suspicion.min, T.suspicion.max),
@@ -350,7 +347,7 @@ function pursuitChances(card, ctx) {
 /**
  * Every line of a cell the record fills and admits, unheld: the candidates of one sub-kind.
  * @param {string} family @param {string} kind @param {Vantage} vantage @param {Rec} slots @param {GoalContext} ctx
- * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[], note?: string | null }} [extra]
+ * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[] }} [extra]
  * @returns {Candidate[]}
  */
 function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
@@ -366,7 +363,7 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
     if (!text) continue;
     if (held.has(text)) { ctx.refusals.n += 1; continue; }
     const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
-    out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], note: extra.note ?? null, notes });
+    out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes });
   }
   return out;
 }
@@ -493,8 +490,9 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
     if (o) {
       const spoken = (/** @type {string} */ l) => resolveSibling(l, NPC_GOAL_SIBLINGS, { facts: ctx.facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' });
       const { result: [kept], notes } = quiet(() => filterDeclared([o], { facts: ctx.facts, poolId: `npcGenerator:STRESS_GOAL_OVERRIDES.${ctx.stressType}`, surface: 'npcs', drawKind: 'T' }));
-      const { result: said, notes: saidNotes } = quiet(() => (kept ? { text: spoken(str(rec(kept).short)), note: rec(kept).note ? spoken(str(rec(kept).note)) : null } : null));
-      if (said?.text && !held.has(said.text)) push([{ family: 'CRISIS', kind: bucket, text: said.text, target: null, slots: {}, refs: [], note: said.note, notes: [...notes, ...saidNotes] }]);
+      const row = rec(kept); const overrideNote = str(row.note); // the override row's own note, a caller-supplied bag (the flavor census's decoy)
+      const { result: said, notes: saidNotes } = quiet(() => (kept ? { text: spoken(str(row.short)), crisisNote: overrideNote ? spoken(overrideNote) : null } : null));
+      if (said?.text && !held.has(said.text)) push([{ family: 'CRISIS', kind: bucket, text: said.text, target: null, slots: {}, refs: [], crisisNote: said.crisisNote, notes: [...notes, ...saidNotes] }]);
     }
   }
   if (ctx.stresses.includes('under_siege')) {
@@ -650,7 +648,7 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
     receipts.push(receipt);
     /** @type {Rec} */
     const next = { ...card, goal: { short: short?.text ?? null, long: long?.text ?? null, intent: { short: short ? intentOf(short) : null, long: long ? intentOf(long) : null } } };
-    if (short?.family === 'CRISIS' && short.note) next.stressNote = short.note;
+    if (short?.family === 'CRISIS' && short.crisisNote) next.stressNote = short.crisisNote;
     else if ('stressNote' in next && short?.family !== 'CRISIS') delete next.stressNote;
     return next;
   });

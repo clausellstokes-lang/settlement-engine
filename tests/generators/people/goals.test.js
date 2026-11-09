@@ -91,6 +91,7 @@ describe('A9: every dealt card holds two goals from two families', () => {
       cards += 1;
       expect(typeof c.goal?.short, `${s.name} ${c.id} short`).toBe('string');
       expect(typeof c.goal?.long, `${s.name} ${c.id} long`).toBe('string');
+      // anchored: the two typeof arms just above prove each t is a live goal string, so the pattern is read against real text
       for (const t of [c.goal.short, c.goal.long]) expect(t, `${c.id}: an unfilled slot`).not.toMatch(/\{\w+\}|\[object|undefined|null/);
       if (c.goal.intent.short.family === c.goal.intent.long.family) sameFamily += 1;
     }
@@ -235,7 +236,9 @@ describe('the fills (WRITE-GOALS §6, bound exactly) and J-16', () => {
 
   it('J-16: no goal by title — the module never reads a card\'s title and never imports the title pools', () => {
     const src = readFileSync(new URL('../../../src/generators/people/goals.js', import.meta.url), 'utf8');
+    // anchored: src is the module's own text, read just above (a missing file throws); the import line names goalFamilies.js, so the text is live
     expect(src).not.toMatch(/\.title\b/);
+    // anchored: the same live text; the positive import of goalFamilies.js in it proves the scan reads the module
     expect(src).not.toMatch(/titleSecretsPresentations|POOL_BY_TITLE|NPC_FACTION_GOALS/);
   });
 
@@ -262,11 +265,13 @@ describe('ITEM 15 (the design §6.5, J-16): the secret and the presentation by t
     expect(titleLinesFor('the head of Elder Council'), 'a mint\'s title keeps its category').toBeNull();
     const other = face('the head of Elder Council');
     const all = Object.values(TITLE_SECRETS).flat().map((r) => r.secret);
+    // anchored: the collection is every title secret (147 x 3, pinned at 147 above) and other.secret is a drawn secret
     expect(all, 'anchored: a title outside the table draws no title line').not.toContain(other.secret?.what);
   });
   it('REVIEW-INTAKE-4: a title whose three secrets the roster already holds falls back to its category, never repeats one', () => {
     const held = new Set(TITLE_SECRETS['the miller'].map((r) => r.secret));
     const card = face('the miller', held);
+    // anchored: the collection is the miller's own three (the positive arm above draws from them); the card's secret is drawn
     expect(TITLE_SECRETS['the miller'].map((r) => r.secret)).not.toContain(card.secret?.what);
   });
   it('on the slice, every titled face born with its own presentation keeps a title line (the secret-driven modes apart)', () => {
