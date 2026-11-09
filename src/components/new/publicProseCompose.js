@@ -26,6 +26,7 @@
 import { PUBLIC_PROSE_VERSION, aliasRepeatedRungs, shippedProseOf } from '../../domain/display/publicProse.js';
 import { economyDeskRead } from './economyDeskRead.js';
 import { criminalStructureOf, economicsDeskArgs, impairedInstitutionOf, overviewStressesOf } from './deskHostArgs.js';
+import { overviewIdentityOf } from './overviewIdentity.js';
 import { generalDeskLines } from './generalDeskRead.js';
 import { stressorsDeskRead } from './stressorsDeskRead.js';
 import { defenseDeskRead, DEFENSE_LENSES } from './defenseDeskRead.js';
@@ -65,6 +66,12 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   ['general:history', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).history],
   ['general:viability', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).viability],
   ['general:economics', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).economics],
+  // The Overview's identity line (the culture scope and "Governed by"): composed owner-side, since
+  // the culture phrase reads fields the projection strips (overviewIdentity.js).
+  ['overview:identity', (s, publicDossier) => {
+    const identity = overviewIdentityOf(s, { publicDossier });
+    return identity.scope || identity.governs ? identity : null;
+  }],
   // THE STRESSORS DESK (stressorsDeskRead.js is its one caller): the Overview's crisis and
   // condition positions. The world stressor is campaign-only and ships null (owner-only).
   ['stressors:overview', (s, publicDossier) => stressorsDeskRead(s, {

@@ -70,7 +70,17 @@ const TABS = {
  * family not yet lit (or a line the projection's own field set strips) is pinned per family
  * below instead, and joins this list in the cause that completes it.
  */
-const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history', 'defense', 'magic', 'viability'];
+const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history', 'defense', 'magic', 'viability', 'overview'];
+
+/**
+ * THE VEILED ROWS, per tab: lines the owner's player view prints that the projection strips by
+ * law, so the shared page's silence there is the veil, not a gap. The crisis card's "Hook:" rows
+ * read `crisisHook` (the `hook` denylist token; §6.3 finding 3, ruled veiled).
+ * @type {Record<string, (line: string) => boolean>}
+ */
+const VEILED = {
+  overview: (line) => line.startsWith('Hook: '),
+};
 
 /**
  * THE LIT FAMILIES' SITES, by tab: every string the save shipped at these sites that the owner's
@@ -127,7 +137,8 @@ describe('the shared page prints the owner\'s player view, line for line', () =>
   for (const tab of COMPLETE) {
     it.each(TOWNS)(`${tab}, soak1k-%i: every owner player-view line is on the shared page`, (i) => {
       const { owner, shared } = towns[i];
-      const a = proseLines(TABS[tab](owner, { playerView: true }));
+      const veiled = VEILED[tab] ?? (() => false);
+      const a = proseLines(TABS[tab](owner, { playerView: true })).filter((line) => !veiled(line));
       const b = new Set(proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })));
       expect(a.length).toBeGreaterThan(0);
       expect(a.filter((line) => !b.has(line))).toEqual([]);

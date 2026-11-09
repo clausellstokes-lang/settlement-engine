@@ -36,6 +36,8 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx';
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
 import { useStore } from '../../src/store/index.js';
+import { withPublicProse } from '../../src/domain/display/publicProse.js';
+import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
 import { generalDeskLines, siteClause } from '../../src/components/new/generalDeskRead.js';
 import { relationshipsDeskLists } from '../../src/domain/display/stateProse/relationshipsDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -331,8 +333,11 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       powerStructure: { governingName: 'The Burgher Council', stability: 'Stable', factions: [] },
       history: { historicalCharacter: 'Character fixture line.' },
     };
+    // RE-KEYED BY CAUSE (SW-B7b fourth seat, B10(a)): a shared page prints the identity line the
+    // owner's save composed (`overview:identity`), so the fixture is stamped as its save stamps it.
+    const stamp = (t) => withPublicProse(t, composePublicProse(t));
     const { container } = render(e(OverviewTab, {
-      settlement: town, narrativeNote: null, onNavigateTab: () => {},
+      settlement: stamp(town), narrativeNote: null, onNavigateTab: () => {},
       publicDossier: true, playerView: false, worldState: null,
     }));
     const line = container.querySelector('[data-testid="overview-identity-line"]')?.textContent || '';
@@ -347,7 +352,7 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     // A culture with no authored phrase takes no fallback: the character line stays the strip's quote only.
     const mixed = { ...town, culturalIdentity: { key: 'mixed', label: 'Germanic-inspired + Latin-inspired' } };
     const text = render(e(OverviewTab, {
-      settlement: mixed, narrativeNote: null, onNavigateTab: () => {},
+      settlement: stamp(mixed), narrativeNote: null, onNavigateTab: () => {},
       publicDossier: true, playerView: false, worldState: null,
     })).container.textContent || '';
     expect(text.split('Character fixture line.').length - 1, 'the character line prints once').toBe(1);

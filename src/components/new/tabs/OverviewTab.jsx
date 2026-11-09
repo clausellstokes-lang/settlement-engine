@@ -8,6 +8,8 @@ import { stressorsDeskRead } from '../stressorsDeskRead.js';
 // owns the §885.3 public gate and the desk's own primary-stress read.
 import { generalDeskLines } from '../generalDeskRead.js';
 import { overviewStressesOf } from '../deskHostArgs.js';
+// The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1), gated (SW-B7b).
+import { overviewIdentityOf } from '../overviewIdentity.js';
 import { populationTrendBand } from '../../../domain/display/trendLens.js'; // DS-POP-3 · the annex's own named reader
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
@@ -36,8 +38,6 @@ import Button from '../../primitives/Button.jsx';
 // stands the repeated opening name down to the tier noun. The DRAW is unchanged — the lines
 // handed over are the same strings `drawnAtMount` ruled on above.
 import ProseBlock from '../ProseBlock.jsx';
-// The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
-import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { TONIGHT_COPY } from '../../../domain/summary/tonightSheet.js'; // the trigger opens the one Tonight sheet (TRIM-2 request 4)
 // The pointer's label, inline: the crisis page's composer (crisisPage.js :: CRISIS_PAGE_COPY.pointer) is the tab's chunk.
 const CRISIS_POINTER = 'Open the Crisis tab';
@@ -188,8 +188,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const sp = eco.safetyProfile || {};
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
-  const scopeLine = cultureScopeLine(r);
-  const governs = governsLine(r);
+  // THE IDENTITY LINE (SW-B7b): composed owner-side; a shared page prints the line shipped at
+  // the save (`overview:identity`), never one read from the fields its projection strips.
+  const { scope: scopeLine, governs } = overviewIdentityOf(r, { publicDossier });
   // THE STRESSOR DESK, read ONCE per render through its one caller and routed by the mount
   // registry. THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the rungs
   // the owner's player view drew here, shipped at the owner's save (`stressors:overview`); an
