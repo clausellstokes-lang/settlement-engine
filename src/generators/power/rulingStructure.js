@@ -347,7 +347,7 @@ export const generatePowerStructure = (
       'City Council':
         'A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its streets.',
       'Grand Council':
-        'A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; internal factions are constant, and real power shifts between blocs.',
+        'A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council is always split into camps, and real power shifts between blocs.',
       'Military City Council':
         'Military officers hold decisive influence over civilian governance; the council ratifies what the commanders decide.',
       'Ecclesiastical Council':
@@ -389,9 +389,9 @@ export const generatePowerStructure = (
       'Merchant oligarchy':
         'Wealthy merchants hold exclusive power; political office is effectively purchased through commercial success.',
       'Democratic assembly':
-        'An assembly of citizens votes on major decisions; factions lobby for influence rather than seizing control.',
+        'An assembly of citizens votes on major decisions; the powers lobby for influence rather than seizing control.',
       'City-State Council':
-        'A city-state council governs with considerable autonomy; internal factions compete for control of policy.',
+        'A city-state council governs with considerable autonomy; camps within it compete for control of policy.',
       'Royal Authority':
         'The crown rules here directly. How far its word carries depends on the monarch\'s strength and on whether the nobles stay loyal.',
     },
@@ -513,13 +513,13 @@ export const generatePowerStructure = (
               ? 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.'
               : noblePower > 10
                 ? 'Hereditary landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them.'
-                : 'Noble families with residual feudal claims; the formal obligations are real, but other factions set the practical agenda day to day.'
+                : 'Noble families with residual feudal claims; the formal obligations are real, but other powers set the practical agenda day to day.'
           : merchantAligned
             ? priorityToCategory(priorities.economy) === 'very_high'
               ? 'Old landed families being systematically displaced by merchant wealth; they retain hereditary title but little real leverage. A dangerous combination of pride and declining power.'
               : 'Landed families increasingly outpaced by merchant capital; they compete for council seats, marriage alliances, and royal appointments to maintain relevance.'
             : tier === 'hamlet' || tier === 'village'
-              ? "The local lord's household; land rights and feudal obligation give them a formal claim to authority, though other factions hold more practical influence day to day."
+              ? "The local lord's household; land rights and feudal obligation give them a formal claim to authority, though other powers hold more practical influence day to day."
               : hasNobleInst && governingFaction && governingFaction.includes('Royal Authority')
                 ? noblePower > 25
                   ? "The great noble houses are the crown's military and fiscal foundation, and they know it. Royal policy is negotiated with them as much as decreed over them."

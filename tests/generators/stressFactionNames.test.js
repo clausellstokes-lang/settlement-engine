@@ -56,7 +56,8 @@ describe('stress factions take the role pool\'s first unused name', () => {
     const added = inject('infiltrated', ['Craft Guilds']).slice(1);
     expect(added).toEqual([expect.objectContaining({
       faction: FACTION_DESCRIPTORS.other[0], category: 'other', power: 15, hidden: true,
-      desc: 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.',
+      // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS C9-6, the owner's map Appendix X): the same desc, "two powers".
+      desc: 'An external interest with embedded assets in at least two powers. Its presence is not known to the settlement.',
     })]);
   });
 

@@ -33,19 +33,19 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
         : 'the next council session',
     hooks = [
       `A neutral figure is being pressured by both ${factionA.name} and ${factionB.name} to take a side before ${arbitrationVenue}.`,
-      'A letter has turned up showing that someone outside both factions paid for the last clash between them.',
+      'A letter has turned up showing that someone outside both powers paid for the last clash between them.',
     ];
   if (stressFlags.merchantCriminalBlur)
     hooks.push(
-      'Leading members of both factions are partners in the same business, one that skirts the law, and neither side wants that said aloud during arbitration.'
+      'Leading members of both powers are partners in the same business, one that skirts the law, and neither side wants that said aloud during arbitration.'
     );
   if (stressFlags.stateCrime)
     hooks.push(
-      "One faction has been using official authority to harass the other's members. The harassment is technically legal."
+      "One power has been using official authority to harass the other's members. The harassment is technically legal."
     );
   if (instFlags.criminalEffective > 55)
     hooks.push(
-      'Someone is offering to resolve the conflict "permanently" for a price. Both factions have received the offer. Neither has refused yet.'
+      'Someone is offering to resolve the conflict "permanently" for a price. Both powers have received the offer. Neither has refused yet.'
     );
   return hooks.slice(0, 3);
 };
