@@ -387,8 +387,8 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(town.conflicts.length, 'fixture premise: the town has a conflict').toBeGreaterThan(0);
     expect(town.history.currentTensions.length, 'fixture premise: the town has tensions').toBeGreaterThan(0);
     const text = view({ publicDossier: true });
-    expect(text).toContain('The Factions');
-    expect(text).not.toMatch(/Current Tensions \(|Active Conflicts \(/); // anchored: toContain('The Factions') on this render
+    expect(text).toContain('The Powers');
+    expect(text).not.toMatch(/Current Tensions \(|Active Conflicts \(/); // anchored: toContain('The Powers') on this render
     expect(text).not.toContain(town.conflicts[0].issue); // anchored: same render
   });
 });

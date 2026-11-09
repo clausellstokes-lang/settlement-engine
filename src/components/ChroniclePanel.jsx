@@ -251,7 +251,7 @@ function FullEntryModal({ entry, onClose }) {
             // have neither and correctly render as a bare name.
             n?.goal?.short || n?.secret?.what || n?.desc || n?.description || '',
           ))}
-          {renderList('Factions', s.powerStructure?.factions, (f) => labelled(nameOf(f) || 'Unnamed', f?.desc || f?.description || ''))}
+          {renderList('Powers', s.powerStructure?.factions, (f) => labelled(nameOf(f) || 'Unnamed', f?.desc || f?.description || ''))}
           {/* C2 (bar 18): the last-resort tail is composed prose from the record's own
               parties/stakes, never a JSON dump in the serif register. */}
           {renderList('Conflicts', s.powerStructure?.conflicts, (c) => (typeof c === 'string' ? c : c?.desc || c?.issue || c?.description || conflictLine(c)))}

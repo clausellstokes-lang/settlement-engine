@@ -348,7 +348,7 @@ export function assignNpcToRole({ npc, institutionId, role, quality, factionAlig
         type: 'legitimacy',
         severity: Q.legitimacyHit,
         causeEventId: eventId,
-        description: `${quality === 'corrupt' ? 'Corrupt' : 'Faction-aligned'} appointment of ${updated.name} is publicly contested.`,
+        description: `${quality === 'corrupt' ? 'Corrupt' : 'Partisan'} appointment of ${updated.name} is publicly contested.`,
       },
     });
   }

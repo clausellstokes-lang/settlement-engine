@@ -43,7 +43,7 @@ const VIEW_TITLES = Object.freeze({
   narrative:    'Narrative view',
   simulation:   'Simulation view',
   delta:        'Delta view',
-  faction:      'Faction view',
+  faction:      'The powers\' view',
   supply_chain: 'Supply-chain view',
   timeline:     'Timeline view',
   district:     'District view',
@@ -106,7 +106,7 @@ function viewFaction(settlement) {
     summary: profiles.length
       ? profiles.map(
           p => `${p.name} (${p.archetype}, power ${p.power}).`)
-      : ['No factions on this settlement.'],
+      : ['This town has no powers on record.'],
   };
 }
 

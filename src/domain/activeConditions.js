@@ -105,8 +105,8 @@ export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultSeverity: 0.65,
   },
   faction_challenge: {
-    label: 'Faction challenge',
-    description: 'A major faction is maneuvering to alter the settlement power balance.',
+    label: 'Challenge to the rulers',
+    description: 'A major power is working to change who holds sway in town.',
     affectedSystems: ['public_legitimacy', 'faction_power', 'social_trust'],
     defaultExpiresAtTicks: 6,
     defaultStatus: 'worsening',

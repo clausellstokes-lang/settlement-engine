@@ -409,7 +409,7 @@ export function buildDossierEntityIndex(settlement = {}) {
     const displayName = faction.faction || faction.name || faction.label;
     const base = {
       ...entityLink('faction', faction, faction.faction),
-      label: displayName || 'Faction',
+      label: displayName || 'Power',
     };
     // IDENTITY must be the canonical snake id (== npc.factionLink), not the
     // hyphen anchor slug entityLink derives. Override it here.

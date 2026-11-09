@@ -721,7 +721,12 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
   // prose 23 -> 24 (2026-11-04, REGISTERS-4 door 7, measured at the composed tip): DEFENSE-3's X-52 food endurance
   // line (8e9de64b9) adds one prose line on WIRING-2's re-measure; the sub-floor counts hold.
-  "Systems/Defense":     { prose: 23, chrome: 2, sub14: 2, sub12: 0 },
+  // prose 23 -> 24, chrome 2 -> 1, sub14 2 -> 1 (2026-11-09, SW-8 RENAME-POWERS C1+C2, re-measured at the lane's
+  // C2 tip): the criminal line's label "Criminal faction:" became "Underworld:" (C2), one chrome row fewer at
+  // 375px (the shorter line falls under MIN_CHARS), and one prose line more, PLAUSIBLY the renamed "Rival
+  // Gangs" operation taking its own gang note (C1) where it shared the catch-all (not bisected);
+  // sub12 stays 0 and the floors arm reads 0 violations.
+  "Systems/Defense":     { prose: 24, chrome: 1, sub14: 1, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.

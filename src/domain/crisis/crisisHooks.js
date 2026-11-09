@@ -52,7 +52,7 @@ export const CRISIS_NOUN = Object.freeze(/** @type {Record<string, string>} */ (
   under_siege: 'siege',
   famine: 'famine',
   occupied: 'occupation',
-  politically_fractured: 'factional split',
+  politically_fractured: 'split between the powers',
   indebted: 'debt crisis',
   recently_betrayed: 'betrayal',
   infiltrated: 'infiltration',

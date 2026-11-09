@@ -144,7 +144,7 @@ function RulingChainBlock({ settlement }) {
           another faction holds the seat. A vacancy is said ONCE, by the seat row's "Stands empty" (lane RULERS,
           chair ruling b, X-50: every fact said once); its ", but the seat itself stands vacant" clause is gone. */}
       {chain.faction && chain.faction.name !== chain.power?.name && (
-        <ChainRow label="The faction">
+        <ChainRow label="Seat held by">
           <strong>{chain.faction.name}</strong>
           {` holds the governing seat`}.
         </ChainRow>
@@ -524,7 +524,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         return (
           <Section title="The Ladder" collapsible defaultOpen>
             <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,marginBottom:8,lineHeight:1.4}}>
-              Who is rising within each faction: standing on the internal ladder, top rung first.
+              Who is rising within each power: standing on the internal ladder, top rung first.
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:10}}>
               {rows.map(({ f, i, rungs, instab }) => {

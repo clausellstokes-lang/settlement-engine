@@ -36,7 +36,7 @@ const EVENT_LABELS = Object.freeze({
 
 export const PLOT_HOOK_CATEGORIES = Object.freeze({
   npc: { color: '#2a3a7a', label: 'NPCs' },
-  faction: { color: '#8b1a1a', label: 'Factions' },
+  faction: { color: '#8b1a1a', label: 'Powers' },
   tension: { color: '#b8860b', label: 'Tensions' },
   economics: { color: '#a0762a', label: 'Economy' },
   safety: { color: '#5a2a8a', label: 'Safety' },

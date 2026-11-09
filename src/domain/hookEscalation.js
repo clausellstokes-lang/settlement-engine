@@ -474,7 +474,7 @@ const CLOCK_TEMPLATES = Object.freeze({
     ],
   },
   faction_split: {
-    label: 'Faction Split Clock',
+    label: 'Power Split Clock',
     triggerDescription: 'Two factions with overlapping power and conflicting wants.',
     stages: [
       'A minor incident is exaggerated by both sides.',

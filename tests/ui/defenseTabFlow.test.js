@@ -330,9 +330,9 @@ describe('UX consolidation — Defense (T2-20..T2-23)', () => {
     const crim = port.powerStructure.factions.find((f) => f.category === 'criminal');
     expect(crim, 'fixture premise: a criminal faction').toBeTruthy();
     const text = dmText(port);
-    expect(text).toContain(`Criminal faction: ${crim.faction}`);
+    expect(text).toContain(`Underworld: ${crim.faction}`);
     if (crim.desc) expect(text).not.toContain(crim.desc); // anchored: the faction line is asserted on this render above
-    expect(text).not.toMatch(/Criminal faction: power \d/); // anchored: same render
+    expect(text).not.toMatch(/Underworld: power \d/); // anchored: same render
   });
 
   test('T2-21: no terrain or strategic-value chips in the posture header', () => {
@@ -443,7 +443,7 @@ describe('F11 / X-2 — Defense prints no plot-hook text', () => {
 // only been hidden, 298 still classifying, and 323 still naming the criminal faction. The
 // block reads the grouping list beside the copy and stands down whole; Public order stays.
 describe('DefenseTab — a veiled criminal architecture says nothing (W2-VEIL-B)', () => {
-  const CRIME_RE = /Criminal structure:|No organized criminal infrastructure|Criminal faction:|Active criminal operations|Active crime patterns/;
+  const CRIME_RE = /Criminal structure:|No organized criminal infrastructure|Underworld:|Active criminal operations|Active crime patterns/;
   const openCriminal = (view) => {
     const head = view.queryAllByText('Criminal Architecture & Public Order')[0];
     if (head && !CRIME_RE.test(view.container.textContent)) fireEvent.click(head);
