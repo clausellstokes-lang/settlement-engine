@@ -189,6 +189,15 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-09, THE SW-B2 FIRST-IMPRESSIONS MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 7) ──
+ * THE NINETY-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the style wave's merge (BRIEF-STYLE-2-WAVE §3, the law of the chain); the
+ * record is docs/shift-records/2026-11-09-style-2-merge-7-swb2.json. THE MOVER, FOUND: the SW-B2 FIRST-IMPRESSIONS merge 52da4542c (249773c5d into the integration branch); its A·O16 causes the components (443cf4051, b6d48ec0e: the origin and port reasons read the docks and the terrain; STYLE-2-FIRST-IMPRESSIONS-2026-11-09.md, the lane's own 184 over 0c93f0ca0, 139 on the line); settlementReason alone moves (field-diffed on the master's 110 rows).
+ * On THIS corpus 139 of 360 rows (thorp 27, hamlet 30, village 29, town 18, city 16, metropolis 19) move against point 6's post-state (the stage of a7770ecfe, SW-5; record 6)
+ * (`e4fd16d3…`); 360/360 hashes stay distinct. Written from the staged tree (52da4542c with the door
+ * paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `e4fd16d3…` -> `26677572…`.
+ *
+ *
  * ── 2026-11-09, THE SW-5 CRISIS-VANTAGES MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 6) ──
  * THE NINETY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the style wave's merge (BRIEF-STYLE-2-WAVE §3, the law of the chain); the
@@ -1188,7 +1197,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'e4fd16d36678949a2391372868272829de1ddb502bda1cced7a53e094d84de05';
+const PRE_COUPLING_CORPUS_SHA = '266775725b28ac47154b997f92cf6678690e1930dd61e8b7e1c107ffb0e39daf';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
