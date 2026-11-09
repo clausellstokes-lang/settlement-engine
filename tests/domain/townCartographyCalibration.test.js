@@ -500,6 +500,14 @@
  *   ceilings move with the operator: W8's translate ceilings 188/324/76/100/72/85 -> 270/465/109/143/104/122, and the
  *   live derivation's hypothetical 160 -> 230. CORPUS_ROWS stays 504; the throw census stays 0.
  *
+ *   2026-11-04 — MERGE-WAVE RECORD 7, THE FIX-FOOD-ISOLATION MERGE, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG
+ *   1 OF THE SOAK LADDER; record docs/shift-records/2026-11-08-merge-wave-7-food-isolation.json; the chair
+ *   signs by the owner's delegation, vetoable). Written from the staged tree SW7 (the step's tree with the door
+ *   paths carried from the branch). The per-tier maximum roster reads 11/16/24/46/90/104, so
+ *   CARTOGRAPHY_CALIBRATION does not move. Re-keyed by measurement over the recorded corpus (the suite's own
+ *   definitions): DUPLICATES.permille 117/202/47/62/45/53 -> 117/202/47/62/45/54 (derived ceilings
+ *   270/465/109/143/104/122 -> 270/465/109/143/104/125). CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -622,7 +630,7 @@ const DUPLICATES = Object.freeze({
   village: Object.freeze({ permille: 47 }),
   town: Object.freeze({ permille: 62 }),
   city: Object.freeze({ permille: 45 }),
-  metropolis: Object.freeze({ permille: 53 }),
+  metropolis: Object.freeze({ permille: 54 }),
 });
 
 /**
@@ -1321,7 +1329,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 202/332/74/100/74/85 -> 188/324/76/100/72/85 on 2026-11-04: F3 FOOD-WORDS (UNITS 1–5) (header), the same operator.
     // 188/324/76/100/72/85 -> 270/465/109/143/104/122 on 2026-11-05: CARTOGRAPHY_HEADROOM_PERMILLE 1600 -> 2300 (the chair's
     // ruling 2, LANDING-4's addendum; header). The readings do not move; the ceilings are the same operator at the new headroom.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([270, 465, 109, 143, 104, 122]);
+    // 270/465/109/143/104/122 -> 270/465/109/143/104/125 on 2026-11-04: MERGE-WAVE RECORD 7, THE FIX-FOOD-ISOLATION MERGE (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([270, 465, 109, 143, 104, 125]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(230);
   });
