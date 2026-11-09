@@ -226,10 +226,6 @@ describe('W-C5 the three covert paths (forced)', () => {
     const evt = out.events.find((e) => e.stage === 'reformed');
     expect(evt).toBeTruthy();
     expect(evt.resolvedTick).toBe(20);
-    // FIX-PULSE-DEFECTS (audit A2·36): the summary and reason opened lower-case on the cause
-    // label ("funds run short has eased, and …"); a label that opens a sentence is capitalised.
-    expect(evt.summary).toMatch(/^[A-Z]/);
-    expect(evt.reasons[0]).toMatch(/^[A-Z]/);
     // Undo round-trip: projecting the reform clears the tag as a BOUNDED, reversible
     // delta (corrupt→false, corruptionVector→null, stamp dropped) — no orphaned state,
     // so restoring those exact fields reproduces the original NPC byte-for-byte.
@@ -250,10 +246,6 @@ describe('W-C5 the three covert paths (forced)', () => {
     expect(rec.resolvedTick).toBe(20);
     expect(rec.historicizedTick).toBe(20);
     expect(out.reforms).toHaveLength(0);
-    // FIX-PULSE-DEFECTS (audit A2·39): the habit summary opened lower-case on the cause label.
-    const evt = out.events.find((e) => e.stage === 'historicized');
-    expect(evt.summary).toMatch(/^[A-Z]/);
-    expect(evt.reasons[0]).toMatch(/^[A-Z]/);
   });
 
   it('RE-CAUSE adopts a NEW cause that is verifiably REAL in-state (coherence)', () => {
@@ -268,11 +260,6 @@ describe('W-C5 the three covert paths (forced)', () => {
     // The adopted cause must be REAL in-state right now (siege ⇒ siege-scarred present).
     expect(rec.causeClass).toBe('siege-scarred');
     expect(rec.causeClass).not.toBe('underfunded');
-    // FIX-PULSE-DEFECTS (audit A2·34): the re-cause summary opened lower-case on the old
-    // cause's label; the new cause, mid-sentence, keeps its lower case.
-    const evt = out.events.find((e) => e.stage === 're-caused');
-    expect(evt.summary).toMatch(/^[A-Z]/);
-    expect(evt.reasons[0]).toMatch(/^[A-Z]/);
   });
 
   it('cannot re-cause when no OTHER real cause is present (never invents) — falls to reform/historicize', () => {

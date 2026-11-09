@@ -293,8 +293,6 @@ function makeEvent(base) {
 }
 
 const causeLabel = (/** @type {string} */ cls) => CAUSE_LABEL_OF[cls] || cls;
-/** The label where it OPENS a sentence (the table is lower-case, for mid-sentence use). */
-const causeLead = (/** @type {string} */ cls) => { const l = causeLabel(cls); return l.charAt(0).toUpperCase() + l.slice(1); };
 
 /**
  * Advance the cause-resolution lifecycle for one tick. READ-LAST/WRITE-NEXT: runs
@@ -504,8 +502,8 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               causeClass: newCause, family: rec.family, stage: 're-caused', priorCause: oldCause,
               originTick: rec.originTick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'}'s need becomes appetite`,
-              summary: `${causeLead(oldCause)} eased, but ${npc?.name || 'the official'} has quietly found a new reason: ${causeLabel(newCause)}. The habit outlives its first cause.`,
-              reasons: [`${causeLead(oldCause)} resolved; re-caused to ${causeLabel(newCause)}: the character reached for it.`],
+              summary: `${causeLabel(oldCause)} eased, but ${npc?.name || 'the official'} has quietly found a new reason: ${causeLabel(newCause)}. The habit outlives its first cause.`,
+              reasons: [`${causeLabel(oldCause)} resolved; re-caused to ${causeLabel(newCause)}: the character reached for it.`],
             }));
           } else if (path === 'reform') {
             reforms.push({ cid, conditionId, npcId: conditionId, name: npc?.name || conditionId, causeClass: rec.causeClass });
@@ -514,8 +512,8 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               causeClass: rec.causeClass, family: rec.family, stage: 'reformed',
               originTick: rec.originTick, resolvedTick: tick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'} comes clean`,
-              summary: `${causeLead(rec.causeClass)} has eased, and ${npc?.name || 'the official'}, who turned to graft only to get through it, has given it up.`,
-              reasons: [`${causeLead(rec.causeClass)} resolved; the sole-support corruption ended (reform).`],
+              summary: `${causeLabel(rec.causeClass)} has eased, and ${npc?.name || 'the official'}, who turned to graft only to get through it, has given it up.`,
+              reasons: [`${causeLabel(rec.causeClass)} resolved; the sole-support corruption ended (reform).`],
             }));
             return;   // record dropped — reform clears the tag (undo-clean)
           } else {
@@ -532,9 +530,9 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               originTick: rec.originTick, resolvedTick: tick, historicizedTick: tick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'}'s habit outlives its reason`,
               summary: yearsPast
-                ? `${causeLead(rec.causeClass)} passed into the lean years, but ${npc?.name || 'the official'}'s habit endures. The ledger never closed.`
-                : `${causeLead(rec.causeClass)} eased, yet ${npc?.name || 'the official'} carries the compromise forward out of habit. Its origin is now past-tense.`,
-              reasons: [`${causeLead(rec.causeClass)} resolved; the compromise persists with a historicized origin.`],
+                ? `${causeLabel(rec.causeClass)} passed into the lean years, but ${npc?.name || 'the official'}'s habit endures. The ledger never closed.`
+                : `${causeLabel(rec.causeClass)} eased, yet ${npc?.name || 'the official'} carries the compromise forward out of habit. Its origin is now past-tense.`,
+              reasons: [`${causeLabel(rec.causeClass)} resolved; the compromise persists with a historicized origin.`],
             }));
           }
         } else {
