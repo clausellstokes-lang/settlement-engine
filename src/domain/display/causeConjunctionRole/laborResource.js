@@ -30,6 +30,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the foreman drew pay for phantom crews, and the yard is counting hands against the tally in front of witnesses.',
       'The ghost tally is out: the foreman padded the count while real wages ran short, and the real crews know whose pockets the difference filled.',
+      "The crews who went short on wages have counted themselves against the foreman's tally, and the extra names were never there.",
     ],
     're-adjudicated': [
       'Whoever held the foreman before is gone, but now the wages run short, and the ghost names draw pay for whoever runs the payroll.',
@@ -53,6 +54,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the foreman billed for materials that never arrived, and the auditors are matching invoices to empty shelves.',
       'The paper deliveries are out: the yard paid for fiction while the work stalled, and the foreman countersigned every page of it.',
+      'The workers who stood idle waiting for materials know now that the foreman signed for deliveries that never came.',
     ],
     're-adjudicated': [
       'Whoever paid the foreman before is gone, but now the supply lines have failed, and the foreman signs false invoices with whoever supplies the yard.',
@@ -76,6 +78,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the stockpile\'s spoilage was sold, not spoiled, and the buyers across town are as identifiable as the handwriting.',
       'The spoilage trade is out: the foreman carried off what was written off, and the town went short while the tally balanced.',
+      "Families who went short while the stockpile 'spoiled' can see their own food sold across town, in the foreman's hand.",
     ],
     're-adjudicated': [
       'Whoever paid the foreman before is gone, but now the stores have run dry, and the foreman writes off the remnants and sells them to whoever pays.',
@@ -99,6 +102,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the yard\'s product ran the embargo by night, and the customs men are walking the drove roads with lanterns.',
       'The night runs are out: the foreman sold across the line while the town obeyed it, and the off-book coin is being counted in daylight.',
+      "People who obeyed the embargo and lost by it are watching the foreman's off-book coin counted in daylight.",
     ],
     're-adjudicated': [
       "Whoever paid the foreman before is gone, but now an embargo strangles trade, and whoever buys the night runs keeps to the foreman's schedule.",
@@ -122,6 +126,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the levy lists were sold at the yard, and the families of the substituted are reading the true draft order.',
       'The pen\'s price is out: the foreman decided who marched by payment, and the men who went in a buyer\'s place have come home asking.',
+      "The men who marched in a buyer's place are home and reading the true draft order, with the foreman's price beside it.",
     ],
     're-adjudicated': [
       'Whoever paid the foreman before is gone, but now the levy drafts from the crew lists, and the foreman sells the names to whoever pays now.',
@@ -145,6 +150,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the yard\'s thefts were arranged by the man who reported them, and the watch is re-reading the foreman\'s bad descriptions.',
       'The schedule is out: the foreman had the yards robbed by appointment, and the town knows why nothing was ever recovered.',
+      'The watch has learned the foreman who reported each theft from the yard set it up, which is why nothing came back.',
     ],
     're-adjudicated': [
       "Whoever paid the foreman before is gone, but now the garrison is hollowed out, and the yard is still robbed on the foreman's schedule.",
@@ -168,6 +174,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the war materiel left the yard short-weighted, and the soldiers who fought with the missing tenth are home to hear it.',
       'The skim is out: the foreman shaved the quotas while the walls shook, and the armies are auditing every delivery of the period.',
+      'The soldiers who fought short a tenth of their supplies are home, and they know now where that tenth went.',
     ],
     're-adjudicated': [
       "Whoever paid the foreman before is gone, but now the war presses in, and the foreman's weighbridge still reads light on the war orders.",
@@ -191,6 +198,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the labor drafts were composed by ability to pay, and the taken are home with the foreman\'s list in hand.',
       'The sparing rate is out: the foreman sold exemption from the occupier\'s drafts, and the poorest carried the count.',
+      "The poorest families, who carried the occupier's labour drafts, know now that others paid the foreman to be spared.",
     ],
     're-adjudicated': [
       "Whoever paid the foreman before is gone, but now the occupier drafts the labor, and its officials take the heads from the foreman's lists.",
@@ -214,6 +222,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the yard\'s accidents were arranged offerings, and every failed scaffold is being re-inspected as a crime scene.',
       'It is out that a dark patron paid for the foreman\'s accidents, and the maimed are telling what happened to them.',
+      'The workers maimed at the yard are telling what happened, now that a dark patron is known to have paid for those accidents.',
     ],
     're-adjudicated': [
       "Whoever paid the foreman before is gone, but now a dark patron rewards the deed, and the accidents at the yard happen for its favor.",
@@ -237,6 +246,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that hiring at the yard was priced per soul, and the passed-over are comparing their skills to the hired\'s attendance.',
       'The placement fees are out: the foreman retailed the crew lists to the mission, and both congregations are reading the hires.',
+      'Workers passed over at the yard are learning that the jobs went to whoever the mission paid the foreman to hire.',
     ],
     're-adjudicated': [
       'Whoever paid the foreman before is gone, but now a rival faith presses in, and it pays the foreman a fee for each convert hired.',
@@ -260,6 +270,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public what the foreman skipped while the oaths meant nothing, and the town is sounding its own walls.',
       'The short lime is out: the foreman built cheap while the faith was cold, and the reviving congregation is inspecting every course the foreman laid.',
+      'Households are sounding their own walls, because the foreman built cheap while no oath held the work.',
     ],
     're-adjudicated': [
       "Whoever paid the foreman before is gone, but now the faith has gone cold, and no oath stops the foreman's short work.",
@@ -283,6 +294,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the foreman billed the temple double for silence about its stone, and both sets of records are being read together.',
       'The delivery records are out: the temple\'s missing stone, the foreman\'s knowledge of it, and the invoices that priced the knowing.',
+      "The congregation has seen the temple's missing stone in the foreman's delivery records, and what the foreman charged to stay quiet.",
     ],
     're-adjudicated': [
       "Whoever paid the foreman before is gone, but now the priesthood is tainted, and the temple pays the foreman's double invoices.",
@@ -306,6 +318,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the yard\'s counts covered the syndicate\'s cargo, and the manifests are being reconciled in front of the town.',
       'The accommodating tallies are out: the foreman counted for the underworld, and the vanished freight has a paper trail at last.',
+      "Merchants whose freight vanished through the yard are reading the manifests and finding the underworld's cargo in the counts.",
     ],
     're-adjudicated': [
       "Whoever used the yard before is gone, but now the underworld holds the offices, and the foreman's tallies leave room for its cargo.",
@@ -329,6 +342,7 @@ export const LABOR_RESOURCE_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the scandal\'s secrets traveled in the yard\'s wagons, and the routes are being retraced crate by crate.',
       'It is out that the foreman hauled away whatever the frightened needed gone, under manifests that never looked false.',
+      "The people the scandal frightened paid to have things hauled away in the foreman's wagons, and the routes are being followed now.",
     ],
     're-adjudicated': [
       "Whoever paid the foreman before is gone, but now a scandal has broken, and whoever needs something hidden pays the foreman's rates.",
