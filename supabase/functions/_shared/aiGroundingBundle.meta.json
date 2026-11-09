@@ -1,12 +1,13 @@
 {
-  "generatedAt": "2026-11-09T02:37:18.971Z",
+  "generatedAt": "2026-11-09T05:14:24.594Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "7e2865d4c78c79f0",
+  "sourceHash": "3ec375ee7fb8d634",
   "inputs": [
     "src/data/bandLadders.js",
     "src/data/constants.js",
     "src/data/entityTags.js",
     "src/data/foodImportRates.js",
+    "src/data/institutionBacking.js",
     "src/data/institutionalCatalog.js",
     "src/data/npcTraitWeights.js",
     "src/data/powerData.js",
@@ -82,6 +83,7 @@
     "src/domain/magicReliance.js",
     "src/domain/migrationDirection.js",
     "src/domain/npcProfile.js",
+    "src/domain/people/allegiance.js",
     "src/domain/people/cardPowers.js",
     "src/domain/people/membership.js",
     "src/domain/prosperityRank.js",
