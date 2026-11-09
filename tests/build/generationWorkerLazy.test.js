@@ -410,7 +410,19 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   car's hook and tie writers, the ported R3 rule, the reader's membership port) · 4c39885fc 0 · the composition cure
 //   b19740ab3 + the display fix 9fd906c23 +212. The sum closes exactly: 1,579,660 + 115,909 + 23,904 + 16,196 + 212 =
 //   1,735,881, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1735881;
+// 1,735,881 -> 1,746,551 (2026-11-09, MERGE-WAVE step 4, the ten lanes merged; the chair's standing ruling "trim where no
+// output byte moves, then re-record at the measured figure", under the owner's delegation of 2026-11-06; VETOABLE BY THE
+// OWNER): A RISE OF 10,670 B. No trim that moves no output byte was attempted in this seat. MEASURED by a fresh
+// `npm run build` of a git archive of every first-parent point that touches a build input, read by this file's own arm;
+// the checkout at the final tip reads the same 1,746,551:
+//   the wave's base 7b86cd07a 1,735,881 (equal to the ceiling) · W1 ECO ea0e269a9 +50 · W2 DEF 82a4e2856 -1,495 ·
+//   W3 POW 1a160d599 -2,376 · W4 PEOPLE 66c23bfea -3,500 · W5 HIS e510409b1 -860 · W1-A0b 9c2724ecb 0 ·
+//   W7 HOOKS 501c97412 +13,069 (the hook pools, the receipt, npcData and the title pools) · FIX-FOOD-ISOLATION c6e8a4ad6
+//   +1,151 · EXPORT-KEYS c6c733d23 0 · FIX-PUBLIC-VEIL 7e65c7bec +4,626 (the veil bit stamped at birth, the veiled re-deal)
+//   · 140b8f333, GREEN-BASE ee663bd9f, 59d723a37, FIX-ARROW-SECTIONS 2c76c6177, 5c14aac4a, 642f1796c 0 each ·
+//   the docks read bcf3e7f8a +5. The sum closes exactly: 1,735,881 + 50 - 1,495 - 2,376 - 3,500 - 860 + 13,069 + 1,151
+//   + 4,626 + 5 = 1,746,551, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1746551;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

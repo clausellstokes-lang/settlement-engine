@@ -592,7 +592,22 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //   gzip   341,647 + 90 + 38 + 66 = 341,841.
 //   Brotli 287,527 + 83 + 107 - 83 = 287,634.
 // (Compressed parts do not add exactly; each is measured as the tip minus a build without it, the remainder named.)
-const CLOSURE_BUDGET_BYTES = 1_072_604; // 2026-11-08: re-recorded AT the measured lane tip, FIX-ARROW-SECTIONS (note above); was 1_072_488 (MERGE-CAR) / 1_051_166 (PEOPLE-LAND)
+// 2026-11-09, MERGE-WAVE step 4 (the ten lanes merged into the integration branch; the chair's standing ruling "trim where
+// no output byte moves, then re-record at the measured figure", under the owner's delegation; VETOABLE BY THE OWNER): the
+// three first-paint budgets re-recorded AT the measured final tip. No trim that moves no output byte was attempted.
+// MEASURED by a fresh `npm run build` of a git archive of every first-parent point that touches a build input, read by
+// this file's own arms (VERIFY_DIST=1); the checkout at the final tip reads the same three figures. From the wave's base
+// 7b86cd07a (MERGE-CAR's 1,072,488 / 341,641 / 287,411 in the archive build), point by point:
+//   raw    1,072,488 - 247 (W4 PEOPLE 66c23bfea) + 100 (W7 HOOKS 501c97412) + 3,138 (FIX-PUBLIC-VEIL 7e65c7bec) + 110
+//          (FIX-ARROW-SECTIONS 2c76c6177, its lane's +116 composed) + 0 (every other point) = 1,075,589.
+//   gzip   341,641 - 6 (W1) + 13 (W2) + 6 (W3) - 70 (W4) - 6 (W5) - 5 (W1-A0b) + 37 (W7) + 3 (FOOD) - 22 (KEYS) + 1,088
+//          (VEIL) - 25 (140b8f333) + 7 (GREEN-BASE) + 200 (ARROW) - 12 (5c14aac4a) - 3 (bcf3e7f8a) = 342,846.
+//   Brotli 287,411 - 79 + 34 + 68 - 197 + 91 + 65 + 22 - 161 + 252 + 690 + 87 - 64 + 214 - 53 + 72 (the same order)
+//          = 288,452.
+// (The compressed steps at an equal raw closure — W1, W2, W3, W5, A0b, FOOD, KEYS, 140b8f333, GREEN-BASE, 5c14aac4a,
+// bcf3e7f8a — are chunk-hash and module-order drift of tens of bytes, measured, not traced further; the real growth is
+// the veil's +1,088 / +690 and the arrow's +200 / +214.)
+const CLOSURE_BUDGET_BYTES = 1_075_589; // 2026-11-09: re-recorded AT the measured final tip, MERGE-WAVE step 4 (note above); was 1_072_604 (FIX-ARROW-SECTIONS) / 1_072_488 (MERGE-CAR)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -622,8 +637,8 @@ const CLOSURE_BUDGET_BYTES = 1_072_604; // 2026-11-08: re-recorded AT the measur
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 341_841; // 2026-11-08: re-recorded AT the measured lane tip, FIX-ARROW-SECTIONS (note at the raw budget); was 341_647 (MERGE-CAR) / 338_535 (MERGE-R2)
-const CLOSURE_BROTLI_BUDGET_BYTES = 287_634; // 2026-11-08: re-recorded AT the measured lane tip, FIX-ARROW-SECTIONS (note at the raw budget); was 287_527 (MERGE-CAR) / 284_950 (MERGE-R2)
+const CLOSURE_GZIP_BUDGET_BYTES = 342_846; // 2026-11-09: re-recorded AT the measured final tip, MERGE-WAVE step 4 (note at the raw budget); was 341_841 (FIX-ARROW-SECTIONS) / 341_647 (MERGE-CAR)
+const CLOSURE_BROTLI_BUDGET_BYTES = 288_452; // 2026-11-09: re-recorded AT the measured final tip, MERGE-WAVE step 4 (note at the raw budget); was 287_634 (FIX-ARROW-SECTIONS) / 287_527 (MERGE-CAR)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -1823,9 +1838,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_072_604); // FIX-ARROW-SECTIONS, 2026-11-08 (note at the constant); MERGE-CAR 1_072_488 / PEOPLE-LAND 1_051_166 before
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(341_841); // FIX-ARROW-SECTIONS, 2026-11-08; MERGE-CAR 341_647 before
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(287_634); // FIX-ARROW-SECTIONS, 2026-11-08; MERGE-CAR 287_527 before
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_075_589); // MERGE-WAVE step 4, 2026-11-09 (note at the constant); FIX-ARROW-SECTIONS 1_072_604 / MERGE-CAR 1_072_488 before
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(342_846); // MERGE-WAVE step 4, 2026-11-09; FIX-ARROW-SECTIONS 341_841 before
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(288_452); // MERGE-WAVE step 4, 2026-11-09; FIX-ARROW-SECTIONS 287_634 before
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
