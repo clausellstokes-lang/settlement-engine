@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "6c18ceb24facd88d925b48903a1e713efc09f675",
-  "measuredBy": "MERGE-TRAIN (FIX-ARROW-PLAQUE merge point)",
+  "measuredAtSha": "7fbb9f0c4b9ecaea459f2412c162dc0337cab4e8",
+  "measuredBy": "SW-9 ODD-ROWS",
   "date": "2026-11-09",
-  "note": "fix-arrow-plaque: the arrow suites and the plate-centre pin",
+  "note": "SW-9 adds eleven test titles and eight suite titles in existing files (the vetoes, the odd rows); no test file added",
   "files": 3136,
   "parked": 384,
   "credited": 2752,
-  "titles": 28810,
-  "suiteTitles": 7748
+  "titles": 28821,
+  "suiteTitles": 7756
 }
