@@ -675,3 +675,11 @@ Pins: `whileYouWereAway.test.jsx` — the failure test reads the new sentence; *
 | D·103 a standing-less observer | `{name} records no standing toward another settlement: no siege, no treaty(, no modelled belief).` | "{name} has no siege or treaty with another settlement yet(, and holds no belief about its neighbours)." — **census strike:** the audit's "has no dealings with another settlement" claims more than the writer reads (it checks sieges, treaties and beliefs, not trade or roads), so the line names only those |
 
 Pins: `warFaithSurfacing.test.jsx` — the honest-nothing assertion re-keyed by identity; **red at the parent**, green here. Registers: none moved.
+
+### 9ag. `PantheonPanel.jsx` (D·104)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·104 a faith's effects disclosure | `How this faith couples ({n})` | "What this faith touches ({n})" (the twin in `src/components/settlement/FaithSection.jsx:173` is outside ledger D's map files: listed in §9's what stays) |
+
+Pins: no fixture opens the disclosure: unpinned, PLAUSIBLE; every suite naming the file green. Registers: none moved.

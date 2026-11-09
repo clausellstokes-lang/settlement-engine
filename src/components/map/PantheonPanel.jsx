@@ -252,7 +252,7 @@ function DeityRow({ deity, tierColor, name, snapshot }) {
             aria-expanded={open}
             style={{ background: 'none', border: 'none', padding: '4px 0', minHeight: 32, color: tierColor, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, justifyContent: 'flex-start' }}
           >
-            {open ? '▾' : '▸'} How this faith couples ({effects.length})
+            {open ? '▾' : '▸'} What this faith touches ({effects.length})
           </Button>
           {open && (
             <ul style={{ margin: '4px 0 0', padding: '0 0 0 12px', listStyle: 'none' }}>
