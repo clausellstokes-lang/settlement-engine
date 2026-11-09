@@ -719,7 +719,7 @@ function deriveFactionPower(s) {
   // We use the power-share spread among profiles.
   const profiles = cachedFactionProfiles(s);
   if (profiles.length === 0) {
-    return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No factions to evaluate.' }] };
+    return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No powers to weigh.' }] };
   }
   const powers = profiles.map(p => p.power || 0);
   const total = powers.reduce((a, b) => a + b, 0);
