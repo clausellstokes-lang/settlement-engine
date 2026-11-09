@@ -79,6 +79,9 @@ export const ALLEGIANCE_TUNING = Object.freeze({
   frontWeight: 1,
   /** a weight-0 criminal house's backing weight in the organized-crime sum (the design's "0 → 0.5") */
   weightZeroHouse: 0.5,
+  /** the boss joins the handlers' round only when every other handler would otherwise carry more than this
+   *  many agents (J-10's boss-last, its fallback sense; the chair's ruling of 2026-11-08, ALLEGIANCE-CAR3) */
+  bossJoinsAbove: 4,
 });
 
 export const ALLEGIANCE_VECTORS = Object.freeze(['greed', 'hunger_for_status', 'fear', 'forbidden_patron', 'fanaticism']);
@@ -329,12 +332,15 @@ const importanceKey = (card) => { const i = IMPORTANCE_ORDER.indexOf(str(rec(car
 /**
  * The handler pool of a criminal power or house, in dealing order (§1.5, J-10): the power's rank 2,
  * rank 3, its other members (roster order), then the crim-house faces by house weight descending
- * (roster order) — the boss (the power's rank 1) last and only when no one else can. Never a card
- * holding an allegiance.
+ * (roster order) — the boss (the power's rank 1) last and only when no one else can: when the pool holds
+ * no one else, or (given `agentCount`) when every other handler would otherwise carry more than
+ * `ALLEGIANCE_TUNING.bossJoinsAbove` agents (the chair's ruling, ALLEGIANCE-CAR3). Never a card holding an
+ * allegiance.
  * @param {Rec[]} cards @param {string | null} power @param {Map<string, Rec>} crimHouses
+ * @param {number} [agentCount] the agents the pool is to handle (omitted: the boss joins only an empty pool)
  * @returns {Rec[]}
  */
-export function handlerPoolOf(cards, power, crimHouses) {
+export function handlerPoolOf(cards, power, crimHouses, agentCount = 0) {
   const free = cards.filter((c) => c && c.id != null && !allegianceOf(c));
   /** @type {Rec[]} */
   const order = [];
@@ -359,7 +365,9 @@ export function handlerPoolOf(cards, power, crimHouses) {
     .filter(({ card }) => rec(card.institution).kind === 'house' && crimHouses.has(str(rec(card.institution).key)))
     .sort((a, b) => (weightOf(b.card) - weightOf(a.card)) || (a.at - b.at))
     .forEach(({ card }) => { if (!order.includes(card) && card !== boss) order.push(card); });
-  return order.length ? order : (boss ? [boss] : []);
+  if (!order.length) return boss ? [boss] : [];
+  if (boss && Math.ceil(agentCount / order.length) > ALLEGIANCE_TUNING.bossJoinsAbove) order.push(boss);
+  return order;
 }
 
 /**
@@ -391,7 +399,7 @@ export function assignHandlers(cards, settlement) {
   /** @type {Rec[]} */
   const dealt = [];
   for (const [key, group] of pools) {
-    const handlers = handlerPoolOf(cards, key.startsWith('power:') ? key.slice(6) : null, crimHouses);
+    const handlers = handlerPoolOf(cards, key.startsWith('power:') ? key.slice(6) : null, crimHouses, group.length);
     if (!handlers.length) continue;
     group.sort((x, y) => (bestRank(x.card) - bestRank(y.card)) || (importanceKey(x.card) - importanceKey(y.card)) || (x.at - y.at));
     group.forEach((x, i) => {

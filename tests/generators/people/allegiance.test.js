@@ -187,6 +187,28 @@ describe('J-10 amended — the round-robin deal (no handler above ceil(agents / 
     expect(crowded.length).toBeGreaterThan(0);
   }, 300_000);
 
+  // THE RESIDUE, RULED (the chair, 2026-11-08, vetoable by the owner): soak1k-537's shape — five agents, a pool of ONE
+  // non-boss handler (the guild's second) and the boss sitting out under J-10's boss-last rule. The boss joins the round
+  // ONLY when every other handler would otherwise carry more than ALLEGIANCE_TUNING.bossJoinsAbove (4): the fallback sense
+  // of boss-last and nothing more. (soak1k-849 — the boss the town's only criminal face — is supply-bound: named in the record.)
+  it('the boss joins the round only when every other handler would carry more than 4 (a planted 537-shaped record)', async () => {
+    const { assignHandlers } = await import('../../../src/domain/people/allegiance.js');
+    const settlement = {
+      institutions: [{ name: 'Street gang' }, { name: 'Front businesses' }],
+      powerStructure: { factions: [{ faction: 'Town Council', power: 70, isGoverning: true }, { faction: "Thieves' Guild", power: 30, category: 'criminal' }] },
+    };
+    const boss = { id: 'boss', institution: { kind: 'house', key: 'Street gang' }, memberships: [{ power: "Thieves' Guild", rank: 1, share: 1 }] };
+    const second = { id: 'second', institution: { kind: 'house', key: 'Front businesses' }, memberships: [{ power: "Thieves' Guild", rank: 2, share: 0.7 }] };
+    const agent = (i) => ({ id: `a${i}`, institution: { kind: 'house', key: `House ${i}` }, memberships: [],
+      allegiance: { power: "Thieves' Guild", house: 'Street gang', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true } });
+    const deal = (n) => { const cards = [boss, second, ...Array.from({ length: n }, (_, i) => agent(i))].map((c) => JSON.parse(JSON.stringify(c))); assignHandlers(cards, settlement); return cards.filter((c) => c.allegiance).map((c) => c.allegiance.handler); };
+    const load = (hs) => hs.reduce((m, h) => ((m[h] = (m[h] || 0) + 1), m), {});
+    // five agents: the second alone would carry 5 > 4, so the boss joins the round
+    expect(load(deal(5))).toEqual({ second: 3, boss: 2 });
+    // four agents: the second carries 4, not more than 4 — the boss stays out (boss-last holds)
+    expect(load(deal(4))).toEqual({ second: 4 });
+  });
+
   it('the control: ten agents piled on the last of six handlers read as a finding', () => {
     const npcs = Array.from({ length: 15 }, (_, i) => ({ id: `a${i}`, allegiance: { power: 'G', handler: `h${Math.min(i, 5)}` } }));
     expect(roundRobinFindings({ npcs }).length).toBe(1);
