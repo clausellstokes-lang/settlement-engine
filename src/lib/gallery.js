@@ -481,6 +481,9 @@ export async function fetchPublicDossier(slug) {
         author_name: unlisted.author_name,
       }),
       unlisted: true,
+      // The players' page names who shared the town (SW-B7 row (b)); the author's
+      // public identity leaves through the one veil seam like every public field.
+      authorName: veilPublicPayload({ authorName: typeof unlisted.author_name === 'string' ? unlisted.author_name : '' }).authorName || '',
     };
   }
 
