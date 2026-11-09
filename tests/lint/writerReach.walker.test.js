@@ -688,11 +688,15 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // 2026-11-07 FIX-EXPORT-KEYS: − those three — migration 205 and its client twin (publicSafe.js PUBLIC_TOPLEVEL_KEYS,
     // NPC_PUBLIC_KEYS, publicNpc) dropped `factions`, `factionAffiliation` and `secondaryAffiliation` from the export
     // allowlist (the owner's word: the dead keys go before the deploy). The five left are the pre-car report, unmoved.
+    // 2026-11-09 SW-B7b PROJECTION (migration 210, STYLE-RULINGS-2 B10(a)): + `publicProse` — the shape lands
+    // before its writer (the save path stamps it owner-side, never the generator), so it reads as unwritten here
+    // until the save-path writer's cause re-keys this row.
     expect(unwritten).toEqual([
       'crossSettlementConflicts on settlement',
       'dailyLife on settlement',
       'interSettlementRelationships on settlement',
       'neighbourNetwork on settlement',
+      'publicProse on settlement',
       'thesis on settlement',
     ]);
     for (const retired of ['factions on settlement', 'factionAffiliation on npcs', 'secondaryAffiliation on npcs']) {

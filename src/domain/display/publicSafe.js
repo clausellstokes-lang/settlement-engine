@@ -65,6 +65,10 @@ export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
   'prominentRelationship', 'relationships', 'resourceAnalysis', 'schemaVersion', 'settlementReason',
   'simulationVersion', 'spatialLayout', 'stress', 'stressors', 'structuralSuggestions',
   'structuralViolations', 'thesis', 'tier',
+  // 210 (STYLE-RULINGS-2 B10(a), SW-B7b): the owner's composed blocks as TEXT — drawn owner-side
+  // (the player audience, the record's own seed) at every save by display/publicProse.js; the
+  // seed never travels, only the drawn sentences do.
+  'publicProse',
 ]);
 
 // Recursive DEEPER-level key denylist. Any nested object key matching this is
