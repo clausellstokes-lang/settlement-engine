@@ -84,7 +84,7 @@ describe('ruling patronage (car 3)', () => {
     const rows = towns.flatMap(({ s }) => patronageOf(s).powers);
     expect(rows.filter((r) => r.boost > 0).length).toBeGreaterThan(20);
     expect(rows.filter((r) => r.bound === 'above-ruler').length).toBeGreaterThan(0);
-  });
+  }, 300_000); // the slice's births (car 1's allegiance.test.js budget)
 
   it('I-6 control: a planted over-cap, past-ceiling and above-ruler boost each read as a finding', () => {
     const p = { ruler: 'R', rulerBase: 30, powers: [
@@ -111,7 +111,7 @@ describe('ruling patronage (car 3)', () => {
       expect(sum, `soak1k-${i}`).toBe(100);
     }
     expect(touched).toBeGreaterThan(10);
-  });
+  }, 300_000);
 
   it('I-7 control: a planted store (the effective written onto the row) reads as a change', () => {
     const s = /** @type {any} */ (fc.sample(townArb, { numRuns: 1, seed: 7 })[0]);
