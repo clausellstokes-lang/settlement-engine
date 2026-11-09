@@ -34,6 +34,8 @@ import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.
 import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
 import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
 import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
+import { powerNameInProse } from '../display/governanceAccount.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -64,42 +66,59 @@ export const TONIGHT_COPY = Object.freeze({
  * line per person, chosen by `castHash` over the person, the crisis and the role: no draw.
  */
 export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
+  // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, A·T3; W4 PEOPLE #40, granted by the chair 12:5x): the wants read
+  // the crisis's scarce good ({scarce}), its noun ({noun}) and the person's own house ({people}: "the people of
+  // the Elder Council"; {house}: "the Elder Council"), filled by `castWantOf`; the struck tic "thanked rather
+  // than blamed" is gone.
   instigator: Object.freeze([
     'keep the pressure on until the seat gives way, and keep their own hand out of sight.',
     'use this crisis to take the seat for themselves.',
     'be the one people turn to when the seat fails.',
   ]),
   brunt: Object.freeze([
-    'get their own people through this with what little they have left.',
-    'be heard by someone with power before the crisis takes the rest.',
-    'hold on until the worst has passed, and remember who helped.',
+    'get {people} a fair share of {scarce} before it runs out.',
+    'be heard by the seat before the {noun} takes what {people} have left.',
+    'hold {people} together through the {noun}, and remember who helped.',
   ]),
   lever: Object.freeze([
-    'decide who gets what the crisis has made scarce, and be thanked rather than blamed for it.',
-    'keep their house working through this, whatever it costs them.',
-    'hold the one thing everyone now needs without being crushed between those who want it.',
+    'decide who gets the {scarce}, and not be blamed by those who go without.',
+    'keep {house} working through the {noun}, whatever it costs them.',
+    'share out the {scarce} without being crushed between those who want it.',
   ]),
   exploiter: Object.freeze([
-    'sell what the crisis has made scarce for as long as the crisis lasts.',
-    'come out of this richer than they went in, without anyone tracing how.',
+    'sell {scarce} dear while others go without.',
+    'come out of the {noun} richer than they went in, without anyone tracing how.',
   ]),
   defender: Object.freeze([
-    'hold the line until the crisis breaks, with fewer hands than the line needs.',
-    'keep the defence standing long enough for someone else to end this.',
+    'hold the line through the {noun} with fewer hands than the line needs.',
+    'keep {house} standing long enough for someone else to end the {noun}.',
   ]),
+}));
+
+/** What each natural kind makes scarce, in one plain noun (the kind is read; nothing else). */
+const SCARCE_OF_KIND = Object.freeze(/** @type {Record<string, string>} */ ({
+  famine: 'food', plague_onset: 'medicine', mass_migration: 'shelter', monster_pressure: 'guards',
+  under_siege: 'food', wartime: 'arms',
 }));
 
 /**
  * The want a cast person voices: the role's own pool, one line by `castHash` over the person, the
- * crisis and the role (no draw). A role with no pool (never voiced today) falls back to the
- * person's own goal.
- * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant
+ * crisis and the role (no draw), filled with the crisis's scarce good and noun and the person's own
+ * house (their first-rank power; '' when they hold none). A role with no pool (never voiced today)
+ * falls back to the person's own goal.
+ * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant @param {string} [house]
  * @returns {string}
  */
-export function castWantOf(role, personId, crisis, ownWant) {
+export function castWantOf(role, personId, crisis, ownWant, house = '') {
   const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role];
   if (!pool || pool.length === 0) return ownWant;
-  return pool[Math.floor(castHash(personId, crisis, role) * pool.length)];
+  const line = pool[Math.floor(castHash(personId, crisis, role) * pool.length)];
+  const named = house ? powerNameInProse(house) : '';
+  return line
+    .replace(/\{people\}/g, named ? `the people of ${named}` : 'their own people')
+    .replace(/\{house\}/g, named || 'their house')
+    .replace(/\{scarce\}/g, SCARCE_OF_KIND[crisis] || 'help')
+    .replace(/\{noun\}/g, /** @type {Record<string, string>} */ (CRISIS_NOUN)[crisis] || 'crisis');
 }
 
 /**
@@ -184,6 +203,8 @@ const HOOK_COUNT = 3;
  * @property {string} role
  * @property {'seat'|'secret'|'cleric'|'cast'} why
  * @property {string=} castLabel    the cast's role label, for a person drawn from the crisis cast
+ * @property {string=} castId       the cast row's id, for a person drawn from the crisis cast (the want's key)
+ * @property {string=} castKind     the crisis kind the person was cast in (the want's fill)
  * @property {string} line          the record's sentence for this person: the crisis secret, or what they want
  * @property {'want'|'secret'|'temperament'} says what `line` is: a want prints after "Wants to"; a
  *                                  secret or a temperament prints as it stands (`printsAsWant`)
@@ -458,8 +479,8 @@ function peopleOf(source) {
     .sort((a, b) => (powerOf(b.npc) - powerOf(a.npc)) || (a.index - b.index));
   /** @type {TonightPerson[]} */
   const out = [];
-  /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'|'cast'} why @param {string} line @param {string} [castLabel] @param {'want'|'secret'|'temperament'} [says] */
-  const add = (row, why, line, castLabel, says = why === 'secret' ? 'secret' : 'want') => {
+  /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'|'cast'} why @param {string} line @param {string} [castLabel] @param {'want'|'secret'|'temperament'} [says] @param {{ castId: string, castKind: string }} [castOf] */
+  const add = (row, why, line, castLabel, says = why === 'secret' ? 'secret' : 'want', castOf = undefined) => {
     const name = clean(row.npc.name);
     const at = out.findIndex((p) => p.name === name);
     if (at >= 0) {
@@ -470,11 +491,12 @@ function peopleOf(source) {
       return;
     }
     if (out.length >= VOICE_SLOTS.length) return; // three people; the fallbacks only where the cast is short
-    out.push({ name, role: clean(row.npc.role || row.npc.title), why, ...(castLabel ? { castLabel } : {}), line, says, sourcePath: `npcs[${row.index}]` });
+    out.push({ name, role: clean(row.npc.role || row.npc.title), why, ...(castLabel ? { castLabel } : {}), ...(castOf || {}), line, says, sourcePath: `npcs[${row.index}]` });
   };
 
   // THE CAST FIRST (docs/DESIGN_CRISIS_TAB.md): slot by slot, the worst crisis's holder first.
   const casts = castsOf(source);
+  const order = powerOrderOf(/** @type {never} */ (source));
   for (const slot of VOICE_SLOTS) {
     let filled = false;
     for (const { cast, kind } of casts) {
@@ -483,7 +505,7 @@ function peopleOf(source) {
         const hit = row ? npcs.find(({ npc }) => (clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) === row.id) : undefined;
         // RUNG2-F13: the cast person wants what the ROLE wants (CAST_WANTS), never the want of
         // the people answering the crisis (soak1k-1805's instigator "identify the infiltrator").
-        if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) { add(hit, 'cast', castWantOf(role, row.id, kind, wantOf(hit.npc)), CRISIS_ROLE_LABEL[role]); filled = true; break; }
+        if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) { add(hit, 'cast', castWantOf(role, row.id, kind, wantOf(hit.npc), clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power)), CRISIS_ROLE_LABEL[role], undefined, { castId: row.id, castKind: kind }); filled = true; break; }
       }
       if (filled) break;
     }

@@ -31,7 +31,7 @@
  * receipt runs never sees them, so no receipt moves. Pure: no clock, no seed, no draw.
  */
 
-import { composeTonightSheet, CAST_WANTS } from '../summary/tonightSheet.js';
+import { composeTonightSheet, castWantOf } from '../summary/tonightSheet.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { migrationDirectionOf } from '../crisis/migrationDirection.js';
@@ -193,8 +193,12 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
     for (const p of sheet.people || []) {
       if (p.why !== 'cast' || p.sameAs) continue;
       const role = ROLE_OF_LABEL[str(p.castLabel)] || str(p.castLabel);
-      const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role] || [];
-      if (!pool.includes(str(p.line))) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_role:${role}` });
+      // SW-6 CRISIS-SURFACES (#40, the chair's grant 12:5x): the want is re-derived through the writer's own fill
+      // (the role, the person, the crisis, the person's house) and compared by EXACT equality, not pool membership.
+      const npc = npcById(str(p.castId));
+      const house = str(firstRankMembershipOf(npc, powerOrderOf(settlement))?.power);
+      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house);
+      if (!want || str(p.line) !== want) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_role:${role}` });
     }
     // target_runs_plot: a crisis's target voiced with that crisis's own secret.
     for (const e of entries) {
