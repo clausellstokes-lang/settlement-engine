@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "2c76c617725be42b19230bdaa5823378711617c4",
-  "measuredBy": "MERGE-WAVE (FIX-ARROW-SECTIONS merge point)",
-  "date": "2026-11-08",
-  "note": "the FIX-ARROW-SECTIONS merge, the last lane: its arrow suites into the integration branch, with GREEN-BASE and its class-(b) commits; refrozen at the merged tip",
+  "measuredAtSha": "fecc98c4805c7f65ae4d5bf984741af387106f30",
+  "measuredBy": "FIX-BUY-BUTTON",
+  "date": "2026-11-09",
+  "note": "FIX-BUY-BUTTON: +1 test title (the unlock dialog keeps its price, launchLock.dossier)",
   "files": 3123,
   "parked": 384,
   "credited": 2739,
-  "titles": 28695,
+  "titles": 28696,
   "suiteTitles": 7717
 }
