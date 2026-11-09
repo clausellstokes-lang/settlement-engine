@@ -59,3 +59,4 @@ readsPlain('government', null);
 readsPlain('military', /enforcement|apparatus|operational|unilateral|neutrality/i);
 readsPlain('economy', /commercial|operat|infrastructure|regulatory|distribution channel/i);
 readsPlain('crafts', /commercial|operat|infrastructure|regulatory|distribution channel/i);
+readsPlain('religious', /pastoral|clerical|endorsement|intermediar|encroach|endowment|institution|welfare|stabiliz/i);

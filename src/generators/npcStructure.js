@@ -244,53 +244,54 @@ reg(cat,'stable',
 }
 
 // ── religious ─────────────────────────────────────────────────────────────────
+// SW-6 second seat (B10(b)): the faith's seat-holders in plain words, the machinery struck; the goals untouched.
 reg('religious',GOVERNANCE_FRACTURED,
-  { position:  'Holds institutional religious authority in a settlement where civic governance is failing. Religious institutions often absorb civic functions when secular authority contracts.',
+  { position:  'Leads the faith while the seat fails, and people bring it the quarrels the seat no longer settles.',
     goal:      'Settle the disputes the seat has stopped settling, in the faith\'s name, and keep doing it afterwards.',
-    constraint:'Civic engagement that appears opportunistic risks being reversed by a reconsolidated authority that resents the encroachment.' },
-  { position:  'Serves a religious position secondary to the dominant religious institution in a settlement with failing civic governance.',
+    constraint:'Whatever the faith takes on now, whoever next holds the seat firmly may resent and take back.' },
+  { position:  'Serves the faith under its leaders while the seat fails around them.',
     goal:      'Keep marrying, burying and comforting their flock while the seat fails around them.',
-    constraint:'Pastoral relevance without institutional authority is difficult to convert into institutional standing when the governance reconsolidates.' }
+    constraint:'The flock\'s trust is easy to earn now, but it buys no say once someone holds the seat firmly again.' }
 );
 reg('religious','corruption',
-  { position:  'Holds institutional religious authority in a settlement where civic institutions are compromised. The church\'s moral authority depends on distance from the corruption.',
+  { position:  'Leads the faith among officials who take bribes; its good name rests on keeping clear of them.',
     goal:      'Keep the faith\'s name clean while every other office in the place takes payments.',
-    constraint:'The institution depends on civic structures for land rights and legal standing. Complete separation from compromised institutions is unavailable.' },
-  { position:  'Holds a religious position that must maintain pastoral credibility in a community aware of institutional corruption in the settlement\'s civic structures.',
+    constraint:'The faith still needs those same officials for its lands and its rights, so it cannot cut them off.' },
+  { position:  'Serves the faith among people who know their officials take bribes.',
     goal:      'Earn their flock\'s trust face to face, so it outlasts their trust in the crooked seat.',
-    constraint:'Pastoral trust built in opposition to civic institutions is vulnerable to any reconsolidation that restores civic legitimacy.' }
+    constraint:'Trust won by standing against the crooked officials can fade once honest ones return.' }
 );
 reg('religious','food_crisis',
-  { position:  'Leads a religious institution with direct welfare capacity during a supply crisis. Charitable infrastructure becomes a primary social stabilizer.',
+  { position:  'Leads the faith while the food runs short, and its alms are among the few things holding people together.',
     goal:      'Feed the hungry from the faith\'s stores, and make sure everyone knows who fed them.',
-    constraint:'The institution\'s charitable capacity is finite; prioritizing distribution for institutional benefit rather than need creates the scandal that outlasts the crisis.' },
-  { position:  'Serves a religious position with limited independent welfare capacity during a supply crisis.',
+    constraint:'The faith\'s stores will run out; feeding its own first, or for show, would be a scandal remembered long after the hunger.' },
+  { position:  'Serves the faith with little of its own to give while the food runs short.',
     goal:      'Get their own flock a share of whatever relief there is, and be thanked for it.',
-    constraint:'Intermediary standing depends on the reliability of what is being intermediated: if the relief infrastructure fails, the position loses credibility along with it.' }
+    constraint:'Its standing rests on the relief it passes on; if the relief fails, the blame falls on it too.' }
 );
 reg('religious','economic_stress',
-  { position:  'Holds religious authority in a settlement under economic pressure. The church\'s land holdings and endowments are both assets and targets.',
+  { position:  'Leads the faith while money is short; its lands and alms are both a help and a target.',
     goal:      'Keep the faith\'s lands and coin intact without looking rich while the people go short.',
-    constraint:'Any use of institutional resources to protect institutional interests during population-level hardship is visible.' },
-  { position:  'Holds a religious position secondary to the dominant institution in an economically stressed settlement where religious endowment is under pressure.',
+    constraint:'Anything it does to guard its own wealth while people go short is seen by all.' },
+  { position:  'Serves the faith on shrinking alms while money is short.',
     goal:      'Keep their small charge going on half the alms and none of the help.',
-    constraint:'Reduced resources reduce the pastoral capacity that justifies the position\'s existence.' }
+    constraint:'With less to give, there is less reason for the post to exist.' }
 );
 reg('religious','contested',
-  { position:  'Holds institutional religious authority during political contestation. Both sides of a political contest typically want clerical endorsement.',
+  { position:  'Leads the faith while rivals fight over the seat, and both sides want its blessing.',
     goal:      'Give no blessing to either claimant until it is plain which one will hold the seat.',
-    constraint:'The longer neutrality is maintained, the less valuable the eventual endorsement becomes.' },
-  { position:  'Serves a religious position under the dominant religious institution during political contestation.',
+    constraint:'The longer it waits to bless one side, the less the blessing will be worth.' },
+  { position:  'Serves the faith under its leaders while rivals fight over the seat.',
     goal:      'Back whichever claimant their superiors bless, and be seen to have waited for the word.',
-    constraint:'Following the institutional alignment requires having subordinated personal judgment to institutional authority. The cost is the same regardless of whether the alignment was correct.' }
+    constraint:'Following the leaders\' choice means setting aside one\'s own judgment, and paying for it whether they chose well or not.' }
 );
 reg('religious','stable',
-  { tags: CALM_ONLY, position:  'Leads an established religious institution in a settlement with functional civic order.',
+  { tags: CALM_ONLY, position:  'Leads the faith in quiet times, at peace with the seat beside it.',
     goal:      'Keep the faith at every naming, wedding and burial, and out of the seat\'s quarrels.',
-    constraint:'Institutional stability tends toward complacency. The challenges that would justify institutional expansion are currently absent.' },
-  { tags: CALM_ONLY, position:  'Serves a religious position secondary to the dominant institution in a stable settlement.',
+    constraint:'With nothing pressing, it is easy to grow comfortable and hard to argue for growing.' },
+  { tags: CALM_ONLY, position:  'Serves the faith under its leaders in quiet times.',
     goal:      'Serve their flock so faithfully that their superiors cannot pass them over again.',
-    constraint:'Excellence within the dominant institution\'s frame does not distinguish the position; deviation from it invites institutional friction.' }
+    constraint:'Doing the work well, the leaders\' way, goes unnoticed; doing it another way brings trouble.' }
 );
 
 // ── criminal ──────────────────────────────────────────────────────────────────
