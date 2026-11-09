@@ -172,7 +172,10 @@ describe('SW-B7b — the writer stamps, and the store holds what it stamped', ()
   test('an ack for an OLDER write never lands on a newer edit', async () => {
     const id = await saveAndHydrate({ ...TOWN });
     const written = { ...store.getState().settlement, population: 2150 };
-    const newer = { ...written, population: 2300 };
+    // The newer edit carries NO stamp, so an ack that wrongly adopted onto it would show as a
+    // `publicProse` key the edit never had (a newer edit WITH the earlier equal stamp hides it).
+    const { publicProse: _earlier, ...bare } = written;
+    const newer = { ...bare, population: 2300 };
     store.setState((draft) => {
       draft.settlement = newer;
       draft.savedSettlements[0].settlement = newer;
