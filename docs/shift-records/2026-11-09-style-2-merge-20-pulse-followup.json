@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 20 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its third seat STYLE-2-MERGE-3), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE PULSE-FOLLOW-UP MERGE OVER THE INTEGRATION BRANCH — lane/style-2-pulse-followup-2026-11-09 at 030b3eb10 merged at 8eb544d29 (STYLE-2-MERGE point 20), HeraldSceneContext.jsx's D·89 footnote composed (SW-12 and this lane wrote the same words, wrapped differently; the rendered string identical), the scene-context test and the WY-1 pulse hash composed (aabbf48b / 95f4af4f -> 5b023789), writer reach re-taken through its door and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-PULSE-FOLLOWUP-2026-11-09.md §2): d4e8d0487 A2·171 herald 2 items; 930b611cd A2·169–171 (npcAgency's candidate reasons in plain words) herald 66 items and the witness 7/8; 0e8c9308c B·8–10 herald 12; 92787493b A2·41 herald 3; f7a455e36 B·2–4 the same seven witness rows; every other commit 0. Composed on the line, RENDERED AND DIFFED stage to stage: the herald row rr-fresh-full|1, 439 items each side, the same ids, 0 non-text field moves, 81 items' text moved, every one of the 135 new strings traced to a line the lane adds (eventProse.js's role frames among them); the witness 7 of 8 rows, worldStateSha256 and wizardNewsSha256 only. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against the stage of 856de8427 (record 19's step; its signed bytes carried): the herald knowledge-desk golden 1 of 441 rows (rr-fresh-full|1|contentSha256 108372e0.. -> d5c5b9d3..; itemCount 439 unchanged; the lane's own figure a6b2c25b -> aafcffa0 on its base, the composed value differing by SW-11's point-12 and SW-12's point-18 moves on the same row, the 21:4x idiom); the preset lighting witness 7 of 8 rows (worldStateSha256 and wizardNewsSha256 only; no count or figure); gm 0, fence 0, prose 0, PDF 0. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE PULSE-FOLLOW-UP MERGE OVER THE INTEGRATION BRANCH — lane/style-2-pulse-followup-2026-11-09 at 030b3eb10 merged at 8eb544d29 (STYLE-2-MERGE point 20), HeraldSceneContext.jsx's D·89 footnote composed (SW-12 and this lane wrote the same words, wrapped differently; the rendered string identical), the scene-context test and the WY-1 pulse hash composed (aabbf48b / 95f4af4f -> 5b023789), writer reach re-taken through its door and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-PULSE-FOLLOWUP-2026-11-09.md §2): d4e8d0487 A2·171 herald 2 items; 930b611cd A2·169–171 (npcAgency's candidate reasons in plain words) herald 66 items and the witness 7/8; 0e8c9308c B·8–10 herald 12; 92787493b A2·41 herald 3; f7a455e36 B·2–4 the same seven witness rows; every other commit 0. Composed on the line, RENDERED AND DIFFED stage to stage: the herald row rr-fresh-full|1, 439 items each side, the same ids, 0 non-text field moves, 81 items' text moved, every one of the 135 new strings traced to a line the lane adds (eventProse.js's role frames among them); the witness 7 of 8 rows, worldStateSha256 and wizardNewsSha256 only",
+  "seat": "STYLE-2-MERGE-3 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at 8eb544d29",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 441,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
