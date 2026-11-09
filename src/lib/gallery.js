@@ -479,6 +479,12 @@ export async function fetchPublicDossier(slug) {
         public_slug: unlisted.slug,
         data: unlisted.dossier,
         author_name: unlisted.author_name,
+        // The veil reaches the players (SW-B7 row (d), migration 208): the read returns
+        // the DM's "Reveal DM content" switch and the per-member overrides (the veil's
+        // deltas ride their reserved key), so this branch projects exactly as the
+        // public branch does.
+        gallery_share_dm: unlisted.gallery_share_dm,
+        gallery_member_overrides: unlisted.gallery_member_overrides,
       }),
       unlisted: true,
       // The players' page names who shared the town (SW-B7 row (b)); the author's

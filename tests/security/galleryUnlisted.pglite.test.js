@@ -276,6 +276,47 @@ describe.runIf(present)('the party link — execution against the real SQL (pgli
     expect((await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j.id).toBe(S_UNLISTED);
   });
 
+  // ── (d) the link honours the veil ────────────────────────────────────────────
+  it('the veil hides the same rows on both reads (default mode, one member revealed, one hidden)', async () => {
+    const data = { name: 'Highkeep', secret: 'the compass', npcs: [
+      { id: 'n1', name: 'Ada', secret: 'ada-secret' },
+      { id: 'n2', name: 'Bo', secret: 'bo-secret' },
+    ] };
+    const overrides = { n1: { revealDm: true }, n2: { revealDm: false }, $veil: { v: 1, deltas: [{ address: 'card:npc:n2', hidden: true }] } };
+    await db.query(`update public.settlements set data = $1, gallery_member_overrides = $2, gallery_share_dm = false where id = '${S_PUBLIC}'`,
+      [JSON.stringify(data), JSON.stringify(overrides)]);
+    const slug = await share(S_PUBLIC);
+    await db.query(`select public.publish_settlement('${S_PUBLIC}')`); // listed and linked, both reads open
+    await asAnon();
+    const gallery = await scalar(`select data, gallery_share_dm, gallery_member_overrides from public.get_gallery_dossier('highkeep01')`);
+    const link = (await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j;
+    expect(link.dossier).toEqual(gallery.data);
+    expect(link.gallery_member_overrides).toEqual(gallery.gallery_member_overrides);
+    expect(link.gallery_share_dm).toBe(gallery.gallery_share_dm);
+    // what the splice did, both sides: the settlement level stripped, Ada revealed, Bo stripped
+    expect(link.dossier.secret).toBeUndefined();
+    expect(link.dossier.npcs.find((n) => n.id === 'n1').secret).toBe('ada-secret');
+    expect(link.dossier.npcs.find((n) => n.id === 'n2').secret).toBeUndefined();
+  });
+
+  it('the veil hides the same rows on both reads (DM content revealed, one member held back)', async () => {
+    const data = { name: 'Highkeep', secret: 'the compass', npcs: [
+      { id: 'n1', name: 'Ada', secret: 'ada-secret' },
+      { id: 'n2', name: 'Bo', secret: 'bo-secret' },
+    ] };
+    await db.query(`update public.settlements set data = $1, gallery_member_overrides = $2, gallery_share_dm = true where id = '${S_PUBLIC}'`,
+      [JSON.stringify(data), JSON.stringify({ n2: { revealDm: false } })]);
+    const slug = await share(S_PUBLIC);
+    await db.query(`select public.publish_settlement('${S_PUBLIC}')`); // listed and linked, both reads open
+    await asAnon();
+    const gallery = await scalar(`select data from public.get_gallery_dossier('highkeep01')`);
+    const link = (await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j;
+    expect(link.dossier).toEqual(gallery.data);
+    expect(link.gallery_share_dm).toBe(true);
+    expect(link.dossier.secret).toBe('the compass');
+    expect(link.dossier.npcs.find((n) => n.id === 'n2').secret).toBeUndefined();
+  });
+
   // ── maps (a shared campaign IS a map_with_campaign row; untouched by 208) ────
   it('MAPS: unlisted share/list/by-slug honor the same RLS pair', async () => {
     const { slug } = await scalar(`select public.share_map_unlisted('${M_UNLISTED}') as slug`);

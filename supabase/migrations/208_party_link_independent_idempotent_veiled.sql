@@ -17,6 +17,16 @@
 --     ends it. get_unlisted_dossier already read the LIVE row, so the town's changes
 --     show through the same link (168, unchanged in that respect).
 --
+-- (d) THE LINK HONOURS THE VEIL. 168's get_unlisted_dossier applied
+--     _gallery_sanitize_public_json ALONE: no "Reveal DM content" (gallery_share_dm),
+--     no per-member overrides, and the client's unlisted branch had no
+--     gallery_member_overrides to project the veil's deltas from. Now the read builds
+--     the dossier EXACTLY as get_gallery_dossier (147, 093's security model) does —
+--     the settlement-level projection by gallery_share_dm, then
+--     _gallery_apply_member_overrides — and returns gallery_share_dm and
+--     gallery_member_overrides so src/lib/gallery.js's unlisted branch runs
+--     sanitizeDossier (toPublicSafe + projectShareVeil) as the public branch does.
+--
 -- Pinned by execution: tests/security/galleryUnlisted.pglite.test.js.
 --
 -- @rollback: re-create the recreated functions at their migration-168 bodies. No data
@@ -57,4 +67,46 @@ begin
 end;
 $$;
 grant execute on function public.share_settlement_unlisted(uuid) to authenticated;
+
+-- ── 5. the by-slug read — the veil's twin (d) ───────────────────────────────
+-- The dossier is built EXACTLY as get_gallery_dossier (147) builds `data`: the
+-- narrated copy when the owner chose it, the settlement-level projection by
+-- gallery_share_dm, then the per-member overrides (093's model: a member reveal never
+-- widens the settlement level). gallery_share_dm and gallery_member_overrides travel
+-- so the client applies the same projection and the veil's deltas.
+create or replace function public.get_unlisted_dossier(p_slug text)
+returns jsonb
+language sql stable security definer set search_path = public, pg_temp
+as $$
+  select jsonb_build_object(
+    'id', s.id,
+    'name', s.name,
+    'tier', s.tier,
+    'slug', s.unlisted_slug,
+    'unlisted', true,
+    'author_name', ap.external_name,
+    'gallery_share_dm', coalesce(s.gallery_share_dm, false),
+    'gallery_member_overrides', s.gallery_member_overrides,
+    'dossier', public._gallery_apply_member_overrides(
+      case when s.gallery_share_dm then public._gallery_dm_full_json(base.j)
+           else public._gallery_sanitize_public_json(base.j) end,
+      public._gallery_dm_full_json(base.j),
+      s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, false
+    )
+  )
+  from public.settlements s
+  left join public.profiles ap on ap.id = s.user_id
+  cross join lateral (
+    select case
+      when s.gallery_share_narrated
+        and s.ai_data is not null
+        and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
+      then s.ai_data -> 'aiSettlement'
+      else s.data
+    end as j
+  ) base
+  where s.unlisted_slug = p_slug and s.visibility = 'unlisted'
+  limit 1;
+$$;
+grant execute on function public.get_unlisted_dossier(text) to authenticated, anon;
 
