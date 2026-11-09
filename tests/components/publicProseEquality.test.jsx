@@ -20,6 +20,7 @@ import React from 'react';
 import { describe, it, expect, beforeAll, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
+import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { publicProseOf, withPublicProse } from '../../src/domain/display/publicProse.js';
@@ -40,6 +41,7 @@ import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
 import { magicDeskRead } from '../../src/components/new/magicDeskRead.js';
 import { isolationDeskRead } from '../../src/components/new/viabilityDeskRead.js';
+import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx';
 import { faithDeskReadings, warFaithDeskRungs } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { powerDeskRead, powerDeskReadings, governanceAccountRead } from '../../src/components/new/powerDeskRead.js';
 
@@ -266,4 +268,46 @@ describe('the legacy fallbacks have left: the shared page never reaches them (it
       }
     });
   }
+});
+
+describe('general:steadings stays SILENT on the shared page in this wave (the chair\'s ruling 18:1x)', () => {
+  // A lifecycle grade and an ancient ruin arise over campaign time (0 of 300 towns carry either at
+  // birth), and campaign readings are OWNER-ONLY in this wave: the shared page prints nothing where
+  // the owner's view prints DS-GEN-8's lines, never a re-draw. The record is planted as the pulse
+  // writes it (settlementLifecycleFirstClass.js: the grade on the record AND on `config`).
+  // The cure shapes, for the post-deploy campaign-aware projection packet: (1) SteadingsSection takes
+  // worldState instead of the store; (2) the composer's reads admitted as a true shape change.
+  const planted = (i) => {
+    const base = birth(i).settlement;
+    return {
+      ...base,
+      lifecycleStatus: 'abandoned_site',
+      config: { ...(base.config || {}), lifecycleStatus: 'abandoned_site' },
+      history: { ...(base.history || {}), ancientRuin: { name: 'Old Vellan', yearsAgo: 340 } },
+    };
+  };
+  /** The section's leaf lines of six words or more. */
+  const leafLines = (el) => {
+    const { container, unmount } = render(el);
+    const lines = [...container.querySelectorAll('div')].filter((d) => d.children.length === 0)
+      .map((d) => (d.textContent || '').trim()).filter((t) => t.split(' ').length >= 6);
+    unmount();
+    return lines;
+  };
+  it.each([0, 4, 9])('soak1k-%i planted: the owner\'s player view prints both desk lines, the shared page neither', (i) => {
+    const owner = planted(i);
+    const projection = composePublicProse(owner);
+    // RED-FIRST: red the day the composer ships a steadings block without the rung that admits it.
+    expect(Object.keys(projection?.blocks || {}).filter((site) => site.includes('steadings'))).toEqual([]);
+    const shared = projectShareVeil(toPublicSafe(withPublicProse(owner, projection)), null);
+    const desk = generalDeskLines(owner, {
+      playerView: true, tier: owner.tier, steadings: [], lifecycleStatus: 'abandoned_site', ancientRuin: owner.history.ancientRuin,
+    }).steadings;
+    const drawn = [desk.remnantLine, desk.ruinLine].filter(Boolean);
+    const a = leafLines(<SteadingsSection settlement={owner} playerView />);
+    const b = leafLines(<SteadingsSection settlement={shared} publicDossier playerView />);
+    // anchored: the owner's player view prints both desk lines on the planted record
+    expect(drawn.filter((line) => a.includes(line))).toHaveLength(2);
+    expect(drawn.filter((line) => b.includes(line))).toEqual([]);
+  });
 });
