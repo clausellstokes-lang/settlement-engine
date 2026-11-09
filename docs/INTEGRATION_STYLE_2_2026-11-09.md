@@ -143,7 +143,9 @@ Points 17 and 18 are done (§1). The third seat merges, in this order:
 **Reds carried (not base reds):**
 
 - The dossierProseManifest DRIFT arm: signed at the final tip.
-- The observed-shape walker ×2: STOP 4.
+- The observed-shape walker ×3 (the newsBody read and SW-7's power.generated.js input drift): the OSR rung at the final tip, ruled 21:2x.
+- newsHeadlineContract ×2 (A2 address rows, A3 rewrite counts), from point 18 (SW-12's pulse lines): the news-family contracts, run ONCE at the final tip.
+- The prose-manifest DRIFT arm now reds as a pair (the DRIFT arm and its by-seed tally): signed at the final tip.
 - voiceMechanics: STOP 5.
 - The organicSamples, heraldTranslationFloor, phoneChromeFloor and realmHub reds of earlier logs were re-keyed by cause at 8e76af6ff and d094697eb.
 
