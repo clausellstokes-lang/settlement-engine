@@ -245,7 +245,7 @@ describe('C2 — the cross-time recall (narrate, not log)', () => {
     ] }, lastReadTick: 10 });
     const mercy = l.sections.find((s) => s.id === 'mercy');
     expect(mercy.lines[0].recalls).toEqual({ headline: 'Grain reaches the starving of Ormsund', when: 'the spring of year 1' });
-    expect(letterToPlainText(l)).toContain('In this my earlier record returns, from the spring of year 1: Grain reaches the starving of Ormsund.');
+    expect(letterToPlainText(l)).toContain('This echoes what I wrote of the spring of year 1: Grain reaches the starving of Ormsund.');
   });
 
   it('no shared place or no pre-floor twin ⇒ no recall field at all (byte-inert)', () => {

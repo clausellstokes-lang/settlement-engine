@@ -443,7 +443,7 @@ export function letterToPlainText(letter) {
       const tally = (l.repeats || 1) > 1 ? ` (so noted ${l.repeats} times)` : '';
       lines.push(`  • ${l.headline}${l.significance === 'major' ? ' (of great moment)' : ''}${tally}`);
       if (l.summary) lines.push(`    ${l.summary}`);
-      if (l.recalls) lines.push(`    In this my earlier record returns, from ${l.recalls.when}: ${l.recalls.headline}.`);
+      if (l.recalls) lines.push(`    This echoes what I wrote of ${l.recalls.when}: ${l.recalls.headline}.`);
     }
   }
   if (letter.truncationNote) {

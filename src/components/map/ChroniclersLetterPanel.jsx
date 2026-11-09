@@ -115,7 +115,7 @@ export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
                   {l.summary ? <div style={{ color: BODY, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.4 }}>{l.summary}</div> : null}
                   {l.recalls ? (
                     <div style={{ color: MUTED, fontSize: proseFontSize(FS.micro, mobile), fontStyle: 'italic', lineHeight: 1.4 }}>
-                      In this my earlier record returns, from {l.recalls.when}: {l.recalls.headline}.
+                      This echoes what I wrote of {l.recalls.when}: {l.recalls.headline}.
                     </div>
                   ) : null}
                 </li>
