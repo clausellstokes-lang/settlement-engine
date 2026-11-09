@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 168,
+      "dated": 169,
       "sha-pin": 2,
       "tree": 139
     },
@@ -381,7 +381,8 @@
     "_rosterGrowth2026-11-08-green-base": "ONE document JOINED the roster by being BORN into it (GREEN-BASE, session session_01FbPLbdhzfNE69LAdAXhoQE, on lane/green-base-2026-11-08 cut from the integration tip 1f74ce3e1, measured once with this walker's own arm): `dated` 150 -> 151, docs/GREEN_BASE_2026-11-08.md, the seat's record, born dated, 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-08-merge-wave-green-base": "THE UNION AT THE GREEN-BASE MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 166 -> 167 (docs/GREEN_BASE_2026-11-08.md); the count measured once by the walker; nothing changed class.",
     "_rosterGrowth2026-11-08-fix-arrow-sections-record": "ONE document JOINED the roster by being BORN into it (seat FIX-ARROW-SECTIONS, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/fix-arrow-sections-2026-11-08, on the owner's word of 2026-11-08 that the painted arrow header's sections are not equally spaced): `dated` 155 -> 156, docs/chair/2026-11-08/FIX-ARROW-SECTIONS-RECORD-2026-11-08.md, the lane's record (born at docs/FIX_ARROW_SECTIONS_2026-11-08.md, moved beside the brief by the chair's ruling), born dated, 0 past-EOF.",
-    "_rosterGrowth2026-11-08-merge-wave-fix-arrow": "THE UNION AT THE FIX-ARROW-SECTIONS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 167 -> 168 (docs/chair/2026-11-08/FIX-ARROW-SECTIONS-RECORD-2026-11-08.md); the count measured once by the walker; nothing changed class."
+    "_rosterGrowth2026-11-08-merge-wave-fix-arrow": "THE UNION AT THE FIX-ARROW-SECTIONS MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 167 -> 168 (docs/chair/2026-11-08/FIX-ARROW-SECTIONS-RECORD-2026-11-08.md); the count measured once by the walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-crisis-vantages": "ONE document JOINED the roster by being BORN into it (seat SW-5 CRISIS-VANTAGES, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-crisis-vantages-2026-11-09 cut from the integration tip a7bc2e4ce): `dated` 168 -> 169 (docs/chair/2026-11-09/STYLE-2-CRISIS-VANTAGES-2026-11-09.md, born dated, 0 past-EOF); `tree` untouched (red at the base by MERGE-WAVE's 9288badee, not this lane's)."
   },
   "rows": []
 }
