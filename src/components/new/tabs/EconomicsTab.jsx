@@ -13,7 +13,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { chainFlowFacts } from '../SupplyChainsPanel';
 import { displayLabel, humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { deriveFoodBalance, deriveGranaryOutlook, deriveTreasuryGlance, foodBarSegments } from '../../../domain/display/dossierViewModel.js';
-import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
+import { economicsDeskArgs, flowDriftOf } from '../deskHostArgs.js';
 import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in economyFreshness.js
 import { customSupplyChainPresentation } from '../../../domain/content/customSupplyChainPresentation.js';
@@ -304,13 +304,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord) : '';
   // FOOD-4: the foodways line is the food record's, read through the one reader; never composed here.
   const foodwaysLine = foodwaysLineOf({ economicState: eco });
-  const flowDrift = useMemo(() => {
-    const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
-    if (!sid || !Array.isArray(campaigns)) return null;
-    const campaign = campaigns.find(c => (c?.settlementIds || []).map(String).includes(sid));
-    if (!campaign) return null;
-    return flowDerivedDependency({ worldState: campaign.worldState, economicState: eco, settlementId: sid, tier: s?.tier });
-  }, [saveId, s, campaigns, eco]);
+  // The derivation is deskHostArgs.js's, shared with the public prose composer (SW-B7b).
+  const flowDrift = useMemo(() => flowDriftOf({ settlement: s, economicState: eco, campaigns, saveId }), [saveId, s, campaigns, eco]);
   // MARKET PRICES (round-21 Wave 7; §776 price-heuristics law) — the crier's
   // MOVEMENTS against the settlement's own usual prices (never absolute coin), a
   // pure display read over the SAME generation baseline + spatial ledgers,
@@ -328,7 +323,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // DS-GEN-18 (`economics.craftReason`) — the general desk's ONE caller with that reader's own
   // gate, memoised (ARCH §4.1, X-F9) ABOVE the early return (rules-of-hooks). FOUR LINES, as
   // many as the block it replaced: this file's thirteen prose-numerics rows are keyed on LINE.
-  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView, tier: s?.tier }).economics.craftReasonLine, [s, publicDossier, playerView]);
+  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView, publicSite: 'general:economics', tier: s?.tier }).economics.craftReasonLine, [s, publicDossier, playerView]);
   if (!eco) return <Empty message="No economic data available."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
@@ -397,7 +392,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // economyDeskRead.js now — four tabs draw this desk and the walker's ARM 2 admits exactly
   // one file that calls it, so the call cannot live in a tab any more. Datum is untouched:
   // situationDesc, the tiles and their sub-lines never read the desk.
-  const deskProse = economyDeskRead(s, { publicDossier, playerView, tier: s?.tier, foodBalance: fbal, granaryOutlook: granary, flowDrift });
+  const deskProse = economyDeskRead(s, { publicDossier, playerView, publicSite: 'economy:economics', tier: s?.tier, ...economicsDeskArgs(s, { economicState: eco, flowDrift }) });
   const drawnFoodLine = drawnAtMount(FOOD_SECURITY_MOUNT, deskProse.foodSecurityRung);
   // The food GLANCE position (DS-ECO-2), read at the Food Security section since the Food
   // tile was cut (T2-1); see EconomicsGlance.jsx for why the read stays.
@@ -602,7 +597,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           corpus has nothing to say (R-DST-K), and silent when the registry mounts this
           position at a glance. Drawn outside the section so a reader who folds it keeps the
           tone; the visibility arm in dossierMountRegistry.walker.test.js keeps it on first paint. */}
-      {drawnFoodLine?.sentence&&<p data-testid="economics-food-security-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
+      {drawnFoodLine?.sentence&&<p data-testid="economics-food-security-line" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
       {/* W1 ECO construction (2026-11-07): what the famine broke, how the need is met, and the
           food sources, each a DS-ECO-9 lens at the same position, under the rung. */}
       <DeskLines mount={FOOD_SECURITY_MOUNT} settlementName={s?.name} tier={s?.tier} rungs={[deskProse.famineSource, deskProse.foodMeans, deskProse.foodSources]} />

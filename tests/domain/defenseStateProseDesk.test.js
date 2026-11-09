@@ -2105,9 +2105,16 @@ describe('the defense desk\'s paid-surface gate — every caller, found by impor
       // (UX consolidation 2026-10-30, RULINGS-T2 T2-15); still two callers, still gated.
       // A THIRD caller, by design (W2 DEF third seat, 2026-11-07): ViabilityTab draws DS-DEF-12, the
       // isolation-support finding, at `viability.isolationSupport`, gated like the other two.
+      // RE-KEYED BY CAUSE (SW-B7b fourth seat, STYLE-RULINGS-2 B10(a)): DefenseTab's eight reads
+      // moved into the defense desk's ONE caller, `components/new/defenseDeskRead.js`, shared with
+      // the public prose composer; each read is still gated in its own statement.
+      // RE-KEYED BY CAUSE again (the magic family): MagicTab's DS-DEF-9 read moved into
+      // `components/new/magicDeskRead.js`, shared with the composer; still gated in its statement.
+      // And the viability family: ViabilityTab's DS-DEF-12 read moved into
+      // `components/new/viabilityDeskRead.js`, shared with the composer; still gated.
       .toEqual([
-        'components/new/tabs/DefenseTab.jsx', 'components/new/tabs/MagicTab.jsx',
-        'components/new/tabs/ViabilityTab.jsx',
+        'components/new/defenseDeskRead.js', 'components/new/magicDeskRead.js',
+        'components/new/viabilityDeskRead.js',
       ]);
     for (const path of importers) {
       const code = codeOnly(readFileSync(path, 'utf8'));

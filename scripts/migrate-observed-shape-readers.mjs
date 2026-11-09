@@ -197,7 +197,12 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 38 -> 39 (LIVE)   MERGE-TRAIN AT THE ALLEGIANCE-CAR4 MERGE (824a8ce2f): one rung, two causes — the
+ *   schema 39 -> 40 (LIVE)   THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the chair's grant of
+ *     2026-11-09 13:5x): one rung, one cause — ONE save-time-writer declaration, `publicProse on settlement`
+ *     (writer lib/saves.js), its one row admitted tagged; the roster 14 -> 15, the bank 76/50 -> 77/51. Its
+ *     full rationale lives beside `PUBLIC_PROSE_TARGET_SCHEMA`.
+ *
+ *   schema 38 -> 39 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR4 MERGE (824a8ce2f): one rung, two causes — the
  *     goals rebuilt (03ff59084: 7 admitted, 4 repaired, 16 uncured instrument erosion) and the fingerprint
  *     re-based (0a18ff311: 1 admitted); none declared, the bank 76/50. Its full rationale lives beside
  *     `TRAIN_CAR4_TARGET_SCHEMA`.
@@ -364,6 +369,7 @@ import {
   validateSchema36Baseline,
   validateSchema37Baseline,
   validateSchema38Baseline,
+  validateSchema39Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1724,6 +1730,28 @@ export const TRAIN_CAR3_TARGET_SCHEMA = 38;
  *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR4_SCANNER_DELTA_PATHS`. */
 export const TRAIN_CAR4_TARGET_SCHEMA = 39;
 
+/* ⭐⭐ THE SCHEMA 39 → 40 RUNG — THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, STYLE-RULINGS-2
+ *  B10(a); the chair's grant of 2026-11-09 13:5x on the lane's STOP 2: "the M9 save-time-writer admission,
+ *  through the GOVERNED door only: the OSR migration in two acts")
+ *
+ *  The shared dossier (the gallery page, the players' link) prints the owner's player-view desk text, which
+ *  the save path composes owner-side and stamps onto the record as `data.publicProse` (src/lib/saves.js ::
+ *  withPublicProse, inside mutationRow and supabaseSave; docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md
+ *  §1, §6, §7). The leaf src/domain/display/publicProse.js :: publicProseOf reads `settlement?.publicProse`
+ *  once. The corpus executes generation and the domain pulse and never the save path, so no generated world
+ *  carries the key: the save-time-writer class, the `decrees on settlement` precedent (EM-C4b).
+ *
+ *  MEASURED at the subject against the schema-39 register (scan vs inventory): NEW 1 · GONE 0 · INCREASED 0 ·
+ *  DECREASED 0 — the one row `publicProse on settlement` at src/domain/display/publicProse.js (1 read).
+ *  CAUSE 1 (the only one) — the leaf's read, ADMITTED TAGGED under ONE declaration (the roster 14 -> 15).
+ *
+ *  ⭐ THE BANK MOVES 76/50 → 77/51, MEASURED: the one declaration reaches one address and one read.
+ *  ⛔ The reconciliation must be EXACTLY that one row; any other moved row means the tip moved under the
+ *  measurement and the mint STOPS. The delta is the THREE bookkeeping paths; see
+ *  `PUBLIC_PROSE_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  walker-red, and its re-freeze lands next. */
+export const PUBLIC_PROSE_TARGET_SCHEMA = 40;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1803,6 +1831,8 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [TRAIN_CAR3_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
   // HELD at 39 (MERGE-TRAIN, ALLEGIANCE-CAR4): no moved row is on a declared identity.
   [TRAIN_CAR4_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // GROWN at 40 (SW-B7b): one declaration, `publicProse on settlement`, one address and one read.
+  [PUBLIC_PROSE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2430,6 +2460,13 @@ export const TRAIN_CAR4_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-39 → 40 delta: the THREE bookkeeping paths (the corpus definition is unchanged). */
+export const PUBLIC_PROSE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2504,6 +2541,8 @@ const TRAIN_CAR3_SCANNER_TRANSITION_POLICY =
   'schema-37-to-38-car3-redeal-v1';
 const TRAIN_CAR4_SCANNER_TRANSITION_POLICY =
   'schema-38-to-39-goals-v1';
+const PUBLIC_PROSE_SCANNER_TRANSITION_POLICY =
+  'schema-39-to-40-public-prose-writer-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2561,6 +2600,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [TRAIN_CAR2_TARGET_SCHEMA]: TRAIN_CAR1_TARGET_SCHEMA,
   [TRAIN_CAR3_TARGET_SCHEMA]: TRAIN_CAR2_TARGET_SCHEMA,
   [TRAIN_CAR4_TARGET_SCHEMA]: TRAIN_CAR3_TARGET_SCHEMA,
+  [PUBLIC_PROSE_TARGET_SCHEMA]: TRAIN_CAR4_TARGET_SCHEMA,
 });
 
 /**
@@ -2670,6 +2710,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [TRAIN_CAR2_TARGET_SCHEMA]: validateSchema37Baseline,
   // The schema-39 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR3), validated as schema 38.
   [TRAIN_CAR3_TARGET_SCHEMA]: validateSchema38Baseline,
+  // The schema-40 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR4), validated as schema 39.
+  [TRAIN_CAR4_TARGET_SCHEMA]: validateSchema39Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -3193,6 +3235,12 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [PUBLIC_PROSE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PUBLIC_PROSE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PUBLIC_PROSE_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
   [TRAIN_CAR4_TARGET_SCHEMA, Object.freeze({
@@ -4382,7 +4430,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : TRAIN_CAR4_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PUBLIC_PROSE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4398,8 +4446,9 @@ export function run(argv = process.argv.slice(2)) {
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
     PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA,
     TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA,
-    TRAIN_CAR4_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${TRAIN_CAR4_TARGET_SCHEMA} (live allegiance-car4 leaf),`
+    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${PUBLIC_PROSE_TARGET_SCHEMA} (live public-prose leaf),`
+      + ` ${TRAIN_CAR4_TARGET_SCHEMA} (retired allegiance-car4 leaf),`
       + ` ${TRAIN_CAR3_TARGET_SCHEMA} (retired allegiance-car3 leaf),`
       + ` ${TRAIN_CAR2_TARGET_SCHEMA} (retired allegiance-car2 leaf),`
       + ` ${TRAIN_CAR1_TARGET_SCHEMA} (retired allegiance-car1 leaf),`

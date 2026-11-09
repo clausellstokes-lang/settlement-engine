@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 209;
+export const MIGRATION_TRAIN_REPO_HEAD = 210;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -803,6 +803,37 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: 'has_surveyor_entitlement' }),
+    ]),
+  }),
+  // 208 and 209 land with their own lanes' entries (SW-B7a, TIER-PARITY-FIX); this lane writes 210's alone.
+  Object.freeze({
+    id: 'public-prose-text-projection',
+    from: 210,
+    to: 210,
+    purpose: '210 — the public dossier carries the owner\'s composed blocks as text (publicProse). '
+      + 'STYLE-RULINGS-2 B10(a), lane SW-B7b PROJECTION; the chair\'s ruling of 2026-11-09 12:5x: the paid-surface '
+      + 'gate (§885.3, publicDossier ⇒ no state prose) is LIFTED for the gallery page and the players\' link, as a '
+      + 'TEXT PROJECTION. The composed blocks are drawn owner-side (the player audience, the record\'s own seed) at '
+      + 'every save and carried as strings in `settlements.data.publicProse` … The seed posture (099/121) stands: '
+      + 'the seed never travels; only the drawn sentences do. A mechanical re-statement of 207\'s '
+      + '`_gallery_sanitize_public_json` body (latest wins) with ONE token added to the top-level allowlist: '
+      + '\'publicProse\'. Deeper levels keep the recursive denylist, so a key under publicProse that matches a '
+      + 'private token is stripped, fail-closed. … `_gallery_apply_member_overrides` (093, 208\'s twin) calls this '
+      + 'function by name and is unchanged. DEPLOYMENT remains the owner\'s manual act after 207, 208 and 209 '
+      + '(`supabase db push` plus the applied-head bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 202, 203, 205, 206 and 207, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: re-apply 207\'s body verbatim, i.e. the same function without '
+        + '\'publicProse\' in public_toplevel — which is why 210 classifies as documented-manual-reversal rather '
+        + 'than taking the wave policy. Nothing is destroyed on reversal: the function holds no state; the public '
+        + 'page then falls silent where the composed blocks stood, as at 207.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
     ]),
   }),
 ]);

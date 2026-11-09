@@ -42,6 +42,7 @@ import { economyStateProse } from '../../domain/display/stateProse/economyStateP
 import { deriveExportPosture } from '../../domain/display/exportPosture.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
+import { publicProseOf } from '../../domain/display/publicProse.js';
 
 /**
  * THE SILENT DESK — what a free, anonymous viewer gets, and what a host gets before it has
@@ -85,6 +86,18 @@ export const SILENT_ECONOMY_DESK = Object.freeze({
 });
 
 /**
+ * The shipped desk for one call site on a shared page, every key the SILENT desk names and
+ * nothing else; SILENT where the save shipped none.
+ * @param {any} settlement @param {unknown} site @returns {Readonly<Record<string, any>>}
+ */
+function publicEconomyDesk(settlement, site) {
+  const shipped = typeof site === 'string' ? publicProseOf(settlement, site) : null;
+  if (!shipped || typeof shipped !== 'object') return SILENT_ECONOMY_DESK;
+  const rungs = /** @type {Record<string, unknown>} */ (shipped);
+  return Object.freeze(Object.fromEntries(Object.keys(SILENT_ECONOMY_DESK).map((key) => [key, rungs[key] ?? null])));
+}
+
+/**
  * Read the economy desk for one settlement, gated.
  *
  * THE SEED IS THE SETTLEMENT'S OWN STABLE IDENTITY, so THE PROMISE holds: same seed + same
@@ -96,7 +109,7 @@ export const SILENT_ECONOMY_DESK = Object.freeze({
  *
  * @param {object|null|undefined} settlement
  * @param {{tierNoun?: string|null, tier?: unknown, publicDossier?: boolean, playerView?: boolean,
- *   foodBalance?: object|null, granaryOutlook?: object|null, flowDrift?: object|null,
+ *   publicSite?: string, foodBalance?: object|null, granaryOutlook?: object|null, flowDrift?: object|null,
  *   impairedInstitution?: string|null}} [options]
  *   `impairedInstitution` is ONE house out of the impairment sets ServicesTab already builds
  *   with `computeChainSets`; it is passed in rather than re-derived here because that
@@ -110,7 +123,10 @@ export function economyDeskRead(settlement, options = {}) {
   // the mount registry's ARM 3, which reads the statement the corpus call sits in: a gate a
   // walker cannot see is a gate the next edit can delete without anything reddening. Same
   // truth table, one statement.
-  return options.publicDossier ? SILENT_ECONOMY_DESK : economyStateProse(
+  // ⭐ THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the desk the
+  // owner's player view drew at this call site, shipped as text at the owner's save
+  // (`publicProse.js`); an absent or stale projection is the SILENT desk, never a re-draw.
+  return options.publicDossier ? publicEconomyDesk(settlement, options.publicSite) : economyStateProse(
     settlement,
     {
       foodBalance: options.foodBalance ?? null,

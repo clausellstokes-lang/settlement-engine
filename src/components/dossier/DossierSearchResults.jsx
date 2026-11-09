@@ -39,6 +39,8 @@ import { HistoryEventCard, TensionRow } from '../new/tabs/HistoryTab.jsx';
 import { TraditionRow } from '../new/tabs/TraditionsTab.jsx';
 import { PlotHookCard } from '../new/tabs/PlotHooksTab.jsx';
 import { ResourceChainCard } from '../new/tabs/ResourcesTab.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 /** Objects shown per group before the "more on this tab" link (the tab holds the rest). */
 const GROUP_CAP = 12;
@@ -122,7 +124,21 @@ const RENDERERS = Object.freeze({
   tradition: { Component: TraditionRow, props: (o) => ({ rec: o.raw, preview: !!o.meta.preview }) },
   hook: { Component: PlotHookCard, props: (o) => ({ hook: o.raw }) },
   resource: { Component: ResourceChainCard, props: (o) => ({ chain: o.raw, stage: o.meta.stage }) },
+  // SW-B7b item 3: one shipped site's carried text, verbatim — no new words; the group's header
+  // above is the jump to the tab that prints it.
+  prose: { Component: ShippedProse, props: (o) => ({ lines: Array.isArray(o.raw) ? o.raw.map(String) : [] }) },
 });
+
+/**
+ * One shipped prose block (`publicProse`, player view only): the carried strings as ONE paragraph,
+ * exactly as the owner's save composed them.
+ * @param {{ lines: string[] }} props
+ */
+function ShippedProse({ lines }) {
+  const mobile = useIsMobile();
+  if (!lines.length) return null;
+  return <p style={{ margin: 0, color: BODY, fontSize: proseFontSize(FS.sm, mobile), lineHeight: 1.55 }}>{lines.join(' ')}</p>;
+}
 
 /**
  * One found object, mounted through its tab's component. X-20 (c): the object whose NAME the

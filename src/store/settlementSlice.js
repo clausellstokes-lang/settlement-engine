@@ -141,6 +141,48 @@ export {
   MAX_EVENT_NARRATIVE_SNAPSHOTS,
 };
 
+// ── The public prose stamp's ADOPTION ON ACK (STYLE-RULINGS-2 B10(a); lane SW-B7b) ──
+// `lib/saves.js` stamps `data.publicProse` (and `ai_data.aiSettlement.publicProse`) on every
+// cloud write and, once the server confirmed the row, hands the stamp here (wired once in
+// store/index.js). The canon commands compare-and-swap on the stored `data` / `ai_data`
+// against this store's cached row (183/193), so the cache and the live record take the
+// stamp, but ONLY where they still hold the record that was written (byte-equal less the
+// stamp): an ack for an older write never lands on a newer edit, whose own write stamps it.
+const sansPublicProse = (record) => JSON.stringify({ ...record, publicProse: undefined });
+const isPlainRecord = (value) => !!value && typeof value === 'object' && !Array.isArray(value);
+const heldIsWritten = (held, written) => isPlainRecord(held) && isPlainRecord(written)
+  && (held === written || sansPublicProse(held) === sansPublicProse(written));
+const stampedOrNull = (held, written, projection) => (
+  projection && heldIsWritten(held, written)
+  && JSON.stringify(held.publicProse) !== JSON.stringify(projection)
+    ? { ...held, publicProse: projection } : null);
+
+/**
+ * @param {Function} set the store's immer `set` @param {Function} get
+ * @param {{id: string, settlement: any, aiSettlement: any, publicProse: {data: any, ai: any}}} ack
+ */
+export function adoptPublicProseAck(set, get, ack) {
+  if (!ack?.publicProse) return;
+  const { id, settlement, aiSettlement, publicProse } = ack;
+  const state = get();
+  const index = (state.savedSettlements || []).findIndex((entry) => String(entry?.id) === id);
+  const cached = index === -1 ? null : state.savedSettlements[index];
+  const cachedData = stampedOrNull(cached?.settlement, settlement, publicProse.data);
+  const cachedAi = stampedOrNull(cached?.aiData?.aiSettlement, aiSettlement, publicProse.ai);
+  // The live record: the active save, or the draft a create just wrote (bound after).
+  const liveIsTarget = state.activeSaveId == null || String(state.activeSaveId) === id;
+  const live = liveIsTarget ? stampedOrNull(state.settlement, settlement, publicProse.data) : null;
+  if (!cachedData && !cachedAi && !live) return;
+  set((draft) => {
+    const row = index === -1 ? null : draft.savedSettlements[index];
+    if (row && String(row.id) === id) {
+      if (cachedData) row.settlement = cachedData;
+      if (cachedAi) row.aiData = { ...row.aiData, aiSettlement: cachedAi };
+    }
+    if (live) draft.settlement = live;
+  });
+}
+
 export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   // `settlement` is the current generated settlement object.

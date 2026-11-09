@@ -112,11 +112,12 @@ import {
   RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema39Baseline,
+  validateSchema40Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -281,7 +282,12 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 39 = schema 38's topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the
  *     ALLEGIANCE-CAR4 merge (one rung, two causes, every row with one and its class): the goals rebuilt
  *     (03ff59084) admit 7, repair 4 and lose 16 to UNCURED INSTRUMENT EROSION (recorded as such); the
- *     fingerprint re-based (0a18ff311) admits 1; nothing declared, the bank 76/50. THE LIVE AUTHORITY.
+ *     fingerprint re-based (0a18ff311) admits 1; nothing declared, the bank 76/50 (RETIRED).
+ * 40 = schema 39's topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER'S
+ *     ADMISSION (lane SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE declaration of the
+ *     save-time-writer class, `publicProse on settlement` (writer lib/saves.js; the corpus never runs the
+ *     save path); the roster 14 -> 15, the bank 76/50 -> 77/51, and the one new row
+ *     (src/domain/display/publicProse.js x1) admitted TAGGED. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -316,6 +322,7 @@ export {
   RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1512,6 +1519,23 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' so the writer never runs in the corpus and the read has no observed writer by'
       + ' construction, not by defect. Read once by src/domain/migrationDirection.js.',
   }),
+  // ⭐⭐ THE SCHEMA-40 RUNG'S ONE DECLARATION — the public prose projection (lane SW-B7b PROJECTION,
+  // STYLE-RULINGS-2 B10(a); docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md §6.4 STOP 2 and §7),
+  // under the chair's grant of 2026-11-09 13:5x. The save-time-writer class, the `decrees on settlement`
+  // precedent: the cloud row builder stamps `data.publicProse` (the owner's player-view desk text,
+  // composed owner-side) on every save, and the corpus executes generation alone, so no generated world
+  // can carry the key. Gate 0 reads the write in saves.js :: withPublicProse, an object-literal key.
+  Object.freeze({
+    identity: 'publicProse on settlement',
+    mechanism: 'save-time-writer',
+    writer: 'src/lib/saves.js',
+    ruling: 'SW-B7b PROJECTION — the chair\'s grant of 2026-11-09 13:5x (STYLE-RULINGS-2 B10(a))',
+    why: 'The cloud row builder stamps the public prose projection onto the record at every save'
+      + ' (withPublicProse, inside mutationRow and supabaseSave), so the shared page can print the'
+      + ' owner\'s drawn desk text without the seed; the corpus runs generation and never the save'
+      + ' path, so the read has no observed writer by construction. Read once by'
+      + ' src/domain/display/publicProse.js :: publicProseOf.',
+  }),
 ]);
 
 /** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
@@ -1627,7 +1651,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema39Baseline(baseline);
+  validateSchema40Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3164,11 +3188,17 @@ export function baselineOf({
       'ALLEGIANCE-CAR3 merge (one rung, two causes, every row with one): the dial e9070d614 (organizedCrime',
       '0.10 -> 0.05) re-deals the year, ADMITTING 13 rows and retiring 5; the bought watch (a63effa93) retires',
       '`ousted on npcs` at corruption.js; nothing is declared and the bank is 76/50 (RETIRED).',
-      'SCHEMA 39 = schema 38\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
+      'SCHEMA 39 (RETIRED) held schema 38\'s topology, tag law, roster and corpus definition, re-governed to MERGE-TRAIN at the',
       'ALLEGIANCE-CAR4 merge (one rung, two causes, every row with one and its class): the goals rebuilt (03ff59084)',
       'ADMIT 7 `on intent` rows, retire 4 by repair and lose 16 to UNCURED INSTRUMENT EROSION (recorded as such, not',
-      'a cure); the fingerprint re-based (0a18ff311) ADMITS 1; nothing is declared and the bank is 76/50.',
-      'Of the fourteen declared bank entries THIRTEEN bank reads today; `isCriminal on incomeSources`',
+      'a cure); the fingerprint re-based (0a18ff311) ADMITS 1; nothing is declared and the bank is 76/50 (RETIRED).',
+      'SCHEMA 40 = schema 39\'s topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER\'S',
+      'ADMISSION (lane SW-B7b PROJECTION, the chair\'s grant of 2026-11-09 13:5x): the cloud row builder',
+      '(src/lib/saves.js) stamps `publicProse` on the record at every save, and its one guarded read',
+      '(src/domain/display/publicProse.js) has no observed writer because the corpus never runs the save path.',
+      'The save-time-writer class explains it: ONE declaration, `publicProse on settlement`, the roster 14 -> 15;',
+      'the one new row is admitted TAGGED and nothing else moves.',
+      'Of the fifteen declared bank entries FOURTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
@@ -3178,7 +3208,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–38 are the RETIRED numeric predecessors.',
+      'Schemas 4–39 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3352,7 +3382,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema39Baseline,
+    validateBaseline: validateSchema40Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

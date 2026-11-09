@@ -5,7 +5,6 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
-import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/viabilityFilter.js';
 // READER-R1 (the chair's rulings 1, 2 and 4): one critical list, the stress effects that are
 // not in it, an issue's text read against the route, and the generator's checks for staff only.
@@ -18,10 +17,9 @@ import {NarrativeNote} from '../NarrativeNote';
 // §885.3 paid-surface gate — corpus prose never draws for a free gallery viewer.
 import { generalDeskLines } from '../generalDeskRead.js';
 // DS-DEF-12 (W2 DEF, 2026-11-07): the isolation-support finding, a defense-leaf block that speaks
-// here, gated on the paid surface exactly as the Magic tab gates DS-DEF-9.
-import { defenseIsolationSupportProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+// here, read through its gated reader (shared with the public prose composer, SW-B7b).
+import { isolationDeskRead, viabilityVerdictRead } from '../viabilityDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18): the verdict's three lenses are one
 // paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
 import ProseBlock from '../ProseBlock.jsx';
@@ -65,7 +63,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // rather than through a single kernel read, and that cost is unmeasured on the browser
   // side. The result is a pure function of the settlement and the two view flags.
   const {verdictLines} = useMemo(
-    () => generalDeskLines(s, {publicDossier, playerView, tier: s?.tier}).viability,
+    () => generalDeskLines(s, {publicDossier, playerView, publicSite: 'general:viability', tier: s?.tier}).viability,
     [s, publicDossier, playerView],
   );
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
@@ -73,13 +71,9 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   const metrics = v.metrics || {};
   // DS-DEF-12: whether a place with no dependable road, river or port can keep itself supplied.
   // Silent on a connected town and on a free viewer's dossier (§885.3).
-  const isolationProse = publicDossier
-    ? Object.freeze({ isolationSupply: null })
-    : defenseIsolationSupportProse(s, {
-      seed: String(s?._seed ?? s?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-      tierNoun: tierNounFor(s.tier),
-    });
+  // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the owner's
+  // player view drew, shipped at the save (`viability`); unstamped, SILENT (viabilityDeskRead.js).
+  const isolationProse = isolationDeskRead(s, { publicDossier, playerView });
   const isolationLine = drawnAtMount(ISOLATION_SUPPORT_MOUNT, isolationProse.isolationSupply)?.sentence || null;
   // DS-DEF-9 and the frozen magicDependency record moved to the Magic tab as the Roles
   // section's framing (UX consolidation 2026-10-30, RULINGS-T2 T2-15); see MagicTab.jsx.
@@ -87,7 +81,9 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since
   // this tab supplies its own coherence badge.
-  const vmViability = flag('canonicalViewModel') ? deriveViability(s) : null;
+  // The verdict's variant is SEEDED (viabilitySeed): a shared page prints the summary the owner's
+  // view drew, shipped at the save (`viewModel:viability`), and an unstamped record is silent.
+  const vmViability = flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier }) : null;
   const summaryClean = trimViabilitySummary(vmViability
     ? vmViability.summary.replace(/^[^:]+:\s*/, '').trim()
     : (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim());

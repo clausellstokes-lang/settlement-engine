@@ -271,7 +271,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `209_surveyor_premium_only.sql`** (this
+**Current migration head: `210_public_prose_text_projection.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -279,6 +279,13 @@ derives the head from `supabase/migrations/` and fails the gate if this line dri
 This line records the head **on disk**, not a clearance to apply it: `195` carries its
 own owner-gated, dark header (`AUTHORED, NOT DEPLOYED`), so whether it ships in a given
 cutover is the owner's call — read that file's preamble before pushing.
+
+`210_public_prose_text_projection.sql` (SW-B7b, STYLE-RULINGS-2 B10(a)) is additive: it restates
+207's `_gallery_sanitize_public_json` with ONE more top-level token, `publicProse`. It needs 208
+and 209 applied before it (both on their own lanes until STYLE-2-MERGE). A shared town shows its
+composed blocks on the gallery and party pages only after its first save once the client that
+stamps `publicProse` has shipped, so one save per shared town is owed. Name it to the owner; it
+is never scripted.
 
 **Read these preambles before the push, whatever the head number says.** Most
 migrations are additive and need no separate reading; these are the pending ones whose

@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 212,
+      "dated": 213,
       "sha-pin": 2,
       "tree": 169
     },
@@ -482,7 +482,9 @@
     "_rosterGrowth2026-11-09-style-2-merge-fix-section-regen": "THE UNION AT THE FIX-SECTION-REGEN MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 210 -> 211 (docs/chair/2026-11-09/FIX-SECTION-REGEN-2026-11-09.md, the lane's record, born dated).",
     "_rosterGrowth2026-11-09-style-2-crisis-surfaces": "ONE document JOINED the roster by being BORN into it (SW-6 CRISIS-SURFACES, session session_01FbPLbezSPiihKVj4W3x369, on lane/style-2-crisis-surfaces-2026-11-09 cut from MERGE-TRAIN's final tip bd07005b9): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-CRISIS-SURFACES-2026-11-09.md, the lane's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-sw6": "THE UNION AT THE SW-6 CRISIS-SURFACES MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 211 -> 212 (docs/chair/2026-11-09/STYLE-2-CRISIS-SURFACES-2026-11-09.md, the lane's record, born dated).",
-    "_rosterGrowth2026-11-09-style-2-merge-record-22": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): `tree` 168 -> 169, docs/shift-records/2026-11-09-style-2-merge-22-sw6.json, record 22, born into the tree class; measured once by this walker; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-record-22": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): `tree` 168 -> 169, docs/shift-records/2026-11-09-style-2-merge-22-sw6.json, record 22, born into the tree class; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-projection": "ONE document JOINED the roster by being BORN into it (SW-B7b PROJECTION, session session_01FbPLbdv5BoGUynY8ainpA5, on lane/style-2-projection-2026-11-09 cut from bd07005b9, measured once with this walker's own arm): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md, the lane's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-sw-b7b": "THE UNION AT THE SW-B7b MERGE (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): both sides' notes kept; `dated` 212 -> 213 (docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md, the lane's record, born dated)."
   },
   "rows": []
 }

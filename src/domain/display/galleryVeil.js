@@ -731,9 +731,48 @@ export function applyVeil(publicSettlement, veil) {
 
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);
+  // THE VEIL ON STRINGS (STYLE-RULINGS-2 B10(a), SW-B7b item 2): a block hidden here drops the
+  // rungs the owner's save shipped for it as TEXT, so the owner's later toggle needs no re-save.
+  dropVeiledPublicProse(s, groupings);
 
   markVeiled(s, [...groupings].sort());
   return s;
+}
+
+/**
+ * Each hideable BLOCK whose display the public prose projection (`data.publicProse`, see
+ * `publicProse.js`) also ships as text, mapped to the site and the rung keys it covers; `null`
+ * keys drop the whole site. The block address IS the mount position the rungs draw at
+ * (`defense.criminalStructure` is DefenseTab's CRIMINAL_MOUNT, `power.criminalUnderside` is
+ * PowerTab's UNDERSIDE_MOUNT). The other hideable blocks ship no rung: the criminal services
+ * category, the vulnerabilities and the housekeeping rows are data, and the rumor and war truths
+ * are campaign-only reads that never reach the save's projection.
+ * @type {Readonly<Record<string, Readonly<Record<string, readonly string[]|null>>>>}
+ */
+export const VEILED_PUBLIC_PROSE = Object.freeze({
+  'block:defense.criminalStructure': Object.freeze({ 'defense:criminal': null }),
+  'block:power.criminalUnderside': Object.freeze({
+    'power:desk': Object.freeze(['legitimacyReading', 'captureReading', 'operationReading', 'gmAdvisory']),
+  }),
+});
+
+/**
+ * Drop the shipped rungs of every hidden block (in place, on applyVeil's own clone). A rung
+ * another site aliased (`{'@': site}`) resolves to null once its target is gone, which is the
+ * same text hidden; an alias held BY a hidden rung is dropped with it.
+ * @param {Rec} s @param {readonly string[]} groupings
+ */
+function dropVeiledPublicProse(s, groupings) {
+  const blocks = recAt(recAt(s, 'publicProse') || {}, 'blocks');
+  if (!blocks) return;
+  for (const g of groupings) {
+    for (const [site, keys] of Object.entries(VEILED_PUBLIC_PROSE[g] || {})) {
+      if (!(site in blocks)) continue;
+      if (keys === null) { delete blocks[site]; continue; }
+      const rungs = recAt(blocks, site);
+      if (rungs) for (const key of keys) delete rungs[key];
+    }
+  }
 }
 
 /**

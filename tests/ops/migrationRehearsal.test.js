@@ -107,8 +107,8 @@ describe('bounded migration rehearsal plan', () => {
     expect(plan.appliedHead).toBe(121);
     // TIER-PARITY-FIX (2026-11-09): written for the MERGED chain — 207 (the allegiance cars) and
     // 208 (the party link) land with their lanes; this lane adds 209 (the Surveyor premium only).
-    expect(plan.repoHead).toBe(209); // STYLE-2-MERGE: 208 at SW-B7a's point, 209 at TIER-PARITY-FIX's
-    expect(plan.pendingCount).toBe(88);
+    expect(plan.repoHead).toBe(210); // STYLE-2-MERGE: 208 at SW-B7a's point, 209 at TIER-PARITY-FIX's, 210 at SW-B7b's
+    expect(plan.pendingCount).toBe(89);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -138,13 +138,14 @@ describe('bounded migration rehearsal plan', () => {
       [207, 207],
       [208, 208],
       [209, 209],
+      [210, 210],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 88 }, (_, index) => 122 + index),
+      Array.from({ length: 89 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
@@ -464,6 +465,20 @@ describe('bounded migration rehearsal plan', () => {
     const surveyorPremium = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 209);
     expect(surveyorPremium.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
     expect(surveyorPremium.rollback.note).toMatch(/re-run 201's body verbatim/i);
+    // ⭐ THE NEW TAIL WAVE (210, SW-B7b PROJECTION, STYLE-RULINGS-2 B10(a), the chair's ruling of 2026-11-09 12:5x):
+    // one re-stated function, the public dossier sanitizer, 207's body plus ONE top-level allowlist token,
+    // 'publicProse'. No table, no column, no policy, no row. Its own @rollback annotation spells the reversal.
+    // (On SW-B7b's lane alone 208 and 209 are absent, so the gap arm above reads 208–209 there; their lanes'
+    // entries close it at the merge.)
+    expect(plan.waves.find((wave) => wave.id === 'public-prose-text-projection')).toMatchObject({
+      id: 'public-prose-text-projection',
+      from: 210,
+      to: 210,
+      expectedObjects: [{ kind: 'function', name: '_gallery_sanitize_public_json' }],
+    });
+    const publicProseWave = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 210);
+    expect(publicProseWave.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(publicProseWave.rollback.note).toMatch(/re-apply 207's body verbatim.*falls silent where the composed blocks stood/i);
     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
     // policy — but for the opposite reason: 197's data half is deliberately unscripted,
     // while 199's whole reversal IS one scripted statement. Both are

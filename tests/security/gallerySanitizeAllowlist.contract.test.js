@@ -55,6 +55,8 @@ const NET_CURRENT = netCurrentSanitizer();
 // Migration 205 (FIX-EXPORT-KEYS, 2026-11-07) REMOVES 'factions': the people car's retired
 // NPC grouping (ODQ §934.105, PEOPLE-RULINGS M-1b/M-2) — no generator writes it; the powers
 // are `powerStructure.factions`, public under `powerStructure`.
+// Migration 210 (SW-B7b PROJECTION, STYLE-RULINGS-2 B10(a), 2026-11-09) ADDS 'publicProse': the
+// owner's composed blocks drawn owner-side and carried as text; the seed never travels.
 const CANONICAL_ALLOWLIST = [
   'activeConditions', 'arrivalScene', 'availableServices', 'coherenceNotes', 'config',
   'conflicts', 'crossSettlementConflicts', 'dailyLife', 'defenseProfile', 'economicState',
@@ -63,7 +65,7 @@ const CANONICAL_ALLOWLIST = [
   'npcs', 'population', 'populationHistory', 'powerStructure', 'pressureSentence',
   'prominentRelationship', 'relationships', 'resourceAnalysis', 'schemaVersion', 'settlementReason',
   'simulationVersion', 'spatialLayout', 'stress', 'stressors', 'structuralSuggestions',
-  'structuralViolations', 'thesis', 'tier',
+  'structuralViolations', 'thesis', 'tier', 'publicProse',
 ];
 
 /** Parse the `public_toplevel constant text[] := array[ '…','…' ];` literal from

@@ -42,9 +42,9 @@
  * home: the header word, with the Output score printed ONCE on the header chip. The Economy
  * tile restated both (1000/1000 identical) and is cut; the Food tile is cut because the Food
  * Security section is the food fact's home and now opens on every town. The header carries
- * ONE paragraph: DS-ECO-1 REPLACES `situationDesc` where the desk speaks (DM and player
- * views), and `situationDesc` stands where it does not (the public dossier, or a silent
- * corpus) — never both, because the two disagreed on 99 of 1000 towns. The Trade chip stays:
+ * ONE paragraph: DS-ECO-1's, on every view (the shared page prints the owner's player-view
+ * draw, shipped at the save: SW-B7b). The legacy `situationDesc` fallback LEFT with that cause:
+ * no owner view reached it (0 of 300 towns, DM and player) and a page with no draw is silent. The Trade chip stays:
  * `tradeAccess` follows the route on the corrected sample (six values, 1000/1000 matched).
  * Only the Season and Treasury tiles remain, and both are campaign-only facts.
  *
@@ -92,7 +92,7 @@ import { FLUSH } from '../../../design/flush.js';
  * `EconomicsCampaignTiles` below, which EconomicsTab mounts last. Both bodies moved verbatim.
  *
  * @param {object} props
- * @param {object} props.eco the economic state (prosperity, economicComplexity, situationDesc)
+ * @param {object} props.eco the economic state (prosperity, economicComplexity)
  * @param {string} props.prosColor
  * @param {string} props.tradeLabel
  * @param {number} props.ecoScore
@@ -107,7 +107,7 @@ export default function EconomicsGlance({
   const header = drawnAtMount('economics.prosperityHeader', headerRung);
   const economyGlance = drawnAtMount('economics.economyTile', economyRung);
   // ONE paragraph: the desk's sentence where it speaks, the generator's datum where it does not.
-  const headerProse = header?.sentence || eco.situationDesc || null;
+  const headerProse = header?.sentence || null;
 
   return (
     <>

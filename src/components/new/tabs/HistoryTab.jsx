@@ -160,7 +160,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
   // `composeStateProse` rather than through a single kernel read, and the browser-side cost
   // is unmeasured. The result is a pure function of the settlement and the two view flags.
   const historyDesk = useMemo(
-    () => generalDeskLines(r, {publicDossier, playerView, tier: r?.tier}).history,
+    () => generalDeskLines(r, {publicDossier, playerView, publicSite: 'general:history', tier: r?.tier}).history,
     [r, publicDossier, playerView],
   );
   if (!r?.history) return <Empty message="No historical data available."/>;

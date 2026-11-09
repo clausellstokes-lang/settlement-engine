@@ -612,3 +612,46 @@ describe('linkMentions (X-20): every mention is a door', () => {
     expect(linkMentions('Mara Voss', null)).toEqual([{ type: 'text', value: 'Mara Voss' }]);
   });
 });
+
+describe('dossierSearch indexes the shipped prose on the player-view enumeration (SW-B7b item 3)', async () => {
+  const { birth, ensureLaws } = await import('../../../scripts/audit/soak-review/corpus.mjs');
+  const { composePublicProse } = await import('../../../src/components/new/publicProseCompose.js');
+  const { withPublicProse, publicProseOf } = await import('../../../src/domain/display/publicProse.js');
+  const { toPublicSafe } = await import('../../../src/domain/display/publicSafe.js');
+  const { applyVeil } = await import('../../../src/domain/display/galleryVeil.js');
+  await ensureLaws();
+  /** The shared page's record, as gallery.js builds it: the stamped record projected and veiled. */
+  const sharedOf = (owner, veil = []) => applyVeil(toPublicSafe(withPublicProse(owner, composePublicProse(owner))), veil);
+  const sentenceOf = (desk, key) => (desk && desk[key] && typeof desk[key].sentence === 'string' ? desk[key].sentence : null);
+
+  it.each([0, 4, 9])('soak1k-%i: a defense lens line the shared page prints is FOUND there, under Defense, as a prose object', (i) => {
+    const shared = sharedOf(birth(i).settlement);
+    const line = sentenceOf(publicProseOf(shared, 'defense:threat'), 'beasts')
+      || sentenceOf(publicProseOf(shared, 'defense:threat'), 'invasion');
+    expect(line).toBeTruthy();
+    const { groups } = searchDossier(shared, line, { publicDossier: true, playerView: true });
+    const hit = groups.find((g) => g.tab === 'defense')?.objects.find((o) => o.type === 'prose');
+    expect(hit?.meta.site).toBe('defense:threat');
+    // NO NEW WORDS: the object's text is the carried block's strings, verbatim.
+    expect(hit.text).toContain(line);
+  });
+
+  it('THE VEIL FIRST: a hidden block\'s shipped words return no hit on the shared page', () => {
+    const owner = birth(0).settlement;
+    const line = sentenceOf(publicProseOf(sharedOf(owner), 'defense:criminal'), 'structure');
+    // anchored: unveiled, the same page finds the line
+    expect(line).toBeTruthy();
+    expect(searchDossier(sharedOf(owner), line, { publicDossier: true, playerView: true }).total).toBeGreaterThan(0);
+    const veiled = sharedOf(owner, ['block:defense.criminalStructure']);
+    expect(searchDossier(veiled, line, { publicDossier: true, playerView: true }).groups
+      .flatMap((g) => g.objects).filter((o) => o.type === 'prose')).toEqual([]);
+  });
+
+  it('a GUARD (green at the parent too): the DM view indexes no prose family, its own families stay as indexed today', () => {
+    const owner = withPublicProse(birth(0).settlement, composePublicProse(birth(0).settlement));
+    const line = sentenceOf(publicProseOf(owner, 'defense:threat'), 'beasts')
+      || sentenceOf(publicProseOf(owner, 'defense:threat'), 'invasion');
+    expect(line).toBeTruthy(); // anchored: the record carries the shipped line
+    expect(searchDossier(owner, line, {}).groups.flatMap((g) => g.objects).filter((o) => o.type === 'prose')).toEqual([]);
+  });
+});

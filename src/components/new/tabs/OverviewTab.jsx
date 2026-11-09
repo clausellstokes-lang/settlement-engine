@@ -1,14 +1,17 @@
 import React, { useMemo } from 'react';
 import { crisisHookFor } from '../../../domain/crisis/crisisHooks.js';
-import { stressorsStateProse } from '../../../domain/display/stateProse/stressorsStateProse.js';
+// THE STRESSORS DESK IS REACHED THROUGH ITS ONE CALLER (ARM 2), shared with the public prose
+// composer (SW-B7b): the reader owns the public branch and the conditions read.
+import { stressorsDeskRead } from '../stressorsDeskRead.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
 // owns the §885.3 public gate and the desk's own primary-stress read.
 import { generalDeskLines } from '../generalDeskRead.js';
+import { overviewStressesOf } from '../deskHostArgs.js';
+// The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1), gated (SW-B7b).
+import { overviewIdentityOf } from '../overviewIdentity.js';
 import { populationTrendBand } from '../../../domain/display/trendLens.js'; // DS-POP-3 · the annex's own named reader
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
-import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
 // normalizer costs no additional bytes. Its sibling `stressorDynamics.js` is NOT — that one
 // drags 29 modules / 602 KB, which is why the synergy and counterforce lenses stay dark.
@@ -35,8 +38,6 @@ import Button from '../../primitives/Button.jsx';
 // stands the repeated opening name down to the tier noun. The DRAW is unchanged — the lines
 // handed over are the same strings `drawnAtMount` ruled on above.
 import ProseBlock from '../ProseBlock.jsx';
-// The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
-import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { TONIGHT_COPY } from '../../../domain/summary/tonightSheet.js'; // the trigger opens the one Tonight sheet (TRIM-2 request 4)
 // The pointer's label, inline: the crisis page's composer (crisisPage.js :: CRISIS_PAGE_COPY.pointer) is the tab's chunk.
 const CRISIS_POINTER = 'Open the Crisis tab';
@@ -162,7 +163,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // `composeStateProse` rather than through a single kernel read. The browser-side cost of
   // that is unmeasured and the composed-prose manifest cannot measure it, so the memo is
   // insurance taken before the cost exists rather than after a page feels slow.
-  const stresses = (Array.isArray(r?.stress) ? r.stress : r?.stress ? [r.stress] : []).filter(Boolean);
+  const stresses = overviewStressesOf(r); // deskHostArgs.js: shared with the public prose composer (SW-B7b)
   // ⛔ `stresses` IS DELIBERATELY NOT A DEPENDENCY, AND DELIBERATELY NOT ITSELF A `useMemo`.
   // It is a pure function of `r`, so `r` already covers it and the memo can never be stale.
   // Memoising it instead was tried and MEASURED: `tests/lint/writerReach.walker.test.js`
@@ -171,7 +172,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // inside a hook callback. Moving a frozen register is not this car's act, and the register
   // is right to notice: the plain const keeps the reach exactly where it was.
   const overviewDesk = useMemo(() => generalDeskLines(r, {
-    publicDossier, playerView, stresses, populationTrend: populationTrendBand(r?.populationHistory),
+    publicDossier, playerView, publicSite: 'general:overview', stresses, populationTrend: populationTrendBand(r?.populationHistory),
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }).overview, [r, publicDossier, playerView]);
   if (!r) return null;
@@ -187,38 +188,23 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const sp = eco.safetyProfile || {};
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
-  const scopeLine = cultureScopeLine(r);
-  const governs = governsLine(r);
-  // THE STRESSOR DESK, read ONCE per render and routed by the mount registry. THE PUBLIC
-  // GATE (§885.3): a public gallery dossier is a PAID surface and the `overview` tab is not
-  // filtered off one, so the desk is NOT DRAWN there and every rung is null ⇒ drawnAtMount
-  // answers null at both mounts. The DATUM is untouched either way — the banner's label,
-  // summary and hook never read the desk. The audience follows kernel law 2's fail-closed
-  // default: an unstated audience reads as the player's, so it is stated.
-  const deskAudience = playerView ? 'player' : 'dm';
-  // The settlement's own noun, resolved once for both of this tab's desk reads: the corpus
-  // writes 'the town' about a settlement of any size, and the desk speaks it (§934.22).
-  const deskTierNoun = tierNounFor(r?.tier);
-  const deskSeed = String(r?._seed ?? r?.id ?? '');
-  const stressorProse = publicDossier
-    ? Object.freeze({
-      crisisArity: null, crisisFraming: null, conditionSeverity: null,
-      conditionDirection: null, conditionArchetype: null, conditionProvenance: null,
-      conditionDuration: null, worldStressorLifecycle: null, worldStressorOrigin: null,
-    })
-    : stressorsStateProse(
-      r,
-      {
-        banners: stresses,
-        conditions: deriveAllActiveConditions(r),
-        // DS-STR-2. The CALLER selects — a world stressor is keyed to the settlement by
-        // `affectedSettlementIds`, which is selection rather than classification — and
-        // normalizes through the kernel's own `normalizeStressor` so the desk sees the
-        // shape the simulation writes. Dark at birth: no generator writes worldState.
-        worldStressor: worldStressorFor(worldState, r?.id),
-      },
-      { seed: deskSeed, audience: deskAudience, tierNoun: deskTierNoun },
-    );
+  // THE IDENTITY LINE (SW-B7b): composed owner-side; a shared page prints the line shipped at
+  // the save (`overview:identity`), never one read from the fields its projection strips.
+  const { scope: scopeLine, governs } = overviewIdentityOf(r, { publicDossier });
+  // THE STRESSOR DESK, read ONCE per render through its one caller and routed by the mount
+  // registry. THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the rungs
+  // the owner's player view drew here, shipped at the owner's save (`stressors:overview`); an
+  // unstamped record is the SILENT desk. The DATUM is untouched either way — the banner's
+  // label and summary never read the desk, and print on the owner's player view too.
+  const stressorProse = stressorsDeskRead(r, {
+    publicDossier, playerView, publicSite: 'stressors:overview', stresses, tier: r?.tier,
+    // DS-STR-2. The CALLER selects — a world stressor is keyed to the settlement by
+    // `affectedSettlementIds`, which is selection rather than classification — and
+    // normalizes through the kernel's own `normalizeStressor` so the desk sees the
+    // shape the simulation writes. Dark at birth: no generator writes worldState.
+    // Campaign-only, so the shared page never prints it (owner-only, the chair's ruling).
+    worldStressor: worldStressorFor(worldState, r?.id),
+  });
   // ⛔ THE DESK'S `crisisFraming` RUNG IS NOT DRAWN HERE, and it must never be. It is the
   // annex's "ARITY — no banner" line ("There is no crisis on the books…"), which speaks only
   // when `stresses` is EMPTY, and this list renders only inside the ACTIVE CRISIS block below,
@@ -369,12 +355,14 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             {crisisDoor&&<Button variant="ghost" size="sm" onClick={()=>onNavigateTab('crisis')} style={{marginLeft:'auto',color:swatch['#C04040'],fontWeight:800}}>{CRISIS_POINTER}</Button>}
           </div>
         </div>
-        {!crisisDoor&&stresses.map((v,i)=>(
+        {/* "Hook:" prints only over a hook (STYLE-RULINGS-2 B10(a)): the public projection strips
+            the entry's crisisHook (a hook is DM content), and the label stood over an empty line. */}
+        {!crisisDoor&&stresses.map((v,i)=>{ const hook=crisisHookFor(r,v); return (
           <div key={i} style={{border:`2px solid ${v.colour}`,padding:'10px 14px',...FLUSH}}>
-            <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
-            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{crisisHookFor(r,v)}</p>
+            <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:hook?'0 0 4px':0}}>{v.summary}</p>
+            {hook&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{hook}</p>}
           </div>
-        ))}
+        );})}
         {(conditionCardLine||pressureLine)&&<div style={{padding:'0 14px 8px',...FLUSH}}>
           {conditionCardLine&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{conditionCardLine}</p>}
           {pressureLine&&<p data-testid="overview-crisis-pressure" style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0'}}>{pressureLine}</p>}

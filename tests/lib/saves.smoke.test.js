@@ -292,7 +292,13 @@ describe('saves — supabase backend round-trip (mocked)', () => {
     expect(row.user_id).toBe('test-user-id');
     expect(row.name).toBe('Mock Town');
     expect(row.tier).toBe('town');
-    expect(row.data).toEqual({ name: 'Mock Town', neighbourNetwork: [{ id: 'n1' }] });
+    // RE-KEYED BY CAUSE (SW-B7b, the writer): the row builder stamps the public prose
+    // projection onto `data` at every cloud write (domain/display/publicProse.js), so the row
+    // is the record plus `publicProse`, and nothing else moved.
+    expect(row.data).toEqual({
+      name: 'Mock Town', neighbourNetwork: [{ id: 'n1' }],
+      publicProse: { v: 'pp-1', blocks: expect.any(Object) },
+    });
     expect(row.neighbour_links).toEqual([{ id: 'n1' }]);  // extracted from settlement.neighbourNetwork
     expect(row.toggles).toBeDefined();
     expect(row.toggles.institutionToggles).toEqual({ foo: { require: true } });
