@@ -651,3 +651,11 @@ Pins: `worldMapTourSteps.test.js` — the step's body pinned whole; **red at the
 | D·98 a settlement card's trouble tooltip | `Active stressor: {stressLabel}` | "Trouble now: {stressLabel}" |
 
 Pins: no fixture renders a card under a live stressor: unpinned, PLAUSIBLE; every suite naming the file green. Registers: none moved.
+
+### 9ad. `LayersPanel.jsx` (D·99)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·99 the reach layer's note | `Impressionistic: sampled dots suggest each settlement's reach by road (the canonized partition), not exact borders. Larger places read stronger.` | "A rough picture: dots show how far each settlement reaches by road, not exact borders. Larger places show stronger." |
+
+Pins: no fixture opens the layer's note: unpinned, PLAUSIBLE; every suite naming the file green (`proseNumerics` re-emission byte-identical). Registers: none moved.
