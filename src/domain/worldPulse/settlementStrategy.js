@@ -54,6 +54,10 @@ import { deityPressureOf, thresholdFactorOf } from './dispositionProfile.js';
 import { humanizeToken } from '../display/humanizeEngineTokens.js';
 import { softmaxWeights, stableSampleByWeight, clamp01, hash01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
+// STYLE-2 C2 (SW-12): the deploy summary carries variants by vantage, chosen by the house
+// idiom — the zero-import selection kernel keyed on the candidate's own stable id (no rng
+// draw, so the chooser's softmax sample is untouched).
+import { pickLine } from './proseSelection.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { chaosPullOf, fidelityFactor } from './fidelityNoise.js';
 import { rustOf } from './martialReadiness.js';
@@ -911,6 +915,31 @@ export function peaceSuitCandidate({ sId, name, target, snapshot, tick, worldSta
  * decided NOT to escalate this tick, with no stray world-state cost.
  * @param {{ move: string, bestTargetId?:string|null, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number, worldState?: import('./beliefMap.js').BeliefWorldState, beliefActive?: boolean, trueStrengthFor?: ((id: string) => number)|null, termination?: { suePressure01:number, dissolvedCauseTypes?:string[], receipt?:{reason?:string}, targetId?:string }|null, warCasusFor?: ReturnType<typeof makeCurrentWarCasusRead>|null }} args
  */
+// STYLE-2 C2 (SW-12) — the deploy decision, said as what the town means to do and to whom.
+// Every slot is one the writer holds: the town and its target. It is the decision only (the
+// war opener judges the march next tick), so no line says the army is already on the road.
+const DEPLOY_SUMMARY = Object.freeze([
+  (/** @type {any} */ x) => `${x.name} is calling up its army to march on ${x.target}.`,
+  (/** @type {any} */ x) => `${x.name}'s rulers mean to send the army against ${x.target}.`,
+  (/** @type {any} */ x) => `In ${x.name} the army is mustering, and its road leads to ${x.target}.`,
+  (/** @type {any} */ x) => `${x.target} has cause to watch its walls: ${x.name} means to march on it.`,
+]);
+// The chooser's receipt: the march won against the other moves open to the town (hold and
+// defend among them), said as a choice its rulers made.
+const DEPLOY_REASON = Object.freeze([
+  (/** @type {any} */ x) => `${x.name} weighed its other courses and chose to march.`,
+  (/** @type {any} */ x) => `Of all that ${x.name} could do, war looked best to its rulers.`,
+  (/** @type {any} */ x) => `${x.name}'s rulers judged the march worth more than waiting.`,
+  (/** @type {any} */ x) => `${x.name} could have waited; its rulers chose war.`,
+]);
+
+// The recall override's receipt: the order is not weighed against the other moves.
+const RECALL_REASON = Object.freeze([
+  (/** @type {any} */ x) => `Bringing the army home comes before every other plan ${x.name} had.`,
+  (/** @type {any} */ x) => `Nothing else ${x.name} might do is weighed until its army is home.`,
+  (/** @type {any} */ x) => `${x.name} calls its army home ahead of anything else.`,
+]);
+
 function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null, termination = null, warCasusFor = null }) {
   const name = item?.name || item?.settlement?.name || String(sId);
 
@@ -953,9 +982,9 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
       tick,
       severity: MOVE_SEVERITY,
       headline: `${name} resolves to march`,
-      summary: `${name} commits to an offensive posture against ${targetName}.`,
+      summary: pickLine(DEPLOY_SUMMARY, `candidate.strategy.deploy.${stablePart(sId)}.${tick}`, { name, target: targetName }),
       reasons: [
-        `${name}'s strategy chooser selected an offensive deployment.`,
+        pickLine(DEPLOY_REASON, `candidate.strategy.deploy.${stablePart(sId)}.${tick}:reason`, { name }),
         ...(misjudgment ? [misjudgmentReason(misjudgment, name, targetName)] : []),
         // W-PEACE-1 §14.4: name the typed war reasons this march consumed (empty when dark).
         ...causalReasonLines(
@@ -1127,9 +1156,9 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
         reasons: [
           ctx.homeBesieged
             ? `${name} is besieged at home while its army is committed against ${deployment.targetId}.`
-            : `${name} has an army abroad while a vassal is besieged (an emergency recall).`,
-          'Hard override: deterministic, bypasses the softmax sample (probability 1).',
-        ],
+            : null,
+          pickLine(RECALL_REASON, `candidate.strategy.return_home.${stablePart(sId)}.${tick}`, { name }),
+        ].filter(Boolean),
       }));
       continue; // exactly one candidate for S; skip the sample.
     }
