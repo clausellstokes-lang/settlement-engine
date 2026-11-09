@@ -77,12 +77,11 @@ const ADVISORY_STATUS = new Map();
  * institution (a hospital, a school) that will outlast them by centuries" — a row of the retired role pool
  * (npcData.js :: NPC_FACTION_GOALS); A9 draws every card's goal from the families its record supports, so the line is no
  * longer printed. The direction the ladder drives this list. */
+/* RE-KEYED 2026-11-09 (URBAN-FIX B-P1, 1b3436acd, the "old town" licence row): 52 -> 34 of 65, MEASURED at the cause's
+ * tree. EIGHTEEN SPECIMENS STOPPED FAILING, nothing started: every commercial-metropolis, grim-seaport-metropolis,
+ * mundane-river-port-city and plagued-martial-city specimen on the list. Their tier-noun finding was the Shadows
+ * District's "Old town or slums", the instrument's false positive (URBAN-AUDIT §2, B-1). */
 const ADVISORY_FAILING = Object.freeze([
-  'certification-v1-commercial-metropolis-alder',
-  'certification-v1-commercial-metropolis-bracken',
-  'certification-v1-commercial-metropolis-cinder',
-  'certification-v1-commercial-metropolis-dun',
-  'certification-v1-commercial-metropolis-ember',
   'certification-v1-criminal-crossroads-town-bracken',
   'certification-v1-criminal-crossroads-town-ember',
   'certification-v1-frontier-hamlet-alder',
@@ -90,11 +89,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-frontier-hamlet-cinder',
   'certification-v1-frontier-hamlet-dun',
   'certification-v1-frontier-hamlet-ember',
-  'certification-v1-grim-seaport-metropolis-alder',
-  'certification-v1-grim-seaport-metropolis-bracken',
-  'certification-v1-grim-seaport-metropolis-cinder',
-  'certification-v1-grim-seaport-metropolis-dun',
-  'certification-v1-grim-seaport-metropolis-ember',
   'certification-v1-isolated-arcane-town-dun',
   'certification-v1-magical-desert-village-alder',
   'certification-v1-magical-desert-village-bracken',
@@ -103,14 +97,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-magical-desert-village-ember',
   'certification-v1-mercantile-seaport-town-alder',
   'certification-v1-mercantile-seaport-town-ember',
-  'certification-v1-mundane-river-port-city-alder',
-  'certification-v1-mundane-river-port-city-cinder',
-  'certification-v1-mundane-river-port-city-dun',
-  'certification-v1-mundane-river-port-city-ember',
-  'certification-v1-plagued-martial-city-alder',
-  'certification-v1-plagued-martial-city-bracken',
-  'certification-v1-plagued-martial-city-cinder',
-  'certification-v1-plagued-martial-city-dun',
   'certification-v1-religious-river-village-alder',
   'certification-v1-religious-river-village-bracken',
   'certification-v1-religious-river-village-dun',
