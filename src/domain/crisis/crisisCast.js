@@ -37,6 +37,7 @@ import { resolveSibling } from '../facts/drawDeclared.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { firstRankMembershipOf, membersByRank, membershipsOf, powerOrderOf } from '../people/membership.js';
+import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -321,8 +322,7 @@ export const CRISIS_LINKS = Object.freeze([
  * @property {unknown=} power
  * @property {Array<{ power: string, rank: 1 | 2 | 3 | null, share?: number }>=} memberships
  * @property {{ kind?: string, key?: string, title?: string } | null=} institution
- * @property {boolean=} corrupt
- * @property {{ criminalInstitution?: string, thievesGuild?: string } | null=} corruptTies
+ * @property {Record<string, unknown> | null=} allegiance the hidden allegiance (ALLEGIANCE-CAR1), read through allegianceOf
  * @property {{ dominant?: string | null, flaw?: string | null, modifier?: string | null } | null=} personality
  * @property {boolean=} temporary
  * @property {string=} temporaryKind
@@ -699,7 +699,7 @@ export function exploiterCandidates(s, stakes, role) {
   const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
   const pool = rosterOf(s).map((n, at) => ({ n, at })).filter(({ n }) => memberOfAny(n, gainers));
   /** @param {CastNpc} n */
-  const grade = (n) => (n.corrupt ? 0 : traitsOf(n).some((t) => GRASPING_TRAITS.includes(t)) ? 1 : 2);
+  const grade = (n) => (allegianceOf(n) ? 0 : traitsOf(n).some((t) => GRASPING_TRAITS.includes(t)) ? 1 : 2);
   pool.sort((a, b) => (grade(a.n) - grade(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at));
   const reasons = [CAST_REASONS.exploiterCorrupt, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower];
   return { candidates: pool.map(({ n }) => npcRow(n, role, reasons[grade(n)])), absent: CAST_ABSENCES.noGains };
@@ -777,10 +777,10 @@ export function treaterCandidates(s) {
 export function collaboratorCandidates(s, stakes) {
   const roster = rosterOf(s);
   /** @type {CastRow[]} */
-  const out = roster.filter((n) => n.corrupt && !!n.corruptTies).map((n) => npcRow(n, 'collaborator', CAST_REASONS.collaboratorCorrupt));
+  const out = roster.filter((n) => !!allegianceOf(n)).map((n) => npcRow(n, 'collaborator', CAST_REASONS.collaboratorCorrupt));
   const gainers = new Set(stakes.filter((k) => k.stake === 'gains').map((k) => k.factionId));
   const ambitious = roster.map((n, at) => ({ n, at }))
-    .filter(({ n }) => memberOfAny(n, gainers) && !n.corrupt)
+    .filter(({ n }) => memberOfAny(n, gainers) && !allegianceOf(n))
     .sort((a, b) => {
       const am = (/** @type {CastNpc} */ n) => (traitsOf(n).some((t) => AMBITION_TRAITS.includes(t)) ? 0 : 1);
       return (am(a.n) - am(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at);

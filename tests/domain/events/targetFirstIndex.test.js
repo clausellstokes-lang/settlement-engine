@@ -26,7 +26,7 @@ const settlement = () => ({
   ],
   powerStructure: { factions: [{ id: 'f1', name: 'Council', faction: 'Council' }, { id: 'f2', name: 'Guild', faction: 'Guild' }] },
   npcs: [
-    { id: 'n1', name: 'Mira', corrupt: true, corruptTies: { criminalInstitution: "Thieves' Guild" } },
+    { id: 'n1', name: 'Mira', allegiance: { power: null, house: "Thieves' Guild", vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true } }, // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
     { id: 'n2', name: 'Puce' },
   ],
   neighbourNetwork: [{ id: 'nb1', name: 'Fordham', relationshipType: 'neutral' }],

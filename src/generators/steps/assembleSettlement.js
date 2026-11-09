@@ -49,6 +49,8 @@ import {
 } from '../generationCoherence.js';
 import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js'; import { fishTradeTwinned } from '../../data/fishTradeTwinLines.js'; // F11: one line, so no cited line moves
 import { truePersonHooks } from '../people/personHooks.js';
+import { takeAllegianceReceipts } from '../../domain/people/allegiance.js';
+import { recordTrace } from '../../domain/trace.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import {
   assertPowerEconomyFreshness,
@@ -91,7 +93,7 @@ const UNPINNED = Symbol('assembleSettlement:unpinned');
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
-  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
+  deps: ['generateNarratives', 'generatePopulation', 'structuralValidationPass'], // ALLEGIANCE-CAR1 (J-2): corruptionPass retired; its roll is the seam's (domain/people/allegiance.js)
   reads: ['availableServices', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   // The terminal step bundles the FINAL value of every re-derived key. Declared rather than
   // assumed: 'it runs last' is a fact about today's order, and the contract now checks it.
@@ -313,6 +315,9 @@ registerStep('assembleSettlement', {
     coherenceRng => generateCoherence(settlement, coherenceRng, pins, ctx._seed),
   );
   Object.assign(settlement, coherenceUpdates);
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiances' receipts, left by the coherence seam, recorded on the
+  // run's deterministic clock under the step label `people-allegiance` (domain/edit/tracePartition.js).
+  for (const receipt of takeAllegianceReceipts(settlement)) recordTrace(ctx, /** @type {any} */ (receipt));
   // Rung 1 N1: faction power totals 100 on every path, the held-roster one included (whose
   // coherence tail skips the dispersal that conserves it). By reference for v1 and for a
   // roster already at 100; no draw. A HELD powerStructure is the DM's and is not rewritten.

@@ -9,7 +9,8 @@ import {
 // THE RESOLVER CHOKEPOINT (§1) rides a LAZY leaf, NOT eager corruption.js — see
 // corruptionLeash.js's first-paint note. npcAgency is the lazy engine chunk, so
 // this import adds nothing to first paint.
-import { resolveLeash, isWilledLeash } from '../corruptionLeash.js';
+import { resolveLeash, isWilledLeash, corruptMarkOf } from '../corruptionLeash.js';
+import { allegianceOf } from '../people/allegiance.js';
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
 // position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
@@ -446,13 +447,14 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         // (authoritative between ticks): EXPOSE_CORRUPTION and
         // criminal-institution removal clear npc.corrupt + bump timesExposed, so
         // they must stick here instead of being re-mirrored from stale npcState.
-        if (typeof npc.corrupt === 'boolean'
-            && (npc.corrupt !== st.corruption || (npc.timesExposed || 0) !== (st.timesExposed || 0))) {
+        const mark = corruptMarkOf(npc, item.settlement);
+        if (typeof mark === 'boolean'
+            && (mark !== st.corruption || (npc.timesExposed || 0) !== (st.timesExposed || 0))) {
           st = {
             ...st,
-            corruption: npc.corrupt,
-            corruptionProfile: npc.corrupt ? st.corruptionProfile : { corrupted: false, vector: null },
-            corruptionHeat: npc.corrupt ? st.corruptionHeat : 0,
+            corruption: mark,
+            corruptionProfile: mark ? st.corruptionProfile : { corrupted: false, vector: null },
+            corruptionHeat: mark ? st.corruptionHeat : 0,
             timesExposed: Math.max(npc.timesExposed || 0, st.timesExposed || 0),
             ousted: npc.ousted || st.ousted || false,
           };
@@ -499,13 +501,15 @@ export function ensureNpcStates(worldState, snapshot, rng) {
       // vector); the world-pulse mirrors it. One rng draw is kept here so a legacy
       // save's downstream NPC-trait draws keep their positions. No criminal
       // institution → no corruption (the rule), regardless of personality.
+      // J-19: drawn for every card so no stream shifts; a v3 card ignores it (corruptMarkOf decides).
       const corruptRoll = local.random();
       const genFlaw = npcCorruptibleFlaw(npc);
       let corrupt;
       let corruptVector;
-      if (typeof npc.corrupt === 'boolean') {
-        corrupt = npc.corrupt;
-        corruptVector = corrupt ? (npc.corruptionVector || corruptionVectorForFlaw(genFlaw)) : null;
+      const mark = corruptMarkOf(npc, item.settlement);
+      if (typeof mark === 'boolean') {
+        corrupt = mark;
+        corruptVector = corrupt ? (npc.corruptionVector || allegianceOf(npc)?.vector || corruptionVectorForFlaw(genFlaw)) : null;
       } else if (climate.hasCriminalInst && genFlaw) {
         corrupt = corruptRoll < spawnCorruptionChance(climate);
         corruptVector = corrupt ? corruptionVectorForFlaw(genFlaw) : null;

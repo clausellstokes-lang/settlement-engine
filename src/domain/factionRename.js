@@ -235,6 +235,9 @@ const NPC_FACTION_FIELDS = Object.freeze([
   // a MINTED face (the seat of R-P2, an `other` power's of R-P4) is the face of the POWER itself:
   // `institution.key` holds the power's name (`when` kind === 'power'; a house-kind card's key is the
   // house's roster name, owned by the institution ledger) and its title is built from the name.
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiance names the criminal power it answers to by the power's name
+  { parent: 'allegiance', key: 'power', kind: 'key',
+    why: 'the hidden allegiance: the criminal power a card secretly answers to (domain/people/allegiance.js)' },
   { parent: 'institution', key: 'key', kind: 'key', when: { key: 'kind', equals: 'power' },
     why: 'a minted face\'s institution is the power it stands for, keyed by the power\'s name' },
   { parent: 'institution', key: 'title', kind: 'prose',
@@ -386,6 +389,8 @@ export const NON_CASCADED_SURFACES = Object.freeze([
   { path: 'campaign.wizardNews.entries[]', why: 'campaign state this writer never holds, and a byte-identity golden surface: rewriting it would be a declared golden shift' },
   { path: 'townScene manifest labels', why: 'derived per compile from the roster; the scene schema carries no district-to-faction identity at all' },
   { path: 'aiData', why: 'cascaded by the registered applyCosmeticRename operation instead' },
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiance's receipt names the criminal power it answers to
+  { path: 'simulationTrace[].downstreamEffects[].target', why: 'the generation RECEIPT (domain/people/allegiance.js :: leaveAllegianceReceipts names the criminal power): a recorded statement of what the generator decided while the power still bore its old name, the same ruling as the institution ledger\'s receipt row and causes[].reason below' },
   { path: 'simulationTrace[].causes[].reason', why: 'the generation TRACE, a recorded statement of what the generator decided while the faction still bore its old name; rewriting it would falsify the receipt, the same ruling as previousGovernments. It is also not a live reference: the fingerprint extractors read the trace enums and drop the reason prose' },
   // RUNG1B-F7 (walker over 120 soak records): the governing body's faction is named after
   // the body for two forms ('Merchant oligarchy', 'Democratic assembly'), so the HOUSE of

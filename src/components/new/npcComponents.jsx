@@ -21,6 +21,7 @@ import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereabout
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { cardPowerLine, cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
 import { cardInstitutionDoorOf, cardHonorificOf } from '../../domain/people/cardDoor.js';
+import { allegianceOf } from '../../domain/people/allegiance.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
@@ -328,6 +329,13 @@ export function NPCInlineCard({
   // floor). Null unless the world pulse touched this compromise. The npc pin key
   // seeds variant selection so two bearers of one conjunction read differently.
   const compromiseLc = describeCompromiseConjunction(npc.compromiseLifecycle, npcPinKey(npc));
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiance replaces the "compromised" mark on the card — "an NPC simply
+  // has an allegiance to the thieves guild" (the owner). The DM's line: "answers to {guild}, through {handler}".
+  const allegiance = allegianceOf(npc);
+  const allegianceGuild = allegiance ? (allegiance.power || allegiance.house || null) : null;
+  const allegianceHandler = allegiance?.handler
+    ? ((placeSettlement || settlement)?.npcs || []).find((n) => String(n?.id) === allegiance.handler)?.name || null
+    : null;
 
   // Pin UI is optional. When `onTogglePin` isn't provided (read-only views,
   // unsaved settlements) the icon doesn't render at all. `pinnedIds` is a Set
@@ -409,9 +417,9 @@ export function NPCInlineCard({
               {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
             </div>
           )}
-          {(npc.corrupt || npc.ousted) && (
+          {(allegiance || npc.ousted) && (
             <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
-              {npc.corrupt ? (
+              {allegiance ? (
                 // W-C5: the lifecycle stage tunes the badge — a historicized compromise
                 // reads muted ("Longstanding"), an exposed one reads "Exposed", the rest
                 // "Compromised". Falls back to the plain badge when the pulse never touched it.
@@ -423,19 +431,19 @@ export function NPCInlineCard({
                       ? { color:swatch.inkMag3, border:`1px solid ${swatch.inkMag3}` }
                       : { color:swatch.danger, border:`1px solid ${swatch.danger}` }),
                   padding:'1px 6px',
-                }}>{(compromiseLc?.badge) || 'Compromised'}</span>
+                }}>{(compromiseLc?.badge) || 'Hidden allegiance'}</span>
               ) : (
                 <span style={{
                   fontWeight:800,color:swatch.inkMag3,
                   border:`1px solid ${swatch.inkMag3}`,padding:'1px 6px',
                 }}>Exposed</span>
               )}
-              {npc.corrupt && npc.corruptTies?.criminalInstitution && (
-                <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>tied to <MentionText text={npc.corruptTies.criminalInstitution} structural/></span>
+              {allegianceGuild && (
+                <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>answers to <MentionText text={allegianceGuild} structural/>{allegianceHandler && <>, through <MentionText text={allegianceHandler} structural/></>}</span>
               )}
             </div>
           )}
-          {npc.corrupt && compromiseLc?.phrase && (
+          {allegiance && compromiseLc?.phrase && (
             <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'2px 0 6px',lineHeight:1.4,fontStyle:'italic'}}>{compromiseLc.phrase}</p>
           )}
           {npc.replacedNpc && (

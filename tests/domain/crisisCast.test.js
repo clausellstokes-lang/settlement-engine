@@ -36,7 +36,7 @@ function town({ legitimacy = 'crisis', extraFactions = [], extraNpcs = [], insti
       { id: 'n3', name: 'Ilse Brand', role: 'High Priest', power: 5, memberships: [{ power: 'Religious Authorities', rank: 1 }], personality: { flaw: 'vain' } },
       { id: 'n4', name: 'Oda Fenn', role: 'Healer', power: 1, memberships: [{ power: 'Religious Authorities', rank: 2 }], personality: {} },
       { id: 'n5', name: 'Cass Morrow', role: 'Merchant Prince', power: 7, memberships: [{ power: 'Merchant Guilds', rank: 1 }], personality: { flaw: 'greedy' } },
-      { id: 'n6', name: 'Pell Rook', role: 'Grain Factor', power: 4, memberships: [{ power: 'Grain Holders', rank: 1 }], institution: { kind: 'house', key: 'Town granary', title: 'the granary reeve' }, corrupt: true, corruptTies: { criminalInstitution: 'Thieves den', thievesGuild: 'Thieves den' }, personality: { flaw: 'greedy' } },
+      { id: 'n6', name: 'Pell Rook', role: 'Grain Factor', power: 4, memberships: [{ power: 'Grain Holders', rank: 1 }], institution: { kind: 'house', key: 'Town granary', title: 'the granary reeve' }, allegiance: { power: null, house: 'Thieves den', vector: 'greed', via: 'office', handler: null, share: 0.15, veiled: true, covert: true }, personality: { flaw: 'greedy' } }, // ALLEGIANCE-CAR1 (2026-11-08): the retired mark is the card's hidden allegiance
       { id: 'n7', name: 'Wil Dunn', role: 'Blacksmith', power: 2, memberships: [{ power: 'Craft Guilds', rank: 1 }], personality: {} },
       { id: 'n8', name: 'Ren Hale', role: 'Baker', power: 1, memberships: [{ power: 'Craft Guilds', rank: 2 }], personality: {} },
       ...extraNpcs,

@@ -37,6 +37,7 @@ import { hasMarketInstitution } from '../../../src/domain/facts/market.js';
 import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/coherence/readerBattery.js';
 import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
 import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';
+import { allegianceOf, criminalHousesOf, criminalPowersOf } from '../../../src/domain/people/allegiance.js';
 import { famineOf } from '../../../src/domain/facts/famine.js';
 import { terrainClassOf, tradeRouteOf } from '../../../src/domain/facts/terrain.js';
 import { waterAccessKind } from '../../../src/domain/tradeRouteSemantics.js';
@@ -60,6 +61,9 @@ export const KIND_OF = Object.freeze({
   // contradiction about WHO (the chair: a contradiction kind the stop rule reads, not repetition
   // 6); keyed with the people family, 7.
   'coh:roster-duplicate-secret': 7, 'coh:roster-duplicate-goal': 7,
+  // ALLEGIANCE-CAR1 (2026-11-08; the allegiance design I-2, I-3): a hidden allegiance whose handler is missing, off the
+  // roster, itself, an agent, or no criminal face — a contradiction about WHO, keyed with the people family.
+  'coh:allegiance-handler': 7,
   'A-05:lacks-access-lines': -2,
   // CENSUS-1b wave 1 (2026-11-04): the runtime self-check (`facts/presumptionCheck.js`) — a drawn
   // line's declared atom the FINAL record contradicts. A certification failure: STOP from the
@@ -349,6 +353,33 @@ export function rosterDuplicate(npcs, textOf) {
   }
   return hit ? { ...hit, repeated: repeated.size } : null;
 }
+/**
+ * ALLEGIANCE-CAR1 (I-2, I-3): every hidden allegiance holds exactly one handler — a roster card, not itself, holding no
+ * allegiance, a member of `allegiance.power` or the face of a roster criminal house (or a criminal power's mint).
+ * @param {object} s @returns {Array<{ card: string, detail: string }>}
+ */
+export function allegianceHandlerFindings(s) {
+  const cast = (s?.npcs || []).filter((n) => n && n.id != null);
+  const byId = new Map(cast.map((n) => [String(n.id), n]));
+  const crim = new Set(criminalHousesOf(s).map((i) => String(i.name)));
+  const crimPowers = new Set(criminalPowersOf(s).map((p) => String(p.faction || p.name)));
+  const crimFace = (n) => (n?.institution?.kind === 'house' && crim.has(String(n.institution.key)))
+    || (n?.institution?.kind === 'power' && crimPowers.has(String(n.institution.key)));
+  const out = [];
+  for (const card of cast) {
+    const a = allegianceOf(card);
+    if (!a) continue;
+    const h = a.handler ? byId.get(a.handler) : null;
+    let why = null;
+    if (!a.handler) why = 'no handler';
+    else if (!h) why = `handler ${a.handler} is not on the roster`;
+    else if (h === card) why = 'its own handler';
+    else if (allegianceOf(h)) why = `handler ${h.id} holds an allegiance itself`;
+    else if (!(a.power && (h.memberships || []).some((m) => m?.power === a.power)) && !crimFace(h)) why = `handler ${h.id} is no criminal face`;
+    if (why) out.push({ card: String(card.id), detail: why });
+  }
+  return out;
+}
 const secretTextOf = (npc) => (typeof npc?.secret === 'string' ? npc.secret : npc?.secret?.what);
 const goalTextOf = (npc) => (typeof npc?.goal === 'string' ? npc.goal : npc?.goal?.short);
 
@@ -377,6 +408,7 @@ export function reviewSettlement(s, config, r) {
     const dup = rosterDuplicate(s.npcs, textOf);
     if (dup) add(check, 'record', dup.text, `${dup.first} and ${dup.second}; ${dup.repeated} text(s) repeat on this roster`);
   }
+  for (const f of allegianceHandlerFindings(s)) add('coh:allegiance-handler', 'record', f.card, f.detail);
 
   // ── coh:migration-direction (lane WIRING-W0, 2026-11-07, R-W7 e): a mass migration runs ONE way.
   // The crisis text, the pressure line (the Tonight opening when no crisis line exists), the Power

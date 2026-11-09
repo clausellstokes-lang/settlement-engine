@@ -46,6 +46,7 @@ import { createGenerationContext } from './generationContext.js';
 
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
+import { takeAllegianceReceipts } from '../domain/people/allegiance.js';
 
 /**
  * Generate a complete settlement using the pipeline.
@@ -547,7 +548,11 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // (the seam mints the `other` powers' faces; their ties to the seat are drawn by drawTies below —
     // MERGE-234, one tie writer — so the seam is handed no ties). MERGE-CAR: CENSUS-4 R12's roster fitter
     // is retired here (the chair's SC-1 ruling): a card's powers are its memberships, born by rank.
-    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, config });
+    const view = { ...settlement, npcs, config };
+    const enrichedNpcs = enrichNpcCoherence(view);
+    // ALLEGIANCE-CAR1 (2026-11-08; the chair's ruling on the trace partition, the LIFECYCLE condition): the seam dealt
+    // the regenerated cast's hidden allegiances; their receipts replace the record's `people-allegiance` run.
+    const allegianceReceipts = takeAllegianceReceipts(view);
 
     // The user's canon rides OVER the finished roll rather than through it. Every
     // draw above has already happened, so preservation cannot perturb a seeded
@@ -578,10 +583,18 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // moves no draw above it; a fresh tie names the cast as it stands, so no projection refresh.
     const finalRelationships = drawTies(roster, { config, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null }, getActiveRng());
     const conflicts = generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster);
+    // the record's trace keeps every other step's run; the subject's run is the regeneration's (re-stamped on the
+    // trace's own clock, ts = position). Dormant: a record with no allegiance before or after carries no new key.
+    const priorTrace = Array.isArray(/** @type {any} */ (settlement).simulationTrace) ? /** @type {any} */ (settlement).simulationTrace : [];
+    const traceParts = (allegianceReceipts.length || priorTrace.some((/** @type {any} */ t) => t?.step === 'people-allegiance'))
+      ? { simulationTrace: [...priorTrace.filter((/** @type {any} */ t) => t?.step !== 'people-allegiance'), ...allegianceReceipts]
+        .map((t, ts) => ({ causes: [], downstreamEffects: [], ...t, ts })) }
+      : {};
     return {
       npcs: roster,
       relationships: finalRelationships,
       conflicts,
+      ...traceParts,
       _regenSeed: seed,
       // The preservation REPORT, out of band of the settlement parts. A keeper
       // inherits its slot's id, so a caller holding id-keyed state (the lock map)

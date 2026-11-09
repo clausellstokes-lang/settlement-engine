@@ -35,6 +35,8 @@
  * annotation. `covert` is always true (the covert-naming law, §6). Pure.
  */
 
+import { allegianceOf } from './people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
+
 /** The set of leash kinds whose beneficiary sits in ANOTHER settlement/court —
  *  the ones whose exposure must NEVER impair a local organization. */
 const FOREIGN_LEASH_KINDS = Object.freeze(new Set(['foreign_settlement', 'foreign_faction', 'foreign_org']));
@@ -68,6 +70,23 @@ const FOREIGN_LEASH_KINDS = Object.freeze(new Set(['foreign_settlement', 'foreig
  * removes the FATE, not the consequence.
  */
 export const WILLED_MEETING_CONSPIRACY = 'chance_meeting';
+
+/**
+ * THE CARD'S CORRUPTION MARK AS THE SIMULATION READS IT (J-19, AMENDED BY CAUSE: the chair's ruling, ALLEGIANCE-CAR1;
+ * its reader is worldPulse/npcAgency.js :: ensureNpcStates). A v3 card is born with no `corrupt` boolean: its hidden
+ * allegiance is the mark, read through `allegianceOf`: an allegiance is corrupt; a v3 card with none is CLEAN
+ * (generation decided; never a re-roll). The retired boolean is read only where present, which at v3 means the
+ * simulation's OWN write-back (npcAgency.js :: mirrorCorruptionOntoSettlement: an exposure writes `corrupt: false` onto a card
+ * that keeps its allegiance, and must stick) or a pre-v3 save. Undefined only for a pre-v3 save with no boolean: the
+ * legacy re-roll, keyed by the SAVE'S VERSION, not by the field's absence.
+ * @param {any} npc @param {any} settlement @returns {boolean | undefined}
+ */
+export function corruptMarkOf(npc, settlement) {
+  if (typeof npc?.corrupt === 'boolean') return npc.corrupt;
+  if (allegianceOf(npc)) return true;
+  if ((Number(settlement?.schemaVersion) || 0) >= 3) return false;
+  return undefined;
+}
 
 /**
  * True iff a leash was WILLED by a chance meeting. TOTAL: garbage, null, a leashless
@@ -118,7 +137,14 @@ export function isForeignLeashKind(kind) {
  * @returns {ResolvedLeash}
  */
 export function resolveLeash(npc, settlement, worldState) {
-  const ties = npc && typeof npc.corruptTies === 'object' ? npc.corruptTies : null;
+  // ALLEGIANCE-CAR1 (2026-11-08): the leash rides on the card's hidden allegiance (its one reader, allegianceOf); the
+  // retired `corruptTies.criminalInstitution` is the allegiance's `house`, and its simulation sub-fields (`leash`,
+  // `foreignPatron`, `conspiracy`) are carried on the allegiance by the v2 -> v3 migration. THE LEGACY ARM: the frozen
+  // simulation (M-6) still writes `corruptTies` on the cards it turns, so a card with no allegiance reads its
+  // `corruptTies` as before (this file is on the dormant list for that arm; it leaves when FPZ rebuilds the loop).
+  const allegiance = allegianceOf(npc);
+  const ties = allegiance ? { ...allegiance, criminalInstitution: allegiance.house || null }
+    : (npc && typeof npc.corruptTies === 'object' ? npc.corruptTies : null);
 
   // 1. Explicit normalized leash (foreign lanes / composer).
   const explicit = ties && typeof ties.leash === 'object' && ties.leash ? ties.leash : null;

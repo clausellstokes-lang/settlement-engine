@@ -27,7 +27,8 @@ export const TRACE_STEP_ORDER = Object.freeze([
   'isolationPass', 'stressConfirmPass', 'generateEconomy', 'generatePower',
   'neighbourFactions', 'factionCorrelationPass', 'coherenceRepairPass',
   'economyReconcilePass', 'powerEconomyReconcilePass', 'structuralValidationPass',
-  'generatePopulation', 'corruptionPass', 'generateNarratives', 'assembleSettlement',
+  // ALLEGIANCE-CAR1 (2026-11-08, J-2): 'corruptionPass' retired from the runner; its roll is the coherence seam's.
+  'generatePopulation', 'generateNarratives', 'assembleSettlement',
   // aaa4ba493 (the crisis tab, unit 2) registered the cast step after assembleSettlement. It calls no
   // recordTrace, so it owns no run and no subject pair; declared so the order stays total.
   'resolveCrisisCast',
@@ -48,7 +49,9 @@ export const TRACE_SUBJECTS = Object.freeze({
   // PEOPLE-5B (2026-11-07, M-7): the grouping `factions` left the record; the population step's faction
   // entries are about the cards' standing in the powers, which lives on the cards (`npcs[].memberships`).
   'generatePopulation::faction': 'npcs',
-  'corruptionPass::npc': 'npcs',
+  // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiance's receipt (domain/people/allegiance.js), recorded by the
+  // assembly step under the seam's label; not a runner step, so its run is carried in the declared tail (A8).
+  'people-allegiance::npc': 'npcs',
   'generatePower::faction': 'powerStructure',
   'neighbourFactions::faction': 'powerStructure',
   'isolationPass::condition': 'isolationSupport',

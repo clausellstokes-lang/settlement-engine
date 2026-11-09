@@ -170,7 +170,7 @@ export const HOLDER_SOURCES = Object.freeze({
   // ⭐ CITED BY SYMBOL (rule 32; REVIEW-INTAKE-3 R8): these two drifted from :588/:608 to :586/:606.
   viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js :: generateEconomicViability', read: true }),
   criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js :: generateEconomicViability', read: true }),
-  economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:116', read: true }),
+  economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:118', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
   primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:766', read: true }),
@@ -241,9 +241,9 @@ export const HOLDER_SOURCES = Object.freeze({
   monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:204', read: true }),
 
   // ── the office itself: the record's own audit of the record ──
-  structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:135', read: true }),
-  structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:136', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1051', read: true }), // MERGE-WAVE at the FIX-PUBLIC-VEIL merge: re-cited to the merged line (1034 integration / 1021 veil)
+  structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:137', read: true }),
+  structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:138', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1076', read: true }), // MERGE-TRAIN at the ALLEGIANCE-CAR1 merge: re-cited to the merged write site (1051 integration / 1048 car 1 -> 1076)
 });
 
 /**

@@ -37,6 +37,8 @@ import { resolveFactionRef } from './factionRefs.js';
 import { tagEntityCanon } from './canonStatus.js';
 import { factionIdFromName } from '../lib/entities.js';
 import { isVeiledPower, stampVeil } from './people/cardVeil.js';
+import { corruptionVectorForFlaw, npcCorruptibleFlaw } from './corruption.js';
+import { ALLEGIANCE_TUNING, allegiancePowerFor, assignHandlers, criminalHousesOf, viaOf } from './people/allegiance.js';
 
 /** The per-card faction fields a v2 record does not carry (M-2's six, less `structuralRank`, which is carried). */
 const V1_CARD_FIELDS = Object.freeze(['factionAffiliation', 'secondaryAffiliation', 'linkedFactionIds', 'factionGoal', 'densityRungRole']);
@@ -238,6 +240,95 @@ export function migrateV1toV2(settlement) {
   return { settlement: out, report };
 }
 
+/** The retired mark's three card fields (ALLEGIANCE-CAR1): the simulation's, gone from a v3 birth-era card. */
+const LEGACY_CORRUPT_FIELDS = Object.freeze(['corrupt', 'corruptionVector', 'corruptTies']);
+/** The simulation's sub-fields of the retired `corruptTies`, carried verbatim onto the allegiance (§7.2). */
+const CARRIED_TIE_FIELDS = Object.freeze(['leash', 'foreignPatron', 'revealed', 'conspiracy']);
+const V3_CAUSE = 'ALLEGIANCE-CAR1: the corrupt mark becomes a hidden allegiance (the allegiance design §7.2)';
+
+/**
+ * v2 -> v3 (ALLEGIANCE-CAR1, 2026-11-08; the allegiance design §7.2, the chair's ruling J-18). The retired `corrupt`
+ * mark becomes the card's hidden `allegiance` (domain/people/allegiance.js), the shape birth writes:
+ *
+ *   a card with `corrupt === true`, not ousted -> `allegiance = { power, house, vector, via, handler, share, veiled,
+ *     covert }` — `house` the tie's `criminalInstitution` when it names a roster criminal house, else the roster's
+ *     first; `power` the criminal power that house's face answers to, else the strongest; `vector` the stored one, else
+ *     the flaw's; `via` the front rule; `handler` birth's DRAW-FREE rule over the migrated cast (J-10); the simulation's
+ *     sub-fields (`leash`, `foreignPatron`, `revealed`, `conspiracy`) carried verbatim — and the three fields deleted;
+ *     a foreign leash (a DM's beneficiary) needs no local house;
+ *   a card it cannot map (no criminal house on the roster, and no leash) -> REPORTED, its three fields KEPT, so a DM's
+ *     corrupt NPC is never silently cleaned;
+ *   `corrupt === false` (the retired pass's "generation decided") -> deleted with an empty vector and ties: the
+ *     absence of an allegiance is the clean state;
+ *   an ousted card -> untouched (the simulation's state);
+ *   ties -> untouched (J-18: the handler lives on `allegiance.handler`; the forced tie is a birth rule).
+ *
+ * Idempotent: a v3 record carries no `corrupt: true` it could map, and a report already written is not written twice.
+ * @param {SaveRecord} settlement
+ * @returns {{ settlement: SaveRecord, report: { converted: number, cleared: number, kept: number, unmapped: Unmapped[] } }}
+ */
+export function migrateV2toV3(settlement) {
+  const s = settlement;
+  /** @type {{ converted: number, cleared: number, kept: number, unmapped: Unmapped[] }} */
+  const report = { converted: 0, cleared: 0, kept: 0, unmapped: [] };
+  const crimHouses = criminalHousesOf(s).map((i) => String(i.name || '')).filter(Boolean);
+  const houseByName = new Map((Array.isArray(s.institutions) ? s.institutions : []).filter(isObj).map((i) => [String(i.name || ''), i]));
+  /** @type {SaveRecord[]} */
+  const cards = (Array.isArray(s.npcs) ? s.npcs : []).map((npc) => (isObj(npc) ? { ...npc } : npc));
+  /** @type {Set<SaveRecord>} */
+  const touched = new Set();
+  for (const card of cards) {
+    if (!isObj(card) || card.ousted === true) continue;
+    if (card.corrupt === true) {
+      const ties = isObj(card.corruptTies) ? card.corruptTies : {};
+      const named = String(ties.criminalInstitution || '');
+      const leash = isObj(ties.leash) ? ties.leash : null;
+      const house = crimHouses.includes(named) ? named : (crimHouses[0] || '');
+      if (!house && !leash) {
+        report.unmapped.push({ id: card.id ?? null, field: 'corrupt', value: named || true, names: 'no criminal house on the roster' });
+        report.kept += 1;
+        continue;
+      }
+      const vector = typeof card.corruptionVector === 'string' && card.corruptionVector
+        ? card.corruptionVector : corruptionVectorForFlaw(npcCorruptibleFlaw(/** @type {import('./settlement.schema.js').SimNpc} */ (card)));
+      /** @type {SaveRecord} */
+      const carried = {};
+      for (const key of CARRIED_TIE_FIELDS) if (key in ties) carried[key] = ties[key];
+      card.allegiance = {
+        power: house ? allegiancePowerFor(cards.filter(isObj), house, s) : null,
+        house,
+        vector,
+        via: viaOf(card, houseByName),
+        handler: null,
+        share: ALLEGIANCE_TUNING.share,
+        veiled: true,
+        covert: true,
+        ...carried,
+      };
+      for (const key of LEGACY_CORRUPT_FIELDS) delete card[key];
+      report.converted += 1;
+      touched.add(card);
+    } else if (card.corrupt === false) {
+      for (const key of LEGACY_CORRUPT_FIELDS) if (key === 'corrupt' || card[key] == null) delete card[key];
+      report.cleared += 1;
+      touched.add(card);
+    }
+  }
+  if (touched.size) assignHandlers(cards.filter(isObj), s);
+  // a card the step did not touch is passed through as the SAME object
+  const npcs = (Array.isArray(s.npcs) ? s.npcs : []).map((npc, i) => (touched.has(cards[i]) ? cards[i] : npc));
+  /** @type {SaveRecord} */
+  const out = { ...s, schemaVersion: 3 };
+  if (Array.isArray(s.npcs)) out.npcs = npcs;
+  if (report.unmapped.length) {
+    const prior = Array.isArray(s.migrationReports) ? s.migrationReports : [];
+    const entry = { from: 2, to: 3, cause: V3_CAUSE, unmapped: report.unmapped };
+    const same = prior.some((r) => isObj(r) && r.from === 2 && r.to === 3 && JSON.stringify(r.unmapped) === JSON.stringify(entry.unmapped));
+    if (!same) out.migrationReports = [...prior, entry];
+  }
+  return { settlement: out, report };
+}
+
 /**
  * The ordered chain. Append-only: every new entry has from = the
  * previous entry's `to`, and to = from + 1.
@@ -274,8 +365,20 @@ const MIGRATIONS = Object.freeze([
       return migrateV1toV2(/** @type {SaveRecord} */ (settlement)).settlement;
     },
   },
+  {
+    from: 2,
+    to:   3,
+    description: 'ALLEGIANCE-CAR1: the retired corrupt mark becomes the card\'s hidden allegiance (power, house, vector, via, handler); what cannot map is reported.',
+    /**
+     * @param {Record<string, unknown>} settlement
+     * @returns {Record<string, unknown>}
+     */
+    migrate(settlement) {
+      return migrateV2toV3(/** @type {SaveRecord} */ (settlement)).settlement;
+    },
+  },
   // Future:
-  // { from: 2, to: 3, description: '...', migrate(s) { ... } },
+  // { from: 3, to: 4, description: '...', migrate(s) { ... } },
 ]);
 
 /**

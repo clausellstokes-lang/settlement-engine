@@ -31,7 +31,8 @@ import {
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
-import { assignCastPowers } from './people/castPowers.js';
+import { landMemberships, rankPowers } from './people/castPowers.js';
+import { CORRUPT_SHORT_GOAL, assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
 import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { pickVariant } from '../kernel/proseHash.js';
@@ -932,7 +933,31 @@ export const enrichNpcCoherence = (settlement) => {
   // pass reads the memberships (npcStructure.js) and no card carries the old fields. This tail is still
   // the one BOTH full assembly and NPC section-regen run, so a regenerated cast carries the
   // same powers as a born one.
-  const withPowers = assignCastPowers(settlement, rawMergedNpcs, getActiveRng(), settlement?._seed ?? null);
+  // ── THE ALLEGIANCE TRAIN, car 1 (ALLEGIANCE-CAR1, 2026-11-08; the design §2): one forward pass,
+  // A1 the memberships landed (rank null) → A2 the hidden allegiances dealt, each card on its own keyed
+  // fork `people-allegiance::<card id>` of this seam's stream (domain/people/allegiance.js; the retired
+  // corruptionPass step's roll, moved here so a regenerated cast deals its allegiances too) → A3 the
+  // rank deal → A4 the handlers, draw-free, after the ranks they read. The receipts are left for the
+  // assembly step's trace (steps/assembleSettlement.js); a regeneration's are dropped, as before.
+  const rng = getActiveRng();
+  const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null);
+  const dealt = dealAllegiances(settlement, landed.all, rng);
+  // the retired pass's compromised short goal, KEPT verbatim until car 4 (REVIEW-INTAKE-4: a goal another figure
+  // carries is refused, and the figure keeps its own). Draw-free, in roster order.
+  if (dealt.length) {
+    const goalsNow = landed.all.map((n) => n?.goal?.short);
+    for (const { card } of dealt) {
+      const k = landed.all.indexOf(card);
+      const corruptGoal = CORRUPT_SHORT_GOAL[card.allegiance.vector] || CORRUPT_SHORT_GOAL.greed;
+      if (card.goal && typeof card.goal === 'object' && !heldByOthers(goalsNow, k).has(corruptGoal)) {
+        card.goal = { ...card.goal, short: corruptGoal };
+        goalsNow[k] = corruptGoal;
+      }
+    }
+  }
+  const withPowers = rankPowers(settlement, landed);
+  assignHandlers(withPowers, settlement);
+  leaveAllegianceReceipts(settlement, dealt);
   return enrichNPCsWithStructure(withPowers, settlement);
 };
 

@@ -90,6 +90,12 @@ export function rollWeightOf(share, weight) {
  * `other` mints are born with it in representatives.js; a power born after the population step is
  * minted here, appended, each tied to the seat).
  *
+ * ALLEGIANCE-CAR1 (2026-11-08, the allegiance design §2, A1 / A3): the deal is TWO halves so the
+ * hidden allegiance (A2, domain/people/allegiance.js :: dealAllegiances) is dealt between them —
+ * `landMemberships` (A1: the memberships, rank null, and the `other` mints) then `rankPowers` (A3:
+ * the three per power and the importance band). This wrapper runs them back to back, byte-identical
+ * to the one function it was: every fork is minted in `landMemberships`, in the same order.
+ *
  * @param {Record<string, any>} settlement the settlement-shaped object at the coherence seam
  *   (tier, institutions, powerStructure, economicState, config, _userEdits for the DM's `backs`)
  * @param {Array<Record<string, any>>} cards the cast as born (step 2)
@@ -98,10 +104,30 @@ export function rollWeightOf(share, weight) {
  * @returns {Array<Record<string, any>>}
  */
 export function assignCastPowers(settlement, cards, rng, seed = settlement?._seed ?? null) {
+  const landed = landMemberships(settlement, cards, rng, seed);
+  return landed.plan ? rankPowers(settlement, landed) : landed.all;
+}
+
+/**
+ * @typedef {{ powers: string[], members: Map<string, Member[]>, governing: string | null,
+ *   seatKey: string | null, rankStream: any }} RankPlan
+ * @typedef {{ all: Array<Record<string, any>>, plan: RankPlan | null }} Landed
+ */
+
+/**
+ * A1 — LAND: every card's memberships (rank null) from the backing catalogue, the minted seat's,
+ * and the `other` mints (R-P3, R-P4). Mints every fork of `people-powers` (mint, ranks, hooks) in
+ * the order the one function minted them. `plan` is null where nothing ranks (no power, no cast).
+ *
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} cards
+ * @param {{ fork: (label: string) => any } | null} rng @param {unknown} [seed]
+ * @returns {Landed}
+ */
+export function landMemberships(settlement, cards, rng, seed = settlement?._seed ?? null) {
   const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const powers = factions.map((f) => nameOf(f)).filter(Boolean);
-  if (!powers.length || !Array.isArray(cards)) return cards;
+  if (!powers.length || !Array.isArray(cards)) return { all: cards, plan: null };
   const powerSet = new Set(powers);
   /** @type {Set<string>} the powers a membership may not name publicly (domain/people/cardVeil.js) */
   const veiledPowers = new Set(factions.filter((f) => isVeiledPower(f)).map((f) => nameOf(f)));
@@ -229,7 +255,21 @@ export function assignCastPowers(settlement, cards, rng, seed = settlement?._see
     drawCardHooks(unhooked, (card) => mintHookPools.get(card.id) || 'other', hookStream, npcConfig, hookRegistry, { worldLaw, institutions, tier });
   }
   const all = lateMints.length ? [...cards, ...lateMints] : cards;
+  return { all, plan: { powers, members, governing, seatKey, rankStream } };
+}
 
+/**
+ * A3 — RANK: each power's first, second and third (R-P5) under FLOOR 1 and FLOOR 2, then the
+ * importance band from the best rank. Reads the plan `landMemberships` returned; draws only on the
+ * `ranks` fork it minted.
+ *
+ * @param {Record<string, any>} settlement @param {Landed} landed
+ * @returns {Array<Record<string, any>>}
+ */
+export function rankPowers(settlement, landed) {
+  const { all, plan } = landed;
+  if (!plan) return all;
+  const { powers, members, governing, seatKey, rankStream } = plan;
   // ── The three (R-P5), per power ──────────────────────────────────────────────────────────
   for (const power of powers) {
     const pool = members.get(power);

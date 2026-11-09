@@ -626,7 +626,9 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // F7 RENAME-CASCADE (a373129ee) → [22, 14] F7 unit 5 (09295e420); none of the new rows declares `readable`.
     // 2026-11-07 (the people landing, by import at each lane's tree): [22, 14] -> [25, 14] PEOPLE-1 CAST dc655f712 ->
     // [20, 12] PEOPLE-5B EDIT a725df7e4 (the grouping walks and the affiliation rows leave); none declares `readable`.
-    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([20, 12]);
+    // ALLEGIANCE-CAR1 (2026-11-08, 4e55421ea, measured by import): [20, 12] -> [21, 12], the allegiance receipt's
+    // `simulationTrace[].downstreamEffects[].target` row (it names the criminal power); it declares no `readable`.
+    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([21, 12]);
     expect(declaring(FACTION_NON_CASCADED).length + declaring(NPC_NON_CASCADED_SURFACES).length).toBe(0);
     const importers = srcModules()
       .map((rel) => ({ rel, clause: /import\s*\{([^}]*)\}\s*from\s*'[^']*factionRename\.js'/s.exec(readFileSync(resolve(ROOT, 'src', rel), 'utf8')) }))

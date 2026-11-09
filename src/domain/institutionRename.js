@@ -115,10 +115,10 @@ const INSTITUTION_HANDLE_FIELDS = Object.freeze([
   // house's name is its `key` (a `kind: 'house'` card) — a removal deletes the key and the face keeps its title.
   { parent: 'institution', key: 'key', list: false, removal: 'delete-key', where: Object.freeze({ key: 'kind', equals: 'house' }),
     why: 'the house a representative is the face of, by the house\'s roster name (people/representatives.js); a `kind: \'power\'` card\'s key is a POWER name, the faction ledger\'s' },
-  { parent: 'corruptTies', key: 'thievesGuild', list: false, removal: 'delete-key',
-    why: 'the corruption record names the guild house by its own name' },
-  { parent: 'corruptTies', key: 'criminalInstitution', list: false, removal: 'delete-key',
-    why: 'the second corruption tie, the criminal house itself' },
+  // ALLEGIANCE-CAR1 (2026-11-08): the retired `corruptTies.thievesGuild` / `.criminalInstitution` rows are the
+  // hidden allegiance's `house` now (domain/people/allegiance.js; the v2 -> v3 migration moves a save's).
+  { parent: 'allegiance', key: 'house', list: false, removal: 'delete-key',
+    why: 'the hidden allegiance names the criminal house it answers to by the house\'s roster name' },
   { parent: null, key: 'linkedInstitutionIds', list: true, removal: 'drop-item',
     why: 'a generated institution has no id, so factionRoles stores the NAME here and calls the branch rename-sensitive; a mixed id and name list heals only its name half' },
 ]);

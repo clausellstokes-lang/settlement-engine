@@ -97,6 +97,7 @@ export {
   institutionTargets, impairedInstitutionTargets,
   depletableResourceTargets, depletedResourceTargets,
 } from './events/targetRosters.js';
+import { allegianceOf } from './people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 
 /** The provenance stamp on every table-authored effect. */
 export const TABLE_EVENT_SOURCE = 'table';
@@ -299,7 +300,7 @@ export function exposureTargets(settlement) {
     Array.isArray(e?.impairments) && e.impairments.some((i) => !!i && i.type === 'corruption');
   const npcs = Array.isArray(s.npcs) ? s.npcs : [];
   for (const n of npcs) {
-    if (n?.corrupt) out.push({ ref: String(n.id || n.name), label: String(n.name || n.id) });
+    if (allegianceOf(n)) out.push({ ref: String(n.id || n.name), label: String(n.name || n.id) });
   }
   const institutions = Array.isArray(s.institutions) ? s.institutions : [];
   for (const i of institutions) {

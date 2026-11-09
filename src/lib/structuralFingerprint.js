@@ -22,6 +22,7 @@
 import { deriveCausalState, SYSTEM_VARIABLES } from '../domain/causalState.js';
 import { normalizeGood } from '../domain/region/goodsCatalog.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
+import { allegianceOf } from '../domain/people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 
 // ── Banding helpers ──────────────────────────────────────────────────────────
 export function populationBand(pop) {
@@ -101,7 +102,7 @@ function npcDistributions(settlement, save, opts = {}) {
     category_dist: countByCategory(npcs, 'category'),
     influence_dist: countByCategory(npcs, 'influence'),
     structural_rank_dist: countByCategory(npcs, 'structuralRank'),
-    corrupt_count: npcs.filter(n => n?.corrupt).length,
+    allegiance_count: npcs.filter(n => allegianceOf(n)).length, // ALLEGIANCE-CAR1 (J-17): corrupt_count -> allegiance_count, the hidden allegiance's count
   };
   if (states.length) {
     block.role_archetype_dist = countByCategory(states, 'roleArchetype');

@@ -168,7 +168,9 @@ export const CARD_KINDS = Object.freeze({
       secret: ['secret'],
       ties: ['relationships', 'institution', 'linkedInstitutionIds'],
       hooks: ['plotHooks'],
-      corruption: ['corrupt', 'corruptionVector', 'corruptTies'],
+      // ALLEGIANCE-CAR1 (2026-11-08, design §8): + `allegiance`, the hidden allegiance; the retired mark's three keys
+      // stay listed so a save the v2 -> v3 migration could not map (it keeps them, reported) is still veiled.
+      corruption: ['allegiance', 'corrupt', 'corruptionVector', 'corruptTies'],
     },
   },
   institution: {
@@ -500,7 +502,7 @@ export const DEFAULT_VEIL_RULES = Object.freeze([
   {
     cls: 'npc-corruption',
     reason: 'X-21c: NPC corruption and compromise flags',
-    select: (s) => (recs(s.npcs).some(n => n.corrupt != null || n.corruptionVector != null || n.corruptTies != null)
+    select: (s) => (recs(s.npcs).some(n => n.allegiance != null || n.corrupt != null || n.corruptionVector != null || n.corruptTies != null)
       ? ['class:npc:corruption'] : []),
   },
   {

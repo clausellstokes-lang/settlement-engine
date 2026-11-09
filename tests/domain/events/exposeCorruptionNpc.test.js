@@ -9,8 +9,9 @@ const settlement = () => ({
   factions: [],
   npcs: [
     {
-      id: 'npc_guard', name: 'Captain Vex', corrupt: true, corruptionVector: 'greed',
-      corruptTies: { criminalInstitution: "Thieves' Guild Chapter" }, factionAffiliation: 'City Watch', timesExposed: 0,
+      // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
+      id: 'npc_guard', name: 'Captain Vex', allegiance: { power: null, house: "Thieves' Guild Chapter", vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true },
+      factionAffiliation: 'City Watch', timesExposed: 0,
     },
     { id: 'npc_clerk', name: 'Honest Mira', corrupt: false },
   ],
@@ -23,6 +24,7 @@ describe('§corruption Phase 4 — EXPOSE_CORRUPTION targets a corrupt NPC', () 
     const successor = next.npcs.find((n) => n.replacedNpc === 'Captain Vex');
     expect(successor).toBeTruthy();
     expect(successor.corrupt).toBeFalsy();
+    expect(successor.allegiance).toBeUndefined(); // ALLEGIANCE-CAR1: the successor holds no allegiance
     expect(successor.factionAffiliation).toBe('City Watch'); // inherited the seat
     const guild = next.institutions.find((i) => i.id === 'i1');
     const watch = next.institutions.find((i) => i.id === 'i2');
@@ -40,7 +42,8 @@ describe('§corruption Phase 4 — removing a criminal institution severs ties',
   it('clears corruption on NPCs tied to the removed criminal institution', () => {
     const next = mutateSettlement({ settlement: settlement(), event: { id: 'e3', type: 'REMOVE_INSTITUTION', targetId: "Thieves' Guild Chapter" }, now: NOW });
     const vex = next.npcs.find((n) => n.name === 'Captain Vex');
-    expect(vex.corrupt).toBe(false);
+    // ALLEGIANCE-CAR1: the severed card loses its allegiance (the clean state)
+    expect(vex.allegiance).toBeUndefined();
     expect(vex.ousted).toBe(true);
   });
 });

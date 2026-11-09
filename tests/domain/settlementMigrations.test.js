@@ -207,7 +207,8 @@ describe('M-7 — the v1 -> v2 step (PEOPLE-5B)', () => {
           expect(out.schemaVersion, `${file}: a forward save is never downgraded`).toBe(raw.schemaVersion);
           continue;
         }
-        expect(out.schemaVersion, file).toBe(2);
+        // ALLEGIANCE-CAR1 (2026-11-08): the chain ends at 3 now (v2 -> v3, the hidden allegiance); re-keyed with the cause.
+        expect(out.schemaVersion, file).toBe(3);
         expect(out.npcs || [], `${file}: every card byte-equal`).toEqual(before);
         expect('factions' in out, `${file}: no grouping`).toBe(false);
         cards += before.length;
@@ -222,7 +223,7 @@ describe('M-7 — the v1 -> v2 step (PEOPLE-5B)', () => {
     expect(entries.length, '60 births + 6 planted').toBe(66);
     const t = { cards: 0, keptOtherFields: 0, fieldsLeft: 0, dm: 0, dmWhy: {}, moved: { factionAffiliation: 0, secondaryAffiliation: 0, linkedFactionIds: 0 },
       deleted: { factionGoal: 0, densityRungRole: 0 }, structuralRank: 0, houseLinked: 0, perCard: {}, unmapped: {},
-      grouping: 0, orphans: 0, ties: 0, tiesMoved: 0, outDegreeOver1: 0, reports: 0, notPowers: 0, dmInstitutionNotNull: 0 };
+      grouping: 0, orphans: 0, ties: 0, tiesMoved: 0, outDegreeOver1: 0, reports: 0, notPowers: 0, dmInstitutionNotNull: 0, v3: { converted: 0, markLeft: 0 } };
     for (const entry of entries) {
       const v1 = entry.settlement;
       expect(v1.schemaVersion, `${entry.label}: a v1 save`).toBe(1);
@@ -232,15 +233,18 @@ describe('M-7 — the v1 -> v2 step (PEOPLE-5B)', () => {
       expect(JSON.stringify(input), `${entry.label}: the input is not mutated`).toBe(JSON.stringify(v1));
       expect(JSON.stringify(entry.campaignState), `${entry.label}: the envelope's locks are untouched`).toBe(locksBefore);
       const { report } = migrateV1toV2(JSON.parse(JSON.stringify(v1)));
-      expect(migrated.schemaVersion).toBe(2);
+      expect(migrated.schemaVersion).toBe(3); // ALLEGIANCE-CAR1: the chain runs on through v2 -> v3
       expect('factions' in migrated, `${entry.label}: the grouping is dropped`).toBe(false);
       const powers = new Set(migrated.powerStructure.factions.map((p) => p.faction || p.name));
       v1.npcs.forEach((card, i) => {
         const next = migrated.npcs[i];
         t.cards += 1;
-        const kept = Object.keys(card).filter((k) => !V1_FIELDS.includes(k) && k !== 'institution');
+        // ALLEGIANCE-CAR1: the chain runs on through v2 -> v3, which moves the retired mark's three fields (its own arm, I-14, below)
+        const kept = Object.keys(card).filter((k) => !V1_FIELDS.includes(k) && k !== 'institution' && !['corrupt', 'corruptionVector', 'corruptTies'].includes(k));
         if (kept.every((k) => JSON.stringify(next[k]) === JSON.stringify(card[k]))) t.keptOtherFields += 1;
         t.fieldsLeft += V1_FIELDS.filter((k) => k in next).length;
+        if (card.corrupt === true) t.v3.converted += next.allegiance ? 1 : 0;
+        if ('corrupt' in next) t.v3.markLeft += 1;
         for (const m of next.memberships || []) if (!powers.has(m.power)) t.notPowers += 1;
       });
       for (const d of report.dmCards) {
@@ -280,6 +284,8 @@ describe('M-7 — the v1 -> v2 step (PEOPLE-5B)', () => {
       unmapped: { 'secondaryAffiliation (a house on the roster)': 14,
         'secondaryAffiliation (neither a power nor a house on the roster)': 59 },
       grouping: 238, orphans: 1, ties: 1486, tiesMoved: 1486, outDegreeOver1: 581, reports: 23, notPowers: 0,
+      // ALLEGIANCE-CAR1 (measured): the fixture's 20 corrupt cards each become an allegiance (470 `corrupt: false` cleared), none left
+      v3: { converted: 20, markLeft: 0 },
     });
   });
 
@@ -332,5 +338,76 @@ describe('FIX-PUBLIC-VEIL — the v1 -> v2 step stamps the veil bits where it bu
       { power: 'The Quiet Hand', rank: null, share: null, veiled: true },
     ]);
     expect(boss.memberships).toEqual([{ power: 'The Night Market', rank: null, share: null, veiled: true }]);
+  });
+});
+
+// ── I-14 (ALLEGIANCE-CAR1, 2026-11-08; the allegiance design §7.2, J-18): v2 -> v3, the retired `corrupt` mark becomes a
+// hidden `allegiance` (or is REPORTED), idempotent, no tie drawn. Written red-first: the migration is imported where
+// it is used, so the arms red at the tree that has no v3.
+describe('I-14 — the save migration v2 -> v3: the corrupt mark becomes a hidden allegiance', () => {
+  /** A v2 save: a guild chapter and its face, a tavern keeper turned (greed), a watch captain turned (fear, no vector
+   *  stored), a clean card stamped `corrupt: false`, an ousted corrupt card, and a DM tie the migration must keep. */
+  const v2 = () => ({
+    schemaVersion: 2,
+    institutions: [{ name: "Thieves' guild chapter", category: 'criminal' }, { name: 'Inns and taverns (district)', category: 'economy' }, { name: 'Citizen militia', category: 'defense' }],
+    powerStructure: { factions: [{ faction: "Thieves' Guild", category: 'criminal', power: 15 }, { faction: 'The Council', category: 'government', power: 85, isGoverning: true }] },
+    npcs: [
+      { id: 'npc_boss', name: 'Boss', institution: { kind: 'house', key: "Thieves' guild chapter" }, memberships: [{ power: "Thieves' Guild", rank: 1, share: 1 }], corrupt: false },
+      { id: 'npc_second', name: 'Second', institution: { kind: 'house', key: "Thieves' guild chapter" }, memberships: [{ power: "Thieves' Guild", rank: 2, share: 1 }] },
+      { id: 'npc_keeper', name: 'Keeper', importance: 'notable', institution: { kind: 'house', key: 'Inns and taverns (district)' }, personality: { flaw: 'greedy' },
+        memberships: [{ power: 'The Council', rank: 3, share: 1 }], corrupt: true, corruptionVector: 'greed',
+        corruptTies: { criminalInstitution: "Thieves' guild chapter", thievesGuild: "Thieves' guild chapter", revealed: false } },
+      { id: 'npc_captain', name: 'Captain', importance: 'key', institution: { kind: 'house', key: 'Citizen militia' }, personality: { flaw: 'cowardly' },
+        memberships: [{ power: 'The Council', rank: 2, share: 1 }], corrupt: true, corruptionVector: null, corruptTies: { criminalInstitution: 'A house long gone' } },
+      { id: 'npc_clean', name: 'Clean', institution: { kind: 'house', key: 'Inns and taverns (district)' }, corrupt: false, corruptionVector: null },
+      { id: 'npc_out', name: 'Out', ousted: true, corrupt: true, corruptionVector: 'greed', corruptTies: { criminalInstitution: "Thieves' guild chapter" } },
+    ],
+    relationships: [{ id: 'tie_npc_keeper', from: 'npc_keeper', to: 'npc_clean', type: 'ally' }],
+  });
+
+  it('SCHEMA_VERSION is 3 and the chain ends there', () => {
+    expect(SCHEMA_VERSION).toBe(3);
+    expect(listMigrations().at(-1)).toMatchObject({ from: 2, to: 3 });
+    expect(diagnoseMigrationChain()).toBeNull();
+  });
+
+  it('every corrupt card becomes an allegiance; no legacy field stays on a migrated card; a clean false goes', async () => {
+    const { migrateV2toV3 } = await import('../../src/domain/settlementMigrations.js');
+    const { settlement: out, report } = migrateV2toV3(v2());
+    const by = Object.fromEntries(out.npcs.map((n) => [n.id, n]));
+    expect(out.schemaVersion).toBe(3);
+    expect(by.npc_keeper.allegiance).toEqual({ power: "Thieves' Guild", house: "Thieves' guild chapter", vector: 'greed', via: 'front', handler: 'npc_second', share: 0.15, veiled: true, covert: true, revealed: false });
+    // a tie naming no roster house falls to the first criminal house; the vector from the flaw; the boss handles last
+    expect(by.npc_captain.allegiance).toMatchObject({ house: "Thieves' guild chapter", vector: 'fear', via: 'office' });
+    expect(['npc_second', 'npc_boss']).toContain(by.npc_captain.allegiance.handler);
+    for (const id of ['npc_boss', 'npc_keeper', 'npc_captain', 'npc_clean']) {
+      for (const k of ['corrupt', 'corruptionVector', 'corruptTies']) expect(Object.hasOwn(by[id], k), `${id}.${k}`).toBe(false);
+    }
+    expect(by.npc_clean.allegiance).toBeUndefined();
+    expect(report.converted).toBe(2);
+    // J-18: the migration draws no tie — the DM's tie is kept as it was
+    expect(out.relationships).toEqual(v2().relationships);
+  });
+
+  it('a card it cannot map (no criminal house on the roster) is REPORTED and keeps its three fields; an ousted card is kept', async () => {
+    const { migrateV2toV3 } = await import('../../src/domain/settlementMigrations.js');
+    const s = v2(); s.institutions = s.institutions.filter((i) => i.category !== 'criminal');
+    const { settlement: out, report } = migrateV2toV3(s);
+    const keeper = out.npcs.find((n) => n.id === 'npc_keeper');
+    expect(keeper.corrupt).toBe(true);
+    expect(keeper.allegiance).toBeUndefined();
+    expect(report.unmapped.map((u) => u.id)).toEqual(['npc_keeper', 'npc_captain']);
+    expect(out.migrationReports.at(-1)).toMatchObject({ from: 2, to: 3 });
+    const out2 = out.npcs.find((n) => n.id === 'npc_out');
+    expect(out2).toEqual(v2().npcs.find((n) => n.id === 'npc_out'));
+  });
+
+  it('idempotent: the chain runs once, and the step applied twice is the step applied once', async () => {
+    const { migrateV2toV3 } = await import('../../src/domain/settlementMigrations.js');
+    const once = migrateV2toV3(v2()).settlement;
+    expect(migrateV2toV3(once).settlement).toEqual(once);
+    const latest = migrateSettlementToLatest(v2());
+    expect(migrateSettlementToLatest(latest)).toEqual(latest);
+    expect(latest).toEqual(once);
   });
 });

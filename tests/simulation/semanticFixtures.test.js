@@ -25,6 +25,7 @@
  */
 
 import { describe, test, expect, beforeAll } from 'vitest';
+import { allegianceOf } from '../../src/domain/people/allegiance.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import {
   gen,
@@ -107,18 +108,22 @@ describe('CORRUPT TRADE TOWN (trade route + corruption)', () => {
   let s;
   beforeAll(() => { s = gen(CONFIG, SEED); });
 
-  test('at least one NPC is flagged corrupt', () => {
-    const corrupt = (s.npcs || []).filter((n) => n.corrupt === true);
+  // ALLEGIANCE-CAR1 (2026-11-08): the corrupt NPC is the hidden allegiance (domain/people/allegiance.js :: allegianceOf).
+  // J-2 retired corruptionPass and its `corrupt` / `corruptionVector` / `corruptTies` mark. The map is one to one:
+  // vector -> allegiance.vector, criminalInstitution -> allegiance.house, thievesGuild -> allegiance.power.
+  test('at least one NPC holds a hidden allegiance', () => {
+    const corrupt = (s.npcs || []).filter((n) => allegianceOf(n));
     expect(corrupt.length).toBeGreaterThanOrEqual(1);
   });
 
-  test('RECEIPT: corrupt NPCs name the mechanism (criminal institution + thieves-guild tie)', () => {
-    const corrupt = (s.npcs || []).filter((n) => n.corrupt === true);
+  test('RECEIPT: agents name the mechanism (criminal house + criminal power + handler)', () => {
+    const corrupt = (s.npcs || []).filter((n) => allegianceOf(n));
     for (const n of corrupt) {
-      expect(typeof n.corruptionVector).toBe('string');
-      expect(n.corruptTies).toBeTruthy();
-      expect(typeof n.corruptTies.criminalInstitution).toBe('string');
-      expect(typeof n.corruptTies.thievesGuild).toBe('string');
+      const a = allegianceOf(n);
+      expect(typeof a.vector).toBe('string');
+      expect(typeof a.house).toBe('string');
+      expect(typeof a.power).toBe('string');
+      expect(typeof a.handler).toBe('string');
     }
   });
 
