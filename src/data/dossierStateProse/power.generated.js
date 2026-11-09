@@ -2103,7 +2103,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "What the {seat} at {settlement} fears is running out of money, not being overthrown, and every decision is made with that in mind.",
+          "text": "What the {seat} at {settlement} fears most is running out of money, and every decision is made with that in mind.",
           "slots": [
             "seat",
             "settlement"
