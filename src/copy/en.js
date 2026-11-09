@@ -63,7 +63,7 @@ export const en = Object.freeze({
   hero: {
     eyebrow:    'A simulator for Dungeon Masters',
     title:      'Forge a settlement worth running a campaign in.',
-    subtitle:   'Every street, every faction, every reason the place hasn’t collapsed yet. Simulated in seconds, exported in a click.',
+    subtitle:   'Every street, every power, every reason the place hasn’t collapsed yet. Simulated in seconds, exported in a click.',
     antiAi:     'Simulated, not AI-generated. The town is derived from constraints, coherent because it has to be.',
     cta:        'Begin a settlement',
     // ⚠ THE PROMISE IS SCOPED TO WHAT THE CODE ACTUALLY DOES (2026-09-18). It read
@@ -826,7 +826,7 @@ export const en = Object.freeze({
       step0Title:   "Let's build your first settlement",
       step0Body:    'Pick a size below (Thorp is small, Metropolis is huge), then click Generate. You can always regenerate or tweak the sliders.',
       step1Title:   'Ready to forge your world',
-      step1Body:    'Hit the Generate button below. Every click rolls a fresh settlement shaped by your choices. Economy, factions, NPCs, crises.',
+      step1Body:    'Hit the Generate button below. Every click rolls a fresh settlement shaped by your choices. Economy, powers, NPCs, crises.',
       step2Title:   'Here it is. Explore the tabs',
       step2Body:    'Each tab reveals a different layer: Summary hooks, Daily Life, Economics, Power, NPCs, History, and more. Click around.',
       step3Title:   "You're all set",
@@ -881,7 +881,7 @@ export const en = Object.freeze({
       },
       culture: {
         title: 'Culture',
-        body: 'Names, naming patterns, institution flavor, faction archetypes. Drives the prose of the place more than the math. A "germanic" town and a "south-asian" town with identical configs read very differently.',
+        body: 'Names, naming patterns, institution flavor, power archetypes. Drives the prose of the place more than the math. A "germanic" town and a "south-asian" town with identical configs read very differently.',
       },
       monsterThreat: {
         title: 'Monster Threat',
@@ -1051,7 +1051,7 @@ export const en = Object.freeze({
   narrativeDrift: {
     headingSeismic:    'This is a big change.',
     headingStructural: 'This change will drift the narrative.',
-    body:              'The narrative layer on this save reasons about the facts you’re changing. A mechanical substitution won’t keep the prose honest. The thesis, faction blurbs, and institution descriptions were written against the old state.',
+    body:              'The narrative layer on this save reasons about the facts you’re changing. A mechanical substitution won’t keep the prose honest. The thesis, power blurbs, and institution descriptions were written against the old state.',
     pickOne:           'Pick one:',
     regenerateTitle:   'Apply & Regenerate Narrative',
     regenerateBody:    'Full re-run against the new state. Spends {cost} credits.',
@@ -1826,7 +1826,7 @@ export const en = Object.freeze({
     },
     aiOrSim: {
       q: "Does SettlementForge use AI to write my settlement?",
-      a: 'The structural layer (population, factions, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
+      a: 'The structural layer (population, powers, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
     },
   },
 
@@ -1948,7 +1948,7 @@ export const en = Object.freeze({
       card: {
         institution: 'Institution',
         npc:         'Person',
-        faction:     'Faction',
+        faction:     'Power',
         powerSeat:   'Power seat',
         worldFact:   'World facts',
         goods:       'Goods',

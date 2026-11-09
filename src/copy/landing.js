@@ -60,7 +60,7 @@ export const landing = {
     // 2026-10-31 derives a quarrel again, voice.receipts.conflict, which §02 names.
     // Re-grounded 2026-11-04 at the rung-1 landing: the travellers' inn gave way to a blacksmith
     // lifted by the nearby resources and terrain. An OWNER VETO POINT.)
-    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, which smith the hills make worth seating, which faction is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
+    body:  'Pick a size and forge. Everything after that is derived, not drawn from a table: where the road goes, which smith the hills make worth seating, which power is owed a favour, what was cut down a generation ago and never grew back. Open the Advanced panel and set terrain, age, wealth and trouble yourself.',
     axiom: 'Every dossier answers the same question: given these constraints, what must this place be?',
     // ⛔ THE SECTION-LEVEL ASK IS GONE (owner, 2026-09-19, taking the draft's
     // recommendation): ONE ask at the top and ONE at the end. `cta` ("Forge a
@@ -106,7 +106,7 @@ export const landing = {
     // dials (town.eyebrow "road village · mountain") are what "a mountain
     // village the road reaches" says. tests/copy/landingProseGrounding.test.js
     // reds when a regenerated fixture leaves this sentence behind.
-    body:    'This is Cnocby: eighty-two people, a mountain village the road reaches, and a bakehouse already on its second bake when you arrive. The Summary tab is your session prep. Systems, factions and history sit one tab deeper, for when the party starts digging.',
+    body:    'This is Cnocby: eighty-two people, a mountain village the road reaches, and a bakehouse already on its second bake when you arrive. The Summary tab is your session prep. Systems, powers and history sit one tab deeper, for when the party starts digging.',
     library: 'Sign in free to keep every town in your Library, organized by campaign.',
     // ⛔ `cta` ('Forge a settlement') and `link` ('Read on: the voice') ARE
     // DELETED. Neither was rendered anywhere — the brief block feeds §01's

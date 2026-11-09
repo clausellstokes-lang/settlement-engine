@@ -265,7 +265,7 @@ export default function LibraryToolbar({
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            aria-label="Search settlements, NPCs, and factions"
+            aria-label="Search settlements, NPCs, and powers"
             placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'}…`}
             style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
           />
@@ -307,7 +307,7 @@ export default function LibraryToolbar({
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            aria-label="Search settlements, NPCs, and factions"
+            aria-label="Search settlements, NPCs, and powers"
             placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'}…`}
             style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
           />
@@ -414,8 +414,8 @@ export default function LibraryToolbar({
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          aria-label="Search settlements, NPCs, and factions"
-          placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'} + NPCs + factions…`}
+          aria-label="Search settlements, NPCs, and powers"
+          placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'} + NPCs + powers…`}
           style={{
             flex: 1, border: 'none', outline: 'none',
             background: 'transparent', fontFamily: sans,

@@ -202,7 +202,7 @@ function QuickStart() {
       </div>
       <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
         Most generators roll on a table. This one simulates. Every output. Institutions, NPC secrets,
-        faction tensions, export economy. Emerges from interlocking mechanical relationships that governed
+        power tensions, export economy. Emerges from interlocking mechanical relationships that governed
         real historical settlements. The outputs aren't random. They're derived.
       </p>
       <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
@@ -222,7 +222,7 @@ function QuickStart() {
         <strong style={{ color:GOLD }}>Narrative Refinement Layer</strong> is built in. The settlement
         itself is simulated, not AI-generated. But you can optionally refine the simulator's output
         into table-ready prose. Hit the purple button in any saved settlement and the layer
-        synthesizes the full settlement state into narrative. Faction tensions, economic pressures,
+        synthesizes the full settlement state into narrative. Power tensions, economic pressures,
         historical character, and daily texture become a coherent voice grounded in what was
         actually simulated. The refinement augments the outputs rather than replacing them, giving
         you something ready for the table without transcribing anything.
@@ -248,7 +248,7 @@ function QuickStart() {
         <p style={{ fontSize: FS['12.5'], color:swatch['#5A3A00'], lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>Overview</strong> tab first. It gives you the town at a glance, ready for the table.</Step>
-      <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and (where relevant) legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
+      <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, relationships between the powers, and (where relevant) legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
       <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
       <Tip>You don't need to read every section before the session starts. The Overview and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
     </>
@@ -281,8 +281,8 @@ function PowerUser() {
           settlement <em>cares about</em>.
         </p>
         <Step n={1}>Open <strong>Institution Configuration</strong> to force or exclude specific institutions. A temple-city forces a Cathedral regardless of tier. A hermit kingdom excludes all trade infrastructure.</Step>
-        <Step n={2}>Apply <strong>Stress Conditions</strong> (Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic. They modify institution probabilities, NPC goals, faction tensions, and safety profiles.</Step>
-        <Step n={3}>Multiple stresses <strong>compound</strong>. Famine + Political Fracture means food distribution is contested by factions, not just scarce. The Overview's crisis card carries each active stress.</Step>
+        <Step n={2}>Apply <strong>Stress Conditions</strong> (Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic. They modify institution probabilities, NPC goals, power tensions, and safety profiles.</Step>
+        <Step n={3}>Multiple stresses <strong>compound</strong>. Famine + Political Fracture means food distribution is contested by powers, not just scarce. The Overview's crisis card carries each active stress.</Step>
         <Tip>Forces and exclusions persist through regeneration. Configure once, generate many variations.</Tip>
       </div>
 
@@ -290,14 +290,14 @@ function PowerUser() {
         <SubHead>Linking Settlements as Neighbours</SubHead>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
           Generate settlements that know about each other. The relationship type modifies the economic engine,
-          faction weights, and institution probabilities. All linking is done from the <strong>Settlements</strong> tab.
+          power weights, and institution probabilities. All linking is done from the <strong>Settlements</strong> tab.
         </p>
         <Step n={1}>Open a saved settlement in the <strong>Settlements tab</strong>. In the detail view, click <strong>Link Neighbour</strong> and choose another saved settlement.</Step>
         <Step n={2}>Pick a relationship type: Trade Partner, Allied, Patron, Client, Rival, Cold War, or Hostile. The relationship is bidirectional and both settlements update immediately.</Step>
-        <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and faction weights before generation.</Step>
+        <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and power weights before generation.</Step>
         <Step n={4}>Open either settlement's <strong>Relationships</strong> tab to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
-        <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
-        <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and seeds embedded agents and saboteur factions. A Patron creates dependency chains in the client's economy. A Cold War seeds clandestine intelligence factions (deep-cover operatives, commercial fronts) on both sides.</Tip>
+        <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or power. Changes cascade to all linked partner records automatically.</Step>
+        <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and seeds embedded agents and saboteur powers. A Patron creates dependency chains in the client's economy. A Cold War seeds clandestine intelligence powers (deep-cover operatives, commercial fronts) on both sides.</Tip>
       </div>
 
       <div style={{ ...NO_BREAK, marginBottom:18 }}>
@@ -309,7 +309,7 @@ function PowerUser() {
         <Step n={2}><strong>Campaigns</strong>. Group settlements into named campaign folders directly inside the Settlements tab. Use the arrow button on any saved settlement to move it between campaigns. Export a campaign to PDF for a complete campaign dossier.</Step>
         <Step n={3}><strong>Export PDF</strong> from the detail view header for a print-ready settlement brief, or export a full campaign PDF from the campaign folder.</Step>
         <Step n={4}><strong>Narrative AI Prompt</strong> and <strong>Map AI Prompt</strong> exports are also available in the detail view. Use these to feed your settlement into an AI assistant for session fiction or map generation.</Step>
-        <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
+        <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or power. Changes propagate to all linked neighbour records automatically.</Step>
         <Step n={6}><strong>World Map</strong>. Drag any saved settlement onto the embedded fantasy map to place it geographically. Click a placed burg to see its linked settlement data. Toggle relationships and supply-chain overlays from the map toolbar.</Step>
       </div>
     </div>
@@ -338,7 +338,7 @@ function RefSection({ heading, rows }) {
 const COMPENDIUM_TABS = [
   ['tiers', 'Tiers & Routes', 'Size tiers, trade routes, and what each unlocks.'],
   ['economy', 'Economy', 'Exports, imports, prosperity, and supply chains.'],
-  ['power', 'Power & Factions', 'Government types, faction blocs, and legitimacy.'],
+  ['power', 'Powers', 'Government types, blocs of powers, and legitimacy.'],
   ['arcane', 'Magic & Religion', 'Arcane institutions, deities, and faith systems.'],
   ['living', 'Living World', 'The simulation verbs, dials, and how a region moves.'],
   ['stress', 'Stress', 'Stressors, severity, and how compound conditions read.'],
@@ -381,7 +381,7 @@ function Reference() {
       ['Economics','Full export/import profile, prosperity analysis, supply chains, trade dependencies.'],
       ['Services','Available services and goods by category, with availability indicators.'],
       ['Institutions','Every institution, house by house, with the services each provides.'],
-      ['Power','Government type, dominant faction, NPC power rankings, political dynamics.'],
+      ['Power','Government type, the leading power, the people\'s standing, political dynamics.'],
       ['Defense','Walls, garrison, threat response, fortification profile.'],
       ['NPCs','All named characters with personality, goals, secrets, and plot hooks.'],
       ['History','Generated historical events that explain current conditions.'],
@@ -393,7 +393,7 @@ function Reference() {
       ['Campaigns','Create named campaign folders in the Settlements tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.'],
       ['Link Neighbour','In the Settlements tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).'],
       ['Set as Neighbour','Tell the generator to bias a new settlement against an existing one. Opens the Create tab with the neighbour active.'],
-      ['Edit Names','Rename any NPC or faction. Changes cascade bidirectionally to linked partners.'],
+      ['Edit Names','Rename any NPC or power. Changes cascade bidirectionally to linked partners.'],
       ['Export PDF','Print-ready settlement briefing. Cover page, index, relationship diagram, NPC cards, and economic appendix.'],
     ]},
     { heading: 'World Map', rows: [
@@ -409,7 +409,7 @@ function Reference() {
       <div style={{ ...NO_BREAK, marginBottom:16 }}>
         <SubHead>Look it up in the Compendium</SubHead>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:'0 0 8px' }}>
-          Every catalog (tiers, institutions, stresses, factions, the living-world verbs) is rendered
+          Every catalog (tiers, institutions, stresses, powers, the living-world verbs) is rendered
           live from the engine in the <a href="/compendium" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Compendium</a>,
           so the reference can never drift from what the simulator actually does. Jump straight to a section:
         </p>

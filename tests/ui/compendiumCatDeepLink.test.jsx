@@ -40,7 +40,7 @@ describe('Compendium ?cat= deep-link', () => {
     // The Factions bucket is the active (pressed) category.
     const pressed = [...container.querySelectorAll('button[aria-pressed="true"]')]
       .map((b) => b.textContent.trim());
-    expect(pressed.some((t) => /Factions/.test(t))).toBe(true);
+    expect(pressed.some((t) => /Powers/.test(t))).toBe(true);
   });
 
   it('ignores an unknown ?cat= value and opens on the catalog', async () => {

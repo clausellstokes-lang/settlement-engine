@@ -62,7 +62,7 @@ const TREND_METRICS = [
   { key: 'edit_reverts', label: 'Edit reverts' },
   { key: 'avg_institution_count', label: 'Avg institutions' },
   { key: 'avg_npc_count', label: 'Avg NPCs' },
-  { key: 'avg_faction_count', label: 'Avg factions' },
+  { key: 'avg_faction_count', label: 'Avg powers' },
   { key: 'avg_condition_count', label: 'Avg conditions' },
   { key: 'avg_stressor_count', label: 'Avg stressors' },
 ];
@@ -99,7 +99,7 @@ const KPI_META = {
   premium_purchases: { label: 'Premium buys' },
   avg_institutions: { label: 'Avg institutions', avg: true },
   avg_npcs: { label: 'Avg NPCs', avg: true },
-  avg_factions: { label: 'Avg factions', avg: true },
+  avg_factions: { label: 'Avg powers', avg: true },
 };
 const KPI_ORDER = Object.keys(KPI_META);
 
@@ -428,7 +428,7 @@ export default function AdminTrendsPanel() {
         <Card title="NPC distribution" control={
           <Select value={npcField} onChange={setNpcField} options={[
             { key: 'goal', label: 'Goal' }, { key: 'role_archetype', label: 'Role archetype' },
-            { key: 'seat', label: 'Faction seat' }, { key: 'dotrank', label: 'Dot rank' },
+            { key: 'seat', label: 'Power seat' }, { key: 'dotrank', label: 'Dot rank' },
             { key: 'category', label: 'Category' }, { key: 'influence', label: 'Influence' },
             { key: 'structural_rank', label: 'Structural rank' },
           ]} />

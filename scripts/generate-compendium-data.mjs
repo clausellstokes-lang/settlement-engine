@@ -115,7 +115,7 @@ const ENDGAME_SYSTEMS = [
   { id: 'npcGrowth',          label: 'NPC growth',                      flag: 'npcGrowthEnabled',
     blurb: 'Lets NPCs slowly change: lived events like calamity, betrayal, or a golden age build pressure that can, rarely, add an acquired trait over an NPC\'s authored core, never overwriting it.' },
   { id: 'npcLadder',          label: 'The contested court',              flag: 'npcLadderEnabled',
-    blurb: 'Gives each faction a persistent rank ladder. NPCs rise by displacing a named rival and fall when displaced, so advancement changes the court without creating titles or resolving anyone\'s fate.' },
+    blurb: 'Gives each power a persistent rank ladder. NPCs rise by displacing a named rival and fall when displaced, so advancement changes the court without creating titles or resolving anyone\'s fate.' },
   { id: 'traditions',         label: 'Living traditions',                flag: 'traditionsEnabled',
     blurb: 'Gives every settlement recurring observances with a durable origin, an accountable keeper, and outcomes shaped by the local economy. Traditions can flourish, fail, migrate, or be imposed without losing their history.' },
   { id: 'roads',              label: 'Named travellers on the roads',    flag: 'roadsEnabled',
@@ -142,9 +142,9 @@ const ENDGAME_SYSTEMS = [
 const CAUSAL_VARIABLE_DESC = {
   food_security:            'How reliably the settlement can feed its population, weighing food production and stores against demand. It falls toward famine when granaries and trade cannot cover the mouths to feed.',
   labor_capacity:           'The workforce available for production, services, and building. It reflects population, health, and how much labor is already committed elsewhere.',
-  public_legitimacy:        'How far the populace accepts the ruling power as rightful. Low legitimacy invites unrest, defiance, and factional challenge.',
+  public_legitimacy:        'How far the populace accepts the ruling power as rightful. Low legitimacy invites unrest, defiance, and challenges from rival powers.',
   ruling_authority:         'The reach and grip of the governing power over the settlement. It measures how effectively decisions are enforced, not whether they are welcomed.',
-  faction_power:            'The collective strength of organized factions competing for influence. When it is high, rival blocs rather than the ruler increasingly set the agenda.',
+  faction_power:            'The combined strength of organised powers competing for influence. When it is high, rival blocs rather than the ruler increasingly set the agenda.',
   trade_connectivity:       'How well the settlement is tied into trade routes and partners. It governs the flow of goods in and out, and the wealth that flow brings.',
   healing_capacity:         'The settlement\'s ability to treat injury and disease through its healers, temples, and institutions. When it is low, plague and wounds run unchecked.',
   defense_readiness:        'How prepared the settlement is to withstand attack, from walls and garrison to trained militia. It rises with fortification and falls under siege or neglect.',
@@ -155,14 +155,14 @@ const CAUSAL_VARIABLE_DESC = {
   magical_stability:        'How stable and well-governed the settlement\'s magical forces are. Low stability signals unchecked arcane hazard, leakage, or contested magical authority.',
   social_trust:             'The cohesion binding the populace together, the everyday confidence that neighbours and institutions will hold. It frays under stress, division, and betrayal.',
   economic_capacity:        'The overall productive and financial strength of the settlement\'s economy. It underwrites what the settlement can afford to build, field, and endure.',
-  law_order:                'How firmly the rule of law holds day to day, from courts and watch to the plain absence of disorder. It falls as crime, faction violence, and unrest rise.',
+  law_order:                'How firmly the rule of law holds day to day, from courts and watch to the plain absence of disorder. It falls as crime, fighting between powers, and unrest rise.',
 };
 
 /** label + description per pressure (the 0..1 directional strain on a settlement). */
 const PRESSURE_GLOSSARY = {
   food:       { label: 'Food',       description: 'Strain from the settlement failing to feed itself, rising as production and stores fall short of demand. It is the pressure behind famine and food riots.' },
   disease:    { label: 'Disease',    description: 'Strain from sickness and poor sanitation outpacing the settlement\'s ability to treat it. It is the pressure behind plague and its social fallout.' },
-  conflict:   { label: 'Conflict',   description: 'Internal strain from factions, classes, or rivals pulling against each other. It is the pressure behind feuds, unrest, and political fracture.' },
+  conflict:   { label: 'Conflict',   description: 'Internal strain from powers, classes, or rivals pulling against each other. It is the pressure behind feuds, unrest, and political fracture.' },
   hostility:  { label: 'Hostility',  description: 'External strain from hostile neighbours and threats pressing on the settlement. It is the pressure behind raids, a war footing, and closed gates.' },
   trade:      { label: 'Trade',      description: 'Strain from the settlement\'s trade being disrupted or unable to meet its needs. It rises when routes, partners, or exports falter.' },
   economy:    { label: 'Economy',    description: 'Strain from economic weakness, scarcity, or collapse of livelihoods. It is the pressure behind hardship, debt, and decline.' },
@@ -239,7 +239,7 @@ const FACTION_ARCHETYPE_READINGS = {
   outsider:   'A foreign or external power with a foothold.',
   occupation: 'An occupying force holding the settlement.',
   civic:      'Civic bodies and community institutions.',
-  other:      'A faction that fits none of the above.',
+  other:      'A power that fits none of the above.',
 };
 const GOVERNANCE_LABELS = [
   { label: 'Stable',         reading: 'Settled governance with no dominant strain.' },
@@ -285,7 +285,7 @@ const TRANSFER_CAUSE_READINGS = {
   conquest:    'Imposed by an outside conqueror.',
   appointment: 'Installed by a higher authority.',
 };
-const POWER_STRUCTURE_NOTE = 'A settlement\'s government type is the name of its governing faction. Power changes hands by one of these causes, which the chronicle stamps on each regime change.';
+const POWER_STRUCTURE_NOTE = 'A settlement\'s government type is the name of the power that governs it. Rule changes hands by one of these causes, which the chronicle stamps on each regime change.';
 const CORRUPTION_VECTORS = [
   { label: 'Greed',              reading: 'Bought with wealth.' },
   { label: 'Hunger for status',  reading: 'Lured with rank and honour.' },

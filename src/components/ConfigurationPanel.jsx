@@ -300,7 +300,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           <label htmlFor="useCustomContent" style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,background:on?'rgba(124,58,237,0.06)':CARD}}>
             <input id="useCustomContent" aria-label="Use my custom content" type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>Use my custom content</span>
-            <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, factions, stressors &amp; chains</span>
+            <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, powers, stressors &amp; chains</span>
           </label>
         );
       })()}

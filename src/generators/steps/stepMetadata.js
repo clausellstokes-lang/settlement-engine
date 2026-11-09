@@ -109,7 +109,7 @@ export const STEP_METADATA = Object.freeze({
     // generatePower provides ctx.powerStructure.
     summary: (ctx) => {
       const n = ctx.powerStructure?.factions?.length || 0;
-      return n ? `${n} faction${n === 1 ? '' : 's'} formed` : null;
+      return n ? `${n} power${n === 1 ? '' : 's'} formed` : null;
     },
   },
   neighbourFactions: {
@@ -119,7 +119,7 @@ export const STEP_METADATA = Object.freeze({
     // This pass derives faction-boost institutions; tensions/history don't exist
     // yet (they come from generateNarratives). Report whether it changed the roster.
     summary: (ctx) => ctx._rosterChangedAfterEconomy
-      ? 'Faction pressure reshaped the roster'
+      ? 'Pressure between the powers reshaped the roster'
       : null,
   },
   coherenceRepairPass: {
@@ -196,15 +196,15 @@ export const STEP_PRESENTATION = Object.freeze({
   isolationPass: { label: 'Resolve isolation', description: 'Detach institutions that lost their dependencies (a smith with no fuel becomes a husk).' },
   stressConfirmPass: { label: 'Confirm stressors', description: 'Re-weight emergent stressors against the real roster. Walls suppress sieges, granaries suppress famine.' },
   generateEconomy: { label: 'Build economy + supply chains', description: 'Compute prices, supply chains, prosperity band, and visible economic frictions.' },
-  generatePower: { label: 'Form factions', description: 'Define the political factions, their stake, and what they’d each like to happen next.' },
-  neighbourFactions: { label: 'Link neighbour factions', description: 'Stitch in the neighbouring settlement’s factions where they have local interests.' },
+  generatePower: { label: 'Form the powers', description: 'Define the political powers, their stake, and what they’d each like to happen next.' },
+  neighbourFactions: { label: 'Link the neighbour\'s powers', description: 'Stitch in the neighbouring settlement’s powers where they have local interests.' },
   factionCorrelationPass: { label: 'Correlate tensions', description: 'Compute who is allied, who is at odds, and which tensions are about to boil.' },
   coherenceRepairPass: { label: 'Repair generated structure', description: 'Correct generator-owned access, dependency, and survival contradictions before downstream systems read the roster.' },
-  economyReconcilePass: { label: 'Reconcile economy with final roster', description: 'Re-derive chains, services, and spatial placement so faction-pulled institutions join the economy.' },
+  economyReconcilePass: { label: 'Reconcile economy with final roster', description: 'Re-derive chains, services, and spatial placement so power-pulled institutions join the economy.' },
   powerEconomyReconcilePass: { label: 'Finalize power against the economy', description: 'Replay the original political intent against the final economic facts without reopening institution pulls.' },
   structuralValidationPass: { label: 'Validate structure', description: 'Check the FINAL roster for tier, dependency, and access contradictions: the coherence receipt.' },
-  generatePopulation: { label: 'Generate NPCs', description: 'Cast the named NPCs: rulers, faction heads, plot-hook owners, and the merchant your players will ask about.' },
-  generateNarratives: { label: 'Compose narratives', description: 'Write the prose layer: history, defense, daily-life, and per-faction asides.' },
+  generatePopulation: { label: 'Generate NPCs', description: 'Cast the named NPCs: rulers, power heads, plot-hook owners, and the merchant your players will ask about.' },
+  generateNarratives: { label: 'Compose narratives', description: 'Write the prose layer: history, defense, daily-life, and per-power asides.' },
   assembleSettlement: { label: 'Assemble dossier', description: 'Bundle every layer into the final settlement object the dossier renders from.' },
   resolveCrisisCast: { label: 'Cast the crisis', description: 'Name who each active crisis touches, from the people, houses and institutions already in the dossier.' },
 });
