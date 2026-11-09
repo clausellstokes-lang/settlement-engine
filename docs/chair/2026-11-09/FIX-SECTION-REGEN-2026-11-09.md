@@ -37,11 +37,25 @@ Expected 0, by construction: birth and the held-roster arm pass no option, so `w
 - The regen suites at the tip: 119/119 in 10 files (regenDerivedState, hallCapture, locksSurviveReroll, regenPreservesUserCanon, regenRngRestore, departedNameProseBoundary, regenIdentityFold, tracePartition, engineRemoteRegenSection, settlementSlice).
 - eslint on the five touched files: clean. `tsc --noEmit`: 167 errors at bd07005b9 and at the tip, the same set.
 - Red at the base and not this lane's: `tests/generators/regenNpcEnrichment.test.js` "a regen roster carries factionAffiliation and structuralPosition like the generated one" (expected 0 to be greater than 0 — the people car retired `factionAffiliation` from the card).
-- The full vitest, base and tip, in clean worktrees: see §5.
+- The full vitest, base and tip, in clean worktrees: see §5 (tip 28 failed, all of the base's 29; 0 new).
 
-## 5. The full run
+## 5. The full run (clean worktrees, `npx vitest run`, the whole corpus)
 
-(filled at the hand-back)
+| tree | files | tests | read |
+|---|---|---|---|
+| base `bd07005b9` | 16 failed · 3,114 passed · 8 skipped (3,138) | 29 failed · 37,806 passed · 127 skipped | the base's level |
+| `d9b591bc2` (causes 1–2 + record) | 19 failed (3,139) | 33 failed | FIVE new, all this lane's new test file and the engine bundle — cured below |
+| tip `1d225ee0c` | 15 failed · 3,116 passed · 8 skipped (3,139) | **28 failed** · 37,813 passed · 127 skipped | **0 new**; every red is one of the base's 29 |
+
+The five reds at `d9b591bc2` and their cures, one commit each:
+
+| commit | red | cure |
+|---|---|---|
+| `294bb721c` | `seedLoopTotality` (4 bare seed loops in the new file) · `mutationCoverageManifest` TOTALITY (no entry) | the loops through `tests/helpers/seedFailures.js :: collectSeedFailures`; a `rationale` entry citing the executed red-firsts; the timeout moved to the third argument (the lighting walker's `TEST_ARG_FORM` refuses an options object) |
+| `34d0c2538` | `sovereigntyLightingContract` ("the estate's file count moved") | the census refrozen by its door (`LIGHTING_CENSUS_REFREEZE` on the clean tree): files 3,138 → 3,139, credited 2,751 → 2,752, titles 28,822 → 28,828, suiteTitles 7,752 → 7,753, parked 387 |
+| `1d225ee0c` | `edgeSharedBundleReproducibility` (the engine bundle's recorded sourceHash stale) | `npm run build:edge-shared`: engineBundle.js and its meta (sourceHash 2bfcfeda52a21e94, engineVersion 05db3fde3a30355b); the five sibling metas move only `generatedAt` (one build window, CR-EB-2 (b)) |
+
+Gone at the tip and not this lane's: `domainAnyCastBaseline` "EVERY DECLARED OVERRUN IS ATTRIBUTED" (red at base, green at both lane runs; this lane touches no `src/domain` any-cast). **Golden surfaces: 0 moved** — no golden-master, fence, prose-manifest, herald, witness or PDF arm reds at the base or the tip; nothing to sign.
 
 ## 6. CONFIRMED vs PLAUSIBLE
 
