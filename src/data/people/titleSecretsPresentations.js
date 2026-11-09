@@ -82,7 +82,7 @@ const ROWS = [
       "Gives a room and a meal, and keeps an eye on who you sit with and how long you stay."),
   ]],
   ["the warehouse factor", 405, [
-    S("Rents out a locked bay at night to people who never sign the ledger and never say what they store",
+    S("Rents out a locked bay at night to people who never sign the books and never say what they store",
       "Whatever is in that bay would be laid at the factor's door, and so would the people who own it"),
     S("Has been reporting goods as spoiled or lost and selling them on through a buyer in another market",
       "Every merchant who trusted the warehouse with their stock would want their losses paid back, with interest"),

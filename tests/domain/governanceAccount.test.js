@@ -199,7 +199,7 @@ describe('the composed governance paragraph', () => {
     vacant.powerStructure.factions[0].modifiers = ['vacant'];
     expect(governanceAccountOf(vacant).text.startsWith('No one holds the seat at Polaovo.')).toBe(true); // re-keyed by condition (b), 2026-11-09
     const unrecorded = { ...planted(), npcs: [] };
-    expect(governanceAccountOf(unrecorded).text.startsWith('Polaovo is governed by the Corrupt Council, and the record names no one in its seat.')).toBe(true);
+    expect(governanceAccountOf(unrecorded).text.startsWith('Polaovo is governed by the Corrupt Council. No one is named to its seat.')).toBe(true); // re-keyed by identity: the chair's words at SW-0's point (STYLE-2-MERGE), 2026-11-09
     expect(governanceAccountOf({ name: 'Nowhere', powerStructure: { factions: [] } })).toBeNull();
     expect(governanceAccountOf(null)).toBeNull();
   });

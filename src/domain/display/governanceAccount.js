@@ -285,7 +285,7 @@ export function governanceAccountOf(settlement, opts = {}) {
       ? `${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`
       : `Until it is filled, ${ruler} governs without a head.`);
   } else {
-    sentences.push(`${place} is governed by ${ruler}, and the record names no one in its seat.`);
+    sentences.push(`${place} is governed by ${ruler}. No one is named to its seat.`);
   }
 
   // 2. THE STANDING.
