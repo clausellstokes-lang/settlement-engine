@@ -7,15 +7,24 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **39**: schema 38's tagged numeric heuristic-leaf envelope, tag law, roster and
+ * `BASELINE_SCHEMA` is **40**: schema 39's tagged numeric heuristic-leaf envelope, tag law and corpus
+ * definition UNCHANGED, re-governed to THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the
+ * chair's grant of 2026-11-09 13:5x, STYLE-RULINGS-2 B10(a)): ONE rung, ONE cause, ONE declaration of the
+ * save-time-writer class, `publicProse on settlement` (writer `src/lib/saves.js`, the cloud row builder
+ * that stamps the public prose projection; the corpus executes generation and never the save path). The
+ * roster 14 -> 15, the bank 76/50 -> 77/51, and the one new row (src/domain/display/publicProse.js x1)
+ * admitted TAGGED; nothing else moves. Its full rationale lives beside `PUBLIC_PROSE_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_TRAIN_CAR4_BASELINE_SCHEMA` is **39**: schema 38's tagged numeric heuristic-leaf envelope, tag law, roster and
  * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR4 MERGE (824a8ce2f; the
  * chair's ruling of 2026-11-09): ONE rung, TWO causes, every moved row with exactly one and its class.
  * Cause 1, the goals rebuilt (03ff59084, A9): 7 rows ADMITTED (class I, `… on intent` at envoyEncounter.js),
  * 4 retired by repair (class R, npcGenerator.js's retired goal draw, `_government` 3 -> 1) and 16 GONE as
  * UNCURED INSTRUMENT EROSION (class E, recorded as such, not a repair: warSeatBooks.js `on facets`,
  * drawDeclared.js / factVocabulary.js `on merchant`). Cause 2, the structural fingerprint re-based
- * (0a18ff311): 1 row ADMITTED (class I, `family on intent`). Nothing is declared; the bank holds at 76/50.
- * Its full rationale lives beside `TRAIN_CAR4_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ * (0a18ff311): 1 row ADMITTED (class I, `family on intent`). Nothing is declared; the bank holds at 76/50
+ * (RETIRED). Its full rationale lives beside `TRAIN_CAR4_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
  *
  * `RETIRED_TRAIN_CAR3_BASELINE_SCHEMA` is **38**: schema 37's tagged numeric heuristic-leaf envelope, tag law, roster and
  * corpus definition UNCHANGED, re-governed to MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (c6ded8e3a; the
@@ -606,7 +615,11 @@ export const RETIRED_TRAIN_CAR2_BASELINE_SCHEMA = 37;
  *  at the ALLEGIANCE-CAR4 merge (the goals rebuilt; the structural fingerprint re-based). Never redefined,
  *  never deleted, so a schema-38 PREDECESSOR is still validated as schema 38. */
 export const RETIRED_TRAIN_CAR3_BASELINE_SCHEMA = 38;
-export const BASELINE_SCHEMA = 39;
+/** The RETIRED allegiance-car4 definition — schema 40's predecessor. Schema 40 re-governs it to the public
+ *  prose writer's admission (SW-B7b). Never redefined, never deleted, so a schema-39 PREDECESSOR is still
+ *  validated as schema 39. */
+export const RETIRED_TRAIN_CAR4_BASELINE_SCHEMA = 39;
+export const BASELINE_SCHEMA = 40;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1381,10 +1394,20 @@ export function validateSchema38Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 39's tagged envelope (MERGE-TRAIN, ALLEGIANCE-CAR4), re-governed by
+ *  schema 40 to the public prose writer's admission (SW-B7b). Re-bound to its own LITERAL. */
+export function validateSchema39Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema39Baseline(baseline) {
+export function validateSchema40Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

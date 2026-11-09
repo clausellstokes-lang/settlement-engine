@@ -42,6 +42,7 @@ import {
   RETIRED_TRAIN_CAR1_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
+  RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -83,6 +84,7 @@ import {
   validateSchema37Baseline,
   validateSchema38Baseline,
   validateSchema39Baseline,
+  validateSchema40Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -393,7 +395,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 37: MERGE-TRAIN at the ALLEGIANCE-CAR2 merge (one rung, one cause: the guild's push re-deals the year, 13 rows retired).
     // ⭐ SCHEMA 38: MERGE-TRAIN at the ALLEGIANCE-CAR3 merge (one rung, two causes: car 3's dial re-deals the year, 13 admitted and 5 retired; the bought watch retires 1).
     // ⭐ SCHEMA 39: MERGE-TRAIN at the ALLEGIANCE-CAR4 merge (one rung, two causes: the goals rebuilt — 7 admitted, 4 repaired, 16 uncured instrument erosion — and the fingerprint re-based, 1 admitted).
-    expect(BASELINE_SCHEMA).toBe(39);
+    // ⭐ SCHEMA 40: THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE save-time-writer declaration, `publicProse on settlement` (the roster 14 -> 15, the bank 77/51); its one new row is admitted tagged and nothing else moves.
+    expect(BASELINE_SCHEMA).toBe(40);
+    expect(RETIRED_TRAIN_CAR4_BASELINE_SCHEMA).toBe(39);
     expect(RETIRED_TRAIN_CAR3_BASELINE_SCHEMA).toBe(38);
     expect(RETIRED_TRAIN_CAR2_BASELINE_SCHEMA).toBe(37);
     expect(RETIRED_TRAIN_CAR1_BASELINE_SCHEMA).toBe(36);
@@ -783,6 +787,13 @@ function validSchema38Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-39 envelope, pinned to its own LITERAL number (the public-prose rung). */
+function validSchema39Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_TRAIN_CAR4_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -1123,9 +1134,14 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // ⭐ 38 IS RETIRED at the schema-39 rung (MERGE-TRAIN, ALLEGIANCE-CAR4) and validates its OWN literal.
     const trainCar3 = validSchema38Baseline_fixture();
     expect(validateSchema38Baseline(trainCar3)).toBe(trainCar3);
-    expect(validateSchema39Baseline(live)).toBe(live);
     expect(() => validateSchema38Baseline(live)).toThrow(/is not schema 38/);
     expect(() => validateSchema39Baseline(trainCar3)).toThrow(/is not schema 39/);
+    // ⭐ 39 IS RETIRED at the schema-40 rung (SW-B7b, the public prose writer) and validates its OWN literal.
+    const trainCar4 = validSchema39Baseline_fixture();
+    expect(validateSchema39Baseline(trainCar4)).toBe(trainCar4);
+    expect(validateSchema40Baseline(live)).toBe(live);
+    expect(() => validateSchema39Baseline(live)).toThrow(/is not schema 39/);
+    expect(() => validateSchema40Baseline(trainCar4)).toThrow(/is not schema 40/);
     expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema31Baseline(peopleCast)).toThrow(/is not schema 31/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);
