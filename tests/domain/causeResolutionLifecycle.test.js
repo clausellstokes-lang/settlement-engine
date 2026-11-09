@@ -270,6 +270,27 @@ describe('W-C5 the three covert paths (forced)', () => {
     if (rec) expect(rec.stage).not.toBe('re-caused');
     else expect(out.events.some((e) => e.stage === 'reformed')).toBe(true);
   });
+
+  // STYLE-2 C2 (SW-12; the chair's ruling on the A2·34/36/39 overlap): the re-cause, reform and
+  // historicize news open on the PERSON, never on a lower-cased cause label ("funds run short
+  // eased, but …" at 2053a809c). Red-first: all three summaries fail this at the base.
+  it('the three covert paths\' news lead with the person\'s name, never a lower-cased cause label', () => {
+    const w = causeLifecycleSelectionWeights({ plane: { e: 0.8, c: 0.3, spread: 1 }, hasTemperament: false, reformClimate: 0.2, hasAlternative: true });
+    const midRecause = (w.reform + w.recause / 2) / (w.reform + w.recause + w.historicize);
+    const runs = [
+      { stage: 'reformed', args: { personality: { dominant: 'principled', flaw: 'honest', modifier: 'incorruptible' }, forkV: 0, climateScores: { law_order: 90 } } },
+      { stage: 'historicized', args: { personality: { dominant: 'stoic' }, forkV: 0.999 } },
+      { stage: 're-caused', args: { personality: { dominant: 'ambitious', flaw: 'greedy' }, forkV: midRecause, alt: true, climateScores: { law_order: 20 } } },
+    ];
+    for (const { stage, args } of runs) {
+      const { out, npc } = resolveOnce(args);
+      const evt = out.events.find((e) => e.stage === stage);
+      expect(evt, stage).toBeTruthy();
+      expect(evt.summary.startsWith(npc.name), `${stage}: ${evt.summary}`).toBe(true);
+      // The fixture's causes (underfunded → siege-scarred): neither label may lead the line.
+      expect(evt.summary, stage).not.toMatch(/^(funds run short|the pressure of the war)/i);
+    }
+  });
 });
 
 describe('W-C5 selection-weight gradient (trait plane + climate)', () => {
