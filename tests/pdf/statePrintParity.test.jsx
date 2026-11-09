@@ -921,8 +921,10 @@ describe('SILENCE — no corpus, no Callout', () => {
     // typography lane, 2026-09-18). It is rendered as the Callout's first child rather than
     // through the `kicker` slot, whose `type.label` would upper-case it.
     const [kickerNode, proseNode] = React.Children.toArray(callouts[0].props.children);
-    // "The place" since the chair's ruling T1-2 (2026-10-30): the site lines are THE PLACE's.
-    expect(kickerNode.props.children).toBe('The place');
+    // "The place" since the chair's ruling T1-2 (2026-10-30); "Trade and the houses" since the
+    // owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 2b): the place ends on the arrival scene and
+    // the site lines stand under their own heading, on the screen and in print.
+    expect(kickerNode.props.children).toBe('Trade and the houses');
     expect(kickerNode.props.style.textTransform, 'the page would shout a heading the screen speaks')
       .toBe('none');
     expect(proseNode.props.children).toBe('The village keeps to itself.');

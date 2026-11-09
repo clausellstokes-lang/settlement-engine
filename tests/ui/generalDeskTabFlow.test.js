@@ -302,6 +302,28 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expectAbsentWithAnchor(pub, firstSite, ARRIVAL, 'a desk site line reached a public dossier');
   });
 
+  test('THE PLACE ends on the arrival scene; the woven block moves below Systems Health (OWNER-WORDS-DOSSIER item 2b)', () => {
+    // The owner, 2026-11-09: "In 'the place' the second paragraph seems redundant. The first was
+    // amazing." The block is NOT deleted (its sentences have no other home on the page): it stands
+    // under its own heading after the Systems Health section.
+    const ARRIVAL = 'Arrival scene fixture: a bell rings twice, then stops.';
+    const town = { ...SPEAKING, arrivalScene: ARRIVAL };
+    const { container, getByTestId } = render(e(OverviewTab, {
+      settlement: town, narrativeNote: null, onNavigateTab: () => {},
+      publicDossier: false, playerView: false, worldState: null,
+    }));
+    const place = getByTestId('overview-place');
+    expect(place.textContent, 'The place is its title and the arrival scene alone').toBe(`The place${ARRIVAL}`);
+    const desk = generalDeskLines(town, { publicDossier: false, stresses: [] }).overview;
+    const firstSite = onPage(siteClause(MARKET), desk.siteLines, town);
+    const block = getByTestId('overview-trade-houses');
+    expect(block.textContent.startsWith('Trade and the houses'), 'the moved block carries its heading').toBe(true);
+    expect(block.textContent).toContain(firstSite);
+    const text = container.textContent || '';
+    expect(text.indexOf('Systems Health'), 'the block follows the Systems Health section').toBeLessThan(text.indexOf('Trade and the houses'));
+    expect(text.split(firstSite).length - 1, 'the site lines print once').toBe(1);
+  });
+
   test('the identity strip carries the culture scope phrase and who governs (X-5 / T1-1)', () => {
     const town = {
       ...SPEAKING,
