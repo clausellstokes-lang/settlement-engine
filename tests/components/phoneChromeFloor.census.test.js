@@ -329,7 +329,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-09, MERGE-TRAIN at the final tip (the phone floors' one re-measure): ALLEGIANCE-CAR1's NPC-card badge line ("answers to
   // {guild}, through {handler}", npcComponents.jsx, 4e55421ea) printed 12px PROSE at phone width (dossierPhoneFloorAllViews' floors arm);
   // floored through `proseFontSize` — `floored` +1 on the three rows: 620 -> 621, 866 -> 867, 664 -> 665; `bare` unmoved.
-  '/create':                { roots: 1, files: 162, floored: 621, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  '/create':                { roots: 1, files: 162, floored: 623, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -377,7 +377,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
-  '/settlements':           { roots: 1, files: 206, floored: 867, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 869, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
@@ -392,7 +392,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
-  '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 667, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

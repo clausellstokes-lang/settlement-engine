@@ -27,7 +27,7 @@
 import { describe, test, expect, beforeAll } from 'vitest';
 import React from 'react';
 
-import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
+import { buildPrintProse, PRINT_NATIVE_POSITIONS } from '../../src/domain/display/stateProse/printProse.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { PDF_VARIANTS } from '../../src/pdf/variants.js';
 import { buildPdfLiveWorld } from '../../src/pdf/lib/liveWorld.js';
@@ -330,6 +330,9 @@ function screenProse(s, faithUnlocked = false) {
     ? screenParagraph(s, 'faith.teaser', [fa.faithTeaser])
     : screenWeave(s, [fm.line.join(' '), ...[fa.faithTeaser].map((rung) => drawnAtMount('faith.teaser', rung))
       .filter((drawn) => drawn && !deferredCell(drawn)).map((drawn) => drawn.sentence).filter(Boolean)]));
+  // SW-6 (R5): the DM's hint prints UNDER the teaser on the screen (FaithTab's `faith-hint` row), so print's
+  // `faith.hint` position is the screen's own row, never woven into the paragraph above it.
+  set('faith.hint', fm.hasEmbed ? '' : screenWeave(s, [fm.hint]));
   if (faithUnlocked) {
     set('faith.patronSeat', screenParagraph(s, 'faith.patronSeat', [
       fa.patronRank, fa.patronCults, fa.devotion, fa.pietyArc,
@@ -841,7 +844,11 @@ describe('the print desk reads the screen\'s own desks', () => {
 
   test('every printed key is a SENTENCE-rung position that the registry still mounts', () => {
     const printed = flat(buildPrintProse(full, {}));
-    const strangers = Object.keys(printed).filter((m) => !drawnAtMount(m, { sentence: 'x' })?.sentence);
+    // re-keyed by identity (SW-6 R5, the chair's ruling): the named print-native positions (`faith.hint`, the DM's
+    // note under the teaser) are not desk blocks; every other printed key is still held to the registry.
+    // The exemption is ONE named position; a second is a visible proposal, never a silent widening (the chair, 15:1x).
+    expect(PRINT_NATIVE_POSITIONS.length).toBe(1);
+    const strangers = Object.keys(printed).filter((m) => !PRINT_NATIVE_POSITIONS.includes(m) && !drawnAtMount(m, { sentence: 'x' })?.sentence);
     expect(strangers, 'a printed position the registry does not route at the sentence rung').toEqual([]);
   });
 });

@@ -33,7 +33,7 @@ import {
 } from './WarFaithDesk.jsx';
 import { useStore } from '../../../store/index.js';
 import { BORDER, CARD, FS, GREEN, INK, MUTED, RED, SECOND, BODY, sans } from '../../theme.js';
-import { chromeFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 
@@ -194,6 +194,12 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
               FAITH-POOLS) and so restates a fact the line prints, so `trimFaithDeskToPanel`
               stands it down here (F2/F4; X-50, every fact once). ── */}
           <FaithTeaserLines desk={panelDesk} settlement={settlement} lead={[(model.line || []).join(' ')]} />
+          {/* SW-6 (R5, the chair's grant of 14:4x): the DM's hint UNDER the paragraph, never in it. */}
+          {model.hint && (
+            <div data-testid="faith-hint" style={{ marginTop: 8, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.45 }}>
+              {model.hint}
+            </div>
+          )}
         </div>
       )}
     </div>

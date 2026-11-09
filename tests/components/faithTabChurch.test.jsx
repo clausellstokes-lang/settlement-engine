@@ -38,6 +38,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { FAITH_YOURS_LINE, faithReadingOf } from '../../src/domain/dossier/faithReading.js';
 import { faithDenialFindings } from '../../src/domain/coherence/faithDenialFindings.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
+import { faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const DIALS = [10, 30, 50, 70, 90];
@@ -141,10 +142,52 @@ describe('the line names the church the reading found (acceptance 2)', () => {
     const bad = [];
     for (const { seed, s } of CORPUS) {
       const printedFaith = buildPrintProse(s)?.faith?.['faith.teaser'] || '';
-      if (!printedFaith.includes(FAITH_YOURS_LINE)) bad.push(`${seed}: no line`);
+      // re-keyed by identity (SW-6 R5): the DM's line is the print position `faith.hint`, under the teaser
+      if (buildPrintProse(s)?.faith?.['faith.hint'] !== FAITH_YOURS_LINE) bad.push(`${seed}: no line`);
       for (const re of DENIALS) if (re.test(printedFaith)) bad.push(`${seed}: ${re.source}`);
     }
     expect(bad).toEqual([]);
+  });
+});
+
+/** @param {any} s @param {{premium?: boolean, publicDossier?: boolean}} view @returns {{line: string, hint: string|null}} */
+function faithParts(s, { premium = false, publicDossier = false } = {}) {
+  useStore.__reset();
+  if (premium) useStore.__set({ auth: { tier: 'premium' } });
+  const { container } = render(<FaithTab settlement={s} saveId={publicDossier ? null : 'save-1'} publicDossier={publicDossier} />);
+  const hintEl = container.querySelector('[data-testid="faith-hint"]');
+  const hint = hintEl ? hintEl.textContent : null;
+  hintEl?.remove();
+  const line = container.textContent || '';
+  cleanup();
+  return { line, hint };
+}
+
+describe('the DM\'s hint sits UNDER the faith paragraph, never joined into it (SW-6, STYLE-RULINGS-2 A1 R5)', () => {
+  it('every view of the 54: the hint is its own row, and the paragraph does not carry it', () => {
+    /** @type {string[]} */
+    const bad = [];
+    for (const { seed, s } of CORPUS) {
+      for (const view of VIEWS) {
+        const { line, hint } = faithParts(s, view);
+        if (hint !== FAITH_YOURS_LINE) bad.push(`${seed} · ${view.label}: hint ${JSON.stringify(hint)}`);
+        if (line.includes(FAITH_YOURS_LINE)) bad.push(`${seed} · ${view.label}: joined into the paragraph`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('print: the teaser paragraph does not carry it; `faith.hint` follows the teaser', () => {
+    for (const { s } of CORPUS.slice(0, 6)) {
+      const faith = buildPrintProse(s)?.faith || {};
+      expect(faith['faith.hint']).toBe(FAITH_YOURS_LINE);
+      // the parity the rule exists for, kept for the hint by its own pin: print emits the model's own `hint`
+      expect(faith['faith.hint']).toBe(faithPanelModel(s).hint);
+      // anchored: the hint is asserted positively one line above, so the absence is a measurement
+      expect(faith['faith.teaser'] || '').not.toContain(FAITH_YOURS_LINE);
+      const keys = Object.keys(faith);
+      expect(keys.indexOf('faith.hint')).toBe(keys.indexOf('faith.teaser') + 1);
+    }
   });
 });
 

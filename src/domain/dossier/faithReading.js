@@ -23,8 +23,9 @@
  * Every faith surface (the Faith tab in both views, FaithSection, the War & Faith desk's
  * faith half, the print chapter) reads this one record through `faithPanelModel`.
  *
- * AND IT SAYS WHAT EXISTS (`faithLinesOf`). Beside a church: the church, plainly, and that its
- * god and its name are the DM's to set, once. Access only: the people walk to the next
+ * AND IT SAYS WHAT EXISTS (`faithLinesOf`). Beside a church: the church, plainly; that its god
+ * and its name are the DM's to set is the HINT (`faithHintOf`), printed under the line, never
+ * in it (SW-6, R5). Access only: the people walk to the next
  * village's church. Nothing at all: the quiet-observances line. The dial is read in every case.
  * The god and the church are never named here: by the owner's rule they are the DM's.
  *
@@ -348,7 +349,7 @@ function factionLine(f, place) {
 
 /**
  * THE FAITH LINE: what the page says about this place's faith when no god has been set.
- * Sentences, in order; the caller joins them.
+ * Sentences, in order; the caller joins them. The DM's hint is not among them (`faithHintOf`).
  * @param {FaithReading} reading
  * @param {{ tierNoun?: string|null }} [opts] the settlement's own tier noun ("thorp")
  * @returns {ReadonlyArray<string>}
@@ -376,6 +377,19 @@ export function faithLinesOf(reading, { tierNoun = null } = {}) {
   if (faction) out.push(factionLine(faction, place));
   if (reading.tithe) out.push('Tithes are collected.');
   out.push(observanceOf(reading.dial));
-  out.push(FAITH_YOURS_LINE);
   return Object.freeze(out);
+}
+
+/**
+ * THE LAYOUT HINT (SW-6 CRISIS-SURFACES, STYLE-RULINGS-2 A1 R5): that the faith's god and the
+ * church's name are the DM's to set. It is a note to the DM, not a fact about the place, so it
+ * is never joined into the faith line: `faithPanelModel` carries it as `hint` and each reader
+ * prints it UNDER the paragraph (the Faith tab, the teaser, the print position `faith.hint`).
+ * Said wherever the line speaks of a church or an organised faith; the quiet-observances town,
+ * which has no church to name, gets none.
+ * @param {FaithReading} reading
+ * @returns {string|null}
+ */
+export function faithHintOf(reading) {
+  return faithHasChurchEvidence(reading) ? FAITH_YOURS_LINE : null;
 }
