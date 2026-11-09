@@ -36,12 +36,12 @@ describe('politicsRead — blocs + conspiracies', () => {
     expect(view.blocs.every(b => !b.covert)).toBe(true);
   });
 
-  it('the DM view (includeCovert true) surfaces the conspiracy as a quiet faction', () => {
+  it('the DM view (includeCovert true) surfaces the conspiracy as a quiet power', () => {
     const view = settlementBlocs({ worldState: worldWithBlocs(), settlementId: 's1', includeCovert: true });
     expect(view.conspiracyCount).toBe(1);
     const conspiracy = view.blocs.find(b => b.kind === 'conspiracy');
     expect(conspiracy.covert).toBe(true);
-    expect(conspiracy.presence).toMatch(/quiet faction/i);
+    expect(conspiracy.presence).toMatch(/quiet power/i); // SW-5: the retired word (STYLE-RULINGS-2 A8) leaves the line
   });
 
   it('includeGroundTruth adds the raw strain/end/glue truth block', () => {
