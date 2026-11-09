@@ -595,3 +595,11 @@ Pins: a new `tests/components/realmComparisonsWords.test.jsx` (the footnote, and
 | D·71's twin (:76) undated line | `at a time the record does not fix` | "undated" (the same string the relationship chronicle took in 9g; the audit's "one cure for both", landed in this writer's own commit) |
 
 Pins: `npcTrailSection.test.jsx` — the footnote, with an anchored negative on "ladder" / "rung" / "record key"; **red at the parent** (1 of 7), green here. The undated twin has no fixture: PLAUSIBLE. Registers: none moved.
+
+### 9w. `HeraldSceneContext.jsx` (D·89)
+
+| row | OLD | NEW |
+|---|---|---|
+| D·89 scene-context footnote | `These are the portrait compiler's recorded references. The Herald has not guessed a story identity for this place.` | "These are the notes the settlement's portrait was built from. The Herald has not guessed which story this place belongs to." (the "Recorded reference: {…}" label stays) |
+
+Pins: `heraldSceneContext.test.jsx` — its "has not guessed a story identity" assertion re-keyed by identity to the whole new footnote; **red at the parent** (1 of 2), green here. Registers: none moved.
