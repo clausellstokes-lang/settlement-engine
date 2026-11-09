@@ -188,16 +188,16 @@
  },
  "digests": {
   "corpusMeta": "a38f67f25927fa83aaea7a8a50163799229ca355a157842191648785bde4edea",
-  "inventory": "e88967d7aa56f66e8a80bb25b648d43a5ae990a798915656b90cfebb9c37e792",
-  "manifests": "13d80c844a3e053e2e3fa3d9a8266050c4c25fa04ee22481e78a4822beb2bfdf",
+  "inventory": "2b81fc1845ddacd1f2b413be455defb12ef0b987697c18ad0b3356178973e5bc",
+  "manifests": "cb6330ccdfc3e2823fb7eb11775297a7d103a47fa79d44a391799eee7cf76258",
   "migrationReview": "fa639629cec3d79c90bdb143215e3521eddba91ea563d24d1a579ab1f101b2cb",
   "rowTags": "1ebab9f067e5ec39f32a8c38b8e1a18c24d8ad0c66109851551ef84efc314447",
-  "scanStats": "64ecf2b1d8ca36179e3ed5a9a3159e9dceb919360a3d4b27f8809fdec3691df6",
-  "sentinel": "d53691a27b5c0c64d3b501ad3d3985cd56c521c465c96511b88c4c23719d4942"
+  "scanStats": "1539cad33d0589a833b4fc7550ee91a3fb3d76d8b279bc287435f0e55c9132e4",
+  "sentinel": "b947e5a1c58d1e696f2b9177860672b49b850d19bea808cd13f6993dc61e689c"
  },
- "frozen": "2026-11-08",
- "frozenAtSha": "e13c6982d551f2de07b6fcd6662c827de846c732",
- "identities": 1541,
+ "frozen": "2026-11-09",
+ "frozenAtSha": "0f752c2743ae1c022383b2fb3427299916251f19",
+ "identities": 1539,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -2512,9 +2512,7 @@
    "summary on founding": 1
   },
   "src/pdf/sections/Overview.jsx": {
-   "foundedBy on history": 1,
    "hook on stress": 3,
-   "origin on history": 1,
    "production on foodBalance": 2
   },
   "src/pdf/sections/SupplyChainFlow.jsx": {
@@ -2689,7 +2687,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "365b8e0d5406cc193ecfe8c1657f35ddbd60179a58a8ea2f61d413348ed96b32",
+   "digest": "91c09805697f61dc13bc45c902be8fdf7a48a1b3736ac615ac686e52d21b4eb3",
    "entries": [
     {
      "mode": "100644",
@@ -16162,8 +16160,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "690d6db511c8632be0a721332781dfbbb281a873cfbfaca6b9f2d96a795def3e",
-     "size": 27904,
+     "sha256": "019f3d495035dcb9c61dbbce83fdbbcfb27e95cf6cc02f7c22a6d2e65633ed4a",
+     "size": 29702,
      "type": "file"
     },
     {
@@ -18765,6 +18763,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/pdf/lib/crisisPrint.js",
+     "sha256": "95dad97391431345a203e491f40fd1c707d14af1c3454db87b2cd53b389dbe12",
+     "size": 2194,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/pdf/lib/customSupplyChains.js",
      "sha256": "161e2cfa961ee27d74fa8fce30ae812d67028f86d587a9580ab6bec31052d440",
      "size": 935,
@@ -18810,6 +18815,13 @@
      "path": "src/pdf/lib/liveWorld.js",
      "sha256": "835cbe268319fdead0d58464aac3f7c1bbe146481408eb3d2e6572288b0b2543",
      "size": 19961,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/pdf/lib/plotHookIndex.js",
+     "sha256": "7887a4aa696ae220298687dac0cbb00f7702a7562dbf56011139d005b4755e69",
+     "size": 2208,
      "type": "file"
     },
     {
@@ -18948,15 +18960,15 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Cover.jsx",
-     "sha256": "bf62dc90d8bad11c072de8c11592b91f2cd0ee09e71ed122c2a05ab6c0b8f234",
-     "size": 14429,
+     "sha256": "972054a2876e9fc782cdcf9330bfd65d9f4650436d08e1949715e9435d51bfb7",
+     "size": 14813,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/CrisisSections.jsx",
-     "sha256": "7fdf974e056148fb36989d12e04dfcc814b493015db0567848a8554310dad26f",
-     "size": 2767,
+     "sha256": "a067a35255882aca70327f8f41c6ccb867a68be58408ca482a81e293b1adfdf5",
+     "size": 3144,
      "type": "file"
     },
     {
@@ -18990,8 +19002,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/IdentityDailyLife.jsx",
-     "sha256": "edcbf7d70e0c016e342e9f46749d1906d8d9ae9a516bc2abebb67e35c6feafff",
-     "size": 18611,
+     "sha256": "b48ec0fe824ae1f2409a8f40aa8c38209a75732deda7c59cf00a79c76c31d2f8",
+     "size": 15843,
      "type": "file"
     },
     {
@@ -19011,22 +19023,22 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/NotableNPCs.jsx",
-     "sha256": "27f66e636cedf92e5f2d58f72a7fa6bcb9b47ec5a7e73be49e793b9c182182b1",
-     "size": 15370,
+     "sha256": "9ee099cb982855cf180b2c8c47bd9c24ad67d2ea6587317fb0d50da491cd8d76",
+     "size": 15437,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "fc2c4f8b9e9fba313b83020953920c04274486fce4a63f87d9f686ea3937670c",
-     "size": 25757,
+     "sha256": "57c34a0ec404b73478a4a56eade4fc4e6d983b0d29649a391099d56d52aa2220",
+     "size": 26561,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/PlotHooks.jsx",
-     "sha256": "ea6a5e7769404f5c620a606b09cd0d4ae8f47fe486704d4b000d7ad0bc7c9f19",
-     "size": 7403,
+     "sha256": "0bcba5f80f1f814d07732fa93c4f0e16f8c295c4f4623466ac35eb6da92bd0e6",
+     "size": 7420,
      "type": "file"
     },
     {
@@ -19039,8 +19051,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Relationships.jsx",
-     "sha256": "526eef50ffc439a5b681ddc3c997d06703bdad314b24cdab166a6bf4ed8ca63d",
-     "size": 15911,
+     "sha256": "ad2667404b5c3dae560a6239107ab8270c2f9109f0c2fca1a36e1f78012ff6ce",
+     "size": 16597,
      "type": "file"
     },
     {
@@ -19053,8 +19065,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Services.jsx",
-     "sha256": "f90366cfc66148158f98fa834a90869d8f80a6695b83369864e6193f3d60e6fe",
-     "size": 10688,
+     "sha256": "f8192106de0cafe083c66c295fe1c98e111aeed0655891299f264264372521c3",
+     "size": 10721,
      "type": "file"
     },
     {
@@ -19088,8 +19100,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/TonightAtTheTable.jsx",
-     "sha256": "3916bdb20f39d61227b5db330cc0314bdc83a470e7fc71c25f3ee2a29b743d71",
-     "size": 5087,
+     "sha256": "5cf15ae8486daade4b48f036631de17f586dea641d29f38a33c7bb3566a27320",
+     "size": 6129,
      "type": "file"
     },
     {
@@ -19102,8 +19114,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/ViabilityAssessment.jsx",
-     "sha256": "d5780f8e78e1bab2308f553381570e01a1f325a4666e98c20676d6909f5d0af5",
-     "size": 13934,
+     "sha256": "c75ade80a8efc2e73b39af05f594d3e08ef46e9eb3e5d3c9ad73167216821c2c",
+     "size": 15026,
      "type": "file"
     },
     {
@@ -19880,7 +19892,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "0052b3252fca3705f2f6f93f9ddae21ea3ffdd336051362867afb4c189249d26",
+   "digest": "fd33f0bdc867748f1f15127b5fffb3924c912baaf64df407a5ead8acdd5a5447",
    "entries": [
     {
      "mode": "100644",
@@ -33164,8 +33176,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "690d6db511c8632be0a721332781dfbbb281a873cfbfaca6b9f2d96a795def3e",
-     "size": 27904,
+     "sha256": "019f3d495035dcb9c61dbbce83fdbbcfb27e95cf6cc02f7c22a6d2e65633ed4a",
+     "size": 29702,
      "type": "file"
     },
     {
@@ -35767,6 +35779,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/pdf/lib/crisisPrint.js",
+     "sha256": "95dad97391431345a203e491f40fd1c707d14af1c3454db87b2cd53b389dbe12",
+     "size": 2194,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/pdf/lib/customSupplyChains.js",
      "sha256": "161e2cfa961ee27d74fa8fce30ae812d67028f86d587a9580ab6bec31052d440",
      "size": 935,
@@ -35812,6 +35831,13 @@
      "path": "src/pdf/lib/liveWorld.js",
      "sha256": "835cbe268319fdead0d58464aac3f7c1bbe146481408eb3d2e6572288b0b2543",
      "size": 19961,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/pdf/lib/plotHookIndex.js",
+     "sha256": "7887a4aa696ae220298687dac0cbb00f7702a7562dbf56011139d005b4755e69",
+     "size": 2208,
      "type": "file"
     },
     {
@@ -35950,15 +35976,15 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Cover.jsx",
-     "sha256": "bf62dc90d8bad11c072de8c11592b91f2cd0ee09e71ed122c2a05ab6c0b8f234",
-     "size": 14429,
+     "sha256": "972054a2876e9fc782cdcf9330bfd65d9f4650436d08e1949715e9435d51bfb7",
+     "size": 14813,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/CrisisSections.jsx",
-     "sha256": "7fdf974e056148fb36989d12e04dfcc814b493015db0567848a8554310dad26f",
-     "size": 2767,
+     "sha256": "a067a35255882aca70327f8f41c6ccb867a68be58408ca482a81e293b1adfdf5",
+     "size": 3144,
      "type": "file"
     },
     {
@@ -35992,8 +36018,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/IdentityDailyLife.jsx",
-     "sha256": "edcbf7d70e0c016e342e9f46749d1906d8d9ae9a516bc2abebb67e35c6feafff",
-     "size": 18611,
+     "sha256": "b48ec0fe824ae1f2409a8f40aa8c38209a75732deda7c59cf00a79c76c31d2f8",
+     "size": 15843,
      "type": "file"
     },
     {
@@ -36013,22 +36039,22 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/NotableNPCs.jsx",
-     "sha256": "27f66e636cedf92e5f2d58f72a7fa6bcb9b47ec5a7e73be49e793b9c182182b1",
-     "size": 15370,
+     "sha256": "9ee099cb982855cf180b2c8c47bd9c24ad67d2ea6587317fb0d50da491cd8d76",
+     "size": 15437,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "fc2c4f8b9e9fba313b83020953920c04274486fce4a63f87d9f686ea3937670c",
-     "size": 25757,
+     "sha256": "57c34a0ec404b73478a4a56eade4fc4e6d983b0d29649a391099d56d52aa2220",
+     "size": 26561,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/PlotHooks.jsx",
-     "sha256": "ea6a5e7769404f5c620a606b09cd0d4ae8f47fe486704d4b000d7ad0bc7c9f19",
-     "size": 7403,
+     "sha256": "0bcba5f80f1f814d07732fa93c4f0e16f8c295c4f4623466ac35eb6da92bd0e6",
+     "size": 7420,
      "type": "file"
     },
     {
@@ -36041,8 +36067,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Relationships.jsx",
-     "sha256": "526eef50ffc439a5b681ddc3c997d06703bdad314b24cdab166a6bf4ed8ca63d",
-     "size": 15911,
+     "sha256": "ad2667404b5c3dae560a6239107ab8270c2f9109f0c2fca1a36e1f78012ff6ce",
+     "size": 16597,
      "type": "file"
     },
     {
@@ -36055,8 +36081,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Services.jsx",
-     "sha256": "f90366cfc66148158f98fa834a90869d8f80a6695b83369864e6193f3d60e6fe",
-     "size": 10688,
+     "sha256": "f8192106de0cafe083c66c295fe1c98e111aeed0655891299f264264372521c3",
+     "size": 10721,
      "type": "file"
     },
     {
@@ -36090,8 +36116,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/TonightAtTheTable.jsx",
-     "sha256": "3916bdb20f39d61227b5db330cc0314bdc83a470e7fc71c25f3ee2a29b743d71",
-     "size": 5087,
+     "sha256": "5cf15ae8486daade4b48f036631de17f586dea641d29f38a33c7bb3566a27320",
+     "size": 6129,
      "type": "file"
     },
     {
@@ -36104,8 +36130,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/ViabilityAssessment.jsx",
-     "sha256": "d5780f8e78e1bab2308f553381570e01a1f325a4666e98c20676d6909f5d0af5",
-     "size": 13934,
+     "sha256": "c75ade80a8efc2e73b39af05f594d3e08ef46e9eb3e5d3c9ad73167216821c2c",
+     "size": 15026,
      "type": "file"
     },
     {
@@ -36875,7 +36901,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "747d6cdb722d2d4f899b2f6033353c35822b07dfa18469028d7a0491442806b9",
+   "digest": "6acde222d380f3105c30b8a7afc292399e2967edbbd63f81f5456ae956120c7d",
    "entries": [
     {
      "mode": "100644",
@@ -50278,8 +50304,8 @@
     {
      "mode": "100644",
      "path": "src/foundry/journalPages.js",
-     "sha256": "690d6db511c8632be0a721332781dfbbb281a873cfbfaca6b9f2d96a795def3e",
-     "size": 27904,
+     "sha256": "019f3d495035dcb9c61dbbce83fdbbcfb27e95cf6cc02f7c22a6d2e65633ed4a",
+     "size": 29702,
      "type": "file"
     },
     {
@@ -52881,6 +52907,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/pdf/lib/crisisPrint.js",
+     "sha256": "95dad97391431345a203e491f40fd1c707d14af1c3454db87b2cd53b389dbe12",
+     "size": 2194,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/pdf/lib/customSupplyChains.js",
      "sha256": "161e2cfa961ee27d74fa8fce30ae812d67028f86d587a9580ab6bec31052d440",
      "size": 935,
@@ -52926,6 +52959,13 @@
      "path": "src/pdf/lib/liveWorld.js",
      "sha256": "835cbe268319fdead0d58464aac3f7c1bbe146481408eb3d2e6572288b0b2543",
      "size": 19961,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/pdf/lib/plotHookIndex.js",
+     "sha256": "7887a4aa696ae220298687dac0cbb00f7702a7562dbf56011139d005b4755e69",
+     "size": 2208,
      "type": "file"
     },
     {
@@ -53064,15 +53104,15 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Cover.jsx",
-     "sha256": "bf62dc90d8bad11c072de8c11592b91f2cd0ee09e71ed122c2a05ab6c0b8f234",
-     "size": 14429,
+     "sha256": "972054a2876e9fc782cdcf9330bfd65d9f4650436d08e1949715e9435d51bfb7",
+     "size": 14813,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/CrisisSections.jsx",
-     "sha256": "7fdf974e056148fb36989d12e04dfcc814b493015db0567848a8554310dad26f",
-     "size": 2767,
+     "sha256": "a067a35255882aca70327f8f41c6ccb867a68be58408ca482a81e293b1adfdf5",
+     "size": 3144,
      "type": "file"
     },
     {
@@ -53106,8 +53146,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/IdentityDailyLife.jsx",
-     "sha256": "edcbf7d70e0c016e342e9f46749d1906d8d9ae9a516bc2abebb67e35c6feafff",
-     "size": 18611,
+     "sha256": "b48ec0fe824ae1f2409a8f40aa8c38209a75732deda7c59cf00a79c76c31d2f8",
+     "size": 15843,
      "type": "file"
     },
     {
@@ -53127,22 +53167,22 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/NotableNPCs.jsx",
-     "sha256": "27f66e636cedf92e5f2d58f72a7fa6bcb9b47ec5a7e73be49e793b9c182182b1",
-     "size": 15370,
+     "sha256": "9ee099cb982855cf180b2c8c47bd9c24ad67d2ea6587317fb0d50da491cd8d76",
+     "size": 15437,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/Overview.jsx",
-     "sha256": "fc2c4f8b9e9fba313b83020953920c04274486fce4a63f87d9f686ea3937670c",
-     "size": 25757,
+     "sha256": "57c34a0ec404b73478a4a56eade4fc4e6d983b0d29649a391099d56d52aa2220",
+     "size": 26561,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/PlotHooks.jsx",
-     "sha256": "ea6a5e7769404f5c620a606b09cd0d4ae8f47fe486704d4b000d7ad0bc7c9f19",
-     "size": 7403,
+     "sha256": "0bcba5f80f1f814d07732fa93c4f0e16f8c295c4f4623466ac35eb6da92bd0e6",
+     "size": 7420,
      "type": "file"
     },
     {
@@ -53155,8 +53195,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Relationships.jsx",
-     "sha256": "526eef50ffc439a5b681ddc3c997d06703bdad314b24cdab166a6bf4ed8ca63d",
-     "size": 15911,
+     "sha256": "ad2667404b5c3dae560a6239107ab8270c2f9109f0c2fca1a36e1f78012ff6ce",
+     "size": 16597,
      "type": "file"
     },
     {
@@ -53169,8 +53209,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Services.jsx",
-     "sha256": "f90366cfc66148158f98fa834a90869d8f80a6695b83369864e6193f3d60e6fe",
-     "size": 10688,
+     "sha256": "f8192106de0cafe083c66c295fe1c98e111aeed0655891299f264264372521c3",
+     "size": 10721,
      "type": "file"
     },
     {
@@ -53204,8 +53244,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/TonightAtTheTable.jsx",
-     "sha256": "3916bdb20f39d61227b5db330cc0314bdc83a470e7fc71c25f3ee2a29b743d71",
-     "size": 5087,
+     "sha256": "5cf15ae8486daade4b48f036631de17f586dea641d29f38a33c7bb3566a27320",
+     "size": 6129,
      "type": "file"
     },
     {
@@ -53218,8 +53258,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/ViabilityAssessment.jsx",
-     "sha256": "d5780f8e78e1bab2308f553381570e01a1f325a4666e98c20676d6909f5d0af5",
-     "size": 13934,
+     "sha256": "c75ade80a8efc2e73b39af05f594d3e08ef46e9eb3e5d3c9ad73167216821c2c",
+     "size": 15026,
      "type": "file"
     },
     {
@@ -54305,23 +54345,23 @@
   }
  },
  "scanStats": {
-  "files": 2427,
-  "reads": 139178,
-  "resolved": 11120,
-  "unresolved": 128058
+  "files": 2429,
+  "reads": 139141,
+  "resolved": 11119,
+  "unresolved": 128022
  },
  "scannerProvenance": {
   "detectorDigest": "4e02c2d6d2fa0f27f3ebe4da2b6db07da3888d6fff64767c718a32d9f646e025",
-  "executionTreeDigest": "365b8e0d5406cc193ecfe8c1657f35ddbd60179a58a8ea2f61d413348ed96b32",
-  "scanTreeDigest": "0052b3252fca3705f2f6f93f9ddae21ea3ffdd336051362867afb4c189249d26",
-  "sourceTreeDigest": "747d6cdb722d2d4f899b2f6033353c35822b07dfa18469028d7a0491442806b9",
+  "executionTreeDigest": "91c09805697f61dc13bc45c902be8fdf7a48a1b3736ac615ac686e52d21b4eb3",
+  "scanTreeDigest": "fd33f0bdc867748f1f15127b5fffb3924c912baaf64df407a5ead8acdd5a5447",
+  "sourceTreeDigest": "6acde222d380f3105c30b8a7afc292399e2967edbbd63f81f5456ae956120c7d",
   "unscannedInputDigest": "2a8cd80b054d65dc5c1c9ebde1d33232cb37d0cb12d896c6497605969bfec9d0"
  },
  "schema": 35,
  "sentinel": {
-  "resolvedReads": 11120,
+  "resolvedReads": 11119,
   "totalKeys": 12068,
   "usableShapes": 520
  },
- "total": 2187
+ "total": 2185
 }
