@@ -88,6 +88,7 @@ export const DEFENSE_STRESS_STATUS = Object.freeze(
  * @property {{ tradeRouteAccess?: string }} [config]
  * @property {Array<{ reason?: unknown, severity?: unknown }>} [structuralViolations]
  * @property {{ factions?: Array<{ category?: unknown } | null | undefined> }} [powerStructure] the roster `deriveCriminalStructure` reads for a criminal faction
+ * @property {unknown} [_seed] the record's seed — the ring note's vantage picker reads it (`withRingVantage`, SW-B5)
  */
 
 const DEFENSE_VULNERABILITY_RE = /fort|milit|wall|garrison|defense|guard|structural|survival/i;
