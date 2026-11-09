@@ -20,7 +20,10 @@
 | `0f752c274` | The tuning register refrozen through its door. `CRISIS_CAST_TUNING` gains one dependent (`src/pdf/lib/crisisPrint.js`); no value moved. |
 | `e5ac1fb92` | The observed-shape baseline re-frozen through `--write`, a shrink: 1,541 → 1,539 identities. The Overview's dead `history.foundedBy` / `history.origin` guard reads left. |
 | `0645e171a` | The lighting census refrozen through its door. Titles 28,695 → 28,703 and suite titles 7,717 → 7,718: the B4 block. |
-| this record | The roster bumped: `dated` 168 → 169. |
+| `68b5ba72a` | This record; the roster bumped: `dated` 168 → 169. |
+| `afd314dce` | **The chair's B4 ruling (2): one home per EXPORT.** The manifest was widened to the one-prop pass in `src/pdf/SettlementPDF.jsx`. See §3a. |
+| `0400e79bc` | The lighting census refrozen through its door: titles 28,703 → 28,704 (the ruling's pin). |
+| (this update) | The record carries §3a and corrects §8. |
 
 **Files touched:**
 - **Product:** `src/pdf/sections/{Cover, CrisisSections, IdentityDailyLife, NotableNPCs, Overview, PlotHooks, Relationships, Services, TonightAtTheTable, ViabilityAssessment}.jsx`, the new `src/pdf/lib/plotHookIndex.js` and `src/pdf/lib/crisisPrint.js`, and `src/foundry/journalPages.js`. In the journal, only the duplicated sections and the machinery figures were touched; no label changed, including the "Faction" headings, which are SW-8's.
@@ -120,6 +123,30 @@ STYLE-0 §3's ten rows, at the tip:
 | 21 | `# Power & Factions` | "Public legitimacy: 23" | "Public legitimacy: Legitimacy Crisis" (the band the PDF prints beside its score) |
 | 22 | `# Faith & War` | "Posture: {band} (aggression ×1.23)"; "War-weary: {Band} (0.47)" | "Posture: {band}"; "War-weary: {Band}" |
 
+### 3a. The chair's ruling (2), 2026-11-09: one home per EXPORT (`afd314dce`)
+
+**The ruling, verbatim:** "a variant that omits History must carry the full text in the home it does have (the Overview's tensions and historical character print in full there when History is absent, and as label plus page number when History is present)".
+
+**The pass.** `SettlementPDF.jsx` passes `historyPrinted = inc('historyFounding')` to the Overview. `journalPages.js` does the same for its Overview page.
+
+| # | where | OLD (after rows 2–3 above) | NEW |
+|---|---|---|---|
+| 23 | Overview › Tensions & Conflicts, History in the variant | label + parties | **"Each tension in full: History & Founding (17)."**, a new connective line printed once under the heading, then label + parties |
+| 24 | Overview › Tensions & Conflicts, no History (campaign_state) | label + parties (the description printed nowhere in the export) | label + "{description}" + parties: the home |
+| 25 | Overview › origin block, History in the variant | "ORIGIN" · "Reason settled: {reason}" | "ORIGIN" · **"Historical character: History & Founding (17)."** (new) · "Reason settled: {reason}" |
+| 26 | Overview › origin block, no History | "ORIGIN" · reason (the character printed nowhere) | "CHARACTER & ORIGIN" · "{historical character}" · "Reason settled: {reason}" |
+| 27 | Foundry `# Overview`, no History page | — | "## Character" + "{historical character}" |
+| 28 | History › Historical events | an event's sentence AND the same sentence on the live tension it seeded (×2 in one chapter, e.g. Copanucan's occupation) | the event keeps its title and lasting effects; the sentence prints once, on Live tensions |
+
+**Red-first.** The case "each tension description and the historical character print exactly once per export, in every variant" (draft_brief, canon_dossier, campaign_state; full SettlementPDF renders) was red at `68b5ba72a`: canon printed the occupation sentence twice (row 28). It is green at `afd314dce`.
+
+**Registers.**
+- The `.character` census of `characterDrift.test.js` re-counted by cause: `Overview.jsx` 5, `journalPages.js` 2.
+- The prose-numerics addresses held.
+- The lighting census +1 title.
+
+**The twelve after the ruling:** PDF 12, Foundry 2, screen 5 (2+ counts: PDF 135, Foundry 25). At the clean tip `0400e79bc`: gm, fence, herald, witness and the PDF view-model snapshot are green (5 files, 38 tests). The PDF and Foundry suites are green.
+
 **Struck under the census law:** none. Every NEW above uses only fields its writer already read:
 - the tension's label and parties;
 - the hook's title and its place in the chapter's own grouping;
@@ -196,10 +223,11 @@ The other phrases of the list print 0 in both exports at both shas. Every move i
 - the cell-table identity;
 - the twelve's text read at the tip.
 
+Also CONFIRMED: the ruling (2) pin, red at `68b5ba72a` and green at `afd314dce`.
+
 **PLAUSIBLE:**
 - the splitter's one-sentence difference from the audit's (58 vs 57);
-- that the Tonight pointer "In full in Plot Hooks (04): History 01" reads well to a DM. The group label is the chapter's own pill, but "History" for a tension's hook is the screen's grouping word, not mine;
-- that the campaign_state variant's loss (§8, item 2) is acceptable.
+- that the Tonight pointer "In full in Plot Hooks (04): History 01" reads well to a DM. The group label is the chapter's own pill, but "History" for a tension's hook is the screen's grouping word, not mine.
 
 **Process note, said plainly:** the B4 block was appended to `tests/pdf/restoredSubsections.test.js` with a shell heredoc. The brief asks for the Edit tool under `tests/`; the classifier did not refuse it, and every later test edit used Edit.
 
@@ -209,11 +237,11 @@ The other phrases of the list print 0 in both exports at both shas. Every move i
   - Power-card figures: "raw {n}" on every card (`PowerStructure.jsx:236`), and the legitimacy modifiers "-10 Prosperity · -12 Safety …" beside the score.
   - The two card sentences repeated across powers (§2).
   - Out of the manifest; **SW-7 (B7)**, the word **SW-8**. Reported to the chair as a STOP with this default.
-- **Variant `campaign_state`.** It includes the Overview and Plot Hooks but not History. Under the keep-on rule, the tension descriptions and the historical character therefore print nowhere in that variant; their labels and the origin line still do. A section cannot see the variant. The cure is one prop through `src/pdf/SettlementPDF.jsx` (out of the manifest), or a ruling that the lean variant carries labels only. Reported to the chair.
+- **Variant `campaign_state`:** CURED by the chair's ruling (2), §3a.
 - **13 Notable NPCs.** The "How they deal" pool repeats inside a city (3 of 12). It is the birth pool, out of the manifest.
 - **14 Relationships.** The pair-pool lines repeat on different pairs (6 of 12): `npcData.js`, SW-7 (A9).
 - **02 Tonight.** The seat-holder's want also prints as Notable NPCs › Motivation (×2: Tonight is quick prep, the card is the person's home), left. The lever lines' "Parish churches (10-30)" catalogue range: SW-6 / SW-2.
-- **17 History.** An event's description and the live tension it seeded can print the same sentence in one chapter (×2). Both are History's own; left.
+- **17 History.** The event / live-tension pair is CURED in §3a, row 28.
 - **05 Services / 07 Economics.** The chains print as cards and as flows: two vantages, left.
 - **11 Viability.** "Food balance −451" in Key metrics beside the Overview's "Deficit: 4" (two units for one fact) is a PLAUSIBLE contradiction for **SW-B1**. "Judged at the first survey; not re-run since." stays as the owner's queue #28.
 - **01 Overview.** The Systems Health caption stays as queue #28.
