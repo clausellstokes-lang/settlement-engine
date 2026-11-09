@@ -7,7 +7,13 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **36**: schema 35's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
+ * `BASELINE_SCHEMA` is **37**: schema 36's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
+ * definition UNCHANGED, re-governed to THE GOALS REBUILT (ALLEGIANCE-CAR4, 2026-11-09): a card's goal is drawn at the
+ * coherence seam's end by `generators/people/goals.js` and carries the keyed `goal.intent.{short,long}`, so the
+ * corpus's records gain four shapes and the stress override's goal table is re-homed. Its full rationale lives beside
+ * `GOALS_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_GUILD_PUSH_BASELINE_SCHEMA` is **36**: schema 35's tagged numeric heuristic-leaf envelope, tag law, roster and corpus
  * definition UNCHANGED, re-governed to THE GUILD'S PUSH AND THE DERIVED HALL (ALLEGIANCE-CAR2, 2026-11-09): the rank
  * deal weights hidden agents and the hall-capture state is derived at the coherence seam, so the corpus's year
  * re-deals. Its full rationale lives beside `GUILD_PUSH_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
@@ -545,7 +551,10 @@ export const RETIRED_ALLEGIANCE_BASELINE_SCHEMA = 34;
 /** The RETIRED J-19 pulse definition — schema 36's predecessor. Never redefined, never deleted, so a schema-35
  *  PREDECESSOR is still validated as schema 35. */
 export const RETIRED_J19_PULSE_BASELINE_SCHEMA = 35;
-export const BASELINE_SCHEMA = 36;
+/** The RETIRED guild-push definition — schema 37's predecessor. Never redefined, never deleted, so a schema-36
+ *  PREDECESSOR is still validated as schema 36. */
+export const RETIRED_GUILD_PUSH_BASELINE_SCHEMA = 36;
+export const BASELINE_SCHEMA = 37;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1290,10 +1299,20 @@ export function validateSchema35Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 36's tagged envelope (the guild's push and the derived hall), re-governed by
+ *  schema 37 to the goals rebuilt. Re-bound to its own LITERAL now that the authority has moved to 37. */
+export function validateSchema36Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_GUILD_PUSH_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema36Baseline(baseline) {
+export function validateSchema37Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

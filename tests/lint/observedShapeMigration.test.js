@@ -30,6 +30,7 @@ import {
   ALLEGIANCE_TARGET_SCHEMA,
   J19_PULSE_TARGET_SCHEMA,
   GUILD_PUSH_TARGET_SCHEMA,
+  GOALS_TARGET_SCHEMA,
   declaredBankOf,
   DEAD_DEPENDENCY_TARGET_SCHEMA,
   PRESET_LIGHT_TARGET_SCHEMA,
@@ -1200,7 +1201,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ AND AGAIN AT THE ALLEGIANCE RUNG: 34 takes a schema-33 predecessor.
       // ⭐ AND AGAIN AT THE J-19 PULSE RUNG: 35 takes a schema-34 predecessor.
       // ⭐ AND AGAIN AT THE GUILD-PUSH RUNG: 36 takes a schema-35 predecessor.
-      ])).toThrow(/predecessor baseline must be a schema-35 object/);
+      // ⭐ AND AGAIN AT THE GOALS RUNG: 37 takes a schema-36 predecessor.
+      ])).toThrow(/predecessor baseline must be a schema-36 object/);
       // …and the RETIRED live target of the previous mint is still reachable by
       // name, still refusing the same schema-2 predecessor for its own reason.
       expect(() => runMigration([
@@ -1256,10 +1258,12 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ AND UP AGAIN AT THE ALLEGIANCE RUNG: 34 became a defined rung on 2026-11-08 (ALLEGIANCE-CAR1),
       // so the probe moved to 35 and the message named 34 as the live leaf.
       // ⭐ AND UP AGAIN AT THE GUILD-PUSH RUNG: 36 became a defined rung on 2026-11-09 (ALLEGIANCE-CAR2),
-      // so the probe moves to 37 and the message names 36 as the live leaf.
+      // so the probe moved to 37 and the message named 36 as the live leaf.
+      // ⭐ AND UP AGAIN AT THE GOALS RUNG: 37 became a defined rung on 2026-11-09 (ALLEGIANCE-CAR4),
+      // so the probe moves to 38 and the message names 37 as the live leaf.
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=37',
-      ])).toThrow(/--target-schema must be 36/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=38',
+      ])).toThrow(/--target-schema must be 37/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -1337,7 +1341,9 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(ALLEGIANCE_TARGET_SCHEMA).toBe(34);
     // ⚠ 35 IS NOW A RETIRED TARGET AND KEEPS ITS NUMBER, by the same law as 8 above.
     expect(J19_PULSE_TARGET_SCHEMA).toBe(35);
+    // ⚠ 36 IS NOW A RETIRED TARGET AND KEEPS ITS NUMBER, by the same law as 8 above.
     expect(GUILD_PUSH_TARGET_SCHEMA).toBe(36);
+    expect(GOALS_TARGET_SCHEMA).toBe(37);
     // ⭐ FROM 19 ONWARD A RUNG DECLARES ITS POST-BANK AS DATA, and the checker's write
     // refuses a migration whose measured bank disagrees (`assertBankTwins`). 19's figure
     // is read off the register `fe021a487` froze; 20 moves no row and declares the same.
@@ -1396,6 +1402,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(declaredBankOf(J19_PULSE_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     // ⭐ AND 36 HOLDS IT: the guild's push moves no row on a declared identity.
     expect(declaredBankOf(GUILD_PUSH_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
+    // ⭐ AND 37 HOLDS IT: the goals rebuilt move no row on a declared identity.
+    expect(declaredBankOf(GOALS_TARGET_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(LINEAGE_REANCHOR_TARGET_SCHEMA)).toBeNull();
     expect(Object.isFrozen(declaredBankOf(BANK_FENCE_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(RELATIONSHIPS_MOUNT_TARGET_SCHEMA))).toBe(true);
@@ -1414,6 +1422,7 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(Object.isFrozen(declaredBankOf(ALLEGIANCE_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(J19_PULSE_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(GUILD_PUSH_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(GOALS_TARGET_SCHEMA))).toBe(true);
     // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
     // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
     // had run — is not expressible, because no such pairing exists.
@@ -1477,6 +1486,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       35: 34,
       // ⭐ 36 -> 35, the guild-push rung (ALLEGIANCE-CAR2). The chain stays SINGLE-STEP.
       36: 35,
+      // ⭐ 37 -> 36, the goals rung (ALLEGIANCE-CAR4). The chain stays SINGLE-STEP.
+      37: 36,
     });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
@@ -1510,13 +1521,13 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // schema 10 became live. A probe left pointing at a number the table has
     // since adopted stops proving the predicate is total and starts proving
     // nothing at all, while still passing for the wrong reason.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 37))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36;/);
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 38))
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36 or 37;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36;/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36 or 37;/);
 
     // A6 positive arm: one valid schema-6 envelope can advance exactly one rung
     // to 7, retaining the numeric inventory alphabet and reconciliation ledger.

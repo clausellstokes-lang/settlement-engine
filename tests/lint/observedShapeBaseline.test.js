@@ -39,6 +39,7 @@ import {
   RETIRED_VEIL_MERGE_BASELINE_SCHEMA,
   RETIRED_ALLEGIANCE_BASELINE_SCHEMA,
   RETIRED_J19_PULSE_BASELINE_SCHEMA,
+  RETIRED_GUILD_PUSH_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -77,6 +78,7 @@ import {
   validateSchema34Baseline,
   validateSchema35Baseline,
   validateSchema36Baseline,
+  validateSchema37Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -384,7 +386,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // ⭐ SCHEMA 34: THE HIDDEN ALLEGIANCE (ALLEGIANCE-CAR1, 2026-11-08): schema 33's envelope, tag law, roster and corpus definition UNCHANGED; the retired corrupt mark leaves the birth record and the card's `allegiance` comes in; 11 rows admitted, 28 go, 1 increases; nothing is declared and the bank holds at 76/50.
     // ⭐ SCHEMA 35: THE J-19 PULSE CURE (ALLEGIANCE-CAR1, 2026-11-08): schema 34's envelope, tag law, roster and corpus definition UNCHANGED; the simulation no longer re-rolls a v3 card's corruption and the corpus's year re-deals; 23 rows admitted, none go, none move; nothing is declared and the bank holds at 76/50.
     // ⭐ SCHEMA 36: THE GUILD'S PUSH AND THE DERIVED HALL (ALLEGIANCE-CAR2, 2026-11-09): schema 35's envelope, tag law, roster and corpus definition UNCHANGED; the rank deal weights hidden agents and the hall-capture state is derived at the coherence seam, so the corpus's year re-deals; none admitted, 12 go, none move; nothing is declared and the bank holds at 76/50.
-    expect(BASELINE_SCHEMA).toBe(36);
+    // ⭐ SCHEMA 37: THE GOALS REBUILT (ALLEGIANCE-CAR4, 2026-11-09): schema 36's envelope, tag law, roster and corpus definition UNCHANGED; a card's goal is drawn at the coherence seam's end and carries the keyed `goal.intent`, so the corpus's records gain four shapes and the stress override's goal table is re-homed; 8 rows admitted, 19 go (16 of them uncured instrument erosion, recorded as such), 1 decreases; nothing is declared and the bank holds at 76/50.
+    expect(BASELINE_SCHEMA).toBe(37);
+    expect(RETIRED_GUILD_PUSH_BASELINE_SCHEMA).toBe(36);
     expect(RETIRED_J19_PULSE_BASELINE_SCHEMA).toBe(35);
     expect(RETIRED_ALLEGIANCE_BASELINE_SCHEMA).toBe(34);
     expect(RETIRED_VEIL_MERGE_BASELINE_SCHEMA).toBe(33);
@@ -750,6 +754,13 @@ function validSchema35Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-36 envelope, pinned to its own LITERAL number (the goals rung). */
+function validSchema36Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_GUILD_PUSH_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -1067,7 +1078,12 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // ⭐ 35 IS RETIRED at the schema-36 rung (the guild's push) and validates its OWN literal; `live` belongs to 36.
     const j19Pulse = validSchema35Baseline_fixture();
     expect(validateSchema35Baseline(j19Pulse)).toBe(j19Pulse);
-    expect(validateSchema36Baseline(live)).toBe(live);
+    // ⭐ 36 IS RETIRED at the schema-37 rung (the goals rebuilt) and validates its OWN literal; `live` belongs to 37.
+    const guildPush = validSchema36Baseline_fixture();
+    expect(validateSchema36Baseline(guildPush)).toBe(guildPush);
+    expect(validateSchema37Baseline(live)).toBe(live);
+    expect(() => validateSchema36Baseline(live)).toThrow(/is not schema 36/);
+    expect(() => validateSchema37Baseline(guildPush)).toThrow(/is not schema 37/);
     expect(() => validateSchema35Baseline(live)).toThrow(/is not schema 35/);
     expect(() => validateSchema36Baseline(j19Pulse)).toThrow(/is not schema 36/);
     expect(() => validateSchema34Baseline(live)).toThrow(/is not schema 34/);
