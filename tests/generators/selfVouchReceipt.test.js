@@ -32,8 +32,11 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
   beforeAll(async () => { await ensureLaws(); });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (no critical issue, and the battery finds food-words, defense-words and tier-noun): was soak1k-40. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
-  it('soak1k-178: the battery finds the contradictions and the page does not vouch', () => {
-    const { settlement } = birth(178);
+  // RE-KEYED BY IDENTITY (URBAN-FIX C-1): soak1k-178's last finding was the culture's raw foodways sentence, which the
+  // record no longer stores (the food record's line is the one home); its receipt passes. Re-pointed to the first seed
+  // of the 1,000 with no critical issue whose battery still finds a contradiction (probed at the cure): was soak1k-178.
+  it('soak1k-7: the battery finds the contradictions and the page does not vouch', () => {
+    const { settlement } = birth(7);
     expect(settlement.economicViability.metrics.criticalIssueCount).toBe(0);
     const judgment = battery(settlement);
     expect(judgment.status).toBe('needs_review');
@@ -45,7 +48,7 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     // does not vouch (below).
     // RE-KEYED BY CAUSE (URBAN-FIX B-P1, 1b3436acd): the tier-noun finding was the Shadows District's "Old town or
     // slums" on this city, the instrument's false positive the licence row cured; one contradiction remains.
-    expect(judgment.findings.map((f) => f.path)).toEqual(['battery.food-words']);
+    expect(judgment.findings.map((f) => f.path)).toEqual(['battery.defense-words', 'battery.defense-words']);
     expect(verdict(settlement)).not.toMatch(VOUCH); // anchored: the next line pins the live contradiction verdict
     expect(verdict(settlement)).toMatch(/cannot all be true/);
   });
