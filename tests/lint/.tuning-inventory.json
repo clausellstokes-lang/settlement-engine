@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "e292479245d27e6eaaecb7243232f655c37df3cb",
-  "measuredBy": "MERGE-TRAIN (ALLEGIANCE-CAR4 merge point)",
+  "measuredAtSha": "94906a722681564605eb9e35c212fdab001773c1",
+  "measuredBy": "SW-B7b fourth seat",
   "date": "2026-11-09",
-  "note": "car 4 composed: GOAL_FAMILY_TUNING and LAW_PURSUIT_TUNING",
+  "note": "SW-B7b stressors desk (94906a722): stressorsStateProse.js is now imported by its one caller components/new/stressorsDeskRead.js; WIND_DOWN_FRACTION dependents moved, no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1158,7 +1158,7 @@
         "value": 0.25
       },
       "dependents": [
-        "src/components/new/tabs/OverviewTab.jsx",
+        "src/components/new/stressorsDeskRead.js",
         "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
