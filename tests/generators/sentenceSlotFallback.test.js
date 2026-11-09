@@ -66,7 +66,8 @@ describe('the one-NPC thorps of rung 2', () => {
     expect(s.npcs).toHaveLength(1);
     expect(s.npcs[0].secret).toEqual({
       what: 'Knows who did it and has said nothing. The betrayer is someone they owe a significant debt to',
-      stakes: 'The debt is called in if they speak. The settlement suffers if they don\'t. They\'ve been choosing themselves for six weeks',
+      // SW-5 (STYLE-RULINGS-2 A4, the owner's style law): the stakes' mannered close re-worded, the same row and slot
+      stakes: 'The debt is called in if they speak. The settlement suffers if they don\'t. For six weeks they have kept quiet to save themselves',
     });
     expect(JSON.stringify(s.npcs[0].secret)).not.toMatch(/\bSomeone\b/); // anchored: the secret is pinned to its exact text above
     expect(narrativeQuality(s)?.findings).toEqual([]);

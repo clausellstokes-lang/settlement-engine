@@ -15,7 +15,7 @@
  * reads), so no mocks are needed — the caller owns the flag/pref gating.
  */
 
-import { CRISIS_SUMMARY_VANTAGES } from '../../src/domain/crisis/crisisSummaryVantage.js';
+import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, cleanup, fireEvent, screen } from '@testing-library/react';
 
@@ -50,10 +50,11 @@ describe('TableView', () => {
 
   it('opens on the active crisis when the record carries one', () => {
     render(<TableView settlement={{ ...fixture(), stress: [{ type: 'famine', label: 'Famine' }] }} onClose={onClose} />);
-    // W4 PEOPLE second seat (#29, WAVE-RULINGS item 2): Tonight prints the crisis from the OFFICIAL vantage,
-    // `<type>. <line>`, read from the vantage table so a re-wording moves the pin with it.
-    const official = CRISIS_SUMMARY_VANTAGES.famine.official.replace(/\{name\}/g, 'Hollowmere');
-    expect(screen.getByText(`Famine. ${official}`)).toBeTruthy();
+    // W4 PEOPLE second seat (#29, WAVE-RULINGS item 2): Tonight prints the crisis's Tonight line,
+    // `<type>. <line>`; SW-5 (the §8 floor) re-keyed the pin to the surface's own pool, the town's seed
+    // choosing the vantage, so a re-wording moves the pin with it.
+    const tonight = crisisSummaryForSurface({ type: 'famine' }, 'Hollowmere', 'tonight');
+    expect(screen.getByText(`Famine. ${tonight}`)).toBeTruthy();
   });
 
   it('a bare record renders the sheet with nothing invented', () => {

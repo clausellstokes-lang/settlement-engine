@@ -231,7 +231,7 @@ export const CRIER_FRAMES = Object.freeze({
   dear: Object.freeze([
     '{label} runs {phrase}: dear, {receipt}.',
     '{label} is dear now, {phrase}, {receipt}.',
-    "They're asking {phrase} for {label}: dear, {receipt}.",
+    '{label} sells at {phrase} now: dear, {receipt}.',
     '{label} fetches {phrase} these days: dear, {receipt}.',
   ]),
   cheap: Object.freeze([

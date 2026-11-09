@@ -58,8 +58,8 @@ describe('2. coup verdict headline', () => {
 
 describe('3. politicsRead projectBloc presence', () => {
   const ws = (/** @type {string[]} */ members) => ({ politicsLedgers: { s1: { blocs: [{ id: 'b1', members, end: 'seats', strain: 0, sinceTick: 0 }] } } });
-  it('a memberless open bloc opens on "A faction"; a held member is unchanged', () => {
-    expect(settlementBlocs({ worldState: ws([]), settlementId: 's1' })?.blocs[0].presence).toBe('A faction stand together as a bloc, for a share of the seats.');
+  it('a memberless open bloc opens on "A power" (SW-5: the retired word, STYLE-RULINGS-2 A8); a held member is unchanged', () => {
+    expect(settlementBlocs({ worldState: ws([]), settlementId: 's1' })?.blocs[0].presence).toBe('A power stand together as a bloc, for a share of the seats.');
     expect(settlementBlocs({ worldState: ws(['the Guild']), settlementId: 's1' })?.blocs[0].presence).toBe('the Guild stand together as a bloc, for a share of the seats.');
   });
 });
