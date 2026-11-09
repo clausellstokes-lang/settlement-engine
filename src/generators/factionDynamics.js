@@ -240,6 +240,87 @@ export function computeCriminalCaptureState(factions, safetyRatio, _instFlags) {
 
 
 /**
+ * The governing ↔ criminal relation row for a capture rung (the row computeFactionRelationships adds; ALLEGIANCE-CAR2
+ * extracted it unchanged so the coherence seam re-reads it from the DERIVED state, the chair's ruling on STOP 3).
+ * @param {{faction: string}} gov @param {{faction: string}} crim @param {string} crimCapture the capture rung
+ * @param {{isLegitimacyCrisis?: boolean, isEndorsed?: boolean}} publicLeg
+ */
+export function govCriminalRelation(gov, crim, crimCapture, publicLeg) {
+  let type, direction, narrative;
+
+  if (crimCapture === 'capture') {
+    type = 'corrupted';
+    narrative = `${gov.faction} is a front. ${crim.faction} makes the actual decisions on taxation, law enforcement priority, and appointments. The fiction of legitimate governance is maintained because it is useful.`;
+  } else if (crimCapture === 'corrupted') {
+    type = 'corrupted';
+    narrative = `${crim.faction} has systematic arrangements with key figures in ${gov.faction}. Enforcement decisions are predictable. Profitable crimes go unpunished, competitive threats are selectively prosecuted.`;
+  } else if (crimCapture === 'equilibrium') {
+    type = 'tense';
+    narrative = `${gov.faction} tolerates ${crim.faction} because suppression costs more than it saves. ${crim.faction} avoids open provocation because it needs the governance structure to remain functional enough to extract from.`;
+  } else {
+    type = 'competitive';
+    narrative = `${gov.faction} actively suppresses ${crim.faction}. Enforcement is genuine but incomplete. ${crim.faction} retreats and reorganises rather than disappearing.`;
+  }
+
+  direction = publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
+            : publicLeg.isEndorsed          ? 'declining'     // strong governance suppresses crime
+            : 'stable';
+
+  return { pair: [gov.faction, crim.faction], type, direction,
+    captureState: crimCapture, narrative,
+    dmNote: crimCapture !== 'adversarial' && crimCapture !== 'none'
+      ? `Ask: which specific officials have arrangements with ${crim.faction}? The answer drives dozens of plot hooks.`
+      : null };
+}
+
+/**
+ * The criminal ↔ military relation row for a capture rung (extracted unchanged, as above).
+ * @param {{faction: string}} crim @param {{faction: string}} mil @param {string} crimCapture the capture rung
+ * @param {{isContested?: boolean, isLegitimacyCrisis?: boolean}} publicLeg
+ */
+export function criminalMilitaryRelation(crim, mil, crimCapture, publicLeg) {
+  let type, direction, narrative;
+
+  if (crimCapture === 'corrupted' || crimCapture === 'capture') {
+    type = 'corrupted';
+    narrative = `${mil.faction} and ${crim.faction} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
+  } else if (crimCapture === 'equilibrium') {
+    type = 'tense';
+    narrative = `${mil.faction} knows where ${crim.faction} operates. ${crim.faction} knows the watch rotation. Neither pushes the other hard enough to force a confrontation. This is not peace. It is managed coexistence.`;
+  } else {
+    type = 'competitive';
+    narrative = `${mil.faction} actively hunts ${crim.faction}. Arrests are real, enforcement is genuine. ${crim.faction} uses superior local knowledge and social embeddedness to absorb pressure and reconstitute.`;
+  }
+
+  direction = publicLeg.isContested || publicLeg.isLegitimacyCrisis ? 'escalating' : 'stable';
+
+  return { pair: [crim.faction, mil.faction], type, direction, captureState: crimCapture, narrative };
+}
+
+/**
+ * THE CAPTURE ROWS READ THE ONE STATE (ALLEGIANCE-CAR2; J-13 read with the chair's ruling on STOP 3: "a relation row that
+ * carries a `captureState` or 'is a front' is a reader … the rows must read the one writer"). A copy of `powerStructure`
+ * whose relation rows that carry a `captureState` are rebuilt for `state` — the derived hall-capture state the coherence
+ * seam just wrote — by the same two builders, so their type, rung, narrative and DM note follow it. A row whose powers
+ * are no longer on the roster is kept as it is. Draw-free; never mutates its input.
+ * @param {any} powerStructure @param {string} state @returns {any}
+ */
+export function withCaptureRelations(powerStructure, state) {
+  const rows = Array.isArray(powerStructure?.factionRelationships) ? powerStructure.factionRelationships : null;
+  if (!rows || !rows.some((r) => r && r.captureState !== undefined)) return powerStructure;
+  const factions = Array.isArray(powerStructure.factions) ? powerStructure.factions : [];
+  const byName = (name) => factions.find((f) => f?.faction === name) || null;
+  const publicLeg = powerStructure.publicLegitimacy || {};
+  const factionRelationships = rows.map((row) => {
+    if (!row || row.captureState === undefined || !Array.isArray(row.pair)) return row;
+    const [a, b] = row.pair.map(byName);
+    if (!a || !b) return row;
+    return a.isGoverning ? govCriminalRelation(a, b, state, publicLeg) : criminalMilitaryRelation(a, b, state, publicLeg);
+  });
+  return { ...powerStructure, factionRelationships };
+}
+
+/**
  * Compute pairwise faction relationships.
  *
  * @param {Array}  factions
@@ -374,33 +455,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   }
 
   // ── Governing ↔ Criminal ────────────────────────────────────────────────────
-  if (gov && crim) {
-    let type, direction, narrative;
-
-    if (crimCapture === 'capture') {
-      type = 'corrupted';
-      narrative = `${gov.faction} is a front. ${crim.faction} makes the actual decisions on taxation, law enforcement priority, and appointments. The fiction of legitimate governance is maintained because it is useful.`;
-    } else if (crimCapture === 'corrupted') {
-      type = 'corrupted';
-      narrative = `${crim.faction} has systematic arrangements with key figures in ${gov.faction}. Enforcement decisions are predictable. Profitable crimes go unpunished, competitive threats are selectively prosecuted.`;
-    } else if (crimCapture === 'equilibrium') {
-      type = 'tense';
-      narrative = `${gov.faction} tolerates ${crim.faction} because suppression costs more than it saves. ${crim.faction} avoids open provocation because it needs the governance structure to remain functional enough to extract from.`;
-    } else {
-      type = 'competitive';
-      narrative = `${gov.faction} actively suppresses ${crim.faction}. Enforcement is genuine but incomplete. ${crim.faction} retreats and reorganises rather than disappearing.`;
-    }
-
-    direction = publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
-              : publicLeg.isEndorsed          ? 'declining'     // strong governance suppresses crime
-              : 'stable';
-
-    addRel({ pair: [gov.faction, crim.faction], type, direction,
-      captureState: crimCapture, narrative,
-      dmNote: crimCapture !== 'adversarial' && crimCapture !== 'none'
-        ? `Ask: which specific officials have arrangements with ${crim.faction}? The answer drives dozens of plot hooks.`
-        : null });
-  }
+  if (gov && crim) addRel(govCriminalRelation(gov, crim, crimCapture, publicLeg));
 
   // ── Merchant ↔ Craft ────────────────────────────────────────────────────────
   if (merc && craft) {
@@ -425,24 +480,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   }
 
   // ── Criminal ↔ Military ─────────────────────────────────────────────────────
-  if (crim && mil) {
-    let type, direction, narrative;
-
-    if (crimCapture === 'corrupted' || crimCapture === 'capture') {
-      type = 'corrupted';
-      narrative = `${mil.faction} and ${crim.faction} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
-    } else if (crimCapture === 'equilibrium') {
-      type = 'tense';
-      narrative = `${mil.faction} knows where ${crim.faction} operates. ${crim.faction} knows the watch rotation. Neither pushes the other hard enough to force a confrontation. This is not peace. It is managed coexistence.`;
-    } else {
-      type = 'competitive';
-      narrative = `${mil.faction} actively hunts ${crim.faction}. Arrests are real, enforcement is genuine. ${crim.faction} uses superior local knowledge and social embeddedness to absorb pressure and reconstitute.`;
-    }
-
-    direction = publicLeg.isContested || publicLeg.isLegitimacyCrisis ? 'escalating' : 'stable';
-
-    addRel({ pair: [crim.faction, mil.faction], type, direction, captureState: crimCapture, narrative });
-  }
+  if (crim && mil) addRel(criminalMilitaryRelation(crim, mil, crimCapture, publicLeg));
 
   // ── Merchant ↔ Religious (at town+ scale) ──────────────────────────────────
   if (merc && rel && ['town','city','metropolis'].includes(tier)) {

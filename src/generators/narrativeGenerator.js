@@ -35,6 +35,7 @@ import { landMemberships, rankPowers } from './people/castPowers.js';
 import { CORRUPT_SHORT_GOAL, assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
 import { hallCaptureOf, writeHallCapture } from '../domain/people/hallCapture.js';
 import { captureClimateOf } from './power/rulingStructure.js';
+import { withCaptureRelations } from './factionDynamics.js';
 import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { pickVariant } from '../kernel/proseHash.js';
@@ -880,7 +881,11 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
  * by its ONE writer, domain/people/hallCapture.js :: writeHallCapture. Draw-free.
  * @param {*} settlement @param {Array<Record<string, any>>} npcs @returns {*} the new power structure
  */
-const withHallCapture = (settlement, npcs) => writeHallCapture(settlement.powerStructure, hallCaptureOf(settlement, { npcs, climate: captureClimateOf(settlement) }));
+const withHallCapture = (settlement, npcs) => {
+  const hall = hallCaptureOf(settlement, { npcs, climate: captureClimateOf(settlement) });
+  // the capture rows of the relation matrix READ the one state (the chair's ruling on car 2's STOP 3)
+  return withCaptureRelations(writeHallCapture(settlement.powerStructure, hall), hall.state);
+};
 
 /**
  * The NPC coherence-enrichment sub-pass: faction/secret overlays
