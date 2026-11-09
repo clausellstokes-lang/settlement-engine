@@ -7,6 +7,7 @@ import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js';
 import { FOOD_SECURITY_BANDS, FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import {
+  getInstFlags,
   getTradeRouteFeatures,
   hasTeleportationInfra,
 } from '../helpers.js';
@@ -322,10 +323,15 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // The label is read by a player (dossierViewModel prints it verbatim), so the
   // config token is de-slugged: 'mountain_pass' must arrive as "mountain pass
   // trade". Byte-identical for every single-word route.
+  // SW-B1 CONTRADICTIONS (STYLE-RULINGS-2 B1(b), the SURFACES audit's P71/#2): "port trade" — printed
+  // "brought in by sea" and "comes in by port trade" — is said only over docks. A port route with no
+  // docks (Albamunicipium, soak1k-0, a mountain thorp) names the channel plainly as "trade"; the rate is
+  // the route's, unchanged. The docks are the institution flag the #10 gate reads (`getInstFlags.inst`).
+  const portWithoutDocks = effectiveRoute === 'port' && !getInstFlags(config || {}, institutions || []).inst?.hasPort;
   const importChannelLabel = importCoverageRate <= 0
     ? null
     : !disconnectedRoute
-      ? `${String(effectiveRoute).replace(/_/g, ' ')} trade`
+      ? (portWithoutDocks ? 'trade' : `${String(effectiveRoute).replace(/_/g, ' ')} trade`)
       : _magicTradeRate * _maintainerMult >= _minorRouteRate
         ? (_hasTeleportCircle ? 'teleportation circle' : _siegeIsolation ? 'airship runs (impaired by siege)' : 'airship traffic')
         : 'minor routes and sanctioned caravans';
