@@ -124,6 +124,7 @@
  * R | l | none            | member  | src/generators/narrativeGenerator.js
  * R | l | none            | member  | src/generators/npcGenerator.js
  * R | l | none            | member  | src/generators/people/castPowers.js
+ * R | l | none            | member  | src/generators/people/goals.js
  * R | l | none            | member  | src/generators/people/representatives.js
  * R | l | identity+chains | surface | src/generators/resourceGenerator.js
  * R | l | chains          | direct  | src/generators/services/institutionServices.js

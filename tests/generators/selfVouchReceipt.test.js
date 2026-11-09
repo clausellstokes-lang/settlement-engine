@@ -37,9 +37,13 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     expect(settlement.economicViability.metrics.criticalIssueCount).toBe(0);
     const judgment = battery(settlement);
     expect(judgment.status).toBe('needs_review');
-    expect(judgment.findings.map((f) => f.path)).toEqual(expect.arrayContaining([
-      'battery.food-words', 'battery.defense-words', 'battery.tier-noun',
-    ]));
+    // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): the record's `battery.defense-words` finding was
+    // "hospital without a hospital" on the goal "Found an institution (a hospital, a school) …" — a row of the retired role
+    // pool (npcData.js :: NPC_FACTION_GOALS), read at the base f6209c0c5; A9 no longer prints it. No seed of the 1,000 at the
+    // car's tip carries all three findings with no critical issue (probed), so the identity is kept and its findings are
+    // re-measured EXACTLY (an exact list, not a superset): the battery still finds two contradictions, and the page still
+    // does not vouch (below).
+    expect(judgment.findings.map((f) => f.path)).toEqual(['battery.food-words', 'battery.tier-noun']);
     expect(verdict(settlement)).not.toMatch(VOUCH); // anchored: the next line pins the live contradiction verdict
     expect(verdict(settlement)).toMatch(/cannot all be true/);
   });

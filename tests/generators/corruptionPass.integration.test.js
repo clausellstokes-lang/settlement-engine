@@ -85,7 +85,17 @@ describe('the hidden allegiance — generation-time deal (integration; the retir
           // (REVIEW-INTAKE-4's refusal); the rewrite reaches a card with a goal.
           if (npc.goal === null) continue;
           expect(npc.goal?.short).toBeTruthy(); // a goal survives the deal
-          if (npc.goal.short === CORRUPT_SHORT_GOAL[a.vector]) sawCorruptGoal = true; // the compromised rewrite
+          // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): the seam's CORRUPT_SHORT_GOAL rewrite
+          // retired; an agent's goal is now drawn at A9 (people/goals.js) and its SHORT goal is the ALLEGIANCE family's —
+          // likely (fit × 3), never certain. The same law on the new writer: the compromised goal is the agent's own
+          // allegiance's (serve / escape / the front's face, keyed and targeted at its own power or house), and the arm is
+          // never vacuous (at least one agent across the seeds carries it).
+          const it = npc.goal.intent?.short;
+          if (it?.family === 'ALLEGIANCE' && /^(serve|escape|front)_/.test(it.kind)) {
+            expect(it.target, `${npc.id}: the allegiance goal targets the agent's own guild`).toEqual(a.power ? { kind: 'power', id: a.power } : { kind: 'house', id: a.house });
+            expect(npc.goal.short, `${npc.id}: the retired rewrite is not the drawn line`).not.toBe(CORRUPT_SHORT_GOAL[a.vector]);
+            sawCorruptGoal = true; // the compromised goal, drawn
+          }
         }
         // every receipt names an agent (no receipt for a card that holds none)
         for (const t of receipts) expect(allegianceOf(byId.get(t.targetId)), `receipt ${t.targetId}`).toBeTruthy();
@@ -102,7 +112,8 @@ describe('the hidden allegiance — generation-time deal (integration; the retir
     expect(sawCriminalSettlement).toBe(true);
     // And with eligible cards under real crime pressure, an allegiance should be dealt.
     expect(sawAgent).toBe(true);
-    // And at least one agent carries the compromised (rewritten) goal, so the goal arm is never vacuous.
+    // And at least one agent carries the compromised goal (since ALLEGIANCE-CAR4: the ALLEGIANCE family's, drawn at A9),
+    // so the goal arm is never vacuous.
     expect(sawCorruptGoal).toBe(true);
   });
 

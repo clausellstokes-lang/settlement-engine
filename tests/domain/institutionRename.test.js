@@ -261,7 +261,10 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
     // linkedInstitutionIds[]}`) left with it (factionRename.js :: NPC_HOMES is ['npcs[]']).
     // 2026-11-08 ALLEGIANCE-CAR1: 40 -> 39 — the two `corruptTies.{thievesGuild, criminalInstitution}` rows left with the
     // retired mark; ONE `allegiance.house` row (the hidden allegiance's criminal house) took their place.
-    expect(exactRows.length, 'the exact rows are the 39 the packet, RUNG1B-F7, PEOPLE-5B and ALLEGIANCE-CAR1 declare').toBe(39);
+    // 2026-11-09 ALLEGIANCE-CAR4: 39 -> 41 — the keyed goal's two house targets (`goal.intent.{short,long}.target.id`
+    // where `kind === 'house'`, generators/people/goals.js), a house's roster name as the simulation's join.
+    expect(exactRows.length, 'the exact rows are the 41 the packet, RUNG1B-F7, PEOPLE-5B, ALLEGIANCE-CAR1 and ALLEGIANCE-CAR4 declare').toBe(41);
+    expect(exactRows.map((row) => row.path), 'the keyed goal\'s house targets are declared').toEqual(expect.arrayContaining(['npcs[].goal.intent.short.target.id', 'npcs[].goal.intent.long.target.id']));
     expect(exactRows.map((row) => row.path), 'the allegiance\'s house is declared, the retired ties are not').toEqual(expect.arrayContaining(['npcs[].allegiance.house']));
     expect(exactRows.filter((row) => row.path.includes('corruptTies')).map((row) => row.path)).toEqual([]);
 

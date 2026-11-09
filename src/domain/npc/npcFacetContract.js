@@ -90,6 +90,20 @@ export const NPC_GOAL_CATALOG = Object.freeze({
   punish_rivals:          { onAchieve: ['consolidate_power', 'settle_rivalry'], onFail: ['exploit_desperation', 'survive_crisis'], drive: 'political' },
   mobilize_defenses:      { onAchieve: ['settle_rivalry', 'professionalize_guard'], onFail: ['survive_crisis', 'protect_followers'], drive: 'military' },
   consolidate_power:      { onAchieve: ['control_institution', 'secure_office'], onFail: ['settle_rivalry', 'survive_crisis'], drive: 'power' },
+  // ── THE GOALS REBUILT (the allegiance train, car 4, ALLEGIANCE-CAR4, 2026-11-09; the design §6.3): the keys the goal
+  // families store as `goal.intent.{short,long}.key` that no landed key names. DATA ONLY — the simulation is frozen (M-6),
+  // so nothing seeds from or acts on them until it wakes; each names only landed keys in its transitions.
+  secure_supply:          { onAchieve: ['expand_trade_house', 'profit_from_change'], onFail: ['survive_crisis', 'bind_external_patron'], drive: 'wealth' },
+  repay_debt:             { onAchieve: ['expand_trade_house', 'win_public_legitimacy'], onFail: ['serve_patron', 'survive_crisis'], drive: 'protection' },
+  collect_debt:           { onAchieve: ['expand_influence', 'profit_from_change'], onFail: ['punish_rivals', 'settle_rivalry'], drive: 'wealth' },
+  protect_ally:           { onAchieve: ['consolidate_power', 'protect_followers'], onFail: ['punish_rivals', 'survive_crisis'], drive: 'protection' },
+  serve_patron:           { onAchieve: ['expand_influence', 'secure_office'], onFail: ['escape_patron', 'survive_crisis'], drive: 'power' },
+  escape_patron:          { onAchieve: ['win_public_legitimacy', 'protect_followers'], onFail: ['serve_patron', 'survive_crisis'], drive: 'protection' },
+  keep_agent:             { onAchieve: ['expand_influence', 'consolidate_power'], onFail: ['punish_rivals', 'keep_agent'], drive: 'power' },
+  pursue_warrant:         { onAchieve: ['restore_order', 'win_public_legitimacy'], onFail: ['prove_allegiance', 'survive_crisis'], drive: 'reform' },
+  prove_allegiance:       { onAchieve: ['pursue_warrant', 'restore_order'], onFail: ['protect_followers', 'survive_crisis'], drive: 'reform' },
+  indulge_trait:          { onAchieve: ['profit_from_change', 'expand_influence'], onFail: ['survive_crisis', 'indulge_trait'], drive: 'power' },
+  answer_the_uncanny:     { onAchieve: ['protect_followers', 'win_public_legitimacy'], onFail: ['survive_crisis', 'answer_the_uncanny'], drive: 'protection' },
 });
 
 /** @type {readonly string[]} */

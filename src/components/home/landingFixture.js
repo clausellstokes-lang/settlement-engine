@@ -84,17 +84,17 @@ export const fixture = {
         "tone": "success",
         "tag": "derived · npcs",
         "lead": "Waitling Hayes, the eldest",
-        "rest": " · goal: win the people back with things that cost nothing: fair hearings and quick answers."
+        "rest": " · goal: settle one quarrel inside elder council before fearghus o'brien can settle it and take the credit."
       },
       {
         "kind": "NPC",
         "tone": "success",
         "tag": "derived · npcs",
         "lead": "Étaín Sullivan, the priest",
-        "rest": " · goal: keep their small charge going on half the alms and none of the help."
+        "rest": " · goal: have the old rights of the house of worship read out and recognised before anyone challenges them."
       }
     ],
-    "hooksMore": 2
+    "hooksMore": 4
   },
   "voice": {
     "receipts": [

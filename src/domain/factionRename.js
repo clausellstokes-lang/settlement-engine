@@ -265,10 +265,19 @@ const NPC_FACTION_FIELDS = Object.freeze([
   // ADDED 2026-09-30, the same latent class as role and the (retired) factionGoal above: npcGenerator's
   // succession-void goal ("Position themselves before {topFaction} moves first") has always
   // named a faction, and no denominator seed rolled it until the urban band's same-seed
-  // shift (ODQ §934.86) did. Cascading it is repair under the same ratified prose policy;
-  // goal.long never names a faction, so it is not declared.
+  // shift (ODQ §934.86) did. Cascading it is repair under the same ratified prose policy.
   { parent: 'goal', key: 'short', kind: 'prose',
     why: 'the succession-void goal names the faction the character means to move before' },
+  // ALLEGIANCE-CAR4 (2026-11-09): the goals rebuilt name the card's powers and their rivals in BOTH vantages (the RANK and
+  // POWER families), so goal.long joins goal.short under the same ratified prose policy; and a goal that targets a POWER
+  // stores the power's name as its keyed intent's target id (`kind === 'power'`), the simulation's join, so it is a KEY
+  // (a target of another kind holds a card id, a house key or a chain id, owned by their own ledgers).
+  { parent: 'goal', key: 'long', kind: 'prose',
+    why: 'the goal families name the card\'s power and its rival in the long goal as in the short' },
+  { parent: 'goal.intent.short.target', key: 'id', kind: 'key', when: { key: 'kind', equals: 'power' },
+    why: 'the keyed short goal\'s target, when it is a power, is the power\'s name (generators/people/goals.js)' },
+  { parent: 'goal.intent.long.target', key: 'id', kind: 'key', when: { key: 'kind', equals: 'power' },
+    why: 'the keyed long goal\'s target, when it is a power, is the power\'s name (generators/people/goals.js)' },
 ]);
 
 /**
@@ -471,6 +480,10 @@ export const NPC_RENAME_SURFACES = Object.freeze([
 export const NPC_NON_CASCADED_SURFACES = Object.freeze([
   { path: `${NPC_HOMES[0]}.secret.what`, why: 'the secret is generated prose that names the characters it implicates; prose policy for people is owner-gated (see above)' },
   { path: `${NPC_HOMES[0]}.secret.stakes`, why: 'the stakes sentence names who would pay to bury the secret; prose policy for people is owner-gated' },
+  // ALLEGIANCE-CAR4 (2026-11-09): the goals rebuilt name the people a goal binds (the card above, the tie's other end, the
+  // handler, a pursuit's target); the simulation's join is the durable id in `goal.intent.*.target`, never the name.
+  { path: `${NPC_HOMES[0]}.goal.short`, why: 'the short goal is generated prose that names the people it binds (its durable join is goal.intent.short.target.id); prose policy for people is owner-gated' },
+  { path: `${NPC_HOMES[0]}.goal.long`, why: 'the long goal is generated prose that names the people it binds (its durable join is goal.intent.long.target.id); prose policy for people is owner-gated' },
   { path: 'relationships[].description', why: 'the generated relationship paragraph names both ends; prose policy for people is owner-gated' },
   { path: 'relationships[].tension', why: 'the generated tension line names both ends; prose policy for people is owner-gated' },
   { path: 'interSettlementRelationships[].description', why: 'the generated contact sentence names both people and the partner settlement; prose policy for people is owner-gated' },
@@ -726,7 +739,8 @@ function renameNpcRecord(npc, home, oldName, newName, mark) {
       mark(npcFieldPath(home, field), movedAny);
       continue;
     }
-    const owner = field.parent ? npc[field.parent] : npc;
+    // a dotted parent ('goal.intent.short.target') walks existing records only, as a single one does
+    const owner = field.parent ? field.parent.split('.').reduce((/** @type {unknown} */ o, k) => (isRecord(o) ? o[k] : undefined), npc) : npc;
     if (!isRecord(owner)) continue;
     if (field.when && owner[field.when.key] !== field.when.equals) continue;
     const moved = field.list

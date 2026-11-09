@@ -79,8 +79,11 @@ export const FOUNDING_SEEDS = Object.freeze([
   // council, and the crisis and that weight → the guild master's goal. It holds no link from the plague to the
   // quarantine council, so the council stands beside the other facts with no causal word.
   // `firstDecade` RE-WORDED 2026-11-06 (LANDING-7 lane H, the verifier's NOTE-5, the chair's ruling R-H3; vetoable by
-  // the owner): "a failing crown" named a governor crown-3 does not seat. The power the master formalises is the
-  // governing guild council's, whose title the streets no longer honour (the synopsis's own held fact).
+  // the owner): "a failing crown" named a governor crown-3 does not seat. RE-SAID 2026-11-09 (ALLEGIANCE-CAR4 STOP 4, the
+  // chair's ruling; the owner's copy, vetoable): the goal is A9's now (people/goals.js), so the master's formalising goal
+  // — the structural pass's retired condition row — is on nobody; what the forge holds is the master's PLACE: the head of
+  // the power the crisis lifted, on the ground the governing guild council (its title no longer honoured in the streets)
+  // has stopped watching — her structural row (position, constraint, condition, rank).
   Object.freeze({
     id: 'the-contested-crown',
     title: 'The Crown That Will Not Hold',
@@ -88,21 +91,21 @@ export const FOUNDING_SEEDS = Object.freeze([
     archetype: 'besieged_holdout',
     settType: 'town',
     synopsis:
-      "A plague is taking hold in this town, and it has thinned the hands that work the fields, so the harvests come in short. A quarantine council sits among its factions. Between the sickness and the short harvests, the guild council holds a title the streets no longer honour, and the crisis has lifted the thieves' guild above it; that guild's master has begun, quietly, to write the authority the collapse handed it into permanent ink. The coup here is not a rumour. It is a matter of paperwork.",
+      "A plague is taking hold in this town, and it has thinned the hands that work the fields, so the harvests come in short. A quarantine council sits among its factions. Between the sickness and the short harvests, the guild council holds a title the streets no longer honour, and the crisis has lifted the thieves' guild above it; that guild's master stands over ground the failing seat has stopped watching, and the one thing that could close the town's ranks against the guild is taking it in the open. The coup here is not a rumour. It is a matter of not being seen.",
     firstDecade:
-      "Opens in a legitimacy crisis: fractured governance, a plague at its onset, and the thieves' guild master formalising the power the guild council, its title no longer honoured in the streets, can no longer reclaim.",
+      "Opens in a legitimacy crisis: fractured governance, a plague at its onset, and the thieves' guild's master standing over the ground a guild council, its title no longer honoured in the streets, has stopped watching.",
     receipts: Object.freeze([
       "Its legitimacy reads 'Legitimacy Crisis', with governance fractured.",
       'Plague is at its onset, and a quarantine council sits among its factions.',
-      'A ranking figure means to formalise the independent authority that governance failure created.',
+      "The thieves' guild's master heads the power the crisis lifted, on ground the failing seat has stopped watching, and can take it only unseen.",
     ]),
     links: Object.freeze([
       Object.freeze({ cause: 'plague', effect: 'poor harvests', field: 'economicViability.issues[stress_consequence]', words: 'it has thinned the hands that work the fields, so the harvests come in short' }),
       Object.freeze({ cause: 'plague', effect: 'title unhonoured', field: 'powerStructure.publicLegitimacy.breakdown.safety', words: 'Between the sickness and the short harvests, the guild council holds a title the streets no longer honour' }),
       Object.freeze({ cause: 'poor harvests', effect: 'title unhonoured', field: 'powerStructure.publicLegitimacy.breakdown.food', words: 'Between the sickness and the short harvests, the guild council holds a title the streets no longer honour' }),
       Object.freeze({ cause: 'title unhonoured', effect: 'thieves outweigh', field: 'factions[].rawPower→power × publicLegitimacy multipliers', words: "the crisis has lifted the thieves' guild above it" }),
-      Object.freeze({ cause: 'thieves outweigh', effect: 'master formalising', field: 'npcs[].structuralRank', words: "the thieves' guild above it; that guild's master" }),
-      Object.freeze({ cause: 'title unhonoured', effect: 'master formalising', field: 'npcs[].settlementCondition', words: 'the authority the collapse handed it' }),
+      Object.freeze({ cause: 'thieves outweigh', effect: 'master placed', field: 'npcs[].structuralRank', words: "the thieves' guild above it; that guild's master" }),
+      Object.freeze({ cause: 'title unhonoured', effect: 'master placed', field: 'npcs[].settlementCondition', words: 'ground the failing seat has stopped watching' }),
     ]),
   }),
   Object.freeze({

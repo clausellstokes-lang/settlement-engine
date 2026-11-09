@@ -301,7 +301,11 @@ describe('faction rename — the declared surface set', () => {
       // with the surfaces themselves; see NPC_FACTION_FIELDS in factionRename.js).
       role: `${OLD} Harbourmaster`,
       // The succession-void goal names a faction too (added 2026-09-30 with its surface).
-      goal: { short: `Position themselves before ${OLD} moves first`, long: 'Secure authority through the right means, not just the fastest' },
+      // ALLEGIANCE-CAR4 (2026-11-09): the goals rebuilt name a power in the long goal too, and a keyed goal that targets a
+      // power holds its name as the intent's target id (factionRename.js's three new surfaces).
+      goal: { short: `Position themselves before ${OLD} moves first`, long: `Lead ${OLD} one day, with or without a blessing.`,
+        intent: { short: { family: 'POWER', kind: 'tense', key: 'expand_influence', target: { kind: 'power', id: OLD } },
+          long: { family: 'RANK', kind: 'enter', key: 'secure_office', target: { kind: 'power', id: OLD } } } },
       secret: { what: `Aldis sells ${OLD} manifests to the Militia.`, stakes: `The ${OLD} would drown them for it.` },
       // PEOPLE-1 CAST (2026-11-07): the card's powers and, for a minted face, the power it stands for.
       title: `the head of ${OLD}`,

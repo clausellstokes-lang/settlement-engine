@@ -119,6 +119,12 @@ const INSTITUTION_HANDLE_FIELDS = Object.freeze([
   // hidden allegiance's `house` now (domain/people/allegiance.js; the v2 -> v3 migration moves a save's).
   { parent: 'allegiance', key: 'house', list: false, removal: 'delete-key',
     why: 'the hidden allegiance names the criminal house it answers to by the house\'s roster name' },
+  // ALLEGIANCE-CAR4 (2026-11-09): a goal that targets a HOUSE stores the house's roster name as its keyed intent's
+  // target id (`kind === 'house'`, generators/people/goals.js); a target of another kind is another ledger's.
+  { parent: 'goal.intent.short.target', key: 'id', list: false, removal: 'delete-key', where: Object.freeze({ key: 'kind', equals: 'house' }),
+    why: 'the keyed short goal\'s target, when it is a house, by the house\'s roster name (generators/people/goals.js)' },
+  { parent: 'goal.intent.long.target', key: 'id', list: false, removal: 'delete-key', where: Object.freeze({ key: 'kind', equals: 'house' }),
+    why: 'the keyed long goal\'s target, when it is a house, by the house\'s roster name (generators/people/goals.js)' },
   { parent: null, key: 'linkedInstitutionIds', list: true, removal: 'drop-item',
     why: 'a generated institution has no id, so factionRoles stores the NAME here and calls the branch rename-sensitive; a mixed id and name list heals only its name half' },
 ]);

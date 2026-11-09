@@ -70,6 +70,13 @@ const ADVISORY_STATUS = new Map();
  * (the advisory judgment, not the overall status: every specimen still certifies). Not bisected per specimen: one
  * cause, the cast (R-P2) with its mints born beside it (R-P4), the mundane draw of a magic-category face where magic
  * does not function, and the pressure line's noun without its article (M-1b) — the battery reads that prose. */
+/* RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): 59 -> 52 of 65, MEASURED at the car's tip.
+ * SEVEN SPECIMENS STOPPED FAILING, nothing started: criminal-crossroads-town-dun, isolated-arcane-town-alder, -bracken,
+ * -cinder, mercantile-seaport-town-bracken, -dun, plagued-martial-city-ember. Read at the base f6209c0c5, each one's
+ * ONLY battery finding was the same `battery.defense-words` "hospital without a hospital" on the goal line "Found an
+ * institution (a hospital, a school) that will outlast them by centuries" — a row of the retired role pool
+ * (npcData.js :: NPC_FACTION_GOALS); A9 draws every card's goal from the families its record supports, so the line is no
+ * longer printed. The direction the ladder drives this list. */
 const ADVISORY_FAILING = Object.freeze([
   'certification-v1-commercial-metropolis-alder',
   'certification-v1-commercial-metropolis-bracken',
@@ -77,7 +84,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-commercial-metropolis-dun',
   'certification-v1-commercial-metropolis-ember',
   'certification-v1-criminal-crossroads-town-bracken',
-  'certification-v1-criminal-crossroads-town-dun',
   'certification-v1-criminal-crossroads-town-ember',
   'certification-v1-frontier-hamlet-alder',
   'certification-v1-frontier-hamlet-bracken',
@@ -89,9 +95,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-grim-seaport-metropolis-cinder',
   'certification-v1-grim-seaport-metropolis-dun',
   'certification-v1-grim-seaport-metropolis-ember',
-  'certification-v1-isolated-arcane-town-alder',
-  'certification-v1-isolated-arcane-town-bracken',
-  'certification-v1-isolated-arcane-town-cinder',
   'certification-v1-isolated-arcane-town-dun',
   'certification-v1-magical-desert-village-alder',
   'certification-v1-magical-desert-village-bracken',
@@ -99,8 +102,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-magical-desert-village-dun',
   'certification-v1-magical-desert-village-ember',
   'certification-v1-mercantile-seaport-town-alder',
-  'certification-v1-mercantile-seaport-town-bracken',
-  'certification-v1-mercantile-seaport-town-dun',
   'certification-v1-mercantile-seaport-town-ember',
   'certification-v1-mundane-river-port-city-alder',
   'certification-v1-mundane-river-port-city-cinder',
@@ -110,7 +111,6 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-plagued-martial-city-bracken',
   'certification-v1-plagued-martial-city-cinder',
   'certification-v1-plagued-martial-city-dun',
-  'certification-v1-plagued-martial-city-ember',
   'certification-v1-religious-river-village-alder',
   'certification-v1-religious-river-village-bracken',
   'certification-v1-religious-river-village-dun',

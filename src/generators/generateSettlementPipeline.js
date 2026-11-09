@@ -14,6 +14,7 @@ import { setActiveRng, clearActiveRng, getActiveRng } from '../kernel/rngContext
 import { runPipeline } from './pipeline.js';
 import { drawTies } from './people/ties.js';
 import { generateRepresentatives } from './people/representatives.js';
+import { dealGoals } from './people/goals.js';
 import { generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
 import { enrichNpcCoherence } from './narrativeGenerator.js'; // MERGE-CAR: CENSUS-4 R12's fitFactionRoster retired (the chair's SC-1 ruling: superseded by construction — memberships born by rank)
@@ -583,6 +584,9 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // moves no draw above it; a fresh tie names the cast as it stands, so no projection refresh.
     const finalRelationships = drawTies(roster, { config, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null }, getActiveRng());
     const conflicts = generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster);
+    // ALLEGIANCE-CAR4 (A9, the design §2): the regenerated cast's goals, dealt over the FINAL roster and its ties on this
+    // regen's own keyed family, as birth deals them (people/goals.js); a preserved keeper's goal is the user's and is kept.
+    const goaledRoster = dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) });
     // the record's trace keeps every other step's run; the subject's run is the regeneration's (re-stamped on the
     // trace's own clock, ts = position). Dormant: a record with no allegiance before or after carries no new key.
     const priorTrace = Array.isArray(/** @type {any} */ (settlement).simulationTrace) ? /** @type {any} */ (settlement).simulationTrace : [];
@@ -591,7 +595,7 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
         .map((t, ts) => ({ causes: [], downstreamEffects: [], ...t, ts })) }
       : {};
     return {
-      npcs: roster,
+      npcs: goaledRoster,
       relationships: finalRelationships,
       conflicts,
       ...traceParts,

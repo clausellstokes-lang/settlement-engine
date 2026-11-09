@@ -27,14 +27,7 @@ function leafLine(leaf, fragment, name) {
   return hits[0].text.replace(/\{settlement\}/g, name).replace(/\{tier\}|\{tierNoun\}/g, 'town');
 }
 
-/** The governing ruler's want as the Tonight sheet prints it, read from the born record. */
-function rulerWant(s, fragment) {
-  const npc = (s.npcs || []).find((n) => typeof n?.goal === 'string' && n.goal.includes(fragment))
-    ?? (s.npcs || []).find((n) => typeof n?.goal?.short === 'string' && n.goal.short.includes(fragment));
-  expect(npc, `${s.name}: no NPC wants "${fragment}"`).toBeDefined();
-  const goal = typeof npc.goal === 'string' ? npc.goal : npc.goal.short;
-  return `Wants to ${goal.charAt(0).toLowerCase()}${goal.slice(1)}`;
-}
+// (`rulerWant`, which read the calm control's born want, retired with that want: ALLEGIANCE-CAR4, see the control row.)
 
 /** The three goals' R11 wording (efb84c0); the claims keep their rung-2D names. */
 const GOAL = {
@@ -120,8 +113,14 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
     expect(readOn(5402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'different goods', s.name) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it */.split(/(?<=\.)\s+/)[0])).toEqual([['depends on none alone', 'hunger']]);
   });
 
+  // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): the calm control's born want was the structural
+  // pass's top-N seat-goal template (npcStructure.js), and A9 (people/goals.js :: dealGoals) now overwrites it — the chair
+  // ruled that seat-goal pool retired (position and constraint kept). So, like the six census-cured rows above, the
+  // control reads the want as it WOULD print (the registry's R11 wording, verbatim) on the same calm record: both halves
+  // asserted — the born record no longer prints it, and the instrument still reads nothing without a crisis.
   it('soak1k-1803 (no crisis, the control): the same want reads nothing', () => {
     expect(born[1803].stress ?? null).toBeFalsy();
-    expect(readOn(1803, (s) => rulerWant(s, GOAL.stability))).toEqual([]);
+    expect(holdsWant(born[1803], GOAL.stability), 'soak1k-1803: A9 overwrites the retired seat-goal template').toBe(false);
+    expect(readOn(1803, () => printed(WANT.stability))).toEqual([]);
   });
 });

@@ -321,7 +321,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const birth = (id, pool, title, institution, hookPool) => {
     const category = pool.category === 'magic' && !magicFunctions ? 'other' : pool.category;
     const card = onStream(faces.fork(id), () => generateSingleNPC(
-      pool.role, pool.titleKey, category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw, { hook: false },
+      pool.role, pool.titleKey, category, culture, tier, npcConfig, institutions, hookRegistry, worldLaw, { hook: false, title }, // ITEM 15 (ALLEGIANCE-CAR4): the face's title keys its secret and presentation (poolMap.js :: titleLinesFor)
     ));
     // MERGE-234 (the chair's ruling of 10:4x UTC): a magic-swapped face draws its hook from the pool its
     // EFFECTIVE category maps to after the swap (`other` has its own loyalty list, so no further fallback)

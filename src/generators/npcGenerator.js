@@ -14,13 +14,13 @@ import {
 import { nativeSemanticName } from '../domain/content/customContentSemanticAuthority.js';
 import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick, getActiveRng } from '../kernel/rngContext.js';
-import { drawUnique, heldByOthers } from './hookVariety.js';
+import { drawUnique } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, hasUnheldCandidate, lineText, resolveSibling, resolveDeclared } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
-import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
+import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
+import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
 
@@ -29,7 +29,7 @@ import { TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { bareLine } from '../domain/facts/bareLine.js'; // F11 / CENSUS-1 / CENSUS-4b: one line, so no cited line moves
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; // F11 / CENSUS-1 / CENSUS-4b: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -39,9 +39,7 @@ import {
   NPC_BUILDS,
   NPC_FEATURES,
   NPC_WANTS,
-  NPC_FACTION_GOALS,
   NPC_FACTION_LOYALTY,
-  NPC_SECRETS,
   NPC_PLOT_HOOKS_DATA,
   NPC_PRESENTATION_MODES, NPC_HOOK_SIBLINGS,
 } from '../data/npcData.js';
@@ -99,7 +97,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   config = {},
   institutions = [],
   hookRegistry,
-  generationContext = null, options = {}, // options.hook === false: the birth seam draws the card's one hook itself
+  generationContext = null, options = {}, // options.hook === false: the birth seam draws the card's one hook itself; options.title: the face's title (item 15)
 ) => {
   const gender = _rng() > 0.5 ? 'male' : 'female';
   const fullName = pickFirst(culture, gender, true, tier);
@@ -113,19 +111,25 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category, birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw)); // CENSUS-1i unit 6: the goal draw's facts (R-V), handed to the wants
-  const goalRaw = bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw), hookRegistry?.goals)); /* MERGE-R2 (the chair's ruling 2): REVIEW-INTAKE-4's held goals refused inside the census's declared draw */ const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : (g ? npcLineAsSpoken(g, f) : null)))(goalRaw, birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
+  // ALLEGIANCE-CAR4 (the design §2, A9): the goal is no longer drawn at birth — the families bind ranks, ties, the
+  // allegiance and rivals that do not exist here; people/goals.js :: dealGoals deals every card's goal at the seam's end.
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   // REVIEW-INTAKE-4: both draws refuse a text the roster already holds (hookRegistry.goals /
   // .secrets), falling through their pool in seed order with no further roll; a pool with every
   // row held leaves this figure without one rather than repeating it.
-  const secret = generateFactionLeaderSecret(
+  // ITEM 15 (ALLEGIANCE-CAR4, the design §6.5, J-16): a face whose title the title table writes (people/poolMap.js ::
+  // titleLinesFor, the 147 fallback titles) draws its secret from its title's own lines, an unheld one (REVIEW-INTAKE-4);
+  // every other face — and a titled face whose three are all held — draws by its role and category, as before.
+  const titled = titleLinesFor(options.title);
+  const titleSecrets = titled ? titled.secrets.filter((row) => !hookRegistry?.secrets?.has(String(row.secret).trim())) : [];
+  const secret = titleSecrets.length ? pickFromArray(titleSecrets) : generateFactionLeaderSecret(
     config,
     institutions,
     worldLaw, role, // CENSUS-1i R-AX: the holder's role keys both rolls (the type and the row)
     hookRegistry?.secrets, // REVIEW-INTAKE-4 (MERGE-R2: composed with the holder's keyed rows)
   );
-  for (const t of [goalRaw?.short, goal?.short]) if (t) hookRegistry?.goals?.add(String(t).trim()); if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim()); // REVIEW-INTAKE-4; MERGE-R2: the drawn text (the held key) beside the text the figure carries
+  if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim()); // REVIEW-INTAKE-4; MERGE-R2: the drawn text (the held key) beside the text the figure carries
   // ONE PLOT HOOK PER PERSON (the owner, 2026-11-07: "one plot hook per NPC rather than multiple";
   // PEOPLE-3 HOOKS): the second hook (a coin-flip, μ 0.5 per card) is RETIRED. A representative's
   // hook is drawn by its birth seam on its own keyed fork, keyed by the face's title through the
@@ -152,12 +156,12 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
       feature: appearance.feature,
       clothes: appearance.clothes,
     },
-    goal: goal ? { short: goal.short, long: goal.long } : null,
+    goal: null, // A9 deals it (people/goals.js :: dealGoals)
     secret: secret ? { what: secret.secret, stakes: secret.stakes } : null,
     plotHooks,
     influence: powerLevel.level,
     power: powerLevel.power,
-    presentation: pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw)),
+    presentation: titled && titled.presentations.length ? { ...pickFromArray(titled.presentations) } : pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw)), // ITEM 15: the title's own first impression
   };
 };
 
@@ -348,25 +352,12 @@ const generateNPCAppearance = (r = 'other', facts = null) => ({
   clothes: lineText(drawDeclared(NPC_WANTS[r] || NPC_WANTS.other, { draw: pickFromArray, facts, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_WANTS`, poolId: 'npcData:NPC_WANTS', surface: 'npcs', drawKind: 'R', keepRefused: true }).line), // CENSUS-1i unit 6: CENSUS-4f's three declaring wants enforced (one roll over the FULL pool, then resolve; R-C)
 });
 
-// generateNPCGoal
-// generateNPCGoal — the NPC's SHORT and LONG goal, drawn from role + the active stress types.
-//
-// ⚠ THIS WAS CALLED `generateNPCRelType` AND RETURNED NO RELATIONSHIP TYPE. It returns
-// `{ short, long, driven_by }`, which `generateSingleNPC` assigns to `goal` — and
-// `domain/npc/npcFacets.js` already registered it as the SOURCE of the `goal` facet while
-// calling it by the wrong name. It now carries the name the facet registry always gave it.
-// REVIEW-INTAKE-4 + MERGE-R2 (the chair's ruling 2): `held` is the roster's goals so far; each draw
-// below is the census's declared draw (`drawDeclared`, CENSUS-1c) with the held rows excluded from
-// its candidates BEFORE the draw, and a pool whose every row is held is skipped WITHOUT a roll for
-// the function's own fallback chain (stress → role → category → the generic 'other' pool); every
-// pool exhausted answers null, a figure without a goal. With nothing held this is the census's draw.
-const generateNPCGoal = (role, category = 'other', config = {}, facts = null, held = null) => { // CENSUS-1c unit 2: `facts` answers the declared lines (drawDeclared)
-  const stressType = config.stressType || null;
-  const commodity = config.tradeCommodity || config._tradeCommodity || null;
-  const topFaction = config._dominantFaction || null;
-  const stresses = config.stressTypes?.length ? config.stressTypes : stressType ? [stressType] : [];
+// THE CRISIS FAMILY'S LINES (ALLEGIANCE-CAR4, the allegiance design §6.1: today's overrides and the siege goal, KEPT
+// verbatim; people/goals.js :: dealGoals draws them at the seam's end, A9, through resolveDeclared). Moved here, unchanged,
+// from the retired role-goal draw (`generateNPCGoal`) and `mergeNPCLists`'s stress block.
 
-  // Stress-specific NPC goals (templates that get substituted)
+/** The siege goal's three rows (`STRESS_GOALS.under_siege`), the trade commodity filled. @param {string | null} commodity */
+export const SIEGE_GOALS = (commodity) => {
   const STRESS_GOALS = {
     under_siege: [
       {
@@ -385,239 +376,98 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null, he
         driven_by: 'military',
       },
     ],
-    famine: [
-      {
-        short: `Control the ${commodity || 'grain'} supply before a competing faction corners it`,
-        long: "Be the person who kept people fed, or profit from the fact that others weren't",
-        driven_by: 'wealth',
-      },
-      {
-        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Find out where the hoarded reserves are before the council does', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
-        long: 'Come out of this with more than they went in with',
-        driven_by: 'wealth',
-      },
-      {
-        short: 'Distribute what little exists fairly enough to prevent a riot',
-        long: 'Build the kind of trust that only a crisis can create',
-        driven_by: 'protection',
-      },
-    ],
-    occupied: [
-      {
-        short: 'Navigate the occupation without losing position or principles: ideally both',
-        long: 'Be remembered as someone who preserved what could be preserved',
-        driven_by: 'personal',
-      },
-      {
-        short: "Pass information to the resistance without being identified as a collaborator's informant",
-        long: 'Outlast the occupation and be on the right side when it ends',
-        driven_by: 'political',
-      },
-      {
-        short: "Satisfy the occupiers' demands while protecting the people they're demanding from",
-        long: 'Find the line between pragmatism and betrayal, and stay on the right side of it',
-        driven_by: 'protection',
-      },
-    ],
-    indebted: [
-      {
-        short: `Renegotiate the debt terms before the ${topFaction || 'creditor'} sends another representative`,
-        long: "Find an exit from this obligation that doesn't require giving up more than it cost to fix",
-        driven_by: 'wealth',
-      },
-      {
-        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Identify which members of the council have already made private terms with the creditor', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
-        long: 'Repudiate the debt on grounds that would survive legal challenge',
-        driven_by: 'political',
-      },
-    ],
-    recently_betrayed: [
-      {
-        short: 'Identify who the betrayer was before they do further damage',
-        long: 'Restore enough trust that the settlement can function again',
-        driven_by: 'justice',
-      },
-      {
-        short: 'Find out what was sold and whether the damage is recoverable',
-        long: 'Build a system that makes the next betrayal harder',
-        driven_by: 'protection',
-      },
-    ],
-    plague_onset: [
-      {
-        short: 'Identify the source of the outbreak before it becomes uncontrollable',
-        long: 'Keep the settlement functioning through what might be a very bad few months',
-        driven_by: 'protection',
-      },
-      {
-        short: 'Enforce quarantine measures against people who have reasons to resist them',
-        long: 'Get through this without the settlement losing faith in its institutions',
-        driven_by: 'protection',
-      },
-    ],
-    succession_void: [
-      {
-        short: `Position themselves before ${topFaction || 'a rival faction'} moves first`,
-        long: 'Secure authority through the right means, not just the fastest',
-        driven_by: 'power',
-      },
-      {
-        short: 'Find a candidate they can support who owes them something for the support',
-        long: 'End the uncertainty on terms they can live with',
-        driven_by: 'political',
-      },
-    ],
-    monster_pressure: [
-      {
-        excludes: ['garrison'], short: 'Organise a response to the attacks without the garrison they were supposed to have', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
-        long: 'Make this settlement safe enough that people stop leaving',
-        driven_by: 'protection',
-      },
-      {
-        short: 'Identify whether the attacks are opportunistic or directed',
-        long: 'Be the person who solved the problem rather than the person who reported it',
-        driven_by: 'military',
-      },
-    ],
-    politically_fractured: [
-      {
-        short: 'Keep the settlement functioning while the factions fight over who controls it',
-        long: 'Be the one still standing when the fracture finally resolves',
-        driven_by: 'political',
-      },
-      {
-        short: 'Position their own faction to win the split outright',
-        long: 'Turn the paralysis into a permanent advantage for their side',
-        driven_by: 'political',
-      },
-      {
-        short: 'Broker between the factions without being seen to take a side',
-        long: 'Become indispensable to whichever side finally prevails',
-        driven_by: 'personal',
-      },
-    ],
-    infiltrated: [
-      {
-        short: 'Identify the infiltrator before the damage becomes irreversible',
-        long: 'Restore the settlement to a state where trust is possible again',
-        driven_by: 'protection',
-      },
-      {
-        short: 'Exploit the climate of suspicion to remove a rival under cover of the hunt',
-        long: 'Come out of the paranoia with more power than they went into it with',
-        driven_by: 'political',
-      },
-      {
-        short: 'Protect someone already suspected before the accusation hardens into a verdict',
-        long: 'Keep the search for real infiltrators from curdling into a purge',
-        driven_by: 'justice',
-      },
-    ],
-    insurgency: [
-      {
-        short: 'Restore the authority to collect and govern without provoking open revolt',
-        long: 'Hold the settlement together long enough to be seen as the one who held it',
-        driven_by: 'political',
-      },
-      {
-        short: 'Identify who inside the institutions is feeding the insurgency',
-        long: 'End the rising in a way that leaves the current order standing',
-        driven_by: 'military',
-      },
-      {
-        short: 'Position themselves to survive whichever side prevails',
-        long: 'Come out of this with their office (or a better one) intact',
-        driven_by: 'personal',
-      },
-    ],
-    mass_migration: [
-      {
-        needs: ['migration: influx'], short: 'Absorb the new arrivals into the labour market before resentment turns to violence', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
-        long: 'Make the changed settlement work rather than merely survive the change',
-        driven_by: 'protection',
-      },
-      {
-        needs: ['migration: influx'], short: `Corner the ${commodity || 'grain'} and housing the newcomers cannot do without`, // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
-        long: 'Turn the churn of people into a lasting private advantage',
-        driven_by: 'wealth',
-      },
-      {
-        needs: ['migration: influx'], short: 'Decide who is admitted and who is turned away, and be owed for each choice', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
-        long: 'Become the person every arrival and every old family must go through',
-        driven_by: 'political',
-      },
-    ],
-    wartime: [
-      {
-        short: `Meet the requisition for ${commodity || 'supplies'} without stripping the settlement bare`,
-        long: 'Keep the settlement standing until the war that is draining it ends',
-        driven_by: 'protection',
-      },
-      {
-        short: 'Secure the war contracts before a rival does',
-        long: 'Come out of the war richer than the peace could ever have made them',
-        driven_by: 'wealth',
-      },
-      {
-        short: 'Fill the conscription quota while keeping the people who matter to them out of it',
-        long: 'Protect their own through a war that spares no one else',
-        driven_by: 'personal',
-      },
-    ],
-    religious_conversion: [
-      {
-        short: 'Settle the contest between the faiths before it splits every institution in two',
-        long: 'Be remembered as the one who chose right when the faith itself was in question',
-        driven_by: 'political',
-      },
-      {
-        short: 'Secure the endowments and properties of the old faith before they are lost in the confusion',
-        long: 'Turn a crisis of belief into a permanent hold on what the belief once owned',
-        driven_by: 'wealth',
-      },
-      {
-        short: 'Protect the adherents of the losing faith from the reprisals now beginning',
-        long: 'Keep their conscience and their position, and refuse to choose between them',
-        driven_by: 'justice',
-      },
-    ],
-    slave_revolt: [
-      {
-        short: 'End the revolt without a suppression the settlement cannot recover from',
-        long: 'Preserve the settlement, and, if possible, their own soul along with it',
-        driven_by: 'protection',
-      },
-      {
-        short: `Restore the labour the ${topFaction || 'ruling faction'} depends on, by force or by terms`,
-        long: 'Put the old order back together before anyone questions whether it should be',
-        driven_by: 'political',
-      },
-      {
-        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Reach the revolt’s leaders with a settlement the council has forbidden them to offer', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
-        long: 'Stop the killing on both sides, whatever it costs them personally',
-        driven_by: 'justice',
-      },
-    ],
   };
+  return STRESS_GOALS.under_siege;
+};
 
-  // 40% chance to use a stress-specific goal
-  const stressGoals = stresses.flatMap(s => STRESS_GOALS[s] || []);
-  // Substitute commodity/faction tokens (draw-free); the held key reads the text the figure would carry.
-  const substitute = text => text.replace(/\{commodity\}/g, commodity || 'key goods').replace(/\{faction\}/g, topFaction || 'the dominant faction').replace(/grain/g, commodity === 'grain' ? 'grain' : commodity || 'grain');
-  const roleGoals = NPC_FACTION_GOALS[role], categoryRows = NPC_SECRETS[category] || NPC_SECRETS.other;
-  const STRESS = { rows: stressGoals, sub: false, poolId: 'npcGenerator:STRESS_GOALS' }, ROLE = { rows: roleGoals && roleGoals.length > 0 ? roleGoals : null, sub: !!(commodity || topFaction), poolId: 'npcData:NPC_FACTION_GOALS' }, CATEGORY = { rows: categoryRows, sub: false, poolId: 'npcData:NPC_SECRETS' }, GENERIC = { rows: categoryRows === NPC_SECRETS.other ? null : NPC_SECRETS.other, sub: false, poolId: 'npcData:NPC_SECRETS' };
-  const drawThrough = (links) => { // the first pool with an unheld row draws (one roll); a fully-held pool is skipped without one
-    for (const link of links) { const heldKey = (/** @type {{ short?: unknown }} */ g) => (link.sub ? substitute(String(g?.short ?? '')) : String(g?.short ?? '')); if (!link.rows || !hasUnheldCandidate(link.rows, { held, heldKey })) continue; const goal = drawDeclared(link.rows, { draw: pickFromArray, facts, key: `${getActiveRng()?.seed ?? ''}::${link.poolId}`, poolId: link.poolId, surface: 'npcs', drawKind: 'R', held, heldKey }).line; return goal && link.sub ? { ...goal, short: substitute(goal.short), long: substitute(goal.long) } : goal; }
-    return null;
-  };
+/**
+ * The stress override's role bucket (gov > mil > rel > merchant), by the shared role→category map; the
+ * merchant bucket reads roleTakesMerchantStress (the guild and overseer crafts roles). Draw-free.
+ * @param {string} role @returns {'gov' | 'mil' | 'rel' | 'merchant' | null}
+ */
+export const stressBucketOf = (role) => {
+  const roleLower = String(role || '').toLowerCase();
+  const roleCat = roleToCategory(roleLower);
+  if (roleCat === 'government') return 'gov';
+  if (roleCat === 'military') return 'mil';
+  if (roleCat === 'religious') return 'rel';
+  return roleTakesMerchantStress(roleLower) ? 'merchant' : null;
+};
 
-  if (stressGoals.length > 0 && _rng() < 0.4) return drawThrough([STRESS, ROLE, CATEGORY, GENERIC]); // ⚠ the 0.4 roll stays on the FULL pool's emptiness (§2.2)
-
-  // Use role-specific goal from NPC_FACTION_GOALS
-  if (ROLE.rows) return drawThrough([ROLE, CATEGORY, GENERIC]);
-
-  // Fallback to category secrets
-  return drawThrough([CATEGORY, GENERIC]);
+/** The stress-specific goal overrides by stress type and role bucket. */
+export const STRESS_GOAL_OVERRIDES = {
+  wartime: {
+    gov: {
+      short: 'Satisfy the crown requisition order without stripping the settlement to the bone',
+      note: "The war has made every civic decision a military calculation. The crown's needs and the settlement's needs are not the same calculation.",
+    },
+    mil: {
+      short:
+        'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes',
+      note: "Every experienced soldier conscripted into the field army is a hole in local security that a substitute won't fill the same way.",
+    },
+    merchant: {
+      short:
+        'Secure a war contract before a rival does, or find a way to profit from the disruption instead of suffering it',
+    },
+  },
+  insurgency: {
+    gov: {
+      short: 'Maintain the appearance of legitimate authority while the substance of it is actively contested',
+      note: 'Every public appearance is a performance of control. The private meetings are about whether there is still enough control to perform.',
+    },
+    mil: {
+      needs: ['watch'], short:
+        'Determine which members of the watch are loyal to the institution and which are loyal to whoever is paying them',
+      note: 'An insurgency that has lasted this long has had time to make investments in the security apparatus.',
+    },
+    rel: {
+      short:
+        'Avoid being forced to publicly declare support for either the governing faction or the insurgency, and run out of reasons before the pressure does',
+    },
+  },
+  mass_migration: {
+    gov: {
+      needs: ['migration: influx'], short:
+        'Manage the influx without the old residents concluding the governing authority has chosen the newcomers over them',
+      note: 'The governing faction is caught between two constituencies that want incompatible things, and both know it.',
+    },
+    merchant: {
+      short:
+        'Either profit from the demographic change or find a way to be insulated from it. Either answer requires moving faster than the uncertainty',
+    },
+    mil: {
+      short:
+        'Establish which residents are registered, which are transient, and which are neither: before one of the third category becomes a problem',
+    },
+  },
+  religious_conversion: {
+    rel: {
+      short:
+        "Preserve the institution's position through the transition without either abandoning the congregation or openly defying the new authority",
+      note: 'The institution has survived political upheaval before by being indispensable. Whether it can repeat that calculation here is the open question.',
+    },
+    gov: {
+      short:
+        'Delay a public declaration on the religious question for as long as the political cost of delay is lower than the cost of choosing a side',
+    },
+  },
+  slave_revolt: {
+    gov: {
+      short:
+        'End the revolt without either full suppression or formal negotiation: both options set precedents the governing faction cannot afford',
+      note: "The revolt's continued existence is itself a delegitimisation. Every day it continues is evidence that the authority is not in control.",
+    },
+    mil: {
+      short:
+        'Contain the revolt geographically without deploying force that will create martyrs and widen the conflict',
+      note: 'The orders are to restore order. The orders do not specify what order is supposed to look like when this is over.',
+    },
+    merchant: {
+      needs: ['market'], short:
+        'Recover the economic loss from the market suspension, or redirect capital away from a labour system that may not survive this in its current form',
+    },
+  },
 };
 
 // drawLoyalty — the ONE spelling of a themed loyalty draw (wave HK-3).
@@ -846,7 +696,7 @@ const _pickFactionName = r => {
   );
 };
 
-export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
+export const mergeNPCLists = (npcs, factions, institutions, _tier, _config) => {
   if (!npcs || !factions || npcs.length === 0 || factions.length === 0) return npcs;
 
 
@@ -1022,8 +872,6 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
     // Sorting by keyword length descending makes the longest match win.
     .sort((a, b) => b[0].length - a[0].length);
 
-  const stressType = config?.stressType || null;
-
   // ── Power-proportional target slots ──────────────────────────────────────
   // Each faction gets a target NPC count proportional to its power score.
   // The fallback assignment weights by *remaining capacity* (target - current),
@@ -1051,9 +899,6 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
     other: null, // generalists — no restriction
   };
 
-  // REVIEW-INTAKE-4: the roster's goals as they stand, so a stress override is never a goal another
-  // figure already carries (the figure keeps its own instead); updated as each figure is written.
-  const goalsNow = npcs.map((n) => n?.goal?.short);
   return npcs.map((npc, idx) => {
     const enriched = { ...npc };
     const roleLower = (npc.role || '').toLowerCase();
@@ -1117,118 +962,6 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       factionAssignCount.set(assignedFaction.faction, (factionAssignCount.get(assignedFaction.faction) || 0) + 1);
     }
 
-    // Stress-modified goals
-    if (stressType && enriched.goal) {
-      // Classify the role via the shared role→category map (longest-keyword-first)
-      // instead of four hand-rolled substring lists. The override below is keyed
-      // gov/mil/rel/merchant; map the role's category onto those buckets, keeping
-      // the same gov > mil > rel > merchant priority via the selector's branch
-      // order. The merchant bucket uses roleTakesMerchantStress, NOT a bare
-      // roleCat === 'economy', so guild/overseer crafts roles (e.g. 'Journeyman
-      // Overseer', 'Craft Guild Representative') still get the merchant override
-      // the pre-unification merchant test (merchant|guild|factor|overseer) gave
-      // them — longest-keyword-first would otherwise resolve them to crafts and
-      // silently drop the override. Pure string work — no rng, so draw order is
-      // unchanged.
-      const roleCat = roleToCategory(roleLower);
-      const isGov = roleCat === 'government';
-      const isMil = roleCat === 'military';
-      const isRel = roleCat === 'religious';
-      const isMerchant = roleTakesMerchantStress(roleLower);
-
-      const STRESS_GOAL_OVERRIDES = {
-        wartime: {
-          gov: {
-            short: 'Satisfy the crown requisition order without stripping the settlement to the bone',
-            note: "The war has made every civic decision a military calculation. The crown's needs and the settlement's needs are not the same calculation.",
-          },
-          mil: {
-            short:
-              'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes',
-            note: "Every experienced soldier conscripted into the field army is a hole in local security that a substitute won't fill the same way.",
-          },
-          merchant: {
-            short:
-              'Secure a war contract before a rival does, or find a way to profit from the disruption instead of suffering it',
-          },
-        },
-        insurgency: {
-          gov: {
-            short: 'Maintain the appearance of legitimate authority while the substance of it is actively contested',
-            note: 'Every public appearance is a performance of control. The private meetings are about whether there is still enough control to perform.',
-          },
-          mil: {
-            needs: ['watch'], short:
-              'Determine which members of the watch are loyal to the institution and which are loyal to whoever is paying them',
-            note: 'An insurgency that has lasted this long has had time to make investments in the security apparatus.',
-          },
-          rel: {
-            short:
-              'Avoid being forced to publicly declare support for either the governing faction or the insurgency, and run out of reasons before the pressure does',
-          },
-        },
-        mass_migration: {
-          gov: {
-            needs: ['migration: influx'], short:
-              'Manage the influx without the old residents concluding the governing authority has chosen the newcomers over them',
-            note: 'The governing faction is caught between two constituencies that want incompatible things, and both know it.',
-          },
-          merchant: {
-            short:
-              'Either profit from the demographic change or find a way to be insulated from it. Either answer requires moving faster than the uncertainty',
-          },
-          mil: {
-            short:
-              'Establish which residents are registered, which are transient, and which are neither: before one of the third category becomes a problem',
-          },
-        },
-        religious_conversion: {
-          rel: {
-            short:
-              "Preserve the institution's position through the transition without either abandoning the congregation or openly defying the new authority",
-            note: 'The institution has survived political upheaval before by being indispensable. Whether it can repeat that calculation here is the open question.',
-          },
-          gov: {
-            short:
-              'Delay a public declaration on the religious question for as long as the political cost of delay is lower than the cost of choosing a side',
-          },
-        },
-        slave_revolt: {
-          gov: {
-            short:
-              'End the revolt without either full suppression or formal negotiation: both options set precedents the governing faction cannot afford',
-            note: "The revolt's continued existence is itself a delegitimisation. Every day it continues is evidence that the authority is not in control.",
-          },
-          mil: {
-            short:
-              'Contain the revolt geographically without deploying force that will create martyrs and widen the conflict',
-            note: 'The orders are to restore order. The orders do not specify what order is supposed to look like when this is over.',
-          },
-          merchant: {
-            needs: ['market'], short:
-              'Recover the economic loss from the market suspension, or redirect capital away from a labour system that may not survive this in its current form',
-          },
-        },
-      };
-
-      const stressOverrides = STRESS_GOAL_OVERRIDES[stressType];
-      if (stressOverrides) {
-        const looked = isGov
-          ? stressOverrides.gov
-          : isMil
-            ? stressOverrides.mil
-            : isRel
-              ? stressOverrides.rel
-              : isMerchant
-                ? stressOverrides.merchant
-                : null; const override = looked ? resolveDeclared(looked, { facts: () => birthFactsOf({ institutions, config, tier, stress: (config?.stressTypes?.length ? config.stressTypes : [stressType]).map((/** @type {unknown} */ type) => ({ type })) }), poolId: `npcGenerator:STRESS_GOAL_OVERRIDES.${stressType}`, surface: 'npcs' }).line : null; // CENSUS-1e unit 2 (T): resolved against CENSUS-4b's declarations and the birth's facts (roster, tier, stresses); a refused override is not applied — the NPC keeps its goal (no twin owed). Draw-free.
-        if (override) {
-          const facts = factsOf({ institutions }); const spoken = (/** @type {string} */ l) => resolveSibling(l, NPC_GOAL_SIBLINGS, { facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' }); const overrideLine = spoken(override.short); const overrideHeld = heldByOthers(goalsNow, idx).has(String(overrideLine ?? '').trim()); if (!overrideHeld) enriched.goal = { short: overrideLine, long: enriched.goal?.long || overrideLine }; // F10, CENSUS-1c: NPC_GOAL_SIBLINGS below, draw-free; REVIEW-INTAKE-4 + MERGE-R2: an override another figure already carries is not applied (the figure keeps its own)
-          if (override.note && !overrideHeld) enriched.stressNote = spoken(override.note);
-        }
-      }
-    }
-
     // Detect criminal affiliation from secret text
     if (npc.secret && typeof npc.secret === 'object') {
       const secretText = ((npc.secret.what || '') + ' ' + (npc.secret.stakes || '')).toLowerCase();
@@ -1289,13 +1022,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         };
       }
     }
-    // F4 unit 3: the role goal ("Identify which of their officers is on the thieves' guild payroll",
-    // drawn at the population step) takes the same substitution where no network exists.
-    if (noCrime && enriched.goal && typeof enriched.goal === 'object' && namesCriminalGuild(enriched.goal)) {
-      enriched.goal = { ...enriched.goal, short: withoutCriminalGuild(enriched.goal.short), long: withoutCriminalGuild(enriched.goal.long) };
-    }
 
-    goalsNow[idx] = enriched.goal?.short;
     return enriched;
   });
 };
@@ -1595,11 +1322,3 @@ export const generateSettlementName = (r = 'germanic') => {
  * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
  */
 export const NPC_GOAL_SIBLINGS = Object.freeze({ 'Identify the person inside the walls who is communicating with the besiegers': Object.freeze([ Object.freeze({ text: 'Identify the person inside the walls who is communicating with the besiegers', needs: Object.freeze(['walls']) }), Object.freeze({ text: 'Identify the person inside the settlement who is communicating with the besiegers', twinOf: 'Identify the person inside the walls who is communicating with the besiegers', excludes: Object.freeze(['walls']) }), ]), 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes': Object.freeze([ Object.freeze({ text: 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes', needs: Object.freeze(['soldiers']) }), Object.freeze({ text: 'Keep the defenders together as the call-up pulls away experienced hands and replaces them with frightened substitutes', twinOf: 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes', excludes: Object.freeze(['soldiers']) }), ]), 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.': Object.freeze([ Object.freeze({ text: 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.', needs: Object.freeze(['soldiers']) }), Object.freeze({ text: 'Every experienced hand called up into the field army is a hole in local security that a substitute won\'t fill the same way.', twinOf: 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.', excludes: Object.freeze(['soldiers']) }), ]), });
-
-/**
- * A drawn NPC goal or hook line as this record can speak it: its declared sibling where the record
- * lacks what the line presumes (the inland twins of `npcData.js :: NPC_HOOK_SIBLINGS`, then the
- * defence twins of `NPC_GOAL_SIBLINGS`, the order the retired lookups ran in). Draw-free.
- * @param {unknown} line @param {ReturnType<typeof factsOf>} facts
- */
-function npcLineAsSpoken(line, facts) { return resolveSibling(resolveSibling(line, NPC_HOOK_SIBLINGS, { facts, poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }), NPC_GOAL_SIBLINGS, { facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' }); }

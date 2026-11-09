@@ -241,9 +241,19 @@ const PICK_VARIANT_CALLS = 31;
 // opaque id, and its keyed forks (`people-faces::`, `people-ties::`, `people-hooks::<card id>`) re-deal, so two of
 // the probe row's ties draw archetypes whose prose takes no external fnv1a32 hash. The cause is the lane's one
 // UNSIGNED generator move.
-// MERGE-WAVE at the FIX-PUBLIC-VEIL merge (2026-11-08): 16 - 2 = 14 composed (the integration side's 16 with the veil's
-// two re-dealt ties), MEASURED by A6 at the merged tree; the register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 14;
+// COMPOSED 2026-11-08 (ALLEGIANCE-CAR1, the veil merged over MERGE-CAR, 744c22d74): 16 -> 14, MEASURED by this arm at
+// the merged tree — the integration side's 16 with the veil's re-deal of the probe row's veiled faces composed in (the
+// veil measured -2 at its lane, 15 -> 13; the same -2 here). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-09 (ALLEGIANCE-CAR4): 14 -> 15, MEASURED by A6 at the car's tip and traced call by call against the base
+// f6209c0c5 (a probe recording each external fnv1a32 caller's stack on this probe row): the fourteen base callers are
+// all still there (1 foodways, 6 economy fingerprints, 1 resolveTieKey, 6 tie-prose offsets), and the one new caller is
+// the tie prose's per-archetype offset (power/relationshipArchetypes.js, via people/ties.js :: drawTies) for
+// "Felix Brauer>Kunhild Meyer::family_complication" — a tie that was `old_debt` (an archetype already hashed) at the
+// base. The cause is the BIRTH stream, not goals.js's import graph (A9 runs after drawTies and makes no fnv1a32 call
+// here): the retired goal draw (03ff59084) and item 15's title-secret draw (eabc93dfe) leave a face's fork before its
+// power roll, so the rookery boss's `power` 1 -> 2, the pair's power gap 4 -> 3, and computeRelTension draws another
+// kind. The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 15;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
