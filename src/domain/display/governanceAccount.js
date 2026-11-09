@@ -51,6 +51,8 @@ function listOf(items) {
 
 /** @param {string} s @returns {string} */
 const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
+/** A list that opens on "The …" carried mid-sentence. @param {string} s @returns {string} */
+const lowerFirst = (s) => s.replace(/^The /, 'the ');
 
 /** The breakdown's four causes, adverse and favourable, in words that hold in any size of place. */
 const CAUSE_WORDS = Object.freeze({
@@ -94,35 +96,58 @@ export function pluralPowerName(name) {
 const possessive = (named) => (/s$/i.test(named) ? `${named}'` : `${named}'s`);
 
 /**
- * The standing sentence: the causes first (the evidence), then the band (the judgment).
+ * THE ARRANGEMENT (the chair's condition (e), 2026-11-09): a slotted sentence whose frame would repeat
+ * near-verbatim across towns takes one of two or three ARRANGEMENTS of the same facts, chosen by the
+ * town's own seed (FNV-1a of `<seed>::<slot>`): same words of fact, a different order, never ornament.
+ * Pure and zero-draw: the same town reads the same arrangement on every surface, forever.
+ * @param {string} seed @param {string} slot @param {number} n @returns {number}
+ */
+export function arrangementOf(seed, slot, n) {
+  let h = 0x811c9dc5;
+  const key = `${seed}::${slot}`;
+  for (let i = 0; i < key.length; i += 1) { h ^= key.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return n > 1 ? h % n : 0;
+}
+
+/**
+ * The standing sentence: the causes first (the evidence), then the band (the judgment), in one of two
+ * arrangements.
  * @param {string} label the producer's band word @param {string[]} causes @param {string} place
  * @param {string} ruler the ruling power as prose carries it, lower-case article
+ * @param {(slot: string, n: number) => number} pick
  * @returns {string}
  */
-function standingSentence(label, causes, place, ruler) {
+function standingSentence(label, causes, place, ruler, pick) {
   const one = causes.length === 1;
   const by = capFirst(listOf(causes));
+  const list = listOf(causes);
+  const a = pick(`standing:${label}:${causes.length ? 'causes' : 'bare'}`, causes.length ? 2 : 1);
   switch (label) {
     case 'Legitimacy Crisis':
-      return causes.length
+      if (!causes.length) return `Few in ${place} still accept ${possessive(ruler)} right to rule.`;
+      return a === 0
         ? `${by} ${one ? 'has' : 'have'} cost ${ruler} its standing, and few in ${place} still accept its right to rule.`
-        : `Few in ${place} still accept ${possessive(ruler)} right to rule.`;
+        : `Few in ${place} still accept ${possessive(ruler)} right to rule, now that ${list} ${one ? 'has' : 'have'} cost it its standing.`;
     case 'Contested':
-      return causes.length
+      if (!causes.length) return `${capFirst(possessive(ruler))} right to rule is contested in ${place}.`;
+      return a === 0
         ? `${by} ${one ? 'has' : 'have'} left ${possessive(ruler)} right to rule contested in ${place}.`
-        : `${capFirst(possessive(ruler))} right to rule is contested in ${place}.`;
+        : `In ${place}, ${possessive(ruler)} right to rule is contested, and ${list} ${one ? 'is' : 'are'} the reason.`;
     case 'Tolerated':
-      return causes.length
+      if (!causes.length) return `${place} tolerates ${ruler}, and no more.`;
+      return a === 0
         ? `${by} ${one ? 'keeps' : 'keep'} ${place} from more than tolerating ${ruler}.`
-        : `${place} tolerates ${ruler}, and no more.`;
+        : `${place} tolerates ${ruler} and no more, and ${list} ${one ? 'is' : 'are'} the reason.`;
     case 'Approved':
-      return causes.length
+      if (!causes.length) return `${place} approves of ${ruler}.`;
+      return a === 0
         ? `${by} ${one ? 'has' : 'have'} earned ${ruler} the approval of ${place}.`
-        : `${place} approves of ${ruler}.`;
+        : `${capFirst(ruler)} has the approval of ${place}, earned by ${list}.`;
     case 'Endorsed':
-      return causes.length
+      if (!causes.length) return `${place} stands behind ${ruler}.`;
+      return a === 0
         ? `${by} ${one ? 'has' : 'have'} won ${ruler} the backing of ${place}.`
-        : `${place} stands behind ${ruler}.`;
+        : `${place} stands behind ${ruler}, won over by ${list}.`;
     default:
       return '';
   }
@@ -216,13 +241,20 @@ export function governanceAccountOf(settlement) {
   const place = text(s.name) || 'this place';
   const ruler = powerNameInProse(governing);
   const sentences = [];
+  const seed = String(s._seed ?? s.id ?? s.name ?? '');
+  /** @param {string} slot @param {number} n */
+  const pick = (slot, n) => arrangementOf(seed, slot, n);
 
   // 1. THE SEAT.
   if (chain.npc && text(chain.npc.name)) {
     const role = text(chain.npc.role);
-    sentences.push(role
-      ? `${place} is governed by ${ruler}, and ${text(chain.npc.name)}, ${role}, holds its seat.`
-      : `${place} is governed by ${ruler}, and ${text(chain.npc.name)} holds its seat.`);
+    const who = role ? `${text(chain.npc.name)}, ${role},` : text(chain.npc.name);
+    const whoEnd = role ? `${text(chain.npc.name)}, ${role}` : text(chain.npc.name);
+    sentences.push([
+      `${place} is governed by ${ruler}, and ${who} holds its seat.`,
+      `${who} holds the seat of ${ruler}, which governs ${place}.`,
+      `The seat of ${ruler}, which governs ${place}, is held by ${whoEnd}.`,
+    ][pick('seat', 3)]);
   } else if (chain.absence?.kind === 'missing_seat') {
     // THE VACANCY IS THE FIRST FACT (the chair's condition (b), 2026-11-09): 65 of the 1,000. Then what
     // fills the gap, from the record: the claimants it names, else the power governing without a head.
@@ -239,7 +271,7 @@ export function governanceAccountOf(settlement) {
   const leg = s.powerStructure?.publicLegitimacy;
   const label = leg && typeof leg === 'object' ? text(leg.label) : '';
   if (label) {
-    const standing = standingSentence(label, legitimacyCausesOf(leg.breakdown, ADVERSE_BANDS.has(label)), place, ruler);
+    const standing = standingSentence(label, legitimacyCausesOf(leg.breakdown, ADVERSE_BANDS.has(label)), place, ruler, pick);
     if (standing) sentences.push(standing);
   }
 
@@ -255,15 +287,45 @@ export function governanceAccountOf(settlement) {
   const corrupted = named('corrupted');
   const competitive = named('competitive');
   const tense = named('tense');
-  if (capture) sentences.push(`${capture.names} ${capture.plural ? 'decide' : 'decides'} what the hall decides.`);
-  if (corrupted) sentences.push(`${corrupted.names} ${corrupted.plural ? 'have' : 'has'} bought people inside the hall.`);
-  if (competitive) sentences.push(`${competitive.names} no longer ${competitive.plural ? 'take' : 'takes'} its orders.`);
-  if (tense) sentences.push(`${tense.names} ${tense.plural ? 'are' : 'is'} at odds with it.`);
+  if (capture) sentences.push([
+    `${capture.names} ${capture.plural ? 'decide' : 'decides'} what the hall decides.`,
+    `What the hall decides, ${lowerFirst(capture.names)} ${capture.plural ? 'decide' : 'decides'}.`,
+  ][pick('capture', 2)]);
+  if (corrupted) sentences.push([
+    `${corrupted.names} ${corrupted.plural ? 'have' : 'has'} bought people inside the hall.`,
+    `People inside the hall have been bought by ${lowerFirst(corrupted.names)}.`,
+  ][pick('corrupted', 2)]);
+  if (competitive) sentences.push([
+    `${competitive.names} no longer ${competitive.plural ? 'take' : 'takes'} its orders.`,
+    `${competitive.names} ${competitive.plural ? 'take' : 'takes'} its orders no longer.`,
+  ][pick('competitive', 2)]);
+  if (tense) sentences.push([
+    `${tense.names} ${tense.plural ? 'are' : 'is'} at odds with it.`,
+    `The hall is at odds with ${lowerFirst(tense.names)}.`,
+  ][pick('tense', 2)]);
   const gravest = estranged[0]?.tie;
-  if (gravest === 'capture') sentences.push('The hall keeps its title and its meetings, but not its decisions.');
-  else if (gravest === 'corrupted') sentences.push('The hall still sits, but its arrests and its offices are no longer its own to give.');
-  else if (gravest === 'competitive') sentences.push('The hall still gives its orders, but it can no longer make them hold alone.');
-  else if (gravest === 'tense') sentences.push('Nothing large is settled in the hall without bargaining with them first.');
+  /** @type {Record<string, string[]>} */
+  const CONSEQUENCE = {
+    capture: [
+      'The hall keeps its title and its meetings, but not its decisions.',
+      'Its decisions are no longer the hall\'s, though it keeps its title and its meetings.',
+    ],
+    corrupted: [
+      'The hall still sits, but its arrests and its offices are no longer its own to give.',
+      'Its arrests and its offices are no longer the hall\'s own to give, though it still sits.',
+    ],
+    competitive: [
+      'The hall still gives its orders, but it can no longer make them hold alone.',
+      'It can no longer make its orders hold alone, though the hall still gives them.',
+      'Alone, the hall can no longer make its orders hold, though it still gives them.',
+    ],
+    tense: [
+      'Nothing large is settled in the hall without bargaining with them first.',
+      'The hall settles nothing large without bargaining with them first.',
+      'Without bargaining with them first, the hall settles nothing large.',
+    ],
+  };
+  if (gravest) sentences.push(CONSEQUENCE[gravest][pick(`consequence:${gravest}`, CONSEQUENCE[gravest].length)]);
 
   // 4b. A FRACTURE'S BLOCS, NAMED (condition (c)): where the town is politically fractured and the
   // record holds the blocs the stress added, they are named, and the fractured line's own consequence
@@ -274,7 +336,10 @@ export function governanceAccountOf(settlement) {
     ? fractureBlocsOf(s, new Set(estranged.map((e) => e.name)))
     : { lines: [], withdrawn: false, names: [] };
   sentences.push(...blocs.lines);
-  if (blocs.withdrawn) sentences.push('Each side makes its own decisions now, and the others overturn them within days.');
+  if (blocs.withdrawn) sentences.push([
+    'Each side makes its own decisions now, and the others overturn them within days.',
+    'Each side now makes its own decisions, and within days the others overturn them.',
+  ][pick('fracture', 2)]);
 
   // 5. THE VIGNETTE. The generator's vignette is its primary stress's (stressPriority.js's order, the
   // generator's own). Under a stress OTHER than politically_fractured it is the EVENT sentence the style

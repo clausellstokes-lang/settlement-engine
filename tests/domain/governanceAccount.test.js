@@ -7,7 +7,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  governanceAccountOf, estrangedPowersOf, legitimacyCausesOf, powerNameInProse, pluralPowerName,
+  governanceAccountOf, estrangedPowersOf, legitimacyCausesOf, powerNameInProse, pluralPowerName, arrangementOf,
 } from '../../src/domain/display/governanceAccount.js';
 import { buildGovernanceLabels } from '../../src/generators/power/governanceNarrative.js';
 import { applyStressEventFactions } from '../../src/generators/power/stressFactions.js';
@@ -56,7 +56,7 @@ describe('the stress vignette is the event sentence (the chair\'s ruling on the 
   it('a famine town with two estranged powers prints the names AND the famine vignette, the vignette last', () => {
     const g = governanceAccountOf(planted({ relationships: TWO_ESTRANGED, recentConflict: FAMINE_VIGNETTE, stress: ['famine'] }));
     expect(g.text).toContain("The Thieves' Guild");
-    expect(g.text).toContain('The Religious Authorities');
+    expect(g.text).toContain('Religious Authorities');
     expect(g.text.endsWith(FAMINE_VIGNETTE)).toBe(true);
   });
 
@@ -110,6 +110,29 @@ describe('the chair\'s conditions (b) and (c), 2026-11-09', () => {
   });
 });
 
+describe('the chair\'s condition (e), 2026-11-09: seed-chosen arrangements of the same facts', () => {
+  const seeded = (seed) => {
+    const s = planted({ relationships: TWO_ESTRANGED });
+    s._seed = seed;
+    return governanceAccountOf(s).text;
+  };
+  it('one seed reads one arrangement, every time', () => {
+    expect(seeded('alpha')).toBe(seeded('alpha'));
+    expect(arrangementOf('alpha', 'seat', 3)).toBe(arrangementOf('alpha', 'seat', 3));
+  });
+  it('across seeds the frames vary, and every arrangement carries the same facts', () => {
+    const texts = new Set();
+    for (let i = 0; i < 40; i += 1) {
+      const t = seeded(`seed-${i}`);
+      texts.add(t);
+      for (const fact of ['Polaovo', 'Corrupt Council', 'Boleslav Davydov', 'the first councillor', 'poverty', 'crime', "Thieves' Guild", 'Religious Authorities', 'arrests', 'offices']) {
+        expect(t.toLowerCase(), `seed-${i} lost "${fact}"`).toContain(fact.toLowerCase());
+      }
+    }
+    expect(texts.size, 'the seed chooses among arrangements').toBeGreaterThan(4);
+  });
+});
+
 describe('the composed governance paragraph', () => {
   it('a record with two estranged powers NAMES them, the seat first, the causes before the band', () => {
     const s = planted({
@@ -124,11 +147,12 @@ describe('the composed governance paragraph', () => {
     expect(g.estranged.map((e) => e.name)).toEqual(["Thieves' Guild", 'Religious Authorities']);
     expect(g.fallback, 'the vignette is the fallback only where no estranged power is named').toBe(false);
     expect(g.text).toBe(
+      // Re-keyed by condition (e), 2026-11-09: the arrangement this record's seed chooses (identity, not wording loosened).
       'Polaovo is governed by the Corrupt Council, and Boleslav Davydov, the first councillor, holds its seat. '
-      + 'Poverty and crime have cost the Corrupt Council its standing, and few in Polaovo still accept its right to rule. '
+      + "Few in Polaovo still accept the Corrupt Council's right to rule, now that poverty and crime have cost it its standing. "
       + "The Thieves' Guild has bought people inside the hall. "
-      + 'The Religious Authorities are at odds with it. '
-      + 'The hall still sits, but its arrests and its offices are no longer its own to give.',
+      + 'The hall is at odds with the Religious Authorities. '
+      + "Its arrests and its offices are no longer the hall's own to give, though it still sits.",
     );
     expect(g.text.startsWith('Polaovo is governed by the Corrupt Council, and Boleslav Davydov')).toBe(true);
     expect(g.text).not.toMatch(/faction/i);

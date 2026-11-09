@@ -48,7 +48,8 @@ describe('the governance block is one paragraph', () => {
     const { getByTestId, container } = tab(s);
     const block = getByTestId('power-governance-account');
     expect(block.textContent).toBe(governanceAccountOf(s).text);
-    expect(block.textContent).toContain("The Thieves' Guild has bought people inside the hall.");
+    expect(block.textContent).toContain("Thieves' Guild"); // the arrangement is the seed's (condition (e)); the name is the fact
+    expect(block.textContent).toContain('Religious Authorities');
     const page = container.textContent || '';
     // The figure stays as data: the score, the band and the breakdown chips.
     expect(page).toContain('Public legitimacy');
