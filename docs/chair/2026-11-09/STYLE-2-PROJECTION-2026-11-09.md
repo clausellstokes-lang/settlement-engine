@@ -347,12 +347,13 @@ Total 186.2 KB; mean **15.2 KB** a town (6.7 KB at §6.2; §6.2 forecast 10–14
 - The three record walkers were green before each push (with `review-fixes-2026-07-08` fetched to a local branch ref).
 - Not run: the 1,000 (no cause is frame-bearing: no pool text was written; the shared page prints the owner's own lines). The production build and its byte ceiling were not run in this seat: the composer's new imports (the tabs' read modules, `WarFaithDesk.jsx`, `rulingPowerCoup` through `powerDeskRead.js`) ride its lazy chunk, which is PLAUSIBLE, not measured.
 
-### 8.5 What stays — BY FILE, for the next seat
+### 8.5 What stays — BY FILE, for the next seat (as ruled; see §8.8)
 
-1. **`src/components/new/tabs/SteadingsSection.jsx`, `src/components/new/publicProseCompose.js`, `src/components/new/generalDeskRead.js`** (`general:steadings`): per §8.3 STOP 1's ruling. The parked work: `PUBLIC_SITE_GROUP` += `'general:steadings': 'steadings'`, SteadingsSection passes `publicSite`, the composer's site with `steadings: []`, and the planted three-town pin.
-2. **`src/domain/dossier/dossierSearch.js` + `src/components/dossier/DossierSearchResults.jsx`** (item 3): per §8.3 STOP 2's ruling.
+1. **`src/components/new/tabs/SteadingsSection.jsx`, `src/components/new/publicProseCompose.js`, `src/components/new/generalDeskRead.js`** (`general:steadings`): UNLIT in this wave by the chair's ruling (18:1x), pinned SILENT (`9a24c2dbf`). For the post-deploy campaign-aware projection packet, the two cure shapes in the chair's order: (1) SteadingsSection takes worldState instead of the store, so the composer's read closes no store cycle; then (2) the composer's reads of `lifecycleStatus` / `ancientRuin` admitted as a TRUE shape change by the one rung at that packet's tip.
+2. **The share veil's known limit** (`src/domain/display/galleryVeil.js`; the SQL's `_gallery_apply_member_overrides`): per-member hides (the `$veil` deltas in `gallery_member_overrides`) are applied CLIENT-side, for cards and now for strings alike; the wire carries player-audience content only. The chair names a server-side application of the `$veil` deltas for the post-deploy veil packet.
 3. **The bytes lever** (§8.2): the chair's call.
-4. **The SQL twin of item 2** (§8.3 note 3): the SQL lane's, at the deploy.
+4. **`tests/ops/migrationRehearsal.test.js`: the gap arm red on the lane alone, 208–209 absent** (§8.8): closed at the merge when 208 and 209 land with their own entries; their entries are not this lane's.
+5. **`src/components/ProseParagraph.jsx`**: +2 on `npm run typecheck:ratchet` (TS2322, a `key` prop), a file this lane never touched: inherited, for the merge seat.
 
 ### 8.6 The deploy step's terms (unchanged from §7.6)
 
@@ -361,3 +362,17 @@ The owner runs `supabase db push` with 208, 209 and 210 in that order; no lane a
 ### 8.7 CONFIRMED against PLAUSIBLE
 
 CONFIRMED by executed measurement: on the twelve, every stressor, defense, power-desk, governance, faith, magic, viability and identity line the owner's player view prints, the shared page prints, character for character, with the veiled rows named; the red-first counts in §8.1; T2-20's reach (owner 0/300, shared 37 → 0); the bytes; the veil arm; the census bisection. PLAUSIBLE: `power:ladder` (the ladder is dark on the twelve: read, not rendered); the lazy chunk's bytes (no build was run); the steadings site (lit on a planted record only, then parked).
+
+### 8.8 After the hand-back: the chair's rulings and the causes they added
+
+The chair's messages of 17:2x (210's wave entry), 17:4x (the tsc gate is `npm run typecheck:ratchet`), 18:1x (the steadings STOP: the default accepted) and 18:4x (the search STOP: granted) reached this seat after the first hand-back. The seat resumed on the same lane:
+
+| commit | cause | proof |
+|---|---|---|
+| `fa46e2e2a` | `PUBLIC_PROSE_SITES` typed for real (`PublicProseSite`): the ratchet's +1 in `publicProseCompose.js`, from `aa04ec19c`'s spread of the defense lenses | the ratchet names the file no more |
+| `9a24c2dbf` | `general:steadings` pinned SILENT on the shared page (the planted three-town pin turned into this wave's silence pin) | red-first by plant and restore: 3/3 red with the parked site planted, 3/3 green restored |
+| `02b3748a4` | 210's rehearsal wave entry (`public-prose-text-projection`, the 207 idiom, purpose quoted from 210's header, deployment "after 207, 208 and 209"); `MIGRATION_TRAIN_REPO_HEAD` 207 → 210; the test's 210 arm, the gap arm += [210, 210], pending 86 → 89 | red-first rehearsed on the merged SHAPE (a scratch migrations copy with stub 208/209 and stub waves): HEAD's manifest REFUSES ("ends at 207, but the repository head is 210"); this one plans 210 with {documented-manual-reversal, migration-annotation} and the note. On the lane alone the suite fails at collection, "not contiguous at 207 → 210" — the DECLARED gap, 208–209 absent, as SW-B7a's §41 named 207's |
+| `448ec0010` | item 3: the dossier search's `prose` family (player view, one object per shipped site, built from the veiled projection) and its one-paragraph renderer in `DossierSearchResults.jsx` | 4/4 red (entityIndex: found under Defense; a veiled block's words return no hit) + 2/2 red (the renderer withdrawn); a DM-view guard green at the parent too; the phone floors unmoved |
+
+The ratchet before the push: no file this lane touched regresses; the one line is the inherited `ProseParagraph.jsx` (§8.5 item 5). The bytes (§8.2) do not move: no site was added after them.
+
