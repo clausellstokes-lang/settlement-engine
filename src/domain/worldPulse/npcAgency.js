@@ -1068,7 +1068,7 @@ function npcGoalRebranch(state, context, tick) {
   const goals = branchedGoals(state, context);
   if (!goals) return null;
   const turned = goals.longGoal !== state.longGoal ? 'longGoal' : 'shortGoal';
-  const aimOf = (/** @type {any} */ g) => NPC_AIMS[g] || String(g || '').replace(/_/g, ' ');
+  const aimOf = (/** @type {unknown} */ g) => NPC_AIMS[/** @type {keyof typeof NPC_AIMS} */ (String(g))] || String(g || '').replace(/_/g, ' ');
   return {
     id: `candidate.npc.goal_rebranch.${stablePart(state.npcId)}.${tick}`,
     type: 'npc',
