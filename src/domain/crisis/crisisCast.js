@@ -219,7 +219,7 @@ export const STAKE_REASONS = Object.freeze({
   loses: 'its own people feel the crisis first', // SW-6 (B3 C4): "its base" was the rule's word
   losesSeat: 'the seat bears the blame',
   split: 'gains and loses by it at once',
-  untouched: 'not touched yet; it could side with either camp',
+  untouched: 'it could side with either camp', // SW-6 (B3 A·C4): the page's label says "no stake yet"
 });
 
 // ── The levers: the houses each kind turns on, and the faces that run them ─────────────────

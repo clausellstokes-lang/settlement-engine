@@ -71,3 +71,20 @@ describe('the Crisis page, one section per active crisis', () => {
     expect(page.map((x) => x.line)).toEqual([`Famine, ${CRISIS_PAGE_COPY.begunByYou}.`, 'Wartime.']);
   });
 });
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3; STYLE-2-SURFACES A·C4): "Noble Families: split. not touched yet; it
+// could side with either camp." contradicted itself on every untouched row (soak1k-4, -5, -9, -10). The page prints
+// an untouched power as having no stake yet; the record keeps its split for the waverer's rule.
+describe('the Crisis page: an untouched power is never "split"', () => {
+  it('an untouched stake prints "no stake yet", and no row says both split and untouched', () => {
+    const s = gen('crisis-page-pair', 'town', ['famine', 'under_siege']);
+    for (const section of composeCrisisPage(s)) {
+      for (const k of section.stakes) {
+        const printed = `${k.factionId}: ${CRISIS_PAGE_COPY.stake[k.stake]}. ${k.reason}.`;
+        expect(printed).not.toMatch(/split\. not touched/);
+        if (/either camp/.test(k.reason)) expect(CRISIS_PAGE_COPY.stake[k.stake]).toBe('no stake yet');
+      }
+    }
+    expect(composeCrisisPage(s).some((x) => x.stakes.some((k) => k.stake === 'untouched'))).toBe(true);
+  });
+});
