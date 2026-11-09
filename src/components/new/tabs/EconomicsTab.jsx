@@ -323,7 +323,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // DS-GEN-18 (`economics.craftReason`) — the general desk's ONE caller with that reader's own
   // gate, memoised (ARCH §4.1, X-F9) ABOVE the early return (rules-of-hooks). FOUR LINES, as
   // many as the block it replaced: this file's thirteen prose-numerics rows are keyed on LINE.
-  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView, tier: s?.tier }).economics.craftReasonLine, [s, publicDossier, playerView]);
+  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView, publicSite: 'general:economics', tier: s?.tier }).economics.craftReasonLine, [s, publicDossier, playerView]);
   if (!eco) return <Empty message="No economic data available."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';

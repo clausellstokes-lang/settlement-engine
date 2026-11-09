@@ -65,7 +65,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // rather than through a single kernel read, and that cost is unmeasured on the browser
   // side. The result is a pure function of the settlement and the two view flags.
   const {verdictLines} = useMemo(
-    () => generalDeskLines(s, {publicDossier, playerView, tier: s?.tier}).viability,
+    () => generalDeskLines(s, {publicDossier, playerView, publicSite: 'general:viability', tier: s?.tier}).viability,
     [s, publicDossier, playerView],
   );
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;

@@ -22,13 +22,15 @@ import { render, cleanup } from '@testing-library/react';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
-import { withPublicProse } from '../../src/domain/display/publicProse.js';
+import { publicProseOf, withPublicProse } from '../../src/domain/display/publicProse.js';
 import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
 import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
-import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
+import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
+import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
+import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 
 afterEach(cleanup);
 
@@ -43,17 +45,43 @@ const TABS = {
   services: (s, gate) => <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} {...gate} />,
   resources: (s, gate) => <ResourcesTab settlement={s} narrativeNote={null} {...gate} />,
   daily_life: (s, gate) => <DailyLifeTab settlement={s} {...gate} />,
+  overview: (s, gate) => <OverviewTab settlement={s} narrativeNote={null} {...gate} />,
+  history: (s, gate) => <HistoryTab settlement={s} narrativeNote={null} {...gate} />,
+  viability: (s, gate) => <ViabilityTab settlement={s} narrativeNote={null} {...gate} />,
 };
 
 /**
- * The lines a tab prints from a desk family NOT YET LIT, by family: the remainder A − B is
- * exactly these until that family's cause lands and deletes its entry.
- * @type {Record<string, (owner: any) => ReadonlyArray<string|null>>}
+ * WHERE EVERY FAMILY A TAB HOSTS IS LIT, the remainder A − B is NONE. A tab that also prints a
+ * family not yet lit (or a line the projection's own field set strips) is pinned per family
+ * below instead, and joins this list in the cause that completes it.
  */
-const PENDING = {
-  // DS-GEN-18, the general desk's craft reason, which the economics tab hosts.
-  economics: (owner) => [generalDeskLines(owner, { playerView: true, tier: owner?.tier }).economics.craftReasonLine],
+const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history'];
+
+/**
+ * THE LIT FAMILIES' SITES, by tab: every string the save shipped at these sites that the owner's
+ * player view prints, the shared page prints, character for character.
+ * @type {Record<string, ReadonlyArray<string>>}
+ */
+const SITES = {
+  economics: ['economy:economics', 'general:economics'],
+  services: ['economy:services'],
+  resources: ['economy:resources'],
+  daily_life: ['economy:daily_life'],
+  overview: ['general:overview'],
+  history: ['general:history'],
+  viability: ['general:viability'],
 };
+
+/** Every string in a shipped site, at any depth. */
+function shippedStrings(record, site) {
+  const out = [];
+  const walk = (v) => {
+    if (typeof v === 'string') { if (v.split(' ').length >= 4) out.push(v); return; }
+    if (v && typeof v === 'object') Object.values(v).forEach(walk);
+  };
+  walk(publicProseOf(record, site));
+  return out;
+}
 
 /** @type {Record<number, {owner: any, shared: any, unstamped: any}>} */
 const towns = {};
@@ -81,16 +109,38 @@ function proseLines(element) {
 }
 
 describe('the shared page prints the owner\'s player view, line for line', () => {
-  for (const tab of Object.keys(TABS)) {
-    it.each(TOWNS)(`${tab}, soak1k-%i: the owner's player-view lines are all on the shared page`, (i) => {
+  for (const tab of COMPLETE) {
+    it.each(TOWNS)(`${tab}, soak1k-%i: every owner player-view line is on the shared page`, (i) => {
       const { owner, shared } = towns[i];
       const a = proseLines(TABS[tab](owner, { playerView: true }));
       const b = new Set(proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })));
       expect(a.length).toBeGreaterThan(0);
-      const pending = (PENDING[tab]?.(owner) ?? []).filter(Boolean);
-      expect(a.filter((line) => !b.has(line))).toEqual(a.filter((line) => pending.includes(line)));
+      expect(a.filter((line) => !b.has(line))).toEqual([]);
     });
   }
+});
+
+describe('each lit family: what the owner\'s player view prints from it, the shared page prints', () => {
+  for (const [tab, sites] of Object.entries(SITES)) {
+    it.each(TOWNS)(`${tab} (${sites.join(', ')}), soak1k-%i`, (i) => {
+      const { owner, shared } = towns[i];
+      const a = proseLines(TABS[tab](owner, { playerView: true })).join('\n');
+      const b = proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })).join('\n');
+      const printed = sites.flatMap((site) => shippedStrings(shared, site)).filter((str) => a.includes(str));
+      expect(printed.filter((str) => !b.includes(str))).toEqual([]);
+    });
+  }
+  it('the family arm is not vacuous: every lit site prints somewhere on the twelve', () => {
+    for (const [tab, sites] of Object.entries(SITES)) {
+      for (const site of sites) {
+        const hits = TOWNS.filter((i) => {
+          const a = proseLines(TABS[tab](towns[i].owner, { playerView: true })).join('\n');
+          return shippedStrings(towns[i].shared, site).some((str) => a.includes(str));
+        });
+        expect(hits.length, `${tab} :: ${site}`).toBeGreaterThan(0);
+      }
+    }
+  });
 });
 
 describe('RULE 1, rendered: an unstamped record prints silence where the desk speaks', () => {

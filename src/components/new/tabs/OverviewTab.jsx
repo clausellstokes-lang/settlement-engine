@@ -5,6 +5,7 @@ import { stressorsStateProse } from '../../../domain/display/stateProse/stressor
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
 // owns the §885.3 public gate and the desk's own primary-stress read.
 import { generalDeskLines } from '../generalDeskRead.js';
+import { overviewStressesOf } from '../deskHostArgs.js';
 import { populationTrendBand } from '../../../domain/display/trendLens.js'; // DS-POP-3 · the annex's own named reader
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
@@ -162,7 +163,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // `composeStateProse` rather than through a single kernel read. The browser-side cost of
   // that is unmeasured and the composed-prose manifest cannot measure it, so the memo is
   // insurance taken before the cost exists rather than after a page feels slow.
-  const stresses = (Array.isArray(r?.stress) ? r.stress : r?.stress ? [r.stress] : []).filter(Boolean);
+  const stresses = overviewStressesOf(r); // deskHostArgs.js: shared with the public prose composer (SW-B7b)
   // ⛔ `stresses` IS DELIBERATELY NOT A DEPENDENCY, AND DELIBERATELY NOT ITSELF A `useMemo`.
   // It is a pure function of `r`, so `r` already covers it and the memo can never be stale.
   // Memoising it instead was tried and MEASURED: `tests/lint/writerReach.walker.test.js`
@@ -171,7 +172,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // inside a hook callback. Moving a frozen register is not this car's act, and the register
   // is right to notice: the plain const keeps the reach exactly where it was.
   const overviewDesk = useMemo(() => generalDeskLines(r, {
-    publicDossier, playerView, stresses, populationTrend: populationTrendBand(r?.populationHistory),
+    publicDossier, playerView, publicSite: 'general:overview', stresses, populationTrend: populationTrendBand(r?.populationHistory),
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }).overview, [r, publicDossier, playerView]);
   if (!r) return null;

@@ -62,3 +62,13 @@ export function impairedInstitutionOf(services, impaired) {
     .filter((inst) => inst && impaired.has(inst))
     .sort(compareCodepoint)[0] || null;
 }
+
+/**
+ * The Overview's own normalized stress list (one banner per entry; a single entry or none read
+ * as a list). The general desk keys DS-GEN-5's suppression on it, so the composer must hand the
+ * desk the same list the arrival scene above it keys on.
+ * @param {any} settlement @returns {any[]}
+ */
+export function overviewStressesOf(settlement) {
+  return (Array.isArray(settlement?.stress) ? settlement.stress : settlement?.stress ? [settlement.stress] : []).filter(Boolean);
+}

@@ -25,7 +25,9 @@
  */
 import { PUBLIC_PROSE_VERSION, aliasRepeatedRungs, shippedProseOf } from '../../domain/display/publicProse.js';
 import { economyDeskRead } from './economyDeskRead.js';
-import { economicsDeskArgs, impairedInstitutionOf } from './deskHostArgs.js';
+import { economicsDeskArgs, impairedInstitutionOf, overviewStressesOf } from './deskHostArgs.js';
+import { generalDeskLines } from './generalDeskRead.js';
+import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
 
 
@@ -46,6 +48,15 @@ export const PUBLIC_PROSE_SITES = Object.freeze([
   })],
   ['economy:resources', (s, publicDossier) => economyDeskRead(s, { publicDossier, playerView: true, tier: s?.tier })],
   ['economy:daily_life', (s, publicDossier) => economyDeskRead(s, { publicDossier, playerView: true, tier: s?.tier })],
+  // THE GENERAL DESK, one site per host group (generalDeskRead.js is its one caller). The
+  // Overview states no tier, exactly as OverviewTab's call does.
+  ['general:overview', (s, publicDossier) => generalDeskLines(s, {
+    publicDossier, playerView: true, stresses: overviewStressesOf(s),
+    populationTrend: populationTrendBand(s?.populationHistory),
+  }).overview],
+  ['general:history', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).history],
+  ['general:viability', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).viability],
+  ['general:economics', (s, publicDossier) => generalDeskLines(s, { publicDossier, playerView: true, tier: s?.tier }).economics],
 ].map((entry) => Object.freeze(entry)));
 
 /**
