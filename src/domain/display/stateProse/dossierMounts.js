@@ -287,10 +287,14 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.tradeFlow', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-3', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'sentence',
+    // ⛔ GLANCES since the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 3): the Power tab's governance
+    // block is ONE paragraph read off the record (governanceAccount.js); the desk and the corpus are untouched.
+    mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'sentence', dimensions: ['walls'],
+    // ⛔ GLANCES since the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 3): the Power tab's governance
+    // block is ONE paragraph read off the record (governanceAccount.js); the desk and the corpus are untouched.
+    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'glance', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'power.criminalUnderside', tab: 'power', desk: 'power', blockId: 'DS-POW-6', rung: 'sentence', dimensions: ['walls'],

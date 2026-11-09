@@ -598,7 +598,7 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Economics":   { measured: 42, sub14: 42 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
-  "Systems/Power":       { measured: 30, sub14: 29 },
+  "Systems/Power":       { measured: 29, sub14: 28 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
   // 28 -> 27 (2026-10-30, UX consolidation U6, T2-20..T2-23): the duplicate order headline, the first-survey
   // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
   // 27 -> 26 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the fixture town's one order & crime plot
@@ -707,7 +707,7 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 34, chrome: 8, sub14: 8, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
-  "Systems/Power":       { prose: 29, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Power":       { prose: 28, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
   // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
   // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.

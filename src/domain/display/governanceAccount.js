@@ -1,0 +1,224 @@
+/**
+ * display/governanceAccount.js — WHO RUNS THE PLACE, IN ONE PARAGRAPH (OWNER-WORDS-DOSSIER item 3).
+ *
+ * The owner, 2026-11-09, on the Power tab's governance block: "The governance description itself seemed
+ * disconnected and not to our standard wouldn't you agree?" It read as three pieces of machinery — a
+ * legitimacy reading ("the space its authority does not occupy", "the gap widens"), a hall line, and a
+ * pool vignette that said "two factions" without a name — while the seat and the powers were named an
+ * inch above and unused. The chair's ruling: ONE paragraph, under the style law (evidence before
+ * judgment; the event, the people, the consequence; no machinery; words that hold in any size of place):
+ *
+ *   1. THE SEAT, by name and title, from the record (`rulingChainOf`: the ladder's first rung, else the
+ *      generation-time seat-holder; a vacancy or an unrecorded seat said plainly).
+ *   2. THE STANDING: the legitimacy band as a word, with the one or two causes its breakdown names.
+ *   3. THE POWERS THAT HAVE BROKEN WITH IT, NAMED from the record's relationships with the ruler — a
+ *      `corrupted` pair (bought, or captured), a `competitive` one (no longer answers to it), a `tense`
+ *      one (at odds with it). Never a count without a name; the word "faction" is not used.
+ *   4. THE CONSEQUENCE, in plain words, from the gravest of those ties.
+ *   5. THE FALLBACK: where the record names no estranged power, the generator's own vignette
+ *      (`powerStructure.recentConflict`) closes the paragraph instead.
+ *
+ * No contradicted-decision sentence is written: the record holds no named decision, and inventing one is
+ * the thing this composer exists to refuse. Pure, zero-draw, total: the same record reads the same words
+ * on the screen and in print. Every sentence is a template over record names; the connective copy is the
+ * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
+ */
+import { rulingChainOf } from '../dossier/powerStrata.js';
+
+/** @param {unknown} v @returns {string} */
+const text = (v) => (typeof v === 'string' ? v.trim() : '');
+
+/**
+ * A power's name as a sentence carries it: a trailing parenthetical qualifier ("Merchant Guilds
+ * (dominant)") is the roster's annotation, not the name; a name that opens on "The" keeps it, lowered
+ * mid-sentence; every other name takes "the".
+ * @param {string} name @param {boolean} [start] @returns {string}
+ */
+export function powerNameInProse(name, start = false) {
+  const bare = text(name).replace(/\s*\([^)]*\)\s*$/, '');
+  if (!bare) return '';
+  const body = /^the\s/i.test(bare) ? bare.replace(/^the\s/i, '') : bare;
+  return `${start ? 'The' : 'the'} ${body}`;
+}
+
+/** @param {string[]} items @returns {string} */
+function listOf(items) {
+  if (items.length <= 1) return items[0] || '';
+  return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+}
+
+/** @param {string} s @returns {string} */
+const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
+
+/** The breakdown's four causes, adverse and favourable, in words that hold in any size of place. */
+const CAUSE_WORDS = Object.freeze({
+  prosperity: Object.freeze({ adverse: 'poverty', favourable: 'prosperity' }),
+  safety: Object.freeze({ adverse: 'crime', favourable: 'safety' }),
+  defense: Object.freeze({ adverse: 'weak defences', favourable: 'strong defences' }),
+  food: Object.freeze({ adverse: 'hunger', favourable: 'full stores' }),
+});
+const CAUSE_ORDER = Object.freeze(['prosperity', 'safety', 'defense', 'food']);
+
+/** The bands that read their ADVERSE causes; the other two read their favourable ones. */
+const ADVERSE_BANDS = new Set(['Legitimacy Crisis', 'Contested', 'Tolerated']);
+
+/**
+ * The one or two causes the breakdown names for the band's direction, largest first; ties break in
+ * the fixed order above, so an unrelated edit cannot reorder them.
+ * @param {unknown} breakdown @param {boolean} adverse @returns {string[]}
+ */
+export function legitimacyCausesOf(breakdown, adverse) {
+  const b = breakdown && typeof breakdown === 'object' ? /** @type {Record<string, unknown>} */ (breakdown) : {};
+  return CAUSE_ORDER
+    .map((field, order) => ({ field, order, value: typeof b[field] === 'number' && Number.isFinite(b[field]) ? /** @type {number} */ (b[field]) : 0 }))
+    .filter(({ value }) => (adverse ? value < 0 : value > 0))
+    .sort((a, z) => Math.abs(z.value) - Math.abs(a.value) || a.order - z.order)
+    .slice(0, 2)
+    .map(({ field }) => CAUSE_WORDS[/** @type {keyof typeof CAUSE_WORDS} */ (field)][adverse ? 'adverse' : 'favourable']);
+}
+
+/**
+ * Whether a power's name reads as plural ("Religious Authorities", "Noble Houses"): its head noun, the
+ * last word before any parenthetical, ends in a single s ("Guild", "Gentry", "Circle" do not).
+ * @param {string} name @returns {boolean}
+ */
+export function pluralPowerName(name) {
+  const words = text(name).replace(/\s*\([^)]*\)\s*$/, '').split(/[\s/]+/).filter(Boolean);
+  const head = (words[words.length - 1] || '').replace(/[^A-Za-z']/g, '');
+  return /[^s']s$/i.test(head);
+}
+
+/** @param {string} named the name as prose carries it @returns {string} */
+const possessive = (named) => (/s$/i.test(named) ? `${named}'` : `${named}'s`);
+
+/**
+ * The standing sentence: the causes first (the evidence), then the band (the judgment).
+ * @param {string} label the producer's band word @param {string[]} causes @param {string} place
+ * @param {string} ruler the ruling power as prose carries it, lower-case article
+ * @returns {string}
+ */
+function standingSentence(label, causes, place, ruler) {
+  const one = causes.length === 1;
+  const by = capFirst(listOf(causes));
+  switch (label) {
+    case 'Legitimacy Crisis':
+      return causes.length
+        ? `${by} ${one ? 'has' : 'have'} cost ${ruler} its standing, and few in ${place} still accept its right to rule.`
+        : `Few in ${place} still accept ${possessive(ruler)} right to rule.`;
+    case 'Contested':
+      return causes.length
+        ? `${by} ${one ? 'has' : 'have'} left ${possessive(ruler)} right to rule contested in ${place}.`
+        : `${capFirst(possessive(ruler))} right to rule is contested in ${place}.`;
+    case 'Tolerated':
+      return causes.length
+        ? `${by} ${one ? 'keeps' : 'keep'} ${place} from more than tolerating ${ruler}.`
+        : `${place} tolerates ${ruler}, and no more.`;
+    case 'Approved':
+      return causes.length
+        ? `${by} ${one ? 'has' : 'have'} earned ${ruler} the approval of ${place}.`
+        : `${place} approves of ${ruler}.`;
+    case 'Endorsed':
+      return causes.length
+        ? `${by} ${one ? 'has' : 'have'} won ${ruler} the backing of ${place}.`
+        : `${place} stands behind ${ruler}.`;
+    default:
+      return '';
+  }
+}
+
+/** The ruler's ties the composer reads as estrangement, gravest first. */
+const ESTRANGED_ORDER = Object.freeze(['capture', 'corrupted', 'competitive', 'tense']);
+
+/**
+ * The powers that have broken with the ruler, NAMED from the record: each relationship whose pair holds
+ * the governing power and whose type is `corrupted` (split by its capture state), `competitive` or
+ * `tense`. One entry per power, its gravest tie kept.
+ * @param {unknown} settlement @param {string} governing
+ * @returns {Array<{ name: string, tie: 'capture' | 'corrupted' | 'competitive' | 'tense' }>}
+ */
+export function estrangedPowersOf(settlement, governing) {
+  const ps = /** @type {{ factionRelationships?: unknown }} */ ((settlement && typeof settlement === 'object' && /** @type {{ powerStructure?: unknown }} */ (settlement).powerStructure) || {});
+  const rels = Array.isArray(ps.factionRelationships) ? ps.factionRelationships : [];
+  /** @type {Map<string, 'capture' | 'corrupted' | 'competitive' | 'tense'>} */
+  const byName = new Map();
+  for (const rel of rels) {
+    if (!rel || typeof rel !== 'object') continue;
+    const pair = Array.isArray(rel.pair) ? rel.pair.map(text) : [];
+    if (!governing || !pair.includes(governing)) continue;
+    const other = pair.find((n) => n && n !== governing);
+    if (!other) continue;
+    const tie = rel.type === 'corrupted' ? (rel.captureState === 'capture' ? 'capture' : 'corrupted')
+      : rel.type === 'competitive' ? 'competitive'
+        : rel.type === 'tense' ? 'tense' : null;
+    if (!tie) continue;
+    const held = byName.get(other);
+    if (!held || ESTRANGED_ORDER.indexOf(tie) < ESTRANGED_ORDER.indexOf(held)) byName.set(other, tie);
+  }
+  return [...byName].map(([name, tie]) => ({ name, tie }))
+    .sort((a, z) => ESTRANGED_ORDER.indexOf(a.tie) - ESTRANGED_ORDER.indexOf(z.tie));
+}
+
+/**
+ * THE PARAGRAPH, or null where the record names no governing power.
+ * @param {unknown} settlement
+ * @returns {{ text: string, estranged: Array<{ name: string, tie: string }>, fallback: boolean } | null}
+ */
+export function governanceAccountOf(settlement) {
+  const s = settlement && typeof settlement === 'object' ? /** @type {Record<string, any>} */ (settlement) : null;
+  if (!s) return null;
+  const chain = rulingChainOf(s);
+  const governing = text(chain.power?.name);
+  if (!governing) return null;
+  const place = text(s.name) || 'this place';
+  const ruler = powerNameInProse(governing);
+  const sentences = [];
+
+  // 1. THE SEAT.
+  if (chain.npc && text(chain.npc.name)) {
+    const role = text(chain.npc.role);
+    sentences.push(role
+      ? `${place} is governed by ${ruler}, and ${text(chain.npc.name)}, ${role}, holds its seat.`
+      : `${place} is governed by ${ruler}, and ${text(chain.npc.name)} holds its seat.`);
+  } else if (chain.absence?.kind === 'missing_seat') {
+    sentences.push(`${place} is governed by ${ruler}, but its seat stands empty.`);
+  } else {
+    sentences.push(`${place} is governed by ${ruler}, and the record names no one in its seat.`);
+  }
+
+  // 2. THE STANDING.
+  const leg = s.powerStructure?.publicLegitimacy;
+  const label = leg && typeof leg === 'object' ? text(leg.label) : '';
+  if (label) {
+    const standing = standingSentence(label, legitimacyCausesOf(leg.breakdown, ADVERSE_BANDS.has(label)), place, ruler);
+    if (standing) sentences.push(standing);
+  }
+
+  // 3 + 4. THE POWERS THAT HAVE BROKEN WITH IT, AND WHAT THAT COSTS THE HALL.
+  const estranged = estrangedPowersOf(s, governing);
+  /** @param {string} tie @returns {{ names: string, plural: boolean } | null} */
+  const named = (tie) => {
+    const of = estranged.filter((e) => e.tie === tie);
+    if (!of.length) return null;
+    return { names: capFirst(listOf(of.map((e) => powerNameInProse(e.name)))), plural: of.length > 1 || pluralPowerName(of[0].name) };
+  };
+  const capture = named('capture');
+  const corrupted = named('corrupted');
+  const competitive = named('competitive');
+  const tense = named('tense');
+  if (capture) sentences.push(`${capture.names} ${capture.plural ? 'decide' : 'decides'} what the hall decides.`);
+  if (corrupted) sentences.push(`${corrupted.names} ${corrupted.plural ? 'have' : 'has'} bought people inside the hall.`);
+  if (competitive) sentences.push(`${competitive.names} no longer ${competitive.plural ? 'take' : 'takes'} its orders.`);
+  if (tense) sentences.push(`${tense.names} ${tense.plural ? 'are' : 'is'} at odds with it.`);
+  const gravest = estranged[0]?.tie;
+  if (gravest === 'capture') sentences.push('The hall keeps its title and its meetings, but not its decisions.');
+  else if (gravest === 'corrupted') sentences.push('The hall still sits, but its arrests and its offices are no longer its own to give.');
+  else if (gravest === 'competitive') sentences.push('The hall still gives its orders, but it can no longer make them hold alone.');
+  else if (gravest === 'tense') sentences.push('Nothing large is settled in the hall without bargaining with them first.');
+
+  // 5. THE FALLBACK: the record's own vignette, only where no estranged power is named.
+  const vignette = text(s.powerStructure?.recentConflict);
+  const fallback = estranged.length === 0 && !!vignette;
+  if (fallback) sentences.push(vignette);
+
+  return { text: sentences.join(' '), estranged, fallback };
+}

@@ -499,25 +499,25 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 317,
+    "line": 323,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 512,
+    "line": 534,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 512,
+    "line": 534,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 550,
+    "line": 572,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -1201,13 +1201,13 @@
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 99,
+    "line": 101,
     "category": "floatInterpolation",
     "snippet": "{p.criminalCapture.score}"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 229,
+    "line": 232,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },

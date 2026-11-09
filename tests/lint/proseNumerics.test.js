@@ -564,6 +564,12 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // sentences stay owed their humanization; a move is not a cure.
 // PEOPLE-4 TIES (2026-11-07, R-P7) — TWO PURE LINE MOVES, NO DEBT MOTION. npcComponents.jsx 149 -> 150 and 155 -> 156
 // (the card-ties import line above the tie card). Path, category and snippet byte-identical; 205 / 138 / 50 unmoved.
+// OWNER-WORDS-DOSSIER item 3 (2026-11-09) — FOUR PURE LINE MOVES IN PowerTab.jsx, NO DEBT MOTION. The governance
+// paragraph's import, its read and its block add lines ABOVE the four rows the tab owns: `{leg.score}` 317 -> 323,
+// the ladder's `{Math.round(instab*100)}` pair 512 -> 534, `{Math.round(rung.standing*100)}` 550 -> 572. Path,
+// category and snippet byte-identical; no ceiling or category count moves. The print chapter's mirror
+// (src/pdf/sections/PowerStructure.jsx: the composer's import and one doc line above, one net line in the
+// paragraph's block) moves `{p.criminalCapture.score}` 99 -> 101 and `{f.power}` 229 -> 232 the same way.
 // W7 HOOKS (2026-11-08) — THE DEBT FELL BY ONE AND THE CEILINGS FOLLOW IT DOWN. 205 -> 204, floatInterpolation
 // 138 -> 137: src/pdf/lib/headlines.js :: npcsHeadline's "(power ${top.power})" left the prose (the people by name,
 // title and first rank; the owner's style law of 2026-11-07), so its row leaves the baseline as a CURE.

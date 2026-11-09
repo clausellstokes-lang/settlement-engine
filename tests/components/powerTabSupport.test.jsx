@@ -358,7 +358,9 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     const d = desk(false);
     const text = view({ publicDossier: false });
     expect(d.stabilityHeader?.sentence, 'fixture premise: the stability ladder line draws').toBeTruthy();
-    expect(text).toContain(d.stabilityHeader.sentence.slice(-40));
+    // Re-keyed OWNER-WORDS-DOSSIER item 3 (2026-11-09): the hall line's row glances; the governance block is
+    // one paragraph, so the ladder line no longer prints and the succession line below is the kept anchor.
+    expect(text, 'the DS-POW-2 hall line still prints').not.toContain(d.stabilityHeader.sentence.slice(-40)); // anchored: the succession line on this render, next
     expect(text).toContain(d.successionRisk.sentence.slice(-40));
     for (const [lens, rung] of [['stabilityLens', d.stabilityLens], ['successionHold', d.successionHold], ['governingTitle', d.governingTitle], ['blocPresence (dormant)', d.blocPresence]]) {
       if (!rung?.sentence) continue;

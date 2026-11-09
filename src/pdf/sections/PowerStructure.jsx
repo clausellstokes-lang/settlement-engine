@@ -4,6 +4,7 @@
  * Mirrors PowerTab.jsx in full:
  *   - Public legitimacy banner with breakdown chips
  *   - Stability + governing authority (with the governing modifier, STOP-1) + governance fractured warning
+ *   - Who runs it: the screen's one governance paragraph (OWNER-WORDS-DOSSIER item 3)
  *   - Stacked power-distribution bar (all factions in one viz)
  *   - Per-faction full card: power meter, description, category, crisis note,
  *     modifiers with deltas, sub-faction members
@@ -26,6 +27,7 @@ import { cap, label, humanize } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { governingFactionOf } from '../../domain/rulingPower.js';
+import { governanceAccountOf } from '../../domain/display/governanceAccount.js';
 
 export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
   const p = vm.power;
@@ -103,20 +105,21 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
         )}
       </View>
 
-      {/* ── Recent conflict ───────────────────────────────────────── */}
+      {/* ── Who runs it, in one paragraph (OWNER-WORDS-DOSSIER item 3, 2026-11-09) ──────────
+          The screen's governance paragraph (domain/display/governanceAccount.js), printed where the
+          standalone vignette printed: the seat, the standing and its causes, the estranged powers named,
+          the consequence, and the vignette itself only where no estranged power is named. The
+          DS-POW-1/2 readings above glance at their registry rows, as on the screen. The kicker is
+          proposed for the owner's veto. */}
       {(() => {
-        const rc = p.recentConflict;
-        if (!rc) return null;
-        const text = typeof rc === 'string'
-          ? rc
-          : (rc.description || rc.summary || rc.text || rc.label || '');
-        if (!text || !String(text).trim()) return null;
+        const text = governanceAccountOf(settlement)?.text || '';
+        if (!text.trim()) return null;
         return (
-          <Callout tone="warn" kicker="RECENT EVENT">
+          <Callout tone="warn" kicker="WHO RUNS IT">
             <EditableProse
-              name="power.recentConflict"
+              name="power.governance"
               defaultValue={text}
-              lines={2}
+              lines={4}
               style={{ ...type.body, fontSize: pt['9.5'] }}
             />
           </Callout>
