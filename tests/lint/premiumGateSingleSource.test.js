@@ -175,10 +175,9 @@ const EXEMPTIONS = {
   'src/store/campaignWorldPulseSlice.js': 'quota-or-limit',
   'src/store/galleryImportMap.js': 'campaign-or-import-entitlement',
   'src/store/galleryImportSettlement.js': 'campaign-or-import-entitlement',
-  // W-F6's activateFaithIfEntitled — the raw comparison this exemption covers —
-  // moved here from settlementSlice.js under THE DECOMPOSITION WAVE (lane D),
-  // byte-identical. The exemption follows the CODE, not the filename.
-  'src/store/settlementLifecycleHelpers.js': 'content-visibility',
+  // ⬇ TIER-PARITY-FIX V5 (2026-11-09) STRUCK the settlementLifecycleHelpers row: W-F6's
+  // activateFaithIfEntitled lost its tier arm (premade gods are engine content, not custom
+  // content), so the file spells no premium comparison. The census shrinks by one.
 };
 
 /** Strip block + line comments so a signature named in prose is not a hit. */
