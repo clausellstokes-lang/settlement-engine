@@ -24,7 +24,6 @@ const LIBRARY_MOUNT = 'src/components/settlements/CampaignFolder.jsx';
 const STORE_SLICE = 'src/store/campaignWorldPulseSlice.js';
 const CHOKEPOINT = 'src/store/campaignAdvanceSession.js';
 const REALM_ADVANCE_CALLER = 'src/hooks/useAdvanceSession.js';
-const LIBRARY_ADVANCE_CALLER = 'src/components/settlements/useCampaignAdvance.js';
 
 describe('auto-resolve is ONE shared state, mounted on the Realm alone', () => {
   test('the shared store defines exactly one advanceAutoResolve value + setter', () => {
@@ -69,11 +68,12 @@ describe('the resolution routes through the SINGLE chokepoint (no forked logic)'
     expect((src.match(/get\(\)\.advanceAutoResolve/g) || []).length).toBe(1);
   });
 
-  test('BOTH advance callers hit advanceCampaignWorld WITHOUT a forked autoResolve arg', () => {
-    // Each mount's advance call must NOT pass its own autoResolve option — passing one
-    // would bypass the shared-state fallback and desync the surfaces. Both rely on the
-    // single chokepoint fallback instead.
-    for (const caller of [REALM_ADVANCE_CALLER, LIBRARY_ADVANCE_CALLER]) {
+  test('the Realm advance caller hits advanceCampaignWorld WITHOUT a forked autoResolve arg', () => {
+    // The advance call must NOT pass its own autoResolve option — passing one would
+    // bypass the shared-state fallback. The Library caller (useCampaignAdvance.js) was
+    // removed with the Library's advance (owner, 2026-11-10); the Library's absence is
+    // pinned in libraryAdvancesNothing.walker.test.js.
+    for (const caller of [REALM_ADVANCE_CALLER]) {
       const src = read(caller);
       expect(src.includes('advanceCampaignWorld('), `${caller} must call the shared advanceCampaignWorld chokepoint`).toBe(true);
       // No inline autoResolve option object handed to the advance from the mount.
