@@ -600,6 +600,9 @@ const desktopShape = (perView) => Object.fromEntries(
 // Power 29/28 -> 33/32. No token moved.
 // ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the faith desk's public branch lit, `warFaith:faith`): Faith 1/1 ->
 // 2/2. No token moved.
+// ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE point 25, URBAN-FIX B-P1 1b3436acd composed with SW-B7b's lit general desk): the
+// licence row passes the fixture town's receipt, so DS-GEN-11's contradiction line leaves the Outlook: Outlook 3/3 -> 2/2.
+// Green on the lane alone (its base predates the lit desk); confirmed by removing the row in the stage. No token moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -641,7 +644,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
   // 5 -> 2 (2026-10-30, UX consolidation U3, T2-11..T2-14): the coaching caption and the generation receipt
   // (moved to Versions) left the page; no token moved.
-  "Systems/Outlook":     { measured: 3, sub14: 3 },
+  "Systems/Outlook":     { measured: 2, sub14: 2 },
   // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
   // 0 -> 4 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one reliance reading
@@ -733,6 +736,8 @@ const DESKTOP_BASELINE = Object.freeze({
 // both sub-floor counts hold.
 // ── RE-MEASURED 2026-11-09 (SW-B7b fourth seat, the faith desk's public branch lit): Faith prose 1 -> 2; chrome and
 // both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE point 25, URBAN-FIX B-P1 1b3436acd composed with SW-B7b's lit general desk): DS-GEN-11's
+// contradiction line leaves the fixture town's Outlook: prose 3 -> 2; chrome and both sub-floor counts hold.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -767,7 +772,7 @@ const MOBILE_BASELINE = Object.freeze({
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
-  "Systems/Outlook":     { prose: 3, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Outlook":     { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   // prose 0 -> 3, chrome 0 -> 1 (2026-11-03, lane MAGIC, chair ruling 2): the dependence block reads the one
   // reliance reading; its title is the 12px chrome line, its explanation and chain notes take the prose floor.
