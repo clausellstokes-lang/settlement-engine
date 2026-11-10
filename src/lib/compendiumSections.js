@@ -36,7 +36,7 @@ export const COMPENDIUM_SECTIONS = Object.freeze([
   { slug: 'living-world', tab: 'living', kicker: 'How it works' },
   { slug: 'a-z', tab: 'az' },
   { slug: 'custom', tab: 'custom' },
-].map(Object.freeze));
+].map((s) => Object.freeze(s)));
 
 /** The reserved slugs, in order. */
 export const COMPENDIUM_SECTION_SLUGS = Object.freeze(COMPENDIUM_SECTIONS.map((s) => s.slug));
