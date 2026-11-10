@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 27, THE SW-9b-B MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-10-style-2-merge-27-sw9b-b.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   167 of 525 rows (village 12, city 84, metropolis 71) against record 25's post-state. THE CAUSE, ONE (first-parent step ee364b3ef): the SW-9b-B merge (lane/style-2-sw9b-b-2026-11-09 at df52ccd34; b23e4e91b, the cast's fixed reason instigatorBacked). FIELD-DIFFED: stress/stressors cast.roles[].reason, 0 non-string leaves.
+ *   Written from the staged tree S27 (the tree of ee364b3ef with the door paths carried from the branch). a1374044.. -> 97936ac1..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 25, THE URBAN-FIX MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-10-style-2-merge-25-urban-fix.json; the cloud chair signs under the owner's delegation, vetoable).
  *   387 of 525 rows (thorp 45, hamlet 57, village 57, town 60, city 84, metropolis 84) against record 24's post-state. THE CAUSE, ONE (first-parent step fe81a843e): the URBAN-FIX merge (lane/urban-fix-2026-11-09 at 9ee7df1ba; B-P1, C-1, D-1, D-1b). FIELD-DIFFED: culturalIdentity.foodways 297, generationCoherenceReceipt 217 (findings removed only, 231; needs_review -> pass 167), history.currentTensions 1; every other leaf a string.
