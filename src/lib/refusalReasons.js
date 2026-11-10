@@ -248,10 +248,14 @@ export function isRefusalReason(id) {
  * optional, because an unkeyed record must go on behaving exactly as records did
  * before the field existed (see REFUSAL_SURFACES).
  *
+ * A var may also be a LIST OF COPY KEYS (remote-path FU-3): RefusalNotice resolves each key and
+ * joins them with the reason's own `join`, so a raiser picks WHICH phrases apply while the words
+ * stay in the copy dictionary.
+ *
  * @param {string} reason one of REFUSAL_REASONS
- * @param {Record<string, string|number>|null} [vars]
+ * @param {Record<string, string|number|string[]>|null} [vars]
  * @param {string|null} [at] one of REFUSAL_SURFACES — the surface that asked
- * @returns {{ reason: string, vars: Record<string, string|number>|null, at: string|null }}
+ * @returns {{ reason: string, vars: Record<string, string|number|string[]>|null, at: string|null }}
  */
 export function refusalOf(reason, vars = null, at = null) {
   return { reason, vars: vars && Object.keys(vars).length ? vars : null, at: at || null };

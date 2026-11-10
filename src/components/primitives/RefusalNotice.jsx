@@ -47,7 +47,7 @@ import { isRefusalReason } from '../../lib/refusalReasons.js';
  * resolves to real words rather than to a dotted key path.
  *
  * @param {string} reason
- * @param {Record<string, string|number>|null} [vars]
+ * @param {Record<string, string|number|string[]>|null} [vars]
  * @returns {{ rubric: string, body: string }|null}
  */
 export function refusalCopy(reason, vars = null) {
@@ -81,7 +81,7 @@ export function refusalCopy(reason, vars = null) {
 
 /**
  * @param {object} props
- * @param {{ reason: string, vars?: Record<string, string|number>|null }|null|undefined} props.refusal
+ * @param {{ reason: string, vars?: Record<string, string|number|string[]>|null }|null|undefined} props.refusal
  *   the store's `lastRefusal`, or null
  * @param {object} [props.style]   layout overrides only
  * @param {import('react').ReactNode} [props.actions]  an optional instrument row (a door the reader can take)
