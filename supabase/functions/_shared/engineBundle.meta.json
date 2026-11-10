@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T05:06:00.331Z",
+  "generatedAt": "2026-11-10T11:17:19.049Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "4847400d87c5e75c",
-  "engineVersion": "08c31364686731a2",
-  "builtFromCommit": "38125573fe1e71e84f0801057490a4827dba9512",
+  "sourceHash": "7c2767bde84aa9e8",
+  "engineVersion": "839f9a85acb64984",
+  "builtFromCommit": "45c80c7974e031822f34f7f0c78d5c2916efb2ea",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -273,6 +273,7 @@
     "src/generators/npc/factionLeaderSecret.js",
     "src/generators/npc/factionRoleCatalog.js",
     "src/generators/npc/generatedNpcTitle.js",
+    "src/generators/npc/rosterFrame.js",
     "src/generators/npc/thorpSecondRole.js",
     "src/generators/npc/tieKind.js",
     "src/generators/npcDisplayNames.js",
