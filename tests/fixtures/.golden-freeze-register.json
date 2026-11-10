@@ -837,7 +837,7 @@
       "suite": "tests/simulation/presetLightingWitness.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "e1da24e2683b625a96d325164da0c741aedce0331ea05336d9d6205a4ab99211",
+      "sha256": "017b2cfc2080299171df3aba067ef334836fed15a6e5927180aa93ee0a0f47f5",
       "rows": 15,
       "seedSet": null,
       "distinctFloor": null,
