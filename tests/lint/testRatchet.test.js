@@ -43,6 +43,7 @@ import {
   classifyFailure, failureEvidenceOf, globalTestTimeoutOf, timeoutLiteralsOf,
   FAILURE_CLASSES, VITEST_DEFAULT_TEST_TIMEOUT,
   MAGNITUDE_KINDS, measureMagnitude, magnitudeReportOf, parseReadOnlyArgs, MODE_FLAGS,
+  remoteDistBuildCommandOf, ENGINE_REMOTE_DIST_DIR,
 } from '../../scripts/check-test-ratchet.mjs';
 // DERIVED, never restated: the discharge below asserts that the rehearsal train still
 // reaches the migration whose cure retired the owner-gated rows. A literal here would go
@@ -1028,7 +1029,7 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
   function run({
     entries = {}, totalTests, totalFiles, skippedCeiling = 0, uncollectedSuites,
     suites = [], report, rawReport, exitCode = 1, args = [], noBaseline = false,
-    captureRunner = false, inheritedVerifyDist = false,
+    captureRunner = false, inheritedVerifyDist = false, remoteBuildCmd,
   }) {
     const built = report === undefined ? reportOf(suites) : report;
     // Give every BANKED, FAILING, message-less row the default message that pairs with
@@ -1051,6 +1052,8 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
 
     const env = { ...process.env, TEST_RATCHET_RUN_CMD: `node ${FAKE} ${src} ${exitCode}` };
     if (inheritedVerifyDist) env.VERIFY_DIST = 'hostile-parent-value';
+    if (remoteBuildCmd !== undefined) env.TEST_RATCHET_REMOTE_BUILD_CMD = remoteBuildCmd;
+    else delete env.TEST_RATCHET_REMOTE_BUILD_CMD;
     const captureFile = captureRunner ? join(TMP, `capture-${seq += 1}.json`) : null;
     if (captureFile) env.TEST_RATCHET_CAPTURE_FILE = captureFile;
     // ── TE-RATCHET-MAG: every banked row must declare a MAGNITUDE, so the harness
@@ -1227,6 +1230,44 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
   });
 
   // ── anti-vacuity: "the suite actually ran" ────────────────────────────────
+  // ── THE FLAGGED DIST (DIST-FLAGGED, 2026-11-10; check-test-ratchet.mjs ::
+  // remoteDistBuildCommandOf). --verify-dist builds the production artifact before its
+  // strict runner and fails CLOSED when that build fails; the source gate builds nothing.
+  describe('the flagged dist — built by --verify-dist, fail closed', () => {
+    test('a FAILING flagged build fails --verify-dist closed, before any runner verdict', () => {
+      const r = run({
+        suites: [], args: ['--verify-dist'], noBaseline: true, exitCode: 0,
+        remoteBuildCmd: 'node -e "process.exit(3)"',
+      });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/FLAGGED build \(the production artifact\) FAILED — failing closed/);
+    });
+
+    test('the flagged build runs under --verify-dist and NOT under the source gate', () => {
+      const marker = join(TMP, `remote-built-${seq += 1}`);
+      const cmd = `node -e "require('fs').writeFileSync(process.argv[1],'x')" ${JSON.stringify(marker)}`;
+      run({ suites: [], args: ['--verify-dist'], noBaseline: true, remoteBuildCmd: cmd });
+      expect(existsSync(marker), '--verify-dist must build the flagged dist').toBe(true);
+      const sourceMarker = `${marker}-source`;
+      run({ suites: [], remoteBuildCmd: `node -e "require('fs').writeFileSync(process.argv[1],'x')" ${JSON.stringify(sourceMarker)}` });
+      expect(existsSync(sourceMarker), 'the source gate must not build the flagged dist').toBe(false);
+    });
+
+    test('the command is the test\'s own default path with the production builder\'s heap, and --dry says so', () => {
+      const cmd = remoteDistBuildCommandOf();
+      expect(cmd).toContain('VITE_ENGINE_REMOTE=true');
+      expect(cmd).toContain(`--outDir "${ENGINE_REMOTE_DIST_DIR}"`);
+      expect(ENGINE_REMOTE_DIST_DIR).toBe('node_modules/.cache/engine-remote-dist');
+      const vercelHeap = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8')).buildCommand
+        .match(/NODE_OPTIONS=(\S+)/)?.[1];
+      expect(vercelHeap, 'vercel.json names the production heap').toBeTruthy();
+      expect(cmd).toContain(`NODE_OPTIONS=${vercelHeap}`);
+      const dry = run({ suites: [], args: ['--verify-dist', '--dry'], noBaseline: true });
+      expect(dry.status, dry.out).toBe(0);
+      expect(dry.out).toContain(`flagged dist:    ${cmd}`);
+    });
+  });
+
   describe('anti-vacuity sentinel — a runner that did not run is not "0 failures"', () => {
     test('fails closed when the runner writes NO report at all', () => {
       const r = run({ report: null });
