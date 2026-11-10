@@ -95,9 +95,10 @@ function leadSentences(text) {
  */
 function withDateline(told, entry, nameById) {
   if (!nameById || typeof nameById.get !== 'function') return told;
-  const names = (Array.isArray(entry.settlementIds) ? entry.settlementIds : [])
+  // The filter keeps only names that are strings, so the list is a string[].
+  const names = /** @type {string[]} */ ((Array.isArray(entry.settlementIds) ? entry.settlementIds : [])
     .map(id => nameById.get(String(id)))
-    .filter(n => typeof n === 'string' && n.trim().length > 1);
+    .filter(n => typeof n === 'string' && n.trim().length > 1));
   if (!names.length || names.some(n => told.includes(n))) return told;
   const travelling = Array.isArray(entry.impactIds) && entry.impactIds.length > 0;
   return `${travelling ? names[names.length - 1] : names[0]}: ${told}`;
@@ -285,7 +286,7 @@ export function newsReaderSummary(entry) {
 
 /**
  * Fiction-register reason phrases for a wizardNews entry's scoring reasons.
- * @param {{ kind?: string|null, reasons?: Array<string|null|undefined> }|null|undefined} entry
+ * @param {{ kind?: string|null, reasons?: Array<string|null|undefined>|null }|null|undefined} entry
  * @returns {string[]}
  */
 export function newsReasonPhrases(entry) {

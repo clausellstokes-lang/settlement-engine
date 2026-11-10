@@ -75,9 +75,10 @@ import { compareCodepoint } from '../deterministicSort.js';
 
 /**
  * What `arr` hands back for a value of type T: an array's own elements, none for anything else
- * (an `unknown` value may be any array, so its elements stay `unknown`).
+ * (an `unknown` value may be any array, so its elements stay `unknown`). An absent value adds no
+ * element type: `readonly string[] | undefined` hands back `string[]`, not `string[] | never[]`.
  * @template T
- * @typedef {unknown extends T ? unknown[] : T extends ReadonlyArray<infer E> ? E[] : never[]} ArrOf
+ * @typedef {unknown extends T ? unknown[] : NonNullable<T> extends ReadonlyArray<infer E> ? E[] : never[]} ArrOf
  */
 
 /** @param {unknown} x @returns {string} */

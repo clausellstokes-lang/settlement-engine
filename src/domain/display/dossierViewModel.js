@@ -218,7 +218,7 @@ export function deriveViability(settlement) {
   // #36 (STYLE-RULINGS §1; W2 DEF, 2026-11-07): each verdict says its finding in the town's own
   // name, from a few variants the seed chooses (the same town always reads the same line).
   const name = viabilityName(settlement);
-  const pick = (pool) => pickVariant(pool, viabilitySeed(settlement));
+  const pick = (/** @type {readonly string[]} */ pool) => pickVariant(pool, viabilitySeed(settlement));
 
   if (v.viable === false) {
     return {
@@ -342,9 +342,9 @@ function importRoutePhrase(channel) {
  */
 function dependencyGoods(dependencies) {
   if (!Array.isArray(dependencies)) return null;
-  const goods = [...new Set(dependencies
+  const goods = /** @type {string[]} */ ([...new Set(dependencies
     .map((d) => /^Imports (.+)$/.exec(String(d?.title || ''))?.[1]?.replace(/\s*\(.*\)\s*$/, '').trim().toLowerCase())
-    .filter((g) => g && !/[0-9]/.test(g)))];
+    .filter((g) => g && !/[0-9]/.test(g)))]);
   if (goods.length === 0) return null;
   return goods.length === 1 ? goods[0] : `${goods[0]} and ${goods[1]}`;
 }

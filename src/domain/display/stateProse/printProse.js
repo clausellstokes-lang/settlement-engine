@@ -439,7 +439,7 @@ export function buildPrintProse(settlement, ctx = {}) {
     faith: faithModel,
     hasPatron: !!faithModel.hasEmbed,
     patronFallCause: patronFallCauseOf(faithModel.patronFallSentence),
-    faithFlags: r?.economicState?.safetyProfile?.flags || null,
+    faithFlags: /** @type {{economicState?: {safetyProfile?: {flags?: Record<string, unknown>|null}|null}|null}} */ (r)?.economicState?.safetyProfile?.flags || null,
   }, opts), faithModel);
 
   // ── THE POSITIONS, IN PAGE ORDER ────────────────────────────────────────────────────

@@ -1808,7 +1808,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  * @param {{scores?: Record<string, unknown>|null, prosperity?: unknown, safetyLabel?: unknown,
  *   viable?: unknown, readinessLabel?: unknown, foodSecurityLabel?: unknown,
  *   terrainType?: unknown, institutions?: unknown, tradeRouteAccess?: unknown,
- *   isEntrepot?: unknown, inst?: object|null, tier?: unknown, primaryStress?: unknown,
+ *   isEntrepot?: unknown, inst?: Record<string, unknown>|null, tier?: unknown, primaryStress?: unknown,
  *   foodBalance?: object|null,
  *   conflicts?: Array<{intensity?: unknown, parties?: unknown, issue?: unknown,
  *     stakes?: unknown}|null>|null,

@@ -520,7 +520,7 @@ function inferPrimaryRelationship(npc, settlement) {
 
   // Prefer relationships with explicit tension over plain alliances —
   // these are the more campaign-actionable connections — the card's own tie before a caller's.
-  const tense = (r) => typeof r.tension === 'string' && r.tension;
+  const tense = (/** @type {typeof candidates[number]} */ r) => typeof r.tension === 'string' && r.tension;
   const chosen = candidates.find((r) => r.from === npc.id && tense(r))
     || candidates.find((r) => tense(r))
     || candidates.find((r) => r.from === npc.id)

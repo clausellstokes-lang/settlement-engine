@@ -907,15 +907,6 @@ export function peaceSuitCandidate({ sId, name, target, snapshot, tick, worldSta
   });
 }
 
-/**
- * Emit the chosen move as a probability-1 candidate. `deploy` carries an
- * army_deployed condition; `sue_for_peace` carries a relationship_label_change
- * proposal (pulling the existing de-escalation levers); `defend` / `hold` emit an
- * INERT marker (no condition, no patch) that still wins the `strategy:<S>`
- * exclusive group and so suppresses the reactive escalation for S — the chooser
- * decided NOT to escalate this tick, with no stray world-state cost.
- * @param {{ move: string, bestTargetId?:string|null, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number, worldState?: import('./beliefMap.js').BeliefWorldState, beliefActive?: boolean, trueStrengthFor?: ((id: string) => number)|null, termination?: { suePressure01:number, dissolvedCauseTypes?:string[], receipt?:{reason?:string}, targetId?:string }|null, warCasusFor?: ReturnType<typeof makeCurrentWarCasusRead>|null }} args
- */
 // STYLE-2 C2 (SW-12) — the deploy decision, said as what the town means to do and to whom.
 // Every slot is one the writer holds: the town and its target. It is the decision only (the
 // war opener judges the march next tick), so no line says the army is already on the road.
@@ -941,6 +932,15 @@ const RECALL_REASON = Object.freeze([
   (/** @type {StrategyLineSlots} */ x) => `${x.name} calls its army home ahead of anything else.`,
 ]);
 
+/**
+ * Emit the chosen move as a probability-1 candidate. `deploy` carries an
+ * army_deployed condition; `sue_for_peace` carries a relationship_label_change
+ * proposal (pulling the existing de-escalation levers); `defend` / `hold` emit an
+ * INERT marker (no condition, no patch) that still wins the `strategy:<S>`
+ * exclusive group and so suppresses the reactive escalation for S — the chooser
+ * decided NOT to escalate this tick, with no stray world-state cost.
+ * @param {{ move: string, bestTargetId?:string|null, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number, worldState?: import('./beliefMap.js').BeliefWorldState, beliefActive?: boolean, trueStrengthFor?: ((id: string) => number)|null, termination?: { suePressure01:number, dissolvedCauseTypes?:string[], receipt?:{reason?:string}, targetId?:string }|null, warCasusFor?: ReturnType<typeof makeCurrentWarCasusRead>|null }} args
+ */
 function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null, termination = null, warCasusFor = null }) {
   const name = item?.name || item?.settlement?.name || String(sId);
 
@@ -1154,14 +1154,14 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
         summary: ctx.homeBesieged
           ? `${name} is itself besieged. Its army abroad is recalled to defend the home walls.`
           : `A vassal of ${name} is under siege. ${name} recalls its army to relieve it.`,
-        reasons: [
+        reasons: /** @type {string[]} */ ([
           ctx.homeBesieged
             ? `${name} is besieged at home while its army is committed against ${snapshot?.byId?.get?.(String(deployment.targetId))?.name || 'a distant front'}.`
             : null,
           // Seeded by the town, never the tick: the recall carries no condition or patch, so it is
           // a drift outcome and its reasons are the feed's metronome key (isMetronomeRepeat).
           pickLine(RECALL_REASON, `candidate.strategy.return_home.${stablePart(sId)}`, { name }),
-        ].filter(Boolean),
+        ].filter(Boolean)),
       }));
       continue; // exactly one candidate for S; skip the sample.
     }
