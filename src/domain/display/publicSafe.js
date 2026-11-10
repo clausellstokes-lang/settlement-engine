@@ -308,6 +308,9 @@ export const HIDDEN_POWER_MASK = 'an unseen interest';
 /** @param {unknown} v @returns {unknown[]} */
 const arrayOf = (v) => (Array.isArray(v) ? v : []);
 
+/** A character outside the blank class (JavaScript's \s set, spelled out as the SQL spells it). */
+const NON_BLANK_NAME = /[^ \t\n\r\f\v\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]/;
+
 /**
  * The names of the record's hidden powers (each row's `faction`), from its own stamp.
  * @param {Record<string, unknown>} settlement @returns {string[]}
@@ -320,8 +323,9 @@ function hiddenPowerNamesOf(settlement) {
     if (!row || typeof row !== 'object' || Array.isArray(row)) continue;
     const power = /** @type {Record<string, unknown>} */ (row);
     if (power.hidden !== true) continue;
-    // R5 (2026-11-10): an empty or whitespace-only name masks nothing (the SQL's `nm ~ '[^[:space:]]'`).
-    if (typeof power.faction === 'string' && /\S/.test(power.faction)) names.add(power.faction);
+    // R5/R11 (2026-11-10): a blank name masks nothing. Blank is ONE explicit class, character for
+    // character the SQL's (a no-break space is blank on both sides).
+    if (typeof power.faction === 'string' && NON_BLANK_NAME.test(power.faction)) names.add(power.faction);
   }
   return [...names];
 }
@@ -354,10 +358,26 @@ function maskHiddenNames(value, names, isRoot = false) {
   if (value && typeof value === 'object') {
     /** @type {Record<string, unknown>} */
     const out = {};
-    for (const [k, v] of Object.entries(value)) out[k] = isRoot && k === 'name' ? v : maskHiddenNames(v, names);
+    for (const [k, v] of Object.entries(value)) {
+      // R11 (2026-11-10): an `id` at any depth and the prose format tag are never text to mask.
+      const kept = (isRoot && k === 'name') || (k === 'id' && typeof v === 'string');
+      out[k] = kept ? v : (isRoot && k === 'publicProse' ? maskProse(v, names) : maskHiddenNames(v, names));
+    }
     return out;
   }
   return value;
+}
+
+/**
+ * The projection's prose masked, its format tag (`v`) kept.
+ * @param {unknown} prose @param {string[]} names @returns {unknown}
+ */
+function maskProse(prose, names) {
+  if (!prose || typeof prose !== 'object' || Array.isArray(prose)) return maskHiddenNames(prose, names);
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const [k, v] of Object.entries(prose)) out[k] = k === 'v' && typeof v === 'string' ? v : maskHiddenNames(v, names);
+  return out;
 }
 
 /**

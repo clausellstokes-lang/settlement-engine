@@ -195,7 +195,9 @@ begin
                                        then value -> 'powerStructure' -> 'factions' else '[]'::jsonb end) as f(row)
              cross join lateral (values (row ->> 'faction')) as n(nm)
        where jsonb_typeof(row) = 'object' and (row -> 'hidden') = 'true'::jsonb
-         and nm is not null and nm ~ '[^[:space:]]';
+         -- R11 (2026-11-10): blank is ONE explicit class, the same as the client's (JavaScript's \s set):
+         -- a name made only of these characters (a no-break space included) masks nothing.
+         and nm is not null and nm ~ '[^ \t\n\r\f\v   -     　﻿]';
       select coalesce(array_agg(n ->> 'id'), '{}') into veiled_ids
         from jsonb_array_elements(case when jsonb_typeof(value -> 'npcs') = 'array'
                                        then value -> 'npcs' else '[]'::jsonb end) as t(n)
@@ -302,6 +304,10 @@ begin
           )
           select p, v #>> '{}' from walk
            where jsonb_typeof(v) = 'string' and p is distinct from array['name']
+             -- R11 (2026-11-10): an identifier and the prose format tag are never text to mask
+             -- (a hidden power named "1" rewrote every id and `publicProse.v`).
+             and p[cardinality(p)] is distinct from 'id'
+             and p is distinct from array['publicProse', 'v']
         loop
           masked := leaf_text;
           foreach txt in array hidden_names loop
