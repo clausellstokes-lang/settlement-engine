@@ -94,3 +94,55 @@ describe('H3 — the top nav’s Compendium from a sub-page lands on the landing
     });
   }
 });
+
+describe('H5 — old links are replaced by their section pages', () => {
+  const CASES = [
+    ['/compendium?tab=institutions', '/compendium/institutions'],
+    ['/compendium?tab=power', '/compendium/powers'],
+    ['/compendium?tab=arcane#magic', '/compendium/magic-and-religion#magic'],
+    ['/compendium?tab=operations', '/compendium/operations'],
+    ['/compendium?tab=az#az', '/compendium/a-z#az'],
+    ['/compendium?tab=overview', '/compendium'],
+    ['/compendium?mode=custom', '/compendium/custom'],
+    ['/compendium?mode=custom&cat=deities', '/compendium/custom?cat=deities'],
+    ['/compendium?cat=factions', '/compendium/custom?cat=factions'],
+    ['/compendium#trade-routes', '/compendium/tiers#trade-routes'],
+    ['/compendium#magic', '/compendium/magic-and-religion#magic'],
+    ['/compendium#institutions', '/compendium/institutions#institutions'],
+  ];
+  for (const [from, to] of CASES) {
+    it(`${from} → ${to} (history replaced)`, async () => {
+      const before = window.history.length;
+      await mountHost(from);
+      await act(async () => {});
+      expect(here()).toBe(to);
+      expect(window.history.length).toBe(before);
+    });
+  }
+
+  it('the landing and an unknown anchor are left alone', async () => {
+    await mountHost('/compendium#nowhere');
+    await act(async () => {});
+    expect(here()).toBe('/compendium#nowhere');
+  });
+
+  it('a global-search result opens its section page (pushed) with its anchor', async () => {
+    const { container } = await mountHost('/compendium');
+    const input = container.querySelector('input[role="combobox"]');
+    await act(async () => { fireEvent.change(input, { target: { value: 'theocracy' } }); });
+    const option = container.querySelector('[role="option"] button');
+    expect(option, 'a result for "theocracy"').toBeTruthy();
+    const before = window.history.length;
+    await act(async () => { fireEvent.click(option); });
+    expect(window.location.pathname).toBe('/compendium/powers');
+    expect(window.history.length).toBe(before + 1);
+    expect(grid(container)).toBeNull();
+  });
+
+  it('every A–Z link is a section-page address', async () => {
+    const { container } = await mountHost('/compendium/a-z');
+    const hrefs = [...container.querySelectorAll('#az a')].map((a) => a.getAttribute('href'));
+    expect(hrefs.length).toBeGreaterThan(100);
+    for (const h of hrefs) expect(h).toMatch(/^\/compendium\/(tiers|powers|operations|living-world|neighbours|calamity)(#[a-z0-9-]+)?$/);
+  });
+});

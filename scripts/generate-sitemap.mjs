@@ -7,8 +7,8 @@
  * is included unless it is noindex (app/auth/transient — IMPORTS seo.js's
  * NOINDEX_VIEWS, the single source), guarded, or a retired redirect surface.
  *
- * Home canonicalizes to '/', and the compendium fans out to one URL per tab
- * (each indexes with its own title via CompendiumPanel's ?tab= deep link).
+ * Home canonicalizes to '/', and the compendium fans out to one URL per section
+ * page (/compendium/<slug>, each prerendered with its own head).
  *
  * The gallery FACET HUBS (GALLERY-2 phase 2; src/lib/galleryHubs.js) are
  * emitted unconditionally — they are static, deterministic URLs derived from
@@ -32,6 +32,7 @@ import { dirname, join } from 'node:path';
 import { ROUTES } from '../src/lib/routes.js';
 import { GALLERY_HUBS } from '../src/lib/galleryHubs.js';
 import { COMPENDIUM_INDEX } from '../src/domain/compendium/searchIndex.js';
+import { COMPENDIUM_SECTIONS } from '../src/lib/compendiumSections.js';
 import { compendiumEntryPath } from '../src/lib/seoCompendium.js';
 import { NOINDEX_VIEWS } from '../src/lib/seo.js';
 
@@ -71,12 +72,12 @@ const HINTS = {
   privacy:    { changefreq: 'yearly',  priority: '0.3' },
 };
 
-// The compendium sections (CompendiumPanel TABS) — each gets its own URL. The bare
-// /compendium is the Overview, so it is not repeated as ?tab=overview here.
-const COMPENDIUM_TABS = [
-  'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane', 'deities',
-  'living', 'stress', 'calamity', 'neighbour', 'az',
-];
+// The compendium sections — each is its own page, /compendium/<slug> (the owner,
+// 2026-11-10; lib/compendiumSections.js). The bare /compendium is the landing. My
+// Custom Content is per-reader (empty for a crawler), so it is not listed.
+const COMPENDIUM_SECTION_PATHS = COMPENDIUM_SECTIONS
+  .filter((s) => s.tab !== 'custom')
+  .map((s) => `/compendium/${s.slug}`);
 
 /** Is this ROUTES entry an indexable public content route? */
 export function isIndexable(route) {
@@ -106,8 +107,8 @@ export function staticUrls() {
     urls.push({ loc, changefreq: hint.changefreq, priority: hint.priority });
     // Fan the compendium out to one URL per section.
     if (route.view === 'compendium') {
-      for (const tab of COMPENDIUM_TABS) {
-        urls.push({ loc: `${ORIGIN}${route.path}?tab=${tab}`, changefreq: 'monthly', priority: '0.5' });
+      for (const path of COMPENDIUM_SECTION_PATHS) {
+        urls.push({ loc: `${ORIGIN}${path}`, changefreq: 'monthly', priority: '0.5' });
       }
     }
   }

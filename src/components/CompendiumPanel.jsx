@@ -94,6 +94,35 @@ const ANCHOR_TO_TAB = Object.freeze({
   'institutions': 'institutions',
 });
 
+/**
+ * Where an old-style compendium address now lives (ruling H5), or null when the
+ * address is already the landing's own. Pure (exported for the pin).
+ * @param {string} search  location.search
+ * @param {string} hash    location.hash
+ * @returns {{ section?: string, search: string, hash: string }|null}
+ */
+export function legacyCompendiumTarget(search, hash) {
+  const params = new URLSearchParams(search || '');
+  const anchor = String(hash || '').replace(/^#/, '');
+  const cat = params.get('cat');
+  const validCat = cat && CUSTOM_CAT_KEYS.has(cat) ? cat : null;
+  if (params.get('mode') === 'custom' || validCat) {
+    return { section: 'custom', search: validCat ? `?cat=${encodeURIComponent(validCat)}` : '', hash: '' };
+  }
+  const tab = params.get('tab');
+  if (tab !== null) {
+    const slugFor = sectionSlugForTab(tab);
+    // A live section keeps its anchor; overview / a removed tab land on the landing.
+    return slugFor && tab !== 'custom'
+      ? { section: slugFor, search: '', hash: anchor ? `#${anchor}` : '' }
+      : { search: '', hash: '' };
+  }
+  if (anchor && ANCHOR_TO_TAB[anchor]) {
+    return { section: sectionSlugForTab(ANCHOR_TO_TAB[anchor]), search: '', hash: `#${anchor}` };
+  }
+  return null;
+}
+
 // ── Main component ──────────────────────────────────────────────────────────
 
 // The landing's own head (the old Overview tab's). Each section page's head lives in
@@ -125,6 +154,17 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry, 
     if (!standalone || !routeEntry || !REMOVED_ENTRY_IDS.has(routeEntry)) return;
     navigate('compendium', { replace: true, scroll: false });
   }, [standalone, routeEntry]);
+  // OLD LINKS KEEP WORKING (ruling H5). Before the owner's word of 2026-11-10 a
+  // section was `/compendium?tab=<id>` (or a bare `#anchor` that ANCHOR_TO_TAB maps to a
+  // tab) and custom content was `?mode=custom` (a valid `?cat=` implied it). Each is
+  // REPLACED (no new history entry) by its section page, the anchor and `?cat=` kept.
+  // `?tab=overview`, an unknown tab and an unknown anchor land on the landing itself.
+  useEffect(() => {
+    if (!standalone || routeSection || routeEntry || typeof window === 'undefined') return;
+    const to = legacyCompendiumTarget(window.location.search, window.location.hash);
+    if (!to) return;
+    navigate('compendium', { params: to.section ? { section: to.section } : undefined, search: to.search, hash: to.hash, replace: true, scroll: false });
+  }, [standalone, routeSection, routeEntry]);
   // Honor a ?cat=<bucket> deep-link — a direct link into the custom-content page
   // focused on one authoring bucket (e.g. ?cat=deities from an "Author a deity" CTA).
   // Only a valid CUSTOM_CATEGORIES key is honored.
