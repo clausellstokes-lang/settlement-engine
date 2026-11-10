@@ -35,17 +35,17 @@ function paragraphs(element) {
 }
 
 describe('the organized-ring note: the shared Defense tab prints the owner\'s seeded variant', () => {
-  const variants = new Set();
-  it.each([10, 11, 23])('soak1k-%i', (i) => {
-    const owner = birth(i).settlement;
-    const note = criminalStructureOf(owner)?.note;
-    expect(typeof note === 'string' && note.length > 0, 'anchored: the town has an organized ring').toBe(true);
-    variants.add(note);
-    const shared = projectShareVeil(toPublicSafe(withPublicProse(owner, composePublicProse(owner))), null);
-    expect(paragraphs(<DefenseTab settlement={owner} narrativeNote={null} playerView />)).toContain(note);
-    expect(paragraphs(<DefenseTab settlement={shared} narrativeNote={null} publicDossier playerView />)).toContain(note);
-  });
-  it('the three towns cover three distinct seeded variants', () => {
+  it('soak1k-10, soak1k-11 and soak1k-23: each prints its seeded variant on the shared tab, three variants in all', () => {
+    const variants = new Set();
+    for (const i of [10, 11, 23]) {
+      const owner = birth(i).settlement;
+      const note = criminalStructureOf(owner)?.note;
+      expect(typeof note === 'string' && note.length > 0, `soak1k-${i}: anchored, the town has an organized ring`).toBe(true);
+      variants.add(note);
+      const shared = projectShareVeil(toPublicSafe(withPublicProse(owner, composePublicProse(owner))), null);
+      expect(paragraphs(<DefenseTab settlement={owner} narrativeNote={null} playerView />), `soak1k-${i} owner`).toContain(note);
+      expect(paragraphs(<DefenseTab settlement={shared} narrativeNote={null} publicDossier playerView />), `soak1k-${i} shared`).toContain(note);
+    }
     expect(variants.size).toBe(3);
   });
   it('an unstamped shared record renders the note locally, as before (no seed: the original sentence)', () => {
