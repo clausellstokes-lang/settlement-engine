@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "9042f65d660cbf0466e478c1923fe54b3c03a5fc",
-  "measuredBy": "STYLE-2-MERGE-6",
+  "measuredAtSha": "5edd9c329a844ef3b916c0a6f399e21e254be78b",
+  "measuredBy": "FOUNDING-WORLDS",
   "date": "2026-11-10",
-  "note": "STYLE-2-MERGE point 35, the UI batch (CONFIG-HEADERS ab4fb1637, COMPENDIUM-INSTITUTIONS a6c537e15 with the landing trim, LIBRARY-SIMPLE 06fce2563): re-frozen at the merged tip; the three lanes own deltas summed (files +1/+1/+0, credited +1/+1/+0, titles +2/+8/-7, suite titles +1/+2/+0)",
-  "files": 3185,
+  "note": "FOUNDING-WORLDS (lane/founding-worlds-2026-11-10 on f0f98d883): three new test files, tests/data/foundingWorldBones.test.js, tests/store/sampleForkPriorities.test.js and tests/copy/landingNarrationGrounding.test.js, plus one new arm in tests/copy/landingProseGrounding.test.js",
+  "files": 3188,
   "parked": 395,
-  "credited": 2790,
-  "titles": 29031,
-  "suiteTitles": 7846
+  "credited": 2793,
+  "titles": 29044,
+  "suiteTitles": 7849
 }
