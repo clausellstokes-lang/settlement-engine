@@ -125,6 +125,7 @@ describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () 
       const t = s.history.currentTensions.find((x) => x.type === 'occupation_legacy');
       expect(t, `soak1k-${i}: an occupation tension`).toBeTruthy();
       expect(s.history.historicalEvents.some((e) => e.templateType === 'occupation_legacy'), `soak1k-${i}: no Occupation on the timeline`).toBe(false);
+      // anchored: `t` is asserted present two lines above and toMatch throws on a non-string, so a drifted record cannot pass
       expect(t.description, `soak1k-${i}: names no past event`).not.toMatch(/\boccupation\b|\bended\b/i);
       expect(t.factions.filter((f) => /^Former\b/.test(f)), `soak1k-${i}: no former participants`).toEqual([]);
     });
