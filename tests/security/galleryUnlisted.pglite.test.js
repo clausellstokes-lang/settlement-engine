@@ -15,6 +15,12 @@
  *        gates; FEATURED admin-only; the maps.
  *   (c)  the link is idempotent — "share twice, one slug"; "publish keeps the link".
  *   (d)  the link honours the veil — "the veil hides the same rows on both reads".
+ *   R1   THE PARTY LINK NEVER WIDENS (VEIL-FIX, the chair's ruling R1 of 2026-11-10 on
+ *        the pre-deploy review's finding 1, which corrects the 2026-11-09 ruling that
+ *        mirrored the gallery read onto the link wholesale): the link applies everything
+ *        that HIDES and nothing that REVEALS — no settlement-level DM-full view by
+ *        gallery_share_dm, no per-member revealDm splice. The two (d) pins that asserted
+ *        the link widens exactly as the gallery read does are INVERTED with R1 as cause.
  *   (f)  the owner is told — "the owner is told is_owner".
  *   (g)  both at once — "share unlisted keeps the listing"; revoke nulls the slug
  *        alone; the owner's list and the read key on the slug; visibility derived.
@@ -86,14 +92,15 @@ describe.runIf(present)('the party link — execution against the real SQL (pgli
       create or replace function public.account_is_active(p uuid) returns boolean language sql stable as $fn$
         select coalesce(nullif(current_setting('test.active', true), '')::boolean, true)
       $fn$;
-      -- the sanitizer twin, reduced to an observable strip: a 'secret' key leaves the
-      -- top level and every NPC (its real redaction is pinned elsewhere)
+      -- the sanitizer twin, reduced to an observable strip: 'secret', 'secrets' and
+      -- 'plotHooks' leave the top level, 'secret' and 'goals' leave every NPC (its real
+      -- redaction is pinned elsewhere)
       create or replace function public._gallery_sanitize_public_json(value jsonb, path text[] default '{}')
         returns jsonb language sql immutable as $fn$
         select case when jsonb_typeof(value -> 'npcs') = 'array'
-          then jsonb_set(value - 'secret', '{npcs}', (select coalesce(jsonb_agg(e - 'secret' order by o), '[]'::jsonb)
+          then jsonb_set(value - 'secret' - 'secrets' - 'plotHooks', '{npcs}', (select coalesce(jsonb_agg(e - 'secret' - 'goals' order by o), '[]'::jsonb)
                  from jsonb_array_elements(value -> 'npcs') with ordinality t(e, o)))
-          else value - 'secret' end
+          else value - 'secret' - 'secrets' - 'plotHooks' end
       $fn$;
       create or replace function public._gallery_dm_full_json(j jsonb) returns jsonb
         language sql immutable as $fn$ select j $fn$;
@@ -276,45 +283,76 @@ describe.runIf(present)('the party link — execution against the real SQL (pgli
     expect((await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j.id).toBe(S_UNLISTED);
   });
 
-  // ── (d) the link honours the veil ────────────────────────────────────────────
-  it('the veil hides the same rows on both reads (default mode, one member revealed, one hidden)', async () => {
-    const data = { name: 'Highkeep', secret: 'the compass', npcs: [
-      { id: 'n1', name: 'Ada', secret: 'ada-secret' },
-      { id: 'n2', name: 'Bo', secret: 'bo-secret' },
-    ] };
+  // ── (d) the link honours the veil; R1 the link never widens ───────────────────
+  const DM_DATA = { name: 'Highkeep', secret: 'the compass', secrets: ['the vault'], plotHooks: ['a hook'], npcs: [
+    { id: 'n1', name: 'Ada', secret: 'ada-secret', goals: ['ada-goal'] },
+    { id: 'n2', name: 'Bo', secret: 'bo-secret', goals: ['bo-goal'] },
+  ] };
+  const plant = (overrides, shareDm) => db.query(
+    `update public.settlements set data = $1, gallery_member_overrides = $2, gallery_share_dm = ${shareDm} where id = '${S_PUBLIC}'`,
+    [JSON.stringify(DM_DATA), JSON.stringify(overrides)]);
+  const linkRead = async (slug) => (await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j;
+  const expectPlayerView = (dossier) => {
+    expect(dossier.secret).toBeUndefined();
+    expect(dossier.secrets).toBeUndefined();
+    expect(dossier.plotHooks).toBeUndefined();
+    for (const npc of dossier.npcs) {
+      expect(npc.secret).toBeUndefined();
+      expect(npc.goals).toBeUndefined();
+    }
+  };
+
+  // INVERTED by R1 (was: "the link's dossier equals the gallery read's, Ada revealed")
+  it('R1 (ii): a revealDm member override does not widen the link (the gallery read still reveals)', async () => {
     const overrides = { n1: { revealDm: true }, n2: { revealDm: false }, $veil: { v: 1, deltas: [{ address: 'card:npc:n2', hidden: true }] } };
-    await db.query(`update public.settlements set data = $1, gallery_member_overrides = $2, gallery_share_dm = false where id = '${S_PUBLIC}'`,
-      [JSON.stringify(data), JSON.stringify(overrides)]);
+    await plant(overrides, false);
     const slug = await share(S_PUBLIC);
     await db.query(`select public.publish_settlement('${S_PUBLIC}')`); // listed and linked, both reads open
     await asAnon();
     const gallery = await scalar(`select data, gallery_share_dm, gallery_member_overrides from public.get_gallery_dossier('highkeep01')`);
-    const link = (await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j;
-    expect(link.dossier).toEqual(gallery.data);
+    const link = await linkRead(slug);
+    // the gallery read (other DMs) honours the member reveal, as 093 decided
+    expect(gallery.data.npcs.find((n) => n.id === 'n1').secret).toBe('ada-secret');
+    // the players' link does not
+    expectPlayerView(link.dossier);
+    expect(link.gallery_share_dm).toBe(false);
+    // the veil's deltas still travel, so the client hides what the gallery hides
     expect(link.gallery_member_overrides).toEqual(gallery.gallery_member_overrides);
-    expect(link.gallery_share_dm).toBe(gallery.gallery_share_dm);
-    // what the splice did, both sides: the settlement level stripped, Ada revealed, Bo stripped
-    expect(link.dossier.secret).toBeUndefined();
-    expect(link.dossier.npcs.find((n) => n.id === 'n1').secret).toBe('ada-secret');
-    expect(link.dossier.npcs.find((n) => n.id === 'n2').secret).toBeUndefined();
   });
 
-  it('the veil hides the same rows on both reads (DM content revealed, one member held back)', async () => {
-    const data = { name: 'Highkeep', secret: 'the compass', npcs: [
-      { id: 'n1', name: 'Ada', secret: 'ada-secret' },
-      { id: 'n2', name: 'Bo', secret: 'bo-secret' },
-    ] };
-    await db.query(`update public.settlements set data = $1, gallery_member_overrides = $2, gallery_share_dm = true where id = '${S_PUBLIC}'`,
-      [JSON.stringify(data), JSON.stringify({ n2: { revealDm: false } })]);
+  // INVERTED by R1 (was: "the link carries gallery_share_dm = true and the compass")
+  it('R1 (i): gallery_share_dm = true returns the SAME link dossier as false — no secrets, no plotHooks, no NPC secret or goals', async () => {
+    const overrides = { n2: { revealDm: false } };
+    await plant(overrides, false);
     const slug = await share(S_PUBLIC);
-    await db.query(`select public.publish_settlement('${S_PUBLIC}')`); // listed and linked, both reads open
+    await db.query(`select public.publish_settlement('${S_PUBLIC}')`);
     await asAnon();
+    const withFalse = await linkRead(slug);
+    await asUser(OWNER);
+    await plant(overrides, true);
+    await asAnon();
+    const withTrue = await linkRead(slug);
+    expect(withTrue.dossier).toEqual(withFalse.dossier);
+    expectPlayerView(withTrue.dossier);
+    expect(withTrue.gallery_share_dm).toBe(false);
+    // the gallery read (other DMs) still honours the settlement flag, as 093 decided
     const gallery = await scalar(`select data from public.get_gallery_dossier('highkeep01')`);
-    const link = (await scalar(`select public.get_unlisted_dossier('${slug}') as j`)).j;
+    expect(gallery.data.secret).toBe('the compass');
+  });
+
+  it('R1 (iii): a planted veil hides the same rows on the link as on the gallery read (nothing revealed: the dossiers agree)', async () => {
+    const overrides = { n2: { revealDm: false }, $veil: { v: 1, deltas: [{ address: 'card:npc:n2', hidden: true }, { address: 'block:power:governance', hidden: true }] } };
+    await plant(overrides, false);
+    const slug = await share(S_PUBLIC);
+    await db.query(`select public.publish_settlement('${S_PUBLIC}')`);
+    await asAnon();
+    const gallery = await scalar(`select data, gallery_share_dm, gallery_member_overrides from public.get_gallery_dossier('highkeep01')`);
+    const link = await linkRead(slug);
     expect(link.dossier).toEqual(gallery.data);
-    expect(link.gallery_share_dm).toBe(true);
-    expect(link.dossier.secret).toBe('the compass');
-    expect(link.dossier.npcs.find((n) => n.id === 'n2').secret).toBeUndefined();
+    expect(link.gallery_member_overrides).toEqual(gallery.gallery_member_overrides);
+    expect(link.gallery_member_overrides.$veil.deltas).toHaveLength(2);
+    expect(link.gallery_share_dm).toBe(gallery.gallery_share_dm);
+    expectPlayerView(link.dossier);
   });
 
   // ── (f) the owner is told ────────────────────────────────────────────────────

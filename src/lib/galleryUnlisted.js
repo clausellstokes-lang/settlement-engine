@@ -82,8 +82,9 @@ export async function fetchMyUnlistedDossiers() {
 /**
  * Read an unlisted dossier by its exact slug (get_unlisted_dossier). Since migration
  * 208 the payload also carries `is_owner` (the caller owns the settlement; false for
- * anon), `gallery_share_dm` and `gallery_member_overrides` (the veil's inputs), which
- * fetchPublicDossier's unlisted branch reads.
+ * anon) and `gallery_member_overrides` (the veil's inputs), which fetchPublicDossier's
+ * unlisted branch reads; its `gallery_share_dm` is always false (the party link never
+ * widens, VEIL-FIX R1 of 2026-11-10) and the client does not read it.
  */
 export async function fetchUnlistedDossier(slug) {
   if (!isConfigured || !slug || typeof slug !== 'string') return null;

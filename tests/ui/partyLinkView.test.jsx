@@ -14,7 +14,7 @@ import { render, screen, cleanup } from '@testing-library/react';
 
 vi.mock('../../src/hooks/useIsMobile.js', () => ({ default: () => false }));
 vi.mock('../../src/lib/seoDossier.js', () => ({ setSharedDossierMeta: vi.fn() }));
-vi.mock('../../src/components/PublicDossierView.jsx', () => ({ default: () => <div data-testid="dossier-body" /> }));
+vi.mock('../../src/components/PublicDossierView.jsx', () => ({ default: ({ dossier }) => <div data-testid="dossier-body" data-share-dm={String(dossier?.shareDm === true)} /> }));
 vi.mock('../../src/components/gallery/GalleryComments.jsx', () => ({ default: () => <div data-testid="comments" /> }));
 vi.mock('../../src/components/gallery/GalleryMoreByCreator.jsx', () => ({ default: () => <div data-testid="more-by-creator" /> }));
 vi.mock('../../src/components/gallery/GalleryImage.jsx', () => ({ default: () => null }));
@@ -56,6 +56,11 @@ describe("the players' page (party link) carries no social chrome", () => {
     expect(screen.getByText(/Shared with the players by The Owner/)).toBeTruthy();
     expect(await screen.findByTestId('dossier-body')).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Report' })).toBeTruthy();
+  });
+
+  test('R1 (VEIL-FIX 2026-11-10): the players\' page never enters DM mode, whatever the dossier says', async () => {
+    await renderDetail({ ...partyLink, shareDm: true });
+    expect((await screen.findByTestId('dossier-body')).getAttribute('data-share-dm')).toBe('false');
   });
 
   test('renders no votes, comments, reactions, views, share, Import or more-by-creator', async () => {

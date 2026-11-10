@@ -8,6 +8,11 @@
  *     execution in tests/security/galleryUnlisted.pglite.test.js.
  * (f) THE OWNER IS TOLD: the read's is_owner travels as `isOwner` (the redirect's
  *     server word; false when absent).
+ * R1  THE PARTY LINK NEVER WIDENS (VEIL-FIX, the chair's ruling R1 of 2026-11-10 on the
+ *     pre-deploy review's finding 1): the unlisted branch is ALWAYS the player view — no
+ *     full mode by gallery_share_dm, no per-member revealDm restore — even if a server
+ *     (or an old one) sends DM content. The pin that asserted "the Reveal DM switch
+ *     travels" is INVERTED with R1 as its cause.
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
@@ -72,13 +77,41 @@ describe('the party link honours the veil on the client (row (d))', () => {
     expect(printed).not.toContain('sly-and-grasping'); // anchored: the two toContain lines above prove `printed` is the live card text; the veil reached the players
   });
 
-  it('the DM\'s "Reveal DM content" switch travels: the players\' page renders as the gallery copy does', async () => {
+  // INVERTED by R1 (was: "the DM's Reveal DM content switch travels: shareDm true")
+  it('R1: the DM\'s "Reveal DM content" switch never reaches the players: player view, DM fields stripped', async () => {
+    const dmFull = {
+      ...SETTLEMENT, secrets: ['the vault'], plotHooks: ['a hook'],
+      npcs: SETTLEMENT.npcs.map((n) => ({ ...n, secret: `${n.id}-secret-text`, goals: [`${n.id}-goal-text`] })),
+    };
     serve({ galleryRow: null, unlistedRow: {
       id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
-      dossier: SETTLEMENT, gallery_share_dm: true, gallery_member_overrides: {},
+      dossier: dmFull, gallery_share_dm: true, gallery_member_overrides: {},
     } });
     const linked = await fetchPublicDossier('u'.repeat(42));
-    expect(linked.shareDm).toBe(true);
+    expect(linked.shareDm).toBe(false);
+    const printed = JSON.stringify(linked.settlement);
+    expect(printed).toContain('Ada Thorne');
+    expect(printed).not.toContain('the vault');
+    expect(printed).not.toContain('a hook');
+    expect(printed).not.toContain('secret-text');
+    expect(printed).not.toContain('goal-text');
+  });
+
+  it('R1: a revealDm member override never widens the players\' page', async () => {
+    const dmFull = {
+      ...SETTLEMENT,
+      npcs: SETTLEMENT.npcs.map((n) => ({ ...n, secret: `${n.id}-secret-text`, goals: [`${n.id}-goal-text`] })),
+    };
+    serve({ galleryRow: null, unlistedRow: {
+      id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
+      dossier: dmFull, gallery_share_dm: false, gallery_member_overrides: { 'npc_1': { revealDm: true } },
+    } });
+    const linked = await fetchPublicDossier('u'.repeat(42));
+    expect(linked.shareDm).toBe(false);
+    const printed = JSON.stringify(linked.settlement);
+    expect(printed).toContain('Ada Thorne');
+    expect(printed).not.toContain('npc_1-secret-text');
+    expect(printed).not.toContain('npc_1-goal-text');
   });
 });
 
