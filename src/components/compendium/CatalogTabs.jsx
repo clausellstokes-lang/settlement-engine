@@ -12,6 +12,7 @@ import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { institutionAnchor } from './institutionSearchEntries.js';
+import { institutionFacts } from './institutionFacts.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
@@ -248,6 +249,34 @@ export function NeighbourTab({ search='' }) {
   </>;
 }
 
+// H7 — what each institution card adds, every line READ from a registry
+// (compendium/institutionFacts.js). A field a registry does not hold prints no line.
+// The owner's own nouns label the three: "Backing", "Services", "Flows into"; "Size" is the
+// configuration panel's word, and "Priority slider" is the page's own lead ("the matching
+// priority slider band").
+const tierLabel = (id) => (CD.tiers.find((t) => t.id === id) || {}).label || null;
+const cap = (w) => String(w || '').charAt(0).toUpperCase() + String(w || '').slice(1);
+function FactLine({ label, children, mobile }) {
+  return (
+    <div data-inst-fact={label} style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>
+      <span style={{ fontWeight:700, color:BODY }}>{label}:</span> {children}
+    </div>
+  );
+}
+function InstitutionFactLines({ inst, mobile }) {
+  const f = institutionFacts(inst);
+  const size = tierLabel(f.size);
+  return <>
+    {size && <FactLine label="Size" mobile={mobile}>{size}</FactLine>}
+    {f.priority && <FactLine label="Priority slider" mobile={mobile}>{cap(f.priority)}</FactLine>}
+    {/* The powers named, largest share first — no figures (the owner, X-45: "just simply
+        saying which ones they back in that row is plenty enough"). */}
+    {f.backing && <FactLine label="Backing" mobile={mobile}>{f.backing.map((b) => cap(b.archetype)).join(', ')}</FactLine>}
+    {f.services && <FactLine label="Services" mobile={mobile}>{f.services.join(', ')}</FactLine>}
+    {f.flowsInto && <FactLine label="Flows into" mobile={mobile}>{f.flowsInto.join(', ')}</FactLine>}
+  </>;
+}
+
 export function InstitutionsTab({ _config, search }) {
   // Catalog load can throw (the live lookups read generated data). Track the
   // failure explicitly so a load FAILURE is distinguishable from a zero-result
@@ -271,12 +300,14 @@ export function InstitutionsTab({ _config, search }) {
   // which renders as label TEXT, so #a0762a (AA fail as text) can't be used here.
   const catColors = { Economy:ECON_TXT, Military:'#8b1a1a', Magic:'#3a1a7a', Religion:'#1a4a2a', Criminal:'#4a1a4a', 'Government/Admin':'#1a3a7a' };
   const filtered = useMemo(() => {
-    if (!search) return all.slice(0, 48);
+    // H7 (the owner, 2026-11-10: "the institution page should show ALL institutions"):
+    // no first-48 cut and no cap on a search.
+    if (!search) return all;
     const q = search.toLowerCase();
     // §934.13 — the DISPLAYED label is searchable too, or a reader who types the words
     // printed on the card in front of them gets no results. The raw key stays searchable
     // so a DM who knows the engine's spelling still finds the entry.
-    return all.filter(i => (i.name||'').toLowerCase().includes(q) || institutionDisplayName(i).toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q))).slice(0,80);
+    return all.filter(i => (i.name||'').toLowerCase().includes(q) || institutionDisplayName(i).toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q)));
   }, [all, search]);
   // A catalog-load failure (no data AND nothing was searched) is a real error,
   // not an empty result — surface it as such with a reload affordance (P10).
@@ -300,7 +331,7 @@ export function InstitutionsTab({ _config, search }) {
     <p style={{ fontSize:FS.sm, color:BODY, lineHeight:1.5, margin:'0 0 10px' }}>
       {search
         ? <><strong>{filtered.length}</strong> results</>
-        : <>Showing first <strong>48</strong> of <strong>{all.length}</strong> institutions. Use search to filter.</>}
+        : <><strong>{all.length}</strong> institutions</>}
     </p>
     <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'-4px 0 10px' }}>
       Each entry rolls a base chance shifted by the matching priority slider band; a Core entry always generates.
@@ -313,13 +344,16 @@ export function InstitutionsTab({ _config, search }) {
     <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:6 }}>
       {filtered.map(inst => (
         // id: the global search's landing anchor for this institution (H6).
-        <div key={inst.name} id={institutionAnchor(inst.name)} style={{ border:`1px solid ${BOR}`, padding:'8px 10px', scrollMarginTop:ANCHOR_OFFSET }}>
+        // contentVisibility: with all 282 cards on one page (H7), the browser skips layout and
+        // paint for the cards off screen (measured on the phone profile; see the record).
+        <div key={inst.name} id={institutionAnchor(inst.name)} style={{ border:`1px solid ${BOR}`, padding:'8px 10px', scrollMarginTop:ANCHOR_OFFSET, contentVisibility:'auto', containIntrinsicSize:'auto 260px' }}>
           <div style={{ display:'flex', alignItems:'flex-start', gap:5, marginBottom:3 }}>
             <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{institutionDisplayName(inst)}</span>
             {inst.required && <Tag label="Core" color='#1a3a7a' title="Always present at this tier. Generated every time, never rolled by chance."/>}
           </div>
           {inst.category && <Tag label={inst.category} color={catColors[inst.category]||GOLD}/>}
           {inst.desc && <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
+          <InstitutionFactLines inst={inst} mobile={mobile} />
         </div>))}
     </div>
     )}
