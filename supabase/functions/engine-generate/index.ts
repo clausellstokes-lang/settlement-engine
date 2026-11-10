@@ -54,7 +54,7 @@
  *
  * THE SPINE (the order is the contract):
  *   CORS preflight → method gate (POST) → bot guard (403) → body cap + parse (413/400)
- *   → shape (400) → version pin (409 `engine_version_retired`, carrying the served
+ *   → shape (400) → a `generate` body's rest without its toggle bags (413 over 32 KB) → version pin (409 `engine_version_retired`, carrying the served
  *   version) → OPTIONAL identity (a Bearer JWT that resolves to a user; anything else is
  *   anonymous) → for a signed-in caller: single-session gate (401) and account_is_active
  *   (403; the design's spine, docs/DESIGN_ENGINE_SERVICE.md "The contract") → staff read →
@@ -125,6 +125,19 @@ const FN = 'engine-generate';
  * whose grid had been "excluded all" on every generation.
  */
 const MAX_BODY_BYTES = 256 * 1024;
+/**
+ * THE 256 KB ADMITS ONLY WHAT IT WAS RAISED FOR (remote-path FU-1, the review's F1, the chair's
+ * ruling 2026-11-10). The function validates nothing inside `config`, so the cap was the only bound
+ * on one call's work: a hostile list at 256 KB cost seconds of CPU and megabytes of reply. The four
+ * toggle bags the wizard's bulk presses fill may use the whole cap; the REST of a `generate` body,
+ * serialised without them, is held to the old 32 KB. Checked on bytes, before any account read or
+ * generation. A real shape validator for `config` is the durable cure (the lane's record, the first
+ * hardening item after the deploy).
+ */
+const GENERATE_TOGGLE_BAGS: ReadonlyArray<string> = Object.freeze([
+  '_institutionToggles', '_categoryToggles', '_goodsToggles', '_servicesToggles',
+]);
+const MAX_GENERATE_REST_BYTES = 32 * 1024;
 /**
  * `derive` carries a pins bag cut from a whole settlement record (a city's record is ~250 KB);
  * `regenSection` carries the record itself. Both are held to this cap.
@@ -293,6 +306,14 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
       return json({ error: 'invalid_seed', maxChars: MAX_SEED_CHARS }, 400, cors);
     }
     if (!isPlainObject(config)) return json({ error: 'invalid_config' }, 400, cors);
+  }
+  if (op === 'generate') {
+    const rest: Record<string, unknown> = { ...(config as Record<string, unknown>) };
+    for (const bag of GENERATE_TOGGLE_BAGS) delete rest[bag];
+    const restBytes = new TextEncoder().encode(JSON.stringify({ ...body, config: rest })).length;
+    if (restBytes > MAX_GENERATE_REST_BYTES) {
+      return json({ error: 'payload_too_large', maxBytes: MAX_GENERATE_REST_BYTES }, 413, cors);
+    }
   }
   if (op === 'regenSection') {
     if (typeof section !== 'string' || !REGEN_SECTIONS.includes(section)) {

@@ -74,8 +74,14 @@ function generateCapBytes() {
   return m[1].split('*').map((x) => Number(x.trim())).reduce((a, b) => a * b, 1);
 }
 
-/** Drive the real store's bulk actions to their largest bags; answer the posted body's bytes. */
-async function largestWizardBody() {
+/**
+ * Drive the real store's bulk actions to their largest bags; answer the posted body's bytes.
+ * @param {'longest'|'force'|'exclude'} [mode] 'longest' keeps the longer spelling of each bag
+ *   (the derived bound); 'force' / 'exclude' press every bulk control one way (the wizard's two
+ *   real extremes, which the function must still serve).
+ * @param {string|null} [pin] the engineVersion the body pins
+ */
+async function largestWizardBody(mode = 'longest', pin = 'f'.repeat(16)) {
   const state = () => useStore.getState();
   useStore.setState({ auth: { ...state().auth, user: { id: 'cap-measure' }, tier: 'premium' } });
   expect(state().canCustomizePreGeneration(), 'the forge takes the stored bags').toBe(true);
@@ -86,7 +92,7 @@ async function largestWizardBody() {
     // that tier), the 'all' browse over the merged tier catalog. 'force' then 'exclude': the
     // later write stands, and 'exclude' is the longer spelling.
     const getter = tier === 'all' ? getInstitutionalCatalog : getFullCatalogWithTierMeta;
-    for (const mode of ['force', 'exclude']) state().bulkSetInstitutions(getter, tier, mode);
+    for (const press of mode === 'longest' ? ['force', 'exclude'] : [mode]) state().bulkSetInstitutions(getter, tier, press);
     for (const category of Object.keys(getter(tier))) {
       if (state().isCategoryEnabled(tier, category)) state().toggleCategory(tier, category);
     }
@@ -111,6 +117,8 @@ async function largestWizardBody() {
   const pick = (bag, write) => {
     write('force'); const forced = structuredClone(state()[bag]);
     write('exclude'); const excluded = structuredClone(state()[bag]);
+    if (mode === 'force') return forced;
+    if (mode === 'exclude') return excluded;
     return longer(forced, excluded);
   };
   const services = pick('servicesToggles', (m) => state().bulkSetServices(m, serviceKeys));
@@ -135,11 +143,11 @@ async function largestWizardBody() {
   await runRemoteGeneration(request, {
     url: 'https://measure/engine-generate',
     getAccessToken: async () => null,
-    engineVersion: 'f'.repeat(16),
+    engineVersion: pin,
     fetchImpl: async (_url, init) => { body = init.body; throw new Error('measured'); },
   }).catch(() => {});
   expect(body, 'the transport posted a body').toBeTypeOf('string');
-  return { bytes: new TextEncoder().encode(body).length, counts };
+  return { bytes: new TextEncoder().encode(body).length, counts, body };
 }
 
 describe('the engine-generate `generate` body cap holds the largest body the wizard can build', () => {
@@ -164,3 +172,47 @@ describe('the engine-generate `generate` body cap holds the largest body the wiz
     expect(FUNCTION_SRC).toMatch(/const MAX_DERIVE_BODY_BYTES = 1024 \* 1024;/);
   });
 });
+
+/**
+ * FU-1 (the review's F1, the chair's ruling 2026-11-10): THE 256 KB ADMITS ONLY WHAT IT WAS RAISED
+ * FOR. The function validates nothing inside `config`, so the cap was the only bound on one call's
+ * work, and a hostile list at 256 KB cost seconds of CPU and megabytes of reply. The four toggle
+ * bags may fill the derived bound; the REST of the body stays under the old 32 KB. Driven on the
+ * REAL handler, bundled from supabase/functions/engine-generate/index.ts exactly as the flagged
+ * browser spec does (e2e/support/engineFunction.js).
+ */
+describe('the generate cap admits the toggle bags and nothing else', () => {
+  const ORDINARY_UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+  const post = (body) => new Request('https://edge.test/functions/v1/engine-generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'user-agent': ORDINARY_UA, 'cf-connecting-ip': '203.0.113.9' },
+    body,
+  });
+
+  it('a 256 KB body of anything but the toggle bags is refused 413 before any generation', async () => {
+    const { loadEngineFunction, adminDouble } = await import('../../e2e/support/engineFunction.js');
+    const { handleEngineGenerate } = await loadEngineFunction();
+    let clientMade = 0;
+    const admin = adminDouble();
+    const nearbyResources = [];
+    while (JSON.stringify(nearbyResources).length < 250 * 1024) nearbyResources.push(`resource-${nearbyResources.length}`);
+    const body = JSON.stringify({ seed: 'hostile', config: { settType: 'metropolis', nearbyResources } });
+    expect(new TextEncoder().encode(body).length).toBeLessThanOrEqual(generateCapBytes());
+    const res = await handleEngineGenerate(post(body), { adminClient: () => { clientMade += 1; return admin(); } });
+    expect(res.status).toBe(413);
+    expect((await res.json()).maxBytes).toBe(32 * 1024);
+    expect(clientMade, 'refused on bytes, before identity, the meter or any generation').toBe(0);
+  }, 120_000);
+
+  for (const mode of ['force', 'exclude']) {
+    it(`the wizard's ${mode}-all body (every bulk control pressed '${mode}') is served 200`, async () => {
+      const { loadEngineFunction, adminDouble } = await import('../../e2e/support/engineFunction.js');
+      const { handleEngineGenerate, ENGINE_VERSION } = await loadEngineFunction();
+      const { body, bytes } = await largestWizardBody(mode, ENGINE_VERSION);
+      expect(bytes, 'the body is past the old 32 KB, so the bags are what the cap admits').toBeGreaterThan(32 * 1024);
+      const res = await handleEngineGenerate(post(body), { adminClient: adminDouble() });
+      expect(res.status, `${mode}-all, ${bytes} B`).toBe(200);
+    }, 240_000);
+  }
+});
+

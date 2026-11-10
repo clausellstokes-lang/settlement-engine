@@ -322,6 +322,16 @@ scopedEnv.test('GENERATE: a wizard-sized body (the chair\'s measured 39,940-byte
   assertEquals(res.status, 200);
 });
 
+scopedEnv.test('GENERATE: past 32 KB, only the four toggle bags are admitted — any other config is 413 before any client (remote-path FU-1)', async () => {
+  const admin = makeAdmin();
+  const nearbyResources: string[] = [];
+  while (JSON.stringify(nearbyResources).length < 40_000) nearbyResources.push(`resource-${nearbyResources.length}`);
+  const res = await handleEngineGenerate(post({ seed: 's', config: { ...cases.config, nearbyResources } }), { adminClient: admin.adminClient });
+  assertEquals(res.status, 413);
+  assertEquals((await res.json()).maxBytes, 32 * 1024);
+  assertEquals(admin.made(), 0);
+});
+
 scopedEnv.test('OPS: an unknown op and a non-object pins bag are refused 400', async () => {
   const admin = makeAdmin();
   const bad = await handleEngineGenerate(post({ op: 'advance', seed: 's', config: {} }), { adminClient: admin.adminClient });
