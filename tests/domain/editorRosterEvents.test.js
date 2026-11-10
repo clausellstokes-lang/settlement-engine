@@ -121,16 +121,16 @@ describe('event registry — editor roster wave', () => {
     expect(deltas.resourcePressure).toBe(-6); // famine is a scarcity crisis
   });
 
-  test('swap stateDeltas are a small volatility bump only; narrate names NPC and faction', () => {
+  test('swap stateDeltas are a small volatility bump only; narrate names the NPC and no power (PULSE-SITES P1)', () => {
     expect(EVENT_REGISTRY.PROMOTE_NPC.stateDeltas(ev('PROMOTE_NPC'))).toEqual({ volatility: +3 });
     expect(EVENT_REGISTRY.DEMOTE_NPC.stateDeltas(ev('DEMOTE_NPC'))).toEqual({ volatility: +3 });
     const settlement = fixture({
-      npcs: [{ id: 'npc_1', name: 'Captain Mara', factionAffiliation: 'The Garrison' }],
+      npcs: [{ id: 'npc_1', name: 'Captain Mara', memberships: [{ power: 'The Garrison', rank: 1, veiled: false }] }], // a member: the line still names no power
     });
     expect(EVENT_REGISTRY.PROMOTE_NPC.narrate(ev('PROMOTE_NPC', { targetId: 'npc_1' }), settlement))
-      .toMatch(/Captain Mara rises within The Garrison/);
+      .toBe('Captain Mara rises within their power, displacing a rival on the way up.');
     expect(EVENT_REGISTRY.DEMOTE_NPC.narrate(ev('DEMOTE_NPC', { targetId: 'npc_1' }), settlement))
-      .toMatch(/Captain Mara is pushed down the ranks of The Garrison/);
+      .toBe('Captain Mara is pushed down the ranks of their power.');
   });
 });
 

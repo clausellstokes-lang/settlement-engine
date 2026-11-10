@@ -92,8 +92,8 @@ function town({ id = 's1', prosperity = 'Wealthy', factions, institutions, npcs 
       ],
       economicState: { prosperity: { tier: prosperity } },
       npcs: npcs ?? [
-        { id: 'n2', name: 'Maren', factionAffiliation: 'Verren Merchant Guild' },
-        { id: 'n1', name: 'Otto', factionAffiliation: 'Verren Merchant Guild', status: 'jailed' },
+        { id: 'n2', name: 'Maren', memberships: [{ power: 'Verren Merchant Guild', rank: 1 }] },
+        { id: 'n1', name: 'Otto', memberships: [{ power: 'Verren Merchant Guild', rank: 2 }], status: 'jailed' },
       ],
     },
   };
@@ -422,7 +422,7 @@ describe('TR-2 — the editor line (R-32): the direction row, the predicate, the
     const guild = faction('Verren Merchant Guild');
     const settlement = town().settlement;
     expect(castHouseFactor(settlement, guild)).toBe('n2');
-    expect(castHouseFactor({ ...settlement, npcs: [settlement.npcs[1], { id: 'n0', factionAffiliation: 'Verren Merchant Guild', status: 'dead' }] }, guild)).toBe('');
+    expect(castHouseFactor({ ...settlement, npcs: [settlement.npcs[1], { id: 'n0', memberships: [{ power: 'Verren Merchant Guild', rank: 1 }], status: 'dead' }] }, guild)).toBe('');
     const { worldState, log } = drive({ ticks: 3 });
     const acts = log.filter((r) => r.event === 'act' && r.factionId === 's1:verren_merchant_guild');
     expect(acts.length).toBeGreaterThan(0);

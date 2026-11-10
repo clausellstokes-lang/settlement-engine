@@ -1,0 +1,140 @@
+{
+ "_": "PULSE-SITES (2026-11-10, the chair's S3): every read, destructure or string access of the five retired per-card fields (factionAffiliation, secondaryAffiliation, linkedFactionIds, factionGoal, densityRungRole) in src/ outside settlementMigrations.js, keyed by file:line field (a line with two reads of one field is one row). SHRINK-ONLY: read by tests/lint/noLegacyFactionReaders.walker.test.js's per-site arm; a new read or a stale row reds.",
+ "base": "5da82ea59",
+ "count": 19,
+ "sites": [
+  {
+   "file": "src/domain/customContent.js",
+   "line": 393,
+   "field": "factionAffiliation",
+   "class": "LEGACY",
+   "reason": "customContent.js :: classifyCustomNpc \u2014 the DM's custom-content library entity, a store no settlement migration covers; the membership read sits in front"
+  },
+  {
+   "file": "src/domain/density/densityRungs.js",
+   "line": 92,
+   "field": "densityRungRole",
+   "class": "DEAD",
+   "reason": "densityRungs.js :: RUNG_ROLE_FIELD \u2014 its only readers are titularSuccession.js (no src importer) and applyDensityLaw.js :: assignRoster (dead); importers would break on removal, so it is listed"
+  },
+  {
+   "file": "src/domain/density/factionLifecycle.js",
+   "line": 117,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/domain/entities/propagate.js",
+   "line": 350,
+   "field": "linkedFactionIds",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands (P3 44b37a520)"
+  },
+  {
+   "file": "src/domain/events/batch.js",
+   "line": 151,
+   "field": "linkedFactionIds",
+   "class": "LEGACY",
+   "reason": "batch.js :: eventConsumes \u2014 an ADD_NPC EVENT PAYLOAD key, not a card: no src composer writes it (buildEvent writes linkedInstitutionIds only); reached by an older or external payload; mirrors mutateEntities :: addNpc"
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "line": 505,
+   "field": "linkedFactionIds",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "line": 751,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "line": 895,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands (swapNpcStanding; four reads on the line pair 895-896 collapse to one key per line)"
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "line": 896,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/domain/events/mutateEntities.js",
+   "line": 918,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/domain/worldPulse/factionDensityKernel.js",
+   "line": 640,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "line": 302,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/domain/worldPulse/npcAgency.js",
+   "line": 825,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/domain/worldPulse/npcLadderFactionMembership.js",
+   "line": 56,
+   "field": "factionAffiliation",
+   "class": "LEGACY",
+   "reason": "npcLadderFactionMembership.js :: npcFactionHandle \u2014 npcInFaction's compatibility arm, AFTER the memberships arm: read for any card whose memberships do not name the faction asked about; it finds a value only on a card carrying a retired handle (today the pulse-written cards, which GREEN-TIP's writer cure ends)"
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "line": 104,
+   "field": "factionAffiliation",
+   "class": "DARK",
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit. WHEN LIT, P1's rule (the chair, 2026-11-10) applies to this lane's dark outputs too: npcVerdictTable :: vacatedSeatOf's seat name (the verdict herald's summary and reasons) and houseLedger :: castHouseFactor's factor name a hidden or criminal power today \u2014 each must name a power only where the card's first-rank membership is stamped veiled: false before the flag is lit"
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "line": 105,
+   "field": "secondaryAffiliation",
+   "class": "DARK",
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit. WHEN LIT, P1's rule (the chair, 2026-11-10) applies to this lane's dark outputs too: npcVerdictTable :: vacatedSeatOf's seat name (the verdict herald's summary and reasons) and houseLedger :: castHouseFactor's factor name a hidden or criminal power today \u2014 each must name a power only where the card's first-rank membership is stamped veiled: false before the flag is lit"
+  },
+  {
+   "file": "src/domain/worldPulse/npcVerdictApply.js",
+   "line": 111,
+   "field": "linkedFactionIds",
+   "class": "DARK",
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit. WHEN LIT, P1's rule (the chair, 2026-11-10) applies to this lane's dark outputs too: npcVerdictTable :: vacatedSeatOf's seat name (the verdict herald's summary and reasons) and houseLedger :: castHouseFactor's factor name a hidden or criminal power today \u2014 each must name a power only where the card's first-rank membership is stamped veiled: false before the flag is lit"
+  },
+  {
+   "file": "src/domain/worldPulse/successorNpc.js",
+   "line": 37,
+   "field": "factionAffiliation",
+   "class": "CURED-ON-LANE",
+   "reason": "cured on lane/green-tip-2026-11-10 (GREEN-TIP's file, forbidden to PULSE-SITES); the merge seat removes this row when that lane lands"
+  },
+  {
+   "file": "src/generators/density/applyDensityLaw.js",
+   "line": 491,
+   "field": "factionAffiliation",
+   "class": "DEAD",
+   "reason": "applyDensityLaw.js :: assignRoster \u2014 its only caller disperseNamedRoster has no src caller (tests only); removal would break those tests, so it is listed"
+  }
+ ]
+}

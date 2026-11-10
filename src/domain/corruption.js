@@ -20,6 +20,7 @@
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
 import { prosperityRank01 } from './prosperityRank.js';
+import { firstRankMembershipOf } from './people/membership.js';
 // TRAIT_ALIGNMENT lives in the zero-import leaf data/npcTraitWeights.js (npcData.js
 // re-exports it). npcAlignmentScore below reads it. corruption.js is EAGER (first paint),
 // so it imports the LIGHT leaf directly — importing from npcData.js would drag that 64 kB
@@ -643,7 +644,9 @@ export const PATRONAGE_TUNING = Object.freeze({
 /** The home-institution fields the exposure path reads, in the same order.
  *  @param {import('./settlement.schema.js').SimNpc} npc */
 export function npcHomeInstitution(npc) {
-  return npc?.factionAffiliation || npc?.factionLink || npc?.institutionId || null;
+  // The card's FIRST-RANK power (people/membership.js; no settlement here, so the memberships' own order breaks a
+  // tie), re-pointed by PULSE-SITES (2026-11-10) from the retired `factionAffiliation`, which no current card carries.
+  return firstRankMembershipOf(npc)?.power || npc?.factionLink || npc?.institutionId || null;
 }
 
 // The bought watch's two readers — compromisedSecurityInstitutions and patronageSecurityDrag — MOVED

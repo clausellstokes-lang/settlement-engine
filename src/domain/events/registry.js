@@ -39,7 +39,7 @@ import { sev01 } from './mutateHelpers.js';
  * @property {Array<Record<string, unknown>>} [stressors]
  * @property {Array<Record<string, unknown>>} [stress]
  * @property {Array<Record<string, unknown>>} [stresses]
- * @property {Array<{ id?: string, name?: string, factionAffiliation?: string }>} [npcs]
+ * @property {Array<{ id?: string, name?: string }>} [npcs]
  */
 /**
  * One event's impact specification.
@@ -802,7 +802,9 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = npc?.factionAffiliation || 'their power';
+      // The narration names NO power (the owner's word, 2026-11-10: the simulation is isolated; the reviewer showed a
+      // named power reaching the public chronicle through narrativeSummary). Naming it is the simulation program's.
+      const faction = 'their power';
       return `${name} rises within ${faction}, displacing a rival on the way up.`;
     },
   },
@@ -817,7 +819,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = npc?.factionAffiliation || 'their power';
+      const faction = 'their power';
       return `${name} is pushed down the ranks of ${faction}.`;
     },
   },

@@ -75,7 +75,7 @@ const GROUPING_DOMINANT_FILES = Object.freeze(['src/components/settlementDetail/
 // FIX-EXPORT-KEYS (2026-11-07): the publicSafe.js rows (here and in OTHER_SHAPES) left with migration 205 — the
 // public projection's allowlists and publicNpc no longer name the grouping or the two fields, so no exemption is owed.
 export const FIELD_CONTRACTS = Object.freeze({
-  'src/domain/customContent.js:392': 'a DM-authored custom-content library entity\'s legacy `controlledBy` fallback (not a generated card; no settlement migration covers that store)',
+  'src/domain/customContent.js:393': 'a DM-authored custom-content library entity\'s legacy `controlledBy` fallback (not a generated card; no settlement migration covers that store)',
 });
 
 /**
