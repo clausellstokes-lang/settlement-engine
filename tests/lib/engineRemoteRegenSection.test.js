@@ -157,6 +157,19 @@ describe('the lifted action commits the same world through either transport', ()
       JSON.parse(JSON.stringify(regenHistoryPipeline(world, world.config).history)));
   }, 120_000);
 
+  it('FU-2: a failed reroll\'s refusal is cleared by the next SUCCESSFUL reroll (the review\'s F2)', async () => {
+    const world = worldFor('village', 'engine5-regen-clear');
+    const store = storeHolding(world);
+    const limited = async () => ({ ok: false, status: 429, json: async () => ({ error: 'rate_limited' }) });
+    await regenSectionAction(store.setState, store.getState, 'history', { remote: true, remoteOptions: remoteOpts(limited) })
+      .catch(() => {});
+    expect(store.getState().lastRefusal?.reason, 'the failure was recorded').toBe('engineRateLimited');
+    const { impl } = okFetch();
+    await regenSectionAction(store.setState, store.getState, 'history', { remote: true, remoteOptions: remoteOpts(impl) });
+    expect(store.getState().settlement._regenSeed, 'the second reroll landed').toBeTruthy();
+    expect(store.getState().lastRefusal, 'a stale refusal outlived the reroll that cured it').toBe(null);
+  }, 120_000);
+
   it('a remote failure rejects typed and leaves the world untouched (no local run)', async () => {
     const world = worldFor('village', 'engine5-regen-fail');
     for (const [status, code] of [[503, 'engine_unavailable'], [429, 'engine_rate_limited'], [413, 'engine_refused']]) {

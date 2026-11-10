@@ -24,7 +24,10 @@
 
 import { makeActionResult } from './actionResult.js';
 import { refusalOf } from '../lib/refusalReasons.js';
-import { engineRefusalReason } from '../lib/engineRefusal.js';
+import { engineRefusalReason, ENGINE_REFUSAL_REASONS } from '../lib/engineRefusal.js';
+
+/** The reasons this lane may record (engineRefusal.js), as a set. */
+const ENGINE_REASONS = new Set(ENGINE_REFUSAL_REASONS);
 import {
   cloneJson, persistSaveUpdate, pickleCampaignState, sectionLocked, foldRegeneratedRoster,
 } from './settlementSliceHelpers.js';
@@ -111,7 +114,16 @@ async function remoteRegenParts(section, settlement, cfg, locks, remoteOptions) 
  */
 async function remoteRegenPartsSaid(set, section, settlement, cfg, locks, remoteOptions) {
   try {
-    return await remoteRegenParts(section, settlement, cfg, locks, remoteOptions);
+    const parts = await remoteRegenParts(section, settlement, cfg, locks, remoteOptions);
+    // A SUCCESS CLEARS THE FAILURE THIS LANE RECORDED (remote-path FU-2, the review's F2): the
+    // record is unkeyed, so every surface says it, and it must not outlive the reroll that
+    // cured it. Only this lane's own kind of record is cleared (an unkeyed engine reason); a
+    // refusal another lane raised, or one keyed to a surface, is left exactly as it was.
+    set((s) => {
+      const said = s.lastRefusal;
+      if (said && !said.at && ENGINE_REASONS.has(said.reason)) s.lastRefusal = null;
+    });
+    return parts;
   } catch (error) {
     const reason = engineRefusalReason(/** @type {{ code?: unknown }} */ (error)?.code);
     if (reason) set((s) => { s.lastRefusal = refusalOf(reason); });

@@ -23,6 +23,9 @@ const ENGINE_CODE_REASONS = Object.freeze({
   engine_unavailable: REFUSAL_REASONS.ENGINE_UNAVAILABLE,
 });
 
+/** Every reason an engine service failure may be said as. @type {ReadonlyArray<string>} */
+export const ENGINE_REFUSAL_REASONS = Object.freeze([...new Set(Object.values(ENGINE_CODE_REASONS))]);
+
 /**
  * The reason an engine service failure is said as, or null when its code has no sentence of
  * its own (the generic failure then speaks).
