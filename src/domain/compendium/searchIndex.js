@@ -25,13 +25,15 @@
 import { COMPENDIUM_DATA as CD } from './generated/compendiumData.generated.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
-// Valid destination tabs — must mirror the TABS ids in CompendiumPanel EXACTLY.
-// Pinned by tests/domain/compendiumSearch.test.js, which source-scans the panel's
-// TABS block so a new tab (like 'living', added 2026-07-16 — the global index had
-// drifted: the Living World tab was in the panel but not here, so a search could
-// never route to it) reds this until it is added (domain-region-dossier-guidance-5).
+// Valid destination tabs — must mirror the catalog sections of lib/compendiumSections.js
+// EXACTLY (every section but My Custom Content, which is per-reader and not indexed).
+// Pinned by tests/domain/compendiumSearch.test.js, so a new section (like 'living',
+// added 2026-07-16 — the global index had drifted: the Living World tab was in the
+// panel but not here, so a search could never route to it) reds this until it is
+// added (domain-region-dossier-guidance-5). The owner's word of 2026-11-10 retired the
+// Overview tab (the landing grid replaced it), so 'overview' left this list with it.
 export const COMPENDIUM_TABS = Object.freeze([
-  'overview', 'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane',
+  'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane',
   'living', 'stress', 'calamity', 'neighbour', 'az',
 ]);
 

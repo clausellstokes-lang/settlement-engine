@@ -28,62 +28,57 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=tiers</loc>
+    <loc>https://settlementforge.com/compendium/tiers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=economy</loc>
+    <loc>https://settlementforge.com/compendium/economy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=power</loc>
+    <loc>https://settlementforge.com/compendium/powers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=institutions</loc>
+    <loc>https://settlementforge.com/compendium/institutions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=operations</loc>
+    <loc>https://settlementforge.com/compendium/magic-and-religion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=arcane</loc>
+    <loc>https://settlementforge.com/compendium/stress</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=deities</loc>
+    <loc>https://settlementforge.com/compendium/calamity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=living</loc>
+    <loc>https://settlementforge.com/compendium/neighbours</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=stress</loc>
+    <loc>https://settlementforge.com/compendium/operations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=calamity</loc>
+    <loc>https://settlementforge.com/compendium/living-world</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=neighbour</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium?tab=az</loc>
+    <loc>https://settlementforge.com/compendium/a-z</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

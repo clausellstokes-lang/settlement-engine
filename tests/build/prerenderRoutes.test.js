@@ -23,12 +23,13 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ROUTES, isKnownView } from '../../src/lib/routes.js';
 import { headForView, VIEW_DESCRIPTIONS, DEFAULT_DESCRIPTION } from '../../src/lib/seo.js';
-import { compendiumEntryHead } from '../../src/lib/seoCompendium.js';
+import { compendiumEntryHead, compendiumSectionHead } from '../../src/lib/seoCompendium.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { COMPENDIUM_INDEX } from '../../src/domain/compendium/searchIndex.js';
 import { GALLERY_HUBS } from '../../src/lib/galleryHubs.js';
 import { isIndexable } from '../../scripts/generate-sitemap.mjs';
 import {
-  renderStatic, renderEntry, renderHub, staticRouteViews, distFileForPath, DYNAMIC_VIEWS,
+  renderStatic, renderEntry, renderSection, PRERENDERED_SECTION_SLUGS, renderHub, staticRouteViews, distFileForPath, DYNAMIC_VIEWS,
 } from '../../scripts/prerender-routes.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -127,6 +128,22 @@ describe('prerender — pure render (build head == runtime head, the single sour
     expect(bootIntact(html)).toBe(true);
   });
 
+  // The owner's word of 2026-11-10: each compendium section is its own page, so each
+  // catalog section bakes its own head (the runtime's compendiumSectionHead).
+  it('every compendium catalog section page bakes its own head', () => {
+    expect(PRERENDERED_SECTION_SLUGS).toHaveLength(11);
+    expectAbsentWithAnchor(PRERENDERED_SECTION_SLUGS, 'custom', 'tiers', 'prerendered compendium sections');
+    for (const slug of PRERENDERED_SECTION_SLUGS) {
+      const html = renderSection(SHELL, slug);
+      const h = compendiumSectionHead(slug);
+      expect(titleTag(html), `${slug} <title>`).toBe(h.title);
+      expect(ogTitle(html), `${slug} og:title`).toBe(h.title);
+      expect(ogDesc(html), `${slug} og:description`).toBe(h.description);
+      expect(canonical(html), `${slug} canonical`).toBe(`https://settlementforge.com/compendium/${slug}`);
+      expect(bootIntact(html), `${slug} SPA boot shell`).toBe(true);
+    }
+  });
+
   it('every compendium entry bakes its DefinedTerm head + JSON-LD + a receipt-true noscript', () => {
     for (const entry of COMPENDIUM_INDEX) {
       const html = renderEntry(SHELL, entry);
@@ -209,6 +226,7 @@ describe('prerender — dist walk (the emitted files carry their own truth)', ()
   const expectedPaths = [
     ...STATIC.map((r) => r.path),
     ...COMPENDIUM_INDEX.map((e) => `/compendium/${e.id}`),
+    ...PRERENDERED_SECTION_SLUGS.map((slug) => `/compendium/${slug}`),
   ];
 
   it.skipIf(!requireDistRead)('every expected public path has a prerendered dist document with head truth', () => {

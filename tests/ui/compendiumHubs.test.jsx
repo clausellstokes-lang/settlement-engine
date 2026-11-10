@@ -23,14 +23,15 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
-function clickTab(container, label) {
-  const btn = [...container.querySelectorAll('button')].find((b) => b.textContent.trim().startsWith(label));
-  if (!btn) throw new Error(`tab not found: ${label}`);
-  fireEvent.click(btn);
+// The owner, 2026-11-10: the tab row is gone; each section is its own page
+// (/compendium/<slug>). A section is opened by rendering its page, as the router does.
+async function renderSection(slug) {
+  const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+  return render(<CompendiumPanel standalone routeSection={slug} />);
 }
 
 describe('Compendium — dashboard + registry hubs', () => {
-  it('opens on the Overview dashboard with source-rendered catalog counts', async () => {
+  it('opens on the landing with source-rendered catalog counts', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
     const { container } = render(<CompendiumPanel standalone />);
     const text = container.textContent;
@@ -42,9 +43,7 @@ describe('Compendium — dashboard + registry hubs', () => {
   });
 
   it('the Operations hub is the op registry public (read/propose/write, every class)', async () => {
-    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
-    const { container } = render(<CompendiumPanel standalone />);
-    clickTab(container, 'Operations');
+    const { container } = await renderSection('operations');
     const text = container.textContent;
     expect(text).toContain('applyEvent');            // a real canon op renders
     expect(text.toLowerCase()).toContain('reads');    // the S-stage story
@@ -56,9 +55,7 @@ describe('Compendium — dashboard + registry hubs', () => {
   });
 
   it('the Living World hub renders the REAL 16 vars / 9 pressures (drift killed)', async () => {
-    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
-    const { container } = render(<CompendiumPanel standalone />);
-    clickTab(container, 'Living World');
+    const { container } = await renderSection('living-world');
     const text = container.textContent;
     expect(text).toContain(String(CD.causal.variableCount)); // 16
     expect(text).toContain(String(CD.pressures.count));      // 9
@@ -67,9 +64,7 @@ describe('Compendium — dashboard + registry hubs', () => {
   });
 
   it('Tiers render the corrected engine population bands (Thorp 8, not 20-80)', async () => {
-    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
-    const { container } = render(<CompendiumPanel standalone />);
-    clickTab(container, 'Tiers');
+    const { container } = await renderSection('tiers');
     const text = container.textContent;
     const thorp = CD.tiers.find((t) => t.id === 'thorp');
     expect(text).toContain(`${thorp.min.toLocaleString()}–${thorp.max.toLocaleString()}`);
@@ -78,25 +73,27 @@ describe('Compendium — dashboard + registry hubs', () => {
 
   it('Calamity and the A–Z index render; the removed Map Lenses and Facets pages are gone', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
-    const { container } = render(<CompendiumPanel standalone />);
-    // (No Deities tab: the premade-deity roster was removed by owner ruling 2026-07-21.
-    // No Map Lenses or Facets tab: both removed by owner order 2026-09-16; neither the
+    const landing = render(<CompendiumPanel standalone />);
+    // (No Deities section: the premade-deity roster was removed by owner ruling 2026-07-21.
+    // No Map Lenses or Facets section: both removed by owner order 2026-09-16; neither the
     // settlement-map lenses nor building interiors ship. docs/FIRST_CONTACT_BACKLOG.md.)
-    const tabLabels = [...container.querySelectorAll('[role="tab"]')].map((b) => b.textContent.trim());
-    expectAbsentWithAnchor(tabLabels, 'Map Lenses', 'Calamity', 'compendium tab strip');
-    expectAbsentWithAnchor(tabLabels, 'Facets', 'Calamity', 'compendium tab strip');
-    // The Overview dashboard carries no card for either removed page.
-    const cardHrefs = [...container.querySelectorAll('#overview a')].map((a) => a.getAttribute('href'));
-    expectAbsentWithAnchor(cardHrefs, '/compendium?tab=lenses#lenses', '/compendium?tab=calamity#calamity', 'overview cards');
-    expectAbsentWithAnchor(cardHrefs, '/compendium?tab=facets#facets', '/compendium?tab=calamity#calamity', 'overview cards');
-    clickTab(container, 'Calamity');
-    expect(container.textContent).toContain(CD.calamity.flavors[0].title);
-    clickTab(container, 'A–Z Index');
-    expect(container.textContent.toLowerCase()).toContain('alphabetical');
-    // The A–Z index carries no Lens rows: every link lands on a live tab.
-    const azTabs = [...container.querySelectorAll('#az a')].map((a) => new URL(a.getAttribute('href'), 'http://x').searchParams.get('tab'));
-    expectAbsentWithAnchor(azTabs, 'lenses', 'calamity', 'A–Z index destinations');
-    expectAbsentWithAnchor(azTabs, 'facets', 'calamity', 'A–Z index destinations');
+    // The landing grid (the owner, 2026-11-10) carries no box for either removed page.
+    const boxLabels = [...landing.container.querySelectorAll('nav[aria-label="Compendium sections"] [data-tile-name]')].map((a) => a.textContent.trim());
+    const boxHrefs = [...landing.container.querySelectorAll('nav[aria-label="Compendium sections"] a')].map((a) => a.getAttribute('href'));
+    expectAbsentWithAnchor(boxLabels, 'Map Lenses', 'Calamity', 'compendium landing boxes');
+    expectAbsentWithAnchor(boxLabels, 'Facets', 'Calamity', 'compendium landing boxes');
+    expectAbsentWithAnchor(boxHrefs, '/compendium/lenses', '/compendium/calamity', 'landing box links');
+    expectAbsentWithAnchor(boxHrefs, '/compendium/facets', '/compendium/calamity', 'landing box links');
+    landing.unmount();
+    const cal = await renderSection('calamity');
+    expect(cal.container.textContent).toContain(CD.calamity.flavors[0].title);
+    cal.unmount();
+    const az = await renderSection('a-z');
+    expect(az.container.textContent.toLowerCase()).toContain('alphabetical');
+    // The A–Z index carries no Lens rows: every link lands on a live section page.
+    const azPaths = [...az.container.querySelectorAll('#az a')].map((a) => new URL(a.getAttribute('href'), 'http://x').pathname);
+    expectAbsentWithAnchor(azPaths, '/compendium/lenses', '/compendium/calamity', 'A–Z index destinations');
+    expectAbsentWithAnchor(azPaths, '/compendium/facets', '/compendium/calamity', 'A–Z index destinations');
   });
 
   // Old links (owner order 2026-09-16): the five /compendium/lens-* entry pages were
@@ -108,7 +105,7 @@ describe('Compendium — dashboard + registry hubs', () => {
   // dead path is never indexed as a duplicate of the Overview. A live entry id is the
   // negative control: it keeps its address. (The prerendered documents are gone; the
   // dist walk in tests/build/prerenderRoutes.test.js pins that.)
-  it('an old /compendium/lens-* link lands on the Overview at /compendium, and the head follows the replaced address', async () => {
+  it('an old /compendium/lens-* link lands on the landing at /compendium, and the head follows the replaced address', async () => {
     const { resolveLocation } = await import('../../src/lib/routes.js');
     const { applyDocumentHead, headForView, ORIGIN } = await import('../../src/lib/seo.js');
     const { COMPENDIUM_INDEX } = await import('../../src/domain/compendium/searchIndex.js');
@@ -125,9 +122,10 @@ describe('Compendium — dashboard + registry hubs', () => {
         expect(loc, `${id} route`).toEqual({ view: 'compendium', params: { entry: id } });
         expectAbsentWithAnchor(indexIds, id, 'tier-thorp', 'compendium index ids');
         const { container, unmount } = render(<CompendiumPanel standalone routeEntry={loc.params.entry} />);
-        const selected = container.querySelector('[role="tab"][aria-selected="true"]');
-        expect(selected && selected.textContent.trim(), `${id} opens on`).toBe('Overview');
-        expect(container.querySelector('#overview'), `${id} renders the dashboard`).not.toBeNull();
+        // The landing (the owner, 2026-11-10: it replaced the Overview tab): its grid
+        // is on screen and no section page is.
+        expect(container.querySelector('nav[aria-label="Compendium sections"]'), `${id} renders the landing grid`).not.toBeNull();
+        expect(container.querySelector('#overview'), `${id} renders the landing intro`).not.toBeNull();
         expect(document.title, `${id} panel head`).toBe('The SettlementForge Compendium');
         // The dead address is REPLACED, and what it resolves to now carries no entry.
         expect(here(), `${id} address`).toBe('/compendium');
@@ -150,13 +148,12 @@ describe('Compendium — dashboard + registry hubs', () => {
     } finally {
       window.history.replaceState(null, '', '/');
     }
-    // The removed section deep-links (?tab= and #anchor) fall back to the Overview too.
+    // The removed section deep-links (?tab= and #anchor) fall back to the landing too.
     try {
       for (const href of ['/compendium?tab=lenses', '/compendium?tab=facets', '/compendium#lenses', '/compendium#facets']) {
         window.history.replaceState(null, '', href);
         const { container, unmount } = render(<CompendiumPanel standalone />);
-        const selected = container.querySelector('[role="tab"][aria-selected="true"]');
-        expect(selected && selected.textContent.trim(), `${href} opens on`).toBe('Overview');
+        expect(container.querySelector('nav[aria-label="Compendium sections"]'), `${href} opens on the landing`).not.toBeNull();
         unmount();
       }
     } finally {

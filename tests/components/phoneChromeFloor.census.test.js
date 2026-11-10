@@ -391,7 +391,11 @@ const ROUTE_BASELINE = Object.freeze({
   '/settlements':           { roots: 1, files: 206, floored: 867, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
-  '/compendium':            { roots: 1, files: 50, floored: 208, ruled: 3, bare: 0 },
+  // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
+  // scroll … boxes that are flush to each other"): the retired tab row's button label and the retired
+  // mode toggle's count badge were the panel's two `chromeFontSize` sites; the landing grid's one
+  // `proseFontSize` line replaces the retired Overview card's one. Re-recorded by the row's ritual.
+  '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 7, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 13, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 107, ruled: 5, bare: 0 },

@@ -93,6 +93,11 @@ const OTHER_HOSTS = Object.freeze({
   'src/components/PurchaseModal.jsx': 3, // raw <button> tile (pill whiteSpace normal), a <span> note, a raw link button
   'src/components/account/AccountAutoReloadPanel.jsx': 1, // Row
   'src/components/account/AccountSubscriptionSection.jsx': 1, // raw <button> tile (pill whiteSpace normal)
+  // A NEW KIND OF HOST, LOOKED AT (COMPENDIUM-HUB H14, 2026-11-10, the owner: "custom content gets the
+  // purple gold treatment waiting till launch"): the landing's My Custom Content tile, an <a> link, carries
+  // the pill on its own block line under the name; on a phone the pill takes whiteSpace 'normal' and
+  // maxWidth 100% so it wraps inside the tile instead of clipping (measured in the iPhone 13 screenshot).
+  'src/components/compendium/CompendiumDashboard.jsx': 1, // the launch tile's <a> (pill wraps on a phone)
   'src/components/dossier/DossierLadderModal.jsx': 1, // block <span>
   'src/components/dossier/ExportUnlockDialog.jsx': 1, // inline-flex <span> that already wraps
   // ⭐ A NEW KIND OF HOST, LOOKED AT RATHER THAN ADDED SILENTLY (FIX-P5, ODQ §934.63 F16).

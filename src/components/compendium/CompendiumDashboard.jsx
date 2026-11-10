@@ -1,40 +1,55 @@
 /**
- * compendium/CompendiumDashboard.jsx — the Overview dashboard + the A–Z index.
+ * compendium/CompendiumDashboard.jsx — the landing grid + the A–Z index.
  *
- * The Overview is the legends-viewer landing: per-catalog counts (all from the
- * generated artifact) as hub cards. The A–Z index is the orphan-proof HTML sitemap:
+ * The landing (/compendium) is the intro and one flush grid of boxes, a box per
+ * section with its count (from the generated artifact) where it has one. The A–Z index is the orphan-proof HTML sitemap:
  * every named entry across every catalog, alphabetised, each a stable deep-link into
  * its hub + section anchor.
  */
 
 import { useMemo } from 'react';
-import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, sans, FS } from '../theme.js';
+import { GOLD_TXT, GOLD_B, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, sans, FS, launchSkin } from '../theme.js';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { slug } from './registrySlug.js';
+import { sectionSlugForTab } from '../../lib/compendiumSections.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Real, crawlable URL for a hub/entry — the A–Z is an HTML sitemap, so its links
 // are true hrefs (SEO + open-in-new-tab); onClick does the smooth in-page nav.
-const hubHref = (tab, anchor) => `/compendium?tab=${tab}${anchor ? `#${anchor}` : ''}`;
+// Since the owner's word of 2026-11-10 every section is its own page: /compendium/<slug>.
+const hubHref = (tab, anchor) => `/compendium/${sectionSlugForTab(tab)}${anchor ? `#${anchor}` : ''}`;
 const onLink = (e, onNavigate, tab, anchor) => { e.preventDefault(); onNavigate(tab, anchor); };
 
-// The catalogs shown on the dashboard, in reading order. `count`, `blurb`, and the
-// destination tab/anchor drive both the Overview cards and (via ENTRY_SOURCES) the
-// A–Z index — one description of the catalog set, two surfaces.
-const CATALOGS = [
-  { tab:'institutions', anchor:'institutions', label:'Institutions', count:CD.institutions.distinctNames, blurb:'Every institution the engine can place, across all tiers.' },
-  { tab:'power',        anchor:'archetypes',   label:'Archetypes',   count:CD.archetypes.count,    blurb:'Emergent settlement archetypes keyed to slider + threat conditions.' },
-  { tab:'operations',   anchor:'operations',   label:'Operations',   count:CD.operations.count,    blurb:'Every operation the engine can perform, with its class and receipt.' },
-  { tab:'living',       anchor:'systems',      label:'Living World',  count:CD.systems.length,     blurb:'The endgame systems, the causal substrate, and the presets that light them.' },
-  { tab:'tiers',        anchor:'tiers',        label:'Tiers',        count:CD.tiers.length,        blurb:'Settlement size tiers and their population bands.' },
-  { tab:'neighbour',    anchor:'neighbours',   label:'Relationships', count:CD.relationships.count, blurb:'Neighbour relationship types and their mechanical effects.' },
-  { tab:'calamity',     anchor:'calamity',     label:'Calamity',     count:CD.calamity.flavors.length, blurb:'The one unified calamity mechanic and its terrain flavours.' },
-];
+// THE LANDING'S COUNTS, keyed by section tab: a tile carries its count where the old
+// Overview card carried one, read from the generated artifact, never typed. (The tile's
+// one-line description was dropped with the imagery — the owner, 2026-11-10: "Behind each
+// box should be imagery … with regal gold for the lettering of the button".)
+const BOX_COUNTS = {
+  tiers:        CD.tiers.length,
+  power:        CD.archetypes.count,
+  institutions: CD.institutions.distinctNames,
+  operations:   CD.operations.count,
+  living:       CD.systems.length,
+  calamity:     CD.calamity.flavors.length,
+  neighbour:    CD.relationships.count,
+};
 
-export function CompendiumOverview({ onNavigate }) {
-  const mobile = useIsMobile();
+// THE TILE'S PAINTING: one image per section, a crop of the repository's own stock
+// (public/backgrounds/*), sized for the tile at 2x (800 x 320 webp) and committed under
+// public/backgrounds/compendium/<slug>.webp. Never a new or generated image.
+const TILE_W = 800;
+const TILE_H = 320;
+// THE SCRIM: ink at 0.80 over the painting. Measured: regal gold (gold-400, #D9B566) on the
+// scrim over the painting's brightest possible pixel (pure white) is 5.02:1 — AA at the
+// worst region of every tile. The launch tile's scrim is the launch ground's deepest stop.
+const SCRIM = 'rgba(27,20,8,0.80)';
+const LAUNCH_SCRIM = 'rgba(28,21,64,0.86)';
+
+// The landing's lead: the old Overview's one paragraph and its sample-world line.
+export function CompendiumIntro() {
   return (
     <div id="overview">
       <p style={{ fontSize:FS.md, color:SEC, lineHeight:1.7, margin:'0 0 6px', fontFamily:sans, maxWidth:'42em' }}>
@@ -45,36 +60,67 @@ export function CompendiumOverview({ onNavigate }) {
         The sample world is <strong style={{ color:INK }}>{CD.meta.demoWorld.name}</strong> (seed{' '}
         <code style={{ fontFamily:'monospace', color:GOLD_TXT }}>{CD.meta.demoWorld.seed}</code>).
       </p>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))', gap:10 }}>
-        {CATALOGS.map((c) => (
-          <a key={c.tab} href={hubHref(c.tab, c.anchor)} onClick={(e) => onLink(e, onNavigate, c.tab, c.anchor)}
-            style={{ display:'block', textDecoration:'none', border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`,
-              padding:'12px 14px', cursor:'pointer' }}>
-            <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', gap:8, marginBottom:4 }}>
-              <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK }}>{c.label}</span>
-              {/* Drawer-label count: old-style figures sit the number into the
-                  running serif line — the lexicon register, not a chrome badge. */}
-              <span style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:700, color:GOLD_TXT, fontVariantNumeric:'oldstyle-nums' }}>{c.count}</span>
-            </div>
-            <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.5 }}>{c.blurb}</div>
-          </a>
-        ))}
-      </div>
-      <p style={{ fontSize:FS.sm, color:SEC, margin:'16px 0 0', fontFamily:sans }}>
-        Looking for a specific name?{' '}
-        {/* The A–Z is the compendium's one orphan-proof door, and its hit area
-            was the bare 16px text line — under every target-size floor on a
-            phone. Vertical padding lifts it to 40px and an equal NEGATIVE margin
-            gives the padding back to the paragraph, so the hit area grows while
-            the rendered line box does not move. (The link is inline in running
-            prose, so the Button/IconButton minHeight idiom does not apply here.) */}
-        <a href={hubHref('az', 'az')} onClick={(e) => onLink(e, onNavigate, 'az', 'az')}
-          style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600, fontFamily:sans, fontSize:FS.sm,
-            display:'inline-block', padding:'12px 4px', margin:'-12px -4px' }}>
-          Browse the A–Z index.
-        </a>
-      </p>
     </div>
+  );
+}
+
+/**
+ * THE LANDING GRID (rulings H1, H13, H14): one tile per section, FLUSH — no space between
+ * tiles, shared hairline rules (the grid's 1px track gap shows the border colour through) and
+ * one outer border; three columns at every width (the owner: "three columns not three rows"),
+ * the kicker hidden on a phone. Each tile is a LINK to its section page inside a nav landmark:
+ * a painting behind a scrim, the kicker, the name in regal gold and the serif, its count.
+ * My Custom Content wears the launch skin with the existing "Available at launch" pill while
+ * purchases are closed (lib/launchGate.js).
+ *
+ * @param {{ sections: ReadonlyArray<{ slug: string, tab: string, kicker?: string, label: string }>,
+ *   customCount?: number, onOpen: (slug: string) => void, launchLocked?: boolean }} props
+ */
+export function CompendiumHubGrid({ sections, customCount = 0, onOpen, launchLocked = false }) {
+  const mobile = useIsMobile();
+  return (
+    <nav aria-label="Compendium sections">
+      <ul data-compendium-grid="" style={{ listStyle:'none', margin:0, padding:0, display:'grid',
+        gridTemplateColumns:'repeat(3, minmax(0, 1fr))',
+        gap:1, background:BOR, border:`1px solid ${BOR}` }}>
+        {sections.map(({ slug: s, tab, kicker, label }) => {
+          const isCustom = tab === 'custom';
+          const count = isCustom ? (customCount > 0 ? customCount : undefined) : BOX_COUNTS[tab];
+          const locked = isCustom && launchLocked;
+          return (
+            <li key={s} style={{ display:'flex', minWidth:0, position:'relative', background:INK }}>
+              <a href={`/compendium/${s}`} onClick={(e) => { e.preventDefault(); onOpen(s); }}
+                data-skin={locked ? 'launch' : undefined}
+                style={{ position:'relative', display:'flex', flexDirection:'column', justifyContent:'flex-end', gap:2,
+                  width:'100%', minWidth:0, minHeight: mobile ? 104 : 132, boxSizing:'border-box', overflow:'hidden',
+                  padding: mobile ? '10px 8px' : '14px 16px', textDecoration:'none', cursor:'pointer' }}>
+                <img src={`/backgrounds/compendium/${s}.webp`} alt="" aria-hidden="true" loading="lazy" decoding="async"
+                  width={TILE_W} height={TILE_H}
+                  style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', zIndex:0 }} />
+                <span aria-hidden="true" style={{ position:'absolute', inset:0, background: locked ? LAUNCH_SCRIM : SCRIM, zIndex:0 }} />
+                {kicker && !mobile && (
+                  <span data-tile-kicker="" style={{ position:'relative', zIndex:1, fontFamily:sans, fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700,
+                    letterSpacing:'0.08em', textTransform:'uppercase', color:GOLD_B }}>{kicker}</span>
+                )}
+                {/* On a phone the count takes its own line, so a long name ("Institutions") wraps
+                    between words and never inside one. */}
+                <span style={{ position:'relative', zIndex:1, display:'flex', flexDirection: mobile ? 'column' : 'row',
+                  alignItems: mobile ? 'flex-start' : 'baseline', justifyContent:'space-between', gap: mobile ? 0 : 6, minWidth:0 }}>
+                  <span data-tile-name="" style={{ fontFamily:serif_, fontSize: mobile ? FS.sm : FS.lg, fontWeight:700, lineHeight:1.2, color:GOLD_B,
+                    overflowWrap:'break-word', minWidth:0, maxWidth:'100%', ...(locked ? launchSkin.shimmer : {}) }}>{label}</span>
+                  {count !== undefined && (
+                    <span data-tile-count="" style={{ fontFamily:serif_, fontSize: mobile ? FS.xs : FS.sm, fontWeight:700, color:GOLD_B, fontVariantNumeric:'oldstyle-nums', flexShrink:0 }}>{count}</span>
+                  )}
+                </span>
+                {locked && (
+                  <span style={{ position:'relative', zIndex:1, marginTop:4, maxWidth:'100%' }}><AvailableAtLaunchPill style={mobile ? { whiteSpace:'normal', maxWidth:'100%', boxSizing:'border-box' } : undefined} /></span>
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
 
