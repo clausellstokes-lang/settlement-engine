@@ -224,7 +224,10 @@ export const NPC_HOMES = Object.freeze(['npcs[]']);
  * holding an ARRAY of names rather than one; `kind` is the declared surface kind
  * (exact-key rewrite vs whole-word prose substitution).
  *
- * @type {ReadonlyArray<{ parent: string | null, key: string, kind: 'key' | 'prose', list?: boolean, each?: boolean, when?: { key: string, equals: unknown }, why: string }>}
+ * A list-of-records field (`each`) always names its parent list; only a single field may sit on the
+ * record itself (`parent: null`).
+ * @type {ReadonlyArray<({ parent: string, each: true } | { parent: string | null, each?: false })
+ *   & { key: string, kind: 'key' | 'prose', list?: boolean, when?: { key: string, equals: unknown }, why: string }>}
  */
 const NPC_FACTION_FIELDS = Object.freeze([
   // 2026-11-07 PEOPLE-1 CAST (R-P3): the card's powers — `memberships[]` holds one record per power the
