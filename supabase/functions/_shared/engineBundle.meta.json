@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T07:42:37.668Z",
+  "generatedAt": "2026-11-10T10:27:53.978Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "52ce2b5492312d48",
-  "engineVersion": "287936e9c62b6f1f",
-  "builtFromCommit": "68e4fda636160ab6373e70bd73a0473fee021b52",
+  "sourceHash": "64915a2d597303c7",
+  "engineVersion": "232c2d947f286973",
+  "builtFromCommit": "813902a2e0a1d897237d9ed75eb1d8382aaf6996",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -247,6 +247,7 @@
     "src/generators/factionDynamics.js",
     "src/generators/factionRoles.js",
     "src/generators/foodGenerator.js",
+    "src/generators/foodLand.js",
     "src/generators/generateSettlementPipeline.js",
     "src/generators/generationCoherence.js",
     "src/generators/generationContext.js",
