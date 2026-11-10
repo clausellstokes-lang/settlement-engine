@@ -55,7 +55,7 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 234453,
+      "raw": 234447,
       "gzip": 31731,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
@@ -67,31 +67,31 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 279570,
+      "raw": 279568,
       "gzip": 35664,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 124264,
+      "raw": 124251,
       "gzip": 17495,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147476,
-      "gzip": 20772,
+      "raw": 147483,
+      "gzip": 20773,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 178233,
+      "raw": 178226,
       "gzip": 24601,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
     "src/data/dossierCausalProse.generated.js": {
-      "raw": 200027,
+      "raw": 200017,
       "gzip": 33970,
       "ceilingRaw": 210260,
       "ceilingGzip": 36700
@@ -531,6 +531,14 @@
       "toRaw": 234453,
       "gzipAfter": 31731,
       "reason": "+175 B raw over the chain (1591 over the committed 232862; the leaf had shrunk 1416 B undeclared since its last row) (gzip level 9: 31654 -> 31731): SW-B6's DS-DEF-1 and DS-DEF-8 rewrites and the DS-DEF-3 COMPOUND insurgency and slave-revolt pools (the lane's widening, ruled ~01:38 UTC), projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); the lane left the row undeclared, so its growth is banked here at the merged tree with the bytes the lane's tip carries (234453); no pool added."
+    },
+    {
+      "car": "STYLE-2 SW-8 RENAME-POWERS C8 e63c6aae6 (2026-11-09, the owner's map Appendix G1): the retired word leaves 28 composed annex lines",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147476,
+      "toRaw": 147483,
+      "gzipAfter": 20773,
+      "reason": "+7 B raw (gzip level 9: 20,772 -> 20,773): C8's word-only swaps in the stressors annex lines ('faction' -> 'power' and the map's hand wordings, Appendix X) projected through node scripts/generate-dossier-state-prose.mjs; no pool, variant, mark or slot added. The same commit SHRANK five leaves (defense -6, general -2, power -13, warFaith -7, the causal leaf -10), lowered in the same register commit. Measured per commit over bd07005b9..e63c6aae6: every leaf unmoved until e63c6aae6."
     }
   ],
   "ceilingTransfersNewLeaves": [
