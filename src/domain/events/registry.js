@@ -806,7 +806,9 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const name = npc?.name || labelOf(event.targetId);
       // The card's FIRST-RANK power (people/membership.js), re-pointed by PULSE-SITES (2026-11-10) from the
       // retired `factionAffiliation`, which no current card carries (the migration maps it to a membership).
-      const faction = firstRankMembershipOf(npc, powerOrderOf(settlement))?.power || 'their power';
+      // Named ONLY where that membership is stamped `veiled: false`: this line is the log entry's narrativeSummary,
+      // which the public chronicle (migration 032) prints to anon (the chair's P1, 2026-11-10).
+      const faction = openPowerOf(npc, settlement);
       return `${name} rises within ${faction}, displacing a rival on the way up.`;
     },
   },
@@ -821,7 +823,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = firstRankMembershipOf(npc, powerOrderOf(settlement))?.power || 'their power';
+      const faction = openPowerOf(npc, settlement);
       return `${name} is pushed down the ranks of ${faction}.`;
     },
   },
@@ -831,6 +833,16 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 export const EVENT_TYPES = /** @type {EventType[]} */ (Object.keys(EVENT_REGISTRY));
 
 // ── helpers ────────────────────────────────────────────────────────────────
+
+/**
+ * The card's first-rank power where that membership is stamped `veiled: false`, else the base's "their power".
+ * @param {unknown} npc @param {unknown} settlement @returns {string}
+ */
+function openPowerOf(npc, settlement) {
+  const first = firstRankMembershipOf(npc, powerOrderOf(settlement));
+  const open = first && /** @type {{ veiled?: unknown }} */ (first).veiled === false;
+  return open ? first.power : 'their power';
+}
 
 /** @param {Record<string, number>} deltas @returns {Record<string, number>} */
 function invertSigns(deltas) {

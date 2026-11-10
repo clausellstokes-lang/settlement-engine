@@ -120,7 +120,7 @@ describe('event registry — editor roster wave', () => {
     expect(EVENT_REGISTRY.PROMOTE_NPC.stateDeltas(ev('PROMOTE_NPC'))).toEqual({ volatility: +3 });
     expect(EVENT_REGISTRY.DEMOTE_NPC.stateDeltas(ev('DEMOTE_NPC'))).toEqual({ volatility: +3 });
     const settlement = fixture({
-      npcs: [{ id: 'npc_1', name: 'Captain Mara', memberships: [{ power: 'The Garrison', rank: 1 }] }],
+      npcs: [{ id: 'npc_1', name: 'Captain Mara', memberships: [{ power: 'The Garrison', rank: 1, veiled: false }] }],
     });
     expect(EVENT_REGISTRY.PROMOTE_NPC.narrate(ev('PROMOTE_NPC', { targetId: 'npc_1' }), settlement))
       .toMatch(/Captain Mara rises within The Garrison/);

@@ -45,14 +45,20 @@ describe('the records carry the relation only as memberships (the probe the cure
 });
 
 describe('events/registry.js :: PROMOTE_NPC / DEMOTE_NPC narrate name the first-rank power', () => {
-  it('every first-rank member is narrated within its power, never "their power"', () => {
+  it('a first-rank member whose membership is unveiled is narrated within its power; a veiled one keeps "their power" (P1)', () => {
     const cards = rankedCards();
+    let named = 0; let veiled = 0;
     for (const { s, npc, power } of cards) {
+      const open = firstRankMembershipOf(npc, powerOrderOf(s)).veiled === false;
+      const shown = open ? power : 'their power';
+      if (open) named += 1; else veiled += 1;
       expect(EVENT_REGISTRY.PROMOTE_NPC.narrate({ type: 'PROMOTE_NPC', targetId: npc.id }, s))
-        .toBe(`${npc.name} rises within ${power}, displacing a rival on the way up.`);
+        .toBe(`${npc.name} rises within ${shown}, displacing a rival on the way up.`);
       expect(EVENT_REGISTRY.DEMOTE_NPC.narrate({ type: 'DEMOTE_NPC', targetId: npc.id }, s))
-        .toBe(`${npc.name} is pushed down the ranks of ${power}.`);
+        .toBe(`${npc.name} is pushed down the ranks of ${shown}.`);
     }
+    expect(named).toBeGreaterThan(10);
+    expect(veiled).toBeGreaterThan(0); // soak1k-3's Thieves' Guild: both branches are driven
   });
 
   it('a card with no membership keeps the template\'s own fallback', () => {
