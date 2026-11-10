@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "37cca6b1530316d0902d30713d8179478bcae508",
+  "measuredAtSha": "c93484a82a1067907b171b6fba6d22be1503f38f",
   "measuredBy": "PULSE-SITES session_01FbPLbehJ1XtTPeEP23oMyC",
   "date": "2026-11-10",
-  "note": "PULSE-SITES P1 (2026-11-10): +1 file, tests/domain/pulseSitesChronicleVeil.test.js (the veil's red-first pin, 7 arms); no rule changed",
+  "note": "PULSE-SITES P1 as changed (2026-11-10): tests/domain/pulseSitesChronicleVeil.test.js rewritten (the pglite arm dropped, the three-arm pin); titles move, no file and no rule",
   "files": 3180,
   "parked": 396,
   "credited": 2784,
-  "titles": 29004,
+  "titles": 29003,
   "suiteTitles": 7838
 }
