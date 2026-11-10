@@ -198,7 +198,9 @@ describe('CRISIS_NOUN: no retired word', () => {
   it('no crisis is spoken of with "faction"', () => {
     // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(Object.values(CRISIS_NOUN).join(' ')).not.toMatch(/faction/i);
-    expect(CRISIS_NOUN.politically_fractured).toBe('split');
+    // Re-keyed by identity at STYLE-2-MERGE point 24 (the chair's ruling of 2026-11-10 00:3x): SW-8 RENAME-POWERS' words
+    // stand on this line, the noun naming who is split.
+    expect(CRISIS_NOUN.politically_fractured).toBe('split between the powers');
   });
 });
 
