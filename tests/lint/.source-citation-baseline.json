@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 176,
+      "dated": 177,
       "sha-pin": 2,
       "tree": 124
     },
@@ -360,6 +360,7 @@
     "_rosterGrowth2026-11-10-veil-fix-second-re-review": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on lane/chair-2026-11-08): `dated` 173 -> 174, docs/chair/2026-11-10/REVIEW-VEIL-FIX-662056a29-2026-11-10.md, the Fable reviewer's re-read of the security lane's second hand-back (verdict CLEAR), filed by the chair. No rule changed and no citation was exempted by hand.",
     "_rosterGrowth2026-11-10-pulse-sites-review": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on lane/chair-2026-11-08): `dated` 174 -> 175, docs/chair/2026-11-10/REVIEW-PULSE-SITES-dbaa54418-2026-11-10.md, the Fable reviewer's read-only review of the PULSE-SITES simulation delta (verdict BLOCK, one high finding: a narration cure names hidden powers on the public chronicle), filed by the chair. No rule changed and no citation was exempted by hand.",
     "_rosterGrowth2026-11-10-green-tip-seam-review": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on lane/chair-2026-11-08): `dated` 175 -> 176, docs/chair/2026-11-10/REVIEW-GREEN-TIP-SEAM-6eeb5f82c-2026-11-10.md, the second Fable reviewer's read-only review of the GREEN-TIP delta and its seam with PULSE-SITES, transcribed by the chair from the reviewer's two messages (verdict CLEAR under the owner's re-scope, then BLOCK on four unnamed reds by its full-suite addendum). No rule changed and no citation was exempted by hand.",
+    "_rosterGrowth2026-11-10-remote-path-review": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on lane/chair-2026-11-08): `dated` 176 -> 177, docs/chair/2026-11-10/REVIEW-REMOTE-PATH-c18f23a61-2026-11-10.md, a fresh Fable reviewer's read-only review of the REMOTE-PATH delta (verdict CLEAR; one medium finding on the function's unbounded config, ruled by the chair), filed by the chair. No rule changed and no citation was exempted by hand.",
     "_rosterGrowth2026-11-10-migration-review": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on lane/chair-2026-11-08): `dated` 171 -> 172, docs/chair/2026-11-10/REVIEW-MIGRATIONS-204-210-2026-11-10.md, the read-only pre-deploy review of migrations 204 to 210, their rollbacks, the save path and the deploy document, born dated; measured once by this walker; nothing changed class."
   },
   "rows": []
