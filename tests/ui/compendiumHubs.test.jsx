@@ -44,6 +44,14 @@ describe('Compendium — dashboard + registry hubs', () => {
 
   it('the Operations hub is the op registry public (read/propose/write, every class)', async () => {
     const { container } = await renderSection('operations');
+    // H9 (the chair's ruling, 2026-11-10): the operation names (the camelCase keys) sit behind
+    // ONE "Show keys" toggle, off by default; the plain labels stay. Re-keyed BY IDENTITY: the
+    // real canon op still renders, once its key is shown.
+    expect(container.querySelector('[data-key]')).toBeNull();
+    const toggle = [...container.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Show keys');
+    expect(toggle.getAttribute('aria-pressed')).toBe('false');
+    fireEvent.click(toggle);
+    expect(toggle.getAttribute('aria-pressed')).toBe('true');
     const text = container.textContent;
     expect(text).toContain('applyEvent');            // a real canon op renders
     expect(text.toLowerCase()).toContain('reads');    // the S-stage story
@@ -160,4 +168,25 @@ describe('Compendium — dashboard + registry hubs', () => {
       window.history.replaceState(null, '', '/');
     }
   });
+
+  it('H9: keys are hidden behind one "Show keys" toggle on Operations and on Living World', async () => {
+    for (const slug of ['operations', 'living-world']) {
+      const { container, unmount } = await renderSection(slug);
+      const toggles = [...container.querySelectorAll('button')].filter((b) => b.textContent.trim() === 'Show keys');
+      expect(toggles, slug).toHaveLength(1);
+      expect(container.querySelectorAll('[data-key]').length, `${slug} hidden by default`).toBe(0);
+      const before = container.textContent.length;
+      fireEvent.click(toggles[0]);
+      expect(container.querySelectorAll('[data-key]').length, `${slug} shown`).toBeGreaterThan(5);
+      expect(container.textContent.length).toBeGreaterThan(before);
+      fireEvent.click(toggles[0]);
+      expect(container.querySelectorAll('[data-key]').length, `${slug} hidden again`).toBe(0);
+      unmount();
+    }
+    // The plain names stay: an operation's label and a system's label read with keys hidden.
+    const ops = await renderSection('operations');
+    expect(ops.container.textContent).toContain(CD.operations.entries[0].label);
+    expect(ops.container.textContent.includes(CD.operations.entries[0].opType + 'Applies')).toBe(false);
+  });
 });
+
