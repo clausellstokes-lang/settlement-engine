@@ -96,31 +96,31 @@
   },
   {
    "file": "src/domain/worldPulse/npcLadderFactionMembership.js",
-   "line": 55,
+   "line": 56,
    "field": "factionAffiliation",
    "class": "LEGACY",
-   "reason": "npcLadderFactionMembership.js :: npcFactionHandle \u2014 npcInFaction's compatibility arm, AFTER the memberships arm: reads a value only on a card with no memberships (DM-authored, or not migrated)"
+   "reason": "npcLadderFactionMembership.js :: npcFactionHandle \u2014 npcInFaction's compatibility arm, AFTER the memberships arm: reads a value only on a card with no memberships (DM-authored, or not migrated); today only pulse-written cards reach a value, which GREEN-TIP's writer cure ends"
   },
   {
    "file": "src/domain/worldPulse/npcVerdictApply.js",
    "line": 104,
    "field": "factionAffiliation",
-   "class": "STOP",
-   "reason": "npcVerdictApply.js :: RELINQUISHED_FIELDS \u2014 the strip clears no affiliation on a current card (memberships kept); the cure is a WRITE, held for the chair's ruling (PULSE-SITES STOP, 2026-11-10)"
+   "class": "DARK",
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit"
   },
   {
    "file": "src/domain/worldPulse/npcVerdictApply.js",
    "line": 105,
    "field": "secondaryAffiliation",
-   "class": "STOP",
-   "reason": "npcVerdictApply.js :: RELINQUISHED_FIELDS \u2014 as the row above: held for the chair's ruling on clearing memberships"
+   "class": "DARK",
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit"
   },
   {
    "file": "src/domain/worldPulse/npcVerdictApply.js",
    "line": 111,
    "field": "linkedFactionIds",
-   "class": "STOP",
-   "reason": "npcVerdictApply.js :: RELINQUISHED_FIELDS \u2014 as the row above: held for the chair's ruling on clearing memberships"
+   "class": "DARK",
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit"
   },
   {
    "file": "src/domain/worldPulse/successorNpc.js",

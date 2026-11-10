@@ -56,12 +56,12 @@ describe('no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE
 // (file, field, line, class, reason), and every row is a site the scan finds. SHRINK-ONLY: a new read reds as
 // "not on the list"; a cured site reds as "a stale row" until its row is removed, so the list ratchets down through
 // this door to the legacy rows alone. Classes: LEGACY (a v1-shaped or external record's path, named), DEAD (unreachable
-// from src, named), STOP (awaiting the chair's ruling), and CURED-ON-LANE (GREEN-TIP's sites, cured on its lane and
+// from src, named), DARK (a dark feature's read, decided when it is lit: the chair, 2026-11-10), and CURED-ON-LANE (GREEN-TIP's sites, cured on its lane and
 // removed here by the merge seat).
 const SITE_LIST = join(HERE, 'legacyFactionReaders/retired-field-sites.json');
 const RETIRED_FIELDS = Object.freeze(['factionAffiliation', 'secondaryAffiliation', 'linkedFactionIds', 'factionGoal', 'densityRungRole']);
 const SITE_KINDS = new Set(['read', 'destructure', 'string', 'path-string']);
-const SITE_CLASSES = new Set(['LEGACY', 'DEAD', 'STOP', 'CURED-ON-LANE']);
+const SITE_CLASSES = new Set(['LEGACY', 'DEAD', 'DARK', 'CURED-ON-LANE']);
 const MIGRATION_FILE = 'src/domain/settlementMigrations.js';
 
 /** The retired-field sites of one source, as `file:line field`. @param {string} file @param {string} source */
