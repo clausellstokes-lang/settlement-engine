@@ -162,7 +162,7 @@ function SeedField() {
   return (
     <div data-testid="seed-card" style={{ marginBottom: SP.md, background: CARD, border: `1px solid ${BORDER}` }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `${SP.sm}px ${SP.lg}px`, flexWrap: 'wrap', background: CARD_HDR, borderBottom: `1px solid ${BORDER}` }}>
-        <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>Exact seed</span>
+        <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>Exact seed</span>
         <span style={{ fontSize: FS.xs, color: MUTED }}>reproduce a world: every dial rolls from the seed</span>
       </div>
       <div style={{ padding: `${SP.md}px ${SP.lg}px` }}>
@@ -304,7 +304,7 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
               above): the card-header surface in the disclosures' own BORDER, no bottom
               edge, the first disclosure joined flush beneath it. Clear all keeps its place. */}
           <div data-testid="constraints-band" style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `${SP.sm}px ${SP.lg}px`, background: CARD_HDR, border: `1px solid ${BORDER}`, borderBottom: 0, flexWrap: 'wrap' }}>
-            <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>
+            <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>
               2 · Institutions, services &amp; trade
             </span>
             <span style={{ fontSize: FS.xs, color: MUTED }}>force or forbid specifics</span>

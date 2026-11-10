@@ -157,7 +157,9 @@ export default function CharacterPresetCard({ advanced = false } = {}) {
   return (
     <div style={{ background: PARCHMENT, border: `1px solid ${BORDER}`, padding: `${SP.md}px ${SP.lg}px`, marginBottom: SP.md }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 4 }}>
-        <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>Character</span>
+        {/* One size for the configuration's five section titles (2026-11-10): Exact seed,
+            Character, 1 · Foundations, 2 · Institutions, Place in Region — FS.xl, serif, 700, INK. */}
+        <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>Character</span>
         <span style={{ fontSize: FS.xs, color: MUTED }}>Pick a settlement archetype to shape it in one tap</span>
       </div>
       <p style={{ fontSize: FS.xs, color: SECOND, margin: `0 0 ${SP.sm}px`, lineHeight: 1.4 }}>
