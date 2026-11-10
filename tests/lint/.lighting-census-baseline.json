@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a47723e8ee821d6f27d4442b5503e05d0659df0c",
-  "measuredBy": "STYLE-2-MERGE-6",
+  "measuredAtSha": "001fc7e005f39e77acfa20b6c7707519af98004f",
+  "measuredBy": "CI-FIT (session_01FbPLbcBpBDvJ6bJrVrxxZo)",
   "date": "2026-11-10",
-  "note": "STYLE-2-MERGE point 37, the REMOTE-PATH merge (922f19837, merge 813902a2e): re-frozen at the merged tip; the files and titles REMOTE-PATH added (its lane, base to tip: files +5, parked +1, credited +4, titles +27, suite titles +5)",
-  "files": 3192,
+  "note": "tests/build/buildHeapPinned.test.js (001fc7e00), one new test file: the build script carries its own heap",
+  "files": 3193,
   "parked": 397,
-  "credited": 2795,
-  "titles": 29066,
-  "suiteTitles": 7858
+  "credited": 2796,
+  "titles": 29068,
+  "suiteTitles": 7859
 }
