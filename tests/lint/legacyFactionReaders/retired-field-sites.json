@@ -106,21 +106,21 @@
    "line": 104,
    "field": "factionAffiliation",
    "class": "DARK",
-   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit"
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit. WHEN LIT, P1's rule (the chair, 2026-11-10) applies to this lane's dark outputs too: npcVerdictTable :: vacatedSeatOf's seat name (the verdict herald's summary and reasons) and houseLedger :: castHouseFactor's factor name a hidden or criminal power today \u2014 each must name a power only where the card's first-rank membership is stamped veiled: false before the flag is lit"
   },
   {
    "file": "src/domain/worldPulse/npcVerdictApply.js",
    "line": 105,
    "field": "secondaryAffiliation",
    "class": "DARK",
-   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit"
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit. WHEN LIT, P1's rule (the chair, 2026-11-10) applies to this lane's dark outputs too: npcVerdictTable :: vacatedSeatOf's seat name (the verdict herald's summary and reasons) and houseLedger :: castHouseFactor's factor name a hidden or criminal power today \u2014 each must name a power only where the card's first-rank membership is stamped veiled: false before the flag is lit"
   },
   {
    "file": "src/domain/worldPulse/npcVerdictApply.js",
    "line": 111,
    "field": "linkedFactionIds",
    "class": "DARK",
-   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit"
+   "reason": "DARK \u2014 decided when npcConsequences is lit (the chair, 2026-11-10). npcVerdictApply.js :: RELINQUISHED_FIELDS: the strip clears no affiliation on a current card (1148/1148 stripped first-rank members still pass npcInFaction through memberships); the true cure is a WRITE that decides what disgrace does to standing \u2014 the owner's, on the day the feature is lit. WHEN LIT, P1's rule (the chair, 2026-11-10) applies to this lane's dark outputs too: npcVerdictTable :: vacatedSeatOf's seat name (the verdict herald's summary and reasons) and houseLedger :: castHouseFactor's factor name a hidden or criminal power today \u2014 each must name a power only where the card's first-rank membership is stamped veiled: false before the flag is lit"
   },
   {
    "file": "src/domain/worldPulse/successorNpc.js",
