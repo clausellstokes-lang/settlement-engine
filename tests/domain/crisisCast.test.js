@@ -89,6 +89,16 @@ describe('the eleven rules, each over a hand-built town', () => {
     expect(eng.absent).toBe(CAST_ABSENCES.outsideHand);
   });
 
+  it('rule 3, E-3 (SW-9b-B, URBAN-AUDIT §5; the chair\'s words): a small name whose house the gaining power ranks by its backing gets the fixed backed reason', () => {
+    const miller = (power) => ({ id: 'n9', name: 'Banan Mill', role: 'Miller', power, memberships: [{ power: 'Noble Families', rank: 1 }], institution: { kind: 'house', key: 'Mills (2-5)', title: 'the miller' }, personality: {} });
+    const at = (power) => town({ extraFactions: [{ faction: 'Noble Families', category: 'noble', power: 40 }], extraNpcs: [miller(power)] });
+    const rowAt = (power) => { const s = at(power); return instigatorCandidates(s, 'insurgency', deriveStakes(s, 'insurgency')).candidates.find((r) => r.name === 'Banan Mill'); };
+    expect(rowAt(2)?.reason).toBe(CAST_REASONS.instigatorBacked);
+    expect(CAST_REASONS.instigatorBacked).toBe('speaks for the power that gains from the crisis, from a house that power backs');
+    // the negative control, same town: a card of standing keeps the rule's reason
+    expect(rowAt(8)?.reason).toBe(CAST_REASONS.instigatorRival);
+  });
+
   it('rule 4: the target is the seat\'s named holder, then the governing house', () => {
     const s = town({ legitimacy: 'contested' });
     const c = targetCandidates(s);

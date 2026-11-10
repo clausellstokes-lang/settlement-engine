@@ -47,7 +47,8 @@ function relationFor(row) {
   const r = row.reason;
   const stake = (want) => (p, f, k) => want.includes(k);
   if (startsWithAny(r, [CAST_REASONS.bruntLeast, ...Object.values(CAST_REASONS.bruntBase)])) return stake(['loses', 'split', undefined]);
-  if (startsWithAny(r, [CAST_REASONS.instigatorGains, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower, CAST_REASONS.collaboratorAmbition])) return stake(['gains']);
+  // re-keyed by identity (SW-9b-B E-3, the chair's ruling 02:2x): the backed instigator is drawn from a power that gains.
+  if (startsWithAny(r, [CAST_REASONS.instigatorGains, CAST_REASONS.instigatorBacked, CAST_REASONS.exploiterTrait, CAST_REASONS.exploiterPower, CAST_REASONS.collaboratorAmbition])) return stake(['gains']);
   if (startsWithAny(r, [CAST_REASONS.waverer])) return stake(['split']);
   if (startsWithAny(r, [CAST_REASONS.defenderMilitary])) return (p, f) => factionArchetype(f) === A.MILITARY;
   if (startsWithAny(r, [CAST_REASONS.treaterMerchant])) return (p, f) => factionArchetype(f) === A.MERCHANT;
