@@ -110,3 +110,20 @@ describe('events/affordanceManifest.js :: PROMOTE_NPC is offered when a power ho
     expect(open).toBeGreaterThan(0);
   });
 });
+
+describe('corruption.js :: npcHomeInstitution reads the card\'s first-rank power first', () => {
+  it('every first-rank member is homed at its first-rank power (membership order breaks a tie: the reader takes no settlement)', async () => {
+    const { npcHomeInstitution } = await import('../../src/domain/corruption.js');
+    let homed = 0;
+    for (const s of towns) {
+      for (const npc of s.npcs || []) {
+        const first = firstRankMembershipOf(npc);
+        if (!first) continue;
+        expect(npcHomeInstitution(npc)).toBe(first.power);
+        homed += 1;
+      }
+    }
+    expect(homed).toBeGreaterThan(10);
+    expect(npcHomeInstitution({ id: 'x', memberships: [] })).toBe(null);
+  });
+});
