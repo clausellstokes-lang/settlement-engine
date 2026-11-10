@@ -1818,7 +1818,7 @@ export const en = Object.freeze({
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',
-      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement. The toggle lives in the dossier header.',
+      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement. Use Share to Gallery in a saved settlement’s header, or Export to gallery in a live dossier’s action band.',
     },
     aiOrSim: {
       q: "Does SettlementForge use AI to write my settlement?",
