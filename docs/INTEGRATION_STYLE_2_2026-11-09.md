@@ -5,6 +5,8 @@ Line: `lane/integration-2026-11-07`, cut from base `bd07005b9`.
 **Hand-back tip (first seat): `a52f7b8f3`. SECOND HAND-BACK (STYLE-2-MERGE-2, session `session_01FbPLbc8gtufq3JftaYsRGV`, RULE 14 at ~580k context): the commit that carries this section, after point 18. §2 below is rewritten for the third seat; §1 carries points 1–18.**
 **THIRD HAND-BACK (STYLE-2-MERGE-3, session `session_01FbPLbfL5qqV4cXN7ykvbtJ`, RULE 14 at ~500k context, at the point-22 boundary because point 23 would cross ~600k): the commit that carries this line, after point 22 (42d01edce). §1 carries points 19–22 (rows above row 17); §2a below is the order remaining for the fourth seat; Appendix B quotes the third seat's helpers.**
 
+**FOURTH HAND-BACK (STYLE-2-MERGE-4, session `session_01FbPLbbT4fy8G4nTurhnGb3`, RULE 14 at ~490k context, at the point-24 boundary because point 25 would cross ~600k): the commit that carries this line, after point 24 (ab4943fc9). §1 carries points 23 and 24 (rows above row 17); §2b is the order remaining for the fifth seat; Appendix C quotes the fourth seat's helper.**
+
 This record is the hand-back under the chair's RULE 14 (19:3x and 19:4x). The closing acts below are not done. The record is unfinished until a later seat writes them; "THE STYLE WAVE IS IN" has not been said.
 
 **One departure the chair must see first.** RULE 14 said to stop after point 15. Its messages, and the STOP 5 ruling and the SW-8 notes, reached this seat only at 20:15, after a context compaction. Before that, SW-7 had already been merged, signed and pushed as point 16. The chair was told at 20:16, and this seat's default is to keep point 16. If the chair rules otherwise, revert by a new commit; never rewrite pushed history.
@@ -123,6 +125,25 @@ Points 19–22 are done (§1). The line's tip is the commit carrying this sectio
 - writer reach --write that moves only `frozenAtSha` is not kept (point 21).
 - After `npm run build:edge-shared`, restore every bundle whose `sourceHash` did not move (the loop in Appendix B's notes).
 - The A7 pin, the fork control hash and the gm suite header are re-keyed in the stage by `stagepins.py` (Appendix B) before `suites`; pass `extraPaths` for the two pin files on the gm act.
+
+## 2b. The order remaining for the fifth seat (written at the FOURTH hand-back, after point 24)
+
+**FOURTH HAND-BACK (STYLE-2-MERGE-4, session `session_01FbPLbbT4fy8G4nTurhnGb3`, RULE 14 at ~490k context, at the point-24 boundary because point 25 would cross ~600k).** Points 23 and 24 are in (§1 rows 23 and 24). The line's tip is the commit carrying this section. The last measured stage is point 24's (signed: gm `5020a5aa`, fence `3e1cc05b`, witness from record 24, herald from record 24b with 442 rows; the fork control `2cbe4731`; faithFieldDormancyFence `c3dd0241`). Rebuild the previous measurement by staging the tip (`landing-stage.sh build HEAD <s>` then `measure <s> <m24>`): it reads 0 on all six against the committed fixtures.
+
+- **25 · URBAN-FIX** at 9ee7df1ba — §2a's note stands (the chair's deltas by cause: gm 168/297/1/0, fence 113/360/7/9; FIELD-DIFF text-only on receipt / culturalIdentity / history; pipelinePinnedChoosers A1 and dmLayerGoldenIsolation A7 move with its gm, re-record at the point; editCorpusRatchet A3/A4/A7/A8 are the base's). Measured by `git merge-tree` against 07d6c173f: NO source conflict; only `scripts/.writer-reach-baseline.json` (ours, then `--write`) and the roster pair (roster.py).
+- **26 · SW-9b-A** at ddafd06c3 (§2): nothing to sign by its record; re-measure stage to stage anyway.
+- **27 · SW-9b-B**, cut by the chair from the point-24 tip ab4943fc9, its tip named by the chair. It carries the chair's ruled row (d): the organized-ring note shipped with the projection under `defense:criminal` — **re-run `tests/components/publicProseEquality.test.jsx` at point 27; the carried pair must be green there or named again with the re-save posture.**
+- **The closing acts** as in §2, with these from points 23–24:
+  - **THE OSR RUNG, the chair's ruling of 00:2x:** the register steps **39 → 40 → 41 in ONE governed ritual** at the final tip, each step attributed — 40: SW-B7b's `publicProse on settlement` save-time-writer declaration (the lane's own rung commits 8ad1df506/840e40d92 are superseded by the merged tree's ritual; its review json `docs/chair/2026-11-09/osr-rung40-public-prose-review.json` is bound to its lane's subject sha and cannot be reused as is); 41: the played-worlds writer (convergence.js:1101 behind `newsBody.js :: itemSettlementIds`); the register's own comment names both; SW-7's and SW-8's (R6 efe5d087c) inputs-only drift re-frozen in the same act. The OSR reds are now ×4 (the 4th: the schema arm, register 39 vs detector 40). `--write` refuses until then ("schema 39 cannot be overwritten by schema 40").
+  - The style walker re-measured DOWN again after SW-9b-B (the door `node scripts/lib/style-law-scan.mjs --record`; a rise is refused — diff the totals and the per-file counts before keeping).
+  - The prose manifest once (SW-8's 1,038 cells with SW-B1's 72 and every other lane's).
+- **The gate's governing run is large at these points** (959 files at 23, 791 at 24, ~45 minutes). Run it with `--maxWorkers=2`: at 3 workers the container was killed once (exit 137) at point 24.
+
+**Reds carried at ab4943fc9, every one named:** tests/lint — OSR ×4, newsHeadlineContract ×2, proseFamilyContract ×3 (all to the closing acts); publicProseEquality ×2 (SW-B5's seeded ring-note vantage on the seedless shared page; SW-9b-B row d); the stage's prose-manifest DRIFT pair. Base reds seen in the governing runs: densityLaw ×4, editCorpusRatchet ×4, editWorldFactResources ×2, worldPulseFactionSeating ×2, religionLegitimacyFactionKey, composeStateProse, layerBoundaries, readerValidationOnPage, deityStanceLane.
+
+**The fourth seat: CONFIRMED against PLAUSIBLE.** CONFIRMED (executed in this session): the six-surface measurements m22 → m23 (0 all six) and m23 → m24 → m24b (m24b = m24 after the crisisHooks ruling); the gm field-diff at 24 (11 string paths, 0 non-string); the herald's rendered diff at 24 (5 gone, 6 new, ids and ticks named); the witness 8/8 worldStateSha256-only field check; faithFieldDormancyFence text-only by substitution; the door writes, transplants and stage suites (470/473 at 24, 471/473 at 24b); the bisections (believedMarketsTr3 to SW-12's tip, foundingSeeds.probe to SW-6's tip, Plot Hooks to SW-8 C9-6, the equality pair to SW-B5 × SW-B7b); typecheck 167, eslint 0, the record walkers, tests/scripts, the governing runs as §1 records. PLAUSIBLE: the WY-1 hash composition at 24 (f94c5ff6; each side leaf-diffed on its own base); the witness at 24 being text-only (SW-8 bisected it to C2; not leaf-diffed here).
+
+**The fourth seat's helpers** are Appendix B's, rebuilt in `/home/user/rec4/` (outside scripts/), plus one new one, quoted in Appendix C.
 
 ## 3. The running tables
 
@@ -552,4 +573,60 @@ sh scripts/gate-tail.sh npx vitest run --maxWorkers=3 tests/lint > /tmp/claude-0
 sh scripts/gate-tail.sh npx vitest run --maxWorkers=3 tests/scripts > /tmp/claude-0/g$n-scripts.log 2>&1; echo "scripts exit $?" >> $S
 if [ -s "$gov" ]; then sh scripts/gate-tail.sh npx vitest run --maxWorkers=3 $(cat $gov | tr '\n' ' ') > /tmp/claude-0/g$n-gov.log 2>&1; echo "gov exit $?" >> $S; fi
 echo DONE >> $S
+```
+
+## Appendix C. The fourth seat's helper (outside scripts/; recreate it from this quote)
+
+`compose3.py <file> [--apply] [--keep-ours-on-overlap N,M]` (run on a file checked out with `git checkout --conflict=diff3 -- <file>`): a line-level three-way compose of each conflict block; blocks whose two sides touch DISJOINT base lines are composed, overlapping blocks are printed with the three texts and never guessed (they are the STOPs). Used at point 24 on eight source files.
+```python
+#!/usr/bin/env python3
+# usage: compose3.py <file> [--apply] [--keep-ours-on-overlap N,M]
+# Reads a file in diff3 conflict form (<<<<<<< ours / ||||||| base / ======= / >>>>>>> theirs).
+# For each block: a line-level 3-way compose — base->ours and base->theirs edits applied together
+# when they touch DISJOINT base line ranges (an insertion counts as touching its anchor point).
+# Overlapping blocks (two lanes rewrote the same base line) are REPORTED with the three texts, never guessed;
+# with --keep-ours-on-overlap the listed block numbers (1-based) take ours whole (the STOP's default).
+# STYLE-2-MERGE-4.
+import re, sys, difflib
+path = sys.argv[1]; apply = '--apply' in sys.argv
+keep = set()
+if '--keep-ours-on-overlap' in sys.argv:
+    keep = {int(x) for x in sys.argv[sys.argv.index('--keep-ours-on-overlap') + 1].split(',')}
+t = open(path).read()
+C = re.compile(r'<<<<<<< [^\n]*\n(.*?)\|\|\|\|\|\|\| [^\n]*\n(.*?)=======\n(.*?)>>>>>>> [^\n]*\n', re.S)
+
+def edits(base, side):
+    sm = difflib.SequenceMatcher(None, base, side, autojunk=False)
+    return [(i1, i2, side[j1:j2]) for tag, i1, i2, j1, j2 in sm.get_opcodes() if tag != 'equal']
+
+def touch(e):
+    i1, i2, _ = e
+    return (i1, i2) if i2 > i1 else (i1 - 0.5, i1 + 0.5)  # an insertion touches its anchor
+
+def overlap(a, b):
+    return a[0] < b[1] and b[0] < a[1]
+
+n = [0]; report = []
+def res(m):
+    n[0] += 1; k = n[0]
+    o, b, th = (x.splitlines(keepends=True) for x in m.groups())
+    eo, et = edits(b, o), edits(b, th)
+    clash = [(x, y) for x in eo for y in et if overlap(touch(x), touch(y)) and not (x[0] == y[0] and x[1] == y[1] and x[2] == y[2])]
+    if clash:
+        report.append((k, ''.join(o), ''.join(b), ''.join(th)))
+        if k in keep: return ''.join(o)
+        return m.group(0)
+    out = []; allE = sorted([(x[0], x[1], x[2], 'o') for x in eo] + [(y[0], y[1], y[2], 't') for y in et if y not in [(x[0], x[1], x[2]) for x in eo]])
+    i = 0
+    for i1, i2, rep, _ in allE:
+        out += b[i:i1]; out += rep; i = max(i, i2)
+    out += b[i:]
+    return ''.join(out)
+t2 = C.sub(res, t)
+print(f'{path}: {n[0]} block(s), {len(report)} overlapping')
+for k, o, b, th in report:
+    print(f'--- block {k} OVERLAP\n[ours]\n{o}[base]\n{b}[theirs]\n{th}')
+if apply:
+    open(path, 'w').write(t2)
+    print('applied; markers left:', t2.count('<<<<<<<'))
 ```
