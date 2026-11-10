@@ -354,6 +354,7 @@ export function dealDoubledNiches(settlement, byHouse) {
     claimants.sort((x, y) => (y.power - x.power) || (x.at - y.at));
     const leader = claimants[0].name;
     // the houses whose largest share is this archetype and whose landing sits on the leader
+    /** @type {Array<{ key: string, weight: number, at: number, list: HouseBack[], landing: HouseBack }>} */
     const dealt = [];
     institutions.forEach((inst, at) => {
       const key = String(inst?.name || '');
@@ -364,7 +365,8 @@ export function dealDoubledNiches(settlement, byHouse) {
       const list = out.get(key);
       const landing = list?.find((b) => b.faction === leader && b.basis === 'aligned');
       if (!landing) return;
-      dealt.push({ key, weight: row.weight, at, list, landing });
+      // `landing` was found IN `list`, so `list` is present here (the guard above).
+      dealt.push({ key, weight: row.weight, at, list: /** @type {HouseBack[]} */ (list), landing });
     });
     dealt.sort((x, y) => (y.weight - x.weight) || (x.at - y.at));
     dealt.forEach((house, i) => {
