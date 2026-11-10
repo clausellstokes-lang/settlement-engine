@@ -256,24 +256,24 @@ export function NeighbourTab({ search='' }) {
 // priority slider band").
 const tierLabel = (id) => (CD.tiers.find((t) => t.id === id) || {}).label || null;
 const cap = (w) => String(w || '').charAt(0).toUpperCase() + String(w || '').slice(1);
-function FactLine({ label, children, mobile }) {
+function FactLine({ label, children }) {
   return (
-    <div data-inst-fact={label} style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>
+    <div data-inst-fact={label} style={{ fontSize:FS.sm, color:SEC, lineHeight:1.4, marginTop:4 }}>
       <span style={{ fontWeight:700, color:BODY }}>{label}:</span> {children}
     </div>
   );
 }
-function InstitutionFactLines({ inst, mobile }) {
+function InstitutionFactLines({ inst }) {
   const f = institutionFacts(inst);
   const size = tierLabel(f.size);
   return <>
-    {size && <FactLine label="Size" mobile={mobile}>{size}</FactLine>}
-    {f.priority && <FactLine label="Priority slider" mobile={mobile}>{cap(f.priority)}</FactLine>}
+    {size && <FactLine label="Size">{size}</FactLine>}
+    {f.priority && <FactLine label="Priority slider">{cap(f.priority)}</FactLine>}
     {/* The powers named, largest share first — no figures (the owner, X-45: "just simply
         saying which ones they back in that row is plenty enough"). */}
-    {f.backing && <FactLine label="Backing" mobile={mobile}>{f.backing.map((b) => cap(b.archetype)).join(', ')}</FactLine>}
-    {f.services && <FactLine label="Services" mobile={mobile}>{f.services.join(', ')}</FactLine>}
-    {f.flowsInto && <FactLine label="Flows into" mobile={mobile}>{f.flowsInto.join(', ')}</FactLine>}
+    {f.backing && <FactLine label="Backing">{f.backing.map((b) => cap(b.archetype)).join(', ')}</FactLine>}
+    {f.services && <FactLine label="Services">{f.services.join(', ')}</FactLine>}
+    {f.flowsInto && <FactLine label="Flows into">{f.flowsInto.join(', ')}</FactLine>}
   </>;
 }
 
@@ -353,7 +353,7 @@ export function InstitutionsTab({ _config, search }) {
           </div>
           {inst.category && <Tag label={inst.category} color={catColors[inst.category]||GOLD}/>}
           {inst.desc && <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
-          <InstitutionFactLines inst={inst} mobile={mobile} />
+          <InstitutionFactLines inst={inst} />
         </div>))}
     </div>
     )}
