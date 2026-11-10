@@ -37,7 +37,11 @@ let slot = { key: null, frames: new Map() };
  */
 export function rosterFramer(rosterNames) {
   /** @param {string} text @returns {string} */
-  const mask = (text) => rosterNames.reduce((/** @type {string} */ acc, nm) => acc.split(/** @type {string} */ (nm)).join('@'), text).trim();
+  const mask = (text) => {
+    let acc = text;
+    for (const nm of rosterNames) acc = acc.split(/** @type {string} */ (nm)).join('@');
+    return acc.trim();
+  };
   if (!rosterNames.every((nm) => typeof nm === 'string')) return (t) => mask(String(t ?? ''));
   const key = JSON.stringify(rosterNames);
   if (slot.key !== key) slot = { key, frames: new Map() };
