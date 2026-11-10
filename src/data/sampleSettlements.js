@@ -93,8 +93,14 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Mossgate',
     tier:    'town',
     terrain: 'coastal',
-    teaser:  'A rain-grey harbour town where the council and the temple have stopped speaking, and the merchant guilds quietly profit from the silence.',
-    tags:    ['Coastal trade', 'Contested council', 'Religious tension'],
+    // RE-MATCHED 2026-11-10 (N8; the old teaser, verbatim, is kept in
+    // docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md): the council-temple quarrel
+    // held in 16 of 20 forks, the contested council in 14 and the guilds' quiet profit
+    // in 15, and no dial pins a faction or a conflict; "rain-grey" was colour no field
+    // holds. What every fork carries: the docks and the harbour master (20/20), and the
+    // Merchant Guilds and the Religious Authorities both as powers (19/20, 97/100).
+    teaser:  'A harbour town with docks and a harbour master, where the merchant guilds and the religious authorities both hold power.',
+    tags:    ['Coastal trade', 'Merchant guilds', 'Religious authority'],
     config: {
       settType:         'town',
       tradeRouteAccess: 'port',

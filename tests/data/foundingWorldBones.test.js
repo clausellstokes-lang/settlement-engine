@@ -77,10 +77,13 @@ const PROMISES = {
     ],
   },
   'sample-mossgate': {
-    teaser: 'A rain-grey harbour town where the council and the temple have stopped speaking, and the merchant guilds quietly profit from the silence.',
-    tags: ['Coastal trade', 'Contested council', 'Religious tension'],
+    teaser: 'A harbour town with docks and a harbour master, where the merchant guilds and the religious authorities both hold power.',
+    tags: ['Coastal trade', 'Merchant guilds', 'Religious authority'],
     promises: [
-      { clause: 'a harbour town · tag Coastal trade', holds: (s) => s.tier === 'town' && s.config.terrainType === 'coastal' && s.config.tradeRouteAccess === 'port' && hasInstitution(s, /docks|harbour/i) },
+      { clause: 'a harbour town · tag Coastal trade', holds: (s) => s.tier === 'town' && s.config.terrainType === 'coastal' && s.config.tradeRouteAccess === 'port' },
+      { clause: 'with docks and a harbour master', holds: (s) => hasInstitution(s, /^Docks\/port facilities$/) && hasInstitution(s, /^Harbour master's office$/) },
+      { clause: 'the merchant guilds hold power · tag Merchant guilds', holds: (s) => hasFaction(s, /^Merchant Guilds$/) },
+      { clause: 'the religious authorities hold power · tag Religious authority', holds: (s) => hasFaction(s, /^Religious Authorities$/) },
     ],
   },
   'sample-blackcrag': {
