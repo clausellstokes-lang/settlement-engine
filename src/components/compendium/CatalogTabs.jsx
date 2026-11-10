@@ -346,7 +346,7 @@ export function InstitutionsTab({ _config, search }) {
         // id: the global search's landing anchor for this institution (H6).
         // contentVisibility: with all 282 cards on one page (H7), the browser skips layout and
         // paint for the cards off screen (measured on the phone profile; see the record).
-        <div key={inst.name} id={institutionAnchor(inst.name)} style={{ border:`1px solid ${BOR}`, padding:'8px 10px', scrollMarginTop:ANCHOR_OFFSET, contentVisibility:'auto', containIntrinsicSize:'auto 260px' }}>
+        <div key={inst.name} id={institutionAnchor(inst.name)} data-filter-entry="" style={{ border:`1px solid ${BOR}`, padding:'8px 10px', scrollMarginTop:ANCHOR_OFFSET, contentVisibility:'auto', containIntrinsicSize:'auto 260px' }}>
           <div style={{ display:'flex', alignItems:'flex-start', gap:5, marginBottom:3 }}>
             <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{institutionDisplayName(inst)}</span>
             {inst.required && <Tag label="Core" color='#1a3a7a' title="Always present at this tier. Generated every time, never rolled by chance."/>}

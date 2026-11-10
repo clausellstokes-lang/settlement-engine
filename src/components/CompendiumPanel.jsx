@@ -221,7 +221,9 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry, 
           if (!(child.textContent || '').toLowerCase().includes(q)) {
             child.setAttribute('data-filter-hidden', child.style.display || '');
             child.style.display = 'none';
-          } else if (child.children.length >= 5) {
+          } else if (child.children.length >= 5 && !child.hasAttribute('data-filter-entry')) {
+            // An ENTRY (`data-filter-entry`: an institution card, a band ladder) is never narrowed
+            // inside, however many parts it has; it is shown whole or hidden whole.
             narrow(child);
           }
         }
