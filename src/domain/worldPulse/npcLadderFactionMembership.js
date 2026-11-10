@@ -51,6 +51,7 @@ function normalizeToken(value) {
 /** The NPC's faction handle (the generator's canonical affiliation fields, first present).
  *  @param {Record<string, unknown>} npc @returns {string} */
 function npcFactionHandle(npc) {
+  // LEGACY (PULSE-SITES 2026-11-10): a card with no `memberships` (DM-authored, or not yet migrated) is read here.
   for (const key of ['factionAffiliation', 'factionId', 'factionLink', 'faction', 'organizationId']) {
     const v = npc[key];
     if (typeof v === 'string' && v) return v;
