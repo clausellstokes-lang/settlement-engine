@@ -1,7 +1,7 @@
 {
   "_doc": "THE STYLE WALKER'S BASELINE (STYLE-2-WAVE SW-0, ruling A10): per file, per phrase, the count of the audit's §3 phrases in the reader-facing units the scanner reads. ONLY-SHRINKS: tests/lint/styleLaw.walker.test.js fails when any count rises and when a phrase whose total is 0 appears anywhere. Written ONLY by `node scripts/lib/style-law-scan.mjs --record`; never hand-edited (the digest is checked). The rules are the scanner's header.",
   "door": "node scripts/lib/style-law-scan.mjs --record",
-  "measuredAtSha": "6786b43c8571e9b89bc519e21649538a4a7ba291",
+  "measuredAtSha": "58aae07fb9117bb93c62fc0e6e33fe5ea26b2c0e",
   "phrases": [
     "faction",
     "rather-than",
@@ -23,7 +23,7 @@
   ],
   "scannedFiles": 1115,
   "totals": {
-    "faction": 67,
+    "faction": 66,
     "rather-than": 253,
     "the-record": 65,
     "the-ledger": 24,
@@ -41,7 +41,7 @@
     "nothing-has-broken-yet": 0,
     "which-is-the-kind-of": 0
   },
-  "digest": "d9b554f40bae32deafb4f312795df3756e5c3bc25b8f521d0f8c8821e489196b",
+  "digest": "9f53a82ee5d6891662868640ddc59cc1f47a8896f721867b265005e200e17f15",
   "files": {
     "src/components/map/PantheonPanel.jsx": {
       "per-cent": 1
@@ -207,9 +207,6 @@
     },
     "src/domain/display/warRemembrance.js": {
       "the-ledger": 1
-    },
-    "src/domain/dossier/hookLines.js": {
-      "faction": 1
     },
     "src/domain/dossier/powerStrata.js": {
       "the-record": 1

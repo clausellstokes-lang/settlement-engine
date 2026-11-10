@@ -124,7 +124,7 @@
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
     "declaredColumnRows": 856,
-    "tablePools": 50
+    "tablePools": 51
   },
   "rows": [
     {
@@ -53903,7 +53903,7 @@
       "name": "CAST_REASONS",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701 (src/domain/crisis/crisisCast.js)",
-      "lines": 45,
+      "lines": 46,
       "declares": [],
       "lineDeclares": {
         "crisis: hunger": 1,
@@ -53915,7 +53915,7 @@
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 37,
+      "undeclared": 38,
       "crisisScoped": false
     },
     {
@@ -54073,6 +54073,18 @@
       "undeclared": 0,
       "crisisScoped": false,
       "colour": true
+    },
+    {
+      "id": "npcData.NPC_DEALING_BY_TRAIT",
+      "module": "src/data/npcData.js",
+      "name": "NPC_DEALING_BY_TRAIT",
+      "drawKind": "T",
+      "drawSite": "npcGenerator.js:552 dealingLineFor(disposition, personality) → NPC_DEALING_BY_TRAIT[disposition][DEALING_TRAIT_FAMILY[trait]] (draw-free; SW-7 B10(b), POWER-SIDE §7)",
+      "lines": 48,
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 48,
+      "crisisScoped": false
     },
     {
       "id": "npcData.NPC_CRIMINAL_SECRETS",

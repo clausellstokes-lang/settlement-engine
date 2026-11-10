@@ -256,7 +256,7 @@ function rowOf(person, nameFor, roaming) {
     whereaboutsLine: heldAbroad
       ? (heldVenueName
           ? `They are held abroad at ${heldVenueName}.`
-          : 'They are held abroad at a place the register cannot name.')
+          : 'They are held abroad at an unnamed place.')
       : person.whereaboutsUnknown === true
         ? 'Their present whereabouts are unknown.'
         : '',

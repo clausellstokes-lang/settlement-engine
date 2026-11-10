@@ -172,7 +172,7 @@ function ActiveFaith({ model }) {
               aria-expanded={faithOpen}
               style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, justifyContent: 'flex-start' }}
             >
-              {faithOpen ? '▾' : '▸'} How this faith couples ({effects.length})
+              {faithOpen ? '▾' : '▸'} What this faith touches ({effects.length})
             </Button>
             {faithOpen && (
               <ul style={{ margin: '4px 0 0', padding: '0 0 0 12px', listStyle: 'none' }}>
@@ -357,9 +357,9 @@ function FaithTeaser({ lines, hint = null, publicDossier, showUpsell }) {
 }
 
 /**
- * @param {{ settlement: any, publicDossier?: boolean }} props
+ * @param {{ settlement: any, publicDossier?: boolean, playerView?: boolean }} props
  */
-export default function FaithSection({ settlement, publicDossier = false }) {
+export default function FaithSection({ settlement, publicDossier = false, playerView = false }) {
   const tier = useStore((s) => s.auth?.tier);
   const elevated = useStore((s) => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const isPremium = tier === 'premium' || elevated;
@@ -370,5 +370,8 @@ export default function FaithSection({ settlement, publicDossier = false }) {
   if (model.hasEmbed) return <ActiveFaith model={model} />;
   // TEASER — no embeds: the faith line (names NO deity) for every owner; the upsell apart,
   // only for the viewer who does not hold what it sells.
-  return <FaithTeaser lines={model.line || []} hint={model.hint} publicDossier={publicDossier} showUpsell={!isPremium} />;
+  // The DM's hint is a note to the owner: a shared page and the player view never print it (the chair's
+  // 23:2x ruling at the merge's point 22). The print position `faith.hint` (the DM's PDF) keeps it.
+  const ownersView = !publicDossier && !playerView;
+  return <FaithTeaser lines={model.line || []} hint={ownersView ? model.hint : null} publicDossier={publicDossier} showUpsell={!isPremium} />;
 }

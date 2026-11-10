@@ -163,6 +163,10 @@ export const CAST_REASONS = Object.freeze({
   leverInstitution: 'whoever runs it decides how the crisis goes, and nobody named here runs it',
   leverTemporary: 'nobody here could, so this one stepped in for the crisis',
   instigatorRival: 'already carries more weight than whoever holds the seat, and gains as the seat weakens',
+  // SW-9b-B (E-3, URBAN-AUDIT §5; the chair's words, 02:2x, option C): a small name whose house the gaining power ranks by
+  // its backing. A FIXED sentence: it names nobody (factionRename.js's law for this vocabulary), so no rename and no veil
+  // reaches it. No draw.
+  instigatorBacked: 'speaks for the power that gains from the crisis, from a house that power backs',
   instigatorGains: 'its power gains from the crisis',
   instigatorLinked: 'drawn from the house that bore the famine',
   targetSeat: 'holds the seat',
@@ -656,10 +660,23 @@ export function instigatorCandidates(s, kind, stakes) {
   const seatHouses = new Set(factionsOf(s).filter((f) => holdsTheSeat(s, f)).map(factionName));
   const actsForTheSeat = (/** @type {CastNpc} */ n) => seatHouses.has(str(firstRankMembershipOf(n, order)?.power));
   for (const { f, reason } of picks) {
-    for (const n of membersOf(s, factionName(f))) if (!actsForTheSeat(n)) out.push(npcRow(n, 'instigator', reason));
+    for (const n of membersOf(s, factionName(f))) if (!actsForTheSeat(n)) out.push(npcRow(n, 'instigator', smallNameBacked(n, f, gainers.includes(f)) ? CAST_REASONS.instigatorBacked : reason));
     out.push(factionRow(f, 'instigator', reason));
   }
   return { candidates: out, absent: nature === 'engineered' ? CAST_ABSENCES.outsideHand : CAST_ABSENCES.noGains };
+}
+
+/**
+ * E-3 (URBAN-AUDIT §5, the chair's ruling; SW-9b-B): true for an instigator who is a SMALL NAME (card power 1-3), the
+ * face of a house that holds a RANKED membership in the instigating power (the backing the people car wrote: the mill,
+ * the opera house, the vintner at city scale), where that power gains from the crisis. Reads only; no draw.
+ * @param {CastNpc} n @param {CastFaction} f @param {boolean} gains @returns {boolean}
+ */
+function smallNameBacked(n, f, gains) {
+  const card = numOf(/** @type {{ power?: unknown }} */ (n).power);
+  if (!gains || n.institution?.kind !== 'house' || !str(n.institution?.key)) return false;
+  if (!(card > 0 && card <= 3)) return false; // a small name: card power 1-3 is "low" (URBAN-AUDIT §5's band)
+  return membershipsOf(n).some((m) => m.power === factionName(f) && m.rank != null);
 }
 
 /**

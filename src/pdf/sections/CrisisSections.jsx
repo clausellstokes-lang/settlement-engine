@@ -32,9 +32,9 @@ export function CrisisSections({ settlement, printedFacts = [] }) {
           <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10.5'] }}>{s.line}</Text>
           {s.summary ? <Line>{s.summary}</Line> : null}
           <Label>{CRISIS_PAGE_COPY.cast}</Label>
-          {s.cast.length ? s.cast.map((r) => <Line key={`${r.role}-${r.id}`}>{`${r.roleLabel}: ${r.name}. ${r.reason}.`}</Line>) : <Line>{CRISIS_PAGE_COPY.nobody}</Line>}
+          {s.cast.length ? s.cast.map((r) => <Line key={`${r.role}-${r.id}`}>{`${r.roleLabel}: ${r.name} · ${r.reason}`}</Line>) : <Line>{CRISIS_PAGE_COPY.nobody}</Line>}
           {s.stakes.length ? <Label>{CRISIS_PAGE_COPY.stakes}</Label> : null}
-          {stakes.rows.map((k) => <Line key={k.factionId}>{`${k.factionId}: ${CRISIS_PAGE_COPY.stake[k.stake]}. ${k.reason}.`}</Line>)}
+          {stakes.rows.map((k) => <Line key={k.factionId}>{`${k.factionId} ${CRISIS_PAGE_COPY.stake[k.stake]} · ${k.reason}`}</Line>)}
           {stakes.untouched ? <Line>{stakes.untouched}</Line> : null}
           <Label>{CRISIS_PAGE_COPY.levers}</Label>
           {s.levers.length ? s.levers.map((l) => <Line key={l.institution}>{l.holderName ? `${l.institution}, held by ${l.holderName}.` : `${l.institution}.`}</Line>) : <Line>{CRISIS_PAGE_COPY.noLevers}</Line>}

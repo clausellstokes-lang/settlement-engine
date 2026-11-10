@@ -131,7 +131,9 @@ describe('the line names the church the reading found (acceptance 2)', () => {
         if (r.accessOnly && !/walk to the next village’s parish church/.test(text)) misses.push(`${where}: access`);
         if (r.religiousFaction && !text.includes(r.religiousFaction.name)) misses.push(`${where}: faction ${r.religiousFaction.name}`);
         if (r.seniorCleric && !text.includes(r.seniorCleric.role)) misses.push(`${where}: cleric ${r.seniorCleric.role}`);
-        if (countOf(text, FAITH_YOURS_LINE) !== 1) misses.push(`${where}: the DM line ${countOf(text, FAITH_YOURS_LINE)} times`);
+        // re-keyed by identity (SW-9b-B row 2c): the DM line is the owner's; the shared dossier prints it 0 times
+        const dmTimes = view.publicDossier ? 0 : 1;
+        if (countOf(text, FAITH_YOURS_LINE) !== dmTimes) misses.push(`${where}: the DM line ${countOf(text, FAITH_YOURS_LINE)} times`);
       }
     }
     expect(misses).toEqual([]);
@@ -150,11 +152,11 @@ describe('the line names the church the reading found (acceptance 2)', () => {
   });
 });
 
-/** @param {any} s @param {{premium?: boolean, publicDossier?: boolean}} view @returns {{line: string, hint: string|null}} */
-function faithParts(s, { premium = false, publicDossier = false } = {}) {
+/** @param {any} s @param {{premium?: boolean, publicDossier?: boolean, playerView?: boolean}} view @returns {{line: string, hint: string|null}} */
+function faithParts(s, { premium = false, publicDossier = false, playerView = false } = {}) {
   useStore.__reset();
   if (premium) useStore.__set({ auth: { tier: 'premium' } });
-  const { container } = render(<FaithTab settlement={s} saveId={publicDossier ? null : 'save-1'} publicDossier={publicDossier} />);
+  const { container } = render(<FaithTab settlement={s} saveId={publicDossier ? null : 'save-1'} publicDossier={publicDossier} playerView={playerView} />);
   const hintEl = container.querySelector('[data-testid="faith-hint"]');
   const hint = hintEl ? hintEl.textContent : null;
   hintEl?.remove();
@@ -164,13 +166,17 @@ function faithParts(s, { premium = false, publicDossier = false } = {}) {
 }
 
 describe('the DM\'s hint sits UNDER the faith paragraph, never joined into it (SW-6, STYLE-RULINGS-2 A1 R5)', () => {
-  it('every view of the 54: the hint is its own row, and the paragraph does not carry it', () => {
+  // re-keyed by identity (SW-9b-B row 2c, the chair's 23:2x ruling at the merge's point 22): the hint is the
+  // DM's note, so it prints on the owner's own views only; the shared dossier and the player view carry none.
+  it('every view of the 54: the hint is its own row on the owner\'s views, absent on the shared and player views, and the paragraph never carries it', () => {
     /** @type {string[]} */
     const bad = [];
+    const views = [...VIEWS, { label: 'free, player view', premium: false, publicDossier: false, playerView: true }];
     for (const { seed, s } of CORPUS) {
-      for (const view of VIEWS) {
+      for (const view of views) {
         const { line, hint } = faithParts(s, view);
-        if (hint !== FAITH_YOURS_LINE) bad.push(`${seed} · ${view.label}: hint ${JSON.stringify(hint)}`);
+        const owners = !view.publicDossier && !view.playerView;
+        if (hint !== (owners ? FAITH_YOURS_LINE : null)) bad.push(`${seed} · ${view.label}: hint ${JSON.stringify(hint)}`);
         if (line.includes(FAITH_YOURS_LINE)) bad.push(`${seed} · ${view.label}: joined into the paragraph`);
       }
     }
