@@ -57,6 +57,19 @@ select source, status, count(*) from public.surveyor_entitlements group by 1, 2;
 select count(*) from public.settlements where (visibility = 'unlisted') <> (unlisted_slug is not null);
 ```
 
+**One more count, for a decision that is yours and can wait until after the release:**
+
+```sql
+-- (d) Gallery pages listed before the veil existed carry no veil marker and are shown as their DMs
+--     published them. This release does NOT change them. The players' party link is different: from
+--     this release a town shared by link alone shows the DEFAULT veil (the criminal houses and the
+--     default-hidden blocks hidden), because a link's readers are players.
+select count(*) from public.settlements
+ where is_public and not (coalesce(gallery_member_overrides, '{}'::jsonb) ? '$veil');
+```
+
+Whether those older listed pages should adopt the default veil too is your call (it would hide, on pages already public, what their DMs published before the veil existed). And one gap to know: a DM who shares by link ALONE cannot yet change that link's veil without exporting to the gallery, because the veil controls sit in the gallery panel — the first UI item after the release.
+
 **After the push, one check:** `select has_function_privilege('anon', 'public.report_engine_generations()', 'execute');` must answer false (204, as amended, revokes it by name).
 
 **ROLLBACK, AS A SET.** 205, 206, 207 and 210 each restate ONE function, so their `@rollback` lines are right only last-in-first-out: undo 210, then 207, then 206, then 205 — never one from the middle (rolling back 206 alone would silently drop 207's capture strip and 210's token). 208's rollback goes with the client's. No table loses a row in any of the seven; `data.publicProse` stays in saved rows after a 210 rollback, inert.
