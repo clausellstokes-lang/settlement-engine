@@ -2,7 +2,7 @@
 
 **Seat:** PULSE-SITES, a cure seat, child of the cloud chair (session `session_01FbPLbejcfwX5nii12VM673`); this seat's session `session_01FbPLbehJ1XtTPeEP23oMyC`. **Branch:** `lane/pulse-sites-2026-11-10`, cut from `lane/integration-2026-11-07` at `5da82ea59`. **Parallel seat:** GREEN-TIP (`lane/green-tip-2026-11-10`), whose files this lane did not touch. **Brief:** the chair's dispatch of 2026-11-10, rulings S1–S5.
 
-**Outcome:** of this lane's 15 sites, 7 are cured and 8 are named. Six LIVE sites in six files are cured by pure re-points to the card's first-rank membership, each red first on a soak birth. One DEAD fallback is removed. Three LEGACY sites stay, each with a one-line comment. Two DEAD sites are listed. The three `npcVerdictApply.js` rows are a STOP held for the chair, because their cure is a write. The landed walker gains a per-site arm, shrink-only, whose list holds 19 rows at this tip. The generator golden master and every pulse golden are green and unmoved, so no golden is left unsigned. `typecheck:ratchet` is 167/167 and `typecheck:domain:strict` exits 0. eslint reports 0 on the touched files.
+**Outcome:** of this lane's 15 sites, 7 are cured and 8 are named. Six LIVE sites in six files are cured by pure re-points to the card's first-rank membership, each red first on a soak birth. One DEAD fallback is removed. Three LEGACY sites stay, each with a one-line comment. Two DEAD sites are listed. The three `npcVerdictApply.js` rows are DARK by the chair's ruling (option (c), 2026-11-10): nothing is written. The landed walker gains a per-site arm, shrink-only, whose list holds 19 rows at this tip. The generator golden master and every property-tree pulse golden are green and unmoved. One pulse-keyed register row moves by cause and is left UNSIGNED (§7). Merged onto the integration line (`79acc9120`), the lazy-edge guard is green, boot-smoke passes, and first paint is +1 B raw. `typecheck:ratchet` is 167/167 and `typecheck:domain:strict` exits 0. eslint reports 0 on the touched files.
 
 ## 1. The scan (reproducing the brief's 29)
 
@@ -41,7 +41,7 @@ Lines are at `5da82ea59`. "Probe" figures are sums over the 60 births at t0 → 
 | 10 | `customContent.js :: classifyCustomNpc` (392 → 393) | factionAffiliation | a library NPC's `controlledBy` | **LEGACY**: the DM's custom-content library entity, a store no settlement migration covers. The membership read is in front | stays, one comment line; the landed walker's FIELD_CONTRACTS row re-keyed 392 → 393 | `c81c544b3` |
 | 11 | `generators/density/applyDensityLaw.js :: assignRoster` (491) | factionAffiliation | rung seating | **DEAD**: the only caller, `disperseNamedRoster`, has no src caller (tests only) | listed; removal would break its tests | — |
 | 12 | `domain/density/densityRungs.js :: RUNG_ROLE_FIELD` (92) | densityRungRole | the field-name constant | **DEAD**: readers are `titularSuccession.js` (no src importer) and `assignRoster` (dead) | listed; importers would break | — |
-| 13–15 | `worldPulse/npcVerdictApply.js :: RELINQUISHED_FIELDS` (104, 105, 111) | factionAffiliation, secondaryAffiliation, linkedFactionIds | the verdict strip clears each listed key the card carries | **LIVE → STOP**: current cards carry none, so the strip clears no affiliation. 1148/1148 stripped first-rank members at t0 (571 at t12) still pass `npcInFaction` through memberships | unchanged; held for the chair (§4) | — |
+| 13–15 | `worldPulse/npcVerdictApply.js :: RELINQUISHED_FIELDS` (104, 105, 111) | factionAffiliation, secondaryAffiliation, linkedFactionIds | the verdict strip clears each listed key the card carries | **DARK** (the chair's ruling; was LIVE → STOP): current cards carry none, so the strip clears no affiliation. 1148/1148 stripped first-rank members at t0 (571 at t12) still pass `npcInFaction` through memberships | unchanged; walker class DARK (§4) | `b8a31714a` |
 
 **Tests re-keyed by cause**, each from a v1 card to a membership at the same strength:
 
@@ -61,7 +61,7 @@ Lines are at `5da82ea59`. "Probe" figures are sums over the 60 births at t0 → 
 
 All five went green after their cure.
 
-## 4. The STOP: `npcVerdictApply.js :: RELINQUISHED_FIELDS`
+## 4. The STOP, ruled DARK: `npcVerdictApply.js :: RELINQUISHED_FIELDS`
 
 The only re-point that carries the relation is a write: `{ key: 'memberships', to: [] }`. It would clear every power standing (rank and share included) and add `memberships` to the receipt snapshot. That is a judgment about what disgrace does to the cast, so it is not a pure re-point under S1. Options put to the chair:
 
@@ -69,7 +69,9 @@ The only re-point that carries the relation is a write: `{ key: 'memberships', t
 - (b) clear the first-rank one only;
 - (c) leave it listed.
 
-Under (c) the rung still vacates through `importance → 'minor'`, the module's own structural path. **Default if no ruling: (c).** The three rows are STOP rows in the walker's list.
+Under (c) the rung still vacates through `importance → 'minor'`, the module's own structural path. **The chair ruled (c)** (2026-11-10): the feature is dark, and the cure is a write that decides what disgrace does to standing, which is the owner's on the day `npcConsequencesEnabled` is lit. The three rows are class **DARK** in the walker's list ("decided when npcConsequences is lit (the chair, 2026-11-10)"), distinct from LEGACY.
+
+**Affordance and handler, for the reviewer:** the affordance (`affordanceManifest.js :: npcSwapPairsExist`) counts by `people/membership.js :: firstRankMembershipOf(npc, powerOrderOf(settlement)).power`. The chair has told GREEN-TIP that `mutateEntities :: swapNpcStanding` reads by the same reader, so check the pair once both lanes land.
 
 ## 5. The walker (S3)
 
@@ -84,18 +86,37 @@ The arm has its own planted control: four read shapes are caught, while a write 
 
 | Class | Rows | Sites |
 |---|---|---|
-| LEGACY | 3 | customContent :393, batch :151, npcLadderFactionMembership :55 |
+| LEGACY | 3 | customContent :393, batch :151, npcLadderFactionMembership :56 (its comment says it reaches a value today only on pulse-written cards, which GREEN-TIP's writer cure ends) |
 | DEAD | 2 | densityRungs :92, applyDensityLaw :491 |
-| STOP | 3 | npcVerdictApply :104 / :105 / :111 |
+| DARK | 3 | npcVerdictApply :104 / :105 / :111 |
 | CURED-ON-LANE | 11 | GREEN-TIP's 14 reads: factionLifecycle :117, propagate :350, mutateEntities :505 / :751 / :895 / :896 / :918, factionDensityKernel :640, npcAgency :302 / :825, successorNpc :37 |
 
-When both lanes merge, the merge seat removes the 11 CURED-ON-LANE rows through this door. The rows for each STOP the chair rules on leave the same way.
+When both lanes merge, the merge seat removes the 11 CURED-ON-LANE rows through this door, leaving the LEGACY, DEAD and DARK rows.
 
 **Red first:** the same walker files run against the base tree went red with exactly the ten sites this lane changed. **Green at the tip:** 4/4 in 9.4 s, of which the per-site arm takes about 9 s for the 2,000+ file walk.
 
 ## 6. The table (S5)
 
-[filled at hand-back]
+The births, `simulateCampaignWorldPulse` and the 0/1/3/12 readings are §2's. The base is `5da82ea59`; the tip is this lane. Each cell is base → tip, summed over 60 births. "Lit" means `npcConsequencesEnabled` and `merchantHousesEnabled` are on.
+
+| Figure (what the cured site feeds) | t0 | t1 | t3 | t12 |
+|---|---|---|---|---|
+| PROMOTE/DEMOTE narration names a power (registry) | 0 → 1630 | 40 → 1630 | 40 → 1628 | 70 → 1622 |
+| births with the PROMOTE_NPC affordance open (affordanceManifest) | 0 → 54 | 0 → 54 | 0 → 54 | 0 → 54 |
+| powers that cast a house factor (houseLedger) | 0 → 211 | 40 → 60 | 40 → 60 | 70 → 60 |
+| members whose vacated seat is named (npcVerdictTable) | 0 → 1630 | 40 → 1630 | 40 → 1628 | 70 → 1622 |
+| corrupt cards homed, for the reform roll (corruption) | 0 → 0 of 0 | 0 → 63 of 70 | 0 → 70 of 78 | 0 → 114 of 130 |
+| lit: verdicts applied / verdicts naming the open seat (· = not measured at that tick) | 0/0 → 0/0 | 0/0 → 0/0 | 2/· → 2/· | 9/0 → 9/8 (births 5, 22, 35, 46, 53, 59) |
+| npcs / powers / members (nothing exploded) | identical | identical | identical | 1863 / 130 / 1622 both |
+| Wizard News entries, default (lit) | 0 → 0 | 476 → 476 | 790 → 790 (792) | 1495 → 1495 (1504 both) |
+| errors | 0 | 0 | 0 | 0 |
+
+Notes on the table:
+
+- The house factor at t1–t12 drops from 211 to 60 because the powers dissolve (216 → 100 → 130 at both base and tip: GREEN-TIP's `factionLifecycle` cause). The base's 40 to 70 are cards the pulse wrote with the retired field.
+- At the tip, a card with no `memberships` that the pulse wrote with `factionAffiliation` (40 to 70 of them) is no longer read by these sites. GREEN-TIP's writer cure makes those writers write memberships.
+- The pulse's own output is identical base → tip on every count measured. The cured reads feed narration, gates, a dark lane's factor and the verdict's seat, and none of these changed a draw.
+- The house-ledger row count read 0 on both trees: the probe's key, not a finding.
 
 ## 7. Goldens, bytes, gates
 
@@ -119,9 +140,39 @@ When both lanes merge, the merge seat removes the 11 CURED-ON-LANE rows through 
 - the generation worker over its ceiling (2,007,681 > 1,976,655 at both);
 - `brandDerivatives` (3), `cultureProfilesLazy`, `vendorPdfLazy` (2).
 
+**Merged onto the integration line (the chair's condition 4).** In a scratch worktree, `origin/lane/integration-2026-11-07` at `79acc9120` was merged with this lane at `c81c544b3`; the merge was clean and nothing was committed to the lane. Later lane commits change no src except one comment line. Results:
+
+- `tests/architecture/engineCoreLazyEdge.test.js`: 2/2 green.
+- `people/membership.js` is not pinned lazy in `vite.config.js`.
+- `npm run build` exits 0, and `node scripts/boot-smoke.mjs` reports **PASS**: 596/596 chunks, the shell mounted, 19,354 B under #root.
+- `verify:dist` first paint is **1,121,178 raw / 357,228 gzip / 299,770 Brotli**, against the line's own 1,121,177 / 357,201 / 299,758 at `25b5617e6`. This cure adds **+1 / +27 / +12 B** to first paint, ATTRIBUTED here to `people/membership.js` entering the eager closure through `corruption.js` and `events/registry.js`. The ceiling rows (1,104,215 / 351,590 / 295,016) are red on the line before this lane; the merge seat re-records them at the final tip.
+
+**Registers through their doors:**
+
+- **writer reach** (`node scripts/check-writer-reach.mjs --write`, commit `8500d4268`): `factionAffiliation on npcs` reach shrinks campaign-pdf/dossier-pdf/foundry/web-transitive/world-book → dossier-pdf/foundry/web-transitive. Cohort 1362 → 1362; HOLD.
+- **lighting census** (`LIGHTING_CENSUS_REFREEZE`, commit `0f2719364`): files 3178 → 3179, titles +9, suite titles +7.
+- **source-citation roster:** dated 221 → 222 (commit `c51a1f53f`).
+- **corruption closure pin** (`proseTasteCorruption`), re-keyed by cause (commit `e73b5d88b`): the desk already ships `membership.js`, and the byte arm is unmoved.
+- **observed-shape readers, NOT re-frozen:** its erasure guard names one lawful row, `causeLifecycle.js / secondaryAffiliation on npcs — the read is gone (a lawful repair)`, from commit 6. The door refuses on the base's own schema drift ("baseline schema 39 cannot be overwritten by schema 40 … --migrate-schema=40"), and that migration is not this lane's. The row is OWED to the seat that migrates the schema, which must shrink it.
+
+**One pulse-keyed register row moves, left UNSIGNED:** `tests/lint/newsHeadlineContract.walker.test.js` A2, address row `applied|npc_verdict|summary|indicative`, distinctValues 1 → 2 (occurrences 3 → 3), by cause `83d79aaa2`. The verdict summary now says "the seat at <power> stands open" where it said only "The office is forfeit." The file is red at the base on other rows (applied|cause_lifecycle, strategy_deploy, stressor_aftermath), so it cannot be refrozen here; the merge seat signs it.
+
 **Edge-shared bundles.** `supabase/functions/_shared/{aiCharter,aiGrounding,aiOutputSchema,engine}Bundle.meta.json` list `corruption.js` and/or `registry.js` among their inputs, so those inputs changed. **They are not re-emitted** (S4). `tests/build/landingFixtureFreshness` is not this lane's.
 
-**Hand-back gate.** [filled at hand-back]
+**Hand-back gate.** `sh scripts/gate-tail.sh npx vitest run tests/lint tests/scripts tests/architecture tests/domain --maxWorkers=2` at the lane tip `c81c544b3`: 1417 files, 32 failed tests in 20 files. A base-worktree run at `5da82ea59` had 27 failed. Five failing titles are tip-only, and each is now cured or named:
+
+- `sourceCitationIntegrity` (this record): cured by the roster bump.
+- `proseTasteCorruption`: re-keyed by cause.
+- `writerReach`: the door, above.
+- `sovereigntyLightingContract`: the census door, above.
+- `observedShapeReaders`' erasure guard: OWED, above.
+
+Each was re-run green after its cure, except the observed-shape row.
+
+Every other red appears at the base by title:
+
+- GREEN-TIP's list: clergyTraitPlane 2, deityStanceLane 1, killNpcDoubleImpair 3, characterConsumers 3, religionLegitimacyFactionKey 1, worldPulseFactionSeating 2.
+- The base's own: layerBoundaries (the foodGenerator/isolationSupport cycle), composeStateProse, editWorldFactResources 2, phantoms, newsHeadlineContract 2 (plus this lane's one row inside A2, named above), observedShapeReaders' other 4, proseFamilyContract 3, proseRegisterLoaders, ledgerCitationIntegrity and provenanceMap (ENVIRONMENT).
 
 ## 8. CONFIRMED against PLAUSIBLE
 
@@ -134,12 +185,15 @@ When both lanes merge, the merge seat removes the 11 CURED-ON-LANE rows through 
 - the build and byte comparisons;
 - the two typecheck gates;
 - eslint;
-- the base attribution of the two property files and the eight build tests (by test title).
+- the base attribution of the two property files, the eight build tests and the gate's 27 base reds (by test title);
+- the merged-line guard, build, boot-smoke and `verify:dist` figures;
+- the three register doors and their diffs.
 
 **PLAUSIBLE, not executed:**
 
 - that the three LEGACY rows are reached only on the paths named. This rests on a src grep for writers, not on a trace of every import or replay path.
 - that `causeLifecycle`'s removed fallback cannot matter to a save. Every load runs the migration chain; I did not trace each load path.
-- that GREEN-TIP will re-point `mutateEntities :: swapNpcStanding` to the same first-rank reader the affordance now counts by. This is a coordination point, not a fact.
+- that GREEN-TIP re-points `mutateEntities :: swapNpcStanding` to the same first-rank reader. The chair has said so; I have not seen it.
+- that the base reds named by title fail for the same reason at the tip. The `newsHeadlineContract` row was checked by content; the others by title only.
 
 **One process note:** in checking the houseLedger red-first I used `git stash` on my own uncommitted lane file in my own worktree. After that I used file copies.
