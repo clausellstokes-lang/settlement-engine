@@ -40,6 +40,7 @@ vi.mock('../../src/store/index.js', () => ({
 import HomeHero from '../../src/components/HomeHero.jsx';
 import { t } from '../../src/copy/index.js';
 import { REFUSAL_SURFACES, refusalOf } from '../../src/lib/refusalReasons.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('HomeHero: a generation the engine service refused', () => {
   let consoleError;
@@ -66,8 +67,8 @@ describe('HomeHero: a generation the engine service refused', () => {
       await new Promise((r) => setTimeout(r, 0));
       view.rerender(<HomeHero onSignIn={() => {}} onNavigate={() => {}} />);
       const alert = (await screen.findByRole('alert')).textContent;
-      expect(alert).toContain(t(`refusals.${reason}.body`));
-      expect(alert).not.toContain(t('errors.forgeStart'));
+      expectAbsentWithAnchor(alert, t('errors.forgeStart'), t(`refusals.${reason}.body`),
+        `${code}: the recorded reason replaces forgeStart`);
     });
   }
 

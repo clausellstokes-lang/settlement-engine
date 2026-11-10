@@ -82,15 +82,22 @@ const SEEDS = ['store-parity-a', 'store-parity-b'];
 
 describe('the engine service answers the store\'s own requests with the store\'s own records', () => {
   it('generate: the bundle\'s birth for the wire body equals the local core on the store\'s request, stamp included', async () => {
+    const failures = [];
+    // seed-loop: collected — every seed runs: a failing seed is caught and listed, and the roster is asserted once below
     for (const seed of SEEDS) {
-      const { request } = await storeForge(seed);
-      expect(request.payload.contentRuntime.contentProvenance?.environment?.environmentId).toBe('system:vanilla');
-      const local = runGenerationRequest(structuredClone(request));
-      const body = wire({ seed: request.payload.seed, config: request.payload.fullConfig });
-      const served = serviceBirth(body);
-      expect(JSON.stringify(wire(served.settlement)), seed).toBe(JSON.stringify(wire(local.settlement)));
-      expect(JSON.stringify(wire(served.pipelineHistory)), seed).toBe(JSON.stringify(wire(local.pipelineHistory)));
+      try {
+        const { request } = await storeForge(seed);
+        expect(request.payload.contentRuntime.contentProvenance?.environment?.environmentId).toBe('system:vanilla');
+        const local = runGenerationRequest(structuredClone(request));
+        const body = wire({ seed: request.payload.seed, config: request.payload.fullConfig });
+        const served = serviceBirth(body);
+        expect(JSON.stringify(wire(served.settlement)), seed).toBe(JSON.stringify(wire(local.settlement)));
+        expect(JSON.stringify(wire(served.pipelineHistory)), seed).toBe(JSON.stringify(wire(local.pipelineHistory)));
+      } catch (error) {
+        failures.push(`${seed}: ${String(error?.message ?? error).split('\n')[0]}`);
+      }
     }
+    expect(failures, `${failures.length} of the seeds failed; every seed ran`).toEqual([]);
   }, 240_000);
 
   it('generate: an account that may customize, with custom content turned off — neither side stamps', async () => {
