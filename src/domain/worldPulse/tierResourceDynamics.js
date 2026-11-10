@@ -468,14 +468,6 @@ export function resourceEconomicRole(settlement, resource) {
   return 'local_resource';
 }
 
-/**
- * @param {any} item
- * @param {any} pressureIdx
- * @param {any} rules
- * @param {any} tick
- * @param {any} previousDrift
- * @param {{ fork?: (key: string) => { random: () => number } }|null} [rng]  W-F4b: the pulse PRNG (DI'd) — enables the development-fidelity term; absent ⇒ inert.
- */
 // STYLE-2 C2 (SW-12) — the tier change's streak receipt (pinned to stay in the receipt), in
 // words: how long the drift has held and how long the change needed.
 const STREAK_REASON = Object.freeze([
@@ -505,6 +497,14 @@ const DEPLETION_TIER = Object.freeze([
   (/** @type {TierLineSlots} */ x) => `${x.name} is a ${x.tier}, and a ${x.tier} uses a great deal.`,
 ]);
 
+/**
+ * @param {any} item
+ * @param {any} pressureIdx
+ * @param {any} rules
+ * @param {any} tick
+ * @param {any} previousDrift
+ * @param {{ fork?: (key: string) => { random: () => number } }|null} [rng]  W-F4b: the pulse PRNG (DI'd) — enables the development-fidelity term; absent ⇒ inert.
+ */
 function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rng = null) {
   const settlement = item.settlement || {};
   const resources = resourceList(settlement);
