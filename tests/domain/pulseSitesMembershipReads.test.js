@@ -13,6 +13,7 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { firstRankMembershipOf, powerOrderOf } from '../../src/domain/people/membership.js';
 import { EVENT_REGISTRY } from '../../src/domain/events/registry.js';
 
@@ -51,7 +52,7 @@ describe('events/registry.js :: PROMOTE_NPC / DEMOTE_NPC narrate name no power (
     for (const { s, npc, power } of cards) {
       const promote = EVENT_REGISTRY.PROMOTE_NPC.narrate({ type: 'PROMOTE_NPC', targetId: npc.id }, s);
       expect(promote).toBe(`${npc.name} rises within their power, displacing a rival on the way up.`);
-      expect(promote).not.toContain(power);
+      expectAbsentWithAnchor(promote, power, npc.name, 'PROMOTE narration');
       expect(EVENT_REGISTRY.DEMOTE_NPC.narrate({ type: 'DEMOTE_NPC', targetId: npc.id }, s))
         .toBe(`${npc.name} is pushed down the ranks of their power.`);
     }

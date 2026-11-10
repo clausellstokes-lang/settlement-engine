@@ -14,6 +14,7 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { firstRankMembershipOf, powerOrderOf } from '../../src/domain/people/membership.js';
 import { isVeiledPower } from '../../src/domain/people/cardVeil.js';
 import { applyEvent } from '../../src/domain/events/applyEvent.js';
@@ -57,9 +58,9 @@ describe('PROMOTE/DEMOTE narration names no power (P1 as changed by the owner: t
         const event = { id: `ev-${type}-${arm.a.id}`, type, targetId: arm.a.id, payload: { swapWithNpcId: arm.b.id }, cause: 'dm_direct' };
         const { logEntry } = applyEvent({ settlement: arm.s, event, now: '2026-11-10T00:00:00.000Z' });
         const summary = String(logEntry.narrativeSummary || '');
-        expect(summary).toContain(arm.a.name); // anchored: the narration ran on this card
         expect(summary).toContain('their power');
-        expect(summary).not.toContain(arm.power);
+        // anchored: the person's name travels the same narration as the power's would
+        expectAbsentWithAnchor(summary, arm.power, arm.a.name, `${which} ${type} narrativeSummary`);
       });
     }
   }
