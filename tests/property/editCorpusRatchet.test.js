@@ -547,7 +547,14 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // -> [670, 277, 2029] SW-B5 FRAMES 46e0121c2 -> [670, 281, 2031] SW-7 POWER-SIDE a3062d919 -> [670, 281, 2029] URBAN-FIX
     // 17b814803 (its record's reason, "the gm fixture", is not this file's: the census generates every town live), unmoved
     // to the tip. Each step is measured at the stage against its parent; the leaf-by-leaf cause inside each lane is not traced.
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([670, 281, 2029]);
+    // 2026-11-10, RESIDUE (re-keyed BY IDENTITY at the simulation batch's merged tip, STYLE-2-MERGE point 36; this census
+    // probed — every other figure of A3, A4, A7 and A8 measured at once by an untracked expect.soft copy, and only this one
+    // moved): [670, 281, 2029] -> [670, 281, 2015]. bf14617ca reads 2029 (GREEN-TIP's figure); the first-parent stages
+    // point 27 SW-9b-B 8e532a663, 28, 29 and 33 and the line 90774f2fa read 2015; inside point 27, by merging each lane
+    // prefix onto its first parent, a74e32c0f reads 2029 and b23e4e91b (SW-9b-B row 2b, E-3: the small-name instigator says
+    // it speaks for the gaining power from a house it backs) reads 2015 — E6 reaches 14 fewer readings (the leaf-by-leaf
+    // cause inside the commit is not traced). The batch (GREEN-TIP + PULSE-SITES over the line) moves none: the line and the merged tip both read 2015.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([670, 281, 2015]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
