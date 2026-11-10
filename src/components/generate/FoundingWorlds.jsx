@@ -36,7 +36,7 @@
 import { useState } from 'react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, sans, serif_, FS, SP } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, CARD_HDR, sans, serif_, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
@@ -120,12 +120,19 @@ export default function FoundingWorlds({ onNavigate }) {
   return (
     <section aria-label="Founding worlds"
       style={{ maxWidth: 960, margin: '0 auto', width: '100%', padding: `${SP.lg}px ${SP.md}px` }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs }}>
-        <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.lg, fontWeight: 900 }}>Founding Worlds</h2>
+      {/* ⛔ THE HEADING AND ITS LEAD STAND ON A PLATE (the owner, 2026-11-10: the Create
+          page's headers "are hard to read"). They sat bare on the painted page, 8–11:1 for
+          the title and 5.1–7.3:1 for the lead over a busy texture. The card-header surface
+          with the cards' own hairline; the cards below keep their own borders.
+          @enforced-by tests/components/createHeadersOnPlates.test.jsx */}
+      <div data-testid="founding-worlds-plate" style={{ background: CARD_HDR, border: `1px solid ${BORDER}`, padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs }}>
+          <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.lg, fontWeight: 900 }}>Founding Worlds</h2>
+        </div>
+        <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
+          Start somewhere already alive. Fork one of these curated settlements into your own draft: no two the same, all deterministic from their seed.
+        </p>
       </div>
-      <p style={{ margin: `0 0 ${SP.md}px`, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
-        Start somewhere already alive. Fork one of these curated settlements into your own draft: no two the same, all deterministic from their seed.
-      </p>
       {/* The refusal sits directly under the lead-in, above the cards the reader
           clicked, announced as well as shown (role=alert inside the notice). */}
       <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.FOUNDING_WORLDS) ? lastRefusal : null} style={{ marginBottom: SP.md }} />

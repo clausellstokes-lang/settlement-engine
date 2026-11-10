@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 226,
+      "dated": 227,
       "sha-pin": 2,
       "tree": 173
     },
@@ -514,7 +514,9 @@
     "_rosterGrowth2026-11-10-veil-fix": "ONE document JOINED the roster by being BORN into it (VEIL-FIX, the pre-deploy security fix seat of 2026-11-10): `dated` 214 -> 215, docs/chair/2026-11-10/VEIL-FIX-2026-11-10.md, the lane's record, born dated; nothing changed class, and it cites code by symbol (0 path:line citations past EOF).",
     "_rosterGrowth2026-11-10-style-2-merge-veil-fix": "THE UNION AT THE VEIL-FIX MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 224 -> 225 (docs/chair/2026-11-10/VEIL-FIX-2026-11-10.md, the lane's record, born dated).",
     "_rosterGrowth2026-11-10-dist-flagged": "ONE document JOINED the roster by being BORN into it (seat BOOT-TIP for DIST-FLAGGED, session session_01FbPLbdzUMFRegg4kskMYG6, on lane/dist-flagged-2026-11-10 cut from 25b5617e6): `dated` 223 -> 224, docs/chair/2026-11-10/DIST-FLAGGED-2026-11-10.md, the lane's record, born dated; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-10-style-2-merge-dist-flagged": "THE UNION AT THE DIST-FLAGGED MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 225 -> 226 (docs/chair/2026-11-10/DIST-FLAGGED-2026-11-10.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-10-style-2-merge-dist-flagged": "THE UNION AT THE DIST-FLAGGED MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 225 -> 226 (docs/chair/2026-11-10/DIST-FLAGGED-2026-11-10.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-10-config-headers": "ONE document JOINED the roster by being BORN into it (seat CONFIG-HEADERS, a child of the chair session session_01FbPLbejcfwX5nii12VM673, session session_01FbPLbdgVNYmnmDH1xzSKMB, on lane/config-headers-2026-11-10 cut from the integration tip ecadf531a): `dated` 217 -> 218, docs/chair/2026-11-10/CONFIG-HEADERS-2026-11-10.md, the lane's record, born dated; measured once by this walker at the lane tip; nothing changed class.",
+    "_rosterGrowth2026-11-10-style-2-merge-config-headers": "THE UNION AT THE CONFIG-HEADERS MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 226 -> 227 (docs/chair/2026-11-10/CONFIG-HEADERS-2026-11-10.md, the lane's record, born dated)."
   },
   "rows": []
 }

@@ -1,6 +1,6 @@
 import { useId, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
-import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import { BODY, BORDER, CARD, CARD_HDR, FS, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
 import Badge from './Badge.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -87,8 +87,11 @@ export default function Disclosure({
         {count != null && <Badge tone="muted">{count}</Badge>}
         {hint && !open && (
           <span style={{
+            // The collapsed hint at the passing ink (2026-11-10): MUTED read 3.6:1 on
+            // CARD. Its only callers are the Create page's (ConfigurationPanel's
+            // Fine-tune, the Layered panel's three deep sections).
             fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
-            color: MUTED, letterSpacing: 0, textTransform: 'none',
+            color: BODY, letterSpacing: 0, textTransform: 'none',
           }}>
             {hint}
           </span>
