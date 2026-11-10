@@ -1473,6 +1473,10 @@
       "kind": "mutation",
       "label": "commands/journal conflict contract drift"
     },
+    "tests/security/canonCommandStampedRow.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/createRouteCommand.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
