@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "083eeaad55bebcf33d75b9b1ec6400de39eb670a",
-  "measuredBy": "STYLE-2-MERGE-4 (session_01FbPLbbT4fy8G4nTurhnGb3)",
+  "measuredAtSha": "201484d919c0caa4ff77173ef29057b6246efb6d",
+  "measuredBy": "SW-9b-B",
   "date": "2026-11-10",
-  "note": "STYLE-2-MERGE point 24, the SW-8 RENAME-POWERS merge (b951ce7da, merge 56f3b2df7): re-frozen at the merged tip; the titles SW-8 added (its R7 and R8)",
+  "note": "SW-9b-B E-3 (b23e4e91b): one new test title in tests/domain/crisisCast.test.js (the backed instigator pin)",
   "files": 3173,
   "parked": 394,
   "credited": 2779,
-  "titles": 28962,
+  "titles": 28963,
   "suiteTitles": 7821
 }
