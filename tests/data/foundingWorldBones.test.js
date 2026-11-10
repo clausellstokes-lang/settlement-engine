@@ -69,11 +69,12 @@ const hasFaction = (s, re) => (s.powerStructure?.factions || []).some((/** @type
  */
 const PROMISES = {
   'sample-cnocby': {
-    teaser: 'A mountain village on a through road, where the good timber was cut out a generation ago and the carters who still stop know exactly whose cousin to ask about the rest.',
-    tags: ['Mountain road', 'Exhausted timber', 'Quiet criminal pressure'],
+    teaser: 'A mountain village on a through road, where the good timber has been cut faster than it can grow back, and the farms, the common grazing and the mill keep the place.',
+    tags: ['Mountain road', 'Exhausted timber', 'Farms and grazing'],
     promises: [
       { clause: 'a mountain village on a through road · tag Mountain road', holds: (s) => s.tier === 'village' && s.config.terrainType === 'mountain' && s.config.tradeRouteAccess === 'road' },
-      { clause: 'the good timber was cut out · tag Exhausted timber', holds: (s) => conditionOf(s, 'mountain_timber') === 'depleted' },
+      { clause: 'the good timber has been cut faster than it can grow back · tag Exhausted timber', holds: (s) => conditionOf(s, 'mountain_timber') === 'depleted' },
+      { clause: 'the farms, the common grazing and the mill keep the place · tag Farms and grazing', holds: (s) => hasInstitution(s, /^Farmland$/) && hasInstitution(s, /^Common grazing land$/) && hasInstitution(s, /^Mill$/) },
     ],
   },
   'sample-mossgate': {

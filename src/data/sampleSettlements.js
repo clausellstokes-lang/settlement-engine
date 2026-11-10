@@ -66,8 +66,8 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Cnocby',
     tier:    'village',
     terrain: 'mountain',
-    teaser:  'A mountain village on a through road, where the good timber was cut out a generation ago and the carters who still stop know exactly whose cousin to ask about the rest.',
-    tags:    ['Mountain road', 'Exhausted timber', 'Quiet criminal pressure'],
+    teaser:  'A mountain village on a through road, where the good timber has been cut faster than it can grow back, and the farms, the common grazing and the mill keep the place.',
+    tags:    ['Mountain road', 'Exhausted timber', 'Farms and grazing'],
     config: {
       settType:         'village',
       tradeRouteAccess: 'road',
@@ -186,6 +186,15 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
   // holds 12/12 across suffixed forks (measured 2026-09-19). The inn, the market
   // and the faction conflict are NOT pinned and NOT promised: they held 6/12,
   // 8/12 and 8/12, so the teaser says nothing about them.
+  //
+  // ⚠ RE-MATCHED 2026-11-10 (N8; the old teaser, verbatim, is kept in
+  // docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md). The carters held in 8 of 20
+  // forks and "whose cousin to ask" (any criminal institution or faction) in 1 of 20,
+  // although the criminal dial is the highest of the five at 64: at village size the
+  // dial does not deliver what its name says. "A generation ago" was a date no field
+  // holds. What every fork carries: the road, the cut-out timber (in the dossier's
+  // words, "cleared faster than they can regrow"), and Farmland, Common grazing land
+  // and a Mill (20/20, 100/100).
 ]);
 
 /**
