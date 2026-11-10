@@ -31,13 +31,16 @@ async function renderSection(slug) {
 }
 
 describe('Compendium — dashboard + registry hubs', () => {
-  it('opens on the landing with source-rendered catalog counts', async () => {
+  it('opens on the landing with source-rendered catalog counts and no sample-world line', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
     const { container } = render(<CompendiumPanel standalone />);
     const text = container.textContent;
     // The demo world + the operations count, from the artifact. (The premade-deity
     // roster was removed by owner ruling 2026-07-21; no deity count is published.)
-    expect(text).toContain(CD.meta.demoWorld.name);
+    // The sample-world line left the landing (the owner, 2026-11-10: "remove the everything
+    // here is rednedered by the deteremistic.... all the way to the sample world cnocby...");
+    // re-keyed BY IDENTITY to an anchored negative. The operations count still renders.
+    expectAbsentWithAnchor(text, `The sample world is ${CD.meta.demoWorld.name}`, String(CD.operations.count), 'the landing text');
     expect(text).toContain(String(CD.operations.count));
     expect(CD.deities).toBeUndefined();
   });
@@ -125,7 +128,6 @@ describe('Compendium — dashboard + registry hubs', () => {
         // The landing (the owner, 2026-11-10: it replaced the Overview tab): its grid
         // is on screen and no section page is.
         expect(container.querySelector('nav[aria-label="Compendium sections"]'), `${id} renders the landing grid`).not.toBeNull();
-        expect(container.querySelector('#overview'), `${id} renders the landing intro`).not.toBeNull();
         expect(document.title, `${id} panel head`).toBe('The SettlementForge Compendium');
         // The dead address is REPLACED, and what it resolves to now carries no entry.
         expect(here(), `${id} address`).toBe('/compendium');
