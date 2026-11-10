@@ -709,7 +709,7 @@ export const en = Object.freeze({
         eyebrow: 'Save it',
         tier:    'Free account',
         // Full-size generation belongs to the FREE rung — size is not premium.
-        body:    'A free account generates any size, from hamlet to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
+        body:    'A free account generates any size, from thorpe to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
         cta:     'Create a free account',
       },
       simulates: {
@@ -1822,7 +1822,7 @@ export const en = Object.freeze({
     },
     aiOrSim: {
       q: "Does SettlementForge use AI to write my settlement?",
-      a: 'The structural layer (population, powers, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
+      a: 'The structural layer (population, powers, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends credits to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
     },
   },
 
