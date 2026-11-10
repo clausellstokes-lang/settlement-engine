@@ -4,36 +4,29 @@
 
 **Seat:** PULSE-SITES, a cure seat, child of the cloud chair (session `session_01FbPLbejcfwX5nii12VM673`); this seat's session `session_01FbPLbehJ1XtTPeEP23oMyC`. **Branch:** `lane/pulse-sites-2026-11-10`, cut from `lane/integration-2026-11-07` at `5da82ea59`. **Parallel seat:** GREEN-TIP (`lane/green-tip-2026-11-10`), whose files this lane did not touch. **Brief:** the chair's dispatch of 2026-11-10, rulings S1–S5.
 
-**Outcome:** of this lane's 15 sites, 7 are cured and 8 are named. Six LIVE sites in six files are cured by pure re-points to the card's first-rank membership, each red first on a soak birth. One DEAD fallback is removed. Three LEGACY sites stay, each with a one-line comment. Two DEAD sites are listed. The three `npcVerdictApply.js` rows are DARK by the chair's ruling (option (c), 2026-11-10): nothing is written. The landed walker gains a per-site arm, shrink-only, whose list holds 19 rows at this tip. The generator golden master and every property-tree pulse golden are green and unmoved. One pulse-keyed register row moves by cause and is left UNSIGNED (§7). Merged onto the integration line (`79acc9120`), the lazy-edge guard is green, boot-smoke passes, and first paint is +1 B raw. `typecheck:ratchet` is 167/167 and `typecheck:domain:strict` exits 0. eslint reports 0 on the touched files.
+**Outcome:** of this lane's 15 sites, 7 are cured and 8 are named. The two narration sites drop the retired read and name no power, because the narration cure is forgone (the owner's word, §0). Four LIVE sites in four files are cured by pure re-points to the card's first-rank membership, each red first on a soak birth. One DEAD fallback is removed. Three LEGACY sites stay, each with a one-line comment. Two DEAD sites are listed. The three `npcVerdictApply.js` rows are DARK by the chair's ruling (option (c), 2026-11-10): nothing is written. The landed walker gains a per-site arm, shrink-only, whose list holds 19 rows at this tip. The generator golden master and every property-tree pulse golden are green and unmoved. One pulse-keyed register row moves by cause and is left UNSIGNED (§7). Merged onto the integration line (`79acc9120`), the lazy-edge guard is green, boot-smoke passes, and first paint is +1 B raw. `typecheck:ratchet` is 167/167 and `typecheck:domain:strict` exits 0. eslint reports 0 on the touched files.
 
 ## 0. The re-opening (the reviewer's BLOCK on `dbaa54418`, the chair's rulings P1–P7)
 
 | Ruling | What | Commit |
 |---|---|---|
-| **P1** (finding 1, the blocker) | The registry cure (`a09f2593e`) put a hidden or criminal power's name, and a person's tie to it, on the PUBLIC chronicle. PROMOTE/DEMOTE narration is the log entry's `narrativeSummary` (`events/applyEvent.js :: applyEvent`), which `supabase/migrations/032_gallery_public_chronicle.sql :: _gallery_chronicle_entry` publishes verbatim to anon. The PDF Timeline and the Foundry journal print the same field. The cure: `events/registry.js :: openPowerOf` names the first-rank power only where that membership is stamped `veiled: false` (the stamp migration 206 reads); otherwise the base's "their power". No new prose. | `b41bb25d9` |
+| **P1** (finding 1, the blocker), **as changed by the owner's word** | The registry cure (`a09f2593e`) put a hidden or criminal power's name, and a person's tie to it, on the PUBLIC chronicle. PROMOTE/DEMOTE narration is the log entry's `narrativeSummary` (`events/applyEvent.js :: applyEvent`), which `supabase/migrations/032_gallery_public_chronicle.sql :: _gallery_chronicle_entry` publishes verbatim to anon. The chair first ruled "name it only where unveiled" (`b41bb25d9`). The owner then said, verbatim: "Forgo or isolated the simulation. My main focus is the generator and dossier. Because the simulation is not fully built yet and requires PLAT." So **the narration cure is forgone**: `events/registry.js` returns to its base text, except that both narrations say "their power" for every card and read no retired field. **Naming a power in these narrations is deferred to the simulation's own program, with the reviewer's finding as the reason.** | `b41bb25d9`, replaced by `1462a8181` |
 | **P2** (finding 4) | The walker's list was not shrink-only: the reviewer grew it by a read and a row with `count: 20`, and 4/4 passed. `RETIRED_SITE_CEILING = 19` is now pinned in the test itself. | `359252677` |
 | **P3** (finding 6) | The verdict seat and the house factor name hidden powers too, behind dark flags. Nothing is written in code; the three DARK rows now state that when lit, P1's rule applies to `vacatedSeatOf`'s seat name and `castHouseFactor`'s factor. | `ce7f9a2ca` |
 | **P4** (finding 7) | The ladder arm's comment said "a card with no memberships". It is read for any card whose memberships do not name the faction asked about. The comment and the row's reason now say so (two lines, so the row stays at 56). | `37cca6b15` |
-| P1's file | Lighting census door: files 3179 → 3180, parked 395 → 396. | `f5ecf6fdf` |
+| P1's pin file | Lighting census door: files 3179 → 3180, parked 395 → 396 (the same file, rewritten by `1462a8181`). | `f5ecf6fdf` |
 
-**P1, red first.** `tests/domain/pulseSitesChronicleVeil.test.js` runs through the real `applyEvent` and then the real net-current `_gallery_chronicle_entry` loaded from migration 032 into pglite.
+**Reach of finding 1 (the chair, 2026-11-10):** the surface is reachable only by an authoring account. The event composer is drawn only in edit mode (`src/components/SettlementDetail.jsx`), and edit mode is open only to `src/lib/viewerAuthority.js :: viewerCanAuthor` (premium, founder or elevated staff). No free or signed-out account writes an event log. The public chronicle's own missing veil goes to the simulation's program; the second lane (`lane/chronicle-veil-2026-11-10`) was cancelled before it was cut.
 
-| Arm | Card | Before the cure (`a09f2593e`..`dbaa54418`) | After |
-|---|---|---|---|
-| (a) hidden | soak1k-113, The Independent Bloc (the infiltrator, `hidden: true`) | named, red ("Yordan Klimov rises within The Independent Bloc …" / "… pushed down the ranks of The Independent Bloc."), PROMOTE and DEMOTE | "their power", green |
-| (b) criminal | soak1k-3, Thieves' Guild | named, red ("Abbas al-Isfahani rises within Thieves' Guild …"), both | "their power", green |
-| (c) open | soak1k-3, Guild Council (`veiled: false`) | named, green | named, green |
+**P1, the pin, red first.** `tests/domain/pulseSitesChronicleVeil.test.js` (the pglite arm dropped by the change) commits a PROMOTE and a DEMOTE through the real `applyEvent` for a member of each of three powers:
 
-Arm (c) shows the cure does not pass by blanking everything. 7/7 after. Re-keyed by this cause: the registry describe of `pulseSitesMembershipReads` (now asserts both branches on soak1k-3/4) and `editorRosterEvents`' fixture (`veiled: false`).
+- (a) hidden: soak1k-113, The Independent Bloc;
+- (b) criminal: soak1k-3, Thieves' Guild;
+- (c) open: soak1k-3, Guild Council.
 
-**P1, the table's row split by the veil** (60 births, sums, base → tip):
+In all three the `narrativeSummary` must name the person and not the power. At `efb2c917d` (the conditional naming) the open arm was red ("Duha al-Yamani rises within Guild Council …"); at `dbaa54418` all three were (the reviewer's "Yordan Klimov rises within The Independent Bloc …"). After the change: 7/7. Re-keyed by this cause: `pulseSitesMembershipReads`' registry describe (every card "their power") and `editorRosterEvents`' swap narration. The walker's list never held these two sites, because the retired read is gone.
 
-| | t0 | t1 | t3 | t12 |
-|---|---|---|---|---|
-| first-rank cards, veiled membership | 126 | 125 | 125 | 123 |
-| … narrated with their power's name | 0 → **0** | 0 → **0** | 0 → **0** | 0 → **0** |
-| first-rank cards, unveiled membership | 1504 | 1505 | 1503 | 1499 |
-| … narrated with their power's name | 0 → 1504 | 0 → 1505 | 0 → 1503 | 0 → 1499 |
+**The table's narration row** is now 0 names at every tick, base and tip, veiled or not. At `efb2c917d` the split was veiled 0 / unveiled 1,504 → 1,499; that tip is superseded.
 
 **P2, red first.** The reviewer's attack was planted: a read `npc?.factionAffiliation` appended to `corruption.js` and its row added with `count: 20`. It reds "the list may only SHRINK … expected 20 to be less than or equal to 19". Restored from a file copy; 4/4.
 
@@ -68,8 +61,8 @@ Lines are at `5da82ea59`. "Probe" figures are sums over the 60 births at t0 → 
 
 | # | Site | Field | What it does | Class and probe | Reads now | Commit |
 |---|---|---|---|---|---|---|
-| 1 | `events/registry.js :: PROMOTE_NPC.narrate` (805) | factionAffiliation | names the person's faction in the event line | **LIVE**: 1793/1793 born cards narrate "their power" | `firstRankMembershipOf(npc, powerOrderOf(settlement))?.power \|\| 'their power'` | `a09f2593e` |
-| 2 | `events/registry.js :: DEMOTE_NPC.narrate` (820) | factionAffiliation | same | **LIVE**, same figures | same | `a09f2593e` |
+| 1 | `events/registry.js :: PROMOTE_NPC.narrate` (805) | factionAffiliation | names the person's faction in the event line | **LIVE**: 1793/1793 born cards narrate "their power" | **FORGONE (§0, P1 as changed)**: `'their power'` for every card, no read. Was `firstRankMembershipOf(...)` at `a09f2593e` | `a09f2593e` → `1462a8181` |
+| 2 | `events/registry.js :: DEMOTE_NPC.narrate` (820) | factionAffiliation | same | **LIVE**, same figures | same as 1 | `a09f2593e` → `1462a8181` |
 | 3 | `events/affordanceManifest.js :: npcSwapPairsExist` (212) | factionAffiliation | gates the PROMOTE_NPC affordance ("Needs a power with two seated members") | **LIVE**: gate closed on 60/60 births at every tick; 54/60 have a power with two first-rank members | counts by first-rank power | `bf7d435fa` |
 | 4 | `worldPulse/houseLedger.js :: castHouseFactor` (324) | factionAffiliation | casts the house's factor (dark: `merchantHousesEnabled`) | **LIVE**: 0 of 216 powers cast a factor at birth, 211 could | `firstRankMembershipOf(npc, order)?.power === house` | `332a5edb5` |
 | 5 | `worldPulse/npcVerdictTable.js :: vacatedSeatOf` (709) | factionAffiliation | the seat a verdict opens (dark: `npcConsequencesEnabled`) | **LIVE**: 0 of 1630 first-rank members name a seat at birth | the first-rank membership, in the retired key's place in front of the remaining handles | `83d79aaa2` |
@@ -140,7 +133,7 @@ The births, `simulateCampaignWorldPulse` and the 0/1/3/12 readings are §2's. Th
 
 | Figure (what the cured site feeds) | t0 | t1 | t3 | t12 |
 |---|---|---|---|---|
-| PROMOTE/DEMOTE narration names a power (registry) | 0 → 1630 | 40 → 1630 | 40 → 1628 | 70 → 1622 |
+| PROMOTE/DEMOTE narration names a power (registry) — FORGONE at `1462a8181`: 0 everywhere; the figures were at `dbaa54418` | 0 → 1630 | 40 → 1630 | 40 → 1628 | 70 → 1622 |
 | births with the PROMOTE_NPC affordance open (affordanceManifest) | 0 → 54 | 0 → 54 | 0 → 54 | 0 → 54 |
 | powers that cast a house factor (houseLedger) | 0 → 211 | 40 → 60 | 40 → 60 | 70 → 60 |
 | members whose vacated seat is named (npcVerdictTable) | 0 → 1630 | 40 → 1630 | 40 → 1628 | 70 → 1622 |
