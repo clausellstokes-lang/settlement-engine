@@ -52,7 +52,7 @@ import { raisedHere, REFUSAL_REASONS, REFUSAL_SURFACES, refusalOf } from '../../
 import { FORK_SEED_MAX } from '../../lib/anonForkSalt.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, FS, SP } from '../theme.js';
+import { INK, BODY, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, FS, SP } from '../theme.js';
 
 // Deep-constraints sections — each keeps its wizard STEP ID so funnel analytics
 // (wizard_step_viewed) still fire when the section is opened.
@@ -163,7 +163,7 @@ function SeedField() {
     <div data-testid="seed-card" style={{ marginBottom: SP.md, background: CARD, border: `1px solid ${BORDER}` }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `${SP.sm}px ${SP.lg}px`, flexWrap: 'wrap', background: CARD_HDR, borderBottom: `1px solid ${BORDER}` }}>
         <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>Exact seed</span>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>reproduce a world: every dial rolls from the seed</span>
+        <span style={{ fontSize: FS.sm, color: BODY }}>reproduce a world: every dial rolls from the seed</span>
       </div>
       <div style={{ padding: `${SP.md}px ${SP.lg}px` }}>
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -191,7 +191,7 @@ function SeedField() {
       <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.SEED_FIELD) ? lastRefusal : null} style={{ margin: `${SP.sm}px 0 0` }} />
       {lastSeed != null && (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginTop: SP.xs, flexWrap: 'wrap' }}>
-          <span style={{ fontSize: FS.xs, color: MUTED }}>Current draft seed</span>
+          <span style={{ fontSize: FS.sm, color: BODY }}>Current draft seed</span>
           <code style={{ fontSize: FS.xs, color: SECOND }} data-testid="current-seed">{String(lastSeed)}</code>
           <Button variant="ghost" size="sm" onClick={copySeed}>{copied ? 'Copied' : 'Copy'}</Button>
         </div>
@@ -281,7 +281,9 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
       <div data-section-id="config" style={{ marginBottom: SP.sm }}>
         <div data-testid="foundations-band" style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `${SP.sm}px ${SP.lg}px`, background: CARD_HDR, border: `1px solid ${BORDER2}`, borderBottom: 0, flexWrap: 'wrap' }}>
           <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>1 · Foundations</span>
-          <span style={{ fontSize: FS.xs, color: MUTED }}>size, route, culture: the essentials</span>
+          {/* Subtitles at the passing ink (BODY) and FS.sm, never MUTED (3.3:1 on these
+              plates, the theme's own "fails 4.5:1"). 2026-11-10. */}
+          <span style={{ fontSize: FS.sm, color: BODY }}>size, route, culture: the essentials</span>
         </div>
         <div>
           {/* Fine-tune (sliders, nearby-resource cycling, stress) is Advanced-only
@@ -307,7 +309,7 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
             <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>
               2 · Institutions, services &amp; trade
             </span>
-            <span style={{ fontSize: FS.xs, color: MUTED }}>force or forbid specifics</span>
+            <span style={{ fontSize: FS.sm, color: BODY }}>force or forbid specifics</span>
             {/* The group-level undo for the three grids below: each grid's own
                 Reset clears one bag, this clears all three at once. */}
             <ResetConstraintsButton />
