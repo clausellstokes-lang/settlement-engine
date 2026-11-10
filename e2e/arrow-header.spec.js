@@ -247,6 +247,22 @@ test.describe('desktop (Chromium)', () => {
     }
   });
 
+  // THE OWNER, 2026-11-10 (ruling H3): "clicking the compendium tab when not on the
+  // main compendium page brings you back to the main compendium page."
+  test('Compendium from a compendium sub-page returns to the landing', async ({ page }) => {
+    await freshPage(page);
+    await page.setViewportSize({ width: 1440, height: 900 });
+    for (const sub of ['/compendium/institutions', '/compendium/custom', '/compendium/tier-thorp']) {
+      await page.goto(sub, { waitUntil: 'domcontentloaded' });
+      await settleHeader(page);
+      await expect(page.getByRole('button', { name: /^Back$/ })).toBeVisible({ timeout: 15_000 });
+      await page.locator('header nav button', { hasText: 'Compendium' }).click();
+      await expect(page).toHaveURL(/\/compendium$/);
+      await expect(page.getByRole('navigation', { name: 'Compendium sections' })).toBeVisible();
+      await expect(page.getByRole('button', { name: /^Back$/ })).toHaveCount(0);
+    }
+  });
+
   test('on a pinned dossier toolbar the Back button is painted over the feather', async ({ page }) => {
     test.setTimeout(60_000);
     await freshPage(page, { auth: MOCK_FREE_AUTH });
