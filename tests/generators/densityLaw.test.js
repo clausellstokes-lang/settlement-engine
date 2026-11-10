@@ -138,7 +138,24 @@ import { applyTierOutcomeToSettlement } from '../../src/domain/worldPulse/tierOu
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from '../../src/domain/worldPulse/assizeKernel.js';
 import { DRIFT_REEMIT_COOLDOWN_TICKS } from '../../src/domain/worldPulse/worldPulseFeedCuration.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
-import { holdsMembership } from '../../src/domain/people/membership.js';
+import { holdsMembership, membershipsOf } from '../../src/domain/people/membership.js';
+import { migrateV1toV2 } from '../../src/domain/settlementMigrations.js';
+
+/**
+ * GREEN-TIP (2026-11-10, re-keyed by cause 15207301f with the lifecycle re-point): a card stands in its house by a
+ * MEMBERSHIP, which factionLifecycle.js :: factionRosterOf now reads; the retired `factionAffiliation` is on no
+ * current card. Each fixture card is written in its v1 shape and handed through the product's own door, the save
+ * migration, which moves the link onto a membership in the house it names (and deletes the retired rung field —
+ * the D3 helper re-attaches it, see there).
+ * @param {Record<string, unknown>} card @returns {Record<string, unknown>}
+ */
+const asCurrent = (card) => {
+  const house = card.factionAffiliation;
+  if (house == null) return card;
+  const out = migrateV1toV2({ powerStructure: { factions: [{ faction: house }] }, npcs: [card] }).settlement.npcs[0];
+  if (!holdsMembership(out, String(house))) throw new Error(`the migration did not seat ${String(card.name)} in ${String(house)}`);
+  return out;
+};
 
 // ── The corpus ───────────────────────────────────────────────────────────────
 // Wide enough that a one-in-many shape is not a coin flip: the §713.2 lesson is
@@ -517,7 +534,7 @@ describe('§817-Q5/Q3 — the rung mapping, and the one resolver', () => {
               name: `${f.name} ${i}`,
               role: 'Shepherd',              // a role the regex reads as `minor`…
               importance: m.importance,      // …so only the STAMP can light a rung
-              factionAffiliation: f.name,
+              memberships: [{ power: f.name, rank: null, share: null }],
             })),
           };
           const lit = eligibleMembersOf('sid', settlement, faction, ladderFactionKey(faction));
@@ -813,7 +830,7 @@ describe('§817-Q2 — the atomic mint binds the event layer', () => {
     expect(out.npcs).toHaveLength(1);
     const founder = out.npcs[0];
     expect(minted.memberNpcIds[0]).toBe(founder.id);
-    expect(founder.factionAffiliation).toBe('The Weavers House');
+    expect(holdsMembership(founder, 'The Weavers House'), 'the founder belongs to the house it founds (a membership)').toBe(true);
     expect(founder.importance).toBe(importanceForRung('head', 'town'));
     // An atomic mint has to be an atomic UNDO: house and founder carry the same
     // creating event, which is the key `withoutEventCreations` drops by.
@@ -970,7 +987,7 @@ describe('D2b — the stressor vocabulary has two planes and only one is dormant
 // measured at 104/240.
 const v2Cfg = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
 const house = (name, extra = {}) => ({ faction: name, ...extra });
-const figure = (name, affiliation, status = 'active') => ({
+const figure = (name, affiliation, status = 'active') => asCurrent({
   name, factionAffiliation: affiliation, status,
 });
 
@@ -1441,7 +1458,7 @@ describe('D2c — the density lane wired into the pulse (§810.4 R18/R20)', () =
 
   const CROWN = { name: 'The Crown', faction: 'The Crown', isGoverning: true, power: 40 };
   const WEAVERS = { name: 'The Weavers', faction: 'The Weavers', power: 12 };
-  const factor = (house, status = 'active') => ({
+  const factor = (house, status = 'active') => asCurrent({
     id: `npc.${house}`, name: `A factor of ${house}`, factionAffiliation: house, status,
   });
 
@@ -1601,7 +1618,7 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
   const house = (name, category, power, governing = false) => ({
     name, faction: name, category, power, isGoverning: governing,
   });
-  const member = (name, houseName) => ({ id: `npc.${name}`, name, factionAffiliation: houseName, status: 'active' });
+  const member = (name, houseName) => asCurrent({ id: `npc.${name}`, name, factionAffiliation: houseName, status: 'active' });
 
   it('R8: the unrepresented powers are the settlement\'s OWN institutions, seated ones excluded', () => {
     const s = place({
@@ -1661,7 +1678,7 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
     // the settlement's roster AND affiliated, so R18 cannot dissolve the house next tick.
     expect(next.npcs).toHaveLength(2);
     const founder = next.npcs[1];
-    expect(founder.factionAffiliation).toBe(risen.name);
+    expect(holdsMembership(founder, risen.name), 'the founder belongs to the risen house (a membership)').toBe(true);
     expect(factionRosterOf(next, risen)).toHaveLength(1);
     expect(out.newsEntries.map(e => e.impactKind)).toEqual(['faction_seat_formed']);
     // The emergence takes NO draw: the same world mints the same founder id twice.
@@ -1694,8 +1711,10 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
     // its seat is the commonest shape the world has. One rule, no special case; ties
     // break on the key so the absorbing house is the same on every device.
     expect(next.npcs).toHaveLength(3);
-    expect(next.npcs[2].factionAffiliation).toBe('The Crown');
-    expect(next.npcs.every(n => next.powerStructure.factions.some(f => f.name === n.factionAffiliation)),
+    expect(holdsMembership(next.npcs[2], 'The Crown'), 'the folded figure now belongs to the absorbing house').toBe(true);
+    expect(holdsMembership(next.npcs[2], 'Weak House'), 'and no longer to the folded one').toBe(false);
+    expect(next.npcs.every(n => membershipsOf(n).length > 0
+      && membershipsOf(n).every(m => next.powerStructure.factions.some(f => f.name === m.power))),
       'a fold orphaned somebody — §817-Q8\'s always-affiliated invariant').toBe(true);
     expect(out.newsEntries.map(e => e.impactKind)).toEqual(['faction_seat_folded']);
   });
@@ -1797,10 +1816,17 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
     const viaCadence = run(s, 40).settlementUpdates[0].settlement.powerStructure.factions[1];
     expect(viaCadence.name, 'the fixture must actually seat the house this pin is about').toBe(HOUSE);
     expect(viaCadence.id).toBe(viaVerb.id);
-    // The founder's linkedFactionIds must join the SAME id, or an atomic mint is
-    // atomic in name only.
+    // The founder must join the SAME house, or an atomic mint is atomic in name only. GREEN-TIP (2026-11-10, re-keyed
+    // with the writers, the chair's STOP-1): the join is the founder's MEMBERSHIP (the retired `linkedFactionIds` is
+    // written by no writer now); both founders belong to the one polity both paths mint under the one id.
     const founder = run(s, 40).settlementUpdates[0].settlement.npcs[1];
-    expect(founder.linkedFactionIds).toEqual([viaVerb.id]);
+    expect(holdsMembership(founder, viaCadence.name), 'the cadence founder belongs to the house it founds').toBe(true);
+    const verbWorld = mutateSettlement({
+      settlement: { tier: 'town', config: V2, npcs: [], powerStructure: { factions: [], seatOfPower: 'The Crown' } },
+      event: { id: 'ev.join', type: 'ADD_FACTION', targetId: 'faction.Rising_Merchants', payload: {} },
+    });
+    expect(verbWorld.npcs.map((n) => holdsMembership(n, viaVerb.faction)), 'the verb founder belongs to the same polity').toEqual([true]);
+    expect(viaCadence.faction).toBe(viaVerb.faction);
   });
 
   it('the crossing clock actually delays the first emergence (the two halves compose)', () => {
@@ -1849,8 +1875,12 @@ describe('D2c — the cadence wired into the pulse (§810.1 R7/R8/R9, §810.3 R1
 const D3 = (() => {
   const V2 = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
   /** A named figure at a stated importance band, optionally carrying the yearner mark. */
+  // GREEN-TIP: the membership through the migration; the D3 block is the UNWIRED succession grammar (nothing here is
+  // wired into the pulse, see its header), and its yearner mark is the retired rung field the migration deletes, so
+  // the mark is re-attached as the block's own input — the reader it tests (titularSuccession.js) reads it on no
+  // current card (DEAD on a current record, reported in the GREEN-TIP record).
   const npc = (name, house, importance, extra = {}) => ({
-    id: `npc.${name}`, name, factionAffiliation: house, status: 'active', importance, ...extra,
+    ...asCurrent({ id: `npc.${name}`, name, factionAffiliation: house, status: 'active', importance }), ...extra,
   });
   const yearner = (name, house, importance) => npc(name, house, importance, { [RUNG_ROLE_FIELD]: 'yearner' });
   const house = (name, category, power, governing = false) => ({
@@ -2117,8 +2147,8 @@ describe('D3 — §810.8 R23/R24/R25: the resolution grammar, and that it always
       // `scattered` re-affiliates the roster onto the victor — R9's fold idiom, and the
       // only roster-emptying road an engine may take under §827's STATE-NEVER-FATE.
       const npcs = d.disposition === 'scattered'
-        ? settlement.npcs.map(n => (n.factionAffiliation === d.key
-          ? { ...n, factionAffiliation: d.intoName } : n))
+        ? settlement.npcs.map(n => (holdsMembership(n, d.key)
+          ? { ...n, memberships: membershipsOf(n).map(m => (m.power === d.key ? { ...m, power: d.intoName } : m)) } : n))
         : settlement.npcs;
       return { ...settlement, npcs, powerStructure: { ...settlement.powerStructure, factions } };
     };
