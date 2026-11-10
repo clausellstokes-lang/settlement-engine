@@ -116,7 +116,15 @@ const STAFF_ROLES: ReadonlyArray<string> = Object.freeze(['developer', 'admin'])
 export const ENGINE_VERSION: string = engineMeta.engineVersion;
 
 const FN = 'engine-generate';
-const MAX_BODY_BYTES = 32 * 1024;
+/**
+ * The `generate` cap (remote-path R4, 2026-11-10). The generate action sends EVERY stored toggle
+ * of every bag, and the wizard's own bulk presses fill them: the largest body they can build is
+ * DERIVED from the catalogs by `tests/build/engineGenerateBodyCap.test.js` (233,119 bytes at this
+ * writing), which holds this cap at least 1.1× that bound and at most the chair's 256 KB
+ * ceiling, and reds the day the catalogs outgrow it. It was 32 KB, which refused an account
+ * whose grid had been "excluded all" on every generation.
+ */
+const MAX_BODY_BYTES = 256 * 1024;
 /**
  * `derive` carries a pins bag cut from a whole settlement record (a city's record is ~250 KB);
  * `regenSection` carries the record itself. Both are held to this cap.
@@ -259,7 +267,7 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
 
   // ── Body: capped, parsed, shaped ───────────────────────────────────────────────────
   // The larger cap is read first (no body exceeds it); a `generate` body is then held to its
-  // own 32 KB once the op is known.
+  // own cap (MAX_BODY_BYTES) once the op is known.
   const raw = await req.text();
   const rawBytes = new TextEncoder().encode(raw).length;
   if (rawBytes > MAX_DERIVE_BODY_BYTES) {

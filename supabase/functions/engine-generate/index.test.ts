@@ -274,7 +274,7 @@ scopedEnv.test('method and shape: OPTIONS 200, GET 405, bad JSON / seed / config
   assertEquals((await handleEngineGenerate(badJson, opts)).status, 400);
   assertEquals((await handleEngineGenerate(post({ config: {} }), opts)).status, 400);
   assertEquals((await handleEngineGenerate(post({ seed: 's', config: [] }), opts)).status, 400);
-  assertEquals((await handleEngineGenerate(post({ seed: 's', config: { pad: 'x'.repeat(40_000) } }), opts)).status, 413);
+  assertEquals((await handleEngineGenerate(post({ seed: 's', config: { pad: 'x'.repeat(300_000) } }), opts)).status, 413);
   assertEquals(admin.rpcCalls.length, 0);
 });
 
@@ -299,16 +299,27 @@ scopedEnv.test('DERIVE: three seeds — the settlement is the bundle\'s own pipe
   }
 });
 
-scopedEnv.test('DERIVE: a body over 32 KB is accepted for derive and refused 413 for generate', async () => {
-  const pad = 'x'.repeat(40 * 1024);
+scopedEnv.test('DERIVE: a body over the generate cap (256 KB) is accepted for derive and refused 413 for generate', async () => {
+  const pad = 'x'.repeat(300 * 1024);
   const admin = makeAdmin();
   const gen = await handleEngineGenerate(post({ seed: 's', config: { pad } }), { adminClient: admin.adminClient });
   assertEquals(gen.status, 413);
-  assertEquals((await gen.json()).maxBytes, 32 * 1024);
+  assertEquals((await gen.json()).maxBytes, 256 * 1024);
   const derive = await handleEngineGenerate(post({ op: 'derive', seed: cases.seeds[0], config: cases.config, pins: { pad } }), { adminClient: makeAdmin().adminClient });
   assert(derive.status !== 413, `derive answered ${derive.status}`);
   const huge = await handleEngineGenerate(post({ op: 'derive', seed: 's', config: { pad: 'x'.repeat(1024 * 1024) } }), { adminClient: makeAdmin().adminClient });
   assertEquals(huge.status, 413);
+});
+
+scopedEnv.test('GENERATE: a wizard-sized body (the chair\'s measured 39,940-byte exclude-all) is served, not 413 (remote-path R4)', async () => {
+  await loadGenerationLawPayloads();
+  const toggles: Record<string, unknown> = {};
+  for (let i = 0; toggles && JSON.stringify(toggles).length < 40_000; i += 1) {
+    toggles[`metropolis::Economy::Institution number ${i}`] = { allow: false, require: false, forceExclude: true };
+  }
+  const config = { ...cases.config, _institutionToggles: toggles };
+  const res = await handleEngineGenerate(post({ seed: cases.seeds[0], config }), { adminClient: makeAdmin().adminClient });
+  assertEquals(res.status, 200);
 });
 
 scopedEnv.test('OPS: an unknown op and a non-object pins bag are refused 400', async () => {
@@ -360,11 +371,13 @@ scopedEnv.test('REGEN: three seeds — each section\'s parts are the bundle\'s o
   }
 });
 
-scopedEnv.test('REGEN: no seed — the pass mints one and reports it; a record over 32 KB rides the 1 MiB cap', async () => {
+scopedEnv.test('REGEN: no seed — the pass mints one and reports it; a record over the generate cap rides the 1 MiB cap', async () => {
   await loadGenerationLawPayloads();
   const config = birthConfig(cases.config);
   const settlement = JSON.parse(JSON.stringify(generateSettlementPipeline(config, null, { seed: cases.seeds[0] })));
-  assert(new TextEncoder().encode(JSON.stringify(settlement)).length > 32 * 1024, 'the record is over the generate cap');
+  // Carried past the generate cap (256 KB) by a key the pass does not read.
+  settlement._capPad = 'x'.repeat(300 * 1024);
+  assert(new TextEncoder().encode(JSON.stringify(settlement)).length > 256 * 1024, 'the record is over the generate cap');
   const res = await handleEngineGenerate(post({ op: 'regenSection', section: 'history', settlement, config: settlement.config }), { adminClient: makeAdmin().adminClient });
   assertEquals(res.status, 200);
   const reply = await res.json();
