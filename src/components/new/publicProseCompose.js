@@ -38,9 +38,10 @@ import { POWER_BLOC_RUNGS, governanceAccountRead, powerDeskRead, powerDeskReadin
 import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
 import { isPhantomRecord } from '../../domain/edit/phantoms.js';
+import { publicVeiledRecordOf } from '../../domain/display/publicSafe.js';
 
 
-/** @typedef {readonly [string, (settlement: any, publicDossier: boolean) => any]} PublicProseSite */
+/** @typedef {readonly [string, (settlement: any, publicDossier: boolean, ctx: {veiledRecord: any}) => any]} PublicProseSite */
 
 /**
  * THE SITES: one entry per desk call site whose public branch reads `publicProseOf(r, site)`.
@@ -84,19 +85,19 @@ export const PUBLIC_PROSE_SITES = Object.freeze(/** @type {PublicProseSite[]} */
   // owner's own classification; a veiled block is dropped on the way out (galleryVeil.js).
   // The criminal lens also carries the card's organized-ring note as drawn by the owner's seed
   // (`ringNote`, VEIL-FIX R3): the shared record has no seed to draw its vantage from.
-  ...DEFENSE_LENSES.map((lens) => /** @type {const} */ ([`defense:${lens}`, (/** @type {any} */ s, /** @type {boolean} */ publicDossier) => {
+  ...DEFENSE_LENSES.map((lens) => /** @type {const} */ ([`defense:${lens}`, (/** @type {any} */ s, /** @type {boolean} */ publicDossier, /** @type {{veiledRecord: any}} */ ctx) => {
     const csd = criminalStructureOf(s);
-    const drawn = defenseDeskRead(s, { publicDossier, playerView: true, tier: s?.tier, crimStructure: csd?.key ?? null })[lens];
+    const drawn = defenseDeskRead(s, { publicDossier, playerView: true, tier: s?.tier, crimStructure: csd?.key ?? null, veiledRecord: ctx?.veiledRecord })[lens];
     return lens === 'criminal' && drawn && typeof csd?.note === 'string' ? { ...drawn, ringNote: csd.note } : drawn;
   }])),
   // THE POWER DESK (powerDeskRead.js is its one caller). The blocs (DS-POW-7) read the played
   // world's politics ledger: campaign-only, so their rungs are never shipped (owner-only).
-  ['power:desk', (s, publicDossier) => withoutRungs(powerDeskRead(s, {
-    publicDossier, playerView: true, readings: powerDeskReadings(s, { playerView: true }),
+  ['power:desk', (s, publicDossier, ctx) => withoutRungs(powerDeskRead(s, {
+    publicDossier, playerView: true, readings: powerDeskReadings(s, { playerView: true }), veiledRecord: ctx?.veiledRecord,
   }), POWER_BLOC_RUNGS)],
   // The governance account paragraph (OWNER-WORDS-DOSSIER item 3), as text: the player view,
   // drawn from the record after the public strip (VEIL-FIX R2).
-  ['power:governance', (s, publicDossier) => governanceAccountRead(s, { publicDossier, playerView: true })],
+  ['power:governance', (s, publicDossier, ctx) => governanceAccountRead(s, { publicDossier, playerView: true, veiledRecord: ctx?.veiledRecord })],
   // DS-POW-3, one line per faction with a ladder, as a list (a faction's NAME never becomes a
   // key, so the projection's key denylist cannot strip one).
   ['power:ladder', (s, publicDossier) => {
@@ -147,9 +148,14 @@ export function composePublicProse(settlement, { publicDossier = false } = {}) {
   if (isPhantomRecord(settlement)) return null;
   /** @type {Record<string, unknown>} */
   const blocks = {};
+  // R12 (VEIL-FIX, 2026-11-10): the record after the public strip, built ONCE per compose and handed
+  // to the three audience-gated readers (the governance account, the criminal lens, the power desk).
+  // Not built for a caller that says publicDossier: every site then prints what the save shipped.
+  /** @type {{veiledRecord: any}} */
+  const ctx = { veiledRecord: publicDossier ? null : publicVeiledRecordOf(settlement) };
   for (const [site, draw] of PUBLIC_PROSE_SITES) {
     try {
-      const shipped = shippedProseOf(draw(settlement, publicDossier));
+      const shipped = shippedProseOf(draw(settlement, publicDossier, ctx));
       if (shipped !== null && shipped !== undefined) blocks[site] = shipped;
     } catch {
       // The site prints SILENT on the public page; the owner's own view is untouched.

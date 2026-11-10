@@ -58,7 +58,8 @@ function publicLens(settlement, lens) {
  * Read the defense desk's eight lenses for one settlement, gated.
  * @param {object|null|undefined} settlement
  * @param {{publicDossier?: boolean, playerView?: boolean, tier?: unknown,
- *   crimStructure?: string|null, crimeVeiled?: boolean}} [options]
+ *   crimStructure?: string|null, crimeVeiled?: boolean, veiledRecord?: any}} [options]
+ *   `veiledRecord` is the stripped record the caller already built (the composer, once per save; R12).
  *   `crimStructure` is the structure key the host's card renders from (`deskHostArgs.js ::
  *   criminalStructureOf`), handed in so the sentence and the card read one classification.
  * @returns {Readonly<Record<string, Readonly<Record<string, any>>>>}
@@ -86,7 +87,7 @@ export function defenseDeskRead(settlement, options = {}) {
   // rung says nothing in ANY state (the 'none' sentence reveals the state too); the DM's view
   // reads the record itself.
   const criminal = options.crimeVeiled ? SILENT_DEFENSE_DESK.criminal
-    : options.publicDossier ? publicLens(r, 'criminal') : defenseCriminalProse(options.playerView ? publicVeiledRecordOf(r) : r, options.crimStructure ?? null, deskOpts);
+    : options.publicDossier ? publicLens(r, 'criminal') : defenseCriminalProse(options.playerView ? (options.veiledRecord ?? publicVeiledRecordOf(r)) : r, options.crimStructure ?? null, deskOpts);
   return Object.freeze({ state, threat, forces, posture, status, wall, supporting, criminal });
 }
 

@@ -57,8 +57,9 @@ function publicPowerDesk(settlement) {
 /**
  * Read the power desk for one settlement, gated.
  * @param {object|null|undefined} settlement
- * @param {{publicDossier?: boolean, playerView?: boolean, readings?: object}} [options]
- *   `readings` is the host's own derivation (`deskHostArgs.js :: powerDeskReadings`).
+ * @param {{publicDossier?: boolean, playerView?: boolean, readings?: object, veiledRecord?: any}} [options]
+ *   `readings` is the host's own derivation (`deskHostArgs.js :: powerDeskReadings`); `veiledRecord`
+ *   the stripped record the caller already built (R12).
  * @returns {Readonly<Record<string, any>>}
  */
 export function powerDeskRead(settlement, options = {}) {
@@ -69,7 +70,7 @@ export function powerDeskRead(settlement, options = {}) {
   // R2, 2026-11-10): the player view draws from the record AFTER the public strip
   // (publicSafe.js :: publicVeiledRecordOf), so not even a silent DS-POW-6 rung's presence says
   // the hall's hold; the seed stays the owner's.
-  return options.publicDossier ? publicPowerDesk(s) : powerStateProse(options.playerView ? publicVeiledRecordOf(s) : s, options.readings ?? {}, {
+  return options.publicDossier ? publicPowerDesk(s) : powerStateProse(options.playerView ? (options.veiledRecord ?? publicVeiledRecordOf(s)) : s, options.readings ?? {}, {
     seed: String(s._seed ?? s.id ?? ''), audience: options.playerView ? 'player' : 'dm', tierNoun: tierNounFor(s.tier),
   });
 }
@@ -141,7 +142,9 @@ export function powerDeskReadings(settlement, opts = {}) {
  * (publicSafe.js :: publicVeiledRecordOf) — no capture or corrupted tie, no tie carrying a
  * capture state, no hidden power, no veiled face's title or role — so the paragraph says nothing
  * the sanitizer strips; the DM's own view reads the record itself.
- * @param {any} settlement @param {{publicDossier?: boolean, playerView?: boolean}} [options]
+ * @param {any} settlement
+ * @param {{publicDossier?: boolean, playerView?: boolean, veiledRecord?: any}} [options] `veiledRecord`:
+ *   the stripped record the caller already built (the composer builds it once per save, R12)
  * @returns {{text?: string}|null}
  */
 export function governanceAccountRead(settlement, options = {}) {
@@ -150,7 +153,7 @@ export function governanceAccountRead(settlement, options = {}) {
     const shipped = publicProseOf(settlement, 'power:governance');
     return shipped && typeof shipped === 'object' && !Array.isArray(shipped) ? /** @type {{text?: string}} */ (shipped) : null;
   }
-  const record = options.playerView ? publicVeiledRecordOf(settlement) : settlement;
+  const record = options.playerView ? (options.veiledRecord ?? publicVeiledRecordOf(settlement)) : settlement;
   const account = governanceAccountOf(record, { primaryStress: resolvePrimaryStress(governanceStressTypesOf(record)) });
   return account?.text ? { text: account.text } : null;
 }
