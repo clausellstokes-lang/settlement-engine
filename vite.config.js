@@ -396,6 +396,23 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   '/src/domain/resolveCulture.js',
   '/src/domain/roles/roleClass.js',
   '/src/domain/worldPulse/warFrontReads.js',
+  // FIRSTPAINT-4 (BOOT-TIP, 2026-11-10; the chair's bisect: the tip BOOTS at merge point 21 e870d7ca9 and FAILS
+  // from point 22 ac1442a3d, SW-6 CRISIS-SURFACES — bootSmoke "a CYCLE of 3 chunks", "Cannot access 'Jt' before
+  // initialization" at coherence-lazy; first paint 2,767,345 B raw vs the 1,104,215 budget). THE SAME PREMISE, THE
+  // SAME MEASUREMENT, ONE MEMBER. Point 22 gave crisis/crisisHooks.js (pinned here, but generator-reached, so the
+  // derivation walks through it before the .delete()) a static import of display/governanceAccount.js
+  // (pluralPowerName): the derived ESD went 86 -> 87 after excisions (raw 156 -> 157), governanceAccount.js the ONE
+  // member joined, and it rode EAGER engine-core. Its long-standing import of dossier/powerStrata.js (rulingChainOf,
+  // pinned here) then became THE ONLY engine-core -> coherence-lazy module edge on Rollup's resolved graph, and the
+  // pre-existing coherence-lazy -> data-lazy -> engine-core edges closed the cycle. MEASURED on Rollup's own resolved
+  // module graph (getModuleInfo().importedIds): NO module of the true first-paint graph (main.jsx, lookups.js,
+  // kernel/**) reaches it; its six static importers are all lazy (crisisHooks [here], summary/tonightSheet,
+  // dossier/hookLines, components/new/powerDeskRead, utils/generateSettlementPDF, pdf/sections/PowerStructure) and
+  // NONE stays in engine-core (the closed set); its one outward edge, powerStrata.js, already rides this chunk, so
+  // coherence-lazy gains no edge. Pinned here, never left unpinned (FP-G11).
+  // @guarded-by tests/architecture/engineCoreLazyEdge.test.js (the source-graph walker: no engine-core module
+  //   statically imports a lazily pinned one — red at ecadf531a, green at point 21) and tests/build/bootSmoke.test.js.
+  '/src/domain/display/governanceAccount.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
