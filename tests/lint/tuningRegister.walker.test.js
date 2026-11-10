@@ -114,7 +114,11 @@ const CEILINGS = Object.freeze({
   // row (725b62eb5). This counts ATTRIBUTED rows, so it moves with them.
   // RAISED 9 -> 10 (2026-11-08, MERGE-WAVE at the W4 PEOPLE merge point), the LANDING-2 idiom: W4 PEOPLE's
   // warFaithStateProse.js bare decimal 0.5 (86a30fdf2). This counts ATTRIBUTED rows, so it moves with them.
-  DECLARED_GROWTH_CEILING: 10,
+  // RAISED 10 -> 12 (2026-11-10, GREEN-TIP, the cloud chair's STOP-2 ruling, ODQ §934.105, the chair's act) on the condition
+  // proved in b46048140's body: the move is a RELOCATION and the estate's totals are conserved — foodLand.js's 7 bare
+  // decimals and 4 named constants are exactly foodGenerator.js's 48 -> 41 and its four constants, the same literals.
+  // Two ATTRIBUTED rows, each "relocation, net zero"; the six population ceilings above are not touched.
+  DECLARED_GROWTH_CEILING: 12,
 });
 
 const register = loadTuningRegister(ROOT);

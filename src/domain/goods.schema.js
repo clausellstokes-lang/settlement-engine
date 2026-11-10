@@ -117,7 +117,7 @@
  * R | l | none            | member  | src/generators/economy/nativeEconomicInputs.js
  * R | l | identity+chains | surface | src/generators/economy/tradeGoods.js
  * R | l | chains          | surface | src/generators/economy/viability.js
- * R | l | none            | member  | src/generators/foodGenerator.js
+ * R | l | none            | member  | src/generators/foodLand.js
  * R | l | none            | member  | src/generators/generationCoherence.js
  * R | l | none            | member  | src/generators/historyGenerator.js
  * R | l | chains          | surface | src/generators/institutionProbability.js
