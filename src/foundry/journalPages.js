@@ -141,15 +141,11 @@ function statePage(vm) {
  * in, not read off `vm.raw`: the two are the same object, but a composer handed `vm.raw` reads
  * as fed by two record shapes, which hides its reads from the observed-shape instrument.
  */
-function tonightPage(settlement, vm) {
+function tonightPage(settlement) {
   const sheet = composeTonightSheet(settlement);
-  // ⛔ THE KEEP-ON RULE FOR HOOKS (B4): the Plot Hooks page keeps each hook's text; this page prints
-  // the hook's title and where to read it. A hook with no title, or one the Plot Hooks page does
-  // not list, keeps its text here. (The heading it sits under is not named: those headings are
-  // SW-8's labels, one of them the retired word.)
-  const hookLine = (h) => (h.source && plotHooksListed(vm, h.text)
-    ? `- **${esc(h.source)}**: in full on the Plot Hooks page.`
-    : `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`);
+  // THE OWNER'S VETO 3 (no connective lines): each hook prints its own text here, as it does on the
+  // Plot Hooks page; no line points from one page to the other.
+  const hookLine = (h) => `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`;
   const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
   return md(
     sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
@@ -221,12 +217,6 @@ function notableNpcPage(n) {
 
 /** The hook groups a reader knows, for the catalogue's category keys. */
 const HOOK_GROUP_WORDS = Object.freeze({ npc: 'People', npcs: 'People', faction: 'Powers', factions: 'Powers' }); // SW-8: the hook group "Faction" (map B3)
-
-/** True when the Plot Hooks page lists a hook with this text. */
-function plotHooksListed(vm, text) {
-  const k = (t) => String(t ?? '').replace(/\s+/g, ' ').trim().replace(/[.!?]+$/, '').toLowerCase();
-  return !!k(text) && (vm?.hooks?.all || []).some((h) => k(hookText(h.hook)) === k(text));
-}
 
 function plotHooksPage(vm) {
   const all = vm.hooks.all || [];
@@ -521,7 +511,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
 
   if (inc('overview'))            push('Overview', overviewPage(vm, { historyPrinted: inc('historyFounding') }));
   if (inc('systemState'))         push('Settlement State', statePage(vm));
-  if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(settlement, vm));
+  if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(settlement));
   if (inc('tonightAtTheTable'))   push(CRISIS_PAGE_COPY.tab, crisisJournalPage(settlement));
   if (inc('npcQuickRef'))         push('NPC Quick Reference', npcQuickRefPage(vm));
   if (inc('notableNpcs')) {
