@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "083eeaad55bebcf33d75b9b1ec6400de39eb670a",
-  "measuredBy": "STYLE-2-MERGE-4 (session_01FbPLbbT4fy8G4nTurhnGb3)",
+  "measuredAtSha": "4e22e55050b55d79c80673de867ad9634abbda2b",
+  "measuredBy": "VEIL-FIX (session_01FbPLbfJU78yBa3MZ2iZbK7)",
   "date": "2026-11-10",
-  "note": "STYLE-2-MERGE point 24, the SW-8 RENAME-POWERS merge (b951ce7da, merge 56f3b2df7): re-frozen at the merged tip; the titles SW-8 added (its R7 and R8)",
-  "files": 3173,
+  "note": "VEIL-FIX, 2026-11-10: two new test files (tests/components/publicProseVeilInvariance.test.js, R2; tests/components/defenseRingNoteProjection.test.jsx, R3) and the R1, R4, R5, R6 and R7 pins added to existing files; re-frozen on the lane tip",
+  "files": 3175,
   "parked": 394,
-  "credited": 2779,
-  "titles": 28962,
-  "suiteTitles": 7821
+  "credited": 2781,
+  "titles": 28982,
+  "suiteTitles": 7827
 }
