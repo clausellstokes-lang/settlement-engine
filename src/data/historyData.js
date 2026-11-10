@@ -1305,6 +1305,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Former resistance',
       'New generation wanting to move on',
     ],
+    // URBAN-FIX D-1: the tension's words when its own event sits on the timeline older than 80 years (historyGenerator.js :: tensionByMemory)
+    byMemory: { dated: { description: 'The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] },
+      // URBAN-FIX D-1b: the words when the timeline holds no occupation at all: the template's own lasting effects, naming no past event
+      unanchored: { description: 'Collaborator and resistance families still keep to separate quarters, and old property seizures remain legally unresolved', factions: ['Collaborator families', 'Resistance families', 'Those who want it forgotten'] } },
     lastingEffects: [
       'Collaborator and resistance families still keep to separate quarters',
       'Wartime property seizures remain legally unresolved',
@@ -1428,7 +1432,7 @@ export const HISTORICAL_EVENTS_DATA = [
   {
     type: 'great_fire',
     description: 'A fire that began in {location} consumed {building_type} across whole districts before it could be checked',
-    factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'],
+    factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'], byMemory: { dated: { factions: ['Families still seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
     plotHooks: [
       'The fire spared exactly the houses one power wanted cleared, and nobody believes it was chance',
       'A confession was extracted from a scapegoat; the real arsonist still lives in town',
@@ -1495,6 +1499,7 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'tyranny',
     description: 'A single figure seized power through {method} and ruled without check for a time, and the memory still shapes who is trusted with authority',
     factions: ['Old loyalists', 'Those who suffered under the regime', 'Beneficiaries who kept their gains'],
+    byMemory: { dated: { factions: ['Loyalist families', 'Families the regime wronged', "Families who kept the regime's gains"] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
     plotHooks: [
       "The tyrant's private records survived, and they implicate respectable families in the worst of it",
       'A fortune the regime confiscated was never returned, and the rightful heirs have surfaced',

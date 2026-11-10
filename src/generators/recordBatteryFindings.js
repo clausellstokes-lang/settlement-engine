@@ -8,7 +8,7 @@
  * rng, no clock; the same record gives the same findings. Measured cost on 120 generations:
  * 8.9–9.3% of generation time (the chair's line is 10%).
  */
-import { RECORD_BATTERY_CHECKS, recordBattery } from '../domain/coherence/recordBattery.js';
+import { RECORD_BATTERY_CHECKS, recordBattery } from '../domain/coherence/recordBattery.js'; import { foodwaysLineOf } from '../domain/foodways.js'; // URBAN-FIX C-1: one line
 
 /** Keys whose strings are not the dossier's own words: the request, the receipt, the trace. */
 const RECORD_TEXT_SKIPPED_KEYS = new Set([
@@ -32,6 +32,9 @@ export function recordTextSurfaces(settlement) {
   const rest = [];
   const town = new Set();
   const seen = new Set();
+  // URBAN-FIX C-1: the path `culturalIdentity.foodways` is SUPERSEDED where the food record carries its line
+  // (the line the page prints; a record stored before the one-home cure kept the culture's raw sentence there).
+  const superseded = foodwaysLineOf(settlement) ? settlement.culturalIdentity : null;
   const walk = (value) => {
     if (typeof value === 'string') {
       if (!/\s/.test(value.trim())) return;
@@ -46,7 +49,7 @@ export function recordTextSurfaces(settlement) {
       return;
     }
     for (const [key, entry] of Object.entries(value)) {
-      if (key.startsWith('_') || RECORD_TEXT_SKIPPED_KEYS.has(key)) continue;
+      if (key.startsWith('_') || RECORD_TEXT_SKIPPED_KEYS.has(key) || (key === 'foodways' && value === superseded)) continue;
       walk(entry);
     }
   };

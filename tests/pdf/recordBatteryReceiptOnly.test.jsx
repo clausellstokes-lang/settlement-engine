@@ -35,7 +35,10 @@ function pdfLeaves(node, out, depth = 0) {
   return out;
 }
 
-const SEEDS = [3, 4];
+// RE-KEYED BY IDENTITY (URBAN-FIX B-P1, 1b3436acd): soak1k-4 is a city whose ONE finding was the Shadows
+// District's "Old town or slums", the instrument's false positive the licence row cured; its receipt now passes.
+// The pin needs a needs-review record whose finding no urban cure touches: soak1k-21 (battery.defense-words, twice).
+const SEEDS = [3, 21];
 const ROWS = [];
 beforeAll(async () => {
   await ensureLaws();
