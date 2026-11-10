@@ -18,6 +18,7 @@ import { render, cleanup } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { NAV } from '../../src/lib/routes.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import HowToUse, { NAV_DESCRIPTIONS, DOSSIER_TAB_GROUPS, SHARE_ENTRY_SENTENCES } from '../../src/components/HowToUse.jsx';
 import { TAB_GROUPS } from '../../src/components/OutputContainer.jsx';
 
@@ -51,8 +52,13 @@ describe('ABOUT-CURRENT — the Navigation list is the header', () => {
 
   it('the Guide no longer names the retired seat "Settlements tab"', () => {
     const { container } = render(<HowToUse />);
-    expect(container.textContent).not.toMatch(/Settlements tab/);
-    expect(read('src/components/HowToUse.jsx')).not.toMatch(/Settlements tab|Settlements<\/strong> tab/);
+    const library = NAV.find((n) => n.id === 'settlements').label;
+    // The anchor is the seat's own label in the same sentence frame: the page demonstrably
+    // renders "<label> tab", so the old name's absence is a removal, not a vanished page.
+    expectAbsentWithAnchor(container.textContent, 'Settlements tab', `${library} tab`, 'rendered Guide');
+    const src = read('src/components/HowToUse.jsx');
+    expectAbsentWithAnchor(src, 'Settlements tab', '{LIBRARY} tab', 'Guide source');
+    expectAbsentWithAnchor(src, 'Settlements</strong> tab', '{LIBRARY}</strong> tab', 'Guide source, bold');
   });
 });
 
@@ -88,7 +94,14 @@ describe('ABOUT-CURRENT — the sharing entry claims only what the share panel s
   });
 
   it('the entry never says what players cannot see', () => {
-    for (const sentence of SHARE_ENTRY_SENTENCES) expect(sentence).not.toMatch(/cannot|can't|never see/i);
+    expect(SHARE_ENTRY_SENTENCES.length, 'the entry has sentences to read').toBeGreaterThan(0);
+    for (const sentence of SHARE_ENTRY_SENTENCES) {
+      const words = sentence.toLowerCase();
+      for (const banned of ['cannot', "can't", 'never see']) {
+        // The anchor is the sentence's own first word: the sentence is present and read.
+        expectAbsentWithAnchor(words, banned, words.split(' ')[0], 'share entry sentence');
+      }
+    }
   });
 });
 
@@ -98,6 +111,6 @@ describe('ABOUT-CURRENT A4 — the FAQ states the Founders\' Hall count from its
     const { FOUNDER_SEATS } = await import('../../src/config/tierFacts.js');
     expect(t('accountFaq.founderLifetime.a', { seats: FOUNDER_SEATS })).toContain(`holds ${FOUNDER_SEATS} chairs`);
     expect(read('src/components/account/AccountFAQ.jsx')).toMatch(/ANSWER_VARS = Object\.freeze\(\{ seats: FOUNDER_SEATS \}\)/);
-    expect(read('src/copy/en.js')).not.toMatch(/Hall holds thirty chairs/);
+    expectAbsentWithAnchor(read('src/copy/en.js'), 'Hall holds thirty chairs', 'Hall holds {seats} chairs', 'founder answer');
   });
 });
