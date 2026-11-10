@@ -120,7 +120,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 2 fewer items (450 → 448).
     // 448 → 441 at MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE OVER THE INTEGRATION BRANCH (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-3-car3.json): car 3's organizedCrime 0.05 re-deals the agents and the year's news (e9070d614, 450 -> 443 on its lane); 2 moved, +45/-52 keys against record 2's post-state.
     // 7 fewer items (448 → 441).
-    expect(Object.keys(manifest)).toHaveLength(441);
+    // 441 → 442 at STYLE-2-MERGE RECORD 24b, THE SW-8 RENAME-POWERS MERGE'S HERALD ACT (ODQ §934.105, the chair's ruling of
+    // 2026-11-10 00:4x; record docs/shift-records/2026-11-10-style-2-merge-24b-sw8-herald.json): SW-8 C1's minted-name id
+    // cascade re-deals the fresh campaign — one item more on rr-fresh-full|1 (439 → 440), 5 section rows gone, 6 new.
+    expect(Object.keys(manifest)).toHaveLength(442);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
