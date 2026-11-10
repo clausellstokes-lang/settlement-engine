@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 214,
+      "dated": 215,
       "sha-pin": 2,
       "tree": 171
     },
@@ -488,7 +488,8 @@
     "_rosterGrowth2026-11-09-style-2-rename-powers": "ONE document JOINED the roster by being BORN into it (seat SW-8 RENAME-POWERS, a child of the chair session session_01FbPLbejcfwX5nii12VM673, session session_01FbPLbbaKV7YuaHy2mo9ouG, on lane/style-2-rename-powers-2026-11-09 cut from MERGE-TRAIN's final tip bd07005b9): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-RENAME-POWERS-2026-11-09.md, the lane's record (the first seat's rule-14 hand-back), born dated. The bump is from the tip's measured 189; the chair reconciles at STYLE-2-MERGE by measuring the walker's count at the merged tree.",
     "_rosterGrowth2026-11-09-style-2-merge-record-24": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): `tree` 169 -> 170, docs/shift-records/2026-11-10-style-2-merge-24-sw8.json, record 24, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-sw-8": "THE UNION AT THE SW-8 MERGE (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): both sides' notes kept; `dated` 213 -> 214 (docs/chair/2026-11-09/STYLE-2-RENAME-POWERS-2026-11-09.md, the lane's record, born dated).",
-    "_rosterGrowth2026-11-09-style-2-merge-record-24b": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): `tree` 170 -> 171, docs/shift-records/2026-11-10-style-2-merge-24b-sw8-herald.json, record 24b, born into the tree class; measured once by this walker; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-record-24b": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): `tree` 170 -> 171, docs/shift-records/2026-11-10-style-2-merge-24b-sw8-herald.json, record 24b, born into the tree class; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-sw9b-b": "ONE document JOINED the roster by being BORN into it (seat SW-9b-B, a child of the chair session session_01FbPLbejcfwX5nii12VM673, session session_01FbPLbfPH4xFQP9Fj7BkTtA, on lane/style-2-sw9b-b-2026-11-09 cut from the integration line at 58aae07fb): `dated` 214 -> 215, docs/chair/2026-11-09/STYLE-2-SW9B-B-2026-11-09.md, the lane's record, born dated. The bump is from the tip's measured 214; SW-9b-A's record (its own bump, merged as point 26) is reconciled by the merge seat measuring the walker at the merged tree."
   },
   "rows": []
 }
