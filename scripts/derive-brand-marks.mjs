@@ -118,7 +118,7 @@
  *   derives into a temp dir, REFUSES if what it produced is not what is on disk, and
  *   writes only tests/fixtures/brand-derivatives.mint.json. It never touches public/,
  *   and it is never a side effect of a plain run or of --out.
- *   On the minting stack without a Mac: .github/workflows/brand-mint.yml (macos-14) runs it.
+ *   On the minting stack without a Mac: .github/workflows/brand-mint.yml runs it.
  *
  * @enforced-by tests/build/brandDerivatives.test.js
  */
