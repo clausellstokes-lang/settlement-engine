@@ -9,10 +9,12 @@
 # WHY IT RUNS ON macOS. The record names darwin/arm64 as its minting stack, and `--record`
 # refuses to write unless the bytes it derives equal the committed art. sharp ships a
 # different prebuilt libvips per platform, so on linux/x64 the fresh bytes differ and the
-# door (correctly) refuses. `macos-14` is an arm64 runner: the record's own stack, so the
-# art never moves and the minting platform never changes. The job prints the host
-# signature first; the reader checks it against the record's `mintedOn` before trusting
-# anything below it.
+# door (correctly) refuses. `macos-latest` is an arm64 runner: the record's own stack, so
+# the art never moves and the minting platform never changes. On this account `macos-14`
+# was cancelled twice with no runner assigned and no reason readable (runs 42760980917 and
+# 42761658250); `macos-latest` ran. The label does not decide the stack: the door's
+# signature check does. The job prints the host signature first; the reader checks it
+# against the record's `mintedOn` before trusting anything below it.
 #
 # IT WRITES NOTHING BACK. contents: read, no secrets, no push. It prints the record
 # between two marker lines (base64) and uploads it as an artifact; a session reads the
