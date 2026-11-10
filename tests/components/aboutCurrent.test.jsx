@@ -9,13 +9,16 @@
  * dossier regrouped its tabs. These pins bind each list to the source the product
  * renders from, so the Guide cannot fall behind again silently:
  *   1. the Navigation seats are the route table's NAV, in its order, each described;
+ *   2. the dossier tab list is OutputContainer.jsx :: TAB_GROUPS, both directions, with
+ *      each label the dossier's own;
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { NAV } from '../../src/lib/routes.js';
-import HowToUse, { NAV_DESCRIPTIONS } from '../../src/components/HowToUse.jsx';
+import HowToUse, { NAV_DESCRIPTIONS, DOSSIER_TAB_GROUPS } from '../../src/components/HowToUse.jsx';
+import { TAB_GROUPS } from '../../src/components/OutputContainer.jsx';
 
 afterEach(cleanup);
 
@@ -49,5 +52,26 @@ describe('ABOUT-CURRENT — the Navigation list is the header', () => {
     const { container } = render(<HowToUse />);
     expect(container.textContent).not.toMatch(/Settlements tab/);
     expect(read('src/components/HowToUse.jsx')).not.toMatch(/Settlements tab|Settlements<\/strong> tab/);
+  });
+});
+
+describe('ABOUT-CURRENT — the dossier tab list is the dossier', () => {
+  it('groups and tabs equal TAB_GROUPS exactly, in order (both directions)', () => {
+    expect(DOSSIER_TAB_GROUPS.map((g) => g.group)).toEqual(Object.keys(TAB_GROUPS));
+    for (const g of DOSSIER_TAB_GROUPS) {
+      expect(g.label, g.group).toBe(TAB_GROUPS[g.group].label);
+      expect(g.tabs.map(([id]) => id), g.group).toEqual([...TAB_GROUPS[g.group].tabs]);
+    }
+  });
+
+  it("each label is the dossier's own label for that tab id", () => {
+    const src = read('src/components/OutputContainer.jsx');
+    for (const g of DOSSIER_TAB_GROUPS) {
+      for (const [id, label] of g.tabs) {
+        const esc = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp(`id:\\s*'${id}',\\s*label:\\s*'${esc}'`);
+        expect(re.test(src), `${id} → '${label}' is not the dossier's label`).toBe(true);
+      }
+    }
   });
 });

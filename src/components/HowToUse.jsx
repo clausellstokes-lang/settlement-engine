@@ -379,6 +379,55 @@ export const NAV_DESCRIPTIONS = Object.freeze({
   'about-what-this-is': 'What this is (the trust page) and this Practical Guide.',
 });
 
+// THE DOSSIER'S TABS, as the dossier groups them (ABOUT-CURRENT A2, 2026-11-10).
+// The order and grouping are OutputContainer.jsx :: TAB_GROUPS (Summary / Systems /
+// World / Notes); each label is the tab's own label there. The list is NOT imported
+// from that module (it would drag the whole dossier into this lazy page's chunk), so
+// tests/components/aboutCurrent.test.jsx pins both directions against TAB_GROUPS and
+// the labels against the dossier's source. Every description is the Guide's own
+// pre-existing line for that tab; a tab the Guide never described carries its label
+// alone until a line is ruled (the record's STOP list names each one).
+export const DOSSIER_TAB_GROUPS = Object.freeze([
+  { group: 'summary', label: 'Summary', tabs: [
+    ['overview', 'Overview', 'The town at a glance: identity, status tags, any active crisis, and who governs.'],
+    ['crisis', 'Crisis', null],
+    ['substrate', 'Foundations', 'What is holding and what is strained, reading by reading.'],
+    ['plot_hooks', 'Plot Hooks', 'Every plot hook in the dossier, grouped by the page it comes from.'],
+    ['dm_compass', 'Guidance', null],
+  ]},
+  { group: 'systems', label: 'Systems', tabs: [
+    ['institutions', 'Institutions', 'Every institution, house by house, with the services each provides.'],
+    ['services', 'Services', 'Available services and goods by category, with availability indicators.'],
+    ['economics', 'Economics', 'Full export/import profile, prosperity analysis, supply chains, trade dependencies.'],
+    ['resources', 'Resources', 'Nearby natural resources and their economic implications.'],
+    ['power', 'Power', 'Government type, the leading power, the people\'s standing, political dynamics.'],
+    ['defense', 'Defense', 'Walls, garrison, threat response, fortification profile.'],
+    ['magic', 'Magic', null],
+    ['viability', 'Outlook', 'Economic stress analysis. What is working, what is fragile, what will break.'],
+  ]},
+  { group: 'world', label: 'World', tabs: [
+    ['npcs', 'NPCs', 'All named characters with personality, goals, secrets, and plot hooks.'],
+    ['relationships', 'Relationships', 'Ties between people, active conflicts, and linked settlements with their contacts.'],
+    ['daily_life', 'Daily Life', 'Wealth level, diet, crime, safety. What it feels like to live here.'],
+    ['traditions', 'Traditions', null],
+    ['history', 'History', 'Generated historical events that explain current conditions.'],
+    ['rumors', 'Rumors & News', null],
+    ['war', 'War', null],
+    ['faith', 'Faith', null],
+  ]},
+  { group: 'notes', label: 'Notes', tabs: [
+    ['dm_notes', 'DM Notes', null],
+    ['ai_notes', 'AI Notes', null],
+    ['chronicle', 'Chronicle', null],
+    ['versions', 'Versions', null],
+  ]},
+]);
+
+const DOSSIER_TAB_SECTIONS = DOSSIER_TAB_GROUPS.map((g) => ({
+  heading: `Settlement Detail Tabs: ${g.label}`,
+  rows: g.tabs.map(([, label, desc]) => [label, desc]),
+}));
+
 function Reference() {
   const sections = [
     // ABOUT-CURRENT A2 (2026-11-10): the seats RENDER from the route table's NAV (the
@@ -394,22 +443,7 @@ function Reference() {
       // settlement is open, so there is nothing stable for an index to point at.
       ['DM Screen', <>At-the-table view of whatever you have open: the Chronicler&rsquo;s Letter, the dossier at a glance, the session ledger, and the auspice, with a player-safe face you can turn around. <a href="/screen" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Open the DM Screen</a>.</>],
     ]},
-    { heading: 'Settlement Detail Tabs', rows: [
-      ['Overview','The town at a glance: identity, status tags, any active crisis, and who governs.'],
-      ['Foundations','What is holding and what is strained, reading by reading.'],
-      ['Plot Hooks','Every plot hook in the dossier, grouped by the page it comes from.'],
-      ['Daily Life','Wealth level, diet, crime, safety. What it feels like to live here.'],
-      ['Economics','Full export/import profile, prosperity analysis, supply chains, trade dependencies.'],
-      ['Services','Available services and goods by category, with availability indicators.'],
-      ['Institutions','Every institution, house by house, with the services each provides.'],
-      ['Power','Government type, the leading power, the people\'s standing, political dynamics.'],
-      ['Defense','Walls, garrison, threat response, fortification profile.'],
-      ['NPCs','All named characters with personality, goals, secrets, and plot hooks.'],
-      ['History','Generated historical events that explain current conditions.'],
-      ['Resources','Nearby natural resources and their economic implications.'],
-      ['Outlook','Economic stress analysis. What is working, what is fragile, what will break.'],
-      ['Relationships','Ties between people, active conflicts, and linked settlements with their contacts.'],
-    ]},
+    ...DOSSIER_TAB_SECTIONS,
     { heading: 'Settlement Workflow', rows: [
       ['Campaigns',`With Cartographer, create named campaign folders in the ${LIBRARY} tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.`],
       ['Link Neighbour',`With Cartographer: in the ${LIBRARY} tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).`],
