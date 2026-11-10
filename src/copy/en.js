@@ -1806,7 +1806,7 @@ export const en = Object.freeze({
     },
     cancelAnytime: {
       q: 'Can I cancel my subscription?',
-      a: 'Yes. Open the Manage Subscription link in your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
+      a: 'Yes. Open Account and use Manage subscription in the Subscription panel; it opens your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
     },
     refundWindow: {
       q: 'Do you offer refunds?',
