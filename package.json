@@ -6,7 +6,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "prebuild": "node scripts/generate-sitemap.mjs",
-    "build": "vite build",
+    "build": "node --max-old-space-size=4096 node_modules/vite/bin/vite.js build",
     "postbuild": "node scripts/prerender-routes.mjs",
     "validate:data": "node scripts/find-duplicate-keys.js && node scripts/generate-institution-service-keys.mjs --check",
     "gen:institution-service-keys": "node scripts/generate-institution-service-keys.mjs",
