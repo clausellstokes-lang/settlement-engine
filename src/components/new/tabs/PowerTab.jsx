@@ -241,7 +241,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
-  const governanceAccount = governanceAccountRead(s, { publicDossier }); // `power:governance` on a shared page
+  const governanceAccount = governanceAccountRead(s, { publicDossier, playerView }); // `power:governance` on a shared page; the player view reads the stripped record (VEIL-FIX R2)
   const drawnReading  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.legitimacyReading);
   const drawnCapture  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.captureReading);
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);

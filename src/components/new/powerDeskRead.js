@@ -23,6 +23,7 @@
 import { powerStateProse, powerLadderRung } from '../../domain/display/stateProse/powerStateProse.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { publicProseOf } from '../../domain/display/publicProse.js';
+import { publicVeiledRecordOf } from '../../domain/display/publicSafe.js';
 import { coupContenders, coupRiskLabel } from '../../domain/rulingPowerCoup.js';
 import { seatLensOf } from '../../domain/spatial/cohesionWeave.js'; // SW-7 (STYLE-2 B7): DS-POW-5 reads the seat
 import { settlementBlocs as politicsBlocsOf } from '../../domain/display/politicsRead.js';
@@ -64,8 +65,11 @@ export function powerDeskRead(settlement, options = {}) {
   if (!settlement) return SILENT_POWER_DESK;
   const s = /** @type {any} */ (settlement);
   // ⛔ THE GATE IS IN THE READ'S OWN STATEMENT (ARM 3). The audience is load-bearing (DS-POW-6's
-  // capture pools are all `dm-only`), so it is stated, never defaulted.
-  return options.publicDossier ? publicPowerDesk(s) : powerStateProse(s, options.readings ?? {}, {
+  // capture pools are all `dm-only`), so it is stated, never defaulted. AUDIENCE-GATED (VEIL-FIX
+  // R2, 2026-11-10): the player view draws from the record AFTER the public strip
+  // (publicSafe.js :: publicVeiledRecordOf), so not even a silent DS-POW-6 rung's presence says
+  // the hall's hold; the seed stays the owner's.
+  return options.publicDossier ? publicPowerDesk(s) : powerStateProse(options.playerView ? publicVeiledRecordOf(s) : s, options.readings ?? {}, {
     seed: String(s._seed ?? s.id ?? ''), audience: options.playerView ? 'player' : 'dm', tierNoun: tierNounFor(s.tier),
   });
 }
@@ -131,8 +135,13 @@ export function powerDeskReadings(settlement, opts = {}) {
 
 /**
  * The governance account paragraph (OWNER-WORDS-DOSSIER item 3), gated: on a shared page, the
- * paragraph the owner's view read off the record, shipped as `power:governance` (`{text}`).
- * @param {any} settlement @param {{publicDossier?: boolean}} [options]
+ * paragraph the owner's player view read off the record, shipped as `power:governance` (`{text}`).
+ * AUDIENCE-GATED (VEIL-FIX R2, the chair's ruling of 2026-11-10 on the pre-deploy review's
+ * finding 2; 207's law): the PLAYER view reads the record AFTER the public strip
+ * (publicSafe.js :: publicVeiledRecordOf) — no capture or corrupted tie, no tie carrying a
+ * capture state, no hidden power, no veiled face's title or role — so the paragraph says nothing
+ * the sanitizer strips; the DM's own view reads the record itself.
+ * @param {any} settlement @param {{publicDossier?: boolean, playerView?: boolean}} [options]
  * @returns {{text?: string}|null}
  */
 export function governanceAccountRead(settlement, options = {}) {
@@ -141,7 +150,8 @@ export function governanceAccountRead(settlement, options = {}) {
     const shipped = publicProseOf(settlement, 'power:governance');
     return shipped && typeof shipped === 'object' && !Array.isArray(shipped) ? /** @type {{text?: string}} */ (shipped) : null;
   }
-  const account = governanceAccountOf(settlement, { primaryStress: resolvePrimaryStress(governanceStressTypesOf(settlement)) });
+  const record = options.playerView ? publicVeiledRecordOf(settlement) : settlement;
+  const account = governanceAccountOf(record, { primaryStress: resolvePrimaryStress(governanceStressTypesOf(record)) });
   return account?.text ? { text: account.text } : null;
 }
 

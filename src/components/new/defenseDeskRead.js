@@ -22,6 +22,7 @@ import {
 } from '../../domain/display/stateProse/defenseStateProse.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { publicProseOf } from '../../domain/display/publicProse.js';
+import { publicVeiledRecordOf } from '../../domain/display/publicSafe.js';
 
 /**
  * THE SILENT LENSES, written out (the gate never depends on a desk staying silent over garbage).
@@ -80,7 +81,11 @@ export function defenseDeskRead(settlement, options = {}) {
   const status = options.publicDossier ? publicLens(r, 'status') : defenseMilitaryStatusProse(r, deskOpts);
   const wall = options.publicDossier ? publicLens(r, 'wall') : defenseWallRationaleProse(r, deskOpts);
   const supporting = options.publicDossier ? publicLens(r, 'supporting') : defenseSupportingProse(r, deskOpts);
+  // AUDIENCE-GATED (VEIL-FIX R2, 2026-11-10; 207's law, the hall-capture state is DM truth): the
+  // player view draws the criminal lens from the record AFTER the public strip, so its capture
+  // rung says nothing in ANY state (the 'none' sentence reveals the state too); the DM's view
+  // reads the record itself.
   const criminal = options.crimeVeiled ? SILENT_DEFENSE_DESK.criminal
-    : options.publicDossier ? publicLens(r, 'criminal') : defenseCriminalProse(r, options.crimStructure ?? null, deskOpts);
+    : options.publicDossier ? publicLens(r, 'criminal') : defenseCriminalProse(options.playerView ? publicVeiledRecordOf(r) : r, options.crimStructure ?? null, deskOpts);
   return Object.freeze({ state, threat, forces, posture, status, wall, supporting, criminal });
 }

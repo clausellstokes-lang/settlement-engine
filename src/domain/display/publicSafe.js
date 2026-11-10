@@ -415,6 +415,35 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
 }
 
 /**
+ * THE OWNER'S RECORD AFTER THE ROOT PASS (VEIL-FIX R2, the chair's ruling of 2026-11-10 on the
+ * pre-deploy review's finding 2): a clone of the WHOLE record (seed and all, so a reader draws
+ * exactly as on the owner's record) with `publicVeilPass`'s strip applied — the hall-capture
+ * state, its seeds and every capture or corrupted tie gone, the hidden powers' rows gone and
+ * their names masked, a veiled face's title off its ties — and, the review's second path, a
+ * veiled face's own `title` and `role` off its card (NPC_HOUSE_NAMED_KEYS, as the projection's
+ * card strip). An AUDIENCE-gated reader (the governance account, the defense desk's capture lens)
+ * draws from this in the player view and on a public dossier, so the sentences it says carry
+ * nothing the sanitizer strips; the DM's own view reads the record itself.
+ * @param {unknown} settlement @returns {Record<string, unknown>|null}
+ */
+export function publicVeiledRecordOf(settlement) {
+  if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return null;
+  const src = /** @type {Record<string, unknown>} */ (settlement);
+  const veiledIds = veiledCardIdsOf(src);
+  const out = publicVeilPass(/** @type {Record<string, unknown>} */ (deepClone(src)), hiddenPowerNamesOf(src), veiledIds);
+  if (veiledIds.length && Array.isArray(out.npcs)) {
+    const veiled = new Set(veiledIds);
+    out.npcs = out.npcs.map((card) => {
+      if (!card || typeof card !== 'object' || Array.isArray(card) || !veiled.has(String(/** @type {Record<string, unknown>} */ (card).id))) return card;
+      const bare = { .../** @type {Record<string, unknown>} */ (card) };
+      for (const key of NPC_HOUSE_NAMED_KEYS) delete bare[key];
+      return bare;
+    });
+  }
+  return out;
+}
+
+/**
  * Project a settlement to its public-safe form. Strips the recursive denylist,
  * drops top-level DM blocks explicitly, and reduces NPCs to a public allowlist
  * (no goal / secret / plotHooks / relationships).

@@ -90,8 +90,9 @@ export const PUBLIC_PROSE_SITES = Object.freeze(/** @type {PublicProseSite[]} */
   ['power:desk', (s, publicDossier) => withoutRungs(powerDeskRead(s, {
     publicDossier, playerView: true, readings: powerDeskReadings(s, { playerView: true }),
   }), POWER_BLOC_RUNGS)],
-  // The governance account paragraph (OWNER-WORDS-DOSSIER item 3), as text.
-  ['power:governance', (s, publicDossier) => governanceAccountRead(s, { publicDossier })],
+  // The governance account paragraph (OWNER-WORDS-DOSSIER item 3), as text: the player view,
+  // drawn from the record after the public strip (VEIL-FIX R2).
+  ['power:governance', (s, publicDossier) => governanceAccountRead(s, { publicDossier, playerView: true })],
   // DS-POW-3, one line per faction with a ladder, as a list (a faction's NAME never becomes a
   // key, so the projection's key denylist cannot strip one).
   ['power:ladder', (s, publicDossier) => {
