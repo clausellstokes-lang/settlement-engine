@@ -22,6 +22,7 @@ import {
 } from '../../domain/display/stateProse/defenseStateProse.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { publicProseOf } from '../../domain/display/publicProse.js';
+import { publicVeiledRecordOf } from '../../domain/display/publicSafe.js';
 
 /**
  * THE SILENT LENSES, written out (the gate never depends on a desk staying silent over garbage).
@@ -57,7 +58,8 @@ function publicLens(settlement, lens) {
  * Read the defense desk's eight lenses for one settlement, gated.
  * @param {object|null|undefined} settlement
  * @param {{publicDossier?: boolean, playerView?: boolean, tier?: unknown,
- *   crimStructure?: string|null, crimeVeiled?: boolean}} [options]
+ *   crimStructure?: string|null, crimeVeiled?: boolean, veiledRecord?: any}} [options]
+ *   `veiledRecord` is the stripped record the caller already built (the composer, once per save; R12).
  *   `crimStructure` is the structure key the host's card renders from (`deskHostArgs.js ::
  *   criminalStructureOf`), handed in so the sentence and the card read one classification.
  * @returns {Readonly<Record<string, Readonly<Record<string, any>>>>}
@@ -80,7 +82,29 @@ export function defenseDeskRead(settlement, options = {}) {
   const status = options.publicDossier ? publicLens(r, 'status') : defenseMilitaryStatusProse(r, deskOpts);
   const wall = options.publicDossier ? publicLens(r, 'wall') : defenseWallRationaleProse(r, deskOpts);
   const supporting = options.publicDossier ? publicLens(r, 'supporting') : defenseSupportingProse(r, deskOpts);
+  // AUDIENCE-GATED (VEIL-FIX R2, 2026-11-10; 207's law, the hall-capture state is DM truth): the
+  // player view draws the criminal lens from the record AFTER the public strip, so its capture
+  // rung says nothing in ANY state (the 'none' sentence reveals the state too); the DM's view
+  // reads the record itself.
   const criminal = options.crimeVeiled ? SILENT_DEFENSE_DESK.criminal
-    : options.publicDossier ? publicLens(r, 'criminal') : defenseCriminalProse(r, options.crimStructure ?? null, deskOpts);
+    : options.publicDossier ? publicLens(r, 'criminal') : defenseCriminalProse(options.playerView ? (options.veiledRecord ?? publicVeiledRecordOf(r)) : r, options.crimStructure ?? null, deskOpts);
   return Object.freeze({ state, threat, forces, posture, status, wall, supporting, criminal });
+}
+
+/**
+ * THE ORGANIZED-RING NOTE, gated (VEIL-FIX R3, the chair's ruling of 2026-11-10; SW-B7b's idiom).
+ * SW-B5 FRAMES picks the note's vantage by the record's `_seed` (defenseDisplay.js ::
+ * withRingVantage), which the shared record does not carry; so the owner's save ships the drawn
+ * note with the projection under `defense:criminal` (`ringNote`), and a shared page prints that
+ * line when present and renders the classification's own note locally, as before, when absent.
+ * The owner's view reads its own classification.
+ * @param {any} settlement @param {{note?: unknown}|null|undefined} csd the card's classification
+ *   (`deskHostArgs.js :: criminalStructureOf`)
+ * @param {{publicDossier?: boolean}} [options]
+ * @returns {string|null}
+ */
+export function criminalRingNoteRead(settlement, csd, options = {}) {
+  const local = typeof csd?.note === 'string' ? csd.note : null;
+  const shipped = options.publicDossier ? /** @type {any} */ (publicProseOf(settlement, 'defense:criminal'))?.ringNote : null;
+  return typeof shipped === 'string' && shipped ? shipped : local;
 }

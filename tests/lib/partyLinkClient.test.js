@@ -8,6 +8,11 @@
  *     execution in tests/security/galleryUnlisted.pglite.test.js.
  * (f) THE OWNER IS TOLD: the read's is_owner travels as `isOwner` (the redirect's
  *     server word; false when absent).
+ * R1  THE PARTY LINK NEVER WIDENS (VEIL-FIX, the chair's ruling R1 of 2026-11-10 on the
+ *     pre-deploy review's finding 1): the unlisted branch is ALWAYS the player view — no
+ *     full mode by gallery_share_dm, no per-member revealDm restore — even if a server
+ *     (or an old one) sends DM content. The pin that asserted "the Reveal DM switch
+ *     travels" is INVERTED with R1 as its cause.
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
@@ -72,13 +77,41 @@ describe('the party link honours the veil on the client (row (d))', () => {
     expect(printed).not.toContain('sly-and-grasping'); // anchored: the two toContain lines above prove `printed` is the live card text; the veil reached the players
   });
 
-  it('the DM\'s "Reveal DM content" switch travels: the players\' page renders as the gallery copy does', async () => {
+  // INVERTED by R1 (was: "the DM's Reveal DM content switch travels: shareDm true")
+  it('R1: the DM\'s "Reveal DM content" switch never reaches the players: player view, DM fields stripped', async () => {
+    const dmFull = {
+      ...SETTLEMENT, secrets: ['the vault'], plotHooks: ['a hook'],
+      npcs: SETTLEMENT.npcs.map((n) => ({ ...n, secret: `${n.id}-secret-text`, goals: [`${n.id}-goal-text`] })),
+    };
     serve({ galleryRow: null, unlistedRow: {
       id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
-      dossier: SETTLEMENT, gallery_share_dm: true, gallery_member_overrides: {},
+      dossier: dmFull, gallery_share_dm: true, gallery_member_overrides: {},
     } });
     const linked = await fetchPublicDossier('u'.repeat(42));
-    expect(linked.shareDm).toBe(true);
+    expect(linked.shareDm).toBe(false);
+    const printed = JSON.stringify(linked.settlement);
+    expect(printed).toContain('Ada Thorne');
+    expect(printed).not.toContain('the vault'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+    expect(printed).not.toContain('a hook'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+    expect(printed).not.toContain('secret-text'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+    expect(printed).not.toContain('goal-text'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+  });
+
+  it('R1: a revealDm member override never widens the players\' page', async () => {
+    const dmFull = {
+      ...SETTLEMENT,
+      npcs: SETTLEMENT.npcs.map((n) => ({ ...n, secret: `${n.id}-secret-text`, goals: [`${n.id}-goal-text`] })),
+    };
+    serve({ galleryRow: null, unlistedRow: {
+      id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
+      dossier: dmFull, gallery_share_dm: false, gallery_member_overrides: { 'npc_1': { revealDm: true } },
+    } });
+    const linked = await fetchPublicDossier('u'.repeat(42));
+    expect(linked.shareDm).toBe(false);
+    const printed = JSON.stringify(linked.settlement);
+    expect(printed).toContain('Ada Thorne');
+    expect(printed).not.toContain('npc_1-secret-text'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+    expect(printed).not.toContain('npc_1-goal-text'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
   });
 });
 
@@ -89,5 +122,55 @@ describe('the owner bit travels to the client (row (f))', () => {
     expect((await fetchPublicDossier('u'.repeat(42))).isOwner).toBe(true);
     serve({ galleryRow: null, unlistedRow: row });
     expect((await fetchPublicDossier('u'.repeat(42))).isOwner).toBe(false);
+  });
+});
+
+// R4 (VEIL-FIX, the chair's ruling of 2026-11-10 on the review's finding 3, its second gap): THE VEIL
+// FAILS CLOSED ON THE LINK. Only the gallery export writes the `$veil` marker, so a town shared by link
+// alone carried no veil at all. With no marker the party link projects the DEFAULT veil — the same one
+// the export writes (galleryVeil.js :: writeShareVeil with no deltas), from that one builder. The
+// gallery read keeps an unmarked listed page as it is (pinned below) until the owner rules on the
+// already-listed pre-veil pages (the lane's STOP of 2026-11-10).
+describe('R4: the party link fails closed to the default veil', () => {
+  const WITH_HOUSEKEEPING = { ...SETTLEMENT, coherenceNotes: ['housekeeping-note-text'] };
+  it('a link-only town that was never exported hides what the default hides', async () => {
+    serve({ galleryRow: null, unlistedRow: {
+      id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
+      dossier: WITH_HOUSEKEEPING, gallery_member_overrides: {},
+    } });
+    const linked = await fetchPublicDossier('u'.repeat(42));
+    const printed = JSON.stringify(linked.settlement);
+    expect(printed).toContain('Ada Thorne');
+    expect(printed).not.toContain('housekeeping-note-text'); // anchored: the live card is asserted present on the line above
+    // the same projection the export's own marker produces
+    serve({ galleryRow: null, unlistedRow: {
+      id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
+      dossier: WITH_HOUSEKEEPING, gallery_member_overrides: writeShareVeil({}, []),
+    } });
+    expect((await fetchPublicDossier('u'.repeat(42))).settlement).toEqual(linked.settlement);
+  });
+  it('an unmarked LISTED gallery page is unchanged (the owner rules on the pre-veil pages)', async () => {
+    serve({ galleryRow: {
+      id: 'set-1', public_slug: 'highkeep01', name: 'Highkeep', tier: 'city', data: WITH_HOUSEKEEPING,
+      gallery_share_dm: false, gallery_member_overrides: {},
+    } });
+    const listed = await fetchPublicDossier('highkeep01');
+    expect(JSON.stringify(listed.settlement)).toContain('housekeeping-note-text');
+  });
+});
+
+// R8 (VEIL-FIX re-review, 2026-11-10): the link's response carries the veil marker and its mode but
+// never the export's frozen snapshot (208 strips $veil.snapshot). The client's link branch then
+// renders the LIVE sanitized dossier — pinned here (it held before R8; this is the read R8 relies on).
+describe('R8: a snapshot-mode share with its snapshot stripped renders the live dossier on the link', () => {
+  it('mode snapshot, no snapshot: the live dossier renders and no frozen copy is claimed', async () => {
+    serve({ galleryRow: null, unlistedRow: {
+      id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
+      dossier: SETTLEMENT, gallery_member_overrides: { $veil: { v: 1, deltas: [], mode: 'snapshot', at: '2026-11-10T00:00:00Z' } },
+    } });
+    const linked = await fetchPublicDossier('u'.repeat(42));
+    expect(JSON.stringify(linked.settlement)).toContain('Ada Thorne');
+    expect(JSON.stringify(linked.settlement)).toContain('patient-with-apprentices');
+    expect(linked.snapshotAt).toBeNull();
   });
 });

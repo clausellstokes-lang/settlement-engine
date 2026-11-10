@@ -308,6 +308,9 @@ export const HIDDEN_POWER_MASK = 'an unseen interest';
 /** @param {unknown} v @returns {unknown[]} */
 const arrayOf = (v) => (Array.isArray(v) ? v : []);
 
+/** A character outside the blank class (JavaScript's \s set, spelled out as the SQL spells it). */
+const NON_BLANK_NAME = /[^ \t\n\r\f\v\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]/;
+
 /**
  * The names of the record's hidden powers (each row's `faction`), from its own stamp.
  * @param {Record<string, unknown>} settlement @returns {string[]}
@@ -320,7 +323,9 @@ function hiddenPowerNamesOf(settlement) {
     if (!row || typeof row !== 'object' || Array.isArray(row)) continue;
     const power = /** @type {Record<string, unknown>} */ (row);
     if (power.hidden !== true) continue;
-    if (typeof power.faction === 'string' && power.faction) names.add(power.faction);
+    // R5/R11 (2026-11-10): a blank name masks nothing. Blank is ONE explicit class, character for
+    // character the SQL's (a no-break space is blank on both sides).
+    if (typeof power.faction === 'string' && NON_BLANK_NAME.test(power.faction)) names.add(power.faction);
   }
   return [...names];
 }
@@ -341,20 +346,38 @@ function veiledCardIdsOf(settlement) {
 const maskText = (text, names) => names.reduce((t, name) => t.split(name).join(HIDDEN_POWER_MASK), text);
 
 /**
- * Every string — value AND key, as the SQL's text-level replace reaches both — with each hidden
- * name masked.
- * @param {unknown} value @param {string[]} names @returns {unknown}
+ * Every string VALUE, at any depth, with each hidden name masked — never a key, and never the
+ * settlement's own top-level `name` (R5, the pre-deploy review of 2026-11-10, finding 4: the SQL's
+ * mask was a replace over the JSON text, which raised on a name matching text outside a string and
+ * rewrote a key equal to a name; the SQL in 210 now walks the string leaves, and this is its twin).
+ * @param {unknown} value @param {string[]} names @param {boolean} [isRoot] @returns {unknown}
  */
-function maskHiddenNames(value, names) {
+function maskHiddenNames(value, names, isRoot = false) {
   if (typeof value === 'string') return maskText(value, names);
   if (Array.isArray(value)) return value.map((v) => maskHiddenNames(v, names));
   if (value && typeof value === 'object') {
     /** @type {Record<string, unknown>} */
     const out = {};
-    for (const [k, v] of Object.entries(value)) out[maskText(k, names)] = maskHiddenNames(v, names);
+    for (const [k, v] of Object.entries(value)) {
+      // R11 (2026-11-10): an `id` at any depth and the prose format tag are never text to mask.
+      const kept = (isRoot && k === 'name') || (k === 'id' && typeof v === 'string');
+      out[k] = kept ? v : (isRoot && k === 'publicProse' ? maskProse(v, names) : maskHiddenNames(v, names));
+    }
     return out;
   }
   return value;
+}
+
+/**
+ * The projection's prose masked, its format tag (`v`) kept.
+ * @param {unknown} prose @param {string[]} names @returns {unknown}
+ */
+function maskProse(prose, names) {
+  if (!prose || typeof prose !== 'object' || Array.isArray(prose)) return maskHiddenNames(prose, names);
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const [k, v] of Object.entries(prose)) out[k] = k === 'v' && typeof v === 'string' ? v : maskHiddenNames(v, names);
+  return out;
 }
 
 /**
@@ -387,12 +410,14 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
     if (Array.isArray(ps.factions)) ps.factions = ps.factions.map((/** @type {Record<string, unknown>} */ f) => { if (!isRow(f) || !Object.hasOwn(f, 'captureState')) return f; const { captureState: _drop, ...rest } = f; return rest; });
     if (Array.isArray(ps.factionRelationships)) ps.factionRelationships = ps.factionRelationships.filter((/** @type {Record<string, unknown>} */ r) => !(isRow(r) && (Object.hasOwn(r, 'captureState') || r.type === 'corrupted')));
   }
-  if (!hiddenNames.length) return pub;
   /** @type {Set<unknown>} */
   const hidden = new Set(hiddenNames);
+  // R5 (2026-11-10): a row stamped hidden leaves whatever its `faction` (missing or empty included),
+  // so the removal sits OUTSIDE the name check, as in 210.
   if (isRow(ps) && Array.isArray(ps.factions)) {
     ps.factions = ps.factions.filter((f) => !(isRow(f) && (f.hidden === true || hidden.has(f.faction))));
   }
+  if (!hiddenNames.length) return pub;
   /** @param {unknown[]} list a conflicts array of the public JSON (the caller checked Array.isArray) */
   const dropConflicts = (list) => list.filter((c) => !(isRow(c) && Array.isArray(c.parties) && c.parties.some((p) => hidden.has(p))));
   if (Array.isArray(pub.conflicts)) pub.conflicts = dropConflicts(pub.conflicts);
@@ -406,7 +431,36 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
     if (Array.isArray(pub[key])) pub[key] = pub[key].map(dropStakes);
     else if (isRow(pub[key])) pub[key] = dropStakes(pub[key]);
   }
-  return /** @type {Record<string, unknown>} */ (maskHiddenNames(pub, hiddenNames));
+  return /** @type {Record<string, unknown>} */ (maskHiddenNames(pub, hiddenNames, true));
+}
+
+/**
+ * THE OWNER'S RECORD AFTER THE ROOT PASS (VEIL-FIX R2, the chair's ruling of 2026-11-10 on the
+ * pre-deploy review's finding 2): a clone of the WHOLE record (seed and all, so a reader draws
+ * exactly as on the owner's record) with `publicVeilPass`'s strip applied — the hall-capture
+ * state, its seeds and every capture or corrupted tie gone, the hidden powers' rows gone and
+ * their names masked, a veiled face's title off its ties — and, the review's second path, a
+ * veiled face's own `title` and `role` off its card (NPC_HOUSE_NAMED_KEYS, as the projection's
+ * card strip). An AUDIENCE-gated reader (the governance account, the defense desk's capture lens)
+ * draws from this in the player view and on a public dossier, so the sentences it says carry
+ * nothing the sanitizer strips; the DM's own view reads the record itself.
+ * @param {unknown} settlement @returns {Record<string, unknown>|null}
+ */
+export function publicVeiledRecordOf(settlement) {
+  if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return null;
+  const src = /** @type {Record<string, unknown>} */ (settlement);
+  const veiledIds = veiledCardIdsOf(src);
+  const out = publicVeilPass(/** @type {Record<string, unknown>} */ (deepClone(src)), hiddenPowerNamesOf(src), veiledIds);
+  if (veiledIds.length && Array.isArray(out.npcs)) {
+    const veiled = new Set(veiledIds);
+    out.npcs = out.npcs.map((card) => {
+      if (!card || typeof card !== 'object' || Array.isArray(card) || !veiled.has(String(/** @type {Record<string, unknown>} */ (card).id))) return card;
+      const bare = { .../** @type {Record<string, unknown>} */ (card) };
+      for (const key of NPC_HOUSE_NAMED_KEYS) delete bare[key];
+      return bare;
+    });
+  }
+  return out;
 }
 
 /**

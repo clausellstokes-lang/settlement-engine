@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 224,
+      "dated": 225,
       "sha-pin": 2,
       "tree": 173
     },
@@ -510,7 +510,9 @@
     "_rosterGrowth2026-11-10-build-heap": "ONE document JOINED the roster by being BORN into it (seat BOOT-TIP reopened for B7, session session_01FbPLbdzUMFRegg4kskMYG6, on lane/build-heap-2026-11-10 cut from ebf6fb0b6): `dated` 218 -> 219, docs/chair/2026-11-10/BUILD-HEAP-2026-11-10.md, the lane's record, born dated; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-10-style-2-merge-build-heap": "THE UNION AT THE BUILD-HEAP MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 222 -> 223 (docs/chair/2026-11-10/BUILD-HEAP-2026-11-10.md, the lane's record, born dated).",
     "_rosterGrowth2026-11-10-brand-mint": "ONE document JOINED the roster by being BORN into it (BRAND-MINT, a cure seat, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbebsq8291ignDriipi; on lane/brand-mint-2026-11-10 cut from ef3142ff3): `dated` 219 -> 220, docs/chair/2026-11-10/BRAND-MINT-2026-11-10.md, the lane's record (the premise's proof, the macOS mint runs and their signature, the mint record's diff entry by entry), born dated. A GROWTH that hid nothing; pastEofCitationsExcluded unchanged at 382.",
-    "_rosterGrowth2026-11-10-style-2-merge-brand-mint": "THE UNION AT THE BRAND-MINT MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 223 -> 224 (docs/chair/2026-11-10/BRAND-MINT-2026-11-10.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-10-style-2-merge-brand-mint": "THE UNION AT THE BRAND-MINT MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 223 -> 224 (docs/chair/2026-11-10/BRAND-MINT-2026-11-10.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-10-veil-fix": "ONE document JOINED the roster by being BORN into it (VEIL-FIX, the pre-deploy security fix seat of 2026-11-10): `dated` 214 -> 215, docs/chair/2026-11-10/VEIL-FIX-2026-11-10.md, the lane's record, born dated; nothing changed class, and it cites code by symbol (0 path:line citations past EOF).",
+    "_rosterGrowth2026-11-10-style-2-merge-veil-fix": "THE UNION AT THE VEIL-FIX MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 224 -> 225 (docs/chair/2026-11-10/VEIL-FIX-2026-11-10.md, the lane's record, born dated)."
   },
   "rows": []
 }

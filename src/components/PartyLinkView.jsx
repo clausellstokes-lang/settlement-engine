@@ -7,8 +7,9 @@
  * it's not for showing publicly and for voting." So this page carries NO social
  * chrome — no votes, comments, reactions, view count, share-to-social, Import or
  * "more by this creator". It keeps the title, the author's name, the dossier in
- * the player view (PublicDossierView: player view unless the DM revealed DM
- * content, the veil applied upstream in sanitizeDossier) and a quiet Report link
+ * the player view (PublicDossierView, ALWAYS the player view — the party link never
+ * widens, VEIL-FIX R1 of 2026-11-10: "Reveal DM content" is the gallery's, never the
+ * players'; the veil applied upstream in sanitizeDossier) and a quiet Report link
  * (moderation covers unlisted rows, migration 171).
  *
  * GalleryDetail routes here when `dossier.unlisted` is set; the gallery's own
@@ -28,6 +29,8 @@ export default function PartyLinkView({ dossier, auth, onReport, reportBusy, sta
   const mobile = useIsMobile();
   const title = dossier?.name || dossier?.settlement?.name || t('gallery.untitled');
   const author = typeof dossier?.authorName === 'string' && dossier.authorName.trim() ? dossier.authorName.trim() : null;
+  // R1: the players' page never enters DM mode, whatever the dossier says.
+  const playerDossier = React.useMemo(() => (dossier ? { ...dossier, shareDm: false } : dossier), [dossier]);
   return (
     <div data-testid="party-link-view" style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
       {statusLine}
@@ -42,7 +45,7 @@ export default function PartyLinkView({ dossier, auth, onReport, reportBusy, sta
       </header>
       <section style={{ minWidth: 0 }}>
         <React.Suspense fallback={<p style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Opening the dossier…</p>}>
-          <PublicDossierView dossier={dossier} showHeader={false} />
+          <PublicDossierView dossier={playerDossier} showHeader={false} />
         </React.Suspense>
       </section>
       <footer style={{ display: 'flex', justifyContent: 'flex-end' }}>

@@ -12,7 +12,7 @@ import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands
 import { statusCase } from '../labelLadder.js';
 // THE DEFENSE DESK IS REACHED THROUGH ITS ONE CALLER (ARM 2), shared with the public prose
 // composer (SW-B7b): the reader owns all eight reads, each gated in its own statement.
-import { defenseDeskRead } from '../defenseDeskRead.js';
+import { defenseDeskRead, criminalRingNoteRead } from '../defenseDeskRead.js';
 import { criminalStructureOf } from '../deskHostArgs.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
@@ -189,6 +189,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // Criminal structure classification (shared with the PDF viewModel, and handed to the desk)
   const csd = criminalStructureOf(r, crimeVeiled);
   const crimStructure = csd?.key || null;
+  // The organized-ring note as the owner's seed drew it (VEIL-FIX R3): projected on a shared page.
+  const csdNote = criminalRingNoteRead(r, csd, { publicDossier });
   // THE DEFENSE DESK, its eight lenses read ONCE through the one caller. THE PUBLIC BRANCH
   // (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lenses the owner's player view
   // drew here, shipped at the owner's save (`defense:<lens>`); an unstamped record is SILENT at
@@ -472,7 +474,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                 shouting here — rung 3 cases it at the mount, as the readiness badge above
                 already does. The PDF's line says the same word the same way. */}
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:csd.color,marginBottom:3}}>Criminal structure: {statusCase(csd.label)}</div>
-            <p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csdNote}</p>
           </div>}
 
           {/* T2-20's static "No organized criminal infrastructure detected…" line LEFT (SW-B7b,

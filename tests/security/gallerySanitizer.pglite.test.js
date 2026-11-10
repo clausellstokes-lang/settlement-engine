@@ -549,3 +549,207 @@ describe('206 (second seat) — the hidden power is not public, and a veiled fac
     for (const n of born) expect(n.id).toMatch(/^npc_veiled_[0-9a-f]{16}(_\d+)?$/);
   }, 120_000);
 });
+
+// ── R5 (VEIL-FIX, the pre-deploy review of 2026-11-10, finding 4): THE NAME MASK WALKS THE DOCUMENT ──
+// 206/207/210 masked a hidden power's name by `replace` over the JSON TEXT, so a name that matched
+// text outside a string raised (`true`, `null`, `1`, a single space, `{`) and a name equal to a key
+// rewrote the key (`name`, `id`, `text`); a substring hit the settlement's own name; and a row
+// stamped hidden with no `faction` stayed public, its description and all. 210 (the last restatement)
+// now masks inside string VALUES only by walking the document — never a key, never the settlement's
+// own top-level `name` — skips an empty or whitespace-only name, and removes every row stamped
+// hidden whatever its `faction`. The client twin (publicSafe.js :: publicVeilPass) holds field for field.
+describe('R5 — the hidden-power name mask walks string values (pglite + the client twin)', () => {
+  let mdb;
+  const sanitizeM = async (obj) =>
+    (await mdb.query(`select public._gallery_sanitize_public_json($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;
+  const town = (hiddenName, extra = {}) => ({
+    name: 'Riverbend', id: 'set-1', tier: 'town',
+    powerStructure: {
+      factions: [
+        { faction: 'Elder Council', power: 40, seats: 11, vacancy: null, isGoverning: true, desc: `They watch ${hiddenName} closely.` },
+        { faction: hiddenName, power: 15, hidden: true, desc: 'Its presence is not known to the settlement.' },
+      ],
+    },
+    thesis: { text: `A town where ${hiddenName} is whispered of.`, id: 'thesis-1', name: 'the thesis' },
+    ...extra,
+  });
+
+  beforeAll(async () => {
+    mdb = new PGlite();
+    await mdb.exec('create schema if not exists public;');
+    await mdb.exec(SANITIZER.sql);
+  }, PGLITE_BOOT_TIMEOUT_MS);
+
+  const clientOf = async (rec) => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    return JSON.parse(JSON.stringify(toPublicSafe(rec)));
+  };
+
+  it('a hidden power named "true", "null", "1", " " or "{" never raises; the row leaves; client == server', async () => {
+    for (const raising of ['true', 'null', '1', ' ', '{']) {
+      const rec = town(raising);
+      const out = await sanitizeM(rec);
+      expect(out.name, raising).toBe('Riverbend');
+      expect(out.powerStructure.factions.map((f) => f.faction), raising).toEqual(['Elder Council']);
+      // anchored: the open row is asserted present on the line above
+      expect(JSON.stringify(out), raising).not.toContain('Its presence is not known');
+      expect(await clientOf(rec), raising).toEqual(out);
+    }
+  });
+
+  it('a whitespace-only name masks nothing (the space between words survives)', async () => {
+    const out = await sanitizeM(town(' '));
+    expect(out.thesis.text).toBe('A town where   is whispered of.');
+    expect(out.powerStructure.factions[0].desc).toBe('They watch   closely.');
+  });
+
+  it('a non-raising name is still masked inside string values', async () => {
+    const out = await sanitizeM(town('true'));
+    expect(out.thesis.text).toBe('A town where an unseen interest is whispered of.');
+  });
+
+  it('a hidden power named "name", "id" or "text" rewrites no key; client == server', async () => {
+    for (const keyName of ['name', 'id', 'text']) {
+      const rec = town(keyName);
+      const out = await sanitizeM(rec);
+      expect(out.name, keyName).toBe('Riverbend');
+      expect(out.id, keyName).toBe('set-1');
+      expect(Object.keys(out.thesis).sort(), keyName).toEqual(['id', 'name', 'text']);
+      expect(Object.keys(out), keyName).not.toContain('an unseen interest'); // anchored: out.name and out.id are asserted present just above
+      expect(out.thesis.text, keyName).toBe('A town where an unseen interest is whispered of.');
+      expect(await clientOf(rec), keyName).toEqual(out);
+    }
+  });
+
+  it("the settlement's own top-level name is never masked (a hidden power that is its substring); client == server", async () => {
+    const rec = town('The Independent Bloc', { name: 'The Independent Bloc Hall' });
+    const out = await sanitizeM(rec);
+    expect(out.name).toBe('The Independent Bloc Hall');
+    expect(out.thesis.text).toBe('A town where an unseen interest is whispered of.');
+    expect(await clientOf(rec)).toEqual(out);
+  });
+
+  it('a row stamped hidden with a missing or empty faction leaves the public JSON; client == server', async () => {
+    const rec = {
+      name: 'Riverbend',
+      powerStructure: { factions: [
+        { faction: 'Elder Council', power: 40 },
+        { hidden: true, power: 9, desc: 'A faceless ring nobody names.' },
+        { faction: '', hidden: true, power: 7, desc: 'An empty-named cell.' },
+      ] },
+    };
+    const out = await sanitizeM(rec);
+    expect(out.powerStructure.factions).toEqual([{ faction: 'Elder Council', power: 40 }]);
+    expect(await clientOf(rec)).toEqual(out);
+  });
+});
+
+// R10 (VEIL-FIX re-review, 2026-11-10): EVERY RESTATEMENT SOUND ALONE. 206, 207 and 210 each restate
+// _gallery_sanitize_public_json; a push that stops between files leaves whichever body applied last, and
+// a rollback re-applies an earlier one. So each file's OWN body carries the corrected mask and hidden-row
+// removal: the R5 cases run on all three bodies, each in its own database.
+describe('R10 — the corrected mask in every restatement (206, 207 and 210, each body alone)', () => {
+  const BODIES = ['206_public_card_veil_bit.sql', '207_public_hall_capture_veil.sql', '210_public_prose_text_projection.sql'];
+  /** @type {Record<string, PGlite>} */
+  const dbs = {};
+  beforeAll(async () => {
+    const re = /^create\s+or\s+replace\s+function\s+public\._gallery_sanitize_public_json\b[\s\S]*?\$\$;/igm;
+    for (const file of BODIES) {
+      const src = readFileSync(resolve(MIGRATIONS_DIR, file), 'utf-8');
+      const body = src.match(re);
+      if (!body || body.length !== 1) throw new Error(`${file}: expected exactly one sanitizer body`);
+      dbs[file] = new PGlite();
+      await dbs[file].exec('create schema if not exists public;');
+      await dbs[file].exec(body[0]);
+    }
+  }, PGLITE_BOOT_TIMEOUT_MS);
+
+  const run = async (file, obj) =>
+    (await dbs[file].query('select public._gallery_sanitize_public_json($1::jsonb) as out', [JSON.stringify(obj)])).rows[0].out;
+  const town = (hiddenName, name = 'Riverbend') => ({
+    name, id: 'set-1', tier: 'town',
+    powerStructure: { factions: [
+      { faction: 'Elder Council', power: 40, seats: 11, vacancy: null, isGoverning: true, desc: `They watch ${hiddenName} closely.` },
+      { faction: hiddenName, power: 15, hidden: true, desc: 'Its presence is not known to the settlement.' },
+      { hidden: true, power: 9, desc: 'A faceless ring nobody names.' },
+    ] },
+    thesis: { text: `A town where ${hiddenName} is whispered of.`, id: 'thesis-1', name: 'the thesis' },
+  });
+
+  it('each body: the raising and key-equal names mask string values only, rows stamped hidden leave, the settlement name stands', async () => {
+    for (const file of BODIES) {
+      for (const hiddenName of ['true', 'null', '1', '{', 'name', 'id', 'text']) {
+        const out = await run(file, town(hiddenName));
+        const at = `${file} / ${JSON.stringify(hiddenName)}`;
+        expect(out.name, at).toBe('Riverbend');
+        expect(Object.keys(out).sort(), at).toEqual(['id', 'name', 'powerStructure', 'thesis', 'tier']);
+        expect(Object.keys(out.thesis).sort(), at).toEqual(['id', 'name', 'text']);
+        expect(out.thesis.text, at).toBe('A town where an unseen interest is whispered of.');
+        expect(out.powerStructure.factions.map((f) => f.faction), at).toEqual(['Elder Council']);
+      }
+      const sub = await run(file, town('The Independent Bloc', 'The Independent Bloc Hall'));
+      expect(sub.name, file).toBe('The Independent Bloc Hall');
+      const blank = await run(file, town(' '));
+      expect(blank.thesis.text, file).toBe('A town where   is whispered of.');
+    }
+  });
+});
+
+// R11 (VEIL-FIX re-review, 2026-11-10): THE MASK'S EDGES. A hidden power named "1" rewrote every id
+// ("set-1" -> "set-an unseen interest") and the projection's format tag (`publicProse.v`, "pp-1"), so a
+// shared page lost its stamp and its rows their identity; and the blank-name test differed between the
+// server and the client (a no-break space was blank to one and a name to the other). The walk now skips
+// every leaf whose last path element is `id`, and `publicProse.v`; the blank test is one explicit class
+// on both sides. Run on each restatement's own body and against the client twin.
+describe('R11 — the mask skips ids and the prose format tag; one blank test on both sides', () => {
+  const BODIES = ['206_public_card_veil_bit.sql', '207_public_hall_capture_veil.sql', '210_public_prose_text_projection.sql'];
+  /** @type {Record<string, PGlite>} */
+  const dbs = {};
+  beforeAll(async () => {
+    const re = /^create\s+or\s+replace\s+function\s+public\._gallery_sanitize_public_json\b[\s\S]*?\$\$;/igm;
+    for (const file of BODIES) {
+      dbs[file] = new PGlite();
+      await dbs[file].exec('create schema if not exists public;');
+      await dbs[file].exec(readFileSync(resolve(MIGRATIONS_DIR, file), 'utf-8').match(re)[0]);
+    }
+  }, PGLITE_BOOT_TIMEOUT_MS);
+  const run = async (file, obj) =>
+    (await dbs[file].query('select public._gallery_sanitize_public_json($1::jsonb) as out', [JSON.stringify(obj)])).rows[0].out;
+  const clientOf = async (rec) => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    return JSON.parse(JSON.stringify(toPublicSafe(rec)));
+  };
+  const town = (hiddenName) => ({
+    name: 'Riverbend', id: 'set-1', tier: 'town',
+    publicProse: { v: 'pp-1', blocks: { 'general:overview': { text: `Talk of ${hiddenName} fills the square.` } } },
+    npcs: [{ id: 'npc-1', name: 'Ada', role: 'Smith' }],
+    powerStructure: { factions: [
+      { faction: 'Elder Council', id: 'power-1', power: 40, desc: `They watch ${hiddenName} closely.` },
+      { faction: hiddenName, power: 15, hidden: true, desc: 'Its presence is not known.' },
+    ] },
+  });
+
+  it('a hidden power named "1": every id and the prose format tag stand, the prose text is masked; each body; client == server', async () => {
+    for (const file of BODIES) {
+      const out = await run(file, town('1'));
+      expect(out.id, file).toBe('set-1');
+      expect(out.npcs[0].id, file).toBe('npc-1');
+      expect(out.powerStructure.factions[0].id, file).toBe('power-1');
+      expect(out.powerStructure.factions[0].desc, file).toBe('They watch an unseen interest closely.');
+      if (file.startsWith('210')) {
+        expect(out.publicProse.v, file).toBe('pp-1');
+        expect(out.publicProse.blocks['general:overview'].text, file).toBe('Talk of an unseen interest fills the square.');
+        expect(await clientOf(town('1')), file).toEqual(out);
+      }
+    }
+  });
+
+  it('a no-break-space name is blank on the server and on the client alike: it masks nothing; each body; client == server', async () => {
+    for (const file of BODIES) {
+      const out = await run(file, town(' '));
+      expect(out.powerStructure.factions[0].desc, file).toBe('They watch   closely.');
+      expect(out.powerStructure.factions.map((f) => f.faction), file).toEqual(['Elder Council']);
+      if (file.startsWith('210')) expect(await clientOf(town(' ')), file).toEqual(out);
+    }
+  });
+});

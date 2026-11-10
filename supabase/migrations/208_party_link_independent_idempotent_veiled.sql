@@ -1,6 +1,27 @@
 -- ════════════════════════════════════════════════════════════════════════════
 -- 208 — the party link: idempotent, veiled, owner-aware, independent of the listing
 -- ════════════════════════════════════════════════════════════════════════════
+-- AMENDED BEFORE FIRST APPLY by the pre-deploy review of 2026-11-10:
+--   (finding 1; the chair's ruling R1, "the party link never widens") the link's
+--   dossier was built as get_gallery_dossier's, so gallery_share_dm turned every
+--   existing link into a DM-full page at apply and a revealDm member override
+--   spliced that member's secrets onto the players' page. The link now applies
+--   everything that HIDES and nothing that REVEALS: its base is ALWAYS
+--   _gallery_sanitize_public_json(base.j); _gallery_apply_member_overrides gets the
+--   SANITIZED JSON as its dm_full source and false for settlement_share_dm, so a
+--   revealDm override splices the member's already-sanitized record (executed:
+--   tests/security/galleryUnlisted.pglite.test.js, R1 (i)-(iii)); the response's
+--   gallery_share_dm is always false; gallery_member_overrides still travels so
+--   the client applies the veil's $veil deltas, LESS its frozen snapshot (the re-review's
+--   blocker R8: an export in snapshot mode stores the whole public copy at $veil.snapshot,
+--   which with Reveal DM is the DM projection — executed: the anon read carried a planted
+--   secret outside `dossier`; the link now returns the overrides `#- '{$veil,snapshot}'`
+--   and the client's link branch renders the live sanitized dossier). (d) is amended to match.
+--   (R12, the re-review's cost note) the read evaluates the sanitizer ONCE on the whole
+--   document (a lateral), its result both the splice's base and its source.
+--   (finding 9) `set local lock_timeout = '5s'` ahead of the constraint, so the
+--   ACCESS EXCLUSIVE lock on settlements never queues the table behind a long
+--   transaction; a timeout fails the file, which is safe to re-run as written.
 -- WRITTEN-NOT-DEPLOYED (standing law; applies via `supabase db push` at the deploy
 -- step, never from a lane). SW-B7a PARTY-LINK (the chair's brief STYLE-2-WAVE
 -- 2026-11-09, SW-B7 rows (c), (d), (f), (g); the owner's words of 2026-11-09 in the
@@ -18,15 +39,15 @@
 --     ends it. get_unlisted_dossier already read the LIVE row, so the town's changes
 --     show through the same link (168, unchanged in that respect).
 --
--- (d) THE LINK HONOURS THE VEIL. 168's get_unlisted_dossier applied
---     _gallery_sanitize_public_json ALONE: no "Reveal DM content" (gallery_share_dm),
---     no per-member overrides, and the client's unlisted branch had no
---     gallery_member_overrides to project the veil's deltas from. Now the read builds
---     the dossier EXACTLY as get_gallery_dossier (147, 093's security model) does —
---     the settlement-level projection by gallery_share_dm, then
---     _gallery_apply_member_overrides — and returns gallery_share_dm and
---     gallery_member_overrides so src/lib/gallery.js's unlisted branch runs
---     sanitizeDossier (toPublicSafe + projectShareVeil) as the public branch does.
+-- (d) THE LINK HONOURS THE VEIL AND NEVER WIDENS. 168's get_unlisted_dossier applied
+--     _gallery_sanitize_public_json ALONE, and the client's unlisted branch had no
+--     gallery_member_overrides to project the veil's deltas from. Now the read keeps
+--     168's sanitized base, runs _gallery_apply_member_overrides over it with the
+--     sanitized JSON as its only source (so it can hide, never reveal), and returns
+--     gallery_member_overrides (and gallery_share_dm = false) so src/lib/gallery.js's
+--     unlisted branch runs sanitizeDossier (toPublicSafe + projectShareVeil) in the
+--     player view. "Reveal DM content" and per-member reveals are the GALLERY's (other
+--     DMs); the players' link never honours them (amended 2026-11-10, R1).
 --
 -- (f) THE OWNER IS TOLD. get_unlisted_dossier returns is_owner = (s.user_id =
 --     auth.uid()), false for anon, so the client routes the owner to the library
@@ -60,6 +81,8 @@ update public.settlements
    set visibility = case when unlisted_slug is null then 'public' else 'unlisted' end
  where visibility is distinct from (case when unlisted_slug is null then 'public' else 'unlisted' end);
 
+-- (2026-11-10, finding 9) never queue the table behind a long transaction
+set local lock_timeout = '5s';
 alter table public.settlements drop constraint if exists settlements_visibility_derived;
 alter table public.settlements
   add constraint settlements_visibility_derived
@@ -147,12 +170,14 @@ end;
 $$;
 grant execute on function public.revoke_settlement_unlisted(uuid) to authenticated;
 
--- ── 5. the by-slug read — the veil's twin, the owner bit, the slug alone (d, f, g) ──
--- The dossier is built EXACTLY as get_gallery_dossier (147) builds `data`: the
--- narrated copy when the owner chose it, the settlement-level projection by
--- gallery_share_dm, then the per-member overrides (093's model: a member reveal never
--- widens the settlement level). gallery_share_dm and gallery_member_overrides travel
--- so the client applies the same projection and the veil's deltas.
+-- ── 5. the by-slug read — the player view, the owner bit, the slug alone (d, f, g) ──
+-- The narrated copy when the owner chose it (as get_gallery_dossier, 147), ALWAYS
+-- sanitized (R1: the link never widens). _gallery_apply_member_overrides runs with the
+-- SANITIZED JSON as both its base and its dm_full source and false for the share-DM
+-- flag: a revealDm override can only splice a record that is already sanitized, and
+-- every other member is re-reduced to the public allowlist (093, idempotent).
+-- gallery_share_dm is always false; gallery_member_overrides travels so the client
+-- applies the veil's $veil deltas, without the export's frozen snapshot (R8).
 create or replace function public.get_unlisted_dossier(p_slug text)
 returns jsonb
 language sql stable security definer set search_path = public, pg_temp
@@ -165,13 +190,14 @@ as $$
     'unlisted', true,
     'author_name', ap.external_name,
     'is_owner', coalesce(s.user_id = auth.uid(), false),
-    'gallery_share_dm', coalesce(s.gallery_share_dm, false),
-    'gallery_member_overrides', s.gallery_member_overrides,
+    'gallery_share_dm', false,
+    -- R8 (the re-review of 2026-11-10): nothing but what HIDES travels. A gallery export in
+    -- snapshot mode stores its frozen public copy at $veil.snapshot, and with Reveal DM (or a
+    -- revealDm member) that copy is the DM projection; it never leaves on the link.
+    'gallery_member_overrides', s.gallery_member_overrides #- '{$veil,snapshot}',
     'dossier', public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(base.j)
-           else public._gallery_sanitize_public_json(base.j) end,
-      public._gallery_dm_full_json(base.j),
-      s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, false
+      pub.j, pub.j,
+      s.gallery_member_overrides, false, s.gallery_importable, false
     )
   )
   from public.settlements s
@@ -185,6 +211,9 @@ as $$
       else s.data
     end as j
   ) base
+  -- R12 (the re-review of 2026-11-10): the sanitizer runs ONCE per read on the whole document;
+  -- its result is both the splice's base and its only source.
+  cross join lateral (select public._gallery_sanitize_public_json(base.j) as j) pub
   where s.unlisted_slug = p_slug
   limit 1;
 $$;

@@ -7,6 +7,11 @@
  * columns of 036's analytics_events it reads: it counts only `engine_generate` rows, splits
  * them by props.op / props.outcome, keeps today inside this month, leaves last month out, and
  * is executable by service_role only.
+ *
+ * The privilege pin models a hosted Supabase project's DEFAULT PRIVILEGES (new functions in
+ * `public` granted EXECUTE to anon and authenticated BY NAME): `revoke … from public` alone
+ * leaves those grants standing (the pre-deploy review of 2026-11-10, finding 8), so 204 names
+ * the two roles as migration 113 does.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -23,6 +28,9 @@ beforeAll(async () => {
   await db.exec(`
     create role service_role;
     create role anon;
+    create role authenticated;
+    -- The hosted project's default privileges, modelled (finding 8 of the 2026-11-10 review).
+    alter default privileges in schema public grant execute on functions to anon, authenticated;
     create table public.analytics_events (
       id bigint generated always as identity primary key,
       event text not null,
@@ -61,11 +69,13 @@ describe('report_engine_generations (migration 204)', () => {
     expect(got).toEqual(expected);
   });
 
-  it('is executable by service_role and not by anon (the 199 posture)', async () => {
-    const [{ svc, anon }] = await rows(`
+  it('is executable by service_role and not by anon or authenticated, even under the hosted default privileges (the 199 posture; 113 idiom)', async () => {
+    const [{ svc, anon, authd }] = await rows(`
       select has_function_privilege('service_role', 'public.report_engine_generations()', 'execute') as svc,
-             has_function_privilege('anon', 'public.report_engine_generations()', 'execute') as anon`);
+             has_function_privilege('anon', 'public.report_engine_generations()', 'execute') as anon,
+             has_function_privilege('authenticated', 'public.report_engine_generations()', 'execute') as authd`);
     expect(svc).toBe(true);
     expect(anon).toBe(false);
+    expect(authd).toBe(false);
   });
 });
