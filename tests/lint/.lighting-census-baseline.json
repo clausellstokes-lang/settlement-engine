@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8500d42681d823f40d7526af95e512e97d37abf8",
+  "measuredAtSha": "37cca6b1530316d0902d30713d8179478bcae508",
   "measuredBy": "PULSE-SITES session_01FbPLbehJ1XtTPeEP23oMyC",
   "date": "2026-11-10",
-  "note": "PULSE-SITES (2026-11-10): +1 file, tests/domain/pulseSitesMembershipReads.test.js (the lane's red-first pin), and docs/chair/2026-11-10/PULSE-SITES-2026-11-10.md if counted; no rule changed",
-  "files": 3179,
-  "parked": 395,
+  "note": "PULSE-SITES P1 (2026-11-10): +1 file, tests/domain/pulseSitesChronicleVeil.test.js (the veil's red-first pin, 7 arms); no rule changed",
+  "files": 3180,
+  "parked": 396,
   "credited": 2784,
   "titles": 29004,
   "suiteTitles": 7838
