@@ -212,7 +212,8 @@ export function cultureScopeLine(settlement) {
   // THE SEED CHOOSES (WIRING-RULINGS §8(3)): the same town prints the same frame forever; a record
   // with no seed (every hand-built caller) gets frame 0, the line as it always read.
   const seed = cleanText(/** @type {{ _seed?: unknown }} */ (source)._seed);
-  return sentence(pickVariant(SCOPE_LINE_FRAMES, seed ? `${seed}::culture-scope-line` : null)(label, phrase));
+  // SCOPE_LINE_FRAMES is a frozen five-frame pool, so the pick is never the empty pool's undefined.
+  return sentence(/** @type {(label: string, phrase: string) => string} */ (pickVariant(SCOPE_LINE_FRAMES, seed ? `${seed}::culture-scope-line` : null))(label, phrase));
 }
 
 /**
