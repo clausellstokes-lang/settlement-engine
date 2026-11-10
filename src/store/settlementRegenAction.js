@@ -24,7 +24,7 @@
 
 import { makeActionResult } from './actionResult.js';
 import { refusalOf } from '../lib/refusalReasons.js';
-import { engineRefusalReason, ENGINE_REFUSAL_REASONS } from '../lib/engineRefusal.js';
+import { engineRefusalOf, ENGINE_REFUSAL_REASONS } from '../lib/engineRefusal.js';
 
 /** The reasons this lane may record (engineRefusal.js), as a set. */
 const ENGINE_REASONS = new Set(ENGINE_REFUSAL_REASONS);
@@ -125,8 +125,8 @@ async function remoteRegenPartsSaid(set, section, settlement, cfg, locks, remote
     });
     return parts;
   } catch (error) {
-    const reason = engineRefusalReason(/** @type {{ code?: unknown }} */ (error)?.code);
-    if (reason) set((s) => { s.lastRefusal = refusalOf(reason); });
+    const said = engineRefusalOf(error);
+    if (said) set((s) => { s.lastRefusal = refusalOf(said.reason, said.vars); });
     throw error;
   }
 }

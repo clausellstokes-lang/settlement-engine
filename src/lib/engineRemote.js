@@ -255,7 +255,9 @@ export async function runRemoteGeneration(request, opts = {}) {
   if (unsupported.length > 0) {
     throw engineRemoteError('engine_remote_unsupported',
       `The engine service does not take ${unsupported.join(', ')}; this generation was not made.`,
-      { inputs: unsupported });
+      // The provenance's scope rides the refusal so the reader can be told WHICH request it was:
+      // a campaign's settlement and an account's own environment both read as `contentEnvironment`.
+      { inputs: unsupported, scope: payload?.contentRuntime?.contentProvenance?.scope ?? null });
   }
   const pin = opts.engineVersion ?? null;
   const reply = await postEngine(

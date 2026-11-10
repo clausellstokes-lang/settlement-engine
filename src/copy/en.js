@@ -487,6 +487,12 @@ export const en = Object.freeze({
       rubric: 'Forge unreachable',
       body:   'The forge could not be reached, so no settlement was made. Check your connection, then forge again.',
     },
+    // The request carries what the engine service cannot make yet (remote-path FU-3): `{what}`
+    // names it from the refusal's own inputs (lib/engineRefusal.js). No date, no "try again".
+    engineUnsupported: {
+      rubric: 'Not in this build yet',
+      body:   'This build’s forge cannot yet make a settlement {what}, so no settlement was made.',
+    },
     // No door and no price: the admin panel is not sold, so this sentence must
     // not read as an upgrade prompt. It says whose page it is and stops.
     staffOnly: {

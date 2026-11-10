@@ -94,4 +94,15 @@ describe('the remote pre-flight reads the real store\'s content runtime', () => 
     expect(remoteUnsupportedInputs({ neighbour: { _seed: 'n' }, contentRuntime }))
       .toEqual(['neighbour', 'customContent', 'contentTunables']);
   });
+
+  it('FU-3: the refusal carries the provenance scope, so the reader can be told "inside a campaign"', async () => {
+    const { runRemoteGeneration } = await import('../../src/lib/engineRemote.js');
+    const base = await storeRuntime();
+    const contentRuntime = { ...base, contentProvenance: { ...base.contentProvenance, scope: 'campaign', bindingHash: HASH } };
+    const err = await runRemoteGeneration({ payload: { seed: 's', fullConfig: {}, neighbour: null, contentRuntime } },
+      { url: 'https://never', fetchImpl: async () => { throw new Error('no fetch may happen'); } }).catch((e) => e);
+    expect(err.code).toBe('engine_remote_unsupported');
+    expect(err.inputs).toEqual(['contentEnvironment']);
+    expect(err.scope).toBe('campaign');
+  });
 });

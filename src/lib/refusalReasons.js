@@ -87,6 +87,13 @@ export const REFUSAL_REASONS = Object.freeze({
    */
   ENGINE_UNAVAILABLE: 'engineUnavailable',
   /**
+   * The request carries what the engine service cannot make yet (the remote transport's typed
+   * `engine_remote_unsupported`: an imported neighbour, the account's own content, a settlement
+   * inside a campaign), refused before any request. Not a failure and not cured by trying again;
+   * its `{what}` names what was asked for (lib/engineRefusal.js; remote-path FU-3, 2026-11-10).
+   */
+  ENGINE_UNSUPPORTED: 'engineUnsupported',
+  /**
    * A STAFF-ONLY destination reached by an account that is not staff (ODQ
    * §934.28). Not a paid gate and not an upgrade path — no tier buys it, so its
    * sentence offers no door; it simply says the page is not this account's.
