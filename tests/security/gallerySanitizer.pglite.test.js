@@ -585,17 +585,17 @@ describe('R5 — the hidden-power name mask walks string values (pglite + the cl
     return JSON.parse(JSON.stringify(toPublicSafe(rec)));
   };
 
-  for (const raising of ['true', 'null', '1', ' ', '{']) {
-    it(`a hidden power named ${JSON.stringify(raising)} never raises; the row leaves; client == server`, async () => {
+  it('a hidden power named "true", "null", "1", " " or "{" never raises; the row leaves; client == server', async () => {
+    for (const raising of ['true', 'null', '1', ' ', '{']) {
       const rec = town(raising);
       const out = await sanitizeM(rec);
-      expect(out.name).toBe('Riverbend');
-      expect(out.powerStructure.factions.map((f) => f.faction)).toEqual(['Elder Council']);
+      expect(out.name, raising).toBe('Riverbend');
+      expect(out.powerStructure.factions.map((f) => f.faction), raising).toEqual(['Elder Council']);
       // anchored: the open row is asserted present on the line above
-      expect(JSON.stringify(out)).not.toContain('Its presence is not known');
-      expect(await clientOf(rec)).toEqual(out);
-    });
-  }
+      expect(JSON.stringify(out), raising).not.toContain('Its presence is not known');
+      expect(await clientOf(rec), raising).toEqual(out);
+    }
+  });
 
   it('a whitespace-only name masks nothing (the space between words survives)', async () => {
     const out = await sanitizeM(town(' '));
@@ -608,18 +608,18 @@ describe('R5 — the hidden-power name mask walks string values (pglite + the cl
     expect(out.thesis.text).toBe('A town where an unseen interest is whispered of.');
   });
 
-  for (const keyName of ['name', 'id', 'text']) {
-    it(`a hidden power named ${JSON.stringify(keyName)} rewrites no key; client == server`, async () => {
+  it('a hidden power named "name", "id" or "text" rewrites no key; client == server', async () => {
+    for (const keyName of ['name', 'id', 'text']) {
       const rec = town(keyName);
       const out = await sanitizeM(rec);
-      expect(out.name).toBe('Riverbend');
-      expect(out.id).toBe('set-1');
-      expect(Object.keys(out.thesis).sort()).toEqual(['id', 'name', 'text']);
-      expect(Object.keys(out)).not.toContain('an unseen interest'); // anchored: out.name and out.id are asserted present just above
-      expect(out.thesis.text).toBe('A town where an unseen interest is whispered of.');
-      expect(await clientOf(rec)).toEqual(out);
-    });
-  }
+      expect(out.name, keyName).toBe('Riverbend');
+      expect(out.id, keyName).toBe('set-1');
+      expect(Object.keys(out.thesis).sort(), keyName).toEqual(['id', 'name', 'text']);
+      expect(Object.keys(out), keyName).not.toContain('an unseen interest'); // anchored: out.name and out.id are asserted present just above
+      expect(out.thesis.text, keyName).toBe('A town where an unseen interest is whispered of.');
+      expect(await clientOf(rec), keyName).toEqual(out);
+    }
+  });
 
   it("the settlement's own top-level name is never masked (a hidden power that is its substring); client == server", async () => {
     const rec = town('The Independent Bloc', { name: 'The Independent Bloc Hall' });
