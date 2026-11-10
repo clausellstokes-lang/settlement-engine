@@ -29,7 +29,7 @@ import { TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; // F11 / CENSUS-1 / CENSUS-4b: one line, so no cited line moves
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; // F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -587,7 +587,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
 
   // 25% chance: NPC knows something compromising about another NPC
   if (random01(0.25) && allNpcs.length > 1) {
-    const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex)), rosterNames = allNpcs.map((n) => n?.name).filter(Boolean).sort((x, y) => y.length - x.length), frameOf = (t) => rosterNames.reduce((acc, nm) => acc.split(nm).join('@'), String(t ?? '')).trim(), heldFrames = held && held.size ? new Set([...held].map(frameOf)) : held; // STYLE-2 SW-7 (B10(b)): the held key is the frame
+    const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex)), rosterNames = allNpcs.map((n) => n?.name).filter(Boolean).sort((x, y) => y.length - x.length), frameOf = rosterFramer(rosterNames), heldFrames = held && held.size ? new Set([...held].map(frameOf)) : held; // STYLE-2 SW-7 (B10(b)): the held key is the frame
     // STYLE-2 SW-7 (STYLE-RULINGS-2 B10(b)): NO FRAME TWICE IN ONE DOSSIER. The held refusal reads the FRAME,
     // every roster name masked, so a second figure cannot carry the same secret under another name (the twelve
     // at dc5684e66: one frame ten times in one town). Every frame held -> no roll, and the figure keeps its own.
