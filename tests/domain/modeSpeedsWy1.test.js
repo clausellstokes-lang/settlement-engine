@@ -545,8 +545,8 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // reason line (x3); no id, tick or number moved. Still no datum: the absent arm holds.
 // STYLE-2-MERGE-4 at the SW-8 RENAME-POWERS merge (2026-11-10, point 24): the two lines' text-only moves composed (the
 // integration side's 5b023789... and SW-8's bce07bf5..., each leaf-diffed TEXT ONLY on its own base); the hash re-measured at
-// the merged tree: 5b023789... / bce07bf5... -> __NEW__...
-const BASE_PULSE_HASH = '5b0237899af2533959ed9a8c74f46a66bdd63f5585b858eedbaeeaa07b7ea4f5';
+// the merged tree: 5b023789... / bce07bf5... -> f94c5ff6...
+const BASE_PULSE_HASH = 'f94c5ff691fadd2542d8f33a017823fc60b17d75c8280ed945a745f6b9073dd5';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
