@@ -34,7 +34,11 @@ export function successorNpc(ousted = {}, rng) {
     name: pick(FIRST_NAMES),
     role: ousted.role || ousted.category || '',
     category: ousted.category,
-    factionAffiliation: ousted.factionAffiliation,
+    // GREEN-TIP (2026-11-10): the successor inherits the seat's powers and house AS WRITTEN on the ousted card (its
+    // `memberships` and `institution`, the current vocabulary); it copied the retired `factionAffiliation`, so on a
+    // current card the successor stood in no power and no house — the seat it was minted to fill was lost.
+    memberships: Array.isArray(ousted.memberships) ? ousted.memberships.map((m) => ({ ...m })) : [],
+    institution: ousted.institution ?? null,
     factionLink: ousted.factionLink,
     institutionId: ousted.institutionId,
     importance: ousted.importance,

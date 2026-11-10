@@ -48,7 +48,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 231,
+      "dated": 232,
       "sha-pin": 2,
       "tree": 173
     },
@@ -521,7 +521,9 @@
     "_rosterGrowth2026-11-10-compendium-institutions": "ONE document JOINED the roster by being BORN into it (COMPENDIUM-HUB phase 2, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbc2U6ZSyMckmSov4WN; on lane/compendium-institutions-2026-11-10 cut from 445390e90): `dated` 216 -> 217, measured by this walker at the lane tip: docs/chair/2026-11-10/COMPENDIUM-INSTITUTIONS-2026-11-10.md, the phase-2 record (the census of the Institutions page's registries, H7 and H9 to their commits and pins, the H11 STOP, the render and bundle measures), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-10-compendium-landing-trim": "ONE document JOINED the roster by being BORN into it (COMPENDIUM-HUB's landing trim, session session_01FbPLbc2U6ZSyMckmSov4WN, on lane/compendium-landing-trim-2026-11-10 cut from 445390e90): `dated` 216 -> 217, docs/chair/2026-11-10/COMPENDIUM-LANDING-TRIM-2026-11-10.md, the trim's record, born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-10-compendium-institutions-2": "ONE document JOINED the roster by being BORN into it (COMPENDIUM-2, a UI seat, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbc2kTo16Q27XH7gkA2; on lane/compendium-institutions-2-2026-11-10 cut from 13fdafa47): `dated` 218 -> 219, measured by this walker at the lane tip: docs/chair/2026-11-10/COMPENDIUM-INSTITUTIONS-2-2026-11-10.md, the lane's record (the screenshots read, the facts module's move, the phone floor, the flows join's measure whole, the render cost, H11 corrected), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged.",
-    "_rosterGrowth2026-11-10-style-2-merge-compendium-institutions": "THE UNION AT THE COMPENDIUM-INSTITUTIONS MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 227 -> 230 (three records born dated on the lane: docs/chair/2026-11-10/COMPENDIUM-INSTITUTIONS-2026-11-10.md, COMPENDIUM-LANDING-TRIM-2026-11-10.md and COMPENDIUM-INSTITUTIONS-2-2026-11-10.md; the lane's side re-stated COMPENDIUM-HUB's roster line, byte-identical, the duplicate key dropped)."
+    "_rosterGrowth2026-11-10-style-2-merge-compendium-institutions": "THE UNION AT THE COMPENDIUM-INSTITUTIONS MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 227 -> 230 (three records born dated on the lane: docs/chair/2026-11-10/COMPENDIUM-INSTITUTIONS-2026-11-10.md, COMPENDIUM-LANDING-TRIM-2026-11-10.md and COMPENDIUM-INSTITUTIONS-2-2026-11-10.md; the lane's side re-stated COMPENDIUM-HUB's roster line, byte-identical, the duplicate key dropped).",
+    "_rosterGrowth2026-11-10-green-tip": "ONE document JOINED the roster by being BORN into it (seat GREEN-TIP, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/green-tip-2026-11-10 cut from bf14617ca): `dated` 216 -> 217, docs/chair/2026-11-10/GREEN-TIP-2026-11-10.md, the seat's record, born dated; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-10-style-2-merge-green-tip": "THE UNION AT THE GREEN-TIP MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 231 -> 232 (docs/chair/2026-11-10/GREEN-TIP-2026-11-10.md, the lane's record, born dated)."
   },
   "rows": []
 }

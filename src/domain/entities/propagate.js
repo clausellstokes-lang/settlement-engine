@@ -22,6 +22,7 @@
  */
 
 import { withImpairment } from './status.js';
+import { membershipsOf } from '../people/membership.js';
 import { factionArchetype } from '../factionArchetypes.js';
 import {
   factionDisplayNameOf,
@@ -347,7 +348,10 @@ function findLinkedEntities(settlement, node) {
         out.push({ targetType: 'institution', targetId: linkedId, strength: importanceWeight(npc) });
       }
       const emittedFactionRefs = new Set();
-      for (const linkedId of npc.linkedFactionIds || []) {
+      // The powers the card stands in, by name (people/membership.js :: membershipsOf) — RE-POINTED
+      // (GREEN-TIP, 2026-11-10) from the retired `linkedFactionIds`, which no current card carries
+      // (57b0de61e / 15207301f), so on a current record this edge reached no faction at all.
+      for (const linkedId of membershipsOf(npc).map((m) => m.power)) {
         const faction = resolveFactionRef(factions, linkedId);
         const targetId = factionRefOf(faction);
         if (!targetId || emittedFactionRefs.has(targetId)) continue;

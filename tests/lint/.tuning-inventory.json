@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "545285100bd7c6c6dac6de36b8cac7e2c85447d9",
-  "measuredBy": "STYLE-2-MERGE-4 (session_01FbPLbbT4fy8G4nTurhnGb3)",
-  "date": "2026-11-09",
-  "note": "STYLE-2-MERGE point 23, the SW-B7b PROJECTION merge (7f352715b, merge 545285100): the inventory re-frozen at the merged tip; the dependents moved with the lane own desk-read modules (its ed60842de and 0df619ac6 on its lane); no value moved",
+  "measuredAtSha": "0bcee1abbf08ed18d31a4337264e1614e9678b22",
+  "measuredBy": "GREEN-TIP",
+  "date": "2026-11-10",
+  "note": "GREEN-TIP b46048140: foodLandOf and its four custom-content constants relocated byte-for-byte from foodGenerator.js to the leaf foodLand.js (the import-cycle cure, the chair STOP-2 ruling); net zero: foodGenerator bare 48->41 and four named out, foodLand bare 7 and four named in",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8202,7 +8202,8 @@
       "dependents": [
         "src/generators/economy/economicState.js",
         "src/generators/economy/viability.js",
-        "src/generators/foodGenerator.js"
+        "src/generators/foodGenerator.js",
+        "src/generators/foodLand.js"
       ],
       "namedDependents": []
     },
@@ -8210,15 +8211,14 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 59,
+      "line": 52,
       "spanDigest": "80a30b61941b4ce767eb70294da0e598be1b01e5d109279817fa9898c18c919a",
       "leaves": {
         "value": 12
       },
       "dependents": [
         "src/generators/economy/economicState.js",
-        "src/generators/economy/prosperity.js",
-        "src/generators/isolationSupport.js"
+        "src/generators/economy/prosperity.js"
       ],
       "namedDependents": []
     },
@@ -8226,15 +8226,14 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 61,
+      "line": 54,
       "spanDigest": "d70a3c36f3d2b697eda6a63ffcd293fc11e35364c9d6dc4619e552583b9f41a9",
       "leaves": {
         "value": 0.1
       },
       "dependents": [
         "src/generators/economy/economicState.js",
-        "src/generators/economy/prosperity.js",
-        "src/generators/isolationSupport.js"
+        "src/generators/economy/prosperity.js"
       ],
       "namedDependents": []
     },
@@ -8242,7 +8241,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 62,
+      "line": 55,
       "spanDigest": "d2e49a612404d3d5836706cd0d20b875f6f1f6758ac155284dcebb2f44a36782",
       "leaves": {
         "rationFloorPct": 5,
@@ -8252,8 +8251,7 @@
       },
       "dependents": [
         "src/generators/economy/economicState.js",
-        "src/generators/economy/prosperity.js",
-        "src/generators/isolationSupport.js"
+        "src/generators/economy/prosperity.js"
       ],
       "namedDependents": []
     },
@@ -8620,7 +8618,8 @@
     "src/domain/worldPulse/worldState.js": 7,
     "src/generators/demandProfile.js": 1,
     "src/generators/economy/viability.js": 1,
-    "src/generators/foodGenerator.js": 5,
+    "src/generators/foodGenerator.js": 1,
+    "src/generators/foodLand.js": 4,
     "src/generators/generationReceiptJudgments.js": 1,
     "src/generators/historyGenerator.js": 1,
     "src/generators/people/ties.js": 1,
@@ -8970,7 +8969,8 @@
     "src/generators/economy/prosperity.js": 13,
     "src/generators/factionCorrelation.js": 4,
     "src/generators/factionDynamics.js": 38,
-    "src/generators/foodGenerator.js": 48,
+    "src/generators/foodGenerator.js": 41,
+    "src/generators/foodLand.js": 7,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
     "src/generators/historyGenerator.js": 13,

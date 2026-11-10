@@ -10,6 +10,7 @@ import { describe, it, expect } from 'vitest';
 import { npcTraitPlane, readClergyPlane, TRAIT_PLANE } from '../../src/domain/worldPulse/clergyTraitPlane.js';
 import { onsetHazard, captureAdvanceChance } from '../../src/domain/corruption.js';
 import { corruptionPlaneMult } from '../../src/domain/worldPulse/piety.js';
+import { migrateV1toV2 } from '../../src/domain/settlementMigrations.js';
 
 describe('per-trait plane projection', () => {
   it('maps conscience vs malice onto the evil axis, order vs disorder onto the chaos axis', () => {
@@ -32,14 +33,26 @@ describe('per-trait plane projection', () => {
 });
 
 describe('readClergyPlane — influence-weighted, variance-preserving', () => {
-  const clergyFaction = { id: 'temple', archetype: 'religious' };
+  // GREEN-TIP (2026-11-10, re-keyed by cause 57b0de61e, people-5b step 2): a card stands in a power by its
+  // `memberships`, which readClergyPlane reads (factionRefs.js :: entityLinksFaction); the retired `linkedFactionIds`
+  // is read by nothing. The fixture is built in the v1 shape and handed through the product's own door, the save
+  // migration (settlementMigrations.js :: migrateV1toV2), which moves the link onto a membership. The power carries
+  // the display name every generated power carries (`.faction`), which is what a membership names.
+  const clergyFaction = { id: 'temple', faction: 'Temple', archetype: 'religious' };
   const npc = (importance, personality) => ({ importance, personality, linkedFactionIds: ['temple'] });
+  /** @param {object} v1 */
+  const current = (v1) => {
+    const { settlement } = migrateV1toV2(v1);
+    // anti-vacuity: every card the fixture links now holds its membership in the temple
+    for (const card of settlement.npcs) expect(card.memberships).toEqual([expect.objectContaining({ power: 'Temple' })]);
+    return settlement;
+  };
 
   it('a corrupt high priest taints the reading; a minor acolyte carries no weight', () => {
-    const s = {
+    const s = current({
       powerStructure: { factions: [clergyFaction] },
       npcs: [npc('pillar', { dominant: 'ruthless', flaw: 'corrupt' }), npc('minor', { dominant: 'compassionate' })],
-    };
+    });
     const r = readClergyPlane(s);
     expect(r.weight).toBeGreaterThan(0);
     expect(r.taint).toBeGreaterThan(0);
@@ -47,16 +60,17 @@ describe('readClergyPlane — influence-weighted, variance-preserving', () => {
   });
 
   it('a divided priesthood (opposed leads) reads high variance', () => {
-    const s = {
+    const s = current({
       powerStructure: { factions: [clergyFaction] },
       npcs: [npc('pillar', { dominant: 'cruel' }), npc('pillar', { dominant: 'compassionate' })],
-    };
+    });
     expect(readClergyPlane(s).variance).toBeGreaterThan(0);
   });
 
   it('a clean, unflawed priesthood reads EXACT zero taint (neutrality anchor)', () => {
-    const s = { powerStructure: { factions: [clergyFaction] }, npcs: [npc('key', { dominant: 'principled' })] };
+    const s = current({ powerStructure: { factions: [clergyFaction] }, npcs: [npc('key', { dominant: 'principled' })] });
     const r = readClergyPlane(s);
+    expect(r.weight).toBeGreaterThan(0); // the clean priest IS read: the zero below is his, not an empty bench
     expect(r.taint).toBe(0);
     expect(r.revealedTaint).toBe(0);
   });

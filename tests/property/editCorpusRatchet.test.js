@@ -382,7 +382,13 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // stage: the merge base 262e8b255 reads 277; the car's tip 373a2947b 306 (+29, its pin above); the integration tip
     // 7b3ffb6ee 283 (+6; LANDING-R2's 280 was taken on the rung-2 lane before it composed); the merged tip 2c7437030 312 =
     // 277 + 29 + 6, additive, no interaction. Groups judged 133 at every stage; mixedOutside and settledLive stay empty.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(312);
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved): not idle 312 -> 313
+    // FIX-FOOD-ISOLATION's merge c6e8a4ad6 (E5 on the isolated forest town) -> 315 FIX-PUBLIC-VEIL 7e65c7bec (two rows join)
+    // -> 329 ALLEGIANCE-CAR1 e5f88930b (+15 E2 role rows, -1 E5), unmoved to the tip. Each lane's generator move is named
+    // and accepted in its own record; this figure was not. mixedOutside and settledLive stay empty.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(329);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -418,7 +424,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // this census's E7 half at the parent ba4366c83 and after): {31, 6} -> {32, 6}. The one new row is
     // thorp|germanic|coastal|port|civilized|golden-master-v3, declared-only on powerStructure (its economy fingerprint
     // receipt), one of the 17 thorps whose food writer read 0 lb beside 1% and now derives its per cent from its pounds.
-    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 32, E8: 6 });
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved): {32, 6} -> {31, 6}
+    // at FIX-FOOD-ISOLATION's merge c6e8a4ad6 (501c97412 reads 32): town|germanic|forest|isolated leaves declared-only, one
+    // of the twelve forest-isolated towns that lane's record says moved. Unmoved to the tip.
+    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 31, E8: 6 });
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
@@ -527,7 +538,16 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // (the people car moved this arm, E5 +188 and E6 +222, and its pin [709, 66, 1821] stood red there); the integration tip 7b3ffb6ee [753, 66, 1815] (LANDING-R2's figure was taken on the
     // rung-2 lane before it composed); the merged tip 2c7437030 [656, 262, 2060], against the additive [686, 254, 2037] an
     // interaction of [-30, +8, +23] between the car's cast and the rung-2 census (not traced leaf by leaf).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([656, 262, 2060]);
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved): [656, 262, 2060] ->
+    // [650, 261, 2060] W3 POW 1a160d599 -> [650, 261, 2010] W4 PEOPLE 66c23bfea -> [654, 264, 2006] FIX-FOOD-ISOLATION
+    // c6e8a4ad6 -> [654, 273, 2023] FIX-PUBLIC-VEIL 7e65c7bec -> [668, 275, 2045] ALLEGIANCE-CAR1 e5f88930b -> [668, 268, 2046]
+    // CAR2 f51058995 -> [668, 275, 2019] CAR3 c6ded8e3a -> [670, 277, 2027] CAR4 824a8ce2f (its own record names this step)
+    // -> [670, 277, 2029] SW-B5 FRAMES 46e0121c2 -> [670, 281, 2031] SW-7 POWER-SIDE a3062d919 -> [670, 281, 2029] URBAN-FIX
+    // 17b814803 (its record's reason, "the gm fixture", is not this file's: the census generates every town live), unmoved
+    // to the tip. Each step is measured at the stage against its parent; the leaf-by-leaf cause inside each lane is not traced.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([670, 281, 2029]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
@@ -538,7 +558,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-08, MERGE-CAR (as above; masked behind the first figure until it was re-keyed): 31 -> 49. By stage: merge base
     // 262e8b255 28, the car's tip 35 (+7), the integration tip 34 (+6), the merged tip 49 (additive 41: interaction +8). The
     // two dormant membership edits still reach none.
-    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([49, 0, 0]);
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved); masked behind the first figure until it was re-keyed): 49 -> 43 W3 POW 1a160d599 -> 59
+    // ALLEGIANCE-CAR1 e5f88930b, unmoved to the tip. The two dormant membership edits still reach none.
+    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([59, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
     // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
@@ -558,7 +582,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // -> [70, 72], measured by this file's own chain census at the merged tip 2c7437030. Chains and leaves are no longer
     // equal: two of the seventy ride-along chains carry two leaves. NOT attributed by stage (the chain census was not probed
     // on the car's and the integration's trees; both tips read A7 red at their first figure, so neither side's pin was live).
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([70, 72]);
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; masked behind A7's first figures until they were re-keyed above): [70, 72]
+    // -> [144, 154], measured by this file's own chain census at the green-tip lane over bf14617ca. NOT attributed by stage:
+    // the chain census (~5 minutes a tree) was not probed on the 76 stage trees the census figures above were measured on,
+    // and every stage between 2c7437030 and the tip read A7 red at its first figure, so this pin was never live there.
+    // PLAUSIBLE cause: the same eleven lane merges that moved [E1, E5, E6] above. Chains and leaves stay unequal.
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([144, 154]);
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {
@@ -592,7 +621,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 24/38 terrain-pools (ac09ea83b) → 24/37 T1/T2 (fe56bddd4) → 22/36 car 3 (90dc22f18; readiness now spans 7..83) →
     // 22/35 car 1b (fb0341b93; 7..81) → 22/37 PINS (37b1e746d; 7..83) → 23/37 car 3 I7 (6ca454d2b) → 21/36 F6 (6d84aa834),
     // unmoved to the tip; legitimacy's range never moved.
-    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([21, 36]);
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved): 21/36 -> 20/36 at
+    // FIX-FOOD-ISOLATION's merge c6e8a4ad6 (501c97412 reads 21/36): legitimacy scores {25, 62} gone, {42} new; readiness
+    // unmoved. Unmoved to the tip.
+    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([20, 36]);
     // (b) the witnessed score set of the ladders, RECORDED (charter addenda 71 and 73)
     expect([Math.min(...witnessed.legitimacy), Math.max(...witnessed.legitimacy)]).toEqual([0, 75]);
     expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([7, 83]);

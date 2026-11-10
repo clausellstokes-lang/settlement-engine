@@ -670,16 +670,17 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     writer: 'src/generators/steps/resolveResources.js',
     reason: 'engine-internal',
     consumer: Object.freeze({
-      file: 'src/generators/foodGenerator.js',
-      symbol: 'the food generator, which reads the custom resource definitions to count the food a custom resource '
+      file: 'src/generators/foodLand.js',
+      symbol: 'the food writer\'s land reader (foodLand.js :: foodLandOf, moved from foodGenerator.js by GREEN-TIP '
+        + 'b46048140, the cycle cure), which reads the custom resource definitions to count the food a custom resource '
         + 'yields',
     }),
     why: 'Content identity sidecars (refId and localUid) for custom nearby resources, so a custom resource '
-      + 'keeps its identity through regeneration and import. The food generator reads them on the config '
-      + '(foodGenerator.js:85); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
+      + 'keeps its identity through regeneration and import. The food writer\'s land reader reads them on the config '
+      + '(foodLand.js :: foodLandOf); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
       + 'is not a fact a player reads.',
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:85',
+      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:85; the read moved verbatim to src/generators/foodLand.js :: foodLandOf (GREEN-TIP b46048140)',
   }),
   Object.freeze({
     identity: 'nearbyResourceDefinitionsDepleted on config',
@@ -688,16 +689,17 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     writer: 'src/generators/steps/resolveResources.js',
     reason: 'engine-internal',
     consumer: Object.freeze({
-      file: 'src/generators/foodGenerator.js',
-      symbol: 'the food generator, which reads the custom resource definitions to count the food a custom resource '
+      file: 'src/generators/foodLand.js',
+      symbol: 'the food writer\'s land reader (foodLand.js :: foodLandOf, moved from foodGenerator.js by GREEN-TIP '
+        + 'b46048140, the cycle cure), which reads the custom resource definitions to count the food a custom resource '
         + 'yields',
     }),
     why: 'Content identity sidecars (refId and localUid) for custom nearby resources, so a custom resource '
-      + 'keeps its identity through regeneration and import. The food generator reads them on the config '
-      + '(foodGenerator.js:90); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
+      + 'keeps its identity through regeneration and import. The food writer\'s land reader reads them on the config '
+      + '(foodLand.js :: foodLandOf); the resource NAMES are LIT through nearbyResources, and an identity sidecar '
       + 'is not a fact a player reads.',
     charter: 'ODQ §934.105 (the cloud chair\'s WIRING ruling R-W2, 2026-11-07, WIRING-RULINGS-2026-11-07.md; lane '
-      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:90',
+      + 'W6, section META), consumer CONFIRMED at src/generators/foodGenerator.js:90; the read moved verbatim to src/generators/foodLand.js :: foodLandOf (GREEN-TIP b46048140)',
   }),
   Object.freeze({
     identity: 'slavery on contentBoundaries',

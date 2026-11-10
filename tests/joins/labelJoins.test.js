@@ -91,7 +91,11 @@ const FROZEN_LABEL_JOINS = Object.freeze({
   'src/generators/economy/tradeGoods.js': 13,
   'src/generators/economy/upgradeOpportunities.js': 5,
   'src/generators/economy/viability.js': 20,
-  'src/generators/foodGenerator.js': 3,
+  // GREEN-TIP (2026-11-10, b46048140): foodLandOf's one instNamesScan site MOVED VERBATIM with the function into the
+  // leaf foodLand.js (the foodGenerator <-> isolationSupport cycle cure): foodGenerator 3 -> 2, foodLand 0 -> 1, the
+  // total unchanged. The moved site stays an id-join candidate.
+  'src/generators/foodGenerator.js': 2,
+  'src/generators/foodLand.js': 1,
   'src/generators/historyGenerator.js': 13,
   'src/generators/isolationGenerator.js': 1,
   'src/generators/narrativeGenerator.js': 1,

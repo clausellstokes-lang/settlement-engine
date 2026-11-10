@@ -36,7 +36,7 @@ import { SCHEMA_VERSION } from './settlement.schema.js';
 import { resolveFactionRef } from './factionRefs.js';
 import { tagEntityCanon } from './canonStatus.js';
 import { factionIdFromName } from '../lib/entities.js';
-import { isVeiledPower, stampVeil } from './people/cardVeil.js';
+import { membershipInPower, stampVeil } from './people/cardVeil.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw } from './corruption.js';
 import { ALLEGIANCE_TUNING, allegiancePowerFor, assignHandlers, criminalHousesOf, viaOf } from './people/allegiance.js';
 
@@ -153,7 +153,7 @@ export function migrateV1toV2(settlement) {
     const add = (p) => {
       const name = powerNameOf(p);
       if (!name || memberships.some((m) => isObj(m) && m.power === name)) return;
-      memberships.push({ power: name, rank: null, share: null, veiled: isVeiledPower(p) });
+      memberships.push(membershipInPower(p));
     };
     /** @param {string} field @param {unknown} value @param {string} [names] */
     const unmapped = (field, value, names) => report.unmapped.push({ id: npc.id ?? null, field, value, ...(names ? { names } : {}) });

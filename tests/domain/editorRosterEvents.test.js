@@ -29,6 +29,11 @@ import { RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registryFull.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { ensureNpcStates, npcId } from '../../src/domain/worldPulse/npcAgency.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+// GREEN-TIP (2026-11-10, re-keyed with the writers and the lifecycle re-point): a card stands in a power by a MEMBERSHIP,
+// written through the product's one constructor (people/cardVeil.js :: membershipInPower, the v1 -> v2 migration's
+// shape); the retired `factionAffiliation` is read and written by nothing now.
+import { membershipInPower } from '../../src/domain/people/cardVeil.js';
+import { holdsMembership } from '../../src/domain/people/membership.js';
 
 const NOW = '2026-06-11T00:00:00.000Z';
 
@@ -621,13 +626,13 @@ describe('mutateSettlement — PROMOTE_NPC / DEMOTE_NPC standing swap', () => {
       {
         id: 'npc_1', name: 'Captain Mara', role: 'Watch Captain',
         importance: 'key', influence: 'high', structuralRank: 'dominant',
-        factionAffiliation: 'The Garrison',
+        memberships: [membershipInPower({ faction: 'The Garrison' })],
         personality: { dominant: 'stern' },
       },
       {
         id: 'npc_2', name: 'Sergeant Brik', role: 'Gate Sergeant',
         importance: 'notable', influence: 'low', structuralRank: 'subordinate',
-        factionAffiliation: 'The Garrison',
+        memberships: [membershipInPower({ faction: 'The Garrison' })],
         personality: { dominant: 'jovial' },
       },
     ],
@@ -691,7 +696,7 @@ describe('mutateSettlement — PROMOTE_NPC / DEMOTE_NPC standing swap', () => {
     // Review fix: findNpc('') matches the first NPC whose id is null
     // (String(null || '') === '') — the guard must fire before the lookup.
     const settlement = roster();
-    settlement.npcs.push({ id: null, name: '', importance: 'pillar', factionAffiliation: 'The Garrison' });
+    settlement.npcs.push({ id: null, name: '', importance: 'pillar', memberships: [membershipInPower({ faction: 'The Garrison' })] });
     const next = mutateSettlement({
       settlement,
       event: ev('PROMOTE_NPC', { targetId: 'npc_2', payload: {} }),
@@ -702,7 +707,7 @@ describe('mutateSettlement — PROMOTE_NPC / DEMOTE_NPC standing swap', () => {
 
   test('a cross-faction pair is a settlement no-op (standing swaps stay inside one faction)', () => {
     const settlement = roster();
-    settlement.npcs[1] = { ...settlement.npcs[1], factionAffiliation: 'Temple Wardens' };
+    settlement.npcs[1] = { ...settlement.npcs[1], memberships: [membershipInPower({ faction: 'Temple Wardens' })] };
     const next = mutateSettlement({
       settlement,
       event: ev('PROMOTE_NPC', { targetId: 'npc_2', payload: { swapWithNpcId: 'npc_1' } }),

@@ -27,6 +27,7 @@ import { advanceReligionStates } from '../../src/domain/worldPulse/religiousCont
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { migrateV1toV2 } from '../../src/domain/settlementMigrations.js';
 
 const CE = { name: 'Vorr', alignmentAxis: 'evil', lawAxis: 'chaotic' };
 const CE2 = { name: 'Skarn', alignmentAxis: 'evil', lawAxis: 'chaotic' };
@@ -184,7 +185,15 @@ describe('piety composition + neutrality', () => {
 describe('targeted footholds — rival deities recruit the specific minister who matches them', () => {
   const patron = { name: 'Aurum', alignmentAxis: 'good', lawAxis: 'lawful' };
   const rivalCE = { name: 'Vorr', alignmentAxis: 'evil', lawAxis: 'chaotic' };
-  const clergySettlement = (npcs) => ({ powerStructure: { factions: [{ id: 'temple', archetype: 'religious' }, { id: 'gov', archetype: 'government' }] }, npcs });
+  // GREEN-TIP (2026-11-10, re-keyed by cause 57b0de61e, people-5b step 2): a minister stands in the temple by a
+  // MEMBERSHIP, which targetedFootholds reads (factionRefs.js :: entityLinksFaction); the retired `linkedFactionIds`
+  // is read by nothing. The v1 fixture goes through the product's own door, the save migration, which moves each link
+  // onto a membership in the power's display name (`.faction`, as every generated power carries it).
+  const clergySettlement = (npcs) => {
+    const { settlement } = migrateV1toV2({ powerStructure: { factions: [{ id: 'temple', faction: 'Temple', archetype: 'religious' }, { id: 'gov', faction: 'Council', archetype: 'government' }] }, npcs });
+    for (const card of settlement.npcs) expect(card.memberships).toEqual([expect.objectContaining({ power: 'Temple' })]);
+    return settlement;
+  };
 
   test('a corrupt influential minister is recruited by the plane-matching rival; the aligned one is not', () => {
     const settlement = clergySettlement([

@@ -35,6 +35,8 @@ import { commitDeityEmbed } from '../deityCommitEmbed.js';
 import { applyTierOutcomeToSettlement } from '../worldPulse/tierOutcomeApply.js';
 import { TIER_ORDER, POPULATION_RANGES, TIER_STAMP_CUTS, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
+import { membershipInPower } from '../people/cardVeil.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { rollsRegisterVii } from '../density/densityLaw.js';
 import { importanceForRung } from '../density/densityRungs.js';
@@ -474,19 +476,16 @@ function foundingMemberFor(s, event, name) {
     importance: /** @type {import('../entities/npcs.js').NpcImportance} */ (
       importanceForRung('head', s.tier)
     ),
-    factionAffiliation: name,
-    linkedFactionIds: [`faction.${slugify(name)}`],
+    // GREEN-TIP (2026-11-10, the chair's STOP-1/STOP-3 ruling): the founder belongs to the minted house by a
+    // MEMBERSHIP, written through the one constructor the v1 -> v2 migration writes a moved link with
+    // (people/cardVeil.js :: membershipInPower: unranked, no share, the power's own veil bit). It wrote the retired
+    // `factionAffiliation` / `linkedFactionIds`, which no reader reads on a current card, so the house it minted
+    // read EMPTY and R18 dissolved it on the next tick. The row is the minted power as this mutator writes it
+    // below (no category, no hidden mark).
+    memberships: [membershipInPower({ name, faction: name })],
     _idSeed: `${event.id}:founder`,
   });
   npc.createdByEventId = event.id;
-  // ⚠ THIS LINE IS LOAD-BEARING AND READS AS REDUNDANT — it is not. The literal
-  // above also sets `factionAffiliation`, but `createNpc` builds from a DECLARED
-  // field set and drops undeclared keys, so the founder would reach the world
-  // house-less without this write and R17's atomic mint would be unsatisfied the
-  // moment the faction exists. VERIFIED BY EXECUTION at D2b (createNpc returns
-  // `factionAffiliation: undefined` for an input that carries it), not assumed —
-  // deleting it as a duplicate is a silent bug, so the reason is recorded here.
-  npc.factionAffiliation = name;
   return npc;
 }
 
@@ -502,7 +501,9 @@ function addNpc(s, event) {
     role: event.payload?.role,
     importance: event.payload?.importance || 'notable',
     linkedInstitutionIds: event.payload?.linkedInstitutionIds || [],
-    linkedFactionIds:     event.payload?.linkedFactionIds || [],
+    // GREEN-TIP (2026-11-10): the payload's retired `linkedFactionIds` is no longer passed — createNpc drops an
+    // undeclared key, so the read reached nothing (DEAD), and no product emitter sends it (batch.js's staging
+    // validation reads it as a LEGACY payload key, PULSE-SITES' class).
     influence:            event.payload?.influence,
     legitimacyContribution: event.payload?.legitimacyContribution,
     // Authored descriptive traits — surfaced verbatim on the NPC read card.
@@ -748,7 +749,9 @@ function exposeCorruptNpc(s, npc, event) {
     name: npc.name,
     kind: 'ousted',
     criminalInstitution: allegianceOf(npc)?.house || undefined,
-    homeInstitution: npc.factionAffiliation || npc.factionLink || null,
+    // GREEN-TIP (2026-11-10): the exposure path's one home reader (corruption.js :: npcHomeInstitution), the read the
+    // scoped arm below already makes — it read the retired `factionAffiliation` first, which no current card carries.
+    homeInstitution: npcHomeInstitution(npc),
   };
   const next = applyCorruptionImpairments(s, [exposure], { now });
   const rng = createPRNG(`successor:${event.id}:${String(npc.name || '').toLowerCase()}`);
@@ -892,8 +895,14 @@ function swapNpcStanding(s, event) {
   // Standing swaps stay inside ONE faction (the owner's design). If both
   // NPCs declare an affiliation and they differ, this is a mis-targeted
   // event — no-op rather than mis-stamp a foreign factionId onto the peer.
-  if (a.factionAffiliation && b.factionAffiliation
-    && String(a.factionAffiliation).toLowerCase() !== String(b.factionAffiliation).toLowerCase()) {
+  // GREEN-TIP (2026-11-10): each card's faction is its FIRST-RANK power (people/membership.js ::
+  // firstRankMembershipOf, the migration's mapping of the retired `factionAffiliation`) — the SAME reader the
+  // PROMOTE_NPC affordance's gate (affordanceManifest.js :: npcSwapPairsExist, PULSE-SITES' cure) counts pairs by, so
+  // the affordance and its handler agree. It read the retired field, so the cross-faction guard never fired.
+  const order = powerOrderOf(s);
+  const powerA = firstRankMembershipOf(a, order)?.power || '';
+  const powerB = firstRankMembershipOf(b, order)?.power || '';
+  if (powerA && powerB && powerA.toLowerCase() !== powerB.toLowerCase()) {
     return vetoMutation('swap_cross_faction', `${a.name} / ${b.name}`);
   }
 
@@ -915,7 +924,7 @@ function swapNpcStanding(s, event) {
 
   // The shared faction's stable id — prefer the real power-faction record's
   // id over the display name so the stamp survives renames.
-  const affiliation = a.factionAffiliation || b.factionAffiliation || null;
+  const affiliation = powerA || powerB || null;
   if (affiliation) {
     const faction = findFaction(s, affiliation);
     const stableId = faction ? factionIdOf(faction) : affiliation;

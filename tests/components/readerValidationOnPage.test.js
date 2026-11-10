@@ -93,11 +93,21 @@ describe('ruling 1 — validation text never renders on a DM surface (non-staff 
 
 describe('ruling 2 — the verdict count and the Critical Issues list are one list', () => {
   test('soak1k-24: "2 critical issues" sits beside "Critical Issues (2)"', () => {
-    const t = text(ViabilityTab, clone(BIRTHS['soak1k-24']));
-    const stated = t.match(/(\d+) critical issues? prevents? settlement survival/);
+    // GREEN-TIP (2026-11-10, re-keyed by cause 0fc8f82d0, W2 DEF third seat #36): the verdict now speaks in the
+    // town's own name ("As things stand, … will not survive.") and carries NO count; the page states the count on
+    // the verdict's chip ("2 critical"), beside the list's own heading. The ruling is unchanged: the count the page
+    // states and the list it shows are one list. Read off the rendered leaves, so the chip cannot be confused with
+    // the heading that also contains the word.
+    const { container } = render(e(ViabilityTab, { settlement: clone(BIRTHS['soak1k-24']) }));
+    const t = container.textContent || '';
+    const leaves = [...container.querySelectorAll('*')].filter((n) => n.children.length === 0).map((n) => (n.textContent || '').trim());
+    const stated = leaves.map((x) => x.match(/^(\d+) critical$/)).find(Boolean);
+    cleanup();
     const listed = t.match(/Critical Issues \((\d+)\)/);
     expect(stated?.[1]).toBe('2');
     expect(listed?.[1]).toBe(stated?.[1]);
+    // anchored: the chip and the list heading are matched in this same text on the two lines above
+    expect(t, 'the verdict carries no contrary count').not.toMatch(/\d+ critical issues? prevents? settlement survival/);
   });
 
   test('soak1k-24: the PDF lists the same critical issues the summary counts', () => {

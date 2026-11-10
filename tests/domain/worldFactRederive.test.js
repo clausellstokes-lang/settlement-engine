@@ -158,6 +158,11 @@ const CULTURE_READERS = Object.freeze([
   // 2026-11-09 (STYLE-2 SW-7, 6f340466f): economy/prosperity.js LEFT the set. It was a "reader" only through the word
   // "agriculture" in one situation line ("efficient agriculture"), which the A2 rewrite replaced; it reads no culture.
   'src/generators/foodGenerator.js',
+  // 2026-11-10 (GREEN-TIP b46048140, the foodGenerator <-> isolationSupport cycle cure): foodLand.js JOINED the set through
+  // the word "agriculture" (`agricultureCapacity`, the terrain table's farming figure), moved verbatim with foodLandOf; it
+  // reads no culture (the prosperity.js and pipeline.js precedents: reported, not filtered). foodGenerator.js stays a real
+  // reader (CULTURE_PROFILES).
+  'src/generators/foodLand.js',
   'src/generators/generateSettlementPipeline.js',
   'src/generators/generationCoherence.js',
   'src/generators/generationContext.js',
