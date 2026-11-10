@@ -556,9 +556,9 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                         <Button variant="ghost" fullWidth
                           disabled={!purchasesAreOpen}
                           onClick={() => { setMenuOpen(false); onNavigate?.('pricing'); }}
-                          icon={<Clock size={13} color={GOLD}/>}
+                          icon={<FolderOpen size={13} color={GOLD}/>}
                           style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500, flexWrap: purchasesAreOpen ? undefined : 'wrap' }}>
-                          Advance time and run campaigns. Upgrade
+                          Run campaigns. Upgrade
                           {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                         </Button>
                       ) : (
