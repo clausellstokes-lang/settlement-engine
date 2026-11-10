@@ -154,7 +154,9 @@ describe('the engine-generate `generate` body cap holds the largest body the wiz
       + `(${JSON.stringify(counts)}); × ${MARGIN} = ${Math.ceil(bytes * MARGIN)} B; cap ${generateCapBytes()} B\n`);
     expect(bytes, 'the derived bound is past the chair\'s ceiling: bring the number').toBeLessThanOrEqual(CEILING_BYTES);
     expect(generateCapBytes(), 'the cap is past the chair\'s ceiling').toBeLessThanOrEqual(CEILING_BYTES);
-    expect(generateCapBytes(), `the cap must hold the derived bound (${bytes} B) with ${MARGIN}× margin`)
+    expect(generateCapBytes(), `the cap must hold the derived bound (${bytes} B) with ${MARGIN}× margin. `
+      + 'The catalogs grew: raise MAX_BODY_BYTES in supabase/functions/engine-generate/index.ts DELIBERATELY, '
+      + `in its own commit that quotes this new bound (${bytes} B); past the 256 KB ceiling the number goes to the chair.`)
       .toBeGreaterThanOrEqual(Math.ceil(bytes * MARGIN));
   }, 120_000);
 
