@@ -12,32 +12,36 @@
 
 import { describe, test, expect } from 'vitest';
 import { generateSettlementPipeline, regenNPCsPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { membershipsOf } from '../../src/domain/people/membership.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
 // Enrichment adds these fields; count how many NPCs carry each.
+// GREEN-TIP (2026-11-10, re-keyed by cause 15207301f, people-5b step 3 — the v2 record): a card's standing in the
+// powers is its `memberships` (people/membership.js :: membershipsOf); the retired `factionAffiliation` is on no
+// current card, generated or rerolled, so counting it read 0 on both rosters. The parity proved is unchanged.
 function enrichmentCoverage(npcs) {
   return {
-    factionAffiliation: npcs.filter((n) => n.factionAffiliation != null).length,
+    memberships: npcs.filter((n) => membershipsOf(n).length > 0).length,
     structuralPosition: npcs.filter((n) => n.structuralPosition != null).length,
   };
 }
 
 describe('[generators-domain-3] rerolled NPCs get the same coherence enrichment as generated ones', () => {
-  test('a regen roster carries factionAffiliation and structuralPosition like the generated one', () => {
+  test('a regen roster carries memberships and structuralPosition like the generated one', () => {
     // CENSUS-1d (re-keyed by cause): the registry's `stable` entries are CALM_ONLY and refused under
     // any crisis; this seed rolled a succession void, under which every top NPC was `stable`, so the
     // anchor reads a CALM city (no stress selected) — the parity it proves is unchanged.
     const s = gen({ settType: 'city', culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road', selectedStressesRandom: false, selectedStresses: [] }, 'd3-gen');
     const genCov = enrichmentCoverage(s.npcs || []);
     // the generated roster is non-vacuously enriched
-    expect(genCov.factionAffiliation).toBeGreaterThan(0);
+    expect(genCov.memberships).toBeGreaterThan(0);
     expect(genCov.structuralPosition).toBeGreaterThan(0);
 
     const regen = regenNPCsPipeline(s, s.config || {}, { seed: 'd3-regen' });
     const regenCov = enrichmentCoverage(regen.npcs || []);
     // the regen roster is enriched too (pre-fix these were both 0)
-    expect(regenCov.factionAffiliation).toBeGreaterThan(0);
+    expect(regenCov.memberships).toBeGreaterThan(0);
     expect(regenCov.structuralPosition).toBeGreaterThan(0);
   });
 
@@ -51,7 +55,7 @@ describe('[generators-domain-3] rerolled NPCs get the same coherence enrichment 
       const s = gen({ settType: tier, culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road', selectedStressesRandom: false, selectedStresses: [] }, `d3-${tier}`);
       const regen = regenNPCsPipeline(s, s.config || {}, { seed: `d3-${tier}-r` });
       const cov = enrichmentCoverage(regen.npcs || []);
-      expect(cov.factionAffiliation + cov.structuralPosition).toBeGreaterThan(0);
+      expect(cov.memberships + cov.structuralPosition).toBeGreaterThan(0);
     }
   });
 });

@@ -138,6 +138,7 @@ import { applyTierOutcomeToSettlement } from '../../src/domain/worldPulse/tierOu
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from '../../src/domain/worldPulse/assizeKernel.js';
 import { DRIFT_REEMIT_COOLDOWN_TICKS } from '../../src/domain/worldPulse/worldPulseFeedCuration.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { holdsMembership } from '../../src/domain/people/membership.js';
 
 // ── The corpus ───────────────────────────────────────────────────────────────
 // Wide enough that a one-in-many shape is not a coin flip: the §713.2 lesson is
@@ -684,7 +685,9 @@ describe('end to end — the law through the real pipeline', () => {
       {
         const factions = s.powerStructure?.factions || [];
         const gov = factions.find(f => f.isGoverning) || factions[0];
-        const members = s.npcs.filter(n => n.factionAffiliation === (gov.faction || gov.name));
+        // GREEN-TIP (2026-11-10, re-keyed by cause 15207301f, people-5b step 3 — the v2 record): a card stands in a power
+        // by its MEMBERSHIP (people/membership.js :: holdsMembership); the retired `factionAffiliation` is on no current card.
+        const members = s.npcs.filter(n => holdsMembership(n, gov.faction || gov.name));
         // The floor itself: someone runs something, always.
         expect(members.length).toBeGreaterThanOrEqual(1);
         // 2026-11-07 PEOPLE-1 CAST (the people car's lane 1; docs/PEOPLE_1_CAST_2026-11-07.md): THE SEAT IS ALWAYS FACED (R-P2: the Government-shelf house's face, the hall's,
@@ -761,8 +764,10 @@ describe('end to end — the law through the real pipeline', () => {
         const leader2 = seatOf(v2, gov2);
         if (!leader2) { moved.push(`${seed}: v2 seats nobody in ${String(gov2?.faction)}`); continue; }
         checked += 1;
-        if (leader2.id !== leader1.id || leader2.factionAffiliation !== gov2?.faction) {
-          moved.push(`${seed}: ${String(leader1.id)} (v1) vs ${String(leader2.id)} (v2) in ${String(leader2.factionAffiliation)}, government is ${String(gov2?.faction)}`);
+        // GREEN-TIP (2026-11-10, re-keyed by cause 15207301f): "lives in the governing house" is a membership there
+        // (holdsMembership), not the retired `factionAffiliation`, which no current card carries.
+        if (leader2.id !== leader1.id || !holdsMembership(leader2, gov2?.faction)) {
+          moved.push(`${seed}: ${String(leader1.id)} (v1) vs ${String(leader2.id)} (v2) in ${JSON.stringify((leader2.memberships || []).map((m) => m.power))}, government is ${String(gov2?.faction)}`);
         }
         // (the CAST — the cards with an institution; a v1 world may still carry today's `faction_structural` append,
         // `npc.<faction>_<role>_N`, which §817-Q1 turns OFF under v2: that is the base's roster law, not the cast's)
