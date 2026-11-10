@@ -63,3 +63,21 @@ describe('events/registry.js :: PROMOTE_NPC / DEMOTE_NPC narrate name the first-
       .toBe('Nobody Inparticular rises within their power, displacing a rival on the way up.');
   });
 });
+
+describe('worldPulse/houseLedger.js :: castHouseFactor casts a member by first-rank power', () => {
+  it('every power with a first-rank member on stage casts one of them as its factor', async () => {
+    const { castHouseFactor } = await import('../../src/domain/worldPulse/houseLedger.js');
+    let cast = 0;
+    for (const s of towns) {
+      const order = powerOrderOf(s);
+      for (const f of s.powerStructure.factions) {
+        const factor = castHouseFactor(s, f);
+        const firsts = (s.npcs || []).filter((n) => n.id && firstRankMembershipOf(n, order)?.power === f.faction);
+        if (!firsts.length) { expect(factor).toBe(''); continue; }
+        expect(firsts.map((n) => String(n.id))).toContain(factor);
+        cast += 1;
+      }
+    }
+    expect(cast).toBeGreaterThan(3);
+  });
+});
