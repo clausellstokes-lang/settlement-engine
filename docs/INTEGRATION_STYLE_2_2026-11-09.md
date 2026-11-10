@@ -183,6 +183,39 @@ The order, per the chair's messages of 02:0x, 02:3x, 03:4x and 04:0x (2026-11-10
 
 **The fifth seat's helpers** are Appendices A–C's with the seat constants set to STYLE-2-MERGE-5 and the worktree `/home/user/wt-merge5` (`/home/user/rec5/`), the governing runs at `--maxWorkers=2`, plus one new one, quoted in Appendix D.
 
+## 2d. The closing acts for the seventh seat (started by the sixth seat at point 35; kept current at every point)
+
+**The chair's ruling (2026-11-10, 07:4x): the closing acts are a seventh seat's WHOLE task.** The sixth seat (STYLE-2-MERGE-6, session `session_01FbPLbcyR4x9KFsR6FAc3F2`) carries the merge points as named — the simulation batch (GREEN-TIP + PULSE-SITES, signing the moved pulse goldens once), REMOTE-PATH, FOUNDING-WORLDS (LAST of the points) — or hands back at the boundary where the next would cross ~600k. This section is written so the seventh seat starts cold. **Line tip when last updated: the commit carrying this section's latest edit (after point 35).**
+
+**The per-point gate as it stands from point 34 on** (each line through `sh scripts/gate-tail.sh`, never a pipe): `NODE_OPTIONS=--max-old-space-size=6144 npm run build`; `node scripts/boot-smoke.mjs` PASS; `npm run typecheck:domain:strict` (1113 = 1113); `npm run typecheck:ratchet` (167); eslint on the composed files; the record walkers (`npx vitest run tests/lint/sourceCitationIntegrity.walker.test.js tests/lint/ledgerCitationIntegrity.test.js tests/lint/testRatchet.test.js`, 114); `npx vitest run --maxWorkers=2 tests/lint` and `tests/scripts`; the governing files (import-keyed set + the lane's own tests + the phone floors + worldFactRederive + generationForkCensus + tests/architecture/engineCoreLazyEdge + tests/build/brandDerivatives and aiMediaProvenance); `npm run verify:dist` (the script builds the flagged dist itself — NEVER build it by hand). Background jobs: pass a timeout of 7200000 (the 30-minute default killed point 33's governing run once).
+
+**THE CLOSING ACTS, in order** (§2, §2b, §2c and the sixth seat's prompt; the chair's rulings govern):
+
+1. **The edge-shared bundles, ONCE after the last src change:** `npm run build:edge-shared`, then restore every bundle whose `sourceHash` did not move (Appendix B's loop); commit with their inputs. Cures edgeSharedBundleReproducibility ×2 if red at the tip (PULSE-SITES leaves corruption.js and registry.js inputs un-emitted).
+2. **The composed-prose manifest, ONCE, through its signed door** (`scripts/audit/landing-stage.sh build|measure` then `node scripts/audit/landing-act.mjs run <cfg>` with the prose surface; the record a shift-record JSON; every row attributed by lane — SW-B1 72, SW-8 1,038, and every other lane's). Cures dossierProseManifest DRIFT ×2 (the stage suites' DRIFT pair).
+3. **The style walker's baseline DOWN:** `node scripts/lib/style-law-scan.mjs --record` — diff the totals and per-file counts first; a rise is refused (STOP).
+4. **The content-totality contracts re-keyed ONCE, by measurement, each figure attributed:** tests/lint/newsHeadlineContract.walker.test.js A2 (80 address rows + digest) and A3 (26 rewrite counts) — red since point 18 (SW-12), plus PULSE-SITES' `applied|npc_verdict|summary` distinct 1 → 2 (cause 83d79aaa2) at its point; tests/lint/proseFamilyContract.walker.test.js A1, A3, A5 (pulse-history distinct 1063 → 1096 at point 18; SW-12); tests/lint/proseRegisterLoaders.walker.test.js R6 (1662 → 1830 rows = SW-9b-A A6's 168 lines; the chair's class ruling 03:4x).
+5. **The observed-shape register's rungs, by the chair's rulings (21:2x and 00:2x):** rung 40's act 2 (`node scripts/check-observed-shape-readers.mjs --write --migrate-schema=40 --migration-review=<bundle.json>` — the checker's own wording; SW-B7b's act 1 is already on the line: `PUBLIC_PROSE_TARGET_SCHEMA = 40`, the declaration in `EXPLAINED_WRITER_EXEMPTIONS`), then rung 41 with the new class "played-worlds writer" in `EXPLAINED_WRITER_MECHANISMS`, first entry convergence.js's minted-proposal `outcome` behind `newsBody.js :: itemSettlementIds`, the 21:2x ruling's words; every inputs-only drift (SW-7 power.generated.js, SW-8 R6, LIBRARY-SIMPLE's two deleted modules, PULSE-SITES' owed causeLifecycle/secondaryAffiliation erasure row, COMPENDIUM-INSTITUTIONS' UI cohort 5 → 4) re-frozen in the same two-act migration, each attributed. If the schema bump cannot carry a new class, that is a STOP with the schema's exact fields. Cures observedShapeReaders ×4.
+6. **STOP 2's leftover:** drop the no-watch phrase path if membership alone reads > 0.9 (§3).
+7. **THE CEILINGS, ONCE, at the measured final tip, every byte attributed by merge point, no buy-back:** tests/build/vendorPdfLazy.test.js `CLOSURE_BUDGET_BYTES` (1,104,215) and its gzip (351,590) and Brotli (295,016) budgets; tests/build/generationWorkerLazy.test.js `WORKER_BUNDLE_CEILING_BYTES` (1,976,655). Readings so far: first paint 1,121,270 / 357,218 / 299,822 at point 35 (BOOT-TIP's attribution: point 19 +11,321, 18 +2,490, 23 +912, 17 +713; then +1,206 raw over points 28–30, +110 at 33, −17 at 35; TIER-PARITY's +20 B Brotli); the worker 2,007,681 (unmoved since point 31). The FLAGGED artifact's first paint (1,097,336 / 348,293 / 292,542 at DIST-FLAGGED) is under every budget. Cures verify:dist's vendorPdfLazy ×3 and generationWorkerLazy.
+8. **The strict type ratchet's residue from later merges, typed for real** (none so far: 1113 = 1113 at every point from 30).
+9. **The 1,000 at the final tip:** `node scripts/audit/soak-review.mjs --count 1000 --workers 2 --out <scratch>` (4 workers if the container holds) — the twenty frames not raised by skeleton (the owner's five governance skeletons excepted by name); `coh:tier-noun` 0; the retired word 0; "rather than" at or below the base; the §8 floor; findings against the base's 657.
+10. **THE CLOSING PROOF, the gate's own word:** all seventeen steps of `npm run check` in a CLEAN worktree, each to its own exit code, each 0 — the eleven validators, `typecheck:ratchet`, `typecheck:domain:strict`, `lint`, `test:ratchet` (no failing test, one skip at most; `--maxWorkers` the script's own), `build`, `verify:dist` — the step table in the record. A red only a ruling clears is a STOP; nothing is banked except by the chair. Then this record's closing section and "THE STYLE WAVE IS IN" with the final tip. (After it, the chair walks the flagged build end to end and merges its docs lanes.)
+
+**Every red carried at point 35, by title, with the act that cures it:**
+
+- tests/lint/newsHeadlineContract.walker.test.js — "A2 freezes all 80 address rows and their canonical digest", "A3 freezes both raw lanes and all 26 exact rewrite counts" → act 4.
+- tests/lint/proseFamilyContract.walker.test.js — "A1 reconstructs the exact four-family AO-0 corpus twice from one build", "A3 freezes all 58 identities counts bytes digest and movement polarities", "A5 closes twelve pulse-history records and pins overlapping headline aliases" → act 4.
+- tests/lint/proseRegisterLoaders.walker.test.js — "R6 reproduces the seat's 1,662 rows in 1,104 pools EXACTLY" → act 4.
+- tests/lint/observedShapeReaders.walker.test.js — "the baseline is CONTENT-ADDRESSED, internally consistent, and every row is a real file"; "A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live"; "SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished"; "the provenance drift classifier … THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all" → act 5.
+- verify:dist — tests/build/vendorPdfLazy.test.js "entry static closure raw bytes stay under the first-paint budget (1104215)", "… gzip bytes stay under 351590", "… Brotli bytes stay under 295016"; tests/build/generationWorkerLazy.test.js "the generation worker bundle stays under its measured ceiling" → act 7.
+- The stage suites' dossierProseManifest DRIFT pair → act 2. edgeSharedBundleReproducibility ×2 if red at the tip → act 1.
+- Base reds owned by GREEN-TIP (its point, not a closing act): editCorpusRatchet A3/A4/A7/A8, readerValidationOnPage soak1k-24, and the train's others by its census. The chair's 17-step run at f0f98d883 names every failing test with its owner; a red with no owner is the chair's to rule.
+
+**Cured on the line by the sixth seat's points (no longer carried):** publicProseEquality ×2 (point 33, VEIL-FIX); brandDerivatives ×3 (point 32, BRAND-MINT); engineAbsentWhenRemote ×4 non-run rows (point 34, DIST-FLAGGED); the chunk cycle and the boot (point 31, BOOT-TIP); the strict ratchet's 90 (point 30, STRICT-TIP).
+
+**The sixth seat's helpers** are Appendices A–D's with the seat constants set to STYLE-2-MERGE-6 and the worktree `/home/user/wt-merge6` (`/home/user/rec6/`), plus `gate2.sh`/`gate3.sh` (Appendix E).
+
 ## 3. The running tables
 
 **STOP rulings, as applied:**
@@ -692,4 +725,45 @@ for(const c of A.corp.goldenCorpus()){const{_seed,...cfg}=c;
   if(p!==fb.length) other.push(['findings-not-subsequence',A.corp.keyOf(c),fa,fb]); else dropped+=fa.length-fb.length;
  });}
 console.log(JSON.stringify({rows,dropped,statusFlip,other:other.length,ex:other.slice(0,4)},null,1));
+```
+
+## Appendix E. The sixth seat's helpers (outside scripts/; recreate them from these quotes)
+
+`gate2.sh <n> <govfile>` (from BOOT-TIP on): build, boot smoke, strict, typecheck, tests/lint, tests/scripts, the governing files; `gate3.sh` (from DIST-FLAGGED on) adds `npm run verify:dist`. Run in the background with a 7200000 timeout.
+```sh
+#!/bin/sh
+# usage: gate2.sh <n> <govfile> — the point's gate from BOOT-TIP on (STYLE-2-MERGE-6): build, boot smoke,
+# strict, typecheck, tests/lint, tests/scripts, the governing files; each line its own log; summary in /tmp/claude-0/gate<n>.sum
+n=$1; gov=$2; S=/tmp/claude-0/gate$n.sum; : > $S
+cd /home/user/wt-merge6
+NODE_OPTIONS=--max-old-space-size=6144 sh scripts/gate-tail.sh npm run build > /tmp/claude-0/g$n-build.log 2>&1; echo "build exit $?" >> $S
+sh scripts/gate-tail.sh node scripts/boot-smoke.mjs > /tmp/claude-0/g$n-boot.log 2>&1; echo "boot exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:domain:strict > /tmp/claude-0/g$n-strict.log 2>&1; echo "strict exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:ratchet > /tmp/claude-0/g$n-tsc.log 2>&1; echo "tsc exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/lint > /tmp/claude-0/g$n-lint.log 2>&1; echo "lint exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/scripts > /tmp/claude-0/g$n-scripts.log 2>&1; echo "scripts exit $?" >> $S
+if [ -s "$gov" ]; then sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 $(cat $gov | tr '\n' ' ') > /tmp/claude-0/g$n-gov.log 2>&1; echo "gov exit $?" >> $S; fi
+echo DONE >> $S
+```
+```sh
+#!/bin/sh
+# usage: gate3.sh <n> <govfile> — the point's gate from DIST-FLAGGED on (STYLE-2-MERGE-6): gate2's lines, then the
+# script's own `npm run verify:dist` (it builds the flagged dist itself). Summary in /tmp/claude-0/gate<n>.sum
+n=$1; gov=$2
+sh /home/user/rec6/gate2.sh $n $gov
+S=/tmp/claude-0/gate$n.sum
+cd /home/user/wt-merge6
+sh scripts/gate-tail.sh npm run verify:dist > /tmp/claude-0/g$n-vd.log 2>&1; echo "verify:dist exit $?" >> $S
+echo DONE2 >> $S
+```
+
+`pw.e2e.config.mjs`: the committed playwright.config.js with ONLY the Chromium executablePath and the webServer cwd changed (run `npx playwright test -c <this> --project=chromium --trace off <specs>` from the worktree; the repository pins a Playwright whose Chromium is not the container's).
+```js
+// STYLE-2-MERGE-6 scratch wrapper: the committed playwright.config.js with ONLY the Chromium executablePath changed.
+import base from '/home/user/wt-merge6/playwright.config.js';
+const projects = base.projects.map((p) => p.name === 'chromium'
+  ? { ...p, use: { ...p.use, launchOptions: { ...(p.use?.launchOptions ?? {}), executablePath: '/opt/pw-browsers/chromium' } } }
+  : p);
+const webServer = (Array.isArray(base.webServer) ? base.webServer : [base.webServer]).map((w) => ({ ...w, cwd: '/home/user/wt-merge6' }));
+export default { ...base, testDir: '/home/user/wt-merge6/e2e', projects, webServer };
 ```
