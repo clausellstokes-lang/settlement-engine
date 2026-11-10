@@ -614,7 +614,10 @@ const DESKTOP_BASELINE = Object.freeze({
   "Summary/Foundations": { measured: 1, sub14: 1 },
   // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
   // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
-  "Summary/Plot Hooks":  { measured: 88, sub14: 88 },
+// ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE-4, point 24; SW-8 RENAME-POWERS C9-6 d12e20112, the power generators):
+// Plot Hooks 88 -> 89 on both arms. Red on SW-8's own tip b951ce7da and unkeyed there; bisected over the lane: green at
+// c85fd3f85, red at d12e20112 (the conflict hooks reworded). No token moved; sub12 0.
+  "Summary/Plot Hooks":  { measured: 89, sub14: 89 },
   "Systems/Services":    { measured: 104, sub14: 104 },
   "Systems/Institutions": { measured: 71, sub14: 71 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
@@ -742,7 +745,7 @@ const MOBILE_BASELINE = Object.freeze({
   "Summary/Foundations": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
-  "Summary/Plot Hooks":  { prose: 88, chrome: 0, sub14: 0, sub12: 0 },
+  "Summary/Plot Hooks":  { prose: 89, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 70, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
