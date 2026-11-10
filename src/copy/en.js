@@ -709,7 +709,7 @@ export const en = Object.freeze({
         eyebrow: 'Save it',
         tier:    'Free account',
         // Full-size generation belongs to the FREE rung — size is not premium.
-        body:    'A free account generates any size, from hamlet to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
+        body:    'A free account generates any size, from thorpe to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
         cta:     'Create a free account',
       },
       simulates: {
@@ -1806,7 +1806,7 @@ export const en = Object.freeze({
     },
     cancelAnytime: {
       q: 'Can I cancel my subscription?',
-      a: 'Yes. Open the Manage Subscription link in your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
+      a: 'Yes. Open Account and use Manage subscription in the Subscription panel; it opens your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
     },
     refundWindow: {
       q: 'Do you offer refunds?',
@@ -1814,15 +1814,15 @@ export const en = Object.freeze({
     },
     founderLifetime: {
       q: 'What is a Founder chair?',
-      a: 'A place in the credits, and everything the paid Cartographer tier runs, for as long as SettlementForge runs. The Founders’ Hall holds thirty chairs. They are given by invitation and have never been for sale; you can ask for one by letter in the Hall.',
+      a: 'A place in the credits, and everything the paid Cartographer tier runs, for as long as SettlementForge runs. The Founders’ Hall holds {seats} chairs. They are given by invitation and have never been for sale; you can ask for one by letter in the Hall.',
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',
-      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement. The toggle lives in the dossier header.',
+      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement. Use Share to Gallery in a saved settlement’s header, or Export to gallery in a live dossier’s action band.',
     },
     aiOrSim: {
       q: "Does SettlementForge use AI to write my settlement?",
-      a: 'The structural layer (population, powers, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
+      a: 'The structural layer (population, powers, supply chains, hooks) is a deterministic simulator, not an LLM. Optional Narrative Refinement spends credits to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
     },
   },
 

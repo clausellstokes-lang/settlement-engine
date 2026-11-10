@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 217,
+      "dated": 218,
       "sha-pin": 2,
       "tree": 173
     },
@@ -496,7 +496,9 @@
     "_rosterGrowth2026-11-09-style-2-merge-sw-9b-a": "THE UNION AT THE SW-9b-A MERGE (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): both sides' notes kept; `dated` 215 -> 216 (docs/chair/2026-11-09/STYLE-2-SW9B-A-2026-11-09.md, the lane's record, born dated).",
     "_rosterGrowth2026-11-09-style-2-sw9b-b": "ONE document JOINED the roster by being BORN into it (seat SW-9b-B, a child of the chair session session_01FbPLbejcfwX5nii12VM673, session session_01FbPLbfPH4xFQP9Fj7BkTtA, on lane/style-2-sw9b-b-2026-11-09 cut from the integration line at 58aae07fb): `dated` 214 -> 215, docs/chair/2026-11-09/STYLE-2-SW9B-B-2026-11-09.md, the lane's record, born dated. The bump is from the tip's measured 214; SW-9b-A's record (its own bump, merged as point 26) is reconciled by the merge seat measuring the walker at the merged tree.",
     "_rosterGrowth2026-11-09-style-2-merge-sw-9b-b": "THE UNION AT THE SW-9b-B MERGE (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): both sides' notes kept; `dated` 216 -> 217 (docs/chair/2026-11-09/STYLE-2-SW9B-B-2026-11-09.md, the lane's record, born dated).",
-    "_rosterGrowth2026-11-09-style-2-merge-record-27": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): `tree` 172 -> 173, docs/shift-records/2026-11-10-style-2-merge-27-sw9b-b.json, record 27, born into the tree class; measured once by this walker; nothing changed class."
+    "_rosterGrowth2026-11-09-style-2-merge-record-27": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): `tree` 172 -> 173, docs/shift-records/2026-11-10-style-2-merge-27-sw9b-b.json, record 27, born into the tree class; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-10-about-current": "ONE document JOINED the roster by being BORN into it (ABOUT-CURRENT, a copy-and-UI seat, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbfiFbVSqzXxrVUjipx; on lane/about-current-2026-11-10 cut from a116c2c52): `dated` 215 -> 216, docs/chair/2026-11-10/ABOUT-CURRENT-2026-11-10.md, the lane's record (A1's census, the Guide brought current, A3's mismatches, What stays), born dated. A GROWTH that hid nothing; pastEofCitationsExcluded unchanged at 382.",
+    "_rosterGrowth2026-11-10-style-2-merge-about-current": "THE UNION AT THE ABOUT-CURRENT MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 217 -> 218 (docs/chair/2026-11-10/ABOUT-CURRENT-2026-11-10.md, the lane's record, born dated)."
   },
   "rows": []
 }
