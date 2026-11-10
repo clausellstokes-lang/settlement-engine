@@ -63,6 +63,12 @@ const RETIRED_FIELDS = Object.freeze(['factionAffiliation', 'secondaryAffiliatio
 const SITE_KINDS = new Set(['read', 'destructure', 'string', 'path-string']);
 const SITE_CLASSES = new Set(['LEGACY', 'DEAD', 'DARK', 'CURED-ON-LANE']);
 const MIGRATION_FILE = 'src/domain/settlementMigrations.js';
+/**
+ * THE CEILING, PINNED HERE AND NOT IN THE LIST (the chair's P2, 2026-11-10: the reviewer grew the list by a read and a
+ * row and set its own `count` to 20, and the arm passed). It only FALLS: lower it in the same commit that removes a
+ * row; never raise it. 19 at PULSE-SITES (LEGACY 3, DEAD 2, DARK 3, CURED-ON-LANE 11).
+ */
+const RETIRED_SITE_CEILING = 19;
 
 /** The retired-field sites of one source, as `file:line field`. @param {string} file @param {string} source */
 function retiredSitesIn(file, source) {
@@ -115,5 +121,7 @@ describe('the retired per-card fields: every remaining site is a named row (PULS
     expect(found.filter((s) => !named.has(s)), 'a retired-field read NOT on the list (cure it, or name it with its class)').toEqual([]);
     expect(listed.filter((s) => !seen.has(s)), 'a STALE row: the site is gone, so its row leaves the list').toEqual([]);
     expect(list.sites.length).toBe(list.count);
+    expect(list.sites.length, 'the list may only SHRINK: a row above the in-test ceiling is a new legacy read').toBeLessThanOrEqual(RETIRED_SITE_CEILING);
+    expect(list.sites.length, 'a row left the list: lower RETIRED_SITE_CEILING to match, in the same commit').toBe(RETIRED_SITE_CEILING);
   });
 });
