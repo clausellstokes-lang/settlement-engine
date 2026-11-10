@@ -109,6 +109,13 @@ export function recurringWarConditionRecordMode({
   return previous.severityBand === incoming.severityBand ? 'state_only' : undefined;
 }
 
+const CLEARED_SUMMARY = Object.freeze([
+  (/** @type {Record<string, string>} */ x) => `The worst of the war's weariness is over in ${x.name}; what is left will fade with time.`,
+  (/** @type {Record<string, string>} */ x) => `${x.name} is still tired of the war, but the weariness no longer deepens.`,
+  (/** @type {Record<string, string>} */ x) => `In ${x.name} the war still weighs, but a little less as time goes on.`,
+  (/** @type {Record<string, string>} */ x) => `${x.name}'s war-weariness has begun to ease, though its marks will take time to fade.`,
+]);
+
 /**
  * Public receipt for the exact tick the durable scar drops below its renewal
  * floor. It carries no patch: the war ledger already crossed the boundary while
@@ -117,13 +124,6 @@ export function recurringWarConditionRecordMode({
  *   floor: number, tick: number }} args
  * @returns {PulseOutcome|null}
  */
-const CLEARED_SUMMARY = Object.freeze([
-  (/** @type {Record<string, string>} */ x) => `The worst of the war's weariness is over in ${x.name}; what is left will fade with time.`,
-  (/** @type {Record<string, string>} */ x) => `${x.name} is still tired of the war, but the weariness no longer deepens.`,
-  (/** @type {Record<string, string>} */ x) => `In ${x.name} the war still weighs, but a little less as time goes on.`,
-  (/** @type {Record<string, string>} */ x) => `${x.name}'s war-weariness has begun to ease, though its marks will take time to fade.`,
-]);
-
 export function warExhaustionClearanceOutcome({
   homeId,
   name,
