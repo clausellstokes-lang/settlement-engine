@@ -111,6 +111,12 @@ describe('the engine service answers the store\'s own requests with the store\'s
     try {
       const { request } = await storeForge('store-parity-off');
       expect(request.payload.contentRuntime.contentProvenance).toBe(null);
+      // The value the store decided from TRAVELS: set the way ConfigurationPanel sets it
+      // (updateConfig({ useCustomContent })), it is on the wire body the transport posts, and it
+      // survives the function's own birthConfig, so the function reads what the store read.
+      const wireConfig = wire({ seed: request.payload.seed, config: request.payload.fullConfig }).config;
+      expect(wireConfig.useCustomContent).toBe(false);
+      expect(bundle.birthConfig(wireConfig).useCustomContent).toBe(false);
       const local = runGenerationRequest(structuredClone(request));
       const served = serviceBirth(wire({ seed: request.payload.seed, config: request.payload.fullConfig }));
       expect(local.settlement.customContentProvenance).toBeUndefined();
