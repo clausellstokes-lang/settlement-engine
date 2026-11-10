@@ -60,7 +60,7 @@ const TOGGLES = [
   ['emergentEventsEnabled', 'Surprise events'],
   ['stressorsEnabled', 'Lasting troubles'],
   ['npcAgencyEnabled', 'NPC agency'],
-  ['factionCompetitionEnabled', 'Factions'],
+  ['factionCompetitionEnabled', 'Powers'],
   ['populationDynamicsEnabled', 'Population'],
   ['resourceDriftEnabled', 'Resources'],
   ['tierDriftEnabled', 'Towns rise and fall in size'],

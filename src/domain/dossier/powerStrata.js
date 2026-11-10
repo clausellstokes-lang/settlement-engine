@@ -368,7 +368,7 @@ export function rulingChainOf(settlement) {
       absence = {
         kind: /** @type {'unrecorded'} */ ('unrecorded'),
         claimants: [],
-        line: 'No named seat-holder stands in the record. The chain ends, honestly, at the faction.',
+        line: 'No named seat-holder stands in the record. The chain ends, honestly, at the power.',
       };
     }
   }

@@ -2342,7 +2342,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "COMPOUND: political fracture": [
         {
           "angle": "street",
-          "text": "Which faction holds a district of {settlement} decides which rules apply there.",
+          "text": "Which power holds a district of {settlement} decides which rules apply there.",
           "slots": [
             "settlement"
           ],
@@ -2350,7 +2350,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Cross a street at {settlement} and you may cross from one faction's rules into another's.",
+          "text": "Cross a street at {settlement} and you may cross from one power's rules into another's.",
           "slots": [
             "settlement"
           ],
@@ -2358,7 +2358,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "Each faction at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
+          "text": "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
           "slots": [
             "settlement"
           ],

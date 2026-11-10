@@ -312,10 +312,10 @@ export const WHAT_PHRASES = Object.freeze({
   // power / faction / coup
   coup_succeeded: 'a seizure of power',
   coup_suppressed: 'an uprising put down',
-  faction_exhaustion: 'a faction spent and failing',
+  faction_exhaustion: 'a power spent and failing',
   faction_government_challenge: 'a challenge to those in power',
   faction_rival_power_contest: 'a contest between rival powers',
-  faction_capture: 'a faction seizing control',
+  faction_capture: 'a power seizing control',
   // TE-DENSITY-1 (§810.4 R18/R19): a house whose last named figure left the roster, and
   // the ONE house that may not end that way — the ruling seat, which stands empty instead.
   faction_dissolved: 'a house of power come to an end',
@@ -404,7 +404,7 @@ export const WHAT_PHRASES = Object.freeze({
   urban_fabric: 'the changing face of a settlement',
   spatial_consequence: 'where in a settlement the blow fell',
   // THE LADDER — a shift in a faction's rank order (owner commission, engine lift #3)
-  npc_ladder: 'a change in who holds rank within a faction',
+  npc_ladder: 'a change in who holds rank within a power',
   // THE CONTESTED GOALS CLASS — two named NPCs reach for the same prize (Deep Couplings D-4)
   npc_contest: 'a rivalry over the same ambition',
   npc_support: 'a cause bound to a patron\'s',

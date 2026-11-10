@@ -502,7 +502,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {/* The criminal faction as ONE coupled line, name and band (T2-20): its description
               lives on Power's roster and the capture state is Power's. */}
           {crimFaction&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',padding:'7px 13px',fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.danger}}>
-            Criminal faction: {crimFaction.faction}{crimFaction.powerLabel?` · ${crimFaction.powerLabel}`:''}
+            Underworld: {crimFaction.faction}{crimFaction.powerLabel?` · ${crimFaction.powerLabel}`:''}
           </div>}
 
           {/* Crime types — as enforcement challenges, not economic statistics */}

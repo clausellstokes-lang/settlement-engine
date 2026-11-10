@@ -297,7 +297,7 @@ export function deriveFactionProfile(faction, settlement) {
 
   const name = typeof faction === 'string'
     ? faction
-    : (faction.faction || faction.name || 'Unnamed Faction');
+    : (faction.faction || faction.name || 'Unnamed power');
   const archetype = deriveFactionArchetype(faction);
   const template = templateForArchetype(archetype);
 

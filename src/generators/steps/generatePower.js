@@ -116,7 +116,7 @@ registerStep('generatePower', {
       causes.push({
         source: 'governingFaction',
         effect: 'inherits public legitimacy',
-        reason: `As the governing faction, ${profile.name} inherits the settlement's public-legitimacy score (${profile.legitimacy}).`,
+        reason: `As the governing power, ${profile.name} inherits the settlement's public-legitimacy score (${profile.legitimacy}).`,
       });
     }
     if (Array.isArray(institutions) && institutions.length) {

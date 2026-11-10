@@ -1612,6 +1612,22 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
       'and a pool reaching nothing is not counted').toEqual([]);
   });
 
+  test('PROBE: a category\'s DISPLAY singular is never an identity — renaming it changes no reachable row', () => {
+    // 2026-11-09 (SW-8 RENAME-POWERS second seat, the chair's ruling (B) at 17:2x): SW-8 C7 renamed the
+    // custom-content manifest's display singular "Faction" -> "Power", and the bucket limb read that LABEL
+    // as a token, so the power desk's own root `power.*` became eight false reaches (28 -> 36). The bucket
+    // tokens are the category's STORED identity — its key and its read-path `root` — never a label.
+    const rows = [
+      { block: 'B', pool: 'desk root', reads: ['power.stability'], predicate: [] },
+      { block: 'B', pool: 'by key', reads: ['readings.factions'], predicate: [] },
+      { block: 'B', pool: 'by root', reads: ['faction.name'], predicate: [] },
+    ];
+    const withSingular = (singular) => customReachable(rows, [{ key: 'factions', root: 'faction', singular, fields: [] }]).rows;
+    expect(withSingular('Power'), 'the display singular moved no row').toEqual(withSingular('Faction'));
+    expect(withSingular('Power').map((r) => r.pool), 'the key and the stored root still reach; the label never does')
+      .toEqual(['by key', 'by root']);
+  });
+
   test('the relation table has its row count by source and by direction, and source (d) is EMPTY', () => {
     const relations = committed.relations;
     expect(relations.rows.length, 'rows the four sources yield at this tip').toBe(165);

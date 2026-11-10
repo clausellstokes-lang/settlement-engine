@@ -143,7 +143,7 @@ const RENDERERS = {
     `The forces of another power hold ${name}, and its own officials take their orders. Most people keep their heads down; a few fight back in secret.`,
 
   politically_fractured: (name) =>
-    `Two or three factions each run part of ${name}, and none will give way. Daily life goes on, but nothing is done without asking whose side it helps.`,
+    `Two or three powers each run part of ${name}, and none will give way. Daily life goes on, but nothing is done without asking whose side it helps.`,
 
   indebted: (name) =>
     `${name} owes an outside power more than it can ever repay, and the debt now decides what it can and cannot do.`,
@@ -169,7 +169,7 @@ const RENDERERS = {
   insurgency: (name) => {
     const h = name || "the settlement";
     return (
-      "A powerful faction in " +
+      "A strong power in " +
       h +
       " has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits."
     );
@@ -247,7 +247,7 @@ const RENDERERS = {
 function RELIGIOUS_CONVERSION_VARIANTS(s) {
   return [
     { id: 0, needs: ['institution: temple'], text: "A new faith is gaining ground in " + s + ". The old house keeps its buildings and its records, but each week its priest preaches to fewer people." },
-    { id: 1, needs: ['institution: temple'], text: "The religious community of " + s + " has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither." },
-    { id: 2, text: "An outside authority is requiring " + s + " to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows." },
+    { id: 1, needs: ['institution: temple'], text: "The religious community of " + s + " has fractured. Both sides claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither." },
+    { id: 2, text: "An outside authority is requiring " + s + " to convert. The governing power has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows." },
   ];
 }

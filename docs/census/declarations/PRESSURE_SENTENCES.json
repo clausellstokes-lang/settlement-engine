@@ -121,7 +121,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[1]",
-          "text": "Since the harvest failed, whoever holds the food in ${name} holds the power, and at least three factions are fighting over the stores.",
+          "text": "Since the harvest failed, whoever holds the food in ${name} holds the power, and at least three powers are fighting over the stores.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -289,7 +289,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[1]",
-          "text": "Three factions in ${name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.",
+          "text": "Three powers in ${name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -300,7 +300,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[2]",
-          "text": "${topNPCName}, the ${topNPCRole}, is the only person all three factions will still speak to, which makes them either the key to resolution or the next target.",
+          "text": "${topNPCName}, the ${topNPCRole}, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -311,7 +311,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[3]",
-          "text": "Nothing gets decided in ${name}, because any decision would hand one faction a win the others will not allow, and every faction prefers the deadlock to losing.",
+          "text": "Nothing gets decided in ${name}, because any decision would hand one power a win the others will not allow, and every power prefers the deadlock to losing.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -540,7 +540,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.infiltrated[1]",
-          "text": "Someone has lived in ${name} long enough to learn its weak points, its factions and whom it trusts, and is using all three.",
+          "text": "Someone has lived in ${name} long enough to learn its weak points, its powers and whom it trusts, and is using all three.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -874,7 +874,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.insurgency(street)[0]",
-          "text": "The commons of ${name} have stopped obeying. ${govFaction} still holds the buildings and the official seal, but its orders go unanswered, and the first faction leader to offer something better will find people ready to follow.",
+          "text": "The commons of ${name} have stopped obeying. ${govFaction} still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -1225,7 +1225,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.religious_conversion[1]",
-          "text": "${name}'s religious community has formally split. Both factions hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.",
+          "text": "${name}'s religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.",
           "needs": [
             "institution: temple"
           ],
@@ -1303,7 +1303,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.slave_revolt[0]",
-          "text": "The revolt in ${name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing faction has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${name} becomes afterwards, and who decides.",
+          "text": "The revolt in ${name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${name} becomes afterwards, and who decides.",
           "needs": [],
           "excludes": [],
           "crisis": [

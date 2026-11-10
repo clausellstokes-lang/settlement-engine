@@ -487,7 +487,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'power',
     },
     {
-      short: 'Root out the faction leaking tax figures to rivals',
+      short: 'Root out whoever is leaking tax figures to rivals',
       long: 'Retire with a fortune and a clean name (in that order)',
       driven_by: 'wealth',
       colour: true,
@@ -685,7 +685,7 @@ export const NPC_FACTION_GOALS = {
       colour: true,
     },
     {
-      short: 'Negotiate a non-aggression pact with a new criminal faction moving into their territory',
+      short: 'Negotiate a non-aggression pact with a new gang moving into their territory',
       long: 'Ensure no one ever proves the connection between them and their operations',
       driven_by: 'personal',
       colour: true,
@@ -734,7 +734,7 @@ export const NPC_FACTION_GOALS = {
   ],
   'Guild Archmage': [
     {
-      short: "Resolve a dispute between two factions of the mages' guild without taking sides",
+      short: "Resolve a dispute between two camps within the mages' guild without taking sides",
       long: 'Establish a magical institution that outlasts their own life and power',
       driven_by: 'power',
       colour: true,
@@ -1957,7 +1957,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`, colour: true },
       { line: (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`, colour: true },
-      { line: (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) => `One camp on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
         `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>

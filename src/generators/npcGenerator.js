@@ -423,14 +423,14 @@ export const STRESS_GOAL_OVERRIDES = {
     },
     rel: {
       short:
-        'Avoid being forced to publicly declare support for either the governing faction or the insurgency, and run out of reasons before the pressure does',
+        'Avoid being forced to publicly declare support for either the governing power or the insurgency, and run out of reasons before the pressure does',
     },
   },
   mass_migration: {
     gov: {
       needs: ['migration: influx'], short:
         'Manage the influx without the old residents concluding the governing authority has chosen the newcomers over them',
-      note: 'The governing faction is caught between two constituencies that want incompatible things, and both know it.',
+      note: 'The governing power is caught between two constituencies that want incompatible things, and both know it.',
     },
     merchant: {
       short:
@@ -455,7 +455,7 @@ export const STRESS_GOAL_OVERRIDES = {
   slave_revolt: {
     gov: {
       short:
-        'End the revolt without either full suppression or formal negotiation: both options set precedents the governing faction cannot afford',
+        'End the revolt without either full suppression or formal negotiation: both options set precedents the governing power cannot afford',
       note: "The revolt's continued existence is itself a delegitimisation. Every day it continues is evidence that the authority is not in control.",
     },
     mil: {

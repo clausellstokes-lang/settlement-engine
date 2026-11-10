@@ -30,7 +30,7 @@
     },
     {
       "id": "noGains",
-      "text": "no faction gains",
+      "text": "no power gains",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -81,7 +81,7 @@
     },
     {
       "id": "noSplit",
-      "text": "no faction could go either way",
+      "text": "no power could go either way",
       "needs": [],
       "excludes": [],
       "crisis": [],

@@ -154,7 +154,7 @@
     },
     {
       "id": "instigatorGains",
-      "text": "its faction gains from the crisis",
+      "text": "its power gains from the crisis",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -214,7 +214,7 @@
     },
     {
       "id": "exploiterTrait",
-      "text": "grasping by nature, in a faction that gains",
+      "text": "grasping by nature, in a power that gains",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -222,7 +222,7 @@
     },
     {
       "id": "exploiterPower",
-      "text": "the most powerful of a faction that gains",
+      "text": "the strongest figure in a power that gains",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -308,7 +308,7 @@
     },
     {
       "id": "collaboratorAmbition",
-      "text": "the most ambitious of a faction that gains",
+      "text": "the most ambitious of a power that gains",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -327,7 +327,7 @@
     },
     {
       "id": "waverer",
-      "text": "its faction could go either way",
+      "text": "its power could go either way",
       "needs": [],
       "excludes": [],
       "crisis": [],

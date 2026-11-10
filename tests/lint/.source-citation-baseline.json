@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 213,
+      "dated": 214,
       "sha-pin": 2,
       "tree": 169
     },
@@ -484,7 +484,9 @@
     "_rosterGrowth2026-11-09-style-2-merge-sw6": "THE UNION AT THE SW-6 CRISIS-SURFACES MERGE (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): both sides' notes kept; `dated` 211 -> 212 (docs/chair/2026-11-09/STYLE-2-CRISIS-SURFACES-2026-11-09.md, the lane's record, born dated).",
     "_rosterGrowth2026-11-09-style-2-merge-record-22": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-3, session session_01FbPLbfL5qqV4cXN7ykvbtJ): `tree` 168 -> 169, docs/shift-records/2026-11-09-style-2-merge-22-sw6.json, record 22, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-projection": "ONE document JOINED the roster by being BORN into it (SW-B7b PROJECTION, session session_01FbPLbdv5BoGUynY8ainpA5, on lane/style-2-projection-2026-11-09 cut from bd07005b9, measured once with this walker's own arm): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md, the lane's record, born dated (its citations are `path :: symbol`), 0 past-EOF; nothing changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-sw-b7b": "THE UNION AT THE SW-B7b MERGE (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): both sides' notes kept; `dated` 212 -> 213 (docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-09-style-2-merge-sw-b7b": "THE UNION AT THE SW-B7b MERGE (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): both sides' notes kept; `dated` 212 -> 213 (docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-09-style-2-rename-powers": "ONE document JOINED the roster by being BORN into it (seat SW-8 RENAME-POWERS, a child of the chair session session_01FbPLbejcfwX5nii12VM673, session session_01FbPLbbaKV7YuaHy2mo9ouG, on lane/style-2-rename-powers-2026-11-09 cut from MERGE-TRAIN's final tip bd07005b9): `dated` 189 -> 190, docs/chair/2026-11-09/STYLE-2-RENAME-POWERS-2026-11-09.md, the lane's record (the first seat's rule-14 hand-back), born dated. The bump is from the tip's measured 189; the chair reconciles at STYLE-2-MERGE by measuring the walker's count at the merged tree.",
+    "_rosterGrowth2026-11-09-style-2-merge-sw-8": "THE UNION AT THE SW-8 MERGE (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): both sides' notes kept; `dated` 213 -> 214 (docs/chair/2026-11-09/STYLE-2-RENAME-POWERS-2026-11-09.md, the lane's record, born dated)."
   },
   "rows": []
 }

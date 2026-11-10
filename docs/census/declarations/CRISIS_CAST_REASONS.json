@@ -284,7 +284,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.instigatorGains",
-     "text": "its faction gains from the crisis",
+     "text": "its power gains from the crisis",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -360,7 +360,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterTrait",
-     "text": "grasping by nature, in a faction that gains",
+     "text": "grasping by nature, in a power that gains",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -369,7 +369,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterPower",
-     "text": "the most powerful of a faction that gains",
+     "text": "the strongest figure in a power that gains",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -478,7 +478,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.collaboratorAmbition",
-     "text": "the most ambitious of a faction that gains",
+     "text": "the most ambitious of a power that gains",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -500,7 +500,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.waverer",
-     "text": "its faction could go either way",
+     "text": "its power could go either way",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -583,7 +583,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noGains",
-     "text": "no faction gains",
+     "text": "no power gains",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -645,7 +645,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noSplit",
-     "text": "no faction could go either way",
+     "text": "no power could go either way",
      "needs": [],
      "excludes": [],
      "crisis": "any",

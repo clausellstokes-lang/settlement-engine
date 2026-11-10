@@ -1035,7 +1035,13 @@ export async function buildCensus(options = {}) {
     branch: grainFigures(spines, DOSSIER_MOUNTS, deskFacts),
     function: grainFigures(shadow, DOSSIER_MOUNTS, deskFacts),
   };
-  const custom = customReachable(spines, CUSTOM_CONTENT_MANIFEST.categories);
+  // The bucket limb reads each category's STORED read-path `root` off the manifest's JSON
+  // source (the generator strips it from the runtime artifacts, so it costs no product bytes);
+  // the display `singular` is never an identity (the chair's ruling (B), 2026-11-09).
+  const sourceRoots = new Map(JSON.parse(readFileSync(join(ROOT, 'schema/custom-content.manifest.json'), 'utf8'))
+    .categories.map((category) => [category.key, category.root]));
+  const custom = customReachable(spines, CUSTOM_CONTENT_MANIFEST.categories
+    .map((category) => ({ ...category, root: sourceRoots.get(category.key) })));
   const sources = sourceSummary(spines);
   const relations = relationTable();
   const rateRows = options.rates?.rows || [];

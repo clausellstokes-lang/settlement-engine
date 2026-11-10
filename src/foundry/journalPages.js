@@ -192,7 +192,7 @@ function npcQuickRefPage(vm) {
   return md(
     lede(npcsHeadline(vm.npcs)),
     '',
-    '| Name | Role | Faction | Power |',
+    '| Name | Role | Member of | Power |',
     '| --- | --- | --- | --- |',
     npcs.map(n => `| ${esc(n.name)} | ${esc(n.title || '')} | ${esc(n.factionLabel || '')} | ${esc(n.power || 0)} |`),
   );
@@ -202,7 +202,7 @@ function notableNpcPage(n) {
   return md(
     kv('Role', n.title),
     kv('Race', n.race),
-    kv('Faction', n.factionLabel),
+    kv('Member of', n.factionLabel),
     kv('House', n.house),
     kv('Standing', n.powerLine),
     kv('Power', n.power),
@@ -220,7 +220,7 @@ function notableNpcPage(n) {
 }
 
 /** The hook groups a reader knows, for the catalogue's category keys. */
-const HOOK_GROUP_WORDS = Object.freeze({ npc: 'People', npcs: 'People' });
+const HOOK_GROUP_WORDS = Object.freeze({ npc: 'People', npcs: 'People', faction: 'Powers', factions: 'Powers' }); // SW-8: the hook group "Faction" (map B3)
 
 /** True when the Plot Hooks page lists a hook with this text. */
 function plotHooksListed(vm, text) {
@@ -257,7 +257,7 @@ function powerPage(vm) {
     kv('Stability', typeof p.stability === 'object' ? (p.stability?.label ?? p.stability?.value) : p.stability),
     // The band in words, not the score (the machinery off the reader's page; B4).
     p.legitimacy?.label ? kv('Public legitimacy', cap(p.legitimacy.label)) : null,
-    p.factions.length ? md('', '## Factions', p.factions.map(f =>
+    p.factions.length ? md('', '## Powers', p.factions.map(f =>
       // No "power N": the score is the engine's, not the reader's (the owner's style law of 2026-11-07).
       `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
@@ -274,7 +274,7 @@ function identityPage(vm, settlement = vm.raw) {
     kv('Layout', id.layout),
     kv('Age', id.age),
     kv('Trade access', id.tradeAccess ? humanize(id.tradeAccess) : null),
-    kv('Governing faction', id.anchor.governingName),
+    kv('Governing power', id.anchor.governingName),
     kv('Cultural notes', id.anchor.culturalNotes),
     // FOOD-4: the food record's foodways line, through the one reader — the PDF chapter's row.
     kv('Foodways', foodwaysLineOf(settlement)),
@@ -530,7 +530,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
     }
   }
   if (inc('plotHooks'))           push('Plot Hooks', plotHooksPage(vm));
-  if (inc('powerStructure'))      push('Power & Factions', powerPage(vm));
+  if (inc('powerStructure'))      push('Power', powerPage(vm));
   if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
   if (inc('institutions'))        push('Institutions', institutionsPage(vm));

@@ -83,7 +83,7 @@ export function involvedEntities(item = {}, nameById = new Map()) {
   }
 
   const faction = o.factionName || payload.factionName || item.factionName;
-  if (faction) out.push({ label: 'Faction', value: human(faction) });
+  if (faction) out.push({ label: 'Power', value: human(faction) });
 
   const institution = o.metadata?.institutionName || payload.institutionName || o.institutionName || item.institutionName;
   if (institution) out.push({ label: 'Institution', value: institution });

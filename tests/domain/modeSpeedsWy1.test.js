@@ -538,6 +538,14 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // STYLE-2-MERGE-3 at the PULSE-FOLLOW-UP merge (2026-11-09, point 20): the two lines' text-only moves composed (the integration
 // side's aabbf48b... and PULSE-FOLLOW-UP's 95f4af4f..., each leaf-diffed TEXT ONLY on its own base); the hash re-measured at the
 // merged tree: aabbf48b... / 95f4af4f... -> 5b023789...
+// 2026-11-09 (STYLE-2 SW-8 RENAME-POWERS, the owner's map, Part B4): 5b6a1e51... -> bce07bf5..., ONE cause, TEXT ONLY:
+// C5 e1a550158 (the world pulse's words). Bisected over the lane bd07005b9..e63c6aae6: unmoved through 417ca5cbe, moved
+// at e1a550158, unmoved after. Leaf-diffed 417ca5cbe -> e1a550158: 15 leaves, all strings — "Factions with the power to
+// move: …" -> "Powers strong enough to move: …" (x9), the label "Faction challenge" -> "Challenge to the rulers" (x3), its
+// reason line (x3); no id, tick or number moved. Still no datum: the absent arm holds.
+// STYLE-2-MERGE-4 at the SW-8 RENAME-POWERS merge (2026-11-10, point 24): the two lines' text-only moves composed (the
+// integration side's 5b023789... and SW-8's bce07bf5..., each leaf-diffed TEXT ONLY on its own base); the hash re-measured at
+// the merged tree: 5b023789... / bce07bf5... -> __NEW__...
 const BASE_PULSE_HASH = '5b0237899af2533959ed9a8c74f46a66bdd63f5585b858eedbaeeaa07b7ea4f5';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {

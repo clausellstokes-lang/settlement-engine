@@ -291,7 +291,8 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const chain = screen.getByTestId('ruling-chain');
     expect(chain.textContent).toContain('Merchant Guild');
-    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/ends, honestly, at the faction/);
+    // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS C9-4, the owner's map): the same absence line, "at the power".
+    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/ends, honestly, at the power/);
   });
 });
 
@@ -387,8 +388,8 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(town.conflicts.length, 'fixture premise: the town has a conflict').toBeGreaterThan(0);
     expect(town.history.currentTensions.length, 'fixture premise: the town has tensions').toBeGreaterThan(0);
     const text = view({ publicDossier: true });
-    expect(text).toContain('The Factions');
-    expect(text).not.toMatch(/Current Tensions \(|Active Conflicts \(/); // anchored: toContain('The Factions') on this render
+    expect(text).toContain('The Powers');
+    expect(text).not.toMatch(/Current Tensions \(|Active Conflicts \(/); // anchored: toContain('The Powers') on this render
     expect(text).not.toContain(town.conflicts[0].issue); // anchored: same render
   });
 });

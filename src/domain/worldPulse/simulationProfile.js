@@ -280,7 +280,7 @@ const CHANGE_PHRASES = {
     omniscient: 'all news is now true and immediate',
     perfect_delayed: 'news now travels. True, but only as fast as the roads',
     unreliable: 'news now travels and twists: distance breeds rumor',
-    full: 'each faction now believes its own version. News travels, twists, and is reconciled from many tellings',
+    full: 'each power now believes its own version. News travels, twists, and is reconciled from many tellings',
   })[/** @type {string} */ (value)] || 'the realm follows a new custom of news',
   majorChangesRequireProposal: value => (value
     ? 'major turns now ask you first'

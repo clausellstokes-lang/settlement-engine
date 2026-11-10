@@ -39,7 +39,8 @@ describe('fillSentenceSlots', () => {
 describe('the audited generation-time fallbacks (unit 1b)', () => {
   it('power/settlementNarrative.js :: genSuccessionNarr opens the surplus sentence on a capital when no faction is named', () => {
     const lines = genSuccessionNarr({ name: 'Ashby', prosperity: 'Wealthy', viabilityIssues: [] });
-    expect(lines).toContain('Ashby is prosperous enough that the real conflicts are about who controls the surplus. The dominant faction has the most and wants more.');
+    // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS C9-5, the owner's map): the same fallback, "The dominant power".
+    expect(lines).toContain('Ashby is prosperous enough that the real conflicts are about who controls the surplus. The dominant power has the most and wants more.');
   });
 });
 

@@ -191,7 +191,8 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
     inst.capacity ? { label: 'Capacity', value: inst.capacity } : null,
     inst.prominence ? { label: 'Scale', value: humanize(inst.prominence) } : null,
     inst.chainDepth != null ? { label: 'Chain', value: `depth ${inst.chainDepth}` } : null,
-    inst.source ? { label: 'Source', value: humanize(inst.source) } : null,
+    // SW-8 RENAME-POWERS (the owner's map, B2): the source key `faction_boost` stays; its words leave the page.
+    inst.source ? { label: 'Source', value: inst.source === 'faction_boost' ? 'Raised by a power' : humanize(inst.source) } : null,
     inst.founded ? {
       label: 'Established',
       value: typeof inst.founded === 'number' ? `${inst.founded}` : inst.founded,

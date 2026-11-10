@@ -137,7 +137,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       })),
     ke('recently_betrayed') &&
       (factions.push({
-        faction: 'Investigation Faction',
+        faction: 'The Inquiry',
         power: 12,
         desc: 'Informal coalition demanding answers; politically inconvenient to governance; growing.',
       }),
@@ -151,7 +151,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
     // pool's framing fits, and `other` is the category the old placeholder inferred.
     // `hidden: true` carries the fiction's fact; the description is unchanged.
     ke('infiltrated') &&
-      pushPoolNamed(factions, 'other', 15, 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.', { hidden: true }),
+      pushPoolNamed(factions, 'other', 15, 'An external interest with embedded assets in at least two powers. Its presence is not known to the settlement.', { hidden: true }),
     ke('succession_void') &&
       (factions.forEach((N) => {
         (N.isGoverning && ((N.power = Math.round(N.power * 0.5)), (N.modifiers = [...(N.modifiers || []), 'vacant'])),
@@ -171,7 +171,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           desc: 'A noble house with a plausible hereditary claim; controls several key military levies. Legally strongest. Not universally liked.',
         }),
         factions.push({
-          faction: 'Noble Claimant (Reform Faction)',
+          faction: 'Noble Claimant (Reform Line)',
           power: 17,
           desc: 'A rival noble house backed by popular sentiment and merchant capital; weaker bloodline claim but stronger coalition. Moving fast.',
         }))
@@ -238,13 +238,13 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ? 'Loyalist Noble Opposition'
             : P && P.includes('Feudal')
               ? "Reform Stewards' Coalition"
-              : 'Reformist Faction';
+              : 'Reform Movement';
         factions.push({
           faction: he,
           power: ye ? 18 : 22,
           desc: ye
             ? "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet, which makes negotiation impossible."
-            : 'Elite faction that has concluded the current governing arrangement is no longer viable. Pursuing institutional change through strategic non-cooperation, coalition-building, and selective pressure.',
+            : 'A group of the well-off who have concluded the current governing arrangement is no longer viable. Pursuing institutional change through strategic non-cooperation, coalition-building, and selective pressure.',
         });
       })(),
     ke('mass_migration') &&
@@ -306,17 +306,17 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ((he.power = Math.round(he.power * 1.5)),
             (he.desc =
               (he.desc || '') +
-              ' Wartime has transformed this faction from a civic institution into a primary power centre. Crown authority flows through military channels now.')),
+              ' Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.')),
             (he.faction.toLowerCase().includes('merchant') || he.faction.toLowerCase().includes('guild')) &&
               (ye
                 ? ((he.power = Math.round(he.power * 1.2)),
                   (he.desc =
                     (he.desc || '') +
-                    ' War contracts have made the well-connected wealthy. The faction is divided between those profiting and those whose trade routes are severed.'))
+                    ' War contracts have made the well-connected wealthy. The power is divided between those profiting and those whose trade routes are severed.'))
                 : ((he.power = Math.round(he.power * 0.8)),
                   (he.desc =
                     (he.desc || '') +
-                    ' Trade disruption and requisition are hurting the bottom line. The faction is lobbying for compensation and receiving promises.'))),
+                    ' Trade disruption and requisition are hurting the bottom line. The power is lobbying for compensation and receiving promises.'))),
             (he.faction.toLowerCase().includes('religious') || he.faction.toLowerCase().includes('church')) &&
               ((he.power = Math.round(he.power * 1.2)),
               (he.desc =
@@ -335,7 +335,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           }),
           ye ||
             factions.push({
-              faction: 'Peace Faction',
+              faction: 'Peace Movement',
               power: 10,
               desc: 'Merchants, clergy, and common voices arguing that the cost of continued war exceeds any achievable gain. Not traitors: pragmatists. Growing.',
             }));
@@ -361,13 +361,13 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               (ye === 0
                 ? ' Losing congregation to the new faith faster than leadership acknowledges publicly.'
                 : ye === 1
-                  ? ' One of two competing factions claiming the legitimate succession: legal standing of their records is contested.'
+                  ? ' One of two rival sides claiming the legitimate succession: legal standing of their records is contested.'
                   : ' Formally compliant with the conversion order. Actual compliance among the congregation is harder to assess.'))),
             he.isGoverning &&
               ((he.power = Math.round(he.power * 0.88)),
               (he.desc =
                 (he.desc || '') +
-                ' Under pressure from both religious factions to make a formal declaration of support. Has so far avoided doing so.')),
+                ' Under pressure from both sides of the faith to make a formal declaration of support. Has so far avoided doing so.')),
             (he.faction.toLowerCase().includes('thieves') || he.faction.toLowerCase().includes('criminal')) &&
               (he.power = Math.round(he.power * 1.25)));
         }),
@@ -381,17 +381,17 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               ? factions.push({
                   faction: 'Reform Congregation',
                   power: 16,
-                  desc: 'The breakaway faction in the religious schism. Claims doctrinal legitimacy and holds parallel services. Legal standing of its records and sacraments is disputed by the established institution.',
+                  desc: 'The breakaway side in the religious schism. Claims doctrinal legitimacy and holds parallel services. Legal standing of its records and sacraments is disputed by the established institution.',
                 })
               : (factions.push({
                   faction: 'Conversion Enforcement Office',
                   power: 18,
-                  desc: 'External or crown-appointed body with authority to verify compliance with the conversion order. Uses informants. Its definition of compliance is stricter than the governing faction anticipated.',
+                  desc: 'External or crown-appointed body with authority to verify compliance with the conversion order. Uses informants. Its definition of compliance is stricter than the governing power anticipated.',
                 }),
                 factions.push({
                   faction: 'Underground Old Faith',
                   power: 7,
-                  desc: "Not officially a faction: officially it doesn't exist. In practice it is the most cohesive social network in the settlement. Its membership overlaps with several other factions in ways nobody discusses.",
+                  desc: "Not officially a power: officially it doesn't exist. In practice it is the most cohesive social network in the settlement. Its membership overlaps with several other powers in ways nobody discusses.",
                 })));
       })(),
     ke('slave_revolt') &&
@@ -419,7 +419,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 ((N.power = Math.round(N.power * 0.85)),
                 (N.desc =
                   (N.desc || '') +
-                  ' The revolt has disrupted labour supply and market operations. The faction is divided between those demanding immediate suppression and those quietly calculating whether a negotiated settlement might be cheaper.')),
+                  ' The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate suppression and those quietly calculating whether a negotiated settlement might be cheaper.')),
               (N.faction.toLowerCase().includes('religious') || N.faction.toLowerCase().includes('church')) &&
                 ((N.power = Math.round(N.power * 1.2)),
                 (N.desc =

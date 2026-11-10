@@ -719,7 +719,7 @@ function deriveFactionPower(s) {
   // We use the power-share spread among profiles.
   const profiles = cachedFactionProfiles(s);
   if (profiles.length === 0) {
-    return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No factions to evaluate.' }] };
+    return { score: 50, contributors: [{ source: 'powerStructure', effect: 'neutral', delta: 0, reason: 'No powers to weigh.' }] };
   }
   const powers = profiles.map(p => p.power || 0);
   const total = powers.reduce((a, b) => a + b, 0);
@@ -737,7 +737,7 @@ function deriveFactionPower(s) {
   }
 
   score += applyConditions(s, contributors, 'faction_power', {
-    scale: 15, mode: 'drain', effect: 'destabilized', tail: 'destabilizes the faction system.',
+    scale: 15, mode: 'drain', effect: 'destabilized', tail: 'unsettles the balance between the powers.',
   });
 
   return { score, contributors };
@@ -1584,7 +1584,7 @@ export const VARIABLE_LABEL = Object.freeze({
   labor_capacity:          'Labor capacity',
   public_legitimacy:       'Public legitimacy',
   ruling_authority:        'Ruling authority',
-  faction_power:           'Faction power',
+  faction_power:           'Strength of the powers',
   trade_connectivity:      'Trade connectivity',
   healing_capacity:        'Healing capacity',
   defense_readiness:       'Defense readiness',

@@ -90,7 +90,10 @@ describe('shell — suggested questions are zero-cost (PIN 2)', () => {
     expect(qs.length).toBeGreaterThanOrEqual(3);
     expect(qs.length).toBeLessThanOrEqual(4);
     expect(qs.some((q) => q.includes('Ashford'))).toBe(true);        // derived from the anchor
-    expect(qs.some((q) => /faction/i.test(q))).toBe(true);           // derived from its factions
+    // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS, C7 0da9265f9, the owner's map Part B6): the
+    // question derived from its factions now reads "Which powers hold sway in …"; the retired word is gone.
+    expect(qs.some((q) => /powers hold sway/i.test(q))).toBe(true);  // derived from its factions
+    expect(qs.some((q) => /faction/i.test(q))).toBe(false);
     expect(new Set(qs).size).toBe(qs.length);                        // no duplicates
   });
 

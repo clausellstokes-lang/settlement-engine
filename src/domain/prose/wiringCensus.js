@@ -1598,12 +1598,15 @@ export function factBudget(rows) {
  *
  * THREE LIMBS, EACH DECLARED AND EACH NAMED ON THE ROW, so a reader can see which rule
  * caught a pool rather than trusting a verdict:
- *   `bucket` a reads path names the kind's own bucket key or its singular
+ *   `bucket` a reads path names the kind's own bucket key or its stored read-path `root`
+ *            (identity only: the display `singular` is a printed label and is never read
+ *            here — SW-8 C7's "Faction" -> "Power" turned the power desk's own `power.*`
+ *            root into eight false reaches while it was; the chair's ruling (B), 2026-11-09)
  *   `field`  a reads path's LEAF is a MECHANICAL field of that kind (a presentation field
  *            changes no world state, so a predicate over one is not a mechanical reach)
  *   `value`  a predicate VALUE is a member of a closed enum a mechanical field declares
  * @param {ReadonlyArray<CensusRow & {reads?: string[]}>} rows
- * @param {ReadonlyArray<{key: string, singular?: string, authorable?: boolean,
+ * @param {ReadonlyArray<{key: string, root?: string, authorable?: boolean,
  *   fields?: ReadonlyArray<{key: string, effect?: string, values?: ReadonlyArray<string>}>}>} categories
  * @returns {{byKind: Array<[string, number]>, rows: Array<{block: string, pool: string, kind: string, via: string, on: string}>}}
  */
@@ -1615,7 +1618,7 @@ export function customReachable(rows, categories) {
     const mechanical = (category.fields || []).filter((f) => f.effect === 'mechanical');
     kinds.push({
       kind: category.key,
-      tokens: new Set([category.key, String(category.singular || '').replace(/\s+/g, '')].map((t) => t.toLowerCase()).filter(Boolean)),
+      tokens: new Set([category.key, String(category.root || '')].map((t) => t.toLowerCase()).filter(Boolean)),
       fields: new Set(mechanical.map((f) => f.key)),
       values: new Set(mechanical.flatMap((f) => [...(f.values || [])])),
     });

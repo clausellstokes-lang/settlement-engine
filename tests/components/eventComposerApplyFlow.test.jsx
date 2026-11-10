@@ -360,7 +360,7 @@ describe('EventComposer — ADD_FACTION offers Compendium factions (the FactionE
     const { container } = render(<EventComposer />);
 
     pickEventType(container, 'ADD_FACTION');
-    const factionSelect = screen.getByLabelText('Faction');
+    const factionSelect = screen.getByLabelText('Power');
     // The Custom optgroup carries the authored faction.
     const customGroup = within(factionSelect).getByRole('group', { name: 'Custom' });
     expect(within(customGroup).getByRole('option', { name: 'The Gilded Quill' })).toBeTruthy();
@@ -379,7 +379,7 @@ describe('EventComposer — ADD_FACTION offers Compendium factions (the FactionE
 
     pickEventType(container, 'ADD_FACTION');
     fireEvent.change(screen.getByLabelText('Description'), { target: { value: 'my own note' } });
-    fireEvent.change(screen.getByLabelText('Faction'), { target: { value: 'The Trade Compact' } });
+    fireEvent.change(screen.getByLabelText('Power'), { target: { value: 'The Trade Compact' } });
     expect(screen.getByLabelText('Description').value).toBe('my own note');
   });
 });

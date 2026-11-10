@@ -177,12 +177,7 @@ export default function AboutManifesto() {
           world that always has exactly what players need isn&rsquo;t a world; it is a service.
         </p>
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
-          And no settlement here is an island. Each one is a node in your world, tied to everything
-          around it by trade, politics, and old grievances. Its exports point outward to whoever buys
-          them; its imports point inward to wherever the need is met; its factions reach to the
-          regional powers you already run. The town becomes real when it has relationships with the
-          rest of your world, and the engine hands you those threads to pull rather than a finished
-          picture to drop in.
+          And no settlement here is an island. Each one is a node in your world, tied to everything around it by trade, politics, and old grievances. Its exports point outward to whoever buys them; its imports point inward to wherever the need is met; its powers reach out to the regional powers you already run. The town becomes real when it has relationships with the rest of your world, and the engine hands you those threads to pull rather than a finished picture to drop in.
         </p>
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
           Sometimes what comes out is not what you pictured. You imagined a cathedral town; the
@@ -222,7 +217,7 @@ export default function AboutManifesto() {
         />
         <Covenant
           claim="The engine can never resolve a named character&rsquo;s fate."
-          mechanism="The simulation moves world-level state: economies, institutions, factions, power. It deliberately stops at the threshold of a named person&rsquo;s story, which is yours to tell. State, never fate."
+          mechanism="The simulation moves world-level state: economies, institutions, the powers and who holds them. It deliberately stops at the threshold of a named person’s story, which is yours to tell. State, never fate."
           receipt="Even when a settlement dies, the engine records that its last residents disperse with their fates unresolved. It kills no named character, ever, a rule enforced in the lifecycle kernel, not a stylistic choice."
         />
         <Covenant
@@ -279,7 +274,7 @@ export default function AboutManifesto() {
         </Mechanism>
         <Mechanism title="Stresses compound into new conditions">
           Two stresses together make a third, named thing. Famine in a politically fractured town
-          isn&rsquo;t only scarcity. It is food distribution contested by factions, which changes who
+          isn&rsquo;t only scarcity. It is food distribution contested by powers, which changes who
           is hoarding, which bloc controls the grain, and where the danger sits. The dossier names the
           compound condition, not just its parts, so you always know what you are actually running.
         </Mechanism>
@@ -290,10 +285,7 @@ export default function AboutManifesto() {
           become two different economies depending on who sits next door.
         </Mechanism>
         <Mechanism title="Legitimacy bends the power structure">
-          Raw faction power comes from institutions and priorities, but effective power bends to how
-          legitimate the governing authority is. When governance falters, the ruling faction weakens
-          and criminal power grows to fill the gap. So every economic and military swing quietly
-          reshapes who really holds the town: through legitimacy, never by decree.
+          A power’s raw strength comes from its institutions and priorities, but effective power bends to how legitimate the governing authority is. When governance falters, the ruling power weakens and criminal strength grows to fill the gap. So every economic and military swing quietly reshapes who really holds the town: through legitimacy, never by decree.
         </Mechanism>
         <Mechanism title="Beneath it all: the causal substrate">
           Once a campaign advances, {CD.causal.variableCount} live causal variables sit under every

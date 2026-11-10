@@ -1242,7 +1242,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "clear top rung, low instability": [
         {
           "angle": "ledger",
-          "text": "{npc} sits at the top of {faction} at {settlement} with a clear gap below, and the gap has held long enough that the faction plans as though it will keep holding.",
+          "text": "{npc} sits at the top of {faction} at {settlement} with a clear gap below, and the gap has held long enough that the power plans as though it will keep holding.",
           "slots": [
             "npc",
             "faction",
@@ -1303,7 +1303,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "high instability (churn at the top)": [
         {
           "angle": "ledger",
-          "text": "The head of {faction} at {settlement} has changed more than once lately, and the faction gets less done for it: each new head spends a season learning who answers to whom.",
+          "text": "The head of {faction} at {settlement} has changed more than once lately, and the power gets less done for it: each new head spends a season learning who answers to whom.",
           "slots": [
             "faction",
             "settlement"
@@ -1330,7 +1330,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Turnover at the head of {faction} at {settlement} is eating the faction's real reach; each new arrangement at the top costs it another season of whatever the last one was building.",
+          "text": "Turnover at the head of {faction} at {settlement} is eating the power's real reach; each new arrangement at the top costs it another season of whatever the last one was building.",
           "slots": [
             "faction",
             "settlement"
@@ -1350,7 +1350,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "Nobody has moved on the top rung of {faction} at {settlement} in a long while, and the faction's weight in the hall reflects the steadiness.",
+          "text": "Nobody has moved on the top rung of {faction} at {settlement} in a long while, and the power's weight in the hall reflects the steadiness.",
           "slots": [
             "faction",
             "settlement"
@@ -3648,7 +3648,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "layer DORMANT (no ledger materialized)": [
         {
           "angle": "ledger",
-          "text": "The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.",
+          "text": "The hall at {settlement} is not organized into sides. The powers sit apart, and nothing binds any two of them into anything larger.",
           "slots": [
             "settlement"
           ],
@@ -4007,7 +4007,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The combination at {settlement} serves an interest, and the interest is not a faction of this town and is not always in it.",
+          "text": "The combination at {settlement} serves an interest, and the interest is not one of this town's powers and is not always in it.",
           "slots": [
             "settlement"
           ],

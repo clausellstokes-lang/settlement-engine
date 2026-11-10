@@ -68,8 +68,8 @@ const TIER_KW = {
   hamlet: 'local subsistence minimal trade',
   village: 'surplus weekly market guilds begin',
   town: 'specialization guilds form',
-  city: 'institutional diversity factional politics',
-  metropolis: 'largest all systems active complex factions',
+  city: 'institutional diversity factional politics powers',
+  metropolis: 'largest all systems active complex factions powers',
 };
 const TIER_ENTRIES = CD.tiers.map((t) => ({
   id: `tier-${slug(t.label)}`, term: t.label, category: 'Tier', tab: 'tiers', anchor: 'tiers',
@@ -123,7 +123,7 @@ const STRESS_ENTRIES = [
   ['Famine', 'food supply failure grain exports collapse'],
   ['Plague', 'disease population loss social trust collapsed'],
   ['Siege', 'military encirclement imports cut defense'],
-  ['Political Fracture', 'governance contested factions legitimacy'],
+  ['Political Fracture', 'governance contested factions powers legitimacy'],
 ].map(([term, kw]) => ({
   id: `stress-${slug(term)}`, term, category: 'Stress', tab: 'stress', anchor: 'stress', keywords: kw,
 }));
@@ -131,7 +131,7 @@ const STRESS_ENTRIES = [
 const CROSS_SETTLEMENT_ENTRIES = [
   ['NPC Contacts', 'named npcs paired category relationship'],
   ['Cross-Settlement Conflicts', 'disputes market contests border incursions intelligence'],
-  ['Bidirectional Cascade', 'rename npc faction propagates linked partner'],
+  ['Bidirectional Cascade', 'rename npc faction power propagates linked partner'],
   ['Delink Cleanup', 'removing link removes contacts conflicts'],
 ].map(([term, kw]) => ({
   id: `xset-${slug(term)}`, term, category: 'Neighbour System', tab: 'neighbour', anchor: 'neighbours', keywords: kw,

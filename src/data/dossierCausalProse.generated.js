@@ -2711,7 +2711,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "The stain the church quarrel left on {settlement}'s seat is fading, slowly and on its own schedule, and the faction that lost the contest is waiting it out rather than conceding it.",
+          "text": "The stain the church quarrel left on {settlement}'s seat is fading, slowly and on its own schedule, and the power that lost the contest is waiting it out rather than conceding it.",
           "slots": [
             "settlement"
           ]
@@ -3430,7 +3430,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "Travellers at {settlement} are asked, carefully, what they saw on the road, and then asked again by someone else: both factions want eyes they can trust.",
+          "text": "Travellers at {settlement} are asked, carefully, what they saw on the road, and then asked again by someone else: both powers want eyes they can trust.",
           "slots": [
             "settlement"
           ]
@@ -3461,7 +3461,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "split"
           ],
-          "text": "The faction shouted down at {settlement} was right, and it has gained support with every event since; the ruler who overruled it is losing it.",
+          "text": "The power shouted down at {settlement} was right, and it has gained support with every event since; the ruler who overruled it is losing it.",
           "slots": [
             "settlement"
           ]
@@ -3677,7 +3677,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "successor"
           ],
-          "text": "The treaty displayed at {settlement} bears a name found nowhere else in town: the faction that signed it is long gone, and the town kept the paper.",
+          "text": "The treaty displayed at {settlement} bears a name found nowhere else in town: the power that signed it is long gone, and the town kept the paper.",
           "slots": [
             "settlement"
           ]
@@ -4388,7 +4388,7 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "home"
           ],
-          "text": "Support for {settlement}'s ruler has fallen low enough that the factions who were waiting have stopped waiting; the temple's withdrawal unseated nobody, but it made the unseating easy.",
+          "text": "Support for {settlement}'s ruler has fallen low enough that the powers who were waiting have stopped waiting; the temple's withdrawal unseated nobody, but it made the unseating easy.",
           "slots": [
             "settlement"
           ]

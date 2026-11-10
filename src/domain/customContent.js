@@ -363,8 +363,8 @@ export function classifyCustomInstitution(rawEntity, settlement) {
 
 /** @param {RawCustomEntity} rawEntity */
 function classifyCustomFaction(rawEntity) {
-  const name = String(rawEntity.name || rawEntity.label || 'Unnamed faction');
-  const contributors = [{ source: 'category_inference', effect: 'faction', reason: `"${name}" classified as faction.` }];
+  const name = String(rawEntity.name || rawEntity.label || 'Unnamed power');
+  const contributors = [{ source: 'category_inference', effect: 'faction', reason: `"${name}" classified as power.` }];
   return {
     type: 'faction',
     rawName: name,
@@ -386,7 +386,7 @@ function classifyCustomNpc(rawEntity) {
     rawName: name,
     inferredCategory: null,
     provides:     ['individual_authority'],
-    requires:     ['standing in a faction or institution'],
+    requires:     ['standing in a power or institution'],
     // PEOPLE-5B (M-7): the power the NPC ranks first in; a library entity the DM authored before the
     // car keeps its own `factionAffiliation` words (custom content is outside the settlement migration).
     controlledBy: firstRankMembershipOf(rawEntity)?.power || rawEntity.factionAffiliation || 'unattributed',

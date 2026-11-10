@@ -171,7 +171,7 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
   },
   'semi-organized': {
     key: 'semi-organized', label: 'Semi-Organized Networks', color: '#8a3010', bg: '#fdf0e8',
-    note: 'Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Multiple factions may be competing. Less predictable than a guild, more structured than street crime.',
+    note: 'Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.',
   },
   diffuse: {
     key: 'diffuse', label: 'Diffuse Criminal Presence', color: '#7a5010', bg: '#faf8e0',

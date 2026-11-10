@@ -977,7 +977,7 @@ export const CURATE_SECTIONS = Object.freeze([
     groupings: [['block:services.criminal', 'Criminal services']] },
   { id: 'power', label: 'Power', kinds: ['faction', 'conflict'],
     groupings: [['block:power.criminalUnderside', 'The capture reading']],
-    switches: [['class:faction:goals', 'Faction goals'], ['class:faction:conflicts', 'Faction conflicts'], ['class:faction:members', 'Faction members'],
+    switches: [['class:faction:goals', 'Powers\' goals'], ['class:faction:conflicts', 'Powers\' quarrels'], ['class:faction:members', 'Powers\' members'],
       ['class:conflict:stakes', 'Conflict stakes']] },
   { id: 'defense', label: 'Defense', kinds: [], switches: [],
     groupings: [['block:defense.criminalStructure', 'Criminal architecture'], ['block:defense.vulnerabilities', 'Vulnerabilities and watch gaps']] },

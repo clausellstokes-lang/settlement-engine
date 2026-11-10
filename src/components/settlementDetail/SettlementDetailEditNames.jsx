@@ -27,7 +27,7 @@ export default function SettlementDetailEditNames({
   const factionRows = powerFactions.map((fac, fi) => ({
     key: `power-${fi}`,
     name: nameOf(fac),
-    label: fac?.category || 'power faction',
+    label: fac?.category || 'power',
   })).filter(row => row.name);
   return (
       settlement&&<div style={{overflow:'hidden'}}>
@@ -42,14 +42,13 @@ export default function SettlementDetailEditNames({
           <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:INK,flex:1}}>
             Edit Names
           </span>
-          <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>NPC &amp; faction names only</span>
+          <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>Names of people and powers only</span>
           <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:4}}>{editNamesOpen?'▲':'▼'}</span>
         </Button>
         {editNamesOpen&&<div style={{padding:'10px 14px',background:CARD}}>
         {isCanonLocked ? (
           <div style={{fontSize:proseFontSize(FS.xs, mobile),color:BODY,fontStyle:'italic',lineHeight:1.6}}>
-            NPC and faction names are locked once this settlement is canonized.
-            Reset it to draft (Phase badge above) if you need to rename them.
+            Names of people and powers are locked once this settlement is canonized. Reset it to draft (Phase badge above) if you need to rename them.
           </div>
         ) : (<>
 
@@ -99,7 +98,7 @@ export default function SettlementDetailEditNames({
           {/* Factions */}
           {factionRows.length>0&&<>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:MUTED,textTransform:'uppercase',
-              letterSpacing:'0.06em',marginBottom:6}}>Factions</div>
+              letterSpacing:'0.06em',marginBottom:6}}>Powers</div>
             <div style={{display:'flex',flexDirection:'column',gap:4}}>
               {factionRows.map(row=>{
                 const isEditing = editingName?.type==='faction' && editingName?.id===row.name;
@@ -113,7 +112,7 @@ export default function SettlementDetailEditNames({
                     ? <><input
                         // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the inline rename field the user just opened
                         autoFocus
-                        aria-label={`Rename faction ${row.name}`}
+                        aria-label={`Rename ${row.name}`}
                         value={editDraft}
                         onChange={e=>setEditDraft(e.target.value)}
                         onKeyDown={e=>{
@@ -143,7 +142,7 @@ export default function SettlementDetailEditNames({
               read as broken. Explain why it's empty. */}
           {(settlement.npcs||[]).length===0 && factionRows.length===0 && (
             <div style={{fontSize:proseFontSize(FS.xs, mobile),color:BODY,lineHeight:1.5}}>
-              This settlement has no named NPCs or factions to rename yet.
+              This settlement has no named NPCs or powers to rename yet.
             </div>
           )}
 

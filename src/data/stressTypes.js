@@ -58,7 +58,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.034,
     requiresTier: null,
     crisisHook:
-      "Something important (a resource, a prisoner, a decision) falls into the contested space between factions. The players can't avoid taking a side.",
+      "Something important (a resource, a prisoner, a decision) falls into the contested space between the powers. The players can't avoid taking a side.",
     viabilityNote:
       "Nothing gets decided, repairs are put off, and every problem is left for later.",
     historyColour: "political",
@@ -110,7 +110,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.03,
     requiresTier: null,
     crisisHook:
-      "Three different factions have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
+      "Three different powers have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
     viabilityNote: "Big decisions wait for a new leader, and in the meantime each office does as it sees fit.",
     historyColour: "political",
   },
@@ -131,7 +131,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.029,
     requiresTier: null,
     crisisHook:
-      "The governing faction knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
+      "The governing power knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
     viabilityNote:
       "Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.",
     historyColour: "political",
@@ -153,7 +153,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.012,
     requiresTier: "town",
     crisisHook:
-      "The revolt's leadership has demands. Some of them are negotiable. The governing faction has not admitted this publicly, and one of them is attempting to open a back channel.",
+      "The revolt's leadership has demands. Some of them are negotiable. The governing power has not admitted this publicly, and one of them is attempting to open a back channel.",
     // R-U (CENSUS-2d; the chair's answer 2 to CENSUS-2c): presumes only the enslaved and their revolt.
     // "The slave market's commercial operations are suspended." presumed a slave market, which has
     // no fact home (`institution: slave market` is listed under "needs a home").
@@ -167,7 +167,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.026,
     requiresTier: null,
     crisisHook:
-      "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing faction must decide whether to comply, negotiate, or find a third option.",
+      "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
     viabilityNote:
       "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.",
     historyColour: "military",

@@ -143,7 +143,7 @@ const genSettSummary = settlement => {
             : tier === 'metropolis'
               ? 'the grand council'
               : 'the council');
-  const topFaction = factions[0]?.faction || 'the dominant faction';
+  const topFaction = factions[0]?.faction || 'the dominant power';
 
   const crimFaction =
     factions.find(

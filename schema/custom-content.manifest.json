@@ -443,7 +443,7 @@
     {
       "key": "living",
       "label": "Living World Content",
-      "blurb": "Deities, traditions, and factions. Deities gain mechanics after assignment; factions enter through authored events; traditions currently shape founding and dossier presentation.",
+      "blurb": "Deities, traditions, and powers. Deities gain mechanics after assignment; powers enter through authored events; traditions currently shape founding and dossier presentation.",
       "buckets": [
         "deities",
         "traditions",
@@ -456,6 +456,7 @@
       "key": "institutions",
       "label": "Institutions",
       "singular": "Institution",
+      "root": "institution",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -735,6 +736,7 @@
       "key": "services",
       "label": "Services",
       "singular": "Service",
+      "root": "service",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -948,6 +950,7 @@
       "key": "resources",
       "label": "Resources",
       "singular": "Resource",
+      "root": "resource",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -1109,6 +1112,7 @@
       "key": "stressors",
       "label": "Stressors",
       "singular": "Stressor",
+      "root": "stressor",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -1194,6 +1198,7 @@
       "key": "tradeGoods",
       "label": "Trade Goods",
       "singular": "Trade Good",
+      "root": "tradegood",
       "lane": "settlement",
       "authorable": true,
       "fields": [
@@ -1339,6 +1344,7 @@
       "key": "deities",
       "label": "Deities",
       "singular": "Deity",
+      "root": "deity",
       "lane": "living",
       "authorable": true,
       "fields": [
@@ -1544,6 +1550,7 @@
       "key": "traditions",
       "label": "Traditions",
       "singular": "Tradition",
+      "root": "tradition",
       "lane": "living",
       "authorable": true,
       "fields": [
@@ -1600,8 +1607,9 @@
     },
     {
       "key": "factions",
-      "label": "Factions",
-      "singular": "Faction",
+      "label": "Powers",
+      "singular": "Power",
+      "root": "faction",
       "lane": "living",
       "authorable": true,
       "fields": [
@@ -1732,7 +1740,7 @@
           "placement": "dependency",
           "label": "Controls institutions",
           "category": "institutions",
-          "hint": "Institutions this faction is associated with controlling. Current simulation does not apply control automatically.",
+          "hint": "Institutions this power is associated with controlling. Current simulation does not apply control automatically.",
           "effect": "presentation",
           "activation": "always",
           "consumers": [
@@ -1748,7 +1756,7 @@
           "placement": "dependency",
           "label": "Rivals (conflicts with)",
           "category": "factions",
-          "hint": "Factions associated as rivals. Current simulation does not create conflict automatically.",
+          "hint": "Powers associated as rivals. Current simulation does not create conflict automatically.",
           "effect": "presentation",
           "activation": "always",
           "consumers": [
@@ -1764,6 +1772,7 @@
       "key": "supplyChains",
       "label": "Supply Chains",
       "singular": "Supply Chain",
+      "root": "supplychain",
       "lane": "settlement",
       "authorable": false,
       "discovered": true,

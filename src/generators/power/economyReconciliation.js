@@ -390,7 +390,7 @@ export function refreshPowerGenerationTraces(
       );
       if (legitimacyCause) {
         legitimacyCause.reason =
-          `As the governing faction, ${profile.name} inherits the settlement's `
+          `As the governing power, ${profile.name} inherits the settlement's `
           + `public-legitimacy score (${profile.legitimacy}).`;
       }
     }

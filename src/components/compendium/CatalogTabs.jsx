@@ -49,8 +49,8 @@ const TIER_META = {
   hamlet:     { color:'#a05010', desc:'2-3 institutions. Local subsistence. Minimal trade.' },
   village:    { color:ECON_TXT, desc:'4-6 institutions. Surplus production begins. Weekly market.' },
   town:       { color:'#1a5a28', desc:'7-10 institutions. Specialization appears. Guilds form.' },
-  city:       { color:'#1a3a7a', desc:'11-14 institutions. Full institutional diversity. Factional politics.' },
-  metropolis: { color:'#4a1a6a', desc:'15+ institutions. All systems active. Complex faction dynamics.' },
+  city:       { color:'#1a3a7a', desc:'11-14 institutions. Full institutional diversity. Politics between the powers.' },
+  metropolis: { color:'#4a1a6a', desc:'15+ institutions. All systems active. Complex power dynamics.' },
 };
 
 export function TiersTab({ _search='' }) {
@@ -126,7 +126,7 @@ export function PowerTab_({ search='' }) {
   const effectiveCat = search ? 'All' : cat;
   const filtered = CD.archetypes.entries.filter(a => (effectiveCat==='All'||a.cat===effectiveCat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
   return <>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes are never picked: no single slider names one, and an archetype appears only once several world inputs have settled far enough into the shape it needs. A faction's power starts from the institutions it holds, then rises or falls with how the public sees the ruling seat.</p>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes are never picked: no single slider names one, and an archetype appears only once several world inputs have settled far enough into the shape it needs. A power's strength starts from the institutions it holds, then rises or falls with how the public sees the ruling seat.</p>
     <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:12 }}>
       {cats.map(c => <Button key={c} onClick={() => setCat(c)} variant={effectiveCat===c?'primary':'ghost'} size="sm" aria-pressed={effectiveCat===c}>{c}</Button>)}
     </div>
@@ -154,8 +154,8 @@ export function PowerTab_({ search='' }) {
       {laddersFor('power').map((l) => (
         <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>
-    <SectionHeading id="factions" accent={INK}>Faction archetypes</SectionHeading>
-    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A faction's category, not its name, decides its archetype. These drive coup logic, faction profiles, NPC roles, and event responses.</p>
+    <SectionHeading id="factions" accent={INK}>Kinds of power</SectionHeading>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A power's category, not its name, decides its kind. These drive coup logic, power profiles, NPC roles, and event responses.</p>
     {CD.factionArchetypes.map((f)=>(<Row key={f.id} label={f.label} lw={110}>{f.reading}</Row>))}
     <SectionHeading accent={INK}>Governance stability</SectionHeading>
     {CD.governance.labels.map((g)=>(<Row key={g.label} label={g.label} lw={130}>{g.reading}</Row>))}
@@ -210,12 +210,12 @@ export function StressTab({ search='' }) {
     { label:'Famine', description:'Food supply failure. Grain exports collapse. Safety degrades.' },
     { label:'Plague', description:'Disease active. Population loss. Social trust collapsed.' },
     { label:'Siege', description:'Military encirclement. Imports cut. All resources redirected to defense.' },
-    { label:'Political Fracture', description:'Governance contested. Multiple factions claim legitimacy.' },
+    { label:'Political Fracture', description:'Governance contested. Multiple powers claim legitimacy.' },
   ];
   return <>
     <div id="stress" style={{ padding:'10px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`, borderLeft:`3px solid ${GOLD}`, marginBottom:12 }}>
       <div style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, color:GOLD_TXT, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
-      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by factions.</p>
+      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by powers.</p>
     </div>
     {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.viabilityNote||s.description||s.desc||'').toLowerCase().includes(search)||(s.crisisHook||'').toLowerCase().includes(search)).map(s => (
       <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
@@ -236,14 +236,14 @@ export function StressTab({ search='' }) {
 export function NeighbourTab({ search='' }) {
   const mobile = useIsMobile();
   return <>
-    <p id="neighbours" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
+    <p id="neighbours" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, power weights, and institution probabilities before generation.</p>
     {CD.relationships.entries.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
       <div key={r.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
         <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{r.effect}</span>
       </div>))}
     <SectionHeading accent={INK}>Cross-Settlement Systems</SectionHeading>
-    {[['NPC Contacts','Named NPCs from both settlements paired by category and relationship type.'],['Cross-Settlement Conflicts','Mechanically-derived disputes: market contests, border incursions, intelligence operations.'],['Bidirectional Cascade','Renaming an NPC or faction propagates to all linked partner records.'],['Delink Cleanup','Removing a link removes all cross-settlement contacts and conflicts from both settlements.']].map(([label,desc])=><Row key={label} label={label} lw={160}>{desc}</Row>)}
+    {[['NPC Contacts','Named NPCs from both settlements paired by category and relationship type.'],['Cross-Settlement Conflicts','Mechanically-derived disputes: market contests, border incursions, intelligence operations.'],['Bidirectional Cascade','Renaming an NPC or power propagates to all linked partner records.'],['Delink Cleanup','Removing a link removes all cross-settlement contacts and conflicts from both settlements.']].map(([label,desc])=><Row key={label} label={label} lw={160}>{desc}</Row>)}
   </>;
 }
 

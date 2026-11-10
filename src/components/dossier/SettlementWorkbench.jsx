@@ -77,7 +77,7 @@ function entitySummary(entry) {
   }
   if (entry?.type === 'faction') {
     return firstText(raw.description, raw.agenda, raw.goal)
-      || 'A faction participating in the settlement’s balance of power.';
+      || 'A power taking part in the town’s balance of power.';
   }
   if (entry?.type === 'institution') {
     return firstText(raw.description, raw.function, raw.type)

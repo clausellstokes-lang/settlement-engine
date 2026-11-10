@@ -147,7 +147,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
   ],
   politically_fractured: [
     {
-      secret: "Has been playing both factions simultaneously, feeding each the other's plans",
+      secret: "Has been playing both powers simultaneously, feeding each the other's plans",
       stakes: "{faction} just sent someone to verify information that won't check out. The meeting is tomorrow",
     },
     {
@@ -157,13 +157,13 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has already agreed to support whichever faction wins in exchange for a specific appointment they have not disclosed",
+        "Has already agreed to support whichever power wins in exchange for a specific appointment they have not disclosed",
       stakes: "They've made this offer to both sides. Both sides believe they have an exclusive commitment",
     },
     {
       secret:
-        "Was responsible for the incident that triggered the fracture: an act of deliberate sabotage they've successfully blamed on the other faction",
-      stakes: "One member of the faction they framed knows the truth and has been building a case",
+        "Was responsible for the incident that triggered the fracture: an act of deliberate sabotage they've successfully blamed on the other power",
+      stakes: "One member of the power they framed knows the truth and has been building a case",
     },
     {
       secret:
@@ -517,7 +517,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
   ],
   slave_revolt: [
     {
-      secret: "Has been in secret contact with the revolt's leadership, brokering terms the governing faction has refused to authorise",
+      secret: "Has been in secret contact with the revolt's leadership, brokering terms the governing power has refused to authorise",
       stakes: "If the negotiation is discovered they hang as a traitor; if it fails the settlement burns. They have told no one",
     },
     {

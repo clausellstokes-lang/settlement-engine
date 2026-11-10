@@ -122,7 +122,7 @@ export function NPCQuickRef({ settlement, narrativeMode, vm }) {
             <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7'] }}>NAME</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7'] }}>FACTION · NOTES</Text>
+            <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7'] }}>MEMBER OF · NOTES</Text>
           </View>
           <View style={{ width: 38, alignItems: 'flex-end' }}>
             <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7'] }}>PWR</Text>

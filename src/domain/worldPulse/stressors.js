@@ -98,7 +98,7 @@ const ORIGIN_REASON_SENTENCES = Object.freeze({
   resistance: 'Occupation has turned unrest into organized resistance.',
   servile_uprising: 'Bound and broken labour rises against those who hold it.',
   tax_revolt: 'The levies of a drowning treasury have broken the commons.',
-  popular_revolt: 'The streets have risen on their own, before any faction can claim them.',
+  popular_revolt: 'The streets have risen on their own, before any power can claim them.',
   arcane_burnout: 'A wild surge burned itself out and left dead ground behind.',
   leyline_silence: 'The leylines have gone quiet, and no one yet knows why.',
   barracks_coup: 'The barracks have found a commander willing to gamble for the seat.',

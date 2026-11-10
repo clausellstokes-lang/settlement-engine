@@ -146,7 +146,7 @@ reg('military',GOVERNANCE_FRACTURED,
     goal:      'Keep the people under their command together, whoever ends up giving the orders.',
     constraint:'Cannot step in to keep order without taking a side in the fight over the seat.' },
   { position:  'Leads a squad that now takes orders from more than one master.',
-    goal:      'Stop any faction buying their squad away from them while the seat is broken.',
+    goal:      'Stop any power buying their squad away from them while the seat is broken.',
     constraint:'Keeping the squad in hand takes quiet favours that no one can be told about.' }
 );
 reg('military','corruption',
@@ -230,7 +230,7 @@ reg(cat,'contested',
     goal:      'Lend to both sides of the fight for the seat, so whoever wins owes them.',
     constraint:'Keeping friends on both sides means neither side fully trusts the house.' },
   { position:  'Runs a smaller house that sells to both sides in the fight for the seat.',
-    goal:      'Keep selling to every faction without any of them treating their goods as its own.',
+    goal:      'Keep selling to every power without any of them treating their goods as its own.',
     constraint:'To both sides, staying out of it looks like fear or scheming.' }
 );
 reg(cat,'stable',

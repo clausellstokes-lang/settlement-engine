@@ -81,7 +81,7 @@ export const PRESSURE_SENTENCES = {
   ],
   famine: (r) => [
     `${r.name} is two bad weeks from genuine starvation; ${r.topFaction || "the merchant class"} controls the remaining ${r.commodity || "grain"} reserves and is not discussing it openly.`,
-    `Since the harvest failed, whoever holds the food in ${r.name} holds the power, and at least three factions are fighting over the stores.`,
+    `Since the harvest failed, whoever holds the food in ${r.name} holds the power, and at least three powers are fighting over the stores.`,
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} can be found and is not saying; someone close to them is among the hoarders.`,
     `The bakers of ${r.name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.`,
     `${capFirst(r.govFaction) || "The council"} of ${r.name} promised a fair share of the ${r.commodity || "grain"} reserves last week, and little of it has reached the poor.`,
@@ -96,16 +96,16 @@ export const PRESSURE_SENTENCES = {
     `The curfew in ${r.name} is enforced unevenly, and the unevenness is the point: no one can be sure which night, or which street, or which face at the checkpoint will decide that the rules apply to them.`,
   ],
   politically_fractured: (r) => [
-    `${r.name} has no effective government; ${r.topFaction || "the leading faction"} controls one district and the institutions inside it, a rival controls another, and the contested space between them is where things go wrong.`,
-    `Three factions in ${r.name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.`,
-    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person all three factions will still speak to, which makes them either the key to resolution or the next target.`,
-    `Nothing gets decided in ${r.name}, because any decision would hand one faction a win the others will not allow, and every faction prefers the deadlock to losing.`,
+    `${r.name} has no effective government; ${r.topFaction || "the leading power"} controls one district and the institutions inside it, a rival controls another, and the contested space between them is where things go wrong.`,
+    `Three powers in ${r.name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.`,
+    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.`,
+    `Nothing gets decided in ${r.name}, because any decision would hand one power a win the others will not allow, and every power prefers the deadlock to losing.`,
     { text: `${r.name} has two of everything now, two watches and two courts of a kind, and people have learned which one to ask for which favour.`, needs: ['watch'] },
-    `The last thing ${r.topFaction || "the leading faction"} and its rivals agreed on in ${r.name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.`,
+    `The last thing ${r.topFaction || "the leading power"} and its rivals agreed on in ${r.name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.`,
   ],
   indebted: (r) => [
     `${r.name} owes more than it can repay; the creditor's representative arrived last month, and every civic decision since has been made with one eye on what they might accept as partial satisfaction.`,
-    `${capFirst(r.topFaction) || "The dominant faction"} took the loans and ${r.govFaction || "the current council"} is repaying them: a distinction that has not gone unnoticed and is not forgotten.`,
+    `${capFirst(r.topFaction) || "The dominant power"} took the loans and ${r.govFaction || "the current council"} is repaying them: a distinction that has not gone unnoticed and is not forgotten.`,
     `The debt has a clause that ${r.topNPCName ? r.topNPCName + " has read" : "almost nobody has read"} and that would change the entire conversation if it became public.`,
     `The creditor has begun taking payment from ${r.name} in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly worse than the last.`,
     `${r.name} still paints its civic buildings and still held its festival, all on borrowed money; everyone knows it, and nobody says it aloud.`,
@@ -121,7 +121,7 @@ export const PRESSURE_SENTENCES = {
   ],
   infiltrated: (r) => [
     `${r.name} does not know it has been infiltrated; for months ${r.govFaction || "the council"} has been deciding things one way, and only now can anyone see which way.`,
-    `Someone has lived in ${r.name} long enough to learn its weak points, its factions and whom it trusts, and is using all three.`,
+    `Someone has lived in ${r.name} long enough to learn its weak points, its powers and whom it trusts, and is using all three.`,
     `Three separate things have gone slightly wrong in ${r.name} recently, in ways that look like bad luck; they are not bad luck.`,
     `The infiltration of ${r.name} shows only in negatives: the meeting that was rescheduled at exactly the wrong moment, the shipment that was delayed just long enough, the appointment that went to the second-best candidate for reasons no one can quite reconstruct.`,
     `Whoever is working inside ${r.name} has asked for nothing yet; they are still earning trust, and ${r.govFaction || "the council"} has not noticed.`,
@@ -138,7 +138,7 @@ export const PRESSURE_SENTENCES = {
   succession_void: (r) => {
     const weeksAgo = Math.floor(_rng() * 8) + 2;
     return [
-      `${r.name}'s last strong leader died ${weeksAgo} weeks ago, and ${r.topFaction || "the dominant faction"} is taking over the offices before anyone else can claim them.`,
+      `${r.name}'s last strong leader died ${weeksAgo} weeks ago, and ${r.topFaction || "the dominant power"} is taking over the offices before anyone else can claim them.`,
       `Three different people in ${r.name} believe they should be in charge; two of them are wrong; none of them is certain; all of them are acting.`,
       "Everyone can see the seat is empty, and every claimant is buying support with promises that will have to be paid.",
       `The old ruler of ${r.name} left no clear heir, and everyone who did well under the old order is gathering followers to back a claim.`,
@@ -164,13 +164,13 @@ export const PRESSURE_SENTENCES = {
       (((d = r.compound) == null ? void 0 : d.militaryEffective) || 0) &&
       (((l = r.compound) == null ? void 0 : l.economyOutput) || 50) < 48
       ? [
-          `The commons of ${r.name} have stopped obeying. ${capFirst(r.govFaction) || "The governing authority"} still holds the buildings and the official seal, but its orders go unanswered, and the first faction leader to offer something better will find people ready to follow.`,
+          `The commons of ${r.name} have stopped obeying. ${capFirst(r.govFaction) || "The governing authority"} still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.`,
           `The streets of ${r.name} have gone quiet, and everyone is waiting for something to break. ${capFirst(r.govFaction) || "The governing authority"} gives orders that are heard and not obeyed, and each one weakens it further.`,
           `In ${r.name} the rents go uncollected, the summons go unanswered, and the men ${r.govFaction || "the governing authority"} sends to enforce either turn back or turn coat. The revolt has not started because it has, in every way that matters, already happened.`,
         ]
       : [
-          `The challenge to ${r.govFaction || "the current authority"} in ${r.name} comes from its own officials: taxes held back, decisions left unsigned, a coalition forming. ${capFirst(r.govFaction) || "The governing faction"} knows it, and cannot move against it without making it stronger.`,
-          `The insurgency in ${r.name} wears a clerk's coat. Permits stall in the right offices, funds arrive short and late, and the people doing it can each point to a rule that excuses them. ${capFirst(r.govFaction) || "The governing faction"} is being strangled by its own procedures, wielded by people who have read them more carefully than it has.`,
+          `The challenge to ${r.govFaction || "the current authority"} in ${r.name} comes from its own officials: taxes held back, decisions left unsigned, a coalition forming. ${capFirst(r.govFaction) || "The governing power"} knows it, and cannot move against it without making it stronger.`,
+          `The insurgency in ${r.name} wears a clerk's coat. Permits stall in the right offices, funds arrive short and late, and the people doing it can each point to a rule that excuses them. ${capFirst(r.govFaction) || "The governing power"} is being strangled by its own procedures, wielded by people who have read them more carefully than it has.`,
           `No one in ${r.name} is marching, and that is what makes it dangerous. The opposition to ${r.govFaction || "the current authority"} is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.`,
         ];
   },
@@ -223,17 +223,17 @@ export const PRESSURE_SENTENCES = {
   // array), real re-roll variety gained. Index 0 stays the canonical scenario-0 line.
   religious_conversion: (r) => [
     `The new faith in ${r.name} has no building yet, only its congregation, and ${r.govFaction || "the authorities"} cannot decide whether to treat it as a matter of faith or of politics; both sides read the delay as a sign.`,
-    { text: `${r.name}'s religious community has formally split. Both factions hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.`, needs: ['institution: temple'] },
+    { text: `${r.name}'s religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.`, needs: ['institution: temple'] },
     `The conversion order in ${r.name} was accepted within the week, faster than anyone expected, and nobody in authority is asking whether the old rites still go on behind closed doors.`,
     `The new faith has taken the young of ${r.name} first, which the old faith has noticed and cannot answer. You cannot argue a congregation back, and every festival now draws two crowds of visibly different ages to two different squares.`,
     `${capFirst(r.govFaction) || "The authorities"} in ${r.name} backed the winning faith a little too early and a little too visibly, and now find that a matter of belief has become a matter of who owes whom: the worst kind of debt to have taken on.`,
     `The conversion in ${r.name} is being managed as a property question as much as a spiritual one: which endowments, which burial rights, which festival days transfer with the congregation. The theology was settled quickly. The estate is where the fighting is.`,
   ],
   slave_revolt: (r) => [
-    `The revolt in ${r.name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing faction has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${r.name} becomes afterwards, and who decides.`,
+    `The revolt in ${r.name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${r.name} becomes afterwards, and who decides.`,
     `${r.name} has stopped functioning as the thing it was. The labour it was built on has withdrawn itself, by force, and every calculation the settlement made about its own wealth turns out to have rested on people who are no longer willing to be a line in the ledger.`,
-    `The rising in ${r.name} did not come from nowhere, though ${r.govFaction || "the governing faction"} is speaking of it as though it did. Everyone who is honest knows the grievances were real, old, and ignored, which makes the question of how to end it far harder than the question of how it began.`,
-    `In ${r.name} the two sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and ${r.govFaction || "the governing faction"} cannot retake it without destroying the ${r.commodity || "trade"} that made it worth holding. What comes next will be a bargain neither wanted, struck between people who no longer pretend to be anything but enemies.`,
+    `The rising in ${r.name} did not come from nowhere, though ${r.govFaction || "the governing power"} is speaking of it as though it did. Everyone who is honest knows the grievances were real, old, and ignored, which makes the question of how to end it far harder than the question of how it began.`,
+    `In ${r.name} the two sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and ${r.govFaction || "the governing power"} cannot retake it without destroying the ${r.commodity || "trade"} that made it worth holding. What comes next will be a bargain neither wanted, struck between people who no longer pretend to be anything but enemies.`,
   ],
 };
 
@@ -272,7 +272,7 @@ export const POLITICAL_FLAVOR = {
     (r) =>
       `Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} to be replaced by a permanent one that never comes`,
     (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} decided who holds power here, but not whether they deserve it, and the factions are still arguing the second point`,
+      `The ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} decided who holds power here, but not whether they deserve it, and the powers are still arguing the second point`,
     (r) =>
       `The offices here are filled and the seals are real, but people still ask in private whether the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} gave the present rulers any right to rule, and nobody in charge wants the question asked aloud`,
   ],

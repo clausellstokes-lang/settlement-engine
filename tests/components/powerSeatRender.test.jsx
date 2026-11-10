@@ -26,7 +26,7 @@ const NOTE = 'Holds the title, but the decisions that matter are made elsewhere'
 const born = (tier, i) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: tier }), null, { seed: `rulers-${tier}-${i}`, customContent: {} });
 const tab = (s) => render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />).container;
 /** Open the governing faction's roster row (one row opens at a time) so its crisis note is on the page. */
-const openGoverning = (s) => fireEvent.click(screen.getByRole('button', { name: `${nameOf(governingFactionOf(s))} faction details` }));
+const openGoverning = (s) => fireEvent.click(screen.getByRole('button', { name: `${nameOf(governingFactionOf(s))} details` }));
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 

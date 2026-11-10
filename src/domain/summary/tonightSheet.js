@@ -147,7 +147,7 @@ export const ABSTRACT_REGISTER_WORDS = Object.freeze([
   'capacity', 'reconsolidation', 'reconsolidates', 'relevance', 'autonomy', 'neutrality', 'visibility',
   'infrastructure', 'constraints', 'niche', 'perceived', 'precedents', 'current stability',
   'conditions change', 'economic conditions', 'political contest', 'political distraction',
-  'the faction\'s position', 'commercial interests', 'commercial standing', 'commercial position',
+  'the power\'s position', 'commercial interests', 'commercial standing', 'commercial position',
   'arcane standing', 'pastoral standing', 'pastoral function', 'welfare capacity', 'responsibilities',
   'supply situation', 'commercial relationships', 'distribution network', 'parallel distribution',
   'justification', 'triggering a response', 'consolidate', 'consolidates', 'consolidating',

@@ -210,11 +210,11 @@ export const STRESS_DESCS = {
   ],
   politically_fractured: [
     { text: r =>
-      `${r} has two gates. The eastern one is controlled by one faction, the western by another. You can tell by the pennants. The road you are on leads to the eastern gate.`, needs: ['gate'] },
+      `${r} has two gates. The eastern one is controlled by one power, the western by another. You can tell by the pennants. The road you are on leads to the eastern gate.`, needs: ['gate'] },
     { text: r =>
       `The gate guard at ${r} asks where you intend to stay: which inn, which district. The answer apparently matters. They note it and say nothing further.`, needs: ['gate', 'institution: tavern', 'guardPresence'] },
     r =>
-      `The road into ${r} has been marked. Symbols painted on fence posts and milestone stones: the same symbol, repeated, belonging to one faction or another. Someone has been doing this recently; the paint is fresh.`,
+      `The road into ${r} has been marked. Symbols painted on fence posts and milestone stones: the same symbol, repeated, belonging to one power or another. Someone has been doing this recently; the paint is fresh.`,
     r =>
       `${r} is quieter than it should be. Not the quiet of a sleeping town or a working one: the particular quiet of a place where people have learned to be careful about what they say in earshot of strangers.`,
     { text: r =>

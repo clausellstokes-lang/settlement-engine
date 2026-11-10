@@ -94,7 +94,7 @@ export const genSuccessionNarr = (ctx) => {
   const narratives = [];
   if (ctx.topTension === 'succession_crisis')
     narratives.push(
-      `${ctx.name}'s ruler is old and the succession is disputed; ${ctx.topFaction || 'the dominant faction'} already has its candidate ready.`
+      `${ctx.name}'s ruler is old and the succession is disputed; ${ctx.topFaction || 'the dominant power'} already has its candidate ready.`
     );
   if (ctx.topTension === 'corruption_scandal')
     narratives.push(
@@ -106,7 +106,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'infiltration_fear')
     narratives.push(
-      `Talk of enemy agents has ${ctx.name} suspicious of everyone, and at least one faction is using the fear for its own ends.`
+      `Talk of enemy agents has ${ctx.name} suspicious of everyone, and at least one power is using the fear for its own ends.`
     );
   if (!ctx.isViable && ctx.viabilityIssues?.length > 0)
     narratives.push(
@@ -118,7 +118,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.prosperity === 'Wealthy' || ctx.prosperity === 'Thriving')
     narratives.push(
-      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${sentenceStart(ctx.topFaction || 'The dominant faction')} has the most and wants more.`
+      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${sentenceStart(ctx.topFaction || 'The dominant power')} has the most and wants more.`
     );
   if (ctx.prosperity === 'Poor') {
     const [costGov, costTop] = resolvePartyPair(
@@ -145,7 +145,7 @@ export const genSuccessionNarr = (ctx) => {
   )
   {
     const [contestTop, contestGov] = resolvePartyPair(
-      ctx.topFaction, 'the dominant faction', ctx.govFaction, 'the council'
+      ctx.topFaction, 'the dominant power', ctx.govFaction, 'the council'
     );
     narratives.push(
       contestGov
@@ -165,7 +165,7 @@ export const genSuccessionNarr = (ctx) => {
   }
   if (ctx.topTension === 'religious_tension')
     narratives.push(
-      `Two versions of faith are competing in ${ctx.name}; both claim legitimacy and both have the ear of someone powerful. ${sentenceStart(ctx.govFaction || 'The council')} has avoided taking sides so far, which means both factions resent it equally.`
+      `Two versions of faith are competing in ${ctx.name}; both claim legitimacy and both have the ear of someone powerful. ${sentenceStart(ctx.govFaction || 'The council')} has avoided taking sides so far, which means both powers resent it equally.`
     );
   if (ctx.topTension === 'guild_conflict')
     narratives.push(
@@ -219,7 +219,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'leadership_vacuum')
     narratives.push(
-      `Nobody has really led ${ctx.name} since the last strong leader went. Its leaders still meet, but anything that matters is put off or settled privately by ${ctx.topFaction || 'the faction with the most to gain'}.`
+      `Nobody has really led ${ctx.name} since the last strong leader went. Its leaders still meet, but anything that matters is put off or settled privately by ${ctx.topFaction || 'the power with the most to gain'}.`
     );
   narratives.push(
     `${ctx.topNPCName ? sentenceStart(ctx.topNPCName) + ', the ' + ctx.topNPCRole + ',' : 'The most senior figure'} knows something about ${ctx.name} that nobody else does, and is keeping it quiet.`

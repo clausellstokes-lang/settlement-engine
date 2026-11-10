@@ -296,7 +296,7 @@ export function ensureFactionStates(worldState, snapshot, rng) {
       factionStates[id] = {
         factionId: id,
         settlementId: item.id,
-        name: faction.faction || faction.name || faction.label || `Faction ${index + 1}`,
+        name: faction.faction || faction.name || faction.label || `Unnamed power ${index + 1}`,
         archetype,
         governmentPreference: faction.governmentPreference || (/** @type {any} */ (GOVERNMENT_BY_ARCHETYPE))[archetype] || pick(local, GOVERNMENT_PREFERENCES),
         powerBases: [...powerBases],
@@ -871,14 +871,14 @@ function governmentChallenge(item, entry, state, tick, legitimacyPressure, confl
     },
     condition: {
       archetype: 'faction_challenge',
-      label: 'Faction challenge',
+      label: 'Challenge to the rulers',
       description: `${state.name} is maneuvering to change local power dynamics.`,
       severity,
       status: severity >= 0.7 ? 'worsening' : 'stable',
       duration: { elapsedTicks: 0, expiresAtTicks: 6 },
       triggeredAt: { tick, sourceEventType: 'WORLD_PULSE_FACTION_CHALLENGE', sourceEventTargetId: state.factionId },
       affectedSystems: ['public_legitimacy', 'faction_power', 'social_trust'],
-      causes: [{ source: state.factionId, effect: 'legitimacy_challenge', reason: 'Faction competition intensified under weak legitimacy.' }],
+      causes: [{ source: state.factionId, effect: 'legitimacy_challenge', reason: 'With the rulers weak, the powers in town are fighting for their place.' }],
     },
     conflictTags: [`settlement:${item.id}:government_change`],
     metadata: {

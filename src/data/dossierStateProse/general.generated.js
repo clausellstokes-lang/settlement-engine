@@ -5199,7 +5199,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "{faction} is strong in {settlement} and the transit trade is clean; whatever the faction takes, it does not take it off the road.",
+          "text": "{faction} is strong in {settlement} and the transit trade is clean; whatever the power takes, it does not take it off the road.",
           "slots": [
             "faction",
             "settlement"
