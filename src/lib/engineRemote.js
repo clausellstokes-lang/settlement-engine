@@ -26,9 +26,19 @@
  * DIFFERENT town for the same seed, so it is refused with `engine_remote_unsupported`
  * naming the inputs, rather than sent and quietly approximated.
  *
- * Imports nothing at module scope (the generation client's wire-lean law): the auth client
- * is fetched lazily, only when a remote request is actually made.
+ * THE ONE ENVIRONMENT IT TAKES IS VANILLA. The store stamps EVERY standalone generation with
+ * the account's content environment, and an account with none is stamped with
+ * `VANILLA_CONTENT_ENVIRONMENT` (`customContentSlice.js :: getActiveCustomContentRuntime`). The
+ * service stamps its own birth with that same environment, so that stamp — with no binding hash
+ * — is the one environment the pre-flight admits. Any other environment, or any binding hash,
+ * is refused as `contentEnvironment`.
+ *
+ * Its one module-scope import is that identity, from `contentEnvironmentDefaults.js`: a leaf of
+ * constants with no imports, already in the store's first paint (customContentSlice.js reads
+ * it), so the wire-lean law holds — the environment compiler is never reached from here. The
+ * auth client is fetched lazily, only when a remote request is actually made.
  */
+import { VANILLA_CONTENT_ENVIRONMENT } from '../domain/content/contentEnvironmentDefaults.js';
 
 /** The error code a pinned version the service no longer serves arrives as (HTTP 409). */
 export const ENGINE_VERSION_RETIRED_CODE = 'engine_version_retired';
@@ -113,8 +123,24 @@ function holdsEntries(value) {
 }
 
 /**
+ * Is this environment reference the built-in vanilla environment, by the constant's own
+ * identity (id, revision, hash and source all equal)? A look-alike is not.
+ * @param {unknown} environment
+ * @returns {boolean}
+ */
+function isVanillaEnvironment(environment) {
+  if (!environment || typeof environment !== 'object') return false;
+  const env = /** @type {Record<string, unknown>} */ (environment);
+  return env.environmentId === VANILLA_CONTENT_ENVIRONMENT.environmentId
+    && env.environmentRevisionId === VANILLA_CONTENT_ENVIRONMENT.environmentRevisionId
+    && env.environmentHash === VANILLA_CONTENT_ENVIRONMENT.environmentHash
+    && env.source === VANILLA_CONTENT_ENVIRONMENT.source;
+}
+
+/**
  * The inputs of a generation request the service would NOT honour, by name. Empty means
- * the service's `{ seed, config }` birth reproduces the local core's run.
+ * the service's `{ seed, config }` birth reproduces the local core's run. The standalone
+ * vanilla stamp with no binding hash is the service's own stamp, so it is not named.
  * @param {any} payload the protocol request's payload
  * @returns {string[]}
  */
@@ -126,7 +152,10 @@ export function remoteUnsupportedInputs(payload) {
   if (holdsEntries(runtime.customContent)) unsupported.push('customContent');
   if (holdsEntries(runtime.contentTunables)) unsupported.push('contentTunables');
   const provenance = runtime.contentProvenance;
-  if (provenance && (provenance.environment != null || provenance.bindingHash != null)) {
+  if (provenance && (
+    provenance.bindingHash != null
+    || (provenance.environment != null && !isVanillaEnvironment(provenance.environment))
+  )) {
     unsupported.push('contentEnvironment');
   }
   return unsupported;
