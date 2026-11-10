@@ -11,13 +11,14 @@
  *   1. the Navigation seats are the route table's NAV, in its order, each described;
  *   2. the dossier tab list is OutputContainer.jsx :: TAB_GROUPS, both directions, with
  *      each label the dossier's own;
+ *   3. the sharing entry says only what the share panel says, sentence by sentence.
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { NAV } from '../../src/lib/routes.js';
-import HowToUse, { NAV_DESCRIPTIONS, DOSSIER_TAB_GROUPS } from '../../src/components/HowToUse.jsx';
+import HowToUse, { NAV_DESCRIPTIONS, DOSSIER_TAB_GROUPS, SHARE_ENTRY_SENTENCES } from '../../src/components/HowToUse.jsx';
 import { TAB_GROUPS } from '../../src/components/OutputContainer.jsx';
 
 afterEach(cleanup);
@@ -73,5 +74,20 @@ describe('ABOUT-CURRENT — the dossier tab list is the dossier', () => {
         expect(re.test(src), `${id} → '${label}' is not the dossier's label`).toBe(true);
       }
     }
+  });
+});
+
+describe('ABOUT-CURRENT — the sharing entry claims only what the share panel says', () => {
+  it('every sentence appears verbatim in the share panel', () => {
+    const panel = read('src/components/ShareToGallery.jsx').replace(/\s+/g, ' ');
+    for (const sentence of SHARE_ENTRY_SENTENCES) {
+      // The canon sentence is interpolated in the panel from the same copy key.
+      const probe = sentence.replace(/^Start the World Clock /, '');
+      expect(panel.includes(probe), sentence).toBe(true);
+    }
+  });
+
+  it('the entry never says what players cannot see', () => {
+    for (const sentence of SHARE_ENTRY_SENTENCES) expect(sentence).not.toMatch(/cannot|can't|never see/i);
   });
 });

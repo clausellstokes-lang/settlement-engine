@@ -423,6 +423,17 @@ export const DOSSIER_TAB_GROUPS = Object.freeze([
   ]},
 ]);
 
+// The sharing entry's sentences, each verbatim from the share panel (ShareToGallery.jsx).
+export const SHARE_ENTRY_SENTENCES = Object.freeze([
+  'Public dossiers appear in the gallery.',
+  'Your name and email stay private.',
+  `${t('canon.startWorldClock')} before sharing the dossier publicly.`,
+  'An unlisted link is for your players.',
+  'It stays the same for as long as this settlement exists, and it always shows your latest changes.',
+  'A town can be listed in the gallery and have an unlisted link at the same time.',
+]);
+const SHARE_ENTRY = SHARE_ENTRY_SENTENCES.join(' ');
+
 const DOSSIER_TAB_SECTIONS = DOSSIER_TAB_GROUPS.map((g) => ({
   heading: `Settlement Detail Tabs: ${g.label}`,
   rows: g.tabs.map(([, label, desc]) => [label, desc]),
@@ -449,6 +460,11 @@ function Reference() {
       ['Link Neighbour',`With Cartographer: in the ${LIBRARY} tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).`],
       ['Set as Neighbour','Tell the generator to bias a new settlement against an existing one. Opens the Create tab with the neighbour active.'],
       ['Edit Names','With Cartographer, rename any NPC or power. Changes cascade bidirectionally to linked partners.'],
+      // ABOUT-CURRENT A2 (2026-11-10): sharing with the table, in the share panel's own
+      // sentences (ShareToGallery.jsx, its private-state note; the button label is
+      // SettlementDetailActions.jsx's). tests/components/aboutCurrent.test.jsx pins each
+      // sentence to that source, so the Guide claims nothing the panel does not.
+      ['Share to Gallery', SHARE_ENTRY],
       ['Export PDF','Print-ready settlement briefing. Cover page, index, relationship diagram, NPC cards, and economic appendix.'],
     ]},
     { heading: 'World Map', rows: [
