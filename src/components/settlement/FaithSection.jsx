@@ -172,7 +172,7 @@ function ActiveFaith({ model }) {
               aria-expanded={faithOpen}
               style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, justifyContent: 'flex-start' }}
             >
-              {faithOpen ? '▾' : '▸'} How this faith couples ({effects.length})
+              {faithOpen ? '▾' : '▸'} What this faith touches ({effects.length})
             </Button>
             {faithOpen && (
               <ul style={{ margin: '4px 0 0', padding: '0 0 0 12px', listStyle: 'none' }}>
