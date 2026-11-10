@@ -239,13 +239,32 @@ export function hookOffsetOf(key) {
  * row whose `needs` the place's facts refuse is skipped (MERGE-R2's ruling 2: the held set and the
  * declarations refuse together), and the wet line resolves through its declared sibling set
  * (`NPC_HOOK_SIBLINGS`, the F5 inland twin dissolved into its table by CENSUS-1c).
+ *
+ * ⚡ ONE READING OF EACH FACT PER WALK (GEN-SPEED cure 3, C′, the chair's ruling (a), 2026-11-10).
+ * Every row's `resolveDeclared` used to build a NEW `factsOf` and re-read its facts (`guardPresence`
+ * re-partitions the whole roster), so a walk read the same answer once per row: on the wizard's
+ * heaviest request 350 of a walk's 406 `guardPresence` reads repeated. The walk now builds ONE facts
+ * object and reads it through `rememberedFacts`, a memo created here and dropped when the call
+ * returns. `factsOf` itself still remembers nothing. EXACT because nothing the facts read is written
+ * while the walk runs: the record is the `{ institutions, tier }` literal built here, the roster
+ * array and its rows and the world law's port kind are the caller's and are only read, the loop is
+ * synchronous, and the only foreign code it calls is `accept` (below). Pinned, not only argued:
+ * `tests/generators/spareHookLineFactsWork.test.js` walks a deep-frozen place and roster and gets
+ * the lines of the unfrozen walk, so a write would throw instead of going stale.
+ *
  * @param {string[]} pools @param {Set<string>} held @param {string} key
- * @param {HookPlace} [place] @param {(line: string) => boolean} [accept]
+ * @param {HookPlace} [place]
+ * @param {(line: string) => boolean} [accept] a PURE test of a candidate line's text. It MUST NOT
+ *   write to the place, its roster or any roster row (the walk's remembered facts depend on it).
+ *   The two callers today hold: `drawCardHooks` (the default, `() => true`) and
+ *   `personHooks.js :: truePersonHooks` (`isTrue`, a check of the text against facts computed
+ *   before the walk); the frozen-walk pin covers both shapes.
  * @returns {string | null}
  */
 export function spareHookLine(pools, held, key, place = {}, accept = () => true) {
   const institutions = Array.isArray(place?.institutions) ? place.institutions : [];
-  const facts = () => factsOf({ institutions, tier: place?.tier }, { waterKind: place?.worldLaw?.portKind });
+  const once = rememberedFacts(factsOf({ institutions, tier: place?.tier }, { waterKind: place?.worldLaw?.portKind }));
+  const facts = () => once;
   for (const name of [...new Set(pools)]) {
     const pool = /** @type {unknown[]} */ (titlePoolLines(name) ?? NPC_FACTION_LOYALTY[/** @type {keyof typeof NPC_FACTION_LOYALTY} */ (name)] ?? []);
     const start = pool.length ? hookOffsetOf(key) % pool.length : 0;
@@ -258,6 +277,31 @@ export function spareHookLine(pools, held, key, place = {}, accept = () => true)
     }
   }
   return null;
+}
+
+/**
+ * A facts object read through a memo: each property is read from `live` at most once, on first
+ * use, and the same value is answered after. The memo is the returned object itself, so it lives
+ * exactly as long as the caller holds it (`spareHookLine` holds it for one walk). A property whose
+ * value is a function (`hasInstitution`, `hasOtherNpc`) is remembered as that function, whose
+ * calls still read the record live. Frozen, like `factsOf`'s own answer.
+ * @template {object} F @param {F} live @returns {F}
+ */
+function rememberedFacts(live) {
+  /** @type {Map<string, unknown>} */
+  const seen = new Map();
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const key of Object.keys(live)) {
+    Object.defineProperty(out, key, {
+      enumerable: true,
+      get() {
+        if (!seen.has(key)) seen.set(key, /** @type {Record<string, unknown>} */ (live)[key]);
+        return seen.get(key);
+      },
+    });
+  }
+  return /** @type {F} */ (Object.freeze(out));
 }
 
 /**
