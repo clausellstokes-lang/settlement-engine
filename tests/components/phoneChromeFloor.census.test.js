@@ -388,7 +388,10 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
-  '/settlements':           { roots: 1, files: 206, floored: 867, ruled: 4, bare: 0 },
+  // 2026-11-10, LIBRARY-SIMPLE (owner: "No longer does it advance time."): floored 867 -> 864, the
+  // campaign folder's three advance sites left with their controls — the "Advance by" micro-label,
+  // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
+  '/settlements':           { roots: 1, files: 206, floored: 864, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   '/compendium':            { roots: 1, files: 50, floored: 208, ruled: 3, bare: 0 },

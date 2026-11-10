@@ -2057,6 +2057,10 @@
       "kind": "rationale",
       "ref": "self-proving-meta"
     },
+    "tests/lint/libraryAdvancesNothing.walker.test.js": {
+      "kind": "mutation",
+      "label": "library-simple/the Library reads no campaign advance"
+    },
     "tests/store/commitPendingEditsTotality.walker.test.js": {
       "kind": "rationale",
       "ref": "self-proving-meta"

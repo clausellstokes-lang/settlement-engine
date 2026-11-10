@@ -132,6 +132,7 @@ describe('the Library promises no advance (owner, 2026-11-10)', () => {
     expect(screen.getByText('Your saved settlements and campaigns. Reopen a town or export a dossier for the table.')).toBeTruthy();
     expect(screen.getByText('Group towns into one world.')).toBeTruthy();
     // And the negative over the whole page.
+    // anchored: the body holds the folder table, the ledger heading and both kept sentences asserted present above.
     expect(document.body.textContent).not.toMatch(/advanc/i);
     expect(screen.queryByRole('button', { name: /advance/i })).toBeNull();
     expect(screen.queryByLabelText(/advance/i)).toBeNull();
