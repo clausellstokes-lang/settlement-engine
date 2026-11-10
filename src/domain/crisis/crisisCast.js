@@ -666,9 +666,6 @@ export function instigatorCandidates(s, kind, stakes) {
   return { candidates: out, absent: nature === 'engineered' ? CAST_ABSENCES.outsideHand : CAST_ABSENCES.noGains };
 }
 
-/** Card power at or below this reads as a small name (`npc.power` 1–3 is "low"; URBAN-AUDIT §5's band). */
-const SMALL_NAME_POWER = 3;
-
 /**
  * E-3 (URBAN-AUDIT §5, the chair's ruling; SW-9b-B): true for an instigator who is a SMALL NAME (card power 1-3), the
  * face of a house that holds a RANKED membership in the instigating power (the backing the people car wrote: the mill,
@@ -678,7 +675,7 @@ const SMALL_NAME_POWER = 3;
 function smallNameBacked(n, f, gains) {
   const card = numOf(/** @type {{ power?: unknown }} */ (n).power);
   if (!gains || n.institution?.kind !== 'house' || !str(n.institution?.key)) return false;
-  if (!(card > 0 && card <= SMALL_NAME_POWER)) return false;
+  if (!(card > 0 && card <= 3)) return false; // a small name: card power 1-3 is "low" (URBAN-AUDIT §5's band)
   return membershipsOf(n).some((m) => m.power === factionName(f) && m.rank != null);
 }
 
