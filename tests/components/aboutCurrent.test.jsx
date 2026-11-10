@@ -12,6 +12,8 @@
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { NAV } from '../../src/lib/routes.js';
 import HowToUse, { NAV_DESCRIPTIONS } from '../../src/components/HowToUse.jsx';
 
@@ -27,6 +29,8 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
+const read = (p) => readFileSync(resolve(process.cwd(), p), 'utf-8');
+
 describe('ABOUT-CURRENT — the Navigation list is the header', () => {
   it('every header seat has a description and no description names a missing seat', () => {
     expect(Object.keys(NAV_DESCRIPTIONS).sort()).toEqual(NAV.map((n) => n.id).sort());
@@ -39,5 +43,11 @@ describe('ABOUT-CURRENT — the Navigation list is the header', () => {
     expect(nav, 'the Navigation sub-section renders').toBeTruthy();
     const labels = [...nav.parentElement.querySelectorAll('div > span:first-child')].map((s) => s.textContent);
     expect(labels.slice(0, NAV.length)).toEqual(NAV.map((n) => n.label));
+  });
+
+  it('the Guide no longer names the retired seat "Settlements tab"', () => {
+    const { container } = render(<HowToUse />);
+    expect(container.textContent).not.toMatch(/Settlements tab/);
+    expect(read('src/components/HowToUse.jsx')).not.toMatch(/Settlements tab|Settlements<\/strong> tab/);
   });
 });
