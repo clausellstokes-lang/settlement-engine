@@ -24,6 +24,7 @@ import { dirname, join } from 'node:path';
 import { ROUTES, isKnownView } from '../../src/lib/routes.js';
 import { headForView, VIEW_DESCRIPTIONS, DEFAULT_DESCRIPTION } from '../../src/lib/seo.js';
 import { compendiumEntryHead, compendiumSectionHead } from '../../src/lib/seoCompendium.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { COMPENDIUM_INDEX } from '../../src/domain/compendium/searchIndex.js';
 import { GALLERY_HUBS } from '../../src/lib/galleryHubs.js';
 import { isIndexable } from '../../scripts/generate-sitemap.mjs';
@@ -131,7 +132,7 @@ describe('prerender — pure render (build head == runtime head, the single sour
   // catalog section bakes its own head (the runtime's compendiumSectionHead).
   it('every compendium catalog section page bakes its own head', () => {
     expect(PRERENDERED_SECTION_SLUGS).toHaveLength(11);
-    expect(PRERENDERED_SECTION_SLUGS).not.toContain('custom');
+    expectAbsentWithAnchor(PRERENDERED_SECTION_SLUGS, 'custom', 'tiers', 'prerendered compendium sections');
     for (const slug of PRERENDERED_SECTION_SLUGS) {
       const html = renderSection(SHELL, slug);
       const h = compendiumSectionHead(slug);

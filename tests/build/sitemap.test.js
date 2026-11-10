@@ -87,7 +87,7 @@ describe('public/sitemap.xml', () => {
     expect(sections).toHaveLength(11);
     for (const loc of sections) expect(locs, loc).toContain(loc);
     expect(locs.filter((l) => l.includes('/compendium?tab='))).toEqual([]);
-    expect(locs).not.toContain('https://settlementforge.com/compendium/custom');
+    expectAbsentWithAnchor(locs, 'https://settlementforge.com/compendium/custom', 'https://settlementforge.com/compendium/tiers', 'sitemap section pages');
     for (const loc of sections) expect(committed, loc).toContain(`<loc>${loc}</loc>`);
   });
 

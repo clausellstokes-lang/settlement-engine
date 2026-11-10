@@ -43,8 +43,8 @@ describe('SurveyorGlossary — the in-place glossary affordance', () => {
     expect(screen.getByText(entry.definition)).toBeTruthy();
     const link = screen.getByRole('link', { name: /compendium/i });
     // The section's own page (the owner, 2026-11-10: each compendium section is a page).
+    // (The pattern admits no query string, so no ?tab= address can pass it.)
     expect(link.getAttribute('href')).toMatch(/^\/compendium\/[a-z-]+#[a-z0-9-]+$/);
-    expect(link.getAttribute('href')).not.toContain('?tab=');
   });
 
   it('Escape closes the dialog', () => {
