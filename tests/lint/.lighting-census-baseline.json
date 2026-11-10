@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b6515f9f8d2aec301268ba2645634a1507f4d205",
+  "measuredAtSha": "6cca6bf46fcd957b0f6350835c7a53e208f538db",
   "measuredBy": "REMOTE-PATH",
   "date": "2026-11-10",
-  "note": "remote-path FU-5b: tests/components/refusalNotice.test.jsx un-parked (R3 had registered its arms in a for-loop the census cannot read, parking the whole file and its titles; now literal titles over shared helpers), with the follow-ups new titles (FU-1, FU-2)",
+  "note": "remote-path FU-3: the new titles of the unsupported-request arms (refusalNotice x3, engineRemoteStorePreflight x1, engineRefusal x1)",
   "files": 3188,
   "parked": 396,
   "credited": 2792,
-  "titles": 29050,
+  "titles": 29055,
   "suiteTitles": 7848
 }
