@@ -342,7 +342,6 @@ function importRoutePhrase(channel) {
  */
 function dependencyGoods(dependencies) {
   if (!Array.isArray(dependencies)) return null;
-  // filter(g && …) drops every unmatched row, so each good is a string.
   const goods = /** @type {string[]} */ ([...new Set(dependencies
     .map((d) => /^Imports (.+)$/.exec(String(d?.title || ''))?.[1]?.replace(/\s*\(.*\)\s*$/, '').trim().toLowerCase())
     .filter((g) => g && !/[0-9]/.test(g)))]);
