@@ -75,6 +75,34 @@ describe('engine-core never statically imports a lazily pinned module (FIRSTPAIN
     expect(engineCore.length).toBeGreaterThan(40);
   });
 
+  const edgesOutOfEngineCore = (resolveDep = (dep) => dep) => {
+    const bad = [];
+    for (const f of engineCore)
+      for (const raw of importsOf(f)) {
+        const dep = resolveDep(raw);
+        const chunk = manualChunks(dep);
+        if (chunk && !EAGER_CHUNKS.has(chunk)) bad.push(`${rel(f)} -> ${rel(dep)} [${chunk}]`);
+      }
+    return bad;
+  };
+
+  // THE FLAGGED GRAPH (DIST-FLAGGED, 2026-11-10). The production artifact is built with
+  // VITE_ENGINE_REMOTE=true, and vite.config.js :: engineAbsentWhenRemote then resolves the
+  // local engine's three seam ids to src/lib/localEngine.absent.js. That plugin swaps those
+  // ids and nothing else, and manualChunks does not read the flag, so the flagged graph is
+  // this walk with the same swap applied — cheap, and it is THE graph that ships.
+  it('the same holds on the FLAGGED graph (the seam swapped to its absent twin, as the plugin does)', () => {
+    const swapped = new Set([
+      join(SRC, 'lib/localEngine.js'),
+      join(SRC, 'lib/localPipeline.js'),
+      join(SRC, 'generators/generateSettlementPipeline.js'),
+    ]);
+    const absent = join(SRC, 'lib/localEngine.absent.js');
+    expect(existsSync(absent), 'the absent twin the plugin resolves to').toBe(true);
+    const bad = edgesOutOfEngineCore((dep) => (swapped.has(dep) ? absent : dep));
+    expect(bad, `FLAGGED graph: engine-core (eager) statically imports a lazily pinned module:\n  ${bad.join('\n  ')}`).toEqual([]);
+  });
+
   it('every static edge out of engine-core lands in an eager chunk or an unpinned module', () => {
     const bad = [];
     for (const f of engineCore)
