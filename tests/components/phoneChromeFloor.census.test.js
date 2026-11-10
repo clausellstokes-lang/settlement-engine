@@ -395,7 +395,17 @@ const ROUTE_BASELINE = Object.freeze({
   // scroll … boxes that are flush to each other"): the retired tab row's button label and the retired
   // mode toggle's count badge were the panel's two `chromeFontSize` sites; the landing grid's one
   // `proseFontSize` line replaces the retired Overview card's one. Re-recorded by the row's ritual.
-  '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
+  // floored 206 -> 207 (2026-11-10, COMPENDIUM-INSTITUTIONS H7, the owner: "the institution page should
+  // show ALL institutions with their native power backing and services and flows"): the institution
+  // card's one fact line (`proseFontSize`, label + registry value). Re-recorded by the row's ritual.
+  // floored 207 -> 206 (2026-11-10, COMPENDIUM-INSTITUTIONS-2 c: a floor does not rise): the fact line
+  // now sits at FS.sm (12 px, at or above the phone floor at every width), an existing token, so it needs
+  // no floor call. Re-recorded by the row's ritual.
+  // floored 206 -> 205 (2026-11-10, COMPENDIUM-INSTITUTIONS-2 a2, the chair: "a card's description is never
+  // smaller than its fact lines"): the institution card's description now asks proseFontSize for FS.sm
+  // (12 px, not below the chrome floor, so the census no longer counts it as floored); it still renders 14 px
+  // on a phone and 12 px on desktop, never smaller than the 12 px fact lines. A fall, said here.
+  '/compendium':            { roots: 1, files: 50, floored: 205, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 7, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 13, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 107, ruled: 5, bare: 0 },

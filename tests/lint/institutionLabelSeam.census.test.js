@@ -225,6 +225,10 @@ describe('the institution label seam — the habitat is exactly the frozen one',
       expect(row.count, file).toBeGreaterThan(0);
     }
     // 3 -> 4 (2026-10-30, T1-14): the Institutions tab's join key and React key.
+    // 4 -> 5 (2026-11-10, COMPENDIUM-INSTITUTIONS H7): the Compendium's facts module's registry
+    // lookup key (the owner's word on the Institutions page; its row above carries the reason).
+    // 5 -> 4 (2026-11-10, COMPENDIUM-INSTITUTIONS-2 b): that module moved to
+    // src/domain/compendium/institutionFacts.js, outside this census's trees; a shrink.
     expect(Object.keys(ALLOWED_RAW_READS)).toHaveLength(4);
   });
 });

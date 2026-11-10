@@ -23,6 +23,7 @@
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { existsSync } from 'node:fs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -66,6 +67,14 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
+function assertLandingTrimmed(container) {
+  const text = container.textContent;
+  expect(container.querySelector('[data-compendium-grid]')).not.toBeNull();
+  expectAbsentWithAnchor(text, 'rendered by the deterministic engine', 'Tiers & Routes', 'the landing text');
+  expectAbsentWithAnchor(text, 'It cannot drift from what the simulator actually does', 'Tiers & Routes', 'the landing text');
+  expectAbsentWithAnchor(text, 'The sample world is', 'Tiers & Routes', 'the landing text');
+}
+
 describe('CompendiumPanel — decomposition smoke', () => {
   test('mounts without throwing and renders the built-in catalog', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
@@ -75,12 +84,11 @@ describe('CompendiumPanel — decomposition smoke', () => {
     expect(document.body).toBeTruthy();
     expect(container.firstChild).not.toBeNull();
 
-    // Default mode is the built-in catalog on the Overview dashboard (DOC WAVE 2/2).
-    // Pinning its stable, artifact-rendered copy means a broken extraction (e.g.
-    // CompendiumDashboard/CatalogHubs → primitives/artifact import) surfaces here.
-    expect(
-      screen.getByText(/rendered by the deterministic engine from its own registries/),
-    ).toBeTruthy();
+    // The landing renders its grid (a broken extraction of CompendiumDashboard would fail
+    // here). RE-KEYED BY IDENTITY (the owner, 2026-11-10, verbatim: "remove the everything
+    // here is rednedered by the deteremistic.... all the way to the sample world cnocby..."):
+    // the intro sentence and the sample-world line are gone; a tile name is the anchor.
+    assertLandingTrimmed(container);
   });
 
   test('mounts in standalone mode without throwing', async () => {
@@ -88,9 +96,7 @@ describe('CompendiumPanel — decomposition smoke', () => {
     const { container } = render(<CompendiumPanel standalone />);
 
     expect(container.firstChild).not.toBeNull();
-    expect(
-      screen.getByText(/rendered by the deterministic engine from its own registries/),
-    ).toBeTruthy();
+    assertLandingTrimmed(container);
   });
 
   // RESTORATION #9 pinned the standalone-page identity (Page frame + PageHeader) and
@@ -187,6 +193,51 @@ describe('CompendiumPanel — decomposition smoke', () => {
     expect(root.querySelectorAll('[data-filter-hidden]').length).toBeGreaterThan(0);
     // Every hidden entry is one that does not contain the string.
     expect([...root.querySelectorAll('[data-filter-hidden]')].filter((el) => el.textContent.toLowerCase().includes('flood'))).toEqual([]);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: '' } });
+    expect(root.querySelectorAll('[data-filter-hidden]').length).toBe(0);
+  });
+
+  // COMPENDIUM-INSTITUTIONS-2 (the chair's catch at the look-first, 2026-11-10): the in-place
+  // filter narrows inside any element of five or more children, and H7's fact lines put every
+  // institution card past five, so "inn" split cards apart (titles without lines, lines without
+  // titles). The owner's rule stands: "The search bar acts as a search bar that filters based
+  // on string matching". An ENTRY is shown whole or hidden whole; the string is matched against
+  // the entry's whole text, as before.
+  const isHidden = (el) => !!el.closest('[data-filter-hidden]');
+  test('the Institutions filter shows each card WHOLE or hides it WHOLE ("inn"), and clearing restores all 282', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    const { container } = render(<CompendiumPanel standalone routeSection="institutions" />);
+    const cards = () => [...container.querySelectorAll('[data-compendium-filter-root] [id^="inst-"]')];
+    expect(cards()).toHaveLength(282);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: 'inn' } });
+    const all = cards();
+    const shown = all.filter((c) => !isHidden(c));
+    expect(shown.length).toBeGreaterThan(0);
+    for (const c of shown) {
+      expect(c.textContent.toLowerCase(), c.id).toContain('inn');
+      // whole: no part of a shown card is hidden — its title, description and every fact line
+      expect(c.querySelectorAll('[data-filter-hidden]').length, c.id).toBe(0);
+    }
+    for (const c of all.filter(isHidden)) expect(c.textContent.toLowerCase().includes('inn'), c.id).toBe(false);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: '' } });
+    expect(cards().filter(isHidden)).toHaveLength(0);
+    expect(cards()).toHaveLength(282);
+  });
+
+  // The same rule on a second page measured past five children before the fix: Economy's band
+  // ladders (title, blurb, seven bands). "poor" names a band of Prosperity; the ladder shows whole.
+  test('the Economy filter shows a band ladder WHOLE ("poor" keeps the Prosperity ladder with its title)', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    const { container } = render(<CompendiumPanel standalone routeSection="economy" />);
+    const root = container.querySelector('[data-compendium-filter-root]');
+    const title = [...root.querySelectorAll('div')].find((d) => d.textContent === 'Prosperity');
+    expect(title).toBeTruthy();
+    const ladder = title.parentElement;
+    expect(ladder.children.length).toBeGreaterThanOrEqual(5);
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: 'poor' } });
+    expect(isHidden(ladder)).toBe(false);
+    expect(isHidden(title)).toBe(false);
+    expect(ladder.querySelectorAll('[data-filter-hidden]').length).toBe(0);
     fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: '' } });
     expect(root.querySelectorAll('[data-filter-hidden]').length).toBe(0);
   });
