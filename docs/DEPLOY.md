@@ -16,7 +16,7 @@ After pushing to `origin/master`:
 
 2. **Vercel deployment**: the push-time build is deliberately skipped while CI
    is pending. The post-CI deploy/retrigger jobs proceed only after every required
-   check is green. `vercel.json` points at **`npm run build`** → `dist/` — the npm
+   check is green. `vercel.json` points at **`NODE_OPTIONS=--max-old-space-size=4096 npm run build`** → `dist/` — the npm
    script, not a bare `npx vite build`. That matters: only the npm script runs
    `prebuild` (`generate-sitemap.mjs`) and `postbuild` (`prerender-routes.mjs`),
    and the sitemap/prerender section of this runbook depends on both.
