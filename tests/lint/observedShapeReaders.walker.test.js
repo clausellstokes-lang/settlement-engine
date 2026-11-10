@@ -1894,7 +1894,13 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // single-revert scratch tree, which measures 1/17/44), and the re-dealt year carries a writer for two more identities
       // in the cohort's file (WorldPulseData.js: `factionName on stressors` ×4, `settlementIds on stressors` ×1), so the
       // filters clear them; they are two of the rung's GONE rows. Car 3's own pin (18a315ee2) reads the same 1/19/49.
-      files: 1, identities: 19, counts: 49,
+      // ⭐ 1/19/49 → 0/18/47 AT COMPENDIUM-HUB (2026-11-10, the owner's word "Rather than a horizontal scroll … when
+      // one clicks on it they are taken to a different page"), RE-DERIVED AND NAMED: no filter's CODE moved, its INPUT
+      // did. The two raw reads M11 cleared in src/components/CompendiumPanel.jsx (`replaceState on history` ×2, the
+      // old in-panel tab jumps' hash writes) LEFT THE ESTATE with the tab row: section changes are now router pushes
+      // through navigate(). That file was raw-only, so the gap loses exactly 1 file / 1 identity / 2 counts; the
+      // filtered reading is unmoved. Measured: the base a116c2c52 passes this arm at 1/19/49.
+      files: 0, identities: 18, counts: 47,
     });
     expect(UNREVIEWED_UI_COHORT.tag).toBe('UNREVIEWED-UI');
     expect(UNREVIEWED_UI_COHORT.scopes).toEqual([...EXACT_SCAN_EXCLUDED_SCOPE]);
