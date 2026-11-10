@@ -91,7 +91,12 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // (5f8f76238), each library's own functions (the voice throw disabled in an untracked scratch copy only).
 // CORPUS 396/0/396/44 → 395/1/394/43 (the observed-shape walker's rung-38 pin 394/2525/395/81): queued|npc_reform ARRIVES and two
 // homes LEAVE (applied|resource_depletion, queued|trade_pressure); one retirement returns; conservation 395 − 1 = 394.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 43 });
+// ── RE-DECLARED 2026-11-10 BY THE RESIDUE SEAT AT THE SIMULATION BATCH (STYLE-2-MERGE point 36), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT (the cause, the bisect and the named home recorded once, at the voice contract's copy): CORPUS 395/1/394/43 →
+// 395/1/394/44 — applied|npc_expose ARRIVES by GREEN-TIP ae6693ccb (the pulse seats an NPC by its first-rank membership); no home
+// leaves; conservation 395 − 1 = 394. ADDRESS_TOTALS and RAW_LIVENESS are NOT moved here: the content-totality rows are the merge
+// seat's closing act.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 44 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
