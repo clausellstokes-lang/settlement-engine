@@ -160,7 +160,9 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
 // position (the subordinate row reads "secondary to the dominant criminal interest", so dominant-vs-subordinate stays).
 const masterOf = (t) => (Array.isArray(t.npcs) ? t.npcs : []).find((n) => (n?.memberships || []).some((m) => m.power === "Thieves' Guild" && m.rank === 1)
   && n?.settlementCondition === 'governance_fractured' && n?.structuralRank === 'head'
-  && /governance vacuum is the optimal environment for criminal operations to expand/i.test(n?.structuralPosition || ''));
+  // Re-keyed by identity at STYLE-2-MERGE point 24 (red since point 22): SW-6 CRISIS-SURFACES 542d6e6b6 re-said the criminal
+  // head's GOVERNANCE_FRACTURED position in plain words (npcStructure.js); the same row, the same master.
+  && /Heads the leading crew while the seat fails; whatever the seat stops watching is there to take\./.test(n?.structuralPosition || ''));
 const governingOf = (t) => (t.powerStructure?.factions || []).find((f) => f.isGoverning);
 const thievesOf = (t) => (t.powerStructure?.factions || []).find((f) => f.faction === "Thieves' Guild");
 /** The showcase story's six facts, each a predicate on the forged world (the same truths the claims above pin). */
