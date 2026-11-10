@@ -91,3 +91,13 @@ describe('ABOUT-CURRENT — the sharing entry claims only what the share panel s
     for (const sentence of SHARE_ENTRY_SENTENCES) expect(sentence).not.toMatch(/cannot|can't|never see/i);
   });
 });
+
+describe('ABOUT-CURRENT A4 — the FAQ states the Founders\' Hall count from its constant (ruling S8)', () => {
+  it('the founder answer renders the seat cap through t(), never a typed count', async () => {
+    const { t } = await import('../../src/copy/index.js');
+    const { FOUNDER_SEATS } = await import('../../src/config/tierFacts.js');
+    expect(t('accountFaq.founderLifetime.a', { seats: FOUNDER_SEATS })).toContain(`holds ${FOUNDER_SEATS} chairs`);
+    expect(read('src/components/account/AccountFAQ.jsx')).toMatch(/ANSWER_VARS = Object\.freeze\(\{ seats: FOUNDER_SEATS \}\)/);
+    expect(read('src/copy/en.js')).not.toMatch(/Hall holds thirty chairs/);
+  });
+});

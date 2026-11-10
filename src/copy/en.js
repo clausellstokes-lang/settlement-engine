@@ -1814,7 +1814,7 @@ export const en = Object.freeze({
     },
     founderLifetime: {
       q: 'What is a Founder chair?',
-      a: 'A place in the credits, and everything the paid Cartographer tier runs, for as long as SettlementForge runs. The Founders’ Hall holds thirty chairs. They are given by invitation and have never been for sale; you can ask for one by letter in the Hall.',
+      a: 'A place in the credits, and everything the paid Cartographer tier runs, for as long as SettlementForge runs. The Founders’ Hall holds {seats} chairs. They are given by invitation and have never been for sale; you can ask for one by letter in the Hall.',
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',
