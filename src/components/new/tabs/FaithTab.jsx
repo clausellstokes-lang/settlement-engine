@@ -140,7 +140,7 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
           is the page's answer), the glance row and the field rows first; the desk passages
           that couple them after. Every block moved verbatim. */}
       {/* The gated faith surface — the constitutional seam, unchanged. */}
-      <FaithSection settlement={settlement} publicDossier={publicDossier} />
+      <FaithSection settlement={settlement} publicDossier={publicDossier} playerView={playerView} />
       {/* ── faith.nicheRow (DS-FTH-3, GLANCE) — the leaf's one glance position. The creed
           rows themselves are FaithSection's one ranked list now (F3 + F6). ── */}
       {active && model.ranks.length > 0 && <FaithNicheGlance desk={deskProse} />}
