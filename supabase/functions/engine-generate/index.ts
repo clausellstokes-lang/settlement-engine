@@ -33,7 +33,17 @@
  * Web Worker and the in-thread fallback run, so the reply is the worker's result packet
  * and the client's `remote` transport (`src/lib/engineRemote.js`) hands phase B the same
  * shape. With no neighbour, no previous settlement and no locks the core's settlement IS
- * `generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} })`.
+ * `generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {}, contentProvenance })`
+ * with the store's own standalone vanilla provenance (THE STAMP, below).
+ *
+ * THE STAMP (remote-path R2, 2026-11-10). The store hands every standalone generation the
+ * provenance `{ scope: 'standalone', environment, bindingHash: null }`, where `environment` is
+ * `VANILLA_CONTENT_ENVIRONMENT` for an account with no content environment
+ * (`src/store/settlementContentRuntime.js`), and none at all when the config turned custom
+ * content off (`useCustomContent === false`). The client admits only that vanilla stamp to this
+ * service (`engineRemote.js :: remoteUnsupportedInputs`), so the birth below hands the pipeline
+ * the same provenance by the same rule, and the pipeline's own `buildSettlementContentProvenance`
+ * writes `customContentProvenance` on both sides: the service's record is the local record.
  *
  * Runs the app's own generator, bundled: `_shared/engineBundle.js` is esbuild's bundle of
  * `src/engine/serviceEntry.js` (scripts/build-edge-shared.mjs), and
@@ -86,6 +96,7 @@ import {
   regenHistoryPipeline,
   regenNPCsPipeline,
   runGenerationRequest,
+  VANILLA_CONTENT_ENVIRONMENT,
 } from '../_shared/engineBundle.js';
 import engineMeta from '../_shared/engineBundle.meta.json' with { type: 'json' };
 import { EVENTS as ANALYTICS_EVENTS, EVENTS_REV as ANALYTICS_EVENTS_REV } from '../_shared/analyticsEventsBundle.js';
@@ -218,6 +229,19 @@ async function logGeneration(admin: EngineAdmin, row: {
   } catch (e) {
     logError(FN, row.userId, e, { stage: 'log' });
   }
+}
+
+/**
+ * The content runtime the store hands its own standalone vanilla generation, by the store's
+ * rule (`settlementContentRuntime.js :: settlementContentRuntimeOptions`): stamped with the
+ * vanilla environment unless the config turned custom content off. No homebrew, no tunables.
+ */
+function storeVanillaContentRuntime(config: Record<string, unknown>) {
+  if (config.useCustomContent === false) return { customContent: {} };
+  return {
+    customContent: {},
+    contentProvenance: { scope: 'standalone', environment: VANILLA_CONTENT_ENVIRONMENT, bindingHash: null },
+  };
 }
 
 function isPlainObject(v: unknown): v is Record<string, unknown> {
@@ -360,7 +384,12 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
     const { settlement, pipelineHistory } = runGenerationRequest({
       op: 'settlement',
       requestId: null,
-      payload: { fullConfig: birthConfig(config), neighbour: null, seed, contentRuntime: { customContent: {} } },
+      payload: {
+        fullConfig: birthConfig(config),
+        neighbour: null,
+        seed,
+        contentRuntime: storeVanillaContentRuntime(config as Record<string, unknown>),
+      },
     });
     const generatedAt = (deps.now ?? (() => new Date()))().toISOString();
     return metered(json({ settlement, pipelineHistory, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors), 'ok');

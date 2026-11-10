@@ -123,9 +123,26 @@ scopedEnv.test('REPLAY: three seeds — the function\'s settlement hashes to the
     const body = await res.json();
     assertEquals(body.engineVersion, ENGINE_VERSION);
     assert(!Number.isNaN(Date.parse(body.generatedAt)));
-    const expected = generateSettlementPipeline(birthConfig(cases.config), null, { seed, customContent: {} });
+    // The expected side is the LOCAL birth under the STORE's own content runtime (remote-path
+    // R2): the store stamps every standalone generation with the vanilla environment, and the
+    // function stamps its birth with the same, so the two records are one record.
+    const expected = generateSettlementPipeline(birthConfig(cases.config), null,
+      { seed, customContent: {}, contentProvenance: cases.storeContentProvenance });
     assertEquals(await sha256(JSON.stringify(body.settlement)), await sha256(JSON.stringify(expected)), `seed ${seed}`);
+    assertEquals(body.settlement.customContentProvenance?.environment?.environmentId, 'system:vanilla');
   }
+});
+
+scopedEnv.test('REPLAY: a config that turned custom content off is born with no stamp, as the store births it (remote-path R2)', async () => {
+  await loadGenerationLawPayloads();
+  const seed = cases.seeds[1];
+  const config = { ...cases.config, useCustomContent: false };
+  const res = await handleEngineGenerate(post({ seed, config }), { adminClient: makeAdmin().adminClient });
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  const expected = generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} });
+  assertEquals(await sha256(JSON.stringify(body.settlement)), await sha256(JSON.stringify(expected)), `seed ${seed}`);
+  assertEquals(body.settlement.customContentProvenance, undefined);
 });
 
 scopedEnv.test('REPLAY: the reply carries the core\'s pipelineHistory — the reveal\'s step list, one row per step (ENGINE-2 unit 1)', async () => {
