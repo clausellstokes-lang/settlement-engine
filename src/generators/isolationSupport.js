@@ -19,7 +19,7 @@ import {
   nativeSemanticName,
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
-import { foodLandOf } from './foodGenerator.js';
+import { foodLandOf } from './foodLand.js';
 
 const REQUIRED_CAPACITY = Object.freeze({
   thorp: 22,
