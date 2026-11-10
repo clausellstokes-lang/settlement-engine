@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 216,
+      "dated": 217,
       "sha-pin": 2,
       "tree": 172
     },
@@ -492,7 +492,8 @@
     "_rosterGrowth2026-11-09-urban-fix": "ONE document JOINED the roster by being BORN into it (URBAN-FIX, a writing lane of the STYLE-2 wave, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbepMRKdedJnbrrmGaf; on lane/urban-fix-2026-11-09 cut from fe55408b9): `dated` 206 -> 207, measured by this walker at the lane tip: docs/chair/2026-11-09/URBAN-FIX-2026-11-09.md, the lane's record (the four urban causes old -> new, the unsigned deltas per cause, the referee before and after, What stays), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382. At the merge it composes with URBAN-AUDIT's own growth note (its lane, 203 -> 204 at its base).",
     "_rosterGrowth2026-11-09-style-2-merge-record-25": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): `tree` 171 -> 172, docs/shift-records/2026-11-10-style-2-merge-25-urban-fix.json, record 25, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-style-2-merge-urban-fix": "THE UNION AT THE URBAN-FIX MERGE (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): both sides' notes kept; `dated` 214 -> 215 (docs/chair/2026-11-09/URBAN-FIX-2026-11-09.md, the lane's record, born dated).",
-    "_rosterGrowth2026-11-10-compendium-hub": "ONE document JOINED the roster by being BORN into it (COMPENDIUM-HUB, a UI seat, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbc2U6ZSyMckmSov4WN; on lane/compendium-hub-2026-11-10 cut from a116c2c52): `dated` 215 -> 216, measured by this walker at the lane tip: docs/chair/2026-11-10/COMPENDIUM-HUB-2026-11-10.md, the lane's record (the owner's word of 2026-11-10 on the compendium landing, each ruling to its commit and pins, the old -> new address table, what was seen, what stays), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382."
+    "_rosterGrowth2026-11-10-compendium-hub": "ONE document JOINED the roster by being BORN into it (COMPENDIUM-HUB, a UI seat, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbc2U6ZSyMckmSov4WN; on lane/compendium-hub-2026-11-10 cut from a116c2c52): `dated` 215 -> 216, measured by this walker at the lane tip: docs/chair/2026-11-10/COMPENDIUM-HUB-2026-11-10.md, the lane's record (the owner's word of 2026-11-10 on the compendium landing, each ruling to its commit and pins, the old -> new address table, what was seen, what stays), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382.",
+    "_rosterGrowth2026-11-10-compendium-institutions": "ONE document JOINED the roster by being BORN into it (COMPENDIUM-HUB phase 2, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbc2U6ZSyMckmSov4WN; on lane/compendium-institutions-2026-11-10 cut from 445390e90): `dated` 216 -> 217, measured by this walker at the lane tip: docs/chair/2026-11-10/COMPENDIUM-INSTITUTIONS-2026-11-10.md, the phase-2 record (the census of the Institutions page's registries, H7 and H9 to their commits and pins, the H11 STOP, the render and bundle measures), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382."
   },
   "rows": []
 }
