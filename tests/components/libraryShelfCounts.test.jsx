@@ -127,7 +127,6 @@ function baseStore(user = { id: 'owner-A' }) {
     applyQueuedRegionalImpact: vi.fn(),
     ignoreQueuedRegionalImpact: vi.fn(),
     resolveRegionalImpact: vi.fn(),
-    advanceCampaignRegionalImpacts: vi.fn(),
     applyAllQueuedRegionalImpacts: vi.fn(),
     ignoreAllQueuedRegionalImpacts: vi.fn(),
     getCampaignMembershipBlock: vi.fn(() => null),

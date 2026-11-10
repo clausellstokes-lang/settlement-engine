@@ -47,7 +47,6 @@ export default function RegionalGraphSummary({
   onApplyImpact,
   onIgnoreImpact,
   onResolveImpact,
-  onAdvanceImpacts,
   onApplyAllImpacts,
   onIgnoreAllImpacts,
 }) {
@@ -73,7 +72,6 @@ export default function RegionalGraphSummary({
   const confirmed = graph.channels.filter(c => c.status === 'confirmed');
   const queuedImpacts = graph.queuedImpacts.filter(i => i.status === 'queued');
   const availableImpacts = queuedImpacts.filter(isRegionalImpactAvailable);
-  const delayedImpacts = queuedImpacts.filter(i => (i.delayTicks || 0) > 0);
   const appliedImpacts = graph.queuedImpacts.filter(i => i.status === 'applied');
   const resolvedImpacts = graph.queuedImpacts.filter(i => i.status === 'resolved');
   const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));
@@ -133,27 +131,6 @@ export default function RegionalGraphSummary({
             />
           </>
         )}
-        {delayedImpacts.length > 0 && (
-          <>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => onAdvanceImpacts?.(campaign.id, 1)}
-              title="Advance regional impacts 1 tick"
-              style={{ marginLeft: availableImpacts.length > 1 ? 0 : 'auto' }}
-            >
-              +1
-            </Button>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => onAdvanceImpacts?.(campaign.id, 3)}
-              title="Advance regional impacts 3 ticks"
-            >
-              +3
-            </Button>
-          </>
-        )}
         <Button
           variant="secondary"
           size="sm"
@@ -169,7 +146,7 @@ export default function RegionalGraphSummary({
           }}
           aria-expanded={suggestionsOpen}
           title={suggestionsOpen ? 'Hide discovered channels' : 'Discover regional channels'}
-          style={{ marginLeft: availableImpacts.length > 1 || delayedImpacts.length > 0 ? 0 : 'auto' }}
+          style={{ marginLeft: availableImpacts.length > 1 ? 0 : 'auto' }}
         >
           Discover
         </Button>
@@ -217,8 +194,8 @@ export default function RegionalGraphSummary({
           {topImpacts.map(impact => {
             const available = isRegionalImpactAvailable(impact);
             // A queued impact isn't acceptable until it matures (delayTicks ticks
-            // down to 0). Show WHY the Accept is disabled and point at the advance
-            // controls above — the bare disabled checkmark read as a dead button.
+            // down to 0). Show WHY the Accept is disabled — the bare disabled
+            // checkmark read as a dead button. It matures as the Realm advances.
             const delayTicks = Math.max(0, impact.delayTicks || 0);
             return (
             <div
@@ -238,7 +215,7 @@ export default function RegionalGraphSummary({
                 <div style={{ fontSize: chromeFontSize(FS.micro, mobile), color: BODY, fontFamily: sans }}>
                   {impactGoodsLabel(impact)} · severity {Math.round((impact.severity || 0) * 100)}%
                   {!available && delayTicks > 0 && (
-                    <span style={{ color: SECOND, fontWeight: 700 }}> · matures in {delayTicks} tick{delayTicks === 1 ? '' : 's'} (advance above to apply)</span>
+                    <span style={{ color: SECOND, fontWeight: 700 }}> · matures in {delayTicks} tick{delayTicks === 1 ? '' : 's'}</span>
                   )}
                 </div>
               </div>
@@ -272,7 +249,6 @@ export default function RegionalGraphSummary({
         onApplyImpact={onApplyImpact}
         onIgnoreImpact={onIgnoreImpact}
         onResolveImpact={onResolveImpact}
-        onAdvanceImpacts={onAdvanceImpacts}
       />
 
       {recentEvents.length > 0 && (

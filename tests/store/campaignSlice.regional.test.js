@@ -335,39 +335,6 @@ describe('campaignSlice regional impact lifecycle', () => {
     expect(store.getState().campaigns[0].regionalGraph.queuedImpacts.every(i => i.status === 'ignored')).toBe(true);
   });
 
-  test('advanceCampaignRegionalImpacts matures delayed queued impacts', () => {
-    const store = makeStore();
-    store.setState(state => {
-      state.campaigns = [{
-        id: 'camp-1',
-        name: 'Trade Belt',
-        settlementIds: ['buyer'],
-        regionalGraph: ensureRegionalGraph({
-          queuedImpacts: [{
-            id: 'regional_impact.delayed',
-            kind: 'route_disruption',
-            sourceSettlementId: 'supplier',
-            targetSettlementId: 'buyer',
-            severity: 0.4,
-            status: 'queued',
-            delayTicks: 1,
-            ageTicks: 0,
-            maxAgeTicks: 12,
-          }],
-        }),
-      }];
-    });
-
-    const graph = store.getState().advanceCampaignRegionalImpacts('camp-1', 1);
-
-    expect(graph.queuedImpacts[0].delayTicks).toBe(0);
-    expect(graph.queuedImpacts[0].ageTicks).toBe(1);
-    expect(store.getState().campaigns[0].wizardNews.currentTick).toBe(1);
-    expect(store.getState().campaigns[0].wizardNews.entries.some(entry =>
-      entry.kind === 'ready' && entry.impactIds.includes('regional_impact.delayed')
-    )).toBe(true);
-  });
-
   // R4 now-threading: each store action computes ONE timestamp and threads it
   // into every domain helper it calls — the graph, the impact row, the news
   // entry, and the campaign all carry the same instant instead of several
@@ -418,41 +385,6 @@ describe('campaignSlice regional impact lifecycle', () => {
       e.kind === 'applied' && e.impactIds.includes(impact.id)
     );
     expect(entry.createdAt).toBe(instant);
-  });
-
-  test('advanceCampaignRegionalImpacts threads a caller-supplied now end to end', () => {
-    const NOW = '2026-06-11T12:00:00.000Z';
-    const store = makeStore();
-    store.setState(state => {
-      state.campaigns = [{
-        id: 'camp-1',
-        name: 'Trade Belt',
-        settlementIds: ['buyer'],
-        regionalGraph: ensureRegionalGraph({
-          queuedImpacts: [{
-            id: 'regional_impact.now_threaded',
-            kind: 'route_disruption',
-            sourceSettlementId: 'supplier',
-            targetSettlementId: 'buyer',
-            severity: 0.4,
-            status: 'queued',
-            delayTicks: 1,
-            ageTicks: 0,
-            createdAt: '2026-01-01T00:00:00.000Z',
-          }],
-        }),
-      }];
-    });
-
-    const graph = store.getState().advanceCampaignRegionalImpacts('camp-1', 1, { now: NOW });
-    const campaign = store.getState().campaigns[0];
-
-    expect(graph.updatedAt).toBe(NOW);
-    expect(graph.queuedImpacts[0].updatedAt).toBe(NOW);
-    expect(campaign.updatedAt).toBe(NOW);
-    expect(campaign.wizardNews.updatedAt).toBe(NOW);
-    const ready = campaign.wizardNews.entries.find(e => e.kind === 'ready');
-    expect(ready.createdAt).toBe(NOW);
   });
 
   test('setCampaignRegionalGraph appends wizard news for newly propagated impacts', () => {

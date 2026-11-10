@@ -136,6 +136,7 @@ MUTATED_FILES=(
   src/generators/resourceGenerator.js
   src/generators/steps/assembleSettlement.js
   src/generators/hookVariety.js
+  src/components/settlements/CampaignFolder.jsx
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1683,6 +1684,12 @@ check_caught "review-intake/water is read from the record" src/generators/econom
 #      `path :: symbol` form, so the two symbol-cited holder rows resolve to nothing.
 perl -0pi -e 's/      const bySymbol = write\.symbol \? `\$\{rel\} :: \$\{write\.symbol\}` : .{2};/      const bySymbol = "";/' scripts/wiring-census.mjs
 check_caught "review-intake/a holder citation resolves by symbol" scripts/wiring-census.mjs "npx vitest run tests/lint/holderCitesBySymbol.test.js --no-file-parallelism"
+
+# 124. THE LIBRARY ADVANCES NOTHING (LIBRARY-SIMPLE, 2026-11-10; the owner: "No longer does it
+#      advance time."). The campaign folder reads the campaign advance again, so the Library is
+#      one wire away from an advance the owner took out of it.
+perl -0pi -e 's/(  const faithUnlocked = useStore\(resolveFaithUnlocked\);\n)/$1  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);\n/' src/components/settlements/CampaignFolder.jsx
+check_caught "library-simple/the Library reads no campaign advance" src/components/settlements/CampaignFolder.jsx "npx vitest run tests/lint/libraryAdvancesNothing.walker.test.js --no-file-parallelism" "the Library advances nothing (owner, 2026-11-10) > no Library file reaches a campaign advance"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
