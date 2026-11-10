@@ -259,7 +259,7 @@ describe('the lane records a reason for every gate it closes', () => {
     });
   }
 
-  // remote-path R3, the chair's condition on engineUnavailable's "nothing you had was lost":
+  // remote-path R3, kept after FU-4 struck the clause from the sentence:
   // a failed forge or regenerate leaves the draft that was on the page exactly in place.
   for (const code of ['engine_unavailable', 'engine_rate_limited']) {
     test(`${code}: a failed forge over an existing draft leaves that draft in place`, async () => {

@@ -481,10 +481,11 @@ export const en = Object.freeze({
       body:   'The forge has made as many settlements from here as it allows for now. Nothing went wrong; wait a while, then forge again.',
     },
     // The engine service could not be reached: a network failure, a server fault, or a build
-    // with no service configured (remote-path R3). Nothing was lost; the connection first.
+    // with no service configured (remote-path R3). The connection first. No "nothing was lost"
+    // (the chair, FU-4): the fork surfaces overwrite the stored dials before a forge that may fail.
     engineUnavailable: {
       rubric: 'Forge unreachable',
-      body:   'The forge could not be reached, so no settlement was made and nothing you had was lost. Check your connection, then forge again.',
+      body:   'The forge could not be reached, so no settlement was made. Check your connection, then forge again.',
     },
     // No door and no price: the admin panel is not sold, so this sentence must
     // not read as an upgrade prompt. It says whose page it is and stops.
