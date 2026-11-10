@@ -78,10 +78,10 @@ describe('Compendium — dashboard + registry hubs', () => {
     // No Map Lenses or Facets section: both removed by owner order 2026-09-16; neither the
     // settlement-map lenses nor building interiors ship. docs/FIRST_CONTACT_BACKLOG.md.)
     // The landing grid (the owner, 2026-11-10) carries no box for either removed page.
-    const boxLabels = [...landing.container.querySelectorAll('nav[aria-label="Compendium sections"] a')].map((a) => a.textContent.trim());
+    const boxLabels = [...landing.container.querySelectorAll('nav[aria-label="Compendium sections"] [data-tile-name]')].map((a) => a.textContent.trim());
     const boxHrefs = [...landing.container.querySelectorAll('nav[aria-label="Compendium sections"] a')].map((a) => a.getAttribute('href'));
-    expectAbsentWithAnchor(boxLabels.map((l) => l.replace(/\d+.*$/, '').trim()), 'Map Lenses', 'Calamity', 'compendium landing boxes');
-    expectAbsentWithAnchor(boxLabels.map((l) => l.replace(/\d+.*$/, '').trim()), 'Facets', 'Calamity', 'compendium landing boxes');
+    expectAbsentWithAnchor(boxLabels, 'Map Lenses', 'Calamity', 'compendium landing boxes');
+    expectAbsentWithAnchor(boxLabels, 'Facets', 'Calamity', 'compendium landing boxes');
     expectAbsentWithAnchor(boxHrefs, '/compendium/lenses', '/compendium/calamity', 'landing box links');
     expectAbsentWithAnchor(boxHrefs, '/compendium/facets', '/compendium/calamity', 'landing box links');
     landing.unmount();

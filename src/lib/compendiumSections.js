@@ -16,21 +16,27 @@
  * paint), the lazy panel, the prerender and the sitemap all read this one list.
  */
 
-/** @type {ReadonlyArray<{ slug: string, tab: string }>} — landing-grid order. */
+/**
+ * Landing-grid order, reading across three columns (the owner, 2026-11-10: "three columns not
+ * three rows"; the chair's H1+ order): the world first, then how it works, then the index and
+ * the reader's own content. `kicker` is the small line above a tile's name — the two words the
+ * owner approved, "The world" and "How it works"; the last two tiles carry none.
+ * @type {ReadonlyArray<{ slug: string, tab: string, kicker?: string }>}
+ */
 export const COMPENDIUM_SECTIONS = Object.freeze([
-  { slug: 'tiers', tab: 'tiers' },
-  { slug: 'economy', tab: 'economy' },
-  { slug: 'powers', tab: 'power' },
-  { slug: 'institutions', tab: 'institutions' },
-  { slug: 'operations', tab: 'operations' },
-  { slug: 'magic-and-religion', tab: 'arcane' },
-  { slug: 'living-world', tab: 'living' },
-  { slug: 'stress', tab: 'stress' },
-  { slug: 'calamity', tab: 'calamity' },
-  { slug: 'neighbours', tab: 'neighbour' },
+  { slug: 'tiers', tab: 'tiers', kicker: 'The world' },
+  { slug: 'economy', tab: 'economy', kicker: 'The world' },
+  { slug: 'powers', tab: 'power', kicker: 'The world' },
+  { slug: 'institutions', tab: 'institutions', kicker: 'The world' },
+  { slug: 'magic-and-religion', tab: 'arcane', kicker: 'The world' },
+  { slug: 'stress', tab: 'stress', kicker: 'The world' },
+  { slug: 'calamity', tab: 'calamity', kicker: 'The world' },
+  { slug: 'neighbours', tab: 'neighbour', kicker: 'The world' },
+  { slug: 'operations', tab: 'operations', kicker: 'How it works' },
+  { slug: 'living-world', tab: 'living', kicker: 'How it works' },
   { slug: 'a-z', tab: 'az' },
   { slug: 'custom', tab: 'custom' },
-]);
+].map(Object.freeze));
 
 /** The reserved slugs, in order. */
 export const COMPENDIUM_SECTION_SLUGS = Object.freeze(COMPENDIUM_SECTIONS.map((s) => s.slug));

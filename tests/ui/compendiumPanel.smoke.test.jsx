@@ -22,6 +22,11 @@
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
+import { existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 afterEach(cleanup);
 
@@ -103,11 +108,35 @@ describe('CompendiumPanel — decomposition smoke', () => {
     const nav = screen.getByRole('navigation', { name: 'Compendium sections' });
     const links = [...nav.querySelectorAll('li > a')];
     expect(links).toHaveLength(12);
+    // The chair's H1+ order (the owner: "three columns not three rows"), reading across.
     expect(links.map((a) => a.getAttribute('href'))).toEqual([
-      '/compendium/tiers', '/compendium/economy', '/compendium/powers', '/compendium/institutions',
-      '/compendium/operations', '/compendium/magic-and-religion', '/compendium/living-world', '/compendium/stress',
-      '/compendium/calamity', '/compendium/neighbours', '/compendium/a-z', '/compendium/custom',
+      '/compendium/tiers', '/compendium/economy', '/compendium/powers',
+      '/compendium/institutions', '/compendium/magic-and-religion', '/compendium/stress',
+      '/compendium/calamity', '/compendium/neighbours', '/compendium/operations',
+      '/compendium/living-world', '/compendium/a-z', '/compendium/custom',
     ]);
+    expect(nav.querySelector('ul').style.gridTemplateColumns).toBe('repeat(3, minmax(0, 1fr))');
+    // The kickers: the owner's two approved words, eight then two then none.
+    const kickers = links.map((a) => a.querySelector('[data-tile-kicker]')?.textContent ?? null);
+    expect(kickers).toEqual([...Array(8).fill('The world'), 'How it works', 'How it works', null, null]);
+    // H13: every tile is lettered over a painting of our stock — lazy, sized, decorative.
+    for (const a of links) {
+      const slug = a.getAttribute('href').split('/').pop();
+      const img = a.querySelector('img');
+      expect(img.getAttribute('src'), slug).toBe(`/backgrounds/compendium/${slug}.webp`);
+      expect(img.getAttribute('loading')).toBe('lazy');
+      expect(img.getAttribute('width')).toBe('800');
+      expect(img.getAttribute('height')).toBe('320');
+      expect(img.getAttribute('alt')).toBe('');
+      expect(existsSync(join(ROOT, 'public', 'backgrounds', 'compendium', `${slug}.webp`)), slug).toBe(true);
+    }
+    // No tile carries a description line any more (H13): the name and the count only.
+    expect(links[0].textContent).toBe('The worldTiers & Routes6');
+    // H14: with purchases closed (this test build), My Custom Content wears the launch skin
+    // and the existing "Available at launch" pill; no other tile does.
+    expect(links[11].getAttribute('data-skin')).toBe('launch');
+    expect(links[11].querySelector('[data-launch-pill]')).not.toBeNull();
+    expect(links.slice(0, 11).filter((a) => a.querySelector('[data-launch-pill]'))).toEqual([]);
     // The twelfth box is My Custom Content (ruling H4); the mode toggle is gone.
     expect(links[11].textContent).toContain('My Custom Content');
     expect(screen.queryByRole('tablist')).toBeNull();

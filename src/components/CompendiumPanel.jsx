@@ -9,6 +9,7 @@ import PageHeader from './primitives/PageHeader.jsx';
 import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { navigate } from '../hooks/useRoute.js';
+import { purchasesOpen } from '../lib/launchGate.js';
 import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
@@ -304,7 +305,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry, 
         <CompendiumGlobalSearch onSelect={handleGlobalSelect} />
         <div style={{ padding:'14px', background:CARD }}>
           <CompendiumIntro />
-          <CompendiumHubGrid sections={SECTIONS} customCount={customContentCount} onOpen={(s) => openSection(tabForSectionSlug(s))} />
+          <CompendiumHubGrid sections={SECTIONS} customCount={customContentCount} launchLocked={!purchasesOpen()} onOpen={(s) => openSection(tabForSectionSlug(s))} />
         </div>
       </>
     );

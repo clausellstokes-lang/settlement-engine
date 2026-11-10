@@ -48,17 +48,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/operations</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/magic-and-religion</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/living-world</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -74,6 +64,16 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/neighbours</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/operations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/living-world</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
