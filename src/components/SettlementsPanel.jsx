@@ -760,7 +760,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       <PageHeader
         eyebrow="Your settlements"
         title="Library"
-        subtitle="Your saved settlements and campaigns. Reopen a town, advance its world, or export a dossier for the table."
+        subtitle="Your saved settlements and campaigns. Reopen a town or export a dossier for the table."
         actions={<Button variant="primary" size="md" icon={<Plus size={16}/>} onClick={() => onNavigate?.('generate')}>New settlement</Button>}
       />
 
@@ -815,7 +815,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           ) : (
             <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
               <Button variant="secondary" size="sm" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>} style={{ alignSelf:'flex-start' }}>New campaign</Button>
-              <span style={{ fontSize:chromeFontSize(FS.xs, mobile), color:BODY, fontFamily:sans }}>Group towns into one world that advances together.</span>
+              <span style={{ fontSize:chromeFontSize(FS.xs, mobile), color:BODY, fontFamily:sans }}>Group towns into one world.</span>
             </div>
           )}
         </div>
