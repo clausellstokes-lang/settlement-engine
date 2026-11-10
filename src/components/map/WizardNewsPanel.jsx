@@ -487,7 +487,7 @@ export default function WizardNewsPanel({ campaign }) {
           busy={chronicleBusy}
           onClick={generateChronicle}
           disabled={chronicleBusy || total === 0}
-          title="Turn this tick's grounded news into a two-credit campaign chronicle"
+          title="Write this advance's news up as a campaign chronicle (two credits)"
           style={{ marginLeft: 'auto' }}
         >
           {chronicleBusy ? 'Writing' : 'Chronicle'}

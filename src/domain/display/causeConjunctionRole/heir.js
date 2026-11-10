@@ -30,6 +30,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the claimant pledged the inheritance to moneylenders, and the family is learning how much of its future is already spent.',
       "The claimant's debts are out, and the worst of it is the security: the succession itself was pledged.",
+      "The moneylenders who hold the claimant's pledge are already asking the family when the inheritance will be theirs.",
     ],
     're-adjudicated': [
       "Whoever held the claimant's debts before is gone, but now the allowance runs short, and the claimant borrows from whoever will lend.",
@@ -53,6 +54,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the claimant mortgaged the future of the house to keep its trade alive, and the promised favors are being tallied in public.',
       "The suppliers have shown their paper: the claimant's signature, pledging the seat's favor for wagonloads, and the family is counting the cost.",
+      "The family is counting what the claimant promised the suppliers in the seat's name, wagonload by wagonload.",
     ],
     're-adjudicated': [
       'Whoever held the claimant\'s pledges before is gone, but now the supply lines are cut, and whoever moves goods holds the claimant\'s promises.',
@@ -76,6 +78,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the claimant sold the heirlooms while the stores ran dry, and the family is inventorying a vault it no longer recognizes.',
       "The quiet sales are out: the claimant sold the family's heirlooms for food and kept part of the money.",
+      'The family has opened the vault and found the heirlooms gone, sold for food, and less money back than they fetched.',
     ],
     're-adjudicated': [
       "Whoever was buying from the claimant before is gone, but now the stores are empty, and the claimant sells what is left of the house's goods to whoever pays.",
@@ -99,6 +102,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the family colors covered contraband through the embargo, and the claimant's name is on the manifests.",
       "The house's caravans are being searched at last, and the town knows why they never were before: the claimant used the family name to cover contraband.",
+      "Merchants who kept the embargo watched the family's caravans go through unsearched, and now they know what the claimant had in them.",
     ],
     're-adjudicated': [
       'Whoever paid the claimant before is gone, but now an embargo chokes the trade, and whoever runs the family-flagged cargo knows what the claimant signed.',
@@ -122,6 +126,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       'The returned soldiers have learned what the claimant did to the succession while they were gone, and the shifted papers are being unshifted in public.',
       'It is out that the claimant worked the inheritance while the strength was at war, and the family is reading the amended documents aloud.',
+      "The soldiers back from the war are hearing the claimant's changes to the succession read aloud, one amended page at a time.",
     ],
     're-adjudicated': [
       "Whoever paid the claimant before is gone, but now the soldiers are away at the war, and with no one watching the succession, the claimant carries on.",
@@ -145,6 +150,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the claimant promised offices and pardons to hired steel, and the town is asking what else the succession has already sold.',
       "The claimant's bodyguard contract is out: paid in the seat's future favors, and the seat does not yet belong to the claimant to promise.",
+      'The hired guards are waiting to be paid in offices the claimant does not yet hold, and the town wants to know what else was promised.',
     ],
     're-adjudicated': [
       'Whoever paid the claimant before is gone, but now the garrison is half empty, and the hired blades still expect what the claimant promised them.',
@@ -168,6 +174,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the claimant pledged the seat to both camps during the war, and each side has produced its letter.',
       "The pledge letters are public: the claimant promised the house's allegiance to both sides, and no one now trusts the family's word.",
+      "Each side of the war holds a letter pledging the house to it in the claimant's hand, and the family's word is worth little now.",
     ],
     're-adjudicated': [
       "Whoever held the claimant's letters before is gone, but now the war presses in, and whoever holds the letters expects them honored.",
@@ -191,6 +198,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the claimant informed for the occupier against a promise of the seat, and the family is reading the reports with their names in them.",
       'The bargain is out: the succession for surveillance, and every arrest in the household during the occupation now has an author.',
+      "Members of the household arrested during the occupation are reading the claimant's reports to the occupier, with their names in them.",
     ],
     're-adjudicated': [
       "Whoever paid the claimant before is gone, but now the occupier is in control, and its officials have renewed the promise of the seat.",
@@ -214,6 +222,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the claimant's rivals fell to sponsored ruin, and the town is re-reading each misfortune as an offering.",
       "The sponsorship is out: a dark patron paid for the claimant's clear path, and the family is asking what was promised in return.",
+      "The claimant's ruined rivals are asking whether a dark patron paid for their ruin, and what the claimant promised it.",
     ],
     're-adjudicated': [
       "Whoever paid the claimant before is gone, but now a dark patron rewards the shortcuts, and the claimant serves it alone.",
@@ -237,6 +246,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       "It is out that the rival faith funds the claimant's suit, and what was promised for it; the family altar has become the town's business.",
       "The backing is public: the claimant sold the house's faith for the house's seat, and both congregations have opinions.",
+      "The house's own congregation has learned that the rival faith is paying for the claimant's suit.",
     ],
     're-adjudicated': [
       "Whoever paid the claimant before is gone, but now a rival faith presses in, and its money covers the claimant's debts in exchange for the family altar.",
@@ -260,6 +270,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the claimant bought witnesses while the oaths meant nothing, and the reviving faith has made the succession its test case.',
       "The changes are out: the claimant rewrote the family papers while the faith was cold, and the returning congregation wants them put back.",
+      'The reviving faith wants the family papers put back as they were, and the witnesses the claimant bought named.',
     ],
     're-adjudicated': [
       "Whoever paid the claimant before is gone, but now the faith has gone cold, and no oath shames the claimant into stopping.",
@@ -282,7 +293,8 @@ export const HEIR_ROLE_CONTENT = {
     ],
     'exposed-public': [
       'It is out that the claimant bought consecrations from the tainted clergy, and every blessing on the succession is being re-examined.',
-      "The receipts are public: the claimant paid disgraced priests to sanctify the claim, and the town now doubts the holy and the legal parts alike.",
+      "The papers are public: the claimant paid disgraced priests to sanctify the claim, and the town now doubts the holy and the legal parts alike.",
+      'The disgraced priests the claimant paid to bless the claim are named, and every blessing they gave the succession is in doubt.',
     ],
     're-adjudicated': [
       "Whoever brokered the claimant's blessings before is gone, but now the priesthood is disgraced, and the claimant buys its blessings directly.",
@@ -306,6 +318,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the underworld finances the claimant's suit, and the signed terms are abroad; the seat now comes with a lien attached.",
       "The backing is out: the claimant took the syndicate's silver for the succession, and the town knows who would really have been crowned.",
+      "The family has seen the syndicate's terms in the claimant's hand, and the seat comes with the underworld's lien on it.",
     ],
     're-adjudicated': [
       'Whoever backed the claimant before is gone, but now the underworld holds the offices, and whoever holds them has signed the old terms again.',
@@ -329,6 +342,7 @@ export const HEIR_ROLE_CONTENT = {
     'exposed-public': [
       "It is out that the claimant fed the scandal and bought silence on the claim's own sins, and the town is reading both ledgers.",
       'The scandal has turned on the claimant: it is out that the claimant fed the evidence and hid their own part in it.',
+      "The people the scandal ruined know now that the claimant fed it the evidence and kept the claim's own part hidden.",
     ],
     're-adjudicated': [
       "Whoever paid the claimant before is gone, but now a scandal has broken, and whoever holds the claimant's file of bought evidence can use it.",

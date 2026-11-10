@@ -30,6 +30,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the envoy\'s dispatches had subscribers, and every government that read them is re-reading its decisions.',
       'It is out that the envoy sold what the mission saw, and the town now knows who was reading its reports.',
+      "The governments that bought the envoy's dispatches are learning the town knows, and the envoy's welcome abroad has gone cold.",
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but now the mission\'s money runs short, and the envoy sells the dispatches to whoever will pay.',
@@ -53,6 +54,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the envoy let the mission\'s letters be read on the road for pay, and everyone who wrote to the mission is wondering what was seen.',
       'It is out that the envoy sold the reading of the mail to its carriers, and the town is guessing what went through unsealed.',
+      'Everyone who wrote to the mission is going back over their letters, because the envoy let them be read on the road for pay.',
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but now the courier lines are cut, and whoever carries the letters pays the envoy to read them.',
@@ -76,6 +78,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the envoy sold concessions no one authorized, and the holders of those promises are presenting them for payment.',
       'It is out that the envoy took payment for promises that were never going to be kept, and the people who paid are at the door.',
+      "The people who paid the envoy for promises no one authorized are at the mission's door with the promises in hand.",
     ],
     're-adjudicated': [
       "Whoever paid the envoy before is gone, but the mission's stores have run dry, and the envoy goes on selling promises no one will keep.",
@@ -99,6 +102,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the embargo\'s terms were sold in advance from the envoy\'s desk, and the ruined are matching their losses to the forewarned\'s gains.',
       'It is out that the envoy sold the town\'s trade news in advance, and the buyers\' sudden fortunes show when each sale was made.',
+      "Merchants ruined by the embargo can see whose fortunes rose just before it, and the envoy's desk is where the news came from.",
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but now an embargo strangles the trade, and the envoy sells its terms in advance to whoever pays.',
@@ -122,6 +126,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the town\'s voice abroad was edited for pay while its men fought, and the withheld paragraphs are being read aloud.',
       'It is out that the envoy was paid to leave things out of the dispatches, and the town knows now why help never came.',
+      'Families of the men who fought hear now what the envoy cut from the dispatches, and why no help came.',
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but now the fighters are levied away to war, and the envoy cuts the dispatches for whoever pays.',
@@ -145,6 +150,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the envoy exported the town\'s weakness with the gate rotations attached, and the town is changing the rotations first and the locks second.',
       'It is out that the envoy sold reports on the emptied garrison abroad every month, and the town is worried about who bought them.',
+      'The town is changing the gate rotations because the envoy sold them abroad, along with word of the empty garrison.',
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but the garrison stands hollow now, and the envoy sells reports on it to whoever pays.',
@@ -168,6 +174,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that both camps bought each other\'s terms from the envoy\'s satchel, and the peace they signed is being re-read for what the leaking bought.',
       'It is out that the envoy sold each side the other\'s terms, and both sides want their money back.',
+      "Both sides of the war learned they bought each other's terms from the same envoy, and the peace they signed is being read again.",
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but now the war presses close, and whoever pays can read the satchel.',
@@ -191,6 +198,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the envoy\'s protests were theater by agreement, and the petitioners who were reported for asking help are the first to speak.',
       'It is out that the envoy bought the occupier\'s favor with empty complaints and the names of those who asked for help.',
+      'The petitioners who asked the envoy for help, and were reported to the occupier for it, are the first to tell the town.',
     ],
     're-adjudicated': [
       "Whoever paid the envoy before is gone, but now the occupier holds sway, and the envoy files the same empty protests for it.",
@@ -214,6 +222,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the envoy\'s betrayals were offerings to a dark patron, and everyone the envoy betrayed is telling their story again.',
       'It is out that a dark patron paid for the envoy\'s betrayals, and the governments that trusted the envoy have been told.',
+      'Everyone the envoy betrayed is telling their story again, now that a dark patron is known to have paid for it.',
     ],
     're-adjudicated': [
       "Whoever paid the envoy before is gone, but now a dark patron rewards betrayal, and the envoy betrays trusts for its favor.",
@@ -237,6 +246,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the mission\'s baggage carried the rival faith\'s preachers under real credentials, and the signing hand is known.',
       'It is out that the envoy lent the mission\'s immunity to the rival faith for pay, and both congregations are checking the clerks.',
+      "The rival faith's preachers came in with the mission's credentials, and the town has learned the envoy signed them for pay.",
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but now a rival faith presses in, and its money buys passage for its people on the envoy\'s papers.',
@@ -260,6 +270,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the envoy resold sworn safe-conducts while the oaths meant nothing, and the stranded holders are presenting both copies.',
       'It is out that the envoy opened sealed letters while the faith was cold, and the returning faithful are going through them.',
+      'People stranded on a safe-conduct the envoy sold twice are holding up both copies and asking which one was ever good.',
     ],
     're-adjudicated': [
       "Whoever paid the envoy before is gone, but now the faith has gone cold, and no oath stops the envoy selling the papers twice.",
@@ -283,6 +294,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the envoy kept the scandal from the foreign courts, and they are reading the full reports at last.',
       'It is out that the envoy hid the temple\'s disgrace abroad for pay, and the envoy signed for every coin.',
+      "The foreign courts are reading the full story of the temple's disgrace at last, and the envoy signed for every coin paid to hide it.",
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but now the priesthood is tainted, and the temple pays the envoy to keep it quiet abroad.',
@@ -306,6 +318,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the mission\'s baggage carried the underworld\'s goods, and every unsearched crossing is being checked again.',
       'It is out that the envoy rented the mission\'s seals to the underworld by weight, and the envoy took a fee on every load.',
+      'Every crossing the mission made unsearched is being checked again, because the envoy rented its seals to the underworld.',
     ],
     're-adjudicated': [
       "Whoever filled the pouches before is gone, but now the underworld holds the offices, and its goods travel the same route under the envoy's seal.",
@@ -329,6 +342,7 @@ export const DIPLOMAT_OUTSIDER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the envoy sold the town\'s disgrace abroad by the name, and the named are learning which capitals hold their files.',
       'It is out that the envoy sold the scandal\'s details abroad, and foreign governments now hold the town\'s shame.',
+      'The people named in the scandal are learning which foreign capitals bought their names from the envoy.',
     ],
     're-adjudicated': [
       'Whoever paid the envoy before is gone, but now a scandal has broken, and the envoy sells the names in it to whoever pays abroad.',

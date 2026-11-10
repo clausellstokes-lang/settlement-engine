@@ -30,6 +30,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the priest priced the sacraments against the empty tithe box, and the families who paid for grace want it back.',
       "The temple's fee list is out, in the priest's own hand, and the congregation can see what it was charged for every rite.",
+      "Families who paid for a wedding or a burial while the tithe box stood empty can read the priest's price for it in the priest's own hand.",
     ],
     're-adjudicated': [
       'Whoever paid the priest before is gone, but now the tithes run short, and the priest charges for the rites.',
@@ -53,6 +54,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the altar was provisioned by smugglers, and what the temple paid them in discretion is being guessed at loudly.',
       "The night deliveries are out; the priest kept the candles lit with contraband, and the congregation is asking what else came in those crates.",
+      'The congregation knows now that the candles on its altar came in with the smugglers, and it wants to know what else did.',
     ],
     're-adjudicated': [
       'Whoever held the priest\'s debt before is gone, but now the supply roads have failed, and whoever moves goods by night supplies the temple and holds the debt.',
@@ -76,6 +78,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the priest fed the loyal first while the alms ran dry, and the hungry remember the sermons about charity.',
       "The list is out, in the priest's hand: who ate, who waited, and what the eating cost them in obedience.",
+      "The hungry who waited while the priest fed the loyal can see their names on the priest's list, and what the eating cost.",
     ],
     're-adjudicated': [
       'Whoever held the priest before is gone, but now the alms have run dry, and the priest hands out what is left by favor.',
@@ -99,6 +102,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the priest blessed the smugglers and took a tithe of the cargo, and the customs officers know which runs the priest blessed.',
       "The temple's share of the contraband is out, and the congregation has learned what the night riders paid for their god's goodwill.",
+      "The night riders the priest blessed are named to the customs officers, with the temple's share of each run.",
     ],
     're-adjudicated': [
       'Whoever ran the cargo with the priest before is gone, but now the embargo chokes the trade, and the priest blesses whoever smuggles, for a share.',
@@ -122,6 +126,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the priest priced prayers for the levied and skimmed the estates of the fallen, and the returned soldiers are at the priest\'s door.',
       "It is out that the priest took fees from the estates of the town's war dead, and the widows know every one.",
+      "The widows of the war dead know every fee the priest took from their husbands' estates, and the returned soldiers are at the priest's door.",
     ],
     're-adjudicated': [
       'Whoever held the priest before is gone, but now the levy has taken the fighters away, and the priest takes fees on prayers and on the estates of the fallen.',
@@ -145,6 +150,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the temple\'s guards were bought with sanctuary and silence, and the crypt they kept locked has been opened.',
       "It is out that the priest sheltered armed men from the law in exchange for their protection, and the congregation is counting the nights it prayed beside them.",
+      'The congregation is counting the nights it prayed beside the armed men the priest hid in the crypt.',
     ],
     're-adjudicated': [
       'Whoever held the priest before is gone, but now the garrison is hollowed out, and whoever needs sanctuary guards the temple for it.',
@@ -168,6 +174,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the priest priced salvation by the war\'s fear, and the families who bought guarantees for their dead are outside.',
       "The wartime offerings are out: the priest took money from frightened families, and the survivors are comparing what they paid with what they got.",
+      'Families who paid the priest for guarantees for their war dead are outside, comparing what they paid with what they got.',
     ],
     're-adjudicated': [
       'Whoever held the priest before is gone, but now the war presses in, and the priest sells promises of safety to the frightened.',
@@ -191,6 +198,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the pulpit preached to the occupier\'s order, and the congregation is re-hearing every sermon about patience.',
       "It is out that the temple stayed open because the priest preached submission to the occupier, and the town knows who wanted those sermons.",
+      "The congregation is hearing the priest's sermons on patience again, knowing now the occupier asked for them.",
     ],
     're-adjudicated': [
       "Whoever paid the priest before is gone, but now the occupier holds the town, and its officials set the terms of the priest's sermons.",
@@ -214,6 +222,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the priest\'s corruptions were devotions to a darker patron, and the congregation is unsure which betrayal cuts deeper.',
       "It is out that the priest served the power the priest preached against, and the congregation is asking what each rite really honored.",
+      'The faithful are asking what each rite the priest led really honoured, now that a darker patron is known to have paid.',
     ],
     're-adjudicated': [
       "Whoever held the priest before is gone, but now a dark patron rewards the deed, and the priest serves it alone.",
@@ -237,6 +246,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the rival mission paid for the temple\'s softening doctrine, and the congregation is comparing old sermons to new.',
       "It is out that the rival mission paid the priest for each change to the creed, and now both faiths doubt everything the priest preached.",
+      "Older members of the congregation can set the priest's old sermons beside the new and see what the rival mission paid to change.",
     ],
     're-adjudicated': [
       "Whoever paid the priest before is gone, but now a rival faith presses in, and its money pays the priest directly.",
@@ -260,6 +270,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the priest sold false relics and hired-out blessings while the faith slept, and the awakened faithful want their money and their god back.',
       "The priest's stock is out: false relics, paid miracles, and the priest's price on each, and the town is asking whether any of it was real.",
+      "Families who bought the priest's relics and blessings while the faith slept want their money back, and the truth about each one.",
     ],
     're-adjudicated': [
       'Whoever held the priest before is gone, but now the faith has gone cold, and the priest sells false wonders to whoever still pays.',
@@ -283,6 +294,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the priest farmed the brothers\' sins for silver, and the synod is reading the priest\'s collection book.',
       "It is out that the priest sold absolution inside the temple itself, with the priest's own hand on every sale.",
+      "The synod is reading the priest's collection book, and the brothers whose sins were sold are in it.",
     ],
     're-adjudicated': [
       'Whoever held the priest before is gone, but now the priesthood is tainted, and the tainted brothers pay the priest silence money.',
@@ -306,6 +318,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the confessional reported to the underworld, and the congregation is remembering everything it ever whispered there.',
       "The temple's second business is out: stored contraband, sheltered men, and sold confessions, all under the priest's seal.",
+      'Everyone who ever confessed at that temple is remembering what they said, now that the underworld heard it too.',
     ],
     're-adjudicated': [
       "Whoever used the temple before is gone, but now the town's offices are in criminal hands, and whoever holds them kept the crypt keys and the priest.",
@@ -329,6 +342,7 @@ export const RELIGIOUS_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the confessional leaked for money through the scandal, and no one in this town will kneel at that grate again.',
       "The notes are out: the priest wrote down what the town confessed and sold it, and the town is reading its own secrets.",
+      "People who confessed through the scandal are reading their own secrets, sold out of the priest's notes.",
     ],
     're-adjudicated': [
       'Whoever bought the confessions before is gone, but now a scandal has broken, and the priest sells confessions to whoever pays.',

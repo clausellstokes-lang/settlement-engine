@@ -30,6 +30,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the crowds were aimed for a patron\'s coin, and the people who marched are learning whose errand they ran.',
       'It is out that the agitator\'s outrage was paid for, and the patron\'s rivals know every rally that was aimed at them.',
+      "The patron's rivals have learned which rallies were aimed at them, and that the agitator was paid for every one.",
     ],
     're-adjudicated': [
       "Whoever paid the agitator before is gone, but now the movement's chest runs empty, and the agitator takes money from whoever offers it.",
@@ -53,6 +54,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the movement\'s pamphlets were edited by their paper supplier, and the readers are comparing editions.',
       'It is out that the agitator let the paper supplier cut the movement\'s pamphlets in exchange for ink, and the cut passages all point to the supplier.',
+      'Readers holding two editions of the same pamphlet can see what the paper supplier had cut, and why.',
     ],
     're-adjudicated': [
       'Whoever supplied the agitator before is gone, but now the supply roads are cut, and whoever sells the paper decides what the pamphlets leave out.',
@@ -76,6 +78,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the strike\'s ending was sold in a back room, and the strikers who starved for it know the date their leader set.',
       'It is out that the agitator was paid to lose the strike, and the strikers are reading the terms of their own defeat.',
+      'The strikers who went hungry for the strike have read the terms the agitator sold it on, and the date it was set.',
     ],
     're-adjudicated': [
       "Whoever paid the agitator before is gone, but now the strike fund runs dry, and the masters' settlement money keeps coming.",
@@ -99,6 +102,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the embargo\'s profiteers paid the agitator to aim the anger away from them, and the crowd is looking again at its old targets.',
       'It is out that the people the movement should have turned on paid the agitator for its anger, and the word is going round the town.',
+      'The crowd is turning back to the profiteers it was steered away from, now that it knows the agitator was paid to steer it.',
     ],
     're-adjudicated': [
       'Whoever paid the agitator before is gone, but now the embargo chokes the trade, and whoever profits from it pays the agitator to steer the anger away.',
@@ -122,6 +126,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the safe houses reported to the muster office, and the runaways who trusted them are back and asking questions.',
       'It is out that the agitator sold hidden runaways to the muster office, and the movement is counting who was taken.',
+      "Runaways who came back from the muster are asking which safe house gave them up, and the answer is the agitator's.",
     ],
     're-adjudicated': [
       'Whoever paid the agitator before is gone, but now the levy calls the young away, and the muster office pays the bounties on the safe houses.',
@@ -145,6 +150,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the town\'s riots and calms were invoiced, and the buyers of both are as exposed as the seller.',
       'It is out that the agitator sold riots by the night while the garrison stood empty, and the people of the burned streets have the dates.',
+      "People from the streets that burned while the garrison stood empty have the dates, and the agitator's prices beside them.",
     ],
     're-adjudicated': [
       "Whoever bought the agitator's riots before is gone, but now the garrison is hollowed out, and the agitator sells riots by the night to whoever pays.",
@@ -168,6 +174,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the wartime panics were scheduled, and the town is matching the agitator\'s speeches to the paymaster\'s purchases.',
       'It is out that the panics were stirred up to order while the war pressed, and the agitator\'s speeches match the dates.',
+      "The town is setting the agitator's wartime speeches beside the paymaster's books, and the dates line up.",
     ],
     're-adjudicated': [
       'Whoever paid for the panics before is gone, but now the war presses in, and whoever gains from a panic pays the agitator to set one off.',
@@ -191,6 +198,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the resistance\'s plans reached the occupier before they ripened, and the survivors of the failed nights know the courier now.',
       'It is out that the movement was the occupier\'s tool with the agitator in charge, and the members now know what the agitator was paid.',
+      "Survivors of the resistance's failed nights know now who carried the plans to the occupier, and what the agitator was paid.",
     ],
     're-adjudicated': [
       "Whoever paid the agitator before is gone, but now the occupier holds the town, and it lets the movement stand for the same reported plans.",
@@ -214,6 +222,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the mob\'s fires were offerings, with the agitator leading them, and the town is looking again at every burning.',
       "It is out that a dark patron paid for the riots' worst nights, and the movement knows now who it was burning for.",
+      "Families who lost homes in the mob's fires know now that a dark patron paid for the worst of them, with the agitator leading.",
     ],
     're-adjudicated': [
       "Whoever paid the agitator before is gone, but now a dark patron rewards the fires, and the agitator sends the mob out on its nights.",
@@ -237,6 +246,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the rival mission paid for the movement, and the marchers see that their slogans were its words.',
       'It is out that the movement spoke for a foreign faith for pay, and both congregations now recognize the words.',
+      "The marchers have heard the rival mission's sermons and recognized their own slogans in them.",
     ],
     're-adjudicated': [
       'Whoever paid the agitator before is gone, but now a rival faith presses in, and its money for the movement has started coming.',
@@ -260,6 +270,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the movement\'s money fed its leader while the vows meant nothing, and the members are going back over all those speeches about greed.',
       'It is out that the agitator preached sacrifice and lived well on the movement\'s purse, and the returning congregation is asking questions.',
+      'Members who gave to the movement are hearing how well the agitator lived on it while preaching against greed.',
     ],
     're-adjudicated': [
       "Whoever paid the agitator before is gone, but now the faith has gone cold, and no vow keeps the agitator out of the purse.",
@@ -283,6 +294,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the temple paid the agitator to blunt the marches, and the crowd knows now why its anger always stopped at the square.',
       'It is out that the agitator took the temple\'s money to hold the movement back, and both sets of accounts are open.',
+      'The crowd that always stopped at the square knows now that the temple paid the agitator to stop it there.',
     ],
     're-adjudicated': [
       'Whoever paid the agitator before is gone, but now the priesthood is tainted, and the temple pays the agitator to keep the unrest small.',
@@ -306,6 +318,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the riots were diversions for the syndicate\'s work, and the movement is matching its proudest nights to the burglaries.',
       'It is out that the agitator rented the movement to the underworld by the night, and the town can match the marches to the crimes.',
+      "The movement's members are matching their proudest marches to the burglaries the underworld did those same nights.",
     ],
     're-adjudicated': [
       "Whoever aimed the agitator's crowds before is gone, but now the underworld holds the offices, and the agitator calls marches on its nights.",
@@ -329,6 +342,7 @@ export const DISSIDENT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the scandal\'s names were priced out of the speeches, and the crowd is learning who paid for its ignorance.',
       'It is out that the agitator sold the movement\'s silence, and those who paid are as angry as those who were fooled.',
+      'The crowd has learned the agitator was paid to leave names out of the speeches, and so have the people who paid.',
     ],
     're-adjudicated': [
       'Whoever paid the agitator before is gone, but now a scandal has broken, and whoever is named in it pays the agitator to keep their names unspoken.',

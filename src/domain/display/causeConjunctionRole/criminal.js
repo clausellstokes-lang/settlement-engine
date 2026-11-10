@@ -30,6 +30,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out on the streets that the boss ran on uptown money through the lean stretch, and the crews are asking who really picked the jobs.',
       "The stipend is public now, and the boss's own crews were the last to learn of it; they are not taking it well.",
+      'The crews who worked the lean stretch for the boss have learned the jobs were chosen by uptown money, and they want a say in the next one.',
     ],
     're-adjudicated': [
       "Whoever paid the boss before is gone, but now the streets run poor, and whoever pays the stipend now has the boss's ear.",
@@ -53,6 +54,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is known in every den that the boss ran on one supplier\'s sufferance, and rivals are courting that supplier by name.',
       "The terms are out: the boss's trade belonged to the one supplier who kept it fed, and the streets know who that is.",
+      "Rival crews are going straight to the boss's one supplier now, and the boss's own people know it.",
     ],
     're-adjudicated': [
       'Whoever fed the boss\'s trade before is gone, but now the supply lines are dead, and whoever moves goods on them holds the boss\'s trade.',
@@ -76,6 +78,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss sold the crews\' own people while the trade starved, and the kin of the fallen are done asking politely.',
       "Every name the law was given has been traced back to the boss, who fed the crews to it and called it hard times.",
+      'Crews who lost their own to the law have traced every name back to the boss, and they are not asking politely any more.',
     ],
     're-adjudicated': [
       "Whoever bought the boss's names before is gone, but now the trade is starved, and the boss sells names to whoever will buy.",
@@ -99,6 +102,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss held the streets as the smugglers\' tenant, and every crew in town is thinking again about its oaths to the boss.',
       "The lease is public: the smugglers who ran the embargo owned the boss's territory, and the boss signed the terms.",
+      "Every crew sworn to the boss knows now that the streets it held were the smugglers' all along, rented out through the boss.",
     ],
     're-adjudicated': [
       'Whoever held the boss\'s lease before is gone, but now the embargo chokes the trade, and whoever took the routes holds the boss\'s streets.',
@@ -122,6 +126,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss ran the streets on borrowed leave while the muscle was at war, and the returned enforcers know whose leave it was.',
       "The conditions are public: the boss bowed to someone when the levy emptied the crews, and the streets remember who.",
+      "The enforcers back from the war know now that the boss kept the streets by someone else's leave while they were gone.",
     ],
     're-adjudicated': [
       "Whoever granted the boss leave before is gone, but now the crews are levied away, and the boss holds the streets by whoever's leave can be had.",
@@ -145,6 +150,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss paid tribute to outside crews for the patch, and the boss\'s own people are asking what exactly the boss ran.',
       "The upward payments are public: the boss rented the patch from outside crews while the garrison stood empty.",
+      "The boss's own people have learned the patch was rented from outside crews, and they are asking what they were fighting for.",
     ],
     're-adjudicated': [
       "Whoever took the boss's tribute before is gone, but now the garrison is hollow, and the boss pays tribute to whoever holds the streets around the patch.",
@@ -159,15 +165,16 @@ export const CRIMINAL_ROLE_CONTENT = {
       "The boss's first reason is gone, but now the war presses in, and both camps use the boss as their courier.",
     ],
     reformed: [
-      'The war receded and the boss burned both sets of receipts in front of witnesses from both camps; the courier trade closed with the lines.',
+      'The war receded and the boss burned both sets of papers in front of witnesses from both camps; the courier trade closed with the lines.',
       'With the pressure lifted, the boss ended it; the last messages were delivered unread, and the retainers returned to both paymasters.',
     ],
     historicized: [
       'The war has moved on, but both armies still hold proof of the boss\'s runs, and the boss still takes orders from both.',
     ],
     'exposed-public': [
-      'It is out that the boss couriered for both camps through the fighting, and each army has published the other\'s receipts.',
+      'It is out that the boss couriered for both camps through the fighting, and each army has made the other\'s papers public.',
       "The double courier trade is public: the boss carried messages for both sides, and the whole town wonders who else the boss would sell.",
+      "Both armies now know the boss carried the other side's messages, and the town is asking who the boss would carry for next.",
     ],
     're-adjudicated': [
       'Whoever paid the boss before is gone, but now the war presses in, and the proof of the boss\'s courier runs is in hands that mean to use it.',
@@ -191,6 +198,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss informed for the occupier, and the resistance\'s survivors have longer memories than the law ever did.',
       "The rent is public: the boss's rackets ran on betrayed neighbors, and the neighbors' families are keeping count.",
+      'Families of the neighbours the boss betrayed to the occupier know the name now, and they are keeping count.',
     ],
     're-adjudicated': [
       'Whoever held the boss before is gone, but now the occupier lets the rackets run, and the boss pays for that in names and safe houses.',
@@ -214,6 +222,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       "It is out that a dark patron steered the boss's violence, and the town knows now who picked the targets.",
       "The sponsorship is public: the boss hurt people to order for a power that paid in favor, and even the boss's own crews want distance now.",
+      "People the boss's crews hurt know now that a dark patron chose them, and the boss's own crews are keeping their distance.",
     ],
     're-adjudicated': [
       "Whoever paid the boss before is gone, but now a patron that rewards the deed backs the boss, and it picks the crews' targets.",
@@ -237,6 +246,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss\'s crews cleared the way for the rival mission, and both congregations know whose fists did the converting.',
       "The mission payroll is public, and the boss's crews are on it by name; the town has learned its conversions were paid for.",
+      "Converts who changed faith under the boss's crews have learned the mission paid for every blow.",
     ],
     're-adjudicated': [
       'Whoever held the boss\'s contract before is gone, but now the rival faith presses in, and its purse has taken on the boss\'s crews.',
@@ -260,6 +270,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss broke the code while nothing held it, and the crews that kept it anyway are deciding what the boss is owed.',
       "The boss's betrayals are public now, dated to the season the faith went cold, and the streets mean to settle them by their own law.",
+      'The crews that kept the code while the faith was cold are deciding, by their own law, what the boss owes for breaking it.',
     ],
     're-adjudicated': [
       "Whoever paid the boss before is gone, but now the faith has gone cold, and no code holds the boss back.",
@@ -283,6 +294,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss bled the tainted temple and guarded it too, and neither the faithful nor the crews like what that makes the boss.',
       "The strongbox is public: every sin of the clergy, listed, with the boss's dates for collecting on each.",
+      "The faithful have seen the boss's list of the clergy's sins, with a date beside each for collecting.",
     ],
     're-adjudicated': [
       "Whoever held the boss before is gone, but now the priesthood is tainted, and the temple's silence money goes through the boss's hands.",
@@ -306,6 +318,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss held the town for the underworld, not for the boss\'s own sake, and every crew sworn to the boss is rethinking its oath.',
       "The stewardship is public: the boss's empire belonged to the underworld, and the town has seen the terms.",
+      'Every crew sworn to the boss has seen the terms, and knows its oath was really made to the underworld.',
     ],
     're-adjudicated': [
       'Whoever owned the boss before is gone, but now the underworld holds the offices, and whoever holds them now kept the boss in place.',
@@ -329,6 +342,7 @@ export const CRIMINAL_ROLE_CONTENT = {
     'exposed-public': [
       'It is out that the boss traded scandal testimony to both sides, and the buyers and the named are comparing invoices.',
       "It is out that the boss sold the town's guilt in both directions, and everyone finds their own name on one side.",
+      'Both sides of the scandal have learned the boss sold their testimony to the other, and they are comparing what they paid.',
     ],
     're-adjudicated': [
       "Whoever held the boss before is gone, but now the scandal has broken, and whoever buys testimony deals with the boss directly.",

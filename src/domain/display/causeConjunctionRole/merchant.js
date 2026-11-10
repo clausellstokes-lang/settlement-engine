@@ -30,6 +30,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the guildmaster kept two books while the fund ran dry, and members are checking every account since the guildmaster's election.",
       'The double ledger is out: the guildmaster borrowed from every member at once without asking any of them, and the guild wants every sum accounted for.',
+      'Guild members are learning the guildmaster borrowed from each of them without asking while the fund ran dry, and they want every sum back.',
     ],
     're-adjudicated': [
       "Whoever held the guildmaster before is gone, but now the fund runs short, and the second ledger pays someone else.",
@@ -53,6 +54,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the guild seal covered smuggled freight while the routes were down, and every sealed manifest of the period is suspect.',
       "The customs men have the guildmaster's manifests now, and the fiction is plain; the guild's good name moved contraband for a fee.",
+      "Honest traders who waited out the closed routes have learned the guild's own seal carried smuggled freight past them.",
     ],
     're-adjudicated': [
       'Whoever partnered the guildmaster before is gone, but now the routes are broken, and the guildmaster moves sealed cargo for whoever pays.',
@@ -76,6 +78,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the guildmaster sold the reserve out the back while the town went short, and the buyers' names are as damning as the guildmaster's.",
       'The midnight prices are out: the guildmaster got rich on the shortage, and the hungry are showing what they paid.',
+      "People who paid the guildmaster's midnight prices during the shortage know now the reserve was sold to them out the back.",
     ],
     're-adjudicated': [
       'Whoever held the guildmaster before is gone, but now the stores are empty, and the guildmaster runs the back-door trade alone.',
@@ -99,6 +102,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the guildmaster's bonded crates dodged the embargo, and the customs house is opening every crate the guildmaster signed for.",
       'The false bonds are out: the guildmaster lied to the customs house crate by crate, and the ruined merchants who obeyed the embargo are keeping count.',
+      'Merchants ruined by keeping the embargo are counting the crates the guildmaster signed through on false bonds.',
     ],
     're-adjudicated': [
       'Whoever paid the guildmaster before is gone, but now an embargo chokes off trade, and whoever runs the cargo uses the guildmaster\'s bonded channel.',
@@ -122,6 +126,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       'The returned inspectors have weighed the market and found it light; it is public now that the guildmaster taxed the town privately while they were at war.',
       "It is out that the guildmaster's scales drifted the moment the escorts left, and every purchase of the empty season is being reweighed.",
+      "Everyone who bought at market while the inspectors were at war is having their purchases reweighed against the guildmaster's scales.",
     ],
     're-adjudicated': [
       "Whoever paid the guildmaster before is gone, but now the levy has taken the watchers to war, and the guildmaster's scales read light.",
@@ -145,6 +150,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the guildmaster paid the road bandits and banked for them too, and every safe caravan of the period reads differently now.',
       "The hidden page of tolls and takings is out, and the town knows why only the guildmaster's caravans were never robbed.",
+      "Traders who lost caravans to the road bandits know now why the guildmaster's never were: the guildmaster paid the bandits.",
     ],
     're-adjudicated': [
       'Whoever shared the toll before is gone, but now the garrison is hollow, and the guildmaster pays the road toll to whoever works the roads.',
@@ -168,6 +174,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the guildmaster provisioned both camps, and each army has learned it fed its enemy through the guildmaster\'s warehouse.',
       "The double custom is out: the guildmaster's war profits are being counted in the square, against the town's dead.",
+      "Families who lost people in the war are watching the guildmaster's profits from feeding both armies counted in the square.",
     ],
     're-adjudicated': [
       'Whoever paid the guildmaster before is gone, but now the war presses in, and partners the guildmaster did not choose run the trade with both sides.',
@@ -191,6 +198,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the guildmaster's permits were paid for in reports on the guild's own members, and the members are reading their files.",
       "Collaboration has a ledger now, and it is the guildmaster's: licenses in one column, betrayed rivals in the other.",
+      'Guild members reported to the occupier are reading their own files, and the licences the guildmaster got for them.',
     ],
     're-adjudicated': [
       "Whoever paid the guildmaster before is gone, but now the occupier rules, and its officials renewed the guildmaster's licenses unchanged.",
@@ -214,6 +222,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the guildmaster's ruthlessness was sponsored devotion, and every ruined competitor is being recounted as an offering.",
       'The sponsorship is out: a dark patron paid the guildmaster to grasp, and the town is going back over every bargain it struck with the guildmaster.',
+      "The guildmaster's ruined competitors are asking whether a dark patron paid for their ruin, and many think it did.",
     ],
     're-adjudicated': [
       "Whoever held the guildmaster before is gone, but now a dark patron rewards the sharp dealing, and the guildmaster serves it alone.",
@@ -237,6 +246,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the rival mission's money moved through the guildmaster's house, and both congregations are following the deposits.",
       'The accounts are out: foreign faith in, local converts funded, and the guildmaster\'s fee on every transaction between.',
+      "Converts in the town are learning their new faith was paid for with foreign money through the guildmaster's house.",
     ],
     're-adjudicated': [
       'Whoever paid the guildmaster before is gone, but now a rival faith presses in, and the guildmaster banks its mission money for a fee.',
@@ -260,6 +270,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       'It is public what the guildmaster traded while no god watched the scales, and the reviving congregation is auditing the market first.',
       'The cold-season dealings are out: the guildmaster kept honest weights only when someone was watching, and the town knows it.',
+      "Anyone who bought by the guildmaster's weights while the faith was cold is checking what they were short.",
     ],
     're-adjudicated': [
       "Whoever paid the guildmaster before is gone, but now the faith has gone cold, and no oath keeps the guildmaster's scales honest.",
@@ -268,13 +279,13 @@ export const MERCHANT_ROLE_CONTENT = {
   'clergy-scandal': {
     attributed: [
       "The disgraced temple needed its money moved quietly, and the guildmaster moved it; the tithe walks out as trade goods and comes home as clean coin, minus the guildmaster's commission.",
-      "The clergy's shame has a banker: the guildmaster, who launders the temple's hush money and holds the receipts as insurance.",
+      "The clergy's shame has a banker: the guildmaster, who launders the temple's hush money and holds the papers as insurance.",
     ],
     're-caused': [
       "The guildmaster's first reason is gone, but now the priesthood is tainted and needs a banker, and the temple's quiet accounts keep the guildmaster paid.",
     ],
     reformed: [
-      'The priesthood was cleansed and the guildmaster closed the quiet accounts; the receipts went to the new hierarch, not the market.',
+      'The priesthood was cleansed and the guildmaster closed the quiet accounts; the papers went to the new hierarch, not the market.',
       "With the clergy's scandal resolved, the guildmaster came clean; the laundered tithe was traced back and restored to the altar.",
     ],
     historicized: [
@@ -283,6 +294,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the guildmaster laundered the temple's hush money, and the tithe's travels are being mapped in the square.",
       "The quiet accounts are out: the clergy's disgrace funded the guildmaster's commissions, and both ledgers are open to the town.",
+      "The faithful are following their tithes from the temple into the guildmaster's books, where the hush money was washed.",
     ],
     're-adjudicated': [
       "Whoever held the guildmaster before is gone, but now the priesthood is tainted, and the guildmaster moves the temple's money for it directly.",
@@ -306,6 +318,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the guild's books did the underworld's washing, and the guildmaster's beautiful balances are being taken apart line by line.",
       'The town knows who kept the underworld\'s books: every clean account the guildmaster signed is evidence now.',
+      "Every account the guildmaster signed is being taken apart line by line, because the guild's books washed the underworld's money.",
     ],
     're-adjudicated': [
       'Whoever owned the guild before is gone, but now the underworld holds the offices, and whoever holds them kept the guildmaster on.',
@@ -329,6 +342,7 @@ export const MERCHANT_ROLE_CONTENT = {
     'exposed-public': [
       "It is public that the guildmaster banked the scandal's bribes, and the town is reading the guildmaster's list of depositors.",
       "The strongroom is open: hush money, evidence, and the guildmaster's fees, all itemized, all public now.",
+      "The people who paid bribes in the scandal are finding their names on the guildmaster's list of depositors.",
     ],
     're-adjudicated': [
       "Whoever held the guildmaster before is gone, but now a scandal has broken, and the guildmaster's strongroom holds hush money for whoever pays.",

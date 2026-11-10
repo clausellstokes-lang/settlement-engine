@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 215,
+      "dated": 216,
       "sha-pin": 2,
       "tree": 172
     },
@@ -491,7 +491,9 @@
     "_rosterGrowth2026-11-09-style-2-merge-record-24b": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-4, session session_01FbPLbbT4fy8G4nTurhnGb3): `tree` 170 -> 171, docs/shift-records/2026-11-10-style-2-merge-24b-sw8-herald.json, record 24b, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-09-urban-fix": "ONE document JOINED the roster by being BORN into it (URBAN-FIX, a writing lane of the STYLE-2 wave, child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbepMRKdedJnbrrmGaf; on lane/urban-fix-2026-11-09 cut from fe55408b9): `dated` 206 -> 207, measured by this walker at the lane tip: docs/chair/2026-11-09/URBAN-FIX-2026-11-09.md, the lane's record (the four urban causes old -> new, the unsigned deltas per cause, the referee before and after, What stays), born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382. At the merge it composes with URBAN-AUDIT's own growth note (its lane, 203 -> 204 at its base).",
     "_rosterGrowth2026-11-09-style-2-merge-record-25": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): `tree` 171 -> 172, docs/shift-records/2026-11-10-style-2-merge-25-urban-fix.json, record 25, born into the tree class; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-09-style-2-merge-urban-fix": "THE UNION AT THE URBAN-FIX MERGE (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): both sides' notes kept; `dated` 214 -> 215 (docs/chair/2026-11-09/URBAN-FIX-2026-11-09.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-09-style-2-merge-urban-fix": "THE UNION AT THE URBAN-FIX MERGE (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): both sides' notes kept; `dated` 214 -> 215 (docs/chair/2026-11-09/URBAN-FIX-2026-11-09.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-09-style-2-sw9b-a": "ONE document JOINED the roster by being BORN into it (seat SW-9b-A, session session_01FbPLbeW2rELFFev5HD4ehm, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/style-2-sw9b-a-2026-11-09 cut from fe55408b9): `dated` 206 -> 207, docs/chair/2026-11-09/STYLE-2-SW9B-A-2026-11-09.md, the seat's record, born dated; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-09-style-2-merge-sw-9b-a": "THE UNION AT THE SW-9b-A MERGE (STYLE-2-MERGE-5, session session_01FbPLbeQvmDxrY7sAEune7V): both sides' notes kept; `dated` 215 -> 216 (docs/chair/2026-11-09/STYLE-2-SW9B-A-2026-11-09.md, the lane's record, born dated)."
   },
   "rows": []
 }

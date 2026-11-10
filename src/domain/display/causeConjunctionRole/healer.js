@@ -30,6 +30,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the healer sold donated medicine while the charity beds stood empty, and families who buried someone from the infirmary want answers.',
       'The side door is out: the infirmary really was short of money, the healer took a profit from it anyway, and the sick paid.',
+      'Families who buried someone from the infirmary know now that donated medicine was sold out of the side door while the charity beds stood empty.',
     ],
     're-adjudicated': [
       'Whoever paid the healer before is gone, but now the infirmary\'s money runs short, and the side-door sales go on.',
@@ -53,6 +54,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the healer stocked the infirmary from robbed graves, and families of the dead are going through the shelves.',
       'It is out that the healer\'s remedies were stolen from the dead. People who recovered on them are asking whose graves were opened.',
+      'People who got well at the infirmary are asking which graves their remedies came from.',
     ],
     're-adjudicated': [
       'Whoever held the healer\'s account before is gone, but now the supply lines have failed, and whoever works by night supplies the infirmary.',
@@ -76,6 +78,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the healer sold colored water to the poor and kept real medicine for friends. The bereaved are reading their bills again.',
       'It is out: real medicine for the well-connected, colored water for everyone else, and the healer charged the same fee for both.',
+      "The bereaved are reading their bills again, side by side with the bills of the healer's friends, for the same fee.",
     ],
     're-adjudicated': [
       'Whoever the healer answered to before is gone, but now the medicine chest has run dry, and the rationing by favor goes on.',
@@ -99,6 +102,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the healer charged three times the risk for smuggled medicine. The town is learning what it paid to stay alive.',
       'It is out that the infirmary\'s medicine came in by night from smugglers, and that the healer kept the extra charged on it.',
+      'The sick who paid for smuggled medicine are learning how much of the price the healer kept.',
     ],
     're-adjudicated': [
       "Whoever paid the healer before has fallen, but now an embargo chokes the trade, and whoever smuggles past it brings the healer's medicine.",
@@ -122,6 +126,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that unfitness was for sale at the infirmary, and the families of those who marched in a buyer\'s place are outside.',
       'It is out: the healer\'s certificates kept the paying sons home, and the town\'s dead marched in their place.',
+      "Families whose sons marched in a buyer's place are standing outside the infirmary with the certificates that sent them.",
     ],
     're-adjudicated': [
       'Whoever held the healer before is gone, but now the levy calls people up, and the healer sells certificates of unfitness to whoever pays.',
@@ -145,6 +150,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the healer stitched the gangs\' wounded in secret, and people are putting names to every odd recovery in town.',
       'It is out that the infirmary treated the gangs\' wounds and hid them, and that the gangs\' protection was the healer\'s fee.',
+      "People are putting names to every quiet recovery in town now that the healer is known to have stitched the gangs' wounded.",
     ],
     're-adjudicated': [
       'Whoever protected the healer before is gone, but now the garrison is hollowed out, and whatever gang holds the streets brings its wounded to the healer on the same terms.',
@@ -166,8 +172,9 @@ export const HEALER_ROLE_CONTENT = {
       'The war has moved on, but the healer still sells places in the sickroom queue.',
     ],
     'exposed-public': [
-      'It is public that the healer sold places in the war queue, and the families of those who waited and died have the receipts of those who did not.',
+      'It is public that the healer sold places in the war queue, and the families of those who waited and died have the papers showing who paid.',
       'It is out that the healer sold places at the sickroom door through the fighting, and families are working out who died waiting.',
+      'Families who waited at the sickroom door through the fighting are working out who was let in ahead of them for money.',
     ],
     're-adjudicated': [
       'Whoever paid the healer before is gone, but now the war presses in, and the healer sells places in the queue at the sickroom door.',
@@ -191,6 +198,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the healer\'s house calls fed the occupier\'s lists, and every raid that followed a treatment now has its informant.',
       'The notes are out, in the healer\'s hand: wounds described, households named, and the occupation\'s visits mapped to both.',
+      "Households raided after a visit from the healer have found their own wounds written up in the healer's notes for the occupier.",
     ],
     're-adjudicated': [
       "Whoever paid the healer before is gone, but now the occupier rules, and the healer's weekly notes on wounded households go to its officers.",
@@ -214,6 +222,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that some deaths in the healer\'s sickroom were offerings. Families are asking again about every gentle passing.',
       'It is out that a dark patron paid the healer for each death, and families are looking again at every early one.',
+      "Families who lost someone gently in the healer's sickroom are asking whether a dark patron paid for that death.",
     ],
     're-adjudicated': [
       "Whoever held the healer before is gone, but now a dark patron rewards the quiet deaths, and the healer's sickroom answers to it alone.",
@@ -237,6 +246,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the mission\'s miracles were the healer\'s staged cures, and every conversion that followed one is unraveling.',
       'It is out that the recoveries were sold as signs, and the healer was paid for every convert.',
+      'Converts who changed faith after a cure are learning the healer staged it and was paid for each of them.',
     ],
     're-adjudicated': [
       'Whoever paid the healer before is gone, but now a rival faith presses in, and its mission pays the healer for miracles.',
@@ -260,6 +270,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known what the healer let slide while no one held them to the vow, and people are going through the infirmary\'s books.',
       'It is out: the healer kept the fees and dropped the duties as soon as the faith went cold, and the town has noticed.',
+      "People are going through the infirmary's books to see which duties the healer dropped once no vow held them.",
     ],
     're-adjudicated': [
       "Whoever paid the healer before is gone, but now the faith has gone cold, and nothing holds the healer to the vow when setting prices.",
@@ -283,6 +294,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the healer certified the temple\'s harms as accidents, and the true injuries are being re-read from the false pages.',
       'It is out that the healer\'s notes hid the clergy\'s sins for a fee, and the healer\'s signature is on every page.',
+      "People hurt by the temple and written up as accidents are reading the healer's false pages, with the healer's signature on each.",
     ],
     're-adjudicated': [
       'Whoever paid the healer before is gone, but now the priesthood is tainted, and the temple pays the healer to sign for its priests.',
@@ -306,6 +318,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is public that the infirmary served the syndicate after dark, and every natural death it certified is being re-examined.',
       'It is out that the healer\'s certificates covered the underworld\'s killings, and the town is going back through the paperwork.',
+      'Families whose dead the healer certified as natural are asking for the deaths to be looked at again.',
     ],
     're-adjudicated': [
       'Whoever used the infirmary before is gone, but now the underworld holds the offices, and its wounded come to the healer after dark.',
@@ -329,6 +342,7 @@ export const HEALER_ROLE_CONTENT = {
     'exposed-public': [
       'It is now known that the healer\'s illnesses matched the scandal\'s court dates, and every certificate is being checked against the calendar.',
       'It is out: the healer sold sickness for the dates that mattered, and the certificates line up with the trials.',
+      "The trials of the scandal are being checked against the healer's certificates, and the sick days fall on the court dates.",
     ],
     're-adjudicated': [
       "Whoever paid the healer before is gone, but now a scandal has broken, and whoever is implicated pays the healer for false illnesses.",

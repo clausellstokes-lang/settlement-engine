@@ -19,7 +19,7 @@
       "lines": [
         {
           "lineId": "vid:52",
-          "text": "What was set down for the coming turn falls on the town's trade and its keeping.",
+          "text": "What is planned for the coming turn falls on the town's trade and its stores.",
           "causes": [
             "party",
             "table"
@@ -32,7 +32,7 @@
         },
         {
           "lineId": "vid:53",
-          "text": "The order names a change in what the town makes, holds and sells, due when the turn comes round.",
+          "text": "A change in what the town makes, holds and sells is due when the turn comes round.",
           "causes": [
             "party",
             "table"
@@ -75,7 +75,7 @@
       "lines": [
         {
           "lineId": "vid:55",
-          "text": "What was set down for the coming turn falls on what the town keeps faith with.",
+          "text": "What is planned for the coming turn falls on what the town keeps faith with.",
           "causes": [
             "party",
             "table"
@@ -88,7 +88,7 @@
         },
         {
           "lineId": "vid:56",
-          "text": "The order names a change in the town's observances, due when the turn comes round.",
+          "text": "A change in the town's observances is due when the turn comes round.",
           "causes": [
             "party",
             "table"
@@ -129,7 +129,7 @@
       "lines": [
         {
           "lineId": "vid:58",
-          "text": "What was set down for the coming turn falls on the people who live here by name.",
+          "text": "What is planned for the coming turn falls on particular people of the town.",
           "causes": [
             "party",
             "table"
@@ -142,7 +142,7 @@
         },
         {
           "lineId": "vid:59",
-          "text": "The order names a change among the town's own folk, due when the turn comes round.",
+          "text": "A change among the town's own folk is due when the turn comes round.",
           "causes": [
             "party",
             "table"
@@ -183,7 +183,7 @@
       "lines": [
         {
           "lineId": "vid:61",
-          "text": "What was set down for the coming turn falls on who holds authority here.",
+          "text": "What is planned for the coming turn falls on who holds authority here.",
           "causes": [
             "party",
             "table"
@@ -196,7 +196,7 @@
         },
         {
           "lineId": "vid:62",
-          "text": "The order names a change in who answers for the town, due when the turn comes round.",
+          "text": "A change in who answers for the town is due when the turn comes round.",
           "causes": [
             "party",
             "table"
@@ -237,7 +237,7 @@
       "lines": [
         {
           "lineId": "vid:64",
-          "text": "What was set down for the coming turn falls on the town's whole standing in the wider realm.",
+          "text": "What is planned for the coming turn falls on the town's whole standing in the wider realm.",
           "causes": [
             "party",
             "table"
@@ -250,7 +250,7 @@
         },
         {
           "lineId": "vid:65",
-          "text": "The order names a change to what {settlement} itself is, due when the turn comes round.",
+          "text": "{settlement} itself is due to change when the turn comes round.",
           "causes": [
             "party",
             "table"
@@ -291,7 +291,7 @@
       "lines": [
         {
           "lineId": "vid:67",
-          "text": "What was set down for the coming turn falls on the town's dealings with its neighbours.",
+          "text": "What is planned for the coming turn falls on the town's dealings with its neighbours.",
           "causes": [
             "party",
             "table"
@@ -304,7 +304,7 @@
         },
         {
           "lineId": "vid:68",
-          "text": "The order names a change between the town and those it lives beside, due when the turn comes round.",
+          "text": "A change between the town and those it lives beside is due when the turn comes round.",
           "causes": [
             "party",
             "table"
@@ -345,7 +345,7 @@
       "lines": [
         {
           "lineId": "vid:70",
-          "text": "What was set down for the coming turn falls on the town as a trouble it must carry.",
+          "text": "What is planned for the coming turn is a trouble the town must carry.",
           "causes": [
             "party",
             "table"
@@ -358,7 +358,7 @@
         },
         {
           "lineId": "vid:71",
-          "text": "The order names a hardship the town will meet, due when the turn comes round.",
+          "text": "A hardship the town must meet is due when the turn comes round.",
           "causes": [
             "party",
             "table"
@@ -399,7 +399,7 @@
       "lines": [
         {
           "lineId": "vid:49",
-          "text": "It follows from the decree recorded as {prerequisite}.",
+          "text": "It follows from {prerequisite}.",
           "causes": [
             "party",
             "table"
@@ -522,7 +522,7 @@
         },
         {
           "lineId": "vid:29",
-          "text": "Whatever answers out there answers off the record; what returns is the town's own, and nothing else comes home.",
+          "text": "What happens out there is not seen from here; only what the town sent comes back, and nothing else comes home.",
           "causes": [
             "party",
             "table"
@@ -576,7 +576,7 @@
         },
         {
           "lineId": "vid:32",
-          "text": "The far side of this is a place with its own record, and it will keep one.",
+          "text": "The far side of this is a place with its own history, and it will remember.",
           "causes": [
             "party",
             "table"
@@ -629,7 +629,7 @@
         },
         {
           "lineId": "vid:2",
-          "text": "The table wrote this one into the record itself.",
+          "text": "The table decided this one itself.",
           "causes": [
             "table"
           ],
@@ -665,7 +665,7 @@
         },
         {
           "lineId": "vid:5",
-          "text": "The party's hand moved first here, and the table kept the record.",
+          "text": "The party's hand moved first here, and the table only noted it.",
           "causes": [
             "party"
           ],
@@ -692,7 +692,7 @@
       "lines": [
         {
           "lineId": "vid:6",
-          "text": "The register offered this one, and the table took the offer.",
+          "text": "It was offered as a suggestion, and the table took it.",
           "causes": [
             "table"
           ],
@@ -704,7 +704,7 @@
         },
         {
           "lineId": "vid:7",
-          "text": "It stands here because the register proposed it and nobody refused.",
+          "text": "It stands here because it was suggested and nobody refused.",
           "causes": [
             "table"
           ],
@@ -716,7 +716,7 @@
         },
         {
           "lineId": "vid:8",
-          "text": "The register raised it, and the table let it into the order.",
+          "text": "It was suggested, and the table let it stand.",
           "causes": [
             "table"
           ],
@@ -728,7 +728,7 @@
         },
         {
           "lineId": "vid:9",
-          "text": "The register offered it, and the party's hand carried it through.",
+          "text": "It was suggested, and the party's hand carried it through.",
           "causes": [
             "party"
           ],
@@ -740,7 +740,7 @@
         },
         {
           "lineId": "vid:10",
-          "text": "It reached the order through the register, with the party acting on it.",
+          "text": "It began as a suggestion, and the party acted on it.",
           "causes": [
             "party"
           ],
@@ -779,7 +779,7 @@
         },
         {
           "lineId": "vid:12",
-          "text": "It arrived as a Surveyor's proposal, with its credit already spent.",
+          "text": "It arrived as a Surveyor's proposal, and the table accepted it.",
           "causes": [
             "table"
           ],
@@ -842,7 +842,7 @@
       "lines": [
         {
           "lineId": "vid:34",
-          "text": "The register had asked for a connection to be made first, and the table went on without it.",
+          "text": "The table was warned that a connection should be made first, and went on without it.",
           "causes": [
             "party",
             "table"
@@ -855,7 +855,7 @@
         },
         {
           "lineId": "vid:35",
-          "text": "A connection the register wanted was never made, and the table proceeded anyway.",
+          "text": "A connection the table was warned about was never made, and it proceeded anyway.",
           "causes": [
             "party",
             "table"
@@ -868,7 +868,7 @@
         },
         {
           "lineId": "vid:36",
-          "text": "The register named a missing connection; the table heard it and moved on.",
+          "text": "The table was warned of a missing connection, heard it, and moved on.",
           "causes": [
             "party",
             "table"
@@ -896,7 +896,7 @@
       "lines": [
         {
           "lineId": "vid:37",
-          "text": "The register called it a contention with an earlier decree, and the table let this one stand.",
+          "text": "The table was warned this one is in contention with an earlier decree, and let it stand.",
           "causes": [
             "party",
             "table"
@@ -922,7 +922,7 @@
         },
         {
           "lineId": "vid:39",
-          "text": "The register raised the contention, and the table answered by proceeding.",
+          "text": "The table was warned of the contention and answered by proceeding.",
           "causes": [
             "party",
             "table"
@@ -950,7 +950,7 @@
       "lines": [
         {
           "lineId": "vid:40",
-          "text": "The register named the contradiction, and the table set the warning aside.",
+          "text": "The table was warned of the contradiction and set the warning aside.",
           "causes": [
             "party",
             "table"
@@ -976,7 +976,7 @@
         },
         {
           "lineId": "vid:42",
-          "text": "The register saw a contradiction here, and the table proceeded regardless.",
+          "text": "The table was warned of a contradiction here, and proceeded regardless.",
           "causes": [
             "party",
             "table"
@@ -1004,7 +1004,7 @@
       "lines": [
         {
           "lineId": "vid:43",
-          "text": "The register named a prerequisite still wanting, and the table did not wait for it.",
+          "text": "The table was warned a prerequisite was still wanting, and did not wait for it.",
           "causes": [
             "party",
             "table"
@@ -1030,7 +1030,7 @@
         },
         {
           "lineId": "vid:45",
-          "text": "The register asked for a prerequisite first, and the table went ahead.",
+          "text": "The table was asked for a prerequisite first, and went ahead.",
           "causes": [
             "party",
             "table"
@@ -1058,7 +1058,7 @@
       "lines": [
         {
           "lineId": "vid:46",
-          "text": "The register warned that the totality would not balance, and the table let it ride.",
+          "text": "The table was warned that the totality would not balance, and let it ride.",
           "causes": [
             "party",
             "table"
@@ -1071,7 +1071,7 @@
         },
         {
           "lineId": "vid:47",
-          "text": "A totality the register keeps was left short, and the table proceeded.",
+          "text": "A totality that should have balanced was left short, and the table proceeded.",
           "causes": [
             "party",
             "table"
@@ -1084,7 +1084,7 @@
         },
         {
           "lineId": "vid:48",
-          "text": "The register raised the totality, and the table accepted the imbalance.",
+          "text": "The table was warned the totality was out of balance, and accepted it.",
           "causes": [
             "party",
             "table"
@@ -1112,7 +1112,7 @@
       "lines": [
         {
           "lineId": "vid:73",
-          "text": "A faction's standing here was raised by the party's hand.",
+          "text": "A power's standing here was raised by the party's hand.",
           "causes": [
             "party"
           ],
@@ -1124,7 +1124,7 @@
         },
         {
           "lineId": "vid:74",
-          "text": "One of the town's factions walks taller since the party took its side.",
+          "text": "One of the town's powers walks taller since the party took its side.",
           "causes": [
             "party"
           ],
@@ -1436,7 +1436,7 @@
         },
         {
           "lineId": "vid:90",
-          "text": "One of the town's own is not in the reckoning any more, and the party is the reason.",
+          "text": "One of the town's own has no say in its affairs any more, and the party is the reason.",
           "causes": [
             "party"
           ],
@@ -1502,7 +1502,7 @@
       "lines": [
         {
           "lineId": "vid:93",
-          "text": "A faction's standing here was cut down by the party's hand.",
+          "text": "A power's standing here was cut down by the party's hand.",
           "causes": [
             "party"
           ],
@@ -1514,7 +1514,7 @@
         },
         {
           "lineId": "vid:94",
-          "text": "One of the town's factions lost ground, and the party is why.",
+          "text": "One of the town's powers lost ground, and the party is why.",
           "causes": [
             "party"
           ],
@@ -1593,7 +1593,7 @@
         },
         {
           "lineId": "vid:17",
-          "text": "The advance carried it out, and what followed followed from it.",
+          "text": "It has been carried out, and the town has felt what followed.",
           "causes": [
             "party",
             "table"
@@ -1606,7 +1606,7 @@
         },
         {
           "lineId": "vid:18",
-          "text": "It is done, and the record keeps it where the doing put it.",
+          "text": "It is done, and the town carries the mark of it.",
           "causes": [
             "party",
             "table"
@@ -1634,7 +1634,7 @@
       "lines": [
         {
           "lineId": "vid:19",
-          "text": "It waits for the next advance, and nothing of it has happened yet.",
+          "text": "It waits for time to move on, and nothing of it has happened yet.",
           "causes": [
             "party",
             "table"
@@ -1647,7 +1647,7 @@
         },
         {
           "lineId": "vid:20",
-          "text": "Nothing has come of it yet; it sits in the order, waiting its turn.",
+          "text": "Nothing has come of it yet; it waits its turn.",
           "causes": [
             "party",
             "table"
@@ -1660,7 +1660,7 @@
         },
         {
           "lineId": "vid:21",
-          "text": "The order holds it, unspent, until the town moves again.",
+          "text": "It is held back, unspent, until time moves on in the town.",
           "causes": [
             "party",
             "table"
@@ -1701,7 +1701,7 @@
         },
         {
           "lineId": "vid:23",
-          "text": "Nothing came of it; the order let it go and kept what it said.",
+          "text": "Nothing came of it; it was let go, though what it said is kept.",
           "causes": [
             "party",
             "table"
@@ -1714,7 +1714,7 @@
         },
         {
           "lineId": "vid:24",
-          "text": "It was withdrawn, and the register still carries the sentence it would have been.",
+          "text": "It was withdrawn, and what it would have said is still written here.",
           "causes": [
             "party",
             "table"
