@@ -186,7 +186,7 @@ describe('CompendiumPanel — decomposition smoke', () => {
     expect(visible().toLowerCase()).toContain('flood');
     expect(root.querySelectorAll('[data-filter-hidden]').length).toBeGreaterThan(0);
     // Every hidden entry is one that does not contain the string.
-    for (const el of root.querySelectorAll('[data-filter-hidden]')) expect(el.textContent.toLowerCase()).not.toContain('flood');
+    expect([...root.querySelectorAll('[data-filter-hidden]')].filter((el) => el.textContent.toLowerCase().includes('flood'))).toEqual([]);
     fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: '' } });
     expect(root.querySelectorAll('[data-filter-hidden]').length).toBe(0);
   });
