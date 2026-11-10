@@ -101,7 +101,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
   const ignoreQueuedRegionalImpact = useStore(s => s.ignoreQueuedRegionalImpact);
   const resolveRegionalImpact = useStore(s => s.resolveRegionalImpact);
-  const advanceCampaignRegionalImpacts = useStore(s => s.advanceCampaignRegionalImpacts);
   const applyAllQueuedRegionalImpacts = useStore(s => s.applyAllQueuedRegionalImpacts);
   const ignoreAllQueuedRegionalImpacts = useStore(s => s.ignoreAllQueuedRegionalImpacts);
 
@@ -648,10 +647,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     resolveRegionalImpact(campaignId, impactId);
   }, [resolveRegionalImpact]);
 
-  const handleAdvanceRegionalImpacts = useCallback((campaignId, ticks) => {
-    advanceCampaignRegionalImpacts(campaignId, ticks);
-  }, [advanceCampaignRegionalImpacts]);
-
   const handleApplyAllRegionalImpacts = useCallback((campaignId) => {
     applyAllQueuedRegionalImpacts(campaignId);
   }, [applyAllQueuedRegionalImpacts]);
@@ -878,7 +873,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 onApplyRegionalImpact={handleApplyRegionalImpact}
                 onIgnoreRegionalImpact={handleIgnoreRegionalImpact}
                 onResolveRegionalImpact={handleResolveRegionalImpact}
-                onAdvanceRegionalImpacts={handleAdvanceRegionalImpacts}
                 onApplyAllRegionalImpacts={handleApplyAllRegionalImpacts}
                 onIgnoreAllRegionalImpacts={handleIgnoreAllRegionalImpacts}
                 onReactivate={handleReactivateSave}

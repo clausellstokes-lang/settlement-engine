@@ -529,37 +529,37 @@
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "floatInterpolation",
     "snippet": "{Math.round((channel.confidence || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "floatInterpolation",
     "snippet": "{Math.round((channel.strength || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "percentToken",
     "snippet": "{Math.round((channel.confidence || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "percentToken",
     "snippet": "{Math.round((channel.strength || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 239,
+    "line": 216,
     "category": "floatInterpolation",
     "snippet": "{Math.round((impact.severity || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 239,
+    "line": 216,
     "category": "percentToken",
     "snippet": "{Math.round((impact.severity || 0) * 100)}"
   },

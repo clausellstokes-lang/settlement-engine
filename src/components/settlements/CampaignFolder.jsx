@@ -81,7 +81,6 @@ export function CampaignFolder({
   onApplyRegionalImpact,
   onIgnoreRegionalImpact,
   onResolveRegionalImpact,
-  onAdvanceRegionalImpacts,
   onApplyAllRegionalImpacts,
   onIgnoreAllRegionalImpacts,
   onReactivate,
@@ -329,7 +328,6 @@ export function CampaignFolder({
           onApplyImpact={onApplyRegionalImpact}
           onIgnoreImpact={onIgnoreRegionalImpact}
           onResolveImpact={onResolveRegionalImpact}
-          onAdvanceImpacts={onAdvanceRegionalImpacts}
           onApplyAllImpacts={onApplyAllRegionalImpacts}
           onIgnoreAllImpacts={onIgnoreAllRegionalImpacts}
         />
