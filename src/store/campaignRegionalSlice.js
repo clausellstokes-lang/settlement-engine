@@ -14,8 +14,6 @@
  * the region/worldPulse domains) and never campaignSlice, so there is no cycle.
  */
 import {
-  advanceRegionalImpacts,
-  advanceWizardNewsFeed,
   applyRegionalImpact,
   conditionFromRegionalImpact,
   deriveGraphWithDiscoveredCandidates,
@@ -427,39 +425,6 @@ export const createCampaignRegionalSlice = (set, get) => ({
 
   ignoreQueuedRegionalImpact: (campaignId, impactId) => {
     return get().setRegionalImpactStatus(campaignId, impactId, 'ignored');
-  },
-
-  advanceCampaignRegionalImpacts: (campaignId, ticks = 1, options = {}) => {
-    // Advance-concurrency guard (store-hooks-state-4): advancing regional impacts
-    // mutates c.regionalGraph, which a running interval — and a resume from a
-    // PARKED pause — restores WHOLESALE from its pre-interval snapshot
-    // (advanceInterval.js resume.preRegionalGraph), so a manual advance written
-    // into either window is silently reverted. Same null no-op as its siblings.
-    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
-    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
-    let graph = null;
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      const now = options.now || new Date().toISOString();
-      // Threaded: this action already minted ONE boundary instant above; without it the
-      // normalizer took a SECOND, later wall-clock read for every stamp-less row.
-      const beforeGraph = ensureRegionalGraph(c.regionalGraph, { now });
-      c.wizardNews = advanceWizardNewsFeed(c.wizardNews, ticks, { now });
-      c.regionalGraph = advanceRegionalImpacts(beforeGraph, ticks, {
-        ...options,
-        currentTick: c.wizardNews.currentTick,
-        now,
-      });
-      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, {
-        tick: c.wizardNews.currentTick,
-        createdAt: now,
-      });
-      c.updatedAt = now;
-      graph = c.regionalGraph;
-      persistCampaignState(state, campaignId);
-    });
-    return graph;
   },
 
   applyQueuedRegionalImpact: async (campaignId, impactId) => {

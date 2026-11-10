@@ -11,7 +11,6 @@ export const CAMPAIGN_REGIONAL_ACTIONS = Object.freeze([
   'setCampaignRegionalGraph',
   'setRegionalImpactStatus',
   'ignoreQueuedRegionalImpact',
-  'advanceCampaignRegionalImpacts',
   'applyQueuedRegionalImpact',
   'resolveRegionalImpact',
   'applyAllQueuedRegionalImpacts',
