@@ -91,10 +91,10 @@ describe('the party link honours the veil on the client (row (d))', () => {
     expect(linked.shareDm).toBe(false);
     const printed = JSON.stringify(linked.settlement);
     expect(printed).toContain('Ada Thorne');
-    expect(printed).not.toContain('the vault');
-    expect(printed).not.toContain('a hook');
-    expect(printed).not.toContain('secret-text');
-    expect(printed).not.toContain('goal-text');
+    expect(printed).not.toContain('the vault'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+    expect(printed).not.toContain('a hook'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+    expect(printed).not.toContain('secret-text'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+    expect(printed).not.toContain('goal-text'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
   });
 
   it('R1: a revealDm member override never widens the players\' page', async () => {
@@ -110,8 +110,8 @@ describe('the party link honours the veil on the client (row (d))', () => {
     expect(linked.shareDm).toBe(false);
     const printed = JSON.stringify(linked.settlement);
     expect(printed).toContain('Ada Thorne');
-    expect(printed).not.toContain('npc_1-secret-text');
-    expect(printed).not.toContain('npc_1-goal-text');
+    expect(printed).not.toContain('npc_1-secret-text'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
+    expect(printed).not.toContain('npc_1-goal-text'); // anchored: `printed` is pinned to hold the live card ('Ada Thorne') just above
   });
 });
 
