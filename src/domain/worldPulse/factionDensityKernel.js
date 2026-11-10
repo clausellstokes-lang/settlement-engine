@@ -476,7 +476,7 @@ function cadenceReady(powerStructure, tick) {
  * until then the estate's own shipped answer to "a house mints with a member" is used
  * rather than a lesser private one.
  *
- * @param {{sid: string, tier: string|null|undefined, house: string, tick: number}} a
+ * @param {{sid: string, tier: string|null|undefined, house: string, tick: number, powerRow: unknown}} a
  * @returns {Record<string, unknown>}
  */
 function foundingMemberForEmergence({ sid, tier, house, tick, powerRow }) {
@@ -654,7 +654,8 @@ function applyCadence(fresh, ctx) {
       moved += 1;
       const held = membershipsOf(npc);
       const already = held.some((m) => m.power === intoName);
-      const memberships = held.flatMap((m) => (m.power !== folding ? [m] : already ? [] : [membershipInPower(into)]));
+      /** @typedef {import('../people/membership.js').Membership | ReturnType<typeof membershipInPower>} FoldedMembership */
+      const memberships = held.flatMap((m) => /** @type {FoldedMembership[]} */ (m.power !== folding ? [m] : already ? [] : [membershipInPower(into)]));
       return { ...npc, memberships };
     });
     return {
