@@ -1,6 +1,18 @@
 -- ════════════════════════════════════════════════════════════════════════════
 -- 210 — the public dossier carries the owner's composed blocks as text (publicProse)
 -- ════════════════════════════════════════════════════════════════════════════
+-- AMENDED BEFORE FIRST APPLY by the pre-deploy review of 2026-11-10 (finding 4; the chair's
+--   ruling R5): THE NAME MASK WALKS THE DOCUMENT. 206/207's mask was `replace` over the whole
+--   JSON TEXT, so a hidden power named `true`, `null`, `1`, a single space or `{` raised
+--   (`invalid input syntax for type json`: every public read of that town, and get_gallery_map
+--   for its campaign, failed), a name equal to a key (`name`, `id`, `text`) rewrote the key,
+--   and a substring hit the settlement's own name. This body — the last restatement of the
+--   function, which therefore carries the corrected mask for 206 and 207 — masks inside
+--   string VALUES only, by walking the document: never a key, never the settlement's own
+--   top-level `name`; an empty or whitespace-only name is skipped; and the removal of a row
+--   stamped hidden moved OUTSIDE the name check, so a hidden row whose `faction` is missing
+--   or empty leaves too. Client twin: publicSafe.js :: publicVeilPass, field for field.
+--   Pinned by execution: tests/security/gallerySanitizer.pglite.test.js (R5).
 -- THE CAUSE. STYLE-RULINGS-2 B10(a), lane SW-B7b PROJECTION; the chair's ruling of 2026-11-09 12:5x on the
 -- owner's word ("I leave all judgement to you for any decision you deferred to me since my last prompt"):
 -- the paid-surface gate (§885.3, publicDossier ⇒ no state prose) is LIFTED for the gallery page and the
@@ -43,6 +55,10 @@ declare
   hidden_names text[];
   veiled_ids text[];
   txt text;
+  -- R5 (2026-11-10): the mask's walk — one string leaf at a time
+  leaf_path text[];
+  leaf_text text;
+  masked text;
   -- ══ PUBLIC TOP-LEVEL ALLOWLIST ══
   -- Character-identical (order-independent) to publicSafe.js PUBLIC_TOPLEVEL_KEYS.
   -- tests/security/gallerySanitizeAllowlist.contract.test.js parses the NET-CURRENT
@@ -176,7 +192,7 @@ begin
                                        then value -> 'powerStructure' -> 'factions' else '[]'::jsonb end) as f(row)
              cross join lateral (values (row ->> 'faction')) as n(nm)
        where jsonb_typeof(row) = 'object' and (row -> 'hidden') = 'true'::jsonb
-         and nm is not null and nm <> '';
+         and nm is not null and nm ~ '[^[:space:]]';
       select coalesce(array_agg(n ->> 'id'), '{}') into veiled_ids
         from jsonb_array_elements(case when jsonb_typeof(value -> 'npcs') = 'array'
                                        then value -> 'npcs' else '[]'::jsonb end) as t(n)
@@ -217,17 +233,18 @@ begin
                         and ((r ? 'captureState') or (r ->> 'type') = 'corrupted'), false)));
         end if;
       end if;
+      -- the hidden power's own row leaves the powers (another row naming it — a niche contest, a
+      -- description — keeps its key and has the name masked below). R5 (2026-11-10): OUTSIDE the
+      -- name check, so a row stamped hidden whose `faction` is missing or empty leaves too.
+      if jsonb_typeof(out -> 'powerStructure' -> 'factions') = 'array' then
+        out := jsonb_set(out, '{powerStructure,factions}', (
+          select coalesce(jsonb_agg(f order by ord), '[]'::jsonb)
+            from jsonb_array_elements(out -> 'powerStructure' -> 'factions') with ordinality as t(f, ord)
+           where not coalesce(jsonb_typeof(f) = 'object'
+                      and (coalesce((f -> 'hidden') = 'true'::jsonb, false)
+                           or coalesce((f ->> 'faction') = any(hidden_names), false)), false)));
+      end if;
       if coalesce(array_length(hidden_names, 1), 0) > 0 then
-        -- the hidden power's own row leaves the powers (another row naming it — a niche contest, a
-        -- description — keeps its key and has the name masked below)
-        if jsonb_typeof(out -> 'powerStructure' -> 'factions') = 'array' then
-          out := jsonb_set(out, '{powerStructure,factions}', (
-            select coalesce(jsonb_agg(f order by ord), '[]'::jsonb)
-              from jsonb_array_elements(out -> 'powerStructure' -> 'factions') with ordinality as t(f, ord)
-             where not coalesce(jsonb_typeof(f) = 'object'
-                        and (coalesce((f -> 'hidden') = 'true'::jsonb, false)
-                             or coalesce((f ->> 'faction') = any(hidden_names), false)), false)));
-        end if;
         -- every conflict whose parties name a hidden power, at both homes
         foreach key in array array['conflicts', 'powerStructure.conflicts'] loop
           if jsonb_typeof(out #> string_to_array(key, '.')) = 'array' then
@@ -260,12 +277,36 @@ begin
                 from jsonb_array_elements(out -> key) with ordinality as t(e, eo)));
           end if;
         end loop;
-        -- last: the name anywhere else a public string (a value, or a key) carries it, masked. The search string is
-        -- the name's JSON-escaped body (to_jsonb(name) without its quotes), so the replacement
-        -- happens only inside string text and the result is valid JSON by construction (the
-        -- replacement holds no character JSON escapes).
-        foreach txt in array hidden_names loop
-          out := replace(out::text, substr(to_jsonb(txt)::text, 2, length(to_jsonb(txt)::text) - 2), 'an unseen interest')::jsonb;
+        -- last: the name anywhere else a public string VALUE carries it, masked. R5 (2026-11-10): the
+        -- document is WALKED — every string leaf, at any depth, by its path — and each leaf is masked
+        -- as text and set back as a JSON string; a key is never touched, nor the settlement's own
+        -- top-level `name`. (206/207 replaced over the JSON text, which raised on a name matching
+        -- text outside a string and rewrote a key equal to a name.)
+        for leaf_path, leaf_text in
+          with recursive walk(p, v) as (
+            select array[]::text[], out
+            union all
+            select w.p || e.k, e.v
+              from walk w
+              cross join lateral (
+                select o.key as k, o.value as v
+                  from jsonb_each(case when jsonb_typeof(w.v) = 'object' then w.v else '{}'::jsonb end) as o
+                union all
+                select (a.ord - 1)::text, a.el
+                  from jsonb_array_elements(case when jsonb_typeof(w.v) = 'array' then w.v else '[]'::jsonb end)
+                       with ordinality as a(el, ord)
+              ) as e
+          )
+          select p, v #>> '{}' from walk
+           where jsonb_typeof(v) = 'string' and p is distinct from array['name']
+        loop
+          masked := leaf_text;
+          foreach txt in array hidden_names loop
+            masked := replace(masked, txt, 'an unseen interest');
+          end loop;
+          if masked is distinct from leaf_text then
+            out := jsonb_set(out, leaf_path, to_jsonb(masked));
+          end if;
         end loop;
       end if;
     end if;

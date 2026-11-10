@@ -320,7 +320,8 @@ function hiddenPowerNamesOf(settlement) {
     if (!row || typeof row !== 'object' || Array.isArray(row)) continue;
     const power = /** @type {Record<string, unknown>} */ (row);
     if (power.hidden !== true) continue;
-    if (typeof power.faction === 'string' && power.faction) names.add(power.faction);
+    // R5 (2026-11-10): an empty or whitespace-only name masks nothing (the SQL's `nm ~ '[^[:space:]]'`).
+    if (typeof power.faction === 'string' && /\S/.test(power.faction)) names.add(power.faction);
   }
   return [...names];
 }
@@ -341,17 +342,19 @@ function veiledCardIdsOf(settlement) {
 const maskText = (text, names) => names.reduce((t, name) => t.split(name).join(HIDDEN_POWER_MASK), text);
 
 /**
- * Every string — value AND key, as the SQL's text-level replace reaches both — with each hidden
- * name masked.
- * @param {unknown} value @param {string[]} names @returns {unknown}
+ * Every string VALUE, at any depth, with each hidden name masked — never a key, and never the
+ * settlement's own top-level `name` (R5, the pre-deploy review of 2026-11-10, finding 4: the SQL's
+ * mask was a replace over the JSON text, which raised on a name matching text outside a string and
+ * rewrote a key equal to a name; the SQL in 210 now walks the string leaves, and this is its twin).
+ * @param {unknown} value @param {string[]} names @param {boolean} [isRoot] @returns {unknown}
  */
-function maskHiddenNames(value, names) {
+function maskHiddenNames(value, names, isRoot = false) {
   if (typeof value === 'string') return maskText(value, names);
   if (Array.isArray(value)) return value.map((v) => maskHiddenNames(v, names));
   if (value && typeof value === 'object') {
     /** @type {Record<string, unknown>} */
     const out = {};
-    for (const [k, v] of Object.entries(value)) out[maskText(k, names)] = maskHiddenNames(v, names);
+    for (const [k, v] of Object.entries(value)) out[k] = isRoot && k === 'name' ? v : maskHiddenNames(v, names);
     return out;
   }
   return value;
@@ -387,12 +390,14 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
     if (Array.isArray(ps.factions)) ps.factions = ps.factions.map((/** @type {Record<string, unknown>} */ f) => { if (!isRow(f) || !Object.hasOwn(f, 'captureState')) return f; const { captureState: _drop, ...rest } = f; return rest; });
     if (Array.isArray(ps.factionRelationships)) ps.factionRelationships = ps.factionRelationships.filter((/** @type {Record<string, unknown>} */ r) => !(isRow(r) && (Object.hasOwn(r, 'captureState') || r.type === 'corrupted')));
   }
-  if (!hiddenNames.length) return pub;
   /** @type {Set<unknown>} */
   const hidden = new Set(hiddenNames);
+  // R5 (2026-11-10): a row stamped hidden leaves whatever its `faction` (missing or empty included),
+  // so the removal sits OUTSIDE the name check, as in 210.
   if (isRow(ps) && Array.isArray(ps.factions)) {
     ps.factions = ps.factions.filter((f) => !(isRow(f) && (f.hidden === true || hidden.has(f.faction))));
   }
+  if (!hiddenNames.length) return pub;
   /** @param {unknown[]} list a conflicts array of the public JSON (the caller checked Array.isArray) */
   const dropConflicts = (list) => list.filter((c) => !(isRow(c) && Array.isArray(c.parties) && c.parties.some((p) => hidden.has(p))));
   if (Array.isArray(pub.conflicts)) pub.conflicts = dropConflicts(pub.conflicts);
@@ -406,7 +411,7 @@ function publicVeilPass(pub, hiddenNames, veiledIds) {
     if (Array.isArray(pub[key])) pub[key] = pub[key].map(dropStakes);
     else if (isRow(pub[key])) pub[key] = dropStakes(pub[key]);
   }
-  return /** @type {Record<string, unknown>} */ (maskHiddenNames(pub, hiddenNames));
+  return /** @type {Record<string, unknown>} */ (maskHiddenNames(pub, hiddenNames, true));
 }
 
 /**

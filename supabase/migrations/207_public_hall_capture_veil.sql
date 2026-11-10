@@ -1,6 +1,13 @@
 -- ════════════════════════════════════════════════════════════════════════════
 -- 207 — the public dossier projection drops the hall-capture state (J-20)
 -- ════════════════════════════════════════════════════════════════════════════
+-- AMENDED BEFORE FIRST APPLY by the pre-deploy review of 2026-11-10 (finding 4; the chair's
+--   ruling R5): this file's hidden-power name mask (`replace` over the JSON text) raises on a
+--   name matching text outside a string and rewrites a key equal to a name. The body here is
+--   left as written — later restatements of _gallery_sanitize_public_json replace it at apply —
+--   and 210, the last restatement, carries the corrected mask (a walk over string values;
+--   never a key, never the settlement's own top-level name; an empty or whitespace-only name
+--   skipped; the hidden-row removal outside the name check).
 -- THE CAUSE. ALLEGIANCE-CAR1 measured `powerStructure.criminalCaptureState` ON the public page in
 -- 1,000 of 1,000 soak towns and 525 of 525 golden rows (J-20, pre-existing). ALLEGIANCE-CAR2 derives
 -- that state from the ruling three's HIDDEN allegiances (src/domain/people/hallCapture.js, J-13), so on

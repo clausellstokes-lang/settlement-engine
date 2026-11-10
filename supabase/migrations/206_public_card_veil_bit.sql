@@ -2,6 +2,13 @@
 -- 206 — the public dossier projection reads the card's veil bit: a face's house is
 --       public where `institution.veiled` is false, stripped where it is true or absent
 -- ════════════════════════════════════════════════════════════════════════════
+-- AMENDED BEFORE FIRST APPLY by the pre-deploy review of 2026-11-10 (finding 4; the chair's
+--   ruling R5): this file's hidden-power name mask (`replace` over the JSON text) raises on a
+--   name matching text outside a string and rewrites a key equal to a name. The body here is
+--   left as written — later restatements of _gallery_sanitize_public_json replace it at apply —
+--   and 210, the last restatement, carries the corrected mask (a walk over string values;
+--   never a key, never the settlement's own top-level name; an empty or whitespace-only name
+--   skipped; the hidden-row removal outside the name check).
 -- THE CAUSE. FIX-EXPORT-KEYS (docs/FIX_EXPORT_KEYS_2026-11-07.md §3) found that a people
 -- car face's `title` and `role` were ALREADY public: the car sets both to the face's
 -- title, so a card minted for a HIDDEN power (the stress infiltrator, "Its presence is

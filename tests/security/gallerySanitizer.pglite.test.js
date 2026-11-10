@@ -549,3 +549,97 @@ describe('206 (second seat) — the hidden power is not public, and a veiled fac
     for (const n of born) expect(n.id).toMatch(/^npc_veiled_[0-9a-f]{16}(_\d+)?$/);
   }, 120_000);
 });
+
+// ── R5 (VEIL-FIX, the pre-deploy review of 2026-11-10, finding 4): THE NAME MASK WALKS THE DOCUMENT ──
+// 206/207/210 masked a hidden power's name by `replace` over the JSON TEXT, so a name that matched
+// text outside a string raised (`true`, `null`, `1`, a single space, `{`) and a name equal to a key
+// rewrote the key (`name`, `id`, `text`); a substring hit the settlement's own name; and a row
+// stamped hidden with no `faction` stayed public, its description and all. 210 (the last restatement)
+// now masks inside string VALUES only by walking the document — never a key, never the settlement's
+// own top-level `name` — skips an empty or whitespace-only name, and removes every row stamped
+// hidden whatever its `faction`. The client twin (publicSafe.js :: publicVeilPass) holds field for field.
+describe('R5 — the hidden-power name mask walks string values (pglite + the client twin)', () => {
+  let mdb;
+  const sanitizeM = async (obj) =>
+    (await mdb.query(`select public._gallery_sanitize_public_json($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;
+  const town = (hiddenName, extra = {}) => ({
+    name: 'Riverbend', id: 'set-1', tier: 'town',
+    powerStructure: {
+      factions: [
+        { faction: 'Elder Council', power: 40, seats: 11, vacancy: null, isGoverning: true, desc: `They watch ${hiddenName} closely.` },
+        { faction: hiddenName, power: 15, hidden: true, desc: 'Its presence is not known to the settlement.' },
+      ],
+    },
+    thesis: { text: `A town where ${hiddenName} is whispered of.`, id: 'thesis-1', name: 'the thesis' },
+    ...extra,
+  });
+
+  beforeAll(async () => {
+    mdb = new PGlite();
+    await mdb.exec('create schema if not exists public;');
+    await mdb.exec(SANITIZER.sql);
+  }, PGLITE_BOOT_TIMEOUT_MS);
+
+  const clientOf = async (rec) => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    return JSON.parse(JSON.stringify(toPublicSafe(rec)));
+  };
+
+  for (const raising of ['true', 'null', '1', ' ', '{']) {
+    it(`a hidden power named ${JSON.stringify(raising)} never raises; the row leaves; client == server`, async () => {
+      const rec = town(raising);
+      const out = await sanitizeM(rec);
+      expect(out.name).toBe('Riverbend');
+      expect(out.powerStructure.factions.map((f) => f.faction)).toEqual(['Elder Council']);
+      // anchored: the open row is asserted present on the line above
+      expect(JSON.stringify(out)).not.toContain('Its presence is not known');
+      expect(await clientOf(rec)).toEqual(out);
+    });
+  }
+
+  it('a whitespace-only name masks nothing (the space between words survives)', async () => {
+    const out = await sanitizeM(town(' '));
+    expect(out.thesis.text).toBe('A town where   is whispered of.');
+    expect(out.powerStructure.factions[0].desc).toBe('They watch   closely.');
+  });
+
+  it('a non-raising name is still masked inside string values', async () => {
+    const out = await sanitizeM(town('true'));
+    expect(out.thesis.text).toBe('A town where an unseen interest is whispered of.');
+  });
+
+  for (const keyName of ['name', 'id', 'text']) {
+    it(`a hidden power named ${JSON.stringify(keyName)} rewrites no key; client == server`, async () => {
+      const rec = town(keyName);
+      const out = await sanitizeM(rec);
+      expect(out.name).toBe('Riverbend');
+      expect(out.id).toBe('set-1');
+      expect(Object.keys(out.thesis).sort()).toEqual(['id', 'name', 'text']);
+      expect(Object.keys(out)).not.toContain('an unseen interest'); // anchored: out.name and out.id are asserted present just above
+      expect(out.thesis.text).toBe('A town where an unseen interest is whispered of.');
+      expect(await clientOf(rec)).toEqual(out);
+    });
+  }
+
+  it("the settlement's own top-level name is never masked (a hidden power that is its substring); client == server", async () => {
+    const rec = town('The Independent Bloc', { name: 'The Independent Bloc Hall' });
+    const out = await sanitizeM(rec);
+    expect(out.name).toBe('The Independent Bloc Hall');
+    expect(out.thesis.text).toBe('A town where an unseen interest is whispered of.');
+    expect(await clientOf(rec)).toEqual(out);
+  });
+
+  it('a row stamped hidden with a missing or empty faction leaves the public JSON; client == server', async () => {
+    const rec = {
+      name: 'Riverbend',
+      powerStructure: { factions: [
+        { faction: 'Elder Council', power: 40 },
+        { hidden: true, power: 9, desc: 'A faceless ring nobody names.' },
+        { faction: '', hidden: true, power: 7, desc: 'An empty-named cell.' },
+      ] },
+    };
+    const out = await sanitizeM(rec);
+    expect(out.powerStructure.factions).toEqual([{ faction: 'Elder Council', power: 40 }]);
+    expect(await clientOf(rec)).toEqual(out);
+  });
+});
