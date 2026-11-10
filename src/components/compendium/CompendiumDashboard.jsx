@@ -46,7 +46,7 @@ const TILE_H = 320;
 // THE SCRIM: ink at 0.80 over the painting. Measured: regal gold (gold-400, #D9B566) on the
 // scrim over the painting's brightest possible pixel (pure white) is 5.02:1 — AA at the
 // worst region of every tile. The launch tile's scrim is the launch ground's deepest stop.
-// Both are the house color-mix idiom over the existing tokens (theme.js :: EDITOR_GROUND),
+// Both are the house color-mix idiom over the existing tokens (the editor's ground in theme.js),
 // never a translucent literal: INK is ink-900 (#1B1408) and launch-900 is #1C1540, so they
 // render the same pixels the two translucent literals did (ink at 0.80, launch-900 at 0.86).
 const SCRIM = `color-mix(in srgb, ${INK} 80%, transparent)`;
