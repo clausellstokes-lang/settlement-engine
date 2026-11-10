@@ -25,6 +25,15 @@
  * seeds are quoted forever; changing a config or seed re-derives a different
  * settlement and the teaser must be re-matched.
  *
+ * ⛔ AND THE PROMISE IS TO THE VISITOR'S TOWN, NOT ONLY THE CANONICAL ONE (the chair's
+ * ruling N8, 2026-11-10, on the owner's word of that day: "regeenrate mossgate, cnocby,
+ * and black crag vwith the updated system"). "Visit" forks with a seed suffixed by who
+ * is forking, so a clause the canonical seed carries and the forks do not is broken for
+ * nearly every visitor. Every clause of a teaser and every tag holds in at least 19 of
+ * 20 forks at the card's own dials, or is pinned by a real wizard dial, or leaves the
+ * card. tests/data/foundingWorldBones.test.js generates the canonical seed and twenty
+ * forks of each card and holds every promise to that line.
+ *
  * Each sample carries:
  *   - id        — stable identifier (used by the fork action)
  *   - name      — display name shown on the card
@@ -106,7 +115,7 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Black Crag',
     tier:    'city',
     terrain: 'mountain',
-    teaser:  'A mountain city built on iron, ruled by its guild-masters, whose mines now give up too little ore.',
+    teaser:  'A mountain city built on iron, where the merchant guilds hold power and the mines now give up too little ore.',
     tags:    ['Industrial', 'Guild power', 'Dwindling resource'],
     config: {
       settType:         'city',
@@ -136,8 +145,13 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
       // guild-masters" was no longer true of it. The hunt ran under this SAME
       // config, blackcrag-017 upward, and blackcrag-045 (the 29th tried) is the
       // first to carry every bone: a "Merchant Guild Council" governs, iron
-      // depleted, a Mine and a Smelter, "Iron ore (local mines exhausted)". The
-      // teaser did not change. A fork saved from the old seed keeps its own `_seed`
+      // depleted, a Mine and a Smelter, "Iron ore (local mines exhausted)". THEN THE
+      // TEASER WAS RE-MATCHED (N8, the same day): the guild government held in 1 of
+      // 20 FORKS at this config, and no dial pins a governing power, so "ruled by its
+      // guild-masters" left the card for what the forks carry: the Merchant Guilds as
+      // a power (20/20) and "Iron ore (local mines exhausted)" (20/20). The old
+      // sentence, verbatim, is kept in docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md.
+      // A fork saved from the old seed keeps its own `_seed`
       // and its `_forkedFromSample: 'sample-blackcrag'`; nothing reads this seed
       // after the fork. tests/data/foundingWorldBones.test.js holds every card's bones.
       seed:                  'blackcrag-045',

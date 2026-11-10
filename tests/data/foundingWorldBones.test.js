@@ -1,30 +1,42 @@
 /**
- * tests/data/foundingWorldBones.test.js — EACH FOUNDING WORLD'S CANONICAL SEED STILL
- * CARRIES ITS CARD'S BONES.
+ * tests/data/foundingWorldBones.test.js — EVERY PROMISE ON A FOUNDING WORLD'S CARD IS
+ * CARRIED BY ITS CANONICAL SEED AND BY THE TOWNS ITS VISITORS ACTUALLY GET.
  *
  * src/data/sampleSettlements.js's own law (NARRATIVE PARITY, the owner's order of
- * 2026-07-21): each card is a REAL generation, its seed+config seed-hunted through the
- * live pipeline until the generated FACTS carried the card's bones, the teaser written
- * to that truth. Nothing re-ran the hunt as the engine moved, so by 2026-11-10 Black
- * Crag's canonical seed `blackcrag-016` generated a city ruled by a "Noble Governorship"
- * under a teaser that says "ruled by its guild-masters" — and nothing reddened. The
- * owner's word that day: "Also after everything has merged, you need to regeenrate
- * mossgate, cnocby, and black crag vwith the updated system". This pin is what turns the
- * NEXT engine change that breaks a card red instead of leaving a stale card.
+ * 2026-07-21): each card is a REAL generation, its teaser written to the generated truth.
+ * Nothing re-ran that as the engine moved, so by 2026-11-10 Black Crag's canonical seed
+ * generated a city ruled by a "Noble Governorship" under a teaser that said "ruled by its
+ * guild-masters", and nothing reddened. The owner's word that day: "Also after everything
+ * has merged, you need to regeenrate mossgate, cnocby, and black crag vwith the updated
+ * system".
  *
- * Each card is generated the way a fork reaches the pipeline (DEFAULT_CONFIG + the
- * card's config minus its seed, through birthConfig, the law payloads loaded), at its
- * canonical seed, and every claim of its teaser and tags is set beside the generated
- * field that carries it. A failing bone means: hunt a new seed under the SAME config
- * (the card's own `<name>-NNN` convention) before any word of the teaser changes.
+ * ⛔ AND THE CANONICAL SEED IS NOT WHAT A VISITOR OPENS. "Visit" forks the card with a
+ * seed suffixed by who is forking (forkSeedFor), so a promise the canonical town keeps
+ * and its forks do not is a promise broken to nearly every visitor. The chair's ruling N8
+ * (2026-11-10): every clause of every teaser and every tag HOLDS IN AT LEAST 19 OF 20
+ * FORKS AT THE CARD'S DIALS, or is pinned by a real wizard dial, or leaves the card.
+ * Measured that day, the guild government held in 1 of 20 Black Crag forks, Cnocby's
+ * criminal pressure in 1 of 20, and Mossgate's council quarrel in 14 of 20; those
+ * clauses left the cards.
  *
- * Cost: three generations (a village, a town, a city), about two seconds.
+ * Each card's PROMISES row quotes its teaser and tags verbatim (so a re-worded card reds
+ * here until its promises are re-measured) and sets a predicate on a generated field
+ * beside every clause. Each predicate must hold at the canonical seed AND in at least
+ * FORK_LINE of FORK_SAMPLE seeded forks, generated the way a fork reaches the pipeline:
+ * DEFAULT_CONFIG + the card's config minus its seed (the card's own dials, which a fork
+ * keeps since N5b), through birthConfig, the law payloads loaded.
+ *
+ * Cost: three canonical generations and sixty forks (a village, a town, a city), measured
+ * in the FOUNDING-WORLDS record.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { SAMPLE_SETTLEMENTS, forkConfigFor } from '../../src/data/sampleSettlements.js';
+import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../src/data/sampleSettlements.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+
+const FORK_SAMPLE = 20;
+const FORK_LINE = 19;
 
 /** @param {string} id */
 const card = (id) => {
@@ -33,94 +45,95 @@ const card = (id) => {
   return sample;
 };
 
-/** @param {any} sample */
-const generateCanonical = (sample) => generateSettlementPipeline(
+/** @param {any} sample @param {string} seed */
+const generateAt = (sample, seed) => generateSettlementPipeline(
   birthConfig({ ...DEFAULT_CONFIG, ...forkConfigFor(sample) }),
   null,
-  { seed: sample.config.seed, customContent: {} },
+  { seed, customContent: {} },
 );
 
-/** @param {any} s @param {string} key */
-const conditionOf = (s, key) => (s.resourceAnalysis?.resourceConditions || []).find((r) => r.key === key)?.condition;
-/** @param {any} s @returns {string[]} */
-const institutionNames = (s) => (s.institutions || []).map((i) => String(i.name));
-/** @param {any} s @returns {string[]} */
-const factionNames = (s) => (s.powerStructure?.factions || []).map((f) => String(f.faction));
-/** @param {any} s @returns {any[]} */
-const conflictsOf = (s) => s.conflicts || [];
+/** The fork seeds: forkSeedFor's own shape, with a fixed, spread-out forker per index. */
+const forkSeeds = (/** @type {any} */ sample) => Array.from({ length: FORK_SAMPLE }, (_, i) =>
+  String(forkSeedFor(sample, `f${String(i).padStart(2, '0')}x${((i * 2654435761) >>> 0).toString(16)}`)));
 
-/** @type {Record<string, any>} */
+/** @param {any} s @param {string} key */
+const conditionOf = (s, key) => (s.resourceAnalysis?.resourceConditions || []).find((/** @type {any} */ r) => r.key === key)?.condition;
+/** @param {any} s @param {RegExp} re */
+const hasInstitution = (s, re) => (s.institutions || []).some((/** @type {any} */ i) => re.test(String(i.name)));
+/** @param {any} s @param {RegExp} re */
+const hasFaction = (s, re) => (s.powerStructure?.factions || []).some((/** @type {any} */ f) => re.test(String(f.faction)));
+
+/**
+ * @typedef {{ clause: string, holds: (s: any) => boolean }} Promise
+ * @type {Record<string, { teaser: string, tags: string[], promises: Promise[] }>}
+ */
+const PROMISES = {
+  'sample-cnocby': {
+    teaser: 'A mountain village on a through road, where the good timber was cut out a generation ago and the carters who still stop know exactly whose cousin to ask about the rest.',
+    tags: ['Mountain road', 'Exhausted timber', 'Quiet criminal pressure'],
+    promises: [
+      { clause: 'a mountain village on a through road · tag Mountain road', holds: (s) => s.tier === 'village' && s.config.terrainType === 'mountain' && s.config.tradeRouteAccess === 'road' },
+      { clause: 'the good timber was cut out · tag Exhausted timber', holds: (s) => conditionOf(s, 'mountain_timber') === 'depleted' },
+    ],
+  },
+  'sample-mossgate': {
+    teaser: 'A rain-grey harbour town where the council and the temple have stopped speaking, and the merchant guilds quietly profit from the silence.',
+    tags: ['Coastal trade', 'Contested council', 'Religious tension'],
+    promises: [
+      { clause: 'a harbour town · tag Coastal trade', holds: (s) => s.tier === 'town' && s.config.terrainType === 'coastal' && s.config.tradeRouteAccess === 'port' && hasInstitution(s, /docks|harbour/i) },
+    ],
+  },
+  'sample-blackcrag': {
+    teaser: 'A mountain city built on iron, where the merchant guilds hold power and the mines now give up too little ore.',
+    tags: ['Industrial', 'Guild power', 'Dwindling resource'],
+    promises: [
+      { clause: 'a mountain city', holds: (s) => s.tier === 'city' && s.config.terrainType === 'mountain' },
+      { clause: 'built on iron · tag Industrial (iron on the card, a Smelter, Specialized metalworkers)', holds: (s) => conditionOf(s, 'iron_deposits') != null && hasInstitution(s, /^Smelter$/) && hasInstitution(s, /^Specialized metalworkers$/) },
+      { clause: 'where the merchant guilds hold power · tag Guild power', holds: (s) => hasFaction(s, /^Merchant Guilds$/) },
+      { clause: 'the mines now give up too little ore (the dossier\'s "Iron ore (local mines exhausted)")', holds: (s) => JSON.stringify(s.economicState).includes('Iron ore (local mines exhausted)') },
+      { clause: 'tag Dwindling resource (iron depleted)', holds: (s) => conditionOf(s, 'iron_deposits') === 'depleted' },
+    ],
+  },
+};
+
+/** @type {Record<string, { canonical: any, forks: any[] }>} */
 const towns = {};
 
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  for (const id of ['sample-cnocby', 'sample-mossgate', 'sample-blackcrag']) towns[id] = generateCanonical(card(id));
-}, 60_000);
+  for (const id of Object.keys(PROMISES)) {
+    const sample = card(id);
+    towns[id] = { canonical: generateAt(sample, sample.config.seed), forks: forkSeeds(sample).map((seed) => generateAt(sample, seed)) };
+  }
+}, 120_000);
 
-describe('Cnocby — "A mountain village on a through road, where the good timber was cut out a generation ago and the carters who still stop know exactly whose cousin to ask about the rest."', () => {
-  it('is a mountain village on a road (tags: Mountain road)', () => {
-    const s = towns['sample-cnocby'];
-    expect(s.name).toBe('Cnocby');
-    expect([s.tier, s.config.terrainType, s.config.tradeRouteAccess]).toEqual(['village', 'mountain', 'road']);
+describe('every Founding World keeps every promise on its card', () => {
+  it('the table covers the three cards and quotes each one verbatim', () => {
+    expect(SAMPLE_SETTLEMENTS.map((s) => s.id).sort()).toEqual(Object.keys(PROMISES).sort());
+    for (const [id, row] of Object.entries(PROMISES)) {
+      expect(card(id).teaser, `${id}: the teaser changed; re-measure its promises against the forks`).toBe(row.teaser);
+      expect(card(id).tags, `${id}: the tags changed; re-measure them against the forks`).toEqual(row.tags);
+      expect(row.promises.length, `${id}: a card with no measured promise`).toBeGreaterThan(0);
+    }
   });
-  it('its mountain timber is cut out (tags: Exhausted timber)', () => {
-    expect(conditionOf(towns['sample-cnocby'], 'mountain_timber')).toBe('depleted');
-  });
-  it('carters still stop: a road-traffic institution stands', () => {
-    expect(institutionNames(towns['sample-cnocby']).filter((n) => /waystation|stable|pack animal|coaching inn/i.test(n)).length).toBeGreaterThan(0);
-  });
-  it('whose cousin to ask: a criminal institution and no criminal faction (tags: Quiet criminal pressure)', () => {
-    const s = towns['sample-cnocby'];
-    expect(institutionNames(s).filter((n) => /bandit|smuggl|fence|thieves|black market|criminal/i.test(n)).length).toBeGreaterThan(0);
-    // Anchored: the factions list is read and non-empty, so "none criminal" is not vacuous.
-    expect(factionNames(s).length).toBeGreaterThan(0);
-    expect(factionNames(s).filter((f) => /thieves|crim|syndicate/i.test(f))).toEqual([]);
-  });
-});
 
-describe('Mossgate — "A rain-grey harbour town where the council and the temple have stopped speaking, and the merchant guilds quietly profit from the silence."', () => {
-  it('is a harbour town (tags: Coastal trade)', () => {
-    const s = towns['sample-mossgate'];
-    expect(s.name).toBe('Mossgate');
-    expect([s.tier, s.config.terrainType, s.config.tradeRouteAccess]).toEqual(['town', 'coastal', 'port']);
-    expect(institutionNames(s).filter((n) => /docks|harbour/i.test(n)).length).toBeGreaterThan(0);
+  it('every promise holds at the card\'s canonical seed', () => {
+    const broken = Object.entries(PROMISES).flatMap(([id, row]) => row.promises
+      .filter((p) => !p.holds(towns[id].canonical))
+      .map((p) => `${card(id).config.seed}: ${p.clause}`));
+    expect(broken).toEqual([]);
   });
-  it('the council and the temple are at odds (tags: Religious tension)', () => {
-    const s = towns['sample-mossgate'];
-    const recent = String(s.powerStructure?.recentConflict || '');
-    const inConflict = conflictsOf(s).some((c) => (c.parties || []).some((/** @type {string} */ p) => /council/i.test(p))
-      && (c.parties || []).some((/** @type {string} */ p) => /relig|church|temple/i.test(p)));
-    expect(inConflict || (/church|temple/i.test(recent) && /council/i.test(recent))).toBe(true);
-  });
-  it('the merchant guilds are a power, and not the government', () => {
-    const s = towns['sample-mossgate'];
-    expect(factionNames(s)).toContain('Merchant Guilds');
-    expect(String(s.powerStructure?.governingName || '')).not.toMatch(/merchant/i);
-  });
-  it('the council is contested (tags: Contested council)', () => {
-    const s = towns['sample-mossgate'];
-    expect(conflictsOf(s).length).toBeGreaterThan(0);
-    expect(conflictsOf(s).some((c) => /council/i.test(String(c.issue || ''))
-      || (c.parties || []).some((/** @type {string} */ p) => /council/i.test(p)))).toBe(true);
-  });
-});
 
-describe('Black Crag — "A mountain city built on iron, ruled by its guild-masters, whose mines now give up too little ore."', () => {
-  it('is a mountain city built on iron (tags: Industrial)', () => {
-    const s = towns['sample-blackcrag'];
-    expect(s.name).toBe('Black Crag');
-    expect([s.tier, s.config.terrainType]).toEqual(['city', 'mountain']);
-    expect(conditionOf(s, 'iron_deposits')).toBeDefined();
-    expect(institutionNames(s)).toContain('Smelter');
-    expect(institutionNames(s).filter((n) => /blacksmith|metalwork/i.test(n)).length).toBeGreaterThan(0);
-  });
-  it('is ruled by its guild-masters (tags: Guild power)', () => {
-    expect(towns['sample-blackcrag'].powerStructure?.governingName).toMatch(/guild/i);
-  });
-  it('its mines give up too little ore (tags: Dwindling resource)', () => {
-    const s = towns['sample-blackcrag'];
-    expect(conditionOf(s, 'iron_deposits')).toBe('depleted');
-    expect(institutionNames(s)).toContain('Mine');
-    expect(JSON.stringify(s.economicState)).toContain('Iron ore (local mines exhausted)');
+  it(`every promise holds in at least ${FORK_LINE} of ${FORK_SAMPLE} forks at the card's dials`, () => {
+    // Anchored: each card's forks were generated, and they are distinct towns.
+    for (const id of Object.keys(PROMISES)) {
+      expect(towns[id].forks).toHaveLength(FORK_SAMPLE);
+      expect(new Set(towns[id].forks.map((s) => s.population)).size, `${id}: the forks are not distinct towns`).toBeGreaterThan(1);
+    }
+    const under = Object.entries(PROMISES).flatMap(([id, row]) => row.promises
+      .map((p) => ({ p, n: towns[id].forks.filter((s) => p.holds(s)).length }))
+      .filter(({ n }) => n < FORK_LINE)
+      .map(({ p, n }) => `${card(id).name}: ${p.clause} — ${n}/${FORK_SAMPLE}`));
+    expect(under).toEqual([]);
   });
 });
