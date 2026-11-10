@@ -474,9 +474,11 @@ export const en = Object.freeze({
     },
     // The engine service's rate guard answered 429 (remote-path R3). A limit, not a fault:
     // waiting cures it, and no clock time is promised (the client cannot tell which window).
+    // "From here", not "you" (the chair's wording, 2026-11-10): a signed-out reader is metered
+    // by address, and behind a shared address other people can spend the limit.
     engineRateLimited: {
       rubric: 'Forge limit reached',
-      body:   'You have reached the limit on new settlements for now. Nothing went wrong; wait a while, then forge again.',
+      body:   'The forge has made as many settlements from here as it allows for now. Nothing went wrong; wait a while, then forge again.',
     },
     // The engine service could not be reached: a network failure, a server fault, or a build
     // with no service configured (remote-path R3). Nothing was lost; the connection first.

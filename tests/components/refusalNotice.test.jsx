@@ -259,6 +259,25 @@ describe('the lane records a reason for every gate it closes', () => {
     });
   }
 
+  // remote-path R3, the chair's condition on engineUnavailable's "nothing you had was lost":
+  // a failed forge or regenerate leaves the draft that was on the page exactly in place.
+  for (const code of ['engine_unavailable', 'engine_rate_limited']) {
+    test(`${code}: a failed forge over an existing draft leaves that draft in place`, async () => {
+      engine.run = vi.fn(async () => {
+        throw Object.assign(new Error(code), { code });
+      });
+      const store = makeStore({ tier: 'free', maxTier: 'capital' });
+      const draft = { name: 'Kept', tier: 'town', population: 1200, _seed: 'kept-seed' };
+      store.state.settlement = draft;
+      store.state.auth = { tier: 'free', user: { id: 'u-kept' } };
+      const before = JSON.stringify(draft);
+      await runLane(store);
+      expect(store.state.lastRefusal?.reason, 'the lane ran and refused').toBeTypeOf('string');
+      expect(store.state.settlement).toBe(draft);
+      expect(JSON.stringify(store.state.settlement)).toBe(before);
+    });
+  }
+
   test('a fresh attempt clears the previous reason', async () => {
     const store = makeStore({ settType: 'city', maxTier: 'town' });
     await runLane(store, undefined, { intent: GENERATION_INTENT_SAMPLE_FORK });
