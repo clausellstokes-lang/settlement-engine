@@ -643,3 +643,54 @@ describe('R5 — the hidden-power name mask walks string values (pglite + the cl
     expect(await clientOf(rec)).toEqual(out);
   });
 });
+
+// R10 (VEIL-FIX re-review, 2026-11-10): EVERY RESTATEMENT SOUND ALONE. 206, 207 and 210 each restate
+// _gallery_sanitize_public_json; a push that stops between files leaves whichever body applied last, and
+// a rollback re-applies an earlier one. So each file's OWN body carries the corrected mask and hidden-row
+// removal: the R5 cases run on all three bodies, each in its own database.
+describe('R10 — the corrected mask in every restatement (206, 207 and 210, each body alone)', () => {
+  const BODIES = ['206_public_card_veil_bit.sql', '207_public_hall_capture_veil.sql', '210_public_prose_text_projection.sql'];
+  /** @type {Record<string, PGlite>} */
+  const dbs = {};
+  beforeAll(async () => {
+    const re = /^create\s+or\s+replace\s+function\s+public\._gallery_sanitize_public_json\b[\s\S]*?\$\$;/igm;
+    for (const file of BODIES) {
+      const src = readFileSync(resolve(MIGRATIONS_DIR, file), 'utf-8');
+      const body = src.match(re);
+      if (!body || body.length !== 1) throw new Error(`${file}: expected exactly one sanitizer body`);
+      dbs[file] = new PGlite();
+      await dbs[file].exec('create schema if not exists public;');
+      await dbs[file].exec(body[0]);
+    }
+  }, PGLITE_BOOT_TIMEOUT_MS);
+
+  const run = async (file, obj) =>
+    (await dbs[file].query('select public._gallery_sanitize_public_json($1::jsonb) as out', [JSON.stringify(obj)])).rows[0].out;
+  const town = (hiddenName, name = 'Riverbend') => ({
+    name, id: 'set-1', tier: 'town',
+    powerStructure: { factions: [
+      { faction: 'Elder Council', power: 40, seats: 11, vacancy: null, isGoverning: true, desc: `They watch ${hiddenName} closely.` },
+      { faction: hiddenName, power: 15, hidden: true, desc: 'Its presence is not known to the settlement.' },
+      { hidden: true, power: 9, desc: 'A faceless ring nobody names.' },
+    ] },
+    thesis: { text: `A town where ${hiddenName} is whispered of.`, id: 'thesis-1', name: 'the thesis' },
+  });
+
+  it('each body: the raising and key-equal names mask string values only, rows stamped hidden leave, the settlement name stands', async () => {
+    for (const file of BODIES) {
+      for (const hiddenName of ['true', 'null', '1', '{', 'name', 'id', 'text']) {
+        const out = await run(file, town(hiddenName));
+        const at = `${file} / ${JSON.stringify(hiddenName)}`;
+        expect(out.name, at).toBe('Riverbend');
+        expect(Object.keys(out).sort(), at).toEqual(['id', 'name', 'powerStructure', 'thesis', 'tier']);
+        expect(Object.keys(out.thesis).sort(), at).toEqual(['id', 'name', 'text']);
+        expect(out.thesis.text, at).toBe('A town where an unseen interest is whispered of.');
+        expect(out.powerStructure.factions.map((f) => f.faction), at).toEqual(['Elder Council']);
+      }
+      const sub = await run(file, town('The Independent Bloc', 'The Independent Bloc Hall'));
+      expect(sub.name, file).toBe('The Independent Bloc Hall');
+      const blank = await run(file, town(' '));
+      expect(blank.thesis.text, file).toBe('A town where   is whispered of.');
+    }
+  });
+});

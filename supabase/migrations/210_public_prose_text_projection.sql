@@ -2,17 +2,17 @@
 -- 210 — the public dossier carries the owner's composed blocks as text (publicProse)
 -- ════════════════════════════════════════════════════════════════════════════
 -- AMENDED BEFORE FIRST APPLY by the pre-deploy review of 2026-11-10 (finding 4; the chair's
---   ruling R5): THE NAME MASK WALKS THE DOCUMENT. 206/207's mask was `replace` over the whole
+--   rulings R5 and R10): THE NAME MASK WALKS THE DOCUMENT. The mask was `replace` over the whole
 --   JSON TEXT, so a hidden power named `true`, `null`, `1`, a single space or `{` raised
 --   (`invalid input syntax for type json`: every public read of that town, and get_gallery_map
 --   for its campaign, failed), a name equal to a key (`name`, `id`, `text`) rewrote the key,
---   and a substring hit the settlement's own name. This body — the last restatement of the
---   function, which therefore carries the corrected mask for 206 and 207 — masks inside
---   string VALUES only, by walking the document: never a key, never the settlement's own
---   top-level `name`; an empty or whitespace-only name is skipped; and the removal of a row
---   stamped hidden moved OUTSIDE the name check, so a hidden row whose `faction` is missing
---   or empty leaves too. Client twin: publicSafe.js :: publicVeilPass, field for field.
---   Pinned by execution: tests/security/gallerySanitizer.pglite.test.js (R5).
+--   and a substring hit the settlement's own name. The body masks inside string VALUES only,
+--   by walking the document: never a key, never the settlement's own top-level `name`; an
+--   empty or whitespace-only name is skipped; and the removal of a row stamped hidden sits
+--   OUTSIDE the name check, so a hidden row whose `faction` is missing or empty leaves too.
+--   206 and 207 carry the SAME corrected body (R10), so this file is again 207's body plus one
+--   token, as THE SHAPE below says. Client twin: publicSafe.js :: publicVeilPass, field for
+--   field. Pinned by execution on all three bodies: tests/security/gallerySanitizer.pglite.test.js.
 -- THE CAUSE. STYLE-RULINGS-2 B10(a), lane SW-B7b PROJECTION; the chair's ruling of 2026-11-09 12:5x on the
 -- owner's word ("I leave all judgement to you for any decision you deferred to me since my last prompt"):
 -- the paid-surface gate (§885.3, publicDossier ⇒ no state prose) is LIFTED for the gallery page and the

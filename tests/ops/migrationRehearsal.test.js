@@ -453,6 +453,17 @@ describe('bounded migration rehearsal plan', () => {
     const partyLink = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 208);
     expect(partyLink.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
     expect(partyLink.rollback.note).toMatch(/at their migration-168 bodies/i);
+    // RE-KEYED BY IDENTITY (VEIL-FIX R10, the re-review of 2026-11-10: the purpose still quoted 208's
+    // pre-amendment "(d)"): every fragment the purpose QUOTES from 208's header (the double-quoted runs,
+    // split at the elisions) is found in that header verbatim, so a header amended under the manifest
+    // reds here instead of leaving a stale quote.
+    const header208 = readFileSync(join(process.cwd(), 'supabase/migrations/208_party_link_independent_idempotent_veiled.sql'), 'utf8')
+      .split('\n').filter((line) => line.startsWith('--')).map((line) => line.replace(/^--\s*/, '')).join(' ').replace(/\s+/g, ' ').replace(/(\w)- (\w)/g, '$1-$2');
+    const partyLinkWave = plan.waves.find((wave) => wave.id === 'party-link-independent-idempotent-veiled');
+    const quoted = String(partyLinkWave.purpose).split('"').filter((_, i) => i % 2 === 1)
+      .flatMap((run) => run.split(' … ')).map((piece) => piece.replace(/\s+/g, ' ').trim()).filter((piece) => piece.length > 12);
+    expect(quoted.length, 'anchored: the purpose quotes the header').toBeGreaterThan(4);
+    for (const piece of quoted) expect(header208.includes(piece), piece).toBe(true);
     // ⭐ THE SURVEYOR WAVE (209, TIER-PARITY-FIX, the owner, 2026-11-09: "Premium only"): one
     // re-stated function, has_surveyor_entitlement — staff, an active premium tier, a staff grant.
     // No table, no column, no policy, no row. Its own @rollback annotation spells the reversal.
