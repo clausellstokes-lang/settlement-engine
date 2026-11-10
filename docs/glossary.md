@@ -29,9 +29,9 @@ _The actions a DM can apply to a settlement, and the dials each exposes._
 | Assign NPC to role | People | A People verb the DM can apply to the settlement, with the option Quality. | `Quality` |
 | Impair institution | Economy | An Economy verb the DM can apply to the settlement. | — |
 | Restore institution | Economy | An Economy verb the DM can apply to the settlement. | — |
-| Impair faction | Power | A Power verb the DM can apply to the settlement. | — |
-| Restore faction | Power | A Power verb the DM can apply to the settlement. | — |
-| Add faction | Power | A Power verb the DM can apply to the settlement. | — |
+| Weaken a power | Power | A Power verb the DM can apply to the settlement. | — |
+| Restore a power | Power | A Power verb the DM can apply to the settlement. | — |
+| Add a power | Power | A Power verb the DM can apply to the settlement. | — |
 | Expose corruption | Power | A Power verb the DM can apply to the settlement. | — |
 | Impose corruption | Power | A Power verb the DM can apply to the settlement, with the option How far the rot reaches. | `How far the rot reaches` |
 | Brokered alliance | Relations | A Relations verb the DM can apply to the settlement. | — |
