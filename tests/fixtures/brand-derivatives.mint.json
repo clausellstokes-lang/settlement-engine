@@ -21,9 +21,9 @@
     "vips": "8.18.3"
   },
   "inputs": {
-    "scripts/derive-brand-marks.mjs": "d2ecad3d7a6603f7ae68477b45a07b2cc10ecb6d3359bef3309ff3d35485a98a",
+    "scripts/derive-brand-marks.mjs": "ca4a29ee77a8af8c26833f636e828ade7d0b7a36bb8fd0909c13253c64dc5c8b",
     "scripts/inject-ai-provenance.mjs": "0a903b70bec3bc4f4ad8891b3da74c3d42b42fb5f0fd1c6e9456454458c34c08",
-    "scripts/ai-media-provenance.json": "243224ac7b2ea4d6bd0326bcb374d0e897be22788cd9ff294673d179b1422543",
+    "scripts/ai-media-provenance.json": "d9dfbd030fac7300a56fe72c426322eb8aff3f100a05e8b208328a1d42454831",
     "public/brand/arrow/arrow-strip.webp": "427f9d98fb9a714c443f074b233ab9ec9cf494e2bd6f096b67d2691c08502dd2",
     "public/fonts/Lora-Bold.ttf": "87946e964402ff5a5b1d7eeb09f9a99dda71635a2667d07a5f17af61dc03fb31",
     "public/fonts/Lora-Regular.ttf": "e23dd6917ca78f061c94c8b304c9338cff32b5bb8d00694e58bb3c4f4bdcd9e5"
