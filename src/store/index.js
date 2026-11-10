@@ -43,7 +43,8 @@ import { createToggleSlice }     from './toggleSlice.js';
 // line) so the operationRegistry census walker — which derives the composed-slice
 // file list from the `import { createXSlice }` lines — still recognises this slice.
 import { normalizeServicesToggles } from './toggleSlice.js';
-import { createSettlementSlice, adoptPublicProseAck } from './settlementSlice.js';
+import { adoptPublicProseAck } from './settlementSlice.js';
+import { createSettlementSlice } from './settlementSlice.js';
 import { createAiSlice }         from './aiSlice.js';
 import { createNeighbourSlice }  from './neighbourSlice.js';
 import { createMapSlice }        from './mapSlice.js';
