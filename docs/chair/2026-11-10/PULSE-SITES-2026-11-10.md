@@ -1,8 +1,47 @@
 # PULSE-SITES — the record (2026-11-10)
 
+**MERGE ORDER, FIRST LINE (the chair's P6, the reviewer's finding 2): THIS LANE NEVER MERGES ALONE.** The cured sites do not see the cards the pulse itself writes until GREEN-TIP's writer cure (`lane/green-tip-2026-11-10`) lands. Those cards carry the retired field and no memberships: 40 / 40 / 70 at 1 / 3 / 12 ticks in §6. GREEN-TIP merges with it, or first.
+
 **Seat:** PULSE-SITES, a cure seat, child of the cloud chair (session `session_01FbPLbejcfwX5nii12VM673`); this seat's session `session_01FbPLbehJ1XtTPeEP23oMyC`. **Branch:** `lane/pulse-sites-2026-11-10`, cut from `lane/integration-2026-11-07` at `5da82ea59`. **Parallel seat:** GREEN-TIP (`lane/green-tip-2026-11-10`), whose files this lane did not touch. **Brief:** the chair's dispatch of 2026-11-10, rulings S1–S5.
 
 **Outcome:** of this lane's 15 sites, 7 are cured and 8 are named. Six LIVE sites in six files are cured by pure re-points to the card's first-rank membership, each red first on a soak birth. One DEAD fallback is removed. Three LEGACY sites stay, each with a one-line comment. Two DEAD sites are listed. The three `npcVerdictApply.js` rows are DARK by the chair's ruling (option (c), 2026-11-10): nothing is written. The landed walker gains a per-site arm, shrink-only, whose list holds 19 rows at this tip. The generator golden master and every property-tree pulse golden are green and unmoved. One pulse-keyed register row moves by cause and is left UNSIGNED (§7). Merged onto the integration line (`79acc9120`), the lazy-edge guard is green, boot-smoke passes, and first paint is +1 B raw. `typecheck:ratchet` is 167/167 and `typecheck:domain:strict` exits 0. eslint reports 0 on the touched files.
+
+## 0. The re-opening (the reviewer's BLOCK on `dbaa54418`, the chair's rulings P1–P7)
+
+| Ruling | What | Commit |
+|---|---|---|
+| **P1** (finding 1, the blocker) | The registry cure (`a09f2593e`) put a hidden or criminal power's name, and a person's tie to it, on the PUBLIC chronicle. PROMOTE/DEMOTE narration is the log entry's `narrativeSummary` (`events/applyEvent.js :: applyEvent`), which `supabase/migrations/032_gallery_public_chronicle.sql :: _gallery_chronicle_entry` publishes verbatim to anon. The PDF Timeline and the Foundry journal print the same field. The cure: `events/registry.js :: openPowerOf` names the first-rank power only where that membership is stamped `veiled: false` (the stamp migration 206 reads); otherwise the base's "their power". No new prose. | `b41bb25d9` |
+| **P2** (finding 4) | The walker's list was not shrink-only: the reviewer grew it by a read and a row with `count: 20`, and 4/4 passed. `RETIRED_SITE_CEILING = 19` is now pinned in the test itself. | `359252677` |
+| **P3** (finding 6) | The verdict seat and the house factor name hidden powers too, behind dark flags. Nothing is written in code; the three DARK rows now state that when lit, P1's rule applies to `vacatedSeatOf`'s seat name and `castHouseFactor`'s factor. | `ce7f9a2ca` |
+| **P4** (finding 7) | The ladder arm's comment said "a card with no memberships". It is read for any card whose memberships do not name the faction asked about. The comment and the row's reason now say so (two lines, so the row stays at 56). | `37cca6b15` |
+| P1's file | Lighting census door: files 3179 → 3180, parked 395 → 396. | `f5ecf6fdf` |
+
+**P1, red first.** `tests/domain/pulseSitesChronicleVeil.test.js` runs through the real `applyEvent` and then the real net-current `_gallery_chronicle_entry` loaded from migration 032 into pglite.
+
+| Arm | Card | Before the cure (`a09f2593e`..`dbaa54418`) | After |
+|---|---|---|---|
+| (a) hidden | soak1k-113, The Independent Bloc (the infiltrator, `hidden: true`) | named, red ("Yordan Klimov rises within The Independent Bloc …" / "… pushed down the ranks of The Independent Bloc."), PROMOTE and DEMOTE | "their power", green |
+| (b) criminal | soak1k-3, Thieves' Guild | named, red ("Abbas al-Isfahani rises within Thieves' Guild …"), both | "their power", green |
+| (c) open | soak1k-3, Guild Council (`veiled: false`) | named, green | named, green |
+
+Arm (c) shows the cure does not pass by blanking everything. 7/7 after. Re-keyed by this cause: the registry describe of `pulseSitesMembershipReads` (now asserts both branches on soak1k-3/4) and `editorRosterEvents`' fixture (`veiled: false`).
+
+**P1, the table's row split by the veil** (60 births, sums, base → tip):
+
+| | t0 | t1 | t3 | t12 |
+|---|---|---|---|---|
+| first-rank cards, veiled membership | 126 | 125 | 125 | 123 |
+| … narrated with their power's name | 0 → **0** | 0 → **0** | 0 → **0** | 0 → **0** |
+| first-rank cards, unveiled membership | 1504 | 1505 | 1503 | 1499 |
+| … narrated with their power's name | 0 → 1504 | 0 → 1505 | 0 → 1503 | 0 → 1499 |
+
+**P2, red first.** The reviewer's attack was planted: a read `npc?.factionAffiliation` appended to `corruption.js` and its row added with `count: 20`. It reds "the list may only SHRINK … expected 20 to be less than or equal to 19". Restored from a file copy; 4/4.
+
+**P5 (finding 5), RECORD ONLY — known, post-deploy.** `corruption.js :: npcHomeInstitution` (`0db374102`) takes no settlement, so it breaks a first-rank tie by the memberships' own order. That differs from `firstRankMembershipOf(npc, powerOrderOf(s))` on **183 of 3,201 cards** (the reviewer's figure). It also returns a POWER name, which its two consumers (`corruptionImpair.js :: harborsCorruptInsider` and the reform reader beside it) match against INSTITUTION names by substring. No cure now.
+
+**P6 (finding 2)** is the merge order on this record's first line.
+
+**P7 (finding 3), RECORD ONLY.** The tip-only red `tests/lint/observedShapeReaders.walker.test.js` > "THE ERASURE GUARD" (the row `causeLifecycle.js / secondaryAffiliation on npcs — the read is gone (a lawful repair)`) **is owned by the closing acts' observed-shape re-freeze, after the baseline's schema 39 → 40 migration**, which the merge seat lists in its hand-back file. This lane does not cure it.
 
 ## 1. The scan (reproducing the brief's 29)
 
@@ -153,7 +192,7 @@ Notes on the table:
 - **lighting census** (`LIGHTING_CENSUS_REFREEZE`, commit `0f2719364`): files 3178 → 3179, titles +9, suite titles +7.
 - **source-citation roster:** dated 221 → 222 (commit `c51a1f53f`).
 - **corruption closure pin** (`proseTasteCorruption`), re-keyed by cause (commit `e73b5d88b`): the desk already ships `membership.js`, and the byte arm is unmoved.
-- **observed-shape readers, NOT re-frozen:** its erasure guard names one lawful row, `causeLifecycle.js / secondaryAffiliation on npcs — the read is gone (a lawful repair)`, from commit 6. The door refuses on the base's own schema drift ("baseline schema 39 cannot be overwritten by schema 40 … --migrate-schema=40"), and that migration is not this lane's. The row is OWED to the seat that migrates the schema, which must shrink it.
+- **observed-shape readers, NOT re-frozen:** its erasure guard names one lawful row, `causeLifecycle.js / secondaryAffiliation on npcs — the read is gone (a lawful repair)`, from commit 6. The door refuses on the base's own schema drift ("baseline schema 39 cannot be overwritten by schema 40 … --migrate-schema=40"), and that migration is not this lane's. The row is owned by the closing acts' observed-shape re-freeze after the schema 39 → 40 migration (§0, P7).
 
 **One pulse-keyed register row moves, left UNSIGNED:** `tests/lint/newsHeadlineContract.walker.test.js` A2, address row `applied|npc_verdict|summary|indicative`, distinctValues 1 → 2 (occurrences 3 → 3), by cause `83d79aaa2`. The verdict summary now says "the seat at <power> stands open" where it said only "The office is forfeit." The file is red at the base on other rows (applied|cause_lifecycle, strategy_deploy, stressor_aftermath), so it cannot be refrozen here; the merge seat signs it.
 
