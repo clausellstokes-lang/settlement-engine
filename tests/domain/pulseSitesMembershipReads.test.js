@@ -81,3 +81,13 @@ describe('worldPulse/houseLedger.js :: castHouseFactor casts a member by first-r
     expect(cast).toBeGreaterThan(3);
   });
 });
+
+describe('worldPulse/npcVerdictTable.js :: vacatedSeatOf names the first-rank power as the seat', () => {
+  it('every first-rank member vacates a seat at its first-rank power', async () => {
+    const { vacatedSeatOf } = await import('../../src/domain/worldPulse/npcVerdictTable.js');
+    const cards = rankedCards();
+    for (const { s, npc, power } of cards) expect(vacatedSeatOf(s, npc)).toEqual({ factionId: '', factionName: power });
+    const none = { id: 'pulse-sites-none', name: 'Nobody Inparticular', memberships: [] };
+    expect(vacatedSeatOf(towns[0], none)).toEqual({ factionId: '', factionName: '' });
+  });
+});
