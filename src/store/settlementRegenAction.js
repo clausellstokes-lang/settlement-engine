@@ -23,6 +23,8 @@
  */
 
 import { makeActionResult } from './actionResult.js';
+import { refusalOf } from '../lib/refusalReasons.js';
+import { engineRefusalReason } from '../lib/engineRefusal.js';
 import {
   cloneJson, persistSaveUpdate, pickleCampaignState, sectionLocked, foldRegeneratedRoster,
 } from './settlementSliceHelpers.js';
@@ -93,6 +95,28 @@ async function remoteRegenParts(section, settlement, cfg, locks, remoteOptions) 
   return runRemoteRegenSection(
     { section, settlement, config: cfg, ...(section === 'npcs' ? { locks } : {}) }, remoteOptions,
   );
+}
+
+/**
+ * The service's remote pass, with its NAMED failures recorded (remote-path R3): a limit, an
+ * unreachable service or a retired version is put on the store as its own refusal (unkeyed, so
+ * the dossier's notice says it), then the rejection goes on exactly as before.
+ * @param {(fn: (s: any) => void) => void} set
+ * @param {'npcs'|'history'} section
+ * @param {RegenSettlement} settlement
+ * @param {Record<string, unknown>} cfg
+ * @param {unknown} locks
+ * @param {import('../lib/engineRemote.js').RemoteOptions} [remoteOptions]
+ * @returns {Promise<Record<string, unknown>>}
+ */
+async function remoteRegenPartsSaid(set, section, settlement, cfg, locks, remoteOptions) {
+  try {
+    return await remoteRegenParts(section, settlement, cfg, locks, remoteOptions);
+  } catch (error) {
+    const reason = engineRefusalReason(/** @type {{ code?: unknown }} */ (error)?.code);
+    if (reason) set((s) => { s.lastRefusal = refusalOf(reason); });
+    throw error;
+  }
 }
 
 /**
@@ -169,7 +193,7 @@ export async function regenSectionAction(set, get, section, { remote = remoteFla
     /** @type {Record<string, unknown>} */
     const result = eng
       ? eng.regenNPCsPipeline(settlement, cfg, { locks })
-      : await remoteRegenParts('npcs', settlement, cfg, locks, remoteOptions);
+      : await remoteRegenPartsSaid(set, 'npcs', settlement, cfg, locks, remoteOptions);
     const { _preservation, ...parts } = result;
     await foldRegeneratedRoster(get, set, parts, /** @type {PreservationReport} */ (_preservation));
   } else if (section === 'history') {
@@ -207,7 +231,7 @@ export async function regenSectionAction(set, get, section, { remote = remoteFla
     /** @type {Record<string, unknown>} */
     const result = eng
       ? eng.regenHistoryPipeline(settlement, cfg)
-      : await remoteRegenParts('history', settlement, cfg, locks, remoteOptions);
+      : await remoteRegenPartsSaid(set, 'history', settlement, cfg, locks, remoteOptions);
     const { history, _regenSeed } = result;
     set((s) => {
       const draft = /** @type {RegenSettlement} */ (s.settlement);

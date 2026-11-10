@@ -166,6 +166,15 @@ describe('the lifted action commits the same world through either transport', ()
         .rejects.toMatchObject({ code });
       expect(JSON.stringify(store.getState().settlement)).toBe(JSON.stringify(world));
     }
+    // remote-path R3: a limit and an unreachable service are RECORDED as their own reasons, so
+    // the dossier's notice says which (the reroll used to say nothing at all).
+    for (const [status, reason] of [[429, 'engineRateLimited'], [503, 'engineUnavailable']]) {
+      const store = storeHolding(world);
+      const impl = async () => ({ ok: false, status, json: async () => ({ error: 'x' }) });
+      await regenSectionAction(store.setState, store.getState, 'history', { remote: true, remoteOptions: remoteOpts(impl) })
+        .catch(() => {});
+      expect(store.getState().lastRefusal?.reason, `HTTP ${status}`).toBe(reason);
+    }
     // The flag forced open with no configured service: typed, never the local engine.
     const unconfigured = storeHolding(world);
     await expect(regenSectionAction(unconfigured.setState, unconfigured.getState, 'history', { remote: true }))
