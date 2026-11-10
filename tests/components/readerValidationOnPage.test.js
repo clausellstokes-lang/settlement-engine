@@ -103,10 +103,11 @@ describe('ruling 2 — the verdict count and the Critical Issues list are one li
     const leaves = [...container.querySelectorAll('*')].filter((n) => n.children.length === 0).map((n) => (n.textContent || '').trim());
     const stated = leaves.map((x) => x.match(/^(\d+) critical$/)).find(Boolean);
     cleanup();
-    expect(t, 'the verdict carries no contrary count').not.toMatch(/\d+ critical issues? prevents? settlement survival/);
     const listed = t.match(/Critical Issues \((\d+)\)/);
     expect(stated?.[1]).toBe('2');
     expect(listed?.[1]).toBe(stated?.[1]);
+    // anchored: the chip and the list heading are matched in this same text on the two lines above
+    expect(t, 'the verdict carries no contrary count').not.toMatch(/\d+ critical issues? prevents? settlement survival/);
   });
 
   test('soak1k-24: the PDF lists the same critical issues the summary counts', () => {
