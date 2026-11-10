@@ -11,6 +11,7 @@ import {
 // this import adds nothing to first paint.
 import { resolveLeash, isWilledLeash, corruptMarkOf, patronageSecurityDrag } from '../corruptionLeash.js';
 import { allegianceOf } from '../people/allegiance.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
 // position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
@@ -294,12 +295,18 @@ export function inferRoleArchetype(npc = {}) {
  * @param {number} [index]
  */
 function factionIdFor(npc = {}, item, index) {
-  // factionAffiliation is the generator's canonical faction handle (npcGenerator
-  // writes assignedFaction.faction onto it); read it FIRST so an affiliated NPC
-  // seats into its named faction instead of the positional-index fallback below.
-  // stablePart(factionAffiliation) lines up with seatNpcsIntoFactions' stablePart
-  // (faction.name) because both derive from the power faction's `faction` field.
-  const direct = npc.factionId || npc.faction || npc.affiliation || npc.factionAffiliation || npc.organizationId || npc.organization;
+  // The card's FIRST-RANK MEMBERSHIP is the generator's canonical faction handle (the people car writes
+  // `memberships: [{ power, rank }]`; people/membership.js :: firstRankMembershipOf, tie-broken by the powers'
+  // order, the seat first); read it so an NPC seats into its named power instead of the positional-index
+  // fallback below. stablePart(power) lines up with seatNpcsIntoFactions' stablePart(faction.name) because both
+  // derive from the power's `faction` field.
+  // ⛔ RE-POINTED (GREEN-TIP, 2026-11-10): this slot read `factionAffiliation`, which the people car retired from
+  // every card (15207301f), so on a current record every NPC fell through to 'unaffiliated' and
+  // seatNpcsIntoFactions seated nobody (60/60 soak births). The retired read is KEPT after the membership read
+  // only because the pulse's own writers (the cadence founder, successorNpc) still write that field — the
+  // chair's STOP-1; it reads nothing on a born card.
+  const membershipPower = firstRankMembershipOf(npc, powerOrderOf(item?.settlement))?.power;
+  const direct = npc.factionId || npc.faction || npc.affiliation || membershipPower || npc.factionAffiliation || npc.organizationId || npc.organization;
   if (direct) return stablePart(direct);
   const factions = item.settlement?.factions || item.settlement?.powerFactions || item.settlement?.politics?.factions || [];
   const faction = factions[(/** @type {any} */ (index)) % Math.max(1, factions.length)];
