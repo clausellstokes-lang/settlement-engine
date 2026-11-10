@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "69e39ed939d311755e2b00770eabb05d7f82b581",
-  "measuredBy": "COMPENDIUM-HUB",
+  "measuredAtSha": "60ec6518370b4506195e5e31b251908f56b04e5e",
+  "measuredBy": "COMPENDIUM-INSTITUTIONS",
   "date": "2026-11-10",
-  "note": "COMPENDIUM-HUB phase 1 additions (a2f84305e, 5a8522a83): two new test titles — the H8 filter pin in tests/ui/compendiumPanel.smoke.test.jsx and the H8 string-match pin in tests/ui/compendiumInstitutionSearch.test.jsx (titles 28982 -> 28984)",
-  "files": 3176,
+  "note": "COMPENDIUM-INSTITUTIONS (lane/compendium-institutions-2026-11-10): H7 adds tests/ui/compendiumInstitutionsPage.test.jsx (one file, its suites and titles); H9 adds one title to tests/ui/compendiumHubs.test.jsx",
+  "files": 3177,
   "parked": 395,
-  "credited": 2781,
-  "titles": 28984,
-  "suiteTitles": 7826
+  "credited": 2782,
+  "titles": 28990,
+  "suiteTitles": 7828
 }
