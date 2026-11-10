@@ -1,5 +1,5 @@
-import { useState, useId, useRef, useEffect, lazy, Suspense } from 'react';
-import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock, ScrollText, BookOpen} from 'lucide-react';
+import { useState, useRef, useEffect, lazy, Suspense } from 'react';
+import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, ScrollText, BookOpen} from 'lucide-react';
 
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
 // Lazy-load on user action so the Settlements first paint stays light —
@@ -15,7 +15,6 @@ const generateWorldBook = (...args) =>
 const CampaignImportPanel = lazy(() => import('./CampaignImportPanel.jsx'));
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, sans, serif_, FS, PROSE_MAX, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
-import { flag } from '../../lib/flags.js';
 import { useStore } from '../../store/index.js';
 import { resolveFaithUnlocked } from '../settlementDetail/resolveExportSeam.js';
 import Button from '../primitives/Button.jsx';
@@ -90,10 +89,8 @@ export function CampaignFolder({
   reactivatingId,
   canManageCampaigns,
   onCanonize,
-  onAdvanceTime,
   onCreateCampaign,
   onNavigate,
-  worldCanonized,
   selectMode = false,
   selectedIds,
   onToggleSelect,
@@ -106,32 +103,12 @@ export function CampaignFolder({
     return match?.name || match?.settlement?.name || String(id);
   };
   const isMobile = useIsMobile();
-  // Disable Advance while a tick is already running for THIS campaign — the store
-  // also no-ops a re-entrant advance, but greying the button stops the double-click
-  // from queuing a second intent + gives the DM visible feedback the tick is busy.
-  const advanceInFlight = useStore(s => s.isAdvanceInFlight(campaign?.id));
-  // Bare, exactly like isAdvanceInFlight above: this folder is only live below
-  // AppViews' campaignLazy gate, and the entry slice always installs the name.
-  const settlementDeletionInFlight = useStore(
-    s => s.isCampaignMutationLocked(campaign?.id) || false,
-  );
-  const advanceBlocked = advanceInFlight || settlementDeletionInFlight;
-  // ITEM 1 (owner order 2026-07-22: "there should be an autoresolver in the library
-  // advance time as well, it should sync with the realm's"). The Library advance
-  // already routes through the SAME chokepoint as the Realm — advanceCampaignWorld →
-  // get().advanceAutoResolve — so the SETTING is one shared store value, never a
-  // forked copy. This exposes it on the Library surface too. Flag-gated identically
-  // to the Realm toggle (auto-resolve only rides the multi-tick advance path).
-  const advanceAutoResolve = useStore(s => s.advanceAutoResolve);
-  const setAdvanceAutoResolve = useStore(s => s.setAdvanceAutoResolve);
   // The faith premium seam at realm scope. The SAME predicate resolveExportSeam
   // threads into the settlement exports (tier premium, or elevated), passed to both
   // realm exporters so a lapsed or downgraded session binds a book with no pantheon
   // and no deity-named arc. Both exporters default it to false, so this read is the
   // unlock, never the gate.
   const faithUnlocked = useStore(resolveFaithUnlocked);
-  const multiTickOn = flag('advanceMultiTick');
-  const autoResolveId = useId();
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -162,23 +139,6 @@ export function CampaignFolder({
       setWbError(err?.message ? `World Book failed: ${err.message}` : 'World Book export failed. Please try again.');
     } finally {
       setWbBusy(false);
-    }
-  };
-  // How far one Advance Time step carries the campaign world. Mirrors the World
-  // Map toolbar's interval picker (one_week..one_year), defaulting to one month —
-  // the same default the store's advanceCampaignWorld uses.
-  const [advanceInterval, setAdvanceInterval] = useState('one_month');
-  const advanceTitle = !worldCanonized
-    ? 'Canonize this campaign world on the World Map before advancing time'
-    : advanceInFlight
-      ? 'Advancing the world…'
-      : settlementDeletionInFlight
-        ? 'Finishing a settlement deletion…'
-        : 'Advance the campaign world and open the Realm';
-  const handleAdvance = (event) => {
-    event.stopPropagation();
-    if (!advanceBlocked) {
-      onAdvanceTime?.(campaign.id, advanceInterval);
     }
   };
   const handleExportPdf = async (e) => {
@@ -251,7 +211,7 @@ export function CampaignFolder({
   return (
     <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}` }}>
       {/* Campaign header. On mobile the row wraps (flexWrap) so the campaign name
-          isn't crushed by the trailing controls (Advance Time / PDF / Rename /
+          isn't crushed by the trailing controls (Books and export / Rename /
           Delete): the name claims a full-width line and the control cluster
           reflows below it. Desktop keeps the single non-wrapping row. */}
       <div style={{ display:'flex', alignItems:'center', gap:8, flexWrap: isMobile ? 'wrap' : undefined, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
@@ -273,75 +233,6 @@ export function CampaignFolder({
         {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
-            {/* ITEM 1 — the Library's auto-resolve switch. ONE shared store value with
-                the Realm toggle (advanceAutoResolve/setAdvanceAutoResolve): setting it
-                here changes the Realm advance too, and vice-versa. A real checkbox
-                styled as a switch (keyboard + screen-reader operable). Flag-gated like
-                the Realm toggle; a global preference, so it stays operable regardless
-                of this folder's advanceability. Stops propagation so it never toggles
-                the folder. */}
-            {multiTickOn && (
-              <label
-                htmlFor={`${autoResolveId}-ar`}
-                style={{ display:'inline-flex', alignItems:'center', gap:3, fontSize:chromeFontSize(FS.xs, mobile), fontFamily:sans, color:INK, padding:'0 4px', userSelect:'none', cursor:'pointer' }}>
-                <input
-                  id={`${autoResolveId}-ar`}
-                  type="checkbox"
-                  role="switch"
-                  checked={!!advanceAutoResolve}
-                  aria-checked={!!advanceAutoResolve}
-                  aria-label="Auto-resolve every change"
-                  title="Auto-resolve every change when advancing, or pause at the big forks. Shared with the Realm advance."
-                  onChange={(e) => setAdvanceAutoResolve(e.target.checked)}
-                  // stopPropagation on the INTERACTIVE input (defensive, matching the
-                  // interval select) — never on the wrapping label (a11y lint).
-                  onClick={(e) => e.stopPropagation()}
-                  style={{ cursor:'pointer', margin:0 }}/>
-                Auto-resolve
-              </label>
-            )}
-            {/* Advance by (interval) — a visible micro-label makes the dropdown's
-                purpose legible at a glance (was title=-only). The select keeps its
-                aria-label so its accessible name is unchanged. Disabled in lockstep
-                with the button; stops propagation so the dropdown never toggles the
-                folder. */}
-            <span aria-hidden="true" style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUTED, fontFamily:sans }}>Advance by</span>
-            <select
-              aria-label="Advance interval"
-              value={advanceInterval}
-              onChange={(e) => setAdvanceInterval(e.target.value)}
-              onClick={(e) => e.stopPropagation()}
-              disabled={settlements.length === 0 || !worldCanonized || advanceBlocked}
-              title="How far one Advance Time step carries the campaign world"
-              style={{
-                fontSize: chromeFontSize(FS.xs, mobile),
-                fontFamily: sans,
-                color: INK,
-                background: CARD,
-                border: `1px solid ${BORDER}`,
-                padding: '4px 6px',
-                cursor: advanceBlocked ? 'default' : 'pointer',
-              }}
-            >
-              <option value="one_week">Week</option>
-              <option value="one_month">Month</option>
-              <option value="one_season">Season</option>
-              <option value="one_year">Year</option>
-            </select>
-            {/* Advance Time — the folder's prominent primary verb, now the sole
-                full action button beside the collapsed export menu. Premium gate:
-                the whole folder only renders (active) for canManageCampaigns.
-                Disabled until the world is canonized. */}
-            <Button
-              variant="secondary"
-              size="sm"
-              icon={<Clock size={10}/>}
-              onClick={handleAdvance}
-              disabled={settlements.length === 0 || !worldCanonized || advanceBlocked}
-              title={advanceTitle}
-            >
-              {advanceInFlight ? 'Advancing…' : 'Advance Time'}
-            </Button>
             {/* Books and export — one disclosure folds the four sibling export/
                 import doors (World Book / Player Book / Campaign PDF / Import).
                 Each row carries a one-line description so the differences read on
@@ -496,7 +387,6 @@ export function CampaignFolder({
               canReactivate={canReactivate}
               reactivatingId={reactivatingId}
               onCanonize={onCanonize}
-              onAdvanceTime={onAdvanceTime}
               onCreateCampaign={onCreateCampaign}
               onNavigate={onNavigate}
               canManageCampaigns={canManageCampaigns}

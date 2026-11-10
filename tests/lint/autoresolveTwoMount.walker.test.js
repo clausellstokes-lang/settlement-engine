@@ -1,16 +1,17 @@
 /**
  * autoresolveTwoMount.walker.test.js — ITEM 1 (owner order 2026-07-22:
  * "there should be an autoresolver in the library advance time as well, it should
- * sync with the realm's").
+ * sync with the realm's"), RE-KEYED by LIBRARY-SIMPLE (owner, 2026-11-10, verbatim:
+ * "I now want to simplify the library page. No longer does it advance time. That will
+ * only be accessible in isolated (not in campaign settlements) or the realm page.").
  *
- * The auto-resolve SETTING must be ONE shared store value, mounted on BOTH advance
- * surfaces (the Realm map + the Library campaign folder), with the resolution routed
- * through the SINGLE chokepoint (advanceCampaignWorld → get().advanceAutoResolve).
- * Zero forked logic: neither mount may own a second autoresolve state, and neither
- * advance call may pass a hand-forked autoResolve option that would desync them.
+ * The auto-resolve SETTING stays ONE shared store value with the resolution routed
+ * through the SINGLE chokepoint (advanceCampaignWorld → get().advanceAutoResolve). The
+ * Library no longer advances, so it no longer mounts the switch: the Realm is the ONE
+ * mount, and the Library folder is pinned to read neither the value nor its setter.
  *
- * A source-scan walker (the E-B pattern): it fails if a future edit forks the state
- * or bypasses the chokepoint on either mount.
+ * A source-scan walker (the E-B pattern): it fails if a future edit forks the state,
+ * bypasses the chokepoint, or puts the switch back on the Library.
  */
 
 import { describe, expect, test } from 'vitest';
@@ -25,7 +26,7 @@ const CHOKEPOINT = 'src/store/campaignAdvanceSession.js';
 const REALM_ADVANCE_CALLER = 'src/hooks/useAdvanceSession.js';
 const LIBRARY_ADVANCE_CALLER = 'src/components/settlements/useCampaignAdvance.js';
 
-describe('auto-resolve is ONE shared state mounted on BOTH advance surfaces', () => {
+describe('auto-resolve is ONE shared state, mounted on the Realm alone', () => {
   test('the shared store defines exactly one advanceAutoResolve value + setter', () => {
     const slice = read(STORE_SLICE);
     // The state value and its setter are declared once, in the shared slice.
@@ -33,12 +34,16 @@ describe('auto-resolve is ONE shared state mounted on BOTH advance surfaces', ()
     expect((slice.match(/setAdvanceAutoResolve:/g) || []).length).toBe(1);
   });
 
-  test('BOTH mounts read the SAME shared store state (advanceAutoResolve + setter)', () => {
-    for (const mount of [REALM_MOUNT, LIBRARY_MOUNT]) {
-      const src = read(mount);
-      expect(src.includes('s.advanceAutoResolve'), `${mount} must read the shared advanceAutoResolve`).toBe(true);
-      expect(src.includes('s.setAdvanceAutoResolve'), `${mount} must read the shared setAdvanceAutoResolve`).toBe(true);
-    }
+  test('the Realm mount reads the shared store state (advanceAutoResolve + setter)', () => {
+    const src = read(REALM_MOUNT);
+    expect(src.includes('s.advanceAutoResolve'), `${REALM_MOUNT} must read the shared advanceAutoResolve`).toBe(true);
+    expect(src.includes('s.setAdvanceAutoResolve'), `${REALM_MOUNT} must read the shared setAdvanceAutoResolve`).toBe(true);
+  });
+
+  test('the Library folder mounts no auto-resolve switch (owner, 2026-11-10)', () => {
+    const src = read(LIBRARY_MOUNT);
+    expect(/advanceAutoResolve/i.test(src), `${LIBRARY_MOUNT} must not read the auto-resolve state`).toBe(false);
+    expect(src.includes('Auto-resolve'), `${LIBRARY_MOUNT} must not render the auto-resolve switch`).toBe(false);
   });
 
   test('neither mount forks a SECOND autoresolve state (no local useState / rival key)', () => {

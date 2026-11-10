@@ -897,10 +897,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 reactivatingId={reactivatingId}
                 canManageCampaigns={canManageCampaigns}
                 onCanonize={handleCanonize}
-                onAdvanceTime={handleAdvanceCampaignTime}
                 onCreateCampaign={openCreateCampaign}
                 onNavigate={onNavigate}
-                worldCanonized={!!campaign.worldState?.canonizedAt}
                 selectMode={selectMode}
                 selectedIds={selectedIds}
                 onToggleSelect={toggleSelect}/>

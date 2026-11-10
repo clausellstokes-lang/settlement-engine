@@ -5,8 +5,8 @@
  *
  * Pins the load-bearing contracts of the Library living-surface adoption so a
  * future refactor can't silently drift them:
- *   1. Advance-time is PREMIUM-gated — a non-premium CampaignFolder never renders
- *      a working Advance button; premium's button is disabled until canonized.
+ *   1. The Library folder renders NO advance control at any tier (re-keyed,
+ *      LIBRARY-SIMPLE, owner 2026-11-10 — a campaign advances on the Realm alone).
  *   2. Bulk-select actions — the extracted hook canonizes only active drafts and
  *      the BulkActionBar hides the campaign actions from free tier.
  *   3. SaveQuotaMeter reads the REAL cap passed in (never a hardcoded 3).
@@ -19,15 +19,12 @@ import { render, screen, cleanup, renderHook, act, fireEvent } from '@testing-li
 
 afterEach(cleanup);
 
-// Store mock — CampaignFolder reads isAdvanceInFlight + isCampaignMutationLocked;
-// SettlementCard reads isSettlementClockBound plus the three campaign block
+// Store mock — SettlementCard reads isSettlementClockBound plus the three campaign block
 // readers. All return benign defaults so the components render deterministically.
 // The block readers are listed even though nothing here asserts on them: the real
 // store always installs them (campaignSliceEntry's stable delegates), so a mock
 // that omits them would only pass while the call sites carried a vestigial `?.`.
 const storeState = {
-  isAdvanceInFlight: () => false,
-  isCampaignMutationLocked: () => false,
   isSettlementClockBound: () => false,
   getSettlementDeletionBlock: () => null,
   getCampaignMutationBlock: () => null,
@@ -40,8 +37,15 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
-// ── 1. Advance-time premium gate ───────────────────────────────────────────
-describe('CampaignFolder — advance-time is premium-gated', () => {
+// ── 1. The Library folder advances nothing, at every tier ──────────────────
+// RE-KEYED (LIBRARY-SIMPLE). This block pinned the folder's advance button as
+// premium-gated and canonize-gated. The owner removed the Library's advance
+// (2026-11-10, verbatim): "I now want to simplify the library page. No longer does
+// it advance time. That will only be accessible in isolated (not in campaign
+// settlements) or the realm page." The same three states — free, premium dormant,
+// premium canonized with a member — now each pin that NO advance control renders,
+// with the premium folder's own header pinned present so the absence is real.
+describe('CampaignFolder — the Library renders no advance control at any tier', () => {
   const baseCampaign = { id: 'c1', name: 'The Reach', settlementIds: [], collapsed: false };
   const noop = () => {};
   const folderProps = {
@@ -49,40 +53,39 @@ describe('CampaignFolder — advance-time is premium-gated', () => {
     deleteId: null, setDeleteId: noop, deleteConfirmed: noop, campaigns: [],
     addToCampaign: noop, removeFromCampaign: noop, onDeleteCampaign: noop,
     onRenameCampaign: noop, toggleCollapsed: noop, onReactivate: noop,
-    canReactivate: false, reactivatingId: null, onAdvanceTime: noop,
+    canReactivate: false, reactivatingId: null,
     onCanonize: noop, onCreateCampaign: noop, onNavigate: noop,
   };
 
   test('free tier (canManageCampaigns=false) renders NO advance button', async () => {
     const { CampaignFolder } = await import('../../src/components/settlements/CampaignFolder.jsx');
-    render(<CampaignFolder {...folderProps} campaign={baseCampaign} canManageCampaigns={false} worldCanonized={false} />);
+    render(<CampaignFolder {...folderProps} campaign={baseCampaign} canManageCampaigns={false} />);
     // The non-premium folder collapses to the retained/upgrade stub — no controls.
     expect(screen.queryByRole('button', { name: /advance time/i })).toBeNull();
     expect(screen.queryByText(/Advance Time/i)).toBeNull();
   });
 
-  test('premium but not canonized → advance button present and DISABLED', async () => {
+  test('premium, world not canonized → the header renders and NO advance button', async () => {
     const { CampaignFolder } = await import('../../src/components/settlements/CampaignFolder.jsx');
-    render(<CampaignFolder {...folderProps} campaign={baseCampaign} canManageCampaigns worldCanonized={false} />);
-    const btn = screen.getByRole('button', { name: /advance time/i });
-    expect(btn).toBeTruthy();
-    expect(btn.disabled).toBe(true);
+    render(<CampaignFolder {...folderProps} campaign={baseCampaign} canManageCampaigns />);
+    expect(screen.getByRole('button', { name: 'Rename campaign' })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: /advance time/i })).toBeNull();
   });
 
-  test('premium + canonized + a member → advance button ENABLED', async () => {
+  test('premium + canonized + a member → the header renders and NO advance button', async () => {
     const { CampaignFolder } = await import('../../src/components/settlements/CampaignFolder.jsx');
     const member = { id: 's1', name: 'Hearthfell', tier: 'town', settlement: { name: 'Hearthfell', config: {}, npcs: [], factions: [], neighbourNetwork: [] } };
     render(
       <CampaignFolder
         {...folderProps}
         settlements={[member]}
-        campaign={{ ...baseCampaign, settlementIds: ['s1'] }}
+        campaign={{ ...baseCampaign, settlementIds: ['s1'], worldState: { canonizedAt: '2026-01-01T00:00:00Z' } }}
         canManageCampaigns
-        worldCanonized
       />,
     );
-    const btn = screen.getByRole('button', { name: /advance time/i });
-    expect(btn.disabled).toBe(false);
+    expect(screen.getByRole('button', { name: 'Rename campaign' })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: /advance time/i })).toBeNull();
+    expect(screen.queryByLabelText('Advance interval')).toBeNull();
   });
 });
 

@@ -91,7 +91,7 @@ const CONTROLS = {
     return { control: screen.getByRole('button', { name: /^Export JSON/ }), label: 'Export JSON', fired: () => exportBulk.mock.calls.length };
   },
   ...Object.fromEntries(['World Book', 'Player Book', 'Campaign PDF'].map((name) => [`CampaignFolder :: ${name}`, () => {
-    render(<CampaignFolder campaign={{ id: 'c1', name: 'Realm', collapsed: true }} settlements={[{ id: 's1', name: 'A', settlement: SETTLEMENT }]} worldCanonized canManageCampaigns onAdvanceTime={() => {}} toggleCollapsed={() => {}} />);
+    render(<CampaignFolder campaign={{ id: 'c1', name: 'Realm', collapsed: true }} settlements={[{ id: 's1', name: 'A', settlement: SETTLEMENT }]} canManageCampaigns toggleCollapsed={() => {}} />);
     fireEvent.click(screen.getByRole('button', { name: /Books and export/ }));
     return { control: screen.getByRole('menuitem', { name: new RegExp(`^${name}`) }), label: name, fired: () => track.mock.calls.length };
   }])),
