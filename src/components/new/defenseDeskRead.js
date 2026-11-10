@@ -89,3 +89,21 @@ export function defenseDeskRead(settlement, options = {}) {
     : options.publicDossier ? publicLens(r, 'criminal') : defenseCriminalProse(options.playerView ? publicVeiledRecordOf(r) : r, options.crimStructure ?? null, deskOpts);
   return Object.freeze({ state, threat, forces, posture, status, wall, supporting, criminal });
 }
+
+/**
+ * THE ORGANIZED-RING NOTE, gated (VEIL-FIX R3, the chair's ruling of 2026-11-10; SW-B7b's idiom).
+ * SW-B5 FRAMES picks the note's vantage by the record's `_seed` (defenseDisplay.js ::
+ * withRingVantage), which the shared record does not carry; so the owner's save ships the drawn
+ * note with the projection under `defense:criminal` (`ringNote`), and a shared page prints that
+ * line when present and renders the classification's own note locally, as before, when absent.
+ * The owner's view reads its own classification.
+ * @param {any} settlement @param {{note?: unknown}|null|undefined} csd the card's classification
+ *   (`deskHostArgs.js :: criminalStructureOf`)
+ * @param {{publicDossier?: boolean}} [options]
+ * @returns {string|null}
+ */
+export function criminalRingNoteRead(settlement, csd, options = {}) {
+  const local = typeof csd?.note === 'string' ? csd.note : null;
+  const shipped = options.publicDossier ? /** @type {any} */ (publicProseOf(settlement, 'defense:criminal'))?.ringNote : null;
+  return typeof shipped === 'string' && shipped ? shipped : local;
+}

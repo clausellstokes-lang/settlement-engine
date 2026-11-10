@@ -82,9 +82,13 @@ export const PUBLIC_PROSE_SITES = Object.freeze(/** @type {PublicProseSite[]} */
   // THE DEFENSE DESK (defenseDeskRead.js is its one caller): one site per lens, the Defense
   // tab's eight reads. The owner's record carries no veil, so the criminal lens is drawn on the
   // owner's own classification; a veiled block is dropped on the way out (galleryVeil.js).
-  ...DEFENSE_LENSES.map((lens) => /** @type {const} */ ([`defense:${lens}`, (/** @type {any} */ s, /** @type {boolean} */ publicDossier) => defenseDeskRead(s, {
-    publicDossier, playerView: true, tier: s?.tier, crimStructure: criminalStructureOf(s)?.key ?? null,
-  })[lens]])),
+  // The criminal lens also carries the card's organized-ring note as drawn by the owner's seed
+  // (`ringNote`, VEIL-FIX R3): the shared record has no seed to draw its vantage from.
+  ...DEFENSE_LENSES.map((lens) => /** @type {const} */ ([`defense:${lens}`, (/** @type {any} */ s, /** @type {boolean} */ publicDossier) => {
+    const csd = criminalStructureOf(s);
+    const drawn = defenseDeskRead(s, { publicDossier, playerView: true, tier: s?.tier, crimStructure: csd?.key ?? null })[lens];
+    return lens === 'criminal' && drawn && typeof csd?.note === 'string' ? { ...drawn, ringNote: csd.note } : drawn;
+  }])),
   // THE POWER DESK (powerDeskRead.js is its one caller). The blocs (DS-POW-7) read the played
   // world's politics ledger: campaign-only, so their rungs are never shipped (owner-only).
   ['power:desk', (s, publicDossier) => withoutRungs(powerDeskRead(s, {
