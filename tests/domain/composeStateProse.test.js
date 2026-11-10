@@ -342,7 +342,13 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     const DECLARED_APART = {
       // W3 POW fourth seat (2026-11-08, STYLE-AUDIT §2a #24): the pool gained its player face's fourth vantage,
       // `[newcomer]` v5 (vid 4); the same 72 player cells now draw it, at vid 4 / index 3 (was vid 3 / index 2).
-      'DS-POW-1 :: governanceFractured true': { cells: 72, coordinates: ['vid 4 / index 3'] },
+      // GREEN-TIP (2026-11-10, re-declared BY IDENTITY): 72 -> 60. MEASURED by an untracked probe of this arm at 8308f13f8
+      // and every first-parent stage of 8308f13f8..bf14617ca touching src/, the helpers or scripts: W3 POW's merge
+      // 1a160d599 moved the coordinate (vid 3 / index 2 -> vid 4 / index 3, the row above), and FIX-FOOD-ISOLATION's merge
+      // c6e8a4ad6 alone moved the count, 72 -> 60 (2482faa60 reads 72; the mover is bf718398e — reverting it alone on the
+      // merge restores 72, reverting 46459cb16 alone does not). The DRAW did not move; the REACH did: the food change lands
+      // the run on governanceFractured worlds less often. DS-DEF-8 and DS-ECO-6 are reached with 0 cells apart.
+      'DS-POW-1 :: governanceFractured true': { cells: 60, coordinates: ['vid 4 / index 3'] },
     };
     /** @type {Record<string, { cells: number, coordinates: string[] }>} */
     const measuredApart = {};
