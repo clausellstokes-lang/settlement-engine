@@ -216,6 +216,7 @@ function composedFixture({ founding = ['corruption_exposed'] } = {}) {
     importance: 'minor',
     power: 0,
   });
+  // anchored: the same member object is asserted present just above (id 'old', importance 'minor', power 0)
   expect(afterSettlement.factions[0].members[0]).not.toHaveProperty('factionAffiliation');
 
   const authorityVerdicts = warAuthorityVerdictsForPulse(RULES, [authorityVerdict]);
