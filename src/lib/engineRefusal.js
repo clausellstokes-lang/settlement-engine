@@ -25,24 +25,26 @@ const ENGINE_CODE_REASONS = Object.freeze({
 });
 
 /**
- * What an `engine_remote_unsupported` request asked for, in the reader's words, built from the
- * refusal's own `inputs` and `scope` (remote-path FU-3). The order is fixed; a phrase is said once.
- * `contentEnvironment` is a campaign's settlement when its scope is 'campaign', and the account's
- * own content otherwise.
+ * What an `engine_remote_unsupported` request asked for, as COPY KEYS (never words: the words live
+ * under `refusals.engineUnsupported.what` in copy/en.js, where the style walker and a translator
+ * look), from the refusal's own `inputs` and `scope` (remote-path FU-3). The order is fixed —
+ * neighbour, content, campaign — and a key appears once. `contentEnvironment` is a campaign's
+ * settlement when its scope is 'campaign', and the account's custom content otherwise.
+ * RefusalNotice resolves the keys and joins them with `refusals.engineUnsupported.join`.
  * @param {unknown} inputs
  * @param {unknown} scope
- * @returns {string|null} null when no input is one the reader can be told about
+ * @returns {string[]|null} null when no input is one the reader can be told about
  */
-export function unsupportedWhat(inputs, scope) {
+export function unsupportedWhatKeys(inputs, scope) {
   const asked = new Set(Array.isArray(inputs) ? inputs : []);
-  const ownContent = asked.has('customContent') || asked.has('contentTunables')
+  const customContent = asked.has('customContent') || asked.has('contentTunables')
     || (asked.has('contentEnvironment') && scope !== 'campaign');
-  const phrases = [
-    asked.has('neighbour') ? 'beside an imported neighbour' : null,
-    ownContent ? 'with your own content' : null,
-    asked.has('contentEnvironment') && scope === 'campaign' ? 'inside a campaign' : null,
-  ].filter(Boolean);
-  return phrases.length ? phrases.join(' and ') : null;
+  const keys = [
+    asked.has('neighbour') ? 'neighbour' : null,
+    customContent ? 'customContent' : null,
+    asked.has('contentEnvironment') && scope === 'campaign' ? 'campaign' : null,
+  ].filter(Boolean).map((k) => `refusals.engineUnsupported.what.${k}`);
+  return keys.length ? keys : null;
 }
 
 /**
@@ -50,14 +52,14 @@ export function unsupportedWhat(inputs, scope) {
  * it has no sentence of its own (the generic failure then speaks). An unsupported request whose
  * inputs name nothing a reader asked for (a bad section, a non-string seed) is null too.
  * @param {unknown} error the rejection
- * @returns {{ reason: string, vars: Record<string, string>|null }|null}
+ * @returns {{ reason: string, vars: Record<string, string|string[]>|null }|null}
  */
 export function engineRefusalOf(error) {
   const err = /** @type {{ code?: unknown, inputs?: unknown, scope?: unknown }|null|undefined} */ (error);
   const reason = engineRefusalReason(err?.code);
   if (!reason) return null;
   if (reason !== REFUSAL_REASONS.ENGINE_UNSUPPORTED) return { reason, vars: null };
-  const what = unsupportedWhat(err?.inputs, err?.scope);
+  const what = unsupportedWhatKeys(err?.inputs, err?.scope);
   return what ? { reason, vars: { what } } : null;
 }
 

@@ -489,9 +489,19 @@ export const en = Object.freeze({
     },
     // The request carries what the engine service cannot make yet (remote-path FU-3): `{what}`
     // names it from the refusal's own inputs (lib/engineRefusal.js). No date, no "try again".
+    // The `{what}` phrases are THE INTERFACE'S OWN WORDS (the chair, 2026-11-10), so the reader
+    // can find the control that caused the refusal: the wizard's "Neighbour active" banner and its
+    // "Use my custom content" switch. lib/engineRefusal.js picks the KEYS in this order (neighbour,
+    // content, campaign); RefusalNotice resolves them and joins them with `join`.
     engineUnsupported: {
       rubric: 'Not in this build yet',
       body:   'This build’s forge cannot yet make a settlement {what}, so no settlement was made.',
+      join:   ' and ',
+      what: {
+        neighbour: 'with a neighbour active',
+        customContent: 'with your custom content',
+        campaign: 'inside a campaign',
+      },
     },
     // No door and no price: the admin panel is not sold, so this sentence must
     // not read as an upgrade prompt. It says whose page it is and stops.

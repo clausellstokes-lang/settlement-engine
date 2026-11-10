@@ -277,13 +277,16 @@ describe('the lane records a reason for every gate it closes', () => {
     // anchored: `said` carries the unsupported sentence; the generic stall must not ride with it.
     expect(said).not.toContain(t('errors.forgeStart'));
   }
-  test('engine_remote_unsupported inside a campaign names the campaign', () =>
-    unsupportedSaysWhatWasAskedFor(['contentEnvironment'], 'campaign', 'a settlement inside a campaign'));
-  test('engine_remote_unsupported with homebrew names your own content', () =>
-    unsupportedSaysWhatWasAskedFor(['customContent', 'contentTunables'], 'standalone', 'a settlement with your own content'));
-  test('engine_remote_unsupported with a neighbour and homebrew names both', () =>
-    unsupportedSaysWhatWasAskedFor(['neighbour', 'customContent'], 'standalone',
-      'a settlement beside an imported neighbour and with your own content'));
+  // The chair's two examples, VERBATIM (2026-11-10), and the third phrase on its own.
+  test('engine_remote_unsupported inside a campaign: the chair\'s first example, verbatim', () =>
+    unsupportedSaysWhatWasAskedFor(['contentEnvironment'], 'campaign',
+      'This build’s forge cannot yet make a settlement inside a campaign, so no settlement was made.'));
+  test('engine_remote_unsupported with a neighbour and homebrew: the chair\'s second example, verbatim, in order', () =>
+    unsupportedSaysWhatWasAskedFor(['customContent', 'neighbour'], 'standalone',
+      'This build’s forge cannot yet make a settlement with a neighbour active and with your custom content, so no settlement was made.'));
+  test('engine_remote_unsupported with an account\'s own environment names the custom content switch', () =>
+    unsupportedSaysWhatWasAskedFor(['contentEnvironment'], 'standalone',
+      'This build’s forge cannot yet make a settlement with your custom content, so no settlement was made.'));
 
   // remote-path R3, kept after FU-4 struck the clause from the sentence:
   // a failed forge or regenerate leaves the draft that was on the page exactly in place.

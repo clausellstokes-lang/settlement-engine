@@ -4,7 +4,7 @@
  * reason; the codes without a sentence of their own map to nothing.
  */
 import { describe, it, expect } from 'vitest';
-import { engineRefusalOf, engineRefusalReason, unsupportedWhat } from '../../src/lib/engineRefusal.js';
+import { engineRefusalOf, engineRefusalReason, unsupportedWhatKeys } from '../../src/lib/engineRefusal.js';
 import { ENGINE_REMOTE_ERROR_CODES, ENGINE_VERSION_RETIRED_CODE } from '../../src/lib/engineRemote.js';
 import { REFUSAL_REASONS, isRefusalReason } from '../../src/lib/refusalReasons.js';
 
@@ -24,15 +24,16 @@ describe('engineRefusalReason', () => {
     }
   });
 
-  it('FU-3: an unsupported request names what was asked for, once each, in a fixed order; or nothing', () => {
-    expect(unsupportedWhat(['contentEnvironment'], 'campaign')).toBe('inside a campaign');
-    expect(unsupportedWhat(['contentEnvironment'], 'standalone')).toBe('with your own content');
-    expect(unsupportedWhat(['customContent', 'contentTunables', 'contentEnvironment'], 'standalone')).toBe('with your own content');
-    expect(unsupportedWhat(['contentEnvironment', 'neighbour'], 'campaign')).toBe('beside an imported neighbour and inside a campaign');
-    expect(unsupportedWhat(['section'], null)).toBe(null);
+  it('FU-3: an unsupported request names what was asked for as COPY KEYS, once each, neighbour → content → campaign; or nothing', () => {
+    const K = (k) => `refusals.engineUnsupported.what.${k}`;
+    expect(unsupportedWhatKeys(['contentEnvironment'], 'campaign')).toEqual([K('campaign')]);
+    expect(unsupportedWhatKeys(['contentEnvironment'], 'standalone')).toEqual([K('customContent')]);
+    expect(unsupportedWhatKeys(['customContent', 'contentTunables', 'contentEnvironment'], 'standalone')).toEqual([K('customContent')]);
+    expect(unsupportedWhatKeys(['contentEnvironment', 'neighbour'], 'campaign')).toEqual([K('neighbour'), K('campaign')]);
+    expect(unsupportedWhatKeys(['section'], null)).toBe(null);
     expect(engineRefusalOf({ code: 'engine_remote_unsupported', inputs: ['seed'] })).toBe(null);
     expect(engineRefusalOf({ code: 'engine_remote_unsupported', inputs: ['neighbour'] }))
-      .toEqual({ reason: REFUSAL_REASONS.ENGINE_UNSUPPORTED, vars: { what: 'beside an imported neighbour' } });
+      .toEqual({ reason: REFUSAL_REASONS.ENGINE_UNSUPPORTED, vars: { what: [K('neighbour')] } });
     expect(engineRefusalOf({ code: 'engine_rate_limited' })).toEqual({ reason: REFUSAL_REASONS.ENGINE_RATE_LIMITED, vars: null });
   });
 });
