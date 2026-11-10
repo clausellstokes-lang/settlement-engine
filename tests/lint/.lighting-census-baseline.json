@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ef226a60c3c952fc14cc34d987897710659ee6d1",
+  "measuredAtSha": "a47723e8ee821d6f27d4442b5503e05d0659df0c",
   "measuredBy": "STYLE-2-MERGE-6",
   "date": "2026-11-10",
-  "note": "STYLE-2-MERGE point 36, the simulation batch (GREEN-TIP 6eeb5f82c, PULSE-SITES 47de1b76a): re-frozen at the merged tip; PULSE-SITES own files and titles (its lane: files +2, parked +1, credited +1, titles +8, suite titles +7), GREEN-TIP none",
-  "files": 3187,
-  "parked": 396,
-  "credited": 2791,
-  "titles": 29039,
-  "suiteTitles": 7853
+  "note": "STYLE-2-MERGE point 37, the REMOTE-PATH merge (922f19837, merge 813902a2e): re-frozen at the merged tip; the files and titles REMOTE-PATH added (its lane, base to tip: files +5, parked +1, credited +4, titles +27, suite titles +5)",
+  "files": 3192,
+  "parked": 397,
+  "credited": 2795,
+  "titles": 29066,
+  "suiteTitles": 7858
 }
