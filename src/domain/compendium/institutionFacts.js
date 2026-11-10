@@ -1,5 +1,5 @@
 /**
- * compendium/institutionFacts.js — what the Institutions page prints under each institution
+ * domain/compendium/institutionFacts.js — what the Institutions page prints under each institution
  * (COMPENDIUM-INSTITUTIONS H7).
  *
  * THE OWNER'S WORD (2026-11-10, verbatim): "Abd the institution page should show ALL
@@ -41,13 +41,14 @@ for (const fam of INSTITUTION_FAMILIES) {
 const SERVICE_KEY = new Map(Object.keys(INSTITUTION_SERVICES).map((k) => [k.toLowerCase(), k]));
 
 /** lower-cased name -> the outputs of every chain that processes through it. */
+/** @type {Map<string, string[]>} */
 const OUTPUTS_BY_NAME = new Map();
 /** @param {string} name @param {ReadonlyArray<string> | undefined} outs */
 function addOutputs(name, outs) {
   const k = String(name || '').toLowerCase();
   if (!k) return;
-  if (!OUTPUTS_BY_NAME.has(k)) OUTPUTS_BY_NAME.set(k, []);
-  const list = OUTPUTS_BY_NAME.get(k);
+  let list = OUTPUTS_BY_NAME.get(k);
+  if (!list) { list = []; OUTPUTS_BY_NAME.set(k, list); }
   for (const o of outs || []) {
     const s = String(o || '').trim();
     if (s && !list.some((x) => x.toLowerCase() === s.toLowerCase())) list.push(s);
@@ -85,7 +86,7 @@ export function institutionFacts(inst) {
       .sort((a, b) => b.share - a.share || (a.archetype < b.archetype ? -1 : 1))
     : null;
   const svcKey = SERVICE_KEY.get(key);
-  const services = svcKey ? Object.keys(INSTITUTION_SERVICES[svcKey] || {}) : null;
+  const services = svcKey ? Object.keys(/** @type {Record<string, object>} */ (INSTITUTION_SERVICES)[svcKey] || {}) : null;
   const outs = OUTPUTS_BY_NAME.get(key);
   return {
     size: TIER_BY_NAME.get(key) || null,

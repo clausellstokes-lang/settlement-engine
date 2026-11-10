@@ -12,7 +12,7 @@ import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { institutionAnchor } from './institutionSearchEntries.js';
-import { institutionFacts } from './institutionFacts.js';
+import { institutionFacts } from '../../domain/compendium/institutionFacts.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
@@ -250,7 +250,7 @@ export function NeighbourTab({ search='' }) {
 }
 
 // H7 — what each institution card adds, every line READ from a registry
-// (compendium/institutionFacts.js). A field a registry does not hold prints no line.
+// (domain/compendium/institutionFacts.js). A field a registry does not hold prints no line.
 // The owner's own nouns label the three: "Backing", "Services", "Flows into"; "Size" is the
 // configuration panel's word, and "Priority slider" is the page's own lead ("the matching
 // priority slider band").

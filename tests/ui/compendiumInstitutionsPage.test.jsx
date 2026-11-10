@@ -18,7 +18,7 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { COMPENDIUM_DATA as CD } from '../../src/domain/compendium/generated/compendiumData.generated.js';
-import { institutionFacts } from '../../src/components/compendium/institutionFacts.js';
+import { institutionFacts } from '../../src/domain/compendium/institutionFacts.js';
 import { distinctInstitutions, institutionAnchor } from '../../src/components/compendium/institutionSearchEntries.js';
 import { backingRowFor } from '../../src/data/institutionBacking.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';

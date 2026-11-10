@@ -102,14 +102,6 @@ const ALLOWED_RAW_READS = Object.freeze({
     count: 1,
     why: 'a React key — an identity, not a word, and it must stay stable when the label changes',
   },
-  // COMPENDIUM-INSTITUTIONS H7 (2026-11-10, the owner: "the institution page should show ALL
-  // institutions with their native power backing and services and flows"): the facts module
-  // reads the raw name only to LOOK THE HOUSE UP in the registries, which key by it; the card
-  // prints the house through the seam, never this read.
-  'src/components/compendium/institutionFacts.js': {
-    count: 1,
-    why: 'the LOOKUP KEY into institutionBacking, institutionServices and the chain registries, which key by the raw catalogue name; nothing is printed from it',
-  },
   'src/components/new/tabs/InstitutionsTab.jsx': {
     count: 2,
     why: 'the JOIN KEY to the service rows (each row names its house by the raw roster name) and a React key; neither is printed — the card title goes through the seam',
@@ -235,7 +227,9 @@ describe('the institution label seam — the habitat is exactly the frozen one',
     // 3 -> 4 (2026-10-30, T1-14): the Institutions tab's join key and React key.
     // 4 -> 5 (2026-11-10, COMPENDIUM-INSTITUTIONS H7): the Compendium's facts module's registry
     // lookup key (the owner's word on the Institutions page; its row above carries the reason).
-    expect(Object.keys(ALLOWED_RAW_READS)).toHaveLength(5);
+    // 5 -> 4 (2026-11-10, COMPENDIUM-INSTITUTIONS-2 b): that module moved to
+    // src/domain/compendium/institutionFacts.js, outside this census's trees; a shrink.
+    expect(Object.keys(ALLOWED_RAW_READS)).toHaveLength(4);
   });
 });
 
