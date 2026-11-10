@@ -21,7 +21,7 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -171,5 +171,23 @@ describe('CompendiumPanel — decomposition smoke', () => {
     render(<CompendiumPanel standalone routeEntry="tier-thorp" />);
     expect(screen.getByRole('button', { name: 'Back' })).toBeTruthy();
     expect(screen.getByRole('heading', { level: 1, name: 'Tiers & Routes' })).toBeTruthy();
+  });
+
+  // H8 (the owner: "The search bar acts as a search bar that filters based on string
+  // matching"): on a section page the one box narrows the page IN PLACE, by substring.
+  test('a section page’s one search box filters the page by string matching, in place', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    const { container } = render(<CompendiumPanel standalone routeSection="calamity" />);
+    expect(container.querySelectorAll('input')).toHaveLength(1); // one box, no second search
+    const root = container.querySelector('[data-compendium-filter-root]');
+    const visible = () => [...root.querySelectorAll('*')].filter((el) => !el.closest('[data-filter-hidden]')).map((el) => el.textContent).join(' ');
+    expect(visible()).toContain('Flavours');
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: 'FLOOD' } });
+    expect(visible().toLowerCase()).toContain('flood');
+    expect(root.querySelectorAll('[data-filter-hidden]').length).toBeGreaterThan(0);
+    // Every hidden entry is one that does not contain the string.
+    for (const el of root.querySelectorAll('[data-filter-hidden]')) expect(el.textContent.toLowerCase()).not.toContain('flood');
+    fireEvent.change(screen.getByLabelText('Search catalog'), { target: { value: '' } });
+    expect(root.querySelectorAll('[data-filter-hidden]').length).toBe(0);
   });
 });

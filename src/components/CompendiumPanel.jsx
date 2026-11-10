@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, PAGE_MAX, PROSE_MAX } from './theme.js';
 // Icons reuse the set already bundled in the eager vendor-icons chunk (List rides
 // in via HowToUse) — no NEW lucide icon is introduced, so first paint is unmoved.
@@ -196,6 +196,42 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry, 
   const search = searchState.tab === activeTab ? searchState.q : '';
   const setSearch = (q) => setSearchState({ tab: activeTab, q });
   const customContentCount = useStore(s => s.getCustomContentCount());
+  // H8 — ONE SEARCH PER PAGE, AND IT FILTERS (the owner, 2026-11-10: "The search bar acts as a
+  // search bar that filters based on string matching"). On a section page the one box narrows
+  // what the page shows IN PLACE: every entry on the page whose text does not CONTAIN the typed
+  // string —
+  // case-insensitive, plain substring — is hidden; clearing the box shows everything again.
+  // The sections that already filtered by their own search prop keep doing so underneath.
+  const filterRoot = useRef(null);
+  useEffect(() => {
+    const root = filterRoot.current;
+    if (!root || activeTab === 'custom') return undefined;
+    const apply = () => {
+      for (const el of root.querySelectorAll('[data-filter-hidden]')) {
+        el.style.display = el.getAttribute('data-filter-hidden');
+        el.removeAttribute('data-filter-hidden');
+      }
+      const q = search.trim().toLowerCase();
+      if (!q) return;
+      // Walk down from the page: a child that does not contain the string is hidden whole; a
+      // child that does is kept, and is itself narrowed only when it is a list (five or more
+      // children) — so an entry's own parts (its title, key, line, chip) are never split.
+      const narrow = (list) => {
+        for (const child of list.children) {
+          if (!(child.textContent || '').toLowerCase().includes(q)) {
+            child.setAttribute('data-filter-hidden', child.style.display || '');
+            child.style.display = 'none';
+          } else if (child.children.length >= 5) {
+            narrow(child);
+          }
+        }
+      };
+      narrow(root);
+    };
+    apply();
+    const t = setTimeout(apply, 60);
+    return () => clearTimeout(t);
+  }, [search, activeTab]);
   // ONE reactive mobile flag for every mobile branch below.
   const isMobile = useIsMobile();
 
@@ -314,7 +350,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry, 
       <>
         {searchBar('Search catalog', 'Search...')}
         <div style={{ padding:'14px', background:CARD, ...(standalone || isMobile ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
-          <div style={contentColumn}>
+          <div ref={filterRoot} data-compendium-filter-root="" style={contentColumn}>
             {renderTab()}
           </div>
         </div>

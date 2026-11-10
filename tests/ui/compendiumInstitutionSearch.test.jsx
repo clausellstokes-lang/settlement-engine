@@ -85,3 +85,27 @@ describe('H6 — institutions in the global search', () => {
     expect(container.querySelector(`#${institutionAnchor('Wayside inn')}`)).not.toBeNull();
   });
 });
+
+// H8 on the landing (the owner, 2026-11-10: "The search bar acts as a search bar that filters
+// based on string matching"): plain, case-insensitive substring over the name and category a
+// result row shows — no fuzzy ranking, no keyword-only hits, no prefix-only rule, no cap.
+describe('H8 — the landing search matches by string', () => {
+  it('lists exactly the entries whose name or category contains the string', async () => {
+    const { matchCompendium } = await import('../../src/components/compendium/CompendiumGlobalSearch.jsx');
+    const index = compendiumGlobalSearchIndex();
+    for (const q of ['inn', 'WATCH', 'theocracy', 'mill', 'ion']) {
+      const want = index.filter((e) => `${e.term}`.toLowerCase().includes(q.toLowerCase())
+        || `${e.category}`.toLowerCase().includes(q.toLowerCase()));
+      const got = matchCompendium(q, index);
+      expect(new Set(got), q).toEqual(new Set(want));
+      expect(got.length, q).toBe(want.length);
+    }
+    // Not fuzzy: letters in order but not contiguous match nothing.
+    expect(matchCompendium('wysd inn', index)).toEqual([]);
+    // Names that contain the string come before category-only matches.
+    const r = matchCompendium('institution', index);
+    expect(r.length).toBeGreaterThan(CD.institutions.distinctNames);
+    expect(r[0].term.toLowerCase()).toContain('institution');
+  });
+});
+
