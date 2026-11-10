@@ -234,6 +234,8 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'recordTrace', reason: 'appends a receipt to `simulationTrace` through the run\'s deterministic clock, the sanctioned cross-cutting ledger, never a held key.' },
   { symbol: 'takeAllegianceReceipts', reason: 'takes (and forgets) the receipts the seam left in a module WeakMap keyed by the settlement; it writes no key on the record.' },
   { symbol: 'factsOf', reason: 'a pure READ of the record\'s declared facts, handed to renderStressSummary as its facts bag; it returns a new object and writes nothing at all.' },
+  // URBAN-FIX C-1 (935c961fd), composed at STYLE-2-MERGE point 25: the food record's composed line, read for the stored foodways.
+  { symbol: 'foodwaysLineOf', reason: 'a pure READ of economicState.foodSecurity.foodRecord.foodwaysLine (trimmed, or null); it writes nothing at all.' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */
