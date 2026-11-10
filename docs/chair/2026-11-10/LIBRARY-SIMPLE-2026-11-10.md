@@ -73,6 +73,8 @@ unreachable today. Left alone, as ruled, and listed here.
 | registers | 1eee640a4, c814aa5a5 | phone floor, mutation manifest (a planted regression, #124), anchor marker, lighting census refrozen |
 | e2e (chair's hand-back condition) | 34a8060a3 | `e2e/regional-causality.spec.js` pressed the removed "+1". Re-keyed BY IDENTITY: the same one tick is taken on the Realm's Advance Realm at Week, then back to the folder for the same "2/2 ready", apply and resolve. Seed: the vanilla content binding from `realm-herald-gate.spec.js`, for its recorded reason. Measured at base and tip alike: on the start-the-clock-in-dialog path the confirm stays open after the pulse commits, so the spec closes it by Cancel |
 | STOP-5 retire (ruled (a)) | 2920100e0 | `advanceCampaignRegionalImpacts` leaves the store and the registry; the compendium re-emitted by `npm run gen:compendium-data` (159 ops, macro 47); the dead-operation ratchet green with its list UNCHANGED |
+| registers after the retire | e18c45357, 5812f0ded | the lighting census refrozen (files 3175 -> 3174, credited -1, titles -5, suite titles -1, exactly the retired pins); the sitemap re-emitted by `node scripts/generate-sitemap.mjs`, exactly one URL leaving (`/compendium/op-advancecampaignregionalimpacts`), which the closing sweep caught (green at the base) |
+| the chair's reopen: phone controls | b56c3ccf8 | NEW `e2e/library-phone-controls.spec.js` (red first on all three folder controls, then green) |
 
 **The three whole test files that left with their modules:**
 - `tests/components/useCampaignAdvance.test.jsx` pinned that the Library's typed refusals speak and that `ADVANCE_REFUSAL_TEXT` stays a twin of the Realm's `useRealmInspector.ADVANCE_ERROR_TEXT`. The Realm's text stays and is read by `tests/components/decreeRegistryPage.test.jsx`. The twin parity dies with the twin.
@@ -137,6 +139,28 @@ What left:
 - Still called from the Realm: `advanceCampaignWorld` (`useAdvanceSession.js`, and the unreachable
   `AutonomyPanel.jsx`), `setAdvanceAutoResolve` (`WorldMap.jsx`), `setActiveCampaign` (four UI files).
 
+## The chair's reopen: a folder card's controls on a phone
+
+Measured at iPhone 13, at rest (no sideways scroll), on the BASE and the tip alike, with a seeded folder
+(Hearthfell) and an unassigned town (Ashford):
+
+| row | the box holding its table | its table | Open / menu / Delete | a tap at each centre |
+|---|---|---|---|---|
+| folder card, base and tip before the cure | x 37-353, 316 px | 360 px | x 337-385 (cut at 353) | lands elsewhere, all three |
+| unassigned card, base and tip | x 28-362, 332 px | fits | x 292-341 | on target, all three |
+
+At the base the page itself was 578 px wide, but that did not reveal them: the folder's own scroll box
+clipped them, so they were reachable only by scrolling that box sideways. The defect predates the lane
+and was not introduced by it; it is cured here as ruled. The cause: a folder card's name line, "Hearthfell
+· The Reach", could not wrap, so the name cell needed 192 px against the ledger row's 121. The cure
+(b56c3ccf8) reuses the card's own phone rule, which its action cluster already follows ("the row gets
+taller, which is free"): on a phone the name line wraps, and "· The Reach" drops below the name. No word,
+size or colour changed, and desktop is unchanged. Pinned by `e2e/library-phone-controls.spec.js`. After
+the cure all three controls lie inside the folder's box and take a tap at their centre. That spec, with
+phone-horizontal-overflow, pinned-footer, flow-c and regional-causality, ran 84 passed.
+
+![the folder card at iPhone 13 after the cure](LIBRARY-SIMPLE-iphone13-folder-fix-2026-11-10.webp)
+
 ## STOP-4 and the strip
 
 RealmStrip is kept untouched. It is **not** a link into the Realm: the file has no `onNavigate`, `href`
@@ -165,7 +189,7 @@ premium through the dev store handle (`window.__store`), and made "The Reach" th
 - iPhone 13: the same, and the page is 390 px wide. At the base it was 578 px: the folder's
   Auto-resolve / Advance by / Advance Time cluster pushed it past the viewport. Two clips are the same at
   the base (pre-existing, not this lane's): the folder member row's Open and Delete are clipped at the
-  right edge, and an open card menu is clipped by its ledger's scroll box.
+  right edge (CURED by b56c3ccf8, see the chair's reopen above), and an open card menu is clipped by its ledger's scroll box (left as found).
   ![iPhone 13](LIBRARY-SIMPLE-iphone13-2026-11-10.webp)
 - Free/anonymous: the menu reads "Canonize / Run campaigns. Upgrade" with the "Available at launch"
   pill. On the free tier the row has no Add-to-campaign rows beside it, so it does not read oddly.
