@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "60ec6518370b4506195e5e31b251908f56b04e5e",
-  "measuredBy": "COMPENDIUM-INSTITUTIONS",
+  "measuredAtSha": "d86ca1860",
+  "measuredBy": "COMPENDIUM-INSTITUTIONS-2",
   "date": "2026-11-10",
-  "note": "COMPENDIUM-INSTITUTIONS (lane/compendium-institutions-2026-11-10): H7 adds tests/ui/compendiumInstitutionsPage.test.jsx (one file, its suites and titles); H9 adds one title to tests/ui/compendiumHubs.test.jsx",
+  "note": "COMPENDIUM-INSTITUTIONS-2 (lane/compendium-institutions-2-2026-11-10) a1, d86ca1860: two new test titles in tests/ui/compendiumPanel.smoke.test.jsx — the Institutions filter shows each card whole ('inn') and the Economy filter shows a band ladder whole ('poor') (titles 28990 -> 28992)",
   "files": 3177,
   "parked": 395,
   "credited": 2782,
-  "titles": 28990,
+  "titles": 28992,
   "suiteTitles": 7828
 }
