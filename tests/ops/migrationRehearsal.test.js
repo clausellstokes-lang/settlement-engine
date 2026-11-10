@@ -620,7 +620,7 @@ describe('bounded migration rehearsal plan', () => {
       rollbackDirectory: ROLLBACK,
       appliedHead: 200,
     });
-    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 209, pendingCount: 9 });
+    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 210, pendingCount: 10 });
     expect(fromWave200.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
       ['staff-unlock-surveyor-entitlement', 201, 201],
       ['edit-registry-public-denylist', 202, 202],
@@ -631,6 +631,7 @@ describe('bounded migration rehearsal plan', () => {
       ['public-hall-capture-veil', 207, 207],
       ['party-link-independent-idempotent-veiled', 208, 208],
       ['surveyor-premium-only', 209, 209],
+      ['public-prose-text-projection', 210, 210],
     ]);
     // ⭐⭐ THE LEDGER'S OWN HEAD IS ASSERTED RELATIONALLY AND MUST NEVER BE A LITERAL AGAIN.
     // `supabase/applied-head.json` is bumped in the same act as the owner's `supabase db
@@ -680,7 +681,7 @@ describe('bounded migration rehearsal plan', () => {
       migrationDirectory: MIGRATIONS,
       rollbackDirectory: ROLLBACK,
       appliedHead: 150,
-    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, 204, 205, 206, 207, 208, 209, but the ledger says 150/);
+    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, but the ledger says 150/);
   });
 
   it('stages no migration beyond the selected wave boundary', () => {
@@ -690,8 +691,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 209,
-      migrationCount: 209,
+      repoHead: 210,
+      migrationCount: 210,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -813,7 +814,7 @@ describe('clone admission is positive and source-bound', () => {
     const liveAppliedHead = JSON.parse(readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8')).appliedHead;
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: liveAppliedHead,
-      repoHead: 209,
+      repoHead: 210,
     });
   });
 });
