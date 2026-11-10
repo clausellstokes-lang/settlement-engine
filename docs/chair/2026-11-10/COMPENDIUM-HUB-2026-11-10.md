@@ -57,6 +57,56 @@ One composed string, flagged for veto: the custom page's head title "My Custom C
 Compendium" (the section's label in the other sections' title pattern); its description reuses the
 compendium route's own description. The section page heading's kicker is the word "Compendium".
 
+
+## Phase 1 additions (the chair's rulings of 02:42 and 02:50, reached this seat at 03:43)
+
+**The owner's words (verbatim):** "And apply your suggestions as wll" · "Sorry u meant three columns not three
+rows! Behind each box should be imagery(chosen from our stock) made opaque with regal gold for the lettering of
+the button. Of course custom content gets the purple gold treatment waiting till launch." · "The search bar acts
+as a search bar that filters based on string matching".
+
+| ruling | commit | what changed | pins |
+|---|---|---|---|
+| H1 revised + H1+ order and kickers | a2f84305e | three columns at every width (at 390 px three columns hold: names in two lines at most, the count on its own line, kicker hidden), order reading across: Tiers & Routes, Economy, Powers / Institutions, Magic & Religion, Stress / Calamity, Neighbour System, Operations / Living World, A–Z Index, My Custom Content; kickers "The world" x 8, "How it works" x 2, none x 2 | smoke: hrefs in order, `repeat(3, …)`, kickers 8/2/0 |
+| H13 tiles | a2f84305e | a stock painting behind every tile (crops under public/backgrounds/compendium/, 800 x 320 webp q60, 432 KB in all, lazy, sized, alt=""), an ink scrim at 0.80, the name in regal gold (gold-400 #D9B566 = GOLD_B, the launch skin's letter token) and the serif, the count smaller; descriptions dropped | smoke: src, lazy, 800 x 320, alt, file on disk, no description |
+| H14 launch skin | a2f84305e | My Custom Content, while purchases are closed: data-skin="launch", the launch ground's deepest stop as scrim, the shimmer on the name, the existing "Available at launch" pill (wraps inside the tile on a phone) | smoke: skin and pill on the twelfth tile only |
+| H12 first phone screen | a2f84305e (measured, no change) | iPhone 13: the first row of tiles ends at 517 px; the bottom bar begins near 620 px (screenshot) — the row is whole on the first screen with no text removed | — (measured; e2e overflow walk green) |
+| H8 search | 5a8522a83, 69e39ed93 | landing: every entry whose name or category CONTAINS the string, case-insensitive, no cap; section page: the one box hides every entry whose text lacks the string, in place, entries kept whole | red-first 2 failed / 9 passed, then green |
+| registers | 7a834a63d | lighting census titles 28982 -> 28984, suiteTitles 7825 -> 7826 | the door, then 34/34 |
+
+**Contrast, measured:** gold-400 on the 0.80 ink scrim over pure white (the brightest pixel any painting can
+show): 5.02:1. Scrim 0.75 would give 4.17:1, so 0.80 is the shallowest AA scrim.
+
+**Provenance (the AI-media register, scripts/ai-media-provenance.json):** our stock is credited AI media, so
+every crop is cut with sharp `.keepMetadata()` (the estate's own pipeline rule), carries its source's XMP credit
+byte for byte (every `require` marker present, every `forbid` marker absent, checked per file), and is registered
+with its source's row plus `derived_from`; present 56 -> 68, PRESENT_COUNT re-keyed with the cause. Three first
+choices (pricing, thorpe, create) were cohort-A files of unrecorded origin, which the register freezes at 23 and
+must not grow, and a fourth (export-dispatch) is a pinned no-Google-credit master; all were swapped for
+credited stills (commit c53d6175e).
+
+**Section → stock file → crop (for the owner's veto):**
+
+| section | stock | crop |
+|---|---|---|
+| Tiers & Routes | backgrounds/world-map.jpg (the crossroads signpost) | attention |
+| Economy | backgrounds/city.jpg (the trading town from above) | centre |
+| Powers | backgrounds/founders-charter.jpg (the sealed charter) | centre |
+| Institutions | backgrounds/gallery.jpg (the town crier in the square) | attention |
+| Magic & Religion | backgrounds/dim-desk.jpg (the lantern desk) | centre |
+| Stress | backgrounds/evolution-1-thorp.jpg (the lone thorp) | centre |
+| Calamity | backgrounds/about.jpg (the night fire) | centre |
+| Neighbour System | backgrounds/settlements.jpg (the map of settlements) | west |
+| Operations | backgrounds/realm-table.jpg (the map table) | centre |
+| Living World | backgrounds/evolution-5-city.jpg (the living city) | centre |
+| A–Z Index | backgrounds/compendium.jpg (the scriptorium) | west |
+| My Custom Content | backgrounds/evolution-2-hamlet.jpg (a hamlet beginning) | centre |
+
+**Seen at 1440 x 900 and iPhone 13:** three columns by four rows, flush, the paintings legible behind the
+scrim, the gold names clear; the purple twelfth tile with its pill; no page scrolls sideways (1440 = 1440, 390 =
+390); Back on every sub-page. The e2e walk (overflow, arrow header, pinned footer) on Chromium: 90 passed, 4
+skipped (WebKit).
+
 ## Old → new addresses (H5: history REPLACED, in the lazy panel)
 
 | old | new |
