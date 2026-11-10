@@ -204,15 +204,16 @@ describe('the generate cap admits the toggle bags and nothing else', () => {
     expect(clientMade, 'refused on bytes, before identity, the meter or any generation').toBe(0);
   }, 120_000);
 
-  for (const mode of ['force', 'exclude']) {
-    it(`the wizard's ${mode}-all body (every bulk control pressed '${mode}') is served 200`, async () => {
-      const { loadEngineFunction, adminDouble } = await import('../../e2e/support/engineFunction.js');
-      const { handleEngineGenerate, ENGINE_VERSION } = await loadEngineFunction();
-      const { body, bytes } = await largestWizardBody(mode, ENGINE_VERSION);
-      expect(bytes, 'the body is past the old 32 KB, so the bags are what the cap admits').toBeGreaterThan(32 * 1024);
-      const res = await handleEngineGenerate(post(body), { adminClient: adminDouble() });
-      expect(res.status, `${mode}-all, ${bytes} B`).toBe(200);
-    }, 240_000);
+  // Literal titles over one helper (not a loop of registrations), so the lighting census reads them.
+  async function wizardBodyIsServed(mode) {
+    const { loadEngineFunction, adminDouble } = await import('../../e2e/support/engineFunction.js');
+    const { handleEngineGenerate, ENGINE_VERSION } = await loadEngineFunction();
+    const { body, bytes } = await largestWizardBody(mode, ENGINE_VERSION);
+    expect(bytes, 'the body is past the old 32 KB, so the bags are what the cap admits').toBeGreaterThan(32 * 1024);
+    const res = await handleEngineGenerate(post(body), { adminClient: adminDouble() });
+    expect(res.status, `${mode}-all, ${bytes} B`).toBe(200);
   }
+  it('the wizard\'s force-all body (every bulk control pressed \'force\') is served 200', () => wizardBodyIsServed('force'), 240_000);
+  it('the wizard\'s exclude-all body (every bulk control pressed \'exclude\') is served 200', () => wizardBodyIsServed('exclude'), 240_000);
 });
 
