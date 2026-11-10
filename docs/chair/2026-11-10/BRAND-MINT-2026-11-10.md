@@ -114,6 +114,13 @@ line) correct, since the edit landed before the mint so the mint covers it.
 - `.github/workflows/brand-mint.yml` stays as the house's tool for the next AI-media registration. After that
   registration, push a `lane/brand-mint-**` branch (or dispatch the workflow), read the log, and commit the record
   from it. Re-minting no longer needs anyone's laptop.
-- The workflow's comment block still says `macos-14`; only `runs-on` moved (the chair's ruling: that line alone).
+- Both stale `macos-14` mentions are cured on the chair's ruling. The workflow's comment block (e335791de) is
+  comment-only and not a mint input, so the record did not move (run 42763055446: `git status` empty). The
+  script's header line now names the workflow file with no label (b65f5d94a). Re-minted by run
+  [42763252347](https://github.com/clausellstokes-lang/settlement-engine/actions/runs/42763252347) in 03ef07c30:
+  one input entry changed (the script, ca4a29ee77a8 → 74d7c8430ee1, its sha256 at the tip); `mintedOn` and the ten
+  outputs are unchanged; sha256 e6ccfc65…, equal to the log's; 70/70. The record's push started run
+  [42763483917](https://github.com/clausellstokes-lang/settlement-engine/actions/runs/42763483917): signature match,
+  `--record` exit 0, `git status --porcelain` empty. The record is a fixed point again.
   The door, not the label, decides the stack.
 - Not this seat's: the register's rows, the crops, the art, the derivation's logic, and any other red.
