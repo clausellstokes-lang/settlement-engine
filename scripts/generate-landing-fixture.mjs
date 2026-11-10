@@ -316,8 +316,17 @@ export function advanceTimelineFor(news, townId = 't', limit = ADVANCE_ENTRIES) 
  * fourth sentence's "bound by something neither speaks of" was an aphorism no field holds (the census law);
  * struck. The sentence keeps only the pressure sentence's fact: the two are about to be on opposite sides of
  * a significant decision.
+ *
+ * ⚠ RE-GROUNDED 2026-11-10 (FOUNDING-WORLDS; the chair's ruling N1; an OWNER VETO POINT). Measured at
+ * ecadf531a and f0f98d883: the run derives no conflict, no figure named Odhrán MacCarthy, Hector Gallagher or
+ * Inghean MacCarthy, and its pressure sentence is now Étaín Sullivan's and Lasair Hayes's rival proposals, so
+ * the second, third and fourth sentences had held nothing since the 2026-11-07 re-emit (7e3ba7547). They are
+ * DELETED. The narration now narrates exactly the card's three receipts: the first sentence is unchanged (the
+ * route pool and the cleared stands); the second is the chair's words for the institution receipt
+ * ("blacksmith · selected (Base chance 4% lifted by ×2.50 from nearby resources + terrain.)").
+ * tests/copy/landingNarrationGrounding.test.js now holds every name and figure here to a derived field.
  */
-const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to win the people back with what costs nothing: fair hearings and quick answers. Hector Gallagher and Inghean MacCarthy are about to stand on opposite sides of an important decision.';
+const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The village keeps a smith on four chances in a hundred, more than doubled by the mountain and by what lies near it.';
 
 /**
  * The frozen fixture object for one seed — every selection COMPUTED from engine
