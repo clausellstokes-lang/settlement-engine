@@ -302,11 +302,10 @@ function factionIdFor(npc = {}, item, index) {
   // derive from the power's `faction` field.
   // ⛔ RE-POINTED (GREEN-TIP, 2026-11-10): this slot read `factionAffiliation`, which the people car retired from
   // every card (15207301f), so on a current record every NPC fell through to 'unaffiliated' and
-  // seatNpcsIntoFactions seated nobody (60/60 soak births). The retired read is KEPT after the membership read
-  // only because the pulse's own writers (the cadence founder, successorNpc) still write that field — the
-  // chair's STOP-1; it reads nothing on a born card.
+  // seatNpcsIntoFactions seated nobody (60/60 soak births). The retired read kept beside it while the pulse's own
+  // writers still wrote that field LEFT with them (the chair's ruling 4): no writer writes it now.
   const membershipPower = firstRankMembershipOf(npc, powerOrderOf(item?.settlement))?.power;
-  const direct = npc.factionId || npc.faction || npc.affiliation || membershipPower || npc.factionAffiliation || npc.organizationId || npc.organization;
+  const direct = npc.factionId || npc.faction || npc.affiliation || membershipPower || npc.organizationId || npc.organization;
   if (direct) return stablePart(direct);
   const factions = item.settlement?.factions || item.settlement?.powerFactions || item.settlement?.politics?.factions || [];
   const faction = factions[(/** @type {any} */ (index)) % Math.max(1, factions.length)];
@@ -829,7 +828,9 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures, deityDisfavor: disfavor.exposure });
       if (local.random() >= exposeP) return;
 
-      const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;
+      // GREEN-TIP (2026-11-10): the exposure path's one home reader (corruption.js :: npcHomeInstitution, imported
+      // above; PULSE-SITES' site) in place of the same three handles read inline, the first of them retired.
+      const homeInstitution = npcHomeInstitution(npc);
       // Attribution is DELIBERATE through the resolver (§4). A LOCAL/cutout leash
       // keeps today's read — the tied org, falling back to the climate's first
       // criminal org — BYTE-IDENTICAL. A FOREIGN leash blames NO local org (the
