@@ -47,6 +47,13 @@ select count(*) from public.settlements s
         or exists (select 1 from jsonb_each(s.gallery_member_overrides) e
                     where e.key <> '$veil' and e.value ->> 'revealDm' = 'true'));
 
+-- (a2) Links on towns that also hold a frozen gallery copy. From this release the link's response
+--      leaves that copy out (it could carry DM content where the reveal switch was on); the count is
+--      for your information.
+select count(*) from public.settlements
+ where unlisted_slug is not null
+   and gallery_member_overrides #> '{$veil,snapshot}' is not null;
+
 -- (b) Surveyor entitlements by source. After 209 only source 'grant' admits by itself; an ACTIVE row
 --     with any other source (or none) on a NON-premium account loses the Surveyor at the push.
 --     Re-grant such rows through the admin path first.
@@ -75,6 +82,8 @@ Whether those older listed pages should adopt the default veil too is your call 
 **ROLLBACK, AS A SET.** 205, 206, 207 and 210 each restate ONE function, so their `@rollback` lines are right only last-in-first-out: undo 210, then 207, then 206, then 205 — never one from the middle (rolling back 206 alone would silently drop 207's capture strip and 210's token). 208's rollback goes with the client's. No table loses a row in any of the seven; `data.publicProse` stays in saved rows after a 210 rollback, inert.
 
 **WHAT THE REHEARSAL PROVES, AND WHAT IT DOES NOT.** The harness proves the seven files plan and apply as a contiguous chain on production-shaped data without losing rows. It cannot see what a restated function DOES; the two high findings were invisible to it. That is why the review was run.
+
+**A SECOND LIMIT, on frozen gallery copies:** a town listed in snapshot mode shows the copy frozen at its export. Copies frozen before this release were made by the old client, so they still carry what this release's sanitiser strips from live rows (the capture state among it); the new client strips them again in the browser when the page renders, but the response carries them until the town is exported again. Re-export each listed town after the release to refreeze its copy. Sanitising a frozen copy on the server is part of the post-deploy veil packet.
 
 **ONE LIMIT THAT REMAINS AFTER THIS RELEASE, said plainly:** the veil a DM sets by hand is applied in the reader's browser. The server's response still carries what that veil hides, on the gallery page as today and now on the party link, so a determined reader can find it in the network traffic. The sanitiser's own strips (secrets, hidden powers, the capture state) ARE server-side. A server-side veil is a migration of its own and is the first item of the post-deploy list. VEIL-FIX makes the veil's DEFAULT apply to a town shared by link alone, which today has none.
 

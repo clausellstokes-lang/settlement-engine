@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 172,
+      "dated": 173,
       "sha-pin": 2,
       "tree": 124
     },
@@ -356,6 +356,7 @@
     "_rosterGrowth2026-11-08-merge-wave": "ONE document JOINED the roster by being BORN into it (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24, on the integration branch at step 0, the brief's record commit): `dated` 156 -> 157, docs/INTEGRATION_MERGE_WAVE_2026-11-07.md, the merge seat's record, born dated (citations `path :: symbol`), 0 past-EOF; nothing changed class; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-07-w1": "W1 ECO (the economy lane of the construction-and-wiring wave, measured with this walker's own arm at the lane tip): ONE document BORN dated, `dated` 131 -> 132, docs/WIRING_W1_2026-11-07.md, the lane's record, 0 past-EOF; and 11 signed shift records BORN into `tree`, 100 -> 111, docs/shift-records/2026-11-07-w1-01 .. -11 (the construction re-record and the style law's re-records of the composed-prose manifest). A GROWTH, not a re-classification.",
     "_rosterGrowth2026-11-08-merge-wave-w1": "THE UNION AT THE W1 ECO MERGE (MERGE-WAVE, session session_01FbPLbdbKovNtK8Fx32oQ24): both sides' notes kept; `dated` 157 -> 158 (W1 ECO's docs/WIRING_W1_2026-11-07.md, 131 -> 132 on that side), `tree` 112 -> 124 (W1 ECO's twelve signed lane records docs/shift-records/2026-11-07-w1-01..w1-12, components of the W1 composition record); the count measured once by the walker; nothing changed class.",
+    "_rosterGrowth2026-11-10-veil-fix-re-review": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on lane/chair-2026-11-08): `dated` 172 -> 173, docs/chair/2026-11-10/REVIEW-VEIL-FIX-0cd3c7fc0-2026-11-10.md, the read-only re-review of the veil-fix lane at 0cd3c7fc0 (BLOCKED on two high findings), born dated; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-10-migration-review": "ONE document JOINED the roster by being BORN into it (the chair, session session_01FbPLbejcfwX5nii12VM673, on lane/chair-2026-11-08): `dated` 171 -> 172, docs/chair/2026-11-10/REVIEW-MIGRATIONS-204-210-2026-11-10.md, the read-only pre-deploy review of migrations 204 to 210, their rollbacks, the save path and the deploy document, born dated; measured once by this walker; nothing changed class."
   },
   "rows": []
