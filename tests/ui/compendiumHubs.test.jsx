@@ -35,10 +35,16 @@ describe('Compendium — dashboard + registry hubs', () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
     const { container } = render(<CompendiumPanel standalone />);
     const text = container.textContent;
-    // The demo world + the operations count, from the artifact. (The premade-deity
-    // roster was removed by owner ruling 2026-07-21; no deity count is published.)
-    expect(text).toContain(CD.meta.demoWorld.name);
+    // The operations count, from the artifact. (The premade-deity roster was removed by
+    // owner ruling 2026-07-21; no deity count is published.) The sample-world line was
+    // removed from the landing by the owner's word of 2026-11-10 ("remove the everything
+    // here is rednedered by the deteremistic.... all the way to the sample world
+    // cnocby..."): re-keyed by identity to an anchored negative. The data stays
+    // (CD.meta.demoWorld feeds the About page); the landing no longer prints it.
+    expect(CD.meta.demoWorld.name).toBeTruthy();
     expect(text).toContain(String(CD.operations.count));
+    expectAbsentWithAnchor(text, 'The sample world is', 'Tiers & Routes', 'landing sample-world line');
+    expectAbsentWithAnchor(text, CD.meta.demoWorld.name, 'Tiers & Routes', 'landing sample-world name');
     expect(CD.deities).toBeUndefined();
   });
 
@@ -125,7 +131,9 @@ describe('Compendium — dashboard + registry hubs', () => {
         // The landing (the owner, 2026-11-10: it replaced the Overview tab): its grid
         // is on screen and no section page is.
         expect(container.querySelector('nav[aria-label="Compendium sections"]'), `${id} renders the landing grid`).not.toBeNull();
-        expect(container.querySelector('#overview'), `${id} renders the landing intro`).not.toBeNull();
+        // The landing intro (#overview) was removed by the owner's word of 2026-11-10; the
+        // grid above is the landing's identity now, and the intro stays gone.
+        expect(container.querySelector('#overview'), `${id} carries no landing intro`).toBeNull();
         expect(document.title, `${id} panel head`).toBe('The SettlementForge Compendium');
         // The dead address is REPLACED, and what it resolves to now carries no entry.
         expect(here(), `${id} address`).toBe('/compendium');

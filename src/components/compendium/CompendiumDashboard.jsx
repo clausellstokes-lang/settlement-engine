@@ -1,7 +1,7 @@
 /**
  * compendium/CompendiumDashboard.jsx — the landing grid + the A–Z index.
  *
- * The landing (/compendium) is the intro and one flush grid of boxes, a box per
+ * The landing (/compendium) is the search and one flush grid of boxes, a box per
  * section with its count (from the generated artifact) where it has one. The A–Z index is the orphan-proof HTML sitemap:
  * every named entry across every catalog, alphabetised, each a stable deep-link into
  * its hub + section anchor.
@@ -47,22 +47,6 @@ const TILE_H = 320;
 // worst region of every tile. The launch tile's scrim is the launch ground's deepest stop.
 const SCRIM = 'rgba(27,20,8,0.80)';
 const LAUNCH_SCRIM = 'rgba(28,21,64,0.86)';
-
-// The landing's lead: the old Overview's one paragraph and its sample-world line.
-export function CompendiumIntro() {
-  return (
-    <div id="overview">
-      <p style={{ fontSize:FS.md, color:SEC, lineHeight:1.7, margin:'0 0 6px', fontFamily:sans, maxWidth:'42em' }}>
-        Everything here is rendered by the deterministic engine from its own registries, the same
-        code that builds your worlds. It cannot drift from what the simulator actually does.
-      </p>
-      <p style={{ fontSize:FS.sm, color:MUT, lineHeight:1.6, margin:'0 0 16px', fontFamily:sans }}>
-        The sample world is <strong style={{ color:INK }}>{CD.meta.demoWorld.name}</strong> (seed{' '}
-        <code style={{ fontFamily:'monospace', color:GOLD_TXT }}>{CD.meta.demoWorld.seed}</code>).
-      </p>
-    </div>
-  );
-}
 
 /**
  * THE LANDING GRID (rulings H1, H13, H14): one tile per section, FLUSH — no space between

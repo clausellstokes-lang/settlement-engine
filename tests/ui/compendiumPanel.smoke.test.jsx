@@ -25,6 +25,7 @@ import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -66,6 +67,19 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
+// The landing renders (the nav of twelve section links is the positive anchor) and the
+// intro the owner removed on 2026-11-10 is absent: both sentences and the sample-world line.
+function expectLandingWithoutIntro() {
+  const nav = screen.getByRole('navigation', { name: 'Compendium sections' });
+  expect(nav.querySelectorAll('li > a')).toHaveLength(12);
+  const text = document.body.textContent;
+  const anchor = 'Tiers & Routes'; // the first tile's name: proves the landing text is live
+  expectAbsentWithAnchor(text, 'rendered by the deterministic engine from its own registries', anchor, 'intro sentence 1');
+  expectAbsentWithAnchor(text, 'cannot drift from what the simulator actually does', anchor, 'intro sentence 2');
+  expectAbsentWithAnchor(text, 'The sample world is', anchor, 'sample-world line');
+  expect(document.querySelector('#overview')).toBeNull();
+}
+
 describe('CompendiumPanel — decomposition smoke', () => {
   test('mounts without throwing and renders the built-in catalog', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
@@ -75,12 +89,12 @@ describe('CompendiumPanel — decomposition smoke', () => {
     expect(document.body).toBeTruthy();
     expect(container.firstChild).not.toBeNull();
 
-    // Default mode is the built-in catalog on the Overview dashboard (DOC WAVE 2/2).
-    // Pinning its stable, artifact-rendered copy means a broken extraction (e.g.
-    // CompendiumDashboard/CatalogHubs → primitives/artifact import) surfaces here.
-    expect(
-      screen.getByText(/rendered by the deterministic engine from its own registries/),
-    ).toBeTruthy();
+    // Default mode is the landing. This pin once held the intro sentence; the owner's
+    // word of 2026-11-10 removed it ("remove the everything here is rednedered by the
+    // deteremistic.... all the way to the sample world cnocby..."), so it is re-keyed by
+    // identity to an ANCHORED NEGATIVE: the landing renders, its twelve tiles are present
+    // (a broken extraction still surfaces here), and the removed copy is not in the document.
+    expectLandingWithoutIntro();
   });
 
   test('mounts in standalone mode without throwing', async () => {
@@ -88,9 +102,8 @@ describe('CompendiumPanel — decomposition smoke', () => {
     const { container } = render(<CompendiumPanel standalone />);
 
     expect(container.firstChild).not.toBeNull();
-    expect(
-      screen.getByText(/rendered by the deterministic engine from its own registries/),
-    ).toBeTruthy();
+    // The same anchored negative (the owner's word of 2026-11-10, quoted above).
+    expectLandingWithoutIntro();
   });
 
   // RESTORATION #9 pinned the standalone-page identity (Page frame + PageHeader) and
