@@ -11,6 +11,7 @@ import { Tag, Row, Card, BandLadder } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { institutionAnchor } from './institutionSearchEntries.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
@@ -311,7 +312,8 @@ export function InstitutionsTab({ _config, search }) {
     ) : (
     <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:6 }}>
       {filtered.map(inst => (
-        <div key={inst.name} style={{ border:`1px solid ${BOR}`, padding:'8px 10px' }}>
+        // id: the global search's landing anchor for this institution (H6).
+        <div key={inst.name} id={institutionAnchor(inst.name)} style={{ border:`1px solid ${BOR}`, padding:'8px 10px', scrollMarginTop:ANCHOR_OFFSET }}>
           <div style={{ display:'flex', alignItems:'flex-start', gap:5, marginBottom:3 }}>
             <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{institutionDisplayName(inst)}</span>
             {inst.required && <Tag label="Core" color='#1a3a7a' title="Always present at this tier. Generated every time, never rolled by chance."/>}

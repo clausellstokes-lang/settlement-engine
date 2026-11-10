@@ -19,6 +19,8 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
+// H6: the institutions join the search as targets (not as per-entry pages).
+import { compendiumGlobalSearchIndex } from './institutionSearchEntries.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 
 // Category → swatch. Kept as a variable map (not inline literals) so the
@@ -57,7 +59,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
   const dropdownMaxHeight = isMobile ? 'min(320px, 45vh)' : 320;
 
   const q = query.trim();
-  const results = useMemo(() => (q ? searchCompendium(q, { limit: 8 }) : []), [q]);
+  const results = useMemo(() => (q ? searchCompendium(q, { limit: 8, index: compendiumGlobalSearchIndex() }) : []), [q]);
 
   // Close on click-outside.
   useEffect(() => {
