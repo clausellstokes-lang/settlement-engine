@@ -79,18 +79,18 @@ describe("(ii) the review's specimens, by text (each anchor computed from the DM
     expect(estrangedPowersOf(publicVeiledRecordOf(owner), governing).filter((e) => e.tie === 'corrupted' || e.tie === 'capture')).toEqual([]);
   });
 
-  for (const [i, state] of [[3, 'equilibrium'], [113, 'none']]) {
-    it(`soak1k-${i} (${state}): the criminal lens ships no capture sentence, though the DM view draws one (even 'none' reveals the state)`, () => {
+  it("soak1k-3 (equilibrium) and soak1k-113 (none): the criminal lens ships no capture sentence, though the DM view draws one (even 'none' reveals the state)", () => {
+    for (const [i, state] of [[3, 'equilibrium'], [113, 'none']]) {
       const owner = town(i);
-      expect(owner.powerStructure.criminalCaptureState).toBe(state);
+      expect(owner.powerStructure.criminalCaptureState, `soak1k-${i}`).toBe(state);
       const dmLine = dmCriminal(owner).capture?.sentence;
-      expect(typeof dmLine === 'string' && dmLine.length > 0, 'anchored: the DM view draws the capture sentence').toBe(true);
+      expect(typeof dmLine === 'string' && dmLine.length > 0, `soak1k-${i}: anchored, the DM view draws the capture sentence`).toBe(true);
       const shipped = composePublicProse(owner).blocks['defense:criminal'];
-      expect(typeof shipped.structure?.sentence === 'string' && shipped.structure.sentence.length > 0).toBe(true);
-      expect(shipped.capture ?? null).toBeNull();
-      expect(JSON.stringify(composePublicProse(owner).blocks).includes(dmLine)).toBe(false);
-    });
-  }
+      expect(typeof shipped.structure?.sentence === 'string' && shipped.structure.sentence.length > 0, `soak1k-${i}`).toBe(true);
+      expect(shipped.capture ?? null, `soak1k-${i}`).toBeNull();
+      expect(JSON.stringify(composePublicProse(owner).blocks).includes(dmLine), `soak1k-${i}`).toBe(false);
+    }
+  });
 
   it("the second path: a veiled governing face's title and role never reach the shipped paragraph; the DM view keeps them", () => {
     const owner = structuredClone(town(15));
