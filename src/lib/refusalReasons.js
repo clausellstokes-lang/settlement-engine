@@ -73,6 +73,20 @@ export const REFUSAL_REASONS = Object.freeze({
    */
   ENGINE_VERSION_RETIRED: 'engineVersionRetired',
   /**
+   * The engine service's rate guard refused (HTTP 429, the remote transport's typed
+   * `engine_rate_limited`). A limit, not a failure: "try once more" is false advice, waiting
+   * cures it. The sentence promises no clock time, because the client cannot tell the
+   * minute's window from the day's (remote-path R3, 2026-11-10).
+   */
+  ENGINE_RATE_LIMITED: 'engineRateLimited',
+  /**
+   * The engine service could not be reached (the remote transport's typed
+   * `engine_unavailable`: a network failure, a 5xx, or a build with no service configured).
+   * Nothing the reader made was lost, and the connection is the first thing to check
+   * (remote-path R3, 2026-11-10).
+   */
+  ENGINE_UNAVAILABLE: 'engineUnavailable',
+  /**
    * A STAFF-ONLY destination reached by an account that is not staff (ODQ
    * §934.28). Not a paid gate and not an upgrade path — no tier buys it, so its
    * sentence offers no door; it simply says the page is not this account's.

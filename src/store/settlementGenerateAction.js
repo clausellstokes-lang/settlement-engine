@@ -44,6 +44,7 @@ import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
 import { REFUSAL_REASONS, refusalOf } from '../lib/refusalReasons.js';
+import { engineRefusalReason } from '../lib/engineRefusal.js';
 import { GENERATION_INTENT_SAMPLE_FORK, intentOf } from '../lib/generationIntent.js';
 import { isChunkLoadError } from '../lib/staleDeploy.js';
 import { DEFAULT_CONFIG } from './configSlice.js';
@@ -580,12 +581,14 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // the lane does not statically pull the remote leaf; tests/components/refusalNotice.test.jsx
     // raises it through that constant) when the server no longer serves the engine this page
     // pinned. As with a stale chunk, only a reload helps.
+    // The service's limit (429) and its absence are their own sentences too (remote-path R3):
+    // "try once more" is false advice for a limit. `engineRefusalReason` maps all three codes.
+    const engineReason = engineRefusalReason(/** @type {any} */ (genErr)?.code);
     set(s => {
-      s.lastRefusal = refusedAt(/** @type {any} */ (genErr)?.code === 'engine_version_retired'
-        ? REFUSAL_REASONS.ENGINE_VERSION_RETIRED
-        : isChunkLoadError(genErr)
+      s.lastRefusal = refusedAt(engineReason
+        ?? (isChunkLoadError(genErr)
           ? REFUSAL_REASONS.STALE_BUILD
-          : REFUSAL_REASONS.GENERATION_FAILED);
+          : REFUSAL_REASONS.GENERATION_FAILED));
     });
     throw genErr;
   }

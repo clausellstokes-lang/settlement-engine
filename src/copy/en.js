@@ -472,6 +472,18 @@ export const en = Object.freeze({
       rubric: 'Generation failed',
       body:   'The generator on the server has moved on from this page; reload to continue.',
     },
+    // The engine service's rate guard answered 429 (remote-path R3). A limit, not a fault:
+    // waiting cures it, and no clock time is promised (the client cannot tell which window).
+    engineRateLimited: {
+      rubric: 'Forge limit reached',
+      body:   'You have reached the limit on new settlements for now. Nothing went wrong; wait a while, then forge again.',
+    },
+    // The engine service could not be reached: a network failure, a server fault, or a build
+    // with no service configured (remote-path R3). Nothing was lost; the connection first.
+    engineUnavailable: {
+      rubric: 'Forge unreachable',
+      body:   'The forge could not be reached, so no settlement was made and nothing you had was lost. Check your connection, then forge again.',
+    },
     // No door and no price: the admin panel is not sold, so this sentence must
     // not read as an upgrade prompt. It says whose page it is and stops.
     staffOnly: {

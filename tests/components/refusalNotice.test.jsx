@@ -236,6 +236,29 @@ describe('the lane records a reason for every gate it closes', () => {
     expect(said).not.toContain(t('errors.forgeStart'));
   });
 
+  // remote-path R3 (D3 of the chair's flagged-path walk): a 429 and an unreachable service each
+  // printed the generic "The forge stalled … Try once more", which is false advice for a limit.
+  for (const [code, reason, key] of [
+    ['engine_rate_limited', 'ENGINE_RATE_LIMITED', 'refusals.engineRateLimited.body'],
+    ['engine_unavailable', 'ENGINE_UNAVAILABLE', 'refusals.engineUnavailable.body'],
+  ]) {
+    test(`${code}: the service's typed refusal records its own reason and says its own sentence`, async () => {
+      engine.run = vi.fn(async () => {
+        throw Object.assign(new Error(code), { code });
+      });
+      const store = makeStore({ tier: 'free', maxTier: 'capital' });
+      await runLane(store);
+      expect(REFUSAL_REASONS[reason], `${reason} is registered`).toBeTypeOf('string');
+      expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS[reason]);
+      render(<RefusalNotice refusal={store.state.lastRefusal} />);
+      const said = screen.getByRole('alert').textContent;
+      expect(t(key)).not.toBe(key);
+      expect(said).toContain(t(key));
+      // anchored: `said` carries the reason's own sentence; the generic one must not ride with it.
+      expect(said).not.toContain(t('errors.forgeStart'));
+    });
+  }
+
   test('a fresh attempt clears the previous reason', async () => {
     const store = makeStore({ settType: 'city', maxTier: 'town' });
     await runLane(store, undefined, { intent: GENERATION_INTENT_SAMPLE_FORK });
