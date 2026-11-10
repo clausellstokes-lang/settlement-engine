@@ -72,6 +72,20 @@ export function isVeiledPower(power) {
 }
 
 /**
+ * THE ONE MEMBERSHIP A CARD GAINS IN A POWER outside the cast's ranking — the v1 -> v2 migration's shape
+ * (settlementMigrations.js :: migrateV1toV2, its `add`), now its one constructor (GREEN-TIP, 2026-11-10): the
+ * power's display name, UNRANKED (the cast alone ranks a power's first three, R-P5), no share, and the veil bit
+ * of THAT power's own row. The migration moves a retired link through it; the pulse's writers (the cadence
+ * founder, the ADD_FACTION founder, the R9 fold) write a new member through it.
+ * @param {unknown} power the power's record (`.faction` before `.name`)
+ * @returns {{ power: string, rank: null, share: null, veiled: boolean }}
+ */
+export function membershipInPower(power) {
+  const p = recordOf(power);
+  return { power: String(p.faction || p.name || ''), rank: null, share: null, veiled: isVeiledPower(power) };
+}
+
+/**
  * The veil bit of a card's `institution` against the record that carries it: a house face is veiled
  * when its roster row is hideable, a minted face when its power is veiled. A house or power the record
  * does not hold is veiled (fail-closed: nothing is known to make it public).
