@@ -98,6 +98,7 @@ describe('a Founding World fork keeps the card\'s five priorities', () => {
     // above and fail this one.
     const ordinary = await store.getState().generateSettlement(forkSeedFor(sample, 'visitor1234'));
     expect(ordinary).toBeTruthy();
+    // anchored: the first arm proves the same fork resolves EXACTLY to cardDials, so a differing roll here is a real roll
     expect(resolvedOf(ordinary)).not.toEqual(cardDials(sample));
   });
 

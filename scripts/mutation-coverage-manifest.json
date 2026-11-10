@@ -469,6 +469,11 @@
     "tests/data/foundingSeeds.test.js": {
       "kind": "uncovered"
     },
+    "tests/data/foundingWorldBones.test.js": {
+      "kind": "rationale",
+      "rationale": "EVERY PROMISE ON A FOUNDING WORLD'S CARD IS CARRIED BY ITS CANONICAL SEED AND BY 19 OF 20 FORKS (FOUNDING-WORLDS, 2026-11-10, the chair's rulings F2 and N8). Its catching power was EXECUTED red-first twice: at blackcrag-016 the canonical arm reported 'is ruled by its guild-masters (tags: Guild power)' red, 1 failed / 10 passed (governingName 'Noble Governorship'; commit be56efb67); and run with the three cards' OLD clauses the fork arm reported 'Black Crag: ruled by its guild-masters — 1/20', 'Cnocby: … whose cousin to ask … — 1/20', 'Cnocby: the carters who still stop … — 8/20', 'Mossgate: … Contested council — 14/20' and two more (commits 08c36904f, 1320a8540, 1c22f4227). The table quotes each teaser and tag verbatim, so a re-worded card also reds until re-measured. WHY A RATIONALE RATHER THAN A STANDING SWEEP PLANT: the subject is the whole generation pipeline under three fixed configs; any engine change that moves a card's facts is the plant, and a hand-planted regression in src/generators would move every golden with it.",
+      "kindNote": "rationale rather than a standing sweep plant: the engine itself is the subject; the red-firsts are recorded in the commits."
+    },
     "tests/data/galleryReactionVocab.test.js": {
       "kind": "uncovered"
     },
@@ -2995,6 +3000,11 @@
       "kind": "rationale",
       "rationale": "THE LANDING PROSE IS GROUNDED IN THE FIXTURE (ODQ 934.30 car 8). Its catching power is EXECUTED IN THE TEST BODY: every quoted fact in src/copy/landing.js is bound to the field of the regenerated fixture it came from — the population as digits and as words, the week count, the six advance events by week number and headline noun as PAIRS (the engine writes 'criminal' where the prose says 'crime', so each pair binds both sides and neither passes alone), the receipts, the neighbour names, the retired keys — so a regeneration that moves a field reds the sentence that went stale, and a rewrite that drops a fact reds against the field. WHY A RATIONALE RATHER THAN A STANDING SWEEP PLANT: the two sides of every binding are a generated file and the copy dictionary, both surfaces a concurrent lane holds, and the sweep's revert is a checkout. Recorded 2026-09-19 by the chair.",
       "kindNote": "rationale rather than a standing sweep plant: both sides of the binding are shared surfaces; the in-body pair bindings are the substitute."
+    },
+    "tests/copy/landingNarrationGrounding.test.js": {
+      "kind": "rationale",
+      "rationale": "THE LANDING NARRATION SAYS ONLY WHAT ITS RECEIPTS HOLD (FOUNDING-WORLDS, 2026-11-10, the chair's rulings N1 and N3). Its catching power was EXECUTED red-first: on the narration the fixture carried at f0f98d883 the names arm reported [\"Elder Council\", \"Odhrán MacCarthy\", \"Gallagher\", \"Inghean MacCarthy\"] (no derived field holds them) and the figures arm reported the claim table's phrase absent, 2 failed / 2 passed; green on the re-grounded narration (commit 45a5e622c). Every figure is bound to a receipt field by a claim table (the route pool's three and two, the institution's 4% and x2.50), and every capitalised name to another fixture field. WHY A RATIONALE RATHER THAN A STANDING SWEEP PLANT: both sides are a generated module (src/components/home/landingFixture.js) and authored copy in the emitter (STOCK_NARRATION), and a plant in either is undone by the re-emit the arm exists to demand; the sweep's revert is a checkout over a file a concurrent lane may regenerate.",
+      "kindNote": "rationale rather than a standing sweep plant: the target is generated and the copy is a shared surface; the red-first is recorded in the commit."
     },
     "tests/lint/worldPulseFateTotality.walker.test.js": {
       "kind": "rationale",
