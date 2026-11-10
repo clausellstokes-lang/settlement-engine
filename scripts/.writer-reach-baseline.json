@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "58aae07fb9117bb93c62fc0e6e33fe5ea26b2c0e",
+ "frozenAtSha": "c51a1f53f8c2e2e4594816ccb2f9d7d668412c85",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "5ebcc401c65762b23bbd252c7f94f4b182af98a74dbd38aafc63f38076508fb0",
  "detectorDigest": "79c5981b3196a7fb17182cbb02ee7045f55b5852c20e32d6e2ed5594177a82e6",
- "verdictDigest": "19c0f41db87050e4e11e7d6ce07603fafdd727f7512b0c7ceefb3445e8df94a5",
+ "verdictDigest": "b1aa7e9a0c197a785b54fbcd60c12ed05d32cf1df3825986e78ead02e788cab2",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,8 +72,8 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 768,
-  "web-transitive": 999,
+  "web-display": 769,
+  "web-transitive": 1000,
   "dossier-pdf": 513,
   "campaign-pdf": 144,
   "world-book": 159,
@@ -91,15 +91,15 @@
   "knownShapes": 532
  },
  "scanStats": {
-  "files": 1768,
-  "sites": 42390,
-  "propRead": 40146,
+  "files": 1770,
+  "sites": 42413,
+  "propRead": 40170,
   "elemRead": 0,
-  "destructure": 2226,
+  "destructure": 2225,
   "inOp": 18,
-  "rGrades": 6745,
-  "nGrades": 1753459,
-  "resolvedReceivers": 7653
+  "rGrades": 6744,
+  "nGrades": 1755415,
+  "resolvedReceivers": 7652
  },
  "registerDigest": "02d18ae944f371b18d1ba707c4e4a8559a97d24824117b30202143aca2c81a28",
  "pendingSurfaceCeiling": 0,
@@ -9930,7 +9930,7 @@
   "covert on npcs": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "expectedReturnTick on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "exposedTick on npcs": "web-transitive=N",
-  "factionAffiliation on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "factionAffiliation on npcs": "dossier-pdf=R foundry=R web-transitive=R",
   "factionLink on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "family on npcs": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "gender on npcs": "dossier-pdf=R foundry=R web-display=R web-transitive=N",
