@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 382,
     "byRule": {
       "banner": 9,
-      "dated": 222,
+      "dated": 223,
       "sha-pin": 2,
       "tree": 173
     },
@@ -506,7 +506,9 @@
     "_rosterGrowth2026-11-10-ci-tip": "ONE document JOINED the roster by being BORN into it (seat CI-TIP, a child of the chair session session_01FbPLbejcfwX5nii12VM673; this seat's session session_01FbPLbcBpBDvJ6bJrVrxxZo; on lane/ci-tip-2026-11-10 cut from bf14617ca): `dated` 216 -> 217, measured by this walker at the lane tip: docs/chair/2026-11-10/CI-TIP-2026-11-10.md, the seat's rehearsal record of the non-check CI jobs, born dated. A GROWTH that hid nothing: 0 past-EOF of its own; pastEofCitationsExcluded unchanged at 382.",
     "_rosterGrowth2026-11-10-style-2-merge-ci-tip": "THE UNION AT THE CI-TIP MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 220 -> 221 (docs/chair/2026-11-10/CI-TIP-2026-11-10.md, the lane's record, born dated).",
     "_rosterGrowth2026-11-10-boot-tip": "ONE document JOINED the roster by being BORN into it (seat BOOT-TIP, a child of the chair session session_01FbPLbejcfwX5nii12VM673, session session_01FbPLbdzUMFRegg4kskMYG6, on lane/boot-tip-2026-11-10 cut from the integration line at ecadf531a): `dated` 217 -> 218, docs/chair/2026-11-10/BOOT-TIP-2026-11-10.md, the lane's record, born dated; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-10-style-2-merge-boot-tip": "THE UNION AT THE BOOT-TIP MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 221 -> 222 (docs/chair/2026-11-10/BOOT-TIP-2026-11-10.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-10-style-2-merge-boot-tip": "THE UNION AT THE BOOT-TIP MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 221 -> 222 (docs/chair/2026-11-10/BOOT-TIP-2026-11-10.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-10-build-heap": "ONE document JOINED the roster by being BORN into it (seat BOOT-TIP reopened for B7, session session_01FbPLbdzUMFRegg4kskMYG6, on lane/build-heap-2026-11-10 cut from ebf6fb0b6): `dated` 218 -> 219, docs/chair/2026-11-10/BUILD-HEAP-2026-11-10.md, the lane's record, born dated; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-10-style-2-merge-build-heap": "THE UNION AT THE BUILD-HEAP MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 222 -> 223 (docs/chair/2026-11-10/BUILD-HEAP-2026-11-10.md, the lane's record, born dated)."
   },
   "rows": []
 }
