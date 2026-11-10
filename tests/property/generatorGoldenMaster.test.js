@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-09 — STYLE-2-MERGE RECORD 24, THE SW-8 RENAME-POWERS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-10-style-2-merge-24-sw8.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 22's post-state. THE CAUSE, ONE (first-parent step c0433a1c7): the SW-8 RENAME-POWERS merge (lane/style-2-rename-powers-2026-11-09 at b951ce7da; the owner's map C1-C10, C10b). FIELD-DIFFED: eleven string paths, 0 non-string leaves.
+ *   Written from the staged tree S24 (the tree of c0433a1c7 with the door paths carried from the branch). 2908b7a3.. -> 5020a5aa..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 22, THE SW-6 CRISIS-SURFACES MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-09-style-2-merge-22-sw6.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 19's post-state. THE CAUSE, ONE (first-parent step ac1442a3d): the SW-6 CRISIS-SURFACES merge (lane/style-2-crisis-surfaces-2026-11-09 at 828ade53f; its generator causes the components: the crisis cast's reasons and npcStructure's position and constraint pools). FIELD-DIFFED: stress/stressors cast.roles[].reason and cast.stakes[].reason 516 rows, npcs[].structuralPosition and npcs[].activeConstraint 255 rows, string leaves only.
