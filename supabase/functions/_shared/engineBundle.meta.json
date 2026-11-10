@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T05:06:00.331Z",
+  "generatedAt": "2026-11-10T07:42:37.668Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "4847400d87c5e75c",
-  "engineVersion": "08c31364686731a2",
-  "builtFromCommit": "38125573fe1e71e84f0801057490a4827dba9512",
+  "sourceHash": "52ce2b5492312d48",
+  "engineVersion": "287936e9c62b6f1f",
+  "builtFromCommit": "68e4fda636160ab6373e70bd73a0473fee021b52",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -73,6 +73,7 @@
     "src/domain/coherence/seatHolderFindings.js",
     "src/domain/coherence/tierNounFindings.js",
     "src/domain/conditionPromotion.js",
+    "src/domain/content/contentEnvironmentDefaults.js",
     "src/domain/content/contentFingerprint.js",
     "src/domain/content/customContentAdmission.generated.js",
     "src/domain/content/customContentAdmission.js",

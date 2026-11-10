@@ -3632,6 +3632,10 @@
     "tests/generators/powerCardOrderReads.test.js": {
       "kind": "rationale",
       "rationale": "THE POWER CARDS READ THE POWERS THEY SPEAK OF (SW-B1 CONTRADICTIONS, STYLE-RULINGS-2 B1; enrolled by STYLE-2-MERGE-2 at the SW-B1 merge point, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED red-first on the lane (docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md: every cause cured red-first at bd07005b9): 14 red at the base (P51 ×4 seeds and P50 ×6: \"Thieves' Guild (39) … above Guild Council (37)\", \"Power is distributed …\"; §2·D #7 ×2), green at the cures."
+    },
+    "tests/build/engineServiceStoreParity.test.js": {
+      "kind": "rationale",
+      "rationale": "THE ENGINE SERVICE ANSWERS THE STORE'S OWN REQUESTS WITH THE STORE'S OWN RECORDS (remote-path R2, lane/remote-path-2026-11-10, 2026-11-10). Its catching power is EXECUTED: TWO mutants planted 2026-11-10, each proved to have moved the file's bytes (cmp) before the run, each restored by cp from a backup taken BEFORE the plant and verified byte-identical by cmp. (1) The store stops stamping: src/store/settlementContentRuntime.js `environment: runtime.environment || null` -> `environment: null` reddened 'generate: the bundle's birth for the wire body equals the local core on the store's request, stamp included' (TRUE_EXIT 1, 1 failed / 3 passed). (2) The service stamps a different environment: the vanilla environmentHash in supabase/functions/_shared/engineBundle.js replaced by 64 zeros reddened the same title (TRUE_EXIT 1, 1 failed / 3 passed). A standing sweep plant is not offered because both targets are shared: the store module is read by every generation lane, and the bundle is GENERATED (the merge seat re-emits it), so check_caught's `git checkout --` revert would race a concurrent re-emit -- the reason recorded at customContentCharsetWiring. Promote to kind:mutation when the sweep gains a target outside those files."
     }
   },
   "meta": {

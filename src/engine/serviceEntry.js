@@ -47,6 +47,16 @@
  *                                   them for a build that carries no engine
  *                                   (ENGINE-5 unit 1).
  *
+ *   - VANILLA_CONTENT_ENVIRONMENT — the built-in content environment's identity
+ *                                   (`src/domain/content/contentEnvironmentDefaults.js`,
+ *                                   a constants leaf with no imports), the very value the
+ *                                   store stamps every standalone generation with
+ *                                   (`customContentSlice.js :: getActiveCustomContentRuntime`).
+ *                                   engine-generate hands its birth the same standalone
+ *                                   provenance, so the pipeline writes the SAME
+ *                                   `customContentProvenance` on both sides (remote-path
+ *                                   R2, 2026-11-10). A constant, not a wrapper.
+ *
  * ⚠ RESERVED SLOT — THE ADVANCE ENTRY (not implemented). The engine service's
  * second operation, advancing an existing settlement through time, will be
  * re-exported HERE under the name `advanceSettlement` when its lane lands, from
@@ -63,3 +73,4 @@ export {
 export { birthConfig, loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
 export { runGenerationRequest } from '../workers/generationRequest.js';
 export { getStepMeta } from '../generators/pipeline.js';
+export { VANILLA_CONTENT_ENVIRONMENT } from '../domain/content/contentEnvironmentDefaults.js';

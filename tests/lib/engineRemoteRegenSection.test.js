@@ -157,6 +157,19 @@ describe('the lifted action commits the same world through either transport', ()
       JSON.parse(JSON.stringify(regenHistoryPipeline(world, world.config).history)));
   }, 120_000);
 
+  it('FU-2: a failed reroll\'s refusal is cleared by the next SUCCESSFUL reroll (the review\'s F2)', async () => {
+    const world = worldFor('village', 'engine5-regen-clear');
+    const store = storeHolding(world);
+    const limited = async () => ({ ok: false, status: 429, json: async () => ({ error: 'rate_limited' }) });
+    await regenSectionAction(store.setState, store.getState, 'history', { remote: true, remoteOptions: remoteOpts(limited) })
+      .catch(() => {});
+    expect(store.getState().lastRefusal?.reason, 'the failure was recorded').toBe('engineRateLimited');
+    const { impl } = okFetch();
+    await regenSectionAction(store.setState, store.getState, 'history', { remote: true, remoteOptions: remoteOpts(impl) });
+    expect(store.getState().settlement._regenSeed, 'the second reroll landed').toBeTruthy();
+    expect(store.getState().lastRefusal, 'a stale refusal outlived the reroll that cured it').toBe(null);
+  }, 120_000);
+
   it('a remote failure rejects typed and leaves the world untouched (no local run)', async () => {
     const world = worldFor('village', 'engine5-regen-fail');
     for (const [status, code] of [[503, 'engine_unavailable'], [429, 'engine_rate_limited'], [413, 'engine_refused']]) {
@@ -165,6 +178,15 @@ describe('the lifted action commits the same world through either transport', ()
       await expect(regenSectionAction(store.setState, store.getState, 'npcs', { remote: true, remoteOptions: remoteOpts(impl) }))
         .rejects.toMatchObject({ code });
       expect(JSON.stringify(store.getState().settlement)).toBe(JSON.stringify(world));
+    }
+    // remote-path R3: a limit and an unreachable service are RECORDED as their own reasons, so
+    // the dossier's notice says which (the reroll used to say nothing at all).
+    for (const [status, reason] of [[429, 'engineRateLimited'], [503, 'engineUnavailable']]) {
+      const store = storeHolding(world);
+      const impl = async () => ({ ok: false, status, json: async () => ({ error: 'x' }) });
+      await regenSectionAction(store.setState, store.getState, 'history', { remote: true, remoteOptions: remoteOpts(impl) })
+        .catch(() => {});
+      expect(store.getState().lastRefusal?.reason, `HTTP ${status}`).toBe(reason);
     }
     // The flag forced open with no configured service: typed, never the local engine.
     const unconfigured = storeHolding(world);
