@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f1fcd1ac61f1417f7e7f60637da884e30211e2c5",
+  "measuredAtSha": "bfbc9d9eb710441e0de0c85e539866eab38796d3",
   "measuredBy": "STYLE-2-MERGE-6",
   "date": "2026-11-10",
-  "note": "STYLE-2-MERGE point 28, the ABOUT-CURRENT merge (6cd331c98, merge f1fcd1ac6): re-frozen at the merged tip; the test file ABOUT-CURRENT added (its record: files +1, credited +1, titles +8, suite titles +4)",
-  "files": 3175,
-  "parked": 394,
-  "credited": 2781,
-  "titles": 28981,
-  "suiteTitles": 7828
+  "note": "STYLE-2-MERGE point 29, the COMPENDIUM-HUB merge (445390e90, merge bfbc9d9eb): re-frozen at the merged tip; the files and titles COMPENDIUM-HUB added (its record: files +3, parked +1, credited +2, titles +14, suite titles +3)",
+  "files": 3178,
+  "parked": 395,
+  "credited": 2783,
+  "titles": 28995,
+  "suiteTitles": 7831
 }
