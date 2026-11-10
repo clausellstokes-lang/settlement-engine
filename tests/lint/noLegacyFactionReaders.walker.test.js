@@ -66,9 +66,10 @@ const MIGRATION_FILE = 'src/domain/settlementMigrations.js';
 /**
  * THE CEILING, PINNED HERE AND NOT IN THE LIST (the chair's P2, 2026-11-10: the reviewer grew the list by a read and a
  * row and set its own `count` to 20, and the arm passed). It only FALLS: lower it in the same commit that removes a
- * row; never raise it. 19 at PULSE-SITES (LEGACY 3, DEAD 2, DARK 3, CURED-ON-LANE 11).
+ * row; never raise it. 19 at PULSE-SITES (LEGACY 3, DEAD 2, DARK 3, CURED-ON-LANE 11). 8 at the STYLE-2-MERGE point 36
+ * (GREEN-TIP + PULSE-SITES): the eleven CURED-ON-LANE rows removed, GREEN-TIP's cures at the same file:line (LEGACY 3, DEAD 2, DARK 3).
  */
-const RETIRED_SITE_CEILING = 19;
+const RETIRED_SITE_CEILING = 8;
 
 /** The retired-field sites of one source, as `file:line field`. @param {string} file @param {string} source */
 function retiredSitesIn(file, source) {
