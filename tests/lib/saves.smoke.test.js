@@ -276,6 +276,33 @@ describe('saves — supabase backend round-trip (mocked)', () => {
     expect(saves.writeAll).toBeNull();  // writeAll is local-only
   });
 
+  // R7 (VEIL-FIX, the pre-deploy review of 2026-11-10, finding 5): A STALE STAMP NEVER RIDES A SAVE.
+  // When the lazily loaded composer fails, the row is written WITHOUT `publicProse` (never the stamp
+  // the record carried from its last save), and the failed import is not cached for the tab's life.
+  test('R7: a failed composer writes the record without its old stamp, and the next save retries the import', async () => {
+    let calls = 0;
+    vi.doMock('../../src/components/new/publicProseCompose.js', () => {
+      calls += 1;
+      if (calls === 1) throw new Error('the chunk is gone');
+      return { composePublicProse: () => ({ v: 'pp-1', blocks: { 'general:overview': { fresh: 'drawn now' } } }) };
+    });
+    const OLD = { v: 'pp-1', blocks: { 'general:overview': { stale: 'drawn before the change' } } };
+    await saves.save({
+      name: 'Stale Town', tier: 'town',
+      settlement: { name: 'Stale Town', publicProse: OLD },
+      config: { settType: 'town', culture: 'germanic' }, seed: 's1',
+    });
+    expect(mockState.lastInsert.data).toEqual({ name: 'Stale Town' });
+    await saves.save({
+      name: 'Stale Town', tier: 'town',
+      settlement: { name: 'Stale Town', publicProse: OLD },
+      config: { settType: 'town', culture: 'germanic' }, seed: 's1',
+    });
+    expect(calls).toBe(2);
+    expect(mockState.lastInsert.data.publicProse).toEqual({ v: 'pp-1', blocks: { 'general:overview': { fresh: 'drawn now' } } });
+    vi.doUnmock('../../src/components/new/publicProseCompose.js');
+  });
+
   test('save shapes the row to the supabase schema', async () => {
     await saves.save({
       name: 'Mock Town',

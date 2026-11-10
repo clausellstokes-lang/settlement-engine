@@ -259,7 +259,10 @@ let _publicProseComposePromise = null;
  */
 function loadPublicProseCompose() {
   if (!_publicProseComposePromise) {
-    _publicProseComposePromise = import('../components/new/publicProseCompose.js');
+    // R7 (VEIL-FIX, 2026-11-10): a failed import (a chunk gone after a deploy) is NOT cached for
+    // the tab's life; the next save tries again.
+    _publicProseComposePromise = import('../components/new/publicProseCompose.js')
+      .catch((error) => { _publicProseComposePromise = null; throw error; });
   }
   return _publicProseComposePromise;
 }
@@ -270,8 +273,10 @@ const isRecord = (value) => !!value && typeof value === 'object' && !Array.isArr
  * THE STAMP FOR ONE CLOUD ROW: `data.publicProse` and `ai_data.aiSettlement.publicProse`,
  * composed owner-side from the record being written (the seed is read here and never
  * shipped; `domain/display/publicProse.js` is the law). Null when the row carries neither
- * record, or when the composer cannot load or throws: a save never fails on the projection,
- * and an absent stamp prints SILENT on the shared page, never a re-draw.
+ * record. When the composer cannot load or throws, `{data: null, ai: null}`: a save never fails
+ * on the projection, the row is written WITHOUT a stamp (R7, VEIL-FIX 2026-11-10: never the
+ * stamp the record carried from an earlier save, which would print sentences about a town state
+ * that no longer exists), and an absent stamp prints SILENT on the shared page, never a re-draw.
  * @param {any} entry a save entry or partial (`settlement`, `aiData`)
  * @returns {Promise<{data: any, ai: any}|null>}
  */
@@ -286,19 +291,27 @@ async function publicProseForRow(entry) {
       ai: isRecord(aiSettlement) ? composePublicProse(aiSettlement) : null,
     };
   } catch {
-    return null;
+    return { data: null, ai: null };
   }
 }
 
-/** The record with its projection written; a null projection leaves it exactly as it was. */
+/**
+ * The record with its projection written. A null projection writes the record WITHOUT a stamp
+ * (R7): a stamp the record carried from an earlier save is dropped, never written again.
+ */
 function withPublicProse(record, projection) {
-  return projection && isRecord(record) ? { ...record, publicProse: projection } : record;
+  if (!isRecord(record)) return record;
+  if (projection) return { ...record, publicProse: projection };
+  if (!Object.hasOwn(record, 'publicProse')) return record;
+  const { publicProse: _stale, ...rest } = record;
+  return rest;
 }
 
-/** `ai_data` with the narrated record's projection written into `aiSettlement`. */
+/** `ai_data` with the narrated record's projection written into `aiSettlement` (none: unstamped). */
 function aiDataWithPublicProse(aiData, projection) {
-  if (!projection || !isRecord(aiData) || !isRecord(aiData.aiSettlement)) return aiData;
-  return { ...aiData, aiSettlement: withPublicProse(aiData.aiSettlement, projection) };
+  if (!isRecord(aiData) || !isRecord(aiData.aiSettlement)) return aiData;
+  const aiSettlement = withPublicProse(aiData.aiSettlement, projection);
+  return aiSettlement === aiData.aiSettlement ? aiData : { ...aiData, aiSettlement };
 }
 
 /** @type {Set<(ack: {id: string, settlement: any, aiSettlement: any, publicProse: {data: any, ai: any}}) => void>} */

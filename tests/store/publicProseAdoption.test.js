@@ -196,6 +196,27 @@ describe('SW-B7b — the writer stamps, and the store holds what it stamped', ()
       'an absent projection reads null, which every desk turns into SILENT').toBe(null);
   });
 
+  // R7 (VEIL-FIX, the pre-deploy review of 2026-11-10, finding 5): a failed composer on a record that
+  // ALREADY carries a stamp writes it WITHOUT the old stamp (never a stale sentence on the shared page),
+  // and the ack tells the store, so the cache and the live record drop it too and a canon command
+  // issued after that save is still not refused as stale.
+  test('R7: a failed composer drops the OLD stamp from the row, the cache and the live record alike', async () => {
+    const id = await saveAndHydrate({ ...TOWN });
+    const stamped = store.getState().settlement;
+    expect(stamped.publicProse?.v, 'anchored: the store holds the first save\'s stamp').toBe('pp-1');
+    composer.fail = true;
+    const next = { ...stamped, population: 2150 };
+    store.setState((draft) => {
+      draft.settlement = next;
+      draft.savedSettlements[0].settlement = next;
+    });
+    await saves.update(id, { settlement: next });
+    const row = cloud.state.rows.find((entry) => String(entry.id) === String(id));
+    expect([row.data.population, Object.hasOwn(row.data, 'publicProse')], 'the edit landed, unstamped').toEqual([2150, false]);
+    expect(Object.hasOwn(store.getState().settlement, 'publicProse'), 'the live record dropped the old stamp').toBe(false);
+    expect(canonCommandReading(id)).toEqual({ liveMatchesCache: true, serverCasEqual: true });
+  });
+
   test('the narrated record is stamped beside the plain one, each from its own record', async () => {
     const aiSettlement = { ...TOWN, name: 'Ashford (narrated)' };
     const id = await saves.save({ ...envelope({ ...TOWN }), aiData: { aiSettlement } });

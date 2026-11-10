@@ -152,10 +152,17 @@ const sansPublicProse = (record) => JSON.stringify({ ...record, publicProse: und
 const isPlainRecord = (value) => !!value && typeof value === 'object' && !Array.isArray(value);
 const heldIsWritten = (held, written) => isPlainRecord(held) && isPlainRecord(written)
   && (held === written || sansPublicProse(held) === sansPublicProse(written));
-const stampedOrNull = (held, written, projection) => (
-  projection && heldIsWritten(held, written)
-  && JSON.stringify(held.publicProse) !== JSON.stringify(projection)
-    ? { ...held, publicProse: projection } : null);
+const stampedOrNull = (held, written, projection) => {
+  if (!heldIsWritten(held, written)) return null;
+  if (projection) {
+    return JSON.stringify(held.publicProse) !== JSON.stringify(projection) ? { ...held, publicProse: projection } : null;
+  }
+  // R7 (VEIL-FIX, 2026-11-10): the write went out WITHOUT a stamp (the composer failed), so the
+  // store drops the stamp it held too, and the canon commands' compare-and-swap still matches.
+  if (!Object.hasOwn(held, 'publicProse')) return null;
+  const { publicProse: _stale, ...rest } = held;
+  return rest;
+};
 
 /**
  * @param {Function} set the store's immer `set` @param {Function} get
