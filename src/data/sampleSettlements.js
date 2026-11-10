@@ -130,7 +130,17 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
       nearbyResourcesRandom: false,
       nearbyResources:       ['iron_deposits', 'coal_deposits', 'stone_quarry', 'mountain_timber', 'alpine_pasture', 'crossroads_position'],
       nearbyResourcesState:  { iron_deposits: 'depleted' },
-      seed:                  'blackcrag-016',
+      // RE-HUNTED 2026-11-10 (the owner: "regeenrate mossgate, cnocby, and black
+      // crag vwith the updated system"): at the engine of that day `blackcrag-016`
+      // generated a city ruled by a "Noble Governorship", so "ruled by its
+      // guild-masters" was no longer true of it. The hunt ran under this SAME
+      // config, blackcrag-017 upward, and blackcrag-045 (the 29th tried) is the
+      // first to carry every bone: a "Merchant Guild Council" governs, iron
+      // depleted, a Mine and a Smelter, "Iron ore (local mines exhausted)". The
+      // teaser did not change. A fork saved from the old seed keeps its own `_seed`
+      // and its `_forkedFromSample: 'sample-blackcrag'`; nothing reads this seed
+      // after the fork. tests/data/foundingWorldBones.test.js holds every card's bones.
+      seed:                  'blackcrag-045',
     },
   },
   // ⛔ CNOCBY REPLACED THORNWELL HERE (owner order ODQ §934.30, 2026-09-19: "Have
