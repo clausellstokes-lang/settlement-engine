@@ -124,3 +124,37 @@ describe('the owner bit travels to the client (row (f))', () => {
     expect((await fetchPublicDossier('u'.repeat(42))).isOwner).toBe(false);
   });
 });
+
+// R4 (VEIL-FIX, the chair's ruling of 2026-11-10 on the review's finding 3, its second gap): THE VEIL
+// FAILS CLOSED ON THE LINK. Only the gallery export writes the `$veil` marker, so a town shared by link
+// alone carried no veil at all. With no marker the party link projects the DEFAULT veil — the same one
+// the export writes (galleryVeil.js :: writeShareVeil with no deltas), from that one builder. The
+// gallery read keeps an unmarked listed page as it is (pinned below) until the owner rules on the
+// already-listed pre-veil pages (the lane's STOP of 2026-11-10).
+describe('R4: the party link fails closed to the default veil', () => {
+  const WITH_HOUSEKEEPING = { ...SETTLEMENT, coherenceNotes: ['housekeeping-note-text'] };
+  it('a link-only town that was never exported hides what the default hides', async () => {
+    serve({ galleryRow: null, unlistedRow: {
+      id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
+      dossier: WITH_HOUSEKEEPING, gallery_member_overrides: {},
+    } });
+    const linked = await fetchPublicDossier('u'.repeat(42));
+    const printed = JSON.stringify(linked.settlement);
+    expect(printed).toContain('Ada Thorne');
+    expect(printed).not.toContain('housekeeping-note-text'); // anchored: the live card is asserted present on the line above
+    // the same projection the export's own marker produces
+    serve({ galleryRow: null, unlistedRow: {
+      id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
+      dossier: WITH_HOUSEKEEPING, gallery_member_overrides: writeShareVeil({}, []),
+    } });
+    expect((await fetchPublicDossier('u'.repeat(42))).settlement).toEqual(linked.settlement);
+  });
+  it('an unmarked LISTED gallery page is unchanged (the owner rules on the pre-veil pages)', async () => {
+    serve({ galleryRow: {
+      id: 'set-1', public_slug: 'highkeep01', name: 'Highkeep', tier: 'city', data: WITH_HOUSEKEEPING,
+      gallery_share_dm: false, gallery_member_overrides: {},
+    } });
+    const listed = await fetchPublicDossier('highkeep01');
+    expect(JSON.stringify(listed.settlement)).toContain('housekeeping-note-text');
+  });
+});

@@ -15,7 +15,7 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { toPublicSafe, veilPublicPayload } from '../domain/display/publicSafe.js';
-import { projectShareVeil, clampVeilDeltas, clampShareMode, readShareMode, VEIL_OVERRIDE_KEY, VEIL_VERSION } from '../domain/display/galleryVeil.js';
+import { projectShareVeil, clampVeilDeltas, clampShareMode, readShareMode, readShareVeil, writeShareVeil, VEIL_OVERRIDE_KEY, VEIL_VERSION } from '../domain/display/galleryVeil.js';
 import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
@@ -834,6 +834,14 @@ function sanitizeDossier(row, { partyLink = false } = {}) {
   // runs through the same projection and the same veil as the row (defence in depth: the copy
   // is owner-written). ⚠ CLIENT MIRROR: until the owner's migration serves the copy from its
   // own column, get_gallery_dossier still returns the saved row beside it.
+  // R4 (VEIL-FIX, 2026-11-10): THE VEIL FAILS CLOSED ON THE PARTY LINK. Only the gallery export
+  // writes the veil marker, so a town shared by link alone carried none; with no marker the link
+  // takes the DEFAULT veil, built by the export's own writer (writeShareVeil with no deltas, which
+  // marks the share so the one default set applies). The gallery read keeps an unmarked listed
+  // page as it was (the owner rules on the pre-veil pages: the lane's STOP).
+  const veilOverrides = partyLink && !readShareVeil(row.gallery_member_overrides).marked
+    ? writeShareVeil(row.gallery_member_overrides, [])
+    : row.gallery_member_overrides;
   const share = readShareMode(overrides);
   const source = share.mode === 'snapshot' && share.snapshot ? share.snapshot : row.data;
   return veilPublicPayload({
@@ -857,7 +865,7 @@ function sanitizeDossier(row, { partyLink = false } = {}) {
     settlement:   projectShareVeil(toPublicSafe(source, {
       full: dmFull,
       memberOverrides: partyLink ? null : overrides,
-    }), row.gallery_member_overrides),
+    }), veilOverrides),
     // Which mode the page is in, and when its frozen copy was taken (null for live).
     galleryMode:  share.mode || 'live',
     snapshotAt:   share.mode === 'snapshot' && share.snapshot ? share.at : null,
