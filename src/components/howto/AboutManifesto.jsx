@@ -188,6 +188,42 @@ export default function AboutManifesto() {
         </p>
       </Band>
 
+      {/* ── BAND 2b · FOR EVERYONE AT THE TABLE ────────────────────────────────
+          THE OWNER (2026-11-10, verbatim): "Treat Settlementforge as both canvas
+          and world to explore for everyone at the table." The section's words are
+          the chair's (version 2, every claim cut to what the census holds), landed exactly,
+          pending the owner's veto (ABOUT-CURRENT A1;
+          its sentence-by-sentence census is in docs/chair/2026-11-10/
+          ABOUT-CURRENT-2026-11-10.md). */}
+      <Band id={anchorFor('table')} eyebrow="For everyone at the table" title="A canvas to build on. A world to explore.">
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          Homebrew rarely dies for want of ideas. It dies of bookkeeping. A world of thirty places
+          needs thirty economies, thirty casts of people with reasons and thirty histories, all of it
+          remembered a year later when the party doubles back. Here that work is done and kept true.
+          You set the frame: the land, the trade, the trouble, what the place cares about. A whole
+          town stands inside it in seconds, and from then on it is yours. Name it. Reroll the draft if
+          it does not fit. Keep your own notes beside it. With Cartographer, rename anyone in it, add
+          your own institutions and gods, and link your towns as neighbours.
+        </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          It is also somewhere to go. A city here is quarter after quarter of working houses, the
+          mill, the forge, the church, the watch, and each has a named person in it who wants
+          something. Ask where the smith&rsquo;s iron comes from and there is an answer. Ask who holds
+          power and who stands against them and there is an answer to that too. Whichever way your
+          players push, there is already something there, so you can say yes without checking your
+          notes for a contradiction.
+        </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          Hand them the town itself. A private link opens the players&rsquo; own page: the town as a
+          visitor would know it, its trade, its services, who governs, the faces worth knowing. Your
+          secrets are left out, and so is anything you choose to hide. They read it between sessions
+          and arrive with plans. The link stays the same for the life of the town.
+        </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          One town, two ways in. You build on it. They explore it. It stays true for both.
+        </p>
+      </Band>
+
       {/* ── BAND 3 · THE COVENANT ──────────────────────────────────────────── */}
       <Band id={anchorFor('covenant')} eyebrow="Structural promises" title="The covenant">
         <p style={{ ...PROSE, margin: '0 0 18px' }}>
