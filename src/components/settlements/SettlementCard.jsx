@@ -286,7 +286,10 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
         {/* ── Settlement — medallion + name lead the row; the retained living-world
             detail stacks below (self-gating, byte-identical when dormant). */}
         <td style={selectMode ? LEDGER_CELL : { ...LEDGER_CELL, borderLeft: leadRail }}>
-          <div style={{ display:'flex', alignItems:'baseline', gap:SP.sm, minWidth:0 }}>
+          {/* On a phone the name line wraps, as the action cluster's does below (the row gets
+              taller, which is free): a folder card's "name · world" would not, so its table ran
+              44 px past the folder's box and cut Open, the menu and Delete at its right edge. */}
+          <div style={{ display:'flex', alignItems:'baseline', gap:SP.sm, minWidth:0, flexWrap: mobile ? 'wrap' : 'nowrap' }}>
             <span aria-hidden="true" style={{ flexShrink:0, lineHeight:0, alignSelf:'center' }} dangerouslySetInnerHTML={{ __html: medallion }} />
             {/* The name is a real heading so screen-reader users navigate row-by-row. */}
             <h3 style={{ margin:0, fontSize:FS.lg, fontWeight:700, color:INK, fontFamily:serif_, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', minWidth:0 }}>{s.name}</h3>
