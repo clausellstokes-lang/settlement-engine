@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ad4cc91f66b42ff9f095a6209f530f13c3eb0e8f",
-  "measuredBy": "STYLE-2-MERGE-5",
+  "measuredAtSha": "6aea355fb8e6c04d7b87d01f01fef1b33ac96c63",
+  "measuredBy": "ABOUT-CURRENT (session_01FbPLbfiFbVSqzXxrVUjipx)",
   "date": "2026-11-10",
-  "note": "STYLE-2-MERGE point 25, the URBAN-FIX merge (9ee7df1ba, merge 17b814803): re-frozen at the merged tip; the live titles URBAN-FIX added (its record: +8, files unmoved)",
-  "files": 3173,
+  "note": "ABOUT-CURRENT 2026-11-10: one new test file, tests/components/aboutCurrent.test.jsx (the About Guide lists pinned to the route table, TAB_GROUPS and the share panel); no rule widened or narrowed",
+  "files": 3174,
   "parked": 394,
-  "credited": 2779,
-  "titles": 28970,
-  "suiteTitles": 7823
+  "credited": 2780,
+  "titles": 28978,
+  "suiteTitles": 7827
 }
