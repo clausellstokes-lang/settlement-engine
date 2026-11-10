@@ -91,3 +91,22 @@ describe('worldPulse/npcVerdictTable.js :: vacatedSeatOf names the first-rank po
     expect(vacatedSeatOf(towns[0], none)).toEqual({ factionId: '', factionName: '' });
   });
 });
+
+describe('events/affordanceManifest.js :: PROMOTE_NPC is offered when a power holds two first-rank members', () => {
+  it('the gate opens exactly where two named cards share a first-rank power', async () => {
+    const { AFFORDANCE_MANIFEST } = await import('../../src/domain/events/affordanceManifest.js');
+    let open = 0;
+    for (const s of towns) {
+      const order = powerOrderOf(s);
+      const count = new Map();
+      for (const n of s.npcs || []) {
+        const p = firstRankMembershipOf(n, order)?.power;
+        if (p && n.name) count.set(p, (count.get(p) || 0) + 1);
+      }
+      const expected = [...count.values()].some((c) => c >= 2);
+      expect(AFFORDANCE_MANIFEST.PROMOTE_NPC.predicate(s).available).toBe(expected);
+      if (expected) open += 1;
+    }
+    expect(open).toBeGreaterThan(0);
+  });
+});

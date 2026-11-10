@@ -38,6 +38,7 @@ import { canonExports, canonImports, canonStressors } from '../canonicalAccessor
 import { qualifiesForGenerosity, normalizeBondKind } from '../spatial/generosityGate.js';
 import { STOCKPILE_TUNING } from '../worldPulse/foodStockpile.js';
 import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 
 // The loose open-object shape of the events layer ("schemaless open objects at
 // this layer" — mutateEntities.js's own words). Aliased to the schema's OWN
@@ -208,8 +209,11 @@ const factionsOf = (/** @type {Mut} */ s) => s?.powerStructure?.factions || s?.f
 
 const npcSwapPairsExist = (/** @type {Mut} */ s) => {
   const byFaction = new Map();
+  // A card's power is its FIRST-RANK membership (people/membership.js), re-pointed by PULSE-SITES (2026-11-10)
+  // from the retired `factionAffiliation`, which no current card carries.
+  const order = powerOrderOf(s);
   for (const npc of s?.npcs || []) {
-    const f = npc?.factionAffiliation;
+    const f = firstRankMembershipOf(npc, order)?.power;
     if (!f || !npc?.name) continue;
     byFaction.set(f, (byFaction.get(f) || 0) + 1);
     if (byFaction.get(f) >= 2) return true;
