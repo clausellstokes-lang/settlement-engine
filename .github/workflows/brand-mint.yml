@@ -33,7 +33,7 @@ permissions:
 jobs:
   brand-mint:  # deploy-gate: optional
     name: Re-mint the brand derivatives record
-    runs-on: macos-14
+    runs-on: macos-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
