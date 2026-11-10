@@ -394,6 +394,39 @@ describe.runIf(present)('the party link — execution against the real SQL (pgli
     expect(link.gallery_member_overrides.n1).toEqual({ revealDm: true });
   });
 
+  // R12 (VEIL-FIX re-review, 2026-11-10): 208's read evaluated the sanitizer TWICE on the whole document
+  // (once as the base, once as the splice's source). Counted by execution: the stub is swapped for a
+  // counting twin (whole-document calls only — the splice's own per-member calls carry no top-level
+  // `name`), the link is read once, and the original stub is restored.
+  it('R12: get_unlisted_dossier evaluates the sanitizer on the whole document ONCE per read', async () => {
+    await plant({ n1: { revealDm: true } }, false);
+    const slug = await share(S_PUBLIC);
+    const original = (await scalar(`select pg_get_functiondef('public._gallery_sanitize_public_json(jsonb, text[])'::regprocedure) as def`)).def;
+    await db.exec(`
+      create sequence if not exists public.r12_whole_document_calls;
+      create or replace function public._gallery_sanitize_public_json(value jsonb, path text[] default '{}')
+        returns jsonb language plpgsql volatile as $fn$
+        begin
+          if value ? 'name' then perform nextval('public.r12_whole_document_calls'); end if;
+          return case when jsonb_typeof(value -> 'npcs') = 'array'
+            then jsonb_set(value - 'secret' - 'secrets' - 'plotHooks', '{npcs}', (select coalesce(jsonb_agg(e - 'secret' - 'goals' order by o), '[]'::jsonb)
+                   from jsonb_array_elements(value -> 'npcs') with ordinality t(e, o)))
+            else value - 'secret' - 'secrets' - 'plotHooks' end;
+        end $fn$;
+      select setval('public.r12_whole_document_calls', 1, false);
+    `);
+    try {
+      await asAnon();
+      const link = await linkRead(slug);
+      expectPlayerView(link.dossier);
+      const { n } = await scalar(`select coalesce((select last_value from public.r12_whole_document_calls where is_called), 0)::int as n`);
+      expect(n).toBe(1);
+    } finally {
+      await asUser(OWNER);
+      await db.exec(original + ';');
+    }
+  });
+
   // ── (f) the owner is told ────────────────────────────────────────────────────
   it('the owner is told is_owner; another user and anon are not', async () => {
     const slug = await share(S_UNLISTED);

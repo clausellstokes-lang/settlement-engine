@@ -17,6 +17,8 @@
 --   which with Reveal DM is the DM projection — executed: the anon read carried a planted
 --   secret outside `dossier`; the link now returns the overrides `#- '{$veil,snapshot}'`
 --   and the client's link branch renders the live sanitized dossier). (d) is amended to match.
+--   (R12, the re-review's cost note) the read evaluates the sanitizer ONCE on the whole
+--   document (a lateral), its result both the splice's base and its source.
 --   (finding 9) `set local lock_timeout = '5s'` ahead of the constraint, so the
 --   ACCESS EXCLUSIVE lock on settlements never queues the table behind a long
 --   transaction; a timeout fails the file, which is safe to re-run as written.
@@ -194,8 +196,7 @@ as $$
     -- revealDm member) that copy is the DM projection; it never leaves on the link.
     'gallery_member_overrides', s.gallery_member_overrides #- '{$veil,snapshot}',
     'dossier', public._gallery_apply_member_overrides(
-      public._gallery_sanitize_public_json(base.j),
-      public._gallery_sanitize_public_json(base.j),
+      pub.j, pub.j,
       s.gallery_member_overrides, false, s.gallery_importable, false
     )
   )
@@ -210,6 +211,9 @@ as $$
       else s.data
     end as j
   ) base
+  -- R12 (the re-review of 2026-11-10): the sanitizer runs ONCE per read on the whole document;
+  -- its result is both the splice's base and its only source.
+  cross join lateral (select public._gallery_sanitize_public_json(base.j) as j) pub
   where s.unlisted_slug = p_slug
   limit 1;
 $$;
