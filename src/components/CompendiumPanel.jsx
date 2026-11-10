@@ -15,7 +15,7 @@ import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
 import { OperationsHub, SystemsHub } from './compendium/RegistryHubs.jsx';
 import { CalamityHub } from './compendium/CatalogHubs.jsx';
-import { CompendiumIntro, CompendiumHubGrid, AtoZIndex } from './compendium/CompendiumDashboard.jsx';
+import { CompendiumHubGrid, AtoZIndex } from './compendium/CompendiumDashboard.jsx';
 import { CustomContentManager, ReadOnlyCustomContentList, CUSTOM_CATEGORIES } from './compendium/CustomContent.jsx';
 // The flat per-entry index (already in the compendium chunk via the global
 // search) + the lazy per-entry head helpers — V-19 long-tail routing.
@@ -335,12 +335,13 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry, 
 
   let body;
   if (!section) {
-    // THE LANDING (ruling H1): the intro, the global search, the grid of twelve boxes.
+    // THE LANDING (ruling H1): the global search and the grid of twelve boxes. (The intro paragraph
+    // and the sample-world line were removed by the owner's word of 2026-11-10: "remove the
+    // everything here is rednedered by the deteremistic.... all the way to the sample world cnocby...")
     body = (
       <>
         <CompendiumGlobalSearch onSelect={handleGlobalSelect} />
         <div style={{ padding:'14px', background:CARD }}>
-          <CompendiumIntro />
           <CompendiumHubGrid sections={SECTIONS} customCount={customContentCount} launchLocked={!purchasesOpen()} onOpen={(s) => openSection(tabForSectionSlug(s))} />
         </div>
       </>

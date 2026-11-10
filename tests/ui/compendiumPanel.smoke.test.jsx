@@ -23,6 +23,7 @@
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { existsSync } from 'node:fs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -66,6 +67,14 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
+function assertLandingTrimmed(container) {
+  const text = container.textContent;
+  expect(container.querySelector('[data-compendium-grid]')).not.toBeNull();
+  expectAbsentWithAnchor(text, 'rendered by the deterministic engine', 'Tiers & Routes', 'the landing text');
+  expectAbsentWithAnchor(text, 'It cannot drift from what the simulator actually does', 'Tiers & Routes', 'the landing text');
+  expectAbsentWithAnchor(text, 'The sample world is', 'Tiers & Routes', 'the landing text');
+}
+
 describe('CompendiumPanel — decomposition smoke', () => {
   test('mounts without throwing and renders the built-in catalog', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
@@ -75,12 +84,11 @@ describe('CompendiumPanel — decomposition smoke', () => {
     expect(document.body).toBeTruthy();
     expect(container.firstChild).not.toBeNull();
 
-    // Default mode is the built-in catalog on the Overview dashboard (DOC WAVE 2/2).
-    // Pinning its stable, artifact-rendered copy means a broken extraction (e.g.
-    // CompendiumDashboard/CatalogHubs → primitives/artifact import) surfaces here.
-    expect(
-      screen.getByText(/rendered by the deterministic engine from its own registries/),
-    ).toBeTruthy();
+    // The landing renders its grid (a broken extraction of CompendiumDashboard would fail
+    // here). RE-KEYED BY IDENTITY (the owner, 2026-11-10, verbatim: "remove the everything
+    // here is rednedered by the deteremistic.... all the way to the sample world cnocby..."):
+    // the intro sentence and the sample-world line are gone; a tile name is the anchor.
+    assertLandingTrimmed(container);
   });
 
   test('mounts in standalone mode without throwing', async () => {
@@ -88,9 +96,7 @@ describe('CompendiumPanel — decomposition smoke', () => {
     const { container } = render(<CompendiumPanel standalone />);
 
     expect(container.firstChild).not.toBeNull();
-    expect(
-      screen.getByText(/rendered by the deterministic engine from its own registries/),
-    ).toBeTruthy();
+    assertLandingTrimmed(container);
   });
 
   // RESTORATION #9 pinned the standalone-page identity (Page frame + PageHeader) and
