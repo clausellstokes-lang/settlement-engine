@@ -20,6 +20,7 @@
  */
 
 import { sev01 } from './mutateHelpers.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 
 /** @typedef {import('../types.js').EventType} EventType */
 /** @typedef {import('../types.js').Event} Event */
@@ -39,7 +40,8 @@ import { sev01 } from './mutateHelpers.js';
  * @property {Array<Record<string, unknown>>} [stressors]
  * @property {Array<Record<string, unknown>>} [stress]
  * @property {Array<Record<string, unknown>>} [stresses]
- * @property {Array<{ id?: string, name?: string, factionAffiliation?: string }>} [npcs]
+ * @property {Array<{ id?: string, name?: string, memberships?: unknown }>} [npcs]
+ * @property {unknown} [powerStructure]
  */
 /**
  * One event's impact specification.
@@ -802,7 +804,9 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = npc?.factionAffiliation || 'their power';
+      // The card's FIRST-RANK power (people/membership.js), re-pointed by PULSE-SITES (2026-11-10) from the
+      // retired `factionAffiliation`, which no current card carries (the migration maps it to a membership).
+      const faction = firstRankMembershipOf(npc, powerOrderOf(settlement))?.power || 'their power';
       return `${name} rises within ${faction}, displacing a rival on the way up.`;
     },
   },
@@ -817,7 +821,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       const npc = (settlement?.npcs || []).find(n =>
         String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
       const name = npc?.name || labelOf(event.targetId);
-      const faction = npc?.factionAffiliation || 'their power';
+      const faction = firstRankMembershipOf(npc, powerOrderOf(settlement))?.power || 'their power';
       return `${name} is pushed down the ranks of ${faction}.`;
     },
   },
