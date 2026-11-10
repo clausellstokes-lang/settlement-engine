@@ -168,6 +168,10 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/npc/generatedNpcTitle.js',
   'src/generators/npcGenerator.js',
   'src/generators/pipeline.js',
+  // 2026-11-10 (STYLE-2-MERGE point 25, URBAN-FIX C-1 935c961fd): recordBatteryFindings.js JOINED the set through the word
+  // "culture's" in one comment line beside the superseded foodways path; it reads no culture (the pipeline.js precedent:
+  // reported, not filtered). Red on the lane's own tip 9ee7df1ba.
+  'src/generators/recordBatteryFindings.js',
   'src/generators/steps/assembleSettlement.js',
   'src/generators/steps/buildGenerationContext.js',
   'src/generators/steps/economyReconcilePass.js',
