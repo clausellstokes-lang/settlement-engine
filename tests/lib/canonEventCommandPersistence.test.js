@@ -8,7 +8,6 @@
 
 import { describe, expect, test, vi } from 'vitest';
 import {
-  commitCreateRouteCommand,
   commitCutTradeRouteCommand,
   readCanonEventCommandAuthority,
 } from '../../src/lib/canonEventCommandPersistence.js';
@@ -191,44 +190,5 @@ describe('commitCutTradeRouteCommand', () => {
       'command_id',
       request().commandId,
     );
-  });
-});
-
-// R7 (VEIL-FIX, the pre-deploy review of 2026-11-10, finding 5): the canon commands write `p_next_data`
-// straight from the store, bypassing the row builder, so the record carried the stamp its last save drew
-// before the command changed the town (and, for a route, its partner). The next projections leave
-// WITHOUT `publicProse` (the shared page prints silence until the next save re-stamps); the expected
-// projections keep it, since they are the compare-and-swap base the server holds.
-describe('R7: a canon command never writes a stale public prose stamp', () => {
-  const STAMP = { v: 'pp-1', blocks: { 'general:overview': { text: 'drawn before the command' } } };
-  const okClient = () => ({ rpc: vi.fn(async () => ({ data: { status: 'applied', settlement: {}, campaign_state: {}, updated_at: 'x' }, error: null })) });
-
-  test('cut route: p_next_data leaves without publicProse; p_expected_data keeps it', async () => {
-    const client = okClient();
-    const r = request();
-    await commitCutTradeRouteCommand({
-      ...r,
-      expectedSettlement: { ...r.expectedSettlement, publicProse: STAMP },
-      settlement: { ...r.settlement, publicProse: STAMP },
-    }, { client });
-    const args = client.rpc.mock.calls[0][1];
-    expect(args.p_next_data).toEqual(r.settlement);
-    expect(args.p_expected_data.publicProse).toEqual(STAMP);
-  });
-
-  test('create route: the initiating and the partner next projections leave without publicProse', async () => {
-    const client = okClient();
-    const r = request();
-    await commitCreateRouteCommand({
-      ...r,
-      partnerSaveId: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
-      partnerExpectedSettlement: { name: 'Partner', publicProse: STAMP },
-      partnerSettlement: { name: 'Partner', config: {}, publicProse: STAMP },
-      settlement: { ...r.settlement, publicProse: STAMP },
-    }, { client });
-    const args = client.rpc.mock.calls[0][1];
-    expect(args.p_next_data).toEqual(r.settlement);
-    expect(args.p_partner_next_data).toEqual({ name: 'Partner', config: {} });
-    expect(args.p_partner_expected_data.publicProse).toEqual(STAMP);
   });
 });

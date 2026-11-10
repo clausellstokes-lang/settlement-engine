@@ -45,21 +45,6 @@ function persistenceError(error) {
 }
 
 /**
- * A next projection without its public prose stamp (R7, VEIL-FIX 2026-11-10; the pre-deploy
- * review's finding 5). The commands write the record straight from the store, bypassing the save
- * path's row builder, so its `publicProse` is the stamp drawn at the last save, BEFORE this command
- * changed the town (and, for a route, its partner); written again it would print sentences about a
- * state that no longer exists. The shared page prints silence until the next save re-stamps. The
- * EXPECTED projections keep the stamp: they are the compare-and-swap base the server holds.
- * @param {any} record @returns {any}
- */
-function withoutPublicProse(record) {
-  if (!record || typeof record !== 'object' || Array.isArray(record) || !Object.hasOwn(record, 'publicProse')) return record;
-  const { publicProse: _stale, ...rest } = record;
-  return rest;
-}
-
-/**
  * @param {{
  *   ownerId:string,
  *   commandId:string,
@@ -91,7 +76,7 @@ export async function commitCutTradeRouteCommand(
     p_expected_data: request.expectedSettlement,
     p_expected_campaign_state: request.expectedCampaignState,
     p_expected_ai_data: request.expectedAiData,
-    p_next_data: withoutPublicProse(request.settlement),
+    p_next_data: request.settlement,
     p_next_campaign_state: request.campaignState,
     p_next_ai_data: request.aiData,
   });
@@ -157,9 +142,9 @@ export async function commitCreateRouteCommand(
     p_expected_campaign_state: request.expectedCampaignState,
     p_expected_ai_data: request.expectedAiData,
     p_partner_expected_data: request.partnerExpectedSettlement,
-    p_next_data: withoutPublicProse(request.settlement),
+    p_next_data: request.settlement,
     p_next_campaign_state: request.campaignState,
-    p_partner_next_data: withoutPublicProse(request.partnerSettlement),
+    p_partner_next_data: request.partnerSettlement,
     p_next_ai_data: request.aiData,
   });
   if (error) throw persistenceError(error);
