@@ -12,9 +12,7 @@
  *   • index integrity (unique ids, valid tabs)
  */
 
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { COMPENDIUM_SECTIONS } from '../../src/lib/compendiumSections.js';
 import { describe, it, expect } from 'vitest';
 import {
   searchCompendium,
@@ -23,7 +21,6 @@ import {
 } from '../../src/domain/compendium/searchIndex.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 describe('searchCompendium', () => {
   it('returns [] for empty or whitespace queries', () => {
@@ -142,25 +139,18 @@ describe('COMPENDIUM_INDEX integrity', () => {
   });
 });
 
-// ── COMPENDIUM_TABS ⇔ CompendiumPanel parity (domain-region-dossier-guidance-5) ──
-describe('COMPENDIUM_TABS stays in lockstep with the CompendiumPanel TABS', () => {
+// ── COMPENDIUM_TABS ⇔ the Compendium's sections (domain-region-dossier-guidance-5) ──
+describe('COMPENDIUM_TABS stays in lockstep with the Compendium sections', () => {
   // The index's valid-destination set drifted from the panel (the Living World tab was
   // in the panel but absent here, so the global search could never route to it). This
-  // pins the two together. Source-scans the panel's TABS block for its `id:'…'` values
-  // — JUDGMENT (vetoable): a source scan rather than importing CompendiumPanel.jsx,
-  // which would drag React + lucide + every lazy tab module into this pure-node domain
-  // test; a new/renamed panel tab id still reds this until COMPENDIUM_TABS matches.
-  function panelTabIds() {
-    const src = readFileSync(join(ROOT, 'src/components/CompendiumPanel.jsx'), 'utf8');
-    const block = src.match(/const TABS\s*=\s*\[([\s\S]*?)\];/);
-    expect(block, 'could not locate the TABS array in CompendiumPanel.jsx').toBeTruthy();
-    return [...block[1].matchAll(/\bid\s*:\s*['"]([a-z0-9_-]+)['"]/g)].map((m) => m[1]);
-  }
-
-  it('the panel TABS ids and COMPENDIUM_TABS are the same set (both directions)', () => {
-    const panel = panelTabIds();
-    expect(panel.length).toBeGreaterThan(0);
-    expect([...COMPENDIUM_TABS].sort()).toEqual([...new Set(panel)].sort());
+  // pins the two together. The owner's word of 2026-11-10 replaced the panel's TABS
+  // row with section pages, so the one list of sections is lib/compendiumSections.js
+  // (a pure module, imported directly — no source scan of the panel is needed any more);
+  // My Custom Content is per-reader and is not an index destination.
+  it('the catalog sections and COMPENDIUM_TABS are the same set (both directions)', () => {
+    const sections = COMPENDIUM_SECTIONS.map((s) => s.tab).filter((t) => t !== 'custom');
+    expect(sections.length).toBe(11);
+    expect([...COMPENDIUM_TABS].sort()).toEqual([...sections].sort());
   });
 
   it('the Living World tab is present and searchable (the drift the finding named)', () => {

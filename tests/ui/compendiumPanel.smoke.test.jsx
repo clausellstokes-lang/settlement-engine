@@ -88,27 +88,59 @@ describe('CompendiumPanel — decomposition smoke', () => {
     ).toBeTruthy();
   });
 
-  // RESTORATION #9 — the standalone-page identity (Page frame + PageHeader) and
-  // the WAI-ARIA tab wiring (role=tablist/tab/tabpanel with matching id linkage)
-  // were dropped at the composite; this pins that they are wired back.
-  test('standalone carries the PageHeader identity and ARIA tab wiring', async () => {
+  // RESTORATION #9 pinned the standalone-page identity (Page frame + PageHeader) and
+  // the WAI-ARIA tab wiring. The owner's word of 2026-11-10 ("Rather than a horizontal
+  // scroll, I would like that the first page of compendium lists in boxes that are
+  // flush to each other … when one clicks on it they are taken to a different page")
+  // retired the tab row: the landing is now a nav landmark of twelve links, one per
+  // section page, and no tablist is left. The PageHeader identity pin stands.
+  test('standalone carries the PageHeader identity and the landing grid of section links', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
     render(<CompendiumPanel standalone />);
 
-    // PageHeader identity: the serif page title, not just a document.title swap.
     expect(screen.getByRole('heading', { level: 1, name: 'Compendium' })).toBeTruthy();
 
-    // The tab strip is a labelled tablist; every tab declares role=tab; the
-    // content region is a tabpanel whose id matches the selected tab's
-    // aria-controls (the linkage AT relies on).
-    const tablist = screen.getByRole('tablist', { name: 'Compendium sections' });
-    expect(tablist).toBeTruthy();
-    const tabs = screen.getAllByRole('tab');
-    expect(tabs.length).toBeGreaterThan(0);
-    const panel = screen.getByRole('tabpanel');
-    const selected = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
-    expect(selected).toBeTruthy();
-    expect(selected.getAttribute('aria-controls')).toBe(panel.getAttribute('id'));
-    expect(panel.getAttribute('aria-labelledby')).toBe(selected.getAttribute('id'));
+    const nav = screen.getByRole('navigation', { name: 'Compendium sections' });
+    const links = [...nav.querySelectorAll('li > a')];
+    expect(links).toHaveLength(12);
+    expect(links.map((a) => a.getAttribute('href'))).toEqual([
+      '/compendium/tiers', '/compendium/economy', '/compendium/powers', '/compendium/institutions',
+      '/compendium/operations', '/compendium/magic-and-religion', '/compendium/living-world', '/compendium/stress',
+      '/compendium/calamity', '/compendium/neighbours', '/compendium/a-z', '/compendium/custom',
+    ]);
+    // The twelfth box is My Custom Content (ruling H4); the mode toggle is gone.
+    expect(links[11].textContent).toContain('My Custom Content');
+    expect(screen.queryByRole('tablist')).toBeNull();
+    expect(screen.queryAllByRole('tab')).toHaveLength(0);
+    expect(screen.queryByRole('button', { name: /Built-in Catalog/ })).toBeNull();
+    // No Back on the landing.
+    expect(screen.queryByRole('button', { name: 'Back' })).toBeNull();
+  });
+
+  test('a section page leads with Back, its title and its own search', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    const { container } = render(<CompendiumPanel standalone routeSection="institutions" />);
+    const back = screen.getByRole('button', { name: 'Back' });
+    expect(screen.getByRole('heading', { level: 1, name: 'Institutions' })).toBeTruthy();
+    expect(screen.getByLabelText('Search catalog')).toBeTruthy();
+    // Back comes first: before the heading in document order.
+    const h1 = screen.getByRole('heading', { level: 1 });
+    expect(back.compareDocumentPosition(h1) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // The landing's grid is not on a section page.
+    expect(container.querySelector('nav[aria-label="Compendium sections"]')).toBeNull();
+    // Back returns to the landing (pushed).
+    window.history.replaceState(null, '', '/compendium/institutions');
+    const before = window.history.length;
+    back.click();
+    expect(window.location.pathname).toBe('/compendium');
+    expect(window.history.length).toBe(before + 1);
+    window.history.replaceState(null, '', '/');
+  });
+
+  test('an entry page also leads with Back', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    render(<CompendiumPanel standalone routeEntry="tier-thorp" />);
+    expect(screen.getByRole('button', { name: 'Back' })).toBeTruthy();
+    expect(screen.getByRole('heading', { level: 1, name: 'Tiers & Routes' })).toBeTruthy();
   });
 });

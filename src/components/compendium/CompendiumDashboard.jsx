@@ -1,40 +1,59 @@
 /**
- * compendium/CompendiumDashboard.jsx — the Overview dashboard + the A–Z index.
+ * compendium/CompendiumDashboard.jsx — the landing grid + the A–Z index.
  *
- * The Overview is the legends-viewer landing: per-catalog counts (all from the
- * generated artifact) as hub cards. The A–Z index is the orphan-proof HTML sitemap:
+ * The landing (/compendium) is the intro and one flush grid of boxes, a box per
+ * section with its count (from the generated artifact) where it has one. The A–Z index is the orphan-proof HTML sitemap:
  * every named entry across every catalog, alphabetised, each a stable deep-link into
  * its hub + section anchor.
  */
 
 import { useMemo } from 'react';
-import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, sans, FS } from '../theme.js';
+import { GOLD, GOLD_TXT, INK, CARD, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, sans, FS } from '../theme.js';
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { slug } from './registrySlug.js';
+import { sectionSlugForTab } from '../../lib/compendiumSections.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Real, crawlable URL for a hub/entry — the A–Z is an HTML sitemap, so its links
 // are true hrefs (SEO + open-in-new-tab); onClick does the smooth in-page nav.
-const hubHref = (tab, anchor) => `/compendium?tab=${tab}${anchor ? `#${anchor}` : ''}`;
+// Since the owner's word of 2026-11-10 every section is its own page: /compendium/<slug>.
+const hubHref = (tab, anchor) => `/compendium/${sectionSlugForTab(tab)}${anchor ? `#${anchor}` : ''}`;
 const onLink = (e, onNavigate, tab, anchor) => { e.preventDefault(); onNavigate(tab, anchor); };
 
-// The catalogs shown on the dashboard, in reading order. `count`, `blurb`, and the
-// destination tab/anchor drive both the Overview cards and (via ENTRY_SOURCES) the
-// A–Z index — one description of the catalog set, two surfaces.
-const CATALOGS = [
-  { tab:'institutions', anchor:'institutions', label:'Institutions', count:CD.institutions.distinctNames, blurb:'Every institution the engine can place, across all tiers.' },
-  { tab:'power',        anchor:'archetypes',   label:'Archetypes',   count:CD.archetypes.count,    blurb:'Emergent settlement archetypes keyed to slider + threat conditions.' },
-  { tab:'operations',   anchor:'operations',   label:'Operations',   count:CD.operations.count,    blurb:'Every operation the engine can perform, with its class and receipt.' },
-  { tab:'living',       anchor:'systems',      label:'Living World',  count:CD.systems.length,     blurb:'The endgame systems, the causal substrate, and the presets that light them.' },
-  { tab:'tiers',        anchor:'tiers',        label:'Tiers',        count:CD.tiers.length,        blurb:'Settlement size tiers and their population bands.' },
-  { tab:'neighbour',    anchor:'neighbours',   label:'Relationships', count:CD.relationships.count, blurb:'Neighbour relationship types and their mechanical effects.' },
-  { tab:'calamity',     anchor:'calamity',     label:'Calamity',     count:CD.calamity.flavors.length, blurb:'The one unified calamity mechanic and its terrain flavours.' },
-];
+// THE LANDING'S COUNTS AND LINES, keyed by section tab. The owner, 2026-11-10: the
+// first page "lists in boxes that are flush to each other"; the chair's ruling H1:
+// a box shows its count where the old Overview card carried one, and ONE line that
+// is that section's own existing Overview-card sentence or its own first intro
+// sentence, VERBATIM — no new prose. A section with neither shows name (and count)
+// alone. Every count is read from the generated artifact, never typed.
+const BOX_FACTS = {
+  tiers:        { count:CD.tiers.length,               line:'Settlement size tiers and their population bands.' },
+  // EconomyTab's own italic lead-in.
+  economy:      { line:'How prosperity is produced, traded, and stressed.' },
+  power:        { count:CD.archetypes.count,           line:'Emergent settlement archetypes keyed to slider + threat conditions.' },
+  institutions: { count:CD.institutions.distinctNames, line:'Every institution the engine can place, across all tiers.' },
+  operations:   { count:CD.operations.count,           line:'Every operation the engine can perform, with its class and receipt.' },
+  // ArcaneTab's first intro sentence: the first sentence of the artifact's own
+  // faith.authorship paragraph, read from it so the box cannot drift from the page.
+  arcane:       { line:firstSentence(CD.faith.authorship) },
+  living:       { count:CD.systems.length,             line:'The endgame systems, the causal substrate, and the presets that light them.' },
+  // StressTab's first intro sentence.
+  stress:       { line:'Multiple stresses compound.' },
+  calamity:     { count:CD.calamity.flavors.length,    line:'The one unified calamity mechanic and its terrain flavours.' },
+  neighbour:    { count:CD.relationships.count,        line:'Neighbour relationship types and their mechanical effects.' },
+};
 
-export function CompendiumOverview({ onNavigate }) {
-  const mobile = useIsMobile();
+/** @param {unknown} text @returns {string} the text up to and including its first full stop. */
+function firstSentence(text) {
+  const t = String(text || '');
+  const i = t.indexOf('. ');
+  return i === -1 ? t : t.slice(0, i + 1);
+}
+
+// The landing's lead: the old Overview's one paragraph and its sample-world line.
+export function CompendiumIntro() {
   return (
     <div id="overview">
       <p style={{ fontSize:FS.md, color:SEC, lineHeight:1.7, margin:'0 0 6px', fontFamily:sans, maxWidth:'42em' }}>
@@ -45,36 +64,57 @@ export function CompendiumOverview({ onNavigate }) {
         The sample world is <strong style={{ color:INK }}>{CD.meta.demoWorld.name}</strong> (seed{' '}
         <code style={{ fontFamily:'monospace', color:GOLD_TXT }}>{CD.meta.demoWorld.seed}</code>).
       </p>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))', gap:10 }}>
-        {CATALOGS.map((c) => (
-          <a key={c.tab} href={hubHref(c.tab, c.anchor)} onClick={(e) => onLink(e, onNavigate, c.tab, c.anchor)}
-            style={{ display:'block', textDecoration:'none', border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`,
-              padding:'12px 14px', cursor:'pointer' }}>
-            <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', gap:8, marginBottom:4 }}>
-              <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK }}>{c.label}</span>
-              {/* Drawer-label count: old-style figures sit the number into the
-                  running serif line — the lexicon register, not a chrome badge. */}
-              <span style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:700, color:GOLD_TXT, fontVariantNumeric:'oldstyle-nums' }}>{c.count}</span>
-            </div>
-            <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.5 }}>{c.blurb}</div>
-          </a>
-        ))}
-      </div>
-      <p style={{ fontSize:FS.sm, color:SEC, margin:'16px 0 0', fontFamily:sans }}>
-        Looking for a specific name?{' '}
-        {/* The A–Z is the compendium's one orphan-proof door, and its hit area
-            was the bare 16px text line — under every target-size floor on a
-            phone. Vertical padding lifts it to 40px and an equal NEGATIVE margin
-            gives the padding back to the paragraph, so the hit area grows while
-            the rendered line box does not move. (The link is inline in running
-            prose, so the Button/IconButton minHeight idiom does not apply here.) */}
-        <a href={hubHref('az', 'az')} onClick={(e) => onLink(e, onNavigate, 'az', 'az')}
-          style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600, fontFamily:sans, fontSize:FS.sm,
-            display:'inline-block', padding:'12px 4px', margin:'-12px -4px' }}>
-          Browse the A–Z index.
-        </a>
-      </p>
     </div>
+  );
+}
+
+/**
+ * THE LANDING GRID (ruling H1): one box per section, FLUSH — no space between boxes,
+ * shared hairline rules (the grid's 1px track gap shows the border colour through)
+ * and one outer border; four columns by three rows on desktop and tablet, two by six
+ * on a phone. Each box is a LINK to its section page, inside a nav landmark.
+ *
+ * @param {{ sections: ReadonlyArray<{ slug: string, tab: string, label: string, Icon: any }>,
+ *   customCount?: number, onOpen: (slug: string) => void }} props
+ */
+export function CompendiumHubGrid({ sections, customCount = 0, onOpen }) {
+  const mobile = useIsMobile();
+  const azTotal = useMemo(() => buildIndexEntries().length, []);
+  return (
+    <nav aria-label="Compendium sections">
+      <ul data-compendium-grid="" style={{ listStyle:'none', margin:0, padding:0, display:'grid',
+        gridTemplateColumns: mobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))',
+        gap:1, background:BOR, border:`1px solid ${BOR}` }}>
+        {sections.map(({ slug: s, tab, label, Icon }) => {
+          const facts = tab === 'az'
+            // No count of its own (the Overview carried no A–Z card); its first intro
+            // sentence already carries the total.
+            ? { line:`Every named entry in the Compendium (${azTotal} in all) in one alphabetical index.` }
+            : tab === 'custom'
+              ? { count: customCount > 0 ? customCount : undefined }
+              : (BOX_FACTS[tab] || {});
+          return (
+            <li key={s} style={{ display:'flex', minWidth:0, background:CARD }}>
+              <a href={`/compendium/${s}`} onClick={(e) => { e.preventDefault(); onOpen(s); }}
+                style={{ display:'flex', flexDirection:'column', gap:4, width:'100%', minWidth:0, minHeight: mobile ? 96 : 112,
+                  boxSizing:'border-box', padding: mobile ? '12px 10px' : '14px 16px', textDecoration:'none', cursor:'pointer' }}>
+                <span style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', gap:6 }}>
+                  <span style={{ display:'flex', alignItems:'center', gap:6, minWidth:0, fontFamily:serif_, fontSize: mobile ? FS.sm : FS.md, fontWeight:700, color:INK, overflowWrap:'anywhere' }}>
+                    <Icon size={14} aria-hidden="true" style={{ color:GOLD, flexShrink:0 }} />{label}
+                  </span>
+                  {facts.count !== undefined && (
+                    <span style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:700, color:GOLD_TXT, fontVariantNumeric:'oldstyle-nums', flexShrink:0 }}>{facts.count}</span>
+                  )}
+                </span>
+                {facts.line && (
+                  <span style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.5, overflowWrap:'anywhere' }}>{facts.line}</span>
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
 
