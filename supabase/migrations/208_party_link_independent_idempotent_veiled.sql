@@ -12,7 +12,11 @@
 --   revealDm override splices the member's already-sanitized record (executed:
 --   tests/security/galleryUnlisted.pglite.test.js, R1 (i)-(iii)); the response's
 --   gallery_share_dm is always false; gallery_member_overrides still travels so
---   the client applies the veil's $veil deltas. (d) below is amended to match.
+--   the client applies the veil's $veil deltas, LESS its frozen snapshot (the re-review's
+--   blocker R8: an export in snapshot mode stores the whole public copy at $veil.snapshot,
+--   which with Reveal DM is the DM projection — executed: the anon read carried a planted
+--   secret outside `dossier`; the link now returns the overrides `#- '{$veil,snapshot}'`
+--   and the client's link branch renders the live sanitized dossier). (d) is amended to match.
 --   (finding 9) `set local lock_timeout = '5s'` ahead of the constraint, so the
 --   ACCESS EXCLUSIVE lock on settlements never queues the table behind a long
 --   transaction; a timeout fails the file, which is safe to re-run as written.
@@ -171,7 +175,7 @@ grant execute on function public.revoke_settlement_unlisted(uuid) to authenticat
 -- flag: a revealDm override can only splice a record that is already sanitized, and
 -- every other member is re-reduced to the public allowlist (093, idempotent).
 -- gallery_share_dm is always false; gallery_member_overrides travels so the client
--- applies the veil's $veil deltas.
+-- applies the veil's $veil deltas, without the export's frozen snapshot (R8).
 create or replace function public.get_unlisted_dossier(p_slug text)
 returns jsonb
 language sql stable security definer set search_path = public, pg_temp
@@ -185,7 +189,10 @@ as $$
     'author_name', ap.external_name,
     'is_owner', coalesce(s.user_id = auth.uid(), false),
     'gallery_share_dm', false,
-    'gallery_member_overrides', s.gallery_member_overrides,
+    -- R8 (the re-review of 2026-11-10): nothing but what HIDES travels. A gallery export in
+    -- snapshot mode stores its frozen public copy at $veil.snapshot, and with Reveal DM (or a
+    -- revealDm member) that copy is the DM projection; it never leaves on the link.
+    'gallery_member_overrides', s.gallery_member_overrides #- '{$veil,snapshot}',
     'dossier', public._gallery_apply_member_overrides(
       public._gallery_sanitize_public_json(base.j),
       public._gallery_sanitize_public_json(base.j),

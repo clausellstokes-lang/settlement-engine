@@ -355,6 +355,45 @@ describe.runIf(present)('the party link — execution against the real SQL (pgli
     expectPlayerView(link.dossier);
   });
 
+  // R8 (VEIL-FIX re-review, 2026-11-10): THE LINK'S WHOLE RESPONSE carries nothing the sanitizer
+  // strips. A gallery export in snapshot mode stores the frozen public copy at
+  // gallery_member_overrides.$veil.snapshot, and with Reveal DM (or a revealDm member) that copy is
+  // the DM projection; the link returned the overrides whole. Structural: the WHOLE serialized
+  // response is searched, not the dossier alone.
+  const DM_SNAPSHOT = {
+    name: 'Highkeep', secret: 'snap-compass-text', secrets: ['snap-vault-text'], plotHooks: ['snap-hook-text'],
+    npcs: [{ id: 'n1', name: 'Ada', secret: 'snap-ada-secret-text', goals: ['snap-ada-goal-text'] }],
+  };
+  const DM_STRINGS = ['snap-compass-text', 'snap-vault-text', 'snap-hook-text', 'snap-ada-secret-text', 'snap-ada-goal-text',
+    'the compass', 'the vault', 'a hook', 'ada-secret', 'ada-goal', 'bo-secret', 'bo-goal'];
+  const expectNoDmString = (response) => {
+    const text = JSON.stringify(response);
+    expect(text).toContain('Highkeep');
+    for (const planted of DM_STRINGS) expect(text.includes(planted), planted).toBe(false);
+  };
+
+  it('R8 (i): a row listed with Reveal DM holding a DM snapshot — the WHOLE link response carries no DM string', async () => {
+    const overrides = { $veil: { v: 1, deltas: [], mode: 'snapshot', at: '2026-11-10T00:00:00Z', snapshot: DM_SNAPSHOT } };
+    await plant(overrides, true);
+    const slug = await share(S_PUBLIC);
+    await db.query(`select public.publish_settlement('${S_PUBLIC}')`);
+    await asAnon();
+    const link = await linkRead(slug);
+    expectNoDmString(link);
+    expect(link.gallery_member_overrides.$veil.mode).toBe('snapshot'); // the veil marker and mode still travel
+  });
+
+  it('R8 (ii): a row with a revealDm member in its snapshot — the WHOLE link response carries no DM string', async () => {
+    const overrides = { n1: { revealDm: true }, $veil: { v: 1, deltas: [{ address: 'card:npc:n2', hidden: true }], mode: 'snapshot', snapshot: DM_SNAPSHOT } };
+    await plant(overrides, false);
+    const slug = await share(S_PUBLIC);
+    await asAnon();
+    const link = await linkRead(slug);
+    expectNoDmString(link);
+    expect(link.gallery_member_overrides.$veil.deltas).toHaveLength(1); // what hides still travels
+    expect(link.gallery_member_overrides.n1).toEqual({ revealDm: true });
+  });
+
   // ── (f) the owner is told ────────────────────────────────────────────────────
   it('the owner is told is_owner; another user and anon are not', async () => {
     const slug = await share(S_UNLISTED);

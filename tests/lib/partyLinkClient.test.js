@@ -158,3 +158,19 @@ describe('R4: the party link fails closed to the default veil', () => {
     expect(JSON.stringify(listed.settlement)).toContain('housekeeping-note-text');
   });
 });
+
+// R8 (VEIL-FIX re-review, 2026-11-10): the link's response carries the veil marker and its mode but
+// never the export's frozen snapshot (208 strips $veil.snapshot). The client's link branch then
+// renders the LIVE sanitized dossier — pinned here (it held before R8; this is the read R8 relies on).
+describe('R8: a snapshot-mode share with its snapshot stripped renders the live dossier on the link', () => {
+  it('mode snapshot, no snapshot: the live dossier renders and no frozen copy is claimed', async () => {
+    serve({ galleryRow: null, unlistedRow: {
+      id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
+      dossier: SETTLEMENT, gallery_member_overrides: { $veil: { v: 1, deltas: [], mode: 'snapshot', at: '2026-11-10T00:00:00Z' } },
+    } });
+    const linked = await fetchPublicDossier('u'.repeat(42));
+    expect(JSON.stringify(linked.settlement)).toContain('Ada Thorne');
+    expect(JSON.stringify(linked.settlement)).toContain('patient-with-apprentices');
+    expect(linked.snapshotAt).toBeNull();
+  });
+});
