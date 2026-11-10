@@ -189,6 +189,16 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-10, THE SW-9b-B MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 27) ──
+ * THE HUNDRED-AND-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the style wave's merge (BRIEF-STYLE-2-WAVE §3, the law of the chain); the
+ * record is docs/shift-records/2026-11-10-style-2-merge-27-sw9b-b.json. THE MOVER, FOUND: the SW-9b-B merge 8e532a663 (df52ccd34 into the integration branch); its one generator cause the component (b23e4e91b: the crisis cast's fixed reason `instigatorBacked`, the chair's words — STYLE-2-SW9B-B-2026-11-09.md).
+ * On THIS corpus 9 of 360 rows (town 2, city 2, metropolis 5) move against record 25's post-state (the stage of bf14617ca)
+ * (`81b49bc6…`); 360/360 hashes stay distinct. Written from the staged tree (ee364b3ef with the door
+ * paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `81b49bc6…` -> `291c7695…`.
+ *
+ *
+ *
  * ── 2026-11-10, THE URBAN-FIX MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 25) ──
  * THE HUNDRED-AND-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the style wave's merge (BRIEF-STYLE-2-WAVE §3, the law of the chain); the
@@ -1268,7 +1278,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '81b49bc6731205bee7396e565dd1edc54f07b9bd2b6bff1a75ab4f77a2fc470a';
+const PRE_COUPLING_CORPUS_SHA = '291c769541e61b2a700b51051b02275674f658fd67b3ec6303ee7faccb49b5ae';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
