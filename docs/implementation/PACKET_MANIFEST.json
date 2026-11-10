@@ -30426,7 +30426,8 @@
         },
         {
           "path": "src/lib/saves.js",
-          "symbol": "row.data = entry.settlement"
+          "symbol": "row.data = entry.settlement",
+          "retiredBy": "§934.105 (rule 39 addendum, judgment 269; §731.3's idiom): SW-B7b PROJECTION (7f352715b, merged as STYLE-2-MERGE point 23) REWROTE this line in place — src/lib/saves.js :: withPublicProse wraps entry.settlement before the same assignment, so the shared dossier's text projection rides the save; the row's subject still writes row.data, through the wrapper. Retired by the chair's ruling of 2026-11-10 00:2x UTC, vetoable by the owner."
         },
         {
           "path": "src/lib/importScrub.js",
