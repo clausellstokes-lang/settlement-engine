@@ -352,7 +352,7 @@ export function InstitutionsTab({ _config, search }) {
             {inst.required && <Tag label="Core" color='#1a3a7a' title="Always present at this tier. Generated every time, never rolled by chance."/>}
           </div>
           {inst.category && <Tag label={inst.category} color={catColors[inst.category]||GOLD}/>}
-          {inst.desc && <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
+          {inst.desc && <div style={{ fontSize:proseFontSize(FS.sm, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
           <InstitutionFactLines inst={inst} />
         </div>))}
     </div>

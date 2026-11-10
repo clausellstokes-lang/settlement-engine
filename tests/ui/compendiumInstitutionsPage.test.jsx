@@ -89,5 +89,13 @@ describe('H7 — the page', () => {
     const mill = container.querySelector(`#${institutionAnchor('Mill')}`);
     expect(mill.querySelector('[data-inst-fact="Flows into"]').textContent).toContain('Baked goods');
     expect(mill.querySelector('[data-inst-fact="Size"]').textContent).toBe('Size: Village');
+    // COMPENDIUM-INSTITUTIONS-2 a2 (the chair: "a card's description is never smaller than its
+    // fact lines"): the description's size is at least every fact line's (desktop here; the phone
+    // floor lifts the description to 14 px there). The lines are told apart by their label ink.
+    const px = (el) => parseFloat(el.style.fontSize);
+    const factEl = mill.querySelector('[data-inst-fact]');
+    const descEl = factEl.previousElementSibling;
+    expect(descEl.textContent.length).toBeGreaterThan(20);
+    expect(px(descEl)).toBeGreaterThanOrEqual(px(factEl));
   });
 });
