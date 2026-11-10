@@ -367,13 +367,16 @@ function CompendiumLink({ tab, label, desc }) {
 
 // The Navigation rows' descriptions, keyed by the route table's view id (NAV is the
 // label and the order). Each line is the Guide's own pre-existing description of that
-// seat, except Gallery, which is the Gallery page's own subtitle (gallery.pageSubtitle).
+// seat, except Gallery, which is the Gallery page's own subtitle (gallery.pageSubtitle),
+// and Realm, in the chair's words (ruling S4).
 // EXPORTED FOR ITS TOTALITY PIN (tests/components/aboutCurrent.test.jsx): every NAV
 // seat has a line and no line names a seat the header does not have.
 export const NAV_DESCRIPTIONS = Object.freeze({
   generate: 'The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).',
   settlements: 'Your saved settlement library. With Cartographer, group into campaigns, link as neighbours, edit, rename, and export without limit.',
-  realm: 'Embedded fantasy map. With Cartographer, drag saved settlements onto it to place them and toggle the relationship and supply-chain overlays.',
+  // The chair's ruling S4 (2026-11-10): each clause held by routes.js (the Realm hub: World
+  // Map + Pulse + Chronicle + Pantheon) and the Guide's former World Map line.
+  realm: 'The world map, with the region\'s Pulse, Chronicle and Pantheon beside it. With Cartographer, drag saved settlements onto the map to place them and toggle the relationship and supply-chain overlays.',
   compendium: 'The reference spine: every catalog rendered live from the engine. See the deep-links below.',
   gallery: t('gallery.pageSubtitle'),
   'about-what-this-is': 'What this is (the trust page) and this Practical Guide.',
