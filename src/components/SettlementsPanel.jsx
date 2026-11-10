@@ -40,7 +40,6 @@ import {
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
 import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
 import BulkActionBar from './settlements/BulkActionBar.jsx';
-import { useCampaignAdvance } from './settlements/useCampaignAdvance.js';
 import { useOwnerScopedSaves } from '../hooks/useOwnerScopedSaves.js';
 import Button from './primitives/Button.jsx';
 import RefusalNotice from './primitives/RefusalNotice.jsx';
@@ -95,10 +94,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const removeFromCampaign = useStore(s => s.removeFromCampaign);
   const getCampaignMembershipBlock = useStore(s => s.getCampaignMembershipBlock);
   const getSettlementDeletionBlock = useStore(s => s.getSettlementDeletionBlock);
-  // W4a — Library living surface: canonize-from-list, per-campaign advance-time.
+  // W4a — Library living surface: canonize-from-list.
   const canonizeSavedSettlement = useStore(s => s.canonizeSavedSettlement);
-  const setActiveCampaign = useStore(s => s.setActiveCampaign);
-  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
   const discoverCampaignRegionalChannels = useStore(s => s.discoverCampaignRegionalChannels);
   const setRegionalChannelStatus = useStore(s => s.setRegionalChannelStatus);
   const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
@@ -639,13 +636,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     canonizeSavedSettlement(s.id);
   }, [canonizeSavedSettlement]);
 
-  // ── Advance Time (per campaign, from the list) ────────────────────────────
-  // Premium (Cartographer) gate lives on the card. The handler + its typed-refusal
-  // surface live in useCampaignAdvance (experience-product-fit-2).
-  const { advanceError, handleAdvanceCampaignTime } = useCampaignAdvance({
-    advanceCampaignWorld, setActiveCampaign, onNavigate,
-  });
-
   const handleApplyRegionalImpact = useCallback((campaignId, impactId) => {
     applyQueuedRegionalImpact(campaignId, impactId);
   }, [applyQueuedRegionalImpact]);
@@ -760,7 +750,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
      <div style={{ display:'flex', flexDirection:'column', gap:SP.sm }}>
       {persistenceError && <div role="alert" style={alertStyle}><strong>Library:</strong> {persistenceError}</div>}
       {reactivationError && <div role="alert" style={alertStyle}><strong>Reactivation:</strong> {reactivationError}</div>}
-      {advanceError && <div role="alert" style={alertStyle}><strong>Advance:</strong> {advanceError}</div>}
 
       {/* Page header — the GM's own content owns the top of their own page; the
           SaveQuotaMeter is demoted to a slim strip below so the funnel frames
@@ -920,7 +909,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               deleteId={deleteId} setDeleteId={setDeleteId} deleteConfirmed={deleteConfirmed}
               campaigns={activeCampaigns} addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
               onReactivate={handleReactivateSave} canReactivate={canReactivateInactive} reactivatingId={reactivatingId}
-              onCanonize={handleCanonize} onAdvanceTime={handleAdvanceCampaignTime} onCreateCampaign={openCreateCampaign}
+              onCanonize={handleCanonize} onCreateCampaign={openCreateCampaign}
               onNavigate={onNavigate} canManageCampaigns={canManageCampaigns}
               selectMode={selectMode} selectedIds={selectedIds} onToggleSelect={toggleSelect} />
           )}
