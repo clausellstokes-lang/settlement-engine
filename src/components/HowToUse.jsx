@@ -42,6 +42,8 @@ import PageHeader from './primitives/PageHeader.jsx';
 import AccountFAQ from './account/AccountFAQ.jsx';
 import LivingWorldTab from './howto/LivingWorldTab.jsx';
 import { anchorFor, unitsForView, ABOUT_GUIDE_VIEW } from '../lib/aboutMapping.js';
+import { NAV } from '../lib/routes.js';
+import { t } from '../copy/index.js';
 import useAboutHashScroll from './about/useAboutHashScroll.js';
 // V-26b: the house-voice draft of the handbook narrative, rendered only when the
 // (default-off) `handbookVoice` flag is on. Rides this already-lazy chunk (zero eager).
@@ -358,20 +360,34 @@ function CompendiumLink({ tab, label, desc }) {
   );
 }
 
+// The Navigation rows' descriptions, keyed by the route table's view id (NAV is the
+// label and the order). Each line is the Guide's own pre-existing description of that
+// seat, except Gallery, which is the Gallery page's own subtitle (gallery.pageSubtitle).
+// EXPORTED FOR ITS TOTALITY PIN (tests/components/aboutCurrent.test.jsx): every NAV
+// seat has a line and no line names a seat the header does not have.
+export const NAV_DESCRIPTIONS = Object.freeze({
+  generate: 'The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).',
+  settlements: 'Your saved settlement library. With Cartographer, group into campaigns, link as neighbours, edit, rename, and export without limit.',
+  realm: 'Embedded fantasy map. With Cartographer, drag saved settlements onto it to place them and toggle the relationship and supply-chain overlays.',
+  compendium: 'The reference spine: every catalog rendered live from the engine. See the deep-links below.',
+  gallery: t('gallery.pageSubtitle'),
+  'about-what-this-is': 'What this is (the trust page) and this Practical Guide.',
+});
+
 function Reference() {
   const sections = [
+    // ABOUT-CURRENT A2 (2026-11-10): the seats RENDER from the route table's NAV (the
+    // header's own labels, in its own order), so this list cannot drift from the header.
+    // Each description is keyed by the seat's view id; DM Screen is not a seat and
+    // follows them (it has no other inbound link, V-18 below).
     { heading: 'Navigation', rows: [
-      ['Create','The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).'],
-      ['Settlements','Your saved settlement library. With Cartographer, group into campaigns, link as neighbours, edit, rename, and export without limit.'],
-      ['World Map','Embedded fantasy map. With Cartographer, drag saved settlements onto it to place them and toggle the relationship and supply-chain overlays.'],
-      ['Compendium','The reference spine: every catalog rendered live from the engine. See the deep-links below.'],
+      ...NAV.map((n) => [n.label, NAV_DESCRIPTIONS[n.id]]),
       // V-18 the DM Screen is a REAL DM-facing surface (letter, dossier, session
       // ledger, auspice, and a player-safe face you can turn to the table), and it
       // had no inbound link anywhere outside lib/routes.js. It stays noindex, which
       // is a crawler posture, not a verdict on who it is for: it reads whatever
       // settlement is open, so there is nothing stable for an index to point at.
       ['DM Screen', <>At-the-table view of whatever you have open: the Chronicler&rsquo;s Letter, the dossier at a glance, the session ledger, and the auspice, with a player-safe face you can turn around. <a href="/screen" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Open the DM Screen</a>.</>],
-      ['About','What this is (the trust page) and this Practical Guide.'],
     ]},
     { heading: 'Settlement Detail Tabs', rows: [
       ['Overview','The town at a glance: identity, status tags, any active crisis, and who governs.'],
