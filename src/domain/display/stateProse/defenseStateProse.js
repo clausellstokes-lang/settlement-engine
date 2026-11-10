@@ -679,7 +679,7 @@ function chainArm(chainModifiers, arm) {
  * why a ruined citadel does not read here as standing walls.
  *
  * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
- *   defenseProfile?: {scores?: {economic?: unknown}|null, chainModifiers?: unknown}|null,
+ *   defenseProfile?: {scores?: {economic?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{beasts: object|null, invasion: object|null, internal: object|null,
@@ -1018,7 +1018,7 @@ export function defenseCriminalProse(settlement, structureKey, options = {}) {
     : null);
   // A key with no printable variant (a dm-only pool for a player) still yields a rung with a
   // null sentence, as it always has; only a null KEY yields no rung.
-  /** @param {string|null} poolKey @param {object|null} unit */
+  /** @param {string|null} poolKey @param {import('./composeStateProse.js').ComposedUnit|null} unit */
   const rung = (poolKey, unit) => (poolKey ? legibilityRung('', unit, []) : null);
 
   const structureKey4 = criminalStructurePoolKey(structureKey);
@@ -1479,7 +1479,8 @@ export function arcaneDefensePoolKey(forces, magicWorks) {
  * the odd one out. A cure that plants a red in a shared module is not a cure.
  *
  * @param {{name?: string, institutions?: unknown,
- *   config?: {monsterThreat?: unknown}|null, defenseProfile?: Record<string, unknown>|null,
+ *   config?: {monsterThreat?: unknown}|null, defenseProfile?: {traditions?: {hasArcaneGuild?: unknown,
+ *     hasAlchemy?: unknown, hasDivine?: unknown, hasDruid?: unknown, hasArcane?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{fortification: object|null, force: object|null, contracted: object|null,
@@ -1997,7 +1998,8 @@ export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent 
  * contortion to dodge the scanner.
  *
  * @param {{name?: string, defenseProfile?: {magicDependency?: unknown}|null,
- *   economicState?: {activeChains?: unknown, safetyProfile?: {flags?: unknown}|null}|null}|null|undefined} settlement
+ *   economicState?: {activeChains?: unknown, safetyProfile?: {flags?: {magicFillsVoid?: unknown,
+ *     magicMilitarized?: unknown}|null}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{arcaneReliance: object|null}>}
  */
@@ -2054,9 +2056,10 @@ export function magicFlagPoolKey(flags) {
  * the spine car's composition takes these over when it lands; nothing waits on the spine).
  * The unit keeps its own pool and angle; the said line rides as a second piece, so the
  * composed-prose manifest reads the cell as ADDITIVE (the spine held, a piece grew).
- * @param {{text?: string, pieces?: ReadonlyArray<object>}|null} unit a composed unit
+ * @template {{text?: string, pieces?: ReadonlyArray<object>}} U
+ * @param {U|null} unit a composed unit
  * @param {{text?: string, pieces?: ReadonlyArray<object>}|null} said a composed unit from the same block, or null
- * @returns {object|null}
+ * @returns {U|null} the unit, its own shape kept (the said line only lengthens its text and pieces)
  */
 export function withSaid(unit, said) {
   const base = unit;
