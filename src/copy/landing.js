@@ -101,12 +101,13 @@ export const landing = {
     // STRIP-1: `waypoint` ('02 · The visual') is REMOVED — it pilled the settlement-map
     // section, which is gone. The rest of this block feeds §01's MiniDossierCard.
     h2:      'Read the Summary tab. That’s your session prep.',
-    // ⚑ FIXTURE-GROUNDED: the population (town.population 412) and the bakehouse
-    // (town.prose) are quoted from the frozen fixture, and the eyebrow's two
-    // dials (town.eyebrow "road village · mountain") are what "a mountain
-    // village the road reaches" says. tests/copy/landingProseGrounding.test.js
-    // reds when a regenerated fixture leaves this sentence behind.
-    body:    'This is Cnocby: eighty-two people, a mountain village the road reaches, and a bakehouse already on its second bake when you arrive. The Summary tab is your session prep. Systems, powers and history sit one tab deeper, for when the party starts digging.',
+    // ⚑ FIXTURE-GROUNDED: the population (town.population 82) is quoted from the
+    // frozen fixture, and the eyebrow's two dials (town.eyebrow "road village ·
+    // mountain") are what "a mountain village the road reaches" says.
+    // tests/copy/landingProseGrounding.test.js reds when a regenerated fixture
+    // leaves this sentence behind. (The bakehouse clause was CUT on 2026-11-10,
+    // FOUNDING-WORLDS / the chair's ruling N2: town.prose no longer carries one.)
+    body:    'This is Cnocby: eighty-two people, a mountain village the road reaches. The Summary tab is your session prep. Systems, powers and history sit one tab deeper, for when the party starts digging.',
     library: 'Sign in free to keep your towns in your Library.',
     // ⛔ `cta` ('Forge a settlement') and `link` ('Read on: the voice') ARE
     // DELETED. Neither was rendered anywhere — the brief block feeds §01's

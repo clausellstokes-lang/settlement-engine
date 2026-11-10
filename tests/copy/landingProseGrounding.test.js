@@ -82,6 +82,22 @@ describe('the landing prose quotes the fixture it is about', () => {
     expect(body, `the ${route} is no longer what reaches it`).toContain(route);
   });
 
+  it('the brief body names no arrival-scene detail the fixture prose does not carry', () => {
+    // FOUNDING-WORLDS (2026-11-10, the chair's ruling N2): the body said "a bakehouse
+    // already on its second bake when you arrive" across re-emits after the fixture's
+    // arrival prose stopped carrying any bakehouse — the arm above binds the
+    // figure and the dials, and nothing bound the scene. A scene word the brief says
+    // must be in town.prose (the arrival scene the card prints).
+    const SCENE_WORDS = ['bakehouse', 'bake', 'oven', 'inn', 'tavern', 'market', 'smithy', 'forge', 'mill', 'well',
+      'shrine', 'temple', 'chapel', 'carter', 'merchant', 'enclosures', 'foundations', 'halls'];
+    const body = landing.brief.body.toLowerCase();
+    const prose = String(fixture.town.prose).toLowerCase();
+    // Anchored: the prose is the arrival scene and carries scene words of its own.
+    expect(SCENE_WORDS.filter((w) => new RegExp(`\\b${w}`).test(prose)).length).toBeGreaterThan(0);
+    const unheld = SCENE_WORDS.filter((w) => new RegExp(`\\b${w}\\b`).test(body) && !new RegExp(`\\b${w}`).test(prose));
+    expect(unheld, 'the brief body names an arrival detail the fixture prose no longer carries').toEqual([]);
+  });
+
   it('the closer states the run the fixture actually performed', () => {
     expect(
       landing.closer.sub,
