@@ -155,7 +155,7 @@ S4 is the Realm description: RULED, the chair's words, landed.
 
 S5 is the eleven undescribed tabs: RULED, the default stands (label-only rows).
 
-S6 is the Compendium hub: RULED, the default stands. The eight `?tab=` links stay, and the hub redirects them. `lane/compendium-hub-2026-11-10` was not on origin at hand-back, so I could confirm neither the slugs nor the URL form.
+S6 is the Compendium hub: RULED, the default stands. The eight `?tab=` links stay, and the hub redirects them. `lane/compendium-hub-2026-11-10` appeared on origin at `9538f7cb4` just before the hand-back. Its `src/lib/compendiumSections.js` holds exactly the twelve slugs the order named, and maps every one of the Guide's eight `?tab=` values (tiers, economy, power, arcane, living, stress, neighbour, institutions) to a section page through `sectionSlugForTab`.
 
 S7 is RULED:
 - F2 landed in the chair's words.
@@ -220,7 +220,7 @@ PLAUSIBLE:
 ## 10. What stays
 
 - **Pricing-copy row** (the owner's surface, out of this lane): "from hamlet to metropolis" at `en.js` pricing tiers (three strings) and `organic/samples/fixtures.js`. The free floor is thorpe.
-- **A2:** the Compendium links stay `?tab=` (S6 ruled). The hub branch was absent at hand-back, so its slugs are unconfirmed.
+- **A2:** the Compendium links stay `?tab=` (S6 ruled). The slugs were confirmed against the hub at `9538f7cb4`. Rewriting the links to `/compendium/<slug>` is the hub's to rule after both lanes land.
 - **Outside the rows, noticed:**
   - The Guide's Workflow and World Map steps (Link Neighbour, Set as Neighbour, the arrow button, Drag to Place) were not re-measured against the product.
   - The en.js comment at `ai.inlineHint` says narrative "3 (fast 2)"; the code says 5 (fast 2).
