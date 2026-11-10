@@ -212,7 +212,10 @@ export const PHRASES = Object.freeze([
 export const PHRASE_IDS = Object.freeze(PHRASES.map((p) => p.id));
 
 /**
- * THE ALLOW-LIST: the app-chrome keys of `src/copy/en.js`, by key path inside `en`, per phrase. The audit
+ * THE ALLOW-LIST: the app-chrome keys of `src/copy/en.js`, by key path inside `en`, per phrase, and the quoted JOIN KEY
+ * of a display map whose label prints the renamed word (institutionDisplayName.js: the key `Multiple criminal factions`
+ * stays the identifier every table joins on and renders as 'Rival gangs'; SW-8 C1 a1b63f95e, row A12; the chair's
+ * keys-stay ruling). The audit
  * judged 443 of en.js's 444 literals app chrome (its §1b row; the one dossier string, `gallery` line 1029's
  * painting alt text, carries none of these phrases) and named the "simulation" and "engine" words of the
  * landing, onboarding, guidance, pricing and settings strings as the allow-list (§3). Those keys follow,
@@ -221,6 +224,7 @@ export const PHRASE_IDS = Object.freeze(PHRASES.map((p) => p.id));
  * "the record" (a refusal notice) stays counted until a lane rules it.
  */
 export const ALLOW = Object.freeze({
+  'src/domain/display/institutionDisplayName.js': Object.freeze({ faction: Object.freeze(['Multiple criminal factions']) }),
   'src/copy/en.js': Object.freeze({
     'the-engine': Object.freeze([
       'generate.subtitle',
