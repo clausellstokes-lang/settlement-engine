@@ -164,14 +164,15 @@ function tonightPage(settlement) {
 function crisisJournalPage(settlement) {
   const sections = composeCrisisPage(settlement);
   if (!sections.length) return null;
-  // The two facts print once, on the Tonight page this page rides; the untouched houses are one
-  // sentence (the PDF's rules, pdf/lib/crisisPrint.js; B4).
+  // The two facts print once, on the Tonight page this page rides; every house keeps its own stake row
+  // (the PDF's rules, pdf/lib/crisisPrint.js; veto 3). A cast row reads as the tab's does: "{name} · {reason}"
+  // (SW-9b-B A13: the reason is a lower-case fragment, never a sentence after a full stop).
   const printedFacts = composeTonightSheet(settlement).facts;
   return md(...sections.map(s => ({ ...s, stakeLines: stakeLines(s.stakes), seeFirst: unprintedFacts(s.seeFirst, printedFacts) })).map(s => md(
     '', `## ${esc(s.line)}`,
     s.summary ? esc(s.summary) : null,
     '', `### ${CRISIS_PAGE_COPY.cast}`,
-    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.name)}. ${esc(r.reason)}.`) : `- ${CRISIS_PAGE_COPY.nobody}`,
+    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
     s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`,
       s.stakeLines.rows.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
       s.stakeLines.untouched ? `- ${esc(s.stakeLines.untouched)}` : null) : null,
