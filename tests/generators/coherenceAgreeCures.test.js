@@ -4,6 +4,7 @@
  * Each describe block was red at the lane's base (99bcc6944) and turns green with its own commit.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { generateResourceAnalysis } from '../../src/generators/resourceGenerator.js';
 import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
@@ -16,12 +17,12 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 
 describe('cure 1: the critical imports never deny a live local resource', () => {
   test('"metals" is not a critical import beside live iron; it is with no metal at all', () => {
-    expect(generateResourceAnalysis('plains', ['iron_deposits', 'iron', 'metalwork'], [], []).imports.critical).not.toContain('metals');
+    expect(generateResourceAnalysis('plains', ['iron_deposits', 'iron', 'metalwork'], [], []).imports.critical).not.toContain('metals'); // anchored: the next line holds metals present for a town with no metal
     expect(generateResourceAnalysis('plains', ['gems'], [], []).imports.critical).toContain('metals');
   });
   test('"Charcoal and fuel" is not a critical import beside peat or coal', () => {
-    expect(generateResourceAnalysis('mountain', ['marshlands', 'peat'], [], []).imports.critical).not.toContain('Charcoal and fuel');
-    expect(generateResourceAnalysis('mountain', ['coal_deposits', 'coal'], [], []).imports.critical).not.toContain('Charcoal and fuel');
+    expect(generateResourceAnalysis('mountain', ['marshlands', 'peat'], [], []).imports.critical).not.toContain('Charcoal and fuel'); // anchored: the third line below holds the import present with no fuel
+    expect(generateResourceAnalysis('mountain', ['coal_deposits', 'coal'], [], []).imports.critical).not.toContain('Charcoal and fuel'); // anchored: the next line holds the import present with no fuel
     expect(generateResourceAnalysis('mountain', [], [], []).imports.critical).toContain('Charcoal and fuel');
   });
 });
@@ -46,7 +47,7 @@ describe('cure 3: the safety writer reads the mercenary fact from the defence ho
   test('a hireling hall beside the town watch is not "a mercenary company provides enforcement"', () => {
     const profile = generateSafetyProfile({ priorityEconomy: 50, priorityMilitary: 50, priorityCriminal: 20 }, 'town',
       [{ name: 'Town watch' }, { name: 'Hireling hall' }, { name: 'Town council' }]);
-    expect(profile.guardEffectivenessDesc).not.toMatch(/mercenary compan/i);
+    expect(profile.guardEffectivenessDesc).not.toMatch(/mercenary compan/i); // anchored: the next line holds the watch named in the same text
     expect(profile.guardEffectivenessDesc).toMatch(/watch/i);
   });
 });
@@ -57,29 +58,29 @@ const birth = (seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONF
 
 describe('cure 4: the import list tells the food record\'s story', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  test.each(['agree-town-0', 'agree-town-3'])('%s grows nine tenths of its need or more and says how little grain it brings in', (seed) => {
+  test('agree-town-0 and agree-town-3 grow nine tenths of their need or more and say how little grain they bring in', () => expectNoSeedFailures(collectSeedFailures(['agree-town-0', 'agree-town-3'], (seed) => {
     const eco = birth(seed).economicState;
     expect(eco.foodSecurity.foodRecord.grownPct).toBeGreaterThanOrEqual(90);
     expect(eco.primaryImports.filter((label) => /^(?:bulk )?grain(?: and foodstuffs)?$/i.test(label))).toEqual([]);
     expect(eco.primaryImports).toContain('Grain (a little, beside its own harvest)');
-  });
+  }), 'the grain import says how little'));
 });
 
 describe('cure 5: the viability hooks open events and do not answer the record otherwise', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  test.each(['agree-village-28', 'agree-town-0', 'agree-town-3'])('%s is at peace and no hook says war took its iron', (seed) => {
+  test('agree-village-28, agree-town-0 and agree-town-3 are at peace and no hook says war took their iron', () => expectNoSeedFailures(collectSeedFailures(['agree-village-28', 'agree-town-0', 'agree-town-3'], (seed) => {
     const hooks = (birth(seed).economicViability?.plotHooks || []).map((h) => h.hook);
     expect(hooks.filter((h) => /\b(?:war|armies)\b/i.test(h))).toEqual([]);
     expect(hooks.some((h) => /\biron\b/i.test(h))).toBe(true);
-  });
-  test.each(['agree-village-1', 'agree-village-14', 'agree-town-8'])('%s has a live material and no hook makes it scarce', (seed) => {
+  }), 'no war hook in peace'));
+  test('agree-village-1, agree-village-14 and agree-town-8 have a live material and no hook makes it scarce', () => expectNoSeedFailures(collectSeedFailures(['agree-village-1', 'agree-village-14', 'agree-town-8'], (seed) => {
     const s = birth(seed);
     const live = s.resourceAnalysis.availableResources;
     const scarce = (s.economicViability?.plotHooks || []).map((h) => h.hook).filter((h) => (
       (/\b(?:iron|metal)\b/i.test(h) && live.includes('iron_deposits'))
       || (/\btimber\b/i.test(h) && ['managed_forest', 'mountain_timber', 'shipbuilding_timber', 'timber'].some((k) => live.includes(k)))));
     expect(scarce).toEqual([]);
-  });
+  }), 'no scarcity of a live material'));
 });
 
 describe('cure 6 (the chair\'s food-sources ruling): worked land is a source by its own name', () => {

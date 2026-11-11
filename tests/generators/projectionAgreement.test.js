@@ -12,6 +12,7 @@
  * `resource_truth` and `food_verdict` clean on each: red before the cures, green after.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { projectionAgreementFindings } from '../../src/generators/generationCoherence.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -41,18 +42,18 @@ describe('the projection-agreement arm convicts each disagreement and clears its
   });
   test('a strategic yield clause the town does not stand on', () => {
     const forest = (line, available) => record({ config: { terrainType: 'forest' }, resourceAnalysis: { strategicValue: line, availableResources: available } });
-    expect(details(forest('Low-Medium - provides timber and game, difficult to besiege', ['hunting_grounds']))).toContain('The strategic line names a yield the town does not have.');
+    expect(details(forest('Low-Medium - provides timber and game, difficult to besiege', ['hunting_grounds']))).toContain('The strategic line names a yield the town lacks.');
     expect(details(forest('Low-Medium - provides game, difficult to besiege', ['hunting_grounds']))).toEqual([]);
     expect(details(forest('Low-Medium - difficult to besiege', []))).toEqual([]);
   });
-  test('a hook that asserts a war the record does not hold, or a scarcity the town does not have', () => {
-    expect(details(record({ hooks: [{ hook: 'War has taken the iron.' }] }))).toContain('A hook asserts a war the record does not hold.');
+  test('a hook that asserts a war the record does not hold, or makes scarce what the town has', () => {
+    expect(details(record({ hooks: [{ hook: '(planted) the armies took it all, iron first.' }] }))).toContain('A hook asserts a war the record does not hold.');
     expect(details(record({ hooks: [{ hook: 'The iron merchants have doubled their price.' }], resourceAnalysis: { availableResources: ['iron_deposits'] } })))
       .toContain('A hook makes a material scarce that a live local resource yields.');
     expect(details(record({ hooks: [{ hook: 'The iron merchants have doubled their price.' }] }))).toEqual([]);
   });
   test('the safety text naming a mercenary company the defence home does not list', () => {
-    const safety = { guardEffectivenessDesc: 'A mercenary company provides enforcement.' };
+    const safety = { guardEffectivenessDesc: '(planted) a mercenary company keeps the peace here.' };
     expect(details(record({ economicState: { safetyProfile: safety } }))).toContain('The safety text names a mercenary company the defence record does not list.');
     expect(details(record({ economicState: { safetyProfile: safety }, institutions: [{ name: 'Mercenary company' }] }))).toEqual([]);
   });
@@ -66,7 +67,7 @@ describe('the projection-agreement arm convicts each disagreement and clears its
   });
   test('an income line naming a local resource the town lacks; a must-import note beside a live material', () => {
     const income = (available) => record({ resourceAnalysis: { availableResources: available },
-      economicState: { incomeSources: [{ source: 'Iron & Metalwork', desc: 'Local ore feeds the smithy directly.' }] } });
+      economicState: { incomeSources: [{ source: 'Iron & Metalwork', desc: 'Local ore (planted) for the smithy.' }] } });
     expect(details(income(['coal_deposits', 'coal']))).toContain('An income line names a local resource the town does not have.');
     expect(details(income(['iron_deposits']))).toEqual([]);
     const note = (category) => ({ ...record({ resourceAnalysis: { availableResources: ['managed_forest'] } }),
@@ -90,12 +91,12 @@ const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
 
 describe('the corpus seeds that disagreed at the base agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  test.each(SEEDS)('%s: resource_truth and food_verdict hold no finding', (seed) => {
+  test('every seed: resource_truth and food_verdict hold no finding', () => expectNoSeedFailures(collectSeedFailures(SEEDS, (seed) => {
     const tier = seed.split('-')[1];
     const settlement = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier }), null, { seed });
     const findings = settlement.generationCoherenceReceipt.checks
       .filter((c) => c.id === 'resource_truth' || c.id === 'food_verdict')
       .flatMap((c) => c.findings.map((f) => `${f.path}: ${f.detail} ${f.evidence || ''}`));
-    expect(findings).toEqual([]);
-  });
+    expect(findings, seed).toEqual([]);
+  }), 'the corpus seeds agree'));
 });

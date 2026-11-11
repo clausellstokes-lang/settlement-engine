@@ -353,7 +353,7 @@ export function projectionAgreementFindings(settlement) {
     for (const { readings } of STRATEGIC_CLAUSES[/** @type {keyof typeof STRATEGIC_CLAUSES} */ (settlement?.config?.terrainType)] || []) {
       const said = readings.find((r) => r.text && r.needs.length && line.includes(r.text));
       if (said && !said.needs.every((group) => group.some((key) => available.includes(key)))) {
-        resource.push(finding('resourceAnalysis.strategicValue', 'The strategic line names a yield the town does not have.', said.text.replace(/^[, ]+|[, ]+$/g, '')));
+        resource.push(finding('resourceAnalysis.strategicValue', 'The strategic line names a yield the town lacks.', said.text.replace(/^[, ]+|[, ]+$/g, '')));
       }
     }
   }
