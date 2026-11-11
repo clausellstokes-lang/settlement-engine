@@ -15,7 +15,7 @@ import { crimeSignalOf } from '../domain/crimeSignal.js';
 import { runningCriminalChains } from '../domain/display/defenseDisplay.js';
 import { defenceOf } from '../domain/facts/defence.js';
 import { factsOf } from '../domain/facts/factsOf.js';
-import { resolveSibling } from '../domain/facts/drawDeclared.js';
+import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js';
 
 /**
  * The pool's own "desperation theft" line, held once because two entries print it: the famine
@@ -713,7 +713,16 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push("A guild merchant hired the party, then asked for something the guild forbids; the pay is good, and someone else in the guild already knows.");
   }
   if (inst.hasSmuggling) {
-    plotHooks.push("The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.");
+    // ONE SENTENCE STOOD IN EVERY SMUGGLING TOWN (COHERENCE-QUARREL cure 4): 107 of 181 safety
+    // hooks on the lane's corpus. The seed chooses among four tellings of the same thought,
+    // without a roll; with no seed the original prints.
+    const seed = getActiveRng()?.seed;
+    const drawn = drawDeclared(SMUGGLING_HOOKS, {
+      draw: (pool) => (seed ? pool[hashKey(`${seed}::safetyProfile:SMUGGLING_HOOKS`) % pool.length] : pool[0]),
+      facts: () => factsOf({ institutions }), key: `${seed ?? ''}::safetyProfile:SMUGGLING_HOOKS`,
+      poolId: 'safetyProfile:SMUGGLING_HOOKS', surface: 'plot_hooks', drawKind: 'H',
+    });
+    if (drawn.line != null) plotHooks.push(String(lineText(drawn.line)));
   }
   if (stress.crusaderSynthesis) {
     plotHooks.push(said("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological."));
@@ -870,6 +879,17 @@ function voiceOf(poolId, pool) {
   const seed = getActiveRng()?.seed;
   return seed ? pool[hashKey(`${seed}::safetyProfile:${poolId}`) % pool.length] : pool[0];
 }
+
+/**
+ * The smuggling hook's four tellings (COHERENCE-QUARREL cure 4). The original stays at index 0.
+ * Each carries its text as its id, so the census counts a line, not a slot.
+ */
+const SMUGGLING_HOOKS = Object.freeze([
+  'The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.',
+  'A smuggler wants one crate moved quietly and will pay well, but will not say what is in it.',
+  'The smugglers have stopped moving their usual goods this week, and nobody can say why.',
+  'A smuggled load went missing on the way in, and the people who paid for it are asking questions.',
+].map((text) => Object.freeze({ id: text, text })));
 
 /** #17: a court AND a prison stand (the branch's two facts). @param {string} lawRef */
 function COURT_AND_PRISON(lawRef) {

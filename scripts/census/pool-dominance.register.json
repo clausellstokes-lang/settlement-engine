@@ -763,7 +763,7 @@
     },
     "ledger:conflicts:HOOKS": {
       "top1": 0.1,
-      "top5": 0.1974,
+      "top5": 0.1973,
       "targets": [
         "top1"
       ],
@@ -4283,6 +4283,11 @@
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
+    "ledger:safetyProfile:SMUGGLING_HOOKS": {
+      "top1": 0.2758,
+      "top5": 1,
+      "reason": "the smuggling hook's four tellings (COHERENCE-QUARREL cure 4), banked at the measure: the charter's quarter holds on the safety hooks pool (record:safetyProfile.plotHooks)"
+    },
     "ledger:stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS": {
       "top1": 0.1605,
       "top5": 0.7768,
@@ -4316,9 +4321,12 @@
       "reason": "the quarrels' plot hooks: COHERENCE-QUARREL cure 2 draws one of the issue's own hooks; the charter's target (no hook above 10%)"
     },
     "record:safetyProfile.plotHooks": {
-      "top1": 0.5912,
-      "top5": 0.9614,
-      "reason": "the safety record's plot hooks, measured at the base (99bcc6944); COHERENCE-QUARREL cures it to top1 0.25"
+      "top1": 0.25,
+      "top5": 0.7238,
+      "targets": [
+        "top1"
+      ],
+      "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)"
     }
   }
 }
