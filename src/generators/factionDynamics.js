@@ -286,7 +286,7 @@ export function criminalMilitaryRelation(crim, mil, crimCapture, publicLeg) {
     narrative = `${mil.faction} and ${crim.faction} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
   } else if (crimCapture === 'equilibrium') {
     type = 'tense';
-    narrative = `${mil.faction} knows where ${crim.faction} works, and ${crim.faction} knows the watch rota. Neither pushes the other hard enough to start a fight.`;
+    narrative = `${mil.faction} knows where ${crim.faction} works, and ${crim.faction} knows the patrol rota. Neither pushes the other hard enough to start a fight.`;
   } else {
     type = 'competitive';
     narrative = `${mil.faction} is hunting ${crim.faction} in earnest and making real arrests; ${crim.faction} knows the streets and the people better, hides, and comes back.`;
@@ -397,7 +397,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
               : 'stable';
 
     addRel({ pair: [gov.faction, mil.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative,
-      dmNote: type === 'competitive' ? 'The garrison commander is a political actor. His cooperation must be maintained, purchased, or circumvented.' : null });
+      dmNote: type === 'competitive' ? 'The military commander is a political actor. Their cooperation must be maintained, purchased, or circumvented.' : null });
   }
 
   // ── Governing ↔ Merchant ────────────────────────────────────────────────────

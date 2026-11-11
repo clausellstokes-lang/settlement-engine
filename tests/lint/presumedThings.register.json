@@ -38,7 +38,6 @@
   {"thing": "garrison", "path": ".economicViability.warnings[].suggestedFixes[]", "text": "Add Town Walls or Garrison", "reason": "hedge", "note": "advice to the builder: what to add", "towns": 4},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison contracts", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison work", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
-  {"thing": "garrison", "path": ".powerStructure.factionRelationships[].dmNote", "text": "The garrison commander is a political actor", "reason": "cure", "note": "src/generators/factionDynamics.js", "towns": 4},
   {"thing": "granary", "path": ".culturalIdentity.defensePattern", "text": "Where the state reaches, enclosed wards, controlled gates, watch towers, granaries, and di", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 3},
   {"thing": "granary", "path": ".culturalIdentity.exchangePattern", "text": "Regulated markets, guild brokerage, granary systems, canals or roads, and standardized rec", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 1},
   {"thing": "granary", "path": ".economicState.activeChains[].magicNote", "text": "Temple granaries blessed", "reason": "reported", "note": "src/generators/computeActiveChains.js (given to no lane): reported", "towns": 6},
@@ -132,7 +131,6 @@
   {"thing": "war", "path": ".history.historicalEvents[].plotHooks[]", "text": "wartime fortune was built on betrayals", "reason": "past", "note": "the fortune was built in a past war", "towns": 41},
   {"thing": "war", "path": ".history.legacyAnnotations[].annotation", "text": "wartime property seizures", "reason": "past", "note": "a past war's legacy", "towns": 8},
   {"thing": "war", "path": ".relationships[].description", "text": "is fought in raids, informants, and paperwork", "reason": "figure", "note": "a rivalry called a war", "towns": 10},
-  {"thing": "watch", "path": ".powerStructure.factionRelationships[].narrative", "text": "knows the watch rota", "reason": "cure", "note": "src/generators/factionDynamics.js", "towns": 1},
   {"thing": "watch", "path": ".pressureSentence", "text": "The Watch Captain", "reason": "reported", "note": "the faction placeholder seat, src/generators/factionRoles.js (given to no lane), in towns with no watch: reported", "towns": 1},
   {"thing": "watch", "path": ".relationships[].description", "text": "The Watch Captain", "reason": "reported", "note": "the faction placeholder seat, src/generators/factionRoles.js (given to no lane), in towns with no watch: reported", "towns": 15},
   {"thing": "watch", "path": ".relationships[].tension", "text": "The Watch Captain", "reason": "reported", "note": "the faction placeholder seat, src/generators/factionRoles.js (given to no lane), in towns with no watch: reported", "towns": 13}
@@ -956,10 +954,8 @@
    ["watch", "other-lane", "Add Thieves' Guild, Black Market, or City Watch"]
   ],
   "src/generators/factionDynamics.js": [
-   ["garrison", "cure", "The garrison commander is a political actor. His cooperation must be maintained, purchased, or circumvented."],
    ["temple", "after-release", " has sway. Merchants pay for churches, "],
-   ["temple", "after-release", " want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the c"],
-   ["watch", "cure", " knows the watch rota. Neither pushes the other hard enough to start a fight."]
+   ["temple", "after-release", " want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the c"]
   ],
   "src/generators/history/historyEventStrands.js": [
    ["garrison", "after-release", "the military garrison"],
