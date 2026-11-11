@@ -23,7 +23,6 @@
   {"thing": "bank", "path": ".institutions[].desc", "text": "Banking and minting depend on it", "reason": "figure", "note": "what the trade serves at large", "towns": 1},
   {"thing": "bank", "path": ".relationships[].description", "text": "never passes through a counting-house", "reason": "negation", "note": "the coin never passes through one", "towns": 20},
   {"thing": "bank", "path": ".relationships[].description", "text": "s counting-house", "reason": "figure", "note": "a merchant's own office, which the person is", "towns": 8},
-  {"thing": "bank", "path": ".spatialLayout.quarters[].desc", "text": "merchant stalls, money changers", "reason": "reported", "note": "src/generators/spatialGenerator.js (given to no lane): reported", "towns": 150},
   {"thing": "docks", "path": ".culturalIdentity.builtForm", "text": "where geography permits", "reason": "hedge", "note": "the hedge is the sentence's own", "towns": 10},
   {"thing": "docks", "path": ".culturalIdentity.exchangePattern", "text": "Harbor and hinterland goods meet through brokers, associations, and tax-farming offices.", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 5},
   {"thing": "docks", "path": ".culturalIdentity.scope", "text": "An agora by the harbor, civic associations, and houses climbing the hillside.", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 14},
@@ -94,7 +93,6 @@
   {"thing": "market", "path": ".powerStructure.conflicts[].desc", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
   {"thing": "market", "path": ".powerStructure.conflicts[].issue", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
   {"thing": "market", "path": ".pressureSentence", "text": "share the streets and the market", "reason": "reported", "note": "src/generators/narrativeText.js declares `market`; printed absent: a late write, reported", "towns": 1},
-  {"thing": "market", "path": ".spatialLayout.layout", "text": "at the market cross", "reason": "reported", "note": "src/generators/spatialGenerator.js (given to no lane): reported", "towns": 13},
   {"thing": "mercenary", "path": ".conflicts[].desc", "text": "mercenary contract being disputed", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 2},
   {"thing": "mercenary", "path": ".conflicts[].issue", "text": "mercenary contract being disputed", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 2},
   {"thing": "mercenary", "path": ".culturalIdentity.defensePattern", "text": "Professional guards and mercenaries supplement civic musters during prolonged threats.", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 6},
@@ -1130,7 +1128,6 @@
    ["temple", "after-release", "Formal church forgiveness, delivered by clergy with flexible interpretations of canon."]
   ],
   "src/generators/spatialGenerator.js": [
-   ["bank", "after-release", "Bustling center with merchant stalls, money changers, and crowds"],
    ["docks", "after-release", "Warehouses, docks, sailors, longshoremen, salt, and fish"],
    ["docks", "after-release", "Warehouses, wharves, barges, dockworkers, and river traffic"],
    ["garrison", "after-release", "Fortified pass town, walls cutting across the valley floor, garrison above"],
