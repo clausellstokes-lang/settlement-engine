@@ -169,10 +169,12 @@ function institutionDestroyed(inst) {
  *  none or none matches. @param {SettlementLike} settlement @param {NpcLike} npc */
 function sustainingInstitution(settlement, npc) {
   // The LOCAL sustaining org resolved through the chokepoint (§1): a foreign
-  // leash has none locally (byte-identical — a betrayal traitor carries neither a
-  // criminalInstitution nor a secondaryAffiliation), a cutout resolves its front.
+  // leash has none locally (byte-identical — a betrayal traitor carries no
+  // criminalInstitution), a cutout resolves its front. PULSE-SITES (2026-11-10): the retired
+  // `secondaryAffiliation` fallback left — no current card carries it (the migration drops a
+  // house-valued one), and the criminal house it named is the allegiance's, read above.
   const leash = resolveLeash(/** @type {SimNpc} */ (npc));
-  const name = (leash.foreign ? null : leash.criminalInstitution) || npc?.secondaryAffiliation || null;
+  const name = (leash.foreign ? null : leash.criminalInstitution) || null;
   if (!name) return null;
   const insts = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const n = norm(name);

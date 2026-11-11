@@ -80,67 +80,93 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // 27 (ee38718de1b929c9 -> 9057c386767a53ef) and 43 (a57cae4ca1a8eaf8 -> 20d12b33835a0846): measured by this file's own
 // loop, 4c39885fc reads the sixty as captured at 2c7437030 and the tip 3f95e3484 moves exactly these three; between them only b19740ab3 touches generation (9fd906c23 is display-only,
 // record C 3f95e3484 is fence-only). Re-captured at 3f95e3484 with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-10 (GREEN-TIP, the chair's ruling on the census's group (6)): 60 of 60 moved, none by the
+// budget (densityFactor is still forced to 1). MEASURED, this file's own loop (an untracked probe reproducing it) at
+// 8308f13f8 (the MERGE-CAR re-key, 0 moved) and every first-parent stage of 8308f13f8..bf14617ca touching src/, the
+// helpers or scripts (73 stages, git-archive trees); the stages that moved a hash, with how many of the sixty each moved:
+// W1 ECO ea0e269a9 (40), W2 DEF 82a4e2856 (54), W3 POW 1a160d599 (59), W4 PEOPLE 66c23bfea (47),
+// W5 HIS e510409b1 (60), W7 HOOKS 501c97412 (60), FIX-FOOD-ISOLATION c6e8a4ad6 (10),
+// FIX-PUBLIC-VEIL 7e65c7bec (60), MERGE-WAVE ruling (a) docks read bcf3e7f8a (5), ALLEGIANCE-CAR1 e5f88930b (60),
+// ALLEGIANCE-CAR2 f51058995 (15), ALLEGIANCE-CAR3 c6ded8e3a (22), OWNER-WORDS-DOSSIER 5f6160284 (1),
+// ALLEGIANCE-CAR4 824a8ce2f (60), SW-0 point fix ca15421ff (6), SW-2 INSTITUTIONS ef4645832 (47),
+// SW-3 REALM-PROSE 1ef46ca30 (5), SW-5 CRISIS-VANTAGES a7770ecfe (45), SW-B2 FIRST-IMPRESSIONS 52da4542c (17),
+// SW-B5 FRAMES 46e0121c2 (44), SW-B6 ECO-DEF-BLOCKS 8de6c4a1a (1), SW-7 POWER-SIDE a3062d919 (60),
+// SW-B1 CONTRADICTIONS 0f2cb865c (43), SW-10 HOOKS 856de8427 (60), SW-6 CRISIS-SURFACES ac1442a3d (60),
+// SW-8 RENAME-POWERS 56f3b2df7 (60), URBAN-FIX 17b814803 (52).
+// Every stage is a lane merge with its own signed shift record under docs/shift-records/ (the movers inside each merge
+// are not isolated: PLAUSIBLE per commit, CONFIRMED per stage). Re-captured at the green-tip lane over bf14617ca (whose
+// generation is bf14617ca's byte for byte) with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-10 (RESIDUE, the chair's packet item 4, at the simulation batch's merged tip — STYLE-2-MERGE
+// point 36, GREEN-TIP and PULSE-SITES): 3 of 60 moved, none by the budget (densityFactor is still forced to 1; no commit in
+// bf14617ca..the tip or in either lane touches src/data/institutionBudget.js; with the factor planted at 1.25 all 60 move, so
+// the pin is armed). MEASURED, this file's own loop (an untracked probe reproducing it) at bf14617ca (0 moved against the
+// GREEN-TIP sixty) and at every first-parent stage of bf14617ca..90774f2fa touching src/ or the soak config: ONE stage moves,
+// SW-9b-B 8e532a663 (point 27) — seeds 21 (79379bee35da9918 -> 7bee45ae807037d6), 52 (dd6681b153dad267 -> b50ff039d9ebf891) and 53 (8347fa12cbf96c74 -> 5e0de535fa6d748f); points 28-35 and
+// the line's hygiene stages move none. Inside point 27, by merging each lane prefix onto its first parent: b23e4e91b (SW-9b-B
+// row 2b, E-3: the small-name instigator says it speaks for the gaining power from a house it backs) moves exactly these three;
+// the four lane commits before it move none. The batch itself (GREEN-TIP + PULSE-SITES over the line) moves none. Re-captured at
+// the merged tip with the factor forced to 1.0, twice and equal.
 const BEFORE = Object.freeze([
-  'a218c33e0b07fdbf', // 0
-  'e54bcb6a762cd333', // 1
-  '3c1040b8606c57a5', // 2
-  '8ec0881d50b4ced1', // 3
-  '612ab7970edcea30', // 4
-  '05dff2518f76c0ea', // 5
-  '2416408d696a144a', // 6
-  'c85d6c3fb548276f', // 7
-  '20a4d9e836903d88', // 8
-  '81ac6cd106e8bd44', // 9
-  '05a98c1fbc272d66', // 10
-  '9b6f9b9f0584580f', // 11
-  '12affc0a0fcd136a', // 12
-  '59ed1a5564aca2c4', // 13
-  'e69dccaa1d7a6cb2', // 14
-  '346f5628f55d761a', // 15
-  '01ec7ed5f56b5c9a', // 16
-  '056d359c2e6e8544', // 17
-  '51db271e4ef6e8b0', // 18
-  '7157dfc6f8a8da56', // 19
-  'ae6b07d20ab1f304', // 20
-  '463e8f7a3e88d12f', // 21
-  'c7162439da1debef', // 22
-  '314029460c5b6b15', // 23
-  'a87a741e59a35fbe', // 24
-  '2e8b03858f465561', // 25
-  '5a5d83c4d318d68f', // 26
-  '9057c386767a53ef', // 27
-  'e8bfebc77f27f23f', // 28
-  'b934701f5e9a2021', // 29
-  '78e56e6b81505156', // 30
-  'fe4b466ac7c79ed4', // 31
-  'b16cba79d26e9918', // 32
-  'c4e552994de08e8a', // 33
-  '79fe65f6003eefa7', // 34
-  '0801f635bca220ad', // 35
-  '5b434f746a4628bd', // 36
-  '284523bee3281a86', // 37
-  '6ae4fb2965cebb14', // 38
-  '2c77009c8b2eb986', // 39
-  '5e7ebade242e392a', // 40
-  'dd364453155de218', // 41
-  '4b44cdd1845ac7a2', // 42
-  '20d12b33835a0846', // 43
-  'e8713ee6471a6254', // 44
-  '0b925ad0ec0b04ec', // 45
-  '18232e2beeb3393c', // 46
-  '24e494c6b58e84bc', // 47
-  'eb8018f81482688c', // 48
-  '5c529604051af62a', // 49
-  '27eb2c526291d1a8', // 50
-  'a520a9b640464baa', // 51
-  'a697e52552f7fa30', // 52
-  '5fc78ebcfde32be7', // 53
-  'ff9d6533e474a67a', // 54
-  '0f587f30e28a0c69', // 55
-  '20b1d41950121bec', // 56
-  'b821cb47cbc4e625', // 57
-  'd95cd1565227f122', // 58
-  '97d1424a0a11724d', // 59
+  '9ea891a6cd71384f', // 0
+  'db8107a73f8e16d3', // 1
+  'c8da048a8b671556', // 2
+  'f89c6ddbaa4d79d1', // 3
+  'ca7937c6e4df84b6', // 4
+  '25ef272eece6c93e', // 5
+  'efaed43c65014b7f', // 6
+  'e713930d43fcb13f', // 7
+  '41c2a5e973aecb53', // 8
+  '83c354d6b8b30852', // 9
+  '3ca18413eea83dcf', // 10
+  '3219516b2f59cb43', // 11
+  '454aed839015a540', // 12
+  '8ba475c451a9b5a2', // 13
+  '8a93b1dd7b27b713', // 14
+  'cfd561b7e33fa828', // 15
+  '802f79507c92464b', // 16
+  '7c2a30476d8ead8e', // 17
+  '6c3ee69139e1d282', // 18
+  '8eba55db8f713789', // 19
+  'f0b2c3f298f0a6d7', // 20
+  '7bee45ae807037d6', // 21
+  'b27abe5cb502f601', // 22
+  'b5cdf30cab302d82', // 23
+  '70bae71dd604e229', // 24
+  '614cdf17c5d6a99c', // 25
+  'b28dbf5e186fa8e1', // 26
+  '76c77ecd8ce25d5c', // 27
+  '3e8c4e7b49a05e5a', // 28
+  '74dcdb8369175567', // 29
+  '8a87eda6cd3bb8d5', // 30
+  'cd3a6e8965861e12', // 31
+  '226eb89f3eb020a9', // 32
+  '6ba1bfcf8e76c260', // 33
+  '2528c405ca6cf1aa', // 34
+  '04733be6711756f7', // 35
+  '23be44f4096920fb', // 36
+  'd2ed7b024737ce2b', // 37
+  '649668a88d1dec46', // 38
+  '99593d91943d4584', // 39
+  '97eefab01b80a080', // 40
+  '3ce7d054b4fab967', // 41
+  '71a0ca608a347c49', // 42
+  'c4d41d245deea1d6', // 43
+  'a6a62e11010b2123', // 44
+  '4a83192339c8b082', // 45
+  'e266852520b4d626', // 46
+  'b27d6e2c2fe85d3d', // 47
+  'fe1119df5272b368', // 48
+  '47e7fd5d33ef7502', // 49
+  '1b7c1d9a005e5c77', // 50
+  'a1dfeedcaa0139c8', // 51
+  'b50ff039d9ebf891', // 52
+  '5e0de535fa6d748f', // 53
+  '20e7ba95a6e6ccb3', // 54
+  '052a13d1839465b4', // 55
+  '34e309e2a8c48f4f', // 56
+  '885e516ef7dbb6b4', // 57
+  'c45030a898849fbe', // 58
+  'ef0e824f44739113', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);

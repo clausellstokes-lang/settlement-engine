@@ -11,6 +11,8 @@ import { describe, it, expect } from 'vitest';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { violationsIn, walk } from './legacyFactionReaders/noLegacyFactionReaders.core.mjs';
+import { readFileSync as readSiteList } from 'node:fs';
+import { filesUnder, sitesIn } from './legacyFactionReaders/ast-sites.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '../..');
@@ -45,5 +47,82 @@ describe('no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE
     expect(scanned).toBeGreaterThan(2000); // liveness: the walk reached src/
     expect(fpz).toBe(38); // PEOPLE-5-PREP's 35 + the landing's three (the density law's retired rung machinery)
     expect(violations.map((v) => `${v.file}:${v.line} ${v.name}`)).toEqual([]);
+  });
+});
+
+// ── THE PER-SITE ARM (PULSE-SITES, 2026-11-10; the chair's S3) ─────────────────────────────────────────────────────
+// The arm above exempts a WHOLE FPZ file. This one is exact to the SITE: every read, destructure or string access of
+// the five retired per-card fields in src/ outside the migration is a row of `legacyFactionReaders/retired-field-sites.json`
+// (file, field, line, class, reason), and every row is a site the scan finds. SHRINK-ONLY: a new read reds as
+// "not on the list"; a cured site reds as "a stale row" until its row is removed, so the list ratchets down through
+// this door to the legacy rows alone. Classes: LEGACY (a v1-shaped or external record's path, named), DEAD (unreachable
+// from src, named), DARK (a dark feature's read, decided when it is lit: the chair, 2026-11-10), and CURED-ON-LANE (GREEN-TIP's sites, cured on its lane and
+// removed here by the merge seat).
+const SITE_LIST = join(HERE, 'legacyFactionReaders/retired-field-sites.json');
+const RETIRED_FIELDS = Object.freeze(['factionAffiliation', 'secondaryAffiliation', 'linkedFactionIds', 'factionGoal', 'densityRungRole']);
+const SITE_KINDS = new Set(['read', 'destructure', 'string', 'path-string']);
+const SITE_CLASSES = new Set(['LEGACY', 'DEAD', 'DARK', 'CURED-ON-LANE']);
+const MIGRATION_FILE = 'src/domain/settlementMigrations.js';
+/**
+ * THE CEILING, PINNED HERE AND NOT IN THE LIST (the chair's P2, 2026-11-10: the reviewer grew the list by a read and a
+ * row and set its own `count` to 20, and the arm passed). It only FALLS: lower it in the same commit that removes a
+ * row; never raise it. 19 at PULSE-SITES (LEGACY 3, DEAD 2, DARK 3, CURED-ON-LANE 11). 8 at the STYLE-2-MERGE point 36
+ * (GREEN-TIP + PULSE-SITES): the eleven CURED-ON-LANE rows removed, GREEN-TIP's cures at the same file:line (LEGACY 3, DEAD 2, DARK 3).
+ */
+const RETIRED_SITE_CEILING = 8;
+
+/** The retired-field sites of one source, as `file:line field`. @param {string} file @param {string} source */
+function retiredSitesIn(file, source) {
+  const r = sitesIn(source);
+  if (!r.parsed) return { parsed: false, sites: [] };
+  return {
+    parsed: true,
+    sites: r.sites.filter((s) => RETIRED_FIELDS.includes(s.name) && SITE_KINDS.has(s.kind)).map((s) => `${file}:${s.line} ${s.name}`),
+  };
+}
+
+describe('the retired per-card fields: every remaining site is a named row (PULSE-SITES, S3)', () => {
+  it('POSITIVE CONTROL: each field, read four ways, is a site; a write and the powers are not', () => {
+    const planted = [
+      'export const a = (npc) => npc.factionAffiliation;',
+      'export const b = ({ linkedFactionIds }) => linkedFactionIds;',
+      "export const c = ['secondaryAffiliation', 'factionGoal'];",
+      "export const d = 'npcs[].densityRungRole';",
+      'export const w = (npc) => { npc.factionAffiliation = 1; };',
+      'export const p = (s) => s.powerStructure.factions;',
+    ].join('\n');
+    const r = retiredSitesIn('src/planted/control.js', planted);
+    expect(r.parsed).toBe(true);
+    expect(r.sites.sort()).toEqual([
+      'src/planted/control.js:1 factionAffiliation', 'src/planted/control.js:2 linkedFactionIds',
+      'src/planted/control.js:3 factionGoal', 'src/planted/control.js:3 secondaryAffiliation',
+      'src/planted/control.js:4 densityRungRole',
+    ]);
+  });
+
+  it('the scan of src/ equals the named list exactly (shrink-only)', () => {
+    const list = JSON.parse(readSiteList(SITE_LIST, 'utf8'));
+    for (const row of list.sites) {
+      expect(SITE_CLASSES.has(row.class), `${row.file}:${row.line} class ${row.class}`).toBe(true);
+      expect(String(row.reason || '').length, `${row.file}:${row.line} has a reason`).toBeGreaterThan(20);
+    }
+    const files = filesUnder(ROOT, 'src');
+    expect(files.length).toBeGreaterThan(2000); // liveness: the walk reached src/
+    const found = []; const unparsed = [];
+    for (const f of files) {
+      if (f === MIGRATION_FILE) continue;
+      const r = retiredSitesIn(f, readSiteList(join(ROOT, f), 'utf8'));
+      if (!r.parsed) unparsed.push(f);
+      found.push(...r.sites);
+    }
+    expect(unparsed).toEqual([]);
+    const listed = list.sites.map((row) => `${row.file}:${row.line} ${row.field}`);
+    const named = new Set(listed);
+    const seen = new Set(found);
+    expect(found.filter((s) => !named.has(s)), 'a retired-field read NOT on the list (cure it, or name it with its class)').toEqual([]);
+    expect(listed.filter((s) => !seen.has(s)), 'a STALE row: the site is gone, so its row leaves the list').toEqual([]);
+    expect(list.sites.length).toBe(list.count);
+    expect(list.sites.length, 'the list may only SHRINK: a row above the in-test ceiling is a new legacy read').toBeLessThanOrEqual(RETIRED_SITE_CEILING);
+    expect(list.sites.length, 'a row left the list: lower RETIRED_SITE_CEILING to match, in the same commit').toBe(RETIRED_SITE_CEILING);
   });
 });

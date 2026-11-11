@@ -389,6 +389,7 @@ function classifyCustomNpc(rawEntity) {
     requires:     ['standing in a power or institution'],
     // PEOPLE-5B (M-7): the power the NPC ranks first in; a library entity the DM authored before the
     // car keeps its own `factionAffiliation` words (custom content is outside the settlement migration).
+    // LEGACY (PULSE-SITES 2026-11-10): the custom-content library's own entity, outside the settlement migration.
     controlledBy: firstRankMembershipOf(rawEntity)?.power || rawEntity.factionAffiliation || 'unattributed',
     risks:        [],
     effects:      { substrate: {}, capacities: {} },

@@ -472,6 +472,37 @@ export const en = Object.freeze({
       rubric: 'Generation failed',
       body:   'The generator on the server has moved on from this page; reload to continue.',
     },
+    // The engine service's rate guard answered 429 (remote-path R3). A limit, not a fault:
+    // waiting cures it, and no clock time is promised (the client cannot tell which window).
+    // "From here", not "you" (the chair's wording, 2026-11-10): a signed-out reader is metered
+    // by address, and behind a shared address other people can spend the limit.
+    engineRateLimited: {
+      rubric: 'Forge limit reached',
+      body:   'The forge has made as many settlements from here as it allows for now. Nothing went wrong; wait a while, then forge again.',
+    },
+    // The engine service could not be reached: a network failure, a server fault, or a build
+    // with no service configured (remote-path R3). The connection first. No "nothing was lost"
+    // (the chair, FU-4): the fork surfaces overwrite the stored dials before a forge that may fail.
+    engineUnavailable: {
+      rubric: 'Forge unreachable',
+      body:   'The forge could not be reached, so no settlement was made. Check your connection, then forge again.',
+    },
+    // The request carries what the engine service cannot make yet (remote-path FU-3): `{what}`
+    // names it from the refusal's own inputs (lib/engineRefusal.js). No date, no "try again".
+    // The `{what}` phrases are THE INTERFACE'S OWN WORDS (the chair, 2026-11-10), so the reader
+    // can find the control that caused the refusal: the wizard's "Neighbour active" banner and its
+    // "Use my custom content" switch. lib/engineRefusal.js picks the KEYS in this order (neighbour,
+    // content, campaign); RefusalNotice resolves them and joins them with `join`.
+    engineUnsupported: {
+      rubric: 'Not in this build yet',
+      body:   'This build’s forge cannot yet make a settlement {what}, so no settlement was made.',
+      join:   ' and ',
+      what: {
+        neighbour: 'with a neighbour active',
+        customContent: 'with your custom content',
+        campaign: 'inside a campaign',
+      },
+    },
     // No door and no price: the admin panel is not sold, so this sentence must
     // not read as an upgrade prompt. It says whose page it is and stops.
     staffOnly: {

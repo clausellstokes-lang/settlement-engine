@@ -341,6 +341,15 @@ describe('EM-F1 — the leaf imports nothing, draws nothing, and the shelf is it
       // through one `lazy(() => import(...))` edge, so neither it nor this leaf is in the eager
       // first-paint graph and the third edge costs the first paint nothing.
       'src/store/phantomMintAction.js imports src/domain/edit/phantoms.js',
+      // ⭐ SW-B7b's WRITER (adbd413a6, item 1: the public prose projection stamped at every cloud save; the row
+      // added by GREEN-TIP, 2026-11-10): the composer reads the DISCRIMINANT (`isPhantomRecord`) so a phantom stub
+      // composes null and EM-F1's five-key record persists exactly as the mint made it — MEASURED: with that one
+      // read removed, tests/store/phantomCloudId.test.js C5 reds. The players' projection does not need the leaf
+      // for its prose; the SAVE path needs it for the shape. It is LAZY: src/lib/saves.js reaches the composer
+      // through one dynamic `import()`, and neither the composer nor this leaf is among the 292
+      // EAGER_FIRST_PAINT_MODULES (MEASURED at bf14617ca); the built leaf is its own shared lazy chunk
+      // (~0.8 KB gzip), so the fourth edge costs the first paint nothing.
+      'src/components/new/publicProseCompose.js imports src/domain/edit/phantoms.js',
     ];
     expect([...importers].sort(),
       'the importer roster is EXACT in both directions. An UNLISTED importer is a bundle edge nobody'

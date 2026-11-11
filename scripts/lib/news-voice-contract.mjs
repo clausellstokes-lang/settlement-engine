@@ -209,8 +209,18 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // (5f8f76238), each library's own functions (the voice throw disabled in an untracked scratch copy only).
 // 396/0/396/44 → 395/1/394/43, the same act as the headline and prose-family contracts: queued|npc_reform arrives, applied|
 // resource_depletion and queued|trade_pressure leave; every owned home reads indicative; the voice debt stays EMPTY.
+// ── RE-DECLARED 2026-11-10 BY THE RESIDUE SEAT (under the cloud chair, ODQ §934.105) AT THE SIMULATION BATCH (STYLE-2-MERGE
+// point 36: GREEN-TIP and PULSE-SITES), the cause GREEN-TIP's own and ONE commit, BISECTED: ae6693ccb (GREEN-TIP P2, the pulse
+// seats an NPC by its first-rank membership — a pure re-point of the retired read). One corpus build per tree, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only): the line 90774f2fa 395/1/394/43; the line + GREEN-TIP to
+// 44b37a520 395/1/394/43; to ae6693ccb 395/1/394/44; every later prefix of either lane 395/1/394/44. 395/1/394/43 → 395/1/394/44:
+// ONE HOME ARRIVES, applied|npc_expose (root 5, "Vilbirg Weber exposes Stefan Friedmann"), an EXISTING home reached from a newly
+// seated actor — its headline is heraldDeeds.js's `expose.done` and its summary the agent's goal line, both on the line before the
+// batch, and the home already sits in NEWS_VOICE_RETRO_ROWS; NO NEW PROSE. The same seating re-deals three neighbours: applied|
+// npc_exploit 2 → 1, applied|npc_reform 24 → 25, applied|npc_suppress 6 → 5; introductions, retirements and conservation hold
+// (395 − 1 = 394); the voice debt stays EMPTY at the line and at the merged tip.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 43,
+  pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 44,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

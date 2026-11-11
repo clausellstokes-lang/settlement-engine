@@ -123,9 +123,26 @@ scopedEnv.test('REPLAY: three seeds — the function\'s settlement hashes to the
     const body = await res.json();
     assertEquals(body.engineVersion, ENGINE_VERSION);
     assert(!Number.isNaN(Date.parse(body.generatedAt)));
-    const expected = generateSettlementPipeline(birthConfig(cases.config), null, { seed, customContent: {} });
+    // The expected side is the LOCAL birth under the STORE's own content runtime (remote-path
+    // R2): the store stamps every standalone generation with the vanilla environment, and the
+    // function stamps its birth with the same, so the two records are one record.
+    const expected = generateSettlementPipeline(birthConfig(cases.config), null,
+      { seed, customContent: {}, contentProvenance: cases.storeContentProvenance });
     assertEquals(await sha256(JSON.stringify(body.settlement)), await sha256(JSON.stringify(expected)), `seed ${seed}`);
+    assertEquals(body.settlement.customContentProvenance?.environment?.environmentId, 'system:vanilla');
   }
+});
+
+scopedEnv.test('REPLAY: a config that turned custom content off is born with no stamp, as the store births it (remote-path R2)', async () => {
+  await loadGenerationLawPayloads();
+  const seed = cases.seeds[1];
+  const config = { ...cases.config, useCustomContent: false };
+  const res = await handleEngineGenerate(post({ seed, config }), { adminClient: makeAdmin().adminClient });
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  const expected = generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} });
+  assertEquals(await sha256(JSON.stringify(body.settlement)), await sha256(JSON.stringify(expected)), `seed ${seed}`);
+  assertEquals(body.settlement.customContentProvenance, undefined);
 });
 
 scopedEnv.test('REPLAY: the reply carries the core\'s pipelineHistory — the reveal\'s step list, one row per step (ENGINE-2 unit 1)', async () => {
@@ -257,7 +274,7 @@ scopedEnv.test('method and shape: OPTIONS 200, GET 405, bad JSON / seed / config
   assertEquals((await handleEngineGenerate(badJson, opts)).status, 400);
   assertEquals((await handleEngineGenerate(post({ config: {} }), opts)).status, 400);
   assertEquals((await handleEngineGenerate(post({ seed: 's', config: [] }), opts)).status, 400);
-  assertEquals((await handleEngineGenerate(post({ seed: 's', config: { pad: 'x'.repeat(40_000) } }), opts)).status, 413);
+  assertEquals((await handleEngineGenerate(post({ seed: 's', config: { pad: 'x'.repeat(300_000) } }), opts)).status, 413);
   assertEquals(admin.rpcCalls.length, 0);
 });
 
@@ -282,16 +299,37 @@ scopedEnv.test('DERIVE: three seeds — the settlement is the bundle\'s own pipe
   }
 });
 
-scopedEnv.test('DERIVE: a body over 32 KB is accepted for derive and refused 413 for generate', async () => {
-  const pad = 'x'.repeat(40 * 1024);
+scopedEnv.test('DERIVE: a body over the generate cap (256 KB) is accepted for derive and refused 413 for generate', async () => {
+  const pad = 'x'.repeat(300 * 1024);
   const admin = makeAdmin();
   const gen = await handleEngineGenerate(post({ seed: 's', config: { pad } }), { adminClient: admin.adminClient });
   assertEquals(gen.status, 413);
-  assertEquals((await gen.json()).maxBytes, 32 * 1024);
+  assertEquals((await gen.json()).maxBytes, 256 * 1024);
   const derive = await handleEngineGenerate(post({ op: 'derive', seed: cases.seeds[0], config: cases.config, pins: { pad } }), { adminClient: makeAdmin().adminClient });
   assert(derive.status !== 413, `derive answered ${derive.status}`);
   const huge = await handleEngineGenerate(post({ op: 'derive', seed: 's', config: { pad: 'x'.repeat(1024 * 1024) } }), { adminClient: makeAdmin().adminClient });
   assertEquals(huge.status, 413);
+});
+
+scopedEnv.test('GENERATE: a wizard-sized body (the chair\'s measured 39,940-byte exclude-all) is served, not 413 (remote-path R4)', async () => {
+  await loadGenerationLawPayloads();
+  const toggles: Record<string, unknown> = {};
+  for (let i = 0; toggles && JSON.stringify(toggles).length < 40_000; i += 1) {
+    toggles[`metropolis::Economy::Institution number ${i}`] = { allow: false, require: false, forceExclude: true };
+  }
+  const config = { ...cases.config, _institutionToggles: toggles };
+  const res = await handleEngineGenerate(post({ seed: cases.seeds[0], config }), { adminClient: makeAdmin().adminClient });
+  assertEquals(res.status, 200);
+});
+
+scopedEnv.test('GENERATE: past 32 KB, only the four toggle bags are admitted — any other config is 413 before any client (remote-path FU-1)', async () => {
+  const admin = makeAdmin();
+  const nearbyResources: string[] = [];
+  while (JSON.stringify(nearbyResources).length < 40_000) nearbyResources.push(`resource-${nearbyResources.length}`);
+  const res = await handleEngineGenerate(post({ seed: 's', config: { ...cases.config, nearbyResources } }), { adminClient: admin.adminClient });
+  assertEquals(res.status, 413);
+  assertEquals((await res.json()).maxBytes, 32 * 1024);
+  assertEquals(admin.made(), 0);
 });
 
 scopedEnv.test('OPS: an unknown op and a non-object pins bag are refused 400', async () => {
@@ -343,11 +381,13 @@ scopedEnv.test('REGEN: three seeds — each section\'s parts are the bundle\'s o
   }
 });
 
-scopedEnv.test('REGEN: no seed — the pass mints one and reports it; a record over 32 KB rides the 1 MiB cap', async () => {
+scopedEnv.test('REGEN: no seed — the pass mints one and reports it; a record over the generate cap rides the 1 MiB cap', async () => {
   await loadGenerationLawPayloads();
   const config = birthConfig(cases.config);
   const settlement = JSON.parse(JSON.stringify(generateSettlementPipeline(config, null, { seed: cases.seeds[0] })));
-  assert(new TextEncoder().encode(JSON.stringify(settlement)).length > 32 * 1024, 'the record is over the generate cap');
+  // Carried past the generate cap (256 KB) by a key the pass does not read.
+  settlement._capPad = 'x'.repeat(300 * 1024);
+  assert(new TextEncoder().encode(JSON.stringify(settlement)).length > 256 * 1024, 'the record is over the generate cap');
   const res = await handleEngineGenerate(post({ op: 'regenSection', section: 'history', settlement, config: settlement.config }), { adminClient: makeAdmin().adminClient });
   assertEquals(res.status, 200);
   const reply = await res.json();

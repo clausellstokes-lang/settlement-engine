@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { mutateSettlement } from '../../../src/domain/events/mutate.js';
+// GREEN-TIP (2026-11-10, re-keyed with the writers and the lifecycle re-point): a card stands in a power by a MEMBERSHIP,
+// written through the product's one constructor (people/cardVeil.js :: membershipInPower, the v1 -> v2 migration's
+// shape); the retired `factionAffiliation` is read and written by nothing now.
+import { membershipInPower } from '../../../src/domain/people/cardVeil.js';
+import { holdsMembership } from '../../../src/domain/people/membership.js';
 
 const NOW = '2026-06-08T00:00:00.000Z';
 const settlement = () => ({
@@ -11,7 +16,7 @@ const settlement = () => ({
     {
       // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
       id: 'npc_guard', name: 'Captain Vex', allegiance: { power: null, house: "Thieves' Guild Chapter", vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true },
-      factionAffiliation: 'City Watch', timesExposed: 0,
+      memberships: [membershipInPower({ faction: 'City Watch' })], timesExposed: 0,
     },
     { id: 'npc_clerk', name: 'Honest Mira', corrupt: false },
   ],
@@ -25,7 +30,7 @@ describe('§corruption Phase 4 — EXPOSE_CORRUPTION targets a corrupt NPC', () 
     expect(successor).toBeTruthy();
     expect(successor.corrupt).toBeFalsy();
     expect(successor.allegiance).toBeUndefined(); // ALLEGIANCE-CAR1: the successor holds no allegiance
-    expect(successor.factionAffiliation).toBe('City Watch'); // inherited the seat
+    expect(holdsMembership(successor, 'City Watch')).toBe(true); // inherited the seat
     const guild = next.institutions.find((i) => i.id === 'i1');
     const watch = next.institutions.find((i) => i.id === 'i2');
     expect(guild.impairments?.length).toBeGreaterThan(0); // criminal institution tarnished

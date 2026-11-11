@@ -102,6 +102,7 @@ async function runLane(store, seed, options) {
  */
 const EVERY_VAR = Object.freeze({
   size: 'City', max: 'Town', min: 'Hamlet', page: 'Account', path: '/this-page-does-not-exist',
+  what: 'inside a campaign',
 });
 
 describe('the refusal register reaches a reader', () => {
@@ -235,6 +236,78 @@ describe('the lane records a reason for every gate it closes', () => {
     // anchored: `said` is proven above to carry the retired sentence; the generic one must not ride with it.
     expect(said).not.toContain(t('errors.forgeStart'));
   });
+
+  // remote-path R3 (D3 of the chair's flagged-path walk): a 429 and an unreachable service each
+  // printed the generic "The forge stalled … Try once more", which is false advice for a limit.
+  // Literal titles over one helper (not a loop of registrations), so the lighting census can read them.
+  async function engineRefusalSaysItsOwnSentence(code, reason, key) {
+    engine.run = vi.fn(async () => {
+      throw Object.assign(new Error(code), { code });
+    });
+    const store = makeStore({ tier: 'free', maxTier: 'capital' });
+    await runLane(store);
+    expect(REFUSAL_REASONS[reason], `${reason} is registered`).toBeTypeOf('string');
+    expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS[reason]);
+    render(<RefusalNotice refusal={store.state.lastRefusal} />);
+    const said = screen.getByRole('alert').textContent;
+    expect(t(key)).not.toBe(key);
+    expect(said).toContain(t(key));
+    // anchored: `said` carries the reason's own sentence; the generic one must not ride with it.
+    expect(said).not.toContain(t('errors.forgeStart'));
+  }
+  test('engine_rate_limited: the service\'s typed refusal records its own reason and says its own sentence', () =>
+    engineRefusalSaysItsOwnSentence('engine_rate_limited', 'ENGINE_RATE_LIMITED', 'refusals.engineRateLimited.body'));
+  test('engine_unavailable: the service\'s typed refusal records its own reason and says its own sentence', () =>
+    engineRefusalSaysItsOwnSentence('engine_unavailable', 'ENGINE_UNAVAILABLE', 'refusals.engineUnavailable.body'));
+
+  // remote-path FU-3 (the chair, 2026-11-10): engine_remote_unsupported printed the generic
+  // "The forge stalled … Try once more", false advice for each of its causes. Its own reason, one
+  // sentence naming what was asked for, built from the error's own `inputs` (and `scope`).
+  async function unsupportedSaysWhatWasAskedFor(inputs, scope, phrase) {
+    engine.run = vi.fn(async () => {
+      throw Object.assign(new Error('unsupported'), { code: 'engine_remote_unsupported', inputs, scope });
+    });
+    const store = makeStore({ tier: 'premium', maxTier: 'capital' });
+    await runLane(store);
+    expect(store.state.lastRefusal?.reason).toBe(REFUSAL_REASONS.ENGINE_UNSUPPORTED);
+    render(<RefusalNotice refusal={store.state.lastRefusal} />);
+    const said = screen.getByRole('alert').textContent;
+    expect(said).toContain(phrase);
+    expect(said).toContain('so no settlement was made');
+    // anchored: `said` carries the unsupported sentence; the generic stall must not ride with it.
+    expect(said).not.toContain(t('errors.forgeStart'));
+  }
+  // The chair's two examples, VERBATIM (2026-11-10), and the third phrase on its own.
+  test('engine_remote_unsupported inside a campaign: the chair\'s first example, verbatim', () =>
+    unsupportedSaysWhatWasAskedFor(['contentEnvironment'], 'campaign',
+      'This build’s forge cannot yet make a settlement inside a campaign, so no settlement was made.'));
+  test('engine_remote_unsupported with a neighbour and homebrew: the chair\'s second example, verbatim, in order', () =>
+    unsupportedSaysWhatWasAskedFor(['customContent', 'neighbour'], 'standalone',
+      'This build’s forge cannot yet make a settlement with a neighbour active and with your custom content, so no settlement was made.'));
+  test('engine_remote_unsupported with an account\'s own environment names the custom content switch', () =>
+    unsupportedSaysWhatWasAskedFor(['contentEnvironment'], 'standalone',
+      'This build’s forge cannot yet make a settlement with your custom content, so no settlement was made.'));
+
+  // remote-path R3, kept after FU-4 struck the clause from the sentence:
+  // a failed forge or regenerate leaves the draft that was on the page exactly in place.
+  async function failedForgeKeepsTheDraft(code) {
+    engine.run = vi.fn(async () => {
+      throw Object.assign(new Error(code), { code });
+    });
+    const store = makeStore({ tier: 'free', maxTier: 'capital' });
+    const draft = { name: 'Kept', tier: 'town', population: 1200, _seed: 'kept-seed' };
+    store.state.settlement = draft;
+    store.state.auth = { tier: 'free', user: { id: 'u-kept' } };
+    const before = JSON.stringify(draft);
+    await runLane(store);
+    expect(store.state.lastRefusal?.reason, 'the lane ran and refused').toBeTypeOf('string');
+    expect(store.state.settlement).toBe(draft);
+    expect(JSON.stringify(store.state.settlement)).toBe(before);
+  }
+  test('engine_unavailable: a failed forge over an existing draft leaves that draft in place', () =>
+    failedForgeKeepsTheDraft('engine_unavailable'));
+  test('engine_rate_limited: a failed forge over an existing draft leaves that draft in place', () =>
+    failedForgeKeepsTheDraft('engine_rate_limited'));
 
   test('a fresh attempt clears the previous reason', async () => {
     const store = makeStore({ settType: 'city', maxTier: 'town' });

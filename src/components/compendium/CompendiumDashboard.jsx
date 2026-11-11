@@ -16,6 +16,7 @@ import { sectionSlugForTab } from '../../lib/compendiumSections.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
+import { color } from '../../design/tokens.js';
 
 // Real, crawlable URL for a hub/entry — the A–Z is an HTML sitemap, so its links
 // are true hrefs (SEO + open-in-new-tab); onClick does the smooth in-page nav.
@@ -45,8 +46,11 @@ const TILE_H = 320;
 // THE SCRIM: ink at 0.80 over the painting. Measured: regal gold (gold-400, #D9B566) on the
 // scrim over the painting's brightest possible pixel (pure white) is 5.02:1 — AA at the
 // worst region of every tile. The launch tile's scrim is the launch ground's deepest stop.
-const SCRIM = 'rgba(27,20,8,0.80)';
-const LAUNCH_SCRIM = 'rgba(28,21,64,0.86)';
+// Both are the house color-mix idiom over the existing tokens (the editor's ground in theme.js),
+// never a translucent literal: INK is ink-900 (#1B1408) and launch-900 is #1C1540, so they
+// render the same pixels the two translucent literals did (ink at 0.80, launch-900 at 0.86).
+const SCRIM = `color-mix(in srgb, ${INK} 80%, transparent)`;
+const LAUNCH_SCRIM = `color-mix(in srgb, ${color['launch-900']} 86%, transparent)`;
 
 /**
  * THE LANDING GRID (rulings H1, H13, H14): one tile per section, FLUSH — no space between
