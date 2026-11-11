@@ -1,0 +1,113 @@
+{
+  "_doc": "COHERENCE-AGREE (the chair's charter of 2026-11-11, §2): the private readers of the defence facts (walls, garrison, militia, watch, mercenaries) outside their home (src/domain/facts/, src/domain/defense/), counted by tests/lint/defenceFactReaders.walker.test.js. SHRINK-ONLY from its first commit: a row may only fall, and falls the commit its reader retires to the home; no row is ever added. Banked at the lane's base 99bcc6944.",
+  "rows": {
+    "src/components/new/SummaryTab.jsx": {
+      "count": 2,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/components/new/dailyLifeLogic.js": {
+      "count": 2,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/domain/crisis/crisisCast.js": {
+      "count": 3,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/domain/events/factionResponses.js": {
+      "count": 1,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/domain/events/registry.js": {
+      "count": 1,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/domain/historyBeats.js": {
+      "count": 1,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/domain/mapProfile.js": {
+      "count": 2,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/domain/townMap/townLayoutV2.js": {
+      "count": 2,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/domain/townMap/townMapModel.js": {
+      "count": 1,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/domain/worldPulse/tierOutcomeApply.js": {
+      "count": 1,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/aiLayer.js": {
+      "count": 2,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/economy/customTradeEndpointIntegration.js": {
+      "count": 2,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/economy/economicState.js": {
+      "count": 3,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/economy/viability.js": {
+      "count": 3,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/historyGenerator.js": {
+      "count": 3,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/historyTemplate.js": {
+      "count": 1,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/institutionProbability.js": {
+      "count": 6,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/narrativeGenerator.js": {
+      "count": 5,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/narrativeText.js": {
+      "count": 1,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/npcGenerator.js": {
+      "count": 3,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/power/rulingStructure.js": {
+      "count": 5,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/power/stressFactions.js": {
+      "count": 2,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/priorityHelpers.js": {
+      "count": 7,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/services/serviceAvailability.js": {
+      "count": 3,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/services/serviceClassifier.js": {
+      "count": 4,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/stressGenerator.js": {
+      "count": 2,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    },
+    "src/generators/structuralValidator.js": {
+      "count": 9,
+      "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
+    }
+  }
+}

@@ -18,6 +18,105 @@ import {
 import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
 import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
 
+// ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
+// The terrain table (`TERRAIN_DATA`) says what a kind of ground usually lacks and yields. The town's
+// own drawn resources and route override it. These tables are the words for that, written once and
+// read by the writer below and by the coherence receipt's agreement arm (generationCoherence.js).
+
+/**
+ * A must-import requirement word, and the resources that yield the material outright. The commodity
+ * words already join by token ("grain", "salt", "stone", "timber"); these two do not ("metals" is
+ * not "iron"; peat and coal are fuel). A town's live iron answers "metals"; gold and silver do not.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const MATERIAL_RESOURCE_KEYS = Object.freeze({
+  metals: Object.freeze(['iron_deposits', 'iron']),
+  iron: Object.freeze(['iron_deposits', 'iron']),
+  fuel: Object.freeze(['coal_deposits', 'coal', 'marshlands', 'peat']),
+  timber: Object.freeze(['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber']),
+});
+
+/**
+ * What a terrain strength stands on: any one of these resources, or the route. A strength with
+ * none of them is the terrain's, not the town's, and is not the town's to claim.
+ * @type {Readonly<Record<string, Readonly<{ keys: ReadonlyArray<string>, routes?: ReadonlyArray<string> }>>>}
+ */
+const TIMBER_KEYS = ['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber'];
+const GRAIN_KEYS = ['grain_fields', 'fertile_floodplain'];
+const HERD_KEYS = ['grazing_land', 'alpine_pasture', 'camel_herds'];
+const MINING_KEYS = ['iron_deposits', 'coal_deposits', 'precious_metals', 'gemstone_deposits', 'stone_quarry'];
+const support = (keys, routes = []) => Object.freeze({ keys: Object.freeze(keys), routes: Object.freeze(routes) });
+export const STRENGTH_SUPPORT = Object.freeze({
+  'Maritime trade': support(['deep_harbour', 'maritime_access'], ['port']),
+  'Fishing industry': support(['fishing_grounds', 'river_fish']),
+  'Salt production': support(['salt_flats', 'desert_salt']),
+  'Salt trade': support(['salt_flats', 'desert_salt']),
+  Shipbuilding: support(['shipbuilding_timber']),
+  Agriculture: support([...GRAIN_KEYS, 'grazing_land']),
+  Milling: support(['river_mills']),
+  'River trade': support([], ['river']),
+  Brewing: support(GRAIN_KEYS),
+  Mining: support(MINING_KEYS),
+  Metalworking: support(['iron_deposits', 'precious_metals']),
+  Stoneworking: support(['stone_quarry']),
+  'Stone quarrying': support(['stone_quarry']),
+  Gemcutting: support(['gemstone_deposits']),
+  'Timber trade': support(TIMBER_KEYS),
+  Woodcraft: support(TIMBER_KEYS),
+  'Fur trade': support(['hunting_grounds']),
+  Hunting: support(['hunting_grounds']),
+  'Grain production': support(GRAIN_KEYS),
+  Livestock: support(HERD_KEYS),
+  'Sheep herding': support(['grazing_land', 'alpine_pasture']),
+  'Wool and textiles': support(['grazing_land', 'alpine_pasture']),
+  'Wool production': support(['grazing_land', 'alpine_pasture']),
+  'Central trade hub': support(['crossroads_position'], ['crossroads']),
+  'Trade hub': support(['crossroads_position'], ['crossroads']),
+  'Glass and gems': support(['glass_sand', 'gemstone_deposits']),
+  'Exotic goods': support(['date_palms', 'precious_metals', 'gemstone_deposits', 'camel_herds'], ['crossroads', 'port']),
+});
+
+/**
+ * The clauses of a terrain's strategic line that name what the ground yields. Each clause lists its
+ * readings, the original first; the first whose every group of resources the town has is the one it
+ * prints (a reading with no groups always stands, and '' drops the clause). The rating word and the
+ * clauses about the lie of the land are the terrain's and stay.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ clause: string, readings: ReadonlyArray<Readonly<{ text: string, needs: ReadonlyArray<ReadonlyArray<string>> }>> }>>>>}
+ */
+const reading = (text, ...needs) => Object.freeze({ text, needs: Object.freeze(needs.map((g) => Object.freeze(g))) });
+export const STRATEGIC_CLAUSES = Object.freeze({
+  plains: Object.freeze([Object.freeze({ clause: 'agricultural heartland', readings: Object.freeze([
+    reading('agricultural heartland', [...GRAIN_KEYS, 'grazing_land']), reading('open country')]) })]),
+  mountain: Object.freeze([
+    Object.freeze({ clause: ', controls mountain passes', readings: Object.freeze([reading(', controls mountain passes', ['defended_pass']), reading('')]) }),
+    Object.freeze({ clause: ', mineral wealth', readings: Object.freeze([reading(', mineral wealth', MINING_KEYS), reading('')]) }),
+  ]),
+  forest: Object.freeze([Object.freeze({ clause: 'provides timber and game, ', readings: Object.freeze([
+    reading('provides timber and game, ', TIMBER_KEYS, ['hunting_grounds']), reading('provides timber, ', TIMBER_KEYS),
+    reading('provides game, ', ['hunting_grounds']), reading('')]) })]),
+});
+
+/** The town's own strategic line: each yield clause read against its resources. @param {string} terrainKey @param {ReadonlyArray<string>} available */
+export const townStrategicValue = (terrainKey, available) => (STRATEGIC_CLAUSES[terrainKey] || []).reduce(
+  (line, { clause, readings }) => line.replace(clause, (readings.find((r) => r.needs.every((g) => g.some((k) => available.includes(k)))) || readings[readings.length - 1]).text),
+  String(TERRAIN_DATA[/** @type {keyof typeof TERRAIN_DATA} */ (terrainKey)]?.strategicValue || ''),
+);
+
+/** @param {ReadonlyArray<string>} available @param {Readonly<{ keys: ReadonlyArray<string>, routes?: ReadonlyArray<string> }>} rule @param {string} [route] */
+export const townSupports = (available, rule, route = '') => (
+  rule.keys.some((key) => available.includes(key)) || (rule.routes || []).includes(route)
+);
+
+/** The requirement words a live resource answers outright. @param {unknown} requirement @param {ReadonlyArray<string>} available */
+export const liveMaterialFor = (requirement, available) => {
+  const words = String(requirement || '').toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[^a-z]+/);
+  for (const word of words) {
+    const hit = (MATERIAL_RESOURCE_KEYS[word] || []).find((key) => available.includes(key));
+    if (hit) return hit;
+  }
+  return null;
+};
+
 // ─── resolveNearbyCommodities ─────────────────────────────────────────────────
 // Turn the settlement's ACTUALLY-rolled nearby resources into the commodity/
 // resource-key tokens the chain matcher reconciles against. This is what couples

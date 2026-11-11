@@ -20,7 +20,15 @@ import {
 import {
   nativeResourceConditionRecords,
   resourceKeyForLabel,
+  resourceShortageImport,
 } from '../domain/resourceSemantics.js';
+import { factsOf } from '../domain/facts/factsOf.js';
+import {
+  STRATEGIC_CLAUSES,
+  STRENGTH_SUPPORT,
+  liveMaterialFor,
+  townSupports,
+} from './resourceGenerator.js';
 import {
   isAuthoredGenerationEntity,
 } from '../domain/generationOwnership.js';
@@ -293,6 +301,81 @@ function resourceTruthFindings(settlement) {
 }
 
 /**
+ * THE PROJECTION-AGREEMENT ARM (COHERENCE-AGREE, 2026-11-11). One fact, one answer: every field of
+ * the record that states a fact the town's own drawn record answers must agree with it. The terrain
+ * tables are defaults the town's resources override; a second reader of a fact must not answer it
+ * otherwise. `resource` findings join `resource_truth`, `food` findings join `food_verdict`, so the
+ * receipt keeps its checks and its shape; a town that agrees prints the receipt it printed before.
+ *   imports    a critical import "this terrain cannot produce" beside a live resource that yields it
+ *   strengths  a terrain strength with nothing of the town's under it (the table is total: a strength
+ *              the table does not know is a finding, so the table cannot fall behind the terrain data)
+ *   strategic  a yield clause of the strategic line the town's resources do not stand on
+ *   hooks      a viability hook that names a war the record does not hold, or a material the town has
+ *   safety     the safety text naming a mercenary company the defence home does not list
+ *   food       grain a primary import, unqualified, where the town grows 90% or more of its need; a
+ *              shortage import ("local fields depleted") beside the resource it says is spent
+ * @param {any} settlement
+ * @returns {{ resource: Array<{path:string, detail:string, evidence?:string}>, food: Array<{path:string, detail:string, evidence?:string}> }}
+ */
+export function projectionAgreementFindings(settlement) {
+  const resource = [];
+  const food = [];
+  const analysis = settlement?.resourceAnalysis;
+  const available = Array.isArray(analysis?.availableResources) ? analysis.availableResources.map(String) : [];
+  const route = String(settlement?.config?.tradeRouteAccess || '');
+  if (analysis && Array.isArray(analysis.availableResources)) {
+    for (const [index, label] of (analysis.imports?.critical || []).entries()) {
+      if (!/cannot produce this locally/.test(String(analysis.imports?.reasons?.[label] || ''))) continue;
+      const live = liveMaterialFor(label, available);
+      if (live) resource.push(finding(`resourceAnalysis.imports.critical[${index}]`, 'A terrain must-import names a material a live local resource yields.', `${label}: ${live}`));
+    }
+    for (const [index, strength] of (analysis.economicStrengths || []).entries()) {
+      const rule = STRENGTH_SUPPORT[/** @type {keyof typeof STRENGTH_SUPPORT} */ (strength)];
+      if (!rule || !townSupports(available, rule, route)) {
+        resource.push(finding(`resourceAnalysis.economicStrengths[${index}]`, rule ? 'A terrain strength has nothing of the town\'s under it.' : 'A terrain strength has no support row.', String(strength)));
+      }
+    }
+    const line = String(analysis.strategicValue || '');
+    for (const { readings } of STRATEGIC_CLAUSES[/** @type {keyof typeof STRATEGIC_CLAUSES} */ (settlement?.config?.terrainType)] || []) {
+      const said = readings.find((r) => r.text && r.needs.length && line.includes(r.text));
+      if (said && !said.needs.every((group) => group.some((key) => available.includes(key)))) {
+        resource.push(finding('resourceAnalysis.strategicValue', 'The strategic line names a yield the town does not have.', said.text.replace(/^[, ]+|[, ]+$/g, '')));
+      }
+    }
+  }
+  const facts = factsOf(settlement);
+  for (const [index, entry] of (settlement?.economicViability?.plotHooks || []).entries()) {
+    const hook = String(entry?.hook || '');
+    if (/\b(?:war|armies|siege)\b/i.test(hook) && facts.warState === 'peace') {
+      resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook asserts a war the record does not hold.', facts.warState));
+    }
+    for (const [word, material] of [[/\b(?:iron|metal)\b/i, 'metals'], [/\btimber\b/i, 'timber']]) {
+      const live = word.test(hook) ? liveMaterialFor(material, available) : null;
+      if (live) resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook makes a material scarce that a live local resource yields.', `${material}: ${live}`));
+    }
+  }
+  const safety = settlement?.economicState?.safetyProfile;
+  for (const field of ['guardEffectivenessDesc', 'safetyDesc']) {
+    if (/\bmercenary compan/i.test(String(safety?.[field] || '')) && facts.defence?.mercenary === false) {
+      resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names a mercenary company the defence record does not list.'));
+    }
+  }
+  const imports = Array.isArray(settlement?.economicState?.primaryImports) ? settlement.economicState.primaryImports.map(String) : [];
+  const grownPct = Number(settlement?.economicState?.foodSecurity?.foodRecord?.grownPct);
+  for (const [index, label] of imports.entries()) {
+    if (/^(?:bulk )?grain\b/i.test(label) && !/\(/.test(label) && grownPct >= 90) {
+      food.push(finding(`economicState.primaryImports[${index}]`, 'Grain stands as a primary import, unqualified, where the town grows most of its need.', `${label}; grown ${grownPct}%`));
+    }
+  }
+  for (const record of nativeResourceConditionRecords(settlement?.config || {})) {
+    const shortage = record.condition === 'available' ? resourceShortageImport(record.key) : null;
+    const index = shortage ? imports.indexOf(shortage) : -1;
+    if (index >= 0) food.push(finding(`economicState.primaryImports[${index}]`, 'A shortage import stands beside the resource it says is spent.', `${shortage}: ${record.key} available`));
+  }
+  return { resource, food };
+}
+
+/**
  * @param {any} settlement
  * @param {{
  *   generationRepairs?: Array<any>,
@@ -492,14 +575,15 @@ export function buildGenerationCoherenceReceipt(settlement, context = {}) {
     ));
   }
 
+  const agreement = projectionAgreementFindings(settlement);
   const baseChecks = [
     check('template_tokens', 'Narrative templates resolved', tokenFindings),
     check('narrative_quality', 'Generated prose clears grammar seams', grammarFindings),
     check('world_law_magic', 'Generated claims obey world law', worldLawFindings),
     check('content_boundaries', 'Generated themes obey profile', contentFindings),
-    check('resource_truth', 'Resource conditions agree across projections', resourceTruthFindings(settlement)),
+    check('resource_truth', 'Resource conditions agree across projections', [...resourceTruthFindings(settlement), ...agreement.resource]),
     check('structural', 'No hard structural violations', hardStructural),
-    check('food_verdict', 'Food verdict agrees with ledger', foodFindings),
+    check('food_verdict', 'Food verdict agrees with ledger', [...foodFindings, ...agreement.food]),
     check('npc_identity', 'Notable NPC display identities are unique', duplicateFindings),
     check('isolation_support', 'Isolation support is explained and sufficient', isolationFindings),
   ];
