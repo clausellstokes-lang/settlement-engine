@@ -64,6 +64,16 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: ['Bulk grain (local fields depleted)'] } });
     expect(details(spent)).toContain('A shortage import stands beside the resource it says is spent.');
   });
+  test('an income line naming a local resource the town lacks; a must-import note beside a live material', () => {
+    const income = (available) => record({ resourceAnalysis: { availableResources: available },
+      economicState: { incomeSources: [{ source: 'Iron & Metalwork', desc: 'Local ore feeds the smithy directly.' }] } });
+    expect(details(income(['coal_deposits', 'coal']))).toContain('An income line names a local resource the town does not have.');
+    expect(details(income(['iron_deposits']))).toEqual([]);
+    const note = (category) => ({ ...record({ resourceAnalysis: { availableResources: ['managed_forest'] } }),
+      economicViability: { plotHooks: [], dependencies: [{ category, title: 'Imports timber' }] } });
+    expect(details(note('Resource Import'))).toContain('The viability notes an import a live local resource yields.');
+    expect(details(note('Provisioning at Scale'))).toEqual([]);
+  });
   test('available worked land the food record does not count as a source', () => {
     const land = (sources) => record({ config: { nearbyResources: ['grazing_land'], nearbyResourcesNativeDepleted: [] },
       economicState: { foodSecurity: { foodRecord: { grownPct: 50, foodSources: sources } } } });
@@ -73,7 +83,7 @@ describe('the projection-agreement arm convicts each disagreement and clears its
 });
 
 /** The seeds that disagreed at the base, by finding (the lane's corpus measure). */
-const SEEDS = ['agree-town-2', 'agree-town-5', 'agree-village-0', 'agree-village-1', 'agree-village-2', 'agree-village-5', 'agree-village-7', 'agree-village-14',
+const SEEDS = ['agree-village-17', 'agree-village-25', 'agree-town-2', 'agree-town-5', 'agree-village-0', 'agree-village-1', 'agree-village-2', 'agree-village-5', 'agree-village-7', 'agree-village-14',
   'agree-village-28', 'agree-town-0', 'agree-town-3', 'agree-town-7', 'agree-town-8', 'agree-town-14', 'agree-town-43', 'agree-town-73'];
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };

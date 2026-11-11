@@ -311,6 +311,8 @@ function resourceTruthFindings(settlement) {
  *              the table does not know is a finding, so the table cannot fall behind the terrain data)
  *   strategic  a yield clause of the strategic line the town's resources do not stand on
  *   hooks      a viability hook that names a war the record does not hold, or a material the town has
+ *   income     an income line that names a local resource ("Local ore", "Local quarry") the town lacks
+ *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
  *   safety     the safety text naming a mercenary company the defence home does not list
  *   sources    available fields, floodplain or grazing that the food record does not count as a source
  *   food       bare grain a primary import, unqualified, where the town grows 90% or more of its need; a
@@ -318,6 +320,14 @@ function resourceTruthFindings(settlement) {
  * @param {any} settlement
  * @returns {{ resource: Array<{path:string, detail:string, evidence?:string}>, food: Array<{path:string, detail:string, evidence?:string}> }}
  */
+/** The income lines that name a local resource, and the resources that make them true. */
+const LOCAL_INCOME_WORDS = Object.freeze([
+  [/^Local ore\b/, ['iron_deposits', 'precious_metals']],
+  [/^Local forest\b/, ['managed_forest', 'timber', 'mountain_timber', 'shipbuilding_timber']],
+  [/^Local quarry\b/, ['stone_quarry']],
+  [/^Local flocks\b/, ['grazing_land', 'alpine_pasture']],
+]);
+
 /** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
 const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
 
@@ -356,6 +366,19 @@ export function projectionAgreementFindings(settlement) {
     for (const [word, material] of [[/\b(?:iron|metal)\b/i, 'metals'], [/\btimber\b/i, 'timber']]) {
       const live = word.test(hook) ? liveMaterialFor(material, available) : null;
       if (live) resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook makes a material scarce that a live local resource yields.', `${material}: ${live}`));
+    }
+  }
+  for (const [index, entry] of (settlement?.economicState?.incomeSources || []).entries()) {
+    const said = LOCAL_INCOME_WORDS.find(([words]) => words.test(String(entry?.desc || '')));
+    if (said && !said[1].some((key) => available.includes(key))) {
+      resource.push(finding(`economicState.incomeSources[${index}].desc`, 'An income line names a local resource the town does not have.', String(entry?.source || '')));
+    }
+  }
+  for (const field of ['dependencies', 'warnings']) {
+    for (const [index, entry] of (settlement?.economicViability?.[field] || []).entries()) {
+      const imported = entry?.category === 'Resource Import' ? /^Imports (.+)$/.exec(String(entry?.title || '')) : null;
+      const live = imported ? liveMaterialFor(imported[1], available) : null;
+      if (live) resource.push(finding(`economicViability.${field}[${index}]`, 'The viability notes an import a live local resource yields.', `${imported?.[1]}: ${live}`));
     }
   }
   const safety = settlement?.economicState?.safetyProfile;
