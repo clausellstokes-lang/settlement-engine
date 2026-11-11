@@ -761,6 +761,23 @@
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
+    "ledger:conflicts:HOOKS": {
+      "top1": 0.1,
+      "top5": 0.1974,
+      "targets": [
+        "top1"
+      ],
+      "reason": "the quarrels' plot hooks: COHERENCE-QUARREL cure 2 draws one of the issue's own hooks; the charter's target (no hook above 10%)"
+    },
+    "ledger:conflicts:ISSUES": {
+      "top1": 0.1,
+      "top5": 0.4,
+      "targets": [
+        "top1",
+        "top5"
+      ],
+      "reason": "the quarrels' issues: COHERENCE-QUARREL cure 2 widens the pool; the charter's targets (no issue above 10%, the first five under 40%)"
+    },
     "ledger:crisisCast:CAST_REASON_SIBLINGS": {
       "top1": 0.9483,
       "top5": 1,
@@ -4282,14 +4299,21 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "record:conflicts.issue": {
-      "top1": 0.2472,
-      "top5": 0.9421,
-      "reason": "the quarrels' issues, measured at the base (99bcc6944); COHERENCE-QUARREL cures it to top1 0.10, top5 0.40"
+      "top1": 0.1,
+      "top5": 0.4,
+      "targets": [
+        "top1",
+        "top5"
+      ],
+      "reason": "the quarrels' issues: COHERENCE-QUARREL cure 2 widens the pool; the charter's targets (no issue above 10%, the first five under 40%)"
     },
     "record:conflicts.plotHooks": {
-      "top1": 0.4236,
-      "top5": 1,
-      "reason": "the quarrels' plot hooks, measured at the base (99bcc6944); COHERENCE-QUARREL cures it to top1 0.10"
+      "top1": 0.1,
+      "top5": 0.1966,
+      "targets": [
+        "top1"
+      ],
+      "reason": "the quarrels' plot hooks: COHERENCE-QUARREL cure 2 draws one of the issue's own hooks; the charter's target (no hook above 10%)"
     },
     "record:safetyProfile.plotHooks": {
       "top1": 0.5912,

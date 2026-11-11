@@ -23,7 +23,9 @@
  * THE REGISTER (`pool-dominance.register.json`) holds one row per pool: a ceiling for `top1` and
  * for `top5`, and its reason. It only TIGHTENS: `tests/lint/poolDominance.walker.test.js` reds
  * when a pool rises above its ceiling, when a drawn pool has no row, when a row's pool is no
- * longer drawn, and when a ceiling sits looser than the measure by more than the slack.
+ * longer drawn, and when a ceiling sits looser than the measure by more than the slack. A cured
+ * pool's row may hold the charter's TARGET instead (`targets`: the ceilings that are a law, not a
+ * measure); a target is never loose, and is only ever lowered by hand.
  *
  * Usage (read-only unless `--tighten`):
  *   node scripts/census/pool-dominance.mjs            print the pools over their ceilings, then the worst twenty
@@ -128,7 +130,7 @@ export function measureDominance() {
 /** @param {number} share @returns {number} the share rounded UP to four places, so a ceiling never sits below its measure */
 export const ceil4 = (share) => Math.ceil(share * 10000 - 1e-9) / 10000;
 
-/** @returns {{ pools: Record<string, { top1: number, top5: number, reason: string }> }} */
+/** @returns {{ pools: Record<string, { top1: number, top5: number, reason: string, targets?: string[] }> }} */
 export function readRegister() {
   return JSON.parse(readFileSync(REGISTER_PATH, 'utf8'));
 }
@@ -146,8 +148,11 @@ export function judge(table, register) {
     if (!row) { unregistered.push(pool); continue; }
     if (m.top1 > row.top1 + 1e-9) over.push(`${pool}: top1 ${m.top1.toFixed(4)} > ceiling ${row.top1}`);
     if (m.top5 > row.top5 + 1e-9) over.push(`${pool}: top5 ${m.top5.toFixed(4)} > ceiling ${row.top5}`);
-    if (row.top1 - m.top1 > TIGHTEN_SLACK) loose.push(`${pool}: top1 ceiling ${row.top1} sits above its measure ${m.top1.toFixed(4)}`);
-    if (row.top5 - m.top5 > TIGHTEN_SLACK) loose.push(`${pool}: top5 ceiling ${row.top5} sits above its measure ${m.top5.toFixed(4)}`);
+    // A ceiling set to the charter's target for a cured pool (`targets`) is a law, not a measure:
+    // it is never loose. Every other ceiling hugs its measure.
+    const targets = Array.isArray(row.targets) ? row.targets : [];
+    if (!targets.includes('top1') && row.top1 - m.top1 > TIGHTEN_SLACK) loose.push(`${pool}: top1 ceiling ${row.top1} sits above its measure ${m.top1.toFixed(4)}`);
+    if (!targets.includes('top5') && row.top5 - m.top5 > TIGHTEN_SLACK) loose.push(`${pool}: top5 ceiling ${row.top5} sits above its measure ${m.top5.toFixed(4)}`);
   }
   for (const pool of Object.keys(rows)) if (!table.has(pool)) stale.push(pool);
   return { over, unregistered, stale, loose };
@@ -160,12 +165,16 @@ function main() {
   if (process.argv.includes('--tighten')) {
     const register = readRegister();
     const rows = register.pools || {};
-    /** @type {Record<string, { top1: number, top5: number, reason: string }>} */
+    /** @type {Record<string, { top1: number, top5: number, reason: string, targets?: string[] }>} */
     const next = {};
     for (const [pool, m] of table) {
       const row = rows[pool];
       next[pool] = row
-        ? { top1: Math.min(row.top1, ceil4(m.top1)), top5: Math.min(row.top5, ceil4(m.top5)), reason: row.reason }
+        ? {
+          ...row,
+          top1: row.targets?.includes('top1') ? row.top1 : Math.min(row.top1, ceil4(m.top1)),
+          top5: row.targets?.includes('top5') ? row.top5 : Math.min(row.top5, ceil4(m.top5)),
+        }
         : { top1: ceil4(m.top1), top5: ceil4(m.top5), reason: BANKED_REASON };
     }
     writeFileSync(REGISTER_PATH, `${JSON.stringify({ ...register, pools: next }, null, 2)}\n`);
