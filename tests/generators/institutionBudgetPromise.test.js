@@ -96,6 +96,16 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // Every stage is a lane merge with its own signed shift record under docs/shift-records/ (the movers inside each merge
 // are not isolated: PLAUSIBLE per commit, CONFIRMED per stage). Re-captured at the green-tip lane over bf14617ca (whose
 // generation is bf14617ca's byte for byte) with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-10 (RESIDUE, the chair's packet item 4, at the simulation batch's merged tip — STYLE-2-MERGE
+// point 36, GREEN-TIP and PULSE-SITES): 3 of 60 moved, none by the budget (densityFactor is still forced to 1; no commit in
+// bf14617ca..the tip or in either lane touches src/data/institutionBudget.js; with the factor planted at 1.25 all 60 move, so
+// the pin is armed). MEASURED, this file's own loop (an untracked probe reproducing it) at bf14617ca (0 moved against the
+// GREEN-TIP sixty) and at every first-parent stage of bf14617ca..90774f2fa touching src/ or the soak config: ONE stage moves,
+// SW-9b-B 8e532a663 (point 27) — seeds 21 (79379bee35da9918 -> 7bee45ae807037d6), 52 (dd6681b153dad267 -> b50ff039d9ebf891) and 53 (8347fa12cbf96c74 -> 5e0de535fa6d748f); points 28-35 and
+// the line's hygiene stages move none. Inside point 27, by merging each lane prefix onto its first parent: b23e4e91b (SW-9b-B
+// row 2b, E-3: the small-name instigator says it speaks for the gaining power from a house it backs) moves exactly these three;
+// the four lane commits before it move none. The batch itself (GREEN-TIP + PULSE-SITES over the line) moves none. Re-captured at
+// the merged tip with the factor forced to 1.0, twice and equal.
 const BEFORE = Object.freeze([
   '9ea891a6cd71384f', // 0
   'db8107a73f8e16d3', // 1
@@ -118,7 +128,7 @@ const BEFORE = Object.freeze([
   '6c3ee69139e1d282', // 18
   '8eba55db8f713789', // 19
   'f0b2c3f298f0a6d7', // 20
-  '79379bee35da9918', // 21
+  '7bee45ae807037d6', // 21
   'b27abe5cb502f601', // 22
   'b5cdf30cab302d82', // 23
   '70bae71dd604e229', // 24
@@ -149,8 +159,8 @@ const BEFORE = Object.freeze([
   '47e7fd5d33ef7502', // 49
   '1b7c1d9a005e5c77', // 50
   'a1dfeedcaa0139c8', // 51
-  'dd6681b153dad267', // 52
-  '8347fa12cbf96c74', // 53
+  'b50ff039d9ebf891', // 52
+  '5e0de535fa6d748f', // 53
   '20e7ba95a6e6ccb3', // 54
   '052a13d1839465b4', // 55
   '34e309e2a8c48f4f', // 56

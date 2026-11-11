@@ -38,7 +38,17 @@ beforeAll(async () => {
   await ensureLaws();
   const hiddenTown = birth(113).settlement;
   const town = birth(3).settlement;
-  arms.hidden = { s: hiddenTown, ...pairIn(hiddenTown, (f) => f.hidden === true) };
+  // THE HIDDEN ARM'S PAIR IS BUILT, NOT OBSERVED (RESIDUE, the chair's ruling of 2026-11-10 on item 8). soak1k 0-199 carry
+  // three hidden powers, each with exactly ONE first-rank member, so `pairIn` can only pair the hidden member with a card
+  // of another power — a swap the handler refuses since GREEN-TIP ae8dc98b1 (`swap_cross_faction`, below). To keep a
+  // COMMITTED hidden swap under this pin, the peer of soak1k-113's pair is given a rank-2 membership in the hidden power
+  // (its only one) on a clone of the town: a same-power pair the composer would offer. Built, not observed.
+  const observed = pairIn(hiddenTown, (f) => f.hidden === true);
+  arms.crossHidden = { s: hiddenTown, ...observed };
+  const built = structuredClone(hiddenTown);
+  const peer = built.npcs.find((n) => n.id === observed.b.id);
+  peer.memberships = [{ power: observed.power, rank: 2 }];
+  arms.hidden = { s: built, power: observed.power, a: built.npcs.find((n) => n.id === observed.a.id), b: peer };
   arms.criminal = { s: town, ...pairIn(town, (f) => String(f.category || '').toLowerCase() === 'criminal') };
   arms.open = { s: town, ...pairIn(town, (f) => !isVeiledPower(f)) };
 }, 180_000);
@@ -56,12 +66,33 @@ describe('PROMOTE/DEMOTE narration names no power (P1 as changed by the owner: t
       it(`(${which}) ${type}: the committed narrativeSummary names the person and not the power`, () => {
         const arm = arms[which];
         const event = { id: `ev-${type}-${arm.a.id}`, type, targetId: arm.a.id, payload: { swapWithNpcId: arm.b.id }, cause: 'dm_direct' };
-        const { logEntry } = applyEvent({ settlement: arm.s, event, now: '2026-11-10T00:00:00.000Z' });
+        const { logEntry, veto } = applyEvent({ settlement: arm.s, event, now: '2026-11-10T00:00:00.000Z' });
+        expect(veto).toBeNull();
         const summary = String(logEntry.narrativeSummary || '');
         expect(summary).toContain('their power');
         // anchored: the person's name travels the same narration as the power's would
         expectAbsentWithAnchor(summary, arm.power, arm.a.name, `${which} ${type} narrativeSummary`);
       });
     }
+  }
+});
+
+// A CROSS-POWER SWAP ON A HIDDEN POWER IS REFUSED AND COMMITS NOTHING (RESIDUE, the chair's ruling of 2026-11-10 on item 8).
+// The cause: GREEN-TIP ae8dc98b1 re-pointed mutateEntities.js :: swapNpcStanding's cross-faction guard to each card's
+// first-rank membership; it read the retired `factionAffiliation`, which no current card carries, so it never fired and
+// the cross-power pair committed (with the hidden power's key in its undo snapshot). The veto channel commits no deltas
+// and no narration (eventPipeline.js), and callers persist nothing on a veto. The pair is soak1k-113's observed one.
+describe('a cross-power swap on a hidden power is refused and commits nothing (the guard live since ae8dc98b1)', () => {
+  for (const type of ['PROMOTE_NPC', 'DEMOTE_NPC']) {
+    it(`(hidden, cross-power) ${type}: vetoed swap_cross_faction, no deltas, no narration, the power named nowhere`, () => {
+      const arm = arms.crossHidden;
+      const event = { id: `ev-${type}-${arm.a.id}`, type, targetId: arm.a.id, payload: { swapWithNpcId: arm.b.id }, cause: 'dm_direct' };
+      const { logEntry, veto } = applyEvent({ settlement: arm.s, event, now: '2026-11-10T00:00:00.000Z' });
+      expect(veto?.code).toBe('swap_cross_faction');
+      expect(logEntry.narrativeSummary).toBe('');
+      expect(logEntry.deltas).toEqual([]);
+      // anchored: the target's id travels the committed entry as the power's name would
+      expectAbsentWithAnchor(JSON.stringify(logEntry), arm.power, arm.a.id, `cross-power ${type} logEntry`);
+    });
   }
 });
