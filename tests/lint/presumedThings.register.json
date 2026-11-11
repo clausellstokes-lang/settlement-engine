@@ -440,7 +440,6 @@
    ["watch", "after-release", "City Watch Chief"]
   ],
   "src/data/historyDescVariants.js": [
-   ["market", "cure", "A quarrel over the terms of trade with a neighbouring settlement grew until it reached every merchant and every purse in"],
    ["market", "after-release", "Competing guilds struggled for control of the market and a voice in local politics"],
    ["market", "after-release", "What began as a disagreement over trade with a partner town spread until no merchant or buyer in the market was untouche"]
   ],
