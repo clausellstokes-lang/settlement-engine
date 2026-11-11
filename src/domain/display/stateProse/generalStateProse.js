@@ -1285,8 +1285,15 @@ export function institutionsPoolKey(inst, record = undefined) {
   const hasHospital = record && typeof record === 'object'
     ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)).hospital
     : inst.hasHospital === true;
+  // COHERENCE-AGREE (the chair's note of 2026-11-11): GARRISONED says "paid hands keep the town
+  // safe", so given the record it reads the defence home's paid forces — a garrison, a watch or a
+  // hired company — never the flag bag's military row, which counts walls and a militia too.
+  const defence = record && typeof record === 'object' ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)) : null;
+  const paidHands = defence
+    ? defence.garrison || defence.watch || defence.mercenary || inst.hasNavy === true
+    : inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true;
   const key = (inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED'
-    : (inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true) ? 'GARRISONED'
+    : paidHands ? 'GARRISONED'
       : inst.hasMagicInst === true ? 'LETTERED'
         : (inst.hasGranary === true || hasHospital) ? 'PROVISIONED'
           : 'BARE';

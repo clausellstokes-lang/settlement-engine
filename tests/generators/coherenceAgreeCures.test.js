@@ -8,6 +8,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateResourceAnalysis } from '../../src/generators/resourceGenerator.js';
 import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 import { foodLandOf } from '../../src/generators/foodLand.js';
+import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -90,5 +91,13 @@ describe('cure 6 (the chair\'s food-sources ruling): worked land is a source by 
   });
   test('hunting grounds stay wild land for a town with no hunters', () => {
     expect(land(['hunting_grounds']).foodSources).toEqual([]);
+  });
+});
+
+describe('cure 8: the health summary\'s "paid hands" reads the defence home', () => {
+  test('a militia and walls are not paid hands; a watch is', () => {
+    const inst = { hasMilitaryInst: true };
+    expect(institutionsPoolKey(inst, { institutions: [{ name: 'Citizen militia' }, { name: 'Town walls' }] })).not.toBe('GARRISONED');
+    expect(institutionsPoolKey(inst, { institutions: [{ name: 'Town watch' }] })).toBe('GARRISONED');
   });
 });
