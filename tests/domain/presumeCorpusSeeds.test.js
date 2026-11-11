@@ -17,6 +17,23 @@ import { corpusConfig, printedAbsent } from '../lint/presumedThings.shared.mjs';
 const CASES = [
   ['outfits town militias', 'militia', 'presume-town-103'],
   ['outfit the militias', 'militia', 'presume-town-0'],
+  ['Sells surplus at the weekly market', 'market', 'presume-village-22'],
+  ['Supplies the market with ducks', 'market', 'presume-village-32'],
+  ['from the docks and the builders', 'docks', 'presume-city-12'],
+  ['how many are in the garrison', 'garrison', 'presume-town-18'],
+  ['take your business to a money-changer', 'bank', 'presume-city-18'],
+  ['Emergency granary reserves', 'granary', 'presume-village-13'],
+  ['every purse in the market', 'market', 'presume-village-51'],
+  ['The garrison commander is a political actor', 'garrison', 'presume-town-111'],
+  ['knows the watch rota', 'watch', 'presume-village-48'],
+  ['A money changer sits', 'bank', 'presume-town-111'],
+  ['a counting house, its brass', 'bank', 'presume-city-41'],
+  ['merchant stalls, money changers', 'bank', 'presume-town-0'],
+  ['at the market cross', 'market', 'presume-village-12'],
+  ['The Watch Captain', 'watch', 'presume-village-0'],
+  ['preferential market positions', 'market', 'presume-village-52'],
+  ['the market quarter', 'market', 'presume-village-24'],
+  ['Temple granaries blessed', 'granary', 'presume-village-19'],
 ];
 
 /** @param {string} seed */
@@ -27,8 +44,11 @@ const birth = (seed) => {
 };
 
 describe('COHERENCE-PRESUME: a cured line no longer prints where its thing is absent', () => {
-  test.each(CASES)('%s (%s) at %s', (fragment, thing, seed) => {
-    const listed = birth(seed).filter((h) => h.thing === thing && h.sentence.includes(fragment));
-    expect(listed).toEqual([]);
-  }, 60_000);
+  // one parameterless test over the rows (the sovereignty census parks a file that calls `each`)
+  test('every case\'s seed prints its line only where the thing stands', () => {
+    const still = CASES.flatMap(([fragment, thing, seed]) => birth(seed)
+      .filter((h) => h.thing === thing && h.sentence.includes(fragment))
+      .map((h) => `${seed} :: ${thing} :: ${h.path} :: ${h.sentence.slice(0, 120)}`));
+    expect(still).toEqual([]);
+  }, 600_000);
 });
