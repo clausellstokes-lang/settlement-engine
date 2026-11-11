@@ -93,7 +93,7 @@ export const GRAIN_TOP_UP = 'Grain (a little, beside its own harvest)';
  * COHERENCE-AGREE (the chair's charter of 2026-11-11, §2): the import list and the food record tell
  * one story. A town that grows 90% or more of its need does not list grain as a primary import
  * without saying how little: a bare grain entry ("Grain", "Bulk grain", "Bulk grain and foodstuffs")
- * becomes GRAIN_TOP_UP. An entry that gives its reason in brackets, or a compound good a culture's
+ * becomes GRAIN_TOP_UP. An entry that gives its reason in brackets, or a compound good that a people's
  * demand names ("Grain and salted pork"), keeps its words. Mutates the list in place, as its
  * neighbours here do.
  * @param {string[]} primaryImports @param {{ grownPct?: unknown } | null | undefined} foodRecord
