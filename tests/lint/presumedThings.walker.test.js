@@ -25,6 +25,7 @@ import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import {
   REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, listFiles, negates, printedAbsent, rowCovers, scanSource, scanTree,
+  unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -101,10 +102,13 @@ describe('ARM 1 — the source', () => {
 describe('ARM 2 — the printed corpus', () => {
   /** @type {Array<{ thing: string, path: string, sentence: string, seed: string }>} */
   const listed = [];
+  /** @type {string[]} */ const unlicensed = [];
   beforeAll(() => {
     for (const { tier, seed } of corpusSeeds()) {
       const record = generateSettlementPipeline({ ...corpusConfig(tier) }, null, { seed, customContent: {} });
-      for (const h of printedAbsent(record, factsOf(record), liveInstitutionNames(record))) listed.push({ ...h, seed });
+      const names = liveInstitutionNames(record);
+      for (const h of printedAbsent(record, factsOf(record), names)) listed.push({ ...h, seed });
+      for (const row of unlicensedServiceRows(record, names)) unlicensed.push(`${seed} :: ${row}`);
     }
   }, 600_000);
 
@@ -117,6 +121,10 @@ describe('ARM 2 — the printed corpus', () => {
     const fresh = listed.filter((h) => !register.arm2.some((r) => rowCovers(r, h)));
     const shown = [...new Set(fresh.map((h) => `${h.thing} :: ${h.path} :: ${JSON.stringify(h.sentence.slice(0, 140))}`))];
     expect(shown, 'declare the thing (the draw refuses the line where it is absent) and write its twin').toEqual([]);
+  });
+
+  test('⛔ a service row stands only with its own institution (the chair\'s licensing rule)', () => {
+    expect(unlicensed).toEqual([]);
   });
 
   test('⛔ no stale row: every arm-2 row still covers a printed line', () => {

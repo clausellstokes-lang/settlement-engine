@@ -271,11 +271,45 @@ export const NOT_PRINTED = Object.freeze({
   '.simulationTrace': 'the simulation trace: ids and targets for the engine',
 });
 
+/**
+ * LICENSED ROWS (the chair's ruling of 2026-11-11, point 2): a chain's service output and a service
+ * menu row are answered by their OWN institution — where the row stands, the service is offered.
+ * Arm 2 does not read their words; instead `unlicensedServiceRows` asserts each row's institution is
+ * live on the roster.
+ */
+export const LICENSED = Object.freeze(['.economicState.institutionalServices', '.availableServices']);
+
+/**
+ * The service rows whose licensing institution is NOT on the live roster (names lower-cased).
+ * @param {any} record @param {string[]} names the live roster's names
+ * @returns {string[]}
+ */
+export function unlicensedServiceRows(record, names) {
+  const live = new Set(names.map((n) => n.toLowerCase()));
+  /** @type {string[]} */ const out = [];
+  for (const row of record?.economicState?.institutionalServices || []) {
+    const insts = Array.isArray(row?.institutions) ? row.institutions : [];
+    if (!insts.length || !insts.some((n) => live.has(String(n).toLowerCase()))) out.push(`institutionalServices :: ${row?.output} :: ${insts.join(', ')}`);
+  }
+  for (const [cat, rows] of Object.entries(record?.availableServices || {})) {
+    for (const row of Array.isArray(rows) ? rows : []) {
+      // a parenthetical house ('(covert)', '(street gang)', '(lawless)') is the criminal structure's
+      // houseless service, stated as such: it names no institution to stand
+      if (/^\(.*\)$/.test(String(row?.institution ?? '').trim())) continue;
+      if (!row?.institution || !live.has(String(row.institution).toLowerCase())) out.push(`availableServices.${cat} :: ${row?.name} :: ${row?.institution}`);
+    }
+  }
+  return out;
+}
+
 /** The ids and keys a record carries beside its prose. */
 const ID_PATH = /(?:\.id|\.key|\.family|targetId|\.inst\.names\[\])$/;
 
 /** @param {string} path */
-export const isPrinted = (path) => !ID_PATH.test(path) && !Object.keys(NOT_PRINTED).some((p) => path === p || path.startsWith(p + '.') || path.startsWith(p + '['));
+const under = (path, p) => path === p || path.startsWith(p + '.') || path.startsWith(p + '[');
+export const isPrinted = (path) => !ID_PATH.test(path) && !Object.keys(NOT_PRINTED).some((p) => under(path, p));
+/** @param {string} path a licensed row's path (`LICENSED`) */
+export const isLicensed = (path) => LICENSED.some((p) => under(path, p));
 
 /** @param {unknown} v @param {string} p @param {Array<[string, string]>} out */
 function leaves(v, p, out) {
@@ -299,7 +333,7 @@ export function printedAbsent(record, facts, names) {
   /** @type {Array<{ thing: string, path: string, sentence: string }>} */ const out = [];
   const seen = new Set();
   for (const [path, text] of leaves(record, '', [])) {
-    if (text.length < 20 || !isPrinted(path)) continue;
+    if (text.length < 20 || !isPrinted(path) || isLicensed(path)) continue;
     for (const sentence of sentencesOf(text)) {
       for (const thing of thingsNamedIn(sentence)) {
         if (!isAbsent(thing)) continue;
