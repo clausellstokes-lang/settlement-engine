@@ -111,16 +111,16 @@ export const fixture = {
         "text": "blacksmith · selected (Base chance 4% lifted by ×2.50 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to win the people back with what costs nothing: fair hearings and quick answers. Hector Gallagher and Inghean MacCarthy are about to stand on opposite sides of an important decision."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The village keeps a smith on four chances in a hundred, more than doubled by the mountain and by what lies near it."
   },
   "realm": {
     "whyTrace": [
       {
         "axis": "Trade connectivity",
         "from": "adequate",
-        "to": "critical",
-        "tone": "danger",
-        "reason": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows."
+        "to": "strained",
+        "tone": "warning",
+        "reason": "Wartime pressure disrupts trade flows. Criminal pressure disrupts trade flows."
       },
       {
         "axis": "Religious authority",
@@ -134,16 +134,10 @@ export const fixture = {
         "from": "strained",
         "to": "critical",
         "tone": "danger",
-        "reason": "Public legitimacy 11 colors trust. Criminal pressure erodes communal trust."
+        "reason": "Public legitimacy 13 colors trust. Criminal pressure erodes communal trust."
       }
     ],
     "advance": [
-      {
-        "week": "Week 1",
-        "season": "the spring of year 1",
-        "headline": "Cnocby turns to the faith of Vael",
-        "text": "After a long contest of devotion, Vael has become the patron creed of Cnocby."
-      },
       {
         "week": "Week 2",
         "season": "the spring of year 1",
@@ -163,16 +157,22 @@ export const fixture = {
         "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes behind."
       },
       {
-        "week": "Week 10",
+        "week": "Week 9",
         "season": "the spring of year 1",
-        "headline": "Crime takes hold of Cnocby",
-        "text": "Thieves and racketeers are working Cnocby's streets in the open."
+        "headline": "Elder Council captures an institution",
+        "text": "Control of Cnocby's multiple water sources is passing to Elder Council."
       },
       {
         "week": "Week 12",
         "season": "the spring of year 1",
-        "headline": "Cnocby's trade routes break down",
-        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
+        "headline": "Caoilfhinn Gallagher pushes through reforms",
+        "text": "Caoilfhinn Gallagher is out to come through the crisis."
+      },
+      {
+        "week": "Week 12",
+        "season": "the spring of year 1",
+        "headline": "Crime takes hold of Cnocby",
+        "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],
     "chronicle": [
@@ -191,7 +191,7 @@ export const fixture = {
       {
         "kind": "trade",
         "tone": "economic",
-        "week": "Week 10",
+        "week": "Week 12",
         "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],

@@ -503,7 +503,14 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // "Random" slider mode: resolveConfig rolls the priorities per
     // generation (fresh seed per regenerate) instead of silently using
     // flat 50s — and never writes the rolls back into the stored config.
-    ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
+    // ⛔ EXCEPT A SAMPLE FORK (FOUNDING-WORLDS, the chair's ruling N5b, under the owner's
+    // word of 2026-11-10: "regeenrate mossgate, cnocby, and black crag vwith the updated
+    // system"). A Founding World's card states its five priorities, and this flag, spread
+    // after the config, threw them away on every fresh visitor's "Visit" (the store ships
+    // randomSliderMode true). Scoped by the same fail-closed `isSampleFork` as the
+    // allowance exemption and the curated tier floor; the visitor's mode is not written.
+    // tests/store/sampleForkPriorities.test.js.
+    ...(state.randomSliderMode === true && !isSampleFork ? { _randomizePriorities: true } : {}),
     ...(neighbor ? { _importedNeighbor: neighbor } : {}),
   });
 

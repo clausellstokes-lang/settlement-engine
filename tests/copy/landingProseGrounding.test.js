@@ -82,6 +82,22 @@ describe('the landing prose quotes the fixture it is about', () => {
     expect(body, `the ${route} is no longer what reaches it`).toContain(route);
   });
 
+  it('the brief body names no arrival-scene detail the fixture prose does not carry', () => {
+    // FOUNDING-WORLDS (2026-11-10, the chair's ruling N2): the body said "a bakehouse
+    // already on its second bake when you arrive" across re-emits after the fixture's
+    // arrival prose stopped carrying any bakehouse — the arm above binds the
+    // figure and the dials, and nothing bound the scene. A scene word the brief says
+    // must be in town.prose (the arrival scene the card prints).
+    const SCENE_WORDS = ['bakehouse', 'bake', 'oven', 'inn', 'tavern', 'market', 'smithy', 'forge', 'mill', 'well',
+      'shrine', 'temple', 'chapel', 'carter', 'merchant', 'enclosures', 'foundations', 'halls'];
+    const body = landing.brief.body.toLowerCase();
+    const prose = String(fixture.town.prose).toLowerCase();
+    // Anchored: the prose is the arrival scene and carries scene words of its own.
+    expect(SCENE_WORDS.filter((w) => new RegExp(`\\b${w}`).test(prose)).length).toBeGreaterThan(0);
+    const unheld = SCENE_WORDS.filter((w) => new RegExp(`\\b${w}\\b`).test(body) && !new RegExp(`\\b${w}`).test(prose));
+    expect(unheld, 'the brief body names an arrival detail the fixture prose no longer carries').toEqual([]);
+  });
+
   it('the closer states the run the fixture actually performed', () => {
     expect(
       landing.closer.sub,
@@ -120,7 +136,10 @@ describe('the landing prose quotes the fixture it is about', () => {
     // 2026-11-09 (MERGE-TRAIN, the allegiance train's final tip): [5, 9] -> [2, 10]. The train's composed generator moves
     // derive a new timeline at lf-033 (the war footing at week 2, crime taking hold at week 10); body2 was re-grounded (an
     // owner veto point).
-    for (const spoken of [2, 10]) {
+    // 2026-11-11 (FOUNDING-WORLDS at the final tip 7ab12183f): [2, 10] -> [9, 12]. The simulation cure re-times the
+    // advance at lf-033 (the Elder Council's capture at week 9, the reforms and the crime at week 12); body2 was
+    // re-grounded (an owner veto point).
+    for (const spoken of [9, 12]) {
       expect(
         weeks,
         `the prose calls out week ${spoken}, which the fixture's advance timeline no longer contains`
@@ -145,12 +164,15 @@ describe('the landing prose quotes the fixture it is about', () => {
     for (const [inProse, inFixture] of [
       // 2026-11-09 (MERGE-TRAIN): re-grounded with body2 on the train's timeline at lf-033; six beats, the conversion to Vael
       // and crime taking hold in, the rallied supporters and the Elder Council's capture out.
-      ['turned to the faith of vael', 'turns to the faith of vael'],
+      // 2026-11-11 (FOUNDING-WORLDS at the final tip 7ab12183f): re-grounded with body2 on the simulation cure's timeline
+      // at lf-033; six beats, the conversion to Vael and the broken trade routes out, the Elder Council's capture of the
+      // water and the reforms in.
       ['restore order', 'restore order'],
-      ['religious conversion fracture', 'religious conversion fracture'],
       ['war footing', 'war footing'],
-      ['crime had taken hold', 'crime takes hold'],
-      ['trade routes', 'trade routes'],
+      ['the split between the faiths', 'the split between the faiths'],
+      ['control of the village’s water was passing to the elder council', 'water sources is passing to elder council'],
+      ['pushing through reforms', 'pushes through reforms'],
+      ['crime took hold', 'crime takes hold'],
     ]) {
       expect(
         headlines,
