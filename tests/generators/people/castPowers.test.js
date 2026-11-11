@@ -175,6 +175,33 @@ describe('the people car — the powers\' people (step 3)', () => {
     expect(landingsOf(after, 'Small prison/stocks')).toEqual(['Elder Council:1']);
   });
 
+  it('the ruler is its own kind\'s first claimant: a Church Council beside Religious Authorities is dealt the churches first, heaviest first (COHERENCE-POWERS, rule A)', () => {
+    const church = {
+      tier: 'town',
+      config: { culture: 'germanic' },
+      powerStructure: { factions: [
+        { faction: 'Church Council', category: 'religious', power: 30, isGoverning: true },
+        { faction: 'Religious Authorities', category: 'religious', power: 20 },
+      ] },
+      institutions: [{ name: 'Parish church' }, { name: 'Great cathedral' }, { name: 'Parish churches (2-5)' }, { name: 'Mayor and council' }],
+    };
+    const before = houseBacksOf(church);
+    // the raw landing is unchanged: a ruler competes for its own kind only when no other power of it is seated
+    expect(landingsOf(before, 'Great cathedral')).toEqual(['Religious Authorities:1']);
+    const after = dealDoubledNiches(church, before);
+    // weight order: Great cathedral 3, Parish church 2 (roster first), Parish churches 2 — the ruler picks first
+    expect(landingsOf(after, 'Great cathedral')).toEqual(['Church Council:1']);
+    expect(landingsOf(after, 'Parish church')).toEqual(['Religious Authorities:1']);
+    expect(landingsOf(after, 'Parish churches (2-5)')).toEqual(['Church Council:1']);
+    expect(landingsOf(after, 'Mayor and council')).toEqual(['Church Council:1']);
+    // a criminal ruler is not its kind's claimant (the veil; the chair's ruling of 2026-11-11)
+    const corrupt = { ...church, powerStructure: { factions: [
+      { faction: 'Corrupt Council', category: 'criminal', power: 30, isGoverning: true },
+      { faction: "Thieves' Guild", category: 'criminal', power: 20 },
+    ] }, institutions: [{ name: 'Front businesses' }, { name: 'Mayor and council' }] };
+    expect(landingsOf(dealDoubledNiches(corrupt, houseBacksOf(corrupt)), 'Front businesses')).toEqual(landingsOf(houseBacksOf(corrupt), 'Front businesses'));
+  });
+
   it('the roll weight: share × house weight, 0.5 for weight 0, 1 for a minted face', () => {
     expect(rollWeightOf(0.6, 3)).toBeCloseTo(1.8);
     expect(rollWeightOf(1, 0)).toBe(0.5);
