@@ -66,7 +66,10 @@ describe('one reader of the watch fact on the Defense tab', () => {
     // RE-KEYED BY IDENTITY at SW-B6's point (STYLE-2-MERGE; the chair's ruling on STOP 2, 16:5x): SW-B5's vantage variants
     // (NO_WATCH_SMALL) say the absence in four ways, one not opening "There is no watch"; a tab says it when its text holds
     // a member of the pool WHOLE (each member renders as one text node, so no member is split across nodes).
-    const saying = TABS.filter(({ text }) => /There is no watch/.test(text) || NO_WATCH_SMALL.some((member) => text.includes(member))).length;
+    // STOP 2's LEFTOVER, CLOSED at the style wave's final tip (STYLE-2-MERGE-7, closing act 6, 2026-11-11): membership ALONE
+    // reads 103 of 109 (0.945 > 0.9), measured at 2cbe72ca1, so the phrase path (/There is no watch/) is dropped; the arm
+    // counts the guard assessment by its pool's members only.
+    const saying = TABS.filter(({ text }) => NO_WATCH_SMALL.some((member) => text.includes(member))).length;
     expect(saying, 'the guard assessment no longer reads the absence').toBeGreaterThan(TABS.length * 0.9);
   });
 
