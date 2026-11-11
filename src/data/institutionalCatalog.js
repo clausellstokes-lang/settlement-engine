@@ -692,7 +692,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { name: 'Bowyers & fletchers (guild)', face: 'the bowyer', desc: 'Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.', tags: ['military', 'trade'], priorityCategory: 'crafts' },
       at: {
         village: { name: 'Bowyer & fletcher', baseChance: 0.6, desc: 'Makes bows, crossbows, and arrows. Sells finished ammunition and takes custom bow commissions. The first stop for any adventurer whose quiver is empty.' },
-        town: { baseChance: 0.75, desc: 'Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits town militias.' },
+        town: { baseChance: 0.75, desc: 'Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits their guards.' },
         city: { baseChance: 0.6 },
         metropolis: { baseChance: 0.6 },
       },
