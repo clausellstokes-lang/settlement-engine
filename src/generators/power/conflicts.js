@@ -186,12 +186,20 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
         poolId: 'conflicts:ISSUES', surface: 'power', drawKind: 'R', keepRefused: true,
       }).line || offered[0],
       intensity = ties > 1 ? 'high' : 'moderate';
+    // THE TOUCHED POWERS ARE NAMED (COHERENCE-QUARREL cure 3): an issue that reaches a kind of
+    // power that need not be a party (the craft guilds, in a conscription quarrel) says so in one
+    // clause, naming the first such power the town has, when it is not a party.
+    const reached = (chosen.touches || []).length
+      ? named.filter((power) => power !== factionA && power !== factionB
+        && [...kindsOfPower(power)].some((kind) => chosen.touches.includes(kind)))
+      : [];
+    const touched = (chosen.touchesFirst && reached.find((power) => chosen.touchesFirst.test(power.name))) || reached[0] || null;
     conflicts.push({
       parties: [factionA.name, factionB.name],
       issue: chosen.issue,
       stakes: chosen.stakes,
       intensity,
-      desc: `${factionA.name} and ${factionB.name} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.`,
+      desc: `${factionA.name} and ${factionB.name} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.${touched ? ` It reaches ${touched.name} too, who are not a party to it.` : ''}`,
       plotHooks: buildConflictPlotHooks(factionA, factionB, chosen, instFlags, stressFlags, facts),
     });
   }

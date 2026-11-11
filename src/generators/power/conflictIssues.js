@@ -37,6 +37,7 @@ const RULE = Object.freeze(['governing', 'government', 'council']);
  * @property {'magic' | 'water_trade'} [requires] a world law the issue waits on
  * @property {ReadonlyArray<ReadonlyArray<string>>} cast the slots its two parties must fill
  * @property {ReadonlyArray<string>} [touches] kinds of power it reaches that need not be a party
+ * @property {RegExp} [touchesFirst] among the touched powers, the names it reaches first (apprentices are the crafts')
  * @property {ReadonlyArray<string>} [needs] things the town must have (the pool census's atoms)
  * @property {ReadonlyArray<string>} [hooks] the issue's own plot hooks (one is drawn per quarrel)
  */
@@ -64,7 +65,7 @@ export const BASE_ISSUES = Object.freeze(/** @type {Array<Omit<ConflictIssue, 'i
     'A boat has been held at the quay for three days because two collectors both demand the duty.',
     'The tax books for last season are missing, and each side says the other took them.',
   ] },
-  { issue: 'Military conscription of guild apprentices', stakes: 'Labor control', flag: null, cast: [['military', 'governing']], touches: ['economy'], needs: ['guild'], hooks: [
+  { issue: 'Military conscription of guild apprentices', stakes: 'Labor control', flag: null, cast: [['military', 'governing']], touches: ['economy'], touchesFirst: /\bcraft/i, needs: ['guild'], hooks: [
     'An apprentice named on the list has gone into hiding, and his master is being questioned.',
     'A master craftsman will pay well to have his best apprentice struck from the list.',
     'The list was drawn up overnight, and some of the names on it belong to boys who are not apprentices at all.',
