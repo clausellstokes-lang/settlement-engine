@@ -160,8 +160,15 @@ const FIXTURE_INPUT_FILES = Object.freeze([
  *     row ADDED (demographicReading:117, "Nobody has counted the harvest"): the demographic reader's own
  *     sentence (src code, never drawn from a state leaf), which the matcher aligns at 19 fixed chars
  *     against W5 HIS's rewritten DS-POP-2 WINDOW vid 2. A false positive, carried with its reason.
+ *   foundingWorldBones:82 — ADDED 2026-11-11 (STYLE-2-MERGE-7 at the FOUNDING-WORLDS merge, point 41): the
+ *     sample card's own TAG "Religious authority" (src/data/sampleSettlements.js card copy, which the test
+ *     pins as the card's promise; never drawn from a state leaf), which the matcher aligns at 19 fixed chars
+ *     against DS-STR-2 ORIGIN: temple_putsch vid 3. The lane did not run tests/lint; the row is the card's
+ *     data, not drawn prose, so computing it through drawnProse.js would assert the wrong thing. A false
+ *     positive, carried with its reason.
  */
 const FROZEN_LITERAL_ANCHORS = Object.freeze({
+  'tests/data/foundingWorldBones.test.js': 1,
   'tests/domain/demographicReading.test.js': 1,
   'tests/domain/settlementLifecycleFirstClass.test.js': 1,
   'tests/domain/treatyVoiceCure.test.js': 1,
