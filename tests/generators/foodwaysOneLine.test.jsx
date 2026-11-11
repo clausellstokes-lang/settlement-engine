@@ -50,7 +50,9 @@ function pdfText(node, out = []) {
   return out;
 }
 /** Journal markdown back to plain words: the shared escaper's backslashes and the bold marks. */
-const unmark = (md) => String(md).replace(/\\(.)/g, '$1').replace(/\*\*/g, '');
+// The journal escapes an apostrophe as an HTML entity, which Foundry renders as the apostrophe (COHERENCE-AGREE:
+// a livestock line, "the herds' milk", first reached this corpus when grazing became a source by its own name).
+const unmark = (md) => String(md).replace(/\\(.)/g, '$1').replace(/\*\*/g, '').replace(/&#39;/g, "'");
 const count = (text, line) => text.split(line).length - 1;
 
 describe('the foodways line: one writer on the record, the same line on every surface', () => {
@@ -104,7 +106,9 @@ describe('C-1 — the stored foodways line is the food record\'s line', () => {
   /** Golden rows whose receipt carried `battery.food-words` at the base (fe55408b9), town and up. */
   const ROWS = [
     'town|germanic|hills|road|civilized|golden-master-v3',
-    'city|germanic|plains|road|civilized|golden-master-v3',
+    // COHERENCE-AGREE (the chair's food-sources ruling, 2026-11-11): the plains city's grazing is a livestock
+    // source now; the planted condition (no staple held) is carried by the coastal port city, which holds fish.
+    'city|germanic|coastal|port|civilized|golden-master-v3',
     'metropolis|germanic|plains|road|civilized|golden-master-v3',
   ];
   const birthOf = (key) => {
