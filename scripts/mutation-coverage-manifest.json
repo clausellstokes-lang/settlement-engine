@@ -3644,6 +3644,10 @@
     "tests/generators/spareHookLineFactsWork.test.js": {
       "kind": "rationale",
       "rationale": "GEN-SPEED cure 3's work-count pin (lane/gen-speed-2026-11-10, merged at STYLE-2-MERGE point 39; its record docs/chair/2026-11-10/GEN-SPEED-2026-11-10.md). Its catching power was EXECUTED, not claimed: (1) at the merge (STYLE-2-MERGE-7, 2026-11-11) src/generators/people/representatives.js's `const facts = () => once;` planted back to the pre-cure per-call `factsOf(…)` reddened exactly 'reads the roster a bounded number of times over a whole walk, not once per row' (expected 24 to be less than or equal to 8; 1 failed | 1 passed); the file was restored from a copy taken before the plant and cmp-verified byte-identical, `grep -c PLANT` 0, the pin 2/2 green after. (2) The lane's own plant for the second arm, recorded in its record: a write of a roster row's `name` inside the loop turned 'a deep-frozen record and place give the same lines…' red (TypeError: Cannot assign to read only property 'name'), removed after. A rationale rather than a standing sweep plant, as above."
+    },
+    "tests/build/buildHeapPinned.test.js": {
+      "kind": "rationale",
+      "rationale": "CI-FIT's build-heap pin (lane/ci-fit-2026-11-10, merged at STYLE-2-MERGE point 40; proven in real CI by the chair, run 42808855501). Its catching power was EXECUTED at the merge, not claimed (STYLE-2-MERGE-7, 2026-11-11): package.json's `build` planted back to a bare `vite build` (the default heap, the exit-134 state the pin guards) reddened exactly '`npm run build` runs Vite through node with --max-old-space-size of at least 4096' (1 failed | 1 passed); package.json restored from a copy taken before the plant and cmp-verified byte-identical, the pin 2/2 green after. A rationale rather than a standing sweep plant: scripts/mutation-sweep.sh reverts by git checkout against a shared worktree, and the merge seat adds no sweep row."
     }
   },
   "meta": {
