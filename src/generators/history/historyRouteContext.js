@@ -46,7 +46,7 @@ export function deriveHistoryRouteContext(
         ? (maritimeSupported
           ? 'the dockside warehouses'
           : 'the riverside wharves')
-        : 'the market quarter',
+        : 'the merchants\' quarter', // COHERENCE-PRESUME (2026-11-11): the town may have no market
     disasterBuildingType: tradeCommodity === 'timber'
       ? 'timber stockpiles and workshop buildings'
       : waterborne
