@@ -1098,10 +1098,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.arabic.socialTexture[0]",
-     "text": "Neighborhood, household, legal, charitable, and commercial obligations intersect in markets and courtyards.",
-     "needs": [
-      "market"
-     ],
+     "text": "Neighborhood, household, legal, charitable, and commercial obligations intersect in streets and courtyards.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": []
@@ -1783,10 +1781,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.east_asian.foodways[1]",
-     "text": "Markets, shared waterworks, fermentation, and intensive garden production structure urban food supply.",
-     "needs": [
-      "market"
-     ],
+     "text": "Shared waterworks, fermentation, and intensive garden production structure urban food supply.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -2037,7 +2033,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.mesoamerican.foodways[1]",
-     "text": "Intensive plots, terraces, raised fields, and market redistribution support dense populations.",
+     "text": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
      "needs": [
       "population: >= middling"
      ],
@@ -2143,10 +2139,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.mesoamerican.socialTexture[0]",
-     "text": "Ward membership, craft specialization, market standing, tribute duty, and ritual office structure public life.",
-     "needs": [
-      "market"
-     ],
+     "text": "Ward membership, craft specialization, craft standing, tribute duty, and ritual office structure public life.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": []
@@ -2309,10 +2303,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.south_asian.foodways[1]",
-     "text": "Irrigation, tanks, market kitchens, preservation, and ritual food rules shape supply and consumption.",
-     "needs": [
-      "market"
-     ],
+     "text": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -2447,10 +2439,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.south_asian.socialTexture[1]",
-     "text": "Water access, market standing, ritual service, and credit relationships are everyday political facts.",
-     "needs": [
-      "market"
-     ],
+     "text": "Water access, trade standing, ritual service, and credit relationships are everyday political facts.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": []
