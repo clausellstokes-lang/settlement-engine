@@ -52,7 +52,7 @@
       "banner": 9,
       "dated": 235,
       "sha-pin": 2,
-      "tree": 173
+      "tree": 174
     },
     "files": {
       "banner": [
@@ -528,7 +528,8 @@
     "_rosterGrowth2026-11-10-green-tip": "ONE document JOINED the roster by being BORN into it (seat GREEN-TIP, a child of the chair session session_01FbPLbejcfwX5nii12VM673, on lane/green-tip-2026-11-10 cut from bf14617ca): `dated` 216 -> 217, docs/chair/2026-11-10/GREEN-TIP-2026-11-10.md, the seat's record, born dated; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-10-style-2-merge-green-tip": "THE UNION AT THE GREEN-TIP MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 231 -> 232 (docs/chair/2026-11-10/GREEN-TIP-2026-11-10.md, the lane's record, born dated).",
     "_rosterGrowth2026-11-10-remote-path": "ONE document JOINED the roster by being BORN into it (REMOTE-PATH, session session_01FbPLbeHexfXLzZ7nsgYkvY, on lane/remote-path-2026-11-10 cut from 8778118, measured once with this walker's own arm): `dated` 226 -> 227, docs/REMOTE_PATH_2026-11-10.md, the lane's record, born dated, 0 past-EOF; nothing changed class.",
-    "_rosterGrowth2026-11-10-style-2-merge-remote-path": "THE UNION AT THE REMOTE-PATH MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 233 -> 234 (docs/REMOTE_PATH_2026-11-10.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-10-style-2-merge-remote-path": "THE UNION AT THE REMOTE-PATH MERGE (STYLE-2-MERGE-6, session session_01FbPLbcyR4x9KFsR6FAc3F2): both sides' notes kept; `dated` 233 -> 234 (docs/REMOTE_PATH_2026-11-10.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-11-style-2-merge-record-38": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-7, session session_01FbPLbf9PtvYaSbTPWUnwoY): `tree` 173 -> 174, docs/shift-records/2026-11-11-style-2-merge-38-residue-herald.json, record 38, born into the tree class; measured once by this walker; nothing changed class."
   },
   "rows": []
 }
