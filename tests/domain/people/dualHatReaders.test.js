@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { cardHatsOf, cardOfficeOf, cardPowerLine, governingNameOf } from '../../../src/domain/people/cardPowers.js';
 import { seatHouseFaceOf } from '../../../src/domain/dossier/seatHolder.js';
 import { deriveLevers } from '../../../src/domain/crisis/crisisCast.js';
+import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { institutionsWithServices } from '../../../src/components/new/tabs/InstitutionsTab.jsx';
 
 const miller = Object.freeze({
@@ -43,6 +44,9 @@ describe('COHERENCE-POWERS — the dual hat, as the page reads it', () => {
   it('the seat row names both hats; an office face, its role', () => {
     expect(cardHatsOf(miller)).toBe('the miller and Mayor');
     expect(cardHatsOf(mayor)).toBe('the mayor');
+    // the ruling chain the Power tab's seat row and the governance account print (powerStrata.js :: rulingChainOf)
+    expect(rulingChainOf(born).npc).toMatchObject({ name: 'Egilbert Neumann', role: 'the miller and Mayor' });
+    expect(rulingChainOf(saved).npc).toMatchObject({ name: 'Klara Schröder', role: 'the mayor' });
   });
 
   it('the seat\'s house with no face of its own is faced by the seat holder; a save before the cure keeps its office face', () => {

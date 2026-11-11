@@ -259,6 +259,7 @@ export function groupRelationships(relationships) {
  * stand-ins, and the settlement-wide fallback is gone.
  */
 import { seatCandidatesOf, isOfficeStandIn } from './seatHolder.js';
+import { cardHatsOf } from '../people/cardPowers.js';
 import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderRead.js';
 
 /**
@@ -350,7 +351,8 @@ export function rulingChainOf(settlement) {
   if (!npc && governing && !vacant) {
     const chosen = liveSeatCandidatesOf(settlement)[0] || null;
     if (chosen) {
-      npc = { name: String(chosen.name || ''), role: String(chosen.role || ''), via: /** @type {'roster'} */ ('roster') };
+      // COHERENCE-POWERS: the dual-hat leader is named by both hats ("the miller and Mayor"); any other holder by its role
+      npc = { name: String(chosen.name || ''), role: cardHatsOf(chosen), via: /** @type {'roster'} */ ('roster') };
     }
   }
 

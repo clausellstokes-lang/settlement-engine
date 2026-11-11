@@ -25,7 +25,6 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 import { FLUSH } from '../../../design/flush.js';
-import { cardHatsOf } from '../../../domain/people/cardPowers.js'; // COHERENCE-POWERS: the seat row names both hats
 
 /**
  * The legitimacy banner's mount id, bound once. It is used at TWO draws below and the
@@ -140,7 +139,7 @@ function RulingChainBlock({ settlement }) {
       {chain.npc && (
         <ChainRow label="The seat">
           <strong data-testid="ruling-chain-npc">{chain.npc.name}</strong>
-          <span style={{color:MUTED}}>{`, ${cardHatsOf(chain.npc)}`}</span>
+          <span style={{color:MUTED}}>{`, ${chain.npc.role}`}</span>
         </ChainRow>
       )}
       {chain.absence && (

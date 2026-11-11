@@ -25,7 +25,6 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
-import { cardHatsOf } from '../people/cardPowers.js';
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
@@ -273,7 +272,7 @@ export function governanceAccountOf(settlement, opts = {}) {
   // filled, …"); nothing else of the paragraph changed.
   // 1. THE SEAT.
   if (chain.npc && text(chain.npc.name)) {
-    const role = text(cardHatsOf(chain.npc)); // COHERENCE-POWERS: the dual-hat leader is named by both hats
+    const role = text(chain.npc.role);
     const who = role ? `${text(chain.npc.name)}, ${role},` : text(chain.npc.name);
     const whoEnd = role ? `${text(chain.npc.name)}, ${role}` : text(chain.npc.name);
     sentences.push([
