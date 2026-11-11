@@ -123,9 +123,13 @@ export function foodLandOf(tier, institutions, config, landRoute) {
   // ── THE FOOD SOURCES (FOOD-3) — the five resource+institution pairings the balance reads,
   // LARGEST CONTRIBUTION FIRST (the order of their bonuses below: grain .25, livestock .10, fish
   // .09, mill .08; game, the small-place hunt, last). A place whose pairings all miss lists none.
+  // COHERENCE-AGREE (the chair's food-sources ruling, 2026-11-11): worked land is a source by its own
+  // name — available fields or floodplain are grain, available grazing is livestock, read as the
+  // resource record reads availability, with or without a farm or pastoral row. Game and fish keep
+  // their rules, and the production bonus below stays paired as it was: naming a source grows nothing.
   const foodSources = /** @type {Array<'grain'|'livestock'|'fish'|'mill'|'game'>} */ ([
-    ['grain', (hasSubsistence || hasFarmland) && hasRes('grain_fields', 'fertile_floodplain')],
-    ['livestock', hasPastoral && hasRes('grazing_land')],
+    ['grain', hasRes('grain_fields', 'fertile_floodplain')],
+    ['livestock', hasRes('grazing_land')],
     ['fish', fishSource],
     ['mill', hasMill && hasRes('river_mills')],
     ['game', hasRes('hunting_grounds') && (hasHunting || ['thorp', 'hamlet', 'village'].includes(tier))],

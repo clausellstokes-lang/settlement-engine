@@ -7,6 +7,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 
 import { generateResourceAnalysis } from '../../src/generators/resourceGenerator.js';
 import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
+import { foodLandOf } from '../../src/generators/foodLand.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -76,5 +77,18 @@ describe('cure 5: the viability hooks open events and do not answer the record o
       (/\b(?:iron|metal)\b/i.test(h) && live.includes('iron_deposits'))
       || (/\btimber\b/i.test(h) && ['managed_forest', 'mountain_timber', 'shipbuilding_timber', 'timber'].some((k) => live.includes(k)))));
     expect(scarce).toEqual([]);
+  });
+});
+
+describe('cure 6 (the chair\'s food-sources ruling): worked land is a source by its own name', () => {
+  const land = (resources, institutions = []) => foodLandOf('town', institutions, { nearbyResources: resources, nearbyResourcesNativeDepleted: [], tradeRouteAccess: 'road', terrainType: 'plains' }, 'road');
+  test('available fields are grain and available grazing is livestock, with no farm or pastoral row', () => {
+    expect(land(['grain_fields', 'grazing_land']).foodSources).toEqual(['grain', 'livestock']);
+  });
+  test('naming the source grows nothing: the land\'s capacity is what the institutions make it', () => {
+    expect(land(['grain_fields', 'grazing_land']).effectiveAgri).toBe(land([]).effectiveAgri);
+  });
+  test('hunting grounds stay wild land for a town with no hunters', () => {
+    expect(land(['hunting_grounds']).foodSources).toEqual([]);
   });
 });
