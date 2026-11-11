@@ -39,6 +39,7 @@ describe('rulingStructure FACTION_DESC_SIBLINGS (CENSUS-1e unit 2)', () => {
 
   it('(c) COHERENCE-PRESUME: the town watch line names no militia (it printed in 91 of 91 corpus towns with none)', () => {
     const { desc } = militaryDesc('town', [{ name: 'Town watch', category: 'Defense' }]);
-    expect(desc).not.toMatch(/militia/i);
+    expect(desc?.startsWith(TOWN_WATCH)).toBe(true);
+    expect(desc).not.toMatch(/militia/i); // anchored: the line above proves the town watch line is the one printed
   });
 });

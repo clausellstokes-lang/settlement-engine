@@ -147,7 +147,7 @@ describe('generation-level pins (Wave 5 #3)', () => {
     // ids inside this exact payload so a truncated or short-circuited serialization
     // reds here rather than passing all three leak scans below.
     expect(json).toContain(`"chainId":"${chains[0].chainId}"`);
-    expect(json).not.toMatch(/Blessed stores; divine provision/i); // COHERENCE-PRESUME re-keyed by identity (the note no longer names a granary); anchored: chain-id pin above
+    expect(json).not.toMatch(/Blessed stores; divine provision/i); // anchored: chain-id pin above (COHERENCE-PRESUME re-keyed the note by identity)
     expect(json).not.toMatch(/magically.sustained/i); // anchored: chain-id pin above
     expect(json).not.toMatch(/divine provision/i); // anchored: chain-id pin above
   });
