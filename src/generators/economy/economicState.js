@@ -798,6 +798,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // re-applies it after later passes append imports (factionCorrelationPass's
   // applySubsumption is INSTITUTION subsumption, not this).
   normalizeFinalTradeLists(primaryExports, primaryImports, tradeStreams.localProduction);
+  sayHowLittleGrain(primaryImports, _foodSec?.foodRecord); // COHERENCE-AGREE: the import list tells the food record's story
   // Keep exact owners sparse so vanilla economies remain byte-identical.
   const earlyTradeOwnership = deriveEarlyTradeOwnership({
     primaryExports, primaryImports, nativeTradeCandidates,
@@ -851,4 +852,4 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     };
 };
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
-import { buildPrimaryTradeLists } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
+import { buildPrimaryTradeLists, sayHowLittleGrain } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)

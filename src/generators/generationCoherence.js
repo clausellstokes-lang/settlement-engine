@@ -312,7 +312,7 @@ function resourceTruthFindings(settlement) {
  *   strategic  a yield clause of the strategic line the town's resources do not stand on
  *   hooks      a viability hook that names a war the record does not hold, or a material the town has
  *   safety     the safety text naming a mercenary company the defence home does not list
- *   food       grain a primary import, unqualified, where the town grows 90% or more of its need; a
+ *   food       bare grain a primary import, unqualified, where the town grows 90% or more of its need; a
  *              shortage import ("local fields depleted") beside the resource it says is spent
  * @param {any} settlement
  * @returns {{ resource: Array<{path:string, detail:string, evidence?:string}>, food: Array<{path:string, detail:string, evidence?:string}> }}
@@ -363,7 +363,7 @@ export function projectionAgreementFindings(settlement) {
   const imports = Array.isArray(settlement?.economicState?.primaryImports) ? settlement.economicState.primaryImports.map(String) : [];
   const grownPct = Number(settlement?.economicState?.foodSecurity?.foodRecord?.grownPct);
   for (const [index, label] of imports.entries()) {
-    if (/^(?:bulk )?grain\b/i.test(label) && !/\(/.test(label) && grownPct >= 90) {
+    if (/^(?:bulk )?grain(?: and foodstuffs)?$/i.test(label) && grownPct >= 90) {
       food.push(finding(`economicState.primaryImports[${index}]`, 'Grain stands as a primary import, unqualified, where the town grows most of its need.', `${label}; grown ${grownPct}%`));
     }
   }

@@ -3,10 +3,13 @@
  * 2026-11-11, §2): the town's own drawn facts override a terrain table, and a fact has one reader.
  * Each describe block was red at the lane's base (99bcc6944) and turns green with its own commit.
  */
-import { describe, expect, test } from 'vitest';
+import { beforeAll, describe, expect, test } from 'vitest';
 
 import { generateResourceAnalysis } from '../../src/generators/resourceGenerator.js';
 import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 describe('cure 1: the critical imports never deny a live local resource', () => {
   test('"metals" is not a critical import beside live iron; it is with no metal at all', () => {
@@ -42,5 +45,19 @@ describe('cure 3: the safety writer reads the mercenary fact from the defence ho
       [{ name: 'Town watch' }, { name: 'Hireling hall' }, { name: 'Town council' }]);
     expect(profile.guardEffectivenessDesc).not.toMatch(/mercenary compan/i);
     expect(profile.guardEffectivenessDesc).toMatch(/watch/i);
+  });
+});
+
+const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+  selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+const birth = (seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: seed.split('-')[1] }), null, { seed });
+
+describe('cure 4: the import list tells the food record\'s story', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test.each(['agree-town-0', 'agree-town-3'])('%s grows nine tenths of its need or more and says how little grain it brings in', (seed) => {
+    const eco = birth(seed).economicState;
+    expect(eco.foodSecurity.foodRecord.grownPct).toBeGreaterThanOrEqual(90);
+    expect(eco.primaryImports.filter((label) => /^(?:bulk )?grain(?: and foodstuffs)?$/i.test(label))).toEqual([]);
+    expect(eco.primaryImports).toContain('Grain (a little, beside its own harvest)');
   });
 });

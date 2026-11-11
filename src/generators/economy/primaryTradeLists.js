@@ -85,3 +85,27 @@ export function buildPrimaryTradeLists({ stressTypes, tradeStreams, tradeRoute, 
   }
   return { necessityImports, primaryExports, primaryImports };
 }
+
+/** The words that say how little grain a town that feeds itself brings in. */
+export const GRAIN_TOP_UP = 'Grain (a little, beside its own harvest)';
+
+/**
+ * COHERENCE-AGREE (the chair's charter of 2026-11-11, §2): the import list and the food record tell
+ * one story. A town that grows 90% or more of its need does not list grain as a primary import
+ * without saying how little: a bare grain entry ("Grain", "Bulk grain", "Bulk grain and foodstuffs")
+ * becomes GRAIN_TOP_UP. An entry that gives its reason in brackets, or a compound good a culture's
+ * demand names ("Grain and salted pork"), keeps its words. Mutates the list in place, as its
+ * neighbours here do.
+ * @param {string[]} primaryImports @param {{ grownPct?: unknown } | null | undefined} foodRecord
+ */
+export function sayHowLittleGrain(primaryImports, foodRecord) {
+  if (!(Number(foodRecord?.grownPct) >= 90)) return;
+  primaryImports.forEach((label, index) => {
+    if (/^(?:bulk )?grain(?: and foodstuffs)?$/i.test(label)) primaryImports[index] = GRAIN_TOP_UP;
+  });
+  const seen = new Set();
+  for (let index = primaryImports.length - 1; index >= 0; index -= 1) {
+    if (primaryImports[index] !== GRAIN_TOP_UP) continue;
+    if (seen.size) primaryImports.splice(index, 1); else seen.add(index);
+  }
+}
