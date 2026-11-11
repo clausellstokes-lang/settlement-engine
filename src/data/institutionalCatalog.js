@@ -194,7 +194,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { name: 'Dairy farmer', face: 'the dairy farmer', tags: ['food', 'trade'], priorityCategory: 'economy' },
       at: {
         hamlet: { baseChance: 0.25, desc: 'Keeps cattle or goats for milk, butter, and cheese. The only reliable fat and protein source during grain shortages. Seasonal. Production peaks in summer.' },
-        village: { baseChance: 0.22, desc: 'Keeps cattle or goats for milk, butter, and soft cheese. Essential protein and fat during lean grain seasons. Sells surplus at the weekly market.' },
+        village: { baseChance: 0.22, desc: 'Keeps cattle or goats for milk, butter, and soft cheese. Essential protein and fat during lean grain seasons. Sells the surplus to neighbours.' },
       },
       ceiling: { tier: 'village', reason: 'Dairying is rural; towns buy milk, butter, and cheese at market.' },
     },
@@ -208,7 +208,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Wildfowler', face: 'the wildfowler' },
       at: {
-        village: { baseChance: 0.15, desc: 'Catches waterfowl and game birds using nets, traps, and trained birds. Supplies the market with ducks, geese, and pigeons.', tags: ['trade'], priorityCategory: 'economy' },
+        village: { baseChance: 0.15, desc: 'Catches waterfowl and game birds using nets, traps, and trained birds. Sells ducks, geese, and pigeons to the households here.', tags: ['trade'], priorityCategory: 'economy' },
       },
       ceiling: { tier: 'village', reason: 'Fowling is a marsh and field trade; towns buy the birds at market.' },
     },
