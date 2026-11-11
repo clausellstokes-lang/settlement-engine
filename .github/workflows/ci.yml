@@ -285,7 +285,14 @@ jobs:
 
   e2e:
     name: Chromium end-to-end
-    runs-on: ubuntu-latest
+    # PINNED to ubuntu-24.04, NOT ubuntu-latest (CI-FIT, 2026-11-10). GitHub moved `ubuntu-latest` to Ubuntu 26.04,
+    # and the pinned Playwright 1.60.0 cannot install a browser there: master's scheduled run 42635256465
+    # (2026-11-09 14:30 UTC, commit db832c892, the same commit green on 2026-11-07) failed this job in under a
+    # second at `npx playwright install --with-deps chromium webkit` with "Cannot install dependencies for
+    # ubuntu26.04-x64 with Playwright 1.60.0! / Error: ERROR: Playwright does not support chromium on
+    # ubuntu26.04-x64". The chair ruled a runner pin, NOT a Playwright bump: the seats' containers carry a
+    # pre-installed browser matched to 1.60.0. Lift the pin with the Playwright bump that supports 26.04.
+    runs-on: ubuntu-24.04
     # This job's suite MORE THAN DOUBLED on this branch and its cap was never revisited:
     # 8 -> 14 chromium spec files and 39 -> 81 `test(` declarations (measured at this tip
     # against master b9c494afe, excluding e2e/performance/** which playwright.config.js
@@ -374,7 +381,11 @@ jobs:
 
   performance:
     name: Production-build browser performance
-    runs-on: ubuntu-latest
+    # PINNED to ubuntu-24.04 for the same cause as the e2e job above (CI-FIT, 2026-11-10): on Ubuntu 26.04
+    # (`ubuntu-latest` since the image moved) Playwright 1.60.0's `npx playwright install --with-deps chromium`
+    # fails ("Playwright does not support chromium on ubuntu26.04-x64"), measured on master's scheduled run
+    # 42635256465 (2026-11-09, commit db832c892). Lift it with the Playwright bump that supports 26.04.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
