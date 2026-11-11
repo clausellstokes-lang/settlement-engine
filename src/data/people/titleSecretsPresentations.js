@@ -437,7 +437,7 @@ const ROWS = [
     P("transactional", "Walks backwards down the rope walk as they talk, twisting fibre the whole time.",
       "Sells by length and weight; tells you what load a rope will bear and charges for it."),
     P("welcoming", "Friendly and chatty, with rough hands and a sailor's turn of phrase.",
-      "Talks about who is buying rope and why; hears a great deal from the docks and the builders."),
+      "Talks about who is buying rope and why; hears a great deal from the carters and the builders."),
     P("dismissive", "Too busy to stop. The walk is long and the work has to keep moving.",
       "Gives a price and a day and keeps walking."),
   ]],
@@ -585,7 +585,7 @@ const ROWS = [
       "The officer who took the blame has come back, and has not forgotten"),
   ], [
     P("cautious", "Stiff-backed and formal, in a coat that has seen better days. Walks visitors along the wall, not inside it.",
-      "Answers questions about the citadel with care; never says how many are in the garrison."),
+      "Answers questions about the citadel with care; never says how strong it is."),
     P("dismissive", "Proud and impatient with outsiders. The citadel's business is not yours.",
       "Gives permission to pass or refuses it, and does not explain either."),
     P("transactional", "Correct and tired. Talks about duty and supplies as if they were the same thing.",
@@ -799,7 +799,7 @@ const ROWS = [
     P("transactional", "Precise and formal, with a scale on the desk and a weight for every coin.",
       "Will change coin and test metal at the posted rate; asks who you are first."),
     P("dismissive", "Proud of the office and short with anyone who is not part of it.",
-      "Tells you to take your business to a money-changer."),
+      "Tells you the mint strikes coin and does not change it."),
   ]],
   ["the lodge master", 204, [
     S("Has been collecting a pension for veterans who died years ago and keeping the money",
