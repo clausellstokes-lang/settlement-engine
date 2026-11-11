@@ -8,6 +8,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateResourceAnalysis } from '../../src/generators/resourceGenerator.js';
 import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 import { foodLandOf } from '../../src/generators/foodLand.js';
+import { getInstFlags } from '../../src/generators/helpers.js';
 import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -99,5 +100,13 @@ describe('cure 8: the health summary\'s "paid hands" reads the defence home', ()
     const inst = { hasMilitaryInst: true };
     expect(institutionsPoolKey(inst, { institutions: [{ name: 'Citizen militia' }, { name: 'Town walls' }] })).not.toBe('GARRISONED');
     expect(institutionsPoolKey(inst, { institutions: [{ name: 'Town watch' }] })).toBe('GARRISONED');
+  });
+});
+
+describe('cure 9: the flag bag\'s hired company and gate are the defence home\'s answers', () => {
+  test('a veteran\'s lodge is not a mercenary company, and a palisade has no gates of record', () => {
+    expect(getInstFlags({}, [{ name: "Veteran's lodge" }]).inst.hasMercenary).toBe(false);
+    expect(getInstFlags({}, [{ name: 'Palisade or earthworks' }]).inst.hasGates).toBe(false);
+    expect(getInstFlags({}, [{ name: 'Mercenary company' }, { name: 'Town walls' }]).inst).toMatchObject({ hasMercenary: true, hasGates: true });
   });
 });

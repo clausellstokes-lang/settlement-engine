@@ -4,7 +4,7 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './helpers.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
+import {clamp} from './helpers.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
 import {
   isMaterializedCustomContent,
   nativeSemanticNames,
@@ -45,16 +45,19 @@ const PORT_INFRA_RE = /\b(?:port|docks?|harbou?r|shipyard|navy)\b/;
 const getInstitutionNames = (institutions = []) => {
   const names = nativeSemanticNames(institutions)
     .map(name => name.toLowerCase());
+  const home = defenseFactsOf({ institutions });
   return {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
     hasGarrison:      hasAny(names, ['garrison','barracks','professional guard',PROFESSIONAL_CITY_WATCH,'multiple garrison']),
     hasMilitia:       hasAny(names, ['citizen militia','militia']),
     hasWatch:         hasAny(names, ['town watch','city watch',PROFESSIONAL_CITY_WATCH,'village watch']), // F1: the village rung
-    hasMercenary:     hasAny(names, ['mercenary company','mercenary quarter','hired muscle','hireling hall','free company hall','veteran\'s lodge']),
+    // COHERENCE-AGREE: a hired company and a gate are the defence home's answers (defenseFactsOf):
+    // this list counted a hireling hall and a veteran's lodge as a company, and a palisade as gates.
+    hasMercenary:     home.hasMercenary,
     hasFreeCompany:   hasAny(names, ['free company hall']),
     hasCharterHall:   hasAny(names, ["adventurers' charter hall","adventurers' guild hall","multiple adventurers'","adventurers' guild","hireling hall"]),
     hasWalls:         hasAny(names, ['walls','citadel','gates (if walled)','inner citadel','massive walls','palisade','earthwork']),
-    hasGates:         hasAny(names, ['gates','town walls','city walls','massive walls','palisade']),
+    hasGates:         home.hasGate,
     hasPrison:        hasAny(names, ['prison','stocks','large prison','massive prison']),
     hasCourtSystem:   hasAny(names, ['courthouse','court buildings','democratic assembly','city hall','town hall']),
     hasMarket:        hasMarketInstitution(institutions), // CENSUS-1 fact 5: the market home ('black market' and 'stock exchange' are not markets)

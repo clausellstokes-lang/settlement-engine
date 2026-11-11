@@ -27,7 +27,7 @@ const REGISTER = JSON.parse(readFileSync(join(ROOT, 'tests/lint/defenceFactReade
 /** The register's total at its first commit: it never rises. */
 const FIRST_TOTAL = 77;
 
-const ASSIGN = /\bhas(?:Walls|Garrison|Militia|Watch|Mercenary)\s*[:=](?!=)(?!\s*(?:defen[cs]e|d)\b\.)/;
+const ASSIGN = /\bhas(?:Walls|Garrison|Militia|Watch|Mercenary)\s*[:=](?!=)(?!\s*(?:defen[cs]e|d|home)\b\.)/;
 const WORD = String.raw`\b(?:walls?|garrison|barracks|militia|watch|mercenar\w*)\b`;
 const CALL = /\b(?:includes|test|hasAny|hasInst|some|match|find|filter)\s*\(/;
 const LITERAL = new RegExp(String.raw`'[^'\n]*${WORD}[^'\n]*'|"[^"\n]*${WORD}[^"\n]*"|\x60[^\x60\n]*${WORD}[^\x60\n]*\x60|/[^/\n]*${WORD}[^/\n]*/[gimsuy]*`, 'i');
@@ -66,6 +66,7 @@ describe('the defence facts have one reader (shrink-only)', () => {
     expect(reads("hasMercenary: hasAny(names, ['mercenary company']),")).toBe(true);
     expect(reads("  const watchExists = instNames.some(n => /watch|guard/i.test(n));")).toBe(true);
     expect(reads('hasMercenary: defence.mercenary,')).toBe(false);
+    expect(reads('hasMercenary: home.hasMercenary,')).toBe(false);
     expect(reads("const inScope = wall.scope.includes('*') || wall.scope.includes(register);")).toBe(false);
     expect(Object.keys(counted()).length).toBeGreaterThan(10);
   });
