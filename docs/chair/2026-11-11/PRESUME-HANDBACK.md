@@ -57,3 +57,31 @@ On the same seeds, the class's rows printed 481 times on the base corpus and 0 a
 ## 6. Class V (measured, nothing built)
 
 The Overview's Systems Health row prints Prosperity, Safety, Viability and Defense as bare tags (`src/components/new/tabs/OverviewTab.jsx`, StatusTag). No reason sits beside them; only the section's help pill explains, and only in general. The Defense tab prints the readiness label next to a "Guard assessment" paragraph, the posture lines and five readiness rows (`DefenseTab.jsx`), so the defence label has its reasons on its own tab. The food band and the prosperity reasons beyond the Overview were not traced.
+
+## 7. The equal-failing-set statement (the six directories, base 99bcc6944 vs the tip measured at 7f0c49348)
+
+The base had 1 failing title (timelineVariety "within-category variety", which is green at the tip) plus the file-level failure of tests/lint/ledgerCitationIntegrity.test.js (it reads the read-only ledger branch; that failure is the same at both). At 7f0c49348 there were 30 failing titles. I cured three test sets after that run:
+
+- **negativeAssertionAnchor ×2:** my two unanchored negatives, fixed at 077dad264.
+- **proseWiringCensus ×2:** the census re-take at 6749d7784.
+- The lighting census was already refrozen.
+
+The rows that stay red at the tip are moved by the lane's text and named as the merge seat's act. This is PLAUSIBLE: each reads a frozen corpus or the recorded golden, and I bisected only writerReach.
+
+- **The goldens:** generatorGoldenMaster; espionageDormancyFence's driven golden; generationForkCensus A1.
+- **The golden-corpus null-change pins:**
+  - pipelinePinnedMode A1, A2 and A5
+  - pipelinePinnedChoosers A1
+  - dmLayerGolden A7
+  - worldFactRederive A7
+  - editWorldFactResources A2 and A6
+  - rosterFinalUnderHeldRoster A1
+  - powerEconomyFreshness A4
+  - nameHeldThroughAssembly A1
+- **The frozen-digest corpora:**
+  - institutionBudgetPromise (X-46 car 3 and car 4)
+  - proseFamilyContract A1, A3 and A5
+  - editCorpusRatchet A3 and A7
+  - writerReach ×3 (red from 9e4e0402a, per the chair's ruling)
+  - the Wizard News homes count (newsHeadlineContract and newsVoiceContract fail at load with "homes drifted: expected 44, got 43")
+- **landingFixtureFreshness ×2:** the landing fixture is derived from the engine; FOUNDING-WORLDS re-runs it.
