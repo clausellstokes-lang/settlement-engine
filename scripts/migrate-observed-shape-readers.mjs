@@ -2460,8 +2460,14 @@ export const TRAIN_CAR4_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
-/** The schema-39 → 40 delta: the THREE bookkeeping paths (the corpus definition is unchanged). */
+/** The schema-39 → 40 delta: the THREE bookkeeping paths (the corpus definition is unchanged) and, MEASURED
+ *  at the style wave's final tip (STYLE-2-MERGE closing act 5, 2026-11-11), `package.json`: CI-FIT's
+ *  001fc7e00 (merged at STYLE-2-MERGE point 40, 4ca5cee57) gave `build` its own heap — a build-script edit
+ *  that moves no scanned or executed source — while the register's ordinary `--write` stood refused on the
+ *  `outcome on outcome` row (point 12), so the drift reached this rung un-absorbed. Act 2 was cut at the
+ *  SW-B7b tip with three paths; at the final tip the transition is these four, or the door refuses. */
 export const PUBLIC_PROSE_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
   'scripts/check-observed-shape-readers.mjs',
   'scripts/lib/observed-shape-baseline.mjs',
   'scripts/migrate-observed-shape-readers.mjs',
