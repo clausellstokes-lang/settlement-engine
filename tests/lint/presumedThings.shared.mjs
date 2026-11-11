@@ -146,10 +146,7 @@ const atomWord = (w) => w.trim().replace(/^no\s+/i, '').toLowerCase();
  */
 function declarationWordsAround(node) {
   /** @type {string[]} */ const out = [];
-  const strings = (n) => {
-    if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) out.push(n.text);
-    ts.forEachChild(n, strings);
-  };
+  const strings = (n) => collectStrings(n, out);
   let cur = node.parent;
   for (let depth = 0; cur && depth < 5; depth++, cur = cur.parent) {
     if (ts.isObjectLiteralExpression(cur)) {
@@ -174,12 +171,52 @@ function isKeyOrTwinOf(node) {
 }
 
 /**
+ * The TEXT-KEYED declarations of one source text: a table whose key is a line's own text and whose
+ * value declares it (`DESC_VARIANT_DECLARATIONS`, a sibling set `'<text>': declaredSet(…)`). Text →
+ * the declaration words. Read over the whole tree first, because a line and its declaration may
+ * live in two files (`rulingStructure.js` prints what `powerSiblings.js` declares).
+ * @param {string} rel @param {string} src
+ * @returns {Map<string, string[]>}
+ */
+export function keyedDeclarations(rel, src) {
+  const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+  /** @type {Map<string, string[]>} */ const out = new Map();
+  const visit = (n) => {
+    if (ts.isPropertyAssignment(n) && (ts.isStringLiteral(n.name) || ts.isNoSubstitutionTemplateLiteral(n.name))) {
+      const words = [];
+      const read = (m) => {
+        if (ts.isObjectLiteralExpression(m)) {
+          for (const p of m.properties) {
+            const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
+            if (name && DECL_PROPS.has(name) && ts.isPropertyAssignment(p)) collectStrings(p.initializer, words);
+          }
+        }
+        if (ts.isCallExpression(m)) for (const a of m.arguments) if (ts.isArrayLiteralExpression(a)) collectStrings(a, words);
+        ts.forEachChild(m, read);
+      };
+      read(n.initializer);
+      if (words.length) out.set(n.name.text, [...(out.get(n.name.text) || []), ...words.map(atomWord)]);
+    }
+    ts.forEachChild(n, visit);
+  };
+  visit(sf);
+  return out;
+}
+
+/** @param {any} n @param {string[]} out */
+function collectStrings(n, out) {
+  if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) out.push(n.text);
+  ts.forEachChild(n, (m) => collectStrings(m, out));
+}
+
+/**
  * Arm 1 over one source text: one hit per (literal, thing) that is NOT declared.
  * @param {string} rel the file's path from the repository root
  * @param {string} src
+ * @param {Map<string, string[]>} [keyed] the tree's text-keyed declarations (`keyedDeclarations`)
  * @returns {Array<{ file: string, thing: string, text: string }>}
  */
-export function scanSource(rel, src) {
+export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
   /** @type {Array<{ file: string, thing: string, text: string }>} */ const hits = [];
   const visit = (n) => {
@@ -188,7 +225,7 @@ export function scanSource(rel, src) {
       let declared = null;
       for (const sentence of sentencesOf(n.text)) {
         for (const thing of thingsNamedIn(sentence)) {
-          declared ??= declarationWordsAround(n);
+          declared ??= [...declarationWordsAround(n), ...(keyed.get(n.text) || [])];
           const atoms = THINGS[thing].atoms.map((a) => a.toLowerCase());
           if (declared.some((w) => atoms.includes(w))) continue;
           if (!hits.some((h) => h.thing === thing && h.text === n.text)) hits.push({ file: rel, thing, text: n.text });
@@ -217,7 +254,10 @@ export function listFiles(root) {
 
 /** @param {string} root @returns {Array<{ file: string, thing: string, text: string }>} */
 export function scanTree(root) {
-  return listFiles(root).flatMap((rel) => scanSource(rel, readFileSync(join(root, rel), 'utf8')));
+  const files = listFiles(root).map((rel) => [rel, readFileSync(join(root, rel), 'utf8')]);
+  /** @type {Map<string, string[]>} */ const keyed = new Map();
+  for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src)) keyed.set(k, [...(keyed.get(k) || []), ...v]);
+  return files.flatMap(([rel, src]) => scanSource(rel, src, keyed));
 }
 
 // ── ARM 2: the printed record ─────────────────────────────────────────────────────────────────

@@ -42,8 +42,10 @@ describe('the rule book', () => {
       "export const A = ['The militia drills on the green every week.'];",
       "export const B = [{ text: 'The militia drills on the green every week.', needs: ['militia'] }];",
       "export const C = [{ text: 'The quiet town has no militia at all.', crisis: ['any'] }];",
-      "export const D = { 'The militia drills on the green every week.': declaredSet('The militia drills on the green every week.', ['militia']) };",
+      "export const D = { 'The militia musters at the gate each spring.': declaredSet('The militia musters at the gate each spring.', ['militia']) };",
       "export const E = [{ text: 'Grain is sold at the weekly market here.', excludes: ['market'] }];",
+      "export const F = ['Cheese goes to the weekly market in summer.'];",
+      "export const G = { 'Cheese goes to the weekly market in summer.': Object.freeze({ needs: Object.freeze(['market']) }) };",
     ].join('\n');
     const hits = scanSource('planted.js', src);
     expect(hits).toEqual([{ file: 'planted.js', thing: 'militia', text: 'The militia drills on the green every week.' }]);
