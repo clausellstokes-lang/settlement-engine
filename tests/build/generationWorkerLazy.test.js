@@ -435,7 +435,19 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   5ee39a56c; ~60 KB of the car's gzip rise) and people/goals.js's dealer · the boundary cure, the landing fixture, the floor
 //   and type fixes 0. The sum closes exactly: 1,746,551 + 21,787 + 7,124 + 74 - 4 + 40 + 201,083 = 1,976,655, the final tip's
 //   worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1976655;
+// 1,976,655 -> 2,008,268 (2026-11-11, STYLE-2-MERGE-7, THE STYLE WAVE'S CLOSING ACT 7; the W0-CLOSE idiom, the chair's ruling (B3) —
+// the ceiling re-recorded ONCE at the final tip at the measured figure, every byte attributed by merge point, NO buy-back;
+// VETOABLE BY THE OWNER): A RISE OF 31,613 B. MEASURED by a fresh production build of every first-parent merge point's tree; the
+// base bd07005b9 reads 1,976,655 (the ceiling, exactly). By point (every point not named: 0):
+//   SW-1 CAUSE-CONJUNCTION (2) -1 · SW-2 INSTITUTIONS (3) -321 · SW-3 REALM-PROSE (4) +12 · SW-4 HOOKS-CONNECTIVE (5)
+//            +11 · SW-5 CRISIS-VANTAGES (6) +36 · SW-B2 FIRST-IMPRESSIONS (7) +557 · SW-B5 FRAMES (9) +2,298 · SW-B6
+//            ECO-DEF-BLOCKS (10) +760 · SW-9 ODD-ROWS (15) +23 · SW-7 POWER-SIDE (16) +4,823 · SW-B1 CONTRADICTIONS
+//            (17) +826 · SW-10 HOOKS (19) +25,794 · FIX-SECTION-REGEN (21) +127 · SW-6 CRISIS-SURFACES (22) -5,697 ·
+//            SW-8 RENAME-POWERS (24) +32 · URBAN-FIX (25) +1,440 · SW-9b-B (27) +306 · GREEN-TIP (36) +69 · GEN-SPEED
+//            (39) +518
+//   The sum closes exactly at the final tip's worker bundle. The largest: SW-10 HOOKS +25,794 (the hook pools), SW-7 POWER-SIDE
+//   +4,823, SW-B5 FRAMES +2,298, URBAN-FIX +1,440; SW-6 CRISIS-SURFACES -5,697. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2008268;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

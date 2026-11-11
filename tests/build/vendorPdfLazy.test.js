@@ -635,7 +635,44 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //   Brotli 288,452 + 4,371 + 1,516 + 591 - 92 + 30 + 0 + 93 + 53 + 52 + 151 - 117 - 84 = 295,016.
 // (The compressed steps at an equal raw closure — WRITE-TITLES-14, OWNER-WORDS-DOSSIER, FIX-BUY-BUTTON and the last three
 // commits — are chunk-hash drift of tens of bytes, measured, not traced further.)
-const CLOSURE_BUDGET_BYTES = 1_104_215; // 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note above); was 1_075_758 (FIX-ARROW-PLAQUE's lane tip) / 1_075_589 (MERGE-WAVE step 4)
+// 2026-11-11, STYLE-2-MERGE-7 (THE STYLE WAVE'S CLOSING ACT 7; the W0-CLOSE idiom, the chair's ruling (B3): the ceilings
+// re-recorded ONCE at the style wave's MEASURED final tip, every byte attributed BY MERGE POINT, NO buy-back; VETOABLE BY THE
+// OWNER): A RISE. MEASURED by a fresh production build (node --max-old-space-size=4096 vite build) of every first-parent merge
+// point's tree, read the way this file reads it (the entry's static closure; gzip -9, Brotli q11); points before 31 built with
+// BOOT-TIP's FIRSTPAINT-4 cure (59258e7ea) cherry-picked, its own sweep's method. The base bd07005b9 reads 1,104,215 raw, the
+// budget exactly; its compressed closure reads 351,602 / 295,116 (+12 / +100 over the budgets recorded at 188a2c498: chunk-hash
+// drift of the cured build, measured, not traced). By point (every point not named: 0; BOOT-TIP's §4 table reproduced, its
+// +713 measured at point 16 SW-7, not point 17):
+//   raw    1,104,215 + SW-5 CRISIS-VANTAGES (6) +169 · SW-B5 FRAMES (9) -5 · SW-B7a PARTY-LINK (11) +13 ·
+//            TIER-PARITY-FIX (14) -209 · SW-7 POWER-SIDE (16) +713 · SW-12 PULSE-LINES (18) +2,490 · SW-10 HOOKS (19)
+//            +11,321 · FIX-SECTION-REGEN (21) +120 · SW-6 CRISIS-SURFACES (22) +12 · SW-B7b PROJECTION (23) +912 ·
+//            URBAN-FIX (25) +220 · ABOUT-CURRENT (28) +148 · COMPENDIUM-HUB (29) +1,052 · STRICT-TIP (30) +6 ·
+//            VEIL-FIX (33) +110 · COMPENDIUM-INSTITUTIONS (35) +16 · LIBRARY-SIMPLE (35) -33 · GREEN-TIP (36) +26 ·
+//            PULSE-SITES (36) -101 · REMOTE-PATH (37) +49 · GEN-SPEED (39) +16 = 1,121,260.
+//   gzip   351,602 + SW-1 CAUSE-CONJUNCTION (2) +2 · SW-2 INSTITUTIONS (3) +3 · SW-3 REALM-PROSE (4) +16 · SW-4
+//            HOOKS-CONNECTIVE (5) -12 · SW-5 CRISIS-VANTAGES (6) +153 · SW-B2 FIRST-IMPRESSIONS (7) +3 · SW-B4
+//            PDF-FOUNDRY (8) +11 · SW-B5 FRAMES (9) -25 · SW-B7a PARTY-LINK (11) +3 · SW-11 PULSE-CARD (12) +4 ·
+//            FIX-PULSE-DEFECTS (13) +15 · TIER-PARITY-FIX (14) -86 · SW-9 ODD-ROWS (15) -8 · SW-7 POWER-SIDE (16)
+//            +175 · SW-B1 CONTRADICTIONS (17) -7 · SW-12 PULSE-LINES (18) +845 · SW-10 HOOKS (19) +3,714 ·
+//            PULSE-FOLLOW-UP (20) -5 · FIX-SECTION-REGEN (21) +30 · SW-6 CRISIS-SURFACES (22) +5 · SW-B7b PROJECTION
+//            (23) +359 · SW-8 RENAME-POWERS (24) +56 · URBAN-FIX (25) +56 · SW-9b-A (26) -41 · SW-9b-B (27) +18 ·
+//            ABOUT-CURRENT (28) +76 · COMPENDIUM-HUB (29) +238 · STRICT-TIP (30) +20 · BOOT-TIP (31) -19 · VEIL-FIX
+//            (33) +38 · CONFIG-HEADERS (35) -9 · COMPENDIUM-INSTITUTIONS (35) -6 · LIBRARY-SIMPLE (35) -6 ·
+//            PULSE-SITES (36) -26 · REMOTE-PATH (37) +9 · RESIDUE (38) +33 · GEN-SPEED (39) -14 · CI-FIT (40) +2 ·
+//            FOUNDING-WORLDS (41) +3 = 357,225.
+//   Brotli 295,116 + SW-1 CAUSE-CONJUNCTION (2) -77 · SW-2 INSTITUTIONS (3) +79 · SW-3 REALM-PROSE (4) -98 · SW-4
+//            HOOKS-CONNECTIVE (5) -17 · SW-5 CRISIS-VANTAGES (6) +322 · SW-B2 FIRST-IMPRESSIONS (7) +124 · SW-B4
+//            PDF-FOUNDRY (8) -161 · SW-B5 FRAMES (9) -1 · SW-B6 ECO-DEF-BLOCKS (10) +7 · SW-B7a PARTY-LINK (11) -49 ·
+//            SW-11 PULSE-CARD (12) -88 · FIX-PULSE-DEFECTS (13) +49 · TIER-PARITY-FIX (14) -79 · SW-9 ODD-ROWS (15)
+//            +67 · SW-7 POWER-SIDE (16) +140 · SW-B1 CONTRADICTIONS (17) +64 · SW-12 PULSE-LINES (18) +713 · SW-10
+//            HOOKS (19) +3,074 · PULSE-FOLLOW-UP (20) -20 · FIX-SECTION-REGEN (21) +236 · SW-6 CRISIS-SURFACES (22)
+//            -146 · SW-B7b PROJECTION (23) +328 · SW-8 RENAME-POWERS (24) -36 · URBAN-FIX (25) -65 · SW-9b-A (26) -30
+//            · SW-9b-B (27) +62 · ABOUT-CURRENT (28) +145 · COMPENDIUM-HUB (29) +103 · STRICT-TIP (30) +122 ·
+//            BOOT-TIP (31) -126 · VEIL-FIX (33) +66 · CONFIG-HEADERS (35) -14 · COMPENDIUM-INSTITUTIONS (35) +94 ·
+//            LIBRARY-SIMPLE (35) -82 · GREEN-TIP (36) -23 · PULSE-SITES (36) +236 · REMOTE-PATH (37) -35 · RESIDUE
+//            (38) -4 · GEN-SPEED (39) -82 · CI-FIT (40) +26 · FOUNDING-WORLDS (41) +45 = 299,985.
+// (Steps at an equal raw closure are chunk-hash drift of tens of bytes, measured, not traced further.)
+const CLOSURE_BUDGET_BYTES = 1_121_260; // 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note above); was 1_104_215 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note above); was 1_075_758 (FIX-ARROW-PLAQUE's lane tip) / 1_075_589 (MERGE-WAVE step 4)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -665,8 +702,8 @@ const CLOSURE_BUDGET_BYTES = 1_104_215; // 2026-11-09: re-recorded AT MERGE-TRAI
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 351_590; // 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 342_975 (FIX-ARROW-PLAQUE's lane tip) / 342_846 (MERGE-WAVE step 4)
-const CLOSURE_BROTLI_BUDGET_BYTES = 295_016; // 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 288_470 (FIX-ARROW-PLAQUE's lane tip) / 288_452 (MERGE-WAVE step 4)
+const CLOSURE_GZIP_BUDGET_BYTES = 357_225; // 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 351_590 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 342_975 (FIX-ARROW-PLAQUE's lane tip) / 342_846 (MERGE-WAVE step 4)
+const CLOSURE_BROTLI_BUDGET_BYTES = 299_985; // 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 295_016 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 288_470 (FIX-ARROW-PLAQUE's lane tip) / 288_452 (MERGE-WAVE step 4)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -1871,9 +1908,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_104_215); // MERGE-TRAIN, 2026-11-09 (note at the constant: every byte by car); FIX-ARROW-PLAQUE 1_075_758 before; (note at the constant); MERGE-WAVE step 4 1_075_589 / FIX-ARROW-SECTIONS 1_072_604 before
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(351_590); // MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 342_975 before;; MERGE-WAVE step 4 342_846 before
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(295_016); // MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 288_470 before;; MERGE-WAVE step 4 288_452 before
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_121_260); // STYLE-2-MERGE-7 closing act 7, 2026-11-11 (note at the constant: every byte by merge point); MERGE-TRAIN 1_104_215 before; MERGE-TRAIN, 2026-11-09 (note at the constant: every byte by car); FIX-ARROW-PLAQUE 1_075_758 before; (note at the constant); MERGE-WAVE step 4 1_075_589 / FIX-ARROW-SECTIONS 1_072_604 before
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(357_225); // STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 351_590 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 342_975 before;; MERGE-WAVE step 4 342_846 before
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(299_985); // STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 295_016 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 288_470 before;; MERGE-WAVE step 4 288_452 before
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
