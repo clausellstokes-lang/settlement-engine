@@ -93,8 +93,8 @@ export const THINGS = Object.freeze({
   },
   bank: {
     words: /\bbankers?\b|\bbanking\b|\bmoney.?changers?\b|\bcounting.?houses?\b/i,
-    atoms: [],
-    absent: (_f, names) => !names.some((n) => /bank|money/i.test(n)),
+    atoms: ['institution: bank'],
+    absent: (f) => !f.hasInstitution('bank'),
   },
   guildhall: { words: /\bguild ?halls?\b/i, atoms: ['guild'], absent: (f) => !f.guild },
   war: {
