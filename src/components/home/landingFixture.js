@@ -118,9 +118,9 @@ export const fixture = {
       {
         "axis": "Trade connectivity",
         "from": "adequate",
-        "to": "critical",
-        "tone": "danger",
-        "reason": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows."
+        "to": "strained",
+        "tone": "warning",
+        "reason": "Wartime pressure disrupts trade flows. Criminal pressure disrupts trade flows."
       },
       {
         "axis": "Religious authority",
@@ -134,16 +134,10 @@ export const fixture = {
         "from": "strained",
         "to": "critical",
         "tone": "danger",
-        "reason": "Public legitimacy 11 colors trust. Criminal pressure erodes communal trust."
+        "reason": "Public legitimacy 13 colors trust. Criminal pressure erodes communal trust."
       }
     ],
     "advance": [
-      {
-        "week": "Week 1",
-        "season": "the spring of year 1",
-        "headline": "Cnocby turns to the faith of Vael",
-        "text": "After a long contest of devotion, Vael has become the patron creed of Cnocby."
-      },
       {
         "week": "Week 2",
         "season": "the spring of year 1",
@@ -163,16 +157,22 @@ export const fixture = {
         "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes behind."
       },
       {
-        "week": "Week 10",
+        "week": "Week 9",
         "season": "the spring of year 1",
-        "headline": "Crime takes hold of Cnocby",
-        "text": "Thieves and racketeers are working Cnocby's streets in the open."
+        "headline": "Elder Council captures an institution",
+        "text": "Control of Cnocby's multiple water sources is passing to Elder Council."
       },
       {
         "week": "Week 12",
         "season": "the spring of year 1",
-        "headline": "Cnocby's trade routes break down",
-        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
+        "headline": "Caoilfhinn Gallagher pushes through reforms",
+        "text": "Caoilfhinn Gallagher is out to come through the crisis."
+      },
+      {
+        "week": "Week 12",
+        "season": "the spring of year 1",
+        "headline": "Crime takes hold of Cnocby",
+        "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],
     "chronicle": [
@@ -191,7 +191,7 @@ export const fixture = {
       {
         "kind": "trade",
         "tone": "economic",
-        "week": "Week 10",
+        "week": "Week 12",
         "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],
