@@ -54,6 +54,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { hookPoolFor, poolFor, seatPoolFor } from './poolMap.js';
 import { seatMintTitleFor } from './mintTitles.js';
+import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 
 /** The keyed fork every card is drawn under (declared in the fork census). */
@@ -128,6 +129,93 @@ export function seatHouseOf(institutions) {
   });
   if (government) return { index: government.index, house: government.house, kind: 'government' };
   return hall;
+}
+
+/**
+ * THE GOVERNMENTS THAT SEND THEIR OWN MAN (COHERENCE-POWERS; the chair's ruling of 2026-11-11, 23:22
+ * UTC, on the owner's word "unless appointed by an appropriate government type"): a government whose own
+ * name says its leader is sent. Its leader is the seat as before (the office's face, or the minted seat),
+ * with no house in the town; every other government's leader wears the dual hat (`dualHatHouseOf`).
+ */
+export const APPOINTED_GOVERNMENTS = Object.freeze([
+  'Feudal Stewardship', 'Feudal Appointee', 'Noble Governorship', 'Ducal Governorship', 'Royal Authority',
+  'Noble Regency', 'Foreign Stewardship', 'Foreign Administration', 'Occupation Authority', 'Martial Administration',
+]);
+/** The kinds of house a civic government's leader comes from: the town's trades and its landed houses. */
+const CIVIC_HOUSE_KINDS = Object.freeze(['craft', 'merchant', 'noble']);
+
+/**
+ * A house's KIND for the dual hat: the largest share of its backing row; 'government' for a
+ * Government-shelf house or a hall (the offices), null for a house the catalogue does not place.
+ * @param {RosterRow} house @returns {string | null}
+ */
+export function houseKindOf(house) {
+  if (faceOfInstitution(house) === FACE_SEAT || familyOfInstitution(house)?.shelf === 'Government') return 'government';
+  const row = backingRowFor(house?.name);
+  if (!row) return null;
+  return Object.entries(row.shares).sort((x, y) => y[1] - x[1])[0][0];
+}
+
+/**
+ * THE DUAL HAT (COHERENCE-POWERS, the owner's word of 2026-11-11: "whoever leads teh town, in any type
+ * of government is wearing a dual hat (where appropraite) they come from an institution, and are elevated
+ * yet still tied to an institution"): the house the governing power's leader comes from, or null where
+ * the government sends its own man (APPOINTED_GOVERNMENTS), rules in the dark (a criminal ruler: the
+ * veil), or the town has no such house. A ruler of a kind takes the heaviest face-bearing house of that
+ * kind; a civic ruler, the heaviest of the town's trades and landed houses. Ties by roster order; a
+ * hideable house never leads. Reads the roster and the governing power only, so the birth step and the
+ * coherence seam answer alike.
+ * @param {RosterRow[]} institutions @param {unknown} governing the governing power's row
+ * @returns {{ index: number, house: RosterRow } | null}
+ */
+export function dualHatHouseOf(institutions, governing) {
+  const name = nameOf(/** @type {any} */ (governing));
+  if (!name || APPOINTED_GOVERNMENTS.includes(name) || isVeiledPower(governing)) return null;
+  const arch = backingArchetypeOf(/** @type {any} */ (governing));
+  if (arch === 'criminal') return null;
+  const kinds = RULER_KINDS.includes(arch) ? [arch] : CIVIC_HOUSE_KINDS;
+  const rows = Array.isArray(institutions) ? institutions : [];
+  /** @type {{ index: number, house: RosterRow, weight: number } | null} */
+  let best = null;
+  rows.forEach((house, index) => {
+    if (!house || isFabricInstitution(house) || isHideableHouse(house)) return;
+    const face = faceOfInstitution(house);
+    if (typeof face !== 'string' || face === FACE_SEAT) return;
+    if (!kinds.includes(/** @type {string} */ (houseKindOf(house)))) return;
+    const weight = backingRowFor(house.name)?.weight ?? 1;
+    if (!best || weight > best.weight) best = { index, house, weight };
+  });
+  return best ? { index: best.index, house: best.house } : null;
+}
+
+/**
+ * THE LEADER'S OFFICE TITLE (COHERENCE-POWERS; the table the chair ruled on 2026-11-11, vetoable by the
+ * owner): the title a dual-hat leader carries beside its house's, written to the card's `role` (its
+ * `title` stays its house's). Titles fit the government and the size; none is mandated. A government the
+ * table does not name takes the size's civic title.
+ */
+export const OFFICE_TITLES = Object.freeze({
+  'Elder Council': 'Elder', 'Free Elder Council': 'Elder', 'Elder Consensus': 'Elder', 'Household Council': 'Household Elder',
+  "Headman's Authority": 'Headman', 'Elected Reeve': 'Reeve', 'Priestly Guidance': 'Elder Priest',
+  'Town Mayor': 'Mayor', 'Town Council': 'Mayor', 'City Council': 'Lord Mayor', 'Grand Council': 'Lord Mayor',
+  'Democratic assembly': 'Speaker of the Assembly', 'City-State Council': 'First Councillor',
+  'Church Council': 'Warden of the Council', 'Ecclesiastical Council': 'Lord Warden', 'Theocratic Council': 'Lord Warden',
+  'High Theocratic Council': 'Lord Protector of the Faith',
+  'Militia Command': 'Captain of the Muster', 'Military Council': 'Captain-Mayor', 'Military City Council': 'Lord Marshal',
+  'Grand Military Council': 'Lord Marshal', 'Garrison Command': 'Lord Marshal',
+  'Merchant Council': 'Burgomaster', 'Merchant City Council': 'Lord Burgomaster', 'Grand Merchant Senate': 'Doge',
+  'Merchant oligarchy': 'First Magnate', 'Grand Merchant Oligarchy': 'First Magnate',
+  'Guild Council': 'Alderman', 'Guild Authority': 'Lord Alderman', 'Grand Guild Council': 'Lord Alderman',
+  'Merchant Guild Council': 'Master of the Guilds', 'Grand Guild Consortium': 'Master of the Guilds',
+  "Guildmasters' Moot": 'Alderman', 'Guildhall Council': 'Alderman', 'Grand Guild Assembly': 'Lord Alderman',
+  'Circle of Adepts': 'First Adept', 'Arcane Council': 'Archmage of the Council', 'Arcane Senate': 'Archmage of the Senate',
+  'Grand Arcane Council': 'Archmage of the Council',
+});
+const CIVIC_OFFICE_BY_SIZE = Object.freeze({ thorp: 'Elder', hamlet: 'Elder', village: 'Elder', town: 'Mayor', city: 'Lord Mayor', metropolis: 'Lord Mayor' });
+
+/** @param {string} government @param {string} tier @returns {string} */
+export function officeTitleFor(government, tier) {
+  return OFFICE_TITLES[government] || CIVIC_OFFICE_BY_SIZE[tier] || 'Mayor';
 }
 
 /**
@@ -405,8 +493,9 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
       hookPoolFor(face, family?.shelf ?? null, { seat: isSeat }).pool);
   });
 
-  // R-P2: no seat house and no hall — the seat's face is minted from the governing power.
-  if (!seat && governingName) {
+  // R-P2: no seat house and no hall — the seat's face is minted from the governing power; but where the
+  // leader wears the dual hat (a house of the town leads, COHERENCE-POWERS), no seat is minted.
+  if (!seat && governingName && !dualHatHouseOf(institutions, governing)) {
     const { title } = seatMintTitleFor(governingName);
     taken.add(SEAT_CARD_ID);
     birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title, veiled: isVeiledPower(governing) },

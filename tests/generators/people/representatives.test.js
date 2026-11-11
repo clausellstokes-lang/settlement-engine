@@ -18,7 +18,7 @@ import { generateSettlementPipeline } from '../../../src/generators/generateSett
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
 import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution } from '../../../src/data/institutionalCatalog.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
-import { SEAT_CARD_ID, YIELDS_TO, seatHouseOf } from '../../../src/generators/people/representatives.js';
+import { SEAT_CARD_ID, YIELDS_TO, seatHouseOf, dualHatHouseOf, officeTitleFor } from '../../../src/generators/people/representatives.js';
 import { seatMintTitleFor } from '../../../src/generators/people/mintTitles.js';
 import { isVeiledPower, veiledOfInstitution } from '../../../src/domain/people/cardVeil.js';
 
@@ -56,6 +56,8 @@ function expectedFaceHouses(settlement) {
 /** The claims every settlement of both corpora must hold. @param {any} s */
 function assertCast(s, label) {
   const cards = s.npcs.filter((n) => n.institution);
+  const governingName = nameOf(governingFactionOf(s));
+  const hat = governingName ? dualHatHouseOf(s.institutions, governingFactionOf(s)) : null;
   const houseCards = cards.filter((n) => n.institution.kind === 'house');
   const { names, seat } = expectedFaceHouses(s);
   // one card per face house and no house twice (the cards are DRAWN in roster order; the stored
@@ -69,7 +71,11 @@ function assertCast(s, label) {
     // anchored positively: an id is the house's slug (or the seat's / a power's mint), never today's `npc_<index>`
     expect(card.id, `${label}: ids derive from the house, never an index`).toMatch(/^npc_[a-z][a-z0-9_]*$/);
     // today's record body, every field the surfaces read
-    expect(card.role, `${label}: ${card.id} role is the title (M-1b)`).toBe(card.title);
+    // COHERENCE-POWERS re-key (the dual hat): the governing power's first, where a house leads, carries the
+    // office in its `role` beside its house's title; every other card's role is its title (M-1b)
+    if (hat && card.memberships.some((m) => m.power === governingName && m.rank === 1)) {
+      expect(card.role, `${label}: ${card.id} the leader's office`).toBe(officeTitleFor(governingName, s.tier));
+    } else expect(card.role, `${label}: ${card.id} role is the title (M-1b)`).toBe(card.title);
     // FIX-PUBLIC-VEIL: the veil bit is stamped at birth, a boolean, and equal to the one predicate read on the FINAL record
     expect(typeof card.institution.veiled, `${label}: ${card.id} carries the veil bit`).toBe('boolean');
     expect(card.institution.veiled, `${label}: ${card.id}'s bit is the predicate's on the record`).toBe(veiledOfInstitution(card.institution, s));
@@ -90,10 +96,11 @@ function assertCast(s, label) {
     // the seat's pools were drawn through, so the seat is found by its house (or its mint), not by role
     const seated = cards.filter((n) => (seat ? n.institution.key === seat.house.name : n.id === SEAT_CARD_ID));
     for (const n of seated) expect(n.role, `${label}: the seat's role is its title (M-1b)`).toBe(n.title);
-    expect(seated.length, `${label}: exactly one seat face (${seat ? seat.kind : 'minted'})`).toBe(1);
+    // COHERENCE-POWERS re-key: where a house leads (the dual hat) and no seat house rolls, no seat is minted
+    expect(seated.length, `${label}: exactly one seat face (${seat ? seat.kind : hat ? 'none: a house leads' : 'minted'})`).toBe(!seat && hat ? 0 : 1);
     // the SEAT mint by its id (the `other` powers' mints of step 3 are `kind: 'power'` too)
     const mint = cards.find((n) => n.id === SEAT_CARD_ID);
-    if (seat) expect(mint, `${label}: no seat mint beside a seat house`).toBeUndefined();
+    if (seat || hat) expect(mint, `${label}: no seat mint beside a seat house or a leading house`).toBeUndefined();
     else {
       expect(mint.id).toBe(SEAT_CARD_ID);
       // FIX-PUBLIC-VEIL (re-keyed with the cause): the mint's institution carries its veil bit, the governing power's

@@ -41,14 +41,15 @@
  */
 
 import { slugify } from '../../kernel/slugify.js';
-import { backingArchetypeOf, dealDoubledNiches, houseBacksOf } from '../../domain/dossier/powerSupport.js';
+import { backingArchetypeOf, dealDoubledNiches, houseBacksOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
+import { backingRowFor } from '../../data/institutionBacking.js';
 import { BACKING_ARCHETYPES } from '../../data/institutionBacking.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { hookPoolFor } from './poolMap.js';
-import { drawCardHooks, HOOKS_FORK_LABEL, mintPowerFace, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
+import { drawCardHooks, dualHatHouseOf, HOOKS_FORK_LABEL, houseKindOf, mintPowerFace, officeTitleFor, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
 import { isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 import { veiledEpithetFor } from '../npcDisplayNames.js';
@@ -329,6 +330,10 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
     if (!pushes.has(card)) pushes.set(card, guildPushOf(card, settlement, { organized, tuning: pushTuning }));
     return /** @type {number} */ (pushes.get(card));
   };
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const tier = String(settlement?.tier || 'town');
+  const rulerRow = governing ? factions.find((f) => nameOf(f) === governing) || null : null;
+  const rulerKind = rulerRow ? backingArchetypeOf(rulerRow) : null;
   // ── The three (R-P5), per power ──────────────────────────────────────────────────────────
   for (const power of powers) {
     const pool = members.get(power);
@@ -341,12 +346,30 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
     // FLOOR 1 — the seat first (the governing power's): the seat house's face, or the minted seat;
     // and an `other` power's own minted face first (R-P4: the mint IS its person)
     if (isGoverning) {
-      take(remaining.find((m) => (seatKey ? m.card.institution?.key === seatKey && m.card.institution?.kind === 'house' : m.card.id === SEAT_CARD_ID)));
+      // THE DUAL HAT (COHERENCE-POWERS): where the government does not send its own man, its first is the
+      // face of the house the leader comes from (representatives.js :: dualHatHouseOf), a member of the
+      // governing power whatever its house backs, carrying the office's title in its `role` (its `title`
+      // stays its house's). Else the seat as before: the seat house's face, or the minted seat.
+      const hat = rulerRow ? dualHatHouseOf(institutions, rulerRow) : null;
+      const leader = hat ? memberOrJoin(String(hat.house.name || ''), power, pool, remaining, all) : null;
+      if (leader) {
+        take(leader);
+        leader.card.role = officeTitleFor(power, tier);
+      } else {
+        take(remaining.find((m) => (seatKey ? m.card.institution?.key === seatKey && m.card.institution?.kind === 'house' : m.card.id === SEAT_CARD_ID)));
+      }
     } else {
       take(remaining.find((m) => m.card.institution?.kind === 'power' && m.card.institution?.key === power));
     }
+    // FLOOR 2, THE RULER'S KIND (COHERENCE-POWERS): a ruler of a kind whose first is not of its kind (a
+    // government that sent its own man) seats the heaviest house of its kind among its members second
+    const kinMember = isGoverning && RULER_KINDS.includes(rulerKind) && !chosen.some((m) => memberKindOf(m) === rulerKind)
+      ? remaining.filter((m) => m.weight !== null && memberKindOf(m) === rulerKind && !m.card.institution?.veiled)
+        .sort((x, y) => (y.weight - x.weight) || (y.share - x.share) || (x.at - y.at))[0]
+      : null;
+    if (kinMember && chosen.length < RANKS) take(kinMember);
     // FLOOR 2 — the power's own landmark: the highest-weight house whose largest share lands here
-    if (chosen.length < RANKS) {
+    if (chosen.length < RANKS && !kinMember) {
       const landmark = remaining
         .filter((m) => m.largest && m.weight !== null)
         .sort((x, y) => (y.weight - x.weight) || (y.share - x.share) || (x.at - y.at))[0];
@@ -382,4 +405,32 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
     card.importance = best === null ? 'minor' : bands[RUNG_KEYS[best - 1]];
   }
   return all;
+}
+
+/** A member's house kind (representatives.js :: houseKindOf); null for a minted face. @param {Member} m */
+function memberKindOf(m) {
+  return m.card.institution?.kind === 'house' ? houseKindOf({ name: m.card.institution.key }) : null;
+}
+
+/**
+ * The member of `power` whose card is the face of `houseKey`; where the house lands elsewhere (its
+ * share is another power's, or the DM's word names another), the face JOINS the power at share 0 —
+ * the dual hat: the office is held whatever the house backs (COHERENCE-POWERS). Null where the house
+ * has no face on the cast.
+ * @param {string} houseKey @param {string} power @param {Member[]} pool @param {Member[]} remaining
+ * @param {Array<Record<string, any>>} all
+ * @returns {Member | null}
+ */
+function memberOrJoin(houseKey, power, pool, remaining, all) {
+  const isFace = (/** @type {any} */ c) => c?.institution?.kind === 'house' && c.institution.key === houseKey;
+  const held = remaining.find((m) => isFace(m.card));
+  if (held) return held;
+  const at = all.findIndex(isFace);
+  if (at < 0 || !Array.isArray(all[at].memberships)) return null;
+  const card = all[at];
+  card.memberships.push({ power, rank: null, share: 0, veiled: false });
+  const member = { card, share: 0, weight: backingRowFor(houseKey)?.weight ?? 1, largest: false, at };
+  pool.push(member);
+  remaining.push(member);
+  return member;
 }
