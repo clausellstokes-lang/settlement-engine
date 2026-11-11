@@ -26,7 +26,7 @@ import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
 /**
  * A must-import requirement word, and the resources that yield the material outright. The commodity
  * words already join by token ("grain", "salt", "stone", "timber"); these two do not ("metals" is
- * not "iron"; peat and coal are fuel). A town's live iron answers "metals"; gold and silver do not.
+ * not "iron"; peat and coal are fuel). A town's live iron answers "metals" (gold and silver already join by the token).
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const MATERIAL_RESOURCE_KEYS = Object.freeze({
@@ -304,7 +304,7 @@ function availableResourceSatisfies(requirement, availableResources) {
     .filter(term => term.length > 3 && !REQUIREMENT_NOISE.has(term));
   return (availableResources || []).some(resource => (
     terms.some(term => tokensReconcile(resource, term))
-  ));
+  )) || liveMaterialFor(requirement, availableResources || []) !== null; // COHERENCE-AGREE: "metals" beside live iron, "fuel" beside coal or peat
 }
 
 const LOCAL_REQUIREMENT_PRODUCERS = Object.freeze([
