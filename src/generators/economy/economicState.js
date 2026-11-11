@@ -448,9 +448,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Iron & Metalwork',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
-        desc: hasNearbyResource('iron_deposit', 'coal_deposit', 'precious_metal')
+        // COHERENCE-AGREE: "local ore" only where the town has ore; coal fires the forges and is not ore.
+        desc: hasNearbyResource('iron_deposit', 'precious_metal')
           ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
-          : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
+          : hasNearbyResource('coal_deposit')
+            ? 'Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.'
+            : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
       });
     }
     // Timber income. Old needles 'forest_access'/'timber_rights' matched no
@@ -465,7 +468,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Timber Trade',
         percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
-        desc: hasNearbyResource('managed_forest', 'shipbuilding_timber', 'hunting_ground')
+        desc: hasNearbyResource('managed_forest', 'timber') // COHERENCE-AGREE: the town's own timber, as the line's gate reads it
           ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
           : 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.',
       });
@@ -502,7 +505,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Stone Quarrying',
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
-        desc: hasNearbyResource('stone_quarry', 'gemstone')
+        desc: hasNearbyResource('stone_quarry') // COHERENCE-AGREE: a gem deposit is not a quarry of dressed stone
           ? 'Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.'
           : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
       });
