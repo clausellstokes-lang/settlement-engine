@@ -1,7 +1,7 @@
 {
   "_doc": "THE STYLE WALKER'S BASELINE (STYLE-2-WAVE SW-0, ruling A10): per file, per phrase, the count of the audit's §3 phrases in the reader-facing units the scanner reads. ONLY-SHRINKS: tests/lint/styleLaw.walker.test.js fails when any count rises and when a phrase whose total is 0 appears anywhere. Written ONLY by `node scripts/lib/style-law-scan.mjs --record`; never hand-edited (the digest is checked). The rules are the scanner's header.",
   "door": "node scripts/lib/style-law-scan.mjs --record",
-  "measuredAtSha": "58aae07fb9117bb93c62fc0e6e33fe5ea26b2c0e",
+  "measuredAtSha": "df1ebd4bdc2bd898d5fb9510f7b09c2355f9a26d",
   "phrases": [
     "faction",
     "rather-than",
@@ -21,7 +21,7 @@
     "nothing-has-broken-yet",
     "which-is-the-kind-of"
   ],
-  "scannedFiles": 1115,
+  "scannedFiles": 1117,
   "totals": {
     "faction": 66,
     "rather-than": 253,
