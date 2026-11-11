@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "15c4afd754c492862d2efdfc55c5e8f6fad4536c",
-  "measuredBy": "STYLE-2-MERGE-7",
+  "measuredAtSha": "dfb266dd18157cf2f74738081bde790896fcbd3b",
+  "measuredBy": "COHERENCE-PRESUME",
   "date": "2026-11-11",
-  "note": "STYLE-2-MERGE point 41: the FOUNDING-WORLDS merge (15c4afd75) — the lane's three new test files",
-  "files": 3199,
+  "note": "COHERENCE-PRESUME (2026-11-11): two new test files (tests/lint/presumedThings.walker.test.js, tests/domain/presumeCorpusSeeds.test.js) and new titles in factionDescSiblings.test.js and institutions.test.js",
+  "files": 3201,
   "parked": 397,
-  "credited": 2802,
-  "titles": 29087,
-  "suiteTitles": 7865
+  "credited": 2804,
+  "titles": 29102,
+  "suiteTitles": 7870
 }
