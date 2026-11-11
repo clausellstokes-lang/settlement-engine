@@ -274,14 +274,14 @@ const EXPECTED_ROOTS = new Map([
 // 81/188); regionalLog 2/8/164 → 2/4/158 (changes[].kind 7/83 → 3/77, sourceEvent.type 1/81 holds); chronicle and timeline hold.
 // Totals 62/1079/5545 → 64/1082/5533; bytes 8098 → 8401; digest 141be9b3 → 9bd27a79. Reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 37645, canonEventLogEntries: 1, wizardNewsFinalEntries: 394,
+  scalarRows: 37067, canonEventLogEntries: 1, wizardNewsFinalEntries: 394,
   wizardNewsAccumulatedEntries: 2525, wizardNewsUnique: 395, pulseHistory: 12,
   regionalEventLog: 81, regionalEventLogUnique: 81, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 51, distinctValues: 1309, occurrences: 5356 },
+  { family: 'pulseHistory', identities: 51, distinctValues: 1343, occurrences: 5225 },
   { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 158 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
@@ -299,9 +299,18 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // pulseHistory[].consequenceOutcomes[].reasons[] 69 → 128, impactDigest[].reasons[] 77 → 146, mechanicalOutcomes[].reasons[]
 // 17 → 46, mechanicalRumorSeeds[].reasons[] 16 → 36, selectedOutcomes[].reasons[] 77 → 146. pulseHistory 51/1063/5356 →
 // 51/1309/5356; totals 64/1082/5533 → 64/1328/5533; bytes 8401 → 8404 (digit widths); digest 9bd27a79 → bc2f448a.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 64, distinctValues: 1328, occurrences: 5533 });
-const EXPECTED_ROWS_BYTES = 8404; // MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out; (ALLEGIANCE-CAR2 merge): 7798 → 8098, two in; (ALLEGIANCE-CAR3 merge): 8098 → 8401, four in and two out; STYLE-2-PULSE-FOLLOWUP: 8401 → 8404, distinct counts only
-const EXPECTED_ROWS_SHA256 = 'bc2f448a77c4449c70fd891610c2e5ee4f73f280960c07e46e4cdb0823bbd1d0';
+// 2026-11-11 (STYLE-2-MERGE-7, closing act 4: re-keyed ONCE at the style wave's final tip by measurement, this library's own
+// functions over each tree's corpus at 3ce63ccc6 / 8acfc52f1 / 90774f2fa / 2cbe72ca1; the library reads every tree identically):
+// the frozen value is PULSE-FOLLOWUP's (point 20's four tellings already in it). STYLE-2-MERGE point 18 (SW-12 PULSE-LINES,
+// 8acfc52f1): scalarRows 37645 → 37029; nine pulseHistory rows — the consequence, impactDigest and selected headline and
+// summary rows gain spellings (+6/+6/+6/+8/+6/+8) and the three candidate-reason rows lose occurrences (441 → 398, 367 → 317,
+// 376 → 326): distinct +33, occurrences −143. Point 36 (the simulation batch: GREEN-TIP's seating by membership, PULSE-SITES):
+// scalarRows 37029 → 37067; twelve rows, one more consequence and one more mechanical outcome (188 → 189, 50 → 51), the
+// impactKind and tags rows +1 spelling: distinct +1, occurrences +12. Nothing else, at any tree. Totals 64/1328/5533 →
+// 64/1362/5402; pulseHistory 51/1309/5356 → 51/1343/5225; bytes 8404 → 8408; digest bc2f448a → 3198eb2f.
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 64, distinctValues: 1362, occurrences: 5402 });
+const EXPECTED_ROWS_BYTES = 8408; // STYLE-2-MERGE-7 closing act 4: 8404 → 8408 (the final tip's re-key); MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out; (ALLEGIANCE-CAR2 merge): 7798 → 8098, two in; (ALLEGIANCE-CAR3 merge): 8098 → 8401, four in and two out; STYLE-2-PULSE-FOLLOWUP: 8401 → 8404, distinct counts only
+const EXPECTED_ROWS_SHA256 = '3198eb2f44d0e8c4d5d18afbc621650c590ef54796497019a396d773cf3e94ed';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

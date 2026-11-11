@@ -155,9 +155,13 @@ describe('the registers, in the wave\'s order — each loaded, each counted', ()
     // The sitting recorded the disagreement rather than erasing it: PROBE_ALL prints 1,659
     // deduplicated sentences; the seat counts 1,662 authored rows and 546 + 558 = 1,104 pools.
     // This loader lands on the seat's figures to the unit.
-    expect(c.rows).toBe(1662);
+    // RE-KEYED BY MEASUREMENT at the style wave's final tip (STYLE-2-MERGE-7, closing act 4, 2026-11-11; the chair's class
+    // ruling 03:4x): 1,662 → 1,830 rows and 1,662 → 1,830 distinct, the 1,104 pools UNMOVED — SW-9b-A A6's 168 new ladder
+    // lines (STYLE-2-MERGE point 26, 77b362ff7; the register's own count, record row 26). The title keeps the seat's
+    // founding figure; the assertion is the live count.
+    expect(c.rows).toBe(1830);
     expect(c.pools).toBe(1104);
-    expect(c.distinct).toBe(1662);
+    expect(c.distinct).toBe(1830);
   });
 
   it('R4b reads 53 — the three bare-string exports the harvester used to drop, named by file', async () => {

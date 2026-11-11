@@ -184,7 +184,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR2 merge, the guild's push's year — bbb1a4abc, with ce90cf16e and aca93cbc5 — at prose-family-contract.mjs's RE-RECORDED block)): 7798 → 8098, two identities in.
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)): 8098 → 8401, four identities in and two out.
     // 2026-11-09 (STYLE-2-PULSE-FOLLOWUP, ruling C2; the four tellings of npcAgency's candidate reasons, 930b611cd, at prose-family-contract.mjs's RE-RECORDED block): 8401 → 8404 (digit widths), no identity in or out.
-    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(8404); // STYLE-2-PULSE-FOLLOWUP (930b611cd's four tellings, at prose-family-contract.mjs's RE-RECORDED block)
+    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(8408); // STYLE-2-MERGE-7 closing act 4 (the final tip; the causes at prose-family-contract.mjs, 2026-11-11): 8404 →; // STYLE-2-PULSE-FOLLOWUP (930b611cd's four tellings, at prose-family-contract.mjs's RE-RECORDED block)
     // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
     // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
     // test-side and library-side denominators from ever disagreeing.
@@ -202,7 +202,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR2 merge, the guild's push's year — bbb1a4abc, with ce90cf16e and aca93cbc5 — at prose-family-contract.mjs's RE-RECORDED block)): 8a4abd46… → 141be9b3…, with EXPECTED_ROWS_SHA256.
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)): 141be9b3… → 9bd27a79…, with EXPECTED_ROWS_SHA256.
     // 2026-11-09 (STYLE-2-PULSE-FOLLOWUP; 930b611cd's four tellings, at prose-family-contract.mjs's RE-RECORDED block): 9bd27a79… → bc2f448a…, re-recorded together with EXPECTED_ROWS_SHA256.
-    expect(live.rowsSha256).toBe('bc2f448a77c4449c70fd891610c2e5ee4f73f280960c07e46e4cdb0823bbd1d0');
+    expect(live.rowsSha256).toBe('3198eb2f44d0e8c4d5d18afbc621650c590ef54796497019a396d773cf3e94ed'); // STYLE-2-MERGE-7 closing act 4: bc2f448a → 3198eb2f (the causes at prose-family-contract.mjs)
     const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
     const movements = [
       [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
@@ -242,7 +242,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR2 merge, the guild's push's year — bbb1a4abc, with ce90cf16e and aca93cbc5 — at prose-family-contract.mjs's RE-RECORDED block)): 53/1052/5501 → 55/1072/5538, the same seven off the new totals (62 − 7, 1079 − 7, 5545 − 7); `chronicle` byte-identical at 7/7/7.
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)): 55/1072/5538 → 57/1075/5526, the same seven off the new totals (64 − 7, 1082 − 7, 5533 − 7); `chronicle` byte-identical at 7/7/7.
     // 2026-11-09 (STYLE-2-PULSE-FOLLOWUP; 930b611cd's four tellings, at prose-family-contract.mjs's RE-RECORDED block): 57/1075/5526 → 57/1321/5526, the same seven off the new totals (64 − 7, 1328 − 7, 5533 − 7); `chronicle` byte-identical at 7/7/7.
-    counterfeit.totals = { families: 3, identities: 57, distinctValues: 1321, occurrences: 5526 }; // STYLE-2-PULSE-FOLLOWUP (930b611cd's four tellings, at prose-family-contract.mjs's RE-RECORDED block)
+    // 2026-11-11 (STYLE-2-MERGE-7, closing act 4, the final tip; at prose-family-contract.mjs's RE-RECORDED block): 57/1321/5526 → 57/1355/5395, the same seven off the new totals (64 − 7, 1362 − 7, 5402 − 7); `chronicle` byte-identical at 7/7/7.
+    counterfeit.totals = { families: 3, identities: 57, distinctValues: 1355, occurrences: 5395 }; // STYLE-2-PULSE-FOLLOWUP (930b611cd's four tellings, at prose-family-contract.mjs's RE-RECORDED block)
     counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
     expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
     for (const mutate of [
@@ -301,7 +302,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR2 merge, the guild's push's year — bbb1a4abc, with ce90cf16e and aca93cbc5 — at prose-family-contract.mjs's RE-RECORDED block)): 47/1040/5336 → 49/1056/5362; two identities in (resourceTaxonomy.kind/type), none out.
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)): 49/1056/5362 → 51/1063/5356; four identities in (warRulingRead.kind/reason on two lanes), two out (resourceTaxonomy.kind/type).
     // 2026-11-09 (STYLE-2-PULSE-FOLLOWUP, ruling C2; 930b611cd, at prose-family-contract.mjs's RE-RECORDED block): 51/1063/5356 → 51/1309/5356; five reasons[] rows gain distinct tellings only; identities and occurrences hold.
-    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 51, distinctValues: 1309, occurrences: 5356 }); // STYLE-2-PULSE-FOLLOWUP (930b611cd's four tellings, at prose-family-contract.mjs's RE-RECORDED block)
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 51, distinctValues: 1343, occurrences: 5225 }); // STYLE-2-MERGE-7 closing act 4 (the final tip; the causes at prose-family-contract.mjs, 2026-11-11): 1309/5356 →; // STYLE-2-PULSE-FOLLOWUP (930b611cd's four tellings, at prose-family-contract.mjs's RE-RECORDED block)
     const history = scalarRows.filter((row) => row.root === 'worldState');
     expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
     const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
@@ -316,7 +317,7 @@ describe('four durable prose-family exact-totality contract', () => {
     // 2026-11-07 (the people car's landing, PEOPLE-LAND second seat, §934.105; by first-parent point at prose-family-contract.mjs's RE-RECORDED block): selected 82/166 → 96/165 (lane 1, held after), mechanical 21/45 → 26/49 (lane 1 26/49, lane 2 27/50, lane 5B 26/49), consequence 68/167 → 79/186 (lane 1 79/186, lane 2 79/188, lane 5B 79/186).
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR1 merge, car 1's re-dealt year — the hidden allegiance, then J-19 — at prose-family-contract.mjs's RE-RECORDED block)): selected 96/164 → 97/164, mechanical 26/50 → 25/50, consequence 79/188 → 78/187.
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)): selected 97/164 → 97/165, mechanical 26/52 → 25/50, consequence 79/189 → 81/188.
-    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 97, occurrences: 165 }); // MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block) // MERGE-TRAIN (ALLEGIANCE-CAR1 merge, car 1's re-dealt year — the hidden allegiance, then J-19 — at prose-family-contract.mjs's RE-RECORDED block)
+    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 103, occurrences: 165 }); // STYLE-2-MERGE-7 closing act 4 (the final tip; the causes at prose-family-contract.mjs, 2026-11-11): 97 → 103 at point 18; // MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block) // MERGE-TRAIN (ALLEGIANCE-CAR1 merge, car 1's re-dealt year — the hidden allegiance, then J-19 — at prose-family-contract.mjs's RE-RECORDED block)
     // TE36: the two lanes that carried the retired family move; `selectedOutcomes` above does
     // NOT, because ordinary population drift was already `state_only` and never selected.
     // mechanical distinctValues RISES (24 → 29) while its occurrences fall — the retired
@@ -335,8 +336,8 @@ describe('four durable prose-family exact-totality contract', () => {
     // (950b75014 -1/0, 597866207 0/-1; 0/+2 interaction with rung 1).
     // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with its cause, measured at the merged tip 6c3e25661, PLAUSIBLE at prose-family-contract.mjs's RE-RECORDED block: the census steps composed with the integration side's WIRING-W0 / REVIEW-INTAKE lines): all three headline lanes HOLD (selected 82/166, mechanical 21/46, consequence 67/168, measured).
     // 2026-11-09 (MERGE-TRAIN (ALLEGIANCE-CAR2 merge, the guild's push's year — bbb1a4abc, with ce90cf16e and aca93cbc5 — at prose-family-contract.mjs's RE-RECORDED block)): selected holds at 97/164; mechanical 25/50 → 26/52, consequence 78/187 → 79/189.
-    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 25, occurrences: 50 }); // MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)
-    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 81, occurrences: 188 }); // MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)
+    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 26, occurrences: 51 }); // STYLE-2-MERGE-7 closing act 4 (the final tip; the causes at prose-family-contract.mjs, 2026-11-11): 25/50 → 26/51 at point 36; // MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)
+    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 87, occurrences: 189 }); // STYLE-2-MERGE-7 closing act 4 (the final tip; the causes at prose-family-contract.mjs, 2026-11-11): 81/188 → 87/188 at point 18, → 87/189 at point 36; // MERGE-TRAIN (ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at prose-family-contract.mjs's RE-RECORDED block)
   });
 
   it('A6 reaches the regional audit log while proving its selected prose zero', () => {
