@@ -9,7 +9,7 @@ import { drawDeclared, lineText } from '../../domain/facts/drawDeclared.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { getActiveRng } from '../../kernel/rngContext.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
-import { BASE_ISSUES, STRESS_ISSUES } from './conflictIssues.js';
+import { BASE_ISSUES, STRESS_ISSUES, castFilled, kindsOfPower } from './conflictIssues.js';
 
 // buildConflictPlotHooks — the quarrel's plot hook (COHERENCE-QUARREL cure 2). One hook per
 // quarrel, as the dossier prints it (the chair's ruling 3): drawn from the issue's OWN hooks and
@@ -174,7 +174,13 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
         `${template.issue} ${template.stakes}`,
       );
     }),
-      offered = applicableTemplates.length ? applicableTemplates : issueTemplates,
+      // EVERY ISSUE DECLARES ITS CAST (COHERENCE-QUARREL cure 1): a pair is offered only the
+      // issues its two powers can fill; with none, the issues that need no cast.
+      kindsA = kindsOfPower(factionA),
+      kindsB = kindsOfPower(factionB),
+      castOpen = applicableTemplates.filter((template) => castFilled(template, kindsA, kindsB)),
+      castFree = applicableTemplates.filter((template) => !template.cast.length),
+      offered = castOpen.length ? castOpen : castFree.length ? castFree : applicableTemplates.length ? applicableTemplates : issueTemplates,
       chosen = drawDeclared(offered, {
         draw: (pool) => pick(pool), facts, key: `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::conflict-issue`,
         poolId: 'conflicts:ISSUES', surface: 'power', drawKind: 'R', keepRefused: true,
