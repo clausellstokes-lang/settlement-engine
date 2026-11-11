@@ -39,8 +39,9 @@ const SEEDS = Object.freeze([
   'critique-city-0', 'critique-city-9', 'critique-metropolis-8', 'critique-metropolis-9',
 ]);
 
-/** The governments that send their own man: the leader has no house of the town. */
-const APPOINTED = Object.freeze(['Feudal Appointee', 'Noble Governorship', 'Ducal Governorship', 'Royal Authority',
+/** The governments that send their own man: the leader has no house of the town (the chair's ruling of
+ *  2026-11-11, 23:2x UTC: the government's own name and description say who is sent; a stewardship is). */
+const APPOINTED = Object.freeze(['Feudal Stewardship', 'Feudal Appointee', 'Noble Governorship', 'Ducal Governorship', 'Royal Authority',
   'Foreign Stewardship', 'Foreign Administration', 'Occupation Authority', 'Martial Administration', 'Noble Regency']);
 /** The kinds a ruler can be of, criminal aside (the veil). */
 const KINDS = Object.freeze(['religious', 'military', 'merchant', 'arcane', 'noble', 'craft']);
