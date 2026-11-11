@@ -19,7 +19,7 @@ import { describeCompromiseConjunction } from '../../domain/display/causeConjunc
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
-import { cardPowerLine, cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
+import { cardPowerLine, cardPowerNames, cardHouseOf, governingNameOf } from '../../domain/people/cardPowers.js';
 import { cardInstitutionDoorOf, cardHonorificOf } from '../../domain/people/cardDoor.js';
 import { allegianceOf } from '../../domain/people/allegiance.js';
 import {
@@ -259,7 +259,7 @@ export function NPCInlineCard({
   // The card's house, then its standing in each power by rank (PEOPLE-5A, M-1b). PEOPLE-6 LINKS:
   // the house is a door to its Institutions card; a minted face's door is its power's card.
   const cardDoor = cardInstitutionDoorOf(npc, settlement);
-  const cardPowerTail = cardPowerLine(npc);
+  const cardPowerTail = cardPowerLine(npc, [], governingNameOf(settlement)); // COHERENCE-POWERS: the leader's office
   const cardLineTail = cardDoor || cardPowerTail;
   // PEOPLE-6 LINKS step 2 (the owner's word): a face's heading is its full name alone, and its
   // role is the honorific of its institution's title, on its own row under the door. The card's

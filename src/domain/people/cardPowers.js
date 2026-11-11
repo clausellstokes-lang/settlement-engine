@@ -36,6 +36,16 @@ export function powerNameOf(power) {
   return String(p.faction || p.name || '');
 }
 
+/**
+ * The governing power's name (the row marked `isGoverning`, else the record's `governingName`), or null.
+ * @param {unknown} settlement @returns {string | null}
+ */
+export function governingNameOf(settlement) {
+  const row = powersOf(settlement).find((f) => f.isGoverning === true);
+  const name = row ? powerNameOf(row) : String(recordOf(recordOf(settlement).powerStructure).governingName || '');
+  return name || null;
+}
+
 /** @param {unknown} settlement @returns {string[]} the powers' names, roster order */
 export function powerNamesOf(settlement) {
   return powersOf(settlement).map(powerNameOf).filter(Boolean);
@@ -56,11 +66,42 @@ export function cardPowerParts(card, powerOrder = []) {
 }
 
 /**
- * THE CARD'S POWER LINE: "first of X · second of Y" ('' for a card in no power).
- * @param {unknown} card @param {string[]} [powerOrder] @returns {string}
+ * THE CARD'S POWER LINE: "first of X · second of Y" ('' for a card in no power). The dual-hat leader's
+ * first rank in the governing power prints its office (COHERENCE-POWERS): "Reeve, first of Elected Reeve".
+ * @param {unknown} card @param {string[]} [powerOrder] @param {string | null} [governing] the governing power's name
+ * @returns {string}
  */
-export function cardPowerLine(card, powerOrder = []) {
-  return cardPowerParts(card, powerOrder).map((p) => p.label).join(' · ');
+export function cardPowerLine(card, powerOrder = [], governing = null) {
+  const office = cardOfficeOf(card);
+  return cardPowerParts(card, powerOrder)
+    .map((p) => (office && governing && p.power === governing && p.rank === 1 ? `${office}, ${p.label}` : p.label))
+    .join(' · ');
+}
+
+/**
+ * THE LEADER'S OFFICE (COHERENCE-POWERS, the dual hat): a house's face that leads the town carries the
+ * office's title in its `role` beside its house's `title` (people/castPowers.js FLOOR 1); null for every
+ * other card (M-1b: a face's role is its title; a minted face's and a DM's person's role is its own).
+ * @param {unknown} card @returns {string | null}
+ */
+export function cardOfficeOf(card) {
+  const c = recordOf(card);
+  const inst = cardInstitutionOf(card);
+  const role = String(c.role || '').trim();
+  if (!inst || inst.kind !== 'house' || !role) return null;
+  return role !== String(c.title || '').trim() && role !== inst.title ? role : null;
+}
+
+/**
+ * THE TWO HATS, as one phrase: "the miller and Reeve" for the dual-hat leader, else the card's role
+ * (the office's own face, a minted seat, a DM's person). The seat's lines read it (the Power tab's seat
+ * row, the governance account).
+ * @param {unknown} card @returns {string}
+ */
+export function cardHatsOf(card) {
+  const c = recordOf(card);
+  const office = cardOfficeOf(card);
+  return office ? `${String(c.title || '').trim()} and ${office}` : String(c.role || '').trim();
 }
 
 /**

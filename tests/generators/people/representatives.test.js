@@ -40,10 +40,13 @@ function expectedFaceHouses(settlement) {
   const houses = (settlement.institutions || []).filter((house) => house && !isFabricInstitution(house));
   const facedFamilies = new Set(houses.filter((h) => typeof faceOfInstitution(h) === 'string' && faceOfInstitution(h) !== FACE_SEAT)
     .map((h) => familyOfInstitution(h)?.key));
+  // COHERENCE-POWERS re-key (cure (i), one person, one face): where a house leads, the seat's house bears no face
+  const hat = dualHatHouseOf(settlement.institutions, governingFactionOf(settlement));
   (settlement.institutions || []).forEach((house, index) => {
     if (!house || isFabricInstitution(house)) return;
     const face = faceOfInstitution(house);
     if (!face) return;
+    if (hat && seat && seat.index === index) return;
     if (face === FACE_SEAT) { if (seat && seat.index === index) names.push(house.name); return; }
     // one person, one face (M-1b): the resident priest yields to the church where the church rolls
     const family = familyOfInstitution(house)?.key;
@@ -97,7 +100,7 @@ function assertCast(s, label) {
     const seated = cards.filter((n) => (seat ? n.institution.key === seat.house.name : n.id === SEAT_CARD_ID));
     for (const n of seated) expect(n.role, `${label}: the seat's role is its title (M-1b)`).toBe(n.title);
     // COHERENCE-POWERS re-key: where a house leads (the dual hat) and no seat house rolls, no seat is minted
-    expect(seated.length, `${label}: exactly one seat face (${seat ? seat.kind : hat ? 'none: a house leads' : 'minted'})`).toBe(!seat && hat ? 0 : 1);
+    expect(seated.length, `${label}: exactly one seat face (${hat ? 'none: a house leads' : seat ? seat.kind : 'minted'})`).toBe(hat ? 0 : 1);
     // the SEAT mint by its id (the `other` powers' mints of step 3 are `kind: 'power'` too)
     const mint = cards.find((n) => n.id === SEAT_CARD_ID);
     if (seat || hat) expect(mint, `${label}: no seat mint beside a seat house or a leading house`).toBeUndefined();
@@ -107,9 +110,10 @@ function assertCast(s, label) {
       expect(mint.institution).toEqual({ kind: 'power', key: governing, family: null, title: seatMintTitleFor(governing).title,
         veiled: isVeiledPower(governingFactionOf(s)) });
     }
-    if (seat?.kind === 'hall') expect(seated[0].title, `${label}: the hall's face is the seat, titled from the power`).toBe(seatMintTitleFor(governing).title);
+    if (seat?.kind === 'hall' && !hat) expect(seated[0].title, `${label}: the hall's face is the seat, titled from the power`).toBe(seatMintTitleFor(governing).title);
   }
-  return { houseFaces: houseCards.length, minted: cards.some((n) => n.institution.kind === 'power') };
+  // COHERENCE-POWERS re-key (cure (i)): the seat's house faced by the leader is a faced house; the envelope counts houses faced
+  return { houseFaces: houseCards.length + (hat && seat ? 1 : 0), minted: cards.some((n) => n.institution.kind === 'power') };
 }
 
 describe('the people car — the representative generator (step 2)', () => {

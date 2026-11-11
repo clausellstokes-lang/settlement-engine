@@ -285,7 +285,7 @@ export function houseBacksOf(settlement) {
  * @param {SupportInstitution[]} institutions
  * @returns {string | null}
  */
-function seatHouseName(institutions) {
+export function seatHouseName(institutions) {
   let government = null;
   let hall = null;
   for (const inst of institutions) {

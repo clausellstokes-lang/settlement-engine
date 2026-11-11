@@ -36,7 +36,7 @@ import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { relationshipEngagementCards } from '../../domain/display/stateProse/relationshipsDeskRead.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
-import { cardHouseOf, cardPowerLine, firstPowerOf, powerOrderOf } from '../../domain/people/cardPowers.js';
+import { cardHouseOf, cardPowerLine, firstPowerOf, governingNameOf, powerOrderOf } from '../../domain/people/cardPowers.js';
 import { ownerGenerationContracts } from './generationContracts.js';
 // The four settlement-body chapters and the shared small readers moved out under
 // THE DECOMPOSITION WAVE (lane D); buildViewModel below still calls them in the
@@ -698,6 +698,7 @@ function npcsSlice(active) {
   const s = active || {};
   const culture = s?.config?.dominantCulture || s?.dominantCulture || s?.culture || null;
   const powerOrder = powerOrderOf(s);
+  const governingName = governingNameOf(s);
   const npcs = (s?.npcs || []).map(n => {
     // Engine's `personality` is an object { dominant, flaw, modifier, tell, speech }.
     // X-48 (the owner, 2026-11-03): NO LOOK, VOICE OR TELL ANYWHERE. The temperament and
@@ -768,7 +769,7 @@ function npcsSlice(active) {
       powers: Array.isArray(n?.memberships)
         ? n.memberships.map((m) => ({ power: m?.power || null, rank: m?.rank ?? null }))
         : [],
-      powerLine: cardPowerLine(n, powerOrder) || null,
+      powerLine: cardPowerLine(n, powerOrder, governingName) || null, // COHERENCE-POWERS: the leader's office (screen parity)
       power: n?.power || 0,
       influence: inf,
       influenceLabel,

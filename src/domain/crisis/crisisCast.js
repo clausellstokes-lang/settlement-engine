@@ -30,7 +30,7 @@ import { GEN_TO_PULSE_TYPE } from '../stressorPicker.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
-import { isOfficeStandIn } from '../dossier/seatHolder.js';
+import { isOfficeStandIn, seatHouseFaceOf } from '../dossier/seatHolder.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { factsOf } from '../facts/factsOf.js';
 import { resolveSibling } from '../facts/drawDeclared.js';
@@ -562,7 +562,9 @@ export function bruntCandidates(s, kind, stakes) {
  */
 function faceOfHouse(s, house) {
   if (!house) return null;
-  return rosterOf(s).find((n) => n.institution?.kind === 'house' && str(n.institution?.key) === house) || null;
+  // COHERENCE-POWERS (cure (i)): the seat's house where a house leads is faced by the leader (seatHolder.js)
+  return rosterOf(s).find((n) => n.institution?.kind === 'house' && str(n.institution?.key) === house)
+    || /** @type {CastNpc | null} */ (seatHouseFaceOf(/** @type {any} */ (s), house));
 }
 
 /**

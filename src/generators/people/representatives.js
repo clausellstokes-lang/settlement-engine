@@ -420,6 +420,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
   const governing = governingFactionOf(/** @type {any} */ ({ powerStructure }));
   const governingName = nameOf(governing) || null;
   const seat = seatHouseOf(institutions);
+  const hat = governingName ? dualHatHouseOf(institutions, governing) : null;
   // The same config context generateNPCs handed every figure: the goal and secret pools read the
   // trade commodity, the dominant power and the prosperity through it.
   const npcConfig = {
@@ -476,6 +477,10 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
     if (family && YIELDS_TO[family.key] && facedFamilies.has(YIELDS_TO[family.key])) return;
     const key = String(house.name || '');
     const isSeat = seat !== null && seat.index === index;
+    // ONE PERSON, ONE FACE (COHERENCE-POWERS, the chair's ruling of 2026-11-11, cure (i)): where a house leads
+    // (the dual hat), the seat's house bears no face of its own — its face IS the leader, as the hall's is the
+    // seat's (R-P1 (c)); the readers that find a house's face by key fall back to the seat holder
+    if (isSeat && hat) return;
     if (face === FACE_SEAT) {
       // R-P1 (c): the hall is the seat's building. Where a Government-shelf house rolls, no face;
       // where none does, the hall IS the seat's house and its face is the seat, titled from the
@@ -495,7 +500,7 @@ export function generateRepresentatives(settlement, culture = 'germanic', config
 
   // R-P2: no seat house and no hall — the seat's face is minted from the governing power; but where the
   // leader wears the dual hat (a house of the town leads, COHERENCE-POWERS), no seat is minted.
-  if (!seat && governingName && !dualHatHouseOf(institutions, governing)) {
+  if (!seat && governingName && !hat) {
     const { title } = seatMintTitleFor(governingName);
     taken.add(SEAT_CARD_ID);
     birth(SEAT_CARD_ID, seatPoolFor(tier), title, { kind: 'power', key: governingName, family: null, title, veiled: isVeiledPower(governing) },

@@ -57,7 +57,8 @@ import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/doss
 import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
 import { walkUserEdits } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
-import { facesByHouse } from '../../../domain/people/cardPowers.js';
+import { cardOfficeOf, facesByHouse } from '../../../domain/people/cardPowers.js';
+import { seatHouseFaceOf } from '../../../domain/dossier/seatHolder.js';
 import { faceNameOf } from '../../../domain/people/cardDoor.js';
 import { nameOf } from '../../../domain/rulingPower.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
@@ -147,7 +148,8 @@ export function institutionsWithServices(settlement) {
         services: byInstitution.get(key) || [],
         backs: backers.get(key) || [],
         // PEOPLE-6 LINKS: the house's representative (null for a house with no face)
-        face: faces.get(key) || null,
+        // COHERENCE-POWERS (cure (i)): the seat's house where a house leads is faced by the leader
+        face: faces.get(key) || seatHouseFaceOf(/** @type {any} */ (settlement), key) || null,
         // X-45: the DM spoke, even to say nobody (the mark outlives an emptied list)
         authored: spoken.has(i),
         // X-46 car 3: the place, not a house (its own group at the foot of the tab)
@@ -232,6 +234,8 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  */
 export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, settlement = null }) {
   const mobile = useIsMobile();
+  // COHERENCE-POWERS: a face that is not this house's own (the seat's house, faced by the dual-hat leader)
+  const seatFaced = !!face && face.institution?.key !== inst.name && !!cardOfficeOf(face);
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
   // X-20 (c): the card is always open; a link to the house scrolls it to the top.
@@ -274,7 +278,9 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
       {face && face.name && (
         <div data-testid="institution-face" style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
           <span data-testid="institution-face-label">Connection:</span>{' '}
-          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={faceNameOf(face, settlement)} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          {/* COHERENCE-POWERS: the seat's house faced by the dual-hat leader names both hats: "Reeve Egilbert Neumann, the miller" */}
+          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={seatFaced ? `${cardOfficeOf(face)} ${face.name}` : faceNameOf(face, settlement)} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          {seatFaced && face.title ? `, ${face.title}` : ''}
         </div>
       )}
       {/* THE BACKS LINE (X-40, X-45): who the house contributes to, each name a door to the Power
