@@ -53689,6 +53689,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 28,
+        "institution: bank": 1,
         "market": 2,
         "navigable": 1,
         "no crisis: hunger": 3,
@@ -53853,6 +53854,7 @@
         "gate": 36,
         "guardPresence": 15,
         "healer": 2,
+        "institution: bank": 1,
         "institution: granary": 2,
         "institution: smith": 3,
         "institution: tavern": 7,
@@ -53870,7 +53872,7 @@
         "walls": 12,
         "watch": 4
       },
-      "undeclared": 31,
+      "undeclared": 30,
       "crisisScoped": false
     },
     {
@@ -53966,7 +53968,6 @@
         "gate": 2,
         "guild": 25,
         "market": 11,
-        "militia": 1,
         "navigable": 2,
         "no garrison": 2,
         "no walls": 1,
@@ -53977,7 +53978,7 @@
         "walls": 8,
         "watch": 7
       },
-      "undeclared": 146,
+      "undeclared": 147,
       "crisisScoped": false
     },
     {
