@@ -42,7 +42,6 @@
   {"thing": "granary", "path": ".culturalIdentity.defensePattern", "text": "Where the state reaches, enclosed wards, controlled gates, watch towers, granaries, and di", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 3},
   {"thing": "granary", "path": ".culturalIdentity.exchangePattern", "text": "Regulated markets, guild brokerage, granary systems, canals or roads, and standardized rec", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 1},
   {"thing": "granary", "path": ".economicState.activeChains[].magicNote", "text": "Temple granaries blessed", "reason": "reported", "note": "src/generators/computeActiveChains.js (given to no lane): reported", "towns": 6},
-  {"thing": "granary", "path": ".history.currentTensions[].lastingEffects[]", "text": "Emergency granary reserves", "reason": "cure", "note": "src/data/historyData.js", "towns": 9},
   {"thing": "market", "path": ".conflicts[].desc", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
   {"thing": "market", "path": ".conflicts[].issue", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
   {"thing": "market", "path": ".culturalIdentity.architecturalDetail", "text": "a hall-and-market axis organizes the settlement center", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 1},
@@ -84,7 +83,6 @@
   {"thing": "market", "path": ".economicState.situationDesc", "text": "markets meet infrequently", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 7},
   {"thing": "market", "path": ".economicState.situationDesc", "text": "The market is shut", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 1},
   {"thing": "market", "path": ".economicState.situationDesc", "text": "The market still opens", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 1},
-  {"thing": "market", "path": ".history.currentTensions[].description", "text": "every purse in the market", "reason": "cure", "note": "src/data/historyData.js", "towns": 1},
   {"thing": "market", "path": ".history.currentTensions[].description", "text": "the market quarter", "reason": "reported", "note": "the {quarter} token, src/generators/historyGenerator.js (given to no lane): reported", "towns": 1},
   {"thing": "market", "path": ".history.founding.reason", "text": "grew as an agricultural market center", "reason": "past", "note": "the founding: a past event", "towns": 1},
   {"thing": "market", "path": ".history.founding.reason", "text": "on the open market", "reason": "figure", "note": "\"the open market\": trade at large", "towns": 1},
@@ -448,8 +446,6 @@
    ["docks", "after-release", "Natural harbor access"]
   ],
   "src/data/historyData.js": [
-   ["granary", "cure", "Emergency granary reserves mandated by ordinance since the shortage"],
-   ["market", "cure", "A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every "],
    ["temple", "after-release", "Temple Guard Commander"],
    ["war", "after-release", "A collaborator family's wartime fortune was built on betrayals that are finally surfacing"],
    ["war", "after-release", "A diplomatic channel exists that the war party is suppressing"],
