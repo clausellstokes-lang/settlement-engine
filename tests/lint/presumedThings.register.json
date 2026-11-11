@@ -37,7 +37,6 @@
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison work", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
   {"thing": "granary", "path": ".culturalIdentity.defensePattern", "text": "Where the state reaches, enclosed wards, controlled gates, watch towers, granaries, and di", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 3},
   {"thing": "granary", "path": ".culturalIdentity.exchangePattern", "text": "Regulated markets, guild brokerage, granary systems, canals or roads, and standardized rec", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 1},
-  {"thing": "granary", "path": ".economicState.activeChains[].magicNote", "text": "Temple granaries blessed", "reason": "reported", "note": "src/generators/computeActiveChains.js (given to no lane): reported", "towns": 6},
   {"thing": "market", "path": ".conflicts[].desc", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
   {"thing": "market", "path": ".conflicts[].issue", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
   {"thing": "market", "path": ".culturalIdentity.architecturalDetail", "text": "a hall-and-market axis organizes the settlement center", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 1},
@@ -860,9 +859,7 @@
    ["temple", "after-release", "the market, shrine, workshop, and public well"]
   ],
   "src/generators/chainMagicSubstitution.js": [
-   ["granary", "after-release", "Temple granaries blessed; divine provision fills the gap"],
    ["temple", "after-release", "Temple fishing rites improve depleted catch"],
-   ["temple", "after-release", "Temple granaries blessed; divine provision fills the gap"],
    ["temple", "after-release", "Temple stores supplement grain shortage"]
   ],
   "src/generators/computeActiveChains.js": [
