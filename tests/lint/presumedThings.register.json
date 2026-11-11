@@ -122,7 +122,6 @@
   {"thing": "militia", "path": ".culturalIdentity.defensePattern", "text": "Militia and professional troops are organized through districts and administrative chains.", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 16},
   {"thing": "militia", "path": ".institutions[].desc", "text": "outfit the militias", "reason": "cure", "note": "src/data/institutionDescVariants.js", "towns": 33},
   {"thing": "militia", "path": ".institutions[].desc", "text": "outfits town militias", "reason": "cure", "note": "src/data/institutionalCatalog.js", "towns": 51},
-  {"thing": "militia", "path": ".powerStructure.factions[].desc", "text": "Town watch and militia", "reason": "cure", "note": "src/data/powerSiblings.js declares the watch alone", "towns": 91},
   {"thing": "prison", "path": ".economicState.safetyProfile.guardEffectivenessDesc", "text": "the prison system is limited", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/safetyProfile.js (and a hedge: \"limited\")", "towns": 53},
   {"thing": "walls", "path": ".culturalIdentity.defensePattern", "text": "Ditches, banks, timber ramparts, and defensible hills protect clustered households.", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 7},
   {"thing": "walls", "path": ".culturalIdentity.defensePattern", "text": "ringworks, timber ramparts, and beacon systems follow where a place can man them.", "reason": "reported", "note": "the culture profile copied into the record unread (src/data/cultureProfiles.js, given to no lane; class II(a)): reported to the chair", "towns": 5},
@@ -813,7 +812,6 @@
    ["watch", "after-release", "The Watchmen's Company"]
   ],
   "src/data/powerSiblings.js": [
-   ["militia", "cure", "Town watch and militia; enforce ordinances, manage disorder, and report to the council."],
    ["temple", "after-release", "The church wants approval rights over market day activities. The village reeve disagrees."],
    ["temple", "after-release", "The church wants approval rights over who may trade and when. The village reeve disagrees."]
   ],
@@ -1126,7 +1124,6 @@
   "src/generators/power/rulingStructure.js": [
    ["market", "after-release", "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them."],
    ["market", "after-release", "Market merchants who profit from the settlement's position; buy from one direction, sell to another, lobby for both."],
-   ["militia", "cure", "Town watch and militia; enforce ordinances, manage disorder, and report to the council."],
    ["temple", "after-release", "Church authority is the formal source of governing legitimacy here; clergy hold both spiritual and temporal jurisdiction"],
    ["temple", "after-release", "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisi"],
    ["temple", "after-release", "Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usua"],

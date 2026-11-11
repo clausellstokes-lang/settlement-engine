@@ -12,7 +12,7 @@ import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.
 
 // CENSUS-5c (the chair's ruling of 05:25): the militia line reworded to presume nothing about the guard (R-U).
 const PATROL = "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.";
-const TOWN_WATCH = 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.';
+const TOWN_WATCH = 'Town watch; it enforces ordinances, manages disorder, and reports to the council.';
 const config = { priorityMilitary: 50, priorityEconomy: 50, tradeRouteAccess: 'road' };
 
 /** @param {string} tier @param {Array<{name: string, category?: string}>} institutions */
@@ -35,5 +35,10 @@ describe('rulingStructure FACTION_DESC_SIBLINGS (CENSUS-1e unit 2)', () => {
     const { desc, ledger } = militaryDesc('town', [{ name: 'Town watch', category: 'Defense' }]);
     expect(desc?.startsWith(TOWN_WATCH)).toBe(true);
     expect(ledger).toEqual([expect.objectContaining({ atoms: ['watch'], resolvedBy: 'drawn', drawKind: 'T' })]);
+  });
+
+  it('(c) COHERENCE-PRESUME: the town watch line names no militia (it printed in 91 of 91 corpus towns with none)', () => {
+    const { desc } = militaryDesc('town', [{ name: 'Town watch', category: 'Defense' }]);
+    expect(desc).not.toMatch(/militia/i);
   });
 });
