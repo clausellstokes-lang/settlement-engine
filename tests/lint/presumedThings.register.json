@@ -126,10 +126,7 @@
   {"thing": "war", "path": ".history.historicalEvents[].plotHooks[]", "text": "the war party is suppressing", "reason": "figure", "note": "a war party is a faction that wants war; no war is presumed", "towns": 34},
   {"thing": "war", "path": ".history.historicalEvents[].plotHooks[]", "text": "wartime fortune was built on betrayals", "reason": "past", "note": "the fortune was built in a past war", "towns": 41},
   {"thing": "war", "path": ".history.legacyAnnotations[].annotation", "text": "wartime property seizures", "reason": "past", "note": "a past war's legacy", "towns": 8},
-  {"thing": "war", "path": ".relationships[].description", "text": "is fought in raids, informants, and paperwork", "reason": "figure", "note": "a rivalry called a war", "towns": 10},
-  {"thing": "watch", "path": ".pressureSentence", "text": "The Watch Captain", "reason": "reported", "note": "the faction placeholder seat, src/generators/factionRoles.js (given to no lane), in towns with no watch: reported", "towns": 1},
-  {"thing": "watch", "path": ".relationships[].description", "text": "The Watch Captain", "reason": "reported", "note": "the faction placeholder seat, src/generators/factionRoles.js (given to no lane), in towns with no watch: reported", "towns": 15},
-  {"thing": "watch", "path": ".relationships[].tension", "text": "The Watch Captain", "reason": "reported", "note": "the faction placeholder seat, src/generators/factionRoles.js (given to no lane), in towns with no watch: reported", "towns": 13}
+  {"thing": "war", "path": ".relationships[].description", "text": "is fought in raids, informants, and paperwork", "reason": "figure", "note": "a rivalry called a war", "towns": 10}
  ],
  "arm1": {
   "src/data/arrivalProse.js": [
