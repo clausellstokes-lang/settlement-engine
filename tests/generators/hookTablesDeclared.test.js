@@ -101,7 +101,10 @@ describe('the outlook hooks carry their declarations beside the branches that pr
     expect(printed.includes('export const OUTLOOK_HOOK_SIBLINGS'), 'the printer carries no table of its own').toBe(false);
     // The old path still answers (scripts/lib/table-pools.mjs enrols the channel at foodBalance.js).
     expect((await import('../../src/generators/economy/foodBalance.js')).OUTLOOK_HOOK_SIBLINGS).toBe(OUTLOOK_HOOK_SIBLINGS);
-    expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).length).toBe(3);
+    // COHERENCE-AGREE (2026-11-11): the timber line's second event, the war line, its three events in peace, the starving set.
+    expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).map((k) => k.split(' ').slice(0, 4).join(' '))).toEqual([
+      'Something is killing the', 'War has taken the', 'The timber rafts stopped', 'The iron merchants have',
+      'The iron carts are', 'A new toll on', 'The settlement is starving.']);
     for (const [key, set] of Object.entries(OUTLOOK_HOOK_SIBLINGS)) {
       expect(printed.includes(key), key.slice(0, 40)).toBe(true);
       expect(set[0].text).toBe(key);

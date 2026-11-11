@@ -830,10 +830,9 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     )
     || hasTeleportationInfra(institutions, config);
   if (mustImport) {
-    const available = availableNativeResourceKeys(config || {});
+    const pick = Math.round(Number(population) || 0) + (institutions?.length || 0); // COHERENCE-AGREE: the event a place draws, by its size, no roll
     mustImport.forEach((resource) => {
-      // COHERENCE-AGREE: a material the town's own live resources yield is no import and no hook.
-      if (liveMaterialFor(resource, available)) return;
+      if (liveMaterialFor(resource, availableNativeResourceKeys(config || {}))) return; // COHERENCE-AGREE: a live material is no import and no hook
       if (hasImportProcessor(institutions, resource, config)) {
         if (!hasExternalSupply) return;
         warnings.push({
@@ -845,16 +844,16 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
           suggestedFixes: [`Establish stable trade relationship with ${resource} supplier`],
         });
         if (resource.toLowerCase().includes('timber'))
-          hooks.push({
-            category: 'Resource Conflict',
-            // COHERENCE-AGREE: two events, picked by the place's identity with no roll.
-            hook: fnv1a32(['timber', population, route, terrain?.name, institutions?.length].join('|')) % 2 === 0
-              ? "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?"
-              : TIMBER_RAFT_HOOK,
-            severity: 'medium',
+          hooks.push({ category: 'Resource Conflict', severity: 'medium',
+            hook: ["Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
+              'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.'][pick % 2],
           });
         if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
-          hooks.push({ category: 'Strategic Resource', hook: ironHookFor(facts, [population, route, terrain?.name, institutions?.length]), severity: 'medium' });
+          hooks.push({ category: 'Strategic Resource', severity: 'medium', hook: (typeof facts === 'function' ? facts() : facts)?.warState !== 'peace' // the war line only where the record holds a war
+            ? 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.'
+            : ['The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and people are starting to complain.',
+              'The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work waits on mended tools.',
+              'A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.'][pick % 3] });
       }
     });
   }
@@ -878,18 +877,6 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
 };
 
 /**
- * COHERENCE-AGREE (the chair's ruling on hooks, 2026-11-11): the iron hook asserts a war only where
- * the record holds one (an unanswered record keeps the war line, as before); in peace it opens an
- * event of its own, picked by the place's identity with no roll.
- * @param {object | (() => object) | null} facts @param {ReadonlyArray<unknown>} identity
- */
-function ironHookFor(facts, identity) {
-  const known = /** @type {{ warState?: string } | null} */ (typeof facts === 'function' ? facts() : facts);
-  if (!known || known.warState !== 'peace') return WAR_IRON_HOOK;
-  return PEACE_IRON_HOOKS[fnv1a32(identity.join('|')) % PEACE_IRON_HOOKS.length][0];
-}
-
-/**
  * CENSUS-3h (R-AV, the chair's answer 2 of 2026-11-05 08:3x): a twin carries only the severity and
  * category the record holds. The moderate-gap twin prints only where the food record reads
  * Import-Dependent or Pressured (its declaration); its category is that band's own label (the one
@@ -908,4 +895,4 @@ function moderateGapGrade(facts) {
   if (severity === undefined) return {};
   return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
 }
-import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS, PEACE_IRON_HOOKS, TIMBER_RAFT_HOOK, WAR_IRON_HOOK } from './outlookHookSiblings.js'; import { liveMaterialFor } from './localMaterials.js'; import { fnv1a32 } from '../../kernel/proseHash.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
+import { MODERATE_GAP_TWIN, OUTLOOK_HOOK_SIBLINGS } from './outlookHookSiblings.js'; import { liveMaterialFor } from './localMaterials.js'; export { OUTLOOK_HOOK_SIBLINGS }; // LANDING-R2 (ODQ §934.105): the outlook hooks' declared siblings moved verbatim to economy/outlookHookSiblings.js, re-exported; below every cited line, so none moves
