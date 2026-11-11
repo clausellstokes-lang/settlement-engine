@@ -159,6 +159,20 @@ describe('drawTies — the target rule', () => {
     expect(two.map((t) => `${t.from}>${t.to}`)).toEqual(['a>b', 'b>a']);
   });
 
+  it('an `other` mint ties to the governing power\'s first — the dual-hat leader where a house leads, not the office (COHERENCE-POWERS)', () => {
+    const cast = [
+      card('npc_mayor_and_council', { institution: { kind: 'house', key: 'Mayor and council', title: 'the mayor' }, memberships: [{ power: 'Town Council', rank: 2, share: 1 }] }),
+      card('npc_mills', { institution: { kind: 'house', key: 'Mills (2-5)', title: 'the miller' }, memberships: [{ power: 'Town Council', rank: 1, share: 0 }] }),
+      card('npc_power_revolt_leadership', { institution: { kind: 'power', key: 'Revolt Leadership' }, memberships: [{ power: 'Revolt Leadership', rank: 1, share: 1 }] }),
+    ];
+    const place = { institutions: [{ name: 'Mayor and council' }, { name: 'Mills (2-5)' }], tier: 'town', government: 'Town Council' };
+    const mintTie = drawTies(cast, place, createPRNG('t')).find((t) => t.from === 'npc_power_revolt_leadership');
+    expect(mintTie?.to).toBe('npc_mills');
+    // a cast with no ranks (a save from before the car) still ties the mint to the seat house's face
+    const old = cast.map((c) => ({ ...c, memberships: [] }));
+    expect(drawTies(old, place, createPRNG('t')).find((t) => t.from === 'npc_power_revolt_leadership')?.to).toBe('npc_mayor_and_council');
+  });
+
   it('the weights: a minted face or no house is 1; a shared power multiplies by 3', () => {
     expect(targetWeightOf(card('m', { institution: { kind: 'power', key: 'Elder Council' } }))).toBe(1);
     expect(targetWeightOf(card('d', { institution: null }))).toBe(1);
