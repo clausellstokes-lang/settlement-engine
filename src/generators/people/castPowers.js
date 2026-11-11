@@ -337,8 +337,11 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
   // ── The three (R-P5), per power ──────────────────────────────────────────────────────────
   for (const power of powers) {
     const pool = members.get(power);
-    if (!pool.length) continue;
     const isGoverning = power === governing;
+    // the dual-hat leader holds the office whatever its house backs, so a governing power with no member
+    // of its own still seats its leader (a hamlet's elders, whose houses back no power)
+    const hat = isGoverning && rulerRow ? dualHatHouseOf(institutions, rulerRow) : null;
+    if (!pool.length && !hat) continue;
     /** @type {Member[]} */
     const chosen = [];
     const remaining = [...pool];
@@ -350,7 +353,6 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
       // face of the house the leader comes from (representatives.js :: dualHatHouseOf), a member of the
       // governing power whatever its house backs, carrying the office's title in its `role` (its `title`
       // stays its house's). Else the seat as before: the seat house's face, or the minted seat.
-      const hat = rulerRow ? dualHatHouseOf(institutions, rulerRow) : null;
       const leader = hat ? memberOrJoin(String(hat.house.name || ''), power, pool, remaining, all) : null;
       if (leader) {
         take(leader);
