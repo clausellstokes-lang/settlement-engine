@@ -64,10 +64,16 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: ['Bulk grain (local fields depleted)'] } });
     expect(details(spent)).toContain('A shortage import stands beside the resource it says is spent.');
   });
+  test('available worked land the food record does not count as a source', () => {
+    const land = (sources) => record({ config: { nearbyResources: ['grazing_land'], nearbyResourcesNativeDepleted: [] },
+      economicState: { foodSecurity: { foodRecord: { grownPct: 50, foodSources: sources } } } });
+    expect(details(land([]))).toContain('Available worked land is not among the food sources.');
+    expect(details(land(['livestock']))).toEqual([]);
+  });
 });
 
 /** The seeds that disagreed at the base, by finding (the lane's corpus measure). */
-const SEEDS = ['agree-village-0', 'agree-village-1', 'agree-village-2', 'agree-village-5', 'agree-village-7', 'agree-village-14',
+const SEEDS = ['agree-town-2', 'agree-town-5', 'agree-village-0', 'agree-village-1', 'agree-village-2', 'agree-village-5', 'agree-village-7', 'agree-village-14',
   'agree-village-28', 'agree-town-0', 'agree-town-3', 'agree-town-7', 'agree-town-8', 'agree-town-14', 'agree-town-43', 'agree-town-73'];
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };

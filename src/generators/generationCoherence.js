@@ -312,11 +312,15 @@ function resourceTruthFindings(settlement) {
  *   strategic  a yield clause of the strategic line the town's resources do not stand on
  *   hooks      a viability hook that names a war the record does not hold, or a material the town has
  *   safety     the safety text naming a mercenary company the defence home does not list
+ *   sources    available fields, floodplain or grazing that the food record does not count as a source
  *   food       bare grain a primary import, unqualified, where the town grows 90% or more of its need; a
  *              shortage import ("local fields depleted") beside the resource it says is spent
  * @param {any} settlement
  * @returns {{ resource: Array<{path:string, detail:string, evidence?:string}>, food: Array<{path:string, detail:string, evidence?:string}> }}
  */
+/** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
+const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
+
 export function projectionAgreementFindings(settlement) {
   const resource = [];
   const food = [];
@@ -367,7 +371,13 @@ export function projectionAgreementFindings(settlement) {
       food.push(finding(`economicState.primaryImports[${index}]`, 'Grain stands as a primary import, unqualified, where the town grows most of its need.', `${label}; grown ${grownPct}%`));
     }
   }
+  const sources = settlement?.economicState?.foodSecurity?.foodRecord?.foodSources;
   for (const record of nativeResourceConditionRecords(settlement?.config || {})) {
+    // The chair's food-sources ruling (2026-11-11): worked land is a source by its own name.
+    const source = record.condition === 'available' ? CULTIVATED_SOURCE_OF[record.key] : null;
+    if (source && Array.isArray(sources) && !sources.includes(source)) {
+      food.push(finding('economicState.foodSecurity.foodRecord.foodSources', 'Available worked land is not among the food sources.', `${record.key}: no ${source}`));
+    }
     const shortage = record.condition === 'available' ? resourceShortageImport(record.key) : null;
     const index = shortage ? imports.indexOf(shortage) : -1;
     if (index >= 0) food.push(finding(`economicState.primaryImports[${index}]`, 'A shortage import stands beside the resource it says is spent.', `${shortage}: ${record.key} available`));
