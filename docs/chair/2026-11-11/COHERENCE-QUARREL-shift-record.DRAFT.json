@@ -1,0 +1,23 @@
+{
+  "_doc": "DRAFT — NOT SIGNED. THE GOLDENS AT COHERENCE-QUARREL's MERGE POINT, drafted by the COHERENCE-QUARREL seat (session session_01FbPLbeUQdBCtu4EwEZeXjs, lane/coherence-quarrel-2026-11-11) on the chair's charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0.7 and the chair's ruling THE HERALD GOLDEN AT POINT 36 (ODQ draft): the lane drafts ONE record, learns its predicted rows in a scratch copy never committed, does NOT run a golden door, and names the golden rows red at its tip as the merge seat's act. THE MERGE SEAT FILLS `seat`, names the merge commit in `cause`'s first clause, re-measures every predictedRows at the merged tree (PRESUME and AGREE merge before this lane and move text of their own), and moves the file to docs/shift-records/ under a dated name.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you. · also i want these fixed before release",
+  "ownerDate": "2026-11-11",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique, the chair's COHERENCE charters of 2026-11-11",
+  "cause": "THE QUARRELS' ISSUES AND HOOKS AND THE SAFETY RECORD'S PLOT HOOKS (COHERENCE-QUARREL, classes III and IV) — lane/coherence-quarrel-2026-11-11 over base 99bcc6944 [MERGE SEAT: name the merge commit here]. Cure 2 widens the quarrels' issue table (power/conflictIssues.js: 44 base issues, each with its stakes and two or three hooks of its own) and draws ONE hook per quarrel from the issue's own hooks and the flag hooks that are up, by one fnv1a32 of the seed, the parties and the issue (no roll); cure 1 offers a pair only the issues its two powers' kinds can fill (the draw is the same one pick, so no roll moves); cure 3 adds one clause to a quarrel's description naming a power its issue touches that is not a party; cure 4 gives the smuggling safety hook four tellings chosen by hashKey of the seed. FIELD-DIFFED at the lane's tip 51b64c520 against the base over the golden's 525 configurations: 476 rows move, and ONLY these leaves: conflicts[].plotHooks 476, conflicts[].issue/stakes/desc 475, the same four under powerStructure.conflicts (the dual-written list), economicState.safetyProfile.plotHooks[] 86. No other leaf of any row moves: no goal, no tie, no roster, no band, label or score. Saved worlds are untouched.",
+  "seat": "",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 476,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 828,
+      "proofForm": "derived-artefact"
+    }
+  ],
+  "alsoRedAtTheLaneTip": "Digest pins that read the same moved leaves and are re-keyed by the merge seat with the goldens, each measured at 51b64c520: tests/property/espionageDormancyFence.test.js THE DRIVEN GOLDEN (360-settlement hash; its header calls a move a STOP outside a chartered window — the chair rules whether this charter is that window); tests/generators/x46NpcBand.test.js (38 of 60 dark digests, tests/fixtures/x46-npc-band-dark-digests.json); tests/generators/institutionBudgetPromise.test.js (37 of 60 digests); tests/domain/editWorldFactResources.test.js A2, A6 and tests/domain/worldFactRederive.test.js A7 (digests and the two fixtures); tests/property/dmLayerGoldenIsolation.test.js A7 (476 rows); tests/property/editCorpusRatchet.test.js A5, A7; and the golden-corpus byte checks of tests/generators/{nameHeldThroughAssembly,pipelinePinnedChoosers,pipelinePinnedMode x3,powerEconomyFreshness,rosterFinalUnderHeldRoster}.test.js and generationForkCensus A1 (21 rows under the instrument)."
+}
