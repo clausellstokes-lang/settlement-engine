@@ -204,8 +204,11 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 73,292 -> 73,469 (408/394/388 unmoved) at MERGE-TRAIN RECORD 10, THE COMPOSED-PROSE MANIFEST AT THE ALLEGIANCE TRAIN'S FINAL TIP (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-10-composed-prose-manifest.json), bisected
     // at every merge point's stage: ALLEGIANCE-CAR1 0, CAR2 +15, CAR3 -6, WRITE-TITLES-14 0, OWNER-WORDS-DOSSIER 0, the three small lanes 0, CAR4 +168.
     // Towns unmoved at 516/3/3/3.
+    // 73,469 -> 73,397 (408/394/388 unmoved) at STYLE-2-MERGE CLOSING ACT 2, THE COMPOSED-PROSE MANIFEST AT THE STYLE WAVE'S FINAL TIP (ODQ §934.105, STYLE-2-MERGE, 2026-11-11; record docs/shift-records/2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json),
+    // at every merge point's tree (86 trees, point to point): SW-B1 CONTRADICTIONS (point 17) -72, every other point 0 (SW-B5, SW-B6, SW-7 and SW-8 move content, not count).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 73_469, towns: 516 },
+      'golden-master-v3': { cells: 73_397, towns: 516 },
       'gm-seed-a': { cells: 408, towns: 3 },
       'gm-seed-b': { cells: 394, towns: 3 },
       'gm-seed-c': { cells: 388, towns: 3 },
