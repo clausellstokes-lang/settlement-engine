@@ -6,6 +6,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { generateResourceAnalysis } from '../../src/generators/resourceGenerator.js';
+import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 
 describe('cure 1: the critical imports never deny a live local resource', () => {
   test('"metals" is not a critical import beside live iron; it is with no metal at all', () => {
@@ -32,5 +33,14 @@ describe('cure 2: the strengths and the strategic line are the town\'s', () => {
   });
   test('a forest town with game and no timber provides game', () => {
     expect(generateResourceAnalysis('forest', ['hunting_grounds', 'game meat'], [], []).strategicValue).toBe('Low-Medium - provides game, difficult to besiege');
+  });
+});
+
+describe('cure 3: the safety writer reads the mercenary fact from the defence home', () => {
+  test('a hireling hall beside the town watch is not "a mercenary company provides enforcement"', () => {
+    const profile = generateSafetyProfile({ priorityEconomy: 50, priorityMilitary: 50, priorityCriminal: 20 }, 'town',
+      [{ name: 'Town watch' }, { name: 'Hireling hall' }, { name: 'Town council' }]);
+    expect(profile.guardEffectivenessDesc).not.toMatch(/mercenary compan/i);
+    expect(profile.guardEffectivenessDesc).toMatch(/watch/i);
   });
 });

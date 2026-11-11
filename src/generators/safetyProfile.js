@@ -54,7 +54,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   // CENSUS-1b unit A (a), the chair's ruling: the militia atom is the home's too (a ruined
   // militia patrols nothing; a household levy is a militia). It moves births, counted by cause.
   const defence = defenceOf({ institutions });
-  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia };
+  // COHERENCE-AGREE: the mercenary atom is the home's too (priorityHelpers' own list of names named
+  // "a mercenary company" in towns whose defence record lists none).
+  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia, hasMercenary: defence.mercenary };
   // CENSUS-1e unit 2 (Appendix B item 23, the inline T branches): each line CENSUS-5b declared in
   // SAFETY_LINE_SIBLINGS (below) resolves at the branch that prints it, against the live roster's
   // facts — the original where the record holds its atom, else its twin. Draw-free.
