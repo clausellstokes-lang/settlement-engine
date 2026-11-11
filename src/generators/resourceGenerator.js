@@ -643,8 +643,13 @@ export const generateResourceAnalysis = (
     exports,
     gaps,
     featureEffects,
-    economicStrengths: terrain.economicStrengths,
-    strategicValue:   terrain.strategicValue,
+    // COHERENCE-AGREE: the terrain's strengths and strategic line are defaults; the town keeps a
+    // strength only where its own resources or route stand under it, and a yield clause likewise.
+    economicStrengths: (terrain.economicStrengths || []).filter(strength => {
+      const rule = STRENGTH_SUPPORT[/** @type {keyof typeof STRENGTH_SUPPORT} */ (strength)];
+      return Boolean(rule) && townSupports(nearbyResources || [], rule, config.tradeRouteAccess);
+    }),
+    strategicValue:   townStrategicValue(terrainType, nearbyResources || []),
     priorityNotes,
   };
 };
