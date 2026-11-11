@@ -66,9 +66,11 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * Military/Guard entry is keyed by the military PRIORITY and the tier, not by the roster). Keyed by
  * the printed text; each printing branch resolves through `said` → `resolveSibling` (CENSUS-1e
  * unit 2). Measured on the 1,000, printed / false by the record: "Town watch
- * and militia" 48 / 0 on `watch` (48 / 48 on `militia`); COHERENCE-PRESUME (2026-11-11) reworded it to
- * the watch alone, which is all it declares (91 of 91 corpus towns printing it had no militia, and
- * the militia is not settled at this step, R-Q), the city garrison
+ * and militia" 48 / 0 on `watch` (48 / 48 on `militia`). THE CHARTER OVERRIDES R-C (COHERENCE-PRESUME,
+ * the owner's order of 2026-11-11, the chair's ruling): R-C read "militia" as the watch's own levy; an
+ * outside reader read two forces, and 91 of 91 corpus towns printing it had no militia. The militia
+ * is not settled at this step (R-Q), so the line cannot declare it; it prints its twin, the watch
+ * alone ("Town watch; it enforces ordinances, …"), the city garrison
  * lines 101 / 0 and 30 / 0, the market-day traders 8 / 0. The part-time militia (7 / 1) and the
  * armed patrol (34 / 13) sets LEFT this table (CENSUS-5c, the chair's ruling of 05:25: the militia
  * is not settled at this draw, so R-U rewords both lines at their branch to their twins' wording), and
