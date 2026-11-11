@@ -18,8 +18,6 @@
    "after-release": "only arm 1 lists it (the corpus never printed it false): banked by name for after the release, the charter's cut"
  },
  "arm2": [
-  {"thing": "bank", "path": ".arrivalScene", "text": "A money changer sits at his table", "reason": "cure", "note": "src/data/arrivalProse.js declares the crisis dimension only", "towns": 3},
-  {"thing": "bank", "path": ".arrivalScene", "text": "belongs to nobody local: a counting house", "reason": "cure", "note": "src/data/narrativeData.js, the indebted arrival", "towns": 4},
   {"thing": "bank", "path": ".history.founding.reason", "text": "built a counting house at the junction", "reason": "past", "note": "the founding: a past event", "towns": 2},
   {"thing": "bank", "path": ".institutions[].desc", "text": "banking and minting", "reason": "figure", "note": "what the trade serves at large", "towns": 6},
   {"thing": "bank", "path": ".institutions[].desc", "text": "Banking and minting depend on it", "reason": "figure", "note": "what the trade serves at large", "towns": 1},
@@ -137,7 +135,6 @@
  ],
  "arm1": {
   "src/data/arrivalProse.js": [
-   ["bank", "cure", "A money changer sits at his table with coins from many mints."],
    ["temple", "after-release", "Someone has left fresh flowers at a small shrine set into a wall."]
   ],
   "src/data/cultureProfiles.js": [
@@ -676,7 +673,6 @@
    ["watch", "after-release", "the watch sergeant"]
   ],
   "src/data/narrativeData.js": [
-   ["bank", "cure", " is new, stone-built, and belongs to nobody local: a counting house, its brass plate polished daily by a clerk who arriv"],
    ["bank", "after-release", "was founded when a powerful merchant family built a counting house at the junction"],
    ["docks", "after-release", " announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air"],
    ["docks", "after-release", "'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against"],
