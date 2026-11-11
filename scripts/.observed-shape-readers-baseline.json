@@ -179,15 +179,21 @@
   "ALLEGIANCE-CAR4 merge (one rung, two causes, every row with one and its class): the goals rebuilt (03ff59084)",
   "ADMIT 7 `on intent` rows, retire 4 by repair and lose 16 to UNCURED INSTRUMENT EROSION (recorded as such, not",
   "a cure); the fingerprint re-based (0a18ff311) ADMITS 1; nothing is declared and the bank is 76/50 (RETIRED).",
-  "SCHEMA 40 = schema 39's topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER'S",
+  "SCHEMA 40 (RETIRED) held schema 39's topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER'S",
   "ADMISSION (lane SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): the cloud row builder",
   "(src/lib/saves.js) stamps `publicProse` on the record at every save, and its one guarded read",
   "(src/domain/display/publicProse.js) has no observed writer because the corpus never runs the save path.",
   "The save-time-writer class explains it: ONE declaration, `publicProse on settlement`, the roster 14 -> 15;",
-  "the one new row is admitted TAGGED and nothing else moves.",
-  "Of the fifteen declared bank entries FOURTEEN bank reads today; `isCriminal on incomeSources`",
+  "the one new row is admitted TAGGED and nothing else moves (RETIRED).",
+  "SCHEMA 41 = schema 40's topology, tag law and corpus definition, re-governed to THE PLAYED-WORLDS WRITER'S",
+  "ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer class,",
+  "played-worlds-writer (a writer that runs only in campaign time and is dormant in the birth corpus), and its",
+  "first declaration, `outcome on outcome` (src/domain/worldPulse/convergence.js, the proposal record minted",
+  "behind interventionActive), the writer behind src/domain/display/newsBody.js :: itemSettlementIds; the",
+  "roster 15 -> 16; the one row, admitted ordinary at 40, is TAGGED and nothing else moves.",
+  "Of the sixteen declared bank entries FIFTEEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
-  "subset of declared. This envelope banks 77 banked read(s) across 51 tagged address(es).",
+  "subset of declared. This envelope banks 78 banked read(s) across 52 tagged address(es).",
   "The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —",
   "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
   "language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside",
@@ -195,7 +201,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–39 are the RETIRED numeric predecessors."
+  "Schemas 4–40 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -211,14 +217,14 @@
  "digests": {
   "corpusMeta": "58cab3a3326eb174bb6b270ede5c99bdb7c66018f4dbd452688fc185958411c8",
   "inventory": "2f2710823f3ff1d926581a2c180ee40e7ec18e4b1aef597faee5dc5fa132a3e0",
-  "manifests": "a41553c0d83b2fc72983f7bce9c0337f120fedf2668d5d5f25aedf559c2d191c",
-  "migrationReview": "e5c8b4467103820ee77f23823caf20f1b1879954fd9d6002f803e75c62199acd",
-  "rowTags": "47181a3a0f6e8c2cfb9bacfac07a1dc2ce38e90daa3c8767eb0eddf2692e6600",
+  "manifests": "57d4689c39492b129fa5c9667ce9154450e681ea28ba4cff98a63c7b53eb0e7c",
+  "migrationReview": "1603931d40c41441a09b7e2334566544d67422ef9d6bb064b01295e54063c398",
+  "rowTags": "a3127aa474bc89b4a9970dcd722ffd474cf0c8a23a54f66e13512a73135e28f4",
   "scanStats": "91ef6a6e984b869c0da640b931844cf4cd1e1086a11e00926e7b61e2b7dc57f8",
   "sentinel": "5fb5f4073fca385e9f3813855e19eb3decb95cb89691cc366fc1e18b18ad7d01"
  },
  "frozen": "2026-11-11",
- "frozenAtSha": "0821e441f80420a221569dd9a69719c7becf416e",
+ "frozenAtSha": "75dd3fc1739e9c7715e364c1ed8c43226daef417",
  "identities": 1532,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2625,7 +2631,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "68f029a389c9a097598f51fa49e82d550b64a5188aad546c992904ca6c536c38",
+   "digest": "2e1fe89a898adadc2be86e34bd9b4d97caa9610896d2d3e038dee2734d11057e",
    "entries": [
     {
      "mode": "100644",
@@ -2644,8 +2650,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "e87954549152c72500aa4f00877df68bc1bca46e63da6c09bf2bb8844b487885",
-     "size": 218061,
+     "sha256": "562e556ef97524b2f3ebe593080771b82a5ada98651f90c305cbebed5c05a8ec",
+     "size": 221875,
      "type": "file"
     },
     {
@@ -2665,8 +2671,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "cd81311442067a1148636066ee1bce5386544c735ec9db827fb52ef104218a19",
-     "size": 95865,
+     "sha256": "546ae5e555ab29635480a48fac64c17a89aba754eea436d6c8fa1bab0cd9fd9a",
+     "size": 97522,
      "type": "file"
     },
     {
@@ -2693,8 +2699,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "a8202c58e44d68354d6e5a1bf73105d423c96730d0459358a50280b49c7ea225",
-     "size": 276599,
+     "sha256": "2bd236f08803a86cf33ab5310ce088511b9960c3d96cf172e9feeca6937c831a",
+     "size": 280971,
      "type": "file"
     },
     {
@@ -2708,7 +2714,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "1978b1d14712ad973e4a20339ffb0aabc9ce5648f71027fea393610b8395707c",
+   "digest": "40237e3ba058e28520d57f2afbe65f1c65d4ee82255ba5710a4e8f08ea361ccc",
    "entries": [
     {
      "mode": "100644",
@@ -2727,8 +2733,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "e87954549152c72500aa4f00877df68bc1bca46e63da6c09bf2bb8844b487885",
-     "size": 218061,
+     "sha256": "562e556ef97524b2f3ebe593080771b82a5ada98651f90c305cbebed5c05a8ec",
+     "size": 221875,
      "type": "file"
     },
     {
@@ -2748,8 +2754,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "cd81311442067a1148636066ee1bce5386544c735ec9db827fb52ef104218a19",
-     "size": 95865,
+     "sha256": "546ae5e555ab29635480a48fac64c17a89aba754eea436d6c8fa1bab0cd9fd9a",
+     "size": 97522,
      "type": "file"
     },
     {
@@ -2776,8 +2782,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "a8202c58e44d68354d6e5a1bf73105d423c96730d0459358a50280b49c7ea225",
-     "size": 276599,
+     "sha256": "2bd236f08803a86cf33ab5310ce088511b9960c3d96cf172e9feeca6937c831a",
+     "size": 280971,
      "type": "file"
     },
     {
@@ -54575,29 +54581,29 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "ce88ba2c5cb293a717d90f36c46de363138698fbbc90adf6d8652699fc146af5",
+  "bundleDigest": "671c0f54f3f274be38c4d4f856ad4449e0475852f27ebb1339c21ed2f98056d6",
   "corpusDigest": "19216679612a5766b8bc775debd6dc692889b29e0d628db392470b3aa593f453",
-  "currentArtifactDigest": "c9378c8d4eb8c25d6857b88dee64a4d4a8972f260c01efa97f5f5afe8d788731",
-  "currentDetectorDigest": "68f029a389c9a097598f51fa49e82d550b64a5188aad546c992904ca6c536c38",
+  "currentArtifactDigest": "f1bd2ba93881c4cec41eab650be6531aa0023eeec30bb360beb4544470f638e1",
+  "currentDetectorDigest": "2e1fe89a898adadc2be86e34bd9b4d97caa9610896d2d3e038dee2734d11057e",
   "currentFindingsDigest": "fe1c760ee439cb784a9e3f68f6efbeb3425a710754d464af5957357d8186c18e",
-  "currentScannerSha": "0821e441f80420a221569dd9a69719c7becf416e",
-  "currentScannerToolDigest": "efff2195c067840e3729907816e3cee5af2da4e02f72f3d151b0b4e931499fb5",
-  "detectorTreeDigest": "68f029a389c9a097598f51fa49e82d550b64a5188aad546c992904ca6c536c38",
-  "executionTreeDigest": "1978b1d14712ad973e4a20339ffb0aabc9ce5648f71027fea393610b8395707c",
+  "currentScannerSha": "75dd3fc1739e9c7715e364c1ed8c43226daef417",
+  "currentScannerToolDigest": "31c9e32b2150fe9fac1a69c1b914ea0576938f391d7ae80dbce79b94c9a15bfc",
+  "detectorTreeDigest": "2e1fe89a898adadc2be86e34bd9b4d97caa9610896d2d3e038dee2734d11057e",
+  "executionTreeDigest": "40237e3ba058e28520d57f2afbe65f1c65d4ee82255ba5710a4e8f08ea361ccc",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "c9378c8d4eb8c25d6857b88dee64a4d4a8972f260c01efa97f5f5afe8d788731",
-  "legacyDetectorDigest": "68f029a389c9a097598f51fa49e82d550b64a5188aad546c992904ca6c536c38",
-  "legacyScannerSha": "0821e441f80420a221569dd9a69719c7becf416e",
-  "legacyScannerToolDigest": "efff2195c067840e3729907816e3cee5af2da4e02f72f3d151b0b4e931499fb5",
-  "predecessorBaselineDigest": "7839a5ead4696a6968847deebf518c5498254c06ff6606d830e00def037591f8",
-  "predecessorBaselineTextSha256": "5dc0674022ab39b6dd69bf3c852121eec25f44f73c98f63b5df65f27525326da",
-  "predecessorInventoryDigest": "c247a9481d92566fcb4d800685a6254fd3f0b0ad6411150a99c6a29ec2a5709e",
-  "reportDigest": "e1422c98edc8170119c45b73a12a5a80a63f77295130f2c4a74abcd038c4eea7",
-  "reviewDigest": "a950c90d777b6c9490be8beb32a7672d6161a594df5ea9007c4b7f9971fc5688",
+  "legacyArtifactDigest": "f1bd2ba93881c4cec41eab650be6531aa0023eeec30bb360beb4544470f638e1",
+  "legacyDetectorDigest": "2e1fe89a898adadc2be86e34bd9b4d97caa9610896d2d3e038dee2734d11057e",
+  "legacyScannerSha": "75dd3fc1739e9c7715e364c1ed8c43226daef417",
+  "legacyScannerToolDigest": "31c9e32b2150fe9fac1a69c1b914ea0576938f391d7ae80dbce79b94c9a15bfc",
+  "predecessorBaselineDigest": "e96237fea2c90937e72d77501353c8d6fc7ce62f328bc1b46d01fe48f41c72d9",
+  "predecessorBaselineTextSha256": "7500133215e4125131316ab55ff40b4fac71bf8e842042803e844972cff84ebe",
+  "predecessorInventoryDigest": "2f2710823f3ff1d926581a2c180ee40e7ec18e4b1aef597faee5dc5fa132a3e0",
+  "reportDigest": "fce1e0ac7947a94c24f52c52bcc5071f31c81cf32dc79e0d9bcd563d70f06f62",
+  "reviewDigest": "8150441add4930c4b127d1d7d6ab8d0d99af09bfa74da79e6a70144c67707dc2",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
   "scanTreeDigest": "063b4ba14f3e3b7f1a9c00a94f69c2a7224ce8072fc2c8c2da9c6d299add8547",
   "sourceTreeDigest": "2554ac7f1aa8cce5626c90181364b5be3708dc1438794aebefbc1e5f1a7adf3a",
-  "subjectSha": "0821e441f80420a221569dd9a69719c7becf416e",
+  "subjectSha": "75dd3fc1739e9c7715e364c1ed8c43226daef417",
   "targetInventoryDigest": "2f2710823f3ff1d926581a2c180ee40e7ec18e4b1aef597faee5dc5fa132a3e0"
  },
  "minRows": 40,
@@ -54690,6 +54696,12 @@
    },
    "temporary on npcs": {
     "reason": "LANDING-2b — the chair's ruling 2 of 2026-11-04 (the crisis set as measured)",
+    "rule": "explained-writer"
+   }
+  },
+  "src/domain/display/newsBody.js": {
+   "outcome on outcome": {
+    "reason": "STYLE-2-MERGE closing act 5 — the chair's FINAL RULING of 2026-11-09 21:2x (a TRUE schema change, admitted by the ONE rung at the final tip)",
     "rule": "explained-writer"
    }
   },
@@ -54903,13 +54915,13 @@
   "unresolved": 130317
  },
  "scannerProvenance": {
-  "detectorDigest": "68f029a389c9a097598f51fa49e82d550b64a5188aad546c992904ca6c536c38",
-  "executionTreeDigest": "1978b1d14712ad973e4a20339ffb0aabc9ce5648f71027fea393610b8395707c",
+  "detectorDigest": "2e1fe89a898adadc2be86e34bd9b4d97caa9610896d2d3e038dee2734d11057e",
+  "executionTreeDigest": "40237e3ba058e28520d57f2afbe65f1c65d4ee82255ba5710a4e8f08ea361ccc",
   "scanTreeDigest": "063b4ba14f3e3b7f1a9c00a94f69c2a7224ce8072fc2c8c2da9c6d299add8547",
   "sourceTreeDigest": "2554ac7f1aa8cce5626c90181364b5be3708dc1438794aebefbc1e5f1a7adf3a",
   "unscannedInputDigest": "7471e4fad8b25ff41dd0add80c55ff4c8d53b8baf255b2333528fa874c1c156d"
  },
- "schema": 40,
+ "schema": 41,
  "sentinel": {
   "resolvedReads": 11406,
   "totalKeys": 12223,

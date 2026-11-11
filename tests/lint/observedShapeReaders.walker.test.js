@@ -1418,7 +1418,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // ⭐ 76 → 77 AT THE SCHEMA-40 RUNG (2026-11-09, SW-B7b, the chair's grant of 13:5x): the ROSTER grows
     // by one — `publicProse on settlement`, the public prose projection the save path stamps — whose one
     // address (src/domain/display/publicProse.js) carries one read. MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(77);
+    // ⭐ 77 → 78 AT THE SCHEMA-41 RUNG (2026-11-11, STYLE-2-MERGE closing act 5, the chair's FINAL RULING of
+    // 2026-11-09 21:2x): the ROSTER grows by one, the first of a NEW class (played-worlds-writer) — `outcome on
+    // outcome`, the minted proposal's outcome — whose one address (src/domain/display/newsBody.js) carries one
+    // read. MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(78);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1496,6 +1500,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'migrationDirection on config',
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
+      // ⭐ THE SCHEMA-41 RUNG'S ONE (2026-11-11, the first played-worlds writer; 21:2x), alphabetical.
+      'outcome on outcome',
       // ⭐ THE SCHEMA-40 RUNG'S ONE (the public prose projection; SW-B7b), alphabetical.
       'publicProse on settlement',
       'stresses on settlement',
@@ -1694,6 +1700,9 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'migrationDirection on config': { reads: 1, addresses: 1 },
       // ⭐ THE SCHEMA-40 ONE (SW-B7b): `publicProseOf`'s one read in src/domain/display/publicProse.js.
       'publicProse on settlement': { reads: 1, addresses: 1 },
+      // ⭐ THE SCHEMA-41 ONE (2026-11-11, STYLE-2-MERGE closing act 5, 21:2x): `itemSettlementIds`'s one read in
+      // src/domain/display/newsBody.js, written by worldPulse/convergence.js's minted proposal.
+      'outcome on outcome': { reads: 1, addresses: 1 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
@@ -1703,7 +1712,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // − 69 from the schema-23 rung, − 76 from the schema-27 rung, − 77 from the schema-29 rung,
     // moving with the banked figure pinned above rather than being a second hand-held copy of it.
     // − 76 from the schema-32 car-merge rung (MERGE-CAR). − 77 from the schema-40 rung (SW-B7b).
-    expect(clearOutright).toHaveLength(live.findings.length - 77);
+    // − 78 from the schema-41 rung (2026-11-11, STYLE-2-MERGE closing act 5, the played-worlds writer).
+    expect(clearOutright).toHaveLength(live.findings.length - 78);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
