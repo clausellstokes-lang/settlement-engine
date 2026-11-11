@@ -189,3 +189,39 @@ The landing fixture's `--check` (and a re-emit only if it moved) and N6's keep-o
 ## 10. CONFIRMED against PLAUSIBLE
 
 CONFIRMED by execution: every fact quoted from a generation, every count, every red-first and every green, the base red at `f0f98d883`, and the in-app populations and governments in the crops, which match the node runs. PLAUSIBLE (a reading, not a predicate): the three ✓ readings marked as such in §2, and the cause of the photograph's lettering change (the capturing machine's fonts).
+
+## 11. The final tip — `lane/integration-2026-11-07` at `7ab12183f` (2026-11-11)
+
+**The merge** (`2d54eae88`). The registers resolved as follows:
+- **The lighting census** takes the line's side. The merge seat re-freezes it at this lane's merge point; this lane adds three test files and 13 titles (the measured deltas in `0d9c7ad79`).
+- **The source-citation roster** is the union: `dated` 236 → 237.
+
+`git diff --stat 7ab12183f HEAD` lists this lane's files only.
+
+**THE STOP CHECK, passed.** The out-of-tree emit's six `realm.advance` records equal, word for word, the six the chair measured at `eba966fc5`. The voice receipts are unchanged, so `voice.narrated` stays grounded (`landingNarrationGrounding` green).
+
+**The fixture** (`063fdc88a`). Re-emitted through its door, `--check` exit 0. The fields that moved under point 36 (the simulation cure):
+- **realm.whyTrace:** trade now ends "strained / warning" (was "critical / danger"), with the second reason "Criminal pressure disrupts trade flows."; legitimacy reads 13 (was 11).
+- **realm.advance:**
+  - Out: Vael at week 1, and the broken trade routes at week 12.
+  - In: the Elder Council's capture of the water at week 9, and Caoilfhinn Gallagher's reforms at week 12.
+  - Moved: crime, from week 10 to week 12.
+- **realm.chronicle:** one entry moves from week 10 to week 12.
+
+**`src/copy/landing.js :: realm.body2`** is the chair's sentence verbatim (an OWNER VETO POINT). The grounding suite was re-keyed with it: weeks [2, 10] → [9, 12], one pair per beat.
+- **OLD:** "Then advance time. In Cnocby’s first twelve weeks the village turned to the faith of Vael and Étaín Sullivan set out to restore order; by week two the village was on a war footing; the religious conversion fracture passed, leaving its sectarian memory behind; by week ten crime had taken hold of its streets, and by week twelve its trade routes had broken down. Every one of those is a record the engine wrote, and every one carries its cause."
+- **NEW:** "Then advance time. In Cnocby’s first twelve weeks Étaín Sullivan set out to restore order and the village went onto a war footing; the split between the faiths ended, leaving its sectarian memory behind; by week nine control of the village’s water was passing to the Elder Council; and by week twelve Caoilfhinn Gallagher was pushing through reforms as crime took hold of its streets. Every one of those is a record the engine wrote, and every one carries its cause."
+
+**The photograph (N6): KEPT.** The overlay's inputs were proven on data, not by eye. The five members (Cnocby village · Keshigordu town · Skáloy city · Aryagrad town · Penshaw village) and the ten edges of the advanced regional graph are byte-identical between `ecadf531a` (where the rehearsal capture matched the committed picture's geography, markers and edges) and `7ab12183f`; the map seed (`landing-lf-033`) is a constant. So the committed `realm-cnocby.{png,webp}` stay, and with them the Cinzel lettering.
+- **Desktop:** `founding-worlds/landing-realm-desktop-final-tip.webp`, the landing's realm card at the final tip, with the committed photograph under the fixture's week-12 chronicle.
+- **Phone:** there is no phone view of the photograph. By the owner's ruling (ODQ §934.27, `HomeLanding.jsx`: "everything below the fold is NOT MOUNTED at phone width") the realm card is not rendered on a phone. CONFIRMED in iPhone 13 emulation: the page is 945 px tall and no element paints `realm-cnocby`.
+- **Noticed, for the owner, not cured:** the realm card's own overlay pins ("Cnocby", "Penshaw · Border incident") sit at fixed percentages (`LandingArtifacts.jsx`, `pinPos`) and do not line up with the photograph's markers, so Cnocby appears twice at different places.
+
+**Gates at `063fdc88a`, with exit codes:**
+- fixture `--check` 0.
+- tests/data + tests/copy + sampleForkPriorities + generateStrayConfigSeed + landingFixtureFreshness + aiMediaProvenance + foundingWorlds* + homeLanding + sourceCitationIntegrity + mutationCoverageManifest + negativeAssertionAnchor: 67 files / 704 tests, 0.
+- goldens (generatorGoldenMaster + dmLayerGoldenIsolation + generationForkCensus): 25/25, 0.
+- typecheck:ratchet 0.
+- eslint 0.
+
+**Not run at the final tip:** the whole tests/lint, tests/scripts and tests/components directories, a production build, and the lighting-census walker (its side is the line's, re-frozen by the merge seat).
