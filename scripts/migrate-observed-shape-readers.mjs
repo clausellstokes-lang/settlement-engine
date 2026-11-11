@@ -197,7 +197,13 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 39 -> 40 (LIVE)   THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the chair's grant of
+ *   schema 40 -> 41 (LIVE)   THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL
+ *     RULING of 2026-11-09 21:2x): one rung, one cause — a NEW writer class, `played-worlds-writer` (a writer that
+ *     runs only in campaign time and is dormant in the birth corpus), and its first declaration, `outcome on
+ *     outcome` (writer worldPulse/convergence.js), its one row tagged; the roster 15 -> 16, the bank 77/51 ->
+ *     78/52. Its full rationale lives beside `PLAYED_WORLDS_TARGET_SCHEMA`.
+ *
+ *   schema 39 -> 40 (RETIRED) THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the chair's grant of
  *     2026-11-09 13:5x): one rung, one cause — ONE save-time-writer declaration, `publicProse on settlement`
  *     (writer lib/saves.js), its one row admitted tagged; the roster 14 -> 15, the bank 76/50 -> 77/51. Its
  *     full rationale lives beside `PUBLIC_PROSE_TARGET_SCHEMA`.
@@ -370,6 +376,7 @@ import {
   validateSchema37Baseline,
   validateSchema38Baseline,
   validateSchema39Baseline,
+  validateSchema40Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1752,6 +1759,33 @@ export const TRAIN_CAR4_TARGET_SCHEMA = 39;
  *  walker-red, and its re-freeze lands next. */
 export const PUBLIC_PROSE_TARGET_SCHEMA = 40;
 
+/* ⭐⭐ THE SCHEMA 40 → 41 RUNG — THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5; the chair's
+ *  FINAL RULING of 2026-11-09 21:2x: "a TRUE schema change, admitted by the ONE rung at the final tip. Schema 40
+ *  → 41 admits a new writer class, "played-worlds writer" (a writer that runs only in campaign time and is
+ *  dormant in the birth corpus). Its first entry is convergence.js:1101's minted-proposal `outcome`, as the
+ *  writer behind `newsBody.js :: itemSettlementIds`'s read of `item.outcome?.affectedSettlementIds`. Gate-0
+ *  evidence: the shorthand spelling probe."; docs/INTEGRATION_STYLE_2_2026-11-09.md §3 and §2d act 5)
+ *
+ *  SW-11's leaf src/domain/display/newsBody.js :: itemSettlementIds (969077590, STYLE-2-MERGE point 12) reads
+ *  `item.outcome?.affectedSettlementIds` once; the writer is the proposal record src/domain/worldPulse/
+ *  convergence.js mints behind interventionActive (`mintedProposals.push({ … outcome, … })`, now at :1104-1107),
+ *  which runs only in campaign time. Point 17 measured the remedies the chair ruled before this one: the
+ *  detector cure (20:5x) does not apply (the live scan walks executed run objects by container name and the
+ *  reader scanner is byte-frozen); the virtual-dormant door (21:0x) is shape-scoped (`writeShapesOnShapeIn`: the
+ *  key inside an `outcome = {` / `outcome: {` literal) and the push literal is neither, so it is UNVERIFIABLE.
+ *  The class is therefore NEW: not a save-time writer (the corpus runs the domain pulse), not a conditional
+ *  generator branch (the writer is no generator step), and its declaration carries the chair's own words.
+ *
+ *  MEASURED at the subject against the schema-40 register (re-minted at d8d7ceee4, where the row was admitted
+ *  ordinary): SAME everywhere — the one row `outcome on outcome` at src/domain/display/newsBody.js (1 read)
+ *  keeps its count and gains its tag. CAUSE 1 (the only one) — the declaration (the roster 15 -> 16).
+ *
+ *  ⭐ THE BANK MOVES 77/51 → 78/52, MEASURED: the one declaration reaches one address and one read.
+ *  ⛔ The reconciliation must be ALL SAME; any moved row means the tip moved under the measurement and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `PLAYED_WORLDS_SCANNER_DELTA_PATHS`. The commit pair
+ *  holds as at every rung: this rung lands walker-red, and its re-freeze lands next. */
+export const PLAYED_WORLDS_TARGET_SCHEMA = 41;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1833,6 +1867,9 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [TRAIN_CAR4_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
   // GROWN at 40 (SW-B7b): one declaration, `publicProse on settlement`, one address and one read.
   [PUBLIC_PROSE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // GROWN at 41 (STYLE-2-MERGE closing act 5, 21:2x): one declaration of the new played-worlds-writer class,
+  // `outcome on outcome`, one address (newsBody.js) and one read.
+  [PLAYED_WORLDS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2473,6 +2510,14 @@ export const PUBLIC_PROSE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-40 → 41 delta: the THREE bookkeeping paths (the corpus definition is unchanged; package.json and
+ *  the eight generated execution inputs were absorbed by rung 40's act 2 at d8d7ceee4). */
+export const PLAYED_WORLDS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2549,6 +2594,8 @@ const TRAIN_CAR4_SCANNER_TRANSITION_POLICY =
   'schema-38-to-39-goals-v1';
 const PUBLIC_PROSE_SCANNER_TRANSITION_POLICY =
   'schema-39-to-40-public-prose-writer-v1';
+const PLAYED_WORLDS_SCANNER_TRANSITION_POLICY =
+  'schema-40-to-41-played-worlds-writer-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2607,6 +2654,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [TRAIN_CAR3_TARGET_SCHEMA]: TRAIN_CAR2_TARGET_SCHEMA,
   [TRAIN_CAR4_TARGET_SCHEMA]: TRAIN_CAR3_TARGET_SCHEMA,
   [PUBLIC_PROSE_TARGET_SCHEMA]: TRAIN_CAR4_TARGET_SCHEMA,
+  [PLAYED_WORLDS_TARGET_SCHEMA]: PUBLIC_PROSE_TARGET_SCHEMA,
 });
 
 /**
@@ -2718,6 +2766,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [TRAIN_CAR3_TARGET_SCHEMA]: validateSchema38Baseline,
   // The schema-40 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR4), validated as schema 39.
   [TRAIN_CAR4_TARGET_SCHEMA]: validateSchema39Baseline,
+  // The schema-41 rung's own predecessor (SW-B7b, the public prose writer), validated as schema 40.
+  [PUBLIC_PROSE_TARGET_SCHEMA]: validateSchema40Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -3241,6 +3291,12 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [PLAYED_WORLDS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PLAYED_WORLDS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PLAYED_WORLDS_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
   [PUBLIC_PROSE_TARGET_SCHEMA, Object.freeze({
@@ -4436,7 +4492,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PUBLIC_PROSE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PLAYED_WORLDS_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4452,8 +4508,9 @@ export function run(argv = process.argv.slice(2)) {
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
     PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA,
     TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA,
-    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${PUBLIC_PROSE_TARGET_SCHEMA} (live public-prose leaf),`
+    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${PLAYED_WORLDS_TARGET_SCHEMA} (live played-worlds leaf),`
+      + ` ${PUBLIC_PROSE_TARGET_SCHEMA} (retired public-prose leaf),`
       + ` ${TRAIN_CAR4_TARGET_SCHEMA} (retired allegiance-car4 leaf),`
       + ` ${TRAIN_CAR3_TARGET_SCHEMA} (retired allegiance-car3 leaf),`
       + ` ${TRAIN_CAR2_TARGET_SCHEMA} (retired allegiance-car2 leaf),`

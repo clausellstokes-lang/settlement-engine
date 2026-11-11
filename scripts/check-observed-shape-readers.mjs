@@ -113,11 +113,12 @@ import {
   RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
+  RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema40Baseline,
+  validateSchema41Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -287,7 +288,13 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     ADMISSION (lane SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE declaration of the
  *     save-time-writer class, `publicProse on settlement` (writer lib/saves.js; the corpus never runs the
  *     save path); the roster 14 -> 15, the bank 76/50 -> 77/51, and the one new row
- *     (src/domain/display/publicProse.js x1) admitted TAGGED. THE LIVE AUTHORITY.
+ *     (src/domain/display/publicProse.js x1) admitted TAGGED (RETIRED).
+ * 41 = schema 40's topology, tag law and corpus definition, re-governed to THE PLAYED-WORLDS WRITER'S
+ *     ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer
+ *     class, `played-worlds-writer` (a writer that runs only in campaign time and is dormant in the birth
+ *     corpus), and its first declaration, `outcome on outcome` (writer worldPulse/convergence.js, the minted
+ *     proposal behind interventionActive); the roster 15 -> 16, the bank 77/51 -> 78/52, and the one row
+ *     (src/domain/display/newsBody.js x1) TAGGED. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -323,6 +330,7 @@ export {
   RETIRED_TRAIN_CAR2_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR3_BASELINE_SCHEMA,
   RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
+  RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1536,6 +1544,26 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' path, so the read has no observed writer by construction. Read once by'
       + ' src/domain/display/publicProse.js :: publicProseOf.',
   }),
+  // ⭐⭐ THE SCHEMA-41 RUNG'S ONE DECLARATION, AND THE FIRST OF A NEW CLASS — the played-worlds writer
+  // (STYLE-2-MERGE closing act 5; docs/INTEGRATION_STYLE_2_2026-11-09.md §3, the OSR table, and §2d act 5),
+  // under the chair's FINAL RULING of 2026-11-09 21:2x: "a TRUE schema change, admitted by the ONE rung at
+  // the final tip." SW-11's src/domain/display/newsBody.js :: itemSettlementIds reads
+  // `item.outcome?.affectedSettlementIds` (969077590, point 12); its writer is convergence.js's minted
+  // proposal record, which carries the outcome it was minted from (`mintedProposals.push({ … outcome, … })`)
+  // and is minted only behind interventionActive, in campaign time. The ruled remedies before it were
+  // measured and closed: the detector cure (20:5x) does not apply to a byte-frozen reader scanner, and the
+  // virtual-dormant door (21:0x) is shape-scoped (an `outcome = {` / `outcome: {` literal), which a push
+  // literal is not. Gate-0 evidence: the shorthand spelling probe (`outcome,` in the push literal).
+  Object.freeze({
+    identity: 'outcome on outcome',
+    mechanism: 'played-worlds-writer',
+    writer: 'src/domain/worldPulse/convergence.js',
+    ruling: 'STYLE-2-MERGE closing act 5 — the chair\'s FINAL RULING of 2026-11-09 21:2x (a TRUE schema change, admitted by the ONE rung at the final tip)',
+    why: 'A reader bound to the walked outcome shape; the writer a proposal record minted behind'
+      + ' interventionActive; chair ruling 21:2x. convergence.js mints the proposal, carrying its outcome,'
+      + ' only in campaign time, so the birth corpus never observes the write. Read once by'
+      + ' src/domain/display/newsBody.js :: itemSettlementIds (item.outcome?.affectedSettlementIds).',
+  }),
 ]);
 
 /** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
@@ -1554,6 +1582,13 @@ const EXPLAINED_WRITER_MECHANISMS = Object.freeze([
   // ⚠ WHETHER THIS CLASS DESERVES ITS OWN TYPED DOOR (as virtual-dormant writers got) or
   // stays a one-off admission is TE-GUARDS-1's question, ruled explicitly NOT this lane's.
   'conditional-generator-branch',
+  // ⭐ THE SIXTH CLASS (the chair's FINAL RULING of 2026-11-09 21:2x, admitted by the schema-41 rung at the
+  // style wave's final tip). "played-worlds writer: a writer that runs only in campaign time and is dormant
+  // in the birth corpus." Distinct from the save-time writer (a store or save path the corpus never runs)
+  // and the conditional generator branch (a generator step the corpus runs without taking the branch): the
+  // writer is DOMAIN code the corpus executes, behind a gate the birth corpus does not light. An entry here
+  // must name the domain file that writes the key, and gate 0 proves the write is still there on every scan.
+  'played-worlds-writer',
 ]);
 
 export function assertExplainedWriterReason(reason, label = 'reason') {
@@ -1651,7 +1686,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema40Baseline(baseline);
+  validateSchema41Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3192,13 +3227,19 @@ export function baselineOf({
       'ALLEGIANCE-CAR4 merge (one rung, two causes, every row with one and its class): the goals rebuilt (03ff59084)',
       'ADMIT 7 `on intent` rows, retire 4 by repair and lose 16 to UNCURED INSTRUMENT EROSION (recorded as such, not',
       'a cure); the fingerprint re-based (0a18ff311) ADMITS 1; nothing is declared and the bank is 76/50 (RETIRED).',
-      'SCHEMA 40 = schema 39\'s topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER\'S',
+      'SCHEMA 40 (RETIRED) held schema 39\'s topology, tag law and corpus definition, re-governed to THE PUBLIC PROSE WRITER\'S',
       'ADMISSION (lane SW-B7b PROJECTION, the chair\'s grant of 2026-11-09 13:5x): the cloud row builder',
       '(src/lib/saves.js) stamps `publicProse` on the record at every save, and its one guarded read',
       '(src/domain/display/publicProse.js) has no observed writer because the corpus never runs the save path.',
       'The save-time-writer class explains it: ONE declaration, `publicProse on settlement`, the roster 14 -> 15;',
-      'the one new row is admitted TAGGED and nothing else moves.',
-      'Of the fifteen declared bank entries FOURTEEN bank reads today; `isCriminal on incomeSources`',
+      'the one new row is admitted TAGGED and nothing else moves (RETIRED).',
+      'SCHEMA 41 = schema 40\'s topology, tag law and corpus definition, re-governed to THE PLAYED-WORLDS WRITER\'S',
+      'ADMISSION (STYLE-2-MERGE closing act 5, the chair\'s FINAL RULING of 2026-11-09 21:2x): a NEW writer class,',
+      'played-worlds-writer (a writer that runs only in campaign time and is dormant in the birth corpus), and its',
+      'first declaration, `outcome on outcome` (src/domain/worldPulse/convergence.js, the proposal record minted',
+      'behind interventionActive), the writer behind src/domain/display/newsBody.js :: itemSettlementIds; the',
+      'roster 15 -> 16; the one row, admitted ordinary at 40, is TAGGED and nothing else moves.',
+      'Of the sixteen declared bank entries FIFTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
@@ -3208,7 +3249,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–39 are the RETIRED numeric predecessors.',
+      'Schemas 4–40 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3382,7 +3423,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema40Baseline,
+    validateBaseline: validateSchema41Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

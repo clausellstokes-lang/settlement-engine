@@ -7,13 +7,23 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **40**: schema 39's tagged numeric heuristic-leaf envelope, tag law and corpus
+ * `BASELINE_SCHEMA` is **41**: schema 40's tagged numeric heuristic-leaf envelope, tag law and corpus
+ * definition UNCHANGED, re-governed to THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the
+ * chair's FINAL RULING of 2026-11-09 21:2x: "a TRUE schema change, admitted by the ONE rung at the final tip"):
+ * ONE rung, ONE cause — a NEW writer class, `played-worlds-writer` ("a writer that runs only in campaign time
+ * and is dormant in the birth corpus"), and its FIRST declaration, `outcome on outcome` (writer
+ * `src/domain/worldPulse/convergence.js`, the minted proposal record behind interventionActive), the writer
+ * behind `src/domain/display/newsBody.js :: itemSettlementIds`. The roster 15 -> 16, the bank 77/51 -> 78/52,
+ * and the one row (newsBody.js x1, admitted ordinary at 40) TAGGED; nothing else moves. Its full rationale
+ * lives beside `PLAYED_WORLDS_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA` is **40**: schema 39's tagged numeric heuristic-leaf envelope, tag law and corpus
  * definition UNCHANGED, re-governed to THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the
  * chair's grant of 2026-11-09 13:5x, STYLE-RULINGS-2 B10(a)): ONE rung, ONE cause, ONE declaration of the
  * save-time-writer class, `publicProse on settlement` (writer `src/lib/saves.js`, the cloud row builder
  * that stamps the public prose projection; the corpus executes generation and never the save path). The
  * roster 14 -> 15, the bank 76/50 -> 77/51, and the one new row (src/domain/display/publicProse.js x1)
- * admitted TAGGED; nothing else moves. Its full rationale lives beside `PUBLIC_PROSE_TARGET_SCHEMA` in
+ * admitted TAGGED (RETIRED). Its full rationale lives beside `PUBLIC_PROSE_TARGET_SCHEMA` in
  * `migrate-observed-shape-readers.mjs`.
  *
  * `RETIRED_TRAIN_CAR4_BASELINE_SCHEMA` is **39**: schema 38's tagged numeric heuristic-leaf envelope, tag law, roster and
@@ -619,7 +629,11 @@ export const RETIRED_TRAIN_CAR3_BASELINE_SCHEMA = 38;
  *  prose writer's admission (SW-B7b). Never redefined, never deleted, so a schema-39 PREDECESSOR is still
  *  validated as schema 39. */
 export const RETIRED_TRAIN_CAR4_BASELINE_SCHEMA = 39;
-export const BASELINE_SCHEMA = 40;
+/** The RETIRED public-prose definition — schema 41's predecessor. Schema 41 re-governs it to the played-worlds
+ *  writer's admission (the chair's FINAL RULING 21:2x). Never redefined, never deleted, so a schema-40
+ *  PREDECESSOR is still validated as schema 40. */
+export const RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA = 40;
+export const BASELINE_SCHEMA = 41;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1404,10 +1418,20 @@ export function validateSchema39Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 40's tagged envelope (SW-B7b, the public prose writer), re-governed by
+ *  schema 41 to the played-worlds writer's admission. Re-bound to its own LITERAL. */
+export function validateSchema40Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema40Baseline(baseline) {
+export function validateSchema41Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
