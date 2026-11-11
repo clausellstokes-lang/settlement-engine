@@ -61,3 +61,20 @@ describe('cure 4: the import list tells the food record\'s story', () => {
     expect(eco.primaryImports).toContain('Grain (a little, beside its own harvest)');
   });
 });
+
+describe('cure 5: the viability hooks open events and do not answer the record otherwise', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test.each(['agree-village-28', 'agree-town-0', 'agree-town-3'])('%s is at peace and no hook says war took its iron', (seed) => {
+    const hooks = (birth(seed).economicViability?.plotHooks || []).map((h) => h.hook);
+    expect(hooks.filter((h) => /\b(?:war|armies)\b/i.test(h))).toEqual([]);
+    expect(hooks.some((h) => /\biron\b/i.test(h))).toBe(true);
+  });
+  test.each(['agree-village-1', 'agree-village-14', 'agree-town-8'])('%s has a live material and no hook makes it scarce', (seed) => {
+    const s = birth(seed);
+    const live = s.resourceAnalysis.availableResources;
+    const scarce = (s.economicViability?.plotHooks || []).map((h) => h.hook).filter((h) => (
+      (/\b(?:iron|metal)\b/i.test(h) && live.includes('iron_deposits'))
+      || (/\btimber\b/i.test(h) && ['managed_forest', 'mountain_timber', 'shipbuilding_timber', 'timber'].some((k) => live.includes(k)))));
+    expect(scarce).toEqual([]);
+  });
+});

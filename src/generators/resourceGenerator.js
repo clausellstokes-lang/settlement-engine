@@ -17,24 +17,15 @@ import {
 } from '../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
 import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
+import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
 
 // ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
 // The terrain table (`TERRAIN_DATA`) says what a kind of ground usually lacks and yields. The town's
 // own drawn resources and route override it. These tables are the words for that, written once and
 // read by the writer below and by the coherence receipt's agreement arm (generationCoherence.js).
 
-/**
- * A must-import requirement word, and the resources that yield the material outright. The commodity
- * words already join by token ("grain", "salt", "stone", "timber"); these two do not ("metals" is
- * not "iron"; peat and coal are fuel). A town's live iron answers "metals" (gold and silver already join by the token).
- * @type {Readonly<Record<string, ReadonlyArray<string>>>}
- */
-export const MATERIAL_RESOURCE_KEYS = Object.freeze({
-  metals: Object.freeze(['iron_deposits', 'iron']),
-  iron: Object.freeze(['iron_deposits', 'iron']),
-  fuel: Object.freeze(['coal_deposits', 'coal', 'marshlands', 'peat']),
-  timber: Object.freeze(['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber']),
-});
+// The material words live in a leaf (economy/localMaterials.js) so the viability hooks read them too.
+export { MATERIAL_RESOURCE_KEYS, liveMaterialFor };
 
 /**
  * What a terrain strength stands on: any one of these resources, or the route. A strength with
@@ -107,15 +98,6 @@ export const townSupports = (available, rule, route = '') => (
   rule.keys.some((key) => available.includes(key)) || (rule.routes || []).includes(route)
 );
 
-/** The requirement words a live resource answers outright. @param {unknown} requirement @param {ReadonlyArray<string>} available */
-export const liveMaterialFor = (requirement, available) => {
-  const words = String(requirement || '').toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[^a-z]+/);
-  for (const word of words) {
-    const hit = (MATERIAL_RESOURCE_KEYS[word] || []).find((key) => available.includes(key));
-    if (hit) return hit;
-  }
-  return null;
-};
 
 // ─── resolveNearbyCommodities ─────────────────────────────────────────────────
 // Turn the settlement's ACTUALLY-rolled nearby resources into the commodity/
