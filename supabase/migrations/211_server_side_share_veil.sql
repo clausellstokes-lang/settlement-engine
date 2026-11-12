@@ -264,13 +264,49 @@ begin
   return case when x < 0 then '-' else '' end || out;
 end $$;
 
--- Array.prototype.join(sep): a null element reads '', every other String(element). (plpgsql: it and
--- _gallery_veil_jsstr call each other, and a SQL body is checked against what exists when it is made.)
+-- Array.prototype.join(sep): a null element reads '', every other String(element); String() of an
+-- element that is itself an array is ITS elements joined by ',', at any depth, so it is that array's
+-- leaves in document order joined by ',' (an empty array is one empty leaf, an object reads
+-- '[object Object]'). Walked WITHOUT a nested call and in memory linear in the array (the second
+-- review's R4 class: the earlier form called _gallery_veil_jsstr, which called this, once per level,
+-- and an id 1,000 arrays deep exhausted the stack where 210 served it): a flat array (every array a
+-- generated town holds) is the one query it always was; a nested one is read from its own text, one
+-- token at a time (a string token is "..." with only escapes inside; jsonb prints nothing else
+-- between tokens but spaces). (plpgsql: _gallery_veil_jsstr calls this, and a SQL body is checked
+-- against what exists when it is made.)
 create or replace function public._gallery_veil_join(j jsonb, sep text)
 returns text language plpgsql immutable as $$
 begin
-  return coalesce((select string_agg(case when jsonb_typeof(e) = 'null' then '' else public._gallery_veil_jsstr(e) end, sep order by o)
-                     from jsonb_array_elements(j) with ordinality x(e, o)), '');
+  if jsonb_typeof(j) is distinct from 'array' then return ''; end if;
+  if not exists (select 1 from jsonb_array_elements(j) x(e) where jsonb_typeof(e) = 'array') then
+    return coalesce((select string_agg(case when jsonb_typeof(e) = 'null' then '' else public._gallery_veil_jsstr(e) end, sep order by o)
+                       from jsonb_array_elements(j) with ordinality x(e, o)), '');
+  end if;
+  return (
+  with t as (
+    select o as i, m[1] as tok
+      from regexp_matches(j::text, '"(?:[^"\\]|\\.)*"|[\[\]{}:,]|[^\[\]{}:,"[:space:]]+', 'g') with ordinality r(m, o)
+  ),
+  d as (
+    select i, tok, lead(tok) over w1 as nxt,
+           coalesce(sum(case when tok in ('[', '{') then 1 when tok in (']', '}') then -1 else 0 end) over w0, 0) as dep,
+           coalesce(sum(case when tok = '{' then 1 when tok = '}' then -1 else 0 end) over w0, 0) as brace
+      from t
+    window w0 as (order by i rows between unbounded preceding and 1 preceding), w1 as (order by i)
+  ),
+  l as (
+    -- the top element a token belongs to: the top level's commas before it (outside every object)
+    select i, tok, nxt, brace,
+           coalesce(sum(case when tok = ',' and dep = 1 and brace = 0 then 1 else 0 end)
+             over (order by i rows between unbounded preceding and 1 preceding), 0) as top
+      from d
+  )
+  select coalesce(string_agg(s, sep order by top), '')
+    from (select top, string_agg(case when tok = '{' then '[object Object]' when tok = '[' or tok = 'null' then ''
+                                      else public._gallery_veil_jsstr(tok::jsonb) end, ',' order by i) as s
+            from l
+           where brace = 0 and (tok = '{' or (tok = '[' and nxt = ']') or tok not in ('[', ']', '{', '}', ',', ':'))
+           group by top) q);
 end $$;
 
 -- String(v) of a JSON value (Array.prototype.join for arrays: null elements read '').
@@ -507,15 +543,107 @@ begin
      where '*' = any(path) and jsonb_typeof(e) = 'object';
 end $$;
 
--- dropHookKeys: every key matching /hook/i, at any depth.
+-- dropHookKeys: every key matching /hook/i, at any depth. Walked WITHOUT recursion and in memory
+-- linear in the document at any depth (the second review's R4: the earlier form called itself once
+-- per level, and a document about 550 deep under Reveal DM exhausted the stack where 210 served it).
+-- A key is always printed "<key>": with only escapes inside, so the text test below cannot miss one;
+-- a value that merely mentions a hook is a harmless extra.
+--   (1) THE SHALLOW WALK (every generated town): a recursive query, iterated by the executor, finds
+--       the objects and arrays ON THE WAY to a hook key (it descends only into a child whose text holds
+--       one, never below a dropped key), and those nodes alone are rebuilt, deepest first, each from its
+--       own children with the rebuilt ones in place and its hook keys left out.
+--   (2) PAST 64 LEVELS the walk would hold every level's subtree (memory the square of the depth), so
+--       the document is read from its text instead, one token at a time: each member whose key matches
+--       runs from its key to the next ',' or '}' of its own object (the next such token at its depth),
+--       those tokens are left out, a comma left without a member on either side goes with them, and
+--       the rest is the document again.
 create or replace function public._gallery_veil_drop_hooks(j jsonb)
 returns jsonb language plpgsql immutable as $$
+declare
+  txt text;
+  wp jsonb[];   -- the nodes on the way, deepest first: path (an array of keys and indexes)
+  wd int[];     -- their depth
+  wv jsonb[];   -- their value
+  np jsonb[];   -- the nodes rebuilt at one level: path
+  nv jsonb[];   -- and new value
+  maps jsonb := '{}';  -- the level below, rebuilt: {parent path: {key or index: new value}}
+  ix int := 1;
+  ex int;
+  n int;
 begin
+  if jsonb_typeof(j) is distinct from 'object' and jsonb_typeof(j) is distinct from 'array' then return j; end if;
+  txt := j::text;
+  if txt !~* 'hook([^"\\]|\\.)*": ' then return j; end if;
+  with recursive w(p, d, v) as (
+      select '[]'::jsonb, 0, j
+    union all
+      select w.p || to_jsonb(c.k), w.d + 1, c.v
+        from w, lateral (
+          select x.k, x.v from jsonb_each(case when jsonb_typeof(w.v) = 'object' then w.v else '{}' end) x(k, v)
+           where x.k !~* 'hook' and jsonb_typeof(x.v) in ('object', 'array') and x.v::text ~* 'hook([^"\\]|\\.)*": '
+          union all
+          select (y.o - 1)::text, y.v from jsonb_array_elements(case when jsonb_typeof(w.v) = 'array' then w.v else '[]' end) with ordinality y(v, o)
+           where jsonb_typeof(y.v) in ('object', 'array') and y.v::text ~* 'hook([^"\\]|\\.)*": ') c
+       where w.d < 64
+  )
+  select array_agg(p order by d desc), array_agg(d order by d desc), array_agg(v order by d desc) into wp, wd, wv from w;
+  if wd[1] < 64 then
+    n := array_length(wd, 1);
+    while ix <= n loop
+      ex := ix;
+      while ex < n and wd[ex + 1] = wd[ix] loop ex := ex + 1; end loop;
+      select array_agg(q.p), array_agg(q.v) into np, nv from (
+        select a.p, case when jsonb_typeof(a.v) = 'object' then
+            (select coalesce(jsonb_object_agg(x.k, coalesce(l.mm -> x.k, x.v)), '{}') from jsonb_each(a.v) x(k, v) where x.k !~* 'hook')
+          else
+            (select coalesce(jsonb_agg(coalesce(l.mm -> ((y.o - 1)::text), y.v) order by y.o), '[]') from jsonb_array_elements(a.v) with ordinality y(v, o))
+          end as v
+          from unnest(wp[ix:ex], wv[ix:ex]) a(p, v), lateral (select coalesce(maps -> (a.p::text), '{}') as mm) l) q;
+      select coalesce(jsonb_object_agg(g.pp, g.m), '{}') into maps
+        from (select (x.p - -1)::text as pp, jsonb_object_agg(x.p ->> -1, x.v) as m from unnest(np, nv) x(p, v) where jsonb_array_length(x.p) > 0 group by 1) g;
+      ix := ex + 1;
+    end loop;
+    return nv[1];
+  end if;
   return (
-  select case jsonb_typeof(j)
-      when 'array' then (select coalesce(jsonb_agg(public._gallery_veil_drop_hooks(e) order by o), '[]') from jsonb_array_elements(j) with ordinality x(e, o))
-      when 'object' then (select coalesce(jsonb_object_agg(k, public._gallery_veil_drop_hooks(v)), '{}') from jsonb_each(j) x(k, v) where k !~* 'hook')
-      else j end);
+  with t as (
+    select o as i, m[1] as tok
+      from regexp_matches(txt, '"(?:[^"\\]|\\.)*"|[\[\]{}:,]|[^\[\]{}:,"[:space:]]+', 'g') with ordinality r(m, o)
+  ),
+  d as (
+    select i, tok, lead(tok) over (order by i) as nxt,
+           coalesce(sum(case when tok in ('[', '{') then 1 when tok in (']', '}') then -1 else 0 end)
+             over (order by i rows between unbounded preceding and 1 preceding), 0) as dep
+      from t
+  ),
+  k as (
+    select i, tok, case when nxt = ':' and left(tok, 1) = '"' and (tok::jsonb #>> '{}') ~* 'hook' then 1 else 0 end as hk,
+           min(case when tok in (',', '}') then i end)
+             over (partition by dep order by i desc rows between unbounded preceding and 1 preceding) as sep
+      from d
+  ),
+  -- a member opens at its key (counted before the token) and closes at its own object's next ',' or
+  -- '}' (counted before that token, which stays)
+  ev as (
+    select i, tok, 0 as wt, 1 as istok from k
+    union all select i, null, 1, 0 from k where hk = 1
+    union all select sep, null, -1, 0 from k where hk = 1
+  ),
+  kept as (
+    select i, tok from (select i, tok, istok, sum(wt) over (order by i, istok rows between unbounded preceding and current row) as cov from ev) c
+     where istok = 1 and cov = 0
+  ),
+  r as (
+    select i, tok, lag(tok) over (order by i) as prv,
+           sum(case when tok <> ',' then 1 else 0 end) over (order by i desc rows between unbounded preceding and current row) as grp
+      from kept
+  ),
+  -- a comma stays only between two members that stay: never after '{', '[' or another comma, never before '}' or ']'
+  nb as (
+    select i, tok, prv, max(case when tok <> ',' then tok end) over (partition by grp) as nxt from r
+  )
+  select string_agg(tok, '' order by i)::jsonb from nb
+   where tok <> ',' or (prv not in ('{', '[', ',') and nxt not in ('}', ']')));
 end $$;
 
 -- The three house classes, apart (the defaults read them one by one).
@@ -756,13 +884,14 @@ create or replace function public._gallery_veil_grouping(s jsonb, g text)
 returns jsonb language plpgsql immutable as $$
 begin
   if g = 'tab:plot_hooks' then
-    -- the walk runs only where a key matches /hook/i at all (the sanitiser already strips most):
-    -- the question is asked once over the whole document, in C. First over its text, where a key is
-    -- always spelled "<key>": with only escapes inside (stepped over by \\.), so the pattern cannot
-    -- miss one; a value that merely mentions a hook falls through to the exact test (the review's F6:
-    -- the exact test alone cost 55 ms on the heaviest town)
+    -- the walk runs only where a key matches /hook/i at all (the sanitiser already strips most): the
+    -- question is asked once over the document's text, in C, where a key is always spelled "<key>":
+    -- with only escapes inside (stepped over by \\.), so the pattern cannot miss one; a value that
+    -- merely mentions a hook is walked and comes back unchanged. (The review's F6 kept an exact
+    -- jsonpath test `$.**` here as well; it is gone: on a document 9,000 deep it exhausted the
+    -- server's memory where 210 served, the second review's R4 class, and the walk's own text test
+    -- makes it redundant.)
     if s::text !~* 'hook([^"\\]|\\.)*": ' then return s; end if;
-    if not jsonb_path_exists(s, 'lax $.** ? (@.type() == "object").keyvalue() ? (@.key like_regex "hook" flag "i")') then return s; end if;
     return (select coalesce(jsonb_object_agg(k, case when k in ('id', 'name', 'tier', 'population', 'config') then v
                                                      else public._gallery_veil_drop_hooks(v) end), '{}')
               from jsonb_each(s) x(k, v)

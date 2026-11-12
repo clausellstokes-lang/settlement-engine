@@ -329,14 +329,69 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(Object.fromEntries(Object.entries(out).map(([k, v]) => [k, v.breaches]))).toEqual(Object.fromEntries(ROWS.map(([k]) => [k, []])));
   }, ROW_TIMEOUT_MS);
 
-  it('R3 (the class): 400 fuzzed stored documents, copies and narrations to the edges of the range, through all four reads at 211 and 210: PARITY', async () => {
+  /** A subtree N objects or arrays deep, a hook key at its bottom (the second review's R4 row). */
+  const deepText = (kind, depth) => {
+    let s = '{"theHook":"x"}';
+    for (let i = 0; i < depth; i += 1) s = kind === 'obj' ? `{"a":${s}}` : `[${s}]`;
+    return s;
+  };
+  /** An id N arrays deep (String() of it is Array.prototype.join, recursively). */
+  const deepId = (depth) => `${'['.repeat(depth)}1${']'.repeat(depth)}`;
+
+  it('R4 (the review rows): a document hundreds deep under Reveal DM makes no read raise that serves at 210', async () => {
+    const MARKED = '{"$veil":{"v":1,"deltas":[]}}';
+    const ROWS = [];
+    for (const kind of ['obj', 'arr']) for (const depth of [550, 900]) {
+      ROWS.push([`${kind} ${depth}, Reveal DM, marked`, { doc: `{"name":"T","npcs":[{"name":"A"}],"deep":${deepText(kind, depth)},"lore":{"aHook":"z"}}`, ov: MARKED, dm: true }]);
+    }
+    const out = {};
+    for (const [tag, row] of ROWS) {
+      const { before, breaches } = await parity(`r4-${Object.keys(out).length}`, row);
+      // anchored: 210 serves every read of these rows, so a 211 raise is a breach of the law
+      expect(Object.values(before), `${tag} at 210`).toEqual(['ok', 'ok', 'ok', 'ok']);
+      out[tag] = breaches;
+    }
+    expect(out).toEqual(Object.fromEntries(ROWS.map(([k]) => [k, []])));
+    // and what the walk serves: every hook key gone at every depth, the deep subtree itself kept
+    for (const [i, [tag]] of ROWS.entries()) {
+      const g = (await LIVE.db.query(`select data from public.get_gallery_dossier('zr4-${i}')`)).rows[0].data;
+      expect(JSON.stringify(g).includes('Hook'), tag).toBe(false);
+      expect(JSON.stringify(g.deep).length, tag).toBeGreaterThan(1000);
+      expect(g.npcs[0].name, tag).toBe('A');
+    }
+  }, ROW_TIMEOUT_MS);
+
+  it('R4 (the same class, found by searching every helper for recursion): String() of an id 1,000 and 5,000 arrays deep is JavaScript\'s, with no nested call', async () => {
+    const ids = [deepId(1000), deepId(5000), `[${deepId(1000)},[],null,{"a":1},"x",[[2,[]],3]]`, `[[],[[]],[null,[null]],[1,[2,[3,[4,"5"]]]]]`];
+    const rows = (await LIVE.db.query(`select e::text as t, public._gallery_veil_jsstr(e) as s, public._gallery_veil_join(e, '-') as j
+        from jsonb_array_elements($1::jsonb) with ordinality x(e, o) order by o`, [`[${ids.join(',')}]`])).rows;
+    expect(rows).toHaveLength(ids.length);
+    // an id 5,000 deep: JavaScript's own String() overflows its stack there (the client cannot address
+    // such an id at all), so its spelling is checked as known: the one leaf, '1'
+    expect(rows[1].s).toBe('1');
+    expect(rows[1].j).toBe('1');
+    for (const { t: text, s, j } of rows.filter((_, i) => i !== 1)) {
+      const v = JSON.parse(text);
+      expect(s, text.slice(0, 40)).toBe(String(v));
+      expect(j, text.slice(0, 40)).toBe(v.map((x) => (x === null || x === undefined ? '' : String(x))).join('-'));
+    }
+  }, ROW_TIMEOUT_MS);
+
+  it('R3/R4 (the class): 400 fuzzed stored documents, copies and narrations to the edges of the range and hundreds deep, through all four reads at 211 and 210: PARITY', async () => {
     const r = rngOf(400);
-    const breaches = []; const tally = { reads: 0, raised211: 0, raised210: 0, marked: 0, unmarked: 0, huge: 0 };
+    const breaches = []; const tally = { reads: 0, raised211: 0, raised210: 0, marked: 0, unmarked: 0, huge: 0, deep: 0 };
     const HUGE = /e1310|e13074/;
+    // DEPTH (the review's R4): a subtree hundreds deep ending in a hook key, appended to a document (a
+    // later key wins, so it is never lost to one docText drew). An id hundreds of ARRAYS deep is not
+    // drawn here: it sends the reads into the sanitiser's own recursion (older than 211), which a native
+    // server refuses with an error at 210 and 211 alike but which kills this in-process WASM Postgres;
+    // its parity is the native probe's, and its String() is pinned directly below.
+    const deepen = (text) => (r() < 0.12 ? `${text.slice(0, -1)},"deep":${deepText(r() < 0.5 ? 'obj' : 'arr', [60, 550, 900, 2000][Math.floor(r() * 4)])}}` : text);
     for (let i = 0; i < 400; i += 1) {
-      const doc = docText(r); const ov = overridesText(r);
-      const narrated = r() < 0.2 ? docText(r) : null;
+      const doc = deepen(docText(r)); const ov = overridesText(r);
+      const narrated = r() < 0.2 ? deepen(docText(r)) : null;
       const dm = r() < 0.3;
+      if (/"deep":/.test(doc + (narrated || ''))) tally.deep += 1;
       if (ov.includes('"$veil":{')) tally.marked += 1; else tally.unmarked += 1;
       if (HUGE.test(doc + ov + (narrated || ''))) tally.huge += 1;
       const p = await parity(`fz${i}`, { doc, ov, dm, narrated });
@@ -350,6 +405,7 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(tally.marked).toBeGreaterThan(0);
     expect(tally.unmarked).toBeGreaterThan(0);
     expect(tally.huge).toBeGreaterThan(20);
+    expect(tally.deep).toBeGreaterThan(20);
     expect(breaches.slice(0, 10)).toEqual([]);
   }, ROW_TIMEOUT_MS);
   // ── the review's minimal towns: every eye the panel offers ON THE CARD shut (its box and its depth
