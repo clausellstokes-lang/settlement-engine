@@ -73,8 +73,10 @@ export function cardPowerParts(card, powerOrder = []) {
  */
 export function cardPowerLine(card, powerOrder = [], governing = null) {
   const office = cardOfficeOf(card);
-  return cardPowerParts(card, powerOrder)
-    .map((p) => (office && governing && p.power === governing && p.rank === 1 ? `${office}, ${p.label}` : p.label))
+  const parts = cardPowerParts(card, powerOrder);
+  const seat = office && governing ? parts.find((p) => p.power === governing && p.rank === 1) : null;
+  // the office leads the line: the seat, then the card's other standings in their order
+  return (seat ? [`${office}, ${seat.label}`, ...parts.filter((p) => p !== seat).map((p) => p.label)] : parts.map((p) => p.label))
     .join(' · ');
 }
 

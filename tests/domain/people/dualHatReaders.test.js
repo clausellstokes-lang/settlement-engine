@@ -37,6 +37,9 @@ describe('COHERENCE-POWERS — the dual hat, as the page reads it', () => {
     expect(governingNameOf(born)).toBe('Town Council');
     expect(cardOfficeOf(miller)).toBe('Mayor');
     expect(cardPowerLine(miller, [], 'Town Council')).toBe('Mayor, first of Town Council · second of Craft Guilds');
+    // the office leads the line whatever the powers' order
+    const master = { ...miller, memberships: [{ power: 'Craft Guilds', rank: 1, share: 1, veiled: false }, miller.memberships[0]] };
+    expect(cardPowerLine(master, ['Craft Guilds', 'Town Council'], 'Town Council')).toBe('Mayor, first of Town Council · first of Craft Guilds');
     expect(cardOfficeOf(mayor)).toBe(null);
     expect(cardPowerLine(mayor, [], 'Town Council')).toBe('first of Town Council');
   });
