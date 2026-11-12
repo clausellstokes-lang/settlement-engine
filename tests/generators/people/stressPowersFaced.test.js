@@ -49,6 +49,14 @@ const SEEDS = Object.freeze([
   'rvw-hamlet-23', 'rvf-famine-village-5', 'rvf-famine-town-1', 'rvf-famine-metropolis-0',
 ]);
 
+/** COHERENCE-POWERS-3, F13 (REVIEW-POWERS F13: the checks were sound but read 22 seeds, and missed 3 and 16 rows a corpus
+ *  showed): THE CORPUS, every crisis forced at every size, beside the pins above. */
+const STRESSES = Object.freeze(['under_siege', 'wartime', 'occupied', 'politically_fractured', 'indebted', 'recently_betrayed',
+  'infiltrated', 'succession_void', 'famine', 'plague_onset', 'monster_pressure', 'insurgency', 'mass_migration',
+  'religious_conversion', 'slave_revolt']);
+const TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
+const CORPUS = Object.freeze(STRESSES.flatMap((stress) => TIERS.flatMap((tier) => [0, 1].map((i) => `rvf-${stress}-${tier}-${10 + i}`))));
+
 /** @param {string} seed */
 function configOf(seed) {
   const m = /^(?:l2|rvf)-(.+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
@@ -61,7 +69,7 @@ function configOf(seed) {
 const births = new Map();
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  for (const seed of SEEDS) births.set(seed, generateSettlementPipeline(birthConfig(configOf(seed)), null, { seed, customContent: {} }));
+  for (const seed of [...SEEDS, ...CORPUS]) births.set(seed, generateSettlementPipeline(birthConfig(configOf(seed)), null, { seed, customContent: {} }));
 }, 300_000);
 
 /** @param {any} s @param {string} power */
@@ -72,7 +80,7 @@ const firstOf = (s, power) => (s.npcs || []).find((card) => (card.memberships ||
 describe('COHERENCE-POWERS item 3 guard — every power has a person, or its declared leaderless line', () => {
   it('no power on the page has neither a member nor a declared leaderless line', () => {
     const misses = [];
-    for (const seed of SEEDS) {
+    for (const seed of births.keys()) {
       const s = births.get(seed);
       for (const f of s.powerStructure.factions) {
         const power = nameOf(f);
@@ -86,7 +94,7 @@ describe('COHERENCE-POWERS item 3 guard — every power has a person, or its dec
   // COHERENCE-POWERS-3 (F6): by whichever path the face was dealt (the rule's seat or a house's own share)
   it('a stress power\'s first leads no other power of the town', () => {
     const misses = [];
-    for (const seed of SEEDS) {
+    for (const seed of births.keys()) {
       const s = births.get(seed);
       for (const f of s.powerStructure.factions) {
         const power = nameOf(f);
@@ -102,7 +110,7 @@ describe('COHERENCE-POWERS item 3 guard — every power has a person, or its dec
 
   it('an appointed power is faced by a person sent in, not a house of the town', () => {
     const misses = [];
-    for (const seed of SEEDS) {
+    for (const seed of births.keys()) {
       const s = births.get(seed);
       for (const f of s.powerStructure.factions) {
         const row = stressPowerRowOf(s, f);
@@ -116,7 +124,7 @@ describe('COHERENCE-POWERS item 3 guard — every power has a person, or its dec
 
   it('a clandestine or criminal power\'s face is veiled', () => {
     const misses = [];
-    for (const seed of SEEDS) {
+    for (const seed of births.keys()) {
       const s = births.get(seed);
       for (const f of s.powerStructure.factions) {
         const row = stressPowerRowOf(s, f);
