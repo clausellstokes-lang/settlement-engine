@@ -36,6 +36,8 @@
  * houses' `npc_<slug>`, stable across a reroll, so a keeper moves only when chooseSlot lands it on another house; of -0..-60
  * -50's innkeeper (npc_inn_multiple -> npc_carriers_guild) is the first move off the leader's slot.
  *
+ * FIXTURE re-keyed BY IDENTITY npcs[9] -> npcs[3] on 2026-11-12 (COHERENCE-POWERS-4): the same seed and the same keeper, -50's innkeeper (npc_inn_multiple -> npc_carriers_guild, the first of -0..-60 under this mint still), moved in the roster's order by the COHERENCE-POWERS lane's deal (rule A, 23a2015d4: 9 -> 2; cure (i), 04334d6ef: 2 -> 3), measured at each commit.
+ *
  * @enforced-by this test
  */
 import { describe, test, expect, beforeEach, vi } from 'vitest';
@@ -63,7 +65,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 });
 
 // Same pinned mint as the pin-remap suite: under this reroll seed, paired with the
-// fixture seed below, the npcs[9] keeper provably inherits a DIFFERENT slot id.
+// fixture seed below, the npcs[3] keeper provably inherits a DIFFERENT slot id.
 vi.mock('../../src/kernel/prng.js', async (importOriginal) => ({
   ...(await importOriginal()),
   generateSeed: () => 'pins-regen-remap-fixed',
@@ -124,8 +126,8 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
   test('npcStates re-key the keeper, drop everyone replaced, and never cross settlements', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-50', customContent: {} }));
-    town.npcs[9]._authored = true; // PEOPLE-1 CAST: the keeper that moves under the re-seated fixture (header)
-    const target = town.npcs[9];
+    town.npcs[3]._authored = true; // PEOPLE-1 CAST: the keeper that moves under the re-seated fixture (header)
+    const target = town.npcs[3];
     const bystander = town.npcs[0];
     expect(String(bystander.id), 'the fixture needs a second, unauthored roster member')
       .not.toBe(String(target.id));
@@ -212,8 +214,8 @@ describe('REGEN — a person\'s world state follows the person, and the stranger
   test('a graduated keeper keeps ONE durable identity across the slot move', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-50', customContent: {} }));
-    town.npcs[9]._authored = true; // PEOPLE-1 CAST: the keeper that moves under the re-seated fixture (header)
-    const target = town.npcs[9];
+    town.npcs[3]._authored = true; // PEOPLE-1 CAST: the keeper that moves under the re-seated fixture (header)
+    const target = town.npcs[3];
 
     // A LIT world — the ledger's whole surface is an early return when the
     // consequence economy is dark, so the graduation below needs the flag.
