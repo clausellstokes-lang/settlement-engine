@@ -39,6 +39,15 @@
  *       The least it needs is 10 towns (at a commonest line of one half); a pool whose commonest
  *       line already takes 0.9 needs 66. Whatever its share's error: the share test cannot see a
  *       pool whose commonest line was already near the whole of it.
+ * A RISE MUST REPEAT (the chair, 2026-11-12): every lane that changes the generator re-deals the
+ * births, so every merge point reads a fresh sample, and a fresh sample puts about one row over by
+ * (1) or (2) on nothing. So when the corpus reads a row over by (1) or (2), the guard reads the
+ * same corpus shape under the fixed second prefix `CONFIRM_SEED_PREFIX` at the same tree, against
+ * the same ceiling and by the same rule; the row reds only if it is over on BOTH. Over on one
+ * alone, it prints as a note carrying both readings. The second corpus is read only when there is
+ * a row to confirm. A cured pool's target, the collapse arm (3) and the row-set checks are NOT
+ * confirmed: they stay exact on the corpus read. What a second corpus cannot clear: a ceiling
+ * banked low reads over on both (the procedure: `docs/DESIGN_POOL_CENSUS.md` §6.7).
  * A ceiling the charter set as a law for a cured pool (`targets`) is judged EXACTLY, with no
  * allowance. A ceiling is loose when its measure sits below it by more than the slack AND by more
  * than the same noise.
@@ -81,6 +90,9 @@ export const DOMINATED = Object.freeze({ top1: 0.75, minDraws: 30 });
 
 /** A pool that printed two or more lines and now prints one reds when chance explains that less often than this. */
 export const COLLAPSE_CHANCE = 0.001;
+
+/** The fixed second prefix a rise by the noise arm or the dominated line must repeat on. */
+export const CONFIRM_SEED_PREFIX = 'confirm';
 
 /** The banked corpus's seed prefix. */
 export const DEFAULT_SEED_PREFIX = 'quarrel';
@@ -264,11 +276,13 @@ export function readRegister() {
  * @param {Map<string, Pick<PoolMeasure, 'draws' | 'towns' | 'lines' | 'top1' | 'top5' | 'spread'>>} table
  * @param {ReturnType<typeof readRegister>} register
  * @param {{ exact?: boolean }} [options] `exact: false` (a foreign seed prefix) turns the row-set checks into notes
- * @returns {{ over: string[], unregistered: string[], stale: string[], loose: string[], notes: string[] }}
+ * @returns {Findings} `repeatable` names the findings of `over` a second corpus must confirm
  */
 export function judge(table, register, { exact = true } = {}) {
   const rows = register.pools || {};
   const over = [], unregistered = [], stale = [], loose = [], notes = [];
+  /** @type {Array<{ key: string, text: string }>} */
+  const repeatable = [];
   for (const [pool, m] of table) {
     const row = rows[pool];
     if (!row) {
@@ -292,7 +306,9 @@ export function judge(table, register, { exact = true } = {}) {
         const why = beyondNoise
           ? `${se > 0 ? ((share - ceiling) / se).toFixed(1) : 'inf'} SE over ${m.draws} draws in ${m.towns} towns`
           : `crosses the dominated line ${DOMINATED.top1} over ${m.draws} draws`;
-        over.push(`${pool}: ${metric} ${share.toFixed(4)} > ceiling ${ceiling} (${why})`);
+        const text = `${pool}: ${metric} ${share.toFixed(4)} > ceiling ${ceiling} (${why})`;
+        over.push(text);
+        if (!targets.includes(metric)) repeatable.push({ key: `${pool}|${metric}`, text });
       }
       if (!targets.includes(metric) && ceiling - share > TIGHTEN_SLACK && ceiling - share > NOISE_SE * se) {
         loose.push(`${pool}: ${metric} ceiling ${ceiling} sits above its measure ${share.toFixed(4)}`);
@@ -304,7 +320,50 @@ export function judge(table, register, { exact = true } = {}) {
     if (exact) stale.push(pool);
     else notes.push(`${pool}: not drawn`);
   }
-  return { over, unregistered, stale, loose, notes };
+  return { over, unregistered, stale, loose, notes, repeatable };
+}
+
+/**
+ * @typedef {{ over: string[], unregistered: string[], stale: string[], loose: string[], notes: string[],
+ *   repeatable: Array<{ key: string, text: string }> }} Findings
+ */
+
+/**
+ * A rise must repeat: each repeatable finding of the first reading stays a finding only if the second
+ * reading has the same pool and share over too (by either arm); else it becomes a note with both readings.
+ * @param {Findings} first @param {Findings} second @param {string} secondPrefix
+ * @param {Map<string, Pick<PoolMeasure, 'draws' | 'top1' | 'top5'>>} secondTable the second reading's measure
+ * @returns {Findings}
+ */
+export function confirmRises(first, second, secondPrefix, secondTable) {
+  const again = new Map(second.repeatable.map((r) => [r.key, r.text]));
+  const unconfirmed = new Set(first.repeatable.filter((r) => !again.has(r.key)).map((r) => r.text));
+  const confirmedText = new Map(first.repeatable.filter((r) => again.has(r.key)).map((r) => [r.text, again.get(r.key)]));
+  return {
+    ...first,
+    over: first.over.filter((t) => !unconfirmed.has(t)).map((t) => (confirmedText.has(t) ? `${t}; repeats on ${secondPrefix}: ${confirmedText.get(t)}` : t)),
+    notes: [...first.notes, ...first.repeatable.filter((r) => unconfirmed.has(r.text)).map((r) => {
+      const [pool, metric] = r.key.split(/\|(?=top[15]$)/);
+      const m = secondTable.get(pool);
+      const reading = m ? `${metric} ${m[/** @type {'top1' | 'top5'} */ (metric)].toFixed(4)} over ${m.draws} draws` : 'not drawn';
+      return `${r.text}; does not repeat on ${secondPrefix} (${reading})`;
+    })],
+    repeatable: first.repeatable.filter((r) => again.has(r.key)),
+  };
+}
+
+/**
+ * The guard's whole reading: the corpus judged, and any rise by the noise arm or the dominated line
+ * read again on the fixed second prefix.
+ * @param {{ seedPrefix?: string, register?: ReturnType<typeof readRegister>, table?: Map<string, PoolMeasure> }} [options]
+ * @returns {{ table: Map<string, PoolMeasure>, findings: Findings, confirmedOn: string | null, second: Map<string, PoolMeasure> | null }}
+ */
+export function judgeCorpus({ seedPrefix = DEFAULT_SEED_PREFIX, register = readRegister(), table = measureDominance({ seedPrefix }) } = {}) {
+  const first = judge(table, register, { exact: seedPrefix === DEFAULT_SEED_PREFIX });
+  if (!first.repeatable.length) return { table, findings: first, confirmedOn: null, second: null };
+  const secondPrefix = seedPrefix === CONFIRM_SEED_PREFIX ? DEFAULT_SEED_PREFIX : CONFIRM_SEED_PREFIX;
+  const second = measureDominance({ seedPrefix: secondPrefix });
+  return { table, findings: confirmRises(first, judge(second, register, { exact: false }), secondPrefix, second), confirmedOn: secondPrefix, second };
 }
 
 const REGISTER_LAW = 'SHRINK-ONLY ON ONE CORPUS. One row per drawn pool: the ceiling for the share of its most-printed line (top1) and of its five most-printed lines (top5) over the corpus `corpus` names (scripts/census/pool-dominance.mjs). On that corpus a ceiling is only ever lowered (--tighten); a row leaves only when its pool is no longer drawn. A change of corpus is a change of instrument: the rows are re-based at the new corpus\'s measure through --rebase, on a chair\'s ruling, and never by hand. Held by tests/lint/poolDominance.walker.test.js.';
@@ -421,7 +480,9 @@ function main() {
     return;
   }
   const register = readRegister();
-  const { over, unregistered, stale, loose, notes } = judge(table, register, { exact });
+  const { findings, confirmedOn } = judgeCorpus({ seedPrefix, register, table });
+  const { over, unregistered, stale, loose, notes } = findings;
+  if (confirmedOn) console.log(`pool-dominance: a rise was read again on ${confirmedOn}`);
   if (register.corpus !== corpusIdentity()) console.log('pool-dominance: the register was banked on another corpus (re-base it, on a ruling, with --rebase)');
   for (const line of [...over, ...unregistered.map((p) => `${p}: no row`), ...stale.map((p) => `${p}: no longer drawn`), ...loose]) console.log(line);
   for (const line of notes) console.log(`note: ${line}`);

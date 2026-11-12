@@ -17,19 +17,22 @@
  * row, a row whose pool is gone (a pool cut to one undeclared line leaves the ledger and reds
  * here); a ceiling loose above its measure beyond the slack and the noise (tighten it with
  * `node scripts/census/pool-dominance.mjs --tighten`, which never raises a ceiling); a register
- * banked on another corpus.
+ * banked on another corpus. A rise by the noise arm or the dominated line is read again on the
+ * fixed second prefix `confirm` and reds only if it repeats there (one alone is a note with both
+ * readings); a target, a collapse and the row-set checks are exact on the one reading.
  * WHAT IT DOES NOT: a rise inside the pool's noise (on a pool of twenty draws that is a wide band;
  * the corpus is the only cure); a pool the corpus never draws; a loss of variety among lines the
  * pool's own line id merges (a line keyed by its index in a sub-list counts every sub-list's line
  * at that index as one: npcData:NPC_FACTION_LOYALTY). The register's `census` is read, never judged.
  * Its proofs (false alarms on four re-seeds: 1 / 1 / 1 / 0 rows; power on five plants) are in
- * `docs/DESIGN_POOL_CENSUS.md` §6.5. A run costs about 137 seconds alone (2026-11-12).
+ * `docs/DESIGN_POOL_CENSUS.md` §6.5 and §6.7. A run costs about 137 seconds alone with no row to
+ * confirm, about twice that with one (2026-11-12).
  *
  * @enforced-by tests/lint/poolDominance.walker.test.js
  */
 import { describe, expect, test } from 'vitest';
 
-import { COLLAPSE_CHANCE, DOMINATED, NOISE_SE, corpusIdentity, judge, measureDominance, readRegister, shareError } from '../../scripts/census/pool-dominance.mjs';
+import { COLLAPSE_CHANCE, DOMINATED, NOISE_SE, confirmRises, corpusIdentity, judge, judgeCorpus, readRegister, shareError } from '../../scripts/census/pool-dominance.mjs';
 
 /**
  * A pool of `towns` settlements with `perTown` draws each, its top line taking `share` in every
@@ -82,6 +85,24 @@ describe('the rule: a rise reds beyond the pool\'s own noise, or across the domi
     expect(judge(new Map([['p', single(enough - 1)]]), banked).over).toEqual([]);
   });
 
+  test('a rise must repeat: over on both readings it reds, over on one alone it is a note with both readings', () => {
+    const rise = 0.4 + allowance * 1.1;
+    const first = judge(new Map([['p', evenPool(rise, 400)]]), register);
+    const again = new Map([['p', evenPool(rise, 400)]]);
+    const calm = new Map([['p', evenPool(0.4, 400)]]);
+    expect(confirmRises(first, judge(again, register, { exact: false }), 'confirm', again).over).toHaveLength(1);
+    const once = confirmRises(first, judge(calm, register, { exact: false }), 'confirm', calm);
+    expect(once.over).toEqual([]);
+    expect(once.notes).toEqual([expect.stringMatching(/does not repeat on confirm \(top1 0\.4000 over 400 draws\)/)]);
+  });
+
+  test('a target and a collapse are never confirmed: they red on the one reading', () => {
+    const target = { pools: { p: { ...row, top1: 0.1, targets: ['top1'] } } };
+    const first = judge(new Map([['p', evenPool(0.1025, 400)]]), target);
+    const calm = new Map([['p', evenPool(0.05, 400)]]);
+    expect(confirmRises(first, judge(calm, target, { exact: false }), 'confirm', calm).over).toHaveLength(1);
+  });
+
   test('under a foreign seed prefix the row-set checks are notes, not findings', () => {
     const findings = judge(new Map([['q', evenPool(0.4, 10)]]), register, { exact: false });
     expect([findings.unregistered, findings.stale]).toEqual([[], []]);
@@ -91,8 +112,7 @@ describe('the rule: a rise reds beyond the pool\'s own noise, or across the domi
 
 describe('no drawn pool prints more of one line than its register allows', () => {
   const register = readRegister();
-  const table = measureDominance();
-  const findings = judge(table, register);
+  const { table, findings } = judgeCorpus({ register });
 
   test('the register was banked on this corpus: a change of corpus is re-based through --rebase, never compared across', () => {
     expect(register.corpus).toBe(corpusIdentity());
@@ -105,7 +125,7 @@ describe('no drawn pool prints more of one line than its register allows', () =>
     }
   });
 
-  test('no pool rises above its ceiling beyond its own noise, and none crosses into dominance', () => {
+  test('no pool rises above its ceiling beyond its own noise, or crosses into dominance, on both readings; none collapses', () => {
     expect(findings.over).toEqual([]);
   });
 

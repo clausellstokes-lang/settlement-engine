@@ -407,6 +407,22 @@ Under the old exact rule the same four re-seeds put 146, 135, 144 and 138 rows o
 
 It does not catch a rise inside the pool's own noise; on a pool of twenty draws that is a wide band, and only a larger corpus narrows it. It does not see a pool the corpus never draws. It cannot see variety lost among lines that the pool's line id merges: `npcData:NPC_FACTION_LOYALTY` keys a line by its index inside its category, so its commonest "line" is seven categories' first lines added together. That is charged to the second wave.
 
+### 6.7 A rise must repeat (the chair's ruling, 2026-11-12), and the residue's procedure
+
+Any lane that changes the generator re-deals births, so every merge point is reading what amounts to a fresh sample. On five fresh prefixes (noiseA, noiseB, noiseC, chairA, chairB), the rule in §6.2 put exactly one row over on each, and every time it was a different row: plotHooks:popular_uprising, then city River ferry, then metropolis River ferry, then village River boatyard, then Town council.Public works. Four of those five pick their line by a hash of the seed. A merge point does not re-deal such a pick; it re-deals only whether the institution is born. So the guard now works like this. When the corpus reads a row over by the noise arm or the dominated line, the guard reads the same corpus shape again under the fixed second prefix `confirm`, at the same tree, against the same ceiling, by the same rule. The row reds only if it is over on BOTH readings. A row over on one alone prints as a note carrying both readings, and the guard exits 0.
+
+These are NOT confirmed and stay exact on the one reading: a cured pool's target, the collapse arm, and the row-set checks. The second corpus is read only when there is a row to confirm. So a green tree costs nothing more, and a tree with a row to confirm costs about one more run.
+
+I measured three ways to stop chance alarms. Repeating the rise (the one adopted) gave 0, 0, 1, 0, 0 alarms over the five prefixes. Banking the highest reading of three corpora gave 1, 0, 0, 1, 0, raised 180 ceilings, weakened the plants and redded the loose check at base. Both together gave 0 on all five, at the second option's costs. Power under the repeat rule, on the banked corpus and on `confirm`: greek 5.6 and 4.9 SE; POLITICAL_FLAVOR.stable 5.7 and 6.6; NPC_FACTION_LOYALTY 17.0 and 17.5.
+
+**THE RESIDUE.** A ceiling banked low reads over on both corpora. At this re-base the register was banked so that both corpora read zero at the banking tree (§6.8). That still leaves a case for later.
+
+**The procedure for later, which a seat runs without waiting:** when a row reds on both corpora at a tip, measure that pool on the SECOND corpus at the tip's BASE tree (its merge base with the line).
+- If the base tree reads it over there too, the ceiling predates the change. It goes to the chair with four readings: the banked corpus and `confirm`, at the tip and at the base. The chair may authorise a re-base of that one row to the base tree's `confirm` reading, through the door, by name. A seat never does that alone.
+- If the base tree does not read it over, the rise belongs to the change, and the cure is to write the lines the pool lacks.
+
+A single-row door that refuses without the base tree's reading is NOT built here. It would have to measure a second tree from inside the first, which is more than an hour's honest work, so it is charged to the second wave.
+
 ## Appendix A — the fact readers (sub-seat table, file:line)
 
 ### Unit 1: record facts a DM-facing line can presume, and who reads them
