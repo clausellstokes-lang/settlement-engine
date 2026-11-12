@@ -954,7 +954,7 @@
   "src/generators/people/representatives.js": [
    ["temple", "after-release", "Access to parish church"]
   ],
-  "src/generators/power/conflicts.js": [
+  "src/generators/power/conflictIssues.js": [
    ["temple", "other-lane", "Church land claims on guild property"]
   ],
   "src/generators/power/governanceNarrative.js": [
