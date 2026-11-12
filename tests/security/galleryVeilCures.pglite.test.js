@@ -428,6 +428,47 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(imp).toEqual(gal);
   }, ROW_TIMEOUT_MS);
 
+  // ── R9 / R11 ──────────────────────────────────────────────────────────────────────────────────
+  it('R9/R11 (the review rows): a stored revealDm or allowImport that is not a boolean raises nothing and reveals nothing; only JSON true reveals', async () => {
+    const VALUES = ['"maybe"', '{}', '"yes"', '"t"', '1', '"on"', '"no"', '"off"', 'true', 'false', 'null', 'absent'];
+    const doc = { name: 'T', npcs: [{ id: 'a', name: 'Ada', role: 'smith', secret: 'R9SECRET_ADA' }] };
+    const out = {};
+    for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+      for (const v of VALUES) {
+        for (const dm of [false, true]) {
+          // revealDm through the gallery and the import, the link for raising only (an unmarked link takes the default veil)
+          const ovText = v === 'absent' ? '{"a":{}}' : `{"a":{"revealDm":${v}}}`;
+          const tag = `${where} revealDm ${v}${dm ? ' +dm' : ''}`;
+          await putRaw(db, `r9-${Object.keys(out).length}`, { doc: JSON.stringify(doc), ov: ovText, dm });
+          const reads = await fourReads(db, `r9-${Object.keys(out).length}`);
+          const g = reads.gallery === 'ok' ? (await db.query(`select data from public.get_gallery_dossier('zr9-${Object.keys(out).length}')`)).rows[0].data : null;
+          out[tag] = { raised: Object.values(reads).filter((x) => x !== 'ok').length, revealed: g === null ? null : has(g, 'R9SECRET_ADA') };
+        }
+        // allowImport on the import of a Reveal DM share
+        const ovText = v === 'absent' ? '{"a":{}}' : `{"a":{"allowImport":${v}}}`;
+        const key = `r9i-${Object.keys(out).length}`;
+        await putRaw(db, key, { doc: JSON.stringify(doc), ov: ovText, dm: true });
+        await db.exec(`set test.uid = '${READER}';`);
+        let imported = null; let raised = 0;
+        try { imported = has((await db.query(`select data from public.import_gallery_dossier('z${key}')`)).rows[0].data, 'R9SECRET_ADA'); } catch { raised = 1; }
+        await db.exec(`set test.uid = '';`);
+        out[`${where} allowImport ${v} +dm`] = { raised, revealed: imported };
+      }
+    }
+    const want = {};
+    for (const v of VALUES) {
+      // only JSON true reveals; absent and null fall back to the share's Reveal DM; anything else is not a reveal
+      want[`211 revealDm ${v}`] = { raised: 0, revealed: v === 'true' };
+      want[`211 revealDm ${v} +dm`] = { raised: 0, revealed: v === 'true' || v === 'null' || v === 'absent' };
+      want[`211 allowImport ${v} +dm`] = { raised: 0, revealed: v === 'true' || v === 'null' || v === 'absent' };
+    }
+    expect(Object.fromEntries(Object.entries(out).filter(([k]) => k.startsWith('211')))).toEqual(want);
+    // the red control: 210 raises on "maybe" and an object, and reveals on "yes"
+    expect(out['210 revealDm "maybe"'].raised).toBeGreaterThan(0);
+    expect(out['210 revealDm {}'].raised).toBeGreaterThan(0);
+    expect(out['210 revealDm "yes"'].revealed).toBe(true);
+  }, ROW_TIMEOUT_MS);
+
   // ── R5 ────────────────────────────────────────────────────────────────────────────────────────
   it('R5 (a, the review rows): a page that draws the LIVE town carries no freeze date; the frozen page keeps its own', async () => {
     const at = '2026-11-01T00:00:00.000Z';

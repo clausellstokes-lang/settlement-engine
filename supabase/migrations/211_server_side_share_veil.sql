@@ -41,8 +41,10 @@
 --       (removal, idempotent) and marks them for DefenseTab; it never re-applies the default rules.
 --       No client path writes v 2 back: the only writer, updateGalleryMetadata, clamps to v 1.
 --
--- NOT CHANGED: _gallery_sanitize_public_json, _gallery_dm_full_json, _gallery_apply_member_overrides,
--- the other four party-link functions, every grant (restated as they stood). No table, column,
+-- RESTATED ALSO: _gallery_apply_member_overrides (093), its body plus a typed read of the two
+-- stored member flags (the second review's R9/R11): only JSON true reveals or permits; nothing raises.
+-- NOT CHANGED: _gallery_sanitize_public_json, _gallery_dm_full_json, the other four party-link
+-- functions, every grant (restated as they stood). No table, column,
 -- constraint, policy or row. Every invisible character is spelled as an escape (low finding 4).
 --
 -- COUPLED CLIENT TWIN: src/domain/display/galleryVeil.js (projectServedVeil, VEIL_LIMITS.servedVersion)
@@ -1092,6 +1094,54 @@ begin
 end $$;
 
 -- ── 6. THE READS (each its previous body plus the veil; grants as they stood) ────────────────
+
+-- _gallery_apply_member_overrides (093), the FIFTH restatement: 093's body plus one change, a TYPED
+-- read of the two stored member flags (the second review's R9 and R11, ruled into 211). 093 cast
+-- the stored text to boolean: a stored word that is not one ("maybe", an object) made the gallery,
+-- the link and the import raise, and "yes", "t", "1" or "on" revealed a person the 210 page hid.
+-- Now only the JSON value true reveals (revealDm) or permits (allowImport); JSON false refuses;
+-- absent or null falls back to the settlement's flag, as before; any other stored value is NOT a
+-- reveal and NOT a permit; nothing raises. The client only ever writes booleans
+-- (src/lib/gallery.js :: the member clamp), so no generated town changes.
+create or replace function public._gallery_apply_member_overrides(
+  base jsonb,
+  dm_full jsonb,
+  overrides jsonb,
+  settlement_share_dm boolean,
+  settlement_importable boolean,
+  for_import boolean
+) returns jsonb language sql immutable as $$
+  select case
+    when jsonb_typeof(base -> 'npcs') is distinct from 'array' then base
+    else jsonb_set(base, '{npcs}', coalesce((
+      select jsonb_agg(
+        case
+          when (
+            case when for_import then
+              coalesce(case when overrides -> public._gallery_npc_key(npc) -> 'revealDm' = 'true' then true
+                            when coalesce(overrides -> public._gallery_npc_key(npc) -> 'revealDm', 'null') = 'null' then null
+                            else false end, settlement_share_dm)
+              and coalesce(case when overrides -> public._gallery_npc_key(npc) -> 'allowImport' = 'true' then true
+                                when coalesce(overrides -> public._gallery_npc_key(npc) -> 'allowImport', 'null') = 'null' then null
+                                else false end, settlement_importable)
+            else
+              coalesce(case when overrides -> public._gallery_npc_key(npc) -> 'revealDm' = 'true' then true
+                            when coalesce(overrides -> public._gallery_npc_key(npc) -> 'revealDm', 'null') = 'null' then null
+                            else false end, settlement_share_dm)
+            end
+          )
+          then coalesce(
+            (select e from jsonb_array_elements(dm_full -> 'npcs') e
+              where public._gallery_npc_key(e) = public._gallery_npc_key(npc) limit 1),
+            npc)
+          else public._gallery_sanitize_public_json(jsonb_build_object('npcs', jsonb_build_array(npc))) -> 'npcs' -> 0
+        end
+        order by ord
+      )
+      from jsonb_array_elements(base -> 'npcs') with ordinality as t(npc, ord)
+    ), '[]'::jsonb))
+  end;
+$$;
 
 -- get_gallery_dossier: 147's body plus the veil, and the pg_temp pin a recreated definer takes
 -- (tests/lint/migrationSearchPathPin.test.js; its ledger row comes off)

@@ -11,8 +11,8 @@
 --
 -- THE BODIES are pg_get_functiondef of a chain stopped at 210 (001..210 applied in order): the net-
 -- current definitions of migrations 147 (get_gallery_dossier, its bare `set search_path = public`
--- included), 208 as amended (get_unlisted_dossier), 131 (import_gallery_dossier) and 088
--- (get_gallery_map). CREATE OR REPLACE keeps each function's grants, which 211 restated unchanged;
+-- included), 208 as amended (get_unlisted_dossier), 131 (import_gallery_dossier), 088
+-- (get_gallery_map) and 093 (_gallery_apply_member_overrides). CREATE OR REPLACE keeps each function's grants, which 211 restated unchanged;
 -- they are restated here too, as the migrations that made them state them.
 --
 -- PROVEN BY EXECUTION: tests/security/galleryVeilCures.pglite.test.js applies 001..211, runs this
@@ -22,7 +22,8 @@
 -- NOT reversed, because there is nothing to: no stored row was written by 211. The new client draws a
 -- share without the served marker (v 1) as it did before 211, so no client revert goes with this.
 
--- ── 1. the four reads at their previous bodies ──────────────────────────────────────────────────
+-- ── 1. the four reads at their previous bodies, and 093's member splice (restated by 211 for the
+--       second review's R9/R11) at its own ──────────────────────────────────────────────────────
 CREATE OR REPLACE FUNCTION public.get_gallery_dossier(dossier_slug text)
  RETURNS TABLE(id uuid, public_slug text, name text, tier text, data jsonb, published_at timestamp with time zone, updated_at timestamp with time zone, view_count integer, is_curated boolean, gallery_description text, gallery_image_url text, gallery_image_alt text, gallery_tags text[], gallery_share_dm boolean, gallery_importable boolean, gallery_member_overrides jsonb, population integer, terrain text, government_type text, magic_level text, stability text, primary_resource text, threat_level text, net_votes integer, comment_count integer, chronicle jsonb, author_name text, aliveness integer)
  LANGUAGE sql
@@ -244,6 +245,39 @@ begin
     'backdrop', public._gallery_map_backdrop(row.map_data)
   );
 end $function$
+
+;
+
+CREATE OR REPLACE FUNCTION public._gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean)
+ RETURNS jsonb
+ LANGUAGE sql
+ IMMUTABLE
+AS $function$
+  select case
+    when jsonb_typeof(base -> 'npcs') is distinct from 'array' then base
+    else jsonb_set(base, '{npcs}', coalesce((
+      select jsonb_agg(
+        case
+          when (
+            case when for_import then
+              coalesce((overrides -> public._gallery_npc_key(npc) ->> 'revealDm')::boolean, settlement_share_dm)
+              and coalesce((overrides -> public._gallery_npc_key(npc) ->> 'allowImport')::boolean, settlement_importable)
+            else
+              coalesce((overrides -> public._gallery_npc_key(npc) ->> 'revealDm')::boolean, settlement_share_dm)
+            end
+          )
+          then coalesce(
+            (select e from jsonb_array_elements(dm_full -> 'npcs') e
+              where public._gallery_npc_key(e) = public._gallery_npc_key(npc) limit 1),
+            npc)
+          else public._gallery_sanitize_public_json(jsonb_build_object('npcs', jsonb_build_array(npc))) -> 'npcs' -> 0
+        end
+        order by ord
+      )
+      from jsonb_array_elements(base -> 'npcs') with ordinality as t(npc, ord)
+    ), '[]'::jsonb))
+  end;
+$function$
 
 ;
 
