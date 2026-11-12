@@ -883,9 +883,8 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
  * @param {any} pressure
  * @param {any} tick
  * @param {any} [rivalTarget]
- * @param {string} [realmSeed] worldState.rngSeed: keys the body frame's hash pick (never a draw)
  */
-function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = null, realmSeed = '') {
+function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = null) {
   const action = (/** @type {any} */ (NPC_ACTION_FAMILIES))[actionFamily];
   // A move-against-a-named-rival action with a resolved subject. Drives both the
   // subject in the headline/summary and the setback applied to that subject.
@@ -925,7 +924,7 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     applyMode: proposal ? 'proposal' : 'auto', ...(!proposal && !subject && state.lastAction === actionFamily ? { recordMode: 'state_only' } : {}),
     headline: `${state.name} ${deed.underway}`,
     appliedHeadline: `${state.name} ${deed.done}`,
-    summary: pickLine(NPC_AIM_FRAMES, `${realmSeed}|${state.npcId}|${tick}|aim-frame`, { name: state.name, aim, deed: deed.noun }),
+    summary: pickLine(NPC_AIM_FRAMES, `aim-frame|${state.npcId}|${tick}`, { name: state.name, aim, deed: deed.noun }),
     reasons: npcCandidateReasons(state, pressure, actionFamily),
     npcPatch: {
       momentum: clamp01((state.momentum || 0) + (action.patch.momentum || 0)),
@@ -1168,7 +1167,7 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
     const rivalTarget = ['seek_promotion', 'undermine_rival', 'sabotage', 'expose', 'suppress'].includes(best.actionFamily)
       ? rivalryTargetFor(state, bySettlement)
       : null;
-    out.push(candidateForAction(state, best.actionFamily, best.pressure, tick, rivalTarget, snapshot.worldState.rngSeed));
+    out.push(candidateForAction(state, best.actionFamily, best.pressure, tick, rivalTarget));
   }
 
   return out;

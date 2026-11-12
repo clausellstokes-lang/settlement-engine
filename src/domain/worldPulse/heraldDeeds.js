@@ -128,7 +128,8 @@ export const NPC_AIMS = Object.freeze({
  * the aim and the deed as its means, in its own order and words; five, not four, so a hash
  * pick over the pool does not alias. Every frame is read with every deed noun and every aim
  * (tests/domain/npcAimFrames.test.js). Slots: `name`, `aim` (NPC_AIMS), `deed` (a `noun`
- * above). The pick is a keyed hash of the realm seed, the person and the tick, never a draw.
+ * above). The pick is a keyed hash of a fixed salt, the person and the tick, never a draw: text
+ * reads no entropy root (the chair's amended condition 1, 2026-11-12).
  * The frames presume no fact of the record beyond the person and their aim: pure colour.
  * @type {ReadonlyArray<(x: { name: string, aim: string, deed: string }) => string>}
  */
