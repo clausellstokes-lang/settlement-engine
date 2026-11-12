@@ -332,15 +332,25 @@ record:safetyProfile.plotHooks: top5 0.7377 > ceiling 0.7238
 
 # PART FOUR — the fourth seat (COHERENCE-AGREE-4, 2026-11-12), from 8be24bf61
 
-**THIS PART IS KEPT CURRENT AS THE SEAT WORKS; its last section says where it stands.**
+**THE NARROW DOOR, FOR THE MERGE SEAT AND THE POWERS LANE: `aab389759`** adds `--bank-new` to the pool-dominance
+register (`scripts/census/pool-dominance.mjs`). Usage: `node scripts/census/pool-dominance.mjs --bank-new`. It banks a row
+for each drawn pool that has none, at the higher of the banked corpus's and the second corpus's readings, with its
+count of lines. It touches no other row (the census header is re-taken, as every door does). It refuses another
+corpus and a foreign `--seed-prefix`. A lane's own new pool goes in through it; `--tighten` is the chair's door
+only (`docs/DESIGN_POOL_CENSUS.md`). Pinned both ways in `tests/lint/poolDominance.walker.test.js` ("--bank-new: a
+pool with no row gains exactly that row, and nothing else moves"). This lane banked its own pool through it at
+`ca1ed8ddd`: `ledger:prosperity:PROSPERITY_LINE_SIBLINGS`, top1 0.6833, top5 1, lines 2. The guard exits 0.
+
+The seat's tip is named in its one message to the chair; the edge bundles are re-emitted alone as the last commit.
 
 ## The corpus and the field diffs (L2, L3)
 
-The third seat's L2 (2,866 births, defined in PART THREE) plus the golden's 525, re-built in the seat's scratch space
-(births through `birthConfig({ ...DEFAULT_CONFIG, ...dials, settType })`, forced stresses as `selectedStresses: [s]`; the
-golden as `generatorGoldenMaster.test.js` births it). Every leaf flattened; array indices folded to `[]`; a leaf
-"moves" when its value differs. Corpora taken at 65ce74ce6, 303396f74, 6b932d3e8, f8932a3e5, e883780bb (the
-integration line the lane holds), 8be24bf61 (the seat's start) and each tip of this seat.
+The third seat's L2 (2,866 births, defined in PART THREE) plus the golden's 525 (3,391 births), re-built in the
+seat's scratch space (births through `birthConfig({ ...DEFAULT_CONFIG, ...dials, settType })`, forced stresses as
+`selectedStresses: [s]`; the golden as `generatorGoldenMaster.test.js` births it). Every leaf is flattened and array
+indices are folded to `[]`. A leaf "moves" when its value differs. Corpora were taken at 65ce74ce6, 303396f74,
+6b932d3e8, f8932a3e5, e883780bb (the integration line the lane holds), 8be24bf61 (the seat's start) and the seat's
+generation-moving commits.
 
 ## Per item: the commit, the pin, the count before → after
 
@@ -348,29 +358,99 @@ integration line the lane holds), 8be24bf61 (the seat's start) and each tip of t
 |---|---|---|---|
 | 1 (a) the theocratic twin's church | 64a62785e | coherenceAgreeCures "item 1 (a)"; the walker's arm 1 | walker fresh 5 → 4; the line prints in 39 births, its twin in 0, 0 without a sacred house |
 | 1 (b) F5's walls twin | cc7e60d82 | the walker's arm 1 lists it at the parent | walker fresh 4 → 3; 38 births, all palisades, 0 without walls or with a gate |
-| 1 (c) three receipt messages | — | — | **STOP**: the walker has no arm-1 rule for a check's diagnostics (below). Fresh 3, unbanked |
+| 1 (c) the receipt's finding messages (the walker rule, the chair's authority) | 071ea4cfd, 075079528 | presumedThings.walker "no reader prints a finding's words"; the planted finding | walker fresh 3 → 0; `ARM1_NOT_PRINTED` keyed by file, callee and argument (`generationCoherence.js :: finding`, argument 1) |
 | 2 (i) court and prison dimensions | f6000464f | coherenceAgreeCures "item 2" | the home's prison and the writer's flag disagree in 0 of 3,391 |
 | 2 (ii) the three court-without-prison lines | 4d12a1447 | coherenceAgreeCures "item 2 (ii)" | declared 0 → 3; 347 printings, 0 where court ∧ ¬prison fails |
-| 3 Floodplain Agriculture | — | — | **STOP**: no such strength in the tree (below) |
-| 4 the repetition guard | — | — | waits on the guard lane's tip |
+| 3 Floodplain | — | — | DROPPED by the chair (no such strength in the tree) |
+| 3′ (i) the exporter's refusal, one predicate | da4f6a87b | coherenceAgreeCures "item 3′ (i)" ×2 | 0 leaves move |
+| A′ refilled (the chair's ruling) | 1dde265d8 | coherenceAgreeCures "A′ refilled" (nine road holders at the bottom of their range) | holders below their size's range → 0; no-live-resource holders 13 → 0; 540 births move = the holders, 0 non-holders |
+| 3′ (ii) "Normally yields" on the tab and the PDF's three writers | 6677d60fe | economicsChainYieldLabel (24 seeds); coherenceAgreeCures "item 3′ (ii)" guard | refused chains printed as outputs 6,559 in 1,838 births (151 golden) → 0; no generated leaf |
+| 4 the repetition guard | 5172b3d24 (merge at 5b31cdfcc), aab389759 (the door), ca1ed8ddd (the row) | poolDominance.walker "--bank-new" ×2 | the guard exit 1 → 0; one row added, no other row moved |
+| 5 the lighting census | b4670a365 | the census through its ritual | files 3205 → 3210, parked 397 → 398, credited 2808 → 2812, titles 29133 → 29187, suite titles 7879 → 7902 |
 
-**L3, the seat's own commits:** 8be24bf61 → 4d12a1447, 0 leaves move in 3,391 births.
+**L3, the seat's own commits:** 8be24bf61 → 4d12a1447, 0 leaves move in 3,391 births. da4f6a87b: 0. 1dde265d8: the
+540 holders and nothing else (the record's A′ declaration). From 1dde265d8 to the tip: 0 of 3,391.
 
-## The STOPs raised
+## The fifth law: the whole-suite run, and every red classed
 
-1. **Item 1 (c).** The presumed-things walker's arm 1 reads every literal under `src/generators`; its arm 2 already
-   puts the receipt out of reach (`NOT_PRINTED['.generationCoherenceReceipt']`), arm 1 has no counterpart, and the
-   register's nine reasons hold none that is true of a diagnostic. What the walker would need
-   (`presumedThings.shared.mjs :: scanSource`, PRESUME's file): a literal passed as the `detail` of
-   `generationCoherence.js :: finding` is the receipt's finding and is not read. Not declared, not banked.
-2. **Item 3.** "Floodplain Agriculture" is a chain (`supplyChainData.js :: floodplain_agriculture`), never a strength.
-   Strengths standing only on a depleted resource, read through `STRENGTH_SUPPORT` with each condition: 0 of 3,391.
-   The depleted-floodplain chain: 15 L2 births, all "impaired"; none exports its outputs; the food record and
-   "Grain Sales: Grain purchased…" agree. What is left is the Economics tab's chain card, which prints the static
-   table's outputs under "(depleted)" and "impaired" — and does so for every depleted chain (1,846 of 3,391 births).
-   A design question, in files not the lane's.
-3. **The A′ record (item 5).** 6b932d3e8 moves labels the draft record does not declare, all inside the 538 L2 +
-   2 golden holders: the golden prosperity row `town|germanic|auto|random_trade|civilized|gm-seed-a` Comfortable →
-   Moderate; the safety label in 15 L2 (9 toward danger); public legitimacy in 22 (13 down); condition severity in 5.
-   The holders are re-born downstream of the roster (institutions 318, npcs 407, relationships 316, conflicts 220 …).
-   Put to the chair: declare as measured, or narrow the cure.
+One `npx vitest run` over all of tests/ at b4670a365 (the ledger ref fetched first; `--maxWorkers=2`): **66 failing
+in 47 files of 3,210; 38,630 passed; 252 skipped.** Each failing file was then re-run at e883780bb (the line) and at
+8be24bf61 (the seat's start), in `git archive` copies, so each red is placed by where it first stands.
+
+**MINE, CURED ON THE LANE (each red at b4670a365, green at its commit):**
+
+| Commit | Red | Cause | Cure |
+|---|---|---|---|
+| 18f5e5c30 | negativeAssertionAnchor ×2 | four bare negatives, the lane's (coherenceAgreeCures 157, 280, 299; crossroadsRequiredAccess 34) | each anchored on its own subject; none loosened |
+| e6e50b7a1 | w0WriterAgreement "ONE FOOD-SOURCE COUNT" (7 rows) | AGREE-3's declared zero-source pair (e4a897c2a) | re-keyed by identity: the exact line foodGenerator chooses (`foodLandOf(...).worksOwnLand`) |
+| 4c33003d0 | vendorPdfLazy "the goods migration roster" | A′ (6b932d3e8) imports `RESOURCE_DATA` into generationCoherence.js | the roster row says identity, direct |
+| e8f54fc57 | proseWiringCensus ×3 | item 2 (i): the `prison` atom is a producer; the leaf chainYield.js | the census re-taken by its writer (`--check` exit 0); measured 586 → 590, not-produced 66 → 62 |
+| 3dec3ae21 | narrativeQualityCorpus "city district-market revenue" | AGREE-3 F9 (e373a7836): the market home reads the catalogue; the fixture's "District market" is no catalogue name | the fixture is the city's own "Multiple market squares", the same branch |
+| d35631f20 | tuningRegister "no file carries more bare decimals" (prosperity.js 13 → 17) | AGREE-3 F11 (b13fb5f30): four bare thresholds | they are PROSPERITY_RANK's Wealthy / Prosperous / Moderate / Poor by name; 0 of 3,391 leaves |
+| ed159ff8c | generationForkCensus A4 | the refill (1dde265d8): a golden road holder's re-dealt roster | the register's door: the four fresh figures (same 21 → 22, transformed 42 → 41, two rows) |
+| the last commit | edge bundles ×7, engineBundleReplay ×3, engineServiceCore, engineServiceStoreParity ×3 | the bundles stale against src/ | re-emitted alone; tests/edgeFunctions + the three build suites 960 passed with them |
+
+**THE LINE'S KNOWN SET (red at e883780bb, §2f "where things stand after point 43"):** landingFixtureFreshness ×2
+(FOUNDING-WORLDS re-runs it); newsHeadlineContract, newsVoiceContract and proseFamilyContract (act 4; at the tip
+proseFamilyContract fails at load, below); dossierProseManifest's DRIFT arm (act 2).
+
+**THE MERGE SEAT'S ROWS, NAMED IN THE DRAFT** (each a byte-identity, digest or corpus figure over generated output;
+red from 8be24bf61, i.e. the earlier seats, unless marked; the record gives each its figures): the four golden
+surfaces that move (gm, fence, herald, the prose manifest's four-seed arm) and the PDF golden (cure 9);
+generationForkCensus A1; dmLayerGoldenIsolation A7; nameHeldThroughAssembly A1; pipelinePinnedChoosers A1;
+pipelinePinnedMode A1, A2, A5; powerEconomyFreshness A4; rosterFinalUnderHeldRoster A1; worldFactRederive A7;
+x46NpcBand; institutionBudgetPromise; editWorldFactResources A2, A6; editCorpusRatchet A4, A7, A8;
+mergeLadderHeldKeys A2, A5, A6; hookThemeDraws; institutionTable; siteCoherenceRatchet C1 (its one rise, desert
+dunes 29 → 30, named, not banked); townCartographyCalibration; undercitySewerDerivation; intentAtlasSoakDistiller;
+statecraftExposureBand ×2 (scandals 16, mobilizations 20 against floor 72; POWERS' point keys the floor). **Two
+instrument seeds the lane's generation moved, each re-searched by the rule in its own header, which moves a closing
+act's register:** the observed-shape corpus's `osr-tier-14` (mints no tier candidate from 8be24bf61, so
+observedShapeReaders, writerReach and proseFamilyContract fail at load); the taste fixture towns
+(`tests/fixtures/tasteTowns.js`): proseTasteInterested ×3 and proseWaveGate (d) ×2 from 8be24bf61, proseComposed A13
+and proseWaveGate (d) "differ in exactly one way" from the refill.
+
+**ABSENT AT THE TIP, AN ARTIFACT OF THE COPY:** the archive copies have no `.git`, so the rows that read history
+fail there only (controlBytes, declaredLineShape, drawDeclaredKeys, ledgerCitationIntegrity, observedShapeSentinel's
+history probe, tuningRegister's four refreeze rows, wiringCensusDeclared, edgeSharedBundleReproducibility's
+committed-tree rows, editCorpusRatchet A5/A6). Every one is green in the real tree at b4670a365.
+
+## The equal-failing set: seven directories and the three L1 gates, the line against the tip
+
+| | e883780bb (the line) | the tip |
+|---|---|---|
+| tests/architecture | 344 passed | 0 failed |
+| tests/build | 2 failed: landingFixtureFreshness ×2 | landingFixtureFreshness ×2 (known); bundle rows cured by the last commit; vendorPdfLazy cured |
+| tests/domain | 18,256 passed | 9 failed, all the merge seat's (above) |
+| tests/generators | 1,817 passed | 11 failed, all the merge seat's; w0, narrativeQuality, fork A4 cured |
+| tests/lint | news ×2, proseFamily A1/A3/A5 (known), plus the copy's history rows | news ×2, proseFamily (known); institutionTable, siteCoherence (merge seat's); OSR, writerReach (the seed); taste ×7 (the towns); anchor, tuning, wiring ×3 cured |
+| tests/property | 1 failed: the DRIFT arm (known) | the DRIFT arm (known); four-seed arm, dmLayer A7, editCorpus ×3, fence, gm, herald, statecraft ×2 (merge seat's) |
+| tests/simulation | 187 passed | 0 failed |
+| domain-strict | 1113 / 1113, exit 0 | 1113 / 1113, exit 0 |
+| typecheck:ratchet | 167 / 167, exit 0 | 167 / 167, exit 0 |
+| eslint | src, exit 0 | src and every touched file, exit 0 |
+
+Outside the seven, tests/pdf holds goldenViewModel (cure 9) and tests/edgeFunctions the bundle rows (the last commit).
+
+## The six golden surfaces (the fourth law)
+
+gm MOVED 501/525; the fence MOVED 359/360 (37bd444b at the tip); the prose manifest MOVED (954 drift rows; its
+four-seed arm from 8be24bf61); the PDF golden MOVED by cure 9 alone (defense.scoreAvg 43 → 40, first at c20042d2c);
+the herald MOVED (a89eda1e → 479da6ba; 8aaf2b3d at 8be24bf61); the preset-lighting witness UNMOVED (7/7). 3′ (ii)
+leaves the PDF golden and the phone floor unmoved. The record says each with its measure.
+
+## The STOPs raised, and the chair's rulings
+
+1. **Item 1 (c)**: the walker had no rule for a check's diagnostics. Ruled: a walker rule keyed by file, callee and
+   argument, pinned so no reader prints a finding's words (071ea4cfd).
+2. **Item 3**: "Floodplain Agriculture" is a chain, never a strength. Ruled: item 3 DROPPED; 3′ (refused chains read
+   "Normally yields"), built in (i) a leaf predicate and (ii) the tab and the PDF's three writers.
+3. **The A′ record**: the re-deal moves labels inside the holders. Ruled: declare every family; then THE SLOT IS
+   REFILLED with no further roll (1dde265d8); the record taken once after (0db835f6f) and the old sentence struck.
+4. **Item 4**: `--tighten` run before the amendment (d329b828c) was reverted (8ea25ef31); the narrow door built.
+5. **Cure 9's legitimacy**: declared under cure 9, with the lane's legitimacy total (85f08688c).
+
+## What was banked
+
+One register row through the narrow door (ca1ed8ddd). The wiring census and the fork census register re-taken by
+their own doors (e8f54fc57, ed159ff8c), the goods roster's row by the walker's own reading (4c33003d0), the lighting
+census by its ritual (b4670a365). No test skipped, no pin loosened, no baseline banked upward, no golden door run.
