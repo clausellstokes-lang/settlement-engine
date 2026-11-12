@@ -37,7 +37,7 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_MEMORIES.plague_years": {
-      "top1": 0.6,
+      "top1": 0.4,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -87,7 +87,7 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_PEOPLE.greek": {
-      "top1": 0.3449,
+      "top1": 0.4138,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -117,7 +117,7 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_PEOPLE.steppe": {
-      "top1": 0.3143,
+      "top1": 0.2858,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -152,22 +152,17 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_SENSES.arms.dominant": {
-      "top1": 0.4091,
+      "top1": 0.3914,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_SENSES.bread.dominant": {
-      "top1": 0.4286,
+      "top1": 0.4091,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_SENSES.bread.lines": {
       "top1": 0.3334,
-      "top5": 1,
-      "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
-    },
-    "ledger:ARRIVAL_SENSES.brewers.dominant": {
-      "top1": 1,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -177,12 +172,12 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_SENSES.cloth.dominant": {
-      "top1": 0.3726,
+      "top1": 0.3922,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_SENSES.faith.dominant": {
-      "top1": 0.5527,
+      "top1": 0.5676,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -197,7 +192,7 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_SENSES.herbs.dominant": {
-      "top1": 0.375,
+      "top1": 0.4167,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -272,12 +267,12 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_TENSIONS.poor": {
-      "top1": 0.3462,
+      "top1": 0.3077,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:ARRIVAL_TENSIONS.prosperous": {
-      "top1": 0.3457,
+      "top1": 0.3334,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -287,11 +282,6 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:CULTURE_PROFILES.arabic.architecturalDetails": {
-      "top1": 1,
-      "top5": 1,
-      "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
-    },
-    "ledger:CULTURE_PROFILES.east_asian.architecturalDetails": {
       "top1": 1,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
@@ -307,7 +297,7 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:CULTURE_PROFILES.south_asian.architecturalDetails": {
-      "top1": 1,
+      "top1": 0.5,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -697,7 +687,7 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:STRESS_DESCS.indebted": {
-      "top1": 0.5,
+      "top1": 0.3334,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -1575,11 +1565,6 @@
     },
     "ledger:institutionDescVariants:town|Crafts|Bakers (5-15)": {
       "top1": 0.3954,
-      "top5": 1,
-      "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
-    },
-    "ledger:institutionDescVariants:town|Crafts|Bowyers & fletchers (guild)": {
-      "top1": 0.5,
       "top5": 1,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
@@ -4180,7 +4165,7 @@
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.genuine_respect": {
       "top1": 0.1393,
-      "top5": 0.6778,
+      "top5": 0.6786,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence": {
@@ -4195,7 +4180,7 @@
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mentor_legacy": {
       "top1": 0.1325,
-      "top5": 0.6433,
+      "top5": 0.6427,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mil_crim_corruption": {
@@ -4234,7 +4219,7 @@
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.wary_alliance": {
-      "top1": 0.1368,
+      "top1": 0.1352,
       "top5": 0.6505,
       "reason": "banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures"
     },
