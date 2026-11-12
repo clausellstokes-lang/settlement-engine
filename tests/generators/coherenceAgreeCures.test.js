@@ -438,8 +438,9 @@ describe('F5 (d): the wizard offers the mountain pass on the mountains only', ()
  * THE REFUSED MEMBER COULD HAVE BEEN DEPLETED. A′'s refill (COHERENCE-AGREE-4) kept the slot's draw, and a crossroads is
  * never randomly depletable, so its replacement could arrive worked out where the roll's own winner never could (125
  * of the lane's 4,141 births; REVIEW-AGREE-2 F5's second effect). Each seed below is a crossroads holder off a
- * crossroads whose replacement arrived depleted at 7cf4f0c2e; it now arrives live. The one food band the rule moves is
- * r2s-under_siege-village-0's (its replacement grain fields arrive live: deficit -> importDependent). REVIEW-AGREE-2
+ * crossroads whose replacement arrived depleted at 7cf4f0c2e; it now arrives live. The one food band the rule moved is
+ * r2s-under_siege-village-0's (its replacement grain fields arrived live: deficit -> importDependent; (c) re-deals it
+ * since, below). REVIEW-AGREE-2
  * F6's besieged city (r2s-under_siege-city-3) frees its replacement forest too, and its band stays deficit: A′'s
  * re-deal moves it by another path, declared in the draft record.
  */
@@ -458,13 +459,19 @@ describe('P2\'s rule: a refilled slot arrives as live as the refused winner woul
       expect(settlement.config.nearbyResourcesDepleted, seed).not.toContain(FREED[seed]);
     }), 'a refilled slot took a depletion draw its refused member could never take');
   });
-  test('the besieged: r2s-under_siege-village-0 grows on live grain fields again (deficit -> importDependent)', () => {
+  // RE-KEYED BY IDENTITY at P2 / F5 (c) (COHERENCE-AGREE-7): the village also rolled a pass off the mountains. Its pass
+  // slot, earlier in the roll, now takes iron, so its crossroads slot takes marshlands where it took grain fields, and
+  // its band reads deficit again by that re-deal (declared with (c)). The rule's claim is unchanged: both
+  // replacements arrive live.
+  test('the besieged: r2s-under_siege-village-0\'s replacements (iron, marshlands) arrive live', () => {
     const besieged = (seed, tier) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier,
       selectedStressesRandom: false, selectedStresses: ['under_siege'] }), null, { seed });
     const village = besieged('r2s-under_siege-village-0', 'village');
-    expect(village.config.nearbyResources).toContain('grain_fields'); // anchored: the replacement is held
-    expect(village.config.nearbyResourcesDepleted).not.toContain('grain_fields');
-    expect(village.economicState.foodSecurity.foodRecord.band).toBe('importDependent');
+    for (const key of ['iron_deposits', 'marshlands']) {
+      expect(village.config.nearbyResources).toContain(key); // anchored: the replacement is held
+      expect(village.config.nearbyResourcesDepleted).not.toContain(key);
+    }
+    expect(village.economicState.foodSecurity.foodRecord.band).toBe('deficit');
     const city = besieged('r2s-under_siege-city-3', 'city');
     expect(city.config.nearbyResources).toContain('managed_forest'); // anchored: the replacement is held
     expect(city.config.nearbyResourcesDepleted).not.toContain('managed_forest');
@@ -489,5 +496,38 @@ describe('F5 (b): a refilled slot never takes a member the terrain refuses', () 
       // anchored: the roster was just held to carry a full roll, so it is the live roster
       expect(roster, seed).not.toContain('defended_pass');
     }), 'a refilled slot takes a pass off the mountains');
+  });
+});
+
+/**
+ * P2 / F5 (c) (COHERENCE-AGREE-7, the chair's ruling of 2026-11-12): THE BASE ROLL'S PASS OFF ITS TERRAIN. "Mountain Pass"
+ * names no `terrain`, so the roll's universal half drew it anywhere (963 of the lane's 4,141 births held one off the
+ * mountains after the refill was confined). A rolled winner the record's terrain refuses is refused as one its access
+ * refuses (A′), at the same point, and its slot refilled by the same rule; P2's rule (e11750d62) makes the replacement
+ * arrive live. Each seed below held a rolled pass off the mountains at df2249ff8; agree-metropolis-33 and
+ * rvw12-town-133 are two of the eleven that, built without the rule, were left with nothing live.
+ */
+describe('P2 / F5 (c): the roll keeps no mountain pass off the mountains', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const CAME = { 'agree-thorp-0': 'ancient_grove', 'r2r-hamlet-14': 'ancient_grove', 'agree-village-25': 'ancient_grove',
+    'agree-town-4': 'iron_deposits', 'agree-city-12': 'precious_metals', 'agree-metropolis-16': 'gemstone_deposits',
+    'agree-metropolis-33': 'coal_deposits', 'rvw12-town-133': 'ancient_grove' };
+  test('each holder holds no pass, and its slot is refilled live', () => {
+    expectNoSeedFailures(collectSeedFailures(Object.keys(CAME), (seed) => {
+      const { config } = birth(seed);
+      expect(config.terrainType, seed).not.toBe('mountain');
+      expect(config.nearbyResources, seed).not.toContain('defended_pass');
+      expect(config.nearbyResources, `anchored: ${seed} holds its replacement`).toContain(CAME[seed]);
+      expect(config.nearbyResourcesDepleted, seed).not.toContain(CAME[seed]);
+      expect(config.nearbyResources.filter((key) => !config.nearbyResourcesDepleted.includes(key)).length, `${seed}: something live`).toBeGreaterThan(0);
+    }), 'a rolled pass stands off the mountains');
+  });
+  // The terrain is the record's: on the wizard's "Mountain Pass" route with the terrain left on 'auto' the town stands
+  // on the mountains, and its rolled pass is kept (the step's own terrain override is null there).
+  test('a village on the Mountain Pass route, terrain auto, stands on the mountains and keeps its rolled pass', () => {
+    const settlement = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'village', tradeRouteAccess: 'mountain_pass',
+      terrainOverride: 'auto', nearbyResourcesRandom: true }), null, { seed: 'agree7-mp-village-4' });
+    expect(settlement.config.terrainType).toBe('mountain');
+    expect(settlement.config.nearbyResources).toContain('defended_pass');
   });
 });

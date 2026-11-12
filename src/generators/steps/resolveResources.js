@@ -214,8 +214,11 @@ registerStep('resolveResources', {
     const refillable = (key) => !held.has(key) && admitsAccess(key) && admitsTerrain(key) && RARE_RESOURCES[key] === undefined
       && (magicOn || key !== 'magical_node');
     const categoryOf = (key) => (RESOURCE_DATA[key]?.category) || 'land';
+    // COHERENCE-AGREE-7 (REVIEW-AGREE-2 F5 (c), the chair's ruling on P2): a rolled winner the record's TERRAIN refuses
+    // (the mountain pass off the mountains: the pool's universal half never read `requiresTerrain`) is refused exactly
+    // as one its access refuses, at the same point, and its slot is refilled by the same rule.
     const slots = nearbyResources.map((key) => {
-      if (admitsAccess(key)) return key;
+      if (admitsAccess(key) && admitsTerrain(key)) return key;
       const own = universal.filter((k) => categoryOf(k) === categoryOf(key) && refillable(k));
       const pool = own.length ? own : [...terrainSpecific, ...universal].filter(refillable);
       if (!pool.length) return null;
