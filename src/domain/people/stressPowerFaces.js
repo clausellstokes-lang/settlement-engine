@@ -5,6 +5,7 @@
  */
 import { STRESS_POWER_FACES } from '../../data/stressPowerFaces.js';
 import { nameOf } from '../rulingPower.js';
+import { membersByRank } from './membership.js';
 
 /** The roster's own landed powers (stressFactions.js's succession_void arm lifts exactly these), never a claimant. */
 const LANDED_ROSTER = Object.freeze(['Noble Families', 'Noble Houses', 'Landed Gentry', 'Manor Household']);
@@ -47,7 +48,8 @@ export function stressPowerRowOf(settlement, faction) {
 
 /**
  * The declared line the page prints in place of a power's people, where the power by its nature has no single voice
- * (the rule's step (b)); '' where the power has none.
+ * (the rule's step (b)); '' where the power has none. Where two or more powers of one row with a `pointer` have no one
+ * on the page, the line prints once, under the stronger, and each other reads its pointer naming the stronger.
  * @param {unknown} settlement @param {string} power the power's display name
  * @returns {string}
  */
@@ -56,5 +58,15 @@ export function leaderlessLineOf(settlement, power) {
   /** @type {unknown[]} */
   const factions = Array.isArray(listed) ? listed : [];
   const faction = factions.find((f) => nameOfRow(rec(f)) === power);
-  return faction ? stressPowerRowOf(settlement, faction)?.leaderless || '' : '';
+  const row = faction ? stressPowerRowOf(settlement, faction) : null;
+  if (!row?.leaderless) return '';
+  if (!row.pointer) return row.leaderless;
+  // the line ONCE (the chair's ruling of 2026-11-12): among this row's powers with no one on the page, the stronger
+  // (its power, then the roster's order) prints it; each other points at the stronger by name
+  const listedNpcs = rec(settlement).npcs;
+  const npcs = Array.isArray(listedNpcs) ? listedNpcs : [];
+  const faceless = factions.filter((f) => stressPowerRowOf(settlement, f) === row && membersByRank(npcs, nameOfRow(rec(f))).length === 0);
+  if (!faceless.includes(faction)) return row.leaderless;
+  const stronger = faceless.reduce((best, f) => (Number(rec(f).power) > Number(rec(best).power) ? f : best));
+  return stronger === faction ? row.leaderless : row.pointer.replace('{power}', nameOfRow(rec(stronger)));
 }

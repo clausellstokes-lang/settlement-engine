@@ -13,6 +13,9 @@
  *   (b) `leaderless`: where neither (0) nor (a) stands and the power by its nature has no single voice (a committee,
  *       a congregation, a claimants' party, a band, a commons' movement), one declared line the page prints in place
  *       of its people. Every row but the appointed one carries a line (the appointed power always has its mint).
+ *       `pointer` (the chair's ruling of 2026-11-12 on the fourth seat's parked item 1): where two or more powers of
+ *       one row have no one on the page, the line prints ONCE, under the stronger (its power, then the roster's
+ *       order), and each other carries this declared line, `{power}` the stronger's name from the roster.
  * `appointed`: the power is sent in from outside and wears one hat (the occupier's man: the R-P4 mint row
  * people/mintTitles.js :: OTHER_MINT_ROWS gives it). `veiled`: the power works in secret, so its face is veiled.
  * `archetype` stands for a pool-drawn name (succession_void's claimants): a power of that archetype that is not the
@@ -25,7 +28,7 @@
 
 /**
  * @typedef {{ stress: string, power?: string, archetype?: string, house?: { kinds?: string[], names?: RegExp },
- *   cast?: RegExp, leaderless?: string, appointed?: boolean, veiled?: boolean, seated?: boolean, claimant?: boolean,
+ *   cast?: RegExp, leaderless?: string, pointer?: string, appointed?: boolean, veiled?: boolean, seated?: boolean, claimant?: boolean,
  *   rungOf?: ReadonlyArray<string> }} StressPowerFace
  */
 
@@ -85,7 +88,8 @@ export const STRESS_POWER_FACES = Object.freeze([
   // powers, else its line
   { stress: 'succession_void', archetype: 'noble', house: { kinds: ['noble'] },
     rungOf: Object.freeze(['Noble Families', 'Noble Houses', 'Landed Gentry', 'Manor Household']),
-    leaderless: 'No one claimant has stepped forward yet: the old families press the claim together.' },
+    leaderless: 'No one claimant has stepped forward yet: the old families press the claim together.',
+    pointer: 'Presses the claim with {power}.' },
 ]);
 
 /**
