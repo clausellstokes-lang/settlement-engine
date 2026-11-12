@@ -1,0 +1,153 @@
+{
+ "engine": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
+ "failed": {
+  "at210": [],
+  "at211": []
+ },
+ "rows": [
+  {
+   "town": "largest corpus town (server-veil-metropolis-3)",
+   "bytes": 525978,
+   "db": "at210",
+   "cfg": "default",
+   "read": "gallery",
+   "medianMs": 194,
+   "maxMs": 198
+  },
+  {
+   "town": "largest corpus town (server-veil-metropolis-3)",
+   "bytes": 525978,
+   "db": "at210",
+   "cfg": "default",
+   "read": "link",
+   "medianMs": 266,
+   "maxMs": 288
+  },
+  {
+   "town": "largest corpus town (server-veil-metropolis-3)",
+   "bytes": 525978,
+   "db": "at210",
+   "cfg": "all",
+   "read": "gallery",
+   "medianMs": 208,
+   "maxMs": 256
+  },
+  {
+   "town": "largest corpus town (server-veil-metropolis-3)",
+   "bytes": 525978,
+   "db": "at210",
+   "cfg": "all",
+   "read": "link",
+   "medianMs": 272,
+   "maxMs": 358
+  },
+  {
+   "town": "largest corpus town (server-veil-metropolis-3)",
+   "bytes": 525978,
+   "db": "at211",
+   "cfg": "default",
+   "read": "gallery",
+   "medianMs": 318,
+   "maxMs": 345
+  },
+  {
+   "town": "largest corpus town (server-veil-metropolis-3)",
+   "bytes": 525978,
+   "db": "at211",
+   "cfg": "default",
+   "read": "link",
+   "medianMs": 271,
+   "maxMs": 274
+  },
+  {
+   "town": "largest corpus town (server-veil-metropolis-3)",
+   "bytes": 525978,
+   "db": "at211",
+   "cfg": "all",
+   "read": "gallery",
+   "medianMs": 378,
+   "maxMs": 447
+  },
+  {
+   "town": "largest corpus town (server-veil-metropolis-3)",
+   "bytes": 525978,
+   "db": "at211",
+   "cfg": "all",
+   "read": "link",
+   "medianMs": 332,
+   "maxMs": 341
+  },
+  {
+   "town": "deploy-check Force all",
+   "bytes": 997890,
+   "db": "at210",
+   "cfg": "default",
+   "read": "gallery",
+   "medianMs": 493,
+   "maxMs": 533
+  },
+  {
+   "town": "deploy-check Force all",
+   "bytes": 997890,
+   "db": "at210",
+   "cfg": "default",
+   "read": "link",
+   "medianMs": 702,
+   "maxMs": 759
+  },
+  {
+   "town": "deploy-check Force all",
+   "bytes": 997890,
+   "db": "at210",
+   "cfg": "all",
+   "read": "gallery",
+   "medianMs": 518,
+   "maxMs": 565
+  },
+  {
+   "town": "deploy-check Force all",
+   "bytes": 997890,
+   "db": "at210",
+   "cfg": "all",
+   "read": "link",
+   "medianMs": 718,
+   "maxMs": 758
+  },
+  {
+   "town": "deploy-check Force all",
+   "bytes": 997890,
+   "db": "at211",
+   "cfg": "default",
+   "read": "gallery",
+   "medianMs": 772,
+   "maxMs": 801
+  },
+  {
+   "town": "deploy-check Force all",
+   "bytes": 997890,
+   "db": "at211",
+   "cfg": "default",
+   "read": "link",
+   "medianMs": 661,
+   "maxMs": 742
+  },
+  {
+   "town": "deploy-check Force all",
+   "bytes": 997890,
+   "db": "at211",
+   "cfg": "all",
+   "read": "gallery",
+   "medianMs": 888,
+   "maxMs": 912
+  },
+  {
+   "town": "deploy-check Force all",
+   "bytes": 997890,
+   "db": "at211",
+   "cfg": "all",
+   "read": "link",
+   "medianMs": 792,
+   "maxMs": 825
+  }
+ ]
+}

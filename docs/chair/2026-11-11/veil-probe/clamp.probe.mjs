@@ -32,7 +32,8 @@ const canon = (v) => (Array.isArray(v) ? v.map(canon) : isRec(v)
 
 it('a share past the client clamp', async () => {
   const { bootChain } = await import('./chain.mjs');
-  const { db } = await bootChain();
+  const through = Number(process.env.THROUGH || 999);
+  const { db } = await bootChain({ through });
   H.db = db;
   await db.exec(`insert into auth.users (id) values ('${O}'); update public.profiles set role='developer' where id='${O}'; set test.uid='';`);
   const { generateSettlementPipeline: gen } = await import('../../../../src/generators/generateSettlementPipeline.js');
@@ -55,7 +56,7 @@ it('a share past the client clamp', async () => {
   await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides)
     values ('aaaaaaaa-0000-0000-0000-000000000001',$1,'T','metropolis',$2,true,'p',now(),'l','unlisted',$3)`, [O, JSON.stringify(rec), JSON.stringify(planted)]);
   const time = async (q) => { const ms = []; for (let k = 0; k < 8; k += 1) { const t = performance.now(); await db.query(q); ms.push(performance.now() - t); } ms.shift(); ms.sort((a, b) => a - b); return Math.round(ms[3]); };
-  const out = { deltas: planted.$veil.deltas.length, rowBytes: JSON.stringify(planted).length };
+  const out = { through, deltas: planted.$veil.deltas.length, rowBytes: JSON.stringify(planted).length };
   for (const [label, q, slug] of [['gallery', `select data from public.get_gallery_dossier('p')`, 'p'], ['link', `select public.get_unlisted_dossier('l')`, 'l']]) {
     out[`${label}MsPlanted`] = await time(q);
     const page = canon((await gallery.fetchPublicDossier(slug)).settlement);
@@ -68,5 +69,5 @@ it('a share past the client clamp', async () => {
   out.galleryMsEveryEyeShut = await time(`select data from public.get_gallery_dossier('p')`);
   out.linkMsEveryEyeShut = await time(`select public.get_unlisted_dossier('l')`);
   mkdirSync(resolve(process.cwd(), 'docs/chair/2026-11-11/veil-probe/out'), { recursive: true });
-  writeFileSync(resolve(process.cwd(), 'docs/chair/2026-11-11/veil-probe/out/clamp.json'), JSON.stringify(out, null, 1));
+  writeFileSync(resolve(process.cwd(), `docs/chair/2026-11-11/veil-probe/out/clamp${through === 999 ? '' : `-at${through}`}.json`), JSON.stringify(out, null, 1));
 });
