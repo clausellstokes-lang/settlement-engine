@@ -386,6 +386,8 @@ walker's "every drawn pool has a row" is red on this tree for that cause alone.
 | F6 the crisis power's leader | 9b1bcc3fd | crisis powers led by a person who leads another 44 (R 14, S 30) | 0 (44 births: the first, the cast's order; 12 on their declared line) | stressPowersFaced's second check reads every first, 4 pins, red first |
 | F13 the crisis guard on a corpus | b1a3934fa | 22 seeds | the pins + 180 births (15 crises × 6 sizes × 2); red at the merged start (3 of 4 checks, 33 rows) | stressPowersFaced.test.js |
 | F10 the card's two offices | 01ccf258f | an office's title beside the office held: 189 (R 52, S 137) | 0 (print time; records 0 of 4,305) | dualHatReaders.test.js, red first |
+| F9 the guard's strength | 5fdb0c023 (tests only) | the planted office-holder left powersDualHat green; four pins computed by the code under test | the plant reds 8 seeds; a wrong leader rule reds all four pins (7 titles) | powersDualHat (birthConfig), tests/helpers/dualHatOracle.js |
+| F11 the PDF pin and the six surfaces | db6f17dc5 | whoRunsThisTownDm red (birth 785: no hidden boost); 4 surfaces named | re-keyed by identity to birth(5); 6 surfaces in the draft, 5 MOVED, the preset-lighting witness UNMOVED | — |
 
 F12's L3: 0 of 4,305 whole-record hashes differ, merged start against the split. The split is SIZED: docs and sealed
 packets cite this file's lines up to :787 and the citation walker reds a new past-EOF citation, so the small cohesive
@@ -457,16 +459,38 @@ The tip is LOCAL and UNPUSHED (the push refusal stands): 9b1bcc3fd plus this doc
 `instrument.mjs` + `runplan.sh` the probe tree's resize log; `f1.mjs`, `crisis.mjs`, `text.mjs`/`textsum.mjs`,
 `f7.mjs`, `f456.mjs`, `hashdiff.mjs`, `sound.mjs`, `crisislines.mjs`).
 
-**Remaining, in order (the chair's order of 2026-11-12):** F9 (the dual-hat guard reds on the review's planted fault,
-births through birthConfig; the four pins' expectations as literals); F11 (the draft record's six surfaces measured at
-the tip; whoRunsThisTownDm re-keyed by identity to a birth with a hidden boost); F3 (the claimant faced by the
-succession's cast, minted as the occupier's governor is; the old families' body on the next free noble rung; STOP if a
-mint needs a card a guard refuses); F8 (the capture table, line f72262c68 against the tip, by kind, both corpora, FULL
-capture only with a criminal power standing, with l2-politically_fractured-metropolis-13 by name; the named-house check).
-THE LONG RUNS ARE A SUCCESSOR'S (the chair, 2026-11-12): the wars (thirty realms, the restated line); the whole-lane
-field diff; the ONE draft record current (the six pools waiting for the narrow door; the crisis table as a measure; the
-capture table; the mobilization count; the crisis seats' coup moves by crisis and size); L5's whole-suite failing set at
-the final tip; the edge bundles re-emitted last, alone.
+**F8, THE CAPTURE TABLE (measured, not yet closed):** `powerStructure.criminalCaptureState`, the line f72262c68 against
+the tip after F11 (both corpora, 4,305 births; R the reviewer's with the golden's 525, S the second seat's):
+
+| from -> to | direction | R | S | with a criminal power standing (R / S) |
+| corrupted -> equilibrium | toward safety | 9 | 22 | 9 / 19 |
+| equilibrium -> corrupted | toward danger | 6 | 21 | 5 / 13 |
+| none -> corrupted | toward danger | 8 | 11 | 0 / 0 |
+| corrupted -> none | toward safety | 6 | 12 | 0 / 0 |
+| none -> equilibrium | toward danger | 4 | 6 | 0 / 0 |
+| equilibrium -> none | toward safety | 5 | 5 | 0 / 0 |
+| adversarial -> equilibrium | toward danger | 5 | 2 | 5 / 2 |
+| adversarial -> corrupted | toward danger | 1 | 4 | 1 / 4 |
+| equilibrium -> adversarial | toward safety | 1 | 4 | 1 / 4 |
+| corrupted -> adversarial | toward safety | 2 | 1 | 2 / 1 |
+| capture -> equilibrium | toward safety | 1 | 1 | 1 / 0 |
+| equilibrium -> capture | toward danger | 0 | 1 | 0 / 1 |
+| corrupted -> capture | toward danger | 1 | 0 | 1 / 0 |
+FULL capture at the tip: 5 births; without a criminal power standing: 0
+
+The chair's rule holds in every row: FULL capture never stands without a criminal power (0 of 5). The one move toward
+danger the crisis seats made (l2-politically_fractured-metropolis-13, equilibrium -> corrupted) is in the S column of
+equilibrium -> corrupted. NOT DONE: the check that wherever the hall's state is not clean the page names the house the
+hall answers to (a state with no such name is a STOP with the town).
+
+**THE THIRD SEAT STOPPED HERE (the chair's line, 600k; final).** The tip is local and unpushed (the refusal stands). WHAT
+REMAINS, IN ORDER: (1) F8's named-house check, then F8 closed in the draft record with this table; (2) F3, the claimants
+(faced by the succession's cast, minted and named as the occupier's governor is; the old families' body on the next free
+noble rung; STOP if a mint needs a card a guard refuses); (3) THE LONG RUNS, a successor's: the wars (thirty realms, the
+restated line), the whole-lane field diff, the ONE draft record brought final (the crisis seats' coup moves by crisis and
+size, the mobilization count, the six pools' draws on both corpora), L5's whole-suite failing set at the final tip (the
+ledger ref fetched first), and the edge bundles re-emitted last, alone.
+
 
 **The chair's notes of 2026-11-12 recorded:** the two `tests/components/powerSeatRender` reds were THE LANE'S OWN before
 the third seat (green at the line f72262c68, red at 1a32c200a: the not-built rule), re-keyed by identity at 39086c96b.
