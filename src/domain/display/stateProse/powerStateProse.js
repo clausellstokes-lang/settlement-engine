@@ -441,6 +441,11 @@ export function capturePoolKey(captureState, breakdown) {
   const state = text(captureState);
   if (state === 'capture') return 'capture reached a LEADER';
   if (state === 'corrupted') return 'capture reached an AGENT of a faction';
+  // 5a (W2-A-LEAVES, 2026-11-12; the second wave's ruling: THE DESK READS THE STORED STATE). At 'none' the hall card
+  // prints "Free of the criminals" off this same stored state, and both pressure pools assert the criminals' reach
+  // (money reaching the officials; a grip being lost). The pressure pools are drawn only at a state that has met
+  // the criminals; at none the desk says nothing. An absent state (an older record) reads as before.
+  if (state === 'none') return null;
   if (!breakdown) return null;
   const safety = contribution(breakdown.safety);
   const prosperity = contribution(breakdown.prosperity);

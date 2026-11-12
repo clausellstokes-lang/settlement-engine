@@ -198,13 +198,11 @@
    "P16three",
    "P17",
    "P2",
-   "P5a",
    "P8any"
   ],
   "r2r-hamlet-0": [
    "P16three",
    "P17",
-   "P5a",
    "P8any"
   ],
   "r2s-occupied-hamlet-0": [
@@ -212,7 +210,6 @@
    "P16three",
    "P17",
    "P20",
-   "P5a",
    "P8any",
    "P9"
   ],
@@ -232,7 +229,6 @@
    "P2",
    "P20",
    "P3any",
-   "P5a",
    "P6"
   ],
   "r2r-town-0": [

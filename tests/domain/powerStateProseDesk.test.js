@@ -721,12 +721,26 @@ describe('DS-POW-6 — the capture pools are COVERT, and that is the kernel work
   it('pressure direction reads the CANONICAL contributions, and a mixed pair is silence', () => {
     expect(capturePoolKey('equilibrium', { safety: -12, prosperity: -10 }))
       .toBe('capture pressure ADVANCING (weak security, poor prosperity)');
-    expect(capturePoolKey('none', { safety: 8, prosperity: 15 }))
+    // re-keyed (W2-A-LEAVES 5a, 2026-11-12): the RECOVERING pool's state is one that has met the criminals
+    // ('adversarial': "Fighting the criminals"), never 'none', where the hall reads "Free of the criminals"
+    expect(capturePoolKey('adversarial', { safety: 8, prosperity: 15 }))
       .toBe('capture pressure RECOVERING (strong security, prosperity)');
     // Mixed and flat are neither direction — the corpus wrote no sentence for them.
-    expect(capturePoolKey('none', { safety: -12, prosperity: 15 })).toBeNull();
-    expect(capturePoolKey('none', { safety: 0, prosperity: 0 })).toBeNull();
+    expect(capturePoolKey('adversarial', { safety: -12, prosperity: 15 })).toBeNull();
+    expect(capturePoolKey('adversarial', { safety: 0, prosperity: 0 })).toBeNull();
     expect(capturePoolKey('none', null)).toBeNull();
+  });
+
+  it('5a (W2-A-LEAVES, the charter\'s ruling): THE DESK READS THE STORED STATE — at none it says nothing', () => {
+    // The hall card prints "Free of the criminals" off the stored state 'none'; the pressure pools assert
+    // criminal money reaching the officials, or a grip being lost. 288 of the census's 720 printed both.
+    expect(capturePoolKey('none', { safety: -12, prosperity: -10 })).toBeNull();
+    expect(capturePoolKey('none', { safety: 8, prosperity: 15 })).toBeNull();
+    // a state that means pressure keeps its direction
+    expect(capturePoolKey('equilibrium', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    expect(capturePoolKey('adversarial', { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    // an absent state (an older record) reads as before: the hall card prints no rung there either
+    expect(capturePoolKey(undefined, { safety: -12, prosperity: -10 })).toBe('capture pressure ADVANCING (weak security, poor prosperity)');
   });
 });
 
@@ -771,7 +785,7 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
       underside(null, 'none'),
       underside(BREAK({}), 'none'),
       underside(BREAK({ prosperity: -10, safety: -12 }), 'equilibrium'),
-      underside(BREAK({ prosperity: 15, safety: 8 }), 'none'),
+      underside(BREAK({ prosperity: 15, safety: 8 }), 'adversarial'), // re-keyed from 'none' (W2-A-LEAVES 5a)
       underside(BREAK({ prosperity: -10, safety: -12 }), 'corrupted'),
       underside(BREAK({ prosperity: -10, safety: -12 }), 'capture'),
       ...['Black Market Ring', 'Smuggling Operation', 'Gambling Den', 'Front Business',
