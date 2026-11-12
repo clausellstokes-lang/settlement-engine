@@ -39,3 +39,30 @@ The lane is `lane/coherence-upkeep-2026-11-12`, base `65ce74ce6`. Its tip is the
 7. **Merge AGREE's fixed tip** when the chair names it (a third seat is curing AGREE). Then re-run every measure and the type gates: the inherited errors should go.
 8. **The equal-failing set.** Base and tip as archives, with the type gates in it. The last-known lint differences beyond the base are this lane's census, tuning and walker fixes, all cured, plus the observed-shape rows (item 6) and two figures the base already had red (the sovereignty file count; the Wizard News drift).
 9. **Edge bundles last and alone** (`npm run build:edge-shared`). Push with `git push --no-verify -u origin lane/coherence-upkeep-2026-11-12`, read the tip back, and send ONE hand-back message to the chair (session `session_01FbPLbejcfwX5nii12VM673`). An independent reviewer reads the lane next. Open no PR.
+
+## THE CHAIR'S RULING ON THE THIRD STOP (arrived after the hand-back; replaces item 5 above)
+
+THE CHAIN MAY MOVE (readiness → public legitimacy → faction power → the people), on these conditions. Take them AFTER the gate ladder (Struggling `funded` 0.3, already landed in 4fb1dce75):
+
+- **(a)** Re-take the field diff at the new ladder: the golden's 525 and the 660.
+- **(b)** Declare every downstream family in the draft record, with its count on both corpora:
+  - public legitimacy: the score, the defence term, the multipliers, each flag
+  - governance fractured
+  - faction power and relationships
+  - the people's power, memberships, goals and personality picks
+  - relationship prose
+  - condition severity
+  - stores held
+- **(c) THE SIGN.** Every legitimacy score that moves, moves in the direction its own town's defence score moved. One exception is a STOP.
+- **(d) STOPS**, each reported with its towns:
+  - WHO GOVERNS changes anywhere: the governing power's name or kind, or the person who leads.
+  - A legitimacy flag moves toward danger (crisis, fracture, contested) in a town whose readiness did NOT fall.
+  - Any one legitimacy flag moves in more than 33 of the 660.
+  - A coup, capture or stability LABEL moves toward danger in a town whose readiness did not fall.
+- **(e) PEOPLE ARE NOT RE-DEALT.** A personality pick, a goal or a membership may move ONLY where a function keys it on the person's or the faction's power by design. Name that function for each of the three, and give the counts. If any move is a seeded draw consumed or skipped because an upstream number changed: STOP.
+- **(f) THE COHERENCE RECEIPT.** Its text may move with the facts; a check that changes STATUS on any birth is a STOP, reported with the check and the seed.
+- **(g)** For `simulationTrace` and each other moving string root (conflicts, prominentRelationship, pressureSentence, generationCoherenceReceipt, stress/stressors, activeConditions, economicViability): one line each on what moves in it (a number quoted in a sentence, or a different sentence chosen).
+
+A NOTE FOR THE HAND-BACK, not a task: another lane changes who leads a town by the weight of its house. Say whether anything this lane moves is read by `src/generators/people/castPowers.js` or `representatives.js`. The merge seat and the reviewer will want it.
+
+Do (a)–(g) after item 2 (the page's crisis twin) and before the merge of AGREE's fixed tip.
