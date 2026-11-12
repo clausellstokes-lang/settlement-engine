@@ -325,6 +325,8 @@ The corpus covers thorp 150, hamlet 200, village 350, town 550, city 350 and met
 
 ### 6.4 The re-base, and the control that makes it one
 
+A pool a lane's change newly draws gets its row through `--bank-new` (COHERENCE-AGREE-4, the chair's ruling of 2026-11-12): the row alone, at the higher of the two corpora's readings, with no other row touched; `--tighten` lowers every ceiling to the tree it runs on, and a lane's tree is a re-dealt sample, so it is the chair's door, used on a ruling as `--rebase` is.
+
 A ceiling is a statement about one pool on ONE population of towns. The register now names its corpus (`corpus`). The walker reds when that name no longer matches the corpus in use, and `--tighten` refuses to compare across corpora. A corpus change goes through `--rebase`, on a chair's ruling, which banks every row at the new corpus's measure. The door refuses while the register already names this corpus. Each `--hold` keeps a row at a lower ceiling where the rule holds it there, and refuses where it does not.
 
 **CONTROL: the old 360-settlement corpus at the lane's base (f72262c68), judged against the old ceilings, reads exit 0** (POOL-GUARD 1, the walker 9/9). Nothing regressed. 49 rows (46 pools) rise numerically because they measure higher on towns the old corpus never drew. 45 of those rises are within 3 SE of the old ceiling. The four beyond 3 SE are **findings for the second wave**, not reds; the register's `census.secondWave` holds them. The chair ruled this re-base on 2026-11-12; the owner may veto it.
