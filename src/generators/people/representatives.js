@@ -170,6 +170,22 @@ export function hasHouseOfKind(institutions, kind) {
 }
 
 /**
+ * The roster's houses that bear a face of their own (the cast's house cards: not the fabric, not a hall, not a
+ * family that yields to a faced one, YIELDS_TO), by roster name. Pure over the roster (COHERENCE-POWERS 2B: the
+ * fold asks which powers the deal would leave with no one).
+ * @param {RosterRow[]} institutions @returns {Set<string>}
+ */
+export function faceBearingHouseNames(institutions) {
+  const rows = (Array.isArray(institutions) ? institutions : [])
+    .filter((house) => house && !isFabricInstitution(house) && typeof faceOfInstitution(house) === 'string' && faceOfInstitution(house) !== FACE_SEAT);
+  const families = new Set(rows.map((house) => familyOfInstitution(house)?.key).filter(Boolean));
+  return new Set(rows.filter((house) => {
+    const family = familyOfInstitution(house);
+    return !(family && YIELDS_TO[family.key] && families.has(YIELDS_TO[family.key]));
+  }).map((house) => String(house.name || '')).filter(Boolean));
+}
+
+/**
  * THE DUAL HAT (COHERENCE-POWERS, the owner's word of 2026-11-11: "whoever leads teh town, in any type
  * of government is wearing a dual hat (where appropraite) they come from an institution, and are elevated
  * yet still tied to an institution"): the house the governing power's leader comes from, or null where

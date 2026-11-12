@@ -286,6 +286,8 @@ registerStep('assembleSettlement', {
     // so the seat ceiling (R17: a house the mass cannot crew must not exist) is
     // computed against a fact rather than against a second mass roll.
     massOverride: (settlement.npcs || []).length,
+    // COHERENCE-POWERS 2B: the fold reads the final houses (applyDensityLaw.js :: foldKin)
+    institutions: settlement.institutions,
     rng,
   });
   if (resized.powerStructure !== settlement.powerStructure) {

@@ -8,10 +8,14 @@
  *   government of a kind is drawn only where the town has an open house of that kind (the house its leader comes
  *   from, people/representatives.js :: hasHouseOfKind), else the next priority's, else the size's civic government.
  *   A name the roster's own government house gives (govBody) is never second-guessed. No house is raised.
+ *
+ *   THE FOLD AND THE POWER WITH NO ONE ON THE PAGE (`settleHouselessPowers`, called by
+ *   density/applyDensityLaw.js :: resizePoliticalRoster, where the roster is last built and the houses are final).
  */
 import { inferFactionCategory } from './factionCategories.js';
-import { hasHouseOfKind } from '../people/representatives.js';
-import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
+import { faceBearingHouseNames, hasHouseOfKind } from '../people/representatives.js';
+import { backingArchetypeOf, dealDoubledNiches, houseBacksOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
+import { FACTION_LABEL_SIBLINGS } from '../../data/factionLabelSiblings.js';
 
 /**
  * The kind a governing name is of (the backing catalogue's archetype, powerSupport.js :: backingArchetypeOf), or null
@@ -52,4 +56,53 @@ export function drawCouncilOfAKind(choose, topCategory, topPriority, priorityByC
   const second = next ? choose(next.c, next.p) : null;
   if (second && !lacksHouse(second[0]) && !isCriminalName(second[0])) return second;
   return choose(topCategory, 0);
+}
+
+/** The powers rulingStructure.js's roster raises from the houses and the priorities: the merchant, craft, criminal
+ *  and arcane blocs, the church, the military bloc under either label, and the landed bloc by size. */
+export const BASE_ROSTER_NAMES = Object.freeze(['Merchant Guilds', 'Craft Guilds', "Thieves' Guild", 'Arcane Orders', 'Religious Authorities',
+  ...FACTION_LABEL_SIBLINGS['Military/Guard'].map((sibling) => sibling.text), 'Manor Household', 'Landed Gentry', 'Noble Houses', 'Noble Families']);
+
+/**
+ * THE FOLD (A-plus, item 1): a power of the ruler's own kind that no house stands behind is not a power, and its
+ * figure folds into the ruler. The ruler is never touched, and a criminal ruler folds nothing (the veil).
+ *
+ * It reaches only the roster's own powers (BASE_ROSTER_NAMES) and the density law's doubled-niche rivals
+ * (`contestsNiche`, the resize's own mint). A power a stress brings (stressFactions.js: the occupier, the quarantine
+ * council, the war council, a schism's congregation) carries the stress's story and stands whatever the houses say;
+ * one with no one on the page is the residue the phase-2B note names for a ruling.
+ *
+ * Runs where the houses are final: at the power step the faction boost (factionCorrelation.js) has not yet raised
+ * the houses a power founds, so a fold there would fold powers housed by birth's end, and drop their houses.
+ * "No house" is the people seam's own test: no face-bearing house (people/representatives.js ::
+ * faceBearingHouseNames) lands a share on the power after the doubled-niche deal (powerSupport.js ::
+ * dealDoubledNiches, the ruler first among its kind). Mutates `factions` in place.
+ * @param {Array<any>} factions the roster, the governing row marked @param {Array<any>} institutions
+ * @returns {{ folded: string[], dropped: string[] }} the powers folded into the ruler (none is dropped)
+ */
+export function settleHouselessPowers(factions, institutions) {
+  const view = { institutions, powerStructure: { factions: factions.map((f) => ({ ...f, category: f.category || inferFactionCategory(f.faction || '') })) } };
+  const governing = view.powerStructure.factions.find((f) => f.isGoverning);
+  if (!governing) return { folded: [], dropped: [] };
+  const rulerKind = backingArchetypeOf(governing);
+  const faced = faceBearingHouseNames(institutions);
+  const housed = new Set();
+  for (const [house, list] of dealDoubledNiches(view, houseBacksOf(view))) {
+    if (faced.has(house)) for (const back of list) if (back.share > 0) housed.add(back.faction);
+  }
+  /** @type {string[]} */ const folded = [];
+  /** @type {string[]} */ const dropped = [];
+  for (const f of view.powerStructure.factions) {
+    if (f.isGoverning || housed.has(f.faction)) continue;
+    if (!BASE_ROSTER_NAMES.includes(f.faction) && !f.contestsNiche) continue;
+    const kind = backingArchetypeOf(f);
+    if (RULER_KINDS.includes(rulerKind) && kind === rulerKind) folded.push(f.faction);
+  }
+  const ruler = factions.find((f) => f.isGoverning);
+  for (const name of [...folded, ...dropped]) {
+    const at = factions.findIndex((f) => !f.isGoverning && f.faction === name);
+    if (folded.includes(name)) ruler.power = (ruler.power || 0) + (factions[at].power || 0);
+    factions.splice(at, 1);
+  }
+  return { folded, dropped };
 }

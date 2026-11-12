@@ -66,6 +66,7 @@ import { rollDensityPlan } from './densityRoll.js';
 import { clamp01 } from '../../kernel/math.js';
 import { prosperityRank01 } from '../../domain/prosperityRank.js';
 import { renormalizeFactionPower } from '../power/rulingStructure.js';
+import { settleHouselessPowers } from '../power/rulerKin.js';
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -234,6 +235,7 @@ export function rollNamedMass(input) {
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   massOverride?: number|null,
+ *   institutions?: unknown,
  *   rng: {random: () => number, fork: (l: string) => any},
  * }} input
  */
@@ -243,11 +245,28 @@ export function resizePoliticalRoster(input) {
   }
   const plan = planFor(input, { massOverride: input.massOverride ?? null });
   return {
-    powerStructure: resizeSeats(
+    powerStructure: foldKin(resizeSeats(
       input.powerStructure, plan, input.rng.fork('density-law').fork('niche-mint'),
-    ),
+    ), input.institutions),
     plan,
   };
+}
+
+/**
+ * COHERENCE-POWERS 2B, THE FOLD (A-plus) at the roster's last build: a power of the ruler's own kind that no
+ * face-bearing house stands behind after the doubled-niche deal is not a power; its figure folds into the ruler
+ * (power/rulerKin.js :: settleHouselessPowers), and a relationship naming it goes with it (pruneToRoster). The
+ * houses here are final, the faction boost's included. No draw. A roster with nothing to fold is returned by
+ * reference; otherwise its seats are copied, so no seat object another holder shares is written.
+ * @param {{factions?: Array<Record<string, unknown>>}|null|undefined} powerStructure
+ * @param {unknown} institutions the settlement's final roster of houses
+ */
+function foldKin(powerStructure, institutions) {
+  if (!powerStructure || !Array.isArray(powerStructure.factions) || !Array.isArray(institutions)) return powerStructure;
+  const factions = powerStructure.factions.map(seat => ({ ...seat }));
+  const { folded, dropped } = settleHouselessPowers(factions, institutions);
+  if (!folded.length && !dropped.length) return powerStructure;
+  return pruneToRoster({ ...powerStructure, factions }, new Set([...folded, ...dropped]));
 }
 
 /**
