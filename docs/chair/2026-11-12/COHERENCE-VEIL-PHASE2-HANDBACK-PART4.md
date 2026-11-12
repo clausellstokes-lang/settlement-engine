@@ -72,7 +72,7 @@ Every configuration the routine pin sets, live and snapshot, Reveal DM on for th
 
 ## 5. The read-only block (R6) and its fixture run
 
-`veil-probe-2/predeploy-readonly.sql`, rebuilt to the review's "For the owner's deploy"; fixture `veil-probe-3/predeploy-fixture.sql`, runner `veil-probe-3/predeploy-run.sh`, the run `veil-probe-3/out/predeploy-run.txt`. On a scratch chain at 210 (the state the owner runs it in), as a superuser, `ON_ERROR_STOP`: exit 0, every number as built:
+`veil-probe-2/predeploy-readonly.sql`, rebuilt to the review's "For the owner's deploy"; fixture `veil-probe-3/predeploy-fixture.sql`, runner `veil-probe-3/predeploy-run.sh`, the run `veil-probe-3/out/predeploy-run.txt`. On a scratch chain at 210 (corrected by part 5, the third review's V3-5: the owner runs it at 203, production's applied head, and the push applies 204 to 211 together; re-run at 203 with the same figures), as a superuser, `ON_ERROR_STOP`: exit 0, every number as built:
 
 | Section | Printed | Built |
 |---|---|---|

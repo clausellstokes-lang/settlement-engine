@@ -1,5 +1,6 @@
 -- COHERENCE-VEIL-3: FIXTURE ROWS FOR THE READ-ONLY PRE-DEPLOY BLOCK (veil-probe-2/predeploy-readonly.sql).
--- Built on a scratch chain at 210 (the state the owner runs the block in), each row made to move one of
+-- Built on a scratch chain at 203 (production's applied head, supabase/applied-head.json: the state the
+-- owner runs the block in) or at 210 (the first run; the same figures), each row made to move one of
 -- the block's numbers; the expected figure is beside each. Needs the probe helper rv.mk(slug, data,
 -- overrides, reveal_dm, narration) from veil-probe-3/rv.sql (every row listed AND linked, importable).
 -- (2) copies: a 1.2M-character copy; a copy past 54,333,333; a snapshot share with no copy; one whose

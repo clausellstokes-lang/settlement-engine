@@ -4,7 +4,10 @@
 -- deploy" (REVIEW-VEIL-211-c4d78c907, finding R6) and the chair's rulings of 2026-11-12.
 --
 -- HOW TO RUN: in the hosted project's SQL editor, as the owner, BEFORE `supabase db push`, the whole
--- file at once. The database is then still at 210, so nothing here calls anything 211 creates.
+-- file at once. Production then stands at ledger 203 (supabase/applied-head.json): the push applies
+-- 204 to 211 together, so nothing here calls anything 204 to 211 create, and every column it reads
+-- exists at 203. ("At 210" in a section below names the reads as migration 210 leaves them, the
+-- baseline every proof compared against; production goes from 203's reads to 211's in one push.)
 -- Every statement READS: the transaction is READ ONLY (a write inside it is refused by the server,
 -- superuser included) and ends in ROLLBACK, so pasting it whole can change nothing. The block's own
 -- `set local statement_timeout` lasts only to its rollback; section (1) reads the limits the ROLES
@@ -17,6 +20,8 @@
 --
 -- EXECUTED (the lane's hand-back, part 4 §R6): on a scratch PostgreSQL 16 cluster at 210 with fixture
 -- rows built to move each number, as a superuser, ON_ERROR_STOP; its write-proofing proven there.
+-- Re-run at 203, production's real head (the third review's V3-5; hand-back part 5): the same
+-- figures, the same write-proofing (veil-probe-3/out/predeploy-run-cv4-203.txt).
 -- Never run against a hosted database by any seat.
 -- ════════════════════════════════════════════════════════════════════════════════════════════
 begin transaction read only;
