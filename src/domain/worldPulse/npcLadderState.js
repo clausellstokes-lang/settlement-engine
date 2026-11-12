@@ -125,16 +125,14 @@ function structuralRankScore(npc) {
   return 0;
 }
 
-/** A card ranked nowhere in the power sorts after its three. */
-const UNRANKED = 9;
 /**
- * The card's rank in this power (its membership's 1, 2 or 3), else UNRANKED. Reads the membership by the power's display
+ * The card's rank in this power (its membership's 1, 2 or 3), else 4: a card ranked nowhere in it sorts after its three. Reads the membership by the power's display
  * name, the one chokepoint npcInFaction matches by (npcLadderFactionMembership.js :: factionName). @param {Record<string, unknown>} n @param {unknown} faction @returns {number}
  */
 function powerRankIn(n, faction) {
   const name = factionName(asObject(faction));
   const m = Array.isArray(n.memberships) ? n.memberships.map(asObject).find((x) => x.power === name) : null;
-  return m && Number.isInteger(m.rank) ? /** @type {number} */ (m.rank) : UNRANKED;
+  return m && Number.isInteger(m.rank) ? /** @type {number} */ (m.rank) : 4;
 }
 
 /**
