@@ -359,7 +359,7 @@ const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floo
  *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
  *   safety     the safety text naming a mercenary company the defence home does not list; saying a
  *              court sits where the defence home has none, or that none sits where it has one
- *   market     the economic situation naming a market the market home says the town does not have
+ *   market     the economic situation, or the food record's foodways line, naming a market the market home says the town lacks
  *   sources    available fields, floodplain or grazing that the food record does not count as a source
  *   surplus    an income line selling a surplus the food record does not hold (offersFoodSurplus)
  *   land       a shortage import whose bracket says a kind of land is spent beside a live resource of that land
@@ -426,6 +426,10 @@ export function projectionAgreementFindings(settlement) {
   }
   if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.situationDesc || ''))) {
     resource.push(finding('economicState.situationDesc', 'The economic situation names a market the town does not have.'));
+  }
+  // F6 (COHERENCE-AGREE-3): the food record's foodways line reads the market home too.
+  if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.foodSecurity?.foodRecord?.foodwaysLine || ''))) {
+    resource.push(finding('economicState.foodSecurity.foodRecord.foodwaysLine', 'The foodways line names a market the town does not have.'));
   }
   const court = facts.defence?.court;
   const courtTexts = [['guardEffectivenessDesc', safety?.guardEffectivenessDesc], ['safetyDesc', safety?.safetyDesc],

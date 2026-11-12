@@ -100,6 +100,10 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(paths(situation('(planted) markets meet infrequently.', []))).toContain('economicState.situationDesc');
     expect(details(situation('(planted) markets meet infrequently.', [{ name: 'Weekly market' }]))).toEqual([]);
     expect(details(situation('(planted) a busy black market undercuts it.', []))).toEqual([]);
+    // F6 (REVIEW-AGREE): the foodways line against the market home
+    const foodways = (line, institutions) => record({ economicState: { foodSecurity: { foodRecord: { grownPct: 50, foodwaysLine: line } } }, institutions });
+    expect(paths(foodways('(planted) Markets structure urban food supply.', []))).toContain('economicState.foodSecurity.foodRecord.foodwaysLine');
+    expect(details(foodways('(planted) Markets structure urban food supply.', [{ name: 'Weekly market' }]))).toEqual([]);
   });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
@@ -175,6 +179,8 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-town-34', tier: 'town' }, { seed: 'rvw12-town-59', tier: 'town' }, { seed: 'rvw12-town-3', tier: 'town' }, { seed: 'rvw-ten-4', tier: 'town' },
   // F12b: "Livestock and dairy (local pastures depleted)" beside a live alpine pasture
   { seed: 'rvw12-city-1', tier: 'city' }, { seed: 'rvw12b-city-33', tier: 'city' }, { seed: 'rvw12b-city-136', tier: 'city' },
+  // F6: the foodways line names a market the market home denies
+  { seed: 'rvw12-village-0', tier: 'village' }, { seed: 'rvw12-village-14', tier: 'village' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });

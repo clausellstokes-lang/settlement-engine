@@ -392,6 +392,7 @@ export function generateFoodSecurity(tier, institutions, config) {
       sources: foodSources,
       cultureLines: CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways?.map(textOf) || null, // R-C: a declared row gives back its text (CENSUS-2d)
       identity: `${tier}|${population}|${terrain}|${route}|${config.cultureProfileKey || ''}`,
+      market: hasMarket, // COHERENCE-AGREE-3 (F6): the market home (facts/market.js), read by foodLandOf
     }),
   });
 
