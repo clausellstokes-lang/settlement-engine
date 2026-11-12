@@ -460,7 +460,7 @@ Groups: GEN = generation-time (stored on the settlement) · DISP = display-time 
 | 68 | GEN | generators/power/rulingStructure.js:221-430 | councilName / govDescByLabel / govDescByFaction | Power | 53 | rulingStructure.js inline | T | F10 defenceTwinLine (:355) | — |
 | 69 | GEN | generators/power/governanceNarrative.js | governance narrative branches (≈95 literals) | Power | 95 | governanceNarrative.js inline | T | F10 twin (:746) | — |
 | 70 | GEN | generators/power/stressFactions.js | stress-faction desc lines (≈39 literals) | Factions, Power | 39 | stressFactions.js inline | T | F1 force words (:51) | — |
-| 71 | GEN | generators/power/conflicts.js:106 | issueTemplates (issue/stakes) + buildConflictPlotHooks | Factions, Plot Hooks | 12 | conflicts.js:271 pick | R | worldLaw.allowsGeneratedContent + maritime pre-filter (falls back) | 1 roll |
+| 71 | GEN | generators/power/conflicts.js:106 | issueTemplates (issue/stakes) + buildConflictPlotHooks | Factions, Plot Hooks | 12 | conflicts.js:185 pick | R | worldLaw.allowsGeneratedContent + maritime pre-filter (falls back) | 1 roll |
 | 72 | GEN | generators/crossSettlementConflicts.js:33 | CONFLICT_NATURE (8 rel types) | Neighbours/Relationships, Factions | 44 | crossSettlementConflicts.js:235 rng.pick | R | none | ⚠ `if(!poolA.length\|\|!poolB.length) continue` skips 3+ picks |
 | 73 | GEN | generators/crossSettlementConflicts.js:81/129 | buildConflictDesc / buildFactionDesc templates | Neighbours/Relationships | 23 | crossSettlementConflicts.js:123/160 rng.pick | R | none | 1 roll each |
 | 74 | GEN | generators/neighbourGenerator.js:312/391/462 | mirror/oppose faction labels + MUNDANE_LORE_LABELS | Factions (neighbour) | 64 | neighbourGenerator.js:456 index from neighbourFactions.js:51 rng.randInt(0,3) | R | mundane-lore (magic off) | 1 roll, modulus by pool length |
@@ -539,7 +539,7 @@ Groups: GEN = generation-time (stored on the settlement) · DISP = display-time 
 11. settlementNarrative.js:205 genRelNarrative: ⚠ one roll per relationship.
 12. historyGenerator.js:446-460 fill loop: ⚠ rejection loop. :556-582 timeline loop: ⚠ rerolls and skip. :190-230 token picks, :279, :760.
 13. historyEventStrands.js:123-208 token picks.
-14. power/conflicts.js:271, crossSettlementConflicts.js:123/160/229-235 (⚠ continue-skip), neighbourGenerator.js:456 (index from neighbourFactions.js:51).
+14. power/conflicts.js:185, crossSettlementConflicts.js:123/160/229-235 (⚠ continue-skip), neighbourGenerator.js:456 (index from neighbourFactions.js:51).
 15. services/institutionServices.js:69/203 service roll: ⚠ one roll per eligible definition.
 16. factionGrouping.js generateFactions name loop (⚠ draw-count-variable retry), applyDensityLaw.js:280.
 17. traditions/genesis.js:251-409 and politics.js:275-279: ⚠ shuffle costs pool.length−1 rolls; the PRNG is local and forked.

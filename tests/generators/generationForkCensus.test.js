@@ -274,7 +274,10 @@ const PICK_VARIANT_CALLS = 31;
 // here): the retired goal draw (03ff59084) and item 15's title-secret draw (eabc93dfe) leave a face's fork before its
 // power roll, so the rookery boss's `power` 1 -> 2, the pair's power gap 4 -> 3, and computeRelTension draws another
 // kind. The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 15;
+// RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
+// take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
+// parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 17;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */

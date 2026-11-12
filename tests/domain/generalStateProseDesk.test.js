@@ -930,10 +930,12 @@ describe('DS-GEN-2 — one line per standing quarrel', () => {
   it('THE WHOLE PRODUCER TABLE CONFORMS: every authored issue and stakes fills a phrase seam', () => {
     // The closed vocabulary, extracted from the producer rather than sampled from a run:
     // a value that cannot conform must red HERE, not lose a variant in silence.
-    const body = src('src/generators/power/conflicts.js');
-    mustExtract(body, 'export const generateConflicts', 'the conflict table in conflicts.js');
-    const values = [...body.matchAll(/^\s*(?:issue|stakes): (?:'([^']+)'|"([^"]+)")/gm)]
-      .map((m) => m[1] ?? m[2]);
+    // RE-KEYED (COHERENCE-QUARREL, 2026-11-11): the table moved beside the writer, one row a line.
+    mustExtract(src('src/generators/power/conflicts.js'), 'export const generateConflicts', 'the conflict writer in conflicts.js');
+    const body = src('src/generators/power/conflictIssues.js');
+    mustExtract(body, 'export const BASE_ISSUES', 'the conflict table in conflictIssues.js');
+    const values = [...body.matchAll(/(?:^\s*|\{ )(?:issue|stakes): (?:'([^']+)'|"([^"]+)")|, stakes: (?:'([^']+)'|"([^"]+)")/gm)]
+      .map((m) => m[1] ?? m[2] ?? m[3] ?? m[4]);
     expect(values.length, 'the conflict table extractor found nothing').toBeGreaterThan(30);
     const shapes = mergedShapes();
     for (const value of values) {

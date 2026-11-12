@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-11T20:30:54.232Z",
+  "generatedAt": "2026-11-11T23:18:36.212Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "9f0680d5bd60382f",
-  "engineVersion": "edb816caf413432c",
-  "builtFromCommit": "2cbe72ca15364c6dc59a83c8297b038289811fd3",
+  "sourceHash": "856717faa3d54d31",
+  "engineVersion": "554a10cf2191e7dc",
+  "builtFromCommit": "c19d81e618ea6a73ae42f299a068a14f3d40adf9",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -289,6 +289,7 @@
     "src/generators/people/representatives.js",
     "src/generators/people/ties.js",
     "src/generators/pipeline.js",
+    "src/generators/power/conflictIssues.js",
     "src/generators/power/conflicts.js",
     "src/generators/power/economyReconciliation.js",
     "src/generators/power/factionCategories.js",
