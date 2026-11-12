@@ -18,6 +18,9 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
+import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
+import { createPRNG } from '../../src/kernel/prng.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SEEDS = ['agree-village-28', 'agree-village-30', 'agree-village-40', 'agree-village-43', 'agree-village-45'];
@@ -84,5 +87,33 @@ describe('the five upkeep gates read the prosperity label, not the output', () =
     const gates = generateDefenseProfile(s).economicGates;
     expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
     for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(FLOORS[gate]);
+  });
+});
+
+/**
+ * SERVICES (ruling 4): what is bought keeps `0.7 + 0.3 × keep` of its demand (healing, lodging,
+ * food, equipment, transport, and the commercial services, whose read moves home), by a draw-free
+ * roll, and a standing institution keeps at least one row. The pin rolls one Struggling town's
+ * own roster twice under the same seed, read as Struggling and as Wealthy.
+ */
+describe('services are kept as far as the place can pay', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** @param {any} s @param {string} prosperity */
+  const rollAs = (s, prosperity) => {
+    const prev = setActiveRng(createPRNG(`${s.config?.seed || 'upkeep'}:services`));
+    try {
+      return generateAvailableServices(s.tier, s.institutions, s.config?.servicesToggles || {}, { ...s.config, _prosperity: prosperity, _seed: 'agree-town-0' }, null);
+    } finally { clearActiveRng(prev); }
+  };
+  const rows = (svc) => Object.values(svc).reduce((n, list) => n + (Array.isArray(list) ? list.length : 0), 0);
+
+  test('RED-FIRST agree-town-0 (Struggling): fewer bought rows than the same roster read as Wealthy, and every institution that offers rows keeps one', () => {
+    const s = born('agree-town-0');
+    const poor = rollAs(s, 'Struggling');
+    const rich = rollAs(s, 'Wealthy');
+    expect(rows(rich), 'anchored: the roster offers services').toBeGreaterThan(10);
+    expect(rows(poor)).toBeLessThan(rows(rich));
+    const providers = (svc) => new Set(Object.values(svc).flat().map((r) => r.institution || r.providedBy || r.source).filter(Boolean));
+    for (const name of providers(rich)) expect(providers(poor).has(name), `${name} keeps a row`).toBe(true);
   });
 });
