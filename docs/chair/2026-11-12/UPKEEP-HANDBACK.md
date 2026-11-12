@@ -4,6 +4,24 @@
 
 **Base for every measure below:** AGREE's reviewed tip `8866a0ddd` merged with the integration line `3575cf061`, WITHOUT the lane: a scratch tree whose `src/` differs from the tip on exactly the lane's files. **Corpora:** the 660 (the 360 `agree-<tier>-<i>`, 60 thorps, 60 hamlets, 180 forced births of famine, war and siege) and the golden master's 525. The field diff is `UPKEEP-FIELD-DIFF.json`; the draft record is `docs/chair/2026-11-11/UPKEEP-shift-record.DRAFT.json`.
 
+## Calls taken without the chair (the chair's standing rule of 2026-11-12, class (a))
+
+1. **The record after the bundles.** The edge bundles were re-emitted once, alone (828348ba8). The commits after it touch only tests and docs, so the bundles' bytes stay true of the tip (they read `src/` alone).
+2. **Two habitat walkers cured in the lane's own pins** (042227874): anchored negatives, and no bare seed loop. The pins assert what they did.
+3. **Two typed register rows** (61c8d452e): `keepOf` in the held-key census's DISCOVERY_EXEMPT, and `keep.js` in the prosperity-ladder EXEMPT table. Each carries its reason, and no pin moved.
+4. **The observed-shape walker** is classed as equal-failing: it cannot build its corpus at the base either.
+
+## Parked (class (b): each would change a pin, a ruled design's fixture or a declaration rule; sent together with the hand-back)
+
+| # | Item | Recommendation |
+|---|---|---|
+| P1 | `defenseEconomicGate.test.js` (8) and `defenseWordsFindings.test.js` "a palisade never pays…": fixtures that drive the economy's OUTPUT. The gates read the label now (ruling 3, B; identity at Comfortable and above), so their gates no longer bite (`fundingNote` null; scores equal). | Re-key each fixture by identity to the label (Struggling against Prosperous over the same buildings). Each pin keeps its claim; a seat of this lane does it red-first. |
+| P2 | `famineStoresOneRounding.test.js` (2): the soak1k famine granaries read 4 months (6 at base), and the control 9 (12). The cause is ruling 6 (stores at the label's share). | Re-key to the kept months with the cause; the "one rounding" claim is untouched. |
+| P3 | `captureBirthScale.test.js`: criminal cities at equilibrium or worse read 369, below the floor 372. The legitimacy chain is declared; the move is away from danger. | Re-measure the floor at the merged tree (a floor is a composed-tree fact, as the ceiling ruling says), by the merge seat. |
+| P4 | `mundaneRealmAcceptance.test.js`: the recorded twin census, services 121/124 -> 116/119 (ruling 4). | Re-record the header line and the MG-4 block with the cause. |
+| P5 | `dossierStateProseProjection.contract.test.js` (2): `src/data/dossierRelations.generated.js` is stale, and the relations count is 165 -> 169 (the gates' new inputs, 07ebe8bdc: `fundedGate` and `upkeep` replace `econOutput`). | Run its door (`npm run gen:dossier-prose`: 169 pairs, 0 joining rows, measured) and restate the count 165 -> 169 at its four places in the contract test, in one commit. |
+| P6 | `presumedThings.walker.test.js` ARM 1 (AGREE's walker, new to the lane at the merge): four lines name the garrison or the hired company without declaring it (the garrison purse line, its twin, its crisis line, and the mercenary lead). | Declaring `garrison` / `mercenary` on an original makes its twin exclude a thing the twin still names, against CENSUS-5b's complement rule. Either the complement rule admits atoms an original and its twin share, or the four take declared rows. This is the chair's rule to make. |
+
 ## What this seat did, in commit order
 
 | Commit | What |
@@ -68,7 +86,27 @@ The five red suites are red at the base too (AGREE's unsigned rows), and each re
 
 ## The equal-failing set and the whole suite
 
-[PENDING at the time of writing: the whole suite at the tip and the seven directories at the base are running; the statement follows.]
+**The whole suite at the final code tip 828348ba8** (`npx vitest run --maxWorkers=2`, JSON reporter, ledger ref fetched, a detached scratch worktree): 3,218 files, 38,985 tests, **70 failed**, 38,661 passed, 254 skipped; 72 failing titles counting the two file-level errors. **The base** (the seven directories, the same way): 25,096 tests, 42 failed (44 titles). The full list, classed, is `UPKEEP-FAILSET-828348ba8.txt` beside this file.
+
+- **Red at base and at the tip (44 titles, the seven directories): the line's known set and AGREE's unsigned golden rows.** Not this lane's. Among them: the five golden surfaces, the pinned-choosers / pinned-mode / held-roster null-change arms that read the golden corpus, the observed-shape and writer-reach walkers (their corpus cannot build), editCorpusRatchet, landingFixtureFreshness, the taste-interested fixtures.
+- **Red at base, green at the tip:** none.
+- **Red at the tip, green at base (22 in the seven directories, 5 outside): the lane's.** Each is classed below.
+
+| Red | Class |
+|---|---|
+| `negativeAssertionAnchor` (2): upkeepHired.test.js lines 271, 286 | MINE, cured in 042227874 |
+| `seedLoopTotality` (2): upkeepHired.test.js line 66 (bab22ea8a) | MINE, cured in 042227874 |
+| `presumedThings` ARM 1: four page-line literals name "garrison" / the mercenary lead without declaring it | PARKED P6 |
+| `heldKeyWriterCensus` A3: `keepOf` newly called in the assembly step | MINE, cured in 61c8d452e |
+| `prosperityRank` "no private prosperity ladder": keep.js | MINE, cured in 61c8d452e |
+| `dossierStateProseProjection` (2): dossierRelations.generated.js stale; relations 165 -> 169 (the gates' new inputs, 07ebe8bdc) | PARKED P5 |
+| `defenseEconomicGate` (8) and `defenseWordsFindings` (1): pins on the gates keyed on the economy's OUTPUT; the gates read the label now (ruling 3, B), so the fixtures' gates no longer bite (`fundingNote` null) | PARKED P1 |
+| `famineStoresOneRounding` (2): soak1k famine granaries 6 -> 4 months, 12 -> 9 (ruling 6) | PARKED P2 |
+| `captureBirthScale`: criminal cities at equilibrium+ 369 below the floor 372 (the legitimacy chain, declared) | PARKED P3 |
+| `mundaneRealmAcceptance`: the recorded twin census, services 121/124 -> 116/119 (ruling 4) | PARKED P4 |
+| `pipelinePinnedChoosers` A6 (37 -> 40), `townCartographyCalibration` W2, W8 | THE MERGE SEAT'S: they re-measure generated output against frozen records |
+| `dossierPhoneFloorAllViews` (2) | THE MERGE SEAT'S: the named class 1 (per-view counts), the page lines and services move what the views print |
+| `poolDominance` "no ceiling sits loose" | Its own class (the chair's ruling): lowered at the merge point |
 
 ## Left
 
