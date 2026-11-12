@@ -857,9 +857,11 @@ export const MIGRATION_WAVES = Object.freeze([
       mode: 'forward-only',
       reason: [
         FORWARD_ONLY_REASON,
-        'Its own @rollback annotation spells the reversal out, last in, first out: undo 211 before 210, 207, 206, '
-        + '205 and 208\'s set — recreate the four reads at their previous bodies and drop the _gallery_veil* '
-        + 'functions. Nothing is destroyed on reversal; the new client draws a v 1 share as before.',
+        'Its reversal is executable: supabase/rollback/211_server_side_share_veil.down.sql, run last in, first '
+        + 'out (undo 211 before 210, 207, 206, 205 and 208\'s set), recreates the four reads at their previous '
+        + 'bodies and drops every _gallery_veil* function; tests/security/galleryVeilCures.pglite.test.js '
+        + 'rehearses it against a chain stopped at 210. Nothing is destroyed on reversal; the new client draws a '
+        + 'v 1 share as before.',
       ].join(' '),
     }),
     expectedObjects: Object.freeze([

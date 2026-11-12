@@ -418,4 +418,24 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
       }
     }
   }, ROW_TIMEOUT_MS);
+  // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
+  it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
+    const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
+    expect(down).toEqual(['211_server_side_share_veil.down.sql']);
+    const rolled = await buildDb();
+    expect(rolled.failed).toEqual([]);
+    await rolled.db.exec(readFileSync(join(ROLLBACK, down[0]), 'utf-8'));
+    const CATALOGUE = `select p.oid::regprocedure::text as sig, md5(p.prosrc) as body, p.provolatile, p.prosecdef, p.proconfig::text as config,
+        p.proacl::text as acl, pg_get_userbyid(p.proowner) as owner, pg_get_function_result(p.oid) as result
+      from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace where ns.nspname = 'public' order by 1`;
+    const at210 = (await AT210.db.query(CATALOGUE)).rows;
+    const after = (await rolled.db.query(CATALOGUE)).rows;
+    expect(after.filter((x) => x.sig.includes('_gallery_veil'))).toEqual([]);
+    expect(after).toEqual(at210);
+    // and the four reads, as text
+    for (const f of ['get_gallery_dossier(text)', 'get_unlisted_dossier(text)', 'import_gallery_dossier(text)', 'get_gallery_map(text)']) {
+      const def = `select pg_get_functiondef('public.${f}'::regprocedure) as d`;
+      expect((await rolled.db.query(def)).rows[0].d, f).toBe((await AT210.db.query(def)).rows[0].d);
+    }
+  }, ROW_TIMEOUT_MS);
 });

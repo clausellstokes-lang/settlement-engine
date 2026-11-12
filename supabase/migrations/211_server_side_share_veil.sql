@@ -47,10 +47,12 @@
 -- and src/lib/gallery.js (sanitizeDossier). PINNED BY EXECUTION: tests/security/galleryServerVeil.pglite.test.js
 -- (the real SQL against the real client page: nothing carried, no page changed, 210 as the red control).
 --
--- @rollback: undo 211 FIRST, before 210, 207, 206, 205 and 208's set: recreate get_gallery_dossier at
---   147's body, get_unlisted_dossier at 208's (as amended), get_gallery_map at 088's and
---   import_gallery_dossier at 131's, then drop the _gallery_veil* functions. No row is written or lost
---   either way; the new client draws a v 1 share as before, so no client rollback goes with it.
+-- @rollback: supabase/rollback/211_server_side_share_veil.down.sql, run FIRST, before 210, 207, 206,
+--   205 and 208's set: it recreates get_gallery_dossier at 147's body, get_unlisted_dossier at 208's
+--   (as amended), import_gallery_dossier at 131's and get_gallery_map at 088's, then drops every
+--   _gallery_veil* function by signature. No row is written or lost either way; the new client draws a
+--   v 1 share as before, so no client rollback goes with it. Rehearsed by
+--   tests/security/galleryVeilCures.pglite.test.js (001..211 then the file equals a chain at 210).
 
 -- ── 1. THE VEIL'S CONSTANTS (galleryVeil.js CARD_KINDS, GROUPING_REMOVERS, VEILED_PUBLIC_PROSE) ──
 -- Character-identical to the client's tables; tests/security/galleryServerVeil.pglite.test.js
