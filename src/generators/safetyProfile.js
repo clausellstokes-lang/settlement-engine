@@ -958,6 +958,7 @@ const CHARTER_LEAD = "The adventurers' charter hall coordinates emergency respon
  */
 export function keptGuardLine(desc, institutions, prosperity) {
   const text = String(desc || '');
+  /** @type {Omit<import('../domain/facts/drawDeclared.js').DrawDeclaredOptions, 'draw'>} */
   const opts = {
     facts: () => factsOf({ institutions, economicState: { prosperity } }),
     poolId: 'safetyProfile:SAFETY_LINE_SIBLINGS', surface: 'defense', drawKind: 'T',
