@@ -617,7 +617,7 @@ end $$;
 -- ── 4. THE APPLIER (applyVeil, removal only) ────────────────────────────────────────────────
 -- One card through its class switches and its own eyes. `id` NULL is an anonymous legacy event:
 -- every eye addressed to any legacy event applies, and no exception does (fail-closed).
-create or replace function public._gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb)
+create or replace function public._gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb, legacy jsonb)
 returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
 declare
   kd jsonb := public._gallery_veil_kinds() -> kind;
@@ -632,7 +632,7 @@ begin
     if id is null or not (excj ? ('field:' || kind || ':' || id || ':' || f)) then drops := drops || f; end if;
   end loop;
   if id is null then
-    own := (select jsonb_agg(x) from jsonb_each(byid) e(k, v), jsonb_array_elements(v) x where k like 'event.legacy-%');
+    own := legacy;  -- every eye on any legacy event, unioned once per read (the review's F5)
   else
     own := byid -> id;
   end if;
@@ -704,7 +704,7 @@ end $$;
 create or replace function public._gallery_veil_map_list(arr jsonb, kind text, mode text, a jsonb)
 returns jsonb language sql immutable set search_path = public, pg_temp as $$
   select jsonb_agg(case when jsonb_typeof(e) <> 'object' then e
-    when mode = 'eyes' then public._gallery_veil_card(kind, e, a -> 'cls', a -> 'byid', a -> 'exc')
+    when mode = 'eyes' then public._gallery_veil_card(kind, e, a -> 'cls', a -> 'byid', a -> 'exc', a -> 'legacy')
     else public._gallery_veil_npc_pass(e, a) end order by o)
   from jsonb_array_elements(arr) with ordinality x(e, o)
 $$;
@@ -786,11 +786,8 @@ declare
   gone_houses jsonb := '{}';
   services_of jsonb;
   people_of jsonb := '{}';
-  r record;
   kind text;
   g text;
-  veiled_services boolean;
-  veiled_people boolean;
 begin
   select jsonb_agg(jsonb_build_object('a', a) || public._gallery_veil_parse(a) order by o) into parsed
     from jsonb_array_elements_text(hidden) with ordinality x(a, o)
@@ -807,39 +804,48 @@ begin
          where p ->> 'type' = 'field' group by 1, 2) q1 group by 1) q2), '{}');
 
   -- X-21e: a card-hidden house goes whole only when the data puts it in the class.
+  -- (set-based, the review's F5: one pass, never a growing object rebuilt per house)
   if card_hides <> '{}' then
-    for r in select c.card, public._gallery_veil_card_id('institution', c.card) as id from public._gallery_veil_cards(s, 'institution') c loop
-      if not (card_hides ? r.id) then continue; end if;
-      if public._gallery_veil_house(r.card) then
-        gone_ids := gone_ids || jsonb_build_object(r.id, true);
-        if public._gallery_veil_str(r.card -> 'name') <> '' then
-          gone_houses := gone_houses || jsonb_build_object(r.card ->> 'name', true);
-        end if;
-      else
-        fields := jsonb_set(fields, '{institution}', coalesce(fields -> 'institution', '{}'));
-        fields := jsonb_set(fields, array['institution', r.id], (select jsonb_agg(distinct f) from (
-          select jsonb_array_elements_text(coalesce(fields #> array['institution', r.id], '[]')) f
-          union select unnest(array['description', 'function', 'services', 'people'])) u));
-      end if;
-    end loop;
+    with h as (
+      select c.card, i.id, public._gallery_veil_house(c.card) as house
+        from public._gallery_veil_cards(s, 'institution') c, lateral (select public._gallery_veil_card_id('institution', c.card) as id) i
+       where card_hides ? i.id
+    )
+    select coalesce((select jsonb_object_agg(id, true) from h where house), '{}'),
+           coalesce((select jsonb_object_agg(card ->> 'name', true) from h where house and public._gallery_veil_str(card -> 'name') <> ''), '{}'),
+           fields || jsonb_build_object('institution', coalesce(fields -> 'institution', '{}') || coalesce((
+             select jsonb_object_agg(q.id, (select jsonb_agg(distinct f) from (
+                 select jsonb_array_elements_text(coalesce(fields #> array['institution', q.id], '[]')) f
+                 union select unnest(array['description', 'function', 'services', 'people'])) u))
+               from (select distinct id from h where not house) q), '{}'))
+      into gone_ids, gone_houses, fields;
+    if fields -> 'institution' = '{}' then fields := fields - 'institution'; end if;
   end if;
 
   -- the virtual institution eyes, read before any card is touched
-  services_of := gone_houses;
-  for r in select c.card, public._gallery_veil_card_id('institution', c.card) as id from public._gallery_veil_cards(s, 'institution') c loop
-    if public._gallery_veil_str(r.card -> 'name') = '' then continue; end if;
-    veiled_services := coalesce(fields #> array['institution', r.id], '[]') ? 'services'
-      or (coalesce(classes -> 'institution', '[]') ? 'services' and not (excj ? ('field:institution:' || r.id || ':services')));
-    veiled_people := coalesce(fields #> array['institution', r.id], '[]') ? 'people'
-      or (coalesce(classes -> 'institution', '[]') ? 'people' and not (excj ? ('field:institution:' || r.id || ':people')));
-    if veiled_services then services_of := services_of || jsonb_build_object(r.card ->> 'name', true); end if;
-    if veiled_people then people_of := people_of || jsonb_build_object(r.card ->> 'name', true); end if;
-  end loop;
+  if fields -> 'institution' is not null or classes -> 'institution' is not null then
+    with v as (
+      select c.card ->> 'name' as name,
+             coalesce(fields #> array['institution', i.id], '[]') ? 'services'
+               or (coalesce(classes -> 'institution', '[]') ? 'services' and not (excj ? ('field:institution:' || i.id || ':services'))) as vs,
+             coalesce(fields #> array['institution', i.id], '[]') ? 'people'
+               or (coalesce(classes -> 'institution', '[]') ? 'people' and not (excj ? ('field:institution:' || i.id || ':people'))) as vp
+        from public._gallery_veil_cards(s, 'institution') c, lateral (select public._gallery_veil_card_id('institution', c.card) as id) i
+       where public._gallery_veil_str(c.card -> 'name') <> ''
+    )
+    select coalesce((select jsonb_object_agg(name, true) from v where vs), '{}'), coalesce((select jsonb_object_agg(name, true) from v where vp), '{}')
+      into services_of, people_of;
+  else
+    services_of := '{}';
+  end if;
+  services_of := gone_houses || services_of;
 
   -- cards: class switches, then per-card eyes
   foreach kind in array public._gallery_veil_kind_order() loop
     if classes -> kind is null and fields -> kind is null then continue; end if;
-    s := public._gallery_veil_map(s, kind, 'eyes', jsonb_build_object('cls', classes -> kind, 'byid', fields -> kind, 'exc', excj));
+    s := public._gallery_veil_map(s, kind, 'eyes', jsonb_build_object('cls', classes -> kind, 'byid', fields -> kind, 'exc', excj,
+      'legacy', case when kind = 'event' then coalesce((select jsonb_agg(distinct f) from jsonb_each(coalesce(fields -> 'event', '{}')) e(k, v),
+                                                          jsonb_array_elements_text(v) f where k like 'event.legacy-%'), '[]') end));
   end loop;
 
   -- an institution's services: the rows in availableServices it offers
