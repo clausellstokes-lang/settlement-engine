@@ -17,6 +17,12 @@
  *                   a listed line stands in the register under a named reason, or the walker reds.
  * Arm 2 is what finds the lines that code pushes; arm 1 is what finds the lines no corpus reached.
  *
+ * WHAT ARM 1 DOES NOT READ (`ARM1_NOT_PRINTED`, COHERENCE-AGREE-4, the chair's ruling of 2026-11-12): arm 2's
+ * NOT_PRINTED on the source side, one site, keyed by file + callee + argument position exactly — the `detail`
+ * of `generationCoherence.js :: finding(path, detail, evidence)` is the coherence receipt's finding, a check's
+ * own diagnostic, never a line about a town. Its pin (the walker's "no reader prints a finding's words")
+ * holds that no printing file reads a finding's detail; were one to, the exemption would be false.
+ *
  * The register (`tests/lint/presumedThings.register.json`) is SHRINK-ONLY: a row is never added to
  * absorb a new line. A cure removes its row in the same commit.
  *
@@ -203,6 +209,26 @@ export function presentForDenial(thing, facts, names) {
 
 const DECL_PROPS = new Set(['needs', 'excludes', 'tags', 'marks', 'cast', 'poolDeclares', 'requires']);
 
+/**
+ * THE SOURCE SITES ARM 1 DOES NOT READ, each with its reason (the header's "WHAT ARM 1 DOES NOT READ"). A literal
+ * is out of reach only when it is EXACTLY argument `argument` (0-based) of a call to the bare identifier `callee`
+ * in `file`; the same words anywhere else, in another position or another file, are read as ever.
+ */
+export const ARM1_NOT_PRINTED = Object.freeze([
+  Object.freeze({
+    file: 'src/generators/generationCoherence.js', callee: 'finding', argument: 1,
+    reason: 'the coherence receipt\'s finding detail: a check\'s own diagnostic, read by no printing file (the receipt is NOT_PRINTED in arm 2; the pin "no reader prints a finding\'s words" holds it)',
+  }),
+]);
+
+/** Is this literal one of ARM1_NOT_PRINTED's sites? @param {string} rel @param {any} node */
+function isNotPrintedSite(rel, node) {
+  const call = node.parent;
+  if (!call || !ts.isCallExpression(call) || !ts.isIdentifier(call.expression)) return false;
+  return ARM1_NOT_PRINTED.some((site) => site.file === rel && site.callee === call.expression.text
+    && call.arguments[site.argument] === node);
+}
+
 /** The atom a declaration word answers (`no X` → X), lower-cased. @param {string} w */
 const atomWord = (w) => w.trim().replace(/^no\s+/i, '').toLowerCase();
 
@@ -289,7 +315,7 @@ export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
   /** @type {Array<{ file: string, thing: string, text: string }>} */ const hits = [];
   const visit = (n) => {
     const isText = ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n);
-    if (isText && n.text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n)) {
+    if (isText && n.text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n) && !isNotPrintedSite(rel, n)) {
       let declared = null;
       for (const sentence of sentencesOf(n.text)) {
         for (const thing of thingsNamedIn(sentence)) {
