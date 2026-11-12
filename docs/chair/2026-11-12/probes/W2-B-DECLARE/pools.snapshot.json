@@ -1,0 +1,230 @@
+{
+ "source": "union of db832c892 and 8866a0ddd prose pools",
+ "capture": [
+  {
+   "key": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "text": "Criminal money is reaching the officials of {settlement} one at a time, because the town is poor and its streets are badly watched, and a bribe goes a long way here."
+  },
+  {
+   "key": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "text": "Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and nobody in the {seat} is mending either."
+  },
+  {
+   "key": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "text": "Officials at {settlement} are spending money their posts never paid them, and nobody in the town asks where it came from."
+  },
+  {
+   "key": "capture pressure RECOVERING (strong security, prosperity)",
+   "text": "The criminals at {settlement} are losing their grip on the hall: the town is doing well again and its streets are guarded."
+  },
+  {
+   "key": "capture pressure RECOVERING (strong security, prosperity)",
+   "text": "The approach was made at {settlement} and did not take. Prosperity and a working watch did what no investigation did."
+  },
+  {
+   "key": "capture pressure RECOVERING (strong security, prosperity)",
+   "text": "The criminals at {settlement} still own a few officials, but keeping them bought now costs more than it brings in."
+  },
+  {
+   "key": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "text": "The criminal interest at {settlement} is gaining ground inside the hall rather than outside it; a poorly-paid, poorly-policed town is cheap to buy into and this one is both."
+  },
+  {
+   "key": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "text": "Each season at {settlement} makes the next approach easier. The conditions that would resist it are the same conditions the town has been failing to maintain."
+  },
+  {
+   "key": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "text": "Money is being spent at {settlement} on people who cannot account for having it, and the accounting is not being asked for."
+  },
+  {
+   "key": "capture pressure RECOVERING (strong security, prosperity)",
+   "text": "What the criminal interest held at {settlement} it is losing; a town that pays its people and polices its streets becomes expensive to hold, and this one has become both."
+  },
+  {
+   "key": "capture pressure RECOVERING (strong security, prosperity)",
+   "text": "What the criminal interest at {settlement} still holds it holds at a rising cost, and the cost is rising faster than what the holding returns."
+  }
+ ],
+ "beast": [
+  {
+   "key": "Beasts & Monsters: plagued, perimeter AND organized force",
+   "text": "The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, perimeter AND organized force",
+   "text": "Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, perimeter AND organized force",
+   "text": "{settlement}'s walls and fighters are holding against the creatures, but each season wears them down, and the town is barely keeping up."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+   "text": "{settlement}'s duty list has names enough to man its wall for one night and no longer, and in this country the creatures do not come for one night only."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+   "text": "Walk {settlement}'s wall and you find long stretches in good repair with nobody on them, in country thick with creatures."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+   "text": "The works at {settlement} are doing less each season as the watch thins, and the thinning is not being reversed."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, NO perimeter and NO force",
+   "text": "An embattled country and nothing organized standing in it: {settlement} has no line, no force and no specialist recourse, and survival here rests on terrain, distance and the ability to leave."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, NO perimeter and NO force",
+   "text": "The town does not defend itself. What it does is watch, and move, and hope the pressure goes around it, and that is understood by everyone in it."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, NO perimeter and NO force",
+   "text": "Visitors to {settlement} sense the danger before anyone mentions it: there is no wall, no organised defence, and nothing arranged to meet what comes out of the country."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, credible deterrence",
+   "text": "The tally of raids at {settlement} is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, credible deterrence",
+   "text": "The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, credible deterrence",
+   "text": "Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, force without a perimeter",
+   "text": "{settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, force without a perimeter",
+   "text": "You see spears at {settlement} and no wall for them to stand on, so anything that came at the town from two sides at once would get in."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, force without a perimeter",
+   "text": "People at {settlement} can drive off what attacks but cannot stop it arriving, so every season the town loses something before its fighters get there."
+  },
+  {
+   "key": "Beasts & Monsters: settled, defenses beyond the need",
+   "text": "There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures."
+  },
+  {
+   "key": "Beasts & Monsters: settled, defenses beyond the need",
+   "text": "{settlement} is comfortably over-provided against beasts. The pressures that matter to this town are internal, and its defensive spending does not reflect that."
+  },
+  {
+   "key": "Beasts & Monsters: settled, defenses beyond the need",
+   "text": "You notice the perimeter at {settlement} chiefly for how relaxed the people on it are: there is little out in the country for them to guard against."
+  },
+  {
+   "key": "Beasts & Monsters: settled, defenses beyond the need",
+   "text": "{settlement} built more against the country than the country ever asked for, and the threat now at hand is spending that margin."
+  },
+  {
+   "key": "Beasts & Monsters: settled, defenses beyond the need",
+   "text": "You find {settlement}'s works manned in earnest now; what was built against nothing in particular is being held against something real."
+  },
+  {
+   "key": "Beasts & Monsters: settled, nothing organized",
+   "text": "{settlement} keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap."
+  },
+  {
+   "key": "Beasts & Monsters: settled, nothing organized",
+   "text": "The town has never needed to think about what is outside it, and does not."
+  },
+  {
+   "key": "Beasts & Monsters: settled, nothing organized",
+   "text": "Whoever walks out of {settlement}, in any direction and at any hour, meets nothing that would justify a watch."
+  },
+  {
+   "key": "Beasts & Monsters: settled, nothing organized",
+   "text": "{settlement} kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built."
+  },
+  {
+   "key": "Beasts & Monsters: settled, nothing organized",
+   "text": "Nothing at {settlement} was organized against the country, and the threat now at hand has found the gap."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, perimeter AND organized force",
+   "text": "What {settlement} has built is holding against the pressure and is being spent doing it; the posture is survivable, and survivable is the most that can be said of it here."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+   "text": "{settlement} has a wall and nobody to man it. The line is a chokepoint on paper and a chokepoint requires people standing in it, which this town cannot supply for more than a night."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+   "text": "A stranger walks the perimeter at {settlement} and finds long stretches of good work with nobody on them, in a country where that matters a great deal."
+  },
+  {
+   "key": "Beasts & Monsters: plagued, NO perimeter and NO force",
+   "text": "A stranger arriving at {settlement} understands the danger before anybody explains it, because nothing about the place is arranged as though danger were expected to be met."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, credible deterrence",
+   "text": "{settlement} sits on an active frontier with a line and a force behind it. Most of what comes out of the country will not press a defended perimeter, and most of what comes here does not."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, force without a perimeter",
+   "text": "A stranger finds spears at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place."
+  },
+  {
+   "key": "Beasts & Monsters: frontier, force without a perimeter",
+   "text": "The town can answer trouble and cannot prevent it, and the difference costs it something every season."
+  },
+  {
+   "key": "Beasts & Monsters: settled, defenses beyond the need",
+   "text": "A stranger notices the perimeter at {settlement} chiefly for how relaxed the people on it are."
+  },
+  {
+   "key": "Beasts & Monsters: settled, nothing organized",
+   "text": "A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch."
+  }
+ ],
+ "rel": [
+  {
+   "key": "INCOME WEIGHT: the religious houses",
+   "text": "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business."
+  },
+  {
+   "key": "INCOME WEIGHT: the religious houses",
+   "text": "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town."
+  }
+ ],
+ "mag": [
+  {
+   "key": "INCOME WEIGHT: the practice of magic",
+   "text": "Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business."
+  },
+  {
+   "key": "INCOME WEIGHT: the practice of magic",
+   "text": "The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns on their custom."
+  }
+ ],
+ "notAGood": [
+  "Transit trade",
+  "Toll revenue",
+  "Pass transit trade",
+  "Toll income",
+  "Market taxes",
+  "Transit trade profit",
+  "Strategic control",
+  "Trade access fees",
+  "Coin minting",
+  "Cultural tourism revenue",
+  "Planar trade access",
+  "Warehousing and logistics services",
+  "Route maps and intelligence",
+  "Massive food requirements",
+  "Political legitimacy",
+  "Banking services",
+  "International banking",
+  "Legal services",
+  "Advanced legal expertise",
+  "Advanced medical care",
+  "Overland freight revenue"
+ ]
+}

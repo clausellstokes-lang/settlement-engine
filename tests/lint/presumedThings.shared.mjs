@@ -33,22 +33,9 @@ import { join } from 'node:path';
 import { createRequire } from 'node:module';
 
 import { timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
-import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
-
-/**
- * THE HOUSES THAT TRY DISPUTES (the chair's correction of 2026-11-12, measured by COHERENCE-AGREE-2):
- * a court is a house whose OWN catalogued service tries disputes under the public law, read from its
- * service rows, never from its name alone — the Town hall's "Dispute arbitration: Bring commercial and
- * civil disputes before a magistrate", the City hall's "Appeals court", the Town council's "Dispute
- * adjudication", the City administration's "Courts and adjudication", a Courthouse's "Civil disputes" and
- * "Criminal trials", the court buildings' "Appeals", Mayor and council's "Legal appeals", a city-state's
- * "Civic law enforcement". A headman's, elder's or reeve's mediation, a guild's arbitration and a church's
- * court are not the town's court.
- */
-const COURT_SERVICE = /^(?:civil disputes|criminal trials|dispute arbitration|dispute adjudication|courts and adjudication|appeals(?: court)?|legal appeals|civic law enforcement)$/i;
-export const COURT_HOUSES = Object.freeze(new Set(Object.entries(INSTITUTION_SERVICES)
-  .filter(([, rows]) => Object.keys(rows || {}).some((service) => COURT_SERVICE.test(service)))
-  .map(([name]) => name.toLowerCase())));
+import {
+  THINGS, sentencesOf, thingsNamedIn, thingsDeniedIn, presentForDenial,
+} from '../../src/domain/facts/registeredWords.js';
 
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
@@ -73,151 +60,13 @@ export const bankedKeys = (register) => new Set(Object.entries(register.arm1).fl
 export const ARM1_ROOTS = Object.freeze(['src/data', 'src/generators']);
 
 /**
- * THE THINGS. `words`: the words that name it (a building's own walls are not the perimeter, ruling
- * 3; a moneylender is a person, not a house). `atoms`: the vocabulary atoms whose declaration answers
- * for it (a line declaring any of them, on either side, declares the thing). `absent(facts, names)`:
- * true when the record lacks it — the vocabulary's own readers where an atom exists; the live roster's
- * names (`liveInstitutionNames`) where the vocabulary has no atom yet.
- * @type {Readonly<Record<string, { words: RegExp, atoms: ReadonlyArray<string>, absent: (f: any, names: string[]) => boolean }>>}
+ * THE THINGS AND THEIR MATCHER live in ONE home, `src/domain/facts/registeredWords.js` (W2-B-DECLARE,
+ * 2026-11-12), moved there verbatim so the page arm (`coherence/vocabularyPageFindings.js`) reads the same
+ * matcher as both arms here. Re-exported, so every reader of this rule book reads them as before.
  */
-export const THINGS = Object.freeze({
-  walls: {
-    words: /\b(?:town|city) walls\b|\bthe walls\b|\bwalls and gates\b|\bramparts?\b|\bbattlements\b/i,
-    atoms: ['walls', 'palisade', 'gate'],
-    absent: (f) => !f.defence.walls && !f.defence.palisade,
-  },
-  garrison: {
-    words: /\bgarrison(?:s|ed)?\b|\bbarracks\b/i,
-    atoms: ['garrison', 'soldiers', 'commander'],
-    absent: (f) => !f.defence.garrison,
-  },
-  militia: { words: /\bmilitias?\b/i, atoms: ['militia'], absent: (f) => !f.defence.militia },
-  watch: {
-    words: /\b(?:town|city|night|village) watch\b|\bwatchm[ae]n\b|\bthe watch\b|\bwatch captain\b|\bwatch rota\b/i,
-    atoms: ['watch'],
-    absent: (f) => !f.defence.watch,
-  },
-  mercenary: {
-    words: /\bmercenar(?:y|ies)\b|\bsellswords?\b|\bfree compan(?:y|ies)\b/i,
-    atoms: ['mercenary', 'soldiers'],
-    absent: (f) => !f.defence.mercenary,
-  },
-  docks: {
-    words: /\bdocks?\b|\bharbou?rs?\b|\bquays?\b|\bwharf\b|\bwharves\b|\bdockside\b|\bdockworkers?\b|\bdockhands?\b/i,
-    atoms: ['docks', 'navigable', 'coast', 'river', 'port', 'institution: docks', 'route: port', 'route: river'],
-    absent: (f) => !f.water.navigable && !f.hasInstitution('docks'),
-    presentForDenial: (f) => f.hasInstitution('docks'),
-  },
-  granary: { words: /\bgranar(?:y|ies)\b/i, atoms: ['institution: granary'], absent: (f) => !f.hasInstitution('granary') },
-  mill: { words: /\bmill(?:s|er|ers)?\b/i, atoms: ['institution: mill'], absent: (f) => !f.hasInstitution('mill') },
-  market: {
-    words: /(?<!\bblack |\bwhisper )\bmarket(?:place|s| square| day| days| cross)?\b/i,
-    atoms: ['market'],
-    absent: (f) => !f.market,
-  },
-  temple: {
-    words: /\btemples?\b|\bchurch(?:es)?\b|\bchapels?\b|\bshrines?\b|\bcathedrals?\b|\babbey\b/i,
-    atoms: ['temple', 'sacredHouse', 'clergy', 'priest', 'institution: temple', 'institution: monastery'],
-    absent: (f) => !f.sacredHouse,
-  },
-  prison: {
-    words: /\bprisons?\b|\bgaols?\b|\bjails?\b/i,
-    atoms: [],
-    absent: (_f, names) => !names.some((n) => /prison|gaol|jail|stocks/i.test(n)),
-  },
-  court: {
-    words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b/i,
-    atoms: [],
-    absent: (_f, names) => !names.some((n) => /court/i.test(n) || COURT_HOUSES.has(n.toLowerCase())),
-  },
-  bank: {
-    words: /\bbankers?\b|\bbanking\b|\bmoney.?changers?\b|\bcounting.?houses?\b/i,
-    atoms: ['institution: bank'],
-    absent: (f) => !f.hasInstitution('bank'),
-  },
-  guildhall: { words: /\bguild ?halls?\b/i, atoms: ['guild'], absent: (f) => !f.guild },
-  war: {
-    words: /\bthe war\b|\bwartime\b|\bat war\b|\bthe armies\b/i,
-    atoms: ['war: front', 'war: aggressor', 'war: at war', 'war: peace', 'crisis: wartime', 'crisis: under_siege', 'crisis: occupied'],
-    absent: (f) => f.warState === 'peace' && !f.crisis?.has?.('wartime') && !f.crisis?.has?.('under_siege') && !f.crisis?.has?.('occupied'),
-  },
-  // THE LAW (the chair's ruling A of 2026-11-11, "denials"): read on the DENIAL side only
-  // (`denialOnly`), because every town has some law and naming it presumes nothing; denying it
-  // ("No law, bring coin", "There is no official recourse here") presumes there is none. The town
-  // has law where a peace-keeping house stands (the vocabulary's watch or garrison) or a house
-  // that judges (a court, a council, a hall, a headman, a magistrate). "No law permits" is the
-  // law of anywhere, not of this town.
-  law: {
-    words: /\blaw enforcement\b|\bofficial recourse\b|\blaw\b(?! permits)/i,
-    atoms: ['watch', 'garrison', 'guardPresence'],
-    absent: (f, names) => !f.defence.watch && !f.defence.garrison
-      && !names.some((n) => /court|council|\bhall\b|headman|magistrat|reeve|justiciar|sheriff/i.test(n)),
-    denialOnly: true,
-  },
-});
-
-export const THING_IDS = Object.freeze(Object.keys(THINGS));
-
-/**
- * A NEGATION the sentence itself states ("no militia could handle", "without courts or prison"):
- * the line names the thing to say it is not there. Read the same way by both arms.
- * @param {string} sentence @param {RegExp} words
- */
-export function negates(sentence, words) {
-  const m = new RegExp(words.source, 'ig');
-  for (const hit of sentence.matchAll(m)) {
-    const before = sentence.slice(Math.max(0, hit.index - 48), hit.index);
-    const after = sentence.slice(hit.index + hit[0].length, hit.index + hit[0].length + 24);
-    const denied = /\b(?:no|not|without|nor|lacks?|lacking|beyond any|than any)\s+(?:[\w'-]+,?\s+(?:or\s+|and\s+)?){0,3}$/i.test(before)
-      || /^\s+(?:cannot|could not|can't|couldn't)\b/i.test(after);
-    if (!denied) return false;
-  }
-  return true;
-}
-
-/** The sentences of a printed text (a semicolon closes one, as the scan of the critique read them). */
-export const sentencesOf = (text) => String(text).split(/(?<=[.!?;])\s+/).map((s) => s.trim()).filter(Boolean);
-
-/** The things a sentence names and does not negate. @param {string} sentence */
-export function thingsNamedIn(sentence) {
-  return THING_IDS.filter((id) => !THINGS[id].denialOnly && THINGS[id].words.test(sentence) && !negates(sentence, THINGS[id].words));
-}
-
-/**
- * A DENIAL OF EXISTENCE: some use of the thing's words is "no X", "without (a, any) X", "lacks
- * (a) X", with at most one plain qualifier between ("no public law", "no official recourse").
- * Narrower than `negates` on purpose: "not a prison" denies an identity, "no single barracks"
- * a size, "the watch cannot" an ability, "would not call the law" a choice, and "no market dues"
- * a market's toll; none says the thing is not there. @param {string} sentence @param {RegExp} words
- */
-export function deniesExistence(sentence, words) {
-  const m = new RegExp(words.source, 'ig');
-  for (const hit of sentence.matchAll(m)) {
-    const before = sentence.slice(Math.max(0, hit.index - 32), hit.index);
-    const after = sentence.slice(hit.index + hit[0].length, hit.index + hit[0].length + 16);
-    if (/^\s+(?:dues|tolls?|fees?|rights?|prices?|value|permits)\b/i.test(after)) continue;
-    if (/\b(?:no|without(?:\s+(?:an?|any))?|lacks?(?:\s+(?:an?|any))?|lacking(?:\s+(?:an?|any))?)\s+(?:(?:public|official|lawful|legal|real|proper|working|standing|organised|organized)\s+)?$/i.test(before)) return true;
-  }
-  return false;
-}
-
-/**
- * The things a sentence DENIES: such a line presumes the thing's ABSENCE (the chair's ruling A of
- * 2026-11-11). @param {string} sentence
- */
-export function thingsDeniedIn(sentence) {
-  return THING_IDS.filter((id) => THINGS[id].words.test(sentence) && deniesExistence(sentence, THINGS[id].words));
-}
-
-/**
- * Does the town HAVE the thing, for a denial? The thing's own reader, except where the denial names
- * a narrower thing than the presumption does: "no wharf of its own" denies the dock HOUSE, which a
- * navigable town may lack. @param {string} thing @param {any} facts @param {string[]} names
- */
-export function presentForDenial(thing, facts, names) {
-  const t = THINGS[thing];
-  return t.presentForDenial ? !!t.presentForDenial(facts, names) : !t.absent(facts, names);
-}
+export {
+  COURT_HOUSES, THINGS, THING_IDS, negates, sentencesOf, thingsNamedIn, deniesExistence, thingsDeniedIn, presentForDenial,
+} from '../../src/domain/facts/registeredWords.js';
 
 // ── ARM 1: the source ─────────────────────────────────────────────────────────────────────────
 
