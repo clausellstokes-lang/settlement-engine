@@ -134,6 +134,16 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(at('crossroads', true)).toEqual([]);
     expect(at('road', false)).toEqual([]);
   });
+  test('F1 (COHERENCE-AGREE-6): an active chain printing a resource whose row refuses the access', () => {
+    const toll = { label: 'Strategic Crossroads Toll', resource: 'Strategic Crossroads', resourceKey: 'crossroads_position', needKey: 'trade_entrepot', chainId: 'crossroads_trade' };
+    const runs = (route, chain) => details(record({ config: { tradeRouteAccess: route }, economicState: { activeChains: [chain] } }));
+    // the printed source reads the access through the leaf: the toll prints its river and port names, so clean
+    expect(runs('river', toll)).toEqual([]);
+    expect(runs('port', toll)).toEqual([]);
+    expect(runs('crossroads', toll)).toEqual([]);
+    // a chain whose printed source has no entry for the access is convicted (a mis-keyed toll prints the crossroads)
+    expect(runs('river', { ...toll, chainId: 'not_the_toll' })).toContain("A chain prints a resource whose row refuses the town's access.");
+  });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
     expect(details(grown(95, ['Grain']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
@@ -260,6 +270,8 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
   // F2 (REVIEW-AGREE-2, COHERENCE-AGREE-6): a good only refused chains make, sold or produced locally
   { seed: 'r2read-city-4', tier: 'city' }, { seed: 'r2r-city-42', tier: 'city' }, { seed: 'r2r-city-6', tier: 'city' }, { seed: 'agree-village-32', tier: 'village' },
+  // F1 (REVIEW-AGREE-2, COHERENCE-AGREE-6): the crossroads toll on a river and on a port
+  { seed: 'r2read-village-1', tier: 'village' }, { seed: 'r2r-city-14', tier: 'city' }, { seed: 'r2read-metropolis-2', tier: 'metropolis' }, { seed: 'r2r-village-2', tier: 'village' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });

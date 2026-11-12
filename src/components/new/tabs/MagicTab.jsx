@@ -166,7 +166,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
                 </p>}
               {magicFrozen && (settlement.economicState?.activeChains || []).filter(c => c.magicNote).map((c, i) => (
                 <div key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 6, paddingLeft: 8, borderLeft: `2px solid ${BORDER}`, fontStyle: 'italic' }}>
-                  {c.label}: {c.magicNote}
+                  {chainPrintName(c, settlement).label}: {c.magicNote}
                 </div>
               ))}
             </div>
@@ -193,3 +193,4 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
     </div>
   );
 }
+import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under

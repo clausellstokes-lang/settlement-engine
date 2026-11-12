@@ -104,7 +104,7 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  * Props are the slices of eco that the section actually consumes — keeps
  * the prop surface narrow and the component cheap to memoize.
  */
-function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [], instNames = [] }) {
+function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [], instNames = [], town = null }) {
   const [flowFilter, setFlowFilter] = useState('all');
   // THE TWO PHONE FLOORS — a chain's impairment line, its entrepot note and its magic
   // substitution note take the PROSE floor. Its `Via` institution LIST and its income
@@ -166,7 +166,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
           // T2-6: the facts the retired Supply Chains diagram alone carried (resource node,
           // missing houses, upstream imports, the upstream note) — one derivation, shared
           // with the Compendium's ChainRow.
-          const facts = chainFlowFacts(chain, instNames);
+          const shown = chainPrintName(chain, town), facts = chainFlowFacts({ ...chain, ...shown }, instNames); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access; the income keyword above stays on the record's label (logic)
           // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
           // sentence, so it prints on the first card that carries it; each card keeps its need.
           const impact = chain.dependency?.impact || '';
@@ -181,7 +181,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {/* Header row */}
               <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
                 {chain.resourceIcon && <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>}
-                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{chain.label}</span>
+                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{shown.label}</span>
                 {/* WRITER REACH: the chain's need icon, read from the chain record exactly as the
                     retired Supply Chains diagram's need header read it (T2-6 fold). */}
                 {chain.needIcon && <span data-testid="flow-need-icon" style={{fontSize: FS['14']}}>{chain.needIcon}</span>}
@@ -608,7 +608,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           chains={eco.activeChains}
           institutionalServices={eco.institutionalServices || []}
           incomeSources={eco.incomeSources || []}
-          instNames={(s?.institutions || []).map(i => i?.name || '')}
+          instNames={(s?.institutions || []).map(i => i?.name || '')} town={s}
         />
       )}
       {/* W1 ECO (2026-11-07): DS-SUP-2 at economics.upstreamSupply — an upstream chain the
@@ -791,3 +791,4 @@ export default React.memo(EconomicsTab);
 
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../../domain/chainYield.js';
+import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
