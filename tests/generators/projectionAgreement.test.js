@@ -152,6 +152,8 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(beside('Bulk grain (local fields depleted)', ['fertile_floodplain']))).toContain('A shortage import says land is spent that a live resource is.');
     expect(details(beside('Timber (local managed woodland cleared)', ['mountain_timber']))).toEqual([]);
     expect(details(beside('Timber (local mountain timber cleared)', ['managed_forest']))).toEqual([]);
+    expect(details(beside('Iron ore (local mines exhausted)', ['coal_deposits']))).toContain('A shortage import says land is spent that a live resource is.');
+    expect(details(beside('Iron ore (local iron mines exhausted)', ['coal_deposits']))).toEqual([]);
     // F7 (REVIEW-AGREE): an income line selling a surplus the food record does not hold
     const sells = (foodRecord) => record({ economicState: { primaryImports: [], foodSecurity: { foodRecord },
       incomeSources: [{ source: 'Grain Sales', desc: 'Surplus from local harvest (planted) sold on.' }] } });
@@ -235,6 +237,7 @@ const REVIEW_SEEDS = [
   // Part B (i): Farmland, Common grazing land and a Dairy farmer beside "no established food chains"
   { seed: 'rvw-ten-3', tier: 'village', stress: 'wartime' }, { seed: 'agree-thorp-2', tier: 'thorp' }, { seed: 'agree-hamlet-0', tier: 'hamlet' },
   // the forest label (the chair's ruling, 2026-11-12): "Timber (local forests cleared)" beside live timber
+  // (rvw-ten-4, in the arm for F8, also holds the iron label beside coal: the mines word is read now)
   { seed: 'rvw12-city-71', tier: 'city' }, { seed: 'rvw12b-town-171', tier: 'town' }, { seed: 'rvw12b-town-251', tier: 'town' }, { seed: 'rvw12b-city-156', tier: 'city' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },

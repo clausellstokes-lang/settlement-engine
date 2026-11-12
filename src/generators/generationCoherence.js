@@ -361,9 +361,7 @@ const SHORTAGE_LAND_WORDS = Object.freeze([
   [/\((?:local |coastal |mountain )?(?:forests?|stands) /i, ['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber']],
   [/\(local springs /i, ['hot_springs', 'hot_springs_mineral']],
   [/\(local deposits /i, ['river_clay', 'gemstone_deposits', 'glass_sand', 'coal_deposits', 'iron_deposits']],
-  [/\(local veins /i, ['iron_deposits', 'precious_metals']],
-  // "(local mines …)" is NOT read yet: the iron label's words also name a live coal seam or gem working, but its
-  // text is a Founding World card's printed promise (Black Crag), not this lane's: put to the chair, 2026-11-12.
+  [/\(local (?:mines|veins) /i, ['iron_deposits', 'precious_metals', 'coal_deposits', 'gemstone_deposits']],
   [/\(local herds /i, ['camel_herds', 'grazing_land', 'alpine_pasture']],
   [/\(local salt beds /i, ['salt_flats', 'desert_salt']],
   [/\(local fishing grounds /i, ['fishing_grounds', 'river_fish']],

@@ -154,7 +154,7 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'manual',
     depletedDescription: 'The accessible iron seams are exhausted.',
-    shortageImport: 'Iron ore (local mines exhausted)',
+    shortageImport: 'Iron ore (local iron mines exhausted)',
   }),
   stone_quarry: Object.freeze({
     type: 'exhaustible',
