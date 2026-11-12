@@ -1,0 +1,23 @@
+{
+  "_doc": "DRAFT, NOT SIGNED — drafted by the VISIBLE-BUGS seat (lane/visible-bugs-2026-11-12) under §0 point 7 of the coherence charters: one drafted record, predicted rows learned in a scratch run never committed, NO door run on the lane. The merge seat fills the provenance fields, moves this to docs/shift-records/ and runs the door. ONE CAUSE, THREE MEASURED COMPONENTS (the residue-herald record's form): the pulse's lines read wrong, cured where each line's words are formed. (A) VISIBLE-BUGS 3a, d57f2fc22: factionCompetition.js's power-move lines fill {target} with institutionSentenceNoun (no catalogue count, condition, 'multiple' or slashed pair). (B) VISIBLE-BUGS 3b, 5aabf82c0 + 6dbf92bff: npcAgency.js's deed body gives the aim as the deed's reason in one of five frames (heraldDeeds.js :: NPC_AIM_FRAMES), picked by fnv1a32('aim-frame|<npcId>|<tick>'). (C) VISIBLE-BUGS 5, e3dac8045 (the chair's authorisation of 2026-11-12 06:29 UTC): a power's name in its pulse lines through powerSentenceName/powerPossessive (no slashed label, no plural \"'s\"). All three are TEXT ONLY: (B) proven over 40 seeds x 12 weeks tick by tick (21,429,758 leaves; 91,327 moved, every one a summary that held an 'is out to' body; zero other leaves); (C) proven the same way against 2a68163e4 (21,429,758 leaves; 3,800 moved, every one a text field whose old value held the slash or the \"s's\"; zero other leaves). The herald manifest measured from outside the tree (scratch script over tests/helpers/heraldDeskGolden.js): base decc7bf15 = committed (0 rows moved); after (A) 1 row; after (A)+(B) 1 row; after (A)+(B)+(C) 1 row — 'rr-fresh-full|1|contentSha256' — at 446 rows at every step. Item counts and every desk unmoved.",
+  "ownerWords": "",
+  "ownerDate": "",
+  "odqRow": "",
+  "cause": "VISIBLE-BUGS items 3 and 5 — pulse lines that read wrong, cured where their words are formed: (A) an institution's catalogue key printed as a noun phrase ('Control of Cnocby's multiple water sources …'), 3a d57f2fc22; (B) a deed headline over a body about an unrelated aim ('pushes through reforms' / 'is out to come through the crisis'), 3b 5aabf82c0 + 6dbf92bff (the chair's rulings of 2026-11-12). (C) a power's slashed label printed as a name and a plural bloc name's possessive formed by rule ('Military/Guard captures …', 'Religious Authorities's people …'), item 5 e3dac8045. Text only; no state leaf moves.",
+  "seat": "",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 446,
+      "proofForm": "derived-artefact"
+    }
+  ],
+  "_notGoldenButRedAtTip": [
+    "tests/property/heraldKnowledgeDeskGolden.test.js :: THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE DESK — the contentSha256 row above (A+B+C)",
+    "tests/domain/modeSpeedsWy1.test.js :: ABSENT datum: four pulse records hash to the base — the pulse records' text (A+B+C)",
+    "tests/lint/proseFamilyContract.walker.test.js :: A1, A3, A5 — the frozen prose-family corpus digest (A+B+C); re-keyed at the merge as b1318ee96 did",
+    "tests/build/landingFixtureFreshness.test.js :: BYTE FOR BYTE, and --check — the fixture's text (VISIBLE-BUGS 2 tag, A and B lines); the fixture lane re-emits",
+    "tests/lint/sovereigntyLightingContract.walker.test.js :: THE CENSUS IS AN ASSERTION — stasis S6 tuple +6 files, the lane's six new test files (figures at the hand-back); green under CENSUS_STASIS=1"
+  ]
+}

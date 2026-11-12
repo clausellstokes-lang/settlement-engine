@@ -44,34 +44,35 @@ export const CONDITION_DEEDS = Object.freeze({
 /**
  * An NPC's move AGAINST a named rival (npcAgency.js). Membership ALSO gates the rival consequence
  * there, so seek_promotion (which carries a rivalTarget only for rivalry tracking) neither names a
- * subject nor sets one back.
- * @type {Readonly<Record<string, { underway: (name: string) => string, done: (name: string) => string }>>}
+ * subject nor sets one back. `noun` is the deed as the body line names it (NPC_AIM_FRAMES).
+ * @type {Readonly<Record<string, { underway: (name: string) => string, done: (name: string) => string, noun: (name: string) => string }>>}
  */
 export const TARGETED_NPC_DEEDS = Object.freeze({
-  expose:          { underway: (name) => `is moving to expose ${name}`,         done: (name) => `exposes ${name}` },
-  suppress:        { underway: (name) => `is moving against ${name}`,          done: (name) => `suppresses ${name}` },
-  sabotage:        { underway: (name) => `is working against ${name} in secret`, done: (name) => `sabotages ${name}` },
-  undermine_rival: { underway: (name) => `is undermining ${name}`,             done: (name) => `undermines ${name}` },
+  expose:          { underway: (name) => `is moving to expose ${name}`,         done: (name) => `exposes ${name}`,   noun: (name) => `exposing ${name}` },
+  suppress:        { underway: (name) => `is moving against ${name}`,          done: (name) => `suppresses ${name}`, noun: (name) => `moving against ${name}` },
+  sabotage:        { underway: (name) => `is working against ${name} in secret`, done: (name) => `sabotages ${name}`, noun: (name) => `working against ${name} in secret` },
+  undermine_rival: { underway: (name) => `is undermining ${name}`,             done: (name) => `undermines ${name}`, noun: (name) => `undermining ${name}` },
 });
 
 /**
  * The same two forms for a move that names no one. Each carries its own object, so no headline
- * ends on a bare verb ("X protects").
- * @type {Readonly<Record<string, { underway: string, done: string }>>}
+ * ends on a bare verb ("X protects"). `noun` is the deed as the body line names it, inside one
+ * of NPC_AIM_FRAMES below ("pushing through reforms").
+ * @type {Readonly<Record<string, { underway: string, done: string, noun: string }>>}
  */
 export const UNTARGETED_NPC_DEEDS = Object.freeze({
-  protect:         { underway: 'is rallying to shield their people',       done: 'shields their people' },
-  exploit:         { underway: 'is turning the moment to their advantage', done: 'turns the moment to their advantage' },
-  reform:          { underway: 'is pushing for reform',                    done: 'pushes through reforms' },
-  suppress:        { underway: 'is cracking down on dissent',              done: 'cracks down on dissent' },
-  bargain:         { underway: 'is striking a bargain',                    done: 'strikes a bargain' },
-  defect:          { underway: 'is breaking with the power they served',   done: 'breaks with the power they served' },
-  expose:          { underway: 'is digging up secrets',                    done: 'drags a secret into the open' },
-  hoard:           { underway: 'is hoarding stores',                       done: 'hoards stores' },
-  mobilize:        { underway: 'is rallying supporters',                   done: 'rallies supporters' },
-  sabotage:        { underway: 'is working sabotage in secret',            done: 'commits sabotage' },
-  seek_promotion:  { underway: 'is angling for promotion',                 done: 'presses for promotion' },
-  undermine_rival: { underway: 'is undermining a rival',                   done: 'undermines a rival' },
+  protect:         { underway: 'is rallying to shield their people',       done: 'shields their people', noun: 'shielding their people' },
+  exploit:         { underway: 'is turning the moment to their advantage', done: 'turns the moment to their advantage', noun: 'turning the moment to their advantage' },
+  reform:          { underway: 'is pushing for reform',                    done: 'pushes through reforms', noun: 'pushing through reforms' },
+  suppress:        { underway: 'is cracking down on dissent',              done: 'cracks down on dissent', noun: 'cracking down on dissent' },
+  bargain:         { underway: 'is striking a bargain',                    done: 'strikes a bargain', noun: 'striking a bargain' },
+  defect:          { underway: 'is breaking with the power they served',   done: 'breaks with the power they served', noun: 'breaking with the power they served' },
+  expose:          { underway: 'is digging up secrets',                    done: 'drags a secret into the open', noun: 'dragging a secret into the open' },
+  hoard:           { underway: 'is hoarding stores',                       done: 'hoards stores', noun: 'hoarding stores' },
+  mobilize:        { underway: 'is rallying supporters',                   done: 'rallies supporters', noun: 'rallying supporters' },
+  sabotage:        { underway: 'is working sabotage in secret',            done: 'commits sabotage', noun: 'working sabotage in secret' },
+  seek_promotion:  { underway: 'is angling for promotion',                 done: 'presses for promotion', noun: 'pressing for promotion' },
+  undermine_rival: { underway: 'is undermining a rival',                   done: 'undermines a rival', noun: 'undermining a rival' },
 });
 
 /**
@@ -117,6 +118,28 @@ export const NPC_AIMS = Object.freeze({
   indulge_trait:         'live as they please',
   answer_the_uncanny:    'deal with something uncanny',
 });
+
+/**
+ * THE BODY UNDER AN NPC DEED: the aim, given as the deed's REASON (VISIBLE-BUGS item 3b,
+ * 2026-11-12; the chair's ruling, five frames). The body used to be "<name> is out to <aim>."
+ * under a headline built from a different key, so the two lines were about different things
+ * ("Caoilfhinn Gallagher pushes through reforms" / "… is out to come through the crisis"):
+ * 1,983 lines over the landing region's seeds lf-001..040. Each frame says the one relation,
+ * the aim and the deed as its means, in its own order and words; five, not four, so a hash
+ * pick over the pool does not alias. Every frame is read with every deed noun and every aim
+ * (tests/domain/npcAimFrames.test.js). Slots: `name`, `aim` (NPC_AIMS), `deed` (a `noun`
+ * above). The pick is a keyed hash of a fixed salt, the person and the tick, never a draw: text
+ * reads no entropy root (the chair's amended condition 1, 2026-11-12).
+ * The frames presume no fact of the record beyond the person and their aim: pure colour.
+ * @type {ReadonlyArray<(x: { name: string, aim: string, deed: string }) => string>}
+ */
+export const NPC_AIM_FRAMES = Object.freeze([
+  ({ name, aim, deed }) => `${name} means to ${aim}, and ${deed} is the road they have taken.`,
+  ({ name, aim, deed }) => `${deed.charAt(0).toUpperCase()}${deed.slice(1)} is how ${name} means to ${aim}.`,
+  ({ name, aim, deed }) => `To ${aim}, ${name} has turned to ${deed}.`,
+  ({ name, aim, deed }) => `${name} is ${deed} in a bid to ${aim}.`,
+  ({ name, aim, deed }) => `${name} wants to ${aim}, and ${deed} is their way to do it.`,
+]);
 
 /**
  * Two settlements' standing turning to a new label (relationshipRuleHelpers.js): "A and B are
