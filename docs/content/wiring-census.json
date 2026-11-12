@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1322
+    "producerIndexFiles": 1323
   },
   "totals": {
     "pools": 856,
@@ -49,9 +49,9 @@
     "objectClassed": 112,
     "mountedRows": 725,
     "absent": {
-      "measured": 586,
+      "measured": 590,
       "default": 3,
-      "not-produced": 66,
+      "not-produced": 62,
       "method-call": 18
     },
     "zeroK": 85,
@@ -1523,7 +1523,7 @@
       "narrowed": false,
       "absent": {
         "court": "measured",
-        "prison": "not-produced"
+        "prison": "measured"
       },
       "covert": false,
       "objectClasses": [
@@ -1597,7 +1597,7 @@
       "narrowed": false,
       "absent": {
         "court": "measured",
-        "prison": "not-produced"
+        "prison": "measured"
       },
       "covert": false,
       "objectClasses": [
@@ -1662,7 +1662,7 @@
       "narrowed": false,
       "absent": {
         "court": "measured",
-        "prison": "not-produced"
+        "prison": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -1725,7 +1725,7 @@
       "narrowed": false,
       "absent": {
         "court": "measured",
-        "prison": "not-produced"
+        "prison": "measured"
       },
       "covert": false,
       "objectClasses": [],
