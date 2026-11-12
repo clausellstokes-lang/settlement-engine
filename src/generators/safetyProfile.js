@@ -471,7 +471,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const courtNote = inst.hasCourtSystem && inst.hasPrison
       ? ' Guild operations are careful and layered. They keep enough distance from violent crime that prosecution is difficult.'
       : inst.hasCourtSystem // COHERENCE-AGREE: a court and no prison is not "no court"
-      ? ' With nowhere to hold the guilty, operations are conducted openly enough to be an open secret.'
+      ? lineText({ text: ' With nowhere to hold the guilty, operations are conducted openly enough to be an open secret.', needs: ['court'], excludes: ['prison'] })
       : ' With no reliable court system to fear, operations are conducted openly enough to be an open secret.';
     crimeTypes.push({
       type: 'Organized guild crime',
@@ -514,7 +514,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : inst.hasPrison
       ? ' Offenders can be jailed, but without consistent courts, enforcement is sporadic.'
       : inst.hasCourtSystem // COHERENCE-AGREE: a court and no prison is not "no court"
-      ? ' With nowhere to hold the guilty, the risk of operating is low. Arrest means a fine at worst.'
+      ? lineText({ text: ' With nowhere to hold the guilty, the risk of operating is low. Arrest means a fine at worst.', needs: ['court'], excludes: ['prison'] })
       : ' Without prison or courts, the risk of operating is low. Arrest means a fine at worst.';
     crimeTypes.push({
       type: 'Smuggling',
@@ -556,7 +556,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const courtNote = inst.hasCourtSystem && inst.hasPrison
         ? ' Consequences exist (offenders risk real prosecution) which keeps serious organised crime from taking root.'
         : inst.hasCourtSystem // COHERENCE-AGREE: a court and no prison is not "no court"
-        ? ' With nowhere to hold the guilty, most offenders face no meaningful consequences.'
+        ? lineText({ text: ' With nowhere to hold the guilty, most offenders face no meaningful consequences.', needs: ['court'], excludes: ['prison'] })
         : ' The lack of reliable courts and detention means most offenders face no meaningful consequences.';
       crimeTypes.push({
         type: 'Background crime',

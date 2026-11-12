@@ -237,3 +237,21 @@ describe('item 2: the court and the prison are the defence home\'s atoms', () =>
     expect(held).toBeGreaterThan(0);
   });
 });
+
+/**
+ * ITEM 2 (ii) (COHERENCE-AGREE-4): cure 11's three crime lines for a court with no prison are declared where they
+ * are printed — each a declared cell needing the court and refusing the prison, the two facts its branch reads
+ * (`inst.hasCourtSystem && !inst.hasPrison`). Text unchanged: the cell gives back its text.
+ */
+describe('item 2 (ii): the court-without-prison crime lines declare both facts', () => {
+  test('each " With nowhere to hold the guilty, …" line is a cell that needs the court and excludes the prison', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { assertDeclarable } = await import('../../src/domain/facts/factVocabulary.js');
+    const site = readFileSync(new URL('../../src/generators/safetyProfile.js', import.meta.url), 'utf8');
+    const said = [...site.matchAll(/' With nowhere to hold the guilty, [^']*'/g)].map((m) => m[0]);
+    const declared = [...site.matchAll(/lineText\(\{ text: (' With nowhere to hold the guilty, [^']*'), needs: \['court'\], excludes: \['prison'\] \}\)/g)].map((m) => m[1]);
+    expect(said).toHaveLength(3);
+    expect(declared).toEqual(said);
+    for (const atom of ['court', 'prison']) expect(assertDeclarable(atom).dimension).toBe(atom);
+  });
+});
