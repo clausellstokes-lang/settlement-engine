@@ -367,10 +367,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : ' Without courts or prison, enforcement relies entirely on fines, exile, or summary violence.';
 
     // COHERENCE-AGREE-3 (F5): the gate home answers "gates"; walls with no gate take the twin that names none.
-    // (A template over the force noun, so it is chosen here by the home, not keyed in the sibling table.)
+    // (A template over the force noun, so it is chosen here by the home, not keyed in the sibling table; the twin carries its declaration, COHERENCE-AGREE-4.)
     const wallNote = !inst.hasWalls ? ''
       : inst.hasGates ? ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`
-        : ` The walls leave few ways in, so smugglers have to get past the ${lawRef}.`;
+        : lineText({ text: ` The walls leave few ways in, so smugglers have to get past the ${lawRef}.`, needs: ['walls'], excludes: ['gate'] });
 
     if (stress.stateCrime) {
       guardEffectivenessDesc = `The ${lawRef} is well organised and works for the rulers' purses, not for the public; ` +
