@@ -439,20 +439,24 @@ begin
       from jsonb_each(ov) with ordinality x(k, v, o)
      where k <> '$veil' and jsonb_typeof(v) = 'object' and v -> 'revealDm' = 'false'::jsonb
   ),
-  stored_raw as (
+  -- the client's clamp (clampVeilDeltas): a well-formed delta, de-duplicated by address (the last
+  -- occurrence wins, at its own place), the LAST 2,000 kept. The cheap shape tests run on every
+  -- entry; the address grammar runs only until 2,000 are kept (a stored list can be any length).
+  stored_typed as (
     select e ->> 'address' as address, (e ->> 'hidden')::boolean as hidden, o::bigint as ord
       from jsonb_array_elements(case when marked and jsonb_typeof(ov -> '$veil' -> 'deltas') = 'array'
                                      then ov -> '$veil' -> 'deltas' else '[]' end) with ordinality x(e, o)
      where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'hidden') = 'boolean'
-       and jsonb_typeof(e -> 'address') = 'string' and public._gallery_veil_parse(e ->> 'address') is not null
+       and jsonb_typeof(e -> 'address') = 'string'
   ),
   stored_last as (
-    select distinct on (address) address, hidden, ord from stored_raw order by address, ord desc
+    select distinct on (address) address, hidden, ord from stored_typed order by address, ord desc
   ),
   stored as (
     select address, hidden, 1000000000 + ord as ord from (
-      select *, row_number() over (order by ord desc) as rn from stored_last) q
-     where rn <= 2000
+      select * from stored_last order by ord desc offset 0) q
+     where public._gallery_veil_parse(address) is not null
+     limit 2000
   ),
   deltas as (select * from card_deltas union all select * from stored),
   targets as (

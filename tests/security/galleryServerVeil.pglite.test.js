@@ -331,6 +331,32 @@ describe('the server-side share veil (211) — execution against the real SQL an
     expect(control.readable).toBeGreaterThan(0);
   });
 
+  it('a share past the client\'s clamp: the server reads the same last 2,000 well-formed deltas the page reads', async () => {
+    const town = TOWNS[2];
+    const { seed, ...cfg } = town;
+    const raw = gen({ ...BROWSER, ...cfg }, null, { seed, customContent: {} });
+    const record = { ...raw, publicProse: compose(raw) };
+    const pub = veil.galleryPayloadFor(record, {});
+    const eyes = veil.curateModelFor(pub, []).sections.flatMap((x) => x.cards.flatMap((c) => c.eyes.map((e) => ({ address: e.address, hidden: true }))));
+    // the real eyes FIRST (the clamp cuts them), malformed and over-long entries, then 5,000 more, a
+    // few real eyes repeated at the END (kept), and the first real eye re-opened last of all
+    const junk = Array.from({ length: 5000 }, (_, i) => ({ address: `field:npc:nobody-${i}:secret`, hidden: i % 2 === 0 }));
+    const tail = eyes.slice(0, 40);
+    const deltas = [...eyes, { address: `field:npc:${'x'.repeat(400)}:secret`, hidden: true }, { address: 'nonsense', hidden: true },
+      { address: 'field:npc:a:secret', hidden: 'yes' }, 7, ...junk, ...tail, { ...eyes[0], hidden: false }];
+    const { db } = LIVE;
+    await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility, gallery_member_overrides)
+      values ('eeeeeeee-0000-0000-0000-000000000001', $1, 'T', 'town', $2, true, 'clamp-p', now(), 'clamp-l', 'unlisted', $3)`,
+    [OWNER, JSON.stringify(record), JSON.stringify({ $veil: { v: 1, deltas } })]);
+    const now = await readAll(db, 'clamp-p', 'clamp-l');
+    expect(carried(now.gRow.data, now.gPage).paths).toEqual([]);
+    expect(carried(now.lResp.dossier, now.lPage).paths).toEqual([]);
+    // the page the 210 client draws from the same stored row (its own clamp), equal to what 211 serves
+    const want = canon(veil.projectShareVeil(pub, { $veil: { v: 1, deltas } }));
+    expect(JSON.stringify(canon(now.gRow.data))).toBe(JSON.stringify(want));
+    expect(JSON.stringify(now.gPage)).toBe(JSON.stringify(want));
+  });
+
   it('the $veil shapes never raise and never leak; an anonymous legacy event is veiled fail-closed', async () => {
     const { db } = LIVE;
     const PLANT = { name: 'Old Copy', criminalCaptureState: { capturedBy: 'PLANT-CAPTURE' }, npcs: [{ id: 'n1', name: 'A', secret: 'PLANT-SECRET' }], seed: 'PLANT-SEED' };
