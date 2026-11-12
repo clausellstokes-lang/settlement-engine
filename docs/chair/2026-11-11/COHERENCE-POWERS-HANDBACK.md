@@ -376,8 +376,19 @@ walker's "every drawn pool has a row" is red on this tree for that cause alone.
 | finding | commit | before (merged start) | after | guard |
 |---|---|---|---|---|
 | F12 the packed ceiling | f064cb83c | rulingStructure.js 799 lines, 5 packed lines | 792 lines, 2 (both predate the lane) | powerStructure.test.js "no power/ module packs more statements onto shared lines than its ceiling", red first (5 packed lines) |
+| F1 the political mass | 97759b837 (census c02bbb48f, manifest 8f72fbc90) | the pure seat-ceiling cut R 19, S 40 | R 0, S 0 | dualHatPoliticalMass.test.js, red first 8 of 8 (the reviewer's crisis and small-place seeds, literal powers) |
 
 F12's L3: 0 of 4,305 whole-record hashes differ, merged start against the split. The split is SIZED: docs and sealed
 packets cite this file's lines up to :787 and the citation walker reds a new past-EOF citation, so the small cohesive
 helper moves (normalizeAndAnnotateFactions, re-exported), not the chooser (that would leave 661 lines and fifteen new
 past-EOF citations, measured).
+
+F1's proof (both corpora, the resize plan logged in a probe tree): of the reviewer's 19, the 8 crisis powers stand again
+and their coup labels read the line's (Contested; rvw-hamlet-66 Holding); the other 11 (Religious Authorities 9, the
+Military Party, one more) had no member and no house at the line and now leave by the not-built rule, which the cut
+had reached first. Births with fewer powers than the line: the fold 107, the not-built rule 205, the council of a kind
+30; any other cause 0. More powers than the line: 0. The mass differs from the line's in 3 births, each a council of a
+kind. **THE STOP (F1's measure), sent to the chair with one proposal ("the crisis seat"):** the forced-crisis births
+where none of the crisis's own powers is on the page read 1,525 at the line and 1,524 at the cure, of 2,520; the class
+predates the lane (the table in the chair's message and in the probes' `crisis.mjs`). Nothing of it is built before
+the ruling.
