@@ -24,8 +24,8 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import {
-  REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, listFiles, negates, printedAbsent, rowCovers, scanSource, scanTree,
-  unlicensedServiceRows,
+  REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, rowCovers, scanSource,
+  scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -65,6 +65,33 @@ describe('the rule book', () => {
     const having = { defence: { militia: true, watch: true } };
     expect(printedAbsent(record, lacking, [])).toEqual([{ thing: 'militia', path: '.powerStructure.factions[].desc', sentence: 'Town watch and militia;' }]);
     expect(printedAbsent(record, having, [])).toEqual([]);
+  });
+});
+
+describe('the denial side (the chair\'s ruling A of 2026-11-11)', () => {
+  test('planted: the existence-denial reader', () => {
+    expect(deniesExistence('No law, bring coin', THINGS.law.words)).toBe(true);
+    expect(deniesExistence('There is no official recourse here.', THINGS.law.words)).toBe(true);
+    expect(deniesExistence('Fragile (private security, no public law)', THINGS.law.words)).toBe(true);
+    expect(deniesExistence('It has no wharf of its own.', THINGS.docks.words)).toBe(true);
+    expect(deniesExistence('It is not a prison, though the distinction is thin.', THINGS.prison.words)).toBe(false);
+    expect(deniesExistence('no single barracks could secure a city this size.', THINGS.garrison.words)).toBe(false);
+    expect(deniesExistence('The adventurers\' charter hall handles threats the watch cannot.', THINGS.watch.words)).toBe(false);
+    expect(deniesExistence('The owners would not call the law;', THINGS.law.words)).toBe(false);
+    expect(deniesExistence('stalls that pay no market dues.', THINGS.market.words)).toBe(false);
+    expect(deniesExistence('services no law permits.', THINGS.law.words)).toBe(false);
+  });
+
+  test('planted: a record denying a thing it HAS is listed; one that lacks it is not; the law is read only where denied', () => {
+    const record = { availableServices: { criminal: [{ name: 'No law, bring coin', desc: 'There is no official recourse here.', institution: '(lawless)' }] }, note: 'The law here keeps the market quiet enough.' };
+    const watched = { defence: { watch: true, garrison: false }, market: true };
+    const lawless = { defence: { watch: false, garrison: false }, market: true };
+    expect(printedAbsent(record, watched, ['Town watch'])).toEqual([
+      { thing: 'law', path: '.availableServices.criminal[].name', sentence: 'No law, bring coin', denies: true },
+      { thing: 'law', path: '.availableServices.criminal[].desc', sentence: 'There is no official recourse here.', denies: true },
+    ]);
+    expect(printedAbsent(record, lawless, ['Tavern'])).toEqual([]);
+    expect(rowCovers({ thing: 'law', path: '.availableServices.criminal[].name', text: 'No law' }, { thing: 'law', path: '.availableServices.criminal[].name', sentence: 'No law, bring coin', denies: true })).toBe(false);
   });
 });
 
