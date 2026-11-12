@@ -24,10 +24,10 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "97804b535ead3fc384d2637990e85c8d3d6f858c",
+  "measuredAtSha": "fd10c7dc69cda321cf12fc92810c0f55335669cd",
   "measuredBy": "COHERENCE-AGREE-6",
   "date": "2026-11-12",
-  "note": "the merged line (points 44, 45) and COHERENCE-AGREE-6: chainPrintName.test.jsx, chainPrintSites.walker.test.js, and new titles in coherenceAgreeCures, projectionAgreement, defenceFactReaders.walker, w0WriterAgreement",
+  "note": "CENSUS-5b complement rule narrowed (census5bOffCensusDeclarations: one describe, one title), after 87a14f413",
   "files": 3218,
   "parked": 399,
   "credited": 2819,
