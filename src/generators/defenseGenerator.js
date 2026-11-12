@@ -19,7 +19,7 @@ import { partitionDefenseInstitutions } from '../domain/institutions/defenseInst
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
-import { keepOf } from '../domain/facts/keep.js';
+import { keepOf, fundedGate } from '../domain/facts/keep.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -185,13 +185,14 @@ const computeDefenseScores = (
   const hasHiredForce = (f) => f.hasMercenary || f.hasCharterHall;
   const hasAnyDefense = inst.hasWalls || hasStanding(inst) || hasHiredForce(inst);
   // Economic-upkeep gate (garrison wages, wall maintenance): paid defenses
-  // degrade when the economy cannot fund them. Same shape as econHealthMult —
-  // identity (×1.0) at econOutput >= 50, linear to the floor at 0 — applied
+  // degrade when the place cannot fund them. COHERENCE-UPKEEP (ruling 3, alternative B): every
+  // gate reads the one home, `fundedGate(floor, keepOf(prosperity))` — identity (×1.0) at
+  // Comfortable and above, the floor at Struggling — applied
   // BEFORE stress penalties so their tuned magnitudes keep meaning. Floor 0.6:
   // built walls keep standing and unpaid soldiers desert slowly, never
   // instantly. The community baseline (armed households, terrain alarm) is
   // unpaid and exempt — only the funded portion above it is gated.
-  const milUpkeepMult = Math.min(1, 0.6 + (econOutput / 50) * 0.4);
+  const milUpkeepMult = fundedGate(0.6, keep);
   /** The standing score of a set of flags: everything but the hired force. @param {any} f */
   const standingMilitary = (f) => {
     let m = communityMilBase;
@@ -246,7 +247,7 @@ const computeDefenseScores = (
   // Economic-upkeep gate (patrol provisioning, bounty purses, charter-hall
   // retainers): monster coverage costs coin to keep in the field. Floor 0.7 —
   // higher than the military gate because bounty work partly self-funds.
-  // Identity at econOutput >= 50, applied before stress penalties. The unpaid
+  // Identity at Comfortable and above (the keep home), applied before stress penalties. The unpaid
   // portion — the threat-level communal baseline plus the volunteer
   // traditions (divine clergy, druidic wardens) — is exempt, the same rule
   // the military/internal gates apply to their community baselines; arcane
@@ -254,7 +255,7 @@ const computeDefenseScores = (
   // tradition cap binds, the paid arcane share is assumed cut first.
   const monsterUnpaidBase = monsterThreatBase
     + Math.min(Math.min(35, monsterMagicBonus), (hasDivine ? 18 : 0) + (hasDruid ? 12 : 0));
-  const monsterUpkeepMult = Math.min(1, 0.7 + (econOutput / 50) * 0.3);
+  const monsterUpkeepMult = fundedGate(0.7, keep);
   if (monsterUpkeepMult < 1) {
     monster = Math.round(monsterUnpaidBase + Math.max(0, monster - monsterUnpaidBase) * monsterUpkeepMult);
   }
@@ -281,11 +282,11 @@ const computeDefenseScores = (
   const hasLawInfra = inst.hasCourtSystem || inst.hasPrison || inst.hasGarrison || inst.hasWatch;
   internal = Math.min(100, internal + Math.round(milEffective * (hasLawInfra ? 0.25 : 0.04)));
   // Economic-upkeep gate (watch wages, court and gaol funding): paid order
-  // institutions degrade unfunded. Floor 0.65; identity at econOutput >= 50.
+  // institutions degrade unfunded. Floor 0.65; identity at Comfortable and above (the keep home).
   // Community self-policing (the small-tier baseline) is unpaid and exempt.
   // Applied BEFORE the crime subtraction — a poor settlement's weakened watch
   // must not also dilute the crime pressure it faces.
-  const internalUpkeepMult = Math.min(1, 0.65 + (econOutput / 50) * 0.35);
+  const internalUpkeepMult = fundedGate(0.65, keep);
   if (hasLawInfra && internalUpkeepMult < 1) {
     internal = Math.round(communityIntBase + Math.max(0, internal - communityIntBase) * internalUpkeepMult);
   }
@@ -318,11 +319,11 @@ const computeDefenseScores = (
   // The additive stack above is almost entirely wealth-independent (storage
   // months + flat institution/route bonuses), so a destitute famine port
   // could still score ~70 "Strong economic base". Identity (×1.0) at
-  // econOutput >= 50 — healthy economies are bit-for-bit unchanged; linear
-  // down to ×0.45 at 0 (physical grain in a granary retains value even when
+  // Comfortable and above (the keep home) — healthy places are bit-for-bit unchanged; down
+  // to ×0.45 at Struggling (physical grain in a granary retains value even when
   // the treasury is empty — never zero it). Applied BEFORE stress penalties
   // so their tuned absolute magnitudes keep their meaning.
-  const econHealthMult = Math.min(1, 0.45 + (econOutput / 50) * 0.55);
+  const econHealthMult = fundedGate(0.45, keep);
   economic = Math.round(economic * econHealthMult);
 
   // ── Magical defense score ───────────────────────────────────────────────────
@@ -640,10 +641,9 @@ export function generateDefenseProfile(settlement) {
   // Disasters & Famine: the dossier row reads foodSecurity.resilienceScore,
   // which carries no economic term — but disaster and famine RESPONSE costs
   // money (relief purchases, granary logistics, work crews). Persist a gated
-  // disaster score (floor 0.55, identity at econOutput >= 50, same shape as
+  // disaster score (floor 0.55, identity at Comfortable and above, the keep home, same shape as
   // the other upkeep gates); display layers prefer it over raw resilience.
-  const _econOut = Math.round(instFlags.economyOutput);
-  const disasterGate = Math.min(1, 0.55 + (_econOut / 50) * 0.45);
+  const disasterGate = fundedGate(0.55, keepOf(settlement.economicState?.prosperity));
   const _resilience = foodSecurity?.resilienceScore;
   const disaster = Number.isFinite(_resilience)
     ? Math.round(Math.max(0, Math.min(100, _resilience)) * disasterGate)
