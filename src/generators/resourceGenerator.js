@@ -27,16 +27,16 @@ import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterial
 // The material words live in a leaf (economy/localMaterials.js) so the viability hooks read them too.
 export { MATERIAL_RESOURCE_KEYS, liveMaterialFor };
 
-/**
- * What a terrain strength stands on: any one of these resources, or the route. A strength with
- * none of them is the terrain's, not the town's, and is not the town's to claim.
- * @type {Readonly<Record<string, Readonly<{ keys: ReadonlyArray<string>, routes?: ReadonlyArray<string> }>>>}
- */
 const TIMBER_KEYS = ['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber'];
 const GRAIN_KEYS = ['grain_fields', 'fertile_floodplain'];
 const HERD_KEYS = ['grazing_land', 'alpine_pasture', 'camel_herds'];
 const MINING_KEYS = ['iron_deposits', 'coal_deposits', 'precious_metals', 'gemstone_deposits', 'stone_quarry'];
 const support = (keys, routes = []) => Object.freeze({ keys: Object.freeze(keys), routes: Object.freeze(routes) });
+/**
+ * What a terrain strength stands on: any one of these resources, or the route. A strength with
+ * none of them is the terrain's, not the town's, and is not the town's to claim.
+ * @type {Readonly<Record<string, Readonly<{ keys: ReadonlyArray<string>, routes?: ReadonlyArray<string> }>>>}
+ */
 export const STRENGTH_SUPPORT = Object.freeze({
   'Maritime trade': support(['deep_harbour', 'maritime_access'], ['port']),
   'Fishing industry': support(['fishing_grounds', 'river_fish']),
@@ -67,6 +67,7 @@ export const STRENGTH_SUPPORT = Object.freeze({
   'Exotic goods': support(['date_palms', 'precious_metals', 'gemstone_deposits', 'camel_herds'], ['crossroads', 'port']),
 });
 
+const reading = (text, ...needs) => Object.freeze({ text, needs: Object.freeze(needs.map((g) => Object.freeze(g))) });
 /**
  * The clauses of a terrain's strategic line that name what the ground yields. Each clause lists its
  * readings, the original first; the first whose every group of resources the town has is the one it
@@ -74,7 +75,6 @@ export const STRENGTH_SUPPORT = Object.freeze({
  * clauses about the lie of the land are the terrain's and stay.
  * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ clause: string, readings: ReadonlyArray<Readonly<{ text: string, needs: ReadonlyArray<ReadonlyArray<string>> }>> }>>>>}
  */
-const reading = (text, ...needs) => Object.freeze({ text, needs: Object.freeze(needs.map((g) => Object.freeze(g))) });
 export const STRATEGIC_CLAUSES = Object.freeze({
   plains: Object.freeze([Object.freeze({ clause: 'agricultural heartland', readings: Object.freeze([
     reading('agricultural heartland', [...GRAIN_KEYS, 'grazing_land']), reading('open country')]) })]),

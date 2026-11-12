@@ -301,6 +301,33 @@ function resourceTruthFindings(settlement) {
 }
 
 /**
+ * The income lines that name a local resource, and the resources that make them true.
+ * @type {ReadonlyArray<readonly [RegExp, ReadonlyArray<string>]>}
+ */
+const LOCAL_INCOME_WORDS = Object.freeze([
+  [/^Local ore\b/, ['iron_deposits', 'precious_metals']],
+  [/^Local forest\b/, ['managed_forest', 'timber', 'mountain_timber', 'shipbuilding_timber']],
+  [/^Local quarry\b/, ['stone_quarry']],
+  [/^Local flocks\b/, ['grazing_land', 'alpine_pasture']],
+]);
+
+/** The safety text's court sentences: one says a court sits, the other that none does. */
+const COURT_SITS = /\b(?:a court exists|the court can try|before the court|tried at the court|the court sits|functioning court|with a working court|only a court|prosecution is real|real prosecution)/i;
+const COURT_ABSENT = /\b(?:with no court|without a court|without courts|without a working court|without consistent courts|without prison or courts|no reliable court|lack of reliable courts)/i;
+
+/** A market named as the town's own ("the market", "markets meet"); a black market is not one. */
+const MARKET_NAMED = /(?<!black )\bmarkets?\b/i;
+
+/**
+ * A hook's words for a material, and the must-import key that names it.
+ * @type {ReadonlyArray<readonly [RegExp, string]>}
+ */
+const SCARCE_MATERIAL_WORDS = Object.freeze([[/\b(?:iron|metal)\b/i, 'metals'], [/\btimber\b/i, 'timber']]);
+
+/** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
+const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
+
+/**
  * THE PROJECTION-AGREEMENT ARM (COHERENCE-AGREE, 2026-11-11). One fact, one answer: every field of
  * the record that states a fact the town's own drawn record answers must agree with it. The terrain
  * tables are defaults the town's resources override; a second reader of a fact must not answer it
@@ -322,24 +349,6 @@ function resourceTruthFindings(settlement) {
  * @param {any} settlement
  * @returns {{ resource: Array<{path:string, detail:string, evidence?:string}>, food: Array<{path:string, detail:string, evidence?:string}> }}
  */
-/** The income lines that name a local resource, and the resources that make them true. */
-const LOCAL_INCOME_WORDS = Object.freeze([
-  [/^Local ore\b/, ['iron_deposits', 'precious_metals']],
-  [/^Local forest\b/, ['managed_forest', 'timber', 'mountain_timber', 'shipbuilding_timber']],
-  [/^Local quarry\b/, ['stone_quarry']],
-  [/^Local flocks\b/, ['grazing_land', 'alpine_pasture']],
-]);
-
-/** The safety text's court sentences: one says a court sits, the other that none does. */
-const COURT_SITS = /\b(?:a court exists|the court can try|before the court|tried at the court|the court sits|functioning court|with a working court|only a court|prosecution is real|real prosecution)/i;
-const COURT_ABSENT = /\b(?:with no court|without a court|without courts|without a working court|without consistent courts|without prison or courts|no reliable court|lack of reliable courts)/i;
-
-/** A market named as the town's own ("the market", "markets meet"); a black market is not one. */
-const MARKET_NAMED = /(?<!black )\bmarkets?\b/i;
-
-/** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
-const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
-
 export function projectionAgreementFindings(settlement) {
   const resource = [];
   const food = [];
@@ -372,7 +381,7 @@ export function projectionAgreementFindings(settlement) {
     if (/\b(?:war|armies|siege)\b/i.test(hook) && facts.warState === 'peace') {
       resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook asserts a war the record does not hold.', facts.warState));
     }
-    for (const [word, material] of [[/\b(?:iron|metal)\b/i, 'metals'], [/\btimber\b/i, 'timber']]) {
+    for (const [word, material] of SCARCE_MATERIAL_WORDS) {
       const live = word.test(hook) ? liveMaterialFor(material, available) : null;
       if (live) resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook makes a material scarce that a live local resource yields.', `${material}: ${live}`));
     }
