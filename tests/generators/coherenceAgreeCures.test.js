@@ -255,3 +255,28 @@ describe('item 2 (ii): the court-without-prison crime lines declare both facts',
     for (const atom of ['court', 'prison']) expect(assertDeclarable(atom).dimension).toBe(atom);
   });
 });
+
+/**
+ * ITEM 3′ (i) (COHERENCE-AGREE-4, the chair's ruling of 2026-11-12): whether a chain yields its table's outputs is
+ * ONE predicate in a leaf (`domain/chainYield.js :: chainYieldRefused`), read by the exporter and by every page that
+ * prints a town's chain outputs. Lifting it moves nothing (field diff, 0 leaves over L2 + the golden's 525).
+ */
+describe('item 3′ (i): the exporter\'s refusal is the leaf\'s', () => {
+  test('impaired, or a depleted input, is refused; the record\'s condition answers first', async () => {
+    const { chainYieldRefused } = await import('../../src/domain/chainYield.js');
+    expect(chainYieldRefused({ status: 'impaired', resourceInputCondition: 'available' })).toBe(true);
+    expect(chainYieldRefused({ status: 'vulnerable', resourceInputCondition: 'depleted' })).toBe(true);
+    expect(chainYieldRefused({ status: 'vulnerable', resourceInputCondition: 'available', resourceDepleted: true })).toBe(false);
+    expect(chainYieldRefused({ status: 'running', resourceDepleted: true })).toBe(true);
+    expect(chainYieldRefused({ status: 'running', resource: 'Fertile Floodplain' }, (r) => r === 'Fertile Floodplain')).toBe(true);
+    expect(chainYieldRefused({ status: 'running', resource: 'Fertile Floodplain' })).toBe(false);
+    expect(chainYieldRefused(null)).toBe(false);
+  });
+  test('the exporter reads the leaf, and keeps no private refusal of its own', async () => {
+    const { readFileSync } = await import('node:fs');
+    const site = readFileSync(new URL('../../src/generators/computeActiveChains.js', import.meta.url), 'utf8');
+    expect(site).toMatch(/import \{ chainYieldRefused \} from '\.\.\/domain\/chainYield\.js';/);
+    expect(site).toMatch(/\.filter\(ch => ch\.exportable && !chainYieldRefused\(ch, isDepletedResource\)\)/);
+    expect(site).not.toMatch(/chainIsDepleted/);
+  });
+});
