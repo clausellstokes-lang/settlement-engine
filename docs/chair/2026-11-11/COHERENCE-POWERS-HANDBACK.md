@@ -384,6 +384,8 @@ walker's "every drawn pool has a row" is red on this tree for that cause alone.
 | F5 the veil | 88616babb | unveiled memberships in a clandestine power 47 (R 17, S 30; 22 towns) | 0 (only the veil bit moves, 22 births) | stressPowersFaced pins the review's 7 towns, red first |
 | F4 the missing rows | a41c5b4f4 | powers with neither a member nor a line 4 (R 3, S 1) | 0 (1 record moves) | stressPowersFaced pins the review's 3 towns, red first |
 | F6 the crisis power's leader | 9b1bcc3fd | crisis powers led by a person who leads another 44 (R 14, S 30) | 0 (44 births: the first, the cast's order; 12 on their declared line) | stressPowersFaced's second check reads every first, 4 pins, red first |
+| F13 the crisis guard on a corpus | b1a3934fa | 22 seeds | the pins + 180 births (15 crises × 6 sizes × 2); red at the merged start (3 of 4 checks, 33 rows) | stressPowersFaced.test.js |
+| F10 the card's two offices | 01ccf258f | an office's title beside the office held: 189 (R 52, S 137) | 0 (print time; records 0 of 4,305) | dualHatReaders.test.js, red first |
 
 F12's L3: 0 of 4,305 whole-record hashes differ, merged start against the split. The split is SIZED: docs and sealed
 packets cite this file's lines up to :787 and the citation walker reds a new past-EOF citation, so the small cohesive
@@ -455,16 +457,16 @@ The tip is LOCAL and UNPUSHED (the push refusal stands): 9b1bcc3fd plus this doc
 `instrument.mjs` + `runplan.sh` the probe tree's resize log; `f1.mjs`, `crisis.mjs`, `text.mjs`/`textsum.mjs`,
 `f7.mjs`, `f456.mjs`, `hashdiff.mjs`, `sound.mjs`, `crisislines.mjs`).
 
-**Remaining, in order:** F13 (stressPowersFaced reads a CORPUS: six sizes, every crisis forced, the review's F4/F5 rows
-kept as pins); F3 (the claimant faced by the succession's cast, minted as the occupier's governor is; the old families'
-body on the next free noble rung; STOP if a mint needs a card a guard refuses); F10 (the leader's card composes the two
-hats as the seat row does: a house honorific that is an office title, 39); F9 (the dual-hat guard reds on the review's
-planted fault, births through birthConfig; the four pins' expectations as literals); F8 (the capture table, line
-f72262c68 against the tip, by kind, both corpora, FULL capture only with a criminal power standing; the named-house check);
-F11 (the draft record's six surfaces measured at the tip; whoRunsThisTownDm re-keyed by identity to a birth with a hidden
-boost); the wars (thirty realms, the restated line); then the lane made whole: the whole-lane field diff, the ONE draft
-record current (the six pools waiting for the narrow door; the crisis table as a measure; the capture table; the
-mobilization count), L5's whole-suite failing set at the final tip, and the edge bundles re-emitted last, alone.
+**Remaining, in order (the chair's order of 2026-11-12):** F9 (the dual-hat guard reds on the review's planted fault,
+births through birthConfig; the four pins' expectations as literals); F11 (the draft record's six surfaces measured at
+the tip; whoRunsThisTownDm re-keyed by identity to a birth with a hidden boost); F3 (the claimant faced by the
+succession's cast, minted as the occupier's governor is; the old families' body on the next free noble rung; STOP if a
+mint needs a card a guard refuses); F8 (the capture table, line f72262c68 against the tip, by kind, both corpora, FULL
+capture only with a criminal power standing, with l2-politically_fractured-metropolis-13 by name; the named-house check).
+THE LONG RUNS ARE A SUCCESSOR'S (the chair, 2026-11-12): the wars (thirty realms, the restated line); the whole-lane
+field diff; the ONE draft record current (the six pools waiting for the narrow door; the crisis table as a measure; the
+capture table; the mobilization count; the crisis seats' coup moves by crisis and size); L5's whole-suite failing set at
+the final tip; the edge bundles re-emitted last, alone.
 
 **The chair's notes of 2026-11-12 recorded:** the two `tests/components/powerSeatRender` reds were THE LANE'S OWN before
 the third seat (green at the line f72262c68, red at 1a32c200a: the not-built rule), re-keyed by identity at 39086c96b.
