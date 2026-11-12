@@ -163,6 +163,11 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(note('Resource Import'))).toContain('The viability notes an import a live local resource yields.');
     expect(details(note('Provisioning at Scale'))).toEqual([]);
   });
+  test('Part B (i): "no established food chains" beside a roster that works its own land', () => {
+    const said = (institutions) => details({ ...record({ institutions, economicState: { foodSecurity: { diversityNote: 'no established food chains', foodRecord: { grownPct: 90 } } } }), tier: 'village' });
+    expect(said([{ name: 'Farmland' }, { name: 'Common grazing land' }])).toContain('The food record says no food chains beside a roster that works its own land.');
+    expect(said([{ name: 'Parish church' }])).toEqual([]);
+  });
   test('available worked land the food record does not count as a source', () => {
     const land = (sources) => record({ config: { nearbyResources: ['grazing_land'], nearbyResourcesNativeDepleted: [] },
       economicState: { foodSecurity: { foodRecord: { grownPct: 50, foodSources: sources } } } });
@@ -220,6 +225,8 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-town-81', tier: 'town' }, { seed: 'rvw12-city-60', tier: 'city' }, { seed: 'rvw12-city-67', tier: 'city' }, { seed: 'rvw12-metropolis-23', tier: 'metropolis' },
   // STOP 1 (F8's compound half): "Grain and salted pork" and its kin in towns growing 90% or more
   { seed: 'rvw12-town-19', tier: 'town' }, { seed: 'rvw12-town-121', tier: 'town' }, { seed: 'rvw12b-town-186', tier: 'town' },
+  // Part B (i): Farmland, Common grazing land and a Dairy farmer beside "no established food chains"
+  { seed: 'rvw-ten-3', tier: 'village', stress: 'wartime' }, { seed: 'agree-thorp-2', tier: 'thorp' }, { seed: 'agree-hamlet-0', tier: 'hamlet' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
 ];

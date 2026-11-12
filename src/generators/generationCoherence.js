@@ -27,6 +27,7 @@ import { offersFoodSurplus } from '../domain/foodSurplus.js';
 import { GRAIN_TOP_UP } from './economy/primaryTradeLists.js';
 import { TRADE_LINE_BANDS, tradeBandContradictsLabel } from './economy/prosperity.js';
 import { PEACE_IRON_HOOKS } from './economy/outlookHookSiblings.js';
+import { NO_FOOD_CHAINS_LINE, foodLandOf } from './foodLand.js';
 import {
   MATERIAL_RESOURCE_KEYS,
   STRATEGIC_CLAUSES,
@@ -494,6 +495,11 @@ export function projectionAgreementFindings(settlement) {
     const said = SHORTAGE_LAND_WORDS.find(([words]) => words.test(label));
     const live = said ? said[1].find((key) => available.includes(key)) : null;
     if (live) food.push(finding(`economicState.primaryImports[${index}]`, 'A shortage import says land is spent that a live resource is.', `${label}: ${live} available`));
+  }
+  // Part B (i) (COHERENCE-AGREE-3): "no established food chains" beside a roster that works its own land.
+  if (settlement?.economicState?.foodSecurity?.diversityNote === NO_FOOD_CHAINS_LINE
+    && foodLandOf(String(settlement?.tier || ''), settlement?.institutions || [], settlement?.config || {}).worksOwnLand) {
+    food.push(finding('economicState.foodSecurity.diversityNote', 'The food record says no food chains beside a roster that works its own land.'));
   }
   const sources = settlement?.economicState?.foodSecurity?.foodRecord?.foodSources;
   for (const record of nativeResourceConditionRecords(settlement?.config || {})) {

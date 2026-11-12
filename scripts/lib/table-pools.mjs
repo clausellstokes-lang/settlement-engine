@@ -100,6 +100,7 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/generators/economy/foodBalance.js', name: 'OUTLOOK_HOOK_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/economy/incomeLineSiblings.js', name: 'INCOME_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE-3: the income lines on the town's own land
   { module: 'src/generators/economy/prosperity.js', name: 'PROSPERITY_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE: the market lines' twins
+  { module: 'src/generators/foodLand.js', name: 'FOOD_RECORD_LINE_SIBLINGS', kind: 'siblings' }, // COHERENCE-AGREE-3: the diversity line's own-plots twin
   { module: 'src/generators/narrativeText.js', name: 'POLITICAL_FLAVOR_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/npcGenerator.js', name: 'NPC_GOAL_SIBLINGS', kind: 'siblings' },
   { module: 'src/generators/safetyProfile.js', name: 'SAFETY_LINE_SIBLINGS', kind: 'siblings' },
