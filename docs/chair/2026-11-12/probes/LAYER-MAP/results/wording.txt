@@ -1,0 +1,66 @@
+src/components/InstitutionalGrid.jsx:413:          const matchSearch = !search || name.toLowerCase().includes(q) || def.desc?.toLowerCase().includes(q);
+src/components/settlement/CatalogPicker.jsx:44:        (i.desc || i.description || '').toLowerCase().includes(q) ||
+src/components/compendium/CatalogTabs.jsx:129:  const filtered = CD.archetypes.entries.filter(a => (effectiveCat==='All'||a.cat===effectiveCat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
+src/components/compendium/CatalogTabs.jsx:222:    {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.viabilityNote||s.description||s.desc||'').toLowerCase().includes(search)||(s.crisisHook||'').toLowerCase().includes(search)).map(s => (
+src/components/compendium/CatalogTabs.jsx:310:    return all.filter(i => (i.name||'').toLowerCase().includes(q) || institutionDisplayName(i).toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q)));
+src/components/compendium/CustomContent.jsx:150:        || (i.description||'').toLowerCase().includes(search)
+src/components/compendium/ReadOnlyCustomContentList.jsx:40:        || (item.description || '').toLowerCase().includes(search)
+src/components/ServicesTogglePanel.jsx:142:        Object.entries(services).some(([n,d]) => n.toLowerCase().includes(search.toLowerCase()) || (d.desc||'').toLowerCase().includes(search.toLowerCase()))
+src/components/new/tabs/ServicesTab.jsx:147:  const searchResults = query ? allServices.filter(s => s.text.includes(query)) : null;
+src/components/TradeDynamicsPanel.jsx:164:    ? goods.filter(g => g.name.toLowerCase().includes(search.toLowerCase()) || (g.desc||'').toLowerCase().includes(search.toLowerCase()) || (g.category||'').toLowerCase().includes(search.toLowerCase()))
+src/generators/generationCoherence.js:428:      const said = readings.find((r) => r.text && r.needs.length && line.includes(r.text));
+src/generators/generationCoherence.js:588:    const matches = entry.text.match(TEMPLATE_TOKEN);
+src/generators/narrativeGenerator.js:624:  const churchControlsEcon = economicState.situationDesc?.toLowerCase().includes('church controls');
+src/domain/dossier/dossierSearch.js:167:  return object.text.some((t) => foldSearchText(t).includes(q)) ? MATCH.TEXT : MATCH.NONE;
+src/domain/worldPulse/settlementLifecycleKernel.js:312:    if (String(e?.reason || '').startsWith('Displaced population')) return true;
+src/domain/events/mutateEntities.js:625:        if (role) return String(imp.description || '').toLowerCase().includes(`(${role})`);
+src/domain/prose/wiringCensus.js:325:    if (lit.kind === 'template' && lit.text.includes('${')) continue;
+src/domain/prose/wiringCensus.js:333:    if (lit.kind !== 'template' || !lit.text.includes('${')) continue;
+src/domain/coherence/foodWordsFindings.js:116:  return roster.some((/** @type {{ name?: unknown, desc?: unknown } | null | undefined} */ inst) => /\bfish ?monger|\bfish market\b/i.test(String(inst?.name ?? '')) && typeof inst?.desc === 'string' && inst.desc.includes(sentence));
+src/domain/coherence/crisisCastFindings.js:81:        ? (row.reason.startsWith(CAST_REASONS.collaboratorAmbition) ? 'gains' : null)
+src/components/new/tabs/DefenseTab.jsx:650:              && new RegExp(`^${cap.status.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(cap.note.trim());
+src/components/new/tabs/OverviewTab.jsx:340:          <p className={/^[A-Za-z]\s/.test(r.arrivalScene)?'oc-dropcap-prose oc-dropcap-prose--lone':'oc-dropcap-prose'} data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
+src/generators/generationCoherence.js:605:    if (/\bthe\s+(?:the|a|an)\b/i.test(entry.text)) {
+src/generators/generationCoherence.js:607:    } else if (/(?<!\.)\.\.(?!\.)/.test(entry.text)) {
+src/generators/generationCoherence.js:609:    } else if (/\b(?:there is|in)\s+a\s+(?:outstanding|embattled)\b/i.test(entry.text)) {
+src/domain/display/defenseDisplay.js:124:    && DEFENSE_VULNERABILITY_RE.test(row.reason)
+src/domain/display/stateProse/economyStateProse.js:750:  return rows.find((row) => row.institution) || rows.find((row) => TERRAIN_ONLY_RE.test(row.reason)) || null;
+src/components/ConfigurationPanel.jsx:234:                {!isOff&&st!=='allow'&&<span style={{fontSize:FS.micro,marginRight:3,opacity:0.85}}>{STATE_LABELS[st].split(' ')[0]}</span>}
+src/components/new/tabs/EconomicsTab.jsx:157:          // A chain may lack a label; default to '' so .split(' ')[0] is always
+src/components/new/tabs/EconomicsTab.jsx:159:          const chainKeyword = String(chain.label || '').split(' ')[0].toLowerCase();
+src/components/new/SupplyChainsPanel.jsx:174:          return e.includes(o.toLowerCase().split(' ')[0]) ||
+src/components/new/SupplyChainsPanel.jsx:175:            o.toLowerCase().includes(e.split(' ')[0]);
+src/generators/economy/finishedGoodsDemand.js:84:      if (label && !alreadyImporting(label.split(' ')[0])) {
+src/generators/tradeCommodity.js:69:  if (firstWordFallback) return lower.split(' ')[0] || fallback;
+src/domain/display/foodBalanceBar.js:78:  const first = String(note ?? '').trim().split(/\s+/)[0].toLowerCase();
+src/domain/display/stateProse/powerStateProse.js:869:    const token = key.slice(prefix.length + 1).split(' ')[0];
+src/domain/summary/settlementQuickGuide.js:530:  const lead = descriptors.split(' ')[0] || '';
+src/domain/prose/composedWalker.js:750:  const first = text.trim().replace(/^,\s*/, '').split(/\s+/)[0] || '';
+src/pdf/sections/SupplyChainFlow.jsx:97:          return e.includes(String(o).toLowerCase().split(' ')[0]) ||
+src/pdf/sections/SupplyChainFlow.jsx:98:            String(o).toLowerCase().includes(e.split(' ')[0]);
+src/components/new/tabs/DefenseTab.jsx:331:  const caps = deriveSupportingCapabilities(r).filter((cap) => cap.label !== 'Economic Backing');
+src/components/primitives/RegenerationDeltaCard.jsx:321:  const label = typeof entry?.label === 'string' ? entry.label.trim() : '';
+src/components/generate/CharacterPresetCard.jsx:185:        {ARCHETYPE_GROUPS.filter(g => magicExists || g.label !== 'Arcane').map(({ label, keys }) => (
+src/components/contentStudio/ContentDraftEntry.jsx:247:          const editable = action === 'edit' && truth.label !== 'unsupported';
+src/components/contentStudio/ContentDraftEntry.jsx:262:                <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: truth.label === 'unsupported' ? MUTED : BODY, fontFamily: sans }}>
+src/domain/governanceLedger.js:58:      legitimacyLabel: typeof leg.label === 'string' ? leg.label : null,
+src/domain/facts/famine.js:41:  const label = typeof fs?.label === 'string' && fs.label !== '' ? fs.label : null;
+src/domain/autonomy/accelerationOps.js:108:  const label = typeof entry.label === 'string' && entry.label ? entry.label : String(nudge.type).replace(/_/g, ' ');
+src/domain/dossier/plotHooks.js:499:    const label = typeof entry.label === 'string' && entry.label ? entry.label : 'Crisis';
+src/domain/tuning/proposedSoakBands.js:72:  if (typeof e.label !== 'string' || !e.label) reasons.push('missing label');
+src/domain/worldPulse/npcLadderFactionMembership.js:33:  if (typeof f.label === 'string' && f.label) return f.label;
+src/domain/display/defenseDisplay.js:443:  return magicWorksAt({ settlement: r }) === false ? caps.filter((c) => c.label !== 'Arcane Support') : caps;
+src/domain/display/stateProse/legibilityRung.js:65:      && typeof row.label === 'string' && row.label !== ''
+src/domain/content/contentSamplePreview.js:298:    foodStatus: typeof food.label === 'string' ? food.label : null,
+src/domain/content/customContentUsage.js:341:  if (typeof item.name === 'string' || typeof item.label === 'string') {
+src/domain/coherence/hookTruth.js:142:  const foodBand = typeof band.label === 'string' && band.label !== '' ? band.label : null;
+src/domain/townMap/mapEdits.js:320:    const label = typeof a.label === 'string' ? a.label.trim().slice(0, ANNOTATION_LABEL_MAX) : '';
+src/domain/townMap/mapEdits.js:799:  const label = typeof meta.label === 'string' && meta.label ? meta.label.slice(0, 60)
+src/domain/townMap/mapEdits.js:800:    : (typeof c.label === 'string' && c.label ? c.label.slice(0, 60) : 'Bespoke');
+src/domain/townMap/ladderRead.js:186:      : typeof f.label === 'string' && f.label ? f.label : '';
+src/domain/intent/interpretReview.js:53:  return op?.label === 'required' ? 'misread_requirement' : 'over_inference';
+src/domain/intent/applyDispatch.js:94:  const label = typeof op.label === 'string' ? op.label : 'uncertain';
+src/domain/intent/applyDispatch.js:187:    const l = typeof it.label === 'string' ? it.label : 'uncertain';
+src/pdf/sections/DefenseSecurity.jsx:303:          {d.supportingCapabilities.filter((sc) => sc.label !== 'Economic Backing').map((sc, i) => (
+src/pdf/lib/generationContracts.js:59:    label: typeof check.label === 'string' ? check.label : 'Unnamed check',
+src/pdf/lib/generationContracts.js:70:    label: typeof judgment.label === 'string'

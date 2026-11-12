@@ -1,0 +1,150 @@
+1. DS-ECO-1::COMBINATION C1: a high rung on a working approach vid 2
+   [crisis: any]
+   {settlement} lives on a {complexity} and ends each year with money to spare, and the traffic on its {access} keeps it that way.
+2. DS-ECO-2::FOOD: balanced vid 2
+   [no crisis: hunger]
+   Food is not a subject here. The town feeds itself, and it feeds itself exactly.
+3. DS-ECO-2::GRANARY: thin vid 2
+   [institution: granary]
+   People in {settlement} have begun asking when the granary was last this low. Nobody yet asks what happens when it is empty.
+4. DS-ECO-3::ADEQUATE vid 1
+   [crisis: any]
+   The traffic through {settlement} matches what the ledgers expect of it. Arrivals and departures come out even, week on week.
+5. DS-ECO-4::MIXED: exports dear, imports cheap vid 1
+   [market]
+   In {settlement} what the town sells is dear and what it buys is cheap.
+6. DS-ECO-8::MODERATE vid 3
+   [no crisis]
+   Nothing about {settlement}'s condition asks to be remarked on. The town supports itself and has a little in hand.
+7. DS-ECO-9::SECURE vid 3
+   [no crisis: hunger]
+   {settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.
+8. DS-ECO-9::BLOCKADED vid 3
+   [grain]
+   {settlement} is cut off from its supply and eating down what it holds. The stores are answering the siege in place of the fields.
+9. DS-ECO-11::TERRAIN: Forest vid 1
+   [game · grain]
+   The timber and what lives in it are {settlement}'s standing wealth; the fields here are clearings rather than country.
+10. DS-DEF-1::readiness STRONG vid 2
+   [crisis: any]
+   What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
+11. DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force vid 2
+   [gate]
+   Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
+12. DS-DEF-2::Beasts & Monsters: settled, nothing organized vid 4
+   [crisis: any · crisis: threat]
+   {settlement} kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built.
+13. DS-DEF-3::Very Safe vid 4
+   [watch · crisis: any]
+   There is money at {settlement} and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+14. DS-DEF-4::structure organized vid 4
+   [no crisis: unrest]
+   There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.
+15. DS-DEF-6::Logistics & Supply: Granary + port vid 1
+   [crisis: any]
+   {settlement}'s granary tally and its open harbour make it the hardest kind of place to starve out: a siege would need a fleet as well as an army.
+16. DS-DEF-7::a contributor with a RECORDED reason, adverse vid 3
+   [walls]
+   The town can name what has cost it at {settlement}, exactly, and names it whenever the subject of the walls comes up.
+17. DS-DEF-8::override: BEAST PRESSURE vid 2
+   [guardPresence]
+   The guards at {settlement} watch the country, not the town, and they do not stand down.
+18. DS-DEF-10::posture COMMAND SPLIT (politically fractured) vid 3
+   [gate]
+   Orders reach the gate at {settlement} from two directions, and the people at the gate have quietly decided which to obey.
+19. DS-DEF-11::WALLED-QUIET vid 1
+   [no crisis: unrest · crisis: any · no crisis: threat]
+   Though the present peace asks nothing of its defences, {settlement} keeps its {defwork} in repair: mending costs less than building again.
+20. DS-POP-1::QUANTITY: a hundred or so vid 3
+   [market]
+   About a hundred have left. That is enough to change what the market can sell and what the levy can raise.
+21. DS-GEN-1::crime_wave vid 2
+   [watch · crisis: any]
+   The watch's book at {settlement} is thick with the same few crimes written many times over, and the names in it are almost never the same twice.
+22. DS-GEN-1::infiltration_fear vid 5
+   [gate · no crisis: infiltrated · crisis: any]
+   {settlement} watches its strangers closely but lets them stay; the gate asks questions, the hall has passed no rule.
+23. DS-GEN-1::occupation_legacy vid 3
+   [population: ≥ middling · no crisis: occupied · no ruler: occupier · crisis: any]
+   {settlement}'s rolls still carry the shape the occupation put on them (the same quarters taxed hardest, the same trades exempt), and no one now living wrote either rule.
+24. DS-GEN-1::succession_crisis vid 1
+   [crisis: any]
+   Who follows at {settlement} is not written anywhere the clerks can point to, and the clerks have begun to mind.
+25. DS-GEN-3::scores.military: WEAK vid 3
+   [no crisis: threat · no crisis: wartime · crisis: any]
+   Few in {settlement} bear arms, and the town has not needed them to.
+26. DS-GEN-3::scores.internal: ADEQUATE vid 1
+   [no crisis: unrest · crisis: any]
+   {settlement} is orderly on the main streets and less particular about the others.
+27. DS-GEN-3::scores.magical: ADEQUATE vid 3
+   [magic]
+   {settlement} sends for a practitioner when it must and manages without one otherwise.
+28. DS-GEN-3::economicViability.viable: true vid 3
+   [no crisis: threat · crisis: any]
+   Nothing suggests {settlement} will be anything but more of the same.
+29. DS-GEN-3::foodSecurity.label: Surplus vid 2
+   [no crisis: hunger · crisis: any]
+   A thin year in {settlement} is a poorer year and not a hungry one.
+30. DS-GEN-3::foodSecurity.label: Deficit vid 2
+   [population: ≥ middling · crisis: any]
+   There is not enough food in {settlement} for everyone, and the poorest quarters go without first.
+31. DS-GEN-7::power_stress: occupation against stated stability vid 1
+   [no crisis: unrest]
+   {settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.
+32. DS-GEN-9::event type: economic vid 3
+   [market]
+   {event} turned {settlement}'s fortunes {timeband_since}, though nothing in today's market shows it.
+33. DS-HK-1::category safety: the streets are the opening vid 5
+   [no crisis: threat · no crisis: unrest · crisis: any · no walls]
+   {settlement} is safer than its country, and what threatens it comes from the country around it rather than from within.
+34. DS-HK-1::clock faction_split vid 3
+   [crisis: any]
+   The people of {settlement} who deal with both {faction} and {faction2} are the ones who will have to choose first.
+35. DS-GEN-13::NO-MARKET vid 1
+   [gate · institution: tavern]
+   No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
+36. DS-GEN-17::GREAT HOUSE: monastery vid 1
+   [institution: monastery]
+   Robed men and women from the monastery are a common sight on the way into {settlement}.
+37. DS-POW-2::siege matched vid 5
+   [no walls]
+   Everything at {settlement} answers to the siege now. Whatever the hall was arguing about before, the siege has settled the argument.
+38. DS-POW-5::FLAG: stateCrime, heavy vid 3
+   [no garrison]
+   The {seat}'s armed officials at {settlement} take what they want and answer to nobody; people who argue with them are not seen again.
+39. DS-POW-6::GM ADVISORY: the commander is a political actor vid 1
+   [commander]
+   The commander at {settlement} is a political player in their own right. Whatever the {seat} plans needs the commander's backing, and that backing has to be kept, bought or worked around.
+40. DS-STR-1::FAMINE vid 1
+   [institution: granary]
+   There is not enough to eat, and everyone knows it now. The granary feeds fewer people each week.
+41. DS-STR-1::INSURGENCY vid 5
+   [watch]
+   The watch's book at {settlement} shows new patrol routes, and they now go round the places they used to cover.
+42. DS-STR-1::MASS MIGRATION vid 11
+   [migration: exodus]
+   Each season more doors in {settlement} are boarded up, and nobody expects the leaving to stop soon.
+43. DS-STR-2::ORIGIN: arcane_ascendancy vid 1
+   [magic]
+   The casters are moving on the seat. Wards around the council hall have failed more than once this season, and the mages responsible shrug.
+44. DS-CND-1::DIRECTION: stable · CRISIS: mass_migration vid 1
+   [migration: influx]
+   Families still arrive in {settlement}, but no faster than before, and the camp has become a place people live.
+45. DS-CND-1::ARCHETYPE: boom vid 3
+   [no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]
+   Coin is easy here: work is plentiful, wages hold, and nobody asks what happens if the trade moves elsewhere.
+46. DS-WAR-1::statusLabel: At war (no front at the walls, no army abroad) vid 4
+   [no walls]
+   {settlement} is at war with {counterpart} and has not been touched by it; the distance between the two towns is doing the work that arms would otherwise have to.
+47. DS-WAR-2::territorial · honored vid 3
+   [walls]
+   {counterpart}'s troops have held {settlement}'s walls quietly for so long that the occupation is starting to look permanent.
+48. DS-WAR-3::* vid 4
+   [war: peace]
+   {settlement} has had no war and no creed for so long that nobody thinks about either.
+49. DS-FTH-1::PATRON: rankAxis: major vid 3
+   [clergy]
+   {settlement} keeps {creed}, a faith holding seats far beyond this one. Its clergy speak with the confidence of people who are not alone.
+50. DS-FTH-1::SINK: unaffiliated present, arc rising vid 1
+   [crisis]
+   The unaffiliated are coming back to the rites, now that times are hard.

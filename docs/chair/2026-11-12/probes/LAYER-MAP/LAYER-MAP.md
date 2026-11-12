@@ -16,6 +16,8 @@
 
 ## 0. The answer in brief
 
+*Items 7–12 (the chair's added measures) follow section 6; the limits are section 13.*
+
 - **Layers.** The town record has five strata (L0–L4). The facts sit on L1–L5. The state-prose pools sit on L1–L5, plus a sixth column, W: desks that read the campaign world rather than the town.
 - **Where two answers are born.** Almost always in one of three places:
   - **(a) A line selected at a lower layer than the fact it asserts.** The magic-weight line is L2 while practitioners are L4. The crime desk's capture pressure is L2 while the hall's capture state is L4–5. The beasts row is L1 while the readiness grade is L3.
@@ -99,13 +101,13 @@ A fact's layer is 1 + the highest stored layer its value depends on.
 
 \* traced in `facts.mjs` only; not in the perturbation set.
 
-**The vocabulary's 47 dimensions** (`FACT_DIMENSIONS`) **by layer, EXECUTED:**
-- **L1:** 31 (walls, gate, watch, market, temple, docks, institution, crisis, migration, war, terrain, route, port, culture, …).
-- **L2:** 8 (imports, exports, famine, starving, fish, game, grain, livestock).
-- **L3:** 3 (guild, organised crime, ruler).
+**The vocabulary's 51 dimensions** (`FACT_DIMENSIONS`: 43 presence, 7 band, 1 crisis; every one has a reader) **by layer, EXECUTED:**
+- **L1:** 34 (walls, gate, watch, market, temple, docks, institution, crisis, migration, war, terrain, route, port, culture, magic, tier, population, magic level, …).
+- **L2:** 11 (imports, exports, famine, starving, fish, game, grain, livestock, food, stores, prosperity).
+- **L3:** 5 (guild, organised crime, ruler, crime, priest).
 - **L4:** 1 (other npc).
 
-The bare perturbation could not test the band atoms, because they have no comparator: tier, population, magic level, food, stores, prosperity and crime. They take their home fact's measured layer: 1, 1, 1, 2, 2, 2 and 3.
+The bare perturbation could not test nine of them, because they need a comparator or a key: the seven bands (tier, population, magic level, food, stores, prosperity, crime), magic and priest. These take their home fact's measured layer. *(An earlier draft of this file said "47 dimensions"; that was a miscount, corrected here.)*
 
 ### 2b. The eleven twice-derived facts, by the layer of each derivation
 
@@ -403,7 +405,256 @@ Six measured strata exist (L0–L5). They fall into three kinds of condition. Th
 
 Everything else (reorder, connectives) waits, because `composeStateProse` already owns connectives and the owner signs that copy.
 
-## 7. What I did not do, and the limits
+## The chair's four added measures, and two more (items 7–12, sent 2026-11-12 18:55–19:07; read after the first hand-back)
+
+**The instrument for 7, 8, 10 and 12:** `depth.mjs`, EXECUTED over all 720 births in 33 seconds.
+- **The hook.** The tree's kernel is wrapped *in memory* by the loader hook (`jsx-loader.mjs`, `LAYER_MAP_HOOK=1`; the tree's file is not changed). Every real `eligibleVariants` call the desks make is then seen with the desk's own options: slots, audience, the answered dimensions, the facts.
+- **A disqualifier** is either of two things:
+  - today's gates: the declared atoms, the kernel dimensions, the pool's brace group;
+  - **the words**: a line naming a registered thing (the walker's `thingsNamedIn`) in a town where the walker's own `absent(factsOf)` says the town lacks it.
+
+  A gate is a disqualifier (the owner's ruling (a)).
+- **Coverage.** 368 of the 856 corpus pools are reached by the public-prose sites, over **55,197** (pool, town) draws. The other 488 pools are mounted elsewhere (GM-only views, the campaign world) and are **not** measured here.
+- **The class table** §5.5 already covers the generator data pools (5 with no line).
+- **Audience.** The draw is the player audience, as the sites draw. Each case also carries the owner view (`linesLeftOwnerView`).
+
+## 7. POOL DEPTH UNDER DISQUALIFIERS
+
+**The distribution of lines left per (pool, town) draw**, slot-silenced draws left out:
+- 1,061 draws leave **none**;
+- **3,243 leave one**.
+
+**The median lines left per pool:**
+
+| lines left (median) | pools |
+|---|---|
+| 0 | 10 |
+| 1 | 18 |
+| 2 | 88 |
+| 3 | 185 |
+| 4 | 57 |
+| 5 | 5 |
+| 6 | 5 |
+
+**By layer:**
+
+| layer | pools reached | draws | one left | none left | bill (3 at 95%) |
+|---|---|---|---|---|---|
+| L1 | 57 | 5,493 | 92 | 1 | 20 |
+| L2 | 117 | 13,695 | 1,280 | 607 | 76 |
+| L3 | 68 | 10,922 | 401 | 33 | 35 |
+| L4 | 115 | 22,145 | 1,436 | 399 | 115 |
+| L5 | 10 | 2,222 | 34 | 21 | 5 |
+| W | 1 | 720 | 0 | 0 | 0 |
+
+**THE WRITING BILL.** Giving every reached pool at least three eligible lines in 95% of the towns that draw it takes **251 new lines in 162 pools**. This is a lower bound: it assumes lines that presume nothing, each serving every town of its pool.
+
+**The words remove almost nothing today.** Only 6 cases (369 towns) lose a line to its words, and none is emptied by them. The emptiness is the gates' and the audience's, not the words'. The words matter for the lines a builder declares next, not for today's eligibility.
+
+**(a) The read sample: 50 declared variants**, a fixed stride over the corpus (`results/sample50.txt`; READ, my judgment):
+
+| class | count | what it is |
+|---|---|---|
+| truth | **39** | e.g. `[gate]` on "the gates close on time"; `[institution: granary]` on "the granary feeds fewer"; `[population: ≥ middling]` on "the poorest quarters" |
+| not a requirement at all | **5** | `crisis: any`: a **widening** in a crisis-scoped pool (232 variants carry it) |
+| flavour: a requirement that truth does not need, a weight's job | **5** | `[market]` on "what the town sells is dear" (trade needs no market); `[no walls]` ×3: the wall-free twins of F10 ("Everything at {settlement} answers to the siege now", "safer than its country", "has not been touched by it"), each **true in a walled town too**; `[no garrison]` on armed officials who answer to nobody |
+| borderline | **1** | `[no crisis: infiltrated]` on a watched-strangers line |
+
+So of the 45 that are requirements, about **5 or 6 (11–13%) are flavour**. The largest family: 42 variants carry `no walls`. Where each is the twin of a `walls` line, it is gated for fit, not truth.
+
+One more line (no. 15, `[crisis: any]`) names a granary and a harbour it does not declare. That is the opposite fault, already in the 412.
+
+## 8. THE PICK TODAY, AND WEIGHTED AGAINST UNIFORM
+
+**Today's pick (READ, source).** Both doors are unweighted:
+- **The corpus:** `stateProseKernel.js :: drawVariant` is a seeded **rendezvous hash** over the eligible lines (the highest `avalanche32(fnv1a32(seed::block::pool::v<vid>))` wins; ties go to the lower vid). That is uniform in expectation, with **no weights**.
+- **Generator pools:** `drawDeclared.js :: drawDeclared` takes the site's own draw over the whole pool. If refused, it takes the declared twin, else the hash argmax over the admitted lines. **No weights** there either.
+- **REGEX:** `weight` appears 0 times in the kernel and in `drawDeclared`.
+- **Pools of differing specificity.** 116 of the 368 reached pools have lines of differing specificity (number of disqualifiers). Only those can feel a weight.
+
+**Over the 720.** For each pool, the top line's expected share is computed under:
+- a uniform draw among the lines left; and
+- a draw weighted by 1 + min(4, disqualifiers on the line).
+
+The weighted draw is the owner's "fit is a weight". The actual seeded draw is given beside both.
+
+| measure | uniform | weighted | actual |
+|---|---|---|---|
+| pools drawn 30 times or more | 192 | 192 | 192 |
+| top line ≥ 0.75 (the repetition guard's absolute rule) | **8** | **7** | **6** |
+| mean top-line share | 0.377 | 0.380 | — |
+| pools where weighting raises the top share by more than 0.005 | — | 27 | — |
+
+The pools at ≥ 0.75: DS-ECO-6 *minor shadow activity* (1.0 under all three), DS-ECO-2 *FOOD: deficit*, DS-ECO-1 *C3*, DS-ECO-2 *FOOD: surplus*, DS-ECO-11 *TERRAIN: Plains* and *Forest*, DS-ECO-6 *significant off-book*, DS-DEF-8 *INFILTRATION*. Every one has a median of **1 line left**: that is depth, not the pick.
+
+**The guard has no rows for these pools.** The repetition guard's register (`scripts/census/pool-dominance.register.json`) holds **908 rows, all generator ledger pools, and none of the corpus's 856.** So "passes its row" cannot be read for a corpus pool today. The table above applies the guard's absolute rule (0.75 at 30 draws or more) instead.
+
+**Verdict.** On today's corpus, weighting changes little (7 pools against 8 at ≥ 0.75; the mean moves 0.003). Its value is in the lines yet to be written, where a specific line will sit beside a line that presumes nothing.
+
+## 9. LINES THAT READ WORDING
+
+**REGEX** (`wording.sh`; `results/wording.txt`): 66 lines in src match a string test, a regex test, a first-word split or a label compared by its text. I read all 66 and classed them by hand (READ).
+
+**18 lines in 14 files decide what to say from already-chosen wording or a display label:**
+
+| site | what it tests |
+|---|---|
+| `narrativeGenerator.js` (`situationDesc` includes 'church controls') | stored prose |
+| `settlementLifecycleKernel.js` (`reason` startsWith 'Displaced population') | stored prose |
+| `mutateEntities.js` (`description` includes '(role)') | stored prose |
+| `DefenseTab.jsx` (a regex of the status over `cap.note`) | displayed wording |
+| `defenseDisplay.js` (`DEFENSE_VULNERABILITY_RE.test(row.reason)`) | stored prose |
+| `economyStateProse.js` (`TERRAIN_ONLY_RE.test(row.reason)`) | stored prose, **inside a pool-key reader** |
+| `EconomicsTab.jsx` (a chain label's first word) | a label |
+| `SupplyChainsPanel.jsx` ×2 (first-word presence: patterns 8 and 18) | a name's first word |
+| `pdf/sections/SupplyChainFlow.jsx` ×2 (its PDF twin) | a name's first word |
+| `finishedGoodsDemand.js`, `tradeCommodity.js` (a goods label's first word) | a label |
+| `foodBalanceBar.js` (a note's first word) | stored prose |
+| `settlementQuickGuide.js` (the first word of a descriptor string) | stored prose |
+| `DefenseTab.jsx`, `pdf/sections/DefenseSecurity.jsx`, `defenseDisplay.js` (a capability **label** compared by text: 'Economic Backing', 'Arcane Support') | a label |
+
+**Not counted:**
+- **8 checks that read wording on purpose:** the agreement guard (`generationCoherence.js` ×5), `foodWordsFindings`, `crisisCastFindings`, `composedWalker`.
+- **The rest:** search boxes, `typeof` guards, enum labels, typography (`OverviewTab`'s drop cap).
+
+**Not seen by the regex (READ):**
+- `drawDeclared.js :: resolveSibling` / `resolveSiblingSentences` / `noteDeclared` find a drawn line's twin **keyed by the line's text**.
+- `weaveBlock` (an opening name) and `aliasRepeatedRungs` (text equality) read wording too, but as reconcilers, which is their contract.
+
+**The ledger already exists.** `domain/facts/presumptionLedger.js` is the *ledger of claims already made*: every drawn line's atoms, per block. But it is birth-local and write-only: only the self-check (`presumptionCheck.js`) reads it. No draw consults it.
+
+## 10. THE CASE TABLE
+
+**A pool's facts** = its key's stored-subtree dependencies (perturb, measured pools) + the condition facts its lines read (declared atoms, kernel dimensions, registered things named). Its case table is 2^(condition facts) with the key held fixed (the key is what routed the town to this pool).
+
+**Condition facts per pool** (368 reached pools):
+
+| condition facts | pools |
+|---|---|
+| 0 | 200 |
+| 1 | 71 |
+| 2 | 39 |
+| 3 | 26 |
+| 4 | 17 |
+| 5 | 8 |
+| 6 | 4 |
+| 7 | 2 |
+| 8 | 1 |
+
+**Key plus condition facts:** 0 for 89 pools; 1–4 for 222; 5–10 for 57.
+
+**Reachable cases over the 720:** 252 pools reach 1 case, 67 reach 2, and 49 reach 3 to 12. **591 cases in all.**
+
+**Exhaustively testable at ≤ 64 cases: 365 of 368 pools.** The three that are not are all DS-GEN-3: *foodSecurity.label: Secure* (7 facts), *safetyProfile.safetyLabel…* (7), *foodSecurity.label: Import-Dependent* (8). The largest table is 256. **Every reached pool except those three can be proven on every case of its table, not on sampled births.**
+
+## 11. THE AUTHORING PATH AS IT STANDS IN SOURCE (READ, names checked against the tree)
+
+### Where a pool lives
+
+- **Corpus pools.**
+  - **Source:** `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`.
+  - **Variant syntax:** a variant is `` N. `[angle · tag · tag]` text ``; the tags become its `marks`.
+  - **Pool syntax:** a pool is `**KEY** {…}`. The brace group is `{atom, …}` (declares), `{crisis-scoped}` or `{colour}`, and becomes `poolMeta`.
+  - **The generator:** `scripts/generate-dossier-state-prose.mjs` (`npm run gen:dossier-prose`; the gate runs it with `--check`).
+  - **The output:** `src/data/dossierStateProse/{economy,defense,general,power,stressors,warFaith}.generated.js`.
+- **Generator pools:** arrays in `src/data/*.js` or `src/generators/**`, drawn through `drawDeclared` / `filterDeclared` / `drawAdmitted` / `agreeingLine` (47 call sites, REGEX), or through 228 bare picks.
+
+### How a variant declares today: every carrier
+
+| carrier | where | who reads it at the DRAW |
+|---|---|---|
+| `marks` (atoms; the kernel words `walls`, `no walls`, the five crisis families; the state words `severity`, `deficit`, `anchor`; `colour`; `dm-only`) | corpus variants | the kernel: `eligibleVariants` (`variantFactDeclaration`, law 5, `variantIsAudible`) |
+| pool brace `declares` / `crisisScoped` / `colour` | corpus `poolMeta` | the kernel, via `composeStateProse` (`poolDeclares`, `crisisScoped`); `colour` is read by the registers only |
+| `needs` / `excludes` / `crisis` | generator line objects | `factVocabulary.js :: declarationOf` (inside `drawDeclared`) |
+| `tags` | registry entries | `declarationOf`, **only** when the site passes `{ tagged: true }` |
+| `poolDeclares`, `crisisScoped`, `twin` / `twinOf`, `registry`, `ctx` | the options of `drawDeclared` | `drawDeclared` |
+| `cast` (`conflictIssues.js`), `requires` (`resourceData.js`, `spatialData.js`: 75 REGEX) | their own tables | their own code (`conflictIssues.js`, `structuralValidator.js` / `generationCoherence.js`): **not** the vocabulary's door |
+
+**A mismatch of carriers.** The walker (`presumedThings.shared.mjs :: DECL_PROPS`) accepts seven carriers as a declaration: `needs`, `excludes`, `tags`, `marks`, `cast`, `poolDeclares`, `requires`. The door enforces a different set.
+- A generator line that "declares" through `marks`, `cast` or `requires`, or through `tags` at an untagged site, **satisfies the walker and is not refused by `drawDeclared`**.
+- The door's `crisis` carrier is **not** in the walker's list.
+
+### The walkers and registers that read a pool today
+
+| walker or register | what it holds |
+|---|---|
+| `tests/data/dossierStateProseProjection.contract.test.js` | refuses unknown mark words |
+| `tests/lint/wiringCensusDeclared.walker.test.js` + `domain/facts/declarationRegisters.js` | the undeclared-lines register `tests/lint/undeclaredLines.register.json` (138 rows, 412; re-taken by `RETAKE_DECLARATION_REGISTERS=1 npx vitest run tests/domain/facts/declarationRegisters.test.js`) and `crisisScopedPools.register.json` (grow-only) |
+| `tests/lint/presumedThings.walker.test.js` + `.shared.mjs` + `.register.json` | the 16 things; arm 1 over `src/data` and `src/generators`; arm 2 over printed records |
+| `tests/lint/drawDeclaredKeys.walker.test.js` | the declared door's keys |
+| `tests/lint/declaredLineShape.test.js` | the shape of a declared line |
+| `tests/domain/facts/factVocabulary.test.js` | the vocabulary |
+| `tests/domain/facts/colourMark.test.js` | the colour mark |
+| `tests/lint/poolDominance.walker.test.js` + `scripts/census/pool-dominance.mjs` (`--bank-new`; `--tighten`, the chair's) + its register | generator ledger pools only |
+| `tests/domain/phraseRepetition.test.js` | phrase repetition |
+| the birth self-check `cert:false-presumption` (`presumptionCheck.js`) | re-asserts every declared atom against the final record |
+
+### The procedure's section 9, corrected name by name
+
+| the procedure says | the source says |
+|---|---|
+| "The declared door: drawDeclared and filterDeclared." | For **generator** pools, `src/domain/facts/drawDeclared.js :: drawDeclared, filterDeclared` (also `drawAdmitted`, `agreeingLine`). **The corpus's door is another**: `src/domain/display/stateProse/stateProseKernel.js :: eligibleVariants` (the gate) + `drawVariant` (the pick), reached through `composeStateProse.js :: composeStateProse`. |
+| "factVocabulary, 51 dimensions (43, 7, 1)." | **Confirmed:** `src/domain/facts/factVocabulary.js :: FACT_DIMENSIONS`, 51 (43 presence, 7 band, 1 crisis), every reader present. Beside it, the kernel's `STATE_MARK_DIMENSIONS` (9: three demoted state keys, `walls`, five crisis families) and the pool rulings `POOL_RULINGS` (`crisis-scoped`, `colour`). |
+| "The words of each registered thing: the presumed-things walker's shared list." | `tests/lint/presumedThings.shared.mjs :: THINGS` (16 things) with the matcher `thingsNamedIn` and the denial reader `thingsDeniedIn`; it is a **test** file, not a domain module. |
+| "The fact homes: the leaves under the domain's facts folder (24)." | 24 **files**, of which **15 are fact leaves**: crisisKind, defence, famine, guild, institutions, magic, market, migration, otherNpc, populationBand, rulerKind, storesMonths, terrain, warState, water. **9 are machinery**: bareLine, declarationRegisters, drawDeclared, factVocabulary, factsAnswered, factsOf, presumptionCheck, presumptionLedger, textOf. Several homes live **outside** the folder: `defense/defenseFacts.js`, `dossier/faithReading.js`, `canonicalAccessors.js`, `resolveCulture.js`, `display/defenseDisplay.js :: deriveCriminalStructure`, `prosperityRank.js`, `magicLedger.js`, `magicReliance.js`. The one entry point is `factsOf.js :: factsOf`. |
+| "The prose corpus and its door: the dossier-state receipt pools document and its generator script." | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` → `scripts/generate-dossier-state-prose.mjs` (`npm run gen:dossier-prose`) → the six `src/data/dossierStateProse/*.generated.js`. |
+| "The repetition guard: the pool-dominance census and its bank-new door." | `scripts/census/pool-dominance.mjs` (`--bank-new`), `scripts/census/pool-dominance.register.json`, `tests/lint/poolDominance.walker.test.js`. **It holds no corpus pool** (908 rows, all `ledger:` generator pools). |
+
+### The procedure's rules the code CANNOT meet today, and what is missing
+
+| rule | what is missing |
+|---|---|
+| §1.2, §2.3, §7.1: a fact's **layer**, a pool's layer, "reads nothing at or above its layer" | No `layer` exists on any dimension, pool or leaf, and no walker reads one (section 5 of this file). |
+| §1.3: "never reads another line's wording; reads the ledger of claims" | 18 sites read wording (measure 9) and no walker forbids it. The claims ledger exists (`presumptionLedger.js`) but no draw can read it: it is birth-local and write-only. |
+| §1.5, §3.4: **the weight** | Neither `drawVariant` nor `drawDeclared` takes a weight; there is no weight field and no rule. A weighted rendezvous draw would move every same-seed draw: every golden surface moves. |
+| §1.6, §4: **one line that presumes nothing, exactly one** | No check. **163 of the 466 non-colour pools have no line free of a disqualifier** (117 because a pool-level brace declares for every line). |
+| §2.4, §7.2: **the case table** | No in-repo tool computes one. `depth.mjs` here is a probe; 365 of 368 reached pools would fit an exhaustive test. |
+| §3.2: a disqualifier for every thing, state, size, **count** or **value** | Things, crisis kinds, sizes (tier, population) and the four banded values exist. **No count dimension.** The nine dimensions of the class table §5.1 are missing (practitioner, capture rung, readiness grade, access-only church, grows-more-than-eats and import share, worked here, carrier, lead). |
+| §3.2: a denial is disqualified where the thing exists | Only for registered things, with `excludes` / `no X` (the walker's denial arm banks 35 literals). |
+| §3.5: names, numbers and lists through placeholders | Slots exist (corpus `{…}`, anchored liveness), but no walker refuses a typed number or name in a pool line (unverified beyond the prose-numerics baseline). |
+| §3.8: a one-word-swap sibling is not a new line | No near-duplicate check (READ: none found by name). |
+| §5.1: a sentence in code is a pool of one, checked at its print site | 1,462 such lines (class table §5.4) and no print-site check. |
+| §5.3: no bare pick from a declared pool; no stripping | `drawDeclaredKeys.walker` reads keys, not callers. 3 strip sites. The carrier mismatch above. |
+| §5.4: new words join the checks | Possible by hand, in two homes: the walker's `THINGS` (a test file) and `FACT_DIMENSIONS`. Nothing ties a new word in a line to either. |
+| §5.5, §7.5: bank a new pool in the repetition guard; the weighted top share inside its row | **The guard holds no corpus pool**, so a new corpus pool cannot be banked through `--bank-new` today. Its corpus is generator ledgers. |
+| §7.3: the page measure by vocabulary | Not built (ruling 3 of record 288 assigns it to B). |
+
+## 12. THE GAP LIST
+
+**File:** `GAPS.json`, beside this file.
+- **Rows:** 591 cases, one per (pool, reachable case of its condition facts).
+- **Each row carries:** the towns of the 720 that reach the case; the lines left (the case's capacity, player audience); the lines left by today's declarations alone; the owner-view lines left; the slot-silenced towns; and why an empty case is empty.
+- **Order:** by towns reached.
+
+**Totals, player audience:**
+- **cases with none: 32**, in 25 pools and 1,009 towns (14 of them are empty only to the player: the owner view keeps lines);
+- **cases under three: 236**, in about 15,000 towns.
+
+**Owner view:**
+- **cases with none: 18**, in 15 pools and 157 towns;
+- **cases under three: 237**.
+
+**The empty cases, owner view.** These are the ones a writer must fill:
+
+| pool | cases | towns | case |
+|---|---|---|---|
+| DS-GEN-9 event types | 9 | 66 | political, disaster, economic ×2, demographic, occupation, religious ×2, exile, magical (with no anchor) |
+| DS-GEN-5 and DS-GEN-6 *river* | 3 | 42 | no river |
+| DS-GEN-3 *readiness: Undefended* | 1 | 15 | walls, militia, no garrison |
+| DS-GEN-3 *scores.military: CRITICAL* | 1 | 5 | — |
+| DS-FTH-4 heresy flags | 2 | 4 | no temple |
+| DS-POW-6 *commander as a political actor* | 1 | 21 | no commander; audience |
+
+**The lines a writer would have to write:**
+
+| target | player audience | owner view |
+|---|---|---|
+| **≥ 1 line in every reachable case** | **25** (one per pool, a line that presumes nothing) to 32 (one per case) | 15 to 18 |
+| **≥ 3 lines in every reachable case** | **252** (per pool, the largest shortfall of its cases) to 393 (per case) | 222 to 346 |
+
+Of the 236 cases under three by player view, **124 are L4 pools** (history, viability, the stored lines). Then 54 are L2, 35 L3 and 23 L1.
+
+## 13. What I did not do, and the limits
 
 - **The perturbation sample** is 72 towns, and each subtree was perturbed 3 times. A dependence that shows only in rarer towns would be missed, so a layer is a **lower bound** where the sample is thin.
 - **The read-tracer** sees only the branches taken.
@@ -430,5 +681,7 @@ All commands run from the tree root with `TREE=$PWD`. The corpus is `births.mjs`
 | sources | `node <f>/sources.mjs` | — |
 | stepReads | `PERTURB=perturb.json node <f>/stepReads.mjs` | — |
 | flow | `CORPUS=… node --import <f>/jsx-register.mjs <f>/flow.mjs` | 30 s |
+| depth (measures 7, 8, 10, 12) | `CORPUS=… LAYERS=layers.json PERTURB=perturb.json LAYER_MAP_HOOK=1 node --import <f>/jsx-register.mjs <f>/depth.mjs <out>` | 33 s |
+| wording (measure 9) | `OUT=wording.txt sh <f>/wording.sh` | — |
 
 `jsx-loader.mjs` lets plain node import the tree's `.jsx` files (an esbuild transform from the tree's own `node_modules`).

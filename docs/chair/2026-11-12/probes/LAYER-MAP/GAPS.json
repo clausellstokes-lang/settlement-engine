@@ -1,0 +1,9037 @@
+{
+ "_doc": "LAYER-MAP measure 12: per state-prose pool, per reachable case of the facts its lines read (declared atoms, kernel dimensions, registered things named), the lines left after today's gates AND the disqualifiers implied by the registered words each line names; over the census 720, player audience as the public-prose sites draw (linesLeftOwnerView: the owner audience). Ordered by towns reached. flag NONE = no line left; UNDER3 = one or two.",
+ "totals": {
+  "cases": 591,
+  "casesNone": 33,
+  "casesUnder3": 236,
+  "linesToWrite": {
+   "atLeast1": {
+    "lowerBound": 26,
+    "upperBound": 33,
+    "pools": 26
+   },
+   "atLeast3": {
+    "lowerBound": 255,
+    "upperBound": 396,
+    "pools": 165
+   }
+  }
+ },
+ "gaps": [
+  {
+   "pool": "DS-DEF-3::First-Survey qualification (the reading is a first look)",
+   "layer": 2,
+   "towns": 720,
+   "slotSilentTowns": 5,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 5
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed",
+   "layer": 4,
+   "towns": 720,
+   "slotSilentTowns": 0,
+   "linesLeft": 6,
+   "linesLeftByDeclarationsOnly": 6,
+   "linesLeftOwnerView": 6,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-FTH-2::PRIVATE DOSSIER",
+   "layer": 3,
+   "towns": 720,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-11::THE FIRST-SURVEY QUALIFICATION",
+   "layer": 4,
+   "towns": 720,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::founding",
+   "layer": 4,
+   "towns": 720,
+   "slotSilentTowns": 5,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 5
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::historicalCharacter",
+   "layer": 4,
+   "towns": 720,
+   "slotSilentTowns": 5,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 5
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-2::recentConflict present",
+   "layer": 3,
+   "towns": 720,
+   "slotSilentTowns": 5,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 5
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-5::governing body name: a SLOT, never a baked noun",
+   "layer": 3,
+   "towns": 720,
+   "slotSilentTowns": 5,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 5
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-7::layer DORMANT (no ledger materialized)",
+   "layer": "W",
+   "towns": 720,
+   "slotSilentTowns": 5,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 5
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-14::FOUNDED-OLD",
+   "layer": 4,
+   "towns": 649,
+   "slotSilentTowns": 5,
+   "linesLeft": 6,
+   "linesLeftByDeclarationsOnly": 6,
+   "linesLeftOwnerView": 6,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 5
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-REL-2::flagDriven count zero",
+   "layer": 5,
+   "towns": 609,
+   "slotSilentTowns": 4,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 4
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-9::SECURE",
+   "layer": 2,
+   "towns": 591,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: hunger": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated",
+   "layer": 4,
+   "towns": 528,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-CND-1::PROVENANCE: causes[] or triggeredAt.sourceEventType populated",
+   "layer": 1,
+   "towns": 478,
+   "slotSilentTowns": 478,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "slot": 478
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::arcane defense ABSENT",
+   "layer": 1,
+   "towns": 473,
+   "slotSilentTowns": 3,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-16::LAYERED-ANCHORED",
+   "layer": 4,
+   "towns": 449,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-5::council",
+   "layer": 3,
+   "towns": 437,
+   "slotSilentTowns": 2,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-9::magicDependency false",
+   "layer": 2,
+   "towns": 431,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "magic": 1
+   }
+  },
+  {
+   "pool": "DS-POW-4::legitimacyHold: public rejection is breaking the hold",
+   "layer": 3,
+   "towns": 429,
+   "slotSilentTowns": 4,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 4
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-REL-2::prominentRelationship present",
+   "layer": 5,
+   "towns": 405,
+   "slotSilentTowns": 4,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 4
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-8::override active, viability intact",
+   "layer": 4,
+   "towns": 398,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-11::viable: true: the arithmetic closes",
+   "layer": 4,
+   "towns": 398,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: exports and imports both present",
+   "layer": 2,
+   "towns": 387,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-2::no token matched: unclassified (the plain-description floor)",
+   "layer": 3,
+   "towns": 383,
+   "slotSilentTowns": 4,
+   "linesLeft": 6,
+   "linesLeftByDeclarationsOnly": 6,
+   "linesLeftOwnerView": 6,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 4
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.magical: CRITICAL",
+   "layer": 4,
+   "towns": 373,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-4::structure null (nothing organized recognized)",
+   "layer": 3,
+   "towns": 371,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "organised crime": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-3::prosperity: Struggling / Poor",
+   "layer": 4,
+   "towns": 368,
+   "slotSilentTowns": 3,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Internal Security: no legal infrastructure",
+   "layer": 2,
+   "towns": 360,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-17::BARE",
+   "layer": 2,
+   "towns": 355,
+   "slotSilentTowns": 2,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-9::FOOD SOURCES: one source",
+   "layer": 2,
+   "towns": 354,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-18::BOUGHT-IN",
+   "layer": 4,
+   "towns": 353,
+   "slotSilentTowns": 4,
+   "linesLeft": 5,
+   "linesLeftByDeclarationsOnly": 5,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 4
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks",
+   "layer": 4,
+   "towns": 346,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::economicViability.viable: true",
+   "layer": 4,
+   "towns": 340,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "crisis: threat": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-16::LEGACY-UNRESOLVED",
+   "layer": 4,
+   "towns": 327,
+   "slotSilentTowns": 3,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::FIXTURE: gates",
+   "layer": 3,
+   "towns": 317,
+   "slotSilentTowns": 3,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::walls PRESENT",
+   "layer": 2,
+   "towns": 317,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-5::walls ABSENT",
+   "layer": 1,
+   "towns": 316,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-18::STALLED",
+   "layer": 4,
+   "towns": 303,
+   "slotSilentTowns": 93,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 93
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-5::ordinary (route road and the default)",
+   "layer": 5,
+   "towns": 303,
+   "slotSilentTowns": 3,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: one source carries the town",
+   "layer": 2,
+   "towns": 301,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: hunger": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: two or three sources between them",
+   "layer": 2,
+   "towns": 299,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-1::terrain FAVOURABLE to the defender",
+   "layer": 4,
+   "towns": 297,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)",
+   "layer": 2,
+   "towns": 295,
+   "slotSilentTowns": 2,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 3,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 293,
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::INCOME WEIGHT: the religious houses",
+   "layer": 2,
+   "towns": 293,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time",
+   "layer": 4,
+   "towns": 289,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-11::criticalIssueCount: critical contradictions on the record",
+   "layer": 4,
+   "towns": 286,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-1::governanceFractured true",
+   "layer": 3,
+   "towns": 284,
+   "slotSilentTowns": 3,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::charter hall PRESENT (specialist monster response)",
+   "layer": 2,
+   "towns": 283,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::FIXTURE: charter hall",
+   "layer": 3,
+   "towns": 281,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-13::WAREHOUSES",
+   "layer": 2,
+   "towns": 279,
+   "slotSilentTowns": 2,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it",
+   "layer": 4,
+   "towns": 277,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-CND-1::SEVERITY: high",
+   "layer": 1,
+   "towns": 276,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::charter hall ABSENT where the country warrants one",
+   "layer": 1,
+   "towns": 273,
+   "slotSilentTowns": 3,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::recency framing: Last century",
+   "layer": 4,
+   "towns": 271,
+   "slotSilentTowns": 2,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: CRITICAL",
+   "layer": 4,
+   "towns": 269,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: established",
+   "layer": 4,
+   "towns": 257,
+   "slotSilentTowns": 0,
+   "linesLeft": 6,
+   "linesLeftByDeclarationsOnly": 6,
+   "linesLeftOwnerView": 6,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: hunger": 0,
+    "dim hunger": "no hunger",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::NO-MARKET",
+   "layer": 2,
+   "towns": 257,
+   "slotSilentTowns": 2,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "gate": 0,
+    "institution: tavern": 0,
+    "market": 0
+   }
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Holding",
+   "layer": 3,
+   "towns": 257,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: walls AND professional garrison",
+   "layer": 3,
+   "towns": 256,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "thing garrison": "present",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-5::garrison PRESENT",
+   "layer": 1,
+   "towns": 256,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "gate": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-5::NO organized force at all",
+   "layer": 2,
+   "towns": 254,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-11::viable: true: the arithmetic closes",
+   "layer": 4,
+   "towns": 242,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-3::economicViability.viable: true",
+   "layer": 4,
+   "towns": 242,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "crisis: threat": 0
+   }
+  },
+  {
+   "pool": "DS-STR-1::Overview's own section framing",
+   "layer": 1,
+   "towns": 242,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.monster: CRITICAL",
+   "layer": 4,
+   "towns": 241,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-6::tier overlay: other tiers",
+   "layer": 4,
+   "towns": 240,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-6::tier overlay: thorp / hamlet",
+   "layer": 4,
+   "towns": 240,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-12::WATER-EDGE",
+   "layer": 1,
+   "towns": 237,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-16::LEGACY-SHIFTED",
+   "layer": 4,
+   "towns": 234,
+   "slotSilentTowns": 2,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::arcane defense PRESENT",
+   "layer": 3,
+   "towns": 233,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "gate": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-9::recency framing: Living memory",
+   "layer": 4,
+   "towns": 228,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: a criminal line is present",
+   "layer": 4,
+   "towns": 221,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 2,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 221
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: exports and imports both present",
+   "layer": 2,
+   "towns": 221,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 0,
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-ECO-9::HOW THE NEED IS MET: much of it brought in",
+   "layer": 2,
+   "towns": 220,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-2::intensity: moderate",
+   "layer": 5,
+   "towns": 220,
+   "slotSilentTowns": 1,
+   "linesLeft": 5,
+   "linesLeftByDeclarationsOnly": 5,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-STRAINED",
+   "layer": 3,
+   "towns": 219,
+   "slotSilentTowns": 3,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Contested",
+   "layer": 3,
+   "towns": 216,
+   "slotSilentTowns": 4,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 4
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::prosperity: Comfortable / Prosperous",
+   "layer": 4,
+   "towns": 212,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-1::Legitimacy Crisis",
+   "layer": 3,
+   "towns": 212,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "tier: <= village": 1,
+    "tier: >= town": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-12::HIGH-GROUND",
+   "layer": 1,
+   "towns": 211,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-2::intensity: high",
+   "layer": 5,
+   "towns": 208,
+   "slotSilentTowns": 2,
+   "linesLeft": 5,
+   "linesLeftByDeclarationsOnly": 5,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Internal Security: full legal chain (court AND prison)",
+   "layer": 2,
+   "towns": 207,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+   "layer": 2,
+   "towns": 207,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 0,
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-17::ADMINISTERED",
+   "layer": 2,
+   "towns": 207,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "thing prison": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::road",
+   "layer": 4,
+   "towns": 206,
+   "slotSilentTowns": 2,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "dim deficit": "deficit"
+   }
+  },
+  {
+   "pool": "DS-DEF-4::structure organized",
+   "layer": 3,
+   "towns": 203,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: unrest": 0,
+    "dim unrest": "no unrest",
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: established",
+   "layer": 4,
+   "towns": 202,
+   "slotSilentTowns": 0,
+   "linesLeft": 5,
+   "linesLeftByDeclarationsOnly": 6,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: hunger": 0,
+    "dim hunger": "no hunger",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-7::structuralSuggestions[]",
+   "layer": 2,
+   "towns": 199,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: CRITICAL",
+   "layer": 3,
+   "towns": 197,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.economic: CRITICAL",
+   "layer": 4,
+   "towns": 197,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Vulnerable",
+   "layer": 4,
+   "towns": 194,
+   "slotSilentTowns": 2,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::ECONOMIC STRENGTHS: none recorded",
+   "layer": 4,
+   "towns": 192,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-6::TIER: minor shadow activity (≥3)",
+   "layer": 2,
+   "towns": 192,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 4,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "organised crime": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-1::terrain EXPOSED",
+   "layer": 4,
+   "towns": 186,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-9::magicDependency true, with a NAMED dependent chain",
+   "layer": 2,
+   "towns": 184,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-1::strategic value HIGH",
+   "layer": 4,
+   "towns": 180,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: WEAK",
+   "layer": 3,
+   "towns": 179,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-13::COMMERCE: a bank",
+   "layer": 2,
+   "towns": 179,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.economic: WEAK",
+   "layer": 4,
+   "towns": 179,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Secure",
+   "layer": 4,
+   "towns": 177,
+   "slotSilentTowns": 2,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "institution: granary": 1,
+    "market": 1,
+    "starving": 0,
+    "thing granary": "present",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::MARKET-OPEN",
+   "layer": 2,
+   "towns": 168,
+   "slotSilentTowns": 3,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: under_siege": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by PROSPERITY, favourable",
+   "layer": 3,
+   "towns": 168,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: neither walls nor force",
+   "layer": 1,
+   "towns": 167,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Secure",
+   "layer": 4,
+   "towns": 167,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "institution: granary": 0,
+    "market": 0,
+    "starving": 0,
+    "thing granary": "absent",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness ADEQUATE",
+   "layer": 3,
+   "towns": 158,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-11::UNWALLED-SMALL",
+   "layer": 1,
+   "towns": 157,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-POW-6::operation role duty evasion",
+   "layer": 2,
+   "towns": 155,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "gate": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-5::mercenary / contracted forces PRESENT",
+   "layer": 2,
+   "towns": 154,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Internal Security: court without detention",
+   "layer": 2,
+   "towns": 153,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-12::OPEN-GROUND",
+   "layer": 1,
+   "towns": 152,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "terrain: plains": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
+   "layer": 4,
+   "towns": 151,
+   "slotSilentTowns": 125,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 125
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: STRONG",
+   "layer": 4,
+   "towns": 149,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied": 0,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.monster: STRONG",
+   "layer": 4,
+   "towns": 149,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: monster_pressure": 0
+   }
+  },
+  {
+   "pool": "DS-POW-2::stable matched",
+   "layer": 3,
+   "towns": 149,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-4::legitimacyHold: public backing hardens the hold",
+   "layer": 3,
+   "towns": 148,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Stable (no challengers)",
+   "layer": 3,
+   "towns": 148,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: succession": 0,
+    "crisis: unrest": 0,
+    "dim succession": "succession settled",
+    "dim unrest": "no unrest"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.monster: WEAK",
+   "layer": 4,
+   "towns": 147,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::CHAIN: defence short",
+   "layer": 3,
+   "towns": 145,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: entrepot",
+   "layer": 2,
+   "towns": 145,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-1::Contested",
+   "layer": 3,
+   "towns": 145,
+   "slotSilentTowns": 1,
+   "linesLeft": 5,
+   "linesLeftByDeclarationsOnly": 5,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low",
+   "layer": 4,
+   "towns": 143,
+   "slotSilentTowns": 7,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 7
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-1::Tolerated",
+   "layer": 3,
+   "towns": 143,
+   "slotSilentTowns": 1,
+   "linesLeft": 5,
+   "linesLeftByDeclarationsOnly": 5,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-4::legitimacyHold: public opinion neither helps nor hurts",
+   "layer": 3,
+   "towns": 143,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::RESOURCE CONDITION: worked out, recovers only with work",
+   "layer": 4,
+   "towns": 142,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.magical: ADEQUATE",
+   "layer": 4,
+   "towns": 138,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "magic": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-13::COMMERCE: a merchant guild, no bank",
+   "layer": 2,
+   "towns": 136,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-4::FIXTURE: black market",
+   "layer": 3,
+   "towns": 135,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-8::STRUGGLING",
+   "layer": 2,
+   "towns": 133,
+   "slotSilentTowns": 0,
+   "linesLeft": 6,
+   "linesLeftByDeclarationsOnly": 6,
+   "linesLeftOwnerView": 6,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "market": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Secure",
+   "layer": 4,
+   "towns": 132,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "institution: granary": 1,
+    "market": 1,
+    "starving": 0,
+    "thing granary": "present",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: political",
+   "layer": 4,
+   "towns": 131,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "dim anchor": "anchored"
+   }
+  },
+  {
+   "pool": "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing",
+   "layer": 2,
+   "towns": 131,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: ADEQUATE",
+   "layer": 3,
+   "towns": 129,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: WEAK",
+   "layer": 4,
+   "towns": 128,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-5::river",
+   "layer": 5,
+   "towns": 128,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "river": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.economic: ADEQUATE",
+   "layer": 4,
+   "towns": 126,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Well-Defended",
+   "layer": 4,
+   "towns": 125,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by SAFETY, adverse",
+   "layer": 3,
+   "towns": 125,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::CHAIN: defence supplied",
+   "layer": 3,
+   "towns": 124,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-17::GREAT HOUSE: cathedral",
+   "layer": 2,
+   "towns": 124,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "institution: temple": 1,
+    "thing temple": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-6::FACET: an underground house",
+   "layer": 2,
+   "towns": 123,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 2,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 123
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-6::TIER: minor shadow activity (≥3)",
+   "layer": 2,
+   "towns": 122,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 3,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "organised crime": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Plains",
+   "layer": 4,
+   "towns": 121,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "grain": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: deficit",
+   "layer": 4,
+   "towns": 121,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "grain": 0,
+    "institution: granary": 1,
+    "thing granary": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-16::LEGACY-RECOVERED",
+   "layer": 4,
+   "towns": 121,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: CRITICAL",
+   "layer": 4,
+   "towns": 121,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "gate": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: deficit",
+   "layer": 4,
+   "towns": 120,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "grain": 0,
+    "institution: granary": 0,
+    "thing granary": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::tier overlay: city",
+   "layer": 4,
+   "towns": 120,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "dim deficit": "deficit"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::tier overlay: metropolis",
+   "layer": 4,
+   "towns": 120,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-8::POOR",
+   "layer": 2,
+   "towns": 119,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-ECO-9::HOW THE NEED IS MET: part of it by magic",
+   "layer": 2,
+   "towns": 119,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-17::GARRISONED",
+   "layer": 2,
+   "towns": 118,
+   "slotSilentTowns": 2,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "layer": 2,
+   "towns": 117,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 1,
+    "crisis: any": 1,
+    "market": 1,
+    "dim crisis": "crisis",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-8::COMFORTABLE",
+   "layer": 2,
+   "towns": 117,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: indebted": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-16::ANCHORED-RECENT",
+   "layer": 4,
+   "towns": 117,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-2::unstable matched",
+   "layer": 3,
+   "towns": 117,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-5::market (route crossroads)",
+   "layer": 5,
+   "towns": 115,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::recency framing: Ancient",
+   "layer": 4,
+   "towns": 115,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: balanced",
+   "layer": 4,
+   "towns": 114,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-GEN-17::GREAT HOUSE: monastery",
+   "layer": 2,
+   "towns": 114,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "institution: monastery": 1
+   }
+  },
+  {
+   "pool": "DS-POW-5::merchant_league",
+   "layer": 3,
+   "towns": 114,
+   "slotSilentTowns": 2,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+   "layer": 2,
+   "towns": 112,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: WEAK",
+   "layer": 4,
+   "towns": 112,
+   "slotSilentTowns": 3,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: STRONG",
+   "layer": 3,
+   "towns": 111,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 1,
+    "crisis: debt": 0,
+    "dim crisis": "crisis"
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness CRITICAL",
+   "layer": 3,
+   "towns": 109,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied, under_siege": 0,
+    "crisis: threat, unrest": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Defensible",
+   "layer": 4,
+   "towns": 109,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.magical: STRONG",
+   "layer": 4,
+   "towns": 108,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "institution: mill": 1,
+    "magic": 1,
+    "thing mill": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: STRONG",
+   "layer": 4,
+   "towns": 108,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: occupied": 0,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.economic: STRONG",
+   "layer": 4,
+   "towns": 107,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "crisis: indebted": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-9::magicDependency true",
+   "layer": 2,
+   "towns": 105,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Coastal",
+   "layer": 4,
+   "towns": 105,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "coast": 1,
+    "fish": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Hills",
+   "layer": 4,
+   "towns": 102,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "grain": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-6::TIER: significant off-book activity (≥15)",
+   "layer": 2,
+   "towns": 102,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 4,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guild": 1,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::MARKET-OPEN",
+   "layer": 2,
+   "towns": 101,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: under_siege": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.magical: WEAK",
+   "layer": 4,
+   "towns": 101,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.monster: STRONG",
+   "layer": 4,
+   "towns": 101,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: monster_pressure": 0
+   }
+  },
+  {
+   "pool": "DS-CND-1::SEVERITY: critical",
+   "layer": 1,
+   "towns": 98,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::Moderate",
+   "layer": 2,
+   "towns": 97,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::road",
+   "layer": 4,
+   "towns": 97,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "dim deficit": "no deficit"
+   }
+  },
+  {
+   "pool": "DS-CND-1::SEVERITY: medium",
+   "layer": 1,
+   "towns": 96,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: STRONG",
+   "layer": 3,
+   "towns": 96,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 0,
+    "crisis: debt": 0,
+    "dim crisis": "no crisis"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.economic: STRONG",
+   "layer": 4,
+   "towns": 96,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "crisis: indebted": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-1::Approved",
+   "layer": 3,
+   "towns": 95,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
+   "layer": 4,
+   "towns": 94,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-9::FOOD SOURCES: several, the largest named",
+   "layer": 2,
+   "towns": 93,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::Moderate",
+   "layer": 2,
+   "towns": 92,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-5::ARCANE: mages' guild",
+   "layer": 3,
+   "towns": 92,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::recency framing: Recent",
+   "layer": 4,
+   "towns": 91,
+   "slotSilentTowns": 2,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::walls PRESENT",
+   "layer": 2,
+   "towns": 87,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "gates": 1
+   },
+   "case": {
+    "gate": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: neither walls nor force",
+   "layer": 1,
+   "towns": 86,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C1: a high rung on a working approach",
+   "layer": 2,
+   "towns": 86,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: River",
+   "layer": 4,
+   "towns": 86,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "institution: mill": 1,
+    "navigable": 1,
+    "river": 1,
+    "thing mill": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: balanced",
+   "layer": 4,
+   "towns": 86,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-GEN-12::WOODLAND",
+   "layer": 1,
+   "towns": 86,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "terrain: forest": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-THREATENED",
+   "layer": 3,
+   "towns": 85,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::ARCANE: alchemists",
+   "layer": 3,
+   "towns": 85,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-16::LIVING-MEMORY",
+   "layer": 4,
+   "towns": 85,
+   "slotSilentTowns": 3,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 3
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::event type: disaster",
+   "layer": 4,
+   "towns": 85,
+   "slotSilentTowns": 1,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "dim anchor": "anchored"
+   }
+  },
+  {
+   "pool": "DS-DEF-5::militia PRESENT (no garrison)",
+   "layer": 1,
+   "towns": 84,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: partiallyExploited",
+   "layer": 4,
+   "towns": 83,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Secure",
+   "layer": 4,
+   "towns": 83,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "institution: granary": 0,
+    "market": 0,
+    "starving": 0,
+    "thing granary": "absent",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: fullyExploited",
+   "layer": 4,
+   "towns": 82,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: occupation_infiltration",
+   "layer": 4,
+   "towns": 82,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "dim anchor": "anchored"
+   }
+  },
+  {
+   "pool": "DS-DEF-1::strategic value LOW",
+   "layer": 4,
+   "towns": 81,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: under_siege, occupied": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-7::structuralViolations[]",
+   "layer": 2,
+   "towns": 81,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-8::override active, viability threatened",
+   "layer": 4,
+   "towns": 80,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-11::viable: false: the arithmetic does not close",
+   "layer": 4,
+   "towns": 80,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::economicViability.viable: false",
+   "layer": 4,
+   "towns": 80,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "layer": 4,
+   "towns": 80,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
+   "layer": 4,
+   "towns": 80,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-4::structure semi-organized",
+   "layer": 2,
+   "towns": 79,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-8::FOOD AND PROSPERITY: hunger holds the town down",
+   "layer": 2,
+   "towns": 79,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: fullyExploited",
+   "layer": 4,
+   "towns": 78,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-8::MODERATE",
+   "layer": 2,
+   "towns": 78,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 1,
+    "crisis: any": 1,
+    "dim crisis": "crisis"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::prosperity: Moderate / Modest",
+   "layer": 4,
+   "towns": 78,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "layer": 4,
+   "towns": 77,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-11::UNWALLED-SMALL",
+   "layer": 1,
+   "towns": 76,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, nothing organized",
+   "layer": 1,
+   "towns": 76,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: walls with NO force",
+   "layer": 1,
+   "towns": 76,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by PROSPERITY, adverse",
+   "layer": 3,
+   "towns": 76,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Undefended",
+   "layer": 4,
+   "towns": 75,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "garrison": 0,
+    "militia": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Lightly Defended",
+   "layer": 4,
+   "towns": 73,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: walls with citizen militia",
+   "layer": 3,
+   "towns": 72,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: a broad spread, no leader",
+   "layer": 2,
+   "towns": 72,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: ADEQUATE",
+   "layer": 4,
+   "towns": 72,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "gate": 1,
+    "walls": 1,
+    "dim walls": "walls",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-1::Legitimacy Crisis",
+   "layer": 3,
+   "towns": 72,
+   "slotSilentTowns": 2,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "tier: <= village": 0,
+    "tier: >= town": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-STRAINED",
+   "layer": 3,
+   "towns": 71,
+   "slotSilentTowns": 1,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-14::FOUNDED-YOUNG",
+   "layer": 4,
+   "towns": 71,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-16::ANCHORED-OLD",
+   "layer": 4,
+   "towns": 71,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-8::PROSPEROUS",
+   "layer": 2,
+   "towns": 68,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "walls": 1,
+    "dim walls": "walls",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::river",
+   "layer": 4,
+   "towns": 68,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "river": 1,
+    "dim deficit": "deficit"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: religious",
+   "layer": 4,
+   "towns": 68,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "gates": 23,
+    "slot": 1
+   },
+   "case": {
+    "institution: temple": 1,
+    "dim anchor": "anchored"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force",
+   "layer": 1,
+   "towns": 67,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "gate": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: none",
+   "layer": 2,
+   "towns": 67,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Mountains",
+   "layer": 4,
+   "towns": 67,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::CHAIN: food trades working",
+   "layer": 3,
+   "towns": 66,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-6::crossroads",
+   "layer": 4,
+   "towns": 65,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "dim deficit": "deficit"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Fortress",
+   "layer": 4,
+   "towns": 64,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "garrison": 1,
+    "walls": 1,
+    "dim walls": "walls",
+    "thing garrison": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence",
+   "layer": 1,
+   "towns": 62,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-8::STRUGGLING",
+   "layer": 2,
+   "towns": 62,
+   "slotSilentTowns": 0,
+   "linesLeft": 7,
+   "linesLeftByDeclarationsOnly": 7,
+   "linesLeftOwnerView": 7,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "market": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Lightly Defended",
+   "layer": 4,
+   "towns": 62,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-DEF-5::ARCANE: wizard's tower",
+   "layer": 3,
+   "towns": 61,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::watch PRESENT",
+   "layer": 2,
+   "towns": 61,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "gate": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-13::NO-MARKET",
+   "layer": 2,
+   "towns": 61,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0,
+    "institution: tavern": 1,
+    "market": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-5::smoke (route isolated / mountain_pass)",
+   "layer": 5,
+   "towns": 61,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::event type: exile_return",
+   "layer": 4,
+   "towns": 61,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "dim anchor": "anchored"
+   }
+  },
+  {
+   "pool": "DS-POW-5::theocracy",
+   "layer": 3,
+   "towns": 61,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-SUP-3::ONE EXPECTED CATEGORY MISSING",
+   "layer": 2,
+   "towns": 61,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-6::river",
+   "layer": 4,
+   "towns": 60,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "river": 1,
+    "dim deficit": "no deficit"
+   }
+  },
+  {
+   "pool": "DS-REL-2::flagDriven count > 0",
+   "layer": 5,
+   "towns": 60,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::event type: demographic",
+   "layer": 4,
+   "towns": 59,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "dim anchor": "anchored"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::ENTREPOT",
+   "layer": 2,
+   "towns": 58,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: under_siege": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::economicViability.viable: true",
+   "layer": 4,
+   "towns": 58,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "crisis: threat": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: ADEQUATE",
+   "layer": 4,
+   "towns": 58,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: unrest": 0,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness STRONG",
+   "layer": 3,
+   "towns": 57,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: unrest": 0,
+    "guardPresence": 1,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-ECO-12::INCOME WEIGHT: the practice of magic",
+   "layer": 2,
+   "towns": 57,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: CRITICAL",
+   "layer": 4,
+   "towns": 57,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "gate": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: economic",
+   "layer": 4,
+   "towns": 57,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "gates": 13
+   },
+   "case": {
+    "market": 1,
+    "dim anchor": "anchored",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "layer": 2,
+   "towns": 55,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 0,
+    "crisis: any": 0,
+    "market": 1,
+    "dim crisis": "no crisis",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-8::POOR",
+   "layer": 2,
+   "towns": 54,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: ADEQUATE",
+   "layer": 4,
+   "towns": 52,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: unrest": 0,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-6::operation role criminal revenue stream (unclassified)",
+   "layer": 2,
+   "towns": 52,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "market": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness WEAK",
+   "layer": 3,
+   "towns": 50,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat, unrest": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::crossroads",
+   "layer": 4,
+   "towns": 50,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "dim deficit": "no deficit"
+   }
+  },
+  {
+   "pool": "DS-POW-1::Endorsed",
+   "layer": 3,
+   "towns": 50,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "tier: <= village": 0,
+    "tier: >= town": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, nothing organized",
+   "layer": 1,
+   "towns": 49,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach",
+   "layer": 2,
+   "towns": 49,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-4::FIXTURE: thieves' guild",
+   "layer": 3,
+   "towns": 48,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: one source carries the town",
+   "layer": 2,
+   "towns": 48,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: hunger": 1,
+    "dim hunger": "hunger"
+   }
+  },
+  {
+   "pool": "DS-ECO-8::FOOD AND PROSPERITY: the cost of food weighs on the town",
+   "layer": 2,
+   "towns": 48,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-5::port",
+   "layer": 5,
+   "towns": 48,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "coast": 1,
+    "institution: docks": 1,
+    "thing docks": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::port",
+   "layer": 4,
+   "towns": 48,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "coast": 1,
+    "dim deficit": "deficit",
+    "thing docks": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-12::CAPACITY: enough",
+   "layer": 2,
+   "towns": 47,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "layer": 4,
+   "towns": 47,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force",
+   "layer": 1,
+   "towns": 46,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness STRONG",
+   "layer": 3,
+   "towns": 45,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: unrest": 0,
+    "guardPresence": 1,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::COMMERCE: craft guilds, no merchant guild",
+   "layer": 2,
+   "towns": 45,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "layer": 4,
+   "towns": 45,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: ADEQUATE",
+   "layer": 4,
+   "towns": 45,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "gate": 0,
+    "walls": 1,
+    "dim walls": "walls",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.monster: ADEQUATE",
+   "layer": 4,
+   "towns": 45,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: monster_pressure": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness WEAK",
+   "layer": 3,
+   "towns": 44,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat, unrest": 0,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence",
+   "layer": 1,
+   "towns": 44,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Deficit × Active Famine",
+   "layer": 4,
+   "towns": 44,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "famine": 1,
+    "starving": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-5::port",
+   "layer": 5,
+   "towns": 44,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "coast": 1,
+    "institution: docks": 0,
+    "thing docks": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-11::UNWALLED-LARGE",
+   "layer": 1,
+   "towns": 43,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: neither walls nor force",
+   "layer": 1,
+   "towns": 43,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "gates": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "dim threat": "threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-4::FIXTURE: smuggling",
+   "layer": 3,
+   "towns": 43,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-6::Naval Defense: Port only",
+   "layer": 2,
+   "towns": 43,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: threat, unrest": 0,
+    "dim threat": "no threat",
+    "thing docks": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::ENTREPOT",
+   "layer": 2,
+   "towns": 43,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: under_siege": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness CRITICAL",
+   "layer": 3,
+   "towns": 42,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 0,
+    "crisis: occupied, under_siege": 0,
+    "crisis: threat, unrest": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Hills",
+   "layer": 4,
+   "towns": 42,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "grain": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-13::COMMERCE: a market, no guild",
+   "layer": 2,
+   "towns": 42,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::CHAIN: food trades failing",
+   "layer": 3,
+   "towns": 41,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: famine",
+   "layer": 2,
+   "towns": 41,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-1::readiness CRITICAL",
+   "layer": 3,
+   "towns": 40,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied, under_siege": 0,
+    "crisis: threat, unrest": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-11::UNWALLED-SMALL",
+   "layer": 1,
+   "towns": 40,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "dim threat": "threat"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: magical",
+   "layer": 4,
+   "towns": 40,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "dim anchor": "anchored"
+   }
+  },
+  {
+   "pool": "DS-POW-2::Desperate matched",
+   "layer": 3,
+   "towns": 40,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-6::capture pressure RECOVERING (strong security, prosperity)",
+   "layer": 2,
+   "towns": 40,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 3,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 40
+   },
+   "case": {
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need",
+   "layer": 1,
+   "towns": 39,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: unrest": 0,
+    "dim threat": "no threat",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: politically_fractured",
+   "layer": 1,
+   "towns": 38,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: politically_fractured": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: political fracture",
+   "layer": 2,
+   "towns": 38,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::watch PRESENT",
+   "layer": 2,
+   "towns": 38,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: River",
+   "layer": 4,
+   "towns": 38,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "institution: mill": 0,
+    "navigable": 1,
+    "river": 1,
+    "thing mill": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-17::GARRISONED",
+   "layer": 2,
+   "towns": 38,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: CRITICAL",
+   "layer": 4,
+   "towns": 38,
+   "slotSilentTowns": 1,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: wartime": 0,
+    "gate": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: stable · CRISIS: indebted",
+   "layer": 1,
+   "towns": 37,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: indebted": 1
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: insurgency",
+   "layer": 1,
+   "towns": 37,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: insurgency": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: debt crisis",
+   "layer": 2,
+   "towns": 37,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-6::Naval Defense: Port only",
+   "layer": 2,
+   "towns": 37,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: threat, unrest": 0,
+    "dim threat": "no threat",
+    "thing docks": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: economic",
+   "layer": 4,
+   "towns": 37,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "gates": 10
+   },
+   "case": {
+    "market": 0,
+    "dim anchor": "anchored",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Critical. The seat could fall",
+   "layer": 3,
+   "towns": 37,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need",
+   "layer": 1,
+   "towns": 36,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: unrest": 0,
+    "dim threat": "no threat",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-18::UNWORKED",
+   "layer": 4,
+   "towns": 36,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: STRONG",
+   "layer": 4,
+   "towns": 36,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: succession": 0,
+    "crisis: unrest": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness CRITICAL",
+   "layer": 3,
+   "towns": 35,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied, under_siege": 1,
+    "crisis: threat, unrest": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness WEAK",
+   "layer": 3,
+   "towns": 35,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat, unrest": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-DEF-4::structure diffuse",
+   "layer": 2,
+   "towns": 35,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-6::TIER: a large share off the books (≥30)",
+   "layer": 2,
+   "towns": 35,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 3,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 35
+   },
+   "case": {
+    "guild": 1
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: famine",
+   "layer": 1,
+   "towns": 34,
+   "slotSilentTowns": 1,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: famine": 1
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: monster_pressure",
+   "layer": 1,
+   "towns": 34,
+   "slotSilentTowns": 2,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {
+    "crisis: monster_pressure": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: monster threat",
+   "layer": 2,
+   "towns": 34,
+   "slotSilentTowns": 2,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 2
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Desert",
+   "layer": 4,
+   "towns": 34,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: imports only, nothing outward",
+   "layer": 2,
+   "towns": 34,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-12::DRY-GROUND",
+   "layer": 1,
+   "towns": 34,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "terrain: desert": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-6::isolated",
+   "layer": 4,
+   "towns": 34,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 0,
+    "dim deficit": "deficit",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-POW-5::autocrat",
+   "layer": 3,
+   "towns": 34,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: recently_betrayed",
+   "layer": 1,
+   "towns": 33,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: recently_betrayed": 1
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: wartime",
+   "layer": 1,
+   "towns": 33,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: wartime": 1,
+    "thing war": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness WEAK",
+   "layer": 3,
+   "towns": 33,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat, unrest": 1,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: WAR FOOTING",
+   "layer": 1,
+   "towns": 33,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "thing war": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "layer": 2,
+   "towns": 33,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 0,
+    "crisis: any": 0,
+    "market": 0,
+    "dim crisis": "no crisis",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: no significant exports",
+   "layer": 2,
+   "towns": 33,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-5::criminal",
+   "layer": 3,
+   "towns": 33,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 3,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 33
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: mass_migration",
+   "layer": 1,
+   "towns": 32,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: mass_migration": 1,
+    "migration: exodus": 0,
+    "migration: influx": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: betrayal",
+   "layer": 2,
+   "towns": 32,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: mass migration, arrivals",
+   "layer": 2,
+   "towns": 32,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::Safe",
+   "layer": 2,
+   "towns": 32,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat, unrest": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-4::FIXTURE: gangs",
+   "layer": 3,
+   "towns": 32,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-8::MODERATE",
+   "layer": 2,
+   "towns": 32,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 0,
+    "crisis: any": 0,
+    "dim crisis": "no crisis"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::prosperity: Moderate / Modest",
+   "layer": 4,
+   "towns": 32,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: stable · CRISIS: succession_void",
+   "layer": 1,
+   "towns": 31,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: succession_void": 1
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: under_siege",
+   "layer": 1,
+   "towns": 31,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: under_siege": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: active siege",
+   "layer": 2,
+   "towns": 31,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: wartime",
+   "layer": 2,
+   "towns": 31,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "thing war": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-4::structure organized",
+   "layer": 3,
+   "towns": 31,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: unrest": 1,
+    "dim unrest": "unrest",
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: SUCCESSION CONTESTED",
+   "layer": 1,
+   "towns": 31,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Plains",
+   "layer": 4,
+   "towns": 31,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "grain": 1
+   }
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: religiousFraud",
+   "layer": 2,
+   "towns": 31,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "institution: temple": 1,
+    "thing temple": "present"
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: infiltrated",
+   "layer": 1,
+   "towns": 30,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: infiltrated": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness WEAK",
+   "layer": 3,
+   "towns": 30,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat, unrest": 0,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "layer": 2,
+   "towns": 30,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 1,
+    "crisis: any": 1,
+    "market": 0,
+    "dim crisis": "crisis",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Forest",
+   "layer": 4,
+   "towns": 30,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "game": 0,
+    "grain": 0,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-9::PRESSURED",
+   "layer": 2,
+   "towns": 30,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::prosperity: Wealthy / Thriving",
+   "layer": 4,
+   "towns": 30,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: succession crisis",
+   "layer": 2,
+   "towns": 29,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Forest",
+   "layer": 4,
+   "towns": 29,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "game": 0,
+    "grain": 0,
+    "watch": 0
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: stable · CRISIS: occupied",
+   "layer": 1,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: occupied": 1
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: stable · CRISIS: religious_conversion",
+   "layer": 1,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: religious_conversion": 1
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: plague_onset",
+   "layer": 1,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: plague_onset": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: occupation curfew",
+   "layer": 2,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: plague",
+   "layer": 2,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: religious upheaval",
+   "layer": 2,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-8::override: RELIGIOUS UPHEAVAL",
+   "layer": 1,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-8::override: UNDER OCCUPATION",
+   "layer": 1,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: local production listed",
+   "layer": 2,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 28,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "garrison": 0,
+    "gate": 0,
+    "watch": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C1: a high rung on a working approach",
+   "layer": 2,
+   "towns": 27,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: balanced",
+   "layer": 4,
+   "towns": 27,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "grain": 1,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Stable (no challengers)",
+   "layer": 3,
+   "towns": 26,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: succession": 0,
+    "crisis: unrest": 1,
+    "dim succession": "succession settled",
+    "dim unrest": "unrest"
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: deficit",
+   "layer": 4,
+   "towns": 25,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "grain": 1,
+    "institution: granary": 1,
+    "thing granary": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-6::FLAG: arcaneBlackMarket",
+   "layer": 2,
+   "towns": 25,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 3,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 25
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-9::DEFICIT",
+   "layer": 2,
+   "towns": 25,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: heresySuppression: hunted",
+   "layer": 2,
+   "towns": 25,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "institution: temple": 1,
+    "thing temple": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: STRONG",
+   "layer": 4,
+   "towns": 25,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: succession": 0,
+    "crisis: unrest": 0
+   }
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: slave_revolt",
+   "layer": 1,
+   "towns": 24,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: slave_revolt": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: REVOLT ACTIVE",
+   "layer": 1,
+   "towns": 24,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by DEFENSE, adverse",
+   "layer": 3,
+   "towns": 24,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-POW-6::operation role unlicensed revenue",
+   "layer": 2,
+   "towns": 24,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-8::override: COMMAND SPLIT",
+   "layer": 1,
+   "towns": 23,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "layer": 4,
+   "towns": 23,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 1,
+    "dim hunger": "no hunger",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: ADEQUATE",
+   "layer": 4,
+   "towns": 23,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0,
+    "walls": 0,
+    "dim walls": "no walls",
+    "thing walls": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.monster: ADEQUATE",
+   "layer": 4,
+   "towns": 23,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: monster_pressure": 0
+   }
+  },
+  {
+   "pool": "DS-POW-6::operation role money laundering",
+   "layer": 2,
+   "towns": 23,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: insurgency",
+   "layer": 2,
+   "towns": 22,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: INSURGENCY ACTIVE",
+   "layer": 1,
+   "towns": 22,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: UNDER TRIBUTE",
+   "layer": 1,
+   "towns": 22,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: balanced",
+   "layer": 4,
+   "towns": 22,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 1,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 22,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "garrison": 0,
+    "gate": 0,
+    "watch": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: MIGRATION, arrivals",
+   "layer": 1,
+   "towns": 21,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Pressured",
+   "layer": 4,
+   "towns": 21,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "institution: granary": 1,
+    "starving": 0,
+    "thing granary": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-5::river",
+   "layer": 5,
+   "towns": 21,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 21
+   },
+   "case": {
+    "river": 0
+   }
+  },
+  {
+   "pool": "DS-POW-6::GM ADVISORY: the commander is a political actor",
+   "layer": 2,
+   "towns": 21,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 21
+   },
+   "case": {
+    "commander": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, nothing organized",
+   "layer": 1,
+   "towns": 20,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "dim threat": "threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: QUARANTINE ACTIVE",
+   "layer": 1,
+   "towns": 20,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-6::FLAG: theocraticEconomy",
+   "layer": 2,
+   "towns": 20,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 3,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 20
+   },
+   "case": {
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-6::TIER: significant off-book activity (≥15)",
+   "layer": 2,
+   "towns": 20,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 2,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 20
+   },
+   "case": {
+    "guild": 0,
+    "market": 0,
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-ECO-8::WEALTHY",
+   "layer": 2,
+   "towns": 20,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "gate": 1,
+    "market": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-16::RECORDED-UNANCHORED",
+   "layer": 4,
+   "towns": 20,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-9::event type: political",
+   "layer": 4,
+   "towns": 20,
+   "slotSilentTowns": 1,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 19,
+    "slot": 1
+   },
+   "case": {
+    "dim anchor": "-"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: plagued, perimeter but NO force to hold it",
+   "layer": 1,
+   "towns": 19,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: ACTIVE SIEGE",
+   "layer": 1,
+   "towns": 19,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: INFILTRATION ACTIVE",
+   "layer": 1,
+   "towns": 19,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 4,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: SECURITY COMPROMISED",
+   "layer": 1,
+   "towns": 19,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "layer": 4,
+   "towns": 19,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "grain": 1,
+    "dim hunger": "no hunger",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-ECO-8::PROSPEROUS",
+   "layer": 2,
+   "towns": 19,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "walls": 0,
+    "dim walls": "no walls",
+    "thing walls": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-3::Very Safe",
+   "layer": 2,
+   "towns": 18,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat, unrest": 0,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-5::FIXTURE: free company",
+   "layer": 3,
+   "towns": 18,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "thing mercenary": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-9::ACTIVE FAMINE: the failed source, most of the harvest",
+   "layer": 2,
+   "towns": 18,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: ADEQUATE",
+   "layer": 4,
+   "towns": 18,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: unrest": 1,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-6::operation role protection + extraction",
+   "layer": 2,
+   "towns": 18,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence",
+   "layer": 1,
+   "towns": 17,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-6::Naval Defense: Port only",
+   "layer": 2,
+   "towns": 17,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: threat, unrest": 1,
+    "dim threat": "no threat",
+    "thing docks": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: BEAST PRESSURE",
+   "layer": 1,
+   "towns": 17,
+   "slotSilentTowns": 1,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: BEAST PRESSURE",
+   "layer": 1,
+   "towns": 17,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: INTERNAL PRESSURE (famine)",
+   "layer": 1,
+   "towns": 17,
+   "slotSilentTowns": 1,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: INTERNAL PRESSURE (famine)",
+   "layer": 1,
+   "towns": 17,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: established",
+   "layer": 4,
+   "towns": 17,
+   "slotSilentTowns": 0,
+   "linesLeft": 5,
+   "linesLeftByDeclarationsOnly": 5,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: hunger": 1,
+    "dim hunger": "hunger",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::MARKET-NARROW",
+   "layer": 2,
+   "towns": 17,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Secure",
+   "layer": 4,
+   "towns": 17,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "institution: granary": 0,
+    "market": 1,
+    "starving": 0,
+    "thing granary": "absent",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: religious",
+   "layer": 4,
+   "towns": 17,
+   "slotSilentTowns": 1,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "gates": 7,
+    "slot": 1
+   },
+   "case": {
+    "institution: temple": 0,
+    "dim anchor": "anchored"
+   }
+  },
+  {
+   "pool": "DS-POW-6::GM ADVISORY: the commander is a political actor",
+   "layer": 2,
+   "towns": 17,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 2,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 17
+   },
+   "case": {
+    "commander": 1
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness WEAK",
+   "layer": 3,
+   "towns": 16,
+   "slotSilentTowns": 1,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat, unrest": 1,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Deficit",
+   "layer": 4,
+   "towns": 16,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: famine": 0,
+    "institution: granary": 0,
+    "population: ≥ middling": 0,
+    "starving": 1,
+    "thing granary": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}",
+   "layer": 4,
+   "towns": 16,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied, plague_onset": 1,
+    "crisis: plague_onset": 0,
+    "crisis: threat": 1,
+    "crisis: unrest": 0,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::isolated",
+   "layer": 4,
+   "towns": 16,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 1,
+    "dim deficit": "deficit",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-1::readiness STRONG",
+   "layer": 3,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: unrest": 1,
+    "guardPresence": 1,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-3::Unsafe",
+   "layer": 2,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: COMMAND SPLIT",
+   "layer": 1,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: INSURGENCY ACTIVE",
+   "layer": 1,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: UNDER TRIBUTE",
+   "layer": 1,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: vulnerable",
+   "layer": 4,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: the criminal line leads",
+   "layer": 4,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 3,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 15
+   },
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "layer": 4,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Undefended",
+   "layer": 4,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 15
+   },
+   "case": {
+    "garrison": 0,
+    "militia": 1,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Pressured",
+   "layer": 4,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "institution: granary": 0,
+    "starving": 0,
+    "thing granary": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Secure",
+   "layer": 4,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "institution: granary": 0,
+    "market": 1,
+    "starving": 0,
+    "thing granary": "absent",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-5::FLAG: merchantCriminalBlur",
+   "layer": 2,
+   "towns": 15,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guild": 1,
+    "thing guildhall": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need",
+   "layer": 1,
+   "towns": 14,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: unrest": 1,
+    "dim threat": "no threat",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-5::arcane defense PRESENT",
+   "layer": 3,
+   "towns": 14,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: SECURITY COMPROMISED",
+   "layer": 1,
+   "towns": 14,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-QUIET",
+   "layer": 3,
+   "towns": 13,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: unrest": 0,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: frontier, force without a perimeter",
+   "layer": 1,
+   "towns": 13,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: insurgency",
+   "layer": 2,
+   "towns": 13,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: slave revolt",
+   "layer": 2,
+   "towns": 13,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
+   "layer": 4,
+   "towns": 13,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
+   "layer": 4,
+   "towns": 13,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-6::operation role parallel marketplace",
+   "layer": 2,
+   "towns": 13,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED",
+   "layer": 2,
+   "towns": 13,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: militia only",
+   "layer": 3,
+   "towns": 12,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "thing militia": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: ACTIVE SIEGE",
+   "layer": 1,
+   "towns": 12,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: established",
+   "layer": 4,
+   "towns": 12,
+   "slotSilentTowns": 0,
+   "linesLeft": 5,
+   "linesLeftByDeclarationsOnly": 5,
+   "linesLeftOwnerView": 5,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: hunger": 1,
+    "dim hunger": "hunger",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}",
+   "layer": 4,
+   "towns": 12,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied, plague_onset": 1,
+    "crisis: plague_onset": 0,
+    "crisis: threat": 1,
+    "crisis: unrest": 0,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-2::siege matched",
+   "layer": 3,
+   "towns": 12,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0,
+    "walls": 0,
+    "dim walls": "no walls",
+    "thing walls": "absent",
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-STR-1::ARITY: several banners standing at once",
+   "layer": 1,
+   "towns": 12,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-1::readiness STRONG",
+   "layer": 3,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: unrest": 0,
+    "guardPresence": 1,
+    "dim threat": "threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-QUIET",
+   "layer": 3,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: unrest": 0,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: slave revolt",
+   "layer": 2,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: INFILTRATION ACTIVE",
+   "layer": 1,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 3,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: MIGRATION, arrivals",
+   "layer": 1,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Forest",
+   "layer": 4,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "game": 0,
+    "grain": 1,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: mageTheocracy",
+   "layer": 2,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "institution: temple": 1,
+    "thing temple": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
+   "layer": 4,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: CRITICAL",
+   "layer": 4,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: wartime": 1,
+    "gate": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::river",
+   "layer": 4,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 11
+   },
+   "case": {
+    "river": 0,
+    "dim deficit": "deficit"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::recency framing: Deep history",
+   "layer": 4,
+   "towns": 11,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-12::MAGIC-DEPENDENT",
+   "layer": 2,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: deficit",
+   "layer": 4,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "grain": 1,
+    "institution: granary": 0,
+    "thing granary": "absent"
+   }
+  },
+  {
+   "pool": "DS-ECO-9::PRESSURED",
+   "layer": 2,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: crusaderSynthesis",
+   "layer": 2,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "garrison": 1,
+    "institution: temple": 1,
+    "thing garrison": "present",
+    "thing temple": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::MARKET-OPEN",
+   "layer": 2,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: under_siege": 1,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: ADEQUATE",
+   "layer": 4,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: unrest": 0,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::isolated",
+   "layer": 4,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 0,
+    "dim deficit": "no deficit",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-6::river",
+   "layer": 4,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 10
+   },
+   "case": {
+    "river": 0,
+    "dim deficit": "no deficit"
+   }
+  },
+  {
+   "pool": "DS-POW-2::siege matched",
+   "layer": 3,
+   "towns": 10,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 1,
+    "walls": 1,
+    "dim walls": "walls",
+    "thing walls": "present",
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+   "layer": 4,
+   "towns": 9,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "layer": 4,
+   "towns": 9,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-16::UNMARKED",
+   "layer": 4,
+   "towns": 9,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Deficit",
+   "layer": 4,
+   "towns": 9,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: famine": 0,
+    "institution: granary": 1,
+    "population: ≥ middling": 1,
+    "starving": 1,
+    "thing granary": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.monster: STRONG",
+   "layer": 4,
+   "towns": 9,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: monster_pressure": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-7::stress_economic: siege against trade income",
+   "layer": 2,
+   "towns": 9,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 1,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: disaster",
+   "layer": 4,
+   "towns": 9,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 9
+   },
+   "case": {
+    "dim anchor": "-"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: economic",
+   "layer": 4,
+   "towns": 9,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 9
+   },
+   "case": {
+    "market": 0,
+    "dim anchor": "-",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-CND-1::SEVERITY: low",
+   "layer": 1,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: STRONG",
+   "layer": 3,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis": 1,
+    "crisis: debt": 1,
+    "dim crisis": "crisis"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: force with NO walls",
+   "layer": 3,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::garrison PRESENT",
+   "layer": 1,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-6::Naval Defense: Port only",
+   "layer": 2,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: threat, unrest": 1,
+    "dim threat": "threat",
+    "thing docks": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-8::override: QUARANTINE ACTIVE",
+   "layer": 1,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "guardPresence": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-9::FLAG: magicMilitarized",
+   "layer": 2,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Coastal",
+   "layer": 4,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "coast": 1,
+    "fish": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Forest",
+   "layer": 4,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "game": 1,
+    "grain": 0,
+    "watch": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Forest",
+   "layer": 4,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "game": 0,
+    "grain": 1,
+    "watch": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: local production listed",
+   "layer": 2,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-ECO-8::COMFORTABLE",
+   "layer": 2,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: indebted": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-9::IMPORT-DEPENDENT",
+   "layer": 2,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 0,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.economic: STRONG",
+   "layer": 4,
+   "towns": 8,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "crisis: indebted": 1,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need",
+   "layer": 1,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: unrest": 0,
+    "dim threat": "threat",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-DEF-3::Very Safe",
+   "layer": 2,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat, unrest": 0,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: heresySuppression: preached",
+   "layer": 2,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "institution: temple": 1,
+    "thing temple": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Import-Dependent",
+   "layer": 4,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "market": 0,
+    "starving": 0,
+    "walls": 0,
+    "dim walls": "no walls",
+    "thing market": "absent",
+    "thing walls": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Pressured",
+   "layer": 4,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "institution: granary": 0,
+    "starving": 0,
+    "thing granary": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: STRONG",
+   "layer": 4,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: succession": 0,
+    "crisis: unrest": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-7::power_economic: temple economy under a secular seat",
+   "layer": 2,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: succession": 0,
+    "institution: temple": 1,
+    "market": 1,
+    "thing market": "present",
+    "thing temple": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-5::FLAG: merchantArmy",
+   "layer": 3,
+   "towns": 7,
+   "slotSilentTowns": 1,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "mercenary": 0
+   }
+  },
+  {
+   "pool": "DS-POW-5::FLAG: merchantArmy",
+   "layer": 3,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "mercenary": 1
+   }
+  },
+  {
+   "pool": "DS-POW-6::operation role duty evasion",
+   "layer": 2,
+   "towns": 7,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-8::WEALTHY",
+   "layer": 2,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "gate": 0,
+    "market": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-9::PRESSURED",
+   "layer": 2,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 1,
+    "dim hunger": "no hunger"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "garrison": 0,
+    "gate": 1,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: wartime": 1,
+    "garrison": 0,
+    "gate": 0,
+    "watch": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-7::power_economic: temple economy under a secular seat",
+   "layer": 2,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: succession": 0,
+    "institution: temple": 1,
+    "market": 1,
+    "thing market": "present",
+    "thing temple": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: demographic",
+   "layer": 4,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 6
+   },
+   "case": {
+    "dim anchor": "-"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: economic",
+   "layer": 4,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 0,
+    "dim anchor": "not anchored",
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: occupation_infiltration",
+   "layer": 4,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 6
+   },
+   "case": {
+    "dim anchor": "-"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: religious",
+   "layer": 4,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 6
+   },
+   "case": {
+    "institution: temple": 1,
+    "dim anchor": "-"
+   }
+  },
+  {
+   "pool": "DS-POW-2::siege matched",
+   "layer": 3,
+   "towns": 6,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0,
+    "walls": 1,
+    "dim walls": "walls",
+    "thing walls": "present",
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-1::strategic value LOW",
+   "layer": 4,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: under_siege, occupied": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: limited",
+   "layer": 4,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-9::IMPORT-DEPENDENT",
+   "layer": 2,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 1,
+    "grain": 0,
+    "dim hunger": "hunger"
+   }
+  },
+  {
+   "pool": "DS-GEN-13::ENTREPOT",
+   "layer": 2,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: under_siege": 1,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: CRITICAL",
+   "layer": 4,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 5
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: wartime": 0,
+    "gate": 0,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: wartime": 0,
+    "garrison": 0,
+    "gate": 0,
+    "watch": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.monster: ADEQUATE",
+   "layer": 4,
+   "towns": 5,
+   "slotSilentTowns": 1,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: monster_pressure": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-7::stress_economic: siege against trade income",
+   "layer": 2,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: religious",
+   "layer": 4,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 5
+   },
+   "case": {
+    "institution: temple": 0,
+    "dim anchor": "-"
+   }
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Stable (no challengers)",
+   "layer": 3,
+   "towns": 5,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: succession": 1,
+    "crisis: unrest": 0,
+    "dim succession": "succession open",
+    "dim unrest": "no unrest"
+   }
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-QUIET",
+   "layer": 3,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: unrest": 1,
+    "dim threat": "no threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-12::CAPACITY: ample",
+   "layer": 2,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::Very Safe",
+   "layer": 2,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat, unrest": 0,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)",
+   "layer": 2,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "stores: >= 6": 1
+   }
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "layer": 4,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "grain": 1,
+    "dim hunger": "no hunger",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-16::UNMARKED",
+   "layer": 4,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Import-Dependent",
+   "layer": 4,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 1,
+    "market": 1,
+    "starving": 0,
+    "walls": 1,
+    "dim walls": "walls",
+    "thing market": "present",
+    "thing walls": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.economic: STRONG",
+   "layer": 4,
+   "towns": 4,
+   "slotSilentTowns": 1,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {
+    "slot": 1
+   },
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 1,
+    "crisis: indebted": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "garrison": 0,
+    "gate": 0,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: exile_return",
+   "layer": 4,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 4
+   },
+   "case": {
+    "dim anchor": "-"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: magical",
+   "layer": 4,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 4
+   },
+   "case": {
+    "dim anchor": "-"
+   }
+  },
+  {
+   "pool": "DS-POW-5::FLAG: crimeIsGovt",
+   "layer": 3,
+   "towns": 4,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-3::Dangerous",
+   "layer": 2,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-5::ARCANE: practitioners",
+   "layer": 3,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-6::TIER: significant off-book activity (≥15)",
+   "layer": 2,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 3,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 3
+   },
+   "case": {
+    "guild": 0,
+    "market": 1,
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-8::WEALTHY",
+   "layer": 2,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "gate": 1,
+    "market": 1
+   }
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: heresySuppression: hunted",
+   "layer": 2,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 3
+   },
+   "case": {
+    "institution: temple": 0,
+    "thing temple": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Pressured",
+   "layer": 4,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: hunger": 0,
+    "institution: granary": 1,
+    "starving": 0,
+    "thing granary": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}",
+   "layer": 4,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied, plague_onset": 1,
+    "crisis: plague_onset": 1,
+    "crisis: threat": 0,
+    "crisis: unrest": 0,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}",
+   "layer": 4,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied, plague_onset": 1,
+    "crisis: plague_onset": 1,
+    "crisis: threat": 0,
+    "crisis: unrest": 0,
+    "watch": 1,
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.economic: ADEQUATE",
+   "layer": 4,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 0,
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: CRITICAL",
+   "layer": 4,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: wartime": 0,
+    "gate": 1,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "garrison": 0,
+    "gate": 1,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: wartime": 0,
+    "garrison": 1,
+    "gate": 1,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-7::power_economic: criminal faction in a transit hub",
+   "layer": 2,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-1::Endorsed",
+   "layer": 3,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "tier: <= village": 1,
+    "tier: >= town": 0
+   }
+  },
+  {
+   "pool": "DS-POW-2::siege matched",
+   "layer": 3,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0,
+    "walls": 0,
+    "dim walls": "no walls",
+    "thing walls": "absent",
+    "thing watch": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-6::capture pressure RECOVERING (strong security, prosperity)",
+   "layer": 2,
+   "towns": 3,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 2,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 3
+   },
+   "case": {
+    "watch": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-3::Very Safe",
+   "layer": 2,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat, unrest": 0,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-ECO-6::TIER: a large share off the books (≥30)",
+   "layer": 2,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 2,
+   "flag": "NONE",
+   "emptyBecause": {
+    "audience": 2
+   },
+   "case": {
+    "guild": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-17::LETTERED",
+   "layer": 2,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Undefended",
+   "layer": 4,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "garrison": 0,
+    "militia": 1,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Import-Dependent",
+   "layer": 4,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 1,
+    "market": 0,
+    "starving": 0,
+    "walls": 0,
+    "dim walls": "no walls",
+    "thing market": "absent",
+    "thing walls": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: ADEQUATE",
+   "layer": 4,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: unrest": 0,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: STRONG",
+   "layer": 4,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: succession": 1,
+    "crisis: unrest": 0
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: CRITICAL",
+   "layer": 4,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "gate": 1,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "garrison": 1,
+    "gate": 0,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: wartime": 0,
+    "garrison": 0,
+    "gate": 0,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: economic",
+   "layer": 4,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 1,
+    "dim anchor": "not anchored",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-POW-6::neutral baseline (nothing pulling either way)",
+   "layer": 2,
+   "towns": 2,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-QUIET",
+   "layer": 3,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: unrest": 0,
+    "dim threat": "threat"
+   }
+  },
+  {
+   "pool": "DS-DEF-3::Safe",
+   "layer": 2,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat, unrest": 0
+   }
+  },
+  {
+   "pool": "DS-DEF-3::Unsafe",
+   "layer": 2,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-4::structure organized",
+   "layer": 3,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: unrest": 0,
+    "dim unrest": "no unrest",
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-DEF-5::ARCANE: divine",
+   "layer": 3,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-DEF-5::ARCANE: druidic",
+   "layer": 3,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "grain": 1,
+    "dim hunger": "no hunger",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-ECO-8::WEALTHY",
+   "layer": 2,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "gate": 0,
+    "market": 0
+   }
+  },
+  {
+   "pool": "DS-ECO-9::ACTIVE FAMINE: the failed source, part of the harvest",
+   "layer": 2,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {}
+  },
+  {
+   "pool": "DS-ECO-9::IMPORT-DEPENDENT",
+   "layer": 2,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 1,
+    "grain": 1,
+    "dim hunger": "hunger"
+   }
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: heresySuppression: preached",
+   "layer": 2,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 1
+   },
+   "case": {
+    "institution: temple": 0,
+    "thing temple": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::defenseProfile.readiness.label: Undefended",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "garrison": 0,
+    "militia": 0,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::foodSecurity.label: Import-Dependent",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 4,
+   "linesLeftByDeclarationsOnly": 4,
+   "linesLeftOwnerView": 4,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: hunger": 0,
+    "market": 1,
+    "starving": 0,
+    "walls": 0,
+    "dim walls": "no walls",
+    "thing market": "present",
+    "thing walls": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: threat": 0,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.internal: ADEQUATE",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: unrest": 1,
+    "watch": 0,
+    "thing watch": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: STRONG",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 0,
+    "crisis: occupied": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: STRONG",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 3,
+   "linesLeftByDeclarationsOnly": 3,
+   "linesLeftOwnerView": 3,
+   "flag": "ok",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied": 0,
+    "walls": 0,
+    "dim walls": "no walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: STRONG",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: occupied": 1,
+    "walls": 1,
+    "dim walls": "walls"
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 1,
+    "crisis: wartime": 0,
+    "garrison": 0,
+    "gate": 0,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-3::scores.military: WEAK",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: any": 1,
+    "crisis: threat": 0,
+    "crisis: wartime": 1,
+    "garrison": 0,
+    "gate": 0,
+    "watch": 1
+   }
+  },
+  {
+   "pool": "DS-GEN-6::isolated",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "market": 1,
+    "dim deficit": "no deficit",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-7::stress_economic: siege against trade income",
+   "layer": 2,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 1,
+   "linesLeftByDeclarationsOnly": 1,
+   "linesLeftOwnerView": 1,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "gate": 0,
+    "market": 0,
+    "thing market": "absent"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: economic",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 0,
+   "linesLeftByDeclarationsOnly": 0,
+   "linesLeftOwnerView": 0,
+   "flag": "NONE",
+   "emptyBecause": {
+    "gates": 1
+   },
+   "case": {
+    "market": 1,
+    "dim anchor": "-",
+    "thing market": "present"
+   }
+  },
+  {
+   "pool": "DS-GEN-9::event type: magical",
+   "layer": 4,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "dim anchor": "not anchored"
+   }
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by FOOD, adverse",
+   "layer": 3,
+   "towns": 1,
+   "slotSilentTowns": 0,
+   "linesLeft": 2,
+   "linesLeftByDeclarationsOnly": 2,
+   "linesLeftOwnerView": 2,
+   "flag": "UNDER3",
+   "emptyBecause": {},
+   "case": {
+    "crisis: hunger": 0,
+    "institution: granary": 1,
+    "thing granary": "present"
+   }
+  }
+ ]
+}
