@@ -8,9 +8,8 @@ import { resolve, join } from 'node:path';
 
 export const MIGRATIONS = resolve(process.cwd(), 'supabase', 'migrations');
 
-export async function bootChain({ through = 999 } = {}) {
-  const db = new PGlite({ extensions: { pgcrypto } });
-  await db.exec(`
+/** The objects a Supabase project provides and the chain reads (auth, roles, cron, storage, pgcrypto). */
+export const SCAFFOLD_SQL = `
     create schema if not exists auth;
     create or replace function auth.uid() returns uuid language sql stable as $fn$
       select nullif(current_setting('test.uid', true), '')::uuid $fn$;
@@ -40,7 +39,19 @@ export async function bootChain({ through = 999 } = {}) {
       if not exists (select from pg_roles where rolname = 'service_role') then create role service_role; end if;
     end $do$;
     create extension if not exists pgcrypto;
-  `);
+  `;
+
+/** The migration files through `through`, in order, each as the text the probe applies. */
+export function chainFiles(through = 999) {
+  return readdirSync(MIGRATIONS).filter((f) => /^\d{3}_.*\.sql$/.test(f)).sort()
+    .filter((f) => Number(f.slice(0, 3)) <= through)
+    .map((f) => [f, readFileSync(join(MIGRATIONS, f), 'utf-8')
+      .replace(/create extension if not exists (pg_cron|pg_net)( with schema extensions)?/gi, 'select 1')]);
+}
+
+export async function bootChain({ through = 999 } = {}) {
+  const db = new PGlite({ extensions: { pgcrypto } });
+  await db.exec(SCAFFOLD_SQL);
   const files = readdirSync(MIGRATIONS).filter((f) => /^\d{3}_.*\.sql$/.test(f)).sort()
     .filter((f) => Number(f.slice(0, 3)) <= through);
   const failed = [];
