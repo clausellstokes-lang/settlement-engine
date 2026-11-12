@@ -1,0 +1,213 @@
+{
+ "engine": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
+ "failed": {
+  "at210": [],
+  "work211": []
+ },
+ "rows": [
+  {
+   "label": "F4 1000 member keys revealDm:false, one-person town",
+   "bytes": 28993,
+   "at210": {
+    "gallery": {
+     "median": 3,
+     "max": 3
+    },
+    "link": {
+     "median": 2,
+     "max": 3
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 9,
+     "max": 10
+    },
+    "link": {
+     "median": 3,
+     "max": 3
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 4,
+     "max": 4
+    },
+    "link": {
+     "median": 2,
+     "max": 2
+    }
+   }
+  },
+  {
+   "label": "F4 50000 member keys revealDm:false, one-person town",
+   "bytes": 1538993,
+   "at210": {
+    "gallery": {
+     "median": 3,
+     "max": 3
+    },
+    "link": {
+     "median": 91,
+     "max": 115
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 6,
+     "max": 7
+    },
+    "link": {
+     "median": 4,
+     "max": 5
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 5,
+     "max": 5
+    },
+    "link": {
+     "median": 3,
+     "max": 5
+    }
+   }
+  },
+  {
+   "label": "F5 4000 anonymous events x 2000 event eyes",
+   "bytes": 367631,
+   "at210": {
+    "gallery": {
+     "median": 1626,
+     "max": 1682
+    },
+    "link": {
+     "median": 3296,
+     "max": 3403
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 1730,
+     "max": 1782
+    },
+    "link": {
+     "median": 1732,
+     "max": 1808
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 1677,
+     "max": 1772
+    },
+    "link": {
+     "median": 1697,
+     "max": 1866
+    }
+   }
+  },
+  {
+   "label": "F5 8000 anonymous events x 2000 event eyes",
+   "bytes": 599631,
+   "at210": {
+    "gallery": {
+     "median": 6312,
+     "max": 6530
+    },
+    "link": {
+     "median": 13311,
+     "max": 13964
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 6633,
+     "max": 7100
+    },
+    "link": {
+     "median": 6644,
+     "max": 6949
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 6339,
+     "max": 6548
+    },
+    "link": {
+     "median": 6093,
+     "max": 6350
+    }
+   }
+  },
+  {
+   "label": "F5 2000 institutions, 2000 card-hidden ordinary houses",
+   "bytes": 285617,
+   "at210": {
+    "gallery": {
+     "median": 989,
+     "max": 1010
+    },
+    "link": {
+     "median": 2027,
+     "max": 2219
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 1300,
+     "max": 1414
+    },
+    "link": {
+     "median": 1227,
+     "max": 1307
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 1069,
+     "max": 1205
+    },
+    "link": {
+     "median": 1098,
+     "max": 1191
+    }
+   }
+  },
+  {
+   "label": "F5 4000 institutions, 2000 card-hidden ordinary houses",
+   "bytes": 465617,
+   "at210": {
+    "gallery": {
+     "median": 3973,
+     "max": 4201
+    },
+    "link": {
+     "median": 8002,
+     "max": 8341
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 4312,
+     "max": 4426
+    },
+    "link": {
+     "median": 4096,
+     "max": 4520
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 4094,
+     "max": 4500
+    },
+    "link": {
+     "median": 3865,
+     "max": 3984
+    }
+   }
+  }
+ ]
+}
