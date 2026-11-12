@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "3ff02367c8d798dcd3d4c462e77446fa0ec0d4e1",
-  "measuredBy": "COHERENCE-VEIL-2",
+  "measuredAtSha": "bf76f9e4de94536e7ffcc89e945d8f39db9e291d",
+  "measuredBy": "COHERENCE-VEIL-3",
   "date": "2026-11-12",
-  "note": "+1 file: tests/security/galleryVeilCures.pglite.test.js (the review rows on 211)",
+  "note": "eight new pin titles in tests/security/galleryVeilCures.pglite.test.js (the second review R1, R3, R4, R5, R9/R11 rows)",
   "files": 3202,
   "parked": 398,
   "credited": 2804,
-  "titles": 29102,
+  "titles": 29110,
   "suiteTitles": 7867
 }
