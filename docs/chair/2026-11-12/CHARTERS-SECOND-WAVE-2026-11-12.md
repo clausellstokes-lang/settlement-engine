@@ -163,3 +163,13 @@ The census was re-taken on master at db832c892 with one counter over the same 72
 8. **Every lane** carries one draft record with the six golden surfaces, takes every count on six sizes and forced crises, runs the census counter base against tip, runs the whole suite once at its final tip, and is read by an independent reviewer before the merge seat.
 
 **What this risks.** Taking lines out of pools changes which line many towns draw: every golden surface moves, declared and signed at the merge points, and the founding worlds are regenerated afterwards as already planned. A lane that waits on another's files does not idle; the fifth ruling sends it to its next item.
+
+## AMENDMENT (record 290, 2026-11-12): A GATE IS A DISQUALIFIER, AND FIT IS A WEIGHT
+
+**The owner, verbatim.** "Change 2 should be weighted not gaursbtedd because then you allow for increased chance of repition. For me, I have a preference of checking for disqualifiers rather than qualifiers."
+
+1. **A GATE IS A DISQUALIFIER AND SPEAKS ONLY OF TRUTH.** A line is in its pool unless something about the town makes it false. What would make it false is declared on the line, several per line. Nothing is required of a town for flavour. Where a line is true in one band of a value only, it may be written as that band; it is stored and checked as the disqualifier of the others.
+2. **FIT IS A WEIGHT, NEVER A WIN.** Among the lines left, the draw is seeded and weighted: a line that reads more of the town weighs more, a line that presumes nothing weighs least, and no line is guaranteed. The weights are bounded, and the repetition guard reads the result: a pool whose top share passes its row is a STOP.
+3. **THE WALKER IS WHAT MAKES A DISQUALIFIER SAFE.** A forgotten disqualifier fails open: the line prints everywhere. So a line that uses a registered word must carry that word's disqualifier, which the walker derives from the vocabulary; the page measure by vocabulary catches what the list does not yet know, and each find adds its words to the list.
+
+This restates ruling 2 of the amendment above (record 288) and withdraws the chair's "the most specific line wins" of record 289.
