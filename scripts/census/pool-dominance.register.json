@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 907,
+    "pools": 908,
     "printOneLine": 677,
-    "measuredUnder30Draws": 144,
+    "measuredUnder30Draws": 143,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction",
@@ -16,23 +16,23 @@
       },
       {
         "pool": "ledger:safetyProfile:SAFETY_LINE_SIBLINGS",
-        "top1": 0.8919,
+        "top1": 0.8805,
         "top5": 1,
-        "draws": 1646,
+        "draws": 2092,
         "lines": 2
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear",
-        "top1": 0.8691,
+        "top1": 0.8677,
         "top5": 1,
-        "draws": 1497,
+        "draws": 1496,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension",
-        "top1": 0.849,
+        "top1": 0.8519,
         "top5": 1,
-        "draws": 834,
+        "draws": 837,
         "lines": 3
       },
       {
@@ -44,51 +44,51 @@
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy",
-        "top1": 0.8007,
+        "top1": 0.8015,
         "top5": 1,
-        "draws": 662,
+        "draws": 675,
         "lines": 3
       },
       {
         "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
-        "top1": 0.7957,
+        "top1": 0.787,
         "top5": 1,
         "draws": 230,
         "lines": 2
       },
       {
         "pool": "ledger:crisisCast:CAST_REASON_SIBLINGS",
-        "top1": 0.7917,
+        "top1": 0.7858,
         "top5": 1,
-        "draws": 744,
+        "draws": 742,
         "lines": 2
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity",
-        "top1": 0.7787,
+        "top1": 0.7811,
         "top5": 1,
-        "draws": 723,
+        "draws": 717,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy",
-        "top1": 0.7776,
+        "top1": 0.7754,
         "top5": 1,
-        "draws": 1888,
+        "draws": 1887,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire",
-        "top1": 0.7279,
+        "top1": 0.7271,
         "top5": 1,
-        "draws": 441,
+        "draws": 447,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years",
-        "top1": 0.7254,
+        "top1": 0.7219,
         "top5": 1,
-        "draws": 415,
+        "draws": 417,
         "lines": 3
       }
     ],
@@ -145,7 +145,7 @@
       "lines": 3
     },
     "ledger:ARRIVAL_MEMORIES.great_flood": {
-      "top1": 0.5455,
+      "top1": 0.5,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -211,7 +211,7 @@
       "lines": 3
     },
     "ledger:ARRIVAL_PEOPLE.arabic": {
-      "top1": 0.2939,
+      "top1": 0.2887,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 4
@@ -385,7 +385,7 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.herbs.dominant": {
-      "top1": 0.375,
+      "top1": 0.3713,
       "top5": 1,
       "reason": "held at or below its original ceiling 0.375 (point 43 re-banked it upward within two draws; restored by POOL-GUARD where the rule holds it): banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -409,7 +409,7 @@
       "lines": 4
     },
     "ledger:ARRIVAL_SENSES.kilns.dominant": {
-      "top1": 0.3948,
+      "top1": 0.3685,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -481,7 +481,7 @@
       "lines": 3
     },
     "ledger:ARRIVAL_SENSES.timber.lines": {
-      "top1": 0.4737,
+      "top1": 0.45,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 4
@@ -541,7 +541,7 @@
       "lines": 2
     },
     "ledger:FOODWAYS.FRAMES.more": {
-      "top1": 0.75,
+      "top1": 0.6452,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 2
@@ -553,7 +553,7 @@
       "lines": 2
     },
     "ledger:FOODWAYS.FRAMES.two": {
-      "top1": 0.5693,
+      "top1": 0.5321,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 2
@@ -571,7 +571,7 @@
       "lines": 2
     },
     "ledger:FOODWAYS.SOURCE_PHRASES.grain": {
-      "top1": 0.3572,
+      "top1": 0.3469,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -976,7 +976,7 @@
       "top1": 0.2858,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 4
+      "lines": 5
     },
     "ledger:POLITICAL_FLAVOR.economic_heavy": {
       "top1": 0.2359,
@@ -986,7 +986,7 @@
     },
     "ledger:POLITICAL_FLAVOR.layered_history": {
       "top1": 0.2174,
-      "top5": 0.8261,
+      "top5": 0.8209,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 7
     },
@@ -998,12 +998,12 @@
     },
     "ledger:POLITICAL_FLAVOR.political_heavy": {
       "top1": 0.244,
-      "top5": 0.9025,
+      "top5": 0.9,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 6
     },
     "ledger:POLITICAL_FLAVOR.religious_heavy": {
-      "top1": 0.1945,
+      "top1": 0.1924,
       "top5": 0.7778,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 7
@@ -1130,7 +1130,7 @@
       "lines": 2
     },
     "ledger:foodBalance:OUTLOOK_HOOK_SIBLINGS": {
-      "top1": 0.649,
+      "top1": 0.6156,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 2
@@ -1670,13 +1670,13 @@
       "lines": 2
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:corruption_scandal": {
-      "top1": 0.5512,
+      "top1": 0.5483,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:crime_wave": {
-      "top1": 0.3456,
+      "top1": 0.3455,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1688,7 +1688,7 @@
       "lines": 2
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:disputed_land": {
-      "top1": 0.5798,
+      "top1": 0.579,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1700,7 +1700,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:external_threat": {
-      "top1": 0.7156,
+      "top1": 0.7149,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1736,7 +1736,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear": {
-      "top1": 0.8691,
+      "top1": 0.8677,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1766,7 +1766,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy": {
-      "top1": 0.7776,
+      "top1": 0.7754,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1784,7 +1784,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years": {
-      "top1": 0.7254,
+      "top1": 0.7219,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1814,7 +1814,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis": {
-      "top1": 0.6402,
+      "top1": 0.6363,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1832,7 +1832,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:tyranny": {
-      "top1": 0.66,
+      "top1": 0.6544,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1856,13 +1856,13 @@
       "lines": 3
     },
     "ledger:institutionDescVariants:city|Crafts|Bakers (5-15)": {
-      "top1": 0.3811,
+      "top1": 0.38,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
     },
     "ledger:institutionDescVariants:city|Crafts|Bowyers & fletchers (guild)": {
-      "top1": 0.3691,
+      "top1": 0.3669,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1880,19 +1880,19 @@
       "lines": 3
     },
     "ledger:institutionDescVariants:city|Crafts|Tanner (established)": {
-      "top1": 0.3505,
+      "top1": 0.3492,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
     },
     "ledger:institutionDescVariants:city|Criminal|Rookery": {
-      "top1": 0.3973,
+      "top1": 0.3836,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
     },
     "ledger:institutionDescVariants:city|Criminal|Underground network": {
-      "top1": 0.3667,
+      "top1": 0.3651,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1922,7 +1922,7 @@
       "lines": 3
     },
     "ledger:institutionDescVariants:city|Economy|Listening post": {
-      "top1": 0.4352,
+      "top1": 0.434,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1955,7 +1955,7 @@
       "lines": 3
     },
     "ledger:institutionDescVariants:city|Religious|Elder Grove Council": {
-      "top1": 0.4811,
+      "top1": 0.475,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -2171,7 +2171,7 @@
       "lines": 3
     },
     "ledger:institutionDescVariants:town|Entertainment|Traveling performers": {
-      "top1": 0.3567,
+      "top1": 0.3562,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -5351,7 +5351,7 @@
       "lines": 4
     },
     "ledger:npcData:HANDLER_TIE_ARCHETYPES.handler_partnership": {
-      "top1": 0.1792,
+      "top1": 0.1778,
       "top5": 0.8458,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 6
@@ -5382,18 +5382,18 @@
     },
     "ledger:npcData:NPC_WANTS": {
       "top1": 0.1295,
-      "top5": 0.6339,
+      "top5": 0.6336,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.bitter_history": {
       "top1": 0.1331,
-      "top5": 0.6495,
+      "top5": 0.6487,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.econ_crim_blur": {
-      "top1": 0.1652,
+      "top1": 0.1637,
       "top5": 0.6698,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
@@ -5406,12 +5406,12 @@
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.econ_mil_contract": {
       "top1": 0.2078,
-      "top5": 0.8052,
+      "top5": 0.7879,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.family_complication": {
-      "top1": 0.1315,
+      "top1": 0.1304,
       "top5": 0.6419,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
@@ -5423,7 +5423,7 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence": {
-      "top1": 0.1491,
+      "top1": 0.1461,
       "top5": 0.6662,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
@@ -5453,8 +5453,8 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mutual_leverage": {
-      "top1": 0.129,
-      "top5": 0.6338,
+      "top1": 0.1289,
+      "top5": 0.6331,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
     },
@@ -5483,7 +5483,7 @@
       "lines": 7
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.wary_alliance": {
-      "top1": 0.1327,
+      "top1": 0.1322,
       "top5": 0.6475,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
@@ -5495,7 +5495,7 @@
       "lines": 4
     },
     "ledger:npcGenerator:NPC_GOAL_SIBLINGS": {
-      "top1": 0.7957,
+      "top1": 0.787,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 2
@@ -5530,6 +5530,12 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 1
     },
+    "ledger:prosperity:PROSPERITY_LINE_SIBLINGS": {
+      "top1": 0.6833,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
+    },
     "ledger:rulingStructure:FACTION_DESC_SIBLINGS": {
       "top1": 1,
       "top5": 1,
@@ -5537,7 +5543,7 @@
       "lines": 1
     },
     "ledger:safetyProfile:SAFETY_LINE_SIBLINGS": {
-      "top1": 0.8919,
+      "top1": 0.8805,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 2
