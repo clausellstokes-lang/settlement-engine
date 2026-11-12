@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-12T07:30:20.320Z",
+  "generatedAt": "2026-11-12T17:54:11.139Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "450b2c6c7ca00dd8",
+  "sourceHash": "024b0a8282d9c001",
   "inputs": [
     "src/data/bandLadders.js",
     "src/data/constants.js",
@@ -55,6 +55,7 @@
     "src/domain/facts/famine.js",
     "src/domain/facts/guild.js",
     "src/domain/facts/institutions.js",
+    "src/domain/facts/keep.js",
     "src/domain/facts/magic.js",
     "src/domain/facts/market.js",
     "src/domain/facts/migration.js",
