@@ -19,6 +19,7 @@ import { partitionDefenseInstitutions } from '../domain/institutions/defenseInst
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
+import { keepOf } from '../domain/facts/keep.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -166,29 +167,23 @@ const computeDefenseScores = (
   }
 
   // ── Military score ──────────────────────────────────────────────────────────
-  let military = communityMilBase;
-  if (inst.hasWalls)       military += 30;
-  if (inst.hasGarrison)    military += 28;
-  if (inst.hasMilitia)     military += 10;
-  if (inst.hasWatch)       military +=  7;
-  if (inst.hasMercenary)   military += 14;
-  if (inst.hasCharterHall) military += 10;
-
-  // Arcane deterrence — scaled (replaces flat +8)
-  if (hasArcane) {
-    const deterrence = Math.round(10 + Math.min(15, (magPri - 35) * 0.25));
-    military += deterrence;
-    if (hasInst('wizard\'s tower')) military += 5; // visible high-level fortification
-    if (hasArcaneGuild)             military += 8; // organised coordinated magic defense
-  }
-  // Divine martial blessing (a battle blessing, crusading morale)
-  if (hasDivineStrong && relPri >= 70) military += 6;
-
-  const hasAnyDefense = inst.hasWalls || inst.hasGarrison || inst.hasMilitia ||
-                        inst.hasWatch || inst.hasMercenary || inst.hasCharterHall;
-  military = Math.min(100, military + Math.round(milEffective * (hasAnyDefense ? 0.35 : 0.06)));
-  // Apply terrain multiplier — natural chokepoints, elevation, approach restriction
-  military = Math.min(100, Math.round(military * terrainMilMult));
+  // COHERENCE-UPKEEP (the chair's ruling 2 of 2026-11-12; the owner: a hired company or an
+  // adventurers' charter stands in for a guard "to an appropriate but lesser degree that scales to
+  // the prosperity of that settlement"). The STANDING score below is the walls, the standing forces,
+  // the traditions and the slider term, under the terrain and the wage gate. The HIRED force is
+  // worth what the place can pay for outright (`keepOf(prosperity).bought`, the one home), added
+  // AFTER the wage gate so it has one reader; each term stays at or under its present value. A
+  // place with hired force and NO standing force does not take the standing-force slider term in
+  // full, and its military is never above what the same place scores with a watch in the hired
+  // force's stead (the invariant, pinned by tests/generators/upkeepHired.test.js).
+  const keep = keepOf(config._prosperity);
+  const SLIDER_FULL = 0.35;
+  const SLIDER_NONE = 0.06;
+  /** @param {any} f */
+  const hasStanding = (f) => f.hasGarrison || f.hasMilitia || f.hasWatch;
+  /** @param {any} f */
+  const hasHiredForce = (f) => f.hasMercenary || f.hasCharterHall;
+  const hasAnyDefense = inst.hasWalls || hasStanding(inst) || hasHiredForce(inst);
   // Economic-upkeep gate (garrison wages, wall maintenance): paid defenses
   // degrade when the economy cannot fund them. Same shape as econHealthMult —
   // identity (×1.0) at econOutput >= 50, linear to the floor at 0 — applied
@@ -197,8 +192,37 @@ const computeDefenseScores = (
   // instantly. The community baseline (armed households, terrain alarm) is
   // unpaid and exempt — only the funded portion above it is gated.
   const milUpkeepMult = Math.min(1, 0.6 + (econOutput / 50) * 0.4);
-  if (hasAnyDefense && milUpkeepMult < 1) {
-    military = Math.round(communityMilBase + Math.max(0, military - communityMilBase) * milUpkeepMult);
+  /** The standing score of a set of flags: everything but the hired force. @param {any} f */
+  const standingMilitary = (f) => {
+    let m = communityMilBase;
+    if (f.hasWalls)    m += 30;
+    if (f.hasGarrison) m += 28;
+    if (f.hasMilitia)  m += 10;
+    if (f.hasWatch)    m +=  7;
+    // Arcane deterrence — scaled (replaces flat +8)
+    if (hasArcane) {
+      m += Math.round(10 + Math.min(15, (magPri - 35) * 0.25));
+      if (hasInst('wizard\'s tower')) m += 5; // visible high-level fortification
+      if (hasArcaneGuild)             m += 8; // organised coordinated magic defense
+    }
+    // Divine martial blessing (a battle blessing, crusading morale)
+    if (hasDivineStrong && relPri >= 70) m += 6;
+    const builtOrStanding = f.hasWalls || hasStanding(f);
+    const sliderRate = builtOrStanding ? SLIDER_FULL
+      : hasHiredForce(f) ? SLIDER_NONE + (SLIDER_FULL - SLIDER_NONE) * keep.bought
+      : SLIDER_NONE;
+    m = Math.min(100, m + Math.round(milEffective * sliderRate));
+    // Apply terrain multiplier — natural chokepoints, elevation, approach restriction
+    m = Math.min(100, Math.round(m * terrainMilMult));
+    if ((builtOrStanding || hasHiredForce(f)) && milUpkeepMult < 1) {
+      m = Math.round(communityMilBase + Math.max(0, m - communityMilBase) * milUpkeepMult);
+    }
+    return m;
+  };
+  const hiredMilitary = Math.round(((inst.hasMercenary ? 14 : 0) + (inst.hasCharterHall ? 10 : 0)) * keep.bought);
+  let military = Math.min(100, standingMilitary(inst) + hiredMilitary);
+  if (hasHiredForce(inst) && !hasStanding(inst)) {
+    military = Math.min(military, standingMilitary({ ...inst, hasMercenary: false, hasCharterHall: false, hasWatch: true }));
   }
 
   // ── Monster score ───────────────────────────────────────────────────────────
@@ -207,7 +231,6 @@ const computeDefenseScores = (
   if (threat === 'plagued')  monster += 8;
   else if (threat === 'frontier') monster += 4;
   const monsterThreatBase = monster;
-  if (inst.hasCharterHall) monster += 35;
   if (inst.hasGarrison)    monster += 20;
   if (inst.hasWalls)       monster += 20;
   if (inst.hasMilitia)     monster += 12;
@@ -235,6 +258,9 @@ const computeDefenseScores = (
   if (monsterUpkeepMult < 1) {
     monster = Math.round(monsterUnpaidBase + Math.max(0, monster - monsterUnpaidBase) * monsterUpkeepMult);
   }
+  // COHERENCE-UPKEEP (ruling 2): the charter hall's bounty work is bought outright, worth what the
+  // place can pay (`keep.bought`), added after the gate so it has one reader.
+  if (inst.hasCharterHall) monster = Math.min(100, monster + Math.round(35 * keep.bought));
   if (threat === 'plagued') monster = Math.max(0, monster - 15);
 
   // ── Internal order score ────────────────────────────────────────────────────
@@ -553,7 +579,7 @@ export function generateDefenseProfile(settlement) {
     Math.round(instFlags.religionInfluence),
     getPriorities(config),
     config.monsterThreat || 'frontier',
-    { ...config, _institutions: institutions, _foodSecurity: foodSecurity },
+    { ...config, _institutions: institutions, _foodSecurity: foodSecurity, _prosperity: settlement.economicState?.prosperity },
     settlement.tier || 'town',
     stressTypes,
     magicReading === 'relied-upon' || magicReading === 'integral',
@@ -602,8 +628,9 @@ export function generateDefenseProfile(settlement) {
     else if (fortificationChain.status === 'impaired') chainMilBonus -= 4;
   }
   // Mercenary chain healthy = +4 military (contract force available)
+  // COHERENCE-UPKEEP (ruling 2): the contract force is bought outright, at the place's share.
   if (chainHealthy(mercenaryChain)) {
-    chainMilBonus += 4;
+    chainMilBonus += Math.round(4 * keepOf(settlement.economicState?.prosperity).bought);
   }
   // Food processing chain healthy = +5 economic defense (logistics well-supplied)
   if (foodProcChain && foodProcChain.status !== 'impaired') chainEconBonus += 5;
