@@ -154,6 +154,7 @@ describe('F13: the income lines are declared where they are printed', () => {
     // the branch prints each by its declared constant, so a reworded line cannot leave its declaration behind
     expect(site).toMatch(/\? GRAIN_SURPLUS_LINE\b/);
     expect(site).toMatch(/\? LOCAL_COAL_LINE\b/);
+    // anchored: the same source text matched the branch's LOCAL_COAL_LINE on the line above
     expect(site).not.toContain('Local coal fires the forges');
   });
 });
@@ -277,6 +278,7 @@ describe('item 3′ (i): the exporter\'s refusal is the leaf\'s', () => {
     const site = readFileSync(new URL('../../src/generators/computeActiveChains.js', import.meta.url), 'utf8');
     expect(site).toMatch(/import \{ chainYieldRefused \} from '\.\.\/domain\/chainYield\.js';/);
     expect(site).toMatch(/\.filter\(ch => ch\.exportable && !chainYieldRefused\(ch, isDepletedResource\)\)/);
+    // anchored: the same source text matched the exporter's filter on the line above
     expect(site).not.toMatch(/chainIsDepleted/);
   });
 });
@@ -296,8 +298,9 @@ describe('A′ refilled: a refused winner does not leave a holder below its size
       const settlement = birth(seed);
       const roster = settlement.config.nearbyResources;
       expect(settlement.config.tradeRouteAccess, seed).toBe('road');
-      expect(roster, seed).not.toContain('crossroads_position');
       expect(roster.length, `${seed}: ${roster.join(', ')}`).toBeGreaterThanOrEqual(MIN[seed.split('-')[1]]);
+      // anchored: the roster was just held at or above its size's minimum, so it cannot be empty
+      expect(roster, seed).not.toContain('crossroads_position');
       expect(new Set(roster).size, seed).toBe(roster.length);
     }), 'a refused winner leaves no holder short');
   });

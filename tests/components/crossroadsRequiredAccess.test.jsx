@@ -31,6 +31,8 @@ describe('the crossroads position on a road (one datum, three readers)', () => {
   });
   it('on a crossroads it is offered plainly', () => {
     render(<NearbyResourcesPanel config={{ tradeRouteAccess: 'crossroads', nearbyResourcesRandom: false, nearbyResources: [] }} updateConfig={vi.fn()} />);
+    expect(crossroadsButton(), 'the crossroads button is on the panel').toBeTruthy();
+    // anchored: the button was just found, so its title is read from the panel and not from a missing node
     expect(crossroadsButton()?.getAttribute('title') || '').not.toMatch(/force include/);
   });
   it('a forced position warns on a road in the same words as on a port; never on a crossroads', () => {
