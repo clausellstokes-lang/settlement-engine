@@ -242,7 +242,9 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
   // COHERENCE-POWERS item 3 (the chair's ruling of 2026-11-12): two more powers mint their one face. An APPOINTED
   // stress power (the occupation authority) is the occupier's man, whatever house lands on it (one hat); a criminal
   // power no house of its own stands behind (a small place's protection operation) has its master, veiled.
-  const housed = (/** @type {string} */ name) => [...byHouse.values()].some((backs) => backs.some((b) => b.faction === name && b.share > 0));
+  // COHERENCE-POWERS-3 (F4): a power is housed only where a house's face has joined it above (a share dealt to a house
+  // with no face, or to one that backs no power, puts no one on the page)
+  const housed = (/** @type {string} */ name) => (members.get(name) || []).some((m) => m.card?.institution?.kind === 'house');
   const mintsBySent = (/** @type {Record<string, unknown>} */ f) => stressPowerRowOf(settlement, f)?.appointed === true
     || (isCriminalPower(f) && !housed(nameOf(f)));
   const unfaced = factions.filter((f) => {

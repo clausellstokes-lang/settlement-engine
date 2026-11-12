@@ -35,8 +35,10 @@ export const STRESS_POWER_FACES = Object.freeze([
   // holds the town, or that the realm is split, seats that power second, after the ruling power, at every size
   // (density/densityRoll.js :: rollDensityPlan reads the mark through applyDensityLaw.js :: planFor)
   { stress: 'occupied', power: 'Occupation Authority', appointed: true, seated: true },
-  { stress: 'politically_fractured', power: 'Loyalist Noble Bloc', seated: true },
-  { stress: 'politically_fractured', power: 'Reform Noble Bloc', seated: true },
+  { stress: 'politically_fractured', power: 'Loyalist Noble Bloc', seated: true, house: { kinds: ['noble'] },
+    leaderless: 'No one house speaks for it: the lords who back the crown act together.' },
+  { stress: 'politically_fractured', power: 'Reform Noble Bloc', seated: true, house: { kinds: ['noble'] },
+    leaderless: 'No one house speaks for it: the lords who want new terms act together.' },
   { stress: 'politically_fractured', power: 'Third Bloc (Neutrals)', seated: true },
   // a fractured realm's pool-drawn bloc (stressFactions.js :: pushPoolNamed, category 'other')
   { stress: 'politically_fractured', archetype: 'other', seated: true },
@@ -59,6 +61,18 @@ export const STRESS_POWER_FACES = Object.freeze([
     leaderless: 'It has no one preacher here: the converts meet in one another\'s houses.' },
   { stress: 'religious_conversion', power: 'Conversion Enforcement Office', house: { kinds: ['religious'] },
     leaderless: 'It has no one officer in town: its orders come from the faith\'s own seat, and the faithful carry them out.' },
+  // COHERENCE-POWERS-3 (F4): every power stressFactions.js pushes whose kind is one a house backs (so no face is minted
+  // for it) has its row, enumerated from the source; a power of no backed kind is minted its face (castPowers.js)
+  { stress: 'indebted', power: 'Crown Creditors (Noble Coalition)', house: { kinds: ['noble'] },
+    leaderless: 'No one lord speaks for it: the houses that hold the crown\'s debt act together.' },
+  { stress: 'insurgency', power: "Commons' Reform Assembly",
+    leaderless: 'It has no one leader yet: the commons speak for it in the street, and no one can treat with it.' },
+  { stress: 'insurgency', power: 'Loyalist Noble Opposition', house: { kinds: ['noble'] },
+    leaderless: 'No one house leads it: the lords who stand by the old order act together.' },
+  { stress: 'insurgency', power: "Reform Stewards' Coalition",
+    leaderless: 'It has no one head: the stewards who want reform speak for it together.' },
+  { stress: 'religious_conversion', power: 'Underground Old Faith', veiled: true,
+    leaderless: 'It has no one priest: the old faith\'s people keep its rites in secret, house by house.' },
   // a claimant's party: the old families' houses
   { stress: 'succession_void', archetype: 'noble', house: { kinds: ['noble'] },
     leaderless: 'No one claimant has stepped forward yet: the old families press the claim together.' },

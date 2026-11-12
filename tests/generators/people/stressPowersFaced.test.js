@@ -42,12 +42,16 @@ const SEEDS = Object.freeze([
   // COHERENCE-POWERS-3, REVIEW-POWERS F5: the Resistance Network's members dealt by a house's share, unveiled at 1a32c200a
   'rvf-occupied-city-1', 'rvw-town-63', 'rvf-occupied-metropolis-0', 'rvf-occupied-metropolis-1', 'rvf-occupied-metropolis-2',
   'rvf-occupied-metropolis-4', 'rvf-occupied-metropolis-7',
+  // COHERENCE-POWERS-3, REVIEW-POWERS F4: a power with neither a member nor a line at 1a32c200a (the noble blocs; a
+  // Thieves' Guild whose one backer bears no face)
+  'rvw-city-31', 'rvw-metropolis-81', 'rvf-plague_onset-town-3',
 ]);
 
 /** @param {string} seed */
 function configOf(seed) {
   const m = /^(?:l2|rvf)-(.+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
   if (m) return { ...DIALS, settType: m[2], selectedStresses: [m[1]], selectedStressesRandom: false };
+  if (/^rvw-/.test(seed)) return { ...DIALS, settType: seed.split('-')[1] };
   return { ...DIALS, settType: seed.split('-')[1] };
 }
 
