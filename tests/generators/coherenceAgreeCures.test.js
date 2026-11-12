@@ -157,3 +157,29 @@ describe('F13: the income lines are declared where they are printed', () => {
     expect(site).not.toContain('Local coal fires the forges');
   });
 });
+
+/**
+ * STOP 2 (b) (COHERENCE-AGREE-3, the chair's ruling, 2026-11-12): the Court Fees and Gate Tolls lines read the
+ * defence home's narrower facts (`hasCourthouse`, `hasTollGate`), whose names moved there from the economy's own
+ * lists. THE PIN THAT NO PRINTED LINE MOVES: on births across the four browser tiers each old list answers what
+ * the home answers, and the record's two income lines stand exactly where the home says.
+ */
+describe('STOP 2 (b): Court Fees and Gate Tolls read the home, and no answer moves', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('the old lists, the home and the printed lines agree on every roster', async () => {
+    const { defenseFactsOf } = await import('../../src/domain/defense/defenseFacts.js');
+    const { nativeSemanticNames } = await import('../../src/domain/content/customContentSemanticAuthority.js');
+    const seeds = ['village', 'town', 'city', 'metropolis'].flatMap((tier) => Array.from({ length: 8 }, (_, i) => `agree-${tier}-${i}`));
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const names = nativeSemanticNames(settlement.institutions).map((n) => n.toLowerCase());
+      const named = (...kws) => kws.some((kw) => names.some((n) => n.includes(kw)));
+      const home = defenseFactsOf(settlement);
+      expect(named('courthouse', 'multiple court', 'city hall'), `${seed}: the court-fee list`).toBe(home.hasCourthouse);
+      expect(named('gate', 'town wall', 'city wall'), `${seed}: the gate-toll list`).toBe(home.hasTollGate);
+      const income = settlement.economicState.incomeSources.map((e) => e.source);
+      expect(income.includes('Court Fees & Fines'), `${seed}: Court Fees where the home keeps a courthouse`).toBe(home.hasCourthouse);
+      if (income.includes('Gate Tolls')) expect(home.hasTollGate, `${seed}: Gate Tolls only at a toll gate`).toBe(true);
+    }), 'Court Fees and Gate Tolls agree with the home');
+  });
+});

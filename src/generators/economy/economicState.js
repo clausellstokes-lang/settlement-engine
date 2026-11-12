@@ -179,7 +179,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     });
   }
   // ── Court fees & fines ──
-  if (hasInst('courthouse', 'multiple court', 'city hall')) {
+  const defenceHome = defenseFactsOf({ institutions }); // COHERENCE-AGREE-3 (STOP 2 b): the court's and the gate's narrower facts
+  if (defenceHome.hasCourthouse) {
     incomeBuild.push({
       source: 'Court Fees & Fines',
       percentage: 10,
@@ -194,7 +195,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       percentage: 20,
       desc: 'Tolls taken on the roads that meet here at the crossroads.',
     });
-  } else if (!trulyIsolated && tradeRoute === 'road' && hasInst('gate', 'town wall', 'city wall')) {
+  } else if (!trulyIsolated && tradeRoute === 'road' && defenceHome.hasTollGate) {
     incomeBuild.push({
       source: 'Gate Tolls',
       percentage: 10,
