@@ -805,3 +805,38 @@ No other printed word is new in this part.
    ("Warm-hearted."). The composer is as ruled; the test's oracle has no arm for (d). RECOMMENDATION: the oracle accepts
    the temperament where `says` is 'temperament' and it is the record's own `personality.dominant` (a widening of a pin,
    so the chair's), or rule that a target who keeps the crisis's own secret is voiced with it.
+
+## 13. The chair's two rulings on section 12, done (after the hand-back at e86d069be)
+
+The chair read the hand-back at e86d069be, let the six calls stand and ruled both parked titles. Each is one commit;
+the edge bundles are re-emitted after them, last and alone.
+
+1. **THE LEADERLESS LINE, ONCE (0ffbf39b8).** `data/stressPowerFaces.js`: the old families' body row gains a declared
+   `pointer`, "Presses the claim with {power}.", in the same register as its line. `people/stressPowerFaces.js ::
+   leaderlessLineOf`, the line's one reader: where two or more powers of one row with a pointer have no one on the page,
+   the line prints once, under the stronger body (its power, then the roster's order), and each other body reads the
+   pointer, `{power}` filled with the stronger body's roster name. Its card is never bare. Red first:
+   `successionClaimants.test.js`'s new arm on x50-trim-21 (The Highborn Circle 11, The Peerage 10: The Peerage read the
+   line, not "Presses the claim with The Highborn Circle."), and the F3 guard's corpus arm now checks the once rule on
+   every succession birth. Green: the guard 5 of 5, stressPowersFaced, and X-50 tabSentencesOnce 2 of 2.
+   **The count on both corpora (`f3count.mjs` at the cure):** R 1,845 has 6 faceless bodies and S 2,460 has 11, each
+   alone in its birth, so each keeps its full line. Births with two or more faceless bodies: 0 on R, 0 on S, so 0 lines
+   printed twice before the cure and 0 after. The class lives on the X-50 corpus (x50-trim-21), where it is cured.
+   **No generator output moves:** every record hash on both corpora (4,305 births, whole-record sha256) equals the F3
+   cure's dump at c67c8319e, and the reader is called only by the Power tab's roster row.
+2. **THE ORACLE GAINS ITS ARM (d) (69949c00e).** `tonightSheetOnce.test.jsx`: the per-person oracle has one home
+   (`personMissOf`) and R11's ruled step (d): the temperament is accepted ONLY where the sheet's `says` is
+   'temperament' AND the line is the record's own `personality.dominant`. This re-keys the test to the ruled design by
+   identity; it does not loosen it. The composer is untouched. Planted (an executed arm of the test): a wrong
+   temperament on x51-tonight-51's seat-holder is red, and the true temperament said as a want is red. Before: red at L5
+   on x51-tonight-51. After: 4 of 4.
+
+**New words for the owner's veto list:** "Presses the claim with <the stronger body>." (the chair's draft, taken as
+written, `{power}` from the roster).
+
+**The lighting census** moved by its own door: titles 29,187 -> 29,189, one title each (e6fc88690, re-frozen at the clean
+tip, the plain re-run 34 of 34). **The check after the two commits:** `tests/lint`, `tests/data`, `tests/generators/people`,
+`tests/pdf` and the Power tab's component tests at two workers: every red is a title L5 already classed, and nothing new
+but the census, cured as above. L1 at 0ffbf39b8: domain-strict 1,113 (ceiling 1,113), typecheck:ratchet 167 (ceiling
+167), eslint 0. **L5's classing at the tip changes by these two only:** the parked 2 are green, so the line's 8, the
+founding worlds' 1 and the merge seat's 46 remain.
