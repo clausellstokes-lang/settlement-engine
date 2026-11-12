@@ -9,9 +9,9 @@
  *
  *   ARM 1 (source)  every string literal of three words or more under ARM1_ROOTS that uses a thing's
  *                   words either DECLARES the thing (an atom of `atoms`, on its needs or its excludes,
- *                   in the declaration around it: `needs`, `excludes`, `tags`, `marks`, `cast`,
- *                   `poolDeclares`, or an array handed to the same call) or stands in the register
- *                   under a named reason.
+ *                   in a declaration around it that a draw door enforces — `needs`, `excludes`,
+ *                   `poolDeclares`, a state variant's `marks`, a tagged table's `tags`; `DECL_PROPS` —
+ *                   or an array handed to the same call) or stands in a register under a named reason.
  *   ARM 2 (printed) every sentence of a generated record that uses a thing's words, printed in a town
  *                   where the vocabulary's own readers (`factsOf`) say the thing is ABSENT, is listed;
  *                   a listed line stands in the register under a named reason, or the walker reds.
@@ -54,6 +54,20 @@ const require = createRequire(import.meta.url);
 const ts = require('typescript');
 
 export const REGISTER_REL = 'tests/lint/presumedThings.register.json';
+
+/**
+ * THE WIDENED REGISTER (W2-B-DECLARE, 2026-11-12): the habitat a widening of this walker newly sees — a
+ * carrier no door enforces (item 1), a new root or a new word (item 3) — banked shrink-only beside the first
+ * register, through its door `scripts/presumed-things-door.mjs` (`--shrink`; `--bank <reason> --base <rev>`
+ * banks only a literal that already stood at the widening's base, so no new line is ever banked).
+ */
+export const WIDENED_REGISTER_REL = 'tests/lint/presumedThings.widened.register.json';
+
+/** An arm-1 hit's key in either register: file, thing, the literal's first 120 characters. */
+export const hitKey = (file, thing, text) => `${file}\t${thing}\t${String(text).slice(0, 120)}`;
+
+/** The arm-1 keys a register banks. @param {{ arm1: Record<string, Array<[string, string, string]>> }} register */
+export const bankedKeys = (register) => new Set(Object.entries(register.arm1).flatMap(([f, rows]) => rows.map((r) => hitKey(f, r[0], r[2]))));
 
 /** The trees arm 1 reads: the pool data and the writers that hold prose. */
 export const ARM1_ROOTS = Object.freeze(['src/data', 'src/generators']);
@@ -207,7 +221,51 @@ export function presentForDenial(thing, facts, names) {
 
 // ── ARM 1: the source ─────────────────────────────────────────────────────────────────────────
 
-const DECL_PROPS = new Set(['needs', 'excludes', 'tags', 'marks', 'cast', 'poolDeclares', 'requires']);
+/**
+ * THE CARRIERS ARM 1 CREDITS ARE THE CARRIERS A DOOR ENFORCES (W2-B-DECLARE item 1; the chair's record 294,
+ * ruling 5: "the walker accepts three carriers of a declaration that the draw does not enforce"). A literal
+ * counts as declared only where the declaration around it is one a draw door READS:
+ *   `needs`, `excludes`  the generator door, `drawDeclared` / `filterDeclared` (`factVocabulary.js :: declarationOf`);
+ *   `poolDeclares`       both doors' pool-level atoms (`drawDeclared`'s option; the kernel's `eligibleVariants`);
+ *   `marks`              the corpus door, and ONLY on a state variant (an object with a numeric `vid`): the
+ *                        kernel reads a variant's marks as atoms there alone (`stateProseKernel.js ::
+ *                        variantFactDeclaration`; the causal register's marks are open arm names);
+ *   `tags`               ONLY in a file whose table a door draws `{ tagged: true }` (`TAGGED_TABLE_FILES`):
+ *                        the vocabulary reads `tags` at no other site (`declarationOf`).
+ * `cast` (`conflictIssues.js`) and `requires` (`spatialData.js`, `resourceData.js`) are read by their own
+ * tables' code and by no draw door, so they declare nothing here. A literal they alone covered is banked in
+ * `presumedThings.widened.register.json` under `carrier`, or cured by a door's declaration.
+ */
+const DECL_PROPS = new Set(['needs', 'excludes', 'poolDeclares']);
+
+/**
+ * The files whose tables a door draws `{ tagged: true }`, each with its site: `tags` declares there and
+ * nowhere else. The walker's pin holds this list equal to the `tagged: true` sites in `src`.
+ */
+export const TAGGED_TABLE_FILES = Object.freeze({
+  'src/generators/npcStructure.js': 'NPC_STRUCTURE (`T`), resolved by `resolveDeclared(T[looked], { tagged: true, … })`',
+});
+
+/** Does this object literal carry a numeric `vid` (a state-prose variant: the kernel reads its marks)? @param {any} obj */
+function isStateVariant(obj) {
+  return obj.properties.some((p) => ts.isPropertyAssignment(p) && p.name
+    && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) && p.name.text === 'vid' && ts.isNumericLiteral(p.initializer));
+}
+
+/**
+ * The declaration properties of one object literal that a door enforces (`DECL_PROPS`, and `marks` / `tags`
+ * under their conditions above), their strings collected into `out`. @param {any} obj @param {string} rel @param {string[]} out
+ */
+function collectCredited(obj, rel, out) {
+  for (const p of obj.properties) {
+    const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
+    if (!name || !ts.isPropertyAssignment(p)) continue;
+    const credited = DECL_PROPS.has(name)
+      || (name === 'marks' && isStateVariant(obj))
+      || (name === 'tags' && Object.prototype.hasOwnProperty.call(TAGGED_TABLE_FILES, rel));
+    if (credited) collectStrings(p.initializer, out);
+  }
+}
 
 /**
  * THE SOURCE SITES ARM 1 DOES NOT READ, each with its reason (the header's "WHAT ARM 1 DOES NOT READ"). A literal
@@ -238,16 +296,13 @@ const atomWord = (w) => w.trim().replace(/^no\s+/i, '').toLowerCase();
  * `declaredSet(text, ['watch'])`).
  * @param {any} node
  */
-function declarationWordsAround(node) {
+function declarationWordsAround(node, rel) {
   /** @type {string[]} */ const out = [];
   const strings = (n) => collectStrings(n, out);
   let cur = node.parent;
   for (let depth = 0; cur && depth < 5; depth++, cur = cur.parent) {
     if (ts.isObjectLiteralExpression(cur)) {
-      for (const p of cur.properties) {
-        const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
-        if (name && DECL_PROPS.has(name) && ts.isPropertyAssignment(p)) strings(p.initializer);
-      }
+      collectCredited(cur, rel, out);
     } else if (ts.isCallExpression(cur)) {
       for (const a of cur.arguments) if (ts.isArrayLiteralExpression(a)) strings(a);
     }
@@ -279,12 +334,7 @@ export function keyedDeclarations(rel, src) {
     if (ts.isPropertyAssignment(n) && (ts.isStringLiteral(n.name) || ts.isNoSubstitutionTemplateLiteral(n.name))) {
       const words = [];
       const read = (m) => {
-        if (ts.isObjectLiteralExpression(m)) {
-          for (const p of m.properties) {
-            const name = p.name && (ts.isIdentifier(p.name) || ts.isStringLiteral(p.name)) ? p.name.text : null;
-            if (name && DECL_PROPS.has(name) && ts.isPropertyAssignment(p)) collectStrings(p.initializer, words);
-          }
-        }
+        if (ts.isObjectLiteralExpression(m)) collectCredited(m, rel, words);
         if (ts.isCallExpression(m)) for (const a of m.arguments) if (ts.isArrayLiteralExpression(a)) collectStrings(a, words);
         ts.forEachChild(m, read);
       };
@@ -319,7 +369,7 @@ export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
       let declared = null;
       for (const sentence of sentencesOf(n.text)) {
         for (const thing of thingsNamedIn(sentence)) {
-          declared ??= [...declarationWordsAround(n), ...(keyed.get(n.text) || [])];
+          declared ??= [...declarationWordsAround(n, rel), ...(keyed.get(n.text) || [])];
           const atoms = THINGS[thing].atoms.map((a) => a.toLowerCase());
           if (declared.some((w) => atoms.includes(w))) continue;
           if (!hits.some((h) => h.thing === thing && h.text === n.text)) hits.push({ file: rel, thing, text: n.text });

@@ -1,0 +1,76 @@
+{
+ "_doc": [
+  "THE PRESUMED-THINGS WALKER'S WIDENED REGISTER (W2-B-DECLARE, 2026-11-12; the chair's records 288, 290 and 294). SHRINK-ONLY.",
+  "Read by tests/lint/presumedThings.walker.test.js beside tests/lint/presumedThings.register.json, over the rule book tests/lint/presumedThings.shared.mjs.",
+  "arm1: each source literal a WIDENING of the walker newly sees (a carrier no door enforces; a new root; a new word) that names a thing and declares no atom answering it through a door, as [thing, reason, the literal's first 120 characters].",
+  "Written only through its door, scripts/presumed-things-door.mjs: --bank <reason> --base <rev> banks a literal only if it already stood in its file at the widening's base; --shrink removes stale rows. A cure removes its row in its own commit; a row nothing matches reds as stale."
+ ],
+ "reasons": {
+  "carrier": "declared only through a carrier no draw door reads (a causal-register mark, a catalogue's `tags`, a structural rule's `requires`): banked until it declares through a door (W2-B-DECLARE item 1)"
+ },
+ "arm1": {
+  "src/data/dossierCausalProse.generated.js": [
+   [
+    "market",
+    "carrier",
+    "{settlement}'s market books show {npc} bought up the {good} before the talk of a shortage began; the talk came right on "
+   ]
+  ],
+  "src/data/institutionalCatalog.js": [
+   [
+    "market",
+    "carrier",
+    "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and ins"
+   ],
+   [
+    "market",
+    "carrier",
+    "Multiple market squares"
+   ],
+   [
+    "market",
+    "carrier",
+    "Multiple permanent market squares serve different districts."
+   ],
+   [
+    "docks",
+    "carrier",
+    "City-scale shipyard constructing large merchant and war vessels. Multiple dry docks, ropewalk, sail loft, and dedicated "
+   ],
+   [
+    "docks",
+    "carrier",
+    "Harbour master's office"
+   ],
+   [
+    "docks",
+    "carrier",
+    "the harbour master"
+   ],
+   [
+    "docks",
+    "carrier",
+    "Regulates harbour and river-port traffic, collects anchorage fees, assigns berths, and enforces port law."
+   ]
+  ],
+  "src/data/spatialData.js": [
+   [
+    "garrison",
+    "carrier",
+    "Multiple garrison facilities require a city's population and military investment."
+   ]
+  ],
+  "src/generators/steps/cascadePass.js": [
+   [
+    "docks",
+    "carrier",
+    "Airship-era dock facilities handling both aerial and surface freight."
+   ],
+   [
+    "docks",
+    "carrier",
+    "Harbour master's office"
+   ]
+  ]
+ }
+}
