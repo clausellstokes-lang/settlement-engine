@@ -88,6 +88,8 @@ The five red suites are red at the base too (AGREE's unsigned rows), and each re
 
 **The whole suite at the final code tip 828348ba8** (`npx vitest run --maxWorkers=2`, JSON reporter, ledger ref fetched, a detached scratch worktree): 3,218 files, 38,985 tests, **70 failed**, 38,661 passed, 254 skipped; 72 failing titles counting the two file-level errors. **The base** (the seven directories, the same way): 25,096 tests, 42 failed (44 titles). The full list, classed, is `UPKEEP-FAILSET-828348ba8.txt` beside this file.
 
+**THE LAST STATEMENT, the whole suite ONCE at the final code-and-test tip 5b647aa9c** (`--maxWorkers=3`, JSON reporter): 38,985 tests, **64 failed**, 38,667 passed, 254 skipped; 66 failing titles (60 in the seven directories). That is exactly the set below, less the six titles cured in 042227874 and 61c8d452e; nothing new. The list is `UPKEEP-FAILSET-FINAL.txt`. Every remaining red is either the line's known set or AGREE's (the 44 red at base too), the merge seat's (named), or parked P1-P6.
+
 - **Red at base and at the tip (44 titles, the seven directories): the line's known set and AGREE's unsigned golden rows.** Not this lane's. Among them: the five golden surfaces, the pinned-choosers / pinned-mode / held-roster null-change arms that read the golden corpus, the observed-shape and writer-reach walkers (their corpus cannot build), editCorpusRatchet, landingFixtureFreshness, the taste-interested fixtures.
 - **Red at base, green at the tip:** none.
 - **Red at the tip, green at base (22 in the seven directories, 5 outside): the lane's.** Each is classed below.
