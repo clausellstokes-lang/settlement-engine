@@ -412,20 +412,22 @@
     "golden": 19,
     "the660": 19
    },
-   "goals": "births 19 golden / 18 the660; RULING (e) OPEN: see `openStops`",
+   "goals": "power-keyed by the people's own design, declared (the chair's ruling (A) on (e), 2026-11-12): goals move in 37 of the 1,185 births (19 golden, 18 the660), all births where a power moved; 842 cards, each on its own card's fork (`people-goals::<card id>`), no other card moved; of them 264 long goals moved with the same draw count (their candidates moved: goals.js :: fitOf reads the card's power rank, the POWER family reads the powers' relationships), and 87 long goals (15 births) moved ONLY because the short vantage consumed a different number of draws on the card's one stream (example: agree-town-143, npc_cooper, 7 -> 6 draws) — a finding in goals.js, not this lane's (see the hand-back, 'found, not mine')",
    "memberships": {
     "golden": 0,
     "the660": 6,
     "why": "only where the power roster changed (castPowers.js ranks each power's members on its own keyed fork; a power that leaves the roster takes its members' memberships)"
    },
-   "secret": "agree-town-143 (one card): the drawn line is the same; its {faction} slot is filled with the strongest power (npcGenerator.js, topFaction)"
+   "secret": "agree-town-143 (one card): the drawn line is the same; its {faction} slot is filled with the strongest power (npcGenerator.js, topFaction)",
+   "rule": "(e) AS RESTATED by the chair: THE LANE RE-DEALS NO PERSON. The set of people, each person's identity and personality, and who governs are unchanged on every birth (0 in 1,185). What a person wants and whom they are tied to are keyed on power by the people's own design; where the lane moves a power, those draws follow in that birth and in no other. THE STOP THAT STANDS: a person added, removed, renamed or given another personality, or a change of who governs, anywhere, is a stop with the town.",
+   "densityRival": "the density law's rival roll draws once at the tip and not at the base in agree-town-143, on its own fork (`density-law::seats::rival`)"
   },
   "relationship prose and ties (chain b)": {
    "birthsMoved": {
     "golden": 19,
     "the660": 19
    },
-   "why": "a tie's target is weighted over the roster with shared power x3 and its kind keys on the pair's power (people/ties.js); RULING (e) OPEN for ties' draw counts"
+   "why": "a tie's target is weighted over the roster with shared power x3 and its kind keys on the pair's power gap (people/ties.js); 158 cards' tie forks draw a different count where power moved; declared under the chair's ruling (A) on (e)"
   },
   "condition severity (chain b)": {
    "severity": {
@@ -458,9 +460,7 @@
   "economicViability": "a different sentence: a stores-driven hook (6 on the 660, e.g. agree-town-66 'The settlement is starving...')"
  },
  "readByOtherLanes": "castPowers.js reads the criminal power's points (criminalStrength: moved in 12 of the 660, 19 golden) and the power roster (6 of the 660); representatives.js reads factions[0] (the dominant power: moved in 4 of the 660, 0 golden) and the prosperity label (0 moves).",
- "openStops": [
-  "ruling (e), goals and ties: per-card forks consume a different number of draws where power moved; 87 cards in 15 births have the short goal unchanged and the long goal moved with their fork's draw count moved (a stream position shift inside one card's fork). Sent to the chair 2026-11-12; held."
- ],
+ "openStops": [],
  "namedRedsForTheMergeSeat": [
   "tests/property/generatorGoldenMaster.test.js :: every config produces byte-identical output to the golden master (red at the base: AGREE's 501 rows; at the tip 525)",
   "tests/property/espionageDormancyFence.test.js :: THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus",
@@ -505,5 +505,8 @@
   "forkCensusA6": "fnv1a32 external calls 17 -> 18 (the stores' second call composes the foodways line again: domain/foodways.js :: composeFoodwaysLine), aa5a30899; 18 -> 42 (the services' keep roll, services/serviceRollMaterialization.js :: upkeepRoll, 24 calls on the Comfortable probe row: lodging 3, food 4, equipment 9, healing 3, transport 3, commercial legal 2), a0e404d95",
   "holderTable": "magicDependency and economicGates re-cited by symbol to defenseGenerator.js :: computeDefenseScores, be4eb0b44",
   "siblingSetCheck": "census5bOffCensusDeclarations: a band atom is lawful where a rung of its own ladder admits it (944d2d28f), with the chair's planted controls (a486e24ec); red on the lane since 11662262e and named by no seat's statement until the whole-suite law found it"
- }
+ },
+ "closedStops": [
+  "ruling (e), goals and ties: ACCEPTED AND DECLARED by the chair 2026-11-12 (A); (B), a sub-fork per vantage in goals.js, is not built here: found, not mine"
+ ]
 }
