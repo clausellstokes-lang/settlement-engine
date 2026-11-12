@@ -251,7 +251,9 @@ describe('safety prose agrees in number and respects settlement scale', () => {
   test('city district-market revenue never claims metropolis scale', () => {
     const economy = withSeed('city-market-scale', () => generateEconomicState(
       'city',
-      [{ name: 'District market' }],
+      // The city's own catalogue market for district-level duties. Whether a market stands is the market home's
+      // answer (COHERENCE-AGREE-3 F9, e373a7836), and it reads the catalogue: an invented name is no market.
+      [{ name: 'Multiple market squares' }],
       'road',
       {},
       {
