@@ -127,3 +127,16 @@ The first wave's shared law still binds (`docs/chair/2026-11-11/CHARTERS-COHEREN
 1. Every guard's corpus arm reads empty on at least a thousand fresh births in six sizes and under forced crises, through a fresh-corpus door each guard owns: the repetition guard has one, the rendered-dossier arm is born with one, and the others gain theirs.
 2. An independent reader, who fixed nothing, reads ten rendered dossiers end to end as the owner sees them, with the list of the owner's recorded designs beside it. Each fault goes back through its class. The round repeats on new towns until one whole round is clean.
 3. Then the founding worlds again, the closing acts on the final tree, and the chair's own last acts.
+
+## AMENDMENT (record 287, 2026-11-12): WHAT THE INTEGRATION ADDED GOES FIRST
+
+The census was re-taken on master at db832c892 with one counter over the same 720 births (the table is in the decision queue's record 287). Of the patterns chartered here, NINE ARE NEW SINCE MASTER: each is a sentence or a panel the integration added beside a fact it does not read. They are the integration's own debt and go first in their lanes.
+
+- **W2-POWER:** 16a (331 towns, wrong at a glance), 16b (291, at a glance), 4 (106) first. This lane NO LONGER WAITS for the powers lane to merge: it takes that seat the moment the powers lane hands back, on that lane's handed-back tip, and merges its final tip again if the review changes it.
+- **W2-PAGE-DESKS:** 5a (288) and 5b (2) before 2+20, 3 and 13.
+- **W2-PAGE-ECONOMY:** after the arm, 8 with NEW-2 (220 and 3) and 1a (57) before 6, 11, 17 and 18.
+- **W2-WORDS:** 7b (27) first.
+
+**The arm is born from the census's own counter** (the measuring seat's script and its two columns, on its lane under the probes folder of this date if its drop is there; rebuilt from the census file otherwise), with BOTH columns in its register. Every row's bar is empty; the register is shrink-only on the way there.
+
+**A law for every lane from here (the lesson of the nine).** A lane that adds a sentence or a panel to the page names, in its draft record, the fact on the page that each new claim reads, and its reviewer runs the counter on the lane's base and tip over the 720: a count that rises, or a new row, is a finding. Forty-five reviewed merges let nine patterns in because each lane was reviewed for its own claims and nothing read the finished page.
