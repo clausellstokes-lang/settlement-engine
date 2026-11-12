@@ -16,7 +16,11 @@ import { buildFoundryModuleFiles } from '../../src/foundry/moduleBuilder.js';
 import { dmPowerViewOf } from '../../src/domain/people/patronage.js';
 
 let s;
-beforeAll(async () => { await ensureLaws(); s = birth(785).settlement; });
+// RE-KEYED BY IDENTITY birth(785) -> birth(5) (COHERENCE-POWERS-3, F11; REVIEW-POWERS F11): the dual hat re-deals the
+// ruling three, and Silberbach (785) no longer carries a hidden boost (0 at the lane's tip; 1 at the base). Scanned
+// birth(0..) in order for a town whose DM view holds a hidden boost AND a ruling-three face that answers to a guild (what
+// the three titles read): 5 (Suryanagar, a Grand Merchant Oligarchy, 1 hidden), 100, 167; 5 is the first.
+beforeAll(async () => { await ensureLaws(); s = birth(5).settlement; });
 
 describe('the DM view in the PDF, never the Foundry journal', () => {
   it('the view model carries `dm` only on the DM layer', () => {

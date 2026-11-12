@@ -9,29 +9,55 @@
     {
       "surface": "generator-golden-master",
       "action": "re-record",
-      "predictedRows": 519,
-      "proofForm": "settlement-hash"
-    },
-    {
-      "surface": "dossier-prose-manifest",
-      "action": "re-record",
-      "predictedRows": 782,
-      "proofForm": "settlement-hash"
-    },
-    {
-      "surface": "herald-knowledge-desk-golden",
-      "action": "re-record",
-      "predictedRows": 0,
-      "proofForm": "settlement-hash"
+      "state": "MOVED",
+      "predictedRows": 376,
+      "proofForm": "settlement-hash",
+      "measure": "tests/property/generatorGoldenMaster.test.js red at the third seat's tip (COHERENCE-POWERS-3, after F11); whole-record sha256 of the golden's 525 configurations, the line f72262c68 against the tip: 376 of 525 differ (the earlier 519 was taken against decc7bf15). The exact row count is the door's."
     },
     {
       "surface": "espionage-dormancy-fence",
       "action": "re-record",
+      "state": "MOVED",
       "predictedRows": 0,
-      "proofForm": "in-file corpus constant"
+      "proofForm": "in-file corpus constant",
+      "measure": "tests/property/espionageDormancyFence.test.js: 1 of 21 red at the third seat's tip (COHERENCE-POWERS-3, after F11)"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "state": "MOVED",
+      "predictedRows": 1000,
+      "proofForm": "settlement-hash",
+      "measure": "tests/property/dossierProseManifest.test.js: 3 of 17 red at the third seat's tip (COHERENCE-POWERS-3, after F11); the drift arm lists 1,000 or more moved rows (its printed list is capped at 1,000), the audience arm 203 -> 204. The exact count is the door's."
+    },
+    {
+      "surface": "pdf-golden",
+      "action": "re-record",
+      "state": "MOVED",
+      "predictedRows": 0,
+      "proofForm": "snapshot",
+      "measure": "tests/pdf/goldenViewModel.test.js 'pdf.6 — golden snapshot of the SHARED_FIELDS canon values': red at the third seat's tip (COHERENCE-POWERS-3, after F11) (green at the line), the canon town's cast and ruling three re-dealt by the dual hat (REVIEW-POWERS F11)."
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "state": "MOVED",
+      "predictedRows": 0,
+      "proofForm": "settlement-hash",
+      "measure": "tests/property/heraldKnowledgeDeskGolden.test.js: 1 of 3 red at the third seat's tip (COHERENCE-POWERS-3, after F11)"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "none",
+      "state": "UNMOVED",
+      "predictedRows": 0,
+      "proofForm": "settlement-hash",
+      "measure": "tests/simulation/presetLightingWitness.test.js: 7 of 7 green at the third seat's tip (COHERENCE-POWERS-3, after F11)"
     }
   ],
   "_alsoRedUntilTheGoldensMove": "the golden-corpus null-change pins that compare to the recorded corpus: dmLayerGoldenIsolation A7, worldFactRederive A7, editWorldFactResources A2 and A6, nameHeldThroughAssembly A1, pipelinePinnedChoosers A1, pipelinePinnedMode A1, A2 and A5, rosterFinalUnderHeldRoster A1, powerEconomyFreshness A4. They read the recorded goldens; they turn green when the surfaces above are re-recorded, and the lane changes none of them.",
   "_otherDrivenFiguresTheMergeSeatKeys": "Measured at 9a88668dd and named, never banked: the digests and fixtures re-taken by their own writers at the merge point (x46NpcBand's dark digests, 59 worlds at the second seat's tip; institutionBudgetPromise, 58 seeds at the second seat's tip; the intent atlas distillate; the landing fixture; the engine bundles, which this lane re-emits as its last commit); the measured figures that move with the cast (hookThemeDraws 2157 -> 2105 hooks, one per card; generationForkCensus A1's control hash and A6's external fnv1a32 callers 15 -> 13, the seat mint reached less often; editCorpusRatchet A3, A5 and A7; mergeLadderHeldKeys A3; dossierProseManifest's audience arm 203 -> 204); the worked-example towns that are no longer corrupted (proseComposed, proseTasteInterested: a new leader who is no agent); writerReach (the re-bank); observedShapeReaders (the corpus grew, wizard news 2,525 -> 2,638 accumulated, and five rows of instrument erosion on the pulse kernels, legitimacy on factions and thievesGuildStrength on settlement: no field of this lane's, no lost reader shown, the limit of what was proved); and statecraftExposureBand's mobilization floor (see the phase-2B note, section 8: a driven figure of this wave unless the population says systematic).",
-  "_secondSeatAdditions": "Measured on the second seat's corpus of 2,460 births (six tiers on random dials; every stress forced x six tiers x 20; probes in docs/chair/2026-11-11/probes/COHERENCE-POWERS-2/). 67278c2c1: powers with neither a person nor a declared line 89 -> 0 (82 stress powers, 7 houseless Thieves' Guilds); leader, ruler, capture, every label and every power figure unmoved. 00823a145: the leader moves in exactly 5 small places (critique-hamlet-5, critique-hamlet-99, l2-indebted-hamlet-7, l2-indebted-hamlet-18, l2-mass_migration-hamlet-19); no label. 9f7aedb99, THE FIELD DIFF (the chair's condition 4, base against the same order in a scratch tree on fbbaa82e6): no generated record differs in 2,985 (the golden's 525 configurations and the 2,460, whole-record sha256); no test title moves in the six directories; it moves figures only inside rows already the merge seat's: heraldKnowledgeDeskGolden's hash (75b93b8d -> 1ea41860), writerReach (write population 1733 -> 1731, dark identities unrowed 28 -> 41, banked-stale 38 -> 37, swap 1384 -> 1398, the shapesDigest), observedShapeReaders' reads 2186 -> 2188 (identities 1527 -> 1529), proseFamilyContract A1's scalarRows 38372 -> 37712; statecraftExposureBand's twenty-year run mobilizations 27 = 27 and scandals inside the band, patched and unpatched. The founding worlds (composeInstantWorld) compose their ladders at first light, so the lane that regenerates them will see the new order."
+  "_secondSeatAdditions": "Measured on the second seat's corpus of 2,460 births (six tiers on random dials; every stress forced x six tiers x 20; probes in docs/chair/2026-11-11/probes/COHERENCE-POWERS-2/). 67278c2c1: powers with neither a person nor a declared line 89 -> 0 (82 stress powers, 7 houseless Thieves' Guilds); leader, ruler, capture, every label and every power figure unmoved. 00823a145: the leader moves in exactly 5 small places (critique-hamlet-5, critique-hamlet-99, l2-indebted-hamlet-7, l2-indebted-hamlet-18, l2-mass_migration-hamlet-19); no label. 9f7aedb99, THE FIELD DIFF (the chair's condition 4, base against the same order in a scratch tree on fbbaa82e6): no generated record differs in 2,985 (the golden's 525 configurations and the 2,460, whole-record sha256); no test title moves in the six directories; it moves figures only inside rows already the merge seat's: heraldKnowledgeDeskGolden's hash (75b93b8d -> 1ea41860), writerReach (write population 1733 -> 1731, dark identities unrowed 28 -> 41, banked-stale 38 -> 37, swap 1384 -> 1398, the shapesDigest), observedShapeReaders' reads 2186 -> 2188 (identities 1527 -> 1529), proseFamilyContract A1's scalarRows 38372 -> 37712; statecraftExposureBand's twenty-year run mobilizations 27 = 27 and scandals inside the band, patched and unpatched. The founding worlds (composeInstantWorld) compose their ladders at first light, so the lane that regenerates them will see the new order.",
+  "_failingSetDirectories": "The failing set covers tests/generators, tests/domain, tests/property, tests/lint, tests/build, tests/architecture, tests/simulation and tests/pdf (L4), and at the final tip the whole suite once (L5).",
+  "_thirdSeat": "COHERENCE-POWERS-3 (2026-11-12): F12 f064cb83c, F1 97759b837, F2 28c93c9da + dd02efe9f, F7 859c11ff8, the crisis seats 9bcda8ff6, F5 88616babb, F4 a41c5b4f4, F6 9b1bcc3fd, F13 b1a3934fa, F10 01ccf258f, F9 5fdb0c023 (tests only), F11 (whoRunsThisTownDm re-keyed by identity birth(785) -> birth(5)); each with its counts in docs/chair/2026-11-11/COHERENCE-POWERS-HANDBACK.md PART 3. ROWS WAITING FOR THE POOL GUARD'S NARROW DOOR (the chair's ruling): ledger:NPC_STRUCTURE.magic__{contested,corruption,economic_stress,governance_fractured,stable}__dominant and ledger:NPC_STRUCTURE.other__corruption__dominant, pools this lane newly reaches (no row; drawn on the banked corpus at the merged start; their draws on both corpora are the successor's to state). THE CRISIS-POWER TABLE is a measure for the owner (PART 3). OWED BY THE SUCCESSOR: the capture table (F8, with l2-politically_fractured-metropolis-13, equilibrium -> corrupted, by name), the crisis seats' coup moves by crisis and size, the mobilization count over thirty realms, the whole-lane field diff."
 }
