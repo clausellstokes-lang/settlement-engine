@@ -8,6 +8,55 @@
  "rows": [
   {
    "kind": "printed false on the 720",
+   "pool": "DS-ECO-9::SECURE",
+   "vid": 3,
+   "word": "onlyJust",
+   "pattern": "1a",
+   "disqualifier": [],
+   "towns": 57,
+   "example": "Indrapat is fed, but only just.",
+   "text": "{settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+   "marks": [
+    "no hunger"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-12::INCOME WEIGHT: the religious houses",
+   "vid": 2,
+   "word": "religiousHouses",
+   "pattern": "8",
+   "disqualifier": [
+    "sacredHouse",
+    "temple",
+    "church",
+    "clergy",
+    "institution: temple",
+    "institution: monastery"
+   ],
+   "towns": 44,
+   "example": "The religious houses at Novapagus are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+   "text": "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.",
+   "marks": [
+    "colour"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency false",
+   "vid": 2,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 122,
+   "example": "Losing every practitioner here would be a loss and not a collapse.",
+   "text": "There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.",
+   "marks": [
+    "magic"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
    "pool": "DS-DEF-3::COMPOUND: insurgency",
    "vid": 3,
    "word": "quarters",
@@ -54,6 +103,56 @@
   },
   {
    "kind": "printed false on the 720",
+   "pool": "DS-ECO-12::INCOME WEIGHT: the practice of magic",
+   "vid": 2,
+   "word": "practitioner",
+   "pattern": "NEW-2",
+   "disqualifier": [],
+   "towns": 1,
+   "example": "The people who work magic at Staroka are among its biggest buyers and employers, and much of the village's trade turns on their custom.",
+   "text": "The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns on their custom.",
+   "marks": [
+    "colour"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency true, with a NAMED dependent chain",
+   "vid": 2,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 16,
+   "example": "Yurttala's trade in herbal remedies rests on a few practitioners, not on the land.",
+   "text": "{settlement}'s trade in {good} rests on a few practitioners, not on the land.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency true",
+   "vid": 4,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 11,
+   "example": "Skaldaker does better than its ground and roads would explain, and the reason is its few practitioners.",
+   "text": "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency true",
+   "vid": 3,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 8,
+   "example": "Drumdale leans on its practitioners;",
+   "text": "{settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a hard season for everyone.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
    "pool": "DS-DEF-3::COMPOUND: political fracture",
    "vid": 3,
    "word": "quarters",
@@ -66,6 +165,46 @@
    "example": "Each power at Rossholme keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
    "text": "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
    "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-DEF-9::magicDependency true",
+   "vid": 1,
+   "word": "practitioner",
+   "pattern": "3",
+   "disqualifier": [],
+   "towns": 4,
+   "example": "What the town produces, and in some measure what the town eats, depends on practitioners continuing to be here and continuing to be willing.",
+   "text": "{settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitioners continuing to be here and continuing to be willing.",
+   "marks": []
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-12::INCOME WEIGHT: the practice of magic",
+   "vid": 1,
+   "word": "practitioner",
+   "pattern": "NEW-2",
+   "disqualifier": [],
+   "towns": 1,
+   "example": "What the town's practitioners charge for, and what they buy, is a large part of its business.",
+   "text": "Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business.",
+   "marks": [
+    "colour"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-ECO-9::SECURE",
+   "vid": 1,
+   "word": "smallMargin",
+   "pattern": "1b",
+   "disqualifier": [],
+   "towns": 64,
+   "example": "Goraka feeds itself with a small margin.",
+   "text": "{settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
+   "marks": [
+    "no hunger"
+   ]
   },
   {
    "kind": "printed false on the 720",
@@ -82,6 +221,24 @@
    "text": "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.",
    "marks": [
     "guardPresence"
+   ]
+  },
+  {
+   "kind": "printed false on the 720",
+   "pool": "DS-POW-5::FLAG: crimeIsGovt",
+   "vid": 1,
+   "word": "law",
+   "pattern": "NEW-V9",
+   "disqualifier": [
+    "watch",
+    "garrison",
+    "guardPresence"
+   ],
+   "towns": 1,
+   "example": "There is no law at Schwarzsteig but what the gang bosses enforce.",
+   "text": "There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.",
+   "marks": [
+    "colour"
    ]
   },
   {

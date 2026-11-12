@@ -27,6 +27,7 @@
  * @enforced-by tests/domain/coherence/vocabularyPageFindings.test.js
  */
 import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
+import { magicPractitioners } from '../magicReliance.js';
 
 /**
  * @typedef {object} RegisteredWord
@@ -35,7 +36,7 @@ import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
  * @property {(facts: any, names: string[], record?: any, sentence?: string) => boolean} absent true when the town makes it false
  * @property {(facts: any, names: string[], record?: any, sentence?: string) => boolean} [presentForDenial] a narrower test for a denial
  * @property {boolean} [denialOnly] read on the denial side only
- * @property {'thing'|'state'|'size'|'count'} [kind]
+ * @property {'thing'|'state'|'size'|'count'|'value'} [kind]
  * @property {string} [leaf] the home that answers it
  * @property {'P'|'S'|'T'} [layer]
  */
@@ -239,6 +240,42 @@ export const NEW_WORDS = Object.freeze({
       if (!m) return false;
       const n = NUMBER_WORDS[m[1].toLowerCase()]; const thing = THINGS[COUNTED_HOUSES[m[2].toLowerCase()]];
       return !!thing && names.filter((name) => thing.words.test(name)).length < n;
+    },
+  },
+  // ── THE WORDS OF THE HAND CURES (W2-B-DECLARE item 4; record 288, ruling 2: "EVERY HAND CURE REGISTERS ITS
+  // WORDS", with the leaf they must read), so the next line that uses them must declare. ──
+  religiousHouses: {
+    kind: 'thing', layer: 'P', leaf: 'factsOf.js :: sacredHouse (pattern 8)',
+    words: /\breligious houses?\b|\bhouses? of worship\b/i,
+    atoms: ['sacredHouse', 'temple', 'church', 'clergy', 'institution: temple', 'institution: monastery'],
+    absent: (f) => f?.sacredHouse !== true,
+  },
+  practitioner: {
+    kind: 'thing', layer: 'T', leaf: 'magicReliance.js :: magicPractitioners (NEW-2, 3; its atom waits for a factsOf reader)',
+    words: /\bpractitioners?\b|\bpeople who work magic\b/i,
+    atoms: [],
+    absent: (_f, _names, record) => !!record && magicPractitioners(record).length === 0,
+  },
+  onlyJust: {
+    kind: 'value', layer: 'S', leaf: 'foodBalance.js :: deriveFoodRecord (growsMoreThanEats; pattern 1a; its atom waits for a factsOf reader)',
+    words: /\bfed, but only just\b/i,
+    atoms: [],
+    absent: (_f, _names, record) => record?.economicState?.foodSecurity?.foodRecord?.growsMoreThanEats === true,
+  },
+  smallMargin: {
+    kind: 'value', layer: 'S', leaf: 'foodBalance.js :: deriveFoodRecord (normalImportPct; pattern 1b; its atom waits for a factsOf reader)',
+    words: /\bwith a small margin\b/i,
+    atoms: [],
+    absent: (_f, _names, record) => Number(record?.economicState?.foodSecurity?.foodRecord?.normalImportPct) >= 25,
+  },
+  almostLevel: {
+    kind: 'value', layer: 'S', leaf: 'the record :: powerStructure.factions[].power (pattern 4; the leader\'s lead is W2-A-LEAVES\'s leaf)',
+    words: /\b(?:stand|stands|are) almost level\b/i,
+    atoms: [],
+    absent: (_f, _names, record) => {
+      /** @type {ReadonlyArray<{ power?: unknown }>} */ const factions = Array.isArray(record?.powerStructure?.factions) ? record.powerStructure.factions : [];
+      const p = factions.map((x) => Number(x?.power)).filter(Number.isFinite).sort((a, b) => b - a);
+      return p.length >= 3 && p[0] - p[2] > 10;
     },
   },
 });

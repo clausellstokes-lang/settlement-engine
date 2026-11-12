@@ -90,3 +90,17 @@ The rendered page was instrumented (the kernel's `eligibleVariants` and `readSta
 - Attribution to a source file is by the longest static fragment of a literal; an assembled sentence (413 lines) is "unattributed", and a fragment shared by two files may name the wrong one.
 - The other-sense classes are a reading, rule by rule; `classify.mjs` holds every rule with its reason, and nothing classed other-sense was dropped from the record.
 - The count of houses reads the roster's names with the thing's own words; the count of powers reads `powerStructure.factions` (a count atom waits for a `factsOf` reader, and `factsOf.js` is in the upkeep lane's hands).
+
+## 6. The hand cures' words registered (item 4b), and the list re-taken
+
+Record 288, ruling 2: "EVERY HAND CURE REGISTERS ITS WORDS". Five words joined `registeredWords.js`, each with the leaf it must read: `religiousHouses` (P, the sacred house: pattern 8), `practitioner` (T, `magicPractitioners`: NEW-2 and 3), `onlyJust` (S, the food record's `growsMoreThanEats`: 1a), `smallMargin` (S, its `normalImportPct`: 1b), `almostLevel` (S, the powers' standing: 4). The same 720 dumps, the same matcher, re-classed (`results/classified-base2.json.gz`, `results/findings-shapes-2.txt`):
+
+| measure | before the five words | with them |
+|---|---|---|
+| findings | 1,569 lines / 710 towns | **2,056 lines / 714 towns** |
+| by layer | P 1,224 · S 345 · T 0 | **P 1,298 · S 572 · T 186** |
+| by source | corpus 27 · generator pool 261 · generator code 131 · written in code 737 · unattributed 413 | corpus 181 · generator pool 261 · generator code 255 · written in code 737 · unattributed 622 |
+
+**The words reached the census's own numbers with no pattern-specific test:** 1a 57 (census 57), 1b 64 (64), 4 112 (106 by the census's narrower test, which needs the word "Three"), NEW-2 3 (3), 8's income half 74 towns, 3's reliance and desk lines 177 towns.
+
+The corpus's share is re-taken in `CORPUS-SHARE.json` (49 rows): DS-ECO-9 SECURE v3 "is fed, but only just" (57 towns) and v1 "feeds itself with a small margin" (64) — the verdict keyed on the label alone; DS-ECO-12 INCOME WEIGHT, both pools, marked `colour` while their lines presume the religious houses or the practitioners (they want `sacredHouse`, and the practitioner atom, which waits); DS-DEF-9 magicDependency lines presuming practitioners (pattern 3); DS-DEF-3 district lines in small places; DS-ECO-11 "the mill finishes it". DS-ECO-12's first religious-houses variant is matched by its second sentence only where the tier noun is "town"; the page's own counts above include every tier.

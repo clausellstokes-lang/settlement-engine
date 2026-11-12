@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 const TREE = process.env.TREE;
-const C = JSON.parse(fs.readFileSync('probe/classified-base.json', 'utf8'));
+const C = JSON.parse(fs.readFileSync(process.env.CLASSIFIED || 'probe/classified-base.json', 'utf8'));
 const U = JSON.parse(fs.readFileSync('probe/unreached-measure.json', 'utf8'));
 const W = await import(`${TREE}/src/domain/facts/registeredWords.js`);
 const variants = [];
@@ -12,9 +12,11 @@ for (const d of ['economy', 'defense', 'general', 'power', 'stressors', 'warFait
   }
 }
 const rows = new Map();
-for (const f of C.filter((x) => x.class === 'F' && x.source === 'corpus pool')) {
-  const v = variants.find((x) => x.frags.length && x.frags.every((fr) => f.quote.includes(fr) || fr.includes(f.quote)));
-  const key = v ? `${v.pool}#v${v.vid}#${f.word}` : `?#${f.quote.slice(0, 60)}`;
+// every finding whose sentence is a corpus variant's (a sentence of its static text, 20 characters or more), whatever the attribution said
+for (const f of C.filter((x) => x.class === 'F')) {
+  const v = variants.find((x) => x.frags.some((fr) => W.sentencesOf(fr).some((sen) => sen.length >= 20 && f.quote.includes(sen))));
+  if (!v) continue;
+  const key = `${v.pool}#v${v.vid}#${f.word}`;
   const r = rows.get(key) || { kind: 'printed false on the 720', pool: v?.pool, vid: v?.vid, word: f.word, pattern: f.pattern, disqualifier: W.REGISTERED_WORDS[f.word].atoms, towns: new Set(), example: f.quote, text: v?.text, marks: v?.marks };
   r.towns.add(f.seed); rows.set(key, r);
 }

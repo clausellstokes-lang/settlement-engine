@@ -192,6 +192,11 @@
     "temple",
     "root",
     "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes behind."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    " · goal: have the old rights of the house of worship read out and recognised before anyone challenges them."
    ]
   ],
   "src/components/howto/AboutManifesto.jsx": [
@@ -832,6 +837,46 @@
     "revolt",
     "word",
     "Each crackdown on the insurgents at {settlement} turns more of its people to their side."
+   ],
+   [
+    "practitioner",
+    "word",
+    "Practitioners of the arcane at {settlement} are called on when the town is threatened."
+   ],
+   [
+    "practitioner",
+    "word",
+    "{settlement} counts a few practitioners of the arcane among its defenders, though no muster roll lists them and none is "
+   ],
+   [
+    "practitioner",
+    "word",
+    "{settlement} runs on arcane work. What the town produces, and in some measure what the town eats, depends on practitione"
+   ],
+   [
+    "practitioner",
+    "word",
+    "{settlement} leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a h"
+   ],
+   [
+    "practitioner",
+    "word",
+    "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners."
+   ],
+   [
+    "practitioner",
+    "word",
+    "{settlement}'s trade in {good} rests on a few practitioners, not on the land."
+   ],
+   [
+    "practitioner",
+    "word",
+    "There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not "
+   ],
+   [
+    "practitioner",
+    "word",
+    "Arcane work at {settlement} answers to its military, and the practitioners' own books show it: defence work first, payin"
    ]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
@@ -839,6 +884,51 @@
     "siege",
     "word",
     "DS-ECO-9: LADDER › food security + the food ledger + the siege interaction · `economicState.foodSecurity` (6 rungs) + `f"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "At {settlement} the faith comes before trade. The religious houses carry more weight in the town's business than its mer"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "The clergy have more say over {settlement}'s market than its traders do; anyone who wants to do business here goes to th"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "A merchant arriving at {settlement} soon learns that the religious house has the last word on who trades here and on wha"
+   ],
+   [
+    "smallMargin",
+    "word",
+    "{settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama."
+   ],
+   [
+    "onlyJust",
+    "word",
+    "{settlement} is fed, but only just. A poor harvest is felt at every table; a good one means a little put by."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the to"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year f"
+   ],
+   [
+    "practitioner",
+    "word",
+    "Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a lar"
+   ],
+   [
+    "practitioner",
+    "word",
+    "The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns"
    ]
   ],
   "src/data/dossierStateProse/general.generated.js": [
@@ -881,6 +971,26 @@
     "quarters",
     "word",
     "{settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to."
+   ],
+   [
+    "practitioner",
+    "word",
+    "A practitioner arriving in {settlement} learns quickly that the town has a position on the subject, and that the positio"
+   ],
+   [
+    "practitioner",
+    "word",
+    "{settlement} has real practitioners, and everyone knows whom to send for."
+   ],
+   [
+    "practitioner",
+    "word",
+    "{settlement} sends for a practitioner when it must and manages without one otherwise."
+   ],
+   [
+    "practitioner",
+    "word",
+    "{settlement} supports trained practitioners of the Art, which few towns its size can afford."
    ]
   ],
   "src/data/dossierStateProse/power.generated.js": [
@@ -1377,6 +1487,51 @@
     "refugees",
     "word",
     "Miles of tunnel and catacomb turned to shelter for criminals and refugees alike."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Services mean a walk of a few miles to the village house of worship."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "The nearest house of worship is the village's, a walk of a few miles away for services."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "The nearest house of worship is the village's, usually a few miles off."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Several quarters, each with its house of worship."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's registe"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "A house of worship to every quarter."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city."
+   ],
+   [
+    "practitioner",
+    "word",
+    "A whole quarter of arcane practitioners, all towers, workshops, libraries, and reagent sellers."
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -1503,6 +1658,11 @@
     "quarters",
     "word",
     "Access to district libraries and research facilities."
+   ],
+   [
+    "practitioner",
+    "word",
+    "The complete range of arcane services from multiple practitioners."
    ]
   ],
   "src/data/institutionalCatalog.js": [
@@ -1660,6 +1820,41 @@
     "quarters",
     "word",
     "the district madam"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "A walk of a few miles to the village house of worship for services."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Services mean the walk to the village house of worship, usually a few miles off."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Several houses of worship within town."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Each congregation keeps its own ground beside its house of worship, and one that has filled its ground buries beyond the"
+   ],
+   [
+    "practitioner",
+    "word",
+    "Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants."
    ]
   ],
   "src/data/narrativeData.js": [
@@ -1724,6 +1919,11 @@
     "quarters",
     "word",
     "Three guards have gone missing in the same district on night patrol. The report filed says they deserted."
+   ],
+   [
+    "practitioner",
+    "word",
+    "Another practitioner has noticed "
    ]
   ],
   "src/data/people/titleSecretsPresentations.js": [
@@ -1763,6 +1963,13 @@
     "quarters",
     "word",
     "Two houses in their district are fighting over the same workers, and both have asked them to settle it."
+   ]
+  ],
+  "src/data/resourceData.js": [
+   [
+    "practitioner",
+    "word",
+    "Intersection of magical energy; draws practitioners and makes ritual work easier"
    ]
   ],
   "src/data/roadmapLedger.js": [
@@ -1830,6 +2037,31 @@
    ],
    [
     "quarters",
+    "word",
+    "A mages' district requires concentration of practitioners and guild organization."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Multiple religious houses require a city's wealth and population."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Concentration of major religious houses requires metropolis resources."
+   ],
+   [
+    "practitioner",
+    "word",
+    "A traveling practitioner needs only a large enough community to offer services."
+   ],
+   [
+    "practitioner",
+    "word",
+    "Professional scroll production requires a magical practitioner to supervise."
+   ],
+   [
+    "practitioner",
     "word",
     "A mages' district requires concentration of practitioners and guild organization."
    ]
@@ -2705,6 +2937,21 @@
     "quarters",
     "word",
     "A PRESENTATION-SIDE SUBSYSTEM, AND THE FIRST ONE THIS CONTRACT HOLDS. THE GATE: townCartographyActive is the virtual tow"
+   ],
+   [
+    "practitioner",
+    "word",
+    "ONE GATE, AND THE SLICE BEHIND IT IS MAGIC-INDEPENDENT. magicEconomyActive is the virtual magicEconomyEnabled alone (ins"
+   ],
+   [
+    "practitioner",
+    "word",
+    "THE CONSERVATION LAW (design section 6). At the top regimes magic may carry a CAP-BANDED share of a settlement's daily n"
+   ],
+   [
+    "practitioner",
+    "word",
+    "Not expressible from a v5 receipt: substitution writes no state key of its own, so there is nothing for the census to re"
    ]
   ],
   "src/domain/certification/warConvergenceContract.js": [
@@ -2782,6 +3029,11 @@
     "famine",
     "word",
     "Each of the five defense arms (beasts and monsters, invasion and war, internal security, economic survival, disasters an"
+   ],
+   [
+    "smallMargin",
+    "word",
+    "The settlement feeds itself with a small margin."
    ]
   ],
   "src/domain/compendium/catalogData.js": [
@@ -2839,6 +3091,11 @@
     "plague",
     "word",
     "Plague of Beasts"
+   ],
+   [
+    "practitioner",
+    "word",
+    "Church persecutes arcane practitioners. Magic goods suppressed x0.25."
    ]
   ],
   "src/domain/compendium/generated/compendiumData.generated.js": [
@@ -3021,6 +3278,16 @@
     "plague",
     "word",
     "Plague of Beasts"
+   ],
+   [
+    "smallMargin",
+    "word",
+    "The settlement feeds itself with a small margin."
+   ],
+   [
+    "practitioner",
+    "word",
+    "Church persecutes arcane practitioners. Magic goods suppressed x0.25."
    ]
   ],
   "src/domain/compendium/searchIndex.js": [
@@ -6143,6 +6410,33 @@
     "Relief arrived when the granaries ran low"
    ]
   ],
+  "src/domain/display/institutionDisplayName.js": [
+   [
+    "religiousHouses",
+    "word",
+    "House of worship"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Houses of worship (2-5)"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Houses of worship (10-30)"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Houses of worship (50-100+)"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Access to a house of worship"
+   ]
+  ],
   "src/domain/display/institutionVocabulary.js": [
    [
     "mercenary",
@@ -6408,6 +6702,31 @@
     "quarters",
     "word",
     "A metropolitan cathedral and the seat of the region's highest religious authority, drawing pilgrims from afar."
+   ],
+   [
+    "practitioner",
+    "word",
+    "A whole quarter of arcane practitioners: towers, workshops, libraries, and reagent merchants."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Ground beside each house of worship, with a sexton who keeps the register of who lies where."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Several houses of worship, each serving its own quarter of a town."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "A house of worship for every neighbourhood, so no one lives far from a bell."
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Hundreds of houses of worship across every district, the faith woven into each neighbourhood."
    ]
   ],
   "src/domain/display/labelBands.js": [
@@ -7268,6 +7587,11 @@
     "market",
     "root",
     "harm set down in advance the way a market day is"
+   ],
+   [
+    "practitioner",
+    "word",
+    "practitioners here who have become ordinary"
    ]
   ],
   "src/domain/display/rumorPhrasePools.js": [
@@ -7725,6 +8049,11 @@
     "famine",
     "word",
     "ACTIVE FAMINE: the failed source, part of the harvest"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "INCOME WEIGHT: the religious houses"
    ]
   ],
   "src/domain/display/stateProse/generalStateProse.js": [
@@ -8858,6 +9187,11 @@
     "refugees",
     "word",
     "Refugee relief becomes the temple's most visible work."
+   ],
+   [
+    "practitioner",
+    "word",
+    "Unlicensed practitioners and quacks fill the gap a strained service leaves."
    ]
   ],
   "src/domain/factionRename.js": [
@@ -9104,6 +9438,11 @@
     "succession",
     "word",
     "A succession dispute opens among the surviving captains."
+   ],
+   [
+    "practitioner",
+    "word",
+    "a single rogue practitioner undercutting prices"
    ]
   ],
   "src/domain/prose/holderTable.js": [
@@ -10228,6 +10567,13 @@
     "granary",
     "root",
     "; the granaries paid for it."
+   ]
+  ],
+  "src/domain/worldPulse/magicRegimeModel.js": [
+   [
+    "practitioner",
+    "word",
+    "what the practitioners can do unpaid"
    ]
   ],
   "src/domain/worldPulse/marketNews.js": [
@@ -11733,6 +12079,11 @@
     "quarters",
     "word",
     "District-level duties on specialized goods; a major civic revenue stream across the urban districts."
+   ],
+   [
+    "practitioner",
+    "word",
+    "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild co"
    ]
   ],
   "src/generators/economy/foodBalance.js": [
@@ -11791,6 +12142,16 @@
     "quarters",
     "word",
     "Add Market Square, Merchants' Quarter, or Trade Guild"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Add a house of worship, a temple or a monastery"
+   ],
+   [
+    "practitioner",
+    "word",
+    "Add a tier-plausible hedge practitioner or alchemical workshop"
    ]
   ],
   "src/generators/foodGenerator.js": [
@@ -11903,6 +12264,11 @@
     "occupation",
     "word",
     "Settlement is under occupation. Stated stability reflects surface conditions only. Governance legitimacy and local loyal"
+   ],
+   [
+    "practitioner",
+    "word",
+    "attracted practitioners seeking ingredients found nowhere else within three days' travel"
    ]
   ],
   "src/generators/narrativeText.js": [
@@ -11970,6 +12336,11 @@
     "quarters",
     "word",
     " is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has"
+   ],
+   [
+    "practitioner",
+    "word",
+    " is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which out"
    ]
   ],
   "src/generators/npcGenerator.js": [
@@ -12028,6 +12399,11 @@
     "powersCount",
     "word",
     "Three powers stand almost level here, and no one leads; every council vote has to be bargained for."
+   ],
+   [
+    "almostLevel",
+    "word",
+    "Three powers stand almost level here, and no one leads; every council vote has to be bargained for."
    ]
   ],
   "src/generators/power/governanceNarrative.js": [
@@ -12060,6 +12436,23 @@
     "powersCount",
     "word",
     "Two powers have stopped coming to council meetings. Each makes its own decisions now, and the others overturn them withi"
+   ],
+   [
+    "practitioner",
+    "word",
+    "the arcane practitioners"
+   ]
+  ],
+  "src/generators/power/rulingStructure.js": [
+   [
+    "practitioner",
+    "word",
+    "Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabi"
+   ],
+   [
+    "practitioner",
+    "word",
+    "Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly "
    ]
   ],
   "src/generators/power/settlementNarrative.js": [
@@ -12176,6 +12569,28 @@
     "revolt",
     "word",
     "Street-level confrontations between insurgent supporters and those who keep order. Officially categorised as riot and di"
+   ],
+   [
+    "practitioner",
+    "word",
+    "Alchemists and other magical practitioners"
+   ]
+  ],
+  "src/generators/servicesGenerator.js": [
+   [
+    "practitioner",
+    "word",
+    "Practitioners working outside guild oversight: cheaper, harder to trace, and against the law."
+   ],
+   [
+    "practitioner",
+    "word",
+    "Readings, visions, and omens from practitioners who know what the client wants to hear."
+   ],
+   [
+    "practitioner",
+    "word",
+    "Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to "
    ]
   ],
   "src/generators/spatialGenerator.js": [
@@ -12248,6 +12663,11 @@
     "quarters",
     "word",
     "Stone-walled hill town, the keep visible above the market quarter"
+   ],
+   [
+    "religiousHouses",
+    "word",
+    "Houses of worship, cloisters, quiet streets with priests and pilgrims"
    ]
   ],
   "src/generators/steps/cascadePass.js": [
@@ -12303,6 +12723,11 @@
     "quarters",
     "word",
     "High magic district"
+   ],
+   [
+    "practitioner",
+    "word",
+    "the arcane practitioners"
    ]
   ]
  },
