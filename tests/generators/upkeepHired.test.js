@@ -1,6 +1,11 @@
 /**
- * upkeepHired.test.js — COHERENCE-UPKEEP (the chair's ruling of 2026-11-12 on item 4, ruling 2):
- * a hired force stands in for a standing one "to an appropriate but lesser degree" (the owner).
+ * upkeepHired.test.js — COHERENCE-UPKEEP (the chair's ruling of 2026-11-12 on item 4): what a place
+ * can keep up, read from one home (`src/domain/facts/keep.js`). It opens with ruling 2's hired
+ * force and carries one describe per family after it: the five gates (3), services (4), magic (5),
+ * stores (6) and the guard assessment's lines (7), each written red first.
+ *
+ * Ruling 2: a hired force stands in for a standing one "to an appropriate but lesser degree" (the
+ * owner).
  *
  * THE INVARIANT, pinned by counterfactual on the pure score: FOR EVERY PLACE WITH HIRED FORCE AND
  * NO STANDING FORCE, ITS MILITARY SCORE IS NOT ABOVE WHAT THE SAME PLACE SCORES WITH A WATCH IN
