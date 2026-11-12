@@ -1,0 +1,495 @@
+{
+ "_doc": "W2-A-LEAVES (2026-11-12): THE LAYER WALKER'S REGISTER, banked at the lane's base deb1544eb (lane/coherence-agree-2026-11-11). SHRINK-ONLY from its first commit: a row may only fall, through its door (node scripts/fact-layers-door.mjs --shrink), in the commit that cures it; no row is ever added and nothing is raised. leaves: each leaf of src/domain/facts/factLayers.js that touches a stratum at or above its own layer, with the strata (the two bundled leaves of the layer map's §2c — the defence object and the crisis home — and what reads through them; the crime structure reading the back-written crime lines; the faith reading touching the cast). pools: each corpus pool whose lines declare or name a fact at or above the pool's layer (factLayers.poolTable.json). readers: per file, per fact family, the lines that answer a homed fact again by a name test outside its home (the defence-reader walker generalised; the defence words stay that walker's).",
+ "_reasons": {
+  "leaves": "a leaf that reads at or above its layer: split (the bundle) or re-home (the back-write), then the row falls",
+  "pools": "a line that reads a fact its pool is not above: the pool is re-placed by what its key reads, or the line declares through a lower leaf",
+  "readers": "a second derivation of a homed fact by a name test: it retires to the fact's leaf, or the row is classed as another sense of the word and stays"
+ },
+ "leaves": {
+  "warState": [
+   "economicState"
+  ],
+  "crisis": [
+   "economicState"
+  ],
+  "defence": [
+   "economicState"
+  ],
+  "guardPresence": [
+   "economicState"
+  ],
+  "soldiers": [
+   "economicState"
+  ],
+  "commander": [
+   "economicState"
+  ],
+  "crime": [
+   "economicState.safetyProfile"
+  ],
+  "faith": [
+   "npcs"
+  ]
+ },
+ "pools": {
+  "DS-ECO-6::TIER: a large share off the books (≥30)": [
+   "declares guild (layer 3)"
+  ],
+  "DS-ECO-6::TIER: significant off-book activity (≥15)": [
+   "declares guild (layer 3)"
+  ],
+  "DS-ECO-6::TIER: minor shadow activity (≥3)": [
+   "declares organised crime (layer 3)"
+  ],
+  "DS-GEN-7::power_stress: occupation against stated stability": [
+   "declares ruler: occupier (layer 3)"
+  ],
+  "DS-POW-5::FLAG: merchantCriminalBlur": [
+   "declares guild (layer 3)",
+   "names guildhall (layer 3)"
+  ]
+ },
+ "readers": {
+  "src/components/compendium/CatalogTabs.jsx": {
+   "magic": 2
+  },
+  "src/components/generate/CharacterPresetCard.jsx": {
+   "magic": 1
+  },
+  "src/components/map/heraldCommandSelectors.js": {
+   "magic": 2
+  },
+  "src/components/new/SummaryTab.jsx": {
+   "market": 1,
+   "crime": 2
+  },
+  "src/components/new/dailyLifeLogic.js": {
+   "tavern": 1,
+   "crime": 1,
+   "magic": 1
+  },
+  "src/components/new/tabHelpers.js": {
+   "magic": 1
+  },
+  "src/components/new/tabs/DefenseTab.jsx": {
+   "crime": 2
+  },
+  "src/components/new/tabs/EconomicsTab.jsx": {
+   "market": 1,
+   "crime": 2,
+   "magic": 1
+  },
+  "src/components/new/tabs/MagicTab.jsx": {
+   "magic": 1
+  },
+  "src/domain/arcaneInstitutionIdentity.js": {
+   "magic": 1
+  },
+  "src/domain/causalState.js": {
+   "crime": 2,
+   "magic": 1
+  },
+  "src/domain/coherence/crisisFactFindings.js": {
+   "crime": 1
+  },
+  "src/domain/coherence/foodWordsFindings.js": {
+   "market": 1
+  },
+  "src/domain/coherence/readerBattery.js": {
+   "docks": 1
+  },
+  "src/domain/contradictions.js": {
+   "magic": 1
+  },
+  "src/domain/criminalOpRole.js": {
+   "market": 2,
+   "crime": 3
+  },
+  "src/domain/crisis/crisisCast.js": {
+   "crime": 1
+  },
+  "src/domain/customContent.js": {
+   "magic": 1
+  },
+  "src/domain/customContentSchema.js": {
+   "crime": 1,
+   "magic": 1
+  },
+  "src/domain/display/chronicleGraph.js": {
+   "market": 1,
+   "magic": 1
+  },
+  "src/domain/display/defenseDisplay.js": {
+   "market": 2,
+   "crime": 9,
+   "magic": 1
+  },
+  "src/domain/display/dossierViewModel.js": {
+   "magic": 1
+  },
+  "src/domain/display/foodBalanceBar.js": {
+   "magic": 1
+  },
+  "src/domain/display/threatAssessment.js": {
+   "faith": 1,
+   "healer": 1
+  },
+  "src/domain/display/visibilityAudit.js": {
+   "crime": 1
+  },
+  "src/domain/entities/npcs.js": {
+   "smith": 1
+  },
+  "src/domain/events/factionResponses.js": {
+   "market": 1,
+   "faith": 1,
+   "mill": 1,
+   "granary": 1
+  },
+  "src/domain/events/registry.js": {
+   "market": 3,
+   "faith": 1,
+   "mill": 1,
+   "smith": 1,
+   "tavern": 1,
+   "granary": 1,
+   "bank": 1,
+   "healer": 1,
+   "guild": 1
+  },
+  "src/domain/historyBeats.js": {
+   "faith": 1,
+   "mill": 1,
+   "healer": 1,
+   "guild": 1
+  },
+  "src/domain/institutionClassify.js": {
+   "mill": 1,
+   "granary": 1
+  },
+  "src/domain/institutions/institutionCategory.js": {
+   "guild": 1
+  },
+  "src/domain/magicProfile.js": {
+   "magic": 4
+  },
+  "src/domain/mapProfile.js": {
+   "docks": 1
+  },
+  "src/domain/people/allegiance.js": {
+   "crime": 1
+  },
+  "src/domain/realm/realmItemActions.js": {
+   "magic": 1
+  },
+  "src/domain/region/propagation.js": {
+   "crime": 1
+  },
+  "src/domain/roles/roleClass.js": {
+   "market": 1
+  },
+  "src/domain/spatial/seaLanes.js": {
+   "docks": 2
+  },
+  "src/domain/summary/settlementQuickGuide.js": {
+   "guild": 1
+  },
+  "src/domain/townCartography/cartographyMorphology.js": {
+   "crime": 1
+  },
+  "src/domain/townMap/siteGenesis.js": {
+   "market": 2,
+   "docks": 2,
+   "quarryMine": 1
+  },
+  "src/domain/townMap/townLayoutV2.js": {
+   "market": 1,
+   "docks": 1,
+   "bank": 1
+  },
+  "src/domain/traditions/genesis.js": {
+   "market": 2
+  },
+  "src/domain/worldPulse/corruptionWeb.js": {
+   "crime": 1
+  },
+  "src/domain/worldPulse/envoyTestimony.js": {
+   "tavern": 1
+  },
+  "src/domain/worldPulse/institutionLifecycle.js": {
+   "market": 1,
+   "mill": 1,
+   "smith": 1,
+   "tavern": 1,
+   "guild": 1,
+   "crime": 1
+  },
+  "src/domain/worldPulse/magicSubstitution.js": {
+   "magic": 1
+  },
+  "src/domain/worldPulse/npcGoalBranches.js": {
+   "healer": 1
+  },
+  "src/domain/worldPulse/religionLegitimacy.js": {
+   "faith": 1
+  },
+  "src/domain/worldPulse/resourceDynamicsKernel.js": {
+   "magic": 1
+  },
+  "src/domain/worldPulse/settlementLifecycleFirstClass.js": {
+   "docks": 1
+  },
+  "src/domain/worldPulse/settlementPolitics.js": {
+   "magic": 1
+  },
+  "src/domain/worldPulse/stressorGates.js": {
+   "magic": 1
+  },
+  "src/domain/worldPulse/stressors.js": {
+   "magic": 1
+  },
+  "src/domain/worldPulse/tierOutcomeApply.js": {
+   "market": 1,
+   "faith": 1,
+   "mill": 1,
+   "smith": 1,
+   "bank": 1,
+   "guild": 1,
+   "crime": 1,
+   "magic": 1
+  },
+  "src/domain/worldPulse/treasury.js": {
+   "crime": 1
+  },
+  "src/domain/worldPulse/upswingKernel.js": {
+   "faith": 1,
+   "quarryMine": 1
+  },
+  "src/domain/worldPulse/warCosts.js": {
+   "faith": 1
+  },
+  "src/generators/computeActiveChains.js": {
+   "docks": 2,
+   "mill": 4
+  },
+  "src/generators/crossSettlementConflicts.js": {
+   "crime": 1
+  },
+  "src/generators/defenseGenerator.js": {
+   "faith": 4,
+   "healer": 1,
+   "crime": 1,
+   "magic": 3
+  },
+  "src/generators/economy/economicState.js": {
+   "market": 7,
+   "faith": 5,
+   "docks": 2,
+   "smith": 1,
+   "bank": 2,
+   "healer": 1,
+   "guild": 4,
+   "crime": 2,
+   "magic": 2,
+   "quarryMine": 1
+  },
+  "src/generators/economy/foodBalance.js": {
+   "faith": 2,
+   "docks": 1,
+   "mill": 5,
+   "smith": 1,
+   "granary": 4,
+   "magic": 2
+  },
+  "src/generators/economy/primaryTradeLists.js": {
+   "docks": 1
+  },
+  "src/generators/economy/tradeGoods.js": {
+   "docks": 2,
+   "mill": 1,
+   "smith": 2,
+   "granary": 1
+  },
+  "src/generators/economy/upgradeOpportunities.js": {
+   "docks": 3,
+   "guild": 1
+  },
+  "src/generators/economy/viability.js": {
+   "market": 1,
+   "faith": 6,
+   "bank": 1,
+   "guild": 1,
+   "crime": 1,
+   "magic": 4
+  },
+  "src/generators/factionDynamics.js": {
+   "faith": 3,
+   "guild": 2,
+   "crime": 2,
+   "magic": 1
+  },
+  "src/generators/foodGenerator.js": {
+   "mill": 1,
+   "magic": 1
+  },
+  "src/generators/foodLand.js": {
+   "market": 1,
+   "faith": 1,
+   "granary": 3,
+   "magic": 1
+  },
+  "src/generators/history/historyEventStrands.js": {
+   "docks": 1,
+   "guild": 2
+  },
+  "src/generators/historyGenerator.js": {
+   "faith": 5,
+   "smith": 1,
+   "guild": 3,
+   "crime": 3,
+   "magic": 3
+  },
+  "src/generators/historyTemplate.js": {
+   "docks": 1,
+   "guild": 2
+  },
+  "src/generators/institutionProbability.js": {
+   "market": 5,
+   "faith": 5,
+   "docks": 2,
+   "bank": 2,
+   "healer": 1,
+   "guild": 3,
+   "crime": 3,
+   "magic": 6
+  },
+  "src/generators/isolationGenerator.js": {
+   "magic": 2
+  },
+  "src/generators/isolationSupport.js": {
+   "magic": 2
+  },
+  "src/generators/legacyGenerator.js": {
+   "faith": 1,
+   "magic": 2
+  },
+  "src/generators/narrative/arrivalScene.js": {
+   "market": 1,
+   "crime": 1
+  },
+  "src/generators/narrative/historyCoherence.js": {
+   "magic": 2
+  },
+  "src/generators/narrativeGenerator.js": {
+   "faith": 6,
+   "healer": 2,
+   "guild": 1,
+   "crime": 5
+  },
+  "src/generators/narrativeText.js": {
+   "granary": 1,
+   "magic": 7
+  },
+  "src/generators/npcGenerator.js": {
+   "faith": 2,
+   "docks": 1,
+   "guild": 3,
+   "crime": 14,
+   "magic": 3
+  },
+  "src/generators/npcStructure.js": {
+   "guild": 1
+  },
+  "src/generators/people/goals.js": {
+   "magic": 1
+  },
+  "src/generators/power/conflicts.js": {
+   "faith": 1
+  },
+  "src/generators/power/factionStanding.js": {
+   "guild": 2,
+   "crime": 4,
+   "magic": 2
+  },
+  "src/generators/power/relationshipArchetypes.js": {
+   "crime": 5,
+   "magic": 1
+  },
+  "src/generators/power/rulingStructure.js": {
+   "faith": 8,
+   "guild": 3,
+   "crime": 1,
+   "magic": 2
+  },
+  "src/generators/power/stressFactions.js": {
+   "faith": 7,
+   "guild": 5,
+   "crime": 2
+  },
+  "src/generators/priorityHelpers.js": {
+   "market": 2,
+   "faith": 4,
+   "docks": 1,
+   "granary": 1,
+   "bank": 1,
+   "healer": 1,
+   "guild": 4,
+   "crime": 4,
+   "magic": 6
+  },
+  "src/generators/roleCategory.js": {
+   "crime": 1,
+   "magic": 1
+  },
+  "src/generators/services/serviceAvailability.js": {
+   "market": 3,
+   "faith": 4,
+   "bank": 2,
+   "healer": 1,
+   "guild": 2,
+   "crime": 4,
+   "magic": 6
+  },
+  "src/generators/services/serviceClassifier.js": {
+   "market": 3,
+   "faith": 4,
+   "mill": 1,
+   "smith": 3,
+   "tavern": 4,
+   "bank": 1,
+   "healer": 4,
+   "guild": 3,
+   "crime": 6,
+   "magic": 5
+  },
+  "src/generators/spatialGenerator.js": {
+   "market": 1,
+   "faith": 3,
+   "docks": 2,
+   "smith": 1,
+   "bank": 1,
+   "healer": 1,
+   "guild": 2,
+   "magic": 2
+  },
+  "src/generators/steps/resolveNeighbour.js": {
+   "market": 1
+  },
+  "src/generators/steps/resolveResources.js": {
+   "magic": 1
+  },
+  "src/generators/stressGenerator.js": {
+   "faith": 2,
+   "granary": 1,
+   "bank": 1,
+   "healer": 1,
+   "guild": 1
+  },
+  "src/pdf/lib/viewModel.js": {
+   "magic": 1
+  },
+  "src/pdf/lib/viewModelBodySlices.js": {
+   "crime": 2
+  }
+ }
+}
