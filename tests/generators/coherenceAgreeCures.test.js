@@ -431,6 +431,17 @@ describe('F5 (d): the wizard offers the mountain pass on the mountains only', ()
     // a row with no terrain law keeps its offer
     expect(getCompatibleResources('road', 'hills').find((r) => r.key === 'grain_fields')).toMatchObject({ offered: true });
   });
+  // P4 (COHERENCE-AGREE-7, the validator's half, after P2 / F5 (c)): the roll keeps no pass off the mountains, so only a
+  // person's forced pass stands there, and the structural validator warns on it as on a forced crossroads, in the
+  // wizard's words.
+  test('the validator warns on a pass forced off the mountains, in the wizard\'s words; on the mountains it does not', async () => {
+    const { checkStructuralValidity } = await import('../../src/generators/structuralValidator.js');
+    const warned = (terrainType) => checkStructuralValidity([], { tier: 'village', tradeRouteAccess: 'road', terrainType,
+      nearbyResources: ['defended_pass', 'grain_fields'] }).violations.filter((v) => v.type === 'resource_access_violation');
+    expect(warned('hills')).toEqual([expect.objectContaining({ institution: 'Mountain Pass', reason: 'Only available in mountain terrain', severity: 'warning' })]);
+    expect(warned('mountain')).toEqual([]);
+    expect(warned(undefined)).toEqual([]); // anchored: no terrain on the record, no claim either way
+  });
 });
 
 /**
@@ -440,8 +451,7 @@ describe('F5 (d): the wizard offers the mountain pass on the mountains only', ()
  * of the lane's 4,141 births; REVIEW-AGREE-2 F5's second effect). Each seed below is a crossroads holder off a
  * crossroads whose replacement arrived depleted at 7cf4f0c2e; it now arrives live. The one food band the rule moved is
  * r2s-under_siege-village-0's (its replacement grain fields arrived live: deficit -> importDependent; (c) re-deals it
- * since, below). REVIEW-AGREE-2
- * F6's besieged city (r2s-under_siege-city-3) frees its replacement forest too, and its band stays deficit: A′'s
+ * since, below). REVIEW-AGREE-2 F6's besieged city (r2s-under_siege-city-3) frees its replacement forest too, and its band stays deficit: A′'s
  * re-deal moves it by another path, declared in the draft record.
  */
 describe('P2\'s rule: a refilled slot arrives as live as the refused winner would have been', () => {
