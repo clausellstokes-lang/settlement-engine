@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a26de34104dfe5f6db71974532f3b9f057d9add4",
-  "measuredBy": "COHERENCE-POWERS-2",
+  "measuredAtSha": "aacd6fd974a0cc032e6af0dd5ec18491d0701437",
+  "measuredBy": "POOL-GUARD",
   "date": "2026-11-12",
-  "note": "item 4: one new test file, tests/domain/ladderTopRungLeader.test.js",
-  "files": 3207,
+  "note": "the pool-dominance walker: eleven new test titles (thirteen as the reader counts them: one template-literal title with two interpolations reads as three) and one new describe",
+  "files": 3205,
   "parked": 397,
-  "credited": 2810,
-  "titles": 29132,
-  "suiteTitles": 7880
+  "credited": 2808,
+  "titles": 29133,
+  "suiteTitles": 7879
 }

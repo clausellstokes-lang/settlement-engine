@@ -31,8 +31,6 @@
   {"thing": "garrison", "path": ".economicViability.warnings[].suggestedFixes[]", "text": "Add Town Walls or Garrison", "reason": "hedge", "note": "advice to the builder: what to add", "towns": 4},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison contracts", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
   {"thing": "garrison", "path": ".institutions[].desc", "text": "garrison work", "reason": "figure", "note": "the hire company's trade, wherever it is hired", "towns": 5},
-  {"thing": "market", "path": ".conflicts[].desc", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
-  {"thing": "market", "path": ".conflicts[].issue", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
   {"thing": "market", "path": ".economicState.situationDesc", "text": "markets meet infrequently", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 7},
   {"thing": "market", "path": ".economicState.situationDesc", "text": "The market is shut", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 1},
   {"thing": "market", "path": ".economicState.situationDesc", "text": "The market still opens", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/economy/prosperity.js", "towns": 1},
@@ -44,17 +42,11 @@
   {"thing": "market", "path": ".npcs[].plotHooks[]", "text": "in a market two settlements away", "reason": "hedge", "note": "the sentence puts the market in another town", "towns": 2},
   {"thing": "market", "path": ".npcs[].secret.stakes", "text": "looking in every market", "reason": "figure", "note": "every market, anywhere", "towns": 2},
   {"thing": "market", "path": ".npcs[].secret.what", "text": "before it goes to market", "reason": "figure", "note": "\"goes to market\": to sale", "towns": 3},
-  {"thing": "market", "path": ".powerStructure.conflicts[].desc", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
-  {"thing": "market", "path": ".powerStructure.conflicts[].issue", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
-  {"thing": "mercenary", "path": ".conflicts[].desc", "text": "mercenary contract being disputed", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 2},
-  {"thing": "mercenary", "path": ".conflicts[].issue", "text": "mercenary contract being disputed", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 2},
   {"thing": "mercenary", "path": ".economicState.safetyProfile.guardEffectivenessDesc", "text": "A mercenary company provides enforcement", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/safetyProfile.js (its member)", "towns": 27},
   {"thing": "mercenary", "path": ".economicState.safetyProfile.guardEffectivenessDesc", "text": "maintain their own mercenary companies", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/safetyProfile.js", "towns": 4},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "mercenaries put out to pasture", "reason": "past", "note": "put out to pasture: their service is past", "towns": 6},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and mercenaries", "reason": "past", "note": "retired: their service is past", "towns": 18},
   {"thing": "mercenary", "path": ".institutions[].desc", "text": "retired soldiers and sellswords", "reason": "past", "note": "retired: their service is past", "towns": 12},
-  {"thing": "mercenary", "path": ".powerStructure.conflicts[].desc", "text": "mercenary contract being disputed", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 2},
-  {"thing": "mercenary", "path": ".powerStructure.conflicts[].issue", "text": "mercenary contract being disputed", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 2},
   {"thing": "mercenary", "path": ".powerStructure.recentConflict", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 5},
   {"thing": "mercenary", "path": ".pressureSentence", "text": "whether to raise a levy or hire mercenaries", "reason": "hedge", "note": "\"whether to … hire\": not yet hired", "towns": 2},
   {"thing": "prison", "path": ".economicState.safetyProfile.guardEffectivenessDesc", "text": "the prison system is limited", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/safetyProfile.js (and a hedge: \"limited\")", "towns": 53},
@@ -961,10 +953,7 @@
   "src/generators/people/representatives.js": [
    ["temple", "after-release", "Access to parish church"]
   ],
-  "src/generators/power/conflicts.js": [
-   ["docks", "other-lane", "Control of the dock taxation authority"],
-   ["market", "other-lane", "Control of the market licensing process"],
-   ["mercenary", "other-lane", "A mercenary contract being disputed by both parties"],
+  "src/generators/power/conflictIssues.js": [
    ["temple", "other-lane", "Church land claims on guild property"]
   ],
   "src/generators/power/governanceNarrative.js": [

@@ -54,7 +54,7 @@
       "banner": 9,
       "dated": 237,
       "sha-pin": 2,
-      "tree": 175
+      "tree": 177
     },
     "files": {
       "banner": [
@@ -534,7 +534,9 @@
     "_rosterGrowth2026-11-11-style-2-merge-record-38": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-7, session session_01FbPLbf9PtvYaSbTPWUnwoY): `tree` 173 -> 174, docs/shift-records/2026-11-11-style-2-merge-38-residue-herald.json, record 38, born into the tree class; measured once by this walker; nothing changed class.",
     "_rosterGrowth2026-11-10-founding-worlds": "ONE document JOINED the roster by being BORN into it (seat FOUNDING-WORLDS, a child of the chair session session_01FbPLbejcfwX5nii12VM673, session session_01FbPLbdY3NBeTAzt4UfkzPb, on lane/founding-worlds-2026-11-10 cut from f0f98d883): `dated` 231 -> 232, docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md, the lane's record, born dated; nothing changed class, and it cites code by symbol.",
     "_rosterGrowth2026-11-11-style-2-merge-record-closing-2": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-7, session session_01FbPLbf9PtvYaSbTPWUnwoY): `tree` 174 -> 175, docs/shift-records/2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json, record closing-2, born into the tree class; measured once by this walker; nothing changed class.",
-    "_rosterGrowth2026-11-11-founding-worlds-union": "THE UNION AT THE LINE MERGE INTO lane/founding-worlds-2026-11-10 (seat FOUNDING-WORLDS, at the final tip 7ab12183f): both sides' notes kept; `dated` 236 -> 237 (docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md, the lane's record, born dated)."
+    "_rosterGrowth2026-11-11-founding-worlds-union": "THE UNION AT THE LINE MERGE INTO lane/founding-worlds-2026-11-10 (seat FOUNDING-WORLDS, at the final tip 7ab12183f): both sides' notes kept; `dated` 236 -> 237 (docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md, the lane's record, born dated).",
+    "_rosterGrowth2026-11-12-style-2-merge-record-43": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-8, session session_01FbPLbc1CCoAMzKt2ScvNSk): `tree` 176 -> 177, docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json, record 43, born into the tree class; measured once by this walker; nothing changed class.",
+    "_rosterGrowth2026-11-12-style-2-merge-record-42": "ONE document JOINED the roster by being BORN into it (STYLE-2-MERGE-8, session session_01FbPLbc1CCoAMzKt2ScvNSk): `tree` 175 -> 176, docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json, record 42, born into the tree class; measured once by this walker; nothing changed class."
   },
   "rows": []
 }

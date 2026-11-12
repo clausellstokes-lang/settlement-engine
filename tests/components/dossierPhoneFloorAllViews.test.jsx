@@ -603,6 +603,10 @@ const desktopShape = (perView) => Object.fromEntries(
 // ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE point 25, URBAN-FIX B-P1 1b3436acd composed with SW-B7b's lit general desk): the
 // licence row passes the fixture town's receipt, so DS-GEN-11's contradiction line leaves the Outlook: Outlook 3/3 -> 2/2.
 // Green on the lane alone (its base predates the lit desk); confirmed by removing the row in the stage. No token moved.
+// ── RE-MEASURED 2026-11-12 (STYLE-2-MERGE-8): no token moved; the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record
+// docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json) draws ONE hook per quarrel from the issue's own hooks, so
+// the fixture town's quarrel hooks print two fewer lines: Summary/Plot Hooks 89 -> 87; every other view holds. Re-keyed BY IDENTITY
+// at the merge by the chair's ruling on STOP 42 (2026-11-12), measured by this file's own walk.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -620,7 +624,7 @@ const DESKTOP_BASELINE = Object.freeze({
 // ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE-4, point 24; SW-8 RENAME-POWERS C9-6 d12e20112, the power generators):
 // Plot Hooks 88 -> 89 on both arms. Red on SW-8's own tip b951ce7da and unkeyed there; bisected over the lane: green at
 // c85fd3f85, red at d12e20112 (the conflict hooks reworded). No token moved; sub12 0.
-  "Summary/Plot Hooks":  { measured: 89, sub14: 89 },
+  "Summary/Plot Hooks":  { measured: 87, sub14: 87 },
   "Systems/Services":    { measured: 104, sub14: 104 },
   "Systems/Institutions": { measured: 71, sub14: 71 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
@@ -738,6 +742,10 @@ const DESKTOP_BASELINE = Object.freeze({
 // both sub-floor counts hold.
 // ── RE-MEASURED 2026-11-10 (STYLE-2-MERGE point 25, URBAN-FIX B-P1 1b3436acd composed with SW-B7b's lit general desk): DS-GEN-11's
 // contradiction line leaves the fixture town's Outlook: prose 3 -> 2; chrome and both sub-floor counts hold.
+// ── RE-MEASURED 2026-11-12 (STYLE-2-MERGE-8): chrome and both sub-floor counts hold (0 in every view); the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record
+// docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json) draws ONE hook per quarrel from the issue's own hooks, so
+// the fixture town's quarrel hooks print two fewer lines: Summary/Plot Hooks 89 -> 87; every other view holds. Re-keyed BY IDENTITY
+// at the merge by the chair's ruling on STOP 42 (2026-11-12), measured by this file's own walk.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -750,7 +758,7 @@ const MOBILE_BASELINE = Object.freeze({
   "Summary/Foundations": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
-  "Summary/Plot Hooks":  { prose: 89, chrome: 0, sub14: 0, sub12: 0 },
+  "Summary/Plot Hooks":  { prose: 87, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 70, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
