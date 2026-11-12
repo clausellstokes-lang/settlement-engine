@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 907,
+    "pools": 908,
     "printOneLine": 677,
-    "measuredUnder30Draws": 144,
+    "measuredUnder30Draws": 143,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction",
@@ -16,23 +16,23 @@
       },
       {
         "pool": "ledger:safetyProfile:SAFETY_LINE_SIBLINGS",
-        "top1": 0.8919,
+        "top1": 0.8805,
         "top5": 1,
-        "draws": 1646,
+        "draws": 2092,
         "lines": 2
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear",
-        "top1": 0.8691,
+        "top1": 0.8677,
         "top5": 1,
-        "draws": 1497,
+        "draws": 1496,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension",
-        "top1": 0.849,
+        "top1": 0.8519,
         "top5": 1,
-        "draws": 834,
+        "draws": 837,
         "lines": 3
       },
       {
@@ -44,51 +44,51 @@
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy",
-        "top1": 0.8007,
+        "top1": 0.8015,
         "top5": 1,
-        "draws": 662,
+        "draws": 675,
         "lines": 3
       },
       {
         "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
-        "top1": 0.7957,
+        "top1": 0.787,
         "top5": 1,
         "draws": 230,
         "lines": 2
       },
       {
         "pool": "ledger:crisisCast:CAST_REASON_SIBLINGS",
-        "top1": 0.7917,
+        "top1": 0.7858,
         "top5": 1,
-        "draws": 744,
+        "draws": 742,
         "lines": 2
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity",
-        "top1": 0.7787,
+        "top1": 0.7811,
         "top5": 1,
-        "draws": 723,
+        "draws": 717,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy",
-        "top1": 0.7776,
+        "top1": 0.7754,
         "top5": 1,
-        "draws": 1888,
+        "draws": 1887,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire",
-        "top1": 0.7279,
+        "top1": 0.7271,
         "top5": 1,
-        "draws": 441,
+        "draws": 447,
         "lines": 3
       },
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years",
-        "top1": 0.7254,
+        "top1": 0.7219,
         "top5": 1,
-        "draws": 415,
+        "draws": 417,
         "lines": 3
       }
     ],
@@ -5593,6 +5593,12 @@
       ],
       "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)",
       "lines": 11
+    },
+    "ledger:prosperity:PROSPERITY_LINE_SIBLINGS": {
+      "top1": 0.6833,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }
