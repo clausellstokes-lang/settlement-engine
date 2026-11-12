@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-12T07:30:20.320Z",
+  "generatedAt": "2026-11-12T21:54:30.792Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "450b2c6c7ca00dd8",
+  "sourceHash": "80b9d57a764d78e8",
   "inputs": [
     "src/data/bandLadders.js",
     "src/data/constants.js",
