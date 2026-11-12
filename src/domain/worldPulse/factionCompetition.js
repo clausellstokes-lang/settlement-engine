@@ -13,6 +13,7 @@ import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes
 import { governingCoalition } from './beliefMap.js';
 import { memoryWeaveActive } from './relationshipEvolution.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { institutionSentenceNoun } from '../display/institutionSentenceNoun.js';
 import { factionPowerShare01 } from '../factionPowerShare.js';
 import { governingFactionOf } from '../rulingPower.js';
 // ES-5b — a REAL cross-layer pair (INFO→INTERIOR), TAKEN rather than avoided, and
@@ -937,8 +938,8 @@ function institutionCandidate(item, entry, state, tick, legitimacyPressure, trad
       fillLine(pickLine(INSTITUTION_MOVE_REASON, `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}:why`), { name: state.name, town: townNameOf(item) }),
       `Target institution: ${target.name}.`,
     ],
-    // The catalogue name, lower-cased to sit inside a sentence ("Steinhafen's mill").
-    say: { target: `${String(target.name).charAt(0).toLowerCase()}${String(target.name).slice(1)}` },
+    // The institution as a noun that sits inside a sentence ("Steinhafen's mill"): institutionSentenceNoun.
+    say: { target: institutionSentenceNoun(target.name) },
     factionPatch: {
       controlledInstitutions: criminalSuppression ? state.controlledInstitutions || [] : [...new Set([...(state.controlledInstitutions || []), target.id])],
       suppressedInstitutions: criminalSuppression ? [...new Set([...(state.suppressedInstitutions || []), target.id])] : state.suppressedInstitutions || [],
