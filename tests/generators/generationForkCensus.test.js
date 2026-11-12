@@ -228,6 +228,13 @@ const CENSUS_ROW = {
 /** The seed the mint census sees minted FOUR times, and the vias that convict a blind wrapper. */
 const REPEATED_SEED = `${CENSUS_ROW._seed}::generatePower::power-structure`;
 const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): the stores are laid by at the label's share on a
+// SECOND call of the stores' writer after prosperity (economicState.js :: generateEconomicState), and that writer's one
+// draw is the label-keyed fork `food.cropFortune`, so the probe row mints it twice, both by fork: the second call draws
+// the same crop fortune BY DESIGN (no stream moves). Measured by A5: repeatedSeeds = cropFortune x2 [fork|fork] ;
+// power-structure x4. The power-structure quartet is unmoved.
+const STORES_SEED = `${CENSUS_ROW._seed}::generateEconomy::food.cropFortune`;
+const STORES_VIAS = ['fork', 'fork'];
 // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
 // registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
 // 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
@@ -279,7 +286,10 @@ const PICK_VARIANT_CALLS = 31;
 // RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
 // take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
 // parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 17;
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): 17 -> 18, MEASURED by A6 and traced: the stores' second
+// call (above, STORES_SEED) composes the foodways line again, one more fnv1a32 (domain/foodways.js ::
+// composeFoodwaysLine, `foodways|<identity>`). The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 18;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -666,7 +676,8 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // [direct|direct|direct]; the fork-minted member of the quartet is exactly what the
     // re-implementation buys, so the via list alone convicts a mock that did not take.
     expect(bySeed.get(REPEATED_SEED), `${REPEATED_SEED} vias`).toEqual(REPEATED_VIAS);
-    expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
+    expect(bySeed.get(STORES_SEED), `${STORES_SEED} vias`).toEqual(STORES_VIAS);
+    expect(repeated.map(([seed]) => seed), 'exactly these two seeds are minted more than once').toEqual([STORES_SEED, REPEATED_SEED]);
   }, 120_000);
 
   it('A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
