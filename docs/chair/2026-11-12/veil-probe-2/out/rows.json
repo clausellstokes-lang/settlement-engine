@@ -1,0 +1,216 @@
+{
+ "failed": {
+  "at210": [],
+  "work211": []
+ },
+ "rows": {
+  "F2 event label null": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": false,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": false,
+    "linkPage": false,
+    "mode": "live"
+   }
+  },
+  "F2 event label \"\"": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": false,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": false,
+    "linkPage": false,
+    "mode": "live"
+   }
+  },
+  "F2 event label 0": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": false,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": false,
+    "linkPage": false,
+    "mode": "live"
+   }
+  },
+  "F2 event name 1e-7": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": false,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": false,
+    "linkPage": false,
+    "mode": "live"
+   }
+  },
+  "F2 institution id 1e-7": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": false,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": false,
+    "linkPage": false,
+    "mode": "live"
+   }
+  },
+  "F2 institution id 9007199254740993 (raw)": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": false,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": false,
+    "linkPage": false,
+    "mode": "live"
+   }
+  },
+  "F2 conflict parties [1e-7,\"x\"]": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": false,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": false,
+    "linkPage": false,
+    "mode": "live"
+   }
+  },
+  "F2 npc id 1e-7": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": false,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": false,
+    "linkPage": false,
+    "mode": "live"
+   }
+  },
+  "F3 institution id 1e400": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": true,
+    "linkResp": true,
+    "linkPage": true,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": true,
+    "galleryPage": true,
+    "linkResp": true,
+    "linkPage": true,
+    "mode": "live"
+   }
+  },
+  "F3 institution id -1e400": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": true,
+    "linkResp": true,
+    "linkPage": true,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": true,
+    "galleryPage": true,
+    "linkResp": true,
+    "linkPage": true,
+    "mode": "live"
+   }
+  },
+  "F3 institution id 1e-400": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": true,
+    "linkResp": true,
+    "linkPage": true,
+    "mode": "live"
+   },
+   "work211": {
+    "galleryResp": true,
+    "galleryPage": true,
+    "linkResp": true,
+    "linkPage": true,
+    "mode": "live"
+   }
+  },
+  "F1 Force all, Reveal DM on, snapshot": {
+   "at210": {
+    "galleryResp": true,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": true,
+    "mode": "snapshot",
+    "pgTextLen": 1032044
+   },
+   "work211": {
+    "galleryResp": false,
+    "galleryPage": false,
+    "linkResp": true,
+    "linkPage": true,
+    "mode": "snapshot",
+    "pgTextLen": 1032044
+   }
+  },
+  "F7 snapshot map member edited after freezing": {
+   "at210": {
+    "listingPage": false,
+    "mapResp": true,
+    "mapPage": true
+   },
+   "work211": {
+    "listingPage": false,
+    "mapResp": true,
+    "mapPage": true
+   }
+  }
+ },
+ "copyJsLen": 976659,
+ "copyStored": true
+}
