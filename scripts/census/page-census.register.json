@@ -46,21 +46,21 @@
    "reader": "SECOND",
    "master": 0,
    "integration": 288,
-   "banked": 288
+   "banked": 0
   },
   "P5b": {
    "label": "5b \"Diffuse, no gang\" beside a criminal power",
    "reader": "SECOND",
    "master": 0,
    "integration": 2,
-   "banked": 2
+   "banked": 0
   },
   "P6": {
    "label": "6 a gap naming what the imports bring",
    "reader": "CROSS",
    "master": 463,
    "integration": 296,
-   "banked": 296
+   "banked": 0
   },
   "P7a": {
    "label": "7a two founders",
@@ -165,7 +165,7 @@
    "reader": "SECOND",
    "master": 689,
    "integration": 689,
-   "banked": 689
+   "banked": 0
   },
   "NEW1": {
    "label": "NEW-1 the governance label against the Defense verdict",
