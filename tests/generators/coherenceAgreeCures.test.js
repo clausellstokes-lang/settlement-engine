@@ -387,3 +387,21 @@ describe('F8 (ii): the flag bag reads the prison and the hospital from the defen
     expect(getInstFlags({}, [{ name: 'Large prison' }]).inst.hasPrison).toBe(true);
   });
 });
+
+/**
+ * F5 (a) (COHERENCE-AGREE-6, REVIEW-AGREE-2; the chair's ruling of 2026-11-12): ONE HOME FOR WHICH TERRAIN HOLDS A
+ * PASS. "Mountain Pass" (`defended_pass`) named no terrain, so the roll gave it anywhere. Its own row now says the
+ * terrain it requires (`requiresTerrain`, a key the roll's pool filter does not read), and agrees with the geography
+ * table, which lists it under the mountains alone.
+ */
+describe('F5 (a): the mountain pass says the terrain it requires, and the geography table agrees', () => {
+  test('RESOURCE_DATA.defended_pass.requiresTerrain is the terrains whose allowed resources list it', async () => {
+    const { RESOURCE_DATA } = await import('../../src/data/resourceData.js');
+    const { TERRAIN_DATA } = await import('../../src/data/geographyData.js');
+    const listing = Object.entries(TERRAIN_DATA).filter(([, t]) => (t.allowedResources || []).includes('defended_pass')).map(([k]) => k).sort();
+    expect(listing).toEqual(['mountain']);
+    expect([...(RESOURCE_DATA.defended_pass.requiresTerrain || [])].sort()).toEqual(listing);
+    // the pool filter reads `terrain`; the pass keeps none, so the pool is what it was
+    expect(RESOURCE_DATA.defended_pass.terrain).toBeUndefined();
+  });
+});
