@@ -2917,6 +2917,17 @@
       },
       "band": null,
       "note": "COHERENCE-UPKEEP (lane/coherence-upkeep-2026-11-12), the chair's ruling of 2026-11-12 on item 4: what a place can keep up, ONE table keyed by the prosperity label with two named columns, `bought` (the share of what is bought outright: the hired force, services, magic stock, stores) and `funded` (the funding of wages and works: the five defence gates' floor-to-identity share). Registered as a DRAFT row in the minting commit; the values are the item 4 proposal's shares (docs/chair/2026-11-11/UPKEEP-PROPOSAL.md (b) and (c)), raw-authored and unsoaked, the owner's to sign."
+    },
+    "src/domain/facts/keep.js#KEEP_SCALE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "services": "fraction01",
+        "stores": "fraction01"
+      },
+      "band": null,
+      "note": "COHERENCE-UPKEEP (lane/coherence-upkeep-2026-11-12), the chair's rulings 4 and 6 of 2026-11-12: the floor a bought family keeps of its full measure, floor + (1 - floor) x keepOf(prosperity).bought — the services' demand (healing, lodging, food, equipment, transport and the commercial read) and the months laid by in store. Registered DRAFT in the minting commit; the values are the ruling's own 0.7 + 0.3 x keep, the owner's to sign."
     }
   },
   "roles": {

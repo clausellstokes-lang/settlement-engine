@@ -65,6 +65,27 @@ export function keepOf(prosperity) {
 }
 
 /**
+ * The floors of what is bought outright, by family (the chair's ruling of 2026-11-12, rulings 4
+ * and 6): a family keeps `floor + (1 - floor) × bought` of its full measure. DRAFT, the owner's to
+ * sign.
+ * @type {Readonly<{ services: number, stores: number }>}
+ */
+export const KEEP_SCALE_TUNING = Object.freeze({
+  services: 0.7,
+  stores: 0.7,
+});
+
+/**
+ * The share of its full measure a bought family keeps: `floor + (1 - floor) × bought`. At
+ * `bought` 1 it is the identity.
+ * @param {'services'|'stores'} family @param {{ bought: number }} keep @returns {number}
+ */
+export function boughtShare(family, keep) {
+  const floor = KEEP_SCALE_TUNING[family];
+  return floor + (1 - floor) * keep.bought;
+}
+
+/**
  * A gate kept above its floor by the place's funding: `floor + (1 - floor) × funded`. At
  * `funded` 1 it is the identity.
  * @param {number} floor @param {{ funded: number }} keep @returns {number}
