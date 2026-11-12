@@ -78,6 +78,17 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(said(live)).toEqual([]);
     expect(said(ruined)).toEqual([]);
   });
+  test('RED-FIRST: a court with no prison is not "no court" in the crime lines (48 corpus towns at the base)', () => {
+    const courtOnly = [{ name: 'Town hall', category: 'Government' }, { name: "Thieves' guild", category: 'Criminal' }];
+    const heard = [];
+    for (const priorityEconomy of [20, 50, 80]) for (const priorityCriminal of [50, 70, 95]) for (const priorityMilitary of [5, 40]) {
+      const config = { priorityEconomy, priorityCriminal, priorityMilitary, priorityMagic: 20 };
+      const profile = generateSafetyProfile(config, 'town', courtOnly);
+      heard.push(...profile.crimeTypes.map((c) => c.type));
+      expect(details(record({ economicState: { safetyProfile: profile }, institutions: courtOnly })), JSON.stringify(config)).toEqual([]);
+    }
+    expect(heard.length).toBeGreaterThan(0); // anchored: the grid reaches the crime lines
+  });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
     expect(details(grown(95, ['Grain']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
