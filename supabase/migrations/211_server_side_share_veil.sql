@@ -56,7 +56,7 @@
 -- Character-identical to the client's tables; tests/security/galleryServerVeil.pglite.test.js
 -- reads this function and the client's exports and compares them field for field.
 create or replace function public._gallery_veil_kinds()
-returns jsonb language sql immutable set search_path = public, pg_temp as $$
+returns jsonb language sql immutable as $$
   select '{
     "npc": {
       "lists": [["npcs"], ["powerStructure", "factions", "*", "members"], ["factions", "*", "members"]],
@@ -109,13 +109,13 @@ $$;
 
 -- The card kinds in the client's iteration order (Object.keys(CARD_KINDS)).
 create or replace function public._gallery_veil_kind_order()
-returns text[] language sql immutable set search_path = public, pg_temp as $$
+returns text[] language sql immutable as $$
   select array['npc', 'institution', 'faction', 'event', 'tension', 'conflict', 'relationship']
 $$;
 
 -- The hideable groupings (GROUPING_REMOVERS' keys), the twelve static defaults in the client's order.
 create or replace function public._gallery_veil_groupings()
-returns text[] language sql immutable set search_path = public, pg_temp as $$
+returns text[] language sql immutable as $$
   select array['tab:plot_hooks', 'block:services.criminal', 'block:defense.criminalStructure',
     'block:power.criminalUnderside', 'block:defense.vulnerabilities', 'block:rumors.dmTruth',
     'block:war.truthVsBelief', 'block:housekeeping.structuralIssues', 'block:housekeeping.coherenceNotes',
@@ -132,14 +132,14 @@ $$;
 -- at most 326/6 of the client's, and the bound is floor(1,000,000 x 326 / 6). A copy past it is
 -- refused by the read (tests/security/galleryVeilCures.pglite.test.js executes the tokens).
 create or replace function public._gallery_veil_copy_bound()
-returns bigint language sql immutable set search_path = public, pg_temp as $$
+returns bigint language sql immutable as $$
   select 54333333::bigint
 $$;
 
 -- ── 2. THE CLIENT'S SMALL READERS, one SQL function each ─────────────────────────────────────
 -- str(v): the string, else ''.
 create or replace function public._gallery_veil_str(j jsonb)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language sql immutable as $$
   select case when jsonb_typeof(j) = 'string' then j #>> '{}' else '' end
 $$;
 
@@ -147,19 +147,19 @@ $$;
 -- nearest double, rounding half to even: zero at or below 2^-1075, Infinity at or past 2^1024 - 2^970.
 -- Both are decided by exact numeric comparison, so no cast is ever asked of an out-of-range value.
 create or replace function public._gallery_veil_num_zero(x numeric)
-returns boolean language sql immutable set search_path = public, pg_temp as $$
+returns boolean language sql immutable as $$
   -- 2^1075
   select abs(x) * 404804506614621236704990693437834614099113299528284236713802716054860679135990693783920767402874248990374155728633623822779617474771586953734026799881477019843034848553132722728933815484186432682479535356945490137124014966849385397236206711298319112681620113024717539104666829230461005064372655017292012526615415482186989568 <= 1
 $$;
 create or replace function public._gallery_veil_num_inf(x numeric)
-returns boolean language sql immutable set search_path = public, pg_temp as $$
+returns boolean language sql immutable as $$
   -- 2^1024 - 2^970
   select abs(x) >= 179769313486231580793728971405303415079934132710037826936173778980444968292764750946649017977587207096330286416692887910946555547851940402630657488671505820681908902000708383676273854845817711531764475730270069855571366959622842914819860834936475292719074168444365510704342711559699508093042880177904174497792
 $$;
 
 -- JS truthiness of a JSON value (absent, null, false, '' and 0 are falsy; a number JS reads as zero is 0).
 create or replace function public._gallery_veil_truthy(j jsonb)
-returns boolean language sql immutable set search_path = public, pg_temp as $$
+returns boolean language sql immutable as $$
   select case jsonb_typeof(j)
     when 'string' then (j #>> '{}') <> ''
     when 'number' then not public._gallery_veil_num_zero((j #>> '{}')::numeric)
@@ -178,7 +178,7 @@ $$;
 -- up to 1e21, exponential outside it. Zero and the infinities come from the exact range tests first, so
 -- no cast is asked of an out-of-range value (F3). An integer of at most 15 digits is that integer.
 create or replace function public._gallery_veil_numstr(t text)
-returns text language plpgsql immutable set search_path = public, pg_temp as $$
+returns text language plpgsql immutable as $$
 declare
   x numeric;
   b bytea;
@@ -259,67 +259,77 @@ begin
   return case when x < 0 then '-' else '' end || out;
 end $$;
 
+-- Array.prototype.join(sep): a null element reads '', every other String(element). (plpgsql: it and
+-- _gallery_veil_jsstr call each other, and a SQL body is checked against what exists when it is made.)
+create or replace function public._gallery_veil_join(j jsonb, sep text)
+returns text language plpgsql immutable as $$
+begin
+  return coalesce((select string_agg(case when jsonb_typeof(e) = 'null' then '' else public._gallery_veil_jsstr(e) end, sep order by o)
+                     from jsonb_array_elements(j) with ordinality x(e, o)), '');
+end $$;
+
 -- String(v) of a JSON value (Array.prototype.join for arrays: null elements read '').
 create or replace function public._gallery_veil_jsstr(j jsonb)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language sql immutable as $$
   select case jsonb_typeof(j)
     when 'string' then j #>> '{}'
     when 'number' then public._gallery_veil_numstr(j #>> '{}')
     when 'boolean' then j #>> '{}'
     when 'object' then '[object Object]'
-    when 'array' then coalesce((select string_agg(case when jsonb_typeof(e) = 'null' then '' else public._gallery_veil_jsstr(e) end, ',' order by o)
-                                  from jsonb_array_elements(j) with ordinality x(e, o)), '')
+    when 'array' then public._gallery_veil_join(j, ',')
     when 'null' then 'null'
     else '' end
 $$;
 
+
 -- The first truthy of up to three values (a || b || c), as JSON.
 create or replace function public._gallery_veil_or(a jsonb, b jsonb, c jsonb default null)
-returns jsonb language sql immutable set search_path = public, pg_temp as $$
+returns jsonb language sql immutable as $$
   select case when public._gallery_veil_truthy(a) then a when public._gallery_veil_truthy(b) then b else c end
 $$;
 
 -- ASCII-only lower case. Every other character the slug keeps is ASCII, and the two characters whose
 -- JS lower case IS ASCII (U+0130 and U+212A) are spelled out before it (computed over all code points).
 create or replace function public._gallery_veil_lower(v text)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language sql immutable as $$
   select translate(replace(replace(v, U&'\0130', U&'i\0307'), U&'\212A', 'k'),
     'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')
 $$;
 
 -- slugifyEntity (kernel/slugify.js with sep '-', max 80, fallback and empty 'unknown').
 create or replace function public._gallery_veil_slug(v text)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language sql immutable as $$
   select coalesce(nullif(left(regexp_replace(regexp_replace(
     public._gallery_veil_lower(coalesce(nullif(v, ''), 'unknown')), '[^a-z0-9]+', '-', 'g'), '^-+|-+$', '', 'g'), 80), ''), 'unknown')
 $$;
 
 -- factionIdFromName's snakeCase (non-alphanumeric runs to '_', trimmed, lower-cased).
 create or replace function public._gallery_veil_snake(v text)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language sql immutable as $$
   select lower(regexp_replace(regexp_replace(coalesce(v, ''), '[^a-zA-Z0-9]+', '_', 'g'), '^_+|_+$', '', 'g'))
 $$;
 
 -- ownIdOr(card, prefix, ...parts): the card's own string id, else prefix.slug(parts joined by '-').
 create or replace function public._gallery_veil_own_id(c jsonb, prefix text, parts jsonb)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language plpgsql immutable as $$
+begin
+  return (
   select coalesce(nullif(public._gallery_veil_str(c -> 'id'), ''),
-    prefix || '.' || public._gallery_veil_slug(coalesce((
-      select string_agg(t, '-' order by o) from (
-        select o, case when jsonb_typeof(p) = 'array'
-          then (select coalesce(string_agg(case when jsonb_typeof(e) = 'null' then '' else public._gallery_veil_jsstr(e) end, '-' order by eo), '')
-                  from jsonb_array_elements(p) with ordinality y(e, eo))
-          else public._gallery_veil_str(p) end as t
-        from jsonb_array_elements(parts) with ordinality x(p, o)) q
-      where t <> ''), '')))
-$$;
+      prefix || '.' || public._gallery_veil_slug(coalesce((
+        select string_agg(t, '-' order by o) from (
+          select o, case when jsonb_typeof(p) = 'array'
+            then public._gallery_veil_join(p, '-')
+            else public._gallery_veil_str(p) end as t
+          from jsonb_array_elements(parts) with ordinality x(p, o)) q
+        where t <> ''), ''))));
+end $$;
 
 -- galleryMemberKey (publicSafe.js), the npc's veil id and member key, as the client spells it:
 -- String(id) when id is neither null nor absent and spells something, else npc.<snake(String(name || ''))>.
 -- (092's _gallery_npc_key reads `->> 'id'`, which spells a number, an array or an object as jsonb does;
 -- it keeps its one caller, the 093 splice, unchanged.)
 create or replace function public._gallery_veil_npc_id(c jsonb)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language sql immutable as $$
   select coalesce(nullif(case when coalesce(jsonb_typeof(c -> 'id'), 'null') <> 'null' then public._gallery_veil_jsstr(c -> 'id') end, ''),
     'npc.' || public._gallery_veil_lower(trim(both '_' from regexp_replace(
       case when public._gallery_veil_truthy(c -> 'name') then public._gallery_veil_jsstr(c -> 'name') else '' end, '[^a-zA-Z0-9]+', '_', 'g'))))
@@ -328,77 +338,78 @@ $$;
 -- The id the veil addresses a card by (CARD_KINDS[kind].idOf). NULL only for an anonymous legacy
 -- event (no string id, no name, title or label): the client hashes it, and the server reads it
 -- FAIL-CLOSED (every eye addressed to any legacy event applies to it; see _gallery_veil_card).
+-- entityIdFor('institution'): String(id || refId || slugifyEntity(name || label || 'institution')).
+create or replace function public._gallery_veil_inst_id(c jsonb)
+returns text language sql immutable as $$
+  select case
+          when public._gallery_veil_truthy(c -> 'id') then public._gallery_veil_jsstr(c -> 'id')
+      when public._gallery_veil_truthy(c -> 'refId') then public._gallery_veil_jsstr(c -> 'refId')
+      when public._gallery_veil_truthy(c -> 'name') then public._gallery_veil_slug(public._gallery_veil_jsstr(c -> 'name'))
+      when public._gallery_veil_truthy(c -> 'label') then public._gallery_veil_slug(public._gallery_veil_jsstr(c -> 'label'))
+      else 'institution' end
+$$;
+
 create or replace function public._gallery_veil_card_id(kind text, c jsonb)
-returns text language plpgsql immutable set search_path = public, pg_temp as $$
-declare
-  f text;
-  n jsonb;
+returns text language plpgsql immutable as $$
 begin
   if kind = 'npc' then return public._gallery_veil_npc_id(c); end if;
-  if kind = 'institution' then
-    if public._gallery_veil_truthy(c -> 'id') then return public._gallery_veil_jsstr(c -> 'id'); end if;
-    if public._gallery_veil_truthy(c -> 'refId') then return public._gallery_veil_jsstr(c -> 'refId'); end if;
-    n := public._gallery_veil_or(c -> 'name', c -> 'label');
-    return public._gallery_veil_slug(case when n is null then 'institution' else public._gallery_veil_jsstr(n) end);
+  if kind = 'institution' then return public._gallery_veil_inst_id(c); end if;
+  if kind = 'faction' then return case
+      when public._gallery_veil_str(c -> 'faction') <> '' then 'faction.' || public._gallery_veil_snake(public._gallery_veil_str(c -> 'faction'))
+      when public._gallery_veil_str(c -> 'name') <> '' then 'faction.' || public._gallery_veil_snake(public._gallery_veil_str(c -> 'name'))
+      else public._gallery_veil_own_id(c, 'faction', jsonb_build_array(c -> 'name')) end;
   end if;
-  if kind = 'faction' then
-    f := coalesce(nullif(public._gallery_veil_str(c -> 'faction'), ''), public._gallery_veil_str(c -> 'name'));
-    if f <> '' then return 'faction.' || public._gallery_veil_snake(f); end if;
-    return public._gallery_veil_own_id(c, 'faction', jsonb_build_array(c -> 'name'));
+  -- eventIdFor: a string id, else the first TRUTHY of name, title and label (a falsy label is no
+  -- name: the review's F2 (a)), else NULL (an anonymous legacy event, read fail-closed)
+  if kind = 'event' then return case
+      when public._gallery_veil_str(c -> 'id') <> '' then c ->> 'id'
+      when public._gallery_veil_truthy(c -> 'name') then 'event.' || public._gallery_veil_slug(public._gallery_veil_jsstr(c -> 'name'))
+      when public._gallery_veil_truthy(c -> 'title') then 'event.' || public._gallery_veil_slug(public._gallery_veil_jsstr(c -> 'title'))
+      when public._gallery_veil_truthy(c -> 'label') then 'event.' || public._gallery_veil_slug(public._gallery_veil_jsstr(c -> 'label'))
+      end;
   end if;
-  if kind = 'event' then
-    if public._gallery_veil_str(c -> 'id') <> '' then return c ->> 'id'; end if;
-    -- eventIdFor: the first TRUTHY of name, title and label (a falsy label is no name: the review's F2 (a))
-    n := case when public._gallery_veil_truthy(c -> 'name') then c -> 'name'
-              when public._gallery_veil_truthy(c -> 'title') then c -> 'title'
-              when public._gallery_veil_truthy(c -> 'label') then c -> 'label' end;
-    if n is not null then return 'event.' || public._gallery_veil_slug(public._gallery_veil_jsstr(n)); end if;
-    return null;
-  end if;
-  if kind = 'tension' then
-    return public._gallery_veil_own_id(c, 'tension', jsonb_build_array(public._gallery_veil_or(c -> 'name', c -> 'title', c -> 'type')));
-  end if;
-  if kind = 'conflict' then
-    return public._gallery_veil_own_id(c, 'conflict', jsonb_build_array(c -> 'parties', c -> 'issue'));
-  end if;
-  if kind = 'relationship' then
-    return public._gallery_veil_own_id(c, 'relationship', jsonb_build_array(
-      public._gallery_veil_or(c -> 'from', c -> 'npc1Name'), public._gallery_veil_or(c -> 'to', c -> 'npc2Name'), c -> 'type'));
-  end if;
+  if kind = 'tension' then return public._gallery_veil_own_id(c, 'tension', jsonb_build_array(public._gallery_veil_or(c -> 'name', c -> 'title', c -> 'type'))); end if;
+  if kind = 'conflict' then return public._gallery_veil_own_id(c, 'conflict', jsonb_build_array(c -> 'parties', c -> 'issue')); end if;
+  if kind = 'relationship' then return public._gallery_veil_own_id(c, 'relationship', jsonb_build_array(
+      public._gallery_veil_or(c -> 'from', c -> 'npc1Name'), public._gallery_veil_or(c -> 'to', c -> 'npc2Name'), c -> 'type')); end if;
   return null;
 end $$;
 
 -- declaredFacet (cohesionWeave.js): a facets{} string value, else the first `facet:<kind>:<value>` tag.
 create or replace function public._gallery_veil_facet(e jsonb, k text)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language plpgsql immutable as $$
+begin
+  return (
   select coalesce(
-    case when jsonb_typeof(e -> 'facets') = 'object' and jsonb_typeof(e -> 'facets' -> k) = 'string'
-         and (e -> 'facets' ->> k) <> '' then e -> 'facets' ->> k end,
-    (select substr(t #>> '{}', length('facet:' || k || ':') + 1)
-       from jsonb_array_elements(case when jsonb_typeof(e -> 'tags') = 'array' then e -> 'tags' else '[]' end) with ordinality x(t, o)
-      where jsonb_typeof(t) = 'string' and left(t #>> '{}', length('facet:' || k || ':')) = 'facet:' || k || ':'
-        and length(t #>> '{}') > length('facet:' || k || ':')
-      order by o limit 1))
-$$;
+      case when jsonb_typeof(e -> 'facets') = 'object' and jsonb_typeof(e -> 'facets' -> k) = 'string'
+           and (e -> 'facets' ->> k) <> '' then e -> 'facets' ->> k end,
+      (select substr(t #>> '{}', length('facet:' || k || ':') + 1)
+         from jsonb_array_elements(case when jsonb_typeof(e -> 'tags') = 'array' then e -> 'tags' else '[]' end) with ordinality x(t, o)
+        where jsonb_typeof(t) = 'string' and left(t #>> '{}', length('facet:' || k || ':')) = 'facet:' || k || ':'
+          and length(t #>> '{}') > length('facet:' || k || ':')
+        order by o limit 1)));
+end $$;
 
 -- isHideableHouse (people/cardVeil.js): criminal, clandestine (declared facets; the inference tables
 -- hold no row for these three kinds), or an illegal information brokerage.
 create or replace function public._gallery_veil_house(i jsonb)
-returns boolean language sql immutable set search_path = public, pg_temp as $$
+returns boolean language plpgsql immutable as $$
+begin
+  return (
   select coalesce(public._gallery_veil_lower(public._gallery_veil_str(i -> 'category')) = 'criminal'
-      or public._gallery_veil_lower(public._gallery_veil_str(i -> 'priorityCategory')) = 'criminal'
-      or public._gallery_veil_facet(i, 'clandestine') = 'clandestine'
-      or public._gallery_veil_facet(i, 'institutionFunction') = 'clandestine'
-      or public._gallery_veil_facet(i, 'subterranean') = 'subterranean'
-      or (jsonb_typeof(i -> 'serviceKeys') = 'array' and jsonb_typeof(i -> 'tags') = 'array'
-          and exists (select 1 from jsonb_array_elements(i -> 'serviceKeys') k
-                       where k in ('"info_calibration"', '"info_query"', '"info_feed"', '"info_plant"'))
-          and i -> 'tags' @> '["brokerage"]' and i -> 'tags' @> '["criminal"]'), false)
-$$;
+        or public._gallery_veil_lower(public._gallery_veil_str(i -> 'priorityCategory')) = 'criminal'
+        or public._gallery_veil_facet(i, 'clandestine') = 'clandestine'
+        or public._gallery_veil_facet(i, 'institutionFunction') = 'clandestine'
+        or public._gallery_veil_facet(i, 'subterranean') = 'subterranean'
+        or (jsonb_typeof(i -> 'serviceKeys') = 'array' and jsonb_typeof(i -> 'tags') = 'array'
+            and exists (select 1 from jsonb_array_elements(i -> 'serviceKeys') k
+                         where k in ('"info_calibration"', '"info_query"', '"info_feed"', '"info_plant"'))
+            and i -> 'tags' @> '["brokerage"]' and i -> 'tags' @> '["criminal"]'), false));
+end $$;
 
 -- The card's house (cardHouseOf || str(npc.institution)).
 create or replace function public._gallery_veil_npc_house(n jsonb)
-returns text language sql immutable set search_path = public, pg_temp as $$
+returns text language sql immutable as $$
   select case
     when jsonb_typeof(n -> 'institution') = 'object' and n -> 'institution' -> 'kind' = '"house"'
          and public._gallery_veil_or(n -> 'institution' -> 'key', n -> 'institution' -> 'name') is not null
@@ -408,17 +419,20 @@ $$;
 
 -- JS string length (UTF-16 code units).
 create or replace function public._gallery_veil_jslen(v text)
-returns integer language sql immutable set search_path = public, pg_temp as $$
-  select char_length(v) + (select count(*)::int from regexp_matches(v, U&'[\+010000-\+10FFFF]', 'g'))
-$$;
+returns integer language plpgsql immutable as $$
+begin
+  return (
+  select char_length(v) + (select count(*)::int from regexp_matches(v, U&'[\+010000-\+10FFFF]', 'g')));
+end $$;
 
 -- parseVeilAddress: {type, kind, id, field} or NULL.
 create or replace function public._gallery_veil_parse(a text)
-returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
 declare
   i int; j int; k int; head text; rest text; tail text;
 begin
-  if a is null or a = '' or public._gallery_veil_jslen(a) > 300 then return null; end if;
+  -- a JS length past 300 is possible only past 300 bytes (a UTF-16 unit is never fewer bytes than one)
+  if a is null or a = '' or (octet_length(a) > 300 and public._gallery_veil_jslen(a) > 300) then return null; end if;
   i := position(':' in a);
   if i <= 1 then return null; end if;
   head := left(a, i - 1);
@@ -446,82 +460,89 @@ begin
 end $$;
 
 -- isHideable(address) with no settlement (the resolver's form).
-create or replace function public._gallery_veil_hideable(a text)
-returns boolean language plpgsql immutable set search_path = public, pg_temp as $$
-declare
-  p jsonb := public._gallery_veil_parse(a);
-  kd jsonb;
+create or replace function public._gallery_veil_hideable_p(p jsonb, a text)
+returns boolean language plpgsql immutable as $$
 begin
-  if p is null then return false; end if;
-  if p ->> 'type' in ('field', 'class') then
-    kd := public._gallery_veil_kinds() -> (p ->> 'kind');
-    if kd is null then return false; end if;
-    if kd -> 'floor' ? (p ->> 'field') then return false; end if;
-    if kd -> 'fields' ? (p ->> 'field')
-       and exists (select 1 from jsonb_array_elements_text(kd -> 'fields' -> (p ->> 'field')) k where kd -> 'floor' ? k) then
-      return false;
-    end if;
-    return true;
-  end if;
-  if p ->> 'type' = 'card' then return p ->> 'kind' = 'institution'; end if;
-  return a = any(public._gallery_veil_groupings());
+  return (
+  select case
+      when p is null then false
+      when p ->> 'type' in ('field', 'class') then coalesce(
+        not (public._gallery_veil_kinds() -> (p ->> 'kind') -> 'floor' ? (p ->> 'field'))
+        and not coalesce((public._gallery_veil_kinds() -> (p ->> 'kind') -> 'fields' -> (p ->> 'field'))
+                           ?| array(select jsonb_array_elements_text(public._gallery_veil_kinds() -> (p ->> 'kind') -> 'floor')), false), false)
+      when p ->> 'type' = 'card' then p ->> 'kind' = 'institution'
+      else a = any(public._gallery_veil_groupings()) end);
 end $$;
+
+create or replace function public._gallery_veil_hideable(a text)
+returns boolean language sql immutable as $$
+  select public._gallery_veil_hideable_p(public._gallery_veil_parse(a), a)
+$$;
 
 -- cardsOf(s, kind): every record of the kind, with the path of its list and its index there.
 create or replace function public._gallery_veil_cards(s jsonb, kind text)
 returns table (list text[], owner_idx int, idx int, card jsonb)
-language sql immutable set search_path = public, pg_temp as $$
+language plpgsql immutable as $$
+begin
+  return query
   with paths as (
-    select array(select jsonb_array_elements_text(p)) as path
-      from jsonb_array_elements(public._gallery_veil_kinds() -> kind -> 'lists') p
-  )
-  select path, null::int, (o - 1)::int, e
-    from paths, jsonb_array_elements(case when jsonb_typeof(s #> path) = 'array' and not ('*' = any(path)) then s #> path else '[]' end) with ordinality x(e, o)
-   where jsonb_typeof(e) = 'object'
-  union all
-  select path, (oo - 1)::int, (o - 1)::int, e
-    from paths,
-         jsonb_array_elements(case when '*' = any(path) and jsonb_typeof(s #> path[1:array_position(path, '*') - 1]) = 'array'
-                                   then s #> path[1:array_position(path, '*') - 1] else '[]' end) with ordinality w(own, oo),
-         jsonb_array_elements(case when jsonb_typeof(own) = 'object' and jsonb_typeof(own #> path[array_position(path, '*') + 1:]) = 'array'
-                                   then own #> path[array_position(path, '*') + 1:] else '[]' end) with ordinality x(e, o)
-   where '*' = any(path) and jsonb_typeof(e) = 'object'
-$$;
+      select array(select jsonb_array_elements_text(p)) as path
+        from jsonb_array_elements(public._gallery_veil_kinds() -> kind -> 'lists') p
+    )
+    select path, null::int, (o - 1)::int, e
+      from paths, jsonb_array_elements(case when jsonb_typeof(s #> path) = 'array' and not ('*' = any(path)) then s #> path else '[]' end) with ordinality x(e, o)
+     where jsonb_typeof(e) = 'object'
+    union all
+    select path, (oo - 1)::int, (o - 1)::int, e
+      from paths,
+           jsonb_array_elements(case when '*' = any(path) and jsonb_typeof(s #> path[1:array_position(path, '*') - 1]) = 'array'
+                                     then s #> path[1:array_position(path, '*') - 1] else '[]' end) with ordinality w(own, oo),
+           jsonb_array_elements(case when jsonb_typeof(own) = 'object' and jsonb_typeof(own #> path[array_position(path, '*') + 1:]) = 'array'
+                                     then own #> path[array_position(path, '*') + 1:] else '[]' end) with ordinality x(e, o)
+     where '*' = any(path) and jsonb_typeof(e) = 'object';
+end $$;
 
 -- dropHookKeys: every key matching /hook/i, at any depth.
 create or replace function public._gallery_veil_drop_hooks(j jsonb)
-returns jsonb language sql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
+begin
+  return (
   select case jsonb_typeof(j)
-    when 'array' then (select coalesce(jsonb_agg(public._gallery_veil_drop_hooks(e) order by o), '[]') from jsonb_array_elements(j) with ordinality x(e, o))
-    when 'object' then (select coalesce(jsonb_object_agg(k, public._gallery_veil_drop_hooks(v)), '{}') from jsonb_each(j) x(k, v) where k !~* 'hook')
-    else j end
-$$;
+      when 'array' then (select coalesce(jsonb_agg(public._gallery_veil_drop_hooks(e) order by o), '[]') from jsonb_array_elements(j) with ordinality x(e, o))
+      when 'object' then (select coalesce(jsonb_object_agg(k, public._gallery_veil_drop_hooks(v)), '{}') from jsonb_each(j) x(k, v) where k !~* 'hook')
+      else j end);
+end $$;
 
 -- The three house classes, apart (the defaults read them one by one).
 create or replace function public._gallery_veil_criminal(i jsonb)
-returns boolean language sql immutable set search_path = public, pg_temp as $$
+returns boolean language sql immutable as $$
   select public._gallery_veil_lower(public._gallery_veil_str(i -> 'category')) = 'criminal'
       or public._gallery_veil_lower(public._gallery_veil_str(i -> 'priorityCategory')) = 'criminal'
 $$;
 create or replace function public._gallery_veil_clandestine(i jsonb)
-returns boolean language sql immutable set search_path = public, pg_temp as $$
+returns boolean language sql immutable as $$
   select coalesce(public._gallery_veil_facet(i, 'clandestine') = 'clandestine'
       or public._gallery_veil_facet(i, 'institutionFunction') = 'clandestine'
       or public._gallery_veil_facet(i, 'subterranean') = 'subterranean', false)
 $$;
 create or replace function public._gallery_veil_illegal_brokerage(i jsonb)
-returns boolean language sql immutable set search_path = public, pg_temp as $$
+returns boolean language plpgsql immutable as $$
+begin
+  return (
   select coalesce(jsonb_typeof(i -> 'serviceKeys') = 'array' and jsonb_typeof(i -> 'tags') = 'array'
-     and exists (select 1 from jsonb_array_elements(i -> 'serviceKeys') k
-                  where k in ('"info_calibration"', '"info_query"', '"info_feed"', '"info_plant"'))
-     and i -> 'tags' @> '["brokerage"]' and i -> 'tags' @> '["criminal"]', false)
-$$;
+       and exists (select 1 from jsonb_array_elements(i -> 'serviceKeys') k
+                    where k in ('"info_calibration"', '"info_query"', '"info_feed"', '"info_plant"'))
+       and i -> 'tags' @> '["brokerage"]' and i -> 'tags' @> '["criminal"]', false));
+end $$;
 
 -- ── 3. THE RESOLVER (defaultVeilFor + readShareVeil + resolveVeil) ─────────────────────────
--- {hidden: [...], except: [...]}, or NULL for an unmarked share read as a listing (the page is
--- unchanged). `link`: the party link's R4 — an unmarked share takes the default veil.
+-- The effective veil, already parsed for the applier: {groupings: [tab/block addresses, sorted],
+-- cards: {institution id: true}, classes: {kind: [field]}, fields: {kind: {id: [field]}}, exc:
+-- {field address: true}} (each address is parsed ONCE, by one regular expression). NULL for an
+-- unmarked share read as a listing (the page is unchanged). `link`: the party link's R4 — an unmarked
+-- share takes the default veil.
 create or replace function public._gallery_veil_resolve(pub jsonb, overrides jsonb, link boolean, people text[])
-returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
 declare
   ov jsonb := case when jsonb_typeof(overrides) = 'object' then overrides else '{}'::jsonb end;
   marked boolean := coalesce(jsonb_typeof(ov -> '$veil') = 'object', false);
@@ -531,7 +552,7 @@ begin
   if not marked and not link then return null; end if;
   with
   insts as (
-    select card as i, public._gallery_veil_card_id('institution', card) as id
+    select card as i, public._gallery_veil_inst_id(card) as id
       from public._gallery_veil_cards(s, 'institution')
   ),
   defaults as (
@@ -585,31 +606,45 @@ begin
     select distinct on (address) address, hidden, ord from stored_typed order by address, ord desc
   ),
   stored as (
-    select address, hidden, 1000000000 + ord as ord from (
-      select * from stored_last order by ord desc offset 0) q
-     where public._gallery_veil_parse(address) is not null
+    select address, hidden, 1000000000 + ord as ord, p
+      from (select address, hidden, ord, public._gallery_veil_parse(address) as p
+              from (select * from stored_last order by ord desc offset 0) q offset 0) q2
+     where p is not null
      limit 2000
   ),
-  deltas as (select * from card_deltas union all select * from stored),
-  targets as (
-    select t, d.hidden, d.ord
-      from deltas d, lateral (select public._gallery_veil_parse(d.address) as p) pp,
-      lateral (
-        select 'field:' || (p ->> 'kind') || ':' || (p ->> 'id') || ':' || f as t
-          from jsonb_object_keys(coalesce(public._gallery_veil_kinds() -> (p ->> 'kind') -> 'fields', '{}')) f
-         where p ->> 'type' = 'card' and p ->> 'kind' <> 'institution'
-        union all
-        select d.address where not (p ->> 'type' = 'card' and p ->> 'kind' <> 'institution')
-      ) tt
-     where public._gallery_veil_hideable(t)
+  deltas as (
+    select address, hidden, ord, jsonb_build_object('type', 'card', 'kind', 'npc', 'id', substr(address, 10)) as p from card_deltas
+    union all select * from stored
   ),
-  last as (select distinct on (t) t, hidden from targets order by t, ord desc)
+  targets as (
+    select tt.t, tt.pt, d.hidden, d.ord
+      from deltas d, lateral (
+        select 'field:' || (d.p ->> 'kind') || ':' || (d.p ->> 'id') || ':' || f as t,
+               jsonb_build_object('type', 'field', 'kind', d.p ->> 'kind', 'id', d.p ->> 'id', 'field', f) as pt
+          from jsonb_object_keys(coalesce(public._gallery_veil_kinds() -> (d.p ->> 'kind') -> 'fields', '{}')) f
+         where d.p ->> 'type' = 'card' and d.p ->> 'kind' <> 'institution'
+        union all
+        select d.address, d.p where not (d.p ->> 'type' = 'card' and d.p ->> 'kind' <> 'institution')
+      ) tt
+     where public._gallery_veil_hideable_p(tt.pt, tt.t)
+  ),
+  last as (select distinct on (t) t, pt, hidden from targets order by t, ord desc),
+  veiled as (
+    select d.a, d.p from (select a, public._gallery_veil_parse(a) as p from defaults offset 0) d
+     where public._gallery_veil_hideable_p(d.p, d.a) and d.a not in (select t from last where not hidden)
+    union
+    select t, pt from last where hidden
+  )
   select jsonb_build_object(
-    'hidden', coalesce((select jsonb_agg(a) from (
-        select a from defaults where public._gallery_veil_hideable(a) and a not in (select t from last where not hidden)
-        union
-        select t from last where hidden) h), '[]'),
-    'except', coalesce((select jsonb_agg(t) from last where not hidden and t like 'field:%'), '[]'))
+    'groupings', coalesce((select jsonb_agg(a order by a collate "C") from veiled where p ->> 'type' in ('tab', 'block')), '[]'),
+    'cards', coalesce((select jsonb_object_agg(p ->> 'id', true) from veiled where p ->> 'type' = 'card'), '{}'),
+    'classes', coalesce((select jsonb_object_agg(k, fs) from (
+        select p ->> 'kind' as k, jsonb_agg(distinct p ->> 'field') as fs from veiled where p ->> 'type' = 'class' group by 1) q), '{}'),
+    'fields', coalesce((select jsonb_object_agg(k, ids) from (
+        select k, jsonb_object_agg(i, fs) as ids from (
+          select p ->> 'kind' as k, p ->> 'id' as i, jsonb_agg(distinct p ->> 'field') as fs from veiled
+           where p ->> 'type' = 'field' group by 1, 2) q1 group by 1) q2), '{}'),
+    'exc', coalesce((select jsonb_object_agg(t, true) from last where not hidden and t like 'field:%'), '{}'))
     into out;
   return out;
 end $$;
@@ -618,7 +653,7 @@ end $$;
 -- One card through its class switches and its own eyes. `id` NULL is an anonymous legacy event:
 -- every eye addressed to any legacy event applies, and no exception does (fail-closed).
 create or replace function public._gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb, legacy jsonb)
-returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
 declare
   kd jsonb := public._gallery_veil_kinds() -> kind;
   id text := public._gallery_veil_card_id(kind, c);
@@ -646,7 +681,7 @@ end $$;
 -- Rebuild every list of one kind through a per-card function chosen by `mode`
 -- ('eyes': _gallery_veil_card; 'npc': the people / gone-house pass).
 create or replace function public._gallery_veil_map(s jsonb, kind text, mode text, a jsonb)
-returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
 declare
   path text[];
   star int;
@@ -679,7 +714,7 @@ end $$;
 -- An NPC card after the house passes: its link to a house whose people are veiled, then (X-21e)
 -- every reference to a house removed whole.
 create or replace function public._gallery_veil_npc_pass(n jsonb, a jsonb)
-returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
 declare
   houses jsonb := coalesce(a -> 'gone_houses', '{}');
   ids jsonb := coalesce(a -> 'gone_ids', '{}');
@@ -702,20 +737,26 @@ begin
 end $$;
 
 create or replace function public._gallery_veil_map_list(arr jsonb, kind text, mode text, a jsonb)
-returns jsonb language sql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
+begin
+  return (
   select jsonb_agg(case when jsonb_typeof(e) <> 'object' then e
-    when mode = 'eyes' then public._gallery_veil_card(kind, e, a -> 'cls', a -> 'byid', a -> 'exc', a -> 'legacy')
-    else public._gallery_veil_npc_pass(e, a) end order by o)
-  from jsonb_array_elements(arr) with ordinality x(e, o)
-$$;
+      when mode = 'eyes' then public._gallery_veil_card(kind, e, a -> 'cls', a -> 'byid', a -> 'exc', a -> 'legacy')
+      else public._gallery_veil_npc_pass(e, a) end order by o)
+    from jsonb_array_elements(arr) with ordinality x(e, o));
+end $$;
 
 -- One grouping's removal (GROUPING_REMOVERS), and the prose rungs it covers (VEILED_PUBLIC_PROSE).
 create or replace function public._gallery_veil_grouping(s jsonb, g text)
-returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
 begin
   if g = 'tab:plot_hooks' then
     -- the walk runs only where a key matches /hook/i at all (the sanitiser already strips most):
-    -- the question is asked once over the whole document, in C
+    -- the question is asked once over the whole document, in C. First over its text, where a key is
+    -- always spelled "<key>": with only escapes inside (stepped over by \\.), so the pattern cannot
+    -- miss one; a value that merely mentions a hook falls through to the exact test (the review's F6:
+    -- the exact test alone cost 55 ms on the heaviest town)
+    if s::text !~* 'hook([^"\\]|\\.)*": ' then return s; end if;
     if not jsonb_path_exists(s, 'lax $.** ? (@.type() == "object").keyvalue() ? (@.key like_regex "hook" flag "i")') then return s; end if;
     return (select coalesce(jsonb_object_agg(k, case when k in ('id', 'name', 'tier', 'population', 'config') then v
                                                      else public._gallery_veil_drop_hooks(v) end), '{}')
@@ -772,16 +813,15 @@ begin
   return s;
 end $$;
 
-create or replace function public._gallery_veil_apply(pub jsonb, hidden jsonb, exc jsonb)
-returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
+create or replace function public._gallery_veil_apply(pub jsonb, res jsonb)
+returns jsonb language plpgsql immutable as $$
 declare
   s jsonb := case when jsonb_typeof(pub) = 'object' then pub else '{}'::jsonb end;
-  excj jsonb := coalesce((select jsonb_object_agg(e, true) from jsonb_array_elements_text(exc) e), '{}');
-  parsed jsonb;
-  groupings text[];
-  card_hides jsonb;
-  classes jsonb;
-  fields jsonb;
+  excj jsonb := coalesce(res -> 'exc', '{}');
+  groupings text[] := array(select jsonb_array_elements_text(coalesce(res -> 'groupings', '[]')));
+  card_hides jsonb := coalesce(res -> 'cards', '{}');
+  classes jsonb := coalesce(res -> 'classes', '{}');
+  fields jsonb := coalesce(res -> 'fields', '{}');
   gone_ids jsonb := '{}';
   gone_houses jsonb := '{}';
   services_of jsonb;
@@ -789,26 +829,12 @@ declare
   kind text;
   g text;
 begin
-  select jsonb_agg(jsonb_build_object('a', a) || public._gallery_veil_parse(a) order by o) into parsed
-    from jsonb_array_elements_text(hidden) with ordinality x(a, o)
-   where public._gallery_veil_hideable(a);
-  parsed := coalesce(parsed, '[]');
-  groupings := array(select p ->> 'a' from jsonb_array_elements(parsed) with ordinality x(p, o) where p ->> 'type' in ('tab', 'block') order by o);
-  card_hides := coalesce((select jsonb_object_agg(p ->> 'id', true) from jsonb_array_elements(parsed) p where p ->> 'type' = 'card'), '{}');
-  classes := coalesce((select jsonb_object_agg(k, fs) from (
-      select p ->> 'kind' as k, jsonb_agg(distinct p ->> 'field') as fs from jsonb_array_elements(parsed) p
-       where p ->> 'type' = 'class' group by 1) q), '{}');
-  fields := coalesce((select jsonb_object_agg(k, ids) from (
-      select k, jsonb_object_agg(i, fs) as ids from (
-        select p ->> 'kind' as k, p ->> 'id' as i, jsonb_agg(distinct p ->> 'field') as fs from jsonb_array_elements(parsed) p
-         where p ->> 'type' = 'field' group by 1, 2) q1 group by 1) q2), '{}');
-
   -- X-21e: a card-hidden house goes whole only when the data puts it in the class.
   -- (set-based, the review's F5: one pass, never a growing object rebuilt per house)
   if card_hides <> '{}' then
     with h as (
       select c.card, i.id, public._gallery_veil_house(c.card) as house
-        from public._gallery_veil_cards(s, 'institution') c, lateral (select public._gallery_veil_card_id('institution', c.card) as id) i
+        from public._gallery_veil_cards(s, 'institution') c, lateral (select public._gallery_veil_inst_id(c.card) as id) i
        where card_hides ? i.id
     )
     select coalesce((select jsonb_object_agg(id, true) from h where house), '{}'),
@@ -830,7 +856,7 @@ begin
                or (coalesce(classes -> 'institution', '[]') ? 'services' and not (excj ? ('field:institution:' || i.id || ':services'))) as vs,
              coalesce(fields #> array['institution', i.id], '[]') ? 'people'
                or (coalesce(classes -> 'institution', '[]') ? 'people' and not (excj ? ('field:institution:' || i.id || ':people'))) as vp
-        from public._gallery_veil_cards(s, 'institution') c, lateral (select public._gallery_veil_card_id('institution', c.card) as id) i
+        from public._gallery_veil_cards(s, 'institution') c, lateral (select public._gallery_veil_inst_id(c.card) as id) i
        where public._gallery_veil_str(c.card -> 'name') <> ''
     )
     select coalesce((select jsonb_object_agg(name, true) from v where vs), '{}'), coalesce((select jsonb_object_agg(name, true) from v where vp), '{}')
@@ -859,7 +885,7 @@ begin
   -- X-21e: a house removed whole leaves the institutions list
   if gone_ids <> '{}' and jsonb_typeof(s -> 'institutions') = 'array' then
     s := jsonb_set(s, '{institutions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s -> 'institutions') with ordinality x(e, o)
-      where not (jsonb_typeof(e) = 'object' and gone_ids ? public._gallery_veil_card_id('institution', e) and public._gallery_veil_house(e))), '[]'));
+      where not (jsonb_typeof(e) = 'object' and gone_ids ? public._gallery_veil_inst_id(e) and public._gallery_veil_house(e))), '[]'));
   end if;
 
   -- an institution's people, and every reference to a house removed whole
@@ -878,45 +904,52 @@ end $$;
 -- {body, groupings} for a marked share (or any share on the party link); NULL for an unmarked
 -- listing, which the reads serve as before.
 create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean)
-returns jsonb language plpgsql immutable set search_path = public, pg_temp as $$
+returns jsonb language plpgsql immutable as $$
 declare
+  -- the stored overrides, decompressed ONCE: every later look at them is in memory (a stored object
+  -- of any size is read once per read, never once per operator)
+  ov jsonb := coalesce(overrides #> '{}', '{}');
+  doc jsonb := case when jsonb_typeof(pub) = 'object' then pub else '{}' end;
   -- every person of the document, by the client's member key (the served booleans and the card deltas)
-  people text[] := array(select distinct public._gallery_veil_card_id('npc', c.card)
-                           from public._gallery_veil_cards(case when jsonb_typeof(pub) = 'object' then pub else '{}' end, 'npc') c);
-  res jsonb := public._gallery_veil_resolve(pub, overrides, link, people);
+  people text[] := array(select distinct public._gallery_veil_npc_id(c.card) from public._gallery_veil_cards(doc, 'npc') c);
+  res jsonb;
 begin
-  if res is null then return jsonb_build_object('people', to_jsonb(people)); end if;
-  return jsonb_build_object('people', to_jsonb(people), 
-    'body', public._gallery_veil_apply(pub, res -> 'hidden', res -> 'except'),
-    'groupings', coalesce((select jsonb_agg(a order by a collate "C") from jsonb_array_elements_text(res -> 'hidden') a
-                            where a like 'tab:%' or a like 'block:%'), '[]'));
+  if jsonb_typeof(ov) <> 'object' then ov := '{}'; end if;
+  res := public._gallery_veil_resolve(pub, ov, link, people);
+  if res is null then return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people))); end if;
+  return jsonb_build_object(
+    'body', public._gallery_veil_apply(pub, res),
+    'groupings', res -> 'groupings',
+    'served', public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people)));
 end $$;
 
 -- What of the share travels to a reader (low finding 2, the fail-closed form: an ALLOWLIST, never
 -- a strip). Each member's two booleans, and — when the server applied a veil — the served marker
 -- { v: 2, mode, at, groupings }. No delta, no frozen copy, no other key.
 create or replace function public._gallery_veil_served(overrides jsonb, groupings jsonb, people jsonb)
-returns jsonb language sql immutable set search_path = public, pg_temp as $$
-  -- each person's member entry, looked up by the person's key (a key naming no person is no one's
+returns jsonb language plpgsql immutable as $$
+begin
+-- each person's member entry, looked up by the person's key (a key naming no person is no one's
   -- override: the review's F4, so the work is the document's, not what a sharer stored)
+  return (
   select coalesce((
-      select jsonb_object_agg(k, m) from (
-        select k, jsonb_strip_nulls(jsonb_build_object(
-            'revealDm', case when jsonb_typeof(v -> 'revealDm') = 'boolean' then v -> 'revealDm' end,
-            'allowImport', case when jsonb_typeof(v -> 'allowImport') = 'boolean' then v -> 'allowImport' end)) as m
-          from (select k, overrides -> k as v
-                  from jsonb_array_elements_text(case when jsonb_typeof(people) = 'array' then people else '[]' end) k
-                 where jsonb_typeof(overrides) = 'object') x
-         where k <> '$veil' and jsonb_typeof(v) = 'object') q
-       where m <> '{}'), '{}')
-    || case when groupings is null then '{}'::jsonb else jsonb_build_object('$veil', jsonb_strip_nulls(jsonb_build_object(
-         'v', 2,
-         'mode', case when overrides #>> '{$veil,mode}' in ('snapshot', 'live') and jsonb_typeof(overrides #> '{$veil,mode}') = 'string'
-                      then overrides #> '{$veil,mode}' end,
-         'at', case when jsonb_typeof(overrides #> '{$veil,at}') = 'string' and public._gallery_veil_jslen(overrides #>> '{$veil,at}') <= 40
-                    then overrides #> '{$veil,at}' end,
-         'groupings', groupings))) end
-$$;
+        select jsonb_object_agg(k, m) from (
+          select k, jsonb_strip_nulls(jsonb_build_object(
+              'revealDm', case when jsonb_typeof(v -> 'revealDm') = 'boolean' then v -> 'revealDm' end,
+              'allowImport', case when jsonb_typeof(v -> 'allowImport') = 'boolean' then v -> 'allowImport' end)) as m
+            from (select k, overrides -> k as v
+                    from jsonb_array_elements_text(case when jsonb_typeof(people) = 'array' then people else '[]' end) k
+                   where jsonb_typeof(overrides) = 'object') x
+           where k <> '$veil' and jsonb_typeof(v) = 'object') q
+         where m <> '{}'), '{}')
+      || case when groupings is null then '{}'::jsonb else jsonb_build_object('$veil', jsonb_strip_nulls(jsonb_build_object(
+           'v', 2,
+           'mode', case when overrides #>> '{$veil,mode}' in ('snapshot', 'live') and jsonb_typeof(overrides #> '{$veil,mode}') = 'string'
+                        then overrides #> '{$veil,mode}' end,
+           'at', case when jsonb_typeof(overrides #> '{$veil,at}') = 'string' and (octet_length(overrides #>> '{$veil,at}') <= 40 or public._gallery_veil_jslen(overrides #>> '{$veil,at}') <= 40)
+                      then overrides #> '{$veil,at}' end,
+           'groupings', groupings))) end);
+end $$;
 
 -- ── 6. THE READS (each its previous body plus the veil; grants as they stood) ────────────────
 
@@ -974,7 +1007,7 @@ as $$
     r.gallery_tags,
     s.gallery_share_dm,
     s.gallery_importable,
-    public._gallery_veil_served(s.gallery_member_overrides, vl.v -> 'groupings', vl.v -> 'people') as gallery_member_overrides,
+    vl.v -> 'served' as gallery_member_overrides,
     r.population,
     r.terrain,
     r.government_type,
@@ -1004,10 +1037,8 @@ as $$
   cross join lateral (
     select case when cp.copy is not null then cp.copy else base.j end as j,
            coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
-      from (select case
-        when s.gallery_member_overrides #>> '{$veil,mode}' = 'snapshot'
-          and jsonb_typeof(s.gallery_member_overrides #> '{$veil,snapshot}') = 'object'
-        then s.gallery_member_overrides #> '{$veil,snapshot}' end as copy) cp
+      from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
+              from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
   ) src
   cross join lateral (
     select public._gallery_apply_member_overrides(
@@ -1043,7 +1074,7 @@ as $$
     'is_owner', coalesce(s.user_id = auth.uid(), false),
     'gallery_share_dm', false,
     -- 211: nothing of the share travels but each member's two booleans and the served marker.
-    'gallery_member_overrides', public._gallery_veil_served(s.gallery_member_overrides, vl.v -> 'groupings', vl.v -> 'people'),
+    'gallery_member_overrides', vl.v -> 'served',
     'dossier', vl.v -> 'body'
   )
   from public.settlements s
