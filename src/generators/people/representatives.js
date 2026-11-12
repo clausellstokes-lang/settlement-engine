@@ -226,6 +226,28 @@ export function dualHatHouseOf(institutions, governing) {
 }
 
 /**
+ * THE SEAT'S FACE THE DUAL HAT FOLDED (COHERENCE-POWERS-3, F1): 1 where a house of the town leads (`dualHatHouseOf`)
+ * and the cast carries no face of the seat's own (one person, one face: the leader holds the office), else 0. The
+ * density law's seat ceiling reads the cast's size as the town's political mass; before the dual hat the office and the
+ * house it is held from were two cards, and they are two in that count still, so a small place keeps the power the
+ * fold of one face into another would cut. A cast that carries its seat's own face (a save from before the dual hat, a
+ * held roster) folded nothing. Pure over the record.
+ * @param {{ institutions?: unknown, powerStructure?: unknown, npcs?: unknown }} settlement
+ * @returns {0 | 1}
+ */
+export function seatFacesFoldedByDualHat(settlement) {
+  const institutions = /** @type {RosterRow[]} */ (Array.isArray(settlement?.institutions) ? settlement.institutions : []);
+  const governing = governingFactionOf(/** @type {any} */ (settlement));
+  if (!governing || !dualHatHouseOf(institutions, governing)) return 0;
+  const seat = seatHouseOf(institutions);
+  const seatKey = seat ? String(seat.house?.name || '') : '';
+  const cards = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  const facesSeat = cards.some((card) => card?.id === SEAT_CARD_ID
+    || (!!seatKey && card?.institution?.kind === 'house' && card.institution.key === seatKey));
+  return facesSeat ? 0 : 1;
+}
+
+/**
  * THE LEADER'S OFFICE TITLE (COHERENCE-POWERS; the table the chair ruled on 2026-11-11, vetoable by the
  * owner): the title a dual-hat leader carries beside its house's, written to the card's `role` (its
  * `title` stays its house's). Titles fit the government and the size; none is mandated. A government the

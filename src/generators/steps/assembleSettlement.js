@@ -24,6 +24,7 @@ import { settleCrimeLinesToSignal } from '../safetyProfile.js';
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
 import { drawTies } from '../people/ties.js';
+import { seatFacesFoldedByDualHat } from '../people/representatives.js';
 // ODQ §810's tier-gated density law: sizes the political roster to the tier's
 // faction band. Dormant (returns its input by reference, no draw) for any world
 // whose own config carries no density-law marker.
@@ -284,8 +285,9 @@ registerStep('assembleSettlement', {
     economicState: settlement.economicState,
     // The roster the population step actually produced is the TRUE mass here,
     // so the seat ceiling (R17: a house the mass cannot crew must not exist) is
-    // computed against a fact rather than against a second mass roll.
-    massOverride: (settlement.npcs || []).length,
+    // computed against a fact rather than against a second mass roll. COHERENCE-POWERS-3 (F1): the leader's office
+    // and the leader's house count as two, as they did before the dual hat folded the office's face into the house's.
+    massOverride: (settlement.npcs || []).length + seatFacesFoldedByDualHat(settlement),
     // COHERENCE-POWERS 2B: the fold reads the final houses (applyDensityLaw.js :: foldKin)
     institutions: settlement.institutions,
     rng,
