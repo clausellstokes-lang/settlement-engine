@@ -21,7 +21,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
-import { codeOf, reads, readsCourtGate } from './defenceFactReaders.shared.mjs';
+import { linesReading, reads, readsCourtGate } from './defenceFactReaders.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const REGISTER = JSON.parse(readFileSync(join(ROOT, 'tests/lint/defenceFactReaders.register.json'), 'utf8'));
@@ -48,7 +48,7 @@ const counted = (test = reads) => {
     const rel = relative(ROOT, path).replace(/\\/g, '/');
     if (!/\.(js|jsx)$/.test(rel) || /\.generated\.js$/.test(rel)) continue;
     if (/^src\/(?:domain\/facts|domain\/defense|data)\//.test(rel)) continue;
-    const n = codeOf(readFileSync(path, 'utf8')).split('\n').filter(test).length;
+    const n = linesReading(readFileSync(path, 'utf8'), test);
     if (n) out[rel] = n;
   }
   return out;
@@ -94,7 +94,7 @@ describe('the court, the gate and a hired company by its other names have one re
     expect(readsCourtGate("const hired = n.includes('sellsword') || n.includes('free company');")).toBe(true);
     expect(readsCourtGate('hasGates: home.hasGate,')).toBe(false);
     expect(readsCourtGate('hasCourtSystem: home.hasCourt,')).toBe(false);
-    // what it does not see, said out loud (scripts/mutation-coverage-manifest.json says the same)
+    // a bare name with no binding in its file is not a literal (the line alone tests nothing it can see)
     expect(readsCourtGate('const sits = names.some(n => n.includes(COURT_WORD));')).toBe(false);
     expect(Object.keys(counted(readsCourtGate)).length).toBeGreaterThan(5);
   });
@@ -106,5 +106,21 @@ describe('the court, the gate and a hired company by its other names have one re
     for (const row of Object.values(COURT_GATE_REGISTER.rows)) expect(String(row.reason || '').length).toBeGreaterThan(20);
     const total = Object.values(COURT_GATE_REGISTER.rows).reduce((sum, row) => sum + row.count, 0);
     expect(total).toBeLessThanOrEqual(COURT_GATE_FIRST_TOTAL);
+  });
+});
+
+/**
+ * A WORD HELD IN A CONSTANT (COHERENCE-AGREE-6, REVIEW-AGREE-2 F8 (i), the chair's ruling of 2026-11-12): the walker
+ * reads an identifier bound to a name-like string in the same file as that string, so a reader cannot hide its
+ * word behind a name. The review's plant, red; a prose constant with a comma (a sentence, not a name) is not.
+ */
+describe('a defence word held in a constant is read as the word', () => {
+  test('the review\'s plant: const MERC = \'mercenary\'; … n.includes(MERC)', () => {
+    expect(linesReading("const MERC = 'mercenary';\nconst hired = names.some((n) => n.includes(MERC));\n", reads)).toBe(1);
+    expect(linesReading("const COURT_WORD = 'courthouse';\nconst sits = names.some((n) => n.includes(COURT_WORD));\n", readsCourtGate)).toBe(1);
+    // controls: the binding alone tests nothing; a prose constant is not a name; a property key is not the constant
+    expect(linesReading("const MERC = 'mercenary';\n", reads)).toBe(0);
+    expect(linesReading("const LINE = 'dawn, the market, the tavern, the watch';\nconst hit = lines.find((x) => x.includes(LINE));\n", reads)).toBe(0);
+    expect(linesReading("const MERC = 'mercenary';\nconst row = { MERC: names.some((n) => n.includes(other)) };\n", reads)).toBe(0);
   });
 });

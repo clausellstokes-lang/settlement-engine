@@ -28,3 +28,30 @@ export const readsCourtGate = (line) => ASSIGN_COURT_GATE.test(line) || (CALL.te
 export const codeOf = (source) => source
   .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
   .replace(/(^|[^:'"`])\/\/[^\n]*/g, '$1');
+
+/**
+ * A word held in a constant (COHERENCE-AGREE-6, REVIEW-AGREE-2 F8 (i)): `const MERC = 'mercenary'; … n.includes(MERC)`.
+ * Each identifier a file binds to a NAME-LIKE string (`const|let|var NAME = '…'`; no comma, 40 characters at most:
+ * a name a name test compares, not a sentence of prose) is read, on every other line of the same file, as that
+ * string literal, so the members above see it. The binding line itself is left as it is (it tests nothing), and a
+ * property key or an assignment target (`NAME:`, `NAME =`) is not replaced. The line count is kept.
+ * @param {string} code a file's code, comments out (`codeOf`)
+ * @returns {string}
+ */
+export const resolveNameConstants = (code) => {
+  /** @type {Map<string, string>} */
+  const bound = new Map();
+  for (const m of code.matchAll(/\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(['"])([^'"\n]*)\2\s*[;,\n]/g)) {
+    if (!m[3].includes(',') && m[3].length <= 40) bound.set(m[1], `${m[2]}${m[3]}${m[2]}`);
+  }
+  if (!bound.size) return code;
+  const names = [...bound.keys()].sort((a, b) => b.length - a.length).map((name) => name.replace(/\$/g, '\\$'));
+  const use = new RegExp(String.raw`(?<![\w$.'"])(${names.join('|')})(?![\w$]|\s*[:=](?!=))`, 'g');
+  return code.split('\n')
+    .map((line) => (/\b(?:const|let|var)\s[^=]*=\s*['"]/.test(line) ? line : line.replace(use, (name) => /** @type {string} */ (bound.get(name)))))
+    .join('\n');
+};
+
+/** The lines of one source file a member counts, with comments out and name-like constants read as their strings. */
+export const linesReading = (/** @type {string} */ source, /** @type {(line: string) => boolean} */ test) =>
+  resolveNameConstants(codeOf(source)).split('\n').filter(test).length;
