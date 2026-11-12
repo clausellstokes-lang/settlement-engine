@@ -20,7 +20,7 @@ import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
 import { NPC_GOAL_NEWS, NPC_ROLE_MEANS, npcCandidateReasons, pickLine, plainTrait } from './eventProse.js';
 import { branchedGoalsFor } from './npcGoalBranches.js';
-import { NPC_AIMS, TARGETED_NPC_DEEDS, UNTARGETED_NPC_DEEDS } from './heraldDeeds.js';
+import { NPC_AIMS, NPC_AIM_FRAMES, TARGETED_NPC_DEEDS, UNTARGETED_NPC_DEEDS } from './heraldDeeds.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -883,19 +883,20 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
  * @param {any} pressure
  * @param {any} tick
  * @param {any} [rivalTarget]
+ * @param {string} [realmSeed] worldState.rngSeed: keys the body frame's hash pick (never a draw)
  */
-function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = null) {
+function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = null, realmSeed = '') {
   const action = (/** @type {any} */ (NPC_ACTION_FAMILIES))[actionFamily];
   // A move-against-a-named-rival action with a resolved subject. Drives both the
   // subject in the headline/summary and the setback applied to that subject.
-  const targetPhrasing = /** @type {{ underway: (n: string) => string, done: (n: string) => string } | undefined} */ (
+  const targetPhrasing = /** @type {{ underway: (n: string) => string, done: (n: string) => string, noun: (n: string) => string } | undefined} */ (
     TARGETED_NPC_DEEDS[actionFamily]
   );
   const subject = (targetPhrasing && rivalTarget?.name) ? rivalTarget : null;
   const plainDeed = UNTARGETED_NPC_DEEDS[actionFamily]
-    || { underway: `is moving to ${actionFamily.replace(/_/g, ' ')}`, done: `moves to ${actionFamily.replace(/_/g, ' ')}` };
+    || { underway: `is moving to ${actionFamily.replace(/_/g, ' ')}`, done: `moves to ${actionFamily.replace(/_/g, ' ')}`, noun: `moving to ${actionFamily.replace(/_/g, ' ')}` };
   const deed = (subject && targetPhrasing)
-    ? { underway: targetPhrasing.underway(subject.name), done: targetPhrasing.done(subject.name) }
+    ? { underway: targetPhrasing.underway(subject.name), done: targetPhrasing.done(subject.name), noun: targetPhrasing.noun(subject.name) }
     : plainDeed;
   const aim = NPC_AIMS[state.shortGoal] || String(state.shortGoal || '').replace(/_/g, ' ');
   const severity = clamp01(
@@ -924,7 +925,7 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     applyMode: proposal ? 'proposal' : 'auto', ...(!proposal && !subject && state.lastAction === actionFamily ? { recordMode: 'state_only' } : {}),
     headline: `${state.name} ${deed.underway}`,
     appliedHeadline: `${state.name} ${deed.done}`,
-    summary: `${state.name} is out to ${aim}.`,
+    summary: pickLine(NPC_AIM_FRAMES, `${realmSeed}|${state.npcId}|${tick}|aim-frame`, { name: state.name, aim, deed: deed.noun }),
     reasons: npcCandidateReasons(state, pressure, actionFamily),
     npcPatch: {
       momentum: clamp01((state.momentum || 0) + (action.patch.momentum || 0)),
@@ -1167,7 +1168,7 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
     const rivalTarget = ['seek_promotion', 'undermine_rival', 'sabotage', 'expose', 'suppress'].includes(best.actionFamily)
       ? rivalryTargetFor(state, bySettlement)
       : null;
-    out.push(candidateForAction(state, best.actionFamily, best.pressure, tick, rivalTarget));
+    out.push(candidateForAction(state, best.actionFamily, best.pressure, tick, rivalTarget, snapshot.worldState.rngSeed));
   }
 
   return out;
