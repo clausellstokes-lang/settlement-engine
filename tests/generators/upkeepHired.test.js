@@ -59,3 +59,30 @@ describe('a hired force stands in for a standing one, to a lesser degree', () =>
     expect(hired, `${seed}: hired-only ${hired} against a watch's ${watch}`).toBeLessThanOrEqual(watch);
   });
 });
+
+/**
+ * THE FIVE GATES (ruling 3, alternative B): the wage-and-works gates (military, monster, internal,
+ * economic, disaster) read the one home, `keepOf(prosperity).funded`, with today's floors kept and
+ * the identity at Comfortable and above. The seeds are two where the label and the output disagree
+ * at the base: agree-village-16 is Comfortable with output 16, agree-village-5 Struggling with 57.
+ */
+describe('the five upkeep gates read the prosperity label, not the output', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const FLOORS = { military: 0.6, monster: 0.7, internal: 0.65, economic: 0.45, disaster: 0.55 };
+
+  test('RED-FIRST agree-village-16 (Comfortable, output 16): every gate is the identity', () => {
+    const s = born('agree-village-16');
+    expect(s.economicState.prosperity).toBe('Comfortable');
+    const gates = generateDefenseProfile(s).economicGates;
+    expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
+    for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(1);
+  });
+
+  test('RED-FIRST agree-village-5 (Struggling, output 57): every gate stands at its floor', () => {
+    const s = born('agree-village-5');
+    expect(s.economicState.prosperity).toBe('Struggling');
+    const gates = generateDefenseProfile(s).economicGates;
+    expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
+    for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(FLOORS[gate]);
+  });
+});
