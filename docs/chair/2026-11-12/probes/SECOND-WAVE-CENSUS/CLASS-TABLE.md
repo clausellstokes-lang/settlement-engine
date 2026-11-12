@@ -80,7 +80,7 @@ The confirmed classes:
 - **Inside the walker's roots:** 879 undeclared pairs are held by the register's 870 grandfathered rows. The walker is green, so it stops only *new* ones.
 - **Outside its roots** (`src/domain`, `src/components`): 1,453 literals name a thing, 1,457 pairs are undeclared, and nothing reads them. Patterns 10's static line, 16a, 20 and 2 were born there.
 - **Sizes, states and counts are not registered things at all.** Of 711 literals carrying one, 139 sit beside any declaration.
-- **The DS prose corpus:** 2,779 variants in 856 pools across 69 blocks. **0** of them carry a `needs` declaration. A variant is chosen by its pool key alone (151 exported `…PoolKey` functions in `src/domain/display/stateProse`). 1a, 1b, 5a, 8, 9, 13 and NEW-2 came through this door: a key that reads fewer facts than its sentences assert.
+- **The DS prose corpus:** 2,779 variants in 856 pools across 69 blocks. *(Corrected in §5: the first version of this line said "0 declared", which counted `needs` keys only. DS variants declare through `marks`, which `factVocabulary.js :: declarationOfMarks` reads: 665 declare.)* A variant is chosen by its pool key (151 exported `…PoolKey` functions in `src/domain/display/stateProse`) and then filtered by its marks. 1a, 1b, 5a, 8, 9, 13 and NEW-2 came through this door: a key that reads fewer facts than its sentences assert, and variants whose marks declare none of them.
 - **Pickers that enforce a declaration:** `drawDeclared` 30 call sites, `filterDeclared` 8, `drawAdmitted` 6, `agreeingLine` 2. **46 in all.**
 - **Bare pickers:** `pick(` 121, `pickRandom` 56, `.pick(` 54, `pickVariant` 12, `[offset % …]` 4. **247.** Not every one draws a declared pool; this is the habitat's upper bound.
 - **Pickers that drop a declaration:** 12 strip-shaped sites (`.map(textOf)` 7, `.map(lineText)` 1, `map(l => l.text)` 4). Read one by one, **3 strip a declared pool before a draw**:
@@ -155,7 +155,7 @@ It comes with **the five leaves that do not exist yet:** imports-as-printed, the
 - **(i) Roots:** `src/domain` and `src/components`. 1,457 pairs banked, new ones red.
 - **(ii) Vocabularies:** states, sizes and counts become registered things beside the sixteen houses.
 - **(iii) Strips:** a ban on unwrapping a declared pool before a draw. Only `drawDeclared` / `filterDeclared` may select from a pool that carries declarations. 3 strip sites today.
-- **(iv) A pool-key arm:** a DS variant declares the facts its sentence asserts, and its key must read them. 2,779 variants, 0 declared today.
+- **(iv) A pool-key arm:** a DS variant declares the facts its sentence asserts, and its key must read them. 2,779 variants; 665 declare through their marks (corrected in §5).
 
 New members then red at source. The existing ones are banked and cured by hand.
 
@@ -198,3 +198,125 @@ The shared files are split so that no two lanes hold one at once:
 **W2-POOLS:** unchanged.
 
 **What I did not do.** I did not re-measure any rate here; the rates are the census's. The spatial landmarks member was found in source and its rate is unmeasured. Every *regex* count above is a shape count, not a census of printed lines.
+
+## 5. The owner's design for class B, sized
+
+The owner, verbatim: *"Can't you just make a bunch of if dossier has this, then x can or can't be in the pool with multiple per each pool item? Added lines then add to those checks for the next?"*
+
+**Most of it already exists.** It is the presumed-things machinery the chair named, plus the fact vocabulary behind `drawDeclared`. The cure *extends* it, and nothing new is invented beside it. Everything below was EXECUTED with the scripts `size.mjs`, `sim.mjs` and `split.mjs` (scratch), over 8866a0ddd's source and the census's 720 records.
+
+### 5.1 The conditions a line may carry
+
+**What exists.** A line carries `needs` (has), `excludes` (has not) and `crisis`, several per line, or the same as `tags` / `marks`.
+- They are read by `factVocabulary.js :: declarationAdmits`, against `factsOf(record)`, where each dimension names its one home.
+- **51 dimensions:** 43 presence, 7 bands, 1 crisis.
+  - **Presence:** walls, palisade, gate, watch, militia, garrison, hospital, healer, court, prison, soldiers, commander, mercenary, guard presence, market, navigable, coast, river, port, magic, temple, docks, sacred house, institution (keyed over the institution words), organised crime, the food sources, imports, exports, culture, ruler, war, migration, terrain, route, …
+  - **Bands:** tier, population, magic level, food, stores, prosperity, crime.
+  - **Crisis:** the crisis dimension, by kind or group, or calm.
+- So **things, states (crisis kinds), sizes (tier, population band) and banded values (food, stores, prosperity, crime)** are already conditions.
+
+**What the 25 patterns need that the vocabulary lacks,** each read from a home that already exists:
+
+| new dimension | its home |
+|---|---|
+| grows more than it eats; import share band | `foodRecord` |
+| a practitioner lives here | `magicReliance.js :: magicPractitioners` |
+| an access-only church | `faithReading.js` (`accessOnly`) |
+| the capture rung | `criminalCaptureState` |
+| the readiness grade | `defenseProfile.readiness` |
+| a resource is worked here | none yet |
+| a chain's carrier | none yet |
+| a leader's lead | none yet |
+| a list's count | the list itself, at a print site |
+
+That is **9 dimensions; 6 have a home, 3 need one.**
+
+### 5.2 The one picker door
+
+**The door is** `drawDeclared` (and its filter twin `filterDeclared`). It applies the conditions after the site's own draw, by twin or hash argmax, so **no roll moves**.
+
+**Sites that go through a declaration-reading door:**
+- `drawDeclared` 30, `filterDeclared` 8, `drawAdmitted` 6, `agreeingLine` 2;
+- the DS kernel's `eligibleVariants` 8;
+- **54 call sites in 26 files.**
+
+**Sites that do not:** **247 bare picker calls in 62 files** (`pick(` 121, `pickRandom` 56, `.pick(` 54, `pickVariant` 12, `[offset % …]` 4). Not all draw a pool that should carry conditions; this is the upper bound.
+
+**3 sites strip conditions before a bare pick:** the foodways rows in `foodGenerator.js`, and two landmark lists in `spatialGenerator.js`. Those are the door's known leaks.
+
+**The rule that closes the door:** a pool that carries any declaration may be selected only through `drawDeclared` / `filterDeclared`. `tests/lint/drawDeclaredKeys.walker.test.js` is the walker to widen, from keys to callers.
+
+### 5.3 The walker that reds a new line naming a listed word with no condition
+
+`tests/lint/presumedThings.walker.test.js` arm 1 does this today, for 16 things, over `src/data` and `src/generators`, with a shrink-only register of 870 rows.
+
+**The owner's "added lines then add to those checks" is three widenings of the same walker:**
+1. **Words:** its things gain the states, sizes and values of 5.1. Today a line saying "under siege", "urban" or "the ruling three" names nothing the walker knows.
+2. **Roots:** `src/domain` and `src/components`.
+3. **The DS pools:** the existing undeclared-pool register (`declarationRegisters.js :: statePoolCounts`, held by `tests/lint/wiringCensusDeclared.walker.test.js`) gains the rule that a variant naming a listed word declares it in its marks.
+
+A line added later is then red in the lane that adds it, until it carries its condition.
+
+### 5.4 How many existing lines need a condition
+
+**(a) Pool lines naming a registered thing, with no condition of their own.** The test: the walker's `thingsNamedIn`, per line, in every array pool of `src/data`.
+
+| family | lines | | family | lines |
+|---|---|---|---|---|
+| `dossierCausalProse.generated.js` | 110 | | DS power | 12 |
+| `institutionDescVariants.js` | 85 | | `narrativeData.js` | 9 |
+| DS general | 60 | | `people/titleSecretsPresentations.js` | 8 |
+| DS defense | 53 | | `goods/chains.js` | 7 |
+| DS warFaith | 47 | | `institutionLadders.js` | 7 |
+| `institutionServiceKeys.generated.js` | 46 | | `faceHonorifics.js` | 6 |
+| DS economy | 44 | | `personHooksByTitle.js` | 6 |
+| DS stressors | 34 | | … 9 smaller families | |
+
+- **562 lines in 24 families.** Generator data: 312 lines in 153 of 895 pools. DS: 250 lines in 169 of 856 pools.
+- The DS register's own count of pools with **no** declaration at all is 412 lines: economy 162, stressors 128, general 120, power 2, defense 0, warFaith 0.
+
+**(b) Every literal naming a registered thing, or a state, size or count word** (regex for the last three; error, assert and console strings excluded), split by where it sits:
+
+| root | in a pool (declared) | written straight into a composer, component or lookup (declared) |
+|---|---|---|
+| `src/data` | 743 (410) | 402 (167) |
+| `src/generators` | 113 (16) | 266 (42) |
+| `src/domain` | 999 (5) | 710 (26) |
+| `src/components` | 25 (1) | 84 (5) |
+
+- **Pool lines:** 1,880, of which 432 are declared. These the door handles once declared.
+- **Lines written straight into code:** 1,462, of which 240 are declared. **These need the same check at the print site**, because no picker ever sees them: patterns 2, 4, 16a, 20 and F4 are of this kind.
+- **The print-site form** is `declarationAdmits(decl, factsOf(record))` around the sentence. The walker's widening (5.3, roots) is what finds them.
+
+### 5.5 Pools left with no eligible line for some town of the 720
+
+**The simulation:** each undeclared line that names a registered thing is given "needs that thing", and every town of the 720 is tested with the walker's own `presentForDenial`.
+
+**Generator data, with a town counted only where the pool is reached** (tier and roster, for the institution descriptions): **5 pools have no eligible line for some town that reaches them.** Each needs one line that presumes nothing:
+- hamlet *Access to external mill*: 120 of 120 hamlets with it. The description presumes a mill; the access row is not one.
+- village *Veteran's lodge*: 4 of 4.
+- village *Wildfowler*: 4 of 5.
+- town *Free company hall*: 14 of 18.
+- village *Dairy farmer*: 8 of 15.
+
+Three more hits were `institutionLadders.js` upgrade pairs, which are names, not printed pools.
+
+**DS pools:** 14 pools have no eligible line for some town *over all 720*. That is an upper bound, because a pool's key routes only some towns there, and that routing was not simulated. Examples: DS-DEF-2 *Invasion & War: w…* (308), DS-ECO-8 *FOOD AND PROSPERITY…* (360), DS-GEN-13 *MARKET-OPEN* / *MARKET-NARROW* / *COMMERCE* (318 each, likely all key-implied), DS-CND-1 *DIRECTION…* (628).
+
+**Already-declared pools:** of those whose every line carries a condition (85 DS, 53 data), **none** leaves a town of the 720 without a line.
+
+**Not in this simulation:** the states, sizes and values of 5.1 are not simulated (their words are not yet things), and neither are the named patterns' own pools.
+- From the census: the Town watch description (10) leaves every unwalled town with a watch and no line, because both variants presume gates.
+- The port origin pool (7b) leaves 1 of 6 lines for a wharfless shore.
+
+Each needs one presumes-nothing twin.
+
+### 5.6 Which of the 13 it closes
+
+The chair's class-B list: 1a, 1b, 4, 6, 7b, 8, NEW-2, 10, 11, F4, 14, 16a, 20.
+
+- **Closes outright** (an existing dimension, the existing door, a declaration and at most one twin line): **10** (gate), **7b** (docks), **14** (population band, once the foodways strip goes through the door), **8's income half** (sacred house). **4.**
+- **Closes once one dimension is added at an existing home** (5.1): **1a**, **1b** (food record), **NEW-2** (practitioner). **3.**
+- **A print-site check rather than a pool draw** (the walker finds them; the condition is written at the sentence): **20** (crisis exists), **16a** (the list's own count). **2.**
+- **Need a home first:** **4** (a leader's lead), **F4** (worked here), **11** (a chain's carrier). **3.**
+- **Not class B:** **6** is a second derivation (A). It is closed by the imports leaf, not by a condition.
