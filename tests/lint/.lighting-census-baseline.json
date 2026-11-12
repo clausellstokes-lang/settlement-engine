@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "97804b535ead3fc384d2637990e85c8d3d6f858c",
-  "measuredBy": "COHERENCE-AGREE-6",
+  "measuredAtSha": "a03144c06c533439da36e47197f5d8c9c0f0605d",
+  "measuredBy": "W2-B-DECLARE",
   "date": "2026-11-12",
-  "note": "the merged line (points 44, 45) and COHERENCE-AGREE-6: chainPrintName.test.jsx, chainPrintSites.walker.test.js, and new titles in coherenceAgreeCures, projectionAgreement, defenceFactReaders.walker, w0WriterAgreement",
-  "files": 3218,
+  "note": "lane/w2-b-declare-2026-11-12: three new test files (coherence/vocabularyPageFindings, facts/faithAtoms, generators/churchNoteReadsFlag) and new titles in presumedThings.walker; no rule widened or narrowed",
+  "files": 3221,
   "parked": 399,
-  "credited": 2819,
-  "titles": 29213,
-  "suiteTitles": 7917
+  "credited": 2822,
+  "titles": 29230,
+  "suiteTitles": 7921
 }
