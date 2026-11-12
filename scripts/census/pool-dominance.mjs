@@ -1,6 +1,7 @@
 /**
  * scripts/census/pool-dominance.mjs — THE DOMINANCE ARM (COHERENCE-QUARREL, 2026-11-11; the
- * chair's charter `docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md` §3).
+ * chair's charter `docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md` §3; its noise rule
+ * POOL-GUARD, 2026-11-12, `docs/DESIGN_POOL_CENSUS.md` §6).
  *
  * THE CLASS IT GUARDS (class IV). A pool can look large in the source and still print a handful
  * of lines, because most of its lines wait behind gates that rarely open. The census measured
@@ -20,15 +21,25 @@
  * THE CORPUS is the configuration a real browser sends, every dial on random, at the charter's
  * sizes: 60 villages, 160 towns, 100 cities, 40 metropolises, seeds `quarrel-<tier>-<i>`.
  *
+ * THE RULE. A measure that sits above its ceiling is not, by itself, a loss of variety: a lane
+ * that re-deals the corpus's draws moves every share by chance. So a row reds only when
+ *   (1) its share rises above its ceiling by more than `NOISE_SE` standard errors of a share AT
+ *       THE CEILING over the pool's own draws — the error taken over SETTLEMENTS (the ratio
+ *       estimator's cluster variance: the draws inside one town are not independent), never
+ *       below the binomial error; or
+ *   (2) its `top1` crosses `DOMINATED.top1` — one line printing three of every four of the pool's
+ *       lines — on a pool read over at least `DOMINATED.minDraws` draws, whatever the noise.
+ * A ceiling the charter set as a law for a cured pool (`targets`) is judged EXACTLY, with no
+ * allowance. A ceiling is loose when its measure sits below it by more than the slack AND by more
+ * than the same noise.
+ *
  * THE REGISTER (`pool-dominance.register.json`) holds one row per pool: a ceiling for `top1` and
  * for `top5`, and its reason. It only TIGHTENS: `tests/lint/poolDominance.walker.test.js` reds
- * when a pool rises above its ceiling, when a drawn pool has no row, when a row's pool is no
- * longer drawn, and when a ceiling sits looser than the measure by more than the slack. A cured
- * pool's row may hold the charter's TARGET instead (`targets`: the ceilings that are a law, not a
- * measure); a target is never loose, and is only ever lowered by hand.
+ * on a rise under the rule, when a drawn pool has no row, when a row's pool is no longer drawn,
+ * and when a ceiling is loose.
  *
  * Usage (read-only unless `--tighten`):
- *   node scripts/census/pool-dominance.mjs            print the pools over their ceilings, then the worst twenty
+ *   node scripts/census/pool-dominance.mjs            print the findings, then the worst twenty
  *   node scripts/census/pool-dominance.mjs --tighten  lower every ceiling to today's measure (never raise one),
  *                                                     drop the rows of pools no longer drawn, bank new pools
  */
@@ -42,6 +53,15 @@ export const REGISTER_PATH = fileURLToPath(new URL('./pool-dominance.register.js
 
 /** How far a ceiling may sit above its measure before the register must be tightened. */
 export const TIGHTEN_SLACK = 0.02;
+
+/** How many standard errors of a share a measure may sit above its ceiling by chance. */
+export const NOISE_SE = 3;
+
+/** The line that means "this pool is dominated", read only where the corpus can read it. */
+export const DOMINATED = Object.freeze({ top1: 0.75, minDraws: 30 });
+
+/** The banked corpus's seed prefix. */
+export const DEFAULT_SEED_PREFIX = 'quarrel';
 
 /** The charter's corpus sizes, by tier. */
 export const CORPUS_PLAN = Object.freeze([['village', 60], ['town', 160], ['city', 100], ['metropolis', 40]]);
@@ -58,9 +78,12 @@ export const BROWSER_CONFIG = Object.freeze({
   contentProfile: 'grounded',
 });
 
-/** @returns {Array<{ tier: string, seed: string }>} the corpus, in a fixed order */
-export function corpusSeeds() {
-  return CORPUS_PLAN.flatMap(([tier, n]) => Array.from({ length: n }, (_, i) => ({ tier, seed: `quarrel-${tier}-${i}` })));
+/**
+ * @param {string} [prefix]
+ * @returns {Array<{ tier: string, seed: string, config: Record<string, unknown> }>} the corpus, in a fixed order
+ */
+export function corpusSeeds(prefix = DEFAULT_SEED_PREFIX) {
+  return CORPUS_PLAN.flatMap(([tier, n]) => Array.from({ length: n }, (_, i) => ({ tier, seed: `${prefix}-${tier}-${i}`, config: BROWSER_CONFIG })));
 }
 
 /** @param {string} text @param {string[]} names @returns {string} the text with each name masked */
@@ -96,35 +119,86 @@ function readRecordPools(s, pools) {
 }
 
 /**
- * Generate the corpus and measure every drawn pool.
- * @returns {Map<string, { draws: number, lines: number, top1: number, top5: number }>}
+ * The sums a share's error over settlements needs: for the share's lines, per settlement i, the
+ * count x_i of those lines and the pool's draws n_i there.
+ * @typedef {{ xx: number, xn: number, nn: number }} Spread
  */
-export function measureDominance() {
-  /** @type {Map<string, Map<string, number>>} */
+
+/**
+ * @typedef {{ draws: number, towns: number, lines: number, top1: number, top5: number,
+ *   spread: { top1: Spread, top5: Spread } }} PoolMeasure
+ */
+
+/**
+ * Generate the corpus and measure every drawn pool.
+ * @param {{ seedPrefix?: string }} [options]
+ * @returns {Map<string, PoolMeasure>}
+ */
+export function measureDominance({ seedPrefix = DEFAULT_SEED_PREFIX } = {}) {
+  /** @type {Map<string, Map<string, number>>} every pool's lines over the corpus */
   const pools = new Map();
-  for (const { tier, seed } of corpusSeeds()) {
-    const { result: s, ledger } = withPresumptionLedger(() => generateSettlementPipeline({ settType: tier, ...BROWSER_CONFIG }, null, { seed }));
+  /** @type {Map<string, Array<Map<string, number>>>} every pool's lines, one map per settlement that drew it */
+  const perTown = new Map();
+  for (const { tier, seed, config } of corpusSeeds(seedPrefix)) {
+    const { result: s, ledger } = withPresumptionLedger(() => generateSettlementPipeline({ settType: tier, ...config }, null, { seed }));
     const powerNames = (s.powerStructure?.factions || []).map((f) => f?.faction || f?.name).filter((n) => typeof n === 'string');
     const names = [s.name, ...powerNames].filter((n) => typeof n === 'string' && n !== '');
+    /** @type {Map<string, Map<string, number>>} */
+    const town = new Map();
     for (const entry of ledger) {
       if (entry.resolvedBy === 'none') continue;
-      count(pools, `ledger:${entry.pool}`, maskNames(String(entry.lineId), names));
+      count(town, `ledger:${entry.pool}`, maskNames(String(entry.lineId), names));
     }
-    readRecordPools(s, pools);
+    readRecordPools(s, town);
+    for (const [pool, lines] of town) {
+      const all = pools.get(pool) || new Map();
+      for (const [line, n] of lines) all.set(line, (all.get(line) || 0) + n);
+      pools.set(pool, all);
+      const list = perTown.get(pool) || [];
+      list.push(lines);
+      perTown.set(pool, list);
+    }
   }
-  /** @type {Map<string, { draws: number, lines: number, top1: number, top5: number }>} */
+  /** @type {Map<string, PoolMeasure>} */
   const table = new Map();
   for (const [pool, lines] of [...pools].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))) {
-    const counts = [...lines.values()].sort((a, b) => b - a);
-    const draws = counts.reduce((a, b) => a + b, 0);
+    const ranked = [...lines].sort(([la, a], [lb, b]) => b - a || (la < lb ? -1 : la > lb ? 1 : 0));
+    const draws = ranked.reduce((sum, [, n]) => sum + n, 0);
+    const towns = perTown.get(pool) || [];
+    /** @param {string[]} chosen @returns {Spread} */
+    const spreadOf = (chosen) => {
+      const spread = { xx: 0, xn: 0, nn: 0 };
+      for (const town of towns) {
+        let x = 0, n = 0;
+        for (const [line, c] of town) { n += c; if (chosen.includes(line)) x += c; }
+        spread.xx += x * x; spread.xn += x * n; spread.nn += n * n;
+      }
+      return spread;
+    };
     table.set(pool, {
       draws,
-      lines: counts.length,
-      top1: counts[0] / draws,
-      top5: counts.slice(0, 5).reduce((a, b) => a + b, 0) / draws,
+      towns: towns.length,
+      lines: ranked.length,
+      top1: ranked[0][1] / draws,
+      top5: ranked.slice(0, 5).reduce((sum, [, n]) => sum + n, 0) / draws,
+      spread: { top1: spreadOf(ranked.slice(0, 1).map(([l]) => l)), top5: spreadOf(ranked.slice(0, 5).map(([l]) => l)) },
     });
   }
   return table;
+}
+
+/**
+ * The standard error of a pool's share at a ceiling: over settlements (the ratio estimator's
+ * cluster variance, the sum over towns of (x_i - c n_i)^2), never below the binomial error over draws.
+ * @param {Pick<PoolMeasure, 'draws' | 'towns' | 'spread'>} m @param {'top1' | 'top5'} metric @param {number} ceiling
+ * @returns {number}
+ */
+export function shareError(m, metric, ceiling) {
+  const binomial = Math.sqrt(Math.max(ceiling * (1 - ceiling), 0) / m.draws);
+  if (m.towns < 2) return binomial;
+  const { xx, xn, nn } = m.spread[metric];
+  const ss = Math.max(xx - 2 * ceiling * xn + ceiling * ceiling * nn, 0);
+  return Math.max(binomial, Math.sqrt((m.towns / (m.towns - 1)) * ss) / m.draws);
 }
 
 /** @param {number} share @returns {number} the share rounded UP to four places, so a ceiling never sits below its measure */
@@ -137,7 +211,8 @@ export function readRegister() {
 
 /**
  * The register's findings against a measure: each one a line a reader can act on.
- * @param {ReturnType<typeof measureDominance>} table @param {ReturnType<typeof readRegister>} register
+ * @param {Map<string, Pick<PoolMeasure, 'draws' | 'towns' | 'top1' | 'top5' | 'spread'>>} table
+ * @param {ReturnType<typeof readRegister>} register
  * @returns {{ over: string[], unregistered: string[], stale: string[], loose: string[] }}
  */
 export function judge(table, register) {
@@ -146,13 +221,24 @@ export function judge(table, register) {
   for (const [pool, m] of table) {
     const row = rows[pool];
     if (!row) { unregistered.push(pool); continue; }
-    if (m.top1 > row.top1 + 1e-9) over.push(`${pool}: top1 ${m.top1.toFixed(4)} > ceiling ${row.top1}`);
-    if (m.top5 > row.top5 + 1e-9) over.push(`${pool}: top5 ${m.top5.toFixed(4)} > ceiling ${row.top5}`);
-    // A ceiling set to the charter's target for a cured pool (`targets`) is a law, not a measure:
-    // it is never loose. Every other ceiling hugs its measure.
     const targets = Array.isArray(row.targets) ? row.targets : [];
-    if (!targets.includes('top1') && row.top1 - m.top1 > TIGHTEN_SLACK) loose.push(`${pool}: top1 ceiling ${row.top1} sits above its measure ${m.top1.toFixed(4)}`);
-    if (!targets.includes('top5') && row.top5 - m.top5 > TIGHTEN_SLACK) loose.push(`${pool}: top5 ceiling ${row.top5} sits above its measure ${m.top5.toFixed(4)}`);
+    for (const metric of /** @type {const} */ (['top1', 'top5'])) {
+      const ceiling = row[metric], share = m[metric];
+      const se = shareError(m, metric, ceiling);
+      // A target is a law, judged exactly. Every other ceiling allows the pool's own noise.
+      const allowance = targets.includes(metric) ? 0 : NOISE_SE * se;
+      const beyondNoise = share > ceiling + allowance + 1e-9;
+      const dominated = metric === 'top1' && m.draws >= DOMINATED.minDraws && ceiling < DOMINATED.top1 && share >= DOMINATED.top1;
+      if (share > ceiling + 1e-9 && (beyondNoise || dominated)) {
+        const why = beyondNoise
+          ? `${se > 0 ? ((share - ceiling) / se).toFixed(1) : 'inf'} SE over ${m.draws} draws in ${m.towns} towns`
+          : `crosses the dominated line ${DOMINATED.top1} over ${m.draws} draws`;
+        over.push(`${pool}: ${metric} ${share.toFixed(4)} > ceiling ${ceiling} (${why})`);
+      }
+      if (!targets.includes(metric) && ceiling - share > TIGHTEN_SLACK && ceiling - share > NOISE_SE * se) {
+        loose.push(`${pool}: ${metric} ceiling ${ceiling} sits above its measure ${share.toFixed(4)}`);
+      }
+    }
   }
   for (const pool of Object.keys(rows)) if (!table.has(pool)) stale.push(pool);
   return { over, unregistered, stale, loose };
