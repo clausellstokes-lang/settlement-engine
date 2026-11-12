@@ -46,7 +46,11 @@ describe('REVIEW-INTAKE-4 — no roster carries one secret or one goal twice', (
     // RE-MEASURED 2026-11-12, COHERENCE-POWERS cure (i) (the chair's ruling of 2026-11-11, "ONE PERSON, ONE FACE"): where a
     // house of the town leads, the seat's house bears no face and no seat is minted beside it, so 65 more births (thorps and
     // hamlets whose one house now leads) carry ONE card: 834 carry two or more, measured by this file at the lane's tip.
-    expect(rosters).toBe(834);
+    // RE-MEASURED 2026-11-12, COHERENCE-POWERS 2B (5915e3af0, the council of a kind): 11 thorps and hamlets drawn as Priestly
+    // Guidance with no religious house become Household or Elder Councils; their leader is then a house of the town (the dual
+    // hat) and no seat is minted beside it, so they carry ONE card (soak1k-18, -24, -108, -223, -391, -565 and five more):
+    // 823 carry two or more, measured by this file at the lane's tip.
+    expect(rosters).toBe(823);
   });
 
   it('no roster repeats a secret', () => {
