@@ -19,7 +19,8 @@
  * `node scripts/census/pool-dominance.mjs --tighten`, which never raises a ceiling); a register
  * banked on another corpus. A rise by the noise arm or the dominated line is read again on the
  * fixed second prefix `confirm` and reds only if it repeats there (one alone is a note with both
- * readings); a target, a collapse and the row-set checks are exact on the one reading.
+ * readings); a loose ceiling likewise, and under a foreign prefix it is a note; a target, a
+ * collapse and the row-set checks are exact on the one reading.
  * WHAT IT DOES NOT: a rise inside the pool's noise (on a pool of twenty draws that is a wide band;
  * the corpus is the only cure); a pool the corpus never draws; a loss of variety among lines the
  * pool's own line id merges (a line keyed by its index in a sub-list counts every sub-list's line
@@ -94,6 +95,18 @@ describe('the rule: a rise reds beyond the pool\'s own noise, or across the domi
     const once = confirmRises(first, judge(calm, register, { exact: false }), 'confirm', calm);
     expect(once.over).toEqual([]);
     expect(once.notes).toEqual([expect.stringMatching(/does not repeat on confirm \(top1 0\.4000 over 400 draws\)/)]);
+  });
+
+  test('a loose ceiling must repeat too: loose on both readings it reds, on one alone it is a note', () => {
+    const first = judge(new Map([['p', evenPool(0.3, 400)]]), register);
+    expect(first.loose).toHaveLength(1);
+    const again = new Map([['p', evenPool(0.3, 400)]]);
+    const calm = new Map([['p', evenPool(0.4, 400)]]);
+    expect(confirmRises(first, judge(again, register), 'confirm', again).loose).toHaveLength(1);
+    const once = confirmRises(first, judge(calm, register), 'confirm', calm);
+    expect(once.loose).toEqual([]);
+    expect(once.notes).toEqual([expect.stringMatching(/not loose on confirm \(top1 0\.4000 over 400 draws\)/)]);
+    expect(judge(new Map([['p', evenPool(0.3, 400)]]), register, { exact: false }).loose).toEqual([]);
   });
 
   test('a target and a collapse are never confirmed: they red on the one reading', () => {

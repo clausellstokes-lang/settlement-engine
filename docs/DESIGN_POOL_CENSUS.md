@@ -427,6 +427,10 @@ A single-row door that refuses without the base tree's reading is NOT built here
 
 Suppose the second corpus reads a row over, by the rule, at the very tree that row was banked on. Nothing in the code differs between the two readings, so that row was banked low. The door `--level-second` deals with such rows at a re-base. It refuses unless the banked corpus reads zero. It raises such a row's ceiling to the second corpus's reading (ceil4) and writes both readings into the row's reason. It never raises a target, and it stops for a ruling if it would raise more than five rows. At this re-base it raised ONE row: `institutionDescVariants:city|Economy|River ferry`, top1 0.5157 → 0.7778 (quarrel 0.5156 over 64 draws; confirm 0.7778 over 81). From here, the banked corpus and the second corpus start from the same zero. Two consequences keep them there. First, a levelled metric (`levelled`) is never loose on the banked reading, because its ceiling is the higher of the two readings by ruling. Second, `--tighten` lowers a ceiling only to the HIGHER of the two corpora's readings. A door that lowered it to the banked corpus's reading alone would bank it low again. Run at this commit, `--tighten` leaves the register byte-identical.
 
+### 6.9 A loose ceiling must repeat too
+
+The loose prompt is the rise's mirror, and the dice deal it the same way. On the five fresh prefixes it fired 1, 1, 0, 0 and 2 times, each one a different row: plotHooks:population_friction, city River ferry before its levelling, and plotHooks:occupation_legacy. So under a foreign prefix it is a note, because `--tighten` reads the banked corpus alone. On the banked corpus it is read again on `confirm`, and it reds only when loose on both. A ceiling the dice left loose by chance is never tightened into a low bank.
+
 ## Appendix A — the fact readers (sub-seat table, file:line)
 
 ### Unit 1: record facts a DM-facing line can presume, and who reads them

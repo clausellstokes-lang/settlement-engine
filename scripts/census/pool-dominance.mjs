@@ -45,7 +45,8 @@
  * same corpus shape under the fixed second prefix `CONFIRM_SEED_PREFIX` at the same tree, against
  * the same ceiling and by the same rule; the row reds only if it is over on BOTH. Over on one
  * alone, it prints as a note carrying both readings. The second corpus is read only when there is
- * a row to confirm. A cured pool's target, the collapse arm (3) and the row-set checks are NOT
+ * a row to confirm. A loose ceiling is the mirror: it is a finding only when loose on both (and
+ * under a foreign prefix a note, since --tighten reads the banked corpus alone). A cured pool's target, the collapse arm (3) and the row-set checks are NOT
  * confirmed: they stay exact on the corpus read. What a second corpus cannot clear: a ceiling
  * banked low reads over on both (the procedure: `docs/DESIGN_POOL_CENSUS.md` §6.7).
  * A ceiling the charter set as a law for a cured pool (`targets`) is judged EXACTLY, with no
@@ -293,6 +294,8 @@ export function judge(table, register, { exact = true } = {}) {
   const over = [], unregistered = [], stale = [], loose = [], notes = [];
   /** @type {Array<{ key: string, text: string }>} */
   const repeatable = [];
+  /** @type {Array<{ key: string, text: string }>} */
+  const looseRepeatable = [];
   for (const [pool, m] of table) {
     const row = rows[pool];
     if (!row) {
@@ -322,7 +325,9 @@ export function judge(table, register, { exact = true } = {}) {
       }
       // A levelled ceiling was banked at the second corpus's higher reading: never loose on the first.
       if (!targets.includes(metric) && !(row.levelled || []).includes(metric) && ceiling - share > TIGHTEN_SLACK && ceiling - share > NOISE_SE * se) {
-        loose.push(`${pool}: ${metric} ceiling ${ceiling} sits above its measure ${share.toFixed(4)}`);
+        const text = `${pool}: ${metric} ceiling ${ceiling} sits above its measure ${share.toFixed(4)}`;
+        // A tightening prompt means nothing off the banked corpus (--tighten reads it alone).
+        if (exact) { loose.push(text); looseRepeatable.push({ key: `${pool}|${metric}`, text }); } else notes.push(`${text} (a tightening prompt, read on the banked corpus only)`);
       }
     }
   }
@@ -331,12 +336,12 @@ export function judge(table, register, { exact = true } = {}) {
     if (exact) stale.push(pool);
     else notes.push(`${pool}: not drawn`);
   }
-  return { over, unregistered, stale, loose, notes, repeatable };
+  return { over, unregistered, stale, loose, notes, repeatable, looseRepeatable };
 }
 
 /**
  * @typedef {{ over: string[], unregistered: string[], stale: string[], loose: string[], notes: string[],
- *   repeatable: Array<{ key: string, text: string }> }} Findings
+ *   repeatable: Array<{ key: string, text: string }>, looseRepeatable: Array<{ key: string, text: string }> }} Findings
  */
 
 /**
@@ -347,13 +352,25 @@ export function judge(table, register, { exact = true } = {}) {
  * @returns {Findings}
  */
 export function confirmRises(first, second, secondPrefix, secondTable) {
+  // A loose ceiling must repeat too: loose on the banked corpus alone is the dice, the mirror of a rise.
+  const looseAgain = new Set(second.looseRepeatable.map((r) => r.key));
+  /** @param {string} key */
+  const readingOf = (key) => {
+    const [pool, metric] = key.split(/\|(?=top[15]$)/);
+    const m = secondTable.get(pool);
+    return m ? `${metric} ${m[/** @type {'top1' | 'top5'} */ (metric)].toFixed(4)} over ${m.draws} draws` : 'not drawn';
+  };
+  const looseKept = first.looseRepeatable.filter((r) => looseAgain.has(r.key));
+  const looseNotes = first.looseRepeatable.filter((r) => !looseAgain.has(r.key)).map((r) => `${r.text}; not loose on ${secondPrefix} (${readingOf(r.key)})`);
   const again = new Map(second.repeatable.map((r) => [r.key, r.text]));
   const unconfirmed = new Set(first.repeatable.filter((r) => !again.has(r.key)).map((r) => r.text));
   const confirmedText = new Map(first.repeatable.filter((r) => again.has(r.key)).map((r) => [r.text, again.get(r.key)]));
   return {
     ...first,
     over: first.over.filter((t) => !unconfirmed.has(t)).map((t) => (confirmedText.has(t) ? `${t}; repeats on ${secondPrefix}: ${confirmedText.get(t)}` : t)),
-    notes: [...first.notes, ...first.repeatable.filter((r) => unconfirmed.has(r.text)).map((r) => {
+    loose: looseKept.map((r) => r.text),
+    looseRepeatable: looseKept,
+    notes: [...first.notes, ...looseNotes, ...first.repeatable.filter((r) => unconfirmed.has(r.text)).map((r) => {
       const [pool, metric] = r.key.split(/\|(?=top[15]$)/);
       const m = secondTable.get(pool);
       const reading = m ? `${metric} ${m[/** @type {'top1' | 'top5'} */ (metric)].toFixed(4)} over ${m.draws} draws` : 'not drawn';
@@ -371,10 +388,10 @@ export function confirmRises(first, second, secondPrefix, secondTable) {
  */
 export function judgeCorpus({ seedPrefix = DEFAULT_SEED_PREFIX, register = readRegister(), table = measureDominance({ seedPrefix }) } = {}) {
   const first = judge(table, register, { exact: seedPrefix === DEFAULT_SEED_PREFIX });
-  if (!first.repeatable.length) return { table, findings: first, confirmedOn: null, second: null };
+  if (!first.repeatable.length && !first.looseRepeatable.length) return { table, findings: first, confirmedOn: null, second: null };
   const secondPrefix = seedPrefix === CONFIRM_SEED_PREFIX ? DEFAULT_SEED_PREFIX : CONFIRM_SEED_PREFIX;
   const second = measureDominance({ seedPrefix: secondPrefix });
-  return { table, findings: confirmRises(first, judge(second, register, { exact: false }), secondPrefix, second), confirmedOn: secondPrefix, second };
+  return { table, findings: confirmRises(first, judge(second, register), secondPrefix, second), confirmedOn: secondPrefix, second };
 }
 
 const REGISTER_LAW = 'SHRINK-ONLY ON ONE CORPUS. One row per drawn pool: the ceiling for the share of its most-printed line (top1) and of its five most-printed lines (top5) over the corpus `corpus` names (scripts/census/pool-dominance.mjs). On that corpus a ceiling is only ever lowered (--tighten); a row leaves only when its pool is no longer drawn. A change of corpus is a change of instrument: the rows are re-based at the new corpus\'s measure through --rebase, on a chair\'s ruling, and never by hand. Held by tests/lint/poolDominance.walker.test.js.';
