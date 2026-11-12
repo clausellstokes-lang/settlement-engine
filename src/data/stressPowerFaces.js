@@ -21,7 +21,7 @@
 
 /**
  * @typedef {{ stress: string, power?: string, archetype?: string, house?: { kinds?: string[], names?: RegExp },
- *   cast?: RegExp, leaderless?: string, appointed?: boolean, veiled?: boolean }} StressPowerFace
+ *   cast?: RegExp, leaderless?: string, appointed?: boolean, veiled?: boolean, seated?: boolean }} StressPowerFace
  */
 
 /** @type {ReadonlyArray<Readonly<StressPowerFace>>} */
@@ -31,7 +31,15 @@ export const STRESS_POWER_FACES = Object.freeze([
     leaderless: 'It has no one captain: the able-bodied householders sit on it by turns and decide together.' },
   { stress: 'wartime', power: 'War Council', house: { kinds: ['military'] }, cast: /garrison|barracks|watch|militia|wall|guard/i,
     leaderless: 'It has no one captain: the able-bodied householders sit on it by turns and decide together.' },
-  { stress: 'occupied', power: 'Occupation Authority', appointed: true },
+  // SEATED (COHERENCE-POWERS-3, the chair's rulings (1) and (2) of 2026-11-12): a crisis whose own name says a power
+  // holds the town, or that the realm is split, seats that power second, after the ruling power, at every size
+  // (density/densityRoll.js :: rollDensityPlan reads the mark through applyDensityLaw.js :: planFor)
+  { stress: 'occupied', power: 'Occupation Authority', appointed: true, seated: true },
+  { stress: 'politically_fractured', power: 'Loyalist Noble Bloc', seated: true },
+  { stress: 'politically_fractured', power: 'Reform Noble Bloc', seated: true },
+  { stress: 'politically_fractured', power: 'Third Bloc (Neutrals)', seated: true },
+  // a fractured realm's pool-drawn bloc (stressFactions.js :: pushPoolNamed, category 'other')
+  { stress: 'politically_fractured', archetype: 'other', seated: true },
   { stress: 'occupied', power: 'Resistance Network', veiled: true,
     leaderless: 'It has no one leader: each cell knows only its own, and no one speaks for the whole.' },
   // the healing house; else the plague's lever (crisisCast.js :: CRISIS_LEVERS.plague_onset)

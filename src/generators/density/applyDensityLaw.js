@@ -67,6 +67,7 @@ import { clamp01 } from '../../kernel/math.js';
 import { prosperityRank01 } from '../../domain/prosperityRank.js';
 import { renormalizeFactionPower } from '../power/rulingStructure.js';
 import { settleHouselessPowers } from '../power/rulerKin.js';
+import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -195,6 +196,9 @@ function planFor(input, mode = {}) {
       : null,
     seatAll: mode.seatAll,
     massOverride: mode.massOverride ?? null,
+    // COHERENCE-POWERS-3 (the chair's rulings (1), (2)): the powers a crisis seats (data/stressPowerFaces.js's `seated`)
+    crisisSeatKeys: (input.powerStructure?.factions || [])
+      .filter((seat) => stressPowerRowOf({ stress: input.stress }, seat)?.seated === true).map(seatKey),
   });
 }
 
