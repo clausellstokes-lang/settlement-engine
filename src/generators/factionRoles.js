@@ -23,7 +23,7 @@ import {
 import { factionDisplayNameOf, factionRefOf } from '../domain/factionRefs.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { firstRankMembershipOf } from '../domain/people/membership.js';
-import { rollsRegisterVii } from '../domain/density/densityLaw.js';
+import { rollsRegisterVii } from '../domain/density/densityLaw.js'; import { factsOf } from '../domain/facts/factsOf.js'; import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary.js'; // COHERENCE-PRESUME: one line, so no cited line moves
 
 // inferImportance is not used directly here yet — kept on the import
 // graph for future expansion where archetype rules read existing NPC
@@ -43,7 +43,7 @@ export const FACTION_ROLES = {
     { role: 'High Priestess', importance: 'pillar', linkToInst: /temple|cathedral|shrine|monastery/ },
   ],
   watch: [
-    { role: 'Watch Captain',  importance: 'key',    linkToInst: /watch|garrison|barracks|militia/ },
+    { role: 'Watch Captain',  importance: 'key',    linkToInst: /watch|garrison|barracks|militia/, needs: ['watch'], twin: 'Veteran Soldier' }, // COHERENCE-PRESUME (2026-11-11, class c): the title declares the watch; where none stands the office falls to its twin
   ],
   merchant: [
     { role: 'Guildmaster',    importance: 'key',    linkToInst: /market|exchange|trade hall|guild/ },
@@ -209,7 +209,10 @@ export function generateFactionStructuralNpcs(
   const defs = (FACTION_ROLES[arch] || []).filter(worldLaw.allowsRole);
   // The placeholder's power is its membership, named by the seat's display name (PEOPLE-LAND, M-2).
   const factionName = factionDisplayNameOf(faction) || 'Unnamed power';
+  /** @type {object | undefined} */ let facts;
   return defs.map((def, i) => {
+    // a declared title the roster refuses takes its twin (the roster here is the settled one)
+    const role = def.twin && !declarationAdmits(declarationOf(def), /** @type {any} */ (facts ??= factsOf({ institutions }))).admitted ? def.twin : def.role;
     // ── ONE-TIME CORRECTION, 2026-08-11 (owner-approved) ────────────────────
     // The bare `?.id` read the WRONG IDENTITY: a generated institution carries no
     // `id` property at all (measured at HEAD 4a9b6cf4 — 3632 institutions across
@@ -242,9 +245,9 @@ export function generateFactionStructuralNpcs(
       : null;
     const linkedInstId = linkedInst ? (linkedInst.id || linkedInst.name) : null;
     return {
-      id: `npc.${slug(factionName)}_${slug(def.role)}_${i}`,
-      name: nameTemplateFor(def.role),
-      role: def.role,
+      id: `npc.${slug(factionName)}_${slug(def.role)}_${i}`, // the office's identity stays its declared title's, whichever title it falls to
+      name: nameTemplateFor(role),
+      role,
       importance: def.importance,
       status: 'active',
       // PEOPLE-LAND (M-2, the shim out): the synthesized leader belongs to its seat by a

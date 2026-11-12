@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "d0d8b787c90c677c564fcd42a98a569b1c4a7fc2530f4a520e999d77ea68536c",
+      "sha256": "b5448298c05fa8dc6d280a486e46733f0b76a0c7f056621f72b2bc533370a984",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE charters of 2026-11-11",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "97936ac101de62d5b951af9ccb25cbfddf0650aa9938d4180712fa16ee907bf4",
+      "sha256": "083542bb94ba54aebab40a6e55a48ba5570553383220095f0424be01048ea613",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair); the owner's order of 2026-11-11 on the outside critique (ODQ-934.105 draft: THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE, 2026-11-11 21:41 UTC), the chair's COHERENCE charters of 2026-11-11",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {

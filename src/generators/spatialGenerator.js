@@ -75,7 +75,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     quarters.push({
       name:      'Market Quarter',
       location:  'Central',
-      desc:      textOf({ text: 'Bustling center with merchant stalls, money changers, and crowds', excludes: ['crisis: threat', 'crisis: plague_onset'], crisis: ['any'] }),
+      desc:      textOf({ text: 'Bustling center with merchant stalls, hawkers, and crowds', excludes: ['crisis: threat', 'crisis: plague_onset'], crisis: ['any'] }),
       landmarks: instNames
         .filter(n => n.includes('Market') || n.includes('Guild') || n.includes('Bank'))
         .slice(0, 3),
@@ -319,8 +319,8 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
           : 'Clustered around the green, fields radiating out in open strips',
         // F1: the walled lines stand only where walls do; the open lines are VETOABLE.
         hills:     defence.hasWalls
-          ? { text: 'Stone-walled village on a south-facing slope, paths converging at the market cross', needs: ['market'] }
-          : { text: 'Stone-built village on a south-facing slope, paths converging at the market cross', needs: ['market'] },
+          ? 'Stone-walled village on a south-facing slope, paths converging at the stone cross'
+          : 'Stone-built village on a south-facing slope, paths converging at the stone cross',
         desert:    defence.hasWalls
           ? `Compact walled settlement around a central well${desertSacred}`
           : `Compact settlement around a central well${desertSacred}`,

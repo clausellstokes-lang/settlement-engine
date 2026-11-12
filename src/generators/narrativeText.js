@@ -186,7 +186,8 @@ export const PRESSURE_SENTENCES = {
     ];
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
-          { text: `${r.name} is taking in more people than it was built for. The newcomers and the old residents share the streets and the market, but not a language, customs or trust, and ${r.govFaction || "the governing authority"} cannot keep up with how fast they come.`, needs: ['market'] },
+          // COHERENCE-PRESUME: the market was incidental and the draw never honoured its `needs` (presume-village-38)
+          `${r.name} is taking in more people than it was built for. The newcomers and the old residents share the same streets, but not a language, customs or trust, and ${r.govFaction || "the governing authority"} cannot keep up with how fast they come.`,
           `The ${r.commodity || "trade"} that made ${r.name} worth coming to cannot keep pace with the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
           `Newcomers have built a second, poorer town at the edges of ${r.name}, and ${r.govFaction || "the governing authority"} has not decided whether it governs it; until it does, the outer town keeps its own rules.`,
         ]
@@ -263,10 +264,20 @@ const isMajorEvent = (e) => e?.severity === 'major' || e?.severity === 'catastro
 
 export const POLITICAL_FLAVOR = {
   political_heavy: [
-    (r) =>
-      `Power here has changed hands ${r.length > 2 ? "more than once " : ""}within living memory, and since the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "last upheaval"} nobody has been sure who really rules`,
-    (r) =>
-      `People here still argue about the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"}: those who lived through it speak of it as if it were last year, and their children treat it as a warning`,
+    // COHERENCE-PRESUME (the chair's ruling B): an event past sixty years is older than its bearers
+    // (heraldCausalGrammar.js :: TIME_BANDS), so the two lines below name no living witness of one.
+    // The one pick each line made is made in the same place; only the words follow its age.
+    (r) => {
+      const e = pickRandom2(r.filter((s) => s.type === "political"));
+      return `Power here has changed hands ${r.length > 2 ? "more than once " : ""}${e?.yearsAgo > 60 ? "" : "within living memory"}`.trimEnd()
+        + `, and since the ${e?.name || "last upheaval"} nobody has been sure who really rules`;
+    },
+    (r) => {
+      const e = pickRandom2(r.filter((s) => s.type === "political"));
+      return e?.yearsAgo > 60
+        ? `People here still argue about the ${e.name}, and every family still teaches its children which side it took`
+        : `People here still argue about the ${e?.name || "this event"}: those who lived through it speak of it as if it were last year, and their children treat it as a warning`;
+    },
     (r) =>
       `The current governing arrangements are a compromise nobody fully chose: shaped more by the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} than by any founding design`,
     (r) =>
@@ -346,8 +357,13 @@ export const POLITICAL_FLAVOR = {
         ? `The ${s.name} is why the relationship between civic and religious authority here is more carefully managed than in settlements that have never had to think about it`
         : `The ${s.name} is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards`;
     },
-    (r) =>
-      `The ${(r.find((o) => o.severity === "catastrophic") || r[0]).name} is this place's defining story, and the people who lived through it are still here to tell it`,
+    (r) => {
+      const s = r.find((o) => o.severity === "catastrophic") || r[0];
+      // COHERENCE-PRESUME (the chair's ruling B): past sixty years nobody who lived through it is alive
+      return s.yearsAgo > 60
+        ? `The ${s.name} is this place's defining story, and every family here still tells its own part of it`
+        : `The ${s.name} is this place's defining story, and the people who lived through it are still here to tell it`;
+    },
     (r) => {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
       return s.type === "disaster" || s.type === "monster_incursion"

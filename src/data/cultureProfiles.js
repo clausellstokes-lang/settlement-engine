@@ -59,7 +59,7 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Germanic-inspired',
     scope: 'Towns of timber and stone, run by guilds and estates.',
     builtForm: [
-      { text: 'Timber-framed street houses cluster around a market green, with stone reserved for halls, bridges, and defenses.', needs: ['market', 'walls'] },
+      'Timber-framed street houses cluster around a central green, with stone kept for the larger halls.',
       'Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.',
     ],
     civicPattern: [
@@ -68,7 +68,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     exchangePattern: [
       'Guild-regulated craft production and overland fairs organize exchange.',
-      { text: 'Estate dues, weekly markets, and merchant associations connect farms to specialist workshops.', needs: ['market'] },
+      'Estate dues, pedlars, and merchant associations connect farms to specialist workshops.',
     ],
     foodways: [
       'Grain, orchard produce, preserved meat, dairy, and ale anchor the local table.',
@@ -80,7 +80,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       'Defense starts with earthworks and timber palisades and turns to gated stone only as wealth and threat increase.',
-      { text: 'A militia tradition supports a smaller permanent watch or retinue.', needs: ['guardPresence'] },
+      'Households are expected to turn out when called; a standing force comes only as a place grows.',
     ],
     socialTexture: [
       'Household, guild, parish, and estate obligations overlap; authority is visible through office and reciprocal duty.',
@@ -89,7 +89,7 @@ export const CULTURE_PROFILES = Object.freeze({
     architecturalDetails: [
       'half-timbered upper floors project above the busier lanes',
       'steep roofs, enclosed craft yards, and carved lintels mark the older wards',
-      { text: 'a hall-and-market axis organizes the settlement center', needs: ['market'] },
+      'one broad street leading up to the hall organizes the settlement center',
     ],
     institutionBias: {
       categories: { Crafts: 1.12, Economy: 1.05 },
@@ -110,7 +110,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Civic office and private patronage are intertwined; public generosity is a recognized route to influence.',
     ],
     exchangePattern: [
-      { text: 'Contract, warehousing, market tolls, and notarial practice support long-distance commerce.', needs: ['market'] },
+      'Contract, warehousing, tolls, and notarial practice support long-distance commerce.',
       { text: 'Urban markets aggregate agricultural estates, workshops, and regional shipping into a documented tax base.', needs: ['market', 'navigable'] },
     ],
     foodways: [
@@ -154,7 +154,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     exchangePattern: [
       'Pastoral wealth, seasonal fairs, metalwork, and gift exchange connect dispersed households.',
-      { text: 'Market exchange operates beside tribute, fosterage, and reciprocal obligations between kin groups.', needs: ['market'] },
+      'Buying and selling go on beside tribute, fosterage, and reciprocal obligations between kin groups.',
     ],
     foodways: [
       'Oats or barley, dairy, cattle products, woodland foods, fish, and seasonal preserves shape the table.',
@@ -165,7 +165,7 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'Ritual authority is distributed among formal sanctuaries, seasonal gatherings, and place-based customs.', needs: ['institution: temple'] },
     ],
     defensePattern: [
-      { text: 'Ditches, banks, timber ramparts, and defensible hills protect clustered households.', needs: ['palisade'] },
+      'Ditches and banks come first; heavier timber works follow only where a place can build and man them.',
       { text: 'War bands and kin levies assemble around a smaller retinue of experienced fighters.', needs: ['militia'] },
     ],
     socialTexture: [
@@ -188,15 +188,15 @@ export const CULTURE_PROFILES = Object.freeze({
     label: 'Arabic-inspired',
     scope: 'Courtyard houses, waterworks, endowed institutions and caravan trade.',
     builtForm: [
-      { text: 'Shaded lanes connect inward-looking courtyard buildings, market arcades, gardens, and managed water points.', needs: ['market'] },
-      { text: 'Dense masonry quarters open onto caravan courts, covered markets, bathhouses, and planted courtyards.', needs: ['market', 'institution: bathhouse'] },
+      'Shaded lanes connect inward-looking courtyard buildings, arcades, gardens, and managed water points.',
+      'Dense masonry quarters open onto caravan yards, covered lanes, and planted courtyards.',
     ],
     civicPattern: [
-      { text: 'Judges, market officers, endowed institutions, military households, and merchant notables share administration.', needs: ['market'] },
+      'Judges, endowed institutions, leading households, and merchant notables share administration.',
       'Formal law and charitable endowment sit beside neighborhood mediation and courtly patronage.',
     ],
     exchangePattern: [
-      { text: 'Caravan organization, brokerage, credit, warehousing, and inspected markets sustain regional exchange.', needs: ['market'] },
+      'Caravan organization, brokerage, credit, warehousing, and inspected weights sustain regional exchange.',
       'Merchant partnerships and route intelligence connect local workshops to long-distance trade.',
     ],
     foodways: [
@@ -212,7 +212,7 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'Mounted patrols and household troops reinforce ward-based watches.', needs: ['watch'] },
     ],
     socialTexture: [
-      { text: 'Neighborhood, household, legal, charitable, and commercial obligations intersect in markets and courtyards.', needs: ['market'] },
+      'Neighborhood, household, legal, charitable, and commercial obligations intersect in streets and courtyards.',
       'Hospitality, reputation, contract, and access to mediation are practical forms of social capital.',
     ],
     architecturalDetails: [
@@ -240,7 +240,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     exchangePattern: [
       { text: 'Maritime trade, seasonal voyaging, fishing, pastoral production, and portable wealth drive exchange.', needs: ['coast'] },
-      { text: 'Landing places and halls serve as markets before specialized commercial institutions emerge.', needs: ['navigable'] },
+      'Halls serve as trading places before specialized commercial institutions emerge.',
     ],
     foodways: [
       'Barley, dairy, preserved fish or meat, hardy greens, and seasonal livestock products dominate.',
@@ -251,7 +251,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Religious authority remains distributed between local ritual specialists and powerful patrons.',
     ],
     defensePattern: [
-      'Readily mobilized crews come first; ringworks, timber ramparts, and beacon systems follow where a place can man them.',
+      'Readily mobilized crews come first; ringworks, earth banks, and beacon systems follow where a place can man them.',
       { text: 'A warrior following provides the permanent core around which levy and ship crews assemble.', needs: ['navigable'] },
     ],
     socialTexture: [
@@ -275,7 +275,7 @@ export const CULTURE_PROFILES = Object.freeze({
     scope: 'Timber compounds and common land, between river and forest.',
     builtForm: [
       'Timber compounds, kitchen gardens, workshops, and communal greens spread along a riverbank or defensible rise.',
-      { text: 'A palisaded core is surrounded by farm lanes, bathhouses, sheds, and later market streets.', needs: ['palisade', 'institution: bathhouse', 'market'] },
+      'A tight older core is surrounded by farm lanes, yards, sheds, and newer streets.',
     ],
     civicPattern: [
       'Communal assemblies, household elders, service elites, and princely or appointed officers share authority.',
@@ -318,27 +318,27 @@ export const CULTURE_PROFILES = Object.freeze({
     scope: 'Wards and courtyards, run by officials and old families.',
     builtForm: [
       'Walled compounds, tiled roofs, axial streets, shop houses, and garden courts organize distinct wards.',
-      { text: 'A planned civic axis links gate, market, administrative compound, temple precinct, and waterworks.', needs: ['gate', 'market', 'institution: temple'] },
+      'A planned civic axis runs straight to the administrative compound, with wards laid out on either side.',
     ],
     civicPattern: [
       'Administrative officers, lineage organizations, neighborhood heads, guilds, and landed patrons overlap.',
       'Written office and examination or appointment coexist with household, temple, and merchant authority.',
     ],
     exchangePattern: [
-      { text: 'Regulated markets, guild brokerage, granary systems, canals or roads, and standardized records support exchange.', needs: ['market', 'institution: granary'] },
+      'Guild brokerage, regulated weights and prices, roads or canals, and standardized records support exchange.',
       'Merchant associations connect specialist craft wards to agricultural hinterlands and long routes.',
     ],
     foodways: [
       'Rice or millet, wheat foods, soy or pulse products, vegetables, tea, fish, and preserved condiments vary by ecology.',
-      { text: 'Markets, shared waterworks, fermentation, and intensive garden production structure urban food supply.', needs: ['market'] },
+      'Shared waterworks, fermentation, and intensive garden production structure urban food supply.',
     ],
     sacredLife: [
       'Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center.',
       'Ritual calendars connect family memorials, neighborhood festivals, pilgrimage, and civic legitimacy.',
     ],
     defensePattern: [
-      'Where the state reaches, enclosed wards, controlled gates, watch towers, granaries, and disciplined troops give defense in depth.',
-      { text: 'Militia and professional troops are organized through districts and administrative chains.', needs: ['militia'] },
+      'Where the state can pay for it, defense runs in depth: enclosed wards, controlled gates, stored grain, and drilled troops.',
+      'Any armed service, levied or paid, is organized through districts and administrative chains.',
     ],
     socialTexture: [
       'Office, household seniority, lineage, guild membership, education, and neighborhood duty create intersecting hierarchies.',
@@ -347,7 +347,7 @@ export const CULTURE_PROFILES = Object.freeze({
     architecturalDetails: [
       'tiled rooflines and enclosed courts create a measured rhythm along the main axis',
       'ward gates, shop fronts, and planted courtyards divide public from household space',
-      { text: 'the market street terminates at an administrative or temple precinct', needs: ['market'] },
+      'the main street ends at the administrative precinct',
     ],
     institutionBias: {
       categories: { Government: 1.08, Infrastructure: 1.08, Crafts: 1.06 },
@@ -358,7 +358,7 @@ export const CULTURE_PROFILES = Object.freeze({
   mesoamerican: profile({
     key: 'mesoamerican',
     label: 'Mesoamerican-inspired',
-    scope: 'A ritual plaza at the centre, tribute coming in, and markets and waterworks around it.',
+    scope: 'A ritual plaza at the centre, tribute coming in, and waterworks and gardens around it.',
     builtForm: [
       { text: 'Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.', needs: ['market'] },
       'Causeways, terraces, canals or reservoirs connect dense neighborhoods to monumental public space.',
@@ -368,12 +368,12 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'Markets and neighborhood organizations operate inside a wider system of civic labor and tribute.', needs: ['market'] },
     ],
     exchangePattern: [
-      { text: 'Large periodic markets, professional merchants, tribute redistribution, and specialist craft production drive exchange.', needs: ['market'] },
+      'Professional merchants, tribute redistribution, and specialist craft production drive exchange.',
       'Porters, canoe traffic where possible, and managed causeways move staple and prestige goods.',
     ],
     foodways: [
       'Maize, beans, squash, chile, tomatoes, greens, cacao, and locally available fish or game form the staple pattern.',
-      { text: 'Intensive plots, terraces, raised fields, and market redistribution support dense populations.', needs: ['population: ≥ middling'] },
+      { text: 'Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.', needs: ['population: ≥ middling'] },
     ],
     sacredLife: [
       { text: 'Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.', needs: ['institution: temple'] },
@@ -384,11 +384,11 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'Ward levies reinforce trained warrior societies and palace guards.', needs: ['militia', 'guardPresence'] },
     ],
     socialTexture: [
-      { text: 'Ward membership, craft specialization, market standing, tribute duty, and ritual office structure public life.', needs: ['market'] },
+      'Ward membership, craft specialization, craft standing, tribute duty, and ritual office structure public life.',
       'Civic labor and festival obligations make the settlement a visibly collective project.',
     ],
     architecturalDetails: [
-      { text: 'a raised ceremonial precinct overlooks a broad and intensely used market plaza', needs: ['market'] },
+      'a raised ceremonial precinct overlooks a broad and busy open plaza',
       'terraces, plastered platforms, and residential compounds step with the terrain',
       'causeways and managed water divide the settlement into organized neighborhoods',
     ],
@@ -404,7 +404,7 @@ export const CULTURE_PROFILES = Object.freeze({
     scope: 'Temple tanks and bazaars, with a quarter for each trade and guilds to run them.',
     builtForm: [
       { text: 'Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock.', needs: ['market'] },
-      { text: 'A temple, court, or fortified precinct anchors neighborhoods organized around wells, workshops, and markets.', needs: ['market'] },
+      'A large central compound anchors neighborhoods organized around wells and workshops.',
     ],
     civicPattern: [
       'Court officers, councils, merchant and craft corporations, religious endowments, and neighborhood leaders overlap.',
@@ -416,7 +416,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.',
-      { text: 'Irrigation, tanks, market kitchens, preservation, and ritual food rules shape supply and consumption.', needs: ['market'] },
+      'Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.',
     ],
     sacredLife: [
       { text: 'Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.', needs: ['institution: temple'] },
@@ -428,12 +428,12 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     socialTexture: [
       'Occupation, neighborhood, household, guild, patronage, and religious affiliation create multiple routes to belonging.',
-      { text: 'Water access, market standing, ritual service, and credit relationships are everyday political facts.', needs: ['market'] },
+      'Water access, trade standing, ritual service, and credit relationships are everyday political facts.',
     ],
     architecturalDetails: [
       { text: 'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines', needs: ['market', 'institution: temple'] },
       'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space',
-      { text: 'occupational quarters cluster around shared water and market infrastructure', needs: ['market'] },
+      'occupational quarters cluster around shared wells and water channels',
     ],
     institutionBias: {
       categories: { Economy: 1.08, Religious: 1.06, Crafts: 1.08, Infrastructure: 1.06 },
@@ -487,7 +487,7 @@ export const CULTURE_PROFILES = Object.freeze({
   greek: profile({
     key: 'greek',
     label: 'Greek-inspired',
-    scope: 'An agora by the harbor, civic associations, and houses climbing the hillside.',
+    scope: 'An agora at the centre, civic associations, and houses climbing the hillside.',
     builtForm: [
       { text: 'Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.', needs: ['market'] },
       { text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: ['market'] },
@@ -498,7 +498,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     exchangePattern: [
       { text: 'Maritime or regional trade, workshops, contracts, coin exchange, and public markets support the civic economy.', needs: ['market'] },
-      { text: 'Harbor and hinterland goods meet through brokers, associations, and tax-farming offices.', needs: ['coast'] },
+      'Goods from near and far meet through brokers, associations, and tax-farming offices.',
     ],
     foodways: [
       'Grain, pulses, olives or other oil crops, wine, vegetables, cheese, and fish vary with terrain and trade.',
@@ -510,7 +510,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       'Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant follow as a place grows.',
-      'Professional guards and mercenaries supplement civic musters during prolonged threats.',
+      'Civic musters come first; paid guards are added only when a threat lasts and the town can pay.',
     ],
     socialTexture: [
       'Household, citizenship, association, patronage, public rhetoric, and military service define competing forms of status.',

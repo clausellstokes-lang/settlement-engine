@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "46e39e2b8374cc982a5d2bae6ed2df34c1f2c34d",
+ "frozenAtSha": "c76bd8a9896a9a382169ee87f1fd0bbad5bef1d0",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -22,9 +22,9 @@
   "originCount": 14782,
   "transitionCount": 22772
  },
- "shapesDigest": "a2bdac18fa0de6e91f6af87ae1798a3e175affab7740fe6d8522932c251f5c76",
- "detectorDigest": "ff5f1fc45f6f202b39c6baa091f68a518c09317d195516ab415b24c075e02779",
- "verdictDigest": "3ff1623b79bbdca365c5a76b6278ef2b3c2d1e0e6a0cc2ef1ee6f2ab22018adf",
+ "shapesDigest": "0298ad483ea4603e997dae52e71471a44ab5a3e71e7fcd0ac7366a0c9e6dfba4",
+ "detectorDigest": "356d3b9c9dc7d2da453b8dc5b7d9331f8895d1384dff6f60cd02153d320edcb1",
+ "verdictDigest": "a5df7f1af67821fad1d9ae3e7ad7e3abdc1c002937d2ce416f80033cdb59cbd5",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,7 +73,7 @@
  ],
  "closureSizes": {
   "web-display": 767,
-  "web-transitive": 1001,
+  "web-transitive": 1002,
   "dossier-pdf": 513,
   "campaign-pdf": 144,
   "world-book": 159,
@@ -91,14 +91,14 @@
   "knownShapes": 536
  },
  "scanStats": {
-  "files": 1769,
-  "sites": 42418,
-  "propRead": 40173,
+  "files": 1770,
+  "sites": 42424,
+  "propRead": 40179,
   "elemRead": 0,
   "destructure": 2227,
   "inOp": 18,
   "rGrades": 6735,
-  "nGrades": 1770130,
+  "nGrades": 1770332,
   "resolvedReceivers": 7647
  },
  "registerDigest": "fc0fc44e0bd1a0d58bfb03caeee1ecd4c5c51037478b5b9a93a223a117943c8b",
@@ -697,7 +697,7 @@
    "identity": "chainContext on candidates",
    "key": "chainContext",
    "shape": "candidates",
-   "rows": 3776
+   "rows": 3778
   },
   {
    "identity": "clay on reasons",
@@ -1417,7 +1417,7 @@
    "identity": "deterministic on conflictResolution",
    "key": "deterministic",
    "shape": "conflictResolution",
-   "rows": 8518
+   "rows": 8583
   },
   {
    "identity": "discoveryAcc on resourceDynamics",
@@ -1435,7 +1435,7 @@
    "identity": "downstreamOf on candidates",
    "key": "downstreamOf",
    "shape": "candidates",
-   "rows": 3776
+   "rows": 3778
   },
   {
    "identity": "economic_strangulation on reasons",
@@ -1591,13 +1591,13 @@
    "identity": "exclusiveTags on candidates",
    "key": "exclusiveTags",
    "shape": "candidates",
-   "rows": 3776
+   "rows": 3778
   },
   {
    "identity": "exclusiveTags on conflictResolution",
    "key": "exclusiveTags",
    "shape": "conflictResolution",
-   "rows": 8518
+   "rows": 8583
   },
   {
    "identity": "exclusiveTags on majors",
@@ -1963,7 +1963,7 @@
    "identity": "gapKind on candidates",
    "key": "gapKind",
    "shape": "candidates",
-   "rows": 3776
+   "rows": 3778
   },
   {
    "identity": "gapKind on metadata",
@@ -2515,7 +2515,7 @@
    "identity": "lastTargetedBy on rivalPatch",
    "key": "lastTargetedBy",
    "shape": "rivalPatch",
-   "rows": 148
+   "rows": 147
   },
   {
    "identity": "lastTargetedTick on npcStates",
@@ -2557,7 +2557,7 @@
    "identity": "lastTargetedTick on rivalPatch",
    "key": "lastTargetedTick",
    "shape": "rivalPatch",
-   "rows": 148
+   "rows": 147
   },
   {
    "identity": "lawPreferences on factionStates",
@@ -5071,7 +5071,7 @@
    "identity": "populationConserved on candidates",
    "key": "populationConserved",
    "shape": "candidates",
-   "rows": 3776
+   "rows": 3778
   },
   {
    "identity": "powerBases on factionStates",
@@ -12019,6 +12019,7 @@
   "factionSeat on osr003:npc_craft_guilds_5_15": "dossier-pdf=N foundry=N web-transitive=N",
   "flaw on osr003:npc_craft_guilds_5_15": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "goal on osr003:npc_craft_guilds_5_15": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "goalHistory on osr003:npc_craft_guilds_5_15": "dossier-pdf=N foundry=N web-transitive=N",
   "goalProgress on osr003:npc_craft_guilds_5_15": "dossier-pdf=N foundry=N web-transitive=N",
   "ideal on osr003:npc_craft_guilds_5_15": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "influenceBasis on osr003:npc_craft_guilds_5_15": "dossier-pdf=N foundry=N web-transitive=N",
@@ -12653,7 +12654,6 @@
   "factionSeat on osr004:npc_guild_consortium": "dossier-pdf=N foundry=N web-transitive=N",
   "flaw on osr004:npc_guild_consortium": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "goal on osr004:npc_guild_consortium": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "goalHistory on osr004:npc_guild_consortium": "dossier-pdf=N foundry=N web-transitive=N",
   "goalProgress on osr004:npc_guild_consortium": "dossier-pdf=N foundry=N web-transitive=N",
   "ideal on osr004:npc_guild_consortium": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "influenceBasis on osr004:npc_guild_consortium": "dossier-pdf=N foundry=N web-transitive=N",

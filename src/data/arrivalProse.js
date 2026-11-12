@@ -352,7 +352,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   greek: [
     { text: () => 'Two citizens argue a point of law loudly enough for a crowd to gather.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.', excludes: ['crisis: occupied'], crisis: ['any'] },
-    { text: () => 'A money changer sits at his table with coins from many mints.', crisis: ['any'] },
+    { text: () => 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank'], crisis: ['any'] }, // COHERENCE-PRESUME: it printed in towns with no money changer
     { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', crisis: ['any'] },
   ],
   mixed: [

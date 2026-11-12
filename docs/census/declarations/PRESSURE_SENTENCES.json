@@ -978,10 +978,8 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.mass_migration(strongeconomy)[0]",
-          "text": "${name} is taking in more people than it was built for. The newcomers and the old residents share the streets and the market, but not a language, customs or trust, and ${govFaction} cannot keep up with how fast they come.",
-          "needs": [
-            "market"
-          ],
+          "text": "${name} is taking in more people than it was built for. The newcomers and the old residents share the same streets, but not a language, customs or trust, and ${govFaction} cannot keep up with how fast they come.",
+          "needs": [],
           "excludes": [],
           "crisis": [
             "mass_migration"

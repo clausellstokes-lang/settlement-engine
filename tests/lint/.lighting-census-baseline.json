@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "7ef6378f156513a4ecaef631fa1a753a83104ff8",
-  "measuredBy": "COHERENCE-AGREE-3",
+  "measuredAtSha": "8bb5e91bb41ab78ccb1c20a2175f7fa7c0b4567b",
+  "measuredBy": "STYLE-2-MERGE-8",
   "date": "2026-11-12",
-  "note": "COHERENCE-AGREE (lane/coherence-agree-2026-11-11): the lane added three test files (tests/generators/coherenceAgreeCures.test.js, tests/generators/projectionAgreement.test.js, tests/lint/defenceFactReaders.walker.test.js) and the titles of their tests, with the third seat's added titles (REVIEW-AGREE F15: the lane's own census row, re-taken by the lane)",
-  "files": 3202,
-  "parked": 398,
-  "credited": 2804,
+  "note": "STYLE-2-MERGE point 43 (the COHERENCE-PRESUME merge f922124d0): the line side taken, the census re-frozen over the composed tree (both lanes new test files)",
+  "files": 3205,
+  "parked": 397,
+  "credited": 2808,
   "titles": 29120,
   "suiteTitles": 7878
 }

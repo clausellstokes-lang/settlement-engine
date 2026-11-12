@@ -63,6 +63,16 @@
           "colour": true,
           "stop": []
         }
+      ],
+      "twins": [
+        {
+          "text": "Family accounts passed down from that time tell it this way: ",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "twinOf": "Families who lived through it tell it this way: ",
+          "why": "COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): past sixty years (TIME_BANDS: older than its bearers) no family lived through it; 40 hooks in 38 of the 360 corpus towns. Chosen by the event's age after the same roll."
+        }
       ]
     }
   ]

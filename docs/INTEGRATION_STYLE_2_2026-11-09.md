@@ -9,6 +9,8 @@ Line: `lane/integration-2026-11-07`, cut from base `bd07005b9`.
 
 **FIFTH HAND-BACK (STYLE-2-MERGE-5, session `session_01FbPLbeQvmDxrY7sAEune7V`, RULE 14 at ~430k context, at the point-27 boundary while the chair holds the line for VEIL-FIX): the commit that carries this line, after point 27. §1 carries points 25–27 (rows above row 17), with a dated correction to row 25 in row 27; §2c is the order remaining for the sixth seat; Appendix D quotes the fifth seat's helper.**
 
+**SEVENTH HAND-BACK (STYLE-2-MERGE-7, session `session_01FbPLbf9PtvYaSbTPWUnwoY`, by the chair's ruling of 2026-11-11 ~21:44 UTC at ~432k context, after points 38–41 and closing acts 1–7, at the chair's hold for points 42–44): the commit that carries this line. §2e is the hand-back for the eighth seat; Appendix F quotes the seventh seat's helpers.**
+
 This record is the hand-back under the chair's RULE 14 (19:3x and 19:4x). The closing acts below are not done. The record is unfinished until a later seat writes them; "THE STYLE WAVE IS IN" has not been said.
 
 **One departure the chair must see first.** RULE 14 said to stop after point 15. Its messages, and the STOP 5 ruling and the SW-8 notes, reached this seat only at 20:15, after a context compaction. Before that, SW-7 had already been merged, signed and pushed as point 16. The chair was told at 20:16, and this seat's default is to keep point 16. If the chair rules otherwise, revert by a new commit; never rewrite pushed history.
@@ -60,6 +62,8 @@ This record is the hand-back under the chair's RULE 14 (19:3x and 19:4x). The cl
 | 39 | GEN-SPEED (5efe58416, cut from 90774f2fa), reviewed CLEAR by the chair | 443d7060a | Three exact cures of repeated work in the generator (src/generators/npc/rosterFrame.js new; npcGenerator, representatives, defenseInstitutionBuckets), three work-count pins. No source conflict; the roster union `dated` 235 → 236; the engine bundle the line's side, then **re-emitted** (8b0ec9229): engineBundle sourceHash 64915a2d → 9f0680d5 (engineVersion 232c2d947f286973 → edb816caf413432c) and aiGroundingBundle 1b1be8c1 → 015da5f9, the rest restored. **0 ALL SIX, m38 → m39** (gm 525 rows 97936ac1, herald 446, prose 1050, witness 8, fence 360, PDF 18: moved 0, added 0, removed 0). **Merge acts:** mutationCoverageManifest TOTALITY red on GEN-SPEED's two new generator pins — each entered as a rationale naming a plant EXECUTED at the merge (rosterFrame's memory made unconditional reddens the masking bound, 54400 > the bound; representatives' facts planted back per-call reddens the roster-read bound, 24 > 8), restored and cmp-verified (8ad9aa39d); the wiring census re-taken, producerIndexFiles 1318 → 1319 (37c213af6); lighting the ritual, files 3192 → 3195, credited 2795 → 2798, titles 29066 → 29072, suite 7858 → 7861 (61b4f495a). Gate: build 0; boot PASS; strict 1113; typecheck 167; tests/scripts 166/166; governing 32 files 565 passed — red only edgeSharedBundleReproducibility's build window (the bundles' generatedAt spread, already over ten minutes at point 38: act 1) and the wiring census pair (cured by 37c213af6, 113/113 on the re-run); tests/lint the carried set plus the three cured here; `verify:dist`: first paint 1,121,260 / 357,222 / 299,940 (+16 raw), the worker 2,008,268 (**+518 B, GEN-SPEED's code**), landingFixtureFreshness ×2. |
 | 40 | CI-FIT (232f20cf9, cut from 5c4abaa95; three commits), proven in real CI by the chair (run 42808855501 on claude/ci-fit-2026-11-10: browser installs, build, Chromium and mobile e2e, Deno, coverage floors, the hostile-locale golden and the performance budgets green; red only the test ratchet and verify:dist on the named rows) | 4ca5cee57 | The two Playwright jobs pinned to ubuntu-24.04 in .github/workflows/ci.yml; `npm run build` carries its own heap (`node --max-old-space-size=4096 node_modules/vite/bin/vite.js build`), pinned by tests/build/buildHeapPinned.test.js. The one conflict the lighting census: the line's side, then the ritual (files 3195 → 3196, credited 2798 → 2799, titles 29072 → 29074, suite 7861 → 7862; the lane's one new file). **Merge act:** mutationCoverageManifest TOTALITY red on the new pin — entered as a rationale naming a plant EXECUTED at the merge (the build planted back to bare `vite build` reddens the heap arm), restored and cmp-verified. **A BARE `npm run build` (NODE_OPTIONS unset) EXITS 0 at this point** — proven once, the gate's own build line. No src change, so the six surfaces are not re-measured (m39 stands). Gate: build 0 (bare); boot PASS; strict 1113; typecheck 167; tests/scripts 166/166; governing 29 files (every test reading package.json or ci.yml, and the pin) 846 passed, red only the carried OSR ×5 and writer reach ×3; tests/lint the carried set plus the manifest row cured here; `verify:dist`: first paint 1,121,260 / 357,222 / 299,940, the worker 2,008,268 (unmoved from point 39), landingFixtureFreshness ×2. The heap NODE_OPTIONS of §5 is no longer needed for the build from here. |
 | 41 | FOUNDING-WORLDS (0e81b482e, which merges 7ab12183f), THE LAST POINT | 15c4afd75 | The three founding worlds regenerated with the final engine: the cards re-matched to their canonical seeds (Black Crag re-seeded to blackcrag-045), the card-promise pin (canonical seed and ≥ 19 of 20 forks), a sample fork forged at the card's own priorities (N5b, src/store/settlementGenerateAction.js), the landing fixture re-emitted through its door at 7ab12183f, `realm.body2` re-grounded (an OWNER VETO POINT) with its suite re-keyed. No conflict (the lane carried the roster union, `dated` 237); lighting the ritual, files 3196 → 3199, credited 2799 → 2802, titles 29074 → 29087, suite 7862 → 7865 (the chair's +3/+13). **0 ALL SIX, m39 → m41.** **Merge act:** proseDrawnAnchors red on one NEW row, foundingWorldBones:82, the card's tag "Religious authority" aligned at 19 fixed chars against DS-STR-2 temple_putsch vid 3 — carried as a false positive with its reason, 95f31f192's precedent. **landingFixtureFreshness ×2 CURED.** Gate: build 0 (bare); boot PASS; strict 1113; typecheck 167; tests/scripts 166/166; governing 44 files 511 passed, red only the worker's ceiling; tests/lint only the closing acts' set (headline A2/A3, proseFamily ×3, R6, OSR ×5, writer reach ×3) after the anchor row; `verify:dist` ONLY the byte ceilings: first paint 1,121,260 / 357,225 / 299,985, the worker 2,008,268. THE FINAL TIP for the closing acts: the commit carrying this row. |
+| 42 | COHERENCE-QUARREL (1c7b5786c, nine commits over 99bcc6944), the coherence wave's first point (STYLE-2-MERGE-8) | d4723749a | The quarrels' issue table widened and cast-declared (power/conflictIssues.js), one hook per quarrel from the issue's own hooks, the touched power named in the description, the smuggling safety hook's four tellings; the guard `node scripts/census/pool-dominance.mjs` + shrink-only register + door tests/lint/poolDominance.walker.test.js. No conflict (the lane's base is the line's code tip). **RECORD 42 SIGNED** (`docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json`, from the lane's draft; `predictedRows` written in the door's unit, 525 / 1 constant, record 17's form): stage m41 (decc7bf15) reproduces 97936ac1 and 291c7695; m41 → m42 **gm 476/525** (thorp 72, hamlet 84, village 84, town 68, city 84, metropolis 84) 97936ac1 → 6f8317a8, the draft's 476 EXACTLY (522cee293); **fence 242/360** 291c7695 → 152defbd, 360/360 distinct (ce2262b03); FIELD-DIFFED both (Appendix G `dump.mjs`/`fdiff.mjs`): only conflicts[] and powerStructure.conflicts[] issue/stakes/desc/plotHooks and economicState.safetyProfile.plotHooks[] (gm 476/475/86, fence 242/240/69), every fence arm green (dormant); herald 0, witness 0, PDF 0; **prose 828/1,050** = the draft's, per-cell 1,254 cells moved, 0 added/removed, ALL block DS-GEN-2 (the standing quarrel's intensity), for closing act 2. Draft retired, roster `tree` 175 → 176 (50b532b54). **Digest pins re-keyed by identity** (8fbc1a8cd; each file's own loop as an untracked probe, twice equal; base all green): x46NpcBand 38/60, institutionBudgetPromise 37/60, editWorldFactResources A2/A6 rows 0, 42 (the pre-EM-B2b2 plant = the live step), editCorpusRatchet A7 E6 2015 → 2016; worldFactRederive A7 in the signing act; the draft's other names green unchanged. **STOP 42** (the phone floor, outside the named classes): dossierPhoneFloorAllViews MOBILE/DESKTOP_BASELINE, Summary/Plot Hooks 89 → 87 at the fixed seed, the lane's leaf; ruled a re-key, done b25930ca8 — the class's three checks: (1) only Summary/Plot Hooks moved, the view printing conflicts[].plotHooks; (2) sub-floor 0 in every view, mobile and desktop; (3) down, as one hook a quarrel implies (now a NAMED CLASS, §3). Doors: wiring census --check, state prose --check, writer reach plain (HOLD 12223, no `--write`, bank 1359), OSR exit 0, **pool-dominance exit 0, register unchanged**; lighting the lane's refreeze stands (the tree = the lane's tip + docs). **Equal-failing-set:** base decc7bf15 full suite 3,191 files, **38,718 passed, 0 failed**, 129 skipped (THE WAVE'S ZERO); merge 50b532b54 full suite 8 failed = 5 draft pins (cured 8fbc1a8cd) + phone floor ×2 (cured b25930ca8) + the prose DRIFT arm ×1 (closing act 2). Gate: build 0 (bare); boot 0; strict 0; typecheck 0; `verify:dist` only the byte ceilings: worker 2,023,178 > 2,008,268, vendorPdfLazy engine chunk 737,587 vs 726,454 (closing act 7). |
+| 43 | COHERENCE-PRESUME (02c5f8fbd, forty-two commits over 99bcc6944; both seats) | f922124d0 | A line names a thing the town does not have: the presumed-things walker + shrink-only register, the cures across the generators' text, the institution kind `bank` as vocabulary. Conflicts only in registers and bundles (no `src/`): taken from the line and re-run — wiring census re-taken at the merge (`--check` 0), the edge bundles re-emitted all six from one run (8bb5e91bb: engine 856717fa → c0c432e9, aiCharter, aiGrounding, aiOutputSchema), lighting the ritual (3e156f7ba: files 3202 → 3205, credited 2805 → 2808, titles 29098 → 29120, suite 7869 → 7878 = base + QUARREL + PRESUME exactly); the compendium regenerates byte-equal; state prose `--check` 0. **STOP 43a (pool-dominance red on the merged tree)** ruled option (a), bounded (a2ff6e9c2): 862 → 859 rows — three left (ARRIVAL_SENSES.brewers.dominant and CULTURE_PROFILES.east_asian.architecturalDetails, one-draw pools gone dark; institutionDescVariants town|Crafts|Bowyers & fletchers (guild), 72 draws at 42, off the ledger since 12e94a139 retired its one declared line's `needs: militia`, PLAUSIBLE), ten tightened, FIVE RE-BANKED UPWARD at the merged measure (§2f's list; each ≤ 2 draws, the pools' lines or the arrival draw upstream in the lane's src/data/arrivalProse.js and src/data/cultureProfiles.js; genuine_respect via the re-titled watch role 9e4e0402a, src/generators/factionRoles.js). Guard exit 0. **OSR** re-minted on the clean tree (c76bd8a98: the compendium input; frozen 2194/1532/434, bank 78/52 unchanged). **Writer reach**: plain HOLD (corpusMeta equal) but the walker pins shapesDigest, which only `--write` rewrites — written (be397ae61): cohort 1359 → 1359, 0 folded, 0 lit (the form ruled for later points, §2f). **presumedThings**: QUARREL's cured rows left (dcf276e7d: arm 1 docks/market/mercenary, arm 2 all eight); **STOP 43b**, the one row QUARREL MOVED, "Church land claims on guild property", re-keyed by identity conflicts.js → conflictIssues.js (b1e78d514; its `cast` (a religious party) licenses the church in a way the walker does not read — charged to the second wave, §2f). other-lane rows left: arm 2 seven (all AGREE's), arm 1 seventy-seven (AGREE's files) + the one QUARREL row. Walker green. **Wizard News homes 44 → 43**: `applied|npc_mobilize` left at PRESUME's 9e4e0402a (bisected: present at 1bf819954) — declared; the news contracts stay red for act 4 and the loss is listed (§2f). **RECORD 43 SIGNED** (`docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json`; law 2's SECOND CASE, the measured figures; the draft's `odqRow` re-cited to §934.105, the door refused the draft's form): m42 → m43 **gm 505/525** (thorp 78, hamlet 84, village 84, town 105, city 76, metropolis 78) 6f8317a8 → 083542bb (a9f104873); **fence 353/360** 152defbd → 38a52b05, 360/360 distinct, every arm green (d82a5e9ca); the fork census control c876f033 → 4c561fca in the same act; FIELD-DIFFED: text leaves only, each a component the cause names (the record lists them); herald 0, witness 0, PDF 0; **prose 174/1,050** = the lane's figure, 178 cells (DS-GEN-16 100, DS-GEN-9 78), for act 2. Draft retired, roster `tree` 176 → 177 (2adc1d122). **Digest pins re-keyed by identity** (a0460b1ad; probes twice equal, the EM-B2b2 plant = live): x46 56/60, institutionBudget 56/60, editWorldFactResources rows 0, 21, 42, editCorpusRatchet A3 329 → 330, A7 [670, 281, 2016] → [682, 325, 2062] and the masked role reach [59, 0, 0] → [71, 0, 0]; the phone floor unmoved. **Equal-failing-set** (full suite at 2adc1d122: 14 titles + 2 files failed at load): cured at the point — pins ×6 (a0460b1ad), presumedThings ×2 (b1e78d514); the named classes — prose DRIFT ×1 (act 2), proseFamilyContract A1/A3/A5 and the news contracts ×2 files at load (act 4, content totality), landingFixtureFreshness ×2. Gate: build 0 (bare); boot 0; strict 0; typecheck 0; `verify:dist` only the byte ceilings (worker 2,022,860 > 2,008,268; first paint 1,121,267 / gzip 357,241 over 1,121,260 / 357,225; vendorPdfLazy engine chunk 738,343 vs 726,454) and landingFixtureFreshness ×2. |
 | 17 | SW-B1 CONTRADICTIONS (8c650338d) | 0f2cb865c | factionStanding.js composed line by line. Record 17: gm 464 (→21b50e30), field-diffed: `factions[].desc` 447 + `foodBalance.importChannel` 29, string leaves only. Fence 272 (→03fc50e3). Fork control 3e522ac1→003d51a5. Prose 72 (final tip). Cures: e49d89d27 (it.each → loops), 77c4f4238 (SW-B2's pool removal composed), 1028367f8 (anchors), 6b84bfa3a (five any-holes typed), 53265aa92 (three files enrolled in the mutation manifest), c35ee987b (a message that aligned with DS-GEN-3). Governing 71 files: 8 red, all base or golden-tied (green after signing). tests/lint has only the carried OSR ×3; tests/scripts is green. |
 
 Point 16 (SW-7) in detail:
@@ -229,6 +233,105 @@ The act-9 reading at the held tip, kept for comparison:
 
 **The sixth seat's helpers** are Appendices A–D's with the seat constants set to STYLE-2-MERGE-6 and the worktree `/home/user/wt-merge6` (`/home/user/rec6/`), plus `gate2.sh`/`gate3.sh` (Appendix E).
 
+## 2e. THE SEVENTH HAND-BACK, BY FILE (STYLE-2-MERGE-7, session `session_01FbPLbf9PtvYaSbTPWUnwoY`; the chair's ruling of 2026-11-11 ~21:44 UTC: an EIGHTH SEAT takes the line for points 42–44 and FOUNDING-WORLDS again)
+
+**The line at hand-back:** 99bcc6944 (code tip 7dc7757fa + the §2d state note), pushed, clean. The seventh seat merged points 38–41 (rows above), then ran closing acts 1–7 at the then-final tip 2cbe72ca1, measured act 9, and started act 10; the chair HELD the acts at ~21:36 UTC because the owner ordered an outside critique of the generator fixed before release (lanes PRESUME, AGREE, QUARREL — `docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md` on `lane/chair-2026-11-08`; each lane drafts ONE shift record and regenerates the edge bundles as its own last commit). Every helper named below is quoted whole in Appendix F; they lived in `/home/user/rec7/` beside the worktree `/home/user/wt-merge7`, which die with the container — recreate them from the quotes (set your own seat/session constants and paths).
+
+### 2e.1 The ten acts at 99bcc6944, and whether each re-runs after points 42–44 and FOUNDING-WORLDS again
+
+| act | state at 99bcc6944 | re-run? | why | the exact command or door (as run) |
+|---|---|---|---|---|
+| 1 edge bundles | DONE a3ea0d325 (no sourceHash moved since point 39; ALL six metas kept from one run so their `generatedAt` share one ≤ 10-min window — that, not the restore loop, is what cures edgeSharedBundleReproducibility) | **YES**, once, after FOUNDING-WORLDS (the last src change) | each lane re-emits its own bundles, but a merged tree's inputs differ from any lane's; the window test needs one run | `npm run build:edge-shared`, then commit ALL six `supabase/functions/_shared/*Bundle.{js,meta.json}` (do NOT restore unmoved ones: the window red returns); proof `sh scripts/gate-tail.sh npx vitest run tests/edgeFunctions` (950/950 at 2cbe72ca1) |
+| 2 prose manifest | DONE ce412bbb2 (provenance) + df1ebd4bd (the act, record `docs/shift-records/2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json`, roster `tree` 174 → 175): 083c8dd7 → 3b9ee8b6, 1,050/1,050 rows | **YES** if any new point moves a cell (the lanes move generated prose: expect yes) | signed once at the final tip | Per-cell tables at every merge point (Appendix F `cell1.sh`, `cellattr.py`) for the attribution, then the stage + door: `sh scripts/audit/landing-stage.sh build <tip> /home/user/stages/sN`; write the record + the MANIFEST_PROVENANCE sentence in the stage (`act2.py`), commit both in the stage; `node scripts/audit/landing-act.mjs run <cfg>`; restate in the stage by hand `tests/property/dossierProseManifest.test.js` (the DRIFT tally, e.g. 73,469 → 73,397) and `tests/domain/worldFactRederive.test.js` A7 (the manifest sha); `sh scripts/audit/landing-stage.sh suites <stage>` (52 files / 473 green) ; `node scripts/audit/landing-act.mjs transplant <cfg>`. ⚠ With `provenance: true` the transplant does NOT commit the record JSON (its `i === 0` branch is consumed by the provenance commit): copy the record from the stage, run `tree.py`, and amend it into the act's commit before pushing (done at df1ebd4bd). |
+| 3 style baseline | DONE 647bc3bb7: 0 rises, 0 refused, 0 falls; restamp only (scannedFiles 1115 → 1117) | **YES** (the lanes write prose; a fall must be banked, a rise is a STOP) | the walker's baseline is per-file counts | `node scripts/lib/style-law-scan.mjs` (read the rises/falls line FIRST), then `node scripts/lib/style-law-scan.mjs --record`; proof `npx vitest run tests/lint/styleLaw.walker.test.js` (20/20) |
+| 4 content-totality contracts | DONE b1318ee96: headline A2 43/86/602/790 → 44/88/623/790 and A3 (selected 97 → 103 at point 18; mechanical 50/25 → 51/26 at point 36); prose families 64/1328/5533 → 64/1362/5402, scalarRows 37645 → 37067, bytes 8404 → 8408, digest → 3198eb2f; R6 1,662 → 1,830 rows (pools 1,104) | **YES** — certainly headline and prose families (the lanes change pulse/news/quarrel text and the corpus) | the contracts freeze the corpus totals | measure through the walkers' own functions: Appendix F `hl-measure.mjs` (writes `<out>.json` = headline rows/sha/raw and `<out>.pf.json` = prose-family corpus/totals/rows/sha) run at the final tip and, for attribution, at each new point's merge and first parent via `hl-at.sh` (`TREE=<worktree> node hl-measure.mjs <out.json>`; `PFLIB=/home/user/wt-merge7/` forces the tip's prose-family library). Then write: `tests/lint/.news-headline-contract-baseline.json` (addressTotality rows/rowsSha256/totals, rewriteLiveness.raw), `scripts/lib/news-headline-contract.mjs` (ADDRESS_TOTALS, RAW_LIVENESS lanes and union — dated comment per cause), the walker's A2 totals literal; `tests/lint/.prose-family-contract-baseline.json` (corpus, familyTotals, rows, rowsSha256, totals), `scripts/lib/prose-family-contract.mjs` (EXPECTED_CORPUS.scalarRows, EXPECTED_FAMILY_TOTALS pulseHistory, EXPECTED_TOTALS, EXPECTED_ROWS_BYTES, EXPECTED_ROWS_SHA256 + the RE-RECORDED comment), the walker's A3 digest literal (line ~205), its counterfeit totals (= totals − chronicle's 7/7/7), A5's pulseHistory total and the three headline pins; R6's two counts in `tests/lint/proseRegisterLoaders.walker.test.js` (measure with a temporary `expect([c.rows,c.pools,c.distinct]).toEqual('M')`, restore). Proof: `sh scripts/gate-tail.sh npx vitest run tests/lint/proseFamilyContract.walker.test.js tests/lint/newsHeadlineContract.walker.test.js tests/lint/newsVoiceContract.walker.test.js tests/lint/proseRegisterLoaders.walker.test.js` (37/37). If a home arrives or leaves, the news-VOICE contract's CORPUS (`scripts/lib/news-voice-contract.mjs` + `.news-voice-baseline.json`) moves too (RESIDUE's 08e6a4be7 is the form). |
+| 5 OSR rungs + writer reach | DONE 0821e441f, d8d7ceee4 (schema 40), 75dd3fc17, 3350c7b18 (schema 41; `played-worlds-writer` admitted, first entry `outcome on outcome`, convergence.js); frozen 2194 / 1532 / 434, bank 78/52; writer reach plain check exit 0 (HOLD, judged 12223; corpusMeta 14782 / 1740 equal), no `--write`, bank 1359 | **YES** if any reader/writer shape or the corpus moves (new tests under tests/lint and new pools: expect yes) — the rung is now 41, so new drift is an ordinary `--write` UNLESS a NEW row needs a declaration (then a rung 42 with its own act 1) | the register is frozen per identity; writer reach shares its corpusMeta | First `node scripts/check-observed-shape-readers.mjs` (gate). If inputs-only drift: on a clean committed tree `node scripts/check-observed-shape-readers.mjs --write`. If it refuses for a schema reason, the governed ritual as run for rungs 40/41 (argv reconstructed from the scripts' usage and the scratch file names; the exact argv was not logged): (1) `node scripts/check-observed-shape-readers.mjs --scan-only --scan-mode=legacy-leaf --json=<ext>/scan.json`; (2) `node scripts/migrate-observed-shape-readers.mjs --predecessor=<copy of the committed baseline> --legacy=<ext>/scan.json --target-schema=<N> --json=<ext>/report.json --review-template=<ext>/template.json`; (3) a scratch builder that REFUSES unless the reconciliation is exactly the expected rows (Appendix F `build-review40.mjs` / `build-review41.mjs`), `node build-reviewN.mjs report.json template.json review.json`; (4) the migrate script again with `--review=review.json --bundle=bundle.json` in place of `--json/--review-template`; (5) `node scripts/check-observed-shape-readers.mjs --write --migrate-schema=<N> --migration-review=<bundle.json>`. ⚠ The transition's delta law (`PUBLIC_PROSE_SCANNER_DELTA_PATHS`) names the exact files allowed to move: the rung-40 run refused until `package.json` (CI-FIT 001fc7e00) was added (0821e441f, for the chair's review). Then `node scripts/check-writer-reach.mjs` (plain); only if corpusMeta differs, `node scripts/check-writer-reach.mjs --write` (the bank must stay 1359, else STOP). Proof: `sh scripts/gate-tail.sh npx vitest run tests/lint/observedShapeReaders.walker.test.js tests/lint/observedShapeBaseline.test.js tests/lint/observedShapeMigration.test.js tests/lint/observedShapeSentinel.test.js tests/lint/observedShapeCorpus.graph.test.js tests/lint/writerReach.walker.test.js` (227/227 at 3350c7b18). |
+| 6 STOP 2's leftover | DONE 0b3b79a79: membership alone 103/109 = 0.945; the phrase path dropped | **RE-CHECK only** | if a lane changes the guard assessment the 0.9 bar must still hold by membership | `sh scripts/gate-tail.sh npx vitest run tests/components/defenseNoWatchNoGuards.test.jsx` (2/2) |
+| 7 byte ceilings | DONE 7dc7757fa: first paint 1,104,215 / 351,590 / 295,016 → 1,121,260 / 357,225 / 299,985; worker 1,976,655 → 2,008,268 (every byte by point, the note at each constant) | **YES**, once, at the new final tip | the lanes add code to first paint and the worker | §2e.3's sweep: extend the per-point lists with the new merge commits only (the 47 measured trees stand; their JSON is in this record's notes at the constants), then rewrite the four constants AND the ARCH car 2 pin (`tests/build/vendorPdfLazy.test.js` "the raw, gzip and Brotli closure budgets are unmoved", three `toBe`s) — forgetting that pin reds tests/build. Proof: `VERIFY_DIST=1 sh scripts/gate-tail.sh npx vitest run tests/build` after a build of the tip (601 passed, 1 skipped at 7dc7757fa). |
+| 8 type residue | none at 7dc7757fa (proof steps 12–13 exit 0: 167, 1113) | **YES** (a check) | lanes may add JS that the ratchets read | `sh scripts/gate-tail.sh npm run typecheck:ratchet`; `sh scripts/gate-tail.sh npm run typecheck:domain:strict` |
+| 9 the 1,000 | MEASURED, not committed (§2e.2) | **YES**, at the final tip (and the base needs no re-run: its outputs are below) | it reads generated text | §2e.2 |
+| 10 closing proof | STARTED at 7dc7757fa in a clean worktree and STOPPED by the hold: steps 1–14 exit 0; 15–17 not run | **YES**, whole, last | — | §2e.4 |
+
+### 2e.2 The 1,000 (act 9), exactly as produced
+
+- Tip: a clean worktree at b1318ee96 (every src byte of the final tip 2cbe72ca1), `node_modules` symlinked: `node scripts/audit/soak-review.mjs --count 1000 --workers 2 --out /home/user/stages/soak1000` → "done in 342s: 1000 settlements, 310 findings, 0 errors · CLIMB".
+- Base: a clean worktree at bd07005b9 (the style wave's base), the same command with `--out /home/user/stages/soak1000-base` → "657 findings, 0 errors · CLIMB" (the base's recorded 657 reproduced). Both outputs died with the container; the base re-run costs ~6 min.
+- The figures (read with small Python over the outputs): findings by class from `aggregates/finding-classes.json` (`check` → `settlements`; the only moving class `info:battery-would-not-vouch` 653 → 306; `coh:tier-noun` absent = 0 at both); the frames gate from `aggregates/repetition-prose.json` → `top` (each `{skeleton, towns}`): take the BASE's first twenty, look each skeleton up in the tip's `top` (absent = 0), a rise is tip > base — 0 rises; the five governance skeletons are the tip entrants matching `governed by|right to rule|cost (the @|it) its standing` at 325 / 302 / 290 / 242 / 234; the retired word and "rather than" by `grep -oiE '\bfactions?\b'` / `grep -oi 'rather than'` over the sixty `sample/*.txt` (1,386 → 28, every one the institution key "Multiple criminal factions", SW-8's record line 250; 263 → 64); the §8 floor by `tests/domain/crisis/crisisSummaryVantage.test.js` (6/6). The full reading is kept in §2d.
+
+### 2e.3 Act 7's sweep
+
+Appendix F `dist1.sh` (one tree: a detached worktree, `node_modules` symlinked, BOOT-TIP's FIRSTPAINT-4 cure 59258e7ea cherry-picked when the tree predates it, `node --max-old-space-size=4096 node_modules/vite/bin/vite.js build`, then `distm.mjs` = the vendorPdfLazy method: the entry's static closure raw / gzip -9 / Brotli q11, and every `generation.worker-*.js` byte size) driven by `xargs -P 2 -n 1 sh dist1.sh < distpts.txt` where distpts.txt = bd07005b9 then `git log --first-parent --merges --format=%h --abbrev=9 bd07005b9..<tip> | tac` (~2.5 min a tree at P=2). The control: the base reproduces 1,104,215 and 1,976,655 exactly; BOOT-TIP's own merge reads +0 raw (the cure applied = the cure merged). The deltas are point-to-point between merge commits (between-merge commits fold into the next point; 0 were seen). For the re-record at the new tip only the new merge commits need building.
+
+### 2e.4 Act 10, the seventeen steps (`npm run check`, each run alone through `env -u NODE_OPTIONS sh scripts/gate-tail.sh npm run <step>` in a fresh `git worktree` + `npm ci`; Appendix F `proof.sh`)
+
+1 validate:hazard-registry · 2 validate:premortem · 3 validate:packets · 4 validate:data · 5 validate:custom-content-manifest · 6 validate:migration-head · 7 validate:edge · 8 validate:map · 9 validate:tuning-bands · 10 validate:foundry-module · 11 validate:mcp-server · 12 typecheck:ratchet · 13 typecheck:domain:strict · 14 lint — **all fourteen exit 0 at 7dc7757fa** (npm ci exit 0, porcelain 0). 15 test:ratchet · 16 build · 17 verify:dist — NOT RUN. Expected at 7dc7757fa: 15 green with the one admitted skip (`customContentLockOrder.postgres` without its database URL) once the ledger branch is a local ref (`git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` — without it provenanceMap and ledgerCitationIntegrity fail, environment, proven at point 38); 16 exit 0 with NO heap flag (CI-FIT's script heap); 17 green (the ceilings re-recorded; landingFixtureFreshness fresh since point 41). Every closing-act red of §2d was cured at 2cbe72ca1's acts and re-proved per act; the whole-suite run is the step that was not reached.
+
+### 2e.5 Signing a lane's DRAFTED shift record at its merge point (point 38's form), and a point's own gate
+
+1. Merge the lane (`git merge --no-ff --no-commit origin/<lane>`), resolve, commit the merge (its hash names the record).
+2. Fill the draft's `seat` and replace its `[MERGE SEAT: …]` marker in `cause` with the merge commit; write it to `docs/shift-records/<date>-style-2-merge-<n>-<slug>.json` (house name form). Keep the lane's DRAFT file in the tree until the door has run (the door refuses a dirty tree: deleting the draft first gave "REFUSED [DIRTY_TREE]"); the new record may be untracked.
+3. `GOLDEN_SHIFT_SIGNED=docs/shift-records/<file> UPDATE_GOLDEN=1 npx vitest run <the surface's suite>` — fails BY DESIGN with "golden RE-RECORDED through the signed door … sha256 A -> B; rows m -> n"; it must read the lane's predicted figures exactly, else STOP.
+4. Restate by hand what the door's write moves (point 38: the herald suite's `toHaveLength(442)` → 446 with its dated comment); `git rm` the draft; `python3 tree.py <n> <record> <LANE>` (the record joins the roster's `tree` class, else sourceCitationIntegrity reds "the archival roster moved"); plain run of the suite + `tests/lint/goldenFreeze.walker.test.js` + `tests/lint/sourceCitationIntegrity.walker.test.js`; commit with `Owner-Signed: §934.105` and the seat trailer (44d4f68e1 is the form).
+- **A point's gate** (Appendix F `gate.sh <n> <govfile> [vd]`, background, timeout 7200000): build, `node scripts/boot-smoke.mjs`, strict (1113), `typecheck:ratchet` (167), `npx vitest run --maxWorkers=2 tests/lint`, `tests/scripts`, the governing files (every test naming a changed src module by basename + the lane's own tests + `tests/property/generatorGoldenMaster.test.js` + `tests/lint/mutationCoverageManifest.test.js`), `npm run verify:dist`. Then the six surfaces: `sh scripts/audit/landing-stage.sh build <tip> /home/user/stages/sN && sh scripts/audit/landing-stage.sh measure /home/user/stages/sN /home/user/stages/mN /home/user/stages/m<prev>` — the m41 measurement died with the container: rebuild it by staging 2cbe72ca1 (0 on all six from m39 to m41). Run the lighting walker first; the census almost always moves (a new test file).
+
+### 2e.6 What the next seat must not rediscover
+
+- **The roster** (`tests/lint/.source-citation-baseline.json` + the walker header): a lane's `dated` +1 composes with the line's as a union, `dated` = ours + 1 (Appendix F `roster.py`; its note line needs a trailing comma when the conflict is mid-object — fixed). When a lane already merged the line's tip (FOUNDING-WORLDS did), there is no conflict and its own +1 stands. Every new shift record = `tree.py` (+1 `tree`). At hand-back: `dated` 237, `tree` 175.
+- **The lighting census** (`tests/lint/.lighting-census-baseline.json`): take the LINE's side, then on a committed tree `LIGHTING_CENSUS_REFREEZE='<seat>' LIGHTING_CENSUS_NOTE='<cause>' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` (it fails by design), commit, plain re-run green. At hand-back: files 3199, credited 2802, titles 29087, suite 7865.
+- **The mutation-coverage manifest** (`scripts/mutation-coverage-manifest.json`): every NEW invariant test file a lane adds needs an entry, or `tests/lint/mutationCoverageManifest.test.js` TOTALITY reds. Lanes forget (GEN-SPEED ×2, CI-FIT ×1). Form: break the guarded code in place (copy first), run the pin, see the named arm red, restore from the copy, `cmp`, then a `kind: 'rationale'` entry quoting the red (8ad9aa39d at point 39, 7985fc779 at point 40).
+- **The wiring census** moves with every new `src/` module (`node scripts/wiring-census.mjs` then `--check`; producerIndexFiles at hand-back 1319).
+- **proseDrawnAnchors**: a lane's test literal that aligns ≥ 18 fixed chars against a state-prose variant reds as a NEW anchor; if it is the card's/data's own words (not drawn prose), carry it in `FROZEN_LITERAL_ANCHORS` with its reason (95f31f192, and point 41's foundingWorldBones:82).
+- **The edge bundles**: never hand-merge; take either side, `npm run build:edge-shared`, and at the END keep all six metas from one run (the window test).
+- **The ledger ref**: `git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` before any tests/scripts or test:ratchet run.
+- **Heap**: since point 40 `npm run build` carries 4096 itself; the dist sweep and stage builds call vite with the same flag.
+- **Never** run a door on a dirty tree; never read a gate through a pipe (`sh scripts/gate-tail.sh …`); push with `git push --no-verify origin HEAD:lane/integration-2026-11-07` after `git fetch` + `git merge-base --is-ancestor origin/<line> HEAD`.
+
+## 2f. THE EIGHTH SEAT'S HAND-BACK, BY FILE (STYLE-2-MERGE-8, session `session_01FbPLbc1CCoAMzKt2ScvNSk`; kept current at every point)
+
+**The line:** after point 43 the tip is the commit carrying this section (code as at a0460b1ad; point 42's code b25930ca8). Every helper named here is quoted whole in Appendix G; they live in `/home/user/rec8/` beside the worktree `/home/user/wt-merge8` (and die with the container).
+
+**THE WAVE'S ZERO:** the full suite at the base decc7bf15 is **3,191 files, 38,718 passed, 0 failed, 129 skipped** (`npx vitest run --maxWorkers=2 --reporter=dot --reporter=json --outputFile=<f>` in a detached worktree, node_modules symlinked, ledger ref fetched; ~100 min under load; Appendix G `failset.py <json>` lists the failing titles). Every red after a point is cured at the point or is one of the closing acts' classes.
+
+**Per point, as run at 42 (the order that worked):**
+1. `git merge --no-ff --no-commit origin/<lane>`; commit with the seat trailer.
+2. Doors: on a conflict take the LINE's side of every register/bundle (`git checkout --ours`), commit the merge, then re-run each door. `node scripts/wiring-census.mjs` (then `--check`), `node scripts/generate-dossier-state-prose.mjs --check`, `node scripts/generate-compendium-data.mjs` (cmp the committed file), `npm run build:edge-shared` (keep ALL six metas from the one run: the window), the lighting ritual on the committed tree (§2e.6), `node scripts/check-observed-shape-readers.mjs` (input drift → `--write` on the clean tree), writer reach (below), every guard a merged lane brings: `node scripts/census/pool-dominance.mjs` exit 0 (its rises by STOP 43a's class, §3) and `npx vitest run tests/lint/presumedThings.walker.test.js` (its rows by STOP 43b's law).
+   - **Writer reach, the ruled form (point 43):** the plain check compares counts (corpusMeta) only; the walker `tests/lint/writerReach.walker.test.js` ALSO pins the frozen `shapesDigest`, which only `--write` rewrites. When the walker reds on shapesDigest/surfaceReach/lit-dial with corpusMeta equal, run `node scripts/check-writer-reach.mjs --write` on the clean tree: accepted when it prints `cohort 1359 → 1359; 0 stale folded out; 0 registered rows now lit`; any other cohort is a STOP.
+   - **A door refuses a draft's `odqRow` that does not name a § row** (PRESUME's): re-cite it to `§934.105 of docs/OWNER_DECISION_QUEUE.md (…)` keeping the draft's words in the parenthesis.
+3. Stage the line's previous tip AND the merge (`sh scripts/audit/landing-stage.sh build <sha> /home/user/stages/sN`), `measure` the first alone (it must reproduce the register's gm sha and the fence constant: the control), then `measure sN mN m<prev>`.
+4. FIELD-DIFF gm and fence (Appendix G `dump.mjs <stage> gm|fence <out>` at both stages, then `fdiff.mjs a b`): every moved leaf must be a leaf the lane's draft declares; else STOP. (A merged lane's own base differs from the line's from point 43 on: law 2's second case — sign with the measured figures.)
+5. Sign (§2e.5, landing-act): write the record INTO THE STAGE from the draft (fill `seat`, the merge sha in `cause`, measured figures; `predictedRows` in the DOOR's unit: 525 for gm, 1 for the fence's in-file constant — a draft's moved-row figure would REFUSE as a prediction miss), commit in the stage; write `<scratch>/fence-block-<n>.txt` (the movement block; the last was THE HUNDRED-AND-SEVENTH); `node scripts/audit/landing-act.mjs run <cfg>`; restate by hand in the stage the gm suite's SHIFT RECORD row and worldFactRederive A7's sha (+ the fork census control if row 21 moves); `landing-stage.sh suites <stage>`; `transplant` (cfg `extraPaths: ['tests/domain/worldFactRederive.test.js']` on the gm surface). Then `git rm` the draft, `python3 tree.py <n> <record> <LANE>`, plain run, commit `Owner-Signed: §934.105`.
+6. The draft's red pins: run `pins.txt` (+ the phone floor) at the signed goldens; re-capture x46 / institutionBudget / editWorldFactResources by Appendix G `probe.py` in a detached probe worktree (twice equal; the EM-B2b2 plant `git show 12c437de4:src/generators/steps/resolveResources.js`, sha 62e16d59, must equal live), write them with `rekey.py <probe-dir> <n> <merge> <LANE> <record> <cause>`; editCorpusRatchet's figures by hand, one at a time — each re-key can UNMASK the next expect (at 43: A3, then A7, then the role reach behind it).
+7. Prose: `cell1.sh <prev tip>`, `cell1.sh <merge>`, `cellattr.py a b` — the per-cell table for closing act 2 (NOT signed per point).
+8. The merged-tree full suite in a separate detached worktree at the signed commit (`/home/user/wt-mNN`), compared with the zero by class; the build lines by Appendix G `gatelite.sh` (build bare, boot, strict, typecheck, verify:dist). ⚠ `verify:dist` goes through `gate-mutex.sh`: it GIVES UP (exit 3) while any vitest runs; run it after the suites.
+9. Record row in §1, this section, push.
+
+**Where things stand after point 43 (the closing acts' classes, carried):** the prose DRIFT arm (42: 828 rows, 1,254 cells, all DS-GEN-2; 43: 174 rows, 178 cells, DS-GEN-16 100 + DS-GEN-9 78; the per-cell JSONs at `/home/user/stages/cells/`); proseFamilyContract A1/A3/A5 and the two Wizard News contracts failing at load (homes 44 → 43) — act 4; landingFixtureFreshness ×2 (FOUNDING-WORLDS re-runs it); the byte ceilings (worker 2,022,860 vs 2,008,268; first paint 1,121,267 / gzip 357,241 vs 1,121,260 / 357,225; vendorPdfLazy engine chunk 738,343 vs 726,454). The stage measurements m41, m42, m43 live at `/home/user/stages/m4N` (m43 = the next point's previous).
+
+**POOLS RE-BANKED UPWARD AT A MERGE POINT** (the second wave, the pools lane, brings each back under its ORIGINAL ceiling by writing the missing lines, or justifies it one by one):
+
+| pool | measure | original ceiling → re-banked | draws before → after | point (commit) | the lane's reach |
+|---|---|---|---|---|---|
+| ledger:ARRIVAL_PEOPLE.greek | top1 | 0.3449 → 0.4138 | 10/29 → 12/29 | 43 (a2ff6e9c2) | src/data/arrivalProse.js, the arrival scene's redraw |
+| ledger:ARRIVAL_SENSES.cloth.dominant | top1 | 0.3726 → 0.3922 | 19/51 → 20/51 | 43 (a2ff6e9c2) | src/data/arrivalProse.js |
+| ledger:ARRIVAL_SENSES.faith.dominant | top1 | 0.5527 → 0.5676 | 21/38 → 21/37 | 43 (a2ff6e9c2) | src/data/arrivalProse.js |
+| ledger:ARRIVAL_SENSES.herbs.dominant | top1 | 0.375 → 0.4167 | 9/24 → 10/24 | 43 (a2ff6e9c2) | src/data/arrivalProse.js |
+| ledger:npcData:STRESS_ECONOMIC_EFFECTS.genuine_respect | top5 | 0.6778 → 0.6786 | 915/1350 → 916/1350 | 43 (a2ff6e9c2) | 9e4e0402a, src/generators/factionRoles.js (the re-titled role upstream) |
+
+**CHARGED TO THE SECOND WAVE:**
+- "Church land claims on guild property" (src/generators/power/conflictIssues.js, QUARREL's line, the presumedThings arm-1 row re-keyed at 43): either the line declares the temple, or the walker learns to read a line's `cast` as a licence.
+- The pool-dominance guard: an exact ceiling on a pool of twenty-odd draws is too tight, and its corpus is four tiers (the chair, STOP 43a).
+- The three pools that left the register at 43 (brewers, east_asian architecturalDetails one-draw pools; town Bowyers off the ledger since 12e94a139, its mechanism not traced).
+
+**COVERAGE A CORPUS LOST AT A MERGE POINT** (at the closing acts each corpus is WIDENED until it exercises what it exercised at the wave's base, BEFORE any contract is re-recorded):
+
+| corpus | what left | point | commit |
+|---|---|---|---|
+| the Wizard News contract corpus (scripts/lib/news-voice-contract.mjs) | home `applied\|npc_mobilize` (44 → 43): nobody is made to do the deed, a re-titled role re-dealt the goals | 43 | 9e4e0402a (PRESUME: the watch office falls to a Veteran Soldier where no watch stands) |
+
+**Guards and wider corpora (the chair's question):** `scripts/census/pool-dominance.mjs` takes NO corpus flag: its corpus is fixed in the script (60 villages, 160 towns, 100 cities, 40 metropolises, seeds `quarrel-<tier>-<i>`; the browser's random dials); its only flag is `--tighten` (lower every ceiling, never raise). Widening it to six tiers and forced stresses would be a script change, the lane's or the chair's — not done here.
+
+**Known order (the chair, 2026-11-12 ~03:56):** 42 QUARREL, 43 PRESUME done; then VEIL or POWERS by readiness (POWERS after PRESUME); AGREE not CLEAR (being cured), UPKEEP after AGREE; FOUNDING-WORLDS last. PRESUME's own conditions are in the chair's message of 02:11 (other-lane rows of `tests/lint/presumedThings.register.json` leave through its door where QUARREL cured them; writer reach re-banked at the point; the wizard-news home that left named by commit; the OSR live-estate drift row re-minted; prose table only; `bank` vocabulary through the vocabulary and wiring doors; gm by field diff, law 2's second case).
+
 ## 3. The running tables
 
 **STOP rulings, as applied:**
@@ -243,6 +346,10 @@ The act-9 reading at the held tip, kept for comparison:
 - **STOP 5** (the voiceMechanics em dash in SW-11's newsBody dateline): ruled at 19:2x. **APPLIED at d3760f77f** by the second seat (voiceMechanics green, em 0).
   - The join becomes a colon: `${place}: ${told}`. Make it a hygiene commit named to 306a8dce4.
   - Re-key, by identity, any pin that holds the joined string. The ratchet stays em 0.
+
+- **STOP 43a** (the pool-dominance guard red on the merged tree): ruled option (a), bounded. **NAMED CLASS:** a RISE in `scripts/census/pool-dominance.register.json` is the merge seat's to re-bank at a point WHEN ALL FOUR HOLD — (1) at most TWO DRAWS on the guard's corpus (numerator and denominator before and after, each row); (2) the only change between the two measures is ONE named lane's merge; (3) that lane's diff touches the pool's own lines or a draw upstream of it (name the file); (4) re-banked AT the merged measure (the guard's own `ceil4`), the row count not growing. Any failing: STOP. Every such row joins §2f's list. Rows no longer drawn leave and loose ceilings tighten through `--tighten`, each departure explained in one line.
+- **STOP 43b** (presumedThings: the row QUARREL moved): re-keyed by identity to the line's new file; the cure charged to the second wave. **THE ZERO-HOLD IS ARM 2's:** after AGREE's point arm 2 holds no `other-lane` row (a row left is a finding); arm 1's `other-lane` rows (literals never printed false) take the register's own reason for that case at AGREE's point, through the register's door, the count not growing.
+- **STOP 42** (the phone floor at point 42): ruled a re-key by identity (b25930ca8). **THE NEW NAMED CLASS (the chair, 2026-11-12):** the phone floor's per-view counts (`tests/components/dossierPhoneFloorAllViews.test.jsx` MOBILE/DESKTOP_BASELINE) are the merge seat's to re-key at the point WHEN ALL THREE HOLD — (1) only views that print a leaf the merged lane declares move; (2) sub-floor reads 0 in every view, mobile and desktop; (3) each count moves in the direction the declared change implies. Any one failing is a STOP. The point's row names the class and the three checks.
 
 **The OSR table:**
 
@@ -779,4 +886,692 @@ const projects = base.projects.map((p) => p.name === 'chromium'
   : p);
 const webServer = (Array.isArray(base.webServer) ? base.webServer : [base.webServer]).map((w) => ({ ...w, cwd: '/home/user/wt-merge6' }));
 export default { ...base, testDir: '/home/user/wt-merge6/e2e', projects, webServer };
+```
+
+## Appendix F. The seventh seat's helpers (were in /home/user/rec7/; quoted whole so the eighth seat can recreate them)
+
+`gate.sh` — the point gate (`BARE=1` runs the build with NODE_OPTIONS unset; `vd` adds verify:dist).
+```sh
+#!/bin/sh
+# usage: gate.sh <n> <govfile> [vd] — STYLE-2-MERGE-7: build, boot smoke, strict, typecheck, tests/lint, tests/scripts, governing files, (vd: verify:dist)
+n=$1; gov=$2; S=/home/user/rec7/gate$n.sum; L=/home/user/rec7/g$n; : > $S
+cd /home/user/wt-merge7
+if [ -n "$BARE" ]; then env -u NODE_OPTIONS sh scripts/gate-tail.sh npm run build > $L-build.log 2>&1; else NODE_OPTIONS=--max-old-space-size=6144 sh scripts/gate-tail.sh npm run build > $L-build.log 2>&1; fi; echo "build exit $? (bare=${BARE:-no})" >> $S
+sh scripts/gate-tail.sh node scripts/boot-smoke.mjs > $L-boot.log 2>&1; echo "boot exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:domain:strict > $L-strict.log 2>&1; echo "strict exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:ratchet > $L-tsc.log 2>&1; echo "tsc exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/lint > $L-lint.log 2>&1; echo "lint exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/scripts > $L-scripts.log 2>&1; echo "scripts exit $?" >> $S
+if [ -s "$gov" ]; then sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 $(cat $gov | tr '\n' ' ') > $L-gov.log 2>&1; echo "gov exit $?" >> $S; fi
+if [ "$3" = vd ]; then NODE_OPTIONS=--max-old-space-size=6144 sh scripts/gate-tail.sh npm run verify:dist > $L-vd.log 2>&1; echo "verify:dist exit $?" >> $S; fi
+echo DONE >> $S
+```
+
+`roster.py` — the dated-roster union.
+```python
+#!/usr/bin/env python3
+# usage: roster.py <lane-label> <lane-record-path> <note-key-suffix> — the dated-roster conflict as a UNION (STYLE-2-MERGE-7)
+import re,sys,json
+lane,rec,key=sys.argv[1:4]
+B='tests/lint/.source-citation-baseline.json'; W='tests/lint/sourceCitationIntegrity.walker.test.js'
+CONF=re.compile(r'<<<<<<< [^\n]*\n(.*?)=======\n(.*?)>>>>>>> [^\n]*\n',re.S)
+t=open(B).read()
+blocks=CONF.findall(t)
+ours=None
+for o,_ in blocks:
+    m=re.search(r'"dated": (\d+)',o)
+    if m: ours=int(m.group(1))
+new=ours+1
+def res(mo):
+    o,th=mo.group(1),mo.group(2)
+    if '"dated":' in o: return re.sub(r'"dated": \d+','"dated": %d'%new,o)
+    o=o.rstrip('\n'); th=th.rstrip('\n')
+    if not o.endswith(','): o+=','
+    note='    "_rosterGrowth2026-11-11-style-2-merge-%s": "THE UNION AT THE %s MERGE (STYLE-2-MERGE-7, session session_01FbPLbf9PtvYaSbTPWUnwoY): both sides\' notes kept; `dated` %d -> %d (%s, the lane\'s record, born dated)."'%(key,lane,ours,new,rec)
+    th_c=th if th.endswith(',') else th+','
+    return o+'\n'+th_c+'\n'+note+',\n'
+t2=CONF.sub(res,t)
+assert '<<<<<<<' not in t2
+json.loads(t2)
+open(B,'w').write(t2)
+w=open(W).read()
+def resw(mo):
+    o=mo.group(1)
+    hm=re.match(r'( \*   dated \()(\d+)(\)  an ISO date in the filename \()(.*)',o,re.S)
+    assert hm and int(hm.group(2))==ours, o[:80]
+    return '%s%d%s2026-11-11, STYLE-2-MERGE-7 at the %s merge, %d -> %d: the union with the lane\'s record %s; %s'%(hm.group(1),new,hm.group(3),lane,ours,new,rec,hm.group(4))
+w2=CONF.sub(resw,w)
+assert '<<<<<<<' not in w2
+open(W,'w').write(w2)
+print('dated',ours,'->',new)
+```
+
+`tree.py` — a new shift record joins `tree`.
+```python
+import re,sys,json
+n,rec,lane=sys.argv[1:4]
+SEAT='STYLE-2-MERGE-7, session session_01FbPLbf9PtvYaSbTPWUnwoY'
+B='tests/lint/.source-citation-baseline.json'; W='tests/lint/sourceCitationIntegrity.walker.test.js'
+t=open(B).read()
+m=re.search(r'"tree": (\d+)\n',t); old=int(m.group(1)); new=old+1
+t=t[:m.start()]+'"tree": %d\n'%new+t[m.end():]
+ms=list(re.finditer(r'\n(    "_rosterGrowth[^\n]*")(,?)\n',t)); last=ms[-1]
+note='    "_rosterGrowth2026-11-11-style-2-merge-record-%s": "ONE document JOINED the roster by being BORN into it (%s): `tree` %d -> %d, %s, record %s, born into the tree class; measured once by this walker; nothing changed class."'%(n,SEAT,old,new,rec,n)
+t=t[:last.start()]+'\n'+last.group(1)+',\n'+note+(last.group(2))+'\n'+t[last.end():]
+json.loads(t); open(B,'w').write(t)
+w=open(W).read()
+a=' *   tree (%d)   docs/review-r2/**, docs/shift-records/** ('%old
+assert w.count(a)==1
+w=w.replace(a,' *   tree (%d)   docs/review-r2/**, docs/shift-records/** (2026-11-11, STYLE-2-MERGE record %s, the %s merge, %d -> %d: %s; '%(new,n,lane,old,new,rec))
+open(W,'w').write(w); print(old,'->',new)
+```
+
+`cell1.sh` — act 2: one tree's per-cell prose table.
+```sh
+#!/bin/sh
+# usage: cell1.sh <sha> — the per-cell prose table at a tree, its own helpers (STYLE-2-MERGE-7, act 2's attribution)
+s=$1; W=/home/user/stages/c-$s; O=/home/user/stages/cells/$s.json
+[ -s $O ] && exit 0
+cd /home/user/wt-merge7
+git worktree add -q --detach $W $s 2>/dev/null || exit 1
+ln -s /home/user/wt-merge7/node_modules $W/node_modules
+( cd $W && node scripts/prose-manifest-cells.mjs --out $O > /home/user/stages/cells/$s.log 2>&1; echo "exit $?" >> /home/user/stages/cells/$s.log )
+git worktree remove --force $W
+```
+
+`cellattr.py` — act 2: per-point rows/cells moved (reads cellpts.txt = the base, each merge's first parent, each merge).
+```python
+# act 2's attribution: rows (of 1,050) and cells moved at each point boundary (STYLE-2-MERGE-7)
+import json,subprocess,collections
+pts=[l.strip() for l in open('/home/user/rec7/cellpts.txt')]
+def load(s):
+    d=json.load(open(f'/home/user/stages/cells/{s}.json'))
+    cells={c['cell']:json.dumps(c,sort_keys=True) for c in d['cells']}
+    return d['rows'],cells
+merges=subprocess.check_output(['git','-C','/home/user/wt-merge7','log','--first-parent','--merges','--format=%h %P','--abbrev=9','bd07005b9..4ca5cee57']).decode().split('\n')
+merges=[m.split() for m in merges if m][::-1]
+subj={}
+for m in merges: subj[m[0]]=subprocess.check_output(['git','-C','/home/user/wt-merge7','log','-1','--format=%s',m[0]]).decode().strip()[:80]
+prev='bd07005b9'; R0,C0=load(prev)
+g=json.load(open('/home/user/wt-merge7/tests/fixtures/dossier-prose-manifest-golden.json'))['rows']
+print('base rows == committed golden:', R0==g, 'cells', len(C0))
+def diff(a,b):
+    (ra,ca),(rb,cb)=a,b
+    rows=sum(1 for k in set(ra)|set(rb) if ra.get(k)!=rb.get(k))
+    cm=sum(1 for k in set(ca)&set(cb) if ca[k]!=cb[k]); add=len(set(cb)-set(ca)); rem=len(set(ca)-set(cb))
+    return rows,cm,add,rem
+out=[]
+cur=(R0,C0); curs=prev
+for m,p1,p2 in merges:
+    p1s=p1[:9]
+    A=load(p1s); 
+    if p1s!=curs:
+        d=diff(cur,A)
+        if any(d): out.append(('between '+curs+'..'+p1s,)+d)
+    B=load(m); d=diff(A,B); out.append((m+' '+subj[m],)+d)
+    cur=B; curs=m
+for o in out: print(o)
+tot=diff((R0,C0),cur); print('base -> 4ca5cee57 total rows,moved,added,removed:',tot)
+```
+
+`act2.py` — act 2: the record, the provenance sentence and the landing-act config (n=42, stage s42).
+```python
+import json
+REC='docs/shift-records/2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json'
+cause=("THE COMPOSED-PROSE MANIFEST AT THE STYLE WAVE'S FINAL TIP, SIGNED ONCE (BRIEF-STYLE-2-WAVE; the integration record "
+"docs/INTEGRATION_STYLE_2_2026-11-09.md §2d, closing act 2): each first-parent merge point's cells, measured point to point by "
+"scripts/prose-manifest-cells.mjs --out at the tree of every merge commit AND of its first parent (86 trees, base bd07005b9 to "
+"4ca5cee57, each through its own helpers; the base tree reproduces the committed manifest exactly; NO cell moves between merge "
+"points), rows of 1,050 and cells of 74,659 moved at each point: SW-B5 FRAMES point 9 (46e0121c2) 1,050 rows, 2,950 cells "
+"(the vantage variants); SW-B6 ECO-DEF-BLOCKS point 10 (8de6c4a1a) 1,050 rows, 5,164 cells (the economy and defense block "
+"rewrites); SW-7 POWER-SIDE point 16 (a3062d919) 1,050 rows, 1,175 cells (the power leaf's prose); SW-B1 CONTRADICTIONS point 17 "
+"(0f2cb865c) 72 rows, 72 cells REMOVED (a contradicting cell no longer composes); SW-8 RENAME-POWERS point 24 (56f3b2df7) 1,038 "
+"rows, 1,038 cells (the minted power renamed, wording only); every other merge point of the forty-one 0 rows, 0 cells, "
+"FOUNDING-WORLDS point 41 included (stage m39 -> m41 prose 0). Base -> final tip: 1,050 of 1,050 rows move, 0 added, 0 removed; "
+"10,399 cells moved (the five points' sum: no cell moved twice), 0 added, 72 removed; 74,659 cells become 74,587. Saved worlds "
+"are untouched.")
+rec={"_doc":("CLOSING ACT 2 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its seventh seat STYLE-2-MERGE-7), ODQ §934.105 (the "
+"cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW "
+"OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; prose "
+"movement is signed ONCE at the final tip, every row attributed to its merge point. Written from the stage at a3ea0d325 (the final "
+"tip 2cbe72ca1 with closing act 1's bundles)."),
+"ownerWords":"I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+"ownerDate":"2026-11-06",
+"odqRow":"§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+"cause":cause,
+"seat":"STYLE-2-MERGE-7 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at a3ea0d325",
+"surfaces":[{"surface":"dossier-prose-manifest","action":"re-record","predictedRows":2,"proofForm":"derived-artefact"}]}
+open('/home/user/stages/s42/'+REC,'w').write(json.dumps(rec,indent=2,ensure_ascii=False)+'\n')
+# provenance sentence
+p='/home/user/stages/s42/scripts/prose-manifest-cells.mjs'; t=open(p).read()
+o="the record; against the wave’s record 9 post-state 181 of the 1,050 rows move, 0 added, 0 removed.',\n});"
+assert t.count(o)==1
+n=("the record; against the wave’s record 9 post-state 181 of the 1,050 rows move, 0 added, 0 removed.'\n"
+"    + ' 2026-11-11 (THE COMPOSED-PROSE MANIFEST AT THE STYLE WAVE’S FINAL TIP, CLOSING ACT 2 OF STYLE-2-MERGE, docs/shift-records/'\n"
+"    + '2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json, ODQ §934.105): re-recorded ONCE at the stage of the final'\n"
+"    + ' tip a3ea0d325 because five of the wave’s forty-one merge points (SW-B5 FRAMES, SW-B6 ECO-DEF-BLOCKS, SW-7 POWER-SIDE,'\n"
+"    + ' SW-B1 CONTRADICTIONS, SW-8 RENAME-POWERS) moved the composed prose, each point’s cells named in the record; against the'\n"
+"    + ' train’s record 10 post-state 1050 of the 1,050 rows move, 0 added, 0 removed.',\n});")
+open(p,'w').write(t.replace(o,n))
+cfg={"n":42,"stage":"/home/user/stages/s42","scratch":"/home/user/rec7/act","step":"a3ea0d32564cfba683c66aed498d0990acc60abb",
+"stepSubject":"build(STYLE-2-MERGE closing act 1): the edge-shared bundles re-emitted ONCE at the final tip",
+"label":"STYLE-2-MERGE closing act 2 (the composed-prose manifest at the style wave's final tip, signed once)","cause":cause,
+"record":REC,"carry":"a3ea0d32564cfba683c66aed498d0990acc60abb","provenance":True,
+"seat":"STYLE-2-MERGE-7 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673",
+"session":"https://claude.ai/code/session_01FbPLbf9PtvYaSbTPWUnwoY",
+"receiptFiles":"the registered suites and the freeze walker (scripts/audit/landing-stage.sh suites) and tests/domain/worldFactRederive.test.js",
+"receipt":"RECEIPT","log":"/home/user/rec7/act/log42.json",
+"surfaces":[{"surface":"dossier-prose-manifest","moved":1050,"rowsText":"1,050 of 1,050 rows move against the train's record 10 post-state (083c8dd7..), 0 added, 0 removed; each merge point's cells named in the record","extra":[]}]}
+json.dump(cfg,open('/home/user/rec7/act/cfg42.json','w'),indent=1,ensure_ascii=False)
+print('ok')
+```
+
+`hl-measure.mjs` — act 4: the headline and prose-family contracts measured through their own functions.
+```js
+// STYLE-2-MERGE-7 closing act 4: the headline contract's live figures, through the walker's own functions.
+import { writeFileSync } from 'node:fs';
+const R = (process.env.TREE ?? '/home/user/wt-merge7') + '/';
+const { buildObservedCorpus, OBSERVED_SCALAR_FIELDS } = await import(R + 'scripts/lib/observed-shape-corpus.mjs');
+const H = await import(R + 'scripts/lib/news-headline-contract.mjs');
+const { reconstructWizardNewsIntroductions } = await import(R + 'scripts/lib/news-voice-contract.mjs');
+const { APPLIED_HEADLINE_REWRITES } = await import(R + 'src/domain/worldPulse/worldPulseFeedCuration.js');
+const corpus = await buildObservedCorpus({ scalarFields: OBSERVED_SCALAR_FIELDS });
+const rec = reconstructWizardNewsIntroductions(corpus.scalarObservations);
+const rows = H.deriveNewsAddressRows(rec.entries);
+const raw = H.selectPersistedHeadlineRows(corpus.scalarObservations);
+const out = { rows, rowsSha256: H.addressRowsSha256(rows), raw: H.rawHeadlineLivenessOf(raw), liveness: H.analyzeHeadlineRewriteLiveness(raw, APPLIED_HEADLINE_REWRITES) };
+writeFileSync(process.argv[2], JSON.stringify(out, null, 1));
+console.log(rows.length, out.rowsSha256);
+// the prose-family contract's live figures (closing act 4), same corpus
+try {
+  const P = await import((process.env.PFLIB ?? R) + 'scripts/lib/prose-family-contract.mjs');
+  const live = P.deriveProseFamilyContract(corpus.scalarObservations, corpus.scalarMeta);
+  const { writeFileSync: w } = await import('node:fs');
+  w(process.argv[2].replace(/\.json$/, '.pf.json'), JSON.stringify({ corpus: live.corpus, familyTotals: live.familyTotals, totals: live.totals, rows: live.rows, rowsSha256: P.proseFamilyRowsSha256(live.rows), rowsBytes: JSON.stringify(live.rows).length }, null, 1));
+  console.log('pf', live.totals, JSON.stringify(live.rows).length);
+} catch (e) { console.log('pf-failed', e.message); }
+```
+
+`hl-at.sh` — act 4: the same at another tree.
+```sh
+#!/bin/sh
+s=$1; W=/home/user/stages/h-$s
+cd /home/user/wt-merge7 && git worktree add -q --detach $W $s && ln -s /home/user/wt-merge7/node_modules $W/node_modules
+TREE=$W node /home/user/rec7/hl-measure.mjs /home/user/rec7/hl-$s.json > /home/user/rec7/hl-$s.log 2>&1; echo "exit $?" >> /home/user/rec7/hl-$s.log
+git worktree remove --force $W
+```
+
+`distm.mjs` — act 7: first paint and worker bytes of a built tree.
+```js
+// STYLE-2-MERGE-7 act 7: first-paint closure (raw/gzip-9/brotli-11, the vendorPdfLazy method) and the worker bundle bytes of <tree>/dist
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import { gzipSync, brotliCompressSync, constants } from 'node:zlib';
+const dist = join(process.argv[2], 'dist'), A = join(dist, 'assets');
+const spec = (c) => { const s = new Set(); let m; const f = /\bfrom\s*["'](\.\/[^"']+\.js)["']/g, b = /(?:^|[;}])import\s*["'](\.\/[^"']+\.js)["']/g;
+  while ((m = f.exec(c))) s.add(m[1].replace('./', '')); while ((m = b.exec(c))) s.add(m[1].replace('./', '')); return [...s]; };
+const entry = readFileSync(join(dist, 'index.html'), 'utf8').match(/<script[^>]*type="module"[^>]*src="\/assets\/([^"]+)"/)[1];
+const seen = new Set([entry]); const q = [entry];
+while (q.length) { const f = q.shift(); for (const d of spec(readFileSync(join(A, f), 'utf8'))) if (!seen.has(d)) { seen.add(d); q.push(d); } }
+let raw = 0, gz = 0, br = 0;
+for (const f of [...seen].sort()) { const b = readFileSync(join(A, f)); raw += statSync(join(A, f)).size; gz += gzipSync(b, { level: 9 }).length; br += brotliCompressSync(b, { params: { [constants.BROTLI_PARAM_QUALITY]: 11 } }).length; }
+const w = readdirSync(A).filter((f) => /^generation\.worker-.*\.js$/.test(f));
+console.log(JSON.stringify({ raw, gz, br, worker: w.map((f) => statSync(join(A, f)).size), files: seen.size }));
+```
+
+`dist1.sh` — act 7: one tree of the sweep.
+```sh
+#!/bin/sh
+# usage: dist1.sh <sha> — build the tree (BOOT-TIP's FIRSTPAINT-4 cure applied when absent) and measure first paint + worker
+s=$1; W=/home/user/stages/d-$s; O=/home/user/stages/dist/$s.json
+[ -s $O ] && exit 0
+cd /home/user/wt-merge7
+git worktree add -q --detach $W $s 2>/dev/null || exit 1
+ln -s /home/user/wt-merge7/node_modules $W/node_modules
+cd $W
+cure=present
+if ! git merge-base --is-ancestor 59258e7ea $s; then
+  if git -c user.name=s -c user.email=s@l cherry-pick --no-commit 59258e7ea >/dev/null 2>&1; then cure=applied; else git cherry-pick --abort >/dev/null 2>&1; git checkout -q -- . ; cure=conflict; fi
+fi
+node --max-old-space-size=4096 node_modules/vite/bin/vite.js build > /home/user/stages/dist/$s.log 2>&1; e=$?
+if [ $e = 0 ]; then m=$(node /home/user/rec7/distm.mjs $W); echo "{\"sha\":\"$s\",\"cure\":\"$cure\",\"m\":$m}" > $O; else echo "build $e" >> /home/user/stages/dist/$s.log; fi
+cd /home/user/wt-merge7 && git worktree remove --force $W
+```
+
+`proof.sh` — act 10: the seventeen steps in a clean worktree.
+```sh
+#!/bin/sh
+# THE CLOSING PROOF (STYLE-2-MERGE-7): all seventeen steps of `npm run check` in a clean worktree, each to its own exit code
+T=$1; W=/home/user/wt-proof; S=/home/user/rec7/proof.sum; : > $S
+cd /home/user/wt-merge7 && git worktree add -q --detach $W $T || exit 1
+cd $W && npm ci --no-audit --no-fund > /home/user/rec7/proof-npmci.log 2>&1; echo "npm ci exit $? (tree $(git rev-parse --short=9 HEAD), status '$(git status --short | wc -l)' lines)" >> $S
+i=0
+for step in validate:hazard-registry validate:premortem validate:packets validate:data validate:custom-content-manifest validate:migration-head validate:edge validate:map validate:tuning-bands validate:foundry-module validate:mcp-server typecheck:ratchet typecheck:domain:strict lint test:ratchet build verify:dist; do
+  i=$((i+1))
+  env -u NODE_OPTIONS sh scripts/gate-tail.sh npm run $step > /home/user/rec7/proof-$i.log 2>&1; e=$?
+  echo "$i $step exit $e" >> $S
+done
+echo "porcelain after: $(git status --short | wc -l)" >> $S
+echo DONE >> $S
+```
+
+`build-review40.mjs` — act 5: the rung-40 review builder (refuses unless the reconciliation is exactly as listed).
+```js
+// Scratch review builder for OSR rung 40 act 2 at the style wave's final tip.
+// REFUSES (exit 1, nothing written) unless the reconciliation is EXACTLY the rows below,
+// the transition EXACTLY the four paths, the unscanned movement EXACTLY the eight paths,
+// and the corpus movement EXACTLY shapeCount 1734 -> 1740.
+// usage: node build-review40.mjs <report.json> <template.json> <out-review.json>
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+
+const [reportPath, templatePath, outPath] = process.argv.slice(2);
+const report = JSON.parse(readFileSync(reportPath, 'utf8'));
+const template = JSON.parse(readFileSync(templatePath, 'utf8'));
+const refuse = (why) => { console.error(`REFUSED: ${why}`); process.exit(1); };
+if (existsSync(outPath)) refuse(`${outPath} exists`);
+
+const EXPECTED = new Map(Object.entries({
+  'src/domain/display/publicProse.js\u0000publicProse on settlement': [0, 1,
+    'ADMITTED TAGGED UNDER ONE DECLARATION (SW-B7b rung 40, the chair\'s grant of 2026-11-09 13:5x): `publicProse on settlement`, the save-time-writer class — written by src/lib/saves.js :: withPublicProse at every cloud save (adbd413a6), read once by src/domain/display/publicProse.js :: publicProseOf; the corpus never runs the save path. 0 -> 1. The rung\'s own row (act 1 8ad1df506).'],
+  'src/domain/display/newsBody.js\u0000outcome on outcome': [0, 1,
+    'ADMITTED ORDINARY AT 40, owed to rung 41 (the chair\'s FINAL RULING 21:2x): SW-11\'s newsBody.js :: itemSettlementIds reads `item.outcome?.affectedSettlementIds` (969077590, STYLE-2-MERGE point 12); its writer is convergence.js\'s minted proposal (`mintedProposals.push({ … outcome, … })`), which runs only in campaign time. Rung 41 declares it under the played-worlds-writer class and tags it. 0 -> 1.'],
+  'src/domain/compendium/institutionFacts.js\u0000outputs on chains': [0, 1,
+    'ADMITTED ORDINARY, attributed: COMPENDIUM-INSTITUTIONS-2 b (01ef2db68) moved the institution facts module from src/components/compendium/ (the UNREVIEWED-UI cohort scope, outside the inventory) to src/domain/compendium/; the read was there before the move and now sits in the scanned domain. 0 -> 1.'],
+  'src/domain/compendium/institutionFacts.js\u0000processingInstitutions on chains': [0, 1,
+    'ADMITTED ORDINARY, attributed: COMPENDIUM-INSTITUTIONS-2 b (01ef2db68) moved the institution facts module from src/components/compendium/ (the UNREVIEWED-UI cohort scope) to src/domain/compendium/; the same read, re-homed into the scanned domain. 0 -> 1.'],
+  'src/domain/settlementMigrations.js\u0000factionAffiliation on npcs': [0, 4,
+    'ADMITTED ORDINARY, attributed: GREEN-TIP (STYLE-2-MERGE point 36) retired the pulse\'s last writers of the v1 card field `factionAffiliation` (0c17ec8a3 the founder, the R9 fold and the successor; ae8dc98b1 the event layer), so the corpus no longer observes it and the v1 migration\'s four inbound reads (V1_CARD_FIELDS, the membership mint) have no observed writer — a migration reader of a retired field, by design. 0 -> 4.'],
+  'src/generators/foodLand.js\u0000nearbyResourcesState on config': [0, 1,
+    'ADMITTED ORDINARY, attributed: GREEN-TIP b46048140 moved foodLandOf (and its one `config.nearbyResourcesState` read) from src/generators/foodGenerator.js into the leaf src/generators/foodLand.js (the foodGenerator <-> isolationSupport cycle removed, cause 46459cb16). The same read re-homed; its GONE twin is foodGenerator.js. 0 -> 1.'],
+  'src/generators/foodGenerator.js\u0000nearbyResourcesState on config': [1, 0,
+    'GONE BY RE-HOMING, attributed: GREEN-TIP b46048140 moved the one read into src/generators/foodLand.js (its NEW twin). 1 -> 0.'],
+  'src/domain/worldPulse/causeLifecycle.js\u0000secondaryAffiliation on npcs': [1, 0,
+    'GONE BY REPAIR, attributed: PULSE-SITES 6 (5153945c2) removed the cause lifecycle\'s dead `secondaryAffiliation` fallback (STYLE-2-MERGE point 36). The row the walker\'s THE ERASURE GUARD names; a lawful repair, owed here (the chair, 08:1x). 1 -> 0.'],
+  'src/domain/entities/propagate.js\u0000linkedFactionIds on npcs': [1, 0,
+    'GONE BY REPAIR, attributed: GREEN-TIP P3 (44b37a520, STYLE-2-MERGE point 36) re-pointed propagation\'s NPC hop from the retired `linkedFactionIds` to the card\'s memberships — a pure re-point; the read left. 1 -> 0.'],
+}));
+const EXPECTED_SAME = 1526;
+const EXPECTED_DELTA = ['package.json', 'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs', 'scripts/migrate-observed-shape-readers.mjs'];
+const EXPECTED_UNSCANNED = [
+  'src/data/dossierCausalProse.generated.js',
+  'src/data/dossierStateProse/defense.generated.js',
+  'src/data/dossierStateProse/general.generated.js',
+  'src/data/dossierStateProse/power.generated.js',
+  'src/data/dossierStateProse/stressors.generated.js',
+  'src/data/dossierStateProse/warFaith.generated.js',
+  'src/domain/compendium/generated/compendiumData.generated.js',
+  'src/domain/content/customContentManifest.generated.js',
+];
+const EXPECTED_CORPUS_MOVED = ['shapeCount: 1734 -> 1740'];
+
+const same = report.predecessorRows.filter((row) => row.reconciliation === 'same');
+const moved = report.predecessorRows.filter((row) => row.reconciliation !== 'same');
+if (same.length !== EXPECTED_SAME) refuse(`SAME ${same.length} != ${EXPECTED_SAME}`);
+if (moved.length !== EXPECTED.size) refuse(`moved ${moved.length} != ${EXPECTED.size}`);
+const notes = new Map();
+for (const row of moved) {
+  const key = `${row.address.file}\u0000${row.address.identity}`;
+  const want = EXPECTED.get(key);
+  if (!want) refuse(`unexpected moved row ${row.address.file} / ${row.address.identity}`);
+  if (row.predecessorCount !== want[0] || row.legacyCount !== want[1]) {
+    refuse(`row ${row.address.file} / ${row.address.identity} is ${row.predecessorCount} -> ${row.legacyCount}, expected ${want[0]} -> ${want[1]}`);
+  }
+  notes.set(row.rowId, want[2]);
+}
+if (report.rows.length) refuse(`site-migration rows present: ${report.rows.length}`);
+const st = report.scannerTransition;
+if (!st || JSON.stringify(st.modifiedPaths) !== JSON.stringify(EXPECTED_DELTA)) {
+  refuse(`scanner transition ${JSON.stringify(st?.modifiedPaths)}`);
+}
+if (JSON.stringify(st.unscannedMovement?.changedPaths) !== JSON.stringify(EXPECTED_UNSCANNED)) {
+  refuse(`unscanned movement ${JSON.stringify(st.unscannedMovement?.changedPaths)}`);
+}
+if (JSON.stringify(report.corpusCompatibility?.moved) !== JSON.stringify(EXPECTED_CORPUS_MOVED)) {
+  refuse(`corpus movement ${JSON.stringify(report.corpusCompatibility?.moved)}`);
+}
+const sameById = new Map(same.map((row) => [row.rowId, row]));
+const TRANSITION_NOTE = 'the schema-39 -> 40 rung\'s four detector-input paths at the style wave\'s final tip: the three bookkeeping paths of act 1 (8ad1df506; the live validator to 40, the retired-39 constant, the rung and the one declaration) and package.json, CI-FIT 001fc7e00 (build heap 4096; merged at point 40, 4ca5cee57), named in the delta law at 0821e441f. The UNSCANNED inputs moved, eight generated execution inputs, each attributed: SW-8 C8 e63c6aae6 (dossierCausalProse, dossierStateProse defense/general/power/stressors/warFaith); SW-7 POWER-SIDE e76cb0ab7, 7c96f27aa, c1d64ef0f (power.generated.js, point 16); SW-8 C2 a46d1ba8b, C6 1e15a3c10, C7 0da9265f9 and LIBRARY-SIMPLE 2920100e0 (compendiumData.generated.js); SW-8 C7 0da9265f9 (customContentManifest.generated.js). The corpus moved shapeCount 1734 -> 1740 (originCount 14344 -> 14782, transitionCount 22053 -> 22772): the simulation batch, point 36 (GREEN-TIP 6eeb5f82c + PULSE-SITES 47de1b76a), measured there by writer reach. The corpus DEFINITION is unchanged.';
+const decisions = template.decisions.map((decision) => {
+  if (decision.subject === 'scanner-transition') return { ...decision, decision: 'accept', note: TRANSITION_NOTE };
+  if (decision.subject !== 'predecessor-reconciliation') refuse(`unexpected subject ${decision.subject}`);
+  if (notes.has(decision.rowId)) return { ...decision, decision: 'accept', note: notes.get(decision.rowId) };
+  const row = sameById.get(decision.rowId);
+  if (!row) refuse(`template row ${decision.rowId} not in report`);
+  return { ...decision, decision: 'accept', note: `SAME against the committed schema-39 register: ${row.legacyCount} read(s).` };
+});
+if (decisions.length !== EXPECTED_SAME + EXPECTED.size + 1) refuse(`decisions ${decisions.length}`);
+writeFileSync(outPath, `${JSON.stringify({ ...template, decisions }, null, 2)}\n`, { flag: 'wx' });
+console.log(`review written: ${decisions.length} decisions (${EXPECTED_SAME} SAME, ${EXPECTED.size} moved, 1 transition)`);
+```
+
+`build-review41.mjs` — act 5: the rung-41 review builder.
+```js
+// Scratch review builder for OSR rung 41 act 2. REFUSES (exit 1, nothing written) unless the
+// reconciliation is ALL SAME (1532 rows, including `outcome on outcome` at newsBody.js at 1),
+// the transition EXACTLY the three bookkeeping paths, no unscanned movement, no corpus movement.
+// usage: node build-review41.mjs <report.json> <template.json> <out-review.json>
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+const [reportPath, templatePath, outPath] = process.argv.slice(2);
+const report = JSON.parse(readFileSync(reportPath, 'utf8'));
+const template = JSON.parse(readFileSync(templatePath, 'utf8'));
+const refuse = (why) => { console.error(`REFUSED: ${why}`); process.exit(1); };
+if (existsSync(outPath)) refuse(`${outPath} exists`);
+const EXPECTED_SAME = 1532;
+const DELTA = ['scripts/check-observed-shape-readers.mjs', 'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs'];
+const moved = report.predecessorRows.filter((row) => row.reconciliation !== 'same');
+if (moved.length) refuse(`moved rows: ${moved.map((r) => `${r.address.file} / ${r.address.identity} ${r.predecessorCount} -> ${r.legacyCount}`).join('; ')}`);
+if (report.predecessorRows.length !== EXPECTED_SAME) refuse(`SAME ${report.predecessorRows.length} != ${EXPECTED_SAME}`);
+const target = report.predecessorRows.filter((r) => r.address.file === 'src/domain/display/newsBody.js'
+  && r.address.identity === 'outcome on outcome');
+if (target.length !== 1 || target[0].legacyCount !== 1) refuse('the declared row is not newsBody.js `outcome on outcome` at 1');
+if (report.rows.length) refuse(`site rows ${report.rows.length}`);
+const st = report.scannerTransition;
+if (JSON.stringify(st?.modifiedPaths) !== JSON.stringify(DELTA)) refuse(`transition ${JSON.stringify(st?.modifiedPaths)}`);
+if (st.unscannedMovement) refuse(`unscanned movement ${JSON.stringify(st.unscannedMovement.changedPaths)}`);
+if ((report.corpusCompatibility?.moved || []).length) refuse(`corpus moved ${JSON.stringify(report.corpusCompatibility.moved)}`);
+const byId = new Map(report.predecessorRows.map((row) => [row.rowId, row]));
+const TAGGED = 'SAME count, TAGGED under the schema-41 declaration (the chair\'s FINAL RULING 21:2x, STYLE-2-MERGE closing act 5): `outcome on outcome`, the first played-worlds writer — src/domain/worldPulse/convergence.js mints the proposal record carrying its outcome behind interventionActive, in campaign time only; read once by src/domain/display/newsBody.js :: itemSettlementIds. Admitted ordinary at 40 (d8d7ceee4); 1 read.';
+const decisions = template.decisions.map((d) => {
+  if (d.subject === 'scanner-transition') {
+    return { ...d, decision: 'accept', note: 'the schema-40 -> 41 rung\'s three bookkeeping paths at act 1 (75dd3fc17; the played-worlds writer\'s admission): the live validator to 41, the retired-40 constant, the rung, the new class played-worlds-writer and its one declaration. The corpus definition is unchanged; no unscanned execution input moved.' };
+  }
+  const row = byId.get(d.rowId);
+  if (!row || d.subject !== 'predecessor-reconciliation') refuse(`template row ${d.rowId}`);
+  const tagged = row.address.identity === 'outcome on outcome';
+  return { ...d, decision: 'accept', note: tagged ? TAGGED : `SAME against the committed schema-40 register: ${row.legacyCount} read(s).` };
+});
+if (decisions.length !== EXPECTED_SAME + 1) refuse(`decisions ${decisions.length}`);
+writeFileSync(outPath, `${JSON.stringify({ ...template, decisions }, null, 2)}\n`, { flag: 'wx' });
+console.log(`review written: ${decisions.length} decisions (${EXPECTED_SAME} SAME, 1 transition)`);
+```
+
+## Appendix G. The eighth seat's helpers (in /home/user/rec8/; quoted whole so a ninth seat can recreate them)
+
+`dump.mjs`
+```js
+// STYLE-2-MERGE-8: dump a corpus's settlements as NDJSON (one {key, s} per line) from <tree>'s own generator.
+// usage: node dump.mjs <tree> gm|fence <out.ndjson>
+import { writeFileSync, appendFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+const [tree, which, out] = process.argv.slice(2);
+const root = resolve(tree);
+const { generateSettlementPipeline } = await import(pathToFileURL(`${root}/src/generators/generateSettlementPipeline.js`).href);
+writeFileSync(out, '');
+if (which === 'gm') {
+  const { goldenCorpus, keyOf } = await import(pathToFileURL(`${root}/tests/helpers/goldenMasterCorpus.js`).href);
+  for (const config of goldenCorpus()) {
+    const { _seed, ...cfg } = config;
+    const s = generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
+    appendFileSync(out, JSON.stringify({ key: keyOf(config), s }) + '\n');
+  }
+} else {
+  for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'])
+    for (const route of ['road', 'isolated', 'port', 'crossroads'])
+      for (let i = 0; i < 15; i += 1) {
+        const seed = `SUBw4-fence1-${tier}-${route}-${String(i).padStart(3, '0')}`;
+        const s = generateSettlementPipeline({ settType: tier, tier, tradeRouteAccess: route, culture: 'germanic' }, null, { seed });
+        appendFileSync(out, JSON.stringify({ key: seed, s }) + '\n');
+      }
+}
+console.log('done', which);
+```
+
+`fdiff.mjs`
+```js
+// STYLE-2-MERGE-8: leaf-level field diff of two NDJSON dumps; prints moved rows and, per normalized leaf path
+// (array indices -> []), the rows in which that leaf moved. A leaf added or removed counts as moved.
+// usage: node fdiff.mjs <a.ndjson> <b.ndjson>
+import { readFileSync } from 'node:fs';
+const load = (p) => new Map(readFileSync(p, 'utf8').trim().split('\n').map((l) => { const o = JSON.parse(l); return [o.key, o.s]; }));
+const A = load(process.argv[2]), B = load(process.argv[3]);
+const flat = (v, p, out) => {
+  if (v === null || typeof v !== 'object') { out.set(p, JSON.stringify(v)); return out; }
+  if (Array.isArray(v)) { if (!v.length) out.set(p, '[]'); v.forEach((x, i) => flat(x, `${p}[${i}]`, out)); return out; }
+  const ks = Object.keys(v); if (!ks.length) out.set(p, '{}');
+  for (const k of ks) flat(v[k], p ? `${p}.${k}` : k, out); return out;
+};
+const norm = (p) => p.replace(/\[\d+\]/g, '[]');
+const leaf = new Map(); let moved = 0; const byTier = {};
+for (const [k, a] of A) {
+  const b = B.get(k); if (JSON.stringify(a) === JSON.stringify(b)) continue;
+  moved++; const t = k.split(/[|-]/)[k.includes('|') ? 0 : 2]; byTier[t] = (byTier[t] ?? 0) + 1;
+  const fa = flat(a, '', new Map()), fb = flat(b, '', new Map()); const hit = new Set();
+  for (const p of new Set([...fa.keys(), ...fb.keys()])) if (fa.get(p) !== fb.get(p)) hit.add(norm(p));
+  for (const p of hit) leaf.set(p, (leaf.get(p) ?? 0) + 1);
+}
+console.log(JSON.stringify({ rows: B.size, moved, onlyA: [...A.keys()].filter((k) => !B.has(k)).length, onlyB: [...B.keys()].filter((k) => !A.has(k)).length, byTier }));
+for (const [p, n] of [...leaf].sort((x, y) => y[1] - x[1])) console.log(n, p);
+```
+
+`failset.py`
+```python
+# usage: python3 failset.py <vitest json> -> failing tests (file > title), one per line (STYLE-2-MERGE-8)
+import json,sys
+d=json.load(open(sys.argv[1]))
+for f in d['testResults']:
+    fn=f['name'].split('/tests/',1)[-1]
+    if f['status']=='failed' and not any(a['status']=='failed' for a in f['assertionResults']): print('tests/'+fn+' > [FILE FAILED TO LOAD] '+(f.get('message') or '')[:150].replace('\n',' '))
+    for a in f['assertionResults']:
+        if a['status']=='failed': print('tests/'+fn+' > '+' > '.join(a['ancestorTitles']+[a['title']]))
+```
+
+`gatelite.sh`
+```sh
+#!/bin/sh
+# usage: gatelite.sh <n> — STYLE-2-MERGE-8: the gate's non-vitest lines (build bare, boot, strict, typecheck, verify:dist); the test dirs ride the full-suite run
+n=$1; S=/home/user/rec8/gate$n.sum; L=/home/user/rec8/g$n; : > $S
+cd /home/user/wt-merge8
+env -u NODE_OPTIONS sh scripts/gate-tail.sh npm run build > $L-build.log 2>&1; echo "build exit $? (bare)" >> $S
+sh scripts/gate-tail.sh node scripts/boot-smoke.mjs > $L-boot.log 2>&1; echo "boot exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:domain:strict > $L-strict.log 2>&1; echo "strict exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:ratchet > $L-tsc.log 2>&1; echo "tsc exit $?" >> $S
+sh scripts/gate-tail.sh npm run verify:dist > $L-vd.log 2>&1; echo "verify:dist exit $?" >> $S
+echo DONE >> $S
+```
+
+`gate.sh`
+```sh
+#!/bin/sh
+# usage: gate.sh <n> <govfile> [vd] — STYLE-2-MERGE-8: build, boot smoke, strict, typecheck, tests/lint, tests/scripts, governing files, (vd: verify:dist)
+n=$1; gov=$2; S=/home/user/rec8/gate$n.sum; L=/home/user/rec8/g$n; : > $S
+cd /home/user/wt-merge8
+env -u NODE_OPTIONS sh scripts/gate-tail.sh npm run build > $L-build.log 2>&1; echo "build exit $? (bare)" >> $S
+sh scripts/gate-tail.sh node scripts/boot-smoke.mjs > $L-boot.log 2>&1; echo "boot exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:domain:strict > $L-strict.log 2>&1; echo "strict exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:ratchet > $L-tsc.log 2>&1; echo "tsc exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/lint > $L-lint.log 2>&1; echo "lint exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/scripts > $L-scripts.log 2>&1; echo "scripts exit $?" >> $S
+if [ -s "$gov" ]; then sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 $(cat $gov | tr '\n' ' ') > $L-gov.log 2>&1; echo "gov exit $?" >> $S; fi
+if [ "$3" = vd ]; then sh scripts/gate-tail.sh npm run verify:dist > $L-vd.log 2>&1; echo "verify:dist exit $?" >> $S; fi
+echo DONE >> $S
+```
+
+`govfiles.sh`
+```sh
+#!/bin/sh
+# usage: govfiles.sh <range>... -> test files naming any changed src module (by basename import) (STYLE-2-MERGE-8)
+cd /home/user/wt-merge8
+for r in "$@"; do git diff --name-only "$r" -- src; done | sort -u | while read f; do
+  b=$(basename "$f"); b=${b%.*}
+  grep -rlE "[/'\"]${b}(\.(js|jsx|ts|mjs))?['\"]" tests --include='*.js' --include='*.jsx' --include='*.mjs' --include='*.ts' 2>/dev/null
+done | sort -u
+```
+
+`tree.py`
+```python
+# usage (in the worktree): python3 tree.py <n> <record> <lane> — a new shift record joins `tree` (STYLE-2-MERGE-8)
+import re,sys,json
+n,rec,lane=sys.argv[1:4]
+SEAT='STYLE-2-MERGE-8, session session_01FbPLbc1CCoAMzKt2ScvNSk'
+B='tests/lint/.source-citation-baseline.json'; W='tests/lint/sourceCitationIntegrity.walker.test.js'
+t=open(B).read()
+m=re.search(r'"tree": (\d+)\n',t); old=int(m.group(1)); new=old+1
+t=t[:m.start()]+'"tree": %d\n'%new+t[m.end():]
+ms=list(re.finditer(r'\n(    "_rosterGrowth[^\n]*")(,?)\n',t)); last=ms[-1]
+note='    "_rosterGrowth2026-11-12-style-2-merge-record-%s": "ONE document JOINED the roster by being BORN into it (%s): `tree` %d -> %d, %s, record %s, born into the tree class; measured once by this walker; nothing changed class."'%(n,SEAT,old,new,rec,n)
+t=t[:last.start()]+'\n'+last.group(1)+',\n'+note+(last.group(2))+'\n'+t[last.end():]
+json.loads(t); open(B,'w').write(t)
+w=open(W).read()
+a=' *   tree (%d)   docs/review-r2/**, docs/shift-records/** ('%old
+assert w.count(a)==1
+w=w.replace(a,' *   tree (%d)   docs/review-r2/**, docs/shift-records/** (2026-11-12, STYLE-2-MERGE record %s, the %s merge, %d -> %d: %s; '%(new,n,lane,old,new,rec))
+open(W,'w').write(w); print(old,'->',new)
+```
+
+`cell1.sh`
+```sh
+#!/bin/sh
+# usage: cell1.sh <sha> — the per-cell prose table at a tree (STYLE-2-MERGE-8, act 2's attribution)
+s=$1; W=/home/user/stages/c-$s; O=/home/user/stages/cells/$s.json; mkdir -p /home/user/stages/cells
+[ -s $O ] && exit 0
+cd /home/user/wt-merge8
+git worktree add -q --detach $W $s 2>/dev/null || exit 1
+ln -s /home/user/wt-merge8/node_modules $W/node_modules
+( cd $W && node scripts/prose-manifest-cells.mjs --out $O > /home/user/stages/cells/$s.log 2>&1; echo "exit $?" >> /home/user/stages/cells/$s.log )
+git worktree remove --force $W
+```
+
+`cellattr.py`
+```python
+# usage: python3 cellattr.py <a-sha> <b-sha> — rows (of 1,050) and cells moved/added/removed between two trees (STYLE-2-MERGE-8, act 2's attribution)
+import json,sys,collections
+def load(s):
+    d=json.load(open(f'/home/user/stages/cells/{s}.json'))
+    return d['rows'],{c['cell']:json.dumps(c,sort_keys=True) for c in d['cells']},d['cells']
+a,b=sys.argv[1:3]; ra,ca,la=load(a); rb,cb,lb=load(b)
+rows=sum(1 for k in set(ra)|set(rb) if ra.get(k)!=rb.get(k))
+cm=[k for k in set(ca)&set(cb) if ca[k]!=cb[k]]
+print({'rows':rows,'of':len(rb),'cellsMoved':len(cm),'added':len(set(cb)-set(ca)),'removed':len(set(ca)-set(cb)),'cellsAt_b':len(cb)})
+ex=json.loads(cb[cm[0]]) if cm else {}
+print('cell keys:',list(ex.keys())[:12])
+for key in ('pool','section','family','id','block'):
+    if key in ex:
+        print(key, collections.Counter(json.loads(cb[k]).get(key) for k in cm).most_common(15))
+```
+
+`probe.py` — the digest-pin probe (run in a detached probe worktree, then `npx vitest run --maxWorkers=1 <the three files>` twice, and once with `git show 12c437de4:src/generators/steps/resolveResources.js` planted; `cmp` the `probe-*` dumps).
+```python
+# The digest-pin probe as run at point 42 (STYLE-2-MERGE-8), in a DETACHED probe worktree (never the line's checkout):
+# it inserts a dump of each pin's live values into the three test files, then the line runs them twice (+ once with the
+# pre-EM-B2b2 step planted for editWorldFactResources) and cmp's the dumps; the worktree is discarded afterwards.
+def ins(p, anchor, add):
+    t=open(p).read(); assert t.count(anchor)==1,(p,anchor); open(p,'w').write(t.replace(anchor, anchor+add))
+def top(p):
+    t=open(p).read(); i=t.index('\nimport ')+1; open(p,'w').write(t[:i]+"import * as __fs from 'node:fs';\n"+t[i:])
+P='/home/user/rec8/probe-'
+f='tests/generators/x46NpcBand.test.js'; top(f)
+ins(f,"      if (rawBitFormOf(s) !== DARK[seed]) moved.push(seed);\n","      __fs.appendFileSync('"+P+"x46.txt', JSON.stringify([seed, rawBitFormOf(s)]) + '\\n');\n")
+f='tests/generators/institutionBudgetPromise.test.js'; top(f)
+ins(f,"    const moved = hashes.map((h, i) => (h === BEFORE[i] ? null : i)).filter((i) => i !== null);\n","    __fs.writeFileSync('"+P+"inst.json', JSON.stringify(hashes));\n")
+f='tests/domain/editWorldFactResources.test.js'; top(f)
+ins(f,"      if (sha(dormant.record) !== PRE_CHANGE[index].derived) drift.push(index);\n","      __fs.appendFileSync('"+P+"ewf.txt', JSON.stringify({ index, derived: sha(dormant.record), fresh: sha(record) }) + '\\n');\n")
+ins(f,"      if (sha(replay) !== PRE_CHANGE[index].replay) drift.push(index);\n","      __fs.appendFileSync('"+P+"ewf.txt', JSON.stringify({ index, replay: sha(replay) }) + '\\n');\n")
+```
+
+`rekey.py` — the three probe-captured pins written by identity (point 43 on).
+```python
+# usage (in the line's worktree): python3 rekey.py <probe-dir> <point> <merge-sha> <lane> <record> <cause-clause>
+# Re-keys BY IDENTITY the x46 dark digests (fixture), institutionBudgetPromise BEFORE, editWorldFactResources PRE_CHANGE
+# from a probe run (probe.py), with a dated note in each file; prints the moved counts. (STYLE-2-MERGE-8)
+import json,re,sys
+R,PT,M,LANE,REC,CAUSE=sys.argv[1:7]; R=R.rstrip('/')+'/'
+def rep(p,o,n):
+    t=open(p).read(); assert t.count(o)==1,(p,o[:70]); open(p,'w').write(t.replace(o,n))
+fx='tests/fixtures/x46-npc-band-dark-digests.json'; raw=open(fx).read(); old=json.loads(raw)
+new=dict(json.loads(l) for l in open(R+'probe-x46.txt')); assert list(new)==list(old)
+x46=[k for k in old if old[k]!=new[k]]
+open(fx,'w').write(json.dumps(new,indent=2 if '\n  "' in raw else 1)+('\n' if raw.endswith('\n') else ''))
+f='tests/generators/institutionBudgetPromise.test.js'; t=open(f).read(); h=json.load(open(R+'probe-inst.json'))
+m=re.search(r"const BEFORE = Object\.freeze\(\[\n(.*?)\n\]\);",t,re.S); L=m.group(1).split('\n'); inst=[]
+for i,l in enumerate(L):
+    v=re.match(r"  '([0-9a-f]{16})', // (\d+)$",l); assert v and int(v.group(2))==i
+    if v.group(1)!=h[i]: inst.append(i); L[i]=f"  '{h[i]}', // {i}"
+t=t[:m.start(1)]+'\n'.join(L)+t[m.end(1):]
+t=t.replace("\nconst BEFORE = Object.freeze([",
+f"\n// RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point {PT}): {len(inst)} of 60 moved, none by the budget (densityFactor still\n// forced to 1), by the {LANE} merge {M} ({REC}: {CAUSE}); the line before the merge reads all sixty green.\n// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.\nconst BEFORE = Object.freeze([",1)
+open(f,'w').write(t)
+p='tests/generators/x46NpcBand.test.js'; t=open(p).read()
+i=t.index('  const DARK =/**')
+t=t[:i]+f"  // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8, point {PT}): {len(x46)} of 60 moved by the {LANE} merge {M} ({REC}:\n  // {CAUSE}); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an\n  // untracked probe), twice and equal.\n"+t[i:]
+open(p,'w').write(t)
+p='tests/domain/editWorldFactResources.test.js'; t=open(p).read()
+rows={}
+for l in open(R+'probe-ewf.txt'):
+    o=json.loads(l); rows.setdefault(o['index'],{}).update({k:v for k,v in o.items() if k in('derived','replay')})
+moved=[]
+for idx,v in rows.items():
+    m=re.search(r"  %d: Object\.freeze\(\{\n    derived: '([0-9a-f]{64})',\n    replay: '([0-9a-f]{64})',"%idx,t)
+    if (m.group(1),m.group(2))!=(v['derived'],v['replay']):
+        moved.append(idx); t=t[:m.start(1)]+v['derived']+t[m.end(1):m.start(2)]+v['replay']+t[m.end(2):] if False else t.replace(m.group(0),"  %d: Object.freeze({\n    derived: '%s',\n    replay: '%s',"%(idx,v['derived'],v['replay']))
+a="\n    const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);\n\n    // (1) THE THREE FIXED ROWS"
+assert t.count(a)==1
+t=t.replace(a,f"\n// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point {PT} (STYLE-2-MERGE-8), BY THE SAME PLANT ── Rows {', '.join(map(str,moved))} moved by the {LANE}\n// merge {M} ({REC}: {CAUSE}); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,\n// sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,\n// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.\n"+a,1)
+open(p,'w').write(t)
+print('x46',len(x46),'inst',len(inst),'ewf rows',moved)
+```
+
+`homes.mjs` + `hat.sh` — the Wizard News homes at a tree (the contract's CORPUS throw disarmed in a scratch copy) and at a commit, for bisecting a home that left.
+```js
+// STYLE-2-MERGE-8: the Wizard News homes at <tree>, measured through the contract's own reconstruction with its CORPUS throw
+// disarmed in a scratch copy beside the module (removed afterwards). usage: TREE=<tree> node homes.mjs <out.json>
+import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
+const R = process.env.TREE + '/';
+const src = readFileSync(R + 'scripts/lib/news-voice-contract.mjs', 'utf8');
+const armed = "    if (result[key] !== expected) throw new Error(`Wizard News ${key} drifted: expected ${expected}, got ${result[key]}`);";
+if (src.split(armed).length !== 2) throw new Error('the throw line moved');
+const copy = R + 'scripts/lib/.homes-probe.mjs';
+writeFileSync(copy, src.replace(armed, '    void expected;'));
+try {
+  const { buildObservedCorpus, OBSERVED_SCALAR_FIELDS } = await import(R + 'scripts/lib/observed-shape-corpus.mjs');
+  const { reconstructWizardNewsIntroductions } = await import(copy);
+  const corpus = await buildObservedCorpus({ scalarFields: OBSERVED_SCALAR_FIELDS });
+  const r = reconstructWizardNewsIntroductions(corpus.scalarObservations);
+  const homes = [...new Set(r.entries.map(({ fields }) => `${fields.kind}|${fields.impactKind}`))].sort();
+  writeFileSync(process.argv[2], JSON.stringify({ ...r, entries: undefined, homeList: homes }, null, 1));
+  console.log(r.pulseRoots, r.introductions, r.retirements, r.finalEntries, r.homes);
+} finally { unlinkSync(copy); }
+```
+```sh
+#!/bin/sh
+# usage: hat.sh <sha> — homes at a commit, in a throwaway detached worktree (STYLE-2-MERGE-8)
+s=$1; W=/home/user/stages/hw-$s
+cd /home/user/wt-merge8 && git worktree add -q --detach $W $s && ln -s /home/user/wt-merge8/node_modules $W/node_modules
+TREE=$W node /home/user/rec8/homes.mjs /home/user/rec8/hb-$s.json > /home/user/rec8/hb-$s.log 2>&1
+cd /home/user/wt-merge8 && git worktree remove --force $W
+grep -c '"applied|npc_mobilize"' /home/user/rec8/hb-$s.json
+```
+
+`pdcounts.mjs` + `rebank.mjs` — the draws behind named pool-dominance rows, and the bounded re-bank of STOP 43a's class (refuses > 2 draws or a row-count change).
+```js
+// STYLE-2-MERGE-8: draws behind named pool-dominance rows at <tree>, through the guard's own measureDominance.
+// usage: node pdcounts.mjs <tree> <pool>... -> JSON {pool: {draws, lines, top1, top5, top1n, top5n}}
+const [tree, ...pools] = process.argv.slice(2);
+const { measureDominance } = await import(tree + '/scripts/census/pool-dominance.mjs');
+const t = measureDominance(); const out = {};
+for (const p of pools) { const m = t.get(p); out[p] = m ? { draws: m.draws, lines: m.lines, top1: m.top1, top5: m.top5, top1n: Math.round(m.top1 * m.draws), top5n: Math.round(m.top5 * m.draws) } : null; }
+console.log(JSON.stringify(out));
+```
+```js
+// STYLE-2-MERGE-8: re-bank NAMED pool-dominance rows at the merged measure (the chair's ruling at point 43), through the
+// guard's own measureDominance and ceil4; refuses a rise of more than two draws, a pool not named, or a row-count change.
+import { readFileSync, writeFileSync } from 'node:fs';
+const [tree, prevJson, ...pools] = process.argv.slice(2);
+const G = await import(tree + '/scripts/census/pool-dominance.mjs');
+const prev = JSON.parse(readFileSync(prevJson, 'utf8'));
+const t = G.measureDominance(); const reg = G.readRegister(); const n0 = Object.keys(reg.pools).length;
+for (const p of pools) {
+  const m = t.get(p), row = reg.pools[p], b = prev[p];
+  if (!m || !row || !b) throw new Error(`refused: ${p} not measured or not registered`);
+  for (const k of ['top1', 'top5']) {
+    const nb = Math.round(b[k] * b.draws), na = Math.round(m[k] * m.draws);
+    if (na - nb > 2) throw new Error(`refused: ${p} ${k} rises ${na - nb} draws`);
+    const c = G.ceil4(m[k]);
+    if (c > row[k]) { console.log(`${p} ${k} ${row[k]} -> ${c} (${nb}/${b.draws} -> ${na}/${m.draws})`); row[k] = c; }
+  }
+}
+if (Object.keys(reg.pools).length !== n0) throw new Error('refused: row count changed');
+writeFileSync(G.REGISTER_PATH, `${JSON.stringify(reg, null, 2)}\n`);
 ```
