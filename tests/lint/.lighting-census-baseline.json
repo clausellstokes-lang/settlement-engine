@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8bb5e91bb41ab78ccb1c20a2175f7fa7c0b4567b",
-  "measuredBy": "STYLE-2-MERGE-8",
+  "measuredAtSha": "aacd6fd974a0cc032e6af0dd5ec18491d0701437",
+  "measuredBy": "POOL-GUARD",
   "date": "2026-11-12",
-  "note": "STYLE-2-MERGE point 43 (the COHERENCE-PRESUME merge f922124d0): the line side taken, the census re-frozen over the composed tree (both lanes new test files)",
+  "note": "the pool-dominance walker: eleven new test titles (thirteen as the reader counts them: one template-literal title with two interpolations reads as three) and one new describe",
   "files": 3205,
   "parked": 397,
   "credited": 2808,
-  "titles": 29120,
-  "suiteTitles": 7878
+  "titles": 29133,
+  "suiteTitles": 7879
 }
