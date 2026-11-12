@@ -14,6 +14,7 @@ Seat: COHERENCE-VEIL-3, lane `lane/coherence-veil-2026-11-11`, from `c4d78c907`.
 6. **The jsonpath `$.**` pre-test in `_gallery_veil_grouping` is removed** (it exhausted memory at depth 9,000; the walk's own text test makes it redundant).
 7. **`importMap` 84 on the six-size probe** is classed as the pre-existing map-hides-more count (part 3: 46 over 12 towns): the map member lacks an NPC title or category the UNMARKED listing shows. PLAUSIBLE for all 84 (the probe keeps 12 examples, every one of that class; the count is not classified row by row).
 8. **The lighting census was re-measured** through its own door (+8 titles, the new pins): `b68cac72e`.
+9. **The bytes were bought back inside R5 (b)** (`2c78f0e46`). `verify:dist` at `1625d4780` read the first-paint Brotli closure at 300,008 B against its zero-slack budget of 299,985 (`tests/build/vendorPdfLazy.test.js`); with `galleryVeil.js` at `c4d78c907` the same build passes, so the 23 bytes were the writer change. No budget was raised: the rule is now one line, `if (mode.snapshot && !next.snapshot) next.mode = 'live';`, the same meaning.
 
 **Chair rulings taken during the seat (2026-11-12):** `allowImport` takes the same typed read as `revealDm` in the same fifth restatement; the `revealDm` reading below is accepted, its one page change declared (§3).
 
@@ -26,7 +27,7 @@ All pins are in `tests/security/galleryVeilCures.pglite.test.js` unless named; e
 | R3 | `e3737f77d` | npc id `1e131071` unmarked; member name `2.5e130748` marked; `-1e131071` in a frozen copy; `1e131071` in a narration: 4 / 4 / 2 / 4 reads RAISE "value overflows numeric format" (210: all serve) → all serve. `_gallery_veil_num_zero` compares against the exact constant 2^-1075 (5^1075 × 10^-1075); no product | "R3 (the review rows) …", "R3/R4 (the class) …" (§2) |
 | R4 | `d4a4718a6` | obj and arr 550 / 900 deep, Reveal DM, marked: gallery and import RAISE "stack depth limit exceeded" → serve. Natively also 2,000 / 9,000 / 60,000 deep: serve (60,000: 4.6 s); 210 serves all | "R4 (the review rows) …", "R4 (the same class …)", the fuzz |
 | R5 (a) | `5b3a58696` | link of a listed snapshot share and a snapshot share with no copy: `snapshotAt` `2026-11-01T00:00:00.000Z` → `null`, every label now the 210 page's; the gallery with its copy keeps its date | "R5 (a, the review rows) …" (through the real client) |
-| R5 (b) | `5b3a58696` | `writeShareVeil` with a 1.1M-character copy: mode `snapshot`, copy dropped → mode `live`, copy dropped | "R5 (b) …" |
+| R5 (b) | `5b3a58696`, `2c78f0e46` | `writeShareVeil` with a 1.1M-character copy: mode `snapshot`, copy dropped → mode `live`, copy dropped | "R5 (b) …" |
 | R1 | `a53dae667` | snapshot share, live row gained "Rvpost Newcomer" (with a secret) and an edited text after the freeze, Reveal DM off and on, through `fetchDossierForImport`: post-freeze content in the import → none, the frozen text present, the same people as the gallery page; a copy past the bound imported the live row → no row; no copy → exactly the gallery page | "R1 (the review row) …", "R1 (the edges) …" |
 | R9/R11 | `4a1bd3066` | `revealDm` "maybe", {}, "yes", "t", 1, "on", "no", "off", true, false, null, absent, Reveal DM off and on, all four reads; `allowImport` the same values on a Reveal DM import: 1–3 reads RAISE and "yes"/"t"/1/"on" reveal → 0 raise; only JSON true reveals or permits (null/absent fall back to the settlement flag) | "R9/R11 (the review rows) …" |
 | R6 | `a6ca40a75` | the block: `session_default` "2min" (its own `set local`) → the real limits; anonymous events 0 of 1,100 → 1,100; counts over the document only → document, copy and narration; four counts added | the fixture run (§5) |
@@ -104,11 +105,13 @@ R7 is inside its line (1.6×, 1.5 s): the worst single read is 1,285 ms (link, m
 
 ## 8. Gates
 
-All at the shipping tip `b68cac72e`, each read through `scripts/gate-tail.sh`:
+Each read through `scripts/gate-tail.sh`. `tests/security` whole ran at `b68cac72e`; the one later code change (`2c78f0e46`, the writer's rule in one line) re-ran its pins and the client tests, and every other gate below ran at it:
 
 | Gate | Result |
 |---|---|
 | `npx vitest run tests/security` | **exit 0: 154 files passed, 1 skipped; 1,949 tests passed, 1 skipped** (the review's 1,941 + 8 new pins) |
+| `npm run build`, then `npm run verify:dist` (at `2c78f0e46`) | exit 0, exit 0: STRICT DIST OK, 66 files, 602 tests |
+| R5 (b), both veil pins, `publicSafe`, the ten files naming `ShareToGallery` (at `2c78f0e46`) | 249/249 |
 | `node scripts/check-domain-strict.mjs` | exit 0 (1,113, ceiling 1,113) |
 | `npm run typecheck:ratchet` | exit 0 (167, ceiling 167) |
 | eslint, every touched file (`galleryVeil.js`, `ShareToGallery.jsx`, both pins, the probes) | exit 0 |
