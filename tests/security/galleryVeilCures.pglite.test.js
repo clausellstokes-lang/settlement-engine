@@ -373,4 +373,17 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     // anchored: the edges JS reads as zero and as the infinities are among them
     expect(rows.filter(({ s }) => s === 'Infinity' || s === '-Infinity').length).toBeGreaterThan(0);
   }, ROW_TIMEOUT_MS);
+  // ── F4 ────────────────────────────────────────────────────────────────────────────────────────
+  it('F4: a member key naming no person is worked on by no read; one naming a person still hides its depth', async () => {
+    const ov = { $veil: { v: 1, deltas: [] }, npc_0: { revealDm: false } };
+    for (let i = 1; i <= 5000; i += 1) ov[`ghost_${i}`] = { revealDm: false, allowImport: true };
+    const share = await put(LIVE.db, { name: 'T', npcs: [{ id: 'npc_0', name: 'A', personality: { core: 'F4SECRET_FACE' } }, { id: 'npc_1', name: 'B', personality: { core: 'F4OPEN_FACE' } }] }, ov);
+    const r = await readBoth(LIVE.db, share);
+    // anchored: the open face's depth is drawn, so the read is the town's
+    expect(has(r.g.settlement, 'F4OPEN_FACE')).toBe(true);
+    expect(has(r.gResp, 'F4SECRET_FACE') || has(r.lResp, 'F4SECRET_FACE')).toBe(false);
+    // the served booleans are the people's: the one person with an entry, never a ghost
+    expect(Object.keys(r.gResp[0].gallery_member_overrides).sort()).toEqual(['$veil', 'npc_0']);
+    expect(Object.keys(r.lResp.gallery_member_overrides).sort()).toEqual(['$veil', 'npc_0']);
+  }, ROW_TIMEOUT_MS);
 });
