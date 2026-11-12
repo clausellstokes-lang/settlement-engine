@@ -27,6 +27,22 @@ import { join } from 'node:path';
 import { createRequire } from 'node:module';
 
 import { timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
+import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
+
+/**
+ * THE HOUSES THAT TRY DISPUTES (the chair's correction of 2026-11-12, measured by COHERENCE-AGREE-2):
+ * a court is a house whose OWN catalogued service tries disputes under the public law, read from its
+ * service rows, never from its name alone — the Town hall's "Dispute arbitration: Bring commercial and
+ * civil disputes before a magistrate", the City hall's "Appeals court", the Town council's "Dispute
+ * adjudication", the City administration's "Courts and adjudication", a Courthouse's "Civil disputes" and
+ * "Criminal trials", the court buildings' "Appeals", Mayor and council's "Legal appeals", a city-state's
+ * "Civic law enforcement". A headman's, elder's or reeve's mediation, a guild's arbitration and a church's
+ * court are not the town's court.
+ */
+const COURT_SERVICE = /^(?:civil disputes|criminal trials|dispute arbitration|dispute adjudication|courts and adjudication|appeals(?: court)?|legal appeals|civic law enforcement)$/i;
+export const COURT_HOUSES = Object.freeze(new Set(Object.entries(INSTITUTION_SERVICES)
+  .filter(([, rows]) => Object.keys(rows || {}).some((service) => COURT_SERVICE.test(service)))
+  .map(([name]) => name.toLowerCase())));
 
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
@@ -92,7 +108,7 @@ export const THINGS = Object.freeze({
   court: {
     words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b/i,
     atoms: [],
-    absent: (_f, names) => !names.some((n) => /court/i.test(n)),
+    absent: (_f, names) => !names.some((n) => /court/i.test(n) || COURT_HOUSES.has(n.toLowerCase())),
   },
   bank: {
     words: /\bbankers?\b|\bbanking\b|\bmoney.?changers?\b|\bcounting.?houses?\b/i,

@@ -24,7 +24,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import {
-  REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, printedOutOfTime,
+  COURT_HOUSES, REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, printedOutOfTime,
   rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
@@ -65,6 +65,15 @@ describe('the rule book', () => {
     const having = { defence: { militia: true, watch: true } };
     expect(printedAbsent(record, lacking, [])).toEqual([{ thing: 'militia', path: '.powerStructure.factions[].desc', sentence: 'Town watch and militia;' }]);
     expect(printedAbsent(record, having, [])).toEqual([]);
+  });
+});
+
+describe('the court reading (the chair\'s correction of 2026-11-12)', () => {
+  test('planted: a house whose own service tries disputes is a court; mediation is not', () => {
+    expect([...COURT_HOUSES].sort()).toEqual(['city administration', 'city hall', 'city-state government', 'courthouse', 'mayor and council', 'multiple court buildings', 'town council', 'town hall']);
+    expect(THINGS.court.absent({}, ['Town hall'])).toBe(false);
+    expect(THINGS.court.absent({}, ['Courthouse'])).toBe(false);
+    expect(THINGS.court.absent({}, ['Village headman', 'Village reeve', 'Craft guilds (5-15)'])).toBe(true);
   });
 });
 
