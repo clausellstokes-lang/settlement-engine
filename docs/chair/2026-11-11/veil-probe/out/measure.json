@@ -1,0 +1,2215 @@
+{
+ "chainFailed": [],
+ "seeds": [
+  "coherence-veil-village-0",
+  "coherence-veil-village-1",
+  "coherence-veil-village-2",
+  "coherence-veil-village-3",
+  "coherence-veil-village-4",
+  "coherence-veil-village-5",
+  "coherence-veil-town-0",
+  "coherence-veil-town-1",
+  "coherence-veil-town-2",
+  "coherence-veil-town-3",
+  "coherence-veil-town-4",
+  "coherence-veil-town-5",
+  "coherence-veil-town-6",
+  "coherence-veil-town-7",
+  "coherence-veil-city-0",
+  "coherence-veil-city-1",
+  "coherence-veil-city-2",
+  "coherence-veil-city-3",
+  "coherence-veil-city-4",
+  "coherence-veil-city-5",
+  "coherence-veil-metropolis-0",
+  "coherence-veil-metropolis-1",
+  "coherence-veil-metropolis-2",
+  "coherence-veil-metropolis-3"
+ ],
+ "flags": {
+  "veiledFaces": 38,
+  "resp": {
+   "gallery.response.cardsMatched": 38,
+   "link.response.cardsMatched": 38
+  },
+  "page": {
+   "gallery.page.cardsMatched": 38,
+   "link.page.cardsMatched": 38
+  },
+  "controlTitleInRecord": 38,
+  "controlMembershipsInRecord": 18
+ },
+ "roll": {
+  "gallery | unmarked": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | default/live": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.deltas | default/live": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 48
+   }
+  },
+  "link.dossier | default/live": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "link.overrides | default/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | default/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | default/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.deltas | default/snapshot": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 48
+   }
+  },
+  "link.dossier | default/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "link.overrides | default/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | groupings/live": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.deltas | groupings/live": {
+   "rows": 24,
+   "paths": 288,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 16032
+   }
+  },
+  "link.dossier | groupings/live": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "link.overrides | groupings/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | groupings/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | groupings/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.deltas | groupings/snapshot": {
+   "rows": 24,
+   "paths": 288,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 16032
+   }
+  },
+  "link.dossier | groupings/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "link.overrides | groupings/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | switches/live": {
+   "rows": 24,
+   "paths": 17634,
+   "readable": 9639,
+   "fam": {
+    "institutions[*].desc": 1107,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "relationships[*].tension": 924,
+    "npcs[*].institution.key": 906,
+    "npcs[*].institution.kind": 906,
+    "npcs[*].institution.title": 906
+   },
+   "extra": {}
+  },
+  "gallery.deltas | switches/live": {
+   "rows": 24,
+   "paths": 212,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 11152
+   }
+  },
+  "link.dossier | switches/live": {
+   "rows": 24,
+   "paths": 17634,
+   "readable": 9639,
+   "fam": {
+    "institutions[*].desc": 1107,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "relationships[*].tension": 924,
+    "npcs[*].institution.key": 906,
+    "npcs[*].institution.kind": 906,
+    "npcs[*].institution.title": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | switches/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | switches/snapshot": {
+   "rows": 24,
+   "paths": 17634,
+   "readable": 9639,
+   "fam": {
+    "institutions[*].desc": 1107,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "relationships[*].tension": 924,
+    "npcs[*].institution.key": 906,
+    "npcs[*].institution.kind": 906,
+    "npcs[*].institution.title": 906
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | switches/snapshot": {
+   "rows": 24,
+   "paths": 17634,
+   "readable": 9639,
+   "fam": {
+    "institutions[*].desc": 1107,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "relationships[*].tension": 924,
+    "npcs[*].institution.key": 906,
+    "npcs[*].institution.kind": 906,
+    "npcs[*].institution.title": 906
+   },
+   "extra": {}
+  },
+  "gallery.deltas | switches/snapshot": {
+   "rows": 24,
+   "paths": 212,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 11152
+   }
+  },
+  "link.dossier | switches/snapshot": {
+   "rows": 24,
+   "paths": 17634,
+   "readable": 9639,
+   "fam": {
+    "institutions[*].desc": 1107,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "relationships[*].tension": 924,
+    "npcs[*].institution.key": 906,
+    "npcs[*].institution.kind": 906,
+    "npcs[*].institution.title": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | switches/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | houses/live": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.deltas | houses/live": {
+   "rows": 24,
+   "paths": 37,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 2362
+   }
+  },
+  "link.dossier | houses/live": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "link.overrides | houses/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | houses/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | houses/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "gallery.deltas | houses/snapshot": {
+   "rows": 24,
+   "paths": 37,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 2362
+   }
+  },
+  "link.dossier | houses/snapshot": {
+   "rows": 24,
+   "paths": 1025,
+   "readable": 417,
+   "fam": {
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 109,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 50,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37,
+    "institutions[*].required": 37
+   },
+   "extra": {}
+  },
+  "link.overrides | houses/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | faces/live": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.deltas | faces/live": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 48
+   }
+  },
+  "link.dossier | faces/live": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | faces/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | faces/snapshot": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | faces/snapshot": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.deltas | faces/snapshot": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 48
+   }
+  },
+  "link.dossier | faces/snapshot": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | faces/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | npcFields/live": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.deltas | npcFields/live": {
+   "rows": 24,
+   "paths": 2794,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 186249
+   }
+  },
+  "link.dossier | npcFields/live": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | npcFields/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | npcFields/snapshot": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | npcFields/snapshot": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.deltas | npcFields/snapshot": {
+   "rows": 24,
+   "paths": 2794,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 186249
+   }
+  },
+  "link.dossier | npcFields/snapshot": {
+   "rows": 24,
+   "paths": 14051,
+   "readable": 8040,
+   "fam": {
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 944,
+    "npcs[*].personality.dominant": 944,
+    "npcs[*].personality.modifier": 944,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | npcFields/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | powerFields/live": {
+   "rows": 24,
+   "paths": 1155,
+   "readable": 547,
+   "fam": {
+    "powerStructure.factions[*].desc": 127,
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 104,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 49,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37
+   },
+   "extra": {}
+  },
+  "gallery.deltas | powerFields/live": {
+   "rows": 24,
+   "paths": 127,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 9999
+   }
+  },
+  "link.dossier | powerFields/live": {
+   "rows": 24,
+   "paths": 1155,
+   "readable": 547,
+   "fam": {
+    "powerStructure.factions[*].desc": 127,
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 104,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 49,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37
+   },
+   "extra": {}
+  },
+  "link.overrides | powerFields/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | powerFields/snapshot": {
+   "rows": 24,
+   "paths": 1155,
+   "readable": 547,
+   "fam": {
+    "powerStructure.factions[*].desc": 127,
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 104,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 49,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | powerFields/snapshot": {
+   "rows": 24,
+   "paths": 1155,
+   "readable": 547,
+   "fam": {
+    "powerStructure.factions[*].desc": 127,
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 104,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 49,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37
+   },
+   "extra": {}
+  },
+  "gallery.deltas | powerFields/snapshot": {
+   "rows": 24,
+   "paths": 127,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 9999
+   }
+  },
+  "link.dossier | powerFields/snapshot": {
+   "rows": 24,
+   "paths": 1155,
+   "readable": 547,
+   "fam": {
+    "powerStructure.factions[*].desc": 127,
+    "publicProse.blocks.power:desk": 124,
+    "publicProse.blocks.defense:criminal": 104,
+    "institutions[*].tags[*]": 62,
+    "economicState.safetyProfile.criminalInstitutions[*]": 49,
+    "economicState.safetyProfile.crimeTypes[*]": 48,
+    "institutions[*].desc": 37,
+    "institutions[*].name": 37,
+    "institutions[*].source": 37,
+    "institutions[*].category": 37
+   },
+   "extra": {}
+  },
+  "link.overrides | powerFields/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | otherFields/live": {
+   "rows": 24,
+   "paths": 11018,
+   "readable": 6976,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "relationships[*].tension": 924,
+    "relationships[*].description": 924,
+    "availableServices.equipment[*].desc": 464,
+    "availableServices.equipment[*].name": 464,
+    "availableServices.equipment[*].institution": 464,
+    "availableServices.legal[*].desc": 359,
+    "availableServices.legal[*].name": 359,
+    "availableServices.legal[*].institution": 356
+   },
+   "extra": {}
+  },
+  "gallery.deltas | otherFields/live": {
+   "rows": 24,
+   "paths": 5428,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 414258
+   }
+  },
+  "link.dossier | otherFields/live": {
+   "rows": 24,
+   "paths": 11018,
+   "readable": 6976,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "relationships[*].tension": 924,
+    "relationships[*].description": 924,
+    "availableServices.equipment[*].desc": 464,
+    "availableServices.equipment[*].name": 464,
+    "availableServices.equipment[*].institution": 464,
+    "availableServices.legal[*].desc": 359,
+    "availableServices.legal[*].name": 359,
+    "availableServices.legal[*].institution": 356
+   },
+   "extra": {}
+  },
+  "link.overrides | otherFields/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | otherFields/snapshot": {
+   "rows": 24,
+   "paths": 11018,
+   "readable": 6976,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "relationships[*].tension": 924,
+    "relationships[*].description": 924,
+    "availableServices.equipment[*].desc": 464,
+    "availableServices.equipment[*].name": 464,
+    "availableServices.equipment[*].institution": 464,
+    "availableServices.legal[*].desc": 359,
+    "availableServices.legal[*].name": 359,
+    "availableServices.legal[*].institution": 356
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | otherFields/snapshot": {
+   "rows": 24,
+   "paths": 11018,
+   "readable": 6976,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "relationships[*].tension": 924,
+    "relationships[*].description": 924,
+    "availableServices.equipment[*].desc": 464,
+    "availableServices.equipment[*].name": 464,
+    "availableServices.equipment[*].institution": 464,
+    "availableServices.legal[*].desc": 359,
+    "availableServices.legal[*].name": 359,
+    "availableServices.legal[*].institution": 356
+   },
+   "extra": {}
+  },
+  "gallery.deltas | otherFields/snapshot": {
+   "rows": 24,
+   "paths": 5428,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 414258
+   }
+  },
+  "link.dossier | otherFields/snapshot": {
+   "rows": 24,
+   "paths": 11018,
+   "readable": 6976,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "relationships[*].tension": 924,
+    "relationships[*].description": 924,
+    "availableServices.equipment[*].desc": 464,
+    "availableServices.equipment[*].name": 464,
+    "availableServices.equipment[*].institution": 464,
+    "availableServices.legal[*].desc": 359,
+    "availableServices.legal[*].name": 359,
+    "availableServices.legal[*].institution": 356
+   },
+   "extra": {}
+  },
+  "link.overrides | otherFields/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | all/live": {
+   "rows": 24,
+   "paths": 24200,
+   "readable": 14749,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 938,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.deltas | all/live": {
+   "rows": 24,
+   "paths": 8886,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 639919
+   }
+  },
+  "link.dossier | all/live": {
+   "rows": 24,
+   "paths": 24200,
+   "readable": 14749,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 938,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | all/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "import | all/live": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "hiddenOnGallery": 14749,
+    "inResponse": 14749,
+    "onImporterPage": 14749
+   }
+  },
+  "map.member (rendered as sent) | all/live": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "hiddenOnGallery": 14749,
+    "onMapPage": 14749
+   }
+  },
+  "gallery.data | all+dm/live": {
+   "rows": 24,
+   "paths": 28707,
+   "readable": 17421,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 938,
+    "npcs[*].physical.build": 924,
+    "npcs[*].physical.clothes": 924,
+    "npcs[*].physical.feature": 924,
+    "npcs[*].personality.flaw": 894,
+    "npcs[*].personality.tell": 894,
+    "npcs[*].institution.key": 841,
+    "npcs[*].personality.speech": 789
+   },
+   "extra": {}
+  },
+  "gallery.deltas | all+dm/live": {
+   "rows": 24,
+   "paths": 8886,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 639919
+   }
+  },
+  "link.dossier | all+dm/live": {
+   "rows": 24,
+   "paths": 24200,
+   "readable": 14749,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 938,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | all+dm/live": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "import | all+dm/live": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "hiddenOnGallery": 17421,
+    "inResponse": 17421,
+    "onImporterPage": 17421
+   }
+  },
+  "map.member (rendered as sent) | all+dm/live": {
+   "rows": 24,
+   "paths": 0,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "hiddenOnGallery": 17421,
+    "onMapPage": 14657
+   }
+  },
+  "gallery.data | all/snapshot": {
+   "rows": 24,
+   "paths": 24200,
+   "readable": 14749,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 938,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | all/snapshot": {
+   "rows": 24,
+   "paths": 24200,
+   "readable": 14749,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 938,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "gallery.deltas | all/snapshot": {
+   "rows": 24,
+   "paths": 8886,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 639919
+   }
+  },
+  "link.dossier | all/snapshot": {
+   "rows": 24,
+   "paths": 24200,
+   "readable": 14749,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 938,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | all/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  },
+  "gallery.data | all+dm/snapshot": {
+   "rows": 24,
+   "paths": 28707,
+   "readable": 17421,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 938,
+    "npcs[*].physical.build": 924,
+    "npcs[*].physical.clothes": 924,
+    "npcs[*].physical.feature": 924,
+    "npcs[*].personality.flaw": 894,
+    "npcs[*].personality.tell": 894,
+    "npcs[*].institution.key": 841,
+    "npcs[*].personality.speech": 789
+   },
+   "extra": {}
+  },
+  "gallery.snapshot | all+dm/snapshot": {
+   "rows": 24,
+   "paths": 47245,
+   "readable": 26787,
+   "fam": {
+    "npcs[*].goal.intent": 9143,
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].goal.long": 924,
+    "npcs[*].goal.short": 924,
+    "npcs[*].power": 924,
+    "npcs[*].gender": 924,
+    "npcs[*].secret.what": 924,
+    "npcs[*].secret.stakes": 916,
+    "npcs[*].physical.age": 894
+   },
+   "extra": {}
+  },
+  "gallery.deltas | all+dm/snapshot": {
+   "rows": 24,
+   "paths": 8886,
+   "readable": 0,
+   "fam": {},
+   "extra": {
+    "bytes": 639919
+   }
+  },
+  "link.dossier | all+dm/snapshot": {
+   "rows": 24,
+   "paths": 24200,
+   "readable": 14749,
+   "fam": {
+    "institutions[*].tags[*]": 1647,
+    "institutions[*].desc": 1107,
+    "npcs[*].physical.age": 944,
+    "npcs[*].physical.build": 944,
+    "npcs[*].physical.clothes": 944,
+    "npcs[*].physical.feature": 944,
+    "npcs[*].personality.flaw": 944,
+    "npcs[*].personality.tell": 944,
+    "npcs[*].personality.speech": 938,
+    "npcs[*].institution.key": 906
+   },
+   "extra": {}
+  },
+  "link.overrides | all+dm/snapshot": {
+   "rows": 24,
+   "paths": 96,
+   "readable": 0,
+   "fam": {},
+   "extra": {}
+  }
+ },
+ "samples": [
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "default/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "default/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "default/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "default/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "default/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "groupings/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "groupings/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "groupings/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "groupings/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "groupings/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "switches/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].institution.family",
+     "Access to parish church"
+    ],
+    [
+     "npcs[id=npc_parish_church].personality.tell",
+     "pauses for exactly three seconds before answering any question"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "switches/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].institution.family",
+     "Access to parish church"
+    ],
+    [
+     "npcs[id=npc_parish_church].personality.tell",
+     "pauses for exactly three seconds before answering any question"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "switches/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].institution.family",
+     "Access to parish church"
+    ],
+    [
+     "npcs[id=npc_parish_church].personality.tell",
+     "pauses for exactly three seconds before answering any question"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "switches/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].institution.family",
+     "Access to parish church"
+    ],
+    [
+     "npcs[id=npc_parish_church].personality.tell",
+     "pauses for exactly three seconds before answering any question"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "switches/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].institution.family",
+     "Access to parish church"
+    ],
+    [
+     "npcs[id=npc_parish_church].personality.tell",
+     "pauses for exactly three seconds before answering any question"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "houses/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "houses/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "houses/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "houses/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "houses/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "faces/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "faces/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "faces/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "faces/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "faces/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "npcFields/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "npcFields/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "npcFields/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "npcFields/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "npcFields/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "powerFields/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "powerFields/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "powerFields/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "powerFields/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "powerFields/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "What goes wrong at Rundberg goes wrong one thing at a time and belongs to whoever did it."
+    ],
+    [
+     "economicState.safetyProfile.crimeTypes[#0].desc",
+     "Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "otherFields/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "history.currentTensions[#0].description",
+     "The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim"
+    ],
+    [
+     "history.historicalEvents[name=The Migration].description",
+     "A recently arrived group and the established population fell into sustained, low-level conflict"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "otherFields/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "history.currentTensions[#0].description",
+     "The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim"
+    ],
+    [
+     "history.historicalEvents[name=The Migration].description",
+     "A recently arrived group and the established population fell into sustained, low-level conflict"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "otherFields/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "history.currentTensions[#0].description",
+     "The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim"
+    ],
+    [
+     "history.historicalEvents[name=The Migration].description",
+     "A recently arrived group and the established population fell into sustained, low-level conflict"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "otherFields/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "history.currentTensions[#0].description",
+     "The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim"
+    ],
+    [
+     "history.historicalEvents[name=The Migration].description",
+     "A recently arrived group and the established population fell into sustained, low-level conflict"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "otherFields/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "history.currentTensions[#0].description",
+     "The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim"
+    ],
+    [
+     "history.historicalEvents[name=The Migration].description",
+     "A recently arrived group and the established population fell into sustained, low-level conflict"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all+dm/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all+dm/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all+dm/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all+dm/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].goal.long",
+     "Protect the people in their care for as long as they are able."
+    ],
+    [
+     "npcs[id=npc_parish_church].goal.short",
+     "Stop Headman's Authority from taking anything more from Religious Authorities this season."
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-0",
+   "cfg": "all+dm/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "npcs[id=npc_parish_church].physical.age",
+     "mid-fifties"
+    ],
+    [
+     "npcs[id=npc_parish_church].physical.build",
+     "tall with a slight stoop"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "default/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "default/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "default/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "default/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "default/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "groupings/live",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "groupings/live",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "groupings/snapshot",
+   "proj": "gallery.data",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "groupings/snapshot",
+   "proj": "gallery.snapshot",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  },
+  {
+   "seed": "coherence-veil-village-1",
+   "cfg": "groupings/snapshot",
+   "proj": "link.dossier",
+   "sample": [
+    [
+     "publicProse.blocks.defense:criminal.structure.sentence",
+     "Ask at Campolitus who runs things on the quiet and you get blank looks; either nobody does, or the village hides it very well."
+    ],
+    [
+     "structuralViolations[#0].type",
+     "survival_crisis"
+    ]
+   ]
+  }
+ ]
+}
