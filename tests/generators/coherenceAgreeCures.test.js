@@ -466,7 +466,7 @@ describe('P2\'s rule: a refilled slot arrives as live as the refused winner woul
         : birth(seed);
       expect(settlement.config.tradeRouteAccess, seed).not.toBe('crossroads');
       expect(settlement.config.nearbyResources, `anchored: ${seed} holds its replacement`).toContain(FREED[seed]);
-      expect(settlement.config.nearbyResourcesDepleted, seed).not.toContain(FREED[seed]);
+      expect(settlement.config.nearbyResourcesDepleted, seed).not.toContain(FREED[seed]); // anchored: the line above holds the key on the roster
     }), 'a refilled slot took a depletion draw its refused member could never take');
   });
   // RE-KEYED BY IDENTITY at P2 / F5 (c) (COHERENCE-AGREE-7): the village also rolled a pass off the mountains. Its pass
@@ -526,9 +526,9 @@ describe('P2 / F5 (c): the roll keeps no mountain pass off the mountains', () =>
     expectNoSeedFailures(collectSeedFailures(Object.keys(CAME), (seed) => {
       const { config } = birth(seed);
       expect(config.terrainType, seed).not.toBe('mountain');
-      expect(config.nearbyResources, seed).not.toContain('defended_pass');
+      expect(config.nearbyResources, seed).not.toContain('defended_pass'); // anchored: the next line holds the replacement on this roster
       expect(config.nearbyResources, `anchored: ${seed} holds its replacement`).toContain(CAME[seed]);
-      expect(config.nearbyResourcesDepleted, seed).not.toContain(CAME[seed]);
+      expect(config.nearbyResourcesDepleted, seed).not.toContain(CAME[seed]); // anchored: the line above holds the key on the roster
       expect(config.nearbyResources.filter((key) => !config.nearbyResourcesDepleted.includes(key)).length, `${seed}: something live`).toBeGreaterThan(0);
     }), 'a rolled pass stands off the mountains');
   });
