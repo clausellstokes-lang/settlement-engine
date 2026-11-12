@@ -181,8 +181,9 @@ it('the six sizes: nothing carried, no page changed, the old client never shows 
           await q(`select data from public.import_gallery_dossier('p${n}')`, READER), await q(`select public.get_gallery_map('m${n}')`)];
       };
       const [r1, r2] = [await raw(at211.db), await raw(at211b.db)];
-      // the map's view count moves with every read: compared without it
-      const norm = (s) => s.replace(/"view_count":\d+,?/g, '');
+      // compared without what each chain's own insert makes differ and no read can depend on: the map's
+      // view count (every read moves it), the generated author name, and the insert times
+      const norm = (s) => s.replace(/"(view_count|author_name|published_at|updated_at)":("[^"]*"|\d+|null),?/g, '');
       fault('splice', tag, r1.map((x, i) => (norm(x) === norm(r2[i]) ? null : ['gallery', 'link', 'import', 'map'][i])).filter(Boolean));
       tally.reads += 8;
       // the 211 page against the 210 page of the SAME row
