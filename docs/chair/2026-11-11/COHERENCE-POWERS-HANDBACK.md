@@ -583,3 +583,108 @@ the houseless Religious Authorities folded into it (`mossgate.mjs`). Sent to the
 founding worlds' row, under a class of its own, "the founding worlds' cards, re-matched when the worlds are made again"; the
 promise is to be read by KIND (a religious power stands, or rules), a re-key by identity, never a loosening; the lane
 touches neither the card nor its test and does not undo the fold. Named so in the draft record.
+
+## 4. The wars — thirty realms against the line (the chair's restated line)
+
+THE RECIPE: statecraftExposureBand's seeded run (composeReaderRegion, the deity case seated, head on, twenty years), only
+the seed changes: the first seat's twenty (`pop-1` … `pop-20`; its `pop.mjs` was never committed, so `wars.mjs` rebuilds
+it from the test's own code) and the reviewer's ten (`rvr-1` … `rvr-10`). Mobilizations counted the test's own way
+(`war_mobilization` raw wizard news, impactKind else kind). The line at 3575cf061 against the tip (src at c67c8319e).
+rvr-1 at the line reads 18, the reviewer's own base figure; every rvr realm at the tip reads the reviewer's tip figure.
+
+**THE COUNT: realms that lose half their mobilized weeks: 4 of 30** (pop-6 146 -> 32, pop-13 36 -> 17, pop-16 209 -> 51,
+rvr-7 1,054 -> 143). The line is a third, 10: **NOT CROSSED.**
+
+| | the line | the tip | change |
+|---|---|---|---|
+| realms that ever mobilize | 30 of 30 | 30 of 30 | 0 |
+| total mobilizations | 2,148 | 1,017 | −52.7% |
+| the same without rvr-7 | 1,094 | 874 | −20.1% |
+| realms that rise / stay / fall | | | 8 / 15 / 7 |
+| the four NPC acts (sabotage, bargain, reform, suppress), summed | 20,090 | 19,171 | −4.6% |
+
+Per realm, line/tip: pop-1 6/4, 2 125/117, 3 21/21, 4 40/40, 5 59/59, **6 146/32**, 7 26/26, 8 10/10, 9 10/10, 10 6/41,
+11 64/66, 12 11/11, **13 36/17**, 14 6/6, 15 29/44, **16 209/51**, 17 15/15, 18 23/20, 19 14/14, 20 3/4; rvr-1 18/38,
+2 63/65, 3 25/25, 4 7/7, 5 27/27, 6 3/5, **7 1,054/143**, 8 64/71, 9 14/14, 10 14/14. The total's fall is rvr-7's
+twenty-year war ending by conquest in its third year (per year 66, 52, 52 … against 70, 52, 21, 0 …; conquest 0 -> 1),
+pop-16's four-year war ending after one (conquest 2 -> 0) and pop-6's later wars not starting. Files: `wars/*.json`
+beside the probe in the scratchpad; the table above is the whole of them.
+
+## 5. The whole-lane field diff — the line at 3575cf061 against the tip (`whole.mjs`, `wholediff.mjs`)
+
+Whole records of both corpora, line by line. **Births that differ: 3,674 of 4,305** (rvw 507/600, rvf 631/720, the
+golden's 525: 376, critique 573/660, l2 1,587/1,800).
+
+THE MOVED LEAVES BY FAMILY (count; numbers up/down; other values changed; added; removed):
+
+| family | leaves | up | down | changed | added | removed |
+|---|---|---|---|---|---|---|
+| npcs[] (the cast) | 2,975,397 | 41,485 | 42,293 | 2,505,468 | 125,808 | 260,343 |
+| relationships[] | 1,171,867 | 40,209 | 39,625 | 1,029,759 | 7,241 | 55,033 |
+| simulationTrace[] | 15,468 | 0 | 0 | 10,909 | 1,267 | 3,292 |
+| powerStructure.conflicts / conflicts[] | 12,552 / 12,216 | 0 | 0 | 8,245 | ~2,100 | ~2,000 |
+| powerStructure.factions | 10,370 | 1,187 | 681 | 3,971 | 1,393 | 3,138 |
+| stress.cast / stressors.cast | 8,707 each | 0 | 0 | 5,544 | 1,548 | 1,615 |
+| generationCoherenceReceipt.judgments | 5,364 | 0 | 0 | 3,553 | 979 | 832 |
+| powerStructure.factionRelationships | 3,173 | 108 | 32 | 931 | 546 | 1,556 |
+| prominentRelationship.* | 10,881 (six leaves) | 0 | 0 | | 22 per leaf | 206 per leaf |
+| history.currentTensions | 849 | 0 | 0 | 414 | 4 | 431 |
+| pressureSentence | 657 | | | 657 | | |
+| stress[] / stressors[] (the crisis's own rows) | 294 each | | | 127 | 104 | 63 |
+| powerStructure.government / governingName | 159 each | | | 159 | | |
+| powerStructure.criminalCaptureState | 139 | | | 139 | | |
+| history.legacyAnnotations | 128 | 11 | 12 | 85 | 15 | 5 |
+| powerStructure.recentConflict | 51 | | | 51 | | |
+| availableServices.* | 496 | | | 382 | 80 | 44 |
+| economicState.* (imports, food security, chains, safety, compound) | 153 | 15 | 23 | 90 | 14 | 11 |
+| institutions[] | 52 | 1 | 0 | 4 | 45 | 2 |
+| economicViability.* | 27 | 4 | 12 | 4 | 4 | 3 |
+| history.historicalEvents | 9 | | | 7 | 2 | |
+| powerStructure.publicLegitimacy | 3 | 3 | | | | |
+| settlementReason[] | 1 | | | 1 | | |
+
+THE FAMILIES OUTSIDE THE CAST AND ITS READERS (`famcheck.mjs`): every birth that moves `economicState` (46),
+`history.historicalEvents` (8), `institutions` (5), `availableServices` (5), `economicViability` (5), `settlementReason` (1)
+or `publicLegitimacy` (1) is a birth whose government moved (the council of a kind, declared): **0 such births without
+it.** stability and legitimacy: 0 births move.
+
+THE LABELS BY CRISIS AND SIZE (thorp, hamlet, village, town, city, metropolis; "none" = the random-dial births, whose
+own stresses are drawn):
+
+**The coup label: 94 toward danger, 185 toward safety.** Toward danger: occupied 26, 20, —, —, —, —; politically_fractured
+17, 17, —, —, —, —; none 4, 9, —, —, —, — (each of these 13 carries an occupation or a fracture among its drawn stresses:
+`coupdanger.mjs`, 48 occupied and 45 fractured of the 94); plague_onset —, —, —, —, 1, —. So 93 of 94 are the crisis seats
+showing the occupier and the fractured realm (the chair's "103 toward danger" was 9bcda8ff6's own diff;
+the whole lane against the line reads 93). **THE ONE OTHER: l2-plague_onset-city-5, Contested -> Critical**,
+moved at the first seat's 902378261 (the not-built rule; green at 1df17289f, `onecoup.mjs`): The Landed Bloc (5), a power
+of the roster's own that no house stands behind, is not built; the roster renormalises (Military/Guard 9 -> 10, weight
+11.25 -> 12.5) and the incumbent's amplified 11.4 no longer reaches the third challenger, so the coup reader's gate opens.
+A declared cause; its effect on the label is named here and in the draft record. Toward safety, by crisis (thorp …
+metropolis): famine 3, 3, 1, 5, 3, —; indebted 2, 1, 1, 2, —, —; infiltrated —, —, 1, —, —, —; insurgency 2, 2, 3, 2, 2, —;
+mass_migration 1, 2, —, 3, —, —; monster_pressure 1, 2, 2, 1, —, —; none 6, 39, 19, 7, 1, —; occupied —, —, —, 1, —, —;
+plague_onset 1, 3, 3, —, —, —; politically_fractured —, —, 1, 2, 7, 1; recently_betrayed 2, 2, —, 3, 1, —;
+religious_conversion —, 1, 3, —, 1, —; slave_revolt 4, 3, 2, 1, —, —; succession_void 4, 4, 4, 2, —, —; under_siege —, 2,
+1, 1, 1, —; wartime 3, 1, 1, 2, —, — (the fold and the not-built rule, the safety the record declares).
+
+**The capture state: 139 move (70 toward danger, 69 toward safety)**, equal to F8's table row for row (R 25 / S 45 toward
+danger; R 24 / S 45 toward safety).
+
+**The government: 159 move** (the council of a kind): thorps 60, hamlets 41, towns 57, cities 1 (an occupation), 0 in
+villages and metropolises. **powerLabel by power name: 40 move**, towns 38, metropolises 2 (the roster's renormalisation).
+
+## 6. The six pools with no row (the repetition guard)
+
+`ledger:NPC_STRUCTURE.<pool>`, draws the presumption ledger notes (refused draws not counted), at the tip on R / S (the
+line beside, on the same corpora; `pools6.mjs`). Every one prints a single line (top1 1.00):
+
+| pool | tip R | tip S | line R / S |
+|---|---|---|---|
+| magic__contested__dominant | 4 (4 towns) | 8 (8) | 1 / 2 |
+| magic__corruption__dominant | 0 | 3 (3) | 0 / 2 |
+| magic__economic_stress__dominant | 3 (3) | 7 (7) | 1 / 1 |
+| magic__governance_fractured__dominant | 8 (8) | 21 (21) | 2 / 0 |
+| magic__stable__dominant | 5 (5) | 11 (11) | 0 / 0 |
+| other__corruption__dominant | 1 (1) | 0 | 1 / 0 |
+
+They are not banked here by any means; the walker's red for this cause is classed as the merge seat's act at this
+lane's point (the narrow door `--bank-new` is on the agreement lane).
