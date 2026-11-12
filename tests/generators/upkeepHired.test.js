@@ -238,3 +238,54 @@ describe('the guard assessment says what the place can pay for its hired force',
     expect(s.economicState.safetyProfile.guardEffectivenessDesc).toContain(charter[0].text);
   });
 });
+
+/**
+ * THE PAGE UNDER A CRISIS (the chair's ruling of 2026-11-12, point 1): where a famine or a siege
+ * caps the label at Struggling, the hired force's purse lines must say the crisis is why, never
+ * that the place is poor. Each purse line carries a declared crisis line (the `crisis` atom on
+ * famine and siege), whose twin is the purse line itself; found here by their atoms. The red
+ * seed is agree-force-famine-city-0, a forced famine with a hired company beside a garrison.
+ */
+describe('under a famine or a siege, the hired lines name the crisis, not the purse', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const CRISIS = 'crisis: famine, under_siege';
+  /** The purse lines: declared originals needing a `prosperity: ≤ …` atom. */
+  const purseLines = () => Object.values(SAFETY_LINE_SIBLINGS).map((set) => set[0])
+    .filter((line) => line.needs.some((atom) => atom.startsWith('prosperity: ≤')));
+  /** The declared crisis line whose twin is this purse line, if any. @param {string} text */
+  const crisisLineFor = (text) => Object.values(SAFETY_LINE_SIBLINGS)
+    .find((set) => set[0].needs.includes(CRISIS) && set[1]?.text === text)?.[0];
+
+  test('RED-FIRST: each purse line has a declared crisis line, its twin the purse line', () => {
+    const lines = purseLines();
+    expect(lines.length, 'anchored: the three purse lines').toBe(3);
+    for (const line of lines) expect(crisisLineFor(line.text), `${line.text} has its crisis line`).toBeDefined();
+  });
+
+  test('RED-FIRST agree-force-famine-city-0 (famine, Struggling, hired swords beside a garrison): the guard line names the crisis', () => {
+    const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'city', selectedStressesRandom: false, selectedStresses: ['famine'] }), null, { seed: 'agree-force-famine-city-0' });
+    expect(s.economicState.prosperity).toBe('Struggling');
+    const desc = s.economicState.safetyProfile.guardEffectivenessDesc;
+    const garrisonPurse = purseLines().find((line) => /garrison/.test(line.text));
+    expect(desc, 'no purse line under a famine').not.toContain(garrisonPurse.text);
+    expect(desc).toContain(crisisLineFor(garrisonPurse.text)?.text);
+  });
+
+  test('planted rosters: each branch names the crisis under a famine and a siege, and the purse with none', () => {
+    const merc = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
+    const beside = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Garrison', category: 'Defense' }];
+    const charter = [{ name: "Adventurers' charter hall", category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
+    for (const roster of [merc, beside, charter]) {
+      const today = generateSafetyProfile({ priorityMilitary: 60, priorityEconomy: 60 }, 'town', roster).guardEffectivenessDesc;
+      const calm = keptGuardLine(today, roster, 'Struggling', []);
+      const purse = purseLines().find((line) => calm.includes(line.text));
+      expect(purse, `anchored: a purse line prints with no crisis (${roster[0].name})`).toBeDefined();
+      for (const stress of ['famine', 'under_siege']) {
+        const hard = keptGuardLine(today, roster, 'Struggling', [stress]);
+        expect(hard, `${roster[0].name} under ${stress}`).not.toContain(purse.text);
+        expect(hard).toContain(crisisLineFor(purse.text)?.text);
+      }
+      expect(keptGuardLine(today, roster, 'Struggling', ['wartime']), 'wartime is no cap: the purse stays').toContain(purse.text);
+    }
+  });
+});
