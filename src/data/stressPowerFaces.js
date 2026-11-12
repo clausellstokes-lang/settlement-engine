@@ -17,11 +17,16 @@
  * people/mintTitles.js :: OTHER_MINT_ROWS gives it). `veiled`: the power works in secret, so its face is veiled.
  * `archetype` stands for a pool-drawn name (succession_void's claimants): a power of that archetype that is not the
  * roster's own, not the density law's rival and not the ruler.
+ * `claimant` (COHERENCE-POWERS-4, REVIEW-POWERS F3): the power IS a claimant, so the claimant faces it: the crisis's cast
+ * is derived after the powers' people and never holds one at the mint, so the claimant is minted (CLAIMANT_FACE) and named
+ * as the occupier's governor is; it carries no leaderless line. `rungOf`: where no house of the power's nature is free,
+ * its first is the next member of these powers, in their rank order, who leads no power (the next FREE rung).
  */
 
 /**
  * @typedef {{ stress: string, power?: string, archetype?: string, house?: { kinds?: string[], names?: RegExp },
- *   cast?: RegExp, leaderless?: string, appointed?: boolean, veiled?: boolean, seated?: boolean }} StressPowerFace
+ *   cast?: RegExp, leaderless?: string, appointed?: boolean, veiled?: boolean, seated?: boolean, claimant?: boolean,
+ *   rungOf?: ReadonlyArray<string> }} StressPowerFace
  */
 
 /** @type {ReadonlyArray<Readonly<StressPowerFace>>} */
@@ -73,8 +78,13 @@ export const STRESS_POWER_FACES = Object.freeze([
     leaderless: 'It has no one head: the stewards who want reform speak for it together.' },
   { stress: 'religious_conversion', power: 'Underground Old Faith', veiled: true,
     leaderless: 'It has no one priest: the old faith\'s people keep its rites in secret, house by house.' },
-  // a claimant's party: the old families' houses
+  // COHERENCE-POWERS-4 (F3): a royal vacancy's two claimants are each a claimant in person, minted as the occupier's man is
+  { stress: 'succession_void', power: 'Noble Claimant (Senior Line)', claimant: true },
+  { stress: 'succession_void', power: 'Noble Claimant (Reform Line)', claimant: true },
+  // the old families' body (a pool-drawn noble power): a free noble house's face, else the next free rung of the landed
+  // powers, else its line
   { stress: 'succession_void', archetype: 'noble', house: { kinds: ['noble'] },
+    rungOf: Object.freeze(['Noble Families', 'Noble Houses', 'Landed Gentry', 'Manor Household']),
     leaderless: 'No one claimant has stepped forward yet: the old families press the claim together.' },
 ]);
 
@@ -83,4 +93,10 @@ export const STRESS_POWER_FACES = Object.freeze([
  * generators/power/rulingStructure.js gives it its own description) has its master, veiled: the guildmaster of the
  * seat mint's table (people/mintTitles.js :: SEAT_MINT_TITLES).
  */
+/**
+ * A claimant in person (COHERENCE-POWERS-4, F3): the lord who presses the claim, on the monarch's own pool row
+ * (people/poolMap.js :: 'the monarch'); a title faces already bear (mintTitles.js :: SEAT_MINT_TITLES, 'Noble Houses').
+ */
+export const CLAIMANT_FACE = Object.freeze({ title: 'the lord', role: 'Duke/Duchess', category: 'government', titleKey: 'noble' });
+
 export const HOUSELESS_CRIMINAL_FACE = Object.freeze({ title: 'the guildmaster', role: 'Guildmaster', category: 'criminal', titleKey: 'lord' });
