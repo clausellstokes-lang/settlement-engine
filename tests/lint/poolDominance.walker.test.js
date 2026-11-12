@@ -23,7 +23,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
-import { DOMINATED, NOISE_SE, corpusIdentity, judge, measureDominance, readRegister, shareError } from '../../scripts/census/pool-dominance.mjs';
+import { COLLAPSE_CHANCE, DOMINATED, NOISE_SE, corpusIdentity, judge, measureDominance, readRegister, shareError } from '../../scripts/census/pool-dominance.mjs';
 
 /**
  * A pool of `towns` settlements with `perTown` draws each, its top line taking `share` in every
@@ -66,6 +66,14 @@ describe('the rule: a rise reds beyond the pool\'s own noise, or across the domi
   test('a cured pool\'s target is a law: any rise above it reds', () => {
     const target = { pools: { p: { ...row, top1: 0.1, targets: ['top1'] } } };
     expect(judge(new Map([['p', evenPool(0.1025, 400)]]), target).over).toHaveLength(1);
+  });
+
+  test('a pool banked with two or more lines that prints one reds where chance does not explain it', () => {
+    const banked = { pools: { p: { top1: 0.9, top5: 1, lines: 3, reason: 'a test row' } } };
+    const single = (towns) => ({ ...evenPool(1, towns), lines: 1 });
+    const enough = Math.ceil(Math.log(COLLAPSE_CHANCE) / Math.log(0.9));
+    expect(judge(new Map([['p', single(enough)]]), banked).over).toHaveLength(1);
+    expect(judge(new Map([['p', single(enough - 1)]]), banked).over).toEqual([]);
   });
 
   test('under a foreign seed prefix the row-set checks are notes, not findings', () => {

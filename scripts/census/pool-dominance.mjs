@@ -32,7 +32,13 @@
  *       estimator's cluster variance: the draws inside one town are not independent), never
  *       below the binomial error; or
  *   (2) its `top1` crosses `DOMINATED.top1` — one line printing three of every four of the pool's
- *       lines — on a pool read over at least `DOMINATED.minDraws` draws, whatever the noise.
+ *       lines — on a pool read over at least `DOMINATED.minDraws` draws, whatever the noise; or
+ *   (3) it COLLAPSES: it printed two or more distinct lines at its banking (the row's `lines`) and
+ *       prints one on the corpus, where chance does not explain it — the chance that every one of
+ *       its towns printed the banked commonest line, `top1 ^ towns`, is under `COLLAPSE_CHANCE`.
+ *       The least it needs is 10 towns (at a commonest line of one half); a pool whose commonest
+ *       line already takes 0.9 needs 66. Whatever its share's error: the share test cannot see a
+ *       pool whose commonest line was already near the whole of it.
  * A ceiling the charter set as a law for a cured pool (`targets`) is judged EXACTLY, with no
  * allowance. A ceiling is loose when its measure sits below it by more than the slack AND by more
  * than the same noise.
@@ -47,7 +53,8 @@
  *   node scripts/census/pool-dominance.mjs                  print the findings, then the worst twenty
  *   node scripts/census/pool-dominance.mjs --seed-prefix=p  the same, on the corpus re-seeded with prefix p
  *   node scripts/census/pool-dominance.mjs --tighten        lower every ceiling to today's measure (never raise one),
- *                                                           drop the rows of pools no longer drawn, bank new pools
+ *                                                           drop the rows of pools no longer drawn, bank new pools,
+ *                                                           and raise a row's count of distinct lines (never lower it)
  *   node scripts/census/pool-dominance.mjs --rebase [--hold=<pool>:<top1|top5>:<ceiling>]...
  *       a CORPUS CHANGE only (it refuses while the register's `corpus` is this one): bank every row
  *       at the new corpus's own measure, targets exactly as they are; a `--hold` keeps a row at a
@@ -71,6 +78,9 @@ export const NOISE_SE = 3;
 
 /** The line that means "this pool is dominated", read only where the corpus can read it. */
 export const DOMINATED = Object.freeze({ top1: 0.75, minDraws: 30 });
+
+/** A pool that printed two or more lines and now prints one reds when chance explains that less often than this. */
+export const COLLAPSE_CHANCE = 0.001;
 
 /** The banked corpus's seed prefix. */
 export const DEFAULT_SEED_PREFIX = 'quarrel';
@@ -242,14 +252,16 @@ export function shareError(m, metric, ceiling) {
 /** @param {number} share @returns {number} the share rounded UP to four places, so a ceiling never sits below its measure */
 export const ceil4 = (share) => Math.ceil(share * 10000 - 1e-9) / 10000;
 
-/** @returns {{ corpus?: string, pools: Record<string, { top1: number, top5: number, reason: string, targets?: string[] }> }} */
+/** @typedef {{ top1: number, top5: number, lines?: number, reason: string, targets?: string[] }} RegisterRow */
+
+/** @returns {{ corpus?: string, pools: Record<string, RegisterRow> }} */
 export function readRegister() {
   return JSON.parse(readFileSync(REGISTER_PATH, 'utf8'));
 }
 
 /**
  * The register's findings against a measure: each one a line a reader can act on.
- * @param {Map<string, Pick<PoolMeasure, 'draws' | 'towns' | 'top1' | 'top5' | 'spread'>>} table
+ * @param {Map<string, Pick<PoolMeasure, 'draws' | 'towns' | 'lines' | 'top1' | 'top5' | 'spread'>>} table
  * @param {ReturnType<typeof readRegister>} register
  * @param {{ exact?: boolean }} [options] `exact: false` (a foreign seed prefix) turns the row-set checks into notes
  * @returns {{ over: string[], unregistered: string[], stale: string[], loose: string[], notes: string[] }}
@@ -265,6 +277,10 @@ export function judge(table, register, { exact = true } = {}) {
       continue;
     }
     const targets = Array.isArray(row.targets) ? row.targets : [];
+    const chance = row.top1 ** m.towns;
+    if ((row.lines || 0) >= 2 && m.lines === 1 && chance < COLLAPSE_CHANCE) {
+      over.push(`${pool}: collapses to one line (banked with ${row.lines}; over ${m.draws} draws in ${m.towns} towns, chance ${chance.toExponential(1)})`);
+    }
     for (const metric of /** @type {const} */ (['top1', 'top5'])) {
       const ceiling = row[metric], share = m[metric];
       const se = shareError(m, metric, ceiling);
@@ -303,7 +319,7 @@ const REBASED_REASON = 'banked at the 2026-11-12 six-tier measure (POOL-GUARD): 
 function rebase(table, register, holds) {
   if (register.corpus === corpusIdentity()) throw new Error('pool-dominance: --rebase is for a corpus change; the register is already banked on this corpus (use --tighten)');
   const rows = register.pools || {};
-  /** @type {Record<string, { top1: number, top5: number, reason: string, targets?: string[] }>} */
+  /** @type {Record<string, RegisterRow>} */
   const next = {};
   for (const [pool, m] of table) {
     const row = rows[pool];
@@ -313,9 +329,10 @@ function rebase(table, register, holds) {
         ...row,
         top1: targets.includes('top1') ? row.top1 : ceil4(m.top1),
         top5: targets.includes('top5') ? row.top5 : ceil4(m.top5),
+        lines: m.lines,
         reason: targets.length ? row.reason : REBASED_REASON,
       }
-      : { top1: ceil4(m.top1), top5: ceil4(m.top5), reason: BANKED_REASON };
+      : { top1: ceil4(m.top1), top5: ceil4(m.top5), lines: m.lines, reason: BANKED_REASON };
   }
   for (const hold of holds) {
     const [, pool = '', metric = '', value = ''] = /^(.*):(top1|top5):([0-9.]+)$/.exec(hold) || [];
@@ -352,7 +369,7 @@ function main() {
     const register = readRegister();
     if (register.corpus !== corpusIdentity()) throw new Error('pool-dominance: --tighten compares like with like; the register was banked on another corpus (--rebase, on a ruling)');
     const rows = register.pools || {};
-    /** @type {Record<string, { top1: number, top5: number, reason: string, targets?: string[] }>} */
+    /** @type {Record<string, RegisterRow>} */
     const next = {};
     for (const [pool, m] of table) {
       const row = rows[pool];
@@ -361,8 +378,10 @@ function main() {
           ...row,
           top1: row.targets?.includes('top1') ? row.top1 : Math.min(row.top1, ceil4(m.top1)),
           top5: row.targets?.includes('top5') ? row.top5 : Math.min(row.top5, ceil4(m.top5)),
+          // The banked count of distinct lines only grows: a collapse is judged against the widest it was.
+          lines: Math.max(row.lines || 0, m.lines),
         }
-        : { top1: ceil4(m.top1), top5: ceil4(m.top5), reason: BANKED_REASON };
+        : { top1: ceil4(m.top1), top5: ceil4(m.top5), lines: m.lines, reason: BANKED_REASON };
     }
     writeFileSync(REGISTER_PATH, `${JSON.stringify({ ...register, pools: next }, null, 2)}\n`);
     console.log(`pool-dominance: ${table.size} pools written`);
