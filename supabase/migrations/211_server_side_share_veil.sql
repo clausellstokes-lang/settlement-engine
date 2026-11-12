@@ -143,12 +143,26 @@ returns text language sql immutable set search_path = public, pg_temp as $$
   select case when jsonb_typeof(j) = 'string' then j #>> '{}' else '' end
 $$;
 
--- JS truthiness of a JSON value (absent, null, false, '' and 0 are falsy).
+-- THE DOUBLE A JSON NUMBER IS (the review's F3). jsonb keeps any decimal; JavaScript reads the
+-- nearest double, rounding half to even: zero at or below 2^-1075, Infinity at or past 2^1024 - 2^970.
+-- Both are decided by exact numeric comparison, so no cast is ever asked of an out-of-range value.
+create or replace function public._gallery_veil_num_zero(x numeric)
+returns boolean language sql immutable set search_path = public, pg_temp as $$
+  -- 2^1075
+  select abs(x) * 404804506614621236704990693437834614099113299528284236713802716054860679135990693783920767402874248990374155728633623822779617474771586953734026799881477019843034848553132722728933815484186432682479535356945490137124014966849385397236206711298319112681620113024717539104666829230461005064372655017292012526615415482186989568 <= 1
+$$;
+create or replace function public._gallery_veil_num_inf(x numeric)
+returns boolean language sql immutable set search_path = public, pg_temp as $$
+  -- 2^1024 - 2^970
+  select abs(x) >= 179769313486231580793728971405303415079934132710037826936173778980444968292764750946649017977587207096330286416692887910946555547851940402630657488671505820681908902000708383676273854845817711531764475730270069855571366959622842914819860834936475292719074168444365510704342711559699508093042880177904174497792
+$$;
+
+-- JS truthiness of a JSON value (absent, null, false, '' and 0 are falsy; a number JS reads as zero is 0).
 create or replace function public._gallery_veil_truthy(j jsonb)
 returns boolean language sql immutable set search_path = public, pg_temp as $$
   select case jsonb_typeof(j)
     when 'string' then (j #>> '{}') <> ''
-    when 'number' then (j #>> '{}')::numeric <> 0
+    when 'number' then not public._gallery_veil_num_zero((j #>> '{}')::numeric)
     when 'boolean' then (j #>> '{}')::boolean
     when 'object' then true
     when 'array' then true
@@ -161,6 +175,8 @@ returns text language sql immutable set search_path = public, pg_temp as $$
   select case jsonb_typeof(j)
     when 'string' then j #>> '{}'
     when 'number' then case
+      when public._gallery_veil_num_zero((j #>> '{}')::numeric) then '0'
+      when public._gallery_veil_num_inf((j #>> '{}')::numeric) then case when (j #>> '{}')::numeric < 0 then '-Infinity' else 'Infinity' end
       when (j #>> '{}')::numeric = trunc((j #>> '{}')::numeric) and abs((j #>> '{}')::numeric) < 1e21
         then trunc((j #>> '{}')::numeric)::text
       else ((j #>> '{}')::float8)::text end

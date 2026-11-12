@@ -196,4 +196,107 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     const g = await db.query('select data from public.get_gallery_dossier($1)', [`p${n}`]);
     expect(g.rows, 'refused: no row, so never the live row under the word snapshot').toEqual([]);
   }, ROW_TIMEOUT_MS);
+  // A seeded generator (no clock, no Math.random): the class tests are the same on every run.
+  function rngOf(seed) { let s = seed >>> 0; return () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 2 ** 32; }; }
+  const EDGE_NUMBERS = ['0', '-0', '1', '-1', '0.5', '1e-7', '-1e-7', '1e-6', '1e21', '1e+21', '1e20', '123456789012345678901', '9007199254740992',
+    '9007199254740993', '-9007199254740993', '12345678901234567890123', '31621967360964610', '1e400', '-1e400', '1e-400', '-1e-400', '5e-324',
+    '2.4703282292062327e-324', '2.4703282292062328e-324', '1.7976931348623157e308', '1.7976931348623158e308', '1.7976931348623159e308',
+    '0.1', '100.0', '1E5', '1.5e300', '-2.5e-10', '4.35e-6', '0.000001', '0.0000001', '999999999999999999999.5', '1e-323', '1.0000000000000002'];
+  /** A JSON number token: an edge, a random double from random bits (every exponent), or a long decimal. */
+  function numberToken(r) {
+    const pick = r();
+    if (pick < 0.4) return EDGE_NUMBERS[Math.floor(r() * EDGE_NUMBERS.length)];
+    if (pick < 0.8) {
+      const dv = new DataView(new ArrayBuffer(8));
+      dv.setUint32(0, Math.floor(r() * 2 ** 32)); dv.setUint32(4, Math.floor(r() * 2 ** 32));
+      const x = dv.getFloat64(0);
+      return Number.isFinite(x) ? JSON.stringify(x) : '0';
+    }
+    const digits = Array.from({ length: 1 + Math.floor(r() * 40) }, () => Math.floor(r() * 10)).join('');
+    return `${r() < 0.5 ? '-' : ''}${digits.replace(/^0+(?=\d)/, '')}${r() < 0.5 ? `.${Math.floor(r() * 1e9)}` : ''}${r() < 0.5 ? `e${Math.floor(r() * 700) - 350}` : ''}`;
+  }
+  const STRINGS = ['', ' ', 'x', 'House', 'The Hidden Hand', "Thieves' Guild", '  -- Ünder  Côte --  ', 'İstanbul KELVIN Kk', '日本語', '🗝 Key',
+    'a:b:c', 'x_y-z.9', 'a'.repeat(120), '0', 'false', 'null', 'event.legacy-1', '$veil', 'npc.a', '\n\t', '"q"', '\\'];
+  function valueToken(r, depth = 0) {
+    const pick = r();
+    if (pick < 0.45) return numberToken(r);
+    if (pick < 0.75) return JSON.stringify(STRINGS[Math.floor(r() * STRINGS.length)]);
+    if (pick < 0.85) return ['true', 'false', 'null'][Math.floor(r() * 3)];
+    if (pick < 0.95 && depth < 2) return `[${Array.from({ length: Math.floor(r() * 4) }, () => valueToken(r, depth + 1)).join(',')}]`;
+    return depth < 2 ? `{${r() < 0.5 ? '' : `"a":${valueToken(r, depth + 1)}`}}` : '{}';
+  }
+  const ID_KEYS = ['id', 'refId', 'name', 'label', 'title', 'type', 'faction', 'parties', 'issue', 'from', 'to', 'npc1Name', 'npc2Name'];
+  function cardText(r) {
+    const keys = ID_KEYS.filter(() => r() < 0.35);
+    return `{${keys.map((k) => `${JSON.stringify(k)}:${valueToken(r)}`).join(',')}}`;
+  }
+
+  // ── F3 ────────────────────────────────────────────────────────────────────────────────────────
+  it('F3 (the review rows): an id beyond double range reads as JavaScript reads it; no read raises', async () => {
+    for (const v of ['1e400', '-1e400', '1e-400']) {
+      const share = await put(LIVE.db, `{"name":"T","institutions":[{"id":${v},"name":"House","desc":"ok"}]}`, veil.writeShareVeil({}, []));
+      const r = await readBoth(LIVE.db, share);
+      expect(r.gResp?.raised ?? null, v).toBe(null);
+      expect(r.lResp?.raised ?? null, v).toBe(null);
+      expect(r.g.settlement.institutions[0].name, v).toBe('House');
+    }
+  }, ROW_TIMEOUT_MS);
+
+  /** A stored document shaped like a settlement, every value drawn from the awkward pools above. */
+  function docText(r) {
+    const card = () => {
+      const keys = [...ID_KEYS, 'category', 'priorityCategory', 'facets', 'tags', 'serviceKeys', 'desc', 'description', 'secret', 'plotHooks',
+        'institution', 'linkedInstitutionIds', 'members', 'captureState', 'reason', 'personality', 'allegiance', 'stakes'].filter(() => r() < 0.3);
+      return `{${keys.map((k) => `${JSON.stringify(k)}:${k === 'category' && r() < 0.5 ? '"criminal"' : k === 'tags' && r() < 0.5 ? '["facet:clandestine:clandestine","brokerage","criminal"]' : valueToken(r)}`).join(',')}}`;
+    };
+    const list = () => (r() < 0.85 ? `[${Array.from({ length: Math.floor(r() * 5) }, () => (r() < 0.9 ? card() : valueToken(r))).join(',')}]` : valueToken(r));
+    const parts = [`"name":${r() < 0.9 ? '"T"' : valueToken(r)}`];
+    for (const k of ['npcs', 'institutions', 'factions', 'conflicts', 'relationships', 'structuralViolations', 'decrees', 'coherenceNotes']) if (r() < 0.6) parts.push(`"${k}":${list()}`);
+    if (r() < 0.6) parts.push(`"powerStructure":{"factions":${list()},"conflicts":${list()},"factionRelationships":${list()},"criminalCaptureState":${valueToken(r)}}`);
+    if (r() < 0.6) parts.push(`"history":{"historicalEvents":${list()},"eventsTimeline":${list()},"currentTensions":${list()}}`);
+    if (r() < 0.5) parts.push(`"availableServices":{"criminal":${list()},"trade":${list()}}`);
+    if (r() < 0.4) parts.push(`"economicState":{"safetyProfile":{"criminalInstitutions":${valueToken(r)},"blackMarketCapture":${valueToken(r)}}}`);
+    if (r() < 0.4) parts.push(`"publicProse":{"blocks":{"defense:criminal":${valueToken(r)},"power:desk":{"captureReading":${valueToken(r)}}}}`);
+    if (r() < 0.3) parts.push(`"plotHooks":${list()}`);
+    return `{${parts.join(',')}}`;
+  }
+  const GOOD_ADDRESSES = ['tab:plot_hooks', 'block:services.criminal', 'block:power.criminalUnderside', 'class:npc:secret', 'class:institution:services',
+    'class:event:description', 'field:event:event.legacy-1:description', 'card:institution:house', 'card:npc:npc.a', 'field:npc:1e-7:personality'];
+  function overridesText(r) {
+    const parts = [];
+    for (let i = Math.floor(r() * 4); i > 0; i -= 1) parts.push(`${JSON.stringify(STRINGS[Math.floor(r() * STRINGS.length)] || 'k')}:${r() < 0.6 ? `{"revealDm":${r() < 0.5 ? 'false' : 'true'},"allowImport":${r() < 0.5 ? 'false' : 'true'}}` : r() < 0.6 ? `{"revealDm":${valueToken(r)},"allowImport":${valueToken(r)}}` : valueToken(r)}`);
+    if (r() < 0.85) {
+      const delta = () => (r() < 0.8 ? `{"address":${r() < 0.6 ? JSON.stringify(GOOD_ADDRESSES[Math.floor(r() * GOOD_ADDRESSES.length)]) : valueToken(r)},"hidden":${r() < 0.8 ? (r() < 0.5 ? 'true' : 'false') : valueToken(r)}}` : valueToken(r));
+      const veilParts = [`"v":${valueToken(r)}`, `"deltas":${r() < 0.85 ? `[${Array.from({ length: Math.floor(r() * 6) }, delta).join(',')}]` : valueToken(r)}`];
+      if (r() < 0.5) veilParts.push(`"mode":${r() < 0.7 ? '"snapshot"' : valueToken(r)}`, `"at":${valueToken(r)}`, `"snapshot":${r() < 0.7 ? docText(r) : valueToken(r)}`);
+      parts.push(`"$veil":${r() < 0.9 ? `{${veilParts.join(',')}}` : valueToken(r)}`);
+    }
+    return `{${parts.join(',')}}`;
+  }
+
+  it('F3 (the class): 400 fuzzed stored documents and veils through all four reads, and no read raises', async () => {
+    const { db } = LIVE;
+    const r = rngOf(400);
+    const raised = []; let reads = 0;
+    for (let i = 0; i < 400; i += 1) {
+      const doc = docText(r); const ov = overridesText(r);
+      const narrated = r() < 0.2 ? docText(r) : null;
+      n += 1;
+      const id = `ffffffff-0000-0000-0000-${String(n).padStart(12, '0')}`;
+      await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility,
+          gallery_member_overrides, gallery_share_dm, gallery_importable, gallery_share_narrated, ai_data)
+        values ($1, $2, 'T', 'town', $3, true, $4, now(), $5, 'unlisted', $6, $7, true, $8, $9)`,
+      [id, OWNER, doc, `fz${i}`, `fl${i}`, ov, r() < 0.3, narrated !== null, narrated === null ? null : `{"aiSettlement":${narrated}}`]);
+      await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
+        values (gen_random_uuid(), $1, 'm', $2, true, $3, 'map_with_campaign', true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `fm${i}`]);
+      for (const [read, uid, q] of [['gallery', '', `select data from public.get_gallery_dossier('fz${i}')`], ['link', '', `select public.get_unlisted_dossier('fl${i}')`],
+        ['import', READER, `select data from public.import_gallery_dossier('fz${i}')`], ['map', '', `select public.get_gallery_map('fm${i}')`]]) {
+        await db.exec(`set test.uid = '${uid}';`);
+        reads += 1;
+        try { await db.query(q); } catch (e) { raised.push(`${read} #${i}: ${String(e.message).slice(0, 100)} | doc ${doc.slice(0, 80)} | ov ${ov.slice(0, 120)}`); }
+      }
+    }
+    expect(reads).toBe(1600);
+    expect(raised.slice(0, 10)).toEqual([]);
+  }, ROW_TIMEOUT_MS);
 });
