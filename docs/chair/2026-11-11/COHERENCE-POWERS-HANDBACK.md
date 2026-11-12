@@ -377,6 +377,7 @@ walker's "every drawn pool has a row" is red on this tree for that cause alone.
 |---|---|---|---|---|
 | F12 the packed ceiling | f064cb83c | rulingStructure.js 799 lines, 5 packed lines | 792 lines, 2 (both predate the lane) | powerStructure.test.js "no power/ module packs more statements onto shared lines than its ceiling", red first (5 packed lines) |
 | F1 the political mass | 97759b837 (census c02bbb48f, manifest 8f72fbc90) | the pure seat-ceiling cut R 19, S 40 | R 0, S 0 | dualHatPoliticalMass.test.js, red first 8 of 8 (the reviewer's crisis and small-place seeds, literal powers) |
+| F2 the final roster's text | 28c93c9da, dd02efe9f (holder re-key d349325ad) | strings naming a power the final roster lacks, both corpora (line → merged start): tension chips 417 → 438, descriptions 168 → 212, rank lines 87 → 104, narratives 200 → 200 | 0 · 0 · 0 · 0 | powerTextFinalRoster.test.js, 120 births born with and without the density law, red first (twice) |
 
 F12's L3: 0 of 4,305 whole-record hashes differ, merged start against the split. The split is SIZED: docs and sealed
 packets cite this file's lines up to :787 and the citation walker reds a new past-EOF citation, so the small cohesive
@@ -392,3 +393,19 @@ kind. **THE STOP (F1's measure), sent to the chair with one proposal ("the crisi
 where none of the crisis's own powers is on the page read 1,525 at the line and 1,524 at the cure, of 2,520; the class
 predates the lane (the table in the chair's message and in the probes' `crisis.mjs`). Nothing of it is built before
 the ruling.
+
+F2: a lane-owned pass (power/rosterText.js) after the roster's last power write re-annotates the standing with
+factionStanding.js's own function (imported), prunes or re-points the tensions' parties, and takes the declared sibling of
+the merchants' and craftsmen's vote (factionDynamics.js :: MERCHANT_CRAFT_VOTE, the chair's ruling (a)). It moves only
+descriptions (1,281 births), tension parties (413) and the 200 narratives; rosters, cards, seat row, coup, capture 0; the
+golden's 525: 0. Most of this class is the density law's trim and predates the lane. The remaining hits of the probe
+are house names (the criminal institutions, income sources: 90 of 90 a house the town holds) and never-printed fields
+(the simulation trace, `factionSource`). The holder table cites assembleSettlement.js by line: F1's and F2's import
+lines moved three rows (red at 97759b837), re-keyed by identity at d349325ad. FOUND, the line's: a doubled-niche rival
+copies its parent's description and standing sentence at its own rank.
+
+**The chair's rulings of 2026-11-12 on F1's stop and F7's table:** the crisis seat for every crisis is NOT built (a
+design question for the owner, with the table above as its measure); built instead: an occupation seats its occupier
+at every size; a fractured realm shows two powers if any shows one; for every other crisis no printed line names or
+presumes its absent power. F7: "Acting <office>" for every office, the crown's monarch "Regent", the exempt small
+place's "Eldest" acting as the government's office word.
