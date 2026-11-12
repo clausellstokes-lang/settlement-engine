@@ -122,6 +122,20 @@ returns text[] language sql immutable set search_path = public, pg_temp as $$
     'block:housekeeping.firstSurvey', 'block:housekeeping.receipt', 'block:housekeeping.decrees']
 $$;
 
+-- THE FROZEN COPY'S BOUND (the review's F1). The client keeps a copy whose JSON.stringify length is
+-- at most VEIL_LIMITS.snapshotMaxChars (1,000,000); the server measures jsonb::text, which is longer,
+-- so the server's bound must admit every copy the client's admits, whatever its shape. The worst
+-- ratio, derived token by token: jsonb::text adds one space after each ':' and ',' (ratio 2 on that
+-- character); it spells strings, escapes, literals and brackets no longer than JSON.stringify (a code
+-- point is never more UTF-16 units than one); it prints a number in plain notation, and the worst
+-- token is the smallest subnormal, 6 characters in JS (5e-324) and 326 here. So the server's length is
+-- at most 326/6 of the client's, and the bound is floor(1,000,000 x 326 / 6). A copy past it is
+-- refused by the read (tests/security/galleryVeilCures.pglite.test.js executes the tokens).
+create or replace function public._gallery_veil_copy_bound()
+returns bigint language sql immutable set search_path = public, pg_temp as $$
+  select 54333333::bigint
+$$;
+
 -- ── 2. THE CLIENT'S SMALL READERS, one SQL function each ─────────────────────────────────────
 -- str(v): the string, else ''.
 create or replace function public._gallery_veil_str(j jsonb)
@@ -854,15 +868,15 @@ as $$
       else s.data
     end as j
   ) base
-  -- 211: a share in snapshot mode is served its frozen copy, through the same projection
+  -- 211: a share in snapshot mode is served its frozen copy, through the same projection. A copy
+  -- past the server's bound is REFUSED (no row), never replaced by the live row (the review's F1).
   cross join lateral (
-    select case
-      when s.gallery_member_overrides #>> '{$veil,mode}' = 'snapshot'
-        and jsonb_typeof(s.gallery_member_overrides #> '{$veil,snapshot}') = 'object'
-        and length((s.gallery_member_overrides #> '{$veil,snapshot}')::text) <= 1000000
-      then s.gallery_member_overrides #> '{$veil,snapshot}'
-      else base.j
-    end as j
+    select case when cp.copy is not null then cp.copy else base.j end as j,
+           coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
+      from (select case
+        when s.gallery_member_overrides #>> '{$veil,mode}' = 'snapshot'
+          and jsonb_typeof(s.gallery_member_overrides #> '{$veil,snapshot}') = 'object'
+        then s.gallery_member_overrides #> '{$veil,snapshot}' end as copy) cp
   ) src
   cross join lateral (
     select public._gallery_apply_member_overrides(
@@ -876,6 +890,7 @@ as $$
   cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false) as v offset 0) vl
   where s.public_slug = dossier_slug
     and s.is_public = true
+    and not src.refused
   limit 1;
 $$;
 

@@ -1752,6 +1752,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryVeilCures.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/galleryUnlisted.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
