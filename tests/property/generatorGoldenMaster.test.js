@@ -18,6 +18,11 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-12 — STYLE-2-MERGE RECORD 42, THE COHERENCE-QUARREL MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   476 of 525 rows (thorp 72, hamlet 84, village 84, town 68, city 84, metropolis 84) against record 27's post-state. THE CAUSE, ONE (first-parent step d4723749a): the COHERENCE-QUARREL merge (lane/coherence-quarrel-2026-11-11 at 1c7b5786c; cures 1-4: the quarrels' cast-declared issues with hooks of their own, the touched power's clause, the smuggling hook's tellings). FIELD-DIFFED: conflicts[] and powerStructure.conflicts[] issue/stakes/desc/plotHooks, economicState.safetyProfile.plotHooks[]; no other leaf.
+ *   Written from the staged tree S42 (the tree of d4723749a with the door paths carried from the branch). 97936ac1.. -> 6f8317a8..
+ *
  * 2026-11-09 — STYLE-2-MERGE RECORD 27, THE SW-9b-B MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-10-style-2-merge-27-sw9b-b.json; the cloud chair signs under the owner's delegation, vetoable).
  *   167 of 525 rows (village 12, city 84, metropolis 71) against record 25's post-state. THE CAUSE, ONE (first-parent step ee364b3ef): the SW-9b-B merge (lane/style-2-sw9b-b-2026-11-09 at df52ccd34; b23e4e91b, the cast's fixed reason instigatorBacked). FIELD-DIFFED: stress/stressors cast.roles[].reason, 0 non-string leaves.
