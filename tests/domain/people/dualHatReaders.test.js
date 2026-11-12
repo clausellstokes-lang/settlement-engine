@@ -89,7 +89,9 @@ describe('COHERENCE-POWERS — the dual hat, as the page reads it', () => {
       const s = generateSettlementPipeline(birthConfig({ ...DIALS, settType: 'thorp' }), null, { seed, customContent: {} });
       const leader = (s.npcs || []).find((c) => (c.memberships || []).some((m) => m.rank === 1 && m.power === governingNameOf(s)));
       if (leader && cardOfficeOf(leader) && OFFICES.includes(shownHonorificOf(leader, s))) misses.push(`${seed}: ${shownHonorificOf(leader, s)} beside ${cardOfficeOf(leader)}`);
-      if (seed === 'rvw-thorp-64') expect(`${shownHonorificOf(leader, s)} · ${cardPowerLine(leader, [], governingNameOf(s))}`).toBe('Boat-headman · Elder, first of Elder Council');
+      // collected, not asserted inline, so every seed runs (seedLoopTotality): the same literal
+      const row = seed === 'rvw-thorp-64' ? `${shownHonorificOf(leader, s)} · ${cardPowerLine(leader, [], governingNameOf(s))}` : null;
+      if (row !== null && row !== 'Boat-headman · Elder, first of Elder Council') misses.push(`${seed}: the card row reads "${row}"`);
     }
     expect(misses).toEqual([]);
   }, 60_000);
