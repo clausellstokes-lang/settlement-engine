@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "dfb266dd18157cf2f74738081bde790896fcbd3b",
-  "measuredBy": "COHERENCE-PRESUME",
-  "date": "2026-11-11",
-  "note": "COHERENCE-PRESUME (2026-11-11): two new test files (tests/lint/presumedThings.walker.test.js, tests/domain/presumeCorpusSeeds.test.js) and new titles in factionDescSiblings.test.js and institutions.test.js",
-  "files": 3201,
+  "measuredAtSha": "8f4aeb8286eb0b80c14e83c0a2a44d7cc1bce3ad",
+  "measuredBy": "COHERENCE-PRESUME-2",
+  "date": "2026-11-12",
+  "note": "the lane adds tests/domain/presumeTimeLens.test.js (two named tests) and new titles in presumedThings.walker.test.js",
+  "files": 3202,
   "parked": 397,
-  "credited": 2804,
-  "titles": 29102,
-  "suiteTitles": 7870
+  "credited": 2805,
+  "titles": 29109,
+  "suiteTitles": 7874
 }
