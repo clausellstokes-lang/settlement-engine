@@ -121,11 +121,9 @@ Counts are on the reviewer's 1,800 (rvw12 + rvw12b) unless marked. "after" is re
 | F12b | 469895ec6 | a shortage import's bracket says land is spent beside a live resource of that land | 3 → 0. **CORRECTED:** its forest word convicts 4 more births (see the STOPs) |
 | F13 | 7ef6378f1 | `coherenceAgreeCures` "F13" (the table is printed by its constants) | the coal line is declared; cure 11's three lines wait on STOP 3 |
 | F14a | this file | — | the 43 viability rows are credited to cure 5 |
-| F14b | 6e6b9b4c3 | the census walker's own reader | 8 line cites → symbols |
+| F14b | c0a156f08 | the census walker's own reader | 8 line cites → symbols |
 | F15 | 213105f89 | the lighting census, through its door | 3199 → 3202 files. Re-taken again at the final tip, after the last test change |
 | B (i) | e4a897c2a | the diversity line beside a roster that works its own land | 231 rows (L2) → 0 |
-
-**F14b's sha is the commit titled "docs(COHERENCE-AGREE-3, F14b)" (`git log --grep F14b`).** Rule 32: cite the commit by its subject; its short sha is written as committed.
 
 **F2 and F10** are declared, with counts and direction, in `AGREE-shift-record.DRAFT.json` (3f20fe85b). The chair accepted F2 on its declaration.
 
