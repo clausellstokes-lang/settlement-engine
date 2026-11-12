@@ -1,0 +1,61 @@
+{
+  "_doc": "COHERENCE-AGREE-7 (REVIEW-AGREE-2 F8 (ii), the chair's ruling of 2026-11-12): the walker's third member — the private readers of the four atoms the defence home holds that the first two members never named (the palisade, the prison, the hospital and the healer; `tests/lint/defenceFactReaders.shared.mjs :: ATOM_WORDS`, member 3), outside src/domain/facts/, src/domain/defense/ and src/data/, counted by tests/lint/defenceFactReaders.walker.test.js. SHRINK-ONLY from its first commit: a row may only fall, and falls the commit its reader retires to the home; no row is ever added. Banked over 293167b6f, after the lane's own two readers (the flag bag's prison, a9d2bc1cf, and hospital, 293167b6f) were cured rather than banked: every row here predates the lane. Two shapes are ruled out by rule, not banked: a name list tested against a person's role archetype (worldPulse/npcGoalBranches.js) and an agreement check that reads the home's own answer on the same line (summary/settlementQuickGuide.js).",
+  "rows": {
+    "src/domain/display/stateProse/generalStateProse.js": {
+      "count": 1,
+      "reason": "Counted, and reads the home: `const hasHospital = record ? defenceOf(record).hospital : inst.hasHospital` sets the flag over two lines, the home's answer first (CENSUS-1b unit A (b)); the line-shaped count cannot see the next line, so the row is held as counted (present at 99bcc6944)"
+    },
+    "src/domain/display/threatAssessment.js": {
+      "count": 1,
+      "reason": "Another sense, held as counted: it words the home's own healerName ('The monastic infirmary' or 'A healer'), it does not decide whether a healer stands (present at 99bcc6944)"
+    },
+    "src/domain/historyBeats.js": {
+      "count": 1,
+      "reason": "Another sense, held as counted: it tests an event's effect string for an institution word, not the roster (present at 99bcc6944)"
+    },
+    "src/generators/aiLayer.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/defenseGenerator.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/economy/viability.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/institutionProbability.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/narrativeGenerator.js": {
+      "count": 2,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/power/rulingStructure.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/priorityHelpers.js": {
+      "count": 1,
+      "reason": "`hasWalls` counts a palisade or earthwork as walls: the flag bag's walls union (the first member's row counts the same line for its walls words); present at 99bcc6944, it retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/services/serviceClassifier.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/spatialGenerator.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/stressGenerator.js": {
+      "count": 2,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/structuralValidator.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the palisade, the prison, the hospital or the healer, at the lane's tip 293167b6f (COHERENCE-AGREE-7, REVIEW-AGREE-2 F8 (ii)); it predates the lane (present at 99bcc6944), answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    }
+  }
+}
