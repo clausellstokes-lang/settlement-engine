@@ -218,10 +218,13 @@ export function deriveCriminalStructure(settlement) {
   // Either makes the null answer SEMI-ORGANIZED, the same reading a criminal house gets above.
   const listed = (r.economicState?.safetyProfile?.criminalInstitutions || []).length > 0
     || runningCriminalChains(r).length > 0;
-  const key = ladder
-    ?? (signal.factions.length ? 'organized'
-      : signal.houses.length || listed ? 'semi-organized'
-        : null);
+  // ⛔ A GANG IS A GANG (W2-A-LEAVES 5b, 2026-11-12; the second wave's ruling): the crime signal's FACTIONS outrank
+  // the name ladder. The ladder read a fence's house as "diffuse" and never asked the roster, so the Defense tab
+  // printed "Diffuse, no gang" beside a criminal power on the Power tab (2 of the census's 720). A criminal power
+  // is a hierarchy, the pool's own reading of one; the ladder answers only where no criminal power stands.
+  // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
+  const key = signal.factions.length ? 'organized'
+    : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
   return key ? withRingVantage(CRIM_STRUCTURE_DATA[key], r) : null;
 }
 
