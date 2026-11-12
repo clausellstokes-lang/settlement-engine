@@ -564,7 +564,7 @@ function faceOfHouse(s, house) {
   if (!house) return null;
   // COHERENCE-POWERS (cure (i)): the seat's house where a house leads is faced by the leader (seatHolder.js)
   return rosterOf(s).find((n) => n.institution?.kind === 'house' && str(n.institution?.key) === house)
-    || /** @type {CastNpc | null} */ (seatHouseFaceOf(/** @type {any} */ (s), house));
+    || /** @type {CastNpc | null} */ (seatHouseFaceOf(/** @type {never} */ (s), house));
 }
 
 /**

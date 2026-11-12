@@ -39,6 +39,7 @@ import { rankIn } from '../people/membership.js';
 import { seatHouseName } from './powerSupport.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
+/** @typedef {import('./powerSupport.js').SupportInstitution} SupportInstitution */
 
 /**
  * The settlement as the seat reads it: the ruling-power contract plus the roster.
@@ -142,11 +143,12 @@ export function seatCandidatesOf(settlement) {
  * the hall — powerSupport.js :: seatHouseName) is faced by the seat holder, the dual-hat leader. A reader
  * that finds a house's face by its key and finds none falls back here; a town saved before the cure still
  * carries the office's own face and never reaches this. Null for any other house, or with no holder.
- * @param {SeatSettlement | null | undefined} settlement @param {string} house the roster row's name
+ * @param {(SeatSettlement & { institutions?: SupportInstitution[] }) | null | undefined} settlement
+ * @param {string} house the roster row's name
  * @returns {SeatNpc | null}
  */
 export function seatHouseFaceOf(settlement, house) {
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  if (!house || seatHouseName(/** @type {any} */ (institutions)) !== house) return null;
+  if (!house || seatHouseName(institutions) !== house) return null;
   return seatCandidatesOf(settlement)[0] || null;
 }
