@@ -35,9 +35,6 @@ import {
  * @property {string} detail what the town holds instead
  */
 
-/** The shortest sentence the check reads (a heading or a chip names no claim). */
-const MIN_SENTENCE = 15;
-
 /**
  * @param {Record<string, unknown> | null | undefined} settlement the record
  * @param {Readonly<Record<string, ReadonlyArray<string>>>} views the rendered dossier
@@ -65,7 +62,9 @@ export function vocabularyPageFindings(settlement, views) {
     for (const line of lines || []) {
       if (typeof line !== 'string' || line.startsWith('[STYLE]')) continue;
       for (const sentence of sentencesOf(line)) {
-        if (sentence.length < MIN_SENTENCE) continue;
+        // The walker's own floor (presumedThings.shared.mjs, the printed-record arm: `text.length < 15`):
+        // a heading or a chip names no claim. Not a tuning value: the measure reads what the walker reads.
+        if (sentence.length < 15) continue;
         for (const id of thingsNamedIn(sentence)) if (thingAbsent(id)) push(view, id, 'names', sentence, `the town lacks: ${id}`);
         for (const id of thingsDeniedIn(sentence)) if (presentForDenial(id, facts, names)) push(view, id, 'denies', sentence, `the town has: ${id}`);
         for (const id of newWordsNamedIn(sentence)) {
