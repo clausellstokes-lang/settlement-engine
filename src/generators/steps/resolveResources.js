@@ -188,6 +188,14 @@ registerStep('resolveResources', {
         && depletionRolled
       );
     });
+    // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12, Part B (iii) A′): a ROLLED resource whose required access
+    // (RESOURCE_DATA[key].requires) is not this town's is dropped after the roll and its draws, so the pool and every
+    // other draw stand (nothing is re-dealt). A hand-chosen roster (the manual branch) is the person's and is kept.
+    nearbyResources = nearbyResources.filter((key) => {
+      const requires = /** @type {{ requires?: string[] } | undefined} */ (RESOURCE_DATA[key])?.requires;
+      return !Array.isArray(requires) || requires.includes(tradeRoute);
+    });
+    nearbyResourcesDepleted = nearbyResourcesDepleted.filter((key) => nearbyResources.includes(key));
 
     // ⭐ EM-B2b2 — AND THE DM'S OWN WORLD FACT IS AN AUTHORED PREMISE TOO, read through the one
     // mark config′ ALREADY CARRIES. EM-B2b routes an edited `worldFact.resources` onto its

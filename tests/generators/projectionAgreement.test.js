@@ -128,6 +128,12 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(says('(planted) The charter hall handles threats the watch cannot.', [{ name: 'Citizen militia' }])).toContain('The safety text names a watch the defence record does not hold.');
     expect(says('(planted) The charter hall handles threats the watch cannot.', [{ name: 'Town watch' }])).toEqual([]);
   });
+  test('Part B (iii): a rolled resource off the access it requires; a hand-chosen roster is exempt', () => {
+    const at = (route, random) => details(record({ config: { tradeRouteAccess: route, nearbyResourcesRandom: random }, resourceAnalysis: { availableResources: ['crossroads_position'] } }));
+    expect(at('road', true)).toContain('A rolled resource stands off the access it requires.');
+    expect(at('crossroads', true)).toEqual([]);
+    expect(at('road', false)).toEqual([]);
+  });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
     expect(details(grown(95, ['Grain']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
@@ -239,6 +245,8 @@ const REVIEW_SEEDS = [
   // the forest label (the chair's ruling, 2026-11-12): "Timber (local forests cleared)" beside live timber
   // (rvw-ten-4, in the arm for F8, also holds the iron label beside coal: the mines word is read now)
   { seed: 'rvw12-city-71', tier: 'city' }, { seed: 'rvw12b-town-171', tier: 'town' }, { seed: 'rvw12b-town-251', tier: 'town' }, { seed: 'rvw12b-city-156', tier: 'city' },
+  // Part B (iii): the review's road village with "Central trade hub", toll and transit exports
+  { seed: 'rvw12-village-19', tier: 'village' }, { seed: 'agree-town-1', tier: 'town' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
 ];

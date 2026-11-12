@@ -24,6 +24,7 @@ import {
   resourceShortageImport,
 } from '../domain/resourceSemantics.js';
 import { factsOf } from '../domain/facts/factsOf.js';
+import { RESOURCE_DATA } from '../data/resourceData.js';
 import { offersFoodSurplus } from '../domain/foodSurplus.js';
 import { GRAIN_TOP_UP } from './economy/primaryTradeLists.js';
 import { TRADE_LINE_BANDS, tradeBandContradictsLabel } from './economy/prosperity.js';
@@ -422,6 +423,15 @@ export function projectionAgreementFindings(settlement) {
       if (said && !said.needs.every((group) => group.some((key) => available.includes(key)))) {
         resource.push(finding('resourceAnalysis.strategicValue', 'The strategic line names a yield the town lacks.', said.text.replace(/^[, ]+|[, ]+$/g, '')));
       }
+    }
+  }
+  // Part B (iii) (COHERENCE-AGREE-3, the chair's ruling of 2026-11-12): a rolled resource standing off the access its
+  // row requires (RESOURCE_DATA[key].requires). A hand-chosen roster (nearbyResourcesRandom === false) is the
+  // person's own premise and is exempt; the structural validator warns on it instead.
+  if (settlement?.config?.nearbyResourcesRandom !== false) {
+    for (const key of available) {
+      const requires = /** @type {{ requires?: string[] } | undefined} */ (RESOURCE_DATA[/** @type {keyof typeof RESOURCE_DATA} */ (key)])?.requires;
+      if (Array.isArray(requires) && !requires.includes(route)) resource.push(finding('resourceAnalysis.availableResources', 'A rolled resource stands off the access it requires.', `${key}: ${route}`));
     }
   }
   const facts = factsOf(settlement);

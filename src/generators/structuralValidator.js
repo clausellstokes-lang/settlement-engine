@@ -788,7 +788,9 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   // ── Resource access violations ────────────────────────────────────────────
   nativeSemanticResourceKeys(config).forEach(resourceKey => {
     const data = RESOURCE_DATA[resourceKey];
-    if (data?.forbidden?.includes(route)) {
+    // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12): a row's required access is read as its forbidden list is,
+    // so a crossroads position forced on a road warns in the same words as one forced on a port.
+    if (data?.forbidden?.includes(route) || (Array.isArray(data?.requires) && !data.requires.includes(route))) {
       violations.push({
         type:        'resource_access_violation',
         institution: data.label,
