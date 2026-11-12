@@ -161,3 +161,176 @@ and 12 at this tip.
 
 The population says NOT SYSTEMATIC. The floor is named red at this tip as the merge seat's act, keyed by the test's
 own rule (dark twin − 10), never here.
+
+---
+
+# PART 2 — the second seat (COHERENCE-POWERS-2, 2026-11-12)
+
+The second seat took the lane at e071dc60e (the first seat's type fix f650b5abd and its re-emitted bundles on top of
+77c5b3e53) and was its only writer from there. Every figure below is on the second seat's corpus (L2): **2,460 births
+through `birthConfig`**: on random dials, `critique-<tier>-<i>` for thorp 150, hamlet 150, village 60, town 160,
+city 100 and metropolis 40; and every one of the 15 stresses forced (`selectedStresses: [stress],
+selectedStressesRandom: false`) × six tiers × 20 (`l2-<stress>-<tier>-<i>`). The probes and their seeds are in
+`docs/chair/2026-11-11/probes/COHERENCE-POWERS-2/` (README there); each takes the tree it measures as its first argument.
+
+## 1. The three type and lint gates (L1)
+
+| tree | domain-strict | typecheck:ratchet | eslint (the lane's src files) |
+|---|---|---|---|
+| decc7bf15 (base) | 0 | 0 | — |
+| 77c5b3e53 | **1** (+7 in powerSupport.js) | **1** (+7 over six lane files) | 0 |
+| e071dc60e (f650b5abd) | 0 | 0 | 0 |
+| every second-seat commit touching `src/` | 0 | 0 | 0 |
+
+## 2. Item 0 — the lane on all six sizes (the STOP, and the chair's rulings)
+
+The first seat's 1,000 births were four tiers on random stresses (village 170, town 440, city 280, metropolis 110).
+On the L2 corpus at e071dc60e (base decc7bf15 in brackets):
+
+| class | 4 tiers, random | thorp + hamlet, random | stresses forced |
+|---|---|---|---|
+| leader is the office, no house of the leader's kinds | 0 | 80 / 300 | 161 |
+| leader is office where a house stands; kind not in the three; council of a kind with no house | 0 [217 councils] | 0 [23] | 0 [626] |
+| roster power or density rival with no one on the page | 0 [20] | 0 [28] | 0 [~110] |
+| Thieves' Guild with no card | 0 | 0 | 7 [7] |
+| stress power with no one on the page | 6 | 2 | 82 |
+| capture none/equilibrium/corrupted/adversarial/capture | 276/32/32/18/2 | 299/0/1/0/0 | 1445/218/100/35/2 |
+
+New kinds the 1,000 did not show, and the chair's rulings (2026-11-12, vetoable by the owner):
+- **The small place with no house but its households**: by design, one hat; the guard exempts exactly a place with no
+  open faced house but the government's. Where an open faced house stands, the rule holds (built: §5 below).
+- **The stress powers are twelve names, not seven**, keyed by the stress of origin. The first seat's mapping of the
+  People's Council was wrong: it comes from insurgency. New: Conversion Enforcement Office and New Faith Community
+  (religious_conversion), Grain Holders (famine, the strongest power of l2-famine-village-7), Monster Hunters /
+  Adventurers (monster_pressure); The Highborn Circle is succession_void's second pool-drawn claimant, one case with
+  The Peerage. The rule gained step (0): a person of the house the power sits in by its nature.
+- **The Thieves' Guild with no card** (7 forced births, equal at the base): it stands as a power with no house of its
+  own (rulingStructure.js gives a small place's "local protection operation" its own description); no agent is dealt
+  to it; in 4 of 7 it does not exist without the stress.
+
+## 3. Item 1 — PRESUME's final tip
+
+`origin/lane/coherence-presume-2026-11-11` at 02c5f8fbd merged theirs into ours at **1981a999d** (15 commits after
+081928512). No source file was touched by both sides; the engine bundle and its meta kept ours (re-emitted last), the
+lighting census was re-frozen by its own command (dd87d3324). The presumed-things walker on the merged tree, which now
+reads denials and time: one red, the counting-house line (item 2), and nothing else in lines this lane draws.
+
+## 4. Item 2 — the presumed bank (fbbaa82e6)
+
+`npcData.js :: STRESS_ECONOMIC_EFFECTS.gov_econ_dependence.desc#6` declares `needs: institution: bank`; the CENSUS-4c
+ledger row carries it. **Arm 2: 1 fresh line → 0.** Guard: presumedThings walker 17 of 17; presumeCorpusSeeds' new
+case (presume-town-72) red first. The banked "figure" row covering the same line in relationships was stale with it and
+left. **No twin row (a call of mine, vetoable):** the tie pool pairs desc and tension by one index, so a ninth desc line
+needs a ninth tension line and re-indexes every Financial Dependence tie in every town; a refused index moves to the
+admitted ones, and desc#2 already says the same with no bank ("costed, quietly, in X's counting-room").
+
+## 5. Item 3 — the powers a stress brings (2eb44e935 guard, 67278c2c1 cure) and the small places (00823a145)
+
+The table is `src/data/stressPowerFaces.js`, its one reader `src/domain/people/stressPowerFaces.js`; the casting is
+`castPowers.js` (two mints in `landMemberships`, `seatStressPowers` after the ranks); the Power tab prints the declared
+line (`PowerStrata.jsx :: FactionRow`).
+
+| on 2,460 | before (fbbaa82e6) | after |
+|---|---|---|
+| powers with neither a person nor a declared line | **89** (82 stress powers, 7 Thieves' Guilds) | **0** |
+| Occupation Authority faced by the occupier's man (minted) | 0 of 81 (68 the town's own soldier, 13 no one) | 81 of 81 |
+| Thieves' Guild with no house: its master, veiled | 0 of 7 | 7 of 7 |
+| a stress power seated from the house of its nature (0) or its cast's houses (a) | — | 7 (War Council 2, The Highborn Circle 2, Quarantine, Reform Congregation, The Peerage) |
+| its declared leaderless line (b) | — | War Council 26, The Peerage 9, People's Council 8, Quarantine 8, Reform 8, The Highborn Circle 3, Resistance 3, New Faith 2, Enforcement 2, Grain Holders 1, Monster Hunters 1 |
+| leader · ruler · capture · any label · any power figure moved | — | 0 · 0 · 0 · 0 · 0 |
+
+Guard: `tests/generators/people/stressPowersFaced.test.js`, 22 seeds, red 2 of 4 at its commit, 4 of 4 after.
+Readings of mine, vetoable: the War Council, the Quarantine Council and the claimants' party fall to (b) where no house
+of their nature has a free face (a committee, a claimants' party by their own descriptions), never (c), since the
+roster prints their power beside them. Found, not cured: 28 stress powers whose first came by a house's own share is a
+face that already leads another power (the miller who leads the Headman's Authority and the Grain Holders); the rule
+seats no such face.
+
+**The small places** (00823a145): a civic leader whose town has no trade or landed house comes from its heaviest open
+house of another kind. **The leader moves in exactly 5 births** (critique-hamlet-5, critique-hamlet-99,
+l2-indebted-hamlet-7, l2-indebted-hamlet-18, l2-mass_migration-hamlet-19); no label. A leader who is the office where an
+open faced house stands: 5 → 0. **Exempt by the chair's (i): 236** (thorp 150, hamlet 86; on random dials 45 thorps and
+21 hamlets, i.e. 66 of 300; 33 hold only hidden criminal houses, which never lead). Guard: powersDualHat gains two
+charter-hall hamlets (red first) and an exempt thorp. One pin re-keyed with the cause: castPowers.test.js's fixture is a
+civic Elder Council whose only open houses are military, so its castellan now leads.
+
+## 6. Item 4 — the ladder's top rung (bd4afc382 guard, 9f7aedb99 cure)
+
+The chair ruled the second seat's proposal: the order, not the readers. `npcLadderState.js :: eligibleMembersOf` sorts
+by the card's rank in THIS power first. The readers that mean "the ruler": gratitudeBonds.js :: rulingSeatNidOf (the war
+seat books' rulingSeatId, rulerTraits, rulerStanding01; seatGratitudeSevToward; applyWorldPulse.js's court gratitude),
+warPeaceDecision.js, the ladder's governing seat and designateHeir, powerStrata.js's seat line, powerStateProse.js
+DS-POW-3, powerDeskRead.js. They reach a person on the dossier's seat line and the Power tab's ladder rows of any lived
+town, in the realm's news (the Herald desk), and in the founding worlds.
+
+| on 2,460 (probe reach.mjs) | before | after |
+|---|---|---|
+| governing first-lit top rung is not the leader | **279** (62 of 660 random, 217 of 1,800 forced; the four-tier 360: base 44, lane 49) | **0** |
+| every power: top rung is not its own rank-1 card | — | 0 |
+| other powers' top rungs that change (the chair's condition 3) | — | 105 of 6,130 |
+| a saved ladder stepped under the new order keeps its rungs | — | yes (the guard's third check, 15 seeds) |
+
+L3 (the same order in a scratch tree on fbbaa82e6): **no generated record differs in 2,985** (the golden's 525
+configurations and the 2,460, whole-record sha256); **no test title moves** in the six directories; it moves figures
+only inside rows already the merge seat's (heraldKnowledgeDeskGolden's hash; writerReach's population 1733 → 1731 and its
+unrowed dark identities 28 → 41; observedShapeReaders' reads 2186 → 2188; proseFamilyContract A1's rows 38372 → 37712).
+**The twenty-year soak: mobilizations 27 = 27 patched and unpatched, scandals inside the band in both** (the first
+seat's equality confirmed; 27 also at 74b3b4949). The printed case, the dossier's seat after one step of the ladder:
+
+```
+Xiaguan (critique-town-10), Guild Council; the birth's leader: Wu Yang, the senior guild master and Alderman
+  before: the seat — Li Liu, first of the governing house (via the ladder)
+  after:  the seat — Wu Yang, first of the governing house (via the ladder)
+```
+
+**For the lane that regenerates the founding worlds:** their ladders are composed at first light and follow the new
+order (the leader on the top rung).
+
+## 7. How both hats and the stress powers print (print.mjs at 00823a145; `five-towns.txt` beside the probes)
+
+```
+Breitthal (critique-thorp-0) — a thorp, ruled by Household Council           (exempt: the office's own words)
+  Household Council (100): first Irene Weber, the eldest householder
+Shangcheng (critique-hamlet-5) — a hamlet, ruled by Headman's Authority      (the charter hall leads)
+  Headman's Authority (100): first Noriko Guo, the charter master and Headman
+Hutang (l2-famine-village-7) — a village, ruled by Headman's Authority, under famine
+  Grain Holders (51): It is no one body: it is every household and dealer with a full bin.
+  Headman's Authority (49): first Ying Liang, the miller and Headman · second Yue Hu, the cooper
+Albapagus (l2-occupied-village-0) — a village, ruled by Headman's Authority, under occupation
+  Occupation Authority (56): first Felicia Gallus, the occupying governor
+  Headman's Authority (44): first Vera Rufus, the mine captain and Headman · second Cato Gratus, the quarry master · third Sulpicia Corvinus, the stable keeper
+Montenovum (l2-plague_onset-hamlet-1) — a hamlet, ruled by Free Elder Council, under plague
+  Free Elder Council (60): first Calvus Silanus, the boat-headman and Elder · second Cornelia Flavius, the head shepherd · third Decius Silanus, the dairy farmer
+  Quarantine Council (40): It has no one head: the households of each street keep the quarantine among themselves.
+Niederwiese (l2-famine-hamlet-6) — a hamlet, ruled by Feudal Stewardship, under famine
+  Thieves' Guild (49): first Guta Richter, the guildmaster (veiled)
+```
+
+A second exempt small place prints as the thorp does: Roccaoppidum (critique-thorp-3), Elder Council, first Celer
+Cicero, the household elder.
+
+## 8. The equal-failing set (the six directories)
+
+Base decc7bf15: 1 title (ledgerCitationIntegrity: the ledger branch's local ref, absent in a fresh checkout). The first
+seat's tip: 52. At c600ab68c, before the bundles: **the same set as 74b3b4949, 63 titles**, of which the 9 engine-bundle titles
+(engineBundleReplay 4, engineServiceStoreParity 4, engineServiceCore 1) are the merge keeping our bundle and leave with
+this lane's last commit. So **54 at the tip**: the first seat's 52, less presumedThings ARM 2 (cured, item 2), plus three
+the first seat's statement did not name, each read at e071dc60e already:
+
+| title(s) | whose |
+|---|---|
+| newsVoiceContract, newsHeadlineContract (file-level: the observed corpus's Wizard News introductions 395 → 412) | the merge seat: the observed-corpus class the first seat named under observedShapeReaders (red at e071dc60e and at PRESUME's 02c5f8fbd, green at decc7bf15) |
+| observedShapeReaders, a fifth title | the same class |
+
+Every other title is the first seat's table, unchanged in kind: the goldens and their null-change pins (the generator
+golden master 519 configurations, the dossier manifest 782 rows, the Herald desk and the espionage fence), the digests
+re-taken at the merge (x46NpcBand 59, institutionBudgetPromise 58, the intent atlas, the landing fixture), the measured
+figures (hookThemeDraws 2157 → 2105, generationForkCensus A1 and A6, editCorpusRatchet, mergeLadderHeldKeys), the
+composed-prose identities, the worked-example towns, writerReach and the mobilization floor (statecraftExposureBand:
+27 mobilizations, the dark twin's rule) — all THE MERGE SEAT'S ACTS, under the drafted record. Cured by the second
+seat beside the items: noLegacyFactionReaders (red at e071dc60e: f650b5abd moved a listed line; re-keyed by identity).
+
+**Banked: nothing.** No baseline row was added, no pin loosened, no test skipped. Registers re-taken by their own
+writers with the cause: the lighting census (three times), the wiring census, the phone chrome floor, the prose
+numerics rows (identity), the legacy faction-reader site (identity), one mutation-coverage rationale with its red-first
+run.
