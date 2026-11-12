@@ -26,6 +26,24 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { createRequire } from 'node:module';
 
+import { timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
+import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
+
+/**
+ * THE HOUSES THAT TRY DISPUTES (the chair's correction of 2026-11-12, measured by COHERENCE-AGREE-2):
+ * a court is a house whose OWN catalogued service tries disputes under the public law, read from its
+ * service rows, never from its name alone — the Town hall's "Dispute arbitration: Bring commercial and
+ * civil disputes before a magistrate", the City hall's "Appeals court", the Town council's "Dispute
+ * adjudication", the City administration's "Courts and adjudication", a Courthouse's "Civil disputes" and
+ * "Criminal trials", the court buildings' "Appeals", Mayor and council's "Legal appeals", a city-state's
+ * "Civic law enforcement". A headman's, elder's or reeve's mediation, a guild's arbitration and a church's
+ * court are not the town's court.
+ */
+const COURT_SERVICE = /^(?:civil disputes|criminal trials|dispute arbitration|dispute adjudication|courts and adjudication|appeals(?: court)?|legal appeals|civic law enforcement)$/i;
+export const COURT_HOUSES = Object.freeze(new Set(Object.entries(INSTITUTION_SERVICES)
+  .filter(([, rows]) => Object.keys(rows || {}).some((service) => COURT_SERVICE.test(service)))
+  .map(([name]) => name.toLowerCase())));
+
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
 
@@ -68,6 +86,7 @@ export const THINGS = Object.freeze({
     words: /\bdocks?\b|\bharbou?rs?\b|\bquays?\b|\bwharf\b|\bwharves\b|\bdockside\b|\bdockworkers?\b|\bdockhands?\b/i,
     atoms: ['docks', 'navigable', 'coast', 'river', 'port', 'institution: docks', 'route: port', 'route: river'],
     absent: (f) => !f.water.navigable && !f.hasInstitution('docks'),
+    presentForDenial: (f) => f.hasInstitution('docks'),
   },
   granary: { words: /\bgranar(?:y|ies)\b/i, atoms: ['institution: granary'], absent: (f) => !f.hasInstitution('granary') },
   mill: { words: /\bmill(?:s|er|ers)?\b/i, atoms: ['institution: mill'], absent: (f) => !f.hasInstitution('mill') },
@@ -89,7 +108,7 @@ export const THINGS = Object.freeze({
   court: {
     words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b/i,
     atoms: [],
-    absent: (_f, names) => !names.some((n) => /court/i.test(n)),
+    absent: (_f, names) => !names.some((n) => /court/i.test(n) || COURT_HOUSES.has(n.toLowerCase())),
   },
   bank: {
     words: /\bbankers?\b|\bbanking\b|\bmoney.?changers?\b|\bcounting.?houses?\b/i,
@@ -101,6 +120,19 @@ export const THINGS = Object.freeze({
     words: /\bthe war\b|\bwartime\b|\bat war\b|\bthe armies\b/i,
     atoms: ['war: front', 'war: aggressor', 'war: at war', 'war: peace', 'crisis: wartime', 'crisis: under_siege', 'crisis: occupied'],
     absent: (f) => f.warState === 'peace' && !f.crisis?.has?.('wartime') && !f.crisis?.has?.('under_siege') && !f.crisis?.has?.('occupied'),
+  },
+  // THE LAW (the chair's ruling A of 2026-11-11, "denials"): read on the DENIAL side only
+  // (`denialOnly`), because every town has some law and naming it presumes nothing; denying it
+  // ("No law, bring coin", "There is no official recourse here") presumes there is none. The town
+  // has law where a peace-keeping house stands (the vocabulary's watch or garrison) or a house
+  // that judges (a court, a council, a hall, a headman, a magistrate). "No law permits" is the
+  // law of anywhere, not of this town.
+  law: {
+    words: /\blaw enforcement\b|\bofficial recourse\b|\blaw\b(?! permits)/i,
+    atoms: ['watch', 'garrison', 'guardPresence'],
+    absent: (f, names) => !f.defence.watch && !f.defence.garrison
+      && !names.some((n) => /court|council|\bhall\b|headman|magistrat|reeve|justiciar|sheriff/i.test(n)),
+    denialOnly: true,
   },
 });
 
@@ -128,7 +160,43 @@ export const sentencesOf = (text) => String(text).split(/(?<=[.!?;])\s+/).map((s
 
 /** The things a sentence names and does not negate. @param {string} sentence */
 export function thingsNamedIn(sentence) {
-  return THING_IDS.filter((id) => THINGS[id].words.test(sentence) && !negates(sentence, THINGS[id].words));
+  return THING_IDS.filter((id) => !THINGS[id].denialOnly && THINGS[id].words.test(sentence) && !negates(sentence, THINGS[id].words));
+}
+
+/**
+ * A DENIAL OF EXISTENCE: some use of the thing's words is "no X", "without (a, any) X", "lacks
+ * (a) X", with at most one plain qualifier between ("no public law", "no official recourse").
+ * Narrower than `negates` on purpose: "not a prison" denies an identity, "no single barracks"
+ * a size, "the watch cannot" an ability, "would not call the law" a choice, and "no market dues"
+ * a market's toll; none says the thing is not there. @param {string} sentence @param {RegExp} words
+ */
+export function deniesExistence(sentence, words) {
+  const m = new RegExp(words.source, 'ig');
+  for (const hit of sentence.matchAll(m)) {
+    const before = sentence.slice(Math.max(0, hit.index - 32), hit.index);
+    const after = sentence.slice(hit.index + hit[0].length, hit.index + hit[0].length + 16);
+    if (/^\s+(?:dues|tolls?|fees?|rights?|prices?|value|permits)\b/i.test(after)) continue;
+    if (/\b(?:no|without(?:\s+(?:an?|any))?|lacks?(?:\s+(?:an?|any))?|lacking(?:\s+(?:an?|any))?)\s+(?:(?:public|official|lawful|legal|real|proper|working|standing|organised|organized)\s+)?$/i.test(before)) return true;
+  }
+  return false;
+}
+
+/**
+ * The things a sentence DENIES: such a line presumes the thing's ABSENCE (the chair's ruling A of
+ * 2026-11-11). @param {string} sentence
+ */
+export function thingsDeniedIn(sentence) {
+  return THING_IDS.filter((id) => THINGS[id].words.test(sentence) && deniesExistence(sentence, THINGS[id].words));
+}
+
+/**
+ * Does the town HAVE the thing, for a denial? The thing's own reader, except where the denial names
+ * a narrower thing than the presumption does: "no wharf of its own" denies the dock HOUSE, which a
+ * navigable town may lack. @param {string} thing @param {any} facts @param {string[]} names
+ */
+export function presentForDenial(thing, facts, names) {
+  const t = THINGS[thing];
+  return t.presentForDenial ? !!t.presentForDenial(facts, names) : !t.absent(facts, names);
 }
 
 // ── ARM 1: the source ─────────────────────────────────────────────────────────────────────────
@@ -320,9 +388,12 @@ function leaves(v, p, out) {
 }
 
 /**
- * Arm 2 over one record: each (thing, path, sentence) printed while the thing is absent.
+ * Arm 2 over one record: each (thing, path, sentence) printed while the thing is absent, and (the
+ * chair's ruling A) each sentence printed DENYING a thing the town has, marked `denies: true`. The
+ * denial side reads the licensed service rows too: a houseless row ('(lawless)') is answered by no
+ * institution, so nothing licenses what it denies.
  * @param {object} record @param {object} facts `factsOf(record)` @param {string[]} names the live roster's names
- * @returns {Array<{ thing: string, path: string, sentence: string }>}
+ * @returns {Array<{ thing: string, path: string, sentence: string, denies?: true }>}
  */
 export function printedAbsent(record, facts, names) {
   /** @type {Map<string, boolean>} */ const absent = new Map();
@@ -333,14 +404,88 @@ export function printedAbsent(record, facts, names) {
   /** @type {Array<{ thing: string, path: string, sentence: string }>} */ const out = [];
   const seen = new Set();
   for (const [path, text] of leaves(record, '', [])) {
-    if (text.length < 20 || !isPrinted(path) || isLicensed(path)) continue;
+    if (text.length < 15 || !isPrinted(path)) continue;
+    const licensed = isLicensed(path);
     for (const sentence of sentencesOf(text)) {
-      for (const thing of thingsNamedIn(sentence)) {
-        if (!isAbsent(thing)) continue;
-        const k = `${thing}\t${path}\t${sentence}`;
-        if (!seen.has(k)) { seen.add(k); out.push({ thing, path, sentence }); }
+      if (!licensed && text.length >= 20) {
+        for (const thing of thingsNamedIn(sentence)) {
+          if (!isAbsent(thing)) continue;
+          const k = `${thing}\t${path}\t${sentence}`;
+          if (!seen.has(k)) { seen.add(k); out.push({ thing, path, sentence }); }
+        }
+      }
+      for (const thing of thingsDeniedIn(sentence)) {
+        if (!presentForDenial(thing, facts, names)) continue;
+        const k = `denies\t${thing}\t${path}\t${sentence}`;
+        if (!seen.has(k)) { seen.add(k); out.push({ thing, path, sentence, denies: true }); }
       }
     }
+  }
+  return out;
+}
+
+// ── TIME: a line can presume its witnesses (the chair's ruling B of 2026-11-11) ──────────────────
+
+/**
+ * The words that put the people who LIVED THROUGH an event among the living ("those who lived
+ * through it are still here", "within living memory", "as if it were last year", "first-hand").
+ * The fact vocabulary has no atom for time, so a line cannot DECLARE it: this reading answers it
+ * from the record's own dates instead.
+ */
+export const WITNESS_WORDS = /\blived through it\b|\bliving memory\b|\bstill here to tell\b|\bas if it were last year\b|\bfirst-hand\b/i;
+
+/**
+ * Is an event older than its bearers? The estate's own time ladder answers it
+ * (`heraldCausalGrammar.js :: TIME_BANDS`: past "a generation", sixty years, the band is "older
+ * than its bearers"). @param {unknown} yearsAgo
+ */
+export const olderThanBearers = (yearsAgo) => typeof yearsAgo === 'number' && timeBandOf(yearsAgo, 52).id === 'older_than_bearers';
+
+/** An event's name as a sentence names it ("The Siege" → "siege"), lower-cased. @param {unknown} name */
+const bareName = (name) => String(name ?? '').replace(/^(?:the|a|an)\s+/i, '').trim().toLowerCase();
+
+/**
+ * Arm 2's TIME reading over one record. Listed, each as { thing: 'time', path, sentence, why }:
+ *   • 'witness'  a sentence claiming living witnesses, printed under an event older than its
+ *     bearers (the event's own prose), or naming only such events (anywhere else);
+ *   • 'echo'     a current tension whose sentence is word for word a past event's in the same town.
+ * @param {any} record
+ * @returns {Array<{ thing: 'time', path: string, sentence: string, why: 'witness'|'echo' }>}
+ */
+export function printedOutOfTime(record) {
+  const events = Array.isArray(record?.history?.historicalEvents) ? record.history.historicalEvents : [];
+  /** @type {Array<{ thing: 'time', path: string, sentence: string, why: 'witness'|'echo' }>} */ const out = [];
+  const seen = new Set();
+  const push = (path, sentence, why) => {
+    const k = `${why}\t${path}\t${sentence}`;
+    if (!seen.has(k)) { seen.add(k); out.push({ thing: 'time', path, sentence, why }); }
+  };
+  for (const e of events) {
+    if (!olderThanBearers(e?.yearsAgo)) continue;
+    for (const [path, text] of leaves(e, '.history.historicalEvents[]', [])) {
+      if (!isPrinted(path)) continue;
+      for (const sentence of sentencesOf(text)) if (WITNESS_WORDS.test(sentence)) push(path, sentence, 'witness');
+    }
+  }
+  const named = events.map((e) => ({ name: bareName(e?.name), old: olderThanBearers(e?.yearsAgo) })).filter((e) => e.name.length > 2);
+  for (const [path, text] of leaves(record, '', [])) {
+    if (path.startsWith('.history.historicalEvents') || !isPrinted(path)) continue;
+    for (const sentence of sentencesOf(text)) {
+      if (!WITNESS_WORDS.test(sentence)) continue;
+      const lower = sentence.toLowerCase();
+      // the event the sentence is ABOUT is the one it names first ("The Siege is still present in
+      // living memory: a previous occupation ended …" is about the siege)
+      let first = null;
+      for (const e of named) {
+        const at = lower.search(new RegExp(`\\b${e.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`));
+        if (at >= 0 && (first === null || at < first.at)) first = { at, old: e.old };
+      }
+      if (first?.old) push(path, sentence, 'witness');
+    }
+  }
+  const past = new Set(events.map((e) => e?.description).filter((d) => typeof d === 'string' && d.length >= 20));
+  for (const t of Array.isArray(record?.history?.currentTensions) ? record.history.currentTensions : []) {
+    if (past.has(t?.description)) push('.history.currentTensions[].description', t.description, 'echo');
   }
   return out;
 }
@@ -359,4 +504,5 @@ export const corpusSeeds = () => CORPUS_PLAN.flatMap(([tier, n]) => Array.from({
  * @param {{ thing: string, path: string, text: string }} row
  * @param {{ thing: string, path: string, sentence: string }} hit
  */
-export const rowCovers = (row, hit) => row.thing === hit.thing && row.path === hit.path && hit.sentence.includes(row.text);
+export const rowCovers = (row, hit) => row.thing === hit.thing && row.path === hit.path && hit.sentence.includes(row.text)
+  && !!row.denies === !!hit.denies;

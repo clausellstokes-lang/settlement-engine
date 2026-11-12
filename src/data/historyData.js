@@ -1631,6 +1631,13 @@ export const tensionDescription = (tension, config) => {
   return byDirection[migrationDirectionOfConfig(/** @type {any} */ (config)) === 'departures' ? 'departures' : 'arrivals'] || tension.description;
 };
 
+/**
+ * COHERENCE-PRESUME: a template's authored description variants (none → empty), for the current tension
+ * that must not repeat its own past event word for word (historyGenerator.js :: apartFromOwnEvent).
+ * @param {string} type @returns {ReadonlyArray<string>}
+ */
+export const historyDescVariantsOf = (type) => HISTORY_DESC_VARIANTS[type] || [];
+
 export const historyDescription = (eventTemplate, seed) => {
   const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];
   return variants

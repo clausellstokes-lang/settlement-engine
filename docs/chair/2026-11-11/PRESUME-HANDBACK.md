@@ -85,3 +85,49 @@ The rows that stay red at the tip are moved by the lane's text and named as the 
   - writerReach ×3 (red from 9e4e0402a, per the chair's ruling)
   - the Wizard News homes count (newsHeadlineContract and newsVoiceContract fail at load with "homes drifted: expected 44, got 43")
 - **landingFixtureFreshness ×2:** the landing fixture is derived from the engine; FOUNDING-WORLDS re-runs it.
+
+---
+
+# ADDENDUM — the second seat (COHERENCE-PRESUME-2, 2026-11-12): §3 finished
+
+Built on 081928512. Every cure below has a pin that was red before it; one cause per commit. The corpus is the charter's 360 (`presume-<tier>-<i>`, the browser's dials). "Base" means measured at 081928512, or for the arms I built, the first commit that carries the arm, whose generator text is still the base's for that class.
+
+## A1. What was cured (base → tip, same seeds)
+
+| commit | class | base | tip |
+|---|---|---|---|
+| 091054897 | §3.1 the 27 culture sentences, PDF Identity section (`src/data/cultureProfiles.js`): each is reworded so it presumes nothing; the defence lines say what the tradition does as a place grows. `needs` go where the thing goes. Ledgers CULTURE_PROFILES_DAILY / CULTURE_ARCHITECTURAL_DETAILS follow; the quick guide's scope digest is re-recorded with its reason | 35 arm-2 rows, 82 towns | 0 |
+| eef26d522 | §3.2 GUARD: arm 2's denial side, `deniesExistence` (matches "no / without / lacks X", not "not a prison", "no single barracks", "the watch cannot", "would not call the law", "no market dues" or "no law permits"). Adds the thing `law`, read only where it is denied, and reads the licensed service rows for denials | — | — |
+| aac5e798d | §3.2 "No law, bring coin / There is no official recourse here." → "Weak law, bring coin / The law here is slow and easily outbid." One row reworded, no twin: a second name would be a 79th classifier registration against the walker's shrink-only ceiling of 78 | 22 towns (every one with a watch) | 0 |
+| 531953458 | §3.2 the stability label "Fragile (private security, no public law)" → "(private security above the public law)" where a court system stands (`src/generators/power/governanceNarrative.js:246`, THE ONE LINE I changed in that file, by the chair's ruling). Its readers key on the first word only. On the 10 towns, the whole record diffed before and after: one leaf moves in each, `.powerStructure.stability`. The compendium gloss is changed at `scripts/generate-compendium-data.mjs` and regenerated through `npm run gen:compendium-data` | 10 towns | 0 |
+| 948be8279 | §3.3 GUARD: the time reading. The fact vocabulary has no atom for time, so a line cannot declare it. `printedOutOfTime` answers from the record's own dates and the estate's ladder (`heraldCausalGrammar.js :: TIME_BANDS`: past 60 years an event is "older than its bearers"). 'witness' = a living-witness phrase on such an event; 'echo' = a current tension in a past event's words. No register: every row is cured | — | — |
+| 597778a53 | §3.3 the echo prefix "Families who lived through it tell it this way" on hooks of events over 60 years → its twin "Family accounts passed down from that time tell it this way" (same roll; plotHooks.js dedupe copy and the ledger follow) | 40 hooks, 38 towns | 0 |
+| 521e96675 | §3.3 three POLITICAL_FLAVOR lines (`narrativeText.js`): "the people who lived through it are still here", "those who lived through it speak of it as if it were last year", "within living memory" → twins chosen by the picked event's age, draw-free | 19 lines, 19 towns | 0 |
+| 5b1e3232d | §3.3 a current tension word for word its own past event → the template's first authored variant whose words differ | 38 tensions, 37 towns | 0 |
+| cc5e649b3 | §3.3 the page's "a decade old" beside "23y ago": the history lens (`generalStateProse.js :: yearBand`) calls no span over 15 years "a decade" (it becomes "a generation"); the herald's ladder is untouched. Wiring census stamp re-taken through its door | pin: 16–25 years read "a decade old" | 0 |
+| d327a6e52 | §3.3 the siege line's "still present in living memory" now only for an event within 60 years (latent on the 360; pinned) | pin | 0 |
+| ecf46d458 | §3.4 the mass-migration pressure line: "share the streets and the market" → "share the same streets". Not a late write: the town has no market house at all, and the pressure draw (`narrativeGenerator.js :: generatePressureSentence`) never refuses a declaration | 1 town | 0 |
+| 8f4aeb828 | the chair's court correction: the rule book's court admits a house whose OWN catalogued service tries disputes (Town hall, City hall, Town council, City administration, Courthouse, Multiple court buildings, Mayor and council, City-state government), not mediation and not guild or church courts. No register row leaves: the register holds no court row, and "A court exists, though the prison system is limited." stands under `prison` (AGREE's) | — | — |
+| 43e0a7916 | the lighting census refrozen through its door (the new test file) | — | — |
+
+## A2. The register by reason, at the tip
+
+Arm 2: `hedge` 15, `figure` 12, `past` 11, `other-lane` 15, `ruling-3` 2, `negation` 1. `premium-export-only` and `reported` are gone (34 rows left by cure; the reason `premium-export-only` is deleted). Arm 1: 9 culture rows left by cure; the rest stand as the first seat left them (`after-release`, `other-lane`). The time reading and the denial side keep no rows. The walker is green at the tip.
+
+## A3. Measured, not built; not mine (reported)
+
+- **Arm 1's denial side** (a literal that denies a thing and declares no `excludes`) would list 35 literals across the tree: the dossier state prose's generated pools (granary, court and gaol, market, temple), the institution catalogue's "No mill of its own" and "no garrison stands", `economy/foodBalance.js` and `economy/viability.js` (AGREE's), `safetyProfile.js` "There is effectively no law enforcement." (AGREE's), `structuralValidator.js`, `settlementOriginProse.js` "no wharf". Not built: most of these are other lanes' files, and the chair asked for the arm-2 side.
+- **The pressure draw** (`narrativeGenerator.js :: generatePressureSentence`, no lane's) unwraps declarations with `textOf` and never refuses one. Of its 16 declaring lines, none printed false on the 360 apart from the one cured above.
+- **26 more culture lines** name a market, temple, harbour or militia. They are drawn in resolveConfig before any institution exists, so their declarations cannot refuse them. None printed false on the 360.
+
+## A4. The equal-failing-set statement (the six directories at 8f4aeb828 + 43e0a7916's census)
+
+One run at 8f4aeb828: 24,814 tests, 37 failing titles, plus the file-level failure of `ledgerCitationIntegrity` (it reads the read-only ledger branch; same at the base). Against the first seat's §7 list:
+- **The same rows, the merge seat's:** generatorGoldenMaster; espionageDormancyFence's driven golden; generationForkCensus A1; pipelinePinnedMode A1, A2, A5; pipelinePinnedChoosers A1; dmLayerGolden A7; worldFactRederive A7; editWorldFactResources A2, A6; rosterFinalUnderHeldRoster A1; powerEconomyFreshness A4; nameHeldThroughAssembly A1; institutionBudgetPromise X-46 car 3 and car 4 (x46NpcBand); proseFamilyContract A1, A3, A5; editCorpusRatchet A3, A7; writerReach ×3; landingFixtureFreshness ×2.
+- **NEW and named, the merge seat's:** dossierProseManifest's DRIFT arm (174 composed-prose rows move by this seat's text; a golden fixture with its own shift records), and observedShapeReaders' live-estate input-drift row (the regenerated compendium file; the chair's condition 3: re-minted at the merge). Both are in the draft shift record.
+- **NEW and cured on the lane:** sovereigntyLightingContract's file count (43e0a7916). The engine bundle rows (engineBundleReplay ×4, engineServiceCore, engineServiceStoreParity ×3) were red only because the committed bundle trails the source; they clear with the edge commit that follows this addendum.
+- **File-level, the same as the first seat's:** newsHeadlineContract and newsVoiceContract still fail at load with "Wizard News homes drifted: expected 44, got 43".
+
+## A5. Golden surfaces and the record
+
+`docs/chair/2026-11-11/PRESUME-shift-record.DRAFT.json` now lists the second seat's components and the two new surfaces. No golden door was run on the lane.
