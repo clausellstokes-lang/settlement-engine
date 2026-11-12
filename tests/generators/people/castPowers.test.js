@@ -269,8 +269,11 @@ describe('the people car — the powers\' people (step 3)', () => {
     const by = Object.fromEntries(out.map((c) => [c.id, c.memberships]));
     // FIX-PUBLIC-VEIL (re-keyed with the cause): each membership carries its power's veil bit (none of the
     // fixture's three powers is hidden or criminal)
-    expect(by.npc_mayor_and_council).toEqual([{ power: 'Elder Council', rank: 1, share: 1, veiled: false }]);
-    expect(by.npc_citadel).toEqual([{ power: 'Military/Guard', rank: 1, share: 0.6, veiled: false }, { power: 'Elder Council', rank: 2, share: 0.4, veiled: false }]);
+    // COHERENCE-POWERS-2 (re-keyed with the cause, the chair's ruling of 2026-11-12 item 1 (ii)): a civic ruler whose town has no
+    // trade or landed house is led from its heaviest open house of another kind (representatives.js :: dualHatHouseOf), so the
+    // castellan leads the Elder Council with both hats and the office's hall is its second
+    expect(by.npc_mayor_and_council).toEqual([{ power: 'Elder Council', rank: 2, share: 1, veiled: false }]);
+    expect(by.npc_citadel).toEqual([{ power: 'Military/Guard', rank: 1, share: 0.6, veiled: false }, { power: 'Elder Council', rank: 1, share: 0.4, veiled: false }]);
     expect(by.npc_barracks).toEqual([{ power: 'The Shield Compact', rank: 1, share: 1, veiled: false }]);
     // and a hidden power's membership is stamped veiled (the stress infiltrator's shape)
     const hidden = { ...FIXTURE, powerStructure: { ...FIXTURE.powerStructure,

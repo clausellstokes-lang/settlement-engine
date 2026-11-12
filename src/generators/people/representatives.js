@@ -191,7 +191,9 @@ export function faceBearingHouseNames(institutions) {
  * yet still tied to an institution"): the house the governing power's leader comes from, or null where
  * the government sends its own man (APPOINTED_GOVERNMENTS), rules in the dark (a criminal ruler: the
  * veil), or the town has no such house. A ruler of a kind takes the heaviest face-bearing house of that
- * kind; a civic ruler, the heaviest of the town's trades and landed houses. Ties by roster order; a
+ * kind; a civic ruler, the heaviest of the town's trades and landed houses, and where none stands, the heaviest
+ * open house the town has of any other kind (the chair's ruling of 2026-11-12, item 1 (ii): a small place whose
+ * one house is a charter hall is led from it, never by the office in a vacuum). Ties by roster order; a
  * hideable house never leads. Reads the roster and the governing power only, so the birth step and the
  * coherence seam answer alike.
  * @param {RosterRow[]} institutions @param {unknown} governing the governing power's row
@@ -204,17 +206,23 @@ export function dualHatHouseOf(institutions, governing) {
   if (arch === 'criminal') return null;
   const kinds = RULER_KINDS.includes(arch) ? [arch] : CIVIC_HOUSE_KINDS;
   const rows = Array.isArray(institutions) ? institutions : [];
-  /** @type {{ index: number, house: RosterRow, weight: number } | null} */
-  let best = null;
-  rows.forEach((house, index) => {
-    if (!house || isFabricInstitution(house) || isHideableHouse(house)) return;
-    const face = faceOfInstitution(house);
-    if (typeof face !== 'string' || face === FACE_SEAT) return;
-    if (!kinds.includes(/** @type {string} */ (houseKindOf(house)))) return;
-    const weight = backingRowFor(house.name)?.weight ?? 1;
-    if (!best || weight > best.weight) best = { index, house, weight };
-  });
-  return best ? { index: best.index, house: best.house } : null;
+  /** @param {(kind: string) => boolean} fits @returns {{ index: number, house: RosterRow } | null} */
+  const heaviest = (fits) => {
+    /** @type {{ index: number, house: RosterRow, weight: number } | null} */
+    let best = null;
+    rows.forEach((house, index) => {
+      if (!house || isFabricInstitution(house) || isHideableHouse(house)) return;
+      const face = faceOfInstitution(house);
+      if (typeof face !== 'string' || face === FACE_SEAT) return;
+      if (!fits(String(houseKindOf(house)))) return;
+      const weight = backingRowFor(house.name)?.weight ?? 1;
+      if (!best || weight > best.weight) best = { index, house, weight };
+    });
+    return best ? { index: best.index, house: best.house } : null;
+  };
+  const own = heaviest((kind) => kinds.includes(kind));
+  if (own || RULER_KINDS.includes(arch)) return own;
+  return heaviest((kind) => kind !== 'government' && kind !== 'null');
 }
 
 /**

@@ -22,7 +22,8 @@ import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { backingArchetypeOf } from '../../../src/domain/dossier/powerSupport.js';
 import { backingRowFor } from '../../../src/data/institutionBacking.js';
-import { FACE_SEAT, faceOfInstitution, familyOfInstitution } from '../../../src/data/institutionalCatalog.js';
+import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution } from '../../../src/data/institutionalCatalog.js';
+import { isHideableHouse } from '../../../src/domain/people/cardVeil.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
 
 /** The browser's dials (the charters' §0.4). */
@@ -34,7 +35,7 @@ const DIALS = Object.freeze({
 
 /** Seeds from the phase-1 corpus, one or more per kind of government and size. */
 const SEEDS = Object.freeze([
-  'critique-hamlet-25', 'critique-village-0', 'critique-village-2', 'critique-village-6',
+  'critique-hamlet-25', 'critique-hamlet-5', 'critique-hamlet-99', 'critique-thorp-0', 'critique-village-0', 'critique-village-2', 'critique-village-6',
   'critique-town-0', 'critique-town-2', 'critique-town-3', 'critique-town-6', 'critique-town-13',
   'critique-city-0', 'critique-city-9', 'critique-metropolis-8', 'critique-metropolis-9',
 ]);
@@ -45,6 +46,13 @@ const APPOINTED = Object.freeze(['Feudal Stewardship', 'Feudal Appointee', 'Nobl
   'Foreign Stewardship', 'Foreign Administration', 'Occupation Authority', 'Martial Administration', 'Noble Regency']);
 /** The kinds a ruler can be of, criminal aside (the veil). */
 const KINDS = Object.freeze(['religious', 'military', 'merchant', 'arcane', 'noble', 'craft']);
+
+/** THE SMALL PLACE WITH NO HOUSE BUT ITS HOUSEHOLDS (the chair's ruling of 2026-11-12, item 1 (i)): no open house other than
+ *  the government's has a face, so the eldest householder leads by the office's own name — exempt, and nothing wider.
+ *  @param {Record<string, any>} s @returns {boolean} */
+const onlyTheOffice = (s) => !(s.institutions || []).some((h) => !isFabricInstitution(h) && !isHideableHouse(h)
+  && typeof faceOfInstitution(h) === 'string' && faceOfInstitution(h) !== FACE_SEAT && familyOfInstitution(h)?.shelf !== 'Government'
+  && kindOf({ institution: { kind: 'house', key: h.name } }) !== 'office');
 
 /** @param {Record<string, any>} card @returns {string} 'office' or the house's kind */
 function kindOf(card) {
@@ -78,7 +86,7 @@ describe('COHERENCE-POWERS guard — the dual hat', () => {
   it('the leader has a house of the town unless the government appoints', () => {
     const misses = [];
     for (const b of births) {
-      if (APPOINTED.includes(b.ruler) || b.arch === 'criminal') continue;
+      if (APPOINTED.includes(b.ruler) || b.arch === 'criminal' || onlyTheOffice(b.s)) continue;
       const leader = b.three[0];
       if (!leader) misses.push(`${b.seed}: ${b.ruler} has no leader`);
       else if (kindOf(leader) === 'office') misses.push(`${b.seed}: ${b.ruler} is led by the office ${leader.name}`);
