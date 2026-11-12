@@ -256,8 +256,12 @@ const LITERALS = Object.fromEntries(Object.entries(FAMILIES).map(([k, v]) => [k,
 /** Does this code line answer the family's fact by a name test? @param {string} family @param {string} line */
 export const readsFamily = (family, line) => CALL.test(line) && LITERALS[family].test(line);
 
-/** The roots and exclusions: the fact homes' folder, the data tables, generated files and each family's own homes are not counted. */
-const EXCLUDED = /^src\/(?:domain\/facts|data)\//;
+/**
+ * The roots and exclusions: the fact homes' folder, the data tables, generated files and each family's own homes are
+ * not counted; nor the page battery's instruments (`src/domain/coherence/`), which test the PRINTED page's words
+ * against the record by design and derive no fact (W2-A-LEAVES's call, 2026-11-12: three banked lines fell).
+ */
+const EXCLUDED = /^src\/(?:domain\/facts|domain\/coherence|data)\//;
 
 /** @param {string} dir @param {string[]} [out] @returns {string[]} */
 const walk = (dir, out = []) => {

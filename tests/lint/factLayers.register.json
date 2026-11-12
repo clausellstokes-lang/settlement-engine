@@ -89,15 +89,6 @@
    "crime": 2,
    "magic": 1
   },
-  "src/domain/coherence/crisisFactFindings.js": {
-   "crime": 1
-  },
-  "src/domain/coherence/foodWordsFindings.js": {
-   "market": 1
-  },
-  "src/domain/coherence/readerBattery.js": {
-   "docks": 1
-  },
   "src/domain/contradictions.js": {
    "magic": 1
   },
