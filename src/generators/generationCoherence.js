@@ -477,7 +477,9 @@ export function projectionAgreementFindings(settlement) {
   const grownPct = Number(settlement?.economicState?.foodSecurity?.foodRecord?.grownPct);
   for (const [index, label] of imports.entries()) {
     // F8 (COHERENCE-AGREE-3): a bracketed grain import says how little too, where the town feeds itself.
-    if (/^(?:bulk )?grain(?: and (?:foodstuffs|produce))?(?: \([^)]*\))?$/i.test(label) && label !== GRAIN_TOP_UP && grownPct >= 90) {
+    // (and STOP 1: a compound grain good the demand pass appends says how little too)
+    const compound = /^(?:grain and .+|.+ and grain)$/i.test(label) && !/\ba little grain$/i.test(label);
+    if ((compound || /^(?:bulk )?grain(?: and (?:foodstuffs|produce))?(?: \([^)]*\))?$/i.test(label)) && label !== GRAIN_TOP_UP && grownPct >= 90) {
       food.push(finding(`economicState.primaryImports[${index}]`, 'Grain stands as a primary import, unqualified, where the town grows most of its need.', `${label}; grown ${grownPct}%`));
     }
   }

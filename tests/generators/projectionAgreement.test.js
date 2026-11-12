@@ -135,6 +135,10 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     // F8 (REVIEW-AGREE): the bracketed shortage says how little too (the compound good is the demand pass's: reported)
     expect(details(grown(101, ['Bulk grain (local fields depleted)']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
     expect(details(grown(100, ['Grain and produce (local floodplain unproductive)']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
+    // STOP 1 (the chair, 2026-11-12): the demand pass's compound good says how little too
+    expect(details(grown(100, ['Grain and salted pork']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
+    expect(details(grown(100, ['Salted pork and a little grain']))).toEqual([]);
+    expect(details(grown(80, ['Grain and salted pork']))).toEqual([]);
     const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: ['Bulk grain (local fields depleted)'] } });
     expect(details(spent)).toContain('A shortage import stands beside the resource it says is spent.');
     // F12b (REVIEW-AGREE): the bracket's land against every live resource of that land
@@ -214,6 +218,8 @@ const REVIEW_SEEDS = [
   // (rvw12-village-7 and -8: the review's "site reads peace" seeds, at war and at the front; they draw no iron hook)
   { seed: 'rvw12-village-7', tier: 'village' }, { seed: 'rvw12-village-8', tier: 'village' }, { seed: 'rvw-ten-7', tier: 'city', stress: 'under_siege' },
   { seed: 'rvw12-town-81', tier: 'town' }, { seed: 'rvw12-city-60', tier: 'city' }, { seed: 'rvw12-city-67', tier: 'city' }, { seed: 'rvw12-metropolis-23', tier: 'metropolis' },
+  // STOP 1 (F8's compound half): "Grain and salted pork" and its kin in towns growing 90% or more
+  { seed: 'rvw12-town-19', tier: 'town' }, { seed: 'rvw12-town-121', tier: 'town' }, { seed: 'rvw12b-town-186', tier: 'town' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
 ];
