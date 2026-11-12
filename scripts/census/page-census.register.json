@@ -28,12 +28,13 @@
    "base": 689,
    "banked": 0
   },
-  "P3any": {
-   "label": "3 magic relied upon or common, and no practitioner on the rolls",
+  "P3source": {
+   "label": "3 reliance on magic stated with neither a practitioner nor a named source",
    "reader": "CROSS",
-   "master": 172,
-   "integration": 190,
-   "banked": 190
+   "master": null,
+   "integration": null,
+   "base": 74,
+   "banked": 74
   },
   "P4": {
    "label": "4 \"three powers stand almost level\" beside a leader far ahead",
@@ -212,7 +213,6 @@
   ],
   "r2r-village-0": [
    "P17",
-   "P3any",
    "P9"
   ],
   "r2s-indebted-village-0": [
@@ -221,7 +221,7 @@
    "P11",
    "P14",
    "P17",
-   "P3any"
+   "P3source"
   ],
   "r2r-town-0": [
    "P16powers",
@@ -249,7 +249,7 @@
    "P17",
    "P18",
    "P1b",
-   "P3any"
+   "P3source"
   ],
   "r2r-metropolis-0": [
    "P16powers",
@@ -274,6 +274,15 @@
    "atRetirement": 569,
    "reason": "two true quantities, by the owner's design: the Economy tab states what the stores hold at peace; the Defense line states what a siege would leave and links to the stores row rather than restating its figure (lane DEFENSE-3). Retired by the chair's ruling of 2026-11-12; replaced by P2siege.",
    "replacedBy": "P2siege"
+  },
+  "P3any": {
+   "label": "3 magic relied upon or common, and no practitioner on the rolls",
+   "reader": "CROSS",
+   "master": 172,
+   "integration": 190,
+   "atRetirement": 190,
+   "reason": "it counted the words, not the explanation: a town whose temples or alchemists supply the magic it relies on has no arcane practitioner on its rolls and is no fault, and an envelope that reads magic common states no reliance. Retired by the chair's ruling of 2026-11-12; replaced by P3source.",
+   "replacedBy": "P3source"
   }
  }
 }

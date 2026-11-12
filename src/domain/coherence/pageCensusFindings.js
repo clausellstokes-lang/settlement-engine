@@ -43,7 +43,7 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   P1a: ['1a the food verdict "only just" beside "grows more than it eats"', 'SECOND'],
   P1b: ['1b "a small margin" beside a quarter or more bought in', 'SECOND'],
   P2siege: ['2 a siege figure in the indicative outside a siege', 'SECOND'],
-  P3any: ['3 magic relied upon or common, and no practitioner on the rolls', 'CROSS'],
+  P3source: ['3 reliance on magic stated with neither a practitioner nor a named source', 'CROSS'],
   P4: ['4 "three powers stand almost level" beside a leader far ahead', 'SECOND'],
   P5a: ['5a the hall "free of the criminals" beside criminal money reaching the officials', 'SECOND'],
   P5b: ['5b "Diffuse, no gang" beside a criminal power', 'SECOND'],
@@ -76,6 +76,9 @@ export const RETIRED_PAGE_CENSUS_ROWS = Object.freeze({
   P2: ['2 the stores stated as two durations',
     'two true quantities, by the owner\'s design: the Economy tab states what the stores hold at peace; the Defense line states what a siege would leave, and links to the stores row rather than restating its figure (lane DEFENSE-3; the chair\'s ruling of 2026-11-12)',
     'P2siege'],
+  P3any: ['3 magic relied upon or common, and no practitioner on the rolls',
+    'it counted the words, not the explanation: a town whose temples or alchemists supply the magic it relies on has no arcane practitioner on its rolls and is no fault, and an envelope that reads magic common states no reliance (the chair\'s ruling of 2026-11-12)',
+    'P3source'],
 });
 
 // ── the tree's own pools, as the counter reads them ──────────────────────────────────────────
@@ -176,10 +179,10 @@ export function pageCensusFindings(settlement, views) {
     const verb = fe.match(/(?<!would )\b(?:are lost|carries|carry|feeds|stands|stand)\b/);
     return verb ? [fe.slice(0, 160), `"${verb[0]}", not besieged`] : null;
   });
-  run('P3any', () => {
-    const relLine = M.find((l) => /^Reliance on magic: /.test(l)) || ''; const relied = /Relied upon|Integral/i.test(relLine);
-    const avail = (M.find((l) => /^Availability/.test(l)) || '').replace('Availability', '');
-    return noArcane && (relied || /common|broad|pervasive/.test(avail)) ? [relLine || avail, 'No arcane practitioners on the rolls'] : null;
+  run('P3source', () => {
+    // the Magic tab states a reliance; the Defense tab's rolls hold no practitioner; the reliance line names no source
+    const relLine = M.find((l) => /^Reliance on magic: (?:Relied upon|Integral)/.test(l));
+    return relLine && noArcane && !/ · supplied by /.test(relLine) ? [relLine, 'No arcane practitioners on the rolls'] : null;
   });
   run('P4', () => {
     const level = PW.find((l) => /Three powers stand almost level/.test(l));

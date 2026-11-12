@@ -27,7 +27,7 @@ const PLANTS = {
   P1a: { views: { 'Systems/Economics': [ONLY_JUST, 'It grows more than it eats.'] } },
   P1b: { views: { 'Systems/Economics': [SMALL_MARGIN] }, record: { economicState: { foodSecurity: { foodRecord: { normalImportPct: 40 } } } } },
   P2siege: { views: { 'Systems/Defense': [ENDURANCE('the granary carries the town for about three months at full rations.')] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
-  P3any: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon'] } },
+  P3source: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon'] } },
   P4: { views: { 'Systems/Power': ['Three powers stand almost level in Brindle.'] }, record: { powerStructure: { factions: [{ power: 80 }, { power: 30 }, { power: 25 }] } } },
   P5a: { views: { 'Systems/Power': ['Free of the criminals', CAPTURE] } },
   P5b: { views: { 'Systems/Defense': ['Criminal structure: Diffuse', 'Underworld: the Night Hands'] } },
@@ -77,13 +77,18 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     })).toEqual([]);
   });
   test('a re-defined row is RETIRED BY NAME with its reason, never reported, and its replacement is a row (the chair, 2026-11-12)', () => {
-    expect(Object.keys(RETIRED_PAGE_CENSUS_ROWS)).toEqual(['P2']);
+    expect(Object.keys(RETIRED_PAGE_CENSUS_ROWS)).toEqual(['P2', 'P3any']);
     for (const [id, [pattern, reason, replacedBy]] of Object.entries(RETIRED_PAGE_CENSUS_ROWS)) {
       expect(PAGE_CENSUS_ROWS[id]).toBeUndefined();
       expect(PAGE_CENSUS_ROWS[replacedBy]).toBeTruthy();
       expect(pattern.length).toBeGreaterThan(0);
-      expect(reason).toMatch(/owner's design/);
+      expect(reason).toMatch(/the chair's ruling of 2026-11-12/);
     }
+    expect(RETIRED_PAGE_CENSUS_ROWS.P2[1]).toMatch(/owner's design/);
+    // row 3's retired shapes: a reliance whose source is named, and magic common with no reliance, read nothing
+    expect(pageCensusFindings({ tier: 'town' }, {
+      'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon · supplied by Parish church and Multiple monasteries', 'Availabilitycommon'],
+    })).toEqual([]);
     // the retired row's own shape (two durations, outside a siege, in the condition) reads nothing now
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: false } } }, {
       'Systems/Economics': ['Stores: a granary of about a year of grain'],
