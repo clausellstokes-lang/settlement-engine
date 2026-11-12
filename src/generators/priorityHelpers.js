@@ -59,7 +59,9 @@ const getInstitutionNames = (institutions = []) => {
     hasWalls:         hasAny(names, ['walls','citadel','gates (if walled)','inner citadel','massive walls','palisade','earthwork']),
     hasGates:         home.hasGate,
     hasPrison:        hasAny(names, ['prison','stocks','large prison','massive prison']),
-    hasCourtSystem:   hasAny(names, ['courthouse','court buildings','democratic assembly','city hall','town hall']),
+    // COHERENCE-AGREE: the court is the defence home's answer (defenseFactsOf.hasCourt), the same names
+    // off the live roster — a ruined courthouse tries no case.
+    hasCourtSystem:   home.hasCourt,
     hasMarket:        hasMarketInstitution(institutions), // CENSUS-1 fact 5: the market home ('black market' and 'stock exchange' are not markets)
     hasGuild:         hasAny(names, ['guild','guild consortium','guild governance']),
     hasMerchantGuild: hasAny(names, ['merchant guild','merchant oligarchy']),
