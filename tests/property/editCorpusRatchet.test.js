@@ -554,7 +554,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // prefix onto its first parent, a74e32c0f reads 2029 and b23e4e91b (SW-9b-B row 2b, E-3: the small-name instigator says
     // it speaks for the gaining power from a house it backs) reads 2015 — E6 reaches 14 fewer readings (the leaf-by-leaf
     // cause inside the commit is not traced). The batch (GREEN-TIP + PULSE-SITES over the line) moves none: the line and the merged tip both read 2015.
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([670, 281, 2015]);
+    // 2026-11-12, STYLE-2-MERGE point 42 (re-keyed BY IDENTITY, STYLE-2-MERGE-8): [670, 281, 2015] -> [670, 281, 2016]. The line's
+    // tip decc7bf15 reads 2015; the COHERENCE-QUARREL merge d4723749a (lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record
+    // docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues and hooks, the safety plot
+    // hooks) reads 2016 — E6 reaches one more reading; every other figure of the arm unmoved (the arm's later expects run green).
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([670, 281, 2016]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6

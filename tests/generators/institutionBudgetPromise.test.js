@@ -106,67 +106,70 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // row 2b, E-3: the small-name instigator says it speaks for the gaining power from a house it backs) moves exactly these three;
 // the four lane commits before it move none. The batch itself (GREEN-TIP + PULSE-SITES over the line) moves none. Re-captured at
 // the merged tip with the factor forced to 1.0, twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-8): 37 of 60 moved, none by the budget (densityFactor still forced to 1),
+// by the COHERENCE-QUARREL merge d4723749a (STYLE-2-MERGE point 42; lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues, stakes, descriptions and hooks, and the safety record's plot hooks); the line's tip decc7bf15 reads all sixty green, the merge these 37 red (the lane's own predicted 37).
+// Re-captured at the merge with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
 const BEFORE = Object.freeze([
   '9ea891a6cd71384f', // 0
   'db8107a73f8e16d3', // 1
-  'c8da048a8b671556', // 2
-  'f89c6ddbaa4d79d1', // 3
+  '9a233cb903992490', // 2
+  '038335fde163b625', // 3
   'ca7937c6e4df84b6', // 4
-  '25ef272eece6c93e', // 5
+  '8bc4186c193c916b', // 5
   'efaed43c65014b7f', // 6
   'e713930d43fcb13f', // 7
-  '41c2a5e973aecb53', // 8
-  '83c354d6b8b30852', // 9
-  '3ca18413eea83dcf', // 10
-  '3219516b2f59cb43', // 11
+  'ca1758078bce210a', // 8
+  'd4d2838886e477e7', // 9
+  '259a0dda30e4dc26', // 10
+  '9dcdd66695a0df96', // 11
   '454aed839015a540', // 12
   '8ba475c451a9b5a2', // 13
   '8a93b1dd7b27b713', // 14
-  'cfd561b7e33fa828', // 15
-  '802f79507c92464b', // 16
-  '7c2a30476d8ead8e', // 17
+  '9924f80833bad278', // 15
+  '04fd650144807989', // 16
+  'f655b2ebc46e5b41', // 17
   '6c3ee69139e1d282', // 18
   '8eba55db8f713789', // 19
   'f0b2c3f298f0a6d7', // 20
-  '7bee45ae807037d6', // 21
-  'b27abe5cb502f601', // 22
-  'b5cdf30cab302d82', // 23
+  '248752e53204da82', // 21
+  '6206624271781b9c', // 22
+  'd4554b72e69c05d2', // 23
   '70bae71dd604e229', // 24
   '614cdf17c5d6a99c', // 25
   'b28dbf5e186fa8e1', // 26
-  '76c77ecd8ce25d5c', // 27
-  '3e8c4e7b49a05e5a', // 28
-  '74dcdb8369175567', // 29
+  '9ead3c4e97909163', // 27
+  'f0f4c4af7863ebf8', // 28
+  '1397844f9ad94d7d', // 29
   '8a87eda6cd3bb8d5', // 30
   'cd3a6e8965861e12', // 31
-  '226eb89f3eb020a9', // 32
-  '6ba1bfcf8e76c260', // 33
-  '2528c405ca6cf1aa', // 34
-  '04733be6711756f7', // 35
+  '88b375df752077b7', // 32
+  '5d0affd8dc30de0c', // 33
+  '87a76db34dd49a47', // 34
+  '2f3c8525278f3674', // 35
   '23be44f4096920fb', // 36
   'd2ed7b024737ce2b', // 37
-  '649668a88d1dec46', // 38
-  '99593d91943d4584', // 39
-  '97eefab01b80a080', // 40
-  '3ce7d054b4fab967', // 41
+  '7b48f105063304db', // 38
+  '72eb38935ed052f2', // 39
+  '4c70d15eabe5ecbd', // 40
+  '0570881886587290', // 41
   '71a0ca608a347c49', // 42
-  'c4d41d245deea1d6', // 43
-  'a6a62e11010b2123', // 44
-  '4a83192339c8b082', // 45
-  'e266852520b4d626', // 46
-  'b27d6e2c2fe85d3d', // 47
+  'd0826342c54a840e', // 43
+  'cc6c19319c6be0b7', // 44
+  'f1001ace97b093cc', // 45
+  '559e9d41ec85b757', // 46
+  'd8feadb15bfe476d', // 47
   'fe1119df5272b368', // 48
   '47e7fd5d33ef7502', // 49
-  '1b7c1d9a005e5c77', // 50
-  'a1dfeedcaa0139c8', // 51
-  'b50ff039d9ebf891', // 52
-  '5e0de535fa6d748f', // 53
+  'dc81c51d8e9128e1', // 50
+  'f83aeea1f7c9b472', // 51
+  'cd1806b1a31e3224', // 52
+  'd2cedea6149361f9', // 53
   '20e7ba95a6e6ccb3', // 54
   '052a13d1839465b4', // 55
-  '34e309e2a8c48f4f', // 56
-  '885e516ef7dbb6b4', // 57
-  'c45030a898849fbe', // 58
-  'ef0e824f44739113', // 59
+  'afe3b3b3e5763e4f', // 56
+  'a0dcfa0f5dea3b8a', // 57
+  '2133203af3f8140e', // 58
+  '7dedc7c1c519223d', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);
