@@ -94,9 +94,10 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(profile.guardEffectivenessDesc).toMatch(/court/); // anchored: the branch prints its court line
     expect(profile.guardEffectivenessDesc).not.toMatch(/prison/i);
   });
-  test('the economic situation naming a market the town does not have', () => {
+  test('the market member: the situation\'s market line against the market home', () => {
     const situation = (line, institutions) => record({ economicState: { situationDesc: line }, institutions });
-    expect(details(situation('(planted) markets meet infrequently.', []))).toContain('The economic situation names a market the town does not have.');
+    const paths = (r) => projectionAgreementFindings(r).resource.map((x) => x.path);
+    expect(paths(situation('(planted) markets meet infrequently.', []))).toContain('economicState.situationDesc');
     expect(details(situation('(planted) markets meet infrequently.', [{ name: 'Weekly market' }]))).toEqual([]);
     expect(details(situation('(planted) a busy black market undercuts it.', []))).toEqual([]);
   });
