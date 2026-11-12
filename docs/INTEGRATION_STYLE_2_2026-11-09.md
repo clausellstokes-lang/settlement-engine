@@ -62,6 +62,7 @@ This record is the hand-back under the chair's RULE 14 (19:3x and 19:4x). The cl
 | 39 | GEN-SPEED (5efe58416, cut from 90774f2fa), reviewed CLEAR by the chair | 443d7060a | Three exact cures of repeated work in the generator (src/generators/npc/rosterFrame.js new; npcGenerator, representatives, defenseInstitutionBuckets), three work-count pins. No source conflict; the roster union `dated` 235 → 236; the engine bundle the line's side, then **re-emitted** (8b0ec9229): engineBundle sourceHash 64915a2d → 9f0680d5 (engineVersion 232c2d947f286973 → edb816caf413432c) and aiGroundingBundle 1b1be8c1 → 015da5f9, the rest restored. **0 ALL SIX, m38 → m39** (gm 525 rows 97936ac1, herald 446, prose 1050, witness 8, fence 360, PDF 18: moved 0, added 0, removed 0). **Merge acts:** mutationCoverageManifest TOTALITY red on GEN-SPEED's two new generator pins — each entered as a rationale naming a plant EXECUTED at the merge (rosterFrame's memory made unconditional reddens the masking bound, 54400 > the bound; representatives' facts planted back per-call reddens the roster-read bound, 24 > 8), restored and cmp-verified (8ad9aa39d); the wiring census re-taken, producerIndexFiles 1318 → 1319 (37c213af6); lighting the ritual, files 3192 → 3195, credited 2795 → 2798, titles 29066 → 29072, suite 7858 → 7861 (61b4f495a). Gate: build 0; boot PASS; strict 1113; typecheck 167; tests/scripts 166/166; governing 32 files 565 passed — red only edgeSharedBundleReproducibility's build window (the bundles' generatedAt spread, already over ten minutes at point 38: act 1) and the wiring census pair (cured by 37c213af6, 113/113 on the re-run); tests/lint the carried set plus the three cured here; `verify:dist`: first paint 1,121,260 / 357,222 / 299,940 (+16 raw), the worker 2,008,268 (**+518 B, GEN-SPEED's code**), landingFixtureFreshness ×2. |
 | 40 | CI-FIT (232f20cf9, cut from 5c4abaa95; three commits), proven in real CI by the chair (run 42808855501 on claude/ci-fit-2026-11-10: browser installs, build, Chromium and mobile e2e, Deno, coverage floors, the hostile-locale golden and the performance budgets green; red only the test ratchet and verify:dist on the named rows) | 4ca5cee57 | The two Playwright jobs pinned to ubuntu-24.04 in .github/workflows/ci.yml; `npm run build` carries its own heap (`node --max-old-space-size=4096 node_modules/vite/bin/vite.js build`), pinned by tests/build/buildHeapPinned.test.js. The one conflict the lighting census: the line's side, then the ritual (files 3195 → 3196, credited 2798 → 2799, titles 29072 → 29074, suite 7861 → 7862; the lane's one new file). **Merge act:** mutationCoverageManifest TOTALITY red on the new pin — entered as a rationale naming a plant EXECUTED at the merge (the build planted back to bare `vite build` reddens the heap arm), restored and cmp-verified. **A BARE `npm run build` (NODE_OPTIONS unset) EXITS 0 at this point** — proven once, the gate's own build line. No src change, so the six surfaces are not re-measured (m39 stands). Gate: build 0 (bare); boot PASS; strict 1113; typecheck 167; tests/scripts 166/166; governing 29 files (every test reading package.json or ci.yml, and the pin) 846 passed, red only the carried OSR ×5 and writer reach ×3; tests/lint the carried set plus the manifest row cured here; `verify:dist`: first paint 1,121,260 / 357,222 / 299,940, the worker 2,008,268 (unmoved from point 39), landingFixtureFreshness ×2. The heap NODE_OPTIONS of §5 is no longer needed for the build from here. |
 | 41 | FOUNDING-WORLDS (0e81b482e, which merges 7ab12183f), THE LAST POINT | 15c4afd75 | The three founding worlds regenerated with the final engine: the cards re-matched to their canonical seeds (Black Crag re-seeded to blackcrag-045), the card-promise pin (canonical seed and ≥ 19 of 20 forks), a sample fork forged at the card's own priorities (N5b, src/store/settlementGenerateAction.js), the landing fixture re-emitted through its door at 7ab12183f, `realm.body2` re-grounded (an OWNER VETO POINT) with its suite re-keyed. No conflict (the lane carried the roster union, `dated` 237); lighting the ritual, files 3196 → 3199, credited 2799 → 2802, titles 29074 → 29087, suite 7862 → 7865 (the chair's +3/+13). **0 ALL SIX, m39 → m41.** **Merge act:** proseDrawnAnchors red on one NEW row, foundingWorldBones:82, the card's tag "Religious authority" aligned at 19 fixed chars against DS-STR-2 temple_putsch vid 3 — carried as a false positive with its reason, 95f31f192's precedent. **landingFixtureFreshness ×2 CURED.** Gate: build 0 (bare); boot PASS; strict 1113; typecheck 167; tests/scripts 166/166; governing 44 files 511 passed, red only the worker's ceiling; tests/lint only the closing acts' set (headline A2/A3, proseFamily ×3, R6, OSR ×5, writer reach ×3) after the anchor row; `verify:dist` ONLY the byte ceilings: first paint 1,121,260 / 357,225 / 299,985, the worker 2,008,268. THE FINAL TIP for the closing acts: the commit carrying this row. |
+| 42 | COHERENCE-QUARREL (1c7b5786c, nine commits over 99bcc6944), the coherence wave's first point (STYLE-2-MERGE-8) | d4723749a | The quarrels' issue table widened and cast-declared (power/conflictIssues.js), one hook per quarrel from the issue's own hooks, the touched power named in the description, the smuggling safety hook's four tellings; the guard `node scripts/census/pool-dominance.mjs` + shrink-only register + door tests/lint/poolDominance.walker.test.js. No conflict (the lane's base is the line's code tip). **RECORD 42 SIGNED** (`docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json`, from the lane's draft; `predictedRows` written in the door's unit, 525 / 1 constant, record 17's form): stage m41 (decc7bf15) reproduces 97936ac1 and 291c7695; m41 → m42 **gm 476/525** (thorp 72, hamlet 84, village 84, town 68, city 84, metropolis 84) 97936ac1 → 6f8317a8, the draft's 476 EXACTLY (522cee293); **fence 242/360** 291c7695 → 152defbd, 360/360 distinct (ce2262b03); FIELD-DIFFED both (Appendix G `dump.mjs`/`fdiff.mjs`): only conflicts[] and powerStructure.conflicts[] issue/stakes/desc/plotHooks and economicState.safetyProfile.plotHooks[] (gm 476/475/86, fence 242/240/69), every fence arm green (dormant); herald 0, witness 0, PDF 0; **prose 828/1,050** = the draft's, per-cell 1,254 cells moved, 0 added/removed, ALL block DS-GEN-2 (the standing quarrel's intensity), for closing act 2. Draft retired, roster `tree` 175 → 176 (50b532b54). **Digest pins re-keyed by identity** (8fbc1a8cd; each file's own loop as an untracked probe, twice equal; base all green): x46NpcBand 38/60, institutionBudgetPromise 37/60, editWorldFactResources A2/A6 rows 0, 42 (the pre-EM-B2b2 plant = the live step), editCorpusRatchet A7 E6 2015 → 2016; worldFactRederive A7 in the signing act; the draft's other names green unchanged. **STOP 42** (the phone floor, outside the named classes): dossierPhoneFloorAllViews MOBILE/DESKTOP_BASELINE, Summary/Plot Hooks 89 → 87 at the fixed seed, the lane's leaf; ruled a re-key, done b25930ca8 — the class's three checks: (1) only Summary/Plot Hooks moved, the view printing conflicts[].plotHooks; (2) sub-floor 0 in every view, mobile and desktop; (3) down, as one hook a quarrel implies (now a NAMED CLASS, §3). Doors: wiring census --check, state prose --check, writer reach plain (HOLD 12223, no `--write`, bank 1359), OSR exit 0, **pool-dominance exit 0, register unchanged**; lighting the lane's refreeze stands (the tree = the lane's tip + docs). **Equal-failing-set:** base decc7bf15 full suite 3,191 files, **38,718 passed, 0 failed**, 129 skipped (THE WAVE'S ZERO); merge 50b532b54 full suite 8 failed = 5 draft pins (cured 8fbc1a8cd) + phone floor ×2 (cured b25930ca8) + the prose DRIFT arm ×1 (closing act 2). Gate: build 0 (bare); boot 0; strict 0; typecheck 0; `verify:dist` only the byte ceilings: worker 2,023,178 > 2,008,268, vendorPdfLazy engine chunk 737,587 vs 726,454 (closing act 7). |
 | 17 | SW-B1 CONTRADICTIONS (8c650338d) | 0f2cb865c | factionStanding.js composed line by line. Record 17: gm 464 (→21b50e30), field-diffed: `factions[].desc` 447 + `foodBalance.importChannel` 29, string leaves only. Fence 272 (→03fc50e3). Fork control 3e522ac1→003d51a5. Prose 72 (final tip). Cures: e49d89d27 (it.each → loops), 77c4f4238 (SW-B2's pool removal composed), 1028367f8 (anchors), 6b84bfa3a (five any-holes typed), 53265aa92 (three files enrolled in the mutation manifest), c35ee987b (a message that aligned with DS-GEN-3). Governing 71 files: 8 red, all base or golden-tied (green after signing). tests/lint has only the carried OSR ×3; tests/scripts is green. |
 
 Point 16 (SW-7) in detail:
@@ -284,6 +285,29 @@ Appendix F `dist1.sh` (one tree: a detached worktree, `node_modules` symlinked, 
 - **Heap**: since point 40 `npm run build` carries 4096 itself; the dist sweep and stage builds call vite with the same flag.
 - **Never** run a door on a dirty tree; never read a gate through a pipe (`sh scripts/gate-tail.sh …`); push with `git push --no-verify origin HEAD:lane/integration-2026-11-07` after `git fetch` + `git merge-base --is-ancestor origin/<line> HEAD`.
 
+## 2f. THE EIGHTH SEAT'S HAND-BACK, BY FILE (STYLE-2-MERGE-8, session `session_01FbPLbc1CCoAMzKt2ScvNSk`; kept current at every point)
+
+**The line:** after point 42 the tip is the commit carrying this section (code as at b25930ca8). Every helper named here is quoted whole in Appendix G; they live in `/home/user/rec8/` beside the worktree `/home/user/wt-merge8` (and die with the container).
+
+**THE WAVE'S ZERO:** the full suite at the base decc7bf15 is **3,191 files, 38,718 passed, 0 failed, 129 skipped** (`npx vitest run --maxWorkers=2 --reporter=dot --reporter=json --outputFile=<f>` in a detached worktree, node_modules symlinked, ledger ref fetched; ~100 min under load; Appendix G `failset.py <json>` lists the failing titles). Every red after a point is cured at the point or is one of the closing acts' classes.
+
+**Per point, as run at 42 (the order that worked):**
+1. `git merge --no-ff --no-commit origin/<lane>`; commit with the seat trailer.
+2. Doors: `node scripts/wiring-census.mjs --check`, `node scripts/generate-dossier-state-prose.mjs --check`, `node scripts/check-writer-reach.mjs` (plain; `--write` only if corpusMeta differs, bank 1359), `node scripts/check-observed-shape-readers.mjs`, every guard a merged lane brings (`node scripts/census/pool-dominance.mjs` exit 0, its register not grown).
+3. Stage the line's previous tip AND the merge (`sh scripts/audit/landing-stage.sh build <sha> /home/user/stages/sN`), `measure` the first alone (it must reproduce the register's gm sha and the fence constant: the control), then `measure sN mN m<prev>`.
+4. FIELD-DIFF gm and fence (Appendix G `dump.mjs <stage> gm|fence <out>` at both stages, then `fdiff.mjs a b`): every moved leaf must be a leaf the lane's draft declares; else STOP. (A merged lane's own base differs from the line's from point 43 on: law 2's second case — sign with the measured figures.)
+5. Sign (§2e.5, landing-act): write the record INTO THE STAGE from the draft (fill `seat`, the merge sha in `cause`, measured figures; `predictedRows` in the DOOR's unit: 525 for gm, 1 for the fence's in-file constant — a draft's moved-row figure would REFUSE as a prediction miss), commit in the stage; write `<scratch>/fence-block-<n>.txt` (the movement block; the last was THE HUNDRED-AND-SEVENTH); `node scripts/audit/landing-act.mjs run <cfg>`; restate by hand in the stage the gm suite's SHIFT RECORD row and worldFactRederive A7's sha (+ the fork census control if row 21 moves); `landing-stage.sh suites <stage>`; `transplant` (cfg `extraPaths: ['tests/domain/worldFactRederive.test.js']` on the gm surface). Then `git rm` the draft, `python3 tree.py <n> <record> <LANE>`, plain run, commit `Owner-Signed: §934.105`.
+6. The draft's `alsoRedAtTheLaneTip` pins: run them at the base and the merge (`pins.txt`), re-capture by each file's own loop with an untracked probe (Appendix G `probe.py`), twice equal; for editWorldFactResources plant `git show 12c437de4:src/generators/steps/resolveResources.js` (sha 62e16d59) and require planted == live; re-key by identity with a dated note.
+7. Prose: `cell1.sh <prev tip>`, `cell1.sh <merge>`, `cellattr.py a b` — the per-cell table for closing act 2 (NOT signed per point).
+8. The merged-tree full suite in a separate detached worktree at the signed commit (`/home/user/wt-mNN`), compared with the zero by class; the build lines by Appendix G `gatelite.sh` (build bare, boot, strict, typecheck, verify:dist). ⚠ `verify:dist` goes through `gate-mutex.sh`: it GIVES UP (exit 3) while any vitest runs; run it after the suites.
+9. Record row in §1, this section, push.
+
+**Where things stand after point 42 (the closing acts' classes, carried):** the prose DRIFT arm (828 rows at 42, all DS-GEN-2, 1,254 cells); the byte ceilings (worker 2,023,178 vs 2,008,268; vendorPdfLazy engine chunk 737,587 vs 726,454). Writer reach, OSR, the content-totality contracts, style baseline and landingFixtureFreshness read GREEN at 42 (the full suite).
+
+**Guards and wider corpora (the chair's question):** `scripts/census/pool-dominance.mjs` takes NO corpus flag: its corpus is fixed in the script (60 villages, 160 towns, 100 cities, 40 metropolises, seeds `quarrel-<tier>-<i>`; the browser's random dials); its only flag is `--tighten` (lower every ceiling, never raise). Widening it to six tiers and forced stresses would be a script change, the lane's or the chair's — not done here.
+
+**Known order (the chair, 2026-11-12 ~03:56):** 43 PRESUME 02c5f8fbd (named); then VEIL or POWERS by readiness (POWERS after PRESUME); AGREE not CLEAR (being cured), UPKEEP after AGREE; FOUNDING-WORLDS last. PRESUME's own conditions are in the chair's message of 02:11 (other-lane rows of `tests/lint/presumedThings.register.json` leave through its door where QUARREL cured them; writer reach re-banked at the point; the wizard-news home that left named by commit; the OSR live-estate drift row re-minted; prose table only; `bank` vocabulary through the vocabulary and wiring doors; gm by field diff, law 2's second case).
+
 ## 3. The running tables
 
 **STOP rulings, as applied:**
@@ -298,6 +322,8 @@ Appendix F `dist1.sh` (one tree: a detached worktree, `node_modules` symlinked, 
 - **STOP 5** (the voiceMechanics em dash in SW-11's newsBody dateline): ruled at 19:2x. **APPLIED at d3760f77f** by the second seat (voiceMechanics green, em 0).
   - The join becomes a colon: `${place}: ${told}`. Make it a hygiene commit named to 306a8dce4.
   - Re-key, by identity, any pin that holds the joined string. The ratchet stays em 0.
+
+- **STOP 42** (the phone floor at point 42): ruled a re-key by identity (b25930ca8). **THE NEW NAMED CLASS (the chair, 2026-11-12):** the phone floor's per-view counts (`tests/components/dossierPhoneFloorAllViews.test.jsx` MOBILE/DESKTOP_BASELINE) are the merge seat's to re-key at the point WHEN ALL THREE HOLD — (1) only views that print a leaf the merged lane declares move; (2) sub-floor reads 0 in every view, mobile and desktop; (3) each count moves in the direction the declared change implies. Any one failing is a STOP. The point's row names the class and the three checks.
 
 **The OSR table:**
 
@@ -1235,3 +1261,186 @@ writeFileSync(outPath, `${JSON.stringify({ ...template, decisions }, null, 2)}\n
 console.log(`review written: ${decisions.length} decisions (${EXPECTED_SAME} SAME, 1 transition)`);
 ```
 
+## Appendix G. The eighth seat's helpers (in /home/user/rec8/; quoted whole so a ninth seat can recreate them)
+
+`dump.mjs`
+```js
+// STYLE-2-MERGE-8: dump a corpus's settlements as NDJSON (one {key, s} per line) from <tree>'s own generator.
+// usage: node dump.mjs <tree> gm|fence <out.ndjson>
+import { writeFileSync, appendFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+const [tree, which, out] = process.argv.slice(2);
+const root = resolve(tree);
+const { generateSettlementPipeline } = await import(pathToFileURL(`${root}/src/generators/generateSettlementPipeline.js`).href);
+writeFileSync(out, '');
+if (which === 'gm') {
+  const { goldenCorpus, keyOf } = await import(pathToFileURL(`${root}/tests/helpers/goldenMasterCorpus.js`).href);
+  for (const config of goldenCorpus()) {
+    const { _seed, ...cfg } = config;
+    const s = generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} });
+    appendFileSync(out, JSON.stringify({ key: keyOf(config), s }) + '\n');
+  }
+} else {
+  for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'])
+    for (const route of ['road', 'isolated', 'port', 'crossroads'])
+      for (let i = 0; i < 15; i += 1) {
+        const seed = `SUBw4-fence1-${tier}-${route}-${String(i).padStart(3, '0')}`;
+        const s = generateSettlementPipeline({ settType: tier, tier, tradeRouteAccess: route, culture: 'germanic' }, null, { seed });
+        appendFileSync(out, JSON.stringify({ key: seed, s }) + '\n');
+      }
+}
+console.log('done', which);
+```
+
+`fdiff.mjs`
+```js
+// STYLE-2-MERGE-8: leaf-level field diff of two NDJSON dumps; prints moved rows and, per normalized leaf path
+// (array indices -> []), the rows in which that leaf moved. A leaf added or removed counts as moved.
+// usage: node fdiff.mjs <a.ndjson> <b.ndjson>
+import { readFileSync } from 'node:fs';
+const load = (p) => new Map(readFileSync(p, 'utf8').trim().split('\n').map((l) => { const o = JSON.parse(l); return [o.key, o.s]; }));
+const A = load(process.argv[2]), B = load(process.argv[3]);
+const flat = (v, p, out) => {
+  if (v === null || typeof v !== 'object') { out.set(p, JSON.stringify(v)); return out; }
+  if (Array.isArray(v)) { if (!v.length) out.set(p, '[]'); v.forEach((x, i) => flat(x, `${p}[${i}]`, out)); return out; }
+  const ks = Object.keys(v); if (!ks.length) out.set(p, '{}');
+  for (const k of ks) flat(v[k], p ? `${p}.${k}` : k, out); return out;
+};
+const norm = (p) => p.replace(/\[\d+\]/g, '[]');
+const leaf = new Map(); let moved = 0; const byTier = {};
+for (const [k, a] of A) {
+  const b = B.get(k); if (JSON.stringify(a) === JSON.stringify(b)) continue;
+  moved++; const t = k.split(/[|-]/)[k.includes('|') ? 0 : 2]; byTier[t] = (byTier[t] ?? 0) + 1;
+  const fa = flat(a, '', new Map()), fb = flat(b, '', new Map()); const hit = new Set();
+  for (const p of new Set([...fa.keys(), ...fb.keys()])) if (fa.get(p) !== fb.get(p)) hit.add(norm(p));
+  for (const p of hit) leaf.set(p, (leaf.get(p) ?? 0) + 1);
+}
+console.log(JSON.stringify({ rows: B.size, moved, onlyA: [...A.keys()].filter((k) => !B.has(k)).length, onlyB: [...B.keys()].filter((k) => !A.has(k)).length, byTier }));
+for (const [p, n] of [...leaf].sort((x, y) => y[1] - x[1])) console.log(n, p);
+```
+
+`failset.py`
+```python
+# usage: python3 failset.py <vitest json> -> failing tests (file > title), one per line (STYLE-2-MERGE-8)
+import json,sys
+d=json.load(open(sys.argv[1]))
+for f in d['testResults']:
+    fn=f['name'].split('/tests/',1)[-1]
+    if f['status']=='failed' and not f['assertionResults']: print('tests/'+fn+' > [FILE FAILED TO LOAD] '+(f.get('message') or '')[:150].replace('\n',' '))
+    for a in f['assertionResults']:
+        if a['status']=='failed': print('tests/'+fn+' > '+' > '.join(a['ancestorTitles']+[a['title']]))
+```
+
+`gatelite.sh`
+```sh
+#!/bin/sh
+# usage: gatelite.sh <n> — STYLE-2-MERGE-8: the gate's non-vitest lines (build bare, boot, strict, typecheck, verify:dist); the test dirs ride the full-suite run
+n=$1; S=/home/user/rec8/gate$n.sum; L=/home/user/rec8/g$n; : > $S
+cd /home/user/wt-merge8
+env -u NODE_OPTIONS sh scripts/gate-tail.sh npm run build > $L-build.log 2>&1; echo "build exit $? (bare)" >> $S
+sh scripts/gate-tail.sh node scripts/boot-smoke.mjs > $L-boot.log 2>&1; echo "boot exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:domain:strict > $L-strict.log 2>&1; echo "strict exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:ratchet > $L-tsc.log 2>&1; echo "tsc exit $?" >> $S
+sh scripts/gate-tail.sh npm run verify:dist > $L-vd.log 2>&1; echo "verify:dist exit $?" >> $S
+echo DONE >> $S
+```
+
+`gate.sh`
+```sh
+#!/bin/sh
+# usage: gate.sh <n> <govfile> [vd] — STYLE-2-MERGE-8: build, boot smoke, strict, typecheck, tests/lint, tests/scripts, governing files, (vd: verify:dist)
+n=$1; gov=$2; S=/home/user/rec8/gate$n.sum; L=/home/user/rec8/g$n; : > $S
+cd /home/user/wt-merge8
+env -u NODE_OPTIONS sh scripts/gate-tail.sh npm run build > $L-build.log 2>&1; echo "build exit $? (bare)" >> $S
+sh scripts/gate-tail.sh node scripts/boot-smoke.mjs > $L-boot.log 2>&1; echo "boot exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:domain:strict > $L-strict.log 2>&1; echo "strict exit $?" >> $S
+sh scripts/gate-tail.sh npm run typecheck:ratchet > $L-tsc.log 2>&1; echo "tsc exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/lint > $L-lint.log 2>&1; echo "lint exit $?" >> $S
+sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/scripts > $L-scripts.log 2>&1; echo "scripts exit $?" >> $S
+if [ -s "$gov" ]; then sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 $(cat $gov | tr '\n' ' ') > $L-gov.log 2>&1; echo "gov exit $?" >> $S; fi
+if [ "$3" = vd ]; then sh scripts/gate-tail.sh npm run verify:dist > $L-vd.log 2>&1; echo "verify:dist exit $?" >> $S; fi
+echo DONE >> $S
+```
+
+`govfiles.sh`
+```sh
+#!/bin/sh
+# usage: govfiles.sh <range>... -> test files naming any changed src module (by basename import) (STYLE-2-MERGE-8)
+cd /home/user/wt-merge8
+for r in "$@"; do git diff --name-only "$r" -- src; done | sort -u | while read f; do
+  b=$(basename "$f"); b=${b%.*}
+  grep -rlE "[/'\"]${b}(\.(js|jsx|ts|mjs))?['\"]" tests --include='*.js' --include='*.jsx' --include='*.mjs' --include='*.ts' 2>/dev/null
+done | sort -u
+```
+
+`tree.py`
+```python
+# usage (in the worktree): python3 tree.py <n> <record> <lane> — a new shift record joins `tree` (STYLE-2-MERGE-8)
+import re,sys,json
+n,rec,lane=sys.argv[1:4]
+SEAT='STYLE-2-MERGE-8, session session_01FbPLbc1CCoAMzKt2ScvNSk'
+B='tests/lint/.source-citation-baseline.json'; W='tests/lint/sourceCitationIntegrity.walker.test.js'
+t=open(B).read()
+m=re.search(r'"tree": (\d+)\n',t); old=int(m.group(1)); new=old+1
+t=t[:m.start()]+'"tree": %d\n'%new+t[m.end():]
+ms=list(re.finditer(r'\n(    "_rosterGrowth[^\n]*")(,?)\n',t)); last=ms[-1]
+note='    "_rosterGrowth2026-11-12-style-2-merge-record-%s": "ONE document JOINED the roster by being BORN into it (%s): `tree` %d -> %d, %s, record %s, born into the tree class; measured once by this walker; nothing changed class."'%(n,SEAT,old,new,rec,n)
+t=t[:last.start()]+'\n'+last.group(1)+',\n'+note+(last.group(2))+'\n'+t[last.end():]
+json.loads(t); open(B,'w').write(t)
+w=open(W).read()
+a=' *   tree (%d)   docs/review-r2/**, docs/shift-records/** ('%old
+assert w.count(a)==1
+w=w.replace(a,' *   tree (%d)   docs/review-r2/**, docs/shift-records/** (2026-11-12, STYLE-2-MERGE record %s, the %s merge, %d -> %d: %s; '%(new,n,lane,old,new,rec))
+open(W,'w').write(w); print(old,'->',new)
+```
+
+`cell1.sh`
+```sh
+#!/bin/sh
+# usage: cell1.sh <sha> — the per-cell prose table at a tree (STYLE-2-MERGE-8, act 2's attribution)
+s=$1; W=/home/user/stages/c-$s; O=/home/user/stages/cells/$s.json; mkdir -p /home/user/stages/cells
+[ -s $O ] && exit 0
+cd /home/user/wt-merge8
+git worktree add -q --detach $W $s 2>/dev/null || exit 1
+ln -s /home/user/wt-merge8/node_modules $W/node_modules
+( cd $W && node scripts/prose-manifest-cells.mjs --out $O > /home/user/stages/cells/$s.log 2>&1; echo "exit $?" >> /home/user/stages/cells/$s.log )
+git worktree remove --force $W
+```
+
+`cellattr.py`
+```python
+# usage: python3 cellattr.py <a-sha> <b-sha> — rows (of 1,050) and cells moved/added/removed between two trees (STYLE-2-MERGE-8, act 2's attribution)
+import json,sys,collections
+def load(s):
+    d=json.load(open(f'/home/user/stages/cells/{s}.json'))
+    return d['rows'],{c['cell']:json.dumps(c,sort_keys=True) for c in d['cells']},d['cells']
+a,b=sys.argv[1:3]; ra,ca,la=load(a); rb,cb,lb=load(b)
+rows=sum(1 for k in set(ra)|set(rb) if ra.get(k)!=rb.get(k))
+cm=[k for k in set(ca)&set(cb) if ca[k]!=cb[k]]
+print({'rows':rows,'of':len(rb),'cellsMoved':len(cm),'added':len(set(cb)-set(ca)),'removed':len(set(ca)-set(cb)),'cellsAt_b':len(cb)})
+ex=json.loads(cb[cm[0]]) if cm else {}
+print('cell keys:',list(ex.keys())[:12])
+for key in ('pool','section','family','id','block'):
+    if key in ex:
+        print(key, collections.Counter(json.loads(cb[k]).get(key) for k in cm).most_common(15))
+```
+
+`probe.py` — the digest-pin probe (run in a detached probe worktree, then `npx vitest run --maxWorkers=1 <the three files>` twice, and once with `git show 12c437de4:src/generators/steps/resolveResources.js` planted; `cmp` the `probe-*` dumps).
+```python
+# The digest-pin probe as run at point 42 (STYLE-2-MERGE-8), in a DETACHED probe worktree (never the line's checkout):
+# it inserts a dump of each pin's live values into the three test files, then the line runs them twice (+ once with the
+# pre-EM-B2b2 step planted for editWorldFactResources) and cmp's the dumps; the worktree is discarded afterwards.
+def ins(p, anchor, add):
+    t=open(p).read(); assert t.count(anchor)==1,(p,anchor); open(p,'w').write(t.replace(anchor, anchor+add))
+def top(p):
+    t=open(p).read(); i=t.index('\nimport ')+1; open(p,'w').write(t[:i]+"import * as __fs from 'node:fs';\n"+t[i:])
+P='/home/user/rec8/probe-'
+f='tests/generators/x46NpcBand.test.js'; top(f)
+ins(f,"      if (rawBitFormOf(s) !== DARK[seed]) moved.push(seed);\n","      __fs.appendFileSync('"+P+"x46.txt', JSON.stringify([seed, rawBitFormOf(s)]) + '\\n');\n")
+f='tests/generators/institutionBudgetPromise.test.js'; top(f)
+ins(f,"    const moved = hashes.map((h, i) => (h === BEFORE[i] ? null : i)).filter((i) => i !== null);\n","    __fs.writeFileSync('"+P+"inst.json', JSON.stringify(hashes));\n")
+f='tests/domain/editWorldFactResources.test.js'; top(f)
+ins(f,"      if (sha(dormant.record) !== PRE_CHANGE[index].derived) drift.push(index);\n","      __fs.appendFileSync('"+P+"ewf.txt', JSON.stringify({ index, derived: sha(dormant.record), fresh: sha(record) }) + '\\n');\n")
+ins(f,"      if (sha(replay) !== PRE_CHANGE[index].replay) drift.push(index);\n","      __fs.appendFileSync('"+P+"ewf.txt', JSON.stringify({ index, replay: sha(replay) }) + '\\n');\n")
+```
