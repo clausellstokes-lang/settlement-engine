@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '4824ab25e9a311ad1706f78338d4d4770f50ec4a6a193647ccc3ad9c6ac2a01b',
-    replay: 'c702b287a3ea8cddd687afbfc03df790acb0fa45bec4cd5e92e7e10c393083b3',
+    derived: '84b32de4209055bd484afd4f6149ea5465473f155111fea23a6f7366b3f631ec',
+    replay: 'cd97cba0535b3c485cba13ab47f55d7c2b2e9de8c93ee6a03c2867bd70f52139',
   }),
   21: Object.freeze({
-    derived: 'c876f0332cf4b6b681eb50869fd147b08b3185f4164bf8ec05dd707b10896968',
-    replay: 'e68ade3a5ecbcf60aecc85b3e5b660ee1e823d94b95ebc3a9611c7475aeefe72',
+    derived: '4c561fca47d4958e791283078316da01353ff1db6be653e82ef3d1275849655c',
+    replay: '9bf783b7d18054fe9a183acd5fb78e81bb7a69d844e341a1f3c223cedf52839d',
   }),
   42: Object.freeze({
-    derived: '3bf293ce409e03c79e3e33dbbf30d77c530a93dd367aff802d31efcb819e2031',
-    replay: 'f7b6791f86dd73e3b8eb5a33483b65e066c1e7e28f395e0d6b195383cee585d6',
+    derived: 'a3ddf3056dbd4ac7fd18a5dadb68bb99241ee90554a056531b437db5cb0585f9',
+    replay: 'd80535ce5dff2f0ac00c7fdb787a93fa9d3021adca8931b83f9cc8f36032f8f1',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -255,6 +255,11 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // pre-EM-B2b2 step (12c437de4, sha256 62e16d59...) planted over a COPY of the merged tree (a detached probe worktree, never
 // this checkout) and the live step produced the SAME six digests (cmp-equal, the live run twice and equal), so EM-B2b2
 // still moves no byte of the no-edit path; on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-12, STYLE-2-MERGE point 43 (STYLE-2-MERGE-8), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the COHERENCE-PRESUME
+// merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: a line names a thing the town does not have: the culture lines, the re-titled watch role and the ties it re-deals, the history and institution texts); the line before the merge reads all six green. Re-captured: the pre-EM-B2b2 step (12c437de4,
+// sha256 62e16d59...) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
+// the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

@@ -388,7 +388,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // FIX-FOOD-ISOLATION's merge c6e8a4ad6 (E5 on the isolated forest town) -> 315 FIX-PUBLIC-VEIL 7e65c7bec (two rows join)
     // -> 329 ALLEGIANCE-CAR1 e5f88930b (+15 E2 role rows, -1 E5), unmoved to the tip. Each lane's generator move is named
     // and accepted in its own record; this figure was not. mixedOutside and settledLive stay empty.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(329);
+    // 2026-11-12, STYLE-2-MERGE point 43 (re-keyed BY IDENTITY, STYLE-2-MERGE-8): 329 -> 330 at the COHERENCE-PRESUME merge
+    // f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json; the re-titled watch role re-deals the
+    // E2 role rows); point 42 and the line before it read 329. The arm's other figures measured green after the re-key.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(330);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -558,7 +561,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // tip decc7bf15 reads 2015; the COHERENCE-QUARREL merge d4723749a (lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record
     // docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues and hooks, the safety plot
     // hooks) reads 2016 — E6 reaches one more reading; every other figure of the arm unmoved (the arm's later expects run green).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([670, 281, 2016]);
+    // 2026-11-12, STYLE-2-MERGE point 43 (re-keyed BY IDENTITY, STYLE-2-MERGE-8): [670, 281, 2016] -> [682, 325, 2062] at the
+    // COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: the culture lines,
+    // the re-titled watch role and the ties it re-deals, the history and institution texts reach more readings); point 42 reads
+    // [670, 281, 2016]. The leaf-by-leaf cause inside the merge is not traced (PLAUSIBLE per component, CONFIRMED per point).
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([682, 325, 2062]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
@@ -573,7 +580,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
     // STYLE-2 records called these figures "the base's, unchanged" while the values moved); masked behind the first figure until it was re-keyed): 49 -> 43 W3 POW 1a160d599 -> 59
     // ALLEGIANCE-CAR1 e5f88930b, unmoved to the tip. The two dormant membership edits still reach none.
-    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([59, 0, 0]);
+    // 2026-11-12, STYLE-2-MERGE point 43 (re-keyed BY IDENTITY, STYLE-2-MERGE-8; masked behind A7's first figures until they were
+    // re-keyed above): 59 -> 71 at the COHERENCE-PRESUME merge f922124d0 (the re-titled watch role reaches the crisis cast on
+    // twelve more readings); point 42 reads 59. The two dormant membership edits still reach none.
+    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([71, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
     // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
