@@ -21,6 +21,7 @@ import { DOSSIER_STATE_PROSE_DEFENSE } from '../../data/dossierStateProse/defens
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../data/dossierStateProse/economy.generated.js';
 import { NOT_A_GOOD } from '../../data/tradeListDeclarations.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -159,7 +160,8 @@ export function pageCensusFindings(settlement, views) {
     }
   };
   const noArcane = D.some((l) => /No arcane practitioners on the rolls/.test(l));
-  const roster = arr(rec.institutions).map((i) => s(obj(i).name).toLowerCase());
+  // the live roster (a ruin is no working house; a birth carries none, so the census's counter reads the same)
+  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec)).map((i) => s(obj(i).name).toLowerCase());
 
   run('P1a', () => {
     const onlyJust = E.find((l) => /is fed, but only just/.test(l)); const grows = E.find((l) => /grows (a little more|more|far more) than it eats/.test(l));

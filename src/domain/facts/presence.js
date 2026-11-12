@@ -8,8 +8,11 @@
  * guilds"), or the catalogue name followed by more words ("Tanners" is here where "Tanners' quarter" stands, never
  * where "Tannery" does). Never by a first word.
  *
+ * A ruined house is not here (`institutionRoster.js :: liveInstitutions`, the estate's one ruin filter).
+ *
  * Layer 1 (the roster). Pure: no randomness, no clock, no write.
  */
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /** Fold a house name: lower case, a parenthesised note or count range struck, spaces collapsed. @param {unknown} name */
 export const foldHouseName = (name) => String(name ?? '').toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim();
@@ -22,8 +25,7 @@ export const foldHouseName = (name) => String(name ?? '').toLowerCase().replace(
 export function houseHere(record, houseName) {
   const want = foldHouseName(houseName);
   if (!want) return false;
-  const roster = record && typeof record === 'object' ? /** @type {{ institutions?: unknown }} */ (record).institutions : null;
-  for (const inst of Array.isArray(roster) ? roster : []) {
+  for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record && typeof record === 'object' ? record : null))) {
     const have = foldHouseName(inst && typeof inst === 'object' ? /** @type {{ name?: unknown }} */ (inst).name : inst);
     if (have === want) return true;
     if (have.startsWith(want) && /^[\s'’]/.test(have.slice(want.length))) return true;
