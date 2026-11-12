@@ -9,8 +9,11 @@ import { keeperHonorificOf, seatKeeperOf } from './seatKeeper.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { OFFICE_WORDS } from '../../data/officeTitles.js';
 
+/** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
+/** @typedef {import('./seatKeeper.js').KeeperCard} KeeperCard */
+
 /** @param {unknown} settlement @returns {string | null} */
-const governmentOf = (settlement) => nameOf(/** @type {any} */ (governingFactionOf(/** @type {any} */ (settlement)))) || null;
+const governmentOf = (settlement) => nameOf(governingFactionOf(/** @type {RulingPowerSettlement | null} */ (settlement))) || null;
 
 /**
  * The card's honorific row as the page prints it: the keeper of an empty seat whose office is its own face's prints
@@ -28,7 +31,7 @@ export function shownHonorificOf(card, settlement, place = settlement) {
   // and Elder"): where its house's honorific is itself an office's title ("Headman"), the row prints the house's own
   // words ("Boat-headman"), never a second office beside the one held
   if (honorific && cardOfficeOf(card) && OFFICE_WORDS.includes(honorific)) {
-    const title = String(/** @type {any} */ (card)?.title || '').replace(/^(the|a|an)\s+/i, '').trim();
+    const title = String(/** @type {KeeperCard | null} */ (card)?.title || '').replace(/^(the|a|an)\s+/i, '').trim();
     if (title) return title.charAt(0).toUpperCase() + title.slice(1);
   }
   return honorific;
@@ -39,7 +42,7 @@ export function shownHonorificOf(card, settlement, place = settlement) {
  * Neumann" + ", the miller"), any other face its honorific and name; the keeper of an empty seat its caretaker's form.
  * The tail never repeats a title the name already carries (a disambiguated name, "Gebhard Schneider (the exchange
  * master)").
- * @param {Record<string, any>} face @param {unknown} settlement @param {boolean} seatFaced the face is the seat
+ * @param {KeeperCard} face @param {unknown} settlement @param {boolean} seatFaced the face is the seat
  * holder's, not the house's own @returns {{ name: string, tail: string }}
  */
 export function connectionOf(face, settlement, seatFaced) {

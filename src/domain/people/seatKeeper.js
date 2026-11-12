@@ -12,28 +12,37 @@ import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { caretakerFormOf, cardOfficeOf } from './cardPowers.js';
 import { honorificOfTitle } from '../../data/faceHonorifics.js';
 
+/** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
+/** The record as the seat's readers read it. @typedef {RulingPowerSettlement & { npcs?: unknown, culturalIdentity?: { key?: string | null } | null }} KeeperSettlement */
+/**
+ * A card as the seat's readers read it (the fields they touch).
+ * @typedef {{ id?: string, name?: string, title?: string, gender?: string, institution?: { key?: string, title?: string } | null,
+ *   memberships?: ReadonlyArray<{ power?: string, rank?: number } | null | undefined> }} KeeperCard
+ */
+
 /**
  * Does the governing power's seat stand empty (its `vacant` modifier)?
  * @param {unknown} settlement @returns {boolean}
  */
 export function isSeatVacant(settlement) {
-  const governing = /** @type {{ modifiers?: unknown } | null} */ (governingFactionOf(/** @type {any} */ (settlement)));
+  const governing = governingFactionOf(/** @type {RulingPowerSettlement | null} */ (settlement));
   return !!governing && Array.isArray(governing.modifiers) && governing.modifiers.includes('vacant');
 }
 
 /**
  * The card that keeps the empty seat: the governing power's first; null where the seat is held or none stands.
- * @param {unknown} settlement @returns {Record<string, any> | null}
+ * @param {unknown} settlement @returns {KeeperCard | null}
  */
 export function seatKeeperOf(settlement) {
   if (!isSeatVacant(settlement)) return null;
-  const power = nameOf(/** @type {any} */ (governingFactionOf(/** @type {any} */ (settlement))));
-  const cards = /** @type {Array<Record<string, any>>} */ (Array.isArray(/** @type {any} */ (settlement)?.npcs) ? /** @type {any} */ (settlement).npcs : []);
-  return cards.find((card) => Array.isArray(card?.memberships) && card.memberships.some((m) => m?.power === power && m?.rank === 1)) || null;
+  const s = /** @type {KeeperSettlement | null} */ (settlement);
+  const power = nameOf(governingFactionOf(s));
+  const cards = /** @type {ReadonlyArray<KeeperCard | null | undefined>} */ (Array.isArray(s?.npcs) ? s.npcs : []);
+  return cards.find((card) => !!card && Array.isArray(card.memberships) && card.memberships.some((m) => m?.power === power && m?.rank === 1)) || null;
 }
 
 /** @param {unknown} settlement @returns {string | null} */
-const governmentOf = (settlement) => nameOf(/** @type {any} */ (governingFactionOf(/** @type {any} */ (settlement)))) || null;
+const governmentOf = (settlement) => nameOf(governingFactionOf(/** @type {RulingPowerSettlement | null} */ (settlement))) || null;
 
 /**
  * The keeper's honorific in the caretaker's form, as all three places print it: a face whose office is its own (one
@@ -44,11 +53,11 @@ const governmentOf = (settlement) => nameOf(/** @type {any} */ (governingFaction
  */
 export function keeperHonorificOf(card, settlement) {
   const keeper = seatKeeperOf(settlement);
-  const c = /** @type {Record<string, any>} */ (card || {});
+  const c = /** @type {KeeperCard} */ (card || {});
   if (!keeper || keeper.id !== c.id || cardOfficeOf(card)) return '';
   const inst = c.institution && typeof c.institution === 'object' ? c.institution : null;
   if (!inst?.title) return '';
-  const culture = /** @type {any} */ (settlement)?.culturalIdentity?.key ?? null;
+  const culture = /** @type {KeeperSettlement | null} */ (settlement)?.culturalIdentity?.key ?? null;
   const honorific = honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${String(inst.key || '')}`, { culture });
   return caretakerFormOf(honorific, governmentOf(settlement));
 }
