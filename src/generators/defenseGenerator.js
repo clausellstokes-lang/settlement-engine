@@ -78,7 +78,7 @@ const getDefenseInstitutions = (institutions) =>
  */
 const computeDefenseScores = (
   inst, milEffective, crimEffective, econOutput, magInfluence, relInfluence,
-  priorities, threat, config, tier, stressTypes = [], reliesOnMagic = false, prosperity = undefined,
+  priorities, threat, config, tier, stressTypes = [], reliesOnMagic = false, upkeep = keepOf(undefined),
 ) => {
   const hasStress = (type) => stressTypes.includes(type);
   const route     = config.tradeRouteAccess || 'road';
@@ -176,7 +176,6 @@ const computeDefenseScores = (
   // place with hired force and NO standing force does not take the standing-force slider term in
   // full, and its military is never above what the same place scores with a watch in the hired
   // force's stead (the invariant, pinned by tests/generators/upkeepHired.test.js).
-  const keep = keepOf(prosperity);
   const SLIDER_FULL = 0.35;
   const SLIDER_NONE = 0.06;
   /** @param {any} f */
@@ -192,7 +191,7 @@ const computeDefenseScores = (
   // built walls keep standing and unpaid soldiers desert slowly, never
   // instantly. The community baseline (armed households, terrain alarm) is
   // unpaid and exempt — only the funded portion above it is gated.
-  const milUpkeepMult = fundedGate(0.6, keep);
+  const milUpkeepMult = fundedGate(0.6, upkeep);
   /**
    * The standing score of a set of flags: everything but the hired force. With `watchInStead`, the
    * counterfactual: the same place with a watch standing where its hired force stands.
@@ -214,7 +213,7 @@ const computeDefenseScores = (
     if (hasDivineStrong && relPri >= 70) m += 6;
     const builtOrStanding = f.hasWalls || hasStanding(f) || watchInStead;
     const sliderRate = builtOrStanding ? SLIDER_FULL
-      : hasHiredForce(f) ? SLIDER_NONE + (SLIDER_FULL - SLIDER_NONE) * keep.bought
+      : hasHiredForce(f) ? SLIDER_NONE + (SLIDER_FULL - SLIDER_NONE) * upkeep.bought
       : SLIDER_NONE;
     m = Math.min(100, m + Math.round(milEffective * sliderRate));
     // Apply terrain multiplier — natural chokepoints, elevation, approach restriction
@@ -224,7 +223,7 @@ const computeDefenseScores = (
     }
     return m;
   };
-  const hiredMilitary = Math.round(((inst.hasMercenary ? 14 : 0) + (inst.hasCharterHall ? 10 : 0)) * keep.bought);
+  const hiredMilitary = Math.round(((inst.hasMercenary ? 14 : 0) + (inst.hasCharterHall ? 10 : 0)) * upkeep.bought);
   let military = Math.min(100, standingMilitary(inst) + hiredMilitary);
   if (hasHiredForce(inst) && !hasStanding(inst)) {
     military = Math.min(military, standingMilitary(inst, true));
@@ -259,13 +258,13 @@ const computeDefenseScores = (
   // tradition cap binds, the paid arcane share is assumed cut first.
   const monsterUnpaidBase = monsterThreatBase
     + Math.min(Math.min(35, monsterMagicBonus), (hasDivine ? 18 : 0) + (hasDruid ? 12 : 0));
-  const monsterUpkeepMult = fundedGate(0.7, keep);
+  const monsterUpkeepMult = fundedGate(0.7, upkeep);
   if (monsterUpkeepMult < 1) {
     monster = Math.round(monsterUnpaidBase + Math.max(0, monster - monsterUnpaidBase) * monsterUpkeepMult);
   }
   // COHERENCE-UPKEEP (ruling 2): the charter hall's bounty work is bought outright, worth what the
-  // place can pay (`keep.bought`), added after the gate so it has one reader.
-  if (inst.hasCharterHall) monster = Math.min(100, monster + Math.round(35 * keep.bought));
+  // place can pay (`upkeep.bought`), added after the gate so it has one reader.
+  if (inst.hasCharterHall) monster = Math.min(100, monster + Math.round(35 * upkeep.bought));
   if (threat === 'plagued') monster = Math.max(0, monster - 15);
 
   // ── Internal order score ────────────────────────────────────────────────────
@@ -290,7 +289,7 @@ const computeDefenseScores = (
   // Community self-policing (the small-tier baseline) is unpaid and exempt.
   // Applied BEFORE the crime subtraction — a poor settlement's weakened watch
   // must not also dilute the crime pressure it faces.
-  const internalUpkeepMult = fundedGate(0.65, keep);
+  const internalUpkeepMult = fundedGate(0.65, upkeep);
   if (hasLawInfra && internalUpkeepMult < 1) {
     internal = Math.round(communityIntBase + Math.max(0, internal - communityIntBase) * internalUpkeepMult);
   }
@@ -327,7 +326,7 @@ const computeDefenseScores = (
   // to ×0.45 at Struggling (physical grain in a granary retains value even when
   // the treasury is empty — never zero it). Applied BEFORE stress penalties
   // so their tuned absolute magnitudes keep their meaning.
-  const econHealthMult = fundedGate(0.45, keep);
+  const econHealthMult = fundedGate(0.45, upkeep);
   economic = Math.round(economic * econHealthMult);
 
   // ── Magical defense score ───────────────────────────────────────────────────
@@ -563,7 +562,7 @@ const computeDefenseReadiness = (scores, threat, tier, magicExists = true) => {
  * @param {Object} settlement - Full settlement object
  * @returns {{ scores:any, readiness:any, institutions:any, magicDependency:boolean, traditions:Object, chainModifiers:Object, economicGates:Object }}
  */
-export function generateDefenseProfile(settlement) {
+export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
   const config       = settlement.config       || {};
   const institutions = settlement.institutions || [];
   const stressTypes  = settlement.stress
@@ -588,7 +587,7 @@ export function generateDefenseProfile(settlement) {
     settlement.tier || 'town',
     stressTypes,
     magicReading === 'relied-upon' || magicReading === 'integral',
-    settlement.economicState?.prosperity,
+    upkeep,
   );
 
   // ── Supply chain linkage (Item 24) ────────────────────────────────────────
@@ -636,7 +635,7 @@ export function generateDefenseProfile(settlement) {
   // Mercenary chain healthy = +4 military (contract force available)
   // COHERENCE-UPKEEP (ruling 2): the contract force is bought outright, at the place's share.
   if (chainHealthy(mercenaryChain)) {
-    chainMilBonus += Math.round(4 * keepOf(settlement.economicState?.prosperity).bought);
+    chainMilBonus += Math.round(4 * upkeep.bought);
   }
   // Food processing chain healthy = +5 economic defense (logistics well-supplied)
   if (foodProcChain && foodProcChain.status !== 'impaired') chainEconBonus += 5;
@@ -648,7 +647,7 @@ export function generateDefenseProfile(settlement) {
   // money (relief purchases, granary logistics, work crews). Persist a gated
   // disaster score (floor 0.55, identity at Comfortable and above, the keep home, same shape as
   // the other upkeep gates); display layers prefer it over raw resilience.
-  const disasterGate = fundedGate(0.55, keepOf(settlement.economicState?.prosperity));
+  const disasterGate = fundedGate(0.55, upkeep);
   const _resilience = foodSecurity?.resilienceScore;
   const disaster = Number.isFinite(_resilience)
     ? Math.round(Math.max(0, Math.min(100, _resilience)) * disasterGate)

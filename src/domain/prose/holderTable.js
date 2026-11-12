@@ -166,7 +166,7 @@ export function capturedRulingStructure(settlement) {
  */
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
-  incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:832', read: true }),
+  incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:842', read: true }),
   // ⭐ CITED BY SYMBOL (rule 32; REVIEW-INTAKE-3 R8): these two drifted from :588/:608 to :586/:606.
   viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js :: generateEconomicViability', read: true }),
   criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js :: generateEconomicViability', read: true }),
@@ -176,7 +176,7 @@ export const HOLDER_SOURCES = Object.freeze({
   primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:769', read: true }),
   primaryImports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:769', read: true }),
   localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:779', read: true }),
-  isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:837', read: true }),
+  isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:847', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:778', read: true }),
   exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:654', read: true }),
   // ⭐ CITED BY SYMBOL (rule 32): REVIEW-INTAKE-3 R9 moved :500/:501/:418 down the file.
@@ -196,8 +196,8 @@ export const HOLDER_SOURCES = Object.freeze({
   mercenary: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:99', read: true }),
   charter: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:102', read: true }),
   force: Object.freeze({ kind: 'muster', cite: 'src/generators/threatDefensePolicy.js:13', read: true }),
-  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:467', read: true }),
-  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:476', read: true }),
+  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:497', read: true }),
+  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:506', read: true }),
   besiegedBy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   besiegingTargets: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   ticksToDeploy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/mobilizationStatus.js:94', read: true }),
@@ -214,7 +214,7 @@ export const HOLDER_SOURCES = Object.freeze({
   }),
   blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:740', read: true }),
   criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/domain/people/hallCapture.js :: writeHallCapture', read: true }), // ALLEGIANCE-CAR2 (J-13): re-cited to the state's ONE writer, the derivation at the coherence seam
-  safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:843', read: true }),
+  safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:853', read: true }),
 
   // ── the court: the seat, its legitimacy, the blocs under it and the treaties it signs ──
   govMultiplier: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:109', read: true }),

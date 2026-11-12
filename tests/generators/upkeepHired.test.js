@@ -23,6 +23,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
+import { keepOf } from '../../src/domain/facts/keep.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
@@ -66,8 +67,8 @@ describe('a hired force stands in for a standing one, to a lesser degree', () =>
       const home = forcesOf(s);
       expect(home.hasCharterHall || home.hasMercenary, `${seed} holds a hired force`).toBe(true);
       expect(home.hasGarrison || home.hasWatch || home.hasMilitia, `${seed} holds no standing force`).toBe(false);
-      const hired = generateDefenseProfile(s).scores.military;
-      const watch = generateDefenseProfile(withWatchInstead(s)).scores.military;
+      const hired = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).scores.military;
+      const watch = generateDefenseProfile(withWatchInstead(s), keepOf(s.economicState.prosperity)).scores.military;
       expect(hired, `${seed}: hired-only ${hired} against a watch's ${watch}`).toBeLessThanOrEqual(watch);
     }
   });
@@ -86,7 +87,7 @@ describe('the five upkeep gates read the prosperity label, not the output', () =
   test('RED-FIRST agree-village-16 (Comfortable, output 16): every gate is the identity', () => {
     const s = born('agree-village-16');
     expect(s.economicState.prosperity).toBe('Comfortable');
-    const gates = generateDefenseProfile(s).economicGates;
+    const gates = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).economicGates;
     expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
     for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(1);
   });
@@ -94,7 +95,7 @@ describe('the five upkeep gates read the prosperity label, not the output', () =
   test('RED-FIRST agree-village-5 (Struggling, output 57): every gate stands at its floor', () => {
     const s = born('agree-village-5');
     expect(s.economicState.prosperity).toBe('Struggling');
-    const gates = generateDefenseProfile(s).economicGates;
+    const gates = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).economicGates;
     expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
     for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(FLOORS[gate]);
   });

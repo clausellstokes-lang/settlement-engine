@@ -1630,19 +1630,21 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
 
   test('the relation table has its row count by source and by direction, and source (d) is EMPTY', () => {
     const relations = committed.relations;
-    expect(relations.rows.length, 'rows the four sources yield at this tip').toBe(165);
-    expect(Object.fromEntries(relations.bySource), 'by source').toEqual({ a: 131, b: 28, c: 6 });
-    expect(Object.fromEntries(relations.byDirection), 'and every row carries its direction').toEqual({ 'a->b': 165 });
+    expect(relations.rows.length, 'rows the four sources yield at this tip').toBe(169); // COHERENCE-UPKEEP (2026-11-12, 07ebe8bdc and the parameter move): the five gates hang on the keep home — source (c)'s economicGates rows read keep/fundedGate, not econOutput/instFlags/economyOutput: 165 -> 169
+    expect(Object.fromEntries(relations.bySource), 'by source').toEqual({ a: 131, b: 28, c: 10 }); // COHERENCE-UPKEEP: source (c) 6 -> 10 (the gates on keep/fundedGate)
+    expect(Object.fromEntries(relations.byDirection), 'and every row carries its direction').toEqual({ 'a->b': 169 }); // COHERENCE-UPKEEP: 165 -> 169, as above
     // ⭐ SOURCE (d) IS THE SITTING'S AND IS EMPTY, ASSERTED (ARCH §5.2, E-F14b). A missing key
     // would leave a reader to infer the emptiness; an assertion makes the standing
     // ratification door's first row visible the moment it lands.
     expect(relationsFromSitting(), 'no sitting has ratified an axis pair').toEqual([]);
     expect(relations.rows.filter((r) => r.source === 'd'), 'so the table carries none').toEqual([]);
-    // THE EDGE ARCH §5.2 NAMES, recovered rather than transcribed: the generator's
-    // `milUpkeepMult = min(1, 0.6 + econOutput/50 * 0.4)` degrading the military score.
+    // THE EDGE ARCH §5.2 NAMES, recovered rather than transcribed: the generator's military upkeep
+    // gate degrading the military score. COHERENCE-UPKEEP (2026-11-12, 07ebe8bdc, the chair's ruling 3,
+    // alternative B) MOVED ITS SOURCE: `milUpkeepMult = fundedGate(0.6, keep)` reads the keep home (the
+    // prosperity label), where it read `min(1, 0.6 + econOutput/50 * 0.4)`. The edge is the same edge.
     const gate = relations.rows.filter((r) => r.b === 'economicGates.military');
-    expect(gate.map((r) => r.a), 'econOutput is the gate\'s source')
-      .toEqual(['src/generators/defenseGenerator.js::econOutput']);
+    expect(gate.map((r) => r.a), 'the keep home is the gate\'s source')
+      .toEqual(['src/generators/defenseGenerator.js::fundedGate', 'src/generators/defenseGenerator.js::upkeep']);
     expect(gate[0].relation).toBe('consequence');
     expect(gate[0].direction).toBe('a->b');
   });
@@ -1681,7 +1683,7 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // ⭐ TWO ROWS JOIN ON ONE ENDPOINT AT THE LEAF, and one of them is the ARCH document's
     // own worked edge — `econOutput` degrading `economicGates.military`. Even that edge is
     // half-joined, because the desks read the gate as an unrooted parameter.
-    expect(join.leafEither, 'two rows touch a desk read at the leaf').toBe(2);
+    expect(join.leafEither, 'three rows touch a desk read at the leaf').toBe(3); // COHERENCE-UPKEEP (2026-11-12): the gates' keep rows add one leaf touch: 2 -> 3
     expect(join.leafRows, 'and none of them on BOTH endpoints').toEqual([]);
     // THE CONSEQUENCE, stated as an executable fact rather than a caution: until a
     // normalisation lands, the clause seat has no licensed row and every modifier at this
@@ -1742,8 +1744,8 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
       endpoints, roots: [...roots], paths: [...paths].sort(), ...draftSources(),
     });
     // THE STRUCTURAL HALF, which no unrelated car can move.
-    expect(endpoints.length, 'the relation table\'s endpoints').toBe(89);
-    expect(draft.endpointsWithCandidate + draft.noCandidate.length, 'every endpoint is answered once').toBe(89);
+    expect(endpoints.length, 'the relation table\'s endpoints').toBe(88); // COHERENCE-UPKEEP (2026-11-12): the gates' sources econOutput, instFlags and economyOutput become fundedGate and upkeep: 89 -> 88
+    expect(draft.endpointsWithCandidate + draft.noCandidate.length, 'every endpoint is answered once').toBe(88); // COHERENCE-UPKEEP: 89 -> 88, as above
     expect(new Set(draft.rows.map((r) => `${r.endpoint}|${r.readRoot}`)).size,
       'one row per pair, never one per citation').toBe(draft.rows.length);
     for (const row of draft.rows) {
@@ -1787,8 +1789,8 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 9 -> 10.
     expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(14); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (9 -> 14) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (9 -> 15) // MERGE-WAVE at the W3 POW merge (2026-11-08): measured at the merged tip — 14: W3 POW's new candidate is one the W1/W2 side already proposes, so it counts once (additive would be 15)
     expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
-    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
-    expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(37); // COHERENCE-AGREE (2026-11-11): 36 -> 37, one docblock of the lane's that names an endpoint token, re-measured at its tip; reported, never proposed // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 28 -> 29 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 29 -> 34 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (28 -> 35) // W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (28 -> 36)
+    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(84); // COHERENCE-UPKEEP (2026-11-12): the gates' three output endpoints become two keep endpoints with no candidate: 85 -> 84
+    expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(39); // COHERENCE-UPKEEP (2026-11-12): 37 -> 39, the lane's docblocks that name the gates' new endpoints (fundedGate, upkeep), re-measured at its tip; reported, never proposed // COHERENCE-AGREE (2026-11-11): 36 -> 37, one docblock of the lane's that names an endpoint token, re-measured at its tip; reported, never proposed // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 28 -> 29 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 29 -> 34 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (28 -> 35) // W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (28 -> 36)
     expect(draft.rows.every((r) => r.evidence !== 'docblock'), 'no row rests on a comment').toBe(true);
     // ⭐ `generator-write` IS AN AST READING NOW (SITTING §P.2-27, cure: the fold's R6). Five of
     // the nine citations the first cut carried were not writes of world state at all — a
