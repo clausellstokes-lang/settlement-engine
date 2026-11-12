@@ -24,6 +24,7 @@ import {
 } from '../domain/resourceSemantics.js';
 import { factsOf } from '../domain/facts/factsOf.js';
 import {
+  MATERIAL_RESOURCE_KEYS,
   STRATEGIC_CLAUSES,
   STRENGTH_SUPPORT,
   liveMaterialFor,
@@ -305,7 +306,9 @@ function resourceTruthFindings(settlement) {
  * @type {ReadonlyArray<readonly [RegExp, ReadonlyArray<string>]>}
  */
 const LOCAL_INCOME_WORDS = Object.freeze([
-  [/^Local ore\b/, ['iron_deposits', 'precious_metals']],
+  // COHERENCE-AGREE-3 (F3): the smith's ore is iron, the material table's one answer (economy/localMaterials.js);
+  // gold and silver are not the smith's ore, so a "Local ore" line beside them alone is a disagreement.
+  [/^Local ore\b/, MATERIAL_RESOURCE_KEYS.metals],
   [/^Local forest\b/, ['managed_forest', 'timber', 'mountain_timber', 'shipbuilding_timber']],
   [/^Local quarry\b/, ['stone_quarry']],
   [/^Local flocks\b/, ['grazing_land', 'alpine_pasture']],

@@ -114,6 +114,8 @@ describe('the projection-agreement arm convicts each disagreement and clears its
       economicState: { incomeSources: [{ source: 'Iron & Metalwork', desc: 'Local ore (planted) for the smithy.' }] } });
     expect(details(income(['coal_deposits', 'coal']))).toContain('An income line names a local resource the town does not have.');
     expect(details(income(['iron_deposits']))).toEqual([]);
+    // F3 (REVIEW-AGREE, 2026-11-12): gold and silver are not the smith's ore — the material table's answer
+    expect(details(income(['precious_metals']))).toContain('An income line names a local resource the town does not have.');
     const note = (category) => ({ ...record({ resourceAnalysis: { availableResources: ['managed_forest'] } }),
       economicViability: { plotHooks: [], dependencies: [{ category, title: 'Imports timber' }] } });
     expect(details(note('Resource Import'))).toContain('The viability notes an import a live local resource yields.');
@@ -145,4 +147,26 @@ describe('the corpus seeds that disagreed at the base agree', () => {
       .flatMap((c) => c.findings.map((f) => `${f.path}: ${f.detail} ${f.evidence || ''}`));
     expect(findings, seed).toEqual([]);
   }), 'the corpus seeds agree'));
+});
+
+/**
+ * THE REVIEWER'S SEEDS (REVIEW-AGREE-65ce74ce6, 2026-11-12), by finding: towns the lane never birthed (the
+ * §0 dials, every one on random; `stress` forces a crisis as the review's `rvwfam-*` and `rvw-ten-*` did).
+ * Each disagreed at 65ce74ce6; each holds resource_truth and food_verdict clean after its cure.
+ */
+const REVIEW_SEEDS = [
+  // F3: "Local ore feeds the smithy" beside gold or silver alone, and an iron import
+  { seed: 'rvw12-town-13', tier: 'town' }, { seed: 'rvw12-town-37', tier: 'town' }, { seed: 'rvw-ten-6', tier: 'city' },
+];
+describe('the reviewer\'s seeds agree', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('every reviewer seed: resource_truth and food_verdict hold no finding', () => expectNoSeedFailures(collectSeedFailures(REVIEW_SEEDS.map((r) => r.seed), (seed) => {
+    const { tier, stress } = REVIEW_SEEDS.find((r) => r.seed === seed) || {};
+    const forced = stress ? { selectedStressesRandom: false, selectedStresses: [stress] } : {};
+    const settlement = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier, ...forced }), null, { seed });
+    const findings = settlement.generationCoherenceReceipt.checks
+      .filter((c) => c.id === 'resource_truth' || c.id === 'food_verdict')
+      .flatMap((c) => c.findings.map((f) => `${f.path}: ${f.detail} ${f.evidence || ''}`));
+    expect(findings, seed).toEqual([]);
+  }), 'the reviewer\'s seeds agree'));
 });

@@ -23,6 +23,7 @@ import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
+import { liveMaterialFor } from './localMaterials.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -448,8 +449,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Iron & Metalwork',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
-        // COHERENCE-AGREE: "local ore" only where the town has ore; coal fires the forges and is not ore.
-        desc: hasNearbyResource('iron_deposit', 'precious_metal')
+        // COHERENCE-AGREE: "local ore" only where the town has ore; coal fires the forges and is not ore. The smith's
+        // ore is iron, the material table's one answer (COHERENCE-AGREE-3, F3): gold or silver alone buys its iron in.
+        desc: liveMaterialFor('metals', nearbyResources)
           ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
           : hasNearbyResource('coal_deposit')
             ? 'Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.'
