@@ -312,7 +312,9 @@ Cicero, the household elder.
 ## 8. The equal-failing set (the six directories)
 
 Base decc7bf15: 1 title (ledgerCitationIntegrity: the ledger branch's local ref, absent in a fresh checkout). The first
-seat's tip: 52. At c600ab68c, before the bundles: **the same set as 74b3b4949, 63 titles**, of which the 9 engine-bundle titles
+seat's tip: 52. At c600ab68c the whole-directory run read 65: the set at 74b3b4949 plus two tuningRegister titles from
+item 4's named sort key, cured in the next commit (the key inlined; the walker green). So, before the bundles, **the same
+set as 74b3b4949, 63 titles**, of which the 9 engine-bundle titles
 (engineBundleReplay 4, engineServiceStoreParity 4, engineServiceCore 1) are the merge keeping our bundle and leave with
 this lane's last commit. So **54 at the tip**: the first seat's 52, less presumedThings ARM 2 (cured, item 2), plus three
 the first seat's statement did not name, each read at e071dc60e already:
