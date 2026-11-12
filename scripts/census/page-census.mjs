@@ -112,7 +112,12 @@ for (const [id, row] of Object.entries(reg.rows)) {
   const limit = banked ? row.banked : 0;
   if (now > limit) over.push(id);
   if (banked && now < row.banked) fell++;
-  console.log(`${id.padEnd(10)} ${String(row.master).padStart(6)} ${String(row.integration).padStart(5)} ${String(row.banked).padStart(6)} ${String(now).padStart(4)}    0${now > limit ? (banked ? '  ROSE' : '  over the bar') : ''}  ${(examples[id] || []).join(' ')}`);
+  const col = (/** @type {number|null} */ n) => (n == null ? '—' : String(n));
+  console.log(`${id.padEnd(10)} ${col(row.master).padStart(6)} ${col(row.integration).padStart(5)} ${String(row.banked).padStart(6)} ${String(now).padStart(4)}    0${now > limit ? (banked ? '  ROSE' : '  over the bar') : ''}  ${(examples[id] || []).join(' ')}${row.base != null ? `  (new row; ${row.base} at the base)` : ''}`);
+}
+// the retired rows, by name, never a silent zero: their counts when retired and the row that replaced each
+for (const [id, row] of Object.entries(reg.retired || {})) {
+  console.log(`${id.padEnd(10)} ${String(row.master).padStart(6)} ${String(row.integration).padStart(5)} ${String(row.atRetirement).padStart(6)}  RETIRED → ${row.replacedBy}: ${row.reason.split(':')[0]}`);
 }
 for (const id of Object.keys(counts)) if (!reg.rows[id]) over.push(`${id} (no row)`);
 writeFileSync(join(out, 'counts.json'), JSON.stringify({ prefix, scale, births: plan.length, counts, examples }, null, 1));
