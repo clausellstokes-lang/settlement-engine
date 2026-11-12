@@ -180,3 +180,28 @@ The post-ruling commits (STOP 1, STOP 2 b, B (i)) are re-diffed at the final tip
 - The trade-politics hook that offers an isolated hamlet "what it can still afford to import".
 - "Floodplain Agriculture" on a depleted floodplain (above).
 - PRESUME's court reader and the vocabulary's missing court dimension (part one, and STOP 3).
+
+## Part B (iii) A′, built (6b932d3e8) — what moved
+
+**The field diff:** parent 303396f74 against 6b932d3e8, over L2 and the golden.
+- **Holders only.** It moves exactly the 538 L2 births that held the position on a road: 0 non-holders, and 0 still hold it off a crossroads afterwards.
+- **Golden:** 2 rows move,  and , both road holders.
+- **Labels:** declared by family and direction in the draft record.
+
+**, before → after:**
+- The strength "Central trade hub" goes, and the export "Transit trade" goes with it.
+- The exports "Toll revenue" and "Pass transit trade" STAY: they are the village's defended pass's own goods, and true of it.
+- It had no Toll Revenue income line, before or after.
+
+**Toward danger, town by town (L2):**
+
+
+**The hand-picked choice:**
+- **Before:** on a road the wizard offered the position as compatible, and the validator was silent.
+- **After:** the wizard dims it on a road, with the row's own words and "Click to force include anyway", exactly as on a port. A forced one is kept, and the structural validator warns in the same words as on a port.
+- **The guard** exempts a manual roster.
+
+**The iron label (303396f74).** "Iron ore (local iron mines exhausted)":
+- The goods catalogue keeps the old spelling as an alias beside the new one, because saved records carry it and subsumption re-runs over their lists.
+- Black Crag's quoted dossier label is re-keyed by identity; the card's promise is unchanged.
+- The two fixtures that quote the old label are untouched and green ( is read stored;  is an input corpus).
