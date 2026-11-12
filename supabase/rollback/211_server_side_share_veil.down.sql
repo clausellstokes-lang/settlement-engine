@@ -255,7 +255,7 @@ grant execute on function public.import_gallery_dossier(text) to authenticated;
 grant execute on function public.get_gallery_map(text) to anon, authenticated;
 
 -- ── 2. the helpers 211 created, every one, by signature ─────────────────────────────────────────
-drop function if exists public._gallery_veil(jsonb, jsonb, boolean);
+drop function if exists public._gallery_veil(jsonb, jsonb, boolean, boolean);
 drop function if exists public._gallery_veil_apply(jsonb, jsonb);
 drop function if exists public._gallery_veil_card(text, jsonb, jsonb, jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_card_id(text, jsonb);
@@ -290,7 +290,7 @@ drop function if exists public._gallery_veil_or(jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_own_id(jsonb, text, jsonb);
 drop function if exists public._gallery_veil_parse(text);
 drop function if exists public._gallery_veil_resolve(jsonb, jsonb, boolean, text[]);
-drop function if exists public._gallery_veil_served(jsonb, jsonb, jsonb);
+drop function if exists public._gallery_veil_served(jsonb, jsonb, jsonb, boolean);
 drop function if exists public._gallery_veil_slug(text);
 drop function if exists public._gallery_veil_snake(text);
 drop function if exists public._gallery_veil_str(jsonb);

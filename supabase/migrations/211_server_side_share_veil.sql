@@ -1036,8 +1036,9 @@ end $$;
 
 -- ── 5. THE VEIL, AS THE READS CALL IT ───────────────────────────────────────────────────────
 -- {body, groupings} for a marked share (or any share on the party link); NULL for an unmarked
--- listing, which the reads serve as before.
-create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean)
+-- listing, which the reads serve as before. `copy`: the read served the share's FROZEN COPY (only
+-- then does the served marker carry the freeze date: the second review's R5).
+create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean default false)
 returns jsonb language plpgsql immutable as $$
 declare
   -- the stored overrides, decompressed ONCE: every later look at them is in memory (a stored object
@@ -1050,17 +1051,20 @@ declare
 begin
   if jsonb_typeof(ov) <> 'object' then ov := '{}'; end if;
   res := public._gallery_veil_resolve(pub, ov, link, people);
-  if res is null then return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people))); end if;
+  if res is null then return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people), copy)); end if;
   return jsonb_build_object(
     'body', public._gallery_veil_apply(pub, res),
     'groupings', res -> 'groupings',
-    'served', public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people)));
+    'served', public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy));
 end $$;
 
 -- What of the share travels to a reader (low finding 2, the fail-closed form: an ALLOWLIST, never
 -- a strip). Each member's two booleans, and — when the server applied a veil — the served marker
--- { v: 2, mode, at, groupings }. No delta, no frozen copy, no other key.
-create or replace function public._gallery_veil_served(overrides jsonb, groupings jsonb, people jsonb)
+-- { v: 2, mode, at, groupings }. No delta, no frozen copy, no other key. `at`, the freeze date,
+-- travels ONLY when the read served the frozen copy (`copy`): a page that draws the live town (the
+-- party link of a snapshot share, by 208's design; a snapshot share with no copy) is never labelled
+-- with a date it does not show (the second review's R5; the client dates a page by `at`).
+create or replace function public._gallery_veil_served(overrides jsonb, groupings jsonb, people jsonb, copy boolean)
 returns jsonb language plpgsql immutable as $$
 begin
 -- each person's member entry, looked up by the person's key (a key naming no person is no one's
@@ -1080,7 +1084,7 @@ begin
            'v', 2,
            'mode', case when overrides #>> '{$veil,mode}' in ('snapshot', 'live') and jsonb_typeof(overrides #> '{$veil,mode}') = 'string'
                         then overrides #> '{$veil,mode}' end,
-           'at', case when jsonb_typeof(overrides #> '{$veil,at}') = 'string' and (octet_length(overrides #>> '{$veil,at}') <= 40 or public._gallery_veil_jslen(overrides #>> '{$veil,at}') <= 40)
+           'at', case when copy and jsonb_typeof(overrides #> '{$veil,at}') = 'string' and (octet_length(overrides #>> '{$veil,at}') <= 40 or public._gallery_veil_jslen(overrides #>> '{$veil,at}') <= 40)
                       then overrides #> '{$veil,at}' end,
            'groupings', groupings))) end);
 end $$;
@@ -1170,6 +1174,7 @@ as $$
   -- past the server's bound is REFUSED (no row), never replaced by the live row (the review's F1).
   cross join lateral (
     select case when cp.copy is not null then cp.copy else base.j end as j,
+           cp.copy is not null as copied,
            coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
       from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
               from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
@@ -1182,8 +1187,9 @@ as $$
     ) as d
     offset 0
   ) proj
-  -- 211: the share's veil, applied here (NULL for an unmarked listing: served as before)
-  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false) as v offset 0) vl
+  -- 211: the share's veil, applied here (NULL for an unmarked listing: served as before); the freeze
+  -- date travels only with the frozen copy (R5)
+  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false, src.copied) as v offset 0) vl
   where s.public_slug = dossier_slug
     and s.is_public = true
     and not src.refused

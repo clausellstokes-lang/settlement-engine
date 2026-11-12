@@ -377,6 +377,43 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     }
   }, ROW_TIMEOUT_MS);
 
+  // ── R5 ────────────────────────────────────────────────────────────────────────────────────────
+  it('R5 (a, the review rows): a page that draws the LIVE town carries no freeze date; the frozen page keeps its own', async () => {
+    const at = '2026-11-01T00:00:00.000Z';
+    const town = { name: 'T', institutions: [{ id: 'h', name: 'House', desc: 'LIVE_AFTER_FREEZE' }] };
+    const frozen = { name: 'T', institutions: [{ id: 'h', name: 'House', desc: 'FROZEN_DESC' }] };
+    const out = {};
+    for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+      // (1) the party link of a listed snapshot share (the link serves live by 208's design)
+      const listed = await put(db, town, veil.writeShareVeil({}, [], { mode: 'snapshot', at, snapshot: frozen }));
+      const r1 = await readBoth(db, listed);
+      // (2) a share in snapshot mode whose copy is absent (the shape the writer left before R5 (b))
+      const nocopy = await put(db, town, { $veil: { v: 1, deltas: [], mode: 'snapshot', at } });
+      const r2 = await readBoth(db, nocopy);
+      // anchored: what each page draws
+      expect(has(r1.g.settlement, 'FROZEN_DESC') && has(r1.l.settlement, 'LIVE_AFTER_FREEZE'), where).toBe(true);
+      expect(has(r2.g.settlement, 'LIVE_AFTER_FREEZE'), where).toBe(true);
+      out[where] = { galleryWithCopy: r1.g.snapshotAt, linkOfListedSnapshot: r1.l.snapshotAt, galleryNoCopy: r2.g.snapshotAt,
+        linkMode: r1.l.galleryMode, noCopyMode: r2.g.galleryMode };
+    }
+    expect(out['211']).toEqual({ galleryWithCopy: at, linkOfListedSnapshot: null, galleryNoCopy: null, linkMode: 'snapshot', noCopyMode: 'snapshot' });
+    // and every label is the 210 page's
+    expect(out['211']).toEqual(out['210']);
+  }, ROW_TIMEOUT_MS);
+
+  it('R5 (b): a copy the writer drops for size does not keep the word "snapshot": the stored mode is live', () => {
+    const at = '2026-11-12T00:00:00.000Z';
+    const big = { name: 'T', pad: 'x'.repeat(1_100_000) };
+    const ov = veil.writeShareVeil({}, [], { mode: 'snapshot', at, snapshot: big });
+    expect('snapshot' in ov.$veil).toBe(false);
+    expect(ov.$veil.mode).toBe('live');
+    expect(veil.readShareMode(ov).mode).toBe('live');
+    // anchored: a copy within the bound keeps both
+    const ok = veil.writeShareVeil({}, [], { mode: 'snapshot', at, snapshot: { name: 'T' } });
+    expect(ok.$veil.mode).toBe('snapshot');
+    expect(ok.$veil.snapshot).toEqual({ name: 'T' });
+  });
+
   it('R3/R4 (the class): 400 fuzzed stored documents, copies and narrations to the edges of the range and hundreds deep, through all four reads at 211 and 210: PARITY', async () => {
     const r = rngOf(400);
     const breaches = []; const tally = { reads: 0, raised211: 0, raised210: 0, marked: 0, unmarked: 0, huge: 0, deep: 0 };

@@ -641,6 +641,8 @@ export default function ShareToGallery({
         <span style={{ flexBasis: '100%', fontSize: chromeFontSize(FS.xs, mobile), color: INK, opacity: 0.75 }}>
           Your settlement's event chronicle (event titles and summaries) is publicly
           visible on the gallery page. Remove from gallery to take it down. A town can be listed in the gallery and have an unlisted link at the same time.
+          {/* R5: the writer stored live because the frozen copy passed its bound (writeShareVeil) */}
+          {mode === 'snapshot' && share.mode === 'live' && ' This town is too large to freeze, so it is shared live: visitors see your latest changes.'}
         </span>
         {partyControl}
         {managePanel}
