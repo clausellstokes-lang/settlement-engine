@@ -97,37 +97,6 @@ export function realmMapPreview(ext = preferredImageExt('png')) {
   return `url('${REALM_MAP_BASE}.${ext}'), url('${REALM_MAP_PLATE}')`;
 }
 
-/**
- * The photograph's own geometry, so an overlay pin can sit ON the marker the
- * image already draws. The photograph prints every town's marker AND its name;
- * an overlay that guessed positions (the old `pinPos`) put a second dot and a
- * second label beside them, and Cnocby and Penshaw read twice.
- *
- * `size` is the image's pixel size (realm-cnocby.png). `markers` are the
- * centres of the drawn markers, as percentages of the WHOLE image, measured
- * from the image's own pixels (the brown fill's bounding box, 2026-11-12).
- * `printedNames` are the town names the image itself prints under its markers
- * (the five settlements of realm-cnocby.provenance.json). An overlay never
- * prints a second label for a name on this list.
- * @enforced-by tests/ui/landingRealmPins.test.jsx
- */
-export const REALM_MAP_GEOMETRY = Object.freeze({
-  size: Object.freeze({ width: 2280, height: 1126 }),
-  markers: Object.freeze({
-    Cnocby: Object.freeze({ x: 56.95, y: 44.36 }),
-    Penshaw: Object.freeze({ x: 75.29, y: 22.6 }),
-    Aryagrad: Object.freeze({ x: 66.01, y: 32.73 }),
-    Keshigordu: Object.freeze({ x: 77.04, y: 47.87 }),
-    'Skáloy': Object.freeze({ x: 64.14, y: 68.07 }),
-  }),
-  printedNames: Object.freeze(['Cnocby', 'Penshaw', 'Aryagrad', 'Keshigordu', 'Skáloy']),
-});
-
-/** Whether the photograph already prints this town's name. */
-export function realmImagePrintsName(name) {
-  return REALM_MAP_GEOMETRY.printedNames.includes(name);
-}
-
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
 // outside §03; it is NOT a second violet — it is the same violet token family.
@@ -513,13 +482,8 @@ export function RealmMapCard() {
           pointerEvents: 'none',
         }}>
           {pins.map((pin, i) => {
-            const at = markers[pin.name];
-            const pos = at ? { left: `${at.x}%`, top: `${at.y}%` } : fallbackPos[i];
+            const { pos, tagAnchor } = realmPinPlacement(markers[pin.name], fallbackPos[i]);
             const showLabel = !realmImagePrintsName(pin.name);
-            // A tag rides ABOVE the marker (the photograph prints the name below
-            // it); a marker in the image's right third anchors its tag leftward so
-            // the card's edge does not cut it.
-            const tagAnchor = at && at.x > 66 ? { right: -10 } : { left: 0, transform: 'translateX(-50%)' };
             return (
               <div key={pin.name} data-realm-pin={pin.name} style={{ position: 'absolute', ...pos, width: 0, height: 0 }}>
                 <span style={{
@@ -585,6 +549,52 @@ export function RealmMapCard() {
     </div>
   );
 }
+
+/**
+ * The photograph's own geometry, so an overlay pin can sit ON the marker the
+ * image already draws. The photograph prints every town's marker AND its name;
+ * an overlay that guessed positions (the old `pinPos`) put a second dot and a
+ * second label beside them, and Cnocby and Penshaw read twice.
+ *
+ * `size` is the image's pixel size (realm-cnocby.png). `markers` are the
+ * centres of the drawn markers, as percentages of the WHOLE image, measured
+ * from the image's own pixels (the brown fill's bounding box, 2026-11-12).
+ * `printedNames` are the town names the image itself prints under its markers
+ * (the five settlements of realm-cnocby.provenance.json). An overlay never
+ * prints a second label for a name on this list.
+ * @enforced-by tests/ui/landingRealmPins.test.jsx
+ */
+export const REALM_MAP_GEOMETRY = Object.freeze({
+  size: Object.freeze({ width: 2280, height: 1126 }),
+  markers: Object.freeze({
+    Cnocby: Object.freeze({ x: 56.95, y: 44.36 }),
+    Penshaw: Object.freeze({ x: 75.29, y: 22.6 }),
+    Aryagrad: Object.freeze({ x: 66.01, y: 32.73 }),
+    Keshigordu: Object.freeze({ x: 77.04, y: 47.87 }),
+    'Skáloy': Object.freeze({ x: 64.14, y: 68.07 }),
+  }),
+  printedNames: Object.freeze(['Cnocby', 'Penshaw', 'Aryagrad', 'Keshigordu', 'Skáloy']),
+});
+
+/** Whether the photograph already prints this town's name. */
+export function realmImagePrintsName(name) {
+  return REALM_MAP_GEOMETRY.printedNames.includes(name);
+}
+
+/**
+ * Where one pin sits in the cover layer, and which way its tag hangs. A tag rides
+ * ABOVE the marker (the photograph prints the name below it); a marker in the
+ * image's right third anchors its tag leftward so the card's edge does not cut it.
+ * A town with no measured marker keeps its old box position.
+ * @param {{ x: number, y: number } | undefined} at the measured marker, in % of the image
+ * @param {{ top: string, left: string } | undefined} fallback
+ */
+export function realmPinPlacement(at, fallback) {
+  if (!at) return { pos: fallback, tagAnchor: TAG_CENTRED };
+  return { pos: { left: `${at.x}%`, top: `${at.y}%` }, tagAnchor: at.x > 66 ? TAG_LEFTWARD : TAG_CENTRED };
+}
+const TAG_CENTRED = Object.freeze({ left: 0, transform: 'translateX(-50%)' });
+const TAG_LEFTWARD = Object.freeze({ right: -10 });
 
 // STRIP-1 (owner ruling, ODQ §725): the MapPlateCard — the landing page's frozen
 // settlement-map lens plates and their flip control — is REMOVED with the rest of
