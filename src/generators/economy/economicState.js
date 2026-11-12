@@ -820,14 +820,22 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeNormalized,
     _foodSec,
   );
+  const prosperity = deriveProsperityLabel(baseProsperity, config, institutions);
+  // COHERENCE-UPKEEP (ruling 6): the stores are laid by at the label's share, at the stores' writer,
+  // AFTER prosperity (which read the full-granary record above and reads no months). The writer's
+  // only draw is a label-keyed fork, so this second call draws the same crop fortune and moves no
+  // stream; every storage field (the months, the note, the resilience) follows the kept months.
+  const _keptFoodSec = generateFoodSecurity(tier, institutions, {
+    ...config, tradeRouteAccess: tradeRoute, _storesShare: boughtShare('stores', keepOf(prosperity)),
+  });
   return {
       tier: tier,
-      prosperity: deriveProsperityLabel(baseProsperity, config, institutions),
+      prosperity,
       situationDesc: deriveEconomicSituationDesc(
         config,
         tier,
         institutions,
-        _foodSec,
+        _keptFoodSec,
       ),
       incomeSources: incomeNormalized,
       primaryExports: primaryExports,
@@ -844,7 +852,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       tradeDependencies: tradeDependencies,
       institutionalServices: instServices,
       activeChains: activeChains,
-      foodSecurity: _foodSec,
+      foodSecurity: _keptFoodSec,
       economicComplexity: deriveEconomicComplexity(
         tier,
         incomeNormalized.length,
@@ -856,3 +864,4 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
 };
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
 import { buildPrimaryTradeLists, sayHowLittleGrain } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
+import { keepOf, boughtShare } from '../../domain/facts/keep.js';

@@ -146,7 +146,12 @@ export function generateFoodSecurity(tier, institutions, config) {
                     : (['thorp','hamlet','village'].includes(tier) ? 1.5 : 1.0);
   // Mill extends storage — flour lasts longer than grain
   // What the granary holds in a good year; an ACTIVE famine has been drawing on it (below).
-  const storageMonthsFull = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
+  // COHERENCE-UPKEEP (the chair's ruling 6 of 2026-11-12): what is laid by is bought, so the full
+  // granary keeps `config._storesShare` of its months — `boughtShare('stores', keepOf(prosperity))`,
+  // handed in by the economy's second call AFTER prosperity (economicState.js); 1 when absent. The
+  // first call (the one prosperity reads) lays by in full, and prosperity reads no months.
+  const storesShare = Number.isFinite(config._storesShare) ? config._storesShare : 1;
+  const storageMonthsFull = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * storesShare * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
