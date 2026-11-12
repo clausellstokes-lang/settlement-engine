@@ -614,3 +614,64 @@ Nothing. No register row was added, no test skipped, no pin loosened and no gold
 re-taken by its writer twice (the merge; F1's new leaf: producerIndexFiles 1325 -> 1326). The lighting census was
 re-taken by its ritual (87a14f413: files 3211 -> 3218). The mutation manifest gained one rationale row
 (chainPrintSites.walker), and its F8 text was corrected.
+
+## The fifth law: the whole suite, once, every red classed
+
+One `npx vitest run tests --maxWorkers=2` at **87a14f413**, with the ledger ref fetched first: **48 failing titles in
+37 of 3,218 files**; 38,682 passed; 252 skipped. After 87a14f413 the seat changed only docs, one test file
+(CENSUS-5b, below: its own file green, 14/14), the lighting baseline (its walker green) and the bundles (the last
+commit).
+
+**THE LINE'S KNOWN SET:**
+- landingFixtureFreshness ×2
+- newsHeadlineContract and newsVoiceContract
+- proseFamilyContract
+- the prose manifest's DRIFT arm
+
+**THE MERGE SEAT'S, named in the draft.** These are byte identities, digests and corpus figures over generated
+output, at the figures PART FOUR gives:
+- generatorGoldenMaster (501 rows)
+- espionageDormancyFence (driven hash 4c0fe1fe; F2 moves it again)
+- heraldKnowledgeDeskGolden (ca07dcdc; F2 again)
+- the prose manifest's four-seed arm
+- goldenViewModel (cure 9's one field)
+- generationForkCensus A1
+- dmLayerGoldenIsolation A7
+- nameHeldThroughAssembly A1
+- pipelinePinnedChoosers A1
+- pipelinePinnedMode A1, A2, A5
+- powerEconomyFreshness A4
+- rosterFinalUnderHeldRoster A1
+- worldFactRederive A7
+- x46NpcBand
+- institutionBudgetPromise
+- editWorldFactResources A2, A6
+- editCorpusRatchet A4, A7, A8
+- mergeLadderHeldKeys A2, A5, A6
+- hookThemeDraws (2149 against 2157, unchanged)
+- institutionTable (1847 against 1849, unchanged)
+- siteCoherenceRatchet C1
+- townCartographyCalibration W2
+- undercitySewerDerivation
+- intentAtlasSoakDistiller
+- statecraftExposureBand (one title, 16 and 20 as before)
+
+**THE INSTRUMENT SEEDS** (PART FOUR):
+- observedShapeReaders and writerReach (fail at load, the seed osr-tier-14)
+- proseTasteInterested ×3 and proseWaveGate (d) ×3 (the taste towns)
+- proseComposed A13
+
+**THE EDGE BUNDLES, CURED BY THE LAST COMMIT:** engineBundleReplay ×3, aiGroundingBundle.freshness, and
+edgeSharedBundleReproducibility (aiGrounding, engine). They are stale against this seat's `src/` and re-emitted alone
+as the last commit.
+
+**YOURS TO CURE: none.** No title is new against PART FOUR's classes, except the bundle rows the last commit cures.
+The preset-lighting witness is green.
+
+## Added by the chair during the seat: CENSUS-5b's complement rule (fd10c7dc6, one commit)
+
+`tests/generators/census5bOffCensusDeclarations.test.js :: twinAnswersOnItsKey`: a twin is the complement of its
+original on the ONE atom the pair is keyed on, and on no other. The plant (keyed on the walls, both naming the
+garrison) was RED under the old rule and is GREEN here. Existing pairs the narrower rule asks a declaration of: **0 of
+21**. Nothing was banked. The upkeep lane's four lines meet the rule at their merge. The lighting census was re-taken
+after it (326e711b0).
