@@ -54,6 +54,7 @@ import { INSTITUTION_KIND_PATTERNS } from '../facts/institutions.js';
  * @property {boolean} hasTollGate a named gate a toll is taken at: a gate row, or town or city walls (the
  *   narrower fact the Gate Tolls line reads; `hasGate` also counts other stone walls, which keep gates no
  *   toll is named for)
+ * @property {boolean} hasPrison somewhere to hold the guilty stands: a prison, the stocks, a gaol or a jail
  * @property {boolean} hasHospital a real hospital stands
  * @property {boolean} hasHealer a healer, an infirmary or a monastic house tends the sick
  * @property {string|null} healerName the roster name of the healer, infirmary or monastic house, or null
@@ -91,6 +92,13 @@ const GATE_RE = /\bgates?\b/i;
  * move here, once, and the lines read the home.
  */
 const COURTHOUSE_RE = /courthouse|multiple court|city hall/i;
+/**
+ * A PRISON STANDS (COHERENCE-AGREE-4, 2026-11-12, the chair's ruling on STOP 3): somewhere to hold the guilty — a
+ * prison of any size or the stocks (the catalogue's "Small prison/stocks", "Large prison", "Massive prison"), or a
+ * gaol or a jail by those names. The words `priorityHelpers.js :: hasPrison` reads off the raw roster, read here
+ * off the live one, so the vocabulary's `prison` atom has a home.
+ */
+const PRISON_RE = /prison|stocks|\bgaol|\bjail/i;
 const TOLL_GATE_RE = /gate|town wall|city wall/i;
 
 /**
@@ -142,6 +150,7 @@ export function defenseFactsOf(settlement) {
     defenceNames: Object.freeze(defenceNames),
     hasCourt: roster.some((n) => COURT_RE.test(n)),
     hasCourthouse: roster.some((n) => COURTHOUSE_RE.test(n)),
+    hasPrison: roster.some((n) => PRISON_RE.test(n)),
     hasTollGate: roster.some((n) => TOLL_GATE_RE.test(n)),
     hasHospital: roster.some((n) => HOSPITAL_RE.test(n)),
     hasHealer: healerName !== null,

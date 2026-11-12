@@ -204,3 +204,36 @@ describe('item 1 (a): the theocratic pair declares the church it names', () => {
     expect(resolveSibling(key, PROSPERITY_LINE_SIBLINGS, opts({ market: false, sacredHouse: true }))).toBe(twin.text);
   });
 });
+
+/**
+ * ITEM 2 (COHERENCE-AGREE-4, the chair's ruling on the third seat's STOP 3): the vocabulary gains `court` and
+ * `prison`, each the defence home's own atom (`defence.js :: court`, `prison`), so a line that names a court and
+ * no prison can declare both. THE PIN THAT NO ANSWER MOVES: the home's prison, read off the live roster, answers
+ * what the safety writer's own list (`priorityHelpers.js :: hasPrison`) answers on every roster.
+ */
+describe('item 2: the court and the prison are the defence home\'s atoms', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('both are declarable presence atoms homed on the defence record, and read it', async () => {
+    const { assertDeclarable, atomHolds, FACT_DIMENSIONS } = await import('../../src/domain/facts/factVocabulary.js');
+    for (const atom of ['court', 'prison']) {
+      expect(assertDeclarable(atom).dimension).toBe(atom);
+      expect(FACT_DIMENSIONS[atom].home).toBe('defence');
+    }
+    expect(atomHolds('court', { defence: { court: true, prison: false } })).toBe(true);
+    expect(atomHolds('prison', { defence: { court: true, prison: false } })).toBe(false);
+  });
+  test('the home\'s prison answers what the safety writer\'s list answers, on every roster', async () => {
+    const { defenseFactsOf } = await import('../../src/domain/defense/defenseFacts.js');
+    const { defenceOf } = await import('../../src/domain/facts/defence.js');
+    const seeds = ['village', 'town', 'city', 'metropolis'].flatMap((tier) => Array.from({ length: 8 }, (_, i) => `agree-${tier}-${i}`));
+    let held = 0;
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const home = defenseFactsOf(settlement);
+      expect(home.hasPrison, `${seed}: the prison`).toBe(getInstFlags({}, settlement.institutions).inst.hasPrison);
+      expect(defenceOf(settlement).prison).toBe(home.hasPrison);
+      if (home.hasPrison) held += 1;
+    }), 'the prison has one answer');
+    expect(held).toBeGreaterThan(0);
+  });
+});

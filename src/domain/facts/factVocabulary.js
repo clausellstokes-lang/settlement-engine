@@ -249,6 +249,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   garrison: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.garrison) }),
   hospital: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.hospital) }),
   healer: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.healer) }),
+  // COHERENCE-AGREE-4 (2026-11-12, the chair's ruling on STOP 3): a court sits, and somewhere holds the guilty —
+  // two facts, each the defence home's own atom (`defence.js :: court`, `prison`), so a line naming one
+  // and not the other declares both.
+  court: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.court) }),
+  prison: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.prison) }),
   // the rulings §2's delegated getters CENSUS-1c owns (R-E): `soldiers` = a garrison or a hired
   // company (the twin table's and `forceWordsOf`'s meaning); `commander` = a garrison stands, so
   // someone commands it (`hasCommander`); `mercenary` = a hired company.
