@@ -470,3 +470,24 @@ describe('P2\'s rule: a refilled slot arrives as live as the refused winner woul
     expect(city.config.nearbyResourcesDepleted).not.toContain('managed_forest');
   });
 });
+
+/**
+ * F5 (b) (COHERENCE-AGREE-6, built; committed by COHERENCE-AGREE-7, as the chair ruled P3): THE REFILL never fills a
+ * slot with a member the town's terrain refuses. Each seed below is a crossroads holder off a crossroads whose refused slot the refill gave "Mountain Pass" off the mountains at
+ * 8866a0ddd (REVIEW-AGREE-2 F5: 46 of the reviewer's 54); it now holds a full roll with no pass. Over the lane's 4,141
+ * births the refill placed 269 passes off the mountains; it now places none.
+ */
+describe('F5 (b): a refilled slot never takes a member the terrain refuses', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('refilled holders off the mountains hold no mountain pass, and keep their roll\'s size', () => {
+    const seeds = ['r2r-thorp-10', 'r2r-hamlet-22', 'agree-village-40', 'agree-town-0', 'agree-city-28', 'r2r-metropolis-2'];
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const roster = settlement.config.nearbyResources;
+      expect(settlement.config.terrainType, seed).not.toBe('mountain');
+      expect(roster.length, `anchored: ${seed} holds a roll`).toBeGreaterThan(2);
+      // anchored: the roster was just held to carry a full roll, so it is the live roster
+      expect(roster, seed).not.toContain('defended_pass');
+    }), 'a refilled slot takes a pass off the mountains');
+  });
+});

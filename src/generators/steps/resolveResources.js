@@ -72,7 +72,7 @@ const RARE_RESOURCES = { 'ancient_ruins': 0.15, 'magical_node': 0.15 };
 
 registerStep('resolveResources', {
   deps: ['buildGenerationContext'],
-  reads: ['generationContext', 'resolvedTerrain', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['generationContext', 'resolvedTerrain', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [
     'nearbyResources',
     'nearbyResourcesNative',
@@ -89,6 +89,7 @@ registerStep('resolveResources', {
     tier,
     tradeRoute,
     resolvedTerrain,
+    terrainType,
     effectiveConfig,
     generationContext,
   } = ctx;
@@ -201,7 +202,16 @@ registerStep('resolveResources', {
     };
     const held = new Set(nearbyResources);
     const magicOn = generationContext.worldLaw.magicFunctions();
-    const refillable = (key) => !held.has(key) && admitsAccess(key) && RARE_RESOURCES[key] === undefined
+    // COHERENCE-AGREE-6, committed by COHERENCE-AGREE-7 (REVIEW-AGREE-2 F5 (b), P3): the refill never fills a slot with
+    // a member the town's terrain refuses (RESOURCE_DATA[key].requiresTerrain: the mountain pass on the mountains). The
+    // pool above does not read the key. The terrain is the RECORD's (`resolveConfig`'s `terrainType`): on a route the
+    // terrain is derived from (terrain left on 'auto', a "Mountain Pass" route) the step's own `terrainOverride` is
+    // null while the town stands on the mountains.
+    const admitsTerrain = (key) => {
+      const terrains = /** @type {{ requiresTerrain?: string[] } | undefined} */ (RESOURCE_DATA[key])?.requiresTerrain;
+      return !Array.isArray(terrains) || terrains.includes(String(terrainType));
+    };
+    const refillable = (key) => !held.has(key) && admitsAccess(key) && admitsTerrain(key) && RARE_RESOURCES[key] === undefined
       && (magicOn || key !== 'magical_node');
     const categoryOf = (key) => (RESOURCE_DATA[key]?.category) || 'land';
     const slots = nearbyResources.map((key) => {
