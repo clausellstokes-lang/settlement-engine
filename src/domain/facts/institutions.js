@@ -10,6 +10,7 @@
  *   healer    a healer or an infirmary
  *   monastery a monastery or a friary
  *   mill · smith · bathhouse · docks · quarry · mine · tavern · school · temple · granary
+ *   bank      a money changer, a bank or a counting house (COHERENCE-PRESUME, 2026-11-11)
  * A row naming ACCESS to a neighbour's facility (`ACCESS_ONLY`) is none of them (CENSUS-1c unit 6).
  * `defense/defenseFacts.js` reads hospital and healer through this table (its `hasHealer` is the
  * healer OR monastery union it always meant, so its answer does not move).
@@ -39,6 +40,9 @@ export const INSTITUTION_KIND_PATTERNS = Object.freeze({
   school: /\bschool|\bacademy|\bcollege|\buniversity/i,
   temple: /\btemple|\bchurch|\bcathedral|\bshrine|\bchapel|\babbey/i,
   granary: /\bgranar/i,
+  // COHERENCE-PRESUME (the chair's ruling of 2026-11-11, additions only): a money changer, a bank or a
+  // counting house — the houses a line naming coin-changing or banking presumes
+  bank: /\bbank(?:s|ing|ers?)?\b|\bmoney.?changers?\b|\bcounting.?houses?\b/i,
 });
 
 /** The kinds a line may declare. @type {ReadonlyArray<string>} */

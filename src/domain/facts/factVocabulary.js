@@ -170,7 +170,7 @@ export const MIGRATION_WORDS = Object.freeze(['influx', 'exodus']);
 /** The institution kinds (`facts/institutions.js :: INSTITUTION_KINDS`). */
 export const INSTITUTION_WORDS = Object.freeze([
   'hospital', 'healer', 'monastery', 'mill', 'smith', 'bathhouse', 'docks', 'quarry', 'mine',
-  'tavern', 'school', 'temple', 'granary',
+  'tavern', 'school', 'temple', 'granary', 'bank',
 ]);
 
 /** The terrain classes (`steps/resolveConfig.js`). */

@@ -647,8 +647,8 @@ const PAIRS = [
     "An established herbalist's shop, well stocked, with a back room for private consultation. On offer are herbalism kit supplies, common antidotes, medicinal herbs, and simple surgical dressings, and some apothecaries here double as chirurgeons.",
   ],
   [
-    "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm the town militias.",
-    "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit the militias.",
+    "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.",
+    "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.",
   ],
   [
     "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's building needs. The crew is permanent.",
@@ -1941,7 +1941,6 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "River barges run in fleet, some to a schedule and some to order. Bulk freight, passengers, and army supply all move on them through the river network.": Object.freeze({ needs: Object.freeze(["river"]) }), // town|Economy|Barge and river transport company#1
   "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced.": Object.freeze({ needs: Object.freeze(["coast"]) }), // town|Economy|Harbour master's office#1
   "The modest end of the news trade. A paid register of who came into the city and what they reported, kept openly and taxed like any other counter.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Economy|Listening post#1
-  "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm the town militias.": Object.freeze({ needs: Object.freeze(["militia"]) }), // town|Crafts|Bowyers & fletchers (guild)#0
   "A full tannery of many vats and a guild-trained workforce, turning out fine leather for shoes, armour, and saddlery.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Tanner (established)#0
   "Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Tanner (established)#1
   "The town's bread. Prices fixed by the guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#0

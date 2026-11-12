@@ -231,8 +231,8 @@ export const STRESS_DESCS = {
       `${r} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.`, needs: ['market'] },
     r =>
       `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`,
-    r =>
-      `The finest building in ${r} is new, stone-built, and belongs to nobody local: a counting house, its brass plate polished daily by a clerk who arrived with the ledgers. It is what everything else in town is working to pay for.`,
+    { text: r =>
+      `The finest building in ${r} is new, stone-built, and belongs to nobody local: a counting house, its brass plate polished daily by a clerk who arrived with the ledgers. It is what everything else in town is working to pay for.`, needs: ['institution: bank'] }, // COHERENCE-PRESUME: it printed in towns with no counting house
     { text: r =>
       `${r} holds a market day that has quietly become a collection day: the stalls pay their pitch fees to a factor before they sell a thing, and the factor's book has more names in it than the market has stalls.`, needs: ['market'] },
   ],

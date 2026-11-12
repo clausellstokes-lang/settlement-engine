@@ -208,7 +208,7 @@ const resolveTimelineHook = (drawnRow, eventTemplate, remaining, taken, printed,
 const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null, hookFacts = null) => {
   // Template variable substitutions (can be overridden by extraTokens)
   const defaultTokens = {
-    '{quarter}': pick(['the market quarter', 'the residential district', 'the waterfront', 'the temple district']),
+    '{quarter}': pick(['the merchants\' quarter', 'the residential district', 'the waterfront', 'the temple district']),
     '{building_type}': pick(['wooden buildings', 'warehouses', 'housing', 'commercial buildings']),
     '{percent}': randInt(15, 60),
     '{duration}': randInt(1, 5),
@@ -766,7 +766,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
         'After years of disputed grain prices, the major farming families and the merchant guilds negotiated a formal compact regulating grain sale and storage. It held for a generation.',
       lastingEffects: [
         'Grain price regulation persists in modified form',
-        "Compact signatories' families still hold preferential market positions",
+        "Compact signatories' families still hold first call on the grain sales",
       ],
       plotHooks: [
         'A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable',

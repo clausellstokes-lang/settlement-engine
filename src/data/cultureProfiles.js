@@ -212,7 +212,7 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'Mounted patrols and household troops reinforce ward-based watches.', needs: ['watch'] },
     ],
     socialTexture: [
-      { text: 'Neighborhood, household, legal, charitable, and commercial obligations intersect in markets and courtyards.', needs: ['market'] },
+      'Neighborhood, household, legal, charitable, and commercial obligations intersect in streets and courtyards.',
       'Hospitality, reputation, contract, and access to mediation are practical forms of social capital.',
     ],
     architecturalDetails: [
@@ -330,7 +330,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Rice or millet, wheat foods, soy or pulse products, vegetables, tea, fish, and preserved condiments vary by ecology.',
-      { text: 'Markets, shared waterworks, fermentation, and intensive garden production structure urban food supply.', needs: ['market'] },
+      'Shared waterworks, fermentation, and intensive garden production structure urban food supply.',
     ],
     sacredLife: [
       'Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center.',
@@ -373,7 +373,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Maize, beans, squash, chile, tomatoes, greens, cacao, and locally available fish or game form the staple pattern.',
-      { text: 'Intensive plots, terraces, raised fields, and market redistribution support dense populations.', needs: ['population: ≥ middling'] },
+      { text: 'Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.', needs: ['population: ≥ middling'] },
     ],
     sacredLife: [
       { text: 'Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.', needs: ['institution: temple'] },
@@ -384,7 +384,7 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'Ward levies reinforce trained warrior societies and palace guards.', needs: ['militia', 'guardPresence'] },
     ],
     socialTexture: [
-      { text: 'Ward membership, craft specialization, market standing, tribute duty, and ritual office structure public life.', needs: ['market'] },
+      'Ward membership, craft specialization, craft standing, tribute duty, and ritual office structure public life.',
       'Civic labor and festival obligations make the settlement a visibly collective project.',
     ],
     architecturalDetails: [
@@ -416,7 +416,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.',
-      { text: 'Irrigation, tanks, market kitchens, preservation, and ritual food rules shape supply and consumption.', needs: ['market'] },
+      'Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.',
     ],
     sacredLife: [
       { text: 'Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.', needs: ['institution: temple'] },
@@ -428,7 +428,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     socialTexture: [
       'Occupation, neighborhood, household, guild, patronage, and religious affiliation create multiple routes to belonging.',
-      { text: 'Water access, market standing, ritual service, and credit relationships are everyday political facts.', needs: ['market'] },
+      'Water access, trade standing, ritual service, and credit relationships are everyday political facts.',
     ],
     architecturalDetails: [
       { text: 'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines', needs: ['market', 'institution: temple'] },
