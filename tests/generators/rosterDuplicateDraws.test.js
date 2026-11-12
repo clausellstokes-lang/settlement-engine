@@ -43,7 +43,10 @@ describe('REVIEW-INTAKE-4 — no roster carries one secret or one goal twice', (
     // 2026-11-07 PEOPLE-1 CAST: 101 thorps and hamlets of the 1,000 carry ONE card (a roster with one face-bearing
     // house and no `other` power to mint beside it; the envelope thorp 0–5), measured at the lane's tip; 899 carry
     // two or more (the 952 read at 5f455dcb9 counted the population-step mints of powers the record did not carry).
-    expect(rosters).toBe(899);
+    // RE-MEASURED 2026-11-12, COHERENCE-POWERS cure (i) (the chair's ruling of 2026-11-11, "ONE PERSON, ONE FACE"): where a
+    // house of the town leads, the seat's house bears no face and no seat is minted beside it, so 65 more births (thorps and
+    // hamlets whose one house now leads) carry ONE card: 834 carry two or more, measured by this file at the lane's tip.
+    expect(rosters).toBe(834);
   });
 
   it('no roster repeats a secret', () => {
