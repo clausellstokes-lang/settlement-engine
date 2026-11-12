@@ -15,6 +15,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { analyze, chroniclePicksFor } from '../../scripts/generate-landing-fixture.mjs';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** What each landing chip may honestly sit over, by the event's impactKind. */
 const CHIP_MAY_SIT_OVER = Object.freeze({
@@ -31,16 +32,14 @@ const SEEDS = ['lf-033', 'lf-001', 'lf-002', 'lf-003', 'lf-004'];
 
 describe('landing chronicle: each tag agrees with its own event', () => {
   it('no chronicle tag contradicts its event\'s category, on every seed', () => {
-    const contradictions = [];
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const picks = chroniclePicksFor(analyze(seed).news);
       expect(picks.length, `${seed}: anti-vacuity`).toBeGreaterThan(0);
-      for (const p of picks) {
-        if (!(CHIP_MAY_SIT_OVER[p.kind]?.(String(p.entry.impactKind ?? '')) ?? false)) {
-          contradictions.push(`${seed}: ${p.kind} over ${p.entry.impactKind}: ${p.entry.summary || p.entry.headline}`);
-        }
-      }
-    }
-    expect(contradictions).toEqual([]);
+      const contradictions = picks
+        .filter((p) => !(CHIP_MAY_SIT_OVER[p.kind]?.(String(p.entry.impactKind ?? '')) ?? false))
+        .map((p) => `${p.kind} over ${p.entry.impactKind}: ${p.entry.summary || p.entry.headline}`);
+      expect(contradictions).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'every chronicle tag agrees with its own event');
   }, 300_000);
 });

@@ -15,6 +15,7 @@ import {
   NPC_AIM_FRAMES, NPC_AIMS, TARGETED_NPC_DEEDS, UNTARGETED_NPC_DEEDS,
 } from '../../src/domain/worldPulse/heraldDeeds.js';
 import { PHRASES } from '../../scripts/lib/style-law-scan.mjs';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const HERALD = '../../src/domain/worldPulse/heraldDeeds.js';
 const FIXTURE = '../../scripts/generate-landing-fixture.mjs';
@@ -60,18 +61,18 @@ describe('NPC_AIM_FRAMES: five frames, each read with every deed and every aim',
 describe('on a real run, every deed line\'s body names its own deed', () => {
   it('lf-033 and lf-003: no deed headline sits over a body about something else', async () => {
     const { analyze } = await import(FIXTURE);
-    const apart = [];
-    for (const seed of ['lf-033', 'lf-003']) {
+    const failures = collectSeedFailures(['lf-033', 'lf-003'], (seed) => {
       const lines = analyze(seed).news.filter((e) => e?.kind === 'applied'
         && /^npc_/.test(String(e.impactKind)) && UNTARGETED_NPC_DEEDS[String(e.impactKind).slice(4)]);
       expect(lines.length, `${seed}: anti-vacuity`).toBeGreaterThan(10);
-      for (const e of lines) {
+      const apart = lines.filter((e) => {
         const family = String(e.impactKind).slice(4);
         const own = [UNTARGETED_NPC_DEEDS[family].noun, TARGETED_NPC_DEEDS[family]?.noun('').trim()].filter(Boolean);
-        if (!own.some((noun) => String(e.summary).toLowerCase().includes(noun.toLowerCase()))) apart.push(`${e.headline} / ${e.summary}`);
-      }
-    }
-    expect(apart).toEqual([]);
+        return !own.some((noun) => String(e.summary).toLowerCase().includes(noun.toLowerCase()));
+      }).map((e) => `${e.headline} / ${e.summary}`);
+      expect(apart).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'every deed line\'s body names its own deed');
   }, 240_000);
 });
 
