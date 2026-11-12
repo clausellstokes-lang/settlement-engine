@@ -22,6 +22,7 @@ import { generateAvailableServices } from '../../src/generators/servicesGenerato
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { deriveMagicProfile, magicAvailabilityBands } from '../../src/domain/magicProfile.js';
+import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SEEDS = ['agree-village-28', 'agree-village-30', 'agree-village-40', 'agree-village-43', 'agree-village-45'];
@@ -143,5 +144,40 @@ describe('magic is as available as the place can buy', () => {
   test('a pervasive world does not move', () => {
     const s = born('agree-village-0');
     expect(readAs(s, 'Struggling', 'pervasive')).toBe(readAs(s, 'Wealthy', 'pervasive'));
+  });
+});
+
+/**
+ * STORES (ruling 6): what a place lays by is what it can buy, at the stores' writer, after
+ * prosperity: the full granary keeps `boughtShare('stores', keep)` of its months, the storage
+ * note and the resilience follow the kept months, and the band does not move.
+ */
+describe('stores are what the place can lay by', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** @param {any} s @param {number} share */
+  const storesAt = (s, share) => {
+    const prev = setActiveRng(createPRNG('upkeep:stores'));
+    try {
+      return generateFoodSecurity(s.tier, s.institutions, { ...s.config, tradeRouteAccess: s.config.tradeRouteAccess, _storesShare: share });
+    } finally { clearActiveRng(prev); }
+  };
+
+  test('RED-FIRST agree-town-0: at a Struggling share the writer lays by fewer months, its note and resilience follow, its band holds', () => {
+    const s = born('agree-town-0');
+    const full = storesAt(s, 1);
+    const kept = storesAt(s, 0.82);
+    expect(full.storageMonths, 'anchored: the town lays something by').toBeGreaterThan(1);
+    expect(kept.storageMonths).toBeLessThan(full.storageMonths);
+    expect(kept.foodRecord.storageMonths).toBe(kept.storageMonths);
+    expect(kept.resilienceScore).toBeLessThanOrEqual(full.resilienceScore);
+    expect(kept.label).toBe(full.label);
+    if (kept.storageMonths >= 4) expect(kept.storageNote).toContain(String(kept.storageMonths));
+  });
+
+  test('the born record lays by at its own label\'s share (agree-town-0, Struggling, below its full granary)', () => {
+    const s = born('agree-town-0');
+    expect(s.economicState.prosperity).toBe('Struggling');
+    const fs = s.economicState.foodSecurity;
+    expect(fs.foodRecord.storageMonths).toBe(fs.storageMonths);
   });
 });
