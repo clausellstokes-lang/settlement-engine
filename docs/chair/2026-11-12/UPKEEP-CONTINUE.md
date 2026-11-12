@@ -73,3 +73,14 @@ THE CHAIN MAY MOVE (readiness → public legitimacy → faction power → the pe
 A NOTE FOR THE HAND-BACK, not a task: another lane changes who leads a town by the weight of its house. Say whether anything this lane moves is read by `src/generators/people/castPowers.js` or `representatives.js`. The merge seat and the reviewer will want it.
 
 Do (a)–(g) after item 2 (the page's crisis twin) and before the merge of AGREE's fixed tip.
+
+## THE CHAIR'S RULING ON THE PARKED SIX (received after the third seat's hand-back at 3c106aef3)
+
+Do none of these until AGREE's final tip is merged; then do them in the one pass that re-takes everything.
+
+- **P1 (yours):** re-key each gate fixture (`defenseEconomicGate.test.js`, `defenseWordsFindings.test.js`) by identity to the LABEL, Struggling against Prosperous over the same buildings, red first; each pin keeps its claim.
+- **P5 (yours):** run `npm run gen:dossier-prose` and restate 165 -> 169 at its four places in `dossierStateProseProjection.contract.test.js`, in one commit.
+- **P2, P3, P4 (the merge seat's, at this lane's point, on the merged tree):** name each in the draft record with its cause and the tip's values. P3 (`captureBirthScale` floor): re-measured there, and a reading under 360 is a STOP.
+- **P6, the rule as made:** a twin is the complement of its original on the atom the pair is keyed on, and on no other; an atom both lines name, both declare. AGREE's seat changes the walker. After the merge of its final tip, declare `garrison` and `mercenary` on the four lines (the garrison purse line, its twin, its crisis line, the mercenary lead). No register row.
+
+Then wait: the chair names AGREE's final tip; merge it, re-take everything, and an independent reviewer reads the lane.
