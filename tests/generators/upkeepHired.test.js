@@ -23,6 +23,7 @@ import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { deriveMagicProfile, magicAvailabilityBands } from '../../src/domain/magicProfile.js';
 import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
+import { SAFETY_LINE_SIBLINGS } from '../../src/generators/safetyProfile.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SEEDS = ['agree-village-28', 'agree-village-30', 'agree-village-40', 'agree-village-43', 'agree-village-45'];
@@ -179,5 +180,35 @@ describe('stores are what the place can lay by', () => {
     expect(s.economicState.prosperity).toBe('Struggling');
     const fs = s.economicState.foodSecurity;
     expect(fs.foodRecord.storageMonths).toBe(fs.storageMonths);
+  });
+});
+
+/**
+ * THE PAGE (ruling 7): the hired force's lines in the guard assessment say what the place can pay,
+ * declared in SAFETY_LINE_SIBLINGS by the `mercenary` and `prosperity` atoms, each with its twin
+ * (today's line). Found here by their declared atoms, never by a literal sentence.
+ */
+describe('the guard assessment says what the place can pay for its hired force', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** The declared originals whose needs name the prosperity atom. */
+  const upkeepLines = () => Object.values(SAFETY_LINE_SIBLINGS)
+    .map((set) => set[0])
+    .filter((line) => line.needs.some((atom) => atom.startsWith('prosperity:')));
+
+  test('RED-FIRST: the hired lines are declared, each with its twin, by the prosperity atom', () => {
+    const lines = upkeepLines();
+    expect(lines.length).toBeGreaterThanOrEqual(3);
+    for (const line of lines) {
+      const set = Object.values(SAFETY_LINE_SIBLINGS).find((x) => x[0] === line);
+      expect(set.length, `${line.text} carries its twin`).toBe(2);
+    }
+  });
+
+  test('RED-FIRST agree-village-40 (Poor, a charter hall and no standing guard): the guard line is the purse-bound charter line', () => {
+    const s = born('agree-village-40');
+    expect(s.economicState.prosperity).toBe('Poor');
+    const charter = upkeepLines().filter((line) => !line.needs.includes('mercenary'));
+    expect(charter.length, 'anchored: the charter line is declared').toBe(1);
+    expect(s.economicState.safetyProfile.guardEffectivenessDesc).toContain(charter[0].text);
   });
 });
