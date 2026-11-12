@@ -178,6 +178,15 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(note('Resource Import'))).toContain('The viability notes an import a live local resource yields.');
     expect(details(note('Provisioning at Scale'))).toEqual([]);
   });
+  test('F2 (COHERENCE-AGREE-6): a good only refused chains make, on the export list or produced locally', () => {
+    const chains = [{ status: 'impaired', outputs: ['Quality tools and weapons', 'Charcoal'] }, { status: 'running', resourceInputCondition: 'available', outputs: ['Charcoal'] }];
+    const lists = (primaryExports, localProduction) => details(record({ economicState: { activeChains: chains, primaryExports, localProduction } }));
+    expect(lists(['Quality tools and weapons'], [])).toContain('A trade list carries a good only a refused chain makes.');
+    expect(lists(['Quality tools and weapons (naval route only)'], [])).toContain('A trade list carries a good only a refused chain makes.');
+    expect(lists([], ['quality tools and weapons'])).toContain('A trade list carries a good only a refused chain makes.');
+    // twins: a good a yielding chain also makes, and a good no chain makes
+    expect(lists(['Charcoal (transit)'], ['Salt'])).toEqual([]);
+  });
   test('Part B (i): "no established food chains" beside a roster that works its own land', () => {
     const said = (institutions) => details({ ...record({ institutions, economicState: { foodSecurity: { diversityNote: 'no established food chains', foodRecord: { grownPct: 90 } } } }), tier: 'village' });
     expect(said([{ name: 'Farmland' }, { name: 'Common grazing land' }])).toContain('The food record says no food chains beside a roster that works its own land.');
@@ -249,6 +258,8 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-village-19', tier: 'village' }, { seed: 'agree-town-1', tier: 'town' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
+  // F2 (REVIEW-AGREE-2, COHERENCE-AGREE-6): a good only refused chains make, sold or produced locally
+  { seed: 'r2read-city-4', tier: 'city' }, { seed: 'r2r-city-42', tier: 'city' }, { seed: 'r2r-city-6', tier: 'city' }, { seed: 'agree-village-32', tier: 'village' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
