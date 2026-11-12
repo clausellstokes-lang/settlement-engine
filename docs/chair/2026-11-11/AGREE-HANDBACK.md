@@ -248,3 +248,84 @@ rvwfam-city-62: defence Defensible -> Lightly Defended
 - The goods catalogue keeps the old spelling as an alias beside the new one, because saved records carry it and subsumption re-runs over their lists.
 - Black Crag's quoted dossier label is re-keyed by identity; the card's promise is unchanged.
 - The two fixtures that quote the old label are untouched and green (`readerValidationOnPage.births.json` is read stored; `goods-matcher-identity-corpus.json` is an input corpus).
+
+## STOP 3 (point 43): where it stands — THE SEAT HANDS BACK BY FILE HERE (context near its limit)
+
+**(b) DONE — e69dc5d5f merges `origin/lane/integration-2026-11-07` at e883780bb into the lane, theirs into ours.**
+- holderTable keeps the lane's symbol cite.
+- The wiring census was re-taken by its writer.
+- The lighting census and the edge bundles were taken from the line; each is re-taken through its own door below.
+- After the merge: typecheck:ratchet 167/167 at exit 0; domain-strict 1113 at exit 0.
+
+**(c) the presumed-things walker — b72d27005.**
+- The nine rows marked "other-lane" that are this lane's cures left through the register (arm 2: 7; arm 1: 2). Both stale-row arms are green.
+- STILL RED, arm 1 ("every source literal that names a thing declares it, or has its row"): five literals of this seat, open for the next seat, which must DECLARE them, never bank them:
+  - `prosperity.js` — the theocratic market twin names the church (`temple`);
+  - `generationCoherence.js` — three receipt messages that name what they test (mercenary; market twice);
+  - `safetyProfile.js` — F5's walls-and-no-gate twin, a template over the force noun, which names the walls.
+
+**(c) `node scripts/census/pool-dominance.mjs` — exit 1.** These rows read above their ceilings on the merged tree; per the chair's ruling NONE is re-banked by this seat:
+```
+ledger:ARRIVAL_SENSES.bread.dominant: top1 0.4286 > ceiling 0.4091
+ledger:ARRIVAL_SENSES.faith.dominant: top1 0.6000 > ceiling 0.5676
+ledger:ARRIVAL_SENSES.kilns.dominant: top1 0.5000 > ceiling 0.4286
+ledger:ARRIVAL_SENSES.market.lines: top1 0.5000 > ceiling 0.4
+ledger:ARRIVAL_SENSES.tanners.dominant: top1 0.5000 > ceiling 0.4
+ledger:ARRIVAL_TENSIONS.unsafe: top1 0.5294 > ceiling 0.5
+ledger:FOODWAYS.FRAMES.more: top1 0.6000 > ceiling 0.5
+ledger:FOODWAYS.FRAMES.one: top1 0.5280 > ceiling 0.5129
+ledger:FOODWAYS.FRAMES.two: top1 0.5484 > ceiling 0.5455
+ledger:FOODWAYS.SOURCE_PHRASES.fish: top1 0.4020 > ceiling 0.3726
+ledger:POLITICAL_FLAVOR.catastrophic: top1 0.1557 > ceiling 0.1548
+ledger:conflicts:HOOKS: top5 0.2043 > ceiling 0.1973
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:crime_wave: top1 0.3389 > ceiling 0.3389
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:disputed_land: top1 0.5676 > ceiling 0.5653
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:generational_divide: top1 0.5556 > ceiling 0.5439
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy: top1 0.7834 > ceiling 0.7821
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:outside_debt: top1 0.5701 > ceiling 0.562
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:popular_uprising: top1 0.5733 > ceiling 0.5642
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction: top1 0.9126 > ceiling 0.9118
+ledger:institutionDescVariants:city|Crafts|Specialized metalworkers: top1 0.4074 > ceiling 0.4025
+ledger:institutionDescVariants:city|Criminal|Underground network: top1 0.4667 > ceiling 0.4375
+ledger:institutionDescVariants:metropolis|Crafts|Bowyers & fletchers (guild): top1 0.3611 > ceiling 0.3514
+ledger:institutionDescVariants:town|Crafts|Bakers (5-15): top1 0.4091 > ceiling 0.3954
+ledger:institutionDescVariants:town|Entertainment|Traveling performers: top1 0.4483 > ceiling 0.4445
+ledger:institutionDescVariants:town|Government|Town crier: top1 0.5000 > ceiling 0.4348
+ledger:npcData:HANDLER_TIE_ARCHETYPES.handler_leverage_crime: top1 0.3333 > ceiling 0.3244
+ledger:npcData:HANDLER_TIE_ARCHETYPES.handler_leverage_debt: top1 0.3939 > ceiling 0.3637
+ledger:npcData:HANDLER_TIE_ARCHETYPES.handler_leverage_loved: top1 0.3333 > ceiling 0.3077
+ledger:npcData:NPC_FACTION_LOYALTY: top5 0.2922 > ceiling 0.2914
+ledger:npcData:NPC_PLOT_HOOKS: top1 0.2615 > ceiling 0.2609
+ledger:npcData:NPC_WANTS: top1 0.1305 > ceiling 0.1303
+ledger:npcData:NPC_WANTS: top5 0.6406 > ceiling 0.6402
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.bitter_history: top5 0.6667 > ceiling 0.6623
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.econ_crim_blur: top1 0.1892 > ceiling 0.1715
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.econ_crim_exploitation: top1 0.2381 > ceiling 0.2174
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.econ_crim_exploitation: top5 0.8095 > ceiling 0.7827
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.econ_mil_contract: top1 0.3125 > ceiling 0.2858
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.family_complication: top1 0.1467 > ceiling 0.1412
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.family_complication: top5 0.6678 > ceiling 0.6522
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence: top1 0.1714 > ceiling 0.1459
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence: top5 0.6786 > ceiling 0.6737
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.mentor_legacy: top1 0.1330 > ceiling 0.1325
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.mil_crim_corruption: top1 0.1818 > ceiling 0.1644
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.mil_crim_corruption: top5 0.7403 > ceiling 0.7398
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.mil_crim_suppression: top1 0.1733 > ceiling 0.1691
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.mil_crim_suppression: top5 0.7467 > ceiling 0.7465
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.peer_rivalry: top5 0.6507 > ceiling 0.6492
+ledger:npcData:STRESS_ECONOMIC_EFFECTS.wary_alliance: top5 0.6524 > ceiling 0.6505
+ledger:stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS: top1 0.1620 > ceiling 0.1605
+record:conflicts.plotHooks: top5 0.2035 > ceiling 0.1966
+record:safetyProfile.plotHooks: top5 0.7377 > ceiling 0.7238
+```
+- FOODWAYS.SOURCE_PHRASES.fish is the one this seat's cures touch directly (F6 filters the culture's foodways lines).
+- The rest are draws downstream of births whose generated text this lane moves, chiefly the crossroads cure's 538 holders, whose resources leave.
+- Not attributed one by one: that is open work for the next seat.
+
+**(d) NOT DONE.** The court and prison dimensions in `factVocabulary.js`, and the three court-without-prison lines declared. The arm's court member still reads them.
+
+**NOT DONE at the final tip, open for the next seat:**
+- the equal-failing-set run over the six directories (the earlier run was stopped because the tree moved under it);
+- the lighting census re-take (this seat added a test file and titles after its F15 re-take; the merge took the line's figures);
+- the edge bundles re-emitted as the last commit, alone;
+- a final L3 diff of the post-ruling commits (each cure carries its own measure in its commit body).
