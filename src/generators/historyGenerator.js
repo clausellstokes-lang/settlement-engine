@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, tensionDescription } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -560,10 +560,10 @@ const buildHistoricalEvent = (
     .filter(worldLaw.allowsHistoryEvent)
     .map((tmpl) => tensionByMemory(tmpl, timeline)).map(({ descriptionByDirection, ...tension }) => ({ // #20: the direction table is the template's, never the record's; URBAN-FIX D-1: so is the memory table
       ...tension,
-      description: renderHistoryTemplate(
+      description: apartFromOwnEvent(renderHistoryTemplate(
         substituteNames(tensionDescription({ ...tension, descriptionByDirection }, config)), // #20: the migration's own direction
-        tensionTokens,
-      ),
+        tensionTokens, // COHERENCE-PRESUME: never its own past event's sentence, word for word (apartFromOwnEvent)
+      ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(text), tensionTokens)),
       factions: (tension.factions || []).map(substituteNames),
       // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
       // filtered by the record (a refused row leaves it) and stored as text; a list that declares
@@ -1086,4 +1086,22 @@ function tensionByMemory(tmpl, timeline) {
   // same line generateEventNarrative draws for the hooks of living memory
   const words = !own ? byMemory.unanchored : Number(own.yearsAgo) > 80 ? byMemory.dated : null;
   return words ? { ...tension, ...words } : tension;
+}
+
+// ─── COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): a current tension is not its past event, word for word ──
+// The tension and the timeline are drawn from one table, and an event that draws its template's canonical sentence
+// printed it again as the town's CURRENT tension (38 tensions in 37 of the 360 corpus towns). Where that happens the
+// tension takes the first of its template's authored variants whose words differ. Draw-free: nothing is rolled.
+
+/**
+ * @param {string} description the tension's rendered sentence
+ * @param {string} type its template type
+ * @param {ReadonlyArray<any>} timeline the history's events, built before the tensions
+ * @param {(text: string) => string} render the tension's own renderer
+ * @returns {string}
+ */
+function apartFromOwnEvent(description, type, timeline, render) {
+  const own = (Array.isArray(timeline) ? timeline : []).find((e) => e?.templateType === type);
+  if (!own || own.description !== description) return description;
+  return historyDescVariantsOf(type).map(render).find((text) => text !== own.description) ?? description;
 }
