@@ -321,6 +321,9 @@ const LOCAL_INCOME_WORDS = Object.freeze([
 const COURT_SITS = /\b(?:a court exists|the court can try|before the court|tried at the court|the court sits|functioning court|with a working court|only a court|prosecution is real|real prosecution)/i;
 const COURT_ABSENT = /\b(?:with no court|without a court|without courts|without a working court|without consistent courts|without prison or courts|no reliable court|lack of reliable courts)/i;
 
+/** The town's gates named as standing ("by the gates", "the gates"); "no gates" names none. */
+const GATES_NAMED = /(?<!\bno )\bgates?\b/i;
+
 /** A market named as the town's own ("the market", "markets meet"); a black market is not one. */
 const MARKET_NAMED = /(?<!black )\bmarkets?\b/i;
 
@@ -358,6 +361,7 @@ const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floo
  *   hooks      a viability hook that names a war the record does not hold, or a material the town has
  *   income     an income line that names a local resource ("Local ore", "Local quarry") the town lacks
  *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
+ *   gate       the safety text naming gates the gate home does not hold
  *   safety     the safety text naming a mercenary company the defence home does not list; saying a
  *              court sits where the defence home has none, or that none sits where it has one
  *   market     the economic situation, or the food record's foodways line, naming a market the market home says the town lacks
@@ -425,6 +429,12 @@ export function projectionAgreementFindings(settlement) {
     if (/\bmercenary compan/i.test(String(safety?.[field] || '')) && facts.defence?.mercenary === false) {
       resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names a mercenary company the defence record does not list.'));
     }
+  }
+  // F5 (COHERENCE-AGREE-3): the gate — the safety text naming the town's gates where the gate home has none.
+  const gateTexts = [['guardEffectivenessDesc', safety?.guardEffectivenessDesc], ['safetyDesc', safety?.safetyDesc],
+    ...(Array.isArray(safety?.crimeTypes) ? safety.crimeTypes.map((c, i) => [`crimeTypes[${i}].desc`, c?.desc]) : [])];
+  for (const [field, text] of gateTexts) {
+    if (facts.defence?.gate === false && GATES_NAMED.test(String(text || ''))) resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names gates the defence record does not hold.'));
   }
   if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.situationDesc || ''))) {
     resource.push(finding('economicState.situationDesc', 'The economic situation names a market the town does not have.'));

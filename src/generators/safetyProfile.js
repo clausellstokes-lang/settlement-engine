@@ -303,7 +303,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
           : inst.hasMilitia
             ? 'militia'
             : 'local guard';
-    const wallNote   = inst.hasWalls ? ' Everyone comes in by the gates, where the guard sees them.' : '';
+    // COHERENCE-AGREE-3 (F5): the gates are the gate home's (defence.gate), not the walls'; a palisade has no gate of record.
+    const wallNote   = inst.hasWalls ? said(' Everyone comes in by the gates, where the guard sees them.') : '';
     const charNote   = inst.hasCharterHall ? " The adventurers' charter hall handles threats the watch cannot." : '';
     // Canonical threat vocabulary is heartland/frontier/plagued ('embattled' was never emitted).
     const threatNote = threat === 'plagued' ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : '';
@@ -365,9 +366,11 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       ? ' Offenders can be jailed, but without a working court system enforcement is arbitrary.'
       : ' Without courts or prison, enforcement relies entirely on fines, exile, or summary violence.';
 
-    const wallNote = inst.hasWalls
-      ? ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`
-      : '';
+    // COHERENCE-AGREE-3 (F5): the gate home answers "gates"; walls with no gate take the twin that names none.
+    // (A template over the force noun, so it is chosen here by the home, not keyed in the sibling table.)
+    const wallNote = !inst.hasWalls ? ''
+      : inst.hasGates ? ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`
+        : ` The walls leave few ways in, so smugglers have to get past the ${lawRef}.`;
 
     if (stress.stateCrime) {
       guardEffectivenessDesc = `The ${lawRef} is well organised and works for the rulers' purses, not for the public; ` +
@@ -846,6 +849,11 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.": declaredSet(
     " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.", ['walls'],
     " The settlement's gates are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes."),
+  // COHERENCE-AGREE-3 (REVIEW-AGREE F5, 2026-11-12): the safety line's gates read the gate home; a palisade
+  // has no gate of record. Measured on the 2,866-birth L2 corpus at 65ce74ce6: printed with no gate 15.
+  ' Everyone comes in by the gates, where the guard sees them.': declaredSet(
+    ' Everyone comes in by the gates, where the guard sees them.', ['gate'],
+    ' The walls leave few ways in, and the guard watches them.'),
   'The watch is too thinly spread to maintain order.': declaredSet(
     'The watch is too thinly spread to maintain order.', ['watch'],
     'Enforcement is too thinly spread to maintain order.'),
