@@ -67,6 +67,12 @@ describe('the rule: a rise reds beyond the pool\'s own noise, or across the domi
     const target = { pools: { p: { ...row, top1: 0.1, targets: ['top1'] } } };
     expect(judge(new Map([['p', evenPool(0.1025, 400)]]), target).over).toHaveLength(1);
   });
+
+  test('under a foreign seed prefix the row-set checks are notes, not findings', () => {
+    const findings = judge(new Map([['q', evenPool(0.4, 10)]]), register, { exact: false });
+    expect([findings.unregistered, findings.stale]).toEqual([[], []]);
+    expect(findings.notes).toHaveLength(2);
+  });
 });
 
 describe('no drawn pool prints more of one line than its register allows', () => {

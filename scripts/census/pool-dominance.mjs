@@ -19,7 +19,8 @@
  *           record with the powers' names and the town's name masked.
  *
  * THE CORPUS is the configuration a real browser sends, every dial on random, at the charter's
- * sizes: 60 villages, 160 towns, 100 cities, 40 metropolises, seeds `quarrel-<tier>-<i>`.
+ * sizes: 60 villages, 160 towns, 100 cities, 40 metropolises, seeds `<prefix>-<tier>-<i>`. The banked
+ * prefix is `quarrel`; `--seed-prefix=<p>` runs the same guard on towns nobody tuned to.
  *
  * THE RULE. A measure that sits above its ceiling is not, by itself, a loss of variety: a lane
  * that re-deals the corpus's draws moves every share by chance. So a row reds only when
@@ -36,12 +37,14 @@
  * THE REGISTER (`pool-dominance.register.json`) holds one row per pool: a ceiling for `top1` and
  * for `top5`, and its reason. It only TIGHTENS: `tests/lint/poolDominance.walker.test.js` reds
  * on a rise under the rule, when a drawn pool has no row, when a row's pool is no longer drawn,
- * and when a ceiling is loose.
+ * and when a ceiling is loose. Under a foreign `--seed-prefix` the row-set checks are notes, not
+ * findings: which one-draw pools a corpus happens to reach is itself chance.
  *
  * Usage (read-only unless `--tighten`):
- *   node scripts/census/pool-dominance.mjs            print the findings, then the worst twenty
- *   node scripts/census/pool-dominance.mjs --tighten  lower every ceiling to today's measure (never raise one),
- *                                                     drop the rows of pools no longer drawn, bank new pools
+ *   node scripts/census/pool-dominance.mjs                  print the findings, then the worst twenty
+ *   node scripts/census/pool-dominance.mjs --seed-prefix=p  the same, on the corpus re-seeded with prefix p
+ *   node scripts/census/pool-dominance.mjs --tighten        lower every ceiling to today's measure (never raise one),
+ *                                                           drop the rows of pools no longer drawn, bank new pools
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -213,14 +216,19 @@ export function readRegister() {
  * The register's findings against a measure: each one a line a reader can act on.
  * @param {Map<string, Pick<PoolMeasure, 'draws' | 'towns' | 'top1' | 'top5' | 'spread'>>} table
  * @param {ReturnType<typeof readRegister>} register
- * @returns {{ over: string[], unregistered: string[], stale: string[], loose: string[] }}
+ * @param {{ exact?: boolean }} [options] `exact: false` (a foreign seed prefix) turns the row-set checks into notes
+ * @returns {{ over: string[], unregistered: string[], stale: string[], loose: string[], notes: string[] }}
  */
-export function judge(table, register) {
+export function judge(table, register, { exact = true } = {}) {
   const rows = register.pools || {};
-  const over = [], unregistered = [], stale = [], loose = [];
+  const over = [], unregistered = [], stale = [], loose = [], notes = [];
   for (const [pool, m] of table) {
     const row = rows[pool];
-    if (!row) { unregistered.push(pool); continue; }
+    if (!row) {
+      if (exact) unregistered.push(pool);
+      else notes.push(`${pool}: no row (${m.draws} draws)`);
+      continue;
+    }
     const targets = Array.isArray(row.targets) ? row.targets : [];
     for (const metric of /** @type {const} */ (['top1', 'top5'])) {
       const ceiling = row[metric], share = m[metric];
@@ -240,14 +248,27 @@ export function judge(table, register) {
       }
     }
   }
-  for (const pool of Object.keys(rows)) if (!table.has(pool)) stale.push(pool);
-  return { over, unregistered, stale, loose };
+  for (const pool of Object.keys(rows)) {
+    if (table.has(pool)) continue;
+    if (exact) stale.push(pool);
+    else notes.push(`${pool}: not drawn`);
+  }
+  return { over, unregistered, stale, loose, notes };
 }
 
 const BANKED_REASON = 'banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures';
 
+/** @param {string[]} argv @returns {string | undefined} */
+function seedPrefixArg(argv) {
+  const arg = argv.find((a) => a.startsWith('--seed-prefix='));
+  return arg ? arg.slice('--seed-prefix='.length) : undefined;
+}
+
 function main() {
-  const table = measureDominance();
+  const seedPrefix = seedPrefixArg(process.argv) || DEFAULT_SEED_PREFIX;
+  const exact = seedPrefix === DEFAULT_SEED_PREFIX;
+  if (process.argv.includes('--tighten') && !exact) throw new Error('pool-dominance: --tighten reads the banked corpus only; drop --seed-prefix');
+  const table = measureDominance({ seedPrefix });
   if (process.argv.includes('--tighten')) {
     const register = readRegister();
     const rows = register.pools || {};
@@ -267,10 +288,12 @@ function main() {
     console.log(`pool-dominance: ${table.size} pools written`);
     return;
   }
-  const { over, unregistered, stale, loose } = judge(table, readRegister());
+  const { over, unregistered, stale, loose, notes } = judge(table, readRegister(), { exact });
   for (const line of [...over, ...unregistered.map((p) => `${p}: no row`), ...stale.map((p) => `${p}: no longer drawn`), ...loose]) console.log(line);
+  for (const line of notes) console.log(`note: ${line}`);
   const worst = [...table].sort(([, a], [, b]) => b.top1 - a.top1 || b.draws - a.draws).filter(([, m]) => m.lines > 1).slice(0, 20);
   for (const [pool, m] of worst) console.log(`${(m.top1 * 100).toFixed(1)}% / ${(m.top5 * 100).toFixed(1)}%  ${m.draws} draws, ${m.lines} lines  ${pool}`);
+  console.log(`pool-dominance: corpus ${seedPrefix} (${table.size} pools): ${over.length} over, ${unregistered.length} unregistered, ${stale.length} stale, ${loose.length} loose, ${notes.length} notes`);
   process.exitCode = over.length || unregistered.length || stale.length || loose.length ? 1 : 0;
 }
 
