@@ -52,6 +52,12 @@ const LIST_FN = netCurrentFn('list_gallery_maps');
 // 088 added the server-side defense-in-depth scanner + wired it into publish_map.
 const SAFE_FN = netCurrentFn('_gallery_world_snapshot_is_safe');
 const PUBLISH_FN = netCurrentFn('publish_map');
+// 211: the map veils each member by its own listing veil and (F7) refuses a frozen copy past the
+// server's bound, so the member path runs 211's _gallery_veil* helpers: load them all, net-current.
+const VEIL_HELPER_FNS = [...new Set(readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f))
+  .flatMap((f) => [...readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8')
+    .matchAll(/^create\s+or\s+replace\s+function\s+public\.(_gallery_veil\w*)\s*\(/gim)].map((m) => m[1])))]
+  .map(netCurrentFn);
 
 // A second account — its settlements must NEVER be projected by another owner's
 // shared campaign (the 046 IDOR guard get_gallery_map carries).
@@ -96,7 +102,13 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         -- get_gallery_map (088) deep-links each member to its own dossier when the
         -- member settlement is itself published, so it reads these columns.
         is_public boolean default false,
-        public_slug text
+        public_slug text,
+        -- The net-current get_gallery_map (211) serves each member from its listing's
+        -- source (narration, frozen copy), so it reads these; real types and defaults
+        -- from 025, 092 and 006.
+        gallery_share_narrated boolean not null default false,
+        gallery_member_overrides jsonb not null default '{}'::jsonb,
+        ai_data jsonb default '{}'::jsonb
       );
       create table public.saved_maps (
         id uuid primary key default gen_random_uuid(),
@@ -168,6 +180,7 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
       create or replace function auth.uid()
         returns uuid language sql stable as $$ select '${OWNER}'::uuid $$;
     `);
+    for (const fn of VEIL_HELPER_FNS) await db.exec(fn);
     await db.exec(BACKDROP_FN);
     await db.exec(SAFE_FN);
     await db.exec(GET_FN);

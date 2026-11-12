@@ -55,3 +55,15 @@ Steps the hook ran on this lane's tree, and passed, before both stops: the valid
 1. `npx vitest run tests/security/galleryVeilCures.pglite.test.js tests/security/galleryServerVeil.pglite.test.js` (about 12 minutes).
 2. The native probes under `docs/chair/2026-11-12/veil-probe-2/` with a scratch cluster (the header of each file gives its command): `rows`, `towns`, `timing` PARTS=f6 twice on a quiet machine.
 3. Their own attack rows: numbers near the double bounds in ids and parts, falsy names, huge member-key maps, snapshot copies near 54,333,333, and narrated or snapshot map members.
+
+## 7. The hook's red, and its cure
+
+The push through the hook (lint 0 errors) stopped at `test:ratchet`. Three tests were outside the frozen census (0 failing, measured at `b43dfb771`): `tests/security/galleryMapMemberCount.pglite.test.js` :: "get_gallery_map does NOT project a member settlement owned by another user (046 IDOR guard)", "get_gallery_map projects the world panel ONLY when gallery_share_world is true", and "member_count is at PARITY with the members get_gallery_map projects". Each raised `column s.gallery_share_narrated does not exist`.
+
+**Cause.** The test runs the net-current function bodies against a `settlements` table it builds by hand, and that table predated what 211's map reads. The red predates this seat: at `ad17ec005` the same three tests raise `column s.gallery_member_overrides does not exist` (run from a `git archive` of that tree). F7 only changed the first missing name.
+
+**Cure, in the fixture only.** The hand-built table gains `gallery_share_narrated boolean not null default false` (025), `gallery_member_overrides jsonb not null default '{}'::jsonb` (092) and `ai_data jsonb default '{}'::jsonb` (006). The fixture now loads every `_gallery_veil*` helper at its net-current body, so the member path runs 211's real veil and copy bound, not a stub. No assertion, cure or migration line changed.
+
+**Results.** The file: 11 of 11. All of `tests/security`: 154 files and 1,941 tests passed, 1 skipped, exit 0 through gate-tail. The other hand-built tables that name a gallery read (`galleryAlivenessTitleChain`, `galleryChronicleProjection`, `galleryUnlisted`) are green unchanged and needed no cure.
+
+**Files touched:** `tests/security/galleryMapMemberCount.pglite.test.js` and this file.
