@@ -33,6 +33,19 @@ export function censusPlan(prefix, scale = 1) {
 }
 
 /**
+ * THE SUITE'S GRID: twelve births of the banked corpus, each size's first calm birth and its first birth under the
+ * crisis at twice the size's index in the census's order (siege, occupation, debt, infiltration, the void, revolt).
+ * @returns {Array<{ seed: string, size: string, crisis: string|null }>}
+ */
+export function censusGrid() {
+  const plan = censusPlan(BANKED_PREFIX);
+  return SIZES.flatMap((size, i) => [
+    /** @type {{ seed: string, size: string, crisis: string|null }} */ (plan.find((r) => r.size === size && r.crisis === null)),
+    plan.filter((r) => r.size === size && r.crisis !== null)[i * 4 * 2],
+  ]);
+}
+
+/**
  * The birth config of one plan row.
  * @param {{ size: string, crisis: string|null }} row
  * @param {Record<string, unknown>} DEFAULT_CONFIG @param {(c: Record<string, unknown>) => unknown} birthConfig

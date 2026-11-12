@@ -24,6 +24,8 @@
  *   node scripts/census/page-census.mjs --seed-prefix=<p> [--scale=k]   a fresh corpus against the bar (zero)
  *   node scripts/census/page-census.mjs --limit=<n> [--seed-prefix=<p>]  a spread of about n births (a smoke run; never banked)
  *   node scripts/census/page-census.mjs --from=<dir>                    count a run already rendered into <dir>
+ *   node scripts/census/page-census.mjs --grid [--shrink]                the suite's twelve births only; --shrink lowers their
+ *                                                                       grid rows (refused if any rose)
  *   node scripts/census/page-census.mjs --shrink                        THE DOOR: lower each banked count that fell;
  *                                                                       refused (nothing written) if any row rose
  * Exit 1 on a row above its banked count (banked corpus) or above its bar (a fresh corpus); 0 otherwise.
@@ -34,7 +36,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFil
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BANKED_PREFIX, censusPlan } from '../../tests/components/pageCensusWalk.shared.mjs';
+import { BANKED_PREFIX, censusGrid, censusPlan } from '../../tests/components/pageCensusWalk.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const REGISTER = join(ROOT, 'scripts/census/page-census.register.json');
@@ -47,12 +49,13 @@ const arg = (name, fallback) => {
 const prefix = arg('seed-prefix', BANKED_PREFIX) ?? BANKED_PREFIX;
 const scale = Number(arg('scale', '1'));
 const workers = Number(arg('workers', '4'));
-const banked = prefix === BANKED_PREFIX && scale === 1 && !process.argv.some((a) => a.startsWith('--limit='));
+const gridOnly = process.argv.includes('--grid');
+const banked = prefix === BANKED_PREFIX && scale === 1 && !gridOnly && !process.argv.some((a) => a.startsWith('--limit='));
 const shrink = process.argv.includes('--shrink');
-if (shrink && !banked) { console.error('page-census: --shrink reads the banked corpus only'); process.exit(2); }
+if (shrink && !banked && !gridOnly) { console.error('page-census: --shrink reads the banked corpus (or --grid) only'); process.exit(2); }
 
 const limit = Number(arg('limit', '0'));
-const plan = limit > 0 ? censusPlan(prefix, scale).filter((_, i) => i % Math.ceil(720 * scale / limit) === 0) : censusPlan(prefix, scale);
+const plan = gridOnly ? censusGrid() : limit > 0 ? censusPlan(prefix, scale).filter((_, i) => i % Math.ceil(720 * scale / limit) === 0) : censusPlan(prefix, scale);
 const from = arg('from');
 const out = from || arg('out') || mkdtempSync(join(tmpdir(), 'page-census-'));
 
@@ -86,6 +89,21 @@ for (const f of done) {
   for (const row of r.rows) { counts[row] = (counts[row] || 0) + 1; (examples[row] ||= []).length < 3 && examples[row].push(r.seed); }
 }
 const reg = JSON.parse(readFileSync(REGISTER, 'utf8'));
+if (gridOnly) {
+  /** @type {string[]} */ const rose = []; let lowered = 0;
+  for (const f of done) {
+    const r = JSON.parse(readFileSync(join(rowsDir, f), 'utf8'));
+    const was = reg.grid[r.seed] || [];
+    for (const row of r.rows) if (!was.includes(row)) rose.push(`${r.seed} ${row}`);
+    for (const row of was) if (!r.rows.includes(row)) { console.log(`FALL  ${r.seed} ${row}`); lowered++; }
+    if (shrink) reg.grid[r.seed] = was.filter((row) => r.rows.includes(row));
+  }
+  for (const x of rose) console.log(`RISE  ${x}`);
+  if (rose.length) { console.log('page-census --grid: REFUSED, a grid row rose'); process.exit(1); }
+  if (shrink && lowered) writeFileSync(REGISTER, `${JSON.stringify(reg, null, 1)}\n`);
+  console.log(`page-census --grid: ${lowered} fall(s)${shrink && lowered ? ', written' : ''}`);
+  process.exit(0);
+}
 /** @type {string[]} */ const over = [];
 let fell = 0;
 console.log('row        master integ banked  now  bar');

@@ -18,7 +18,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { censusPlan, configOf, storeFor, walkDossier } from './pageCensusWalk.shared.mjs';
+import { censusGrid, configOf, storeFor, walkDossier } from './pageCensusWalk.shared.mjs';
 
 const mocks = vi.hoisted(() => ({ store: {} }));
 vi.mock('../../src/store/index.js', () => {
@@ -39,12 +39,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { coherenceBattery } from '../../src/domain/coherence/coherenceBattery.js';
 
 const REGISTER = JSON.parse(readFileSync(join(process.cwd(), 'scripts/census/page-census.register.json'), 'utf8'));
-/** The grid: each size's first calm birth and its first birth under the crisis at the size's index in the census's order. */
-const PLAN = censusPlan('r2');
-const GRID = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].flatMap((size, i) => [
-  PLAN.find((r) => r.size === size && r.crisis === null),
-  PLAN.filter((r) => r.size === size && r.crisis !== null)[i * 4 * 2],
-]);
+const GRID = censusGrid();
 
 const viewport = { matches: false, listeners: new Set() };
 window.matchMedia = Object.assign(vi.fn((q) => ({ media: q, get matches() { return viewport.matches; }, addEventListener: (_t, f) => viewport.listeners.add(f), removeEventListener: (_t, f) => viewport.listeners.delete(f), addListener: (f) => viewport.listeners.add(f), removeListener: (f) => viewport.listeners.delete(f) })), { SF_CONTROLLED: true });
