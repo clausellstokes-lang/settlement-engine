@@ -1,0 +1,36 @@
+{
+  "_doc": "A DRAFT, NOT A SIGNATURE (the chair's ruling at point 36, ODQ-934.105 draft: the lane drafts ONE record, learns predictedRows at its own tip without running a golden door, leaves `seat` and the merge commit to the merge seat). COHERENCE-POWERS' cause is ONE: the owner's dual-hat law, the leader comes from a house of the town, and the powers stand on the houses (the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §0 and §5). Its component commits are listed in `cause`. They move the cast of every birth where a house leads (one fewer card: the office face), the ranks and importance of the ruling three, the roster where a power has no house (the fold, not built), the government where a council of a kind has no house of its kind, and the hall's capture state where no criminal power stands. predictedRows are the counts the failing golden assertions reported at the lane's tip 9a88668dd (the golden master's differing configs, the manifest's moved rows); a hash-only surface reads 0. The goldens stay red at the lane's tip as the merge seat's named act.",
+  "ownerWords": "whoever leads teh town, in any type of government is wearing a dual hat (where appropraite) they come from an institution, and are elevated yet still tied to an institution. for example, the miller is typically the lord mayor (unless appointed by an appropriate government type) rather than a lord mayer simply existing in a vacuume",
+  "ownerDate": "2026-11-11",
+  "odqRow": "",
+  "cause": "COHERENCE-POWERS, lane/coherence-powers-2026-11-11 at 9a88668dd (base decc7bf15; PRESUME's 081928512 merged at 84f02ef0e). Components: 23a2015d4 rule A, the ruler of a kind first claimant of its kind in the deal; e0c8bb357 the dual hat, the leader is the heaviest house of its kind (civic: trade or landed) with the office as its role; e3316ac5f the mint's forced tie to the rank-1 card; 484f5a1d4 the empty-pool governing seat; 04334d6ef cure (i), the seat's house bears no face where a house leads, and its readers; 4509d4add and 528d9886e the two hats on the seat row and the card line; c7bc4702a and 32bda7bf7 the typed and seam-clean readers; 5915e3af0 the council of a kind; 1df17289f the fold; 902378261 a power of the roster's own with no house is not built; fd4db104e cure (a), capture only where a criminal power stands.",
+  "seat": "",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 493,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 648,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 0,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 0,
+      "proofForm": "in-file corpus constant"
+    }
+  ],
+  "_alsoRedUntilTheGoldensMove": "the golden-corpus null-change pins that compare to the recorded corpus: dmLayerGoldenIsolation A7 (493 rows), worldFactRederive A7, editWorldFactResources A2 and A6, nameHeldThroughAssembly A1, pipelinePinnedChoosers A1, pipelinePinnedMode A1, A2 and A5, rosterFinalUnderHeldRoster A1, powerEconomyFreshness A4. They read the recorded goldens; they turn green when the surfaces above are re-recorded, and the lane changes none of them.",
+  "_otherDrivenFiguresTheMergeSeatKeys": "Measured at 9a88668dd and named, never banked: the digests and fixtures re-taken by their own writers at the merge point (x46NpcBand's dark digests, 57 of 60 worlds; institutionBudgetPromise, 57 of 60 seeds; the intent atlas distillate; the landing fixture; the engine bundles, which this lane re-emits as its last commit); the measured figures that move with the cast (hookThemeDraws 2157 -> 2105 hooks, one per card; generationForkCensus A1's control hash and A6's external fnv1a32 callers 15 -> 13, the seat mint reached less often; editCorpusRatchet A3, A5 and A7; mergeLadderHeldKeys A3; dossierProseManifest's audience arm 203 -> 204); the worked-example towns that are no longer corrupted (proseComposed, proseTasteInterested: a new leader who is no agent); writerReach (the re-bank); observedShapeReaders (the corpus grew, wizard news 2,525 -> 2,638 accumulated, and five rows of instrument erosion on the pulse kernels, legitimacy on factions and thievesGuildStrength on settlement: no field of this lane's, no lost reader shown, the limit of what was proved); and statecraftExposureBand's mobilization floor (see the phase-2B note, section 8: a driven figure of this wave unless the population says systematic)."
+}
