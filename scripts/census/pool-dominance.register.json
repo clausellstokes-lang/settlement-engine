@@ -1,6 +1,136 @@
 {
   "_law": "SHRINK-ONLY ON ONE CORPUS. One row per drawn pool: the ceiling for the share of its most-printed line (top1) and of its five most-printed lines (top5) over the corpus `corpus` names (scripts/census/pool-dominance.mjs). On that corpus a ceiling is only ever lowered (--tighten); a row leaves only when its pool is no longer drawn. A change of corpus is a change of instrument: the rows are re-based at the new corpus's measure through --rebase, on a chair's ruling, and never by hand. Held by tests/lint/poolDominance.walker.test.js.",
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
+  "census": {
+    "_note": "Figures for the second wave, never a red: re-written by every door.",
+    "pools": 907,
+    "printOneLine": 677,
+    "measuredUnder30Draws": 144,
+    "highestSharesOver150Draws": [
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction",
+        "top1": 0.8947,
+        "top5": 1,
+        "draws": 1082,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:safetyProfile:SAFETY_LINE_SIBLINGS",
+        "top1": 0.8919,
+        "top5": 1,
+        "draws": 1646,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear",
+        "top1": 0.8691,
+        "top5": 1,
+        "draws": 1497,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension",
+        "top1": 0.849,
+        "top5": 1,
+        "draws": 834,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:factionLabelSiblings:FACTION_LABEL_SIBLINGS",
+        "top1": 0.8098,
+        "top5": 1,
+        "draws": 1593,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy",
+        "top1": 0.8007,
+        "top5": 1,
+        "draws": 662,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:npcGenerator:NPC_GOAL_SIBLINGS",
+        "top1": 0.7957,
+        "top5": 1,
+        "draws": 230,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:crisisCast:CAST_REASON_SIBLINGS",
+        "top1": 0.7917,
+        "top5": 1,
+        "draws": 744,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity",
+        "top1": 0.7787,
+        "top5": 1,
+        "draws": 723,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy",
+        "top1": 0.7776,
+        "top5": 1,
+        "draws": 1888,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire",
+        "top1": 0.7279,
+        "top5": 1,
+        "draws": 441,
+        "lines": 3
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years",
+        "top1": 0.7254,
+        "top5": 1,
+        "draws": 415,
+        "lines": 3
+      }
+    ],
+    "secondWave": [
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension",
+        "metric": "top1",
+        "oldCeiling": 0.794,
+        "measure": 0.849,
+        "standardErrors": 3.57,
+        "draws": 834,
+        "towns": 456
+      },
+      {
+        "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:tyranny",
+        "metric": "top1",
+        "oldCeiling": 0.5775,
+        "measure": 0.66,
+        "standardErrors": 3.11,
+        "draws": 347,
+        "towns": 151
+      },
+      {
+        "pool": "ledger:npcData:NPC_FACTION_LOYALTY",
+        "metric": "top1",
+        "oldCeiling": 0.1207,
+        "measure": 0.1565,
+        "standardErrors": 3.45,
+        "draws": 68422,
+        "towns": 2050
+      },
+      {
+        "pool": "ledger:npcData:NPC_FACTION_LOYALTY",
+        "metric": "top5",
+        "oldCeiling": 0.2914,
+        "measure": 0.3202,
+        "standardErrors": 3.43,
+        "draws": 68422,
+        "towns": 2050
+      }
+    ]
+  },
   "pools": {
     "ledger:ARRIVAL_MEMORIES.external_threat": {
       "top1": 0.3732,
@@ -185,8 +315,8 @@
     "ledger:ARRIVAL_SENSES.arcane.lines": {
       "top1": 0.5,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 2
+      "lines": 2,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.arms.dominant": {
       "top1": 0.3246,
@@ -209,8 +339,8 @@
     "ledger:ARRIVAL_SENSES.brewers.dominant": {
       "top1": 0.5,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 2
+      "lines": 2,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.brewers.lines": {
       "top1": 0.3847,
@@ -227,8 +357,8 @@
     "ledger:ARRIVAL_SENSES.cloth.lines": {
       "top1": 0.6667,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 2
+      "lines": 2,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.faith.dominant": {
       "top1": 0.4856,
@@ -251,8 +381,8 @@
     "ledger:ARRIVAL_SENSES.fish.lines": {
       "top1": 0.4348,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 3
+      "lines": 3,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.herbs.dominant": {
       "top1": 0.375,
@@ -263,8 +393,8 @@
     "ledger:ARRIVAL_SENSES.herbs.lines": {
       "top1": 0.6667,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 2
+      "lines": 2,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.horses.dominant": {
       "top1": 0.353,
@@ -287,8 +417,8 @@
     "ledger:ARRIVAL_SENSES.kilns.lines": {
       "top1": 0.8,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 2
+      "lines": 2,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.livestock.dominant": {
       "top1": 0.4334,
@@ -317,8 +447,8 @@
     "ledger:ARRIVAL_SENSES.smiths.lines": {
       "top1": 0.5,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 3
+      "lines": 3,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.stone.dominant": {
       "top1": 0.3627,
@@ -329,8 +459,8 @@
     "ledger:ARRIVAL_SENSES.stone.lines": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.tanners.dominant": {
       "top1": 0.4688,
@@ -485,8 +615,8 @@
     "ledger:NPC_STRUCTURE.criminal__economic_stress__dominant": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:NPC_STRUCTURE.criminal__economic_stress__subordinate": {
       "top1": 1,
@@ -677,8 +807,8 @@
     "ledger:NPC_STRUCTURE.military__corruption__dominant": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:NPC_STRUCTURE.military__corruption__subordinate": {
       "top1": 1,
@@ -743,8 +873,8 @@
     "ledger:NPC_STRUCTURE.other__economic_stress__dominant": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:NPC_STRUCTURE.other__economic_stress__subordinate": {
       "top1": 1,
@@ -1830,26 +1960,26 @@
     "ledger:institutionDescVariants:hamlet|Adventuring|Adventurers' charter hall": {
       "top1": 0.44,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 3
+      "lines": 3,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionDescVariants:hamlet|Criminal|Smuggling waypoint": {
       "top1": 0.5,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 3
+      "lines": 3,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionDescVariants:hamlet|Economy|Charcoal burner": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionDescVariants:hamlet|Economy|Fisher's landing": {
       "top1": 0.3899,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 3
+      "lines": 3,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionDescVariants:metropolis|Crafts|Alchemist quarter": {
       "top1": 0.3358,
@@ -1938,8 +2068,8 @@
     "ledger:institutionDescVariants:metropolis|Economy|River boatyard": {
       "top1": 0.5,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 3
+      "lines": 3,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionDescVariants:metropolis|Economy|River ferry": {
       "top1": 0.4616,
@@ -2136,32 +2266,32 @@
     "ledger:institutionServices:Access to external mill.Grain milling (a day away)": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Access to parish church.Last rites": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Access to parish church.Marriage ceremony": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Access to parish church.Rite of entry": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Access to parish church.Weekly rite": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Advanced water infrastructure.Clean water supply": {
       "top1": 1,
@@ -2364,8 +2494,8 @@
     "ledger:institutionServices:Bandit affiliate.Protection racket": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Banking district.Currency exchange": {
       "top1": 1,
@@ -2640,8 +2770,8 @@
     "ledger:institutionServices:Burial ground.Burial": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Burial grounds and charnel house.Burial": {
       "top1": 1,
@@ -2700,14 +2830,14 @@
     "ledger:institutionServices:Carpenter (part-time).Basic repairs": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Carpenter (part-time).Simple construction": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Carpenter.Basic carpentry": {
       "top1": 1,
@@ -3216,8 +3346,8 @@
     "ledger:institutionServices:Dwellings (1-8).Hospitality": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Dwellings (15-100).Hospitality": {
       "top1": 1,
@@ -3228,8 +3358,8 @@
     "ledger:institutionServices:Dwellings (5-25).Hospitality": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Dyer.Dyed cloth": {
       "top1": 1,
@@ -3324,8 +3454,8 @@
     "ledger:institutionServices:Fishmonger.Fresh fish": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Fishmonger.Salted fish": {
       "top1": 1,
@@ -3570,8 +3700,8 @@
     "ledger:institutionServices:Head-of-household consensus.Family decisions": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Healer (divine, 1st level).Purify food and water": {
       "top1": 1,
@@ -3636,26 +3766,26 @@
     "ledger:institutionServices:Household elder.Communal decisions": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Household elder.Dispute mediation": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Household elder.Hospitality": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Household elder.Record of custom": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Housing (3500+ households).Lodging (rooms to let)": {
       "top1": 1,
@@ -3720,32 +3850,32 @@
     "ledger:institutionServices:Inn/Tavern.Hiring hall": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Inn/Tavern.Lodging": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Inn/Tavern.Meals and drink": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Inn/Tavern.Message relay": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Inn/Tavern.Stabling": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Inns and taverns (district).Entertainment": {
       "top1": 1,
@@ -3810,8 +3940,8 @@
     "ledger:institutionServices:Local fence.Sell stolen goods": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Lord's appointee.Administrative orders": {
       "top1": 1,
@@ -3834,8 +3964,8 @@
     "ledger:institutionServices:Lord's steward.Record keeping": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Luxury goods quarter.Custom commissions": {
       "top1": 1,
@@ -4224,8 +4354,8 @@
     "ledger:institutionServices:Outlaw shelter.Hideout rental": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Pack animal trader.Pack animal hire": {
       "top1": 1,
@@ -4422,14 +4552,14 @@
     "ledger:institutionServices:Resident smith (part-time).Basic smithing": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Resident smith (part-time).Horseshoeing": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:River boatyard.Barge construction": {
       "top1": 1,
@@ -4656,14 +4786,14 @@
     "ledger:institutionServices:Stable yard.Basic horse care": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Stable yard.Overnight boarding": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:State granary complex.Strategic grain reserves": {
       "top1": 1,
@@ -4908,14 +5038,14 @@
     "ledger:institutionServices:Traveling hedge wizard.Fortune telling": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Traveling hedge wizard.Minor spells for hire": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Traveling performers.Private entertainment": {
       "top1": 1,
@@ -5040,8 +5170,8 @@
     "ledger:institutionServices:Village scribe.Document reading": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionServices:Village scribe.Letter writing": {
       "top1": 1,

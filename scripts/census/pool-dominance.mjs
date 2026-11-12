@@ -254,7 +254,7 @@ export const ceil4 = (share) => Math.ceil(share * 10000 - 1e-9) / 10000;
 
 /** @typedef {{ top1: number, top5: number, lines?: number, reason: string, targets?: string[] }} RegisterRow */
 
-/** @returns {{ corpus?: string, pools: Record<string, RegisterRow> }} */
+/** @returns {{ corpus?: string, census?: { secondWave?: unknown[] }, pools: Record<string, RegisterRow> }} */
 export function readRegister() {
   return JSON.parse(readFileSync(REGISTER_PATH, 'utf8'));
 }
@@ -312,6 +312,27 @@ const BANKED_REASON = 'banked at the 2026-11-12 six-tier measure (POOL-GUARD): a
 const REBASED_REASON = 'banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair\'s ruling, not a tightening';
 
 /**
+ * The census the second wave reads: figures, not findings. Written by both doors from the measure;
+ * `secondWave` (the rows a re-base found more dominated on the new towns beyond the noise) is
+ * written by `--rebase` and carried forward by `--tighten`.
+ * @param {Map<string, PoolMeasure>} table @param {unknown[]} [secondWave]
+ */
+function censusOf(table, secondWave = []) {
+  const all = [...table];
+  const highest = all.filter(([, m]) => m.draws >= 150 && m.lines > 1)
+    .sort(([pa, a], [pb, b]) => b.top1 - a.top1 || (pa < pb ? -1 : 1)).slice(0, 12)
+    .map(([pool, m]) => ({ pool, top1: ceil4(m.top1), top5: ceil4(m.top5), draws: m.draws, lines: m.lines }));
+  return {
+    _note: 'Figures for the second wave, never a red: re-written by every door.',
+    pools: table.size,
+    printOneLine: all.filter(([, m]) => m.lines === 1).length,
+    measuredUnder30Draws: all.filter(([, m]) => m.draws < 30).length,
+    highestSharesOver150Draws: highest,
+    secondWave,
+  };
+}
+
+/**
  * The re-base door: every row at the corpus's own measure, targets exactly as they are, each
  * `--hold` at its lower ceiling where the rule holds the measure there.
  * @param {Map<string, PoolMeasure>} table @param {ReturnType<typeof readRegister>} register @param {string[]} holds
@@ -334,6 +355,17 @@ function rebase(table, register, holds) {
       }
       : { top1: ceil4(m.top1), top5: ceil4(m.top5), lines: m.lines, reason: BANKED_REASON };
   }
+  /** @type {unknown[]} the rows the new towns read more dominated than the old ceiling, beyond the noise */
+  const secondWave = [];
+  for (const [pool, m] of table) {
+    const row = rows[pool];
+    if (!row) continue;
+    for (const metric of /** @type {const} */ (['top1', 'top5'])) {
+      if (row.targets?.includes(metric)) continue;
+      const se = shareError(m, metric, row[metric]);
+      if (m[metric] > row[metric] + NOISE_SE * se + 1e-9) secondWave.push({ pool, metric, oldCeiling: row[metric], measure: ceil4(m[metric]), standardErrors: Number(((m[metric] - row[metric]) / se).toFixed(2)), draws: m.draws, towns: m.towns });
+    }
+  }
   for (const hold of holds) {
     const [, pool = '', metric = '', value = ''] = /^(.*):(top1|top5):([0-9.]+)$/.exec(hold) || [];
     const ceiling = Number(value);
@@ -344,7 +376,7 @@ function rebase(table, register, holds) {
     if (over.length) throw new Error(`pool-dominance: --hold=${hold} does not hold: ${over.join('; ')}`);
     next[pool] = { ...held.pools[pool], reason: `held at or below its original ceiling ${ceiling} (point 43 re-banked it upward within two draws; restored by POOL-GUARD where the rule holds it): ${REBASED_REASON}` };
   }
-  return { _law: REGISTER_LAW, corpus: corpusIdentity(), pools: next };
+  return { _law: REGISTER_LAW, corpus: corpusIdentity(), census: censusOf(table, secondWave), pools: next };
 }
 
 /** @param {string[]} argv @returns {string | undefined} */
@@ -383,7 +415,8 @@ function main() {
         }
         : { top1: ceil4(m.top1), top5: ceil4(m.top5), lines: m.lines, reason: BANKED_REASON };
     }
-    writeFileSync(REGISTER_PATH, `${JSON.stringify({ ...register, pools: next }, null, 2)}\n`);
+    const census = censusOf(table, register.census?.secondWave || []);
+    writeFileSync(REGISTER_PATH, `${JSON.stringify({ ...register, census, pools: next }, null, 2)}\n`);
     console.log(`pool-dominance: ${table.size} pools written`);
     return;
   }
