@@ -4,19 +4,16 @@
  *
  * Who leads, and by how much. The standing sentences (`generators/power/factionStanding.js`) compare a power
  * with its neighbours and never with the leader; this leaf is the one reading of the margins against the
- * leader, so "level" means level with the leader too. `LEVEL_STEP` is the standings' own "almost level" step
- * (a gap of five points or less between neighbours); THREE ARE LEVEL when each neighbouring gap among the top
- * three is within the step, so the third sits within two steps of the leader.
+ * leader (and between neighbours), so a line that says "level" reads the leader's margin too. The leaf states
+ * margins and decides nothing: the threshold a sentence holds is that sentence's own (the standings' step).
  *
  * Layer 3 (it reads the powers, stored at layer 2). Pure: no randomness, no clock, no write.
  */
 
-/** The standings' own "almost level" step between neighbouring powers. */
-export const LEVEL_STEP = 5;
-
 /**
  * @param {unknown} factions the record's `powerStructure.factions` (or the list a step holds)
- * @returns {{ leader: string|null, powers: number[], leadOverSecond: number|null, leadOverThird: number|null, threeLevel: boolean, twoLevel: boolean }}
+ * @returns {{ leader: string|null, powers: number[], leadOverSecond: number|null, leadOverThird: number|null, gaps: number[] }}
+ *   `gaps[i]` is the margin between the i-th and the (i+1)-th power, strongest first
  */
 export function leaderLeadOf(factions) {
   const rows = (Array.isArray(factions) ? factions : [])
@@ -31,8 +28,7 @@ export function leaderLeadOf(factions) {
     powers,
     leadOverSecond,
     leadOverThird,
-    twoLevel: leadOverSecond !== null && leadOverSecond <= LEVEL_STEP,
-    threeLevel: leadOverSecond !== null && leadOverThird !== null && leadOverSecond <= LEVEL_STEP && powers[1] - powers[2] <= LEVEL_STEP,
+    gaps: powers.slice(1).map((p, i) => powers[i] - p),
   };
 }
 

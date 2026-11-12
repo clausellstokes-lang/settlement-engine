@@ -101,7 +101,7 @@ const WORD = Object.freeze({ a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, fiv
 function months(phrase) {
   if (!phrase) return null;
   const ph = phrase.toLowerCase();
-  if (/few weeks/.test(ph)) return 0.5;
+  if (/few weeks/.test(ph)) return 1 / 2; // half a month: the counter's reading of "a few weeks", not a dial
   if (/about a month|^a month/.test(ph)) return 1;
   if (/more than two years/.test(ph)) return 24;
   if (/more than a year/.test(ph)) return 13;

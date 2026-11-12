@@ -7,7 +7,7 @@ import { describe, expect, test } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { FOUNDER_KIND, FOUNDER_KINDS, founderOf } from '../../../src/domain/facts/founder.js';
-import { LEVEL_STEP, leaderLeadOf, leaderLeadOfRecord } from '../../../src/domain/facts/leaderLead.js';
+import { leaderLeadOf, leaderLeadOfRecord } from '../../../src/domain/facts/leaderLead.js';
 import { foldHouseName, houseHere } from '../../../src/domain/facts/presence.js';
 import { beastsReadinessOf } from '../../../src/domain/facts/beastsReadiness.js';
 import { chainCarrierOf } from '../../../src/domain/facts/chainCarrier.js';
@@ -32,13 +32,12 @@ describe('the founder (pattern 7a: one founder, the "Founded by" row is its home
 });
 
 describe('the leader\'s lead (pattern 4: "three powers stand almost level" beside a leader far ahead)', () => {
-  test('three are level only when the third sits within the step of the second and the second within the step of the leader', () => {
-    expect(leaderLeadOf([{ faction: 'A', power: 80 }, { faction: 'B', power: 30 }, { faction: 'C', power: 27 }])).toMatchObject({ leader: 'A', leadOverSecond: 50, leadOverThird: 53, threeLevel: false, twoLevel: false });
-    expect(leaderLeadOf([{ faction: 'C', power: 35 }, { faction: 'A', power: 40 }, { faction: 'B', power: 37 }])).toMatchObject({ leader: 'A', powers: [40, 37, 35], threeLevel: true, twoLevel: true });
-    // the census's own case: neighbours level, the leader not
-    expect(leaderLeadOf([{ power: 50 }, { power: 39 }, { power: 36 }]).threeLevel).toBe(false);
-    expect(LEVEL_STEP).toBe(5);
-    expect(leaderLeadOfRecord({})).toMatchObject({ leader: null, powers: [], threeLevel: false });
+  test('the margins against the leader, strongest first; the neighbours\' gaps beside them', () => {
+    expect(leaderLeadOf([{ faction: 'A', power: 80 }, { faction: 'B', power: 30 }, { faction: 'C', power: 27 }])).toEqual({ leader: 'A', powers: [80, 30, 27], leadOverSecond: 50, leadOverThird: 53, gaps: [50, 3] });
+    expect(leaderLeadOf([{ faction: 'C', power: 35 }, { faction: 'A', power: 40 }, { faction: 'B', power: 37 }])).toMatchObject({ leader: 'A', powers: [40, 37, 35], leadOverThird: 5, gaps: [3, 2] });
+    // the census's own case (pattern 4): neighbours close, the leader not — the leaf states it in the leader's margin
+    expect(leaderLeadOf([{ power: 50 }, { power: 39 }, { power: 36 }])).toMatchObject({ leadOverThird: 14, gaps: [11, 3] });
+    expect(leaderLeadOfRecord({})).toEqual({ leader: null, powers: [], leadOverSecond: null, leadOverThird: null, gaps: [] });
   });
 });
 

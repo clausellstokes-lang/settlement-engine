@@ -159,9 +159,9 @@ describe('the Defense tab carries one Food endurance line, and it is a door to t
       if (s.economicState.foodSecurity.hasSiege) {
         expect(sentence, seed).toMatch(/\bthe siege has taken the outlying fields\b/i);
       } else {
-        expect(sentence, seed).not.toMatch(/\bare lost\b|\bcarries\b|\bcarry the\b(?<!would carry the)|\bfeeds it\b|\bstands? in reserve\b/i);
         expect(sentence, seed).toMatch(/\bunder siege the outlying fields would be lost\b/i);
-        expect(sentence, seed).toMatch(/\bwould\b/);
+        // anchored: the same sentence matched 'would be lost' on the line above
+        expect(sentence, seed).not.toMatch(/\bare lost\b|\bcarries\b|\bcarry the\b(?<!would carry the)|\bfeeds it\b|\bstands? in reserve\b/i);
       }
     }), 'the siege figure is a condition outside a siege');
   });

@@ -6,22 +6,34 @@
 import { describe, expect, test } from 'vitest';
 import { PAGE_CENSUS_ROWS, pageCensusFindings, viewsOfSurfaces } from '../../../src/domain/coherence/pageCensusFindings.js';
 import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery.js';
+import { poolMemberTexts } from '../../helpers/drawnProse.js';
+
+/** A corpus line, computed (never typed): the pool's first member with the town's name in its slots. */
+const corpusLine = (leaf, blockId, poolKey) => poolMemberTexts({ leaf, blockId, poolKey, slots: { settlement: 'Brindle', seat: 'hall' } })[0];
+const CAPTURE = corpusLine('power', 'DS-POW-6', 'capture pressure ADVANCING (weak security, poor prosperity)');
+const HOUSES = corpusLine('economy', 'DS-ECO-12', 'INCOME WEIGHT: the religious houses');
+const MAGIC = corpusLine('economy', 'DS-ECO-12', 'INCOME WEIGHT: the practice of magic');
+const SECURE = poolMemberTexts({ leaf: 'economy', blockId: 'DS-ECO-9', poolKey: 'SECURE', slots: { settlement: 'Brindle' } });
+// the SECURE pool's members the arm's 1a and 1b rows read, found by the rows themselves (no sentence typed here)
+const ONLY_JUST = SECURE.find((t) => pageCensusFindings({}, { 'Systems/Economics': [t, 'It grows more than it eats.'] }).some((f) => f.row === 'P1a'));
+const SMALL_MARGIN = SECURE.find((t) => pageCensusFindings({ economicState: { foodSecurity: { foodRecord: { normalImportPct: 40 } } } }, { 'Systems/Economics': [t] }).some((f) => f.row === 'P1b'));
+const SETTLED = corpusLine('defense', 'DS-DEF-2', 'Beasts & Monsters: settled, defenses beyond the need');
 
 const NO_ARCANE = 'Arcane Support None · No arcane practitioners on the rolls';
 /** @type {Record<string, { views: Record<string, string[]>, record?: Record<string, unknown> }>} */
 const PLANTS = {
-  P1a: { views: { 'Systems/Economics': ['Brindle is fed, but only just.', 'It grows more than it eats.'] } },
-  P1b: { views: { 'Systems/Economics': ['Brindle feeds itself with a small margin.'] }, record: { economicState: { foodSecurity: { foodRecord: { normalImportPct: 40 } } } } },
+  P1a: { views: { 'Systems/Economics': [ONLY_JUST, 'It grows more than it eats.'] } },
+  P1b: { views: { 'Systems/Economics': [SMALL_MARGIN] }, record: { economicState: { foodSecurity: { foodRecord: { normalImportPct: 40 } } } } },
   P2: { views: { 'Systems/Economics': ['Stores: a granary of about a year of grain'], 'Systems/Defense': ['Food endurance: the town could hold for three months at full rations'] } },
   P3any: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Magic': ['Reliance on magic: Relied upon'] } },
   P4: { views: { 'Systems/Power': ['Three powers stand almost level in Brindle.'] }, record: { powerStructure: { factions: [{ power: 80 }, { power: 30 }, { power: 25 }] } } },
-  P5a: { views: { 'Systems/Power': ['Free of the criminals', 'Criminal money is reaching the officials of Brindle one at a time, because the town is poor and its streets are badly watched, and a bribe goes a long way here.'] } },
+  P5a: { views: { 'Systems/Power': ['Free of the criminals', CAPTURE] } },
   P5b: { views: { 'Systems/Defense': ['Criminal structure: Diffuse', 'Underworld: the Night Hands'] } },
   P6: { views: { 'Systems/Economics': ['Imports', 'Iron, salt'], 'Systems/Resources': ['No iron reaches the smithy.'] } },
   P7a: { views: { 'World/History': ['Origin:was founded by a band of veteran soldiers', 'Founded by:a merchant consortium'] } },
   P7b: { views: { 'Summary/Overview': ['Settlement Origin▲', 'No wharf stands on this shore.'], 'World/History': ['Origin:grew as a trading port'] } },
-  P8any: { views: { 'Systems/Faith': ['Brindle has no church of its own.'], 'Systems/Economics': ["Faith carries real weight in Brindle's money. What the religious houses take in and spend is a large part of the town's business."] } },
-  P9: { views: { 'Systems/Defense': ['Beasts & Monsters', 'Critical▼', 'There is very little in the country around Brindle and there are substantial works facing it; whatever the walls here are for, it is not the creatures.'] } },
+  P8any: { views: { 'Systems/Faith': ['Brindle has no church of its own.'], 'Systems/Economics': [HOUSES] } },
+  P9: { views: { 'Systems/Defense': ['Beasts & Monsters', 'Critical▼', SETTLED] } },
   P10: { views: { 'World/Institutions': ['The watch hold the gates at night.'], 'Systems/Defense': ['Unfortified. No perimeter walls.'] } },
   P11: { views: { 'Systems/Economics': ['Iron ore · From the hills'] }, record: { config: { nearbyResources: ['timber'] }, economicState: { activeChains: [{ label: 'Ironworking', resource: 'Iron ore', resourceKey: 'iron_deposits' }] } } },
   F4: { views: { 'Systems/Economics': ['Local quarry provides dressed stone for the town.'] }, record: { institutions: [{ name: 'Tavern' }] } },
@@ -34,11 +46,12 @@ const PLANTS = {
   P19: { views: { 'World/History': ['Tannery operating on stockpiles only: 2 inputs missing (hides, bark)'] } },
   P20: { views: { 'Systems/Defense': ['Under siege the outlying fields are lost first.'] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
   NEW1: { views: { 'Summary/Overview': ['Brindle', 'Town · Council · underdefended', 'Defense', 'Fortress'] } },
-  NEW2: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Economics': ["Magic carries real weight in Brindle's money. What the town's practitioners charge for, and what they buy, is a large part of its business."] } },
+  NEW2: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Economics': [MAGIC] } },
 };
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
   test('every row has a plant, and every plant reds its own row and no other', () => {
+    for (const line of [CAPTURE, HOUSES, MAGIC, SETTLED, ONLY_JUST, SMALL_MARGIN]) expect(typeof line).toBe('string');
     expect(Object.keys(PLANTS).sort()).toEqual(Object.keys(PAGE_CENSUS_ROWS).sort());
     for (const [row, plant] of Object.entries(PLANTS)) {
       const rows = pageCensusFindings({ tier: 'town', ...(plant.record || {}) }, plant.views).map((f) => f.row);
@@ -47,7 +60,7 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
   });
   test('the controls: each plant with its contradicting half removed reads nothing', () => {
     const halves = {
-      P1a: { 'Systems/Economics': ['Brindle is fed, but only just.'] },
+      P1a: { 'Systems/Economics': [ONLY_JUST] },
       P5a: { 'Systems/Power': ['Free of the criminals'] },
       P10: { 'World/Institutions': ['The watch hold the gates at night.'] },
       NEW2: { 'Systems/Economics': PLANTS.NEW2.views['Systems/Economics'] },
