@@ -212,7 +212,7 @@ export const HOLDER_SOURCES = Object.freeze({
       + ' the token is mapped to the WATCH rather than to the muster on the ruling\'s own'
       + ' grain: the muster roll counts men under arms, and the watch keeps its own count.',
   }),
-  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:734', read: true }),
+  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:740', read: true }),
   criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/domain/people/hallCapture.js :: writeHallCapture', read: true }), // ALLEGIANCE-CAR2 (J-13): re-cited to the state's ONE writer, the derivation at the coherence seam
   safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:843', read: true }),
 
