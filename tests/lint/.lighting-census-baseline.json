@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "c67c8319e87610642d3ab680f45b754a219b80eb",
+  "measuredAtSha": "69949c00e14719bb06eb9d53758ade5599593bce",
   "measuredBy": "COHERENCE-POWERS-4",
   "date": "2026-11-12",
-  "note": "F3 adds successionClaimants.test.js (four titles)",
+  "note": "the chair's two rulings add one title each: successionClaimants.test.js (the leaderless line once) and tonightSheetOnce.test.jsx (arm (d) planted)",
   "files": 3221,
   "parked": 397,
   "credited": 2824,
-  "titles": 29187,
+  "titles": 29189,
   "suiteTitles": 7899
 }
