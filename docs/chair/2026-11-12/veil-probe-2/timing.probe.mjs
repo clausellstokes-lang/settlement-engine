@@ -1,7 +1,9 @@
 /**
  * COHERENCE-VEIL-2: the review's cost rows on the native engine (F4, F5, F6), median of seven warm reads.
  * Each row is timed at 210, at the reviewed 211 (ORIG_211) and at the working 211, beside the same row
- * unveiled (no `$veil`, no member key, no eye) at the working 211. PARTS picks rows: f4,f5a,f5b,f6.
+ * unveiled (no `$veil`, no member key, no eye) at the working 211. PARTS picks rows: f4,f5a,f5b,f6,r7
+ * (r7, COHERENCE-VEIL-3: the second review's R7 row, the Force-all request with Reveal DM ON in snapshot
+ * mode with the DM copy writeShareVeil stores, every eye shut; its unveiled twin is the same row live).
  *   PG_MODULE=... PGHOST=... PGPORT=... PGUSER=postgres ORIG_211=<file> FORCE_ALL=<json> PARTS=f6 RUN=1 \
  *   npx vitest run --config docs/chair/2026-11-12/veil-probe-2/vitest.config.mjs timing
  * Writes veil-probe-2/out/timing-<RUN>.json.
@@ -24,11 +26,11 @@ it('the cost rows', async () => {
   for (const [k, v] of Object.entries(dbs)) out.failed[k] = v.failed;
   const veil = await import('../../../../src/domain/display/galleryVeil.js');
   let n = 0;
-  async function time(db, data, ov) {
+  async function time(db, data, ov, dm = false) {
     n += 1;
     const id = `bbbbbbbb-0000-0000-0000-${String(n).padStart(12, '0')}`;
-    await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides)
-      values ($1,$2,'T','town',$3,true,$4,now(),$5,'unlisted',$6)`, [id, OWNER, JSON.stringify(data), `t${n}`, `u${n}`, JSON.stringify(ov)]);
+    await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm)
+      values ($1,$2,'T','town',$3,true,$4,now(),$5,'unlisted',$6,$7)`, [id, OWNER, JSON.stringify(data), `t${n}`, `u${n}`, JSON.stringify(ov), dm]);
     await db.query(`select set_config('test.uid', '', false)`);
     const r = {};
     for (const [read, q] of [['gallery', `select data from public.get_gallery_dossier('t${n}')`], ['link', `select public.get_unlisted_dossier('u${n}')`]]) {
@@ -39,10 +41,10 @@ it('the cost rows', async () => {
     await db.query('delete from public.settlements where id = $1', [id]);
     return r;
   }
-  async function row(label, data, ov, unveiled) {
+  async function row(label, data, ov, unveiled, dm = false) {
     const r = { label, bytes: JSON.stringify(data).length + JSON.stringify(ov).length };
-    for (const [k, { db }] of Object.entries(dbs)) r[k] = await time(db, data, ov);
-    r.work211unveiled = await time(dbs.work211.db, unveiled.data ?? data, unveiled.ov ?? {});
+    for (const [k, { db }] of Object.entries(dbs)) r[k] = await time(db, data, ov, dm);
+    r.work211unveiled = await time(dbs.work211.db, unveiled.data ?? data, unveiled.ov ?? {}, dm);
     out.rows.push(r);
     console.log(JSON.stringify(r));
   }
@@ -79,6 +81,18 @@ it('the cost rows', async () => {
     const all = veil.writeShareVeil({}, everyEye(veil, pub).map((address) => ({ address, hidden: true })));
     await row('F6 Force all, every eye shut', rec, all, { ov: {} });
     await row('F6 Force all, default veil', rec, veil.writeShareVeil({}, []), { ov: {} });
+  }
+  if (PARTS.has('r7') && process.env.FORCE_ALL) {
+    const { generateSettlementPipeline: gen } = await import('../../../../src/generators/generateSettlementPipeline.js');
+    const { composePublicProse } = await import('../../../../src/components/new/publicProseCompose.js');
+    const req = JSON.parse(readFileSync(process.env.FORCE_ALL, 'utf-8'));
+    const raw = gen(req.config, null, { seed: req.seed, customContent: {} });
+    const rec = { ...raw, publicProse: composePublicProse(raw) };
+    const pub = veil.galleryPayloadFor(rec, {});
+    const copy = veil.galleryPayloadFor(rec, { shareDm: true });
+    const all = veil.writeShareVeil({}, everyEye(veil, pub).map((address) => ({ address, hidden: true })), { mode: 'snapshot', at: '2026-11-12T00:00:00.000Z', snapshot: copy });
+    if (!all.$veil.snapshot) throw new Error('the writer dropped the DM copy');
+    await row('R7 Force all, Reveal DM on, snapshot with the DM copy, every eye shut', rec, all, { ov: {} }, true);
   }
   mkdirSync(OUT, { recursive: true });
   writeFileSync(resolve(OUT, `timing-${process.env.RUN || 'x'}.json`), JSON.stringify(out, null, 1));
