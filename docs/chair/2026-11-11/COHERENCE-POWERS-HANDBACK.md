@@ -465,3 +465,10 @@ F11 (the draft record's six surfaces measured at the tip; whoRunsThisTownDm re-k
 boost); the wars (thirty realms, the restated line); then the lane made whole: the whole-lane field diff, the ONE draft
 record current (the six pools waiting for the narrow door; the crisis table as a measure; the capture table; the
 mobilization count), L5's whole-suite failing set at the final tip, and the edge bundles re-emitted last, alone.
+
+**The chair's notes of 2026-11-12 recorded:** the two `tests/components/powerSeatRender` reds were THE LANE'S OWN before
+the third seat (green at the line f72262c68, red at 1a32c200a: the not-built rule), re-keyed by identity at 39086c96b.
+Ruling (3) CLOSES WITH NOTHING BUILT: 234 lines read, 0 say an absent power holds or shares power. The crisis seats'
+coup label moves (103 toward danger, 8 toward safety, 9bcda8ff6) are the occupation and the fracture being shown: the
+draft record owes them by crisis and size; the one capture move toward danger (l2-politically_fractured-metropolis-13,
+equilibrium → corrupted) goes into F8's capture table by name.
