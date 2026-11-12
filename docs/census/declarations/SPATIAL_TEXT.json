@@ -21,7 +21,7 @@
       "lines": [
         {
           "lineId": "quarters.Market Quarter.desc",
-          "text": "Bustling center with merchant stalls, money changers, and crowds",
+          "text": "Bustling center with merchant stalls, hawkers, and crowds",
           "needs": [],
           "excludes": [
             "crisis: threat",
@@ -1328,11 +1328,10 @@
         },
         {
           "lineId": "villageLayouts.hills.walled",
-          "text": "Stone-walled village on a south-facing slope, paths converging at the market cross",
+          "text": "Stone-walled village on a south-facing slope, paths converging at the stone cross",
           "needs": [
             "terrain: hills",
-            "walls",
-            "market"
+            "walls"
           ],
           "excludes": [],
           "crisis": null,
@@ -1341,10 +1340,9 @@
         },
         {
           "lineId": "villageLayouts.hills",
-          "text": "Stone-built village on a south-facing slope, paths converging at the market cross",
+          "text": "Stone-built village on a south-facing slope, paths converging at the stone cross",
           "needs": [
-            "terrain: hills",
-            "market"
+            "terrain: hills"
           ],
           "excludes": [
             "walls"

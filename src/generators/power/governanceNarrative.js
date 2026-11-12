@@ -243,7 +243,7 @@ const deriveBaselineStability = ({
   if (stressFlags.stateCrime) return 'Enforced Order (authoritarian)';
   if (stressFlags.crimeIsGovt) return 'Unstable — criminal governance';
   if (stressFlags.crusaderSynthesis) return 'Rigid (militant theocracy)';
-  if (stressFlags.merchantArmy) return 'Fragile (private security, no public law)';
+  if (stressFlags.merchantArmy) return institutionFlags.inst?.hasCourtSystem ? 'Fragile (private security above the public law)' : 'Fragile (private security, no public law)'; // COHERENCE-PRESUME (the chair's ruling of 2026-11-12): never deny the law a hall or court keeps
 
   if (
     institutionFlags.criminalEffective > 75 &&

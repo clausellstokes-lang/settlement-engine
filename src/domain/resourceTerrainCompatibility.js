@@ -41,7 +41,7 @@ const WATER_TERRAIN = new Set(['coastal', 'riverside']);
  * only some arms; the domain layer typechecks strict, so the catalog is read
  * through ONE declared row shape (the resourceDynamicsKernel idiom). Erased at
  * runtime — the values are the same object.
- * @typedef {{ forbidden?: string[], terrain?: string, terrainRequired?: string[],
+ * @typedef {{ forbidden?: string[], requires?: string[], terrain?: string, terrainRequired?: string[],
  *   warning?: string }} ResourceTerrainRow
  */
 const CATALOG = /** @type {Record<string, ResourceTerrainRow & Record<string, unknown>>} */ (
@@ -50,7 +50,10 @@ const CATALOG = /** @type {Record<string, ResourceTerrainRow & Record<string, un
 /**
  * @param {string} route
  * @param {string|null} [terrain]
- * @returns {Array<{ key: string, compatible: boolean, incompatibleReason: (string|null) } & Record<string, unknown>>}
+ * @returns {Array<{ key: string, compatible: boolean, offered: boolean, incompatibleReason: (string|null) } & Record<string, unknown>>}
+ *   `compatible` is the random roll's pool and is unchanged by `requires`; `offered` is the wizard's answer: compatible,
+ *   and on an access the row `requires` (COHERENCE-AGREE-3, 2026-11-12: a crossroads position off a crossroads is
+ *   dimmed in the wizard, with the row's own warning, and can still be forced, as on a port).
  */
 export const getCompatibleResources = (route, terrain = null) =>
   Object.entries(CATALOG).map(([key, r]) => {
@@ -105,5 +108,8 @@ export const getCompatibleResources = (route, terrain = null) =>
       incompatibleReason = routeBlocked ? (r.warning || 'Not compatible with ' + route + ' access.') : null;
     }
 
-    return { key, ...r, compatible, incompatibleReason };
+    const accessMissing = Array.isArray(r.requires) && !r.requires.includes(resourceRoute);
+    const offered = compatible && !accessMissing;
+    if (compatible && accessMissing) incompatibleReason = r.warning || 'Not compatible with ' + route + ' access.';
+    return { key, ...r, compatible, offered, incompatibleReason };
   });

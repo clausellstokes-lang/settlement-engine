@@ -39,10 +39,8 @@
         },
         {
           "lineId": "CULTURE_PROFILES.germanic.architecturalDetails[2]",
-          "text": "a hall-and-market axis organizes the settlement center",
-          "needs": [
-            "market"
-          ],
+          "text": "one broad street leading up to the hall organizes the settlement center",
+          "needs": [],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -321,10 +319,8 @@
         },
         {
           "lineId": "CULTURE_PROFILES.east_asian.architecturalDetails[2]",
-          "text": "the market street terminates at an administrative or temple precinct",
-          "needs": [
-            "market"
-          ],
+          "text": "the main street ends at the administrative precinct",
+          "needs": [],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -349,10 +345,8 @@
       "lines": [
         {
           "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[0]",
-          "text": "a raised ceremonial precinct overlooks a broad and intensely used market plaza",
-          "needs": [
-            "market"
-          ],
+          "text": "a raised ceremonial precinct overlooks a broad and busy open plaza",
+          "needs": [],
           "excludes": [],
           "crisis": null,
           "colour": false,
@@ -418,10 +412,8 @@
         },
         {
           "lineId": "CULTURE_PROFILES.south_asian.architecturalDetails[2]",
-          "text": "occupational quarters cluster around shared water and market infrastructure",
-          "needs": [
-            "market"
-          ],
+          "text": "occupational quarters cluster around shared wells and water channels",
+          "needs": [],
           "excludes": [],
           "crisis": null,
           "colour": false,

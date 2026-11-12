@@ -102,6 +102,7 @@ function ChainRow({ chain, instNames, primaryExports }) {
   });
 
   const importedUpstream = missing.map((uid) => CHAIN_DEFS[uid]?.label || uid);
+  const refused = chainYieldRefused(chain);
 
   return (
     <View
@@ -148,7 +149,18 @@ function ChainRow({ chain, instNames, primaryExports }) {
           </View>
         ))}
 
-        {outputs.length > 0 ? (
+        {outputs.length > 0 && refused ? (
+          <>
+            <Connector />
+            {/* COHERENCE-AGREE-4 (item 3′): a chain the exporter refuses draws its table's outputs in the missing
+                style, as what it yields when whole; nothing is marked exported. */}
+            {outputs.map((o, i) => (
+              <Node key={`o-${i}`} {...MISSING} dashed italic>
+                {i === 0 ? `${NORMALLY_YIELDS}: ` : ''}{safe(o.label)}
+              </Node>
+            ))}
+          </>
+        ) : outputs.length > 0 ? (
           <>
             <Connector />
             {outputs.map((o, i) => (
@@ -271,3 +283,6 @@ export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], t
 }
 
 export default SupplyChainFlow;
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';

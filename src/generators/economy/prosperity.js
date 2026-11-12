@@ -18,6 +18,7 @@ import {
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
+import { PROSPERITY_RANK } from '../../domain/prosperityRank.js';
 
 
 // Public compatibility name retained for every generator caller. The vocabulary
@@ -26,21 +27,65 @@ import { factsOf } from '../../domain/facts/factsOf.js';
 export const priorityToCategory = priorityBand;
 
 
-// deriveEconomicSituationDesc
+// deriveEconomicSituationDesc — `prosperityLabel` (COHERENCE-AGREE-3, F11) is the computed label the
+// record prints beside the line; where the economy slider's trade line contradicts it, the label wins.
 export const deriveEconomicSituationDesc = (
   config = {},
   _tier = 'town',
   institutions = [],
   foodSecurity = null,
-) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity), PROSPERITY_LINE_SIBLINGS, {
+  prosperityLabel = null,
+) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity, prosperityLabel), PROSPERITY_LINE_SIBLINGS, {
   facts: () => factsOf({ institutions }), poolId: 'prosperity:PROSPERITY_LINE_SIBLINGS', surface: 'economics', drawKind: 'T',
 });
 
-/** @param {any} config @param {string} _tier @param {any[]} institutions @param {any} foodSecurity @returns {string} */
-const situationDescOf = (config, _tier, institutions, foodSecurity) => {
+/**
+ * THE TRADE LINE AND THE PROSPERITY LABEL, ONE ANSWER (COHERENCE-AGREE-3, REVIEW-AGREE F11). The trade
+ * lines below are chosen by a band of the economy slider; the label beside them is computed. Where the
+ * slider's line says the opposite of the label ("Commerce is sluggish" beside "Prosperous"), the line is
+ * re-keyed to the label's own band: a label of Comfortable or better takes no slow-trade line, a label of
+ * Poor or worse no busy-trade line. The label's meaning is the ladder's (domain/prosperityRank.js ::
+ * PROSPERITY_RANK); this reads its rank and adds no meaning of its own.
+ */
+const SLOW_TRADE = Object.freeze(['low', 'very_low']);
+const BUSY_TRADE = Object.freeze(['high', 'very_high']);
+/** The band of the trade line a label's rank speaks for. @param {number} rank */
+const tradeBandOfRank = (rank) => (rank >= PROSPERITY_RANK.Wealthy ? 'very_high' : rank >= PROSPERITY_RANK.Prosperous ? 'high' : rank >= PROSPERITY_RANK.Moderate ? 'medium' : rank >= PROSPERITY_RANK.Poor ? 'low' : 'very_low');
+/**
+ * Does a trade line's band contradict the prosperity label? @param {string} band @param {unknown} label
+ * @returns {boolean}
+ */
+export const tradeBandContradictsLabel = (band, label) => {
+  const rank = PROSPERITY_RANK[/** @type {keyof typeof PROSPERITY_RANK} */ (String(label || ''))];
+  if (typeof rank !== 'number') return false;
+  return (SLOW_TRADE.includes(band) && rank >= PROSPERITY_RANK.Comfortable) || (BUSY_TRADE.includes(band) && rank <= PROSPERITY_RANK.Poor);
+};
+/**
+ * The trade lines by the band each is chosen for, read by the coherence receipt's agreement arm
+ * (generationCoherence.js) with `tradeBandContradictsLabel`, so the arm and this writer give one answer.
+ * Matched by opening words, so a market line's declared twin is read as its original.
+ * @type {ReadonlyArray<readonly [RegExp, string]>}
+ */
+export const TRADE_LINE_BANDS = Object.freeze([
+  [/^Trade is what this settlement lives on\./, 'very_high'],
+  [/^Trade is brisk, the guilds are well run/, 'high'],
+  [/^Commerce is sluggish;/, 'low'],
+  [/^Little coin changes hands here/, 'very_low'],
+  [/^Cut off as it is, the settlement runs itself well/, 'high'],
+  [/^With no outside trade, the settlement struggles/, 'low'],
+]);
+
+/** @param {string} econCat @param {unknown} label @returns {string} the band the trade line is chosen by */
+const tradeBandFor = (econCat, label) => (tradeBandContradictsLabel(econCat, label)
+  ? tradeBandOfRank(Number(PROSPERITY_RANK[/** @type {keyof typeof PROSPERITY_RANK} */ (String(label))]))
+  : econCat);
+
+/** @param {any} config @param {string} _tier @param {any[]} institutions @param {any} foodSecurity @param {unknown} [prosperityLabel] @returns {string} */
+const situationDescOf = (config, _tier, institutions, foodSecurity, prosperityLabel = null) => {
   const flags = getInstFlags(config, institutions);
   const stress = getStressFlags(config, institutions);
   const econCat = priorityToCategory(flags.economyOutput);
+  const tradeCat = tradeBandFor(econCat, prosperityLabel);
   const crimeCat = priorityToCategory(flags.criminalEffective);
   const route = config?.tradeRouteAccess || 'road';
   const worldLaw = resolveGenerationWorldLaw(null, config);
@@ -101,9 +146,9 @@ const situationDescOf = (config, _tier, institutions, foodSecurity) => {
       return 'Goods come and go by magic: teleportation circles and planar contacts do the work of roads. Trade works, but only as long as the circles do.';
     if (stress.stateCrime)
       return 'Those in power take so much that little gets made, and what little is left over goes to them.';
-    if (econCat === 'very_high' || econCat === 'high')
+    if (tradeCat === 'very_high' || tradeCat === 'high')
       return 'Cut off as it is, the settlement runs itself well: skilled crafts, well-worked fields and shared stores keep it fed and supplied.';
-    if (econCat === 'low' || econCat === 'very_low')
+    if (tradeCat === 'low' || tradeCat === 'very_low')
       return 'With no outside trade, the settlement struggles to feed and supply itself. Everything is rationed, and there is nothing to spare for growing.';
     return 'The settlement feeds and supplies itself without outside trade, but it has little to spare and cannot get what it does not make.';
   }
@@ -114,12 +159,12 @@ const situationDescOf = (config, _tier, institutions, foodSecurity) => {
     return 'Trade is brisk, and it is hard to say where honest business ends and crime begins. The richest traders work both sides.';
   if (stress.stateCrime)
     return "On paper the settlement's trade looks healthy. In fact, seizures, forced sales and unfair taxes keep people from making or selling much.";
-  if (econCat === 'very_high')
+  if (tradeCat === 'very_high')
     return 'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.';
-  if (econCat === 'high')
+  if (tradeCat === 'high')
     return "Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.";
-  if (econCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
-  if (econCat === 'very_low')
+  if (tradeCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
+  if (tradeCat === 'very_low')
     return 'Little coin changes hands here; people barter, and few outsiders bother to come and trade.';
   if (crimeCat === 'high' || crimeCat === 'very_high')
     return 'Honest trade gets by, but a busy black market undercuts it.';
@@ -346,10 +391,16 @@ const complexityByExports = (tier, incomeSourceCount, exportCount, hasMarketInst
  * thing for a town with no market. Measured on 360 births (seeds agree-<tier>-<i>) before the
  * change: "markets meet infrequently" printed in 7 towns with no market, "The market still opens"
  * in 2, the rest in none. Keyed by the printed text; resolved through `resolveSibling` above.
+ * `alsoNeeds` declares what BOTH the line and its twin name besides the market (COHERENCE-AGREE-4): the
+ * theocratic pair names the church, so each needs the sacred house — true wherever it prints, since its
+ * branch (`priorityHelpers.js :: theocraticEconomy`) fires only beside a cathedral or a monastery.
+ * @param {string} text @param {string} twin @param {ReadonlyArray<string>} [alsoNeeds]
  */
-const marketSet = (text, twin) => Object.freeze([
-  Object.freeze({ text, needs: Object.freeze(['market']) }),
-  Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(['market']) }),
+const marketSet = (text, twin, alsoNeeds = []) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(['market', ...alsoNeeds]) }),
+  Object.freeze(alsoNeeds.length
+    ? { text: twin, twinOf: text, needs: Object.freeze([...alsoNeeds]), excludes: Object.freeze(['market']) }
+    : { text: twin, twinOf: text, excludes: Object.freeze(['market']) }),
 ]);
 export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
   'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.': marketSet(
@@ -363,7 +414,8 @@ export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
     'Fear of the sickness and the quarantine keep people from trading, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.'),
   'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.': marketSet(
     'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.',
-    'The church controls most economic activity. Land and trade flow through religious institutions. Commerce is present but the church sets the terms.'),
+    'The church controls most economic activity. Land and trade flow through religious institutions. Commerce is present but the church sets the terms.',
+    ['sacredHouse']),
   'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.': marketSet(
     'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.',
     'Trade is what this settlement lives on. Goods change hands at all hours, and the guilds have a hand in every craft.'),

@@ -1,5 +1,5 @@
 {
-  "_doc": "COHERENCE-AGREE (the chair's charter of 2026-11-11, \u00a72): the private readers of the defence facts (walls, garrison, militia, watch, mercenaries) outside their home (src/domain/facts/, src/domain/defense/), counted by tests/lint/defenceFactReaders.walker.test.js. SHRINK-ONLY from its first commit: a row may only fall, and falls the commit its reader retires to the home; no row is ever added. Banked at the lane's base 99bcc6944.",
+  "_doc": "COHERENCE-AGREE (the chair's charter of 2026-11-11, §2): the private readers of the defence facts (walls, garrison, militia, watch, mercenaries) outside their home (src/domain/facts/, src/domain/defense/), counted by tests/lint/defenceFactReaders.walker.test.js. SHRINK-ONLY from its first commit: a row may only fall, and falls the commit its reader retires to the home; no row is ever added. Banked at the lane's base 99bcc6944.",
   "rows": {
     "src/components/new/SummaryTab.jsx": {
       "count": 2,
@@ -50,7 +50,7 @@
       "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
     },
     "src/generators/economy/economicState.js": {
-      "count": 3,
+      "count": 2,
       "reason": "A private name test or flag of a defence fact, at the base; it answers what the home answers and retires to src/domain/facts/defence.js"
     },
     "src/generators/economy/viability.js": {

@@ -31,7 +31,7 @@ import {
   isTradeRouteDisconnected,
   SEASONAL_ROUTE_FOOD_IMPORT_RATE,
 } from '../domain/tradeRouteSemantics.js';
-import { foodLandOf } from './foodLand.js';
+import { NO_FOOD_CHAINS_LINE, OWN_PLOTS_LINE, foodLandOf } from './foodLand.js';
 
 // ── THE BASE NUMBERS (FOOD-2, chair ruling 2, 2026-11-03; fix shape E) ──────────────
 // Per capita and per tier, so the arithmetic holds under any headcount scale. Every place
@@ -102,7 +102,7 @@ export function generateFoodSecurity(tier, institutions, config, storesShare = 1
     instNames, hasInst,
     hasMill, hasGranary, hasCityGranary, hasStateGranary,
     hasMarket, hasDruid, hasDivine, hasArcane,
-    foodSources, preservedSources,
+    foodSources, preservedSources, worksOwnLand,
     effectiveAgri, customFoodImpact, customProducerCapacityBonus, customConsumerNeedBonus,
   } = foodLandOf(tier, institutions, config, route);
 
@@ -360,7 +360,7 @@ export function generateFoodSecurity(tier, institutions, config, storesShare = 1
                       : activeChainsCount === 3 ? 'three food source types'
                       : activeChainsCount === 2 ? 'two food source types'
                       : activeChainsCount === 1 ? 'single food source'
-                      : 'no established food chains';
+                      : worksOwnLand ? OWN_PLOTS_LINE : NO_FOOD_CHAINS_LINE; // COHERENCE-AGREE-3 (Part B (i)): its own plots
 
   const storageNote = storageMonths >= 8 ? `${storageMonths} months strategic reserve`
                     : storageMonths >= 4 ? `${storageMonths} months buffer`
@@ -396,6 +396,7 @@ export function generateFoodSecurity(tier, institutions, config, storesShare = 1
       sources: foodSources,
       cultureLines: CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways?.map(textOf) || null, // R-C: a declared row gives back its text (CENSUS-2d)
       identity: `${tier}|${population}|${terrain}|${route}|${config.cultureProfileKey || ''}`,
+      market: hasMarket, // COHERENCE-AGREE-3 (F6): the market home (facts/market.js), read by foodLandOf
     }),
   });
 

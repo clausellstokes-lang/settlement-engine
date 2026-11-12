@@ -77,7 +77,7 @@ import { scoreBand } from '../defenseScoreBands.js';
 // stressorsStateProse.js:78) — `timeBandOf`/`timeBandWord` ARE that former, and the
 // declination is stale at this tip rather than wrong when it was written. Measured here,
 // not assumed: see `yearBand` below.
-import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
+import { TIME_BANDS, timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
 import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
@@ -448,8 +448,11 @@ function phraseFill(value) {
  * ⚠ THE LADDER TOPS OUT WELL BELOW THIS CHAPTER'S SUBJECT, AND THAT IS THE FINDING BELOW.
  * @param {number} years @returns {ReturnType<typeof timeBandOf>}
  */
-function yearBand(years) {
-  return timeBandOf(years, 52);
+export function yearBand(years) {
+  const band = timeBandOf(years, 52);
+  // COHERENCE-PRESUME (the chair's ruling B): the herald's ladder calls up to twenty-five years "a decade",
+  // and the page printed "a decade old" beside "23y ago". In years, past fifteen a span is a generation.
+  return band.id === 'a_decade' && years > 15 ? (TIME_BANDS.find((b) => b.id === 'a_generation') ?? band) : band;
 }
 
 /**

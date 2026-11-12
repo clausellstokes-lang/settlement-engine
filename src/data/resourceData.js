@@ -172,6 +172,10 @@ export const RESOURCE_DATA = {
     instBoosts: { inn: 1.6, market: 1.8, guild: 1.3, warehouse: 1.5, stable: 1.6 },
     tradeGoods: ["Transit trade", "Toll revenue"],
     forbidden: ["isolated", "port", "river"],
+    // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12): the rule the warning states, as data. Read by the
+    // roll (resolveResources.js: a rolled position off a crossroads is dropped, the pool unchanged), the wizard
+    // (getCompatibleResources' `offered`) and the structural validator (a forced one warns, as on a port).
+    requires: ["crossroads"],
     warning: "A crossroads position requires crossroads trade access.",
     category: "special",
   },

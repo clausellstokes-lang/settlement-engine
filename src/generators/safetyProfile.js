@@ -15,7 +15,7 @@ import { crimeSignalOf } from '../domain/crimeSignal.js';
 import { runningCriminalChains } from '../domain/display/defenseDisplay.js';
 import { defenceOf } from '../domain/facts/defence.js';
 import { factsOf } from '../domain/facts/factsOf.js';
-import { resolveSibling } from '../domain/facts/drawDeclared.js';
+import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js';
 
 /**
  * The pool's own "desperation theft" line, held once because two entries print it: the famine
@@ -303,8 +303,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
           : inst.hasMilitia
             ? 'militia'
             : 'local guard';
-    const wallNote   = inst.hasWalls ? ' Everyone comes in by the gates, where the guard sees them.' : '';
-    const charNote   = inst.hasCharterHall ? " The adventurers' charter hall handles threats the watch cannot." : '';
+    // COHERENCE-AGREE-3 (F5): the gates are the gate home's (defence.gate), not the walls'; a palisade has no gate of record.
+    const wallNote   = inst.hasWalls ? said(' Everyone comes in by the gates, where the guard sees them.') : '';
+    const charNote   = inst.hasCharterHall ? said(" The adventurers' charter hall handles threats the watch cannot.") : ''; // F12: the watch, where it stands
     // Canonical threat vocabulary is heartland/frontier/plagued ('embattled' was never emitted).
     const threatNote = threat === 'plagued' ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : '';
     safetyDesc = `Visitors can walk anywhere at any hour, and there is little crime; the ${lawRef} sees to that.` +
@@ -365,9 +366,11 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       ? ' Offenders can be jailed, but without a working court system enforcement is arbitrary.'
       : ' Without courts or prison, enforcement relies entirely on fines, exile, or summary violence.';
 
-    const wallNote = inst.hasWalls
-      ? ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`
-      : '';
+    // COHERENCE-AGREE-3 (F5): the gate home answers "gates"; walls with no gate take the twin that names none.
+    // (A template over the force noun, so it is chosen here by the home, not keyed in the sibling table; the twin carries its declaration, COHERENCE-AGREE-4.)
+    const wallNote = !inst.hasWalls ? ''
+      : inst.hasGates ? ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`
+        : lineText({ text: ` The walls leave few ways in, so smugglers have to get past the ${lawRef}.`, needs: ['walls'], excludes: ['gate'] });
 
     if (stress.stateCrime) {
       guardEffectivenessDesc = `The ${lawRef} is well organised and works for the rulers' purses, not for the public; ` +
@@ -468,7 +471,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const courtNote = inst.hasCourtSystem && inst.hasPrison
       ? ' Guild operations are careful and layered. They keep enough distance from violent crime that prosecution is difficult.'
       : inst.hasCourtSystem // COHERENCE-AGREE: a court and no prison is not "no court"
-      ? ' With nowhere to hold the guilty, operations are conducted openly enough to be an open secret.'
+      ? lineText({ text: ' With nowhere to hold the guilty, operations are conducted openly enough to be an open secret.', needs: ['court'], excludes: ['prison'] })
       : ' With no reliable court system to fear, operations are conducted openly enough to be an open secret.';
     crimeTypes.push({
       type: 'Organized guild crime',
@@ -511,7 +514,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : inst.hasPrison
       ? ' Offenders can be jailed, but without consistent courts, enforcement is sporadic.'
       : inst.hasCourtSystem // COHERENCE-AGREE: a court and no prison is not "no court"
-      ? ' With nowhere to hold the guilty, the risk of operating is low. Arrest means a fine at worst.'
+      ? lineText({ text: ' With nowhere to hold the guilty, the risk of operating is low. Arrest means a fine at worst.', needs: ['court'], excludes: ['prison'] })
       : ' Without prison or courts, the risk of operating is low. Arrest means a fine at worst.';
     crimeTypes.push({
       type: 'Smuggling',
@@ -553,7 +556,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const courtNote = inst.hasCourtSystem && inst.hasPrison
         ? ' Consequences exist (offenders risk real prosecution) which keeps serious organised crime from taking root.'
         : inst.hasCourtSystem // COHERENCE-AGREE: a court and no prison is not "no court"
-        ? ' With nowhere to hold the guilty, most offenders face no meaningful consequences.'
+        ? lineText({ text: ' With nowhere to hold the guilty, most offenders face no meaningful consequences.', needs: ['court'], excludes: ['prison'] })
         : ' The lack of reliable courts and detention means most offenders face no meaningful consequences.';
       crimeTypes.push({
         type: 'Background crime',
@@ -721,7 +724,16 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push("A guild merchant hired the party, then asked for something the guild forbids; the pay is good, and someone else in the guild already knows.");
   }
   if (inst.hasSmuggling) {
-    plotHooks.push("The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.");
+    // ONE SENTENCE STOOD IN EVERY SMUGGLING TOWN (COHERENCE-QUARREL cure 4): 107 of 181 safety
+    // hooks on the lane's corpus. The seed chooses among four tellings of the same thought,
+    // without a roll; with no seed the original prints.
+    const seed = getActiveRng()?.seed;
+    const drawn = drawDeclared(SMUGGLING_HOOKS, {
+      draw: (pool) => (seed ? pool[hashKey(`${seed}::safetyProfile:SMUGGLING_HOOKS`) % pool.length] : pool[0]),
+      facts: () => factsOf({ institutions }), key: `${seed ?? ''}::safetyProfile:SMUGGLING_HOOKS`,
+      poolId: 'safetyProfile:SMUGGLING_HOOKS', surface: 'plot_hooks', drawKind: 'H',
+    });
+    if (drawn.line != null) plotHooks.push(String(lineText(drawn.line)));
   }
   if (stress.crusaderSynthesis) {
     plotHooks.push(said("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological."));
@@ -846,6 +858,16 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.": declaredSet(
     " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.", ['walls'],
     " The settlement's gates are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes."),
+  // COHERENCE-AGREE-3 (REVIEW-AGREE F5, 2026-11-12): the safety line's gates read the gate home; a palisade
+  // has no gate of record. Measured on the 2,866-birth L2 corpus at 65ce74ce6: printed with no gate 15.
+  ' Everyone comes in by the gates, where the guard sees them.': declaredSet(
+    ' Everyone comes in by the gates, where the guard sees them.', ['gate'],
+    ' The walls leave few ways in, and the guard watches them.'),
+  // COHERENCE-AGREE-3 (REVIEW-AGREE F12): the charter hall's line names the watch, so it needs the watch; the
+  // twin names no force. Measured on the 2,866-birth L2 corpus at 65ce74ce6: printed with no watch 11.
+  " The adventurers' charter hall handles threats the watch cannot.": declaredSet(
+    " The adventurers' charter hall handles threats the watch cannot.", ['watch'],
+    " The adventurers' charter hall takes the jobs that need hunters, not guards."),
   'The watch is too thinly spread to maintain order.': declaredSet(
     'The watch is too thinly spread to maintain order.', ['watch'],
     'Enforcement is too thinly spread to maintain order.'),
@@ -895,6 +917,17 @@ function voiceOf(poolId, pool) {
   const seed = getActiveRng()?.seed;
   return seed ? pool[hashKey(`${seed}::safetyProfile:${poolId}`) % pool.length] : pool[0];
 }
+
+/**
+ * The smuggling hook's four tellings (COHERENCE-QUARREL cure 4). The original stays at index 0.
+ * Each carries its text as its id, so the census counts a line, not a slot.
+ */
+const SMUGGLING_HOOKS = Object.freeze([
+  'The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.',
+  'A smuggler wants one crate moved quietly and will pay well, but will not say what is in it.',
+  'The smugglers have stopped moving their usual goods this week, and nobody can say why.',
+  'A smuggled load went missing on the way in, and the people who paid for it are asking questions.',
+].map((text) => Object.freeze({ id: text, text })));
 
 /** #17: a court AND a prison stand (the branch's two facts). @param {string} lawRef */
 function COURT_AND_PRISON(lawRef) {

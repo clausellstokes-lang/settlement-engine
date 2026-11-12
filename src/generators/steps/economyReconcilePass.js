@@ -37,6 +37,7 @@ import {
   projectCustomTradeSemantics,
 } from './generateEconomy.js';
 import { computeDemandImports } from '../demandProfile.js';
+import { sayHowLittleGrain } from '../economy/primaryTradeLists.js';
 import { subsumeTradeGoods, reconcileTradeLists } from '../../domain/region/goodsCatalog.js';
 import { generateSpatialLayout } from '../spatialGenerator.js';
 import { generateAvailableServices } from '../servicesGenerator.js';
@@ -187,6 +188,9 @@ registerStep('economyReconcilePass', {
   // Re-apply subsumption + export/import reconciliation to the final lists
   // (see finalizeTradeLists above for why both are needed here).
   finalizeTradeLists(economicState, effectiveConfig.customTradeGoods || null);
+  // COHERENCE-AGREE-3 (the chair's ruling on STOP 1, 2026-11-12): what the demand pass appends passes the same
+  // "says how little grain" rule as the list it joins (a town growing 90% of its need names a little grain).
+  if (Array.isArray(economicState.primaryImports)) sayHowLittleGrain(economicState.primaryImports, economicState.foodSecurity?.foodRecord);
 
   // ── 3. Spatial layout + services from the FINAL roster ──────────────────
   const terrainType = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);

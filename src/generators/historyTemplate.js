@@ -16,7 +16,7 @@
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const THE_LOWER_DISTRICT = 'the lower district';
-const THE_MARKET_QUARTER = 'the market quarter';
+const THE_MARKET_QUARTER = 'the merchants\' quarter'; // COHERENCE-PRESUME (2026-11-11): the town may have no market
 const THE_RIVERSIDE_QUARTER = 'the riverside quarter';
 export const renderHistoryTemplate = (template, tokens = {}) =>
   Object.entries(tokens).reduce(

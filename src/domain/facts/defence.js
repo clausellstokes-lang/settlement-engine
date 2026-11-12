@@ -19,6 +19,8 @@
  *   commander — a garrison stands, so someone commands one (`hasCommander`; CENSUS-1c, R-E)
  *   court    — a court sits: a courthouse, or a town or city hall a magistrate hears cases in
  *              (`hasCourt`; COHERENCE-AGREE, 2026-11-12)
+ *   prison   — somewhere to hold the guilty: a prison, the stocks, a gaol or a jail (`hasPrison`;
+ *              COHERENCE-AGREE-4, 2026-11-12). A court and a prison are two facts.
  *
  * Pure: no randomness, no clock.
  */
@@ -29,6 +31,7 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
  * @property {boolean} walls @property {'stone'|'palisade'|null} wallKind @property {boolean} palisade
  * @property {boolean} gate @property {boolean} watch @property {boolean} militia
  * @property {boolean} garrison @property {boolean} hospital @property {boolean} healer @property {boolean} mercenary @property {boolean} commander @property {boolean} court
+ * @property {boolean} prison
  */
 
 /**
@@ -51,5 +54,6 @@ export function defenceOf(record) {
     mercenary: d.hasMercenary,
     commander: d.hasCommander,
     court: d.hasCourt,
+    prison: d.hasPrison,
   });
 }

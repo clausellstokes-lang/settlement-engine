@@ -194,7 +194,12 @@ describe('composeSettlementQuickGuide', () => {
     // terms, so every SCOPE_PHRASE paraphrase was re-read and still holds (none moved).
     // 0268f53d29cd -> 48db1bc0fdfc, same pass: the east-asian scope drops "Walled" (the soak's coh:defense-words read it
     // on 35 wall-less towns); its paraphrase never named walls and still holds.
-    const SCOPE_TEXT_DIGEST = '48db1bc0fdfc';
+    // 48db1bc0fdfc -> 05b9e6d78861 at COHERENCE-PRESUME (2026-11-12): the Greek scope's agora stands "at the
+    // centre", not "by the harbor" (it printed in 14 corpus towns with no water), and the Mesoamerican scope has
+    // "waterworks and gardens" round its plaza, not "markets" (2 marketless towns). Both paraphrases were re-read:
+    // each is declared on its own (the Greek harbour needs navigable, with its inland twin; the Mesoamerican
+    // market-and-waterworks needs market, with its twin), so neither presumes and neither moved.
+    const SCOPE_TEXT_DIGEST = '05b9e6d78861';
     const scopesInKeyOrder = Object.values(CULTURE_PROFILES).map((profile) => profile.scope);
     const digest = (parts) => createHash('sha256').update(parts.join('\n')).digest('hex').slice(0, 12);
 

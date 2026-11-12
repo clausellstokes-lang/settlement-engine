@@ -94,7 +94,9 @@ const PROMISES = {
       { clause: 'a mountain city', holds: (s) => s.tier === 'city' && s.config.terrainType === 'mountain' },
       { clause: 'built on iron · tag Industrial (iron on the card, a Smelter, Specialized metalworkers)', holds: (s) => conditionOf(s, 'iron_deposits') != null && hasInstitution(s, /^Smelter$/) && hasInstitution(s, /^Specialized metalworkers$/) },
       { clause: 'where the merchant guilds hold power · tag Guild power', holds: (s) => hasFaction(s, /^Merchant Guilds$/) },
-      { clause: 'the mines now give up too little ore (the dossier\'s "Iron ore (local mines exhausted)")', holds: (s) => JSON.stringify(s.economicState).includes('Iron ore (local mines exhausted)') },
+      // RE-KEYED BY IDENTITY (COHERENCE-AGREE-3, the chair's ruling of 2026-11-12): the card's promise is its own words
+      // and unchanged; only the dossier label it quotes is re-spelled, the shortage label naming its own land.
+      { clause: 'the mines now give up too little ore (the dossier\'s "Iron ore (local iron mines exhausted)")', holds: (s) => JSON.stringify(s.economicState).includes('Iron ore (local iron mines exhausted)') },
       { clause: 'tag Dwindling resource (iron depleted)', holds: (s) => conditionOf(s, 'iron_deposits') === 'depleted' },
     ],
   },

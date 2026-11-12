@@ -23,6 +23,7 @@ import {
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { waterOf } from '../../domain/facts/water.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-1f: one line
+import { hasMarketInstitution } from '../../domain/facts/market.js';
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
 
@@ -206,10 +207,10 @@ const generatePowerDynamics = (population, institutions, economicState, config =
   const pri = getPriorities(config);
   const instNames = nativeSemanticNames(institutions)
     .map(name => name.toLowerCase());
-  const hasInst = (...kws) => kws.some((kw) => instNames.some((n) => n.includes(kw)));
 
   // City+ without markets
-  const hasMarket = hasInst('market', 'merchant', 'district'), cityScale = isCityScale(sizeTier, population);
+  // COHERENCE-AGREE-3 (REVIEW-AGREE F9): the market is the market home's answer (facts/market.js), not a third name list.
+  const hasMarket = hasMarketInstitution(institutions), cityScale = isCityScale(sizeTier, population);
   if (cityScale && !hasMarket) {
     warnings.push({
       severity: SEVERITY.CRITICAL,
@@ -445,6 +446,16 @@ export const sortBySeverity = (r) => {
   return r.sort((o, d) => (s[o.severity] ?? 9) - (s[d.severity] ?? 9));
 };
 
+/**
+ * THE WAR FACT'S ONE HOME AT THE HOOK SITE (COHERENCE-AGREE-3, REVIEW-AGREE F4). The hook site's partial
+ * record carried no crisis container, so `warStateOf` (domain/facts/warState.js) read every town at peace
+ * and the war line could never print. The birth's crises are the stress types it resolved (resolveStress);
+ * handed over as the container the final record carries, the site reads the war from the same home and
+ * the same reader the coherence receipt reads (measured on 1,426 births: the site and the final record agree
+ * on every one). @param {{ stressTypes?: unknown }} cfg
+ */
+const birthStressorsOf = (cfg) => (Array.isArray(cfg?.stressTypes) ? cfg.stressTypes.filter((type) => typeof type === 'string').map((type) => ({ type })) : []);
+
 export const generateEconomicViability = (settlement, terrainType = null, nearbyResources = []) => {
   const issues = [];
   const warnings = [];
@@ -479,7 +490,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   suggestions.push(...(waterAnalysis.suggestions || []));
 
   // Food balance plot hooks
-  const stabilityAnalysis = deriveSupplyRiskAnalysis(population, terrain, insts, cfg, foodAnalysis.foodBalance, () => factsOf({ institutions: insts, config: cfg, tier, economicState })); // CENSUS-1f: the outlook hooks resolve (the fields at hand only, R-Z)
+  const stabilityAnalysis = deriveSupplyRiskAnalysis(population, terrain, insts, cfg, foodAnalysis.foodBalance, () => factsOf({ institutions: insts, config: cfg, tier, economicState, stressors: birthStressorsOf(cfg) })); // CENSUS-1f: the outlook hooks resolve (the fields at hand only, R-Z)
   issues.push(...stabilityAnalysis.issues);
   warnings.push(...stabilityAnalysis.warnings);
   plotHooks.push(...stabilityAnalysis.plotHooks);
@@ -570,7 +581,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
 // reads the LIVE roster; re-exported under its SIZE-lane name for this module's importers. (Rung 1's
 // LANDING-2 moved the same function to src/domain/marketInstitution.js for the domain -> generators
 // boundary; at the rung-2 merge the census's home serves both intents and that copy is retired.)
-export { hasMarketInstitution } from '../../domain/facts/market.js';
+export { hasMarketInstitution };
 
 /**
  * IS THIS A CITY-SCALE PLACE? The two structural cuts below ("no trade infrastructure",

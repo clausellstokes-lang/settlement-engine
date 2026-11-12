@@ -691,15 +691,9 @@ export function deriveExportsFromChains(
   const depletedKeys = new Set(
     depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
   );
-  const chainIsDepleted = (chain) => {
-    if (chain.resourceInputCondition) {
-      return chain.resourceInputCondition === 'depleted';
-    }
-    return (
-      chain.resourceDepleted
-      || (chain.resource && depletedKeys.has(resourceKeyForLabel(chain.resource)))
-    );
-  };
+  // COHERENCE-AGREE-4 (item 3′): the refusal is the leaf's (domain/chainYield.js), the one predicate every page
+  // that prints a town's chain outputs reads too.
+  const isDepletedResource = (resource) => depletedKeys.has(resourceKeyForLabel(resource));
 
   // 1. Raw material exports from nearby resources (what the land provides directly)
   // Skip depleted resources — they're consumed locally, nothing available to export
@@ -738,7 +732,7 @@ export function deriveExportsFromChains(
   // Skip chains whose primary resource is depleted (consumed locally, nothing left to export)
   // Also gate byproduct outputs that require a specific additional institution.
   activeChains
-    .filter(ch => ch.exportable && ch.status !== 'impaired' && !chainIsDepleted(ch))
+    .filter(ch => ch.exportable && !chainYieldRefused(ch, isDepletedResource))
     .forEach(chain => ownFoodGoodsHeldByFoodRecord(goodsHeldByFoodRecord(chain.outputs, foodRecord), chain.chainId, foodRecord).slice(0, 2).forEach(o => {
       const requiredInst = CHAIN_OUTPUT_INST_GATES[o];
       if (requiredInst) {
@@ -1026,3 +1020,6 @@ export function deriveServiceExports(institutionalServices) {
     .filter(s => s.exportable && s.exportLabel)
     .map(s => s.exportLabel);
 }
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line cited above it moves.
+import { chainYieldRefused } from '../domain/chainYield.js';

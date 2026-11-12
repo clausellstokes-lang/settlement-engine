@@ -18,12 +18,20 @@ import {
   resolveGenerationContentProfile,
 } from '../domain/generationContentProfile.js';
 import {
+  RESOURCE_SEMANTICS,
   nativeResourceConditionRecords,
   resourceKeyForLabel,
   resourceShortageImport,
 } from '../domain/resourceSemantics.js';
 import { factsOf } from '../domain/facts/factsOf.js';
+import { RESOURCE_DATA } from '../data/resourceData.js';
+import { offersFoodSurplus } from '../domain/foodSurplus.js';
+import { GRAIN_TOP_UP } from './economy/primaryTradeLists.js';
+import { TRADE_LINE_BANDS, tradeBandContradictsLabel } from './economy/prosperity.js';
+import { PEACE_IRON_HOOKS } from './economy/outlookHookSiblings.js';
+import { NO_FOOD_CHAINS_LINE, foodLandOf } from './foodLand.js';
 import {
+  MATERIAL_RESOURCE_KEYS,
   STRATEGIC_CLAUSES,
   STRENGTH_SUPPORT,
   liveMaterialFor,
@@ -301,30 +309,13 @@ function resourceTruthFindings(settlement) {
 }
 
 /**
- * THE PROJECTION-AGREEMENT ARM (COHERENCE-AGREE, 2026-11-11). One fact, one answer: every field of
- * the record that states a fact the town's own drawn record answers must agree with it. The terrain
- * tables are defaults the town's resources override; a second reader of a fact must not answer it
- * otherwise. `resource` findings join `resource_truth`, `food` findings join `food_verdict`, so the
- * receipt keeps its checks and its shape; a town that agrees prints the receipt it printed before.
- *   imports    a critical import "this terrain cannot produce" beside a live resource that yields it
- *   strengths  a terrain strength with nothing of the town's under it (the table is total: a strength
- *              the table does not know is a finding, so the table cannot fall behind the terrain data)
- *   strategic  a yield clause of the strategic line the town's resources do not stand on
- *   hooks      a viability hook that names a war the record does not hold, or a material the town has
- *   income     an income line that names a local resource ("Local ore", "Local quarry") the town lacks
- *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
- *   safety     the safety text naming a mercenary company the defence home does not list; saying a
- *              court sits where the defence home has none, or that none sits where it has one
- *   market     the economic situation naming a market the market home says the town does not have
- *   sources    available fields, floodplain or grazing that the food record does not count as a source
- *   food       bare grain a primary import, unqualified, where the town grows 90% or more of its need; a
- *              shortage import ("local fields depleted") beside the resource it says is spent
- * @param {any} settlement
- * @returns {{ resource: Array<{path:string, detail:string, evidence?:string}>, food: Array<{path:string, detail:string, evidence?:string}> }}
+ * The income lines that name a local resource, and the resources that make them true.
+ * @type {ReadonlyArray<readonly [RegExp, ReadonlyArray<string>]>}
  */
-/** The income lines that name a local resource, and the resources that make them true. */
 const LOCAL_INCOME_WORDS = Object.freeze([
-  [/^Local ore\b/, ['iron_deposits', 'precious_metals']],
+  // COHERENCE-AGREE-3 (F3): the smith's ore is iron, the material table's one answer (economy/localMaterials.js);
+  // gold and silver are not the smith's ore, so a "Local ore" line beside them alone is a disagreement.
+  [/^Local ore\b/, MATERIAL_RESOURCE_KEYS.metals],
   [/^Local forest\b/, ['managed_forest', 'timber', 'mountain_timber', 'shipbuilding_timber']],
   [/^Local quarry\b/, ['stone_quarry']],
   [/^Local flocks\b/, ['grazing_land', 'alpine_pasture']],
@@ -334,12 +325,80 @@ const LOCAL_INCOME_WORDS = Object.freeze([
 const COURT_SITS = /\b(?:a court exists|the court can try|before the court|tried at the court|the court sits|functioning court|with a working court|only a court|prosecution is real|real prosecution)/i;
 const COURT_ABSENT = /\b(?:with no court|without a court|without courts|without a working court|without consistent courts|without prison or courts|no reliable court|lack of reliable courts)/i;
 
+/** Each shortage label and the resource it is spent for (resourceSemantics.js), so the bracket's own resource is excepted. */
+const SHORTAGE_OWNER = new Map(Object.keys(RESOURCE_SEMANTICS).map((key) => [resourceShortageImport(key), key]));
+
+/** The peacetime iron events and their twins (economy/outlookHookSiblings.js): each presumes the peace. */
+const PEACE_IRON_TEXTS = new Set(PEACE_IRON_HOOKS.flat());
+
+/** The town's watch named as its own ("the watch"); "There is no watch" names none. */
+const WATCH_NAMED = /(?<!\bno )\bthe watch\b/i;
+
+/** The town's gates named as standing ("by the gates", "the gates"); "no gates" names none. */
+const GATES_NAMED = /(?<!\bno )\bgates?\b/i;
+
 /** A market named as the town's own ("the market", "markets meet"); a black market is not one. */
 const MARKET_NAMED = /(?<!black )\bmarkets?\b/i;
+
+/**
+ * A hook's words for a material, and the must-import key that names it.
+ * @type {ReadonlyArray<readonly [RegExp, string]>}
+ */
+const SCARCE_MATERIAL_WORDS = Object.freeze([[/\b(?:iron|metal)\b/i, 'metals'], [/\btimber\b/i, 'timber']]);
+
+/**
+ * A shortage import's bracket, read by WHAT ITS WORDS NAME (F12b, widened by the chair's ruling of 2026-11-12):
+ * an unqualified word ("pastures", "fields", "forests", "stands", "springs", "deposits", "mines", "veins",
+ * "herds", "salt beds", "fishing grounds") names every resource of its family, so a bracket that says that land
+ * is spent beside ANOTHER live resource of the family tells two stories. The label's own resource is excepted
+ * (that case is the shortage member below: same key, available). Comparing the key alone let "local pastures"
+ * stand beside an alpine pasture and "local forests" beside mountain timber.
+ * @type {ReadonlyArray<readonly [RegExp, ReadonlyArray<string>]>}
+ */
+const SHORTAGE_LAND_WORDS = Object.freeze([
+  [/\(local pastures? /i, ['grazing_land', 'alpine_pasture']],
+  [/\(local fields? /i, ['grain_fields', 'fertile_floodplain']],
+  [/\(local floodplain /i, ['fertile_floodplain']],
+  [/\((?:local |coastal |mountain )?(?:forests?|stands) /i, ['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber']],
+  [/\(local springs /i, ['hot_springs', 'hot_springs_mineral']],
+  [/\(local deposits /i, ['river_clay', 'gemstone_deposits', 'glass_sand', 'coal_deposits', 'iron_deposits']],
+  [/\(local (?:mines|veins) /i, ['iron_deposits', 'precious_metals', 'coal_deposits', 'gemstone_deposits']],
+  [/\(local herds /i, ['camel_herds', 'grazing_land', 'alpine_pasture']],
+  [/\(local salt beds /i, ['salt_flats', 'desert_salt']],
+  [/\(local fishing grounds /i, ['fishing_grounds', 'river_fish']],
+]);
 
 /** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
 const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
 
+/**
+ * THE PROJECTION-AGREEMENT ARM (COHERENCE-AGREE, 2026-11-11). One fact, one answer: every field of
+ * the record that states a fact the town's own drawn record answers must agree with it. The terrain
+ * tables are defaults the town's resources override; a second reader of a fact must not answer it
+ * otherwise. `resource` findings join `resource_truth`, `food` findings join `food_verdict`, so the
+ * receipt keeps its checks and its shape; a town that agrees prints the receipt it printed before.
+ *   imports    a critical import "this terrain cannot produce" beside a live resource that yields it
+ *   strengths  a terrain strength with nothing of the town's under it (the table is total: a strength
+ *              the table does not know is a finding, so the table cannot fall behind the terrain data)
+ *   strategic  a yield clause of the strategic line the town's resources do not stand on
+ *   hooks      a viability hook that names a war the record does not hold, presumes the peace where it holds
+ *              one, or makes scarce a material the town has
+ *   income     an income line that names a local resource ("Local ore", "Local quarry") the town lacks
+ *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
+ *   gate       the safety text naming gates the gate home does not hold
+ *   watch      the safety text naming the watch where the defence home holds none
+ *   safety     the safety text naming a mercenary company the defence home does not list; saying a
+ *              court sits where the defence home has none, or that none sits where it has one
+ *   market     the economic situation, or the food record's foodways line, naming a market the market home says the town lacks
+ *   trade      the economic situation's trade line saying the opposite of the prosperity label (prosperity.js)
+ *   sources    available fields, floodplain or grazing that the food record does not count as a source
+ *   surplus    an income line selling a surplus the food record does not hold (offersFoodSurplus)
+ *   land       a shortage import whose bracket says a kind of land is spent beside a live resource of that land
+ *   food       bare grain a primary import, unqualified, where the town grows 90% or more of its need; a
+ *              shortage import ("local fields depleted") beside the resource it says is spent
+ * @param {any} settlement
+ * @returns {{ resource: Array<{path:string, detail:string, evidence?:string}>, food: Array<{path:string, detail:string, evidence?:string}> }}
+ */
 export function projectionAgreementFindings(settlement) {
   const resource = [];
   const food = [];
@@ -366,13 +425,26 @@ export function projectionAgreementFindings(settlement) {
       }
     }
   }
+  // Part B (iii) (COHERENCE-AGREE-3, the chair's ruling of 2026-11-12): a rolled resource standing off the access its
+  // row requires (RESOURCE_DATA[key].requires). A hand-chosen roster (nearbyResourcesRandom === false) is the
+  // person's own premise and is exempt; the structural validator warns on it instead.
+  if (settlement?.config?.nearbyResourcesRandom !== false) {
+    for (const key of available) {
+      const requires = /** @type {{ requires?: string[] } | undefined} */ (RESOURCE_DATA[/** @type {keyof typeof RESOURCE_DATA} */ (key)])?.requires;
+      if (Array.isArray(requires) && !requires.includes(route)) resource.push(finding('resourceAnalysis.availableResources', 'A rolled resource stands off the access it requires.', `${key}: ${route}`));
+    }
+  }
   const facts = factsOf(settlement);
   for (const [index, entry] of (settlement?.economicViability?.plotHooks || []).entries()) {
     const hook = String(entry?.hook || '');
     if (/\b(?:war|armies|siege)\b/i.test(hook) && facts.warState === 'peace') {
       resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook asserts a war the record does not hold.', facts.warState));
     }
-    for (const [word, material] of [[/\b(?:iron|metal)\b/i, 'metals'], [/\btimber\b/i, 'timber']]) {
+    // F4 (COHERENCE-AGREE-3): both directions — a peacetime iron event where the record holds a war or a front.
+    if (PEACE_IRON_TEXTS.has(hook) && facts.warState !== 'peace') {
+      resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook presumes the peace where the record holds a war.', facts.warState));
+    }
+    for (const [word, material] of SCARCE_MATERIAL_WORDS) {
       const live = word.test(hook) ? liveMaterialFor(material, available) : null;
       if (live) resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook makes a material scarce that a live local resource yields.', `${material}: ${live}`));
     }
@@ -396,8 +468,27 @@ export function projectionAgreementFindings(settlement) {
       resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names a mercenary company the defence record does not list.'));
     }
   }
+  // F5 (COHERENCE-AGREE-3): the gate — the safety text naming the town's gates where the gate home has none.
+  const gateTexts = [['guardEffectivenessDesc', safety?.guardEffectivenessDesc], ['safetyDesc', safety?.safetyDesc],
+    ...(Array.isArray(safety?.crimeTypes) ? safety.crimeTypes.map((c, i) => [`crimeTypes[${i}].desc`, c?.desc]) : [])];
+  for (const [field, text] of gateTexts) {
+    if (facts.defence?.gate === false && GATES_NAMED.test(String(text || ''))) resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names gates the defence record does not hold.'));
+    // F12 (COHERENCE-AGREE-3): the watch — named as the town's own where the defence home has none.
+    const watchSaid = facts.defence?.watch === false && WATCH_NAMED.test(String(text || '')); // the PRINTED text, not the roster
+    if (watchSaid) resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names a watch the defence record does not hold.'));
+  }
   if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.situationDesc || ''))) {
     resource.push(finding('economicState.situationDesc', 'The economic situation names a market the town does not have.'));
+  }
+  // F11 (COHERENCE-AGREE-3): the trade line against the prosperity label printed beside it.
+  const situation = String(settlement?.economicState?.situationDesc || '');
+  const tradeBand = TRADE_LINE_BANDS.find(([words]) => words.test(situation));
+  if (tradeBand && tradeBandContradictsLabel(tradeBand[1], settlement?.economicState?.prosperity)) {
+    resource.push(finding('economicState.situationDesc', 'The trade line says the opposite of the prosperity label beside it.', `${tradeBand[1]}; ${settlement?.economicState?.prosperity}`));
+  }
+  // F6 (COHERENCE-AGREE-3): the food record's foodways line reads the market home too.
+  if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.foodSecurity?.foodRecord?.foodwaysLine || ''))) {
+    resource.push(finding('economicState.foodSecurity.foodRecord.foodwaysLine', 'The foodways line names a market the town does not have.'));
   }
   const court = facts.defence?.court;
   const courtTexts = [['guardEffectivenessDesc', safety?.guardEffectivenessDesc], ['safetyDesc', safety?.safetyDesc],
@@ -410,9 +501,30 @@ export function projectionAgreementFindings(settlement) {
   const imports = Array.isArray(settlement?.economicState?.primaryImports) ? settlement.economicState.primaryImports.map(String) : [];
   const grownPct = Number(settlement?.economicState?.foodSecurity?.foodRecord?.grownPct);
   for (const [index, label] of imports.entries()) {
-    if (/^(?:bulk )?grain(?: and foodstuffs)?$/i.test(label) && grownPct >= 90) {
+    // F8 (COHERENCE-AGREE-3): a bracketed grain import says how little too, where the town feeds itself.
+    // (and STOP 1: a compound grain good the demand pass appends says how little too)
+    const compound = /^(?:grain and .+|.+ and grain)$/i.test(label) && !/\ba little grain$/i.test(label);
+    if ((compound || /^(?:bulk )?grain(?: and (?:foodstuffs|produce))?(?: \([^)]*\))?$/i.test(label)) && label !== GRAIN_TOP_UP && grownPct >= 90) {
       food.push(finding(`economicState.primaryImports[${index}]`, 'Grain stands as a primary import, unqualified, where the town grows most of its need.', `${label}; grown ${grownPct}%`));
     }
+  }
+  // F7 (COHERENCE-AGREE-3): an income line that sells a surplus reads the food record's one surplus rule.
+  const foodRecord = settlement?.economicState?.foodSecurity?.foodRecord;
+  for (const [index, entry] of (settlement?.economicState?.incomeSources || []).entries()) {
+    if (/^Surplus from local harvest\b/.test(String(entry?.desc || '')) && foodRecord && !offersFoodSurplus(foodRecord)) {
+      food.push(finding(`economicState.incomeSources[${index}].desc`, 'An income line sells a surplus the food record does not hold.', `grown ${grownPct}%; band ${foodRecord.band}`));
+    }
+  }
+  for (const [index, label] of imports.entries()) {
+    const own = SHORTAGE_OWNER.get(label);
+    const live = SHORTAGE_LAND_WORDS.filter(([words]) => words.test(label))
+      .flatMap(([, keys]) => keys).find((key) => key !== own && available.includes(key));
+    if (live) food.push(finding(`economicState.primaryImports[${index}]`, 'A shortage import says land is spent that a live resource is.', `${label}: ${live} available`));
+  }
+  // Part B (i) (COHERENCE-AGREE-3): "no established food chains" beside a roster that works its own land.
+  if (settlement?.economicState?.foodSecurity?.diversityNote === NO_FOOD_CHAINS_LINE
+    && foodLandOf(String(settlement?.tier || ''), settlement?.institutions || [], settlement?.config || {}).worksOwnLand) {
+    food.push(finding('economicState.foodSecurity.diversityNote', 'The food record says no food chains beside a roster that works its own land.'));
   }
   const sources = settlement?.economicState?.foodSecurity?.foodRecord?.foodSources;
   for (const record of nativeResourceConditionRecords(settlement?.config || {})) {

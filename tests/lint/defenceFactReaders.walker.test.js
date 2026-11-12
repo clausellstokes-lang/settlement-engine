@@ -21,22 +21,15 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, test } from 'vitest';
+import { codeOf, reads, readsCourtGate } from './defenceFactReaders.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const REGISTER = JSON.parse(readFileSync(join(ROOT, 'tests/lint/defenceFactReaders.register.json'), 'utf8'));
 /** The register's total at its first commit: it never rises. */
 const FIRST_TOTAL = 77;
-
-const ASSIGN = /\bhas(?:Walls|Garrison|Militia|Watch|Mercenary)\s*[:=](?!=)(?!\s*(?:defen[cs]e|d|home)\b\.)/;
-const WORD = String.raw`\b(?:walls?|garrison|barracks|militia|watch|mercenar\w*)\b`;
-const CALL = /\b(?:includes|test|hasAny|hasInst|some|match|find|filter)\s*\(/;
-const LITERAL = new RegExp(String.raw`'[^'\n]*${WORD}[^'\n]*'|"[^"\n]*${WORD}[^"\n]*"|\x60[^\x60\n]*${WORD}[^\x60\n]*\x60|/[^/\n]*${WORD}[^/\n]*/[gimsuy]*`, 'i');
-/** @param {string} line */
-const reads = (line) => ASSIGN.test(line) || (CALL.test(line) && LITERAL.test(line));
-/** Comments out, line count kept. @param {string} source */
-const codeOf = (source) => source
-  .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
-  .replace(/(^|[^:'"`])\/\/[^\n]*/g, '$1');
+const COURT_GATE_REGISTER = JSON.parse(readFileSync(join(ROOT, 'tests/lint/defenceFactReaders.courtGate.register.json'), 'utf8'));
+/** The second member's total at its first commit (COHERENCE-AGREE-3, over 65ce74ce6): it never rises. */
+const COURT_GATE_FIRST_TOTAL = 20;
 
 /** @param {string} dir @param {string[]} out @returns {string[]} */
 const walk = (dir, out = []) => {
@@ -47,14 +40,15 @@ const walk = (dir, out = []) => {
   return out;
 };
 
-const counted = () => {
+/** @param {(line: string) => boolean} [test] */
+const counted = (test = reads) => {
   /** @type {Record<string, number>} */
   const out = {};
   for (const path of walk(join(ROOT, 'src'))) {
     const rel = relative(ROOT, path).replace(/\\/g, '/');
     if (!/\.(js|jsx)$/.test(rel) || /\.generated\.js$/.test(rel)) continue;
     if (/^src\/(?:domain\/facts|domain\/defense|data)\//.test(rel)) continue;
-    const n = codeOf(readFileSync(path, 'utf8')).split('\n').filter(reads).length;
+    const n = codeOf(readFileSync(path, 'utf8')).split('\n').filter(test).length;
     if (n) out[rel] = n;
   }
   return out;
@@ -81,5 +75,36 @@ describe('the defence facts have one reader (shrink-only)', () => {
     for (const row of Object.values(REGISTER.rows)) expect(String(row.reason || '').length).toBeGreaterThan(20);
     const total = Object.values(REGISTER.rows).reduce((sum, row) => sum + row.count, 0);
     expect(total).toBeLessThanOrEqual(FIRST_TOTAL);
+  });
+});
+
+/**
+ * THE SECOND MEMBER (COHERENCE-AGREE-3, REVIEW-AGREE F9, 2026-11-12). The first member saw only literal
+ * walls/garrison/militia/watch/mercenar* words: a reader of the COURT or the GATE (the two facts the lane gave
+ * a home in the flag bag), or of a hired company named any other way (the names priorityHelpers.js listed for
+ * it before cure 9 — "hireling hall", "free company", "hired muscle", "veteran's lodge" — and "sellsword"),
+ * passed unseen (the review planted each and the walker passed). What it still does NOT see: a defence word
+ * held in a constant and tested through the constant (`const W = 'courthouse'; n.includes(W)`).
+ */
+describe('the court, the gate and a hired company by its other names have one reader (shrink-only)', () => {
+  test('guard-the-guard: the review\'s plants are caught, the home and the constant are not', () => {
+    expect(readsCourtGate("const sits = names.some(n => n.includes('courthouse'));")).toBe(true);
+    expect(readsCourtGate("const hired = names.some(n => n.includes('hireling hall'));")).toBe(true);
+    expect(readsCourtGate("const gated = names.some(n => /\\bgates?\\b/i.test(n));")).toBe(true);
+    expect(readsCourtGate("const hired = n.includes('sellsword') || n.includes('free company');")).toBe(true);
+    expect(readsCourtGate('hasGates: home.hasGate,')).toBe(false);
+    expect(readsCourtGate('hasCourtSystem: home.hasCourt,')).toBe(false);
+    // what it does not see, said out loud (scripts/mutation-coverage-manifest.json says the same)
+    expect(readsCourtGate('const sits = names.some(n => n.includes(COURT_WORD));')).toBe(false);
+    expect(Object.keys(counted(readsCourtGate)).length).toBeGreaterThan(5);
+  });
+  test('every file reads exactly its banked count, and no file reads outside the register', () => {
+    const banked = Object.fromEntries(Object.entries(COURT_GATE_REGISTER.rows).map(([file, row]) => [file, row.count]));
+    expect(counted(readsCourtGate)).toEqual(banked);
+  });
+  test('every row carries its reason, and the total never rises', () => {
+    for (const row of Object.values(COURT_GATE_REGISTER.rows)) expect(String(row.reason || '').length).toBeGreaterThan(20);
+    const total = Object.values(COURT_GATE_REGISTER.rows).reduce((sum, row) => sum + row.count, 0);
+    expect(total).toBeLessThanOrEqual(COURT_GATE_FIRST_TOTAL);
   });
 });

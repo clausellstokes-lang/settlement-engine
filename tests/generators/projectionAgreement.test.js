@@ -15,6 +15,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { projectionAgreementFindings } from '../../src/generators/generationCoherence.js';
+import { resourceShortageImport } from '../../src/domain/resourceSemantics.js'; // re-keyed by identity: the label names its own land now
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -52,6 +53,11 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(record({ hooks: [{ hook: 'The iron merchants have doubled their price.' }], resourceAnalysis: { availableResources: ['iron_deposits'] } })))
       .toContain('A hook makes a material scarce that a live local resource yields.');
     expect(details(record({ hooks: [{ hook: 'The iron merchants have doubled their price.' }] }))).toEqual([]);
+    // F4 (REVIEW-AGREE): both directions — a peacetime iron event where the record holds a war
+    const peace = 'A new toll on the iron road has made metal dear. Nobody will say who set it, and the tools still need mending.';
+    const atWar = (hook) => ({ ...record({ hooks: [{ hook }] }), stress: [{ type: 'wartime' }] });
+    expect(details(atWar(peace))).toContain('A hook presumes the peace where the record holds a war.');
+    expect(details(record({ hooks: [{ hook: peace }] }))).toEqual([]);
   });
   test('the safety text naming a mercenary company the defence home does not list', () => {
     const safety = { guardEffectivenessDesc: '(planted) a mercenary company keeps the peace here.' };
@@ -100,24 +106,82 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(paths(situation('(planted) markets meet infrequently.', []))).toContain('economicState.situationDesc');
     expect(details(situation('(planted) markets meet infrequently.', [{ name: 'Weekly market' }]))).toEqual([]);
     expect(details(situation('(planted) a busy black market undercuts it.', []))).toEqual([]);
+    // F6 (REVIEW-AGREE): the foodways line against the market home
+    const foodways = (line, institutions) => record({ economicState: { foodSecurity: { foodRecord: { grownPct: 50, foodwaysLine: line } } }, institutions });
+    expect(paths(foodways('(planted) Markets structure urban food supply.', []))).toContain('economicState.foodSecurity.foodRecord.foodwaysLine');
+    expect(details(foodways('(planted) Markets structure urban food supply.', [{ name: 'Weekly market' }]))).toEqual([]);
+  });
+  test('F11: the trade line against the prosperity label beside it', () => {
+    const said = (line, prosperity) => details(record({ economicState: { situationDesc: line, prosperity } }));
+    const slow = 'Commerce is sluggish; little is bought or sold and many crafts are in decline.';
+    expect(said(slow, 'Prosperous')).toContain('The trade line says the opposite of the prosperity label beside it.');
+    expect(said(slow, 'Poor')).toEqual([]);
+    expect(said("Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.", 'Struggling')).toContain('The trade line says the opposite of the prosperity label beside it.');
+    expect(said('Trade proceeds at an ordinary pace for a settlement of this size.', 'Wealthy')).toEqual([]);
+  });
+  test('F5, F12: the safety text\'s gates and watch against the defence home', () => {
+    const says = (line, institutions) => details(record({ economicState: { safetyProfile: { safetyDesc: line } }, institutions }));
+    expect(says('(planted) Everyone comes in by the gates.', [{ name: 'Palisade' }])).toContain('The safety text names gates the defence record does not hold.');
+    expect(says('(planted) Everyone comes in by the gates.', [{ name: 'Town walls' }, { name: 'Gatehouse' }])).toEqual([]);
+    expect(says('(planted) No gates to bribe and no walls to watch.', [{ name: 'Palisade' }])).toEqual([]);
+    // F12: the watch, named where none stands
+    expect(says('(planted) The charter hall handles threats the watch cannot.', [{ name: 'Citizen militia' }])).toContain('The safety text names a watch the defence record does not hold.');
+    expect(says('(planted) The charter hall handles threats the watch cannot.', [{ name: 'Town watch' }])).toEqual([]);
+  });
+  test('Part B (iii): a rolled resource off the access it requires; a hand-chosen roster is exempt', () => {
+    const at = (route, random) => details(record({ config: { tradeRouteAccess: route, nearbyResourcesRandom: random }, resourceAnalysis: { availableResources: ['crossroads_position'] } }));
+    expect(at('road', true)).toContain('A rolled resource stands off the access it requires.');
+    expect(at('crossroads', true)).toEqual([]);
+    expect(at('road', false)).toEqual([]);
   });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
     expect(details(grown(95, ['Grain']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
     expect(details(grown(80, ['Grain']))).toEqual([]);
     expect(details(grown(95, ['Grain (a little, beside its own harvest)']))).toEqual([]);
-    const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: ['Bulk grain (local fields depleted)'] } });
+    // F8 (REVIEW-AGREE): the bracketed shortage says how little too (the compound good is the demand pass's: reported)
+    expect(details(grown(101, ['Bulk grain (local fields depleted)']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
+    expect(details(grown(100, ['Grain and produce (local floodplain unproductive)']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
+    // STOP 1 (the chair, 2026-11-12): the demand pass's compound good says how little too
+    expect(details(grown(100, ['Grain and salted pork']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
+    expect(details(grown(100, ['Salted pork and a little grain']))).toEqual([]);
+    expect(details(grown(80, ['Grain and salted pork']))).toEqual([]);
+    const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: [resourceShortageImport('grain_fields')] } });
     expect(details(spent)).toContain('A shortage import stands beside the resource it says is spent.');
+    // F12b (REVIEW-AGREE): the bracket's land against every live resource of that land
+    const pasture = (label) => record({ resourceAnalysis: { availableResources: ['alpine_pasture'] }, economicState: { primaryImports: [label] } });
+    expect(details(pasture('Livestock and dairy (local pastures depleted)'))).toContain('A shortage import says land is spent that a live resource is.');
+    expect(details(pasture('Livestock and dairy (local grazing land depleted)'))).toEqual([]);
+    // the chair's widening (2026-11-12): the words, not the key — forests beside mountain timber, fields beside a floodplain
+    const beside = (label, live) => record({ resourceAnalysis: { availableResources: live }, economicState: { primaryImports: [label] } });
+    expect(details(beside('Timber (local forests cleared)', ['mountain_timber']))).toContain('A shortage import says land is spent that a live resource is.');
+    expect(details(beside('Bulk grain (local fields depleted)', ['fertile_floodplain']))).toContain('A shortage import says land is spent that a live resource is.');
+    expect(details(beside('Timber (local managed woodland cleared)', ['mountain_timber']))).toEqual([]);
+    expect(details(beside('Timber (local mountain timber cleared)', ['managed_forest']))).toEqual([]);
+    expect(details(beside('Iron ore (local mines exhausted)', ['coal_deposits']))).toContain('A shortage import says land is spent that a live resource is.');
+    expect(details(beside('Iron ore (local iron mines exhausted)', ['coal_deposits']))).toEqual([]);
+    // F7 (REVIEW-AGREE): an income line selling a surplus the food record does not hold
+    const sells = (foodRecord) => record({ economicState: { primaryImports: [], foodSecurity: { foodRecord },
+      incomeSources: [{ source: 'Grain Sales', desc: 'Surplus from local harvest (planted) sold on.' }] } });
+    expect(details(sells({ grownPct: 29, band: 'famine', growsMoreThanEats: false }))).toContain('An income line sells a surplus the food record does not hold.');
+    expect(details(sells({ grownPct: 120, band: 'surplus', growsMoreThanEats: true }))).toEqual([]);
   });
   test('an income line naming a local resource the town lacks; a must-import note beside a live material', () => {
     const income = (available) => record({ resourceAnalysis: { availableResources: available },
       economicState: { incomeSources: [{ source: 'Iron & Metalwork', desc: 'Local ore (planted) for the smithy.' }] } });
     expect(details(income(['coal_deposits', 'coal']))).toContain('An income line names a local resource the town does not have.');
     expect(details(income(['iron_deposits']))).toEqual([]);
+    // F3 (REVIEW-AGREE, 2026-11-12): gold and silver are not the smith's ore — the material table's answer
+    expect(details(income(['precious_metals']))).toContain('An income line names a local resource the town does not have.');
     const note = (category) => ({ ...record({ resourceAnalysis: { availableResources: ['managed_forest'] } }),
       economicViability: { plotHooks: [], dependencies: [{ category, title: 'Imports timber' }] } });
     expect(details(note('Resource Import'))).toContain('The viability notes an import a live local resource yields.');
     expect(details(note('Provisioning at Scale'))).toEqual([]);
+  });
+  test('Part B (i): "no established food chains" beside a roster that works its own land', () => {
+    const said = (institutions) => details({ ...record({ institutions, economicState: { foodSecurity: { diversityNote: 'no established food chains', foodRecord: { grownPct: 90 } } } }), tier: 'village' });
+    expect(said([{ name: 'Farmland' }, { name: 'Common grazing land' }])).toContain('The food record says no food chains beside a roster that works its own land.');
+    expect(said([{ name: 'Parish church' }])).toEqual([]);
   });
   test('available worked land the food record does not count as a source', () => {
     const land = (sources) => record({ config: { nearbyResources: ['grazing_land'], nearbyResourcesNativeDepleted: [] },
@@ -145,4 +209,56 @@ describe('the corpus seeds that disagreed at the base agree', () => {
       .flatMap((c) => c.findings.map((f) => `${f.path}: ${f.detail} ${f.evidence || ''}`));
     expect(findings, seed).toEqual([]);
   }), 'the corpus seeds agree'));
+});
+
+/**
+ * THE REVIEWER'S SEEDS (REVIEW-AGREE-65ce74ce6, 2026-11-12), by finding: towns the lane never birthed (the
+ * §0 dials, every one on random; `stress` forces a crisis as the review's `rvwfam-*` and `rvw-ten-*` did).
+ * Each disagreed at 65ce74ce6; each holds resource_truth and food_verdict clean after its cure.
+ */
+const REVIEW_SEEDS = [
+  // F3: "Local ore feeds the smithy" beside gold or silver alone, and an iron import
+  { seed: 'rvw12-town-13', tier: 'town' }, { seed: 'rvw12-town-37', tier: 'town' }, { seed: 'rvw-ten-6', tier: 'city' },
+  // F7: "Grain Sales: Surplus from local harvest" in famine and deficit towns
+  { seed: 'rvw12b-town-275', tier: 'town' }, { seed: 'rvw12b-town-103', tier: 'town' }, { seed: 'rvw12b-town-427', tier: 'town' },
+  // F8: a town growing all its grain "imports bulk grain (local fields depleted)" or its floodplain's produce
+  { seed: 'rvw12-town-34', tier: 'town' }, { seed: 'rvw12-town-59', tier: 'town' }, { seed: 'rvw12-town-3', tier: 'town' }, { seed: 'rvw-ten-4', tier: 'town' },
+  // F12b: "Livestock and dairy (local pastures depleted)" beside a live alpine pasture
+  { seed: 'rvw12-city-1', tier: 'city' }, { seed: 'rvw12b-city-33', tier: 'city' }, { seed: 'rvw12b-city-136', tier: 'city' },
+  // F6: the foodways line names a market the market home denies
+  { seed: 'rvw12-village-0', tier: 'village' }, { seed: 'rvw12-village-14', tier: 'village' },
+  // F5: "Everyone comes and goes by the gates" in a palisade village with no gate
+  { seed: 'rvw12-village-3', tier: 'village' }, { seed: 'rvw12-village-19', tier: 'village' }, { seed: 'rvw12-village-22', tier: 'village' },
+  { seed: 'rvw12-village-34', tier: 'village' }, { seed: 'rvw12-village-45', tier: 'village' }, { seed: 'rvw12-village-50', tier: 'village' },
+  { seed: 'rvw12-village-53', tier: 'village' }, { seed: 'rvw-ten-2', tier: 'village' },
+  // F12: "…handles threats the watch cannot" with no watch (rvw12-village-50 and rvw-ten-2, above)
+  { seed: 'rvw12-village-6', tier: 'village' }, { seed: 'rvw12b-village-28', tier: 'village' }, { seed: 'rvw12b-village-174', tier: 'village' },
+  { seed: 'rvw12b-village-229', tier: 'village' },
+  // F4: a town at war or at the front draws a peacetime iron event; the war line never printed
+  // (rvw12-village-7 and -8: the review's "site reads peace" seeds, at war and at the front; they draw no iron hook)
+  { seed: 'rvw12-village-7', tier: 'village' }, { seed: 'rvw12-village-8', tier: 'village' }, { seed: 'rvw-ten-7', tier: 'city', stress: 'under_siege' },
+  { seed: 'rvw12-town-81', tier: 'town' }, { seed: 'rvw12-city-60', tier: 'city' }, { seed: 'rvw12-city-67', tier: 'city' }, { seed: 'rvw12-metropolis-23', tier: 'metropolis' },
+  // STOP 1 (F8's compound half): "Grain and salted pork" and its kin in towns growing 90% or more
+  { seed: 'rvw12-town-19', tier: 'town' }, { seed: 'rvw12-town-121', tier: 'town' }, { seed: 'rvw12b-town-186', tier: 'town' },
+  // Part B (i): Farmland, Common grazing land and a Dairy farmer beside "no established food chains"
+  { seed: 'rvw-ten-3', tier: 'village', stress: 'wartime' }, { seed: 'agree-thorp-2', tier: 'thorp' }, { seed: 'agree-hamlet-0', tier: 'hamlet' },
+  // the forest label (the chair's ruling, 2026-11-12): "Timber (local forests cleared)" beside live timber
+  // (rvw-ten-4, in the arm for F8, also holds the iron label beside coal: the mines word is read now)
+  { seed: 'rvw12-city-71', tier: 'city' }, { seed: 'rvw12b-town-171', tier: 'town' }, { seed: 'rvw12b-town-251', tier: 'town' }, { seed: 'rvw12b-city-156', tier: 'city' },
+  // Part B (iii): the review's road village with "Central trade hub", toll and transit exports
+  { seed: 'rvw12-village-19', tier: 'village' }, { seed: 'agree-town-1', tier: 'town' },
+  // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
+  { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
+];
+describe('the reviewer\'s seeds agree', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('every reviewer seed: resource_truth and food_verdict hold no finding', () => expectNoSeedFailures(collectSeedFailures(REVIEW_SEEDS.map((r) => r.seed), (seed) => {
+    const { tier, stress } = REVIEW_SEEDS.find((r) => r.seed === seed) || {};
+    const forced = stress ? { selectedStressesRandom: false, selectedStresses: [stress] } : {};
+    const settlement = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier, ...forced }), null, { seed });
+    const findings = settlement.generationCoherenceReceipt.checks
+      .filter((c) => c.id === 'resource_truth' || c.id === 'food_verdict')
+      .flatMap((c) => c.findings.map((f) => `${f.path}: ${f.detail} ${f.evidence || ''}`));
+    expect(findings, seed).toEqual([]);
+  }), 'the reviewer\'s seeds agree'));
 });

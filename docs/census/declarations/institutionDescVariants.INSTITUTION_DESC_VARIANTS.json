@@ -2664,17 +2664,15 @@
     },
     {
       "id": "town|Crafts|Bowyers & fletchers (guild)#0",
-      "text": "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm the town militias.",
-      "needs": [
-        "militia"
-      ],
+      "text": "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
     },
     {
       "id": "town|Crafts|Bowyers & fletchers (guild)#1",
-      "text": "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit the militias.",
+      "text": "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.",
       "needs": [],
       "excludes": [],
       "crisis": [],

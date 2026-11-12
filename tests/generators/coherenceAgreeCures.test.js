@@ -111,3 +111,229 @@ describe('cure 9: the flag bag\'s hired company and gate are the defence home\'s
     expect(getInstFlags({}, [{ name: 'Mercenary company' }, { name: 'Town walls' }]).inst).toMatchObject({ hasMercenary: true, hasGates: true });
   });
 });
+
+/**
+ * F9 (COHERENCE-AGREE-3, REVIEW-AGREE): the market's latent second readers re-pointed to the market home —
+ * viability.js's city-without-a-market warning and economicState.js's Market Taxes. THE PIN THAT NO PRINTED LINE
+ * MOVES: on births across the four browser tiers, the name list each reader kept answers what the home answers
+ * (measured on the 2,866-birth L2 corpus at 65ce74ce6: equal on every one), so the re-point is a change of
+ * reader, never of answer.
+ */
+describe('F9: the market readers follow the market home, and no answer moves', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('the old name lists and the home agree on every roster', async () => {
+    const { hasMarketInstitution } = await import('../../src/domain/facts/market.js');
+    const { nativeSemanticNames } = await import('../../src/domain/content/customContentSemanticAuthority.js');
+    const seeds = ['village', 'town', 'city', 'metropolis'].flatMap((tier) => Array.from({ length: 8 }, (_, i) => `agree-${tier}-${i}`));
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const names = nativeSemanticNames(settlement.institutions).map((n) => n.toLowerCase());
+      const named = (...kws) => kws.some((kw) => names.some((n) => n.includes(kw)));
+      const home = hasMarketInstitution(settlement.institutions);
+      expect(named('market', 'merchant', 'district'), `${seed}: the viability reader`).toBe(home);
+      if (named('district market', 'multiple market', 'daily market', 'market square', 'weekly market', 'annual fair')) expect(home, `${seed}: a market-tax name`).toBe(true);
+    }), 'the market readers agree with the home');
+  });
+});
+
+/** F13 (COHERENCE-AGREE-3, REVIEW-AGREE): the income lines on the town's own land are declared, keyed by the text the branch prints. */
+describe('F13: the income lines are declared where they are printed', () => {
+  test('each key is a line economicState.js prints, each atom is declarable, each twin answers its original', async () => {
+    const { INCOME_LINE_SIBLINGS, LOCAL_COAL_LINE, GRAIN_SURPLUS_LINE } = await import('../../src/generators/economy/incomeLineSiblings.js');
+    const { assertDeclarable } = await import('../../src/domain/facts/factVocabulary.js');
+    const { DECLARATION_CHANNELS } = await import('../../scripts/lib/table-pools.mjs');
+    expect(Object.keys(INCOME_LINE_SIBLINGS)).toEqual([GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE]);
+    expect(DECLARATION_CHANNELS.map((c) => c.name)).toContain('INCOME_LINE_SIBLINGS');
+    const { readFileSync } = await import('node:fs');
+    const site = readFileSync(new URL('../../src/generators/economy/economicState.js', import.meta.url), 'utf8');
+    for (const [key, set] of Object.entries(INCOME_LINE_SIBLINGS)) {
+      expect(set[0].text).toBe(key);
+      for (const line of set) for (const atom of [...(line.needs || []), ...(line.excludes || [])]) expect(assertDeclarable(atom).dimension, atom).toBeTruthy();
+      if (set[1]) expect(set[1].twinOf).toBe(key);
+    }
+    // the branch prints each by its declared constant, so a reworded line cannot leave its declaration behind
+    expect(site).toMatch(/\? GRAIN_SURPLUS_LINE\b/);
+    expect(site).toMatch(/\? LOCAL_COAL_LINE\b/);
+    // anchored: the same source text matched the branch's LOCAL_COAL_LINE on the line above
+    expect(site).not.toContain('Local coal fires the forges');
+  });
+});
+
+/**
+ * STOP 2 (b) (COHERENCE-AGREE-3, the chair's ruling, 2026-11-12): the Court Fees and Gate Tolls lines read the
+ * defence home's narrower facts (`hasCourthouse`, `hasTollGate`), whose names moved there from the economy's own
+ * lists. THE PIN THAT NO PRINTED LINE MOVES: on births across the four browser tiers each old list answers what
+ * the home answers, and the record's two income lines stand exactly where the home says.
+ */
+describe('STOP 2 (b): Court Fees and Gate Tolls read the home, and no answer moves', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('the old lists, the home and the printed lines agree on every roster', async () => {
+    const { defenseFactsOf } = await import('../../src/domain/defense/defenseFacts.js');
+    const { nativeSemanticNames } = await import('../../src/domain/content/customContentSemanticAuthority.js');
+    const seeds = ['village', 'town', 'city', 'metropolis'].flatMap((tier) => Array.from({ length: 8 }, (_, i) => `agree-${tier}-${i}`));
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const names = nativeSemanticNames(settlement.institutions).map((n) => n.toLowerCase());
+      const named = (...kws) => kws.some((kw) => names.some((n) => n.includes(kw)));
+      const home = defenseFactsOf(settlement);
+      expect(named('courthouse', 'multiple court', 'city hall'), `${seed}: the court-fee list`).toBe(home.hasCourthouse);
+      expect(named('gate', 'town wall', 'city wall'), `${seed}: the gate-toll list`).toBe(home.hasTollGate);
+      const income = settlement.economicState.incomeSources.map((e) => e.source);
+      expect(income.includes('Court Fees & Fines'), `${seed}: Court Fees where the home keeps a courthouse`).toBe(home.hasCourthouse);
+      if (income.includes('Gate Tolls')) expect(home.hasTollGate, `${seed}: Gate Tolls only at a toll gate`).toBe(true);
+    }), 'Court Fees and Gate Tolls agree with the home');
+  });
+});
+
+/**
+ * ITEM 1 (a) (COHERENCE-AGREE-4, 2026-11-12): the theocratic economic-situation line and its no-market twin name
+ * the church, so each declares the sacred house beside the market it needs or refuses. The branch fires only beside
+ * a cathedral or a monastery (`priorityHelpers.js :: theocraticEconomy`), so the declaration is true wherever the
+ * line prints and the resolution answers as before: with a sacred house the pair resolves on the market alone.
+ */
+describe('item 1 (a): the theocratic pair declares the church it names', () => {
+  test('the line and its twin both need the sacred house; the twin still refuses the market', async () => {
+    const { PROSPERITY_LINE_SIBLINGS } = await import('../../src/generators/economy/prosperity.js');
+    const { resolveSibling } = await import('../../src/domain/facts/drawDeclared.js');
+    const key = Object.keys(PROSPERITY_LINE_SIBLINGS).find((k) => k.startsWith('The church controls'));
+    const [line, twin] = PROSPERITY_LINE_SIBLINGS[key];
+    expect(line.needs).toEqual(['market', 'sacredHouse']);
+    expect(twin.needs).toEqual(['sacredHouse']);
+    expect(twin.excludes).toEqual(['market']);
+    const opts = (facts) => ({ facts, poolId: 'test:theocratic', surface: 'economics', drawKind: 'T' });
+    expect(resolveSibling(key, PROSPERITY_LINE_SIBLINGS, opts({ market: true, sacredHouse: true }))).toBe(line.text);
+    expect(resolveSibling(key, PROSPERITY_LINE_SIBLINGS, opts({ market: false, sacredHouse: true }))).toBe(twin.text);
+  });
+});
+
+/**
+ * ITEM 2 (COHERENCE-AGREE-4, the chair's ruling on the third seat's STOP 3): the vocabulary gains `court` and
+ * `prison`, each the defence home's own atom (`defence.js :: court`, `prison`), so a line that names a court and
+ * no prison can declare both. THE PIN THAT NO ANSWER MOVES: the home's prison, read off the live roster, answers
+ * what the safety writer's own list (`priorityHelpers.js :: hasPrison`) answers on every roster.
+ */
+describe('item 2: the court and the prison are the defence home\'s atoms', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('both are declarable presence atoms homed on the defence record, and read it', async () => {
+    const { assertDeclarable, atomHolds, FACT_DIMENSIONS } = await import('../../src/domain/facts/factVocabulary.js');
+    for (const atom of ['court', 'prison']) {
+      expect(assertDeclarable(atom).dimension).toBe(atom);
+      expect(FACT_DIMENSIONS[atom].home).toBe('defence');
+    }
+    expect(atomHolds('court', { defence: { court: true, prison: false } })).toBe(true);
+    expect(atomHolds('prison', { defence: { court: true, prison: false } })).toBe(false);
+  });
+  test('the home\'s prison answers what the safety writer\'s list answers, on every roster', async () => {
+    const { defenseFactsOf } = await import('../../src/domain/defense/defenseFacts.js');
+    const { defenceOf } = await import('../../src/domain/facts/defence.js');
+    const seeds = ['village', 'town', 'city', 'metropolis'].flatMap((tier) => Array.from({ length: 8 }, (_, i) => `agree-${tier}-${i}`));
+    let held = 0;
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const home = defenseFactsOf(settlement);
+      expect(home.hasPrison, `${seed}: the prison`).toBe(getInstFlags({}, settlement.institutions).inst.hasPrison);
+      expect(defenceOf(settlement).prison).toBe(home.hasPrison);
+      if (home.hasPrison) held += 1;
+    }), 'the prison has one answer');
+    expect(held).toBeGreaterThan(0);
+  });
+});
+
+/**
+ * ITEM 2 (ii) (COHERENCE-AGREE-4): cure 11's three crime lines for a court with no prison are declared where they
+ * are printed — each a declared cell needing the court and refusing the prison, the two facts its branch reads
+ * (`inst.hasCourtSystem && !inst.hasPrison`). Text unchanged: the cell gives back its text.
+ */
+describe('item 2 (ii): the court-without-prison crime lines declare both facts', () => {
+  test('each " With nowhere to hold the guilty, …" line is a cell that needs the court and excludes the prison', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { assertDeclarable } = await import('../../src/domain/facts/factVocabulary.js');
+    const site = readFileSync(new URL('../../src/generators/safetyProfile.js', import.meta.url), 'utf8');
+    const said = [...site.matchAll(/' With nowhere to hold the guilty, [^']*'/g)].map((m) => m[0]);
+    const declared = [...site.matchAll(/lineText\(\{ text: (' With nowhere to hold the guilty, [^']*'), needs: \['court'\], excludes: \['prison'\] \}\)/g)].map((m) => m[1]);
+    expect(said).toHaveLength(3);
+    expect(declared).toEqual(said);
+    for (const atom of ['court', 'prison']) expect(assertDeclarable(atom).dimension).toBe(atom);
+  });
+});
+
+/**
+ * ITEM 3′ (i) (COHERENCE-AGREE-4, the chair's ruling of 2026-11-12): whether a chain yields its table's outputs is
+ * ONE predicate in a leaf (`domain/chainYield.js :: chainYieldRefused`), read by the exporter and by every page that
+ * prints a town's chain outputs. Lifting it moves nothing (field diff, 0 leaves over L2 + the golden's 525).
+ */
+describe('item 3′ (i): the exporter\'s refusal is the leaf\'s', () => {
+  test('impaired, or a depleted input, is refused; the record\'s condition answers first', async () => {
+    const { chainYieldRefused } = await import('../../src/domain/chainYield.js');
+    expect(chainYieldRefused({ status: 'impaired', resourceInputCondition: 'available' })).toBe(true);
+    expect(chainYieldRefused({ status: 'vulnerable', resourceInputCondition: 'depleted' })).toBe(true);
+    expect(chainYieldRefused({ status: 'vulnerable', resourceInputCondition: 'available', resourceDepleted: true })).toBe(false);
+    expect(chainYieldRefused({ status: 'running', resourceDepleted: true })).toBe(true);
+    expect(chainYieldRefused({ status: 'running', resource: 'Fertile Floodplain' }, (r) => r === 'Fertile Floodplain')).toBe(true);
+    expect(chainYieldRefused({ status: 'running', resource: 'Fertile Floodplain' })).toBe(false);
+    expect(chainYieldRefused(null)).toBe(false);
+  });
+  test('the exporter reads the leaf, and keeps no private refusal of its own', async () => {
+    const { readFileSync } = await import('node:fs');
+    const site = readFileSync(new URL('../../src/generators/computeActiveChains.js', import.meta.url), 'utf8');
+    expect(site).toMatch(/import \{ chainYieldRefused \} from '\.\.\/domain\/chainYield\.js';/);
+    expect(site).toMatch(/\.filter\(ch => ch\.exportable && !chainYieldRefused\(ch, isDepletedResource\)\)/);
+    // anchored: the same source text matched the exporter's filter on the line above
+    expect(site).not.toMatch(/chainIsDepleted/);
+  });
+});
+
+/**
+ * A′'S SLOT REFILLED (COHERENCE-AGREE-4, the chair's ruling of 2026-11-12): a rolled winner the access refuses (the
+ * crossroads position on a road) leaves no slot empty. Its slot takes another admissible member by a hash, with no
+ * further roll. Each seed below rolled the position on a road at the bottom of its size's range, so the dropped slot
+ * left it below the range; now it holds a full roll, and never the position.
+ */
+describe('A′ refilled: a refused winner does not leave a holder below its size\'s range', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const MIN = { village: 3, town: 4, city: 5, metropolis: 6 };
+  test('road holders at the bottom of their range keep a full roll, with no crossroads position', () => {
+    const seeds = ['agree-village-2', 'agree-village-27', 'agree-village-39', 'agree-town-16', 'agree-town-48', 'agree-city-12', 'agree-city-20', 'agree-metropolis-1', 'agree-metropolis-10'];
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const roster = settlement.config.nearbyResources;
+      expect(settlement.config.tradeRouteAccess, seed).toBe('road');
+      expect(roster.length, `${seed}: ${roster.join(', ')}`).toBeGreaterThanOrEqual(MIN[seed.split('-')[1]]);
+      // anchored: the roster was just held at or above its size's minimum, so it cannot be empty
+      expect(roster, seed).not.toContain('crossroads_position');
+      expect(new Set(roster).size, seed).toBe(roster.length);
+    }), 'a refused winner leaves no holder short');
+  });
+});
+
+/**
+ * ITEM 3′ (ii), THE GUARD (COHERENCE-AGREE-4): every file under src/components and src/pdf that prints a chain's
+ * table outputs reads the one predicate (`domain/chainYield.js`), so a sixth reader cannot appear unseen. Exempt by
+ * name, each with its reason.
+ */
+describe('item 3′ (ii): every page that prints a chain\'s outputs reads the leaf', () => {
+  test('the readers of chain outputs under src/components and src/pdf import chainYieldRefused, or are exempt by name', async () => {
+    const { readdirSync, readFileSync, statSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const root = new URL('../..', import.meta.url).pathname;
+    const EXEMPT = {
+      'src/components/new/SupplyChainsPanel.jsx': 'the Compendium\'s ChainRow (mounted only by compendium/SupplyChainsManager.jsx): a discovered or custom chain in the abstract, no town and no status',
+      'src/pdf/lib/customSupplyChains.js': 'the custom chains\' view-model: user-confirmed chains outside the exporter, with their own activation state',
+      'src/pdf/lib/viewModelBodySlices.js': 'a projection, not a page: its chain rows are printed by EconomicsTrade.jsx, which reads the leaf',
+    };
+    const files = [];
+    const walk = (rel) => {
+      for (const e of readdirSync(join(root, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(root, p)).isDirectory()) walk(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e)) files.push(p);
+      }
+    };
+    walk('src/components'); walk('src/pdf');
+    const readers = files.filter((f) => /\b(?:chain|c)\??\.outputs\b/.test(readFileSync(join(root, f), 'utf8')));
+    expect(readers.length).toBeGreaterThanOrEqual(4);
+    const unread = readers.filter((f) => !(f in EXEMPT) && !/import \{[^}]*\bchainYieldRefused\b[^}]*\} from '[./]+\/domain\/chainYield\.js';/.test(readFileSync(join(root, f), 'utf8')));
+    expect(unread, 'a page prints a chain\'s outputs without the leaf').toEqual([]);
+    expect(Object.keys(EXEMPT).filter((f) => !readers.includes(f)), 'a stale exemption').toEqual([]);
+  });
+});
