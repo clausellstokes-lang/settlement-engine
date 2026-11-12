@@ -5,7 +5,11 @@
  * habitat a widening of the walker newly sees (a carrier no door enforces, a new root, a new word) and is
  * SHRINK-ONLY: no line is ever banked to absorb a NEW line.
  *
- *   --check                    print the fresh hits (not banked) and the stale rows; exit 1 if either exists
+ *   --check                    print the fresh hits (not banked) and the stale rows, of arm 1 and of the strip
+ *                              ban; exit 1 if any exists
+ *   --bank-strip <reason> <file> --base <rev>
+ *                              bank the fresh strip sites of one file under <reason> (`strip-before-draw`,
+ *                              `not-a-draw`) — only a site whose receiver already stood in the file at <rev>
  *   --shrink                   remove every stale row (a row nothing matches); never adds
  *   --bank <reason> --base <rev>
  *                              bank the fresh hits under <reason> — ONLY hits whose literal already stood in
@@ -18,7 +22,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { WIDENED_REGISTER_REL, bankedKeys, hitKey, scanTree } from '../tests/lint/presumedThings.shared.mjs';
+import { WIDENED_REGISTER_REL, bankedKeys, hitKey, scanTree, stripKey, stripTree } from '../tests/lint/presumedThings.shared.mjs';
 
 const ROOT = process.cwd();
 const args = process.argv.slice(2);
@@ -31,6 +35,12 @@ const banked = new Set([...bankedKeys(main), ...bankedKeys(reg)]);
 const found = new Set(hits.map((h) => hitKey(h.file, h.thing, h.text)));
 const fresh = hits.filter((h) => !banked.has(hitKey(h.file, h.thing, h.text)));
 const stale = [...bankedKeys(reg)].filter((k) => !found.has(k));
+reg.strips ||= [];
+const strips = stripTree(ROOT);
+const stripFound = new Set(strips.map((x) => stripKey(x.file, x.receiver)));
+const stripBanked = new Set(reg.strips.map((r) => stripKey(r[0], r[1])));
+const stripFresh = strips.filter((x) => !stripBanked.has(stripKey(x.file, x.receiver)));
+const stripStale = [...stripBanked].filter((k) => !stripFound.has(k));
 
 const write = () => {
   const arm1 = {};
@@ -42,13 +52,17 @@ const write = () => {
 if (mode === '--check' || mode === undefined) {
   for (const h of fresh) console.log(`fresh\t${hitKey(h.file, h.thing, h.text)}`);
   for (const k of stale) console.log(`stale\t${k}`);
-  console.log(`fresh ${fresh.length} · stale ${stale.length} · banked ${bankedKeys(reg).size}`);
-  process.exit(fresh.length || stale.length ? 1 : 0);
+  for (const x of stripFresh) console.log(`strip fresh\t${stripKey(x.file, x.receiver)}`);
+  for (const k of stripStale) console.log(`strip stale\t${k}`);
+  console.log(`fresh ${fresh.length} · stale ${stale.length} · banked ${bankedKeys(reg).size} · strips fresh ${stripFresh.length} stale ${stripStale.length} banked ${stripBanked.size}`);
+  process.exit(fresh.length || stale.length || stripFresh.length || stripStale.length ? 1 : 0);
 } else if (mode === '--shrink') {
   const staleSet = new Set(stale);
   for (const f of Object.keys(reg.arm1)) reg.arm1[f] = reg.arm1[f].filter((r) => !staleSet.has(hitKey(f, r[0], r[2])));
+  const stripStaleSet = new Set(stripStale);
+  reg.strips = reg.strips.filter((r) => !stripStaleSet.has(stripKey(r[0], r[1])));
   write();
-  console.log(`removed ${stale.length} stale rows`);
+  console.log(`removed ${stale.length} stale rows and ${stripStale.length} stale strip sites`);
 } else if (mode === '--bank') {
   const reason = args[args.indexOf('--bank') + 1];
   const base = args[args.indexOf('--base') + 1];
@@ -77,7 +91,22 @@ if (mode === '--check' || mode === undefined) {
   }
   write();
   console.log(`banked ${fresh.length} rows under '${reason}' (each stood at ${base})`);
+} else if (mode === '--bank-strip') {
+  const at = args.indexOf('--bank-strip'); const reason = args[at + 1]; const file = args[at + 2];
+  const base = args[args.indexOf('--base') + 1];
+  if (!['strip-before-draw', 'not-a-draw'].includes(reason) || !file || args.indexOf('--base') < 0 || !base) {
+    console.error('--bank-strip needs a reason (strip-before-draw | not-a-draw), a file and --base <rev>'); process.exit(2);
+  }
+  let atBase = ''; try { atBase = execFileSync('git', ['show', `${base}:${file}`], { encoding: 'utf8', maxBuffer: 1 << 28 }); } catch { /* absent */ }
+  const fold = (/** @type {string} */ x) => x.replace(/\s+/g, ' ');
+  const mine = stripFresh.filter((x) => x.file === file);
+  const novel = mine.filter((x) => !fold(atBase).includes(x.receiver));
+  if (novel.length) { for (const x of novel) console.error(`NEW STRIP (not at ${base}): ${stripKey(x.file, x.receiver)}`); process.exit(1); }
+  for (const x of mine) reg.strips.push([x.file, x.receiver, reason]);
+  reg.strips.sort((p, q) => stripKey(p[0], p[1]).localeCompare(stripKey(q[0], q[1])));
+  write();
+  console.log(`banked ${mine.length} strip sites of ${file} under '${reason}'`);
 } else {
-  console.error('usage: --check | --shrink | --bank <reason> --base <rev>');
+  console.error('usage: --check | --shrink | --bank <reason> --base <rev> | --bank-strip <reason> <file> --base <rev>');
   process.exit(2);
 }

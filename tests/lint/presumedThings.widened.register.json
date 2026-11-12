@@ -3,7 +3,8 @@
   "THE PRESUMED-THINGS WALKER'S WIDENED REGISTER (W2-B-DECLARE, 2026-11-12; the chair's records 288, 290 and 294). SHRINK-ONLY.",
   "Read by tests/lint/presumedThings.walker.test.js beside tests/lint/presumedThings.register.json, over the rule book tests/lint/presumedThings.shared.mjs.",
   "arm1: each source literal a WIDENING of the walker newly sees (a carrier no door enforces; a new root; a new word) that names a thing and declares no atom answering it through a door, as [thing, reason, the literal's first 120 characters].",
-  "Written only through its door, scripts/presumed-things-door.mjs: --bank <reason> --base <rev> banks a literal only if it already stood in its file at the widening's base; --shrink removes stale rows. A cure removes its row in its own commit; a row nothing matches reds as stale."
+  "Written only through its door, scripts/presumed-things-door.mjs: --bank <reason> --base <rev> banks a literal only if it already stood in its file at the widening's base; --shrink removes stale rows. A cure removes its row in its own commit; a row nothing matches reds as stale.",
+  "strips: each strip-shaped call in src (`.map(textOf)`, `.map(lineText)`, `.map((l) => l.text)`), as [file, receiver, reason]: `strip-before-draw` unwraps a declared pool before its pick (to cure: the pool goes through a door); `not-a-draw` is a dedupe, a join, a check or a list printed whole. A new strip is red (W2-B-DECLARE item 3, the strip ban)."
  ],
  "reasons": {
   "carrier": "declared only through a carrier no draw door reads (a causal-register mark, a catalogue's `tags`, a structural rule's `requires`): banked until it declares through a door (W2-B-DECLARE item 1)",
@@ -12304,5 +12305,67 @@
     "High magic district"
    ]
   ]
- }
+ },
+ "strips": [
+  [
+   "src/domain/display/stateProse/decreeProse.js",
+   "parts",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/prose/grammarWalker.js",
+   "pool",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/realm/realmItemPresentation.js",
+   "[...readIds]",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/realm/realmItemPresentation.js",
+   "classes",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/realm/realmItemReadModel.js",
+   "values",
+   "not-a-draw"
+  ],
+  [
+   "src/foundry/journalPages.js",
+   "revenuesOffTheLists(vm.raw)",
+   "not-a-draw"
+  ],
+  [
+   "src/generators/foodGenerator.js",
+   "CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways",
+   "strip-before-draw"
+  ],
+  [
+   "src/generators/historyGenerator.js",
+   "filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.pl",
+   "not-a-draw"
+  ],
+  [
+   "src/generators/people/personHooks.js",
+   "npc.plotHooks",
+   "not-a-draw"
+  ],
+  [
+   "src/generators/spatialGenerator.js",
+   "[\"Tannery Row\", \"Slaughterhouse\", { text: \"Dyer's Bridge\", needs: ['river'] }]",
+   "strip-before-draw"
+  ],
+  [
+   "src/generators/spatialGenerator.js",
+   "[{ text: \"The Rat's Nest (tavern)\", needs: ['institution: tavern'] }, 'Blind Alley', 'The Warren (sl",
+   "strip-before-draw"
+  ],
+  [
+   "src/utils/generateWorldBook.js",
+   "collectPlotHooks(st_)",
+   "not-a-draw"
+  ]
+ ]
 }

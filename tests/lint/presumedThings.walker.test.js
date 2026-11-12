@@ -10,6 +10,9 @@
  *     answers it through a carrier a draw door enforces (W2-B-DECLARE item 1), and has no row in the
  *     register or the widened register (`presumedThings.widened.register.json`) (a new undeclared line);
  *   • the tagged tables the walker credits differ from the `tagged: true` sites in src;
+ *   • THE STRIP BAN (W2-B-DECLARE item 3): a call that unwraps lines to their text (`.map(textOf)`,
+ *     `.map(lineText)`, `.map((l) => l.text)`) stands nowhere in src without its row in the widened
+ *     register's `strips` (`strip-before-draw`, to cure; `not-a-draw`), and no strip row is stale;
  *   • ARM 2: a sentence of the corpus (360 births, the browser's configuration, seeds
  *     presume-<tier>-<i>) names a thing the town lacks by the vocabulary's own readers, and no row
  *     of the register covers it (a new false presumption, or a cured line come back);
@@ -31,7 +34,7 @@ import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
-  ARM1_NOT_PRINTED, ARM1_ROOTS, COURT_HOUSES, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
+  ARM1_NOT_PRINTED, ARM1_ROOTS, COURT_HOUSES, stripKey, stripSites, stripTree, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
   deniesExistence, hitKey, listFiles, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
@@ -283,6 +286,37 @@ describe('ARM 1 — the source', () => {
 
   test('⛔ no stale row: a cured line leaves the register in its own commit', () => {
     expect([...banked].filter((k) => !found.has(k))).toEqual([]);
+  });
+});
+
+describe('ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B (iii))', () => {
+  const sites = stripTree(ROOT);
+  const banked = new Map((widened.strips || []).map((r) => [stripKey(r[0], r[1]), r[2]]));
+
+  test('planted: each unwrap shape is a strip; a door\'s own draw and a map to another field are not', () => {
+    const src = [
+      "const a = POOL.map(textOf);",
+      "const b = [{ text: 'x', needs: ['river'] }].map(lineText);",
+      "const c = rows.map((l) => l.text);",
+      "const d = drawDeclared(POOL, { draw, key }).text;",
+      "const e = rows.map((l) => l.name);",
+    ].join('\n');
+    expect(stripSites('src/generators/planted.js', src).map((x) => x.receiver)).toEqual(['POOL', "[{ text: 'x', needs: ['river'] }]", 'rows']);
+  });
+
+  test('anti-vacuity: the strip walk finds the twelve sites of the class table', () => {
+    expect(sites.length).toBeGreaterThanOrEqual(12);
+  });
+
+  test('⛔ no strip without its row: a new unwrap of a pool is red (draw it through a door)', () => {
+    const fresh = sites.filter((x) => !banked.has(stripKey(x.file, x.receiver)));
+    expect(fresh.map((x) => stripKey(x.file, x.receiver)), 'draw a declared pool through drawDeclared / filterDeclared; never unwrap it first').toEqual([]);
+  });
+
+  test('⛔ no stale strip row, and every row names one of the two reasons', () => {
+    const found = new Set(sites.map((x) => stripKey(x.file, x.receiver)));
+    expect([...banked.keys()].filter((k) => !found.has(k))).toEqual([]);
+    expect([...banked.values()].filter((r) => r !== 'strip-before-draw' && r !== 'not-a-draw')).toEqual([]);
   });
 });
 

@@ -52,6 +52,9 @@ export const REGISTER_REL = 'tests/lint/presumedThings.register.json';
  */
 export const WIDENED_REGISTER_REL = 'tests/lint/presumedThings.widened.register.json';
 
+/** A strip site's key in the widened register: file and receiver. @param {string} file @param {string} receiver */
+export const stripKey = (file, receiver) => `${file} :: ${receiver}`;
+
 /** An arm-1 hit's key in either register: file, thing, the literal's first 120 characters. */
 export const hitKey = (file, thing, text) => `${file}\t${thing}\t${String(text).slice(0, 120)}`;
 
@@ -282,6 +285,63 @@ export function scanTree(root) {
   /** @type {Map<string, string[]>} */ const keyed = new Map();
   for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src)) keyed.set(k, [...(keyed.get(k) || []), ...v]);
   return files.flatMap(([rel, src]) => scanSource(rel, src, keyed));
+}
+
+// ── ARM 3: the strip ban (W2-B-DECLARE item 3) ────────────────────────────────────────────────────
+
+/**
+ * THE STRIP BAN (the chair's record 288, ruling 1, B (iii); the procedure §5.3: "no stripping a declaration
+ * before a draw"). A pool whose lines carry declarations is selected only through a door (`drawDeclared`,
+ * `filterDeclared`); unwrapping its lines to their text first (`.map(textOf)`, `.map(lineText)`,
+ * `.map((l) => l.text)`) throws the declarations away, and the bare pick after it is refused nowhere.
+ * Every strip-shaped call in `src` is listed by its identity — file and receiver text — and stands in the
+ * widened register's `strips` under a named reason (`strip-before-draw`, to cure; `not-a-draw`, a dedupe, a
+ * join, a check or a list printed whole), or the walker reds. Written only through the register's door. A new strip is red in the lane that writes it.
+ */
+export const STRIP_ROOTS = Object.freeze(['src']);
+
+/** Is this `.map` argument an unwrap to text? @param {any} arg */
+function isUnwrap(arg) {
+  if (ts.isIdentifier(arg)) return arg.text === 'textOf' || arg.text === 'lineText';
+  if (ts.isArrowFunction(arg) && arg.parameters.length === 1 && ts.isIdentifier(arg.parameters[0].name)) {
+    const p = arg.parameters[0].name.text;
+    const body = ts.isParenthesizedExpression(arg.body) ? arg.body.expression : arg.body;
+    return ts.isPropertyAccessExpression(body) && body.name.text === 'text' && ts.isIdentifier(body.expression) && body.expression.text === p;
+  }
+  return false;
+}
+
+/**
+ * The strip-shaped calls of one source text: `{ file, receiver }`, the receiver's source text (whitespace
+ * folded, its first 100 characters) being the site's identity. @param {string} rel @param {string} src
+ * @returns {Array<{ file: string, receiver: string }>}
+ */
+export function stripSites(rel, src) {
+  const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
+  /** @type {Array<{ file: string, receiver: string }>} */ const out = [];
+  const visit = (n) => {
+    if (ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) && n.expression.name.text === 'map'
+      && n.arguments.length === 1 && isUnwrap(n.arguments[0])) {
+      out.push({ file: rel, receiver: n.expression.expression.getText(sf).replace(/\s+/g, ' ').slice(0, 100) });
+    }
+    ts.forEachChild(n, visit);
+  };
+  visit(sf);
+  return out;
+}
+
+/** @param {string} root @returns {Array<{ file: string, receiver: string }>} every strip-shaped call under STRIP_ROOTS */
+export function stripTree(root) {
+  /** @type {string[]} */ const files = [];
+  const walk = (rel) => {
+    for (const e of readdirSync(join(root, rel)).sort()) {
+      const p = `${rel}/${e}`;
+      if (statSync(join(root, p)).isDirectory()) walk(p);
+      else if (/\.(?:js|jsx|mjs)$/.test(e)) files.push(p);
+    }
+  };
+  for (const r of STRIP_ROOTS) walk(r);
+  return files.flatMap((rel) => stripSites(rel, readFileSync(join(root, rel), 'utf8')));
 }
 
 // ── ARM 2: the printed record ─────────────────────────────────────────────────────────────────
