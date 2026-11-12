@@ -1,0 +1,563 @@
+{
+ "atomLayer": {
+  "crime": 3,
+  "food": 2,
+  "magic": 1,
+  "magic level": 1,
+  "population": 1,
+  "priest": 3,
+  "prosperity": 2,
+  "stores": 2,
+  "tier": 1,
+  "clergy": 1,
+  "coast": 1,
+  "commander": 1,
+  "court": 1,
+  "crisis": 1,
+  "culture": 1,
+  "docks": 1,
+  "garrison": 1,
+  "gate": 1,
+  "guardPresence": 1,
+  "healer": 1,
+  "hospital": 1,
+  "institution": 1,
+  "market": 1,
+  "mercenary": 1,
+  "migration": 1,
+  "militia": 1,
+  "navigable": 1,
+  "palisade": 1,
+  "port": 1,
+  "prison": 1,
+  "river": 1,
+  "route": 1,
+  "sacredHouse": 1,
+  "soldiers": 1,
+  "temple": 1,
+  "terrain": 1,
+  "walls": 1,
+  "war": 1,
+  "watch": 1,
+  "exports": 2,
+  "famine": 2,
+  "fish": 2,
+  "game": 2,
+  "grain": 2,
+  "imports": 2,
+  "livestock": 2,
+  "starving": 2,
+  "guild": 3,
+  "organised crime": 3,
+  "ruler": 3,
+  "other npc": 4
+ },
+ "files": {
+  "src/data/arrivalProse.js": {
+   "step": "generateNarratives",
+   "ceil": 2,
+   "atoms": 72,
+   "above": 0,
+   "dims": {
+    "crisis": 41,
+    "institution": 4,
+    "market": 10,
+    "navigable": 5,
+    "fish": 6,
+    "sacredHouse": 3,
+    "starving": 3
+   }
+  },
+  "src/data/cultureProfiles.js": {
+   "step": "resolveConfig",
+   "ceil": 0,
+   "atoms": 57,
+   "above": 1,
+   "dims": {
+    "ruler": 1,
+    "institution": 14,
+    "market": 17,
+    "navigable": 6,
+    "militia": 5,
+    "guardPresence": 3,
+    "gate": 2,
+    "watch": 1,
+    "coast": 1,
+    "river": 4,
+    "palisade": 2,
+    "population": 1
+   }
+  },
+  "src/data/historyData.js": {
+   "step": "generateEconomy",
+   "ceil": 0,
+   "atoms": 15,
+   "above": 2,
+   "dims": {
+    "ruler": 2,
+    "tier": 1,
+    "market": 3,
+    "guardPresence": 1,
+    "navigable": 2,
+    "institution": 3,
+    "migration": 3
+   }
+  },
+  "src/data/institutionServices.js": {
+   "step": "resolveResources",
+   "ceil": 0,
+   "atoms": 59,
+   "above": 4,
+   "dims": {
+    "institution": 4,
+    "market": 4,
+    "walls": 4,
+    "watch": 7,
+    "guild": 3,
+    "river": 2,
+    "magic": 13,
+    "gate": 6,
+    "coast": 2,
+    "navigable": 3,
+    "organised crime": 1,
+    "tier": 5,
+    "militia": 3,
+    "guardPresence": 1,
+    "terrain": 1
+   }
+  },
+  "src/data/institutionalCatalog.js": {
+   "step": "buildGenerationContext",
+   "ceil": 0,
+   "atoms": 23,
+   "above": 10,
+   "dims": {
+    "market": 8,
+    "guild": 10,
+    "port": 5
+   }
+  },
+  "src/data/narrativeData.js": {
+   "step": "generateNarratives",
+   "ceil": 2,
+   "atoms": 145,
+   "above": 0,
+   "dims": {
+    "institution": 18,
+    "population": 1,
+    "walls": 13,
+    "gate": 36,
+    "guardPresence": 15,
+    "market": 23,
+    "crisis": 21,
+    "watch": 4,
+    "healer": 2,
+    "militia": 2,
+    "soldiers": 2,
+    "garrison": 1,
+    "migration": 6,
+    "war": 1
+   }
+  },
+  "src/data/npcData.js": {
+   "step": "generatePopulation",
+   "ceil": 2,
+   "atoms": 72,
+   "above": 0,
+   "dims": {
+    "sacredHouse": 1,
+    "guild": 5,
+    "docks": 1,
+    "walls": 1,
+    "temple": 2,
+    "tier": 2,
+    "hospital": 1,
+    "guardPresence": 9,
+    "institution": 9,
+    "market": 4,
+    "magic": 3,
+    "watch": 3,
+    "ruler": 30,
+    "garrison": 1
+   }
+  },
+  "src/data/people/goalFamilies.js": {
+   "step": "generateNarratives",
+   "ceil": 2,
+   "atoms": 70,
+   "above": 0,
+   "dims": {
+    "market": 2,
+    "magic": 60,
+    "priest": 3,
+    "sacredHouse": 3,
+    "river": 1,
+    "terrain": 1
+   }
+  },
+  "src/data/spatialData.js": {
+   "step": "assembleInstitutions",
+   "ceil": 0,
+   "atoms": 3,
+   "above": 1,
+   "dims": {
+    "garrison": 2,
+    "guild": 1
+   }
+  },
+  "src/data/stressInstitutionEffects.js": {
+   "step": "generatePopulation",
+   "ceil": 2,
+   "atoms": 45,
+   "above": 20,
+   "dims": {
+    "ruler": 12,
+    "other npc": 20,
+    "starving": 1,
+    "tier": 1,
+    "gate": 2,
+    "migration": 7,
+    "institution": 1,
+    "market": 1
+   }
+  },
+  "src/data/stressTypes.js": {
+   "step": "resolveStress",
+   "ceil": 0,
+   "atoms": 9,
+   "above": 0,
+   "dims": {
+    "healer": 2,
+    "market": 4,
+    "institution": 3
+   }
+  },
+  "src/data/stressorSpinePhrases.js": {
+   "step": "display-time",
+   "ceil": null,
+   "atoms": 4,
+   "above": 0,
+   "dims": {
+    "walls": 2,
+    "ruler": 2
+   }
+  },
+  "src/data/supplyChainData.js": {
+   "step": "resolveResources",
+   "ceil": 0,
+   "atoms": 1,
+   "above": 0,
+   "dims": {
+    "terrain": 1
+   }
+  },
+  "src/generators/factionRoles.js": {
+   "step": "assembleSettlement",
+   "ceil": 3,
+   "atoms": 1,
+   "above": 0,
+   "dims": {
+    "watch": 1
+   }
+  },
+  "src/generators/narrativeGenerator.js": {
+   "step": "generateNarratives",
+   "ceil": 2,
+   "atoms": 1,
+   "above": 0,
+   "dims": {
+    "institution": 1
+   }
+  },
+  "src/generators/narrativeText.js": {
+   "step": "generateNarratives",
+   "ceil": 2,
+   "atoms": 24,
+   "above": 0,
+   "dims": {
+    "gate": 1,
+    "walls": 3,
+    "market": 2,
+    "watch": 1,
+    "healer": 2,
+    "population": 1,
+    "institution": 5,
+    "starving": 1,
+    "garrison": 2,
+    "sacredHouse": 2,
+    "magic": 4
+   }
+  },
+  "src/generators/npcGenerator.js": {
+   "step": "generatePopulation",
+   "ceil": 2,
+   "atoms": 3,
+   "above": 0,
+   "dims": {
+    "watch": 1,
+    "migration": 1,
+    "market": 1
+   }
+  },
+  "src/generators/power/conflictIssues.js": {
+   "step": "generateNarratives",
+   "ceil": 2,
+   "atoms": 7,
+   "above": 0,
+   "dims": {
+    "market": 2,
+    "guild": 2,
+    "docks": 1,
+    "mercenary": 1,
+    "guardPresence": 1
+   }
+  },
+  "src/generators/safetyProfile.js": {
+   "step": "generateEconomy",
+   "ceil": 0,
+   "atoms": 8,
+   "above": 0,
+   "dims": {
+    "walls": 1,
+    "gate": 1,
+    "court": 3,
+    "prison": 3
+   }
+  },
+  "src/generators/spatialGenerator.js": {
+   "step": "economyReconcilePass",
+   "ceil": 1,
+   "atoms": 64,
+   "above": 0,
+   "dims": {
+    "crisis": 3,
+    "river": 11,
+    "coast": 10,
+    "magic": 1,
+    "institution": 9,
+    "gate": 13,
+    "market": 10,
+    "walls": 7
+   }
+  },
+  "src/generators/steps/cascadePass.js": {
+   "step": "cascadePass",
+   "ceil": 0,
+   "atoms": 2,
+   "above": 0,
+   "dims": {
+    "port": 2
+   }
+  },
+  "src/generators/stressNarrative.js": {
+   "step": "resolveStress",
+   "ceil": 0,
+   "atoms": 6,
+   "above": 0,
+   "dims": {
+    "crisis": 2,
+    "healer": 2,
+    "institution": 2
+   }
+  },
+  "src/generators/structuralValidator.js": {
+   "step": "assembleInstitutions",
+   "ceil": 0,
+   "atoms": 7,
+   "above": 0,
+   "dims": {
+    "walls": 2,
+    "crisis": 2,
+    "gate": 1,
+    "navigable": 2
+   }
+  }
+ },
+ "totals": {
+  "atoms": 698,
+  "aboveCeiling": 38,
+  "displayTime": 4
+ },
+ "byDim": {
+  "crisis": {
+   "layer": 1,
+   "atoms": 69,
+   "above": 0
+  },
+  "institution": {
+   "layer": 1,
+   "atoms": 73,
+   "above": 0
+  },
+  "market": {
+   "layer": 1,
+   "atoms": 91,
+   "above": 0
+  },
+  "navigable": {
+   "layer": 1,
+   "atoms": 18,
+   "above": 0
+  },
+  "fish": {
+   "layer": 2,
+   "atoms": 6,
+   "above": 0
+  },
+  "sacredHouse": {
+   "layer": 1,
+   "atoms": 9,
+   "above": 0
+  },
+  "starving": {
+   "layer": 2,
+   "atoms": 5,
+   "above": 0
+  },
+  "ruler": {
+   "layer": 3,
+   "atoms": 47,
+   "above": 3
+  },
+  "militia": {
+   "layer": 1,
+   "atoms": 10,
+   "above": 0
+  },
+  "guardPresence": {
+   "layer": 1,
+   "atoms": 30,
+   "above": 0
+  },
+  "gate": {
+   "layer": 1,
+   "atoms": 62,
+   "above": 0
+  },
+  "watch": {
+   "layer": 1,
+   "atoms": 18,
+   "above": 0
+  },
+  "coast": {
+   "layer": 1,
+   "atoms": 13,
+   "above": 0
+  },
+  "river": {
+   "layer": 1,
+   "atoms": 18,
+   "above": 0
+  },
+  "palisade": {
+   "layer": 1,
+   "atoms": 2,
+   "above": 0
+  },
+  "population": {
+   "layer": 1,
+   "atoms": 3,
+   "above": 0
+  },
+  "tier": {
+   "layer": 1,
+   "atoms": 9,
+   "above": 0
+  },
+  "migration": {
+   "layer": 1,
+   "atoms": 17,
+   "above": 0
+  },
+  "walls": {
+   "layer": 1,
+   "atoms": 33,
+   "above": 0
+  },
+  "guild": {
+   "layer": 3,
+   "atoms": 21,
+   "above": 14
+  },
+  "magic": {
+   "layer": 1,
+   "atoms": 81,
+   "above": 0
+  },
+  "organised crime": {
+   "layer": 3,
+   "atoms": 1,
+   "above": 1
+  },
+  "terrain": {
+   "layer": 1,
+   "atoms": 3,
+   "above": 0
+  },
+  "port": {
+   "layer": 1,
+   "atoms": 7,
+   "above": 0
+  },
+  "healer": {
+   "layer": 1,
+   "atoms": 8,
+   "above": 0
+  },
+  "soldiers": {
+   "layer": 1,
+   "atoms": 2,
+   "above": 0
+  },
+  "garrison": {
+   "layer": 1,
+   "atoms": 6,
+   "above": 0
+  },
+  "war": {
+   "layer": 1,
+   "atoms": 1,
+   "above": 0
+  },
+  "docks": {
+   "layer": 1,
+   "atoms": 2,
+   "above": 0
+  },
+  "temple": {
+   "layer": 1,
+   "atoms": 2,
+   "above": 0
+  },
+  "hospital": {
+   "layer": 1,
+   "atoms": 1,
+   "above": 0
+  },
+  "priest": {
+   "layer": 3,
+   "atoms": 3,
+   "above": 0
+  },
+  "other npc": {
+   "layer": 4,
+   "atoms": 20,
+   "above": 20
+  },
+  "mercenary": {
+   "layer": 1,
+   "atoms": 1,
+   "above": 0
+  },
+  "court": {
+   "layer": 1,
+   "atoms": 3,
+   "above": 0
+  },
+  "prison": {
+   "layer": 1,
+   "atoms": 3,
+   "above": 0
+  }
+ }
+}

@@ -1,0 +1,561 @@
+{
+ "order": [
+  "resolveConfig",
+  "buildGenerationContext",
+  "resolveResources",
+  "resolveStress",
+  "resolveNeighbour",
+  "assembleInstitutions",
+  "subsumptionPass",
+  "cascadePass",
+  "isolationPass",
+  "stressConfirmPass",
+  "generateEconomy",
+  "generatePower",
+  "neighbourFactions",
+  "factionCorrelationPass",
+  "coherenceRepairPass",
+  "economyReconcilePass",
+  "powerEconomyReconcilePass",
+  "structuralValidationPass",
+  "generatePopulation",
+  "generateNarratives",
+  "assembleSettlement",
+  "resolveCrisisCast"
+ ],
+ "meta": [
+  {
+   "name": "resolveConfig",
+   "phase": "config",
+   "deps": [],
+   "reads": [],
+   "provides": [
+    "tier",
+    "population",
+    "tradeRoute",
+    "terrainType",
+    "resolvedTerrain",
+    "culture",
+    "culturalIdentity",
+    "generationContentProfile",
+    "magicLevel",
+    "threat",
+    "priorityMagicEffective",
+    "noMagic",
+    "townPlus",
+    "effectiveConfig",
+    "institutionToggles",
+    "categoryToggles",
+    "goodsToggles",
+    "servicesToggles"
+   ],
+   "mutates": [],
+   "readsVersion": {}
+  },
+  {
+   "name": "buildGenerationContext",
+   "phase": "config",
+   "deps": [
+    "resolveConfig"
+   ],
+   "reads": [
+    "culture",
+    "culturalIdentity",
+    "effectiveConfig",
+    "generationContentProfile",
+    "terrainType",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [
+    "generationContext"
+   ],
+   "mutates": [],
+   "readsVersion": {}
+  },
+  {
+   "name": "resolveResources",
+   "phase": "config",
+   "deps": [
+    "buildGenerationContext"
+   ],
+   "reads": [
+    "generationContext",
+    "resolvedTerrain",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [
+    "nearbyResources",
+    "nearbyResourcesNative",
+    "nearbyResourcesDepleted",
+    "nearbyResourcesNativeDepleted",
+    "nearbyResourcesCustom",
+    "nearbyResourceDefinitions",
+    "nearbyResourceDefinitionsDepleted"
+   ],
+   "mutates": [
+    "effectiveConfig"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "resolveStress",
+   "phase": "config",
+   "deps": [
+    "resolveConfig",
+    "resolveResources"
+   ],
+   "reads": [
+    "effectiveConfig",
+    "generationContentProfile"
+   ],
+   "provides": [
+    "stress",
+    "stressTypes"
+   ],
+   "mutates": [
+    "effectiveConfig"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "resolveNeighbour",
+   "phase": "config",
+   "deps": [
+    "resolveConfig"
+   ],
+   "reads": [
+    "effectiveConfig"
+   ],
+   "provides": [
+    "neighbourProfile",
+    "neighbourEconBias",
+    "neighbourFacBias",
+    "rawNeighbour"
+   ],
+   "mutates": [
+    "effectiveConfig"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "assembleInstitutions",
+   "phase": "institutions",
+   "deps": [
+    "buildGenerationContext",
+    "resolveResources",
+    "resolveStress",
+    "resolveNeighbour"
+   ],
+   "reads": [
+    "categoryToggles",
+    "effectiveConfig",
+    "generationContext",
+    "goodsToggles",
+    "institutionToggles",
+    "nearbyResources",
+    "neighbourProfile",
+    "population",
+    "threat",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [
+    "institutions",
+    "catalogForTier",
+    "generationRepairs"
+   ],
+   "mutates": [],
+   "readsVersion": {}
+  },
+  {
+   "name": "subsumptionPass",
+   "phase": "institutions",
+   "deps": [
+    "assembleInstitutions"
+   ],
+   "reads": [
+    "institutions"
+   ],
+   "provides": [],
+   "mutates": [
+    "institutions"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "cascadePass",
+   "phase": "institutions",
+   "deps": [
+    "subsumptionPass",
+    "buildGenerationContext"
+   ],
+   "reads": [
+    "categoryToggles",
+    "effectiveConfig",
+    "generationContext",
+    "goodsToggles",
+    "institutionToggles",
+    "institutions",
+    "nearbyResources",
+    "neighbourProfile",
+    "population",
+    "terrainType",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [],
+   "mutates": [
+    "institutions"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "isolationPass",
+   "phase": "institutions",
+   "deps": [
+    "cascadePass"
+   ],
+   "reads": [
+    "catalogForTier",
+    "effectiveConfig",
+    "stress",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [
+    "stress",
+    "isolationSupport"
+   ],
+   "mutates": [
+    "institutions",
+    "effectiveConfig"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "stressConfirmPass",
+   "phase": "config",
+   "deps": [
+    "resolveStress",
+    "isolationPass"
+   ],
+   "reads": [
+    "effectiveConfig",
+    "institutions",
+    "stress",
+    "tier"
+   ],
+   "provides": [
+    "stress",
+    "stressTypes"
+   ],
+   "mutates": [
+    "effectiveConfig"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "generateEconomy",
+   "phase": "economy",
+   "deps": [
+    "stressConfirmPass",
+    "resolveNeighbour"
+   ],
+   "reads": [
+    "effectiveConfig",
+    "goodsToggles",
+    "institutions",
+    "neighbourEconBias",
+    "neighbourProfile",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [
+    "economicState"
+   ],
+   "mutates": [
+    "effectiveConfig"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "generatePower",
+   "phase": "power",
+   "deps": [
+    "generateEconomy",
+    "resolveNeighbour"
+   ],
+   "reads": [
+    "economicState",
+    "effectiveConfig",
+    "institutions",
+    "stress",
+    "tier"
+   ],
+   "provides": [
+    "powerIntent",
+    "powerStructure"
+   ],
+   "mutates": [],
+   "readsVersion": {
+    "economicState": "provisional",
+    "stress": "reconciled"
+   }
+  },
+  {
+   "name": "neighbourFactions",
+   "phase": "power",
+   "deps": [
+    "generatePower",
+    "resolveNeighbour"
+   ],
+   "reads": [
+    "neighbourFacBias",
+    "neighbourProfile"
+   ],
+   "provides": [],
+   "mutates": [
+    "powerStructure"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "factionCorrelationPass",
+   "phase": "power",
+   "deps": [
+    "neighbourFactions",
+    "generateEconomy",
+    "buildGenerationContext"
+   ],
+   "reads": [
+    "categoryToggles",
+    "effectiveConfig",
+    "generationContext",
+    "goodsToggles",
+    "institutionToggles",
+    "institutions",
+    "nearbyResources",
+    "neighbourProfile",
+    "population",
+    "powerStructure",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [],
+   "mutates": [
+    "institutions"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "coherenceRepairPass",
+   "phase": "institutions",
+   "deps": [
+    "factionCorrelationPass"
+   ],
+   "reads": [
+    "effectiveConfig",
+    "generationContext",
+    "catalogForTier",
+    "institutionToggles",
+    "institutions",
+    "isolationSupport",
+    "terrainType",
+    "threat",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [
+    "generationRepairs",
+    "isolationSupport"
+   ],
+   "mutates": [
+    "effectiveConfig",
+    "institutions"
+   ],
+   "readsVersion": {}
+  },
+  {
+   "name": "economyReconcilePass",
+   "phase": "economy",
+   "deps": [
+    "coherenceRepairPass"
+   ],
+   "reads": [
+    "economicState",
+    "generationContext"
+   ],
+   "provides": [
+    "economicState",
+    "spatialLayout",
+    "availableServices"
+   ],
+   "mutates": [],
+   "readsVersion": {}
+  },
+  {
+   "name": "powerEconomyReconcilePass",
+   "phase": "power",
+   "deps": [
+    "economyReconcilePass"
+   ],
+   "reads": [
+    "economicState",
+    "powerIntent",
+    "powerStructure",
+    "tier"
+   ],
+   "provides": [],
+   "mutates": [
+    "powerStructure"
+   ],
+   "readsVersion": {
+    "economicState": "reconciled"
+   }
+  },
+  {
+   "name": "structuralValidationPass",
+   "phase": "institutions",
+   "deps": [
+    "powerEconomyReconcilePass"
+   ],
+   "reads": [
+    "effectiveConfig",
+    "institutions",
+    "isolationSupport",
+    "magicLevel",
+    "threat",
+    "tier",
+    "townPlus",
+    "tradeRoute"
+   ],
+   "provides": [
+    "structural"
+   ],
+   "mutates": [],
+   "readsVersion": {
+    "isolationSupport": "reconciled"
+   }
+  },
+  {
+   "name": "generatePopulation",
+   "phase": "population",
+   "deps": [
+    "coherenceRepairPass",
+    "powerEconomyReconcilePass"
+   ],
+   "reads": [
+    "culture",
+    "economicState",
+    "effectiveConfig",
+    "generationContext",
+    "institutions",
+    "powerStructure",
+    "tier"
+   ],
+   "provides": [
+    "npcs",
+    "relationships"
+   ],
+   "mutates": [],
+   "readsVersion": {
+    "economicState": "reconciled"
+   }
+  },
+  {
+   "name": "generateNarratives",
+   "phase": "narrative",
+   "deps": [
+    "generatePopulation",
+    "economyReconcilePass"
+   ],
+   "reads": [
+    "economicState",
+    "effectiveConfig",
+    "generationContext",
+    "institutions",
+    "population",
+    "powerStructure",
+    "tier",
+    "tradeRoute"
+   ],
+   "provides": [
+    "settlementReason",
+    "resourceAnalysis",
+    "economicViability",
+    "history"
+   ],
+   "mutates": [],
+   "readsVersion": {
+    "economicState": "reconciled"
+   }
+  },
+  {
+   "name": "assembleSettlement",
+   "phase": "assembly",
+   "deps": [
+    "generateNarratives",
+    "generatePopulation",
+    "structuralValidationPass"
+   ],
+   "reads": [
+    "availableServices",
+    "culture",
+    "culturalIdentity",
+    "economicState",
+    "economicViability",
+    "effectiveConfig",
+    "generationContext",
+    "generationRepairs",
+    "history",
+    "institutions",
+    "isolationSupport",
+    "neighbourProfile",
+    "npcs",
+    "population",
+    "powerIntent",
+    "powerStructure",
+    "rawNeighbour",
+    "relationships",
+    "resourceAnalysis",
+    "settlementReason",
+    "spatialLayout",
+    "stress",
+    "structural",
+    "tier"
+   ],
+   "provides": [
+    "settlement"
+   ],
+   "mutates": [
+    "powerStructure",
+    "stress",
+    "relationships"
+   ],
+   "readsVersion": {
+    "economicState": "reconciled",
+    "stress": "reconciled",
+    "isolationSupport": "reconciled"
+   }
+  },
+  {
+   "name": "resolveCrisisCast",
+   "phase": "assembly",
+   "deps": [
+    "assembleSettlement"
+   ],
+   "reads": [
+    "settlement"
+   ],
+   "provides": [
+    "crisisCast"
+   ],
+   "mutates": [
+    "settlement"
+   ],
+   "readsVersion": {}
+  }
+ ]
+}

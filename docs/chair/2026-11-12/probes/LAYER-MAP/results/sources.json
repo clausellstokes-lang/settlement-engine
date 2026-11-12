@@ -1,0 +1,279 @@
+{
+ "files": 2477,
+ "byRoot": {
+  "src/data": {
+   "literals": 11845,
+   "byCeiling": {
+    "L2 (generateNarratives)": 1020,
+    "L0 (resolveStress)": 166,
+    "L0 (resolveResources)": 1368,
+    "L0 (resolveConfig)": 274,
+    "L1 (generatePower)": 28,
+    "L3 (assembleSettlement)": 75,
+    "L0 (assembleInstitutions)": 883,
+    "L0 (generateEconomy)": 283,
+    "L0 (buildGenerationContext)": 653,
+    "L2 (generatePopulation)": 3270,
+    "L1 (economyReconcilePass)": 0
+   },
+   "displayTime": 802,
+   "files": 78,
+   "stateProseFiles": 3023
+  },
+  "src/generators": {
+   "literals": 3000,
+   "byCeiling": {
+    "L0 (cascadePass)": 6,
+    "L0 (assembleInstitutions)": 228,
+    "L0 (generateEconomy)": 456,
+    "L3 (assembleSettlement)": 167,
+    "L1 (economyReconcilePass)": 339,
+    "L2 (factionCorrelationPass)": 5,
+    "L1 (generatePower)": 285,
+    "L0 (buildGenerationContext)": 0,
+    "L0 (resolveStress)": 62,
+    "L2 (generateNarratives)": 971,
+    "L2 (generatePopulation)": 90,
+    "L0 (isolationPass)": 13,
+    "L0 (resolveNeighbour)": 83,
+    "L0 (resolveConfig)": 20,
+    "L0 (coherenceRepairPass)": 15,
+    "L1 (neighbourFactions)": 4,
+    "L1 (powerEconomyReconcilePass)": 0,
+    "L4 (resolveCrisisCast)": 0,
+    "L0 (resolveResources)": 13,
+    "L0 (stressConfirmPass)": 2,
+    "L0 (structuralValidationPass)": 0,
+    "L0 (subsumptionPass)": 1
+   },
+   "displayTime": 240,
+   "files": 134
+  },
+  "src/domain": {
+   "literals": 17694,
+   "byCeiling": {
+    "L0 (resolveStress)": 3535,
+    "L0 (buildGenerationContext)": 5,
+    "L3 (assembleSettlement)": 682,
+    "L0 (generateEconomy)": 32,
+    "L0 (resolveConfig)": 26,
+    "L2 (generateNarratives)": 26,
+    "L0 (resolveResources)": 116,
+    "L1 (economyReconcilePass)": 11,
+    "L2 (generatePopulation)": 9,
+    "L0 (assembleInstitutions)": 0
+   },
+   "displayTime": 12752,
+   "files": 1192,
+   "stateProseFiles": 500
+  },
+  "src/components": {
+   "literals": 5404,
+   "byCeiling": {},
+   "displayTime": 5404,
+   "files": 604
+  }
+ },
+ "topFilesByCeiling": [
+  {
+   "f": "src/data/people/titleSecretsPresentations.js",
+   "n": 1832,
+   "at": "L2 generatePopulation"
+  },
+  {
+   "f": "src/data/institutionServices.js",
+   "n": 988,
+   "at": "L0 resolveResources"
+  },
+  {
+   "f": "src/data/npcData.js",
+   "n": 977,
+   "at": "L2 generatePopulation"
+  },
+  {
+   "f": "src/data/dossierStateProse/general.generated.js",
+   "n": 794,
+   "at": "display-time"
+  },
+  {
+   "f": "src/data/institutionDescVariants.js",
+   "n": 668,
+   "at": "L0 assembleInstitutions"
+  },
+  {
+   "f": "src/data/dossierStateProse/defense.generated.js",
+   "n": 599,
+   "at": "display-time"
+  },
+  {
+   "f": "src/data/institutionalCatalog.js",
+   "n": 552,
+   "at": "L0 buildGenerationContext"
+  },
+  {
+   "f": "src/data/dossierCausalProse.generated.js",
+   "n": 546,
+   "at": "display-time"
+  },
+  {
+   "f": "src/data/people/goalFamilies.js",
+   "n": 530,
+   "at": "L2 generateNarratives"
+  },
+  {
+   "f": "src/data/dossierStateProse/warFaith.generated.js",
+   "n": 465,
+   "at": "display-time"
+  },
+  {
+   "f": "src/data/dossierStateProse/stressors.generated.js",
+   "n": 437,
+   "at": "display-time"
+  },
+  {
+   "f": "src/data/dossierStateProse/economy.generated.js",
+   "n": 430,
+   "at": "display-time"
+  },
+  {
+   "f": "src/data/dossierStateProse/power.generated.js",
+   "n": 298,
+   "at": "display-time"
+  },
+  {
+   "f": "src/generators/npcStructure.js",
+   "n": 240,
+   "at": "L2 generateNarratives"
+  },
+  {
+   "f": "src/data/historyData.js",
+   "n": 225,
+   "at": "L0 generateEconomy"
+  },
+  {
+   "f": "src/data/narrativeData.js",
+   "n": 225,
+   "at": "L2 generateNarratives"
+  },
+  {
+   "f": "src/data/arrivalProse.js",
+   "n": 214,
+   "at": "L2 generateNarratives"
+  },
+  {
+   "f": "src/data/cultureProfiles.js",
+   "n": 199,
+   "at": "L0 resolveConfig"
+  },
+  {
+   "f": "src/data/stressInstitutionEffects.js",
+   "n": 196,
+   "at": "L2 generatePopulation"
+  },
+  {
+   "f": "src/generators/safetyProfile.js",
+   "n": 196,
+   "at": "L0 generateEconomy"
+  },
+  {
+   "f": "src/data/personHooksByTitle.js",
+   "n": 182,
+   "at": "L2 generatePopulation"
+  },
+  {
+   "f": "src/generators/demandProfile.js",
+   "n": 178,
+   "at": "L1 economyReconcilePass"
+  },
+  {
+   "f": "src/generators/power/conflictIssues.js",
+   "n": 168,
+   "at": "L2 generateNarratives"
+  },
+  {
+   "f": "src/data/supplyChainData.js",
+   "n": 157,
+   "at": "L0 resolveResources"
+  },
+  {
+   "f": "src/generators/narrativeText.js",
+   "n": 151,
+   "at": "L2 generateNarratives"
+  },
+  {
+   "f": "src/generators/crossSettlementConflicts.js",
+   "n": 135,
+   "at": "display-time"
+  },
+  {
+   "f": "src/data/roadsProse.js",
+   "n": 128,
+   "at": "L0 resolveStress"
+  },
+  {
+   "f": "src/data/spatialData.js",
+   "n": 128,
+   "at": "L0 assembleInstitutions"
+  },
+  {
+   "f": "src/generators/narrativeGenerator.js",
+   "n": 116,
+   "at": "L2 generateNarratives"
+  },
+  {
+   "f": "src/data/powerData.js",
+   "n": 101,
+   "at": "L0 buildGenerationContext"
+  },
+  {
+   "f": "src/generators/structuralValidator.js",
+   "n": 98,
+   "at": "L0 assembleInstitutions"
+  },
+  {
+   "f": "src/generators/spatialGenerator.js",
+   "n": 95,
+   "at": "L1 economyReconcilePass"
+  },
+  {
+   "f": "src/data/economicData.js",
+   "n": 92,
+   "at": "L0 resolveResources"
+  },
+  {
+   "f": "src/generators/generationReceiptJudgments.js",
+   "n": 85,
+   "at": "L3 assembleSettlement"
+  },
+  {
+   "f": "src/generators/power/governanceNarrative.js",
+   "n": 85,
+   "at": "L1 generatePower"
+  },
+  {
+   "f": "src/data/tradeGoodsData.js",
+   "n": 79,
+   "at": "L0 resolveResources"
+  },
+  {
+   "f": "src/generators/economy/foodBalance.js",
+   "n": 78,
+   "at": "L0 assembleInstitutions"
+  },
+  {
+   "f": "src/generators/neighbourGenerator.js",
+   "n": 76,
+   "at": "L0 resolveNeighbour"
+  },
+  {
+   "f": "src/data/resourceData.js",
+   "n": 75,
+   "at": "L0 resolveConfig"
+  },
+  {
+   "f": "src/data/people/handlerTieLines.js",
+   "n": 74,
+   "at": "L2 generatePopulation"
+  }
+ ]
+}

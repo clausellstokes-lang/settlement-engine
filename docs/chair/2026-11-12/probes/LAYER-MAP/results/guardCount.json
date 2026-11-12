@@ -1,0 +1,98 @@
+{
+ "thingLayer": {
+  "walls": 1,
+  "garrison": 1,
+  "militia": 1,
+  "watch": 1,
+  "mercenary": 1,
+  "docks": 1,
+  "granary": 1,
+  "mill": 1,
+  "market": 1,
+  "temple": 1,
+  "prison": null,
+  "court": null,
+  "bank": 1,
+  "guildhall": 3,
+  "war": 1,
+  "law": 1
+ },
+ "namings": 258,
+ "undeclared": 89,
+ "violations": 7,
+ "byThing": {
+  "market": {
+   "layer": 1,
+   "undeclared": 12,
+   "violations": 0
+  },
+  "granary": {
+   "layer": 1,
+   "undeclared": 10,
+   "violations": 0
+  },
+  "walls": {
+   "layer": 1,
+   "undeclared": 5,
+   "violations": 1
+  },
+  "garrison": {
+   "layer": 1,
+   "undeclared": 13,
+   "violations": 2
+  },
+  "militia": {
+   "layer": 1,
+   "undeclared": 1,
+   "violations": 0
+  },
+  "war": {
+   "layer": 1,
+   "undeclared": 24,
+   "violations": 4
+  },
+  "watch": {
+   "layer": 1,
+   "undeclared": 2,
+   "violations": 0
+  },
+  "mercenary": {
+   "layer": 1,
+   "undeclared": 2,
+   "violations": 0
+  },
+  "prison": {
+   "layer": null,
+   "undeclared": 3,
+   "violations": 0
+  },
+  "court": {
+   "layer": null,
+   "undeclared": 2,
+   "violations": 0
+  },
+  "docks": {
+   "layer": 1,
+   "undeclared": 7,
+   "violations": 0
+  },
+  "temple": {
+   "layer": 1,
+   "undeclared": 8,
+   "violations": 0
+  }
+ },
+ "byLayer": {
+  "L1": 7
+ },
+ "poolsWithViolation": 5,
+ "examples": [
+  "L1 DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need names walls(L1): There is very little in the country around {settlement} and there are substantial works facing it; whatever th",
+  "L1 DS-DEF-8::override: WAR FOOTING names war(L1): {settlement} is on a war footing: what it makes, what it stores and who is free to work are all decided by the",
+  "L1 DS-DEF-8::override: WAR FOOTING names war(L1): {settlement} has given up several ordinary things for the war, and people have stopped remarking on it.",
+  "L1 DS-DEF-8::override: WAR FOOTING names war(L1): The war's demands at {settlement} keep reaching further, into trades and households that thought themselves un",
+  "L1 DS-STR-1::UNDER OCCUPATION names garrison(L1): The garrison is quartered inside the walls, and the town's business is conducted around it.",
+  "L1 DS-STR-1::WARTIME names war(L1): {settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expe",
+  "L1 DS-CND-1::FAMILY: occupation layer names garrison(L1): Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength tha"
+ ]
+}

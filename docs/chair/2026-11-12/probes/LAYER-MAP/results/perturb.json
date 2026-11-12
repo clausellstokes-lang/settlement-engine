@@ -1,0 +1,3923 @@
+{
+ "sample": 72,
+ "siteThrows": 0,
+ "lenses": {
+  "economy:economics.prosperityHeader": [
+   "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+   "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach",
+   "DS-ECO-1::COMBINATION C1: a high rung on a working approach"
+  ],
+  "economy:economics.prosperityRung": [
+   "DS-ECO-8::COMFORTABLE",
+   "DS-ECO-8::STRUGGLING",
+   "DS-ECO-8::POOR",
+   "DS-ECO-8::MODERATE",
+   "DS-ECO-8::WEALTHY",
+   "DS-ECO-8::PROSPEROUS"
+  ],
+  "economy:economics.foodTile": [
+   "DS-ECO-2::FOOD: surplus",
+   "DS-ECO-2::FOOD: deficit",
+   "DS-ECO-2::FOOD: balanced"
+  ],
+  "economy:economics.foodSecurityRung": [
+   "DS-ECO-9::SECURE",
+   "DS-ECO-9::DEFICIT",
+   "DS-ECO-9::PRESSURED",
+   "DS-ECO-9::IMPORT-DEPENDENT"
+  ],
+  "economy:economics.incomeMix": [
+   "DS-ECO-12::INCOME MIX: one source carries the town",
+   "DS-ECO-12::INCOME MIX: two or three sources between them",
+   "DS-ECO-12::INCOME MIX: a broad spread, no leader"
+  ],
+  "economy:economics.tradeProfile": [
+   "DS-ECO-12::TRADE PROFILE: local production listed",
+   "DS-ECO-12::TRADE PROFILE: exports and imports both present",
+   "DS-ECO-12::TRADE PROFILE: imports only, nothing outward",
+   "DS-ECO-12::TRADE PROFILE: no significant exports"
+  ],
+  "economy:economics.exportPosture": [
+   "DS-ECO-10::POSTURE: established",
+   "DS-ECO-10::POSTURE: entrepot",
+   "DS-ECO-10::POSTURE: none",
+   "DS-ECO-10::POSTURE: vulnerable"
+  ],
+  "economy:economics.terrainIdentity": [
+   "DS-ECO-11::TERRAIN: Forest",
+   "DS-ECO-11::TERRAIN: Desert",
+   "DS-ECO-11::TERRAIN: Plains",
+   "DS-ECO-11::TERRAIN: River",
+   "DS-ECO-11::TERRAIN: Coastal",
+   "DS-ECO-11::TERRAIN: Hills",
+   "DS-ECO-11::TERRAIN: Mountains"
+  ],
+  "economy:economics.economicStrengths": [
+   "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated",
+   "DS-ECO-11::ECONOMIC STRENGTHS: none recorded"
+  ],
+  "economy:economics.strategicValue": [
+   "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed"
+  ],
+  "economy:economics.foodSources": [
+   "DS-ECO-9::FOOD SOURCES: several, the largest named",
+   "DS-ECO-9::FOOD SOURCES: one source"
+  ],
+  "economy:economics.criticalImport": [
+   "DS-ECO-12::CRITICAL IMPORT: the land cannot give it",
+   "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks"
+  ],
+  "economy:economics.incomeWeight": [
+   "DS-ECO-12::INCOME WEIGHT: the religious houses",
+   "DS-ECO-12::INCOME WEIGHT: the practice of magic"
+  ],
+  "economy:services.prosperityHeader": [
+   "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+   "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach",
+   "DS-ECO-1::COMBINATION C1: a high rung on a working approach"
+  ],
+  "economy:services.prosperityRung": [
+   "DS-ECO-8::COMFORTABLE",
+   "DS-ECO-8::STRUGGLING",
+   "DS-ECO-8::POOR",
+   "DS-ECO-8::MODERATE",
+   "DS-ECO-8::WEALTHY",
+   "DS-ECO-8::PROSPEROUS"
+  ],
+  "economy:services.foodSecurityRung": [
+   "DS-ECO-9::SECURE",
+   "DS-ECO-9::DEFICIT",
+   "DS-ECO-9::PRESSURED",
+   "DS-ECO-9::IMPORT-DEPENDENT"
+  ],
+  "economy:services.incomeMix": [
+   "DS-ECO-12::INCOME MIX: one source carries the town",
+   "DS-ECO-12::INCOME MIX: two or three sources between them",
+   "DS-ECO-12::INCOME MIX: a broad spread, no leader"
+  ],
+  "economy:services.tradeProfile": [
+   "DS-ECO-12::TRADE PROFILE: local production listed",
+   "DS-ECO-12::TRADE PROFILE: exports and imports both present",
+   "DS-ECO-12::TRADE PROFILE: imports only, nothing outward",
+   "DS-ECO-12::TRADE PROFILE: no significant exports"
+  ],
+  "economy:services.exportPosture": [
+   "DS-ECO-10::POSTURE: established",
+   "DS-ECO-10::POSTURE: entrepot",
+   "DS-ECO-10::POSTURE: none",
+   "DS-ECO-10::POSTURE: vulnerable"
+  ],
+  "economy:services.terrainIdentity": [
+   "DS-ECO-11::TERRAIN: Forest",
+   "DS-ECO-11::TERRAIN: Desert",
+   "DS-ECO-11::TERRAIN: Plains",
+   "DS-ECO-11::TERRAIN: River",
+   "DS-ECO-11::TERRAIN: Coastal",
+   "DS-ECO-11::TERRAIN: Hills",
+   "DS-ECO-11::TERRAIN: Mountains"
+  ],
+  "economy:services.economicStrengths": [
+   "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated",
+   "DS-ECO-11::ECONOMIC STRENGTHS: none recorded"
+  ],
+  "economy:services.strategicValue": [
+   "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed"
+  ],
+  "economy:services.foodSources": [
+   "DS-ECO-9::FOOD SOURCES: several, the largest named",
+   "DS-ECO-9::FOOD SOURCES: one source"
+  ],
+  "economy:services.criticalImport": [
+   "DS-ECO-12::CRITICAL IMPORT: the land cannot give it",
+   "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks"
+  ],
+  "economy:services.incomeWeight": [
+   "DS-ECO-12::INCOME WEIGHT: the religious houses",
+   "DS-ECO-12::INCOME WEIGHT: the practice of magic"
+  ],
+  "economy:resources.prosperityHeader": [
+   "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+   "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach",
+   "DS-ECO-1::COMBINATION C1: a high rung on a working approach"
+  ],
+  "economy:resources.prosperityRung": [
+   "DS-ECO-8::COMFORTABLE",
+   "DS-ECO-8::STRUGGLING",
+   "DS-ECO-8::POOR",
+   "DS-ECO-8::MODERATE",
+   "DS-ECO-8::WEALTHY",
+   "DS-ECO-8::PROSPEROUS"
+  ],
+  "economy:resources.foodSecurityRung": [
+   "DS-ECO-9::SECURE",
+   "DS-ECO-9::DEFICIT",
+   "DS-ECO-9::PRESSURED",
+   "DS-ECO-9::IMPORT-DEPENDENT"
+  ],
+  "economy:resources.incomeMix": [
+   "DS-ECO-12::INCOME MIX: one source carries the town",
+   "DS-ECO-12::INCOME MIX: two or three sources between them",
+   "DS-ECO-12::INCOME MIX: a broad spread, no leader"
+  ],
+  "economy:resources.tradeProfile": [
+   "DS-ECO-12::TRADE PROFILE: local production listed",
+   "DS-ECO-12::TRADE PROFILE: exports and imports both present",
+   "DS-ECO-12::TRADE PROFILE: imports only, nothing outward",
+   "DS-ECO-12::TRADE PROFILE: no significant exports"
+  ],
+  "economy:resources.exportPosture": [
+   "DS-ECO-10::POSTURE: established",
+   "DS-ECO-10::POSTURE: entrepot",
+   "DS-ECO-10::POSTURE: none",
+   "DS-ECO-10::POSTURE: vulnerable"
+  ],
+  "economy:resources.terrainIdentity": [
+   "DS-ECO-11::TERRAIN: Forest",
+   "DS-ECO-11::TERRAIN: Desert",
+   "DS-ECO-11::TERRAIN: Plains",
+   "DS-ECO-11::TERRAIN: River",
+   "DS-ECO-11::TERRAIN: Coastal",
+   "DS-ECO-11::TERRAIN: Hills",
+   "DS-ECO-11::TERRAIN: Mountains"
+  ],
+  "economy:resources.economicStrengths": [
+   "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated",
+   "DS-ECO-11::ECONOMIC STRENGTHS: none recorded"
+  ],
+  "economy:resources.strategicValue": [
+   "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed"
+  ],
+  "economy:resources.foodSources": [
+   "DS-ECO-9::FOOD SOURCES: several, the largest named",
+   "DS-ECO-9::FOOD SOURCES: one source"
+  ],
+  "economy:resources.criticalImport": [
+   "DS-ECO-12::CRITICAL IMPORT: the land cannot give it",
+   "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks"
+  ],
+  "economy:resources.incomeWeight": [
+   "DS-ECO-12::INCOME WEIGHT: the religious houses",
+   "DS-ECO-12::INCOME WEIGHT: the practice of magic"
+  ],
+  "economy:daily_life.prosperityHeader": [
+   "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+   "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach",
+   "DS-ECO-1::COMBINATION C1: a high rung on a working approach"
+  ],
+  "economy:daily_life.prosperityRung": [
+   "DS-ECO-8::COMFORTABLE",
+   "DS-ECO-8::STRUGGLING",
+   "DS-ECO-8::POOR",
+   "DS-ECO-8::MODERATE",
+   "DS-ECO-8::WEALTHY",
+   "DS-ECO-8::PROSPEROUS"
+  ],
+  "economy:daily_life.foodSecurityRung": [
+   "DS-ECO-9::SECURE",
+   "DS-ECO-9::DEFICIT",
+   "DS-ECO-9::PRESSURED",
+   "DS-ECO-9::IMPORT-DEPENDENT"
+  ],
+  "economy:daily_life.incomeMix": [
+   "DS-ECO-12::INCOME MIX: one source carries the town",
+   "DS-ECO-12::INCOME MIX: two or three sources between them",
+   "DS-ECO-12::INCOME MIX: a broad spread, no leader"
+  ],
+  "economy:daily_life.tradeProfile": [
+   "DS-ECO-12::TRADE PROFILE: local production listed",
+   "DS-ECO-12::TRADE PROFILE: exports and imports both present",
+   "DS-ECO-12::TRADE PROFILE: imports only, nothing outward",
+   "DS-ECO-12::TRADE PROFILE: no significant exports"
+  ],
+  "economy:daily_life.exportPosture": [
+   "DS-ECO-10::POSTURE: established",
+   "DS-ECO-10::POSTURE: entrepot",
+   "DS-ECO-10::POSTURE: none",
+   "DS-ECO-10::POSTURE: vulnerable"
+  ],
+  "economy:daily_life.terrainIdentity": [
+   "DS-ECO-11::TERRAIN: Forest",
+   "DS-ECO-11::TERRAIN: Desert",
+   "DS-ECO-11::TERRAIN: Plains",
+   "DS-ECO-11::TERRAIN: River",
+   "DS-ECO-11::TERRAIN: Coastal",
+   "DS-ECO-11::TERRAIN: Hills",
+   "DS-ECO-11::TERRAIN: Mountains"
+  ],
+  "economy:daily_life.economicStrengths": [
+   "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated",
+   "DS-ECO-11::ECONOMIC STRENGTHS: none recorded"
+  ],
+  "economy:daily_life.strategicValue": [
+   "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed"
+  ],
+  "economy:daily_life.foodSources": [
+   "DS-ECO-9::FOOD SOURCES: several, the largest named",
+   "DS-ECO-9::FOOD SOURCES: one source"
+  ],
+  "economy:daily_life.criticalImport": [
+   "DS-ECO-12::CRITICAL IMPORT: the land cannot give it",
+   "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks"
+  ],
+  "economy:daily_life.incomeWeight": [
+   "DS-ECO-12::INCOME WEIGHT: the religious houses",
+   "DS-ECO-12::INCOME WEIGHT: the practice of magic"
+  ],
+  "stressors:overview.crisisFraming": [
+   "DS-STR-1::Overview's own section framing"
+  ],
+  "defense:state.publicOrder.rung": [
+   "DS-DEF-3::Moderate",
+   "DS-DEF-3::COMPOUND: monster threat",
+   "DS-DEF-3::Unsafe",
+   "DS-DEF-3::COMPOUND: occupation curfew",
+   "DS-DEF-3::COMPOUND: active siege",
+   "DS-DEF-3::Safe",
+   "DS-DEF-3::Dangerous",
+   "DS-DEF-3::COMPOUND: political fracture",
+   "DS-DEF-3::COMPOUND: plague",
+   "DS-DEF-3::COMPOUND: succession crisis",
+   "DS-DEF-3::Very Safe",
+   "DS-DEF-3::COMPOUND: famine",
+   "DS-DEF-3::COMPOUND: debt crisis",
+   "DS-DEF-3::COMPOUND: betrayal",
+   "DS-DEF-3::COMPOUND: insurgency",
+   "DS-DEF-3::COMPOUND: religious upheaval",
+   "DS-DEF-3::COMPOUND: slave revolt",
+   "DS-DEF-3::COMPOUND: wartime",
+   "DS-DEF-3::COMPOUND: mass migration, arrivals"
+  ],
+  "defense:state.firstSurvey.rung": [
+   "DS-DEF-3::First-Survey qualification (the reading is a first look)"
+  ],
+  "defense:threat.beasts": [
+   "DS-DEF-2::Beasts & Monsters: settled, nothing organized",
+   "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force",
+   "DS-DEF-2::Beasts & Monsters: frontier, force without a perimeter",
+   "DS-DEF-2::Beasts & Monsters: plagued, perimeter but NO force to hold it",
+   "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need",
+   "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence"
+  ],
+  "defense:threat.invasion": [
+   "DS-DEF-2::Invasion & War: neither walls nor force",
+   "DS-DEF-2::Invasion & War: walls with NO force",
+   "DS-DEF-2::Invasion & War: walls with citizen militia",
+   "DS-DEF-2::Invasion & War: militia only",
+   "DS-DEF-2::Invasion & War: walls AND professional garrison"
+  ],
+  "defense:threat.internal": [
+   "DS-DEF-2::Internal Security: no legal infrastructure",
+   "DS-DEF-2::Internal Security: full legal chain (court AND prison)",
+   "DS-DEF-2::Internal Security: court without detention"
+  ],
+  "defense:threat.economic": [
+   "DS-DEF-2::Economic Survival: CRITICAL",
+   "DS-DEF-2::Economic Survival: WEAK",
+   "DS-DEF-2::Economic Survival: ADEQUATE",
+   "DS-DEF-2::Economic Survival: STRONG"
+  ],
+  "defense:forces.fortification": [
+   "DS-DEF-5::walls ABSENT",
+   "DS-DEF-5::walls PRESENT"
+  ],
+  "defense:forces.force": [
+   "DS-DEF-5::NO organized force at all",
+   "DS-DEF-5::militia PRESENT (no garrison)",
+   "DS-DEF-5::watch PRESENT",
+   "DS-DEF-5::garrison PRESENT"
+  ],
+  "defense:forces.arcane": [
+   "DS-DEF-5::arcane defense ABSENT",
+   "DS-DEF-5::arcane defense PRESENT"
+  ],
+  "defense:posture.posture.rung": [
+   "DS-DEF-1::readiness WEAK",
+   "DS-DEF-1::readiness CRITICAL",
+   "DS-DEF-1::readiness ADEQUATE",
+   "DS-DEF-1::readiness STRONG"
+  ],
+  "defense:posture.terrain.rung": [
+   "DS-DEF-1::terrain FAVOURABLE to the defender",
+   "DS-DEF-1::terrain EXPOSED"
+  ],
+  "defense:posture.prize.rung": [
+   "DS-DEF-1::strategic value LOW",
+   "DS-DEF-1::strategic value HIGH"
+  ],
+  "defense:wall.rationale": [
+   "DS-DEF-11::UNWALLED-SMALL",
+   "DS-DEF-11::WALLED-THREATENED",
+   "DS-DEF-11::WALLED-STRAINED",
+   "DS-DEF-11::UNWALLED-LARGE",
+   "DS-DEF-11::WALLED-QUIET"
+  ],
+  "defense:criminal.structure": [
+   "DS-DEF-4::structure null (nothing organized recognized)",
+   "DS-DEF-4::structure diffuse",
+   "DS-DEF-4::structure semi-organized",
+   "DS-DEF-4::structure organized"
+  ],
+  "power:desk.legitimacyBanner": [
+   "DS-POW-1::Tolerated",
+   "DS-POW-1::Legitimacy Crisis",
+   "DS-POW-1::Contested",
+   "DS-POW-1::Approved",
+   "DS-POW-1::Endorsed"
+  ],
+  "power:desk.legitimacyLens": [
+   "DS-POW-1::breakdown dominated by PROSPERITY, favourable",
+   "DS-POW-1::governanceFractured true",
+   "DS-POW-1::breakdown dominated by PROSPERITY, adverse",
+   "DS-POW-1::breakdown dominated by SAFETY, adverse",
+   "DS-POW-1::breakdown dominated by DEFENSE, adverse"
+  ],
+  "power:desk.stabilityHeader": [
+   "DS-POW-2::stable matched",
+   "DS-POW-2::no token matched: unclassified (the plain-description floor)",
+   "DS-POW-2::siege matched",
+   "DS-POW-2::unstable matched",
+   "DS-POW-2::Desperate matched"
+  ],
+  "power:desk.stabilityLens": [
+   "DS-POW-2::recentConflict present"
+  ],
+  "power:desk.successionRisk": [
+   "DS-POW-4::riskLabel: Stable (no challengers)",
+   "DS-POW-4::riskLabel: Contested",
+   "DS-POW-4::riskLabel: Holding",
+   "DS-POW-4::riskLabel: Critical. The seat could fall"
+  ],
+  "power:desk.successionHold": [
+   "DS-POW-4::legitimacyHold: public opinion neither helps nor hurts",
+   "DS-POW-4::legitimacyHold: public rejection is breaking the hold",
+   "DS-POW-4::legitimacyHold: public backing hardens the hold"
+  ],
+  "power:desk.rulingStructure": [
+   "DS-POW-5::council",
+   "DS-POW-5::theocracy",
+   "DS-POW-5::merchant_league",
+   "DS-POW-5::autocrat"
+  ],
+  "power:desk.governingTitle": [
+   "DS-POW-5::governing body name: a SLOT, never a baked noun"
+  ],
+  "warFaith:faith.faithTeaser": [
+   "DS-FTH-2::PRIVATE DOSSIER"
+  ],
+  "magic.arcaneReliance": [
+   "DS-DEF-9::magicDependency false",
+   "DS-DEF-9::magicDependency true, with a NAMED dependent chain",
+   "DS-DEF-9::magicDependency true"
+  ],
+  "stressors:overview.conditionSeverity": [
+   "DS-CND-1::SEVERITY: critical",
+   "DS-CND-1::SEVERITY: high",
+   "DS-CND-1::SEVERITY: medium",
+   "DS-CND-1::SEVERITY: low"
+  ],
+  "stressors:overview.conditionDirection": [
+   "DS-CND-1::DIRECTION: worsening · CRISIS: monster_pressure",
+   "DS-CND-1::DIRECTION: stable · CRISIS: occupied",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: under_siege",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: politically_fractured",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: plague_onset",
+   "DS-CND-1::DIRECTION: stable · CRISIS: succession_void",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: infiltrated",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: famine",
+   "DS-CND-1::DIRECTION: stable · CRISIS: indebted",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: recently_betrayed",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: insurgency",
+   "DS-CND-1::DIRECTION: stable · CRISIS: religious_conversion",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: slave_revolt",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: wartime",
+   "DS-CND-1::DIRECTION: worsening · CRISIS: mass_migration"
+  ],
+  "defense:forces.charter": [
+   "DS-DEF-5::charter hall ABSENT where the country warrants one",
+   "DS-DEF-5::charter hall PRESENT (specialist monster response)"
+  ],
+  "defense:status.override": [
+   "DS-DEF-8::override: BEAST PRESSURE",
+   "DS-DEF-8::override: UNDER OCCUPATION",
+   "DS-DEF-8::override: ACTIVE SIEGE",
+   "DS-DEF-8::override: COMMAND SPLIT",
+   "DS-DEF-8::override: QUARANTINE ACTIVE",
+   "DS-DEF-8::override: SUCCESSION CONTESTED",
+   "DS-DEF-8::override: INFILTRATION ACTIVE",
+   "DS-DEF-8::override: INTERNAL PRESSURE (famine)",
+   "DS-DEF-8::override: UNDER TRIBUTE",
+   "DS-DEF-8::override: SECURITY COMPROMISED",
+   "DS-DEF-8::override: INSURGENCY ACTIVE",
+   "DS-DEF-8::override: RELIGIOUS UPHEAVAL",
+   "DS-DEF-8::override: REVOLT ACTIVE",
+   "DS-DEF-8::override: WAR FOOTING",
+   "DS-DEF-8::override: MIGRATION, arrivals"
+  ],
+  "defense:status.viability": [
+   "DS-DEF-8::override active, viability intact",
+   "DS-DEF-8::override active, viability threatened"
+  ],
+  "economy:economics.exploitation": [
+   "DS-ECO-11::EXPLOITATION: fullyExploited",
+   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low",
+   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
+   "DS-ECO-11::EXPLOITATION: partiallyExploited"
+  ],
+  "economy:services.exploitation": [
+   "DS-ECO-11::EXPLOITATION: fullyExploited",
+   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low",
+   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
+   "DS-ECO-11::EXPLOITATION: partiallyExploited"
+  ],
+  "economy:resources.exploitation": [
+   "DS-ECO-11::EXPLOITATION: fullyExploited",
+   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low",
+   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
+   "DS-ECO-11::EXPLOITATION: partiallyExploited"
+  ],
+  "economy:daily_life.exploitation": [
+   "DS-ECO-11::EXPLOITATION: fullyExploited",
+   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low",
+   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
+   "DS-ECO-11::EXPLOITATION: partiallyExploited"
+  ],
+  "economy:economics.shadowEconomy": [
+   "DS-ECO-6::TIER: minor shadow activity (≥3)",
+   "DS-ECO-6::TIER: significant off-book activity (≥15)"
+  ],
+  "economy:services.shadowEconomy": [
+   "DS-ECO-6::TIER: minor shadow activity (≥3)",
+   "DS-ECO-6::TIER: significant off-book activity (≥15)"
+  ],
+  "economy:resources.shadowEconomy": [
+   "DS-ECO-6::TIER: minor shadow activity (≥3)",
+   "DS-ECO-6::TIER: significant off-book activity (≥15)"
+  ],
+  "economy:daily_life.shadowEconomy": [
+   "DS-ECO-6::TIER: minor shadow activity (≥3)",
+   "DS-ECO-6::TIER: significant off-book activity (≥15)"
+  ],
+  "economy:economics.foodOnProsperity": [
+   "DS-ECO-8::FOOD AND PROSPERITY: hunger holds the town down",
+   "DS-ECO-8::FOOD AND PROSPERITY: the cost of food weighs on the town"
+  ],
+  "economy:services.foodOnProsperity": [
+   "DS-ECO-8::FOOD AND PROSPERITY: hunger holds the town down",
+   "DS-ECO-8::FOOD AND PROSPERITY: the cost of food weighs on the town"
+  ],
+  "economy:resources.foodOnProsperity": [
+   "DS-ECO-8::FOOD AND PROSPERITY: hunger holds the town down",
+   "DS-ECO-8::FOOD AND PROSPERITY: the cost of food weighs on the town"
+  ],
+  "economy:daily_life.foodOnProsperity": [
+   "DS-ECO-8::FOOD AND PROSPERITY: hunger holds the town down",
+   "DS-ECO-8::FOOD AND PROSPERITY: the cost of food weighs on the town"
+  ],
+  "economy:economics.resourceCondition": [
+   "DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time",
+   "DS-ECO-11::RESOURCE CONDITION: worked out, recovers only with work"
+  ],
+  "economy:services.resourceCondition": [
+   "DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time",
+   "DS-ECO-11::RESOURCE CONDITION: worked out, recovers only with work"
+  ],
+  "economy:resources.resourceCondition": [
+   "DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time",
+   "DS-ECO-11::RESOURCE CONDITION: worked out, recovers only with work"
+  ],
+  "economy:daily_life.resourceCondition": [
+   "DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time",
+   "DS-ECO-11::RESOURCE CONDITION: worked out, recovers only with work"
+  ],
+  "viability.isolationSupply": [
+   "DS-DEF-12::CAPACITY: enough",
+   "DS-DEF-12::MAGIC-DEPENDENT"
+  ],
+  "economy:economics.catalogStanding": [
+   "DS-SUP-3::ONE EXPECTED CATEGORY MISSING"
+  ],
+  "economy:services.catalogStanding": [
+   "DS-SUP-3::ONE EXPECTED CATEGORY MISSING"
+  ],
+  "economy:resources.catalogStanding": [
+   "DS-SUP-3::ONE EXPECTED CATEGORY MISSING"
+  ],
+  "economy:daily_life.catalogStanding": [
+   "DS-SUP-3::ONE EXPECTED CATEGORY MISSING"
+  ],
+  "power:desk.operationReading": [
+   "DS-POW-6::operation role criminal revenue stream (unclassified)",
+   "DS-POW-6::operation role duty evasion",
+   "DS-POW-6::operation role protection + extraction",
+   "DS-POW-6::operation role unlicensed revenue",
+   "DS-POW-6::operation role money laundering",
+   "DS-POW-6::operation role parallel marketplace"
+  ],
+  "economy:economics.foodMeans": [
+   "DS-ECO-9::HOW THE NEED IS MET: part of it by magic",
+   "DS-ECO-9::HOW THE NEED IS MET: much of it brought in"
+  ],
+  "economy:services.foodMeans": [
+   "DS-ECO-9::HOW THE NEED IS MET: part of it by magic",
+   "DS-ECO-9::HOW THE NEED IS MET: much of it brought in"
+  ],
+  "economy:resources.foodMeans": [
+   "DS-ECO-9::HOW THE NEED IS MET: part of it by magic",
+   "DS-ECO-9::HOW THE NEED IS MET: much of it brought in"
+  ],
+  "economy:daily_life.foodMeans": [
+   "DS-ECO-9::HOW THE NEED IS MET: part of it by magic",
+   "DS-ECO-9::HOW THE NEED IS MET: much of it brought in"
+  ],
+  "defense:supporting.naval": [
+   "DS-DEF-6::Naval Defense: Port only"
+  ],
+  "defense:forces.contracted": [
+   "DS-DEF-5::mercenary / contracted forces PRESENT"
+  ],
+  "power:desk.structureFlag": [
+   "DS-POW-5::FLAG: merchantCriminalBlur",
+   "DS-POW-5::FLAG: merchantArmy",
+   "DS-POW-5::FLAG: crimeIsGovt"
+  ],
+  "economy:economics.upstreamWeak": [
+   "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing"
+  ],
+  "economy:services.upstreamWeak": [
+   "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing"
+  ],
+  "economy:resources.upstreamWeak": [
+   "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing"
+  ],
+  "economy:daily_life.upstreamWeak": [
+   "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing"
+  ],
+  "warFaith:faith.templeFraud": [
+   "DS-FTH-4::FLAG: religiousFraud"
+  ],
+  "warFaith:faith.templeMageTheocracy": [
+   "DS-FTH-4::FLAG: mageTheocracy"
+  ],
+  "warFaith:faith.templeHeresy": [
+   "DS-FTH-4::FLAG: heresySuppression: hunted"
+  ],
+  "economy:services.impairedService": [
+   "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED"
+  ],
+  "economy:economics.famineSource": [
+   "DS-ECO-9::ACTIVE FAMINE: the failed source, most of the harvest"
+  ],
+  "economy:services.famineSource": [
+   "DS-ECO-9::ACTIVE FAMINE: the failed source, most of the harvest"
+  ],
+  "economy:resources.famineSource": [
+   "DS-ECO-9::ACTIVE FAMINE: the failed source, most of the harvest"
+  ],
+  "economy:daily_life.famineSource": [
+   "DS-ECO-9::ACTIVE FAMINE: the failed source, most of the harvest"
+  ]
+ },
+ "facts": [
+  {
+   "fact": "atom crime",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom food",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom magic",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom magic level",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom population",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom priest",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom prosperity",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom stores",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom tier",
+   "layer": 0,
+   "decidedBy": null,
+   "dependsOn": []
+  },
+  {
+   "fact": "atom clergy",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom coast",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "atom commander",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom court",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom crisis",
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "fact": "atom culture",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "atom docks",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom garrison",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom gate",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom guardPresence",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom healer",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom hospital",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom institution",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom market",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom mercenary",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom migration",
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "fact": "atom militia",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom navigable",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "atom palisade",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom port",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "atom prison",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom river",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "atom route",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "atom sacredHouse",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom soldiers",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom temple",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom terrain",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "atom walls",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "atom war",
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "fact": "atom watch",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "defenseFactsOf.walls-gate-watch-garrison (roster part)",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "factsOf.commander",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "factsOf.culture",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "factsOf.defence",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "factsOf.guardPresence",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "factsOf.hasInstitution",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "factsOf.magic",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "factsOf.market",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "factsOf.migration",
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "fact": "factsOf.populationBand",
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "dependsOn": [
+    "size(tier+population)"
+   ]
+  },
+  {
+   "fact": "factsOf.route",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "factsOf.sacredHouse",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "factsOf.soldiers",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "dependsOn": [
+    "institutions"
+   ]
+  },
+  {
+   "fact": "factsOf.terrain",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "factsOf.tier",
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "dependsOn": [
+    "size(tier+population)"
+   ]
+  },
+  {
+   "fact": "factsOf.warState",
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "fact": "factsOf.water",
+   "layer": 1,
+   "decidedBy": "config",
+   "dependsOn": [
+    "config"
+   ]
+  },
+  {
+   "fact": "atom exports",
+   "layer": 2,
+   "decidedBy": "economicState.primaryExports",
+   "dependsOn": [
+    "economicState.primaryExports"
+   ]
+  },
+  {
+   "fact": "atom famine",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "atom fish",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "atom game",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "atom grain",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "atom imports",
+   "layer": 2,
+   "decidedBy": "economicState.primaryImports",
+   "dependsOn": [
+    "economicState.primaryImports"
+   ]
+  },
+  {
+   "fact": "atom livestock",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "atom starving",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "factsOf.crisis",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "factsOf.exports",
+   "layer": 2,
+   "decidedBy": "economicState.primaryExports",
+   "dependsOn": [
+    "economicState.primaryExports"
+   ]
+  },
+  {
+   "fact": "factsOf.famine",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "factsOf.foodSources",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "factsOf.imports",
+   "layer": 2,
+   "decidedBy": "economicState.primaryImports",
+   "dependsOn": [
+    "economicState.primaryImports"
+   ]
+  },
+  {
+   "fact": "factsOf.prosperity",
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "economicState.prosperity"
+   ]
+  },
+  {
+   "fact": "factsOf.storesMonths",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "foodEnduranceOf",
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "fact": "magicDependents",
+   "layer": 2,
+   "decidedBy": "economicState.activeChains",
+   "dependsOn": [
+    "economicState.activeChains"
+   ]
+  },
+  {
+   "fact": "atom guild",
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "fact": "atom organised crime",
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "economicState.activeChains",
+    "economicState.safetyProfile",
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "fact": "atom ruler",
+   "layer": 3,
+   "decidedBy": "powerStructure.government",
+   "dependsOn": [
+    "powerStructure.government"
+   ]
+  },
+  {
+   "fact": "crimeSignalOf(seats+estate)",
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "fact": "deriveCriminalStructure",
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "economicState.activeChains",
+    "economicState.safetyProfile",
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "fact": "factsOf.crime",
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "economicState.activeChains",
+    "economicState.safetyProfile",
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "fact": "factsOf.faith",
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "config",
+    "economicState.incomeSources",
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "fact": "factsOf.guild",
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "fact": "factsOf.rulerKind",
+   "layer": 3,
+   "decidedBy": "powerStructure.government",
+   "dependsOn": [
+    "powerStructure.government"
+   ]
+  },
+  {
+   "fact": "faithReadingOf",
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "config",
+    "economicState.incomeSources",
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "fact": "atom other npc",
+   "layer": 4,
+   "decidedBy": "npcs",
+   "dependsOn": [
+    "npcs"
+   ]
+  },
+  {
+   "fact": "deriveMagicReliance",
+   "layer": 4,
+   "decidedBy": "npcs",
+   "dependsOn": [
+    "config",
+    "economicState.activeChains",
+    "institutions",
+    "npcs"
+   ]
+  },
+  {
+   "fact": "factsOf.hasOtherNpc",
+   "layer": 4,
+   "decidedBy": "npcs",
+   "dependsOn": [
+    "npcs"
+   ]
+  },
+  {
+   "fact": "magicPractitioners",
+   "layer": 4,
+   "decidedBy": "npcs",
+   "dependsOn": [
+    "institutions",
+    "npcs"
+   ]
+  },
+  {
+   "fact": "hallCaptureOf.state",
+   "layer": 5,
+   "decidedBy": "powerStructure.criminalCaptureState",
+   "dependsOn": [
+    "npcs",
+    "powerStructure.criminalCaptureState",
+    "powerStructure.factions"
+   ]
+  }
+ ],
+ "pools": [
+  {
+   "pool": "DS-CND-1::DIRECTION: stable · CRISIS: indebted",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: stable · CRISIS: occupied",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: stable · CRISIS: religious_conversion",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: stable · CRISIS: succession_void",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: famine",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: infiltrated",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: insurgency",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: mass_migration",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: monster_pressure",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: plague_onset",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: politically_fractured",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: recently_betrayed",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: slave_revolt",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: under_siege",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::DIRECTION: worsening · CRISIS: wartime",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::SEVERITY: critical",
+   "draws": 10,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::SEVERITY: high",
+   "draws": 23,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::SEVERITY: low",
+   "draws": 1,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-CND-1::SEVERITY: medium",
+   "draws": 11,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-11::UNWALLED-LARGE",
+   "draws": 7,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "size(tier+population)",
+   "dependsOn": [
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-11::UNWALLED-SMALL",
+   "draws": 30,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "size(tier+population)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-QUIET",
+   "draws": 1,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "config",
+    "defenseProfile",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-STRAINED",
+   "draws": 27,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "defenseProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-11::WALLED-THREATENED",
+   "draws": 7,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "config",
+    "defenseProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-12::CAPACITY: enough",
+   "draws": 5,
+   "layer": 2,
+   "decidedBy": "isolationSupport",
+   "keyLayer": 2,
+   "keyDecidedBy": "isolationSupport",
+   "dependsOn": [
+    "isolationSupport",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-12::MAGIC-DEPENDENT",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "isolationSupport",
+   "keyLayer": 2,
+   "keyDecidedBy": "isolationSupport",
+   "dependsOn": [
+    "isolationSupport",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-1::readiness ADEQUATE",
+   "draws": 17,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "defenseProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-1::readiness CRITICAL",
+   "draws": 18,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "defenseProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-1::readiness STRONG",
+   "draws": 9,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "defenseProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-1::readiness WEAK",
+   "draws": 28,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "defenseProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-1::strategic value HIGH",
+   "draws": 15,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-1::strategic value LOW",
+   "draws": 9,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-1::terrain EXPOSED",
+   "draws": 17,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-1::terrain FAVOURABLE to the defender",
+   "draws": 32,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence",
+   "draws": 8,
+   "layer": 1,
+   "decidedBy": "config",
+   "keyLayer": 1,
+   "keyDecidedBy": "config",
+   "dependsOn": [
+    "config",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: frontier, force without a perimeter",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "config",
+   "keyLayer": 1,
+   "keyDecidedBy": "config",
+   "dependsOn": [
+    "config",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force",
+   "draws": 9,
+   "layer": 1,
+   "decidedBy": "config",
+   "keyLayer": 1,
+   "keyDecidedBy": "config",
+   "dependsOn": [
+    "config",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: plagued, perimeter but NO force to hold it",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "config",
+   "keyLayer": 1,
+   "keyDecidedBy": "config",
+   "dependsOn": [
+    "config",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need",
+   "draws": 11,
+   "layer": 1,
+   "decidedBy": "config",
+   "keyLayer": 1,
+   "keyDecidedBy": "config",
+   "dependsOn": [
+    "config",
+    "crises(stress+stressors+activeConditions)",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Beasts & Monsters: settled, nothing organized",
+   "draws": 22,
+   "layer": 1,
+   "decidedBy": "config",
+   "keyLayer": 1,
+   "keyDecidedBy": "config",
+   "dependsOn": [
+    "config",
+    "crises(stress+stressors+activeConditions)",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: ADEQUATE",
+   "draws": 11,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "defenseProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: CRITICAL",
+   "draws": 15,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "defenseProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: STRONG",
+   "draws": 21,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "defenseProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Economic Survival: WEAK",
+   "draws": 25,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 5,
+   "keyDecidedBy": "defenseProfile",
+   "dependsOn": [
+    "defenseProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Internal Security: court without detention",
+   "draws": 11,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.compound",
+   "dependsOn": [
+    "economicState.compound",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Internal Security: full legal chain (court AND prison)",
+   "draws": 25,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.compound",
+   "dependsOn": [
+    "economicState.compound",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Internal Security: no legal infrastructure",
+   "draws": 36,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.compound",
+   "dependsOn": [
+    "economicState.compound",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: militia only",
+   "draws": 5,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "defenseProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: neither walls nor force",
+   "draws": 32,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: walls AND professional garrison",
+   "draws": 24,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "defenseProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: walls with NO force",
+   "draws": 7,
+   "layer": 1,
+   "decidedBy": "institutions",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-2::Invasion & War: walls with citizen militia",
+   "draws": 4,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "defenseProfile",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: active siege",
+   "draws": 4,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: betrayal",
+   "draws": 3,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: debt crisis",
+   "draws": 2,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: famine",
+   "draws": 2,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: insurgency",
+   "draws": 3,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: mass migration, arrivals",
+   "draws": 2,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: monster threat",
+   "draws": 4,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: occupation curfew",
+   "draws": 4,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: plague",
+   "draws": 4,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: political fracture",
+   "draws": 4,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: religious upheaval",
+   "draws": 2,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: slave revolt",
+   "draws": 3,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: succession crisis",
+   "draws": 3,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::COMPOUND: wartime",
+   "draws": 2,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::Dangerous",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::First-Survey qualification (the reading is a first look)",
+   "draws": 72,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::Moderate",
+   "draws": 18,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::Safe",
+   "draws": 5,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::Unsafe",
+   "draws": 4,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-3::Very Safe",
+   "draws": 2,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-4::structure diffuse",
+   "draws": 4,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "economicState.compound",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-4::structure null (nothing organized recognized)",
+   "draws": 36,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "economicState.activeChains",
+    "economicState.compound",
+    "economicState.safetyProfile",
+    "institutions",
+    "powerStructure.factions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-4::structure organized",
+   "draws": 25,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.compound",
+    "institutions",
+    "powerStructure.factions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-4::structure semi-organized",
+   "draws": 7,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "economicState.compound",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::NO organized force at all",
+   "draws": 26,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "economicState.compound",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::arcane defense ABSENT",
+   "draws": 50,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::arcane defense PRESENT",
+   "draws": 22,
+   "layer": 5,
+   "decidedBy": "defenseProfile",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "defenseProfile",
+    "economicState.compound",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::charter hall ABSENT where the country warrants one",
+   "draws": 21,
+   "layer": 1,
+   "decidedBy": "config",
+   "keyLayer": 1,
+   "keyDecidedBy": "config",
+   "dependsOn": [
+    "config",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::charter hall PRESENT (specialist monster response)",
+   "draws": 26,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "economicState.compound",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::garrison PRESENT",
+   "draws": 24,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::mercenary / contracted forces PRESENT",
+   "draws": 14,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "economicState.compound",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::militia PRESENT (no garrison)",
+   "draws": 9,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::walls ABSENT",
+   "draws": 37,
+   "layer": 1,
+   "decidedBy": "institutions",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::walls PRESENT",
+   "draws": 35,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "economicState.compound",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-5::watch PRESENT",
+   "draws": 13,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 1,
+   "keyDecidedBy": "institutions",
+   "dependsOn": [
+    "economicState.compound",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-6::Naval Defense: Port only",
+   "draws": 8,
+   "layer": 2,
+   "decidedBy": "economicState.compound",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.compound",
+   "dependsOn": [
+    "config",
+    "crises(stress+stressors+activeConditions)",
+    "economicState.compound"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override active, viability intact",
+   "draws": 38,
+   "layer": 4,
+   "decidedBy": "economicViability",
+   "keyLayer": 4,
+   "keyDecidedBy": "economicViability",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicViability",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override active, viability threatened",
+   "draws": 7,
+   "layer": 4,
+   "decidedBy": "economicViability",
+   "keyLayer": 4,
+   "keyDecidedBy": "economicViability",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicViability"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: ACTIVE SIEGE",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: BEAST PRESSURE",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: COMMAND SPLIT",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "institutions",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: INFILTRATION ACTIVE",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: INSURGENCY ACTIVE",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: INTERNAL PRESSURE (famine)",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: MIGRATION, arrivals",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "institutions",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: QUARANTINE ACTIVE",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: RELIGIOUS UPHEAVAL",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: REVOLT ACTIVE",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: SECURITY COMPROMISED",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: SUCCESSION CONTESTED",
+   "draws": 3,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: UNDER OCCUPATION",
+   "draws": 4,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: UNDER TRIBUTE",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-8::override: WAR FOOTING",
+   "draws": 2,
+   "layer": 1,
+   "decidedBy": "crises(stress+stressors+activeConditions)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-9::magicDependency false",
+   "draws": 46,
+   "layer": 2,
+   "decidedBy": "economicState.activeChains",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.activeChains",
+   "dependsOn": [
+    "economicState.activeChains",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-9::magicDependency true",
+   "draws": 13,
+   "layer": 2,
+   "decidedBy": "economicState.activeChains",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.activeChains",
+   "dependsOn": [
+    "economicState.activeChains",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-DEF-9::magicDependency true, with a NAMED dependent chain",
+   "draws": 13,
+   "layer": 2,
+   "decidedBy": "economicState.activeChains",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.activeChains",
+   "dependsOn": [
+    "economicState.activeChains",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: entrepot",
+   "draws": 48,
+   "layer": 2,
+   "decidedBy": "economicState.primaryExports",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.primaryExports",
+   "dependsOn": [
+    "economicState.primaryExports",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: established",
+   "draws": 204,
+   "layer": 4,
+   "decidedBy": "economicViability",
+   "keyLayer": 4,
+   "keyDecidedBy": "economicViability",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.foodSecurity",
+    "economicState.primaryExports",
+    "economicViability",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: none",
+   "draws": 28,
+   "layer": 2,
+   "decidedBy": "economicState.primaryExports",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.primaryExports",
+   "dependsOn": [
+    "economicState.primaryExports",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-10::POSTURE: vulnerable",
+   "draws": 8,
+   "layer": 4,
+   "decidedBy": "economicViability",
+   "keyLayer": 4,
+   "keyDecidedBy": "economicViability",
+   "dependsOn": [
+    "economicState.primaryExports",
+    "economicViability"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::ECONOMIC STRENGTHS: none recorded",
+   "draws": 92,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated",
+   "draws": 196,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: fullyExploited",
+   "draws": 64,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "institutions",
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: partiallyExploited",
+   "draws": 28,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
+   "draws": 8,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low",
+   "draws": 64,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time",
+   "draws": 92,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::RESOURCE CONDITION: worked out, recovers only with work",
+   "draws": 68,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed",
+   "draws": 288,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Coastal",
+   "draws": 28,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "config",
+    "economicState.foodSecurity",
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Desert",
+   "draws": 4,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "config",
+    "resourceAnalysis"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Forest",
+   "draws": 36,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "config",
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Hills",
+   "draws": 60,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "config",
+    "economicState.foodSecurity",
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Mountains",
+   "draws": 32,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "config",
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: Plains",
+   "draws": 64,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "config",
+    "economicState.foodSecurity",
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-11::TERRAIN: River",
+   "draws": 64,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "config",
+    "institutions",
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks",
+   "draws": 140,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it",
+   "draws": 108,
+   "layer": 4,
+   "decidedBy": "resourceAnalysis",
+   "keyLayer": 4,
+   "keyDecidedBy": "resourceAnalysis",
+   "dependsOn": [
+    "resourceAnalysis",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: a broad spread, no leader",
+   "draws": 20,
+   "layer": 2,
+   "decidedBy": "economicState.incomeSources",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.incomeSources",
+   "dependsOn": [
+    "economicState.incomeSources"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: one source carries the town",
+   "draws": 144,
+   "layer": 2,
+   "decidedBy": "economicState.incomeSources",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.incomeSources",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.incomeSources",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::INCOME MIX: two or three sources between them",
+   "draws": 124,
+   "layer": 2,
+   "decidedBy": "economicState.incomeSources",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.incomeSources",
+   "dependsOn": [
+    "economicState.incomeSources"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::INCOME WEIGHT: the practice of magic",
+   "draws": 24,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::INCOME WEIGHT: the religious houses",
+   "draws": 108,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: exports and imports both present",
+   "draws": 232,
+   "layer": 2,
+   "decidedBy": "economicState.primaryExports",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.primaryExports",
+   "dependsOn": [
+    "economicState.primaryExports",
+    "economicState.primaryImports",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: imports only, nothing outward",
+   "draws": 20,
+   "layer": 2,
+   "decidedBy": "economicState.primaryExports",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.primaryExports",
+   "dependsOn": [
+    "economicState.primaryExports",
+    "economicState.primaryImports",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: local production listed",
+   "draws": 28,
+   "layer": 2,
+   "decidedBy": "economicState.primaryExports",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.primaryExports",
+   "dependsOn": [
+    "economicState.localProduction",
+    "economicState.primaryExports",
+    "economicState.primaryImports",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-ECO-12::TRADE PROFILE: no significant exports",
+   "draws": 8,
+   "layer": 2,
+   "decidedBy": "economicState.primaryExports",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.primaryExports",
+   "dependsOn": [
+    "economicState.primaryExports",
+    "economicState.primaryImports",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C1: a high rung on a working approach",
+   "draws": 48,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.economicComplexity",
+    "economicState.prosperity",
+    "economicState.tradeAccess",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C3: the middle rungs",
+   "draws": 96,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.economicComplexity",
+    "economicState.prosperity",
+    "economicState.tradeAccess",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
+   "draws": 128,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "economicState.prosperity",
+    "economicState.tradeAccess",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach",
+   "draws": 16,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "economicState.economicComplexity",
+    "economicState.prosperity",
+    "economicState.tradeAccess"
+   ]
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: balanced",
+   "draws": 19,
+   "layer": 4,
+   "decidedBy": "economicViability",
+   "keyLayer": 4,
+   "keyDecidedBy": "economicViability",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.foodSecurity",
+    "economicViability",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: deficit",
+   "draws": 29,
+   "layer": 4,
+   "decidedBy": "economicViability",
+   "keyLayer": 4,
+   "keyDecidedBy": "economicViability",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "economicViability",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-2::FOOD: surplus",
+   "draws": 24,
+   "layer": 4,
+   "decidedBy": "economicViability",
+   "keyLayer": 4,
+   "keyDecidedBy": "economicViability",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "economicViability",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-6::TIER: minor shadow activity (≥3)",
+   "draws": 120,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-ECO-6::TIER: significant off-book activity (≥15)",
+   "draws": 56,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-ECO-8::COMFORTABLE",
+   "draws": 56,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "economicState.prosperity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-8::FOOD AND PROSPERITY: hunger holds the town down",
+   "draws": 28,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-8::FOOD AND PROSPERITY: the cost of food weighs on the town",
+   "draws": 24,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-8::MODERATE",
+   "draws": 40,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.prosperity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-8::POOR",
+   "draws": 76,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.prosperity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-8::PROSPEROUS",
+   "draws": 36,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "economicState.prosperity",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-8::STRUGGLING",
+   "draws": 68,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "economicState.prosperity",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-8::WEALTHY",
+   "draws": 12,
+   "layer": 2,
+   "decidedBy": "economicState.prosperity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.prosperity",
+   "dependsOn": [
+    "economicState.prosperity",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::ACTIVE FAMINE: the failed source, most of the harvest",
+   "draws": 8,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::DEFICIT",
+   "draws": 16,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::FOOD SOURCES: one source",
+   "draws": 104,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::FOOD SOURCES: several, the largest named",
+   "draws": 72,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::HOW THE NEED IS MET: much of it brought in",
+   "draws": 88,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::HOW THE NEED IS MET: part of it by magic",
+   "draws": 32,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::IMPORT-DEPENDENT",
+   "draws": 8,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::PRESSURED",
+   "draws": 24,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "economicState.foodSecurity"
+   ]
+  },
+  {
+   "pool": "DS-ECO-9::SECURE",
+   "draws": 232,
+   "layer": 2,
+   "decidedBy": "economicState.foodSecurity",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.foodSecurity",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "economicState.foodSecurity",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-FTH-2::PRIVATE DOSSIER",
+   "draws": 72,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 0,
+   "keyDecidedBy": null,
+   "dependsOn": [
+    "config",
+    "institutions",
+    "powerStructure.factions"
+   ]
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: heresySuppression: hunted",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: mageTheocracy",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-FTH-4::FLAG: religiousFraud",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::Approved",
+   "draws": 10,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::Contested",
+   "draws": 18,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::Endorsed",
+   "draws": 5,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.publicLegitimacy",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::Legitimacy Crisis",
+   "draws": 27,
+   "layer": 3,
+   "decidedBy": "powerStructure.publicLegitimacy",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.publicLegitimacy",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::Tolerated",
+   "draws": 12,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by DEFENSE, adverse",
+   "draws": 1,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by PROSPERITY, adverse",
+   "draws": 10,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by PROSPERITY, favourable",
+   "draws": 20,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::breakdown dominated by SAFETY, adverse",
+   "draws": 11,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-1::governanceFractured true",
+   "draws": 27,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-2::Desperate matched",
+   "draws": 2,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.stability",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.stability"
+   ]
+  },
+  {
+   "pool": "DS-POW-2::no token matched: unclassified (the plain-description floor)",
+   "draws": 35,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.stability",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-2::recentConflict present",
+   "draws": 72,
+   "layer": 3,
+   "decidedBy": "powerStructure.recentConflict",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.recentConflict",
+   "dependsOn": [
+    "powerStructure.recentConflict",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-2::siege matched",
+   "draws": 4,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.stability",
+   "dependsOn": [
+    "institutions",
+    "powerStructure.governingName",
+    "powerStructure.stability",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-2::stable matched",
+   "draws": 18,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.stability",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.stability",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-2::unstable matched",
+   "draws": 13,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.stability",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.stability",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-4::legitimacyHold: public backing hardens the hold",
+   "draws": 15,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.publicLegitimacy",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-4::legitimacyHold: public opinion neither helps nor hurts",
+   "draws": 12,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-4::legitimacyHold: public rejection is breaking the hold",
+   "draws": 45,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.publicLegitimacy",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Contested",
+   "draws": 23,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "powerStructure.factions",
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy"
+   ]
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Critical. The seat could fall",
+   "draws": 4,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "powerStructure.factions",
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Holding",
+   "draws": 25,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "powerStructure.factions",
+    "powerStructure.governingName",
+    "powerStructure.publicLegitimacy",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-4::riskLabel: Stable (no challengers)",
+   "draws": 17,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "powerStructure.factions",
+    "powerStructure.governingName",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-5::FLAG: crimeIsGovt",
+   "draws": 1,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "powerStructure.governingName"
+   ]
+  },
+  {
+   "pool": "DS-POW-5::FLAG: merchantArmy",
+   "draws": 3,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions",
+    "powerStructure.governingName"
+   ]
+  },
+  {
+   "pool": "DS-POW-5::FLAG: merchantCriminalBlur",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-POW-5::autocrat",
+   "draws": 2,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "powerStructure.factions",
+    "powerStructure.governingName"
+   ]
+  },
+  {
+   "pool": "DS-POW-5::council",
+   "draws": 45,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "powerStructure.factions",
+    "powerStructure.governingName",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-5::governing body name: a SLOT, never a baked noun",
+   "draws": 72,
+   "layer": 3,
+   "decidedBy": "powerStructure.governingName",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.governingName",
+   "dependsOn": [
+    "powerStructure.governingName",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-5::merchant_league",
+   "draws": 9,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "powerStructure.factions",
+    "powerStructure.governingName"
+   ]
+  },
+  {
+   "pool": "DS-POW-5::theocracy",
+   "draws": 7,
+   "layer": 3,
+   "decidedBy": "powerStructure.factions",
+   "keyLayer": 3,
+   "keyDecidedBy": "powerStructure.factions",
+   "dependsOn": [
+    "powerStructure.factions",
+    "powerStructure.governingName",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-6::operation role criminal revenue stream (unclassified)",
+   "draws": 5,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions"
+   ]
+  },
+  {
+   "pool": "DS-POW-6::operation role duty evasion",
+   "draws": 19,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile",
+    "institutions",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-POW-6::operation role money laundering",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-POW-6::operation role parallel marketplace",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-POW-6::operation role protection + extraction",
+   "draws": 2,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-POW-6::operation role unlicensed revenue",
+   "draws": 2,
+   "layer": 2,
+   "decidedBy": "economicState.safetyProfile",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.safetyProfile",
+   "dependsOn": [
+    "economicState.safetyProfile"
+   ]
+  },
+  {
+   "pool": "DS-STR-1::Overview's own section framing",
+   "draws": 27,
+   "layer": 1,
+   "decidedBy": "size(tier+population)",
+   "keyLayer": 1,
+   "keyDecidedBy": "crises(stress+stressors+activeConditions)",
+   "dependsOn": [
+    "crises(stress+stressors+activeConditions)",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing",
+   "draws": 48,
+   "layer": 2,
+   "decidedBy": "economicState.activeChains",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.activeChains",
+   "dependsOn": [
+    "economicState.activeChains",
+    "size(tier+population)"
+   ]
+  },
+  {
+   "pool": "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED",
+   "draws": 1,
+   "layer": 2,
+   "decidedBy": "economicState.tradeDependencies",
+   "keyLayer": 2,
+   "keyDecidedBy": "economicState.tradeDependencies",
+   "dependsOn": [
+    "availableServices",
+    "economicState.tradeDependencies"
+   ]
+  },
+  {
+   "pool": "DS-SUP-3::ONE EXPECTED CATEGORY MISSING",
+   "draws": 12,
+   "layer": 2,
+   "decidedBy": "availableServices",
+   "keyLayer": 2,
+   "keyDecidedBy": "availableServices",
+   "dependsOn": [
+    "availableServices",
+    "size(tier+population)"
+   ]
+  }
+ ]
+}

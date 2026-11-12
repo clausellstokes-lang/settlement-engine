@@ -1,0 +1,896 @@
+{
+ "sample": 120,
+ "storedDefenseProfileLayer": 4,
+ "facts": [
+  {
+   "name": "canonStressors",
+   "home": "domain/canonicalAccessors.js :: canonStressors",
+   "layer": 1,
+   "decidedBy": "stressors",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "stress@L0",
+    "stresses@L0",
+    "stressors@L0"
+   ]
+  },
+  {
+   "name": "factsOf.culture",
+   "home": "src/domain/facts/factsOf.js :: factsOf.culture",
+   "layer": 1,
+   "decidedBy": "config",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.culture@L0"
+   ]
+  },
+  {
+   "name": "factsOf.hasInstitution",
+   "home": "facts/institutions.js :: hasInstitution",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0"
+   ]
+  },
+  {
+   "name": "factsOf.magic",
+   "home": "src/domain/facts/factsOf.js :: factsOf.magic",
+   "layer": 1,
+   "decidedBy": "settlement",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.magicExists@L0",
+    "config.magicLevel@L0",
+    "config.priorityMagic@L0",
+    "settlement@L0"
+   ]
+  },
+  {
+   "name": "factsOf.market",
+   "home": "src/domain/facts/factsOf.js :: factsOf.market",
+   "layer": 1,
+   "decidedBy": "institutions",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.status@L0",
+    "institutions.tags@L0"
+   ]
+  },
+  {
+   "name": "factsOf.populationBand",
+   "home": "src/domain/facts/factsOf.js :: factsOf.populationBand",
+   "layer": 1,
+   "decidedBy": "population",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "population@L0"
+   ]
+  },
+  {
+   "name": "factsOf.route",
+   "home": "src/domain/facts/factsOf.js :: factsOf.route",
+   "layer": 1,
+   "decidedBy": "config",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.tradeRouteAccess@L0"
+   ]
+  },
+  {
+   "name": "factsOf.terrain",
+   "home": "src/domain/facts/factsOf.js :: factsOf.terrain",
+   "layer": 1,
+   "decidedBy": "config",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.terrainType@L0"
+   ]
+  },
+  {
+   "name": "factsOf.tier",
+   "home": "src/domain/facts/factsOf.js :: factsOf.tier",
+   "layer": 1,
+   "decidedBy": "tier",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "tier@L0"
+   ]
+  },
+  {
+   "name": "magicDialAbsent",
+   "home": "domain/magicReliance.js :: magicDialAbsent",
+   "layer": 1,
+   "decidedBy": "config",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.magicExists@L0",
+    "config.magicLevel@L0",
+    "config.priorityMagic@L0"
+   ]
+  },
+  {
+   "name": "defenseFactsOf",
+   "home": "domain/defense/defenseFacts.js :: defenseFactsOf",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0"
+   ]
+  },
+  {
+   "name": "factsOf.crisis",
+   "home": "src/domain/facts/factsOf.js :: factsOf.crisis",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "activeConditions@L0",
+    "activeConditions.archetype@L0",
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "stress@L0",
+    "stresses@L0",
+    "stressors@L0",
+    "stressors.type@L0"
+   ]
+  },
+  {
+   "name": "factsOf.exports",
+   "home": "src/domain/facts/factsOf.js :: factsOf.exports",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.primaryExports@L1"
+   ]
+  },
+  {
+   "name": "factsOf.famine",
+   "home": "src/domain/facts/factsOf.js :: factsOf.famine",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1"
+   ]
+  },
+  {
+   "name": "factsOf.foodSources",
+   "home": "src/domain/facts/factsOf.js :: factsOf.foodSources",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1"
+   ]
+  },
+  {
+   "name": "factsOf.imports",
+   "home": "src/domain/facts/factsOf.js :: factsOf.imports",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.primaryImports@L1"
+   ]
+  },
+  {
+   "name": "factsOf.prosperity",
+   "home": "src/domain/facts/factsOf.js :: factsOf.prosperity",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.prosperity@L1"
+   ]
+  },
+  {
+   "name": "factsOf.sacredHouse",
+   "home": "src/domain/facts/factsOf.js :: factsOf.sacredHouse",
+   "layer": 2,
+   "decidedBy": "fact factsOf.hasInstitution",
+   "deps": [
+    "factsOf.hasInstitution"
+   ],
+   "errors": 0,
+   "reads": [
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0"
+   ]
+  },
+  {
+   "name": "factsOf.storesMonths",
+   "home": "src/domain/facts/factsOf.js :: factsOf.storesMonths",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1"
+   ]
+  },
+  {
+   "name": "factsOf.water",
+   "home": "src/domain/facts/factsOf.js :: factsOf.water",
+   "layer": 2,
+   "decidedBy": "fact factsOf.terrain",
+   "deps": [
+    "factsOf.terrain",
+    "factsOf.route"
+   ],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.terrainType@L0",
+    "config.tradeRouteAccess@L0"
+   ]
+  },
+  {
+   "name": "magicDependents",
+   "home": "domain/magicReliance.js :: magicDependents",
+   "layer": 2,
+   "decidedBy": "economicState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.activeChains@L1"
+   ]
+  },
+  {
+   "name": "crimeSignalOf (seats+estate)",
+   "home": "domain/crimeSignal.js :: crimeSignalOf",
+   "layer": 3,
+   "decidedBy": "powerStructure",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "institutions@L0",
+    "institutions.category@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.tags@L0",
+    "powerStructure@L2",
+    "powerStructure.factions@L2"
+   ]
+  },
+  {
+   "name": "crisisDimensionsOf (crisisAnswered)",
+   "home": "domain/crisis/crisisFacts.js :: crisisAnswered",
+   "layer": 3,
+   "decidedBy": "fact factsOf.crisis",
+   "deps": [
+    "factsOf.crisis"
+   ],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "stress@L0",
+    "stresses@L0",
+    "stressors@L0",
+    "stressors.type@L0"
+   ]
+  },
+  {
+   "name": "deriveCriminalStructure",
+   "home": "domain/display/defenseDisplay.js :: deriveCriminalStructure",
+   "layer": 3,
+   "decidedBy": "powerStructure",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "_seed@L0",
+    "economicState@L1",
+    "economicState.activeChains@L1",
+    "economicState.safetyProfile@L1",
+    "institutions@L0",
+    "institutions.category@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.tags@L0",
+    "powerStructure@L2",
+    "powerStructure.factions@L2"
+   ]
+  },
+  {
+   "name": "factsOf.defence",
+   "home": "src/domain/facts/factsOf.js :: factsOf.defence",
+   "layer": 3,
+   "decidedBy": "fact defenseFactsOf",
+   "deps": [
+    "defenseFactsOf"
+   ],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0"
+   ]
+  },
+  {
+   "name": "factsOf.guild",
+   "home": "src/domain/facts/factsOf.js :: factsOf.guild",
+   "layer": 3,
+   "decidedBy": "powerStructure",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.catalogId@L0",
+    "institutions.category@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0",
+    "institutions.tags@L0",
+    "powerStructure@L2",
+    "powerStructure.factions@L2"
+   ]
+  },
+  {
+   "name": "factsOf.migration",
+   "home": "src/domain/facts/factsOf.js :: factsOf.migration",
+   "layer": 3,
+   "decidedBy": "fact factsOf.crisis",
+   "deps": [
+    "factsOf.crisis"
+   ],
+   "errors": 0,
+   "reads": [
+    "stress@L0",
+    "stresses@L0",
+    "stressors@L0",
+    "stressors.direction@L0",
+    "stressors.type@L0"
+   ]
+  },
+  {
+   "name": "factsOf.rulerKind",
+   "home": "src/domain/facts/factsOf.js :: factsOf.rulerKind",
+   "layer": 3,
+   "decidedBy": "powerStructure",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "powerStructure@L2",
+    "powerStructure.government@L2"
+   ]
+  },
+  {
+   "name": "factsOf.warState",
+   "home": "src/domain/facts/factsOf.js :: factsOf.warState",
+   "layer": 3,
+   "decidedBy": "fact factsOf.crisis",
+   "deps": [
+    "factsOf.crisis"
+   ],
+   "errors": 0,
+   "reads": [
+    "activeConditions@L0",
+    "activeConditions.archetype@L0",
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "stress@L0",
+    "stresses@L0",
+    "stressors@L0",
+    "stressors.type@L0"
+   ]
+  },
+  {
+   "name": "foodEnduranceOf",
+   "home": "domain/defense/defenseFacts.js :: foodEnduranceOf",
+   "layer": 3,
+   "decidedBy": "fact factsOf.storesMonths",
+   "deps": [
+    "factsOf.storesMonths",
+    "factsOf.crisis"
+   ],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1"
+   ]
+  },
+  {
+   "name": "wallsDimensionOf (wallsAnswered)",
+   "home": "domain/defense/defenseFacts.js :: wallsDimensionOf",
+   "layer": 3,
+   "decidedBy": "fact defenseFactsOf",
+   "deps": [
+    "defenseFactsOf"
+   ],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0"
+   ]
+  },
+  {
+   "name": "factsOf.commander",
+   "home": "src/domain/facts/factsOf.js :: factsOf.commander",
+   "layer": 4,
+   "decidedBy": "fact factsOf.defence",
+   "deps": [
+    "factsOf.defence"
+   ],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0"
+   ]
+  },
+  {
+   "name": "factsOf.crime",
+   "home": "src/domain/facts/factsOf.js :: factsOf.crime",
+   "layer": 4,
+   "decidedBy": "fact deriveCriminalStructure",
+   "deps": [
+    "deriveCriminalStructure"
+   ],
+   "errors": 0,
+   "reads": [
+    "_seed@L0",
+    "economicState@L1",
+    "economicState.activeChains@L1",
+    "economicState.safetyProfile@L1",
+    "institutions@L0",
+    "institutions.category@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.tags@L0",
+    "powerStructure@L2",
+    "powerStructure.factions@L2"
+   ]
+  },
+  {
+   "name": "factsOf.guardPresence",
+   "home": "src/domain/facts/factsOf.js :: factsOf.guardPresence",
+   "layer": 4,
+   "decidedBy": "fact factsOf.defence",
+   "deps": [
+    "factsOf.defence"
+   ],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0"
+   ]
+  },
+  {
+   "name": "factsOf.hasOtherNpc",
+   "home": "facts/otherNpc.js :: hasOtherNpc",
+   "layer": 4,
+   "decidedBy": "npcs",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "npcs@L3",
+    "npcs.name@L3"
+   ]
+  },
+  {
+   "name": "factsOf.soldiers",
+   "home": "src/domain/facts/factsOf.js :: factsOf.soldiers",
+   "layer": 4,
+   "decidedBy": "fact factsOf.defence",
+   "deps": [
+    "factsOf.defence"
+   ],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.isCustom@L0",
+    "institutions.name@L0",
+    "institutions.source@L0",
+    "institutions.status@L0"
+   ]
+  },
+  {
+   "name": "faithReadingOf",
+   "home": "domain/dossier/faithReading.js :: faithReadingOf",
+   "layer": 4,
+   "decidedBy": "npcs",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.priorityReligion@L0",
+    "economicState@L1",
+    "economicState.incomeSources@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.name@L0",
+    "institutions.status@L0",
+    "npcs@L3",
+    "npcs.role@L3",
+    "powerStructure@L2",
+    "powerStructure.factions@L2"
+   ]
+  },
+  {
+   "name": "foodEnduranceLine (a composer)",
+   "home": "domain/display/defenseDisplay.js :: foodEnduranceLine",
+   "layer": 4,
+   "decidedBy": "fact foodEnduranceOf",
+   "deps": [
+    "foodEnduranceOf",
+    "factsOf.storesMonths"
+   ],
+   "errors": 0,
+   "reads": [
+    "economicState@L1",
+    "economicState.foodSecurity@L1",
+    "tier@L0"
+   ]
+  },
+  {
+   "name": "generateDefenseProfile (stored defenseProfile)",
+   "home": "generators/defenseGenerator.js :: generateDefenseProfile",
+   "layer": 4,
+   "decidedBy": "npcs",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config._densityLawVersion@L0",
+    "config._isolationSupport@L0",
+    "config._livingContentLawVersion@L0",
+    "config._magicTradeOnly@L0",
+    "config._population@L0",
+    "config._randomizePriorities@L0",
+    "config._routeIntent@L0",
+    "config.contentBoundaries@L0",
+    "config.contentProfile@L0",
+    "config.culture@L0",
+    "config.cultureProfileKey@L0",
+    "config.customInstitutions@L0",
+    "config.customName@L0",
+    "config.customResources@L0",
+    "config.customTradeRoutes@L0",
+    "config.defenseScenarioConfig@L0",
+    "config.intendedStressTypes@L0",
+    "config.magicExists@L0",
+    "config.magicLevel@L0",
+    "config.migrationDirection@L0",
+    "config.monsterThreat@L0",
+    "config.nearbyResourceDefinitions@L0",
+    "config.nearbyResourceDefinitionsDepleted@L0",
+    "config.nearbyResources@L0",
+    "config.nearbyResourcesCustom@L0",
+    "config.nearbyResourcesDepleted@L0",
+    "config.nearbyResourcesNative@L0",
+    "config.nearbyResourcesNativeDepleted@L0",
+    "config.nearbyResourcesRandom@L0",
+    "config.nearbyResourcesState@L0",
+    "config.neighborRelationship@L0",
+    "config.population@L0",
+    "config.powerDynamicsConfig@L0",
+    "config.priorityCriminal@L0",
+    "config.priorityEconomy@L0",
+    "config.priorityMagic@L0",
+    "config.priorityMilitary@L0",
+    "config.priorityReligion@L0",
+    "config.selectedStresses@L0",
+    "config.selectedStressesRandom@L0",
+    "config.settType@L0",
+    "config.settlementAgeMode@L0",
+    "config.settlementAgeYears@L0",
+    "config.stressType@L0",
+    "config.stressTypes@L0",
+    "config.terrainOverride@L0",
+    "config.terrainType@L0",
+    "config.tier@L0",
+    "config.tradeRouteAccess@L0",
+    "economicState@L1",
+    "economicState.activeChains@L1",
+    "economicState.foodSecurity@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.baseChance@L0",
+    "institutions.cascadeAdded@L0",
+    "institutions.cascadeBoost@L0",
+    "institutions.catalogId@L0",
+    "institutions.category@L0",
+    "institutions.coherenceRepair@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.desc@L0",
+    "institutions.exclusiveGroup@L0",
+    "institutions.exclusiveGroupCoexists@L0",
+    "institutions.facets@L0",
+    "institutions.factionSource@L0",
+    "institutions.forbiddenResources@L0",
+    "institutions.forbiddenTradeRoutes@L0",
+    "institutions.forcedByIsolation@L0",
+    "institutions.isCustom@L0",
+    "institutions.magicLicense@L0",
+    "institutions.name@L0",
+    "institutions.nativeTier@L0",
+    "institutions.priorityCategory@L0",
+    "institutions.required@L0",
+    "institutions.serviceKeys@L0",
+    "institutions.source@L0",
+    "institutions.status@L0",
+    "institutions.tags@L0",
+    "institutions.terrainAccess@L0",
+    "institutions.terrainRequired@L0",
+    "institutions.tier@L0",
+    "institutions.tradeRouteRequired@L0",
+    "npcs@L3",
+    "npcs.name@L3",
+    "npcs.role@L3",
+    "npcs.status@L3",
+    "npcs.title@L3",
+    "stress@L0",
+    "stress.type@L0",
+    "tier@L0"
+   ]
+  },
+  {
+   "name": "magicPractitioners",
+   "home": "domain/magicReliance.js :: magicPractitioners",
+   "layer": 4,
+   "decidedBy": "npcs",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.baseChance@L0",
+    "institutions.cascadeAdded@L0",
+    "institutions.cascadeBoost@L0",
+    "institutions.catalogId@L0",
+    "institutions.category@L0",
+    "institutions.coherenceRepair@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.desc@L0",
+    "institutions.exclusiveGroup@L0",
+    "institutions.exclusiveGroupCoexists@L0",
+    "institutions.facets@L0",
+    "institutions.factionSource@L0",
+    "institutions.forbiddenResources@L0",
+    "institutions.forbiddenTradeRoutes@L0",
+    "institutions.forcedByIsolation@L0",
+    "institutions.isCustom@L0",
+    "institutions.magicLicense@L0",
+    "institutions.name@L0",
+    "institutions.nativeTier@L0",
+    "institutions.priorityCategory@L0",
+    "institutions.required@L0",
+    "institutions.serviceKeys@L0",
+    "institutions.source@L0",
+    "institutions.status@L0",
+    "institutions.tags@L0",
+    "institutions.terrainAccess@L0",
+    "institutions.terrainRequired@L0",
+    "institutions.tier@L0",
+    "institutions.tradeRouteRequired@L0",
+    "npcs@L3",
+    "npcs.name@L3",
+    "npcs.role@L3",
+    "npcs.status@L3",
+    "npcs.title@L3"
+   ]
+  },
+  {
+   "name": "deriveMagicReliance",
+   "home": "domain/magicReliance.js :: deriveMagicReliance",
+   "layer": 5,
+   "decidedBy": "fact magicPractitioners",
+   "deps": [
+    "magicPractitioners",
+    "magicDependents",
+    "magicDialAbsent"
+   ],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.magicExists@L0",
+    "config.magicLevel@L0",
+    "config.priorityMagic@L0",
+    "economicState@L1",
+    "economicState.activeChains@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.baseChance@L0",
+    "institutions.cascadeAdded@L0",
+    "institutions.cascadeBoost@L0",
+    "institutions.catalogId@L0",
+    "institutions.category@L0",
+    "institutions.coherenceRepair@L0",
+    "institutions.custom@L0",
+    "institutions.customDefinitionCategory@L0",
+    "institutions.customDefinitionId@L0",
+    "institutions.desc@L0",
+    "institutions.exclusiveGroup@L0",
+    "institutions.exclusiveGroupCoexists@L0",
+    "institutions.facets@L0",
+    "institutions.factionSource@L0",
+    "institutions.forbiddenResources@L0",
+    "institutions.forbiddenTradeRoutes@L0",
+    "institutions.forcedByIsolation@L0",
+    "institutions.isCustom@L0",
+    "institutions.magicLicense@L0",
+    "institutions.name@L0",
+    "institutions.nativeTier@L0",
+    "institutions.priorityCategory@L0",
+    "institutions.required@L0",
+    "institutions.serviceKeys@L0",
+    "institutions.source@L0",
+    "institutions.status@L0",
+    "institutions.tags@L0",
+    "institutions.terrainAccess@L0",
+    "institutions.terrainRequired@L0",
+    "institutions.tier@L0",
+    "institutions.tradeRouteRequired@L0",
+    "npcs@L3",
+    "npcs.name@L3",
+    "npcs.role@L3",
+    "npcs.status@L3",
+    "npcs.title@L3"
+   ]
+  },
+  {
+   "name": "factsOf.faith",
+   "home": "src/domain/facts/factsOf.js :: factsOf.faith",
+   "layer": 5,
+   "decidedBy": "fact faithReadingOf",
+   "deps": [
+    "faithReadingOf"
+   ],
+   "errors": 0,
+   "reads": [
+    "config@L0",
+    "config.priorityReligion@L0",
+    "economicState@L1",
+    "economicState.incomeSources@L1",
+    "institutions@L0",
+    "institutions._worldPulseInactive@L0",
+    "institutions.name@L0",
+    "institutions.status@L0",
+    "npcs@L3",
+    "npcs.role@L3",
+    "powerStructure@L2",
+    "powerStructure.factions@L2"
+   ]
+  },
+  {
+   "name": "hallCaptureOf",
+   "home": "domain/people/hallCapture.js :: hallCaptureOf",
+   "layer": 5,
+   "decidedBy": "powerStructure.criminalCaptureState",
+   "deps": [],
+   "errors": 0,
+   "reads": [
+    "npcs@L3",
+    "npcs.allegiance@L3",
+    "npcs.id@L3",
+    "npcs.memberships@L3",
+    "npcs.name@L3",
+    "powerStructure@L2",
+    "powerStructure.criminalCaptureState@L4",
+    "powerStructure.factions@L2"
+   ]
+  }
+ ],
+ "unclassifiedPaths": []
+}

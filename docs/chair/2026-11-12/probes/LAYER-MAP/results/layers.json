@@ -1,0 +1,6931 @@
+{
+ "how": {
+  "measured": 210,
+  "inferred": 197,
+  "static": 193,
+  "world": 235,
+  "unknown": 21
+ },
+ "tally": {
+  "1": {
+   "pools": 115,
+   "variants": 405,
+   "undeclaredLines": 72,
+   "measured": 50,
+   "inferred": 60,
+   "static": 5,
+   "world": 0,
+   "unknown": 0
+  },
+  "2": {
+   "pools": 197,
+   "variants": 614,
+   "undeclaredLines": 110,
+   "measured": 83,
+   "inferred": 71,
+   "static": 43,
+   "world": 0,
+   "unknown": 0
+  },
+  "3": {
+   "pools": 116,
+   "variants": 373,
+   "undeclaredLines": 0,
+   "measured": 48,
+   "inferred": 47,
+   "static": 21,
+   "world": 0,
+   "unknown": 0
+  },
+  "4": {
+   "pools": 161,
+   "variants": 533,
+   "undeclaredLines": 96,
+   "measured": 29,
+   "inferred": 19,
+   "static": 113,
+   "world": 0,
+   "unknown": 0
+  },
+  "5": {
+   "pools": 11,
+   "variants": 47,
+   "undeclaredLines": 4,
+   "measured": 0,
+   "inferred": 0,
+   "static": 11,
+   "world": 0,
+   "unknown": 0
+  },
+  "W": {
+   "pools": 235,
+   "variants": 735,
+   "undeclaredLines": 124,
+   "measured": 0,
+   "inferred": 0,
+   "static": 0,
+   "world": 235,
+   "unknown": 0
+  },
+  "?": {
+   "pools": 21,
+   "variants": 72,
+   "undeclaredLines": 6,
+   "measured": 0,
+   "inferred": 0,
+   "static": 0,
+   "world": 0,
+   "unknown": 21
+  }
+ },
+ "rows": {
+  "DS-ECO-1::COMBINATION C1: a high rung on a working approach": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-1::COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-1::COMBINATION C3: the middle rungs": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-1::COMBINATION C4: a low rung on a working approach": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 1,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-2::FOOD: deficit": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 1,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-2::FOOD: surplus": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-2::FOOD: balanced": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-2::GRANARY: well stocked": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-ECO-2::GRANARY: stocked": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-2::GRANARY: thin": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-ECO-2::GRANARY: nearly empty": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-3::SHORTAGE × trade-dependent": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-ECO-3::SHORTAGE × not trade-dependent": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-3::ADEQUATE": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-3::SURPLUS × trade-dependent": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-ECO-3::SURPLUS × not trade-dependent": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-4::HIGHLIGHT: dear": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-ECO-4::HIGHLIGHT: cheap": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-4::NO HIGHLIGHT: everything steady": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-ECO-4::MIXED: exports dear, imports cheap": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-5::IMPAIRED (canonical scarce), with a named dependency": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-5::VULNERABLE (canonical strained)": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-5::RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-5::ENTREPÔT": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-5::MAGICALLY SUSTAINED: a small prop (low magicRecovery)": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-5::MAGICALLY SUSTAINED: a large prop (high magicRecovery)": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-5::OPERATIONAL: the service economy (no line of supply behind it)": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-1::COMPLETE LINE, output exported": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-SUP-1::A PROCESSING HOUSE MISSING FROM THE ROSTER": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-1::UPSTREAM LINK COVERED BY AN IMPORT": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-1::RESOURCE DEPLETED": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-1::ENTREPÔT PASS-THROUGH (no workshop in the line)": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-1::BLOCKED: nothing can be got away": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-6::TIER: a large share off the books (≥30)": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-6::TIER: significant off-book activity (≥15)": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-6::TIER: minor shadow activity (≥3)": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-6::FLAG: arcaneBlackMarket": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-6::FLAG: theocraticEconomy": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-6::FACET: an underground house": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-6::FACET: a clandestine house": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-7::TALLIES": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-7::CATALOG": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-8::SUBSISTENCE": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-8::STRUGGLING": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 7,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-8::POOR": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-ECO-8::MODERATE": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-8::COMFORTABLE": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 1,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-8::PROSPEROUS": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-8::WEALTHY": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-8::FOOD AND PROSPERITY: hunger holds the town down": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-8::FOOD AND PROSPERITY: the cost of food weighs on the town": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-8::FOOD AND PROSPERITY: full stores lift the town": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::SURPLUS": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-9::SECURE": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-ECO-9::PRESSURED": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-9::IMPORT-DEPENDENT": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-9::DEFICIT": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::ACTIVE FAMINE": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::BLOCKADED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-ECO-9::BLOCKADE BYPASSED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-9::ACTIVE FAMINE: the failed source, most of the harvest": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::ACTIVE FAMINE: the failed source, part of the harvest": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::HOW THE NEED IS MET: much of it brought in": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::HOW THE NEED IS MET: part of it by magic": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::FOOD SOURCES: one source": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::FOOD SOURCES: several, the largest named": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-9::FOOD SOURCES: four or more": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-2::STABLE": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-2::STRAINED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-2::SCARCE": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-2::BLOCKED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-2::CAPTURED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-2::SUBSTITUTED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-SUP-2::COLLAPSING": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-10::POSTURE: none": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-10::POSTURE: limited": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-10::POSTURE: vulnerable": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-10::POSTURE: entrepot": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-10::POSTURE: import_dependent": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-10::POSTURE: established": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 6,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-10::SCARCITY: shortage": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-10::SCARCITY: adequate": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-10::SCARCITY: surplus": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-10::THE FRESHNESS CAVEAT: for any surface printing a derived tally": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: Coastal": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: Plains": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: Forest": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: Hills": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: Mountains": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: River": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: Desert": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: Swamp": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: Tundra": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::TERRAIN: anything else (the default accent)": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::ECONOMIC STRENGTHS: none recorded": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 6,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::EXPLOITATION: partiallyExploited": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::EXPLOITATION: fullyExploited": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 1,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-11::RESOURCE CONDITION: worked out, recovers in time": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-11::RESOURCE CONDITION: worked out, recovers only with work": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::INCOME MIX: one source carries the town": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-12::INCOME MIX: two or three sources between them": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::INCOME MIX: a broad spread, no leader": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::INCOME MIX: a criminal line is present": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::INCOME MIX: the criminal line leads": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::TRADE PROFILE: exports and imports both present": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-ECO-12::TRADE PROFILE: no significant exports": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::TRADE PROFILE: imports only, nothing outward": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::TRADE PROFILE: local production listed": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::CRITICAL IMPORT: the land cannot give it": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::INCOME WEIGHT: the religious houses": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-ECO-12::INCOME WEIGHT: the practice of magic": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-3::COMPLETE FOR ITS TIER": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-SUP-3::ONE EXPECTED CATEGORY MISSING": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-3::THE HEALING GAP": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-3::THE FOOD GAP": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-SUP-3::A METROPOLIS-TIER CATALOG, COMPLETE": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-DEF-1::readiness STRONG": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-DEF-1::readiness ADEQUATE": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-1::readiness WEAK": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-1::readiness CRITICAL": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-1::terrain FAVOURABLE to the defender": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-1::terrain EXPOSED": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-1::strategic value HIGH": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-1::strategic value LOW": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-2::Beasts & Monsters: plagued, perimeter but NO force to hold it": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-2::Beasts & Monsters: plagued, NO perimeter and NO force": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-2::Beasts & Monsters: frontier, force without a perimeter": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-DEF-2::Beasts & Monsters: settled, nothing organized": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-DEF-2::Invasion & War: walls AND professional garrison": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Invasion & War: walls with citizen militia": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Invasion & War: walls with NO force": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Invasion & War: force with NO walls": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Invasion & War: militia only": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Invasion & War: neither walls nor force": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-DEF-2::Internal Security: full legal chain (court AND prison)": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-2::Internal Security: court without detention": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Internal Security: detention without process": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Internal Security: no legal infrastructure": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Economic Survival: STRONG": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-2::Economic Survival: ADEQUATE": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Economic Survival: WEAK": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Economic Survival: CRITICAL": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::CHAIN: defence supplied": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::CHAIN: defence short": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::CHAIN: food trades working": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::CHAIN: food trades failing": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Disasters & Famine: granary AND hospital": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Disasters & Famine: granary AND parish care only": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Disasters & Famine: granary, NO medical provision": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Disasters & Famine: NO reserves, hospital present": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-2::Disasters & Famine: NO reserves, NO medical provision": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::Very Safe": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-DEF-3::Safe": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-3::Moderate": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-3::Unsafe": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-3::Dangerous": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-3::COMPOUND override (a crisis stress has rewritten the label)": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-3::COMPOUND: occupation curfew": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: active siege": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: famine": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: plague": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: insurgency": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-3::COMPOUND: slave revolt": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-3::COMPOUND: wartime": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: political fracture": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: succession crisis": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: betrayal": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: monster threat": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: debt crisis": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: religious upheaval": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: mass migration, arrivals": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: mass migration, departures": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: authoritarian rule": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::COMPOUND: criminal governance": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-3::First-Survey qualification (the reading is a first look)": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::structure organized": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-4::structure semi-organized": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::structure diffuse": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::structure null (nothing organized recognized)": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-4::capture none": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-4::capture adversarial": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::capture equilibrium": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::capture corrupted": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::capture capture": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::FIXTURE: black market": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::FIXTURE: thieves' guild": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::FIXTURE: smuggling": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-4::FIXTURE: gangs": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::walls PRESENT": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-5::walls ABSENT": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::garrison PRESENT": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-5::militia PRESENT (no garrison)": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::watch PRESENT": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-5::NO organized force at all": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::mercenary / contracted forces PRESENT": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::charter hall PRESENT (specialist monster response)": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::charter hall ABSENT where the country warrants one": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::arcane defense PRESENT": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-5::arcane defense ABSENT": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::FIXTURE: gates": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::FIXTURE: charter hall": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::FIXTURE: free company": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::ARCANE: wizard's tower": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::ARCANE: mages' guild": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::ARCANE: alchemists": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::ARCANE: divine": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::ARCANE: druidic": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-5::ARCANE: practitioners": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Economic Backing: Well-funded": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-6::Economic Backing: Adequate": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Economic Backing: Underfunded": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Economic Backing: Critical": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Arcane Support: Present": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-6::Arcane Support: None": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Legal Infrastructure: Court + Prison": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Legal Infrastructure: Court only": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Legal Infrastructure: Prison only": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Legal Infrastructure: None": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Medical Readiness: Hospital present": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Medical Readiness: Clergy care": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Medical Readiness: None": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Logistics & Supply: Granary + port": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-6::Logistics & Supply: Granary in isolation": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Logistics & Supply: Granary with road supply": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-6::Logistics & Supply: No reserves, port open": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-6::Logistics & Supply: No reserves, landlocked": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-6::Naval Defense: Naval force": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-6::Naval Defense: Port only": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-6::Naval Defense: Under blockade": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-7::band surplus": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-7::band adequate": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-7::band strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-7::band critical": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-7::band collapsed": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-7::live band FALLS SHORT of the built profile": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-7::live band EXCEEDS the built profile": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-7::a contributor with a RECORDED reason, adverse": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-7::a contributor with a RECORDED reason, favourable": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-7::besiegedBy present": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-7::besiegingTargets present (the army is abroad)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-8::override active (generic framing)": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-8::override: ACTIVE SIEGE": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override: INTERNAL PRESSURE (famine)": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override: UNDER OCCUPATION": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-8::override: COMMAND SPLIT": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override: UNDER TRIBUTE": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override: SECURITY COMPROMISED": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override: INFILTRATION ACTIVE": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override: QUARANTINE ACTIVE": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override: SUCCESSION CONTESTED": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-8::override: BEAST PRESSURE": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-8::override: INSURGENCY ACTIVE": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override: RELIGIOUS UPHEAVAL": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-8::override: REVOLT ACTIVE": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-8::override: WAR FOOTING": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-8::override: MIGRATION, arrivals": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-8::override: MIGRATION, departures": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-8::override active, viability threatened": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-8::override active, viability intact": {
+   "layer": 4,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-8::multiple stresses, one posture shown": {
+   "layer": 4,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-9::magicDependency true": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-9::magicDependency true, with a NAMED dependent chain": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-9::magicDependency false": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-9::magicDependency false, availability absent": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-9::FLAG: magicFillsVoid": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-9::FLAG: magicMilitarized": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-10::badge STRONG (any arm)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-10::badge ADEQUATE (any arm)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-10::badge WEAK (any arm)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-10::badge CRITICAL (any arm)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-10::overall reading well defended": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::overall reading undefended": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-10::posture ACTIVE SIEGE": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture INTERNAL PRESSURE (famine)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-10::posture UNDER OCCUPATION": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture COMMAND SPLIT (politically fractured)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture UNDER TRIBUTE (indebted)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-10::posture SECURITY COMPROMISED (recently betrayed)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture INFILTRATION ACTIVE": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture QUARANTINE ACTIVE (plague onset)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-10::posture SUCCESSION CONTESTED": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture BEAST PRESSURE": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture INSURGENCY ACTIVE": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture RELIGIOUS UPHEAVAL": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-10::posture REVOLT ACTIVE": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-10::posture WAR FOOTING (wartime)": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-10::posture MIGRATION SURGE": {
+   "layer": 3,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-DEF-12::MAGIC-DEPENDENT": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-12::CAPACITY: ample": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-12::CAPACITY: enough": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-12::CAPACITY: short": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-12::CAPACITY: far short": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-11::WALLED-THREATENED": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-DEF-11::WALLED-QUIET": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-DEF-11::WALLED-STRAINED": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-DEF-11::UNWALLED-SMALL": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-DEF-11::UNWALLED-LARGE": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POP-1::QUANTITY: nobody": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POP-1::QUANTITY: a few souls": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-1::QUANTITY: a dozen or so": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POP-1::QUANTITY: dozens": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-1::QUANTITY: a hundred or so": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POP-1::QUANTITY: several hundred": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POP-1::QUANTITY: many hundreds": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POP-1::QUANTITY: thousands": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POP-1::HERALD KIND: hungry_gap": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POP-1::HERALD KIND: migration_flight": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-1::RECEIPT: births exceed deaths": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-1::RECEIPT: births and deaths in balance": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 1,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POP-1::RECEIPT: deficit01 positive": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-1::CANDIDATE KIND: growth": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POP-1::CANDIDATE KIND: emigration": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-1::CANDIDATE KIND: decline": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-POP-1::BELIEVED TREND diverges from the ring": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-2::BAND −2: has been emptying": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-2::BAND −1: has been thinning": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-2::BAND 0: has held level": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-2::BAND +1: has been growing": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-2::BAND +2: has been swelling": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-2::WINDOW under two readings": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-2::NET MAGNITUDE, banded": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-1::crime_wave": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-1::economic_disparity": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-1::guild_conflict": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-1::infiltration_fear": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-1::leadership_vacuum": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-1::magical_controversy": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-1::occupation_legacy": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-1::outside_debt": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-1::resource_scarcity": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-1::succession_crisis": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-2::intensity: low": {
+   "layer": 5,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-2::intensity: moderate": {
+   "layer": 5,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-2::intensity: high": {
+   "layer": 5,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::scores.military: STRONG": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-3::scores.military: ADEQUATE": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 2,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-GEN-3::scores.military: WEAK": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.military: CRITICAL": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.monster: STRONG": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.monster: ADEQUATE": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.monster: WEAK": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-3::scores.monster: CRITICAL": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::scores.internal: STRONG": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.internal: ADEQUATE": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.internal: WEAK": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-3::scores.internal: CRITICAL": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::scores.economic: STRONG": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.economic: ADEQUATE": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-3::scores.economic: WEAK": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::scores.economic: CRITICAL": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::scores.magical: STRONG": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.magical: ADEQUATE": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::scores.magical: WEAK": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::scores.magical: CRITICAL": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::prosperity: Poverty / Impoverished": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::prosperity: Struggling / Poor": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::prosperity: Moderate / Modest": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-GEN-3::prosperity: Comfortable / Prosperous": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::prosperity: Wealthy / Thriving": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-3::safetyProfile.safetyLabel: head word in {Dangerous, Desperate}": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-3::economicViability.viable: true": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-3::economicViability.viable: false": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Fortress": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 1,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Well-Defended": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Defensible": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Lightly Defended": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 1,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Vulnerable": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-3::defenseProfile.readiness.label: Undefended": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-GEN-3::foodSecurity.label: Secure": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-3::foodSecurity.label: Surplus": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-3::foodSecurity.label: Pressured": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-3::foodSecurity.label: Import-Dependent": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-GEN-3::foodSecurity.label: Deficit": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-3::foodSecurity.label: Deficit × Active Famine": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-5::market (route crossroads)": {
+   "layer": 5,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-5::port": {
+   "layer": 5,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-5::river": {
+   "layer": 5,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-5::smoke (route isolated / mountain_pass)": {
+   "layer": 5,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-5::ordinary (route road and the default)": {
+   "layer": 5,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-6::crossroads": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-6::port": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 3,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-6::river": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-6::isolated": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 3,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-6::road": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-6::tier overlay: metropolis": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-6::tier overlay: city": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-6::tier overlay: thorp / hamlet": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-6::tier overlay: other tiers": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-7::power_economic: criminal faction in a transit hub": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-7::power_economic: powerful criminal faction in a prosperous settlement": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-7::stress_economic: siege against trade income": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 1,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-7::power_stress: occupation against stated stability": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-7::power_economic: temple economy under a secular seat": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-7::historical_economic: the recovery narrative": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-7::structuralViolations[]": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-7::structuralSuggestions[]": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-8::lifecycleStatus: relic_ruin": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-8::lifecycleStatus: abandoned_site": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-8::history.ancientRuin present": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 4,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-8::steading row: organic": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-8::steading row: provenance: 'forced'": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-8::steading row: charterPending": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::trade_partner": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-REL-1::allied": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::patron": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::client": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::rival": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::cold_war": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::hostile": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::neutral": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::cross-settlement NPC contacts": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-1::cross-settlement engagements": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-2::prominentRelationship present": {
+   "layer": 5,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-2::flagDriven count > 0": {
+   "layer": 5,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-REL-2::flagDriven count zero": {
+   "layer": 5,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::founding": {
+   "layer": 4,
+   "src": "static",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::historicalCharacter": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::event type: disaster": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::event type: political": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::event type: economic": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 3,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-9::event type: religious": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 3,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-9::event type: magical": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::event type: demographic": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::event type: exile_return": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::event type: occupation_infiltration": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::recency framing: Recent": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::recency framing: Living memory": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::recency framing: Last century": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::recency framing: Ancient": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-9::recency framing: Deep history": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: overview": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: economics": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: defense": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: viability": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-10::PRINT-NATIVE CHAPTER OPENERS: power": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-HK-1::category npc: the people are the opening": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-HK-1::category faction: the blocs are the opening": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-HK-1::category tension: the standing quarrels are the opening": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-HK-1::category economics: the books are the opening": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-HK-1::category safety: the streets are the opening": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-HK-1::category history: the past is the opening": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-HK-1::category relationship: the ties are the opening": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-HK-1::clock bread_riot": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-HK-1::clock smuggling_rise": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 2,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-HK-1::clock legitimacy_crisis": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-HK-1::clock faction_split": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-11::viable: true: the arithmetic closes": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-11::the MARGINAL arm: neither verdict returned": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-11::viable: false: the arithmetic does not close": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-11::criticalIssueCount: critical contradictions on the record": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-11::THE FIRST-SURVEY QUALIFICATION": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-12::WATER-EDGE": {
+   "layer": 1,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-12::HIGH-GROUND": {
+   "layer": 1,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-12::WOODLAND": {
+   "layer": 1,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-12::OPEN-GROUND": {
+   "layer": 1,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-12::DRY-GROUND": {
+   "layer": 1,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-13::MARKET-OPEN": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-13::MARKET-NARROW": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-13::ENTREPOT": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-13::NO-MARKET": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-GEN-13::COMMERCE: a bank": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-13::COMMERCE: a merchant guild, no bank": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-13::COMMERCE: craft guilds, no merchant guild": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-13::COMMERCE: a market, no guild": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-13::WAREHOUSES": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-GEN-14::FOUNDED-YOUNG": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-14::FOUNDED-OLD": {
+   "layer": 4,
+   "src": "static",
+   "variants": 7,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-14::GROWN-UNRECORDED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POP-3::RISING-OPEN": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-3::RISING-NARROW": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-3::LEVEL": {
+   "layer": "W",
+   "src": "world",
+   "variants": 2,
+   "undeclared": 2,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-3::FALLING-OPEN": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POP-3::FALLING-NARROW": {
+   "layer": "W",
+   "src": "world",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-15::SCARRED-FRESH": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-15::SCARRED-FADING": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-15::REBUILT": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-15::ENCROACHED": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-15::WORN-PLAIN": {
+   "layer": "?",
+   "src": "unknown",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-16::ANCHORED-RECENT": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-16::ANCHORED-OLD": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-16::LAYERED-ANCHORED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-16::RECORDED-UNANCHORED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-16::UNMARKED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-16::LIVING-MEMORY": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-16::LEGACY-UNRESOLVED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-16::LEGACY-RECOVERED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-16::LEGACY-SHIFTED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-16::LEGACY-LINKED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-17::ADMINISTERED": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-17::GARRISONED": {
+   "layer": 2,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 1,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-GEN-17::LETTERED": {
+   "layer": 2,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-17::PROVISIONED": {
+   "layer": 2,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-GEN-17::BARE": {
+   "layer": 2,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-17::GREAT HOUSE: cathedral": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-17::GREAT HOUSE: monastery": {
+   "layer": 2,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-GEN-18::STALLED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-18::HOME-FED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-18::BOUGHT-IN": {
+   "layer": 4,
+   "src": "static",
+   "variants": 6,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-GEN-18::UNWORKED": {
+   "layer": 4,
+   "src": "static",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-1::Endorsed": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POW-1::Approved": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-1::Tolerated": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-1::Contested": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-1::Legitimacy Crisis": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POW-1::breakdown dominated by PROSPERITY, favourable": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-1::breakdown dominated by PROSPERITY, adverse": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-1::breakdown dominated by SAFETY, adverse": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-1::breakdown dominated by DEFENSE, adverse": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-1::breakdown dominated by FOOD, adverse": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POW-1::governanceFractured true": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-2::stable matched": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-2::unstable matched": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-2::critical matched": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-2::siege matched": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 6,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-POW-2::Desperate matched": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-2::no token matched: unclassified (the plain-description floor)": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 7,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-2::governing faction holds a DOMINANT share": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-2::governing faction holds a NARROW plurality": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-2::recentConflict present": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-3::clear top rung, low instability": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-3::crowded top rung, low instability": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-3::high instability (churn at the top)": {
+   "layer": 4,
+   "src": "static",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-3::low instability, long-held order": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-3::shallow ladder (few rungs recorded)": {
+   "layer": 4,
+   "src": "static",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-4::riskLabel: Stable (no challengers)": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 6,
+   "undeclared": 0,
+   "declaring": 6,
+   "colour": false
+  },
+  "DS-POW-4::riskLabel: Holding": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-4::riskLabel: Contested": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-4::riskLabel: Critical. The seat could fall": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-4::legitimacyHold: public backing hardens the hold": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-4::legitimacyHold: public opinion neither helps nor hurts": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-4::legitimacyHold: public rejection is breaking the hold": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-4::previousGovernments present with a recorded cause": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-4::previousGovernments empty (no recorded lineage)": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::autocrat": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::council": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::theocracy": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::merchant_league": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::criminal": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::mixed": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::economicBase: extraction": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::economicBase: agrarian": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::economicBase: trade_hub": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::economicBase: craft": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::economicBase: mixed": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::governing body name: a SLOT, never a baked noun": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-5::FLAG: stateCrime": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-POW-5::FLAG: stateCrime, heavy": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-POW-5::FLAG: crimeIsGovt": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POW-5::FLAG: merchantArmy": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POW-5::FLAG: merchantCriminalBlur": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POW-5::FLAG: secularBrutalism": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POW-6::present: false (no legitimacy reading)": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-6::neutral baseline (nothing pulling either way)": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-6::capture pressure RECOVERING (strong security, prosperity)": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POW-6::capture reached an AGENT of a faction": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-6::capture reached a LEADER": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-6::operation role parallel marketplace": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POW-6::operation role duty evasion": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POW-6::operation role unlicensed revenue": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-6::operation role money laundering": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-6::operation role stolen goods market": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POW-6::operation role protection + extraction": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-6::operation role criminal revenue stream (unclassified)": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-POW-6::GM ADVISORY: the commander is a political actor": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POW-6::GM ADVISORY: officials with criminal arrangements": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POW-7::layer DORMANT (no ledger materialized)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::consolidation 0: a fully divided court (live layer, no ruling bloc)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::a RULING bloc, consolidated": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::glue concession (seats and revenue traded)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::glue patronage (personal loyalty between leaders)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::glue doctrine (a shared creed)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::glue threat (a common danger at the walls)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-POW-7::glue compromise (a corruption leash)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::end seats": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::end commerce": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::end doctrine": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::end survival": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::end patron": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::receipt formed": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::receipt realigned": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::receipt fractured": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::receipt exposed": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::receipt deferred (the alignment exists and has not happened)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-POW-7::hostile leader tie HARD-BLOCKS an otherwise natural alignment": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-POW-7::an opposition bloc forms COVERT under an autarchy": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-1::UNDER SIEGE": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 10,
+   "undeclared": 1,
+   "declaring": 9,
+   "colour": false
+  },
+  "DS-STR-1::FAMINE": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 2,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-STR-1::UNDER OCCUPATION": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 7,
+   "undeclared": 5,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-STR-1::POLITICALLY FRACTURED": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 6,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-1::INDEBTED TO AN OUTSIDE POWER": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 7,
+   "undeclared": 5,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-STR-1::RECENTLY BETRAYED": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 6,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-1::INFILTRATED": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 5,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-STR-1::DISEASE OUTBREAK": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 4,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-STR-1::SUCCESSION VOID": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 6,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-1::BEAST & RAIDER THREAT": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 7,
+   "undeclared": 5,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-STR-1::INSURGENCY": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 5,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-STR-1::RELIGIOUS CRISIS": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 4,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-STR-1::SLAVE REVOLT": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 6,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-1::WARTIME": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 6,
+   "undeclared": 6,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-1::MASS MIGRATION": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 11,
+   "undeclared": 0,
+   "declaring": 11,
+   "colour": false
+  },
+  "DS-STR-1::ARITY: several banners standing at once": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-1::Overview's own section framing": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::LIFECYCLE: emerging": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::LIFECYCLE: active": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::LIFECYCLE: peaking": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::LIFECYCLE: easing": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::LIFECYCLE: residual": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::COUNTERFORCE: floorsMet with a strong score": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::COUNTERFORCE: floorsMet: false": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::COUNTERFORCE: a named leading source": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::COUNTERFORCE: weak or absent": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-STR-2::SYNERGY: famine × disease_outbreak": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::SYNERGY: famine × siege": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 2,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-STR-2::SYNERGY: occupation × insurgency": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::SYNERGY: mass_migration × disease_outbreak": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::SYNERGY: coup_detat × succession_void": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::SYNERGY: market_shock × indebtedness": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: foreign_sponsored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: abandoned_agent": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: internal_conspiracy": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: declared_war": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: unattributed": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 2,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: resistance": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 1,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: palace_coup": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: barracks_coup": {
+   "layer": "W",
+   "src": "world",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: merchant_cabal": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: temple_putsch": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: arcane_ascendancy": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: council_schism": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: popular_revolt": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: servile_uprising": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: tax_revolt": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 2,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: arcane_burnout": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-STR-2::ORIGIN: leyline_silence": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::SEVERITY: low": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::SEVERITY: medium": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::SEVERITY: high": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::SEVERITY: critical": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::DIRECTION: worsening": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::DIRECTION: stable, and the FLAT case (no valid directional status)": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::DIRECTION: easing": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: under_siege": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: under_siege": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: under_siege": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: famine": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: famine": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: famine": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: occupied": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: occupied": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: occupied": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: politically_fractured": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: politically_fractured": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: politically_fractured": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: indebted": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: indebted": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: indebted": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: recently_betrayed": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: recently_betrayed": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: recently_betrayed": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: infiltrated": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: infiltrated": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: infiltrated": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: plague_onset": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: plague_onset": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: plague_onset": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: succession_void": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: succession_void": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: succession_void": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: monster_pressure": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: monster_pressure": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: monster_pressure": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: insurgency": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: insurgency": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: insurgency": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: religious_conversion": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: religious_conversion": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: religious_conversion": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: slave_revolt": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: slave_revolt": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: slave_revolt": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: wartime": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: wartime": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: wartime": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: worsening · CRISIS: mass_migration": {
+   "layer": 1,
+   "src": "measured",
+   "variants": 8,
+   "undeclared": 0,
+   "declaring": 8,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: stable · CRISIS: mass_migration": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-CND-1::DIRECTION: easing · CRISIS: mass_migration": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-CND-1::ARCHETYPE: reconstruction": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-CND-1::ARCHETYPE: boom": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-CND-1::ARCHETYPE: flourishing": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-CND-1::PROVENANCE: causes[] or triggeredAt.sourceEventType populated": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::PROVENANCE: no causes[] and no sourceEventType": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::DURATION: inside the expiry wind-down window": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::FAMILY: acute crisis": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::FAMILY: regional transmission": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-CND-1::FAMILY: war layer, aggressor side": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-CND-1::FAMILY: occupation layer": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 3,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-CND-1::FAMILY: recovery": {
+   "layer": 1,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-WAR-1::statusLabel: On campaign": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-WAR-1::statusLabel: Occupied": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-WAR-1::statusLabel: At war (no front at the walls, no army abroad)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-WAR-1::warExhaustion: rested": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-WAR-1::warExhaustion: near peace": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::warExhaustion: war-weary": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::warExhaustion: exhausted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::mobilization: climbing the ramp, still distant": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::mobilization: climbing, close to ready": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::mobilization: fully ready": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::mobilization: COVERT": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::occupation.pays false (the occupation is a net drain on the holder)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::occupation.pays true": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::occupierHoldings.stretchedThin": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::occupierHoldings.strengthened": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::feasibility plausible": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::feasibility auto_fail": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::feasibility harassment": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-WAR-1::feasibility require_coalition": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-1::feasibility require_betrayal": {
+   "layer": "W",
+   "src": "world",
+   "variants": 6,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-WAR-1::feasibility require_magic": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::economic · honored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::economic · strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-WAR-2::economic · defaulted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::relational · honored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::relational · strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::relational · defaulted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::security · honored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::security · strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::security · defaulted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::territorial · honored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-WAR-2::territorial · strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-WAR-2::territorial · defaulted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-WAR-2::political · honored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::political · strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::political · defaulted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::informational · honored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::informational · strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::informational · defaulted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::sovereignty · honored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::sovereignty · strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::sovereignty · defaulted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-WAR-2::generic floor · honored": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::generic floor · strained": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::generic floor · defaulted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::fraying set on a term with time still to run": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::document-level: the treaty runs out within the year": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::document-level: the town is the LOSER side": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-2::document-level: the town is the VICTOR side": {
+   "layer": "W",
+   "src": "world",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-3::*": {
+   "layer": "W",
+   "src": "world",
+   "variants": 5,
+   "undeclared": 0,
+   "declaring": 5,
+   "colour": false
+  },
+  "DS-WAR-4::Belligerent": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-4::Assertive": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-4::Even-handed": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-4::Cautious": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-4::Pacific": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::posture peace": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-WAR-5::posture alert": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::posture war_preparation": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::posture mobilized": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::posture deployed": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::posture war_exhaustion": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::posture demobilizing": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::posture COVERT (any state)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::settlementWarStatus null (peace, not missing data)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-WAR-5::live war_front INTO the settlement (a genuine siege)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-WAR-5::phantom front (hostility with no army behind it)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-WAR-5::occupation contested": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::occupation unstable": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::occupation extractive": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::occupation stabilized": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::occupation vassalized": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::resistance largely quiescent": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::resistance restive": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::resistance simmering": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::resistance in open revolt": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::blockade stamped (recorded cause)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-WAR-5::blockade LIFTED (the impairment is cleared)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::a stream: true treaty term (the installment shape)": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::a HIGH-burden term": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::aftermath siege_lifted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-WAR-5::aftermath occupation_lifted": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::aftermath war_exhaustion": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::aftermath war_drain": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::aftermath war_spoils": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::aftermath relief_burden": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-WAR-5::aftermath trade_realignment": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::PATRON: rankAxis: major": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 3,
+   "colour": false
+  },
+  "DS-FTH-1::PATRON: rankAxis: minor": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-FTH-1::PATRON: rankAxis: cult": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-FTH-1::CULTS: cults[] present beneath the patron": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::DEVOTION: devout": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-1::DEVOTION: faithful": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::DEVOTION: observant": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-1::DEVOTION: lukewarm": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-FTH-1::DEVOTION: secular": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::ARC: trend: rising": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::ARC: trend: falling": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::ARC: trend: steady": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-1::STANDINGS: the patron dominant": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-1::STANDINGS: the patron pressed by a near rival": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-1::STANDINGS: a plural field, no majority": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::SINK: unaffiliated present, arc falling": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::SINK: unaffiliated present, arc rising": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-FTH-1::MANDATE: contested, or patron security below the floor": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::MANDATE: a dominant church": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-1::MANDATE: a measure of divine mandate": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-1::live: false": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-2::PRIVATE DOSSIER": {
+   "layer": 3,
+   "src": "measured",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-2::PUBLIC / SHARED DOSSIER": {
+   "layer": 3,
+   "src": "inferred",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::STANDING: cult": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-3::STANDING: established": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-3::STANDING: ascendant": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::NICHE: slots saturated at tier capacity": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::NICHE: slots open": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-3::NICHE: the patron's niche carries a contestant": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::NICHE: every niche uncontested": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-FTH-3::LEGITIMACY: secure": {
+   "layer": "W",
+   "src": "world",
+   "variants": 4,
+   "undeclared": 0,
+   "declaring": 4,
+   "colour": false
+  },
+  "DS-FTH-3::LEGITIMACY: established": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-3::LEGITIMACY: tenuous": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::LEGITIMACY: contested": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::FALL: displaced": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::FALL: discredited": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::FALL: imposed": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::FALL: suppressed": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::PANTHEON RANK: Cult": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::PANTHEON RANK: Minor": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::PANTHEON RANK: Major": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-3::TEMPLE WEALTH: rich": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::TEMPLE WEALTH: modest": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::TEMPLE WEALTH: drawn down": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 1,
+   "colour": false
+  },
+  "DS-FTH-3::COVERT CONGREGATION: deities[ref].covert present": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::PILGRIM SEASON: heavy": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-3::PILGRIM SEASON: thin": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": false
+  },
+  "DS-FTH-3::PILGRIM SEASON: suppressed by road danger": {
+   "layer": "W",
+   "src": "world",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-4::CONTESTED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-4::ROOTED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 3,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-4::ENDOWED": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-4::THIN": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 0,
+   "colour": true
+  },
+  "DS-FTH-4::FLAG: crusaderSynthesis": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-FTH-4::FLAG: heresySuppression: hunted": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-FTH-4::FLAG: heresySuppression: preached": {
+   "layer": 2,
+   "src": "inferred",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-FTH-4::FLAG: religiousFraud": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  },
+  "DS-FTH-4::FLAG: mageTheocracy": {
+   "layer": 2,
+   "src": "measured",
+   "variants": 2,
+   "undeclared": 0,
+   "declaring": 2,
+   "colour": false
+  }
+ }
+}

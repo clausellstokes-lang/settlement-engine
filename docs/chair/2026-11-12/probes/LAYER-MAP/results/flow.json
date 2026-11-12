@@ -1,0 +1,72 @@
+{
+ "towns": 720,
+ "sentencesTotal": 51239,
+ "distinct": {
+  "F2pairs": 244,
+  "F3sentences": 913,
+  "F3bsentences": 367
+ },
+ "tally": {
+  "F1": {
+   "towns": 0,
+   "instances": 0
+  },
+  "F2": {
+   "towns": 196,
+   "instances": 247
+  },
+  "F3": {
+   "towns": 623,
+   "instances": 1926
+  },
+  "F3b": {
+   "towns": 442,
+   "instances": 1197
+  },
+  "F4": {
+   "towns": 257,
+   "instances": 365
+  }
+ },
+ "examples": {
+  "F1": [],
+  "F2": [
+   "r2r-thorp-0 power:desk: «the elder council at izamitza» | The question of who might replace the Elder Council at Izamitza does not come up, because there is nobody the thorp would name if it did. || The Elder Council at Izamitza stands on its own strength alone.",
+   "r2r-thorp-6 power:desk: «the headman's authority at novapagus» | The Headman's Authority at Novapagus has lost the thorp's support, and no rival had to take it. || The Headman's Authority at Novapagus worries less about rivals than about the thorp turning on it.",
+   "r2r-thorp-6 power:desk: «the headman's authority at novapagus» | The Headman's Authority at Novapagus worries less about rivals than about the thorp turning on it. || Call the Headman's Authority at Novapagus by any other title and you will be corrected, politely and at once.",
+   "r2r-thorp-7 power:desk: «the elder council at breitdorf» | The Elder Council at Breitdorf has lost the thorp's support, and no rival had to take it. || The Elder Council at Breitdorf has left obvious decisions untaken because its members cannot agree on them.",
+   "r2r-thorp-7 power:desk: «the elder council at breitdorf» | The Elder Council at Breitdorf has left obvious decisions untaken because its members cannot agree on them. || Call the Elder Council at Breitdorf by any other title and you will be corrected, politely and at once.",
+   "r2r-thorp-9 power:desk: «the household council at raasmahal» | The Household Council at Raasmahal has lost the thorp's support, and no rival had to take it. || The Household Council at Raasmahal has left obvious decisions untaken because its members cannot agree on them.",
+   "r2r-thorp-9 power:desk: «the household council at raasmahal» | The Household Council at Raasmahal has left obvious decisions untaken because its members cannot agree on them. || Call the Household Council at Raasmahal by any other title and you will be corrected, politely and at once.",
+   "r2r-thorp-15 power:desk: «the elder council at buyanshari» | The Elder Council at Buyanshari has left obvious decisions untaken because its members cannot agree on them. || Call the Elder Council at Buyanshari by any other title and you will be corrected, politely and at once."
+  ],
+  "F3": [
+   "r2r-thorp-0 economy:economics: «a bad year» in: People in Izamitza work at more than one trade, so a bad year for one is not a bad year for everyone.",
+   "r2r-thorp-0 economy:services: «a bad year» in: People in Izamitza work at more than one trade, so a bad year for one is not a bad year for everyone.",
+   "r2r-thorp-0 power:desk: «the elder council» in: Izamitza credits the Elder Council with the good years whether or not the Elder Council earned them; the prosperity is the whole of the argument in its favour.",
+   "r2r-thorp-1 economy:economics: «two or three» in: Ask what this thorp does well and you get two or three answers, all of them the same two or three answers.",
+   "r2r-thorp-1 economy:services: «two or three» in: Ask what this thorp does well and you get two or three answers, all of them the same two or three answers.",
+   "r2r-thorp-1 power:desk: «shore it up» in: Public rejection is breaking the Elder Council's grip at Terrapolis faster than Elder Council can shore it up, and every measure taken to shore it up costs a little more of what remains.",
+   "r2r-thorp-2 economy:economics: «a bad year» in: It is doing well enough now, but if that trade has a bad year, the whole thorp has a bad year.",
+   "r2r-thorp-2 economy:services: «a bad year» in: It is doing well enough now, but if that trade has a bad year, the whole thorp has a bad year."
+  ],
+  "F3b": [
+   "r2r-thorp-0 economy:economics: «a bad year for» in: People in Izamitza work at more than one trade, so a bad year for one is not a bad year for everyone.",
+   "r2r-thorp-0 economy:services: «a bad year for» in: People in Izamitza work at more than one trade, so a bad year for one is not a bad year for everyone.",
+   "r2r-thorp-1 economy:economics: «two or three answers» in: Ask what this thorp does well and you get two or three answers, all of them the same two or three answers.",
+   "r2r-thorp-1 economy:services: «two or three answers» in: Ask what this thorp does well and you get two or three answers, all of them the same two or three answers.",
+   "r2r-thorp-2 economy:economics: «has a bad year» in: It is doing well enough now, but if that trade has a bad year, the whole thorp has a bad year.",
+   "r2r-thorp-2 economy:services: «has a bad year» in: It is doing well enough now, but if that trade has a bad year, the whole thorp has a bad year.",
+   "r2r-thorp-4 economy:economics: «has a bad year» in: It is doing well enough now, but if that trade has a bad year, the whole thorp has a bad year.",
+   "r2r-thorp-4 economy:economics: «a bad year for» in: People in Hochthal work at more than one trade, so a bad year for one is not a bad year for everyone."
+  ],
+  "F4": [
+   "r2r-thorp-0 defense:threat: The thorp settles things itself, quickly, and does not alway || The thorp could not pay for a bad month at Izamitza, and the",
+   "r2r-thorp-6 economy:economics: The thorp is poor, and its people say so to anyone who asks. || The thorp gets by.",
+   "r2r-thorp-6 economy:services: The thorp is poor, and its people say so to anyone who asks. || The thorp gets by.",
+   "r2r-thorp-6 power:desk: The Headman's Authority at Novapagus has lost the thorp's su || The Headman's Authority at Novapagus worries less about riva",
+   "r2r-thorp-7 economy:economics: What Breitdorf lives on comes out of the rock rather than of || What Breitdorf is for is legible within a day, because the t",
+   "r2r-thorp-7 economy:services: What Breitdorf lives on comes out of the rock rather than of || What Breitdorf is for is legible within a day, because the t"
+  ]
+ }
+}
