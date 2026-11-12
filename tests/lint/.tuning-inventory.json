@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0bcee1abbf08ed18d31a4337264e1614e9678b22",
-  "measuredBy": "GREEN-TIP",
-  "date": "2026-11-10",
-  "note": "GREEN-TIP b46048140: foodLandOf and its four custom-content constants relocated byte-for-byte from foodGenerator.js to the leaf foodLand.js (the import-cycle cure, the chair STOP-2 ruling); net zero: foodGenerator bare 48->41 and four named out, foodLand bare 7 and four named in",
+  "measuredAtSha": "655b0ae3b4fd104f0e1f9af6d414b2256e6ab00a",
+  "measuredBy": "COHERENCE-UPKEEP",
+  "date": "2026-11-12",
+  "note": "lane/coherence-upkeep-2026-11-12: KEEP_TUNING and KEEP_SCALE_TUNING minted (draft) in src/domain/facts/keep.js; the five defence gates and the hired terms read them (bare decimals in defenseGenerator.js fall); the chair rulings of 2026-11-12 on item 4",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -355,7 +355,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 157,
+      "line": 158,
       "spanDigest": "ab4bbb15a6220283cf96e3ac4a1e58f4fe4f109b123d949bde65cc949f4c2149",
       "leaves": {
         "spawn.base": 0.1,
@@ -419,7 +419,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 190,
+      "line": 191,
       "spanDigest": "2a49e9c408346df030d11c747be66131ccfe77729e738127e5a7c88fc21db844",
       "leaves": {
         "span": 0.4,
@@ -464,7 +464,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 247,
+      "line": 248,
       "spanDigest": "a3c3e37b7b4a4536d47b43c602db8ea57c4399d9ff2f01beda024a59d5219374",
       "leaves": {
         "axisSign.lawful": 1,
@@ -511,7 +511,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 490,
+      "line": 491,
       "spanDigest": "46dfbf0bcd35ae64408fa01882b20e375d0fbaf356c2772c76dce112f190b3cf",
       "leaves": {
         "advance.base": 0.05,
@@ -561,7 +561,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 6,
-      "line": 519,
+      "line": 520,
       "spanDigest": "8b5da2da126aac3dbd4cc464fa1c170614cc9a73aef82131bf1d8c984c405f6f",
       "leaves": {
         "powerRate": 0.9,
@@ -608,7 +608,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 637,
+      "line": 638,
       "spanDigest": "1eda2a9a19616521403191b4fa770f2d1f9010a2f4e4b978917f9fc9a3aad5d6",
       "leaves": {
         "dragPerInstitution": 0.15,
@@ -1188,6 +1188,59 @@
       "dependents": [
         "src/domain/dossier/plotHooks.js",
         "src/domain/hookEscalation.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/facts/keep.js#KEEP_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 7,
+      "line": 39,
+      "spanDigest": "e15b0961f9dfe5e3b058821b5bf03d31db0cf80fa130334928437fcb24ace1f1",
+      "leaves": {
+        "Struggling.bought": 0.4,
+        "Struggling.funded": 0,
+        "Subsistence.bought": 0.55,
+        "Subsistence.funded": 0.3,
+        "Poor.bought": 0.55,
+        "Poor.funded": 0.4,
+        "Moderate.bought": 0.75,
+        "Moderate.funded": 0.7,
+        "Comfortable.bought": 0.9,
+        "Comfortable.funded": 1,
+        "Prosperous.bought": 1,
+        "Prosperous.funded": 1,
+        "Wealthy.bought": 1,
+        "Wealthy.funded": 1
+      },
+      "dependents": [
+        "src/domain/facts/factsOf.js",
+        "src/domain/magicProfile.js",
+        "src/generators/defenseGenerator.js",
+        "src/generators/economy/economicState.js",
+        "src/generators/services/serviceRollMaterialization.js",
+        "src/generators/steps/assembleSettlement.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/facts/keep.js#KEEP_SCALE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 3,
+      "line": 74,
+      "spanDigest": "b6308e4c49142fb193f25d310792d9a854b2a1712461b4252a148209ac0df8a6",
+      "leaves": {
+        "services": 0.7,
+        "stores": 0.7,
+        "magicBelow": 0.6
+      },
+      "dependents": [
+        "src/domain/facts/factsOf.js",
+        "src/domain/magicProfile.js",
+        "src/generators/defenseGenerator.js",
+        "src/generators/economy/economicState.js",
+        "src/generators/services/serviceRollMaterialization.js",
+        "src/generators/steps/assembleSettlement.js"
       ],
       "namedDependents": []
     },
@@ -4928,7 +4981,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 9,
-      "line": 94,
+      "line": 95,
       "spanDigest": "09e93aab2bbb8b3d83f42fd6bd9c9e05df6f7f4aca5d19765371dd777e54709e",
       "leaves": {
         "maxHousesPerSettlement": 2,
@@ -8959,7 +9012,7 @@
     "src/domain/worldPulse/worldPulseFeedCuration.js": 2,
     "src/generators/cascadeGenerator.js": 8,
     "src/generators/chainMagicSubstitution.js": 16,
-    "src/generators/defenseGenerator.js": 46,
+    "src/generators/defenseGenerator.js": 41,
     "src/generators/density/applyDensityLaw.js": 10,
     "src/generators/density/densityRoll.js": 7,
     "src/generators/density/successionGrammar.js": 3,
@@ -9005,11 +9058,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 277,
-    "keys": 2249,
+    "tables": 279,
+    "keys": 2259,
     "unregisteredNamed": 539,
-    "bareDecimals": 6931,
+    "bareDecimals": 6926,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 185
+    "zeroNamedDependentTables": 187
   }
 }
