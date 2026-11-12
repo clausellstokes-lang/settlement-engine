@@ -289,7 +289,13 @@ const PICK_VARIANT_CALLS = 31;
 // RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): 17 -> 18, MEASURED by A6 and traced: the stores' second
 // call (above, STORES_SEED) composes the foodways line again, one more fnv1a32 (domain/foodways.js ::
 // composeFoodwaysLine, `foodways|<identity>`). The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 18;
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 4 under (A), c19e96e23): 18 -> 42, MEASURED by A6 and traced: the
+// services keep each bought row by a draw-free roll after the seeded ones, one fnv1a32 of
+// `<seed>|upkeep|<institution>|<service>` per bought row evaluated while the place's share is below 1
+// (services/serviceRollMaterialization.js :: upkeepRoll). The probe row is Comfortable, so every bought row rolls:
+// 24 calls, counted on the probe row by a counter in a scratch tree (lodging 3, food 4, equipment 9, healing 3,
+// transport 3, commercial legal 2; every row kept). The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 42;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
