@@ -62,6 +62,9 @@ const CASES = [
   ['Militia and professional troop', 'militia', 'presume-village-27'],
   ['Ditches, banks, timber rampart', 'walls', 'presume-village-0'],
   ['ringworks, timber ramparts, an', 'walls', 'presume-village-5'],
+  // the denial side (the chair's ruling A): a line that denies a thing the town has
+  ['No law, bring coin', 'law', 'presume-town-4'],
+  ['no official recourse', 'law', 'presume-town-4'],
 ];
 
 /** @param {string} seed */
