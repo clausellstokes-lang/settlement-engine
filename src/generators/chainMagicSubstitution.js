@@ -59,7 +59,7 @@ export function applyMagicSubstitution(activeChains, traditions, magicPriority, 
         recovery = Math.max(recovery, divRate);
         note = note || (isFishing ? 'Temple fishing rites improve depleted catch'
                       : isBrewing ? 'Temple stores supplement grain shortage'
-                      : 'Temple granaries blessed; divine provision fills the gap');
+                      : 'Blessed stores; divine provision fills the gap');
       }
       if (traditions.arcane && magicPriority >= 50) {
         const arcRate = isFishing ? 0.20 : isHunting ? 0.25 : 0.30;

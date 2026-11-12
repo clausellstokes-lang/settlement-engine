@@ -314,8 +314,8 @@ export const SERVICE_CATEGORY_MAP = {
   'Discreet meeting venues': 'criminal',
   'Fence (word of mouth)': 'criminal',
   'Hired muscle': 'criminal',
-  'No law, bring coin': 'criminal',
   'Protection (informal)': 'criminal',
+  'Weak law, bring coin': 'criminal',
   // Registered explicitly rather than left to the keyword heuristic: the
   // heuristic reaches 'criminal' only via a `safe house` substring test that a
   // lodging-institution branch runs BEFORE, so the same service name folded

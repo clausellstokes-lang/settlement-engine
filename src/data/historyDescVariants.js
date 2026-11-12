@@ -129,7 +129,7 @@ export const HISTORY_DESC_VARIANTS = Object.freeze({
     "The settlement took in more people than it could house or employ, and the strain showed in every crowded street",
   ],
   "trade_dispute": [
-    "A quarrel over the terms of trade with a neighbouring settlement grew until it reached every merchant and every purse in the market",
+    "A quarrel over the terms of trade with a neighbouring settlement grew until it reached every merchant and every purse in town",
     "What began as a disagreement over trade with a partner town spread until no merchant or buyer in the market was untouched by it",
   ],
 });

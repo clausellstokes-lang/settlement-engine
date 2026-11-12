@@ -1207,7 +1207,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A critical resource became scarce, causing hoarding and price gouging',
     factions: ['Hoarders', 'Desperate poor', 'Price regulators'],
     lastingEffects: [
-      'Emergency granary reserves mandated by ordinance since the shortage',
+      'Emergency grain reserves mandated by ordinance since the shortage',
       'Price ceilings on the affected goods still enforced in lean seasons',
     ],
     plotHooks: [
@@ -1556,7 +1556,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'trade_dispute',
-    description: 'A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in the market',
+    description: 'A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in town',
     factions: ['Merchants tied to the old partner', 'Those who want new partners', 'Authorities caught between them'],
     plotHooks: [
       'The dispute is being kept alive by someone who profits from the uncertainty on both sides',
@@ -1630,6 +1630,13 @@ export const tensionDescription = (tension, config) => {
   if (!byDirection) return tension.description;
   return byDirection[migrationDirectionOfConfig(/** @type {any} */ (config)) === 'departures' ? 'departures' : 'arrivals'] || tension.description;
 };
+
+/**
+ * COHERENCE-PRESUME: a template's authored description variants (none → empty), for the current tension
+ * that must not repeat its own past event word for word (historyGenerator.js :: apartFromOwnEvent).
+ * @param {string} type @returns {ReadonlyArray<string>}
+ */
+export const historyDescVariantsOf = (type) => HISTORY_DESC_VARIANTS[type] || [];
 
 export const historyDescription = (eventTemplate, seed) => {
   const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];

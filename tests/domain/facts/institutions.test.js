@@ -20,6 +20,11 @@ describe('the institution-presence home (CENSUS-1 fact 11)', () => {
     expect(INSTITUTION_KINDS).toEqual(expect.arrayContaining(['mill', 'smith', 'bathhouse', 'docks', 'quarry', 'mine', 'tavern', 'school', 'healer', 'temple']));
   });
 
+  it('COHERENCE-PRESUME (2026-11-11): bank — a money changer, a bank or a counting house; an exchange of news or caravans is none', () => {
+    for (const n of ['Banking houses', 'Banking district', 'Money changers']) expect(hasInstitution(rec(n), 'bank')).toBe(true);
+    for (const n of ["Caravan masters' exchange", "Chroniclers' exchange", 'Riverbank landing']) expect(hasInstitution(rec(n), 'bank')).toBe(false);
+  });
+
   it('defenseFactsOf reads hospital and healer through the same table, its answers unmoved', () => {
     const d = defenseFactsOf(rec('Monastery or friary', 'Town watch'));
     expect([d.hasHospital, d.hasHealer, d.healerName]).toEqual([false, true, 'Monastery or friary']);
