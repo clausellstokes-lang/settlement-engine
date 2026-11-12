@@ -386,4 +386,36 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(Object.keys(r.gResp[0].gallery_member_overrides).sort()).toEqual(['$veil', 'npc_0']);
     expect(Object.keys(r.lResp.gallery_member_overrides).sort()).toEqual(['$veil', 'npc_0']);
   }, ROW_TIMEOUT_MS);
+  // ── F7 ────────────────────────────────────────────────────────────────────────────────────────
+  it('F7: the map member shows its frozen copy and its narration, each under its own listing\'s veil', async () => {
+    const { seed, ...cfg } = { seed: 'server-veil-village-3', settType: 'village' };
+    const raw = gen({ ...BROWSER, ...cfg }, null, { seed, customContent: {} });
+    const rec = { ...raw, publicProse: compose(raw) };
+    const live = structuredClone(rec);
+    live.institutions[0].desc = 'MAPSPOILER_AFTER_FREEZE';
+    const narrated = { ...structuredClone(rec), name: 'NARRATED_NAME' };
+    const cases = [
+      ['snapshot, edited after freezing', live, veil.writeShareVeil({}, [], { mode: 'snapshot', at: '2026-11-12T00:00:00.000Z', snapshot: veil.galleryPayloadFor(rec, {}) }), null],
+      ['narrated, live', rec, veil.writeShareVeil({}, [], { mode: 'live' }), narrated],
+    ];
+    for (const [tag, data, ov, narration] of cases) {
+      for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+        const share = await put(db, data, ov, { narrated: narration });
+        await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
+          values (gen_random_uuid(), $1, 'm', $2, true, $3, 'map_with_campaign', true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [share.id] } }), `map-${share.slug}`]);
+        H.db = db; H.uid = '';
+        const listing = await gallery.fetchPublicDossier(share.slug);
+        const map = await gallery.fetchGalleryMap(`map-${share.slug}`);
+        const member = map.members.find((x) => x.settlement)?.settlement;
+        if (where === '210') {
+          // the red control: 210's map drew the live row and ignored the narration
+          expect(member.name === listing.settlement.name && !has(member, 'MAPSPOILER_AFTER_FREEZE'), `${tag} 210`).toBe(false);
+          continue;
+        }
+        expect(member.name, tag).toBe(listing.settlement.name);
+        expect(has(member, 'MAPSPOILER_AFTER_FREEZE'), tag).toBe(false);
+        expect(JSON.stringify(Object.keys(member).sort()), tag).toBe(JSON.stringify(Object.keys(listing.settlement).sort()));
+      }
+    }
+  }, ROW_TIMEOUT_MS);
 });

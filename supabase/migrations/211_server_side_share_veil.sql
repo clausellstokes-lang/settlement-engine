@@ -1182,9 +1182,27 @@ begin
       'chronicle',   public._gallery_chronicle_json(s.campaign_state -> 'eventLog')
     )) into v_members
     from public.settlements s
-    -- 211: the member's own listing veil over its sanitized dossier
-    cross join lateral (select public._gallery_sanitize_public_json(s.data) as j offset 0) pub
-    where s.id::text in (
+    -- 211: the member's own listing source (the review's F7): its narration when narrated, its frozen
+    -- copy in snapshot mode (a copy past the bound is refused: the member is left out, never served
+    -- live), then the sanitizer and its own listing's veil
+    cross join lateral (
+      select case
+        when s.gallery_share_narrated
+          and s.ai_data is not null
+          and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
+        then s.ai_data -> 'aiSettlement'
+        else s.data
+      end as j
+    ) base
+    cross join lateral (
+      select case when cp.copy is not null then cp.copy else base.j end as j,
+             coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
+        from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
+                from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
+    ) src
+    cross join lateral (select public._gallery_sanitize_public_json(src.j) as j offset 0) pub
+    where not src.refused
+      and s.id::text in (
       select jsonb_array_elements_text(coalesce(v_camp->'settlementIds', '[]'::jsonb))
     )
       -- CRITICAL (IDOR guard, 046): the owner may only ever expose their OWN
