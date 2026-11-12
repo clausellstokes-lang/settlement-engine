@@ -11,6 +11,9 @@ import { seatHouseFaceOf } from '../../../src/domain/dossier/seatHolder.js';
 import { deriveLevers } from '../../../src/domain/crisis/crisisCast.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { institutionsWithServices } from '../../../src/components/new/tabs/InstitutionsTab.jsx';
+import { shownHonorificOf } from '../../../src/domain/people/seatKeeperDisplay.js';
+import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 
 const miller = Object.freeze({
   id: 'npc_mills_2_5', name: 'Egilbert Neumann', title: 'the miller', role: 'Mayor',
@@ -66,4 +69,28 @@ describe('COHERENCE-POWERS — the dual hat, as the page reads it', () => {
     expect(holderOf(born)).toBe('npc_mills_2_5');
     expect(holderOf(saved)).toBe('npc_mayor_and_council');
   });
+
+  // COHERENCE-POWERS-3 (F10, REVIEW-POWERS F10): the card composes the two hats as the seat row does: a house honorific
+  // that is itself an office's title never prints beside the office held (39 leaders on the review's corpus read
+  // "Headman · Elder"). Literal expectations; births through birthConfig.
+  it('the leader\'s honorific row never prints a second office beside the office held', async () => {
+    const boatHeadman = { id: 'npc_boat', name: 'Iovita Cicero', title: 'the boat-headman', role: 'Elder',
+      institution: { kind: 'house', key: "Fisher's landing", family: "Fisher's landing", title: 'the boat-headman', veiled: false },
+      memberships: [{ power: 'Elder Council', rank: 1, share: 0, veiled: false }] };
+    const town = { tier: 'thorp', powerStructure: { factions: [{ faction: 'Elder Council', isGoverning: true, power: 100 }] }, institutions: [], npcs: [boatHeadman] };
+    expect(shownHonorificOf(boatHeadman, town)).toBe('Boat-Master'); // no office's title: the house's honorific stands
+    expect(cardHatsOf(boatHeadman)).toBe('the boat-headman and Elder');
+    await loadGenerationLawPayloads();
+    const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+      selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    const OFFICES = ['Headman', 'Elder', 'Household Elder', 'Reeve', 'Mayor', 'Lord Mayor', 'Alderman', 'Burgomaster'];
+    const misses = [];
+    for (const seed of ['rvw-thorp-24', 'rvw-thorp-64', 'rvw-thorp-68', 'rvw-thorp-3', 'rvw-thorp-2']) {
+      const s = generateSettlementPipeline(birthConfig({ ...DIALS, settType: 'thorp' }), null, { seed, customContent: {} });
+      const leader = (s.npcs || []).find((c) => (c.memberships || []).some((m) => m.rank === 1 && m.power === governingNameOf(s)));
+      if (leader && cardOfficeOf(leader) && OFFICES.includes(shownHonorificOf(leader, s))) misses.push(`${seed}: ${shownHonorificOf(leader, s)} beside ${cardOfficeOf(leader)}`);
+      if (seed === 'rvw-thorp-64') expect(`${shownHonorificOf(leader, s)} · ${cardPowerLine(leader, [], governingNameOf(s))}`).toBe('Boat-headman · Elder, first of Elder Council');
+    }
+    expect(misses).toEqual([]);
+  }, 60_000);
 });

@@ -54,6 +54,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { disambiguateNPCDisplayNames } from '../npcDisplayNames.js';
 import { hookPoolFor, poolFor, seatPoolFor } from './poolMap.js';
 import { seatMintTitleFor } from './mintTitles.js';
+import { CIVIC_OFFICE_BY_SIZE, OFFICE_TITLES } from '../../data/officeTitles.js';
 import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 
@@ -247,30 +248,9 @@ export function seatFacesFoldedByDualHat(settlement) {
   return facesSeat ? 0 : 1;
 }
 
-/**
- * THE LEADER'S OFFICE TITLE (COHERENCE-POWERS; the table the chair ruled on 2026-11-11, vetoable by the
- * owner): the title a dual-hat leader carries beside its house's, written to the card's `role` (its
- * `title` stays its house's). Titles fit the government and the size; none is mandated. A government the
- * table does not name takes the size's civic title.
- */
-export const OFFICE_TITLES = Object.freeze({
-  'Elder Council': 'Elder', 'Free Elder Council': 'Elder', 'Elder Consensus': 'Elder', 'Household Council': 'Household Elder',
-  "Headman's Authority": 'Headman', 'Elected Reeve': 'Reeve', 'Priestly Guidance': 'Elder Priest',
-  'Town Mayor': 'Mayor', 'Town Council': 'Mayor', 'City Council': 'Lord Mayor', 'Grand Council': 'Lord Mayor',
-  'Democratic assembly': 'Speaker of the Assembly', 'City-State Council': 'First Councillor',
-  'Church Council': 'Warden of the Council', 'Ecclesiastical Council': 'Lord Warden', 'Theocratic Council': 'Lord Warden',
-  'High Theocratic Council': 'Lord Protector of the Faith',
-  'Militia Command': 'Captain of the Muster', 'Military Council': 'Captain-Mayor', 'Military City Council': 'Lord Marshal',
-  'Grand Military Council': 'Lord Marshal', 'Garrison Command': 'Lord Marshal',
-  'Merchant Council': 'Burgomaster', 'Merchant City Council': 'Lord Burgomaster', 'Grand Merchant Senate': 'Doge',
-  'Merchant oligarchy': 'First Magnate', 'Grand Merchant Oligarchy': 'First Magnate',
-  'Guild Council': 'Alderman', 'Guild Authority': 'Lord Alderman', 'Grand Guild Council': 'Lord Alderman',
-  'Merchant Guild Council': 'Master of the Guilds', 'Grand Guild Consortium': 'Master of the Guilds',
-  "Guildmasters' Moot": 'Alderman', 'Guildhall Council': 'Alderman', 'Grand Guild Assembly': 'Lord Alderman',
-  'Circle of Adepts': 'First Adept', 'Arcane Council': 'Archmage of the Council', 'Arcane Senate': 'Archmage of the Senate',
-  'Grand Arcane Council': 'Archmage of the Council',
-});
-const CIVIC_OFFICE_BY_SIZE = Object.freeze({ thorp: 'Elder', hamlet: 'Elder', village: 'Elder', town: 'Mayor', city: 'Lord Mayor', metropolis: 'Lord Mayor' });
+// COHERENCE-POWERS-3 (F10): the office-title table moved verbatim to data/officeTitles.js (one source; the card's
+// honorific row reads it too), re-exported here for its importers
+export { OFFICE_TITLES } from '../../data/officeTitles.js';
 
 /** @param {string} government @param {string} tier @returns {string} */
 export function officeTitleFor(government, tier) {

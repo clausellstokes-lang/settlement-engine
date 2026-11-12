@@ -7,19 +7,31 @@ import { caretakerFormOf, cardOfficeOf } from './cardPowers.js';
 import { cardHonorificOf, faceNameOf } from './cardDoor.js';
 import { keeperHonorificOf, seatKeeperOf } from './seatKeeper.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
+import { OFFICE_WORDS } from '../../data/officeTitles.js';
 
 /** @param {unknown} settlement @returns {string | null} */
 const governmentOf = (settlement) => nameOf(/** @type {any} */ (governingFactionOf(/** @type {any} */ (settlement)))) || null;
 
 /**
  * The card's honorific row as the page prints it: the keeper of an empty seat whose office is its own face's prints
- * the caretaker's form (seatKeeper.js :: keeperHonorificOf, the same words as the seat row); every other card its
- * house's honorific (cardDoor.js).
+ * the caretaker's form (seatKeeper.js :: keeperHonorificOf, the same words as the seat row); the dual-hat leader whose
+ * house's honorific is an office's title, its house's own words (F10); every other card its house's honorific
+ * (cardDoor.js).
  * @param {unknown} card @param {unknown} settlement @param {unknown} [place] the place whose coast and culture pick the pool
  * @returns {string}
  */
 export function shownHonorificOf(card, settlement, place = settlement) {
-  return keeperHonorificOf(card, settlement) || cardHonorificOf(card, place);
+  const keeper = keeperHonorificOf(card, settlement);
+  if (keeper) return keeper;
+  const honorific = cardHonorificOf(card, place);
+  // COHERENCE-POWERS-3 (F10): the dual-hat leader's card composes the two hats as the seat row does ("the boat-headman
+  // and Elder"): where its house's honorific is itself an office's title ("Headman"), the row prints the house's own
+  // words ("Boat-headman"), never a second office beside the one held
+  if (honorific && cardOfficeOf(card) && OFFICE_WORDS.includes(honorific)) {
+    const title = String(/** @type {any} */ (card)?.title || '').replace(/^(the|a|an)\s+/i, '').trim();
+    if (title) return title.charAt(0).toUpperCase() + title.slice(1);
+  }
+  return honorific;
 }
 
 /**
