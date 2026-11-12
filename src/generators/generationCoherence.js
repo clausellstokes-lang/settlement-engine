@@ -23,6 +23,7 @@ import {
   resourceShortageImport,
 } from '../domain/resourceSemantics.js';
 import { factsOf } from '../domain/facts/factsOf.js';
+import { offersFoodSurplus } from '../domain/foodSurplus.js';
 import {
   MATERIAL_RESOURCE_KEYS,
   STRATEGIC_CLAUSES,
@@ -347,6 +348,7 @@ const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floo
  *              court sits where the defence home has none, or that none sits where it has one
  *   market     the economic situation naming a market the market home says the town does not have
  *   sources    available fields, floodplain or grazing that the food record does not count as a source
+ *   surplus    an income line selling a surplus the food record does not hold (offersFoodSurplus)
  *   food       bare grain a primary import, unqualified, where the town grows 90% or more of its need; a
  *              shortage import ("local fields depleted") beside the resource it says is spent
  * @param {any} settlement
@@ -424,6 +426,13 @@ export function projectionAgreementFindings(settlement) {
   for (const [index, label] of imports.entries()) {
     if (/^(?:bulk )?grain(?: and foodstuffs)?$/i.test(label) && grownPct >= 90) {
       food.push(finding(`economicState.primaryImports[${index}]`, 'Grain stands as a primary import, unqualified, where the town grows most of its need.', `${label}; grown ${grownPct}%`));
+    }
+  }
+  // F7 (COHERENCE-AGREE-3): an income line that sells a surplus reads the food record's one surplus rule.
+  const foodRecord = settlement?.economicState?.foodSecurity?.foodRecord;
+  for (const [index, entry] of (settlement?.economicState?.incomeSources || []).entries()) {
+    if (/^Surplus from local harvest\b/.test(String(entry?.desc || '')) && foodRecord && !offersFoodSurplus(foodRecord)) {
+      food.push(finding(`economicState.incomeSources[${index}].desc`, 'An income line sells a surplus the food record does not hold.', `grown ${grownPct}%; band ${foodRecord.band}`));
     }
   }
   const sources = settlement?.economicState?.foodSecurity?.foodRecord?.foodSources;

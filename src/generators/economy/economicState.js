@@ -24,6 +24,7 @@ import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
 import { liveMaterialFor } from './localMaterials.js';
+import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -410,8 +411,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Grain Sales',
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
-        desc: hasNearbyResource('grain_field', 'fertile_flood')
-          ? 'Surplus from local harvest sold to nearby settlements and passing merchants: steady income tied to the growing season.'
+        desc: hasNearbyResource('grain_field', 'fertile_flood') // the surplus words read the food record below (F7)
+          ? GRAIN_SURPLUS_LINE
           : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
       });
     }
@@ -689,6 +690,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // fork (food.cropFortune), so writing it earlier moves no other stream.
   const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
   const _foodRecord = _foodSec?.foodRecord ?? null;
+  // COHERENCE-AGREE-3 (F7): "surplus" only where the food record holds one; otherwise the declared twin.
+  for (const entry of incomeNormalized) if (entry.desc === GRAIN_SURPLUS_LINE && !offersFoodSurplus(_foodRecord)) entry.desc = GRAIN_OWN_FIELDS_LINE;
   const activeChainsList = computeActiveChains(
     institutions || [],
     nativeNearbyResources,

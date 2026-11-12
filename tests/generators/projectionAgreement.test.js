@@ -108,6 +108,11 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(grown(95, ['Grain (a little, beside its own harvest)']))).toEqual([]);
     const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: ['Bulk grain (local fields depleted)'] } });
     expect(details(spent)).toContain('A shortage import stands beside the resource it says is spent.');
+    // F7 (REVIEW-AGREE): an income line selling a surplus the food record does not hold
+    const sells = (foodRecord) => record({ economicState: { primaryImports: [], foodSecurity: { foodRecord },
+      incomeSources: [{ source: 'Grain Sales', desc: 'Surplus from local harvest (planted) sold on.' }] } });
+    expect(details(sells({ grownPct: 29, band: 'famine', growsMoreThanEats: false }))).toContain('An income line sells a surplus the food record does not hold.');
+    expect(details(sells({ grownPct: 120, band: 'surplus', growsMoreThanEats: true }))).toEqual([]);
   });
   test('an income line naming a local resource the town lacks; a must-import note beside a live material', () => {
     const income = (available) => record({ resourceAnalysis: { availableResources: available },
@@ -157,6 +162,8 @@ describe('the corpus seeds that disagreed at the base agree', () => {
 const REVIEW_SEEDS = [
   // F3: "Local ore feeds the smithy" beside gold or silver alone, and an iron import
   { seed: 'rvw12-town-13', tier: 'town' }, { seed: 'rvw12-town-37', tier: 'town' }, { seed: 'rvw-ten-6', tier: 'city' },
+  // F7: "Grain Sales: Surplus from local harvest" in famine and deficit towns
+  { seed: 'rvw12b-town-275', tier: 'town' }, { seed: 'rvw12b-town-103', tier: 'town' }, { seed: 'rvw12b-town-427', tier: 'town' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
