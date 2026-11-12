@@ -386,6 +386,8 @@ Appendix F `dist1.sh` (one tree: a detached worktree, `node_modules` symlinked, 
 - **Listed for the second wave:** the lighting census's title reader counts a template-literal title with two interpolations as three (POOL-GUARD's walker, +13 for eleven titles). Not fixed.
 - Stage s45 at 358e072ab, its measure `/home/user/stages/m45` (= the next point's previous).
 
+**Between points 45 and 46: the hook's lane rule, 7d429f6cb, committed by the chair on the owner's direct word of 2026-11-12** (`.husky/pre-push` only, sha256 70b7c022…d76b: a push whose every ref is `refs/heads/lane/*` runs the type ratchet, the strict-domain gate and the linter; every other push the whole check). **The push from here is PLAIN, one Bash call, after the fetch and the ancestor check: `git -C /home/user/wt-merge9 push origin HEAD:lane/integration-2026-11-07`** (the hook in the worktree's checkout runs the three gates, ~4 min). No `--no-verify`. Never push with nothing to send (a push with no ref runs the whole check). A red gate at a merge point is a STOP. This seat could not commit the hook change itself (its permission layer refused a narrowed push gate on a relayed approval; the chair ruled that refusal right).
+
 ## 3. The running tables
 
 **STOP rulings, as applied:**
