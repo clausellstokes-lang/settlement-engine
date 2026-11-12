@@ -56,13 +56,13 @@ describe('the rule book', () => {
   });
 
   test('planted: a finding\'s detail in generationCoherence.js is out of reach; the same words anywhere else are read', () => {
-    const line = 'The economic situation names a market the town does not have.';
+    const line = 'A planted detail that names a market for this test.';
     const src = [
       `push(finding('economicState.situationDesc', '${line}'));`,
       `push(finding('${line}', 'x'));`,
-      `push(other('economicState.situationDesc', '${line.replace('town', 'place')}'));`,
+      `push(other('economicState.situationDesc', '${line.replace('this test', 'that test')}'));`,
     ].join('\n');
-    expect(scanSource('src/generators/generationCoherence.js', src).map((h) => h.text)).toEqual([line, line.replace('town', 'place')]);
+    expect(scanSource('src/generators/generationCoherence.js', src).map((h) => h.text)).toEqual([line, line.replace('this test', 'that test')]);
     expect(scanSource('src/generators/elsewhere.js', `push(finding('p', '${line}'));`).map((h) => h.text)).toEqual([line]);
     expect(ARM1_NOT_PRINTED.map((s) => `${s.file} :: ${s.callee} :: ${s.argument}`)).toEqual(['src/generators/generationCoherence.js :: finding :: 1']);
   });
