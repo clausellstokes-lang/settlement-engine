@@ -1213,7 +1213,9 @@
     {
       "id": "gov_econ_dependence.desc#6",
       "text": "{B} lends and {A} spends. The council's decisions are made in {A}'s chamber and approved in {B}'s counting-house.",
-      "needs": [],
+      "needs": [
+        "institution: bank"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"

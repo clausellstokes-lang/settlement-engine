@@ -22,7 +22,6 @@
   {"thing": "bank", "path": ".institutions[].desc", "text": "banking and minting", "reason": "figure", "note": "what the trade serves at large", "towns": 6},
   {"thing": "bank", "path": ".institutions[].desc", "text": "Banking and minting depend on it", "reason": "figure", "note": "what the trade serves at large", "towns": 1},
   {"thing": "bank", "path": ".relationships[].description", "text": "never passes through a counting-house", "reason": "negation", "note": "the coin never passes through one", "towns": 20},
-  {"thing": "bank", "path": ".relationships[].description", "text": "s counting-house", "reason": "figure", "note": "a merchant's own office, which the person is", "towns": 8},
   {"thing": "docks", "path": ".culturalIdentity.builtForm", "text": "where geography permits", "reason": "hedge", "note": "the hedge is the sentence's own", "towns": 10},
   {"thing": "docks", "path": ".culturalNotes", "text": "where geography permits", "reason": "hedge", "note": "the hedge is the sentence's own", "towns": 10},
   {"thing": "docks", "path": ".economicState.tradeDependencies[].detail", "text": "harbour", "reason": "hedge", "note": "\"crossroads or harbour\", \"Trade access + harbour\": the alternative stated", "towns": 6},
