@@ -185,16 +185,59 @@ The post-ruling commits (STOP 1, STOP 2 b, B (i)) are re-diffed at the final tip
 
 **The field diff:** parent 303396f74 against 6b932d3e8, over L2 and the golden.
 - **Holders only.** It moves exactly the 538 L2 births that held the position on a road: 0 non-holders, and 0 still hold it off a crossroads afterwards.
-- **Golden:** 2 rows move,  and , both road holders.
-- **Labels:** declared by family and direction in the draft record.
+- **Golden:** 2 rows move, `town|germanic|auto|random_trade|civilized|gm-seed-a` and `town|germanic|plains|road|civilized|gm-seed-a`, both road holders.
+- **Labels (L2), a false advantage leaving:**
+  - defence: down a step 23 (Defensible→Lightly 11, Well-Defended→Defensible 9, Lightly→Vulnerable 3); up 18 (Defensible→Well-Defended 8, Lightly→Defensible 8, Vulnerable→Lightly 1, Well-Defended→Fortress 1);
+  - prosperity: down 15 (Comfortable→Moderate 4, Poor→Struggling 4, Wealthy→Prosperous 2, Prosperous→Comfortable 2, Prosperous→Moderate 1, Moderate→Poor 1, Comfortable→Poor 1); up 5;
+  - food band: pressured→secure 1;
+  - storage note: seasonal→months 1.
 
-**, before → after:**
+**`rvw12-village-19`, before → after:**
 - The strength "Central trade hub" goes, and the export "Transit trade" goes with it.
 - The exports "Toll revenue" and "Pass transit trade" STAY: they are the village's defended pass's own goods, and true of it.
 - It had no Toll Revenue income line, before or after.
 
-**Toward danger, town by town (L2):**
-
+**Toward danger, town by town (L2, 38 rows):**
+```
+agree-village-58: prosperity Comfortable -> Moderate
+agree-town-10: defence Well-Defended -> Defensible
+agree-town-18: prosperity Wealthy -> Prosperous
+agree-town-27: defence Defensible -> Lightly Defended
+agree-town-33: defence Well-Defended -> Defensible
+agree-town-45: defence Well-Defended -> Defensible
+agree-town-62: prosperity Prosperous -> Comfortable
+agree-town-66: defence Lightly Defended -> Vulnerable
+l2-wartime-town-2: prosperity Poor -> Struggling
+rvw12-town-12: defence Defensible -> Lightly Defended
+rvw12-town-146: prosperity Comfortable -> Moderate
+rvw12b-village-26: prosperity Prosperous -> Moderate
+rvw12b-town-6: prosperity Moderate -> Poor
+rvw12b-town-14: prosperity Poor -> Struggling
+rvw12b-town-15: defence Defensible -> Lightly Defended
+rvw12b-town-65: prosperity Comfortable -> Moderate
+rvw12b-town-68: prosperity Comfortable -> Moderate
+rvw12b-town-125: defence Defensible -> Lightly Defended
+rvw12b-town-132: defence Well-Defended -> Defensible
+rvw12b-town-136: prosperity Poor -> Struggling
+rvw12b-town-166: defence Well-Defended -> Defensible
+rvw12b-town-170: defence Well-Defended -> Defensible
+rvw12b-town-269: prosperity Prosperous -> Comfortable
+rvw12b-town-313: prosperity Wealthy -> Prosperous
+rvw12b-town-318: defence Defensible -> Lightly Defended
+rvw12b-town-352: defence Lightly Defended -> Vulnerable
+rvw12b-town-394: defence Well-Defended -> Defensible
+rvw12b-town-394: prosperity Comfortable -> Poor
+rvw12b-town-408: defence Defensible -> Lightly Defended
+rvw12b-town-408: prosperity Poor -> Struggling
+rvw12b-town-551: defence Defensible -> Lightly Defended
+rvw12b-town-639: defence Defensible -> Lightly Defended
+rvw12b-city-108: defence Defensible -> Lightly Defended
+rvw12b-city-236: defence Well-Defended -> Defensible
+rvw12b-city-370: defence Well-Defended -> Defensible
+rvwfam-town-92: defence Lightly Defended -> Vulnerable
+rvwfam-city-31: defence Defensible -> Lightly Defended
+rvwfam-city-62: defence Defensible -> Lightly Defended
+```
 
 **The hand-picked choice:**
 - **Before:** on a road the wizard offered the position as compatible, and the validator was silent.
@@ -204,4 +247,4 @@ The post-ruling commits (STOP 1, STOP 2 b, B (i)) are re-diffed at the final tip
 **The iron label (303396f74).** "Iron ore (local iron mines exhausted)":
 - The goods catalogue keeps the old spelling as an alias beside the new one, because saved records carry it and subsumption re-runs over their lists.
 - Black Crag's quoted dossier label is re-keyed by identity; the card's promise is unchanged.
-- The two fixtures that quote the old label are untouched and green ( is read stored;  is an input corpus).
+- The two fixtures that quote the old label are untouched and green (`readerValidationOnPage.births.json` is read stored; `goods-matcher-identity-corpus.json` is an input corpus).
