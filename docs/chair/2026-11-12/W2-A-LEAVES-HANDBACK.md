@@ -1,7 +1,7 @@
 # W2-A-LEAVES — the hand-back
 
 **Lane:** `lane/w2-a-leaves-2026-11-12`, cut from `lane/coherence-agree-2026-11-11` at `deb1544eb`; built in a scratch
-worktree; the main checkout untouched. **Code tip:** `af468a5a8` (later commits: this file and the draft record, docs only).
+worktree; the main checkout untouched. **Code tip:** `af468a5a8` (later commits: this file and the draft record, docs only; the whole suite was run at `af468a5a8`).
 **Draft shift record:** `W2-A-LEAVES-SHIFT-RECORD-DRAFT.md` beside this file.
 
 ## Measure first (charter §0 item 2)
@@ -96,7 +96,20 @@ Every commit touching `src/`: check-domain-strict exit 0; typecheck:ratchet exit
 touched files exit 0. Four pushes, each through the lane hook's three gates, exit 0.
 
 ## The whole suite at the tip
-(filled when the run ends)
+`npx vitest run --maxWorkers=2` at `af468a5a8` (the ledger branch fetched first): **exit 1; 38 files, 50 tests red**
+(38,720 pass, 252 skipped). Every red file run again at the base `deb1544eb`: 38 files, 49 tests red there, and the
+titles compared one by one:
+- **49 red at the base, the same 54 failure titles (two are whole-file errors)** (not this lane's): the generator golden master and every byte-identity pin that
+  reads it (pipelinePinnedMode ×3, pipelinePinnedChoosers, nameHeldThroughAssembly, rosterFinalUnderHeldRoster,
+  powerEconomyFreshness, institutionBudgetPromise, x46NpcBand, hookThemeDraws, generationForkCensus, dmLayerGoldenIsolation,
+  worldFactRederive, editWorldFactResources ×2, mergeLadderHeldKeys ×3, editCorpusRatchet ×3), the espionage fence, the
+  PDF golden, the Herald desk, the manifest's two drift titles, the built-bundle and fixture hashes (engineBundleReplay ×3,
+  edgeSharedBundleReproducibility ×2, aiGroundingBundle.freshness, landingFixtureFreshness ×2: stale at the base; this lane's
+  `src/` changes are one more reason to rebuild them at the merge), townCartographyCalibration, undercitySewerDerivation,
+  intentAtlasSoakDistiller, statecraftExposureBand, and the thirteen tests/lint files named below (16 titles).
+- **1 red at the tip only, this lane's and expected:** dossierProseManifest › "THE MIXED-POOL AUDIENCE ARM" (pin 203,
+  reads 167), cause 5a; the merge seat re-pins it through the manifest's door (the draft record).
+- Red at the base and green at the tip: none.
 
 ## Calls taken without the chair
 1. The pool table's scale is the procedure's (map + 1).
@@ -128,7 +141,7 @@ touched files exit 0. Four pushes, each through the lane hook's three gates, exi
 ## Found, not mine
 - My own guard misses, each cured in the lane: commits 2 and 3 reddened four walkers outside my files (defence readers,
   ruin filter, tuning register, prose anchors); the push hook runs no suite, so they were found by my own lint-dir runs.
-- At the base, 10 tests/lint titles are red (institutionTable, newsHeadline, newsVoice, observedShapeReaders,
+- At the base, 16 tests/lint titles in 13 files are red (institutionTable, newsHeadline, newsVoice, observedShapeReaders,
   proseComposed, proseFamilyContract, proseTasteInterested ×3, proseWaveGate ×3, siteCoherenceRatchet,
   sovereigntyLighting, writerReach): not this lane's.
 
