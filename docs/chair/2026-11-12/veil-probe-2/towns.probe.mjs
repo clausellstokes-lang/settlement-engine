@@ -185,6 +185,8 @@ it('the six sizes: nothing carried, no page changed, the old client never shows 
       // view count (every read moves it), the generated author name, and the insert times
       const norm = (s) => s.replace(/"(view_count|author_name|published_at|updated_at)":("[^"]*"|\d+|null),?/g, '');
       fault('splice', tag, r1.map((x, i) => (norm(x) === norm(r2[i]) ? null : ['gallery', 'link', 'import', 'map'][i])).filter(Boolean));
+      // COHERENCE-VEIL-4 (the third review's V3-1): the editor's working state in any 211 response
+      fault('editorState', tag, r1.map((x, i) => (/"(decrees|dmLayer)":/.test(x) ? ['gallery', 'link', 'import', 'map'][i] : null)).filter(Boolean));
       tally.reads += 8;
       // the 211 page against the 210 page of the SAME row
       const same = [];
@@ -207,6 +209,11 @@ it('the six sizes: nothing carried, no page changed, the old client never shows 
       const old = await read(at211.db, oldGallery);
       tally.rows += 1; tally.reads += 6;
       if (!now.g || !now.l || !old.g || !old.l) { fault('noPage', tag, ['a read returned no page']); continue; }
+      // COHERENCE-VEIL-4 (the third review's V3-2): a person card the client drops (no name, no role)
+      // drawn on the 211 page; `nameless210` is the same count on the 210 page (the control)
+      const nameless = (p) => (Array.isArray(p?.npcs) ? p.npcs : []).filter((x) => !(isRec(x) && (x.name || x.role))).map((x) => JSON.stringify(x).slice(0, 60));
+      fault('nameless', tag, [...nameless(now.g.settlement), ...nameless(now.l.settlement).map((x) => `link ${x}`)]);
+      fault('nameless210', tag, [...nameless(before.g.settlement), ...nameless(before.l.settlement).map((x) => `link ${x}`)]);
       const g = carried(now.gRow.data, now.g.settlement); const l = carried(now.lResp.dossier, now.l.settlement);
       fault('carried', tag, [...g.paths, ...g.readable, ...l.paths.map((x) => `link ${x}`), ...l.readable.map((x) => `link ${x}`)]);
       fault('overrides', tag, [...overridesOffences(now.gRow.gallery_member_overrides), ...overridesOffences(now.lResp.gallery_member_overrides)]);

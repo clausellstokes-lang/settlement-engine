@@ -66,6 +66,6 @@ it('the id differential: server card ids against the client\'s idOf', async () =
     out.kinds[kind] = k; out.compared += k.compared; out.unequal += k.unequal;
   }
   mkdirSync(OUT, { recursive: true });
-  writeFileSync(resolve(OUT, 'iddiff-cv3.json'), JSON.stringify(out, null, 1));
+  writeFileSync(resolve(OUT, process.env.OUT_FILE || 'iddiff-cv3.json'), JSON.stringify(out, null, 1));
   await db.end();
 });
