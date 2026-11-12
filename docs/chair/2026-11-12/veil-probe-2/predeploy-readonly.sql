@@ -169,4 +169,28 @@ select source,
        count(*) filter (where jsonb_path_exists(j, 'lax $.** ? (@.type() == "number" && (@ > 1.7976931348623157e308 || @ < -1.7976931348623157e308))')) as past_double
   from src group by source order by source;
 
+-- (9) THE EDITOR'S WORKING STATE ON A REVEAL-DM SHARE (the third review's V3-1, COHERENCE-VEIL-4).
+--     The editor's staged `decrees` and its `dmLayer` are never shared by the client, Reveal DM or not,
+--     but the server's full reveal kept them: every public Reveal-DM share whose served source holds
+--     either key sends it today, in the gallery response to any visitor and in the import response.
+--     211 (as cured) strips both on the gallery read and the import, so from 211 no read sends them.
+--     reveal_dm_listings_sending_editor_state — the third review's own count, verbatim: the shares that
+--       211-as-reviewed would STILL have sent (unmarked, or "Pending decrees" opened).
+--     reveal_dm_shares_sending_editor_state_today — every public Reveal-DM share sending either key now
+--       (a key present counts, even an empty list; a superset: any source is counted, served or not).
+--     WORRIES: above zero, those towns' staged decrees and DM layer have been readable by every visitor
+--       until 211 lands; nothing to hold for (211 ends it), but the owner may tell the sharers.
+select count(*) as reveal_dm_listings_sending_editor_state
+  from public.settlements
+ where is_public and gallery_share_dm
+   and (jsonb_typeof(gallery_member_overrides -> '$veil') is distinct from 'object'
+        or (gallery_member_overrides #> '{$veil,deltas}') @> '[{"address":"block:housekeeping.decrees","hidden":false}]')
+   and (data ?| array['decrees','dmLayer'] or coalesce(ai_data -> 'aiSettlement', '{}') ?| array['decrees','dmLayer']
+        or coalesce(gallery_member_overrides #> '{$veil,snapshot}', '{}') ?| array['decrees','dmLayer']);
+select count(*) as reveal_dm_shares_sending_editor_state_today
+  from public.settlements
+ where is_public and gallery_share_dm
+   and (data ?| array['decrees','dmLayer'] or coalesce(ai_data -> 'aiSettlement', '{}') ?| array['decrees','dmLayer']
+        or coalesce(gallery_member_overrides #> '{$veil,snapshot}', '{}') ?| array['decrees','dmLayer']);
+
 rollback;

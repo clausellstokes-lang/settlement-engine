@@ -656,6 +656,88 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
       }
     }
   }, ROW_TIMEOUT_MS);
+  // ── V3-1 (the THIRD review, REVIEW-VEIL-211-f07db8760) ─────────────────────────────────────────
+  // The editor's working state (`decrees`, `dmLayer`) is never shared, even with Reveal DM on: the
+  // client strips both in full mode (publicSafe.js :: toPublicSafe, "THE OPT-IN DOES NOT COVER THEM").
+  // The server's full reveal kept them, so they reached an anonymous reader of an unmarked Reveal-DM
+  // listing, an importer, and every reader once "Pending decrees" was opened. Red at f07db8760.
+  const V31_DOC = {
+    name: 'T',
+    npcs: [{ id: 'a', name: 'Ada', role: 'smith', goal: 'V31_GOAL' }],
+    decrees: [{ id: 'd1', text: 'V31_DECREE: the mayor dies next session' }],
+    dmLayer: { npcs: { a: { goal: 'V31_DMLAYER' } } },
+  };
+  const OPENED = [{ address: 'block:housekeeping.decrees', hidden: false }];
+  /** The gallery, link, import and map responses of a Reveal-DM share of `data`, with the gallery page. */
+  async function v31Reads(db, data, ov, opts = {}) {
+    const share = await put(db, data, ov, { dm: true, ...opts });
+    await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
+      values (gen_random_uuid(), $1, 'm', $2, true, $3, 'map_with_campaign', true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [share.id] } }), `map-${share.slug}`]);
+    const r = await readBoth(db, share);
+    H.uid = READER;
+    await gallery.fetchDossierForImport(share.slug);
+    const iResp = H.last; H.uid = '';
+    await gallery.fetchGalleryMap(`map-${share.slug}`);
+    const mResp = H.last;
+    // `goal` is a DM field the default veil keeps: present, it anchors that the read is the DM-full one
+    return { page: r.g.settlement, gallery: r.gResp, link: r.lResp, import: iResp, map: mResp, dmFull: has(r.gResp, 'V31_GOAL') };
+  }
+  const editorState = (v) => has(v, 'V31_DECREE') || has(v, 'V31_DMLAYER') || /"(decrees|dmLayer)":/.test(JSON.stringify(v ?? null));
+
+  it('V3-1 (the review row, the gallery read): an unmarked Reveal-DM listing sends no anonymous reader the editor\'s decrees or its DM layer', async () => {
+    const out = {};
+    for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+      const r = await v31Reads(db, V31_DOC, {});
+      expect(r.dmFull, `${where}: the Reveal-DM read`).toBe(true);
+      out[where] = { gallery: editorState(r.gallery), link: editorState(r.link), map: editorState(r.map), page: editorState(r.page) };
+    }
+    // the red control: 210 sends both in the gallery response (its page never drew them)
+    expect(out['210'].gallery).toBe(true);
+    expect(out['211']).toEqual({ gallery: false, link: false, map: false, page: false });
+  }, ROW_TIMEOUT_MS);
+
+  it('V3-1 (the review row, the import): the importer of a Reveal-DM share, unmarked or marked, frozen or narrated, receives no decree and no DM layer', async () => {
+    const at = '2026-11-12T00:00:00.000Z';
+    const cases = [
+      ['unmarked', V31_DOC, {}],
+      ['marked, default veil', V31_DOC, veil.writeShareVeil({}, [])],
+      ['marked, Pending decrees opened', V31_DOC, veil.writeShareVeil({}, OPENED)],
+      ['frozen copy holding both, opened', { name: 'T' }, { $veil: { ...veil.writeShareVeil({}, OPENED).$veil, mode: 'snapshot', at, snapshot: V31_DOC } }],
+      ['narration holding both, opened', { name: 'T' }, veil.writeShareVeil({}, OPENED), { narrated: V31_DOC }],
+    ];
+    const out = {};
+    for (const [tag, data, ov, opts] of cases) {
+      const r = await v31Reads(LIVE.db, data, ov, opts);
+      expect(r.dmFull, `${tag}: the Reveal-DM read`).toBe(true);
+      expect(Array.isArray(r.import) && r.import.length, `${tag}: an import row`).toBe(1);
+      out[tag] = editorState(r.import);
+    }
+    // the red control: 210's import of the unmarked share hands both over
+    expect(editorState((await v31Reads(AT210.db, V31_DOC, {})).import)).toBe(true);
+    expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, false])));
+  }, ROW_TIMEOUT_MS);
+
+  it('V3-1 (the review row, Pending decrees opened): opening the grouping sends no reader the editor\'s state, whatever the source', async () => {
+    const at = '2026-11-12T00:00:00.000Z';
+    const cases = [
+      ['live', V31_DOC, veil.writeShareVeil({}, OPENED)],
+      ['frozen copy', { name: 'T' }, { $veil: { ...veil.writeShareVeil({}, OPENED).$veil, mode: 'snapshot', at, snapshot: V31_DOC } }],
+      ['narration', { name: 'T' }, veil.writeShareVeil({}, OPENED), { narrated: V31_DOC }],
+      // and every other grouping opened with it: no other eye reaches them either
+      ['every grouping opened', V31_DOC, veil.writeShareVeil({}, veil.defaultVeilFor(veil.galleryPayloadFor(V31_DOC, { shareDm: true })).map((d) => ({ address: d.address, hidden: false })))],
+    ];
+    const out = {};
+    for (const [tag, data, ov, opts] of cases) {
+      const r = await v31Reads(LIVE.db, data, ov, opts);
+      expect(r.dmFull, `${tag}: the Reveal-DM read`).toBe(true);
+      expect(r.gallery[0].gallery_member_overrides.$veil.v, `${tag}: a served (veiled) read`).toBe(2);
+      out[tag] = { gallery: editorState(r.gallery), link: editorState(r.link), import: editorState(r.import), map: editorState(r.map), page: editorState(r.page) };
+    }
+    // the red control: at 210 the opened share sends both in the gallery response
+    expect(editorState((await v31Reads(AT210.db, V31_DOC, veil.writeShareVeil({}, OPENED))).gallery)).toBe(true);
+    expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, { gallery: false, link: false, import: false, map: false, page: false }])));
+  }, ROW_TIMEOUT_MS);
+
   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
   it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));

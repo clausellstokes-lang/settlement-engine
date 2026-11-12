@@ -40,6 +40,12 @@
 --       object never raises. The client reads v 2 as "applied": it re-applies only the groupings
 --       (removal, idempotent) and marks them for DefenseTab; it never re-applies the default rules.
 --       No client path writes v 2 back: the only writer, updateGalleryMetadata, clamps to v 1.
+--   (7) THE EDITOR'S WORKING STATE NEVER TRAVELS (the third review's V3-1): on the gallery read
+--       and the import, a Reveal-DM share's full projection loses `decrees` and `dmLayer`, as the
+--       client's full mode does (publicSafe.js :: toPublicSafe, "THE OPT-IN DOES NOT COVER THEM").
+--       Before, an unmarked Reveal-DM listing sent both to every reader and every importer, and so
+--       did a marked one once "Pending decrees" was opened. The sanitiser's top-level allowlist
+--       already drops both, so the link and the map never carried them.
 --
 -- RESTATED ALSO: _gallery_apply_member_overrides (093), its body plus a typed read of the two
 -- stored member flags (the second review's R9/R11): only JSON true reveals or permits; nothing raises.
@@ -1230,9 +1236,11 @@ as $$
       from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
               from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
   ) src
+  -- 211: the editor's working state (decrees, dmLayer) never travels, Reveal DM or not (the third
+  -- review's V3-1; the client's full mode strips both)
   cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) else public._gallery_sanitize_public_json(src.j) end,
+      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer'] else public._gallery_sanitize_public_json(src.j) end,
       public._gallery_dm_full_json(src.j),
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, false
     ) as d
@@ -1334,9 +1342,11 @@ as $$
       from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
               from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
   ) src
+  -- 211: the editor's working state (decrees, dmLayer) never travels, Reveal DM or not (the third
+  -- review's V3-1; the client's full mode strips both)
   cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) else public._gallery_sanitize_public_json(src.j) end,
+      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) - array['decrees', 'dmLayer'] else public._gallery_sanitize_public_json(src.j) end,
       public._gallery_dm_full_json(src.j),
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, true
     ) as d

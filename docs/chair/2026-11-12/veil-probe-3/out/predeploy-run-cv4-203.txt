@@ -1,0 +1,83 @@
+# predeploy-run.sh pd203 (a 001..203 scratch chain, production's applied head, with veil-probe-3/predeploy-fixture.sql), COHERENCE-VEIL-4, 2026-11-12, PostgreSQL 16.15. The same run on a 001..210 chain prints the same (the row and function md5 lines aside).
+== before
+690ddbcda7312eeb57cd7ec1f6272d0e
+2dbff3f741e18b384b48fa10f9963c69
+20
+== the block (ON_ERROR_STOP, superuser)
+BEGIN
+SET
+    rolname    |     role_settings      |  role_in_db_settings   
+---------------+------------------------+------------------------
+ anon          |                        | {statement_timeout=3s}
+ authenticated | {statement_timeout=8s} | {statement_timeout=8s}
+ service_role  |                        | 
+(3 rows)
+
+ every_role_in_this_db | server_default_at_session_start 
+-----------------------+---------------------------------
+ statement_timeout=60s | 60000 ms
+(1 row)
+
+ frozen_copies | largest_copy_jsonb_chars | over_1000000 | refused_at_211 | snapshot_without_copy 
+---------------+--------------------------+--------------+----------------+-----------------------
+             4 |                 54400024 |            2 |              1 |                     3
+(1 row)
+
+ importable_snapshot_shares 
+----------------------------
+                          6
+(1 row)
+
+ non_boolean_reveal_dm | non_boolean_allow_import | rows_holding_one 
+-----------------------+--------------------------+------------------
+                     4 |                        2 |                2
+(1 row)
+
+ most_withheld_member_keys | rows_over_1000 
+---------------------------+----------------
+                      1500 |              1
+(1 row)
+
+ longest_delta_list | rows_over_2000 
+--------------------+----------------
+               2500 |              1
+(1 row)
+
+  source   | most_houses | most_anonymous_events 
+-----------+-------------+-----------------------
+ copy      |           0 |                   300
+ document  |        1200 |                  1100
+ narration |           0 |                   310
+(3 rows)
+
+  source   | at_or_past_1e130748 | with_numeric_id | with_numeric_name_or_part | past_double 
+-----------+---------------------+-----------------+---------------------------+-------------
+ copy      |                   1 |               1 |                         1 |           1
+ document  |                   1 |               2 |                         2 |           2
+ narration |                   1 |               0 |                         1 |           1
+(3 rows)
+
+ reveal_dm_listings_sending_editor_state 
+-----------------------------------------
+                                       3
+(1 row)
+
+ reveal_dm_shares_sending_editor_state_today 
+---------------------------------------------
+                                           4
+(1 row)
+
+ROLLBACK
+block exit 0
+== after
+690ddbcda7312eeb57cd7ec1f6272d0e
+2dbff3f741e18b384b48fa10f9963c69
+20
+== negative control: a write inside a READ ONLY transaction
+BEGIN
+ERROR:  cannot execute UPDATE in a read-only transaction
+control exit 1
+
+# the owner's push rehearsed on that fixture: 204..211 applied over pd203, each file in its own transaction (psql -1 -v ON_ERROR_STOP=1): every exit 0.
+# section (9)'s rows, top-level decrees or dmLayer in the response (gallery as anon, import as a premium reader), before (203) and after (211):
+#   pd-v31-unmarked, -marked, -opened, -narration: gallery true -> false, import true -> false; pd-v31-nodm: false -> false

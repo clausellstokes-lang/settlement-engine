@@ -48,6 +48,16 @@ select rv.mk('pd-num-doc', '{"name":"T","npcs":[{"name":"A","id":1e131071}]}');
 select rv.mk('pd-num-copy', '{"name":"T"}', '{"$veil":{"v":1,"deltas":[],"mode":"snapshot","at":"2026-11-01T00:00:00Z","snapshot":{"name":"T","npcs":[{"name":"A","id":-1e131071}]}}}');
 select rv.mk('pd-num-narr', '{"name":"T"}', '{}', false, '{"name":"T","npcs":[{"name":2.5e130748}]}');
 select rv.mk('pd-num-ids', '{"name":"T","npcs":[{"name":7,"id":7}],"institutions":[{"id":1e400,"name":"H"}]}');
+-- (9) (COHERENCE-VEIL-4, the third review's V3-1) Reveal-DM shares holding the editor's state: unmarked
+--     with decrees; marked with the default veil, a dmLayer; marked with "Pending decrees" opened,
+--     decrees; a narration holding a dmLayer, opened; and decrees on a share WITHOUT Reveal DM (never sent).
+--     No row adds a copy, a member flag or a number, so (2) to (8) are unmoved.
+--     expected: reveal_dm_listings_sending_editor_state 3; reveal_dm_shares_sending_editor_state_today 4
+select rv.mk('pd-v31-unmarked', '{"name":"T","decrees":[{"id":"d1","text":"x"}]}', '{}', true);
+select rv.mk('pd-v31-marked', '{"name":"T","dmLayer":{"npcs":{}}}', '{"$veil":{"v":1,"deltas":[]}}', true);
+select rv.mk('pd-v31-opened', '{"name":"T","decrees":[]}', '{"$veil":{"v":1,"deltas":[{"address":"block:housekeeping.decrees","hidden":false}]}}', true);
+select rv.mk('pd-v31-narration', '{"name":"T"}', '{"$veil":{"v":1,"deltas":[{"address":"block:housekeeping.decrees","hidden":false}]}}', true, '{"name":"T","dmLayer":{}}');
+select rv.mk('pd-v31-nodm', '{"name":"T","decrees":[{"id":"d2"}]}', '{}', false);
 -- (1) time limits: one per role, one per role in this database, one for every role in this database.
 --     expected: authenticated 8s (role_settings); anon 3s (role_in_db_settings); every_role_in_this_db
 --     60s; never the block's own 120s.
