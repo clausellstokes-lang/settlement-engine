@@ -892,7 +892,7 @@ function COURT_AND_PRISON(lawRef) {
 /** #17's sibling: a court and no prison. @param {string} lawRef */
 function COURT_NO_PRISON(lawRef) {
   return [
-    ' A court exists, though the prison system is limited.',
+    ' A court exists, though there is nowhere to hold the guilty.',
     ' The court can try a case, but there is little room to hold anyone it convicts.',
     ` Offenders the ${lawRef} catches go before the court; there is little room to hold them after.`,
   ];

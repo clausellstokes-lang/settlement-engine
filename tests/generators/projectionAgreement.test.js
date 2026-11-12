@@ -89,6 +89,11 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     }
     expect(heard.length).toBeGreaterThan(0); // anchored: the grid reaches the crime lines
   });
+  test('RED-FIRST: the court-without-prison line names no prison (PRESUME\'s register, banked as this lane\'s: 53 towns)', () => {
+    const profile = generateSafetyProfile({}, 'town', [{ name: 'Town watch', category: 'Defense' }, { name: 'Town hall', category: 'Government' }]);
+    expect(profile.guardEffectivenessDesc).toMatch(/court/); // anchored: the branch prints its court line
+    expect(profile.guardEffectivenessDesc).not.toMatch(/prison/i);
+  });
   test('the economic situation naming a market the town does not have', () => {
     const situation = (line, institutions) => record({ economicState: { situationDesc: line }, institutions });
     expect(details(situation('(planted) markets meet infrequently.', []))).toContain('The economic situation names a market the town does not have.');
