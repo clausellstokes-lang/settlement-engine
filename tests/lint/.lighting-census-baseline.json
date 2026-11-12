@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f064cb83c3a138a1ec93ebef5491c4d6cf8bb853",
+  "measuredAtSha": "97759b8371a1f15ebd36d9cac77e4bc2bf7af2bd",
   "measuredBy": "COHERENCE-POWERS-3",
   "date": "2026-11-12",
-  "note": "F12 adds one title to tests/generators/powerStructure.test.js (the packed-lines guard)",
-  "files": 3210,
+  "note": "F1 adds tests/generators/people/dualHatPoliticalMass.test.js (two titles)",
+  "files": 3211,
   "parked": 397,
-  "credited": 2813,
-  "titles": 29157,
-  "suiteTitles": 7885
+  "credited": 2814,
+  "titles": 29159,
+  "suiteTitles": 7886
 }
