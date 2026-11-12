@@ -47,6 +47,7 @@ import { INSTITUTION_KIND_PATTERNS } from '../facts/institutions.js';
  * @property {boolean} hasCharter an adventurers' charter hall or guild stands
  * @property {string|null} forceName the roster name of the force that holds the place (garrison, then watch, militia, hired company, charter hall), or null
  * @property {ReadonlyArray<string>} defenceNames the roster names of every standing defence the defence purse pays for (enclosures and forces)
+ * @property {boolean} hasCourt a court sits (a courthouse, or a hall a magistrate hears cases in)
  * @property {boolean} hasHospital a real hospital stands
  * @property {boolean} hasHealer a healer, an infirmary or a monastic house tends the sick
  * @property {string|null} healerName the roster name of the healer, infirmary or monastic house, or null
@@ -54,6 +55,14 @@ import { INSTITUTION_KIND_PATTERNS } from '../facts/institutions.js';
  */
 
 /** @param {unknown} inst @returns {string} */
+/**
+ * A court sits: a courthouse, the court buildings, or a hall a magistrate hears cases in (the town and
+ * city halls' own service rows: "Dispute arbitration … before a magistrate", "Appeals court") or an
+ * assembly that judges (COHERENCE-AGREE, 2026-11-12: the names `priorityHelpers.js` read off the raw
+ * roster, read here off the live one, so the court fact has one reader).
+ */
+const COURT_RE = /courthouse|court buildings|democratic assembly|city hall|town hall/i;
+
 const nameOf = (inst) => String(nativeSemanticName(inst) || '');
 
 /** @param {ReadonlyArray<string>} names @param {RegExp} re @returns {string|null} */
@@ -117,6 +126,7 @@ export function defenseFactsOf(settlement) {
     hasCharter: forces.charter.present,
     forceName,
     defenceNames: Object.freeze(defenceNames),
+    hasCourt: roster.some((n) => COURT_RE.test(n)),
     hasHospital: roster.some((n) => HOSPITAL_RE.test(n)),
     hasHealer: healerName !== null,
     healerName,

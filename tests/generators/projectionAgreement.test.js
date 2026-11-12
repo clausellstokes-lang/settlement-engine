@@ -18,6 +18,7 @@ import { projectionAgreementFindings } from '../../src/generators/generationCohe
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 
 const record = (over = {}) => ({
   config: { terrainType: 'plains', tradeRouteAccess: 'road', ...(over.config || {}) },
@@ -56,6 +57,26 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     const safety = { guardEffectivenessDesc: '(planted) a mercenary company keeps the peace here.' };
     expect(details(record({ economicState: { safetyProfile: safety } }))).toContain('The safety text names a mercenary company the defence record does not list.');
     expect(details(record({ economicState: { safetyProfile: safety }, institutions: [{ name: 'Mercenary company' }] }))).toEqual([]);
+  });
+  test('the safety text saying a court sits where the defence home has none, or none where it has one', () => {
+    const says = (line, institutions) => record({ economicState: { safetyProfile: { guardEffectivenessDesc: line } }, institutions });
+    expect(details(says('(planted) A court exists, though the prison system is limited.', []))).toContain('The safety text says a court sits where the defence record has none.');
+    // the measure (2026-11-12): a town hall is a court — its own service row brings disputes before a magistrate
+    expect(details(says('(planted) A court exists, though the prison system is limited.', [{ name: 'Town hall' }]))).toEqual([]);
+    expect(details(says('(planted) A court exists, though the prison system is limited.', [{ name: 'Town hall', status: 'ruined' }])))
+      .toContain('The safety text says a court sits where the defence record has none.');
+    const crime = record({ economicState: { safetyProfile: { crimeTypes: [{ desc: '(planted) Without a court, there is no formal mechanism.' }] } }, institutions: [{ name: 'Courthouse' }] });
+    expect(details(crime)).toContain('The safety text says no court sits where the defence record has one.');
+    expect(details(says('(planted) Without courts or prison, enforcement relies on fines.', []))).toEqual([]);
+  });
+  test('RED-FIRST: a ruined courthouse does not try the cases (the safety writer reads the court home)', () => {
+    const live = [{ name: 'Town watch', category: 'Defense' }, { name: 'Courthouse', category: 'Government' }];
+    const ruined = [{ name: 'Town watch', category: 'Defense' }, { name: 'Courthouse', category: 'Government', status: 'ruined' }];
+    const said = (institutions) => details(record({ economicState: { safetyProfile: generateSafetyProfile({}, 'town', institutions) }, institutions }));
+    // anchored: the live courthouse prints a court sentence the arm accepts; only the ruin differs
+    expect(JSON.stringify(generateSafetyProfile({}, 'town', live))).toMatch(/court/);
+    expect(said(live)).toEqual([]);
+    expect(said(ruined)).toEqual([]);
   });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
