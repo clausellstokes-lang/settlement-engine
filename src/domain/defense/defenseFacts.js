@@ -54,7 +54,6 @@ import { INSTITUTION_KIND_PATTERNS } from '../facts/institutions.js';
  * @property {number|null} storedFoodMonths the engine's months of stored food, or null when the record carries none
  */
 
-/** @param {unknown} inst @returns {string} */
 /**
  * A court sits: a courthouse, the court buildings, or a hall a magistrate hears cases in (the town and
  * city halls' own service rows: "Dispute arbitration … before a magistrate", "Appeals court") or an
@@ -63,6 +62,7 @@ import { INSTITUTION_KIND_PATTERNS } from '../facts/institutions.js';
  */
 const COURT_RE = /courthouse|court buildings|democratic assembly|city hall|town hall/i;
 
+/** @param {unknown} inst @returns {string} */
 const nameOf = (inst) => String(nativeSemanticName(inst) || '');
 
 /** @param {ReadonlyArray<string>} names @param {RegExp} re @returns {string|null} */
