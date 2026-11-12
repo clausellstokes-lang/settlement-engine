@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-11T23:12:29.011Z",
+  "generatedAt": "2026-11-12T03:10:44.751Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "fc844994082973c7",
+  "sourceHash": "15272210332dfe33",
   "inputs": [
-    "node_modules/immer/dist/immer.mjs",
-    "node_modules/seedrandom/seedrandom.js",
+    "../wt/node_modules/immer/dist/immer.mjs",
+    "../wt/node_modules/seedrandom/seedrandom.js",
     "src/data/constants.js",
     "src/data/entityTags.js",
     "src/data/informationBrokerageTuning.js",
