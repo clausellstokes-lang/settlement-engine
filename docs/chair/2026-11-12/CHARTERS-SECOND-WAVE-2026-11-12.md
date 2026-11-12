@@ -173,3 +173,11 @@ The census was re-taken on master at db832c892 with one counter over the same 72
 3. **THE WALKER IS WHAT MAKES A DISQUALIFIER SAFE.** A forgotten disqualifier fails open: the line prints everywhere. So a line that uses a registered word must carry that word's disqualifier, which the walker derives from the vocabulary; the page measure by vocabulary catches what the list does not yet know, and each find adds its words to the list.
 
 This restates ruling 2 of the amendment above (record 288) and withdraws the chair's "the most specific line wins" of record 289.
+
+## AMENDMENT (record 291, 2026-11-12): THE PROCEDURE AND THE GAPS
+
+**The owner, verbatim.** "Also make a sop for writing new pools and the conditions for each. And where you see combinations for lacking pools, fill those one"
+
+1. **THE PROCEDURE** is the file SOP-POOLS-AND-CONDITIONS of this date, beside this charter. It binds every lane and every seat that writes or changes a line a reader can see. W2-B-DECLARE, in its first commits, confirms its section 9 from source, adds one worked example, installs the living copy beside the prose corpus and links it from the contributing guide.
+2. **THE GAPS ARE FILLED.** The mapping seat's gap list names, per pool, the reachable cases with too few lines left. A case with NO line left is filled before the release, with no exception. A case under three is the target, taken in the order of how many towns reach it. The lines are written under the procedure, as part of W2-B-DECLARE, which owns the corpus. If the bill passes about 150 lines, a writing seat takes the corpus and W2-B-DECLARE keeps the code, so the corpus still has one owner.
+3. **Every new line is listed for the owner's veto**, lane by lane, in the hand-back.
