@@ -106,40 +106,80 @@ describe('CENSUS-5b unit 2 · the wired baseline conflicts', () => {
   });
 });
 
+/**
+ * The well-formedness rows of one sibling table against the source that prints it (the check
+ * below, lifted whole into a function on 2026-11-12 so the planted controls run the SAME code).
+ * @param {Record<string, ReadonlyArray<any>>} table @param {string} source @returns {string[]}
+ */
+function malformedRows(table, source) {
+  const bad = [];
+  for (const key of Object.keys(table)) {
+    const set = table[key];
+    // the key's opening words stand in the source (a concatenated literal is keyed whole)
+    const head = key.trim().slice(0, 32).replace(/'/g, "\\'");
+    if (!source.includes(key.trim().slice(0, 32)) && !source.includes(head)) bad.push(`not in source: ${key.slice(0, 60)}`);
+    if (set[0].text !== key) bad.push(`the first member is not the original: ${key.slice(0, 60)}`);
+    for (const line of set) {
+      const d = declarationOf(line);
+      for (const atom of [...d.needs, ...d.excludes]) {
+        try { assertDeclarable(atom); } catch (e) { bad.push(String(e)); }
+      }
+      if (line.twinOf !== undefined && line.twinOf !== key) bad.push(`twin of another line: ${line.text.slice(0, 60)}`);
+    }
+    const original = declarationOf(set[0]);
+    expect(original.needs.length + original.excludes.length + original.crisis.length, key).toBeGreaterThan(0);
+    // the original is admitted by the calm admit-all record (it is lawful somewhere)
+    if (!lawfulSomewhere(original) && !original.crisis.length) bad.push(`never lawful: ${key.slice(0, 60)}`);
+    // a twin excludes exactly what its original needs (and, for an original declared on the
+    // crisis dimension, its crisis disjunction as one atom: `stressNarrative.js`' idiom)
+    const twin = set.find((l) => l.twinOf === key);
+    if (twin) {
+      const t = declarationOf(twin);
+      const complement = [...original.needs, ...(original.crisis.length ? [`crisis: ${original.crisis.join(', ')}`] : [])];
+      if (t.excludes.join('|') !== complement.join('|')) bad.push(`twin is not the complement: ${key.slice(0, 60)}`);
+    }
+  }
+  return bad;
+}
+
 describe('CENSUS-5b unit 2 · every declared sibling set is well formed', () => {
   for (const [file, table] of Object.entries(SOURCES)) {
     it(`${file}: each key is a line the source prints, each atom is declarable, each twin answers its original`, () => {
       const source = readFileSync(new URL(`../../${file}`, import.meta.url), 'utf8');
-      const keys = Object.keys(table);
-      expect(keys.length).toBeGreaterThan(0);
-      const bad = [];
-      for (const key of keys) {
-        const set = table[key];
-        // the key's opening words stand in the source (a concatenated literal is keyed whole)
-        const head = key.trim().slice(0, 32).replace(/'/g, "\\'");
-        if (!source.includes(key.trim().slice(0, 32)) && !source.includes(head)) bad.push(`not in source: ${key.slice(0, 60)}`);
-        if (set[0].text !== key) bad.push(`the first member is not the original: ${key.slice(0, 60)}`);
-        for (const line of set) {
-          const d = declarationOf(line);
-          for (const atom of [...d.needs, ...d.excludes]) {
-            try { assertDeclarable(atom); } catch (e) { bad.push(String(e)); }
-          }
-          if (line.twinOf !== undefined && line.twinOf !== key) bad.push(`twin of another line: ${line.text.slice(0, 60)}`);
-        }
-        const original = declarationOf(set[0]);
-        expect(original.needs.length + original.excludes.length + original.crisis.length, key).toBeGreaterThan(0);
-        // the original is admitted by the calm admit-all record (it is lawful somewhere)
-        if (!lawfulSomewhere(original) && !original.crisis.length) bad.push(`never lawful: ${key.slice(0, 60)}`);
-        // a twin excludes exactly what its original needs (and, for an original declared on the
-        // crisis dimension, its crisis disjunction as one atom: `stressNarrative.js`' idiom)
-        const twin = set.find((l) => l.twinOf === key);
-        if (twin) {
-          const t = declarationOf(twin);
-          const complement = [...original.needs, ...(original.crisis.length ? [`crisis: ${original.crisis.join(', ')}`] : [])];
-          if (t.excludes.join('|') !== complement.join('|')) bad.push(`twin is not the complement: ${key.slice(0, 60)}`);
-        }
-      }
-      expect(bad).toEqual([]);
+      expect(Object.keys(table).length).toBeGreaterThan(0);
+      expect(malformedRows(table, source)).toEqual([]);
     });
   }
+});
+
+/**
+ * THE BAND ARM STILL CONVICTS (the chair's condition of 2026-11-12 on 944d2d28f). Planted one-set
+ * tables run through the same check: a line whose band atoms no rung of its ladder satisfies
+ * together, and a line on a ladder rung or a ladder that does not exist, are each "never lawful";
+ * a line lawful on exactly one rung passes. A presence-declared line is read as before.
+ */
+describe('CENSUS-5b unit 2 · the lawful-somewhere arm, planted', () => {
+  /** A one-set table whose source prints its key. @param {string} text @param {string[]} needs */
+  const planted = (text, needs) => {
+    const table = { [text]: Object.freeze([Object.freeze({ text, needs }), Object.freeze({ text: `${text} (twin)`, twinOf: text, excludes: needs })]) };
+    return malformedRows(table, `'${text}'`);
+  };
+
+  it('RED: a line needing at least Moderate AND at most Poor is lawful on no rung', () => {
+    expect(planted('Planted line one, both ends of the purse.', ['prosperity: ≥ moderate', 'prosperity: ≤ poor']))
+      .toContain('never lawful: Planted line one, both ends of the purse.');
+  });
+
+  it('RED: a line on a rung its ladder lacks, or on a ladder that does not exist, is never lawful', () => {
+    expect(planted('Planted line two, an opulent rung.', ['prosperity: ≥ opulent'])).toContain('never lawful: Planted line two, an opulent rung.');
+    expect(planted('Planted line three, no such ladder.', ['opulence: ≥ high'])).toContain('never lawful: Planted line three, no such ladder.');
+  });
+
+  it('GREEN: a line lawful on exactly one rung passes, and a presence line reads as before', () => {
+    const one = declarationOf({ text: 'x', needs: ['prosperity: = poor'] });
+    const rungs = FACT_DIMENSIONS.prosperity.order.filter((rung) => declarationAdmits(one, { ...CALM_FACTS_ADMIT_ALL, prosperity: rung }).admitted);
+    expect(rungs, 'anchored: exactly one rung admits it').toEqual(['poor']);
+    expect(planted('Planted line four, one rung.', ['prosperity: = poor'])).toEqual([]);
+    expect(planted('Planted line five, walls.', ['walls'])).toEqual([]);
+  });
 });
