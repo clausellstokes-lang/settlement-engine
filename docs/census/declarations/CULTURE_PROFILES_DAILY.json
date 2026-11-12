@@ -19,11 +19,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.germanic.builtForm[0]",
-     "text": "Timber-framed street houses cluster around a market green, with stone reserved for halls, bridges, and defenses.",
-     "needs": [
-      "market",
-      "walls"
-     ],
+     "text": "Timber-framed street houses cluster around a central green, with stone kept for the larger halls.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -108,10 +105,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.germanic.exchangePattern[1]",
-     "text": "Estate dues, weekly markets, and merchant associations connect farms to specialist workshops.",
-     "needs": [
-      "market"
-     ],
+     "text": "Estate dues, pedlars, and merchant associations connect farms to specialist workshops.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -233,7 +228,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.germanic.defensePattern[1]",
-     "text": "A militia tradition supports a smaller permanent watch or retinue.",
+     "text": "Households are expected to turn out when called; a standing force comes only as a place grows.",
      "needs": [],
      "excludes": [],
      "colour": false,
@@ -369,10 +364,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.latin.exchangePattern[0]",
-     "text": "Contract, warehousing, market tolls, and notarial practice support long-distance commerce.",
-     "needs": [
-      "market"
-     ],
+     "text": "Contract, warehousing, tolls, and notarial practice support long-distance commerce.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -648,10 +641,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.celtic.exchangePattern[1]",
-     "text": "Market exchange operates beside tribute, fosterage, and reciprocal obligations between kin groups.",
-     "needs": [
-      "market"
-     ],
+     "text": "Buying and selling go on beside tribute, fosterage, and reciprocal obligations between kin groups.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": []
@@ -750,10 +741,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.celtic.defensePattern[0]",
-     "text": "Ditches, banks, timber ramparts, and defensible hills protect clustered households.",
-     "needs": [
-      "palisade"
-     ],
+     "text": "Ditches and banks come first; heavier timber works follow only where a place can build and man them.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -835,21 +824,16 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.arabic.builtForm[0]",
-     "text": "Shaded lanes connect inward-looking courtyard buildings, market arcades, gardens, and managed water points.",
-     "needs": [
-      "market"
-     ],
+     "text": "Shaded lanes connect inward-looking courtyard buildings, arcades, gardens, and managed water points.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": []
     },
     {
      "lineId": "CULTURE_PROFILES.arabic.builtForm[1]",
-     "text": "Dense masonry quarters open onto caravan courts, covered markets, bathhouses, and planted courtyards.",
-     "needs": [
-      "market",
-      "institution: bathhouse"
-     ],
+     "text": "Dense masonry quarters open onto caravan yards, covered lanes, and planted courtyards.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -885,10 +869,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.arabic.civicPattern[0]",
-     "text": "Judges, market officers, endowed institutions, military households, and merchant notables share administration.",
-     "needs": [
-      "market"
-     ],
+     "text": "Judges, endowed institutions, leading households, and merchant notables share administration.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -923,10 +905,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.arabic.exchangePattern[0]",
-     "text": "Caravan organization, brokerage, credit, warehousing, and inspected markets sustain regional exchange.",
-     "needs": [
-      "market"
-     ],
+     "text": "Caravan organization, brokerage, credit, warehousing, and inspected weights sustain regional exchange.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -1218,10 +1198,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.norse.exchangePattern[1]",
-     "text": "Landing places and halls serve as markets before specialized commercial institutions emerge.",
-     "needs": [
-      "navigable"
-     ],
+     "text": "Halls serve as trading places before specialized commercial institutions emerge.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [],
@@ -1326,7 +1304,7 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.norse.defensePattern[0]",
-     "text": "Readily mobilized crews come first; ringworks, timber ramparts, and beacon systems follow where a place can man them.",
+     "text": "Readily mobilized crews come first; ringworks, earth banks, and beacon systems follow where a place can man them.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -1408,12 +1386,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.slavic.builtForm[1]",
-     "text": "A palisaded core is surrounded by farm lanes, bathhouses, sheds, and later market streets.",
-     "needs": [
-      "palisade",
-      "institution: bathhouse",
-      "market"
-     ],
+     "text": "A tight older core is surrounded by farm lanes, yards, sheds, and newer streets.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": []
@@ -1664,12 +1638,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.east_asian.builtForm[1]",
-     "text": "A planned civic axis links gate, market, administrative compound, temple precinct, and waterworks.",
-     "needs": [
-      "gate",
-      "market",
-      "institution: temple"
-     ],
+     "text": "A planned civic axis runs straight to the administrative compound, with wards laid out on either side.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -1732,11 +1702,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.east_asian.exchangePattern[0]",
-     "text": "Regulated markets, guild brokerage, granary systems, canals or roads, and standardized records support exchange.",
-     "needs": [
-      "market",
-      "institution: granary"
-     ],
+     "text": "Guild brokerage, regulated weights and prices, roads or canals, and standardized records support exchange.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -1841,7 +1808,7 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.east_asian.defensePattern[0]",
-     "text": "Where the state reaches, enclosed wards, controlled gates, watch towers, granaries, and disciplined troops give defense in depth.",
+     "text": "Where the state can pay for it, defense runs in depth: enclosed wards, controlled gates, stored grain, and drilled troops.",
      "needs": [],
      "excludes": [],
      "colour": true,
@@ -1850,10 +1817,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.east_asian.defensePattern[1]",
-     "text": "Militia and professional troops are organized through districts and administrative chains.",
-     "needs": [
-      "militia"
-     ],
+     "text": "Any armed service, levied or paid, is organized through districts and administrative chains.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -1988,10 +1953,8 @@
    "lines": [
     {
      "lineId": "CULTURE_PROFILES.mesoamerican.exchangePattern[0]",
-     "text": "Large periodic markets, professional merchants, tribute redistribution, and specialist craft production drive exchange.",
-     "needs": [
-      "market"
-     ],
+     "text": "Professional merchants, tribute redistribution, and specialist craft production drive exchange.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": []
@@ -2183,10 +2146,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.south_asian.builtForm[1]",
-     "text": "A temple, court, or fortified precinct anchors neighborhoods organized around wells, workshops, and markets.",
-     "needs": [
-      "market"
-     ],
+     "text": "A large central compound anchors neighborhoods organized around wells and workshops.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -2825,10 +2786,8 @@
     },
     {
      "lineId": "CULTURE_PROFILES.greek.exchangePattern[1]",
-     "text": "Harbor and hinterland goods meet through brokers, associations, and tax-farming offices.",
-     "needs": [
-      "coast"
-     ],
+     "text": "Goods from near and far meet through brokers, associations, and tax-farming offices.",
+     "needs": [],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -2944,7 +2903,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.greek.defensePattern[1]",
-     "text": "Professional guards and mercenaries supplement civic musters during prolonged threats.",
+     "text": "Civic musters come first; paid guards are added only when a threat lasts and the town can pay.",
      "needs": [],
      "excludes": [],
      "colour": false,

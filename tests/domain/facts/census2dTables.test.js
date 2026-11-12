@@ -51,7 +51,6 @@ const PARKED = Object.freeze({
   'STRESS_DESCS.slave_revolt[2]': 'guardPresence',
   'STRESS_DESCS.insurgency[2]': 'soldiers',
   'STRESS_DESCS.wartime[2]': 'soldiers',
-  'CULTURE_PROFILES.germanic.defensePattern[1]': 'guardPresence',
   'CULTURE_PROFILES.latin.defensePattern[1]': 'guardPresence',
   'CULTURE_PROFILES.mesoamerican.defensePattern[1]': 'guardPresence',
   'CULTURE_PROFILES.steppe.defensePattern[1]': 'guardPresence'
