@@ -578,4 +578,8 @@ took it, The Peerage keeps its line with none left). `seatKeeper.test.js`'s Grud
 
 FOUND, NOT MINE: `tests/data/foundingWorldBones.test.js` "every promise holds in at least 19 of 20 forks" is red BEFORE
 F3 (at 178601d5a; green at the line): "Mossgate: the religious authorities hold power · tag Religious authority — 15/20".
-Classed in §7.
+Bisected to the first seat's 1df17289f (the fold; green at 5915e3af0). In all five failing forks Church Council rules and
+the houseless Religious Authorities folded into it (`mossgate.mjs`). Sent to the chair as a STOP; **THE CHAIR'S RULING:** the
+founding worlds' row, under a class of its own, "the founding worlds' cards, re-matched when the worlds are made again"; the
+promise is to be read by KIND (a religious power stands, or rules), a re-key by identity, never a loosening; the lane
+touches neither the card nor its test and does not undo the fold. Named so in the draft record.
