@@ -108,7 +108,6 @@ const POST_CONVENTION_BARE = Object.freeze({
   'public._gallery_public_tile_rows': '147_gallery_tile_chain_aliveness_title_reactions.sql',
   'public.list_gallery_dossiers': '147_gallery_tile_chain_aliveness_title_reactions.sql',
   'public.list_gallery_more_by_creator': '147_gallery_tile_chain_aliveness_title_reactions.sql',
-  'public.get_gallery_dossier': '147_gallery_tile_chain_aliveness_title_reactions.sql',
   'public.list_my_gallery_dossiers': '147_gallery_tile_chain_aliveness_title_reactions.sql',
 });
 

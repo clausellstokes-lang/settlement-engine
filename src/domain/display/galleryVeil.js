@@ -91,6 +91,8 @@ export const VEIL_OVERRIDE_KEY = '$veil';
  */
 export const VEIL_LIMITS = Object.freeze({
   version: 1, maxDeltas: 2000, addressMax: 300,
+  // The marker a read sends when the server applied the veil (migration 211). Never stored.
+  servedVersion: 2,
   // X-24 (a): the frozen public copy a snapshot share stores. The thousand's largest
   // projection is 304,925 characters (full DM view; 187,792 closed); three times that.
   snapshotMaxChars: 1000000,
@@ -1159,4 +1161,33 @@ export function projectShareVeil(publicSettlement, memberOverrides) {
   const { marked, deltas } = readShareVeil(memberOverrides);
   if (!marked) return publicSettlement;
   return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas));
+}
+
+/**
+ * Did the server apply this share's veil (migration 211)? The read then sends the served
+ * marker `{ v: 2, mode, at, groupings }` in place of the stored share: no delta, no copy.
+ * @param {unknown} memberOverrides  the read's gallery_member_overrides
+ * @returns {boolean}
+ */
+export function isServedVeil(memberOverrides) {
+  const stored = isRec(memberOverrides) ? memberOverrides[VEIL_OVERRIDE_KEY] : null;
+  return isRec(stored) && stored.v === VEIL_LIMITS.servedVersion;
+}
+
+/**
+ * The page's projection of a read. A served share (211) is already veiled: only its
+ * groupings run again (removal, so it changes nothing) and are marked for the renderers;
+ * the default rules never run again, so an eye the DM opened stays open. Any other share
+ * is projected here, as before 211.
+ * @param {Rec} publicSettlement  toPublicSafe's output
+ * @param {unknown} memberOverrides  the read's gallery_member_overrides
+ * @returns {Rec}
+ */
+export function projectServedVeil(publicSettlement, memberOverrides) {
+  if (!isServedVeil(memberOverrides)) return projectShareVeil(publicSettlement, memberOverrides);
+  const stored = /** @type {Rec} */ (/** @type {Rec} */ (memberOverrides)[VEIL_OVERRIDE_KEY]);
+  const groupings = Array.isArray(stored.groupings)
+    ? stored.groupings.filter(a => typeof a === 'string' && Object.prototype.hasOwnProperty.call(GROUPING_REMOVERS, a))
+    : [];
+  return applyVeil(publicSettlement, groupings);
 }

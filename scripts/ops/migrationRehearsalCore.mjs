@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 210;
+export const MIGRATION_TRAIN_REPO_HEAD = 211;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -839,6 +839,36 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'server-side-share-veil',
+    from: 211,
+    to: 211,
+    purpose: '211 — the server-side share veil (COHERENCE-VEIL, the chair\'s rulings of 2026-11-12): the veil a DM '
+      + 'sets by hand is applied before the response leaves. New helper functions _gallery_veil* (the SQL twin of '
+      + 'galleryVeil.js\'s resolver and applier); four reads restated as their previous bodies plus the veil — '
+      + 'get_gallery_dossier (147; a snapshot share is served its frozen copy through the same projection, and the '
+      + 'live row is not sent), get_unlisted_dossier (208 as amended; the sanitiser runs once), get_gallery_map (088) '
+      + 'and import_gallery_dossier (131). gallery_member_overrides travels as an allowlist: members\' booleans and the '
+      + 'served marker {v: 2, mode, at, groupings}. No table, column, constraint, policy or row. DEPLOYMENT remains '
+      + 'the owner\'s manual act after 204 to 210 (`supabase db push` plus the applied-head bump in that same act).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Its own @rollback annotation spells the reversal out, last in, first out: undo 211 before 210, 207, 206, '
+        + '205 and 208\'s set — recreate the four reads at their previous bodies and drop the _gallery_veil* '
+        + 'functions. Nothing is destroyed on reversal; the new client draws a v 1 share as before.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_veil' }),
+      Object.freeze({ kind: 'function', name: '_gallery_veil_resolve' }),
+      Object.freeze({ kind: 'function', name: '_gallery_veil_apply' }),
+      Object.freeze({ kind: 'function', name: '_gallery_veil_served' }),
+      Object.freeze({ kind: 'function', name: 'get_gallery_dossier' }),
+      Object.freeze({ kind: 'function', name: 'get_unlisted_dossier' }),
     ]),
   }),
 ]);

@@ -92,7 +92,7 @@ const TOWNS = Object.freeze([
   { seed: 'server-veil-metropolis-7', settType: 'metropolis' },
 ]);
 
-async function bootChain(through = 999) {
+async function buildDb(through = 999) {
   const db = new PGlite({ extensions: { pgcrypto } });
   await db.exec(`
     create schema if not exists auth;
@@ -194,8 +194,8 @@ describe('the server-side share veil (211) — execution against the real SQL an
   const control = { readable: 0, rows: 0 };
 
   beforeAll(async () => {
-    LIVE = await bootChain();
-    AT210 = await bootChain(210);
+    LIVE = await buildDb();
+    AT210 = await buildDb(210);
     ({ generateSettlementPipeline: gen } = await import('../../src/generators/generateSettlementPipeline.js'));
     ({ composePublicProse: compose } = await import('../../src/components/new/publicProseCompose.js'));
     veil = await import('../../src/domain/display/galleryVeil.js');
@@ -453,7 +453,7 @@ describe('the server-side share veil (211) — execution against the real SQL an
 describe('LOW FINDING 1: the party link runs the sanitiser once per read (an IMMUTABLE counting stand-in)', () => {
   /** @type {any} */ let db;
   beforeAll(async () => {
-    ({ db } = await bootChain());
+    ({ db } = await buildDb());
     await db.exec(`
       create sequence public.sanitize_calls;
       create or replace function public._gallery_sanitize_public_json(value jsonb, path text[] default '{}') returns jsonb

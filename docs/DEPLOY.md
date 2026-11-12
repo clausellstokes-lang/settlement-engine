@@ -271,7 +271,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `210_public_prose_text_projection.sql`** (this
+**Current migration head: `211_server_side_share_veil.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -286,6 +286,11 @@ and 209 applied before it (both on their own lanes until STYLE-2-MERGE). A share
 composed blocks on the gallery and party pages only after its first save once the client that
 stamps `publicProse` has shipped, so one save per shared town is owed. Name it to the owner; it
 is never scripted.
+
+`211_server_side_share_veil.sql` (COHERENCE-VEIL) applies the veil a DM sets by hand on the server:
+the gallery read, the party link, the map page and import send nothing their page hides, and a
+frozen gallery copy is served sanitised and veiled (no re-export is owed). It restates four reads
+and adds helper functions; no table, column or row. Undo it first if the set is ever rolled back.
 
 **Read these preambles before the push, whatever the head number says.** Most
 migrations are additive and need no separate reading; these are the pending ones whose

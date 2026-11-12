@@ -27,7 +27,6 @@
   "public.founder_seats_taken": "010_founder_seat_counter.sql",
   "public.gen_account_number": "075_account_identity_columns.sql",
   "public.gen_external_name": "075_account_identity_columns.sql",
-  "public.get_gallery_dossier": "093_gallery_member_overrides_fix.sql",
   "public.get_gallery_vote_state": "020_gallery_public_privacy.sql",
   "public.grant_welcome_credit": "017_fix_credit_auth_integrity.sql",
   "public.handle_new_user": "075_account_identity_columns.sql",

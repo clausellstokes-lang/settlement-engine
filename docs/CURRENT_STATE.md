@@ -2,7 +2,7 @@
 
 > **BANKED 2026-07-26 (THE BANKING FOLD).** Everything this document describes as
 > "uncommitted integration" is now committed on claude/composite-r4 as 12 lane
-> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 210 at
+> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 211 at
 > HEAD. Governance home: the ledger branch (review-fixes-2026-07-08) — owner
 > decisions live in ONE surface, `docs/OWNER_DECISION_QUEUE.md` there; the
 > 2026-07-26 ledger rows carry the pivot ratification, the golden-regen
@@ -76,7 +76,7 @@ evidence must be checked independently.
 
 ## Current release blockers
 
-1. **Migration train.** Working-tree migration head 210 is 7 migrations ahead
+1. **Migration train.** Working-tree migration head 211 is 8 migrations ahead
    of the live-verified production head 203 (`supabase/applied-head.json`; the
    owner applied 122–200 to production on 2026-09-16 and 201–203 on 2026-09-20:
    201 — the staff unlock of ODQ §934.28 — 202 — design §12.4's gallery-scanner
