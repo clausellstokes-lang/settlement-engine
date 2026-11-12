@@ -56,8 +56,12 @@ export const hitKey = (file, thing, text) => `${file}\t${thing}\t${String(text).
 /** The arm-1 keys a register banks. @param {{ arm1: Record<string, Array<[string, string, string]>> }} register */
 export const bankedKeys = (register) => new Set(Object.entries(register.arm1).flatMap(([f, rows]) => rows.map((r) => hitKey(f, r[0], r[2]))));
 
-/** The trees arm 1 reads: the pool data and the writers that hold prose. */
-export const ARM1_ROOTS = Object.freeze(['src/data', 'src/generators']);
+/**
+ * The trees arm 1 reads. W2-B-DECLARE item 3 (record 288, ruling 1, B (i)): the display and the components joined
+ * the pool data and the generators, so a line written in code is read where it is written; their habitat at the
+ * widening is banked in the widened register under `root`, shrink-only.
+ */
+export const ARM1_ROOTS = Object.freeze(['src/data', 'src/generators', 'src/domain', 'src/components']);
 
 /**
  * THE THINGS AND THEIR MATCHER live in ONE home, `src/domain/facts/registeredWords.js` (W2-B-DECLARE,
@@ -213,15 +217,19 @@ export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
   /** @type {Array<{ file: string, thing: string, text: string }>} */ const hits = [];
   const visit = (n) => {
-    const isText = ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n);
-    if (isText && n.text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n) && !isNotPrintedSite(rel, n)) {
+    // a JSX text node is a line written in a component (W2-B-DECLARE item 3: the components are a root); its
+    // white space is folded as a browser folds it
+    const jsx = ts.isJsxText(n) ? n.text.replace(/\s+/g, ' ').trim() : null;
+    const isText = jsx !== null || ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n);
+    const text = jsx ?? n.text;
+    if (isText && text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n) && !isNotPrintedSite(rel, n)) {
       let declared = null;
-      for (const sentence of sentencesOf(n.text)) {
+      for (const sentence of sentencesOf(text)) {
         for (const thing of thingsNamedIn(sentence)) {
-          declared ??= [...declarationWordsAround(n, rel), ...(keyed.get(n.text) || [])];
+          declared ??= [...declarationWordsAround(n, rel), ...(keyed.get(text) || [])];
           const atoms = THINGS[thing].atoms.map((a) => a.toLowerCase());
           if (declared.some((w) => atoms.includes(w))) continue;
-          if (!hits.some((h) => h.thing === thing && h.text === n.text)) hits.push({ file: rel, thing, text: n.text });
+          if (!hits.some((h) => h.thing === thing && h.text === text)) hits.push({ file: rel, thing, text });
         }
       }
     }

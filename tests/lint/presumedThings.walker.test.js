@@ -5,7 +5,8 @@
  * `tests/lint/presumedThings.register.json`, shrink-only.
  *
  * THIS FILE REDS WHEN:
- *   • ARM 1: a source literal under src/data or src/generators names a thing, declares no atom that
+ *   • ARM 1: a source literal (or a component's JSX text) under src/data, src/generators, src/domain or
+ *     src/components (the last two since W2-B-DECLARE item 3) names a thing, declares no atom that
  *     answers it through a carrier a draw door enforces (W2-B-DECLARE item 1), and has no row in the
  *     register or the widened register (`presumedThings.widened.register.json`) (a new undeclared line);
  *   • the tagged tables the walker credits differ from the `tagged: true` sites in src;
@@ -29,7 +30,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import {
-  ARM1_NOT_PRINTED, COURT_HOUSES, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
+  ARM1_NOT_PRINTED, ARM1_ROOTS, COURT_HOUSES, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
   deniesExistence, hitKey, listFiles, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
@@ -79,6 +80,16 @@ describe('the rule book', () => {
       'Leads the militia drill on the green each week.',
     ]);
     expect(scanSource('src/generators/npcStructure.js', src).map((h) => h.text)).not.toContain('Leads the militia drill on the green each week.');
+  });
+
+  /**
+   * W2-B-DECLARE item 3 (record 288, ruling 1, B (i)): the display and the components are roots, and a component's
+   * JSX text is read as a line. Red at e55ede7d2's rule book (two roots, no JSX text): every `root` row stale.
+   */
+  test('the roots are the four trees that hold lines, and a component\'s JSX text is read', () => {
+    expect([...ARM1_ROOTS]).toEqual(['src/data', 'src/generators', 'src/domain', 'src/components']);
+    const jsx = 'export const P = () => <p>The militia drills on the green every week.</p>;';
+    expect(scanSource('src/components/planted.jsx', jsx).map((h) => `${h.thing} :: ${h.text}`)).toEqual(['militia :: The militia drills on the green every week.']);
   });
 
   test('the tagged tables are exactly the files a door draws `{ tagged: true }`', () => {

@@ -61,7 +61,9 @@ if (mode === '--check' || mode === undefined) {
     }
     return atBase.get(file);
   };
-  const novel = fresh.filter((h) => !srcAt(h.file).replace(/\\(.)/g, '$1').includes(h.text.slice(0, 60)));
+  // a literal's text against its source at the base: escapes and runs of white space folded on both sides
+  const fold = (/** @type {string} */ x) => x.replace(/\\[nrt]/g, ' ').replace(/\\(.)/g, '$1').replace(/\s+/g, ' ');
+  const novel = fresh.filter((h) => !fold(srcAt(h.file)).includes(fold(h.text).trim().slice(0, 60)));
   if (novel.length) {
     for (const h of novel) console.error(`NEW LINE (not at ${base}): ${hitKey(h.file, h.thing, h.text)}`);
     process.exit(1);
