@@ -9,6 +9,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 
@@ -21,7 +22,8 @@ describe('the church-economy note reads the flag', () => {
 
   test('a theocratic economy whose situation sentence is suppressed still carries its note', () => {
     expect(town.economicState.safetyProfile.flags.theocraticEconomy).toBe(true);
-    expect(String(town.economicState.situationDesc).toLowerCase()).not.toContain('church controls');
+    // the sentence is live (its trade clause prints) and silent on the church: the note may not read it
+    expectAbsentWithAnchor(String(town.economicState.situationDesc).toLowerCase(), 'church controls', 'trade works', 'the situation sentence');
     expect(town.coherenceNotes.some((n) => n.type === 'power_economic' && /flows through religious institutions/.test(n.note))).toBe(true);
   });
 });

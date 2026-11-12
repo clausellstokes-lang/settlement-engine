@@ -27,6 +27,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
@@ -83,7 +84,13 @@ describe('the rule book', () => {
       'The militia drills on the green in the causal arm.',
       'Leads the militia drill on the green each week.',
     ]);
-    expect(scanSource('src/generators/npcStructure.js', src).map((h) => h.text)).not.toContain('Leads the militia drill on the green each week.');
+    // the same source, read as a table drawn `{ tagged: true }`: its `tags` declare, so the line it flagged elsewhere is answered
+    expectPresentThenAbsent(
+      scanSource('src/data/planted.js', src).map((h) => h.text),
+      scanSource('src/generators/npcStructure.js', src).map((h) => h.text),
+      'Leads the militia drill on the green each week.',
+      'tags credited only in a tagged table',
+    );
   });
 
   /**
