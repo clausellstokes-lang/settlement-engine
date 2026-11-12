@@ -738,6 +738,40 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(out).toEqual(Object.fromEntries(cases.map(([tag]) => [tag, { gallery: false, link: false, import: false, map: false, page: false }])));
   }, ROW_TIMEOUT_MS);
 
+  // ── V3-2 (the THIRD review) ────────────────────────────────────────────────────────────────────
+  // The client drops a person card with neither a name nor a role (publicSafe.js :: toPublicSafe,
+  // `filter(npc => npc.name || npc.role)`); a served page is not projected again, so at f07db8760 the
+  // card the face veil left nameless and roleless was drawn. Hand-edited towns only.
+  it('V3-2 (the review row): a person with no name and no role (the face veil took the role) is drawn on no page and sent by no served read', async () => {
+    const doc = { name: 'T',
+      institutions: [{ id: 'den', name: 'The Den', category: 'criminal', desc: 'd' }],
+      npcs: [
+        { id: 'npc:named', name: 'Ada', role: 'smith', physical: 'V32_ANCHOR' },
+        // the review's class: an empty name, a role the face veil removes (tied to a hidden house)
+        { id: 'npc:211:x', name: '', role: 'fence', institution: { kind: 'house', key: 'The Den', veiled: true }, physical: 'V32_PHYS_FACE', personality: { core: 'V32_PERS_FACE' } },
+        // and plainly nameless and roleless
+        { id: 'npc:211:y', name: '', physical: 'V32_PHYS_BARE' },
+      ] };
+    const out = {};
+    for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+      for (const [tag, ov, dm] of [['default veil', veil.writeShareVeil({}, []), false], ['every eye open', veil.writeShareVeil({}, veil.defaultVeilFor(veil.galleryPayloadFor(doc, {})).map((d) => ({ address: d.address, hidden: false }))), false],
+        ['Reveal DM, the person revealed', { ...veil.writeShareVeil({}, []), 'npc:211:y': { revealDm: true } }, true]]) {
+        const r = await readBoth(db, await put(db, doc, ov, { dm }));
+        // anchored: the named person is drawn on both pages
+        expect(has(r.g.settlement, 'V32_ANCHOR') && has(r.l.settlement, 'V32_ANCHOR'), `${where} ${tag}`).toBe(true);
+        // with Reveal DM on, person x is the full record (no face veil: its role stays, so it is drawn on
+        // every page); the nameless and roleless card is y alone
+        const tok = dm ? 'V32_PHYS_BARE' : 'V32_PHYS';
+        out[`${where} ${tag}`] = { page: has(r.g.settlement, tok) || has(r.l.settlement, tok),
+          response: where === '211' ? has(r.gResp, tok) || has(r.lResp, tok) : null };
+      }
+    }
+    // the control: the 210 page never drew either card
+    for (const [k, v] of Object.entries(out)) if (k.startsWith('210')) expect(v.page, k).toBe(false);
+    expect(Object.fromEntries(Object.entries(out).filter(([k]) => k.startsWith('211'))))
+      .toEqual(Object.fromEntries(Object.keys(out).filter((k) => k.startsWith('211')).map((k) => [k, { page: false, response: false }])));
+  }, ROW_TIMEOUT_MS);
+
   // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
   it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));

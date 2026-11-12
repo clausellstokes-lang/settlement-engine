@@ -46,6 +46,9 @@
 --       Before, an unmarked Reveal-DM listing sent both to every reader and every importer, and so
 --       did a marked one once "Pending decrees" was opened. The sanitiser's top-level allowlist
 --       already drops both, so the link and the map never carried them.
+--   (8) A SERVED BODY DROPS A PERSON CARD WITH NEITHER A NAME NOR A ROLE (the third review's V3-2), as
+--       the client's projection does: a served page is not projected again, so a nameless card whose
+--       role the face veil removed was drawn. Hand-edited towns only (the six-size probe counts 0).
 --
 -- RESTATED ALSO: _gallery_apply_member_overrides (093), its body plus a typed read of the two
 -- stored member flags (the second review's R9/R11): only JSON true reveals or permits; nothing raises.
@@ -1058,12 +1061,20 @@ declare
   -- every person of the document, by the client's member key (the served booleans and the card deltas)
   people text[] := array(select distinct public._gallery_veil_npc_id(c.card) from public._gallery_veil_cards(doc, 'npc') c);
   res jsonb;
+  body jsonb;
 begin
   if jsonb_typeof(ov) <> 'object' then ov := '{}'; end if;
   res := public._gallery_veil_resolve(pub, ov, link, people);
   if res is null then return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people), copy)); end if;
+  body := public._gallery_veil_apply(pub, res);
+  -- a person card with neither a name nor a role is dropped, as the client's projection drops it
+  -- (publicSafe.js :: toPublicSafe); a served page is not projected again (the third review's V3-2)
+  if jsonb_typeof(body -> 'npcs') = 'array' then
+    body := jsonb_set(body, '{npcs}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(body -> 'npcs') with ordinality x(e, o)
+      where jsonb_typeof(e) <> 'object' or public._gallery_veil_truthy(e -> 'name') or public._gallery_veil_truthy(e -> 'role')), '[]'));
+  end if;
   return jsonb_build_object(
-    'body', public._gallery_veil_apply(pub, res),
+    'body', body,
     'groupings', res -> 'groupings',
     'served', public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy));
 end $$;
