@@ -5,7 +5,7 @@
 import { random as _rng } from '../../kernel/rngContext.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { getInstFlags, getPriorities, getStressFlags, getTradeRouteFeatures, hasTeleportationInfra, priorityToMultiplier } from '../helpers.js';
-import { generateSafetyProfile } from '../safetyProfile.js';
+import { generateSafetyProfile, keptGuardLine } from '../safetyProfile.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../data/goods/chains.js';
 import { computeActiveChains, deriveExportsFromChains, deriveImportsFromChains, deriveLocalProductionFromChains, deriveInstitutionalServices, deriveServiceExports } from '../computeActiveChains.js';
 import { generateTradeIncomeStreams } from './tradeGoods.js';
@@ -821,6 +821,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     _foodSec,
   );
   const prosperity = deriveProsperityLabel(baseProsperity, config, institutions);
+  // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force.
+  safetyProfile.guardEffectivenessDesc = keptGuardLine(safetyProfile.guardEffectivenessDesc, institutions, prosperity);
   // COHERENCE-UPKEEP (ruling 6): the stores are laid by at the label's share, at the stores' writer,
   // AFTER prosperity (which read the full-granary record above and reads no months). The writer's
   // only draw is a label-keyed fork, so this second call draws the same crop fortune and moves no

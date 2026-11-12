@@ -855,6 +855,23 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.": declaredSet(
     "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.", ['garrison'],
     "The settlement's chaplain also leads its armed men. He's authorizing military action for reasons that sound theological."),
+  // COHERENCE-UPKEEP (the chair's ruling 7 of 2026-11-12): what the place can pay for its hired
+  // force, said in the guard assessment. Resolved AFTER prosperity by `keptGuardLine` (below), by the
+  // `prosperity` atom (`prosperity: ≥ moderate` is `keepOf().bought` ≥ 0.6); each twin is today's
+  // line. The hired company, the garrison and the charter hall each line names are the branch's own
+  // guarantee (`keptGuardLine` reads them off the defence home), so a twin excludes the purse alone.
+  'There is no standing guard; a hired company is paid to keep the peace, and gives what it is paid for.': declaredSet(
+    'There is no standing guard; a hired company is paid to keep the peace, and gives what it is paid for.', ['prosperity: ≥ moderate'],
+    'A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.'),
+  'A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.': declaredSet(
+    'A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.', ['prosperity: ≤ poor'],
+    'A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.'),
+  'Hired swords back the garrison when the purse allows.': declaredSet(
+    'Hired swords back the garrison when the purse allows.', ['prosperity: ≤ comfortable'],
+    'Hired swords back the garrison.'),
+  "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.": declaredSet(
+    "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.", ['prosperity: ≤ comfortable'],
+    "The adventurers' charter hall coordinates emergency response to threats."),
 });
 
 // ─── SW-B5 FRAMES: the guard assessment's frames get vantages ────────────────
@@ -917,3 +934,48 @@ export const NO_WATCH_SMALL = Object.freeze([ // exported for the no-watch pin (
   'Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.',
   'There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.',
 ]);
+
+// ─── COHERENCE-UPKEEP: the hired force's lines, after prosperity ─────────────
+// ⚠ AT THE END OF THE FILE for the same reason as the frames above (LINE citations).
+
+/** Today's leads the upkeep lines stand in for (each is its declared line's twin). */
+const MERCENARY_LEAD = 'A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.';
+const CHARTER_LEAD = "The adventurers' charter hall coordinates emergency response to threats.";
+
+/**
+ * THE GUARD ASSESSMENT SAYS WHAT THE PLACE CAN PAY (COHERENCE-UPKEEP, the chair's ruling 7 of
+ * 2026-11-12). The safety profile is written before prosperity (prosperity reads its black-market
+ * figure), so the economy hands the guard assessment back here once the label is known. Draw-free:
+ * every line resolves through the declared siblings above, against the live roster and the label.
+ *   - a hired company and no standing guard: the paid line (Moderate and above) or the short line
+ *     (Poor and below) in place of today's lead;
+ *   - a hired company beside a garrison: one more sentence, the purse-bound line below Prosperous;
+ *   - a charter hall with no garrison and no watch: the bounty line below Prosperous.
+ * @param {string} desc the guard assessment as the safety profile wrote it
+ * @param {Array<{ name?: string }>} institutions the roster
+ * @param {unknown} prosperity the prosperity label
+ * @returns {string}
+ */
+export function keptGuardLine(desc, institutions, prosperity) {
+  const text = String(desc || '');
+  const opts = {
+    facts: () => factsOf({ institutions, economicState: { prosperity } }),
+    poolId: 'safetyProfile:SAFETY_LINE_SIBLINGS', surface: 'defense', drawKind: 'T',
+  };
+  const said = (/** @type {string} */ line) => resolveSibling(line, SAFETY_LINE_SIBLINGS, opts);
+  const d = defenceOf({ institutions });
+  const standing = d.garrison || d.watch || d.militia;
+  if (text.startsWith(MERCENARY_LEAD) && d.mercenary && !standing) {
+    const paid = said('There is no standing guard; a hired company is paid to keep the peace, and gives what it is paid for.');
+    const lead = paid !== MERCENARY_LEAD ? paid
+      : said('A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.');
+    return lead + text.slice(MERCENARY_LEAD.length);
+  }
+  if (text.startsWith(CHARTER_LEAD)) {
+    return said("The adventurers' charter hall takes bounty work against threats, as far as the purse runs.") + text.slice(CHARTER_LEAD.length);
+  }
+  if (d.mercenary && d.garrison && !text.startsWith(MERCENARY_LEAD)) {
+    return `${text} ${said('Hired swords back the garrison when the purse allows.')}`;
+  }
+  return text;
+}

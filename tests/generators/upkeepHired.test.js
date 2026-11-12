@@ -23,7 +23,7 @@ import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { deriveMagicProfile, magicAvailabilityBands } from '../../src/domain/magicProfile.js';
 import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
-import { SAFETY_LINE_SIBLINGS } from '../../src/generators/safetyProfile.js';
+import { SAFETY_LINE_SIBLINGS, keptGuardLine, generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SEEDS = ['agree-village-28', 'agree-village-30', 'agree-village-40', 'agree-village-43', 'agree-village-45'];
@@ -204,10 +204,21 @@ describe('the guard assessment says what the place can pay for its hired force',
     }
   });
 
+  test('a hired company and no standing guard: the paid line at Moderate, the short line at Poor, today\'s line unanswered', () => {
+    const roster = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
+    const today = generateSafetyProfile({ priorityMilitary: 60, priorityEconomy: 60 }, 'town', roster).guardEffectivenessDesc;
+    const lineOf = (atom) => upkeepLines().find((line) => line.needs.includes(atom));
+    expect(keptGuardLine(today, roster, 'Moderate').startsWith(lineOf('prosperity: ≥ moderate').text)).toBe(true);
+    expect(keptGuardLine(today, roster, 'Poor').startsWith(lineOf('prosperity: ≤ poor').text)).toBe(true);
+    expect(keptGuardLine(today, roster, 'Wealthy').startsWith(lineOf('prosperity: ≥ moderate').text)).toBe(true);
+    const twin = Object.values(SAFETY_LINE_SIBLINGS).find((set) => set[0] === lineOf('prosperity: ≤ poor'))[1].text;
+    expect(today.startsWith(twin), 'anchored: the safety writer printed today\'s lead').toBe(true);
+  });
+
   test('RED-FIRST agree-village-40 (Poor, a charter hall and no standing guard): the guard line is the purse-bound charter line', () => {
     const s = born('agree-village-40');
     expect(s.economicState.prosperity).toBe('Poor');
-    const charter = upkeepLines().filter((line) => !line.needs.includes('mercenary'));
+    const charter = upkeepLines().filter((line) => /charter hall/.test(line.text));
     expect(charter.length, 'anchored: the charter line is declared').toBe(1);
     expect(s.economicState.safetyProfile.guardEffectivenessDesc).toContain(charter[0].text);
   });
