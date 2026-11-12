@@ -887,16 +887,15 @@ export function writeShareVeil(memberOverrides, deltas, mode = {}) {
     rest.push(d);
   }
   const prior = readShareMode(memberOverrides);
-  const asked = {
+  const next = clampShareMode({
     mode: mode.mode !== undefined ? mode.mode : prior.mode,
     at: mode.at !== undefined ? mode.at : prior.at,
     snapshot: mode.snapshot !== undefined ? mode.snapshot : prior.snapshot,
-  };
-  const next = clampShareMode(asked);
-  // A copy the clamp drops (past VEIL_LIMITS.snapshotMaxChars) does not keep the word: with no copy
-  // every reader draws the live town, so the stored mode IS live (the second review's R5: such a
-  // share was labelled frozen while it was shared live). The share panel says so in one line.
-  if (next.mode === 'snapshot' && isRec(asked.snapshot) && !next.snapshot) next.mode = 'live';
+  });
+  // A copy asked for and not kept (past VEIL_LIMITS.snapshotMaxChars) does not keep the word: with
+  // no copy every reader draws the live town, so the stored mode IS live (the second review's R5).
+  // The prior copy was read through the clamp already, so only a copy given here can be dropped.
+  if (mode.snapshot && !next.snapshot) next.mode = 'live';
   out[VEIL_OVERRIDE_KEY] = { v: VEIL_VERSION, deltas: rest, ...next };
   return out;
 }
