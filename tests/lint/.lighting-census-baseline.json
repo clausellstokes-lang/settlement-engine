@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "6e2992eadf59fd7b75517f18955ae259ec0c4b1e",
-  "measuredBy": "COHERENCE-QUARREL",
-  "date": "2026-11-11",
-  "note": "three new test files: tests/generators/conflictCast.test.js, tests/generators/conflictTouched.test.js, tests/lint/poolDominance.walker.test.js (the quarrel cures and the dominance door)",
-  "files": 3202,
+  "measuredAtSha": "8bb5e91bb41ab78ccb1c20a2175f7fa7c0b4567b",
+  "measuredBy": "STYLE-2-MERGE-8",
+  "date": "2026-11-12",
+  "note": "STYLE-2-MERGE point 43 (the COHERENCE-PRESUME merge f922124d0): the line side taken, the census re-frozen over the composed tree (both lanes new test files)",
+  "files": 3205,
   "parked": 397,
-  "credited": 2805,
-  "titles": 29098,
-  "suiteTitles": 7869
+  "credited": 2808,
+  "titles": 29120,
+  "suiteTitles": 7878
 }
