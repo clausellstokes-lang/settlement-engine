@@ -35,6 +35,10 @@ Lane `lane/coherence-agree-2026-11-11`, base `99bcc6944`. First seat: through `8
 | guard | 5bea66c25 | the market: the economic situation naming a market the market home says the town lacks | — |
 | 12 | fe3c54001 | the economic situation's six market lines are declared in `PROSPERITY_LINE_SIBLINGS` (needs `market`, each with its twin) and enrolled in the pool census's declaration channels | 9 towns → 0 ("markets meet infrequently" 7, "The market still opens" 2, "The market is shut" 0) |
 | 13 | f61a5a5da | the court-without-prison line names no prison ("…the prison system is limited" → "…there is nowhere to hold the guilty") | printed in 57 towns, all without a prison by their branch → 0 |
+| pin | b8030fc29 | the market member's test is pinned by its finding's path, not a literal sentence (the drawn-anchor walker) | — |
+| census | 927db25e0 | the wiring census re-taken by its own writer: the `court` atom produces DS-DEF-2's four `court` reads; the holder table's `blackMarketCapture` cite follows its line | measured 582 → 586, not-produced 70 → 66 |
+| docs | b35b43edb, 92a4ebd25 | this hand-back and the draft record; the item 4 proposal (`UPKEEP-PROPOSAL.md`, nothing under `src/`) | — |
+| edge | the last commit | the edge-shared bundles re-emitted at the final tip, alone (§0.11) | — |
 
 ## What moved, and why (outside the text)
 
@@ -50,7 +54,22 @@ PRESUME's corpus arm listed "A court exists…" in towns its reader calls courtl
 
 At the first seat's tip, 40 rows were red. Each is a byte-identity, a digest or a corpus figure over generated text, and each is **the merge seat's** to re-record. The lane ran no golden door. Cures 10–13 move generated text again in the same surfaces. The draft shift record is **`docs/chair/2026-11-11/AGREE-shift-record.DRAFT.json`**: unsigned, with `predictedRows` not learned. It names four surfaces: the generator golden master, the dossier prose manifest, the herald knowledge-desk golden and the espionage dormancy fence. The second seat added cures 10–13 to its cause and to the dossier manifest's reason.
 
-EQUAL-FAILING-SET: see the section below.
+See the equal-failing-set section below.
+
+## The equal-failing set
+
+The suites are tests/generators, domain, property, lint, build and architecture. They ran at the first seat's tip `81b942665` (a `git archive` copy) and at the second seat's tip before the last three commits.
+- **First seat's tip:** 44 rows failed of 24803.
+- **Second seat's tip:** 48 rows failed of 24823.
+
+**New at the tip, and cured on the lane:**
+- `tests/lint/proseDrawnAnchors.walker.test.js`: the market test anchored a literal sentence. Cured in b8030fc29.
+- `tests/lint/proseWiringCensus.walker.test.js`: four rows (the stale census, the dry read, the holder cite, the absence pin). Cured in 927db25e0.
+- `tests/build/engineBundleReplay.test.js` (3 rows), `engineServiceCore.test.js` (1) and `engineServiceStoreParity.test.js` (1): the committed engine bundle was stale against `src/`. Cured by the last commit, the bundles re-emitted.
+
+**Absent at the tip, and an artifact of the copy:** the archive copy has no `.git`. The rows below read git history and fail there only: the observed-shape sentinel's history probe, the tuning register's four refreeze rows, `wiringCensusDeclared`'s channel census, and the four whole suites that fail to load without git (`declaredLineShape`, `drawDeclaredKeys`, `controlBytes`, `ledgerCitationIntegrity`). They are not cures and are claimed as none.
+
+**Every other failing row is identical at both tips.** There are 38 such rows; the first seat counted 40 in a real git tree. Each is a byte-identity, digest or corpus figure over generated text, and each is the merge seat's. No row green at the first seat's tip is red at the second seat's, once the three cures above are in.
 
 ## Found, and not the lane's
 
@@ -60,4 +79,4 @@ EQUAL-FAILING-SET: see the section below.
 
 ## What was banked
 
-The second seat banked nothing. It added no register row, skipped no test and loosened no pin.
+The second seat added no register row, skipped no test and loosened no pin. Its one re-take is the wiring census, taken by its own writer (927db25e0), and it is a truth: the `court` atom is a producer the tree now carries. Its two count pins moved with it, each with its reason on the line.
