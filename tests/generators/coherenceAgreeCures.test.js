@@ -432,3 +432,41 @@ describe('F5 (d): the wizard offers the mountain pass on the mountains only', ()
     expect(getCompatibleResources('road', 'hills').find((r) => r.key === 'grain_fields')).toMatchObject({ offered: true });
   });
 });
+
+/**
+ * P2's RULE (COHERENCE-AGREE-7, the chair's ruling of 2026-11-12): A REFILLED SLOT TAKES ITS DEPLETION DRAW ONLY WHERE
+ * THE REFUSED MEMBER COULD HAVE BEEN DEPLETED. A′'s refill (COHERENCE-AGREE-4) kept the slot's draw, and a crossroads is
+ * never randomly depletable, so its replacement could arrive worked out where the roll's own winner never could (125
+ * of the lane's 4,141 births; REVIEW-AGREE-2 F5's second effect). Each seed below is a crossroads holder off a
+ * crossroads whose replacement arrived depleted at 7cf4f0c2e; it now arrives live. The one food band the rule moves is
+ * r2s-under_siege-village-0's (its replacement grain fields arrive live: deficit -> importDependent). REVIEW-AGREE-2
+ * F6's besieged city (r2s-under_siege-city-3) frees its replacement forest too, and its band stays deficit: A′'s
+ * re-deal moves it by another path, declared in the draft record.
+ */
+describe('P2\'s rule: a refilled slot arrives as live as the refused winner would have been', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const FREED = { 'agree-town-100': 'ancient_grove', 'agree-city-20': 'ancient_grove', 'r2r-village-50': 'ancient_grove',
+    'r2r-town-47': 'grazing_land', 'r2r-metropolis-27': 'hunting_grounds', 'l2-wartime-metropolis-8': 'grain_fields' };
+  test('each replacement is held and not depleted', () => {
+    expectNoSeedFailures(collectSeedFailures(Object.keys(FREED), (seed) => {
+      const [, stress, tier] = seed.match(/^l2-(\w+)-(\w+)-\d+$/) ?? [];
+      const settlement = stress
+        ? generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier, selectedStressesRandom: false, selectedStresses: [stress] }), null, { seed })
+        : birth(seed);
+      expect(settlement.config.tradeRouteAccess, seed).not.toBe('crossroads');
+      expect(settlement.config.nearbyResources, `anchored: ${seed} holds its replacement`).toContain(FREED[seed]);
+      expect(settlement.config.nearbyResourcesDepleted, seed).not.toContain(FREED[seed]);
+    }), 'a refilled slot took a depletion draw its refused member could never take');
+  });
+  test('the besieged: r2s-under_siege-village-0 grows on live grain fields again (deficit -> importDependent)', () => {
+    const besieged = (seed, tier) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: tier,
+      selectedStressesRandom: false, selectedStresses: ['under_siege'] }), null, { seed });
+    const village = besieged('r2s-under_siege-village-0', 'village');
+    expect(village.config.nearbyResources).toContain('grain_fields'); // anchored: the replacement is held
+    expect(village.config.nearbyResourcesDepleted).not.toContain('grain_fields');
+    expect(village.economicState.foodSecurity.foodRecord.band).toBe('importDependent');
+    const city = besieged('r2s-under_siege-city-3', 'city');
+    expect(city.config.nearbyResources).toContain('managed_forest'); // anchored: the replacement is held
+    expect(city.config.nearbyResourcesDepleted).not.toContain('managed_forest');
+  });
+});

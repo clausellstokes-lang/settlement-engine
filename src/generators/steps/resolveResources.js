@@ -182,7 +182,7 @@ registerStep('resolveResources', {
     // Positions and infrastructure can still be explicitly disabled by an
     // authored state/event; settlement size alone cannot "consume" a harbour,
     // crossroads, mountain pass, mill site, oasis, or hot spring.
-    // (One draw per slot, in slot order, exactly as before; the slot keeps its draw if its winner is refilled below.)
+    // (One draw per slot, in slot order, exactly as before; a refilled slot reads it only where its winner could be depleted.)
     const depletionRolls = nearbyResources.map(() => rng.chance(depletionProb));
     // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12, Part B (iii) A′): a ROLLED resource whose required access
     // (RESOURCE_DATA[key].requires) is not this town's is refused after the roll and its draws. A hand-chosen roster
@@ -192,7 +192,7 @@ registerStep('resolveResources', {
     // takes another admissible member by a hash of this step's seed and the refused key (`kernel/proseHash.js ::
     // fnv1a32`), first from the refused member's own category (the roll's one-per-category slot), else from any
     // compatible member: not already held, its own required access met, not a rare one (a rare member enters only
-    // by its own chance), and no magical node where magic does not function. The slot keeps its depletion draw.
+    // by its own chance), and no magical node where magic does not function. Its depletion draw: P2's rule, below.
     // No draw is added or moved, so a birth with no refused winner is byte-identical. None admissible: the slot
     // stays empty.
     const admitsAccess = (key) => {
@@ -213,7 +213,12 @@ registerStep('resolveResources', {
       held.add(refill);
       return refill;
     });
-    nearbyResourcesDepleted = slots.filter((key, i) => key !== null && isRandomlyDepletableResource(key) && depletionRolls[i]);
+    // COHERENCE-AGREE-7 (the chair's ruling on P2, 2026-11-12): A REFILLED SLOT TAKES ITS DEPLETION DRAW ONLY WHERE THE
+    // REFUSED MEMBER COULD HAVE BEEN DEPLETED. The draw belongs to the roll's winner; a refused position (a crossroads,
+    // a mountain pass) is never randomly depletable, so its replacement arrives live, as the winner would have been.
+    const refused = nearbyResources.map((key, i) => slots[i] !== key);
+    nearbyResourcesDepleted = slots.filter((key, i) => key !== null && isRandomlyDepletableResource(key) && depletionRolls[i]
+      && (!refused[i] || isRandomlyDepletableResource(nearbyResources[i])));
     nearbyResources = slots.filter((key) => key !== null);
 
     // ⭐ EM-B2b2 — AND THE DM'S OWN WORLD FACT IS AN AUTHORED PREMISE TOO, read through the one
