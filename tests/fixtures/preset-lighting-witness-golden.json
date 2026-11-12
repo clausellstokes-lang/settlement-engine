@@ -67,8 +67,8 @@
       "bornWorldSha256": "aa20e7f52ad33153e5596083ae8411de03fa85183de5f8a4d6d19e737548c84a",
       "observedTicks": 52,
       "status": "complete",
-      "worldStateSha256": "ed475d74619a0a05727c5e89728aece9fc846e6c10070336608d02a2b6b75d38",
-      "wizardNewsSha256": "ea6064b7d7d74daed30e0a77bf99bf1c5970d244e9c15ade2b87730ab4a43bdc",
+      "worldStateSha256": "4598832e7e3755034dbbc30279fcf9a8b593a94b5bad953f3afef7f73be755e7",
+      "wizardNewsSha256": "a90d29bbee84a75dc900a6de1791de98eb72495d7df8e1d33f83bd16e1961ad2",
       "settlementUpdatesSha256": "3210dac3888b0d63a3d640abe1fd7fdd7a7aa7644366658f84ac6b03e7c51ad5",
       "regionalGraphSha256": "d8b3b7e12db27aece41081efbbcde4ecfd352d2a0a40f55ccc3266b6899165c6"
     },
@@ -83,8 +83,8 @@
       "bornWorldSha256": "6039eafa56dfc9f35109a272702fb6c7442ebad900323e324a03ceed3d8c286c",
       "observedTicks": 52,
       "status": "complete",
-      "worldStateSha256": "19ab8a5e41a442bab81d859d18c435b241e850eca596a2d825e1347f07a18f2b",
-      "wizardNewsSha256": "86d60808ae92c49dd9fff8d1b64ffabce0041202d9d1bfd6bf580e9bbe33cd53",
+      "worldStateSha256": "ef6a518a9ce2033b29ff2ce072d2b7a27598dcf01742ed64080ea5f4b93a6625",
+      "wizardNewsSha256": "517dbec6852c854ceaee2017b0c04bbe21ed6d8860962c1f4a9bfdaed654b9dc",
       "settlementUpdatesSha256": "3811bd5e5544eeeeaedb97be55cf08a6bd29c14c77b258246c0e463ff5a59916",
       "regionalGraphSha256": "5c065ca89b1e5385f1a152b830485f98273ce1a0835a6850d2f77ada26d05336"
     },
@@ -99,8 +99,8 @@
       "bornWorldSha256": "ad975aa7135aa0cd24ca3d72a3f8b03b2c024c265539a3c752bcbc17d3b90bf8",
       "observedTicks": 52,
       "status": "complete",
-      "worldStateSha256": "9b07de91d7051765abc42aedc1992b5eabe6b44e74c251d7d418626959ca11e3",
-      "wizardNewsSha256": "07e3b12ae265981cf402352b7061ee127d4e420163650804b2ee0a3797ee325d",
+      "worldStateSha256": "697e9e0f854ce0682f034b4afdddc49278dfe0dc57c89a1ab40eee09a83b7626",
+      "wizardNewsSha256": "47f46eb59dbacfffb8ea279c7745d0322d959a5524faea36d3f22d8ef70c6bb9",
       "settlementUpdatesSha256": "a57ff4d0f09d479ce66692326f53e9c76ef658fad166dff79b11d950b3337893",
       "regionalGraphSha256": "4c5afe6d69649df4b437b6ba1554663cafeef9832df41677b91aa5072c7a2448"
     },
@@ -115,8 +115,8 @@
       "bornWorldSha256": "d578f848d36b23cd09ec32ba205e9c54f6a2ce9b1139619417e747eed32c3ed2",
       "observedTicks": 52,
       "status": "complete",
-      "worldStateSha256": "818579bdc094589f4e6ddb817f566408be620e3c5fdc2193f2ddd2df42fe67df",
-      "wizardNewsSha256": "56a294c7b476bf895f08c988becd69f0819de5adc6c1b63df0ee40a18b136f22",
+      "worldStateSha256": "f539ea0a4f9fdaef7d18a048439aaca9fd74df202c7742aac1aaa1e3efa41337",
+      "wizardNewsSha256": "aa5a69192a9c55fa6ecf6245b640300cf3566ca01894f168d4f52aee67b4d733",
       "settlementUpdatesSha256": "c3aea18c8dc06c11ac523d0c878853c48cdfdf3d3810d628f40047fc6213a87e",
       "regionalGraphSha256": "edf21734db2302e651ab0364ac001f4de886baf3a0dc93a09acc1da45ed619d3"
     },
@@ -147,8 +147,8 @@
       "bornWorldSha256": "80d5d57562060562b9c298081d28d1eb1283626f3f70b6a71951bede4968c9f9",
       "observedTicks": 52,
       "status": "complete",
-      "worldStateSha256": "96b6548a7076e7eca51eabbbf60161922fc4fb4b8af88db301afc835e913f670",
-      "wizardNewsSha256": "e049add00bba5b6d253e2005479fc7256ccb9634348e7c924d0eead9b444ea72",
+      "worldStateSha256": "a246ee142e179efb7813506b5626686c26e59b86527f166517b12ab1112be63c",
+      "wizardNewsSha256": "0c9898e5b41595762950ff4a555e0238bdf58193912ac56ccee0d26e6f281b3f",
       "settlementUpdatesSha256": "6d5113d02ee352515a02bf8f632057a6a1d4f7d0ee0d65507bded24030a81b31",
       "regionalGraphSha256": "5c065ca89b1e5385f1a152b830485f98273ce1a0835a6850d2f77ada26d05336"
     },
@@ -163,8 +163,8 @@
       "bornWorldSha256": "49523ac653cdec5af29f7382a5cc4995c8d1eeae879c661717e4b4f96d3726d3",
       "observedTicks": 52,
       "status": "complete",
-      "worldStateSha256": "84c7222c8010322f87b02346a004758e783c7aeeb9b3cb3e88ecfb846ed8efd9",
-      "wizardNewsSha256": "ddbab381879aee5143be2f2367b125eaf39458c52069b7f1dbd085960cc0d1f1",
+      "worldStateSha256": "2acfaf3192784e8dda999b45d8721692b79f4e0ef16ed85aee332fdfa5b3e9b6",
+      "wizardNewsSha256": "ef2289b5b47e94066511e67c5f5329493cd222bb11296ee5793ce07af988685a",
       "settlementUpdatesSha256": "ec86e18f5a07af1fe2ab34cab7e221c690a070cc3aa7ff1d393403895fb664e2",
       "regionalGraphSha256": "1122ffb6ae5ce4f561ea043c899dc89c655769e2c2e268fd525efe3087aa9898"
     },
@@ -179,8 +179,8 @@
       "bornWorldSha256": "dfc191d7892fa60cf2743fe651253a16ede8db6d82725f4af6c1692511409f7c",
       "observedTicks": 52,
       "status": "complete",
-      "worldStateSha256": "96c5a0b0eecaaf723dfa7f26a783871965755854eebd0faa614a629f5307e8be",
-      "wizardNewsSha256": "4e61647002d9a0d2ebbdadcdc6e017d3f33ac4580821d8757c4357a51a11ada1",
+      "worldStateSha256": "d87d08538f5a1f371d9c023aedd37f04b0ea893bcd51936bef7c518576480ce3",
+      "wizardNewsSha256": "f29a6f8bc221037b3733dd482e3229ea227ecedd5ff92e82ddd5f5306b1ac54c",
       "settlementUpdatesSha256": "b27179985cbac0f0f1ff75cfec057ec6e1968adf3da5df04bf92ff40e0571651",
       "regionalGraphSha256": "8bc4478549f19b5b084db1120f4ab626f494c2b507940215544cffe0a5c497fa"
     }
