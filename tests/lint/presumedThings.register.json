@@ -47,7 +47,6 @@
   {"thing": "market", "path": ".npcs[].secret.what", "text": "before it goes to market", "reason": "figure", "note": "\"goes to market\": to sale", "towns": 3},
   {"thing": "market", "path": ".powerStructure.conflicts[].desc", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
   {"thing": "market", "path": ".powerStructure.conflicts[].issue", "text": "market licensing", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 3},
-  {"thing": "market", "path": ".pressureSentence", "text": "share the streets and the market", "reason": "reported", "note": "src/generators/narrativeText.js declares `market`; printed absent: a late write, reported", "towns": 1},
   {"thing": "mercenary", "path": ".conflicts[].desc", "text": "mercenary contract being disputed", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 2},
   {"thing": "mercenary", "path": ".conflicts[].issue", "text": "mercenary contract being disputed", "reason": "other-lane", "note": "COHERENCE-QUARREL: src/generators/power/conflicts.js", "towns": 2},
   {"thing": "mercenary", "path": ".economicState.safetyProfile.guardEffectivenessDesc", "text": "A mercenary company provides enforcement", "reason": "other-lane", "note": "COHERENCE-AGREE: src/generators/safetyProfile.js (its member)", "towns": 27},

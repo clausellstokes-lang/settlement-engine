@@ -186,7 +186,8 @@ export const PRESSURE_SENTENCES = {
     ];
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
-          { text: `${r.name} is taking in more people than it was built for. The newcomers and the old residents share the streets and the market, but not a language, customs or trust, and ${r.govFaction || "the governing authority"} cannot keep up with how fast they come.`, needs: ['market'] },
+          // COHERENCE-PRESUME: the market was incidental and the draw never honoured its `needs` (presume-village-38)
+          `${r.name} is taking in more people than it was built for. The newcomers and the old residents share the same streets, but not a language, customs or trust, and ${r.govFaction || "the governing authority"} cannot keep up with how fast they come.`,
           `The ${r.commodity || "trade"} that made ${r.name} worth coming to cannot keep pace with the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
           `Newcomers have built a second, poorer town at the edges of ${r.name}, and ${r.govFaction || "the governing authority"} has not decided whether it governs it; until it does, the outer town keeps its own rules.`,
         ]

@@ -223,7 +223,8 @@ describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor
       if (!have || JSON.stringify(have[0]) !== JSON.stringify(want)) wrong.push(`${line.lineId}: ${JSON.stringify(have)} ≠ ${JSON.stringify(want)}`);
     }
     expect(wrong).toEqual([]);
-    expect(declaring).toBe(17);
+    // 17 -> 16 (COHERENCE-PRESUME): the mass-migration line no longer names a market, so it declares nothing
+    expect(declaring).toBe(16);
   });
 });
 

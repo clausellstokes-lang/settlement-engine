@@ -65,6 +65,8 @@ const CASES = [
   // the denial side (the chair's ruling A): a line that denies a thing the town has
   ['No law, bring coin', 'law', 'presume-town-4'],
   ['no official recourse', 'law', 'presume-town-4'],
+  // the one reported row (the hand-back's §3 item 4): narrativeText's mass-migration line
+  ['share the streets and the market', 'market', 'presume-village-38'],
 ];
 
 /** @param {string} seed */
