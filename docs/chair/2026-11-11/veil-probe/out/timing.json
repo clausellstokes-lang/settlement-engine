@@ -6,7 +6,7 @@
   "cfg": "default",
   "read": "gallery",
   "medianMs": 306,
-  "maxMs": 357
+  "maxMs": 328
  },
  {
   "town": "largest corpus town (server-veil-metropolis-3)",
@@ -14,8 +14,8 @@
   "db": "at210",
   "cfg": "default",
   "read": "link",
-  "medianMs": 503,
-  "maxMs": 629
+  "medianMs": 461,
+  "maxMs": 484
  },
  {
   "town": "largest corpus town (server-veil-metropolis-3)",
@@ -23,8 +23,8 @@
   "db": "at210",
   "cfg": "all",
   "read": "gallery",
-  "medianMs": 298,
-  "maxMs": 373
+  "medianMs": 314,
+  "maxMs": 322
  },
  {
   "town": "largest corpus town (server-veil-metropolis-3)",
@@ -33,7 +33,7 @@
   "cfg": "all",
   "read": "link",
   "medianMs": 473,
-  "maxMs": 529
+  "maxMs": 492
  },
  {
   "town": "largest corpus town (server-veil-metropolis-3)",
@@ -41,8 +41,8 @@
   "db": "at211",
   "cfg": "default",
   "read": "gallery",
-  "medianMs": 389,
-  "maxMs": 439
+  "medianMs": 407,
+  "maxMs": 430
  },
  {
   "town": "largest corpus town (server-veil-metropolis-3)",
@@ -50,8 +50,8 @@
   "db": "at211",
   "cfg": "default",
   "read": "link",
-  "medianMs": 345,
-  "maxMs": 400
+  "medianMs": 351,
+  "maxMs": 352
  },
  {
   "town": "largest corpus town (server-veil-metropolis-3)",
@@ -59,8 +59,8 @@
   "db": "at211",
   "cfg": "all",
   "read": "gallery",
-  "medianMs": 526,
-  "maxMs": 553
+  "medianMs": 537,
+  "maxMs": 595
  },
  {
   "town": "largest corpus town (server-veil-metropolis-3)",
@@ -68,8 +68,8 @@
   "db": "at211",
   "cfg": "all",
   "read": "link",
-  "medianMs": 479,
-  "maxMs": 530
+  "medianMs": 480,
+  "maxMs": 516
  },
  {
   "town": "deploy-check Force all",
@@ -77,8 +77,8 @@
   "db": "at210",
   "cfg": "default",
   "read": "gallery",
-  "medianMs": 692,
-  "maxMs": 752
+  "medianMs": 699,
+  "maxMs": 745
  },
  {
   "town": "deploy-check Force all",
@@ -86,8 +86,8 @@
   "db": "at210",
   "cfg": "default",
   "read": "link",
-  "medianMs": 1072,
-  "maxMs": 1234
+  "medianMs": 1148,
+  "maxMs": 1252
  },
  {
   "town": "deploy-check Force all",
@@ -95,8 +95,8 @@
   "db": "at210",
   "cfg": "all",
   "read": "gallery",
-  "medianMs": 777,
-  "maxMs": 802
+  "medianMs": 755,
+  "maxMs": 771
  },
  {
   "town": "deploy-check Force all",
@@ -104,8 +104,8 @@
   "db": "at210",
   "cfg": "all",
   "read": "link",
-  "medianMs": 1125,
-  "maxMs": 1186
+  "medianMs": 1172,
+  "maxMs": 1218
  },
  {
   "town": "deploy-check Force all",
@@ -113,8 +113,8 @@
   "db": "at211",
   "cfg": "default",
   "read": "gallery",
-  "medianMs": 909,
-  "maxMs": 941
+  "medianMs": 939,
+  "maxMs": 979
  },
  {
   "town": "deploy-check Force all",
@@ -122,8 +122,8 @@
   "db": "at211",
   "cfg": "default",
   "read": "link",
-  "medianMs": 822,
-  "maxMs": 899
+  "medianMs": 835,
+  "maxMs": 889
  },
  {
   "town": "deploy-check Force all",
@@ -131,8 +131,8 @@
   "db": "at211",
   "cfg": "all",
   "read": "gallery",
-  "medianMs": 1221,
-  "maxMs": 1259
+  "medianMs": 1229,
+  "maxMs": 1317
  },
  {
   "town": "deploy-check Force all",
@@ -140,7 +140,7 @@
   "db": "at211",
   "cfg": "all",
   "read": "link",
-  "medianMs": 1097,
-  "maxMs": 1159
+  "medianMs": 1147,
+  "maxMs": 1211
  }
 ]

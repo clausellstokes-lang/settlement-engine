@@ -1,0 +1,495 @@
+{
+ "towns": 360,
+ "minutes": 34,
+ "seedsPattern": "coherence-veil-corpus-<tier>-<k>",
+ "tiers": {
+  "village": 60,
+  "town": 160,
+  "city": 100,
+  "metropolis": 40
+ },
+ "totals": {
+  "at210 | village | default | gallery": {
+   "reads": 60,
+   "paths": 1153,
+   "readable": 352,
+   "pageChanged": 0
+  },
+  "at210 | village | default | link": {
+   "reads": 60,
+   "paths": 1153,
+   "readable": 352,
+   "pageChanged": 0
+  },
+  "at211 | village | default | gallery": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | village | default | link": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | village | everyEyeShut | gallery": {
+   "reads": 60,
+   "paths": 15785,
+   "readable": 9844,
+   "pageChanged": 0
+  },
+  "at210 | village | everyEyeShut | link": {
+   "reads": 60,
+   "paths": 15785,
+   "readable": 9844,
+   "pageChanged": 0
+  },
+  "at211 | village | everyEyeShut | gallery": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | village | everyEyeShut | link": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | village | everyDefaultOpened | gallery": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | village | everyDefaultOpened | link": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | village | everyDefaultOpened | gallery": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | village | everyDefaultOpened | link": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | village | everyEyeShut+dm | gallery": {
+   "reads": 60,
+   "paths": 27896,
+   "readable": 17717,
+   "pageChanged": 0
+  },
+  "at210 | village | everyEyeShut+dm | link": {
+   "reads": 60,
+   "paths": 15785,
+   "readable": 9844,
+   "pageChanged": 0
+  },
+  "at211 | village | everyEyeShut+dm | gallery": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | village | everyEyeShut+dm | link": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | village | everyEyeShut/snapshot | gallery": {
+   "reads": 60,
+   "paths": 31570,
+   "readable": 19688,
+   "pageChanged": 0
+  },
+  "at210 | village | everyEyeShut/snapshot | link": {
+   "reads": 60,
+   "paths": 15785,
+   "readable": 9844,
+   "pageChanged": 0
+  },
+  "at211 | village | everyEyeShut/snapshot | gallery": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | village | everyEyeShut/snapshot | link": {
+   "reads": 60,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | town | default | gallery": {
+   "reads": 160,
+   "paths": 4743,
+   "readable": 1912,
+   "pageChanged": 0
+  },
+  "at210 | town | default | link": {
+   "reads": 160,
+   "paths": 4743,
+   "readable": 1912,
+   "pageChanged": 0
+  },
+  "at211 | town | default | gallery": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | town | default | link": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | town | everyEyeShut | gallery": {
+   "reads": 160,
+   "paths": 105292,
+   "readable": 64382,
+   "pageChanged": 0
+  },
+  "at210 | town | everyEyeShut | link": {
+   "reads": 160,
+   "paths": 105292,
+   "readable": 64382,
+   "pageChanged": 0
+  },
+  "at211 | town | everyEyeShut | gallery": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | town | everyEyeShut | link": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | town | everyDefaultOpened | gallery": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | town | everyDefaultOpened | link": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | town | everyDefaultOpened | gallery": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | town | everyDefaultOpened | link": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | town | everyEyeShut+dm | gallery": {
+   "reads": 160,
+   "paths": 147646,
+   "readable": 94185,
+   "pageChanged": 0
+  },
+  "at210 | town | everyEyeShut+dm | link": {
+   "reads": 160,
+   "paths": 105292,
+   "readable": 64382,
+   "pageChanged": 0
+  },
+  "at211 | town | everyEyeShut+dm | gallery": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | town | everyEyeShut+dm | link": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | town | everyEyeShut/snapshot | gallery": {
+   "reads": 160,
+   "paths": 210584,
+   "readable": 128764,
+   "pageChanged": 0
+  },
+  "at210 | town | everyEyeShut/snapshot | link": {
+   "reads": 160,
+   "paths": 105292,
+   "readable": 64382,
+   "pageChanged": 0
+  },
+  "at211 | town | everyEyeShut/snapshot | gallery": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | town | everyEyeShut/snapshot | link": {
+   "reads": 160,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | city | default | gallery": {
+   "reads": 100,
+   "paths": 8292,
+   "readable": 3988,
+   "pageChanged": 0
+  },
+  "at210 | city | default | link": {
+   "reads": 100,
+   "paths": 8292,
+   "readable": 3988,
+   "pageChanged": 0
+  },
+  "at211 | city | default | gallery": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | city | default | link": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | city | everyEyeShut | gallery": {
+   "reads": 100,
+   "paths": 146379,
+   "readable": 88867,
+   "pageChanged": 0
+  },
+  "at210 | city | everyEyeShut | link": {
+   "reads": 100,
+   "paths": 146379,
+   "readable": 88867,
+   "pageChanged": 0
+  },
+  "at211 | city | everyEyeShut | gallery": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | city | everyEyeShut | link": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | city | everyDefaultOpened | gallery": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | city | everyDefaultOpened | link": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | city | everyDefaultOpened | gallery": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | city | everyDefaultOpened | link": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | city | everyEyeShut+dm | gallery": {
+   "reads": 100,
+   "paths": 188194,
+   "readable": 117853,
+   "pageChanged": 0
+  },
+  "at210 | city | everyEyeShut+dm | link": {
+   "reads": 100,
+   "paths": 146379,
+   "readable": 88867,
+   "pageChanged": 0
+  },
+  "at211 | city | everyEyeShut+dm | gallery": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | city | everyEyeShut+dm | link": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | city | everyEyeShut/snapshot | gallery": {
+   "reads": 100,
+   "paths": 292758,
+   "readable": 177734,
+   "pageChanged": 0
+  },
+  "at210 | city | everyEyeShut/snapshot | link": {
+   "reads": 100,
+   "paths": 146379,
+   "readable": 88867,
+   "pageChanged": 0
+  },
+  "at211 | city | everyEyeShut/snapshot | gallery": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | city | everyEyeShut/snapshot | link": {
+   "reads": 100,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | default | gallery": {
+   "reads": 40,
+   "paths": 4018,
+   "readable": 2025,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | default | link": {
+   "reads": 40,
+   "paths": 4018,
+   "readable": 2025,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | default | gallery": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | default | link": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | everyEyeShut | gallery": {
+   "reads": 40,
+   "paths": 82332,
+   "readable": 50405,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | everyEyeShut | link": {
+   "reads": 40,
+   "paths": 82332,
+   "readable": 50405,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | everyEyeShut | gallery": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | everyEyeShut | link": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | everyDefaultOpened | gallery": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | everyDefaultOpened | link": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | everyDefaultOpened | gallery": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | everyDefaultOpened | link": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | everyEyeShut+dm | gallery": {
+   "reads": 40,
+   "paths": 102372,
+   "readable": 64581,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | everyEyeShut+dm | link": {
+   "reads": 40,
+   "paths": 82332,
+   "readable": 50405,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | everyEyeShut+dm | gallery": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | everyEyeShut+dm | link": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | everyEyeShut/snapshot | gallery": {
+   "reads": 40,
+   "paths": 164664,
+   "readable": 100810,
+   "pageChanged": 0
+  },
+  "at210 | metropolis | everyEyeShut/snapshot | link": {
+   "reads": 40,
+   "paths": 82332,
+   "readable": 50405,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | everyEyeShut/snapshot | gallery": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  },
+  "at211 | metropolis | everyEyeShut/snapshot | link": {
+   "reads": 40,
+   "paths": 0,
+   "readable": 0,
+   "pageChanged": 0
+  }
+ },
+ "faults": [],
+ "faultCount": 0
+}
