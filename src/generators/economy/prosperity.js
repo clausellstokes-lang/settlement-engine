@@ -16,6 +16,8 @@ import {
   isTradeRouteDisconnected,
 } from '../../domain/tradeRouteSemantics.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
+import { resolveSibling } from '../../domain/facts/drawDeclared.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
 
 
 // Public compatibility name retained for every generator caller. The vocabulary
@@ -30,7 +32,12 @@ export const deriveEconomicSituationDesc = (
   _tier = 'town',
   institutions = [],
   foodSecurity = null,
-) => {
+) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity), PROSPERITY_LINE_SIBLINGS, {
+  facts: () => factsOf({ institutions }), poolId: 'prosperity:PROSPERITY_LINE_SIBLINGS', surface: 'economics', drawKind: 'T',
+});
+
+/** @param {any} config @param {string} _tier @param {any[]} institutions @param {any} foodSecurity @returns {string} */
+const situationDescOf = (config, _tier, institutions, foodSecurity) => {
   const flags = getInstFlags(config, institutions);
   const stress = getStressFlags(config, institutions);
   const econCat = priorityToCategory(flags.economyOutput);
@@ -332,3 +339,35 @@ const complexityByExports = (tier, incomeSourceCount, exportCount, hasMarketInst
               : exportCount >= 3
                 ? 'Subsistence with surplus'
                 : 'Subsistence — survival economy';
+
+/**
+ * DECLARED SIBLINGS (COHERENCE-AGREE, 2026-11-12). The economic situation's lines that name the
+ * town's market need the market home's atom (`domain/facts/market.js`); each twin says the same
+ * thing for a town with no market. Measured on 360 births (seeds agree-<tier>-<i>) before the
+ * change: "markets meet infrequently" printed in 7 towns with no market, "The market still opens"
+ * in 2, the rest in none. Keyed by the printed text; resolved through `resolveSibling` above.
+ */
+const marketSet = (text, twin) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(['market']) }),
+  Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(['market']) }),
+]);
+export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
+  'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.': marketSet(
+    'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.',
+    'The caravans have stopped coming and nothing is bought or sold. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.'),
+  'Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate.': marketSet(
+    'Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate.',
+    'Food is short, and those with grain hold the power. What food is sold costs more than most people can pay, and those without grain are growing desperate.'),
+  'Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.': marketSet(
+    'Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.',
+    'Fear of the sickness and the quarantine keep people from trading, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.'),
+  'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.': marketSet(
+    'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.',
+    'The church controls most economic activity. Land and trade flow through religious institutions. Commerce is present but the church sets the terms.'),
+  'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.': marketSet(
+    'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.',
+    'Trade is what this settlement lives on. Goods change hands at all hours, and the guilds have a hand in every craft.'),
+  'Commerce is sluggish; markets meet infrequently and many crafts are in decline.': marketSet(
+    'Commerce is sluggish; markets meet infrequently and many crafts are in decline.',
+    'Commerce is sluggish; little is bought or sold and many crafts are in decline.'),
+});
