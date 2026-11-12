@@ -193,7 +193,8 @@ registerStep('economyReconcilePass', {
   const spatialLayout = generateSpatialLayout(tier, institutions, tradeRoute, terrainType);
   const availableServices = generateAvailableServices(
     tier, institutions, servicesToggles,
-    { ...effectiveConfig, _tradeRoute: tradeRoute },
+    // COHERENCE-UPKEEP (ruling 4): the prosperity label and the birth seed, for the draw-free upkeep roll.
+    { ...effectiveConfig, _tradeRoute: tradeRoute, _prosperity: economicState.prosperity, _seed: ctx._seed },
     generationContext,
   );
 

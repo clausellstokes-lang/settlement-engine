@@ -118,6 +118,11 @@ describe('services are kept as far as the place can pay', () => {
     expect(rows(poor)).toBeLessThan(rows(rich));
     const providers = (svc) => new Set(Object.values(svc).flat().map((r) => r.institution || r.providedBy || r.source).filter(Boolean));
     for (const name of providers(rich)) expect(providers(poor).has(name), `${name} keeps a row`).toBe(true);
+    // THE CHAIR'S INVARIANT (ruling (A), condition 2): the rule only takes away — every row the
+    // Struggling read holds, the full read holds too (the step's seeded stream does not move).
+    const keys = (svc) => new Set(Object.entries(svc).flatMap(([cat, list]) => list.map((r) => `${cat}|${r.institution}|${r.name}`)));
+    const full = keys(rich);
+    expect([...keys(poor)].filter((k) => !full.has(k)), 'rows added by the upkeep rule').toEqual([]);
   });
 });
 
