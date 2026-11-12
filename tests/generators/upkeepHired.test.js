@@ -21,6 +21,7 @@ import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { deriveMagicProfile, magicAvailabilityBands } from '../../src/domain/magicProfile.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SEEDS = ['agree-village-28', 'agree-village-30', 'agree-village-40', 'agree-village-43', 'agree-village-45'];
@@ -115,5 +116,32 @@ describe('services are kept as far as the place can pay', () => {
     expect(rows(poor)).toBeLessThan(rows(rich));
     const providers = (svc) => new Set(Object.values(svc).flat().map((r) => r.institution || r.providedBy || r.source).filter(Boolean));
     for (const name of providers(rich)) expect(providers(poor).has(name), `${name} keeps a row`).toBe(true);
+  });
+});
+
+/**
+ * MAGIC (ruling 5): availability steps down one band where the place keeps too little to buy it
+ * (`keep.bought` under the scale table's magic line), unless the world's magic is pervasive.
+ */
+describe('magic is as available as the place can buy', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** @param {any} s @param {string} prosperity @param {string} [magicLevel] */
+  const readAs = (s, prosperity, magicLevel) => deriveMagicProfile({
+    ...s, economicState: { ...s.economicState, prosperity },
+    config: magicLevel ? { ...s.config, magicLevel } : s.config,
+  }).availability;
+  const bands = magicAvailabilityBands();
+
+  test('RED-FIRST agree-village-0: read as Struggling, one band below the same record read as Wealthy', () => {
+    const s = born('agree-village-0');
+    const rich = readAs(s, 'Wealthy');
+    expect(bands.indexOf(rich), 'anchored: the record has magic to buy').toBeGreaterThan(1);
+    expect(bands.indexOf(readAs(s, 'Struggling'))).toBe(bands.indexOf(rich) - 1);
+    expect(readAs(s, 'Moderate'), 'a Moderate place buys what it buys today').toBe(rich);
+  });
+
+  test('a pervasive world does not move', () => {
+    const s = born('agree-village-0');
+    expect(readAs(s, 'Struggling', 'pervasive')).toBe(readAs(s, 'Wealthy', 'pervasive'));
   });
 });
