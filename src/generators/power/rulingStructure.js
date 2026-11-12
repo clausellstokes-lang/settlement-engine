@@ -309,7 +309,7 @@ export const generatePowerStructure = (
                             magic: 'Arcane Council',
                           }[topCategory]) ||
                         'Town Council');
-  return [governingFaction, govModifier]; }; const [governingFaction, govModifier] = drawCouncilOfAKind(chooseGoverning, topCategory, topPriority, priorityByCategory, govBody, nativeInstitutions);
+  return /** @type {[any, any]} */ ([governingFaction, govModifier]); }; const [governingFaction, govModifier] = drawCouncilOfAKind(chooseGoverning, topCategory, topPriority, priorityByCategory, govBody, nativeInstitutions);
   let informalModifier = null;
   govBody ||
     (['thorp', 'hamlet', 'village'].includes(tier) && topPriority > 65

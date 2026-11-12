@@ -259,7 +259,7 @@ export function resizePoliticalRoster(input) {
  * settleHouselessPowers), and a relationship naming either goes with it (pruneToRoster). The
  * houses here are final, the faction boost's included. No draw. A roster with nothing to fold is returned by
  * reference; otherwise its seats are copied, so no seat object another holder shares is written.
- * @param {{factions?: Array<Record<string, unknown>>}|null|undefined} powerStructure
+ * @param {{factions?: Array<Record<string, unknown>>, factionRelationships?: unknown}|null|undefined} powerStructure
  * @param {unknown} institutions the settlement's final roster of houses
  */
 function foldKin(powerStructure, institutions) {
@@ -267,7 +267,8 @@ function foldKin(powerStructure, institutions) {
   const factions = powerStructure.factions.map(seat => ({ ...seat }));
   const { folded, dropped } = settleHouselessPowers(factions, institutions);
   if (!folded.length && !dropped.length) return powerStructure;
-  return pruneToRoster({ ...powerStructure, factions }, new Set([...folded, ...dropped]));
+  const settled = { ...powerStructure, factions };
+  return pruneToRoster(settled, new Set([...folded, ...dropped]));
 }
 
 /**

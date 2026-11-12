@@ -301,6 +301,15 @@ export function seatHouseName(institutions) {
 }
 
 /**
+ * THE KINDS A RULER CLAIMS (COHERENCE-POWERS, rule A; the chair's ruling of 2026-11-11 on the owner's
+ * word "they come from an institution, and are elevated yet still tied to an institution"): a ruler
+ * of one of these kinds is that kind's first claimant in the deal below, beside any power of its kind.
+ * A criminal ruler is not (the veil: its houses are hidden). The raw landing (`houseBacksOf`) is
+ * unchanged: a ruler still takes its own kind's share whole only where no other power of it is seated.
+ */
+export const RULER_KINDS = /** @type {readonly string[]} */ (Object.freeze([A.RELIGIOUS, A.MILITARY, A.MERCHANT, A.ARCANE, A.NOBLE, A.CRAFT]));
+
+/**
  * THE SNAKE DEAL FOR A DOUBLED NICHE (the people car, PEOPLE-1 CAST, 2026-11-07; the chair's
  * ruling R-P3 in docs/chair/2026-11-07/PEOPLE-RULINGS-2026-11-07.md §1). The arithmetic above
  * lands a share on the LEADING power of its archetype, so a doubled archetype's second claimant
@@ -330,14 +339,6 @@ export function seatHouseName(institutions) {
  * @param {Map<string, HouseBack[]>} byHouse the map `houseBacksOf` built for this settlement
  * @returns {Map<string, HouseBack[]>}
  */
-/**
- * THE KINDS A RULER CLAIMS (COHERENCE-POWERS, rule A; the chair's ruling of 2026-11-11 on the owner's
- * word "they come from an institution, and are elevated yet still tied to an institution"): a ruler
- * of one of these kinds is that kind's first claimant in the deal below, beside any power of its kind.
- * A criminal ruler is not (the veil: its houses are hidden). The raw landing (`houseBacksOf`) is
- * unchanged: a ruler still takes its own kind's share whole only where no other power of it is seated.
- */
-export const RULER_KINDS = Object.freeze([A.RELIGIOUS, A.MILITARY, A.MERCHANT, A.ARCANE, A.NOBLE, A.CRAFT]);
 
 export function dealDoubledNiches(settlement, byHouse) {
   const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
