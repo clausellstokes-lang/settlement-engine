@@ -65,9 +65,12 @@ export const BASE_ROSTER_NAMES = Object.freeze(['Merchant Guilds', 'Craft Guilds
 
 /**
  * THE FOLD (A-plus, item 1): a power of the ruler's own kind that no house stands behind is not a power, and its
- * figure folds into the ruler. The ruler is never touched, and a criminal ruler folds nothing (the veil).
+ * figure folds into the ruler. THE POWER WITH NO ONE ON THE PAGE (item 3, inside R-P5: no borrowing, never a
+ * fabricated citizen): any other power of a house kind that no house stands behind is not built; its share leaves
+ * the roster (the resize's conservation restores 100). An `other` power keeps its R-P4 mint; a criminal power
+ * stands outside (its houses are hidden: the veil); the ruler is never touched.
  *
- * It reaches only the roster's own powers (BASE_ROSTER_NAMES) and the density law's doubled-niche rivals
+ * Both reach only the roster's own powers (BASE_ROSTER_NAMES) and the density law's doubled-niche rivals
  * (`contestsNiche`, the resize's own mint). A power a stress brings (stressFactions.js: the occupier, the quarantine
  * council, the war council, a schism's congregation) carries the stress's story and stands whatever the houses say;
  * one with no one on the page is the residue the phase-2B note names for a ruling.
@@ -78,7 +81,7 @@ export const BASE_ROSTER_NAMES = Object.freeze(['Merchant Guilds', 'Craft Guilds
  * faceBearingHouseNames) lands a share on the power after the doubled-niche deal (powerSupport.js ::
  * dealDoubledNiches, the ruler first among its kind). Mutates `factions` in place.
  * @param {Array<any>} factions the roster, the governing row marked @param {Array<any>} institutions
- * @returns {{ folded: string[], dropped: string[] }} the powers folded into the ruler (none is dropped)
+ * @returns {{ folded: string[], dropped: string[] }} the powers folded into the ruler, and those not built
  */
 export function settleHouselessPowers(factions, institutions) {
   const view = { institutions, powerStructure: { factions: factions.map((f) => ({ ...f, category: f.category || inferFactionCategory(f.faction || '') })) } };
@@ -96,7 +99,8 @@ export function settleHouselessPowers(factions, institutions) {
     if (f.isGoverning || housed.has(f.faction)) continue;
     if (!BASE_ROSTER_NAMES.includes(f.faction) && !f.contestsNiche) continue;
     const kind = backingArchetypeOf(f);
-    if (RULER_KINDS.includes(rulerKind) && kind === rulerKind) folded.push(f.faction);
+    if (kind === 'other' || kind === 'criminal') continue;
+    (RULER_KINDS.includes(rulerKind) && kind === rulerKind ? folded : dropped).push(f.faction);
   }
   const ruler = factions.find((f) => f.isGoverning);
   for (const name of [...folded, ...dropped]) {

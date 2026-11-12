@@ -253,9 +253,10 @@ export function resizePoliticalRoster(input) {
 }
 
 /**
- * COHERENCE-POWERS 2B, THE FOLD (A-plus) at the roster's last build: a power of the ruler's own kind that no
- * face-bearing house stands behind after the doubled-niche deal is not a power; its figure folds into the ruler
- * (power/rulerKin.js :: settleHouselessPowers), and a relationship naming it goes with it (pruneToRoster). The
+ * COHERENCE-POWERS 2B, THE FOLD (A-plus) and THE POWER WITH NO ONE ON THE PAGE, at the roster's last build: a
+ * power that no face-bearing house stands behind after the doubled-niche deal is not a power. The ruler's own
+ * kind folds its figure into the ruler; any other kinded power is not built (power/rulerKin.js ::
+ * settleHouselessPowers), and a relationship naming either goes with it (pruneToRoster). The
  * houses here are final, the faction boost's included. No draw. A roster with nothing to fold is returned by
  * reference; otherwise its seats are copied, so no seat object another holder shares is written.
  * @param {{factions?: Array<Record<string, unknown>>}|null|undefined} powerStructure
