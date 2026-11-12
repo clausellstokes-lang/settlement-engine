@@ -805,6 +805,19 @@ export function settleCrimeLinesToSignal(economicState, lists) {
   return { ...economicState, safetyProfile: { ...safetyProfile, crimeTypes: settled } };
 }
 
+/** The two crisis kinds that cap the prosperity label at Struggling (`prosperity.js :: deriveProsperityLabel`). */
+const UPKEEP_CRISIS = Object.freeze(['famine', 'under_siege']);
+
+/**
+ * One declared crisis set (`stressNarrative.js`' idiom): the original declares the crisis
+ * disjunction on the crisis dimension; its twin excludes it as one atom.
+ * @param {string} text @param {ReadonlyArray<string>} kinds @param {string} twin
+ */
+const crisisSet = (text, kinds, twin) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze([]), crisis: Object.freeze([...kinds]) }),
+  Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze([`crisis: ${kinds.join(', ')}`]) }),
+]);
+
 /**
  * One declared sibling set: the original, `needs` its atoms; its twin (when the slot needs one)
  * `excludes` them. @param {string} text @param {string[]} needs @param {string} [twin]
@@ -894,6 +907,19 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.": declaredSet(
     "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.", ['prosperity: ≤ comfortable'],
     "The adventurers' charter hall coordinates emergency response to threats."),
+  // COHERENCE-UPKEEP (the chair's ruling of 2026-11-12, point 1): a famine or a siege caps the label
+  // at Struggling, so there the purse lines above would call the place poor when the crisis is why.
+  // Each purse line has a crisis line, declared by the `crisis` atom on the two kinds that cap the
+  // label; its twin is the purse line itself, which then resolves through its own set above.
+  'A hired company is on the books, paid from what the hunger leaves; it comes when called and leaves when the coin does.': crisisSet(
+    'A hired company is on the books, paid from what the hunger leaves; it comes when called and leaves when the coin does.', UPKEEP_CRISIS,
+    'A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.'),
+  'Hired swords back the garrison, paid from what the hunger leaves.': crisisSet(
+    'Hired swords back the garrison, paid from what the hunger leaves.', UPKEEP_CRISIS,
+    'Hired swords back the garrison when the purse allows.'),
+  "The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.": crisisSet(
+    "The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.", UPKEEP_CRISIS,
+    "The adventurers' charter hall takes bounty work against threats, as far as the purse runs."),
 });
 
 // ─── SW-B5 FRAMES: the guard assessment's frames get vantages ────────────────
@@ -984,32 +1010,41 @@ const CHARTER_LEAD = "The adventurers' charter hall coordinates emergency respon
  *     (Poor and below) in place of today's lead;
  *   - a hired company beside a garrison: one more sentence, the purse-bound line below Prosperous;
  *   - a charter hall with no garrison and no watch: the bounty line below Prosperous.
+ * Under a famine or a siege (each caps the label at Struggling) a purse line gives way to its
+ * crisis line, which says the hunger is why (the chair's ruling of 2026-11-12, point 1).
  * @param {string} desc the guard assessment as the safety profile wrote it
  * @param {Array<{ name?: string }>} institutions the roster
  * @param {unknown} prosperity the prosperity label
+ * @param {ReadonlyArray<unknown>} [stressTypes] the birth's active stresses (`config.stressTypes`)
  * @returns {string}
  */
-export function keptGuardLine(desc, institutions, prosperity) {
+export function keptGuardLine(desc, institutions, prosperity, stressTypes = []) {
   const text = String(desc || '');
+  const stress = (Array.isArray(stressTypes) ? stressTypes : []).map((type) => ({ type }));
   /** @type {Omit<import('../domain/facts/drawDeclared.js').DrawDeclaredOptions, 'draw'>} */
   const opts = {
-    facts: () => factsOf({ institutions, economicState: { prosperity } }),
+    facts: () => factsOf({ institutions, economicState: { prosperity }, stress }),
     poolId: 'safetyProfile:SAFETY_LINE_SIBLINGS', surface: 'defense', drawKind: 'T',
   };
   const said = (/** @type {string} */ line) => resolveSibling(line, SAFETY_LINE_SIBLINGS, opts);
+  /** The crisis line where a famine or a siege holds, else the purse line through its own set. @param {string} crisisLine */
+  const purseOrCrisis = (crisisLine) => {
+    const crisis = said(crisisLine);
+    return crisis === crisisLine ? crisis : said(crisis);
+  };
   const d = defenceOf({ institutions });
   const standing = d.garrison || d.watch || d.militia;
   if (text.startsWith(MERCENARY_LEAD) && d.mercenary && !standing) {
     const paid = said('There is no standing guard; a hired company is paid to keep the peace, and gives what it is paid for.');
     const lead = paid !== MERCENARY_LEAD ? paid
-      : said('A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.');
+      : purseOrCrisis('A hired company is on the books, paid from what the hunger leaves; it comes when called and leaves when the coin does.');
     return lead + text.slice(MERCENARY_LEAD.length);
   }
   if (text.startsWith(CHARTER_LEAD)) {
-    return said("The adventurers' charter hall takes bounty work against threats, as far as the purse runs.") + text.slice(CHARTER_LEAD.length);
+    return purseOrCrisis("The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.") + text.slice(CHARTER_LEAD.length);
   }
   if (d.mercenary && d.garrison && !text.startsWith(MERCENARY_LEAD)) {
-    return `${text} ${said('Hired swords back the garrison when the purse allows.')}`;
+    return `${text} ${purseOrCrisis('Hired swords back the garrison, paid from what the hunger leaves.')}`;
   }
   return text;
 }

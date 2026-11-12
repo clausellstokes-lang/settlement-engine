@@ -831,7 +831,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   );
   const prosperity = deriveProsperityLabel(baseProsperity, config, institutions);
   // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force.
-  safetyProfile.guardEffectivenessDesc = keptGuardLine(safetyProfile.guardEffectivenessDesc, institutions, prosperity);
+  safetyProfile.guardEffectivenessDesc = keptGuardLine(safetyProfile.guardEffectivenessDesc, institutions, prosperity, config.stressTypes || []);
   // COHERENCE-UPKEEP (ruling 6): the stores are laid by at the label's share, at the stores' writer,
   // AFTER prosperity (which read the full-granary record above and reads no months). The writer's
   // only draw is a label-keyed fork, so this second call draws the same crop fortune and moves no

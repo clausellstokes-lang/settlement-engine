@@ -30,6 +30,7 @@ import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { deriveMagicProfile, magicAvailabilityBands } from '../../src/domain/magicProfile.js';
 import { generateFoodSecurity } from '../../src/generators/foodGenerator.js';
 import { SAFETY_LINE_SIBLINGS, keptGuardLine, generateSafetyProfile } from '../../src/generators/safetyProfile.js';
+import { atomsOf, declarationOf } from '../../src/domain/facts/factVocabulary.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SEEDS = ['agree-village-28', 'agree-village-30', 'agree-village-40', 'agree-village-43', 'agree-village-45'];
@@ -254,7 +255,7 @@ describe('under a famine or a siege, the hired lines name the crisis, not the pu
     .filter((line) => line.needs.some((atom) => atom.startsWith('prosperity: ≤')));
   /** The declared crisis line whose twin is this purse line, if any. @param {string} text */
   const crisisLineFor = (text) => Object.values(SAFETY_LINE_SIBLINGS)
-    .find((set) => set[0].needs.includes(CRISIS) && set[1]?.text === text)?.[0];
+    .find((set) => atomsOf(declarationOf(set[0])).includes(CRISIS) && set[1]?.text === text)?.[0];
 
   test('RED-FIRST: each purse line has a declared crisis line, its twin the purse line', () => {
     const lines = purseLines();
