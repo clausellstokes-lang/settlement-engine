@@ -1934,10 +1934,13 @@
       "lines": 3
     },
     "ledger:institutionDescVariants:city|Economy|River ferry": {
-      "top1": 0.5157,
+      "top1": 0.7778,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 3
+      "reason": "top1 levelled to the second corpus's reading at the banking tree (POOL-GUARD, the chair's ruling 2026-11-12): banked low by definition, since nothing in the code differs between the two readings. quarrel 0.5156 over 64 draws (ceiling 0.5157); confirm 0.7778 over 81 draws. banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "lines": 3,
+      "levelled": [
+        "top1"
+      ]
     },
     "ledger:institutionDescVariants:city|Government|Town crier": {
       "top1": 0.3704,

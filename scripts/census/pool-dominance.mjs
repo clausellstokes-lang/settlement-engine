@@ -63,13 +63,20 @@
  *   node scripts/census/pool-dominance.mjs --seed-prefix=p  the same, on the corpus re-seeded with prefix p
  *   node scripts/census/pool-dominance.mjs --tighten        lower every ceiling to today's measure (never raise one),
  *                                                           drop the rows of pools no longer drawn, bank new pools,
- *                                                           and raise a row's count of distinct lines (never lower it)
+ *                                                           and raise a row's count of distinct lines (never lower it);
+ *                                                           a ceiling is lowered only to the higher of the banked
+ *                                                           corpus's and the second corpus's readings
  *   node scripts/census/pool-dominance.mjs --rebase [--hold=<pool>:<top1|top5>:<ceiling>]...
  *       a CORPUS CHANGE only (it refuses while the register's `corpus` is this one): bank every row
  *       at the new corpus's own measure, targets exactly as they are; a `--hold` keeps a row at a
  *       lower ceiling where the rule holds the measure there, and refuses where it does not. A
  *       ceiling is a statement about one pool on ONE population of towns; this door re-bases the
  *       instrument, by identity, and is used on a chair's ruling.
+ *   node scripts/census/pool-dominance.mjs --level-second
+ *       at a re-base only (the chair's ruling, 2026-11-12): a row the SECOND corpus reads over, by the
+ *       rule, at the very tree it is banked on is banked low by definition; its ceiling becomes the
+ *       second corpus's reading and the row carries both readings. Refuses unless the banked corpus
+ *       reads zero, refuses more than `LEVEL_LIMIT` rows, never raises a target.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -93,6 +100,9 @@ export const COLLAPSE_CHANCE = 0.001;
 
 /** The fixed second prefix a rise by the noise arm or the dominated line must repeat on. */
 export const CONFIRM_SEED_PREFIX = 'confirm';
+
+/** The most rows `--level-second` raises before it stops for a ruling. */
+export const LEVEL_LIMIT = 5;
 
 /** The banked corpus's seed prefix. */
 export const DEFAULT_SEED_PREFIX = 'quarrel';
@@ -264,7 +274,7 @@ export function shareError(m, metric, ceiling) {
 /** @param {number} share @returns {number} the share rounded UP to four places, so a ceiling never sits below its measure */
 export const ceil4 = (share) => Math.ceil(share * 10000 - 1e-9) / 10000;
 
-/** @typedef {{ top1: number, top5: number, lines?: number, reason: string, targets?: string[] }} RegisterRow */
+/** @typedef {{ top1: number, top5: number, lines?: number, reason: string, targets?: string[], levelled?: string[] }} RegisterRow */
 
 /** @returns {{ corpus?: string, census?: { secondWave?: unknown[] }, pools: Record<string, RegisterRow> }} */
 export function readRegister() {
@@ -310,7 +320,8 @@ export function judge(table, register, { exact = true } = {}) {
         over.push(text);
         if (!targets.includes(metric)) repeatable.push({ key: `${pool}|${metric}`, text });
       }
-      if (!targets.includes(metric) && ceiling - share > TIGHTEN_SLACK && ceiling - share > NOISE_SE * se) {
+      // A levelled ceiling was banked at the second corpus's higher reading: never loose on the first.
+      if (!targets.includes(metric) && !(row.levelled || []).includes(metric) && ceiling - share > TIGHTEN_SLACK && ceiling - share > NOISE_SE * se) {
         loose.push(`${pool}: ${metric} ceiling ${ceiling} sits above its measure ${share.toFixed(4)}`);
       }
     }
@@ -444,11 +455,49 @@ function seedPrefixArg(argv) {
   return arg ? arg.slice('--seed-prefix='.length) : undefined;
 }
 
+/**
+ * The levelling door: both corpora read zero at the banking tree.
+ * @param {Map<string, PoolMeasure>} table @param {Map<string, PoolMeasure>} second @param {ReturnType<typeof readRegister>} register
+ * @returns {{ next: ReturnType<typeof readRegister>, raised: string[] }}
+ */
+function levelSecond(table, second, register) {
+  if (register.corpus !== corpusIdentity()) throw new Error('pool-dominance: --level-second reads the register\'s own corpus; re-base first');
+  const first = judge(table, register);
+  if (first.over.length || first.unregistered.length || first.stale.length) throw new Error(`pool-dominance: --level-second needs the banked corpus at zero; it reads ${first.over.length} over, ${first.unregistered.length} unregistered, ${first.stale.length} stale`);
+  const rows = { ...(register.pools || {}) };
+  const { repeatable } = judge(second, register, { exact: false });
+  if (repeatable.length > LEVEL_LIMIT) throw new Error(`pool-dominance: --level-second would raise ${repeatable.length} rows (> ${LEVEL_LIMIT}); stop for a ruling:\n${repeatable.map((r) => r.text).join('\n')}`);
+  const raised = [];
+  for (const { key, text } of repeatable) {
+    const [pool, metric] = /** @type {[string, 'top1' | 'top5']} */ (key.split(/\|(?=top[15]$)/));
+    const row = rows[pool];
+    if (row.targets?.includes(metric)) throw new Error(`pool-dominance: --level-second never raises a target (${pool} ${metric})`);
+    const m = table.get(pool), s = second.get(pool);
+    if (!m || !s) throw new Error(`pool-dominance: --level-second: ${pool} is not drawn on both corpora`);
+    const level = ceil4(s[metric]);
+    rows[pool] = {
+      ...row,
+      [metric]: level,
+      levelled: [...new Set([...(row.levelled || []), metric])],
+      reason: `${metric} levelled to the second corpus's reading at the banking tree (POOL-GUARD, the chair's ruling 2026-11-12): banked low by definition, since nothing in the code differs between the two readings. ${DEFAULT_SEED_PREFIX} ${m[metric].toFixed(4)} over ${m.draws} draws (ceiling ${row[metric]}); ${CONFIRM_SEED_PREFIX} ${s[metric].toFixed(4)} over ${s.draws} draws. ${row.reason}`,
+    };
+    raised.push(`${text} -> ${metric} ${level}`);
+  }
+  return { next: { ...register, census: censusOf(table, register.census?.secondWave || []), pools: rows }, raised };
+}
+
 function main() {
   const seedPrefix = seedPrefixArg(process.argv) || DEFAULT_SEED_PREFIX;
   const exact = seedPrefix === DEFAULT_SEED_PREFIX;
-  if ((process.argv.includes('--tighten') || process.argv.includes('--rebase')) && !exact) throw new Error('pool-dominance: the doors read the banked corpus only; drop --seed-prefix');
+  if ((process.argv.includes('--tighten') || process.argv.includes('--rebase') || process.argv.includes('--level-second')) && !exact) throw new Error('pool-dominance: the doors read the banked corpus only; drop --seed-prefix');
   const table = measureDominance({ seedPrefix });
+  if (process.argv.includes('--level-second')) {
+    const { next, raised } = levelSecond(table, measureDominance({ seedPrefix: CONFIRM_SEED_PREFIX }), readRegister());
+    writeFileSync(REGISTER_PATH, `${JSON.stringify(next, null, 2)}\n`);
+    for (const line of raised) console.log(`levelled: ${line}`);
+    console.log(`pool-dominance: ${raised.length} rows levelled to the second corpus`);
+    return;
+  }
   if (process.argv.includes('--rebase')) {
     const holds = process.argv.filter((a) => a.startsWith('--hold=')).map((a) => a.slice('--hold='.length));
     const next = rebase(table, readRegister(), holds);
@@ -457,6 +506,10 @@ function main() {
     return;
   }
   if (process.argv.includes('--tighten')) {
+    // Both corpora start from zero: a ceiling is lowered only to the HIGHER of the two readings.
+    const second = measureDominance({ seedPrefix: CONFIRM_SEED_PREFIX });
+    /** @param {string} pool @param {'top1' | 'top5'} metric @param {number} share */
+    const higher = (pool, metric, share) => ceil4(Math.max(share, second.get(pool)?.[metric] ?? 0));
     const register = readRegister();
     if (register.corpus !== corpusIdentity()) throw new Error('pool-dominance: --tighten compares like with like; the register was banked on another corpus (--rebase, on a ruling)');
     const rows = register.pools || {};
@@ -467,12 +520,12 @@ function main() {
       next[pool] = row
         ? {
           ...row,
-          top1: row.targets?.includes('top1') ? row.top1 : Math.min(row.top1, ceil4(m.top1)),
-          top5: row.targets?.includes('top5') ? row.top5 : Math.min(row.top5, ceil4(m.top5)),
+          top1: row.targets?.includes('top1') ? row.top1 : Math.min(row.top1, higher(pool, 'top1', m.top1)),
+          top5: row.targets?.includes('top5') ? row.top5 : Math.min(row.top5, higher(pool, 'top5', m.top5)),
           // The banked count of distinct lines only grows: a collapse is judged against the widest it was.
           lines: Math.max(row.lines || 0, m.lines),
         }
-        : { top1: ceil4(m.top1), top5: ceil4(m.top5), lines: m.lines, reason: BANKED_REASON };
+        : { top1: higher(pool, 'top1', m.top1), top5: higher(pool, 'top5', m.top5), lines: m.lines, reason: BANKED_REASON };
     }
     const census = censusOf(table, register.census?.secondWave || []);
     writeFileSync(REGISTER_PATH, `${JSON.stringify({ ...register, census, pools: next }, null, 2)}\n`);

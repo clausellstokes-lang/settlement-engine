@@ -423,6 +423,10 @@ I measured three ways to stop chance alarms. Repeating the rise (the one adopted
 
 A single-row door that refuses without the base tree's reading is NOT built here. It would have to measure a second tree from inside the first, which is more than an hour's honest work, so it is charged to the second wave.
 
+### 6.8 Both corpora start from zero (the chair's ruling, 2026-11-12)
+
+Suppose the second corpus reads a row over, by the rule, at the very tree that row was banked on. Nothing in the code differs between the two readings, so that row was banked low. The door `--level-second` deals with such rows at a re-base. It refuses unless the banked corpus reads zero. It raises such a row's ceiling to the second corpus's reading (ceil4) and writes both readings into the row's reason. It never raises a target, and it stops for a ruling if it would raise more than five rows. At this re-base it raised ONE row: `institutionDescVariants:city|Economy|River ferry`, top1 0.5157 → 0.7778 (quarrel 0.5156 over 64 draws; confirm 0.7778 over 81). From here, the banked corpus and the second corpus start from the same zero. Two consequences keep them there. First, a levelled metric (`levelled`) is never loose on the banked reading, because its ceiling is the higher of the two readings by ruling. Second, `--tighten` lowers a ceiling only to the HIGHER of the two corpora's readings. A door that lowered it to the banked corpus's reading alone would bank it low again. Run at this commit, `--tighten` leaves the register byte-identical.
+
 ## Appendix A — the fact readers (sub-seat table, file:line)
 
 ### Unit 1: record facts a DM-facing line can presume, and who reads them
