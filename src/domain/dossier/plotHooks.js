@@ -197,7 +197,7 @@ const ECHO_PREFIXES = [
   'a letter found this year tells it this way: ',
   'families who lived through it tell it this way: ',
   'the records of that time say: ',
-  'what survives from that time says: ',
+  'what survives from that time says: ', 'family accounts passed down from that time tell it this way: ', // the second: [2]'s twin past sixty years (COHERENCE-PRESUME)
   'old records suggest ',
   'a recently surfaced document implies ',
   'family accounts passed down from the time claim ',

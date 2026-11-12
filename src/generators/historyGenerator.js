@@ -314,7 +314,7 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
         const presentTenseSignals = [' is ', ' are ', ' has ', ' have ', ' exists', ' exist', ' being '];
         const needsReframe = presentTenseSignals.some(sig => drawnText.toLowerCase().includes(sig));
         if (needsReframe) {
-          const prefix = ECHO_PREFIXES[Math.floor(_rng() * ECHO_PREFIXES.length)];
+          const prefix = ((p) => (yearsAgo > 60 && p === ECHO_PREFIXES[2] ? 'Family accounts passed down from that time tell it this way: ' : p))(ECHO_PREFIXES[Math.floor(_rng() * ECHO_PREFIXES.length)]); // COHERENCE-PRESUME (ruling B): past sixty years (TIME_BANDS: older than its bearers) no family lived through it; the twin, chosen by age after the same roll
           // Lowercase the first letter of the hook when adding prefix (CENSUS-1f: a resolved row that
           // does not read as present tense keeps its own words; the roll was the drawn row's)
           if (hook && presentTenseSignals.some(sig => hook.toLowerCase().includes(sig))) hook = prefix + hook.charAt(0).toLowerCase() + hook.slice(1);
