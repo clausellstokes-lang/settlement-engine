@@ -329,6 +329,64 @@ export function advanceTimelineFor(news, townId = 't', limit = ADVANCE_ENTRIES) 
 const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The village keeps a smith on four chances in a hundred, more than doubled by the mountain and by what lies near it.';
 
 /**
+ * ── THE CHRONICLE TAG IS THE EVENT'S OWN CATEGORY ────────────────────────────
+ *
+ * ⛔ A SLOT IS NOT A CATEGORY (VISIBLE-BUGS item 2, 2026-11-12). The chronicle
+ * picks one beat per SLOT (faith, stressor, trade/economy) by id pattern, and it
+ * used to print the slot's name as the beat's tag. The trade slot's pattern also
+ * takes `condition.crime`, so a crime beat ("Thieves and racketeers are working
+ * Cnocby's streets in the open.") shipped under a TRADE chip. Measured on seeds
+ * lf-001..040: 27 of 120 chronicle entries were `trade` over a `crime_pressure`
+ * event; no other slot contradicted its event.
+ *
+ * The tag is now decided HERE, from the event's own `impactKind`, for every kind
+ * the landing has a chip for. A kind this table does not name keeps its slot's
+ * tag (a religious-pact betrayal is honestly both faith and stressor, and is
+ * left as its slot reads). Which beats SHIP is unchanged — the slot patterns are
+ * the chair's call (the `townFirst` note above).
+ * @enforced-by tests/build/landingChronicleTagCategory.test.js
+ */
+export const CHRONICLE_TAG_OF_IMPACT = Object.freeze({
+  crime_pressure: Object.freeze({ kind: 'crime', tone: 'danger' }),
+  trade_pressure: Object.freeze({ kind: 'trade', tone: 'economic' }),
+  trade_route_disruption: Object.freeze({ kind: 'trade', tone: 'economic' }),
+  conflict_pressure: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_monster_raider_pressure: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_betrayal: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_wartime: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_siege: Object.freeze({ kind: 'stressor', tone: 'war' }),
+  stressor_birth_religious_conversion_fracture: Object.freeze({ kind: 'faith', tone: 'faith' }),
+});
+
+/**
+ * One chronicle entry's tag: the event's own category where the table names it,
+ * else the slot's.
+ * @param {any} entry an applied wizardNews entry
+ * @param {{ kind: string, tone: string }} slot
+ * @returns {{ kind: string, tone: string }}
+ */
+export function chronicleTagFor(entry, slot) {
+  const own = CHRONICLE_TAG_OF_IMPACT[/** @type {keyof typeof CHRONICLE_TAG_OF_IMPACT} */ (String(entry?.impactKind ?? ''))];
+  return own ? { kind: own.kind, tone: own.tone } : { kind: slot.kind, tone: slot.tone };
+}
+
+/**
+ * The chronicle's picks WITH their events, so a guard can hold each tag against
+ * its own event. buildFixture prints exactly these, minus the event.
+ * @param {any[]} newsEntries the campaign's wizardNews entries
+ */
+export function chroniclePicksFor(newsEntries) {
+  const news = (newsEntries || []).filter(e => e?.kind === 'applied');
+  const findNews = (re) => news.filter(e => re.test(e.id || '')).sort((x, y) => (x.tick || 0) - (y.tick || 0))[0];
+  const townFirst = (base) => findNews(new RegExp(`${base}[^]*\\.t\\b`)) || findNews(new RegExp(base));
+  return [
+    { entry: townFirst('religious_conversion_fracture|conversion|deity|faith'), kind: 'faith', tone: 'faith' },
+    { entry: townFirst('stressor\\.(monster_raider_pressure|betrayal|wartime|siege)|condition\\.conflict'), kind: 'stressor', tone: 'war' },
+    { entry: townFirst('condition\\.trade|trade_route|blockade|condition\\.crime'), kind: 'trade', tone: 'economic' },
+  ].filter(p => p.entry).map(p => ({ entry: p.entry, ...chronicleTagFor(p.entry, p) }));
+}
+
+/**
  * The frozen fixture object for one seed — every selection COMPUTED from engine
  * output (verbatim strings where possible); nothing narrative is invented here
  * except the labels that name each receipt line and the stock narration above.
@@ -434,12 +492,9 @@ export function buildFixture(seed, { weeks = DEFAULT_WEEKS, settType = DEFAULT_S
   // which three beats ship, and that is the chair's call, not a lane's.
   const news = a.news.filter(e => e?.kind === 'applied');
   const findNews = (re) => news.filter(e => re.test(e.id || '')).sort((x, y) => (x.tick || 0) - (y.tick || 0))[0];
-  const townFirst = (base) => findNews(new RegExp(`${base}[^]*\\.t\\b`)) || findNews(new RegExp(base));
-  const chronPicks = [
-    { entry: townFirst('religious_conversion_fracture|conversion|deity|faith'), kind: 'faith', tone: 'faith' },
-    { entry: townFirst('stressor\\.(monster_raider_pressure|betrayal|wartime|siege)|condition\\.conflict'), kind: 'stressor', tone: 'war' },
-    { entry: townFirst('condition\\.trade|trade_route|blockade|condition\\.crime'), kind: 'trade', tone: 'economic' },
-  ].filter(p => p.entry).map(p => ({
+  // The picks and their tags come from chroniclePicksFor (the one place a
+  // chronicle tag is decided: the event's own category, VISIBLE-BUGS item 2).
+  const chronPicks = chroniclePicksFor(a.news).map(p => ({
     kind: p.kind, tone: p.tone, week: `Week ${p.entry.tick}`, text: p.entry.summary || p.entry.headline,
   }));
 
