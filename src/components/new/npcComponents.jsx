@@ -20,7 +20,9 @@ import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { cardPowerLine, cardPowerNames, cardHouseOf, governingNameOf } from '../../domain/people/cardPowers.js';
-import { cardInstitutionDoorOf, cardHonorificOf } from '../../domain/people/cardDoor.js';
+import { cardInstitutionDoorOf } from '../../domain/people/cardDoor.js';
+import { seatKeeperOf } from '../../domain/people/seatKeeper.js';
+import { shownHonorificOf } from '../../domain/people/seatKeeperDisplay.js';
 import { allegianceOf } from '../../domain/people/allegiance.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
@@ -259,14 +261,14 @@ export function NPCInlineCard({
   // The card's house, then its standing in each power by rank (PEOPLE-5A, M-1b). PEOPLE-6 LINKS:
   // the house is a door to its Institutions card; a minted face's door is its power's card.
   const cardDoor = cardInstitutionDoorOf(npc, settlement);
-  const cardPowerTail = cardPowerLine(npc, [], governingNameOf(settlement)); // COHERENCE-POWERS: the leader's office
+  const cardPowerTail = cardPowerLine(npc, [], governingNameOf(settlement), !!npc?.id && seatKeeperOf(settlement)?.id === npc.id); // COHERENCE-POWERS: the leader's office (F7: an empty seat's keeper, its caretaker's form)
   const cardLineTail = cardDoor || cardPowerTail;
   // PEOPLE-6 LINKS step 2 (the owner's word): a face's heading is its full name alone, and its
   // role is the honorific of its institution's title, on its own row under the door. The card's
   // `role`/`title` (the title itself, M-1b) is not printed beside it; a DM's person keeps both.
   // MERGE-CAR: the place's coast picks the pool (A-11) — read from the settlement the card is SHOWN in (the tab's), the
   // store's when absent; the edit layer above keeps the live store record (its roster order resolves the edit's index).
-  const honorific = cardHonorificOf(npc, placeSettlement || settlement);
+  const honorific = shownHonorificOf(npc, settlement, placeSettlement || settlement); // COHERENCE-POWERS-3 (F7): an empty seat's keeper
   const nativeRole = cardDoor ? '' : NPC_ROLE_ARCHETYPES.includes(npc.role)
     ? humanizeNpcFacet(npc.role)
     : (npc.role || '');

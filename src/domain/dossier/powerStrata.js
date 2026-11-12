@@ -260,6 +260,7 @@ export function groupRelationships(relationships) {
  */
 import { seatCandidatesOf, isOfficeStandIn } from './seatHolder.js';
 import { cardHatsOf } from '../people/cardPowers.js';
+import { seatKeeperLineOf } from '../people/seatKeeper.js';
 import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderRead.js';
 
 /**
@@ -362,9 +363,12 @@ export function rulingChainOf(settlement) {
     if (vacant) {
       // The row's own label is "The seat", so the line opens on the verb: the row
       // read "The seat The seat stands empty" while it opened on the noun.
-      const line = claimants.length === 0
+      const empty = claimants.length === 0
         ? 'Stands empty; the succession is unsettled.'
         : `Stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimants.join(', ')}.`;
+      // COHERENCE-POWERS-3 (F7): who keeps the seat while it stands empty, in the caretaker's form the card prints
+      const keeper = seatKeeperLineOf(settlement);
+      const line = keeper ? `${empty} ${keeper}` : empty;
       absence = { kind: /** @type {'missing_seat'} */ ('missing_seat'), claimants, line };
     } else if (governing) {
       absence = {

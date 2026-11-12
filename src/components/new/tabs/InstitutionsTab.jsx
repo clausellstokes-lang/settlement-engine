@@ -59,7 +59,7 @@ import { walkUserEdits } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { cardOfficeOf, facesByHouse } from '../../../domain/people/cardPowers.js';
 import { seatHouseFaceOf } from '../../../domain/dossier/seatHolder.js';
-import { faceNameOf } from '../../../domain/people/cardDoor.js';
+import { connectionOf } from '../../../domain/people/seatKeeperDisplay.js';
 import { nameOf } from '../../../domain/rulingPower.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
@@ -238,6 +238,8 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
   const mobile = useIsMobile();
   // COHERENCE-POWERS: a face that is not this house's own (the seat's house, faced by the dual-hat leader)
   const seatFaced = seatFacedRow && !!face && !!cardOfficeOf(face);
+  // COHERENCE-POWERS-3 (F7): the empty seat's keeper in the caretaker's form; a disambiguated name's title once
+  const connection = face && face.name ? connectionOf(face, settlement, seatFaced) : { name: '', tail: '' };
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
   // X-20 (c): the card is always open; a link to the house scrolls it to the top.
@@ -281,8 +283,8 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
         <div data-testid="institution-face" style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
           <span data-testid="institution-face-label">Connection:</span>{' '}
           {/* COHERENCE-POWERS: the seat's house faced by the dual-hat leader names both hats: "Reeve Egilbert Neumann, the miller" */}
-          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={seatFaced ? `${cardOfficeOf(face)} ${face.name}` : faceNameOf(face, settlement)} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
-          {seatFaced && face.title ? `, ${face.title}` : ''}
+          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={connection.name} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          {connection.tail}
         </div>
       )}
       {/* THE BACKS LINE (X-40, X-45): who the house contributes to, each name a door to the Power

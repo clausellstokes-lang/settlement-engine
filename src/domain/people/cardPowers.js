@@ -67,17 +67,45 @@ export function cardPowerParts(card, powerOrder = []) {
 
 /**
  * THE CARD'S POWER LINE: "first of X · second of Y" ('' for a card in no power). The dual-hat leader's
- * first rank in the governing power prints its office (COHERENCE-POWERS): "Reeve, first of Elected Reeve".
+ * first rank in the governing power prints its office (COHERENCE-POWERS): "Reeve, first of Elected Reeve"; the
+ * keeper of an empty seat its caretaker's form (COHERENCE-POWERS-3, F7: "Acting Reeve, first of Elected Reeve").
  * @param {unknown} card @param {string[]} [powerOrder] @param {string | null} [governing] the governing power's name
+ * @param {boolean} [keeper] the card keeps the governing power's seat while it stands empty (seatKeeper.js :: seatKeeperOf)
  * @returns {string}
  */
-export function cardPowerLine(card, powerOrder = [], governing = null) {
-  const office = cardOfficeOf(card);
+export function cardPowerLine(card, powerOrder = [], governing = null, keeper = false) {
+  const held = cardOfficeOf(card);
+  // COHERENCE-POWERS-3 (F7): the keeper of an empty seat holds its office in the caretaker's form
+  const office = held && keeper ? caretakerFormOf(held, governing) : held;
   const parts = cardPowerParts(card, powerOrder);
   const seat = office && governing ? parts.find((p) => p.power === governing && p.rank === 1) : null;
   // the office leads the line: the seat, then the card's other standings in their order
   return (seat ? [`${office}, ${seat.label}`, ...parts.filter((p) => p !== seat).map((p) => p.label)] : parts.map((p) => p.label))
     .join(' · ');
+}
+
+/** The crown's offices: an empty crown is kept by a regent (COHERENCE-POWERS-3, F7; the chair's ruling of 2026-11-12). */
+const CROWN_OFFICES = Object.freeze(['King', 'Queen', 'Monarch']);
+/** Titles that describe the person, not an office (the exempt small place's eldest): the acting form takes the
+ *  government's own office word (the chair's refinement of 2026-11-12), never "Acting Eldest". */
+const DESCRIPTIVE_TITLES = Object.freeze({
+  Eldest: (/** @type {string | null} */ government) => (government === 'Household Council' ? 'Household Elder' : 'Elder'),
+});
+
+/**
+ * THE CARETAKER'S FORM OF AN OFFICE (COHERENCE-POWERS-3, F7; the chair's ruling of 2026-11-12, the owner's to veto):
+ * where the seat stands empty its keeper holds "Acting <the office>"; a crown's, "Regent"; a regent already keeps its
+ * words. '' for no office.
+ * @param {string | null | undefined} office the office or honorific as printed @param {string | null} [government]
+ * @returns {string}
+ */
+export function caretakerFormOf(office, government = null) {
+  const word = String(office || '').trim();
+  if (!word) return '';
+  if (CROWN_OFFICES.includes(word)) return 'Regent';
+  if (/^Regent\b|^Acting\b/.test(word)) return word;
+  const described = /** @type {Record<string, (g: string | null) => string>} */ (DESCRIPTIVE_TITLES)[word];
+  return `Acting ${described ? described(government) : word}`;
 }
 
 /**

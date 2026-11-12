@@ -103,7 +103,8 @@ describe('the vacant seat reads once', () => {
     tab(s);
     const chain = screen.getByTestId('ruling-chain');
     const words = chain.innerText ?? chain.textContent;
-    expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/^Stands empty; the succession is unsettled\.$/);
+    // Re-keyed by identity (COHERENCE-POWERS-3, F7: the seat row names who keeps the empty seat, in the caretaker's form)
+    expect(screen.getByTestId('ruling-chain-absence').textContent).toBe('Stands empty; the succession is unsettled. Acting Elder Karima al-Hassan keeps the seat meanwhile.');
     expect(words.replace(/\s+/g, ' ')).not.toMatch(/The seat ?The seat/); // anchored: the absence row is asserted on this render
   });
 
