@@ -113,11 +113,14 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(said("Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.", 'Struggling')).toContain('The trade line says the opposite of the prosperity label beside it.');
     expect(said('Trade proceeds at an ordinary pace for a settlement of this size.', 'Wealthy')).toEqual([]);
   });
-  test('F5: the safety text\'s gates against the gate home', () => {
+  test('F5, F12: the safety text\'s gates and watch against the defence home', () => {
     const says = (line, institutions) => details(record({ economicState: { safetyProfile: { safetyDesc: line } }, institutions }));
     expect(says('(planted) Everyone comes in by the gates.', [{ name: 'Palisade' }])).toContain('The safety text names gates the defence record does not hold.');
     expect(says('(planted) Everyone comes in by the gates.', [{ name: 'Town walls' }, { name: 'Gatehouse' }])).toEqual([]);
     expect(says('(planted) No gates to bribe and no walls to watch.', [{ name: 'Palisade' }])).toEqual([]);
+    // F12: the watch, named where none stands
+    expect(says('(planted) The charter hall handles threats the watch cannot.', [{ name: 'Citizen militia' }])).toContain('The safety text names a watch the defence record does not hold.');
+    expect(says('(planted) The charter hall handles threats the watch cannot.', [{ name: 'Town watch' }])).toEqual([]);
   });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
@@ -199,6 +202,9 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-village-3', tier: 'village' }, { seed: 'rvw12-village-19', tier: 'village' }, { seed: 'rvw12-village-22', tier: 'village' },
   { seed: 'rvw12-village-34', tier: 'village' }, { seed: 'rvw12-village-45', tier: 'village' }, { seed: 'rvw12-village-50', tier: 'village' },
   { seed: 'rvw12-village-53', tier: 'village' }, { seed: 'rvw-ten-2', tier: 'village' },
+  // F12: "…handles threats the watch cannot" with no watch (rvw12-village-50 and rvw-ten-2, above)
+  { seed: 'rvw12-village-6', tier: 'village' }, { seed: 'rvw12b-village-28', tier: 'village' }, { seed: 'rvw12b-village-174', tier: 'village' },
+  { seed: 'rvw12b-village-229', tier: 'village' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
 ];

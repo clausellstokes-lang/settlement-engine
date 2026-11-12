@@ -321,6 +321,9 @@ const LOCAL_INCOME_WORDS = Object.freeze([
 const COURT_SITS = /\b(?:a court exists|the court can try|before the court|tried at the court|the court sits|functioning court|with a working court|only a court|prosecution is real|real prosecution)/i;
 const COURT_ABSENT = /\b(?:with no court|without a court|without courts|without a working court|without consistent courts|without prison or courts|no reliable court|lack of reliable courts)/i;
 
+/** The town's watch named as its own ("the watch"); "There is no watch" names none. */
+const WATCH_NAMED = /(?<!\bno )\bthe watch\b/i;
+
 /** The town's gates named as standing ("by the gates", "the gates"); "no gates" names none. */
 const GATES_NAMED = /(?<!\bno )\bgates?\b/i;
 
@@ -362,6 +365,7 @@ const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floo
  *   income     an income line that names a local resource ("Local ore", "Local quarry") the town lacks
  *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
  *   gate       the safety text naming gates the gate home does not hold
+ *   watch      the safety text naming the watch where the defence home holds none
  *   safety     the safety text naming a mercenary company the defence home does not list; saying a
  *              court sits where the defence home has none, or that none sits where it has one
  *   market     the economic situation, or the food record's foodways line, naming a market the market home says the town lacks
@@ -435,6 +439,8 @@ export function projectionAgreementFindings(settlement) {
     ...(Array.isArray(safety?.crimeTypes) ? safety.crimeTypes.map((c, i) => [`crimeTypes[${i}].desc`, c?.desc]) : [])];
   for (const [field, text] of gateTexts) {
     if (facts.defence?.gate === false && GATES_NAMED.test(String(text || ''))) resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names gates the defence record does not hold.'));
+    // F12 (COHERENCE-AGREE-3): the watch — named as the town's own where the defence home has none.
+    if (facts.defence?.watch === false && WATCH_NAMED.test(String(text || ''))) resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names a watch the defence record does not hold.'));
   }
   if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.situationDesc || ''))) {
     resource.push(finding('economicState.situationDesc', 'The economic situation names a market the town does not have.'));

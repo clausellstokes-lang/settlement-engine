@@ -305,7 +305,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
             : 'local guard';
     // COHERENCE-AGREE-3 (F5): the gates are the gate home's (defence.gate), not the walls'; a palisade has no gate of record.
     const wallNote   = inst.hasWalls ? said(' Everyone comes in by the gates, where the guard sees them.') : '';
-    const charNote   = inst.hasCharterHall ? " The adventurers' charter hall handles threats the watch cannot." : '';
+    const charNote   = inst.hasCharterHall ? said(" The adventurers' charter hall handles threats the watch cannot.") : ''; // F12: the watch, where it stands
     // Canonical threat vocabulary is heartland/frontier/plagued ('embattled' was never emitted).
     const threatNote = threat === 'plagued' ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : '';
     safetyDesc = `Visitors can walk anywhere at any hour, and there is little crime; the ${lawRef} sees to that.` +
@@ -854,6 +854,11 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   ' Everyone comes in by the gates, where the guard sees them.': declaredSet(
     ' Everyone comes in by the gates, where the guard sees them.', ['gate'],
     ' The walls leave few ways in, and the guard watches them.'),
+  // COHERENCE-AGREE-3 (REVIEW-AGREE F12): the charter hall's line names the watch, so it needs the watch; the
+  // twin names no force. Measured on the 2,866-birth L2 corpus at 65ce74ce6: printed with no watch 11.
+  " The adventurers' charter hall handles threats the watch cannot.": declaredSet(
+    " The adventurers' charter hall handles threats the watch cannot.", ['watch'],
+    " The adventurers' charter hall takes the jobs that need hunters, not guards."),
   'The watch is too thinly spread to maintain order.': declaredSet(
     'The watch is too thinly spread to maintain order.', ['watch'],
     'Enforcement is too thinly spread to maintain order.'),
