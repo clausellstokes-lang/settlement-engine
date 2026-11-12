@@ -509,6 +509,25 @@ push ran the hook's three fast gates, plain, never `--no-verify`. **Base for eve
 3575cf061.** The corpora are PART 3's (R 1,845 with the golden's 525; S 2,460), every probe a copy of PART 3's or new
 beside them under `probes/COHERENCE-POWERS-4/`. This part is kept current at every commit.
 
+### Calls taken without the chair (the chair's standing rule: declares or names, taken and listed here)
+
+1. **l2-plague_onset-city-5's coup move toward danger** (the only one of 94 not under occupation or fracture): the
+   not-built rule's renormalisation (902378261), a declared cause inside a ruled bound; declared by name here (section 5)
+   and in the draft record.
+2. **The six pools with no row** (section 6): named with their draws on both corpora; the repetition guard's walker red for
+   this cause classed as the merge seat's act. Not banked.
+3. **The earlier seats' reds first seen by the whole suite** (section 7): each cured through its own door with its cause,
+   by identity or by a re-measure attributed commit by commit, one commit each: the seed-loop collection, the any-cast
+   types (types only), the legacy faction-reader rows, the prose-numeric addresses, the held-key census's six rows, the
+   generation snapshot, the DM panel's town, the live-corpus count, the three store keepers, the seam seeds, the phone
+   floors. No pin loosened, no ceiling raised, no test skipped, nothing banked upward.
+4. **The F3 guard's mutation-coverage row**: a rationale with its executed red-first, the third seat's form.
+5. **The six surfaces** (section 8) declared at the tip in the record, each MOVED or UNMOVED, no door run.
+6. **The merge seat's rows** (section 7): every title the draft record already names, classed to it; the founding worlds'
+   row placed beside the landing fixture's two, as the chair ruled.
+
+**Parked for the chair** (a ruled line or a pin would change): two, in section 12, sent together once.
+
 ## 1. The line taken (2b635f100, 49f29fe04, 178601d5a)
 
 `origin/lane/integration-2026-11-07` at 3575cf061 (merge point 44, VISIBLE-BUGS, and the merge commits of point 45), theirs
@@ -688,3 +707,101 @@ line beside, on the same corpora; `pools6.mjs`). Every one prints a single line 
 
 They are not banked here by any means; the walker's red for this cause is classed as the merge seat's act at this
 lane's point (the narrow door `--bank-new` is on the agreement lane).
+
+## 7. L5 — the whole suite at the tip, every failing title classed
+
+THE RUN: `npx vitest run tests --maxWorkers=2` at 72c90a594 with the re-emitted bundles in the tree, after
+`git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08`: 3,221 files, 38,945 tests, **76 failed in 47 files**
+(147 skipped, the suite's own). Every failing file was then run again on the line (3575cf061) and on the tree before F3
+(178601d5a), the same command, to class each title by where it is first red. **No run before this one included
+`tests/components`, `tests/store` or the root `tests/generation.test.js`** (the earlier seats' failing set covered eight
+directories, L4), so the lane's reds there were first seen here.
+
+**The line's known set (red at 3575cf061 as at the tip): 8 titles.** landingFixtureFreshness 2; newsHeadlineContract and
+newsVoiceContract (file-level, "Wizard News homes drifted"); proseFamilyContract A1, A3, A5 (the line's own 3 of the 4);
+dossierProseManifest's drift arm (856 rows at the line). Unchanged in kind by this lane.
+
+**F3's own: 1 title, cured.** mutationCoverageManifest TOTALITY: the F3 guard had no manifest row (fa2ba36ff). 75 of the 76
+are red at 178601d5a already; this was the 76th.
+
+**YOURS TO CURE, the lane's earlier seats', each cured by its door with its cause (one commit each):**
+
+| titles | the cause | the cure |
+|---|---|---|
+| seedLoopTotality (1) | dualHatReaders.test.js asserted inline in a seed loop (the third seat's F10) | collected into its misses, the same literal (2d877b752) |
+| domainAnyCastBaseline (4) | the third seat's new seatKeeper.js (11) and seatKeeperDisplay.js (4) any-holes | typed, never widened; types only (9415a106e) |
+| noLegacyFactionReaders (2) | viewModel.js's three tension reads moved one line (F7's import); rosterText.js's new tension read (F2); applyDensityLaw.js's listed dead read moved 512 -> 516 | re-keyed by identity, the new read named 'a tension' (238ce16ef) |
+| proseNumerics (1) | npcComponents.jsx's two banked rows moved two lines (04334d6ef, 859c11ff8) | re-addressed, 155 -> 157, 161 -> 163 (6f2d0bbdd) |
+| heldKeyWriterCensus A3 (1) | six assembly calls of the third seat's F1 and F2 | two writers rowed (mutators), four exempt with reasons (0354477d0) |
+| generation.test.js snapshot (1) | village_riverside_river npcCount 12 -> 11: cure (i) 04334d6ef drops the reeve's office face (measured at 04334d6ef^ and 04334d6ef) | re-measured in place (3154ecb5e) |
+| whoRunsThisTownPanel (2) | soak1k-785's ruling three re-dealt by the dual hat (the sibling Dm pin's own cause, F11) | re-keyed by identity to birth(5), the sibling's town (895e9a4f0) |
+| rosterDuplicateDraws (1) | 823 -> 826 at 97759b837 (F1), 826 -> 853 at 9bcda8ff6 (the crisis seats), each commit measured | re-measured with the commits (d36fbd25e) |
+| locksEngine (1), npcStateRegenRebind (2), pinnedNpcRegenRemap (1) | the same keeper on the same seed moved index under the lane's deal: crier 14 -> 17 (23a2015d4), innkeeper 9 -> 2 -> 3 (23a2015d4, 04334d6ef) | re-keyed by identity, still the first move of -0..-60 under each mint (d3e089be9) |
+| tonightSeatSecret (1) | five of twelve seam seeds are no longer seams under the dual hat (31, 80, 62, 43, 127, each measured) | re-keyed by identity, seven kept, five next seams (ee1608329) |
+| dossierPhoneFloorAllViews (2) | the fixture city's lines move with the cast, bisected per view by the file's own walk at every lane commit touching src: rule A 23a2015d4, the dual hat e0c8bb357, cure (i) 04334d6ef, the seat row's two hats 4509d4add; F3 nothing; no token moved, zero violations | both pins re-measured with those causes (2fd6cf8a2) |
+
+**PARKED (a ruled design or a pin would change; the chair's, with my recommendation): 2 titles.** See section 12.
+tabSentencesOnce (x50-trim-21) and tonightSheetOnce (x51-tonight-51).
+
+**THE FOUNDING WORLDS' ROW (the chair's ruling): 1 title.** foundingWorldBones "every promise holds in at least 19 of 20
+forks", beside the landing fixture's two rows.
+
+**THE MERGE SEAT'S, named by the draft record: the rest.** The goldens and their null-change pins (generatorGoldenMaster;
+espionageDormancyFence; heraldKnowledgeDeskGolden; dossierProseManifest's tally and audience arms, the drift arm the line's
+too; pdf goldenViewModel; dmLayerGoldenIsolation A7, worldFactRederive A7, editWorldFactResources A2 and A6,
+nameHeldThroughAssembly A1, pipelinePinnedChoosers A1, pipelinePinnedMode A1, A2, A5, rosterFinalUnderHeldRoster A1,
+powerEconomyFreshness A4); the digests re-taken by their writers (x46NpcBand, institutionBudgetPromise,
+intentAtlasSoakDistiller); the measured figures (hookThemeDraws, generationForkCensus A1 and A6, editCorpusRatchet A3, A5,
+A7, mergeLadderHeldKeys A3); proseFamilyContract A2 (the fourth of its arms, the lane's beside the line's three);
+the worked-example towns (proseComposed A13, proseTasteInterested 2); writerReach 9; observedShapeReaders 4;
+statecraftExposureBand's floor; poolDominance (the six pools, section 6).
+
+THE FINAL TIP: the same command at 2fd6cf8a2 (the last commit touching code or tests; the edge bundles re-emitted in the tree, engine hash 50f424eb244a7487), the ledger fetched first (review-fixes-2026-07-08 at 235efce1a): 3,221 files, 38,945 tests, **55 failed plus the two file-level news walkers, 57 titles in 33 files** (147 skipped, the suite's own). Every title cured above is green. The 57 are exactly the classed set and nothing else: the line's 8, the founding worlds' 1, the parked 2, the merge seat's 46. **No title is YOURS TO CURE.** The six surfaces read as in section 8 (golden 376 of 525; fence 1 of 21; manifest 3 of 17, the drift list capped at 1,000, the audience arm 204 against 203; pdf.6 1 of 4; Herald 1 of 3; witness 7 of 7 green).
+
+## 8. The six surfaces, at the tip
+
+Read from L5 (no golden door run; the fourth seat's commits after it move no generator output: tests, registers and one
+types-only change). The record's `surfaces` carries the same.
+
+| surface | state | at the tip |
+|---|---|---|
+| generator golden master | MOVED | 376 of 525 configurations differ (the line's f72262c68 = 3575cf061 against the tip; F3 and the line moved 0 of the golden's 525) |
+| espionage dormancy fence | MOVED | 1 of 21 red, the driven golden's hash |
+| dossier prose manifest | MOVED | 3 of 17 red: the drift arm 1,000 or more rows (its list is capped; 856 at the line already), the tally, the audience arm 203 -> 204 |
+| PDF golden (pdf.6) | MOVED | 1 of 4 red, the canon town's cast and ruling three |
+| Herald knowledge desk golden | MOVED | 1 of 3 red, its hash |
+| preset-lighting witness | UNMOVED | 7 of 7 green |
+
+## 9. The gates
+
+At every commit touching `src/` (L1): domain-strict exit 0 (1,113, ceiling 1,113); typecheck:ratchet exit 0 (167, ceiling
+167); eslint on the touched files exit 0. At the push, the hook's three gates: run at the docs commit's parent 2fd6cf8a2 with `sh scripts/gate-tail.sh` as the hook runs them for a lane-only push: typecheck:ratchet exit 0 (167, ceiling 167), typecheck:domain:strict exit 0 (1,113, ceiling 1,113), lint exit 0; the push itself ran the same three through the hook, plain. The repetition guard
+(poolDominance) is red for the six pools alone (section 6), classed, not banked.
+
+## 10. New words for the owner's veto list
+
+- The seat row names each claimant in person: "Stands empty; 2 claimants circle: Dubravka Semyonov for Noble Claimant
+  (Senior Line), Galina Grbić for Noble Claimant (Reform Line)." (the words "<person> for <power>").
+- The claimant's mint title "the lord" (an existing title, the Noble Houses seat mint's; no honorific, hook or secret
+  register gains a row).
+No other printed word is new in this part.
+
+## 11. Seen, not chased
+
+- "Criminal money is reaching the officials" is a state-prose candidate (`src/data/dossierStateProse/power.generated.js`);
+  not counted (NOT YOURS: the Power tab's "hall free of criminals" beside it).
+- x51-tonight-51's seat-holder is both the insurgency's target and the keeper of the insurgency's own secret (a gate
+  opened to it): the secret is dealt to the house face that the dual hat made the seat-holder.
+
+## 12. PARKED for the chair (sent once, together)
+
+1. tabSentencesOnce, x50-trim-21 (a town under succession): The Highborn Circle and The Peerage, both old families'
+   bodies with no free landed rung, print "No one claimant has stepped forward yet: the old families press the claim
+   together." twice on one Power tab. Red before F3 (178601d5a) as at the tip; F3's ruled "else keeps its line" stands.
+   RECOMMENDATION: the line prints once per tab, under the stronger body (its own words say "together"); a change to the
+   Power tab's leaderless line, so the chair's.
+2. tonightSheetOnce, x51-tonight-51: the seat-holder (the craft-guild master under the dual hat) is the insurgency's
+   target and keeps its own secret, so RUNG2-F13 withholds it and R11's ruled step (d) voices the temperament
+   ("Warm-hearted."). The composer is as ruled; the test's oracle has no arm for (d). RECOMMENDATION: the oracle accepts
+   the temperament where `says` is 'temperament' and it is the record's own `personality.dominant` (a widening of a pin,
+   so the chair's), or rule that a target who keeps the crisis's own secret is voiced with it.
