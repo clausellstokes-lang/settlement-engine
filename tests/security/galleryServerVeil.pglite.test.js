@@ -87,7 +87,7 @@ const TOWNS = Object.freeze([
   { seed: 'server-veil-town-2', settType: 'town' },
   { seed: 'server-veil-town-0', settType: 'town' },
   { seed: 'server-veil-city-2', settType: 'city' },
-  { seed: 'server-veil-city-infiltrated-0', settType: 'city', stressTypes: ['infiltrated'], selectedStressesRandom: false },
+  { seed: 'server-veil-city-infiltrated-0', settType: 'city', crisis: 'infiltrated', selectedStresses: ['infiltrated'], selectedStressesRandom: false },
   { seed: 'server-veil-metropolis-3', settType: 'metropolis' },
   { seed: 'server-veil-metropolis-7', settType: 'metropolis' },
 ]);
@@ -247,8 +247,14 @@ describe('the server-side share veil (211) — execution against the real SQL an
 
   for (const [n, town] of TOWNS.entries()) {
     it(`${town.seed}: nothing the page hides is sent; no page changes; 210 is red on the same rows`, async () => {
-      const { seed, ...cfg } = town;
+      const { seed, crisis, ...cfg } = town;
       const raw = gen({ ...BROWSER, ...cfg }, null, { seed, customContent: {} });
+      // a town named for a crisis IS in it, and an infiltrated one carries a hidden power (the second
+      // review's R8: the key the generator reads is selectedStresses)
+      if (crisis) {
+        expect(raw.stress?.type, `${seed} stress`).toBe(crisis);
+        expect((raw.powerStructure?.factions || []).filter((f) => f.hidden === true).length, `${seed} hidden powers`).toBeGreaterThan(0);
+      }
       const record = { ...raw, publicProse: compose(raw) };
       const pub = veil.galleryPayloadFor(record, {});
       const id = `aaaaaaaa-0000-0000-0000-${String(n + 1).padStart(12, '0')}`;
