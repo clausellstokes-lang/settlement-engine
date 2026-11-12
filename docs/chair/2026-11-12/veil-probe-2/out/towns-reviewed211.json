@@ -1,0 +1,114 @@
+{
+ "failed": {
+  "at210": [],
+  "at211": []
+ },
+ "towns": [
+  {
+   "seed": "cv2-thorp-calm-0",
+   "size": "thorp",
+   "npcs": 1,
+   "institutions": 7,
+   "bytes": 49630
+  },
+  {
+   "seed": "cv2-thorp-crisis-0",
+   "size": "thorp",
+   "npcs": 3,
+   "institutions": 7,
+   "bytes": 54546
+  },
+  {
+   "seed": "cv2-hamlet-calm-0",
+   "size": "hamlet",
+   "npcs": 3,
+   "institutions": 9,
+   "bytes": 62145
+  },
+  {
+   "seed": "cv2-hamlet-crisis-0",
+   "size": "hamlet",
+   "npcs": 9,
+   "institutions": 16,
+   "bytes": 90313
+  },
+  {
+   "seed": "cv2-village-calm-0",
+   "size": "village",
+   "npcs": 13,
+   "institutions": 18,
+   "bytes": 104930
+  },
+  {
+   "seed": "cv2-village-crisis-0",
+   "size": "village",
+   "npcs": 10,
+   "institutions": 15,
+   "bytes": 91849
+  },
+  {
+   "seed": "cv2-town-calm-0",
+   "size": "town",
+   "npcs": 17,
+   "institutions": 22,
+   "bytes": 131162
+  },
+  {
+   "seed": "cv2-town-crisis-0",
+   "size": "town",
+   "npcs": 21,
+   "institutions": 28,
+   "bytes": 157733
+  },
+  {
+   "seed": "cv2-city-calm-0",
+   "size": "city",
+   "npcs": 59,
+   "institutions": 67,
+   "bytes": 317905
+  },
+  {
+   "seed": "cv2-city-crisis-0",
+   "size": "city",
+   "npcs": 45,
+   "institutions": 52,
+   "bytes": 275032
+  },
+  {
+   "seed": "cv2-metropolis-calm-0",
+   "size": "metropolis",
+   "npcs": 75,
+   "institutions": 85,
+   "bytes": 393800
+  },
+  {
+   "seed": "cv2-metropolis-crisis-0",
+   "size": "metropolis",
+   "npcs": 86,
+   "institutions": 96,
+   "bytes": 456849
+  }
+ ],
+ "totals": {
+  "rows": 348,
+  "reads": 2304,
+  "offences": {
+   "carried": 0,
+   "overrides": 0,
+   "changed": 0,
+   "oldShows": 0,
+   "importMap": 46
+  }
+ },
+ "examples": {
+  "importMap": [
+   "cv2-thorp-crisis-0 unmarked/live: map lacks npcs[id=npc.military_guard_watch_captain_0].title | map lacks npcs[id=npc.military_guard_watch_captain_0].category",
+   "cv2-hamlet-calm-0 unmarked/live: map lacks npcs[id=npc.military_guard_watch_captain_0].title | map lacks npcs[id=npc.military_guard_watch_captain_0].category",
+   "cv2-town-calm-0 unmarked/live: map lacks npcs[id=npc.thieves_guild_kingpin_0].title | map lacks npcs[id=npc.thieves_guild_kingpin_0].category",
+   "cv2-city-calm-0 unmarked/live: map lacks npcs[id=npc_veiled_3a9ee8c63386c3ed].role | map lacks npcs[id=npc_veiled_3a9ee8c63386c3ed].title",
+   "cv2-city-crisis-0 unmarked/live: map lacks npcs[id=npc_veiled_e205baf372a75755].role | map lacks npcs[id=npc_veiled_e205baf372a75755].title",
+   "cv2-metropolis-calm-0 unmarked/live: map lacks npcs[id=npc_veiled_019557b3ae8c7870].role | map lacks npcs[id=npc_veiled_019557b3ae8c7870].title",
+   "cv2-metropolis-crisis-0 unmarked/live: map lacks npcs[id=npc_veiled_90e8d3e212c3c172].role | map lacks npcs[id=npc_veiled_90e8d3e212c3c172].title"
+  ]
+ }
+}
