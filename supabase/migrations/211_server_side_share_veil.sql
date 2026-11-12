@@ -30,7 +30,9 @@
 --   (3) get_unlisted_dossier (208 as amended): the veil applied to `dossier`; the lateral holds
 --       `offset 0`, so the sanitiser runs once (the VEIL-FIX review's low finding 1).
 --   (4) get_gallery_map (088): each member's dossier through its own listing's veil (ruling 1).
---   (5) import_gallery_dossier (131): the importer's copy through the listing's veil (ruling 2).
+--   (5) import_gallery_dossier (131): the importer's copy through the listing's veil (ruling 2), read
+--       from the same source as the listing: in snapshot mode the FROZEN COPY, past the bound refused
+--       (the second review's R1, ruled into 211).
 --   (6) On both dossier reads gallery_member_overrides is rebuilt from an ALLOWLIST
 --       (_gallery_veil_served; low finding 2, the fail-closed form): each member's boolean revealDm /
 --       allowImport, and when a veil was applied the served marker {v: 2, mode, at, groupings}. No
@@ -1245,7 +1247,10 @@ as $$
 $$;
 grant execute on function public.get_unlisted_dossier(text) to authenticated, anon;
 
--- import_gallery_dossier: 131's body plus the veil
+-- import_gallery_dossier: 131's body plus the veil, and the frozen copy read exactly as the gallery
+-- read reads it (the second review's R1: in snapshot mode the import handed over the LIVE town, so
+-- everything written after the freeze reached the importer): the same lateral, the same bound (a
+-- refused copy is refused: no row), no copy served as the gallery serves it
 create or replace function public.import_gallery_dossier(dossier_slug text)
 returns table (
   id uuid,
@@ -1274,17 +1279,25 @@ as $$
     end as j
   ) base
   cross join lateral (
+    select case when cp.copy is not null then cp.copy else base.j end as j,
+           cp.copy is not null as copied,
+           coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
+      from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
+              from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
+  ) src
+  cross join lateral (
     select public._gallery_apply_member_overrides(
-      case when s.gallery_share_dm then public._gallery_dm_full_json(base.j) else public._gallery_sanitize_public_json(base.j) end,
-      public._gallery_dm_full_json(base.j),
+      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) else public._gallery_sanitize_public_json(src.j) end,
+      public._gallery_dm_full_json(src.j),
       s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, true
     ) as d
     offset 0
   ) proj
   -- 211: the share's veil (NULL for an unmarked listing: served as before)
-  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false) as v offset 0) vl
+  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false, src.copied) as v offset 0) vl
   where s.public_slug = dossier_slug
     and s.is_public = true
+    and not src.refused
     and s.gallery_importable = true
     and auth.uid() is not null
     -- ── mig 120: IMPORT is premium (server-authoritative). Free/anon → 0 rows. ──

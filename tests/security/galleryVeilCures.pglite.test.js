@@ -377,6 +377,57 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     }
   }, ROW_TIMEOUT_MS);
 
+  // ── R1 ────────────────────────────────────────────────────────────────────────────────────────
+  it('R1 (the review row): the import of a snapshot share is its FROZEN copy: nothing written after the freeze reaches the importer', async () => {
+    const at = '2026-11-01T00:00:00.000Z';
+    const rec = { name: 'T', npcs: [{ id: 'npc_a', name: 'Ada', role: 'smith' }], institutions: [{ id: 'h', name: 'House', desc: 'FROZEN_DESC' }] };
+    const live = structuredClone(rec);
+    live.institutions[0].desc = 'RVPOST_DESC';
+    live.npcs.push({ id: 'npc_rvpost', name: 'Rvpost Newcomer', role: 'spy', secret: 'RVPOST_SECRET' });
+    const read = async (db, ov, dm = false) => {
+      const share = await put(db, live, ov, { dm });
+      H.db = db; H.uid = READER;
+      const page = await gallery.fetchDossierForImport(share.slug);
+      const resp = H.last; H.uid = '';
+      const g = await gallery.fetchPublicDossier(share.slug);
+      return { page, resp, g };
+    };
+    const out = {};
+    for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+      for (const dm of [false, true]) {
+        const ov = veil.writeShareVeil({}, [], { mode: 'snapshot', at, snapshot: veil.galleryPayloadFor(rec, { shareDm: dm }) });
+        const r = await read(db, ov, dm);
+        out[`${where}${dm ? ' +dm' : ''}`] = { postFreeze: has(r.resp, 'Rvpost') || has(r.resp, 'RVPOST'), frozen: has(r.page, 'FROZEN_DESC'),
+          sameAsGallery: JSON.stringify(r.page.settlement.npcs?.map((x) => x.name)) === JSON.stringify(r.g.settlement.npcs?.map((x) => x.name)) };
+      }
+    }
+    // red control: 210 hands the importer the live town
+    expect(out['210'].postFreeze).toBe(true);
+    expect(out['211']).toEqual({ postFreeze: false, frozen: true, sameAsGallery: true });
+    expect(out['211 +dm']).toEqual({ postFreeze: false, frozen: true, sameAsGallery: true });
+  }, ROW_TIMEOUT_MS);
+
+  it('R1 (the edges): a refused copy is refused on import too; a snapshot share with no copy imports what its gallery page shows', async () => {
+    const { db } = LIVE;
+    // past the bound (the F1 row's copy): no row on import, never the live row
+    const big = `{"name":"FROZEN","n":[${Array(180_000).fill('1e+308').join(',')}]}`;
+    const refused = await put(db, '{"name":"LIVE_ROW"}', {});
+    await db.query(`update public.settlements set gallery_member_overrides = $2 where public_slug = $1`, [refused.slug,
+      `{"$veil":{"v":1,"deltas":[],"mode":"snapshot","at":"2026-11-12T00:00:00.000Z","snapshot":${big}}}`]);
+    await db.exec(`set test.uid = '${READER}';`);
+    expect((await db.query('select data from public.import_gallery_dossier($1)', [refused.slug])).rows).toEqual([]);
+    expect((await db.query('select data from public.get_gallery_dossier($1)', [refused.slug])).rows).toEqual([]);
+    // no copy: live, as the gallery read
+    await db.exec(`set test.uid = '';`);
+    const nocopy = await put(db, { name: 'T', institutions: [{ id: 'h', name: 'House', desc: 'LIVE_NOCOPY' }] }, { $veil: { v: 1, deltas: [], mode: 'snapshot', at: '2026-11-12T00:00:00.000Z' } });
+    await db.exec(`set test.uid = '${READER}';`);
+    const imp = (await db.query('select data from public.import_gallery_dossier($1)', [nocopy.slug])).rows[0].data;
+    await db.exec(`set test.uid = '';`);
+    const gal = (await db.query('select data from public.get_gallery_dossier($1)', [nocopy.slug])).rows[0].data;
+    expect(has(imp, 'LIVE_NOCOPY')).toBe(true);
+    expect(imp).toEqual(gal);
+  }, ROW_TIMEOUT_MS);
+
   // ── R5 ────────────────────────────────────────────────────────────────────────────────────────
   it('R5 (a, the review rows): a page that draws the LIVE town carries no freeze date; the frozen page keeps its own', async () => {
     const at = '2026-11-01T00:00:00.000Z';
