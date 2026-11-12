@@ -546,7 +546,13 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // STYLE-2-MERGE-4 at the SW-8 RENAME-POWERS merge (2026-11-10, point 24): the two lines' text-only moves composed (the
 // integration side's 5b023789... and SW-8's bce07bf5..., each leaf-diffed TEXT ONLY on its own base); the hash re-measured at
 // the merged tree: 5b023789... / bce07bf5... -> f94c5ff6...
-const BASE_PULSE_HASH = 'f94c5ff691fadd2542d8f33a017823fc60b17d75c8280ed945a745f6b9073dd5';
+// STYLE-2-MERGE-9 at the VISIBLE-BUGS merge (2026-11-12, point 44, merge a390ef97b): RE-KEYED BY IDENTITY at the merged tree,
+// f94c5ff6... -> 936751d9..., ONE cause, TEXT ONLY: the lane's component (B), VISIBLE-BUGS 3b 5aabf82c0 + 6dbf92bff (the deed
+// body gives the aim as that deed's reason). Leaf-diffed f72262c68 -> the merge over this arm's four records: 29,345 leaves
+// each side, 44 moved, all strings, every one a summary whose old value held "is out to" (pulseHistory selected/consequence/
+// impactDigest summaries 12 each, proposals[].summary and .outcome.summary 4 each); no id, tick or number moved; components
+// (A) and (C) reach no line of these four records. Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = '936751d9050f833ab965b24485f0e9f5ce26798a24cbe88ca5b01e8df746f033';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {
