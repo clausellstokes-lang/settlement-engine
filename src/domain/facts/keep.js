@@ -66,14 +66,24 @@ export function keepOf(prosperity) {
 
 /**
  * The floors of what is bought outright, by family (the chair's ruling of 2026-11-12, rulings 4
- * and 6): a family keeps `floor + (1 - floor) × bought` of its full measure. DRAFT, the owner's to
- * sign.
- * @type {Readonly<{ services: number, stores: number }>}
+ * and 6): a family keeps `floor + (1 - floor) × bought` of its full measure. And the magic line
+ * (ruling 5): below this `bought` share, magic availability steps down one band. DRAFT, the
+ * owner's to sign.
+ * @type {Readonly<{ services: number, stores: number, magicBelow: number }>}
  */
 export const KEEP_SCALE_TUNING = Object.freeze({
   services: 0.7,
   stores: 0.7,
+  magicBelow: 0.6,
 });
+
+/**
+ * Whether a place keeps too little to buy magic at its world's own availability (ruling 5).
+ * @param {{ bought: number }} keep @returns {boolean}
+ */
+export function buysLessMagic(keep) {
+  return keep.bought < KEEP_SCALE_TUNING.magicBelow;
+}
 
 /**
  * The share of its full measure a bought family keeps: `floor + (1 - floor) × bought`. At

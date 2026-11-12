@@ -2923,11 +2923,12 @@
       "status": "draft",
       "signedAt": null,
       "unit": {
+        "magicBelow": "share",
         "services": "fraction01",
         "stores": "fraction01"
       },
       "band": null,
-      "note": "COHERENCE-UPKEEP (lane/coherence-upkeep-2026-11-12), the chair's rulings 4 and 6 of 2026-11-12: the floor a bought family keeps of its full measure, floor + (1 - floor) x keepOf(prosperity).bought — the services' demand (healing, lodging, food, equipment, transport and the commercial read) and the months laid by in store. Registered DRAFT in the minting commit; the values are the ruling's own 0.7 + 0.3 x keep, the owner's to sign."
+      "note": "COHERENCE-UPKEEP (lane/coherence-upkeep-2026-11-12), the chair's rulings 4 and 6 of 2026-11-12: the floor a bought family keeps of its full measure, floor + (1 - floor) x keepOf(prosperity).bought — the services' demand (healing, lodging, food, equipment, transport and the commercial read) and the months laid by in store; and magicBelow (ruling 5), the bought share under which magic availability steps down one band. Registered DRAFT in the minting commit; the values are the ruling's own 0.7 + 0.3 x keep and the proposal's keep < 0.6, the owner's to sign."
     }
   },
   "roles": {
