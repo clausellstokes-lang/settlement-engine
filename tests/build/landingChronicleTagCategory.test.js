@@ -30,12 +30,17 @@ const CHIP_MAY_SIT_OVER = Object.freeze({
 const SEEDS = ['lf-033', 'lf-001', 'lf-002', 'lf-003', 'lf-004'];
 
 describe('landing chronicle: each tag agrees with its own event', () => {
-  it.each(SEEDS)('%s: no chronicle tag contradicts its event\'s category', (seed) => {
-    const picks = chroniclePicksFor(analyze(seed).news);
-    expect(picks.length).toBeGreaterThan(0);
-    const contradictions = picks
-      .filter((p) => !(CHIP_MAY_SIT_OVER[p.kind]?.(String(p.entry.impactKind ?? '')) ?? false))
-      .map((p) => `${p.kind} over ${p.entry.impactKind}: ${p.entry.summary || p.entry.headline}`);
+  it('no chronicle tag contradicts its event\'s category, on every seed', () => {
+    const contradictions = [];
+    for (const seed of SEEDS) {
+      const picks = chroniclePicksFor(analyze(seed).news);
+      expect(picks.length, `${seed}: anti-vacuity`).toBeGreaterThan(0);
+      for (const p of picks) {
+        if (!(CHIP_MAY_SIT_OVER[p.kind]?.(String(p.entry.impactKind ?? '')) ?? false)) {
+          contradictions.push(`${seed}: ${p.kind} over ${p.entry.impactKind}: ${p.entry.summary || p.entry.headline}`);
+        }
+      }
+    }
     expect(contradictions).toEqual([]);
-  }, 120_000);
+  }, 300_000);
 });

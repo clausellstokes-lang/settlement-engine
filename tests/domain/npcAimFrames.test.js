@@ -58,18 +58,21 @@ describe('NPC_AIM_FRAMES: five frames, each read with every deed and every aim',
 });
 
 describe('on a real run, every deed line\'s body names its own deed', () => {
-  it.each(['lf-033', 'lf-003'])('%s: no deed headline sits over a body about something else', async (seed) => {
+  it('lf-033 and lf-003: no deed headline sits over a body about something else', async () => {
     const { analyze } = await import(FIXTURE);
-    const lines = analyze(seed).news.filter((e) => e?.kind === 'applied'
-      && /^npc_/.test(String(e.impactKind)) && UNTARGETED_NPC_DEEDS[String(e.impactKind).slice(4)]);
-    expect(lines.length, 'anti-vacuity').toBeGreaterThan(10);
-    const apart = lines.filter((e) => {
-      const family = String(e.impactKind).slice(4);
-      const own = [UNTARGETED_NPC_DEEDS[family].noun, TARGETED_NPC_DEEDS[family]?.noun('').trim()].filter(Boolean);
-      return !own.some((noun) => String(e.summary).toLowerCase().includes(noun.toLowerCase()));
-    }).map((e) => `${e.headline} / ${e.summary}`);
+    const apart = [];
+    for (const seed of ['lf-033', 'lf-003']) {
+      const lines = analyze(seed).news.filter((e) => e?.kind === 'applied'
+        && /^npc_/.test(String(e.impactKind)) && UNTARGETED_NPC_DEEDS[String(e.impactKind).slice(4)]);
+      expect(lines.length, `${seed}: anti-vacuity`).toBeGreaterThan(10);
+      for (const e of lines) {
+        const family = String(e.impactKind).slice(4);
+        const own = [UNTARGETED_NPC_DEEDS[family].noun, TARGETED_NPC_DEEDS[family]?.noun('').trim()].filter(Boolean);
+        if (!own.some((noun) => String(e.summary).toLowerCase().includes(noun.toLowerCase()))) apart.push(`${e.headline} / ${e.summary}`);
+      }
+    }
     expect(apart).toEqual([]);
-  }, 120_000);
+  }, 240_000);
 });
 
 describe('the frames are text only', () => {
