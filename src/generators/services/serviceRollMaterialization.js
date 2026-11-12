@@ -148,22 +148,6 @@ function availableServiceIdentityKey(service) {
 }
 
 /**
- * @param {{
- *   buckets:Record<string, Array<Record<string, unknown>>>,
- *   tier:string,
- *   institutions:Array<Record<string, unknown>>,
- *   opts:Record<string, unknown>,
- *   config:Record<string, unknown>,
- *   worldLaw:{
- *     magicFunctions:()=>boolean,
- *     allowsInstitution:(institution:unknown)=>boolean,
- *     allowsService:(service:unknown,provider?:unknown,category?:string)=>boolean,
- *     portKind?:'maritime'|'river'|'none',
- *   },
- * }} input
- * @returns {{criminalEffective:number,seen:Set<string>}}
- */
-/**
  * COHERENCE-UPKEEP (the chair's ruling 4 of 2026-11-12): the service categories a place buys
  * outright. With the commercial services (`serviceDomainOf` 'commercial'), each keeps
  * `boughtShare('services', keepOf(prosperity))` of its rows — 0.82 at Struggling, the identity at
@@ -187,6 +171,23 @@ function upkeepRoll(seed, institutionName, serviceName) {
   return (h >>> 0) / 4294967296;
 }
 
+/**
+ * @param {{
+ *   buckets:Record<string, Array<Record<string, unknown>>>,
+ *   tier:string,
+ *   institutions:Array<Record<string, unknown>>,
+ *   opts:Record<string, unknown>,
+ *   config:Record<string, unknown>,
+ *   worldLaw:{
+ *     magicFunctions:()=>boolean,
+ *     allowsInstitution:(institution:unknown)=>boolean,
+ *     allowsService:(service:unknown,provider?:unknown,category?:string)=>boolean,
+ *     portKind?:'maritime'|'river'|'none',
+ *   },
+ *   upkeep?:{ prosperity?:unknown, seed?:string }|null,
+ * }} input
+ * @returns {{criminalEffective:number,seen:Set<string>}}
+ */
 export function materializeInstitutionServiceRolls(input) {
   const {
     buckets,
@@ -213,8 +214,8 @@ export function materializeInstitutionServiceRolls(input) {
   const facts = () => birthFactsOf({ institutions, config, tier }, worldLaw);
 
   // COHERENCE-UPKEEP (ruling 4): what the place can pay for, from the one home.
-  const keep = keepOf(config._prosperity);
-  const upkeepSeed = String(config._seed || '');
+  const keep = keepOf(input.upkeep?.prosperity);
+  const upkeepSeed = String(input.upkeep?.seed || '');
 
   for (const institution of filteredInstitutions) {
     const services = getServicesForInstitution(

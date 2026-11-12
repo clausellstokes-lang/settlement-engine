@@ -827,9 +827,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // AFTER prosperity (which read the full-granary record above and reads no months). The writer's
   // only draw is a label-keyed fork, so this second call draws the same crop fortune and moves no
   // stream; every storage field (the months, the note, the resilience) follows the kept months.
-  const _keptFoodSec = generateFoodSecurity(tier, institutions, {
-    ...config, tradeRouteAccess: tradeRoute, _storesShare: boughtShare('stores', keepOf(prosperity)),
-  });
+  const _keptFoodSec = generateFoodSecurity(
+    tier, institutions, { ...config, tradeRouteAccess: tradeRoute }, boughtShare('stores', keepOf(prosperity)),
+  );
   return {
       tier: tier,
       prosperity,

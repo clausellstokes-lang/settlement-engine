@@ -226,8 +226,11 @@ describe('the column census, measured across the estate', () => {
     // census-1f unit 1c: -5) from the shared 1,925; the merged tip reads 1,849 = 1,925 - 72 - 5 + 1, the two causes
     // composed and one row of INTERACTION (the census's declared service roll over the review-intake's regenerated
     // service keys; PLAUSIBLE as attributed, not bisected per settlement). The liveness anchor is unchanged in kind.
-    expect(serviceRows, 'the header claims 1,849 instantiated service rows over these thirty')
-      .toBe(1849);
+    // ⭐ RE-MEASURED 2026-11-12 (COHERENCE-UPKEEP, the chair's ruling (A) on the services STOP): 1,849 → 1,834, ONE
+    // cause, c19e96e23 — services are kept as far as the place can pay, by a draw-free roll after the seeded one, so the
+    // rule only takes rows away (0 added on the lane's 360). The liveness anchor is unchanged in kind.
+    expect(serviceRows, 'the header claims 1,834 instantiated service rows over these thirty')
+      .toBe(1834);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'

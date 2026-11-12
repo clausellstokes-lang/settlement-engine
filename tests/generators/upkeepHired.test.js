@@ -60,14 +60,16 @@ describe('a hired force stands in for a standing one, to a lesser degree', () =>
     expect(cf.hasCharterHall || cf.hasMercenary).toBe(false);
   });
 
-  test.each(SEEDS)('RED-FIRST %s: military with hired force only is not above the same place with a watch instead', (seed) => {
-    const s = born(seed);
-    const home = forcesOf(s);
-    expect(home.hasCharterHall || home.hasMercenary, 'the seed holds a hired force').toBe(true);
-    expect(home.hasGarrison || home.hasWatch || home.hasMilitia, 'and no standing force').toBe(false);
-    const hired = generateDefenseProfile(s).scores.military;
-    const watch = generateDefenseProfile(withWatchInstead(s)).scores.military;
-    expect(hired, `${seed}: hired-only ${hired} against a watch's ${watch}`).toBeLessThanOrEqual(watch);
+  test('RED-FIRST: on every hired-only corpus village, military with hired force only is not above the same place with a watch instead', () => {
+    for (const seed of SEEDS) {
+      const s = born(seed);
+      const home = forcesOf(s);
+      expect(home.hasCharterHall || home.hasMercenary, `${seed} holds a hired force`).toBe(true);
+      expect(home.hasGarrison || home.hasWatch || home.hasMilitia, `${seed} holds no standing force`).toBe(false);
+      const hired = generateDefenseProfile(s).scores.military;
+      const watch = generateDefenseProfile(withWatchInstead(s)).scores.military;
+      expect(hired, `${seed}: hired-only ${hired} against a watch's ${watch}`).toBeLessThanOrEqual(watch);
+    }
   });
 });
 
@@ -110,7 +112,7 @@ describe('services are kept as far as the place can pay', () => {
   const rollAs = (s, prosperity) => {
     const prev = setActiveRng(createPRNG(`${s.config?.seed || 'upkeep'}:services`));
     try {
-      return generateAvailableServices(s.tier, s.institutions, s.config?.servicesToggles || {}, { ...s.config, _prosperity: prosperity, _seed: 'agree-town-0' }, null);
+      return generateAvailableServices(s.tier, s.institutions, s.config?.servicesToggles || {}, s.config, null, { prosperity, seed: 'agree-town-0' });
     } finally { clearActiveRng(prev); }
   };
   const rows = (svc) => Object.values(svc).reduce((n, list) => n + (Array.isArray(list) ? list.length : 0), 0);
@@ -169,7 +171,7 @@ describe('stores are what the place can lay by', () => {
   const storesAt = (s, share) => {
     const prev = setActiveRng(createPRNG('upkeep:stores'));
     try {
-      return generateFoodSecurity(s.tier, s.institutions, { ...s.config, tradeRouteAccess: s.config.tradeRouteAccess, _storesShare: share });
+      return generateFoodSecurity(s.tier, s.institutions, { ...s.config, tradeRouteAccess: s.config.tradeRouteAccess }, share);
     } finally { clearActiveRng(prev); }
   };
 

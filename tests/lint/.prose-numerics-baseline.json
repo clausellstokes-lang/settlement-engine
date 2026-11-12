@@ -763,13 +763,13 @@
   },
   {
     "path": "src/domain/magicProfile.js",
-    "line": 156,
+    "line": 172,
     "category": "floatInterpolation",
     "snippet": "`${religious.name} (power ${religious.power}) restricts arcane practice.`"
   },
   {
     "path": "src/domain/magicProfile.js",
-    "line": 164,
+    "line": 180,
     "category": "floatInterpolation",
     "snippet": "`${arcane.name} (power ${arcane.power}) normalizes arcane practice.`"
   },

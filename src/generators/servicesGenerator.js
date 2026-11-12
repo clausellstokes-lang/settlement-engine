@@ -56,6 +56,7 @@ export const generateAvailableServices = (
   opts = {},
   config = {},
   generationContext = null,
+  upkeep = null,
 ) => {
   const worldLaw = resolveGenerationWorldLaw(
     generationContext,
@@ -81,6 +82,7 @@ export const generateAvailableServices = (
     opts,
     config,
     worldLaw,
+    upkeep,
   });
   const hasCriminalInst = institutions.some((inst) => {
       if (isMaterializedCustomContent(inst)) return false;

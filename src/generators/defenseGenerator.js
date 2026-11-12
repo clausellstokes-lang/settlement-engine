@@ -78,7 +78,7 @@ const getDefenseInstitutions = (institutions) =>
  */
 const computeDefenseScores = (
   inst, milEffective, crimEffective, econOutput, magInfluence, relInfluence,
-  priorities, threat, config, tier, stressTypes = [], reliesOnMagic = false,
+  priorities, threat, config, tier, stressTypes = [], reliesOnMagic = false, prosperity = undefined,
 ) => {
   const hasStress = (type) => stressTypes.includes(type);
   const route     = config.tradeRouteAccess || 'road';
@@ -176,7 +176,7 @@ const computeDefenseScores = (
   // place with hired force and NO standing force does not take the standing-force slider term in
   // full, and its military is never above what the same place scores with a watch in the hired
   // force's stead (the invariant, pinned by tests/generators/upkeepHired.test.js).
-  const keep = keepOf(config._prosperity);
+  const keep = keepOf(prosperity);
   const SLIDER_FULL = 0.35;
   const SLIDER_NONE = 0.06;
   /** @param {any} f */
@@ -193,13 +193,17 @@ const computeDefenseScores = (
   // instantly. The community baseline (armed households, terrain alarm) is
   // unpaid and exempt — only the funded portion above it is gated.
   const milUpkeepMult = fundedGate(0.6, keep);
-  /** The standing score of a set of flags: everything but the hired force. @param {any} f */
-  const standingMilitary = (f) => {
+  /**
+   * The standing score of a set of flags: everything but the hired force. With `watchInStead`, the
+   * counterfactual: the same place with a watch standing where its hired force stands.
+   * @param {any} f @param {boolean} [watchInStead]
+   */
+  const standingMilitary = (f, watchInStead = false) => {
     let m = communityMilBase;
     if (f.hasWalls)    m += 30;
     if (f.hasGarrison) m += 28;
     if (f.hasMilitia)  m += 10;
-    if (f.hasWatch)    m +=  7;
+    if (f.hasWatch || watchInStead) m += 7;
     // Arcane deterrence — scaled (replaces flat +8)
     if (hasArcane) {
       m += Math.round(10 + Math.min(15, (magPri - 35) * 0.25));
@@ -208,7 +212,7 @@ const computeDefenseScores = (
     }
     // Divine martial blessing (a battle blessing, crusading morale)
     if (hasDivineStrong && relPri >= 70) m += 6;
-    const builtOrStanding = f.hasWalls || hasStanding(f);
+    const builtOrStanding = f.hasWalls || hasStanding(f) || watchInStead;
     const sliderRate = builtOrStanding ? SLIDER_FULL
       : hasHiredForce(f) ? SLIDER_NONE + (SLIDER_FULL - SLIDER_NONE) * keep.bought
       : SLIDER_NONE;
@@ -223,7 +227,7 @@ const computeDefenseScores = (
   const hiredMilitary = Math.round(((inst.hasMercenary ? 14 : 0) + (inst.hasCharterHall ? 10 : 0)) * keep.bought);
   let military = Math.min(100, standingMilitary(inst) + hiredMilitary);
   if (hasHiredForce(inst) && !hasStanding(inst)) {
-    military = Math.min(military, standingMilitary({ ...inst, hasMercenary: false, hasCharterHall: false, hasWatch: true }));
+    military = Math.min(military, standingMilitary(inst, true));
   }
 
   // ── Monster score ───────────────────────────────────────────────────────────
@@ -580,10 +584,11 @@ export function generateDefenseProfile(settlement) {
     Math.round(instFlags.religionInfluence),
     getPriorities(config),
     config.monsterThreat || 'frontier',
-    { ...config, _institutions: institutions, _foodSecurity: foodSecurity, _prosperity: settlement.economicState?.prosperity },
+    { ...config, _institutions: institutions, _foodSecurity: foodSecurity },
     settlement.tier || 'town',
     stressTypes,
     magicReading === 'relied-upon' || magicReading === 'integral',
+    settlement.economicState?.prosperity,
   );
 
   // ── Supply chain linkage (Item 24) ────────────────────────────────────────

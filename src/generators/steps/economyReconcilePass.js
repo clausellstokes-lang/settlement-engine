@@ -193,9 +193,10 @@ registerStep('economyReconcilePass', {
   const spatialLayout = generateSpatialLayout(tier, institutions, tradeRoute, terrainType);
   const availableServices = generateAvailableServices(
     tier, institutions, servicesToggles,
-    // COHERENCE-UPKEEP (ruling 4): the prosperity label and the birth seed, for the draw-free upkeep roll.
-    { ...effectiveConfig, _tradeRoute: tradeRoute, _prosperity: economicState.prosperity, _seed: ctx._seed },
+    { ...effectiveConfig, _tradeRoute: tradeRoute },
     generationContext,
+    // COHERENCE-UPKEEP (ruling 4): the prosperity label and the birth seed, for the draw-free upkeep roll.
+    { prosperity: economicState.prosperity, seed: ctx._seed },
   );
 
   // §14 — inject the user's CUSTOM services into the buyable-services map.
