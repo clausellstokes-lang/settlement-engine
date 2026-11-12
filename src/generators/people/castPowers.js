@@ -47,11 +47,13 @@ import { BACKING_ARCHETYPES } from '../../data/institutionBacking.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
-import { isNoPowerInstitution } from '../../data/institutionalCatalog.js';
+import { FACE_SEAT, faceOfInstitution, isFabricInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { hookPoolFor } from './poolMap.js';
 import { drawCardHooks, dualHatHouseOf, HOOKS_FORK_LABEL, houseKindOf, mintPowerFace, officeTitleFor, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
-import { isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
+import { HOUSELESS_CRIMINAL_FACE } from '../../data/stressPowerFaces.js';
+import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
+import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 import { allegianceOf, isCriminalPower, organizedCrimeOf } from '../../domain/people/allegiance.js';
@@ -235,9 +237,15 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
   const mintIdOf = (/** @type {Record<string, unknown>} */ f) => (isVeiledPower(f)
     ? veiledCardIdFor(seed, `power_${powerSlug(nameOf(f))}`)
     : `${OTHER_CARD_PREFIX}${powerSlug(nameOf(f))}`);
+  // COHERENCE-POWERS item 3 (the chair's ruling of 2026-11-12): two more powers mint their one face. An APPOINTED
+  // stress power (the occupation authority) is the occupier's man, whatever house lands on it (one hat); a criminal
+  // power no house of its own stands behind (a small place's protection operation) has its master, veiled.
+  const housed = (/** @type {string} */ name) => [...byHouse.values()].some((backs) => backs.some((b) => b.faction === name && b.share > 0));
+  const mintsBySent = (/** @type {Record<string, unknown>} */ f) => stressPowerRowOf(settlement, f)?.appointed === true
+    || (isCriminalPower(f) && !housed(nameOf(f)));
   const unfaced = factions.filter((f) => {
     const name = nameOf(f);
-    return name && name !== governing && !BACKING_ARCHETYPES.includes(backingArchetypeOf(f))
+    return name && name !== governing && (!BACKING_ARCHETYPES.includes(backingArchetypeOf(f)) || mintsBySent(f))
       && !existingIds.has(mintIdOf(f));
   });
   if (unfaced.length) {
@@ -270,7 +278,7 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
       const name = nameOf(f);
       const id = mintIdOf(f);
       existingIds.add(id);
-      const row = otherMintRowFor(name);
+      const row = isCriminalPower(f) && otherMintRowFor(name).fallback ? HOUSELESS_CRIMINAL_FACE : otherMintRowFor(name);
       const draw = () => mintPowerFace(row, mintCtx, { hook: false });
       const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
       card.id = id;
@@ -392,6 +400,8 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
     });
   }
 
+  seatStressPowers(settlement, all, members);
+
   // ── THE IMPORTANCE BAND, from the rank ──────────────────────────────────────────────────
   // The retired rung roll expressed itself through `importance` on EVERY figure (densityRungs.js:
   // "ROLLED RUNGS EXPRESS THROUGH NOTABILITY PLACEMENT" — the ladder, the notability dot and
@@ -407,6 +417,38 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
     card.importance = best === null ? 'minor' : bands[RUNG_KEYS[best - 1]];
   }
   return all;
+}
+
+/**
+ * THE POWER A STRESS BRINGS WITH NO ONE ON THE PAGE (COHERENCE-POWERS item 3; the chair's ruling of 2026-11-12, the rule
+ * in data/stressPowerFaces.js). A power of the table that the deal left with no member takes, as its first, the face of
+ * (0) the heaviest house of the town it sits in by its nature, else (a) of the stress's own cast's houses — in each
+ * case the next house where that face already leads another power — joined at share 0 (the face keeps its own powers,
+ * as the dual hat's leader does). Where neither stands, the power keeps no one and the page prints its declared line
+ * (b). Draw-free. A clandestine power's membership is veiled.
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} all @param {Map<string, Member[]>} members
+ */
+function seatStressPowers(settlement, all, members) {
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const leads = (/** @type {Record<string, any>} */ card) => (card.memberships || []).some((m) => m.rank === 1);
+  /** @param {(house: Record<string, any>) => boolean} fits */
+  const faceFrom = (fits) => institutions
+    .map((house, at) => ({ house, at, weight: backingRowFor(house?.name)?.weight ?? 1 }))
+    .filter(({ house }) => house && !isFabricInstitution(house) && !isHideableHouse(house)
+      && typeof faceOfInstitution(house) === 'string' && faceOfInstitution(house) !== FACE_SEAT && fits(house))
+    .sort((x, y) => (y.weight - x.weight) || (x.at - y.at))
+    .map(({ house }) => all.find((c) => c?.institution?.kind === 'house' && c.institution.key === house.name && Array.isArray(c.memberships)))
+    .find((card) => card && !leads(card)) || null;
+  for (const f of factions) {
+    const power = nameOf(f);
+    const row = stressPowerRowOf(settlement, f);
+    if (!row || row.appointed || (members.get(power) || []).length) continue;
+    const byHouse = row.house ? faceFrom((house) => (row.house.kinds || []).includes(String(houseKindOf(house)))
+      || !!row.house.names?.test(String(house.name || ''))) : null;
+    const card = byHouse || (row.cast ? faceFrom((house) => /** @type {RegExp} */ (row.cast).test(String(house.name || ''))) : null);
+    if (card) card.memberships.push({ power, rank: 1, share: 0, veiled: row.veiled === true || isVeiledPower(f) });
+  }
 }
 
 /** A member's house kind (representatives.js :: houseKindOf); null for a minted face. @param {Member} m */
