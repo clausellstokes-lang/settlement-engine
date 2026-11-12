@@ -1,7 +1,7 @@
 /**
  * scripts/census/pool-dominance.mjs — THE DOMINANCE ARM (COHERENCE-QUARREL, 2026-11-11; the
- * chair's charter `docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md` §3; its noise rule
- * POOL-GUARD, 2026-11-12, `docs/DESIGN_POOL_CENSUS.md` §6).
+ * chair's charter `docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md` §3; its noise rule and
+ * six-tier corpus POOL-GUARD, 2026-11-12, `docs/DESIGN_POOL_CENSUS.md` §6).
  *
  * THE CLASS IT GUARDS (class IV). A pool can look large in the source and still print a handful
  * of lines, because most of its lines wait behind gates that rarely open. The census measured
@@ -18,9 +18,12 @@
  *           the quarrels' plot hooks and the safety record's plot hooks. Read off the printed
  *           record with the powers' names and the town's name masked.
  *
- * THE CORPUS is the configuration a real browser sends, every dial on random, at the charter's
- * sizes: 60 villages, 160 towns, 100 cities, 40 metropolises, seeds `<prefix>-<tier>-<i>`. The banked
- * prefix is `quarrel`; `--seed-prefix=<p>` runs the same guard on towns nobody tuned to.
+ * THE CORPUS (`CORPUS_PLAN`) is the configuration a real browser sends, every dial on random, over
+ * all six tiers, plus three forced stresses (famine, war, siege) at the tiers that carry them:
+ * 2,050 settlements, seeds `<prefix>-<tier>-<i>` and `<prefix>-<tier>-<stress>-<i>`. The banked
+ * prefix is `quarrel` (the 360 settlements this arm was born on are a subset); `--seed-prefix=<p>`
+ * runs the same guard on towns nobody tuned to. It takes about 137 seconds alone on the seat's
+ * machine (2026-11-12).
  *
  * THE RULE. A measure that sits above its ceiling is not, by itself, a loss of variety: a lane
  * that re-deals the corpus's draws moves every share by chance. So a row reds only when
@@ -45,6 +48,12 @@
  *   node scripts/census/pool-dominance.mjs --seed-prefix=p  the same, on the corpus re-seeded with prefix p
  *   node scripts/census/pool-dominance.mjs --tighten        lower every ceiling to today's measure (never raise one),
  *                                                           drop the rows of pools no longer drawn, bank new pools
+ *   node scripts/census/pool-dominance.mjs --rebase [--hold=<pool>:<top1|top5>:<ceiling>]...
+ *       a CORPUS CHANGE only (it refuses while the register's `corpus` is this one): bank every row
+ *       at the new corpus's own measure, targets exactly as they are; a `--hold` keeps a row at a
+ *       lower ceiling where the rule holds the measure there, and refuses where it does not. A
+ *       ceiling is a statement about one pool on ONE population of towns; this door re-bases the
+ *       instrument, by identity, and is used on a chair's ruling.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -66,8 +75,27 @@ export const DOMINATED = Object.freeze({ top1: 0.75, minDraws: 30 });
 /** The banked corpus's seed prefix. */
 export const DEFAULT_SEED_PREFIX = 'quarrel';
 
-/** The charter's corpus sizes, by tier. */
-export const CORPUS_PLAN = Object.freeze([['village', 60], ['town', 160], ['city', 100], ['metropolis', 40]]);
+/** @param {string} stress */
+const forced = (stress) => Object.freeze({ selectedStressesRandom: false, selectedStresses: [stress] });
+
+/**
+ * The corpus, by tier: every tier on the browser's random dials, then the three forced stresses.
+ * @type {ReadonlyArray<{ tier: string, n: number, stress?: string }>}
+ */
+export const CORPUS_PLAN = Object.freeze([
+  { tier: 'thorp', n: 150 },
+  { tier: 'hamlet', n: 200 },
+  { tier: 'village', n: 350 },
+  { tier: 'town', n: 550 },
+  { tier: 'city', n: 350 },
+  { tier: 'metropolis', n: 150 },
+  { tier: 'village', n: 50, stress: 'famine' },
+  { tier: 'town', n: 50, stress: 'famine' },
+  { tier: 'town', n: 50, stress: 'wartime' },
+  { tier: 'city', n: 50, stress: 'wartime' },
+  { tier: 'town', n: 50, stress: 'under_siege' },
+  { tier: 'city', n: 50, stress: 'under_siege' },
+]);
 
 /** The configuration a real browser sends: every dial on random (the charter §0.4). */
 export const BROWSER_CONFIG = Object.freeze({
@@ -86,8 +114,15 @@ export const BROWSER_CONFIG = Object.freeze({
  * @returns {Array<{ tier: string, seed: string, config: Record<string, unknown> }>} the corpus, in a fixed order
  */
 export function corpusSeeds(prefix = DEFAULT_SEED_PREFIX) {
-  return CORPUS_PLAN.flatMap(([tier, n]) => Array.from({ length: n }, (_, i) => ({ tier, seed: `${prefix}-${tier}-${i}`, config: BROWSER_CONFIG })));
+  return CORPUS_PLAN.flatMap(({ tier, n, stress }) => Array.from({ length: n }, (_, i) => ({
+    tier,
+    seed: stress ? `${prefix}-${tier}-${stress}-${i}` : `${prefix}-${tier}-${i}`,
+    config: stress ? { ...BROWSER_CONFIG, ...forced(stress) } : BROWSER_CONFIG,
+  })));
 }
+
+/** @returns {string} the corpus's identity, banked in the register: a change of plan is a change of instrument */
+export const corpusIdentity = () => JSON.stringify(CORPUS_PLAN);
 
 /** @param {string} text @param {string[]} names @returns {string} the text with each name masked */
 export function maskNames(text, names) {
@@ -207,7 +242,7 @@ export function shareError(m, metric, ceiling) {
 /** @param {number} share @returns {number} the share rounded UP to four places, so a ceiling never sits below its measure */
 export const ceil4 = (share) => Math.ceil(share * 10000 - 1e-9) / 10000;
 
-/** @returns {{ pools: Record<string, { top1: number, top5: number, reason: string, targets?: string[] }> }} */
+/** @returns {{ corpus?: string, pools: Record<string, { top1: number, top5: number, reason: string, targets?: string[] }> }} */
 export function readRegister() {
   return JSON.parse(readFileSync(REGISTER_PATH, 'utf8'));
 }
@@ -256,7 +291,44 @@ export function judge(table, register, { exact = true } = {}) {
   return { over, unregistered, stale, loose, notes };
 }
 
-const BANKED_REASON = 'banked at the 2026-11-11 measure (99bcc6944): not a pool COHERENCE-QUARREL cures';
+const REGISTER_LAW = 'SHRINK-ONLY ON ONE CORPUS. One row per drawn pool: the ceiling for the share of its most-printed line (top1) and of its five most-printed lines (top5) over the corpus `corpus` names (scripts/census/pool-dominance.mjs). On that corpus a ceiling is only ever lowered (--tighten); a row leaves only when its pool is no longer drawn. A change of corpus is a change of instrument: the rows are re-based at the new corpus\'s measure through --rebase, on a chair\'s ruling, and never by hand. Held by tests/lint/poolDominance.walker.test.js.';
+const BANKED_REASON = 'banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew';
+const REBASED_REASON = 'banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair\'s ruling, not a tightening';
+
+/**
+ * The re-base door: every row at the corpus's own measure, targets exactly as they are, each
+ * `--hold` at its lower ceiling where the rule holds the measure there.
+ * @param {Map<string, PoolMeasure>} table @param {ReturnType<typeof readRegister>} register @param {string[]} holds
+ */
+function rebase(table, register, holds) {
+  if (register.corpus === corpusIdentity()) throw new Error('pool-dominance: --rebase is for a corpus change; the register is already banked on this corpus (use --tighten)');
+  const rows = register.pools || {};
+  /** @type {Record<string, { top1: number, top5: number, reason: string, targets?: string[] }>} */
+  const next = {};
+  for (const [pool, m] of table) {
+    const row = rows[pool];
+    const targets = row?.targets || [];
+    next[pool] = row
+      ? {
+        ...row,
+        top1: targets.includes('top1') ? row.top1 : ceil4(m.top1),
+        top5: targets.includes('top5') ? row.top5 : ceil4(m.top5),
+        reason: targets.length ? row.reason : REBASED_REASON,
+      }
+      : { top1: ceil4(m.top1), top5: ceil4(m.top5), reason: BANKED_REASON };
+  }
+  for (const hold of holds) {
+    const [, pool = '', metric = '', value = ''] = /^(.*):(top1|top5):([0-9.]+)$/.exec(hold) || [];
+    const ceiling = Number(value);
+    const m = table.get(pool);
+    if (!m || !next[pool] || (metric !== 'top1' && metric !== 'top5') || !(ceiling > 0)) throw new Error(`pool-dominance: --hold=${hold} names no drawn pool's top1 or top5`);
+    const held = { pools: { [pool]: { ...next[pool], [metric]: Math.min(next[pool][metric], ceiling) } } };
+    const { over } = judge(new Map([[pool, m]]), held);
+    if (over.length) throw new Error(`pool-dominance: --hold=${hold} does not hold: ${over.join('; ')}`);
+    next[pool] = { ...held.pools[pool], reason: `held at or below its original ceiling ${ceiling} (point 43 re-banked it upward within two draws; restored by POOL-GUARD where the rule holds it): ${REBASED_REASON}` };
+  }
+  return { _law: REGISTER_LAW, corpus: corpusIdentity(), pools: next };
+}
 
 /** @param {string[]} argv @returns {string | undefined} */
 function seedPrefixArg(argv) {
@@ -267,10 +339,18 @@ function seedPrefixArg(argv) {
 function main() {
   const seedPrefix = seedPrefixArg(process.argv) || DEFAULT_SEED_PREFIX;
   const exact = seedPrefix === DEFAULT_SEED_PREFIX;
-  if (process.argv.includes('--tighten') && !exact) throw new Error('pool-dominance: --tighten reads the banked corpus only; drop --seed-prefix');
+  if ((process.argv.includes('--tighten') || process.argv.includes('--rebase')) && !exact) throw new Error('pool-dominance: the doors read the banked corpus only; drop --seed-prefix');
   const table = measureDominance({ seedPrefix });
+  if (process.argv.includes('--rebase')) {
+    const holds = process.argv.filter((a) => a.startsWith('--hold=')).map((a) => a.slice('--hold='.length));
+    const next = rebase(table, readRegister(), holds);
+    writeFileSync(REGISTER_PATH, `${JSON.stringify(next, null, 2)}\n`);
+    console.log(`pool-dominance: ${table.size} pools re-based on the corpus, ${holds.length} held`);
+    return;
+  }
   if (process.argv.includes('--tighten')) {
     const register = readRegister();
+    if (register.corpus !== corpusIdentity()) throw new Error('pool-dominance: --tighten compares like with like; the register was banked on another corpus (--rebase, on a ruling)');
     const rows = register.pools || {};
     /** @type {Record<string, { top1: number, top5: number, reason: string, targets?: string[] }>} */
     const next = {};
@@ -288,13 +368,15 @@ function main() {
     console.log(`pool-dominance: ${table.size} pools written`);
     return;
   }
-  const { over, unregistered, stale, loose, notes } = judge(table, readRegister(), { exact });
+  const register = readRegister();
+  const { over, unregistered, stale, loose, notes } = judge(table, register, { exact });
+  if (register.corpus !== corpusIdentity()) console.log('pool-dominance: the register was banked on another corpus (re-base it, on a ruling, with --rebase)');
   for (const line of [...over, ...unregistered.map((p) => `${p}: no row`), ...stale.map((p) => `${p}: no longer drawn`), ...loose]) console.log(line);
   for (const line of notes) console.log(`note: ${line}`);
   const worst = [...table].sort(([, a], [, b]) => b.top1 - a.top1 || b.draws - a.draws).filter(([, m]) => m.lines > 1).slice(0, 20);
   for (const [pool, m] of worst) console.log(`${(m.top1 * 100).toFixed(1)}% / ${(m.top5 * 100).toFixed(1)}%  ${m.draws} draws, ${m.lines} lines  ${pool}`);
   console.log(`pool-dominance: corpus ${seedPrefix} (${table.size} pools): ${over.length} over, ${unregistered.length} unregistered, ${stale.length} stale, ${loose.length} loose, ${notes.length} notes`);
-  process.exitCode = over.length || unregistered.length || stale.length || loose.length ? 1 : 0;
+  process.exitCode = over.length || unregistered.length || stale.length || loose.length || register.corpus !== corpusIdentity() ? 1 : 0;
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) main();

@@ -1,11 +1,11 @@
 /**
  * poolDominance.walker.test.js — THE DOMINANCE ARM'S DOOR (COHERENCE-QUARREL, 2026-11-11; the
- * chair's charter `docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md` §3; the noise rule
- * POOL-GUARD, 2026-11-12, `docs/DESIGN_POOL_CENSUS.md` §6).
+ * chair's charter `docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md` §3; the noise rule and
+ * the six-tier corpus POOL-GUARD, 2026-11-12, `docs/DESIGN_POOL_CENSUS.md` §6).
  *
  * A pool that looks large in the source can print a handful of lines. The arm
- * (`scripts/census/pool-dominance.mjs`) measures, for every drawn pool over a fixed corpus of 360
- * settlements, the share its most-printed line takes and the
+ * (`scripts/census/pool-dominance.mjs`) measures, for every drawn pool over a fixed corpus of 2,050
+ * settlements (six tiers, three forced stresses; about 137 seconds alone), the share its most-printed line takes and the
  * share its five most-printed lines take. Its register (`scripts/census/pool-dominance.register.json`)
  * holds one ceiling of each per pool, and the ceilings only tighten.
  *
@@ -23,7 +23,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
-import { DOMINATED, NOISE_SE, judge, measureDominance, readRegister, shareError } from '../../scripts/census/pool-dominance.mjs';
+import { DOMINATED, NOISE_SE, corpusIdentity, judge, measureDominance, readRegister, shareError } from '../../scripts/census/pool-dominance.mjs';
 
 /**
  * A pool of `towns` settlements with `perTown` draws each, its top line taking `share` in every
@@ -76,8 +76,13 @@ describe('the rule: a rise reds beyond the pool\'s own noise, or across the domi
 });
 
 describe('no drawn pool prints more of one line than its register allows', () => {
+  const register = readRegister();
   const table = measureDominance();
-  const findings = judge(table, readRegister());
+  const findings = judge(table, register);
+
+  test('the register was banked on this corpus: a change of corpus is re-based through --rebase, never compared across', () => {
+    expect(register.corpus).toBe(corpusIdentity());
+  });
 
   test('the corpus draws pools, and the record pools are among them', () => {
     expect(table.size).toBeGreaterThan(100);
