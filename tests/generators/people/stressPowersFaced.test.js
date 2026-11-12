@@ -39,11 +39,14 @@ const SEEDS = Object.freeze([
   'l2-famine-village-7', // Grain Holders, the strongest power of its town
   'l2-monster_pressure-village-11', // Monster Hunters / Adventurers
   'l2-famine-hamlet-6', 'l2-insurgency-hamlet-12', // the Thieves' Guild with no house
+  // COHERENCE-POWERS-3, REVIEW-POWERS F5: the Resistance Network's members dealt by a house's share, unveiled at 1a32c200a
+  'rvf-occupied-city-1', 'rvw-town-63', 'rvf-occupied-metropolis-0', 'rvf-occupied-metropolis-1', 'rvf-occupied-metropolis-2',
+  'rvf-occupied-metropolis-4', 'rvf-occupied-metropolis-7',
 ]);
 
 /** @param {string} seed */
 function configOf(seed) {
-  const m = /^l2-(.+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
+  const m = /^(?:l2|rvf)-(.+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
   if (m) return { ...DIALS, settType: m[2], selectedStresses: [m[1]], selectedStressesRandom: false };
   return { ...DIALS, settType: seed.split('-')[1] };
 }

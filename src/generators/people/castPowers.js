@@ -182,7 +182,9 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
   if (!powers.length || !Array.isArray(cards)) return { all: cards, plan: null };
   const powerSet = new Set(powers);
   /** @type {Set<string>} the powers a membership may not name publicly (domain/people/cardVeil.js) */
-  const veiledPowers = new Set(factions.filter((f) => isVeiledPower(f)).map((f) => nameOf(f)));
+  // COHERENCE-POWERS-3 (F5): a clandestine power of the stress table (its `veiled` row) is veiled for EVERY member, by
+  // whichever path the member is dealt — a house's share as much as the face the rule seats
+  const veiledPowers = new Set(factions.filter((f) => isVeiledPower(f) || stressPowerRowOf(settlement, f)?.veiled === true).map((f) => nameOf(f)));
   const governing = nameOf(governingFactionOf(settlement)) || null;
   const stream = rng && typeof rng.fork === 'function' ? rng.fork(POWERS_FORK_LABEL) : null;
   // ONE mint per label (the fork census counts every stream minted): the two families are forked
