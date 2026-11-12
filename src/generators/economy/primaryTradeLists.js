@@ -93,15 +93,19 @@ export const GRAIN_TOP_UP = 'Grain (a little, beside its own harvest)';
  * COHERENCE-AGREE (the chair's charter of 2026-11-11, §2): the import list and the food record tell
  * one story. A town that grows 90% or more of its need does not list grain as a primary import
  * without saying how little: a bare grain entry ("Grain", "Bulk grain", "Bulk grain and foodstuffs")
- * becomes GRAIN_TOP_UP. An entry that gives its reason in brackets, or a compound good that a people's
- * demand names ("Grain and salted pork"), keeps its words. Mutates the list in place, as its
- * neighbours here do.
+ * becomes GRAIN_TOP_UP. COHERENCE-AGREE-3 (REVIEW-AGREE F8, the text half): the rule covers every grain
+ * import — a shortage entry whose bracket blames the town's spent land ("Bulk grain (local fields
+ * depleted)", "Grain and produce (local floodplain unproductive)") becomes GRAIN_TOP_UP too, since a town
+ * that feeds itself does not buy its grain for want of fields. (A compound good a people's demand names,
+ * "Grain and salted pork", is appended after this list by steps/economyReconcilePass.js, which is not this
+ * lane's file: reported to the chair.) Mutates the list in place, as its neighbours here do.
  * @param {string[]} primaryImports @param {{ grownPct?: unknown } | null | undefined} foodRecord
  */
 export function sayHowLittleGrain(primaryImports, foodRecord) {
   if (!(Number(foodRecord?.grownPct) >= 90)) return;
   primaryImports.forEach((label, index) => {
-    if (/^(?:bulk )?grain(?: and foodstuffs)?$/i.test(label)) primaryImports[index] = GRAIN_TOP_UP;
+    const head = label.replace(/\s*\([^)]*\)\s*$/, '');
+    if (/^(?:bulk )?grain(?: and (?:foodstuffs|produce))?$/i.test(head)) primaryImports[index] = GRAIN_TOP_UP;
   });
   const seen = new Set();
   for (let index = primaryImports.length - 1; index >= 0; index -= 1) {

@@ -106,6 +106,9 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(grown(95, ['Grain']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
     expect(details(grown(80, ['Grain']))).toEqual([]);
     expect(details(grown(95, ['Grain (a little, beside its own harvest)']))).toEqual([]);
+    // F8 (REVIEW-AGREE): the bracketed shortage says how little too (the compound good is the demand pass's: reported)
+    expect(details(grown(101, ['Bulk grain (local fields depleted)']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
+    expect(details(grown(100, ['Grain and produce (local floodplain unproductive)']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
     const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: ['Bulk grain (local fields depleted)'] } });
     expect(details(spent)).toContain('A shortage import stands beside the resource it says is spent.');
     // F7 (REVIEW-AGREE): an income line selling a surplus the food record does not hold
@@ -164,6 +167,8 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-town-13', tier: 'town' }, { seed: 'rvw12-town-37', tier: 'town' }, { seed: 'rvw-ten-6', tier: 'city' },
   // F7: "Grain Sales: Surplus from local harvest" in famine and deficit towns
   { seed: 'rvw12b-town-275', tier: 'town' }, { seed: 'rvw12b-town-103', tier: 'town' }, { seed: 'rvw12b-town-427', tier: 'town' },
+  // F8: a town growing all its grain "imports bulk grain (local fields depleted)" or its floodplain's produce
+  { seed: 'rvw12-town-34', tier: 'town' }, { seed: 'rvw12-town-59', tier: 'town' }, { seed: 'rvw12-town-3', tier: 'town' }, { seed: 'rvw-ten-4', tier: 'town' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });

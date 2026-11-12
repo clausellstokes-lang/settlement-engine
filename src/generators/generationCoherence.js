@@ -24,6 +24,7 @@ import {
 } from '../domain/resourceSemantics.js';
 import { factsOf } from '../domain/facts/factsOf.js';
 import { offersFoodSurplus } from '../domain/foodSurplus.js';
+import { GRAIN_TOP_UP } from './economy/primaryTradeLists.js';
 import {
   MATERIAL_RESOURCE_KEYS,
   STRATEGIC_CLAUSES,
@@ -424,7 +425,8 @@ export function projectionAgreementFindings(settlement) {
   const imports = Array.isArray(settlement?.economicState?.primaryImports) ? settlement.economicState.primaryImports.map(String) : [];
   const grownPct = Number(settlement?.economicState?.foodSecurity?.foodRecord?.grownPct);
   for (const [index, label] of imports.entries()) {
-    if (/^(?:bulk )?grain(?: and foodstuffs)?$/i.test(label) && grownPct >= 90) {
+    // F8 (COHERENCE-AGREE-3): a bracketed grain import says how little too, where the town feeds itself.
+    if (/^(?:bulk )?grain(?: and (?:foodstuffs|produce))?(?: \([^)]*\))?$/i.test(label) && label !== GRAIN_TOP_UP && grownPct >= 90) {
       food.push(finding(`economicState.primaryImports[${index}]`, 'Grain stands as a primary import, unqualified, where the town grows most of its need.', `${label}; grown ${grownPct}%`));
     }
   }
