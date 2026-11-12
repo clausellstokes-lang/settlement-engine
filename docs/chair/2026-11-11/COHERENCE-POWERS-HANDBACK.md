@@ -378,6 +378,9 @@ walker's "every drawn pool has a row" is red on this tree for that cause alone.
 | F12 the packed ceiling | f064cb83c | rulingStructure.js 799 lines, 5 packed lines | 792 lines, 2 (both predate the lane) | powerStructure.test.js "no power/ module packs more statements onto shared lines than its ceiling", red first (5 packed lines) |
 | F1 the political mass | 97759b837 (census c02bbb48f, manifest 8f72fbc90) | the pure seat-ceiling cut R 19, S 40 | R 0, S 0 | dualHatPoliticalMass.test.js, red first 8 of 8 (the reviewer's crisis and small-place seeds, literal powers) |
 | F2 the final roster's text | 28c93c9da, dd02efe9f (holder re-key d349325ad) | strings naming a power the final roster lacks, both corpora (line → merged start): tension chips 417 → 438, descriptions 168 → 212, rank lines 87 → 104, narratives 200 → 200 | 0 · 0 · 0 · 0 | powerTextFinalRoster.test.js, 120 births born with and without the density law, red first (twice) |
+| F7 the empty seat | 859c11ff8 | vacant births where a place prints the office as held 194; doubled Connection titles 7 | 0 · 0 (records 0 of 4,305 move) | seatKeeper.test.js, red first |
+| the occupier and the fractured realm (rulings (1), (2)) | 9bcda8ff6 | occupier absent 50 of 168 forced; fractured with one power 42 of 168 | 0 of 178 · 0 of 205 | crisisSeat.test.js, red first |
+| the lane's two reds in tests/components | 39086c96b | powerSeatRender: 2 red (green at the line) | re-keyed by identity to thorp 57 | — |
 
 F12's L3: 0 of 4,305 whole-record hashes differ, merged start against the split. The split is SIZED: docs and sealed
 packets cite this file's lines up to :787 and the citation walker reds a new past-EOF citation, so the small cohesive
@@ -409,3 +412,34 @@ design question for the owner, with the table above as its measure); built inste
 at every size; a fractured realm shows two powers if any shows one; for every other crisis no printed line names or
 presumes its absent power. F7: "Acting <office>" for every office, the crown's monarch "Regent", the exempt small
 place's "Eldest" acting as the government's office word.
+
+**THE CRISIS-POWER MEASURE (F1's stop), as sent to the chair, a design question for the owner:** the forced-crisis births
+(the reviewer's rvf 8 and the second seat's l2 20 per crisis per size: 28 per cell) where none of the crisis's own powers
+is on the page, the line f72262c68 → F1's tree:
+
+| crisis | its own power | thorp | hamlet | village | town | city | metropolis | all |
+|---|---|---|---|---|---|---|---|---|
+| famine | Grain Holders | 27 → 27 | 24 → 24 | 18 → 18 | 13 → 13 | 5 → 5 | 2 → 2 | 89 → 89 of 168 |
+| indebted | Creditor's Representative / Crown Creditors | 28 → 28 | 23 → 23 | 21 → 21 | 23 → 23 | 15 → 15 | 6 → 6 | 116 → 116 of 168 |
+| infiltrated | a hidden pool power | 28 → 28 | 24 → 24 | 17 → 17 | 15 → 15 | 15 → 15 | 11 → 11 | 110 → 110 of 168 |
+| insurgency | People's Council / the reform body | 24 → 24 | 23 → 23 | 17 → 17 | 12 → 12 | 13 → 13 | 3 → 3 | 92 → 92 of 168 |
+| mass_migration | Newcomers' Settlement / Departure Committee | 28 → 28 | 22 → 22 | 20 → 20 | 22 → 21 | 20 → 20 | 17 → 17 | 129 → 128 of 168 |
+| monster_pressure | Monster Hunters / Adventurers | 28 → 28 | 28 → 28 | 25 → 25 | 25 → 25 | 25 → 25 | 22 → 22 | 153 → 153 of 168 |
+| occupied | Occupation Authority | 26 → 26 | 20 → 20 | 4 → 4 | 0 → 0 | 0 → 0 | 0 → 0 | 50 → 50 of 168 |
+| plague_onset | Quarantine Council | 28 → 28 | 24 → 24 | 19 → 19 | 21 → 21 | 13 → 13 | 12 → 12 | 117 → 117 of 168 |
+| politically_fractured | Loyalist Noble Bloc / a pool bloc | 18 → 18 | 21 → 21 | 13 → 13 | 18 → 18 | 8 → 8 | 5 → 5 | 83 → 83 of 168 |
+| recently_betrayed | The Inquiry | 28 → 28 | 23 → 23 | 21 → 21 | 21 → 21 | 19 → 19 | 12 → 12 | 124 → 124 of 168 |
+| religious_conversion | New Faith Community | 28 → 28 | 18 → 18 | 20 → 20 | 16 → 16 | 14 → 14 | 6 → 6 | 102 → 102 of 168 |
+| slave_revolt | Revolt Leadership | 25 → 25 | 21 → 21 | 23 → 23 | 16 → 16 | 11 → 11 | 2 → 2 | 98 → 98 of 168 |
+| succession_void | a claimant | 25 → 25 | 22 → 22 | 14 → 14 | 15 → 14 | 9 → 9 | 3 → 3 | 88 → 87 of 168 |
+| under_siege | War Council | 27 → 27 | 24 → 24 | 9 → 9 | 6 → 6 | 8 → 8 | 2 → 2 | 76 → 76 of 168 |
+| wartime | War Council | 26 → 26 | 24 → 24 | 16 → 16 | 17 → 18 | 11 → 11 | 4 → 4 | 98 → 99 of 168 |
+| all | | | | | | | | 1525 → 1524 of 2520 |
+
+The occupation's and the fractured realm's rows are built since (9bcda8ff6): 0. **Ruling (3), measured and classed as the
+crisis's actors in prose, not findings:** in the births where the crisis's power is absent, lines naming it — indebted
+123 (secrets 106, the pressure sentence 17), slave_revolt 102 (the crime line 98, a conflict's issue 4), occupied 9
+(gone with the occupier seated), insurgency 9 (history hooks); 0 say an absent power holds or shares power (the nearest,
+the pressure sentence's "every civic decision since has been made with one eye on what they might accept", read as
+influence). **F7's descriptive titles:** "Eldest" alone (its acting form is the government's office word: "Acting
+Elder", "Acting Household Elder").
