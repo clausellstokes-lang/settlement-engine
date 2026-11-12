@@ -32,7 +32,7 @@ const DIALS = Object.freeze({
 });
 const TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 /** Paths whose strings are never printed, or print a house's name. */
-const NOT_READ = /^\.(simulationTrace|institutions\[\]\.factionSource|defenseProfile\.institutions\.[a-z]+\[\]\.factionSource|economicState\.safetyProfile\.criminalInstitutions|economicState\.incomeSources|powerStructure\.factionRelationships\[\]\.narrative)/;
+const NOT_READ = /^\.(simulationTrace|institutions\[\]\.factionSource|defenseProfile\.institutions\.[a-z]+\[\]\.factionSource|economicState\.safetyProfile\.criminalInstitutions|economicState\.incomeSources)/;
 /** The standing sentences that count the powers above a power (power/factionStanding.js): each needs that many powers
  *  on the page beside it. (A doubled niche's rival copies its parent's sentence at its own rank: a FOUND class, the
  *  line's, reported to the chair; this guard reads the count, as the review's finding does.) */

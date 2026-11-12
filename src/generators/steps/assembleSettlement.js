@@ -25,7 +25,7 @@ import { settleCrimeLinesToSignal } from '../safetyProfile.js';
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
 import { drawTies } from '../people/ties.js';
 import { seatFacesFoldedByDualHat } from '../people/representatives.js';
-import { settleStandingToRoster, settleTensionsToRoster, standingForceOf, standingRosterOf } from '../power/rosterText.js';
+import { settleNarrativesToRoster, settleStandingToRoster, settleTensionsToRoster, standingForceOf, standingRosterOf } from '../power/rosterText.js';
 // ODQ §810's tier-gated density law: sizes the political roster to the tier's
 // faction band. Dormant (returns its input by reference, no draw) for any world
 // whose own config carries no density-law marker.
@@ -338,6 +338,7 @@ registerStep('assembleSettlement', {
     // the density law moved the roster; the power's last write is the conservation just above.
     if (rosterResized) {
       settlement.powerStructure = settleStandingToRoster(settlement.powerStructure, standingRoster, standingForceOf(settlement.institutions));
+      settlement.powerStructure = settleNarrativesToRoster(settlement.powerStructure, standingRoster);
       settlement.history = settleTensionsToRoster(settlement.history, settlement.powerStructure, standingRoster);
     }
   }

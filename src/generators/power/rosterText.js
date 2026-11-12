@@ -10,6 +10,7 @@
  * was born.
  */
 import { annotateFactionStanding } from './factionStanding.js';
+import { MERCHANT_CRAFT_VOTE } from '../factionDynamics.js';
 import { inferFactionCategory } from './factionCategories.js';
 import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js';
@@ -131,4 +132,28 @@ export function settleTensionsToRoster(history, powerStructure, annotated) {
     return { ...t, factions: settled };
   });
   return moved ? { ...history, currentTensions: next } : history;
+}
+
+/**
+ * The relationships' narratives settled to the final roster: the merchants' and craftsmen's vote names the landholding
+ * power and needs it (factionDynamics.js :: MERCHANT_CRAFT_VOTE, a declared pair); where that power left, the row takes
+ * the pair's sibling, which names none (the refused-winner rule: no roll). Returns the same object where nothing moves.
+ * @template {{ factions?: Array<Record<string, any>>, factionRelationships?: Array<Record<string, any>> }} P
+ * @param {P} powerStructure @param {RosterSeat[]} annotated @returns {P}
+ */
+export function settleNarrativesToRoster(powerStructure, annotated) {
+  const rows = Array.isArray(powerStructure?.factionRelationships) ? powerStructure.factionRelationships : null;
+  if (!rows || !annotated.length) return powerStructure;
+  const onPage = new Set(standingRosterOf(powerStructure?.factions || []).map((f) => f.faction));
+  const gone = annotated.map((f) => f.faction).filter((name) => !onPage.has(name));
+  if (!gone.length) return powerStructure;
+  let moved = false;
+  const next = rows.map((row) => {
+    const [merchants, craft] = Array.isArray(row?.pair) ? row.pair.map(String) : [];
+    if (!merchants || !craft) return row;
+    if (!gone.some((name) => row.narrative === MERCHANT_CRAFT_VOTE.against(merchants, craft, name))) return row;
+    moved = true;
+    return { ...row, narrative: MERCHANT_CRAFT_VOTE.sibling(merchants, craft) };
+  });
+  return moved ? { ...powerStructure, factionRelationships: next } : powerStructure;
 }
