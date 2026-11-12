@@ -1,0 +1,142 @@
+{
+ "engine": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
+ "failed": {
+  "at210": [],
+  "work211": [],
+  "orig211": []
+ },
+ "rows": [
+  {
+   "label": "F6 Force all, every eye shut",
+   "bytes": 1134296,
+   "at210": {
+    "gallery": {
+     "median": 666,
+     "max": 737
+    },
+    "link": {
+     "median": 905,
+     "max": 969
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 787,
+     "max": 827
+    },
+    "link": {
+     "median": 651,
+     "max": 692
+    }
+   },
+   "orig211": {
+    "gallery": {
+     "median": 747,
+     "max": 778
+    },
+    "link": {
+     "median": 652,
+     "max": 746
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 572,
+     "max": 587
+    },
+    "link": {
+     "median": 564,
+     "max": 589
+    }
+   }
+  },
+  {
+   "label": "F6 Force all, default veil",
+   "bytes": 997919,
+   "at210": {
+    "gallery": {
+     "median": 609,
+     "max": 620
+    },
+    "link": {
+     "median": 910,
+     "max": 1003
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 694,
+     "max": 714
+    },
+    "link": {
+     "median": 585,
+     "max": 624
+    }
+   },
+   "orig211": {
+    "gallery": {
+     "median": 655,
+     "max": 700
+    },
+    "link": {
+     "median": 571,
+     "max": 604
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 631,
+     "max": 686
+    },
+    "link": {
+     "median": 574,
+     "max": 608
+    }
+   }
+  },
+  {
+   "label": "R7 Force all, Reveal DM on, snapshot with the DM copy, every eye shut",
+   "bytes": 2111017,
+   "at210": {
+    "gallery": {
+     "median": 675,
+     "max": 707
+    },
+    "link": {
+     "median": 1437,
+     "max": 1584
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 828,
+     "max": 896
+    },
+    "link": {
+     "median": 1169,
+     "max": 1285
+    }
+   },
+   "orig211": {
+    "gallery": {
+     "median": 1258,
+     "max": 1319
+    },
+    "link": {
+     "median": 1195,
+     "max": 1290
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 202,
+     "max": 219
+    },
+    "link": {
+     "median": 571,
+     "max": 658
+    }
+   }
+  }
+ ]
+}

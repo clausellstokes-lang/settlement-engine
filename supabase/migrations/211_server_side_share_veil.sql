@@ -1101,7 +1101,9 @@ end $$;
 -- the link and the import raise, and "yes", "t", "1" or "on" revealed a person the 210 page hid.
 -- Now only the JSON value true reveals (revealDm) or permits (allowImport); JSON false refuses;
 -- absent or null falls back to the settlement's flag, as before; any other stored value is NOT a
--- reveal and NOT a permit; nothing raises. The client only ever writes booleans
+-- reveal and NOT a permit; nothing raises. Each flag is looked up ONCE per person, as 093 did (a
+-- simple CASE evaluates its subject once): the overrides can hold the whole frozen copy, and every
+-- lookup reads them again. The client only ever writes booleans
 -- (src/lib/gallery.js :: the member clamp), so no generated town changes.
 create or replace function public._gallery_apply_member_overrides(
   base jsonb,
@@ -1118,16 +1120,13 @@ create or replace function public._gallery_apply_member_overrides(
         case
           when (
             case when for_import then
-              coalesce(case when overrides -> public._gallery_npc_key(npc) -> 'revealDm' = 'true' then true
-                            when coalesce(overrides -> public._gallery_npc_key(npc) -> 'revealDm', 'null') = 'null' then null
-                            else false end, settlement_share_dm)
-              and coalesce(case when overrides -> public._gallery_npc_key(npc) -> 'allowImport' = 'true' then true
-                                when coalesce(overrides -> public._gallery_npc_key(npc) -> 'allowImport', 'null') = 'null' then null
-                                else false end, settlement_importable)
+              coalesce(case coalesce(overrides -> public._gallery_npc_key(npc) -> 'revealDm', 'null')
+                              when 'true' then true when 'null' then null else false end, settlement_share_dm)
+              and coalesce(case coalesce(overrides -> public._gallery_npc_key(npc) -> 'allowImport', 'null')
+                                  when 'true' then true when 'null' then null else false end, settlement_importable)
             else
-              coalesce(case when overrides -> public._gallery_npc_key(npc) -> 'revealDm' = 'true' then true
-                            when coalesce(overrides -> public._gallery_npc_key(npc) -> 'revealDm', 'null') = 'null' then null
-                            else false end, settlement_share_dm)
+              coalesce(case coalesce(overrides -> public._gallery_npc_key(npc) -> 'revealDm', 'null')
+                              when 'true' then true when 'null' then null else false end, settlement_share_dm)
             end
           )
           then coalesce(
