@@ -10,7 +10,10 @@
  *       and a copy past it is refused, never replaced by the live row;
  *   F2  the server's card id equals the client's for every value a row can hold: the review's rows,
  *       then a differential over thousands of generated cards;
- *   F3  nothing storable makes a read raise: the review's rows, then a fuzz through all four reads;
+ *   F3  an id beyond double range reads as JavaScript reads it (the review's rows);
+ *   R3  (the SECOND review, REVIEW-VEIL-211-c4d78c907) THE PARITY LAW: no stored row raises a read at
+ *       211 that serves at 210 — its rows (a number at the top of numeric's range in the document, a
+ *       frozen copy, a narration), then a fuzz to the edges of what the database stores, both chains;
  *   F4  the member keys a read works on are the ones that name a person in the document;
  *   F7  the map serves what the member's own listing serves (its frozen copy, its narration);
  *   and the rollback: supabase/rollback/211_*.down.sql over 001..211 restores the four reads of a
@@ -201,7 +204,10 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
   const EDGE_NUMBERS = ['0', '-0', '1', '-1', '0.5', '1e-7', '-1e-7', '1e-6', '1e21', '1e+21', '1e20', '123456789012345678901', '9007199254740992',
     '9007199254740993', '-9007199254740993', '12345678901234567890123', '31621967360964610', '1e400', '-1e400', '1e-400', '-1e-400', '5e-324',
     '2.4703282292062327e-324', '2.4703282292062328e-324', '1.7976931348623157e308', '1.7976931348623158e308', '1.7976931348623159e308',
-    '0.1', '100.0', '1E5', '1.5e300', '-2.5e-10', '4.35e-6', '0.000001', '0.0000001', '999999999999999999999.5', '1e-323', '1.0000000000000002'];
+    '0.1', '100.0', '1E5', '1.5e300', '-2.5e-10', '4.35e-6', '0.000001', '0.0000001', '999999999999999999999.5', '1e-323', '1.0000000000000002',
+    // the edges of what the database can store (COHERENCE-VEIL-3, the review's R3): numeric holds up to
+    // 131,072 digits before the point and 16,383 after; 2.5e130748 is where 211's multiplication left the range
+    '1e131071', '-1e131071', '9.99e131071', '2.5e130748', '-2.5e130748', '1e130747', '1e-16383', '-1e-16383'];
   /** A JSON number token: an edge, a random double from random bits (every exponent), or a long decimal. */
   function numberToken(r) {
     const pick = r();
@@ -274,30 +280,77 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     return `{${parts.join(',')}}`;
   }
 
-  it('F3 (the class): 400 fuzzed stored documents and veils through all four reads, and no read raises', async () => {
-    const { db } = LIVE;
+  /** One stored row (raw JSON text, as PostgREST would write it) in `db`, with a map holding it. */
+  async function putRaw(db, tag, { doc, ov = '{}', dm = false, narrated = null }) {
+    n += 1;
+    const id = `ffffffff-0000-0000-0000-${String(n).padStart(12, '0')}`;
+    await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility,
+        gallery_member_overrides, gallery_share_dm, gallery_importable, gallery_share_narrated, ai_data)
+      values ($1, $2, 'T', 'town', $3, true, $4, now(), $5, 'unlisted', $6, $7, true, $8, $9)`,
+    [id, OWNER, doc, `z${tag}`, `zl${tag}`, ov, dm, narrated !== null, narrated === null ? null : `{"aiSettlement":${narrated}}`]);
+    await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
+      values (gen_random_uuid(), $1, 'm', $2, true, $3, 'map_with_campaign', true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `zm${tag}`]);
+  }
+  /** The four reads of a row put by putRaw, each 'ok' or the message it raised. */
+  async function fourReads(db, tag) {
+    const out = {};
+    for (const [read, uid, q] of [['gallery', '', `select data from public.get_gallery_dossier('z${tag}')`], ['link', '', `select public.get_unlisted_dossier('zl${tag}')`],
+      ['import', READER, `select data from public.import_gallery_dossier('z${tag}')`], ['map', '', `select public.get_gallery_map('zm${tag}')`]]) {
+      await db.exec(`set test.uid = '${uid}';`);
+      try { await db.query(q); out[read] = 'ok'; } catch (e) { out[read] = String(e.message).slice(0, 100); }
+    }
+    await db.exec(`set test.uid = '';`);
+    return out;
+  }
+  /** THE PARITY LAW (COHERENCE-VEIL-3): a read that serves the row at 210 serves it at 211. */
+  async function parity(tag, row) {
+    await putRaw(LIVE.db, tag, row); await putRaw(AT210.db, tag, row);
+    const now = await fourReads(LIVE.db, tag); const before = await fourReads(AT210.db, tag);
+    return { now, before, breaches: Object.keys(now).filter((k) => now[k] !== 'ok' && before[k] === 'ok').map((k) => `${k}: ${now[k]}`) };
+  }
+
+  it('R3 (the review rows): a number at the top of the database\'s range makes no read raise that serves at 210', async () => {
+    const MARKED = '{"$veil":{"v":1,"deltas":[]}}';
+    const ROWS = [
+      ['npc id 1e131071, unmarked', { doc: '{"name":"T","npcs":[{"name":"A","id":1e131071}]}' }],
+      ['member name 2.5e130748, marked', { doc: '{"name":"T","powerStructure":{"factions":[{"name":"F","members":[{"name":2.5e130748}]}]}}', ov: MARKED }],
+      ['npc id -1e131071 in the frozen copy', { doc: '{"name":"T"}', ov: '{"$veil":{"v":1,"deltas":[],"mode":"snapshot","at":"2026-11-01T00:00:00Z","snapshot":{"name":"T","npcs":[{"name":"A","id":-1e131071}]}}}' }],
+      ['npc id 1e131071 in the narration', { doc: '{"name":"T"}', ov: MARKED, narrated: '{"name":"T","npcs":[{"name":"A","id":1e131071}]}' }],
+      ['conflict part 9.99e131071, unmarked', { doc: '{"name":"T","conflicts":[{"parties":[9.99e131071,"x"],"stakes":"S"}]}' }],
+      ['institution id -2.5e130748, marked', { doc: '{"name":"T","institutions":[{"id":-2.5e130748,"name":"House","desc":"d"}]}', ov: MARKED }],
+    ];
+    const out = {};
+    for (const [tag, row] of ROWS) {
+      const { now, before, breaches } = await parity(`r3-${Object.keys(out).length}`, row);
+      // anchored: 210 serves every read of these rows, so a 211 raise is a breach of the law
+      expect(Object.values(before), `${tag} at 210`).toEqual(['ok', 'ok', 'ok', 'ok']);
+      out[tag] = { breaches, now };
+    }
+    expect(Object.fromEntries(Object.entries(out).map(([k, v]) => [k, v.breaches]))).toEqual(Object.fromEntries(ROWS.map(([k]) => [k, []])));
+  }, ROW_TIMEOUT_MS);
+
+  it('R3 (the class): 400 fuzzed stored documents, copies and narrations to the edges of the range, through all four reads at 211 and 210: PARITY', async () => {
     const r = rngOf(400);
-    const raised = []; let reads = 0;
+    const breaches = []; const tally = { reads: 0, raised211: 0, raised210: 0, marked: 0, unmarked: 0, huge: 0 };
+    const HUGE = /e1310|e13074/;
     for (let i = 0; i < 400; i += 1) {
       const doc = docText(r); const ov = overridesText(r);
       const narrated = r() < 0.2 ? docText(r) : null;
-      n += 1;
-      const id = `ffffffff-0000-0000-0000-${String(n).padStart(12, '0')}`;
-      await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility,
-          gallery_member_overrides, gallery_share_dm, gallery_importable, gallery_share_narrated, ai_data)
-        values ($1, $2, 'T', 'town', $3, true, $4, now(), $5, 'unlisted', $6, $7, true, $8, $9)`,
-      [id, OWNER, doc, `fz${i}`, `fl${i}`, ov, r() < 0.3, narrated !== null, narrated === null ? null : `{"aiSettlement":${narrated}}`]);
-      await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
-        values (gen_random_uuid(), $1, 'm', $2, true, $3, 'map_with_campaign', true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `fm${i}`]);
-      for (const [read, uid, q] of [['gallery', '', `select data from public.get_gallery_dossier('fz${i}')`], ['link', '', `select public.get_unlisted_dossier('fl${i}')`],
-        ['import', READER, `select data from public.import_gallery_dossier('fz${i}')`], ['map', '', `select public.get_gallery_map('fm${i}')`]]) {
-        await db.exec(`set test.uid = '${uid}';`);
-        reads += 1;
-        try { await db.query(q); } catch (e) { raised.push(`${read} #${i}: ${String(e.message).slice(0, 100)} | doc ${doc.slice(0, 80)} | ov ${ov.slice(0, 120)}`); }
-      }
+      const dm = r() < 0.3;
+      if (ov.includes('"$veil":{')) tally.marked += 1; else tally.unmarked += 1;
+      if (HUGE.test(doc + ov + (narrated || ''))) tally.huge += 1;
+      const p = await parity(`fz${i}`, { doc, ov, dm, narrated });
+      tally.reads += 8;
+      tally.raised211 += Object.values(p.now).filter((x) => x !== 'ok').length;
+      tally.raised210 += Object.values(p.before).filter((x) => x !== 'ok').length;
+      for (const b of p.breaches) breaches.push(`#${i} ${b} | doc ${doc.slice(0, 80)} | ov ${ov.slice(0, 120)}`);
     }
-    expect(reads).toBe(1600);
-    expect(raised.slice(0, 10)).toEqual([]);
+    expect(tally.reads).toBe(3200);
+    // anchored: marked and unmarked listings, and rows holding a number at the range's top, are all in it
+    expect(tally.marked).toBeGreaterThan(0);
+    expect(tally.unmarked).toBeGreaterThan(0);
+    expect(tally.huge).toBeGreaterThan(20);
+    expect(breaches.slice(0, 10)).toEqual([]);
   }, ROW_TIMEOUT_MS);
   // ── the review's minimal towns: every eye the panel offers ON THE CARD shut (its box and its depth
   // eyes, never a class switch, which hides by kind and would mask a wrong id) ─────────────────────
