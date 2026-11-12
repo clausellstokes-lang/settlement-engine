@@ -336,3 +336,48 @@ seat beside the items: noLegacyFactionReaders (red at e071dc60e: f650b5abd moved
 writers with the cause: the lighting census (three times), the wiring census, the phone chrome floor, the prose
 numerics rows (identity), the legacy faction-reader site (identity), one mutation-coverage rationale with its red-first
 run.
+
+---
+
+# PART 3 — the third seat (COHERENCE-POWERS-3, 2026-11-12)
+
+The third seat took the lane at 1a32c200a and cures the thirteen findings of
+`REVIEW-POWERS-1a32c200a-2026-11-12.md` (on `lane/chair-2026-11-08`). It works in a scratch git worktree (the main
+checkout refused a checkout; it has no node_modules) and COMMITS LOCALLY: its push was refused by its session's
+auto-mode classifier ("[Undermining Oversight]"), the chair was told the same minute, and the chair has asked the owner.
+This part is kept current at every commit.
+
+**Base for every field diff: the line at f72262c68.** THE TWO CORPORA (L2), every birth through `birthConfig` with
+the browser's dials, the golden's 525 as the golden calls them: R, the reviewer's (rvw 100 × 6 tiers; rvf 15 stresses ×
+6 tiers × 8; golden 525) = 1,845; S, the second seat's (critique 150/150/60/160/100/40; l2 15 × 6 × 20) = 2,460. The
+third seat's probes (`dump.mjs`, `plan.mjs` with a probe tree's density law logging its plan, `sound.mjs`, `f1.mjs`,
+`hashdiff.mjs`) live in its scratchpad and are committed under `probes/COHERENCE-POWERS-3/` with the lane's last docs.
+
+## 1. The merge at the start (47a66774a, eedd48a6d, e17edb8ee)
+
+`lane/pool-guard-2026-11-12` at 5b31cdfcc (cut from the line at f72262c68), theirs into ours. No `src/` file touched by
+both sides. Taken whole from the line's side: the wiring census, the lighting census, every edge bundle. Re-taken by
+their doors: the lighting census (eedd48a6d), the wiring census's stamp (e17edb8ee). Row-keyed, merged without
+conflict, each side's rows as its owner wrote them: the mutation-coverage manifest, the presumed-things register.
+
+**The review's sound results at the merged start, on all 4,305 births:** the seat row names someone other than the
+leader 0; the seat house's Connection row 0; an office face beside a house head 0; a council of a kind with no house of
+its kind 0; the governing top rung at first light not the leader 0 (the line: 428); any power's top rung not its first 0
+(the line: 266); two cards sharing a name 0.
+
+**The repetition guard** (`node scripts/census/pool-dominance.mjs`, 2,050 towns, 150 s): 0 over, 0 stale, 0 loose,
+**6 with no row**: `ledger:NPC_STRUCTURE.magic__{contested,corruption,economic_stress,governance_fractured,stable}__dominant`
+and `ledger:NPC_STRUCTURE.other__corruption__dominant`, pools this lane newly reaches. The chair's ruling: `--tighten` is
+not run; the six wait for the narrow door the agreement lane's seat is adding, and are named in the draft record; the
+walker's "every drawn pool has a row" is red on this tree for that cause alone.
+
+## 2. Per finding (the reviewer's count, before → after, and the guard)
+
+| finding | commit | before (merged start) | after | guard |
+|---|---|---|---|---|
+| F12 the packed ceiling | f064cb83c | rulingStructure.js 799 lines, 5 packed lines | 792 lines, 2 (both predate the lane) | powerStructure.test.js "no power/ module packs more statements onto shared lines than its ceiling", red first (5 packed lines) |
+
+F12's L3: 0 of 4,305 whole-record hashes differ, merged start against the split. The split is SIZED: docs and sealed
+packets cite this file's lines up to :787 and the citation walker reds a new past-EOF citation, so the small cohesive
+helper moves (normalizeAndAnnotateFactions, re-exported), not the chooser (that would leave 661 lines and fifteen new
+past-EOF citations, measured).
