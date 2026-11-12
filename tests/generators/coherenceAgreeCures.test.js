@@ -386,6 +386,17 @@ describe('F8 (ii): the flag bag reads the prison and the hospital from the defen
     expect(getInstFlags({}, [{ name: 'Village gaol' }]).inst.hasPrison).toBe(true);
     expect(getInstFlags({}, [{ name: 'Large prison' }]).inst.hasPrison).toBe(true);
   });
+  // COHERENCE-AGREE-7 (P1): the hospital flag is the home's hospital OR healer. The old list read "monastery" as a
+  // substring, so the catalogue's plural rows ("Multiple monasteries", "Major monasteries (5-10)") tended no one
+  // (176 of the lane's 4,141 births), and a ruined hospital still did.
+  test('a house of many monasteries tends the sick; a ruined hospital does not', () => {
+    expect(getInstFlags({}, [{ name: 'Multiple monasteries' }]).inst.hasHospital).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Major monasteries (5-10)' }]).inst.hasHospital).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Hospital', status: 'ruined' }]).inst.hasHospital).toBe(false);
+    expect(getInstFlags({}, [{ name: 'Hospital' }]).inst.hasHospital).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Healer' }]).inst.hasHospital).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Parish church' }]).inst.hasHospital).toBe(false);
+  });
 });
 
 /**
