@@ -218,7 +218,7 @@ function ChainCard({ chain }) {
   const flow = [
     chain.resource ? humanize(label(chain.resource)) : null,
     (chain.processingInstitutions || []).map((n) => humanize(institutionDisplayName(n) || n)).join(' + ') || null,
-    (chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null,
+    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))((chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null),
   ].filter(Boolean).join(' \u00bb ');
 
   const meta = [
@@ -273,3 +273,6 @@ function svcLabel(svc) {
 }
 
 export default Services;
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';

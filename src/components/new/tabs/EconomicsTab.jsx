@@ -202,7 +202,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
                   <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>{facts.institutions.map(inst=>`${institutionDisplayName(inst.name)}${inst.present?'':' (missing)'}`).join(' · ')}</div>
                 </div>
                 {chain.outputs.length > 0 && <div style={{flex:'1 1 140px'}}>
-                  <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Outputs</div>
+                  <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>{chainYieldRefused(chain) ? NORMALLY_YIELDS : 'Outputs'}</div>
                   <div style={{display:'flex',flexWrap:'wrap',gap:2}}>
                     {chain.outputs.slice(0, 3).map((o, j) => (
                       <span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag2,background:`${st.color}10`,padding:'1px 5px'}}>{o}</span>
@@ -788,3 +788,6 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
 }
 
 export default React.memo(EconomicsTab);
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../../domain/chainYield.js';

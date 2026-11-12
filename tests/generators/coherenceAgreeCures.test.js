@@ -302,3 +302,35 @@ describe('A′ refilled: a refused winner does not leave a holder below its size
     }), 'a refused winner leaves no holder short');
   });
 });
+
+/**
+ * ITEM 3′ (ii), THE GUARD (COHERENCE-AGREE-4): every file under src/components and src/pdf that prints a chain's
+ * table outputs reads the one predicate (`domain/chainYield.js`), so a sixth reader cannot appear unseen. Exempt by
+ * name, each with its reason.
+ */
+describe('item 3′ (ii): every page that prints a chain\'s outputs reads the leaf', () => {
+  test('the readers of chain outputs under src/components and src/pdf import chainYieldRefused, or are exempt by name', async () => {
+    const { readdirSync, readFileSync, statSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const root = new URL('../..', import.meta.url).pathname;
+    const EXEMPT = {
+      'src/components/new/SupplyChainsPanel.jsx': 'the Compendium\'s ChainRow (mounted only by compendium/SupplyChainsManager.jsx): a discovered or custom chain in the abstract, no town and no status',
+      'src/pdf/lib/customSupplyChains.js': 'the custom chains\' view-model: user-confirmed chains outside the exporter, with their own activation state',
+      'src/pdf/lib/viewModelBodySlices.js': 'a projection, not a page: its chain rows are printed by EconomicsTrade.jsx, which reads the leaf',
+    };
+    const files = [];
+    const walk = (rel) => {
+      for (const e of readdirSync(join(root, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(root, p)).isDirectory()) walk(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e)) files.push(p);
+      }
+    };
+    walk('src/components'); walk('src/pdf');
+    const readers = files.filter((f) => /\b(?:chain|c)\??\.outputs\b/.test(readFileSync(join(root, f), 'utf8')));
+    expect(readers.length).toBeGreaterThanOrEqual(4);
+    const unread = readers.filter((f) => !(f in EXEMPT) && !/import \{[^}]*\bchainYieldRefused\b[^}]*\} from '[./]+\/domain\/chainYield\.js';/.test(readFileSync(join(root, f), 'utf8')));
+    expect(unread, 'a page prints a chain\'s outputs without the leaf').toEqual([]);
+    expect(Object.keys(EXEMPT).filter((f) => !readers.includes(f)), 'a stale exemption').toEqual([]);
+  });
+});
