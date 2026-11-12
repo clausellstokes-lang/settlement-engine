@@ -135,3 +135,25 @@ describe('F9: the market readers follow the market home, and no answer moves', (
     }), 'the market readers agree with the home');
   });
 });
+
+/** F13 (COHERENCE-AGREE-3, REVIEW-AGREE): the income lines on the town's own land are declared, keyed by the text the branch prints. */
+describe('F13: the income lines are declared where they are printed', () => {
+  test('each key is a line economicState.js prints, each atom is declarable, each twin answers its original', async () => {
+    const { INCOME_LINE_SIBLINGS, LOCAL_COAL_LINE, GRAIN_SURPLUS_LINE } = await import('../../src/generators/economy/incomeLineSiblings.js');
+    const { assertDeclarable } = await import('../../src/domain/facts/factVocabulary.js');
+    const { DECLARATION_CHANNELS } = await import('../../scripts/lib/table-pools.mjs');
+    expect(Object.keys(INCOME_LINE_SIBLINGS)).toEqual([GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE]);
+    expect(DECLARATION_CHANNELS.map((c) => c.name)).toContain('INCOME_LINE_SIBLINGS');
+    const { readFileSync } = await import('node:fs');
+    const site = readFileSync(new URL('../../src/generators/economy/economicState.js', import.meta.url), 'utf8');
+    for (const [key, set] of Object.entries(INCOME_LINE_SIBLINGS)) {
+      expect(set[0].text).toBe(key);
+      for (const line of set) for (const atom of [...(line.needs || []), ...(line.excludes || [])]) expect(assertDeclarable(atom).dimension, atom).toBeTruthy();
+      if (set[1]) expect(set[1].twinOf).toBe(key);
+    }
+    // the branch prints each by its declared constant, so a reworded line cannot leave its declaration behind
+    expect(site).toMatch(/\? GRAIN_SURPLUS_LINE\b/);
+    expect(site).toMatch(/\? LOCAL_COAL_LINE\b/);
+    expect(site).not.toContain('Local coal fires the forges');
+  });
+});

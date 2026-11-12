@@ -24,7 +24,7 @@ import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
 import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
-import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
+import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -458,7 +458,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         desc: liveMaterialFor('metals', nearbyResources)
           ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
           : hasNearbyResource('coal_deposit')
-            ? 'Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.'
+            ? LOCAL_COAL_LINE // declared in incomeLineSiblings.js (F13)
             : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
       });
     }
