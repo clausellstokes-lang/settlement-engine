@@ -2,6 +2,13 @@
 
 The lane is `lane/coherence-upkeep-2026-11-12`, base `65ce74ce6`. Its tip is the commit that adds this file; read it back from the remote. The record so far is `UPKEEP-HANDBACK.md` (this folder), and the field diff is `UPKEEP-FIELD-DIFF.json`. Both were measured BEFORE 4fb1dce75, the gate-ladder lift, so re-take them.
 
+
+> **STATUS, THE THIRD SEAT (COHERENCE-UPKEEP-3, 2026-11-12):** items 1-5 below are DONE, and so are the merges of AGREE 8866a0ddd and the line 3575cf061. The chair's rulings (a)-(g), (e) restated, and the readiness line restated are applied: see the top section of `UPKEEP-HANDBACK.md` and `docs/chair/2026-11-11/UPKEEP-shift-record.DRAFT.json`.
+> - Item 6: the observed-shape walker is red at the base too; equal-failing.
+> - LEFT: item 7, merge AGREE's final tip when the chair names it, then re-take every measure; item 8, the equal-failing set over seven directories, base against tip, plus the whole suite at the final tip (running when this was written); item 9, the edge bundles last and alone.
+> - The push is plain (`git push -u origin lane/coherence-upkeep-2026-11-12`, never `--no-verify`), from a worktree whose hook wrappers are installed (`npm ci`).
+> - The measurement harness is described in the hand-back. It births the 660 and the golden 525 in base and tip trees and diffs them.
+
 ## Done
 
 - **The guard and the six families**, each pinned red first, then cured (see `UPKEEP-HANDBACK.md`).
