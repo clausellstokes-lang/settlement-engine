@@ -18,6 +18,7 @@
  * scoring military 97 at the base.
  */
 import { describe, expect, test, beforeAll } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -63,7 +64,7 @@ describe('a hired force stands in for a standing one, to a lesser degree', () =>
   });
 
   test('RED-FIRST: on every hired-only corpus village, military with hired force only is not above the same place with a watch instead', () => {
-    for (const seed of SEEDS) {
+    expectNoSeedFailures(collectSeedFailures(SEEDS, (seed) => {
       const s = born(seed);
       const home = forcesOf(s);
       expect(home.hasCharterHall || home.hasMercenary, `${seed} holds a hired force`).toBe(true);
@@ -71,7 +72,7 @@ describe('a hired force stands in for a standing one, to a lesser degree', () =>
       const hired = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).scores.military;
       const watch = generateDefenseProfile(withWatchInstead(s), keepOf(s.economicState.prosperity)).scores.military;
       expect(hired, `${seed}: hired-only ${hired} against a watch's ${watch}`).toBeLessThanOrEqual(watch);
-    }
+    }), 'every hired-only corpus village is at or under its watch');
   });
 });
 
@@ -268,6 +269,7 @@ describe('under a famine or a siege, the hired lines name the crisis, not the pu
     expect(s.economicState.prosperity).toBe('Struggling');
     const desc = s.economicState.safetyProfile.guardEffectivenessDesc;
     const garrisonPurse = purseLines().find((line) => /garrison/.test(line.text));
+    // anchored: the next line pins the crisis line in the same text, so a drifted text reds there
     expect(desc, 'no purse line under a famine').not.toContain(garrisonPurse.text);
     expect(desc).toContain(crisisLineFor(garrisonPurse.text)?.text);
   });
@@ -283,6 +285,7 @@ describe('under a famine or a siege, the hired lines name the crisis, not the pu
       expect(purse, `anchored: a purse line prints with no crisis (${roster[0].name})`).toBeDefined();
       for (const stress of ['famine', 'under_siege']) {
         const hard = keptGuardLine(today, roster, 'Struggling', [stress]);
+        // anchored: the next line pins the crisis line in the same text, so a drifted text reds there
         expect(hard, `${roster[0].name} under ${stress}`).not.toContain(purse.text);
         expect(hard).toContain(crisisLineFor(purse.text)?.text);
       }
