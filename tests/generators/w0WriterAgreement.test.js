@@ -16,6 +16,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+import { foodLandOf, NO_FOOD_CHAINS_LINE, OWN_PLOTS_LINE } from '../../src/generators/foodLand.js';
 
 /** @type {Array<{ key: string, s: any }>} */
 const births = [];
@@ -54,13 +55,19 @@ describe('ONE FOOD-SOURCE COUNT (R-W7 c, cause 4b)', () => {
   });
 
   it('activeChainsCount, the chains it marks live and the diversity note are the record foodSources\' own types', () => {
-    const NOTE = ['no established food chains', 'single food source', 'two food source types', 'three food source types', 'highly diversified diet'];
+    // With no source type the note is the declared pair's (COHERENCE-AGREE-3, Part B (i), e4a897c2a): its own plots
+    // where the roster works its own land, by the same read the coherence receipt makes on the record; else no chains.
+    const NOTE = [null, 'single food source', 'two food source types', 'three food source types', 'highly diversified diet'];
+    const zeroNote = (s) => (foodLandOf(String(s.tier || ''), s.institutions || [], s.config || {}).worksOwnLand ? OWN_PLOTS_LINE : NO_FOOD_CHAINS_LINE);
+    const noteCount = (line) => births.filter(({ s }) => s.economicState.foodSecurity.diversityNote === line).length;
+    expect(noteCount(OWN_PLOTS_LINE), 'the slice carries the own-plots twin').toBeGreaterThan(0);
+    expect(noteCount(NO_FOOD_CHAINS_LINE), 'and the no-chains line, so the zero arm reads both').toBeGreaterThan(0);
     const disagree = births.filter(({ s }) => {
       const fs = s.economicState.foodSecurity;
       const n = typesOf(fs.foodRecord.foodSources).size;
       return fs.activeChainsCount !== n
         || fs.activeChains.length !== n
-        || fs.diversityNote !== NOTE[Math.min(n, 4)]
+        || fs.diversityNote !== (n === 0 ? zeroNote(s) : NOTE[Math.min(n, 4)])
         || fs.chains['Trade & imports'] !== false;
     }).map(({ key, s }) => `${key}: ${s.economicState.foodSecurity.activeChainsCount} vs ${s.economicState.foodSecurity.foodRecord.foodSources.join('+')}`);
     expect(disagree).toEqual([]);
