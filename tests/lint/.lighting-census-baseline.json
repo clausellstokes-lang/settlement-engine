@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f165d94b703bc296938a89a0d5615b55a1d44822",
-  "measuredBy": "STYLE-2-MERGE-9, point 45",
+  "measuredAtSha": "97804b535ead3fc384d2637990e85c8d3d6f858c",
+  "measuredBy": "COHERENCE-AGREE-6",
   "date": "2026-11-12",
-  "note": "point 45 POOL-GUARD merge f165d94b7: tests/lint/poolDominance.walker.test.js's eleven new titles (+13 by the reader, which counts one template-literal title with two interpolations as three: listed for the second wave) and one describe",
-  "files": 3211,
-  "parked": 397,
-  "credited": 2814,
-  "titles": 29147,
-  "suiteTitles": 7888
+  "note": "the merged line (points 44, 45) and COHERENCE-AGREE-6: chainPrintName.test.jsx, chainPrintSites.walker.test.js, and new titles in coherenceAgreeCures, projectionAgreement, defenceFactReaders.walker, w0WriterAgreement",
+  "files": 3218,
+  "parked": 399,
+  "credited": 2819,
+  "titles": 29213,
+  "suiteTitles": 7917
 }
