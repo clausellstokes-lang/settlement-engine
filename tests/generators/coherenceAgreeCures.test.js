@@ -111,3 +111,27 @@ describe('cure 9: the flag bag\'s hired company and gate are the defence home\'s
     expect(getInstFlags({}, [{ name: 'Mercenary company' }, { name: 'Town walls' }]).inst).toMatchObject({ hasMercenary: true, hasGates: true });
   });
 });
+
+/**
+ * F9 (COHERENCE-AGREE-3, REVIEW-AGREE): the market's latent second readers re-pointed to the market home —
+ * viability.js's city-without-a-market warning and economicState.js's Market Taxes. THE PIN THAT NO PRINTED LINE
+ * MOVES: on births across the four browser tiers, the name list each reader kept answers what the home answers
+ * (measured on the 2,866-birth L2 corpus at 65ce74ce6: equal on every one), so the re-point is a change of
+ * reader, never of answer.
+ */
+describe('F9: the market readers follow the market home, and no answer moves', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test('the old name lists and the home agree on every roster', async () => {
+    const { hasMarketInstitution } = await import('../../src/domain/facts/market.js');
+    const { nativeSemanticNames } = await import('../../src/domain/content/customContentSemanticAuthority.js');
+    const seeds = ['village', 'town', 'city', 'metropolis'].flatMap((tier) => Array.from({ length: 8 }, (_, i) => `agree-${tier}-${i}`));
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const names = nativeSemanticNames(settlement.institutions).map((n) => n.toLowerCase());
+      const named = (...kws) => kws.some((kw) => names.some((n) => n.includes(kw)));
+      const home = hasMarketInstitution(settlement.institutions);
+      expect(named('market', 'merchant', 'district'), `${seed}: the viability reader`).toBe(home);
+      if (named('district market', 'multiple market', 'daily market', 'market square', 'weekly market', 'annual fair')) expect(home, `${seed}: a market-tax name`).toBe(true);
+    }), 'the market readers agree with the home');
+  });
+});

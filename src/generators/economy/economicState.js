@@ -23,7 +23,7 @@ import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
-import { liveMaterialFor } from './localMaterials.js';
+import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
 import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
 
 
@@ -87,13 +87,16 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   const SUBSISTENCE_TIERS_ECO = ['thorp', 'hamlet', 'village'];
   const isSubsistenceOnly = isIsolated && SUBSISTENCE_TIERS_ECO.includes(tier) && !isolatedMagicTrade;
   // ── Market taxes / magical trade revenue — scaled by market institution tier ──
-  if (!trulyIsolated && hasInst('district market', 'multiple market')) {
+  // COHERENCE-AGREE-3 (REVIEW-AGREE F9): whether a market stands is the market home's answer; the names below
+  // say only which kind of market it is (district, daily, weekly), and so the size of its revenue.
+  const hasMarketHome = hasMarketInstitution(institutions);
+  if (!trulyIsolated && hasMarketHome && hasInst('district market', 'multiple market')) {
     incomeBuild.push({
       source: isolatedMagicTrade ? 'Magical Trade Revenue' : 'Market Taxes',
       percentage: Math.round(45 * magicRevenueScale),
       desc: 'District-level duties on specialized goods; a major civic revenue stream across the urban districts.',
     });
-  } else if (!trulyIsolated && hasInst('daily market')) {
+  } else if (!trulyIsolated && hasMarketHome && hasInst('daily market')) {
     incomeBuild.push({
       source: isolatedMagicTrade ? 'Magical Trade Revenue' : 'Market Taxes',
       percentage: Math.round(35 * magicRevenueScale),
@@ -101,7 +104,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         ? 'Trade flowing through teleportation channels generates modest fees and arcane duties.'
         : 'Daily market tolls, stall fees, and weights-and-measures inspections.',
     });
-  } else if (!trulyIsolated && hasInst('market square', 'weekly market', 'annual fair')) {
+  } else if (!trulyIsolated && hasMarketHome && hasInst('market square', 'weekly market', 'annual fair')) {
     incomeBuild.push({
       source: isolatedMagicTrade ? 'Magical Trade Revenue' : 'Market Taxes',
       percentage: Math.round(22 * magicRevenueScale),

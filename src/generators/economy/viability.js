@@ -23,6 +23,7 @@ import {
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { waterOf } from '../../domain/facts/water.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-1f: one line
+import { hasMarketInstitution } from '../../domain/facts/market.js';
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
 
@@ -206,10 +207,10 @@ const generatePowerDynamics = (population, institutions, economicState, config =
   const pri = getPriorities(config);
   const instNames = nativeSemanticNames(institutions)
     .map(name => name.toLowerCase());
-  const hasInst = (...kws) => kws.some((kw) => instNames.some((n) => n.includes(kw)));
 
   // City+ without markets
-  const hasMarket = hasInst('market', 'merchant', 'district'), cityScale = isCityScale(sizeTier, population);
+  // COHERENCE-AGREE-3 (REVIEW-AGREE F9): the market is the market home's answer (facts/market.js), not a third name list.
+  const hasMarket = hasMarketInstitution(institutions), cityScale = isCityScale(sizeTier, population);
   if (cityScale && !hasMarket) {
     warnings.push({
       severity: SEVERITY.CRITICAL,
@@ -580,7 +581,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
 // reads the LIVE roster; re-exported under its SIZE-lane name for this module's importers. (Rung 1's
 // LANDING-2 moved the same function to src/domain/marketInstitution.js for the domain -> generators
 // boundary; at the rung-2 merge the census's home serves both intents and that copy is retired.)
-export { hasMarketInstitution } from '../../domain/facts/market.js';
+export { hasMarketInstitution };
 
 /**
  * IS THIS A CITY-SCALE PLACE? The two structural cuts below ("no trade infrastructure",
