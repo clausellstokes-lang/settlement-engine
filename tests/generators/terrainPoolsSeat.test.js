@@ -14,7 +14,9 @@ import { governingFactionOf } from '../../src/domain/rulingPower.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { dualHatHouseOf, officeTitleFor } from '../../src/generators/people/representatives.js';
+import { leaderHouseOf, officeLiteralOf } from '../helpers/dualHatOracle.js'; // COHERENCE-POWERS-3 (F9): the expectation's own oracle, literals
+import { backingArchetypeOf } from '../../src/domain/dossier/powerSupport.js';
+import { nameOf } from '../../src/domain/rulingPower.js';
 
 // HAND-BUILT 2026-11-04 (rung-1 pins, unit 4; the chair's ruling): the seed soak1k-694 carried this
 // case on the dry run's corpus, and no seed in soak1k-0..4,999 carries it on the de-aliased corpus
@@ -61,8 +63,8 @@ describe('the council case, hand-built (was soak1k-694)', () => {
       // RE-KEYED BY IDENTITY 2026-11-12, COHERENCE-POWERS (the owner's dual-hat law, 2026-11-11): where a house of the town
       // leads (representatives.js :: dualHatHouseOf), its face keeps its title and its role is the office (officeTitleFor:
       // an Ecclesiastical Council city's 'Lord Warden'); where none does, the role is still the title.
-      const hat = dualHatHouseOf(s.institutions || [], governingFactionOf(s));
-      expect(seated?.role).toBe(hat && seated?.institution?.key === hat.house.name ? officeTitleFor(String(governingFactionOf(s)?.faction || ''), s.tier) : seated?.title);
+      const hat = leaderHouseOf(s.institutions || [], nameOf(governingFactionOf(s)), backingArchetypeOf(governingFactionOf(s)));
+      expect(seated?.role).toBe(hat && seated?.institution?.key === hat ? officeLiteralOf(String(governingFactionOf(s)?.faction || ''), s.tier) : seated?.title);
       expect((seated?.memberships || []).some((m) => m.rank === 1 && m.power === String(chain.faction?.faction || chain.faction?.name || ''))).toBe(true);
       expect(String(chain.npc?.name || '')).not.toMatch(/^The /); // anchored: the line above pins the seat's Mayor live
       expect(seatHolderFindings(s)).toEqual([]);

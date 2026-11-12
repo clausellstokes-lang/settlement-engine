@@ -18,8 +18,10 @@
  * the largest share of its backing row. Criminal rulers stand outside the guard: naming the thieves'
  * house as the leader would break the veil, and that is the owner's call (the proposal, (b)).
  */
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
+import { seatHouseName } from '../../../src/domain/dossier/powerSupport.js';
 import { backingArchetypeOf } from '../../../src/domain/dossier/powerSupport.js';
 import { backingRowFor } from '../../../src/data/institutionBacking.js';
 import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution } from '../../../src/data/institutionalCatalog.js';
@@ -67,9 +69,19 @@ function kindOf(card) {
   return top === 'government' ? 'office' : top;
 }
 
-const births = SEEDS.map((seed) => {
+// COHERENCE-POWERS-3 (F9): the births go through the browser's create boundary (birthConfig: the density law on), as the
+// page's towns are born; the guard used to read births the browser never makes.
+/** @type {Array<{ seed: string, s: Record<string, any>, ruler: string, arch: string | null, three: Array<Record<string, any>> }>} */
+let births = [];
+beforeAll(async () => {
+  await loadGenerationLawPayloads();
+  births = SEEDS.map(born);
+}, 120_000);
+
+/** @param {string} seed */
+function born(seed) {
   const tier = seed.split('-')[1];
-  const s = generateSettlementPipeline({ ...DIALS, settType: tier }, null, { seed, customContent: {} });
+  const s = generateSettlementPipeline(birthConfig({ ...DIALS, settType: tier }), null, { seed, customContent: {} });
   const rulerRow = governingFactionOf(s);
   const ruler = nameOf(rulerRow);
   const three = (s.npcs || [])
@@ -78,7 +90,7 @@ const births = SEEDS.map((seed) => {
     .sort((x, y) => x.rank - y.rank)
     .map((x) => x.card);
   return { seed, s, ruler, arch: rulerRow ? backingArchetypeOf(rulerRow) : null, three };
-});
+}
 
 /** Each check loops the seeds in its body and names every seed that misses (the sovereignty lint's park rule:
  *  a plain test over the rows, never an `each` call). */
@@ -108,6 +120,23 @@ describe('COHERENCE-POWERS guard — the dual hat', () => {
   it('a ruler of a kind has a house of its kind in the town', () => {
     const misses = births.filter((b) => KINDS.includes(b.arch) && !(b.s.npcs || []).some((card) => kindOf(card) === b.arch))
       .map((b) => `${b.seed}: ${b.ruler} (${b.arch}) has no house of its kind`);
+    expect(misses).toEqual([]);
+  });
+
+  // COHERENCE-POWERS-3 (F9; REVIEW-POWERS F9: its first planted fault, the seat's house keeping its own face beside the
+  // leader, left this guard green): one person, one face — where a house's head leads, no office's face (the seat's house,
+  // the hall, the minted seat) stands beside it in the governing power.
+  it('no office-holder stands beside the house head who leads', () => {
+    const misses = [];
+    for (const b of births) {
+      const leader = b.three[0];
+      if (!leader || kindOf(leader) === 'office') continue;
+      const seatKey = seatHouseName(b.s.institutions || []);
+      const beside = (b.s.npcs || []).find((card) => card !== leader && (card.id === 'npc_seat'
+        || (seatKey && card.institution?.kind === 'house' && card.institution.key === seatKey)));
+      if (beside) misses.push(`${b.seed}: ${beside.name} (${beside.institution?.key}) beside ${leader.name}, who leads ${b.ruler}`);
+    }
+    expect(births.length).toBe(SEEDS.length);
     expect(misses).toEqual([]);
   });
 });

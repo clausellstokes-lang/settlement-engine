@@ -18,9 +18,11 @@ import { generateSettlementPipeline } from '../../../src/generators/generateSett
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
 import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution } from '../../../src/data/institutionalCatalog.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
-import { SEAT_CARD_ID, YIELDS_TO, seatHouseOf, dualHatHouseOf, officeTitleFor } from '../../../src/generators/people/representatives.js';
+import { SEAT_CARD_ID, YIELDS_TO, seatHouseOf } from '../../../src/generators/people/representatives.js';
 import { seatMintTitleFor } from '../../../src/generators/people/mintTitles.js';
 import { isVeiledPower, veiledOfInstitution } from '../../../src/domain/people/cardVeil.js';
+import { leaderHouseOf, officeLiteralOf } from '../../helpers/dualHatOracle.js'; // COHERENCE-POWERS-3 (F9): the expectation's own oracle, literals
+import { backingArchetypeOf } from '../../../src/domain/dossier/powerSupport.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /**
@@ -41,7 +43,7 @@ function expectedFaceHouses(settlement) {
   const facedFamilies = new Set(houses.filter((h) => typeof faceOfInstitution(h) === 'string' && faceOfInstitution(h) !== FACE_SEAT)
     .map((h) => familyOfInstitution(h)?.key));
   // COHERENCE-POWERS re-key (cure (i), one person, one face): where a house leads, the seat's house bears no face
-  const hat = dualHatHouseOf(settlement.institutions, governingFactionOf(settlement));
+  const hat = leaderHouseOf(settlement.institutions, nameOf(governingFactionOf(settlement)), backingArchetypeOf(governingFactionOf(settlement)));
   (settlement.institutions || []).forEach((house, index) => {
     if (!house || isFabricInstitution(house)) return;
     const face = faceOfInstitution(house);
@@ -60,7 +62,7 @@ function expectedFaceHouses(settlement) {
 function assertCast(s, label) {
   const cards = s.npcs.filter((n) => n.institution);
   const governingName = nameOf(governingFactionOf(s));
-  const hat = governingName ? dualHatHouseOf(s.institutions, governingFactionOf(s)) : null;
+  const hat = governingName ? leaderHouseOf(s.institutions, nameOf(governingFactionOf(s)), backingArchetypeOf(governingFactionOf(s))) : null;
   const houseCards = cards.filter((n) => n.institution.kind === 'house');
   const { names, seat } = expectedFaceHouses(s);
   // one card per face house and no house twice (the cards are DRAWN in roster order; the stored
@@ -77,7 +79,7 @@ function assertCast(s, label) {
     // COHERENCE-POWERS re-key (the dual hat): the governing power's first, where a house leads, carries the
     // office in its `role` beside its house's title; every other card's role is its title (M-1b)
     if (hat && card.memberships.some((m) => m.power === governingName && m.rank === 1)) {
-      expect(card.role, `${label}: ${card.id} the leader's office`).toBe(officeTitleFor(governingName, s.tier));
+      expect(card.role, `${label}: ${card.id} the leader's office`).toBe(officeLiteralOf(governingName, s.tier));
     } else expect(card.role, `${label}: ${card.id} role is the title (M-1b)`).toBe(card.title);
     // FIX-PUBLIC-VEIL: the veil bit is stamped at birth, a boolean, and equal to the one predicate read on the FINAL record
     expect(typeof card.institution.veiled, `${label}: ${card.id} carries the veil bit`).toBe('boolean');

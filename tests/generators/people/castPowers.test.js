@@ -22,10 +22,11 @@ import { faceOfInstitution } from '../../../src/data/institutionalCatalog.js';
 import { FACTION_ARCHETYPES as A } from '../../../src/domain/factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
 import { OTHER_CARD_PREFIX, RANKS, assignCastPowers, rollWeightOf } from '../../../src/generators/people/castPowers.js';
-import { dualHatHouseOf, houseKindOf, officeTitleFor, SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/people/representatives.js';
+import { houseKindOf, SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/people/representatives.js';
 import { otherMintRowFor } from '../../../src/generators/people/mintTitles.js';
 import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { isVeiledPower, veiledOfPower, VEILED_CARD_PREFIX } from '../../../src/domain/people/cardVeil.js';
+import { leaderHouseOf, officeLiteralOf } from '../../helpers/dualHatOracle.js'; // COHERENCE-POWERS-3 (F9): the expectation's own oracle, literals
 
 /** Two military claimants (the density law's doubled niche), one seat, four military houses. */
 const FIXTURE = Object.freeze({
@@ -79,11 +80,11 @@ function assertPowers(s, label) {
   }
   // FLOOR 1 — the governing power's first is the dual-hat leader's face (COHERENCE-POWERS re-key: the house the
   // leader comes from, its office in `role`), else the seat's face as before (a government that sends its own man)
-  const hat = governing ? dualHatHouseOf(s.institutions, governingFactionOf(s)) : null;
+  const hat = governing ? leaderHouseOf(s.institutions, nameOf(governingFactionOf(s)), backingArchetypeOf(governingFactionOf(s))) : null;
   if (hat) {
     const first = cards.find((c) => c.memberships.some((m) => m.power === governing && m.rank === 1));
-    expect(first?.institution, `${label}: floor 1, the dual hat first`).toMatchObject({ kind: 'house', key: hat.house.name });
-    expect(first.role, `${label}: the leader's office`).toBe(officeTitleFor(governing, s.tier));
+    expect(first?.institution, `${label}: floor 1, the dual hat first`).toMatchObject({ kind: 'house', key: hat });
+    expect(first.role, `${label}: the leader's office`).toBe(officeLiteralOf(governing, s.tier));
     expect(cards.some((c) => c.id === SEAT_CARD_ID), `${label}: no seat minted where a house leads`).toBe(false);
   } else if (governing) {
     const first = cards.find((c) => c.memberships.some((m) => m.power === governing && m.rank === 1));
@@ -314,8 +315,8 @@ describe('the guild\'s push (car 2): I-5 the floors hold under a maximal push; I
         const isGov = power === plan.governing;
         // COHERENCE-POWERS re-key: the governing power's first is the dual-hat leader's face where a house leads
         const rulerRow = isGov ? governingFactionOf(view) : null;
-        const hat = rulerRow ? dualHatHouseOf(view.institutions, rulerRow) : null;
-        const hatCard = hat ? cast.find((c) => c.institution?.kind === 'house' && c.institution.key === hat.house.name) : null;
+        const hat = rulerRow ? leaderHouseOf(view.institutions, nameOf(rulerRow), backingArchetypeOf(rulerRow)) : null;
+        const hatCard = hat ? cast.find((c) => c.institution?.kind === 'house' && c.institution.key === hat) : null;
         const f1 = isGov
           ? (hatCard ? { card: hatCard } : pool.find((m) => (plan.seatKey ? m.card.institution?.key === plan.seatKey && m.card.institution?.kind === 'house' : m.card.id === SEAT_CARD_ID)))
           : pool.find((m) => m.card.institution?.kind === 'power' && m.card.institution?.key === power);
