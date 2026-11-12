@@ -319,13 +319,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 155,
+    "line": 157,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 161,
+    "line": 163,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
