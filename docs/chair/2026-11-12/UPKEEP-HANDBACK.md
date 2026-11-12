@@ -135,3 +135,29 @@ See the section appended below.
 - **Registers:** two DRAFT tuning rows (`KEEP_TUNING`, `KEEP_SCALE_TUNING`), and the upkeep-reader register (10 rows at its first commit, 4 at the tip, one of them held by ruling (A)).
 - **Re-takes:** the tuning inventory and the wiring census, each re-taken by its own writer (named below).
 - **Nothing else:** no test was skipped and no pin was loosened.
+
+## L2, the wider corpus (the chair's review laws of 2026-11-12): a STOP, sent and held
+
+The wider corpus is the 360, plus 60 thorps and 60 hamlets (`agree-thorp-i`, `agree-hamlet-i`), plus 180 forced births (`agree-force-<famine|wartime|under_siege>-<tier>-<i>`, six tiers × 10). The base is `65ce74ce6` and the tip is this lane, both measured as archives.
+
+**Readiness, against the STOP at 5 points of the corpus:**
+- The 360: +4.4 (36.7% → 41.1%), 93 labels.
+- Thorps and hamlets: 12 labels, the share unchanged.
+- **Forced: 53 of 180 labels move (48 down), and Well-Defended+Fortress goes 16.7% → 8.9% (−7.8, OVER).** By stress: famine 8 → 1, siege 5 → 0, wartime 17 → 15. Of the 53 movers, 44 are Struggling: a famine or siege caps prosperity at Struggling, so `funded` = 0 and every gate stands at its floor.
+- All 660: +0.3, 158 labels.
+
+**Stores:** printed storage thresholds crossing: 58 on the 660 (the 360 22, thorps and hamlets 3, forced 33). Food bands 0 and prosperity 0 everywhere, including all 77 famine births.
+
+**Holding on the wider corpus:**
+- The hired counterfactual: 9 hired-only places (6 villages, 3 hamlets), every one at or under its watch.
+- Services: 0 rows added, 0 institutions newly empty.
+- Safety, food and prosperity: 0 moves.
+
+**L1, the type gates:**
+- The domain strict check reads exactly the one inherited error (`src/domain/defense/defenseFacts.js`, AGREE's).
+- The typecheck ratchet: this lane's one error (`safetyProfile.js`) is cured in b95ba62e0; what remains is AGREE's first seat's (`generationCoherence.js` +3, `resourceGenerator.js` +15).
+- Eslint is clean on every file the lane touched.
+
+**STOP sent to the chair with three options for the gates (lift Struggling's `funded`, exempt stress-capped labels, or accept) and the stores choice.** The lane is held until the ruling.
+
+**Still running when this was written:** the base-against-tip field diff over the golden 525 and the 660, and the equal-failing-set suites.
