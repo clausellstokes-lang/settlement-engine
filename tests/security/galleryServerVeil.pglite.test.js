@@ -349,6 +349,8 @@ describe('the server-side share veil (211) — execution against the real SQL an
       const g = await db.query('select data, gallery_member_overrides from public.get_gallery_dossier($1)', [`shape-p${i}`]);
       const l = await db.query('select public.get_unlisted_dossier($1) as o', [`shape-l${i}`]);
       const text = JSON.stringify([g.rows, l.rows]);
+      expect(text, tag).toMatch(/"name":"T"/);
+      // anchored: the line above proves the reads returned the planted row itself, and 210 serves these PLANTs (red at 5b563a4aa)
       expect(text, tag).not.toMatch(/PLANT-(SECRET|CAPTURE|SEED|EXTRA)/);
       expect(overridesOffences(g.rows[0].gallery_member_overrides), tag).toEqual([]);
       expect(overridesOffences(l.rows[0].o.gallery_member_overrides), tag).toEqual([]);
@@ -358,6 +360,8 @@ describe('the server-side share veil (211) — execution against the real SQL an
     const ov = { $veil: { v: 1, deltas: [{ address: 'field:event:event.legacy-abc123:description', hidden: true }] } };
     await db.query('update public.settlements set gallery_member_overrides = $2 where id = $1', ['bbbbbbbb-0000-0000-0000-000000000001', JSON.stringify(ov)]);
     const l = await db.query('select public.get_unlisted_dossier($1) as o', ['shape-l0']);
+    expect(l.rows[0].o.dossier.history.historicalEvents).toHaveLength(1);
+    // anchored: the line above proves the event itself is still on the page; only its description is gone
     expect(JSON.stringify(l.rows[0].o.dossier)).not.toContain('PLANT-ANON-EVENT');
   });
 
