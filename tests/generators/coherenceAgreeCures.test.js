@@ -183,3 +183,24 @@ describe('STOP 2 (b): Court Fees and Gate Tolls read the home, and no answer mov
     }), 'Court Fees and Gate Tolls agree with the home');
   });
 });
+
+/**
+ * ITEM 1 (a) (COHERENCE-AGREE-4, 2026-11-12): the theocratic economic-situation line and its no-market twin name
+ * the church, so each declares the sacred house beside the market it needs or refuses. The branch fires only beside
+ * a cathedral or a monastery (`priorityHelpers.js :: theocraticEconomy`), so the declaration is true wherever the
+ * line prints and the resolution answers as before: with a sacred house the pair resolves on the market alone.
+ */
+describe('item 1 (a): the theocratic pair declares the church it names', () => {
+  test('the line and its twin both need the sacred house; the twin still refuses the market', async () => {
+    const { PROSPERITY_LINE_SIBLINGS } = await import('../../src/generators/economy/prosperity.js');
+    const { resolveSibling } = await import('../../src/domain/facts/drawDeclared.js');
+    const key = Object.keys(PROSPERITY_LINE_SIBLINGS).find((k) => k.startsWith('The church controls'));
+    const [line, twin] = PROSPERITY_LINE_SIBLINGS[key];
+    expect(line.needs).toEqual(['market', 'sacredHouse']);
+    expect(twin.needs).toEqual(['sacredHouse']);
+    expect(twin.excludes).toEqual(['market']);
+    const opts = (facts) => ({ facts, poolId: 'test:theocratic', surface: 'economics', drawKind: 'T' });
+    expect(resolveSibling(key, PROSPERITY_LINE_SIBLINGS, opts({ market: true, sacredHouse: true }))).toBe(line.text);
+    expect(resolveSibling(key, PROSPERITY_LINE_SIBLINGS, opts({ market: false, sacredHouse: true }))).toBe(twin.text);
+  });
+});

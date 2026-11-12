@@ -850,8 +850,7 @@
    ["market", "other-lane", "Mixed subsistence and market"],
    ["market", "other-lane", "The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is pr"],
    ["market", "other-lane", "The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question"],
-   ["market", "other-lane", "Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft."],
-   ["temple", "other-lane", "The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is pr"]
+   ["market", "other-lane", "Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft."]
   ],
   "src/generators/economy/viability.js": [
    ["bank", "other-lane", "Banking institutions exist but the economy priority is very low."],

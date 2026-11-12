@@ -391,10 +391,16 @@ const complexityByExports = (tier, incomeSourceCount, exportCount, hasMarketInst
  * thing for a town with no market. Measured on 360 births (seeds agree-<tier>-<i>) before the
  * change: "markets meet infrequently" printed in 7 towns with no market, "The market still opens"
  * in 2, the rest in none. Keyed by the printed text; resolved through `resolveSibling` above.
+ * `alsoNeeds` declares what BOTH the line and its twin name besides the market (COHERENCE-AGREE-4): the
+ * theocratic pair names the church, so each needs the sacred house — true wherever it prints, since its
+ * branch (`priorityHelpers.js :: theocraticEconomy`) fires only beside a cathedral or a monastery.
+ * @param {string} text @param {string} twin @param {ReadonlyArray<string>} [alsoNeeds]
  */
-const marketSet = (text, twin) => Object.freeze([
-  Object.freeze({ text, needs: Object.freeze(['market']) }),
-  Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(['market']) }),
+const marketSet = (text, twin, alsoNeeds = []) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(['market', ...alsoNeeds]) }),
+  Object.freeze(alsoNeeds.length
+    ? { text: twin, twinOf: text, needs: Object.freeze([...alsoNeeds]), excludes: Object.freeze(['market']) }
+    : { text: twin, twinOf: text, excludes: Object.freeze(['market']) }),
 ]);
 export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
   'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.': marketSet(
@@ -408,7 +414,8 @@ export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
     'Fear of the sickness and the quarantine keep people from trading, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.'),
   'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.': marketSet(
     'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.',
-    'The church controls most economic activity. Land and trade flow through religious institutions. Commerce is present but the church sets the terms.'),
+    'The church controls most economic activity. Land and trade flow through religious institutions. Commerce is present but the church sets the terms.',
+    ['sacredHouse']),
   'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.': marketSet(
     'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.',
     'Trade is what this settlement lives on. Goods change hands at all hours, and the guilds have a hand in every craft.'),
