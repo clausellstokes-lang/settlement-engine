@@ -148,7 +148,16 @@ The post-ruling commits (STOP 1, STOP 2 b, B (i)) are re-diffed at the final tip
 2. **F9's court and gate re-point** would move printed lines (714 and 318 births). **Ruled (b), built in e68896aa6.** The home gains `hasCourthouse` and `hasTollGate`; the pin holds that no answer moves.
 3. **F13's three court-without-prison lines** need a court and a prison dimension in the vocabulary (PRESUME's file). **Ruled:** wait for point 43, merge the integration line, run both merged guards, then add the dimensions. **PENDING.**
 4. **Part B (iii) A′ is AUTHORISED with conditions.** Condition 4 raised a new STOP (the wizard, below). **PENDING.**
-5. **NEW: F12b's forest word.** "Timber (local forests cleared)" (`managed_forest.shortageImport`) stands beside live timber in 4 births; the cure is one more label. **PENDING.**
+5. **F12b's forest word: AUTHORISED as a rule, BUILT in 080527677.** Every shortage label now names its own resource.
+   - CHANGED (13): fishing_grounds → "sea fisheries"; salt_flats → "salt flats"; shipbuilding_timber → "shipbuilding stands"; river_clay → "clay pits"; managed_forest → "managed woodland"; grain_fields → "grain fields"; precious_metals → "gold and silver veins"; gemstone_deposits → "gem deposits"; hot_springs → "hot springs"; glass_sand → "sand pits"; camel_herds → "camel herds"; mountain_timber → "mountain timber"; hot_springs_mineral → "mineral springs".
+   - READ AND LEFT (19): deep_harbour, river_mills, fertile_floodplain, river_fish, hunting_grounds, foraging_areas, ancient_grove, grazing_land, crossroads_position, stone_quarry, coal_deposits, ancient_ruins, magical_node, defended_pass, marshlands, oasis_water, date_palms, desert_salt, alpine_pasture.
+   - The guard's shortage member now reads what the bracket's words name, by family.
+   - **STOP:** iron_deposits ("local mines" also names a live coal or gem working; the text is a Founding World card's printed promise and a goodsCatalog alias, neither file mine). The guard does not read "(local mines" until the chair rules.
+6. **(iii) A′ as one datum with two readers.** STOP raised before building:
+   - The random roll filters on `getCompatibleResources`' `compatible` flag, so the wizard's dimming needs a second field.
+   - A forced position on port, river or isolated access raises `structuralValidator.js`'s `resource_access_violation`; on a road it would raise nothing unless that file reads the datum (not authorised).
+   - No per-resource hand-forced mark exists in the config; the manual roster is the only one.
+7. **The pushes.** This session refuses `--no-verify`, so every push ran without it. No pre-push hook is installed in this checkout (`npm ci --ignore-scripts` skipped the installer; `.git/hooks` holds samples only), so no hook ran.
 
 ## Part B, as ruled
 
