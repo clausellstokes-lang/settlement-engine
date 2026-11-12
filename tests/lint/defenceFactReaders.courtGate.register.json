@@ -1,0 +1,57 @@
+{
+  "_doc": "COHERENCE-AGREE-3 (REVIEW-AGREE F9, 2026-11-12): the walker's second member — the private readers of the COURT and the GATE (the two facts the lane gave a home in the defence home's flag bag) and of a hired company named any other way than 'mercenary' (the names priorityHelpers.js listed before cure 9: hireling hall, free company, hired muscle, veteran's lodge; and 'sellsword'), outside src/domain/facts/, src/domain/defense/ and src/data/, counted by tests/lint/defenceFactReaders.walker.test.js. SHRINK-ONLY from its first commit: a row may only fall, and falls the commit its reader retires to the home; no row is ever added. Banked at the third seat's commit over 65ce74ce6. It does NOT see a defence word held in a constant (`const W = 'courthouse'; n.includes(W)`).",
+  "rows": {
+    "src/components/settlement/eventComposer/EventComposerCorruptionFields.jsx": {
+      "count": 1,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/domain/events/registry.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/domain/mapProfile.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/domain/worldPulse/envoyNegotiationPictureBuilder.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/domain/worldPulse/tierOutcomeApply.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/aiLayer.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/economy/economicState.js": {
+      "count": 2,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/generationCoherence.js": {
+      "count": 3,
+      "reason": "The agreement arm itself: it tests the PRINTED text for a court, a gate or a watch against the home (it reads no roster); it stays, and is banked so the count holds"
+    },
+    "src/generators/institutionProbability.js": {
+      "count": 2,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/priorityHelpers.js": {
+      "count": 3,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/services/serviceAvailability.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/services/serviceClassifier.js": {
+      "count": 2,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    },
+    "src/generators/spatialGenerator.js": {
+      "count": 1,
+      "reason": "A private name test or flag of the court, the gate or a hired company under another name, at 65ce74ce6 (COHERENCE-AGREE-3, REVIEW-AGREE F9); it answers what the home answers and retires to src/domain/defense/defenseFacts.js"
+    }
+  }
+}

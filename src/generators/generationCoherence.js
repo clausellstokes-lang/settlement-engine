@@ -449,7 +449,8 @@ export function projectionAgreementFindings(settlement) {
   for (const [field, text] of gateTexts) {
     if (facts.defence?.gate === false && GATES_NAMED.test(String(text || ''))) resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names gates the defence record does not hold.'));
     // F12 (COHERENCE-AGREE-3): the watch — named as the town's own where the defence home has none.
-    if (facts.defence?.watch === false && WATCH_NAMED.test(String(text || ''))) resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names a watch the defence record does not hold.'));
+    const watchSaid = facts.defence?.watch === false && WATCH_NAMED.test(String(text || '')); // the PRINTED text, not the roster
+    if (watchSaid) resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names a watch the defence record does not hold.'));
   }
   if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.situationDesc || ''))) {
     resource.push(finding('economicState.situationDesc', 'The economic situation names a market the town does not have.'));
