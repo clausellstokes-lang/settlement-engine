@@ -36,6 +36,7 @@ import { institutionHasAnyTag } from '../../lib/entities.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { importsAsPrinted } from './tradeListDisplay.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -127,8 +128,10 @@ const CHAIN_INPUTS = Object.freeze({
 const ROUTE_HOUSE_TAGS = Object.freeze(['market', 'transport']);
 
 /**
- * The record's own goods, as one searchable text: what the economy produces, imports and
- * exports, and the nearby resources that are not depleted (their keys and their commodities).
+ * The record's own goods, as one searchable text: what the economy produces, the imports AS THE PAGE PRINTS
+ * THEM (`tradeListDisplay.js :: importsAsPrinted`, W2-A-LEAVES 6: the Imports line is the record's imports and
+ * the terrain's critical imports as one list, and a gap that ignored the second named a good the page shows
+ * arriving), the exports, and the nearby resources that are not depleted (their keys and their commodities).
  * @param {PageRecord} s
  */
 function recordGoods(s) {
@@ -136,7 +139,7 @@ function recordGoods(s) {
   const keys = availableNativeResourceKeys(s?.config || {});
   /** @type {string[]} */
   const goods = [
-    ...arr(es.localProduction), ...arr(es.primaryImports), ...arr(es.primaryExports),
+    ...arr(es.localProduction), ...importsAsPrinted(/** @type {Parameters<typeof importsAsPrinted>[0]} */ (s)), ...arr(es.primaryExports),
     ...keys, ...keys.flatMap((/** @type {string} */ k) => arr(/** @type {Readonly<Record<string, { commodities?: unknown } | undefined>>} */ (RESOURCE_DATA)[k]?.commodities)),
   ].map(str);
   return goods.map(norm).join('|');
