@@ -1,0 +1,294 @@
+{
+ "_law": "W2-A-LEAVES (2026-11-12): THE RENDERED-DOSSIER ARM'S REGISTER. One row per pattern of the second wave's census, read by src/domain/coherence/pageCensusFindings.js over the census's own corpus (720 births, prefix r2: tests/components/pageCensusWalk.shared.mjs :: censusPlan) rendered as the owner sees it. master and integration are the census's two columns (db832c892, master before the integration; 8866a0ddd, the integration's tip), counted by the census's counter and mapped to these rows (row 14 joins the counter's P14 and P14district; 18 joins P18npc and P18rec; F4 joins P12ore/coal/quarry/saw; NEW1 joins NEW1 and NEW1b; 8 joins P8any and P8houses). master is NOT a measurement for 5a, 8 and 16a: their page did not exist there. banked is this arm's count on the corpus at the lane's base deb1544eb (per seed equal to the census counter's own run there, all 25 rows); it ONLY FALLS, through scripts/census/page-census.mjs --shrink. EVERY ROW'S BAR IS ZERO. grid: the suite walker's twelve births (tests/components/pageCensus.walker.test.jsx), each seed's rows exactly; a cure lowers them in the same commit.",
+ "corpus": {
+  "prefix": "r2",
+  "scale": 1,
+  "births": 720
+ },
+ "rows": {
+  "P1a": {
+   "label": "1a the food verdict \"only just\" beside \"grows more than it eats\"",
+   "reader": "SECOND",
+   "master": 0,
+   "integration": 57,
+   "banked": 57
+  },
+  "P1b": {
+   "label": "1b \"a small margin\" beside a quarter or more bought in",
+   "reader": "SECOND",
+   "master": 64,
+   "integration": 64,
+   "banked": 64
+  },
+  "P2": {
+   "label": "2 the stores stated as two durations",
+   "reader": "CROSS",
+   "master": 568,
+   "integration": 569,
+   "banked": 569
+  },
+  "P3any": {
+   "label": "3 magic relied upon or common, and no practitioner on the rolls",
+   "reader": "CROSS",
+   "master": 172,
+   "integration": 190,
+   "banked": 190
+  },
+  "P4": {
+   "label": "4 \"three powers stand almost level\" beside a leader far ahead",
+   "reader": "SECOND",
+   "master": 0,
+   "integration": 106,
+   "banked": 106
+  },
+  "P5a": {
+   "label": "5a the hall \"free of the criminals\" beside criminal money reaching the officials",
+   "reader": "SECOND",
+   "master": 0,
+   "integration": 288,
+   "banked": 288
+  },
+  "P5b": {
+   "label": "5b \"Diffuse, no gang\" beside a criminal power",
+   "reader": "SECOND",
+   "master": 0,
+   "integration": 2,
+   "banked": 2
+  },
+  "P6": {
+   "label": "6 a gap naming what the imports bring",
+   "reader": "CROSS",
+   "master": 463,
+   "integration": 296,
+   "banked": 296
+  },
+  "P7a": {
+   "label": "7a two founders",
+   "reader": "GLANCE",
+   "master": 128,
+   "integration": 127,
+   "banked": 128
+  },
+  "P7b": {
+   "label": "7b a harbour origin where no wharf stands",
+   "reader": "CROSS",
+   "master": 0,
+   "integration": 27,
+   "banked": 27
+  },
+  "P8any": {
+   "label": "8 no church, and worship in the economy",
+   "reader": "CROSS",
+   "master": 0,
+   "integration": 220,
+   "banked": 220
+  },
+  "P9": {
+   "label": "9 a weak beasts grade over settled-country text",
+   "reader": "GLANCE",
+   "master": 148,
+   "integration": 149,
+   "banked": 149
+  },
+  "P10": {
+   "label": "10 \"hold the gates\" with no walls",
+   "reader": "SECOND",
+   "master": 18,
+   "integration": 17,
+   "banked": 17
+  },
+  "P11": {
+   "label": "11 a flow card naming a resource the town lacks",
+   "reader": "CROSS",
+   "master": 396,
+   "integration": 411,
+   "banked": 410
+  },
+  "F4": {
+   "label": "F4 an income line naming a working the roster lacks",
+   "reader": "CROSS",
+   "master": 274,
+   "integration": 245,
+   "banked": 245
+  },
+  "P13": {
+   "label": "13 \"… and go on.\" doubled",
+   "reader": "GLANCE",
+   "master": 173,
+   "integration": 172,
+   "banked": 172
+  },
+  "P14": {
+   "label": "14 size words in small places",
+   "reader": "SECOND",
+   "master": 183,
+   "integration": 167,
+   "banked": 167
+  },
+  "P16three": {
+   "label": "16a \"the ruling three\" over fewer",
+   "reader": "GLANCE",
+   "master": 0,
+   "integration": 331,
+   "banked": 331
+  },
+  "P16powers": {
+   "label": "16b two \"The Powers (n)\" counts",
+   "reader": "GLANCE",
+   "master": 0,
+   "integration": 291,
+   "banked": 291
+  },
+  "P17": {
+   "label": "17 non-goods produced locally",
+   "reader": "GLANCE",
+   "master": 681,
+   "integration": 680,
+   "banked": 680
+  },
+  "P18": {
+   "label": "18 catalogue count ranges printed as names",
+   "reader": "GLANCE",
+   "master": 337,
+   "integration": 360,
+   "banked": 360
+  },
+  "P19": {
+   "label": "19 a diagnostic printed as a tension",
+   "reader": "GLANCE",
+   "master": 5,
+   "integration": 7,
+   "banked": 7
+  },
+  "P20": {
+   "label": "20 siege words outside a siege",
+   "reader": "SECOND",
+   "master": 689,
+   "integration": 689,
+   "banked": 689
+  },
+  "NEW1": {
+   "label": "NEW-1 the governance label against the Defense verdict",
+   "reader": "SECOND",
+   "master": 10,
+   "integration": 11,
+   "banked": 11
+  },
+  "NEW2": {
+   "label": "NEW-2 magic income, and no practitioner on the rolls",
+   "reader": "CROSS",
+   "master": 0,
+   "integration": 3,
+   "banked": 3
+  }
+ },
+ "grid": {
+  "r2r-thorp-0": [
+   "F4",
+   "P13",
+   "P14",
+   "P2",
+   "P20",
+   "P8any",
+   "P9"
+  ],
+  "r2s-under_siege-thorp-0": [
+   "F4",
+   "P13",
+   "P16three",
+   "P17",
+   "P2",
+   "P5a",
+   "P8any"
+  ],
+  "r2r-hamlet-0": [
+   "P16three",
+   "P17",
+   "P5a",
+   "P8any"
+  ],
+  "r2s-occupied-hamlet-0": [
+   "P11",
+   "P16three",
+   "P17",
+   "P20",
+   "P5a",
+   "P8any",
+   "P9"
+  ],
+  "r2r-village-0": [
+   "P17",
+   "P2",
+   "P20",
+   "P3any",
+   "P9"
+  ],
+  "r2s-indebted-village-0": [
+   "F4",
+   "NEW2",
+   "P11",
+   "P14",
+   "P17",
+   "P2",
+   "P20",
+   "P3any",
+   "P5a",
+   "P6"
+  ],
+  "r2r-town-0": [
+   "P16powers",
+   "P17",
+   "P18",
+   "P2",
+   "P20"
+  ],
+  "r2s-infiltrated-town-0": [
+   "P17",
+   "P18",
+   "P2",
+   "P20",
+   "P4"
+  ],
+  "r2r-city-0": [
+   "P11",
+   "P16powers",
+   "P17",
+   "P18",
+   "P1b",
+   "P2",
+   "P20",
+   "P4",
+   "P7a"
+  ],
+  "r2s-succession_void-city-0": [
+   "P11",
+   "P16powers",
+   "P16three",
+   "P17",
+   "P18",
+   "P1b",
+   "P2",
+   "P20",
+   "P3any",
+   "P6"
+  ],
+  "r2r-metropolis-0": [
+   "P16powers",
+   "P17",
+   "P18",
+   "P1b",
+   "P2",
+   "P20",
+   "P6"
+  ],
+  "r2s-insurgency-metropolis-0": [
+   "P16powers",
+   "P17",
+   "P18",
+   "P1b",
+   "P2",
+   "P20",
+   "P7a"
+  ]
+ }
+}
