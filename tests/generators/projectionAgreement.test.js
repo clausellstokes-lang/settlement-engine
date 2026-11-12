@@ -52,6 +52,11 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(record({ hooks: [{ hook: 'The iron merchants have doubled their price.' }], resourceAnalysis: { availableResources: ['iron_deposits'] } })))
       .toContain('A hook makes a material scarce that a live local resource yields.');
     expect(details(record({ hooks: [{ hook: 'The iron merchants have doubled their price.' }] }))).toEqual([]);
+    // F4 (REVIEW-AGREE): both directions — a peacetime iron event where the record holds a war
+    const peace = 'A new toll on the iron road has made metal dear. Nobody will say who set it, and the tools still need mending.';
+    const atWar = (hook) => ({ ...record({ hooks: [{ hook }] }), stress: [{ type: 'wartime' }] });
+    expect(details(atWar(peace))).toContain('A hook presumes the peace where the record holds a war.');
+    expect(details(record({ hooks: [{ hook: peace }] }))).toEqual([]);
   });
   test('the safety text naming a mercenary company the defence home does not list', () => {
     const safety = { guardEffectivenessDesc: '(planted) a mercenary company keeps the peace here.' };
@@ -205,6 +210,10 @@ const REVIEW_SEEDS = [
   // F12: "…handles threats the watch cannot" with no watch (rvw12-village-50 and rvw-ten-2, above)
   { seed: 'rvw12-village-6', tier: 'village' }, { seed: 'rvw12b-village-28', tier: 'village' }, { seed: 'rvw12b-village-174', tier: 'village' },
   { seed: 'rvw12b-village-229', tier: 'village' },
+  // F4: a town at war or at the front draws a peacetime iron event; the war line never printed
+  // (rvw12-village-7 and -8: the review's "site reads peace" seeds, at war and at the front; they draw no iron hook)
+  { seed: 'rvw12-village-7', tier: 'village' }, { seed: 'rvw12-village-8', tier: 'village' }, { seed: 'rvw-ten-7', tier: 'city', stress: 'under_siege' },
+  { seed: 'rvw12-town-81', tier: 'town' }, { seed: 'rvw12-city-60', tier: 'city' }, { seed: 'rvw12-city-67', tier: 'city' }, { seed: 'rvw12-metropolis-23', tier: 'metropolis' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
 ];

@@ -26,6 +26,7 @@ import { factsOf } from '../domain/facts/factsOf.js';
 import { offersFoodSurplus } from '../domain/foodSurplus.js';
 import { GRAIN_TOP_UP } from './economy/primaryTradeLists.js';
 import { TRADE_LINE_BANDS, tradeBandContradictsLabel } from './economy/prosperity.js';
+import { PEACE_IRON_HOOKS } from './economy/outlookHookSiblings.js';
 import {
   MATERIAL_RESOURCE_KEYS,
   STRATEGIC_CLAUSES,
@@ -321,6 +322,9 @@ const LOCAL_INCOME_WORDS = Object.freeze([
 const COURT_SITS = /\b(?:a court exists|the court can try|before the court|tried at the court|the court sits|functioning court|with a working court|only a court|prosecution is real|real prosecution)/i;
 const COURT_ABSENT = /\b(?:with no court|without a court|without courts|without a working court|without consistent courts|without prison or courts|no reliable court|lack of reliable courts)/i;
 
+/** The peacetime iron events and their twins (economy/outlookHookSiblings.js): each presumes the peace. */
+const PEACE_IRON_TEXTS = new Set(PEACE_IRON_HOOKS.flat());
+
 /** The town's watch named as its own ("the watch"); "There is no watch" names none. */
 const WATCH_NAMED = /(?<!\bno )\bthe watch\b/i;
 
@@ -361,7 +365,8 @@ const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floo
  *   strengths  a terrain strength with nothing of the town's under it (the table is total: a strength
  *              the table does not know is a finding, so the table cannot fall behind the terrain data)
  *   strategic  a yield clause of the strategic line the town's resources do not stand on
- *   hooks      a viability hook that names a war the record does not hold, or a material the town has
+ *   hooks      a viability hook that names a war the record does not hold, presumes the peace where it holds
+ *              one, or makes scarce a material the town has
  *   income     an income line that names a local resource ("Local ore", "Local quarry") the town lacks
  *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
  *   gate       the safety text naming gates the gate home does not hold
@@ -409,6 +414,10 @@ export function projectionAgreementFindings(settlement) {
     const hook = String(entry?.hook || '');
     if (/\b(?:war|armies|siege)\b/i.test(hook) && facts.warState === 'peace') {
       resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook asserts a war the record does not hold.', facts.warState));
+    }
+    // F4 (COHERENCE-AGREE-3): both directions — a peacetime iron event where the record holds a war or a front.
+    if (PEACE_IRON_TEXTS.has(hook) && facts.warState !== 'peace') {
+      resource.push(finding(`economicViability.plotHooks[${index}]`, 'A hook presumes the peace where the record holds a war.', facts.warState));
     }
     for (const [word, material] of SCARCE_MATERIAL_WORDS) {
       const live = word.test(hook) ? liveMaterialFor(material, available) : null;

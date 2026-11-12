@@ -445,6 +445,16 @@ export const sortBySeverity = (r) => {
   return r.sort((o, d) => (s[o.severity] ?? 9) - (s[d.severity] ?? 9));
 };
 
+/**
+ * THE WAR FACT'S ONE HOME AT THE HOOK SITE (COHERENCE-AGREE-3, REVIEW-AGREE F4). The hook site's partial
+ * record carried no crisis container, so `warStateOf` (domain/facts/warState.js) read every town at peace
+ * and the war line could never print. The birth's crises are the stress types it resolved (resolveStress);
+ * handed over as the container the final record carries, the site reads the war from the same home and
+ * the same reader the coherence receipt reads (measured on 1,426 births: the site and the final record agree
+ * on every one). @param {{ stressTypes?: unknown }} cfg
+ */
+const birthStressorsOf = (cfg) => (Array.isArray(cfg?.stressTypes) ? cfg.stressTypes.filter((type) => typeof type === 'string').map((type) => ({ type })) : []);
+
 export const generateEconomicViability = (settlement, terrainType = null, nearbyResources = []) => {
   const issues = [];
   const warnings = [];
@@ -479,7 +489,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   suggestions.push(...(waterAnalysis.suggestions || []));
 
   // Food balance plot hooks
-  const stabilityAnalysis = deriveSupplyRiskAnalysis(population, terrain, insts, cfg, foodAnalysis.foodBalance, () => factsOf({ institutions: insts, config: cfg, tier, economicState })); // CENSUS-1f: the outlook hooks resolve (the fields at hand only, R-Z)
+  const stabilityAnalysis = deriveSupplyRiskAnalysis(population, terrain, insts, cfg, foodAnalysis.foodBalance, () => factsOf({ institutions: insts, config: cfg, tier, economicState, stressors: birthStressorsOf(cfg) })); // CENSUS-1f: the outlook hooks resolve (the fields at hand only, R-Z)
   issues.push(...stabilityAnalysis.issues);
   warnings.push(...stabilityAnalysis.warnings);
   plotHooks.push(...stabilityAnalysis.plotHooks);

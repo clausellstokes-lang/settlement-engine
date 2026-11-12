@@ -39,6 +39,8 @@ export const PEACE_IRON_HOOKS = Object.freeze([
     'A new toll on the iron road has made metal dear. Nobody will say who set it, and the tools still need mending.']),
 ]);
 export { WAR_IRON_HOOK };
+/** The war states a peacetime event refuses (domain/facts/warState.js :: WAR_STATES, less the peace). */
+const WAR_STATES_REFUSED = Object.freeze(['war: front', 'war: aggressor', 'war: at war']);
 /** COHERENCE-AGREE: the timber line's second event (foodBalance.js prints it), so no one line carries the pool. */
 export const TIMBER_RAFT_HOOK = 'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.';
 export const MODERATE_GAP_TWIN = 'The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin.';
@@ -53,14 +55,20 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
     Object.freeze({ text: WAR_IRON_HOOK, needs: Object.freeze(['institution: smith']), excludes: Object.freeze(['war: peace']) }),
     Object.freeze({
       text: 'War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops arriving. Work slows, and people are starting to complain.',
-      twinOf: WAR_IRON_HOOK, excludes: Object.freeze(['institution: smith']), // the site prints either war line only where the record holds a war
+      // COHERENCE-AGREE-3 (F4): the twin asserts the war too, so it declares the peace it refuses.
+      twinOf: WAR_IRON_HOOK, excludes: Object.freeze(['institution: smith', 'war: peace']), // the site prints either war line only where the record holds a war
     }),
   ]),
   [TIMBER_RAFT_HOOK]: declaredSet(TIMBER_RAFT_HOOK, ['navigable'],
     'The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left in the yards.'),
   // In peace the iron line opens an event of its own (a price, a late cart, a toll), drawn by the
   // place's size with no roll (foodBalance.js prints all three), each with its smith twin.
-  ...Object.fromEntries(PEACE_IRON_HOOKS.map(([text, twin]) => [text, declaredSet(text, ['institution: smith'], twin)])),
+  // COHERENCE-AGREE-3 (F4): each presumes the peace, so each, and its twin, refuses every war state; the site
+  // prints them only where the record holds the peace.
+  ...Object.fromEntries(PEACE_IRON_HOOKS.map(([text, twin]) => [text, Object.freeze([
+    Object.freeze({ text, needs: Object.freeze(['institution: smith']), excludes: WAR_STATES_REFUSED }),
+    Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(['institution: smith', ...WAR_STATES_REFUSED]) }),
+  ])])),
   // CENSUS-3g unit 5 (R-AM read; R-U, R-G — the chair's rulings recorded in the lane doc): the
   // original presumes only the famine band ("Villagers" left the text: its `tier` read false on 110
   // of the 1,000); the moderate gap (Import-Dependent / Pressured, the chair's ruling 1 of

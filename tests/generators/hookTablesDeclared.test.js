@@ -111,7 +111,11 @@ describe('the outlook hooks carry their declarations beside the branches that pr
       for (const a of set[0].needs) expect(assertDeclarable(a).dimension, a).toBeTruthy();
       if (set[1]) {
         expect(set[1].twinOf).toBe(key);
-        expect(set[1].excludes).toEqual(set[0].needs);
+        // RE-SPELLED 2026-11-12 (COHERENCE-AGREE-3, REVIEW-AGREE F4), stricter, not looser: a twin answers its
+        // original's needs AND keeps its original's refusals (the war line's twin asserts the war too, so it
+        // refuses the peace as its original does). For every set whose original refuses nothing — all but the
+        // war line and the three peace events — this is the assertion it was.
+        expect(set[1].excludes).toEqual([...set[0].needs, ...(set[0].excludes || [])]);
       }
     }
     // the [sea] case: the timber twin says no ships
