@@ -45,6 +45,8 @@ const SEEDS = Object.freeze([
   // COHERENCE-POWERS-3, REVIEW-POWERS F4: a power with neither a member nor a line at 1a32c200a (the noble blocs; a
   // Thieves' Guild whose one backer bears no face)
   'rvw-city-31', 'rvw-metropolis-81', 'rvf-plague_onset-town-3',
+  // COHERENCE-POWERS-3, REVIEW-POWERS F6: a crisis power led by a face that leads another power, dealt by a house's share
+  'rvw-hamlet-23', 'rvf-famine-village-5', 'rvf-famine-town-1', 'rvf-famine-metropolis-0',
 ]);
 
 /** @param {string} seed */
@@ -81,8 +83,8 @@ describe('COHERENCE-POWERS item 3 guard — every power has a person, or its dec
     expect(misses).toEqual([]);
   });
 
-  // a face the rule seats (joined at share 0); a face a house's own share already makes the power's first stands as dealt
-  it('a stress power\'s face seated by the rule leads no other power of the town', () => {
+  // COHERENCE-POWERS-3 (F6): by whichever path the face was dealt (the rule's seat or a house's own share)
+  it('a stress power\'s first leads no other power of the town', () => {
     const misses = [];
     for (const seed of SEEDS) {
       const s = births.get(seed);
@@ -90,7 +92,7 @@ describe('COHERENCE-POWERS item 3 guard — every power has a person, or its dec
         const power = nameOf(f);
         if (!stressPowerRowOf(s, f)) continue;
         const first = firstOf(s, power);
-        if (!first || first.institution?.kind !== 'house' || first.memberships.find((m) => m.power === power).share !== 0) continue;
+        if (!first || first.institution?.kind !== 'house') continue;
         const other = (first.memberships || []).find((m) => m.rank === 1 && m.power !== power);
         if (other) misses.push(`${seed}: ${first.name} leads ${power} and ${other.power}`);
       }

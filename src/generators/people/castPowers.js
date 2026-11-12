@@ -405,6 +405,7 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
   }
 
   seatStressPowers(settlement, all, members);
+  settleCrisisLeaders(settlement, all);
 
   // ── THE IMPORTANCE BAND, from the rank ──────────────────────────────────────────────────
   // The retired rung roll expressed itself through `importance` on EVERY figure (densityRungs.js:
@@ -452,6 +453,37 @@ function seatStressPowers(settlement, all, members) {
       || !!row.house.names?.test(String(house.name || ''))) : null;
     const card = byHouse || (row.cast ? faceFrom((house) => /** @type {RegExp} */ (row.cast).test(String(house.name || ''))) : null);
     if (card) card.memberships.push({ power, rank: 1, share: 0, veiled: row.veiled === true || isVeiledPower(f) });
+  }
+}
+
+/**
+ * A CRISIS'S POWER IS NEVER LED BY A PERSON WHO LEADS ANOTHER POWER (COHERENCE-POWERS-3, F6; REVIEW-POWERS F6): by
+ * whichever path that person was dealt (a house's share as much as the face seatStressPowers seats), the first of a power
+ * of the stress table who is first of another power gives the first rung to the next of the power's members who leads
+ * none (ranks re-dealt in their order); where no such member stands, the power keeps no one and the page prints its
+ * declared line (data/stressPowerFaces.js). An appointed power (the occupier's man) is minted and never shared. Draw-free.
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} all
+ */
+function settleCrisisLeaders(settlement, all) {
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  /** @param {Record<string, any>} card @param {string} power */
+  const leadsElsewhere = (card, power) => (card.memberships || []).some((m) => m.rank === 1 && m.power !== power);
+  for (const f of factions) {
+    const power = nameOf(f);
+    const row = stressPowerRowOf(settlement, f);
+    if (!row || row.appointed) continue;
+    const members = all.filter((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === power));
+    const own = (/** @type {Record<string, any>} */ c) => c.memberships.find((m) => m.power === power);
+    const first = members.find((c) => own(c).rank === 1);
+    if (!first || !leadsElsewhere(first, power)) continue;
+    const ranked = [...members.filter((c) => Number.isInteger(own(c).rank)).sort((a, b) => own(a).rank - own(b).rank),
+      ...members.filter((c) => !Number.isInteger(own(c).rank))];
+    const next = ranked.find((c) => c !== first && !leadsElsewhere(c, power));
+    if (!next) {
+      first.memberships = first.memberships.filter((m) => m.power !== power);
+      continue;
+    }
+    [next, ...ranked.filter((c) => c !== next)].forEach((c, i) => { own(c).rank = i < RANKS ? i + 1 : null; });
   }
 }
 
