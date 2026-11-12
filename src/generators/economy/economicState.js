@@ -825,14 +825,16 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeNormalized,
     _foodSec,
   );
+  const prosperityLabel = deriveProsperityLabel(baseProsperity, config, institutions); // drawn first, as before
   return {
       tier: tier,
-      prosperity: deriveProsperityLabel(baseProsperity, config, institutions),
+      prosperity: prosperityLabel,
       situationDesc: deriveEconomicSituationDesc(
         config,
         tier,
         institutions,
         _foodSec,
+        prosperityLabel, // COHERENCE-AGREE-3 (F11): the trade line reads the label printed beside it
       ),
       incomeSources: incomeNormalized,
       primaryExports: primaryExports,

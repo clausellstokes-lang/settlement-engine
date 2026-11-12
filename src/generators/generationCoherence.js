@@ -25,6 +25,7 @@ import {
 import { factsOf } from '../domain/facts/factsOf.js';
 import { offersFoodSurplus } from '../domain/foodSurplus.js';
 import { GRAIN_TOP_UP } from './economy/primaryTradeLists.js';
+import { TRADE_LINE_BANDS, tradeBandContradictsLabel } from './economy/prosperity.js';
 import {
   MATERIAL_RESOURCE_KEYS,
   STRATEGIC_CLAUSES,
@@ -360,6 +361,7 @@ const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floo
  *   safety     the safety text naming a mercenary company the defence home does not list; saying a
  *              court sits where the defence home has none, or that none sits where it has one
  *   market     the economic situation, or the food record's foodways line, naming a market the market home says the town lacks
+ *   trade      the economic situation's trade line saying the opposite of the prosperity label (prosperity.js)
  *   sources    available fields, floodplain or grazing that the food record does not count as a source
  *   surplus    an income line selling a surplus the food record does not hold (offersFoodSurplus)
  *   land       a shortage import whose bracket says a kind of land is spent beside a live resource of that land
@@ -426,6 +428,12 @@ export function projectionAgreementFindings(settlement) {
   }
   if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.situationDesc || ''))) {
     resource.push(finding('economicState.situationDesc', 'The economic situation names a market the town does not have.'));
+  }
+  // F11 (COHERENCE-AGREE-3): the trade line against the prosperity label printed beside it.
+  const situation = String(settlement?.economicState?.situationDesc || '');
+  const tradeBand = TRADE_LINE_BANDS.find(([words]) => words.test(situation));
+  if (tradeBand && tradeBandContradictsLabel(tradeBand[1], settlement?.economicState?.prosperity)) {
+    resource.push(finding('economicState.situationDesc', 'The trade line says the opposite of the prosperity label beside it.', `${tradeBand[1]}; ${settlement?.economicState?.prosperity}`));
   }
   // F6 (COHERENCE-AGREE-3): the food record's foodways line reads the market home too.
   if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.foodSecurity?.foodRecord?.foodwaysLine || ''))) {

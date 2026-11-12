@@ -105,6 +105,14 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(paths(foodways('(planted) Markets structure urban food supply.', []))).toContain('economicState.foodSecurity.foodRecord.foodwaysLine');
     expect(details(foodways('(planted) Markets structure urban food supply.', [{ name: 'Weekly market' }]))).toEqual([]);
   });
+  test('F11: the trade line against the prosperity label beside it', () => {
+    const said = (line, prosperity) => details(record({ economicState: { situationDesc: line, prosperity } }));
+    const slow = 'Commerce is sluggish; little is bought or sold and many crafts are in decline.';
+    expect(said(slow, 'Prosperous')).toContain('The trade line says the opposite of the prosperity label beside it.');
+    expect(said(slow, 'Poor')).toEqual([]);
+    expect(said("Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.", 'Struggling')).toContain('The trade line says the opposite of the prosperity label beside it.');
+    expect(said('Trade proceeds at an ordinary pace for a settlement of this size.', 'Wealthy')).toEqual([]);
+  });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
     expect(details(grown(95, ['Grain']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
@@ -181,6 +189,8 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-city-1', tier: 'city' }, { seed: 'rvw12b-city-33', tier: 'city' }, { seed: 'rvw12b-city-136', tier: 'city' },
   // F6: the foodways line names a market the market home denies
   { seed: 'rvw12-village-0', tier: 'village' }, { seed: 'rvw12-village-14', tier: 'village' },
+  // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
+  { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
