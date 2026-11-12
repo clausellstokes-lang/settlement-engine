@@ -245,7 +245,7 @@ const GOVERNANCE_LABELS = [
   { label: 'Stable',         reading: 'Settled governance with no dominant strain.' },
   { label: 'Ordered',        reading: 'Stable under a strong military presence.' },
   { label: 'Tense',          reading: 'Stable but under external threat or monster pressure.' },
-  { label: 'Fragile',        reading: 'Held by private security, with no public law.' },
+  { label: 'Fragile',        reading: 'Held by private security more than by the public law.' },
   { label: 'Vulnerable',     reading: 'Prosperous but underdefended.' },
   { label: 'Unstable',       reading: 'Pervasive organized crime, up to outright criminal governance.' },
   { label: 'Enforced Order', reading: 'Authoritarian control.' },
