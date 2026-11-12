@@ -329,3 +329,48 @@ record:safetyProfile.plotHooks: top5 0.7377 > ceiling 0.7238
 - the lighting census re-take (this seat added a test file and titles after its F15 re-take; the merge took the line's figures);
 - the edge bundles re-emitted as the last commit, alone;
 - a final L3 diff of the post-ruling commits (each cure carries its own measure in its commit body).
+
+# PART FOUR — the fourth seat (COHERENCE-AGREE-4, 2026-11-12), from 8be24bf61
+
+**THIS PART IS KEPT CURRENT AS THE SEAT WORKS; its last section says where it stands.**
+
+## The corpus and the field diffs (L2, L3)
+
+The third seat's L2 (2,866 births, defined in PART THREE) plus the golden's 525, re-built in the seat's scratch space
+(births through `birthConfig({ ...DEFAULT_CONFIG, ...dials, settType })`, forced stresses as `selectedStresses: [s]`; the
+golden as `generatorGoldenMaster.test.js` births it). Every leaf flattened; array indices folded to `[]`; a leaf
+"moves" when its value differs. Corpora taken at 65ce74ce6, 303396f74, 6b932d3e8, f8932a3e5, e883780bb (the
+integration line the lane holds), 8be24bf61 (the seat's start) and each tip of this seat.
+
+## Per item: the commit, the pin, the count before → after
+
+| Item | Commit | Pin (red at the parent → green) | Count before → after |
+|---|---|---|---|
+| 1 (a) the theocratic twin's church | 64a62785e | coherenceAgreeCures "item 1 (a)"; the walker's arm 1 | walker fresh 5 → 4; the line prints in 39 births, its twin in 0, 0 without a sacred house |
+| 1 (b) F5's walls twin | cc7e60d82 | the walker's arm 1 lists it at the parent | walker fresh 4 → 3; 38 births, all palisades, 0 without walls or with a gate |
+| 1 (c) three receipt messages | — | — | **STOP**: the walker has no arm-1 rule for a check's diagnostics (below). Fresh 3, unbanked |
+| 2 (i) court and prison dimensions | f6000464f | coherenceAgreeCures "item 2" | the home's prison and the writer's flag disagree in 0 of 3,391 |
+| 2 (ii) the three court-without-prison lines | 4d12a1447 | coherenceAgreeCures "item 2 (ii)" | declared 0 → 3; 347 printings, 0 where court ∧ ¬prison fails |
+| 3 Floodplain Agriculture | — | — | **STOP**: no such strength in the tree (below) |
+| 4 the repetition guard | — | — | waits on the guard lane's tip |
+
+**L3, the seat's own commits:** 8be24bf61 → 4d12a1447, 0 leaves move in 3,391 births.
+
+## The STOPs raised
+
+1. **Item 1 (c).** The presumed-things walker's arm 1 reads every literal under `src/generators`; its arm 2 already
+   puts the receipt out of reach (`NOT_PRINTED['.generationCoherenceReceipt']`), arm 1 has no counterpart, and the
+   register's nine reasons hold none that is true of a diagnostic. What the walker would need
+   (`presumedThings.shared.mjs :: scanSource`, PRESUME's file): a literal passed as the `detail` of
+   `generationCoherence.js :: finding` is the receipt's finding and is not read. Not declared, not banked.
+2. **Item 3.** "Floodplain Agriculture" is a chain (`supplyChainData.js :: floodplain_agriculture`), never a strength.
+   Strengths standing only on a depleted resource, read through `STRENGTH_SUPPORT` with each condition: 0 of 3,391.
+   The depleted-floodplain chain: 15 L2 births, all "impaired"; none exports its outputs; the food record and
+   "Grain Sales: Grain purchased…" agree. What is left is the Economics tab's chain card, which prints the static
+   table's outputs under "(depleted)" and "impaired" — and does so for every depleted chain (1,846 of 3,391 births).
+   A design question, in files not the lane's.
+3. **The A′ record (item 5).** 6b932d3e8 moves labels the draft record does not declare, all inside the 538 L2 +
+   2 golden holders: the golden prosperity row `town|germanic|auto|random_trade|civilized|gm-seed-a` Comfortable →
+   Moderate; the safety label in 15 L2 (9 toward danger); public legitimacy in 22 (13 down); condition severity in 5.
+   The holders are re-born downstream of the roster (institutions 318, npcs 407, relationships 316, conflicts 220 …).
+   Put to the chair: declare as measured, or narrow the cure.
