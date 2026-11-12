@@ -149,7 +149,9 @@ export function institutionsWithServices(settlement) {
         backs: backers.get(key) || [],
         // PEOPLE-6 LINKS: the house's representative (null for a house with no face)
         // COHERENCE-POWERS (cure (i)): the seat's house where a house leads is faced by the leader
-        face: faces.get(key) || seatHouseFaceOf(/** @type {any} */ (settlement), key) || null,
+        face: faces.get(key) || seatHouseFaceOf(/** @type {never} */ (settlement), key) || null,
+        // COHERENCE-POWERS: the face is the seat holder's, not this house's own (it names both hats)
+        seatFaced: !faces.get(key) && !!seatHouseFaceOf(/** @type {never} */ (settlement), key),
         // X-45: the DM spoke, even to say nobody (the mark outlives an emptied list)
         authored: spoken.has(i),
         // X-46 car 3: the place, not a house (its own group at the foot of the tab)
@@ -232,10 +234,10 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
  * car 3) marks the place rather than a house: no Backs line and no editor.
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, settlement = null }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null }) {
   const mobile = useIsMobile();
   // COHERENCE-POWERS: a face that is not this house's own (the seat's house, faced by the dual-hat leader)
-  const seatFaced = !!face && face.institution?.key !== inst.name && !!cardOfficeOf(face);
+  const seatFaced = seatFacedRow && !!face && !!cardOfficeOf(face);
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
   // X-20 (c): the card is always open; a link to the house scrolls it to the top.
@@ -352,9 +354,9 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
       </div>
       {/* THE FLUSH RULE (X-44): the houses sit edge to edge, parted by their own hairlines. */}
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
-        {houses.map(({ inst, category, label, services, backs, authored, face }, i) => (
+        {houses.map(({ inst, category, label, services, backs, authored, face, seatFaced }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} authored={authored} sets={sets}
-            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} settlement={settlement} />
+            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} />
         ))}
       </div>
       {/* THE FABRIC OF THE PLACE (X-46 car 3): the dwellings, the well, the church walk — the place
