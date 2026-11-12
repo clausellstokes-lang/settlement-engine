@@ -157,6 +157,19 @@ export function houseKindOf(house) {
 }
 
 /**
+ * Does the roster hold an open, face-bearing house of `kind` — a house a ruler of that kind could come from
+ * (the candidates `dualHatHouseOf` draws, COHERENCE-POWERS 2B: a council of a kind is drawn only where one stands)?
+ * @param {RosterRow[]} institutions @param {string} kind @returns {boolean}
+ */
+export function hasHouseOfKind(institutions, kind) {
+  return (Array.isArray(institutions) ? institutions : []).some((house) => {
+    if (!house || isFabricInstitution(house) || isHideableHouse(house)) return false;
+    const face = faceOfInstitution(house);
+    return typeof face === 'string' && face !== FACE_SEAT && houseKindOf(house) === kind;
+  });
+}
+
+/**
  * THE DUAL HAT (COHERENCE-POWERS, the owner's word of 2026-11-11: "whoever leads teh town, in any type
  * of government is wearing a dual hat (where appropraite) they come from an institution, and are elevated
  * yet still tied to an institution"): the house the governing power's leader comes from, or null where

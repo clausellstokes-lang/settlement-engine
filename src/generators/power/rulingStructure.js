@@ -13,7 +13,7 @@ import {
   computeFactionRelationships,
   computePublicLegitimacy,
 } from '../factionDynamics.js';
-import { inferFactionCategory } from './factionCategories.js';
+import { inferFactionCategory } from './factionCategories.js'; import { drawCouncilOfAKind } from './rulerKin.js'; // COHERENCE-POWERS 2B
 import { applyStressEventFactions } from './stressFactions.js';
 import { annotateFactionStanding } from './factionStanding.js';
 import { buildGovernanceLabels } from './governanceNarrative.js';
@@ -163,8 +163,7 @@ export const generatePowerStructure = (
     },
     topCategory = Object.entries(priorityByCategory).reduce((best, entry) => (best[1] > entry[1] ? best : entry))[0],
     topPriority = priorityByCategory[topCategory];
-  let governingFaction,
-    govModifier = null;
+  const chooseGoverning = (/** @type {string} */ topCategory, /** @type {number} */ topPriority) => { let governingFaction, govModifier = null; // COHERENCE-POWERS 2B: drawn through rulerKin.js :: drawCouncilOfAKind
   if (govBody) {
     const modifier =
         topPriority > 65
@@ -310,6 +309,7 @@ export const generatePowerStructure = (
                             magic: 'Arcane Council',
                           }[topCategory]) ||
                         'Town Council');
+  return [governingFaction, govModifier]; }; const [governingFaction, govModifier] = drawCouncilOfAKind(chooseGoverning, topCategory, topPriority, priorityByCategory, govBody, nativeInstitutions);
   let informalModifier = null;
   govBody ||
     (['thorp', 'hamlet', 'village'].includes(tier) && topPriority > 65
