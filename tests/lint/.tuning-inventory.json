@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "655b0ae3b4fd104f0e1f9af6d414b2256e6ab00a",
+  "measuredAtSha": "370d18804ef2641ff4a23c65b5358b38807eb5d5",
   "measuredBy": "COHERENCE-UPKEEP",
   "date": "2026-11-12",
-  "note": "lane/coherence-upkeep-2026-11-12: KEEP_TUNING and KEEP_SCALE_TUNING minted (draft) in src/domain/facts/keep.js; the five defence gates and the hired terms read them (bare decimals in defenseGenerator.js fall); the chair rulings of 2026-11-12 on item 4",
+  "note": "Struggling funded 0 -> 0.3, the chair ruling on the wider-corpus STOP",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1062,7 +1062,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 984,
+      "line": 987,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -1196,10 +1196,10 @@
       "idiom": "literal",
       "keys": 7,
       "line": 39,
-      "spanDigest": "e15b0961f9dfe5e3b058821b5bf03d31db0cf80fa130334928437fcb24ace1f1",
+      "spanDigest": "0a94ddb381c843a2d64c57af568d1c6f8c86923f669d733faade8424277eb613",
       "leaves": {
         "Struggling.bought": 0.4,
-        "Struggling.funded": 0,
+        "Struggling.funded": 0.3,
         "Subsistence.bought": 0.55,
         "Subsistence.funded": 0.3,
         "Poor.bought": 0.55,
@@ -4511,7 +4511,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 455,
+      "line": 457,
       "spanDigest": "bfb9f3afad0fbf5a97b4267b6097e8e11f95abf8950fc1e2b5ff9ad9cc7133ec",
       "leaves": {
         "YEAR_WEEKS": 52,
