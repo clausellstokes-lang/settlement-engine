@@ -405,3 +405,19 @@ describe('F5 (a): the mountain pass says the terrain it requires, and the geogra
     expect(RESOURCE_DATA.defended_pass.terrain).toBeUndefined();
   });
 });
+
+/**
+ * F5 (d) (COHERENCE-AGREE-6): the wizard reads the pass's own row, as it reads `requires` for the crossroads. Off the
+ * mountains the pass is not OFFERED, says why, and may still be forced; the random roll's pool (`compatible`) is
+ * unchanged.
+ */
+describe('F5 (d): the wizard offers the mountain pass on the mountains only', () => {
+  test('hills: compatible (the pool) but not offered, with the reason; mountain: offered', async () => {
+    const { getCompatibleResources } = await import('../../src/domain/resourceTerrainCompatibility.js');
+    const pass = (terrain) => getCompatibleResources('road', terrain).find((r) => r.key === 'defended_pass');
+    expect(pass('hills')).toMatchObject({ compatible: true, offered: false, incompatibleReason: 'Only available in mountain terrain' });
+    expect(pass('mountain')).toMatchObject({ compatible: true, offered: true, incompatibleReason: null });
+    // a row with no terrain law keeps its offer
+    expect(getCompatibleResources('road', 'hills').find((r) => r.key === 'grain_fields')).toMatchObject({ offered: true });
+  });
+});
