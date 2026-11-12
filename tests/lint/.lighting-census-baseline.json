@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "1981a999d83e9db4ee7cb130fc6c23d88b890184",
+  "measuredAtSha": "67278c2c16ea01fdde7125c1d27cba6b41a63957",
   "measuredBy": "COHERENCE-POWERS-2",
   "date": "2026-11-12",
-  "note": "the PRESUME final-tip merge 1981a999d: PRESUME test files joined the lane",
-  "files": 3205,
+  "note": "item 3: one new test file, tests/generators/people/stressPowersFaced.test.js",
+  "files": 3206,
   "parked": 397,
-  "credited": 2808,
-  "titles": 29125,
-  "suiteTitles": 7878
+  "credited": 2809,
+  "titles": 29129,
+  "suiteTitles": 7879
 }
