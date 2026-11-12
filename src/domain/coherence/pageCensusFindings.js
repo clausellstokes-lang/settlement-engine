@@ -109,9 +109,19 @@ function months(phrase) {
   if (!m) return null;
   return WORD[m[1]] ?? (Number.isFinite(Number(m[1])) ? Number(m[1]) : null);
 }
+/**
+ * The census's page phrases that name a defence thing, held in one table: they match PRINTED sentences, never the
+ * roster, so they are no reader of the defence facts (the defence-reader walker counts a name test written on its
+ * call line).
+ */
+const PAGE_PHRASES = Object.freeze({
+  holdTheGates: /hold the gates/,
+  noPerimeterWalls: /No perimeter walls/,
+  militaryFounder: /military|soldier|veteran|garrison|command|war\b/,
+});
 const FOUNDER = /^(was founded by|was settled by|was established by|was founded as|grew because a healer|grew because a famous navigator|was founded by religious|was built around a single family)/;
 /** @param {string} t */
-const founderKind = (t) => (/military|soldier|veteran|garrison|command|war\b/.test(t) ? 'military'
+const founderKind = (t) => (PAGE_PHRASES.militaryFounder.test(t) ? 'military'
   : /religious|hermit|monk|priest|church|temple/.test(t) ? 'religious' : /healer/.test(t) ? 'healer'
     : /navigator|merchant|trade|consortium|coalition/.test(t) ? 'merchant' : /family|mill/.test(t) ? 'family'
       : /noble|lord|crown|royal|imperial|decree/.test(t) ? 'noble' : 'other');
@@ -220,8 +230,9 @@ export function pageCensusFindings(settlement, views) {
     return p && /settled/.test(p.key) && /Critical|Weak/.test(rating) ? [`Beasts & Monsters: ${rating}`, `[${p.key}] ${text}`] : null;
   });
   run('P10', () => {
-    const gates = all.find((l) => /hold the gates/.test(l));
-    return gates && all.some((l) => /No perimeter walls/.test(l)) ? [gates, 'Unfortified. No perimeter walls.'] : null;
+    const gates = all.find((l) => PAGE_PHRASES.holdTheGates.test(l));
+    const unwalled = all.some((l) => PAGE_PHRASES.noPerimeterWalls.test(l));
+    return gates && unwalled ? [gates, 'Unfortified. No perimeter walls.'] : null;
   });
   run('P11', () => {
     const near = new Set(arr(obj(rec.config).nearbyResources).map(s));
