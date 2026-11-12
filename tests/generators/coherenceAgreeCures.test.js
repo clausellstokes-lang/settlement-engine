@@ -374,3 +374,16 @@ describe('F2: a good only refused chains make is neither sold nor produced local
     }), "a refused chain's good stands on a trade list");
   });
 });
+
+/**
+ * F8 (ii) (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): the flag bag's prison and hospital are the defence
+ * home's answers (`defenseFactsOf`), off the live roster: the lane's own two private readers in
+ * `priorityHelpers.js :: getInstitutionNames`, cured rather than banked when the walker learned the four atoms.
+ */
+describe('F8 (ii): the flag bag reads the prison and the hospital from the defence home', () => {
+  test('a ruined prison holds no one; a gaol does', () => {
+    expect(getInstFlags({}, [{ name: 'Large prison', status: 'ruined' }]).inst.hasPrison).toBe(false);
+    expect(getInstFlags({}, [{ name: 'Village gaol' }]).inst.hasPrison).toBe(true);
+    expect(getInstFlags({}, [{ name: 'Large prison' }]).inst.hasPrison).toBe(true);
+  });
+});

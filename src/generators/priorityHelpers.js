@@ -58,7 +58,7 @@ const getInstitutionNames = (institutions = []) => {
     hasCharterHall:   hasAny(names, ["adventurers' charter hall","adventurers' guild hall","multiple adventurers'","adventurers' guild","hireling hall"]),
     hasWalls:         hasAny(names, ['walls','citadel','gates (if walled)','inner citadel','massive walls','palisade','earthwork']),
     hasGates:         home.hasGate,
-    hasPrison:        hasAny(names, ['prison','stocks','large prison','massive prison']),
+    hasPrison:        home.hasPrison, // COHERENCE-AGREE-6 (F8 (ii)): the prison is the defence home's atom (defenseFactsOf.hasPrison)
     // COHERENCE-AGREE: the court is the defence home's answer (defenseFactsOf.hasCourt), the same names
     // off the live roster — a ruined courthouse tries no case.
     hasCourtSystem:   home.hasCourt,
