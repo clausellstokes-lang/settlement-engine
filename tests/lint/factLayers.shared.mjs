@@ -101,6 +101,14 @@ export function leafTouches(row, record, modules, stratumOf) {
     if (row.call === 'factsGetter') exhaust(facts[getter]);
     else if (getter === 'hasInstitution') for (const kind of INSTITUTION_PROBES) facts.hasInstitution(kind);
     else if (getter === 'hasOtherNpc') facts.hasOtherNpc(Array.isArray(record.npcs) ? record.npcs[0] : 0);
+  } else if (row.call === 'perChain' || row.call === 'perHouse') {
+    // the chain a leaf reads is read through the view; the house NAMES a card asks about are the walker's own
+    // argument, taken from the raw record, so asking costs the leaf no read of the economy
+    const chains = row.call === 'perChain' ? /** @type {any} */ (view).economicState?.activeChains : record.economicState?.activeChains;
+    for (const chain of Array.isArray(chains) ? chains : []) {
+      if (row.call === 'perChain') exhaust(modules[row.module][row.exported](chain, view));
+      else for (const house of chain?.processingInstitutions || []) exhaust(modules[row.module][row.exported](view, house));
+    }
   } else if (row.call === 'crimeLists') {
     exhaust(modules[row.module][row.exported]({ seats: /** @type {any} */ (view).powerStructure?.factions, estate: /** @type {any} */ (view).institutions }));
   } else {

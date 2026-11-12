@@ -68,7 +68,8 @@ export const STRATA = Object.freeze({
  * @property {number} layer the fact's layer (the layer map's §2a value layer, unless the row says otherwise)
  * @property {string} module the leaf's module, from `src/`
  * @property {string} exported the export the walker calls; `factsOf.<getter>` for a vocabulary home
- * @property {'record'|'crimeLists'|'factsGetter'|'factsCall'} call how the walker calls it on a record
+ * @property {'record'|'crimeLists'|'factsGetter'|'factsCall'|'perChain'|'perHouse'} call how the walker calls it on a
+ *   record (`perChain`: once per active chain, `(chain, record)`; `perHouse`: once per chain's house, `(record, name)`)
  * @property {ReadonlyArray<string>} reads the strata it touches (keys of STRATA)
  * @property {boolean} [stored] it hands on one stored value as it is: it may read its own stratum
  * @property {string} [note] where this table differs from the layer map, and why
@@ -91,6 +92,7 @@ const home = (getter, layer, reads, more = {}) => leaf({
  */
 export const LEAVES = Object.freeze({
   // ── layer 1: the base facts ──
+  presenceOnCard: leaf({ layer: 1, module: 'domain/facts/presence.js', exported: 'houseHere', call: 'perHouse', reads: ['institutions'] }),
   terrain: home('terrain', 1, ['config']),
   route: home('route', 1, ['config']),
   water: home('water', 1, ['config']),
@@ -123,6 +125,7 @@ export const LEAVES = Object.freeze({
   prosperity: home('prosperity', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),
   foodEndurance: leaf({ layer: 2, module: 'domain/defense/defenseFacts.js', exported: 'foodEnduranceOf', call: 'record', reads: ['economicState'] }),
+  chainCarrier: leaf({ layer: 2, module: 'domain/facts/chainCarrier.js', exported: 'chainCarrierOf', call: 'perChain', reads: ['config', 'economicState'] }),
   readiness: leaf({ layer: 2, module: 'domain/facts/factLayers.js', exported: 'defenseProfile.readiness', call: 'record', reads: ['defenseProfile'], stored: true,
     note: 'the stored readiness: the defence profile is layer 2 by value; born at assembly (NEW-1\'s step order)' }),
   // ── layer 3: over the powers ──
@@ -135,7 +138,13 @@ export const LEAVES = Object.freeze({
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs'], {
     note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked',
   }),
+  beastsReadiness: leaf({ layer: 3, module: 'domain/facts/beastsReadiness.js', exported: 'beastsReadinessOf', call: 'record', reads: ['config', 'defenseProfile'] }),
+  leaderLead: leaf({ layer: 3, module: 'domain/facts/leaderLead.js', exported: 'leaderLeadOfRecord', call: 'record', reads: ['powerStructure'] }),
+  powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure'],
+    note: 'the one derivation of both lists the Power tab prints (the contenders and the roster); the fault of 16b is that both are titled alike, not a second derivation' }),
   // ── layer 4: over the cast ──
+  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['economicState', 'resourceAnalysis', 'tier'] }),
+  founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
   hasOtherNpc: home('hasOtherNpc', 4, ['npcs'], { call: 'factsCall' }),
   magicPractitioners: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'magicPractitioners', call: 'record', reads: ['institutions', 'npcs'] }),
   magicReliance: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'deriveMagicReliance', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'] }),
@@ -147,17 +156,12 @@ export const LEAVES = Object.freeze({
 
 /**
  * THE LEAVES THE CLASS TABLE NAMES AND THE SOURCE DOES NOT HAVE YET, with the layer each will take (the
- * layer map's §2b, READ). A row leaves this list the commit its leaf is written, and joins LEAVES.
+ * layer map's §2b, READ). A row leaves this list the commit its leaf is written, and joins LEAVES. W2-A-LEAVES
+ * wrote seven (presence on a card, the chain's carrier, beasts readiness, the leader's lead, the powers' lists,
+ * the imports as printed, the founder); the eighth is the agreement lane's F4, built there.
  * @type {Readonly<Record<string, { layer: number, reads: ReadonlyArray<string>, owner: string }>>}
  */
 export const LEAVES_OWED = Object.freeze({
-  presenceOnCard: Object.freeze({ layer: 1, reads: Object.freeze(['institutions']), owner: 'W2-A-LEAVES' }),
-  importsAsPrinted: Object.freeze({ layer: 2, reads: Object.freeze(['economicState']), owner: 'W2-A-LEAVES' }),
-  beastsReadiness: Object.freeze({ layer: 3, reads: Object.freeze(['defenseProfile', 'config']), owner: 'W2-A-LEAVES' }),
-  powersList: Object.freeze({ layer: 3, reads: Object.freeze(['powerStructure']), owner: 'W2-A-LEAVES' }),
-  founder: Object.freeze({ layer: 4, reads: Object.freeze(['history']), owner: 'W2-A-LEAVES' }),
-  leaderLead: Object.freeze({ layer: 3, reads: Object.freeze(['powerStructure']), owner: 'W2-A-LEAVES' }),
-  chainCarrier: Object.freeze({ layer: 2, reads: Object.freeze(['economicState', 'config']), owner: 'W2-A-LEAVES' }),
   workedHere: Object.freeze({ layer: 2, reads: Object.freeze(['economicState', 'institutions']), owner: 'COHERENCE-AGREE (F4)' }),
 });
 

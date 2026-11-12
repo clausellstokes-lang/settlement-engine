@@ -125,3 +125,29 @@ export function revenuesOffTheLists(settlement) {
     drawKind: 'A',
   }).map((home) => ({ text: home.text, desc: home.desc }));
 }
+
+/**
+ * THE IMPORTS AS PRINTED (W2-A-LEAVES, 2026-11-12; the class table's pattern 6: the page printed two lists of
+ * imports as one — the record's `primaryImports` and the terrain's critical imports beside them — and the gap
+ * reader read only the first, so a gap named a good the Imports line shows arriving, 296 of 720). ONE list:
+ * the record's imports, then each terrain-critical import no import already names (the Economics tab's own
+ * composition, moved here verbatim), through `displayTradeList` (the export wins; the category errors and the
+ * undeclared luxuries leave). The Imports pills and the gap reader both read this; nothing composes it again.
+ *
+ * Layer 4: it reads the economy and the resource analysis (stored at layer 3).
+ * @param {{
+ *   economicState?: { primaryImports?: ReadonlyArray<unknown> | null, primaryExports?: ReadonlyArray<unknown> | null } | null,
+ *   resourceAnalysis?: { imports?: unknown } | null,
+ * } | null | undefined} settlement
+ * @returns {string[]} the raw items, in the order the record gives them
+ */
+export function importsAsPrinted(settlement) {
+  const eco = settlement?.economicState || {};
+  const res = settlement?.resourceAnalysis;
+  const imports = /** @type {{ critical?: unknown } | unknown[] | null | undefined} */ (res?.imports);
+  const critical = !res || Array.isArray(imports) ? [] : (Array.isArray(imports?.critical) ? imports.critical : []);
+  const primary = (eco.primaryImports || []).filter((x) => typeof x === 'string').map(String);
+  const terrain = critical.filter((x) => typeof x === 'string').map(String)
+    .filter((tc) => !primary.some((imp) => imp.toLowerCase().includes(tc.toLowerCase())));
+  return displayTradeList([...primary, ...terrain], /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'imports', exports: eco.primaryExports });
+}
