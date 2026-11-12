@@ -11,13 +11,19 @@
  *
  * WHAT IT CATCHES: a pool whose share rises above its ceiling by more than three standard errors of
  * a share at the ceiling (the error taken over settlements, never below the binomial); a pool read
- * over 30 draws or more whose top line crosses 0.75 from below, whatever the noise; any rise at all
- * on a cured pool's target; a drawn pool with no row, a row whose pool is gone, and a ceiling
- * loose above its measure beyond the slack and the noise (tighten it with
- * `node scripts/census/pool-dominance.mjs --tighten`, which never raises a ceiling).
- * WHAT IT DOES NOT: a rise inside the pool's noise (on a pool of twenty draws that is a wide band);
- * a pool the corpus never draws; a loss of variety among lines the pool's own line id merges (a
- * line keyed by its index in a sub-list counts every sub-list's line at that index as one).
+ * over 30 draws or more whose commonest line crosses 0.75 from below, whatever the noise; a pool
+ * banked with two or more distinct lines that prints one, where chance (top1 ^ towns) is under
+ * 1/1000 -- 10 towns at the least; any rise at all on a cured pool's target; a drawn pool with no
+ * row, a row whose pool is gone (a pool cut to one undeclared line leaves the ledger and reds
+ * here); a ceiling loose above its measure beyond the slack and the noise (tighten it with
+ * `node scripts/census/pool-dominance.mjs --tighten`, which never raises a ceiling); a register
+ * banked on another corpus.
+ * WHAT IT DOES NOT: a rise inside the pool's noise (on a pool of twenty draws that is a wide band;
+ * the corpus is the only cure); a pool the corpus never draws; a loss of variety among lines the
+ * pool's own line id merges (a line keyed by its index in a sub-list counts every sub-list's line
+ * at that index as one: npcData:NPC_FACTION_LOYALTY). The register's `census` is read, never judged.
+ * Its proofs (false alarms on four re-seeds: 1 / 1 / 1 / 0 rows; power on five plants) are in
+ * `docs/DESIGN_POOL_CENSUS.md` §6.5. A run costs about 137 seconds alone (2026-11-12).
  *
  * @enforced-by tests/lint/poolDominance.walker.test.js
  */

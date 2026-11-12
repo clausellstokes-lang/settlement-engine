@@ -302,6 +302,111 @@ The wide end is driven by the draw sites with content-dependent roll counts (§2
 6. Are the world-pulse and Herald pools in scope?
 7. Who owns the wiring census re-take through `gen:dossier-prose`'s door? It has been bypassed since F9, and wave 1 cannot extend a stale census.
 
+## 6. The dominance guard: what it reds, and on what corpus (POOL-GUARD, 2026-11-12)
+
+`scripts/census/pool-dominance.mjs`, its register `scripts/census/pool-dominance.register.json`, its walker `tests/lint/poolDominance.walker.test.js`. Born in COHERENCE-QUARREL (2026-11-11) to keep a pool from coming to print more of one line without anyone deciding it. The purpose has not changed. This section records why the rule changed, and the evidence for the change.
+
+### 6.1 Why the exact ceiling had to go
+
+The guard banked each pool at its EXACT share on a fixed 360-settlement corpus, and redded on any rise. I re-seeded that corpus with no source change, and 104, 102 and 105 rows read above their ceilings (noiseA, B, C). Not one of the 51 rows COHERENCE-AGREE read red rose by even one standard error of a share (the largest was 0.86). Neither did any of the five rows re-banked upward at point 43 (0.06 to 0.78). The guard was measuring the dice.
+
+### 6.2 The rule
+
+A row reds when:
+1. **beyond its own noise:** its share rises above the ceiling by more than **three standard errors of a share at the ceiling**. The error is taken **over settlements**: the ratio estimator's cluster variance, `sqrt(N/(N-1) · Σ_towns (x_i − c·n_i)²) / Σ n_i`. It is never taken below the binomial error. Draws inside one town are not independent: with the binomial error alone, `npcData:NPC_FACTION_LOYALTY` read 30 SE over its ceiling on a re-seed.
+2. **across the dominated line:** whatever the noise, a pool read over **30 or more draws** whose commonest line crosses **0.75** from a ceiling below it reds. I measured the line before choosing it: with no draw floor, 0.5 added 5 to 15 chance crossings per re-seed, 0.75 added 3 to 7 and even 1.0 added 1 to 4, all on pools of a handful of draws.
+3. **a collapse:** a pool banked with two or more distinct lines that prints one reds when chance does not explain it. The test is that `top1 ^ towns` falls below 1/1000. That needs at least 10 towns at a commonest line of one half, and 66 towns at 0.9. It reds whatever the share's error, because the share test cannot see a pool whose commonest line was already most of it.
+
+A cured pool's **target** is judged exactly, with no allowance. A ceiling is **loose** only when its measure sits below it by more than the 0.02 slack AND by more than three standard errors. Row-set checks (no row, no longer drawn) are exact on the banked corpus. Under `--seed-prefix=<p>` they print as notes.
+
+### 6.3 The corpus
+
+The corpus covers thorp 150, hamlet 200, village 350, town 550, city 350 and metropolis 150, all on the browser's random dials. Forced stresses are added on top: famine (village 50, town 50), wartime (town 50, city 50) and siege (town 50, city 50). That makes 2,050 settlements, with seeds `quarrel-<tier>[-<stress>]-<i>`; the old 360 are a subset. The run takes **137 seconds alone** on the seat's machine; the walker took 137 to 145 s. `--seed-prefix=<p>` runs the same guard on towns nobody tuned to.
+
+### 6.4 The re-base, and the control that makes it one
+
+A ceiling is a statement about one pool on ONE population of towns. The register now names its corpus (`corpus`). The walker reds when that name no longer matches the corpus in use, and `--tighten` refuses to compare across corpora. A corpus change goes through `--rebase`, on a chair's ruling, which banks every row at the new corpus's measure. The door refuses while the register already names this corpus. Each `--hold` keeps a row at a lower ceiling where the rule holds it there, and refuses where it does not.
+
+**CONTROL: the old 360-settlement corpus at the lane's base (f72262c68), judged against the old ceilings, reads exit 0** (POOL-GUARD 1, the walker 9/9). Nothing regressed. 49 rows (46 pools) rise numerically because they measure higher on towns the old corpus never drew. 45 of those rises are within 3 SE of the old ceiling. The four beyond 3 SE are **findings for the second wave**, not reds; the register's `census.secondWave` holds them. The chair ruled this re-base on 2026-11-12; the owner may veto it.
+
+The five rows re-banked upward at point 43 are held at their original ceilings, or at the measure where that is lower. All five hold: ARRIVAL_PEOPLE.greek top1 0.3449 · ARRIVAL_SENSES.cloth.dominant 0.3507 · faith.dominant 0.4856 · herbs.dominant 0.375 · npcData STRESS_ECONOMIC_EFFECTS.genuine_respect top5 0.6656. The cured targets are exactly as they were. Five rows carry them: conflicts:ISSUES, record:conflicts.issue, conflicts:HOOKS, record:conflicts.plotHooks and record:safetyProfile.plotHooks.
+
+The 49 rows follow. Each slice's share is that slice's share of the pool's own commonest line (or its five commonest), with the slice's draws in brackets. "Driven by" names the slice that reads highest. "Size alone" means the same four tiers at the new sizes.
+
+| pool | m | old ceiling | new measure | SE | draws | small tiers | four tiers | stress | driven by |
+|---|---|---|---|---|---|---|---|---|---|
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension` | top1 | 0.794 | 0.849 | 3.57 | 834 | 0.841 (113) | 0.834 (615) | 0.943 (106) | a stress |
+| `npcData:NPC_FACTION_LOYALTY` | top1 | 0.1207 | 0.1565 | 3.45 | 68422 | 0.232 (1360) | 0.152 (56005) | 0.171 (11057) | the small tiers |
+| `npcData:NPC_FACTION_LOYALTY` | top5 | 0.2914 | 0.3202 | 3.43 | 68422 | 0.396 (1360) | 0.312 (56005) | 0.350 (11057) | the small tiers |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:tyranny` | top1 | 0.5775 | 0.66 | 3.11 | 347 | 0.771 (35) | 0.630 (270) | 0.762 (42) | the small tiers |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear` | top1 | 0.8406 | 0.8691 | 2.59 | 1497 | 0.888 (197) | 0.850 (1091) | 0.952 (209) | a stress |
+| `stressNarrative:STRESS_SUMMARY_SIBLINGS` | top1 | 0.9167 | 0.9711 | 2.31 | 138 | 1.000 (16) | 0.937 (63) | 1.000 (59) | the small tiers |
+| `npcData:NPC_HOOK_SIBLINGS` | top1 | 0.5579 | 0.6209 | 2.11 | 422 | 1.000 (3) | 0.620 (355) | 0.609 (64) | the small tiers |
+| `POLITICAL_FLAVOR.stable` | top5 | 0.6797 | 0.7166 | 2.09 | 702 | 0.653 (170) | 0.683 (442) | 1.000 (90) | a stress |
+| `institutionDescVariants:village|Economy|River boatyard` | top1 | 0.4445 | 0.6 | 2.01 | 45 | — | 0.610 (41) | 0.500 (4) | size alone |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire` | top1 | 0.6843 | 0.7279 | 1.84 | 441 | 0.815 (54) | 0.693 (339) | 0.875 (48) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:wild_magic` | top1 | 0.6529 | 0.6946 | 1.79 | 419 | 0.704 (54) | 0.674 (331) | 0.882 (34) | a stress |
+| `institutionDescVariants:town|Religious|Parish burial grounds` | top1 | 0.3375 | 0.37 | 1.78 | 700 | — | 0.362 (550) | 0.400 (150) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis` | top1 | 0.616 | 0.6402 | 1.48 | 881 | 0.741 (162) | 0.632 (611) | 0.537 (108) | the small tiers |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:heresy_trial` | top1 | 0.6445 | 0.6777 | 1.38 | 394 | 0.627 (51) | 0.663 (309) | 0.882 (34) | a stress |
+| `foodBalance:OUTLOOK_HOOK_SIBLINGS` | top1 | 0.6285 | 0.649 | 1.37 | 1051 | 0.544 (57) | 0.641 (749) | 0.698 (245) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict` | top1 | 0.3704 | 0.387 | 1.33 | 1512 | 0.564 (39) | 0.377 (1364) | 0.450 (109) | the small tiers |
+| `FOODWAYS.FRAMES.more` | top1 | 0.5 | 0.75 | 1.32 | 8 | — | 0.600 (5) | 1.000 (3) | a stress |
+| `institutionDescVariants:metropolis|Government|Town crier` | top1 | 0.3667 | 0.4261 | 1.27 | 115 | — | 0.426 (115) | — | size alone |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years` | top1 | 0.6982 | 0.7254 | 1.09 | 415 | 0.722 (36) | 0.680 (319) | 0.967 (60) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy` | top1 | 0.7821 | 0.8007 | 0.99 | 662 | 0.793 (87) | 0.785 (512) | 0.937 (63) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:popular_uprising` | top1 | 0.5642 | 0.5888 | 0.93 | 355 | 0.565 (46) | 0.566 (281) | 0.857 (28) | a stress |
+| `STRESS_DESCS.politically_fractured` | top1 | 0.25 | 0.3019 | 0.81 | 53 | 0.400 (10) | 0.279 (43) | — | the small tiers |
+| `institutionDescVariants:metropolis|Economy|Harbour master's office` | top1 | 0.3334 | 0.4167 | 0.80 | 24 | — | 0.417 (24) | — | size alone |
+| `ARRIVAL_SENSES.tanners.dominant` | top1 | 0.4 | 0.4688 | 0.76 | 32 | — | 0.464 (28) | 0.500 (4) | a stress |
+| `CULTURE_PROFILES.south_asian.architecturalDetails` | top1 | 0.5 | 0.6 | 0.75 | 15 | 0.714 (7) | 0.500 (8) | — | the small tiers |
+| `STRESS_DESCS.politically_fractured` | top5 | 0.9167 | 0.9434 | 0.70 | 53 | 1.000 (10) | 0.930 (43) | — | the small tiers |
+| `POLITICAL_FLAVOR.stable` | top1 | 0.1554 | 0.1653 | 0.70 | 702 | 0.194 (170) | 0.143 (442) | 0.222 (90) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:pilgrimage_surge` | top1 | 0.6512 | 0.6675 | 0.69 | 418 | 0.606 (33) | 0.652 (322) | 0.778 (63) | a stress |
+| `institutionDescVariants:metropolis|Crafts|Bowyers & fletchers (guild)` | top1 | 0.3514 | 0.3788 | 0.65 | 132 | — | 0.379 (132) | — | size alone |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:crime_wave` | top1 | 0.3389 | 0.3456 | 0.54 | 1502 | 0.452 (93) | 0.339 (1155) | 0.339 (254) | the small tiers |
+| `FOODWAYS.FRAMES.two` | top1 | 0.5455 | 0.5693 | 0.54 | 130 | 0.559 (34) | 0.557 (79) | 0.647 (17) | a stress |
+| `institutionDescVariants:city|Defense|Citadel` | top1 | 0.3489 | 0.3673 | 0.50 | 177 | — | 0.360 (150) | 0.407 (27) | a stress |
+| `ARRIVAL_SENSES.market.lines` | top1 | 0.4 | 0.4667 | 0.50 | 15 | — | 0.364 (11) | 0.750 (4) | a stress |
+| `institutionDescVariants:city|Economy|Harbour master's office` | top1 | 0.4 | 0.4269 | 0.49 | 82 | — | 0.377 (61) | 0.571 (21) | a stress |
+| `ARRIVAL_SENSES.bread.lines` | top1 | 0.3334 | 0.375 | 0.48 | 32 | — | 0.391 (23) | 0.333 (9) | size alone |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:disputed_land` | top1 | 0.5653 | 0.5798 | 0.47 | 257 | 0.667 (24) | 0.559 (222) | 0.818 (11) | a stress |
+| `historyData:HISTORICAL_EVENTS_DATA.plotHooks:market_crash` | top1 | 0.5 | 0.5122 | 0.44 | 328 | 0.346 (26) | 0.518 (272) | 0.600 (30) | a stress |
+| `STRESS_DESCS.indebted` | top1 | 0.3334 | 0.3637 | 0.41 | 44 | 0.750 (8) | 0.278 (36) | — | the small tiers |
+| `ARRIVAL_MEMORIES.plague_years` | top1 | 0.4 | 0.4546 | 0.34 | 11 | — | 0.455 (11) | — | size alone |
+| `institutionDescVariants:metropolis|Defense|Citadel` | top1 | 0.3847 | 0.4 | 0.32 | 105 | — | 0.400 (105) | — | size alone |
+| `ARRIVAL_MEMORIES.great_flood` | top1 | 0.5 | 0.5455 | 0.29 | 11 | 0.000 (1) | 0.600 (10) | — | size alone |
+| `STRESS_DESCS.plague_onset` | top1 | 0.3334 | 0.3637 | 0.29 | 22 | 1.000 (7) | 0.067 (15) | — | the small tiers |
+| `npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence` | top1 | 0.1459 | 0.1491 | 0.23 | 644 | 0.000 (9) | 0.151 (624) | 0.182 (11) | a stress |
+| `STRESS_DESCS.religious_conversion` | top1 | 0.4 | 0.4211 | 0.18 | 19 | 0.250 (4) | 0.467 (15) | — | size alone |
+| `institutionDescVariants:metropolis|Economy|Barge and river transport company` | top1 | 0.6 | 0.6191 | 0.18 | 21 | — | 0.619 (21) | — | size alone |
+| `npcData:HANDLER_TIE_ARCHETYPES.handler_leverage_loved` | top1 | 0.3077 | 0.312 | 0.10 | 125 | 0.000 (1) | 0.333 (99) | 0.240 (25) | size alone |
+| `FOODWAYS.FRAMES.one` | top1 | 0.5129 | 0.514 | 0.06 | 751 | 0.486 (183) | 0.531 (473) | 0.484 (95) | size alone |
+| `FOODWAYS.SOURCE_PHRASES.game` | top1 | 0.5455 | 0.5469 | 0.03 | 128 | 0.517 (60) | 0.569 (58) | 0.600 (10) | a stress |
+| `institutionDescVariants:city|Crafts|Bakers (5-15)` | top1 | 0.3803 | 0.3811 | 0.03 | 328 | — | 0.389 (257) | 0.352 (71) | size alone |
+
+Of the 49: 23 are driven by a stress, 13 by the small tiers and 13 by size alone.
+
+### 6.5 The proofs, on the final rule and corpus
+
+| proof | run | result |
+|---|---|---|
+| false alarm | `--seed-prefix=noiseA` | 1 row over (village River boatyard, crossing 0.75 on 40 draws); 1 loose; 7 notes |
+| false alarm | `--seed-prefix=noiseB` | 1 row over (plotHooks:popular_uprising, 3.4 SE); 4 notes |
+| false alarm | `--seed-prefix=noiseC` | 1 row over (city River ferry, 3.7 SE over 79 draws); 5 notes |
+| false alarm | `--seed-prefix=dominance` | 0; exit 0 |
+| power, small | ARRIVAL_PEOPLE.greek, 4 → 2 lines | reds: top1 0.5625 > 0.3449, 5.6 SE over 192 draws |
+| power, middling | POLITICAL_FLAVOR.stable, 9 → 5 lines | reds: top1 5.7 SE, top5 16.7 SE over 702 draws |
+| power, large | npcData:NPC_FACTION_LOYALTY, every category halved | reds: top1 17.0 SE, top5 18.2 SE |
+| power, one line | ARRIVAL_MEMORIES.heresy_trial, 3 → 1 | reds by the collapse arm alone (10 draws in 10 towns; chance 1.0e-4; the share arm allows 1.0) |
+| power, one line | village Dairy farmer, variants emptied | the pool leaves the ledger (its one line is undeclared): reds as no longer drawn |
+
+Under the old exact rule the same four re-seeds put 146, 135, 144 and 138 rows over their ceilings.
+
+### 6.6 What it does not catch
+
+It does not catch a rise inside the pool's own noise; on a pool of twenty draws that is a wide band, and only a larger corpus narrows it. It does not see a pool the corpus never draws. It cannot see variety lost among lines that the pool's line id merges: `npcData:NPC_FACTION_LOYALTY` keys a line by its index inside its category, so its commonest "line" is seven categories' first lines added together. That is charged to the second wave.
+
 ## Appendix A — the fact readers (sub-seat table, file:line)
 
 ### Unit 1: record facts a DM-facing line can presume, and who reads them
