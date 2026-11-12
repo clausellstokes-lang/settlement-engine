@@ -106,11 +106,13 @@ export const THINGS = Object.freeze({
   prison: {
     words: /\bprisons?\b|\bgaols?\b|\bjails?\b/i,
     atoms: [],
+    leaf: 'institutions.js :: liveInstitutionNames, by name; defence.js answers its atom: one home owed (W2-A-LEAVES)',
     absent: (_f, names) => !names.some((n) => /prison|gaol|jail|stocks/i.test(n)),
   },
   court: {
     words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b/i,
     atoms: [],
+    leaf: 'institutions.js :: liveInstitutionNames and COURT_HOUSES; defence.js answers its atom: one home owed (W2-A-LEAVES)',
     absent: (_f, names) => !names.some((n) => /court/i.test(n) || COURT_HOUSES.has(n.toLowerCase())),
   },
   bank: {

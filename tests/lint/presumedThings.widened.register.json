@@ -7,7 +7,8 @@
  ],
  "reasons": {
   "carrier": "declared only through a carrier no draw door reads (a causal-register mark, a catalogue's `tags`, a structural rule's `requires`): banked until it declares through a door (W2-B-DECLARE item 1)",
-  "root": "a literal or a component's JSX text under a root the walker joined at W2-B-DECLARE item 3 (src/domain, src/components) that names a thing and declares no atom answering it: the habitat at the widening (e55ede7d2), banked; a line written in code is cured by its print-site check or its declaration"
+  "root": "a literal or a component's JSX text under a root the walker joined at W2-B-DECLARE item 3 (src/domain, src/components) that names a thing and declares no atom answering it: the habitat at the widening (e55ede7d2), banked; a line written in code is cured by its print-site check or its declaration",
+  "word": "a literal naming a word the walker registered at W2-B-DECLARE item 3 (a state, a size or a count: registeredWords.js :: NEW_WORDS) with no declaration answering it: the habitat at the widening, banked; a count has no atom yet, so its lines are cured at the print site"
  },
  "arm1": {
   "src/components/CommandPalette.jsx": [
@@ -32,6 +33,21 @@
     "market",
     "root",
     "Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and s"
+   ],
+   [
+    "famine",
+    "word",
+    "(Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic. They modify ins"
+   ],
+   [
+    "plague",
+    "word",
+    "(Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic. They modify ins"
+   ],
+   [
+    "famine",
+    "word",
+    ". Famine + Political Fracture means food distribution is contested by powers, not just scarce. The Overview's crisis car"
    ]
   ],
   "src/components/InterviewPanel.jsx": [
@@ -93,6 +109,11 @@
     "market",
     "root",
     "Mechanically-derived disputes: market contests, border incursions, intelligence operations."
+   ],
+   [
+    "famine",
+    "word",
+    "Multiple stresses compound. Famine + Political Fracture means food distribution is contested by powers."
    ]
   ],
   "src/components/dossier/EngineSections.jsx": [
@@ -120,6 +141,11 @@
     "garrison",
     "root",
     "; the home garrison is thinned while it campaigns."
+   ],
+   [
+    "siege",
+    "word",
+    "Besieged by a coalition ("
    ]
   ],
   "src/components/dossier/WorkbenchFactionRename.jsx": [
@@ -217,6 +243,16 @@
     "war",
     "root",
     "pressures: the directional strain on the settlement, each carrying its own reasons, so &ldquo;high external threat&rdquo"
+   ],
+   [
+    "famine",
+    "word",
+    "Two stresses together make a third, named thing. Famine in a politically fractured town isn&rsquo;t only scarcity. It is"
+   ],
+   [
+    "famine",
+    "word",
+    "pressures: the directional strain on the settlement, each carrying its own reasons, so &ldquo;high external threat&rdquo"
    ]
   ],
   "src/components/howto/LivingWorldTab.jsx": [
@@ -234,6 +270,11 @@
     "temple",
     "root",
     "Each settlement grows its own pantheon. Creeds win adherents, earn or lose the rightful claim to the patron seat, and ri"
+   ],
+   [
+    "quarters",
+    "word",
+    "Settlement Progression across the six tiers. A thorpe is a few huts and farmsteads with no formal defenses; a hamlet add"
    ]
   ],
   "src/components/instant/InstantWorldEntry.jsx": [
@@ -241,6 +282,13 @@
     "temple",
     "root",
     "This shapes every settlement in the realm: its mages and arcane orders, its magical events, its enchanted trade. Gods an"
+   ]
+  ],
+  "src/components/legal/BountyPage.jsx": [
+   [
+    "famine",
+    "word",
+    "This world is built on one promise: nothing it states is left unexplained. Every event has a cause, every figure a sourc"
    ]
   ],
   "src/components/legal/PrivacyPage.jsx": [
@@ -253,6 +301,13 @@
     "market",
     "root",
     "Telemetry consent has four plain-language settings in Account then Privacy and data: essential product telemetry, the an"
+   ]
+  ],
+  "src/components/library/LibraryToolbar.jsx": [
+   [
+    "siege",
+    "word",
+    "Show settlements under siege or besieging a neighbour."
    ]
   ],
   "src/components/map/LiveWarStatus.jsx": [
@@ -270,6 +325,11 @@
     "war",
     "root",
     ". Fewer guards stand at home, and the war is costing "
+   ],
+   [
+    "siege",
+    "word",
+    " is blockaded by a coalition fleet"
    ]
   ],
   "src/components/map/PerspectiveStandings.jsx": [
@@ -282,6 +342,18 @@
     "war",
     "root",
     "March-mates in the same named war, read from the war edges."
+   ],
+   [
+    "siege",
+    "word",
+    "is besieged by "
+   ]
+  ],
+  "src/components/map/RoadScenePanel.jsx": [
+   [
+    "siege",
+    "word",
+    "Under siege by "
    ]
   ],
   "src/components/map/SimulationRulesAxes.jsx": [
@@ -301,10 +373,22 @@
     "A wartime dynamic: light War first, and this wakes with it."
    ]
   ],
+  "src/components/map/WarFaithMapOverlay.jsx": [
+   [
+    "siege",
+    "word",
+    "Under siege: coalition of "
+   ]
+  ],
   "src/components/map/WarResolveSection.jsx": [
    [
     "granary",
     "root",
+    "Resolve is the will to keep resisting; hope is the odds a besieged town faces; supply reads the granary and any circle o"
+   ],
+   [
+    "siege",
+    "word",
     "Resolve is the will to keep resisting; hope is the odds a besieged town faces; supply reads the granary and any circle o"
    ]
   ],
@@ -357,6 +441,37 @@
     "docks",
     "root",
     "The sea brings the world to the door. The harbour is never quiet. Sailors from distant ports, foreign merchants, exotic "
+   ],
+   [
+    "refugees",
+    "word",
+    "Multiple roads converging means constant movement: merchants, pilgrims, soldiers, refugees. The settlement sees a rotati"
+   ],
+   [
+    "quarters",
+    "word",
+    "The sea brings the world to the door. The harbour is never quiet. Sailors from distant ports, foreign merchants, exotic "
+   ]
+  ],
+  "src/components/new/tabHelpers.js": [
+   [
+    "famine",
+    "word",
+    "% of food needs via port. Sea supply is reliable until it isn't. A blockade or naval threat converts this dependency int"
+   ]
+  ],
+  "src/components/new/tabs/DefenseTab.jsx": [
+   [
+    "famine",
+    "word",
+    "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judg"
+   ]
+  ],
+  "src/components/new/tabs/MagicTab.jsx": [
+   [
+    "plague",
+    "word",
+    "This place leans on its spellcasters: some of what it eats or makes, or some of the trouble it keeps at bay, depends on "
    ]
   ],
   "src/components/new/tabs/WarTab.jsx": [
@@ -374,6 +489,13 @@
     "garrison",
     "root",
     "; the home garrison is thinned while it campaigns."
+   ]
+  ],
+  "src/components/new/tabs/WhoRunsThisTownPanel.jsx": [
+   [
+    "powersCount",
+    "word",
+    "The ruling three of"
    ]
   ],
   "src/components/organic/samples/fixtures.js": [
@@ -486,6 +608,11 @@
     "granary",
     "root",
     "One event per line works best. For example:\nThe famine struck Ashford in the third winter.\nThe party bought grain and sa"
+   ],
+   [
+    "famine",
+    "word",
+    "One event per line works best. For example:\nThe famine struck Ashford in the third winter.\nThe party bought grain and sa"
    ]
   ],
   "src/components/settlements/LivingWorldSignalRow.jsx": [
@@ -493,6 +620,23 @@
     "war",
     "root",
     "At war, besieging "
+   ],
+   [
+    "siege",
+    "word",
+    "Besieged by a coalition: "
+   ],
+   [
+    "siege",
+    "word",
+    "Under siege by "
+   ]
+  ],
+  "src/components/surveyor/AutonomyPanel.jsx": [
+   [
+    "revolt",
+    "word",
+    "e.g. run until Bramwick's food turns critical or two months pass; stir a rebellion…"
    ]
   ],
   "src/components/surveyor/CorpusFactoryPanel.jsx": [
@@ -514,11 +658,850 @@
     "The party bought the miller a season’s grain…"
    ]
   ],
+  "src/data/arrivalProse.js": [
+   [
+    "plague",
+    "word",
+    " marks where the plague dead were buried, and people walk around it."
+   ]
+  ],
+  "src/data/bandLadders.js": [
+   [
+    "famine",
+    "word",
+    "Deficit — Active Famine"
+   ]
+  ],
+  "src/data/cultureProfiles.js": [
+   [
+    "quarters",
+    "word",
+    "Urban markets aggregate agricultural estates, workshops, and regional shipping into a documented tax base."
+   ],
+   [
+    "quarters",
+    "word",
+    "Professional guards supplement levy forces organized by district and patron."
+   ],
+   [
+    "quarters",
+    "word",
+    "Kin districts and open assemblies, with pasture and earthworks around them."
+   ],
+   [
+    "quarters",
+    "word",
+    "caravan courts and covered lanes make movement through the merchant quarter deliberate"
+   ],
+   [
+    "quarters",
+    "word",
+    "Shared waterworks, fermentation, and intensive garden production structure urban food supply."
+   ],
+   [
+    "quarters",
+    "word",
+    "Any armed service, levied or paid, is organized through districts and administrative chains."
+   ],
+   [
+    "quarters",
+    "word",
+    "Causeways, terraces, canals or reservoirs connect dense neighborhoods to monumental public space."
+   ],
+   [
+    "quarters",
+    "word",
+    "causeways and managed water divide the settlement into organized neighborhoods"
+   ],
+   [
+    "quarters",
+    "word",
+    "A large central compound anchors neighborhoods organized around wells and workshops."
+   ],
+   [
+    "quarters",
+    "word",
+    "Professional retainers and district levies answer through layered patrons and offices."
+   ],
+   [
+    "quarters",
+    "word",
+    "Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant"
+   ]
+  ],
   "src/data/dossierCausalProse.generated.js": [
    [
     "market",
     "carrier",
     "{settlement}'s market books show {npc} bought up the {good} before the talk of a shortage began; the talk came right on "
+   ],
+   [
+    "quarters",
+    "word",
+    "Half {settlement}'s new quarter is here on paper before it is here on foot: a settlement provision signed with {counterp"
+   ],
+   [
+    "powersCount",
+    "word",
+    "Travellers at {settlement} are asked, carefully, what they saw on the road, and then asked again by someone else: both p"
+   ],
+   [
+    "siege",
+    "word",
+    "{settlement}'s caravans cross a blockaded road every season and have never been stopped, so the town has no grievance ag"
+   ]
+  ],
+  "src/data/dossierStateProse/defense.generated.js": [
+   [
+    "plague",
+    "word",
+    "The town can eat through a bad year. What it does about a plague is pray and nurse, in that order."
+   ],
+   [
+    "plague",
+    "word",
+    "The stores will carry the town through hunger. Nothing here will carry it through a plague, and the town has not built a"
+   ],
+   [
+    "famine",
+    "word",
+    "People at {settlement} can outlast a hungry year but have no answer to a sick one, and they fear plague more than famine"
+   ],
+   [
+    "plague",
+    "word",
+    "People at {settlement} can outlast a hungry year but have no answer to a sick one, and they fear plague more than famine"
+   ],
+   [
+    "plague",
+    "word",
+    "{settlement} has no granary and nobody to treat the sick; a failed harvest is hardship within the season here and a plag"
+   ],
+   [
+    "occupation",
+    "word",
+    "Only those holding the occupiers' passes may be out after dark at {settlement}, and anyone caught without one is taken i"
+   ],
+   [
+    "siege",
+    "word",
+    "With the town under siege, quarrels over rations and theft of food are the trouble on {settlement}'s streets now."
+   ],
+   [
+    "quarters",
+    "word",
+    "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there."
+   ],
+   [
+    "quarters",
+    "word",
+    "Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished."
+   ],
+   [
+    "quarters",
+    "word",
+    "Which power holds a district of {settlement} decides which rules apply there."
+   ],
+   [
+    "quarters",
+    "word",
+    "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the ne"
+   ],
+   [
+    "plague",
+    "word",
+    "{settlement} has no dedicated healers. Wounds take what they take, and a plague here runs until it has finished."
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement}'s defence answers to its occupiers now: the arms in the town are theirs, and whatever the townsfolk could r"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers' troops at {settlement} protect it from everyone except the people who sent them."
+   ],
+   [
+    "occupation",
+    "word",
+    "As long as the occupation lasts, {settlement} cannot defend itself on its own terms; its defence is someone else's to or"
+   ],
+   [
+    "revolt",
+    "word",
+    "Each crackdown on the insurgents at {settlement} turns more of its people to their side."
+   ]
+  ],
+  "src/data/dossierStateProse/economy.generated.js": [
+   [
+    "siege",
+    "word",
+    "DS-ECO-9: LADDER › food security + the food ledger + the siege interaction · `economicState.foodSecurity` (6 rungs) + `f"
+   ]
+  ],
+  "src/data/dossierStateProse/general.generated.js": [
+   [
+    "quarters",
+    "word",
+    "Thousands have gone from {settlement}, and more leave every season. Whole districts stand empty."
+   ],
+   [
+    "famine",
+    "word",
+    "{settlement} is starving: the stores are gone, nothing can be bought, and people are dying."
+   ],
+   [
+    "siege",
+    "word",
+    "{settlement} is under siege and has earned almost nothing since the gates shut; the town is living on what it made befor"
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace."
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to."
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved."
+   ],
+   [
+    "powersCount",
+    "word",
+    "Two powers in {settlement} want the same halls, offices and favours, and there are not enough to share."
+   ],
+   [
+    "quarters",
+    "word",
+    "{settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to."
+   ]
+  ],
+  "src/data/dossierStateProse/power.generated.js": [
+   [
+    "siege",
+    "word",
+    "The {seat} at {settlement} governs a besieged town, which means it governs rationing, the gates and the watch rota, and "
+   ]
+  ],
+  "src/data/dossierStateProse/stressors.generated.js": [
+   [
+    "occupation",
+    "word",
+    "{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside."
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers are quartered inside the town, and the town's business is conducted around them."
+   ],
+   [
+    "famine",
+    "word",
+    "This famine is not a failure of harvest. It is a blockade, and it keeps exactly as long as the blockade keeps."
+   ],
+   [
+    "occupation",
+    "word",
+    "The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occup"
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement} is occupied and fighting back, and the occupiers no longer walk its streets alone."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation gave rise to the resistance, and now the resistance is wearing the occupation down; both sides are paying"
+   ],
+   [
+    "occupation",
+    "word",
+    "This is a resistance rather than a revolt. It was born under an occupation, and it defines itself against the occupier r"
+   ],
+   [
+    "famine",
+    "word",
+    "The famine in {settlement} is getting worse: the rations shrink each week, and the queues for them grow longer."
+   ],
+   [
+    "famine",
+    "word",
+    "The famine in {settlement} is no worse than last season and no better: the rations are short, and they stay short."
+   ],
+   [
+    "famine",
+    "word",
+    "Those in charge of {settlement} are holding the famine where it is with strict rationing, and cannot yet end it."
+   ],
+   [
+    "famine",
+    "word",
+    "The worst of the famine in {settlement} is over: the rations are growing again, though nobody has eaten well yet."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers are tightening their hold on {settlement}: more searches, more seizures, and harsher punishment for anyone"
+   ],
+   [
+    "occupation",
+    "word",
+    "Each season the occupiers ask more of {settlement} and leave its own leaders less to decide."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation of {settlement} has settled in, and nobody there expects it to end this year."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them."
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement}'s own leaders still protest the occupation, and the occupiers still ignore them; nothing has changed in mon"
+   ],
+   [
+    "occupation",
+    "word",
+    "Merchants in {settlement} pay the occupiers the same share of every sale, season after season, and have learned to price"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for ques"
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement}'s occupier is stretched thin, and every season of sabotage costs it more to stay."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier takes more from the town than it gives, but its own accounts never show what holding the town costs it in m"
+   ]
+  ],
+  "src/data/dossierStateProse/warFaith.generated.js": [
+   [
+    "occupation",
+    "word",
+    "What is decided at {settlement} is decided subject to the occupier; the town's institutions run, and run inside a bounda"
+   ],
+   [
+    "occupation",
+    "word",
+    "Holding {settlement} is costing {counterpart} more than {settlement} yields; the garrison here is an expense the occupie"
+   ],
+   [
+    "occupation",
+    "word",
+    "{counterpart}'s tribute books now show {settlement} paying more than the troops holding it cost, and the occupation has "
+   ],
+   [
+    "occupation",
+    "word",
+    "Goods leave {settlement} for {counterpart} on a regular schedule now, planned for at both ends, and the occupation is se"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier at {settlement} does not press harder because it cannot. What it holds elsewhere is taking the strength tha"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier's grip on {settlement} is tightening because the occupier is winning elsewhere, and nothing local is causin"
+   ],
+   [
+    "occupation",
+    "word",
+    "{counterpart}'s troops have held {settlement}'s walls quietly for so long that the occupation is starting to look perman"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers have held {settlement} quietly for so long that the occupation is starting to look permanent."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers' duty lists at {settlement} now put more of their troops on the streets than on the walls, and more each s"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers keep {settlement} uneasily now; the townspeople chafe, stones are thrown, and the throwing has stopped bei"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers' duty lists at {settlement} now put more of their troops on policing the town than on watching the country"
+   ],
+   [
+    "siege",
+    "word",
+    "The townspeople of {settlement} have taken up arms against the occupiers' troops, now besieged inside the town they hold"
+   ],
+   [
+    "occupation",
+    "word",
+    "The townspeople of {settlement} have taken up arms against the occupiers' troops, now besieged inside the town they hold"
+   ],
+   [
+    "occupation",
+    "word",
+    "What holds {settlement}'s walls is now under attack from inside them, and the occupation has become a siege in reverse."
+   ],
+   [
+    "occupation",
+    "word",
+    "What holds {settlement} is now under attack from inside it, and the occupation has become a siege in reverse."
+   ],
+   [
+    "occupation",
+    "word",
+    "{counterpart} holds {settlement} but has no grip on it: the occupiers' duty lists put every one of their troops to keepi"
+   ],
+   [
+    "occupation",
+    "word",
+    "Nothing about the occupation at {settlement} has settled, and every week it does not settle makes settling harder."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation at {settlement} sits at the point where a single incident decides it, and both the garrison and the town "
+   ],
+   [
+    "occupation",
+    "word",
+    "{counterpart} bleeds {settlement} for everything the town holds. The occupation has begun to pay, and it pays by taking "
+   ],
+   [
+    "occupation",
+    "word",
+    "{counterpart}'s accounts show the occupation of {settlement} paying its way; it runs smoothly and looks set to last."
+   ],
+   [
+    "occupation",
+    "word",
+    "The town at {settlement} has arranged itself around the occupier and stopped calling it an occupation in ordinary conver"
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement} is not resisting. The occupation meets no organized opposition, and what opposition exists is individual an"
+   ],
+   [
+    "occupation",
+    "word",
+    "{settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets"
+   ],
+   [
+    "quarters",
+    "word",
+    "The rite draws pilgrims from well outside the district, and for weeks each year they fill {settlement}'s beds."
+   ]
+  ],
+  "src/data/economicData.js": [
+   [
+    "quarters",
+    "word",
+    "grain at metropolitan scale"
+   ],
+   [
+    "quarters",
+    "word",
+    "grain for district-scale hospitality"
+   ],
+   [
+    "quarters",
+    "word",
+    "stone and iron for metropolitan fortifications"
+   ],
+   [
+    "quarters",
+    "word",
+    "stone for metropolitan cathedral maintenance"
+   ],
+   [
+    "quarters",
+    "word",
+    "arcane energy for district-scale magical operations"
+   ],
+   [
+    "quarters",
+    "word",
+    "trade access and commodities for district markets"
+   ]
+  ],
+  "src/data/foundingSeeds.js": [
+   [
+    "plague",
+    "word",
+    "A plague is taking hold in this town, and it has thinned the hands that work the fields, so the harvests come in short. "
+   ],
+   [
+    "plague",
+    "word",
+    "Opens in a legitimacy crisis: fractured governance, a plague at its onset, and the thieves' guild's master standing over"
+   ],
+   [
+    "plague",
+    "word",
+    "Plague is at its onset, and a quarantine council sits among its powers."
+   ],
+   [
+    "revolt",
+    "word",
+    "The ore comes up clean; nothing else here does. A government survives by never looking too hard at the arrangements it r"
+   ],
+   [
+    "revolt",
+    "word",
+    "Contested authority riddled with informal power: a recent uprising, criminal arrangements the government dares not confr"
+   ],
+   [
+    "revolt",
+    "word",
+    "An uprising of the first rank sits within the last fifteen years."
+   ]
+  ],
+  "src/data/historyData.js": [
+   [
+    "quarters",
+    "word",
+    "The merchant quarter and the labourers' quarter remain walled apart"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart"
+   ],
+   [
+    "occupation",
+    "word",
+    "A former occupier officer has returned under a false identity"
+   ],
+   [
+    "quarters",
+    "word",
+    "Newcomer and old-family districts remain socially distinct"
+   ],
+   [
+    "quarters",
+    "word",
+    "A fire that began in {location} consumed {building_type} across whole districts before it could be checked"
+   ],
+   [
+    "plague",
+    "word",
+    "A healer who profited enormously during the plague is being asked how they stayed untouched"
+   ],
+   [
+    "plague",
+    "word",
+    "The plague pit holds a body that matches no one on the list of the dead"
+   ],
+   [
+    "revolt",
+    "word",
+    "The uprising was funded by an outside hand that has come back to collect on the favour"
+   ],
+   [
+    "quarters",
+    "word",
+    "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise"
+   ],
+   [
+    "succession",
+    "word",
+    "The Succession Crisis"
+   ],
+   [
+    "plague",
+    "word",
+    "The Plague Years"
+   ]
+  ],
+  "src/data/historyDescVariants.js": [
+   [
+    "occupation",
+    "word",
+    "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+   ],
+   [
+    "quarters",
+    "word",
+    "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under contr"
+   ],
+   [
+    "plague",
+    "word",
+    "The pestilence lingered {duration} seasons, thinning the families it reached and pushing every institution to the edge o"
+   ]
+  ],
+  "src/data/institutionDescVariants.js": [
+   [
+    "quarters",
+    "word",
+    "Druids gathered in a circle and rooted to the country around them, ordering the seasons, mediating quarrels with wild cr"
+   ],
+   [
+    "quarters",
+    "word",
+    "A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new"
+   ],
+   [
+    "famine",
+    "word",
+    "Shared grain stores that even out the harvests and hold off famine."
+   ],
+   [
+    "siege",
+    "word",
+    "An innermost stronghold, the city's final hold under siege."
+   ],
+   [
+    "quarters",
+    "word",
+    "Those who dress, trade, and sell fur, all pressed into one district. The trade runs high, quality pelts being luxuries."
+   ],
+   [
+    "quarters",
+    "word",
+    "Several standing market squares, one to a district."
+   ],
+   [
+    "quarters",
+    "word",
+    "Several inn districts, given over to merchants, travellers, and those who stay long."
+   ],
+   [
+    "quarters",
+    "word",
+    "Heated communal baths. Some cultures make them a social hub, others suspect them of vice; either way they are the distri"
+   ],
+   [
+    "quarters",
+    "word",
+    "A public bathhouse with hot water, a gathering place in some cultures and a suspected den of vice in others. Nowhere in "
+   ],
+   [
+    "quarters",
+    "word",
+    "A permanent district, licensed for commerce in persons, with auction halls, holding compounds, broker offices, and the a"
+   ],
+   [
+    "quarters",
+    "word",
+    "Buildings of several storeys. Tenements house the poor."
+   ],
+   [
+    "quarters",
+    "word",
+    "Multi-storey construction, with tenements for the poor."
+   ],
+   [
+    "quarters",
+    "word",
+    "Between five and ten standing market districts, each to its own trade: grain, livestock, cloth, metals, exotica."
+   ],
+   [
+    "quarters",
+    "word",
+    "The city's finance gathered into one district: international houses, letters of credit, and currency dealing on a grand "
+   ],
+   [
+    "quarters",
+    "word",
+    "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith."
+   ],
+   [
+    "quarters",
+    "word",
+    "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims."
+   ],
+   [
+    "quarters",
+    "word",
+    "Hospitals and infirmaries across the districts, medical care organised for a city's numbers."
+   ],
+   [
+    "quarters",
+    "word",
+    "Tall, crowded blocks and tenement courts, with suburbs spreading beyond the walls."
+   ],
+   [
+    "quarters",
+    "word",
+    "Multi-story blocks packed around tenement courts, and suburbs that have outgrown the walls."
+   ],
+   [
+    "quarters",
+    "word",
+    "Several aqueducts feed cisterns and fountains spread across the districts, a water system built for a city's size."
+   ],
+   [
+    "quarters",
+    "word",
+    "The heart of metropolitan or state rule. A palace with its ministries, audience halls, and clerks' bureaux."
+   ],
+   [
+    "quarters",
+    "word",
+    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage"
+   ],
+   [
+    "quarters",
+    "word",
+    "The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out."
+   ],
+   [
+    "refugees",
+    "word",
+    "Miles of tunnel and catacomb turned to shelter for criminals and refugees alike."
+   ]
+  ],
+  "src/data/institutionLadders.js": [
+   [
+    "quarters",
+    "word",
+    "Slave market district"
+   ]
+  ],
+  "src/data/institutionServiceKeys.generated.js": [
+   [
+    "quarters",
+    "word",
+    "Craft Guild District"
+   ],
+   [
+    "quarters",
+    "word",
+    "Brothel (red light district)"
+   ],
+   [
+    "quarters",
+    "word",
+    "Inns and taverns (district)"
+   ],
+   [
+    "quarters",
+    "word",
+    "Red light district"
+   ],
+   [
+    "quarters",
+    "word",
+    "Slave market district"
+   ],
+   [
+    "quarters",
+    "word",
+    "Dungeon delving supply district"
+   ]
+  ],
+  "src/data/institutionServices.js": [
+   [
+    "quarters",
+    "word",
+    "Permission to use the hidden urban grove."
+   ],
+   [
+    "quarters",
+    "word",
+    "Hire coaches and drivers for urban transport or longer journeys."
+   ],
+   [
+    "quarters",
+    "word",
+    "District-scale potion output. Volume discounts for bulk orders."
+   ],
+   [
+    "quarters",
+    "word",
+    "Rare medications and treatments available through district-wide sourcing."
+   ],
+   [
+    "famine",
+    "word",
+    "Large-scale municipal grain reserves against famine and siege."
+   ],
+   [
+    "quarters",
+    "word",
+    "Convert winnings and losses across currencies. Ubiquitous in gambling districts."
+   ],
+   [
+    "quarters",
+    "word",
+    "All price points and quality levels represented across the district."
+   ],
+   [
+    "quarters",
+    "word",
+    "Multiple gangs running protection in different districts."
+   ],
+   [
+    "quarters",
+    "word",
+    "Military presence distributed across multiple districts."
+   ],
+   [
+    "quarters",
+    "word",
+    "Each district has its own market square serving local needs."
+   ],
+   [
+    "quarters",
+    "word",
+    "Monastic schools provide literacy and basic education across districts."
+   ],
+   [
+    "quarters",
+    "word",
+    "Several congregations covering different districts or communities."
+   ],
+   [
+    "quarters",
+    "word",
+    "Every district has a temple. Religious observance accessible to all."
+   ],
+   [
+    "quarters",
+    "word",
+    "Know who goes where in their district. Sellable information."
+   ],
+   [
+    "quarters",
+    "word",
+    "Coordinate pickpocketing, burglary, and robbery within the district."
+   ],
+   [
+    "famine",
+    "word",
+    "City-scale grain storage for siege survival and famine prevention."
+   ],
+   [
+    "quarters",
+    "word",
+    "Access to district libraries and research facilities."
    ]
   ],
   "src/data/institutionalCatalog.js": [
@@ -556,6 +1539,241 @@
     "docks",
     "carrier",
     "Regulates harbour and river-port traffic, collects anchorage fees, assigns berths, and enforces port law."
+   ],
+   [
+    "quarters",
+    "word",
+    "District markets (5-10)"
+   ],
+   [
+    "quarters",
+    "word",
+    "Five to ten permanent specialized market districts: grain, livestock, cloth, metals, exotica."
+   ],
+   [
+    "quarters",
+    "word",
+    "Multiple permanent market squares serve different districts."
+   ],
+   [
+    "quarters",
+    "word",
+    "Inns and taverns (district)"
+   ],
+   [
+    "quarters",
+    "word",
+    "Multiple inn districts catering to merchants, travelers, and long-term visitors."
+   ],
+   [
+    "quarters",
+    "word",
+    "At city scale drink and lodging share one district row."
+   ],
+   [
+    "famine",
+    "word",
+    "Communal grain storage. Buffers harvests, prevents famine."
+   ],
+   [
+    "quarters",
+    "word",
+    "Communal bathing facility with heated water. In some cultures a social hub; in others suspect as a venue for vice. Eithe"
+   ],
+   [
+    "quarters",
+    "word",
+    "Slave market district"
+   ],
+   [
+    "quarters",
+    "word",
+    "A permanent, licensed district for commerce in persons: auction halls, holding compounds, broker offices, and associated"
+   ],
+   [
+    "quarters",
+    "word",
+    "Organised shoemakers producing boots, shoes, and sandals for the urban population. Strictly regulated quality."
+   ],
+   [
+    "quarters",
+    "word",
+    "Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood."
+   ],
+   [
+    "quarters",
+    "word",
+    "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination."
+   ],
+   [
+    "quarters",
+    "word",
+    "Multiple hospitals and infirmaries across districts. Organized medical care at population scale."
+   ],
+   [
+    "quarters",
+    "word",
+    "A circle of druids tied to the land. They regulate the seasons, mediate disputes with wild creatures, and know which str"
+   ],
+   [
+    "quarters",
+    "word",
+    "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneat"
+   ],
+   [
+    "quarters",
+    "word",
+    "Multi-story buildings. Tenements for poor."
+   ],
+   [
+    "quarters",
+    "word",
+    "Dense multi-story blocks, tenement courts, and suburbs spilling past the walls."
+   ],
+   [
+    "quarters",
+    "word",
+    "Seat of metropolitan or state government: palace, ministries, audience halls, administrative bureaux."
+   ],
+   [
+    "quarters",
+    "word",
+    "Dungeon delving supply district"
+   ],
+   [
+    "refugees",
+    "word",
+    "Extensive tunnels and catacombs repurposed as criminal and refugee sanctuary."
+   ],
+   [
+    "quarters",
+    "word",
+    "Brothel (red light district)"
+   ],
+   [
+    "quarters",
+    "word",
+    "Red light district"
+   ],
+   [
+    "quarters",
+    "word",
+    "the district madam"
+   ]
+  ],
+  "src/data/narrativeData.js": [
+   [
+    "quarters",
+    "word",
+    " looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you wal"
+   ],
+   [
+    "occupation",
+    "word",
+    "'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and eve"
+   ],
+   [
+    "quarters",
+    "word",
+    " asks where you intend to stay: which inn, which district. The answer apparently matters. They note it and say nothing f"
+   ],
+   [
+    "quarters",
+    "word",
+    "The merchant district of "
+   ],
+   [
+    "quarters",
+    "word",
+    " looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant distr"
+   ],
+   [
+    "housesCount",
+    "word",
+    "Two temples face each other across "
+   ],
+   [
+    "quarters",
+    "word",
+    "'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising th"
+   ],
+   [
+    "siege",
+    "word",
+    "The founders chose this place for its trade, water and good ground. Now it is under siege, and none of that matters unti"
+   ],
+   [
+    "occupation",
+    "word",
+    "The founders assumed the settlement would always make its own decisions. Under occupation, it no longer does."
+   ]
+  ],
+  "src/data/npcData.js": [
+   [
+    "quarters",
+    "word",
+    "Identify the source of unexplained magical disturbances in the northern district"
+   ],
+   [
+    "quarters",
+    "word",
+    "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet."
+   ],
+   [
+    "quarters",
+    "word",
+    "Three guards have gone missing in the same district on night patrol. The report filed says they deserted."
+   ]
+  ],
+  "src/data/people/titleSecretsPresentations.js": [
+   [
+    "quarters",
+    "word",
+    "the district madam"
+   ],
+   [
+    "quarters",
+    "word",
+    "The women are close to turning on the madam, and they know a great deal about the district's customers"
+   ],
+   [
+    "quarters",
+    "word",
+    "Pays a share of every house's takings to someone in authority who keeps the district open"
+   ],
+   [
+    "quarters",
+    "word",
+    "If that arrangement became known, the district would close, and the person paid would deny it first"
+   ],
+   [
+    "quarters",
+    "word",
+    "Offers a drink and a seat; asks who recommended the district."
+   ],
+   [
+    "powersCount",
+    "word",
+    "Is paid by two rival powers at once, and tells each what it wants to hear"
+   ]
+  ],
+  "src/data/personHooksByTitle.js": [
+   [
+    "quarters",
+    "word",
+    "Two houses in their district are fighting over the same workers, and both have asked them to settle it."
+   ]
+  ],
+  "src/data/roadmapLedger.js": [
+   [
+    "plague",
+    "word",
+    "The map remembers. A burned quarter stays scarred for years, a boom district visibly rises, and the temple grows two siz"
+   ],
+   [
+    "quarters",
+    "word",
+    "The map remembers. A burned quarter stays scarred for years, a boom district visibly rises, and the temple grows two siz"
    ]
   ],
   "src/data/spatialData.js": [
@@ -563,6 +1781,213 @@
     "garrison",
     "carrier",
     "Multiple garrison facilities require a city's population and military investment."
+   ],
+   [
+    "quarters",
+    "word",
+    "District markets (5-10)"
+   ],
+   [
+    "quarters",
+    "word",
+    "Sellsword district requires military infrastructure and sustained demand."
+   ],
+   [
+    "quarters",
+    "word",
+    "Complex multi-district water distribution requires the population and resources of a metropolis."
+   ],
+   [
+    "quarters",
+    "word",
+    "Specialized district markets emerge from growth of general markets across multiple city districts."
+   ],
+   [
+    "quarters",
+    "word",
+    "A metropolitan network of them requires tens of thousands of residents."
+   ],
+   [
+    "quarters",
+    "word",
+    "Architectural marvel requires massive wealth, metropolitan population, and deep congregational roots."
+   ],
+   [
+    "quarters",
+    "word",
+    "Grand civic architecture requires metropolitan resources and centuries of institutional development."
+   ],
+   [
+    "quarters",
+    "word",
+    "A district requires concentrated and institutionalized gambling infrastructure."
+   ],
+   [
+    "quarters",
+    "word",
+    "Formal magical education requires organized guild and district infrastructure."
+   ],
+   [
+    "quarters",
+    "word",
+    "A mages' district requires concentration of practitioners and guild organization."
+   ]
+  ],
+  "src/data/stressInstitutionEffects.js": [
+   [
+    "famine",
+    "word",
+    "Their family has been eating normally throughout the famine (not from stores, from a private source they will not name)"
+   ],
+   [
+    "famine",
+    "word",
+    "Helped engineer the original supply disruption that triggered the famine, believing it would only last a week"
+   ],
+   [
+    "famine",
+    "word",
+    "Has documentation proving the famine was caused by export decisions made by {faction}, and has been paid to lose it"
+   ],
+   [
+    "occupation",
+    "word",
+    "Has been feeding information to the occupation authority since the first week, not under duress"
+   ],
+   [
+    "occupation",
+    "word",
+    "Made a private arrangement with the occupation commander that ensures their safety and their family's at the cost of thr"
+   ],
+   [
+    "occupation",
+    "word",
+    "Some of them are still alive in the occupation's custody. They believe they were betrayed by someone else"
+   ],
+   [
+    "occupation",
+    "word",
+    "{faction} would pay well. So would the occupation authority, to suppress it"
+   ],
+   [
+    "occupation",
+    "word",
+    "Their position under the occupation exists because they helped legitimise the takeover (a public statement they made in "
+   ],
+   [
+    "occupation",
+    "word",
+    "Knows the occupation commander's real orders (not the stated ones), and those orders include a date"
+   ],
+   [
+    "powersCount",
+    "word",
+    "Has been playing both powers simultaneously, feeding each the other's plans"
+   ],
+   [
+    "revolt",
+    "word",
+    "Has been quietly forwarding a share of the taxes they collect to the insurgency (as insurance, not conviction)"
+   ],
+   [
+    "revolt",
+    "word",
+    "If the authority survives, this is treason. If the insurgency wins, it is not enough. They bet on neither side and owe b"
+   ],
+   [
+    "revolt",
+    "word",
+    "Wrote the anonymous manifesto that gave the insurgency its language, and has since publicly condemned it more than once"
+   ],
+   [
+    "revolt",
+    "word",
+    "Is the insurgency's contact inside the council, and has been feeding it exactly the information that keeps the fighting "
+   ],
+   [
+    "revolt",
+    "word",
+    "Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record t"
+   ],
+   [
+    "revolt",
+    "word",
+    "Has already negotiated their own safe passage with the insurgency's leadership in exchange for opening a gate on a night"
+   ],
+   [
+    "revolt",
+    "word",
+    "Knows the insurgency is being funded from outside the settlement, by a party the authority itself has been quietly deali"
+   ],
+   [
+    "revolt",
+    "word",
+    "Has been moving insurgent fighters and sealed messages through the underways (the dug tunnels beneath the settlement), o"
+   ]
+  ],
+  "src/data/stressTypes.js": [
+   [
+    "famine",
+    "word",
+    "No one can earn a normal living while the famine lasts, and every coin goes on food."
+   ],
+   [
+    "occupation",
+    "word",
+    "A resistance cell needs outside help: people who aren't known faces. The occupation's local collaborators include someon"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers take the revenue, and local offices work only under their eye."
+   ]
+  ],
+  "src/data/stressTypesMeta.js": [
+   [
+    "famine",
+    "word",
+    "No one can earn a normal living while the famine lasts, and every coin goes on food."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers take the revenue, and local offices work only under their eye."
+   ]
+  ],
+  "src/data/stressorSpinePhrases.js": [
+   [
+    "occupation",
+    "word",
+    "a foreign occupation"
+   ],
+   [
+    "occupation",
+    "word",
+    "what the occupier will take next"
+   ],
+   [
+    "revolt",
+    "word",
+    "an active insurgency"
+   ],
+   [
+    "revolt",
+    "word",
+    "a slave revolt"
+   ]
+  ],
+  "src/data/supplyChainData.js": [
+   [
+    "quarters",
+    "word",
+    "Inns and taverns (district)"
+   ]
+  ],
+  "src/data/traditionProse.js": [
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, "
    ]
   ],
   "src/domain/activeConditions.js": [
@@ -600,6 +2025,26 @@
     "war",
     "root",
     "Tribute, levies, and materiel from stabilized occupations sustain the war effort."
+   ],
+   [
+    "occupation",
+    "word",
+    "A foreign occupation has ended; the settlement is restoring its own authority."
+   ],
+   [
+    "siege",
+    "word",
+    "Marching relief to a besieged ally is straining local capacity."
+   ],
+   [
+    "occupation",
+    "word",
+    "Sabotage, noncompliance, and an organizing resistance harry the occupiers."
+   ],
+   [
+    "occupation",
+    "word",
+    "Garrisoning and administering conquered settlements ties down the occupier's strength."
    ]
   ],
   "src/domain/aiCharter.js": [
@@ -622,6 +2067,37 @@
     "war",
     "root",
     "WORKED EXEMPLAR\n\nREQUEST: \"Run the world until Ashford is starving or at war, half a year at most, and lean on\ntheir foo"
+   ],
+   [
+    "famine",
+    "word",
+    "WORKED EXEMPLAR\n\nREQUEST: \"Run the world until Ashford is starving or at war, half a year at most, and lean on\ntheir foo"
+   ],
+   [
+    "succession",
+    "word",
+    "WORKED EXEMPLAR\n\nREQUEST: \"Run the world until Ashford is starving or at war, half a year at most, and lean on\ntheir foo"
+   ]
+  ],
+  "src/domain/aiGrounding.js": [
+   [
+    "quarters",
+    "word",
+    "Renaming proper nouns (settlement name, faction names, NPC names, district names)."
+   ]
+  ],
+  "src/domain/autonomy/signalRegistry.js": [
+   [
+    "siege",
+    "word",
+    "Whether the settlement is besieging or besieged (active war)."
+   ]
+  ],
+  "src/domain/capacityModel.js": [
+   [
+    "refugees",
+    "word",
+    "Refugee influx raises food demand."
    ]
   ],
   "src/domain/causalState.js": [
@@ -639,6 +2115,21 @@
     "market",
     "root",
     "Black-market capture at "
+   ],
+   [
+    "famine",
+    "word",
+    "Famine grips the settlement."
+   ],
+   [
+    "plague",
+    "word",
+    "Monsters plague the region, and its defences are too weak to answer them. The crown cannot protect its people."
+   ],
+   [
+    "refugees",
+    "word",
+    "Refugee influx strains available housing."
    ]
   ],
   "src/domain/certification/subsystemRowsBaseline.js": [
@@ -700,6 +2191,11 @@
     "granary",
     "root",
     "Per tick, the change in total coin across all settlements equals mints minus sinks EXACTLY — an integer equality with no"
+   ],
+   [
+    "siege",
+    "word",
+    "THE ESTATE'S FIRST CONSERVED COIN STOCK, and the reversal of a standing ruling: f3cf639e forbade a conserved-coin primit"
    ]
   ],
   "src/domain/certification/subsystemRowsCompact.js": [
@@ -742,6 +2238,16 @@
     "war",
     "root",
     "THIS SUBSYSTEM IS STRUCTURALLY INVISIBLE TO EVERY RECEIPT SHAPE THE ESTATE WRITES, and saying so is the row. ⚠ ONE GATE,"
+   ],
+   [
+    "occupation",
+    "word",
+    "A vassalage changes overlord without changing rung. The only pre-existing occupier-change writer resets the ladder to co"
+   ],
+   [
+    "famine",
+    "word",
+    "Amendment B: a casus contradicted by a LIVE read scores zero and returns a receipt NAMING the read that struck it out — "
    ]
   ],
   "src/domain/certification/subsystemRowsGrowth.js": [
@@ -779,6 +2285,61 @@
     "war",
     "root",
     "PARTIALLY expressible: in a receipt of at least one hundred observed years recording demographicsEnabled true, the disea"
+   ],
+   [
+    "refugees",
+    "word",
+    "THE ROW WITH NO CHANNEL, AND THE REASON IS THE SLICE. Wave P1 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md) cures the finding that"
+   ],
+   [
+    "famine",
+    "word",
+    "THE ROW WITH NO CHANNEL, AND THE REASON IS THE SLICE. Wave P1 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md) cures the finding that"
+   ],
+   [
+    "famine",
+    "word",
+    "The equilibrium is a fixed point of the rate pair, not a ceiling anyone enforces. Far from min(K_food, D_tier) births do"
+   ],
+   [
+    "famine",
+    "word",
+    "NOT expressible from any receipt schema today. Pinned at source with a menu whose two destinations carry the SAME effect"
+   ],
+   [
+    "famine",
+    "word",
+    "WAVE P2, the owner where-appropriate clause. Each push driver carries an applicability guard that zeroes it outright rat"
+   ],
+   [
+    "famine",
+    "word",
+    "NOT expressible from any receipt schema today: no envelope records why a settlement did not shed. Pinned at source pairw"
+   ],
+   [
+    "refugees",
+    "word",
+    "NOT expressible from any receipt schema today: no envelope records why a settlement did not shed. Pinned at source pairw"
+   ],
+   [
+    "refugees",
+    "word",
+    "WAVE P2. The two migrant classes fall out of the driver table rather than from a second rule: only food and an enemy at "
+   ],
+   [
+    "refugees",
+    "word",
+    "NOT expressible from any receipt schema today. Pinned at source on ONE menu and one home reading, with the destination p"
+   ],
+   [
+    "famine",
+    "word",
+    "NOT expressible from any receipt schema today. Pinned at source on ONE menu and one home reading, with the destination p"
+   ],
+   [
+    "famine",
+    "word",
+    "NOT expressible from any receipt schema today: no envelope pairs a settlement population with its named-cast size. Pinne"
    ]
   ],
   "src/domain/certification/subsystemRowsMemory.js": [
@@ -798,6 +2359,41 @@
     "prison",
     "root",
     "DARK BY DECLARATION, STILL, AFTER H4, AND THE eventTypes LIST IS STILL EMPTY, THOUGH FOR A NEW REASON THAT MATTERS. H4 i"
+   ],
+   [
+    "plague",
+    "word",
+    "The gate is a single seam: candidateEvents.js:442 admits evaluateStressorRules only when rules.stressorsEnabled is true,"
+   ],
+   [
+    "famine",
+    "word",
+    "THE HEADLINE SILENCE OF THIS LANE. MEASURED 2026-07-31: flow_migration appears ZERO times in all seven completed release"
+   ],
+   [
+    "plague",
+    "word",
+    "THE HEADLINE SILENCE OF THIS LANE. MEASURED 2026-07-31: flow_migration appears ZERO times in all seven completed release"
+   ],
+   [
+    "revolt",
+    "word",
+    "THE HEADLINE SILENCE OF THIS LANE. MEASURED 2026-07-31: flow_migration appears ZERO times in all seven completed release"
+   ],
+   [
+    "refugees",
+    "word",
+    "THE HEADLINE SILENCE OF THIS LANE. MEASURED 2026-07-31: flow_migration appears ZERO times in all seven completed release"
+   ],
+   [
+    "refugees",
+    "word",
+    "A refugee flow is a transfer: it debits the source and credits the destination in the same tick, so it moves two settlem"
+   ],
+   [
+    "refugees",
+    "word",
+    "The lane keys off displacement stressors. A realm that carries severe famines, sieges or occupations for years and never"
    ]
   ],
   "src/domain/certification/subsystemRowsPlace.js": [
@@ -815,6 +2411,21 @@
     "granary",
     "root",
     "NOT expressible from a v4 or v5 receipt. It needs a per-QUARTER granary series (storageMonths at the four season boundar"
+   ],
+   [
+    "quarters",
+    "word",
+    "The gate is a single seam: urbanFabricActive (urbanFabricKernel.js:158) reads simulationRules.urbanFabricEnabled === tru"
+   ],
+   [
+    "famine",
+    "word",
+    "Partially expressible today: no settlement stateVectors population may fall to zero in any observed year, which the comp"
+   ],
+   [
+    "quarters",
+    "word",
+    "The layer swaps WHERE a consequence lands, never how much of it there is: a calamity toll is narrated by district with t"
    ]
   ],
   "src/domain/certification/subsystemRowsSeat.js": [
@@ -832,6 +2443,46 @@
     "war",
     "root",
     "D10 THE IRREGULAR-FORCE LAW, below-threshold half. THE OWNER MECHANISM, quoted from the volume: a coup, rebellion or ins"
+   ],
+   [
+    "occupation",
+    "word",
+    "The foreign seat (the occupier or overlord who looms over the ruler)"
+   ],
+   [
+    "occupation",
+    "word",
+    "THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement's ruling power has \"an equal"
+   ],
+   [
+    "revolt",
+    "word",
+    "THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement's ruling power has \"an equal"
+   ],
+   [
+    "famine",
+    "word",
+    "THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement's ruling power has \"an equal"
+   ],
+   [
+    "revolt",
+    "word",
+    "LEGITIMACY-SCALED UPHEAVAL: the owner directive (ODQ 736) that \"any attempted coup or rebellion has a scaling factor acc"
+   ],
+   [
+    "revolt",
+    "word",
+    "Under a live occupation the lit insurgency gate composes exactly ONE row. The two dark rows (occupation 2.0 and crisis 1"
+   ],
+   [
+    "revolt",
+    "word",
+    "D10 THE IRREGULAR-FORCE LAW, below-threshold half. THE OWNER MECHANISM, quoted from the volume: a coup, rebellion or ins"
+   ],
+   [
+    "occupation",
+    "word",
+    "Under a live occupations row `participation01` reads `resistance` INSTEAD of the commons grievance blend, never both. Su"
    ]
   ],
   "src/domain/certification/subsystemRowsVirtual.js": [
@@ -884,6 +2535,31 @@
     "war",
     "root",
     "With the key absent, false, or any truthy non-true value, the opener opens exactly the war it opens without the layer, a"
+   ],
+   [
+    "refugees",
+    "word",
+    "Migration rumor carrier (the refugee lane)"
+   ],
+   [
+    "refugees",
+    "word",
+    "THE LANE ADDS ZERO WRITERS BY DESIGN, WHICH IS ALSO WHY NO RECEIPT CAN SEE IT. ONE GATE: migrationRumorsActive is the vi"
+   ],
+   [
+    "refugees",
+    "word",
+    "With the flag dark the assembly returns migrantPaths null and flightEntries empty, so advanceRumorLedgers behaves byte-i"
+   ],
+   [
+    "housesCount",
+    "word",
+    "A QUEUE ORDER AND A RETURNED RECEIPT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE,"
+   ],
+   [
+    "refugees",
+    "word",
+    "A NEWS-ONLY STAGE OVER LEDGERS OTHER LAYERS WRITE, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READI"
    ]
   ],
   "src/domain/certification/subsystemRowsWar.js": [
@@ -941,6 +2617,26 @@
     "market",
     "root",
     "Roads, stores, hands, institutions and markets are qualitative reads of existing state, never a new war-tax stock or a s"
+   ],
+   [
+    "siege",
+    "word",
+    "Nested under warLayerEnabled (read at warDeployment.js:479, inside the gate at 243). MEASURED SILENT, and that is this r"
+   ],
+   [
+    "siege",
+    "word",
+    "Nested under warLayerEnabled (read at warDeployment.js:469). The ledger seeds from the target's fresh homeDefense on the"
+   ],
+   [
+    "siege",
+    "word",
+    "The eroded defender strength is clamped to the town's own fresh home defense, so a besieged town is never made stronger "
+   ],
+   [
+    "siege",
+    "word",
+    "Nested under warLayerEnabled (read at warDeployment.js:477). computeAllyRelief (warCapacityReads.js:74) sums ALLY_RELIEF"
    ]
   ],
   "src/domain/certification/subsystemRowsWaves.js": [
@@ -988,6 +2684,26 @@
     "market",
     "root",
     "A CONJUNCTION GATE OVER A LANE THAT WRITES NOTHING. brokerageEffectsActive is informationBrokeragesEnabled AND infoState"
+   ],
+   [
+    "famine",
+    "word",
+    "ONE GATE, AND THE SLICE BEHIND IT STILL EMITS NO EVENT. routeLifecycleActive is the virtual routeLifecycleEnabled alone "
+   ],
+   [
+    "siege",
+    "word",
+    "ONE GATE, AND THE SLICE BEHIND IT IS MAGIC-INDEPENDENT. magicEconomyActive is the virtual magicEconomyEnabled alone (ins"
+   ],
+   [
+    "famine",
+    "word",
+    "THE CONSERVATION LAW (design section 6). At the top regimes magic may carry a CAP-BANDED share of a settlement's daily n"
+   ],
+   [
+    "quarters",
+    "word",
+    "A PRESENTATION-SIDE SUBSYSTEM, AND THE FIRST ONE THIS CONTRACT HOLDS. THE GATE: townCartographyActive is the virtual tow"
    ]
   ],
   "src/domain/certification/warConvergenceContract.js": [
@@ -1019,6 +2735,13 @@
     "a governed WR-5 seat-transition family closed the war (warRulingsNews families)"
    ]
   ],
+  "src/domain/coherence/crisisFactFindings.js": [
+   [
+    "famine",
+    "word",
+    "active famine; the line prints "
+   ]
+  ],
   "src/domain/coherence/defenseWordsFindings.js": [
    [
     "militia",
@@ -1043,6 +2766,21 @@
     "watch",
     "root",
     "Organized crime or a crisis has overwhelmed the watch."
+   ],
+   [
+    "famine",
+    "word",
+    "Famine. Food has failed outright, and it caps prosperity no matter how strong the trade."
+   ],
+   [
+    "famine",
+    "word",
+    "How well the settlement feeds itself, read from local production, imports, and any magical supplement against demand. A "
+   ],
+   [
+    "famine",
+    "word",
+    "Each of the five defense arms (beasts and monsters, invasion and war, internal security, economic survival, disasters an"
    ]
   ],
   "src/domain/compendium/catalogData.js": [
@@ -1085,6 +2823,21 @@
     "temple",
     "root",
     "Church hierarchy is corrupt. Indulgences, false relics, protection rackets."
+   ],
+   [
+    "siege",
+    "word",
+    "Stress: Under Siege active"
+   ],
+   [
+    "siege",
+    "word",
+    "Under siege. Supply constrained. Morale is a resource."
+   ],
+   [
+    "plague",
+    "word",
+    "Plague of Beasts"
    ]
   ],
   "src/domain/compendium/generated/compendiumData.generated.js": [
@@ -1177,6 +2930,96 @@
     "market",
     "root",
     "Competing for the same markets. Exports tend to mirror the rival and stay contested. Criminal presence elevated."
+   ],
+   [
+    "famine",
+    "word",
+    "How reliably the settlement can feed its population, weighing food production and stores against demand. It falls toward"
+   ],
+   [
+    "plague",
+    "word",
+    "The settlement's ability to treat injury and disease through its healers, temples, and institutions. When it is low, pla"
+   ],
+   [
+    "siege",
+    "word",
+    "How prepared the settlement is to withstand attack, from walls and garrison to trained militia. It rises with fortificat"
+   ],
+   [
+    "famine",
+    "word",
+    "Strain from the settlement failing to feed itself, rising as production and stores fall short of demand. It is the press"
+   ],
+   [
+    "plague",
+    "word",
+    "Strain from sickness and poor sanitation outpacing the settlement's ability to treat it. It is the pressure behind plagu"
+   ],
+   [
+    "famine",
+    "word",
+    "How well the settlement feeds itself, read from local production, imports, and any magical supplement against demand. A "
+   ],
+   [
+    "famine",
+    "word",
+    "Famine. Food has failed outright, and it caps prosperity no matter how strong the trade."
+   ],
+   [
+    "famine",
+    "word",
+    "Each of the five defense arms (beasts and monsters, invasion and war, internal security, economic survival, disasters an"
+   ],
+   [
+    "famine",
+    "word",
+    "Adds a normalized stressor, such as a famine or a raid, into the campaign's region to be resolved later. The change can "
+   ],
+   [
+    "occupation",
+    "word",
+    "An occupying force holding the settlement."
+   ],
+   [
+    "occupation",
+    "word",
+    "An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed u"
+   ],
+   [
+    "famine",
+    "word",
+    "A satellite thorp grows into a hamlet and can charter at village scale; a starving satellite returns its people to the p"
+   ],
+   [
+    "siege",
+    "word",
+    "Adds sea power to a mapped realm: convoys carry armies to reachable ports, hostile fleets fight where they share a sea l"
+   ],
+   [
+    "quarters",
+    "word",
+    "On a mapped realm, it decides where a calamity's toll, a siege's breach, and corruption's creep actually fall across dis"
+   ],
+   [
+    "quarters",
+    "word",
+    "Gives each district a slowly decaying sense of prominence, so old power and wealth linger after a regime or economy shif"
+   ],
+   [
+    "siege",
+    "word",
+    "Stress: Under Siege active"
+   ],
+   [
+    "siege",
+    "word",
+    "Under siege. Supply constrained. Morale is a resource."
+   ],
+   [
+    "plague",
+    "word",
+    "Plague of Beasts"
    ]
   ],
   "src/domain/compendium/searchIndex.js": [
@@ -1219,6 +3062,11 @@
     "market",
     "root",
     "disputes market contests border incursions intelligence"
+   ],
+   [
+    "plague",
+    "word",
+    "plagued embattled dangerous monster plague crisis siege-like militia war"
    ]
   ],
   "src/domain/content/customContentManifest.generated.js": [
@@ -1267,6 +3115,48 @@
     "temple",
     "root",
     "the church gains while the seat struggles"
+   ],
+   [
+    "occupation",
+    "word",
+    "the occupier's local face"
+   ],
+   [
+    "famine",
+    "word",
+    "drawn from the house that bore the famine"
+   ],
+   [
+    "occupation",
+    "word",
+    "the occupation's resistance turns on its local face"
+   ],
+   [
+    "famine",
+    "word",
+    "the famine's exploiter, first to deal with the occupier"
+   ],
+   [
+    "occupation",
+    "word",
+    "the famine's exploiter, first to deal with the occupier"
+   ],
+   [
+    "occupation",
+    "word",
+    "leads the occupying power"
+   ],
+   [
+    "occupation",
+    "word",
+    "the occupier gains by it"
+   ]
+  ],
+  "src/domain/crisis/crisisHooks.js": [
+   [
+    "occupation",
+    "word",
+    "the occupier's orders come through "
    ]
   ],
   "src/domain/crisis/crisisSummaryVantage.js": [
@@ -1324,6 +3214,86 @@
     "war",
     "root",
     "In wartime {name}'s trade follows the army: what the war needs sells, and the rest waits."
+   ],
+   [
+    "siege",
+    "word",
+    "{name} is under siege and its supply roads are cut; every order its leaders give is about lasting another week."
+   ],
+   [
+    "famine",
+    "word",
+    "Nobody in {name} earns a normal living while the famine lasts; what money there is goes on food, and whoever sells grain"
+   ],
+   [
+    "occupation",
+    "word",
+    "Newcomers to {name} are questioned by the occupiers' officials before any local will say a word to them."
+   ],
+   [
+    "occupation",
+    "word",
+    "Everything sold in {name} pays the occupiers their due first, and the merchants keep their prices and their opinions to "
+   ],
+   [
+    "occupation",
+    "word",
+    "At every road into {name}, the occupiers' officials note who comes and goes."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers take {name}'s revenue, and the local offices work only under their eye."
+   ],
+   [
+    "occupation",
+    "word",
+    "{name}'s own leaders keep their titles, but every decision they make goes to the occupiers for approval."
+   ],
+   [
+    "occupation",
+    "word",
+    "A newcomer in {name} is taken for the occupiers' informer until they prove otherwise."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers watch {name} closely, and the resistance watches them back, careful never to be caught."
+   ],
+   [
+    "occupation",
+    "word",
+    "Keeping order in {name} is the occupiers' business now, and the locals are not trusted to help."
+   ],
+   [
+    "occupation",
+    "word",
+    "In {name} people keep their heads down; a careless word to the wrong neighbour can bring the occupiers to the door."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers watch {name} for the resistance, and the resistance watches for its chance."
+   ],
+   [
+    "occupation",
+    "word",
+    "People who are not known faces in {name} are what its quiet resistance needs most, and what the occupiers fear most."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers take what {name} earns, and the people who once shared in it now fill someone else's purse."
+   ],
+   [
+    "powersCount",
+    "word",
+    "Two or three powers each hold part of {name}, and none will give way, so nothing that needs them all gets done."
+   ],
+   [
+    "succession",
+    "word",
+    "Newcomers to {name} are courted by every claimant to the empty seat, each hoping to count one more friend."
    ]
   ],
   "src/domain/customContentSchema.js": [
@@ -1331,6 +3301,11 @@
     "market",
     "root",
     "Trade and markets"
+   ],
+   [
+    "plague",
+    "word",
+    "Healing and resistance to pestilence"
    ]
   ],
   "src/domain/dailyLife.js": [
@@ -1385,6 +3360,11 @@
     "militia",
     "root",
     "a capable militia, enough to defend its own and raid a neighbour"
+   ],
+   [
+    "famine",
+    "word",
+    "starving and demoralized, close to falling apart"
    ]
   ],
   "src/domain/display/causeConjunctionClassContent.js": [
@@ -1497,6 +3477,56 @@
     "market",
     "root",
     "The scandal burned out and the {role} came clean in the quiet after it; the market for silence closed and took the arran"
+   ],
+   [
+    "famine",
+    "word",
+    "Trade is choked off and lawful commerce is starving, so this {role} takes a cut of the commerce that is not lawful."
+   ],
+   [
+    "occupation",
+    "word",
+    "An occupier holds this place, and this {role} has made an accommodation; the occupier finds it useful and pays in protec"
+   ],
+   [
+    "occupation",
+    "word",
+    "Under occupation everything runs through the occupier, and this {role} runs errands for them that the town cannot see."
+   ],
+   [
+    "occupation",
+    "word",
+    "The old reason has gone, but the occupier is here now, and their favor sustains the arrangement in its place."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation ended and the {role} ended the accommodation with it; whatever was owed to the occupier left with them."
+   ],
+   [
+    "occupation",
+    "word",
+    "When the occupier withdrew, the {role} came clean; the accommodation had no life of its own once its protection marched "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the habits of accommodation remain; the {role} still works the way the occupation taught."
+   ],
+   [
+    "occupation",
+    "word",
+    "The town now knows the {role} served the occupier's interest against its own; collaboration is a word no one says quietl"
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public that the {role} took the occupier's protection and paid for it in the town's secrets; the word for that is "
+   ],
+   [
+    "occupation",
+    "word",
+    "The old paymaster is destroyed, but the occupier remains, and their administration has quietly inherited the arrangement"
    ]
   ],
   "src/domain/display/causeConjunctionContent.js": [
@@ -1524,6 +3554,26 @@
     "watch",
     "root",
     "It is now known that the underworld ran the watch through its captain, and the town is asking whether anything the watch"
+   ],
+   [
+    "occupation",
+    "word",
+    "The ruler's seal still stamps the town's decrees, and the occupier's clerk reads them first. The ruler keeps the seat by"
+   ],
+   [
+    "occupation",
+    "word",
+    "The town believes its ruler shields it from the occupier. The requisition lists say otherwise: signed in the familiar ha"
+   ],
+   [
+    "occupation",
+    "word",
+    "It is out that the agitator sold every serious plan to the occupier before it could happen, and the movement is breaking"
+   ],
+   [
+    "occupation",
+    "word",
+    "It is now known why the occupier let this one resistance survive: the agitator who led it reported to them. The survivor"
    ]
   ],
   "src/domain/display/causeConjunctionRole/arcane.js": [
@@ -1656,6 +3706,56 @@
     "watch",
     "root",
     "The capture was broken and the adept called in his own debt: every working done for the syndicate was named, and its cou"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier needs eyes, and the adept is the best scryer in town. The adept watches the neighbors for the occupier and "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation keeps a list of the gifted, and the adept writes it: who can do what, and where they sleep, sent each mon"
+   ],
+   [
+    "occupation",
+    "word",
+    "The adept's first reason is gone, but now the occupier's leave is what lets the adept practice, and the scrying pays for"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the adept burned the register, then stood before those it had named and read his own entry fir"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the adept came clean; the scrying was confessed to the watched, house by house."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the adept still keeps the list of the gifted up to date."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public that the adept scried on the town for the occupier, and every family is working out how the occupation knew"
+   ],
+   [
+    "occupation",
+    "word",
+    "The list is out, in the adept's hand: the town's gifted, listed for the occupier, and the adept's own name left off."
+   ],
+   [
+    "occupation",
+    "word",
+    "The gifted families on the adept's list are asking why the occupier came to their doors first, and the answer is in the "
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the adept before is gone, but now the occupier is in control, and the adept scries for it."
    ]
   ],
   "src/domain/display/causeConjunctionRole/civic.js": [
@@ -1758,6 +3858,51 @@
     "temple",
     "root",
     "It is out that the official took the temple's money for silence, and the town is reading what was hidden."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier asked for the census, and the official handed it over with notes: who resists, who complies, who has sons o"
+   ],
+   [
+    "occupation",
+    "word",
+    "Under the occupation the official kept every office and earned it. The town's files serve the occupier now, and the offi"
+   ],
+   [
+    "occupation",
+    "word",
+    "Whatever first drew the official in is over, but now the official serves the occupier, and the noted census keeps the of"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the official produced the annotations for the town to read, their own entries first."
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the official came clean; what the census had carried to the occupier was confessed to those i"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the official still marks in the census who resists and who complies."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public that the census went to the occupier annotated, and every family the occupation visited is finding its entr"
+   ],
+   [
+    "occupation",
+    "word",
+    "Families the occupier visited are finding their own names in the official's census, each with a mark beside it."
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the official before is gone, but now the occupier rules, and the official hands the noted census to the occ"
    ]
   ],
   "src/domain/display/causeConjunctionRole/criminal.js": [
@@ -1880,6 +4025,51 @@
     "temple",
     "root",
     "Whoever held the boss before is gone, but now the priesthood is tainted, and the temple's silence money goes through the"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier lets the boss's rackets run, and the boss pays for it each month in names: resisters, safe houses, and anyo"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation could have crushed the trade in a week and did not; the boss pays for that in information, and the crews "
+   ],
+   [
+    "occupation",
+    "word",
+    "The boss's first reason is gone, but now the occupier tolerates the rackets, and the boss pays the rent in names."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the boss stood before the crews with the whole account: what was traded, who was named, and hi"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the boss came clean to his own; the informing stopped with the occupation, and the amends did"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the boss still keeps an informer's habits: careful lists of neighbors, careful silences."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is out that the boss informed for the occupier, and the resistance's survivors have longer memories than the law ever"
+   ],
+   [
+    "occupation",
+    "word",
+    "Families of the neighbours the boss betrayed to the occupier know the name now, and they are keeping count."
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever held the boss before is gone, but now the occupier lets the rackets run, and the boss pays for that in names and"
    ]
   ],
   "src/domain/display/causeConjunctionRole/diplomatOutsider.js": [
@@ -1987,6 +4177,51 @@
     "temple",
     "root",
     "Whoever paid the envoy before is gone, but now the priesthood is tainted, and the temple pays the envoy to keep it quiet"
+   ],
+   [
+    "occupation",
+    "word",
+    "The envoy now answers to the occupier. The protests the envoy files are empty by agreement, and townsfolk who ask the en"
+   ],
+   [
+    "occupation",
+    "word",
+    "The mission survives the occupation by serving it. The envoy's complaints are softened before they are sent, the occupie"
+   ],
+   [
+    "occupation",
+    "word",
+    "Whatever first drew the envoy in is over, but now the mission stands by the occupier's leave, and the empty protests kee"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the envoy published the agreement that had hollowed the protests, with every reported name and"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the envoy came clean; the pre-approved theater was confessed, and the reported petitioners so"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the envoy still files protests as if the occupier were reading them."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is out that the envoy bought the occupier's favor with empty complaints and the names of those who asked for help."
+   ],
+   [
+    "occupation",
+    "word",
+    "The petitioners who asked the envoy for help, and were reported to the occupier for it, are the first to tell the town."
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the envoy before is gone, but now the occupier holds sway, and the envoy files the same empty protests for "
    ]
   ],
   "src/domain/display/causeConjunctionRole/dissident.js": [
@@ -2134,6 +4369,56 @@
     "watch",
     "root",
     "The underworld owns the mob as it owns the offices. The agitator's riots break out wherever the crews need the watch loo"
+   ],
+   [
+    "occupation",
+    "word",
+    "The resistance follows the agitator, and the occupier follows the resistance, because the agitator tells it where to loo"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation allows one resistance, the agitator's, and not out of kindness: the agitator reports every serious plan b"
+   ],
+   [
+    "occupation",
+    "word",
+    "The agitator's first reason is gone, but now the occupier holds the town and lets the movement stand, and the reported p"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the agitator stood before the movement with the whole account; the reported plans, the tolerat"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the agitator came clean; the movement learned why its boldest nights had always failed, from "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the agitator still writes down every serious plan the movement makes, as if for the occupier."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public that the resistance's plans reached the occupier before they ripened, and the survivors of the failed night"
+   ],
+   [
+    "occupation",
+    "word",
+    "It is out that the movement was the occupier's tool with the agitator in charge, and the members now know what the agita"
+   ],
+   [
+    "occupation",
+    "word",
+    "Survivors of the resistance's failed nights know now who carried the plans to the occupier, and what the agitator was pa"
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the agitator before is gone, but now the occupier holds the town, and it lets the movement stand for the sa"
    ]
   ],
   "src/domain/display/causeConjunctionRole/healer.js": [
@@ -2226,6 +4511,56 @@
     "temple",
     "root",
     "Whoever paid the healer before is gone, but now the priesthood is tainted, and the temple pays the healer to sign for it"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier's officers are treated first and best, and the healer's reports go to them with the medicine. Each week the"
+   ],
+   [
+    "occupation",
+    "word",
+    "The infirmary stays open by the occupier's leave. The healer treats everyone who comes and reports anyone whose wounds p"
+   ],
+   [
+    "occupation",
+    "word",
+    "Whatever first drew the healer in is over, but now the occupier decides whether the infirmary stays open, and the weekly"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the healer confessed the notes to the households they had named, one visit at a time."
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the healer came clean; the first-and-best treatment was owned, and the infirmary's books open"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier has gone, but the healer still keeps notes on who comes in hurt."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public that the healer's house calls fed the occupier's lists, and every raid that followed a treatment now has it"
+   ],
+   [
+    "occupation",
+    "word",
+    "The notes are out, in the healer's hand: wounds described, households named, and the occupation's visits mapped to both."
+   ],
+   [
+    "occupation",
+    "word",
+    "Households raided after a visit from the healer have found their own wounds written up in the healer's notes for the occ"
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the healer before is gone, but now the occupier rules, and the healer's weekly notes on wounded households "
    ]
   ],
   "src/domain/display/causeConjunctionRole/heir.js": [
@@ -2348,6 +4683,56 @@
     "temple",
     "root",
     "The temple was set in order, but the claimant never gave up the blessings bought from it."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier has promised the claimant the succession, and the claimant earns it weekly: names, movements, and the mood "
+   ],
+   [
+    "occupation",
+    "word",
+    "The claimant's path to the seat now runs through the occupation office, and the toll is information about everyone who t"
+   ],
+   [
+    "occupation",
+    "word",
+    "The claimant's first reason is gone; now the occupier's promise of the seat keeps the claimant informing."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the claimant confessed the reports to the family, every one; the promised succession was renou"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the claimant came clean about the bargain; the seat was to be the fee, and the family now kno"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the claimant still watches the family and reports like an informer."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public that the claimant informed for the occupier against a promise of the seat, and the family is reading the re"
+   ],
+   [
+    "occupation",
+    "word",
+    "The bargain is out: the succession for surveillance, and every arrest in the household during the occupation now has an "
+   ],
+   [
+    "occupation",
+    "word",
+    "Members of the household arrested during the occupation are reading the claimant's reports to the occupier, with their n"
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the claimant before is gone, but now the occupier is in control, and its officials have renewed the promise"
    ]
   ],
   "src/domain/display/causeConjunctionRole/laborResource.js": [
@@ -2505,6 +4890,51 @@
     "temple",
     "root",
     "Whoever paid the foreman before is gone, but now the priesthood is tainted, and the temple pays the foreman's double inv"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier requisitions labor by the head, and the foreman draws up the list of who is taken and who is spared, and ch"
+   ],
+   [
+    "occupation",
+    "word",
+    "The labor drafts come through the yard, and the foreman has made them a business; the occupier gets its count, and the c"
+   ],
+   [
+    "occupation",
+    "word",
+    "The foreman's first reason is gone, but now the occupier drafts labor through the yard, and families pay the foreman to "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the foreman confessed the draft lists to the taken and their families, and worked their plots "
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the foreman came clean; the sparing fees were returned, and the composed counts owned before "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the foreman still keeps the draft lists ready, and families still pay to stay off them."
+   ],
+   [
+    "occupation",
+    "word",
+    "The sparing rate is out: the foreman sold exemption from the occupier's drafts, and the poorest carried the count."
+   ],
+   [
+    "occupation",
+    "word",
+    "The poorest families, who carried the occupier's labour drafts, know now that others paid the foreman to be spared."
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the foreman before is gone, but now the occupier drafts the labor, and its officials take the heads from th"
    ]
   ],
   "src/domain/display/causeConjunctionRole/merchant.js": [
@@ -2677,6 +5107,51 @@
     "bank",
     "root",
     "Since the scandal broke, the bribes need banking, and the guildmaster banks them, holding the escrow between the guilty "
+   ],
+   [
+    "famine",
+    "word",
+    "The guild reserve shrinks in the books and turns up at night, sold at famine prices by the guildmaster."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier issues the trade permits now, and the guildmaster holds the best of them; the price was cooperation, and it"
+   ],
+   [
+    "occupation",
+    "word",
+    "Commerce under occupation runs on licenses, and the guildmaster collects them like debts; what the guildmaster gives the"
+   ],
+   [
+    "occupation",
+    "word",
+    "The guildmaster's first reason is gone, but now the occupier issues the licenses, and the guildmaster's reports on rival"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the guildmaster surrendered the privileged permits; the reports he had filed were confessed to"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the guildmaster came clean; the licenses were burned and the guild elected whether to keep hi"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the guildmaster still trades on the positions the occupier's licenses built, ahead of every ri"
+   ],
+   [
+    "occupation",
+    "word",
+    "Guild members reported to the occupier are reading their own files, and the licences the guildmaster got for them."
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the guildmaster before is gone, but now the occupier rules, and its officials renewed the guildmaster's lic"
    ]
   ],
   "src/domain/display/causeConjunctionRole/military.js": [
@@ -2954,6 +5429,56 @@
     "watch",
     "root",
     "People whose evidence sank in the watch house are learning the captain sold it, at prices on a list."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier holds the town, and the captain's patrols never trouble them; the schedules reach the occupation office bef"
+   ],
+   [
+    "occupation",
+    "word",
+    "The captain kept the command under the occupation, and the price is standing: names, routes, and the occasional door lef"
+   ],
+   [
+    "occupation",
+    "word",
+    "The captain's first reason is gone; now the occupier's favor keeps the captain in command, and their protection is the p"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the captain ended the accommodation; what he had passed to them marched away in their baggage,"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the captain came clean about the accommodation; he kept the watch alive under it, and the tow"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the captain still runs the patrols the way the occupier wanted them."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public that the captain fed patrol schedules to the occupier, and every arrest made on those nights is being laid "
+   ],
+   [
+    "occupation",
+    "word",
+    "The word is collaboration now, said in the open: the captain served the occupier's order, and the town remembers whose d"
+   ],
+   [
+    "occupation",
+    "word",
+    "Families arrested on nights the captain gave the occupier the patrol schedules are laying each arrest at the captain's d"
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the captain before is gone, but now the occupier holds the gates, and its garrison gives the captain orders"
    ]
   ],
   "src/domain/display/causeConjunctionRole/religious.js": [
@@ -3196,6 +5721,56 @@
     "temple",
     "root",
     "Whoever used the temple before is gone, but now the town's offices are in criminal hands, and whoever holds them kept th"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier lets the temple stand, and the sermons pay the rent; the priest preaches patience, submission, and the sinf"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier lets the temple stay open because the priest is useful, and the sermons always suit the occupier."
+   ],
+   [
+    "occupation",
+    "word",
+    "The priest's first reason is gone, but now the occupier holds the town and lets the temple stay open, and the priest's s"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the priest preached the sermon he had swallowed the whole occupation, and named what the other"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the priest came clean; the scheduled sermons were confessed as the price of the open door."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the priest still preaches patience and submission to the congregation, as if the occupier were"
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public that the pulpit preached to the occupier's order, and the congregation is re-hearing every sermon about pat"
+   ],
+   [
+    "occupation",
+    "word",
+    "It is out that the temple stayed open because the priest preached submission to the occupier, and the town knows who wan"
+   ],
+   [
+    "occupation",
+    "word",
+    "The congregation is hearing the priest's sermons on patience again, knowing now the occupier asked for them."
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the priest before is gone, but now the occupier holds the town, and its officials set the terms of the prie"
    ]
   ],
   "src/domain/display/causeConjunctionRole/ruler.js": [
@@ -3403,6 +5978,56 @@
     "market",
     "root",
     "When the scandal settled, the ruler ended the market in mercy; the last payments were returned with the verdicts unbough"
+   ],
+   [
+    "occupation",
+    "word",
+    "The ruler keeps the seat by the occupier's leave, and earns the leave daily: requisitions signed, resisters named, appea"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier wants a native ruler, and the ruler keeps the seat by signing what the occupier asks; the town pays the cos"
+   ],
+   [
+    "occupation",
+    "word",
+    "The ruler's first reason is gone, but now the occupier's leave keeps the ruler in the seat, and the ruler keeps earning "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier withdrew and the ruler ended the accommodation, then laid the whole record of it before the council unasked"
+   ],
+   [
+    "occupation",
+    "word",
+    "With the occupation ended, the ruler came clean; whatever the seat had signed under the occupier was published, and the "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier is gone, but the ruler still names resisters and signs requisitions as if the occupier were watching."
+   ],
+   [
+    "occupation",
+    "word",
+    "It is public what the ruler signed to keep the seat under the occupier, and each requisition now has families attached t"
+   ],
+   [
+    "occupation",
+    "word",
+    "Collaboration is said openly of the ruler now; the occupier's records marched away, but copies stayed, and they are bein"
+   ],
+   [
+    "occupation",
+    "word",
+    "Families named in the occupier's requisitions are reading the copies, with the ruler's signature on each."
+   ],
+   [
+    "occupation",
+    "word",
+    "Whoever paid the ruler before is gone, but now the ruler keeps the seat by the occupier's leave and answers to its offic"
    ]
   ],
   "src/domain/display/causeLifecycleVocabulary.js": [
@@ -3415,6 +6040,11 @@
     "war",
     "root",
     "the war pressed in"
+   ],
+   [
+    "occupation",
+    "word",
+    "an occupier held the town"
    ]
   ],
   "src/domain/display/defenseDisplay.js": [
@@ -3432,6 +6062,11 @@
     "prison",
     "root",
     "Court + Prison"
+   ],
+   [
+    "siege",
+    "word",
+    "under siege the outlying fields are lost"
    ]
   ],
   "src/domain/display/demographicReading.js": [
@@ -3483,6 +6118,11 @@
     "docks",
     "root",
     "the harbour trade finds its old rhythm"
+   ],
+   [
+    "siege",
+    "word",
+    "the besiegers run short before the besieged do"
    ]
   ],
   "src/domain/display/humanizeEngineTokens.js": [
@@ -3667,6 +6307,106 @@
     "temple",
     "root",
     "A house that takes in parentless children and raises them until they can be apprenticed or placed. Order and mercy under"
+   ],
+   [
+    "quarters",
+    "word",
+    "A district given over to organized sellsword companies, from escort outfits to field regiments available for hire."
+   ],
+   [
+    "quarters",
+    "word",
+    "A quiet district of scholars, researchers, and keepers of obscure knowledge who sell answers to those who can afford the"
+   ],
+   [
+    "quarters",
+    "word",
+    "A water or wind mill that grinds the district's grain, usually under a monopoly. The miller holds a chokehold on bread a"
+   ],
+   [
+    "quarters",
+    "word",
+    "An organized body of shoemakers producing footwear for an urban population under regulated standards."
+   ],
+   [
+    "quarters",
+    "word",
+    "A district trading in silks, spices, and precious goods for those with coin to burn."
+   ],
+   [
+    "refugees",
+    "word",
+    "Repurposed tunnels and catacombs sheltering criminals, refugees, and everything that needs to stay out of daylight."
+   ],
+   [
+    "quarters",
+    "word",
+    "A chartered market held once a week where the district buys and sells its produce and goods."
+   ],
+   [
+    "famine",
+    "word",
+    "Communal grain storage that buffers the harvest and holds off famine in a bad year."
+   ],
+   [
+    "quarters",
+    "word",
+    "Several permanent market squares serving different districts of a large city."
+   ],
+   [
+    "quarters",
+    "word",
+    "Markets that trade every day in several places at once, the mark of a true urban economy."
+   ],
+   [
+    "quarters",
+    "word",
+    "Whole districts of inns and taverns catering to merchants, travellers, and long-staying visitors."
+   ],
+   [
+    "quarters",
+    "word",
+    "A district of warehouses holding merchant goods between shipment and sale."
+   ],
+   [
+    "quarters",
+    "word",
+    "A licensed district for commerce in people, with auction halls, holding compounds, and the brokers and clerks that serve"
+   ],
+   [
+    "quarters",
+    "word",
+    "Several specialized market districts, each given over to one thing: grain, cloth, metals, livestock, or exotica."
+   ],
+   [
+    "famine",
+    "word",
+    "A state-run network of granaries holding strategic reserves against war and famine."
+   ],
+   [
+    "quarters",
+    "word",
+    "Several standing theatres worked by professional companies, a mark of urban culture."
+   ],
+   [
+    "quarters",
+    "word",
+    "Dense multi-storey housing and tenements packing a city's population, poorest at the bottom."
+   ],
+   [
+    "quarters",
+    "word",
+    "Dense multi-storey blocks and tenement courts housing a metropolis, with suburbs spilling past the walls."
+   ],
+   [
+    "quarters",
+    "word",
+    "Hundreds of houses of worship across every district, the faith woven into each neighbourhood."
+   ],
+   [
+    "quarters",
+    "word",
+    "A metropolitan cathedral and the seat of the region's highest religious authority, drawing pilgrims from afar."
    ]
   ],
   "src/domain/display/labelBands.js": [
@@ -4130,6 +6870,86 @@
     "market",
     "root",
     "Word of the country's good fortune moves along the market roads, and the guilds reckon their gains."
+   ],
+   [
+    "plague",
+    "word",
+    "Word comes of plague in the near country; the healers ready their stores and the gates grow watchful."
+   ],
+   [
+    "plague",
+    "word",
+    "A pestilence is abroad and drawing nearer, and the market thins as folk shut themselves away."
+   ],
+   [
+    "plague",
+    "word",
+    "The plague has come; the sick lie in their homes and the bells toll for the dead."
+   ],
+   [
+    "plague",
+    "word",
+    "Pestilence walks openly now; the pyres are lit and the living tend the dying as best they can."
+   ],
+   [
+    "plague",
+    "word",
+    "The plague has spent itself, and the healers who held the line are counted among the saved."
+   ],
+   [
+    "plague",
+    "word",
+    "The plague turned aside on the roads, and the fever that was feared never came."
+   ],
+   [
+    "plague",
+    "word",
+    "The pestilence passed the town by; the watchful gates ease open and the market fills again."
+   ],
+   [
+    "famine",
+    "word",
+    "The plea from the starving country arrives with the first frost, and the almoners weigh charity against a hard winter of"
+   ],
+   [
+    "famine",
+    "word",
+    "Word of famine in the near lands reaches the market, and the fortunate are asked to measure out their surplus."
+   ],
+   [
+    "famine",
+    "word",
+    "The almoners send what the harvest allows to the starving marches, and mark the giving down against a future favour."
+   ],
+   [
+    "famine",
+    "word",
+    "The wagons came in time, and a friend saved from famine is a friend for many a long season."
+   ],
+   [
+    "famine",
+    "word",
+    "The famine breaks on the strength of the sent stores, and the neighbour is grateful for them."
+   ],
+   [
+    "famine",
+    "word",
+    "The relief did its quiet work; a country pulled from famine keeps a long and grateful memory of the hand that fed it."
+   ],
+   [
+    "famine",
+    "word",
+    "The tithe-barn stayed locked while a neighbour starved, and the memory of the closed gate will outlast the famine."
+   ],
+   [
+    "famine",
+    "word",
+    "The messengers of the starving marches go home with empty carts, and a bitterness settles where friendship might have."
+   ],
+   [
+    "plague",
+    "word",
+    "The matter of the plague hangs over the country, and every household marks it well."
    ]
   ],
   "src/domain/display/occupationStatus.js": [
@@ -4137,6 +6957,21 @@
     "garrison",
     "root",
     "restive: sabotage and noncompliance harry the garrison"
+   ],
+   [
+    "occupation",
+    "word",
+    "a contested occupation; the occupier has not yet taken hold"
+   ],
+   [
+    "occupation",
+    "word",
+    "an extractive occupation; the occupier bleeds it for everything it holds"
+   ],
+   [
+    "occupation",
+    "word",
+    "a stabilized occupation; the occupier holds it firmly"
    ]
   ],
   "src/domain/display/realmArcSentences.js": [
@@ -4355,6 +7190,46 @@
     "granary",
     "root",
     "a spring measured against a granary"
+   ],
+   [
+    "occupation",
+    "word",
+    "garrisons entered against the occupier's own strength"
+   ],
+   [
+    "occupation",
+    "word",
+    "an obligation struck from the occupier's rolls"
+   ],
+   [
+    "siege",
+    "word",
+    "a relief column marching for an ally under siege"
+   ],
+   [
+    "quarters",
+    "word",
+    "whole districts on the road at once"
+   ],
+   [
+    "plague",
+    "word",
+    "hunger, plague, and a fracturing faith feeding one another"
+   ],
+   [
+    "quarters",
+    "word",
+    "a reading taken from the whole district and not this town"
+   ],
+   [
+    "quarters",
+    "word",
+    "a season in which the whole district is uneasy"
+   ],
+   [
+    "occupation",
+    "word",
+    "resistance under occupation"
    ]
   ],
   "src/domain/display/rumorFallbackPhrasePoolsEvents.js": [
@@ -4521,6 +7396,26 @@
     "temple",
     "root",
     "The healers and temples hold a firm line against it."
+   ],
+   [
+    "plague",
+    "word",
+    "a raging plague"
+   ],
+   [
+    "plague",
+    "word",
+    "Word of plague has reached "
+   ],
+   [
+    "plague",
+    "word",
+    "The plague in "
+   ],
+   [
+    "plague",
+    "word",
+    "Plague burns in "
    ]
   ],
   "src/domain/display/settlementRumors.js": [
@@ -4613,6 +7508,21 @@
     "war",
     "root",
     "the last of the war spoils spent"
+   ],
+   [
+    "occupation",
+    "word",
+    "a parley held under an occupying garrison"
+   ],
+   [
+    "revolt",
+    "word",
+    "an uprising put down"
+   ],
+   [
+    "occupation",
+    "word",
+    "the occupiers changing their bearing"
    ]
   ],
   "src/domain/display/stateProse/decreeProsePools.js": [
@@ -4727,6 +7637,76 @@
     "war",
     "root",
     "posture WAR FOOTING (wartime)"
+   ],
+   [
+    "revolt",
+    "word",
+    "COMPOUND: slave revolt"
+   ],
+   [
+    "succession",
+    "word",
+    "COMPOUND: succession crisis"
+   ],
+   [
+    "famine",
+    "word",
+    "Disasters & Famine: granary AND hospital"
+   ],
+   [
+    "famine",
+    "word",
+    "Disasters & Famine: granary AND parish care only"
+   ],
+   [
+    "famine",
+    "word",
+    "Disasters & Famine: granary, NO medical provision"
+   ],
+   [
+    "famine",
+    "word",
+    "Disasters & Famine: NO reserves, hospital present"
+   ],
+   [
+    "famine",
+    "word",
+    "Disasters & Famine: NO reserves, NO medical provision"
+   ],
+   [
+    "famine",
+    "word",
+    "override: INTERNAL PRESSURE (famine)"
+   ],
+   [
+    "occupation",
+    "word",
+    "override: UNDER OCCUPATION"
+   ],
+   [
+    "revolt",
+    "word",
+    "override: INSURGENCY ACTIVE"
+   ],
+   [
+    "famine",
+    "word",
+    "posture INTERNAL PRESSURE (famine)"
+   ],
+   [
+    "occupation",
+    "word",
+    "posture UNDER OCCUPATION"
+   ],
+   [
+    "plague",
+    "word",
+    "posture QUARANTINE ACTIVE (plague onset)"
+   ],
+   [
+    "revolt",
+    "word",
+    "posture INSURGENCY ACTIVE"
    ]
   ],
   "src/domain/display/stateProse/economyStateProse.js": [
@@ -4734,6 +7714,16 @@
     "market",
     "root",
     "mix of field and market"
+   ],
+   [
+    "famine",
+    "word",
+    "ACTIVE FAMINE: the failed source, most of the harvest"
+   ],
+   [
+    "famine",
+    "word",
+    "ACTIVE FAMINE: the failed source, part of the harvest"
    ]
   ],
   "src/domain/display/stateProse/generalStateProse.js": [
@@ -4746,6 +7736,11 @@
     "market",
     "root",
     "COMMERCE: a market, no guild"
+   ],
+   [
+    "famine",
+    "word",
+    "foodSecurity.label: Deficit × Active Famine"
    ]
   ],
   "src/domain/display/stateProse/stateProseKernel.js": [
@@ -4753,6 +7748,16 @@
     "mill",
     "root",
     "a generalisation over all places: the miller line in domain/display/institutionVocabulary.js"
+   ],
+   [
+    "quarters",
+    "word",
+    "a district of a city (the lower town below the citadel), licensed for city and metropolis only: the mountain city layout"
+   ],
+   [
+    "quarters",
+    "word",
+    "a district of a larger place: the Shadows District quarter in generators/spatialGenerator.js; the twin of \"lower town\" ("
    ]
   ],
   "src/domain/display/stateProse/stressorsStateProse.js": [
@@ -4770,6 +7775,36 @@
     "war",
     "root",
     "DIRECTION: easing · CRISIS: wartime"
+   ],
+   [
+    "famine",
+    "word",
+    "DIRECTION: worsening · CRISIS: famine"
+   ],
+   [
+    "revolt",
+    "word",
+    "DIRECTION: worsening · CRISIS: insurgency"
+   ],
+   [
+    "famine",
+    "word",
+    "DIRECTION: stable · CRISIS: famine"
+   ],
+   [
+    "revolt",
+    "word",
+    "DIRECTION: stable · CRISIS: insurgency"
+   ],
+   [
+    "famine",
+    "word",
+    "DIRECTION: easing · CRISIS: famine"
+   ],
+   [
+    "revolt",
+    "word",
+    "DIRECTION: easing · CRISIS: insurgency"
    ]
   ],
   "src/domain/display/stateProse/warFaithStateProse.js": [
@@ -4777,6 +7812,11 @@
     "war",
     "root",
     "statusLabel: At war (no front at the walls, no army abroad)"
+   ],
+   [
+    "occupation",
+    "word",
+    "occupation.pays false (the occupation is a net drain on the holder)"
    ]
   ],
   "src/domain/display/threatAssessment.js": [
@@ -4854,6 +7894,21 @@
     "garrison",
     "root",
     "wear out the garrison's patience."
+   ],
+   [
+    "famine",
+    "word",
+    "In famine. Hunger is the disaster this row grades, and it has already come."
+   ],
+   [
+    "plague",
+    "word",
+    "Nobody here treats the sick, and a plague would run until it burned out."
+   ],
+   [
+    "famine",
+    "word",
+    "Disasters & Famine"
    ]
   ],
   "src/domain/display/tradeFlowEconomics.js": [
@@ -4908,6 +7963,16 @@
     "walls",
     "root",
     " and made terms alone, leaving its fellow besiegers at the walls."
+   ],
+   [
+    "siege",
+    "word",
+    "The garrison is besieged in the very town it holds; the occupation is repudiated."
+   ],
+   [
+    "occupation",
+    "word",
+    "The garrison is besieged in the very town it holds; the occupation is repudiated."
    ]
   ],
   "src/domain/display/warAndRoadNames.js": [
@@ -5189,6 +8254,11 @@
     "granary",
     "root",
     "An airship dock keeps trade flowing beyond the granary."
+   ],
+   [
+    "siege",
+    "word",
+    "A teleportation circle runs beneath the siege lines. Supplies arrive, and the blockade cannot touch them."
    ]
   ],
   "src/domain/display/warStatus.js": [
@@ -5218,6 +8288,36 @@
     "walls",
     "root",
     "An old veteran offers private training to those who can pay, fearing the walls will not hold."
+   ],
+   [
+    "quarters",
+    "word",
+    " districts skew to "
+   ],
+   [
+    "quarters",
+    "word",
+    "; district wealth nudged up."
+   ],
+   [
+    "quarters",
+    "word",
+    "; district wealth nudged down."
+   ],
+   [
+    "quarters",
+    "word",
+    "Acute external threat pulls district safety down."
+   ],
+   [
+    "quarters",
+    "word",
+    " thins the foreign quarter; some have already left."
+   ],
+   [
+    "quarters",
+    "word",
+    "Something quiet is shifting in the district's usual routine."
    ]
   ],
   "src/domain/dossier/faithReading.js": [
@@ -5247,6 +8347,13 @@
     " has no church of its own; its people walk to the next village’s parish church for the rites."
    ]
   ],
+  "src/domain/dossier/powerSupport.js": [
+   [
+    "occupation",
+    "word",
+    "Held under this occupying power"
+   ]
+  ],
   "src/domain/edit/directions.js": [
    [
     "war",
@@ -5262,6 +8369,11 @@
     "war",
     "root",
     "No guard is wired here. The four rungs are the ordered ramp a town climbs, and the off-ramp states the war layer enters "
+   ],
+   [
+    "occupation",
+    "word",
+    "No guard is wired here. The three postures are the occupier own hand, and the default stays a constant by ruling rather "
    ]
   ],
   "src/domain/events/affordanceManifest.js": [
@@ -5294,6 +8406,16 @@
     "granary",
     "root",
     "The granary holds nothing above the reserve floor. There is nothing to lend."
+   ],
+   [
+    "refugees",
+    "word",
+    "A refugee wave arrives via Apply stressor (migration pressure)."
+   ],
+   [
+    "plague",
+    "word",
+    "PLAGUE arrives via Apply stressor (plague): one fiction, one roaming stressor."
    ]
   ],
   "src/domain/events/factionResponses.js": [
@@ -5371,6 +8493,43 @@
     "watch",
     "root",
     "A guild contact wants the party to make sure a specific candidate becomes the next watch captain."
+   ],
+   [
+    "refugees",
+    "word",
+    "A refugee child claims to have seen something on the road the temple wants kept quiet."
+   ],
+   [
+    "refugees",
+    "word",
+    "A refugee family offers the party shelter in exchange for help getting past the watch checkpoint."
+   ],
+   [
+    "refugees",
+    "word",
+    " recruits from the desperate. Pickpocket rings expand overnight. Some refugees are coerced into paying off impossible \"t"
+   ],
+   [
+    "refugees",
+    "word",
+    "A refugee elder asks the party to help free a young relative from the guild's grip."
+   ]
+  ],
+  "src/domain/events/mutateWorld.js": [
+   [
+    "refugees",
+    "word",
+    " refugee wave arrived."
+   ],
+   [
+    "plague",
+    "word",
+    "Overrun by plague casualties."
+   ],
+   [
+    "plague",
+    "word",
+    "Plague outbreak ("
    ]
   ],
   "src/domain/events/realmManifest.js": [
@@ -5383,6 +8542,16 @@
     "market",
     "root",
     "The sovereignty market is not active in this campaign. It rides the envoy layer, the demographic layer, and its own rule"
+   ],
+   [
+    "siege",
+    "word",
+    "The ally under siege"
+   ],
+   [
+    "siege",
+    "word",
+    "The blockaded port"
    ]
   ],
   "src/domain/events/registry.js": [
@@ -5400,6 +8569,11 @@
     "temple",
     "root",
     "A cult fades from the settlement, its shrine left to the dust."
+   ],
+   [
+    "refugees",
+    "word",
+    " refugee wave arrived"
    ]
   ],
   "src/domain/events/registryProse.js": [
@@ -5437,6 +8611,33 @@
     "market",
     "root",
     "Force the settlement up or down one size tier (thorp through metropolis), a DM override of the organic growth-and-declin"
+   ],
+   [
+    "siege",
+    "word",
+    "A trade route is closed, blockaded, or rendered unsafe. Imports/exports stall."
+   ],
+   [
+    "refugees",
+    "word",
+    "A surge of refugees arrives. Population spikes; food security and infrastructure strain. Power politics shift."
+   ],
+   [
+    "quarters",
+    "word",
+    "Optional: district or trigger (e.g. \"Lower Quarter\")"
+   ]
+  ],
+  "src/domain/explanation.js": [
+   [
+    "quarters",
+    "word",
+    ") dominates this district."
+   ],
+   [
+    "quarters",
+    "word",
+    "'s population disperses to neighboring districts"
    ]
   ],
   "src/domain/factionProfile.js": [
@@ -5444,6 +8645,16 @@
     "walls",
     "root",
     "secure the walls"
+   ],
+   [
+    "siege",
+    "word",
+    "morale fragile under siege"
+   ],
+   [
+    "revolt",
+    "word",
+    "a successful uprising"
    ]
   ],
   "src/domain/factionRelationshipUpdate.js": [
@@ -5631,6 +8842,28 @@
     "market",
     "root",
     "Boycotts and preference along sect lines fracture the market."
+   ],
+   [
+    "plague",
+    "word",
+    "Plague relief organized by the temple lifts public trust."
+   ],
+   [
+    "succession",
+    "word",
+    "Succession crisis weakens public confidence in continuity."
+   ],
+   [
+    "refugees",
+    "word",
+    "Refugee relief becomes the temple's most visible work."
+   ]
+  ],
+  "src/domain/factionRename.js": [
+   [
+    "powersCount",
+    "word",
+    "generated relationship prose names both factions"
    ]
   ],
   "src/domain/facts/registeredWords.js": [
@@ -5638,6 +8871,21 @@
     "war",
     "root",
     "war: at war"
+   ],
+   [
+    "famine",
+    "word",
+    "famine.js :: famineOf · crisisKind.js (famine)"
+   ],
+   [
+    "occupation",
+    "word",
+    "crisisKind.js (occupied) · rulerKind.js (occupier)"
+   ],
+   [
+    "revolt",
+    "word",
+    "crisisKind.js (insurgency, slave_revolt)"
    ]
   ],
   "src/domain/fieldManifest.js": [
@@ -5645,6 +8893,21 @@
     "granary",
     "root",
     "The storage slice is re-graded from the current granary each tick; the "
+   ],
+   [
+    "famine",
+    "word",
+    "The Disasters & Famine row may prefer the persisted score ONLY because the "
+   ],
+   [
+    "famine",
+    "word",
+    "Displays read the EFFECTIVE deficit (blockade/famine/tithe/drawdown applied); "
+   ],
+   [
+    "refugees",
+    "word",
+    "If refugee influxes should strain per-capita food, that is a model-design decision."
    ]
   ],
   "src/domain/foodways.js": [
@@ -5689,6 +8952,21 @@
     "market",
     "root",
     "Black-market traders fill the gap quietly."
+   ],
+   [
+    "plague",
+    "word",
+    "The external pressure compounds: more refugees, more raids, deeper plague."
+   ],
+   [
+    "refugees",
+    "word",
+    "The external pressure compounds: more refugees, more raids, deeper plague."
+   ],
+   [
+    "powersCount",
+    "word",
+    "Two powers of near-equal strength want different things."
    ]
   ],
   "src/domain/hookThemes.js": [
@@ -5706,6 +8984,16 @@
     "market",
     "root",
     "A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away."
+   ],
+   [
+    "quarters",
+    "word",
+    "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet."
+   ],
+   [
+    "quarters",
+    "word",
+    "Three guards have gone missing in the same district on night patrol. The report filed says they deserted."
    ]
   ],
   "src/domain/instantWorld/worldPlan.js": [
@@ -5725,6 +9013,11 @@
     "market",
     "root",
     "the service label, not a handle: where it names a roster house it names a DIFFERENT house from the entry own institution"
+   ],
+   [
+    "quarters",
+    "word",
+    "the governing FACTION's name, owned by the faction rename ledger (src/domain/factionRename.js); it equals the institutio"
    ]
   ],
   "src/domain/institutions/defenseInstitutionBuckets.js": [
@@ -5751,6 +9044,18 @@
     "temple",
     "root",
     "High religious authority suggests procession / shrine path features."
+   ]
+  ],
+  "src/domain/npc/characterReadModel.js": [
+   [
+    "occupation",
+    "word",
+    "a home under occupation"
+   ],
+   [
+    "plague",
+    "word",
+    "a season of plague survived"
    ]
   ],
   "src/domain/npcProfile.js": [
@@ -5793,6 +9098,11 @@
     "watch",
     "root",
     "The watch claims a public victory whether or not it caused this."
+   ],
+   [
+    "succession",
+    "word",
+    "A succession dispute opens among the surviving captains."
    ]
   ],
   "src/domain/prose/holderTable.js": [
@@ -5900,6 +9210,18 @@
     "through their temples"
    ]
   ],
+  "src/domain/regionalGraph.js": [
+   [
+    "plague",
+    "word",
+    "plague there → PILGRIM flow stalls"
+   ],
+   [
+    "famine",
+    "word",
+    "famine there → REFUGEE_WAVE here"
+   ]
+  ],
   "src/domain/resourceSemantics.js": [
    [
     "docks",
@@ -5932,6 +9254,13 @@
     "market",
     "root",
     "shared trade or market"
+   ]
+  ],
+  "src/domain/rulingPower.js": [
+   [
+    "occupation",
+    "word",
+    "An occupying force governs at spearpoint; local institutions persist on sufferance."
    ]
   ],
   "src/domain/spatial/dispatchDestination.js": [
@@ -6017,6 +9346,16 @@
     "docks",
     "root",
     "built around the agora and the harbour, on hillside ground and civic association"
+   ],
+   [
+    "quarters",
+    "word",
+    "built around kin districts and an assembly ground, on pasture and earthwork"
+   ],
+   [
+    "famine",
+    "word",
+    "food is in deficit and famine is active"
    ]
   ],
   "src/domain/summary/tonightSheet.js": [
@@ -6038,11 +9377,72 @@
     "the watch's credibility"
    ]
   ],
+  "src/domain/townCartography/cartographyWards.js": [
+   [
+    "quarters",
+    "word",
+    " canonical districts exceed the "
+   ]
+  ],
   "src/domain/townMap/asymmetrySources.js": [
    [
     "market",
     "root",
     "market accretion (stalls crowd the trade gate)"
+   ]
+  ],
+  "src/domain/townMap/townLayoutV2.js": [
+   [
+    "quarters",
+    "word",
+    "stressor scars (urban fabric)"
+   ]
+  ],
+  "src/domain/townScene/manifestRecordValidation.js": [
+   [
+    "siege",
+    "word",
+    "living.atmosphere.besieged must be a boolean"
+   ]
+  ],
+  "src/domain/townScene/sceneCompileInput.js": [
+   [
+    "siege",
+    "word",
+    "atmosphere.besieged must be boolean"
+   ]
+  ],
+  "src/domain/traditions/relations.js": [
+   [
+    "occupation",
+    "word",
+    "the occupation ended; the old rite returned"
+   ]
+  ],
+  "src/domain/tuning/proposedSoakBands.js": [
+   [
+    "famine",
+    "word",
+    "A festival window opens once per year, but hard stressors (plague, famine, war, occupation) and a Subsistence economy (S"
+   ],
+   [
+    "plague",
+    "word",
+    "A festival window opens once per year, but hard stressors (plague, famine, war, occupation) and a Subsistence economy (S"
+   ]
+  ],
+  "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js": [
+   [
+    "occupation",
+    "word",
+    "A foreign occupation authority installed by conquest."
+   ]
+  ],
+  "src/domain/worldPulse/blockadeTransport.js": [
+   [
+    "siege",
+    "word",
+    "Blockade running: airship traffic operates under siege countermeasures at reduced throughput."
    ]
   ],
   "src/domain/worldPulse/brokeragePlantHandoff.js": [
@@ -6106,6 +9506,21 @@
     "market",
     "root",
     "Slave market district"
+   ],
+   [
+    "quarters",
+    "word",
+    "Dungeon delving supply district"
+   ],
+   [
+    "quarters",
+    "word",
+    "Slave market district"
+   ],
+   [
+    "quarters",
+    "word",
+    "Razed as the district collapsed to a single survivor after the disaster."
    ]
   ],
   "src/domain/worldPulse/candidateEvents.js": [
@@ -6125,6 +9540,28 @@
     "war",
     "root",
     "the hardship of the war"
+   ]
+  ],
+  "src/domain/worldPulse/changeAuthorityPolicy.js": [
+   [
+    "refugees",
+    "word",
+    "A refugee wave that moves >=8% of a source population redraws two settlements; that is a new premise, not an implied con"
+   ],
+   [
+    "revolt",
+    "word",
+    "Every diplomatic relabel built through labelProposal emits a bare applyMode: \"proposal\". A visible relationship label fl"
+   ],
+   [
+    "occupation",
+    "word",
+    "Conquest is the resolution of a siege that already broke. The siege is the gated premise; the occupation that follows is"
+   ],
+   [
+    "occupation",
+    "word",
+    "How an occupier means to hold a town it already holds is a policy of the same court, not a change of hands; it is asked "
    ]
   ],
   "src/domain/worldPulse/commercialReasonsNews.js": [
@@ -6259,6 +9696,11 @@
     "guildhall",
     "root",
     ". Steady for years, and nobody at the guildhall can name the year it began."
+   ],
+   [
+    "famine",
+    "word",
+    " in the famine will be argued at every table for a generation."
    ]
   ],
   "src/domain/worldPulse/commonsVoiceKernel.js": [
@@ -6271,6 +9713,11 @@
     "watch",
     "root",
     ". The watch is stretched, and the seat's standing bleeds by the hour."
+   ],
+   [
+    "revolt",
+    "word",
+    "The gathering has become a riot-band: an organised crowd, short of rebellion but past all petitioning, that holds the sq"
    ]
   ],
   "src/domain/worldPulse/conquestExecution.js": [
@@ -6346,6 +9793,46 @@
     "market",
     "root",
     "A market shock is the economic-shock class."
+   ],
+   [
+    "plague",
+    "word",
+    "A disease outbreak is the plague class."
+   ],
+   [
+    "succession",
+    "word",
+    "A succession void is a succession/coup arc."
+   ],
+   [
+    "succession",
+    "word",
+    "political_fracture → succession_coup (architect ruling, vetoable): REALM_LABELS already groups it with succession_void a"
+   ],
+   [
+    "revolt",
+    "word",
+    "An insurgency is an internal contest."
+   ],
+   [
+    "revolt",
+    "word",
+    "A rebellion is an internal contest."
+   ],
+   [
+    "revolt",
+    "word",
+    "slave_revolt → schism_contest (architect ruling, vetoable): REALM_LABELS groups it with insurgency as \"The Uprising\"."
+   ],
+   [
+    "famine",
+    "word",
+    "FAMINE → economic_shock (§5.1 ruling, vetoable): the most common arc has no home among the seven; a food-scarcity crisis"
+   ],
+   [
+    "famine",
+    "word",
+    "A migration is consequence-adjacent (it is usually the OUTCOME of a famine/war arc, not an independent birth)."
    ]
   ],
   "src/domain/worldPulse/demographicsHerald.js": [
@@ -6372,6 +9859,13 @@
     "walls",
     "root",
     "the walls are the wall"
+   ]
+  ],
+  "src/domain/worldPulse/demographicsRates.js": [
+   [
+    "quarters",
+    "word",
+    "The four urban-load words."
    ]
   ],
   "src/domain/worldPulse/demographicsResponses.js": [
@@ -6408,6 +9902,38 @@
     "granary",
     "root",
     " The granaries would have to answer for the march, and they answer thinly."
+   ]
+  ],
+  "src/domain/worldPulse/deploymentReturn.js": [
+   [
+    "occupation",
+    "word",
+    " throws off its occupiers"
+   ],
+   [
+    "occupation",
+    "word",
+    "'s army returned to a captured home and broke the occupation; the settlement begins restoring its own authority."
+   ],
+   [
+    "occupation",
+    "word",
+    "drove out the occupiers"
+   ],
+   [
+    "occupation",
+    "word",
+    "'s returning army broke the occupation."
+   ],
+   [
+    "occupation",
+    "word",
+    "'s army came home too spent to break the occupation; the failed rising leaves the settlement weaker still."
+   ],
+   [
+    "siege",
+    "word",
+    "'s depleted army could not break through to its besieged home; the failed relief leaves the defenders more desperate."
    ]
   ],
   "src/domain/worldPulse/dispositionNews.js": [
@@ -6543,6 +10069,13 @@
     "Hopelessly outmatched, it cannot take the walls, though it can still raid the roads."
    ]
   ],
+  "src/domain/worldPulse/flows.js": [
+   [
+    "refugees",
+    "word",
+    "Refugees arrive from "
+   ]
+  ],
   "src/domain/worldPulse/foundingCatalog.js": [
    [
     "temple",
@@ -6602,6 +10135,21 @@
     "war",
     "root",
     "NO WEIGHT, NO FORK. MEASURED: judgment 265 (c) found that four of the processes design §19 ruling 3 names as seals draw "
+   ],
+   [
+    "plague",
+    "word",
+    "SURVEY U-15 - the epidemic ledger advance, TWO draws: the propagation gate along carrier edges and the clearance gate at"
+   ],
+   [
+    "occupation",
+    "word",
+    "SURVEY U-27 - the TWO homecoming rolls: whether a returning host throws off the occupation at its own gate, and whether "
+   ],
+   [
+    "occupation",
+    "word",
+    "grade a homecoming against whether the occupation or the siege stayed lifted; ⛔ a pin here must carry the odds word with"
    ]
   ],
   "src/domain/worldPulse/hegemony.js": [
@@ -6636,6 +10184,11 @@
     "watch",
     "root",
     "ready the walls and the watch"
+   ],
+   [
+    "plague",
+    "word",
+    "Plague breaks out in "
    ]
   ],
   "src/domain/worldPulse/infoLure.js": [
@@ -6655,6 +10208,13 @@
     "watch",
     "root",
     " opens a line for extra watchmen, lamp oil, and a clerk to keep the gate rolls."
+   ]
+  ],
+  "src/domain/worldPulse/institutionStatusModel.js": [
+   [
+    "occupation",
+    "word",
+    "the siege lifts or the occupier withdraws"
    ]
   ],
   "src/domain/worldPulse/magicBufferModel.js": [
@@ -6686,6 +10246,18 @@
     "market",
     "root",
     "They unloaded into a market that had no need of them, and the stalls hardly looked up."
+   ],
+   [
+    "famine",
+    "word",
+    "The caravans came for the famine and found the harvest."
+   ]
+  ],
+  "src/domain/worldPulse/migrationKernel.js": [
+   [
+    "refugees",
+    "word",
+    "Refugee column arrives from a shed settlement."
    ]
   ],
   "src/domain/worldPulse/militaryStrength.js": [
@@ -6710,6 +10282,11 @@
     "war",
     "root",
     "The danger has passed, and the war footing is eased."
+   ],
+   [
+    "occupation",
+    "word",
+    "under occupation: the occupier permits no war footing"
    ]
   ],
   "src/domain/worldPulse/momentum.js": [
@@ -6783,6 +10360,46 @@
     "garrison",
     "root",
     " garrisons and administers "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation held long enough to become a compact; what resistance is left is "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation of "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation became unholdable against a town "
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation has reached "
+   ],
+   [
+    "occupation",
+    "word",
+    " resists its occupiers"
+   ],
+   [
+    "famine",
+    "word",
+    "The famine it annexed is part of the garrison bill: "
+   ],
+   [
+    "famine",
+    "word",
+    " has annexed a famine: "
+   ],
+   [
+    "famine",
+    "word",
+    "Netted down by the famine it annexed: "
    ]
   ],
   "src/domain/worldPulse/occupationRecordMode.js": [
@@ -6804,6 +10421,11 @@
     "mercenary",
     "root",
     "The DM identifies the force behind a war-shaped stressor: another settlement, or a force with no settlement at all (a go"
+   ],
+   [
+    "plague",
+    "word",
+    "The party ended an active stressor (broke the siege, cured the plague)."
    ]
   ],
   "src/domain/worldPulse/peaceTermsCatalog.js": [
@@ -6828,6 +10450,11 @@
     "garrison",
     "root",
     ". The garrison stays at the walls."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation continues "
    ]
   ],
   "src/domain/worldPulse/pestilenceKernel.js": [
@@ -6835,6 +10462,21 @@
     "temple",
     "root",
     ". The healers and temples brace for what comes."
+   ],
+   [
+    "plague",
+    "word",
+    "The plague travelled the trade roads from "
+   ],
+   [
+    "plague",
+    "word",
+    "The plague took hold here as the sickness spread inward."
+   ],
+   [
+    "plague",
+    "word",
+    "The pestilence travelled from "
    ]
   ],
   "src/domain/worldPulse/razing.js": [
@@ -6859,6 +10501,16 @@
     "temple",
     "root",
     " has risen to a major power in the realm's pantheon. Temples multiply, rivals bend the knee, and the faithful walk the r"
+   ],
+   [
+    "plague",
+    "word",
+    "Hunger, plague, and a fracturing faith feed one another. Flagellants walk the streets, scapegoats are named from pulpits"
+   ],
+   [
+    "succession",
+    "word",
+    "The Succession Crisis"
    ]
   ],
   "src/domain/worldPulse/realmVerbExecution.js": [
@@ -6871,6 +10523,13 @@
     "walls",
     "root",
     " fled; the walls of the severity band held."
+   ]
+  ],
+  "src/domain/worldPulse/reinforcement.js": [
+   [
+    "siege",
+    "word",
+    "Origin is itself besieged/occupied. It cannot spare reinforcements."
    ]
   ],
   "src/domain/worldPulse/relationshipMemory.js": [
@@ -6912,6 +10571,26 @@
     "market",
     "root",
     "'s markets and among its powers."
+   ],
+   [
+    "revolt",
+    "word",
+    "Rebellion is stirring in "
+   ],
+   [
+    "revolt",
+    "word",
+    "Rebellion breaks out in "
+   ],
+   [
+    "revolt",
+    "word",
+    "The rebellion in "
+   ],
+   [
+    "revolt",
+    "word",
+    "The overlord has enough coercive advantage to quash the rebellion for now."
    ]
   ],
   "src/domain/worldPulse/religionState.js": [
@@ -6969,6 +10648,21 @@
     "market",
     "root",
     " closes its markets to "
+   ],
+   [
+    "siege",
+    "word",
+    " is itself besieged. Its army abroad is recalled to defend the home walls."
+   ],
+   [
+    "siege",
+    "word",
+    " is under siege. "
+   ],
+   [
+    "siege",
+    "word",
+    " is besieged at home while its army is committed against "
    ]
   ],
   "src/domain/worldPulse/simulationProfile.js": [
@@ -7017,6 +10711,18 @@
     "The wharf at "
    ]
   ],
+  "src/domain/worldPulse/spatialConsequenceKernel.js": [
+   [
+    "quarters",
+    "word",
+    "The spatial substrate distributed the calamity toll by district adjacency and flammability. WHERE the harm fell, never H"
+   ],
+   [
+    "quarters",
+    "word",
+    "The spatial substrate diffused the exposed covert corruption along real district adjacency (leash-bounded) instead of a "
+   ]
+  ],
   "src/domain/worldPulse/stressorDynamics.js": [
    [
     "garrison",
@@ -7052,6 +10758,26 @@
     "court",
     "root",
     "A list of grievances was nailed to the courthouse door. Nobody has dared remove it."
+   ],
+   [
+    "plague",
+    "word",
+    "flight from the plague swells the columns"
+   ],
+   [
+    "occupation",
+    "word",
+    "the occupier sponsors the new faith. The schism has a patron"
+   ],
+   [
+    "occupation",
+    "word",
+    "Born under occupation: this is a resistance, not a mere revolt."
+   ],
+   [
+    "powersCount",
+    "word",
+    "'s amplified standing no longer ranks among the top three powers. Its case will not even be heard."
    ]
   ],
   "src/domain/worldPulse/stressorGates.js": [
@@ -7104,6 +10830,36 @@
     "market",
     "root",
     "A near-closed economy has little market to shock."
+   ],
+   [
+    "famine",
+    "word",
+    "The blockade is starving the granaries."
+   ],
+   [
+    "occupation",
+    "word",
+    "Taking this settlement would cost an occupier dearly."
+   ],
+   [
+    "plague",
+    "word",
+    "Healing capacity has collapsed; nothing stands between a fever and a plague."
+   ],
+   [
+    "refugees",
+    "word",
+    "Crowded refugee camps are kindling for contagion."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier's faith arrives with its garrison."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupier controls movement in and out."
    ]
   ],
   "src/domain/worldPulse/stressors.js": [
@@ -7148,6 +10904,21 @@
     "market",
     "root",
     "the market crash"
+   ],
+   [
+    "succession",
+    "word",
+    "the fight over the empty seat"
+   ],
+   [
+    "revolt",
+    "word",
+    "the slave revolt"
+   ],
+   [
+    "revolt",
+    "word",
+    "Slave revolt pressure"
    ]
   ],
   "src/domain/worldPulse/supplyWebWarfare.js": [
@@ -7191,6 +10962,16 @@
     "market",
     "root",
     " lies under siege, and its markets are shut."
+   ],
+   [
+    "siege",
+    "word",
+    " is under siege, and a town whose markets are shut collects nothing to pay with."
+   ],
+   [
+    "siege",
+    "word",
+    " lies under siege, and its markets are shut."
    ]
   ],
   "src/domain/worldPulse/upswingKernel.js": [
@@ -7198,6 +10979,37 @@
     "market",
     "root",
     "The trade that fed the boom has failed; markets retreat and the town empties toward richer roads."
+   ]
+  ],
+  "src/domain/worldPulse/urbanFabricKernel.js": [
+   [
+    "quarters",
+    "word",
+    "A catastrophe reset the struck district stocks and stamped a rebirth marker. Buildings resist rapid change EXCEPT catast"
+   ],
+   [
+    "quarters",
+    "word",
+    "The dominant district class changed hands. The old stock decays on the masonry clock while the new deposits; never a fli"
+   ],
+   [
+    "quarters",
+    "word",
+    "A district class crossed the prominence floor with no prior incumbent: the first fabric dominance."
+   ]
+  ],
+  "src/domain/worldPulse/warCoalitionNews.js": [
+   [
+    "occupation",
+    "word",
+    "An occupying power prevented the called court from marching into a different war."
+   ]
+  ],
+  "src/domain/worldPulse/warCoalitionRefusal.js": [
+   [
+    "occupation",
+    "word",
+    "An occupying power prevents the court from marching into a different war."
    ]
   ],
   "src/domain/worldPulse/warCostsNews.js": [
@@ -7282,6 +11094,11 @@
     "granary",
     "root",
     "'s army loots the granaries of "
+   ],
+   [
+    "siege",
+    "word",
+    ", to put it under siege."
    ]
   ],
   "src/domain/worldPulse/warHomeCosts.js": [
@@ -7788,6 +11605,21 @@
     "market",
     "root",
     "So much of our craft and provision leans on their markets. A war would ruin both courts before it settled anything."
+   ],
+   [
+    "siege",
+    "word",
+    "The harbour is blockaded. No keel comes or goes, and the wharves stand idle; a strangled port cannot bear the war."
+   ],
+   [
+    "siege",
+    "word",
+    "The port is blockaded. Nothing sails in or out, and the docks lie still; a choked harbour cannot fund a war."
+   ],
+   [
+    "siege",
+    "word",
+    "The harbour is blockaded shut. No cargo comes or goes, and the wharves are idle; a throttled port cannot carry the war."
    ]
   ],
   "src/domain/worldPulse/warRecordMode.js": [
@@ -7824,6 +11656,11 @@
     "walls",
     "root",
     "The siege ran to the hard limit of what a host can sustain before a town, and the besiegers still out-weighed the defenc"
+   ],
+   [
+    "famine",
+    "word",
+    "'s will broke. Starving, discredited, and out of hope, the defenders capitulated rather than be stormed."
    ]
   ],
   "src/domain/worldPulse/warTermination.js": [
@@ -7890,6 +11727,528 @@
     "The alliance call has been discharged, leaving no sworn cause to continue the war."
    ]
   ],
+  "src/generators/economy/economicState.js": [
+   [
+    "quarters",
+    "word",
+    "District-level duties on specialized goods; a major civic revenue stream across the urban districts."
+   ]
+  ],
+  "src/generators/economy/foodBalance.js": [
+   [
+    "plague",
+    "word",
+    "The plague has killed or sickened many who work the fields. Those still standing face a short harvest and a hard winter."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers are fed from local stores, so the food has to stretch about a fifth further than before."
+   ],
+   [
+    "famine",
+    "word",
+    "A trade disruption or bad harvest becomes a famine within weeks."
+   ],
+   [
+    "famine",
+    "word",
+    "Vulnerable to trade disruption, famine risk."
+   ],
+   [
+    "famine",
+    "word",
+    "Vulnerable to seasonal shortages and siege starvation without grain reserves."
+   ],
+   [
+    "quarters",
+    "word",
+    "Imports staple food at urban scale"
+   ],
+   [
+    "famine",
+    "word",
+    "The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price "
+   ]
+  ],
+  "src/generators/economy/outlookHookSiblings.js": [
+   [
+    "famine",
+    "word",
+    "The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price "
+   ]
+  ],
+  "src/generators/economy/prosperity.js": [
+   [
+    "occupation",
+    "word",
+    "The occupiers take their share through "
+   ]
+  ],
+  "src/generators/economy/viability.js": [
+   [
+    "quarters",
+    "word",
+    "Add Market Square, Merchants' Quarter, or Trade Guild"
+   ]
+  ],
+  "src/generators/foodGenerator.js": [
+   [
+    "famine",
+    "word",
+    "Active famine: food production collapsed, prosperity cannot exceed Struggling"
+   ]
+  ],
+  "src/generators/history/historyEventStrands.js": [
+   [
+    "quarters",
+    "word",
+    "transformation of the affected district"
+   ]
+  ],
+  "src/generators/history/historyRouteContext.js": [
+   [
+    "quarters",
+    "word",
+    "the lumber yards and sawmill district"
+   ],
+   [
+    "quarters",
+    "word",
+    "the merchants' quarter"
+   ],
+   [
+    "quarters",
+    "word",
+    "the harbour and coastal districts"
+   ],
+   [
+    "quarters",
+    "word",
+    "the mill and lumber district"
+   ],
+   [
+    "quarters",
+    "word",
+    "the lower districts"
+   ]
+  ],
+  "src/generators/historyGenerator.js": [
+   [
+    "quarters",
+    "word",
+    "the merchants' quarter"
+   ],
+   [
+    "quarters",
+    "word",
+    "the residential district"
+   ],
+   [
+    "quarters",
+    "word",
+    "the temple district"
+   ],
+   [
+    "quarters",
+    "word",
+    "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a distric"
+   ],
+   [
+    "quarters",
+    "word",
+    "Affected district retains residual magical effects"
+   ]
+  ],
+  "src/generators/historyTemplate.js": [
+   [
+    "quarters",
+    "word",
+    "the lower district"
+   ],
+   [
+    "quarters",
+    "word",
+    "the merchants' quarter"
+   ],
+   [
+    "quarters",
+    "word",
+    "the harbour district"
+   ],
+   [
+    "quarters",
+    "word",
+    "the dock quarter"
+   ],
+   [
+    "quarters",
+    "word",
+    "the old quarter"
+   ]
+  ],
+  "src/generators/narrativeGenerator.js": [
+   [
+    "quarters",
+    "word",
+    "was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild res"
+   ],
+   [
+    "refugees",
+    "word",
+    "refugees fleeing war or persecution who found the location defensible"
+   ],
+   [
+    "occupation",
+    "word",
+    "Settlement is under occupation. Stated stability reflects surface conditions only. Governance legitimacy and local loyal"
+   ]
+  ],
+  "src/generators/narrativeText.js": [
+   [
+    "famine",
+    "word",
+    " is two bad weeks from genuine starvation; "
+   ],
+   [
+    "powersCount",
+    "word",
+    " holds the power, and at least three powers are fighting over the stores."
+   ],
+   [
+    "occupation",
+    "word",
+    " still meets, but nothing it decides stands until the occupiers agree."
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupation of "
+   ],
+   [
+    "occupation",
+    "word",
+    " has lasted long enough to split it: some families now work with the occupiers and some hide the people who fight them, "
+   ],
+   [
+    "occupation",
+    "word",
+    " is simultaneously expected to enforce the occupiers' directives and protect the people those directives are aimed at: a"
+   ],
+   [
+    "occupation",
+    "word",
+    "The occupiers of "
+   ],
+   [
+    "occupation",
+    "word",
+    " has decided what it would do if the occupiers asked it for names, and every one of them hopes it is never asked."
+   ],
+   [
+    "quarters",
+    "word",
+    " controls one district and the institutions inside it, a rival controls another, and the contested space between them is"
+   ],
+   [
+    "powersCount",
+    "word",
+    "Three powers in "
+   ],
+   [
+    "powersCount",
+    "word",
+    " is the only person all three powers will still speak to, which makes them either the key to resolution or the next targ"
+   ],
+   [
+    "revolt",
+    "word",
+    "The insurgency in "
+   ],
+   [
+    "quarters",
+    "word",
+    " is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has"
+   ]
+  ],
+  "src/generators/npcGenerator.js": [
+   [
+    "revolt",
+    "word",
+    "An insurgency that has lasted this long has had time to make investments in the security apparatus."
+   ],
+   [
+    "revolt",
+    "word",
+    "Avoid being forced to publicly declare support for either the governing power or the insurgency, and run out of reasons "
+   ]
+  ],
+  "src/generators/power/conflictIssues.js": [
+   [
+    "succession",
+    "word",
+    "The vote on the empty seat is in four days, and two of the voters have not been seen since the last meeting."
+   ],
+   [
+    "powersCount",
+    "word",
+    "An unpaid debt between the two powers"
+   ],
+   [
+    "revolt",
+    "word",
+    "Whether to open back-channel negotiations with the insurgency"
+   ],
+   [
+    "revolt",
+    "word",
+    "Control of the intelligence on insurgent cells"
+   ]
+  ],
+  "src/generators/power/conflicts.js": [
+   [
+    "powersCount",
+    "word",
+    "Leading members of both powers are partners in the same business, one that skirts the law, and neither side wants that s"
+   ],
+   [
+    "powersCount",
+    "word",
+    "Someone is offering to resolve the conflict \"permanently\" for a price. Both powers have received the offer. Neither has "
+   ],
+   [
+    "powersCount",
+    "word",
+    "A letter has turned up showing that someone outside both powers paid for the last clash between them."
+   ]
+  ],
+  "src/generators/power/factionStanding.js": [
+   [
+    "powersCount",
+    "word",
+    "Three powers stand almost level here, and no one leads; every council vote has to be bargained for."
+   ]
+  ],
+  "src/generators/power/governanceNarrative.js": [
+   [
+    "siege",
+    "word",
+    "Critical (under siege)"
+   ],
+   [
+    "occupation",
+    "word",
+    "Suppressed (under occupation: resistance simmers)"
+   ],
+   [
+    "revolt",
+    "word",
+    "Unstable (insurgency contests authority)"
+   ],
+   [
+    "quarters",
+    "word",
+    "The guild and the district council both claim authority over the new market. Violence has settled some of the disputes; "
+   ],
+   [
+    "siege",
+    "word",
+    "The settlement is under siege. Its stores and every able pair of hands now go to the defence, and nothing else is discus"
+   ],
+   [
+    "powersCount",
+    "word",
+    "Two powers have stopped coming to council meetings. Each makes its own decisions now, and the others overturn them withi"
+   ]
+  ],
+  "src/generators/power/settlementNarrative.js": [
+   [
+    "powersCount",
+    "word",
+    " has avoided taking sides so far, which means both powers resent it equally."
+   ]
+  ],
+  "src/generators/power/stressFactions.js": [
+   [
+    "occupation",
+    "word",
+    " Under occupation, several noble families have made private accommodations with the new authority. Others have not, and "
+   ],
+   [
+    "quarters",
+    "word",
+    "Claims legitimate authority through different means; controls a distinct district or institution."
+   ],
+   [
+    "powersCount",
+    "word",
+    "An external interest with embedded assets in at least two powers. Its presence is not known to the settlement."
+   ],
+   [
+    "succession",
+    "word",
+    " The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing."
+   ]
+  ],
+  "src/generators/safetyProfile.js": [
+   [
+    "occupation",
+    "word",
+    "The garrison, now under occupier command, enforces"
+   ],
+   [
+    "plague",
+    "word",
+    "Dangerous — Plague Unrest"
+   ],
+   [
+    "quarters",
+    "word",
+    "Armed rebels are active. Patrols have changed their routes, some districts are closed off, "
+   ],
+   [
+    "quarters",
+    "word",
+    "Rebels and guards are fighting in the contested districts. People keep off certain streets, "
+   ],
+   [
+    "quarters",
+    "word",
+    "No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply."
+   ],
+   [
+    "quarters",
+    "word",
+    " District boundaries often follow the old wall lines and alleyways."
+   ],
+   [
+    "quarters",
+    "word",
+    "Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than"
+   ],
+   [
+    "revolt",
+    "word",
+    "Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder."
+   ],
+   [
+    "revolt",
+    "word",
+    "Both the governing power and the insurgency pressure individuals to declare allegiance. Refusal is dangerous. False decl"
+   ],
+   [
+    "quarters",
+    "word",
+    "Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding spe"
+   ],
+   [
+    "quarters",
+    "word",
+    "Stolen and improvised weapons circulating in the revolt-held districts. Some are being smuggled in from outside. The bla"
+   ],
+   [
+    "quarters",
+    "word",
+    "Red Light District"
+   ],
+   [
+    "quarters",
+    "word",
+    "Armed rebels are active. Patrols have changed their routes, some districts are closed off, and nobody is sure whose side"
+   ],
+   [
+    "quarters",
+    "word",
+    "Armed rebels are active. Some districts are closed off, and nobody is sure whose side a neighbour is on."
+   ],
+   [
+    "quarters",
+    "word",
+    "Rebels and guards are fighting in the contested districts. People keep off certain streets, and the regular patrols have"
+   ],
+   [
+    "quarters",
+    "word",
+    "The rebels hold some districts. People keep off those streets, and nobody walks them after dark."
+   ],
+   [
+    "revolt",
+    "word",
+    "Street-level confrontations between insurgent supporters and those who keep order. Officially categorised as riot and di"
+   ]
+  ],
+  "src/generators/spatialGenerator.js": [
+   [
+    "quarters",
+    "word",
+    "Eastern district (traditional)"
+   ],
+   [
+    "quarters",
+    "word",
+    "Old town or slums"
+   ],
+   [
+    "quarters",
+    "word",
+    "The Warren (slums)"
+   ],
+   [
+    "quarters",
+    "word",
+    "Dense timber tenements, narrow streets, crowded"
+   ],
+   [
+    "quarters",
+    "word",
+    "Imperial port city: fortified harbour, merchant districts, grand boulevard from waterfront to palace"
+   ],
+   [
+    "quarters",
+    "word",
+    "River delta metropolis: island districts, bridge-markets, the great river-gate controlling all upstream trade"
+   ],
+   [
+    "quarters",
+    "word",
+    "Sprawling imperial capital: walled inner city, vast suburban rings, the palace district above the outer walls"
+   ],
+   [
+    "quarters",
+    "word",
+    "Hill metropolis on seven rises: each commanding a district, each district a city unto itself"
+   ],
+   [
+    "quarters",
+    "word",
+    "Dense urban core with sprawling suburbs"
+   ],
+   [
+    "quarters",
+    "word",
+    "Great river city: bridge quarter, merchant districts, "
+   ],
+   [
+    "quarters",
+    "word",
+    "Hill city: castle district commanding the heights, market quarter below, poor wards at the base"
+   ],
+   [
+    "quarters",
+    "word",
+    "Mountain city of terraced districts, the citadel at the summit, lower town in the valley"
+   ],
+   [
+    "quarters",
+    "word",
+    "Hill town of stone houses climbing above the market quarter"
+   ],
+   [
+    "quarters",
+    "word",
+    "Stone-walled hill town, the keep visible above the market quarter"
+   ]
+  ],
   "src/generators/steps/cascadePass.js": [
    [
     "docks",
@@ -7900,6 +12259,49 @@
     "docks",
     "carrier",
     "Harbour master's office"
+   ]
+  ],
+  "src/generators/steps/isolationPass.js": [
+   [
+    "famine",
+    "word",
+    " has no external supply line. A failed harvest cannot be covered by imports, so famine is a live risk."
+   ]
+  ],
+  "src/generators/steps/stepMetadata.js": [
+   [
+    "plague",
+    "word",
+    "Roll the active stressors (plague, drought, raid pressure, etc.) that shape this run."
+   ],
+   [
+    "famine",
+    "word",
+    "Re-weight emergent stressors against the real roster. Walls suppress sieges, granaries suppress famine."
+   ]
+  ],
+  "src/generators/stressNarrative.js": [
+   [
+    "powersCount",
+    "word",
+    "Two or three powers each run part of "
+   ]
+  ],
+  "src/generators/structuralValidator.js": [
+   [
+    "quarters",
+    "word",
+    "Inns and taverns (district)"
+   ],
+   [
+    "quarters",
+    "word",
+    "A complex of old stone buildings (the university) anchors the northern quarter."
+   ],
+   [
+    "quarters",
+    "word",
+    "High magic district"
    ]
   ]
  }

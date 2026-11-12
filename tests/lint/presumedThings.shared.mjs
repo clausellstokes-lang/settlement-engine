@@ -7,8 +7,9 @@
  * beside the vocabulary atoms that answer for it (`src/domain/facts/factVocabulary.js ::
  * FACT_DIMENSIONS`), the way `src/domain/foodways.js :: SOURCE_WORDS` gives the food sources theirs.
  *
- *   ARM 1 (source)  every string literal of three words or more under ARM1_ROOTS that uses a thing's
- *                   words either DECLARES the thing (an atom of `atoms`, on its needs or its excludes,
+ *   ARM 1 (source)  every string literal of three words or more under ARM1_ROOTS that uses a REGISTERED
+ *                   WORD's words (a thing, and since W2-B-DECLARE item 3 a state, a size or a count:
+ *                   `registeredWords.js :: REGISTERED_WORDS`) either DECLARES it (an atom of `atoms`, on its needs or its excludes,
  *                   in a declaration around it that a draw door enforces — `needs`, `excludes`,
  *                   `poolDeclares`, a state variant's `marks`, a tagged table's `tags`; `DECL_PROPS` —
  *                   or an array handed to the same call) or stands in a register under a named reason.
@@ -34,8 +35,9 @@ import { createRequire } from 'node:module';
 
 import { timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
 import {
-  THINGS, sentencesOf, thingsNamedIn, thingsDeniedIn, presentForDenial,
+  REGISTERED_WORDS, THINGS, newWordsNamedIn, sentencesOf, thingsNamedIn, thingsDeniedIn, presentForDenial,
 } from '../../src/domain/facts/registeredWords.js';
+import { CRISIS_KIND_ALIASES, MARK_DIMENSION_ATOM } from '../../src/domain/facts/factVocabulary.js';
 
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
@@ -116,7 +118,19 @@ function collectCredited(obj, rel, out) {
     const credited = DECL_PROPS.has(name)
       || (name === 'marks' && isStateVariant(obj))
       || (name === 'tags' && Object.prototype.hasOwnProperty.call(TAGGED_TABLE_FILES, rel));
-    if (credited) collectStrings(p.initializer, out);
+    if (credited) {
+      /** @type {string[]} */ const words = []; collectStrings(p.initializer, words);
+      for (const w of words) {
+        out.push(w);
+        // a kernel family mark (`threat`, `no hunger`) is its crisis atom (`factVocabulary.js :: MARK_DIMENSION_ATOM`)
+        const fam = MARK_DIMENSION_ATOM[w.trim().replace(/^no\s+/i, '')];
+        if (name === 'marks' && fam) out.push(fam);
+      }
+    } else if (name === 'crisis') {
+      // the generator door's crisis carrier (`declarationOf` reads `crisis`): each value is its crisis atom
+      /** @type {string[]} */ const words = []; collectStrings(p.initializer, words);
+      for (const w of words) for (const v of w.replace(/^crisis:\s*/i, '').split(',')) out.push(`crisis: ${CRISIS_KIND_ALIASES[v.trim()] || v.trim()}`);
+    }
   }
 }
 
@@ -138,6 +152,16 @@ function isNotPrintedSite(rel, node) {
   if (!call || !ts.isCallExpression(call) || !ts.isIdentifier(call.expression)) return false;
   return ARM1_NOT_PRINTED.some((site) => site.file === rel && site.callee === call.expression.text
     && call.arguments[site.argument] === node);
+}
+
+/**
+ * Does a declaration answer a registered word? One of the word's atoms is declared (either side); an atom
+ * written `dimension:` is answered by any band of that dimension (`population: ≥ middling`).
+ * @param {ReadonlyArray<string>} atoms @param {string[]} declared the declaration words around the literal
+ */
+export function answers(atoms, declared) {
+  const want = atoms.map((a) => a.toLowerCase());
+  return declared.some((w) => want.some((a) => (a.endsWith(':') ? w.startsWith(a) : w === a)));
 }
 
 /** The atom a declaration word answers (`no X` → X), lower-cased. @param {string} w */
@@ -225,10 +249,9 @@ export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
     if (isText && text.trim().split(/\s+/).length >= 3 && !isKeyOrTwinOf(n) && !isNotPrintedSite(rel, n)) {
       let declared = null;
       for (const sentence of sentencesOf(text)) {
-        for (const thing of thingsNamedIn(sentence)) {
+        for (const thing of [...thingsNamedIn(sentence), ...newWordsNamedIn(sentence)]) {
           declared ??= [...declarationWordsAround(n, rel), ...(keyed.get(text) || [])];
-          const atoms = THINGS[thing].atoms.map((a) => a.toLowerCase());
-          if (declared.some((w) => atoms.includes(w))) continue;
+          if (answers(REGISTERED_WORDS[thing].atoms, declared)) continue;
           if (!hits.some((h) => h.thing === thing && h.text === text)) hits.push({ file: rel, thing, text });
         }
       }

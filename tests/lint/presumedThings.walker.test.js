@@ -28,7 +28,8 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
-import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
+import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabulary.js';
+import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
   ARM1_NOT_PRINTED, ARM1_ROOTS, COURT_HOUSES, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
   deniesExistence, hitKey, listFiles, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
@@ -90,6 +91,35 @@ describe('the rule book', () => {
     expect([...ARM1_ROOTS]).toEqual(['src/data', 'src/generators', 'src/domain', 'src/components']);
     const jsx = 'export const P = () => <p>The militia drills on the green every week.</p>;';
     expect(scanSource('src/components/planted.jsx', jsx).map((h) => `${h.thing} :: ${h.text}`)).toEqual(['militia :: The militia drills on the green every week.']);
+  });
+
+  /**
+   * W2-B-DECLARE item 3 (record 288, ruling 1, B (ii); record 290, ruling 3: "a line that uses a registered word must
+   * carry that word's disqualifier"). Red at 21a27e035's rule book, which read the sixteen things alone.
+   */
+  test('planted: a state, a size or a count with no declaration is a hit; the door\'s carriers answer it', () => {
+    const src = [
+      "export const A = ['The town has been under siege since the thaw.'];",
+      "export const B = [{ text: 'The town has been under siege since the thaw, still.', crisis: ['siege'] }];",
+      "export const C = [{ vid: 1, marks: ['threat'], text: 'The town has been under siege since the thaw, again.' }];",
+      "export const D = ['Smoke rises from the poorest quarters at dusk.'];",
+      "export const E = [{ text: 'Smoke rises from the poorest quarters at dusk, still.', needs: ['population: ≥ middling'] }];",
+      "export const F = ['The ruling three meet each spring at the hall.'];",
+    ].join('\n');
+    expect(scanSource('src/data/planted.js', src).map((h) => `${h.thing} :: ${h.text}`)).toEqual([
+      'siege :: The town has been under siege since the thaw.',
+      'quarters :: Smoke rises from the poorest quarters at dusk.',
+      'powersCount :: The ruling three meet each spring at the hall.',
+    ]);
+  });
+
+  test('every registered word carries its disqualifier: atoms of the vocabulary, or the leaf its atom waits for', () => {
+    const bad = [];
+    for (const [id, w] of Object.entries(REGISTERED_WORDS)) {
+      if (w.atoms.length === 0 && !w.leaf) bad.push(`${id}: no atom and no leaf`);
+      for (const a of w.atoms) if (!(a.endsWith(':') ? FACT_DIMENSIONS[a.slice(0, -1)] : parseAtom(a))) bad.push(`${id}: ${a}`);
+    }
+    expect(bad).toEqual([]);
   });
 
   test('the tagged tables are exactly the files a door draws `{ tagged: true }`', () => {
@@ -227,9 +257,11 @@ describe('the register', () => {
     expect(bad).toEqual([]);
   });
 
-  test('no row is banked twice: the widened register holds nothing the first one holds', () => {
+  test('no row is banked twice: the widened register holds nothing the first one holds, nor any key twice', () => {
     const first = bankedKeys(register);
     expect([...bankedKeys(widened)].filter((k) => first.has(k))).toEqual([]);
+    const rows = Object.entries(widened.arm1).flatMap(([f, rs]) => rs.map((r) => hitKey(f, r[0], r[2])));
+    expect(rows.length).toBe(new Set(rows).size);
   });
 });
 

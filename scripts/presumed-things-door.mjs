@@ -68,7 +68,13 @@ if (mode === '--check' || mode === undefined) {
     for (const h of novel) console.error(`NEW LINE (not at ${base}): ${hitKey(h.file, h.thing, h.text)}`);
     process.exit(1);
   }
-  for (const h of fresh) (reg.arm1[h.file] ||= []).push([h.thing, reason, h.text.slice(0, 120)]);
+  const once = new Set();
+  for (const h of fresh) {
+    const k = hitKey(h.file, h.thing, h.text);
+    if (once.has(k)) continue; // two literals sharing their first 120 characters are one row
+    once.add(k);
+    (reg.arm1[h.file] ||= []).push([h.thing, reason, h.text.slice(0, 120)]);
+  }
   write();
   console.log(`banked ${fresh.length} rows under '${reason}' (each stood at ${base})`);
 } else {
