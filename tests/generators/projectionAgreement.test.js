@@ -15,6 +15,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 import { projectionAgreementFindings } from '../../src/generators/generationCoherence.js';
+import { resourceShortageImport } from '../../src/domain/resourceSemantics.js'; // re-keyed by identity: the label names its own land now
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -139,12 +140,18 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(grown(100, ['Grain and salted pork']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
     expect(details(grown(100, ['Salted pork and a little grain']))).toEqual([]);
     expect(details(grown(80, ['Grain and salted pork']))).toEqual([]);
-    const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: ['Bulk grain (local fields depleted)'] } });
+    const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: [resourceShortageImport('grain_fields')] } });
     expect(details(spent)).toContain('A shortage import stands beside the resource it says is spent.');
     // F12b (REVIEW-AGREE): the bracket's land against every live resource of that land
     const pasture = (label) => record({ resourceAnalysis: { availableResources: ['alpine_pasture'] }, economicState: { primaryImports: [label] } });
     expect(details(pasture('Livestock and dairy (local pastures depleted)'))).toContain('A shortage import says land is spent that a live resource is.');
     expect(details(pasture('Livestock and dairy (local grazing land depleted)'))).toEqual([]);
+    // the chair's widening (2026-11-12): the words, not the key — forests beside mountain timber, fields beside a floodplain
+    const beside = (label, live) => record({ resourceAnalysis: { availableResources: live }, economicState: { primaryImports: [label] } });
+    expect(details(beside('Timber (local forests cleared)', ['mountain_timber']))).toContain('A shortage import says land is spent that a live resource is.');
+    expect(details(beside('Bulk grain (local fields depleted)', ['fertile_floodplain']))).toContain('A shortage import says land is spent that a live resource is.');
+    expect(details(beside('Timber (local managed woodland cleared)', ['mountain_timber']))).toEqual([]);
+    expect(details(beside('Timber (local mountain timber cleared)', ['managed_forest']))).toEqual([]);
     // F7 (REVIEW-AGREE): an income line selling a surplus the food record does not hold
     const sells = (foodRecord) => record({ economicState: { primaryImports: [], foodSecurity: { foodRecord },
       incomeSources: [{ source: 'Grain Sales', desc: 'Surplus from local harvest (planted) sold on.' }] } });
@@ -227,6 +234,8 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12-town-19', tier: 'town' }, { seed: 'rvw12-town-121', tier: 'town' }, { seed: 'rvw12b-town-186', tier: 'town' },
   // Part B (i): Farmland, Common grazing land and a Dairy farmer beside "no established food chains"
   { seed: 'rvw-ten-3', tier: 'village', stress: 'wartime' }, { seed: 'agree-thorp-2', tier: 'thorp' }, { seed: 'agree-hamlet-0', tier: 'hamlet' },
+  // the forest label (the chair's ruling, 2026-11-12): "Timber (local forests cleared)" beside live timber
+  { seed: 'rvw12-city-71', tier: 'city' }, { seed: 'rvw12b-town-171', tier: 'town' }, { seed: 'rvw12b-town-251', tier: 'town' }, { seed: 'rvw12b-city-156', tier: 'city' },
   // F11: "Commerce is sluggish" beside "Comfortable" or "Prosperous" (rvw-ten-6, above, beside "Prosperous")
   { seed: 'rvw12-town-8', tier: 'town' }, { seed: 'rvw12-town-20', tier: 'town' }, { seed: 'rvw12-town-32', tier: 'town' },
 ];

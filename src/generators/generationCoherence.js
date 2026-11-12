@@ -18,6 +18,7 @@ import {
   resolveGenerationContentProfile,
 } from '../domain/generationContentProfile.js';
 import {
+  RESOURCE_SEMANTICS,
   nativeResourceConditionRecords,
   resourceKeyForLabel,
   resourceShortageImport,
@@ -323,6 +324,9 @@ const LOCAL_INCOME_WORDS = Object.freeze([
 const COURT_SITS = /\b(?:a court exists|the court can try|before the court|tried at the court|the court sits|functioning court|with a working court|only a court|prosecution is real|real prosecution)/i;
 const COURT_ABSENT = /\b(?:with no court|without a court|without courts|without a working court|without consistent courts|without prison or courts|no reliable court|lack of reliable courts)/i;
 
+/** Each shortage label and the resource it is spent for (resourceSemantics.js), so the bracket's own resource is excepted. */
+const SHORTAGE_OWNER = new Map(Object.keys(RESOURCE_SEMANTICS).map((key) => [resourceShortageImport(key), key]));
+
 /** The peacetime iron events and their twins (economy/outlookHookSiblings.js): each presumes the peace. */
 const PEACE_IRON_TEXTS = new Set(PEACE_IRON_HOOKS.flat());
 
@@ -342,15 +346,27 @@ const MARKET_NAMED = /(?<!black )\bmarkets?\b/i;
 const SCARCE_MATERIAL_WORDS = Object.freeze([[/\b(?:iron|metal)\b/i, 'metals'], [/\btimber\b/i, 'timber']]);
 
 /**
- * A shortage import's bracket names a kind of land; the resources that ARE that land (F12b, COHERENCE-AGREE-3).
- * A shortage that says the town's pastures are spent beside a live pasture tells two stories.
+ * A shortage import's bracket, read by WHAT ITS WORDS NAME (F12b, widened by the chair's ruling of 2026-11-12):
+ * an unqualified word ("pastures", "fields", "forests", "stands", "springs", "deposits", "mines", "veins",
+ * "herds", "salt beds", "fishing grounds") names every resource of its family, so a bracket that says that land
+ * is spent beside ANOTHER live resource of the family tells two stories. The label's own resource is excepted
+ * (that case is the shortage member below: same key, available). Comparing the key alone let "local pastures"
+ * stand beside an alpine pasture and "local forests" beside mountain timber.
  * @type {ReadonlyArray<readonly [RegExp, ReadonlyArray<string>]>}
  */
 const SHORTAGE_LAND_WORDS = Object.freeze([
   [/\(local pastures? /i, ['grazing_land', 'alpine_pasture']],
-  [/\(local (?:grain )?fields /i, ['grain_fields']],
+  [/\(local fields? /i, ['grain_fields', 'fertile_floodplain']],
   [/\(local floodplain /i, ['fertile_floodplain']],
-  [/\(local forests? /i, ['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber']],
+  [/\((?:local |coastal |mountain )?(?:forests?|stands) /i, ['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber']],
+  [/\(local springs /i, ['hot_springs', 'hot_springs_mineral']],
+  [/\(local deposits /i, ['river_clay', 'gemstone_deposits', 'glass_sand', 'coal_deposits', 'iron_deposits']],
+  [/\(local veins /i, ['iron_deposits', 'precious_metals']],
+  // "(local mines …)" is NOT read yet: the iron label's words also name a live coal seam or gem working, but its
+  // text is a Founding World card's printed promise (Black Crag), not this lane's: put to the chair, 2026-11-12.
+  [/\(local herds /i, ['camel_herds', 'grazing_land', 'alpine_pasture']],
+  [/\(local salt beds /i, ['salt_flats', 'desert_salt']],
+  [/\(local fishing grounds /i, ['fishing_grounds', 'river_fish']],
 ]);
 
 /** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
@@ -492,8 +508,9 @@ export function projectionAgreementFindings(settlement) {
     }
   }
   for (const [index, label] of imports.entries()) {
-    const said = SHORTAGE_LAND_WORDS.find(([words]) => words.test(label));
-    const live = said ? said[1].find((key) => available.includes(key)) : null;
+    const own = SHORTAGE_OWNER.get(label);
+    const live = SHORTAGE_LAND_WORDS.filter(([words]) => words.test(label))
+      .flatMap(([, keys]) => keys).find((key) => key !== own && available.includes(key));
     if (live) food.push(finding(`economicState.primaryImports[${index}]`, 'A shortage import says land is spent that a live resource is.', `${label}: ${live} available`));
   }
   // Part B (i) (COHERENCE-AGREE-3): "no established food chains" beside a roster that works its own land.

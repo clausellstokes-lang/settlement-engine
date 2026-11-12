@@ -35,7 +35,11 @@ const RESOURCE_CATALOG = /** @type {Record<string, {label: string}>} */ (
  * @property {boolean} randomDepletionEligible
  * @property {ResourceRecoveryMode} recoveryMode
  * @property {string} depletedDescription
- * @property {string|null} shortageImport
+ * @property {string|null} shortageImport what the town buys when the resource is spent, and why. THE RULE
+ *   (COHERENCE-AGREE-3, the chair's ruling of 2026-11-12): the bracket names its OWN resource by its own name,
+ *   never by a word another resource answers to ("pastures" beside an alpine pasture, "forests" beside mountain
+ *   timber, "fields" beside a floodplain, "springs", "deposits", "veins", "herds", "stands"); the coherence
+ *   receipt's shortage member reads the words (generationCoherence.js :: SHORTAGE_LAND_WORDS)
  */
 
 /** @type {Readonly<Record<string, Readonly<ResourceSemantics>>>} */
@@ -45,14 +49,14 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'natural',
     depletedDescription: 'The fishing grounds are over-fished and no longer sustain a commercial catch.',
-    shortageImport: 'Salted fish (local fishing grounds exhausted)',
+    shortageImport: 'Salted fish (local sea fisheries exhausted)',
   }),
   salt_flats: Object.freeze({
     type: 'exhaustible',
     randomDepletionEligible: true,
     recoveryMode: 'manual',
     depletedDescription: 'The accessible salt beds are exhausted or no longer workable.',
-    shortageImport: 'Salt (local salt beds exhausted)',
+    shortageImport: 'Salt (local salt flats exhausted)',
   }),
   deep_harbour: Object.freeze({
     type: 'positional',
@@ -66,7 +70,7 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'natural',
     depletedDescription: 'The coastal stands have been cleared faster than they can regrow.',
-    shortageImport: 'Shipbuilding timber (coastal stands cleared)',
+    shortageImport: 'Shipbuilding timber (local shipbuilding stands cleared)',
   }),
   river_mills: Object.freeze({
     type: 'infrastructure',
@@ -80,7 +84,7 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'manual',
     depletedDescription: 'The workable river-clay beds have been exhausted.',
-    shortageImport: 'Clay and ceramics materials (local deposits exhausted)',
+    shortageImport: 'Clay and ceramics materials (local clay pits exhausted)',
   }),
   fertile_floodplain: Object.freeze({
     type: 'renewable',
@@ -108,7 +112,7 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'natural',
     depletedDescription: 'The managed woodland has been cut faster than it can regrow.',
-    shortageImport: 'Timber (local forests cleared)',
+    shortageImport: 'Timber (local managed woodland cleared)',
   }),
   foraging_areas: Object.freeze({
     type: 'renewable',
@@ -129,14 +133,14 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'natural',
     depletedDescription: 'The fields are exhausted or failing and no longer yield a dependable surplus.',
-    shortageImport: 'Bulk grain (local fields depleted)',
+    shortageImport: 'Bulk grain (local grain fields depleted)',
   }),
   grazing_land: Object.freeze({
     type: 'renewable',
     randomDepletionEligible: true,
     recoveryMode: 'natural',
     depletedDescription: 'The pasture is overgrazed and cannot support its former herds.',
-    shortageImport: 'Livestock and dairy (local grazing land depleted)', // COHERENCE-AGREE-3 (F12b): named by its own name, not "pastures", which a live alpine pasture is
+    shortageImport: 'Livestock and dairy (local grazing land depleted)',
   }),
   crossroads_position: Object.freeze({
     type: 'positional',
@@ -164,14 +168,14 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'manual',
     depletedDescription: 'The accessible precious-metal veins are exhausted.',
-    shortageImport: 'Precious metals (local veins exhausted)',
+    shortageImport: 'Precious metals (local gold and silver veins exhausted)',
   }),
   gemstone_deposits: Object.freeze({
     type: 'exhaustible',
     randomDepletionEligible: true,
     recoveryMode: 'manual',
     depletedDescription: 'The accessible gemstone-bearing rock is exhausted.',
-    shortageImport: 'Gemstones (local deposits exhausted)',
+    shortageImport: 'Gemstones (local gem deposits exhausted)',
   }),
   coal_deposits: Object.freeze({
     type: 'exhaustible',
@@ -192,7 +196,7 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: false,
     recoveryMode: 'not_applicable',
     depletedDescription: 'Access to the healing waters is obstructed or unsafe.',
-    shortageImport: 'Healing waters (local springs unavailable)',
+    shortageImport: 'Healing waters (local hot springs unavailable)',
   }),
   magical_node: Object.freeze({
     type: 'magical',
@@ -234,7 +238,7 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'manual',
     depletedDescription: 'The accessible high-purity glass sand is exhausted.',
-    shortageImport: 'Glass sand (local deposits exhausted)',
+    shortageImport: 'Glass sand (local sand pits exhausted)',
   }),
   desert_salt: Object.freeze({
     type: 'exhaustible',
@@ -248,7 +252,7 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'natural',
     depletedDescription: 'The camel herds have fallen below a sustainable breeding stock.',
-    shortageImport: 'Camels and pack animals (local herds depleted)',
+    shortageImport: 'Camels and pack animals (local camel herds depleted)',
   }),
   alpine_pasture: Object.freeze({
     type: 'renewable',
@@ -262,14 +266,14 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'natural',
     depletedDescription: 'The accessible mountain stands have been cleared faster than they can regrow.',
-    shortageImport: 'Timber (mountain stands cleared)',
+    shortageImport: 'Timber (local mountain timber cleared)',
   }),
   hot_springs_mineral: Object.freeze({
     type: 'positional',
     randomDepletionEligible: false,
     recoveryMode: 'not_applicable',
     depletedDescription: 'Access to the mineral springs is obstructed or unsafe.',
-    shortageImport: 'Mineral salts and medicinal waters (local springs unavailable)',
+    shortageImport: 'Mineral salts and medicinal waters (local mineral springs unavailable)',
   }),
 });
 
