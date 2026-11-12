@@ -97,6 +97,37 @@ export function realmMapPreview(ext = preferredImageExt('png')) {
   return `url('${REALM_MAP_BASE}.${ext}'), url('${REALM_MAP_PLATE}')`;
 }
 
+/**
+ * The photograph's own geometry, so an overlay pin can sit ON the marker the
+ * image already draws. The photograph prints every town's marker AND its name;
+ * an overlay that guessed positions (the old `pinPos`) put a second dot and a
+ * second label beside them, and Cnocby and Penshaw read twice.
+ *
+ * `size` is the image's pixel size (realm-cnocby.png). `markers` are the
+ * centres of the drawn markers, as percentages of the WHOLE image, measured
+ * from the image's own pixels (the brown fill's bounding box, 2026-11-12).
+ * `printedNames` are the town names the image itself prints under its markers
+ * (the five settlements of realm-cnocby.provenance.json). An overlay never
+ * prints a second label for a name on this list.
+ * @enforced-by tests/ui/landingRealmPins.test.jsx
+ */
+export const REALM_MAP_GEOMETRY = Object.freeze({
+  size: Object.freeze({ width: 2280, height: 1126 }),
+  markers: Object.freeze({
+    Cnocby: Object.freeze({ x: 56.95, y: 44.36 }),
+    Penshaw: Object.freeze({ x: 75.29, y: 22.6 }),
+    Aryagrad: Object.freeze({ x: 66.01, y: 32.73 }),
+    Keshigordu: Object.freeze({ x: 77.04, y: 47.87 }),
+    'Skáloy': Object.freeze({ x: 64.14, y: 68.07 }),
+  }),
+  printedNames: Object.freeze(['Cnocby', 'Penshaw', 'Aryagrad', 'Keshigordu', 'Skáloy']),
+});
+
+/** Whether the photograph already prints this town's name. */
+export function realmImagePrintsName(name) {
+  return REALM_MAP_GEOMETRY.printedNames.includes(name);
+}
+
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
 // outside §03; it is NOT a second violet — it is the same violet token family.
@@ -438,10 +469,18 @@ export function AdvanceTimeCard() {
 // ── 04 · Realm — world map + chronicle (real names, real applied events) ─────
 export function RealmMapCard() {
   const { pins = [], chronicle = [], relationships = [] } = fixture.realm;
-  // Pin percentage positions (relative to the image box — spec §7). The scene
-  // is the painted world-map (an in-app realm capture was blocked this wave —
-  // see docs/LANDING_HANDOFF_AMENDMENTS.md); names/states are the fixture's.
-  const pinPos = [{ top: '52%', left: '38%' }, { top: '22%', left: '60%' }, { top: '70%', left: '64%' }];
+  // ⛔ A PIN SITS ON THE PHOTOGRAPH'S OWN MARKER, AND NEVER NAMES A TOWN TWICE.
+  // The backdrop is the realm's own photograph, which draws every town's marker
+  // and prints its name. The pins used to sit at guessed box percentages
+  // (`pinPos`), beside the drawn markers, each with its own label — so Cnocby and
+  // Penshaw each read twice. A pin is now placed at its town's measured marker
+  // (REALM_MAP_GEOMETRY) inside a layer that is scaled and cropped exactly as
+  // `background-size: cover` scales and crops the photograph (the layer keeps
+  // the image's aspect, is at least the box in both axes, and is centred), and it
+  // prints a label only for a town the photograph does not name. A town with no
+  // measured marker keeps the old box position and its label.
+  const { size, markers } = REALM_MAP_GEOMETRY;
+  const fallbackPos = [{ top: '52%', left: '38%' }, { top: '22%', left: '60%' }, { top: '70%', left: '64%' }];
   return (
     <div style={{
       ...cardStyle, maxWidth: 1080, margin: `${SP.xl + SP.md}px auto 0`, overflow: 'hidden',
@@ -449,7 +488,7 @@ export function RealmMapCard() {
     }}>
       {/* Map half */}
       <div style={{
-        position: 'relative', minHeight: 320,
+        position: 'relative', minHeight: 320, overflow: 'hidden',
         backgroundImage: realmMapPreview(), backgroundSize: 'cover', backgroundPosition: 'center',
       }}>
         <div style={{
@@ -468,29 +507,46 @@ export function RealmMapCard() {
             color: CARD, background: GOLD, border: `1px solid ${GOLD}`, borderRadius: R.lg, padding: '5px 12px',
           }}>{tl('realm.clockCta')}</span>
         </div>
-        {pins.map((pin, i) => (
-          <div key={pin.name} style={{
-            position: 'absolute', top: pinPos[i]?.top, left: pinPos[i]?.left, transform: 'translateX(-50%)',
-            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
-          }}>
-            <span style={{
-              width: 13, height: 13, borderRadius: radius.button, background: dotColor[pin.dotTone] || GOLD,
-              border: `2.5px solid ${CARD}`, boxShadow: ELEV[1],
-            }} />
-            <span style={{
-              fontFamily: sans, fontSize: FS.xs, fontWeight: 800, color: INK,
-              background: 'rgba(255,251,245,0.92)', borderRadius: R.sm, padding: '1px 7px',
-              boxShadow: ELEV[1], whiteSpace: 'nowrap',
-            }}>{pin.name}</span>
-            {pin.tag && (
-              <span style={{
-                fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
-                color: PARCH, background: pin.tagTone === 'danger' ? RED : AMBER,
-                borderRadius: R.sm, padding: '1px 7px', boxShadow: ELEV[1], whiteSpace: 'nowrap',
-              }}>{pin.tag}</span>
-            )}
-          </div>
-        ))}
+        <div style={{
+          position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)',
+          aspectRatio: `${size.width} / ${size.height}`, minWidth: '100%', minHeight: '100%',
+          pointerEvents: 'none',
+        }}>
+          {pins.map((pin, i) => {
+            const at = markers[pin.name];
+            const pos = at ? { left: `${at.x}%`, top: `${at.y}%` } : fallbackPos[i];
+            const showLabel = !realmImagePrintsName(pin.name);
+            // A tag rides ABOVE the marker (the photograph prints the name below
+            // it); a marker in the image's right third anchors its tag leftward so
+            // the card's edge does not cut it.
+            const tagAnchor = at && at.x > 66 ? { right: -10 } : { left: 0, transform: 'translateX(-50%)' };
+            return (
+              <div key={pin.name} data-realm-pin={pin.name} style={{ position: 'absolute', ...pos, width: 0, height: 0 }}>
+                <span style={{
+                  position: 'absolute', left: 0, top: 0, transform: 'translate(-50%, -50%)', boxSizing: 'border-box',
+                  width: 10, height: 10, borderRadius: radius.button, background: dotColor[pin.dotTone] || GOLD,
+                  border: `2px solid ${CARD}`, boxShadow: ELEV[1],
+                }} />
+                {showLabel && (
+                  <span data-realm-pin-label="" style={{
+                    position: 'absolute', top: 8, left: 0, transform: 'translateX(-50%)',
+                    fontFamily: sans, fontSize: FS.xs, fontWeight: 800, color: INK,
+                    background: 'rgba(255,251,245,0.92)', borderRadius: R.sm, padding: '1px 7px',
+                    boxShadow: ELEV[1], whiteSpace: 'nowrap',
+                  }}>{pin.name}</span>
+                )}
+                {pin.tag && (
+                  <span style={{
+                    position: 'absolute', bottom: 8, ...tagAnchor,
+                    fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+                    color: PARCH, background: pin.tagTone === 'danger' ? RED : AMBER,
+                    borderRadius: R.sm, padding: '1px 7px', boxShadow: ELEV[1], whiteSpace: 'nowrap',
+                  }}>{pin.tag}</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
       {/* Chronicle half */}
       <div style={{ padding: '20px 22px', borderLeft: `1px solid ${BORDER}` }}>
