@@ -37,7 +37,7 @@ import { prosperityLabelOf } from '../prosperityRank.js';
  * @type {Readonly<Record<string, Readonly<{ bought: number, funded: number }>>>}
  */
 export const KEEP_TUNING = Object.freeze({
-  Struggling:  Object.freeze({ bought: 0.4,  funded: 0 }),
+  Struggling:  Object.freeze({ bought: 0.4,  funded: 0.3 }),
   Subsistence: Object.freeze({ bought: 0.55, funded: 0.3 }),
   Poor:        Object.freeze({ bought: 0.55, funded: 0.4 }),
   Moderate:    Object.freeze({ bought: 0.75, funded: 0.7 }),

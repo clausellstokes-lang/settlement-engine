@@ -92,12 +92,14 @@ describe('the five upkeep gates read the prosperity label, not the output', () =
     for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(1);
   });
 
-  test('RED-FIRST agree-village-5 (Struggling, output 57): every gate stands at its floor', () => {
+  test('RED-FIRST agree-village-5 (Struggling, output 57): every gate stands at the Struggling rung of the ladder', () => {
     const s = born('agree-village-5');
     expect(s.economicState.prosperity).toBe('Struggling');
     const gates = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).economicGates;
     expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
-    for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(FLOORS[gate]);
+    const funded = keepOf('Struggling').funded;
+    expect(funded, 'the chair\'s bound lifted the bottom rung (2026-11-12)').toBeGreaterThan(0);
+    for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(Math.round((FLOORS[gate] + (1 - FLOORS[gate]) * funded) * 100) / 100);
   });
 });
 
