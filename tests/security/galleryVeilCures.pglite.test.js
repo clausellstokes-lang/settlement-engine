@@ -299,4 +299,78 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     expect(reads).toBe(1600);
     expect(raised.slice(0, 10)).toEqual([]);
   }, ROW_TIMEOUT_MS);
+  // ── the review's minimal towns: every eye the panel offers ON THE CARD shut (its box and its depth
+  // eyes, never a class switch, which hides by kind and would mask a wrong id) ─────────────────────
+  const cardEyes = (pub) => veil.curateModelFor(pub, []).sections.flatMap((x) => x.cards.flatMap((c) => [...(c.whole ? [c.whole.address] : []), ...c.eyes.map((e) => e.address)]));
+  async function shutCardEyes(db, text) {
+    const pub = veil.galleryPayloadFor(JSON.parse(text), {});
+    const eyes = cardEyes(pub);
+    const share = await put(db, text, veil.writeShareVeil({}, eyes.map((address) => ({ address, hidden: true }))));
+    return { eyes, ...(await readBoth(db, share)) };
+  }
+
+  // ── F2 ────────────────────────────────────────────────────────────────────────────────────────
+  it('F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut', async () => {
+    const ROWS = [
+      ['event label null', '{"name":"T","history":{"historicalEvents":[{"label":null,"description":"EVSECRET_LABELNULL"}]}}', 'EVSECRET_LABELNULL'],
+      ['event label ""', '{"name":"T","history":{"historicalEvents":[{"label":"","description":"EVSECRET_LABELEMPTY"}]}}', 'EVSECRET_LABELEMPTY'],
+      ['event label 0', '{"name":"T","history":{"historicalEvents":[{"label":0,"description":"EVSECRET_LABELZERO"}]}}', 'EVSECRET_LABELZERO'],
+      ['event name 1e-7', '{"name":"T","history":{"historicalEvents":[{"name":1e-7,"description":"EVSECRET_TINYNAME"}]}}', 'EVSECRET_TINYNAME'],
+      ['institution id 1e-7', '{"name":"T","institutions":[{"id":1e-7,"name":"House","desc":"INSTSECRET_TINYID"}]}', 'INSTSECRET_TINYID'],
+      ['institution id 9007199254740993 (a raw write)', '{"name":"T","institutions":[{"id":9007199254740993,"name":"House","desc":"INSTSECRET_BIGID"}]}', 'INSTSECRET_BIGID'],
+      ['conflict parties [1e-7, "x"]', '{"name":"T","conflicts":[{"parties":[1e-7,"x"],"stakes":"CONFSECRET_STAKES","desc":"CONFSECRET_DESC"}]}', 'CONFSECRET'],
+      ['npc id 1e-7', '{"name":"T","npcs":[{"id":1e-7,"name":"A","personality":{"core":"NPCSECRET_TINYID"}}]}', 'NPCSECRET_TINYID'],
+    ];
+    const out = [];
+    for (const [tag, text, secret] of ROWS) {
+      for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+        const r = await shutCardEyes(db, text);
+        // anchored: the panel offered eyes on the card, and the town itself was read
+        expect(r.eyes.length, `${tag}: eyes`).toBeGreaterThan(0);
+        expect(r.g.settlement.name, tag).toBe('T');
+        out.push([`${where} ${tag}`, { page: has(r.g.settlement, secret) || has(r.l.settlement, secret),
+          response: where === '211' ? has(r.gResp, secret) || has(r.lResp, secret) : null }]);
+      }
+    }
+    expect(Object.fromEntries(out)).toEqual(Object.fromEntries(out.map(([k]) => [k, { page: false, response: k.startsWith('211') ? false : null }])));
+  }, ROW_TIMEOUT_MS);
+
+  it('F2 (the class): the server card id equals the client\'s idOf on 10,500 generated cards of every kind', async () => {
+    const { db } = LIVE;
+    const r = rngOf(211);
+    const bad = []; let compared = 0; let legacy = 0;
+    for (const kind of Object.keys(veil.CARD_KINDS)) {
+      const texts = Array.from({ length: 1500 }, () => cardText(r));
+      const rows = (await db.query(`select e::text as t, public._gallery_veil_card_id($2, e) as id
+          from jsonb_array_elements($1::jsonb) with ordinality x(e, o) order by o`, [`[${texts.join(',')}]`, kind])).rows;
+      expect(rows).toHaveLength(1500);
+      for (const { t, id } of rows) {
+        // the client computes its id on the card as the owner's own read delivers it: jsonb's text, parsed
+        const card = JSON.parse(t);
+        const want = veil.CARD_KINDS[kind].idOf(card);
+        compared += 1;
+        // an anonymous legacy event (no string id; no truthy name, title or label): the client hashes it,
+        // the server reads it fail-closed (NULL)
+        const anonymous = kind === 'event' && !(typeof card.id === 'string' && card.id) && !(card.name || card.title || card.label);
+        if (anonymous) { legacy += 1; if (id !== null) bad.push(`${kind} ${t} -> ${id} (want legacy)`); continue; }
+        if (id !== want) bad.push(`${kind} ${t.slice(0, 120)} -> ${JSON.stringify(id)}, client ${JSON.stringify(want)}`);
+      }
+    }
+    expect(compared).toBe(10_500);
+    expect(legacy).toBeGreaterThan(0);
+    expect(bad.slice(0, 20)).toEqual([]);
+  }, ROW_TIMEOUT_MS);
+
+  it('F2 (the class): the server spells 20,000 JSON numbers as JavaScript\'s String() does, past double range included', async () => {
+    const { db } = LIVE;
+    const r = rngOf(1075);
+    const toks = [...EDGE_NUMBERS, ...Array.from({ length: 20_000 - EDGE_NUMBERS.length }, () => numberToken(r))];
+    const rows = (await db.query(`select e::text as t, public._gallery_veil_jsstr(e) as s
+        from jsonb_array_elements($1::jsonb) with ordinality x(e, o) order by o`, [`[${toks.join(',')}]`])).rows;
+    expect(rows).toHaveLength(20_000);
+    const bad = rows.filter(({ t, s }) => String(JSON.parse(t)) !== s).map(({ t, s }) => `${t.slice(0, 60)} -> ${s}, JS ${String(JSON.parse(t))}`);
+    expect(bad.slice(0, 20)).toEqual([]);
+    // anchored: the edges JS reads as zero and as the infinities are among them
+    expect(rows.filter(({ s }) => s === 'Infinity' || s === '-Infinity').length).toBeGreaterThan(0);
+  }, ROW_TIMEOUT_MS);
 });
