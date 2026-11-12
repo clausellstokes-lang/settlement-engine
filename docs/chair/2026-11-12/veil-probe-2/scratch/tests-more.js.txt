@@ -1,0 +1,244 @@
+
+  // ── the review's minimal towns: every eye the panel offers ON THE CARD shut (its box and its depth
+  // eyes, never a class switch, which hides by kind and would mask a wrong id) ─────────────────────
+  const cardEyes = (pub) => veil.curateModelFor(pub, []).sections.flatMap((x) => x.cards.flatMap((c) => [...(c.whole ? [c.whole.address] : []), ...c.eyes.map((e) => e.address)]));
+  async function shutCardEyes(db, text) {
+    const pub = veil.galleryPayloadFor(JSON.parse(text), {});
+    const eyes = cardEyes(pub);
+    const share = await put(db, text, veil.writeShareVeil({}, eyes.map((address) => ({ address, hidden: true }))));
+    return { eyes, ...(await readBoth(db, share)) };
+  }
+
+  // ── F2 ────────────────────────────────────────────────────────────────────────────────────────
+  it('F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut', async () => {
+    const ROWS = [
+      ['event label null', '{"name":"T","history":{"historicalEvents":[{"label":null,"description":"EVSECRET_LABELNULL"}]}}', 'EVSECRET_LABELNULL'],
+      ['event label ""', '{"name":"T","history":{"historicalEvents":[{"label":"","description":"EVSECRET_LABELEMPTY"}]}}', 'EVSECRET_LABELEMPTY'],
+      ['event label 0', '{"name":"T","history":{"historicalEvents":[{"label":0,"description":"EVSECRET_LABELZERO"}]}}', 'EVSECRET_LABELZERO'],
+      ['event name 1e-7', '{"name":"T","history":{"historicalEvents":[{"name":1e-7,"description":"EVSECRET_TINYNAME"}]}}', 'EVSECRET_TINYNAME'],
+      ['institution id 1e-7', '{"name":"T","institutions":[{"id":1e-7,"name":"House","desc":"INSTSECRET_TINYID"}]}', 'INSTSECRET_TINYID'],
+      ['institution id 9007199254740993 (a raw write)', '{"name":"T","institutions":[{"id":9007199254740993,"name":"House","desc":"INSTSECRET_BIGID"}]}', 'INSTSECRET_BIGID'],
+      ['conflict parties [1e-7, "x"]', '{"name":"T","conflicts":[{"parties":[1e-7,"x"],"stakes":"CONFSECRET_STAKES","desc":"CONFSECRET_DESC"}]}', 'CONFSECRET'],
+      ['npc id 1e-7', '{"name":"T","npcs":[{"id":1e-7,"name":"A","personality":{"core":"NPCSECRET_TINYID"}}]}', 'NPCSECRET_TINYID'],
+    ];
+    const out = [];
+    for (const [tag, text, secret] of ROWS) {
+      for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+        const r = await shutCardEyes(db, text);
+        // anchored: the panel offered eyes on the card, and the town itself was read
+        expect(r.eyes.length, `${tag}: eyes`).toBeGreaterThan(0);
+        expect(r.g.settlement.name, tag).toBe('T');
+        out.push([`${where} ${tag}`, { page: has(r.g.settlement, secret) || has(r.l.settlement, secret),
+          response: where === '211' ? has(r.gResp, secret) || has(r.lResp, secret) : null }]);
+      }
+    }
+    expect(Object.fromEntries(out)).toEqual(Object.fromEntries(out.map(([k]) => [k, { page: false, response: k.startsWith('211') ? false : null }])));
+  }, ROW_TIMEOUT_MS);
+
+  // A seeded generator (no clock, no Math.random): the class tests are the same on every run.
+  function rngOf(seed) { let s = seed >>> 0; return () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 2 ** 32; }; }
+  const EDGE_NUMBERS = ['0', '-0', '1', '-1', '0.5', '1e-7', '-1e-7', '1e-6', '1e21', '1e+21', '1e20', '123456789012345678901', '9007199254740992',
+    '9007199254740993', '-9007199254740993', '12345678901234567890123', '31621967360964610', '1e400', '-1e400', '1e-400', '-1e-400', '5e-324',
+    '2.4703282292062327e-324', '2.4703282292062328e-324', '1.7976931348623157e308', '1.7976931348623158e308', '1.7976931348623159e308',
+    '0.1', '100.0', '1E5', '1.5e300', '-2.5e-10', '4.35e-6', '0.000001', '0.0000001', '999999999999999999999.5', '1e-323', '1.0000000000000002'];
+  /** A JSON number token: an edge, a random double from random bits (every exponent), or a long decimal. */
+  function numberToken(r) {
+    const pick = r();
+    if (pick < 0.4) return EDGE_NUMBERS[Math.floor(r() * EDGE_NUMBERS.length)];
+    if (pick < 0.8) {
+      const dv = new DataView(new ArrayBuffer(8));
+      dv.setUint32(0, Math.floor(r() * 2 ** 32)); dv.setUint32(4, Math.floor(r() * 2 ** 32));
+      const x = dv.getFloat64(0);
+      return Number.isFinite(x) ? JSON.stringify(x) : '0';
+    }
+    const digits = Array.from({ length: 1 + Math.floor(r() * 40) }, () => Math.floor(r() * 10)).join('');
+    return `${r() < 0.5 ? '-' : ''}${digits.replace(/^0+(?=\d)/, '')}${r() < 0.5 ? `.${Math.floor(r() * 1e9)}` : ''}${r() < 0.5 ? `e${Math.floor(r() * 700) - 350}` : ''}`;
+  }
+  const STRINGS = ['', ' ', 'x', 'House', 'The Hidden Hand', "Thieves' Guild", '  -- Ünder  Côte --  ', 'İstanbul KELVIN Kk', '日本語', '🗝 Key',
+    'a:b:c', 'x_y-z.9', 'a'.repeat(120), '0', 'false', 'null', 'event.legacy-1', '$veil', 'npc.a', '\n\t', '"q"', '\\'];
+  function valueToken(r, depth = 0) {
+    const pick = r();
+    if (pick < 0.45) return numberToken(r);
+    if (pick < 0.75) return JSON.stringify(STRINGS[Math.floor(r() * STRINGS.length)]);
+    if (pick < 0.85) return ['true', 'false', 'null'][Math.floor(r() * 3)];
+    if (pick < 0.95 && depth < 2) return `[${Array.from({ length: Math.floor(r() * 4) }, () => valueToken(r, depth + 1)).join(',')}]`;
+    return depth < 2 ? `{${r() < 0.5 ? '' : `"a":${valueToken(r, depth + 1)}`}}` : '{}';
+  }
+  const ID_KEYS = ['id', 'refId', 'name', 'label', 'title', 'type', 'faction', 'parties', 'issue', 'from', 'to', 'npc1Name', 'npc2Name'];
+  function cardText(r) {
+    const keys = ID_KEYS.filter(() => r() < 0.35);
+    return `{${keys.map((k) => `${JSON.stringify(k)}:${valueToken(r)}`).join(',')}}`;
+  }
+
+  it('F2 (the class): the server card id equals the client\'s idOf on 10,500 generated cards of every kind', async () => {
+    const { db } = LIVE;
+    const r = rngOf(211);
+    const bad = []; let compared = 0; let legacy = 0;
+    for (const kind of Object.keys(veil.CARD_KINDS)) {
+      const texts = Array.from({ length: 1500 }, () => cardText(r));
+      const rows = (await db.query(`select e::text as t, public._gallery_veil_card_id($2, e) as id
+          from jsonb_array_elements($1::jsonb) with ordinality x(e, o) order by o`, [`[${texts.join(',')}]`, kind])).rows;
+      expect(rows).toHaveLength(1500);
+      for (const { t, id } of rows) {
+        // the client computes its id on the card as the owner's own read delivers it: jsonb's text, parsed
+        const want = veil.CARD_KINDS[kind].idOf(JSON.parse(t));
+        compared += 1;
+        // an anonymous legacy event: the client hashes it, the server reads it fail-closed (NULL)
+        if (kind === 'event' && want.startsWith('event.legacy-')) { legacy += 1; if (id !== null) bad.push(`${kind} ${t} -> ${id} (want legacy)`); continue; }
+        if (id !== want) bad.push(`${kind} ${t.slice(0, 120)} -> ${JSON.stringify(id)}, client ${JSON.stringify(want)}`);
+      }
+    }
+    expect(compared).toBe(10_500);
+    expect(legacy).toBeGreaterThan(0);
+    expect(bad.slice(0, 20)).toEqual([]);
+  }, ROW_TIMEOUT_MS);
+
+  it('F2 (the class): the server spells 20,000 JSON numbers as JavaScript\'s String() does, past double range included', async () => {
+    const { db } = LIVE;
+    const r = rngOf(1075);
+    const toks = [...EDGE_NUMBERS, ...Array.from({ length: 20_000 - EDGE_NUMBERS.length }, () => numberToken(r))];
+    const rows = (await db.query(`select e::text as t, public._gallery_veil_jsstr(e) as s
+        from jsonb_array_elements($1::jsonb) with ordinality x(e, o) order by o`, [`[${toks.join(',')}]`])).rows;
+    expect(rows).toHaveLength(20_000);
+    const bad = rows.filter(({ t, s }) => String(JSON.parse(t)) !== s).map(({ t, s }) => `${t.slice(0, 60)} -> ${s}, JS ${String(JSON.parse(t))}`);
+    expect(bad.slice(0, 20)).toEqual([]);
+    // anchored: the edges JS reads as zero and as the infinities are among them
+    expect(rows.filter(({ s }) => s === 'Infinity' || s === '-Infinity').length).toBeGreaterThan(0);
+  }, ROW_TIMEOUT_MS);
+
+  // ── F3 ────────────────────────────────────────────────────────────────────────────────────────
+  it('F3 (the review rows): an id beyond double range reads as JavaScript reads it; no read raises', async () => {
+    for (const v of ['1e400', '-1e400', '1e-400']) {
+      const share = await put(LIVE.db, `{"name":"T","institutions":[{"id":${v},"name":"House","desc":"ok"}]}`, veil.writeShareVeil({}, []));
+      const r = await readBoth(LIVE.db, share);
+      expect(r.gResp?.raised ?? null, v).toBe(null);
+      expect(r.lResp?.raised ?? null, v).toBe(null);
+      expect(r.g.settlement.institutions[0].name, v).toBe('House');
+    }
+  }, ROW_TIMEOUT_MS);
+
+  /** A stored document shaped like a settlement, every value drawn from the awkward pools above. */
+  function docText(r) {
+    const card = () => {
+      const keys = [...ID_KEYS, 'category', 'priorityCategory', 'facets', 'tags', 'serviceKeys', 'desc', 'description', 'secret', 'plotHooks',
+        'institution', 'linkedInstitutionIds', 'members', 'captureState', 'reason', 'personality', 'allegiance', 'stakes'].filter(() => r() < 0.3);
+      return `{${keys.map((k) => `${JSON.stringify(k)}:${k === 'category' && r() < 0.5 ? '"criminal"' : k === 'tags' && r() < 0.5 ? '["facet:clandestine:clandestine","brokerage","criminal"]' : valueToken(r)}`).join(',')}}`;
+    };
+    const list = () => (r() < 0.85 ? `[${Array.from({ length: Math.floor(r() * 5) }, () => (r() < 0.9 ? card() : valueToken(r))).join(',')}]` : valueToken(r));
+    const parts = [`"name":${r() < 0.9 ? '"T"' : valueToken(r)}`];
+    for (const k of ['npcs', 'institutions', 'factions', 'conflicts', 'relationships', 'structuralViolations', 'decrees', 'coherenceNotes']) if (r() < 0.6) parts.push(`"${k}":${list()}`);
+    if (r() < 0.6) parts.push(`"powerStructure":{"factions":${list()},"conflicts":${list()},"factionRelationships":${list()},"criminalCaptureState":${valueToken(r)}}`);
+    if (r() < 0.6) parts.push(`"history":{"historicalEvents":${list()},"eventsTimeline":${list()},"currentTensions":${list()}}`);
+    if (r() < 0.5) parts.push(`"availableServices":{"criminal":${list()},"trade":${list()}}`);
+    if (r() < 0.4) parts.push(`"economicState":{"safetyProfile":{"criminalInstitutions":${valueToken(r)},"blackMarketCapture":${valueToken(r)}}}`);
+    if (r() < 0.4) parts.push(`"publicProse":{"blocks":{"defense:criminal":${valueToken(r)},"power:desk":{"captureReading":${valueToken(r)}}}}`);
+    if (r() < 0.3) parts.push(`"plotHooks":${list()}`);
+    return `{${parts.join(',')}}`;
+  }
+  const GOOD_ADDRESSES = ['tab:plot_hooks', 'block:services.criminal', 'block:power.criminalUnderside', 'class:npc:secret', 'class:institution:services',
+    'class:event:description', 'field:event:event.legacy-1:description', 'card:institution:house', 'card:npc:npc.a', 'field:npc:1e-7:personality'];
+  function overridesText(r) {
+    const parts = [];
+    for (let i = Math.floor(r() * 4); i > 0; i -= 1) parts.push(`${JSON.stringify(STRINGS[Math.floor(r() * STRINGS.length)] || 'k')}:${r() < 0.6 ? `{"revealDm":${r() < 0.5 ? 'false' : 'true'},"allowImport":${r() < 0.5 ? 'false' : 'true'}}` : r() < 0.6 ? `{"revealDm":${valueToken(r)},"allowImport":${valueToken(r)}}` : valueToken(r)}`);
+    if (r() < 0.85) {
+      const delta = () => (r() < 0.8 ? `{"address":${r() < 0.6 ? JSON.stringify(GOOD_ADDRESSES[Math.floor(r() * GOOD_ADDRESSES.length)]) : valueToken(r)},"hidden":${r() < 0.8 ? (r() < 0.5 ? 'true' : 'false') : valueToken(r)}}` : valueToken(r));
+      const veilParts = [`"v":${valueToken(r)}`, `"deltas":${r() < 0.85 ? `[${Array.from({ length: Math.floor(r() * 6) }, delta).join(',')}]` : valueToken(r)}`];
+      if (r() < 0.5) veilParts.push(`"mode":${r() < 0.7 ? '"snapshot"' : valueToken(r)}`, `"at":${valueToken(r)}`, `"snapshot":${r() < 0.7 ? docText(r) : valueToken(r)}`);
+      parts.push(`"$veil":${r() < 0.9 ? `{${veilParts.join(',')}}` : valueToken(r)}`);
+    }
+    return `{${parts.join(',')}}`;
+  }
+
+  it('F3 (the class): 400 fuzzed stored documents and veils through all four reads, and no read raises', async () => {
+    const { db } = LIVE;
+    const r = rngOf(400);
+    const raised = []; let reads = 0;
+    for (let i = 0; i < 400; i += 1) {
+      const doc = docText(r); const ov = overridesText(r);
+      const narrated = r() < 0.2 ? docText(r) : null;
+      n += 1;
+      const id = `ffffffff-0000-0000-0000-${String(n).padStart(12, '0')}`;
+      await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility,
+          gallery_member_overrides, gallery_share_dm, gallery_importable, gallery_share_narrated, ai_data)
+        values ($1, $2, 'T', 'town', $3, true, $4, now(), $5, 'unlisted', $6, $7, true, $8, $9)`,
+      [id, OWNER, doc, `fz${i}`, `fl${i}`, ov, r() < 0.3, narrated !== null, narrated === null ? null : `{"aiSettlement":${narrated}}`]);
+      await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
+        values (gen_random_uuid(), $1, 'm', $2, true, $3, 'map_with_campaign', true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `fm${i}`]);
+      for (const [read, uid, q] of [['gallery', '', `select data from public.get_gallery_dossier('fz${i}')`], ['link', '', `select public.get_unlisted_dossier('fl${i}')`],
+        ['import', READER, `select data from public.import_gallery_dossier('fz${i}')`], ['map', '', `select public.get_gallery_map('fm${i}')`]]) {
+        await db.exec(`set test.uid = '${uid}';`);
+        reads += 1;
+        try { await db.query(q); } catch (e) { raised.push(`${read} #${i}: ${String(e.message).slice(0, 100)} | doc ${doc.slice(0, 80)} | ov ${ov.slice(0, 120)}`); }
+      }
+    }
+    expect(reads).toBe(1600);
+    expect(raised.slice(0, 10)).toEqual([]);
+  }, ROW_TIMEOUT_MS);
+
+  // ── F4 ────────────────────────────────────────────────────────────────────────────────────────
+  it('F4: a member key naming no person is worked on by no read; one naming a person still hides its depth', async () => {
+    const ov = { $veil: { v: 1, deltas: [] }, npc_0: { revealDm: false } };
+    for (let i = 1; i <= 5000; i += 1) ov[`ghost_${i}`] = { revealDm: false, allowImport: true };
+    const share = await put(LIVE.db, { name: 'T', npcs: [{ id: 'npc_0', name: 'A', personality: { core: 'F4SECRET_FACE' } }, { id: 'npc_1', name: 'B', personality: { core: 'F4OPEN_FACE' } }] }, ov);
+    const r = await readBoth(LIVE.db, share);
+    // anchored: the open face's depth is drawn, so the read is the town's
+    expect(has(r.g.settlement, 'F4OPEN_FACE')).toBe(true);
+    expect(has(r.gResp, 'F4SECRET_FACE') || has(r.lResp, 'F4SECRET_FACE')).toBe(false);
+    // the served booleans are the people's: the one person with an entry, never a ghost
+    expect(Object.keys(r.gResp[0].gallery_member_overrides).sort()).toEqual(['$veil', 'npc_0']);
+    expect(Object.keys(r.lResp.gallery_member_overrides).sort()).toEqual(['$veil', 'npc_0']);
+  }, ROW_TIMEOUT_MS);
+
+  // ── F7 ────────────────────────────────────────────────────────────────────────────────────────
+  it('F7: the map member shows its frozen copy and its narration, each under its own listing\'s veil', async () => {
+    const { seed, ...cfg } = { seed: 'server-veil-village-3', settType: 'village' };
+    const raw = gen({ ...BROWSER, ...cfg }, null, { seed, customContent: {} });
+    const rec = { ...raw, publicProse: compose(raw) };
+    const live = structuredClone(rec);
+    live.institutions[0].desc = 'MAPSPOILER_AFTER_FREEZE';
+    const narrated = { ...structuredClone(rec), name: 'NARRATED_NAME' };
+    const cases = [
+      ['snapshot, edited after freezing', live, veil.writeShareVeil({}, [], { mode: 'snapshot', at: '2026-11-12T00:00:00.000Z', snapshot: veil.galleryPayloadFor(rec, {}) }), null],
+      ['narrated, live', rec, veil.writeShareVeil({}, [], { mode: 'live' }), narrated],
+    ];
+    for (const [tag, data, ov, narration] of cases) {
+      for (const [where, { db }] of [['211', LIVE], ['210', AT210]]) {
+        const share = await put(db, data, ov, { narrated: narration });
+        await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign)
+          values (gen_random_uuid(), $1, 'm', $2, true, $3, 'map_with_campaign', true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [share.id] } }), `map-${share.slug}`]);
+        H.db = db; H.uid = '';
+        const listing = await gallery.fetchPublicDossier(share.slug);
+        const map = await gallery.fetchGalleryMap(`map-${share.slug}`);
+        const member = map.members.find((x) => x.settlement)?.settlement;
+        if (where === '210') {
+          // the red control: 210's map drew the live row and ignored the narration
+          expect(member.name === listing.settlement.name && !has(member, 'MAPSPOILER_AFTER_FREEZE'), `${tag} 210`).toBe(false);
+          continue;
+        }
+        expect(member.name, tag).toBe(listing.settlement.name);
+        expect(has(member, 'MAPSPOILER_AFTER_FREEZE'), tag).toBe(false);
+        expect(JSON.stringify(Object.keys(member).sort()), tag).toBe(JSON.stringify(Object.keys(listing.settlement).sort()));
+      }
+    }
+  }, ROW_TIMEOUT_MS);
+
+  // ── THE ROLLBACK ──────────────────────────────────────────────────────────────────────────────
+  it('the rollback: 001..211 then supabase/rollback/211_*.down.sql equals a chain stopped at 210, byte for byte', async () => {
+    const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
+    expect(down).toEqual(['211_server_side_share_veil.down.sql']);
+    const rolled = await buildDb();
+    expect(rolled.failed).toEqual([]);
+    await rolled.db.exec(readFileSync(join(ROLLBACK, down[0]), 'utf-8'));
+    const CATALOGUE = `select p.oid::regprocedure::text as sig, md5(p.prosrc) as body, p.provolatile, p.prosecdef, p.proconfig::text as config,
+        p.proacl::text as acl, pg_get_userbyid(p.proowner) as owner, pg_get_function_result(p.oid) as result
+      from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace where ns.nspname = 'public' order by 1`;
+    const at210 = (await AT210.db.query(CATALOGUE)).rows;
+    const after = (await rolled.db.query(CATALOGUE)).rows;
+    expect(after.filter((x) => x.sig.includes('_gallery_veil'))).toEqual([]);
+    expect(after).toEqual(at210);
+    // and the four reads, as text
+    for (const f of ['get_gallery_dossier(text)', 'get_unlisted_dossier(text)', 'import_gallery_dossier(text)', 'get_gallery_map(text)']) {
+      const def = `select pg_get_functiondef('public.${f}'::regprocedure) as d`;
+      expect((await rolled.db.query(def)).rows[0].d, f).toBe((await AT210.db.query(def)).rows[0].d);
+    }
+  }, ROW_TIMEOUT_MS);
