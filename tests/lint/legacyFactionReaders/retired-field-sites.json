@@ -54,7 +54,7 @@
   },
   {
    "file": "src/generators/density/applyDensityLaw.js",
-   "line": 511,
+   "line": 512,
    "field": "factionAffiliation",
    "class": "DEAD",
    "reason": "applyDensityLaw.js :: assignRoster \u2014 its only caller disperseNamedRoster has no src caller (tests only); removal would break those tests, so it is listed"
