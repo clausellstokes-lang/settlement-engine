@@ -13,6 +13,7 @@ import { getCompatibleResources, getDefaultResources } from '../terrainHelpers.j
 import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { slugify } from '../../lib/customRegistry.js';
+import { fnv1a32 } from '../../kernel/proseHash.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 import { byCustomIdentityCodepoint } from '../../domain/deterministicSort.js';
 import {
@@ -181,21 +182,39 @@ registerStep('resolveResources', {
     // Positions and infrastructure can still be explicitly disabled by an
     // authored state/event; settlement size alone cannot "consume" a harbour,
     // crossroads, mountain pass, mill site, oasis, or hot spring.
-    nearbyResourcesDepleted = nearbyResources.filter((resourceKey) => {
-      const depletionRolled = rng.chance(depletionProb);
-      return (
-        isRandomlyDepletableResource(resourceKey)
-        && depletionRolled
-      );
-    });
+    // (One draw per slot, in slot order, exactly as before; the slot keeps its draw if its winner is refilled below.)
+    const depletionRolls = nearbyResources.map(() => rng.chance(depletionProb));
     // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12, Part B (iii) A′): a ROLLED resource whose required access
-    // (RESOURCE_DATA[key].requires) is not this town's is dropped after the roll and its draws, so the pool and every
-    // other draw stand (nothing is re-dealt). A hand-chosen roster (the manual branch) is the person's and is kept.
-    nearbyResources = nearbyResources.filter((key) => {
+    // (RESOURCE_DATA[key].requires) is not this town's is refused after the roll and its draws. A hand-chosen roster
+    // (the manual branch) is the person's and is kept.
+    // COHERENCE-AGREE-4 (the chair's ruling of 2026-11-12): THE SLOT IS REFILLED, WITHOUT A FURTHER ROLL. The roll is
+    // a shuffle and per-category picks, so no roll value is left to re-read at this point; the refused winner's slot
+    // takes another admissible member by a hash of this step's seed and the refused key (`kernel/proseHash.js ::
+    // fnv1a32`), first from the refused member's own category (the roll's one-per-category slot), else from any
+    // compatible member: not already held, its own required access met, not a rare one (a rare member enters only
+    // by its own chance), and no magical node where magic does not function. The slot keeps its depletion draw.
+    // No draw is added or moved, so a birth with no refused winner is byte-identical. None admissible: the slot
+    // stays empty.
+    const admitsAccess = (key) => {
       const requires = /** @type {{ requires?: string[] } | undefined} */ (RESOURCE_DATA[key])?.requires;
       return !Array.isArray(requires) || requires.includes(tradeRoute);
+    };
+    const held = new Set(nearbyResources);
+    const magicOn = generationContext.worldLaw.magicFunctions();
+    const refillable = (key) => !held.has(key) && admitsAccess(key) && RARE_RESOURCES[key] === undefined
+      && (magicOn || key !== 'magical_node');
+    const categoryOf = (key) => (RESOURCE_DATA[key]?.category) || 'land';
+    const slots = nearbyResources.map((key) => {
+      if (admitsAccess(key)) return key;
+      const own = universal.filter((k) => categoryOf(k) === categoryOf(key) && refillable(k));
+      const pool = own.length ? own : [...terrainSpecific, ...universal].filter(refillable);
+      if (!pool.length) return null;
+      const refill = pool[fnv1a32(`${rng.seed}::refill::${key}`) % pool.length];
+      held.add(refill);
+      return refill;
     });
-    nearbyResourcesDepleted = nearbyResourcesDepleted.filter((key) => nearbyResources.includes(key));
+    nearbyResourcesDepleted = slots.filter((key, i) => key !== null && isRandomlyDepletableResource(key) && depletionRolls[i]);
+    nearbyResources = slots.filter((key) => key !== null);
 
     // ⭐ EM-B2b2 — AND THE DM'S OWN WORLD FACT IS AN AUTHORED PREMISE TOO, read through the one
     // mark config′ ALREADY CARRIES. EM-B2b routes an edited `worldFact.resources` onto its

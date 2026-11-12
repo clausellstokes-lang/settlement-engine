@@ -280,3 +280,25 @@ describe('item 3′ (i): the exporter\'s refusal is the leaf\'s', () => {
     expect(site).not.toMatch(/chainIsDepleted/);
   });
 });
+
+/**
+ * A′'S SLOT REFILLED (COHERENCE-AGREE-4, the chair's ruling of 2026-11-12): a rolled winner the access refuses (the
+ * crossroads position on a road) leaves no slot empty. Its slot takes another admissible member by a hash, with no
+ * further roll. Each seed below rolled the position on a road at the bottom of its size's range, so the dropped slot
+ * left it below the range; now it holds a full roll, and never the position.
+ */
+describe('A′ refilled: a refused winner does not leave a holder below its size\'s range', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const MIN = { village: 3, town: 4, city: 5, metropolis: 6 };
+  test('road holders at the bottom of their range keep a full roll, with no crossroads position', () => {
+    const seeds = ['agree-village-2', 'agree-village-27', 'agree-village-39', 'agree-town-16', 'agree-town-48', 'agree-city-12', 'agree-city-20', 'agree-metropolis-1', 'agree-metropolis-10'];
+    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+      const settlement = birth(seed);
+      const roster = settlement.config.nearbyResources;
+      expect(settlement.config.tradeRouteAccess, seed).toBe('road');
+      expect(roster, seed).not.toContain('crossroads_position');
+      expect(roster.length, `${seed}: ${roster.join(', ')}`).toBeGreaterThanOrEqual(MIN[seed.split('-')[1]]);
+      expect(new Set(roster).size, seed).toBe(roster.length);
+    }), 'a refused winner leaves no holder short');
+  });
+});
