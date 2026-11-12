@@ -89,6 +89,12 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     }
     expect(heard.length).toBeGreaterThan(0); // anchored: the grid reaches the crime lines
   });
+  test('the economic situation naming a market the town does not have', () => {
+    const situation = (line, institutions) => record({ economicState: { situationDesc: line }, institutions });
+    expect(details(situation('(planted) markets meet infrequently.', []))).toContain('The economic situation names a market the town does not have.');
+    expect(details(situation('(planted) markets meet infrequently.', [{ name: 'Weekly market' }]))).toEqual([]);
+    expect(details(situation('(planted) a busy black market undercuts it.', []))).toEqual([]);
+  });
   test('the import list against the food record', () => {
     const grown = (pct, imports) => record({ economicState: { primaryImports: imports, foodSecurity: { foodRecord: { grownPct: pct } } } });
     expect(details(grown(95, ['Grain']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
@@ -117,7 +123,9 @@ describe('the projection-agreement arm convicts each disagreement and clears its
 
 /** The seeds that disagreed at the base, by finding (the lane's corpus measure). */
 const SEEDS = ['agree-village-17', 'agree-village-25', 'agree-town-2', 'agree-town-5', 'agree-village-0', 'agree-village-1', 'agree-village-2', 'agree-village-5', 'agree-village-7', 'agree-village-14',
-  'agree-village-28', 'agree-town-0', 'agree-town-3', 'agree-town-7', 'agree-town-8', 'agree-town-14', 'agree-town-43', 'agree-town-73'];
+  'agree-village-28', 'agree-town-0', 'agree-town-3', 'agree-town-7', 'agree-town-8', 'agree-town-14', 'agree-town-43', 'agree-town-73',
+  // the market member (2026-11-12): the economic situation names a market the town does not have
+  'agree-village-8', 'agree-village-11', 'agree-village-20', 'agree-village-21', 'agree-village-34', 'agree-village-39', 'agree-village-42', 'agree-village-56'];
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 

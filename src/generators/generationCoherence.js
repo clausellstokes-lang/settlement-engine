@@ -315,6 +315,7 @@ function resourceTruthFindings(settlement) {
  *   viability  an "Imports …" note beside a live resource that yields it (one reader of the must-import list)
  *   safety     the safety text naming a mercenary company the defence home does not list; saying a
  *              court sits where the defence home has none, or that none sits where it has one
+ *   market     the economic situation naming a market the market home says the town does not have
  *   sources    available fields, floodplain or grazing that the food record does not count as a source
  *   food       bare grain a primary import, unqualified, where the town grows 90% or more of its need; a
  *              shortage import ("local fields depleted") beside the resource it says is spent
@@ -332,6 +333,9 @@ const LOCAL_INCOME_WORDS = Object.freeze([
 /** The safety text's court sentences: one says a court sits, the other that none does. */
 const COURT_SITS = /\b(?:a court exists|the court can try|before the court|tried at the court|the court sits|functioning court|with a working court|only a court|prosecution is real|real prosecution)/i;
 const COURT_ABSENT = /\b(?:with no court|without a court|without courts|without a working court|without consistent courts|without prison or courts|no reliable court|lack of reliable courts)/i;
+
+/** A market named as the town's own ("the market", "markets meet"); a black market is not one. */
+const MARKET_NAMED = /(?<!black )\bmarkets?\b/i;
 
 /** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
 const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
@@ -391,6 +395,9 @@ export function projectionAgreementFindings(settlement) {
     if (/\bmercenary compan/i.test(String(safety?.[field] || '')) && facts.defence?.mercenary === false) {
       resource.push(finding(`economicState.safetyProfile.${field}`, 'The safety text names a mercenary company the defence record does not list.'));
     }
+  }
+  if (facts.market === false && MARKET_NAMED.test(String(settlement?.economicState?.situationDesc || ''))) {
+    resource.push(finding('economicState.situationDesc', 'The economic situation names a market the town does not have.'));
   }
   const court = facts.defence?.court;
   const courtTexts = [['guardEffectivenessDesc', safety?.guardEffectivenessDesc], ['safetyDesc', safety?.safetyDesc],
