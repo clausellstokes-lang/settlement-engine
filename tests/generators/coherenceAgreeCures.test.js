@@ -276,7 +276,8 @@ describe('item 3′ (i): the exporter\'s refusal is the leaf\'s', () => {
   test('the exporter reads the leaf, and keeps no private refusal of its own', async () => {
     const { readFileSync } = await import('node:fs');
     const site = readFileSync(new URL('../../src/generators/computeActiveChains.js', import.meta.url), 'utf8');
-    expect(site).toMatch(/import \{ chainYieldRefused \} from '\.\.\/domain\/chainYield\.js';/);
+    // re-keyed by identity (COHERENCE-AGREE-6, F2): the one import from the leaf also names the leaf's goods set
+    expect(site).toMatch(/import \{ chainYieldRefused, goodsOnlyRefusedChainsMake \} from '\.\.\/domain\/chainYield\.js';/);
     expect(site).toMatch(/\.filter\(ch => ch\.exportable && !chainYieldRefused\(ch, isDepletedResource\)\)/);
     // anchored: the same source text matched the exporter's filter on the line above
     expect(site).not.toMatch(/chainIsDepleted/);
@@ -335,5 +336,41 @@ describe('item 3′ (ii): every page that prints a chain\'s outputs reads the le
     const unread = readers.filter((f) => !(f in EXEMPT) && !/import \{[^}]*\bchainYieldRefused\b[^}]*\} from '[./]+\/domain\/chainYield\.js';/.test(readFileSync(join(root, f), 'utf8')));
     expect(unread, 'a page prints a chain\'s outputs without the leaf').toEqual([]);
     expect(Object.keys(EXEMPT).filter((f) => !readers.includes(f)), 'a stale exemption').toEqual([]);
+  });
+});
+
+/**
+ * F2 (COHERENCE-AGREE-6, the chair's ruling of 2026-11-12): `domain/chainYield.js` is the one home of "does this chain
+ * yield now". A good only refused chains make (no yielding chain makes it) is not exported and is not produced
+ * locally: the export bonus (`economy/finishedGoodsDemand.js`), the land's raw goods
+ * (`computeActiveChains.js :: deriveExportsFromChains`) and "Produced locally"
+ * (`computeActiveChains.js :: deriveLocalProductionFromChains`) all ask the leaf. Each seed below sold or listed such
+ * a good at 8866a0ddd (REVIEW-AGREE-2's F2: Quality tools and weapons beside two impaired iron cards; Processed
+ * textiles beside an impaired Textiles & Cloth card).
+ */
+describe('F2: a good only refused chains make is neither sold nor produced locally', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  test("the leaf: a refused chain's output that a yielding chain also makes is not refused-only", async () => {
+    const { goodsOnlyRefusedChainsMake } = await import('../../src/domain/chainYield.js');
+    const only = goodsOnlyRefusedChainsMake([
+      { status: 'impaired', outputs: ['Quality tools and weapons', 'Charcoal'] },
+      { status: 'running', resourceInputCondition: 'available', outputs: ['Charcoal'] },
+      { status: 'vulnerable', resourceInputCondition: 'depleted', outputs: ['Processed textiles'] },
+    ]);
+    expect([...only].sort()).toEqual(['processed textiles', 'quality tools and weapons']);
+    expect(goodsOnlyRefusedChainsMake(null).size).toBe(0);
+  });
+  const SUFFIX = / \((?:transit|naval route only|taxed by occupation)\)$/;
+  // agree-village-32: the entrepôt branch sent a depleted salt chain's "Preserved foods (transit)"
+  test('r2read-city-4, r2r-city-42, r2r-city-6 and agree-village-32 sell and list no good only refused chains make', async () => {
+    const { goodsOnlyRefusedChainsMake } = await import('../../src/domain/chainYield.js');
+    expectNoSeedFailures(collectSeedFailures(['r2read-city-4', 'r2r-city-42', 'r2r-city-6', 'agree-village-32'], (seed) => {
+      const eco = birth(seed).economicState;
+      const only = goodsOnlyRefusedChainsMake(eco.activeChains);
+      expect(only.size, `${seed}: anchored — the seed holds a good only a refused chain makes`).toBeGreaterThan(0);
+      const sold = eco.primaryExports.filter((e) => only.has(e.replace(SUFFIX, '').toLowerCase()));
+      const local = eco.localProduction.filter((e) => only.has(e.toLowerCase()));
+      expect({ sold, local }, seed).toEqual({ sold: [], local: [] });
+    }), "a refused chain's good stands on a trade list");
   });
 });
