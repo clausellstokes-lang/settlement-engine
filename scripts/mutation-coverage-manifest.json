@@ -3670,6 +3670,14 @@
     "tests/lint/defenceFactReaders.walker.test.js": {
       "kind": "rationale",
       "rationale": "COHERENCE-AGREE's shrink-only count of the defence facts' private readers (2026-11-11). Its guard-the-guard test plants a private reader of each shape (a name test, a pattern test, a flag from a name list) and two controls (a read of the home, a scope test on a variable named wall) and holds the pattern to them; the exact-equality arm reds on any new reader and on any shrink not banked (executed: cure 9 shrank priorityHelpers 7 -> 5 and the arm went red until the row was lowered)."
+    },
+    "tests/generators/upkeepHired.test.js": {
+      "kind": "rationale",
+      "rationale": "THE HIRED-FORCE COUNTERFACTUAL (COHERENCE-UPKEEP, the chair's ruling 2 of 2026-11-12). Its catching power is EXECUTED, not claimed: it was written red-first and run at the lane's base 65ce74ce6, where all five hired-only corpus villages failed it (agree-village-45 military 97 with a charter hall against 93 with a watch in its stead; agree-village-43 65 against 61). The cure that turns it green is the hired rule in src/generators/defenseGenerator.js; reverting that rule reds it again. Its anchor arm proves the counterfactual is a watch and no hired force, so the comparison cannot pass vacuously."
+    },
+    "tests/lint/upkeepReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE UPKEEP-READER WALKER (COHERENCE-UPKEEP, the chair's ruling 1 of 2026-11-12). Its catching power is carried in-file: the plant arm convicts a planted output-over-50 upkeep gate and clears a non-gate read of the same output through the walker's own statement-window rule; the register arms are two-way (every live read is a row, every row is a live read), so a new reader reds by name and a retired read cannot leave a stale row; the anchored count proves the walk reads the defence gates."
     }
   },
   "meta": {

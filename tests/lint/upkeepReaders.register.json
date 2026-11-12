@@ -1,0 +1,35 @@
+{
+  "_doc": "COHERENCE-UPKEEP (the chair's ruling of 2026-11-12 on item 4, ruling 1): every read of the economy's OUTPUT score used to gate upkeep, outside the one home (src/domain/facts/keep.js :: keepOf), counted by tests/lint/upkeepReaders.walker.test.js. SHRINK-ONLY from its first commit: a row retires the commit its read moves home; no row is ever added. Banked at the lane's base 65ce74ce6.",
+  "rows": {
+    "src/generators/defenseGenerator.js :: inst, milEffective, crimEffective, econOutput, magInfluence, relInfluence,": {
+      "reason": "The defence scores' parameter: it carries the output to the economic score's capacity term (the row above); held while that term reads it."
+    },
+    "src/generators/defenseGenerator.js :: const milUpkeepMult = Math.min(1, 0.6 + (econOutput / 50) * 0.4);": {
+      "reason": "An upkeep gate on the economy's output, at the base: a second reader of what the place can keep up. It retires to keepOf(prosperity).funded (the chair's ruling 3, alternative B)."
+    },
+    "src/generators/defenseGenerator.js :: const monsterUpkeepMult = Math.min(1, 0.7 + (econOutput / 50) * 0.3);": {
+      "reason": "An upkeep gate on the economy's output, at the base: a second reader of what the place can keep up. It retires to keepOf(prosperity).funded (the chair's ruling 3, alternative B)."
+    },
+    "src/generators/defenseGenerator.js :: const internalUpkeepMult = Math.min(1, 0.65 + (econOutput / 50) * 0.35);": {
+      "reason": "An upkeep gate on the economy's output, at the base: a second reader of what the place can keep up. It retires to keepOf(prosperity).funded (the chair's ruling 3, alternative B)."
+    },
+    "src/generators/defenseGenerator.js :: economic = Math.min(100, economic + Math.round(econOutput * 0.2));": {
+      "reason": "Not an upkeep gate: the economy's own trade adds to crisis logistics as capacity (the economic score's additive stack). Held, and it stays at its row unless a later ruling moves it."
+    },
+    "src/generators/defenseGenerator.js :: const econHealthMult = Math.min(1, 0.45 + (econOutput / 50) * 0.55);": {
+      "reason": "An upkeep gate on the economy's output, at the base: a second reader of what the place can keep up. It retires to keepOf(prosperity).funded (the chair's ruling 3, alternative B)."
+    },
+    "src/generators/defenseGenerator.js :: Math.round(instFlags.economyOutput),": {
+      "reason": "The defence profile hands the output to computeDefenseScores for the capacity term; held while that term reads it."
+    },
+    "src/generators/defenseGenerator.js :: const _econOut = Math.round(instFlags.economyOutput);": {
+      "reason": "The disaster gate's own read of the output, at the base; it retires with the disaster gate (ruling 3, alternative B)."
+    },
+    "src/generators/defenseGenerator.js :: const disasterGate = Math.min(1, 0.55 + (_econOut / 50) * 0.45);": {
+      "reason": "An upkeep gate on the economy's output, at the base: a second reader of what the place can keep up. It retires to keepOf(prosperity).funded (the chair's ruling 3, alternative B)."
+    },
+    "src/generators/services/serviceAvailability.js :: ? priorityToMultiplier(flags.economyOutput)": {
+      "reason": "The commercial services' demand multiplier read off the output, at the base; it moves home to keepOf (the chair's ruling 4)."
+    }
+  }
+}
