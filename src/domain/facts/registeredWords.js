@@ -30,11 +30,25 @@ import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { magicPractitioners } from '../magicReliance.js';
 
 /**
+ * The facts a rule reads: `factsOf(record)`'s own frozen reading.
+ * @typedef {ReturnType<typeof import('./factsOf.js').factsOf>} WordFacts
+ */
+
+/**
+ * The fields of the record a rule reads where no fact reader exists yet (the powers' list, the food record's
+ * two figures), and the record `magicPractitioners` reads.
+ * @typedef {import('../magicReliance.js').MagicRelianceSource & {
+ *   powerStructure?: { factions?: unknown } | null,
+ *   economicState?: { foodSecurity?: { foodRecord?: { growsMoreThanEats?: unknown, normalImportPct?: unknown } | null } | null } | null,
+ * }} WordRecord
+ */
+
+/**
  * @typedef {object} RegisteredWord
  * @property {RegExp} words the words that name it
  * @property {ReadonlyArray<string>} atoms the atoms whose declaration answers for it (its disqualifier)
- * @property {(facts: any, names: string[], record?: any, sentence?: string) => boolean} absent true when the town makes it false
- * @property {(facts: any, names: string[], record?: any, sentence?: string) => boolean} [presentForDenial] a narrower test for a denial
+ * @property {(facts: WordFacts, names: string[], record?: WordRecord | null, sentence?: string) => boolean} absent true when the town makes it false
+ * @property {(facts: WordFacts, names: string[], record?: WordRecord | null, sentence?: string) => boolean} [presentForDenial] a narrower test for a denial
  * @property {boolean} [denialOnly] read on the denial side only
  * @property {'thing'|'state'|'size'|'count'|'value'} [kind]
  * @property {string} [leaf] the home that answers it
@@ -144,7 +158,7 @@ export const THINGS = Object.freeze({
 
 export const THING_IDS = Object.freeze(Object.keys(THINGS));
 
-/** @param {any} f @param {string} kind @returns {boolean} is this crisis kind in force (`factsOf(record).crisis`) */
+/** @param {WordFacts} f @param {string} kind @returns {boolean} is this crisis kind in force (`factsOf(record).crisis`) */
 const inForce = (f, kind) => f?.crisis?.has?.(kind) === true;
 
 /** The number words a count reads. @type {Readonly<Record<string, number>>} */
@@ -161,7 +175,7 @@ function statedCount(words, sentence) {
   return NUMBER_WORDS[word.toLowerCase()] ?? null;
 }
 
-/** @param {any} record @returns {number} the powers the record holds (`powerStructure.factions`) */
+/** @param {WordRecord | null | undefined} record @returns {number} the powers the record holds (`powerStructure.factions`) */
 const powerCount = (record) => (Array.isArray(record?.powerStructure?.factions) ? record.powerStructure.factions.length : 0);
 
 /** The houses a count of houses reads, each by the thing whose words name it. */
@@ -341,7 +355,7 @@ export function thingsDeniedIn(sentence) {
 /**
  * Does the town HAVE the thing, for a denial? The thing's own reader, except where the denial names
  * a narrower thing than the presumption does: "no wharf of its own" denies the dock HOUSE, which a
- * navigable town may lack. @param {string} thing @param {any} facts @param {string[]} names
+ * navigable town may lack. @param {string} thing @param {WordFacts} facts @param {string[]} names
  */
 export function presentForDenial(thing, facts, names) {
   const t = THINGS[thing];
