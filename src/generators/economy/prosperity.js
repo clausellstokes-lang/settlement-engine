@@ -50,7 +50,7 @@ export const deriveEconomicSituationDesc = (
 const SLOW_TRADE = Object.freeze(['low', 'very_low']);
 const BUSY_TRADE = Object.freeze(['high', 'very_high']);
 /** The band of the trade line a label's rank speaks for. @param {number} rank */
-const tradeBandOfRank = (rank) => (rank >= 0.95 ? 'very_high' : rank >= 0.8 ? 'high' : rank >= 0.5 ? 'medium' : rank >= 0.25 ? 'low' : 'very_low');
+const tradeBandOfRank = (rank) => (rank >= PROSPERITY_RANK.Wealthy ? 'very_high' : rank >= PROSPERITY_RANK.Prosperous ? 'high' : rank >= PROSPERITY_RANK.Moderate ? 'medium' : rank >= PROSPERITY_RANK.Poor ? 'low' : 'very_low');
 /**
  * Does a trade line's band contradict the prosperity label? @param {string} band @param {unknown} label
  * @returns {boolean}
