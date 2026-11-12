@@ -206,3 +206,7 @@ This restates ruling 2 of the amendment above (record 288) and withdraws the cha
 5. **TWO HOLES THE MAPPING FOUND, AND WHOSE THEY ARE.** The walker accepts three carriers of a declaration that the draw does not enforce (a declaration that nothing reads): W2-B-DECLARE, first. The repetition guard holds none of the corpus's pools: W2-POOLS banks them through the narrow door.
 6. **THE 488 CORPUS POOLS THE MEASURE DID NOT REACH** are measured by W2-B-DECLARE's first act or shown unreachable from a page of this release (the campaign world's 235 are banked by name).
 7. The procedure is corrected to version 2 to match (its sections 1, 3, 4, 7, 8, 9 and a new section 10).
+
+## AMENDMENT (record 297, 2026-11-12): THE INCOME LINE WITH NO WORKING IS THIS WAVE'S, BY A DISQUALIFIER AND A TWIN
+
+The agreement lane was to gate an income source at the generator wherever no chain works its resource (pattern F4). Measured there, the gate moved prosperity in 3.2 per cent of the births that lose a source (over the bound of one in fifty), one roster and 22 history annotations. RE-RULED: the income source STAYS in the record (a town can sell what it does not work), and the agreement lane builds only the leaf, "a chain works this resource here". The fault is the LINE that names a house the town lacks. It is cured in this wave to the owner's design: W2-B-DECLARE adds the condition (worked here) to the vocabulary and the disqualifier's check; W2-WRITE writes the twin for the raw trade, under the procedure.
