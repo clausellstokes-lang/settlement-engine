@@ -136,7 +136,7 @@ export const RESOURCE_SEMANTICS = Object.freeze({
     randomDepletionEligible: true,
     recoveryMode: 'natural',
     depletedDescription: 'The pasture is overgrazed and cannot support its former herds.',
-    shortageImport: 'Livestock and dairy (local pastures depleted)',
+    shortageImport: 'Livestock and dairy (local grazing land depleted)', // COHERENCE-AGREE-3 (F12b): named by its own name, not "pastures", which a live alpine pasture is
   }),
   crossroads_position: Object.freeze({
     type: 'positional',

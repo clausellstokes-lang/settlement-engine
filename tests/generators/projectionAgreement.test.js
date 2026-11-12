@@ -111,6 +111,10 @@ describe('the projection-agreement arm convicts each disagreement and clears its
     expect(details(grown(100, ['Grain and produce (local floodplain unproductive)']))).toContain('Grain stands as a primary import, unqualified, where the town grows most of its need.');
     const spent = record({ config: { nearbyResources: ['grain_fields'], nearbyResourcesNativeDepleted: [] }, economicState: { primaryImports: ['Bulk grain (local fields depleted)'] } });
     expect(details(spent)).toContain('A shortage import stands beside the resource it says is spent.');
+    // F12b (REVIEW-AGREE): the bracket's land against every live resource of that land
+    const pasture = (label) => record({ resourceAnalysis: { availableResources: ['alpine_pasture'] }, economicState: { primaryImports: [label] } });
+    expect(details(pasture('Livestock and dairy (local pastures depleted)'))).toContain('A shortage import says land is spent that a live resource is.');
+    expect(details(pasture('Livestock and dairy (local grazing land depleted)'))).toEqual([]);
     // F7 (REVIEW-AGREE): an income line selling a surplus the food record does not hold
     const sells = (foodRecord) => record({ economicState: { primaryImports: [], foodSecurity: { foodRecord },
       incomeSources: [{ source: 'Grain Sales', desc: 'Surplus from local harvest (planted) sold on.' }] } });
@@ -169,6 +173,8 @@ const REVIEW_SEEDS = [
   { seed: 'rvw12b-town-275', tier: 'town' }, { seed: 'rvw12b-town-103', tier: 'town' }, { seed: 'rvw12b-town-427', tier: 'town' },
   // F8: a town growing all its grain "imports bulk grain (local fields depleted)" or its floodplain's produce
   { seed: 'rvw12-town-34', tier: 'town' }, { seed: 'rvw12-town-59', tier: 'town' }, { seed: 'rvw12-town-3', tier: 'town' }, { seed: 'rvw-ten-4', tier: 'town' },
+  // F12b: "Livestock and dairy (local pastures depleted)" beside a live alpine pasture
+  { seed: 'rvw12-city-1', tier: 'city' }, { seed: 'rvw12b-city-33', tier: 'city' }, { seed: 'rvw12b-city-136', tier: 'city' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });

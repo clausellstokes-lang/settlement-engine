@@ -329,6 +329,18 @@ const MARKET_NAMED = /(?<!black )\bmarkets?\b/i;
  */
 const SCARCE_MATERIAL_WORDS = Object.freeze([[/\b(?:iron|metal)\b/i, 'metals'], [/\btimber\b/i, 'timber']]);
 
+/**
+ * A shortage import's bracket names a kind of land; the resources that ARE that land (F12b, COHERENCE-AGREE-3).
+ * A shortage that says the town's pastures are spent beside a live pasture tells two stories.
+ * @type {ReadonlyArray<readonly [RegExp, ReadonlyArray<string>]>}
+ */
+const SHORTAGE_LAND_WORDS = Object.freeze([
+  [/\(local pastures? /i, ['grazing_land', 'alpine_pasture']],
+  [/\(local (?:grain )?fields /i, ['grain_fields']],
+  [/\(local floodplain /i, ['fertile_floodplain']],
+  [/\(local forests? /i, ['timber', 'managed_forest', 'mountain_timber', 'shipbuilding_timber']],
+]);
+
 /** Worked land and the food source it is (the chair's food-sources ruling, 2026-11-11; game and fish keep their rules). */
 const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floodplain: 'grain', grazing_land: 'livestock' });
 
@@ -350,6 +362,7 @@ const CULTIVATED_SOURCE_OF = Object.freeze({ grain_fields: 'grain', fertile_floo
  *   market     the economic situation naming a market the market home says the town does not have
  *   sources    available fields, floodplain or grazing that the food record does not count as a source
  *   surplus    an income line selling a surplus the food record does not hold (offersFoodSurplus)
+ *   land       a shortage import whose bracket says a kind of land is spent beside a live resource of that land
  *   food       bare grain a primary import, unqualified, where the town grows 90% or more of its need; a
  *              shortage import ("local fields depleted") beside the resource it says is spent
  * @param {any} settlement
@@ -436,6 +449,11 @@ export function projectionAgreementFindings(settlement) {
     if (/^Surplus from local harvest\b/.test(String(entry?.desc || '')) && foodRecord && !offersFoodSurplus(foodRecord)) {
       food.push(finding(`economicState.incomeSources[${index}].desc`, 'An income line sells a surplus the food record does not hold.', `grown ${grownPct}%; band ${foodRecord.band}`));
     }
+  }
+  for (const [index, label] of imports.entries()) {
+    const said = SHORTAGE_LAND_WORDS.find(([words]) => words.test(label));
+    const live = said ? said[1].find((key) => available.includes(key)) : null;
+    if (live) food.push(finding(`economicState.primaryImports[${index}]`, 'A shortage import says land is spent that a live resource is.', `${label}: ${live} available`));
   }
   const sources = settlement?.economicState?.foodSecurity?.foodRecord?.foodSources;
   for (const record of nativeResourceConditionRecords(settlement?.config || {})) {
