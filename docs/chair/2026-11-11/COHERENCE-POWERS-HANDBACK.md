@@ -498,3 +498,84 @@ Ruling (3) CLOSES WITH NOTHING BUILT: 234 lines read, 0 say an absent power hold
 coup label moves (103 toward danger, 8 toward safety, 9bcda8ff6) are the occupation and the fracture being shown: the
 draft record owes them by crisis and size; the one capture move toward danger (l2-politically_fractured-metropolis-13,
 equilibrium → corrupted) goes into F8's capture table by name.
+
+---
+
+# PART 4 — the fourth seat (COHERENCE-POWERS-4, 2026-11-12)
+
+The fourth seat took the lane at b43eceeca and finishes it. It works in a scratch worktree on the lane branch itself (the
+main checkout refused `git checkout` and `git switch`); `npm ci` there installed the hook manager's wrappers, so every
+push ran the hook's three fast gates, plain, never `--no-verify`. **Base for every field diff from item 1 on: the line at
+3575cf061.** The corpora are PART 3's (R 1,845 with the golden's 525; S 2,460), every probe a copy of PART 3's or new
+beside them under `probes/COHERENCE-POWERS-4/`. This part is kept current at every commit.
+
+## 1. The line taken (2b635f100, 49f29fe04, 178601d5a)
+
+`origin/lane/integration-2026-11-07` at 3575cf061 (merge point 44, VISIBLE-BUGS, and the merge commits of point 45), theirs
+into ours; merge base 5b31cdfcc. **No `src/` file is touched by both sides.** Touched by both: `.husky/pre-push` (the same
+commit 7d429f6cb on each side, merged clean) and two generated registers that conflicted, taken whole from the line's
+side and re-taken by their own doors: the wiring census (`--dry`: rows 0, the stamp only, producerIndexFiles 1322 -> 1328)
+and the lighting census (files 3211 -> 3220, titles 29147 -> 29183; walker green 34 of 34). Gates of L1 at the merge:
+domain-strict 0 (1113 of 1113), the type ratchet 0 (167 of 167), eslint on the 18 touched files 0. First push 178601d5a.
+
+**Point 44 moves no generator output:** whole-record sha256, the line at f72262c68 against the line at 3575cf061, on
+both corpora: **0 of 4,305 differ** (rvw 0/600, rvf 0/720, golden 0/525, critique 0/660, l2 0/1,800). So every measure
+the third seat took against f72262c68 stands against 3575cf061.
+
+## 2. F8 — the capture moves, CLOSED
+
+The capture table is PART 3's (measured against f72262c68, which equals 3575cf061 on every birth; F3 moves no capture
+state, 12 births read). The chair's rule holds in every row: FULL capture never stands without a criminal power, 0 of 5.
+The one move toward danger the crisis seats made, **l2-politically_fractured-metropolis-13, equilibrium -> corrupted**, is
+in the S column of equilibrium -> corrupted.
+
+**The page check (owed), on both corpora at the tip:** wherever the hall's state is not clean, does the game master's
+page name the house the hall answers to? Read from `patronage.js :: dmPowerViewOf(s).hall.line` (the Power tab's DM
+panel and the PDF's DM chapter); a name counts when it is a power on the roster or an institution of the town and the
+line carries it; the fallback words "the criminal houses" name none (`probes/COHERENCE-POWERS-4/f8page.mjs`).
+
+| state | R (with the golden's 525): births / named | S: births / named |
+|---|---|---|
+| none (clean) | 1,430 / — | 2,023 / — |
+| adversarial | 203 / 203 | 53 / 53 |
+| equilibrium | 128 / 128 | 247 / 247 |
+| corrupted | 83 / 83 | 133 / 133 |
+| capture | 1 / 1 | 4 / 4 |
+| **not clean, no house named** | **0** | **0** |
+
+The rung the page prints equals the stored state in 4,305 of 4,305. No state stands with no name: no STOP.
+
+## 3. F3 — a claimant is the succession crisis's own cast (c67c8319e; the census a083286b4)
+
+Red first: `tests/generators/people/successionClaimants.test.js`, 4 of 4 (the review's two towns, the three metropolises
+whose claimants a mine captain or a college master faced, seven bodies, a 36-birth succession corpus at every size).
+
+THE RULE BUILT: the royal vacancy's two claimant powers ("Noble Claimant (Senior Line)", "(Reform Line)") have rows of
+their own in `data/stressPowerFaces.js` (`claimant: true`, no leaderless line). The crisis's cast is derived after the
+powers' people (`steps/resolveCrisisCast.js` reads the dossier's people), so it never holds a claimant at the mint; the
+claimant is MINTED as the occupier's governor is (`castPowers.js :: mintsBySent`), on `CLAIMANT_FACE`: the title "the
+lord", one faces already bear (the Noble Houses seat mint, so no honorific, hook or secret register gains a row), the
+monarch's pool row. FLOOR 1 makes the mint the power's first; a house face dealt to it stands second. The old families'
+body (a pool-named noble power: The Peerage, The Highborn Circle) takes a free noble house's face as before, else the next
+member of the landed powers (Noble Families, Noble Houses, Landed Gentry, Manor Household) who leads no power
+(`freeRungOf`), else keeps its line. The seat row names the persons: "Stands empty; 2 claimants circle: Dubravka Semyonov
+for Noble Claimant (Senior Line), Galina Grbić for Noble Claimant (Reform Line). Regent Biljana Nikolić keeps the seat
+meanwhile." No mint was refused by a people's or a veil's guard: no STOP.
+
+| F3's class, both corpora (`f3count.mjs`, `f3sum.mjs`) | before (178601d5a) | after (c67c8319e) |
+|---|---|---|
+| claimant powers with no one on the page (the line printed) | 4 (R; rvf-succession_void-city-4, -city-6) | 0 |
+| claimant powers faced by an unrelated house's face | 8 (R 4, S 4; metropolises) | 0 (that face now second) |
+| the old families' body printing its line while a free landed rung stands | 9 (R 1, S 8) | 0 |
+| seat rows naming a claimant power with no person | 2 | 0 |
+
+WHAT MOVES (L3, whole-record sha256, 178601d5a against c67c8319e, both corpora): **12 births (R 4, S 8, the golden's 525:
+0), every one under a succession crisis;** 10 cards added (the claimants), 0 removed, 0 re-dealt outside a succession
+crisis; rosters 0; seat rows 5; coup, capture, stability, legitimacy and every power label 0 (the 12 read). The cards'
+`importance` follows rank: the 10 claimants minor -> pillar; 6 displaced house faces pillar -> key; 8 persons taking a
+rung key or notable -> pillar (of the 9 bodies, l2-succession_void-town-17's two shared one free rung: The Highborn Circle
+took it, The Peerage keeps its line with none left). `seatKeeper.test.js`'s Grudino pin re-keyed by identity to the new seat row.
+
+FOUND, NOT MINE: `tests/data/foundingWorldBones.test.js` "every promise holds in at least 19 of 20 forks" is red BEFORE
+F3 (at 178601d5a; green at the line): "Mossgate: the religious authorities hold power · tag Religious authority — 15/20".
+Classed in §7.
