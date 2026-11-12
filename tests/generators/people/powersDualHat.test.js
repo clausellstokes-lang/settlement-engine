@@ -72,25 +72,34 @@ const births = SEEDS.map((seed) => {
   return { seed, s, ruler, arch: rulerRow ? backingArchetypeOf(rulerRow) : null, three };
 });
 
+/** Each check loops the seeds in its body and names every seed that misses (the sovereignty lint's park rule:
+ *  a plain test over the rows, never an `each` call). */
 describe('COHERENCE-POWERS guard — the dual hat', () => {
-  it.each(births.map((b) => [b.seed, b]))('%s: the leader has a house of the town unless the government appoints', (_seed, b) => {
-    if (APPOINTED.includes(b.ruler) || b.arch === 'criminal') return;
-    const leader = b.three[0];
-    expect(leader, `${b.ruler} has no leader`).toBeTruthy();
-    expect({ ruler: b.ruler, leader: leader.name, kind: kindOf(leader) }).not.toMatchObject({ kind: 'office' });
+  it('the leader has a house of the town unless the government appoints', () => {
+    const misses = [];
+    for (const b of births) {
+      if (APPOINTED.includes(b.ruler) || b.arch === 'criminal') continue;
+      const leader = b.three[0];
+      if (!leader) misses.push(`${b.seed}: ${b.ruler} has no leader`);
+      else if (kindOf(leader) === 'office') misses.push(`${b.seed}: ${b.ruler} is led by the office ${leader.name}`);
+    }
+    expect(misses).toEqual([]);
   });
 
-  it.each(births.map((b) => [b.seed, b]))('%s: a ruler of a kind has its kind among its first three where the town has such a house', (_seed, b) => {
-    if (!KINDS.includes(b.arch)) return;
-    const kin = (b.s.npcs || []).filter((card) => kindOf(card) === b.arch && !card.institution?.veiled);
-    if (!kin.length) return;
-    expect({ ruler: b.ruler, three: b.three.map((c) => `${c.name} (${kindOf(c)})`), kind: b.three.some((c) => kindOf(c) === b.arch) })
-      .toMatchObject({ kind: true });
+  it('a ruler of a kind has its kind among its first three where the town has such a house', () => {
+    const misses = [];
+    for (const b of births) {
+      if (!KINDS.includes(b.arch)) continue;
+      const kin = (b.s.npcs || []).filter((card) => kindOf(card) === b.arch && !card.institution?.veiled);
+      if (!kin.length) continue;
+      if (!b.three.some((c) => kindOf(c) === b.arch)) misses.push(`${b.seed}: ${b.ruler}'s three are ${b.three.map((c) => `${c.name} (${kindOf(c)})`).join(', ')}`);
+    }
+    expect(misses).toEqual([]);
   });
 
-  it.each(births.map((b) => [b.seed, b]))('%s: a ruler of a kind has a house of its kind in the town', (_seed, b) => {
-    if (!KINDS.includes(b.arch)) return;
-    const kin = (b.s.npcs || []).filter((card) => kindOf(card) === b.arch);
-    expect({ ruler: b.ruler, kinHouses: kin.length > 0 }).toMatchObject({ kinHouses: true });
+  it('a ruler of a kind has a house of its kind in the town', () => {
+    const misses = births.filter((b) => KINDS.includes(b.arch) && !(b.s.npcs || []).some((card) => kindOf(card) === b.arch))
+      .map((b) => `${b.seed}: ${b.ruler} (${b.arch}) has no house of its kind`);
+    expect(misses).toEqual([]);
   });
 });
