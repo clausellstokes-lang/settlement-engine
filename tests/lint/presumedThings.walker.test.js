@@ -24,8 +24,8 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import {
-  REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, rowCovers, scanSource,
-  scanTree, unlicensedServiceRows,
+  REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, printedOutOfTime,
+  rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -95,6 +95,25 @@ describe('the denial side (the chair\'s ruling A of 2026-11-11)', () => {
   });
 });
 
+describe('time (the chair\'s ruling B of 2026-11-11)', () => {
+  test('planted: a witness line under an old event, a named old event, and an echoed tension are listed; recent ones are not', () => {
+    const record = { history: {
+      historicalEvents: [
+        { name: 'The Siege', yearsAgo: 182, description: 'The walls held for a whole winter against the host.', plotHooks: ['Families who lived through it tell it this way: the gate was opened.'] },
+        { name: 'The Flood', yearsAgo: 23, description: 'The river came up in a night and took the low streets.', plotHooks: ['Families who lived through it tell it this way: the dam was cut.'] },
+      ],
+      currentTensions: [{ description: 'The river came up in a night and took the low streets.' }],
+      historicalCharacter: 'The Siege is this place\'s defining story, and the people who lived through it are still here to tell it',
+      note: 'The Flood is still present in living memory: the low streets were never rebuilt.',
+    } };
+    expect(printedOutOfTime(record).map((h) => `${h.why} ${h.path}`)).toEqual([
+      'witness .history.historicalEvents[].plotHooks[]',
+      'witness .history.historicalCharacter',
+      'echo .history.currentTensions[].description',
+    ]);
+  });
+});
+
 describe('the register', () => {
   test('every row carries a named reason', () => {
     const bad = [
@@ -130,12 +149,14 @@ describe('ARM 2 — the printed corpus', () => {
   /** @type {Array<{ thing: string, path: string, sentence: string, seed: string }>} */
   const listed = [];
   /** @type {string[]} */ const unlicensed = [];
+  /** @type {string[]} */ const outOfTime = [];
   beforeAll(() => {
     for (const { tier, seed } of corpusSeeds()) {
       const record = generateSettlementPipeline({ ...corpusConfig(tier) }, null, { seed, customContent: {} });
       const names = liveInstitutionNames(record);
       for (const h of printedAbsent(record, factsOf(record), names)) listed.push({ ...h, seed });
       for (const row of unlicensedServiceRows(record, names)) unlicensed.push(`${seed} :: ${row}`);
+      for (const h of printedOutOfTime(record)) outOfTime.push(`${h.why} :: ${h.path} :: ${JSON.stringify(h.sentence.slice(0, 120))}`);
     }
   }, 600_000);
 
@@ -148,6 +169,10 @@ describe('ARM 2 — the printed corpus', () => {
     const fresh = listed.filter((h) => !register.arm2.some((r) => rowCovers(r, h)));
     const shown = [...new Set(fresh.map((h) => `${h.thing} :: ${h.path} :: ${JSON.stringify(h.sentence.slice(0, 140))}`))];
     expect(shown, 'declare the thing (the draw refuses the line where it is absent) and write its twin').toEqual([]);
+  });
+
+  test('⛔ TIME: no witness line on an event older than its bearers, and no current tension in a past event\'s words (no register: every row is cured)', () => {
+    expect([...new Set(outOfTime)]).toEqual([]);
   });
 
   test('⛔ a service row stands only with its own institution (the chair\'s licensing rule)', () => {

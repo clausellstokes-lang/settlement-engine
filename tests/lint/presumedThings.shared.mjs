@@ -26,6 +26,8 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { createRequire } from 'node:module';
 
+import { timeBandOf } from '../../src/domain/display/heraldCausalGrammar.js';
+
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
 
@@ -402,6 +404,72 @@ export function printedAbsent(record, facts, names) {
         if (!seen.has(k)) { seen.add(k); out.push({ thing, path, sentence, denies: true }); }
       }
     }
+  }
+  return out;
+}
+
+// ── TIME: a line can presume its witnesses (the chair's ruling B of 2026-11-11) ──────────────────
+
+/**
+ * The words that put the people who LIVED THROUGH an event among the living ("those who lived
+ * through it are still here", "within living memory", "as if it were last year", "first-hand").
+ * The fact vocabulary has no atom for time, so a line cannot DECLARE it: this reading answers it
+ * from the record's own dates instead.
+ */
+export const WITNESS_WORDS = /\blived through it\b|\bliving memory\b|\bstill here to tell\b|\bas if it were last year\b|\bfirst-hand\b/i;
+
+/**
+ * Is an event older than its bearers? The estate's own time ladder answers it
+ * (`heraldCausalGrammar.js :: TIME_BANDS`: past "a generation", sixty years, the band is "older
+ * than its bearers"). @param {unknown} yearsAgo
+ */
+export const olderThanBearers = (yearsAgo) => typeof yearsAgo === 'number' && timeBandOf(yearsAgo, 52).id === 'older_than_bearers';
+
+/** An event's name as a sentence names it ("The Siege" → "siege"), lower-cased. @param {unknown} name */
+const bareName = (name) => String(name ?? '').replace(/^(?:the|a|an)\s+/i, '').trim().toLowerCase();
+
+/**
+ * Arm 2's TIME reading over one record. Listed, each as { thing: 'time', path, sentence, why }:
+ *   • 'witness'  a sentence claiming living witnesses, printed under an event older than its
+ *     bearers (the event's own prose), or naming only such events (anywhere else);
+ *   • 'echo'     a current tension whose sentence is word for word a past event's in the same town.
+ * @param {any} record
+ * @returns {Array<{ thing: 'time', path: string, sentence: string, why: 'witness'|'echo' }>}
+ */
+export function printedOutOfTime(record) {
+  const events = Array.isArray(record?.history?.historicalEvents) ? record.history.historicalEvents : [];
+  /** @type {Array<{ thing: 'time', path: string, sentence: string, why: 'witness'|'echo' }>} */ const out = [];
+  const seen = new Set();
+  const push = (path, sentence, why) => {
+    const k = `${why}\t${path}\t${sentence}`;
+    if (!seen.has(k)) { seen.add(k); out.push({ thing: 'time', path, sentence, why }); }
+  };
+  for (const e of events) {
+    if (!olderThanBearers(e?.yearsAgo)) continue;
+    for (const [path, text] of leaves(e, '.history.historicalEvents[]', [])) {
+      if (!isPrinted(path)) continue;
+      for (const sentence of sentencesOf(text)) if (WITNESS_WORDS.test(sentence)) push(path, sentence, 'witness');
+    }
+  }
+  const named = events.map((e) => ({ name: bareName(e?.name), old: olderThanBearers(e?.yearsAgo) })).filter((e) => e.name.length > 2);
+  for (const [path, text] of leaves(record, '', [])) {
+    if (path.startsWith('.history.historicalEvents') || !isPrinted(path)) continue;
+    for (const sentence of sentencesOf(text)) {
+      if (!WITNESS_WORDS.test(sentence)) continue;
+      const lower = sentence.toLowerCase();
+      // the event the sentence is ABOUT is the one it names first ("The Siege is still present in
+      // living memory: a previous occupation ended …" is about the siege)
+      let first = null;
+      for (const e of named) {
+        const at = lower.search(new RegExp(`\\b${e.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`));
+        if (at >= 0 && (first === null || at < first.at)) first = { at, old: e.old };
+      }
+      if (first?.old) push(path, sentence, 'witness');
+    }
+  }
+  const past = new Set(events.map((e) => e?.description).filter((d) => typeof d === 'string' && d.length >= 20));
+  for (const t of Array.isArray(record?.history?.currentTensions) ? record.history.currentTensions : []) {
+    if (past.has(t?.description)) push('.history.currentTensions[].description', t.description, 'echo');
   }
   return out;
 }
