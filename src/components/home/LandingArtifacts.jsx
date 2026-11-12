@@ -562,7 +562,7 @@ export function RealmMapCard() {
  * `printedNames` are the town names the image itself prints under its markers
  * (the five settlements of realm-cnocby.provenance.json). An overlay never
  * prints a second label for a name on this list.
- * @enforced-by tests/ui/landingRealmPins.test.jsx
+ * @enforced-by tests/ui/landingRealmMapOverlay.test.jsx
  */
 export const REALM_MAP_GEOMETRY = Object.freeze({
   size: Object.freeze({ width: 2280, height: 1126 }),
