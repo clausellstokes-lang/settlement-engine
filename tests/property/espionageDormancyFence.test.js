@@ -189,6 +189,18 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-12, THE COHERENCE-QUARREL MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 42) ──
+ * THE HUNDRED-AND-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the coherence wave (the chair's ruling: this wave is the window for the lanes'
+ * own text leaves, on condition of attribution at each merge point); the record is
+ * docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json. THE MOVER, FOUND: the COHERENCE-QUARREL merge d4723749a
+ * (1c7b5786c into the integration branch); its causes the components (cures 1-4: the quarrels' cast-declared issues and their
+ * own hooks, the touched power's clause, the smuggling hook's four tellings). FIELD-DIFFED: only the quarrels' issue, stakes,
+ * desc and plotHooks (both lists) and the safety record's plotHooks move; the espionage subsystem stays dormant.
+ * On THIS corpus 242 of 360 rows (thorp 10, hamlet 23, village 30, town 59, city 60, metropolis 60) move against record 27's
+ * post-state (the stage of decc7bf15) (`291c7695…`); 360/360 hashes stay distinct. Written from the staged tree (d4723749a with
+ * the door paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `291c7695…` -> `152defbd…`.
+ *
  * ── 2026-11-10, THE SW-9b-B MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 27) ──
  * THE HUNDRED-AND-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the style wave's merge (BRIEF-STYLE-2-WAVE §3, the law of the chain); the
@@ -1278,7 +1290,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '291c769541e61b2a700b51051b02275674f658fd67b3ec6303ee7faccb49b5ae';
+const PRE_COUPLING_CORPUS_SHA = '152defbd5f7b1ff4c74628fb6350843045008926f6dc75ff374f1ed3b0cb53d7';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
