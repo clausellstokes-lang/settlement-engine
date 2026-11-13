@@ -9497,7 +9497,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "threat",
             "crisis: any"
           ],
-          "text": "{settlement} kept its {defwork} through the quiet years, and the {defwork} is earning its keep now.",
+          "text": "{settlement} kept its {defwork} through the quiet years, and that care is earning its keep now.",
           "slots": [
             "settlement",
             "defwork"

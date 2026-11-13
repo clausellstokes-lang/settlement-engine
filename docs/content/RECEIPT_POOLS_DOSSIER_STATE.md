@@ -6977,7 +6977,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 1. `[visitor · no threat · crisis: any · no crisis: unrest]` Though the present peace asks nothing of its defences, {settlement} keeps its {defwork} in repair: mending costs less than building again.
 2. `[elder · no threat · crisis: any]` The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.
 3. `[ledger · no threat · crisis: any]` {settlement}'s accounts show little spent on its {defwork} now that it asks little of it, since built work needs little upkeep.
-4. `[visitor · threat · crisis: any]` {settlement} kept its {defwork} through the quiet years, and the {defwork} is earning its keep now.
+4. `[visitor · threat · crisis: any]` {settlement} kept its {defwork} through the quiet years, and that care is earning its keep now.
 5. `[ledger · threat · crisis: any]` What {settlement} spent on its {defwork} in the quiet years is what stands between the town and the threat at hand.
 
 **`WALLED-STRAINED`**
