@@ -29,6 +29,9 @@ describe('textOf', () => {
     // 86 → 92 by cause: CENSUS-2f unit 2 (R-AP) declared the fish key's three bare lines and the faith key's bell, incense and hymn;
     // 92 → 99: CENSUS-2f unit 7 — fish.dominant[1] declares `fish` (R-AP amended) and six read bare lines are marked colour (R-AO)
     // 99 → 101: W2-FIX-DATA (the REVIEW-W2B cold list) — the smiths' ironwork carts (siege) and the arabic water for travellers (siege) declare
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(101);
+    // 101 → 105: W2-FIX-DATA-3 (REVIEW-W2A-3 #366, #2) — the smiths' three bare dominant lines ("Forge smoke hangs …",
+    // "The hammering echoes through all of …", "… lives by its forges …") declare `tier: ≥ town` (fb48fb8bc), and the
+    // mesoamerican craftspeople row ("Craftspeople sit in rows …") declares `market` (c0f8dd279); re-keyed by W2-FIX-DATA-6
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(105);
   });
 });
