@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2908,
+    "variants": 2909,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -24425,7 +24425,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
+      "variants": 6,
       "grammars": 3,
       "predicate": [
         {
@@ -24476,7 +24476,7 @@
         "militia": 2,
         "no garrison": 5,
         "no militia": 2,
-        "no walls": 1,
+        "no walls": 2,
         "walls": 2
       },
       "undeclared": 0,
@@ -55742,7 +55742,7 @@
         "DS-GEN-3 :: defenseProfile.readiness.label: Vulnerable",
         "DS-GEN-3 :: defenseProfile.readiness.label: Undefended"
       ],
-      "variants": 17,
+      "variants": 18,
       "grammars": 9,
       "blocks": [
         "DS-GEN-3"
@@ -69614,7 +69614,7 @@
         "text(label) (via READINESS_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "READINESS_POOL_OF",
-      "count": "5 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

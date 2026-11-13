@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 294181,
-      "gzip": 37611,
+      "raw": 294535,
+      "gzip": 37645,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -691,6 +691,14 @@
       "toRaw": 182387,
       "gzipAfter": 25593,
       "reason": "+6 B raw over the committed 182381 (gzip level 9: 25602 -> 25593): round 1 and stage 3 lines read against four pins of the whole suite (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE walls mute",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 294443,
+      "toRaw": 294535,
+      "gzipAfter": 37645,
+      "reason": "+354 B raw over the committed 294181 (gzip level 9: 37611 -> 37645): DS-GEN-3 Undefended: a no-walls line that names neither walls nor a force (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

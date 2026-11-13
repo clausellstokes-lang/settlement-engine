@@ -871,7 +871,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
         'DS-GEN-1 :: occupation_legacy :: severity=major',
         'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
         'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
-        'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=no walls',
+        // W2-WRITE the walls-word mute (2026-11-13): 'Undefended :: walls=no walls' CURED and gone — v6, a no-walls line naming neither walls nor a force, speaks there.
       ],
     });
 
@@ -984,7 +984,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       'DS-GEN-1 :: occupation_legacy :: severity=major',
       'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
       'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
-      'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=no walls',
+      // W2-WRITE the walls-word mute (2026-11-13): 'Undefended :: walls=no walls' CURED and gone — v6, a no-walls line naming neither walls nor a force, speaks there.
     ]);
   });
 
