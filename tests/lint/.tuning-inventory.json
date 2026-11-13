@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "9a9f7c10ea997176ba10cf454c3836eb81ef629c",
+  "measuredAtSha": "fe5786c9719915e763851e5e2fe80c929e223523",
   "measuredBy": "COHERENCE-UPKEEP-6",
   "date": "2026-11-13",
-  "note": "COHERENCE-UPKEEP-6 ruling 1(b): threatAssessment.js reads keep.js (KEEP_TUNING, KEEP_SCALE_TUNING gain a dependent); no value moved",
+  "note": "COHERENCE-UPKEEP-6 ruling 3 (fe5786c97): DEFENCE_TUNING.crises rows gain crime (ten leaves, draft); priorityHelpers criminalPreStress",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -133,7 +133,7 @@
       "idiom": "literal",
       "keys": 32,
       "line": 14,
-      "spanDigest": "5283ec86efe447697bf1aeab0e9b976bbe046af089c58a6ded14026c40517c7a",
+      "spanDigest": "c557ffcfbfd338c247a5a34bd8380d096a21e196a877f2f39dd3414e62976cc1",
       "leaves": {
         "walls.mil": 30,
         "walls.mon": 20,
@@ -247,6 +247,7 @@
         "chains.unmended": -4,
         "chains.foodWorking": 5,
         "chains.foodBroken": -8,
+        "crises.under_siege.crime": 1.25,
         "crises.under_siege.sup": 25,
         "crises.under_siege.int": 15,
         "crises.under_siege.teleportFrom": 65,
@@ -256,6 +257,7 @@
         "crises.under_siege.strongInt": 0.53,
         "crises.under_siege.druidFrom": 40,
         "crises.under_siege.druidEco": 0.72,
+        "crises.famine.crime": 1.35,
         "crises.famine.sup": 20,
         "crises.famine.mil": 10,
         "crises.famine.int": 20,
@@ -269,8 +271,10 @@
         "crises.famine.arcaneFrom": 50,
         "crises.famine.arcaneEco": 15,
         "crises.famine.alchemyEco": 3,
+        "crises.occupied.crime": 0.6,
         "crises.occupied.mil": 35,
         "crises.occupied.int": 20,
+        "crises.plague_onset.crime": 1.2,
         "crises.plague_onset.mil": 15,
         "crises.plague_onset.sup": 15,
         "crises.plague_onset.divineMil": 0.33,
@@ -282,8 +286,10 @@
         "crises.succession_void.mil": 15,
         "crises.succession_void.int": 20,
         "crises.politically_fractured.int": 20,
+        "crises.recently_betrayed.crime": 1.15,
         "crises.recently_betrayed.int": 10,
         "crises.recently_betrayed.mil": 10,
+        "crises.indebted.crime": 1.2,
         "crises.indebted.sup": 15,
         "crises.indebted.mil": 10,
         "crises.infiltrated.int": 15,
@@ -294,7 +300,11 @@
         "crises.monster_pressure.arcaneMon": 0.25,
         "crises.monster_pressure.divineMon": 0.4,
         "crises.monster_pressure.druidMon": 0.5,
-        "crises.wartime.sup": 15
+        "crises.wartime.sup": 15,
+        "crises.insurgency.crime": 1.25,
+        "crises.mass_migration.crime": 1.18,
+        "crises.religious_conversion.crime": 1.22,
+        "crises.slave_revolt.crime": 1.3
       },
       "dependents": [
         "src/generators/defenseGenerator.js",
