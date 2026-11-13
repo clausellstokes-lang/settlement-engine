@@ -16,14 +16,14 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
   TIMELINE_CATEGORY_TYPES,
 } from './history/historyPolicyData.js';
 import { deriveHistoryRouteContext, smallPlaceWordsOf } from './history/historyRouteContext.js';
-import { drawDeclared, filterDeclared, lineText } from '../domain/facts/drawDeclared.js';
+import { drawDeclared, filterDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js';
 import { factsOf } from '../domain/facts/factsOf.js';
 import { generateSafetyNarrative2, generateTradeNarrative2 } from './history/historyEventStrands.js';
 export {
@@ -261,7 +261,7 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
   // (historyData.historyDescription). The draw count remains fixed:
   // defaultTokens builds every pick regardless of which tokens the chosen
   // variant references, then the renderer resolves every occurrence.
-  const description = renderHistoryTemplate(historyDescription(eventTemplate, descSeed), defaultTokens);
+  const description = renderHistoryTemplate(sizedHistoryText(historyDescription(eventTemplate, descSeed), hookFacts), defaultTokens); // W2-FIX-DATA-5 (#331): a text's small-place twin, draw-free
 
   // Select lasting effects based on severity
   const severity = pick(eventTemplate.severity || ['major']);
@@ -578,9 +578,9 @@ const buildHistoricalEvent = (
     .map((tmpl) => tensionByMemory(tmpl, timeline)).map(({ descriptionByDirection, ...tension }) => ({ // #20: the direction table is the template's, never the record's; URBAN-FIX D-1: so is the memory table
       ...tension,
       description: apartFromOwnEvent(renderHistoryTemplate(
-        substituteNames(tensionDescription({ ...tension, descriptionByDirection }, config)), // #20: the migration's own direction
+        substituteNames(sizedHistoryText(tensionDescription({ ...tension, descriptionByDirection }, config), hookFacts)), // #20: the migration's own direction; W2-FIX-DATA-5 (#331): its small-place twin
         tensionTokens, // COHERENCE-PRESUME: never its own past event's sentence, word for word (apartFromOwnEvent)
-      ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(text), tensionTokens)),
+      ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(sizedHistoryText(text, hookFacts)), tensionTokens)),
       factions: (tension.factions || []).map(substituteNames),
       // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
       // filtered by the record (a refused row leaves it) and stored as text; a list that declares
@@ -1249,4 +1249,20 @@ function noteByTemplateRow(from, list, eventTemplate, value) {
     if (at >= 0) ledger[k] = { ...entry, lineId: at };
   }
   return value;
+}
+
+// ─── W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #331): A HISTORY TEXT TAKES ITS SMALL-PLACE TWIN ─────────────────────
+// The great fire "spread through barges, warehouses, and wharf infrastructure across entire districts" in a village of
+// 172. A description that presumes a place's districts and quarters declares its size (`historyData.js ::
+// HISTORY_DESC_SIBLINGS`); in a place of village size or smaller its twin, which names neither, prints. The pick is
+// kept (the hash over the same texts), and the refused text resolves draw-free through the declared door.
+// At the end of the file on purpose: the prose wiring census cites this file's producer writes by line.
+
+/**
+ * @param {string} text a history template's raw text (its tokens unrendered)
+ * @param {object | (() => object) | null} facts the history's facts (`hookFacts`)
+ * @returns {string}
+ */
+function sizedHistoryText(text, facts) {
+  return resolveSibling(text, HISTORY_DESC_SIBLINGS, { facts, poolId: 'historyData:HISTORY_DESC_SIBLINGS', surface: 'history', drawKind: 'T' });
 }

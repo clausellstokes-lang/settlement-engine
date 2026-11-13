@@ -112,4 +112,5 @@ export const NOT_TABLE_CHANNELS = Object.freeze({
   DOSSIER_CONNECTIVE_DECLARATIONS: 'a list PARALLEL to each connective list, read by position (CENSUS-1h unit 7); the connectives are state-corpus joints, not an enrolled table',
   FIELD_DECLARATIONS: 'the edit cards\' field declarations (domain/edit), not prose',
   TENSION_TEMPLATE_DECLARATIONS: 'keyed by the tension template\'s TYPE beside the selection (CENSUS-1g unit 4); the history templates are not an enrolled table',
+  HISTORY_DESC_SIBLINGS: 'keyed by a history template\'s raw description text, resolved at the timeline\'s and the tension\'s print (W2-FIX-DATA-5, ROUND-3-CUT #331); the history templates are not an enrolled table',
 });

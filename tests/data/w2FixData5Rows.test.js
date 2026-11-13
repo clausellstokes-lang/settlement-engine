@@ -33,4 +33,11 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     expect(burial).not.toMatch(/No clergy|nobody else to say them/);
     expect(burial).toMatch(/\ba priest\b/i);
   }, 60_000);
+  test('#331: a village\'s great fire burns no districts, quarters or streets, and names no wharves it lacks (rr2s-village-monster_pressure-rand-1)', () => {
+    const town = bornRr2s('rr2s-village-monster_pressure-rand-1');
+    expect(town.tier).toBe('village');
+    const fires = [...(town.history.historicalEvents || []), ...(town.history.currentTensions || [])].filter((/** @type {any} */ e) => (e.templateType || e.type) === 'great_fire').map((/** @type {any} */ e) => String(e.description));
+    expect(fires.length, 'the village keeps its fire').toBeGreaterThan(0);
+    expect(fires.filter((t) => /district|quarter|street|warehouse|wharf/i.test(t))).toEqual([]);
+  }, 60_000);
 });

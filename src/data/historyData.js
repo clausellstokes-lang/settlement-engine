@@ -1678,3 +1678,26 @@ export const HISTORY_SMALL_PLACE_WORDS = Object.freeze({
   river: Object.freeze({ text: 'the houses nearest the river', needs: Object.freeze(['river', 'tier: ≤ village']) }),
   inland: Object.freeze({ text: 'the low ground', needs: Object.freeze(['tier: ≤ village']) }),
 });
+
+/**
+ * W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #331): THE HISTORY TEXTS THAT PRESUME A PLACE'S SIZE, AND THEIR SMALL-PLACE TWINS
+ * (`historyGenerator.js :: sizedHistoryText`, at the timeline's description and the tension's). The great fire burns
+ * "across whole districts", "across entire districts", "street by street until whole quarters were gone", through
+ * warehouses and wharves: districts, quarters and streets are a size error in a place of village size or smaller (the
+ * chair's ruling of 2026-11-13). Keyed by the raw template text; each twin names no district, street or building type.
+ * VETOABLE wording (the owner's).
+ */
+export const HISTORY_DESC_SIBLINGS = Object.freeze({
+  "A fire that began in {location} consumed {building_type} across whole districts before it could be checked": Object.freeze([
+    Object.freeze({ text: "A fire that began in {location} consumed {building_type} across whole districts before it could be checked", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "A fire that began in {location} burned through the houses and their outbuildings before it could be checked", twinOf: "A fire that began in {location} consumed {building_type} across whole districts before it could be checked", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control": Object.freeze([
+    Object.freeze({ text: "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "A fire out of {location} spread from roof to roof before anyone could bring it under control", twinOf: "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone": Object.freeze([
+    Object.freeze({ text: "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Beginning in {location}, the blaze took house after house before it was put out", twinOf: "Beginning in {location}, the blaze took {building_type} street by street until whole quarters were gone", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+});
