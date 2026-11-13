@@ -39,7 +39,7 @@
 import { getInstFlags, getPriorities } from './helpers.js';
 import { computeEffectiveMagicPresence, neighbourMilitaryFactorOf } from './priorityHelpers.js';
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
-import { partitionDefenseInstitutions, defenseTraditionNamesOf } from '../domain/institutions/defenseInstitutionBuckets.js';
+import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
@@ -256,8 +256,11 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const law = inst.hasCourtSystem || inst.hasPrison || inst.hasGarrison || inst.hasWatch;
   const bos = inst.hasWalls || hasStanding;
 
-  // BUILT: what already stands. Prosperity does not scale it.
-  if (inst.hasWalls) add('BUILT', 'walls', W.walls);
+  // BUILT: what already stands. Prosperity does not scale it. The walls count by their kind, read from the
+  // roster's defence home (COHERENCE-UPKEEP-6, B): stone at its full value, the other kinds less (`W.wallKind`).
+  const wallKind = defenseWallOf(institutions).kind;
+  const wallShare = wallKind && Object.hasOwn(W.wallKind, wallKind) ? W.wallKind[wallKind] : W.wallKind.stone;
+  if (inst.hasWalls) add('BUILT', 'walls', Object.fromEntries(Object.entries(W.walls).map(([d, v]) => [d, v * wallShare])));
   const wallsPart = inst.hasWalls ? parts[parts.length - 1] : null;
   if (chains.fortification) add('BUILT', chains.fortification > 0 ? 'masons' : 'unmended', { mil: chains.fortification });
   // STANDS: who defends. Paid forces at the funded share of their own scores' floors.

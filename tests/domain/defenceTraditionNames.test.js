@@ -61,7 +61,9 @@ describe('the defence traditions are read by the roster\'s defence home', () => 
     expect(src).not.toMatch(/\bhasInst\s*\(/); // anchored: the same read, proven above to be the generator's source
   });
 
-  test('R17: the home also answers the wall\'s kind (stone by default); nothing in defence reads it', () => {
+  // Re-keyed by identity at COHERENCE-UPKEEP-6 (B, the chair's decision on the owner's deferral): the walls part
+  // now reads the wall's kind from this home, so the claim is that the generator asks the home, and nothing else.
+  test('R17: the home also answers the wall\'s kind (stone by default); the walls part asks the home', () => {
     expect(defenseWallOf([])).toEqual({ present: false, kind: null });
     expect(defenseWallOf([{ name: 'Town Walls' }])).toEqual({ present: true, kind: 'stone' });
     expect(defenseWallOf([{ name: 'Massive Walls' }, { name: 'Inner Citadel' }])).toEqual({ present: true, kind: 'stone' });
@@ -70,6 +72,7 @@ describe('the defence traditions are read by the roster\'s defence home', () => 
     expect(defenseWallOf([{ name: 'Earthwork ring' }])).toEqual({ present: true, kind: 'earthwork' });
     const generator = readFileSync(join(ROOT, 'src/generators/defenseGenerator.js'), 'utf8');
     expect(generator).toMatch(/defenseTraditionNamesOf/);
-    expect(generator).not.toMatch(/defenseWallOf/); // anchored: the line above proves this is the generator, which asks the home for names
+    expect(generator).toMatch(/defenseWallOf\(institutions\)/);
+    expect(generator).not.toMatch(/palisade|earthwork/i); // anchored: the line above proves this is the generator, which asks the home for the kind
   });
 });

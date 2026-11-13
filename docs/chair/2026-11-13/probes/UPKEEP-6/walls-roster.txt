@@ -1,0 +1,26 @@
+walls: roster names in the walls bucket, by size
+    ('thorp', ('Palisade',)) 166
+    ('hamlet', ('Palisade or earthworks',)) 119
+    ('village', ('Palisade or earthworks',)) 137
+    ('town', ('Citadel', 'Town walls')) 27
+    ('town', ('Town walls',)) 356
+    ('town', ('Town walls', 'Citadel')) 31
+    ('town', ('Town walls', 'Citadel', 'Gates (if walled)')) 1
+    ('town', ('Town walls', 'Gates (if walled)')) 51
+    ('town', ('Town walls', 'Gates (if walled)', 'Citadel')) 11
+    ('city', ('City walls and gates',)) 263
+    ('city', ('City walls and gates', 'Citadel')) 489
+    ('metropolis', ('Massive walls and fortifications',)) 165
+    ('metropolis', ('Massive walls and fortifications', 'Citadel')) 387
+walls: kind (the buckets home, the facts home) by size
+    ('thorp', 'palisade', 'palisade') 166
+    ('thorp', None, None) 374
+    ('hamlet', 'palisade', 'palisade') 119
+    ('hamlet', None, None) 421
+    ('village', 'palisade', 'palisade') 137
+    ('village', None, None) 483
+    ('town', 'stone', 'stone') 477
+    ('town', None, None) 275
+    ('city', 'stone', 'stone') 752
+    ('metropolis', 'stone', 'stone') 552
+walls: the two homes disagree on 0 

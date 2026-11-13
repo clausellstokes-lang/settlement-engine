@@ -14,6 +14,7 @@ import { neighbourMilitaryFactorOf } from '../../src/generators/priorityHelpers.
 import { keepOfRecord } from '../../src/domain/facts/keep.js';
 import { readinessBandOf } from '../../src/data/bandLadders.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
+import { defenseWallOf } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 import { DEFENCE_TUNING, DEFENCE_WEIGHT_REASONS, DEFENCE_WORDS } from '../../src/data/defenceWeights.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -140,6 +141,34 @@ describe('defence is the sum of its parts', () => {
   test('the printed prosperity label is the label the tree printed before this lane (pinned at e1b2f9c1f)', () => {
     const got = Object.fromEntries(Object.keys(PRINTED_AT_BASE).map((k) => [k, births[k].economicState.prosperity]));
     expect(got).toEqual(PRINTED_AT_BASE);
+  });
+});
+
+// COHERENCE-UPKEEP-6, B (the chair's decision on the owner's deferral, record 323's R17): the walls part is
+// scaled by the wall's kind, read from the roster's defence home (`defenseWallOf`). Stone keeps its full value.
+describe('the kind of wall counts', () => {
+  test('RED-FIRST: the walls part is the walls\' points scaled by the kind the defence home answers', () => {
+    const bad = [];
+    let kinds = new Set();
+    for (const [key, s] of Object.entries(births)) {
+      const walls = s.defenseProfile.parts.find((p) => p.id === 'walls');
+      const wall = defenseWallOf(s.institutions);
+      expect(Boolean(walls), `${key}: a walls part where the home answers a wall`).toBe(wall.present);
+      if (!walls) continue;
+      kinds.add(wall.kind);
+      const n = s.config.magicExists === false ? 4 : 5;
+      const full = (DEFENCE_TUNING.walls.mil + DEFENCE_TUNING.walls.mon) * DEFENCE_TUNING.wallKind[wall.kind] / n;
+      if (Math.abs(walls.full - Math.round(full * 10) / 10) > 1e-9) bad.push([key, wall.kind, walls.full, full]);
+    }
+    expect([...kinds].sort(), 'anchored: the corpus holds stone and palisade walls').toEqual(['palisade', 'stone']);
+    expect(bad).toEqual([]);
+  });
+
+  test('stone keeps today\'s full value; a palisade and an earthwork count for less, an earthwork least', () => {
+    const K = DEFENCE_TUNING.wallKind;
+    expect(K.stone).toBe(1);
+    expect(K.palisade).toBeLessThan(K.stone);
+    expect(K.earthwork).toBeLessThan(K.palisade);
   });
 });
 
