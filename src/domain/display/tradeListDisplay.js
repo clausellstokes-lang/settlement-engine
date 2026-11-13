@@ -170,7 +170,7 @@ export function importsAsPrinted(settlement) {
     .filter((tc) => !primary.some((imp) => imp.toLowerCase().includes(tc.toLowerCase())));
   const kept = displayTradeList([...primary, ...terrain], /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'imports', exports: eco.primaryExports });
   const fromTrade = new Set(primary);
-  const arriving = kept.filter((x) => fromTrade.has(x));
+  const arriving = arrivingOf(settlement);
   // W2-C-LEAVES R2 (the chair's ruling on REVIEW-R2-STAGES finding 2): a need the town MAKES is not a need — it leaves
   // the line where the town exports the good, produces it locally (as printed, `localProductionAsPrinted`), or a
   // working chain of the record makes it (its resource, its outputs, its name), matched as an import is (`needMetBy`).
@@ -272,19 +272,23 @@ export function localProductionAsPrinted(settlement) {
     .filter((c) => WORKING_CHAIN_STATUSES.includes(String(c.status)) && !accessOnly(c))
     .flatMap((c) => (Array.isArray(c.outputs) ? c.outputs : []).map((o) => String(o).toLowerCase())));
   const outputs = new Set(chains.flatMap((c) => (Array.isArray(c.outputs) ? c.outputs : []).map((o) => String(o).toLowerCase())));
+  const bought = new Set(arrivingOf(settlement).map((x) => fold(tradeMarkOf(x).label)));
   const kept = list.filter((raw) => {
     const item = raw.toLowerCase().replace(/_/g, ' ').trim();
     if (LOCAL_IDENTIFIERS.has(item)) return false;
+    if (!pillBorneOut(raw, 'local', settlement)) return false; // W2-C-LEAVES-4 item 2: the one pill reader (below)
     if (outputs.has(raw.toLowerCase())) return made.has(raw.toLowerCase());
     const keys = RESOURCES_YIELDING.get(item);
     const makers = HOUSE_MAKES[item];
     if (!keys && !makers) return true;
-    return (!!keys && chainWorksResource(settlement, keys, item)) || (!!makers && ownHouses.some((n) => makers.some((w) => n.includes(w))));
+    const worked = !!keys && rawWorkedNow(settlement, keys, item); // (i): the leaf, read with the card's crisis state
+    if (bought.has(item) && !worked) return false; // (v): bought in, and the leaf does not say it is worked here
+    return worked || (!!makers && ownHouses.some((n) => makers.some((w) => n.includes(w))));
   });
   return displayTradeList(kept, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'exports' });
 }
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
-import { chainWorksResource, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';
+import { chainWorksResource, chainsWorking, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 /** The model's own identifiers in the local list (a position and the commodity categories): never a good. */
 const LOCAL_IDENTIFIERS = new Set(['trade access', 'maritime access', 'luxury', 'craft', 'textile', 'herbs', 'fuel', 'precious metal']);
@@ -323,3 +327,178 @@ function madeHere(settlement) {
       .flatMap((c) => [c.resource, ...(Array.isArray(c.outputs) ? c.outputs : []), c.label]),
   ].filter((x) => typeof x === 'string' && x.trim() !== '').map(String);
 }
+
+/**
+ * What trade brings in, as the Imports row prints it (`importsAsPrinted(s).arriving`), read apart so the local reader
+ * can ask it without composing the needs (W2-C-LEAVES-4 item 2, rule (v)).
+ * @param {Parameters<typeof importsAsPrinted>[0]} settlement
+ * @returns {string[]}
+ */
+function arrivingOf(settlement) {
+  const eco = settlement?.economicState || {};
+  const primary = (eco.primaryImports || []).filter((x) => typeof x === 'string').map(String);
+  const fromTrade = new Set(primary);
+  return displayTradeList(primary, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'imports', exports: eco.primaryExports })
+    .filter((x) => fromTrade.has(x));
+}
+
+/**
+ * THE GOODS PILLS PRINT ONLY WHERE THE RECORD BEARS THEM OUT (W2-C-LEAVES-4 item 2; the chair's ruling of 2026-11-13 on
+ * the cut's #129, #196, #691, #1038, #1146, #1365 and the increment's seven "goods pills" lines). ONE reader for the
+ * Economics tab's "Produced locally" and "Exports" pills; display only: the record's lists do not change.
+ *   (ii) a MADE good (a chain's output, or a good of `MADE_GOOD_HOUSES`) prints only where a chain that makes it works
+ *        here, in the state its card prints (`chainStateShown.js`, the crisis read; `facts/chainWorking.js ::
+ *        WORKING_CHAIN_STATUSES`), none of its houses held only as a road to elsewhere, and the house its making
+ *        needs stands on the live roster (`MADE_GOOD_HOUSES`, else any house of the chain): "Books and manuscripts" by
+ *        Glassmakers alone, "metalwork" with no smithy, guild goods with no guild, are not borne out. A good the land
+ *        gives and a house finishes ("Milled flour") prints only where a chain on that ground still works (a famine
+ *        that failed the grain mills none); an export of a made good whose chain is impaired or broken (on a
+ *        depleted ground, #1038) is not listed (vi).
+ *   (ii) a good only an entrepôt chain carries is not made here: never "Produced locally"; an export only as transit.
+ *   (iii) a SERVICE is a chain's output too: it prints only where a house of the live roster offers it (a church for
+ *        "Religious services"); an "Access to ..." row is no house here.
+ *   (iv) a key that is not a good (`NOT_A_GOOD_HERE`) never prints as one.
+ *   (i), (v) a raw good keeps the chain leaf's reading (`localProductionAsPrinted`); an Export of the resource's own raw
+ *        good stands (the record's export is the worked fact, W2-C-LEAVES-3 P1-b).
+ * @param {string} raw the item as the record stores it (a trade mark may follow)
+ * @param {'local'|'exports'} side the list it prints on
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement the record
+ * @returns {boolean} whether the pill prints as the record stores it
+ */
+export function pillBorneOut(raw, side, settlement) {
+  return pillAsPrinted(raw, side, settlement) === raw;
+}
+
+/**
+ * The pill as it prints, or null where it does not: a good an entrepôt carries through and no house here makes prints
+ * on the Exports as a transit good (the page's own mark and legend, "Blue = re-exported transit goods"), never as made.
+ * @param {string} raw @param {'local'|'exports'} side @param {Parameters<typeof localProductionAsPrinted>[0]} settlement
+ * @returns {string | null}
+ */
+function pillAsPrinted(raw, side, settlement) {
+  const mark = tradeMarkOf(raw);
+  const good = fold(mark.label).replace(/_/g, ' ');
+  if (NOT_A_GOOD_HERE.has(good)) return null;
+  const eco = settlement?.economicState || {};
+  const chains = /** @type {Array<{ outputs?: unknown, processingInstitutions?: unknown, status?: unknown, entrepot?: unknown, resourceInputKey?: unknown }>} */ (
+    (Array.isArray(eco.activeChains) ? eco.activeChains : []).filter((c) => c && typeof c === 'object'));
+  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
+  const own = roster.filter((n) => !n.startsWith('access to'));
+  /** @param {{ status?: unknown }} c */
+  const works = (c) => WORKING_CHAIN_STATUSES.includes(String(chainStateShown(c, settlement)));
+  /** @param {{ processingInstitutions?: unknown }} c @returns {string[]} the chain's houses' first words */
+  const heads = (c) => (Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []).map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
+  const houseRe = MADE_GOOD_HOUSES.get(good);
+  const makerStands = !!houseRe && own.some((n) => houseRe.test(n));
+  /** @param {{ processingInstitutions?: unknown }} c */
+  const houseStands = (c) => (houseRe ? makerStands : heads(c).some((h) => own.some((n) => n.includes(h))));
+  /** @param {{ processingInstitutions?: unknown }} c */
+  const roadOnly = (c) => heads(c).some((h) => { const m = roster.filter((r) => r.includes(h)); return m.length > 0 && m.every((r) => r.startsWith('access to')); });
+  const grounds = TRADE_GOOD_GROUNDS.get(good) || [];
+  const makers = chains.filter((c) => (Array.isArray(c.outputs) ? c.outputs : []).some((o) => fold(o) === good));
+  if (makers.length > 0) {
+    /** @param {{ entrepot?: unknown }} c an entrepôt that works no ground of the town's carries the good; it makes it only by a house here */
+    const carries = (c) => c.entrepot === true && !SERVICE_OUTPUTS.has(good) && !makerStands && ['transit', 'none'].includes(chainCarrierOf(c, settlement).kind);
+    /** @param {{ resourceInputKey?: unknown }} c the good is the land's own on the ground the chain works: no house makes it */
+    const ofGround = (c) => !houseRe && grounds.includes(String(c.resourceInputKey)) && ['own', 'substitute'].includes(chainCarrierOf(c, settlement).kind);
+    if (makers.some((c) => !carries(c) && works(c) && (ofGround(c) || (!roadOnly(c) && houseStands(c))))) return raw;
+    if (side !== 'exports' || !makers.some((c) => carries(c) && works(c))) return null;
+    return mark.kinds.includes('transit') ? raw : [mark.label, 'transit', ...mark.kinds].map((k, i) => (i === 0 ? k : `(${k === 'naval' ? 'naval route only' : k === 'occupation' ? 'taxed by occupation' : k})`)).join(' ');
+  }
+  if (!houseRe) return raw;
+  if (!makerStands || landFailed(settlement, [...grounds, ...(RESOURCES_YIELDING.get(good) || [])])) return null;
+  const onGround = chains.filter((c) => grounds.includes(String(c.resourceInputKey)));
+  return onGround.length === 0 || onGround.some(works) ? raw : null;
+}
+
+/**
+ * Whether every ground of the town's own that yields a good is one a famine in force failed (`chainStateShown.js ::
+ * failedGroundsOf`): a famine that failed the grain mills no flour and grows no grain here.
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement @param {ReadonlyArray<string>} grounds
+ * @returns {boolean}
+ */
+function landFailed(settlement, grounds) {
+  const failed = failedGroundsOf(settlement);
+  if (failed.length === 0) return false;
+  const near = /** @type {{ config?: { nearbyResources?: unknown } }} */ (settlement || {}).config?.nearbyResources;
+  const mine = grounds.filter((g) => (Array.isArray(near) ? near.map(String) : []).includes(g));
+  return mine.length > 0 && mine.every((g) => failed.includes(g));
+}
+
+/**
+ * (i) A raw good the chain leaf says is worked here, read with the card's own state: where the chains that work it
+ * all print as stopped by a crisis (a siege that took the fields, a famine that failed the harvest), or the famine
+ * failed its ground, it is not produced locally; a house that works it (the leaf's) still does.
+ * @param {Parameters<typeof localProductionAsPrinted>[0]} settlement @param {string[]} keys @param {string} item
+ * @returns {boolean}
+ */
+function rawWorkedNow(settlement, keys, item) {
+  if (!chainWorksResource(settlement, keys, item) || landFailed(settlement, keys)) return false;
+  const chains = chainsWorking(settlement, keys, item);
+  return chains.length === 0 || chains.some((c) => WORKING_CHAIN_STATUSES.includes(String(chainStateShown(c, settlement))));
+}
+
+/** The outputs an entrepôt offers as a house's service (a bank, a warehouse, a market), not goods carried through. */
+const SERVICE_OUTPUTS = new Set(['financial services', 'international banking services', 'cargo handling', 'goods storage', 'magical item market',
+  'weapon enchantment', 'planar travel information', 'diplomatic access', 'meals and drink']);
+
+/** (iv) Keys the lists carry that are not goods (a position, a revenue, a label): never printed as a pill. */
+const NOT_A_GOOD_HERE = new Set(['trade access', 'maritime trade access', 'toll income', 'market taxes', 'date export', 'maritime trade revenue']);
+
+/**
+ * (ii), (iii) THE HOUSE A GOOD'S MAKING NEEDS, by the roster's own words (a closed list, each entry its cause; a good
+ * not here needs any house of the chain that makes it). Matched on the live roster's own houses, never an access row.
+ * @type {ReadonlyArray<readonly [ReadonlyArray<string>, RegExp]>} */
+const MADE_GOOD_ROWS = Object.freeze([
+  // the glass and print chain's Glassmakers make no book (rww-city-famine-1); a scriptorium, a library, a sage does
+  [['books and manuscripts'], /\bprint|\bscriptor|\bbookbind|\blibrar|\buniversit|\bcollege|\bscribe|\bsage|\bwizard/],
+  [['printing services'], /\bprint/],
+  [['glassware', 'window glass', 'glass blanks'], /\bglass/],
+  // the parish chain's outputs need a house of worship: an almshouse or a foundling home holds no service
+  [['religious services', 'education (basic)', 'sanctuary'], /\bchurch|\bcathedral|\bchapel|\bshrine|\btemple|\babbey|\bmonaster|\bfriary|\bpriest/],
+  // guild goods with no guild (rww-village-famine-1: a Shepherd alone)
+  [['guild-manufactured goods'], /\bguild/],
+  // barrels need a cooper or a woodworker (rww-village-famine-1: a Thatcher alone)
+  [['barrels and containers'], /\bcooper|\bcarpenter|\bjoiner|wright\b/],
+  // tools, arms and metalwork need a smithy (rww-thorp-plague_onset-1: "metalwork" with no smith)
+  [['quality tools and weapons', 'advanced weapons and armor', 'weapons and armour', 'basic metalwork', 'metalwork', 'ironwork'], /smith|\bforge|\bmetalwork|\barmou?r|\bweapon/],
+  [['fine metalwork and jewelry', 'jewellery', 'cut gemstones'], /\bmetalwork|\bjewel|goldsmith|silversmith|\bgem/],
+  // the luxury goods chains' manufacture: a metalworker, a luxury goods quarter or a silk house makes it here
+  [['luxury manufactured goods'], /\bmetalwork|\bjewel|\bluxury goods|\bsilk|\bweav|\btailor/],
+  // leather needs a tannery or a leatherworker (a hamlet's grazing alone tans nothing, rr2s-hamlet-calm-rand-1)
+  [['leather goods', 'boots and shoes', 'tanned leather', 'leather'], /\btann|\bleather|\bcobbler|\bcordwain|\bsaddler|\bfurrier/],
+  // cloth needs a weaver, a fuller, a dyer or a tailor (a Shepherd spins no cloth, rww-village-famine-1)
+  [['processed textiles', 'finished clothing', 'dyed cloth', 'fine wool cloth', 'fine textiles', 'fulled cloth', 'cloth'], /\bweav|\btextile|\bfuller|\bdyer|\btailor|\bcloth|\bdraper|\bsilk/],
+  // flour needs a mill (a sawmill is none) or a baker; bread a baker
+  [['milled flour', 'flour and meal', 'flour'], /(?:^|[^a-z])mill(?:s|er|ers)?\b|\bbaker/],
+  [['baked goods'], /(?:^|[^a-z])mill(?:s|er|ers)?\b|\bbaker/],
+]);
+/** @type {ReadonlyMap<string, RegExp>} */
+const MADE_GOOD_HOUSES = new Map(MADE_GOOD_ROWS.flatMap(([goods, re]) => goods.map((g) => /** @type {[string, RegExp]} */ ([g, re]))));
+
+/** The grounds a land's trade good comes from (`RESOURCE_DATA[k].tradeGoods`), lower case. */
+const TRADE_GOOD_GROUNDS = (() => {
+  /** @type {Map<string, string[]>} */ const m = new Map();
+  for (const [key, row] of Object.entries(RESOURCE_DATA)) {
+    for (const g of /** @type {{ tradeGoods?: ReadonlyArray<string> }} */ (row).tradeGoods || []) m.set(fold(g), [...(m.get(fold(g)) || []), key]);
+  }
+  return m;
+})();
+
+/**
+ * THE EXPORTS AS PRINTED (W2-C-LEAVES-4 item 2): the record's exports through the trade lists' reader, each borne out
+ * by `pillBorneOut`. The record's list is untouched.
+ * @param {Parameters<typeof localProductionAsPrinted>[0] & { economicState?: { primaryExports?: ReadonlyArray<unknown> | null } | null }} settlement
+ * @returns {string[]}
+ */
+export function exportsAsPrinted(settlement) {
+  const eco = settlement?.economicState || {};
+  const seen = new Set();
+  return displayTradeList(eco.primaryExports, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'exports' })
+    .map((raw) => pillAsPrinted(raw, 'exports', settlement))
+    .filter((x) => x !== null && !seen.has(fold(tradeMarkOf(x).label)) && !!seen.add(fold(tradeMarkOf(x).label)))
+    .map(String);
+}
+import { chainStateShown, failedGroundsOf } from './chainStateShown.js';
+import { chainCarrierOf } from '../facts/chainCarrier.js';

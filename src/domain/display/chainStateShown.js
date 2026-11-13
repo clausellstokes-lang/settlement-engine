@@ -101,6 +101,19 @@ function runsOnlyThroughAccess(chain, record) {
 }
 
 /**
+ * THE GROUNDS A FAMINE IN FORCE FAILED (W2-C-LEAVES-4 item 2): the ground the food record's failed source is grown,
+ * grazed, fished or hunted on (`FOOD_SOURCE_GROUND`), the reading the famine branch above makes; none outside a famine.
+ * @param {unknown} record the settlement record
+ * @returns {ReadonlyArray<string>}
+ */
+export function failedGroundsOf(record) {
+  if (!record || typeof record !== 'object' || !crisisOf(/** @type {object} */ (record)).has('famine')) return [];
+  const failed = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { failedSource?: unknown } | null } | null } | null }} */ (record)
+    .economicState?.foodSecurity?.foodRecord?.failedSource;
+  return (typeof failed === 'string' && FOOD_SOURCE_GROUND[/** @type {keyof typeof FOOD_SOURCE_GROUND} */ (failed)]) || [];
+}
+
+/**
  * WHETHER TRADE COMES IN AT ALL (W2-C-LEAVES-3, #169): a siege in force stops field work and trade (the siege's own
  * record line, `data/stressTypes.js :: STRESS_TYPE_MAP.under_siege.viabilityNote`, printed on the page). The one home
  * the chain cards and the Economics tab's Imports list read.
