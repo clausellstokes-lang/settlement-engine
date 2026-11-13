@@ -1,0 +1,155 @@
+diff --git a/src/data/dossierRelations.generated.js b/src/data/dossierRelations.generated.js
+index e5e5dd27c..fb260dd58 100644
+--- a/src/data/dossierRelations.generated.js
++++ b/src/data/dossierRelations.generated.js
+@@ -3,11 +3,11 @@
+ // with a DIRECTION. Projected from the engine's OWN tables through the wiring census
+ // (ARCH §5.2 sources (a) condition archetype -> system variable, (b) CAUSE_SIGNAL, (c) the
+ // generator's recorded derivations); source (d), the sitting's ratified axis pairs, is empty.
+-// MEASURED: 165 pairs over
+-// 165 rows, every one running a->b.
++// MEASURED: 169 pairs over
++// 169 rows, every one running a->b.
+ //
+ // ⛔ THE JOIN IS EMPTY, AND THAT IS THE MEASUREMENT CAR 0 LANDED (F1, ARCH §16 item 9).
+-// With the ratified aliases applied, 0 of 165
++// With the ratified aliases applied, 0 of 169
+ // rows have BOTH endpoints resolving to a field a desk reads. The rows are keyed on PRODUCER
+ // tokens (`condition:plague`, `system:food_security`) and the desks read settlement paths, so
+ // no `consequence` and no `tension` joint is authorable anywhere on the shipped corpus and
+@@ -1129,42 +1129,70 @@ export const DOSSIER_RELATIONS = /* #__PURE__ */ Object.freeze({
+       "direction": "a→b"
+     }
+   ],
+-  "src/generators/defenseGenerator.js::econOutput|economicGates.military": [
++  "src/generators/defenseGenerator.js::fundedGate|economicGates.military": [
+     {
+       "relation": "consequence",
+       "source": "c",
+       "direction": "a→b"
+     }
+   ],
+-  "src/generators/defenseGenerator.js::econOutput|economicGates.monster": [
++  "src/generators/defenseGenerator.js::upkeep|economicGates.military": [
+     {
+       "relation": "consequence",
+       "source": "c",
+       "direction": "a→b"
+     }
+   ],
+-  "src/generators/defenseGenerator.js::econOutput|economicGates.internal": [
++  "src/generators/defenseGenerator.js::fundedGate|economicGates.monster": [
+     {
+       "relation": "consequence",
+       "source": "c",
+       "direction": "a→b"
+     }
+   ],
+-  "src/generators/defenseGenerator.js::econOutput|economicGates.economic": [
++  "src/generators/defenseGenerator.js::upkeep|economicGates.monster": [
+     {
+       "relation": "consequence",
+       "source": "c",
+       "direction": "a→b"
+     }
+   ],
+-  "src/generators/defenseGenerator.js::instFlags|economicGates.disaster": [
++  "src/generators/defenseGenerator.js::fundedGate|economicGates.internal": [
+     {
+       "relation": "consequence",
+       "source": "c",
+       "direction": "a→b"
+     }
+   ],
+-  "src/generators/defenseGenerator.js::economyOutput|economicGates.disaster": [
++  "src/generators/defenseGenerator.js::upkeep|economicGates.internal": [
++    {
++      "relation": "consequence",
++      "source": "c",
++      "direction": "a→b"
++    }
++  ],
++  "src/generators/defenseGenerator.js::fundedGate|economicGates.economic": [
++    {
++      "relation": "consequence",
++      "source": "c",
++      "direction": "a→b"
++    }
++  ],
++  "src/generators/defenseGenerator.js::upkeep|economicGates.economic": [
++    {
++      "relation": "consequence",
++      "source": "c",
++      "direction": "a→b"
++    }
++  ],
++  "src/generators/defenseGenerator.js::fundedGate|economicGates.disaster": [
++    {
++      "relation": "consequence",
++      "source": "c",
++      "direction": "a→b"
++    }
++  ],
++  "src/generators/defenseGenerator.js::upkeep|economicGates.disaster": [
+     {
+       "relation": "consequence",
+       "source": "c",
+diff --git a/tests/data/dossierStateProseProjection.contract.test.js b/tests/data/dossierStateProseProjection.contract.test.js
+index e9f981ee2..0e05fbedd 100644
+--- a/tests/data/dossierStateProseProjection.contract.test.js
++++ b/tests/data/dossierStateProseProjection.contract.test.js
+@@ -1561,10 +1561,10 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
+     expect(META_ROWS.length - keys.length).toBe(unfired);
+   });
+ 
+-  it('⛔ RELATIONS: 165 rows with a direction, three ratified aliases, and a join of ZERO', () => {
+-    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(165);
++  it('⛔ RELATIONS: 169 rows with a direction, three ratified aliases, and a join of ZERO', () => {
++    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(169);
+     const rows = Object.values(DOSSIER_RELATIONS).flat();
+-    expect(rows.length).toBe(165);
++    expect(rows.length).toBe(169);
+     const directions = new Set(rows.map((r) => r.direction));
+     expect([...directions]).toEqual(['a→b']);
+     expect([...new Set(rows.map((r) => r.relation))]).toEqual(['consequence']);
+@@ -1589,10 +1589,12 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
+     const joined = Object.keys(DOSSIER_RELATIONS)
+       .filter((key) => key.split('|').every((endpoint) => resolves(endpoint)));
+     expect(joined).toEqual([]);
+-    // Non-vacuity: the resolver CAN resolve — ten rows join on exactly one endpoint.
++    // Non-vacuity: the resolver CAN resolve — eleven rows join on exactly one endpoint. (Ten
++    // until COHERENCE-UPKEEP 07ebe8bdc: the one row on the ratified alias `economicGates.military`,
++    // `econOutput|…`, became two, `fundedGate|…` and `upkeep|…`, the gate's new inputs.)
+     const half = Object.keys(DOSSIER_RELATIONS)
+       .filter((key) => key.split('|').some((endpoint) => resolves(endpoint))).length;
+-    expect(half).toBe(10);
++    expect(half).toBe(11);
+     expect(deskRoots.size).toBeGreaterThanOrEqual(60);
+   });
+ 
+@@ -2018,7 +2020,7 @@ describe('SEAM car 4 — the 68 STATE-KEY lines, transcribed against the branch
+ // ── SEAM CAR 4d — THE SEAT LICENCE, RESOLVED AT PROJECTION ───────────────────────────────
+ // The composer used to ask the relation table itself, keyed on `spineMeta.reads[0]` — a field
+ // `PoolMeta` has never carried, because the authoring half lives in the wiring census and
+-// never ships (ARCH §16). The licence is now resolved HERE, where the census, the 165 relation
++// never ships (ARCH §16). The licence is now resolved HERE, where the census, the 169 relation
+ // rows and the three ratified aliases are all visible, and frozen onto the pool as a `seat`.
+ 
+ /** The alias lookup the resolver joins through, read off the committed leaf. */
+@@ -2220,14 +2222,14 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
+   });
+ 
+   it('⛔ ON THE COMMITTED FILES THE JOIN IS STILL ZERO — car 0 F1, re-derived here', () => {
+-    // Every one of the 165 rows, asked in READ space through the three ratified aliases: none
++    // Every one of the 169 rows, asked in READ space through the three ratified aliases: none
+     // has BOTH endpoints landing on a path a desk reads. This is the measurement that makes
+     // "no clause can seat today" a number rather than a sentence in a header.
+     const readPaths = [...new Set(CENSUS.rows.flatMap((r) => r.reads || []))];
+     const lands = (endpoint) => readPaths.some((p) => endpointReads(endpoint, p, ALIAS_OF));
+     const joining = CENSUS.relations.rows.filter((r) => lands(r.a) && lands(r.b));
+     const oneSide = CENSUS.relations.rows.filter((r) => lands(r.a) !== lands(r.b));
+-    expect(CENSUS.relations.rows).toHaveLength(165);
++    expect(CENSUS.relations.rows).toHaveLength(169);
+     expect(joining, 'no row joins on both endpoints').toEqual([]);
+     // THE NON-VACUITY CONTROL: the walk is not simply blind — rows DO land on one side.
+     expect(oneSide.length, 'rows landing on exactly one endpoint').toBeGreaterThan(0);

@@ -1,30 +1,34 @@
 {
- "_doc": "COHERENCE-UPKEEP, A DRAFT SHIFT RECORD (the charter's §0.7; the form of the chair's ruling 'THE HERALD GOLDEN AT POINT 36'). NOT SIGNED: `seat` and the merge commit are the merge seat's, which signs at the UPKEEP merge point after learning `predictedRows` in a scratch copy that is never committed; the lane runs no golden door. Every figure here is MEASURED base against tip: base = AGREE's reviewed tip 8866a0ddd merged with the integration line 3575cf061 WITHOUT the lane (a scratch tree whose src differs from the tip on exactly the lane's files); tip = the lane's tip named in `cause`. The base-against-tip field diff is docs/chair/2026-11-12/UPKEEP-FIELD-DIFF.json (golden 525, the 660, the fence's 360). Re-take after the merge of AGREE's final tip (the chair names it).",
+ "_doc": "COHERENCE-UPKEEP, A DRAFT SHIFT RECORD (the charter's §0.7; the form of the chair's ruling 'THE HERALD GOLDEN AT POINT 36'). NOT SIGNED: `seat` and the merge commit are the merge seat's, which signs at the UPKEEP merge point after learning `predictedRows` in a scratch copy that is never committed; the lane runs no golden door. RE-TAKEN 2026-11-13 by the fourth seat (COHERENCE-UPKEEP-4) after the merge of AGREE's final tip faa20bc6c (5e10fd07f). Every figure is MEASURED base against tip: base = AGREE's final tip faa20bc6c itself (the agreement lane without this lane); tip = 6f95af557 (the lane's src is final there; later commits are docs and the edge bundles). The field diff is docs/chair/2026-11-12/UPKEEP-FIELD-DIFF.json (golden 525, the 660, the fence's 360). The harness that births the corpora and takes every figure is in docs/chair/2026-11-13/probes/UPKEEP-4/ (dump.mjs, measures.mjs, fielddiff.py).",
  "ownerWords": "prosperity should also scale the rest inlcuding healing, magic, etc. everything is based on what can be stockpiled, refilled, rebuilt, etc. · if a village or town doesn't have an active guard but can hire mercenaries or adventurers if they have the cash, then that means something rather than not having a guard at all",
  "ownerDate": "2026-11-11",
- "cause": "COHERENCE-UPKEEP: what a place can keep up has ONE home, the prosperity label (src/domain/facts/keep.js :: keepOf, KEEP_TUNING, KEEP_SCALE_TUNING), and hired force, the five defence gates, services, magic and stores read it. Lane lane/coherence-upkeep-2026-11-12, base 65ce74ce6, tip a0e404d95 + this record. Component causes: the guard d7d7f7787; hired force 0b5dc10b5 (ruling 2); the five gates 07ebe8bdc (ruling 3, B) and the ladder's bottom rung 4fb1dce75 (Struggling funded 0.3); services c19e96e23 (ruling 4 under (A)); magic e2ebb6447 (ruling 5); stores 05ec9b601 (ruling 6); the page 11662262e (ruling 7) and its crisis lines b4cba2ece (the chair's ruling of 2026-11-12, point 1). [MERGE SEAT: the merge commit]",
+ "cause": "COHERENCE-UPKEEP: what a place can keep up has ONE home, the prosperity label (src/domain/facts/keep.js :: keepOf, KEEP_TUNING, KEEP_SCALE_TUNING), and hired force, the five defence gates, services, magic and stores read it. Lane lane/coherence-upkeep-2026-11-12, base 65ce74ce6, tip 6f95af557 + this record (src final), after the merge of AGREE's final tip faa20bc6c (5e10fd07f). Component causes: the guard d7d7f7787; hired force 0b5dc10b5 (ruling 2); the five gates 07ebe8bdc (ruling 3, B) and the ladder's bottom rung 4fb1dce75 (Struggling funded 0.3); services c19e96e23 (ruling 4 under (A)); magic e2ebb6447 (ruling 5); stores 05ec9b601 (ruling 6); the page 11662262e (ruling 7) and its crisis lines b4cba2ece (the chair's ruling of 2026-11-12, point 1). [MERGE SEAT: the merge commit] The fourth seat: P6, the four lines that name the garrison or the hired company declare `garrison` / `mercenary` (00fc0d9ce, under the complement rule narrowed in fd10c7dc6); P1, the gate fixtures re-keyed to the label (fbdae5389, tests only).",
  "seat": null,
- "crisisLinesKeyedOnTheCrisisAlone": "The crisis lines are keyed on the crisis alone (`crisis: famine, under_siege`), because a famine or a siege caps the label at Struggling; a cap the food record puts on the label with no famine and no siege is the town's standing, not a crisis (the chair, 2026-11-12), so those places keep the purse line, which says a true thing there. The 660: 0 such births print a purse line; the golden 525: 19, by key below (Import-Dependent, capped at Poor). Under famine or siege on the 660: 31 births print a crisis line, 0 a purse line.",
+ "crisisLinesKeyedOnTheCrisisAlone": "The crisis lines are keyed on the crisis alone (`crisis: famine, under_siege`), because a famine or a siege caps the label at Struggling; a cap the food record puts on the label with no famine and no siege is the town's standing, not a crisis (the chair, 2026-11-12), so those places keep the purse line, which says a true thing there. The 660: 0 such births print a purse line; the golden 525: 23, by key below (Import-Dependent, capped at Poor; 19 at the third seat: AGREE's final base re-deals five forest metropolises in and one out, the same rule). Under famine or siege on the 660: 31 births print a crisis line, 0 a purse line.",
  "foodCapPurseLineGoldenKeys": [
-  "city|germanic|forest|isolated|civilized|golden-master-v3",
-  "city|latin|forest|isolated|civilized|golden-master-v3",
-  "city|celtic|forest|isolated|civilized|golden-master-v3",
   "city|arabic|forest|isolated|civilized|golden-master-v3",
+  "city|celtic|forest|isolated|civilized|golden-master-v3",
+  "city|east_asian|forest|isolated|civilized|golden-master-v3",
+  "city|germanic|forest|isolated|civilized|golden-master-v3",
+  "city|greek|forest|isolated|civilized|golden-master-v3",
+  "city|latin|forest|isolated|civilized|golden-master-v3",
+  "city|mediterranean|forest|isolated|civilized|golden-master-v3",
+  "city|mesoamerican|forest|isolated|civilized|golden-master-v3",
   "city|norse|forest|isolated|civilized|golden-master-v3",
   "city|slavic|forest|isolated|civilized|golden-master-v3",
-  "city|east_asian|forest|isolated|civilized|golden-master-v3",
-  "city|mesoamerican|forest|isolated|civilized|golden-master-v3",
   "city|south_asian|forest|isolated|civilized|golden-master-v3",
   "city|steppe|forest|isolated|civilized|golden-master-v3",
-  "city|greek|forest|isolated|civilized|golden-master-v3",
-  "city|mediterranean|forest|isolated|civilized|golden-master-v3",
-  "metropolis|germanic|forest|isolated|civilized|golden-master-v3",
   "metropolis|arabic|forest|isolated|civilized|golden-master-v3",
-  "metropolis|norse|forest|isolated|civilized|golden-master-v3",
+  "metropolis|celtic|forest|isolated|civilized|golden-master-v3",
   "metropolis|east_asian|forest|isolated|civilized|golden-master-v3",
+  "metropolis|germanic|forest|isolated|civilized|golden-master-v3",
+  "metropolis|greek|forest|isolated|civilized|golden-master-v3",
+  "metropolis|latin|forest|isolated|civilized|golden-master-v3",
+  "metropolis|mediterranean|forest|isolated|civilized|golden-master-v3",
   "metropolis|mesoamerican|forest|isolated|civilized|golden-master-v3",
-  "metropolis|south_asian|forest|isolated|civilized|golden-master-v3",
-  "metropolis|greek|forest|isolated|civilized|golden-master-v3"
+  "metropolis|norse|forest|isolated|civilized|golden-master-v3",
+  "metropolis|slavic|forest|isolated|civilized|golden-master-v3",
+  "metropolis|steppe|forest|isolated|civilized|golden-master-v3"
  ],
  "surfaces": [
   {
@@ -33,8 +37,8 @@
    "measured": "MOVED",
    "predictedRows": null,
    "proofForm": "settlement-hash",
-   "rows": "496 of 525 rows move base -> tip (the suite reads 501 red at the base, AGREE's unsigned rows, and 525 at the tip)",
-   "why": "the field diff over the 525 (UPKEEP-FIELD-DIFF.json `golden`): 166 leaf paths, every one in a family below (declared-family check: 0 undeclared)"
+   "rows": "507 of 525 rows move base -> tip (base: AGREE faa20bc6c, whose own suite reads 525 red against the banked manifest)",
+   "why": "the field diff over the 525 (UPKEEP-FIELD-DIFF.json `golden`): 145 leaf paths, every one in a family below (two not in the third seat's list, each declared: npcs[].allegiance by index order only, prominentRelationship.npc2 under the prominent tie)"
   },
   {
    "surface": "espionage-dormancy-fence",
@@ -42,8 +46,8 @@
    "measured": "MOVED",
    "predictedRows": null,
    "proofForm": "in-file corpus constant",
-   "rows": "346 of the fence's 360 driven settlements move base -> tip (its digest ca07dcdc -> 3a1d7986 against the banked 0fa1f3ca)",
-   "why": "the fence's corpus is the plain generator over tier x route x 15 seeds; its field diff (UPKEEP-FIELD-DIFF.json `fence`): 214 leaf paths, every one in a family below (declared-family check: 0 undeclared)"
+   "rows": "346 of the fence's 360 driven settlements move base -> tip (its driven hash 366d5c20 at the base -> 7b5e14b0 at the tip, against the banked 38a52b05)",
+   "why": "the fence's corpus is the plain generator over tier x route x 15 seeds; its field diff (UPKEEP-FIELD-DIFF.json `fence`): 198 leaf paths, every one in a family below (npcs[].allegiance by index order only: by person id 0 moves)"
   },
   {
    "surface": "dossier-prose-manifest",
@@ -51,7 +55,7 @@
    "measured": "MOVED",
    "predictedRows": null,
    "proofForm": "derived-artefact",
-   "rows": "684 of 1,050 rows (342 dm, 342 player) move base -> tip (driftRun over the golden 525 at both audiences; the suite reads 954 moved at the base, 1024 at the tip)",
+   "rows": "the suite's DRIFT arm reads 990 rows moved at the base and 1024 at the tip; the four-seed arm's total cells 73491 at the base -> 73201 at the tip (gm-seed-a/-b/-c cells unmoved by the lane: 410, 398, 390); the mixed-pool arm 177 at both (unmoved by the lane)",
    "why": "the manifest composes the golden 525's records; its moved rows are towns whose records move only in the declared families (the golden field diff); the page lines, the stores note, the readiness label, the services, the legitimacy label and the people print on the dossier"
   },
   {
@@ -60,7 +64,7 @@
    "measured": "MOVED",
    "predictedRows": null,
    "proofForm": "derived-artefact",
-   "rows": "rr-fresh-full|1: items 444 -> 447 (52 added, 49 removed, 80 changed by id; contentSha 37bd444b -> ea12a495)",
+   "rows": "contentSha 02d3fa8e at the base -> 919f46cb at the tip (banked 0fa1f3ca)",
    "why": "the desk is one year of the world pulse over composed towns; the pulse reads the moved defence scores, legitimacy, faction power and stores; no desk code changed"
   },
   {
@@ -69,7 +73,7 @@
    "measured": "MOVED",
    "predictedRows": null,
    "proofForm": "derived-artefact",
-   "rows": "one field: defense.scoreAvg 40 at the base -> 41 at the tip (the suite's banked value is AGREE's to move first)",
+   "rows": "one field the lane moves: defense.scoreAvg 41 at the base -> 42 at the tip (banked 43); headcounts.institutions 43 and npcs 35 at both (AGREE's)",
    "why": "the defence scores (rulings 2, 3, 6) are a declared family"
   },
   {
@@ -78,63 +82,68 @@
    "measured": "UNMOVED",
    "predictedRows": 0,
    "proofForm": "witness",
-   "rows": "0: tests/simulation/presetLightingWitness.test.js green at the base and at the tip (run 2026-11-12, base and tip in the same run)",
+   "rows": "0: tests/simulation/presetLightingWitness.test.js green at the base and at the tip (run 2026-11-13, both trees)",
    "why": "no preset bit reads a family this lane moves"
   }
  ],
  "families": {
   "readiness (rulings 2, 3; ladder 4fb1dce75)": {
    "labelsMoved": {
-    "golden": 70,
-    "the660": 121,
-    "the360": 78,
+    "golden": 63,
+    "the660": 131,
+    "the360": 84,
     "thorpsHamlets": 9,
-    "forced": 34
+    "forced": 38
    },
-   "oneBandLaw": "0 places more than one band from base, on all 660 and the golden 525",
+   "oneBandLaw": "0 places more than one band from base, on all 660 and the golden 525 (base AGREE faa20bc6c)",
    "byStressAndDistance": {
-    "360|random|-1": 22,
-    "360|random|+1": 56,
-    "forced|famine|-1": 15,
-    "forced|under_siege|-1": 6,
-    "forced|under_siege|+1": 2,
+    "360|random|-1": 25,
+    "360|random|+1": 59,
+    "small|random|+1": 2,
+    "small|random|-1": 7,
+    "forced|famine|-1": 18,
+    "forced|famine|+1": 1,
     "forced|wartime|-1": 6,
     "forced|wartime|+1": 5,
-    "small|random|-1": 7,
-    "small|random|+1": 2
+    "forced|under_siege|-1": 5,
+    "forced|under_siege|+1": 3
    },
-   "the360Share": "Well-Defended+Fortress 36.7% -> 41.9% (+5.3); declared, not a stop, under the chair's restated line",
-   "entriesExits": "entries into Well-Defended/Fortress from below on the 360: 23 at the old tip 8a5899204 and 23 at the tip (the line: 25); exits 6 and 4. The share past five points comes from two of the lane's own falls that vanished under AGREE's cures: agree-town-29 and agree-city-26 (base Well-Defended, old tip Defensible, tip Well-Defended).",
-   "restatedLine": "the one-band law on all 660, hard; the lane's entries into the top two bands on the 360 no more than the old tip's plus two; the share reported beside it, entries and exits apart (the chair, 2026-11-12)."
+   "the360Share": "Well-Defended+Fortress 37.8% -> 43.1% (+5.3); declared, not a stop, under the chair's restated line",
+   "entriesExits": "entries into Well-Defended/Fortress from below on the 360: 24 at the tip against AGREE's final tip (the line: 25; 23 at the third seat against the older base); exits 5. Entries: agree-town-4 Defensible -> Well-Defended (Comfortable); agree-town-33 Defensible -> Well-Defended (Moderate); agree-town-34 Defensible -> Well-Defended (Prosperous); agree-town-40 Defensible -> Well-Defended (Comfortable); agree-town-54 Defensible -> Well-Defended (Prosperous); agree-town-142 Defensible -> Well-Defended (Comfortable); agree-city-1 Defensible -> Well-Defended (Prosperous); agree-city-5 Defensible -> Well-Defended (Comfortable); agree-city-8 Defensible -> Well-Defended (Prosperous); agree-city-32 Defensible -> Well-Defended (Comfortable); agree-city-33 Defensible -> Well-Defended (Prosperous); agree-city-38 Defensible -> Well-Defended (Comfortable); agree-city-39 Defensible -> Well-Defended (Comfortable); agree-city-45 Defensible -> Well-Defended (Comfortable); agree-city-67 Defensible -> Well-Defended (Comfortable); agree-city-82 Defensible -> Well-Defended (Prosperous); agree-city-88 Defensible -> Well-Defended (Moderate); agree-city-90 Defensible -> Well-Defended (Moderate); agree-city-95 Defensible -> Well-Defended (Moderate); agree-city-97 Defensible -> Well-Defended (Comfortable); agree-metropolis-7 Defensible -> Well-Defended (Moderate); agree-metropolis-18 Defensible -> Well-Defended (Comfortable); agree-metropolis-23 Defensible -> Well-Defended (Prosperous); agree-metropolis-39 Defensible -> Well-Defended (Comfortable). Exits: agree-town-22 Well-Defended -> Defensible (Poor); agree-town-44 Well-Defended -> Defensible (Poor); agree-town-98 Well-Defended -> Defensible (Moderate); agree-town-143 Well-Defended -> Defensible (Poor); agree-city-40 Well-Defended -> Defensible (Poor)",
+   "restatedLine": "the one-band law on all 660, hard; the lane's entries into the top two bands on the 360 no more than the old tip's plus two; the share reported beside it, entries and exits apart (the chair, 2026-11-12).",
+   "byStressAndDistanceGolden": {
+    "golden|golden|-1": 61,
+    "golden|golden|+1": 2
+   }
   },
   "stores (ruling 6)": {
    "storageMonthsFall": {
-    "golden": 317,
-    "the660": 478
+    "golden": 328,
+    "the660": 477
    },
    "rise": 0,
    "noteCrossings660": {
     "total": 57,
     "towardMore": 0,
     "byDirection": {
-     "strategic->buffer": 19,
+     "seasonal->minimal": 35,
      "buffer->seasonal": 3,
-     "seasonal->minimal": 35
+     "strategic->buffer": 19
     },
     "byCohortStress": {
-     "forced|famine": 9,
+     "360|random": 21,
      "small|random": 3,
-     "forced|under_siege": 19,
+     "forced|famine": 9,
      "forced|wartime": 5,
-     "360|random": 21
+     "forced|under_siege": 19
     },
     "byTier": {
-     "town": 7,
      "village": 26,
-     "metropolis": 1,
-     "hamlet": 4,
+     "town": 7,
+     "city": 18,
      "thorp": 1,
-     "city": 18
+     "hamlet": 4,
+     "metropolis": 1
     }
    },
    "noteCrossingsGolden": {
@@ -153,68 +162,822 @@
    },
    "storesHeld": {
     "golden": 0,
-    "the660": 4
+    "the660": 4,
+    "direction": "true -> false in every one"
    },
-   "foodBandAndProsperity": "0 moves on either corpus"
+   "foodBandAndProsperity": "0 moves on either corpus (and the safety label 0)",
+   "famineBirths660": [
+    [
+     "agree-village-8",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-village-39",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-town-66",
+     3.1,
+     1.9,
+     "seasonal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-town-99",
+     4,
+     2.8,
+     "buffer",
+     "seasonal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-city-58",
+     7,
+     5.4,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-metropolis-5",
+     11.8,
+     9.1,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-thorp-2",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-thorp-14",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-thorp-31",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-thorp-39",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-thorp-40",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-hamlet-9",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-hamlet-19",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-hamlet-29",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-hamlet-36",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-0",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-1",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-2",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-3",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-4",
+     1.2,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-5",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-6",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-7",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-8",
+     1.3,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-thorp-9",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-0",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-1",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-2",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-3",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-4",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-5",
+     1.3,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-6",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-7",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-8",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-hamlet-9",
+     1.1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-0",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-1",
+     2.1,
+     1.7,
+     "seasonal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-2",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-3",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-4",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-5",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-6",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-7",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-8",
+     1,
+     1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-village-9",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-0",
+     3,
+     1.8,
+     "seasonal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-1",
+     3.2,
+     2,
+     "seasonal",
+     "seasonal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-2",
+     4.4,
+     3.2,
+     "buffer",
+     "seasonal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-3",
+     4.2,
+     3,
+     "buffer",
+     "seasonal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-4",
+     6.1,
+     4.9,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-5",
+     2.2,
+     1,
+     "seasonal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-6",
+     0.4,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-7",
+     2.7,
+     1.5,
+     "seasonal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-8",
+     1.9,
+     0.7,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-town-9",
+     0.5,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-0",
+     7.4,
+     5.8,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-1",
+     5.6,
+     4,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-2",
+     7.2,
+     5.6,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-3",
+     7.9,
+     6.3,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-4",
+     7.5,
+     5.9,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-5",
+     6.7,
+     5.1,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-6",
+     8.3,
+     6.7,
+     "strategic",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-7",
+     7.2,
+     5.6,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-8",
+     9,
+     7.4,
+     "strategic",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-city-9",
+     7.7,
+     6.1,
+     "buffer",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-0",
+     13,
+     10.2,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-1",
+     10.5,
+     7.8,
+     "strategic",
+     "buffer",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-2",
+     13,
+     10.2,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-3",
+     12,
+     9.2,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-4",
+     15.1,
+     12.3,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-5",
+     13.7,
+     10.9,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-6",
+     12.3,
+     9.5,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-7",
+     13,
+     10.3,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-8",
+     14.2,
+     11.5,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-famine-metropolis-9",
+     13.8,
+     11.1,
+     "strategic",
+     "strategic",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-wartime-thorp-8",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ],
+    [
+     "agree-force-wartime-hamlet-5",
+     0.1,
+     0.1,
+     "minimal",
+     "minimal",
+     "Deficit — Active Famine",
+     "Deficit — Active Famine"
+    ]
+   ]
   },
   "services (ruling 4 under (A))": {
    "rowsAdded": 0,
-   "rowsRemoved660": 978,
+   "rowsRemoved660": 981,
    "institutionsNewlyEmpty": 0,
    "birthsMoved": {
-    "golden": 94,
-    "the660": 190
+    "golden": 149,
+    "the660": 313
    },
    "healingByBand660": {
     "Struggling": [
-     1026,
-     918
+     1034,
+     927
     ],
     "Poor": [
-     471,
-     431
+     468,
+     428
     ],
     "Moderate": [
-     466,
-     435
+     472,
+     439
     ],
     "Comfortable": [
-     751,
-     734
+     747,
+     729
     ],
     "Prosperous": [
-     706,
-     706
+     709,
+     709
     ],
     "Wealthy": [
-     270,
-     270
+     274,
+     274
     ]
    },
    "criminalByBand660_noneRises": {
     "Struggling": [
-     370,
-     367
+     371,
+     368
     ],
     "Poor": [
-     159,
-     156
+     160,
+     157
     ],
     "Moderate": [
-     201,
-     199
+     197,
+     195
     ],
     "Comfortable": [
-     455,
-     454
+     451,
+     450
     ],
     "Prosperous": [
-     299,
-     299
+     304,
+     304
     ],
     "Wealthy": [
-     97,
-     97
+     99,
+     99
+    ]
+   },
+   "rowsRemovedGolden": 336,
+   "institutionsWithNoRows660": {
+    "base": 1218,
+    "tip": 1218,
+    "roster": 23548
+   },
+   "healingByBandGolden": {
+    "Struggling": [
+     156,
+     120
+    ],
+    "Poor": [
+     647,
+     574
+    ],
+    "Moderate": [
+     203,
+     190
+    ],
+    "Comfortable": [
+     197,
+     197
+    ],
+    "Prosperous": [
+     1614,
+     1614
+    ],
+    "Wealthy": [
+     0,
+     0
+    ]
+   },
+   "criminalByBandGolden_noneRises": {
+    "Struggling": [
+     0,
+     0
+    ],
+    "Poor": [
+     125,
+     125
+    ],
+    "Moderate": [
+     1,
+     1
+    ],
+    "Comfortable": [
+     28,
+     28
+    ],
+    "Prosperous": [
+     958,
+     958
+    ],
+    "Wealthy": [
+     0,
+     0
     ]
    }
   },
@@ -224,13 +987,19 @@
     "Poor|broad->common": 27,
     "Poor|common->moderate": 7,
     "Poor|limited->rare": 25,
-    "Poor|moderate->limited": 47,
+    "Poor|moderate->limited": 46,
     "Poor|pervasive->broad": 6,
     "Struggling|broad->common": 49,
     "Struggling|common->moderate": 17,
-    "Struggling|limited->rare": 46,
+    "Struggling|limited->rare": 47,
     "Struggling|moderate->limited": 81,
     "Struggling|pervasive->broad": 23
+   },
+   "bandsMovedGolden": 250,
+   "byProsperityAndStepGolden": {
+    "Poor|common->moderate": 11,
+    "Poor|moderate->limited": 179,
+    "Struggling|moderate->limited": 60
    }
   },
   "the page (ruling 7 and the crisis lines)": {
@@ -239,7 +1008,8 @@
     "the660": 139
    },
    "crisisLinesPrinted660": 31,
-   "purseLinesUnderCrisis660": 0
+   "purseLinesUnderCrisis660": 0,
+   "p6": "the four lines that name the garrison or the hired company declare `garrison` / `mercenary` (00fc0d9ce); no line moves (the guard-line figures equal the third seat's)"
   },
   "hired counterfactual (ruling 2)": {
    "hiredOnlyPlaces660": 9,
@@ -321,43 +1091,40 @@
   },
   "public legitimacy (chain b)": {
    "golden": {
-    "legitimacy_score_moves": 70,
-    "defence_term_moves": 70,
-    "multiplier_moves": 19,
+    "legitimacy_score_moves": 63,
+    "defence_term_moves": 63,
+    "multiplier_moves": 11,
     "label_moves": {
-     "Approved -> Endorsed": 12,
-     "Tolerated -> Contested": 7
+     "Tolerated -> Contested": 11
     },
     "flag_moves": {
-     "isEndorsed": 12,
-     "isTolerated": 7,
-     "isContested": 7
+     "isTolerated": 11,
+     "isContested": 11
     },
     "flag_dir": {
-     "isEndorsed:on": 12,
-     "isTolerated:off": 7,
-     "isContested:on": 7
+     "isTolerated:off": 11,
+     "isContested:on": 11
     }
    },
    "the660": {
-    "legitimacy_score_moves": 108,
-    "defence_term_moves": 119,
-    "multiplier_moves": 28,
+    "legitimacy_score_moves": 115,
+    "defence_term_moves": 129,
+    "multiplier_moves": 29,
     "label_moves": {
      "Approved -> Tolerated": 1,
      "Tolerated -> Contested": 2,
      "Tolerated -> Approved": 11,
-     "Approved -> Endorsed": 7,
-     "Contested -> Legitimacy Crisis": 5,
+     "Approved -> Endorsed": 9,
+     "Contested -> Legitimacy Crisis": 4,
      "Contested -> Tolerated": 2
     },
     "flag_moves": {
      "isApproved": 12,
      "isTolerated": 16,
-     "isContested": 9,
-     "isEndorsed": 7,
-     "isLegitimacyCrisis": 5,
-     "governanceFractured": 5
+     "isContested": 8,
+     "isEndorsed": 9,
+     "isLegitimacyCrisis": 4,
+     "governanceFractured": 4
     },
     "flag_dir": {
      "isApproved:off": 1,
@@ -365,30 +1132,60 @@
      "isTolerated:off": 13,
      "isContested:on": 2,
      "isApproved:on": 11,
-     "isEndorsed:on": 7,
-     "isContested:off": 7,
-     "isLegitimacyCrisis:on": 5,
-     "governanceFractured:on": 5
+     "isEndorsed:on": 9,
+     "isContested:off": 6,
+     "isLegitimacyCrisis:on": 4,
+     "governanceFractured:on": 4
     }
+   },
+   "fence": {
+    "legitimacy_score_moves": 59,
+    "multiplier_moves": 18
    }
   },
   "governance fractured (chain b)": {
    "golden": 0,
-   "the660": 5,
-   "eachWhereReadinessFell": true
+   "the660": 4,
+   "eachWhereReadinessFell": true,
+   "births": [
+    [
+     "agree-town-143",
+     56,
+     47
+    ],
+    [
+     "agree-city-40",
+     64,
+     46
+    ],
+    [
+     "agree-force-wartime-metropolis-4",
+     59,
+     52
+    ],
+    [
+     "agree-force-wartime-metropolis-7",
+     70,
+     52
+    ]
+   ]
   },
   "faction power, roster and relationships (chain b)": {
    "powerMoved": {
-    "golden": 19,
-    "the660": 28
+    "golden": 11,
+    "the660": 29,
+    "fence": 18
    },
    "rosterSetChanged": {
     "golden": 0,
-    "the660": 6,
+    "the660": 9,
     "births": [
+     "agree-city-6",
+     "agree-city-38",
      "agree-city-39",
      "agree-city-43",
      "agree-city-45",
+     "agree-city-87",
      "agree-metropolis-27",
      "agree-force-wartime-metropolis-4",
      "agree-force-wartime-metropolis-7"
@@ -396,78 +1193,94 @@
     "why": "the density law seats the ruling power first, then by descending power (densityRoll.js :: chooseSeats); the governing power is never trimmed"
    },
    "relationshipsMoved": {
-    "golden": 19,
-    "the660": 27
+    "golden": 11,
+    "the660": 16
    },
    "captureState660": {
+    "none -> equilibrium": 1,
     "equilibrium -> adversarial": 1,
-    "adversarial -> none": 1,
+    "adversarial -> none": 2,
     "adversarial -> equilibrium": 1
-   }
+   },
+   "captureMoves660": [
+    "agree-city-38: none -> equilibrium (readiness 45->56)",
+    "agree-city-82: equilibrium -> adversarial (readiness 48->60)",
+    "agree-city-87: adversarial -> none (readiness 61->78)",
+    "agree-metropolis-27: adversarial -> none (readiness 63->78)",
+    "agree-force-wartime-metropolis-7: adversarial -> equilibrium (readiness 70->52)"
+   ],
+   "factionsModifiers": "powerStructure.factions[].modifiers moves in agree-metropolis-7 by index order only (the same modifier on the same power)"
   },
   "the people (chain b, e)": {
    "npcSetChanged": 0,
    "personalityPicks": 0,
    "orderChanged": {
-    "golden": 19,
-    "the660": 19
+    "golden": 11,
+    "the660": 20
    },
-   "goals": "power-keyed by the people's own design, declared (the chair's ruling (A) on (e), 2026-11-12): goals move in 37 of the 1,185 births (19 golden, 18 the660), all births where a power moved; 842 cards, each on its own card's fork (`people-goals::<card id>`), no other card moved; of them 264 long goals moved with the same draw count (their candidates moved: goals.js :: fitOf reads the card's power rank, the POWER family reads the powers' relationships), and 87 long goals (15 births) moved ONLY because the short vantage consumed a different number of draws on the card's one stream (example: agree-town-143, npc_cooper, 7 -> 6 draws) — a finding in goals.js, not this lane's (see the hand-back, 'found, not mine')",
+   "goals": "power-keyed by the people's own design, declared (the chair's ruling (A) on (e), 2026-11-12): by person id, goals move for 572 cards in 19 births on the 660 and 85 cards in 11 births golden, every one a birth where a power moved (0 goal moves in a birth whose powers did not move), each on its own card's fork (`people-goals::<card id>`); the goals.js vantage-stream finding stands as found, not mine",
    "memberships": {
     "golden": 0,
-    "the660": 6,
-    "why": "only where the power roster changed (castPowers.js ranks each power's members on its own keyed fork; a power that leaves the roster takes its members' memberships)"
+    "the660": 9,
+    "cards660": 182,
+    "why": "only where the power roster changed (the 9 births of rosterSetChanged, exactly): castPowers.js ranks each power's members on its own keyed fork; a power that leaves the roster takes its members' memberships, one that enters gives them"
    },
-   "secret": "agree-town-143 (one card): the drawn line is the same; its {faction} slot is filled with the strongest power (npcGenerator.js, topFaction)",
+   "secret": "agree-town-143 (one card) on the 660 and two on the fence (SUBw4-fence1-city-isolated-004, -005): the drawn line is the same; its {faction} slot is filled with the strongest power (npcGenerator.js, topFaction)",
    "rule": "(e) AS RESTATED by the chair: THE LANE RE-DEALS NO PERSON. The set of people, each person's identity and personality, and who governs are unchanged on every birth (0 in 1,185). What a person wants and whom they are tied to are keyed on power by the people's own design; where the lane moves a power, those draws follow in that birth and in no other. THE STOP THAT STANDS: a person added, removed, renamed or given another personality, or a change of who governs, anywhere, is a stop with the town.",
-   "densityRival": "the density law's rival roll draws once at the tip and not at the base in agree-town-143, on its own fork (`density-law::seats::rival`)"
+   "densityRival": "the density law's rival roll draws once at the tip and not at the base in agree-town-143, on its own fork (`density-law::seats::rival`)",
+   "allegiance": "NEW AT THIS RE-TAKE, declared: by person id, a covert allegiance's `power` moves for 25 cards and its `handler` for 33, in the 5 roster-changed births agree-city-6, agree-city-39, agree-metropolis-27, agree-force-wartime-metropolis-4, -7; 0 allegiances gained or lost and 0 houses, vectors or vias moved. Both are draw-free functions of the power roster by design: the power, allegiance.js :: allegiancePowerFor (the house face's own criminal membership, else the first criminal power), the handler, allegiance.js :: assignHandlers (agents by standing to the power's second, third and other members). Golden and fence: index order only.",
+   "hallCapture": "agree-city-38 (THE CHAIR'S RULING ON THE FOURTH SEAT'S STOP, 2026-11-13: declared): the gates stand at the identity at Comfortable (0.84/0.88/0.86/0.78/0.82 -> 1) -> readiness 45 -> 56 (Defensible -> Well-Defended) -> legitimacy 58 -> 65 (Tolerated -> Approved; govMultiplier 1 -> 1.15) -> the council's power 28 -> 31 -> the roster swaps Religious Authorities (10) for Merchant Guilds (9) -> the merchant's person (npc_merchant_guilds_15_40) takes the Merchant Guilds' rank 1 and leaves the council's rank 2; castPowers.js re-ranks the council: rank 2 npc_multiple_courthouses, rank 3 npc_city_granaries, who carries a covert retainer to 'Multiple criminal factions' -> hallCapture.js :: hallCaptureOf's agent rung = equilibrium (agentScore 1) -> criminalCaptureState none -> equilibrium. No person re-dealt, shown by diff: the 42 cards' ids, names and personalities are unchanged, and the granaries' allegiance is the same object at the base and the tip; only memberships move, by design."
   },
   "relationship prose and ties (chain b)": {
    "birthsMoved": {
-    "golden": 19,
-    "the660": 19
+    "golden": 11,
+    "the660": 20,
+    "relationships660": 20
    },
    "why": "a tie's target is weighted over the roster with shared power x3 and its kind keys on the pair's power gap (people/ties.js); 158 cards' tie forks draw a different count where power moved; declared under the chair's ruling (A) on (e)"
   },
   "condition severity (chain b)": {
    "severity": {
-    "golden": 42,
+    "golden": 46,
     "the660": 42
    },
    "severityBand": {
-    "golden": 21,
-    "the660": 13
+    "golden": 25,
+    "the660": 12
    }
   }
  },
  "legitimacyChecks": {
-  "c_sign": "every legitimacy score that moves moves with its own town's readiness score: 0 exceptions on the golden (70 moves) and the 660 (108)",
-  "d_whoGoverns": "governing name, government, governing power and the person who leads: 0 changes on either corpus",
+  "c_sign": "every legitimacy score that moves moves with its own town's readiness score: 0 exceptions on the golden (63 moves) and the 660 (115)",
+  "d_whoGoverns": "governing name, government and governing power: 0 changes on either corpus (and the person who leads: 0 people re-dealt)",
   "d_dangerFlagWithoutFall": 0,
   "d_flagOver33": "none (largest: isTolerated 16 on the 660)",
   "d_stabilityLabel": 0,
-  "d_capture": "3 on the 660, by the capture order none < adversarial < equilibrium < corrupted < capture (factionDynamics.js :: computeCriminalCaptureState): agree-city-82 equilibrium -> adversarial (readiness 48 -> 60), agree-metropolis-27 adversarial -> none (63 -> 78), both away from danger; agree-force-wartime-metropolis-7 adversarial -> equilibrium (69 -> 51), toward danger where readiness fell",
-  "f_receipt": "text moves in 3 births on the 660 (agree-city-40, agree-city-43, agree-force-wartime-city-4: a conflict no longer cited as evidence of dramatic tension); 0 status changes on any of the 1,185"
+  "d_capture": "5 on the 660, 0 golden, by the capture order none < adversarial < equilibrium < corrupted < capture: agree-city-82 equilibrium -> adversarial (readiness 48 -> 60), agree-city-87 adversarial -> none (61 -> 78), agree-metropolis-27 adversarial -> none (63 -> 78), all away from danger; agree-force-wartime-metropolis-7 adversarial -> equilibrium (70 -> 52), toward danger where readiness fell; agree-city-38 none -> equilibrium (45 -> 56), TOWARD DANGER WHERE READINESS ROSE: the fourth seat's STOP, RULED BY THE CHAIR 2026-11-13 (declared; the trace is under the people, `hallCapture`)",
+  "f_receipt": "text moves in 4 births on the 660 (agree-city-38, agree-city-40, agree-city-43, agree-force-wartime-city-4) and 0 golden; 0 status changes on any of the 1,185",
+  "d_restatedByTheChair": "CONDITION (d) RESTATED BY THE CHAIR AT THE FOURTH SEAT'S STOP (2026-11-13), a ruling, not silence: a flag toward danger where readiness did not fall is accepted ONLY when it is traced, town by town, to a change of council membership that the lane's own declared chain causes, and in at most 3 of the 660. At this tip: 1 (agree-city-38). A fourth such town, or one that cannot be traced, is a STOP.",
+  "e_people": "by person id on the 660, the golden and the fence: 0 people added, removed or renamed, 0 personality changes, who governs 0"
  },
  "stringRoots_g": {
-  "simulationTrace": "a number quoted in a sentence (108 births on the 660, 70 golden: the cause reasons quote the moved scores); 4 births choose a different target where the power roster changed",
-  "conflicts": "a different sentence: the quarrels' parties, issue, stakes and hooks follow the power roster and power order (11 / 16)",
-  "prominentRelationship": "a different sentence: the most prominent tie follows the ties (3 / 14)",
-  "pressureSentence": "a different sentence: chosen from the ties (6 on the 660)",
-  "generationCoherenceReceipt": "evidence text only (3 on the 660); no status moves",
-  "stress/stressors": "a different sentence: the crisis cast's roles and stakes read the powers and the people (7 / 19)",
-  "activeConditions": "the severity number and its band (42; a different band word in 13 / 21)",
-  "economicViability": "a different sentence: a stores-driven hook (6 on the 660, e.g. agree-town-66 'The settlement is starving...')"
+  "simulationTrace": "a number quoted in a sentence (115 births on the 660, 63 golden: the cause reasons quote the moved scores); a different target where the power roster changed",
+  "conflicts": "a different sentence: the quarrels' parties, issue, stakes and hooks follow the power roster and power order (10 / 1)",
+  "prominentRelationship": "a different sentence: the most prominent tie follows the ties (6 / 9; golden `npc2`, the tie's other end)",
+  "pressureSentence": "a different sentence: chosen from the ties (8 on the 660)",
+  "generationCoherenceReceipt": "evidence only (4 on the 660: judgments[].evidence's length); no status moves",
+  "stress/stressors": "a different sentence: the crisis cast's roles and stakes read the powers and the people (5 / 11)",
+  "activeConditions": "the severity number and its band (42 / 46; a different band word in 12 / 25)",
+  "economicViability": "a different sentence: a stores-driven hook (6 on the 660)"
  },
- "readByOtherLanes": "castPowers.js reads the criminal power's points (criminalStrength: moved in 12 of the 660, 19 golden) and the power roster (6 of the 660); representatives.js reads factions[0] (the dominant power: moved in 4 of the 660, 0 golden) and the prosperity label (0 moves).",
+ "readByOtherLanes": "castPowers.js reads the criminal power's points (criminalStrength: moved in 14 of the 660, 11 golden) and the power roster (9 of the 660, 0 golden); representatives.js reads factions[0] (the dominant power by name: moved in 4 of the 660, 0 golden) and the prosperity label (0 moves).",
  "openStops": [],
  "namedRedsForTheMergeSeat": [
-  "tests/property/generatorGoldenMaster.test.js :: every config produces byte-identical output to the golden master (red at the base: AGREE's 501 rows; at the tip 525)",
-  "tests/property/espionageDormancyFence.test.js :: THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus",
-  "tests/property/dossierProseManifest.test.js :: THE DRIFT ARM and THE DRIFT CORPUS CARRIES FOUR SEEDS",
-  "tests/property/heraldKnowledgeDeskGolden.test.js :: THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE",
-  "tests/pdf/goldenViewModel.test.js :: canon values for the fixed seed are golden",
-  "tests/generators/generationForkCensus.test.js :: A1 (the golden control row; red at the base too)"
+  "tests/property/generatorGoldenMaster.test.js :: every config produces byte-identical output to the golden master (red at the base: 525 rows; 507 move base -> tip)",
+  "tests/property/espionageDormancyFence.test.js :: THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus (base 366d5c20, tip 7b5e14b0)",
+  "tests/property/dossierProseManifest.test.js :: THE DRIFT ARM, THE DRIFT CORPUS CARRIES FOUR SEEDS, THE MIXED-POOL AUDIENCE ARM (red at the base: AGREE's)",
+  "tests/property/heraldKnowledgeDeskGolden.test.js :: THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE (base 02d3fa8e, tip 919f46cb)",
+  "tests/pdf/goldenViewModel.test.js :: canon values for the fixed seed are golden (scoreAvg 41 -> 42)",
+  "tests/generators/generationForkCensus.test.js :: A1, A3e, A4 (red at the base, AGREE's: identical disagreements at faa20bc6c)",
+  "tests/lint/poolDominance.walker.test.js :: no ceiling sits loose (SAFETY_LINE_SIBLINGS) and every row is a drawn pool (NPC_STRUCTURE.magic__contested__dominant): the merge point"
  ],
  "aCeilingTheLanesOwnLinesMadeLoose": {
   "class": "a ceiling the lane's own lines made loose: lowered at the lane's merge point, on the merged tree, that one row, by the merge seat on the chair's ruling",
@@ -507,6 +1320,24 @@
   "siblingSetCheck": "census5bOffCensusDeclarations: a band atom is lawful where a rung of its own ladder admits it (944d2d28f), with the chair's planted controls (a486e24ec); red on the lane since 11662262e and named by no seat's statement until the whole-suite law found it"
  },
  "closedStops": [
-  "ruling (e), goals and ties: ACCEPTED AND DECLARED by the chair 2026-11-12 (A); (B), a sub-fork per vantage in goals.js, is not built here: found, not mine"
- ]
+  "ruling (e), goals and ties: ACCEPTED AND DECLARED by the chair 2026-11-12 (A); (B), a sub-fork per vantage in goals.js, is not built here: found, not mine",
+  "the fourth seat's STOP (2026-11-13), condition (d): agree-city-38's capture none -> equilibrium where readiness rose. RULED by the chair: DECLARED, with (d) restated (see legitimacyChecks.d_restatedByTheChair)"
+ ],
+ "seat4": {
+  "seat": "COHERENCE-UPKEEP-4",
+  "commits": {
+   "5e10fd07f": "merge AGREE faa20bc6c",
+   "00fc0d9ce": "P6: garrison/mercenary declared on the four lines (no line moves: keptGuardLine reads each off the defence home)",
+   "fbdae5389": "P1: the gate fixtures re-keyed to the label",
+   "6f95af557": "the lighting census re-taken through its door"
+  },
+  "whyTheFiguresMovedFromTheThirdSeat": "the base moved: AGREE's sixth and seventh seats re-dealt 963 holders' resources (the mountain pass refused off the mountains) and cured the healing reader, so the base births differ; the lane's own src moved only by P6, which moves no line (field diff of the page: 139 guard-line births on the 660 and 96 golden, the third seat's figures exactly)."
+ },
+ "parkedForTheMergeSeat": {
+  "P2": "famineStoresOneRounding.test.js (2): the soak1k famine granaries read 4 months (6 at base) and the control 9 (12). Cause: ruling 6 (stores at the label's share). Re-key to the kept months with the cause; the 'one rounding' claim is untouched.",
+  "P3": "captureBirthScale.test.js: criminal cities at equilibrium or worse read 369 at the third seat's tip, below the floor 372 (the legitimacy chain, declared; the move is away from danger). A floor is a composed-tree fact: re-measured on the merged tree by the merge seat; a reading under 360 there is a STOP.",
+  "P4": "mundaneRealmAcceptance.test.js: the recorded twin census, services 121/124 -> 116/119 (ruling 4). Re-record the header line and the MG-4 block with the cause.",
+  "P5": "PARKED BY THE FOURTH SEAT (it could not land as ruled): regenerating src/data/dossierRelations.generated.js (npm run gen:dossier-prose: 169 pairs, 0 joining rows) and restating 165 -> 169 at the four places greens dossierStateProseProjection, but the same file reds two more pins: proseComposed.walker.test.js:215 (the relation leaf's count 165, a fifth place, same cause) and the one-endpoint row count 10 -> 11 in the contract test (the military alias's one row became two, fundedGate|… and upkeep|…), AND the prose byte ratchet (proseCorpusBytes.test.js RAW: the leaf grows 28249 -> 28926 raw bytes, whose door appends a declared row moving the number up: a baseline banked upward, barred to the lane). The built patch is docs/chair/2026-11-13/probes/UPKEEP-4/P5-built.patch.",
+  "poolDominanceStaleRow": "ledger:NPC_STRUCTURE.magic__contested__dominant, a row AGREE banked through --bank-new (a62d984e1) when its re-deal first drew the pool; on the composed tree the corpus no longer draws it, so the walker's 'every row is a drawn pool' arm reds (stale). The only door that drops a stale row is --tighten (the chair's); named beside SAFETY_LINE_SIBLINGS for the merge point."
+ }
 }
