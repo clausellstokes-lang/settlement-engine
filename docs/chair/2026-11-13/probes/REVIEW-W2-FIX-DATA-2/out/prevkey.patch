@@ -1,0 +1,62 @@
+diff --git a/src/generators/historyGenerator.js b/src/generators/historyGenerator.js
+index 8e6e041fe..2e435ff17 100644
+--- a/src/generators/historyGenerator.js
++++ b/src/generators/historyGenerator.js
+@@ -189,14 +189,14 @@ const buildHistoryContext = (
+  */
+ const resolveTimelineHook = (drawnRow, eventTemplate, remaining, taken, printed, facts) => {
+   const domain = [drawnRow, ...remaining.filter((row) => !taken.has(row) && !printed.includes(lineText(row)))];
+-  const already = taken.has(drawnRow);
++  const already = taken.has(drawnRow); const noted = notedSoFar(); // W2-FIX-DATA-3 item 6: the notes made below are keyed by the row's own index in the template (noteByTemplateRow)
+   const r = drawDeclared(domain, {
+     draw: () => drawnRow, facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`,
+     surface: 'history', drawKind: 'R', key: `${getActiveRng()?.seed ?? ''}::${eventTemplate?.type ?? ''}::${lineText(drawnRow)}`, // R-AT (CENSUS-1i unit 5): the settlement's identity leads the key
+   });
+-  if (!already) return r.line;
+-  const others = domain.slice(1);
+-  return others.length ? drawDeclared(others, { draw: (p) => p[0], facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`, key: `${getActiveRng()?.seed ?? ''}::${eventTemplate?.type ?? ''}::taken`, surface: 'history', drawKind: 'R' }).line : null;
++  if (!already) return noteByTemplateRow(noted, domain, eventTemplate, r.line);
++  noteByTemplateRow(noted, domain, eventTemplate, null); const others = domain.slice(1); const notedOthers = notedSoFar();
++  return others.length ? noteByTemplateRow(notedOthers, others, eventTemplate, drawDeclared(others, { draw: (p) => p[0], facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`, key: `${getActiveRng()?.seed ?? ''}::${eventTemplate?.type ?? ''}::taken`, surface: 'history', drawKind: 'R' }).line) : null;
+ };
+ 
+ // ─── generateEventNarrative ───────────────────────────────────────────────────
+@@ -1105,3 +1105,38 @@ function apartFromOwnEvent(description, type, timeline, render) {
+   if (!own || own.description !== description) return description;
+   return historyDescVariantsOf(type).map(render).find((text) => text !== own.description) ?? description;
+ }
++// ─── W2-FIX-DATA-3 item 6 (2026-11-13; the chair's ruling on the carried red): A TIMELINE HOOK IS NOTED BY ITS OWN ROW ──
++// `drawDeclared` notes a line by its index in the domain it is handed (`drawDeclared.js :: lineIdOf`), and
++// `resolveTimelineHook`'s domain LEADS with the drawn row, so every timeline hook was noted as line 0: the repetition
++// guard read one line where the town printed several. The note this call made is re-keyed to the row's index in its
++// template, the id the tension's own hook list (drawKind A, `filterDeclared` over the whole list) already notes. Only the
++// ledger's note moves: the draw, its argmax key (which reads the domain's index) and the printed text do not.
++// At the end of the file on purpose: the prose wiring census cites this file's producer writes by line.
++import { activePresumptionLedger } from '../domain/facts/presumptionLedger.js';
++
++/** How many notes the open ledger holds (0 when none is open). @returns {number} */
++function notedSoFar() {
++  return activePresumptionLedger()?.length ?? 0;
++}
++
++/**
++ * Re-key the timeline-hook notes made since `from`: a note that names a row by its index in `list` (a row with no
++ * own id) is keyed by that row's index in the template instead. Returns `value` unchanged.
++ * @template T @param {number} from @param {ReadonlyArray<any>} list the domain the draw was handed
++ * @param {any} eventTemplate @param {T} value @returns {T}
++ */
++function noteByTemplateRow(from, list, eventTemplate, value) {
++  const ledger = activePresumptionLedger();
++  if (ledger === null) return value;
++  const pool = `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`;
++  const rows = Array.isArray(eventTemplate?.plotHooks) ? eventTemplate.plotHooks : [];
++  for (let k = from; k < ledger.length; k++) {
++    const entry = ledger[k];
++    if (entry?.pool !== pool || typeof entry.lineId !== 'number') continue;
++    const row = list[entry.lineId];
++    if (row === undefined || (row && typeof row === 'object' && 'id' in row)) continue;
++    const at = rows.indexOf(row);
++    if (at >= 0) ledger[k] = { ...entry, lineId: at };
++  }
++  return value;
++}

@@ -1,0 +1,134 @@
+{
+ "prefix": "quarrel",
+ "findings": {
+  "over": [],
+  "unregistered": [],
+  "stale": [],
+  "loose": [
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:corruption_scandal: top1 ceiling 0.5512 sits above its measure 0.3355",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:disputed_land: top1 ceiling 0.5798 sits above its measure 0.3534",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity: top1 ceiling 0.7787 sits above its measure 0.3849",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:external_threat: top1 ceiling 0.7156 sits above its measure 0.3432",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:generational_divide: top1 ceiling 0.5299 sits above its measure 0.3552",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire: top1 ceiling 0.7279 sits above its measure 0.3490",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict: top1 ceiling 0.387 sits above its measure 0.3354",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:heresy_trial: top1 ceiling 0.6777 sits above its measure 0.3615",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear: top1 ceiling 0.8691 sits above its measure 0.3422",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:leadership_vacuum: top1 ceiling 0.5248 sits above its measure 0.3422",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy: top1 ceiling 0.8007 sits above its measure 0.3481",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:market_crash: top1 ceiling 0.5122 sits above its measure 0.3606",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy: top1 ceiling 0.7776 sits above its measure 0.3540",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:outside_debt: top1 ceiling 0.5605 sits above its measure 0.3438",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:pilgrimage_surge: top1 ceiling 0.6675 sits above its measure 0.3678",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years: top1 ceiling 0.7254 sits above its measure 0.3381",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:popular_uprising: top1 ceiling 0.5888 sits above its measure 0.3410",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction: top1 ceiling 0.8947 sits above its measure 0.3484",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension: top1 ceiling 0.849 sits above its measure 0.3405",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:trade_collapse: top1 ceiling 0.6533 sits above its measure 0.3460",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:tyranny: top1 ceiling 0.66 sits above its measure 0.3343",
+   "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:wild_magic: top1 ceiling 0.6946 sits above its measure 0.3341",
+   "ledger:institutionServices:Carriers' guild.Freight haulage: top1 ceiling 1 sits above its measure 0.9463",
+   "ledger:institutionServices:Daily markets.Fresh produce: top1 ceiling 1 sits above its measure 0.8733"
+  ],
+  "notes": [],
+  "repeatable": [],
+  "looseRepeatable": [
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:corruption_scandal|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:corruption_scandal: top1 ceiling 0.5512 sits above its measure 0.3355"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:disputed_land|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:disputed_land: top1 ceiling 0.5798 sits above its measure 0.3534"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity: top1 ceiling 0.7787 sits above its measure 0.3849"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:external_threat|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:external_threat: top1 ceiling 0.7156 sits above its measure 0.3432"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:generational_divide|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:generational_divide: top1 ceiling 0.5299 sits above its measure 0.3552"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire: top1 ceiling 0.7279 sits above its measure 0.3490"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict: top1 ceiling 0.387 sits above its measure 0.3354"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:heresy_trial|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:heresy_trial: top1 ceiling 0.6777 sits above its measure 0.3615"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear: top1 ceiling 0.8691 sits above its measure 0.3422"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:leadership_vacuum|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:leadership_vacuum: top1 ceiling 0.5248 sits above its measure 0.3422"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy: top1 ceiling 0.8007 sits above its measure 0.3481"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:market_crash|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:market_crash: top1 ceiling 0.5122 sits above its measure 0.3606"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy: top1 ceiling 0.7776 sits above its measure 0.3540"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:outside_debt|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:outside_debt: top1 ceiling 0.5605 sits above its measure 0.3438"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:pilgrimage_surge|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:pilgrimage_surge: top1 ceiling 0.6675 sits above its measure 0.3678"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years: top1 ceiling 0.7254 sits above its measure 0.3381"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:popular_uprising|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:popular_uprising: top1 ceiling 0.5888 sits above its measure 0.3410"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction: top1 ceiling 0.8947 sits above its measure 0.3484"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension: top1 ceiling 0.849 sits above its measure 0.3405"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:trade_collapse|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:trade_collapse: top1 ceiling 0.6533 sits above its measure 0.3460"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:tyranny|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:tyranny: top1 ceiling 0.66 sits above its measure 0.3343"
+   },
+   {
+    "key": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:wild_magic|top1",
+    "text": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:wild_magic: top1 ceiling 0.6946 sits above its measure 0.3341"
+   },
+   {
+    "key": "ledger:institutionServices:Carriers' guild.Freight haulage|top1",
+    "text": "ledger:institutionServices:Carriers' guild.Freight haulage: top1 ceiling 1 sits above its measure 0.9463"
+   },
+   {
+    "key": "ledger:institutionServices:Daily markets.Fresh produce|top1",
+    "text": "ledger:institutionServices:Daily markets.Fresh produce: top1 ceiling 1 sits above its measure 0.8733"
+   }
+  ]
+ }
+}
