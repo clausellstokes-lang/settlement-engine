@@ -55,3 +55,12 @@ The parked message it answers (sent once, 14:1x UTC): P1 narrativeGenerator.js (
 - **Guard:** `tests/generators/importerHookNoTrade.test.js` — red first at the base 3 of 5 (the siege table row, rw3-hamlet-under_siege-1, rw3-town-under_siege+famine-1), green 6 of 6 at the tip.
 - **Gates:** domain-strict 1113 / 1113; type ratchet 167 / 167; eslint clean; the 96 non-property suites naming foodBalance or viability green.
 - **New words for the veto:** the hook above; the heading "Hoarded Food".
+
+### Item 7 — the thieves' guild informant with no thieves' guild — DONE (commit below)
+- **Before** (records, 720 + 20): a secret names a thieves' guild in **29** towns whose roster and estate hold none (all one line: "On the payroll of the thieves' guild as a silent informant"; the page measure on the base render agrees: 29 of 176 towns printing the words, all this line). The F4 sanitiser in `mergeNPCLists` rewrote the guild only where no crime stood at all.
+- **After:** **3** remain, each a face minted after the sanitiser runs (r2r-metropolis-50 "the bloc's speaker", r2s-politically_fractured-city-1 "the bloc's speaker", r2s-succession_void-city-2 "the lord"; `src/generators/people/mintTitles.js` / the people seams draw their secret later) — **STOP for those three: another lane's files**; recommended to the seat that next holds the people seams: run the same rewrite where a minted face's secret is set. 26 cured: the line now reads "On the payroll of the local underworld as a silent informant" (27 prints) or the town's own named criminal power ("the Black Circle", "the Hidden Hand"; none in this corpus's 26). The 35 informant lines left naming the thieves' guild are in towns that have one (true).
+- **Cold-list rows:** #311 (rw3-metropolis-under_siege-1) cured. #128 and #720 do not print at this base (the two towns are dealt other secrets at e969a75b7; the reviewer's tree dealt them differently); both are guarded.
+- **Draw-free:** the rewrite is after every draw; no line count changes.
+- **Guard:** `tests/generators/informantNoThievesGuild.test.js` — red first at the base on rw3-metropolis-under_siege-1, green 3 of 3 here.
+- **Gates:** domain-strict 1113 / 1113; type ratchet 167 / 167; eslint clean; 86 non-property suites naming npcGenerator, crimeSignal or thieves green.
+- **New words for the veto:** "the local underworld" (and the town's own criminal power named in its place).
