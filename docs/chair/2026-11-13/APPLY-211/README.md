@@ -4,6 +4,8 @@
 
 **A note added on 2026-11-13 at 19:45 UTC: this pack is still the right one.** After the pack was built, the veil lane's builder wrote its newer cures into the lane's copy of migration 211, so that copy no longer matched this pack. The chair has ruled that migration 211 is FROZEN at the reviewed bytes, which are the bytes in this pack; the newer cures move to a new migration 212, which is not in this pack and is not to be applied until a security review clears it. Applying this pack is correct whether or not 212 follows. If it is already applied, nothing needs redoing.
 
+**A note added on 2026-11-13 at 21:11 UTC: one more thing 211 alone does not close.** The security reader found that the names of houses a game master hid whole still reach a reader, in lower case, inside two derived lists of the town's record, and, on shares that reveal the game master's notes, inside the town's trace. This is so today, before 211, and stays so after it: applying 211 makes nothing worse and still closes everything it was reviewed to close, so this pack is still the right one. Neither does the later migration 212 close it yet: the cure is being written into 212 now. Migration 212 is still NOT to be applied until its security review clears it; it will come to you as one pack.
+
 **What it does.** Today the server sends every reader of a shared town everything its game master hid by hand, and only the reader's browser hides it. Migration 211 makes the server withhold it, on the gallery page, the party link, the map page and the import. It creates and replaces functions only: no table, column, policy or row is touched.
 
 **What was checked.** The chair checked on 2026-11-13 at 17:18 UTC that the file inside `3-apply-211.sql` is byte for byte the reviewed file (sha256 `eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01`), and that the two read-first files open a read-only transaction, end in a rollback and hold no statement that writes. The security reviewer rehearsed the whole step on a local database, not in the hosted editor. The full review is `docs/chair/2026-11-13/REVIEW-VEIL-211-333b33973-2026-11-13.md`, section 7.
@@ -29,4 +31,4 @@ Tell the chair it is applied, with the numbers from steps 1 and 2. At the releas
 
 ## What 211 alone does not close
 
-Hidden text that travels through second copies in a town's record (a sixth seat is fixing these now), the public event log, shares exported before the veil, and custom-content records on reveal-to-DM shares.
+Hidden text that travels through second copies in a town's record (a sixth seat is fixing these now), the public event log, shares exported before the veil, and custom-content records on reveal-to-DM shares. And, found on 2026-11-13 at 21:08 UTC: the lower-cased names of hidden houses in two derived lists and in the trace (the note near the top).
