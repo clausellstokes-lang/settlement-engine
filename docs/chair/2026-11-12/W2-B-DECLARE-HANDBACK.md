@@ -179,3 +179,11 @@ Source supports the ruling (the generator's timeline: `anchored: e.anchored || f
 ## 7. Gates at each `src/` commit
 
 check-domain-strict exit 0 (1113, ceiling 1113) · typecheck:ratchet exit 0 (167, ceiling 167) · eslint on the touched files exit 0 · the walker 36/36 and tests/domain/facts (269 with the walker) · the page check 7/7 · the desk test 71/71 · door --check fresh 0, stale 0. Every push passed its three pre-push gates.
+
+# PART THREE — the third seat (2026-11-13), from `83c84a8ed`
+
+**Kept current after every item; a stop at any moment loses nothing.** Every count is executed unless marked PLAUSIBLE.
+
+## 0. Status
+- [ ] 1 precision read · [ ] 2 the ten cases · [ ] 3 F2 F4 F5 F6 F7 F8 F9 F11 F12 F13 · [ ] 4 more recall · [ ] 5 lane whole
+
