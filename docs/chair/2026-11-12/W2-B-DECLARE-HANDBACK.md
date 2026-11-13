@@ -250,3 +250,18 @@ Recall by class at `28222eea7`: a house, role or force lacked 21/79 · normal ti
 
 **A correction to part two §3.** `VOCABULARY_SIZE.houses` reads **152** at `83c84a8ed` (measured), not 157. The vocabulary now holds: written 34 (`rulingFaces`, `shrine` added) · houses 152 · resources 33 · roles 9 · states 3.
 
+## 3. Item 3: the review's remaining findings, each with its plant
+
+| F | commit | done | the plant (red at the commit before) |
+|---|---|---|---|
+| F2 | `2ca67e00e` | "the ruling N" is its own word, `rulingFaces`: the leaf is `patronage.js :: dmPowerViewOf(...).rulingThree` (the panel's own list); `powersCount` keeps "N powers". On the 720: 173 headings flagged, the reviewer's measured count of false ones | vocabularyPageFindings.test "F2 — the ruling three counts the ruler's faces" |
+| F4 | `3ff343284` | ONE home for a church: `THINGS.temple` reads the faith reading (`hasChurch`; atom `church`, `church access` and a monastery sufficient). New `THINGS.shrine` reads the sacred house. `religiousHouses` reads the faith reading. "Access to (the) parish church" names a church elsewhere (by its words). SOP §11 gets its fourth case, shrine only. 54 of the 720 are shrine-only; none of arm 2's 360 are | "F4 — one home for whether there is a church" (4 plants, 1 green control) |
+| F5 | `44e4f14e2` | the strip ban reads all 13 of the review's unwrap shapes, plus a loop that pushes text and `pick(R).text`. The n-th strip of one receiver in a file is its own key (`R #n`). 4 more sites in `src`, each read and banked `not-a-draw` | walker "planted (F5): every unwrap shape …" |
+| F6 | `7da06c3cc` (words), `2ab2599a5` (classifier) | a range row holds its own minimum ("Parish churches (2-5)" = 2); `lawEnforcement` (watch ∨ garrison) split from `law` (a headman judges, but is not law enforcement); classify: VHOUSE and VLAW withdrawn, VWAR and VOCC filed `two-homes` | "F13 / F6 — the counts" (F6 plants) |
+| F7 | — (confirmed, no change) | on `origin/lane/w2-write-2026-11-13` (`c16d7292a`), `docs/chair/2026-11-13/W2-WRITE-NEW-LINES.md` lists DS-ECO-2 "GRANARY: thin" v3 and DS-ECO-8 "full stores lift the town" v1–v3, each CHANGED `[colour]` → `[institution: granary]`. The other 29 key-implied words were not re-read by this seat | — |
+| F8 | (reported) | every recall total is given with and without pattern 20 (§1). Since item 1 withdrew the crisis states, pattern 20 is no longer a finding, so the two totals are equal at `28222eea7` | — |
+| F9 | `2ab2599a5` | classify `eventhook`: a hit is past by its sentence (a past-tense verb, a marker of time gone), not by its file. On the 720: 67 → 64 | (probe; executed on the 720) |
+| F11 | `2ab2599a5` | classify: an unattributed finding is attributed through its rule's named owner (a bare file name resolved in `src`): 0 → 57 | (probe; executed on the 720) |
+| F12 | see §3a | | |
+| F13 | `7da06c3cc` | count words to "twelve", "a dozen", digits; guilds a counted noun (the roster's guild rows) | "F13 / F6 — the counts" (F13 plants) |
+
