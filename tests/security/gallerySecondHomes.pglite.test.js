@@ -325,6 +325,11 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             for (const r of Array.isArray(t.economicState.incomeSources) ? t.economicState.incomeSources : []) {
               if (isRec(r) && r.isCriminal === true) sent.push(`${label} dm=${dm} ${mode} ${read}: a criminal income row (${r.source}), its groupings shut`);
             }
+            // and nothing open is taken: every income row that is not criminal stays (the record's, by label)
+            const openRows = (isRec(record.economicState) && Array.isArray(record.economicState.incomeSources) ? record.economicState.incomeSources : [])
+              .filter((r) => isRec(r) && r.isCriminal !== true).map((r) => r.source);
+            const sentRows = new Set((Array.isArray(t.economicState.incomeSources) ? t.economicState.incomeSources : []).filter(isRec).map((r) => r.source));
+            for (const src of openRows) if (!sentRows.has(src) && !names.some((h) => fold(src).includes(h.f))) sent.push(`${label} dm=${dm} ${mode} ${read}: an open income row (${src}) was taken`);
           }
           // COHERENCE-VEIL-8 (N3): a tie's copy of an end's role, where that person's own entry in the same response
           // carries no role (a person the share does not reveal, sent as a veiled public card: 206)

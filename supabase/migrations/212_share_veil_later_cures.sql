@@ -519,7 +519,7 @@ begin
      and jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
     s := jsonb_set(s, '{economicState,incomeSources}', coalesce((select jsonb_agg(e order by o)
       from jsonb_array_elements(s #> '{economicState,incomeSources}') with ordinality x(e, o)
-     where not (jsonb_typeof(e) = 'object' and e -> 'isCriminal' = 'true'::jsonb)), '[]'));
+     where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isCriminal' = 'true'::jsonb, false))), '[]'));
   end if;
   return s;
 end $$;
