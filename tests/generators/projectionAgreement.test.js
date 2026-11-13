@@ -291,6 +291,11 @@ const REVIEW_SEEDS = [
   { seed: 'agree-thorp-56', tier: 'thorp' }, { seed: 'r2r-hamlet-5', tier: 'hamlet' }, { seed: 'rvw12-village-25', tier: 'village' },
   // F3 (ii): the surplus member's subject ("Surplus from local harvest" printed), live in no birth above
   { seed: 'agree-town-56', tier: 'town' }, { seed: 'r2r-town-2', tier: 'town' },
+  // F3 (iii), RE-KEYED BY IDENTITY (COHERENCE-UPKEEP-7, item 3, the round-three cut's #640): the company member's
+  // subject was "A mercenary company provides enforcement" in G2's three births above, each with a town watch; that
+  // line was false beside the watch and now gives way to the watch's own. With no standing body the hired lines
+  // replace it, so the member's live subject is the merchant guilds' "… maintain their own mercenary companies".
+  { seed: 'agree-city-52', tier: 'city' },
 ];
 describe('the reviewer\'s seeds agree', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
