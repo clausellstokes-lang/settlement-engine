@@ -357,13 +357,15 @@ function topHooksBySeverity(settlement, n) {
  * (`chainPrintName`: the toll's by the town's access, COHERENCE-AGREE-8). The AI's words print on the page, so the
  * grounding never hands it a name the page would not print. The projection's list is the record's own, less what is
  * not a chain object (`deriveAllSupplyChainStates`), so the two align by position.
- * @param {any} settlement
+ * @param {AiSettlement | null | undefined} settlement
  */
 function groundingChains(settlement) {
-  const record = (settlement?.economicState?.activeChains || settlement?.economy?.activeChains || settlement?.supplyChains || [])
-    .filter((/** @type {unknown} */ c) => c && typeof c === 'object');
+  const source = /** @type {import('./supplyChainState.js').ChainsSettlementSource} */ (settlement || {});
+  const record = (source.economicState?.activeChains || source.economy?.activeChains || source.supplyChains || [])
+    .filter((c) => c && typeof c === 'object');
+  const town = /** @type {{ config?: { tradeRouteAccess?: unknown } }} */ (settlement || {});
   return deriveAllSupplyChainStates(settlement)
-    .map((projected, i) => ({ ...projected, resource: /** @type {string | undefined} */ (chainPrintName(record[i], settlement).resource) }));
+    .map((projected, i) => ({ ...projected, resource: /** @type {string | undefined} */ (chainPrintName(record[i], town).resource) }));
 }
 
 /**

@@ -421,7 +421,7 @@ describe('the coal line: coal fires the forges only where a forge house stands',
       const metal = s.economicState.incomeSources.find((e) => e.source === 'Iron & Metalwork');
       expect(metal?.desc, seed).toBe(LOCAL_COAL_SOLD_LINE);
       expect(metal?.desc).not.toBe(LOCAL_COAL_LINE);
-    }), 'coal fires a forge the town does not have');
+    }), 'COAL-LINE-NO-FORGE-HOUSE');
   });
   test('the sibling is declared beside the line, keyed by its text', async () => {
     const { INCOME_LINE_SIBLINGS, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE } = await import('../../src/generators/economy/incomeLineSiblings.js');
@@ -448,6 +448,7 @@ describe('the gate tally is not said where no gate stands', () => {
       const d = factsOf(s).defence;
       expect([d?.walls, d?.gate], `${seed}: anchored, walled with no gate`).toEqual([true, false]);
       expect(String(s.economicState.safetyProfile.safetyDesc || '') + String(s.economicState.safetyProfile.guardEffectivenessDesc || ''), `${seed}: anchored, the twin speaks`).toMatch(/The walls leave few ways in/);
+      // anchored: the same town is walled and its twin speaks (both held just above), so the line is read where it can speak
       expect(String(defenseForcesProse(s).fortification?.sentence || ''), seed).not.toMatch(/\bgates?\b/i);
     }), 'a gate is named where none stands');
   });
@@ -497,7 +498,9 @@ describe('Agriculture: what the land offers, where the town farms it', () => {
   test('twin: r2r-town-38 fishes and earns no rents, and its land still does not offer Agriculture', () => {
     const s = born('r2r-town-38');
     expect(s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents')).toBe(false);
+    // anchored: the food record's chains are read for the grain chain the positive arm above finds in r2r-town-26
     expect(s.economicState.foodSecurity.activeChains || []).not.toContain('Grain & agriculture');
+    // anchored: the same strengths list carries Agriculture in the farming towns of the arm above
     expect(s.resourceAnalysis.economicStrengths).not.toContain('Agriculture');
   });
 });
