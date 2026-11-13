@@ -231,7 +231,9 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
     if (pick < 0.95 && depth < 2) return `[${Array.from({ length: Math.floor(r() * 4) }, () => valueToken(r, depth + 1)).join(',')}]`;
     return depth < 2 ? `{${r() < 0.5 ? '' : `"a":${valueToken(r, depth + 1)}`}}` : '{}';
   }
-  const ID_KEYS = ['id', 'refId', 'name', 'label', 'title', 'type', 'faction', 'parties', 'issue', 'from', 'to', 'npc1Name', 'npc2Name'];
+  // master's stored tie (COHERENCE-VEIL-4, V4-1): its ends are `npc1Id`/`npc2Id`, so the fuzz draws
+  // ties in both stored shapes, the deployed client's and the new one
+  const ID_KEYS = ['id', 'refId', 'name', 'label', 'title', 'type', 'faction', 'parties', 'issue', 'from', 'to', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name'];
   function cardText(r) {
     const keys = ID_KEYS.filter(() => r() < 0.35);
     return `{${keys.map((k) => `${JSON.stringify(k)}:${valueToken(r)}`).join(',')}}`;
