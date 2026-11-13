@@ -471,7 +471,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret: "Took a private share of the war contracts that made the settlement rich, routed through a merchant house that does not exist on paper",
-      stakes: "The house's accounts exist somewhere. A rival contractor has been looking for exactly this",
+      stakes: "The house's accounts exist somewhere. A rival contractor has been looking for exactly this", needs: ["prosperity: ≥ comfortable"], // R2-CODE-A-2 (cold #723): the war made the place rich
     },
     {
       secret: "Knows the war is going worse than the settlement has been told, and has been quietly moving their family and their wealth ahead of the news",
