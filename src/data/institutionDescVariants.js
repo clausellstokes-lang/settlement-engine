@@ -2047,6 +2047,24 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
     Object.freeze({ text: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", needs: Object.freeze(["river"]) }),
     Object.freeze({ text: "The water is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", twinOf: "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.", excludes: Object.freeze(["river"]) }),
   ]),
+  // W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #17): the thorp's burial ground says no clergy is near enough to speak, in a thorp
+  // whose people go to a neighbour's parish church ("Access to parish church", whose Last rites the parish priest comes to say).
+  // Each such text declares the faith reading's access answer (`church access`, faithReading.js :: accessOnly) on its excludes
+  // side, and its twin says the words wait for a priest when one can be fetched in time. The twin is true whether or not
+  // the access survives the roster's later trim (it does not in about a quarter of these thorps): it claims no priest
+  // near, and no want of one. VETOABLE wording (the owner's).
+  "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.": Object.freeze([
+    Object.freeze({ text: "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.", excludes: Object.freeze(["church access"]) }),
+    Object.freeze({ text: "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them. The oldest markers have lost their names to the weather and are kept clear anyway.", twinOf: "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.", needs: Object.freeze(["church access"]) }),
+  ]),
+  "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.": Object.freeze([
+    Object.freeze({ text: "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.", excludes: Object.freeze(["church access"]) }),
+    Object.freeze({ text: "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.", twinOf: "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.", needs: Object.freeze(["church access"]) }),
+  ]),
+  "Fieldstones on a low bank at the edge of the ploughland. The rites are said by neighbours because there is nobody else to say them, and the weathered markers are kept clear regardless.": Object.freeze([
+    Object.freeze({ text: "Fieldstones on a low bank at the edge of the ploughland. The rites are said by neighbours because there is nobody else to say them, and the weathered markers are kept clear regardless.", excludes: Object.freeze(["church access"]) }),
+    Object.freeze({ text: "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.", twinOf: "Fieldstones on a low bank at the edge of the ploughland. The rites are said by neighbours because there is nobody else to say them, and the weathered markers are kept clear regardless.", needs: Object.freeze(["church access"]) }),
+  ]),
 });
 
 /**
