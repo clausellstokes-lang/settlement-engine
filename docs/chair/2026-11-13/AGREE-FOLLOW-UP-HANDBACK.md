@@ -15,9 +15,83 @@ Probes (`docs/chair/2026-11-13/probes/AGREE-FOLLOW-UP/`), each runnable as `node
 5. `sewerProsperityIdentities.mjs`: each RAISES cause over the 42 × K identities.
 6. `sewerWitnessCivic.mjs`: the sewer witness's civic houses at one tree.
 
-## 1. The site inventory
+## 1. The site inventory (siteCoherenceRatchet C1)
 
-(Pending: the per-town bisect is running. This section lands in the next commit.)
+**Verdict: ORIGIN 0, EXPOSURE 14, TRUE AND RIGHT 4, over the 18 towns whose row moved.**
+- No token the lane wrote is false of its town: every decisive export line is backed by a resource the town's own roster holds, plus the institution that gates it or a chain that works it.
+- What reads false is the site deriver's old rules, which SITE_COHERENCE_PLAN's Waves 3 and 4 own.
+
+### The instrument, and what it checked
+- **The scan.** `siteScan.mjs` re-births the test's frozen corpus with the same literals and computes each town's `(terrain, siteKind, decisiveToken)` exactly as `scanCorpus` does: the production kind from `buildTownLayoutV2`, and the token by leave-one-out against the real `generateSite`.
+- **Checks:**
+  - At f572d12b7 the 462 keys aggregate EXACTLY to `.site-coherence-baseline.json`'s rows, and the key-derived category totals equal its frozen totals.
+  - The reconstruction disagrees with the production kind on 0 towns at either tree.
+  - `src/domain/townMap/`, `canonicalAccessors.js` and `resolveTerrain.js` are unchanged f572d12b7..aac79b808: the deriver did not move, its inputs did.
+- **The test's own runner at the tip** (`sh scripts/gate-tail.sh npx vitest run tests/lint/siteCoherenceRatchet.test.js`) exits 1, with 1 failed and 8 passed. It reports **16 rows, not 14**: the book's fourteen (2 added, 9 grown, 3 shrunk) plus **2 VANISHED**, `desert|mountain-flank|iron` (frozen 2, now absent) and `plains|mountain-flank|stone` (frozen 1, now absent). Row 47 and §2i.6 omit those two.
+- **The totals.** The test's next assertion (`scan.totals`, hidden behind the first red) is also off: water-on-dry 112 → 117, marsh-on-dry 24 → 27, flank-on-flat 38 → 40, dunes-on-wet 0 → 0, any-contradiction 150 → 157.
+- **The bisect.** It scans the corpus at 15 commits: the lane's A′ pair on its own base (`6b932d3e8^`, `6b932d3e8`, `1dde265d8^`, `1dde265d8`, `8866a0ddd`), then 3575cf061, d0f0d022b, e449afc4e, 97804b535, e11750d62, df2249ff8, aa08dc10b, 1359d2435, 69b53decd and aac79b808. `siteAttribute.mjs` reads each town's key and roster across them.
+  - The line's 3575cf061 equals f572d12b7 on all 18 towns, so points 44–46 move none of them.
+  - Between scanned commits nothing moves any of the 18 except where named below. A move and its reversal inside an unscanned span cannot be excluded; none of the 18 shows a net move outside the named commits.
+
+### The chain, every town
+The agreement lane removes positional slots a town's access or terrain refuses, and refills them:
+1. **A′** (`6b932d3e8`, "the crossroads position requires crossroads access") strikes `crossroads_position` from road towns.
+2. **A′ refilled** (`1dde265d8`) refills the slot, sometimes with `defended_pass` on a town off the mountains.
+3. **P3** (`df2249ff8`, "the refill never fills a slot with a member the record's terrain refuses") replaces that refilled pass.
+4. **P2 (c)** (`aa08dc10b`, "the roll keeps no mountain pass off the mountains") replaces a base-rolled pass.
+
+The replacement resource brings an export line, and the site deriver reads that line.
+- Where the token is written: `computeActiveChains.js :: deriveExportsFromChains`, from the new resource's trade goods, gated by `RESOURCE_GOOD_INST_GATES` and `RESOURCE_EXTRACTION_GATES`.
+- Where it is read: `siteGenesis.js :: generateSite`, whose arms are `WATER_ECONOMY_RE` (fish|preserved|reed|peat|pearl|whal|ferry|barge|timber|lumber), the marsh split (reed|peat) and the mountain arm (/ore|iron|stone|mine|silver|gold|coal/i).
+
+| # | Town (settType/terrain/route@seed/culture) | Old row → new row | Commit that moved it | Slot: struck → filled | Decisive export line | True of the town by its record? | Class |
+|---|---|---|---|---|---|---|---|
+| 140 | city/plains/road@scw0-a1/south_asian | plains\|plain\|(biome) → plains\|mountain-flank\|coal | aa08dc10b P2 (c) | defended_pass → coal_deposits | Coal | YES: coal_deposits; petty_mining (vulnerable) and fuel (running) chains work it | EXPOSURE: coal → flank on a plain (Wave 3) |
+| 143 | city/plains/road@scw0-a4/germanic | plains\|plain\|(biome) → plains\|mountain-flank\|coal | df2249ff8 P3 (pass from 1dde265d8) | crossroads → pass → coal_deposits | Coal | YES: as #140 | EXPOSURE (Wave 3) |
+| 150 | city/forest/road@scw0-a1/mesoamerican | forest\|plain\|(biome) → forest\|mountain-flank\|coal | aa08dc10b P2 (c) | defended_pass → coal_deposits | Coal | YES: as #140 | EXPOSURE: flank in a forest (Wave 3's forest row) |
+| 153 | city/forest/road@scw0-a4/greek | forest\|plain\|(biome) → forest\|mountain-flank\|coal | df2249ff8 P3 | crossroads → pass → coal_deposits | Coal | YES: as #140 | EXPOSURE (Wave 3) |
+| 175 | metropolis/plains/road@scw0-a1/greek | plains\|plain\|(biome) → plains\|mountain-flank\|iron (ADDED) | aa08dc10b P2 (c) | defended_pass → iron_deposits | Iron ore, Refined iron ingots, Pig iron | YES: iron_deposits; Mine and Smelter; smelting chain (vulnerable) | EXPOSURE (Wave 3) |
+| 185 | metropolis/forest/road@scw0-a1/steppe | forest\|plain\|(biome) → forest\|mountain-flank\|iron (ADDED) | aa08dc10b P2 (c) | defended_pass → iron_deposits | as #175 | YES: as #175 | EXPOSURE (Wave 3) |
+| 252 | hamlet/plains/road@scw0-b1/greek | plains\|plain\|(biome) → plains\|mountain-flank\|coal | df2249ff8 P3 | crossroads → pass → managed_forest (+ a Charcoal burner by the roll) | **Charcoal** | The CHARCOAL is true (managed_forest + Charcoal burner). **COAL is not**: its coal_deposits' fuel chain is impaired and unavailable and it exports no coal. The deriver's `/coal/` reads Charcoal as coal | EXPOSURE: Wave 4 ("Charcoal leaves the mineral class") and Wave 3 |
+| 264 | hamlet/forest/road@scw0-b1/germanic | forest\|plain\|(biome) → forest\|mountain-flank\|coal | df2249ff8 P3 | crossroads → pass → managed_forest (its burner and camp already stood) | **Charcoal** | as #252 | EXPOSURE (Wave 4) |
+| 306 | village/forest/road@scw0-b1/steppe | forest\|river\|timber → forest\|mountain-flank\|coal | df2249ff8 P3 | crossroads → pass → grazing_land (the roll swapped Sawmill for a Dairy farmer: Milled timber left, Charcoal entered) | **Charcoal** | as #252 (managed_forest + Charcoal burner; coal unworked) | EXPOSURE (Wave 4) |
+| 107 | town/plains/road@scw0-a3/south_asian | plains\|mountain-flank\|stone → plains\|river\|timber | aa08dc10b P2 (c) | defended_pass → managed_forest | Milled timber (the old token was "stone" from "Raw gemstones") | YES: managed_forest + Sawmill | EXPOSURE: timber read as water, a river on a plain (Wave 4's "timber leaves the water class"). Its old row was the same deriver's gemSTONEs → flank |
+| 112 | town/hills/road@scw0-a3/celtic | hills\|mountain-flank\|(biome) → hills\|river\|timber | aa08dc10b P2 (c) | defended_pass → managed_forest | Milled timber | YES: as #107 | EXPOSURE (Wave 4) |
+| 117 | town/forest/road@scw0-a3/mesoamerican | forest\|plain\|(biome) → forest\|river\|timber | aa08dc10b P2 (c) | defended_pass → managed_forest | Milled timber | YES: as #107 | EXPOSURE (Wave 4) |
+| 294 | village/plains/road@scw0-b1/south_asian | plains\|river\|timber → plains\|river\|preserved | df2249ff8 P3 | crossroads → pass → grazing_land | Preserved foods (livestock chain, running) beside Milled timber | YES. The SITE did not move (river both sides): two water-read exports now hold it, so the first in source order is named | EXPOSURE, attribution only ("preserved" leaves the water class, Wave 4) |
+| 205 | metropolis/desert/road@scw0-a1/mesoamerican | desert\|mountain-flank\|iron → desert\|mountain-flank\|ore | df2249ff8 P3 | crossroads → pass → ancient_grove | Iron ore (Refined iron ingots left the list) | YES: iron_deposits; Mine; iron chain (running). The SITE did not move | EXPOSURE, attribution only (Wave 3: desert flank → 0) |
+| 108 | town/plains/road@scw0-a4/steppe | plains\|plain\|(biome) → plains\|marsh\|reed | df2249ff8 P3 | crossroads → pass → marshlands | Reeds and thatch | YES: marshlands is on the roster and the terrain table admits it. No chain works it (a raw good, ungated) | TRUE AND RIGHT: a marsh site for a town whose record holds a marsh (outside Wave 3's DRY_BIOME_RE; the audit counts it in marsh-on-dry) |
+| 113 | town/hills/road@scw0-a4/arabic | hills\|mountain-flank\|(biome) → hills\|marsh\|reed | df2249ff8 P3 | crossroads → pass → marshlands | Reeds and thatch | YES: marshlands; its reed_marsh chain runs | TRUE AND RIGHT |
+| 118 | town/forest/road@scw0-a4/south_asian | forest\|plain\|(biome) → forest\|marsh\|reed | df2249ff8 P3 | crossroads → pass → marshlands | Reeds and thatch | YES: as #108 (no chain) | TRUE AND RIGHT |
+| 135 | town/desert/road@scw0-a1/arabic | desert\|mountain-flank\|iron → desert\|dunes\|(biome) (one of the VANISHED) | 6b932d3e8 A′ | crossroads struck; the roll re-dealt 17 houses out and 13 in | none: "Refined iron ingots" left the export list | The town still holds iron_deposits, a Smelter and a smelting chain (vulnerable); its iron simply no longer exports | TRUE AND RIGHT for the site (a desert town on dunes: a contradiction falls). The unexported iron is "found, not mine" |
+
+**By row:**
+- `forest|plain|(biome)` −6: #117 #118 #150 #153 #185 #264.
+- `plains|plain|(biome)` −5: #108 #140 #143 #175 #252.
+- `hills|mountain-flank|(biome)` −2: #112 #113.
+- `desert|mountain-flank|iron` −2: #135 #205.
+- `plains|mountain-flank|stone` −1: #107.
+- `forest|mountain-flank|coal` +4: #150 #153 #264 #306.
+- `plains|mountain-flank|coal` +3: #140 #143 #252.
+- `forest|`, `hills|` and `plains|marsh|reed` +1 each: #118, #113, #108.
+- `forest|` and `plains|mountain-flank|iron` new: #185, #175.
+- `hills|river|timber` +1: #112.
+- `plains|river|preserved` +1: #294.
+- `desert|mountain-flank|ore` +1: #205.
+- `desert|dunes|(biome)` +1: #135.
+- The rest offset: #107 and #117 into river|timber against #294 and #306 out.
+
+**Amendment 303's four conditions, for the 14 EXPOSURE towns:**
+1. *The rows are old on the line.* At f572d12b7 the same rules already place 3 towns on a flank by "Charcoal", 20 plains and forest towns on a flank by true "Coal", 17 dry-terrain towns on a river by "Milled timber" and 10 by "Preserved foods".
+2. *A named later lane owes the cure:* SITE_COHERENCE_PLAN Wave 3 (an export-derived flank needs a mountainous biome; the exit rows `(plains|forest|desert, mountain-flank, *)` reach 0) and Wave 4 (Charcoal leaves the mineral class; preserved, mill, timber and lumber leave the water class).
+3. *The rise is confined to towns whose fact the lane changed:* every one of the 18 had a pass or crossroads slot refused and refilled by A′, P3 or P2 (c), and no other town of the 462 moved.
+4. *Declared with counts:* this table.
+
+### Recommendation (for the chair; nothing touched)
+- **No cure at a token's home is owed.** No token is false of its town as the record writes it. The one false reading is "Charcoal" read as coal (#252, #264, #306), and that falsehood is the deriver's `/coal/` substring, Wave 4's named item, not a token the lane wrote.
+- **Carry C1 red and named, re-stated as 16 rows plus the totals line.** Owner: SITE_COHERENCE_PLAN Waves 3 and 4. They are the only route by which the grown rows can shrink, since the form is shrink-only.
+- **What could move by the ratchet's own form at the chair's point:** lowering the 3 shrunk rows and removing the 2 vanished ones. Read with this table, those five are the SAME 18 towns as the rises, so lowering them alone still banks half of one movement, as §2i.7 ruled.
+- **Merge book:** correct row 47 and §2i.6 from "fourteen" to sixteen, naming the two vanished rows.
 
 ## 2. The sewer's HONEST FOUNDING arm: PROSPERITY_BAND
 
@@ -75,3 +149,11 @@ Re-found the arm's INPUT and leave its LAW untouched.
 - The same measure is green at the line, so the change is not tuned to the tip.
 - The alternative is a re-seeded witness, but the file holds no seed rule to re-seed by.
 - No page sentence needed checking: the cause is not dead.
+
+## Found, not mine (reported, not touched)
+- **#135** (town/desert/road@scw0-a1/arabic): its smelting chain on iron_deposits runs (vulnerable) and a Smelter stands, yet no iron good is in its exports after A′'s re-deal at 6b932d3e8. The site's win rests on that absence.
+- **#108 and #118**: they export "Reeds and thatch" from marshlands with no chain working it (a raw, ungated good). By the chain model (`chainWorksResource`, amendment 303's one home of "worked here") the marsh is not worked.
+- **The sewer arm's other two RAISES causes** (CIVIC_CAPACITY, CALAMITY_REBUILD) each rest on one witness in the 42 at the default identity (section 2).
+
+## Hazard log
+The local config and refs were snapshotted before and after every suite and every push. The only differences are this seat's own branch (`agree-fu-work`) and its remote-tracking ref.
