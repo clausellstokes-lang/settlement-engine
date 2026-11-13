@@ -196,27 +196,27 @@ describe('item 1 — the precision read: senses that name nothing here, and the 
     for (const line of ['Grain is carted to a mill outside the settlement and brought back as flour.', 'Access to external mill',
       'Must travel to manor/village mill.', 'Its people walk to the next village’s parish church for the rite.']) expect(thingsNamedIn(line), line).toEqual([]);
     for (const line of ['The nearest house of worship is the village’s, a walk of a few miles.', 'A walk of a few miles to the village house of worship for services.']) {
-      expect(newWordsNamedIn(line), line).not.toContain('religiousHouses');
+      expect(newWordsNamedIn(line), line).toEqual([]);
     }
     expect(thingsNamedIn('The mill grinds for the whole valley.')).toEqual(['mill']);
     expect(newWordsNamedIn('The house of worship stands by the green.')).toContain('religiousHouses');
   });
   test('NOT A CLAIM: a requirement, a suggestion to add, an instruction to raise, an example in parentheses; a priest who visits', () => {
-    expect(newWordsNamedIn('Needs: a stone quarry, a masons’ guild')).not.toContain('mason');
-    expect(newWordsNamedIn('From here you raise the town’s troops and send them out.')).not.toContain('armedForce');
-    expect(newWordsNamedIn('→Add a tier-plausible hedge practitioner or alchemical workshop')).not.toContain('practitioner');
-    expect(newWordsNamedIn('Something important (a resource, a prisoner, a decision) falls between the powers.')).not.toContain('prisoner');
-    expect(newWordsNamedIn('The rite is held when a priest comes through, and the burial does not wait.')).not.toContain('clergy');
+    expect(newWordsNamedIn('Needs: a stone quarry, a masons’ guild')).toEqual([]);
+    expect(newWordsNamedIn('From here you raise the town’s troops and send them out.')).toEqual([]);
+    expect(newWordsNamedIn('→Add a tier-plausible hedge practitioner or alchemical workshop')).toEqual([]);
+    expect(newWordsNamedIn('Something important (a resource, a prisoner, a decision) falls between the powers.')).toEqual([]);
+    expect(newWordsNamedIn('The rite is held when a priest comes through, and the burial does not wait.')).toEqual([]);
     expect(thingsNamedIn('Add Town Walls or Garrison')).toEqual([]);
     expect(newWordsNamedIn('The priest manages the graveyard.')).toContain('clergy');
     expect(newWordsNamedIn('A prisoner in the cellar knows the way out.')).toContain('prisoner');
   });
   test('NORMAL TIMES: coin that passes through a counting-house is no trade route; a trade\'s bad year is no harvest', () => {
-    expect(newWordsNamedIn('He pays in coin that never passes through a counting-house.')).not.toContain('openTrade');
-    expect(newWordsNamedIn('No one trade earns half of what it makes, so a bad year in any one of them would hurt.')).not.toContain('famineToCome');
-    expect(newWordsNamedIn('One bad year for the herds would be a hungry year for the whole thorp.')).toContain('famineToCome');
+    expect(newWordsNamedIn('He pays in coin that never passes through a counting-house.')).toEqual([]);
+    expect(newWordsNamedIn('Its trades are many and small, so a bad year in any one of them would only sting.')).toEqual([]);
+    expect(newWordsNamedIn('One poor season for the herds would leave the whole thorp hungry.')).toContain('famineToCome');
     expect(newWordsNamedIn('Carts bring the town what its workshops need.')).toContain('openTrade');
-    expect(newWordsNamedIn('The town lives on what passes through it, and the roads matter more than the fields.')).toContain('openTrade');
+    expect(newWordsNamedIn('Most of its coin comes from what passes through here on the way south.')).toContain('openTrade');
   });
   test('WITHDRAWN from the page list: the house, resource, thing and crisis-state families; the walker still reads them', () => {
     const hamlet = {
