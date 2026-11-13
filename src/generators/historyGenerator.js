@@ -852,14 +852,14 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
   }
 
   if (resourceEvents.length > 0 && events.length < 7) {
-    const chosen = resourceEvents[Math.floor(_rng() * resourceEvents.length)];
+    const chosen = admittedResourceEvent(resourceEvents, Math.floor(_rng() * resourceEvents.length), hookFacts); // W2-FIX-DATA-5 (ww-25): a refused pick resolves draw-free to the next admitted event
     // Resource events are authored with an array severity (like a template); collapse
     // it to a single rendered string so downstream consumers (e.g. historyBeats
     // severityScore) see the same shape as generateEventNarrative output.
     if (Array.isArray(chosen.severity)) chosen.severity = pick(chosen.severity);
     // Strip plot hooks from ancient resource events (same ≤80y rule)
     if ((chosen.yearsAgo || 0) > 80) chosen.plotHooks = [];
-    events.push(chosen);
+    if (resourceEventAdmitted(chosen, hookFacts)) events.push(chosen); // W2-FIX-DATA-5 (ww-25): none admitted, none written (the draws above are kept)
     events.sort((a, b) => (b.yearsAgo || 0) - (a.yearsAgo || 0));
   }
 
@@ -1266,3 +1266,6 @@ function noteByTemplateRow(from, list, eventTemplate, value) {
 function sizedHistoryText(text, facts) {
   return resolveSibling(text, HISTORY_DESC_SIBLINGS, { facts, poolId: 'historyData:HISTORY_DESC_SIBLINGS', surface: 'history', drawKind: 'T' });
 }
+
+// ─── W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT-INCREMENT ww-25, HIGH): a resource event declares its size; the leaf holds why.
+import { admittedResourceEvent, resourceEventAdmitted } from './history/resourceEventAdmission.js';

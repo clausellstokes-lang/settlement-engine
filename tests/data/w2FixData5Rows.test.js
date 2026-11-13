@@ -18,6 +18,13 @@ const bornRr2s = (/** @type {string} */ seed) => {
   const route = m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] };
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
 };
+/** A town of the newer readers' lists (REVIEW-W2-WRITE `rww-*`, REVIEW-POWERS-FU `rpf-*`), as their renderers birth it. */
+const bornInc = (/** @type {string} */ seed) => {
+  const m = /** @type {RegExpMatchArray} */ (seed.match(/^r(?:ww|pf)-(\w+?)-([a-z_+]+)-(\d+)$/));
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
+};
+const historyText = (/** @type {any} */ s) => JSON.stringify(s.history || {});
+const arrivalText = (/** @type {any} */ s) => JSON.stringify(s.arrivalScene || '');
 const servicesOf = (/** @type {any} */ s) => /** @type {any[]} */ (Object.values(s.availableServices || {}).flat());
 const named = (/** @type {any} */ s, /** @type {string} */ name) => (s.institutions || []).find((/** @type {any} */ i) => i.name === name);
 
@@ -40,4 +47,11 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     expect(fires.length, 'the village keeps its fire').toBeGreaterThan(0);
     expect(fires.filter((t) => /district|quarter|street|warehouse|wharf/i.test(t))).toEqual([]);
   }, 60_000);
+  test('ww-25 (HIGH): a thorp\'s history raises no civic buildings or cathedral (rww-thorp-calm-1)', () => {
+    const town = bornInc('rww-thorp-calm-1');
+    expect(town.tier).toBe('thorp');
+    expect(town.history.founding, 'the thorp keeps its founding (its one event was the Great Construction: silence, record 386, 4)').toBeTruthy();
+    expect(historyText(town)).not.toMatch(/civic buildings|cathedral|The Great Construction/i);
+  }, 60_000);
+
 });
