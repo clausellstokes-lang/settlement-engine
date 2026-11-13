@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "37b607270867c98497b727bef53587c65c4d5e9b",
+  "measuredAtSha": "4a179bcc994edf410c448b7f331360f89b144646",
   "measuredBy": "COHERENCE-UPKEEP-5",
   "date": "2026-11-13",
-  "note": "the merge of AGREE-8 tip 69b53decd took AGREE figures, which do not count this lane tests",
-  "files": 3223,
-  "parked": 400,
-  "credited": 2823,
-  "titles": 29261,
-  "suiteTitles": 7936
+  "note": "V3 and stage two at 4a179bcc9: defenceParts, defenceDerived walker, upkeepVocation, upkeepGuardLines and the V3 builder's tests added",
+  "files": 3230,
+  "parked": 401,
+  "credited": 2829,
+  "titles": 29286,
+  "suiteTitles": 7944
 }
