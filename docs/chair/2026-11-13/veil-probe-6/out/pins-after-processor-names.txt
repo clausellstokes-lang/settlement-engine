@@ -1,0 +1,10 @@
+components/publicProseVeilInvariance.test.js 5/5 passed
+lib/gallery.test.js 50/50 passed
+lib/partyLinkClient.test.js 7/7 passed
+security/allegianceVeil.pglite.test.js 8/8 passed
+security/gallerySecondHomes.pglite.test.js 3/3 passed
+security/galleryServerVeil.pglite.test.js 16/16 passed
+security/galleryVeilCures.pglite.test.js 30/30 passed
+security/playerRecordVeiledFace.test.js 4/4 passed
+security/publicPayloadVeilTotality.test.js 28/28 passed
+display/publicSafe.test.js 56/56 passed

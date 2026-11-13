@@ -7,7 +7,7 @@ hosted database, no production credential, no `supabase db push`, no `migration 
 
 **TIP:** the commit carrying the latest copy of this file, read back from origin.
 
-**THE NEXT STEP, IF THIS SEAT IS CUT OFF:** item 1 is pushed; run the attack (both sides) at the tip and `secondhome3.mjs` over its clones, then the lighting census through its door, then item 2 (§0).
+**THE NEXT STEP, IF THIS SEAT IS CUT OFF:** items 1-3 are pushed; the final attack (both shapes), planted run and sentence search on the final 211; then the chair's two added items, V5-3 and V5-4 (§4), each its own commit, red first.
 
 ## 0. Status
 
@@ -88,8 +88,53 @@ lists and in the trace's causes and effects.
 | `planted.probe.jsx`, master's shape, `203 + 211` and `001..211`, DM off and on, live and frozen | the review's 17 rows a chain (`planted-master-base.txt`) | **0 markers, 0 house names** (`planted-master-item1.txt`): 24 towns, 4,447 markers, 96 shares, 768 reads, 0 raised |
 | the same, the new shape, `001..211` | the review's rows (`planted-tip-base.txt`) | **0, 0** (`planted-tip-item1.txt`): 24 towns, 7,537 markers, 96 shares, 384 reads, 0 raised |
 
-THE PROOFS STILL RUNNING AT THIS COMMIT (they follow in the next copy of this file): the attack at item 1 in both
-shapes (EXTRA / MISSING: nothing open taken), and the sentence search over its clones.
+**The attack at item 1, the new shape** (`attack.probe.jsx`, RV5_POWERS=1, the reference my own client): 12 towns,
+912 shares, 3,648 reads, 75,652 hand hides, 285,988 tokens the reference removed (280,152 at the base: the client now
+withholds the second homes too); **0 token leaks, 0 `EXTRA`, 0 raised, 0 `pageShowMore`, its `secondHome` list empty**
+(at the base it listed the defence copies in every read); `MISSING` exactly the base's four rows (`decrees` and
+`dmLayer` on Reveal-DM reads, the two retired names the review salts onto new cards: the review's own classes);
+`postFreeze` on the link 279 (by 208's design, as the review). (`attack-tip-{base,item1}-summary.txt`.)
+
+### 1.6 THE SENTENCE SEARCH FOUND AN ELEVENTH HOME: a chain names a hidden house by the engine's processor match
+
+`secondhome2.mjs` SENTENCES=1 over the item-1 clones (`secondhome2-tip-sentences-item1.txt`): **every one of the
+review's ten rows reads 0.** Nine lines remain; I traced each:
+
+| Line | What it is | Class |
+|---|---|---|
+| `npc.ties(institution)` at `activeChains[].label` and `.processingInstitutions[]`: "Black market" (Oxteitza) | the town's house is **"Black market bazaar"**, hidden whole; the chain names it **"Black market"**, the name the engine's processor match gives it (`computeActiveChains.js :: institutionMatchesProcessor`, id-first over `fuzzyProcessorMatch`, the pattern's first twelve characters). The review's name search looks for the card's own name, so it could not see it; the person's tie (`family: "Black market"`) is how the sentence search did | **A REAL SECOND HOME. Cured below** |
+| the same at `.processingInstitutions[]`, "Merchant guilds (3-8)" and the like | a person's tie key equal to the name of a house left OPEN, which the chain names | open at its source |
+| `institution.function(tags)` at `activeChains[].chainId`, "fortification"; `npc.goals(goal)` at `.chainId` / `.upstreamChains[]`, "animal_husbandry", "warehouse_logistics" | the same token in two vocabularies: a catalog tag, or a goal's intent key that targets a chain, equal to an open chain's id | open at its source |
+| `tension.description` at `economicViability.issues[].description` / `.message` and the tension's own `specificIssue` (Kallipolis) | the tension's description is COMPOSED FROM the viability issue (`historyGenerator.js:442-452`: the issue's text is `specificIssue`, and the description is a lead plus it): the issue is the source and it is open; hiding the tension hides the copy, not the source | open at its source |
+| `npc.physical` embedded at `presentation.impression` (Pratopolis) | the impression "Unremarkable clothes, a quiet voice and eyes that never stop moving." holds the words of ANOTHER person's appearance, a shared phrase of two pools; the card's own `physical` holds nothing of it | a coincidence of two pools |
+
+So at item 1 the review's two instruments read zero on the ten rows; the residue is eight lines open at their source
+or a coincidence, which no withholding can make zero without taking what is open, plus one real home, now cured.
+
+**How often a hidden house feeds a chain under another name** (`processor-names.probe.jsx` over 300 births, the
+engine's own matcher, `processor-names-300-births.json`): two forms only, "Black market" <= "Black market bazaar"
+(24) and "Thieves' guild (powerful)" <= "Thieves' guild chapter" (24).
+
+**The cure, both twins** (`gallerySecondHomes.js`; 211's `_gallery_veil_hidden_name` and `_gallery_veil_second_homes`):
+a processing name that a house hidden whole answers to (its own name, or the engine's rule: the lower-cased name
+holds the pattern's first twelve characters) **and no house left open answers to** is that house's name: it leaves
+the processing list; the dependency naming it goes; a chain left with no processor is withheld whole (as before); the
+trace's causes and effects holding it go. A name an open house also answers to stays (nothing open is taken). The
+label rule is unchanged: a chain whose label IS the name of a house hidden whole is withheld whole, even where an
+open house also processes it, because its id prints that name (`EconomicsTab.jsx:686`). **MY RULING, for the chair's
+veto:** where the hidden name and an open chain's own label are the same words, the hidden name wins; the cost is
+that chain's row.
+
+**Red first, the guard widened**: two towns that carry the alias (`cv6-proc-metropolis-infiltrated-0`, the bazaar;
+`cv6-proc-city-infiltrated-2`, the chapter) join the guard, and its oracle is the ENGINE's matcher, not mine: a
+processing name only hidden houses answer to, by `institutionMatchesProcessor`, is searched for as text like a
+hidden house's name. At 1a017fb51: **RED** in both shapes on every read (`guard-red-processor-names.txt`, 48
+lines; the older guard town `rv5-plant-city-infiltrated-0` carries the chapter too). After the cure: **3 of 3**.
+The lane's pins after it (`pins-after-processor-names.txt`): **10 files, 207 of 207** (galleryServerVeil 16,
+galleryVeilCures 30, gallerySecondHomes 3, publicPayloadVeilTotality 28, allegianceVeil 8, playerRecordVeiledFace
+4, lib/gallery 50, lib/partyLinkClient 7, display/publicSafe 56, publicProseVeilInvariance 5). Gates: strict 0
+(1,113), ratchet 0 (167), eslint 0. The item-3 rehearsal re-run on this file: every comparison 0, 47 helpers, none
+callable (`rehearse-item3.txt`).
 
 ### 1.5 The lane's pins at item 1
 
@@ -148,7 +193,7 @@ as the owner's `begin; … commit;`) (`out/rehearse-item3.txt`):
 | (c) the same from 203 + this 211 alone | **0** |
 | (d) 001..211, then this down file, against a chain at 210 | **0**; the down file again: 0; this 211 again, against 001..211: 0 (control 210 against 211: 56) |
 | (e) the release after the early deploy: 203 + today's 211 + 204..210 + this 211, against 001..211 in order | **0** |
-| (f) after the early deploy and this 211: helpers / callable by `anon` or `authenticated` | **46 / 0** (the owner's check of §7.4 now expects `46 | 0`, not `40 | 0`) |
+| (f) after the early deploy and this 211: helpers / callable by `anon` or `authenticated` | **47 / 0** (the owner's check of §7.4 now expects `47 | 0`, not `40 | 0`; re-run after §1.6's cure, controls 11 and 57) |
 
 **A pin so a later seat cannot leave one behind** (`galleryVeilCures.pglite.test.js`, "V5-7: …"): the forty
 signatures today's 211 creates are frozen in the test; each must be created again by the chain's 211 or dropped by it

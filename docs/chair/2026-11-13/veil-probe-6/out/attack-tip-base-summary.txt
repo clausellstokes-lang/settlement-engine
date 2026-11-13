@@ -1,0 +1,58 @@
+towns 12  shares 912  reads 3648  hand hides 75652  tokens the reference removed 280152
+raised 0 []
+tokens removed by the reference, per chain:read {"b211:gallery":91980,"b211:link":48286,"b211:map":47906,"b211:import":91980}
+TOKEN LEAKS 0
+{}
+secondHome {
+  'b211:gallery:institution:desc': 487,
+  'b211:gallery:institution:tags': 392,
+  'b211:gallery:institution:facets': 159,
+  'b211:gallery:institution:description': 281,
+  'b211:link:institution:desc': 487,
+  'b211:link:institution:tags': 392,
+  'b211:link:institution:facets': 159,
+  'b211:link:institution:description': 281,
+  'b211:map:institution:desc': 487,
+  'b211:map:institution:tags': 392,
+  'b211:map:institution:facets': 159,
+  'b211:map:institution:description': 281,
+  'b211:import:institution:desc': 487,
+  'b211:import:institution:tags': 392,
+  'b211:import:institution:facets': 159,
+  'b211:import:institution:description': 281,
+  'b211:gallery:institution:serviceKeys': 140,
+  'b211:link:institution:serviceKeys': 140,
+  'b211:map:institution:serviceKeys': 140,
+  'b211:import:institution:serviceKeys': 140
+} [
+  {
+    share: 'rv5-t-city-calm-0 salted allShut/pub/live',
+    read: 'gallery',
+    tok: 'RV5~rv5tcitycalm0~institution~1282~desc~Z',
+    at: [ 'defenseProfile.institutions.magicDef[].desc' ]
+  },
+  {
+    share: 'rv5-t-city-calm-0 salted allShut/pub/live',
+    read: 'gallery',
+    tok: 'RV5~rv5tcitycalm0~institution~1284~tags~Z',
+    at: [ 'defenseProfile.institutions.magicDef[].tags[]' ]
+  },
+  {
+    share: 'rv5-t-city-calm-0 salted allShut/pub/live',
+    read: 'gallery',
+    tok: 'RV5~rv5tcitycalm0~institution~1285~facets~Z',
+    at: [ 'defenseProfile.institutions.magicDef[].facets' ]
+  },
+  {
+    share: 'rv5-t-city-calm-0 salted allShut/pub/live',
+    read: 'gallery',
+    tok: 'RV5~rv5tcitycalm0~institution~1283~description~Z',
+    at: [ 'defenseProfile.institutions.magicDef[].description' ]
+  }
+]
+towns with a hidden power 0 hiddenPowerName {} covertTies {} powers cards hidden 560
+noRow {} postFreeze { 'b211:link': 279 } served {} pageShowMore {}
+b211 MISSING decrees                                                   {"gallery":31,"import":31}
+b211 MISSING dmLayer                                                   {"gallery":31,"import":31}
+b211 MISSING npcs[].factionGoal                                        {"gallery":1378,"import":1378}
+b211 MISSING npcs[].linkedFactionIds                                   {"gallery":1353,"import":1353}

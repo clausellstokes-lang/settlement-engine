@@ -129,12 +129,16 @@ const GROUPING_DATA = Object.freeze([
 const TOWNS = Object.freeze([
   { seed: 'rv5-plant-city-infiltrated-0', settType: 'city', stress: 'infiltrated' },
   { seed: 'rv5-plant-hamlet-infiltrated-0', settType: 'hamlet', stress: 'infiltrated' },
-  { seed: 'rv5-plant-metropolis-null-1', settType: 'metropolis', stress: null },
+  // a hidden house that feeds a chain under ANOTHER name (the engine's processor match: 'Black market' <= 'Black market
+  // bazaar'; "Thieves' guild (powerful)" <= "Thieves' guild chapter"), found by the second instrument at item 1
+  { seed: 'cv6-proc-metropolis-infiltrated-0', settType: 'metropolis', stress: 'infiltrated' },
+  { seed: 'cv6-proc-city-infiltrated-2', settType: 'city', stress: 'infiltrated' },
 ]);
 
 describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sent (V5-1)', () => {
   /** @type {any} */ let LIVE; /** @type {any} */ let veil; /** @type {any} */ let gallery; /** @type {any} */ let gen;
   /** @type {any} */ let compose; /** @type {any} */ let birthConfig; /** @type {any} */ let DEFAULT_CONFIG; /** @type {any} */ let factionIdFromName;
+  /** @type {any} */ let matchesProcessor;
   let n = 0;
 
   beforeAll(async () => {
@@ -148,6 +152,7 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     await density.loadGenerationLawPayloads();
     ({ DEFAULT_CONFIG } = await import('../../src/store/configSlice.js'));
     ({ factionIdFromName } = await import('../../src/lib/entities.js'));
+    ({ institutionMatchesProcessor: matchesProcessor } = await import('../../src/generators/computeActiveChains.js'));
   }, PGLITE_BOOT_TIMEOUT_MS);
 
   /** The marker planter: every string an eye or a grouping governs, at the step it first exists after. */
@@ -245,7 +250,16 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
         await db.exec(`set test.uid = '';`);
         // the names of the houses this share hid whole (the gallery response no longer lists them)
         const listed = new Set((g?.data?.institutions || []).filter(isRec).map((i) => i.name));
-        const gone = (record.institutions || []).filter(isRec).map((i) => i.name).filter((x) => typeof x === 'string' && x.length >= 6 && !listed.has(x));
+        const goneCards = (record.institutions || []).filter((i) => isRec(i) && typeof i.name === 'string' && !listed.has(i.name));
+        const openCards = (record.institutions || []).filter((i) => isRec(i) && typeof i.name === 'string' && listed.has(i.name));
+        const gone = goneCards.map((i) => i.name).filter((x) => x.length >= 6);
+        // the names a chain gives a hidden house, by the ENGINE's own processor match (computeActiveChains.js ::
+        // institutionMatchesProcessor, id-first): a processing name only hidden houses answer to is that house's name
+        for (const c of (isRec(record.economicState) && Array.isArray(record.economicState.activeChains) ? record.economicState.activeChains : []).filter(isRec)) {
+          for (const x of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) {
+            if (typeof x === 'string' && x.length >= 6 && !gone.includes(x) && goneCards.some((h) => matchesProcessor(h, x)) && !openCards.some((h) => matchesProcessor(h, x))) gone.push(x);
+          }
+        }
         for (const [read, body] of Object.entries(resp)) {
           reads += 1;
           if (!body) { sent.push(`${label} dm=${dm} ${mode} ${read}: NO ROW`); continue; }
@@ -254,7 +268,7 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
             else if (isRec(v)) for (const [k, x] of Object.entries(v)) walk(x, p ? `${p}.${k}` : k);
             else if (typeof v === 'string') {
               for (const t of v.match(TOKEN_RE) || []) sent.push(`${label} dm=${dm} ${mode} ${read}: ${t.split('~').slice(1, 2)[0]}.${t.split('~')[3]} at ${p}`);
-              for (const nm of gone) if (v.includes(nm)) sent.push(`${label} dm=${dm} ${mode} ${read}: the house "${nm}", hidden whole, at ${p}`);
+              for (const nm of gone) if (v.includes(nm)) sent.push(`${label} dm=${dm} ${mode} ${read}: the house "${nm}", hidden whole, or its name in a chain, at ${p}`);
             }
           };
           walk(body, '');

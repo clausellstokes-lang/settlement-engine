@@ -304,6 +304,7 @@ drop function if exists public._gallery_veil_grouping(jsonb, text);
 drop function if exists public._gallery_veil_groupings();
 drop function if exists public._gallery_veil_hideable(text);
 drop function if exists public._gallery_veil_hideable_p(jsonb, text);
+drop function if exists public._gallery_veil_hidden_name(jsonb, jsonb, text[]);
 drop function if exists public._gallery_veil_house(jsonb);
 drop function if exists public._gallery_veil_illegal_brokerage(jsonb);
 drop function if exists public._gallery_veil_inst_id(jsonb);

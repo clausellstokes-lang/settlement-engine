@@ -14,12 +14,16 @@
  *   history.siegeNarrative                              a current tension's description, embedded
  *   defenseProfile.institutions.<slot>[]                a house's copy, by name: its description and function;
  *                                                       the whole entry for a house hidden whole
- *   economicState.activeChains[]                        a house hidden whole: its name leaves the processing
- *                                                       list and the dependency; a chain that is that house's
- *                                                       own (its label is the name, or no processing house is
- *                                                       left) is withheld whole: its id prints as the name
- *   simulationTrace[]                                   a house hidden whole: each cause or effect that names
- *                                                       it; an entry that names it elsewhere, whole
+ *   economicState.activeChains[]                        a house hidden whole: each processing name it answers
+ *                                                       to and no open house does (its own, or the engine's
+ *                                                       processor match: 'Black market' for 'Black market
+ *                                                       bazaar') leaves the list, and the dependency on it goes;
+ *                                                       a chain that is that house's own (its label is the name,
+ *                                                       or no processing house is left) is withheld whole: its
+ *                                                       id prints as the name
+ *   simulationTrace[]                                   a house hidden whole: each cause or effect that holds
+ *                                                       one of those names; an entry that holds one elsewhere,
+ *                                                       whole
  *   <a person>.presentation.impression                  a sentence of the appearance (`physical`) embedded
  *
  * SQL TWIN, rule for rule: migration 211 :: _gallery_veil_pieces, _gallery_veil_embeds, _gallery_veil_names,
@@ -49,6 +53,9 @@ function recAt(s, key) {
   const v = s[key];
   return isRec(v) ? v : null;
 }
+
+/** The engine's processor match reads this many characters of a pattern (computeActiveChains.js :: fuzzyProcessorMatch). */
+const PROCESSOR_PREFIX = 12;
 
 /** A piece shorter than this is never searched for (a word or a name is no sentence). */
 const SECOND_HOME_PIECE_MIN = 12;
@@ -167,9 +174,24 @@ export function withholdSecondHomes(s, src, gone, houseFields) {
     }
   }
   if (!gone.size) return;
+  // A chain names a house by the ENGINE's processor match, not only by the card's name (computeActiveChains.js ::
+  // fuzzyProcessorMatch: the lower-cased name holds the pattern's first PROCESSOR_PREFIX characters), so a house
+  // hidden whole as 'Black market bazaar' is processing name 'Black market'. A processing name that a house hidden
+  // whole answers to, and no house left open does, is that house's name.
+  const openNames = (Array.isArray(s.institutions) ? s.institutions : []).filter(isRec).map(i => str(i.name));
+  /** @param {string} name @param {string} x @returns {boolean} */
+  const answers = (name, x) => name === x || name.toLowerCase().includes(x.toLowerCase().slice(0, PROCESSOR_PREFIX));
+  /** @param {unknown} x @returns {boolean} */
+  const hiddenName = (x) => [...gone].some(g => answers(g, str(x))) && !openNames.some(o => answers(o, str(x)));
+  /** every name of a house removed whole: its own, and each processing name only it answers to */
+  const named = new Set(gone);
+  const econ0 = recAt(s, 'economicState');
+  for (const c of (econ0 && Array.isArray(econ0.activeChains) ? econ0.activeChains : []).filter(isRec)) {
+    for (const x of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) if (typeof x === 'string' && hiddenName(x)) named.add(x);
+  }
   /** @param {unknown} v @returns {boolean} */
   const names = (v) => {
-    if (typeof v === 'string') { for (const g of gone) if (v.includes(g)) return true; return false; }
+    if (typeof v === 'string') { for (const g of named) if (v.includes(g)) return true; return false; }
     if (Array.isArray(v)) return v.some(names);
     if (isRec(v)) return Object.values(v).some(names);
     return false;
@@ -181,11 +203,11 @@ export function withholdSecondHomes(s, src, gone, houseFields) {
       if (gone.has(str(c.label))) return [];
       const next = { ...c };
       if (Array.isArray(c.processingInstitutions)) {
-        const kept = c.processingInstitutions.filter(x => !gone.has(str(x)));
+        const kept = c.processingInstitutions.filter(x => !hiddenName(x));
         if (c.processingInstitutions.length && !kept.length) return [];
         next.processingInstitutions = kept;
       }
-      if (isRec(c.dependency) && gone.has(str(c.dependency.institution))) delete next.dependency;
+      if (isRec(c.dependency) && hiddenName(c.dependency.institution)) delete next.dependency;
       return [next];
     });
   }

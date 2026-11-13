@@ -1,0 +1,16 @@
+towns 12  shares 912  reads 3648  hand hides 75652  tokens the reference removed 285988
+raised 0 []
+tokens removed by the reference, per chain:read {"c211:gallery":93439,"c211:link":49745,"c211:map":49365,"c211:import":93439}
+TOKEN LEAKS 0
+{}
+secondHome {} []
+towns with a hidden power 0 hiddenPowerName {} covertTies {} powers cards hidden 560
+noRow {} postFreeze { 'c211:link': 279 } served {} pageShowMore {}
+c211 MISSING decrees                                                   {"gallery":31,"import":31}
+      e.g. rv5-t-thorp-calm-0 salted opened/dm/live :: [{"id":"d1","text":"RV5~rv5tthorpcalm0~grp~96~decrees~Z"}]
+c211 MISSING dmLayer                                                   {"gallery":31,"import":31}
+      e.g. rv5-t-thorp-calm-0 salted opened/dm/live :: {"notes":"RV5~rv5tthorpcalm0~grp~97~dmLayer~Z"}
+c211 MISSING npcs[].factionGoal                                        {"gallery":1378,"import":1378}
+      e.g. rv5-t-village-calm-0 salted members/pub/live :: "RV5~rv5tvillagecalm0~npc~5~factionGoal~Z"
+c211 MISSING npcs[].linkedFactionIds                                   {"gallery":1353,"import":1353}
+      e.g. rv5-t-thorp-calm-0 salted members/pub/live :: "RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z"

@@ -54,8 +54,8 @@
 --       _gallery_veil_second_homes and the impression arm of _gallery_veil_card): a tie's description and tension
 --       under prominentRelationship and inside pressureSentence; a current tension's description inside
 --       history.siegeNarrative; a house's description and function in the defence profile's lists, and the whole
---       entry for a house hidden whole; the name of a house hidden whole in the economy's chains (and the chain that
---       is its own) and in the simulation trace; a sentence of a person's appearance inside the card's impression.
+--       entry for a house hidden whole; the name of a house hidden whole in the economy's chains (its own, or the
+--       name the engine's processor match gives it; and the chain that is its own) and in the simulation trace; a sentence of a person's appearance inside the card's impression.
 --       A composed sentence that embeds a hidden string is withheld whole; a list loses the hidden name only.
 --
 -- RESTATED ALSO: _gallery_apply_member_overrides (093), its body plus a typed read of the two
@@ -1017,6 +1017,16 @@ returns boolean language sql immutable as $$
                   where jsonb_typeof(x.j) = 'string' and position(g in (x.j #>> '{}')) > 0)
 $$;
 
+-- A processing name that a house removed whole answers to, and no house left open does: that house's name. A
+-- house answers to its own name or by the engine's processor match (computeActiveChains.js :: fuzzyProcessorMatch:
+-- the lower-cased name holds the pattern's first twelve characters), so 'Black market bazaar' is 'Black market'.
+create or replace function public._gallery_veil_hidden_name(x jsonb, gone jsonb, open_names text[])
+returns boolean language sql immutable as $$
+  select exists (select 1 from jsonb_object_keys(gone) g where g = q.v or position(left(lower(q.v), 12) in lower(g)) > 0)
+     and not exists (select 1 from unnest(open_names) o where o = q.v or position(left(lower(q.v), 12) in lower(o)) > 0)
+    from (select public._gallery_veil_str(x) as v) q
+$$;
+
 -- What each second home's source said, read BEFORE the eyes run: the ties with a shut eye
 -- [{n1, n2, ty, d, t, ds, ts}], the pieces of every shut tension description, and each house's shut
 -- eyes by name {name: {desc, fn}}.
@@ -1070,6 +1080,8 @@ declare
   own jsonb;
   k text;
   v jsonb;
+  open_names text[];
+  named jsonb;
 begin
   if jsonb_array_length(ties) > 0 then
     pr := s -> 'prominentRelationship';
@@ -1106,6 +1118,14 @@ begin
     end loop;
   end if;
   if gone = '{}' then return s; end if;
+  open_names := array(select public._gallery_veil_str(e -> 'name')
+                        from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+                       where jsonb_typeof(e) = 'object');
+  -- every name of a house removed whole: its own, and each processing name only it answers to
+  named := gone || coalesce((select jsonb_object_agg(x #>> '{}', true)
+      from jsonb_array_elements(case when jsonb_typeof(s #> '{economicState,activeChains}') = 'array' then s #> '{economicState,activeChains}' else '[]' end) c,
+           jsonb_array_elements(case when jsonb_typeof(c -> 'processingInstitutions') = 'array' then c -> 'processingInstitutions' else '[]' end) x
+     where jsonb_typeof(c) = 'object' and jsonb_typeof(x) = 'string' and public._gallery_veil_hidden_name(x, gone, open_names)), '{}');
 
   if jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,activeChains}') = 'array' then
     s := jsonb_set(s, '{economicState,activeChains}', coalesce((
@@ -1113,9 +1133,10 @@ begin
         select o, case when jsonb_typeof(c) <> 'object' then c
           else (case when jsonb_typeof(c -> 'processingInstitutions') = 'array'
                      then jsonb_set(c, '{processingInstitutions}', coalesce((select jsonb_agg(x order by xo) from jsonb_array_elements(c -> 'processingInstitutions') with ordinality y(x, xo)
-                                                                             where not gone ? public._gallery_veil_str(x)), '[]'))
+                                                                             where not public._gallery_veil_hidden_name(x, gone, open_names)), '[]'))
                      else c end)
-               - (case when jsonb_typeof(c -> 'dependency') = 'object' and gone ? public._gallery_veil_str(c #> '{dependency,institution}') then array['dependency'] else '{}'::text[] end) end as c2,
+               - (case when jsonb_typeof(c -> 'dependency') = 'object' and public._gallery_veil_hidden_name(c #> '{dependency,institution}', gone, open_names)
+                       then array['dependency'] else '{}'::text[] end) end as c2,
           c
           from jsonb_array_elements(s #> '{economicState,activeChains}') with ordinality x(c, o)) q
        where not (jsonb_typeof(c) = 'object'
@@ -1127,11 +1148,11 @@ begin
     s := jsonb_set(s, '{simulationTrace}', coalesce((
       select jsonb_agg(case when jsonb_typeof(e) <> 'object' then e
           else e || (select coalesce(jsonb_object_agg(kk, coalesce((select jsonb_agg(x order by xo) from jsonb_array_elements(e -> kk) with ordinality y(x, xo)
-                                                                    where not public._gallery_veil_names(x, gone)), '[]')), '{}')
+                                                                    where not public._gallery_veil_names(x, named)), '[]')), '{}')
                        from unnest(array['causes', 'downstreamEffects']) kk where jsonb_typeof(e -> kk) = 'array') end order by o)
         from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)
        where not (jsonb_typeof(e) = 'object'
-                  and exists (select 1 from jsonb_each(e) z(kk, vv) where kk not in ('causes', 'downstreamEffects') and public._gallery_veil_names(vv, gone)))), '[]'));
+                  and exists (select 1 from jsonb_each(e) z(kk, vv) where kk not in ('causes', 'downstreamEffects') and public._gallery_veil_names(vv, named)))), '[]'));
   end if;
   return s;
 end $$;

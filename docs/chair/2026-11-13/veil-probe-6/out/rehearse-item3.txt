@@ -1,9 +1,5 @@
-NOTICE:  database "r203" does not exist, skipping
-NOTICE:  database "r210" does not exist, skipping
-NOTICE:  database "r211" does not exist, skipping
-NOTICE:  database "r203new" does not exist, skipping
 (a) 203 + today's 211 + this 211, against 203 + this 211 alone: 0 lines differ
-    control, 203 + today's 211 against 203 + this 211: 10 lines differ
+    control, 203 + today's 211 against 203 + this 211: 11 lines differ
 (b) 203 + this 211, then this 211 again over itself: 0 lines differ
     001..211, then this 211 again over itself: 0 lines differ
 (c) r203oldnew, then this down file and 203's get_unlisted_dossier (the review's 7.6), against 203: 0 lines differ
@@ -11,6 +7,6 @@ NOTICE:  database "r203new" does not exist, skipping
 (d) 001..211, then this down file, against a chain at 210: 0 lines differ
     the down file a second time: 0
     then this 211 again, against 001..211: 0
-    control, 210 against 211: 56
+    control, 210 against 211: 57
 (e) the release after the early deploy: 203 + today's 211 + 204..210 + this 211, against 001..211 in order: 0 lines differ
-(f) helpers | callable by readers, after the early deploy and this 211: 46|0
+(f) helpers | callable by readers, after the early deploy and this 211: 47|0
