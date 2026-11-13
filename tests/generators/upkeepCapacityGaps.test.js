@@ -12,6 +12,7 @@ import { defencePartsOf } from '../../src/generators/defenseGenerator.js';
 import { getInstFlags } from '../../src/generators/helpers.js';
 import { keepOfRecord } from '../../src/domain/facts/keep.js';
 import { DEFENCE_TUNING } from '../../src/data/defenceWeights.js';
+import { UPGRADE_CHAINS } from '../../src/data/institutionLadders.js';
 import { partitionDefenseInstitutions } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 import { defenseFactsOf } from '../../src/domain/defense/defenseFacts.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -19,7 +20,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** @type {Record<string, any>} */
 const births = {};
-const KEYS = ['cold-city-227', 'fresh6-metropolis-30', 'cold-thorp-191', 'fresh6-thorp-52', 'cold-thorp-16', 'cold-hamlet-123', 'cold-thorp-20'];
+const KEYS = ['cold-city-227', 'fresh6-metropolis-30', 'cold-thorp-191', 'fresh6-thorp-52', 'cold-thorp-16', 'cold-hamlet-123', 'cold-thorp-20', 'cold-famine-village-24'];
 const CITIES = ['cold-city-227', 'fresh6-metropolis-30'];
 
 /** @param {string} key */
@@ -143,5 +144,22 @@ describe('G3s (C4b): the wayside shrine has no clergy of its own, so it opens no
     expect(partOf(s, 'clergy')).toBeNull();
     expect(partOf(s, 'parish')).not.toBeNull();
     expect(s.defenseProfile.traditions.hasDivine).toBe(false);
+  });
+});
+
+describe('G4 (C5): the druid houses are one function at two scales (the catalogue\'s own successor key)', () => {
+  test('RED-FIRST: the Druid Circle\'s family hands its function to the Elder Grove Council, so the two are one ladder', () => {
+    expect(UPGRADE_CHAINS.some(([lesser, greater]) => lesser === 'Druid Circle' && greater === 'Elder Grove Council')).toBe(true);
+  });
+
+  test('RED-FIRST: in the same village an Elder Grove Council counts 1.5 times a Druid Circle (1.2 against 0.8)', () => {
+    const { least, greatest } = DEFENCE_TUNING.houseScale;
+    const s = births['cold-famine-village-24'];
+    expect(s.institutions.some((i) => i.name === 'Druid Circle')).toBe(true);
+    const circle = partOf(s, 'druids');
+    const council = partOf({ ...s, institutions: s.institutions.map((i) => (i.name === 'Druid Circle' ? { ...i, name: 'Elder Grove Council' } : i)) }, 'druids');
+    expect(circle).not.toBeNull();
+    expect(council).not.toBeNull();
+    expect(council.full / circle.full).toBeCloseTo(greatest / least, 1);
   });
 });

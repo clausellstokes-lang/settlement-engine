@@ -1,0 +1,18 @@
+== C5x: the key alone (druids out of SCALED_PARTS) vs C4b: births 3756; records differ 0
+READINESS moved 0 (up 0, down 0); mean all +0.00; min 0 max 0; bands 0 {}
+  fresh6: moved 0, band 0
+  thorp      moved    0 mean +0.00 min +0 max +0 bands 0
+  hamlet     moved    0 mean +0.00 min +0 max +0 bands 0
+  village    moved    0 mean +0.00 min +0 max +0 bands 0
+  town       moved    0 mean +0.00 min +0 max +0 bands 0
+  city       moved    0 mean +0.00 min +0 max +0 bands 0
+  metropolis moved    0 mean +0.00 min +0 max +0 bands 0
+  military  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  monster   moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  internal  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  economic  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  magical   moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  disaster  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  MAGIC AGAINST THE PAGE: made 0 [], cured 0
+  AI THREATS: births changed 0 {}
+  COUPLING: power structure changed 0 (of which band changed 0), a power appears or vanishes 0, legitimacy label changed 0

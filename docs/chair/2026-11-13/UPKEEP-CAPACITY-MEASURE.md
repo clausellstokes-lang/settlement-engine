@@ -656,3 +656,20 @@ The hand-back's order: the defence lane's seventh seat edits `defenseInstitution
   - **"Clergy provide basic wound care: better than nothing, worse than a hospital."** (and its famine form), in all 20 (the PDF): `src/domain/display/threatAssessment.js`.
   - **A chain's divine provision**, in 5 of the 20 ("Divine provision makes up a little more", "divine provision covers 45"): the food balance's `src/generators/economy/foodBalance.js :: hasDivineFood` reads 'parish church' as a substring, so it counts the WALK to another's church (all five hold "Access to parish church"). It is G3's class on another home, the food record's, which this step does not touch: named for its holder.
   - In 8 of the 20 a "Priestly Guidance" power governs, with a priest as its head: there the lines above have a person to stand on, though no house of clergy. In the other 12 nobody on the page is a priest.
+
+## C5. G4: the ONE key `successor: 'Elder Grove Council'` on the Druid Circle family
+
+**Built:** the one key in `src/data/institutionalCatalog.js` (the family's own `ceiling` already said "In towns and cities the druids speak through the Elder Grove Council"). `familyLadderPairs` turns it into the ladder pair Druid Circle → Elder Grove Council, so by the one law the circle reads 0.8 and the council 1.2. Red first: `upkeepCapacityGaps.test.js`, two tests red at C4b (the pair is not in `UPGRADE_CHAINS`; a council counted the same as a circle in the same village), green after.
+
+**THE PROOF THAT THE KEY ALONE MOVES NOTHING:** the corpus born at C5 with `druids` taken out of `SCALED_PARTS` in a scratch copy (`move-C5x.txt`): **0 of 3,756 whole records differ from C4b, and 0 part lists.** The ladder normalizer's new pair removes nothing: no birth holds both houses (0).
+
+**The factor's own move against C4b** (`move-C5.txt`): 69 records differ; readiness moves in 44 (32 up, 12 down), ±1; 5 bands (Lightly Defended → Defensible 2, Defensible → Well-Defended 1, Lightly Defended → Vulnerable 1, Vulnerable → Undefended 1).
+
+| | Holders | With the druids part | Readiness up / down | Bands | Power structures |
+|---|---|---|---|---|---|
+| Druid Circle (villages; 0.8) | 24 | 18 | 0 / 12 | 2 | 2 |
+| Elder Grove Council (towns and up; 1.2) | 600 | 445 | 32 / 0 | 3 | 3 |
+
+- Beasts moves in 69 (±3; 2 bands up); supply 24 and magic 24 through limit 1 (2 bands each); military 2; order 0.
+- **5 power structures re-drawn, each with a band move; no power appears or vanishes.** No AI threat; magic against the page 0. Outside defence and powers: 5 records, the same five whose power structure is re-drawn.
+- **Golden corpus: 0 of 525 rows move.**
