@@ -65,6 +65,25 @@ function getRank(standing, allFactions) {
   return (isTop && isDominantOverall) ? 'dominant' : 'subordinate';
 }
 
+/**
+ * COHERENCE-POWERS-7: the card categories whose subordinate rows place the card "behind the leading one" of its own kind,
+ * and the power categories that are that kind: the trade's houses (economy) and the old families (the noble bodies).
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+const HOUSE_KINDS = Object.freeze({ economy: Object.freeze(['economy']), other: Object.freeze(['noble']) });
+
+/**
+ * Whether the card heads the strongest power of its own kind (so no house of its kind stands ahead of it).
+ * @param {{ standing: string, power?: string | null }} standing @param {Array<Record<string, any>>} factions
+ * @param {readonly string[] | undefined} kinds @returns {boolean}
+ */
+function headsItsKind(standing, factions, kinds) {
+  if (!kinds || standing.standing !== STANDING.head) return false;
+  const mine = factions.find((f) => f.faction === standing.power);
+  if (!mine || !kinds.includes(mine.category)) return false;
+  return factions.filter((f) => kinds.includes(f.category)).every((f) => (f.power || 0) <= (mine.power || 0));
+}
+
 // ── Template library: category × condition × rank ─────────────────────────────
 // Each entry: { position, goal, constraint }
 // position / constraint: abstract structural language only — no world facts.
@@ -512,7 +531,10 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     if (!within && !isHolder) return { ...npc, structuralRank: standing.standing };
 
     const cat  = isHolder ? 'government' : npc.category || 'other';
-    const rank = isHolder ? 'dominant' : getRank(standing, powerFactions);
+    // COHERENCE-POWERS-7 (the chair's R1): the trade's and the old families' subordinate rows say the card stands "behind the
+    // leading one" of its kind; the head of the strongest power of its own kind is that leading one, whatever its weight
+    // beside the ruler, and reads its kind's head row ("Heads the leading house in the trade", "Heads an old family")
+    const rank = isHolder ? 'dominant' : headsItsKind(standing, powerFactions, HOUSE_KINDS[cat]) ? 'dominant' : getRank(standing, powerFactions);
     const key  = `${cat}__${condition}__${rank}`;
     const looked = T[key] ? key : T[`${cat}__stable__${rank}`] ? `${cat}__stable__${rank}` : OTHER_STABLE_DOMINANT;
     // ⭐ CENSUS-1d unit 2 (the chair's R-A ruling of 2026-11-05 02:30; Appendix B item 3, kind T):
