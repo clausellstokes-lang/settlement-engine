@@ -23,13 +23,26 @@
 | 1a service row machinery | #249 #251 #430 #550 #607 #690 #692 #693 (chip), #865 (covers), #85 #246 (provenance tags) | f2c77472c | cured, pushed |
 | 1b house label | #140 #960 (NPC door), #269 #444 (chain card rank) | 231798731 | cured, pushed |
 | 1 Outlook list "Taverns (5-20)" | #939 | — | STOP: writer `src/generators/economy/viability.js` (changed on six lanes) |
+| 2 YOU badge | #893 #894 | 9cd4f7306 | cured, pushed |
+| 3 stores span, one home | #149 #856 #872 | aaf314475 | cured, pushed; #883 (Defence line) named, not made |
+| 4a Relationships empty line | #29 #60 | 49a6ad244 | cured, pushed |
+| 4b Daily Life food tile | #848 | 9cee7f470 | cured, pushed |
+| 4c crisis cast (defender, treater) | #328 #855 | — | in hand at the chair's pause |
+| 4d "The Market Contest" | #536 | — | in hand at the chair's pause |
 
 ## Stops and parked items (with recommendation)
 - **#939** — "11 institutions critically impaired by siege: …, Taverns (5-20), …": written by `viability.js :: issues` (`critical.map(d => institutionDisplayName(d.institution))`). The switch: read `institutionHouseLabel` (or `houseInProse` in a sentence). Recommend: the lane that next holds viability.js takes it.
+
+- **#883** — the Defence tab's food endurance ("carries the town for a few weeks at full rations, a few weeks on half" at three days of stores): `defenseDisplay.js :: monthsInWords` (the third leaves seat's file). The switch: for a span under a month, read `tonightSheet.js :: storesSpanWords` (the one home, item 3).
+
+## The chair's rulings received
+- 15:52 UTC (read 16:01): THE ACCOUNT'S WEEKLY ALLOWANCE IS IN ITS WARNING BAND. PAUSE: finish only the mechanism already under way (mechanism 4), push it, keep this file current with the exact next step, then STOP and wait for the chair's word. No new mechanism, no whole suite, no final statement. One line to the chair with the tip when stopped.
 
 ## Calls taken without the chair
 - Took `src/components/new/SupplyChainsPanel.jsx`, `src/pdf/sections/Services.jsx`, `src/domain/display/institutionDisplayName.js` (one new export) and a new leaf `src/domain/display/chainHouses.js`: no lane in flight changes them, none is named to another seat.
 - Re-recorded, each with its cause in the commit: the phone chrome floor ROUTE_BASELINE (-1 ×3), the dossier phone floors World/NPCs (-2), three address-only rows of the prose-numerics baseline.
 
 ## New words (for the owner's veto)
-- None yet (items 1a/1b remove words; the house label is the existing label minus its bracket).
+- Items 1a/1b remove words; the house label is the existing label minus its bracket.
+- Item 3: the stores span "less than a day", "about a day", "about N days", "about N weeks".
+- Item 4a: "No neighbours or ties between people are recorded for this settlement." (the old line less its last claim).
