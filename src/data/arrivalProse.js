@@ -61,11 +61,11 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.',
       () => 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.',
     ],
-    dominant: [
-      (n) => `The hammering echoes through all of ${n}, and the place plainly lives by its forges.`,
-      () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.',
-      { text: () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.', excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: the carts a siege stops (c22)
-      (n) => `${n} lives by its forges: the clang of iron is in every lane.`,
+    dominant: [ // W2-FIX-DATA-3 (REVIEW-W2A-3 #366): these four lines speak of many forges; a village or smaller has one (a hamlet's part-time smith, a village's blacksmith), so they declare tier: ≥ town. A one-forge place then draws none and its sense beat is left out (the redraw finds no clean line and draws nothing more); a line of its own would lengthen the pool and re-deal the arrival in every town that draws it (measured: 44 of 720)
+      { text: (n) => `The hammering echoes through all of ${n}, and the place plainly lives by its forges.`, needs: ['tier: ≥ town'] },
+      { text: () => 'Forge smoke hangs over everything here, and the ring of the anvils never quite stops.', needs: ['tier: ≥ town'] },
+      { text: () => 'Racks of new ironwork stand outside the workshops, waiting for the carts.', needs: ['tier: ≥ town'], excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: the carts a siege stops (c22)
+      { text: (n) => `${n} lives by its forges: the clang of iron is in every lane.`, needs: ['tier: ≥ town'] },
     ] },
   // ARMS speaks only where the settlement EXPORTS weapons or armour (no `lines`, so it is never a candidate on a
   // smithy alone): the owner's own example, "if a big part of their output is in making military weapons".

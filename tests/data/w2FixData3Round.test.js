@@ -54,4 +54,17 @@ describe('W2-FIX-DATA-3: the round\'s high lines in this lane\'s files', () => {
     expect(String(town.arrivalScene)).toMatch(/\S/);
     expect([String(town.arrivalScene)].filter((t) => t.includes('Craftspeople sit in rows'))).toEqual([]);
   }, 60_000);
+
+  test('a place of one forge does not "live by its forges"; a town of many still may (rw3-hamlet-plague_onset-1)', async () => {
+    const { ARRIVAL_SENSES } = await import('../../src/data/arrivalProse.js');
+    const smiths = ARRIVAL_SENSES.find((s) => s.key === 'smiths');
+    for (const line of smiths?.dominant || []) {
+      for (const tier of ['thorp', 'hamlet', 'village']) expect(refusedAt(line, tier), tier).toBe(true);
+      for (const tier of ['town', 'city', 'metropolis']) expect(refusedAt(line, tier), tier).toBe(false);
+    }
+    const hamlet = born('rw3-hamlet-plague_onset-1');
+    expect(hamlet.institutions.some((/** @type {any} */ i) => i.name === 'Resident smith (part-time)'), 'its one smith').toBe(true);
+    expect(String(hamlet.arrivalScene)).toMatch(/Caergarth/);
+    expect([String(hamlet.arrivalScene)].filter((t) => /lives by its forges|forge smoke hangs over everything|racks of new ironwork/i.test(t))).toEqual([]);
+  }, 60_000);
 });

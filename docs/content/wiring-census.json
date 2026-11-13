@@ -53781,9 +53781,10 @@
         "no crisis: threat": 4,
         "no crisis: under_siege": 10,
         "no crisis: unrest": 1,
-        "sacredHouse": 3
+        "sacredHouse": 3,
+        "tier: ≥ town": 4
       },
-      "undeclared": 261,
+      "undeclared": 258,
       "crisisScoped": false
     },
     {
