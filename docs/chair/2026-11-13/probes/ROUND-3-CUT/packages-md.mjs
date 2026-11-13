@@ -11,6 +11,8 @@ for(const [k,v] of keyed){ i++; const s=v.filter(r=>r.severity===SEV); const h=v
   const st={}; for(const r of s) st[r.status]=(st[r.status]||0)+1;
   const r2=[...new Set(s.filter(r=>r.round2).map(r=>`#${r.round2.n} (${r.round2.status})`))];
   o+=`\n### ${SEV==='HIGH'?'H':'M'}${i}. ${k} — ${s.length} ${SEV} (the package holds ${h} HIGH, ${m} MED in all)\n`;
+  const hold=[...new Set(s.flatMap(r=>r.holders))], ownH=[...new Set(s.flatMap(r=>r.ownHolders||r.holders))];
+  o+=`- **Holders of the writers' files:** ${hold.join(', ')||'none'}${hold.length>1||ownH.join()!==hold.join()?` (with commits of their own: ${ownH.join(', ')||'none'})`:''}\n`;
   o+=`- **Lines:** ${s.map(r=>'#'+r.n).join(' ')}\n- **Status at the line's tip:** ${Object.entries(st).map(([a,b])=>`${a} ${b}`).join('; ')}\n`;
   o+=`- **Mechanism:** ${Object.entries(mech).sort((a,b)=>b[1]-a[1]).map(([a,b])=>`${a} ${b}`).join('; ')}\n- **Writers (${Object.keys(W).length}):**\n`;
   for(const [w,rs] of Object.entries(W).sort((a,b)=>b[1].length-a[1].length)) o+=`  - \`${w}\` — ${rs.length}: ${rs.map(r=>'#'+r.n).join(' ')}\n`;

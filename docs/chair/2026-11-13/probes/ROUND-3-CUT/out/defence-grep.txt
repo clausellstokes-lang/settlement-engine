@@ -1,0 +1,92 @@
+######## line
+## walls and nobody
+src/data/dossierStateProse/defense.generated.js:783:          "text": "{settlement} has walls and nobody to put on them. A determined attacker takes t
+src/data/dossierStateProse/defense.generated.js:799:          "text": "People at {settlement} admit it when asked: the town has walls and nobody to st
+## meet nobody on them
+src/data/dossierStateProse/defense.generated.js:791:          "text": "You can walk the length of {settlement}'s walls and meet nobody on them.",
+## with nobody
+src/data/dossierStateProse/defense.generated.js:503:          "text": "Walk {settlement}'s wall and you find long stretches in good repair with nobody
+src/data/dossierStateProse/general.generated.js:9241:          "text": "A stranger can set up and sell at {settlement} on the next market day with nob
+src/domain/density/factionLifecycle.js:209:          + 'a house with nobody in it is unrepresentable under R17',
+src/domain/display/rumorFallbackPhrasePoolsEvents.js:123:    "goods travelling with nobody's name on them",
+## has no line and no force
+src/data/dossierStateProse/defense.generated.js:863:          "text": "{settlement} has no line and no force. Organized aggression cannot be resisted 
+src/data/dossierStateProse/defense.generated.js:897:          "text": "{settlement} has no line and no force, and the threat now at hand has noticed b
+## would take real effort to threaten
+src/data/dossierStateProse/defense.generated.js:37:          "text": "What {settlement} can field and what {settlement} has built are both in good ord
+## does not spend much time thinking about being attacked
+src/data/dossierStateProse/defense.generated.js:50:          "text": "The town does not spend much time thinking about being attacked: its defences ar
+src/domain/coherence/crisisBlindFindings.js:53:  { claim: 'not thinking about being attacked', re: /\bdoes not spend much time thinking about being at
+## is all but undefended
+src/data/dossierStateProse/defense.generated.js:144:          "text": "{settlement} is all but undefended. Nothing in the town would stop a serious at
+## could not hold off a raid
+src/data/dossierStateProse/defense.generated.js:106:          "text": "{settlement} could deal with a brawl or a thief, but the town could not hold of
+## can pay its way through it
+src/data/dossierStateProse/defense.generated.js:1039:          "text": "Trouble at {settlement} has not turned into a collapse, because the town can p
+## accounts have money in hand
+src/data/dossierStateProse/defense.generated.js:1019:          "text": "{settlement}'s accounts have money in hand: the town can keep its defenders pa
+## arrangements intact
+src/data/dossierStateProse/defense.generated.js:1030:          "text": "The town could go through a bad season with its arrangements intact, and the p
+## Money enough to ride out a long crisis
+src/domain/display/threatAssessment.js:244:    econA = 'Money enough to ride out a long crisis: emergency measures can be paid for, and '
+## No one can earn a normal living
+src/data/stressTypes.js:42:    viabilityNote: "No one can earn a normal living while the famine lasts, and every coin goes on food.",
+src/data/stressTypesMeta.js:34:    viabilityNote: 'No one can earn a normal living while the famine lasts, and every coin goes on food.',
+## may not come through this crisis
+src/data/dossierStateProse/defense.generated.js:6580:          "text": "{settlement} may not come through this crisis, and what it spends on defence n
+## defences are sound, but fewer people
+src/data/dossierStateProse/defense.generated.js:8621:          "text": "{settlement}'s defences are sound, but fewer people turn out each season to ma
+## Member of:
+## Score avg
+src/pdf/sections/DefenseSecurity.jsx:83:          { label: 'Score avg', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
+src/pdf/sections/IdentityDailyLife.jsx:103:              // "Score avg", the mean of the defence scores, left with it: the Defense chapter
+## Safe heartland with minimal creature
+src/domain/display/threatAssessment.js:170:      mon = 'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary 
+## a viable but demanding posture
+src/domain/display/threatAssessment.js:131:      mon = (palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding postur
+######## up
+## walls and nobody
+src/data/dossierStateProse/defense.generated.js:783:          "text": "{settlement} has walls and nobody to put on them. A determined attacker takes t
+src/data/dossierStateProse/defense.generated.js:799:          "text": "People at {settlement} admit it when asked: the town has walls and nobody to st
+## meet nobody on them
+src/data/dossierStateProse/defense.generated.js:791:          "text": "You can walk the length of {settlement}'s walls and meet nobody on them.",
+## with nobody
+src/data/dossierStateProse/defense.generated.js:503:          "text": "Walk {settlement}'s wall and you find long stretches in good repair with nobody
+src/data/dossierStateProse/general.generated.js:9241:          "text": "A stranger can set up and sell at {settlement} on the next market day with nob
+src/domain/density/factionLifecycle.js:209:          + 'a house with nobody in it is unrepresentable under R17',
+src/domain/display/rumorFallbackPhrasePoolsEvents.js:123:    "goods travelling with nobody's name on them",
+## has no line and no force
+src/data/dossierStateProse/defense.generated.js:863:          "text": "{settlement} has no line and no force. Organized aggression cannot be resisted 
+src/data/dossierStateProse/defense.generated.js:897:          "text": "{settlement} has no line and no force, and the threat now at hand has noticed b
+## would take real effort to threaten
+src/data/dossierStateProse/defense.generated.js:37:          "text": "What {settlement} can field and what {settlement} has built are both in good ord
+## does not spend much time thinking about being attacked
+src/data/dossierStateProse/defense.generated.js:50:          "text": "The town does not spend much time thinking about being attacked: its defences ar
+src/domain/coherence/crisisBlindFindings.js:53:  { claim: 'not thinking about being attacked', re: /\bdoes not spend much time thinking about being at
+## is all but undefended
+src/data/dossierStateProse/defense.generated.js:144:          "text": "{settlement} is all but undefended. Nothing in the town would stop a serious at
+## could not hold off a raid
+src/data/dossierStateProse/defense.generated.js:106:          "text": "{settlement} could deal with a brawl or a thief, but the town could not hold of
+## can pay its way through it
+src/data/dossierStateProse/defense.generated.js:1039:          "text": "Trouble at {settlement} has not turned into a collapse, because the town can p
+## accounts have money in hand
+src/data/dossierStateProse/defense.generated.js:1019:          "text": "{settlement}'s accounts have money in hand: the town can keep its defenders pa
+## arrangements intact
+src/data/dossierStateProse/defense.generated.js:1030:          "text": "The town could go through a bad season with its arrangements intact, and the p
+## Money enough to ride out a long crisis
+src/domain/display/threatAssessment.js:257:    econA = 'Money enough to ride out a long crisis: emergency measures can be paid for, and '
+## No one can earn a normal living
+src/data/stressTypes.js:42:    viabilityNote: "No one can earn a normal living while the famine lasts, and every coin goes on food.",
+src/data/stressTypesMeta.js:34:    viabilityNote: 'No one can earn a normal living while the famine lasts, and every coin goes on food.',
+## may not come through this crisis
+src/data/dossierStateProse/defense.generated.js:6580:          "text": "{settlement} may not come through this crisis, and what it spends on defence n
+## defences are sound, but fewer people
+src/data/dossierStateProse/defense.generated.js:8621:          "text": "{settlement}'s defences are sound, but fewer people turn out each season to ma
+## Member of:
+## Score avg
+src/pdf/sections/DefenseSecurity.jsx:83:          { label: 'Score avg', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
+src/pdf/sections/IdentityDailyLife.jsx:103:              // "Score avg", the mean of the defence scores, left with it: the Defense chapter
+## Safe heartland with minimal creature
+src/domain/display/threatAssessment.js:182:      mon = 'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary 
+## a viable but demanding posture
+src/domain/display/threatAssessment.js:143:      mon = (palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding postur
