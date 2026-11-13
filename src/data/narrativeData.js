@@ -33,14 +33,20 @@ export const ARRIVAL_SCENES = {
       `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`,
   ],
   port: [
-    (r) =>
-      `The harbour at ${r} announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air.`,
-    (r) =>
-      `${r} faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.`,
-    (r) =>
-      `You hear ${r}'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall.`,
-    (r) =>
-      `The road into ${r} descends toward a forest of masts. Tar, salt, fish, and woodsmoke mark the boundary between the coast and the working port.`,
+    // R2-CODE-A item 4 (the cold list REVIEW-W2A-3, HIGH #1): the four harbour scenes declare the docks; 44 of
+    // the census's 92 port scenes are a shore with no harbour, and the two rows after them say only the shore.
+    { text: (r) =>
+      `The harbour at ${r} announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air.`, needs: ['docks'] },
+    { text: (r) =>
+      `${r} faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.`, needs: ['docks'] },
+    { text: (r) =>
+      `You hear ${r}'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall.`, needs: ['docks'] },
+    { text: (r) =>
+      `The road into ${r} descends toward a forest of masts. Tar, salt, fish, and woodsmoke mark the boundary between the coast and the working port.`, needs: ['docks'] },
+    { text: (r) =>
+      `The road into ${r} comes down to the sea, and the salt reaches you a mile before the first roof does.`, needs: ['coast'] },
+    { text: (r) =>
+      `${r} sits with its back to the land and its face to the open water, and the wind off the sea carries salt and weed a long way inland.`, needs: ['coast'] },
   ],
   smoke: [
     { text: (r) =>

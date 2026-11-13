@@ -597,9 +597,6 @@
   ],
   "src/data/narrativeData.js": [
    ["bank", "after-release", "was founded when a powerful merchant family built a counting house at the junction"],
-   ["docks", "after-release", " announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air"],
-   ["docks", "after-release", "'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against"],
-   ["docks", "after-release", "The harbour at "],
    ["docks", "after-release", "was established to exploit the natural harbour"],
    ["market", "after-release", " against a tide of people leaving it. The market has ended for the day, and the settlement is exhaling its visitors back"],
    ["market", "after-release", "'s market day has the comfortable chaos of something that has been happening in the same place for a long time and has w"],
