@@ -1,0 +1,4347 @@
+{
+ "added": [
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness STRONG",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "threat",
+    "crisis: any",
+    "no crisis: occupied",
+    "guardPresence"
+   ],
+   "text": "The danger at {settlement} is real, and so is what the town has to meet it: its people under arms and its works are both in good order."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness STRONG",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "threat",
+    "crisis: any",
+    "no crisis: occupied"
+   ],
+   "text": "{settlement} is being tested now, and so far its defences are holding."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness STRONG",
+   "vid": 7,
+   "angle": "street",
+   "marks": [
+    "crisis: wartime"
+   ],
+   "text": "The war has made {settlement} think about being attacked, and what it sees when it looks is a town that would be hard to take."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness STRONG",
+   "vid": 8,
+   "angle": "ledger",
+   "marks": [
+    "crisis: wartime",
+    "guardPresence"
+   ],
+   "text": "With the war on, {settlement}'s people under arms and its works are both in good order, and the town means to keep them so."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness WEAK",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: any",
+    "no crisis: threat, unrest"
+   ],
+   "text": "{settlement} would struggle to hold against anything more than a handful of raiders, and the people who live there know it.",
+   "rewordOf": "{settlement} has not been attacked lately, and if it were, it would struggle to hold.",
+   "baseMarks": [
+    "crisis: any",
+    "no crisis: threat, unrest"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness CRITICAL",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "crisis: any",
+    "guardPresence"
+   ],
+   "text": "{settlement} has people under arms, but too few and too badly placed to hold off a serious attack for long."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Beasts & Monsters: plagued, perimeter AND organized force",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly.",
+   "rewordOf": "The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Beasts & Monsters: plagued, perimeter AND organized force",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "colour"
+   ],
+   "text": "The wall at {settlement} is manned day and night against the creatures, and nobody walks out past it unarmed."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Beasts & Monsters: frontier, credible deterrence",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "threat",
+    "crisis: any"
+   ],
+   "text": "The arrangements that kept {settlement} safe on the frontier are being tested in earnest now, and so far they are holding."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Beasts & Monsters: settled, nothing organized",
+   "vid": 6,
+   "angle": "visitor",
+   "marks": [
+    "threat",
+    "crisis: any"
+   ],
+   "text": "You find {settlement} with nothing organised against what has come out of the country, and people arming themselves with whatever is at hand."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls AND professional garrison",
+   "vid": 4,
+   "angle": "unfolding",
+   "marks": [
+    "garrison",
+    "crisis: under_siege"
+   ],
+   "text": "Paid soldiers are holding {settlement}'s walls against the siege, and so far they have held."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls with NO force",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "watch",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement}'s walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls with NO force",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "watch",
+    "no crisis: under_siege"
+   ],
+   "text": "The only people on {settlement}'s walls are the watch on their rounds, and everyone knows that would not stop an army."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls with NO force",
+   "vid": 6,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} had nobody to put on its walls until the siege came; the people on them now are townsfolk who have never held a wall before."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls with NO force",
+   "vid": 7,
+   "angle": "street",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "Since the siege began, {settlement}'s walls are manned by whoever can be spared from everything else."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 2,
+   "angle": "counterforce",
+   "marks": [
+    "no threat",
+    "crisis: any"
+   ],
+   "text": "Nothing threatens {settlement} now, and nothing about the town would stop it if something did. Its safety rests on nobody wanting it.",
+   "rewordOf": "Nothing has come for {settlement} and nothing about the town would stop it. The safety here is entirely a matter of nobody having wanted to.",
+   "baseMarks": [
+    "no threat",
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "threat",
+    "crisis: any",
+    "no watch"
+   ],
+   "text": "With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 6,
+   "angle": "visitor",
+   "marks": [
+    "threat",
+    "crisis: any",
+    "no watch"
+   ],
+   "text": "You find {settlement} open on every side, with nobody posted anywhere, while the danger everyone talks about is close."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 7,
+   "angle": "ledger",
+   "marks": [
+    "watch",
+    "no threat",
+    "crisis: any"
+   ],
+   "text": "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 8,
+   "angle": "counterforce",
+   "marks": [
+    "watch",
+    "threat",
+    "crisis: any"
+   ],
+   "text": "{settlement} has no wall and only its watch, and the threat now at hand has noticed both."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 9,
+   "angle": "street",
+   "marks": [
+    "watch",
+    "threat",
+    "crisis: any"
+   ],
+   "text": "With trouble at hand, {settlement}'s watch is all the town has to send, and there is no wall to send it to."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 10,
+   "angle": "visitor",
+   "marks": [
+    "watch",
+    "threat",
+    "crisis: any"
+   ],
+   "text": "{settlement} lies open on every side; its watch keeps to its rounds while the danger everyone talks about is close."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: famine"
+   ],
+   "text": "The famine is costing the town dearly, and the town is paying: its money is going on food, and so far there is money enough."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "crisis: debt"
+   ],
+   "text": "The debt takes much of what {settlement} earns, but what is left still keeps the town's own business running."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "crisis: debt"
+   ],
+   "text": "People in {settlement} complain of what the creditor takes, but nobody here expects the town to go under for it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 7,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: debt"
+   ],
+   "text": "{settlement} cannot pay off what it owes, but it can carry the debt, and for now it does."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 8,
+   "angle": "street",
+   "marks": [
+    "no crisis"
+   ],
+   "text": "Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 9,
+   "angle": "ledger",
+   "marks": [
+    "crisis",
+    "no crisis: debt",
+    "no crisis: famine"
+   ],
+   "text": "Whatever the present trouble costs {settlement}, the town has the money to meet it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 10,
+   "angle": "street",
+   "marks": [
+    "crisis: famine"
+   ],
+   "text": "Hunger has come to the town, but its money has not run out: what food can be bought, it buys."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 11,
+   "angle": "visitor",
+   "marks": [
+    "crisis: famine"
+   ],
+   "text": "Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: WEAK",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "{settlement} pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: WEAK",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "If {settlement} ever had to hire people to defend it, it would have to borrow the money first."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: defence supplied",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "crisis: hunger"
+   ],
+   "text": "Food is short at {settlement}, but the trades that arm its defenders are still working, so the defence is not short of gear."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: defence supplied",
+   "vid": 6,
+   "angle": "visitor",
+   "marks": [
+    "crisis: hunger"
+   ],
+   "text": "You can see that {settlement}'s defenders are armed and equipped from the town's own trades; you can also see that they eat no better than anyone else."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades working",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} is cut off now, and what its food trades salted and dried before the siege is what stands between the town and hunger."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades failing",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement}'s salting and drying trades are failing, and each season they fail the town has less preserved food to fall back on if it is cut off.",
+   "rewordOf": "{settlement}'s food trades are failing, and each season they fail the town has less to fall back on if it is cut off.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades failing",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} is cut off now, and the trades that salt and dry its food were failing before the siege began, so there is less put by than the town will need."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades failing",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "With {settlement} cut off, people count the salted and dried stores every week, and they were thin before the siege began."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "Moderate",
+   "vid": 1,
+   "angle": "street",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "{settlement} keeps a working balance: the law is present, and nobody has the run of the town.",
+   "rewordOf": "{settlement} runs on a working balance: the law is present, crime exists, and neither has the run of the town.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "Moderate",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "Nobody at {settlement} is paid to keep order, and for now the place keeps order well enough by itself."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "Moderate",
+   "vid": 6,
+   "angle": "ledger",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "{settlement} has nobody to keep the peace and no great need of anyone yet; trouble here is settled between neighbours."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "Moderate",
+   "vid": 7,
+   "angle": "visitor",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "{settlement} has people who keep order, and order holds about as well as anyone here expects."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: insurgency",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "People at {settlement} keep to their own doorways after dark, and nobody goes to the far end of the place without a reason."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: insurgency",
+   "vid": 5,
+   "angle": "watch",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "Those who keep order at {settlement} walk in pairs now, and there are lanes they no longer walk at all."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: political fracture",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "At {settlement} a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: political fracture",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "What counts as an offence at {settlement} depends on who is asked, because each power keeps its own rules and enforces them on its own people."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "walls PRESENT",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "no gate",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} has a wall but no proper gate in it: people come and go by gaps everyone knows, and the wall slows trouble more than it stops it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "walls PRESENT",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "no gate",
+    "no crisis: under_siege"
+   ],
+   "text": "The wall around {settlement} turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "walls PRESENT",
+   "vid": 6,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement}'s wall is all that stands between the town and the siege, and every stretch of it is watched now."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "walls PRESENT",
+   "vid": 7,
+   "angle": "ledger",
+   "marks": [
+    "no gate",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} put its labour into a wall and none into a gate; the wall marks the edge of the town more than it closes it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "walls PRESENT",
+   "vid": 8,
+   "angle": "ledger",
+   "marks": [
+    "no gate",
+    "crisis: under_siege"
+   ],
+   "text": "With no gate in its wall, {settlement} has no proper way to shut itself in against the siege."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "walls PRESENT",
+   "vid": 9,
+   "angle": "street",
+   "marks": [
+    "no gate",
+    "guardPresence",
+    "crisis: under_siege"
+   ],
+   "text": "The people who keep order in {settlement} are spread along a wall with no gate in it, and the siege can try it anywhere."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "garrison PRESENT",
+   "vid": 4,
+   "angle": "unfolding",
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement}'s soldiers are paid by the season and drilled by the week, whether or not anything comes."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "NO organized force at all",
+   "vid": 4,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: under_siege",
+    "crisis: wartime"
+   ],
+   "text": "{settlement} kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "NO organized force at all",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "crisis: under_siege",
+    "crisis: wartime"
+   ],
+   "text": "There was never a force at {settlement}; whoever leads the defence now is learning the work as the trouble goes on."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "NO organized force at all",
+   "vid": 6,
+   "angle": "visitor",
+   "marks": [
+    "crisis: under_siege",
+    "crisis: wartime"
+   ],
+   "text": "With trouble at hand and no force to meet it, {settlement} leans on whoever owns a weapon and is willing to use it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "charter hall ABSENT where the country warrants one",
+   "vid": 2,
+   "angle": "counterforce",
+   "marks": [],
+   "text": "{settlement} knows it needs specialists against the creatures, and has none of its own to send.",
+   "rewordOf": "{settlement} knows it needs specialists against the creatures and cannot afford to keep them.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "FIXTURE: gates",
+   "vid": 5,
+   "angle": "visitor",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement}'s gates are shut and barred, and nothing has come through them since the siege began."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "ARCANE: alchemists",
+   "vid": 1,
+   "angle": "street",
+   "marks": [],
+   "text": "Part of the magical help at {settlement} is brewed: alchemy is practised here, and some of what it makes goes to the defenders.",
+   "rewordOf": "The magical help at {settlement} comes from its alchemists, who brew for the defenders.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "ARCANE: alchemists",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement} buys alchemical preparations for its defence by the batch, and the town's accounts carry them as a purchase, not a defence.",
+   "rewordOf": "{settlement} buys its magical support from its alchemists by the batch, and the town's accounts carry it as a purchase, not a defence.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Naval Defense: Port only",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "crisis: any",
+    "no crisis: threat, unrest"
+   ],
+   "text": "Nothing armed meets a ship coming into {settlement}; the waterfront is kept for trade, not for defence.",
+   "rewordOf": "You can sail into {settlement} unchallenged; nobody watches the harbour mouth.",
+   "baseMarks": [
+    "crisis: any",
+    "no crisis: threat, unrest"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: ACTIVE SIEGE",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "{settlement} had nobody whose work was its defence before the army came, so the siege is being held by householders taking turns."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: INTERNAL PRESSURE (famine)",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "{settlement} has nobody paid to defend it, only households, and every household is minding its own share of what is left."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: INTERNAL PRESSURE (famine)",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "With nobody at {settlement} paid to keep order, the hunger is policed by neighbours watching each other's doors."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: COMMAND SPLIT",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "{settlement} has no standing force to command, and the quarrel over who would command one is louder for it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: UNDER TRIBUTE",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "{settlement} keeps no defenders to pay, and the debt is one more reason it never will."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: SECURITY COMPROMISED",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "{settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: QUARANTINE ACTIVE",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "Nobody at {settlement} is paid to hold the quarantine, so households take turns at the edge of the place, turning travellers away."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: BEAST PRESSURE",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "With nobody posted at {settlement}, every household watches its own edge of the place against the beasts, and nobody sleeps well."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: BEAST PRESSURE",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "{settlement} has nobody whose work is to stand against the beasts; what the creatures take is counted afterwards, house by house."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: INSURGENCY ACTIVE",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no guardPresence",
+    "crisis: insurgency"
+   ],
+   "text": "{settlement} has nobody to send against the insurgents, and each household decides for itself what to keep quiet about."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: MIGRATION, arrivals",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "At {settlement} you find the guards posted where the newcomers camp, not at the edges of the place."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-9",
+   "pool": "magicDependency true",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [],
+   "text": "{settlement} does better than its ground and roads would explain, and the reason is the arcane work done here.",
+   "rewordOf": "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-9",
+   "pool": "magicDependency true, with a NAMED dependent chain",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [],
+   "text": "The {good} made at {settlement} cannot be made without arcane work, which puts the whole line behind a very small number of people.",
+   "rewordOf": "The {good} that {settlement} lives on cannot be made here without arcane work, which puts the whole line behind a very small number of people.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-9",
+   "pool": "magicDependency false",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "The town would go on if the arcane went away, more slowly and less comfortably.",
+   "rewordOf": "The town would go on if the arcane went away, more slowly and less comfortably and go on.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-QUIET",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "threat",
+    "crisis: any"
+   ],
+   "text": "{settlement} kept its {defwork} through the quiet years, and that care is earning its keep now.",
+   "rewordOf": "{settlement} kept its {defwork} through the quiet years, and the {defwork} is earning its keep now.",
+   "baseMarks": [
+    "threat",
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-STRAINED",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement}'s {defwork} was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-STRAINED",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "The siege has put more people on {settlement}'s {defwork} than the town could ever find for it in quieter seasons."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-STRAINED",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "no guardPresence",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} keeps its {defwork} in repair and pays nobody to stand guard there."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-STRAINED",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "no guardPresence",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} has nobody whose work it is to stand on its {defwork}, though the town keeps the {defwork} in repair."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-STRAINED",
+   "vid": 7,
+   "angle": "ledger",
+   "marks": [
+    "guardPresence",
+    "no watch",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} keeps its {defwork} in repair before it pays anyone to stand guard there, and the few who do turn out are stretched thin."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-STRAINED",
+   "vid": 8,
+   "angle": "street",
+   "marks": [
+    "guardPresence",
+    "no watch",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement}'s people under arms are too few to cover its {defwork}, and the town spends on the {defwork} before it spends on them."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "UNWALLED-SMALL",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "no threat",
+    "crisis: any"
+   ],
+   "text": "Nobody ever thought {settlement} worth a wall, and nothing has yet given it cause to want one."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "UNWALLED-SMALL",
+   "vid": 5,
+   "angle": "unfolding",
+   "marks": [
+    "threat",
+    "crisis: any"
+   ],
+   "text": "{settlement} has no wall to fall back behind, so the threat now at hand is being met in the open, house by house."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "UNWALLED-LARGE",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} is large enough that anyone arriving expects a wall around it, and is surprised to walk straight in from open country."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "Traffic moves along {settlement}'s {access} every day, and little of its money stays behind.",
+   "rewordOf": "Traffic moves along {settlement}'s {access} every day, and little of its money stays. The place earns less than it spends.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
+   "rewordOf": "Plenty passes through {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} was poor even while its trade moved freely, and the siege has stopped it moving at all."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 6,
+   "angle": "visitor",
+   "marks": [
+    "no market",
+    "no crisis: under_siege"
+   ],
+   "text": "There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 7,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} had little to begin with, and the siege has stopped the passing traffic that brought in the rest."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-6",
+   "pool": "TIER: significant off-book activity (≥15)",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "market"
+   ],
+   "text": "Goods change hands at {settlement} without anyone writing them down, and the price a buyer is quoted depends on whether a duty is to be paid at all."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-6",
+   "pool": "TIER: significant off-book activity (≥15)",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "market"
+   ],
+   "text": "The duties gathered at {settlement} fall short of the trade that plainly goes on there, and nobody is pressed to make up the difference."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-6",
+   "pool": "TIER: significant off-book activity (≥15)",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "Ask how to bring goods into {settlement} cheaply and somebody will tell you, with a nod toward the quieter way in."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-6",
+   "pool": "TIER: significant off-book activity (≥15)",
+   "vid": 7,
+   "angle": "street",
+   "marks": [
+    "no market"
+   ],
+   "text": "Much of what changes hands at {settlement} changes hands quietly, between people who would rather nobody counted it."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-6",
+   "pool": "TIER: minor shadow activity (≥3)",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "organised crime"
+   ],
+   "text": "Little of {settlement}'s trade goes unrecorded, but what does goes through the same organised hands each time."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-6",
+   "pool": "TIER: minor shadow activity (≥3)",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "organised crime"
+   ],
+   "text": "The shadow trade at {settlement} is small, but it is not casual: somebody organises it."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-8",
+   "pool": "POOR",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "crisis: any"
+   ],
+   "text": "Money is short in {settlement}, and most households spend what they earn as soon as it comes in."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-8",
+   "pool": "FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 4,
+   "angle": "trade",
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement} grows more food than it eats, and what it sells of the surplus brings coin in every season."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-8",
+   "pool": "FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 5,
+   "angle": "local",
+   "marks": [
+    "colour"
+   ],
+   "text": "A lean month at {settlement} is something people talk about, not something they live through, and the full larders are part of why the place does well."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-8",
+   "pool": "FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 6,
+   "angle": "threshold",
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement}'s good fortune rests partly on its harvests: so long as they come in full, the place can afford to be generous."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "IMPORT-DEPENDENT",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "Whatever {settlement} used to buy for its table, none of it has come since the siege closed the roads."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "IMPORT-DEPENDENT",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "The trade that fed {settlement} is shut out by the siege, and the town is finding out what it can live without."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "DEFICIT",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} grows far less food than it needs, and with the roads cut by the siege nothing comes in to make up the difference."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "DEFICIT",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "Nothing has come into {settlement} since the siege closed the roads, and what the town can still grow is not near enough."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: one source",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "no crisis: famine"
+   ],
+   "text": "With only its {good} to fall back on, {settlement} feels every bad season there at every table.",
+   "rewordOf": "With only its {good} to fall back on, {settlement} would feel a single failure there at every table within the season.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: one source",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: famine"
+   ],
+   "text": "{settlement} lived off its {good} and little else, and the {good} has failed; there is nothing else to turn to."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: several, the largest named",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: famine"
+   ],
+   "text": "{settlement}'s food comes from more than one source, and this year that has not been enough: the town is hungry all the same."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: several, the largest named",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "crisis: famine"
+   ],
+   "text": "Having more than its {good} to rely on has not kept the famine out of {settlement}."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-SUP-2",
+   "pool": "UPSTREAM WEAK: a chain the town's work draws on is failing",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "Some of {settlement}'s {chain} depends on supplies from elsewhere, and those supplies are failing: what should come down the line arrives short.",
+   "rewordOf": "Some of {settlement}'s work depends on {chain} done elsewhere, and that supply is failing: what should come down the line arrives short.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-SUP-2",
+   "pool": "UPSTREAM WEAK: a chain the town's work draws on is failing",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "Work is slowing at {settlement} for a fault that is not all its own: its {chain} is short of what it needs from upstream.",
+   "rewordOf": "Work is slowing at {settlement} for a fault that is not the town's own: the {chain} it relies on upstream has gone short.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: entrepot",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} sells on goods it never made: some of what leaves the town entered it as imports the same season.",
+   "rewordOf": "{settlement} sells on what it never made. The export column is full of goods that entered the town as imports the same season.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: entrepot",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} lived by moving other people's goods, and the siege has stopped the moving."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: entrepot",
+   "vid": 5,
+   "angle": "visitor",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "Goods that were only passing through {settlement} are stuck there now, with the roads closed and nowhere for them to go."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: established",
+   "vid": 7,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} had several trades sending goods out before the siege, and none of them can send anything now."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: established",
+   "vid": 8,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: famine"
+   ],
+   "text": "{settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: established",
+   "vid": 9,
+   "angle": "street",
+   "marks": [
+    "crisis: famine"
+   ],
+   "text": "With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: established",
+   "vid": 10,
+   "angle": "visitor",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} has several kinds of goods to sell outward, and the siege has shut every one of them in."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: partiallyExploited",
+   "vid": 5,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} used to send its {resource} out half-worked; with the roads cut by the siege it piles up instead, and nobody here can finish it."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: partiallyExploited",
+   "vid": 6,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "Half of this trade was always done elsewhere, and with the siege closing the roads, the half the town does has nowhere to go."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: fullyExploited",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The {resource} in {settlement}'s country is worked all the way to the finished {good}.",
+   "rewordOf": "The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: fullyExploited",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "The town has taken this trade as far as it goes, from the ground to the finished thing.",
+   "rewordOf": "This is the trade the town is actually built on, and the town has taken it as far as it goes.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: fullyExploited",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement} takes everything it can from the {resource} its country gives."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: fullyExploited",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "With the siege on, none of {settlement}'s {resource} can go out to buyers; whatever the town works, the town must use."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: a house needs what the land lacks",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys it from outside or that work stops.",
+   "rewordOf": "{settlement}'s {institution} cannot work without {good}, and the country around the town produces none, so the town buys from outside or the work stops.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: a house needs what the land lacks",
+   "vid": 3,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement}'s {institution} has had no {good} since the siege closed the roads, and its work has stopped or soon will."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: a house needs what the land lacks",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} has no {good} of its own, and the siege lets none in, so the work that needs it is stopping."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: the land cannot give it",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "The country around {settlement} produces no {good}: whatever the town has of it comes from outside.",
+   "rewordOf": "{settlement} has to buy its {good} from outside: the country around the town produces none.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: the land cannot give it",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "None of the {good} used at {settlement} comes from the country here; it is brought in or done without.",
+   "rewordOf": "Every load of {good} used at {settlement} comes from elsewhere, because the country here produces none.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: the land cannot give it",
+   "vid": 3,
+   "angle": "ledger",
+   "marks": [
+    "no imports"
+   ],
+   "text": "The country around {settlement} produces no {good}, and nothing comes in from outside to make up for it, so the town does without."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: the land cannot give it",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no imports"
+   ],
+   "text": "{settlement} neither grows nor buys any {good}; people there do without."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "INCOME WEIGHT: the religious houses",
+   "vid": 3,
+   "angle": "ledger",
+   "marks": [
+    "no sacredHouse"
+   ],
+   "text": "Faith carries real weight in {settlement}'s money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "INCOME WEIGHT: the religious houses",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no sacredHouse"
+   ],
+   "text": "At {settlement} the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "INCOME WEIGHT: the religious houses",
+   "vid": 5,
+   "angle": "threshold",
+   "marks": [
+    "no sacredHouse"
+   ],
+   "text": "{settlement} spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-3",
+   "pool": "scores.military: CRITICAL",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "walls",
+    "crisis: any",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} has walls and too few people to stand on them; anyone determined would find a stretch that nobody watches."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-3",
+   "pool": "scores.military: CRITICAL",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "walls",
+    "crisis: any"
+   ],
+   "text": "{settlement}'s walls are better than the muster behind them, and the muster is almost nothing."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-3",
+   "pool": "scores.military: CRITICAL",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "crisis: threat"
+   ],
+   "text": "With trouble close, people in {settlement} know there is nobody to send against it, and they keep their own doors barred."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-3",
+   "pool": "defenseProfile.readiness.label: Undefended",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "walls",
+    "militia",
+    "no garrison"
+   ],
+   "text": "{settlement} has walls and a militia to stand on them, and neither would hold against anyone who came in earnest."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-3",
+   "pool": "defenseProfile.readiness.label: Undefended",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "walls",
+    "no garrison",
+    "no militia"
+   ],
+   "text": "The walls at {settlement} stand with no paid force behind them, and walls nobody holds are only a fence."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-3",
+   "pool": "defenseProfile.readiness.label: Undefended",
+   "vid": 5,
+   "angle": "street",
+   "marks": [
+    "militia",
+    "no garrison"
+   ],
+   "text": "{settlement} counts on its neighbours turning out with whatever they own, and everyone knows how little that would stop."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-3",
+   "pool": "defenseProfile.readiness.label: Undefended",
+   "vid": 6,
+   "angle": "ledger",
+   "marks": [
+    "no walls"
+   ],
+   "text": "Nothing at {settlement} would hold back anyone who came in earnest: the place lies open, and what defence it has is thin."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-5",
+   "pool": "river",
+   "vid": 5,
+   "angle": "visitor",
+   "marks": [
+    "coast"
+   ],
+   "text": "{settlement} stands where a river comes down to the sea, and its boats work the river more than the coast."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-5",
+   "pool": "river",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "coast"
+   ],
+   "text": "In {settlement} the talk is of the river's moods more than the sea's, though the salt gets into everything."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-5",
+   "pool": "river",
+   "vid": 7,
+   "angle": "ledger",
+   "marks": [
+    "coast"
+   ],
+   "text": "What {settlement} trades comes and goes by the river; the sea at its back carries less of it."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-6",
+   "pool": "river",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "no deficit",
+    "coast"
+   ],
+   "text": "{settlement} stands at a river's mouth because goods could go up the river and out to sea from the same landing."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-6",
+   "pool": "river",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "no deficit",
+    "coast"
+   ],
+   "text": "{settlement} was put where the river meets the sea, and it has lived off both waters since."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-6",
+   "pool": "river",
+   "vid": 7,
+   "angle": "elder",
+   "marks": [
+    "no deficit",
+    "coast"
+   ],
+   "text": "{settlement} began as a landing at the river's mouth, and the landing is still the reason for the place."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-6",
+   "pool": "river",
+   "vid": 8,
+   "angle": "ledger",
+   "marks": [
+    "deficit",
+    "coast"
+   ],
+   "text": "{settlement}'s ground gives less than it needs, and what the river brings down and the sea brings in makes up the rest."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-6",
+   "pool": "river",
+   "vid": 9,
+   "angle": "visitor",
+   "marks": [
+    "deficit",
+    "coast"
+   ],
+   "text": "{settlement} has few fields between the river and the sea, and it eats from the boats."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-6",
+   "pool": "river",
+   "vid": 10,
+   "angle": "street",
+   "marks": [
+    "deficit",
+    "coast"
+   ],
+   "text": "Bread in {settlement} comes down the river or in from the sea, because the ground at the mouth was never good for grain."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: disaster",
+   "vid": 3,
+   "angle": "street",
+   "marks": [],
+   "text": "{settlement} remembers {event} as a hard time, and the people who tell it do not make it smaller than it was.",
+   "rewordOf": "{settlement} remembers {event} as a hard time, and holds no grudge over it.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: disaster",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [],
+   "text": "Anyone in {settlement} will tell a visitor about {event} if asked, even {timeband_since}.",
+   "rewordOf": "{settlement} came through {event} {timeband_since} and does not show it.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: disaster",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{event} is written into {settlement}'s rolls as a loss, with the damage set down item by item."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: disaster",
+   "vid": 6,
+   "angle": "street",
+   "marks": [],
+   "text": "People in {settlement} speak of {event} plainly, as a hard thing that happened to the place and was got through."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: disaster",
+   "vid": 7,
+   "angle": "elder",
+   "marks": [],
+   "text": "When {settlement} tells of {event}, it remembers by name those who dealt with it, and hands the telling down with care."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: political",
+   "vid": 3,
+   "angle": "street",
+   "marks": [],
+   "text": "Even {timeband_since}, {event} is one of the stories the street in {settlement} tells about its hall.",
+   "rewordOf": "{event} is a thing that happened to {settlement}'s hall {timeband_since} and does not come up.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: political",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement}'s rolls mark {event} as a turn in how the place is governed, and the entry is {timeband_age}."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: political",
+   "vid": 6,
+   "angle": "street",
+   "marks": [],
+   "text": "Ask about {event} in {settlement} and you hear the hall's account first and the street's second, and the two do not quite agree."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: political",
+   "vid": 7,
+   "angle": "elder",
+   "marks": [],
+   "text": "The older families of {settlement} know who stood on which side of {event}, and they tell it as a story about the hall, not about themselves."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: economic",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "market"
+   ],
+   "text": "Even {timeband_since}, the older stallholders in {settlement}'s market can say which way {event} turned their trade.",
+   "rewordOf": "{event} turned {settlement}'s fortunes {timeband_since}, though nothing in today's market shows it.",
+   "baseMarks": [
+    "not anchored",
+    "market"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: economic",
+   "vid": 4,
+   "angle": "counterforce",
+   "marks": [],
+   "text": "Some in {settlement} say {event} is given more weight than it deserves; others say it is given less.",
+   "rewordOf": "{event} should have remade {settlement} and did not; the town absorbed it and went on doing what it had been doing.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: economic",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "{event} sits in {settlement}'s accounts as a turn in its fortunes, {timeband_age} and plainly entered."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: economic",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "People in {settlement} argue over whether {event} left the place richer or poorer, and each side has a story to prove it."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: economic",
+   "vid": 7,
+   "angle": "elder",
+   "marks": [
+    "colour"
+   ],
+   "text": "The older heads of {settlement} measure good years and bad against {event}, a turn in its trade that everyone there has heard of."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: religious",
+   "vid": 3,
+   "angle": "street",
+   "marks": [],
+   "text": "People in {settlement} know {event} by name, and know which households it touched.",
+   "rewordOf": "{settlement} remembers {event} as a passing upset, not a change of faith.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: religious",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "institution: temple"
+   ],
+   "text": "Ask at {settlement}'s altars about {event} and you will be given the faith's own account of it.",
+   "rewordOf": "{settlement}'s altars carry a history visitors only learn by asking.",
+   "baseMarks": [
+    "not anchored",
+    "institution: temple"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: religious",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement}'s rolls set down {event} as a matter of faith, between the harvests and the deaths."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: religious",
+   "vid": 6,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "In {settlement}, {event} is spoken of in a lowered voice, by believers and doubters alike."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: religious",
+   "vid": 7,
+   "angle": "elder",
+   "marks": [
+    "colour"
+   ],
+   "text": "The elders of {settlement} tell {event} as a test of the faith the place keeps, and they tell it with care."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: magical",
+   "vid": 3,
+   "angle": "street",
+   "marks": [],
+   "text": "Even {timeband_since}, the people of {settlement} who were there at {event} do not all tell it the same way.",
+   "rewordOf": "{event} happened at {settlement} {timeband_since} and is now a story told to children with the frightening part left in.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: magical",
+   "vid": 4,
+   "angle": "counterforce",
+   "marks": [],
+   "text": "There are people in {settlement} who say {event} was less strange than the story makes it, and they say it quietly.",
+   "rewordOf": "{event} could have marked {settlement} permanently and did not; what it touched has grown back.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: magical",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement}'s rolls note {event} in plainer words than the people use when they tell it."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: magical",
+   "vid": 6,
+   "angle": "street",
+   "marks": [],
+   "text": "Every child in {settlement} has heard of {event}, and most have been told a different version of it."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: magical",
+   "vid": 7,
+   "angle": "elder",
+   "marks": [],
+   "text": "{settlement} keeps the story of {event} close, the way a place keeps a thing it does not fully understand."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: demographic",
+   "vid": 3,
+   "angle": "street",
+   "marks": [],
+   "text": "{settlement} was a different size before {event}, and even {timeband_since} the people old enough to remember can say how different.",
+   "rewordOf": "{settlement} was a different size {timeband_since}, and almost nobody here thinks about that.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: demographic",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [],
+   "text": "The count of households at {settlement} changed with {event}, and the rolls say so in plain figures."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: demographic",
+   "vid": 6,
+   "angle": "street",
+   "marks": [],
+   "text": "Families in {settlement} know which of them were here before {event} and which came or stayed after it."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: demographic",
+   "vid": 7,
+   "angle": "elder",
+   "marks": [],
+   "text": "{event} is told at {settlement} as a year when people came and went in numbers."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: exile_return",
+   "vid": 3,
+   "angle": "street",
+   "marks": [],
+   "text": "{event} is still told in {settlement}, and each family tells it a little differently.",
+   "rewordOf": "{settlement} once exiled some of its own and later took them back, and nobody here talks about either.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: exile_return",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{event} is in {settlement}'s rolls as a sending-away and a coming-back, and the rolls do not say who was in the right."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: exile_return",
+   "vid": 6,
+   "angle": "street",
+   "marks": [],
+   "text": "In {settlement}, everyone knows which families left and came back at {event}, and which never left."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: exile_return",
+   "vid": 7,
+   "angle": "elder",
+   "marks": [],
+   "text": "{event} is {timeband_age}, and {settlement} tells it as a family quarrel that grew too large for the families."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: occupation_infiltration",
+   "vid": 3,
+   "angle": "street",
+   "marks": [],
+   "text": "Even {timeband_since}, people in {settlement} know who stood where during {event}.",
+   "rewordOf": "{settlement} was taken and released {timeband_since}, and the town has put it behind it.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: occupation_infiltration",
+   "vid": 4,
+   "angle": "counterforce",
+   "marks": [],
+   "text": "Not everyone in {settlement} tells {event} the same way, and the difference lies in who their families were at the time.",
+   "rewordOf": "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.",
+   "baseMarks": [
+    "not anchored"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: occupation_infiltration",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement}'s rolls carry {event}, when a power from outside reached into the running of the place."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: occupation_infiltration",
+   "vid": 6,
+   "angle": "street",
+   "marks": [],
+   "text": "{event} is talked of quietly in {settlement}, and only among people who know each other well."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: occupation_infiltration",
+   "vid": 7,
+   "angle": "visitor",
+   "marks": [],
+   "text": "A visitor who asks about {event} in {settlement} gets a short answer and a change of subject."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-13",
+   "pool": "MARKET-OPEN",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement}'s market grew up on the road's trade, and with the siege closing the road it has almost nobody left to sell to."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-17",
+   "pool": "GREAT HOUSE: monastery",
+   "vid": 1,
+   "angle": "traveller",
+   "marks": [
+    "institution: monastery"
+   ],
+   "text": "Robed monks and nuns are a common sight on the way into {settlement}.",
+   "rewordOf": "Robed men and women from the monastery are a common sight on the way into {settlement}.",
+   "baseMarks": [
+    "institution: monastery"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-17",
+   "pool": "GREAT HOUSE: monastery",
+   "vid": 2,
+   "angle": "local",
+   "marks": [
+    "institution: monastery"
+   ],
+   "text": "The monks keep their own hours, and the rest of {settlement} leaves them to it.",
+   "rewordOf": "The monastery keeps its own hours, and the rest of {settlement} leaves it to them.",
+   "baseMarks": [
+    "institution: monastery"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-17",
+   "pool": "GREAT HOUSE: monastery",
+   "vid": 3,
+   "angle": "newcomer",
+   "marks": [
+    "institution: monastery"
+   ],
+   "text": "Anyone new to {settlement} who needs a meal or a bed is sent to the monks.",
+   "rewordOf": "Anyone new to {settlement} who needs a meal or a bed is sent to the monastery door.",
+   "baseMarks": [
+    "institution: monastery"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-17",
+   "pool": "GREAT HOUSE: monastery",
+   "vid": 4,
+   "angle": "official",
+   "marks": [
+    "institution: monastery"
+   ],
+   "text": "The monks answer to their own order before they answer to whoever governs {settlement}.",
+   "rewordOf": "The monastery answers to its own order before it answers to whoever governs {settlement}.",
+   "baseMarks": [
+    "institution: monastery"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "STALLED",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement}'s {institution} is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+   "rewordOf": "{settlement}'s {institution} stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "baseMarks": []
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} cannot produce its own {good}, so it buys it in.",
+   "rewordOf": "{settlement} works {good} it cannot produce; it buys the raw stuff in, and always has.",
+   "baseMarks": []
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 4,
+   "angle": "trade",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "Ask where {settlement}'s {good} comes from and you are pointed at the carts, not at anyone in the town.",
+   "rewordOf": "Carts bring {settlement} what its workshops need, and carry the worked {good} away again.",
+   "baseMarks": []
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 7,
+   "angle": "ledger",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 8,
+   "angle": "street",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "The carts that kept {settlement}'s trades supplied have not come since the siege began."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 9,
+   "angle": "trade",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "What {settlement}'s trades use comes in from elsewhere more often than from its own ground."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 10,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: under_siege"
+   ],
+   "text": "{settlement} is running short of {good}, and the siege lets none in."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-5",
+   "pool": "FLAG: crimeIsGovt",
+   "vid": 4,
+   "angle": "watch",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "{settlement} has people paid to keep order, and they keep the order the gang bosses want; a complaint against the bosses goes nowhere."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "angle": "unfolding",
+   "marks": [
+    "dm-only",
+    "tier: ≥ village",
+    "no threat",
+    "no crisis: wartime",
+    "no watch"
+   ],
+   "text": "Criminal money would go a long way with the officials of {settlement}: the town is poor, its streets are badly watched, and nobody has shut the door.",
+   "rewordOf": "Criminal money is reaching the officials of {settlement} one at a time, because the town is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "baseMarks": [
+    "dm-only"
+   ]
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "dm-only"
+   ],
+   "text": "Officials at {settlement} are paid little and watched less, and a purse offered in the right doorway would not be turned away.",
+   "rewordOf": "Officials at {settlement} are spending money their posts never paid them, and nobody in the town asks where it came from.",
+   "baseMarks": [
+    "dm-only"
+   ]
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "dm-only",
+    "tier: ≤ hamlet"
+   ],
+   "text": "{settlement} is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 5,
+   "angle": "ledger",
+   "marks": [
+    "dm-only",
+    "tier: ≥ village",
+    "threat"
+   ],
+   "text": "Whoever holds {settlement}'s streets now, nobody is watching its officials, and they are paid poorly enough to be bought."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 6,
+   "angle": "unfolding",
+   "marks": [
+    "dm-only",
+    "tier: ≥ village",
+    "crisis: wartime"
+   ],
+   "text": "With the war taking everyone's attention, {settlement}'s officials are left to themselves, and an underpaid official left alone is easily bought."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 7,
+   "angle": "ledger",
+   "marks": [
+    "dm-only",
+    "tier: ≥ village",
+    "watch",
+    "no threat",
+    "no crisis: wartime"
+   ],
+   "text": "{settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 8,
+   "angle": "counterforce",
+   "marks": [
+    "dm-only",
+    "tier: ≥ village",
+    "watch",
+    "no threat",
+    "no crisis: wartime"
+   ],
+   "text": "A watch walks {settlement}'s streets, but the danger is in the hall, where officials paid next to nothing are worth buying."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 9,
+   "angle": "street",
+   "marks": [
+    "dm-only",
+    "tier: ≥ village",
+    "threat"
+   ],
+   "text": "With everyone's mind on the present danger, nobody at {settlement} is watching its officials, and they are paid little enough to be bought."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 10,
+   "angle": "ledger",
+   "marks": [
+    "dm-only",
+    "tier: ≥ village",
+    "crisis: wartime"
+   ],
+   "text": "{settlement}'s officials are poorly paid and, with the war on, nobody is checking their accounts."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure RECOVERING (strong security, prosperity)",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "dm-only",
+    "colour"
+   ],
+   "text": "Criminal money finds little purchase at {settlement}: the town is doing well, and its officials have little reason to sell."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "GM ADVISORY: the commander is a political actor",
+   "vid": 3,
+   "angle": "ledger",
+   "marks": [
+    "dm-only",
+    "colour"
+   ],
+   "text": "{faction} answers to the {seat} at {settlement} in name only: whatever the {seat} plans needs its consent, and that consent is bargained for."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "GM ADVISORY: the commander is a political actor",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "dm-only",
+    "colour"
+   ],
+   "text": "At {settlement} the {seat} gives no order {faction} would refuse, and whoever can turn {faction} turns the place's armed strength with it."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "GM ADVISORY: the commander is a political actor",
+   "vid": 5,
+   "angle": "unfolding",
+   "marks": [
+    "dm-only",
+    "colour"
+   ],
+   "text": "{faction} has grown stronger than the {seat} at {settlement}, and both know it; the {seat} keeps the title while {faction} decides what is enforced."
+  },
+  {
+   "file": "warFaith.generated.js",
+   "block": "DS-FTH-4",
+   "pool": "FLAG: heresySuppression: hunted",
+   "vid": 3,
+   "angle": "newcomer",
+   "marks": [
+    "colour"
+   ],
+   "text": "Anyone at {settlement} suspected of working magic is named aloud and shunned, and those who have the art keep it even from their kin."
+  },
+  {
+   "file": "warFaith.generated.js",
+   "block": "DS-FTH-4",
+   "pool": "FLAG: heresySuppression: hunted",
+   "vid": 4,
+   "angle": "watch",
+   "marks": [
+    "colour"
+   ],
+   "text": "A charm worked in the open at {settlement} is reported before nightfall, and the faithful see to it that whoever worked it leaves."
+  },
+  {
+   "file": "warFaith.generated.js",
+   "block": "DS-FTH-4",
+   "pool": "FLAG: heresySuppression: hunted",
+   "vid": 5,
+   "angle": "local",
+   "marks": [
+    "colour"
+   ],
+   "text": "The faithful of {settlement} treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door."
+  },
+  {
+   "file": "warFaith.generated.js",
+   "block": "DS-FTH-4",
+   "pool": "FLAG: heresySuppression: preached",
+   "vid": 3,
+   "angle": "local",
+   "marks": [
+    "colour"
+   ],
+   "text": "Most people at {settlement} hold that magic offends the faith, and a neighbour who works it is talked about, though not yet turned in."
+  },
+  {
+   "file": "warFaith.generated.js",
+   "block": "DS-FTH-4",
+   "pool": "FLAG: heresySuppression: preached",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "Children at {settlement} are taught that spellwork is heresy, and they learn to look away from anyone who does it."
+  },
+  {
+   "file": "warFaith.generated.js",
+   "block": "DS-FTH-4",
+   "pool": "FLAG: heresySuppression: preached",
+   "vid": 5,
+   "angle": "newcomer",
+   "marks": [
+    "colour"
+   ],
+   "text": "A newcomer at {settlement} soon hears that magic is heresy here, and is watched until the neighbours are sure of them."
+  }
+ ],
+ "removed": [
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness WEAK",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "crisis: any",
+    "no crisis: threat, unrest"
+   ],
+   "text": "{settlement} has not been attacked lately, and if it were, it would struggle to hold.",
+   "rewordedTo": "{settlement} would struggle to hold against anything more than a handful of raiders, and the people who live there know it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Beasts & Monsters: plagued, perimeter AND organized force",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.",
+   "rewordedTo": "The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 2,
+   "angle": "counterforce",
+   "marks": [
+    "no threat",
+    "crisis: any"
+   ],
+   "text": "Nothing has come for {settlement} and nothing about the town would stop it. The safety here is entirely a matter of nobody having wanted to.",
+   "rewordedTo": "Nothing threatens {settlement} now, and nothing about the town would stop it if something did. Its safety rests on nobody wanting it."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades failing",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [],
+   "text": "{settlement}'s food trades are failing, and each season they fail the town has less to fall back on if it is cut off.",
+   "rewordedTo": "{settlement}'s salting and drying trades are failing, and each season they fail the town has less preserved food to fall back on if it is cut off."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "Moderate",
+   "vid": 1,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement} runs on a working balance: the law is present, crime exists, and neither has the run of the town.",
+   "rewordedTo": "{settlement} keeps a working balance: the law is present, and nobody has the run of the town."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "charter hall ABSENT where the country warrants one",
+   "vid": 2,
+   "angle": "counterforce",
+   "marks": [],
+   "text": "{settlement} knows it needs specialists against the creatures and cannot afford to keep them.",
+   "rewordedTo": "{settlement} knows it needs specialists against the creatures, and has none of its own to send."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "ARCANE: alchemists",
+   "vid": 1,
+   "angle": "street",
+   "marks": [],
+   "text": "The magical help at {settlement} comes from its alchemists, who brew for the defenders.",
+   "rewordedTo": "Part of the magical help at {settlement} is brewed: alchemy is practised here, and some of what it makes goes to the defenders."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "ARCANE: alchemists",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement} buys its magical support from its alchemists by the batch, and the town's accounts carry it as a purchase, not a defence.",
+   "rewordedTo": "{settlement} buys alchemical preparations for its defence by the batch, and the town's accounts carry them as a purchase, not a defence."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Naval Defense: Port only",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "crisis: any",
+    "no crisis: threat, unrest"
+   ],
+   "text": "You can sail into {settlement} unchallenged; nobody watches the harbour mouth.",
+   "rewordedTo": "Nothing armed meets a ship coming into {settlement}; the waterfront is kept for trade, not for defence."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-9",
+   "pool": "magicDependency true",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [],
+   "text": "{settlement} does better than its ground and roads would explain, and the reason is its few practitioners.",
+   "rewordedTo": "{settlement} does better than its ground and roads would explain, and the reason is the arcane work done here."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-9",
+   "pool": "magicDependency true, with a NAMED dependent chain",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [],
+   "text": "The {good} that {settlement} lives on cannot be made here without arcane work, which puts the whole line behind a very small number of people.",
+   "rewordedTo": "The {good} made at {settlement} cannot be made without arcane work, which puts the whole line behind a very small number of people."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-9",
+   "pool": "magicDependency false",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "The town would go on if the arcane went away, more slowly and less comfortably and go on.",
+   "rewordedTo": "The town would go on if the arcane went away, more slowly and less comfortably."
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-QUIET",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "threat",
+    "crisis: any"
+   ],
+   "text": "{settlement} kept its {defwork} through the quiet years, and the {defwork} is earning its keep now.",
+   "rewordedTo": "{settlement} kept its {defwork} through the quiet years, and that care is earning its keep now."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "Traffic moves along {settlement}'s {access} every day, and little of its money stays. The place earns less than it spends.",
+   "rewordedTo": "Traffic moves along {settlement}'s {access} every day, and little of its money stays behind."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 2,
+   "angle": "street",
+   "marks": [],
+   "text": "Plenty passes through {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
+   "rewordedTo": "Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: one source",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "colour"
+   ],
+   "text": "With only its {good} to fall back on, {settlement} would feel a single failure there at every table within the season.",
+   "rewordedTo": "With only its {good} to fall back on, {settlement} feels every bad season there at every table."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-SUP-2",
+   "pool": "UPSTREAM WEAK: a chain the town's work draws on is failing",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "Some of {settlement}'s work depends on {chain} done elsewhere, and that supply is failing: what should come down the line arrives short.",
+   "rewordedTo": "Some of {settlement}'s {chain} depends on supplies from elsewhere, and those supplies are failing: what should come down the line arrives short."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-SUP-2",
+   "pool": "UPSTREAM WEAK: a chain the town's work draws on is failing",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "Work is slowing at {settlement} for a fault that is not the town's own: the {chain} it relies on upstream has gone short.",
+   "rewordedTo": "Work is slowing at {settlement} for a fault that is not all its own: its {chain} is short of what it needs from upstream."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: entrepot",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement} sells on what it never made. The export column is full of goods that entered the town as imports the same season.",
+   "rewordedTo": "{settlement} sells on goods it never made: some of what leaves the town entered it as imports the same season."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: fullyExploited",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [],
+   "text": "The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.",
+   "rewordedTo": "The {resource} in {settlement}'s country is worked all the way to the finished {good}."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: fullyExploited",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "This is the trade the town is actually built on, and the town has taken it as far as it goes.",
+   "rewordedTo": "The town has taken this trade as far as it goes, from the ground to the finished thing."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: a house needs what the land lacks",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement}'s {institution} cannot work without {good}, and the country around the town produces none, so the town buys from outside or the work stops.",
+   "rewordedTo": "Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys it from outside or that work stops."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: the land cannot give it",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "colour"
+   ],
+   "text": "{settlement} has to buy its {good} from outside: the country around the town produces none.",
+   "rewordedTo": "The country around {settlement} produces no {good}: whatever the town has of it comes from outside."
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: the land cannot give it",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "colour"
+   ],
+   "text": "Every load of {good} used at {settlement} comes from elsewhere, because the country here produces none.",
+   "rewordedTo": "None of the {good} used at {settlement} comes from the country here; it is brought in or done without."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: disaster",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{settlement} remembers {event} as a hard time, and holds no grudge over it.",
+   "rewordedTo": "{settlement} remembers {event} as a hard time, and the people who tell it do not make it smaller than it was."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: disaster",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{settlement} came through {event} {timeband_since} and does not show it.",
+   "rewordedTo": "Anyone in {settlement} will tell a visitor about {event} if asked, even {timeband_since}."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: political",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{event} is a thing that happened to {settlement}'s hall {timeband_since} and does not come up.",
+   "rewordedTo": "Even {timeband_since}, {event} is one of the stories the street in {settlement} tells about its hall."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: economic",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "not anchored",
+    "market"
+   ],
+   "text": "{event} turned {settlement}'s fortunes {timeband_since}, though nothing in today's market shows it.",
+   "rewordedTo": "Even {timeband_since}, the older stallholders in {settlement}'s market can say which way {event} turned their trade."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: economic",
+   "vid": 4,
+   "angle": "counterforce",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{event} should have remade {settlement} and did not; the town absorbed it and went on doing what it had been doing.",
+   "rewordedTo": "Some in {settlement} say {event} is given more weight than it deserves; others say it is given less."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: religious",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{settlement} remembers {event} as a passing upset, not a change of faith.",
+   "rewordedTo": "People in {settlement} know {event} by name, and know which households it touched."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: religious",
+   "vid": 4,
+   "angle": "visitor",
+   "marks": [
+    "not anchored",
+    "institution: temple"
+   ],
+   "text": "{settlement}'s altars carry a history visitors only learn by asking.",
+   "rewordedTo": "Ask at {settlement}'s altars about {event} and you will be given the faith's own account of it."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: magical",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{event} happened at {settlement} {timeband_since} and is now a story told to children with the frightening part left in.",
+   "rewordedTo": "Even {timeband_since}, the people of {settlement} who were there at {event} do not all tell it the same way."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: magical",
+   "vid": 4,
+   "angle": "counterforce",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{event} could have marked {settlement} permanently and did not; what it touched has grown back.",
+   "rewordedTo": "There are people in {settlement} who say {event} was less strange than the story makes it, and they say it quietly."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: demographic",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{settlement} was a different size {timeband_since}, and almost nobody here thinks about that.",
+   "rewordedTo": "{settlement} was a different size before {event}, and even {timeband_since} the people old enough to remember can say how different."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: exile_return",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{settlement} once exiled some of its own and later took them back, and nobody here talks about either.",
+   "rewordedTo": "{event} is still told in {settlement}, and each family tells it a little differently."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: occupation_infiltration",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{settlement} was taken and released {timeband_since}, and the town has put it behind it.",
+   "rewordedTo": "Even {timeband_since}, people in {settlement} know who stood where during {event}."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-9",
+   "pool": "event type: occupation_infiltration",
+   "vid": 4,
+   "angle": "counterforce",
+   "marks": [
+    "not anchored"
+   ],
+   "text": "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.",
+   "rewordedTo": "Not everyone in {settlement} tells {event} the same way, and the difference lies in who their families were at the time."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-17",
+   "pool": "GREAT HOUSE: monastery",
+   "vid": 1,
+   "angle": "traveller",
+   "marks": [
+    "institution: monastery"
+   ],
+   "text": "Robed men and women from the monastery are a common sight on the way into {settlement}.",
+   "rewordedTo": "Robed monks and nuns are a common sight on the way into {settlement}."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-17",
+   "pool": "GREAT HOUSE: monastery",
+   "vid": 2,
+   "angle": "local",
+   "marks": [
+    "institution: monastery"
+   ],
+   "text": "The monastery keeps its own hours, and the rest of {settlement} leaves it to them.",
+   "rewordedTo": "The monks keep their own hours, and the rest of {settlement} leaves them to it."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-17",
+   "pool": "GREAT HOUSE: monastery",
+   "vid": 3,
+   "angle": "newcomer",
+   "marks": [
+    "institution: monastery"
+   ],
+   "text": "Anyone new to {settlement} who needs a meal or a bed is sent to the monastery door.",
+   "rewordedTo": "Anyone new to {settlement} who needs a meal or a bed is sent to the monks."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-17",
+   "pool": "GREAT HOUSE: monastery",
+   "vid": 4,
+   "angle": "official",
+   "marks": [
+    "institution: monastery"
+   ],
+   "text": "The monastery answers to its own order before it answers to whoever governs {settlement}.",
+   "rewordedTo": "The monks answer to their own order before they answer to whoever governs {settlement}."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "STALLED",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement}'s {institution} stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "rewordedTo": "{settlement}'s {institution} is short of what it needs from upstream, though the building and the skilled hands are all still there."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [],
+   "text": "{settlement} works {good} it cannot produce; it buys the raw stuff in, and always has.",
+   "rewordedTo": "{settlement} cannot produce its own {good}, so it buys it in."
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 4,
+   "angle": "trade",
+   "marks": [],
+   "text": "Carts bring {settlement} what its workshops need, and carry the worked {good} away again.",
+   "rewordedTo": "Ask where {settlement}'s {good} comes from and you are pointed at the carts, not at anyone in the town."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 1,
+   "angle": "unfolding",
+   "marks": [
+    "dm-only"
+   ],
+   "text": "Criminal money is reaching the officials of {settlement} one at a time, because the town is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "rewordedTo": "Criminal money would go a long way with the officials of {settlement}: the town is poor, its streets are badly watched, and nobody has shut the door."
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "dm-only"
+   ],
+   "text": "Officials at {settlement} are spending money their posts never paid them, and nobody in the town asks where it came from.",
+   "rewordedTo": "Officials at {settlement} are paid little and watched less, and a purse offered in the right doorway would not be turned away."
+  }
+ ],
+ "marksChanged": [
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness STRONG",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [
+    "crisis: any",
+    "no threat",
+    "no crisis: wartime"
+   ],
+   "text": "What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.",
+   "baseMarks": [
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-1",
+   "pool": "readiness CRITICAL",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "crisis: any",
+    "no guardPresence"
+   ],
+   "text": "{settlement} is all but undefended. Nothing in the town would stop a serious attack for long.",
+   "baseMarks": [
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls AND professional garrison",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement}'s garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls AND professional garrison",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls with NO force",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no watch",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls with NO force",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "no watch",
+    "no crisis: under_siege"
+   ],
+   "text": "You can walk the length of {settlement}'s walls and meet nobody on them.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: walls with NO force",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "no watch",
+    "no crisis: under_siege"
+   ],
+   "text": "People at {settlement} admit it when asked: the town has walls and nobody to stand on them.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "crisis: any",
+    "no crisis: threat",
+    "no watch"
+   ],
+   "text": "{settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.",
+   "baseMarks": [
+    "crisis: any",
+    "no crisis: threat"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Invasion & War: neither walls nor force",
+   "vid": 4,
+   "angle": "counterforce",
+   "marks": [
+    "threat",
+    "crisis: any",
+    "no watch"
+   ],
+   "text": "{settlement} has no line and no force, and the threat now at hand has noticed both.",
+   "baseMarks": [
+    "threat",
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: debt",
+    "no crisis: famine",
+    "prosperity: ≥ moderate"
+   ],
+   "text": "{settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without going begging.",
+   "baseMarks": [
+    "no crisis: debt"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no crisis: debt",
+    "no crisis: famine"
+   ],
+   "text": "The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+   "baseMarks": [
+    "no crisis: debt"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: STRONG",
+   "vid": 3,
+   "angle": "counterforce",
+   "marks": [
+    "crisis",
+    "no crisis: debt"
+   ],
+   "text": "Trouble at {settlement} has not turned into a collapse, because the town can pay its way through it.",
+   "baseMarks": [
+    "crisis"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: WEAK",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "{settlement}'s pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Economic Survival: WEAK",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "The people who would have to hold {settlement} through something are already owed, and they have not forgotten it.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: defence supplied",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: hunger"
+   ],
+   "text": "The supply book for {settlement}'s defenders balances: the town's own trades feed and equip them, so a call to arms does not begin with a shortage.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: defence supplied",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no crisis: hunger"
+   ],
+   "text": "The trades that feed and equip {settlement}'s defenders are busy and well stocked, and the defenders know it.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: defence supplied",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "no crisis: hunger"
+   ],
+   "text": "You can see the defence at {settlement} is kept supplied: food and gear come from the town's own workshops.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: defence supplied",
+   "vid": 4,
+   "angle": "unfolding",
+   "marks": [
+    "no crisis: hunger"
+   ],
+   "text": "While the trades behind {settlement}'s defence keep working, its defenders will not go short.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades working",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The tally of salted and preserved food at {settlement} is kept up by its working food trades, so the town would not run short at once if it were cut off.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades working",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The people who salt, dry and preserve food at {settlement} are working steadily, which matters a great deal if the town is ever cut off.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades working",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "As long as {settlement}'s food trades keep salting and drying, the town has provisions to fall back on if it is cut off.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades failing",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The tally of preserved food at {settlement} is falling, because the trades that salt and dry it are failing; if the town were cut off, it would run short quickly.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "CHAIN: food trades failing",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The people who salt and dry food at {settlement} cannot keep up, and everyone knows the stores would empty fast if the town were cut off.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Disasters & Famine: granary AND hospital",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "institution: granary"
+   ],
+   "text": "People at {settlement} are glad of their granary for bad years and their hospital for the sick.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-2",
+   "pool": "Disasters & Famine: NO reserves, NO medical provision",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "no institution: granary"
+   ],
+   "text": "Ask for the granary or the sick-house at {settlement} and you are pointed to neither, because there is neither.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "Moderate",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "The town's record of crimes at {settlement} is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: insurgency",
+   "vid": 1,
+   "angle": "street",
+   "marks": [
+    "guardPresence",
+    "population: ≥ middling"
+   ],
+   "text": "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.",
+   "baseMarks": [
+    "guardPresence"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: insurgency",
+   "vid": 3,
+   "angle": "ledger",
+   "marks": [
+    "population: ≥ middling"
+   ],
+   "text": "Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: political fracture",
+   "vid": 1,
+   "angle": "street",
+   "marks": [
+    "population: ≥ middling"
+   ],
+   "text": "Which power holds a district of {settlement} decides which rules apply there.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: political fracture",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "colour"
+   ],
+   "text": "Cross a street at {settlement} and you may cross from one power's rules into another's.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-3",
+   "pool": "COMPOUND: political fracture",
+   "vid": 3,
+   "angle": "ledger",
+   "marks": [
+    "population: ≥ middling"
+   ],
+   "text": "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "walls PRESENT",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [
+    "gate",
+    "guardPresence",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "NO organized force at all",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege",
+    "no crisis: wartime"
+   ],
+   "text": "{settlement} has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "NO organized force at all",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege",
+    "no crisis: wartime"
+   ],
+   "text": "If {settlement} were attacked, its people would fight with no leaders and no plan, each household for itself.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "NO organized force at all",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "no crisis: under_siege",
+    "no crisis: wartime"
+   ],
+   "text": "Nobody at {settlement} is responsible for defending the town; ask who is, and nobody can name anyone.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "FIXTURE: gates",
+   "vid": 1,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "Traffic in and out of {settlement} goes through its gates, and that is where anyone arriving is first seen.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "FIXTURE: gates",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The wall at {settlement} is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-5",
+   "pool": "FIXTURE: gates",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "You come into {settlement} by a gate, and someone at the gate sees you come.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Logistics & Supply: Granary + port",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "institution: granary",
+    "coast",
+    "crisis: any"
+   ],
+   "text": "{settlement}'s granary tally and its open harbour make it the hardest kind of place to starve out: a siege would need a fleet as well as an army.",
+   "baseMarks": [
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Logistics & Supply: Granary in isolation",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "institution: granary"
+   ],
+   "text": "{settlement} holds reserves and nothing else; endurance here is exactly the size of what is in the granary and not a day longer.",
+   "baseMarks": []
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Logistics & Supply: Granary with road supply",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "institution: granary"
+   ],
+   "text": "{settlement} keeps stores and is fed by the roads; the roads are the vulnerability, and the granary is what buys time to do something about them.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Logistics & Supply: Granary with road supply",
+   "vid": 3,
+   "angle": "counterforce",
+   "marks": [
+    "institution: granary",
+    "no crisis: hunger"
+   ],
+   "text": "An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.",
+   "baseMarks": [
+    "no crisis: hunger"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Naval Defense: Naval force",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "coast",
+    "crisis: any"
+   ],
+   "text": "Arriving by sea at {settlement}, you are met by the town's own vessels well before the harbour.",
+   "baseMarks": [
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Naval Defense: Under blockade",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "coast"
+   ],
+   "text": "A hostile fleet sits across {settlement}'s sea approaches: the harbour book records no ship in, and the goods the town lives on have stopped.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-6",
+   "pool": "Naval Defense: Under blockade",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "coast"
+   ],
+   "text": "The harbour at {settlement} is full of vessels that cannot leave and empty of the ones that should be coming in.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-8",
+   "pool": "override: INTERNAL PRESSURE (famine)",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "guardPresence"
+   ],
+   "text": "At {settlement} the people who keep order spend their days at the food stores, not watching the roads.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-STRAINED",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "watch",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences are sound and too few people man them.",
+   "baseMarks": [
+    "watch"
+   ]
+  },
+  {
+   "file": "defense.generated.js",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-STRAINED",
+   "vid": 2,
+   "angle": "unfolding",
+   "marks": [
+    "guardPresence",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement}'s defences are sound, but fewer people turn out each season to man the {defwork}, and the town is slow to notice.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-1",
+   "pool": "COMBINATION C4: a low rung on a working approach",
+   "vid": 3,
+   "angle": "visitor",
+   "marks": [
+    "market",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.",
+   "baseMarks": [
+    "market"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-2",
+   "pool": "GRANARY: thin",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "institution: granary"
+   ],
+   "text": "{settlement} is eating its stores faster than {season} will refill them. If nothing changes, the granary runs out before the next harvest.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-6",
+   "pool": "TIER: minor shadow activity (≥3)",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "dm-only",
+    "no organised crime"
+   ],
+   "text": "A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.",
+   "baseMarks": [
+    "dm-only",
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-6",
+   "pool": "TIER: minor shadow activity (≥3)",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "dm-only",
+    "no organised crime"
+   ],
+   "text": "There is some thieving and some selling without a licence. Every town this size has both.",
+   "baseMarks": [
+    "dm-only",
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-8",
+   "pool": "POOR",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no hunger",
+    "food: ≥ secure"
+   ],
+   "text": "The town gets by. Nobody is going without bread and nobody is building anything either.",
+   "baseMarks": [
+    "no hunger"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-8",
+   "pool": "FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "institution: granary"
+   ],
+   "text": "Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-8",
+   "pool": "FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "institution: granary"
+   ],
+   "text": "Nobody at {settlement} worries much about the next meal, and the spare food in the granary is part of why the town does as well as it does.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-8",
+   "pool": "FOOD AND PROSPERITY: full stores lift the town",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "institution: granary"
+   ],
+   "text": "With its granary full, {settlement} can meet a lean season without selling what it cannot spare.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "IMPORT-DEPENDENT",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "crisis: any",
+    "no crisis: under_siege"
+   ],
+   "text": "A substantial part of what {settlement} eats is bought rather than grown. The town's food is a trade item, and the trade is not optional.",
+   "baseMarks": [
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "IMPORT-DEPENDENT",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "grain",
+    "crisis: any",
+    "no crisis: under_siege"
+   ],
+   "text": "The carts feed this town as much as the fields do. Everybody knows what day they come and what it means if they do not.",
+   "baseMarks": [
+    "grain",
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "IMPORT-DEPENDENT",
+   "vid": 4,
+   "angle": "ledger",
+   "marks": [
+    "hunger",
+    "no crisis: under_siege"
+   ],
+   "text": "A substantial part of what {settlement} eats is bought, and under the hunger the bought part comes short. The stores cover the gap and are drawn down to do it.",
+   "baseMarks": [
+    "hunger"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "DEFICIT",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} grows far less food than it needs, and not enough comes in to make up the rest.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "DEFICIT",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "There is not enough here and there has not been for a while. What comes in helps and does not close the gap.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: one source",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: famine"
+   ],
+   "text": "{settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: several, the largest named",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: famine"
+   ],
+   "text": "{settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: several, the largest named",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "no crisis: famine"
+   ],
+   "text": "The {good} feeds {settlement} first, but not alone; when one source has a lean year, the others carry it.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-9",
+   "pool": "FOOD SOURCES: several, the largest named",
+   "vid": 3,
+   "angle": "unfolding",
+   "marks": [
+    "no crisis: famine"
+   ],
+   "text": "With more than its {good} to rely on, {settlement} can take a bad season in one source without going hungry.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: entrepot",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The trade here is in the moving of things. Very little of what leaves began here.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: entrepot",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The town's living is the road. Goods come, goods go, and the town takes its part of both.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: established",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "tier: ≥ village",
+    "no crisis: under_siege",
+    "no crisis: famine"
+   ],
+   "text": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: established",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege",
+    "no crisis: famine"
+   ],
+   "text": "There is always something going out. If one trade is quiet, another is not.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: established",
+   "vid": 4,
+   "angle": "trade",
+   "marks": [
+    "no crisis: under_siege",
+    "no crisis: famine"
+   ],
+   "text": "The carts that leave {settlement} carry several kinds of goods, not one.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-10",
+   "pool": "POSTURE: established",
+   "vid": 6,
+   "angle": "newcomer",
+   "marks": [
+    "no crisis: under_siege",
+    "no crisis: famine"
+   ],
+   "text": "A merchant who comes to {settlement} for one thing usually leaves with two or three.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: partiallyExploited",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} works part of the line that {resource} could support: the raw material moves, and it moves before it has been made into anything worth more.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: partiallyExploited",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "{resource} leaves {settlement} half-finished, and nobody in the town is troubled by it.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-11",
+   "pool": "EXPLOITATION: partiallyExploited",
+   "vid": 4,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.",
+   "baseMarks": []
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "INCOME MIX: one source carries the town",
+   "vid": 3,
+   "angle": "threshold",
+   "marks": [
+    "no hunger",
+    "prosperity: ≥ moderate"
+   ],
+   "text": "{settlement} lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole town has a bad year.",
+   "baseMarks": [
+    "no hunger"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "CRITICAL IMPORT: a house needs what the land lacks",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "Every load of {good} that {settlement}'s {institution} uses comes in from elsewhere; a closed road would stop its work within the season.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "INCOME WEIGHT: the religious houses",
+   "vid": 1,
+   "angle": "ledger",
+   "marks": [
+    "sacredHouse"
+   ],
+   "text": "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "economy.generated.js",
+   "block": "DS-ECO-12",
+   "pool": "INCOME WEIGHT: the religious houses",
+   "vid": 2,
+   "angle": "street",
+   "marks": [
+    "sacredHouse"
+   ],
+   "text": "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-13",
+   "pool": "MARKET-OPEN",
+   "vid": 1,
+   "angle": "street",
+   "marks": [
+    "no crisis: under_siege",
+    "crisis: any",
+    "tier: ≤ town"
+   ],
+   "text": "Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.",
+   "baseMarks": [
+    "no crisis: under_siege",
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-13",
+   "pool": "MARKET-OPEN",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [
+    "crisis: any",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.",
+   "baseMarks": [
+    "crisis: any"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-13",
+   "pool": "COMMERCE: a market, no guild",
+   "vid": 4,
+   "angle": "threshold",
+   "marks": [
+    "no crisis: under_siege"
+   ],
+   "text": "A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 2,
+   "angle": "visitor",
+   "marks": [
+    "market",
+    "no crisis: under_siege"
+   ],
+   "text": "{settlement} buys in what it cannot make, and the trading keeps as many people busy as the making would.",
+   "baseMarks": []
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 5,
+   "angle": "local",
+   "marks": [
+    "guild",
+    "no crisis: under_siege"
+   ],
+   "text": "Much of the work in {settlement}'s workshops begins with unloading a cart.",
+   "baseMarks": []
+  },
+  {
+   "file": "general.generated.js",
+   "block": "DS-GEN-18",
+   "pool": "BOUGHT-IN",
+   "vid": 6,
+   "angle": "newcomer",
+   "marks": [
+    "market",
+    "no crisis: under_siege",
+    "no crisis: famine"
+   ],
+   "text": "Anyone looking for work at {settlement} finds it in carrying, weighing and selling as often as in making.",
+   "baseMarks": []
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-5",
+   "pool": "FLAG: crimeIsGovt",
+   "vid": 1,
+   "angle": "street",
+   "marks": [
+    "no guardPresence"
+   ],
+   "text": "There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.",
+   "baseMarks": [
+    "colour"
+   ]
+  },
+  {
+   "file": "power.generated.js",
+   "block": "DS-POW-6",
+   "pool": "capture pressure ADVANCING (weak security, poor prosperity)",
+   "vid": 2,
+   "angle": "ledger",
+   "marks": [
+    "dm-only",
+    "tier: ≥ village",
+    "no threat",
+    "no crisis: wartime",
+    "no watch"
+   ],
+   "text": "Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and nobody in the {seat} is mending either.",
+   "baseMarks": [
+    "dm-only"
+   ]
+  },
+  {
+   "file": "stressors.generated.js",
+   "block": "DS-STR-1",
+   "pool": "UNDER OCCUPATION",
+   "vid": 3,
+   "angle": "street",
+   "marks": [
+    "walls",
+    "garrison"
+   ],
+   "text": "The garrison is quartered inside the walls, and the town's business is conducted around it.",
+   "baseMarks": [
+    "walls"
+   ]
+  },
+  {
+   "file": "stressors.generated.js",
+   "block": "DS-CND-1",
+   "pool": "DIRECTION: worsening · CRISIS: famine",
+   "vid": 1,
+   "angle": "local",
+   "marks": [
+    "tier: ≥ village"
+   ],
+   "text": "The famine in {settlement} is getting worse: the rations shrink each week, and the queues for them grow longer.",
+   "baseMarks": []
+  }
+ ]
+}

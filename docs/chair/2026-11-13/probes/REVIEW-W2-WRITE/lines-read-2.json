@@ -1,0 +1,1018 @@
+[
+ {
+  "id": "DS-DEF-1::readiness STRONG::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-monster_pressure-town-1",
+    "true": true,
+    "severity": "-",
+    "why": "stress.type=monster_pressure, readiness Fortress 81, walls+citadel+barracks+watch+charter; page: \"Beasts & Monsters Strong\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "true, but near-verbatim echo of the Beasts bar line on the same tab (\"being tested in earnest now, and so far they are holding\")"
+ },
+ {
+  "id": "DS-DEF-1::readiness CRITICAL::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-city-famine-1",
+    "true": false,
+    "severity": "MED",
+    "why": "Megaousa city 3116 with City walls, Garrison, Professional city watch; same tab Invasion & War: \"garrison roll puts paid soldiers on every stretch of its walls ... an army would pay dearly\""
+   },
+   {
+    "town": "rww-thorp-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "thorp pop 5, Household levy + Palisade, readiness Undefended 7"
+   },
+   {
+    "town": "rw3-town-occupied-1",
+    "true": true,
+    "severity": "-",
+    "why": "Town watch only, readiness Vulnerable 18; page: \"only people on Polano's walls are the watch\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "fine where the force is thin; contradicts the walls/garrison line in a city whose Invasion bar is Adequate"
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: settled, nothing organized::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-thorp-40",
+    "true": false,
+    "severity": "HIGH",
+    "why": "stress.type=occupied, config.monsterThreat=heartland; no beast crisis anywhere on page; Defense: \"the arms in the thorp are theirs\" (occupiers)"
+   },
+   {
+    "town": "r2r-thorp-5",
+    "true": true,
+    "severity": "-",
+    "why": "stress monster_pressure, no institutions of defence, \"No organized force\""
+   },
+   {
+    "town": "r2s-monster_pressure-town-2",
+    "true": false,
+    "severity": "HIGH",
+    "why": "institutions include Town watch and Free company hall; same page: \"The free company at Velipol keeps its own muster roll\", \"1 force\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "gate fires without a beast crisis and where a watch and free company exist"
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-under_siege-town-3",
+    "true": false,
+    "severity": "HIGH",
+    "why": "institutions include Town watch (\"1 force\"); Guard assessment: \"Everyone comes and goes by the gates, so smugglers have to get past the town watch\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "\"walls with NO force\" pool printed where a town watch keeps the gates"
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "true": false,
+    "severity": "HIGH",
+    "why": "stress under_siege; Military status: \"Miroko is surrounded. Everyone who can keep a lookout is keeping one\""
+   },
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "true": false,
+    "severity": "HIGH",
+    "why": "stress under_siege; \"Every able body in Lidostagnum takes a turn at the lookout\"; also has Adventurers' charter hall mustering the defence"
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "true": false,
+    "severity": "HIGH",
+    "why": "stress under_siege; \"the siege is being held by householders taking turns\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "under an active siege \"nobody posted anywhere\" and danger merely \"close\" is normal-times prose under a crisis; needs no crisis: under_siege"
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v10",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-town-under_siege+famine-1",
+    "true": false,
+    "severity": "HIGH",
+    "why": "stressors under_siege+famine; \"With an army outside ... every guard and every store is counted\"; danger is not \"close\", it is outside the gates"
+   },
+   {
+    "town": "r2s-monster_pressure-town-2",
+    "true": true,
+    "severity": "-",
+    "why": "Velipol unwalled, Town watch, monster_pressure: watch on rounds while beasts near"
+   },
+   {
+    "town": "r2s-under_siege-town-1",
+    "true": false,
+    "severity": "HIGH",
+    "why": "stress under_siege; \"To reach Fengling you would have to cross the besiegers' lines\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "watch \"keeps to its rounds\" while the danger is \"close\" reads as quiet times during an active siege"
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v8",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-city-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "no stress, prosperity Comfortable, food Secure, granary ~1 year"
+   },
+   {
+    "town": "r2r-city-0",
+    "true": true,
+    "severity": "-",
+    "why": "no stress, Comfortable, Daily Life \"closes every year ahead ... reserves behind it\""
+   },
+   {
+    "town": "r2r-city-13",
+    "true": true,
+    "severity": "-",
+    "why": "no stress, Comfortable, granary ~11 months"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: WEAK::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-hamlet-calm-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "prosperity Comfortable; Daily Life: \"Ormaker closes every year ahead ... there are reserves behind it\" (Economic Survival bar is Weak)"
+   },
+   {
+    "town": "rww-thorp-monster_pressure-1",
+    "true": true,
+    "severity": "-",
+    "why": "no force, prosperity Moderate, thorp of 28"
+   },
+   {
+    "town": "rww-village-religious_conversion-1",
+    "true": true,
+    "severity": "-",
+    "why": "no force, prosperity Struggling"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "fits the Weak bar; strains against comfortable hamlets with reserves"
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: food trades failing::v3",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "r2r-metropolis-0",
+    "true": false,
+    "severity": "LOW",
+    "why": "activeChains food_processing=impaired, but it is Bakers + Butchers on depleted grain fields, not salting/drying"
+   },
+   {
+    "town": "r2r-metropolis-16",
+    "true": false,
+    "severity": "MED",
+    "why": "food_processing impaired (bakers/butchers) but Salt works present, chain salt=entrepot; Economics page: \"Salt & Preservation ... Salt works · Preserved foods\" healthy"
+   },
+   {
+    "town": "r2r-metropolis-22",
+    "true": false,
+    "severity": "MED",
+    "why": "food_processing impaired (bakers/butchers) but river_fishing=running and page Produced locally lists \"Salted fish, Smoked seafood\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "rewording names salting and drying trades the record does not have failing; the failing chain is bakers and butchers"
+ },
+ {
+  "id": "DS-DEF-3::Moderate::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-hamlet-1",
+    "true": true,
+    "severity": "-",
+    "why": "no stress, no force, Guard assessment \"neighbours deal with it themselves\""
+   },
+   {
+    "town": "r2r-hamlet-15",
+    "true": true,
+    "severity": "-",
+    "why": "no stress, no force, heartland \"reasonable one rather than a gap\""
+   },
+   {
+    "town": "r2r-hamlet-2",
+    "true": true,
+    "severity": "-",
+    "why": "no stress, no force, Invasion \"Nothing threatens Tulumac now\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-DEF-3::COMPOUND: political fracture::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-hamlet-4",
+    "true": false,
+    "severity": "LOW",
+    "why": "powerStructure.factions has 1 (Headman's Authority); Power tab \"The Powers (1)\" though its prose says \"Two powers have stopped coming\""
+   },
+   {
+    "town": "r2r-village-30",
+    "true": true,
+    "severity": "-",
+    "why": "2 factions (Independent Bloc 66, Elected Reeve 34), stability Fractured"
+   },
+   {
+    "town": "r2s-politically_fractured-hamlet-3",
+    "true": false,
+    "severity": "MED",
+    "why": "powerStructure.factions has 1; Power tab: \"The Powers (1)\" and the split is \"Two households are not speaking\", not rival powers"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "presumes several powers; one-power hamlets carry it on the fracture stress alone"
+ },
+ {
+  "id": "DS-DEF-5::walls PRESENT::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-city-under_siege-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "Citadel (\"Inner fortress. Last refuge in siege\"), garrison, mercenary quarter also stand between; wall is not \"all\""
+   },
+   {
+    "town": "r2s-under_siege-city-3",
+    "true": false,
+    "severity": "LOW",
+    "why": "Citadel and garrison listed on the same tab"
+   },
+   {
+    "town": "r2s-under_siege-metropolis-0",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege, massive walls, every stretch manned"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "\"all that stands\" overstates where a citadel and garrison are listed; repeats the WALLED-STRAINED line on the same tab"
+ },
+ {
+  "id": "DS-DEF-5::garrison PRESENT::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "true": false,
+    "severity": "HIGH",
+    "why": "stress under_siege; same paragraph: \"gates are shut and barred ... since the siege began\"; something has come"
+   },
+   {
+    "town": "rw3-city-calm-1",
+    "true": false,
+    "severity": "MED",
+    "why": "same tab Vulnerabilities: \"Fortification and forces are present but chronically underfunded: poor equipment, low morale\""
+   },
+   {
+    "town": "rw3-city-infiltrated-1",
+    "true": true,
+    "severity": "-",
+    "why": "Garrison present, well-defended, no siege"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "colour mark lets \"whether or not anything comes\" print under a siege"
+ },
+ {
+  "id": "DS-DEF-5::charter hall ABSENT where the country warrants one::v2",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-hamlet-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "monsterThreat frontier, no charter hall, Beasts bar Critical"
+   },
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "monsterThreat frontier, no charter hall"
+   },
+   {
+    "town": "rww-thorp-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "monsterThreat frontier, no charter hall"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-DEF-6::Naval Defense: Port only::v3",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-metropolis-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "Naval Defense \"Port only. Port facility but no naval force\"; Docks + Harbour master, no naval institution"
+   },
+   {
+    "town": "rww-town-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "Naval Defense Port only; Docks, Shipyard, no naval force"
+   },
+   {
+    "town": "r2r-city-12",
+    "true": true,
+    "severity": "-",
+    "why": "Naval Defense Port only"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "true to the rating; \"for trade, not for defence\" is a light balanced turn"
+ },
+ {
+  "id": "DS-DEF-8::override: COMMAND SPLIT::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-hamlet-35",
+    "true": true,
+    "severity": "-",
+    "why": "stress politically_fractured, Military status Command split, no force"
+   },
+   {
+    "town": "r2r-hamlet-4",
+    "true": true,
+    "severity": "-",
+    "why": "Command split, only an Adventurers' charter hall, no standing force"
+   },
+   {
+    "town": "r2r-hamlet-45",
+    "true": true,
+    "severity": "-",
+    "why": "Command split, charter hall only"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": false,
+  "note": "true; \"louder for it\" is a mannered turn whose cause does not follow"
+ },
+ {
+  "id": "DS-DEF-8::override: BEAST PRESSURE::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-thorp-monster_pressure-1",
+    "true": true,
+    "severity": "-",
+    "why": "monster_pressure, no watch, no force"
+   },
+   {
+    "town": "r2r-hamlet-9",
+    "true": false,
+    "severity": "LOW",
+    "why": "same tab: \"the lookouts count the days between attacks\" and \"the outlying houses stand empty at night\""
+   },
+   {
+    "town": "r2r-thorp-5",
+    "true": false,
+    "severity": "LOW",
+    "why": "same tab: \"the lookouts count the days between attacks\" (someone is posted)"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "sits beside a stock line about lookouts that says someone is posted"
+ },
+ {
+  "id": "DS-DEF-9::magicDependency true::v4",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-city-calm-1",
+    "true": false,
+    "severity": "MED",
+    "why": "Economics tab: \"The city is well off, the road keeps it that way\"; traditions.hasArcane=false (Wizard's tower only)"
+   },
+   {
+    "town": "rww-city-recently_betrayed-1",
+    "true": true,
+    "severity": "-",
+    "why": "magicDependency true, Mages' guild, magic Integral economic role"
+   },
+   {
+    "town": "r2r-city-12",
+    "true": false,
+    "severity": "LOW",
+    "why": "Economics tab: \"Markaztappa pays its way on a thin margin\" against \"does better than ... would explain\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "rewording fine; the claim fights the Economics tab where the road carries the town"
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-city-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege, City walls and gates; printed \"...city walls and gates than the city could ever find for it\""
+   },
+   {
+    "town": "rww-thorp-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege, Palisade, Household levy"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege, Massive walls and fortifications; printed \"for it\""
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "\"find for it\" after plural fills (\"walls and gates\", \"walls and fortifications\")"
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v8",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-hamlet-17",
+    "true": false,
+    "severity": "LOW",
+    "why": "Economic Survival: \"Faroaltum has no money to meet trouble\"; Citizen militia are volunteers, so \"spends on them\" presumes pay"
+   },
+   {
+    "town": "r2r-hamlet-26",
+    "true": true,
+    "severity": "-",
+    "why": "Palisade or earthworks + Citizen militia, no stress"
+   },
+   {
+    "town": "r2r-hamlet-27",
+    "true": true,
+    "severity": "-",
+    "why": "Palisade or earthworks + Citizen militia; page: \"arming itself when needed costs less than paying anybody\""
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "slot prints \"palisade or earthworks\" twice, reading as the generator undecided"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v1",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-hamlet-mass_migration-1",
+    "true": true,
+    "severity": "-",
+    "why": "river access, Struggling, output 16/100"
+   },
+   {
+    "town": "rww-metropolis-famine-1",
+    "true": false,
+    "severity": "MED",
+    "why": "Income: \"Entrepôt Trade 9% Transit duties, warehouse fees ... from goods passing through the crossroads\", plus Toll Revenue"
+   },
+   {
+    "town": "rww-thorp-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "river access, subsistence, Struggling"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "\"moves along Kilwell's crossroads\" with the crossroads fill; false where transit duties are an income line"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-hamlet-succession_void-1",
+    "true": true,
+    "severity": "-",
+    "why": "no market institution, river, prosperity Poor"
+   },
+   {
+    "town": "rw3-hamlet-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "no market institution, river, Poor"
+   },
+   {
+    "town": "rw3-hamlet-plague_onset-1",
+    "true": true,
+    "severity": "-",
+    "why": "no market institution, road, Struggling"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-6::TIER: significant off-book activity (≥15)::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-metropolis-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "Smuggling network, Black market bazaar; Shadow Economy 17%"
+   },
+   {
+    "town": "r2r-city-12",
+    "true": true,
+    "severity": "-",
+    "why": "Smuggling network, Smuggling & Contraband chain"
+   },
+   {
+    "town": "r2r-city-16",
+    "true": true,
+    "severity": "-",
+    "why": "Smuggling network, Shadow Economy 19%"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-8::POOR::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-hamlet-succession_void-1",
+    "true": true,
+    "severity": "-",
+    "why": "prosperity Poor, subsistence"
+   },
+   {
+    "town": "rw3-thorp-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "prosperity Poor, output 8/100"
+   },
+   {
+    "town": "r2r-hamlet-18",
+    "true": true,
+    "severity": "-",
+    "why": "prosperity Poor"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-9::DEFICIT::v5",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-city-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "foodSecurity.importCoverage=0; page \"No food comes into Panteakra by trade\""
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "importCoverage=0, trade isolated"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "true": false,
+    "severity": "MED",
+    "why": "foodSecurity.importCoverage=68868 (13%); line just above: \"+ 68,834 imported\" and \"carts bring in a little of the rest\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "contradicts the food line above it where siege imports are still non-zero"
+ },
+ {
+  "id": "DS-SUP-2::UPSTREAM WEAK: a chain the town's work draws on is failing::v1",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-metropolis-famine-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "smelting upstream = iron (running, local) + fuel (impaired, local deposits depleted); fuel not in primaryImports, so not \"supplies from elsewhere\""
+   },
+   {
+    "town": "rw3-city-infiltrated-1",
+    "true": true,
+    "severity": "-",
+    "why": "smelting vulnerable; imports \"Coal and fuel (local seams exhausted)\""
+   },
+   {
+    "town": "rw3-metropolis-calm-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "livestock chain vulnerable from local grazing land depleted; livestock/fodder not in primaryImports"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "rewording moved the failing upstream chain into the town's own work (\"Some of Vatannuur's livestock depends on supplies\")"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: entrepot::v5",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-under_siege-metropolis-1",
+    "true": true,
+    "severity": "-",
+    "why": "isEntrepot=true, under_siege"
+   },
+   {
+    "town": "r2s-under_siege-town-0",
+    "true": true,
+    "severity": "-",
+    "why": "isEntrepot=true, crossroads, under_siege"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v10",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-city-under_siege-1",
+    "true": false,
+    "severity": "MED",
+    "why": "primaryExports are all services: letters of credit, legal, military contract, arcane services; no goods"
+   },
+   {
+    "town": "r2r-village-21",
+    "true": true,
+    "severity": "-",
+    "why": "exports salted fish, smoked seafood, fish oil; under_siege"
+   },
+   {
+    "town": "r2s-under_siege-city-2",
+    "true": false,
+    "severity": "MED",
+    "why": "exports legal services, pilgrimage, military contracts, cultural tourism, alchemical trade: mostly services, not goods to shut in"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "\"goods ... shut in\" printed where the exports are services"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v3",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-city-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "resourceAnalysis.exploitation.fullyExploited=[fish]; Fish market present"
+   },
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "true": false,
+    "severity": "MED",
+    "why": "fullyExploited grain via \"Access to external mill\" (no mill or bakers in the hamlet); grain is not taken to the finished thing here"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "fullyExploited medicinal herbs; Apothecary district present"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "\"this trade\" has no referent in the printed paragraph (it follows a sentence about position and precedes depleted deposits)"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks::v3",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-city-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "Smelter present; Imports page lists Gold/silver ore; under_siege"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "Mills (2-5); primaryImports Grain; importCoverage 0 under siege"
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "Smelter present; Imports page lists Iron ore; under_siege"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v3",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-thorp-1",
+    "true": true,
+    "severity": "-",
+    "why": "primaryImports [] for luxury; page Imports \"Stone\" only"
+   },
+   {
+    "town": "r2r-thorp-23",
+    "true": false,
+    "severity": "MED",
+    "why": "same Economics tab, Imports: \"Metals Salt / Terrain cannot produce\"; line says nothing comes in"
+   },
+   {
+    "town": "r2r-thorp-54",
+    "true": true,
+    "severity": "-",
+    "why": "page \"No recorded imports\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "contradicts the Imports list where metals are listed as imported"
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v5",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-thorp-plague_onset-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "incomeSources: Agricultural Rents 68, Black Market 14, Fish 9, Iron 9; no faith money for a quarrel to be felt in"
+   },
+   {
+    "town": "r2r-hamlet-11",
+    "true": false,
+    "severity": "LOW",
+    "why": "incomeSources: Agri 74, Fish 13, Timber 13; no faith line"
+   },
+   {
+    "town": "r2r-hamlet-24",
+    "true": false,
+    "severity": "LOW",
+    "why": "incomeSources: Agri 84, Black Market 16; no faith line"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "the \"felt in its money first\" claim has no faith income behind it and the logic is obscure"
+ },
+ {
+  "id": "DS-GEN-18::STALLED::v2",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-city-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "garrison chain vulnerable, upstream food_processing; famine"
+   },
+   {
+    "town": "rww-city-recently_betrayed-1",
+    "true": true,
+    "severity": "-",
+    "why": "smelting vulnerable; page \"Needs imported fuel: no local source\""
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "furs_north vulnerable (upstream hunting) under siege"
+   }
+  ],
+  "plain": true,
+  "machinery": true,
+  "strike": true,
+  "note": "\"short of what it needs from upstream\" names no good: the supply chain model speaking"
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v8",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-hamlet-under_siege-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "trade access port; no bought-in trade shown on the Economics tab (\"carts\")"
+   },
+   {
+    "town": "r2r-village-43",
+    "true": false,
+    "severity": "LOW",
+    "why": "trade access isolated; primaryImports only \"Incense and votive candles\": no cart-fed trade"
+   },
+   {
+    "town": "r2s-under_siege-hamlet-0",
+    "true": true,
+    "severity": "-",
+    "why": "road; \"None of the metals used at Sanctaurbs comes from the country here\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "carts assumed for an isolated village and a port hamlet"
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v1",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "r2s-mass_migration-village-2",
+    "true": true,
+    "severity": "-",
+    "why": "no watch, prosperity Struggling, Smuggling waypoint"
+   },
+   {
+    "town": "r2s-slave_revolt-village-0",
+    "true": true,
+    "severity": "-",
+    "why": "no watch, Struggling; next sentence says officials already have an understanding with Thieves' Guild"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "true; hypothetical \"would go\" sits just before a sentence saying it already has"
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v8",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-city-19",
+    "true": true,
+    "severity": "-",
+    "why": "garrison and city watch; prosperity Poor"
+   },
+   {
+    "town": "r2r-city-56",
+    "true": true,
+    "severity": "-",
+    "why": "garrison and city watch; prosperity Poor"
+   },
+   {
+    "town": "r2s-famine-metropolis-0",
+    "true": true,
+    "severity": "-",
+    "why": "garrison and city watch; Struggling, Economics \"The metropolis is poor\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v3",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-hamlet-55",
+    "true": true,
+    "severity": "-",
+    "why": "no arcane institution, reliance None"
+   },
+   {
+    "town": "r2r-metropolis-29",
+    "true": false,
+    "severity": "MED",
+    "why": "Alchemist quarter; Magic tab: \"passes through a workshop that could not run without the arcane, and everybody in the trade knows which workshop\""
+   },
+   {
+    "town": "r2r-metropolis-46",
+    "true": false,
+    "severity": "MED",
+    "why": "Wizard's tower and Alchemist quarter; reliance Integral, supplied by Wizard's tower and named practitioner Wenhao Kato"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "\"keep it even from their kin\" printed where a wizard's tower and an alchemist quarter work openly"
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: preached::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-recently_betrayed-town-0",
+    "true": true,
+    "severity": "-",
+    "why": "Magic religious acceptance hostile; Wizard's tower and Scroll scribe; looking away fits"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ }
+]

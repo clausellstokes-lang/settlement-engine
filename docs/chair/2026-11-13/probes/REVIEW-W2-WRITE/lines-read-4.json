@@ -1,0 +1,984 @@
+[
+ {
+  "id": "DS-DEF-1::readiness STRONG::v8",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-metropolis-4",
+    "true": true,
+    "severity": "-",
+    "why": "stress wartime; defenseProfile walls Massive walls+Citadel, garrison watch+multiple garrisons; readiness Well-Defended; page \"Military status War footing\""
+   },
+   {
+    "town": "r2s-wartime-city-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "page Invasion & War: \"Jalalserai's defenders are a little worse off every month the trades behind them keep failing\" sits against \"in good order\""
+   },
+   {
+    "town": "r2s-wartime-metropolis-1",
+    "true": true,
+    "severity": "-",
+    "why": "wartime; readiness Fortress; walls+citadel, garrisons, mercenary quarter; page \"supply book ... balances\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "true where it prints; \"its works\" is slightly vague but fine"
+ },
+ {
+  "id": "DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-metropolis-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "config.monsterThreat plagued; Massive walls; garrisons+watch; no crisis"
+   },
+   {
+    "town": "rww-metropolis-wartime-1",
+    "true": true,
+    "severity": "-",
+    "why": "monsterThreat plagued; massive walls, garrisons, mercenaries (page also says fewer turn out each season to man the walls: tension only)"
+   },
+   {
+    "town": "rww-thorp-under_siege-1",
+    "true": false,
+    "severity": "MED",
+    "why": "thorp of 5, palisade + household levy, scores.monster 10; same page: \"The thorp knows it needs specialists against the creatures, and has none\"; besiegers let nobody out anyway"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "fine for walled towns; a 5-person thorp \"manning the wall day and night against the creatures\" is a stretch"
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: walls with NO force::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-town-occupied-1",
+    "true": false,
+    "severity": "HIGH",
+    "why": "stress occupied; same tab Military status: \"The occupiers' troops at Tulumtzal protect it from everyone except the people who sent them\" - so not \"its watch and nobody else\""
+   },
+   {
+    "town": "r2r-town-0",
+    "true": true,
+    "severity": "-",
+    "why": "Town walls; watch only (no garrison/militia/mercenary); page \"too few people man them\""
+   },
+   {
+    "town": "r2r-town-1",
+    "true": true,
+    "severity": "-",
+    "why": "Town walls+Citadel; Town watch only; page \"long stretches ... with nobody on them\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "needs a no-occupation gate: under occupation it denies the occupiers' troops the same page names"
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v2",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-hamlet-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "no stress; monsterThreat heartland; no walls, no force"
+   },
+   {
+    "town": "rww-hamlet-famine-1",
+    "true": false,
+    "severity": "HIGH",
+    "why": "famine/critical; same tab \"The hamlet may not come through this crisis\"; monsterThreat frontier, page \"needs specialists against the creatures\" - \"Nothing threatens Ulfset now\" is wrong"
+   },
+   {
+    "town": "rww-hamlet-mass_migration-1",
+    "true": false,
+    "severity": "MED",
+    "why": "mass_migration/high and monsterThreat frontier; same tab \"Every quarrel over a roof or a meal is a fight no one is placed to stop\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "\"Nothing threatens X now\" prints under any crisis (marks crisis: any); reads as normal times during a famine"
+ },
+ {
+  "id": "DS-DEF-2::Invasion & War: neither walls nor force::v8",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-under_siege-town-0",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; no walls; Town watch only; page \"Unfortified\""
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "true, but \"the threat now at hand has noticed both\" is a mannered personified abstraction"
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-indebted-city-1",
+    "true": true,
+    "severity": "-",
+    "why": "stress indebted; scores.economic 76; Crisis tab says it owes more than it can repay, but nothing says collapse is expected"
+   },
+   {
+    "town": "r2s-indebted-metropolis-2",
+    "true": true,
+    "severity": "-",
+    "why": "indebted; scores.economic 78; \"the metropolis is shaken but standing\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true; mild tension with \"owes more than it can ever repay\" on the Crisis tab"
+ },
+ {
+  "id": "DS-DEF-2::Economic Survival: STRONG::v10",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-famine-city-2",
+    "true": true,
+    "severity": "-",
+    "why": "famine/high; scores.economic 80; imports grain; page \"every coin goes on food\" agrees"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-DEF-2::CHAIN: defence supplied::v5",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-city-44",
+    "true": true,
+    "severity": "-",
+    "why": "famine/critical; guard \"well paid, well equipped\"; no contrary supply line"
+   },
+   {
+    "town": "r2s-famine-city-0",
+    "true": true,
+    "severity": "-",
+    "why": "famine/high; garrison+watch; no contrary supply line"
+   },
+   {
+    "town": "r2s-famine-metropolis-2",
+    "true": false,
+    "severity": "MED",
+    "why": "same tab Guard assessment: \"The garrison and city watch exists on paper. Chronically underpaid and poorly equipped\" against \"the defence is not short of gear\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain; clashes only where the guard text says the force is poorly equipped"
+ },
+ {
+  "id": "DS-DEF-3::Moderate::v1",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "true": false,
+    "severity": "MED",
+    "why": "next lines: \"Criminal structure: Organized syndicate\", \"Thieves' Guild (Powerful) ... Deeply embedded in civic life\", \"the people who run the metropolis's crime\"; stress infiltrated"
+   },
+   {
+    "town": "r2r-city-11",
+    "true": false,
+    "severity": "LOW",
+    "why": "next line: \"Ask who runs crime here and the answer is one ring\"; Thieves' guild chapter + black market"
+   },
+   {
+    "town": "r2r-city-12",
+    "true": false,
+    "severity": "MED",
+    "why": "Guard assessment: \"Public law enforcement is largely a formality\"; Internal Security rated Critical; next line one ring runs crime"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "the reword drops \"crime exists\" and now says nobody has the run of the town directly above an organised syndicate"
+ },
+ {
+  "id": "DS-DEF-3::COMPOUND: insurgency::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-thorp-52",
+    "true": false,
+    "severity": "LOW",
+    "why": "thorp of 25 people: there is no \"far end of the place\"; insurgency/high is true"
+   },
+   {
+    "town": "r2r-town-11",
+    "true": true,
+    "severity": "-",
+    "why": "insurgency rebellion/critical; town 1790"
+   },
+   {
+    "town": "r2r-village-26",
+    "true": true,
+    "severity": "-",
+    "why": "insurgency rebellion/critical; village 335"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and concrete; \"far end\" is odd for a thorp"
+ },
+ {
+  "id": "DS-DEF-5::walls PRESENT::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-thorp-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "Palisade, no Gates institution; no crisis"
+   },
+   {
+    "town": "r2r-hamlet-34",
+    "true": true,
+    "severity": "-",
+    "why": "Palisade or earthworks, no gate; recently_betrayed (not siege)"
+   },
+   {
+    "town": "r2r-hamlet-6",
+    "true": false,
+    "severity": "LOW",
+    "why": "same tab Guard assessment: \"The walls leave few ways in, so smugglers have to get past the citizen militia\" against \"gaps everyone knows\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true; one guard line elsewhere disagrees"
+ },
+ {
+  "id": "DS-DEF-5::walls PRESENT::v8",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-thorp-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; Palisade, no gate"
+   },
+   {
+    "town": "r2r-thorp-45",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; Palisade, no gate"
+   },
+   {
+    "town": "r2s-under_siege-thorp-3",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; Palisade, no gate"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-DEF-5::NO organized force at all::v5",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; defenseProfile militia/garrison/watch all empty"
+   },
+   {
+    "town": "r2r-hamlet-0",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; no force; page \"held by householders taking turns\""
+   },
+   {
+    "town": "r2r-hamlet-53",
+    "true": false,
+    "severity": "LOW",
+    "why": "wartime (war elsewhere): same tab \"A visitor to Markazdeh would not guess at the trouble from the streets\"; nobody is leading a defence \"as the trouble goes on\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "fits a siege; a stretch for wartime with the war away"
+ },
+ {
+  "id": "DS-DEF-5::ARCANE: alchemists::v1",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "true": true,
+    "severity": "-",
+    "why": "magicDef Alchemist quarter + Academy of magic, so \"part of\" holds"
+   },
+   {
+    "town": "r2r-city-16",
+    "true": false,
+    "severity": "LOW",
+    "why": "Alchemist quarter is the only arcane defence and Supporting Capabilities says \"Arcane Support None\" - \"Part of the magical help\" presumes other help; traditions.hasAlchemy=false"
+   },
+   {
+    "town": "r2r-city-36",
+    "true": true,
+    "severity": "-",
+    "why": "Alchemist quarter + Enchanter's shop/Scroll scribe; Arcane Support Present"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "better than the old line; \"Part of\" is wrong where alchemy is all there is"
+ },
+ {
+  "id": "DS-DEF-8::override: INTERNAL PRESSURE (famine)::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-hamlet-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "famine/critical; no force, no watch"
+   },
+   {
+    "town": "rww-thorp-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "famine/high; palisade, no force or watch"
+   },
+   {
+    "town": "rww-village-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "famine/critical; no force or watch"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-DEF-8::override: SECURITY COMPROMISED::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-recently_betrayed-thorp-1",
+    "true": false,
+    "severity": "MED",
+    "why": "the line before it: \"Those who keep Grímberg safe are questioning everyone who could have reached what was sold\" - says there are keepers"
+   },
+   {
+    "town": "r2s-recently_betrayed-thorp-2",
+    "true": true,
+    "severity": "-",
+    "why": "no force, no watch; line before is about neighbours"
+   },
+   {
+    "town": "r2s-recently_betrayed-village-1",
+    "true": false,
+    "severity": "MED",
+    "why": "line before: \"Those who keep Hongan safe are questioning everyone...\" against \"no defenders\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "true by the record; the stock line before it is the one at fault"
+ },
+ {
+  "id": "DS-DEF-8::override: INSURGENCY ACTIVE::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-thorp-52",
+    "true": true,
+    "severity": "-",
+    "why": "insurgency; no force or watch"
+   },
+   {
+    "town": "r2s-insurgency-thorp-2",
+    "true": true,
+    "severity": "-",
+    "why": "insurgency rebellion/critical; no force"
+   },
+   {
+    "town": "r2s-insurgency-village-0",
+    "true": true,
+    "severity": "-",
+    "why": "insurgency; no force; \"nobody can name anyone\" responsible"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-DEF-9::magicDependency false::v3",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-hamlet-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "magicDependency false; roles occasional, so \"less comfortably\" fits"
+   },
+   {
+    "town": "rww-hamlet-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "magicDependency false; roles occasional"
+   },
+   {
+    "town": "rww-hamlet-succession_void-1",
+    "true": true,
+    "severity": "-",
+    "why": "magicDependency false; roles occasional"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "the fix removes the doubled \"and go on\"; reads fine"
+ },
+ {
+  "id": "DS-DEF-11::WALLED-STRAINED::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-thorp-24",
+    "true": false,
+    "severity": "MED",
+    "why": "stress occupied; same tab: \"The occupiers' troops at Sanctaminus protect it\""
+   },
+   {
+    "town": "r2r-thorp-43",
+    "true": true,
+    "severity": "-",
+    "why": "Palisade, no force or watch; repeats \"has walls and nobody to put on them\" a few lines up"
+   },
+   {
+    "town": "r2r-village-17",
+    "true": true,
+    "severity": "-",
+    "why": "Palisade or earthworks, no force; but slot prints \"palisade or earthworks\" twice"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "{defwork} can print the catalogue name \"palisade or earthworks\" twice in one sentence; repeats the \"walls and nobody to put on them\" line"
+ },
+ {
+  "id": "DS-DEF-11::UNWALLED-SMALL::v5",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-hamlet-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; no walls"
+   },
+   {
+    "town": "rww-village-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; no walls; everyone holds a weapon"
+   },
+   {
+    "town": "r2r-thorp-10",
+    "true": true,
+    "severity": "-",
+    "why": "monster_pressure; no walls; \"beasts give Tihogorod no rest\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "true": false,
+    "severity": "MED",
+    "why": "metropolis of 17,524 with district markets, major annual fairs and Market Taxes 24% of income: \"the little that passing trade used to leave\" undersells it"
+   },
+   {
+    "town": "rww-thorp-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "thorp of 5; struggling; under_siege"
+   },
+   {
+    "town": "rww-village-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "village with weekly market; Market Taxes 20%; under_siege"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain; \"the little\" is wrong for a big place"
+ },
+ {
+  "id": "DS-ECO-6::TIER: significant off-book activity (≥15)::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-city-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "Off-book 15%; page \"Some goods change hands here without a licence or a duty paid\""
+   },
+   {
+    "town": "rw3-city-wartime-1",
+    "true": true,
+    "severity": "-",
+    "why": "Off-book 24%; Smuggling network"
+   },
+   {
+    "town": "rw3-metropolis-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "Smuggling network, black market operational"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and concrete"
+ },
+ {
+  "id": "DS-ECO-6::TIER: minor shadow activity (≥3)::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-city-infiltrated-1",
+    "true": true,
+    "severity": "-",
+    "why": "3% capture; one-ring syndicate; thieves' guild chapter"
+   },
+   {
+    "town": "rw3-metropolis-politically_fractured-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "institutions include \"Multiple criminal factions\" against \"the same organised hands each time\" (Defense says one ring)"
+   },
+   {
+    "town": "r2r-city-11",
+    "true": true,
+    "severity": "-",
+    "why": "thieves' guild chapter, one ring; \"does little harm\""
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-9::IMPORT-DEPENDENT::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-under_siege-metropolis-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; imports Grain; page \"No food comes into Torriplenum by trade\""
+   },
+   {
+    "town": "r2s-under_siege-metropolis-2",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; imports Grain; same"
+   },
+   {
+    "town": "r2s-under_siege-village-1",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; imports Grain; same"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-9::FOOD SOURCES: one source::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-thorp-famine-1",
+    "true": false,
+    "severity": "MED",
+    "why": "same paragraph: \"Chichek grows about a third of what it eats, and carts bring in most of the rest\"; \"whatever it can buy\" - so not \"little else ... nothing else to turn to\""
+   },
+   {
+    "town": "r2s-famine-hamlet-2",
+    "true": false,
+    "severity": "MED",
+    "why": "same paragraph: \"ships bring in most of the rest\" and \"some of what the hamlet eats is made or kept by magic\""
+   },
+   {
+    "town": "r2s-famine-hamlet-3",
+    "true": true,
+    "severity": "-",
+    "why": "herds are the only food chain; imports small; but prints \"the herds has failed\""
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "\"the herds has failed\" (plural good, singular verb), and \"nothing else to turn to\" sits next to lines saying imports cover most of the food"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: entrepot::v1",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-thorp-monster_pressure-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "thorp of 28, page Exports lists only Raw wool and Livestock, both made locally; \"carts stop coming\" under beast pressure (record isEntrepot true, transit Metal tools/Cloth)"
+   },
+   {
+    "town": "r2r-city-11",
+    "true": true,
+    "severity": "-",
+    "why": "isEntrepot true; crossroads; transit luxury goods"
+   },
+   {
+    "town": "r2r-city-19",
+    "true": true,
+    "severity": "-",
+    "why": "isEntrepot true; port; transit luxury goods"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "the reword drops \"the export column\"; reads clean"
+ },
+ {
+  "id": "DS-ECO-10::POSTURE: established::v8",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-village-58",
+    "true": true,
+    "severity": "-",
+    "why": "famine/critical; exports six goods"
+   },
+   {
+    "town": "r2s-famine-city-0",
+    "true": true,
+    "severity": "-",
+    "why": "famine/high; many exports; \"two or three trades\""
+   },
+   {
+    "town": "r2s-famine-hamlet-3",
+    "true": true,
+    "severity": "-",
+    "why": "famine/critical; exports herbs, honey, wool, livestock"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-metropolis-14",
+    "true": false,
+    "severity": "LOW",
+    "why": "resourceAnalysis.exploitation.partiallyExploited hides, no share given: \"Half\" is an invented figure; under_siege true"
+   },
+   {
+    "town": "r2s-under_siege-city-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "partiallyExploited medicinal herbs, no share: \"Half\" invented; under_siege true"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "\"this trade\" has no antecedent in the paragraph, and \"Half\" is a figure the record does not hold"
+ },
+ {
+  "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v5",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-hamlet-0",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; grain fullyExploited"
+   },
+   {
+    "town": "r2s-under_siege-hamlet-2",
+    "true": true,
+    "severity": "-",
+    "why": "under_siege; grain fullyExploited"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and true"
+ },
+ {
+  "id": "DS-ECO-12::CRITICAL IMPORT: the land cannot give it::v1",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-hamlet-calm-1",
+    "true": true,
+    "severity": "-",
+    "why": "plains; no timber resource; Imports list Timber"
+   },
+   {
+    "town": "rww-hamlet-succession_void-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "exports \"Sacred wood\"; nearby ancient_grove; Economics: \"game from the woods\" against \"produces no timber\""
+   },
+   {
+    "town": "rww-town-calm-1",
+    "true": false,
+    "severity": "MED",
+    "why": "same page Imports: \"Grain (a little, beside its own harvest)\"; Mills (2-5); \"Herding and mixed farming\" - it does grow grain"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain; wrong where the import is a top-up on its own harvest"
+ },
+ {
+  "id": "DS-ECO-12::INCOME WEIGHT: the religious houses::v3",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rw3-hamlet-plague_onset-1",
+    "true": false,
+    "severity": "MED",
+    "why": "Income Sources on the same page: Agricultural Rents 89%, Iron & Metalwork 11%, no faith share; Economic Flows prints \"House of worship\""
+   },
+   {
+    "town": "r2r-hamlet-30",
+    "true": false,
+    "severity": "MED",
+    "why": "Income: Agricultural Rents 89%, Iron 11%; flows row \"House of worship\""
+   },
+   {
+    "town": "r2r-hamlet-46",
+    "true": false,
+    "severity": "MED",
+    "why": "Income: Agricultural Rents 92%, Stone 8%; flows row \"House of worship ✓ Running\""
+   }
+  ],
+  "plain": false,
+  "machinery": true,
+  "strike": true,
+  "note": "\"Faith carries real weight in X's money\" is the income-weight variable spoken aloud, and the income list beside it shows no faith share"
+ },
+ {
+  "id": "DS-GEN-17::GREAT HOUSE: monastery::v3",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-metropolis-famine-1",
+    "true": true,
+    "severity": "-",
+    "why": "Major monasteries (5-10); famine makes a meal from the monks plausible"
+   },
+   {
+    "town": "rww-metropolis-under_siege-1",
+    "true": false,
+    "severity": "MED",
+    "why": "under_siege; Defense: \"To reach Naranjotepec you would have to cross the besiegers' lines first, and they let nobody through\" - nobody new arrives"
+   },
+   {
+    "town": "rww-town-under_siege-1",
+    "true": false,
+    "severity": "MED",
+    "why": "under_siege; \"Field work and trade have stopped\" - newcomers sent to the monks is normal times"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": true,
+  "note": "fine in normal times; prints in the Overview of besieged towns where nobody new can arrive"
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v4",
+  "kind": "reworded",
+  "reads": [
+   {
+    "town": "rww-hamlet-succession_void-1",
+    "true": true,
+    "severity": "-",
+    "why": "imports Incense and votive candles; but prints \"incense and votive candles comes\""
+   },
+   {
+    "town": "rww-metropolis-infiltrated-1",
+    "true": true,
+    "severity": "-",
+    "why": "imports Iron; smiths work it"
+   },
+   {
+    "town": "rww-thorp-famine-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "same page: \"boats bring in about half the rest\" - boats, not carts"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "\"{good} comes\" fails agreement on plural goods (\"incense and votive candles comes\")"
+ },
+ {
+  "id": "DS-GEN-18::BOUGHT-IN::v10",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "rww-city-under_siege-1",
+    "true": false,
+    "severity": "LOW",
+    "why": "{good} = \"Capital\" (an imports entry): \"running short of capital, and the siege lets none in\" is not a good a siege keeps out"
+   },
+   {
+    "town": "rww-thorp-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "imports Grain; under_siege; food Deficit"
+   },
+   {
+    "town": "rww-village-under_siege-1",
+    "true": true,
+    "severity": "-",
+    "why": "imports Grain; under_siege; food Deficit"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "the slot can take \"capital\", which makes nonsense; fine for real goods"
+ },
+ {
+  "id": "DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)::v6",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2s-wartime-metropolis-2",
+    "true": true,
+    "severity": "-",
+    "why": "wartime; prosperity Poor; internal 37; Thieves' Guild has officials in its pocket on the same page"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "true, but it ends on a maxim (\"an underpaid official left alone is easily bought\")"
+ },
+ {
+  "id": "DS-POW-6::GM ADVISORY: the commander is a political actor::v4",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-town-27",
+    "true": true,
+    "severity": "-",
+    "why": "Feudal Appointee; Military/Guard faction; town watch"
+   },
+   {
+    "town": "r2s-famine-village-1",
+    "true": true,
+    "severity": "-",
+    "why": "Headman's Authority; Military/Guard faction; citizen militia"
+   },
+   {
+    "town": "r2s-famine-village-3",
+    "true": true,
+    "severity": "-",
+    "why": "Elder Council; Military/Guard faction; citizen militia"
+   }
+  ],
+  "plain": false,
+  "machinery": false,
+  "strike": true,
+  "note": "{faction} prints the raw label \"Military/Guard\" twice without an article, and \"the Headman's Authority gives no order\" is stiff"
+ },
+ {
+  "id": "DS-FTH-4::FLAG: heresySuppression: hunted::v5",
+  "kind": "new",
+  "reads": [
+   {
+    "town": "r2r-city-9",
+    "true": true,
+    "severity": "-",
+    "why": "Magic tab legality restricted, acceptance wary, roles absent; no magic institutions"
+   },
+   {
+    "town": "r2r-hamlet-45",
+    "true": true,
+    "severity": "-",
+    "why": "legality forbidden, acceptance hostile"
+   },
+   {
+    "town": "r2r-metropolis-15",
+    "true": false,
+    "severity": "MED",
+    "why": "Alchemist quarter \"organised into a guild\" is its arcane defence; Elder Grove Council; Magic tab Risk low and \"Relied upon\" - not a place that hunts magic on suspicion"
+   }
+  ],
+  "plain": true,
+  "machinery": false,
+  "strike": false,
+  "note": "plain and vivid; wrong beside a guild alchemist quarter"
+ }
+]

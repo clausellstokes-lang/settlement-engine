@@ -443,7 +443,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "NEW",
-  "reviewerNote": "base: \"Nothing has come for X and nothing about the place would stop it\" (true of a place nothing has attacked); tip: \"Nothing threatens X now ... Its safety rests on nobody wanting it\" beside a frontier beast threat and \"needs specialists against the creatures\" on the same tab"
+  "reviewerNote": "base: \"Nothing has come for X and nothing about the place would stop it\" (true of a place nothing has attacked); tip: \"Nothing threatens X now ... Its safety rests on nobody wanting it\" beside a frontier beast threat and \"needs specialists against the creatures\" on the same tab",
+  "origin": "OWN"
  },
  {
   "town": "rww-thorp-calm-1",
@@ -585,7 +586,8 @@
   "bornOnLane": true,
   "corpusTip": null,
   "corpusBase": null,
-  "corpusOwn": false
+  "corpusOwn": false,
+  "origin": "MERGED"
  },
  {
   "town": "rww-thorp-calm-1",
@@ -1232,7 +1234,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "NEW",
-  "reviewerNote": "base: \"Nothing has come for X and nothing about the place would stop it\" (true of a place nothing has attacked); tip: \"Nothing threatens X now ... Its safety rests on nobody wanting it\" beside a frontier beast threat and \"needs specialists against the creatures\" on the same tab"
+  "reviewerNote": "base: \"Nothing has come for X and nothing about the place would stop it\" (true of a place nothing has attacked); tip: \"Nothing threatens X now ... Its safety rests on nobody wanting it\" beside a frontier beast threat and \"needs specialists against the creatures\" on the same tab",
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-famine-1",
@@ -1350,7 +1353,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "NEW",
-  "reviewerNote": "a new line; the hamlet was founded as a defensive stronghold"
+  "reviewerNote": "a new line; the hamlet was founded as a defensive stronghold",
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-famine-1",
@@ -1408,7 +1412,8 @@
    "DS-DEF-9: The town would go on if the arcane went away, more slowly and less comfortably."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-famine-1",
@@ -1941,7 +1946,8 @@
    "DS-ECO-12: The country around {settlement} produces no {good}: whatever the town has of it comes from outside."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-village-religious_conversion-1",
@@ -2312,7 +2318,8 @@
   "corpusBase": null,
   "corpusOwn": false,
   "faultAge": "OLD",
-  "reviewerNote": "the base printed the same figures (\"carry the village for about four/three months\"); only the mood of the verb changed"
+  "reviewerNote": "the base printed the same figures (\"carry the village for about four/three months\"); only the mood of the verb changed",
+  "origin": "MERGED"
  },
  {
   "town": "rww-village-religious_conversion-1",
@@ -2370,7 +2377,8 @@
   "corpusBase": null,
   "corpusOwn": false,
   "faultAge": "NEW",
-  "reviewerNote": "the \"· supplied by …\" clause is new at the tip (base: the label alone); it names a catalogue range or a priest beside a tab of absent roles"
+  "reviewerNote": "the \"· supplied by …\" clause is new at the tip (base: the label alone); it names a catalogue range or a priest beside a tab of absent roles",
+  "origin": "MERGED"
  },
  {
   "town": "rww-village-religious_conversion-1",
@@ -3848,7 +3856,8 @@
    "DS-ECO-12: Some of {settlement}'s work cannot go on without {good}, and the country around the town produces none, so the town buys it from outside or that work stops."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-metropolis-calm-1",
@@ -4876,7 +4885,8 @@
   "corpusBase": null,
   "corpusOwn": false,
   "faultAge": "NEW",
-  "reviewerNote": "the \"· supplied by …\" clause is new at the tip (base: the label alone); it names a catalogue range or a priest beside a tab of absent roles"
+  "reviewerNote": "the \"· supplied by …\" clause is new at the tip (base: the label alone); it names a catalogue range or a priest beside a tab of absent roles",
+  "origin": "MERGED"
  },
  {
   "town": "rww-metropolis-calm-1",
@@ -6365,7 +6375,8 @@
   "corpusBase": null,
   "corpusOwn": false,
   "faultAge": "NEW",
-  "reviewerNote": "the \"· supplied by …\" clause is new at the tip (base: the label alone); it names a catalogue range or a priest beside a tab of absent roles"
+  "reviewerNote": "the \"· supplied by …\" clause is new at the tip (base: the label alone); it names a catalogue range or a priest beside a tab of absent roles",
+  "origin": "MERGED"
  },
  {
   "town": "rww-metropolis-famine-1",
@@ -17327,7 +17338,8 @@
    "DS-ECO-12: {settlement}'s {institution} has had no {good} since the siege closed the roads, and its work has stopped or soon will."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-city-under_siege-1",
@@ -17638,7 +17650,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "NEW",
-  "reviewerNote": "a new line (siege variant); the city has weavers, a dyer and a fuller and its cloth chain runs"
+  "reviewerNote": "a new line (siege variant); the city has weavers, a dyer and a fuller and its cloth chain runs",
+  "origin": "OWN"
  },
  {
   "town": "rww-city-under_siege-1",
@@ -18814,7 +18827,8 @@
   "corpusBase": [
    "DS-ECO-12: Ask what {settlement} lives on and you will hear two or three trades named, not one."
   ],
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-town-calm-1",
@@ -19015,7 +19029,8 @@
    "DS-GEN-18: {settlement}'s {institution} is short of what it needs from upstream, though the building and the skilled hands are all still there."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-town-calm-1",
@@ -19322,7 +19337,8 @@
   "bornOnLane": true,
   "corpusTip": null,
   "corpusBase": null,
-  "corpusOwn": false
+  "corpusOwn": false,
+  "origin": "MERGED"
  },
  {
   "town": "rww-town-calm-1",
@@ -19844,7 +19860,8 @@
   "bornOnLane": true,
   "corpusTip": null,
   "corpusBase": null,
-  "corpusOwn": false
+  "corpusOwn": false,
+  "origin": "MERGED"
  },
  {
   "town": "rww-thorp-monster_pressure-1",
@@ -20396,7 +20413,8 @@
    "DS-GEN-18: {settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-under_siege-1",
@@ -20454,7 +20472,8 @@
    "DS-ECO-11: The town has taken this trade as far as it goes, from the ground to the finished thing."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-under_siege-1",
@@ -20651,7 +20670,8 @@
    "DS-DEF-5: {settlement} knows it needs specialists against the creatures, and has none of its own to send."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-under_siege-1",
@@ -22785,7 +22805,8 @@
    "DS-FTH-4: A charm worked in the open at {settlement} is reported before nightfall, and the faithful see to it that whoever worked it leaves."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-town-slave_revolt-1",
@@ -24397,7 +24418,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "OLD",
-  "reviewerNote": "base: \"Benglen works medicinal herbs it cannot produce; it buys the raw stuff in\" (the same false claim)"
+  "reviewerNote": "base: \"Benglen works medicinal herbs it cannot produce; it buys the raw stuff in\" (the same false claim)",
+  "origin": "OWN"
  },
  {
   "town": "rww-thorp-plague_onset-1",
@@ -25206,7 +25228,8 @@
   "bornOnLane": true,
   "corpusTip": null,
   "corpusBase": null,
-  "corpusOwn": false
+  "corpusOwn": false,
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-mass_migration-1",
@@ -25865,7 +25888,8 @@
    "DS-GEN-18: What {settlement}'s trades use comes in from elsewhere more often than from its own ground."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-village-indebted-1",
@@ -26031,7 +26055,8 @@
    "DS-DEF-8: {settlement} keeps no defenders to pay, and the debt is one more reason it never will."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-village-indebted-1",
@@ -27451,7 +27476,8 @@
    "DS-DEF-2: {settlement}'s walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-town-occupied-1",
@@ -29231,7 +29257,8 @@
    "DS-DEF-2: Whatever the present trouble costs {settlement}, the town has the money to meet it."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-city-insurgency-1",
@@ -30678,7 +30705,8 @@
    "DS-ECO-12: {settlement}'s {institution} has had no {good} since the siege closed the roads, and its work has stopped or soon will."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-metropolis-under_siege-1",
@@ -31434,7 +31462,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "NEW",
-  "reviewerNote": "a new line; the same tab says the pay book is always behind"
+  "reviewerNote": "a new line; the same tab says the pay book is always behind",
+  "origin": "OWN"
  },
  {
   "town": "rww-metropolis-under_siege-1",
@@ -33329,7 +33358,8 @@
   "bornOnLane": true,
   "corpusTip": null,
   "corpusBase": null,
-  "corpusOwn": false
+  "corpusOwn": false,
+  "origin": "MERGED"
  },
  {
   "town": "rww-city-famine-1",
@@ -36497,7 +36527,8 @@
   "corpusBase": null,
   "corpusOwn": false,
   "faultAge": "NEW",
-  "reviewerNote": "the \"· supplied by …\" clause is new at the tip (base: the label alone); it names a catalogue range or a priest beside a tab of absent roles"
+  "reviewerNote": "the \"· supplied by …\" clause is new at the tip (base: the label alone); it names a catalogue range or a priest beside a tab of absent roles",
+  "origin": "MERGED"
  },
  {
   "town": "rww-metropolis-infiltrated-1",
@@ -38013,7 +38044,8 @@
    "DS-SUP-2: Work is slowing at {settlement} for a fault that is not all its own: its {chain} is short of what it needs from upstream."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-city-recently_betrayed-1",
@@ -39544,7 +39576,8 @@
    "DS-ECO-9: With only its {good} to fall back on, {settlement} feels every bad season there at every table."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-village-calm-1",
@@ -39604,7 +39637,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "OLD",
-  "reviewerNote": "base: \"Maghleigh's Cartographer's guild stands idle\" (the guild name the roster lacks was already printed)"
+  "reviewerNote": "base: \"Maghleigh's Cartographer's guild stands idle\" (the guild name the roster lacks was already printed)",
+  "origin": "OWN"
  },
  {
   "town": "rww-village-calm-1",
@@ -39831,7 +39865,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "NEW",
-  "reviewerNote": "base: \"Nothing has come for X and nothing about the place would stop it\" (true of a place nothing has attacked); tip: \"Nothing threatens X now ... Its safety rests on nobody wanting it\" beside a frontier beast threat and \"needs specialists against the creatures\" on the same tab"
+  "reviewerNote": "base: \"Nothing has come for X and nothing about the place would stop it\" (true of a place nothing has attacked); tip: \"Nothing threatens X now ... Its safety rests on nobody wanting it\" beside a frontier beast threat and \"needs specialists against the creatures\" on the same tab",
+  "origin": "OWN"
  },
  {
   "town": "rww-village-calm-1",
@@ -39893,7 +39928,8 @@
   "corpusBase": null,
   "corpusOwn": false,
   "faultAge": "OLD",
-  "reviewerNote": "the base printed the same figures (\"carry the village for about four/three months\"); only the mood of the verb changed"
+  "reviewerNote": "the base printed the same figures (\"carry the village for about four/three months\"); only the mood of the verb changed",
+  "origin": "MERGED"
  },
  {
   "town": "rww-village-calm-1",
@@ -40782,7 +40818,8 @@
    "DS-GEN-18: What {settlement}'s trades use comes in from elsewhere more often than from its own ground."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-village-famine-1",
@@ -40986,7 +41023,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "NEW",
-  "reviewerNote": "base: \"Nothing has come for X and nothing about the place would stop it\" (true of a place nothing has attacked); tip: \"Nothing threatens X now ... Its safety rests on nobody wanting it\" beside a frontier beast threat and \"needs specialists against the creatures\" on the same tab"
+  "reviewerNote": "base: \"Nothing has come for X and nothing about the place would stop it\" (true of a place nothing has attacked); tip: \"Nothing threatens X now ... Its safety rests on nobody wanting it\" beside a frontier beast threat and \"needs specialists against the creatures\" on the same tab",
+  "origin": "OWN"
  },
  {
   "town": "rww-village-famine-1",
@@ -41015,7 +41053,8 @@
   "bornOnLane": true,
   "corpusTip": null,
   "corpusBase": null,
-  "corpusOwn": false
+  "corpusOwn": false,
+  "origin": "MERGED"
  },
  {
   "town": "rww-village-famine-1",
@@ -41676,7 +41715,8 @@
    "DS-GEN-18: Ask where {settlement}'s {good} comes from and you are pointed at the carts, not at anyone in the town."
   ],
   "corpusBase": null,
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-thorp-famine-1",
@@ -41925,7 +41965,8 @@
   "bornOnLane": true,
   "corpusTip": null,
   "corpusBase": null,
-  "corpusOwn": false
+  "corpusOwn": false,
+  "origin": "MERGED"
  },
  {
   "town": "rww-thorp-famine-1",
@@ -42566,7 +42607,8 @@
   "corpusBase": null,
   "corpusOwn": true,
   "faultAge": "NEW",
-  "reviewerNote": "a new line; the hamlet has Salt works (the raw salt is imported, the salt is made here)"
+  "reviewerNote": "a new line; the hamlet has Salt works (the raw salt is imported, the salt is made here)",
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-calm-1",
@@ -42711,7 +42753,8 @@
   "corpusBase": [
    "DS-DEF-3: Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right."
   ],
-  "corpusOwn": true
+  "corpusOwn": true,
+  "origin": "OWN"
  },
  {
   "town": "rww-hamlet-calm-1",
@@ -42740,7 +42783,8 @@
   "bornOnLane": true,
   "corpusTip": null,
   "corpusBase": null,
-  "corpusOwn": false
+  "corpusOwn": false,
+  "origin": "MERGED"
  },
  {
   "town": "rww-hamlet-calm-1",
@@ -43038,7 +43082,8 @@
   "bornOnLane": true,
   "faultAge": "NEW",
   "corpusOwn": true,
-  "reviewerNote": "added by the reviewer from the tip-only sentence list"
+  "reviewerNote": "added by the reviewer from the tip-only sentence list",
+  "origin": "OWN"
  },
  {
   "town": "rww-metropolis-under_siege-1",
@@ -43062,6 +43107,7 @@
   "bornOnLane": true,
   "faultAge": "NEW",
   "corpusOwn": true,
-  "reviewerNote": "added by the reviewer from the tip-only sentence list"
+  "reviewerNote": "added by the reviewer from the tip-only sentence list",
+  "origin": "OWN"
  }
 ]

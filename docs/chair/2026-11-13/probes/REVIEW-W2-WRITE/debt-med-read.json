@@ -1,0 +1,650 @@
+[
+ {
+  "n": 24,
+  "town": "rw3-thorp-calm-1",
+  "verdict": "cured, true",
+  "replacement": "Chalahau keeps its palisade in repair and pays nobody to stand guard there.",
+  "replacementTrue": true,
+  "why": "Same slot (defense:wall rationale, WALLED-STRAINED pool). defenseProfile.institutions.walls [\"Palisade\"], garrison/militia/watch/mercenary all []; same tab: \"There is no watch\", \"No organized force\". No fortification chain impaired, nothing records disrepair. It no longer claims the defences are sound."
+ },
+ {
+  "n": 30,
+  "town": "rw3-thorp-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in World/History at the tip. history.founding.reason \"was built around a single family's shipwright operation\"; institutions[] has no shipwright, port or dock; Overview: \"ask for the docks and you are told there are none\"."
+ },
+ {
+  "n": 41,
+  "town": "rw3-thorp-calm-2",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. economicState.incomeSources is 100% Agricultural Rents (no tithes); religious institutions are only Wayside shrine, Access to parish church, Burial ground; World/Faith: \"The thorp has no church of its own\"."
+ },
+ {
+  "n": 42,
+  "town": "rw3-thorp-calm-2",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. No religious house that takes in money (institutions[]: Wayside shrine, Access to parish church, Burial ground); incomeSources 100% Agricultural Rents; World/Faith: \"The thorp has no church of its own\"."
+ },
+ {
+  "n": 43,
+  "town": "rw3-thorp-calm-2",
+  "verdict": "reworded, still false",
+  "replacement": "None of the luxury goods used at Xochioatl comes from the country here; it is brought in or done without.",
+  "replacementTrue": false,
+  "why": "The same false claim in other words. resourceAnalysis.availableResources includes \"gemstone_deposits\" and \"luxury\" (gemstone_deposits condition \"available\"); economicState.localProduction includes \"luxury\"; same tab, Produced locally: \"...honeyluxury...\"."
+ },
+ {
+  "n": 57,
+  "town": "rw3-thorp-calm-2",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Magic at the tip. economicState.compound.inst.hasMagicInst false; defenseProfile.traditions.hasArcane false; Systems/Defense: \"No arcane practitioners on the rolls.\""
+ },
+ {
+  "n": 58,
+  "town": "rw3-thorp-calm-2",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Outlook at the tip. economicState.foodSecurity.storageMonths 1.5; Economics: \"No granary; two months in household stores.\""
+ },
+ {
+  "n": 91,
+  "town": "rw3-metropolis-politically_fractured-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. economicState.foodSecurity.label \"Secure\", deficitPct 0, storageMonths 15; same tab: \"Stores: a granary, 15 months of grain.\""
+ },
+ {
+  "n": 102,
+  "town": "rw3-metropolis-politically_fractured-1",
+  "verdict": "cured, true",
+  "replacement": "Ask where Saltovallis's paper comes from and you are pointed at the carts, not at anyone in the metropolis.",
+  "replacementTrue": true,
+  "why": "Same slot (publicProse general:economics.craftReasonLine). economicState.primaryImports includes \"Paper\" and \"Paper materials\"; no paper among primaryExports; no papermaker in institutions[]."
+ },
+ {
+  "n": 104,
+  "town": "rw3-metropolis-politically_fractured-1",
+  "verdict": "cured, true",
+  "replacement": "Little of Saltovallis's trade goes unrecorded, but what does goes through the same organised hands each time.",
+  "replacementTrue": true,
+  "why": "Same slot (economy:economics.shadowEconomy, minor tier, organised-crime variant). Shadow economy 13% capture; Defense tab: \"Criminal structure: Organized syndicate\" and \"Shopkeepers here pay one ring for protection\"; Black market supply chain \"Operational\". It no longer calls the crime a nuisance."
+ },
+ {
+  "n": 105,
+  "town": "rw3-metropolis-politically_fractured-1",
+  "verdict": "cured, true",
+  "replacement": "The grain in Saltovallis's country is worked all the way to the finished bread.",
+  "replacementTrue": true,
+  "why": "Same sentence slot (Resource Exploitation, fullyExploited). Grain & Bread chain \"Running\": Grain fields to Mills to \"Baked goods\"; institutions[39] \"Bakers (5-15)\". The false parts (\"Mill finishes it\", \"it leaves as bread\") are gone; it makes no export claim."
+ },
+ {
+  "n": 120,
+  "town": "rw3-metropolis-politically_fractured-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. Same tab: \"No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.\" (politically fractured)."
+ },
+ {
+  "n": 121,
+  "town": "rw3-metropolis-politically_fractured-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. Same tab: \"a quarrel where their ground meets can turn into a brawl\"; Rival Gangs \"Controls specific territory through violence\"; Safety \"Volatile — political fracture\"."
+ },
+ {
+  "n": 124,
+  "town": "rw3-metropolis-politically_fractured-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "The chip row \"Armed Forces & Fortifications2 walls 3 forces 1 charter 3 arcane\" prints at the tip. Only two standing forces are listed (Professional city watch, Multiple garrisons); defenseProfile.institutions has the watch in both garrison[] and watch[]."
+ },
+ {
+  "n": 125,
+  "town": "rw3-metropolis-politically_fractured-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. economicState.compound.inst.hasMagesGuild false; the magical defence is Mages' district, Academy of magic, Golem workforce (defenseProfile.institutions.magicDef)."
+ },
+ {
+  "n": 164,
+  "town": "rw3-thorp-famine-1",
+  "verdict": "reworded, still false",
+  "replacement": "The thorp lived off its grain harvest and little else, and the grain harvest has failed; there is nothing else to turn to.",
+  "replacementTrue": false,
+  "why": "The tense is fixed (foodRecord.failedSource \"grain\"), but the line says the thorp lived off grain \"and little else\" with \"nothing else to turn to\". foodRecord.grownPct 35 against normalImportPct 39, and the same paragraph says \"Food carts come into Chichek most days, and they matter: a good part of what the thorp eats is grown elsewhere\" and \"faces the season ahead on its stores and whatever it can buy\"."
+ },
+ {
+  "n": 166,
+  "town": "rw3-thorp-famine-1",
+  "verdict": "reworded, still false",
+  "replacement": "What Chichek's trades use comes in from elsewhere more often than from its own ground.",
+  "replacementTrue": false,
+  "why": "Same slot (general:economics.craftReasonLine, BOUGHT-IN). It fired on economicState.isEntrepot true, which is transit trade. The thorp's only chain (activeChains[0] Grain & Bread) is fed from its own \"Grain fields\" (available, running, entrepot false). The same tab says \"Iron & Metalwork: Local ore feeds the smithy directly\", and the exports Date harvest and Desert grain are local."
+ },
+ {
+  "n": 170,
+  "town": "rw3-thorp-famine-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Power at the tip. The page has \"↳1 member · first Chan Chuc\" for the Feudal Stewardship, so there is no body to agree."
+ },
+ {
+  "n": 174,
+  "town": "rw3-thorp-famine-1",
+  "verdict": "cured, true",
+  "replacement": "The thorp would go on if the arcane went away, more slowly and less comfortably.",
+  "replacementTrue": true,
+  "why": "The same pool line without the duplicated \"and go on\". Same tab: \"Reliance on magic: None\"; defenseProfile.traditions.hasArcane false."
+ },
+ {
+  "n": 179,
+  "town": "rw3-thorp-famine-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in World/History at the tip (\"...the economic divide, years old.\"). {timeband} is still filled with a bare \"years old\"."
+ },
+ {
+  "n": 197,
+  "town": "rw3-hamlet-calm-1",
+  "verdict": "cured, true",
+  "replacement": "Ask where Plaviets's incense and votive candles comes from and you are pointed at the carts, not at anyone in the hamlet.",
+  "replacementTrue": true,
+  "why": "Same slot (craftReasonLine). economicState.primaryImports [\"Incense and votive candles\"]; no chandler or incense maker in institutions[] (Subsistence farming ... Resident smith (part-time), Access to parish church ...). It no longer claims the goods are worked here and sent out."
+ },
+ {
+  "n": 202,
+  "town": "rw3-hamlet-calm-1",
+  "verdict": "cured, true",
+  "replacement": "Visitors to Plaviets are told which few streets to avoid, and the advice turns out to be right.",
+  "replacementTrue": true,
+  "why": "Same slot (Criminal Architecture line). safetyProfile.safetyLabel \"Moderate\", safetyDesc: \"...quieter spots after dark carry genuine risk. Residents know which corners to avoid.\" It makes no claim about a crime record, law or criminals."
+ },
+ {
+  "n": 212,
+  "town": "rw3-metropolis-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Summary/Overview at the tip. stress.type \"under_siege\", config.tradeRouteAccess \"isolated\"; same page: \"Current effective trade is likely zero or severely restricted.\""
+ },
+ {
+  "n": 255,
+  "town": "rw3-metropolis-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. foodSecurity deficit (\"hunger is already here\"); under siege the road is closed (\"Nothing has come into Hochfurt since the siege closed the roads\"), not poor."
+ },
+ {
+  "n": 261,
+  "town": "rw3-metropolis-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. stress \"under_siege\"; same tab: \"Nothing has come into Hochfurt since the siege closed the roads\". The way out is closed, not unreliable."
+ },
+ {
+  "n": 282,
+  "town": "rw3-metropolis-under_siege-1",
+  "verdict": "reworded, still false",
+  "replacement": "Some of Hochfurt's smelting depends on supplies from elsewhere, and those supplies are failing: what should come down the line arrives short.",
+  "replacementTrue": false,
+  "why": "Smelting is local now (Smelter on available iron_deposits; iron chain running). But its upstream note is \"fuel or timber disrupted\", and local peat fuel (Reed & Marsh) is running. Under siege the same tab says \"Nothing has come into Hochfurt since the siege closed the roads\", so imported supply does not \"arrive short\"; it does not arrive."
+ },
+ {
+  "n": 298,
+  "town": "rw3-metropolis-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense (Guard assessment) at the tip. Same tab: \"Military status Active siege\", \"With an army outside...\". Defended for an active siege, not \"in the ordinary way\"."
+ },
+ {
+  "n": 303,
+  "town": "rw3-metropolis-under_siege-1",
+  "verdict": "cured, true",
+  "replacement": "The siege has put more people on Hochfurt's massive walls and fortifications than the metropolis could ever find for it in quieter seasons.",
+  "replacementTrue": true,
+  "why": "Same slot (defense:wall rationale, WALLED-STRAINED siege variant). stress \"under_siege\"; same tab: \"Every able body in Hochfurt takes a turn at the lookout, and families sleep in their clothes.\""
+ },
+ {
+  "n": 325,
+  "town": "rw3-hamlet-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Summary/Overview at the tip. stress.type \"under_siege\"; same page: \"Current effective trade is likely zero\"; Economics: \"the siege has stopped it moving at all\". No trade is done on the road."
+ },
+ {
+  "n": 342,
+  "town": "rw3-hamlet-under_siege-1",
+  "verdict": "cured, true",
+  "replacement": "At Lidostagnum the feast days set the calendar of buying and selling, and the offerings leave the place with the people who carry them.",
+  "replacementTrue": true,
+  "why": "Same slot (INCOME WEIGHT, no-sacredHouse variant; the religious-houses pair is gone). compound.religionInfluence 97.2; institutions are only \"Access to parish church\" and \"Burial ground\"; World/Faith: \"its people walk to the next village's parish church... the rites set the rhythm of the week\"."
+ },
+ {
+  "n": 348,
+  "town": "rw3-hamlet-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. Overview \"Reliance on magic: None\"; Defense \"No arcane practitioners on the rolls\"; the 23 lbs/day is divine provision; defenseProfile.traditions.hasArcane false."
+ },
+ {
+  "n": 349,
+  "town": "rw3-hamlet-under_siege-1",
+  "verdict": "cured, true",
+  "replacement": "The carts that kept Lidostagnum's trades supplied have not come since the siege began.",
+  "replacementTrue": true,
+  "why": "Same slot (craftReasonLine). stress \"under_siege\"; primaryImports Grain, Salt, Iron (weapons), Incense and votive candles; the Maltster works grain; same tab: \"No food comes into Lidostagnum by trade\". It no longer implies carts are being unloaded."
+ },
+ {
+  "n": 359,
+  "town": "rw3-hamlet-under_siege-1",
+  "verdict": "cured, true",
+  "replacement": "The hamlet would go on if the arcane went away, more slowly and less comfortably.",
+  "replacementTrue": true,
+  "why": "The same pool line without the duplicated \"and go on\". Same tab: \"Reliance on magic: None\"; defenseProfile.traditions.hasArcane false."
+ },
+ {
+  "n": 380,
+  "town": "rw3-hamlet-plague_onset-1",
+  "verdict": "cured, true",
+  "replacement": "Faith carries real weight in Caergarth's money, though the place keeps no house for it: what its people give for their faith leaves with them on the feast days.",
+  "replacementTrue": true,
+  "why": "Same slot (INCOME WEIGHT, no-sacredHouse variant). compound.religionInfluence 100; institutions have only \"Access to parish church\" and \"Burial ground\"; World/Faith: \"no church of its own; its people walk to the next village's parish church\"; primaryImports includes \"Incense and votive candles\"."
+ },
+ {
+  "n": 386,
+  "town": "rw3-hamlet-plague_onset-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. Same page: \"Reliance on magic: None\"; Magic tab: \"the hamlet does not rest on it\"; defenseProfile.traditions all false."
+ },
+ {
+  "n": 396,
+  "town": "rw3-hamlet-plague_onset-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. institutions[] has \"Village headman\", who offers dispute mediation and judges disputes over land, livestock and debt."
+ },
+ {
+  "n": 435,
+  "town": "rw3-metropolis-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. Same tab: \"Economic Flows (38 active · 4 impaired)\"; fortification, textiles, textile_finishing and stone are \"impaired\"."
+ },
+ {
+  "n": 462,
+  "town": "rw3-metropolis-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. foodSecurity.importPct 39; activeChains garrison \"Needs imported food_processing: no local source\"; Economics: \"Vatannuur's Garrison is short of what it needs from upstream\"."
+ },
+ {
+  "n": 466,
+  "town": "rw3-metropolis-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "The chip row \"...1 arcane▲\" prints at the tip against the same tab's \"Arcane SupportNone\"; defenseProfile.traditions.hasArcane false."
+ },
+ {
+  "n": 467,
+  "town": "rw3-metropolis-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. activeChains fortification \"impaired\"; same tab: \"the metropolis can keep its defenders paid\"."
+ },
+ {
+  "n": 468,
+  "town": "rw3-metropolis-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. Same tab: \"Arcane SupportNone\" / \"No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.\"; traditions all false."
+ },
+ {
+  "n": 472,
+  "town": "rw3-metropolis-calm-1",
+  "verdict": "reworded, still false",
+  "replacement": "The preserved foods made at Vatannuur cannot be made without arcane work, which puts the whole line behind a very small number of people.",
+  "replacementTrue": false,
+  "why": "Same slot (publicProse magic.arcaneReliance); the fixed run still prints. Same tab: \"Reliance on magic: Relied upon · supplied by Parish churches (50-100+) and Great cathedral\" and \"Livestock & Dairy: Blessed stores; divine provision fills the gap\". That is divine, not arcane, and not a very small number of people. defenseProfile.traditions.hasArcane false; Defense \"Arcane SupportNone\"."
+ },
+ {
+  "n": 509,
+  "town": "rw3-village-famine-1",
+  "verdict": "cured, true",
+  "replacement": "There is no market at Amarabad to hold the trade that passes by, and the village stays poor while the trade goes on its way.",
+  "replacementTrue": true,
+  "why": "Same slot (prosperity header, C4 no-market variant). economicState.compound.inst.hasMarket false; prosperity \"Struggling\"; config.tradeRouteAccess \"port\". It no longer claims a port (hasPort false)."
+ },
+ {
+  "n": 519,
+  "town": "rw3-village-famine-1",
+  "verdict": "reworded, still false",
+  "replacement": "Nearly every meal at Amarabad goes back to the fishing, and after a poor season for the fishing, everyone eats less.",
+  "replacementTrue": false,
+  "why": "foodRecord.grownPct 35 against normalImportPct 46; same tab: \"Amarabad grows about a third of what it eats, and ships bring in most of the rest\". foodRecord.failedSource \"fish\": the fishing has failed, not had \"a poor season\"."
+ },
+ {
+  "n": 523,
+  "town": "rw3-village-famine-1",
+  "verdict": "reworded, still false",
+  "replacement": "Amarabad's Cartographer's guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "replacementTrue": false,
+  "why": "The status is fixed (vulnerable, not idle), but there is still no guild. institutions[7] \"Cartographer's workshop\", compound.inst.hasGuild false; Institutions tab lists \"Cartographer's workshop\"."
+ },
+ {
+  "n": 554,
+  "town": "rw3-town-calm-1",
+  "verdict": "reworded, still false",
+  "replacement": "None of the luxury goods used at Malodvor comes from the country here; it is brought in or done without.",
+  "replacementTrue": false,
+  "why": "The same false claim in other words. resourceAnalysis.availableResources includes \"precious_metals\", \"luxury\" and \"gems\"; economicState.localProduction includes \"gems\"; same tab, Produced locally: \"...stonegems...\"; Resources tab Abundant: \"Precious Metals\"."
+ },
+ {
+  "n": 559,
+  "town": "rw3-town-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Resources at the tip. Economics: \"Stone Quarrying Local quarry provides dressed stone to regional builders\"; History: the Great Construction was raised from local quarry stone."
+ },
+ {
+  "n": 561,
+  "town": "rw3-town-calm-1",
+  "verdict": "cured, true",
+  "replacement": "The only people on Malodvor's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+  "replacementTrue": true,
+  "why": "Same slot (Invasion & War, walls-with-watch variant). defenseProfile.institutions.watch [\"Town watch\"], garrison/militia/mercenary []; same tab: \"duty list has names enough to man its wall for one night\". It no longer says there is nobody on the walls."
+ },
+ {
+  "n": 614,
+  "town": "rw3-city-infiltrated-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. resourceConditions grain_fields \"depleted\"."
+ },
+ {
+  "n": 642,
+  "town": "rw3-city-infiltrated-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. activeChains food_processing \"impaired\", weapons_armor \"vulnerable\", garrison \"Upstream food_processing chain is impaired\"; same page: \"the trades that salt and dry it are failing\"."
+ },
+ {
+  "n": 646,
+  "town": "rw3-city-infiltrated-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. activeChains fortification \"impaired\"; resourceConditions stone_quarry \"depleted\"."
+ },
+ {
+  "n": 666,
+  "town": "rw3-city-infiltrated-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in World/Daily Life at the tip. Defense: \"a few months into a longer one, the money would run out\"; Plot Hooks: \"The guard has not been paid this month\"."
+ },
+ {
+  "n": 667,
+  "town": "rw3-city-wartime-1",
+  "verdict": "cured, true",
+  "replacement": "Lundsund's market lives off through-traffic.",
+  "replacementTrue": true,
+  "why": "Same slot (Overview market line, MARKET-OPEN). compound.inst.hasMarket true; config.tradeRouteAccess \"road\"; incomeSources Market Taxes 27%; Overview origin: \"Established along a road route. Trade flows in, goods flow out, people pass through.\" It no longer claims market days fill the city."
+ },
+ {
+  "n": 673,
+  "town": "rw3-city-wartime-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "\"Public legitimacyCritical\" prints in Summary/Foundations at the tip. powerStructure.publicLegitimacy {score:32, label:\"Contested\"}."
+ },
+ {
+  "n": 705,
+  "town": "rw3-city-wartime-1",
+  "verdict": "cured, true",
+  "replacement": "Lundsund's Caravanserai is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "replacementTrue": true,
+  "why": "Same slot (STALLED). activeChains caravan_trade status \"vulnerable\", upstreamMissing [\"warehouse_logistics\"] (\"Needs imported Storage & Logistics: no local source\"). It no longer says the Caravanserai stands idle. The Warehouse district is storage, not a Storage & Logistics processor (caravan masters/caravaneer's post/barge company), and none of those is here."
+ },
+ {
+  "n": 755,
+  "town": "rw3-city-calm-1",
+  "verdict": "reworded, still false",
+  "replacement": "With only its fishing to fall back on, Shanmen feels every bad season there at every table.",
+  "replacementTrue": false,
+  "why": "It still offers the fishing as the fallback. resourceConditions river_fish \"depleted\"; same tab: \"River Fishing ... Impaired, River fisheries (depleted)\". The fishery has already failed."
+ },
+ {
+  "n": 767,
+  "town": "rw3-city-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip under a \"Strong\" Beasts & Monsters bar; defenseProfile.scores.monster 73."
+ },
+ {
+  "n": 769,
+  "town": "rw3-city-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. powerStructure.criminalCaptureState \"corrupted\"; Power tab: \"People inside the hall have been bought by the Thieves' Guild\"."
+ },
+ {
+  "n": 810,
+  "town": "rw3-village-calm-1",
+  "verdict": "cured, true",
+  "replacement": "Nothing threatens Langenbrunn now, and nothing about the village would stop it if something did.",
+  "replacementTrue": true,
+  "why": "Same slot (Invasion & War, neither walls nor force). The false historical claim \"Nothing has come for\" is gone. config.monsterThreat \"heartland\"; same tab: \"Unfortified. No perimeter walls\", \"pass nobody on the way in\"; no garrison, militia or watch."
+ },
+ {
+  "n": 811,
+  "town": "rw3-village-calm-1",
+  "verdict": "reworded, still false",
+  "replacement": "Langenbrunn pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.",
+  "replacementTrue": false,
+  "why": "economicState.prosperity \"Wealthy\"; Foundations: \"Economic capacitySurplus\"; Daily Life: \"The village is rich and behaves like it. What would be a crisis elsewhere is an expense here.\""
+ },
+ {
+  "n": 815,
+  "town": "rw3-village-calm-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in World/History at the tip. The motto: \"Everything before the Flood is referred to as 'the old settlement'. What exists now was built after\". The Flood, not the Trade Collapse."
+ },
+ {
+  "n": 829,
+  "town": "rw3-village-insurgency-1",
+  "verdict": "cured, true",
+  "replacement": "More than half of what Ioannolimani earns comes from a single trade, and most households depend on it one way or another.",
+  "replacementTrue": true,
+  "why": "Same slot (incomeMix). incomeSources Agricultural Rents 75%. The false \"doing well enough now\" is gone (prosperity \"Struggling\")."
+ },
+ {
+  "n": 834,
+  "town": "rw3-village-insurgency-1",
+  "verdict": "reworded, still false",
+  "replacement": "Ioannolimani's Palisade is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "replacementTrue": false,
+  "why": "It no longer says \"idle\", but it still says the palisade lacks upstream stone. resourceConditions stone_quarry \"available\"; same tab: \"Stone Quarrying Local quarry provides dressed stone\" and Produced locally \"stone\". The work is \"Palisade or earthworks\" (stakes or a bank)."
+ },
+ {
+  "n": 837,
+  "town": "rw3-village-insurgency-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. defenseProfile.scores.military 99; same tab: \"Every household at Ioannolimani would send someone to the walls\"."
+ },
+ {
+  "n": 841,
+  "town": "rw3-village-insurgency-1",
+  "verdict": "cured, true",
+  "replacement": "Ioannolimani put its labour into a wall and none into a gate; the wall marks the edge of the village more than it closes it.",
+  "replacementTrue": true,
+  "why": "Same slot. economicState.compound.inst.hasGates false; institutions[16] \"Palisade or earthworks\"."
+ },
+ {
+  "n": 869,
+  "town": "rw3-town-under_siege+famine-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. foodSecurity.diversityNote \"single food source\"; same tab: \"Nearly every meal at Cobapan goes back to the fishing\"; under siege and famine every trade has stopped (\"the siege has stopped it moving at all\")."
+ },
+ {
+  "n": 876,
+  "town": "rw3-town-under_siege+famine-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip under the heading \"Shadow Economy: 31% capture\"."
+ },
+ {
+  "n": 910,
+  "town": "rw3-city-famine-1",
+  "verdict": "cured, true",
+  "replacement": "Stormthorpe's Tanner (established) is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "replacementTrue": true,
+  "why": "Same slot (STALLED). activeChains leather status \"vulnerable\", upstreamMissing [\"livestock\"] (\"Needs imported livestock: no local source\"); it no longer says idle (the hunting chain is still \"Running\")."
+ },
+ {
+  "n": 916,
+  "town": "rw3-city-famine-1",
+  "verdict": "cured, true",
+  "replacement": "Stormthorpe buys alchemical preparations for its defence by the batch, and the city's accounts carry them as a purchase, not a defence.",
+  "replacementTrue": true,
+  "why": "Same slot (ARCANE: alchemists). defenseProfile.traditions.hasAlchemy true; compound.inst.hasAlchemist false, so it buys. The line no longer claims alchemists of its own."
+ },
+ {
+  "n": 1001,
+  "town": "rw3-town-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Economics at the tip. safetyProfile.safetyDesc: \"...food is sold under the counter, and the hungry have started to steal\"; crime patterns \"desperation theft\", \"black market food\"."
+ },
+ {
+  "n": 1003,
+  "town": "rw3-town-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Resources at the tip. Economics: \"Stone & Construction ✓ Running\", \"Contributes to Stone Quarrying - 5% of income\"."
+ },
+ {
+  "n": 1006,
+  "town": "rw3-town-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Power at the tip. Arcane Council 37 and \"↳12 members\" against Military/Guard 25 and \"↳2 members\"."
+ },
+ {
+  "n": 1007,
+  "town": "rw3-town-under_siege-1",
+  "verdict": "not reachable",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Not on the rw3 town page before or after the lane: atMbase false and absent from rw3-mbase Systems/Power, which is identical to the tip's. The lane's writing did not remove it. The tab's crime line at both is \"There is gambling at Lagomagnum that nobody licenses...\" (Gambling den on the roll), which is not false."
+ },
+ {
+  "n": 1011,
+  "town": "rw3-town-under_siege-1",
+  "verdict": "cured, true",
+  "replacement": "Since the siege began, Lagomagnum's walls are manned by whoever can be spared from everything else.",
+  "replacementTrue": true,
+  "why": "Same slot (Invasion & War, walls siege variant). stress \"under_siege\"; same tab: \"Everyone at Lagomagnum who can hold a weapon has a place in the defence, and the whole day is arranged around the siege.\""
+ },
+ {
+  "n": 1014,
+  "town": "rw3-town-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. safetyProfile.safetyDesc: \"The military command has taken charge of the streets\"; criminalCaptureState \"none\"."
+ },
+ {
+  "n": 1016,
+  "town": "rw3-town-under_siege-1",
+  "verdict": "cured, true",
+  "replacement": "The siege has put more people on Lagomagnum's town walls than the town could ever find for it in quieter seasons.",
+  "replacementTrue": true,
+  "why": "Same slot (defense:wall rationale, siege variant). stress \"under_siege\"; same tab: \"Everyone at Lagomagnum who can hold a weapon has a place in the defence\"."
+ },
+ {
+  "n": 1018,
+  "town": "rw3-town-under_siege-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Magic at the tip. compound.inst.hasMagicInst false, hasAlchemist false; Defense: \"No arcane practitioners on the rolls\"."
+ },
+ {
+  "n": 1033,
+  "town": "rw3-town-occupied-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Summary/Overview at the tip. compound.inst.hasMercenary false, hasGarrison false; the only force is the part-time Town watch."
+ },
+ {
+  "n": 1060,
+  "town": "rw3-town-occupied-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Power at the tip. Guild Council 40 against Occupation Authority 38; same tab: \"Occupation Authority is now about as strong as Guild Council\"."
+ },
+ {
+  "n": 1061,
+  "town": "rw3-town-occupied-1",
+  "verdict": "not reachable",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Not on the rw3 town page before or after the lane: atMbase false. rw3-mbase and tip Systems/Power are identical and neither has a \"Crime and the hall\" section. The lane's writing did not remove it, and nothing false sits in a slot."
+ },
+ {
+  "n": 1065,
+  "town": "rw3-town-occupied-1",
+  "verdict": "still prints",
+  "replacement": "",
+  "replacementTrue": null,
+  "why": "Prints whole in Systems/Defense at the tip. Invasion & War \"Critical\" on the same tab; defenseProfile.scores.military 8; only the part-time Town watch."
+ }
+]
