@@ -531,6 +531,12 @@ const buildHistoricalEvent = (
     // template is set aside and the loop draws again, so only those places' streams move. The
     // roster here is the pre-trim one; the density law's trim only removes a criminal faction,
     // never adds one, so "none here" is "none on the final record".
+    // W2-FIX-DATA-3 (2026-11-13): a drawn candidate leaves the pool, SELECTED or set aside, so a later pick
+    // cannot draw it again. The second seat's cure commit (dde3b1277) dropped this splice when it added the
+    // set-aside `continue`s below, which let the same template be selected twice: 28 of the census's 720 towns
+    // printed a repeated tension type (r2r-town-51 guild_conflict+guild_conflict). The splice before the guards
+    // is the original shape; a set-aside candidate still leaves and the loop draws the next from the reduced pool.
+    pool.splice(pool.indexOf(candidate), 1);
     if (candidate.type === 'crime_wave' && !crimeSignalOf({ seats: factions, estate: institutions }).present) continue;
     if (!tensionAdmitted(candidate, hookFacts)) continue; // R-AL: a template that presumes a fact declares it
     // ⛔ W2-FIX-DATA-2 items 2 and 3 (the REVIEW-W2B cold list, rows 31, 300, 40, 314): NOR A TENSION THE RECORD
