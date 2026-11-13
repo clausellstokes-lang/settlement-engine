@@ -44,6 +44,7 @@ import { foodLedger } from '../foodLedger.js';
 import { famineOf } from '../facts/famine.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
+import { rulerKindOf } from '../facts/rulerKind.js';
 
 /**
  * The bands that license a famine sentence, and the bands that are a real gap short of
@@ -111,7 +112,28 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  *   `measured` and records a producer that feeds neither pool. Measured by running
  *   `node scripts/wiring-census.mjs` with each spelling.
  * @property {boolean} speaksOfVillagers may a hook call the residents villagers?
+ * @property {boolean} ruledByCouncil a council governs the place, not one ruler (see RULED_BY_A_BODY)
+ * @property {boolean} rosterKnown does the record carry an institution roster at all?
+ * @property {boolean} hasPhysician a healer, an infirmary, a monastic house or a hospital tends the sick
  */
+
+/**
+ * A COUNCIL, NOT ONE RULER (R3-CODE-C-3, ROUND-3-CUT-INCREMENT #ww-868, rww-thorp-plague_onset-1:
+ * "An old story from that time: someone is poisoning the ruler slowly, and the physician knows" in a
+ * thorp governed by an Elder Council of two). The row carries `excludes: ['ruler: council']`
+ * (historyData.js, the data lane's) and still printed, and THIS IS WHY: the ruler-kind home
+ * (`facts/rulerKind.js`) sorts a government by WHO holds it, so an Elder Council, a Household Council
+ * and a Free Elder Council read `elder` (beside the one-person Headman's Authority), and an
+ * Ecclesiastical, Church or High Theocratic Council reads `priest` (beside the one-person Priestly
+ * Guidance): `ruler: council` holds only for the councils of no other kind. Measured on the 720 and the
+ * 240 at the lane's tip: of 146 towns storing a hook about "the ruler", 87 are governed by a council
+ * and none of them reads `ruler: council`. The vocabulary has no council-presence atom (powerSiblings.js
+ * waits for one too), so this gate reads the form of government itself: the kind `council`, or an
+ * elder or priestly government whose own label names a council. A headman, a priest-king, a lord, a
+ * mayor or an occupier is one ruler and is not refused. An absent government licenses nothing.
+ * @type {RegExp}
+ */
+const RULED_BY_A_BODY = /\bcouncil\b/i;
 
 /**
  * Read the facts a hook can contradict out of one settlement record.
@@ -164,6 +186,10 @@ export function settlementHookFacts(settlement) {
     record.defenseProfile?.institutions && typeof record.defenseProfile.institutions === 'object',
   );
   const defense = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (settlement));
+  const rulerKind = rulerKindOf(/** @type {Parameters<typeof rulerKindOf>[0]} */ (settlement));
+  const government = /** @type {{ powerStructure?: { government?: unknown } }} */ (record).powerStructure?.government;
+  const ruledByCouncil = rulerKind === 'council'
+    || ((rulerKind === 'elder' || rulerKind === 'priest') && typeof government === 'string' && RULED_BY_A_BODY.test(government));
 
   return Object.freeze({
     tier,
@@ -197,6 +223,11 @@ export function settlementHookFacts(settlement) {
     // is passing, so the predicate's own tolerance is not read as a defect.
     magicFunctions: magicWorksAt({ settlement }),
     speaksOfVillagers: tier === '' || VILLAGER_TIERS.has(tier),
+    ruledByCouncil,
+    // An unknown roster refuses nothing (the `defenseKnown` rule): a fixture with no institutions
+    // cannot say the physician is missing.
+    rosterKnown: Array.isArray(record.institutions) && record.institutions.length > 0,
+    hasPhysician: defense.hasHealer || defense.hasHospital,
   });
 }
 
@@ -215,6 +246,9 @@ export function settlementHookFacts(settlement) {
  *     This module's earlier reading (a building's walls) is retired by that ruling. "inside
  *     the walls of the temple" names its building and is not read.
  *   - HOSPITAL / MAGIC / VILLAGERS as named in the rulings.
+ *   - RULER: "the ruler" (or "the ailing ruler") is one person; refused where a council governs
+ *     (RULED_BY_A_BODY above). PHYSICIAN: "the physician" is a role, read against the roster's care
+ *     houses (record 386: a line that names a role reads the roster). Both #ww-868.
  * @type {Readonly<Record<string, RegExp>>}
  */
 const WORDS = Object.freeze({
@@ -227,6 +261,8 @@ const WORDS = Object.freeze({
   hospital: /\bhospitals?\b/i,
   magic: /\bmagic(?:al|s)?\b|\bmages?\b|\bwizards?\b|\bspell(?:s|caster|casters)?\b|\barcane\b|\bsorcer\w*\b|\benchant\w*\b|\bconjur\w*\b|\bthaumat\w*\b/i,
   villagers: /\bvillagers?\b/i,
+  ruler: /\bthe (?:ailing )?ruler\b/i,
+  physician: /\bthe physician\b/i,
 });
 
 /** "N days of food left" / "N days of reserves" — the figure and its noun. */
@@ -302,6 +338,12 @@ export function hookTruthViolations(text, facts) {
   }
   if (facts.tierNoun !== null && facts.tierNoun !== 'town' && TOWN_NOUN.test(line)) {
     add('town_for_a_place_that_is_not_one', `the place is a ${facts.tierNoun}`);
+  }
+  if (facts.ruledByCouncil && WORDS.ruler.test(line)) {
+    add('one_ruler_where_a_council_governs', 'a council governs the place, not one ruler');
+  }
+  if (facts.rosterKnown && WORDS.physician.test(line) && !facts.hasPhysician) {
+    add('physician_without_a_healer', 'no healer, infirmary, monastic house or hospital on the roster');
   }
   return out;
 }

@@ -80,6 +80,41 @@ describe('settlementHookFacts — a fact the record does not carry licenses noth
     expect(hookTruthViolations(STARVING, facts)).toEqual([]);
   });
 
+  // R3-CODE-C-3, ROUND-3-CUT-INCREMENT #ww-868 (rww-thorp-plague_onset-1): "someone is poisoning the
+  // ruler slowly, and the physician knows" in a thorp governed by an Elder Council, with no physician.
+  // The row's `excludes: ['ruler: council']` did not hold: an Elder Council reads `ruler: elder`.
+  test('"the ruler" is refused where a council governs, of any kind; one ruler keeps it', () => {
+    const POISON = 'Someone is poisoning the ruler slowly, and the physician knows';
+    const ERRAND = 'The ailing ruler wants a final errand completed before naming a successor';
+    const ruledBy = (government) => settlementHookFacts({ tier: 'thorp', powerStructure: { government } });
+    for (const government of ['Elder Council', 'Household Council', 'Free Elder Council', 'Ecclesiastical Council', 'Church Council', 'High Theocratic Council', 'Merchant Council']) {
+      expect(ruledBy(government).ruledByCouncil, government).toBe(true);
+      expect(hookTruthViolations(ERRAND, ruledBy(government)).map((f) => f.code), government).toEqual(['one_ruler_where_a_council_governs']);
+    }
+    // anchored: one person rules here, so the same reader passes the same sentence
+    for (const government of ["Headman's Authority", 'Priestly Guidance', 'Royal Authority', 'Town Mayor', 'Occupation Authority']) {
+      expect(ruledBy(government).ruledByCouncil, government).toBe(false);
+      expect(hookTruthViolations(ERRAND, ruledBy(government)), government).toEqual([]);
+    }
+    // an absent government licenses nothing
+    expect(settlementHookFacts({ tier: 'thorp' }).ruledByCouncil).toBe(false);
+    expect(hookTruthViolations(POISON, settlementHookFacts({ tier: 'thorp' }))).toEqual([]);
+  });
+
+  test('"the physician" reads the roster: a healer, a monastic house or a hospital licenses it', () => {
+    const POISON = 'Someone is poisoning the ruler slowly, and the physician knows';
+    const lord = { tier: 'village', powerStructure: { government: 'Feudal Stewardship' } };
+    const none = settlementHookFacts({ ...lord, institutions: [{ name: 'Parish church', category: 'Religious' }] });
+    expect(hookTruthViolations(POISON, none).map((f) => f.code)).toEqual(['physician_without_a_healer']);
+    const healer = settlementHookFacts({ ...lord, institutions: [{ name: 'Village healer', category: 'Health' }] });
+    expect(healer.hasPhysician).toBe(true);
+    expect(hookTruthViolations(POISON, healer)).toEqual([]);
+    const hospital = settlementHookFacts({ ...lord, institutions: [{ name: 'Major hospital', category: 'Health' }] });
+    expect(hookTruthViolations(POISON, hospital)).toEqual([]);
+    // an unknown roster refuses nothing
+    expect(hookTruthViolations(POISON, settlementHookFacts(lord))).toEqual([]);
+  });
+
   test('a record with no defence roster does not deny a garrison', () => {
     const facts = settlementHookFacts({ tier: 'town', economicState: { foodSecurity: { label: 'Secure', storageMonths: 9 } } });
     expect(facts.defenseKnown).toBe(false);

@@ -55,6 +55,31 @@ describe('the record stores only hooks true of it', () => {
     expect(hookTruthFindings(settlement)).toEqual([]);
   });
 
+  // R3-CODE-C-3, ROUND-3-CUT-INCREMENT #ww-868: the reader's own towns, born in the app's shape. THE
+  // GUARD TOWNS for the ruler and physician arms (hookTruth.js :: WORDS.ruler, WORDS.physician).
+  const appShape = (seed) => {
+    const m = seed.match(/^rww-(\w+)-([a-z_]+)-(\d+)$/);
+    const config = birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : [m[2]], _randomizePriorities: true });
+    return generateSettlementPipeline(config, null, { seed, customContent: {} });
+  };
+  const POISONING = /poisoning the ruler slowly/;
+  it('rww-thorp-plague_onset-1 (an Elder Council): the poisoning hook is not stored, though its row excludes only `ruler: council`', () => {
+    const settlement = appShape('rww-thorp-plague_onset-1');
+    expect(settlement.powerStructure?.government).toBe('Elder Council');
+    expect(storedTexts(settlement).filter((t) => POISONING.test(t))).toEqual([]);
+    expect(hookTruthFindings(settlement)).toEqual([]);
+  });
+  it('rww-city-insurgency-1 (one lord, no healer or hospital): the poisoning hook is not stored', () => {
+    const settlement = appShape('rww-city-insurgency-1');
+    expect(settlement.powerStructure?.government).toBe('Noble Governorship');
+    expect(storedTexts(settlement).filter((t) => POISONING.test(t))).toEqual([]);
+  });
+  it('rww-metropolis-under_siege-1 (a crown and a hospital): the poisoning hook is still stored', () => {
+    const settlement = appShape('rww-metropolis-under_siege-1');
+    expect(settlement.powerStructure?.government).toBe('Royal Authority');
+    expect(storedTexts(settlement).filter((t) => POISONING.test(t))).toHaveLength(1);
+  });
+
   it('soak1k-28: the starving hook on a fed place is not stored, and the place keeps hooks', () => {
     const { settlement } = birth(28);
     const texts = storedTexts(settlement);
