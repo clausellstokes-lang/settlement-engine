@@ -1,0 +1,13 @@
+{
+ "_doc": "REVIEW-W2B-4 item 1: my read of each drawn line (draw4.json, salt review-w2b-4-precision-2026-11-13) against its town's record. F = false on the page (the finding is right); T = not shown false (the finding is wrong). Standard: the third read's (a word naming a power on the town's powers roster is not false; size words to the chair's ruled standard).",
+ "F": [1,4,5,6,7,8,9,11,12,13,14,15,16,17,18,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,44,45,46,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,64,66,67,68,69,70,71,72,73,75,76,3,43,63,65],
+ "T": {
+  "2": "practitioner: 'Readings, visions, and omens from practitioners who know what the client wants to hear.' (the False prophecy service) in a metropolis whose roster holds Charlatan fortune tellers and an Alchemist quarter: the practitioners are the frauds, and they are there",
+  "10": "armedForce: the War tab's 'From here you raise Niederbrücke's troops …' (a village with no standing force): an instruction that the tab raises troops, not a claim that troops stand",
+  "19": "clergy: 'tithes fund civic works and the clergy's opinion on appointments carries decisive weight.' — the Religious Authorities power's own description, that power on the roster at 51",
+  "47": "armedForce: 'The Military Party takes its orders no longer.' — names the Military Party, a power on the roster at 57",
+  "74": "clergy: 'The priest guides the community, and disputes are brought to the priest to settle.' — the Priestly Guidance power's description, that power on the roster",
+  "77": "clergy: the Religious Authorities power's description again (on the roster at 71)"
+ },
+ "labels": "3, 43, 63, 65: 'House of worship' (± '· Wayside shrine', or 'Via') on the Faith & Worship flow is the display name of the catalogue's 'Parish church' (institutionDisplayName.js :: INSTITUTION_DISPLAY_NAMES), printed in a thorp or hamlet that holds only 'Access to parish church': F"
+}

@@ -1,0 +1,1 @@
+names.filter((name) => re.test(name))

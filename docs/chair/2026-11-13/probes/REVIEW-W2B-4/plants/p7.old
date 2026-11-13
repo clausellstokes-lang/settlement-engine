@@ -1,0 +1,1 @@
+names.filter((name) => !NOT_HERE.test(name) && re.test(name))

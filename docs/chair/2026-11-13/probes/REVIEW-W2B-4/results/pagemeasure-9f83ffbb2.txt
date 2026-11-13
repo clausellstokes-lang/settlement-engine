@@ -1,0 +1,28 @@
+dossiers read 720 findings 1998 towns 588
+by source {
+  'written in code': 563,
+  unattributed: 484,
+  'corpus pool': 301,
+  'generator pool': 188,
+  'generator code': 462
+}
+by layer { P: 1375, S: 427, T: 196 }
+by kind { thing: 845, size: 631, count: 200, value: 227, state: 95 }
+by side { names: 1998 }
+by word {
+  clergy: 102,
+  religiousHouses: 340,
+  streets: 329,
+  rulingFaces: 173,
+  onlyJust: 57,
+  quarters: 302,
+  armedForce: 106,
+  practitioner: 196,
+  market: 26,
+  openTrade: 68,
+  powersCount: 27,
+  famineToCome: 27,
+  'house: alchemist': 75,
+  almostLevel: 106,
+  smallMargin: 64
+}

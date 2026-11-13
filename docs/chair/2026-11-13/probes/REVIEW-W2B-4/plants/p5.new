@@ -1,0 +1,1 @@
+return n !== null && low !== null ? Math.max(n, low) : n;

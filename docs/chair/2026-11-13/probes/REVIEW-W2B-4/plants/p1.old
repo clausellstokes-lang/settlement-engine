@@ -1,0 +1,1 @@
+for (const id of ROLE_PAGE_WITHDRAWN) ROLE_FAMILIES[id].pageWithdrawn = PAGE_WITHDRAWN.role;

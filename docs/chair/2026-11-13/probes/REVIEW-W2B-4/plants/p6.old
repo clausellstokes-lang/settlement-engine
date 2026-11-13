@@ -1,0 +1,1 @@
+|\\b(both)\\s+(?:the\\s+|its\\s+|of\\s+(?:the|its)\\s+)?(${HOUSE_NOUNS})\\b(?!\\s+and\\b)

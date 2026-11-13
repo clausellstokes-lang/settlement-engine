@@ -1,0 +1,1 @@
+(${HOUSE_NOUNS})\\b(?!\\s+and\\b)

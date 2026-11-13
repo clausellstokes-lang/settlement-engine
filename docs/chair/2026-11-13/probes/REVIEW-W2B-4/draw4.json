@@ -1,0 +1,6079 @@
+{
+ "salt": "review-w2b-4-precision-2026-11-13",
+ "pageListLines": 1953,
+ "familyLines": {
+  "other": 688,
+  "church words": 336,
+  "alchemist phrase": 75,
+  "powers count": 27,
+  "streets": 329,
+  "role kept": 200,
+  "market phrase": 15,
+  "quarters": 289
+ },
+ "drawn": [
+  {
+   "n": 1,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-plague_onset-thorp-1",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Household Council",
+   "town": {
+    "name": "Somathal",
+    "tier": "thorp",
+    "population": 25,
+    "crisis": [
+     "plague_onset"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Tukaram Ahuja",
+     "Pavithra Banerjee"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 13
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Fishing community",
+     "Access to external mill",
+     "Burial ground",
+     "Head-of-household consensus",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy"
+    ]
+   },
+   "context": [
+    "Who really runs this thorp",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Household Council",
+    "Head · Tukaram Ahuja, the eldest householder",
+    "Second · Pavithra Banerjee, the boat-headman"
+   ]
+  },
+  {
+   "n": 2,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "practitioner/names"
+   ],
+   "views": [
+    "Systems/Services"
+   ],
+   "seed": "r2r-metropolis-8",
+   "source": "generator pool",
+   "file": "src/generators/servicesGenerator.js",
+   "quote": "Readings, visions, and omens from practitioners who know what the client wants to hear.",
+   "town": {
+    "name": "Langenberg",
+    "tier": "metropolis",
+    "population": 344689,
+    "crisis": [
+     "succession_void"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "gate": true,
+     "watch": true,
+     "garrison": true,
+     "hospital": true,
+     "healer": true,
+     "commander": true,
+     "court": true,
+     "prison": true
+    },
+    "powers": [
+     "Royal Authority 22",
+     "Religious Authorities 20",
+     "Thieves' Guild 16",
+     "Noble Claimant (Senior Line) 15",
+     "Noble Claimant (Reform Line) 12",
+     "The Highborn Circle 7",
+     "The Peerage 8"
+    ],
+    "rulingThree": [
+     "Oda Kauf",
+     "Viktor Kauf",
+     "Hans Baum"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 42
+    },
+    "roster": [
+     "Fish market",
+     "Charcoal burner",
+     "Mine",
+     "Stone quarry",
+     "Furrier's district",
+     "District markets (5-10)",
+     "Multiple market squares",
+     "Major annual fairs",
+     "International trade center",
+     "Merchant guilds (50-100+)",
+     "Banking district",
+     "Pawnbroker",
+     "Inns and taverns (district)",
+     "Coaching inn",
+     "Stable district",
+     "Post relay station",
+     "Barge and river transport company",
+     "Harbour master's office",
+     "Toll bridge",
+     "State granary complex",
+     "Warehouse district",
+     "Public bathhouse",
+     "Mint (official)",
+     "Chroniclers' exchange",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Luxury goods quarter",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Bowyers & fletchers (guild)",
+     "Sawmill (commercial)",
+     "Brewery",
+     "Vintner",
+     "Tanners",
+     "Fuller",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Brickmaker",
+     "Cobbler's guild",
+     "Tailor's guild",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Glassmakers",
+     "Ropemaker",
+     "Midwife",
+     "Woodcarver",
+     "Cartographer's guild",
+     "Craft guilds (100-150+)",
+     "Alchemist quarter",
+     "Parish churches (50-100+)",
+     "Cemetery network",
+     "Major monasteries (5-10)",
+     "Great cathedral",
+     "Hospital network",
+     "Elder Grove Council",
+     "Royal seat",
+     "Town crier",
+     "Housing (3500+ households)",
+     "Advanced water infrastructure",
+     "City hall",
+     "Palace/government complex",
+     "Multiple court buildings",
+     "Massive prison",
+     "Workhouse",
+     "Great library",
+     "Massive walls and fortifications",
+     "Professional city watch",
+     "Multiple garrisons",
+     "Multiple adventurers' guilds",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Smuggling network",
+     "Thieves' guild (powerful)",
+     "Front businesses",
+     "Underground city",
+     "Whisper market",
+     "Assassins' guild",
+     "Multiple theaters",
+     "Opera house",
+     "Bardic college",
+     "Gambling district",
+     "Red light district",
+     "Gladiatorial school",
+     "Colosseum/arena",
+     "Charlatan fortune tellers",
+     "River ferry",
+     "Veteran's lodge"
+    ]
+   },
+   "context": [
+    "Get shipments past checkpoints without inspection.",
+    "False prophecy",
+    "Readings, visions, and omens from practitioners who know what the client wants to hear.",
+    "(religious fraud)",
+    "Fence services"
+   ]
+  },
+  {
+   "n": 3,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-indebted-hamlet-1",
+   "source": "written in code",
+   "file": "src/domain/display/institutionDisplayName.js",
+   "quote": "House of worship · Wayside shrine",
+   "town": {
+    "name": "Hadithaqila",
+    "tier": "hamlet",
+    "population": 63,
+    "crisis": [
+     "indebted"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Free Elder Council 57",
+     "Religious Authorities 43"
+    ],
+    "rulingThree": [
+     "Dawud ibn Khalid",
+     "Laith al-Amin",
+     "Imad ibn Rashid"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Hunter's lodge",
+     "Pack animal trader",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Informal elder consensus",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Honey and beeswaxForaged goods",
+    "Faith & WorshipReligion & civic✓ Running",
+    "House of worship · Wayside shrine",
+    "Religious servicesEducation (basic)Poor relief",
+    "Furs & PeltsTrade & entrepôtEntrepôt"
+   ]
+  },
+  {
+   "n": 4,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-slave_revolt-thorp-0",
+   "source": "unattributed",
+   "file": "",
+   "quote": "What the religious houses take in and spend is a large part of the thorp's business.",
+   "town": {
+    "name": "Mönkhkher",
+    "tier": "thorp",
+    "population": 28,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Feudal Stewardship 100"
+    ],
+    "rulingThree": [
+     "Samarkand Kiyad",
+     "Khishigbayar Naiman"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 7
+    },
+    "roster": [
+     "Subsistence farming",
+     "Shepherd collective",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Lord's reeve",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Iron & Metalwork Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.",
+    "Also earned, with no share recorded: Transit trade, goods passing through on the route, handled here on their way elsewhere.",
+    "Almost everyone's living at Mönkhkher depends on one trade, whether or not they work in it. Faith carries real weight in Mönkhkher's money. What the religious houses take in and spend is a large part of the thorp's business. Every load of luxury goods used at Mönkhkher comes from elsewhere, because ",
+    "Trade Profile▲",
+    "Exports"
+   ]
+  },
+  {
+   "n": 5,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "alchemist phrase"
+   ],
+   "words": [
+    "house: alchemist/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-politically_fractured-town-3",
+   "source": "generator code",
+   "file": "src/generators/economy/economicState.js",
+   "quote": "The local alchemist supplements conventional trade.",
+   "town": {
+    "name": "Ioannovrysi",
+    "tier": "town",
+    "population": 1633,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "watch": true,
+     "healer": true,
+     "court": true
+    },
+    "powers": [
+     "Religious Authorities 39",
+     "The Independent Bloc 20",
+     "Merchant Guilds 15",
+     "Third Bloc (Neutrals) 15",
+     "Church Council 11"
+    ],
+    "rulingThree": [
+     "Christodoulos Gregoraios",
+     "Charis Makrembolites",
+     "Akakisa Kalojan"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 21
+    },
+    "roster": [
+     "Hunter's lodge",
+     "Weekly market",
+     "Market square",
+     "Merchant guilds (3-8)",
+     "Inn (multiple)",
+     "Taverns (5-20)",
+     "Town granary",
+     "Merchant warehouses",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Apothecary (established)",
+     "Bowyers & fletchers (guild)",
+     "Tanners",
+     "Woodcarver",
+     "Craft guilds (5-15)",
+     "Parish churches (2-5)",
+     "Parish burial grounds",
+     "Housing (75-650 households)",
+     "Multiple water sources",
+     "Town hall",
+     "Town watch",
+     "Brothel",
+     "Charlatan fortune tellers",
+     "Cooper",
+     "Monastery or friary"
+    ]
+   },
+   "context": [
+    "Grain Sales Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.",
+    "4%",
+    "Herbalist & Apothecary Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.",
+    "No one trade earns half of what Ioannovrysi makes, so a bad year in any one of them would hurt without ruining it. The religious houses at Ioannovrysi are among its biggest buyers and employers, and a bad year for them is a bad year for the town. Every load of grain used at Ioannovrysi comes from el",
+    "Trade Profile▲"
+   ]
+  },
+  {
+   "n": 6,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-thorp-12",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Priestly Guidance",
+   "town": {
+    "name": "Nahrhaven",
+    "tier": "thorp",
+    "population": 23,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Priestly Guidance 100"
+    ],
+    "rulingThree": [
+     "Ola al-Malik"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy"
+    ]
+   },
+   "context": [
+    "Who really runs this thorp",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Priestly Guidance",
+    "Head · Ola al-Malik, the household elder",
+    "The hall"
+   ]
+  },
+  {
+   "n": 7,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-hamlet-24",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Headman's Authority",
+   "town": {
+    "name": "Jayakota",
+    "tier": "hamlet",
+    "population": 100,
+    "crisis": [
+     "famine"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 100"
+    ],
+    "rulingThree": [
+     "Vinod Deshpande"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Village headman",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Who really runs this hamlet",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Headman's Authority",
+    "Head · Vinod Deshpande, the headman",
+    "The hall"
+   ]
+  },
+  {
+   "n": 8,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-politically_fractured-hamlet-2",
+   "source": "generator code",
+   "file": "src/data/powerSiblings.js",
+   "quote": "Two powers have stopped coming to Free Elder Council meetings.",
+   "town": {
+    "name": "Viknes",
+    "tier": "hamlet",
+    "population": 52,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Free Elder Council 100"
+    ],
+    "rulingThree": [
+     "Myrkjartan Asgersson",
+     "Ranveig Sigmundsson",
+     "Hrolf Magnusson"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Charcoal burner",
+     "Alehouse",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Informal elder consensus",
+     "Dwellings (5-25)",
+     "Water source",
+     "Adventurers' charter hall"
+    ]
+   },
+   "context": [
+    "Stability",
+    "Fractured — no stable governing authority",
+    "Myrkjartan Asgersson, the eldest, holds the seat of the Free Elder Council. The Free Elder Council governs Viknes. Poverty and crime have cost the Free Elder Council its standing. Few in Viknes still accept its right to rule. Two powers have stopped coming to Free Elder Council meetings. Each makes ",
+    "The Powers (1)▲",
+    "Who holds and who contests the seat. Open a power to see the institutions behind it."
+   ]
+  },
+  {
+   "n": 9,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-politically_fractured-hamlet-3",
+   "source": "unattributed",
+   "file": "",
+   "quote": "A visitor to Achillathra would not guess at the trouble from the streets;",
+   "town": {
+    "name": "Achillathra",
+    "tier": "hamlet",
+    "population": 49,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 100"
+    ],
+    "rulingThree": [
+     "Thodoros Chortasmenos",
+     "Eirenaion Chrysoberges"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Access to external mill",
+     "Carpenter (part-time)",
+     "Access to parish church",
+     "Burial ground",
+     "Village headman",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "No one in Achillathra can call everyone to its defence; each power guards its own ground and trusts nobody else's.",
+    "Nothing gets decided, repairs are put off, and every problem is left for later.",
+    "More than one power at Achillathra claims to command its defence, and orders are given twice and obeyed once. A visitor to Achillathra would not guess at the trouble from the streets; the hamlet is shaken but standing.",
+    "Threat Assessment",
+    "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer."
+   ]
+  },
+  {
+   "n": 10,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "armedForce/names"
+   ],
+   "views": [
+    "World/War"
+   ],
+   "seed": "r2r-village-52",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WarTab.jsx",
+   "quote": "From here you raise Niederbrücke's troops, send them out, call them home, and read what they report back.",
+   "town": {
+    "name": "Niederbrücke",
+    "tier": "village",
+    "population": 162,
+    "crisis": [
+     "indebted"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 56",
+     "Creditor's Representative 44"
+    ],
+    "rulingThree": [
+     "Eberhard Bauer",
+     "Theotmar Schröder",
+     "Kunhild Weber"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Wildfowler",
+     "Ale house",
+     "Mill",
+     "Thatcher",
+     "Cooper",
+     "Sawmill",
+     "Tannery",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Carpenter"
+    ]
+   },
+   "context": [
+    "== World/War ==",
+    "Available at launch",
+    "From here you raise Niederbrücke's troops, send them out, call them home, and read what they report back.",
+    "== World/Faith ==",
+    "Faith"
+   ]
+  },
+  {
+   "n": 11,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "alchemist phrase"
+   ],
+   "words": [
+    "house: alchemist/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-monster_pressure-metropolis-3",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "The magical help at Brahmabagh comes from its alchemists, who brew for the defenders.",
+   "town": {
+    "name": "Brahmabagh",
+    "tier": "metropolis",
+    "population": 37094,
+    "crisis": [
+     "monster_pressure"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "gate": true,
+     "watch": true,
+     "garrison": true,
+     "hospital": true,
+     "healer": true,
+     "mercenary": true,
+     "commander": true,
+     "court": true,
+     "prison": true
+    },
+    "powers": [
+     "Grand Merchant Senate 23",
+     "Merchant Guilds 17",
+     "Military/Guard 16",
+     "Craft Guilds 10",
+     "Arcane Orders 9",
+     "Religious Authorities 8",
+     "The Merchant Bloc 9",
+     "The Martial Alliance 8"
+    ],
+    "rulingThree": [
+     "Nikhil Panda",
+     "Ganga Subramanian",
+     "Jagdish Kulkarni"
+    ],
+    "practitioners": 4,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 53
+    },
+    "roster": [
+     "Fish market",
+     "Charcoal burner",
+     "Mine",
+     "Stone quarry",
+     "Furrier's district",
+     "District markets (5-10)",
+     "Multiple market squares",
+     "Major annual fairs",
+     "Merchant guilds (50-100+)",
+     "Banking district",
+     "Pawnbroker",
+     "Inns and taverns (district)",
+     "Coaching inn",
+     "Caravan masters' exchange",
+     "Beast trainers",
+     "Toll bridge",
+     "Customs house",
+     "State granary complex",
+     "Warehouse district",
+     "Auction house",
+     "Mint (official)",
+     "Chroniclers' exchange",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Luxury goods quarter",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Bowyers & fletchers (guild)",
+     "Sawmill (commercial)",
+     "Tanner (established)",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Cobbler's guild",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Glassmakers",
+     "Ropemaker",
+     "Midwife",
+     "Woodcarver",
+     "Cartographer's guild",
+     "Craft guilds (100-150+)",
+     "Parish churches (50-100+)",
+     "Cemetery network",
+     "Major monasteries (5-10)",
+     "Great cathedral",
+     "Hospital network",
+     "Mayor and council",
+     "Town crier",
+     "Housing (3500+ households)",
+     "Advanced water infrastructure",
+     "City hall",
+     "Palace/government complex",
+     "Multiple court buildings",
+     "Massive prison",
+     "Sewage system",
+     "Great library",
+     "Massive walls and fortifications",
+     "Professional city watch",
+     "Multiple garrisons",
+     "Citadel",
+     "Mercenary quarter",
+     "Mages' district",
+     "Academy of magic",
+     "Enchanter's shop",
+     "Scroll scribe",
+     "Multiple adventurers' guilds",
+     "Hired blades",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Thieves' guild (powerful)",
+     "Multiple theaters",
+     "Bardic college",
+     "Gambling district",
+     "Brothel (red light district)",
+     "Gladiatorial school",
+     "Colosseum/arena",
+     "Charlatan fortune tellers",
+     "Post relay station",
+     "Fuller",
+     "Brickmaker",
+     "Tailor's guild",
+     "Elder Grove Council",
+     "Front businesses"
+    ]
+   },
+   "context": [
+    "Academy of magic",
+    "Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars.",
+    "The metropolis has a wall and arranges its day around the gates without noticing that it does. The wall at Brahmabagh is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost. It keeps a standing force: people whose work is the defense of this metropolis an",
+    "Supporting Capabilities▲",
+    "Arcane SupportPresent"
+   ]
+  },
+  {
+   "n": 12,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "smallMargin/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-metropolis-34",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Weißfeld feeds itself with a small margin.",
+   "town": {
+    "name": "Weißfeld",
+    "tier": "metropolis",
+    "population": 41060,
+    "crisis": [],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "gate": true,
+     "watch": true,
+     "garrison": true,
+     "hospital": true,
+     "commander": true,
+     "court": true,
+     "prison": true
+    },
+    "powers": [
+     "City-State Council 59",
+     "Arcane Orders 15",
+     "Thieves' Guild 11",
+     "The Tower Alliance 9",
+     "The Black Circle 6"
+    ],
+    "rulingThree": [
+     "Simon Dietrich",
+     "Joachim Waldmann",
+     "Irene Wirth"
+    ],
+    "practitioners": 13,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 51
+    },
+    "roster": [
+     "District markets (5-10)",
+     "Multiple market squares",
+     "Inns and taverns (district)",
+     "Beast trainers",
+     "Customs house",
+     "State granary complex",
+     "Warehouse district",
+     "Mint (official)",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Sawmill (commercial)",
+     "Brewery",
+     "Vintner",
+     "Tanner (established)",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Brickmaker",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Ropemaker",
+     "Midwife",
+     "Woodcarver",
+     "Cartographer's guild",
+     "Craft guilds (100-150+)",
+     "Parish churches (50-100+)",
+     "Cemetery network",
+     "Hospital network",
+     "City-state government",
+     "Town crier",
+     "Housing (3500+ households)",
+     "Advanced water infrastructure",
+     "City hall",
+     "Palace/government complex",
+     "Multiple court buildings",
+     "Massive prison",
+     "Workhouse",
+     "Sewage system",
+     "Massive walls and fortifications",
+     "Professional city watch",
+     "Multiple garrisons",
+     "Mages' district",
+     "Academy of magic",
+     "Enchanter's shop",
+     "Scroll scribe",
+     "Teleportation circle",
+     "Planar embassy",
+     "Hired blades",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Smuggling network",
+     "Multiple criminal factions",
+     "Front businesses",
+     "Underground city",
+     "Whisper market",
+     "Black market bazaar",
+     "Contract killer",
+     "Multiple theaters",
+     "Bardic college",
+     "Gambling district",
+     "Brothel (red light district)",
+     "Fighting pits",
+     "Colosseum/arena",
+     "Charlatan fortune tellers",
+     "Planar traders",
+     "Golem workforce",
+     "Dream parlors (high magic)",
+     "Airship docking (high magic)",
+     "Message network (high magic)",
+     "Public bathhouse",
+     "Fuller",
+     "Tailor's guild",
+     "Glassmakers",
+     "Great library",
+     "Harbour master's office",
+     "Multiple adventurers' guilds"
+    ]
+   },
+   "context": [
+    "Stores: a granary, 15 months of grain.",
+    "Meals follow the season and what the household has put by.",
+    "Weißfeld feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
+    "Bread at Weißfeld is as likely to come from somebody else's fields as from the metropolis's own, and everyone knows which days the carts arrive.",
+    "Economic Flows (34 active · 4 impaired)▲?What is made here and what it depends on."
+   ]
+  },
+  {
+   "n": 13,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "armedForce/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2r-thorp-42",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "Qaratala's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+   "town": {
+    "name": "Qaratala",
+    "tier": "thorp",
+    "population": 18,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Manduhai Kereit",
+     "Qubilai Jadaran"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 1
+    },
+    "roster": [
+     "Subsistence farming",
+     "Woodcutter's camp",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Qaratala keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.",
+    "Economic Survival",
+    "Qaratala's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+    "Disasters & Famine",
+    "Adequate▼"
+   ]
+  },
+  {
+   "n": 14,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "market phrase"
+   ],
+   "words": [
+    "market/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-village-4",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Elder Council has been debating market levies for three months.",
+   "town": {
+    "name": "Huaji",
+    "tier": "village",
+    "population": 391,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Xiao Hu",
+     "Qinglong Sun",
+     "Tae Zhou"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Peat cutter",
+     "Stone quarry",
+     "Travelers' inn",
+     "Carriers' hiring hall",
+     "Mill",
+     "Blacksmith",
+     "Sawmill",
+     "Potter",
+     "Woodcarver",
+     "Cartographer's workshop",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Village elder",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Smuggling waypoint",
+     "Dairy farmer",
+     "Thatcher"
+    ]
+   },
+   "context": [
+    "Stability",
+    "Stable",
+    "Xiao Hu, the village elder, holds the seat of the Elder Council. The Elder Council governs Huaji. Huaji tolerates the Elder Council and no more. Weak defences is the reason. Elder Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides ",
+    "The Powers (1)▲",
+    "Who holds and who contests the seat. Open a power to see the institutions behind it."
+   ]
+  },
+  {
+   "n": 15,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-slave_revolt-thorp-1",
+   "source": "generator code",
+   "file": "src/generators/safetyProfile.js",
+   "quote": "The rebels hold some districts.",
+   "town": {
+    "name": "Erdeniin",
+    "tier": "thorp",
+    "population": 15,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Enkhjargal Kereit",
+     "Organa Tayichi'ud"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 3
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Head-of-household consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Criminal Architecture & Public Order▲",
+    "Dangerous — slave revolt",
+    "The rebels hold some districts. People keep off those streets, and nobody walks them after dark.",
+    "Everyone at Erdeniin who could keep order has gone to fight the revolt, so the rest of the thorp keeps its own order.",
+    "Active crime patterns"
+   ]
+  },
+  {
+   "n": 16,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Summary/Overview"
+   ],
+   "seed": "r2r-thorp-27",
+   "source": "written in code",
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "quote": "Greek-inspired: built around the agora, on riverside ground, and run by civic association.",
+   "town": {
+    "name": "Olympnea",
+    "tier": "thorp",
+    "population": 25,
+    "crisis": [
+     "occupied"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Stephanos Argyros",
+     "Zosime Alexios"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy"
+    ]
+   },
+   "context": [
+    "== Summary/Overview ==",
+    "Olympneathorp· 25 pop.· river· 229 years old",
+    "Greek-inspired: built around the agora, on riverside ground, and run by civic association. Governed by Household Council · Suppressed (under occupation: resistance simmers); monsters on the roads",
+    "\"A settlement shaped by the accumulated weight of The Siege, The Schism and The Purge: no single defining moment, but enough of them that the character formed anyway\"",
+    "Riverside"
+   ]
+  },
+  {
+   "n": 17,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "smallMargin/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-wartime-city-2",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Langkirche feeds itself with a small margin.",
+   "town": {
+    "name": "Langkirche",
+    "tier": "city",
+    "population": 13169,
+    "crisis": [
+     "wartime"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "gate": true,
+     "watch": true,
+     "garrison": true,
+     "hospital": true,
+     "healer": true,
+     "mercenary": true,
+     "commander": true,
+     "court": true,
+     "prison": true
+    },
+    "powers": [
+     "Religious Authorities 24",
+     "Military/Guard 18",
+     "Corrupt City Council 16",
+     "War Council 12",
+     "Thieves' Guild 9",
+     "Noble Families 7",
+     "The Shield Compact 10",
+     "The Highborn Circle 4"
+    ],
+    "rulingThree": [
+     "Gertrude Schmitt",
+     "Irmgard Weber",
+     "Rudolf Eisenberg"
+    ],
+    "practitioners": 2,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 34
+    },
+    "roster": [
+     "Furrier's district",
+     "Daily markets",
+     "Multiple market squares",
+     "Major annual fairs",
+     "Banking houses",
+     "Inns and taverns (district)",
+     "Coaching inn",
+     "Caravan masters' exchange",
+     "Beast trainers",
+     "Post relay station",
+     "River ferry",
+     "City granaries",
+     "Warehouse district",
+     "Public bathhouse",
+     "Auction house",
+     "Mint (official)",
+     "Listening post",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Luxury goods quarter",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Bowyers & fletchers (guild)",
+     "Sawmill (commercial)",
+     "Brewery",
+     "Vintner",
+     "Tanners",
+     "Fuller",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Brickmaker",
+     "Cobbler's guild",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Glassmakers",
+     "Ropemaker",
+     "Midwife",
+     "Woodcarver",
+     "Printing house",
+     "Cartographer's guild",
+     "Craft guilds (30-80)",
+     "Alchemist quarter",
+     "Parish churches (10-30)",
+     "Burial grounds and charnel house",
+     "Multiple monasteries",
+     "Cathedral (10,000+ only)",
+     "Major hospital",
+     "Foundling home",
+     "Elder Grove Council",
+     "City administration",
+     "Housing (500-4000 households)",
+     "Aqueduct or water system",
+     "City hall",
+     "Multiple courthouses",
+     "Large prison",
+     "Workhouse",
+     "City walls and gates",
+     "Professional city watch",
+     "Garrison",
+     "Citadel",
+     "Mercenary quarter",
+     "Veteran's lodge",
+     "Multiple adventurers' guilds",
+     "Sage's quarter",
+     "Smuggling network",
+     "Multiple criminal factions",
+     "Front businesses",
+     "Rookery",
+     "Contract killer",
+     "Bardic college",
+     "Gambling halls",
+     "Brothel (red light district)",
+     "Merchant guilds (15-40)",
+     "River boatyard",
+     "Wizard's tower",
+     "Black market"
+    ]
+   },
+   "context": [
+    "Stores: a granary, nine months of grain.",
+    "Meals follow the season and what the household has put by.",
+    "Langkirche feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
+    "Langkirche grows only part of what it eats; the rest comes in from the farms around it and from trade.",
+    "Economic Flows (46 active · 4 impaired)▲?What is made here and what it depends on."
+   ]
+  },
+  {
+   "n": 18,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-hamlet-43",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Headman's Authority",
+   "town": {
+    "name": "Devamala",
+    "tier": "hamlet",
+    "population": 92,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 100"
+    ],
+    "rulingThree": [
+     "Indira Chatterjee"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Village headman",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Who really runs this hamlet",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Headman's Authority",
+    "Head · Indira Chatterjee, the headman",
+    "The hall"
+   ]
+  },
+  {
+   "n": 19,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "clergy/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-hamlet-21",
+   "source": "generator code",
+   "file": "src/generators/power/rulingStructure.js",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight.",
+   "town": {
+    "name": "Celoburg",
+    "tier": "hamlet",
+    "population": 95,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Religious Authorities 51",
+     "Free Elder Council 49"
+    ],
+    "rulingThree": [
+     "Nikolai Borisov",
+     "Vaclav Sokolov",
+     "Frantisek Bykov"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Woodcutter's camp",
+     "Pack animal trader",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Informal elder consensus",
+     "Dwellings (5-25)",
+     "Water source",
+     "Adventurers' charter hall",
+     "Stable yard"
+    ]
+   },
+   "context": [
+    "Religious Authorities",
+    "Contests the seatReligious51▲",
+    "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight.",
+    "Free Elder Council",
+    "↑ Holds powerGovernment49▼"
+   ]
+  },
+  {
+   "n": 20,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-hamlet-0",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Feudal Stewardship",
+   "town": {
+    "name": "Spitzsteig",
+    "tier": "hamlet",
+    "population": 22,
+    "crisis": [
+     "under_siege"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Feudal Stewardship 100"
+    ],
+    "rulingThree": [
+     "Tassilo Bauer"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Lord's steward",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Who really runs this hamlet",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Feudal Stewardship",
+    "Head · Tassilo Bauer, the steward",
+    "The hall"
+   ]
+  },
+  {
+   "n": 21,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "alchemist phrase"
+   ],
+   "words": [
+    "house: alchemist/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-indebted-metropolis-3",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "The magical help at Lidocastra comes from its alchemists, who brew for the defenders.",
+   "town": {
+    "name": "Lidocastra",
+    "tier": "metropolis",
+    "population": 44209,
+    "crisis": [
+     "indebted"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "gate": true,
+     "watch": true,
+     "garrison": true,
+     "hospital": true,
+     "healer": true,
+     "mercenary": true,
+     "commander": true,
+     "court": true,
+     "prison": true
+    },
+    "powers": [
+     "Royal Authority 19",
+     "Noble Houses 19",
+     "Religious Authorities 13",
+     "Merchant Guilds 10",
+     "Thieves' Guild 10",
+     "Military/Guard 9",
+     "Crown Creditors (Noble Coalition) 8",
+     "Craft Guilds 7",
+     "The Martial Alliance 5"
+    ],
+    "rulingThree": [
+     "Zona Aquila",
+     "Xenia Mamercus",
+     "Crispus Barba"
+    ],
+    "practitioners": 4,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 53
+    },
+    "roster": [
+     "Fish market",
+     "Stone quarry",
+     "Furrier's district",
+     "District markets (5-10)",
+     "Multiple market squares",
+     "Major annual fairs",
+     "Merchant guilds (50-100+)",
+     "Banking district",
+     "Pawnbroker",
+     "Inns and taverns (district)",
+     "Coaching inn",
+     "Beast trainers",
+     "Toll bridge",
+     "Customs house",
+     "State granary complex",
+     "Warehouse district",
+     "Public bathhouse",
+     "Auction house",
+     "Mint (official)",
+     "Chroniclers' exchange",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Luxury goods quarter",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Bowyers & fletchers (guild)",
+     "Brewery",
+     "Tanners",
+     "Weavers/Textile workers",
+     "Brickmaker",
+     "Cobbler's guild",
+     "Tailor's guild",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Glassmakers",
+     "Midwife",
+     "Woodcarver",
+     "Cartographer's guild",
+     "Craft guilds (100-150+)",
+     "Parish churches (50-100+)",
+     "Cemetery network",
+     "Major monasteries (5-10)",
+     "Great cathedral",
+     "Hospital network",
+     "Royal seat",
+     "Town crier",
+     "Housing (3500+ households)",
+     "Advanced water infrastructure",
+     "City hall",
+     "Palace/government complex",
+     "Multiple court buildings",
+     "Massive prison",
+     "Workhouse",
+     "Sewage system",
+     "Great library",
+     "Massive walls and fortifications",
+     "Professional city watch",
+     "Multiple garrisons",
+     "Citadel",
+     "Mercenary quarter",
+     "Veteran's lodge",
+     "Mages' district",
+     "Academy of magic",
+     "Scroll scribe",
+     "Multiple adventurers' guilds",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Smuggling network",
+     "Multiple criminal factions",
+     "Front businesses",
+     "Underground network",
+     "Underground city",
+     "Whisper market",
+     "Black market bazaar",
+     "Assassins' guild",
+     "Multiple theaters",
+     "Opera house",
+     "Bardic college",
+     "Gambling district",
+     "Red light district",
+     "Fighting pits",
+     "Colosseum/arena",
+     "Charlatan fortune tellers",
+     "International trade center",
+     "Fuller",
+     "Dyer",
+     "Elder Grove Council",
+     "Enchanter's shop"
+    ]
+   },
+   "context": [
+    "Academy of magic",
+    "Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars.",
+    "The metropolis has a wall and arranges its day around the gates without noticing that it does. Traffic in and out of Lidocastra goes through its gates, and that is where anyone arriving is first seen. It keeps a standing force: people whose work is the defense of this metropolis and who are answerab",
+    "Supporting Capabilities▲",
+    "Arcane SupportPresent"
+   ]
+  },
+  {
+   "n": 22,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-famine-thorp-0",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Household Council",
+   "town": {
+    "name": "Makronea",
+    "tier": "thorp",
+    "population": 19,
+    "crisis": [
+     "famine"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Konstantina Bryennios",
+     "Philippos Bryennios"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 28
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Who really runs this thorp",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Household Council",
+    "Head · Konstantina Bryennios, the household elder",
+    "Second · Philippos Bryennios, the boat-headman"
+   ]
+  },
+  {
+   "n": 23,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-religious_conversion-thorp-2",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Each season it gets easier to buy an official at Archoakra: the thorp stays poor, the streets stay badly guarded, and nobody in the Elder Council is mending either.",
+   "town": {
+    "name": "Archoakra",
+    "tier": "thorp",
+    "population": 21,
+    "crisis": [
+     "religious_conversion"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Laskaris Botaneiates"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 6
+    },
+    "roster": [
+     "Subsistence farming",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Informal elder consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Nobody at Archoakra is in a position to take Elder Council's place; it has no rival, and nobody in the thorp is asking who comes next.",
+    "Crime and the hall",
+    "Each season it gets easier to buy an official at Archoakra: the thorp stays poor, the streets stay badly guarded, and nobody in the Elder Council is mending either.",
+    "Who really runs this thorp",
+    "For the DM only. Nothing here appears on a player view or a shared page."
+   ]
+  },
+  {
+   "n": 24,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-wartime-hamlet-3",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Criminal money is reaching the officials of Caercross one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "town": {
+    "name": "Caercross",
+    "tier": "hamlet",
+    "population": 84,
+    "crisis": [
+     "wartime",
+     "famine"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Hugh Doherty"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source",
+     "Bandit affiliate"
+    ]
+   },
+   "context": [
+    "No rival stands at Caercross to take Elder Council's place, and in a season of fighting that is small comfort: what threatens Elder Council now is the fighting across the hamlet.",
+    "Crime and the hall",
+    "Criminal money is reaching the officials of Caercross one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here.",
+    "Who really runs this hamlet",
+    "For the DM only. Nothing here appears on a player view or a shared page."
+   ]
+  },
+  {
+   "n": 25,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "onlyJust/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-hamlet-44",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Longzhou is fed, but only just.",
+   "town": {
+    "name": "Longzhou",
+    "tier": "hamlet",
+    "population": 21,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Xian Sun",
+     "Bixia Zhang"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Access to external mill",
+     "Maltster",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "No granary; two months in household stores.",
+    "Most meals start from fish from the local waters. Shared waterworks, fermentation, and intensive garden production structure urban food supply.",
+    "Longzhou is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "Longzhou lives off its fishing and little else. One bad year for the fishing would be a hungry year for the whole hamlet.",
+    "Economic Flows (3 active)▲?What is made here and what it depends on."
+   ]
+  },
+  {
+   "n": 26,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-slave_revolt-hamlet-3",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Elder Council",
+   "town": {
+    "name": "Breitenwiese",
+    "tier": "hamlet",
+    "population": 48,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Leopold Klein"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 16
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Hunter's lodge",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source",
+     "Fence (word of mouth)"
+    ]
+   },
+   "context": [
+    "Who really runs this hamlet",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Elder Council",
+    "Head · Leopold Klein, the eldest",
+    "Who answers to whom"
+   ]
+  },
+  {
+   "n": 27,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-thorp-28",
+   "source": "unattributed",
+   "file": "",
+   "quote": "What the religious houses take in and spend is a large part of the thorp's business.",
+   "town": {
+    "name": "Zelenoev",
+    "tier": "thorp",
+    "population": 18,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 100"
+    ],
+    "rulingThree": [
+     "Slobodan Popov"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "9%",
+    "Timber Trade Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.",
+    "Almost everyone's living at Zelenoev depends on one trade, whether or not they work in it. Faith carries real weight in Zelenoev's money. What the religious houses take in and spend is a large part of the thorp's business.",
+    "Trade Profile▲",
+    "Exports"
+   ]
+  },
+  {
+   "n": 28,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-thorp-21",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Elder Council",
+   "town": {
+    "name": "Ulaankhurel",
+    "tier": "thorp",
+    "population": 17,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Urangua Tayichi'ud",
+     "Chino-Ujin Kereit"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Shepherd collective",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Who really runs this thorp",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Elder Council",
+    "Head · Urangua Tayichi'ud, the household elder",
+    "Second · Chino-Ujin Kereit, the head shepherd"
+   ]
+  },
+  {
+   "n": 29,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-thorp-6",
+   "source": "unattributed",
+   "file": "",
+   "quote": "The religious houses at Novapagus are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp.",
+   "town": {
+    "name": "Novapagus",
+    "tier": "thorp",
+    "population": 19,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Headman's Authority 100"
+    ],
+    "rulingThree": [
+     "Egnatius Brutus",
+     "Sulpicia Maximus"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Shepherd collective",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy",
+     "Local fence"
+    ]
+   },
+   "context": [
+    "Stone Quarrying Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.",
+    "Also earned, with no share recorded: Transit trade, goods passing through on the route, handled here on their way elsewhere.",
+    "More than half of what Novapagus earns comes from a single trade, and most households depend on it one way or another. The religious houses at Novapagus are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp. It has to buy its luxury goods from outside: the c",
+    "Trade Profile▲",
+    "Exports"
+   ]
+  },
+  {
+   "n": 30,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-thorp-36",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Priestly Guidance",
+   "town": {
+    "name": "Cnocbridge",
+    "tier": "thorp",
+    "population": 5,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Priestly Guidance 100"
+    ],
+    "rulingThree": [
+     "Eithne O'Connor",
+     "Clothra O'Connor"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Who really runs this thorp",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Priestly Guidance",
+    "Head · Eithne O'Connor, the elder priest",
+    "Second · Clothra O'Connor, the boat-headman"
+   ]
+  },
+  {
+   "n": 31,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-infiltrated-thorp-3",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Elder Council",
+   "town": {
+    "name": "Kaltenwiese",
+    "tier": "thorp",
+    "population": 6,
+    "crisis": [
+     "infiltrated"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "militia": true
+    },
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Hademar Meyer"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 1
+    },
+    "roster": [
+     "Subsistence farming",
+     "Access to external mill",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source",
+     "Household levy"
+    ]
+   },
+   "context": [
+    "Who really runs this thorp",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Elder Council",
+    "Head · Hademar Meyer, the eldest",
+    "The hall"
+   ]
+  },
+  {
+   "n": 32,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "practitioner/names"
+   ],
+   "views": [
+    "Systems/Magic"
+   ],
+   "seed": "r2s-mass_migration-thorp-3",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "Losing every practitioner here would be a loss and not a collapse.",
+   "town": {
+    "name": "Qal'atqala",
+    "tier": "thorp",
+    "population": 7,
+    "crisis": [
+     "mass_migration"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 100"
+    ],
+    "rulingThree": [
+     "Isa al-Rahman",
+     "Fuad ibn Ahmed"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Shepherd collective",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Infrastructure role: occasional",
+    "Reliance on magic, as judged at the first survey",
+    "There is magic at Qal'atqala and the thorp does not rest on it. Losing every practitioner here would be a loss and not a collapse.",
+    "== Systems/Outlook ==",
+    "✓ Viable"
+   ]
+  },
+  {
+   "n": 33,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "onlyJust/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-hamlet-1",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Divoino is fed, but only just.",
+   "town": {
+    "name": "Divoino",
+    "tier": "hamlet",
+    "population": 90,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 88",
+     "Religious Authorities 12"
+    ],
+    "rulingThree": [
+     "Uljana Popov",
+     "Dragomir Alexeyev",
+     "Alexei Volkov"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Alehouse",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Village headman",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "No granary; two months in household stores.",
+    "The table rests on fish from the local waters. Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.",
+    "Divoino is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "With only its fishing to fall back on, Divoino would feel a single failure there at every table within the season.",
+    "Economic Flows (2 active)▲?What is made here and what it depends on."
+   ]
+  },
+  {
+   "n": 34,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-indebted-thorp-1",
+   "source": "unattributed",
+   "file": "",
+   "quote": "A visitor to Ravenås would not guess at the trouble from the streets;",
+   "town": {
+    "name": "Ravenås",
+    "tier": "thorp",
+    "population": 14,
+    "crisis": [
+     "indebted"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Járnsaxa Thorsson",
+     "Eir Ragnarsson"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Shepherd collective",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "People in Ravenås hide what little they have saved, in case the creditor's agents come asking.",
+    "Much of what is earned here goes straight to the creditor, and nothing is left to build with.",
+    "Every year the debt stands, less of Ravenås's money reaches its defence. A visitor to Ravenås would not guess at the trouble from the streets; the thorp is shaken but standing.",
+    "Threat Assessment",
+    "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer."
+   ]
+  },
+  {
+   "n": 35,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "World/History"
+   ],
+   "seed": "r2s-under_siege-hamlet-3",
+   "source": "generator pool",
+   "file": "src/data/historyData.js",
+   "quote": "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+   "town": {
+    "name": "Rotholz",
+    "tier": "hamlet",
+    "population": 80,
+    "crisis": [
+     "under_siege"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 61",
+     "War Council 39"
+    ],
+    "rulingThree": [
+     "Margarete Schneider",
+     "Brunhild Weber",
+     "Mathilde Wagner"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Dairy farmer",
+     "Hunter's lodge",
+     "Periodic market",
+     "Alehouse",
+     "Stable yard",
+     "Access to external mill",
+     "Maltster",
+     "Resident smith (part-time)",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source",
+     "Shepherd"
+    ]
+   },
+   "context": [
+    "Disaster",
+    "The Great FireDisastercatastrophic",
+    "A fire that began in the lower districts consumed wooden buildings and merchant stalls across whole districts before it could be checked",
+    "17y ago",
+    "Living memory"
+   ]
+  },
+  {
+   "n": 36,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2r-thorp-20",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "Visitors to Bergdal are told which few streets to avoid, and the advice turns out to be right.",
+   "town": {
+    "name": "Bergdal",
+    "tier": "thorp",
+    "population": 27,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Záleif Eriksson"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Head-of-household consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Criminal Architecture & Public Order▲",
+    "A mix of safer and more exposed areas. Locals watch over the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid.",
+    "Visitors to Bergdal are told which few streets to avoid, and the advice turns out to be right.",
+    "What goes wrong at Bergdal goes wrong one thing at a time and belongs to whoever did it.",
+    "Armed Forces & Fortifications▲"
+   ]
+  },
+  {
+   "n": 37,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2r-village-53",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "Each power at Dongan keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
+   "town": {
+    "name": "Dongan",
+    "tier": "village",
+    "population": 269,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Merchant Guilds 48",
+     "Thieves' Guild 35",
+     "Elder Council 17"
+    ],
+    "rulingThree": [
+     "Lingling Xiao",
+     "Satoshi Zheng",
+     "Xiaoling Zheng"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 5
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Fisher's landing",
+     "Dairy farmer",
+     "Peat cutter",
+     "Salt works",
+     "Weekly market",
+     "Ale house",
+     "River ferry",
+     "River boatyard",
+     "Mill",
+     "Carpenter",
+     "Potter",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Smuggling waypoint"
+    ]
+   },
+   "context": [
+    "Volatile — political fracture",
+    "No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.",
+    "Each power at Dongan keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.",
+    "Criminal structure: Semi-organized networks",
+    "Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime."
+   ]
+  },
+  {
+   "n": 38,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Summary/Overview"
+   ],
+   "seed": "r2r-village-38",
+   "source": "written in code",
+   "file": "src/components/map/RealmComparisons.jsx",
+   "quote": "The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
+   "town": {
+    "name": "Drumdale",
+    "tier": "village",
+    "population": 230,
+    "crisis": [
+     "indebted"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 51",
+     "Creditor's Representative 30",
+     "Military Party 19"
+    ],
+    "rulingThree": [
+     "Alastair O'Brien",
+     "Órlaith Sheridan",
+     "Emmet Ryan"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Fisher's landing",
+     "Woodcutter's camp",
+     "Salt works",
+     "Travelers' inn",
+     "River boatyard",
+     "Mill",
+     "Thatcher",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Stable master"
+    ]
+   },
+   "context": [
+    "Open Tonight",
+    "The place",
+    "The merchant district of Drumdale looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years. The bells of Drumdale answer one another across the roofs, and the streets slow for them. A poet holds",
+    "Active crisisIndebted to Outside PowerOpen the Crisis tab",
+    "Newcomers to Drumdale soon learn who the village owes, and that their own dues will go to paying it."
+   ]
+  },
+  {
+   "n": 39,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-hamlet-11",
+   "source": "unattributed",
+   "file": "",
+   "quote": "What the religious houses take in and spend is a large part of the hamlet's business.",
+   "town": {
+    "name": "Riparipa",
+    "tier": "hamlet",
+    "population": 46,
+    "crisis": [],
+    "market": true,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Yelena Severus",
+     "Egeria Aurelius",
+     "Valeria Cicero"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Periodic market",
+     "Alehouse",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source",
+     "Palisade or earthworks",
+     "Citizen militia"
+    ]
+   },
+   "context": [
+    "Fish & Maritime Produce Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
+    "Timber Trade Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.",
+    "Riparipa lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole hamlet has a bad year. Faith carries real weight in Riparipa's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+    "Trade Profile▲",
+    "Exports"
+   ]
+  },
+  {
+   "n": 40,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-under_siege-thorp-0",
+   "source": "generator code",
+   "file": "src/generators/safetyProfile.js",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down.",
+   "town": {
+    "name": "Qaradavan",
+    "tier": "thorp",
+    "population": 9,
+    "crisis": [
+     "under_siege"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Jelme Naiman",
+     "Senggum Tayichi'ud"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy"
+    ]
+   },
+   "context": [
+    "Criminal Architecture & Public Order▲",
+    "Desperate — active siege",
+    "The military command has taken charge of the streets, and more harshly as the food runs down. People quarrel over rations, food is sold under the counter, and the hungry have started to steal.",
+    "Inside the siege at Qaradavan, people guard their food and keep an eye on their neighbours.",
+    "Active crime patterns"
+   ]
+  },
+  {
+   "n": 41,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "armedForce/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-famine-hamlet-3",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "The longer the hunger lasts at Malosk, the less its defenders can do, and nothing is filling the stores again yet.",
+   "town": {
+    "name": "Malosk",
+    "tier": "hamlet",
+    "population": 22,
+    "crisis": [
+     "famine"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Ivana Popov",
+     "Dobroslav Fedorov"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 18
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Wayside inn",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "In Malosk stealing food is the crime of the season, and neighbours who once shared now bar their doors.",
+    "No one can earn a normal living while the famine lasts, and every coin goes on food.",
+    "The longer the hunger lasts at Malosk, the less its defenders can do, and nothing is filling the stores again yet. The crisis could end Malosk, and what it spends on its defence now goes to keeping it alive.",
+    "Threat Assessment",
+    "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer."
+   ]
+  },
+  {
+   "n": 42,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-slave_revolt-thorp-1",
+   "source": "generator code",
+   "file": "src/generators/safetyProfile.js",
+   "quote": "Active armed conflict between revolt participants and security forces in contested districts.",
+   "town": {
+    "name": "Erdeniin",
+    "tier": "thorp",
+    "population": 15,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Enkhjargal Kereit",
+     "Organa Tayichi'ud"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 3
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Head-of-household consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Active crime patterns",
+    "revolt violence",
+    "Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets.",
+    "escape networks",
+    "Organised infrastructure helping enslaved persons escape. Safe houses, forged papers, passage out of the settlement. The same network that was small and cautious is now large and urgent."
+   ]
+  },
+  {
+   "n": 43,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-wartime-thorp-1",
+   "source": "written in code",
+   "file": "src/domain/display/institutionDisplayName.js",
+   "quote": "House of worship · Wayside shrine",
+   "town": {
+    "name": "Breitgate",
+    "tier": "thorp",
+    "population": 21,
+    "crisis": [
+     "wartime"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Christoph Becker"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Honey and beeswaxForaged goods",
+    "Faith & WorshipReligion & civic✓ Running",
+    "House of worship · Wayside shrine",
+    "Religious servicesEducation (basic)Poor relief",
+    "There is more to be had in the country around Breitgate than the thorp takes, and an outsider with money could make use of it."
+   ]
+  },
+  {
+   "n": 44,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-monster_pressure-thorp-0",
+   "source": "unattributed",
+   "file": "",
+   "quote": "A visitor to Umabagh would not guess at the trouble from the streets;",
+   "town": {
+    "name": "Umabagh",
+    "tier": "thorp",
+    "population": 16,
+    "crisis": [
+     "monster_pressure"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Swati Ahuja",
+     "Chandra Bhat"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Head-of-household consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Whatever is attacking around Umabagh, wolves, raiders or worse, is getting bolder, and the lookouts count the days between attacks.",
+    "Trade suffers as carts stop coming, more is spent on defence, and people grow afraid.",
+    "The beasts give Umabagh no rest between attacks, and each one costs the thorp something it cannot quickly replace. A visitor to Umabagh would not guess at the trouble from the streets; the thorp is shaken but standing.",
+    "Threat Assessment",
+    "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer."
+   ]
+  },
+  {
+   "n": 45,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "onlyJust/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-insurgency-village-1",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Collenovum is fed, but only just.",
+   "town": {
+    "name": "Collenovum",
+    "tier": "village",
+    "population": 200,
+    "crisis": [
+     "insurgency"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Reform Movement 53",
+     "Elder Council 47"
+    ],
+    "rulingThree": [
+     "Zosimus Celer",
+     "Valerianus Flaccus",
+     "Denter Gallus"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Fisher's landing",
+     "Mine",
+     "Salt works",
+     "Travelers' inn",
+     "Carriers' hiring hall",
+     "River ferry",
+     "Mill",
+     "Cobbler",
+     "Cartographer's workshop",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Palisade or earthworks",
+     "Citizen militia",
+     "Pack animal trader",
+     "Cooper"
+    ]
+   },
+   "context": [
+    "No granary; two months in household stores.",
+    "Most meals start from salted fish. Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
+    "Collenovum is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "Collenovum lives off its fishing and little else. One bad year for the fishing would be a hungry year for the whole village.",
+    "Economic Flows (7 active)▲?What is made here and what it depends on."
+   ]
+  },
+  {
+   "n": 46,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "famineToCome/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-famine-village-1",
+   "source": "unattributed",
+   "file": "",
+   "quote": "One bad year for the fishing would be a hungry year for the whole village.",
+   "town": {
+    "name": "Humen",
+    "tier": "village",
+    "population": 90,
+    "crisis": [
+     "famine"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Military/Guard 64",
+     "Headman's Authority 36"
+    ],
+    "rulingThree": [
+     "Ren Li",
+     "Xiangyu Huang",
+     "Emiko Guo"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 32
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Fisher's landing",
+     "River ferry",
+     "Mill",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Palisade or earthworks",
+     "Citizen militia"
+    ]
+   },
+   "context": [
+    "No granary; a few weeks in the larder.",
+    "The table rests on salted fish. Shared waterworks, fermentation, and intensive garden production structure urban food supply.",
+    "The fishing failed this year and took most of Humen's own food with it. What the village does not grow now has to be bought or done without until the next harvest. Food carts come into Humen most days, and they matter: a good part of what the village eats is grown elsewhere and brought in. It lives ",
+    "Economic Flows (3 active)▲?What is made here and what it depends on.",
+    "All (3)Issues (1)✓ Productive (2)"
+   ]
+  },
+  {
+   "n": 47,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "armedForce/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-village-18",
+   "source": "written in code",
+   "file": "src/domain/display/governanceAccount.js",
+   "quote": "The Military Party takes its orders no longer.",
+   "town": {
+    "name": "Weikou",
+    "tier": "village",
+    "population": 225,
+    "crisis": [
+     "religious_conversion"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Military Party 57",
+     "Household Council 43"
+    ],
+    "rulingThree": [
+     "Kenji Wang",
+     "Enlai Wang",
+     "Riko Zhang"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 8
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Mill",
+     "Blacksmith",
+     "Carpenter",
+     "Thatcher",
+     "Cobbler",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Village elder",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Adventurers' charter hall",
+     "Stable master"
+    ]
+   },
+   "context": [
+    "Stability",
+    "Tense (the creed is contested)",
+    "Kenji Wang, the village elder, holds the seat of the Household Council. The Household Council governs Weikou. Few in Weikou still accept the Household Council's right to rule. Poverty and crime have cost it its standing. The Military Party takes its orders no longer. The hall still gives its orders,",
+    "The Powers (2)▲",
+    "Who holds and who contests the seat. Open a power to see the institutions behind it."
+   ]
+  },
+  {
+   "n": 48,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "openTrade/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-under_siege-city-0",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "Traffic in and out of Bellaurbs goes through its gates, and that is where anyone arriving is first seen.",
+   "town": {
+    "name": "Bellaurbs",
+    "tier": "city",
+    "population": 13252,
+    "crisis": [
+     "under_siege"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "gate": true,
+     "watch": true,
+     "garrison": true,
+     "hospital": true,
+     "healer": true,
+     "mercenary": true,
+     "commander": true,
+     "court": true,
+     "prison": true
+    },
+    "powers": [
+     "Royal Authority 21",
+     "Military/Guard 21",
+     "Religious Authorities 18",
+     "Noble Families 12",
+     "Arcane Orders 9",
+     "War Council 9",
+     "Craft Guilds 5",
+     "The Arcane Circle 5"
+    ],
+    "rulingThree": [
+     "Valens Scipio",
+     "Marcus Gratus",
+     "Sabinus Ursus"
+    ],
+    "practitioners": 6,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 24
+    },
+    "roster": [
+     "Fish market",
+     "Mine",
+     "Salt works",
+     "Daily markets",
+     "Multiple market squares",
+     "Major annual fairs",
+     "Merchant guilds (15-40)",
+     "Inns and taverns (district)",
+     "Stable district",
+     "Shipyard",
+     "Docks/port facilities",
+     "Harbour master's office",
+     "Toll bridge",
+     "Customs house",
+     "City granaries",
+     "Warehouse district",
+     "Public bathhouse",
+     "Chroniclers' exchange",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Luxury goods quarter",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Bowyers & fletchers (guild)",
+     "Sawmill (commercial)",
+     "Brewery",
+     "Vintner",
+     "Tanner (established)",
+     "Fuller",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Ropemaker",
+     "Midwife",
+     "Cartographer's guild",
+     "Craft guilds (30-80)",
+     "Alchemist quarter",
+     "Parish churches (10-30)",
+     "Burial grounds and charnel house",
+     "Multiple monasteries",
+     "Cathedral (10,000+ only)",
+     "Major hospital",
+     "Foundling home",
+     "Elder Grove Council",
+     "Royal seat",
+     "Housing (500-4000 households)",
+     "Aqueduct or water system",
+     "City hall",
+     "Multiple courthouses",
+     "Large prison",
+     "Workhouse",
+     "City walls and gates",
+     "Professional city watch",
+     "Garrison",
+     "Citadel",
+     "Mercenary quarter",
+     "Mages' guild",
+     "Enchanter's shop",
+     "Scroll scribe",
+     "Teleportation circle",
+     "Hired blades",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Rookery",
+     "Theaters",
+     "Bardic college",
+     "Gambling halls",
+     "Red light district",
+     "Golem workforce",
+     "Furrier's district",
+     "Cobbler's guild",
+     "Tailor's guild",
+     "Multiple adventurers' guilds"
+    ]
+   },
+   "context": [
+    "Golem workforce",
+    "Constructed servants, put to the heavy work.",
+    "The city has a wall and arranges its day around the gates without noticing that it does. Traffic in and out of Bellaurbs goes through its gates, and that is where anyone arriving is first seen. It keeps a standing force: people whose work is the defense of this city and who are answerable for it as ",
+    "Supporting Capabilities▲",
+    "Arcane SupportPresent"
+   ]
+  },
+  {
+   "n": 49,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-insurgency-thorp-3",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "Some districts of Hochkirche are closed off now, and whatever happens there goes unrecorded and unpunished.",
+   "town": {
+    "name": "Hochkirche",
+    "tier": "thorp",
+    "population": 16,
+    "crisis": [
+     "insurgency"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Reform Movement 54",
+     "Household Council 46"
+    ],
+    "rulingThree": [
+     "Judith Koch",
+     "Mechthild Becker"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Head-of-household consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Dangerous — insurgency",
+    "Armed rebels are active. Some districts are closed off, and nobody is sure whose side a neighbour is on.",
+    "Some districts of Hochkirche are closed off now, and whatever happens there goes unrecorded and unpunished.",
+    "Active crime patterns",
+    "political violence"
+   ]
+  },
+  {
+   "n": 50,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "openTrade/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-under_siege-metropolis-2",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Plenty passes through Raassaray, and little of it stops.",
+   "town": {
+    "name": "Raassaray",
+    "tier": "metropolis",
+    "population": 33734,
+    "crisis": [
+     "under_siege"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "gate": true,
+     "watch": true,
+     "garrison": true,
+     "hospital": true,
+     "healer": true,
+     "mercenary": true,
+     "commander": true,
+     "court": true,
+     "prison": true
+    },
+    "powers": [
+     "Military/Guard 36",
+     "Grand Guild Consortium 9",
+     "War Council 9",
+     "Religious Authorities 9",
+     "Arcane Orders 8",
+     "Noble Houses 6",
+     "The Order of the Watch 20",
+     "The Highborn Circle 3"
+    ],
+    "rulingThree": [
+     "Yasmeen al-Misri",
+     "Waad al-Karimi",
+     "Waad al-Qadir"
+    ],
+    "practitioners": 4,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Fish market",
+     "Charcoal burner",
+     "Stone quarry",
+     "Furrier's district",
+     "District markets (5-10)",
+     "Multiple market squares",
+     "Major annual fairs",
+     "International trade center",
+     "Merchant guilds (50-100+)",
+     "Pawnbroker",
+     "Inns and taverns (district)",
+     "Coaching inn",
+     "Stable district",
+     "Beast trainers",
+     "Toll bridge",
+     "Customs house",
+     "State granary complex",
+     "Warehouse district",
+     "Public bathhouse",
+     "Auction house",
+     "Mint (official)",
+     "Chroniclers' exchange",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Bowyers & fletchers (guild)",
+     "Sawmill (commercial)",
+     "Brewery",
+     "Vintner",
+     "Tanners",
+     "Fuller",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Brickmaker",
+     "Cobbler's guild",
+     "Tailor's guild",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Glassmakers",
+     "Ropemaker",
+     "Midwife",
+     "Cartographer's guild",
+     "Craft guilds (100-150+)",
+     "Parish churches (50-100+)",
+     "Cemetery network",
+     "Major monasteries (5-10)",
+     "Great cathedral",
+     "Hospital network",
+     "Guild consortium",
+     "Town crier",
+     "Housing (3500+ households)",
+     "Advanced water infrastructure",
+     "City hall",
+     "Palace/government complex",
+     "Multiple court buildings",
+     "Massive prison",
+     "Sewage system",
+     "Great library",
+     "Massive walls and fortifications",
+     "Professional city watch",
+     "Multiple garrisons",
+     "Citadel",
+     "Mercenary quarter",
+     "Veteran's lodge",
+     "Mages' district",
+     "Academy of magic",
+     "Enchanter's shop",
+     "Scroll scribe",
+     "Multiple adventurers' guilds",
+     "Hired blades",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Smuggling network",
+     "Whisper market",
+     "Multiple theaters",
+     "Bardic college",
+     "Gambling district",
+     "Brothel (red light district)",
+     "Fighting pits",
+     "Colosseum/arena",
+     "Charlatan fortune tellers",
+     "Post relay station",
+     "Elder Grove Council"
+    ]
+   },
+   "context": [
+    "Output",
+    "36/100",
+    "Plenty passes through Raassaray, and little of it stops. The metropolis is poor, and its people say so to anyone who asks.",
+    "Income Sources▲",
+    "26%"
+   ]
+  },
+  {
+   "n": 51,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "rulingFaces/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-thorp-3",
+   "source": "written in code",
+   "file": "src/components/new/tabs/WhoRunsThisTownPanel.jsx",
+   "quote": "The ruling three of Elder Council",
+   "town": {
+    "name": "Gantulgaabad",
+    "tier": "thorp",
+    "population": 12,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Ergene Taichiud",
+     "Borchigid Kiyad"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Informal elder consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Who really runs this thorp",
+    "For the DM only. Nothing here appears on a player view or a shared page.",
+    "The ruling three of Elder Council",
+    "Head · Ergene Taichiud, the eldest",
+    "Second · Borchigid Kiyad, the boat-headman"
+   ]
+  },
+  {
+   "n": 52,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-hamlet-4",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Two powers have stopped coming to Headman's Authority meetings.",
+   "town": {
+    "name": "Gantulgaiin",
+    "tier": "hamlet",
+    "population": 41,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 100"
+    ],
+    "rulingThree": [
+     "Yanjmaa Jalayir",
+     "Güchlüg Kereit",
+     "Barlas Jadaran"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Periodic market",
+     "Pack animal trader",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source",
+     "Adventurers' charter hall"
+    ]
+   },
+   "context": [
+    "Stability",
+    "Fractured — no stable governing authority",
+    "Gantulgaiin is governed by the Headman's Authority. Yanjmaa Jalayir, the headman, holds its seat. Few in Gantulgaiin still accept the Headman's Authority's right to rule. Crime and poverty have cost it its standing. Two powers have stopped coming to Headman's Authority meetings. Each makes its own d",
+    "The Powers (1)▲",
+    "Who holds and who contests the seat. Open a power to see the institutions behind it."
+   ]
+  },
+  {
+   "n": 53,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-slave_revolt-village-2",
+   "source": "generator code",
+   "file": "src/generators/safetyProfile.js",
+   "quote": "Stolen and improvised weapons circulating in the revolt-held districts.",
+   "town": {
+    "name": "Mönkhkotan",
+    "tier": "village",
+    "population": 106,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Revolt Leadership 51",
+     "Elder Council 49"
+    ],
+    "rulingThree": [
+     "Tuyaa Arulad",
+     "Borchigid Jalayir",
+     "Dogshin Ongirad"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 9
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Ale house",
+     "Mill",
+     "Sawmill",
+     "Midwife",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Dwellings (15-100)",
+     "Multiple water sources"
+    ]
+   },
+   "context": [
+    "Both the authorities and the revolt leadership are pressing people for information. Silence is being interpreted as allegiance. Some residents have already left, so they will not be forced to choose.",
+    "weapons trade",
+    "Stolen and improvised weapons circulating in the revolt-held districts. Some are being smuggled in from outside. The black market is very active.",
+    "Armed Forces & Fortifications▲",
+    "Unfortified. No perimeter walls. Defenders cannot control entry points or create chokepoints."
+   ]
+  },
+  {
+   "n": 54,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Summary/Overview",
+    "World/History"
+   ],
+   "seed": "r2r-hamlet-44",
+   "source": "generator pool",
+   "file": "src/data/historyData.js",
+   "quote": "A fire that began in the riverside quarter consumed barges, warehouses, and wharf infrastructure across whole districts before it could be checked",
+   "town": {
+    "name": "Longzhou",
+    "tier": "hamlet",
+    "population": 21,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Xian Sun",
+     "Bixia Zhang"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Access to external mill",
+     "Maltster",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Tensions & Conflicts▲?Who is at odds with whom, and how badly.",
+    "▸",
+    "A fire that began in the riverside quarter consumed barges, warehouses, and wharf infrastructure across whole districts before it could be checked",
+    "Survivors seeking someone to blameRebuilders and profiteersThose accused of setting it",
+    "Bixia Zhang has found a new source for what Xian Sun supplies. Xian Sun has not been told."
+   ]
+  },
+  {
+   "n": 55,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-village-56",
+   "source": "generator code",
+   "file": "src/generators/power/factionStanding.js",
+   "quote": "Three powers stand almost level here, and no one leads;",
+   "town": {
+    "name": "Treford",
+    "tier": "village",
+    "population": 117,
+    "crisis": [
+     "succession_void"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "The Highborn Circle 60",
+     "Elder Council 40"
+    ],
+    "rulingThree": [
+     "Fionnuala Sheridan",
+     "Kilian Sullivan",
+     "Kathleen Kelly"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Fisher's landing",
+     "Salt works",
+     "River ferry",
+     "River boatyard",
+     "Mill",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Palisade or earthworks",
+     "Citizen militia"
+    ]
+   },
+   "context": [
+    "Contests the seatNoble60▼",
+    "↑ Holds powerGovernment40▲",
+    "The oldest heads of the community decide things together; people follow them out of respect and custom, not law. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.",
+    "Holds the title; the decisions that matter are made by The Highborn Circle.",
+    "== Systems/Defense =="
+   ]
+  },
+  {
+   "n": 56,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "smallMargin/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-politically_fractured-metropolis-1",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Nokhoiobo feeds itself with a small margin.",
+   "town": {
+    "name": "Nokhoiobo",
+    "tier": "metropolis",
+    "population": 41777,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "gate": true,
+     "watch": true,
+     "garrison": true,
+     "hospital": true,
+     "healer": true,
+     "mercenary": true,
+     "commander": true,
+     "court": true,
+     "prison": true
+    },
+    "powers": [
+     "Religious Authorities 17",
+     "Thieves' Guild 16",
+     "Shadow Senate 14",
+     "The Independent Bloc 13",
+     "Merchant Guilds 12",
+     "Arcane Orders 12",
+     "The Grey Council 7",
+     "The Black Circle 9"
+    ],
+    "rulingThree": [
+     "Ulugh Kereit",
+     "Walun Seljuk",
+     "Borte Merkit"
+    ],
+    "practitioners": 13,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 45
+    },
+    "roster": [
+     "Charcoal burner",
+     "Mine",
+     "Furrier's district",
+     "District markets (5-10)",
+     "Multiple market squares",
+     "Major annual fairs",
+     "International trade center",
+     "Merchant guilds (50-100+)",
+     "Banking district",
+     "Pawnbroker",
+     "Inns and taverns (district)",
+     "Coaching inn",
+     "Stable district",
+     "Beast trainers",
+     "Customs house",
+     "State granary complex",
+     "Warehouse district",
+     "Public bathhouse",
+     "Auction house",
+     "Mint (official)",
+     "Chroniclers' exchange",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Luxury goods quarter",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Bowyers & fletchers (guild)",
+     "Sawmill (commercial)",
+     "Brewery",
+     "Vintner",
+     "Tanners",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Brickmaker",
+     "Cobbler's guild",
+     "Tailor's guild",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Glassmakers",
+     "Ropemaker",
+     "Midwife",
+     "Cartographer's guild",
+     "Craft guilds (100-150+)",
+     "Parish churches (50-100+)",
+     "Cemetery network",
+     "Major monasteries (5-10)",
+     "Great cathedral",
+     "Hospital network",
+     "Elder Grove Council",
+     "City administration",
+     "Town crier",
+     "Housing (3500+ households)",
+     "Advanced water infrastructure",
+     "City hall",
+     "Palace/government complex",
+     "Multiple court buildings",
+     "Massive prison",
+     "Workhouse",
+     "Great library",
+     "Massive walls and fortifications",
+     "Professional city watch",
+     "Multiple garrisons",
+     "Citadel",
+     "Mercenary quarter",
+     "Veteran's lodge",
+     "Mages' district",
+     "Academy of magic",
+     "Enchanter's shop",
+     "Scroll scribe",
+     "Teleportation circle",
+     "Planar embassy",
+     "Multiple adventurers' guilds",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Smuggling network",
+     "Multiple criminal factions",
+     "Front businesses",
+     "Underground city",
+     "Whisper market",
+     "Black market bazaar",
+     "Assassins' guild",
+     "Multiple theaters",
+     "Bardic college",
+     "Gambling district",
+     "Red light district",
+     "Fighting pits",
+     "Colosseum/arena",
+     "Charlatan fortune tellers",
+     "Planar traders",
+     "Golem workforce",
+     "Dream parlors (high magic)",
+     "Airship docking (high magic)",
+     "Message network (high magic)",
+     "Stone quarry",
+     "Toll bridge",
+     "Docks/port facilities",
+     "Harbour master's office"
+    ]
+   },
+   "context": [
+    "Stores: a granary, 15 months of grain.",
+    "Meals follow the season and what the household has put by.",
+    "Nokhoiobo feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
+    "Food carts come into Nokhoiobo most days, and they matter: a good part of what the metropolis eats is grown elsewhere and brought in.",
+    "Economic Flows (39 active · 3 impaired)▲?What is made here and what it depends on."
+   ]
+  },
+  {
+   "n": 57,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2r-thorp-16",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "The danger at Beizhou comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+   "town": {
+    "name": "Beizhou",
+    "tier": "thorp",
+    "population": 10,
+    "crisis": [
+     "wartime"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Military/Guard 52",
+     "Feudal Stewardship 48"
+    ],
+    "rulingThree": [
+     "Wen Zhao"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 10
+    },
+    "roster": [
+     "Subsistence farming",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Lord's reeve",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy",
+     "Outlaw shelter",
+     "Local fence"
+    ]
+   },
+   "context": [
+    "conscription fraud",
+    "Wealthy families paying poorer ones to send sons in their place. The practice is illegal, widespread, and poorly enforced. It concentrates the actual dying in specific households.",
+    "The danger at Beizhou comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+    "Armed Forces & Fortifications1 wall 1 force ▲",
+    "Fortifications"
+   ]
+  },
+  {
+   "n": 58,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "other"
+   ],
+   "words": [
+    "practitioner/names"
+   ],
+   "views": [
+    "Systems/Magic"
+   ],
+   "seed": "r2s-under_siege-hamlet-3",
+   "source": "corpus pool",
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "quote": "Losing every practitioner here would be a loss and not a collapse.",
+   "town": {
+    "name": "Rotholz",
+    "tier": "hamlet",
+    "population": 80,
+    "crisis": [
+     "under_siege"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 61",
+     "War Council 39"
+    ],
+    "rulingThree": [
+     "Margarete Schneider",
+     "Brunhild Weber",
+     "Mathilde Wagner"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Dairy farmer",
+     "Hunter's lodge",
+     "Periodic market",
+     "Alehouse",
+     "Stable yard",
+     "Access to external mill",
+     "Maltster",
+     "Resident smith (part-time)",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source",
+     "Shepherd"
+    ]
+   },
+   "context": [
+    "Infrastructure role: occasional",
+    "Reliance on magic, as judged at the first survey",
+    "There is magic at Rotholz and the hamlet does not rest on it. Losing every practitioner here would be a loss and not a collapse.",
+    "== Systems/Outlook ==",
+    "✗ Not viable"
+   ]
+  },
+  {
+   "n": 59,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "clergy/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-indebted-hamlet-1",
+   "source": "generator code",
+   "file": "src/generators/power/rulingStructure.js",
+   "quote": "The village priest is the most educated person for miles;",
+   "town": {
+    "name": "Hadithaqila",
+    "tier": "hamlet",
+    "population": 63,
+    "crisis": [
+     "indebted"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Free Elder Council 57",
+     "Religious Authorities 43"
+    ],
+    "rulingThree": [
+     "Dawud ibn Khalid",
+     "Laith al-Amin",
+     "Imad ibn Rashid"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Hunter's lodge",
+     "Pack animal trader",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Informal elder consensus",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "↑ Holds powerGovernment57▼",
+    "Contests the seatReligious43▲",
+    "The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale. They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.",
+    "== Systems/Defense ==",
+    "Defensive posture"
+   ]
+  },
+  {
+   "n": 60,
+   "why": [
+    "whole list"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2r-thorp-22",
+   "source": "generator code",
+   "file": "src/generators/safetyProfile.js",
+   "quote": "Some districts are closed off, and nobody is sure whose side a neighbour is on.",
+   "town": {
+    "name": "Kaanche",
+    "tier": "thorp",
+    "population": 11,
+    "crisis": [
+     "insurgency"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Iztli Chuc",
+     "Akna Balam"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 1
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Access to external mill",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Criminal Architecture & Public Order▲",
+    "Dangerous — insurgency",
+    "Armed rebels are active. Some districts are closed off, and nobody is sure whose side a neighbour is on.",
+    "Some districts of Kaanche are closed off now, and whatever happens there goes unrecorded and unpunished.",
+    "Active crime patterns"
+   ]
+  },
+  {
+   "n": 61,
+   "why": [
+    "top-up streets"
+   ],
+   "families": [
+    "streets"
+   ],
+   "words": [
+    "streets/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2s-succession_void-hamlet-0",
+   "source": "generator pool",
+   "file": "src/data/cultureProfiles.js",
+   "quote": "Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
+   "town": {
+    "name": "Pratocivitas",
+    "tier": "hamlet",
+    "population": 99,
+    "crisis": [
+     "succession_void"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "The Highborn Circle 59",
+     "Free Elder Council 41"
+    ],
+    "rulingThree": [
+     "Antonia Corvinus",
+     "Scaevola Nero",
+     "Zenobia Silanus"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Shepherd",
+     "Dairy farmer",
+     "Stone quarry",
+     "Hunter's lodge",
+     "Access to external mill",
+     "Resident smith (part-time)",
+     "Access to parish church",
+     "Burial ground",
+     "Informal elder consensus",
+     "Dwellings (5-25)",
+     "Water source",
+     "Palisade or earthworks",
+     "Citizen militia",
+     "Mine (open cast)"
+    ]
+   },
+   "context": [
+    "Pratocivitas grows more than it eats, with some to put by against a bad year.",
+    "No granary; two months in household stores.",
+    "Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
+    "Pratocivitas is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+    "Economic Flows (6 active)▲?What is made here and what it depends on."
+   ]
+  },
+  {
+   "n": 62,
+   "why": [
+    "top-up quarters"
+   ],
+   "families": [
+    "quarters"
+   ],
+   "words": [
+    "quarters/names"
+   ],
+   "views": [
+    "Systems/Defense"
+   ],
+   "seed": "r2s-slave_revolt-hamlet-1",
+   "source": "generator code",
+   "file": "src/generators/safetyProfile.js",
+   "quote": "Stolen and improvised weapons circulating in the revolt-held districts.",
+   "town": {
+    "name": "Radhagrad",
+    "tier": "hamlet",
+    "population": 36,
+    "crisis": [
+     "slave_revolt"
+    ],
+    "market": true,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Vijayalakshmi Das",
+     "Suresh Acharya",
+     "Nagendra Bhatt"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 8
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Mine (open cast)",
+     "Hunter's lodge",
+     "Periodic market",
+     "Caravanserai",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Both the authorities and the revolt leadership are pressing people for information. Silence is being interpreted as allegiance. Some residents have already left, so they will not be forced to choose.",
+    "weapons trade",
+    "Stolen and improvised weapons circulating in the revolt-held districts. Some are being smuggled in from outside. The black market is very active.",
+    "Armed Forces & Fortifications▲",
+    "Unfortified. No perimeter walls. Defenders cannot control entry points or create chokepoints."
+   ]
+  },
+  {
+   "n": 63,
+   "why": [
+    "top-up church words"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-thorp-32",
+   "source": "written in code",
+   "file": "src/domain/display/institutionDisplayName.js",
+   "quote": "House of worship",
+   "town": {
+    "name": "Hochsee",
+    "tier": "thorp",
+    "population": 8,
+    "crisis": [
+     "wartime"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Udelhild Schneider"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 9
+    },
+    "roster": [
+     "Subsistence farming",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Head-of-household consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Faith & WorshipReligion & civic○ Operational",
+    "Via",
+    "House of worship",
+    "Outputs",
+    "Religious servicesEducation (basic)Poor relief"
+   ]
+  },
+  {
+   "n": 64,
+   "why": [
+    "top-up church words"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-hamlet-57",
+   "source": "unattributed",
+   "file": "",
+   "quote": "What the religious houses take in and spend is a large part of the hamlet's business.",
+   "town": {
+    "name": "Ulanköl",
+    "tier": "hamlet",
+    "population": 89,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Free Elder Council 100"
+    ],
+    "rulingThree": [
+     "Narantuya Kereit",
+     "Otgontuya Ongut",
+     "Oyuntuya Jalayir"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Dairy farmer",
+     "Stable yard",
+     "Access to external mill",
+     "Carpenter (part-time)",
+     "Access to parish church",
+     "Burial ground",
+     "Informal elder consensus",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "9%",
+    "Iron & Metalwork Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.",
+    "More than half of what Ulanköl earns comes from a single trade, and most households depend on it one way or another. Faith carries real weight in Ulanköl's money. What the religious houses take in and spend is a large part of the hamlet's business. Every load of timber used at Ulanköl comes from els",
+    "Trade Profile▲",
+    "Exports"
+   ]
+  },
+  {
+   "n": 65,
+   "why": [
+    "top-up church words"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-hamlet-29",
+   "source": "written in code",
+   "file": "src/domain/display/institutionDisplayName.js",
+   "quote": "House of worship · Wayside shrine",
+   "town": {
+    "name": "Tighness",
+    "tier": "hamlet",
+    "population": 83,
+    "crisis": [],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Religious Authorities 53",
+     "Headman's Authority 47"
+    ],
+    "rulingThree": [
+     "Ide O'Brien",
+     "Baothghalach MacCarthy"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Village headman",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Flour and mealMilled lumberFulled cloth",
+    "Faith & WorshipReligion & civic✓ Running",
+    "House of worship · Wayside shrine",
+    "Religious servicesEducation (basic)Poor relief",
+    "Tighness buys in what it cannot make, and the trading keeps as many people busy as the making would."
+   ]
+  },
+  {
+   "n": 66,
+   "why": [
+    "top-up church words"
+   ],
+   "families": [
+    "church words"
+   ],
+   "words": [
+    "religiousHouses/names"
+   ],
+   "views": [
+    "Systems/Economics"
+   ],
+   "seed": "r2r-hamlet-20",
+   "source": "unattributed",
+   "file": "",
+   "quote": "What the religious houses take in and spend is a large part of the hamlet's business.",
+   "town": {
+    "name": "Jómsmark",
+    "tier": "hamlet",
+    "population": 99,
+    "crisis": [],
+    "market": true,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "militia": true
+    },
+    "powers": [
+     "Feudal Stewardship 55",
+     "Merchant Guilds 45"
+    ],
+    "rulingThree": [
+     "Skadi Ragnarsson",
+     "Kjara Eriksson",
+     "Styrkar Sigmundsson"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Shepherd",
+     "Periodic market",
+     "Stable yard",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Lord's steward",
+     "Dwellings (5-25)",
+     "Water source",
+     "Citizen militia",
+     "Smuggling waypoint"
+    ]
+   },
+   "context": [
+    "Iron & Metalwork Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
+    "Also earned, with no share recorded: Transit trade, goods passing through on the route, handled here on their way elsewhere.",
+    "Jómsmark lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole hamlet has a bad year. Faith carries real weight in Jómsmark's money. What the religious houses take in and spend is a large part of the hamlet's business. It has to buy its luxury goods from outsid",
+    "Trade Profile▲",
+    "Exports"
+   ]
+  },
+  {
+   "n": 67,
+   "why": [
+    "top-up powers count"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Summary/Overview"
+   ],
+   "seed": "r2r-village-42",
+   "source": "generator pool",
+   "file": "src/generators/narrativeText.js",
+   "quote": "Mugain Kennedy, the priest, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+   "town": {
+    "name": "Rossholme",
+    "tier": "village",
+    "population": 144,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Religious Authorities 76",
+     "Priestly Guidance 24"
+    ],
+    "rulingThree": [
+     "Eanán Kelly",
+     "Aengus O'Neill",
+     "Nóinín Carey"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Peat cutter",
+     "Mill",
+     "Cartographer's workshop",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Village elder",
+     "Dwellings (15-100)",
+     "Multiple water sources",
+     "Maltster",
+     "Sawmill"
+    ]
+   },
+   "context": [
+    "Active crisisPolitically FracturedOpen the Crisis tab",
+    "The quarrel among Rossholme's powers grows sharper each week, and neighbours who took different sides have stopped speaking.",
+    "Mugain Kennedy, the priest, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+    "Systems Health▲?Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as the campaign advances.",
+    "Prosperity"
+   ]
+  },
+  {
+   "n": 68,
+   "why": [
+    "top-up powers count"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Summary/Overview"
+   ],
+   "seed": "r2r-hamlet-16",
+   "source": "generator pool",
+   "file": "src/generators/narrativeText.js",
+   "quote": "Since the harvest failed, whoever holds the food in Oxteha holds the power, and at least three powers are fighting over the stores.",
+   "town": {
+    "name": "Oxteha",
+    "tier": "hamlet",
+    "population": 20,
+    "crisis": [
+     "famine"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Rain Chuc",
+     "Uinal Cohuoh",
+     "Nakul Chuc"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 36
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Fisher's landing",
+     "Stone quarry",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (5-25)",
+     "Water source",
+     "Palisade or earthworks",
+     "Citizen militia"
+    ]
+   },
+   "context": [
+    "Active crisisFamineOpen the Crisis tab",
+    "In Oxteha you see thin faces at every door, and more of them each time you pass through.",
+    "Since the harvest failed, whoever holds the food in Oxteha holds the power, and at least three powers are fighting over the stores.",
+    "Systems Health▲?Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as the campaign advances.",
+    "Prosperity"
+   ]
+  },
+  {
+   "n": 69,
+   "why": [
+    "top-up powers count"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2s-succession_void-thorp-1",
+   "source": "generator code",
+   "file": "src/generators/power/factionStanding.js",
+   "quote": "Three powers stand almost level here, and no one leads;",
+   "town": {
+    "name": "Schwarzdorf",
+    "tier": "thorp",
+    "population": 11,
+    "crisis": [
+     "succession_void",
+     "famine"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Priestly Guidance 100"
+    ],
+    "rulingThree": [
+     "Dominik Wagner"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "↑ Holds powerReligious100▲",
+    "↳1 member · first Dominik Wagner",
+    "The priest guides the community, and disputes are brought to the priest to settle. Three powers stand almost level here, and no one leads; every council vote has to be bargained for.",
+    "The shape of authority",
+    "The Priestly Guidance at Schwarzdorf rules by its faith: every decision is checked against doctrine first, and only then against what the thorp needs."
+   ]
+  },
+  {
+   "n": 70,
+   "why": [
+    "top-up powers count"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "World/NPCs"
+   ],
+   "seed": "r2s-politically_fractured-thorp-2",
+   "source": "generator pool",
+   "file": "src/data/stressInstitutionEffects.js",
+   "quote": "Secret: Has been playing both powers simultaneously, feeding each the other's plans",
+   "town": {
+    "name": "Ripavetum",
+    "tier": "thorp",
+    "population": 9,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Decima Aquila",
+     "Seianus Maximus"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Shepherd collective",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy"
+    ]
+   },
+   "context": [
+    "Disposition intuitive, marginal",
+    "How they deal Volunteers information before you ask. Seems invested in your success here.",
+    "Secret: Has been playing both powers simultaneously, feeding each the other's plans",
+    "Decima Aquila●",
+    "Household elder · first of Elder Council"
+   ]
+  },
+  {
+   "n": 71,
+   "why": [
+    "top-up powers count"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Summary/Overview"
+   ],
+   "seed": "r2s-politically_fractured-thorp-2",
+   "source": "generator pool",
+   "file": "src/generators/narrativeText.js",
+   "quote": "Decima Aquila, the household elder, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+   "town": {
+    "name": "Ripavetum",
+    "tier": "thorp",
+    "population": 9,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Elder Council 100"
+    ],
+    "rulingThree": [
+     "Decima Aquila",
+     "Seianus Maximus"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Communal root cellar",
+     "Shepherd collective",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy"
+    ]
+   },
+   "context": [
+    "Active crisisPolitically FracturedOpen the Crisis tab",
+    "Fights between Ripavetum's powers break out more often now, and each side keeps its own people close at hand.",
+    "Decima Aquila, the household elder, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+    "Systems Health▲?Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as the campaign advances.",
+    "Prosperity"
+   ]
+  },
+  {
+   "n": 72,
+   "why": [
+    "top-up powers count"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Summary/Overview"
+   ],
+   "seed": "r2r-village-30",
+   "source": "generator pool",
+   "file": "src/generators/narrativeText.js",
+   "quote": "Hristo Kozlov, the bloc's speaker, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+   "town": {
+    "name": "Celono",
+    "tier": "village",
+    "population": 175,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": true,
+     "accessOnly": false,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "The Independent Bloc 66",
+     "Elected Reeve 34"
+    ],
+    "rulingThree": [
+     "Dobroslav Dmitriev",
+     "Zorana Volkov",
+     "Olia Kozlov"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Farmland",
+     "Common grazing land",
+     "Travelers' inn",
+     "Stable master",
+     "Mill",
+     "Sawmill",
+     "Parish church",
+     "Graveyard",
+     "Priest (resident)",
+     "Village reeve",
+     "Dwellings (15-100)",
+     "Multiple water sources"
+    ]
+   },
+   "context": [
+    "Active crisisPolitically FracturedOpen the Crisis tab",
+    "Each power in Celono now blocks the others more often than it acts, and less gets decided every season.",
+    "Hristo Kozlov, the bloc's speaker, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+    "Systems Health▲?Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as the campaign advances.",
+    "Prosperity"
+   ]
+  },
+  {
+   "n": 73,
+   "why": [
+    "top-up powers count"
+   ],
+   "families": [
+    "powers count"
+   ],
+   "words": [
+    "powersCount/names"
+   ],
+   "views": [
+    "Summary/Crisis"
+   ],
+   "seed": "r2s-politically_fractured-hamlet-3",
+   "source": "unattributed",
+   "file": "",
+   "quote": "Two or three powers each run part of Achillathra, and none will give way.",
+   "town": {
+    "name": "Achillathra",
+    "tier": "hamlet",
+    "population": 49,
+    "crisis": [
+     "politically_fractured"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Headman's Authority 100"
+    ],
+    "rulingThree": [
+     "Thodoros Chortasmenos",
+     "Eirenaion Chrysoberges"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Common grazing land",
+     "Access to external mill",
+     "Carpenter (part-time)",
+     "Access to parish church",
+     "Burial ground",
+     "Village headman",
+     "Dwellings (5-25)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "== Summary/Crisis ==",
+    "Politically Fractured.",
+    "Two or three powers each run part of Achillathra, and none will give way. Daily life goes on, but nothing is done without asking whose side it helps.",
+    "Who it touches",
+    "target: Thodoros Chortasmenos · holds the seat, and the right to it is already in dispute"
+   ]
+  },
+  {
+   "n": 74,
+   "why": [
+    "top-up role kept"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "clergy/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-thorp-41",
+   "source": "generator code",
+   "file": "src/data/powerSiblings.js",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle.",
+   "town": {
+    "name": "Xinyuan",
+    "tier": "thorp",
+    "population": 22,
+    "crisis": [
+     "plague_onset"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Religious Authorities 71",
+     "Priestly Guidance 29"
+    ],
+    "rulingThree": [
+     "Yun Yang",
+     "Xiaoling Yang",
+     "Tianmei Yang"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 13
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Woodcutter's camp",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source",
+     "Household levy",
+     "Palisade"
+    ]
+   },
+   "context": [
+    "Contests the seatReligious71▼",
+    "↑ Holds powerReligious29▲",
+    "The priest guides the community, and disputes are brought to the priest to settle.",
+    "Holds the title; the decisions that matter are made by Religious Authorities.",
+    "== Systems/Defense =="
+   ]
+  },
+  {
+   "n": 75,
+   "why": [
+    "top-up role kept"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "clergy/names"
+   ],
+   "views": [
+    "Systems/Services"
+   ],
+   "seed": "r2r-thorp-32",
+   "source": "generator code",
+   "file": "src/data/institutionServices.js",
+   "quote": "The priest manages the graveyard.",
+   "town": {
+    "name": "Hochsee",
+    "tier": "thorp",
+    "population": 8,
+    "crisis": [
+     "wartime"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": false,
+    "defence": {},
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Udelhild Schneider"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 9
+    },
+    "roster": [
+     "Subsistence farming",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Head-of-household consensus",
+     "Dwellings (1-8)",
+     "Water source"
+    ]
+   },
+   "context": [
+    "Burial ground",
+    "Last rites",
+    "Funeral rites and burial. The priest manages the graveyard.",
+    "Access to a house of worship",
+    "Weekly rite"
+   ]
+  },
+  {
+   "n": 76,
+   "why": [
+    "top-up role kept"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "clergy/names"
+   ],
+   "views": [
+    "Systems/Services"
+   ],
+   "seed": "r2r-thorp-27",
+   "source": "generator code",
+   "file": "src/data/institutionServices.js",
+   "quote": "The priest manages the graveyard.",
+   "town": {
+    "name": "Olympnea",
+    "tier": "thorp",
+    "population": 25,
+    "crisis": [
+     "occupied"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": false,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Household Council 100"
+    ],
+    "rulingThree": [
+     "Stephanos Argyros",
+     "Zosime Alexios"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": true,
+     "normalImportPct": 0
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Access to external mill",
+     "Access to parish church",
+     "Burial ground",
+     "Dwellings (1-8)",
+     "Water source",
+     "Palisade",
+     "Household levy"
+    ]
+   },
+   "context": [
+    "Burial ground",
+    "Last rites",
+    "Funeral rites and burial. The priest manages the graveyard.",
+    "Access to a house of worship",
+    "Weekly rite"
+   ]
+  },
+  {
+   "n": 77,
+   "why": [
+    "top-up role kept"
+   ],
+   "families": [
+    "role kept"
+   ],
+   "words": [
+    "clergy/names"
+   ],
+   "views": [
+    "Systems/Power"
+   ],
+   "seed": "r2r-thorp-41",
+   "source": "generator code",
+   "file": "src/generators/power/rulingStructure.js",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight.",
+   "town": {
+    "name": "Xinyuan",
+    "tier": "thorp",
+    "population": 22,
+    "crisis": [
+     "plague_onset"
+    ],
+    "market": false,
+    "faith": {
+     "hasChurch": false,
+     "accessOnly": true,
+     "seniorCleric": null
+    },
+    "sacredHouse": true,
+    "guard": true,
+    "defence": {
+     "walls": true,
+     "palisade": true,
+     "militia": true
+    },
+    "powers": [
+     "Religious Authorities 71",
+     "Priestly Guidance 29"
+    ],
+    "rulingThree": [
+     "Yun Yang",
+     "Xiaoling Yang",
+     "Tianmei Yang"
+    ],
+    "practitioners": 0,
+    "food": {
+     "growsMoreThanEats": false,
+     "normalImportPct": 13
+    },
+    "roster": [
+     "Subsistence farming",
+     "Fishing community",
+     "Woodcutter's camp",
+     "Access to external mill",
+     "Wayside shrine",
+     "Access to parish church",
+     "Burial ground",
+     "Household elder",
+     "Dwellings (1-8)",
+     "Water source",
+     "Household levy",
+     "Palisade"
+    ]
+   },
+   "context": [
+    "Religious Authorities",
+    "Contests the seatReligious71▲",
+    "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight.",
+    "⚠",
+    "Priestly Guidance"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2 @@
+        && n.arguments.length >= 1 && isP(n.arguments[0]))
+      || (ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression) && n.expression.getText() === 'Reflect.get' && n.arguments.length >= 1 && isP(n.arguments[0]))) { found = true; return; }
