@@ -21,13 +21,13 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2957
+          "value": 2960
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "4e364b74d9bf2e53e6a65cc7fad48009cbf8ed722a970dd92e02cf5fc5911fb9"
+          "value": "a926c9a12b9531b96788652e293db874b85594bdbe4bacae664c0819ca71206b"
         }
       ]
     },
@@ -42,7 +42,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2957
+          "value": 2960
         },
         {
           "kind": "integer",
@@ -53,7 +53,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "21ae7355b4aab3ebfba8fbf64d33d4a830570be40ab754a34c98cef219378c4d"
+          "value": "ba7009474bd043c9622415d25534150d63a8964338c7be33d4e56e7e6935c693"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "3221fb79d1137080c459e4daa994f340383436ef320bfe3a9c652c4d9c0c4ed2"
+          "value": "1151ab2f1d3ed9a89a5344e351e1a8ede6cfed10a2c673477ed7166058c6d784"
         }
       ]
     },

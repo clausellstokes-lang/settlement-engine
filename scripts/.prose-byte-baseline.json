@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 264067,
-      "gzip": 35570,
+      "raw": 265418,
+      "gzip": 35721,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -827,6 +827,14 @@
       "toRaw": 296086,
       "gzipAfter": 37845,
       "reason": "+19 B raw over the committed 296067 (gzip level 9: 37843 -> 37845): five defence-desk lines reworded off claims the record does not hold (no court, paid hands safe, barely keeping up, a mages' guild, every practitioner) (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-4 round 3 #642",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 264150,
+      "toRaw": 265418,
+      "gzipAfter": 35721,
+      "reason": "+1351 B raw over the committed 264067 (gzip level 9: 35570 -> 35721): DS-DEF-2 walls with NO force declared off a hired company (no mercenary on v1-v6); three lines for walls with a hired company (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
