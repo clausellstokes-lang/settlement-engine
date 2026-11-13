@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-13T09:46:15.078Z",
+  "generatedAt": "2026-11-13T20:03:33.879Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "fa9517c687a7f9b1",
+  "sourceHash": "25e9fd17428e64ce",
   "inputs": [
     "src/data/bandLadders.js",
     "src/data/chainAccessNames.js",
@@ -43,6 +43,7 @@
     "src/domain/display/defenseDisplay.js",
     "src/domain/display/defenseScoreBands.js",
     "src/domain/display/numberWords.js",
+    "src/domain/display/powerSentenceName.js",
     "src/domain/display/stateProse/stateProseKernel.js",
     "src/domain/display/threatAssessment.js",
     "src/domain/display/warStatus.js",
