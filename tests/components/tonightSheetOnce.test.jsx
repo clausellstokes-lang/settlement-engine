@@ -177,8 +177,14 @@ describe('X-51: one Tonight sheet', () => {
         if (!hookTexts.includes(h.text.replace(/[.!?]$/, '').toLowerCase())) offenders.push(`${seed}: hook not on the record: ${h.text}`);
       }
       const food = sheet.facts.find((f) => f.id === 'food');
-      const band = settlement.economicState?.foodSecurity?.foodRecord?.band;
-      if (food && !food.text.startsWith(FOOD_SECURITY_BANDS[band]?.label ?? '\u0000')) offenders.push(`${seed}: food fact misreads the band ${band}: ${food.text}`);
+      const record = settlement.economicState?.foodSecurity?.foodRecord;
+      const band = record?.band;
+      // RE-KEYED BY IDENTITY (R2-CODE-B-3 item 2b, the chair's ruling: a label of plenty never stands beside a deficit): the
+      // record's own band word, except where the record makes it false — "Secure"/"Surplus" with a share of the need unmet
+      // (gapPct > 0) reads the ladder's "Pressured"; "Import-Dependent" with no food brought in by trade reads "Deficit".
+      const ruled = (band === 'secure' || band === 'surplus') && Number(record?.gapPct) > 0 ? 'pressured'
+        : band === 'importDependent' && record?.normalImportPct === 0 ? 'deficit' : band;
+      if (food && !food.text.startsWith(`${FOOD_SECURITY_BANDS[ruled]?.label ?? '\u0000'}.`)) offenders.push(`${seed}: food fact misreads the band ${band}: ${food.text}`);
       for (const [name, s] of Object.entries(surfaces)) {
         for (const re of INVENTED) if (re.test(s.all)) offenders.push(`${seed} / ${name}: invented fallback prints (${re})`);
         for (const p of sheet.people) if (!s.all.includes(p.name)) offenders.push(`${seed} / ${name}: ${p.name} is composed but not printed`);

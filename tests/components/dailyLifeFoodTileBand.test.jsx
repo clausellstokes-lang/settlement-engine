@@ -27,6 +27,9 @@ vi.mock('../../src/lib/analytics.js', () => ({
 
 import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
 
 afterEach(cleanup);
 
@@ -54,4 +57,51 @@ describe('the Food tile and the food record', () => {
     expect(surplus + secureWithSpare, 'no generated town tested the cut').toBeGreaterThan(0);
     expect(wrong).toEqual([]);
   }, 120000);
+});
+
+/**
+ * ROUND THREE item 2b (the chair's ruling on the cut's #843 #1102 #1297 and the increment's #472 #668 #769): THE FOOD LABEL ON
+ * EVERY SURFACE READS ONE HOME (tonightSheet.js :: foodBandOf, the food record the Economics tab's stores sentence reads),
+ * and a label of plenty never stands beside a deficit. The readers' towns, born in their own shape.
+ */
+describe('ROUND THREE · the food label reads one home on the Daily Life tile and the Tonight sheet', () => {
+  /** @param {string} seed */
+  const cfgFor = (seed) => {
+    let m = seed.match(/^rr2s-(\w+)-([a-z_+]+)-([a-z_]+)-(\d+)$/);
+    if (m) return birthConfig({ ...DEFAULT_CONFIG, ...(m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] }), settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true });
+    m = /** @type {RegExpMatchArray} */ (seed.match(/^rpf-(\w+)-([a-z_+]+)-(\d+)$/));
+    return birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true });
+  };
+  const SEEDS = ['rr2s-city-famine-rand-1', 'rr2s-city-occupied-rand-1', 'rr2s-metropolis-wartime-rand-1', 'rpf-thorp-occupied-13', 'rpf-thorp-succession_void-13', 'rpf-thorp-under_siege-13'];
+  /** @param {any} s */
+  const tileOf = (s) => {
+    mocks.store = { settlement: s, savedSettlements: [], auth: { tier: 'premium' }, getCost: () => 0 };
+    const { container } = render(<DailyLifeTab settlement={s} />);
+    const tile = foodTile(container);
+    cleanup();
+    return tile;
+  };
+  test('each reader town: the tile prints the Tonight sheet\'s food word, and never "Secure" or "Surplus" beside a deficit', async () => {
+    await loadGenerationLawPayloads();
+    /** @type {Record<string, { tile: string | null, tonight: string, gap: number }>} */
+    const got = {};
+    for (const seed of SEEDS) {
+      const s = generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} });
+      const tonight = String(composeTonightSheet(s).facts.find((f) => f.id === 'food')?.text || '').split('. ')[0];
+      got[seed] = { tile: tileOf(s), tonight, gap: Number(s.economicState.foodSecurity.foodRecord.gapPct) };
+    }
+    for (const seed of SEEDS) expect(got[seed].tile, seed).toBe(got[seed].tonight);
+    expect(got['rr2s-city-famine-rand-1'].tile).toBe('Deficit — Active Famine');
+    expect(got['rpf-thorp-occupied-13']).toMatchObject({ tile: 'Pressured', gap: 2 });
+    expect(got['rpf-thorp-succession_void-13']).toMatchObject({ tile: 'Pressured', gap: 5 });
+    expect(got['rpf-thorp-under_siege-13'].tile).toBe('Deficit');
+    for (const seed of SEEDS) if (got[seed].gap > 0) expect(['Secure', 'Surplus'], seed).not.toContain(got[seed].tile); // anchored: each tile is asserted equal to its Tonight word above
+  }, 300000);
+  test('GUARD: a town whose record leaves no need unmet keeps "Secure" on both', async () => {
+    await loadGenerationLawPayloads();
+    const s = generateSettlementPipeline(cfgFor('rpf-city-calm-13'), null, { seed: 'rpf-city-calm-13', customContent: {} });
+    expect(s.economicState.foodSecurity.foodRecord).toMatchObject({ band: 'secure', gapPct: 0 });
+    expect(tileOf(s)).toBe('Secure');
+    expect(composeTonightSheet(s).facts.find((f) => f.id === 'food')?.text).toMatch(/^Secure\. /);
+  }, 300000);
 });

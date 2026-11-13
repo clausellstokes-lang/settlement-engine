@@ -683,6 +683,30 @@ export function foodStoresWords(record) {
   return months < 1 ? `No granary; ${span} in the larder.` : `No granary; ${span} in household stores.`;
 }
 
+/**
+ * THE FOOD LABEL — ONE HOME (ROUND THREE item 2b; the chair's ruling on the cut's #843 #1102 #1297 and the increment's #472
+ * #668 #769): the band word every surface of this lane prints for the town's food (the Tonight sheet's fact, and so the
+ * Crisis page, the PDF and the journal; the Daily Life tile), read from the food record the Economics tab's stores
+ * sentence reads (`economicState.foodSecurity.foodRecord`): its own band (data/bandLadders.js :: FOOD_SECURITY_BANDS),
+ * except where the record itself makes that band's word false. A label of plenty never stands beside a deficit: a
+ * "Secure" or "Surplus" band whose record leaves a share of the need unmet (`gapPct` > 0; Economics prints "Short: …
+ * lbs/day" exactly there, 800 of 800 births) reads as the ladder's next word, "Pressured". "Import-Dependent" where no
+ * food comes in by trade (`normalImportPct` 0) reads "Deficit". The ladder's own words only; no new word.
+ * @param {{ band?: unknown, gapPct?: unknown, normalImportPct?: unknown } | null | undefined} record
+ * @returns {{ key: string, label: string, color: string } | null} null for a record with no band
+ */
+export function foodBandOf(record) {
+  const band = clean(record?.band);
+  /** @type {Record<string, { label: string, color: string }>} */
+  const bands = FOOD_SECURITY_BANDS;
+  if (!band || !Object.hasOwn(bands, band)) return null;
+  const gap = Number(record?.gapPct);
+  let key = band;
+  if ((band === 'secure' || band === 'surplus') && Number.isFinite(gap) && gap > 0) key = 'pressured';
+  else if (band === 'importDependent' && record?.normalImportPct === 0) key = 'deficit';
+  return { key, label: bands[key].label, color: bands[key].color };
+}
+
 /** @param {number} n @returns {string} */
 function numberWord(n) {
   const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
@@ -693,10 +717,8 @@ function numberWord(n) {
 function foodFact(source) {
   const record = source.economicState?.foodSecurity?.foodRecord;
   if (!record || typeof record !== 'object') return null;
-  const band = clean(record.band);
-  /** @type {Record<string, { label: string }>} */
-  const bands = FOOD_SECURITY_BANDS;
-  const bandText = band && Object.hasOwn(bands, band) ? `${bands[band].label}.` : '';
+  const band = foodBandOf(record);
+  const bandText = band ? `${band.label}.` : '';
   const text = [bandText, foodStoresWords(record)].filter(Boolean).join(' ');
   return text ? { id: 'food', label: TONIGHT_COPY.food, text, sourcePath: 'economicState.foodSecurity.foodRecord' } : null;
 }

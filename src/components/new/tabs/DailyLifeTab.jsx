@@ -14,6 +14,7 @@ import { economyDeskRead } from '../economyDeskRead.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { edged } from '../../../design/edgedBox.js';
+import { foodBandOf } from '../../../domain/summary/tonightSheet.js'; // the food label's one home (ROUND THREE item 2b)
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -125,13 +126,17 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const displayNarrative = narrative || (aiDailyLife ? formatDailyLifeResult(aiDailyLife) : null);
   const hasContent = !!displayNarrative;
 
-  const foodLabel     =
+  // ROUND THREE item 2b (the cut's #843 #1102 #1297: "Strained" under an active famine, "Tightening" beside "Secure"):
+  // the tile prints the food label's ONE home (tonightSheet.js :: foodBandOf), the word the Tonight sheet and the Crisis
+  // page print; its own percent ladder stands only for a record with no band.
+  const foodBand      = foodBandOf(r?.economicState?.foodSecurity?.foodRecord);
+  const foodLabel     = foodBand ? foodBand.label :
     ctx.foodDeficit > 35 ? 'Severe' :
     ctx.foodDeficit > 20 ? 'Serious' :
     ctx.foodDeficit > 10 ? 'Strained' :
     ctx.foodDeficit > 0  ? 'Tightening' :
     ctx.hasSurplus ? 'Surplus' : 'Adequate';
-  const foodColor     =
+  const foodColor     = foodBand ? foodBand.color :
     ctx.foodDeficit > 35 ? '#5a0a0a' :
     ctx.foodDeficit > 20 ? '#8b1a1a' :
     ctx.foodDeficit > 10 ? '#8a4010' :
