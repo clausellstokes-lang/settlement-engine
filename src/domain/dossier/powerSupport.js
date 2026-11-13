@@ -51,6 +51,7 @@ import { institutionBackingFactionName } from '../display/institutionBackingFact
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { walkUserEdits } from '../userEdits.js';
+import { isCriminalInstitution } from '../corruption.js';
 import { BACKS_SEPARATOR, formatBacksValue, parseBacksValue } from '../userEditLines.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
 import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution } from '../../data/institutionalCatalog.js';
@@ -269,8 +270,10 @@ export function houseBacksOf(settlement) {
       const backer = institutionBackingFactionName(inst, settlement);
       if (backer) add(backer, 'aligned', alignedWhy(archOf(backer)), 1);
     }
-    // THE DEFAULT: nothing landed, so the house answers to the seat at no weight.
-    if (list.length === 0 && ruler) list.push({ faction: ruler, basis: 'default', why: DEFAULT_BASIS, share: 0, weight });
+    // THE DEFAULT: nothing landed, so the house answers to the seat at no weight. COHERENCE-POWERS-7 (cold list
+    // REVIEW-W2A-3 #636): never a criminal house (corruption.js's one detector) — with no criminal power to land on it
+    // works outside the seat's law, not under it (a criminal ruler takes its houses above, as its kind's leader).
+    if (list.length === 0 && ruler && !isCriminalInstitution(inst)) list.push({ faction: ruler, basis: 'default', why: DEFAULT_BASIS, share: 0, weight });
     list.sort((x, y) => y.share - x.share || BASIS_RANK[x.basis] - BASIS_RANK[y.basis]);
     byHouse.set(key, list);
   }
