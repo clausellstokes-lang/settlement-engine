@@ -54137,9 +54137,11 @@
         "magic": 3,
         "market": 1,
         "navigable": 1,
-        "no navigable": 1
+        "no navigable": 1,
+        "population: ≥ middling": 1,
+        "tier: ≥ village": 6
       },
-      "undeclared": 159,
+      "undeclared": 152,
       "crisisScoped": false
     },
     {
@@ -54278,10 +54280,11 @@
         "no ruler: lord": 6,
         "no ruler: occupier": 6,
         "other npc": 20,
+        "prosperity: ≥ comfortable": 1,
         "starving": 1,
         "tier: ≥ town": 1
       },
-      "undeclared": 63,
+      "undeclared": 62,
       "crisisScoped": false
     },
     {
