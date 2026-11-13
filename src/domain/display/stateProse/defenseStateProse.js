@@ -697,6 +697,20 @@ export function defenseThreatProse(settlement, options = {}) {
   const walls = forces.walls.present;
   const garrison = forces.garrison.present;
   const militia = forces.militia.present;
+  // ⛔ L0 (R3-TABS; the chair's ruling of 2026-11-13): "NO FORCE" READS EVERY ARMED BODY. A town has
+  // no force only when it holds no garrison, no militia (the household levy is one), no watch and no
+  // contracted company; the projection already carries all four. Read from three of them, a town whose
+  // force was its watch was "walls and nobody to put on them" while its force cards printed the watch
+  // (79 walled and 41 unwalled watch-only births of 884 at 9e57f5023). For the invasion row a watch
+  // stands with the townspeople's pools and a contracted company with the paid professionals' pools.
+  // ⚠ ONE CELL THE CORPUS DID NOT WRITE, AND IT IS SILENT: an UNWALLED town whose only force is its watch.
+  // `militia only` names a militia ("The militia at … know every path"), which such a town lacks, and no
+  // other pool is true of it; the row says nothing there rather than round it into a neighbour (this
+  // desk's idiom, `beastsRowSituation`). The cell is the corpus lane's to write.
+  const watch = forces.watch.present;
+  const contracted = forces.mercenary.present;
+  const force = garrison || militia || watch || contracted;
+  const watchAloneUnwalled = !walls && watch && !garrison && !militia && !contracted;
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3f), as is every entry point on this leaf. The
   // spine key is this desk's own key function and every bag is unchanged; the candidates
@@ -736,10 +750,10 @@ export function defenseThreatProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, garrison || militia)),
+    beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, force)),
     invasion: rungWith(
-      invasionRowPoolKey(walls, garrison, militia),
-      defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, garrison || militia),
+      watchAloneUnwalled ? null : invasionRowPoolKey(walls, garrison || contracted, militia || watch),
+      defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force),
     ),
     internal: rung(internalRowPoolKey(
       civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
