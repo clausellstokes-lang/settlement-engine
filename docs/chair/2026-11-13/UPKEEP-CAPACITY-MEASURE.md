@@ -593,3 +593,31 @@ The hand-back's order: the defence lane's seventh seat edits `defenseInstitution
 **Gates:** eslint 0 on the touched files; typecheck:domain:strict 0 (1,113 at its ceiling); typecheck:ratchet 0 (167 at its ceiling).
 
 **The tree measured:** the corpus, goldens and pages ran on a measuring commit of the same generator bytes (ed9ec6702, on the first cut of C2); this commit's generator differs from it in no byte.
+
+## C4a. G3: the walk to another's church opens no clergy part; the parish row stays
+
+**Built:** `defenseGenerator.js :: housedOf`, the roster without its fabric rows (`institutionalCatalog.js :: isFabricInstitution`, the catalogue's own registry, read by exact name). The traditions' names are read over it, in the generator and in `scaledPartsOfHouse`, so the clergy's ladder agrees. The small place's parish row (`hasChurch`) still reads the whole roster. Of the catalogue's fabric rows, only "Access to parish church" answers any tradition's name (measured: it answers `divine` alone), so nothing else moves. Red first: `upkeepCapacityGaps.test.js`, two tests red at C3 (a walking thorp and hamlet had a clergy part and the divine tradition; the clergy's ladder read the village's Parish church as its second rung), green after.
+
+**THE COUNT TEST IS IN C4b, NOT HERE, AND WHY:** on this tree its static arm reads a third house that shares a score, the Wayside shrine (the stop below and the chair's G3s). A test is never skipped, so it lands where it is green: C4b.
+
+**The ladder, by the one law:** the walk was the clergy's least rung (1 of 5). Out of the ladder, the village's Parish church is the least (1 of 4): its factor falls from 0.9 to 0.8; a town's Parish churches (2–5) from 1.0 to 0.93; a city's (10–30) from 1.1 to 1.07; the metropolis's (50–100+) stays 1.2. Declared, not special-cased.
+
+**The move against C3** (`move-C4a.txt`): 674 move (568 down, 106 up), mean −0.35, from −8 to +2; 107 bands.
+
+| | Holders | Down / up | Mean over holders (extremes) | Bands | Beasts moved, band changes | Power structures |
+|---|---|---|---|---|---|---|
+| The walk to church (thorps, hamlets) | 938 | 346 / 106 | −1.17 (−8 … +2) | 97 | 463, −8.8 among movers (to −27); Weak → Critical 97 | 77 |
+| The parish ladder (villages to cities) | 2,676 | 222 / 0 | −0.08 (−1 … 0) | 10 | 565, −1.5; Weak → Critical 82 | 10 |
+
+- **The 106 that rise are walking places with a wayside shrine**: with the walk off the ladder, their clergy part is opened by the shrine alone (its religion gate), and the shrine stands on no clergy ladder (the scale reader's clergy job is the parish houses, the monastery and the cathedrals), so the part counts whole, 1, instead of the walk's 0.8. That is the shrine's clergy reading at work, and C4b closes it.
+- The five scores (all births): military 73 moved, 6 bands; beasts 1,028, 237 bands (Weak → Critical 179, Critical → Weak 39); order 510, 37 bands; supply 152, 21 bands; magic 56 (limit 1), 1 band.
+- **87 power structures re-drawn, every one with a band move; no power appears or vanishes; one legitimacy label changes.** AI threats: 4 gain "Economic fragility". Magic against the page: 0.
+- The rest of the record: 86 differ outside defence and powers; 85 of them re-draw their power structure, and the two read field by field differ only in the power trace's legitimacy figure.
+- **Golden corpus: 0 of 525 rows move.**
+
+**The pages: twenty places that walk to church** (`pages/c4a-beasts.txt`; the Beasts & Monsters row on the tab and in the PDF, at C3 and C4a):
+- The band word falls Weak → Critical in 7 of the 20; the rest hold.
+- **Every sentence is true of a place with no cleric.** None speaks of clergy, a priest or divine help, before or after; no new line on any surface speaks of them.
+- Two things named for the holder of the Beasts rows (`dossierStateProse/defense.generated.js`, DS-DEF-2), not touched:
+  - **9 of the 20 tabs print no sentence under the Beasts row** at all, before and after (the row goes straight to "Invasion & War"); the PDF prints one.
+  - The tab's sentence is drawn from a pool keyed on the threat and the force, not on the band: 5 of the 20 now print "… holding against the creatures, but each season wears them down" or "… has answered it properly: there is a wall to hold and there are people to hold it" beside a Critical band.

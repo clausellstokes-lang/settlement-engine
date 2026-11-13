@@ -46,6 +46,7 @@ import { deriveMagicReliance } from '../domain/magicReliance.js';
 import { keepOf, keepOfRecord, fundedGate } from '../domain/facts/keep.js';
 import { DEFENCE_TUNING as W, DEFENCE_WORDS, WATCH_IN_STEAD } from '../data/defenceWeights.js';
 import { houseRungsOf, jobRungAtTier } from '../domain/institutions/houseScale.js';
+import { isFabricInstitution } from '../data/institutionalCatalog.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -81,11 +82,20 @@ const SCALED_PARTS = Object.freeze({
   clergy: (_, n) => n.divine, druids: (_, n) => n.druid, market: (i) => i.hasMarket, hospital: (i) => i.hasHospital,
   alchemists: (_, n) => n.alchemy,
 });
+/**
+ * THE HOUSES THAT STAND IN THE PLACE (UPKEEP-CAPACITY C4, the chair's G3): the roster without its fabric rows. A fabric
+ * row is the place, not a house (`institutionalCatalog.js :: isFabricInstitution`): "Access to parish church" is the walk
+ * to another village's church, with no house, no power and no seat, so it opens no clergy part and no rung of the
+ * clergy's ladder. The traditions' names are read over these alone; the small place's parish row (`hasChurch`, the
+ * rallying point) still reads the whole roster.
+ * @param {ReadonlyArray<unknown>} list
+ */
+const housedOf = (list) => list.filter((i) => !isFabricInstitution(/** @type {any} */ (i)));
 /** The scaled parts one house opens, alone (the one `jobsOf` the house-scale reader is handed). @param {unknown} house */
 const scaledPartsOfHouse = (house) => {
   const one = [house];
   const { inst } = getInstFlags({}, one);
-  const names = defenseTraditionNamesOf(one);
+  const names = defenseTraditionNamesOf(housedOf(one));
   return Object.keys(SCALED_PARTS).filter((id) => SCALED_PARTS[id](inst, names));
 };
 
@@ -229,7 +239,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const crimeOf = (/** @type {Array<[string, any]>} */ list) => Math.max(2, Math.min(100, list.reduce((a, [, row]) => a * row.crime, flags.criminalPreStress)));
   const crimEff = Math.round(crimeOf(crimeRows));
   const crimBase = Math.round(crimeOf([]));
-  const names = defenseTraditionNamesOf(institutions);
+  const names = defenseTraditionNamesOf(housedOf(institutions));
   const G = W.traditionGates;
   const t = {
     hasArcane: magicOn && magPri >= G.arcane && (inst.hasMagicInst || names.arcane),

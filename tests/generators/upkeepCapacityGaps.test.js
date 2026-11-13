@@ -19,7 +19,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** @type {Record<string, any>} */
 const births = {};
-const KEYS = ['cold-city-227', 'fresh6-metropolis-30', 'cold-thorp-191', 'fresh6-thorp-52'];
+const KEYS = ['cold-city-227', 'fresh6-metropolis-30', 'cold-thorp-191', 'fresh6-thorp-52', 'cold-thorp-16', 'cold-hamlet-123', 'cold-thorp-20'];
 const CITIES = ['cold-city-227', 'fresh6-metropolis-30'];
 
 /** @param {string} key */
@@ -106,5 +106,32 @@ describe('G2 (C3): the household levy is the militia, at its ladder\'s least run
     const s = births['cold-thorp-191'];
     const asMilitia = { ...s, institutions: s.institutions.map((i) => (i.name === 'Household levy' ? { ...i, name: 'Citizen militia' } : i)) };
     expect(partOf(asMilitia, 'militia').full / partOf(s, 'militia').full).toBeCloseTo(greatest / least, 1);
+  });
+});
+
+describe('G3 (C4a): the walk to another\'s church opens no clergy part; the parish row stays', () => {
+  test('RED-FIRST: a thorp and a hamlet that walk to church have no clergy part and no divine tradition, and keep the parish row', () => {
+    for (const key of ['cold-thorp-16', 'cold-hamlet-123']) {
+      const s = births[key];
+      expect(s.institutions.some((i) => i.name === 'Access to parish church'), key).toBe(true);
+      expect(s.institutions.some((i) => /parish church$|parish churches|cathedral|monastery|shrine|temple|friary/i.test(i.name) && i.name !== 'Access to parish church'), key).toBe(false);
+      expect(partOf(s, 'clergy'), key).toBeNull();
+      expect(partOf(s, 'parish'), key).not.toBeNull();
+      expect(s.defenseProfile.traditions.hasDivine, key).toBe(false);
+    }
+  });
+
+  test('RED-FIRST: the clergy\'s ladder starts at the village\'s Parish church: it counts the least rung, and a town\'s parish churches more', () => {
+    const { least } = DEFENCE_TUNING.houseScale;
+    const s = births['cold-hamlet-123'];
+    const asVillageChurch = { ...s, institutions: s.institutions.map((i) => (i.name === 'Access to parish church' ? { ...i, name: 'Parish church' } : i)) };
+    const asTownChurches = { ...s, institutions: s.institutions.map((i) => (i.name === 'Access to parish church' ? { ...i, name: 'Parish churches (2-5)' } : i)) };
+    const church = partOf(asVillageChurch, 'clergy');
+    const churches = partOf(asTownChurches, 'clergy');
+    expect(church).not.toBeNull();
+    expect(churches).not.toBeNull();
+    // The Parish church is now rung 1 of 4 (the walk was rung 1 of 5): 0.8 against (2-5)'s rung 2 of 4.
+    const { greatest } = DEFENCE_TUNING.houseScale;
+    expect(churches.full / church.full).toBeCloseTo((least + (greatest - least) / 3) / least, 1);
   });
 });
