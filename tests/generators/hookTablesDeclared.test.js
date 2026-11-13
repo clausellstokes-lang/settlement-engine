@@ -33,7 +33,9 @@ describe('the history hooks declare what their event does not guarantee', () => 
   // W2-FIX-DATA-5 (2026-11-13, ROUND-3-CUT-INCREMENT ww-544): the succession crisis's ailing and poisoned ruler exclude the vacant seat's crisis too (re-keyed by cause; still 17 rows).
   // W2-FIX-DATA-HISTORY item C (2026-11-13, the review of the data lane, L4): the occupation's "former occupier officer"
   // excludes an occupation in force ("former" says it is over; re-keyed by cause: 17 → 18 rows).
-  it('the eighteen declaring rows carry their atoms, every atom declarable', () => {
+  // W2-FIX-DATA-HISTORY item E (2026-11-13, CENSUS-2): the plague's healer declares the healer, and the wild magic's
+  // spreading district a town (re-keyed by cause: 18 → 20 rows).
+  it('the twenty declaring rows carry their atoms, every atom declarable', () => {
     const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
     expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
       'succession_crisis: no ruler: council, no crisis: succession_void',
@@ -46,11 +48,13 @@ describe('the history hooks declare what their event does not guarantee', () => 
       'crime_wave: watch',
       'occupation_legacy: no crisis: occupied',
       'market_crash: market',
+      'plague_years: healer',
       'great_flood: navigable',
       'great_flood: navigable',
       'heresy_trial: institution: temple',
       'pilgrimage_surge: institution: temple',
       'pilgrimage_surge: institution: temple',
+      'wild_magic: tier: ≥ town',
       'demographic_pressure: migration: influx',
       'demographic_pressure: migration: exodus',
       'demographic_pressure: migration: influx',

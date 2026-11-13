@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, livelihoodLead } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -859,7 +859,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
     if (Array.isArray(chosen.severity)) chosen.severity = pick(chosen.severity);
     // Strip plot hooks from ancient resource events (same ≤80y rule)
     if ((chosen.yearsAgo || 0) > 80) chosen.plotHooks = [];
-    if (resourceEventAdmitted(chosen, hookFacts)) events.push(chosen); // W2-FIX-DATA-5 (ww-25): none admitted, none written (the draws above are kept)
+    if (resourceEventAdmitted(chosen, hookFacts)) events.push(sizedResourceEvent(chosen, hookFacts)); // W2-FIX-DATA-5 (ww-25): none admitted, none written (the draws above are kept); W2-FIX-DATA-HISTORY item E: its texts resolved
     events.sort((a, b) => (b.yearsAgo || 0) - (a.yearsAgo || 0));
   }
 

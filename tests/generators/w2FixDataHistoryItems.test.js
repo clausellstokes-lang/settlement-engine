@@ -28,13 +28,19 @@
  * place lacks and no market where none stands; three sentences said what it could not see (herding and farming, the
  * neighbourhood vendors, an urban supply from shared waterworks). They now speak in its own words, or name nothing false.
  *
+ * ITEM E (CENSUS-2's `historyGenerator.js :: generateRelationshipEvent` writer; ROUND-3-CUT-INCREMENT ww-26, ww-90): the
+ * resource events named what the town lacks (civic buildings or a cathedral in a village of 89, a quarrymen's guild, the
+ * merchant guilds of a hamlet, a district of a thorp, extraction and a mining contract with no mine); their texts resolve
+ * through `historyData.js :: HISTORY_DESC_SIBLINGS` where the event is written (`sizedResourceEvent`). And two timeline
+ * hooks declare: the plague's healer (`healer`) and the wild magic's district (`tier: ≥ town`).
+ *
  * THIS FILE REDS WHEN: a cured line prints again in its guard town, or a declaration is dropped or turned.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { HISTORY_TEMPLATE_RECORD_DECLARATIONS, trueToRecordAt } from '../../src/generators/historyGenerator.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { CULTURE_LINE_SIBLINGS } from '../../src/data/cultureProfiles.js';
-import { HISTORICAL_EVENTS_DATA, TENSIONS_THAT_NEED_THEIR_OWN_EVENT, tensionHeldByTimeline, livelihoodLead } from '../../src/data/historyData.js';
+import { HISTORICAL_EVENTS_DATA, TENSIONS_THAT_NEED_THEIR_OWN_EVENT, tensionHeldByTimeline, livelihoodLead, sizedResourceEvent } from '../../src/data/historyData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -184,5 +190,47 @@ describe('W2-FIX-DATA-HISTORY item B: the culture\'s foodways sentence only wher
     const { sourcesNamedIn } = await import('../../src/domain/foodways.js');
     expect(sourcesNamedIn('Herds and field grain set a strongly seasonal food calendar.').sort()).toEqual(['grain', 'livestock']);
   });
+});
+
+describe('W2-FIX-DATA-HISTORY item E: the resource events and two timeline hooks say only what the town holds', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const village = (/** @type {string[]} */ houses, tier = 'village') => factsOf({ tier, institutions: houses.map((name) => ({ name })), config: {} });
+
+  it('each text resolves to its twin, or is dropped, where the town makes it false', () => {
+    const construction = { description: "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.", lastingEffects: ["Quarrymen's guild retains unusual civic influence"], plotHooks: [] };
+    const small = sizedResourceEvent(construction, village([]));
+    expect(small.description).not.toMatch(/civic buildings|cathedral/i);
+    expect(small.lastingEffects).toEqual(["The quarrymen's families retain unusual civic influence"]);
+    expect(sizedResourceEvent(construction, village(['Craft guilds (5-15)', 'Parish church'], 'town'))).toEqual(construction);
+    expect(sizedResourceEvent(construction, village(['Craft guilds (5-15)'], 'town')).description, 'a town with no house of worship: no cathedral').toBe("A period of ambitious stone construction transformed the settlement's character. Its civic buildings were raised from local quarry stone. The quarry workers became a political force.");
+    const arcane = { description: 'A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants.', lastingEffects: ['Affected district retains residual magical effects', 'Arcane regulatory body established with unusual local authority'], plotHooks: [] };
+    expect(sizedResourceEvent(arcane, village([], 'thorp')).lastingEffects).toEqual(['The affected ground retains residual magical effects']);
+    const iron = { description: 'Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.', lastingEffects: ['Fortified extraction sites established during the dispute'], plotHooks: ['A rival family claims their ancestor was cheated out of the original mining contract'] };
+    const noMine = sizedResourceEvent(iron, village([]));
+    expect(noMine.description).toMatch(/who holds those rights to this day/);
+    expect(noMine.lastingEffects).toEqual([]);
+    expect(noMine.plotHooks).toEqual(['A rival family claims their ancestor was cheated out of the original rights to the deposits']);
+    expect(sizedResourceEvent(iron, village(['Mine (shaft)']))).toEqual(iron);
+  });
+
+  it('the plague\'s healer and the wild magic\'s district declare what they presume', () => {
+    const hooks = HISTORICAL_EVENTS_DATA.flatMap((e) => e.plotHooks || []).filter((h) => typeof h === 'object');
+    expect(hooks).toContainEqual({ text: 'A healer who profited enormously during the plague is being asked how they stayed untouched', needs: ['healer'] });
+    expect(hooks).toContainEqual({ text: 'The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise', needs: ['tier: ≥ town'] });
+  });
+
+  // GUARDS: the readers' towns that printed them at the base
+  for (const [seed, words] of /** @type {const} */ ([
+    ['rww-village-religious_conversion-1', /Civic buildings or a cathedral|Quarrymen's guild/], // ww-90, a village of 89
+    ['rw3-thorp-famine-1', /the merchant guilds negotiated/],
+    ['rww-hamlet-succession_void-1', /controls extraction|original mining contract|Fortified extraction sites|affected district/],
+    ['rpf-village-occupied-13', /A healer who profited/],
+  ])) {
+    it(`${seed}: no history line names what the town lacks`, () => {
+      const s = born(seed);
+      expect(historyText(s)).not.toMatch(words);
+      expect(s.history.historicalEvents.length).toBeGreaterThan(0);
+    }, 60_000);
+  }
 });
 
