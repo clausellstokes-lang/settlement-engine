@@ -53709,16 +53709,18 @@
       "name": "ARRIVAL_SCENES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:216-228 (sceneKey from route/terrain/market fragments, then one pickRandom on t",
-      "lines": 26,
+      "lines": 28,
       "declares": [],
       "lineDeclares": {
+        "coast": 2,
         "crisis: any": 7,
+        "docks": 4,
         "institution: mill": 1,
         "institution: smith": 1,
         "population: ≥ middling": 1,
         "walls": 1
       },
-      "undeclared": 15,
+      "undeclared": 11,
       "crisisScoped": false
     },
     {
