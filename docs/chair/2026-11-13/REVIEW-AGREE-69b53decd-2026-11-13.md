@@ -1,3 +1,5 @@
+CLEAR
+
 # REVIEW-AGREE-3, second pass — the agreement lane at 69b53decd (2026-11-13)
 
 The eighth seat's cures (faa20bc6c → 69b53decd, 15 commits), read against my first file
@@ -118,3 +120,42 @@ The seat's field diff, my run, faa20bc6c → 69b53decd, the 4,141: **1,138 birth
 simulationTrace 636, incomeSources 374, npcs 228 (goal.short 148 lines, goal.long 109, secret.what 9: words only, no
 person changes), economicStrengths 210, primaryExports 69, pressureSentence 5, arrivalScene 2. **0 label moves**;
 no roster, chain, score, power or food figure moves.
+
+## F — THE SUITE (executed)
+
+`sh scripts/gate-tail.sh npx vitest run --maxWorkers=2` at 69b53decd, the ledger ref fetched first, 6,277 s, exit 1:
+**36 failed files of 3,221; 51 failed tests; 38,733 passed; 254 skipped**. Title by title against my own run at
+faa20bc6c: **the same 55 entries (50 tests and 5 files at load), plus one**: `editCorpusRatchet` A5, a 600 s timeout
+(its assertion never ran) while my census, sweeps and plants loaded the machine. Re-run alone on a quiet machine
+(`sh scripts/gate-tail.sh npx vitest run tests/property/editCorpusRatchet.test.js --maxWorkers=1`): **A5 passes**;
+the file's reds are A4, A6, A7, A8, as PART SEVEN lists them. (A5 took 440 s at faa20bc6c under the same suite; it
+runs close to its 600 s limit, a flake under load, not the lane's.) None of PART SEVEN's nine own reds and none of
+its thirteen bundle reds fails. **The failing set is otherwise my first review's, title for title; none is the
+lane's to cure.** The golden surfaces read as PART SEVEN states them: the fence's driven hash 1062f65c…, the herald
+02d3fa8e…, the PDF golden scoreAvg 41 / institutions 43 / npcs 35, the lighting witness green, the generator golden
+moved (156 rows by this seat in my field diff).
+
+## G — VERDICT AND FINDINGS
+
+**CLEAR.** Both findings of my first review that held the release are cured by my own measure: the toll's
+catalogue name is gone from every stored field of the 4,141 but the two ruled carriers, from the 720's pages, the
+PDF, the Foundry journals, the AI prompt, the causal views and the explanation rail; the refused-only goods are gone
+from both trade lists, all 77 lines, with nothing else moved. The gate tally and Agriculture are cured, no label
+moves, no census row rises against faa20bc6c, and row 2's six are exposure as stated. Four LOW findings remain;
+none is a fault the release must wait on, and each has a named home.
+
+- **G1 (LOW, guard gap).** A page component printing the record's toll name through `({ label })` or `x['label']`
+  turns nothing red (plants TP1, TP2); the print-site walker reads named bindings and the sweep pin does not render
+  the dossier. CURE: a rendered-dossier arm in the sweep (the census's walk on its three seeds), or the walker reads
+  a destructured `label`/`resource` beside `activeChains`.
+- **G2 (LOW, census short a row).** `src/domain/events/mutateWorld.js :: addTradeGood` writes `primaryExports`
+  through a computed key the writers' walker cannot see; class USER. CURE: its row, and `\[\w+Key\]\s*:` in `WRITES`.
+- **G3 (LOW, new words).** The coal twin "Coal is dug here and sold to the forges of other towns" stands where the
+  export list carries no coal: 3 of the 720 pages (r2r-thorp-45, r2s-under_siege-village-3: "No significant
+  exports."; r2r-village-21), 7 of the 4,141. And a chain works the coal in only 54 of its 294 towns. CURE: the
+  twin's sale clause only where Coal is exported (or the W2 lanes' chain-worked reading), at the owner's veto of the
+  words.
+- **G4 (LOW, a cure that printed a false line).** The felling origin's revert judged "worked" by roster names: in 6
+  of the 83 (r2r-village-50 among the 720; rvw12-city-63 rendered) a chain works the town's own timber and the town
+  exports it, and the page now says "Timber sourced from more distant forests". CURE: the revert keys on
+  `chainWorksResource` (the home the chair ruled), keeping the local line where a chain works the timber.
