@@ -274,7 +274,8 @@ function scopeAgainstRecord(phrase, source) {
       .replace(', on pasture and earthwork', '');
   }
   // the guild: "guild and estate" only where the roster holds a guild
-  if (roster && out.includes('run by guild and estate') && !factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).guild) {
+  // R2-CODE-B-SIDE item 5: the guild is a HOUSE on the roster, never a power that only contends (rosterHolds below).
+  if (roster && out.includes('run by guild and estate') && !rosterHolds(source, GUILD_HOUSE)) {
     out = out.replace('run by guild and estate', 'run by its estates');
   }
   // earthworks: a defence fact of their own
@@ -341,7 +342,9 @@ function scopeAtSize(phrase, source) {
   if (!phrase) return phrase;
   const tier = cleanText(source?.tier).toLowerCase();
   const tiny = TINY_TIERS.has(tier);
-  const small = populationBandOf(/** @type {{ population?: unknown, tier?: unknown }} */ (source)) === 'small';
+  // R2-CODE-B-SIDE item 5: a village is small by its tier as well as by its people (the chair's ruling: "a village of up
+  // to about 350 people included"; a village of 372 is a town by its population band and still a village on its page).
+  const small = populationBandOf(/** @type {{ population?: unknown, tier?: unknown }} */ (source)) === 'small' || SMALL_TIERS.has(tier);
   const roster = Array.isArray(/** @type {{ institutions?: unknown }} */ (source)?.institutions);
   const noMarket = roster && factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).market === false;
   let out = phrase;
@@ -356,10 +359,66 @@ function scopeAtSize(phrase, source) {
       .replace('built around the agora, ', 'built ');
   }
   if (small) {
-    out = out.replace('built around kin districts and an assembly ground', 'built around kin and an assembly ground')
+    out = out.replace('built around kin districts and an assembly ground', 'built around kin')
       .replace(', in quarters by trade and kin', ', kin by kin')
       .replace(', in quarters by trade,', ',')
-      .replace('built in wards and courtyards', 'built around courtyards');
+      .replace('built in wards and courtyards', 'built around courtyards')
+      // R2-CODE-B-SIDE item 5: a bureau is an office no small place keeps (the increment's hamlet of 31).
+      .replace('ordered by bureau and lineage', 'ordered by lineage');
+  }
+  // R2-CODE-B-SIDE item 5: the houses and the office the phrase names, read against the roster (after the size reads,
+  // so a phrase is first said at the place's size). A record with no roster is legacy and unread.
+  return roster ? scopeAgainstRoster(out, source) : out;
+}
+
+/** A house that is waterworks: a conduit, a cistern, a fountain or a bathhouse (a well or a spring is not). */
+const WATERWORKS_HOUSE = /\baqueduct|\bcistern|\bwater system|\bwaterworks|\bfountain|\bbath(?:s|house)?\b/i;
+/** A house a gift endows: a church, a temple, a religious house, a school, a hospital or an almshouse (a shrine is not). */
+const ENDOWED_HOUSE = /\bchurch|\bcathedral|\btemple|\babbey|\bmonaster|\bfriary|\balmshouse|\bhospital|\bschool|\bcollege|\bacademy|\buniversity|\bmadrasa/i;
+/** A house that keeps an office: a court, a customs or tax house, a chancery (the seat of government is read by its own reader). */
+const OFFICE_HOUSE = /\bcourt|\bcustoms|\btax|\bchancery|\bbureau|\bmagistra/i;
+/** A guild house on the roster (a guild that is only a contending power is not a house: round three's #234). */
+const GUILD_HOUSE = /\bguild/i;
+
+/**
+ * Does the roster hold a live house of this kind? A road to another place's house ("Access to ...") is not one.
+ * @param {SettlementQuickGuideSource} source @param {RegExp} re @returns {boolean}
+ */
+function rosterHolds(source, re) {
+  return liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (source))
+    .map((inst) => cleanText(inst?.name))
+    .some((n) => !!n && !/^access to/i.test(n) && re.test(n));
+}
+
+/** The ruler kinds (facts/rulerKind.js) whose rule is not a civic association. */
+const NOT_CIVIC_RULE = new Set(['lord', 'priest', 'occupier']);
+
+/**
+ * THE SCOPE PHRASE'S HOUSES READ AGAINST THE ROSTER (R2-CODE-B-SIDE item 5; round three's #1 "built around courtyards
+ * and waterworks, on endowed institutions" in a thorp of 16 with neither, #234 "under temple and guild" with no guild,
+ * #513 "run by civic association" under a lord's appointee, the increment's "ordered by bureau and lineage" in a hamlet
+ * of 31; CENSUS-2's 57 lines of kind (a)). THE RULING: a frame that names an institution, a quarter or an office reads
+ * the roster; a frame that cannot be made true in a small place is not printed there. Each clause is struck where the
+ * roster (its live houses, never an "Access to ..." road to another place's) holds no such house (the office is
+ * struck in every small place by scopeAtSize itself). Nothing is added the record does not hold. Display-time only.
+ * @param {string} phrase @param {SettlementQuickGuideSource} source @returns {string}
+ */
+function scopeAgainstRoster(phrase, source) {
+  const holds = (/** @type {RegExp} */ re) => rosterHolds(source, re);
+  const facts = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source));
+  let out = phrase;
+  if (!holds(WATERWORKS_HOUSE)) {
+    out = out.replace('built around courtyards and waterworks', 'built around courtyards')
+      .replace('tribute, and market-and-waterworks', 'tribute and market')
+      .replace('built on tribute, market and waterworks', 'built on tribute and market');
+  }
+  if (!holds(ENDOWED_HOUSE)) out = out.replace(', on endowed institutions and ', ', on ').replace(', on endowed institutions', '');
+  if (!holds(GUILD_HOUSE)) out = out.replace(', under temple and guild', ', under the temple');
+  if (!(governmentSeatName(/** @type {Parameters<typeof governmentSeatName>[0]} */ (source)) || holds(OFFICE_HOUSE))) {
+    out = out.replace('ordered by bureau and lineage', 'ordered by lineage');
+  }
+  if (NOT_CIVIC_RULE.has(String(facts.rulerKind))) {
+    out = out.replace(', and run by civic association', '').replace(' and civic association', '');
   }
   return out;
 }
