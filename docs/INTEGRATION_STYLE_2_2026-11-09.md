@@ -2472,3 +2472,71 @@ for (const row of m.calibrationRows()) {
 }
 ```
 Its readers: **cbattr.py** (per moved calibration row: did its birth move, which families, roster names / count, quarters) and **cbmodel.mjs** (the same rows' `buildTownMapModel(s)` dumped and diffed by leaf: hazards, roads, fortifications, conditions). **kinds.mjs** (the regional audit log's change kinds in the observed-shape corpus: `scalarObservations` rows rooted `pulseResult.regionalGraph.eventLog`, tallied by `changes.kind` / `sourceEvent.type`). **buildreview.py** (the rung-42 review ledger from the template; REFUSES unless the reconciliation, the four delta paths, the corpus move and the three new rows are exactly as accepted). **mkrec.py** (record 47 from the draft into the stage). The throwaway probes (a copy of a test with a dump inserted, run once, deleted, the tree's status checked clean): the ladder's restated trials, the ride-along at the lane's tip, the seam settlements over soak1k-0..239, the taste control over rateGrid, soak1k-27's sheet.
+
+
+## Appendix K. The twelfth seat's helpers (in /home/user/rec12/; quoted whole)
+
+Appendix G–J's quoted helpers were EXTRACTED from this file by `extract.py` (each fenced block after Appendix G under the bold or backticked name in the three lines above it), then `rec8`/`rec9`/`rec10`/`rec11` → `rec12` and `wt-merge8..11` → `wt-merge12` by `sed`. New at this seat:
+
+**extract.py**
+
+```python
+import re,sys
+L=open('book.md').read().split('\n')
+start=1560
+i=start; out=[]
+name_re=re.compile(r'(?:`|\*\*)([A-Za-z0-9_.\-]+\.(?:mjs|js|py|sh|json))(?:`|\*\*)')
+while i<len(L):
+    if L[i].startswith('```') and len(L[i])>3:
+        # find name in preceding 3 lines
+        nm=None
+        for j in range(i-1,max(start,i-4),-1):
+            m=name_re.findall(L[j])
+            if m: nm=m[0]; break
+        k=i+1
+        while not L[k].startswith('```'): k+=1
+        body='\n'.join(L[i+1:k])+'\n'
+        out.append((i+1,nm,len(body)))
+        if nm:
+            fn='h/'+nm
+            import os
+            if os.path.exists(fn): fn=fn+'.L%d'%(i+1)
+            open(fn,'w').write(body)
+        i=k+1
+    else: i+=1
+for o in out: print(*o)
+```
+
+**stage48.sh**
+
+```sh
+#!/bin/sh
+# STYLE-2-MERGE-12: build and measure the previous stage (the line's tip) and the merge stage, each to its own log
+cd /home/user/wt-merge12 || exit 9
+P=$1; M=$2; S=/home/user/stages; O=/home/user/rec12/stage48.sum; : > $O
+sh scripts/audit/landing-stage.sh build $P $S/s47 > /home/user/rec12/st-b47.log 2>&1; echo "build s47 exit $?" >> $O
+sh scripts/audit/landing-stage.sh build $M $S/s48 > /home/user/rec12/st-b48.log 2>&1; echo "build s48 exit $?" >> $O
+sh scripts/audit/landing-stage.sh measure $S/s47 $S/m47 > /home/user/rec12/st-m47.log 2>&1; echo "measure m47 exit $?" >> $O
+sh scripts/audit/landing-stage.sh measure $S/s48 $S/m48 $S/m47 > /home/user/rec12/st-m48.log 2>&1; echo "measure m48 exit $?" >> $O
+echo DONE >> $O
+```
+
+**pcdiff.py** (STOP 48c's per-town attribution between two `page-census.mjs --out` dirs)
+
+```python
+# usage: pcdiff.py <dirA> <dirB> -> per row: towns gained / lost from A to B (STYLE-2-MERGE-12, STOP 48c's attribution)
+import json,os,sys,collections
+def load(d):
+    out={}
+    for f in os.listdir(d+'/rows'):
+        r=json.load(open(d+'/rows/'+f)); out[r['seed']]=set(r['rows'])
+    return out
+A,B=load(sys.argv[1]),load(sys.argv[2])
+gain=collections.defaultdict(list); lose=collections.defaultdict(list)
+for s in sorted(set(A)|set(B)):
+    a,b=A.get(s,set()),B.get(s,set())
+    for r in b-a: gain[r].append(s)
+    for r in a-b: lose[r].append(s)
+for r in sorted(set(gain)|set(lose)):
+    print(f'{r:10} +{len(gain[r]):3} -{len(lose[r]):3} net {len(gain[r])-len(lose[r]):+d}  gained e.g. {gain[r][:6]}  lost e.g. {lose[r][:4]}')
+```
