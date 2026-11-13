@@ -1099,19 +1099,19 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 183,
+    "line": 184,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 329,
+    "line": 331,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 382,
+    "line": 384,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
