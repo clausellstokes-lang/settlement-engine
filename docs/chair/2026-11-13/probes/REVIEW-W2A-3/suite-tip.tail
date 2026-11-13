@@ -1,0 +1,62 @@
+    870|     }
+    871|     expect(drift).toEqual([]);
+       |                   ^
+    872|   }, 600_000);
+    873| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[47/49]⎯
+
+ FAIL  tests/domain/undercitySewerDerivation.test.js > MF-UC1 — the undercity sanitation ladder and its wells > the HONEST FOUNDING arm (§441.2): the NO_TYPED_HOME slot sits at zero weight and perturbing its input moves NOTHING, while each of the five live causes moves the rung monotone in its declared direction
+AssertionError: expected [ false, true, true, true ] to deeply equal [ true, true, true, true ]
+
+- Expected
++ Received
+
+  [
+-   true,
++   false,
+    true,
+    true,
+    true,
+  ]
+
+ ❯ tests/domain/undercitySewerDerivation.test.js:240:73
+    238|     const raiseDeltas = raise.map(([, lo, hi]) => free.map((s) => rung…
+    239|     expect(raiseDeltas.map((ds) => ds.filter((d) => d < 0).length)).to…
+    240|     expect(raiseDeltas.map((ds) => ds.filter((d) => d > 0).length > 0)…
+       |                                                                         ^
+    241|     // ⚠ THE TWO ROSTER READS TAKE DIFFERENT RUIN DISPOSITIONS, and bo…
+    242|     // left to the walker's file-granular compliance. A burnt-out hall…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[48/49]⎯
+
+ FAIL  tests/domain/worldFactRederive.test.js > EM-B2b — world facts by consequence: the route, the refusals and the stated radius > A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden
+AssertionError: the stride is non-empty, or the absence above is vacuous: expected 6 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 6
+
+ ❯ tests/domain/worldFactRederive.test.js:567:87
+    565|       if (sha(out.record) !== manifest[keyOf(row)]) misses.push(keyOf(…
+    566|     }
+    567|     expect(misses.length, 'the stride is non-empty, or the absence abo…
+       |                                                                                       ^
+    568|     expect(stride(golden, 75).length).toBeGreaterThan(0);
+    569|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[49/49]⎯
+
+
+  Snapshots  1 failed
+ Test Files  35 failed | 3183 passed | 8 skipped (3226)
+      Tests  43 failed | 38747 passed | 254 skipped (39044)
+   Start at  11:52:39
+   Duration  6136.94s (transform 125.47s, setup 58.28s, import 2464.06s, tests 8919.63s, environment 360.62s)
+
+JSON report written to /home/user/wt/out/suite-tip.json
+[gate-tail] end:  13:34:58 up  1:51,  0 user,  load average: 3.18, 3.16, 3.42
+[gate-tail] full log: /home/user/wt/out/gate-tail.935.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -1,0 +1,15 @@
+tests/build/landingFixtureFreshness.test.js failed
+tests/domain/intentAtlasSoakDistiller.test.js failed
+tests/domain/undercitySewerDerivation.test.js failed
+tests/lint/institutionTable.walker.test.js failed
+tests/lint/newsHeadlineContract.walker.test.js failed
+tests/lint/newsVoiceContract.walker.test.js failed
+tests/lint/observedShapeReaders.walker.test.js failed
+tests/lint/proseComposed.walker.test.js failed
+tests/lint/proseFamilyContract.walker.test.js failed
+tests/lint/proseTasteInterested.walker.test.js failed
+tests/lint/proseWaveGate.walker.test.js failed
+tests/lint/siteCoherenceRatchet.test.js failed
+tests/lint/sovereigntyLightingContract.walker.test.js failed
+tests/lint/writerReach.walker.test.js failed
+tests/property/dossierProseManifest.test.js failed

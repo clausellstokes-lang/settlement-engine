@@ -1,0 +1,161 @@
+{
+ "towns": 740,
+ "blocks": 17760,
+ "mism": [
+  {
+   "id": "rw3-city-infiltrated-1.json",
+   "k": "general:overview",
+   "owner": {
+    "healthLines": [],
+    "conflictLines": [
+     null,
+     null,
+     null
+    ],
+    "warningLines": [],
+    "originLines": [],
+    "siteLines": [
+     "Half the goods traded in Qaracaravansarai are only passing through.",
+     "Members of Qaracaravansarai's merchant guild do most of the buying and selling that matters.",
+     "Qaracaravansarai's warehouses fill after the harvest and empty through the year as the town trades out of them.",
+     "In Qaracaravansarai the law keeps a building of its own.",
+     "Qaracaravansarai sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them."
+    ],
+    "situationLine": null,
+    "connectionLines": [],
+    "populationLine": null
+   },
+   "stripped": {
+    "healthLines": [],
+    "conflictLines": [
+     null,
+     null
+    ],
+    "warningLines": [],
+    "originLines": [],
+    "siteLines": [
+     "Half the goods traded in Qaracaravansarai are only passing through.",
+     "Members of Qaracaravansarai's merchant guild do most of the buying and selling that matters.",
+     "Qaracaravansarai's warehouses fill after the harvest and empty through the year as the town trades out of them.",
+     "In Qaracaravansarai the law keeps a building of its own.",
+     "Qaracaravansarai sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them."
+    ],
+    "situationLine": null,
+    "connectionLines": [],
+    "populationLine": null
+   }
+  },
+  {
+   "id": "r2s-infiltrated-city-3",
+   "k": "power:desk",
+   "owner": {
+    "legitimacyBanner": {
+     "glance": "Tolerated",
+     "sentence": "Terraium neither backs the Merchant Guild Council nor opposes it. Routine orders are obeyed; a hard decision would find nobody willing to carry it.",
+     "detail": []
+    },
+    "legitimacyLens": {
+     "glance": "",
+     "sentence": "Terraium is doing well and gives the Merchant Guild Council the credit. While the money keeps coming, nobody looks hard at how it governs.",
+     "detail": []
+    },
+    "stabilityHeader": {
+     "glance": "Vulnerable (decisions shaped from outside)",
+     "sentence": "A trader with a complaint at Terraium takes it to Merchant Guild Council.",
+     "detail": []
+    },
+    "stabilityLens": {
+     "glance": "",
+     "sentence": "Terraium is still living with its recent quarrel, and the hall is run the way it is because of who won it.",
+     "detail": []
+    },
+    "legitimacyReading": null,
+    "captureReading": null,
+    "operationReading": {
+     "glance": "",
+     "sentence": "The customs at Terraium keep proper books, and a good share of goods goes around them anyway.",
+     "detail": []
+    },
+    "successionRisk": {
+     "glance": "Holding",
+     "sentence": "Merchant Guild Council outweighs everyone at Terraium who wants its place, and the whole city knows who they are. Merchant Guild Council holds on, but has to watch them.",
+     "detail": []
+    },
+    "successionHold": {
+     "glance": "",
+     "sentence": "Terraium neither backs the Merchant Guild Council nor moves against it, and the Merchant Guild Council governs on its own strength alone.",
+     "detail": []
+    },
+    "rulingStructure": {
+     "glance": "merchant_league",
+     "sentence": "The people who run Terraium are also the people it owes money to, and they do not keep the two apart.",
+     "detail": []
+    },
+    "governingTitle": {
+     "glance": "",
+     "sentence": "Terraium calls its hall the Merchant Guild Council in public and something shorter everywhere else.",
+     "detail": []
+    },
+    "structureFlag": null,
+    "gmAdvisory": null,
+    "blocPresence": null,
+    "blocGlue": null,
+    "blocEnd": null
+   },
+   "stripped": {
+    "legitimacyBanner": {
+     "glance": "Tolerated",
+     "sentence": "Terraium neither backs the Merchant Guild Council nor opposes it. Routine orders are obeyed; a hard decision would find nobody willing to carry it.",
+     "detail": []
+    },
+    "legitimacyLens": {
+     "glance": "",
+     "sentence": "Terraium is doing well and gives the Merchant Guild Council the credit. While the money keeps coming, nobody looks hard at how it governs.",
+     "detail": []
+    },
+    "stabilityHeader": {
+     "glance": "Vulnerable (decisions shaped from outside)",
+     "sentence": "A trader with a complaint at Terraium takes it to Merchant Guild Council.",
+     "detail": []
+    },
+    "stabilityLens": {
+     "glance": "",
+     "sentence": "Terraium is still living with its recent quarrel, and the hall is run the way it is because of who won it.",
+     "detail": []
+    },
+    "legitimacyReading": null,
+    "captureReading": null,
+    "operationReading": {
+     "glance": "",
+     "sentence": "The customs at Terraium keep proper books, and a good share of goods goes around them anyway.",
+     "detail": []
+    },
+    "successionRisk": {
+     "glance": "Stable",
+     "sentence": "The question of who might replace the Merchant Guild Council at Terraium does not come up, because there is nobody the city would name if it did.",
+     "detail": []
+    },
+    "successionHold": {
+     "glance": "",
+     "sentence": "Terraium neither backs the Merchant Guild Council nor moves against it, and the Merchant Guild Council governs on its own strength alone.",
+     "detail": []
+    },
+    "rulingStructure": {
+     "glance": "merchant_league",
+     "sentence": "The people who run Terraium are also the people it owes money to, and they do not keep the two apart.",
+     "detail": []
+    },
+    "governingTitle": {
+     "glance": "",
+     "sentence": "Terraium calls its hall the Merchant Guild Council in public and something shorter everywhere else.",
+     "detail": []
+    },
+    "structureFlag": null,
+    "gmAdvisory": null,
+    "blocPresence": null,
+    "blocGlue": null,
+    "blocEnd": null
+   }
+  }
+ ]
+}

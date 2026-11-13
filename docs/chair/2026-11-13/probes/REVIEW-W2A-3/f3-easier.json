@@ -1,0 +1,2198 @@
+[
+ {
+  "s": "r2r-hamlet-0",
+  "tier": "hamlet",
+  "pop": 22,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-hamlet-16",
+  "tier": "hamlet",
+  "pop": 20,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-hamlet-24",
+  "tier": "hamlet",
+  "pop": 100,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-hamlet-27",
+  "tier": "hamlet",
+  "pop": 96,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-hamlet-28",
+  "tier": "hamlet",
+  "pop": 23,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-hamlet-33",
+  "tier": "hamlet",
+  "pop": 32,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-hamlet-34",
+  "tier": "hamlet",
+  "pop": 50,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-hamlet-35",
+  "tier": "hamlet",
+  "pop": 36,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-hamlet-36",
+  "tier": "hamlet",
+  "pop": 74,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-hamlet-4",
+  "tier": "hamlet",
+  "pop": 41,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-hamlet-45",
+  "tier": "hamlet",
+  "pop": 85,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-hamlet-5",
+  "tier": "hamlet",
+  "pop": 97,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-hamlet-53",
+  "tier": "hamlet",
+  "pop": 95,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-hamlet-9",
+  "tier": "hamlet",
+  "pop": 33,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-1",
+  "tier": "thorp",
+  "pop": 30,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-thorp-10",
+  "tier": "thorp",
+  "pop": 10,
+  "st": "monster_pressure",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-16",
+  "tier": "thorp",
+  "pop": 10,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-thorp-17",
+  "tier": "thorp",
+  "pop": 11,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-thorp-22",
+  "tier": "thorp",
+  "pop": 11,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-thorp-24",
+  "tier": "thorp",
+  "pop": 20,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-25",
+  "tier": "thorp",
+  "pop": 21,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-thorp-27",
+  "tier": "thorp",
+  "pop": 25,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-29",
+  "tier": "thorp",
+  "pop": 11,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-32",
+  "tier": "thorp",
+  "pop": 8,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-thorp-38",
+  "tier": "thorp",
+  "pop": 26,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-40",
+  "tier": "thorp",
+  "pop": 20,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-thorp-41",
+  "tier": "thorp",
+  "pop": 22,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-43",
+  "tier": "thorp",
+  "pop": 19,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-45",
+  "tier": "thorp",
+  "pop": 20,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-46",
+  "tier": "thorp",
+  "pop": 26,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-thorp-51",
+  "tier": "thorp",
+  "pop": 11,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-52",
+  "tier": "thorp",
+  "pop": 25,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-thorp-54",
+  "tier": "thorp",
+  "pop": 17,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-thorp-56",
+  "tier": "thorp",
+  "pop": 24,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-thorp-58",
+  "tier": "thorp",
+  "pop": 7,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-town-1",
+  "tier": "town",
+  "pop": 1590,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-town-11",
+  "tier": "town",
+  "pop": 1790,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-town-27",
+  "tier": "town",
+  "pop": 1310,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-town-3",
+  "tier": "town",
+  "pop": 1168,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-town-36",
+  "tier": "town",
+  "pop": 440,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-1",
+  "tier": "village",
+  "pop": 85,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-village-18",
+  "tier": "village",
+  "pop": 225,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-21",
+  "tier": "village",
+  "pop": 144,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-24",
+  "tier": "village",
+  "pop": 275,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-25",
+  "tier": "village",
+  "pop": 255,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-26",
+  "tier": "village",
+  "pop": 335,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-28",
+  "tier": "village",
+  "pop": 249,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-29",
+  "tier": "village",
+  "pop": 137,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-village-30",
+  "tier": "village",
+  "pop": 175,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-34",
+  "tier": "village",
+  "pop": 355,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-35",
+  "tier": "village",
+  "pop": 180,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-37",
+  "tier": "village",
+  "pop": 141,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-38",
+  "tier": "village",
+  "pop": 230,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-39",
+  "tier": "village",
+  "pop": 136,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-41",
+  "tier": "village",
+  "pop": 81,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-42",
+  "tier": "village",
+  "pop": 144,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-43",
+  "tier": "village",
+  "pop": 149,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-47",
+  "tier": "village",
+  "pop": 375,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-5",
+  "tier": "village",
+  "pop": 117,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-50",
+  "tier": "village",
+  "pop": 386,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-village-52",
+  "tier": "village",
+  "pop": 162,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-village-53",
+  "tier": "village",
+  "pop": 269,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2r-village-55",
+  "tier": "village",
+  "pop": 102,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2r-village-56",
+  "tier": "village",
+  "pop": 117,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-58",
+  "tier": "village",
+  "pop": 78,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2r-village-9",
+  "tier": "village",
+  "pop": 95,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-famine-city-0",
+  "tier": "city",
+  "pop": 2909,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-famine-city-3",
+  "tier": "city",
+  "pop": 11818,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-famine-hamlet-0",
+  "tier": "hamlet",
+  "pop": 35,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-famine-hamlet-1",
+  "tier": "hamlet",
+  "pop": 41,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-famine-hamlet-2",
+  "tier": "hamlet",
+  "pop": 92,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-famine-hamlet-3",
+  "tier": "hamlet",
+  "pop": 22,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-famine-metropolis-1",
+  "tier": "metropolis",
+  "pop": 35674,
+  "st": "famine",
+  "contradicted": "well paid, well equipped",
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-famine-metropolis-3",
+  "tier": "metropolis",
+  "pop": 32388,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-famine-thorp-0",
+  "tier": "thorp",
+  "pop": 19,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-famine-thorp-1",
+  "tier": "thorp",
+  "pop": 20,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-famine-thorp-2",
+  "tier": "thorp",
+  "pop": 28,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-famine-thorp-3",
+  "tier": "thorp",
+  "pop": 16,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-famine-town-0",
+  "tier": "town",
+  "pop": 1696,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-famine-town-1",
+  "tier": "town",
+  "pop": 1336,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-famine-town-2",
+  "tier": "town",
+  "pop": 407,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-famine-village-0",
+  "tier": "village",
+  "pop": 114,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-famine-village-1",
+  "tier": "village",
+  "pop": 90,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-famine-village-2",
+  "tier": "village",
+  "pop": 214,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-famine-village-3",
+  "tier": "village",
+  "pop": 257,
+  "st": "famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-indebted-hamlet-0",
+  "tier": "hamlet",
+  "pop": 67,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-indebted-hamlet-1",
+  "tier": "hamlet",
+  "pop": 63,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-indebted-hamlet-2",
+  "tier": "hamlet",
+  "pop": 85,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-indebted-hamlet-3",
+  "tier": "hamlet",
+  "pop": 65,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-indebted-thorp-0",
+  "tier": "thorp",
+  "pop": 12,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-indebted-thorp-1",
+  "tier": "thorp",
+  "pop": 14,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-indebted-thorp-2",
+  "tier": "thorp",
+  "pop": 8,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-indebted-town-2",
+  "tier": "town",
+  "pop": 590,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-indebted-village-0",
+  "tier": "village",
+  "pop": 294,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-indebted-village-1",
+  "tier": "village",
+  "pop": 228,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-indebted-village-2",
+  "tier": "village",
+  "pop": 318,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-indebted-village-3",
+  "tier": "village",
+  "pop": 75,
+  "st": "indebted",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-insurgency-hamlet-0",
+  "tier": "hamlet",
+  "pop": 35,
+  "st": "insurgency+famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-insurgency-hamlet-2",
+  "tier": "hamlet",
+  "pop": 72,
+  "st": "insurgency+famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-insurgency-hamlet-3",
+  "tier": "hamlet",
+  "pop": 42,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-insurgency-thorp-0",
+  "tier": "thorp",
+  "pop": 22,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-insurgency-thorp-1",
+  "tier": "thorp",
+  "pop": 10,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-insurgency-thorp-2",
+  "tier": "thorp",
+  "pop": 9,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-insurgency-village-0",
+  "tier": "village",
+  "pop": 323,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-insurgency-village-1",
+  "tier": "village",
+  "pop": 200,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-insurgency-village-3",
+  "tier": "village",
+  "pop": 264,
+  "st": "insurgency",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-mass_migration-hamlet-0",
+  "tier": "hamlet",
+  "pop": 83,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-mass_migration-hamlet-1",
+  "tier": "hamlet",
+  "pop": 60,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-mass_migration-hamlet-2",
+  "tier": "hamlet",
+  "pop": 53,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-mass_migration-hamlet-3",
+  "tier": "hamlet",
+  "pop": 82,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-mass_migration-thorp-0",
+  "tier": "thorp",
+  "pop": 21,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-mass_migration-thorp-1",
+  "tier": "thorp",
+  "pop": 16,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-mass_migration-thorp-2",
+  "tier": "thorp",
+  "pop": 24,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-mass_migration-thorp-3",
+  "tier": "thorp",
+  "pop": 7,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-mass_migration-village-0",
+  "tier": "village",
+  "pop": 146,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-mass_migration-village-1",
+  "tier": "village",
+  "pop": 263,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-mass_migration-village-3",
+  "tier": "village",
+  "pop": 117,
+  "st": "mass_migration",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-monster_pressure-hamlet-0",
+  "tier": "hamlet",
+  "pop": 56,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-monster_pressure-hamlet-1",
+  "tier": "hamlet",
+  "pop": 64,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-monster_pressure-hamlet-3",
+  "tier": "hamlet",
+  "pop": 48,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-monster_pressure-thorp-1",
+  "tier": "thorp",
+  "pop": 18,
+  "st": "monster_pressure",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-monster_pressure-thorp-2",
+  "tier": "thorp",
+  "pop": 21,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-monster_pressure-thorp-3",
+  "tier": "thorp",
+  "pop": 10,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-monster_pressure-town-3",
+  "tier": "town",
+  "pop": 1890,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-monster_pressure-village-0",
+  "tier": "village",
+  "pop": 267,
+  "st": "monster_pressure",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-monster_pressure-village-1",
+  "tier": "village",
+  "pop": 245,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-monster_pressure-village-3",
+  "tier": "village",
+  "pop": 207,
+  "st": "monster_pressure",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-occupied-city-0",
+  "tier": "city",
+  "pop": 5170,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-occupied-city-1",
+  "tier": "city",
+  "pop": 10359,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-occupied-city-3",
+  "tier": "city",
+  "pop": 4671,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-occupied-hamlet-0",
+  "tier": "hamlet",
+  "pop": 20,
+  "st": "occupied+famine",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-occupied-hamlet-1",
+  "tier": "hamlet",
+  "pop": 95,
+  "st": "occupied+famine",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-occupied-hamlet-2",
+  "tier": "hamlet",
+  "pop": 59,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-occupied-hamlet-3",
+  "tier": "hamlet",
+  "pop": 43,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-occupied-thorp-0",
+  "tier": "thorp",
+  "pop": 13,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-occupied-thorp-1",
+  "tier": "thorp",
+  "pop": 17,
+  "st": "occupied+famine",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-occupied-thorp-2",
+  "tier": "thorp",
+  "pop": 28,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-occupied-thorp-3",
+  "tier": "thorp",
+  "pop": 18,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-occupied-town-0",
+  "tier": "town",
+  "pop": 1580,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-occupied-town-1",
+  "tier": "town",
+  "pop": 1994,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-occupied-town-2",
+  "tier": "town",
+  "pop": 310,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-occupied-village-0",
+  "tier": "village",
+  "pop": 85,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-occupied-village-1",
+  "tier": "village",
+  "pop": 132,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-occupied-village-2",
+  "tier": "village",
+  "pop": 386,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-occupied-village-3",
+  "tier": "village",
+  "pop": 134,
+  "st": "occupied",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-hamlet-0",
+  "tier": "hamlet",
+  "pop": 25,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-hamlet-1",
+  "tier": "hamlet",
+  "pop": 35,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-plague_onset-hamlet-2",
+  "tier": "hamlet",
+  "pop": 24,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-hamlet-3",
+  "tier": "hamlet",
+  "pop": 97,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-thorp-0",
+  "tier": "thorp",
+  "pop": 14,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-plague_onset-thorp-1",
+  "tier": "thorp",
+  "pop": 25,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-thorp-2",
+  "tier": "thorp",
+  "pop": 9,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-plague_onset-town-0",
+  "tier": "town",
+  "pop": 830,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-town-2",
+  "tier": "town",
+  "pop": 1264,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-plague_onset-town-3",
+  "tier": "town",
+  "pop": 475,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-village-0",
+  "tier": "village",
+  "pop": 110,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-village-1",
+  "tier": "village",
+  "pop": 214,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-plague_onset-village-2",
+  "tier": "village",
+  "pop": 141,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-plague_onset-village-3",
+  "tier": "village",
+  "pop": 197,
+  "st": "plague_onset",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-politically_fractured-city-0",
+  "tier": "city",
+  "pop": 14572,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-politically_fractured-hamlet-0",
+  "tier": "hamlet",
+  "pop": 92,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-politically_fractured-hamlet-1",
+  "tier": "hamlet",
+  "pop": 63,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-politically_fractured-hamlet-2",
+  "tier": "hamlet",
+  "pop": 52,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-politically_fractured-hamlet-3",
+  "tier": "hamlet",
+  "pop": 49,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-politically_fractured-thorp-0",
+  "tier": "thorp",
+  "pop": 9,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-politically_fractured-thorp-3",
+  "tier": "thorp",
+  "pop": 15,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-politically_fractured-town-3",
+  "tier": "town",
+  "pop": 1633,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-politically_fractured-village-0",
+  "tier": "village",
+  "pop": 187,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-politically_fractured-village-1",
+  "tier": "village",
+  "pop": 324,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-politically_fractured-village-2",
+  "tier": "village",
+  "pop": 331,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-politically_fractured-village-3",
+  "tier": "village",
+  "pop": 78,
+  "st": "politically_fractured",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-recently_betrayed-hamlet-0",
+  "tier": "hamlet",
+  "pop": 73,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-recently_betrayed-hamlet-1",
+  "tier": "hamlet",
+  "pop": 44,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-recently_betrayed-hamlet-2",
+  "tier": "hamlet",
+  "pop": 86,
+  "st": "recently_betrayed+famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-recently_betrayed-hamlet-3",
+  "tier": "hamlet",
+  "pop": 84,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-recently_betrayed-thorp-1",
+  "tier": "thorp",
+  "pop": 27,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-recently_betrayed-town-3",
+  "tier": "town",
+  "pop": 322,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-recently_betrayed-village-0",
+  "tier": "village",
+  "pop": 321,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-recently_betrayed-village-1",
+  "tier": "village",
+  "pop": 174,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-recently_betrayed-village-2",
+  "tier": "village",
+  "pop": 394,
+  "st": "recently_betrayed",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-religious_conversion-hamlet-0",
+  "tier": "hamlet",
+  "pop": 80,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-religious_conversion-hamlet-1",
+  "tier": "hamlet",
+  "pop": 56,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-religious_conversion-hamlet-2",
+  "tier": "hamlet",
+  "pop": 49,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-religious_conversion-thorp-0",
+  "tier": "thorp",
+  "pop": 15,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-religious_conversion-thorp-1",
+  "tier": "thorp",
+  "pop": 26,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-religious_conversion-thorp-2",
+  "tier": "thorp",
+  "pop": 21,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-religious_conversion-thorp-3",
+  "tier": "thorp",
+  "pop": 11,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-religious_conversion-town-2",
+  "tier": "town",
+  "pop": 1575,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-religious_conversion-town-3",
+  "tier": "town",
+  "pop": 1419,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-religious_conversion-village-0",
+  "tier": "village",
+  "pop": 264,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-religious_conversion-village-1",
+  "tier": "village",
+  "pop": 294,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-religious_conversion-village-2",
+  "tier": "village",
+  "pop": 298,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-religious_conversion-village-3",
+  "tier": "village",
+  "pop": 351,
+  "st": "religious_conversion",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-slave_revolt-city-0",
+  "tier": "city",
+  "pop": 6942,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-slave_revolt-hamlet-0",
+  "tier": "hamlet",
+  "pop": 89,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-slave_revolt-hamlet-1",
+  "tier": "hamlet",
+  "pop": 36,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-slave_revolt-hamlet-2",
+  "tier": "hamlet",
+  "pop": 98,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-slave_revolt-hamlet-3",
+  "tier": "hamlet",
+  "pop": 48,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-slave_revolt-thorp-1",
+  "tier": "thorp",
+  "pop": 15,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-slave_revolt-village-0",
+  "tier": "village",
+  "pop": 386,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-slave_revolt-village-1",
+  "tier": "village",
+  "pop": 89,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-slave_revolt-village-2",
+  "tier": "village",
+  "pop": 106,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-slave_revolt-village-3",
+  "tier": "village",
+  "pop": 171,
+  "st": "slave_revolt",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-succession_void-hamlet-0",
+  "tier": "hamlet",
+  "pop": 99,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-succession_void-hamlet-1",
+  "tier": "hamlet",
+  "pop": 52,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-succession_void-hamlet-2",
+  "tier": "hamlet",
+  "pop": 55,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-succession_void-hamlet-3",
+  "tier": "hamlet",
+  "pop": 28,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-succession_void-thorp-0",
+  "tier": "thorp",
+  "pop": 8,
+  "st": "succession_void+famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-succession_void-thorp-1",
+  "tier": "thorp",
+  "pop": 11,
+  "st": "succession_void+famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-succession_void-thorp-2",
+  "tier": "thorp",
+  "pop": 30,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-succession_void-town-2",
+  "tier": "town",
+  "pop": 2154,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-succession_void-village-2",
+  "tier": "village",
+  "pop": 87,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-succession_void-village-3",
+  "tier": "village",
+  "pop": 301,
+  "st": "succession_void",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-under_siege-city-0",
+  "tier": "city",
+  "pop": 13252,
+  "st": "under_siege",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-under_siege-city-1",
+  "tier": "city",
+  "pop": 2679,
+  "st": "under_siege",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-under_siege-hamlet-0",
+  "tier": "hamlet",
+  "pop": 48,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-under_siege-hamlet-1",
+  "tier": "hamlet",
+  "pop": 57,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-under_siege-hamlet-2",
+  "tier": "hamlet",
+  "pop": 94,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-under_siege-hamlet-3",
+  "tier": "hamlet",
+  "pop": 80,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-under_siege-metropolis-0",
+  "tier": "metropolis",
+  "pop": 46527,
+  "st": "under_siege",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-under_siege-metropolis-2",
+  "tier": "metropolis",
+  "pop": 33734,
+  "st": "under_siege",
+  "contradicted": "well paid, well equipped",
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-under_siege-thorp-0",
+  "tier": "thorp",
+  "pop": 9,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-under_siege-thorp-1",
+  "tier": "thorp",
+  "pop": 16,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-under_siege-thorp-2",
+  "tier": "thorp",
+  "pop": 6,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-under_siege-thorp-3",
+  "tier": "thorp",
+  "pop": 7,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-under_siege-town-0",
+  "tier": "town",
+  "pop": 2137,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 1,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-under_siege-town-1",
+  "tier": "town",
+  "pop": 1339,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 1,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-under_siege-town-2",
+  "tier": "town",
+  "pop": 2453,
+  "st": "under_siege",
+  "contradicted": null,
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-under_siege-village-0",
+  "tier": "village",
+  "pop": 281,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-under_siege-village-1",
+  "tier": "village",
+  "pop": 95,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-under_siege-village-2",
+  "tier": "village",
+  "pop": 224,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-under_siege-village-3",
+  "tier": "village",
+  "pop": 123,
+  "st": "under_siege",
+  "contradicted": "military command has taken charge of the streets",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-wartime-hamlet-1",
+  "tier": "hamlet",
+  "pop": 22,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-wartime-hamlet-2",
+  "tier": "hamlet",
+  "pop": 25,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-wartime-hamlet-3",
+  "tier": "hamlet",
+  "pop": 84,
+  "st": "wartime+famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-wartime-metropolis-2",
+  "tier": "metropolis",
+  "pop": 160267,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-wartime-thorp-0",
+  "tier": "thorp",
+  "pop": 18,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v1"
+ },
+ {
+  "s": "r2s-wartime-thorp-1",
+  "tier": "thorp",
+  "pop": 21,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-wartime-thorp-2",
+  "tier": "thorp",
+  "pop": 9,
+  "st": "wartime+famine",
+  "contradicted": null,
+  "watch": 0,
+  "baseLine": "v3"
+ },
+ {
+  "s": "r2s-wartime-thorp-3",
+  "tier": "thorp",
+  "pop": 6,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-wartime-town-0",
+  "tier": "town",
+  "pop": 1715,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 1,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-wartime-village-1",
+  "tier": "village",
+  "pop": 287,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-wartime-village-2",
+  "tier": "village",
+  "pop": 370,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v2"
+ },
+ {
+  "s": "r2s-wartime-village-3",
+  "tier": "village",
+  "pop": 213,
+  "st": "wartime",
+  "contradicted": "curfew",
+  "watch": 0,
+  "baseLine": "v1"
+ }
+]

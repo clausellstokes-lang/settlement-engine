@@ -1,0 +1,46 @@
+towns moved 417 | lines out 427 | lines in 438
+OUT
+  93 Officials at {N} are spending money their posts never paid them, and nobody in the {T} ask
+  66 Crime here answers to one ring. It keeps the streets quiet because trouble brings the law,
+  66 Criminal money is reaching the officials of {N} one at a time, because the {T} is poor and
+  61 Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, i
+  60 Shopkeepers here pay one ring for protection, and the ring pays officials in turn. It stam
+  48 One criminal ring decides what crime is allowed here. Its rules are predictable and it can
+  16 The criminals at {N} are losing their grip on the hall: the {T} is doing well again and it
+  15 The criminals at {N} still own a few officials, but keeping them bought now costs more tha
+  2 Thieves, fences and bandits each work for themselves; there is no boss to threaten or to b
+IN
+  159 Each season it gets easier to buy an official at {N}: the {T} stays poor, the streets stay
+  72 Crime here answers to one ring. It keeps the streets quiet because trouble brings the law,
+  63 Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, i
+  62 Shopkeepers here pay one ring for protection, and the ring pays any official who will take
+  54 One criminal ring decides what crime is allowed here. Its rules are predictable and it can
+  26 The approach was made at {N} and did not take. Prosperity and a working watch did what no 
+  2 The criminals at {N} still own a few officials, but keeping them bought now costs more tha
+EASIER (the one ADVANCING line left at no official in pay): 244
+ by tier {
+  hamlet: 66,
+  thorp: 64,
+  town: 25,
+  village: 75,
+  city: 9,
+  metropolis: 5
+}
+ contradicted on its own page by a held street: 63 {
+  under_siege: 21,
+  '-': 181,
+  wartime: 16,
+  occupied: 19,
+  monster_pressure: 3,
+  famine: 1,
+  'occupied+famine': 3
+}
+ by base line { v3: 93, v2: 85, v1: 66 }
+ contradicted, by base line { v3: 22, '-': 181, v1: 15, v2: 26 }
+ contradiction words {
+  'military command has taken charge of the streets': 20,
+  '-': 181,
+  curfew: 41,
+  'well paid, well equipped': 2
+}
+ in a thorp or hamlet (streets, an official): 130
