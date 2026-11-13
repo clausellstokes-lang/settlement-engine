@@ -3731,10 +3731,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: famine"
           ],
-          "text": "With only its {good} to fall back on, {settlement} feels every bad season there at every table.",
+          "text": "{settlement} has little food of its own but its {good}, so a bad season for the {good} is felt at every table.",
           "slots": [
-            "good",
-            "settlement"
+            "settlement",
+            "good"
           ],
           "vid": 3
         },
@@ -5594,7 +5594,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: under_siege"
           ],
-          "text": "{settlement} used to send its {resource} out half-worked; with the roads cut by the siege it piles up instead, and nobody here can finish it.",
+          "text": "With the roads cut by the siege, {settlement} can no longer send out its {resource}, and what it has stays in the town.",
           "slots": [
             "settlement",
             "resource"

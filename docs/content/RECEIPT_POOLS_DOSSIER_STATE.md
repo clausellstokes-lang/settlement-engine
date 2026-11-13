@@ -1377,7 +1377,7 @@ sentence in two voices. **No named deaths.**
 **FOOD SOURCES: one source**
 1. `[ledger · no crisis: famine]` {settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town.
 2. `[street · colour]` Nearly every meal at {settlement} goes back to the {good}, and after a poor season for the {good}, everyone eats less.
-3. `[unfolding · no crisis: famine]` With only its {good} to fall back on, {settlement} feels every bad season there at every table.
+3. `[unfolding · no crisis: famine]` {settlement} has little food of its own but its {good}, so a bad season for the {good} is felt at every table.
 4. `[ledger · crisis: famine]` {settlement} lived off its {good} and little else, and the {good} has failed; there is nothing else to turn to.
 
 **FOOD SOURCES: several, the largest named**
@@ -1717,7 +1717,7 @@ A composed page draws one of each grain, never two.
 2. `[visitor · no crisis: under_siege]` {resource} leaves {settlement} half-finished, and nobody in the town is troubled by it.
 3. `[threshold]` The {chain} between {resource} and {good} is begun and not finished here; what stands between the two is one {institution} the town does not have.
 4. `[street · no crisis: under_siege]` The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.
-5. `[unfolding · crisis: under_siege]` {settlement} used to send its {resource} out half-worked; with the roads cut by the siege it piles up instead, and nobody here can finish it.
+5. `[unfolding · crisis: under_siege]` With the roads cut by the siege, {settlement} can no longer send out its {resource}, and what it has stays in the town.
 6. `[ledger · crisis: under_siege]` Half of this trade was always done elsewhere, and with the siege closing the roads, the half the town does has nowhere to go.
 
 **EXPLOITATION: `fullyExploited`**
@@ -7013,7 +7013,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 1. `[street · no threat · crisis: any]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
 2. `[visitor · crisis: any]` No wall marks where {settlement} ends; the last houses simply give way to open country.
 3. `[street · threat · crisis: any]` {settlement} is too small to wall, and what has come for it now makes the smallness a danger rather than a protection.
-4. `[ledger · no threat · crisis: any]` Nobody ever thought {settlement} worth a wall, and nothing has yet given it cause to want one.
+4. `[ledger · no threat · crisis: any]` {settlement} has no wall, and nothing has yet come against it that a wall would have stopped.
 5. `[unfolding · threat · crisis: any]` {settlement} has no wall to fall back behind, so the threat now at hand is being met in the open, house by house.
 
 **`UNWALLED-LARGE`** {colour}
@@ -7319,7 +7319,7 @@ no compass word, no real-world place, no named analogy.*
 3. `[street]` Nobody wonders why {settlement} keeps {institution}: the {resource} is all around.
 
 **`BOUGHT-IN`** {colour}
-1. `[ledger · no crisis: under_siege]` {settlement} cannot produce its own {good}, so it buys it in.
+1. `[ledger · no crisis: under_siege]` {settlement} brings in {good} from outside.
 2. `[visitor · market · no crisis: under_siege]` {settlement} buys in what it cannot make, and the trading keeps as many people busy as the making would.
 3. `[street]` {institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
 4. `[trade · no crisis: under_siege]` Ask where {settlement}'s {good} comes from and you are pointed at the carts, not at anyone in the town.
@@ -7327,7 +7327,7 @@ no compass word, no real-world place, no named analogy.*
 6. `[newcomer · market · no crisis: under_siege · no crisis: famine]` Anyone looking for work at {settlement} finds it in carrying, weighing and selling as often as in making.
 7. `[ledger · crisis: under_siege]` {settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last.
 8. `[street · crisis: under_siege]` The carts that kept {settlement}'s trades supplied have not come since the siege began.
-9. `[trade · no crisis: under_siege]` What {settlement}'s trades use comes in from elsewhere more often than from its own ground.
+9. `[trade · no crisis: under_siege]` Much of what changes hands at {settlement} came from somewhere else first.
 10. `[unfolding · crisis: under_siege]` {settlement} is running short of {good}, and the siege lets none in.
 
 **`UNWORKED`** {colour}

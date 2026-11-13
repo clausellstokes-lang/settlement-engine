@@ -11413,7 +11413,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "{settlement} cannot produce its own {good}, so it buys it in.",
+          "text": "{settlement} brings in {good} from outside.",
           "slots": [
             "settlement",
             "good"
@@ -11506,7 +11506,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "What {settlement}'s trades use comes in from elsewhere more often than from its own ground.",
+          "text": "Much of what changes hands at {settlement} came from somewhere else first.",
           "slots": [
             "settlement"
           ],

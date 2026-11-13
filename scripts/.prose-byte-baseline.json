@@ -55,20 +55,20 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 265319,
-      "gzip": 35685,
+      "raw": 265318,
+      "gzip": 35671,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 185760,
-      "gzip": 25963,
+      "raw": 185753,
+      "gzip": 25951,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 296662,
-      "gzip": 37915,
+      "raw": 296627,
+      "gzip": 37897,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },

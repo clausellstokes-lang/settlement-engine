@@ -9747,7 +9747,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "Nobody ever thought {settlement} worth a wall, and nothing has yet given it cause to want one.",
+          "text": "{settlement} has no wall, and nothing has yet come against it that a wall would have stopped.",
           "slots": [
             "settlement"
           ],
