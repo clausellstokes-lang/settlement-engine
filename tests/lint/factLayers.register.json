@@ -1718,10 +1718,6 @@
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {
-     "line": "const churchControlsEcon = economicState.situationDesc?.toLowerCase().includes('church controls');",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
      "line": "f.faction?.toLowerCase().includes('church') ||",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
