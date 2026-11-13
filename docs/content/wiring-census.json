@@ -1721,7 +1721,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "court",
@@ -5985,7 +5985,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "settlement.economicState.compound.inst.hasMagesGuild",
@@ -55463,7 +55463,7 @@
         "DS-DEF-5 :: ARCANE: mages' guild"
       ],
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "blocks": [
         "DS-DEF-5"
       ]
@@ -55562,7 +55562,7 @@
         "DS-DEF-5 :: ARCANE: mages' guild"
       ],
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "blocks": [
         "DS-DEF-5"
       ]
@@ -66484,7 +66484,7 @@
       "subject": "Internal Security: no legal infrastructure",
       "fields": [],
       "readingFunction": "internalRowPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67093,7 +67093,7 @@
         "settlement.defenseProfile.traditions.hasArcaneGuild"
       ],
       "readingFunction": "arcaneFixturePoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

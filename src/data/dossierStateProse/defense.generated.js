@@ -551,7 +551,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement}'s walls and fighters are holding against the creatures, but each season wears them down, and the town is barely keeping up.",
+          "text": "{settlement}'s walls and fighters are holding against the creatures, and every season of it wears on them.",
           "slots": [
             "settlement"
           ],
@@ -1269,7 +1269,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "If you are wronged at {settlement}, there is nowhere to take it, and no local is surprised.",
+          "text": "If you are wronged at {settlement}, there is no court to take it to, and no local is surprised.",
           "slots": [
             "settlement"
           ],
@@ -4826,7 +4826,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "ARCANE: mages' guild": [
         {
           "angle": "street",
-          "text": "The mages' guild at {settlement} keeps the town's wards and answers hostile spells.",
+          "text": "The mages at {settlement} keep the town's wards and answer hostile spells.",
           "slots": [
             "settlement"
           ],
@@ -4834,7 +4834,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement}'s magical defence sits in the mages' guild's books, not the town's: the guild can withdraw it, and the town cannot hold it.",
+          "text": "{settlement}'s magical defence sits in the mages' own books, not the town's: the mages can withdraw it, and the town cannot hold it.",
           "slots": [
             "settlement"
           ],
@@ -8025,7 +8025,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "magic"
           ],
-          "text": "There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.",
+          "text": "Whatever magic reaches {settlement}, the town does not rest on it: nothing it lives by would stop without it.",
           "slots": [
             "settlement"
           ],

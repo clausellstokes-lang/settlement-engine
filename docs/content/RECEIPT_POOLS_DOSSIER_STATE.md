@@ -2828,7 +2828,7 @@ supplies the ancestry.
 **`Beasts & Monsters`: `plagued`, perimeter AND organized force**
 1. `[ledger · colour]` The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly.
 2. `[street · gate]` Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
-3. `[unfolding · colour]` {settlement}'s walls and fighters are holding against the creatures, but each season wears them down, and the town is barely keeping up.
+3. `[unfolding · colour]` {settlement}'s walls and fighters are holding against the creatures, and every season of it wears on them.
 4. `[visitor · colour]` The wall at {settlement} is manned day and night against the creatures, and nobody walks out past it unarmed.
 
 **`Beasts & Monsters`: `plagued`, perimeter but NO force to hold it**
@@ -2927,7 +2927,7 @@ supplies the ancestry.
 **`Internal Security`: no legal infrastructure** {colour}
 1. `[ledger]` {settlement} keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it.
 2. `[street]` The town settles things itself, quickly, and does not always settle them well.
-3. `[visitor]` If you are wronged at {settlement}, there is nowhere to take it, and no local is surprised.
+3. `[visitor]` If you are wronged at {settlement}, there is no court to take it to, and no local is surprised.
 
 **`Economic Survival`: `STRONG`**
 1. `[ledger · no crisis: debt · no crisis: famine · prosperity: ≥ moderate]` {settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without going begging.
@@ -3403,8 +3403,8 @@ print nowhere). Description position: plain lines.
 2. `[ledger]` The town's defence against magic rests on the wizard's tower at {settlement}, and no muster roll lists it: if the wizard leaves, it leaves too.
 
 **ARCANE: mages' guild** {colour}
-1. `[street]` The mages' guild at {settlement} keeps the town's wards and answers hostile spells.
-2. `[ledger]` {settlement}'s magical defence sits in the mages' guild's books, not the town's: the guild can withdraw it, and the town cannot hold it.
+1. `[street]` The mages at {settlement} keep the town's wards and answer hostile spells.
+2. `[ledger]` {settlement}'s magical defence sits in the mages' own books, not the town's: the mages can withdraw it, and the town cannot hold it.
 
 **ARCANE: alchemists** {colour}
 1. `[street]` Part of the magical help at {settlement} is brewed: alchemy is practised here, and some of what it makes goes to the defenders.
@@ -3819,7 +3819,7 @@ relied on by nothing.
 
 **`magicDependency` false**
 1. `[ledger · colour]` Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.
-2. `[counterforce · magic]` There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.
+2. `[counterforce · magic]` Whatever magic reaches {settlement}, the town does not rest on it: nothing it lives by would stop without it.
 3. `[street · colour]` The town would go on if the arcane went away, more slowly and less comfortably.
 
 **`magicDependency` false, availability absent** {colour}
@@ -7263,7 +7263,7 @@ no compass word, no real-world place, no named analogy.*
 3. `[street]` In {settlement} the law keeps a building of its own, and people take their quarrels there.
 
 **`GARRISONED`**
-1. `[visitor]` Paid hands keep {settlement} safe; the town does not trust to luck and neighbours.
+1. `[visitor]` {settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
 2. `[ledger · walls]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
 
 **`LETTERED`** {colour}

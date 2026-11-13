@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 264150,
-      "gzip": 35592,
+      "raw": 264089,
+      "gzip": 35571,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 296067,
-      "gzip": 37843,
+      "raw": 296086,
+      "gzip": 37845,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -819,6 +819,14 @@
       "toRaw": 296067,
       "gzipAfter": 37843,
       "reason": "+58 B raw over the committed 296009 (gzip level 9: 37833 -> 37843): DS-GEN-16's eight legacy lines say the time band as a predicate ('The flood is years old'), not as a broken appositive ('the flood, years old,') (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-4 item 4",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 296067,
+      "toRaw": 296086,
+      "gzipAfter": 37845,
+      "reason": "+19 B raw over the committed 296067 (gzip level 9: 37843 -> 37845): five defence-desk lines reworded off claims the record does not hold (no court, paid hands safe, barely keeping up, a mages' guild, every practitioner) (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

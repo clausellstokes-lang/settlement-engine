@@ -11025,7 +11025,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "GARRISONED": [
         {
           "angle": "visitor",
-          "text": "Paid hands keep {settlement} safe; the town does not trust to luck and neighbours.",
+          "text": "{settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.",
           "slots": [
             "settlement"
           ],
