@@ -21,17 +21,28 @@ import { institutionHouseLabel } from './institutionDisplayName.js';
  * @returns {Array<{ name: string, present: boolean }>}
  */
 export function chainHousesOf(patterns, instNames) {
-  const names = (Array.isArray(instNames) ? instNames : []).map((n) => String(n || '').toLowerCase());
+  const rawNames = (Array.isArray(instNames) ? instNames : []).map((n) => String(n || '')).filter(Boolean);
+  const names = rawNames.map((n) => n.toLowerCase());
   /** @type {Array<{ name: string, present: boolean }>} */
   const out = [];
   const seen = new Set();
   for (const pattern of Array.isArray(patterns) ? patterns : []) {
     const p = String(pattern || '');
     if (!p) continue;
-    const name = institutionHouseLabel(p);
+    const word = p.toLowerCase().split(/[\s(]/)[0];
+    // THE CHAIR'S RULING (e) (2026-11-13 19:05; W2-C-LEAVES' #195 #196): a house the roster holds ONLY as a road to
+    // another place's ("Access to external mill", "Access to parish church") is not worked here. The card names the
+    // roster's own row, in the words the page already uses for it, never the house the town lacks. The test is
+    // restated from tradeListDisplay.js :: localProductionAsPrinted's `accessOnly` (the third leaves lane's; not
+    // imported across lanes; the seat after the merges makes it one): the pattern's first word, matched against the
+    // roster, matches only rows that begin "access to".
+    const access = word === 'access'
+      ? (names.includes(p.toLowerCase()) ? p : '')
+      : (() => { const m = rawNames.filter((n) => n.toLowerCase().includes(word)); return m.length > 0 && m.every((n) => n.toLowerCase().startsWith('access to')) ? m[0] : ''; })();
+    const name = institutionHouseLabel(access || p);
     if (seen.has(name)) continue;
     seen.add(name);
-    out.push({ name, present: names.some((n) => n.includes(p.toLowerCase().split(/[\s(]/)[0])) });
+    out.push({ name, present: names.some((n) => n.includes(word)) });
   }
   return out;
 }

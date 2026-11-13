@@ -103,7 +103,7 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
             ACTIVE SUPPLY CHAINS · {s.activeChains.length}
           </Text>
           {s.activeChains.map((chain, i) => (
-            <ChainCard key={`chain-${i}`} chain={chain} />
+            <ChainCard key={`chain-${i}`} chain={chain} instNames={(settlement?.institutions || []).map((x) => x?.name)} />
           ))}
         </View>
       )}
@@ -189,7 +189,7 @@ function CategoryCard({ cat }) {
   );
 }
 
-function ChainCard({ chain }) {
+function ChainCard({ chain, instNames = [] }) {
   // Honor the chain's own disruption status first — the card used to label
   // trade-impaired/vulnerable chains 'Active', contradicting the web panel.
   const status = String(chain.status || '').toLowerCase();
@@ -221,7 +221,8 @@ function ChainCard({ chain }) {
     chainSourceOf(chain) ? humanize(label(chainSourceOf(chain))) : null,
     // R2-CODE-B item 1: the houses by the seam's house label, each once (domain/display/chainHouses.js),
     // the screen's chain card's own read: no rank's count range the roster does not hold.
-    chainHousesOf(chain.processingInstitutions, []).map((h) => humanize(h.name)).join(' + ') || null,
+    // Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.
+    chainHousesOf(chain.processingInstitutions, instNames).map((h) => humanize(h.name)).join(' + ') || null,
     (chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null,
   ].filter(Boolean).join(' \u00bb ');
 
