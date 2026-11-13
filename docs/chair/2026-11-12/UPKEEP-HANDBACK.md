@@ -45,6 +45,17 @@ The build was made and measured before the ruling arrived and was never committe
 - **FOUND, NOT CURED (for the chair): the law fails off the app's default dials.** On 240 births with every dial random (`once8.fresh.ndjson`, `once7-<size>-<i>`): **60** births hold a house that moves two parts feeding one score. Classes: "Access to parish church" opens both the small place's parish part and the clergy part, both feeding internal (22); "Monastery or friary" opens clergy and the hospital, both feeding monster (11); a church, grove or tower moving arcane, clergy and druids together on monster (the rest; PLAUSIBLY the traditions' shared monster cap, R2, re-apportioning when one tradition's house goes: read from the code, not traced). None is a magic house's double role. **Recommendation:** the chair rules whether the parish/clergy and monastery/hospital pairs are one role or two; the cap's re-apportionment is count once's own rule and should be excluded from the measure by name.
 
 
+- **Later message (18:45), ITEM 3'S NEW LIST:** the round-three cut (`lane/round-3-cut-2026-11-13`, ROUND-3-CUT-2026-11-13.md sections 2, 6, 6b and ROUND-3-CUT.json) replaces the round-two list for this lane's files: `safetyProfile.js` (16) and `economy/economicState.js` (13), 6 high and 23 medium; `dossierViewModel.js` (4 medium); `domain/defense/defenseFacts.js` (6); the PDF forces' "REQ" and "FORCED" badges in `DefenseSecurity.jsx` (RULED: the generator's provenance, they leave the PDF). NOT this lane's: `EconomicsTab.jsx`, `DefenseTab.jsx`. The Economics "Needs X · affects" row: only what it says falsely, never its shape.
+- **Later message (18:51), F1 to F3, after W4 and BEFORE items 1 and 2b:** F1 "no force" read in the wrong place: `defenseInstitutionBuckets.js :: standingDefenseForces` gains the watch and a contracted company (a town has no force only with no garrison, militia, watch or contracted company), from the partition's own tables; the selector (`defenseStateProse.js`) untouched; ACCEPTANCE classes A and B at zero by `classes3.py`, twenty towns read, the defence profile equal field for field. F2 the Foundry journal never prints a raw category key as a power (`pdf/lib/viewModel.js :: npcsSlice`). F3 the PDF's band sentence drawn within the band the row prints (`threatAssessment.js`); measure first; a band with no true sentence is a stop with three towns.
+
+## W3 — the will unpaid on the hired branch (befa936dc)
+
+- **The cure:** the hired branch's rate is `D.none + D.hiredExtra`, unpaid (`defenseGenerator.js :: computeDefenseScores`); the hired parts stay paid.
+- **Red first:** `defenceParts.test.js`, "the martial will is not paid on the hired branch either (W3)": the reader's rv2 births in the app's shape, each ANCHORED to the branch (nothing built or standing, a hired part, paid short, no hold, no crisis).
+- **Measured** (the reader's `willpay.mjs`, classed by `probes/UPKEEP-7/willcls.py`; `hashscan.mjs`; its 1,440): **11 -> 0.** DECLARED MOVE against 2133873fe: 22 records, the military score on 22; readiness up on 18 (none down, max +2); **2 up a band**, Vulnerable -> Lightly Defended: rv2-calm-hamlet-33 and rv2-calm-village-38 (23 -> 24), where the power structure moves with the band.
+- **C-M1, declared as exposure at the final statement** (the six births of the fourth read, town by town; the corpus untouched).
+
+
 ---
 
 # COHERENCE-UPKEEP: the hand-back (the sixth seat, COHERENCE-UPKEEP-6, 2026-11-13) — HANDED BACK BY FILE, WITHOUT THE FINAL STATEMENT (the chair's ruling of 15:04: the seventh seat makes it once)
