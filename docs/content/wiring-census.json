@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2818,
+    "variants": 2824,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -53386,7 +53386,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
+      "variants": 5,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -53440,6 +53440,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 3,
         "institution: temple": 2
       },
       "undeclared": 0,
@@ -53464,7 +53465,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
+      "variants": 5,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -53518,6 +53519,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 3,
         "institution: temple": 2
       },
       "undeclared": 0,
@@ -73565,7 +73567,7 @@
       "subject": "FLAG: heresySuppression: hunted",
       "fields": [],
       "readingFunction": "heresyPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -73573,7 +73575,7 @@
       "subject": "FLAG: heresySuppression: preached",
       "fields": [],
       "readingFunction": "heresyPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

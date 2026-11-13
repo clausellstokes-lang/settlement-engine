@@ -7241,10 +7241,16 @@ no compass word, no real-world place, no named analogy.*
 **`FLAG: heresySuppression: hunted`**
 1. `[local · institution: temple]` The church in {settlement} hunts heresy openly. Anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities, so those who have the art keep it hidden.
 2. `[watch · institution: temple]` The church in {settlement} watches for heresy: a charm sold in the street or a spell worked behind a shutter can bring armed men to the door in the faith's name.
+3. `[newcomer · colour]` Anyone at {settlement} suspected of working magic is named aloud and shunned, and those who have the art keep it even from their kin.
+4. `[watch · colour]` A charm worked in the open at {settlement} is reported before nightfall, and the faithful see to it that whoever worked it leaves.
+5. `[local · colour]` The faithful of {settlement} treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.
 
 **`FLAG: heresySuppression: preached`**
 1. `[newcomer · institution: temple]` The church in {settlement} preaches that magic is heresy against the faith, and a newcomer seen working a spell will be reported to the priests.
 2. `[local · institution: temple]` Magic is called heresy from {settlement}'s pulpit, and folk of the faith who know a charm or two keep it to themselves.
+3. `[local · colour]` Most people at {settlement} hold that magic offends the faith, and a neighbour who works it is talked about, though not yet turned in.
+4. `[street · colour]` Children at {settlement} are taught that spellwork is heresy, and they learn to look away from anyone who does it.
+5. `[newcomer · colour]` A newcomer at {settlement} soon hears that magic is heresy here, and is watched until the neighbours are sure of them.
 
 **`FLAG: religiousFraud`**
 1. `[watch · institution: temple]` Some of {settlement}'s clergy work with its thieves: relics are sold twice, alms go missing, and no one in office asks where the money went. The fraud trades on the faith of ordinary folk.
