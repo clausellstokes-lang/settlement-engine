@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2960,
+    "variants": 2959,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -5020,7 +5020,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 3,
       "grammars": 1,
       "predicate": [
         {
@@ -5084,7 +5084,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3,
+        "colour": 2,
         "gate": 1,
         "no crisis: under_siege": 1
       },
@@ -55090,7 +55090,7 @@
       "pools": [
         "DS-DEF-5 :: garrison PRESENT"
       ],
-      "variants": 4,
+      "variants": 3,
       "grammars": 1,
       "blocks": [
         "DS-DEF-5"
@@ -66985,7 +66985,7 @@
         "forces.garrison.present"
       ],
       "readingFunction": "forceCorePoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

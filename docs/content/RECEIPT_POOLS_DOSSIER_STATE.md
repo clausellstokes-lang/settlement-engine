@@ -3322,7 +3322,6 @@ may not say the contract is failing unless the economic arm supplies that.
 1. `[ledger · colour]` {settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.
 2. `[street · colour]` {settlement}'s soldiers serve all year, not for a season; the town relies on them and grumbles about them in equal measure.
 3. `[visitor · gate · no crisis: under_siege]` Everyone entering {settlement} is counted at the gate by a soldier whose job it is, and counted again on the way out.
-4. `[unfolding · colour]` {settlement}'s soldiers are paid by the season and drilled by the week, whether or not anything comes.
 
 **militia PRESENT (no garrison)** {colour}
 1. `[ledger]` {settlement}'s defense is its own people under arms. They know the ground, they can be raised, and raising them stops everything else the town was doing.
