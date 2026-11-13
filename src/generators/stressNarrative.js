@@ -24,6 +24,7 @@
  * to the old inline closures.
  */
 import { drawDeclared, resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
+import { atomHolds } from '../domain/facts/factVocabulary.js';
 
 /**
  * #8 (STYLE-RULINGS §1(b), WAVE-RULINGS item 8; W4 PEOPLE second seat 2026-11-07): the migration's crisis
@@ -136,8 +137,18 @@ const RENDERERS = {
   under_siege: (name) =>
     `Enemies are camped around ${name}, and nothing comes in by road. Inside, people argue over whether to hold out or give in.`,
 
-  famine: (name) =>
-    `${name} has lost its harvest for a second season. Rationing has begun, the wealthy are hoarding, and the children are visibly hungry.`,
+  // famine: "lost its harvest" presumes the place grows grain (R2-CODE-B item 6; the cold list REVIEW-W2A-3
+  // #857: a fishing town whose food record holds `foodSources` ["fish"]). A line written in code is a pool of
+  // two checked at its print site: the vocabulary's `grain` atom (the food record's own source) read by
+  // `atomHolds`; where the record grows none, the twin says what the famine is. No draw; an unread record
+  // (no facts, or the atom unanswered) keeps the line as it always read.
+  famine: (name, _roll, facts) => {
+    const rest = ' Rationing has begun, the wealthy are hoarding, and the children are visibly hungry.';
+    const noGrain = facts ? atomHolds('grain', facts) === false : false;
+    return noGrain
+      ? `${name} has gone short of food for a second season.${rest}`
+      : `${name} has lost its harvest for a second season.${rest}`;
+  },
 
   occupied: (name) =>
     `The forces of another power hold ${name}, and its own officials take their orders. Most people keep their heads down; a few fight back in secret.`,
@@ -204,13 +215,16 @@ const RENDERERS = {
   // wartime: the only summary that draws from rng. rollStressSummary made the draw
   // (`rng() < 0.45` → roll.profit) at the pipeline's draw point; this pure render
   // just branches on that pre-rolled token (the draw is unchanged; the profit text is not).
-  wartime: (name, roll) => {
+  // R2-CODE-B item 6 (the cold list REVIEW-W2A-3 #670: "doing well out of it" for a city whose prosperity
+  // is Poor and whose Economics reads "The place earns less than it spends"): the profit text is true only
+  // at `prosperity: ≥ moderate` (the vocabulary's band, read by `atomHolds` at this print site); refused,
+  // the pick resolves to the next row, the loss text (no line added, the coin's draw unchanged). The loss
+  // text stands as it always did; an unread record keeps the coin's text.
+  wartime: (name, roll, facts) => {
     const s = name || "the settlement";
-    return roll?.profit
-      ? s +
-          " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later."
-      : s +
-          " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. " + WARTIME_PRICES + " The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
+    const [profit, loss] = WARTIME_VARIANTS(s);
+    const refused = facts ? atomHolds('prosperity: ≥ moderate', facts) === false : false;
+    return roll?.profit && !refused ? profit.text : loss.text;
   },
 
   // mass_migration: the old closure used `typeof getInstFlags == 'function'` (ALWAYS
@@ -236,6 +250,19 @@ const RENDERERS = {
     );
   },
 };
+
+/**
+ * wartime's two texts for one place (`s` = the name, or "the settlement"): the profit text, true only
+ * where the place is at least of moderate prosperity (checked at the renderer), and the loss text.
+ * @param {string} s
+ * @returns {ReadonlyArray<{ id: string, text: string }>}
+ */
+function WARTIME_VARIANTS(s) {
+  return [
+    { id: 'profit', text: s + " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later." },
+    { id: 'loss', text: s + " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. " + WARTIME_PRICES + " The governing authority is demanding sacrifice while certain families are quietly thriving on contracts." },
+  ];
+}
 
 /**
  * religious_conversion's three wordings for one place (`s` = the name, or "the settlement"), in
