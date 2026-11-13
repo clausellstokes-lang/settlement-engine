@@ -504,7 +504,7 @@ const buildHistoricalEvent = (
     const tensionType = STRESS_TO_TENSION[primaryStress];
     if (tensionType && !usedTypes.has(tensionType)) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === tensionType);
-      if (tmpl && tensionAdmitted(tmpl, hookFacts)) {
+      if (tmpl && tensionAdmitted(tmpl, hookFacts) && trueToRecordAt(tmpl, hookFacts, true, context.stability, context.prosperity)) { // W2-FIX-DATA-2 item 2
         selected.push({ ...tmpl });
         usedTypes.add(tensionType);
       }
@@ -523,7 +523,6 @@ const buildHistoricalEvent = (
       const guildTmpl = pool.find(e => e.type === 'guild_conflict');
       if (guildTmpl) candidate = guildTmpl;
     }
-    pool.splice(pool.indexOf(candidate), 1);
     // ⛔ NO CRIME WAVE WITHOUT CRIME (lane RUNG1B-F4 unit 3b, 2026-11-04;
     // docs/F4_CRIME_SIGNAL_2026-11-04.md). The fill drew `crime_wave` in places with no criminal
     // faction and no criminal house, and its "the criminal network" and "A guard captain is on
@@ -534,6 +533,12 @@ const buildHistoricalEvent = (
     // never adds one, so "none here" is "none on the final record".
     if (candidate.type === 'crime_wave' && !crimeSignalOf({ seats: factions, estate: institutions }).present) continue;
     if (!tensionAdmitted(candidate, hookFacts)) continue; // R-AL: a template that presumes a fact declares it
+    // ⛔ W2-FIX-DATA-2 items 2 and 3 (the REVIEW-W2B cold list, rows 31, 300, 40, 314): NOR A TENSION THE RECORD
+    // ITSELF MAKES FALSE — a leadership vacuum under a power the record calls settled, a collapse of fortunes where
+    // the record says the place ends the year with money to spare, a guild war where no guild stands. Set aside
+    // exactly as the crime signal's own above (R-Q: the template leaves the pool and the loop draws again; no draw is
+    // added or re-mapped), so only those places' streams move.
+    if (!trueToRecordAt(candidate, hookFacts, true, context.stability, context.prosperity)) continue;
     selected.push({ ...candidate });
     usedTypes.add(candidate.type);
   }
@@ -652,7 +657,11 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
       ),
     );
     if (!pool.length) continue;
-    const tmpl = pool[Math.floor(_rng() * pool.length)];
+    // W2-FIX-DATA-2 item 3: the roll is unchanged; the drawn template, where the record makes it false (a guild war
+    // with no guild), gives way DRAW-FREE to the next admitted template of this same pool. None → the slot is skipped,
+    // as an exhausted category is.
+    const tmpl = admittedTimelineTemplate(pool, Math.floor(_rng() * pool.length), hookFacts);
+    if (!tmpl) continue;
     // Track the exact template so it is not emitted twice this timeline.
     const tmplName = tmpl.name || tmpl.type || '';
     usedNames.add(tmplName);
@@ -717,6 +726,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
         ? HISTORICAL_EVENTS_DATA.find(event => (
             event.type === anchorType
             && worldLaw.allowsHistoryEvent(event)
+            && trueToRecordAt(event, hookFacts, false) // W2-FIX-DATA-2 item 3: an anchor the record makes false is no anchor (the event keeps its own words)
           ))
         : null;
       if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
@@ -1105,3 +1115,85 @@ function apartFromOwnEvent(description, type, timeline, render) {
   if (!own || own.description !== description) return description;
   return historyDescVariantsOf(type).map(render).find((text) => text !== own.description) ?? description;
 }
+
+// ─── W2-FIX-DATA-2 items 2 and 3 (2026-11-13; the REVIEW-W2B cold list, rows 31, 300, 40, 314): A TEMPLATE THE RECORD MAKES FALSE ──
+// The record's own tension said "the last strong leader died or left, and no one has yet consolidated their position"
+// beside a settled power, and "a speculative frenzy … collapsed … ruining fortunes" in a city with money to spare; the
+// timeline told of rival guilds at war in a hamlet that has none. Each template now declares what makes it false, read
+// through its home: the prosperity band and the guild through the vocabulary (`factsOf.js :: prosperity`, `guild`), the
+// power's settledness through the stability band (`labelBands.js :: stabilityBandOf`; the vocabulary has no atom for it).
+// A refused pick resolves DRAW-FREE to the next admitted template of the same pool: no roll is added or moved.
+// At the end of the file on purpose: the prose wiring census cites this file's producer writes by line.
+import { stabilityBandOf } from '../domain/display/labelBands.js';
+import { prosperityLabelOf } from '../domain/prosperityRank.js';
+import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary.js';
+
+/**
+ * WHAT MAKES A TEMPLATE FALSE, declared beside the selection (never on the template object, which is spread into the
+ * record). `needs` are vocabulary atoms, read through the birth's facts; `timeline`: the past event too (a guild war
+ * is a war between guilds whenever it was fought), else the current tension only.
+ * @type {Readonly<Record<string, Readonly<{ needs: ReadonlyArray<string>, timeline: boolean }>>>}
+ */
+export const HISTORY_TEMPLATE_RECORD_DECLARATIONS = Object.freeze({
+  guild_conflict: Object.freeze({ needs: Object.freeze(['guild']), timeline: true }),
+});
+
+/** The stability bands that say the power is settled: a leadership vacuum is false under them (`labelBands.js`). */
+export const SETTLED_STABILITY_BANDS = Object.freeze(['Stable', 'Ordered', 'Enforced Order', 'Rigid']);
+
+/** The tension templates a settled power makes false (`powerStructure.stability`, banded). */
+export const TENSIONS_FALSE_UNDER_A_SETTLED_POWER = Object.freeze(['leadership_vacuum']);
+
+/**
+ * THE PROSPERITY A TENSION DENIES. A tension that says the fortunes are ruined and the wealth drained away is false
+ * where the record says the place ends its year with money to spare. The band is read through its own home
+ * (`prosperityRank.js :: prosperityLabelOf`, the reader the facts delegate to); the economy's record is not among the
+ * birth facts the history holds, so the band is handed in from the history's own context (`buildHistoryContext`'s
+ * `prosperity`, measured equal to the final record's on 720 of 720 births).
+ * Row 40 of the cold list is the crash; the trade collapse prints the same claim in the same towns.
+ */
+export const TENSIONS_FALSE_WHERE_THE_PLACE_IS_RICH = Object.freeze(['market_crash', 'trade_collapse']);
+
+/** The prosperity bands that say the money is there (`prosperityRank.js :: PROSPERITY_LABELS`, the top two). */
+export const RICH_PROSPERITY_BANDS = Object.freeze(['Prosperous', 'Wealthy']);
+
+/**
+ * Is this template true to the record? Draw-free; reads the history's facts and the power's stability.
+ * `tension`: the current tension (a leadership vacuum is false under a settled power); false: a past event.
+ * @param {{ type?: string }} tmpl @param {any} facts the history's `hookFacts` thunk
+ * @param {boolean} tension @param {unknown} [stability] `powerStructure.stability`, as the context carries it
+ * @param {unknown} [prosperity] `economicState.prosperity`, as the context carries it
+ * @returns {boolean}
+ */
+export function trueToRecordAt(tmpl, facts, tension, stability = null, prosperity = null) {
+  return trueToRecord(tmpl, facts, { tension, stability, prosperity });
+}
+
+/**
+ * @param {{ type?: string }} tmpl @param {any} facts
+ * @param {{ tension: boolean, stability?: unknown, prosperity?: unknown }} at
+ */
+function trueToRecord(tmpl, facts, at) {
+  const type = String(tmpl?.type);
+  if (at.tension && TENSIONS_FALSE_UNDER_A_SETTLED_POWER.includes(type)
+    && SETTLED_STABILITY_BANDS.includes(String(stabilityBandOf(typeof at.stability === 'string' ? at.stability : '')))) return false;
+  if (at.tension && TENSIONS_FALSE_WHERE_THE_PLACE_IS_RICH.includes(type)
+    && RICH_PROSPERITY_BANDS.includes(prosperityLabelOf(at.prosperity))) return false;
+  const decl = HISTORY_TEMPLATE_RECORD_DECLARATIONS[type];
+  if (!decl || (!at.tension && !decl.timeline)) return true;
+  return declarationAdmits(declarationOf({ text: type, needs: decl.needs }), typeof facts === 'function' ? facts() : facts).admitted;
+}
+
+/**
+ * The timeline's pick, resolved: the drawn template if the record admits it, else the next admitted template of the
+ * same pool (wrapping); null when none is (the slot is skipped, as an exhausted category is).
+ * @template T @param {T[]} pool @param {number} i the drawn index @param {any} facts @returns {T | null}
+ */
+function admittedTimelineTemplate(pool, i, facts) {
+  for (let k = 0; k < pool.length; k++) {
+    const row = pool[(i + k) % pool.length];
+    if (trueToRecord(/** @type {any} */ (row), facts, { tension: false })) return row;
+  }
+  return null;
+}
+
