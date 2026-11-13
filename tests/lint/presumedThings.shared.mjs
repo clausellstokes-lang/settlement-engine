@@ -373,6 +373,20 @@ export const ARM1_RULE_BOOK = Object.freeze({
   'src/domain/facts/registeredWords.js': 'the registered words, their atoms and their leaves: the walker\'s and the page check\'s rule book, imported by no printing file',
 });
 
+/**
+ * THE LINE'S OWN INSTRUMENTS, ADMITTED BY NAME (STYLE-2-MERGE-13, point 49: the chair's ruling on STOP 49a (i), record
+ * 405; the form of the rule book's above and of chainPrintSites' EXEMPT at point 48). Two files of other lanes that print
+ * nothing — the rendered-dossier census's rows (their labels, its counter's own words) and the layer table's doc strings —
+ * whose literals this walker's widened roots read as lines once both lanes stood on the line. Each is admitted with its
+ * EXACT count of arm-1 hits and of strip sites: the walker asserts each file reads exactly its named counts, so a new line
+ * in either file, or one gone, reds ("each admitted instrument reads exactly its named counts"). Not a directory rule: a
+ * file in src/domain/coherence/ has printed a line before.
+ */
+export const ARM1_INSTRUMENTS = Object.freeze({
+  'src/domain/coherence/pageCensusFindings.js': Object.freeze({ hits: 11, strips: 2, reason: 'the rendered-dossier census (W2-A-LEAVES): its rows\' labels and the words its counter looks for, read by no printing file' }),
+  'src/domain/facts/factLayers.js': Object.freeze({ hits: 3, strips: 0, reason: 'the layer table (W2-A-LEAVES): its leaves\' doc strings, read by its walker and no printing file' }),
+});
+
 /** Is this literal one of ARM1_NOT_PRINTED's sites? @param {string} rel @param {any} node */
 function isNotPrintedSite(rel, node) {
   const call = node.parent;
@@ -513,12 +527,14 @@ export function listFiles(root) {
 }
 
 /** @param {string} root @returns {Array<{ file: string, thing: string, text: string }>} */
-export function scanTree(root) {
+/** @param {string} root @param {{ keepAdmitted?: boolean }} [opts] keepAdmitted: also the ARM1_INSTRUMENTS files' hits (their count arm) */
+export function scanTree(root, { keepAdmitted = false } = {}) {
   const files = /** @type {Array<[string, string]>} */ (listFiles(root).map((rel) => [rel, readFileSync(join(root, rel), 'utf8')]));
   const drawn = drawnRanges(files);
   /** @type {Map<string, { needs: string[], excludes: string[], crisis: string[] }>} */ const keyed = new Map();
   for (const [rel, src] of files) for (const [k, v] of keyedDeclarations(rel, src, drawn)) { const prev = keyed.get(k) || emptyDecl(); addDecl(prev, v); keyed.set(k, prev); }
-  return files.flatMap(([rel, src]) => scanSource(rel, src, keyed, drawn));
+  const hits = files.flatMap(([rel, src]) => scanSource(rel, src, keyed, drawn));
+  return keepAdmitted ? hits : hits.filter((h) => !Object.hasOwn(ARM1_INSTRUMENTS, h.file));
 }
 
 // ── ARM 3: the strip ban (W2-B-DECLARE item 3) ────────────────────────────────────────────────────
@@ -735,7 +751,8 @@ export function withOrdinals(sites) {
 }
 
 /** @param {string} root @returns {Array<{ file: string, receiver: string }>} every strip-shaped call under STRIP_ROOTS, counted per receiver */
-export function stripTree(root) {
+/** @param {string} root @param {{ keepAdmitted?: boolean }} [opts] keepAdmitted: also the ARM1_INSTRUMENTS files' strip sites */
+export function stripTree(root, { keepAdmitted = false } = {}) {
   /** @type {string[]} */ const files = [];
   const walk = (rel) => {
     for (const e of readdirSync(join(root, rel)).sort()) {
@@ -745,7 +762,8 @@ export function stripTree(root) {
     }
   };
   for (const r of STRIP_ROOTS) walk(r);
-  return withOrdinals(files.flatMap((rel) => stripSites(rel, readFileSync(join(root, rel), 'utf8'))));
+  const sites = withOrdinals(files.flatMap((rel) => stripSites(rel, readFileSync(join(root, rel), 'utf8'))));
+  return keepAdmitted ? sites : sites.filter((x) => !Object.hasOwn(ARM1_INSTRUMENTS, x.file));
 }
 
 // ── ARM 2: the printed record ─────────────────────────────────────────────────────────────────

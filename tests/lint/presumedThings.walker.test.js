@@ -36,7 +36,7 @@ import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
-  ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, DOOR_ARGS, drawnRanges, keyedDeclarations, COURT_HOUSES, stripKey, stripSites, stripTree, withOrdinals, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
+  ARM1_INSTRUMENTS, ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, DOOR_ARGS, drawnRanges, keyedDeclarations, COURT_HOUSES, stripKey, stripSites, stripTree, withOrdinals, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
   bankRow, deniesExistence, hitKey, listFiles, rowKeys, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
@@ -428,7 +428,8 @@ describe('the register', () => {
 });
 
 describe('ARM 1 — the source', () => {
-  const hits = scanTree(ROOT);
+  const all = scanTree(ROOT, { keepAdmitted: true });
+  const hits = all.filter((h) => !Object.hasOwn(ARM1_INSTRUMENTS, h.file));
   const key = hitKey;
   const banked = new Set([...bankedKeys(register), ...bankedKeys(widened)]);
   const found = new Set(hits.map((h) => key(h.file, h.thing, h.text)));
@@ -445,6 +446,20 @@ describe('ARM 1 — the source', () => {
 
   test('⛔ no stale row: a cured line leaves the register in its own commit', () => {
     expect([...banked].filter((k) => !found.has(k))).toEqual([]);
+  });
+
+  /**
+   * STYLE-2-MERGE-13, point 49 (the chair's ruling on STOP 49a (i), record 405): the line's two instruments are admitted
+   * BY NAME, each with its exact counts (ARM1_INSTRUMENTS) — the rule book's form and chainPrintSites' EXEMPT form. A new
+   * literal in either file, or one gone, moves its count and reds here; a third file is never admitted by this arm.
+   */
+  test('the admitted instruments: each reads EXACTLY its named counts, and only these two are admitted', () => {
+    expect(Object.keys(ARM1_INSTRUMENTS)).toEqual(['src/domain/coherence/pageCensusFindings.js', 'src/domain/facts/factLayers.js']);
+    const strips = stripTree(ROOT, { keepAdmitted: true });
+    for (const [file, named] of Object.entries(ARM1_INSTRUMENTS)) {
+      expect(all.filter((h) => h.file === file).length, `${file}: arm-1 hits`).toBe(named.hits);
+      expect(strips.filter((x) => x.file === file).length, `${file}: strip sites`).toBe(named.strips);
+    }
   });
 });
 
