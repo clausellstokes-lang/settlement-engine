@@ -37,8 +37,8 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 612,
-      "COVERED": 244,
+      "THIN": 613,
+      "COVERED": 243,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -11851,7 +11851,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "rank"
@@ -15737,7 +15737,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "securityKey",
@@ -55419,7 +55419,7 @@
         "DS-ECO-9 :: HOW THE NEED IS MET: much of it brought in"
       ],
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "blocks": [
         "DS-ECO-9"
       ]
@@ -67913,12 +67913,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {complexity, settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-ECO-1",
       "subject": "COMBINATION C3: the middle rungs",
       "fields": [],
       "readingFunction": "prosperityHeaderPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {access, complexity, settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {access, complexity, settlement}"
     },
     {
       "tier": "COVERED",
@@ -68438,7 +68438,7 @@
         "securityKey"
       ],
       "readingFunction": "foodMeansPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

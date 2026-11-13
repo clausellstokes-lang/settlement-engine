@@ -102,7 +102,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "{settlement} pays its way on a thin margin. Nothing in its trade is failing, and nothing in it is spare.",
+          "text": "{settlement} gets by on a thin margin, and little in its trade is spare.",
           "slots": [
             "settlement"
           ],
@@ -1975,7 +1975,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.",
+          "text": "A good share of the business of this town is done quietly, and the quiet part is not hiding especially hard.",
           "slots": [],
           "vid": 2
         },
@@ -3659,7 +3659,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Bread at {settlement} is as likely to come from somebody else's fields as from the town's own, and everyone knows which days the carts arrive.",
+          "text": "A good part of the bread at {settlement} comes in on carts, and everyone knows which days they arrive.",
           "slots": [
             "settlement"
           ],
@@ -3683,7 +3683,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Part of {settlement}'s food comes from spellwork, and the people who do that work matter to the town's table as much as its farmers.",
+          "text": "Part of {settlement}'s food is neither grown nor bought, and the table would be thinner without it.",
           "slots": [
             "settlement"
           ],
@@ -3694,7 +3694,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A visitor may not see it, but some of the food on {settlement}'s tables is there by magic, and the town counts on it.",
+          "text": "A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it is there by magic.",
           "slots": [
             "settlement"
           ],
@@ -4691,7 +4691,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "People in {settlement} work at more than one trade, so a bad year for one is not a bad year for everyone.",
+          "text": "People in {settlement} work at more than one trade that sells beyond the town.",
           "slots": [
             "settlement"
           ],

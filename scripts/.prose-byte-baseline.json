@@ -55,14 +55,14 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 264089,
-      "gzip": 35571,
+      "raw": 264067,
+      "gzip": 35570,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 185880,
-      "gzip": 26025,
+      "raw": 185725,
+      "gzip": 25967,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },

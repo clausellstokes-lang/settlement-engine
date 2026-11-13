@@ -9294,7 +9294,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "The town's count of its stores at {settlement} covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+          "text": "What {settlement} raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
           "slots": [
             "settlement"
           ],

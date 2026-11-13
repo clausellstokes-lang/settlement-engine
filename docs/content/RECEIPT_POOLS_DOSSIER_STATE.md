@@ -821,7 +821,7 @@ the access.
 
 **COMBINATION C3: the middle rungs** {crisis-scoped}
 1. `[street · crisis: any]` With a little left over each year, {settlement} gets by on a {complexity}, and every year people argue over how to spend it.
-2. `[ledger]` {settlement} pays its way on a thin margin. Nothing in its trade is failing, and nothing in it is spare.
+2. `[ledger]` {settlement} gets by on a thin margin, and little in its trade is spare.
 3. `[visitor · no crisis · market]` Nothing about {settlement} looks rich or poor: the {access} is busy enough, the market is open, and nobody is building or selling up.
 
 **COMBINATION C4: a low rung on a working approach**
@@ -1122,7 +1122,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 
 **TIER: a large share off the books (≥30)**
 1. `[ledger · dm-only · colour]` A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.
-2. `[street · dm-only · colour]` Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.
+2. `[street · dm-only · colour]` A good share of the business of this town is done quietly, and the quiet part is not hiding especially hard.
 3. `[visitor · dm-only · colour]` Honest traders in {settlement} are undersold and cannot see why: {faction} pays no duty.
 4. `[unfolding · dm-only · guild]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
 
@@ -1367,12 +1367,12 @@ sentence in two voices. **No named deaths.**
 **HOW THE NEED IS MET: much of it brought in**
 1. `[visitor · colour]` Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.
 2. `[ledger · colour]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
-3. `[street · colour]` Bread at {settlement} is as likely to come from somebody else's fields as from the town's own, and everyone knows which days the carts arrive.
+3. `[street · colour]` A good part of the bread at {settlement} comes in on carts, and everyone knows which days they arrive.
 
 **HOW THE NEED IS MET: part of it by magic**
 1. `[ledger · colour]` Not all of {settlement}'s food is grown or bought: some of what the town eats is made or kept by magic, and the town would go shorter without it.
-2. `[street · colour]` Part of {settlement}'s food comes from spellwork, and the people who do that work matter to the town's table as much as its farmers.
-3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables is there by magic, and the town counts on it.
+2. `[street · colour]` Part of {settlement}'s food is neither grown nor bought, and the table would be thinner without it.
+3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it is there by magic.
 
 **FOOD SOURCES: one source**
 1. `[ledger · no crisis: famine]` {settlement} lives off its {good} and little else. One bad year for the {good} would be a hungry year for the whole town.
@@ -1572,7 +1572,7 @@ note that carries it on the six wired surfaces.
 2. `[visitor · tier: ≥ village · no crisis: under_siege · no crisis: famine]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
 3. `[street · no crisis: under_siege · no crisis: famine]` There is always something going out. If one trade is quiet, another is not.
 4. `[trade · no crisis: under_siege · no crisis: famine]` The carts that leave {settlement} carry several kinds of goods, not one.
-5. `[local · colour]` People in {settlement} work at more than one trade, so a bad year for one is not a bad year for everyone.
+5. `[local · colour]` People in {settlement} work at more than one trade that sells beyond the town.
 6. `[newcomer · no crisis: under_siege · no crisis: famine]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
 7. `[ledger · crisis: under_siege]` {settlement} had several trades sending goods out before the siege, and none of them can send anything now.
 8. `[unfolding · crisis: famine]` {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.
@@ -4002,7 +4002,7 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 
 **CAPACITY: enough** {colour}
 1. `[visitor]` No dependable road, river or port reaches {settlement}, and the town gets by on its own: enough for an ordinary year, with little to spare.
-2. `[ledger]` The town's count of its stores at {settlement} covers an ordinary year and no more, so one bad harvest would leave it short before spring.
+2. `[ledger]` What {settlement} raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.
 3. `[street]` People at {settlement} make do with what the town raises and keeps for itself; a good year is comfortable and a bad one is lean.
 
 **CAPACITY: short** {colour}
