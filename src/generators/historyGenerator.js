@@ -473,7 +473,7 @@ const buildHistoricalEvent = (
   // Priority-add: neighbor tension
   if (neighborTension && !usedTypes.has(neighborTension)) {
     const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === neighborTension);
-    if (tmpl) {
+    if (tmpl && trueToRecordAt(tmpl, hookFacts, true)) { // W2-FIX-DATA-HISTORY item A: a trade dispute that touches every merchant needs the market it names
       selected.push({ ...tmpl });
       usedTypes.add(neighborTension);
     }
@@ -1149,11 +1149,22 @@ import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary
  * description, both memory forms, its factions and its hooks), and the occupation's crisis maps to it
  * (`historyPolicyData.js :: STRESS_TO_TENSION`): under an occupation in force it is no tension of the town. The past
  * event keeps its account: a town may have been occupied before.
+ * W2-FIX-DATA-HISTORY item A (ROUND-3-CUT-INCREMENT ww-543, ww-572, ww-1524; CENSUS-2's economic_disparity writer): the
+ * Economic Divide is merchants against labourers (its description and both variants that name them, its hook of a
+ * merchant funding both sides, its merchant quarter walled apart), told of hamlets with no market; and the trade dispute
+ * "touched every merchant and every purse in town" where no market stands. Each needs the market home's answer
+ * (`facts/market.js`); the divide as a past event too (a refused pick resolves draw-free to the pool's next template, an
+ * anchor keeps the event's own words), the dispute as the current tension, at the neighbour's add as at the fill. The
+ * crash ("a speculative frenzy in {resource} and property collapsed") is the economic pool's next template where the
+ * divide gives way, and speaks of a market as surely: it needs one too, past and present.
  * @type {Readonly<Record<string, Readonly<{ needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, timeline: boolean }>>>}
  */
 export const HISTORY_TEMPLATE_RECORD_DECLARATIONS = Object.freeze({
   guild_conflict: Object.freeze({ needs: Object.freeze(['guild']), timeline: true }),
   occupation_legacy: Object.freeze({ excludes: Object.freeze(['crisis: occupied']), timeline: false }),
+  economic_disparity: Object.freeze({ needs: Object.freeze(['market']), timeline: true }), // W2-FIX-DATA-HISTORY item A: merchants against labourers, where a market stands
+  trade_dispute: Object.freeze({ needs: Object.freeze(['market']), timeline: false }), // W2-FIX-DATA-HISTORY item A: "every merchant and every purse", where a market stands
+  market_crash: Object.freeze({ needs: Object.freeze(['market']), timeline: true }), // W2-FIX-DATA-HISTORY item A: a speculative frenzy in goods and property, where a market stands
 });
 
 /** The stability bands that say the power is settled: a leadership vacuum is false under them (`labelBands.js`). */
