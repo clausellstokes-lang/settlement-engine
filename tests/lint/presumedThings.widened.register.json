@@ -697,27 +697,12 @@
    [
     "quarters",
     "word",
-    "caravan courts and covered lanes make movement through the merchant quarter deliberate"
-   ],
-   [
-    "quarters",
-    "word",
-    "Shared waterworks, fermentation, and intensive garden production structure urban food supply."
-   ],
-   [
-    "quarters",
-    "word",
     "Any armed service, levied or paid, is organized through districts and administrative chains."
    ],
    [
     "quarters",
     "word",
     "Causeways, terraces, canals or reservoirs connect dense neighborhoods to monumental public space."
-   ],
-   [
-    "quarters",
-    "word",
-    "causeways and managed water divide the settlement into organized neighborhoods"
    ],
    [
     "quarters",
@@ -1250,19 +1235,9 @@
     "The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart"
    ],
    [
-    "occupation",
-    "word",
-    "A former occupier officer has returned under a false identity"
-   ],
-   [
     "quarters",
     "word",
     "Newcomer and old-family districts remain socially distinct"
-   ],
-   [
-    "quarters",
-    "word",
-    "A fire that began in {location} consumed {building_type} across whole districts before it could be checked"
    ],
    [
     "plague",
@@ -1280,11 +1255,6 @@
     "The uprising was funded by an outside hand that has come back to collect on the favour"
    ],
    [
-    "quarters",
-    "word",
-    "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise"
-   ],
-   [
     "succession",
     "word",
     "The Succession Crisis"
@@ -1300,11 +1270,6 @@
     "occupation",
     "word",
     "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
-   ],
-   [
-    "quarters",
-    "word",
-    "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under contr"
    ],
    [
     "plague",
@@ -12098,18 +12063,6 @@
     "quarters",
     "word",
     "the lower districts"
-   ]
-  ],
-  "src/generators/historyGenerator.js": [
-   [
-    "quarters",
-    "word",
-    "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a distric"
-   ],
-   [
-    "quarters",
-    "word",
-    "Affected district retains residual magical effects"
    ]
   ],
   "src/generators/historyTemplate.js": [
