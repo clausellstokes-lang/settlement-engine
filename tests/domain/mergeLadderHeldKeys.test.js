@@ -389,7 +389,11 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // RE-KEYED at STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154; a figure its drafted record names for
     // the merge seat, mergeLadderHeldKeys A3): 62 -> 63, this arm's received value at the merged tree: the dual hat re-deals the cast
     // and the ties whose conflicts the post-pass restates (+1). `foreign` stays empty.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(63);
+    // RE-KEYED at STYLE-2-MERGE point 47 (2026-11-13, BY MEASUREMENT, the chair's ruling (3) on STOP 47d): COMPOSED at point 47 —
+    // the line f572d12b7 reads 63, the COHERENCE-AGREE lane's own tip 69b53decd 66, the merge 22cc9ef7d 61. Against the line, by
+    // trial: JOINED 'E8 culture to norse town|germanic|plains|road|plagued|golden-master-v3'; LEFT the three 'E6 seat' trials on
+    // town|germanic|plains|road|civilized / frontier / safe|golden-master-v3. `foreign` stays empty (the rebuilt rows the record's own).
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(61);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
