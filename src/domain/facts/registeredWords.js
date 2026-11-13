@@ -159,8 +159,9 @@ export const THINGS = Object.freeze({
   // here; a wayside shrine is NOT a church). "Access to (the) parish church" names a church ELSEWHERE (the roster's
   // access row; the faith reading's `accessOnly`): excluded by its words; a line declaring `church access` is answered.
   temple: {
-    // F8 of the second read: "the church's name" (an invitation to name it) puts no church in the town
-    words: /\btemples?\b|(?<!\baccess to (?:the |a )?(?:parish |nearby |neighbouring )?)\bchurch(?:es)?\b(?!['’]s name\b)|\bchapels?\b|\bcathedrals?\b|\babbey\b/i,
+    // F8 of the second read: "the church's name" (an invitation to name it) puts no church in the town; finding 6 of the
+    // third read: ONLY the invitation ("… are yours to set", faithReading.js :: FAITH_YOURS_LINE) is spared, a claim is not
+    words: /\btemples?\b|(?<!\baccess to (?:the |a )?(?:parish |nearby |neighbouring )?)\bchurch(?:es)?\b(?!['’]s name (?:are|is) (?:yours|theirs) to set\b)|\bchapels?\b|\bcathedrals?\b|\babbey\b/i,
     atoms: ['church'], sufficient: ['church access', 'institution: monastery'],
     leaf: 'faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)',
     absent: (f) => f?.faith?.hasChurch !== true,

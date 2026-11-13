@@ -359,6 +359,17 @@ describe('F8 (second read) — "the church\'s name" names no church here', () =>
     expect(thingsNamedIn('The faith\'s god and the church\'s name are yours to set.')).toEqual([]);
     expect(thingsNamedIn('The church\'s bell rings over the square at noon.')).toEqual(['temple']);
   });
+  /**
+   * Finding 6 of the third read (REVIEW-W2B-c3913f999: "'the church's name' also spares claims of a church"). Only the
+   * INVITATION is spared ("… the church's name are yours to set", the faith reading's `FAITH_YOURS_LINE`); a sentence that
+   * says the church's name is carved, known or changed claims a church. Red at ca8e70e43 (each claim was spared).
+   */
+  test('finding 6 (third read): only the invitation is spared; a claim about the church\'s name names a church', () => {
+    expect(thingsNamedIn('The faith’s god and the church’s name are yours to set.')).toEqual([]);
+    expect(thingsNamedIn('The church\'s name is carved over the door of the nave.')).toEqual(['temple']);
+    expect(thingsNamedIn('Everyone in the hamlet knows the church\'s name and its saint.')).toEqual(['temple']);
+    expect(thingsNamedIn('The church\'s name was changed when the new priest came.')).toEqual(['temple']);
+  });
 });
 
 /**
