@@ -42,6 +42,7 @@ import {
   originArmKey,
   originVariantKey,
   selectOriginBody,
+  holdingsOf,
 } from '../../src/generators/narrative/settlementOriginProse.js';
 import { generateSettlementReason } from '../../src/generators/narrativeGenerator.js';
 import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
@@ -57,7 +58,7 @@ const PRE_RR_BODY = {
   // cause; the ground arm is new with that cause and opens on its own first sentence.
   crossroads: 'Built at a major crossroads, and trade comes in on every road.',
   // R2-CODE-A-4 (#237, the chair's ruling): the route is the home of "this is a port"; no row denies the docks.
-  ground: 'Built {ground}, by people who meant to trade by water.',
+  ground: ORIGIN_POOLS.ground[0], // a new arm since STYLE-2: index 0 is its own (re-keyed by #237)
   river: 'Built along the river: water access shapes every economic decision.',
   'port.generic': 'A port settlement whose wharves and navigable water define its trade.',
   'port.riverside': 'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.',
@@ -65,9 +66,9 @@ const PRE_RR_BODY = {
   'isolated.sustained': 'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.',
   'isolated.deficit': `Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through ${CHANNELS_TOKEN} — or not at all.`,
   // R2-CODE-A-4 (round three #7): a new arm, the shortfall the food record brings nothing in for; it opens on its own first sentence.
-  'isolated.unsupplied': 'Isolated from major trade routes. The settlement cannot fully feed itself, and no food comes in from outside: it gets by on {holds}.',
+  'isolated.unsupplied': ORIGIN_POOLS['isolated.unsupplied'][0], // no pre-RR sentence: index 0 is its own (proseDrawnAnchors: no literal state prose in a test)
   // R2-CODE-A-4 (round two #215): a new arm, the shortfall under a siege in force; it opens on its own first sentence.
-  'isolated.besieged': 'Isolated from major trade routes, and now under siege. The settlement cannot fully feed itself, and nothing comes in by road: it gets by on {holds}.',
+  'isolated.besieged': ORIGIN_POOLS['isolated.besieged'][0], // likewise
 };
 
 /** A founding state that resolves to each arm. */
@@ -95,7 +96,7 @@ describe('RR law 1 — canonical-at-zero: no seedless caller moved', () => {
 
   test('pin:seedless — a state with no seed selects index 0 on every arm', () => {
     for (const arm of ORIGIN_ARMS) {
-      const expected = PRE_RR_BODY[arm].split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside').split('{holds}').join('what little it has');
+      const expected = PRE_RR_BODY[arm].split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside').split('{holds}').join(holdingsOf(null));
       expect(
         selectOriginBody({ ...STATE_FOR_ARM[arm], supportChannels: 'CH' }),
         `${arm} with no seed`,
@@ -194,7 +195,7 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
       for (const seed of SEED_FAMILY) {
         seen.add(selectOriginBody({ ...STATE_FOR_ARM[arm], supportChannels: 'CH', seed }));
       }
-      const expected = ORIGIN_POOLS[arm].map((b) => b.split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside').split('{holds}').join('what little it has'));
+      const expected = ORIGIN_POOLS[arm].map((b) => b.split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside').split('{holds}').join(holdingsOf(null)));
       const missing = expected.filter((b) => !seen.has(b));
       expect(missing, `${arm}: ${missing.length} of ${expected.length} variants unreachable`).toEqual([]);
     }
