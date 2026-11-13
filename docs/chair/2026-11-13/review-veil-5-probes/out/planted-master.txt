@@ -1,0 +1,131 @@
+towns 24; markers planted 4447; shares (every eye shut by hand) 96; rows hidden by hand 23368; reads 768; births that threw 0; reads that raised or sent no row 0; houses hidden whole 42
+planted, by origin: conflict.desc 22 · conflict.plotHooks 22 · conflict.stakes 22 · event.description 130 · event.lastingEffects 105 · event.plotHooks 48 · faction.crisisNote 12 · faction.desc 344 · grouping.criminalCaptureState 72 · grouping.decrees 24 · grouping.desc 117 · grouping.dmLayer 24 · grouping.note 3 · grouping.reason 9 · institution.desc 910 · npc.activeConstraint 81 · npc.corruptTies 7 · npc.corruptionVector 7 · npc.factionGoal 2 · npc.goal 235 · npc.personality 235 · npc.physical 235 · npc.plotHooks 235 · npc.secret 345 · relationship.description 539 · relationship.tension 539 · tension.description 43 · tension.lastingEffects 37 · tension.plotHooks 43
+planted, by origin and the step it first existed after: conflict.desc after assembleSettlement 22 · conflict.plotHooks after assembleSettlement 22 · conflict.stakes after assembleSettlement 22 · event.description after generateNarratives 130 · event.lastingEffects after generateNarratives 105 · event.plotHooks after generateNarratives 48 · faction.crisisNote after assembleSettlement 4 · faction.crisisNote after generatePower 4 · faction.crisisNote after powerEconomyReconcilePass 4 · faction.desc after assembleSettlement 92 · faction.desc after generatePower 126 · faction.desc after powerEconomyReconcilePass 126 · grouping.criminalCaptureState after assembleSettlement 24 · grouping.criminalCaptureState after generatePower 24 · grouping.criminalCaptureState after powerEconomyReconcilePass 24 · grouping.decrees after by the editor 24 · grouping.desc after assembleSettlement 4 · grouping.desc after economyReconcilePass 88 · grouping.desc after generateEconomy 25 · grouping.dmLayer after by the editor 24 · grouping.note after assembleSettlement 3 · grouping.reason after assembleSettlement 9 · institution.desc after assembleInstitutions 859 · institution.desc after cascadePass 36 · institution.desc after coherenceRepairPass 7 · institution.desc after factionCorrelationPass 6 · institution.desc after isolationPass 2 · npc.activeConstraint after assembleSettlement 81 · npc.corruptTies after corruptionPass 7 · npc.corruptionVector after corruptionPass 7 · npc.factionGoal after assembleSettlement 2 · npc.goal after generatePopulation 235 · npc.personality after generatePopulation 235 · npc.physical after generatePopulation 235 · npc.plotHooks after generatePopulation 235 · npc.secret after assembleSettlement 110 · npc.secret after generatePopulation 235 · relationship.description after generatePopulation 539 · relationship.tension after generatePopulation 539 · tension.description after generateNarratives 43 · tension.lastingEffects after generateNarratives 37 · tension.plotHooks after generateNarratives 43
+
+== MARKERS STILL IN A PAYLOAD (a hidden string, sent)
+q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16}  towns 8
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Rival organisations. RV5~institution~72~desc~Z
+q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Full-time keepers of order, numbering about 1% of the city. RV5~institution~63~desc~Z
+q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Several alchemical workshops, run under a guild. RV5~institution~49~desc~Z
+q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12}  towns 6
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Sellsword companies under proper organisation, mustering hundreds to thousands. RV5~institution~66~desc~Z
+q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. RV5~institution~12~desc~Z
+q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. RV5~institution~11~desc~Z
+q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. RV5~institution~35~desc~Z
+q203p211 | DM reveal on | relationship.description  ->  prominentRelationship.full  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Nidud Eriksson and Hildigunn Ragnarsson work together because the alternative (working against each other) is worse for both. The alliance holds as lo
+q203p211 | DM reveal on | relationship.tension  ->  pressureSentence  {"gallery":8,"link":8,"map":8,"import":8}  towns 4
+      e.g. rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot
+q203p211 | DM reveal on | relationship.tension  ->  prominentRelationship.phrasing  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: The relationship between Nidud Eriksson and Hildigunn Ragnarsson is best understood as pragmatic alliance. A third party is actively working to change
+q203p211 | DM reveal on | relationship.tension  ->  prominentRelationship.tension  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: A third party is actively working to change that calculation. RV5~relationship~49~tension~Z
+q203p211 | DM reveal on | tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~t
+q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16}  towns 8
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Rival organisations. RV5~institution~72~desc~Z
+q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Full-time keepers of order, numbering about 1% of the city. RV5~institution~63~desc~Z
+q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Several alchemical workshops, run under a guild. RV5~institution~49~desc~Z
+q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12}  towns 6
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Sellsword companies under proper organisation, mustering hundreds to thousands. RV5~institution~66~desc~Z
+q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. RV5~institution~12~desc~Z
+q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. RV5~institution~11~desc~Z
+q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. RV5~institution~35~desc~Z
+q203p211 | no reveal | relationship.description  ->  prominentRelationship.full  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Nidud Eriksson and Hildigunn Ragnarsson work together because the alternative (working against each other) is worse for both. The alliance holds as lo
+q203p211 | no reveal | relationship.tension  ->  pressureSentence  {"gallery":8,"link":8,"map":8,"import":8}  towns 4
+      e.g. rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot
+q203p211 | no reveal | relationship.tension  ->  prominentRelationship.phrasing  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: The relationship between Nidud Eriksson and Hildigunn Ragnarsson is best understood as pragmatic alliance. A third party is actively working to change
+q203p211 | no reveal | relationship.tension  ->  prominentRelationship.tension  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: A third party is actively working to change that calculation. RV5~relationship~49~tension~Z
+q203p211 | no reveal | tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~t
+qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16}  towns 8
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Rival organisations. RV5~institution~72~desc~Z
+qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Full-time keepers of order, numbering about 1% of the city. RV5~institution~63~desc~Z
+qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Several alchemical workshops, run under a guild. RV5~institution~49~desc~Z
+qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12}  towns 6
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Sellsword companies under proper organisation, mustering hundreds to thousands. RV5~institution~66~desc~Z
+qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. RV5~institution~12~desc~Z
+qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. RV5~institution~11~desc~Z
+qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. RV5~institution~35~desc~Z
+qfull | DM reveal on | relationship.description  ->  prominentRelationship.full  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Nidud Eriksson and Hildigunn Ragnarsson work together because the alternative (working against each other) is worse for both. The alliance holds as lo
+qfull | DM reveal on | relationship.tension  ->  pressureSentence  {"gallery":8,"link":8,"map":8,"import":8}  towns 4
+      e.g. rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot
+qfull | DM reveal on | relationship.tension  ->  prominentRelationship.phrasing  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: The relationship between Nidud Eriksson and Hildigunn Ragnarsson is best understood as pragmatic alliance. A third party is actively working to change
+qfull | DM reveal on | relationship.tension  ->  prominentRelationship.tension  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: A third party is actively working to change that calculation. RV5~relationship~49~tension~Z
+qfull | DM reveal on | tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~t
+qfull | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16}  towns 8
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Rival organisations. RV5~institution~72~desc~Z
+qfull | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Full-time keepers of order, numbering about 1% of the city. RV5~institution~63~desc~Z
+qfull | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Several alchemical workshops, run under a guild. RV5~institution~49~desc~Z
+qfull | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12}  towns 6
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Sellsword companies under proper organisation, mustering hundreds to thousands. RV5~institution~66~desc~Z
+qfull | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. RV5~institution~12~desc~Z
+qfull | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. RV5~institution~11~desc~Z
+qfull | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. RV5~institution~35~desc~Z
+qfull | no reveal | relationship.description  ->  prominentRelationship.full  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Nidud Eriksson and Hildigunn Ragnarsson work together because the alternative (working against each other) is worse for both. The alliance holds as lo
+qfull | no reveal | relationship.tension  ->  pressureSentence  {"gallery":8,"link":8,"map":8,"import":8}  towns 4
+      e.g. rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot
+qfull | no reveal | relationship.tension  ->  prominentRelationship.phrasing  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: The relationship between Nidud Eriksson and Hildigunn Ragnarsson is best understood as pragmatic alliance. A third party is actively working to change
+qfull | no reveal | relationship.tension  ->  prominentRelationship.tension  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: A third party is actively working to change that calculation. RV5~relationship~49~tension~Z
+qfull | no reveal | tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~t
+
+== A HOUSE HIDDEN WHOLE, ITS NAME STILL IN A PAYLOAD
+q203p211 | DM reveal on | a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+q203p211 | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":120,"import":120}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network converts raw inputs into chain output."
+q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":32,"import":32}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "processor.Smuggling network"
+q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":28,"import":28}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Front businesses" in "Front businesses"
+q203p211 | no reveal | a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+q203p211 | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+qfull | DM reveal on | a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+qfull | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":120,"import":120}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network converts raw inputs into chain output."
+qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":32,"import":32}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "processor.Smuggling network"
+qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":28,"import":28}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Front businesses" in "Front businesses"
+qfull | no reveal | a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+qfull | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"

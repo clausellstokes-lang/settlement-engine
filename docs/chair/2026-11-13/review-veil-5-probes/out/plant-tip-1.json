@@ -1,0 +1,239 @@
+{
+ "side": "tip",
+ "towns": 12,
+ "birthsThatThrew": [],
+ "planted": 3763,
+ "plantedByOrigin": {
+  "institution.desc": 455,
+  "faction.desc": 165,
+  "faction.crisisNote": 9,
+  "npc.personality": 339,
+  "npc.physical": 339,
+  "npc.secret": 384,
+  "npc.plotHooks": 676,
+  "event.description": 68,
+  "event.lastingEffects": 52,
+  "event.plotHooks": 26,
+  "tension.description": 22,
+  "tension.lastingEffects": 16,
+  "tension.plotHooks": 22,
+  "npc.goal": 339,
+  "npc.activeConstraint": 38,
+  "relationship.tension": 338,
+  "relationship.description": 338,
+  "grouping.criminalCaptureState": 12,
+  "grouping.reason": 7,
+  "grouping.decrees": 12,
+  "grouping.dmLayer": 12,
+  "grouping.desc": 55,
+  "conflict.stakes": 7,
+  "conflict.desc": 7,
+  "conflict.plotHooks": 7,
+  "npc.allegiance": 16,
+  "grouping.note": 2
+ },
+ "plantedAfterStep": {
+  "institution.desc after assembleInstitutions": 425,
+  "faction.desc after generatePower": 60,
+  "faction.crisisNote after generatePower": 3,
+  "institution.desc after coherenceRepairPass": 5,
+  "faction.desc after powerEconomyReconcilePass": 60,
+  "faction.crisisNote after powerEconomyReconcilePass": 3,
+  "npc.personality after generatePopulation": 338,
+  "npc.physical after generatePopulation": 338,
+  "npc.secret after generatePopulation": 338,
+  "npc.plotHooks after generatePopulation": 338,
+  "event.description after generateNarratives": 68,
+  "event.lastingEffects after generateNarratives": 52,
+  "event.plotHooks after generateNarratives": 26,
+  "tension.description after generateNarratives": 22,
+  "tension.lastingEffects after generateNarratives": 16,
+  "tension.plotHooks after generateNarratives": 22,
+  "npc.personality after assembleSettlement": 1,
+  "npc.physical after assembleSettlement": 1,
+  "npc.goal after assembleSettlement": 339,
+  "npc.secret after assembleSettlement": 46,
+  "npc.plotHooks after assembleSettlement": 338,
+  "npc.activeConstraint after assembleSettlement": 38,
+  "faction.desc after assembleSettlement": 45,
+  "faction.crisisNote after assembleSettlement": 3,
+  "relationship.tension after assembleSettlement": 338,
+  "relationship.description after assembleSettlement": 338,
+  "grouping.criminalCaptureState after assembleSettlement": 12,
+  "grouping.reason after assembleSettlement": 7,
+  "grouping.decrees after by the editor": 12,
+  "grouping.dmLayer after by the editor": 12,
+  "institution.desc after cascadePass": 20,
+  "institution.desc after factionCorrelationPass": 3,
+  "institution.desc after isolationPass": 2,
+  "grouping.desc after generateEconomy": 14,
+  "grouping.desc after economyReconcilePass": 40,
+  "conflict.stakes after assembleSettlement": 7,
+  "conflict.desc after assembleSettlement": 7,
+  "conflict.plotHooks after assembleSettlement": 7,
+  "npc.allegiance after assembleSettlement": 16,
+  "grouping.note after assembleSettlement": 2,
+  "grouping.desc after assembleSettlement": 1
+ },
+ "shares": 48,
+ "reads": 192,
+ "handHides": 17278,
+ "sent": {
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": {
+   "gallery": 20,
+   "link": 20,
+   "map": 20,
+   "import": 20
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": {
+   "gallery": 20,
+   "link": 20,
+   "map": 20,
+   "import": 20
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": {
+   "gallery": 12,
+   "link": 12,
+   "map": 12,
+   "import": 12
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": {
+   "gallery": 12,
+   "link": 12,
+   "map": 12,
+   "import": 12
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  }
+ },
+ "sentTowns": {
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": 8,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": 3,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": 8,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": 3,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": 6,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": 5,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": 6,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": 5,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": 4,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": 3,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": 4,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": 3,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": 4,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": 4
+ },
+ "examples": {
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": "rv5-plant-thorp-null-0 live gallery: Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders. RV5~institution~15~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": "rv5-plant-thorp-null-0 live gallery: One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields. RV5~institution~16~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": "rv5-plant-thorp-null-0 live gallery: Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders. RV5~institution~15~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": "rv5-plant-thorp-null-0 live gallery: One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields. RV5~institution~16~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": "rv5-plant-town-null-0 live gallery: Part-time guards. Night patrol and gate duty. RV5~institution~25~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": "rv5-plant-town-null-0 live gallery: Individual wizard residence. RV5~institution~38~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": "rv5-plant-town-null-0 live gallery: Part-time guards. Night patrol and gate duty. RV5~institution~25~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": "rv5-plant-town-null-0 live gallery: Individual wizard residence. RV5~institution~38~desc~Z",
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses\"",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": "rv5-plant-city-null-0 live gallery: A standing force of the law, roughly one in a hundred residents. RV5~institution~23~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": "rv5-plant-city-null-0 live gallery: Organized sellsword companies. Major forces (hundreds to thousands). RV5~institution~41~desc~Z",
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses\"",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": "rv5-plant-city-null-0 live gallery: A standing force of the law, roughly one in a hundred residents. RV5~institution~23~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": "rv5-plant-city-null-0 live gallery: Organized sellsword companies. Major forces (hundreds to thousands). RV5~institution~41~desc~Z",
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses converts raw inputs into chain output.\"",
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"processor.Front businesses\"",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": "rv5-plant-metropolis-null-0 live gallery: Rival organisations. RV5~institution~89~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": "rv5-plant-metropolis-null-0 live gallery: Rival organisations. RV5~institution~89~desc~Z",
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": "rv5-plant-metropolis-null-0 live gallery: \"Whisper market\" in \"Whisper market\""
+ },
+ "houseNames": {
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": {
+   "gallery": 48,
+   "import": 48
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": {
+   "gallery": 16,
+   "import": 16
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": {
+   "gallery": 32,
+   "import": 32
+  }
+ },
+ "houseNameTowns": {
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": 5,
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": 5,
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": 5,
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": 5,
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": 3
+ },
+ "housesHiddenWhole": 19,
+ "raised": []
+}

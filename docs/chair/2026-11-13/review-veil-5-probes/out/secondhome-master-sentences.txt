@@ -1,0 +1,37 @@
+towns 12; governed strings off the floor 2516; houses hidden whole 24
+(a) institution.description(desc) sent at defenseProfile.institutions.charter[].desc  {"gallery":7,"link":7,"map":7,"import":7}  towns 7
+      e.g. Eleftburg [a203p211_0] gallery: Rival organisations.
+(a) institution.description(desc) sent at defenseProfile.institutions.garrison[].desc  {"gallery":8,"link":8,"map":8,"import":8}  towns 4
+      e.g. Eleftburg [a203p211_0] gallery: Full-time keepers of order, numbering about 1% of the city.
+(a) institution.description(desc) sent at defenseProfile.institutions.magicDef[].desc  {"gallery":8,"link":8,"map":8,"import":8}  towns 4
+      e.g. Eleftburg [a203p211_0] gallery: Several alchemical workshops, run under a guild.
+(a) institution.description(desc) sent at defenseProfile.institutions.mercenary[].desc  {"gallery":3,"link":3,"map":3,"import":3}  towns 3
+      e.g. Eleftburg [a203p211_0] gallery: Sellsword companies under proper organisation, mustering hundreds to thousands.
+(a) institution.description(desc) sent at defenseProfile.institutions.walls[].desc  {"gallery":10,"link":10,"map":10,"import":10}  towns 6
+      e.g. Eleftburg [a203p211_0] gallery: Masonry ramparts studded with towers and pierced by many gates.
+(a) institution.description(desc) sent at defenseProfile.institutions.watch[].desc  {"gallery":6,"link":6,"map":6,"import":6}  towns 6
+      e.g. Eleftburg [a203p211_0] gallery: Full-time keepers of order, numbering about 1% of the city.
+(a) institution.function(tags) sent at defenseProfile.institutions.garrison[].tags[]  {"gallery":4,"link":4,"map":4,"import":4}  towns 4
+      e.g. Eleftburg [a203p211_0] gallery: law_enforcement
+(a) institution.function(tags) sent at defenseProfile.institutions.walls[].tags[]  {"gallery":10,"link":10,"map":10,"import":10}  towns 6
+      e.g. Eleftburg [a203p211_0] gallery: fortification
+(a) institution.function(tags) sent at defenseProfile.institutions.watch[].tags[]  {"gallery":6,"link":6,"map":6,"import":6}  towns 6
+      e.g. Eleftburg [a203p211_0] gallery: law_enforcement
+(a) institution.function(tags) sent at economicState.activeChains[].chainId  {"gallery":3,"link":3,"map":3,"import":3}  towns 3
+      e.g. Olympvrysi [a203p211_1] gallery: fortification
+(a) relationship.description(description) sent at prominentRelationship.full  {"gallery":4,"link":4,"map":4,"import":4}  towns 4
+      e.g. Pratominus [a203p211_0] gallery: The quarrel between Gnaeus Julianus and Julia Aquila is old enough that no one else remembers the cause. They remember. 
+(a) relationship.tension(tension) sent at pressureSentence  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Grímstrand [a203p211_2] gallery: Ragna Sigvaldsson has been offered Sigvald Styrkarsson's post by people who want Sigvald Styrkarsson gone.
+(a) relationship.tension(tension) sent at prominentRelationship.tension  {"gallery":4,"link":4,"map":4,"import":4}  towns 4
+      e.g. Pratominus [a203p211_0] gallery: A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.
+(b) a house hidden whole, named at economicState.activeChains[].label  {"gallery":2,"link":2,"map":2,"import":2}  towns 2
+      e.g. Eleftburg [a203p211_0] gallery: house "Black market" in "Black market"
+(b) a house hidden whole, named at economicState.activeChains[].processingInstitutions[]  {"gallery":10,"link":10,"map":10,"import":10}  towns 5
+      e.g. Eleftburg [a203p211_0] gallery: house "Front businesses" in "Front businesses"
+(c) a sentence of relationship.tension(tension) embedded at pressureSentence  {"gallery":4,"link":4,"map":4,"import":4}  towns 2
+      e.g. Anwan [a203p211_2] gallery: Riko Yang's relationship with Bixia Guo is more complicated than their public roles suggest. A third party has asked Riko Yang, quietly, whether Bixia Guo can b
+(c) a sentence of relationship.tension(tension) embedded at prominentRelationship.phrasing  {"gallery":7,"link":7,"map":7,"import":7}  towns 4
+      e.g. Pratominus [a203p211_0] gallery: Gnaeus Julianus and Julia Aquila are connected by something neither discusses openly: A newcomer keeps trying to reconcile them, and is about to learn why nobod
+(c) a sentence of tension.description(description) embedded at history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2}  towns 2
+      e.g. Eleftkastro [a203p211_1] gallery: The Siege is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations.

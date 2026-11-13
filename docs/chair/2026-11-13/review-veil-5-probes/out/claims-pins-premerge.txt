@@ -1,0 +1,7 @@
+[gate-tail] start:  15:55:30 up  1:35,  0 user,  load average: 4.42, 4.37, 4.66 · cores: 4
+ Test Files  2 passed (2)
+      Tests  44 passed (44)
+   Duration  653.57s (transform 9.56s, setup 118ms, import 1.03s, tests 931.14s, environment 0ms)
+[gate-tail] end:  16:06:25 up  1:46,  0 user,  load average: 1.08, 2.44, 3.69
+[gate-tail] full log: /tmp/gate-tail.26414.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

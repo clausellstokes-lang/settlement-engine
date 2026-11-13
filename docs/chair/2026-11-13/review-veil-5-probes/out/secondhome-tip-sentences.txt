@@ -1,0 +1,55 @@
+towns 12; governed strings off the floor 4166; houses hidden whole 23
+(a) institution.description(desc) sent at defenseProfile.institutions.charter[].desc  {"gallery":5,"link":5,"map":5,"import":5}  towns 5
+      e.g. Kallipolis [c211_0] gallery: Competing organizations.
+(a) institution.description(desc) sent at defenseProfile.institutions.garrison[].desc  {"gallery":8,"link":8,"map":8,"import":8}  towns 4
+      e.g. Kallipolis [c211_0] gallery: Full-time keepers of order, about one for every hundred people in the city.
+(a) institution.description(desc) sent at defenseProfile.institutions.magicDef[].desc  {"gallery":6,"link":6,"map":6,"import":6}  towns 4
+      e.g. Kallipolis [c211_0] gallery: Several alchemical workshops, run under a guild.
+(a) institution.description(desc) sent at defenseProfile.institutions.mercenary[].desc  {"gallery":4,"link":4,"map":4,"import":4}  towns 4
+      e.g. Kallipolis [c211_0] gallery: Organized sellsword companies. Major forces (hundreds to thousands).
+(a) institution.description(desc) sent at defenseProfile.institutions.militia[].desc  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Umakund [c211_1] gallery: Organised local defence, mustered against raiders and monsters alike. Steadier than the levies a hamlet can raise.
+(a) institution.description(desc) sent at defenseProfile.institutions.walls[].desc  {"gallery":10,"link":10,"map":10,"import":10}  towns 7
+      e.g. Kallipolis [c211_0] gallery: Masonry ramparts studded with towers and pierced by many gates.
+(a) institution.description(desc) sent at defenseProfile.institutions.watch[].desc  {"gallery":6,"link":6,"map":6,"import":6}  towns 6
+      e.g. Kallipolis [c211_0] gallery: Full-time keepers of order, about one for every hundred people in the city.
+(a) institution.function(tags) sent at defenseProfile.institutions.garrison[].tags[]  {"gallery":4,"link":4,"map":4,"import":4}  towns 4
+      e.g. Kallipolis [c211_0] gallery: law_enforcement
+(a) institution.function(tags) sent at defenseProfile.institutions.walls[].tags[]  {"gallery":10,"link":10,"map":10,"import":10}  towns 7
+      e.g. Kallipolis [c211_0] gallery: fortification
+(a) institution.function(tags) sent at defenseProfile.institutions.watch[].tags[]  {"gallery":6,"link":6,"map":6,"import":6}  towns 6
+      e.g. Kallipolis [c211_0] gallery: law_enforcement
+(a) institution.function(tags) sent at economicState.activeChains[].chainId  {"gallery":2,"link":2,"map":2,"import":2}  towns 2
+      e.g. Kallipolis [c211_0] gallery: fortification
+(a) npc.goals(goal) sent at economicState.activeChains[].chainId  {"gallery":15,"link":15,"map":15,"import":15}  towns 6
+      e.g. Kallipolis [c211_0] gallery: animal_husbandry
+(a) npc.goals(goal) sent at economicState.activeChains[].upstreamChains[]  {"gallery":2,"link":2,"map":2,"import":2}  towns 2
+      e.g. Kallipolis [c211_0] gallery: warehouse_logistics
+(a) npc.ties(institution) sent at economicState.activeChains[].label  {"gallery":2,"link":2,"map":2,"import":2}  towns 2
+      e.g. Oxteitza [c211_2] gallery: Black market
+(a) npc.ties(institution) sent at economicState.activeChains[].processingInstitutions[]  {"gallery":12,"link":12,"map":12,"import":12}  towns 4
+      e.g. Kallipolis [c211_0] gallery: Merchant guilds (3-8)
+(a) relationship.description(description) sent at prominentRelationship.full  {"gallery":8,"link":8,"map":8,"import":8}  towns 8
+      e.g. Kallipolis [c211_0] gallery: Angelina Kurtikios and Symeon Limniotes back each other in public and check each other's work in private.
+(a) relationship.tension(tension) sent at pressureSentence  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Chalcoatl [c211_2] gallery: Nicte Cohuoh has asked Acatl Coh for a second favour before repaying the first.
+(a) relationship.tension(tension) sent at prominentRelationship.phrasing  {"gallery":7,"link":7,"map":7,"import":7}  towns 7
+      e.g. Kallipolis [c211_0] gallery: Angelina Kurtikios wants to bring a third member into the alliance. Symeon Limniotes thinks the newcomer would take Syme
+(a) relationship.tension(tension) sent at prominentRelationship.tension  {"gallery":8,"link":8,"map":8,"import":8}  towns 8
+      e.g. Kallipolis [c211_0] gallery: Angelina Kurtikios wants to bring a third member into the alliance. Symeon Limniotes thinks the newcomer would take Syme
+(a) tension.description(description) sent at economicViability.issues[].description  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Kallipolis [c211_0] gallery: Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.
+(a) tension.description(description) sent at economicViability.issues[].message  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Kallipolis [c211_0] gallery: Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.
+(a) tension.description(description) sent at history.currentTensions[].specificIssue  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Kallipolis [c211_0] gallery: Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.
+(b) a house hidden whole, named at economicState.activeChains[].label  {"gallery":2,"link":2,"map":2,"import":2}  towns 2
+      e.g. Kallipolis [c211_0] gallery: house "Black market" in "Black market"
+(b) a house hidden whole, named at economicState.activeChains[].processingInstitutions[]  {"gallery":11,"link":11,"map":11,"import":11}  towns 6
+      e.g. Kallipolis [c211_0] gallery: house "Smuggling network" in "Smuggling network"
+(c) a sentence of npc.physical(physical) embedded at npcs[].presentation.impression  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Pratopolis [c211_1] gallery: Unremarkable clothes, a quiet voice and eyes that never stop moving.
+(c) a sentence of relationship.tension(tension) embedded at prominentRelationship.phrasing  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Chalcoatl [c211_2] gallery: Acatl Coh and Guelagetza Chuc respect each other, and it is real. Acatl Coh and Guelagetza Chuc are about to be on opposite sides of an important decision.
+(c) a sentence of tension.description(description) embedded at history.siegeNarrative  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Bjorntun [c211_1] gallery: The Siege is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations.

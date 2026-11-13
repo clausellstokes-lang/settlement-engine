@@ -66,6 +66,29 @@ deployed page, for `pageShowMore`). Each shard works in its own clones (`<db>_<s
 second-home probes read them. THE RED CONTROL: point a subject at a chain built from 5a2399cf9's migrations
 (`sh native/chain.sh t211old 211 <5a2399cf9 worktree>/supabase/migrations`).
 
+## Second homes by planted marker (`planted.probe.jsx`, `planted-summary.mjs`)
+
+Every string a user can hide by hand gets a marker of its own during the birth, through the generator's own
+`options.onStep` hook (at the boundary of the step after which it first exists), so that later derived fields carry
+it. Every eye is then shut by hand and the whole payload of each of the four reads is searched as text.
+
+```sh
+cd $SP/master && RV5_SIDE=master RV5_SRC=$SP/master RV5_PROBE=planted.probe.jsx RV5_CHAINS=q203p211:t203p211,qfull:t211 \
+  RV5_SEEDS=2 RV5_SHARD=0/2 RV5_OUT=$SP/out/plant-master-0.json npx vitest run --config <this folder>/vitest.config.mjs
+node planted-summary.mjs $SP/out/plant-master-?.json
+```
+Its two limits (a boolean, a number or a name carries no marker; a field derived in the step that wrote its source is
+planted too late) are covered by `SENTENCES=1 node secondhome2.mjs <pg dir> <clones of an attack run>`.
+
+## My own faults (`plants/plant.sh`)
+
+Five faults, each planted alone in migration 211 inside a throwaway worktree of the tip, and the builder's
+composition pin run against it: `sh plants/plant.sh <worktree> <out dir> A|B|C|D|E [vitest -t pattern]`.
+
+## The owner's reads (`native/early-deploy-readonly.sql`)
+
+The read-only counts the review adds to the owner's step for 211 alone. Run here only on local chains.
+
 ## The other probes
 
 - `census.probe.jsx` + `census-compare.mjs`: the key census. Every key of every record the veil addresses, born by

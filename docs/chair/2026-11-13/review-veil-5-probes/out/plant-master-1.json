@@ -1,0 +1,516 @@
+{
+ "side": "master",
+ "towns": 12,
+ "birthsThatThrew": [],
+ "planted": 2143,
+ "plantedByOrigin": {
+  "institution.desc": 455,
+  "faction.desc": 165,
+  "faction.crisisNote": 9,
+  "grouping.criminalCaptureState": 36,
+  "npc.personality": 111,
+  "npc.physical": 111,
+  "npc.goal": 111,
+  "npc.secret": 149,
+  "npc.plotHooks": 111,
+  "relationship.tension": 255,
+  "relationship.description": 255,
+  "event.description": 66,
+  "event.lastingEffects": 52,
+  "event.plotHooks": 26,
+  "tension.description": 22,
+  "tension.lastingEffects": 16,
+  "tension.plotHooks": 22,
+  "npc.activeConstraint": 41,
+  "grouping.reason": 7,
+  "grouping.decrees": 12,
+  "grouping.dmLayer": 12,
+  "conflict.stakes": 10,
+  "conflict.desc": 10,
+  "conflict.plotHooks": 10,
+  "grouping.desc": 56,
+  "npc.corruptionVector": 5,
+  "npc.corruptTies": 5,
+  "grouping.note": 2,
+  "npc.factionGoal": 1
+ },
+ "plantedAfterStep": {
+  "institution.desc after assembleInstitutions": 425,
+  "faction.desc after generatePower": 60,
+  "faction.crisisNote after generatePower": 3,
+  "grouping.criminalCaptureState after generatePower": 12,
+  "institution.desc after coherenceRepairPass": 5,
+  "faction.desc after powerEconomyReconcilePass": 60,
+  "faction.crisisNote after powerEconomyReconcilePass": 3,
+  "grouping.criminalCaptureState after powerEconomyReconcilePass": 12,
+  "npc.personality after generatePopulation": 111,
+  "npc.physical after generatePopulation": 111,
+  "npc.goal after generatePopulation": 111,
+  "npc.secret after generatePopulation": 111,
+  "npc.plotHooks after generatePopulation": 111,
+  "relationship.tension after generatePopulation": 255,
+  "relationship.description after generatePopulation": 255,
+  "event.description after generateNarratives": 66,
+  "event.lastingEffects after generateNarratives": 52,
+  "event.plotHooks after generateNarratives": 26,
+  "tension.description after generateNarratives": 22,
+  "tension.lastingEffects after generateNarratives": 16,
+  "tension.plotHooks after generateNarratives": 22,
+  "npc.activeConstraint after assembleSettlement": 41,
+  "npc.secret after assembleSettlement": 38,
+  "faction.desc after assembleSettlement": 45,
+  "faction.crisisNote after assembleSettlement": 3,
+  "grouping.criminalCaptureState after assembleSettlement": 12,
+  "grouping.reason after assembleSettlement": 7,
+  "grouping.decrees after by the editor": 12,
+  "grouping.dmLayer after by the editor": 12,
+  "institution.desc after cascadePass": 20,
+  "institution.desc after factionCorrelationPass": 3,
+  "conflict.stakes after assembleSettlement": 10,
+  "conflict.desc after assembleSettlement": 10,
+  "conflict.plotHooks after assembleSettlement": 10,
+  "institution.desc after isolationPass": 2,
+  "grouping.desc after generateEconomy": 14,
+  "grouping.desc after economyReconcilePass": 41,
+  "npc.corruptionVector after corruptionPass": 5,
+  "npc.corruptTies after corruptionPass": 5,
+  "grouping.note after assembleSettlement": 2,
+  "npc.factionGoal after assembleSettlement": 1,
+  "grouping.desc after assembleSettlement": 1
+ },
+ "shares": 48,
+ "reads": 384,
+ "handHides": 11422,
+ "sent": {
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": {
+   "gallery": 20,
+   "link": 20,
+   "map": 20,
+   "import": 20
+  },
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "q203p211 | no reveal | relationship.description  ->  prominentRelationship.full": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "q203p211 | no reveal | relationship.tension  ->  prominentRelationship.tension": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "q203p211 | no reveal | relationship.tension  ->  prominentRelationship.phrasing": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": {
+   "gallery": 20,
+   "link": 20,
+   "map": 20,
+   "import": 20
+  },
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qfull | no reveal | relationship.description  ->  prominentRelationship.full": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "qfull | no reveal | relationship.tension  ->  prominentRelationship.tension": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "qfull | no reveal | relationship.tension  ->  prominentRelationship.phrasing": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": {
+   "gallery": 20,
+   "link": 20,
+   "map": 20,
+   "import": 20
+  },
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "q203p211 | DM reveal on | relationship.description  ->  prominentRelationship.full": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "q203p211 | DM reveal on | relationship.tension  ->  prominentRelationship.tension": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "q203p211 | DM reveal on | relationship.tension  ->  prominentRelationship.phrasing": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": {
+   "gallery": 20,
+   "link": 20,
+   "map": 20,
+   "import": 20
+  },
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qfull | DM reveal on | relationship.description  ->  prominentRelationship.full": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "qfull | DM reveal on | relationship.tension  ->  prominentRelationship.tension": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "qfull | DM reveal on | relationship.tension  ->  prominentRelationship.phrasing": {
+   "gallery": 14,
+   "link": 14,
+   "map": 14,
+   "import": 14
+  },
+  "q203p211 | no reveal | relationship.tension  ->  pressureSentence": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "qfull | no reveal | relationship.tension  ->  pressureSentence": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "q203p211 | DM reveal on | relationship.tension  ->  pressureSentence": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "qfull | DM reveal on | relationship.tension  ->  pressureSentence": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": {
+   "gallery": 12,
+   "link": 12,
+   "map": 12,
+   "import": 12
+  },
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": {
+   "gallery": 12,
+   "link": 12,
+   "map": 12,
+   "import": 12
+  },
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": {
+   "gallery": 12,
+   "link": 12,
+   "map": 12,
+   "import": 12
+  },
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": {
+   "gallery": 12,
+   "link": 12,
+   "map": 12,
+   "import": 12
+  },
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  }
+ },
+ "sentTowns": {
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": 8,
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": 3,
+  "q203p211 | no reveal | relationship.description  ->  prominentRelationship.full": 7,
+  "q203p211 | no reveal | relationship.tension  ->  prominentRelationship.tension": 7,
+  "q203p211 | no reveal | relationship.tension  ->  prominentRelationship.phrasing": 7,
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": 8,
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": 3,
+  "qfull | no reveal | relationship.description  ->  prominentRelationship.full": 7,
+  "qfull | no reveal | relationship.tension  ->  prominentRelationship.tension": 7,
+  "qfull | no reveal | relationship.tension  ->  prominentRelationship.phrasing": 7,
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": 8,
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": 3,
+  "q203p211 | DM reveal on | relationship.description  ->  prominentRelationship.full": 7,
+  "q203p211 | DM reveal on | relationship.tension  ->  prominentRelationship.tension": 7,
+  "q203p211 | DM reveal on | relationship.tension  ->  prominentRelationship.phrasing": 7,
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": 8,
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": 3,
+  "qfull | DM reveal on | relationship.description  ->  prominentRelationship.full": 7,
+  "qfull | DM reveal on | relationship.tension  ->  prominentRelationship.tension": 7,
+  "qfull | DM reveal on | relationship.tension  ->  prominentRelationship.phrasing": 7,
+  "q203p211 | no reveal | relationship.tension  ->  pressureSentence": 4,
+  "qfull | no reveal | relationship.tension  ->  pressureSentence": 4,
+  "q203p211 | DM reveal on | relationship.tension  ->  pressureSentence": 4,
+  "qfull | DM reveal on | relationship.tension  ->  pressureSentence": 4,
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": 6,
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": 5,
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": 6,
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": 5,
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": 6,
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": 5,
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": 6,
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": 5,
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": 4,
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": 3,
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": 4,
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": 3,
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": 4,
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": 3,
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": 4,
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": 3,
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": 4,
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": 4,
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": 4,
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": 4
+ },
+ "examples": {
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": "rv5-plant-thorp-null-0 live gallery: Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders. RV5~institution~16~desc~Z",
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": "rv5-plant-thorp-null-0 live gallery: One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields. RV5~institution~17~desc~Z",
+  "q203p211 | no reveal | relationship.description  ->  prominentRelationship.full": "rv5-plant-thorp-null-0 live gallery: Noriko Zhao brings the votes and Jiangli Huang brings the money. The alliance is three years old and has won every vote it needed. RV5~relationship~35",
+  "q203p211 | no reveal | relationship.tension  ->  prominentRelationship.tension": "rv5-plant-thorp-null-0 live gallery: Jiangli Huang voted against Noriko Zhao on a small matter last week. Noriko Zhao is waiting to see whether it was small. RV5~relationship~34~tension~Z",
+  "q203p211 | no reveal | relationship.tension  ->  prominentRelationship.phrasing": "rv5-plant-thorp-null-0 live gallery: Jiangli Huang voted against Noriko Zhao on a small matter last week. Noriko Zhao is waiting to see whether it was small. RV5~relationship~34~tension~Z",
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": "rv5-plant-thorp-null-0 live gallery: Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders. RV5~institution~16~desc~Z",
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": "rv5-plant-thorp-null-0 live gallery: One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields. RV5~institution~17~desc~Z",
+  "qfull | no reveal | relationship.description  ->  prominentRelationship.full": "rv5-plant-thorp-null-0 live gallery: Noriko Zhao brings the votes and Jiangli Huang brings the money. The alliance is three years old and has won every vote it needed. RV5~relationship~35",
+  "qfull | no reveal | relationship.tension  ->  prominentRelationship.tension": "rv5-plant-thorp-null-0 live gallery: Jiangli Huang voted against Noriko Zhao on a small matter last week. Noriko Zhao is waiting to see whether it was small. RV5~relationship~34~tension~Z",
+  "qfull | no reveal | relationship.tension  ->  prominentRelationship.phrasing": "rv5-plant-thorp-null-0 live gallery: Jiangli Huang voted against Noriko Zhao on a small matter last week. Noriko Zhao is waiting to see whether it was small. RV5~relationship~34~tension~Z",
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": "rv5-plant-thorp-null-0 live gallery: Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders. RV5~institution~16~desc~Z",
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": "rv5-plant-thorp-null-0 live gallery: One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields. RV5~institution~17~desc~Z",
+  "q203p211 | DM reveal on | relationship.description  ->  prominentRelationship.full": "rv5-plant-thorp-null-0 live gallery: Noriko Zhao brings the votes and Jiangli Huang brings the money. The alliance is three years old and has won every vote it needed. RV5~relationship~35",
+  "q203p211 | DM reveal on | relationship.tension  ->  prominentRelationship.tension": "rv5-plant-thorp-null-0 live gallery: Jiangli Huang voted against Noriko Zhao on a small matter last week. Noriko Zhao is waiting to see whether it was small. RV5~relationship~34~tension~Z",
+  "q203p211 | DM reveal on | relationship.tension  ->  prominentRelationship.phrasing": "rv5-plant-thorp-null-0 live gallery: Jiangli Huang voted against Noriko Zhao on a small matter last week. Noriko Zhao is waiting to see whether it was small. RV5~relationship~34~tension~Z",
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": "rv5-plant-thorp-null-0 live gallery: Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders. RV5~institution~16~desc~Z",
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": "rv5-plant-thorp-null-0 live gallery: One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields. RV5~institution~17~desc~Z",
+  "qfull | DM reveal on | relationship.description  ->  prominentRelationship.full": "rv5-plant-thorp-null-0 live gallery: Noriko Zhao brings the votes and Jiangli Huang brings the money. The alliance is three years old and has won every vote it needed. RV5~relationship~35",
+  "qfull | DM reveal on | relationship.tension  ->  prominentRelationship.tension": "rv5-plant-thorp-null-0 live gallery: Jiangli Huang voted against Noriko Zhao on a small matter last week. Noriko Zhao is waiting to see whether it was small. RV5~relationship~34~tension~Z",
+  "qfull | DM reveal on | relationship.tension  ->  prominentRelationship.phrasing": "rv5-plant-thorp-null-0 live gallery: Jiangli Huang voted against Noriko Zhao on a small matter last week. Noriko Zhao is waiting to see whether it was small. RV5~relationship~34~tension~Z",
+  "q203p211 | no reveal | relationship.tension  ->  pressureSentence": "rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot",
+  "qfull | no reveal | relationship.tension  ->  pressureSentence": "rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot",
+  "q203p211 | DM reveal on | relationship.tension  ->  pressureSentence": "rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot",
+  "qfull | DM reveal on | relationship.tension  ->  pressureSentence": "rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot",
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": "rv5-plant-town-null-0 live gallery: Part-time guards. Night patrol and gate duty. RV5~institution~25~desc~Z",
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": "rv5-plant-town-null-0 live gallery: Individual wizard residence. 1,000+ population viable. RV5~institution~39~desc~Z",
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": "rv5-plant-town-null-0 live gallery: Part-time guards. Night patrol and gate duty. RV5~institution~25~desc~Z",
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": "rv5-plant-town-null-0 live gallery: Individual wizard residence. 1,000+ population viable. RV5~institution~39~desc~Z",
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": "rv5-plant-town-null-0 live gallery: Part-time guards. Night patrol and gate duty. RV5~institution~25~desc~Z",
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": "rv5-plant-town-null-0 live gallery: Individual wizard residence. 1,000+ population viable. RV5~institution~39~desc~Z",
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": "rv5-plant-town-null-0 live gallery: Part-time guards. Night patrol and gate duty. RV5~institution~25~desc~Z",
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": "rv5-plant-town-null-0 live gallery: Individual wizard residence. 1,000+ population viable. RV5~institution~39~desc~Z",
+  "q203p211 | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses\"",
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": "rv5-plant-city-null-0 live gallery: A standing force of the law, roughly one in a hundred residents. RV5~institution~23~desc~Z",
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": "rv5-plant-city-null-0 live gallery: Organized sellsword companies. Major forces (hundreds to thousands). RV5~institution~42~desc~Z",
+  "qfull | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses\"",
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": "rv5-plant-city-null-0 live gallery: A standing force of the law, roughly one in a hundred residents. RV5~institution~23~desc~Z",
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": "rv5-plant-city-null-0 live gallery: Organized sellsword companies. Major forces (hundreds to thousands). RV5~institution~42~desc~Z",
+  "q203p211 | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses\"",
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": "rv5-plant-city-null-0 live gallery: A standing force of the law, roughly one in a hundred residents. RV5~institution~23~desc~Z",
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": "rv5-plant-city-null-0 live gallery: Organized sellsword companies. Major forces (hundreds to thousands). RV5~institution~42~desc~Z",
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses converts raw inputs into chain output.\"",
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"processor.Front businesses\"",
+  "qfull | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses\"",
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": "rv5-plant-city-null-0 live gallery: A standing force of the law, roughly one in a hundred residents. RV5~institution~23~desc~Z",
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": "rv5-plant-city-null-0 live gallery: Organized sellsword companies. Major forces (hundreds to thousands). RV5~institution~42~desc~Z",
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"Front businesses converts raw inputs into chain output.\"",
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": "rv5-plant-city-null-0 live gallery: \"Front businesses\" in \"processor.Front businesses\"",
+  "q203p211 | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": "rv5-plant-metropolis-null-0 live gallery: Rival organisations. RV5~institution~89~desc~Z",
+  "qfull | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": "rv5-plant-metropolis-null-0 live gallery: Rival organisations. RV5~institution~89~desc~Z",
+  "q203p211 | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": "rv5-plant-metropolis-null-0 live gallery: Rival organisations. RV5~institution~89~desc~Z",
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": "rv5-plant-metropolis-null-0 live gallery: \"Assassins' guild\" in \"Assassins' guild\"",
+  "qfull | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": "rv5-plant-metropolis-null-0 live gallery: Rival organisations. RV5~institution~89~desc~Z",
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": "rv5-plant-metropolis-null-0 live gallery: \"Assassins' guild\" in \"Assassins' guild\""
+ },
+ "houseNames": {
+  "q203p211 | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "qfull | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "q203p211 | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": {
+   "gallery": 76,
+   "import": 76
+  },
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": {
+   "gallery": 16,
+   "import": 16
+  },
+  "qfull | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": {
+   "gallery": 16,
+   "link": 16,
+   "map": 16,
+   "import": 16
+  },
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": {
+   "gallery": 76,
+   "import": 76
+  },
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": {
+   "gallery": 16,
+   "import": 16
+  },
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": {
+   "gallery": 20,
+   "import": 20
+  },
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": {
+   "gallery": 20,
+   "import": 20
+  }
+ },
+ "houseNameTowns": {
+  "q203p211 | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": 5,
+  "qfull | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": 5,
+  "q203p211 | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": 5,
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": 5,
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": 5,
+  "qfull | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": 5,
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": 5,
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": 5,
+  "q203p211 | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": 2,
+  "qfull | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": 2
+ },
+ "housesHiddenWhole": 19,
+ "raised": []
+}

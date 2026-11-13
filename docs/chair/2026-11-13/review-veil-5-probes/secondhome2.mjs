@@ -4,6 +4,8 @@
 //       cards left out), looked for at ANY path of each of the four responses;
 //   (b) the name of every house hidden WHOLE (the institutions the gallery response no longer lists), looked for inside
 //       any string of each response.
+//   (c) with SENTENCES=1: every sentence of 20+ characters of such a string, looked for INSIDE any string of each
+//       response (a derived line that embeds a hidden sentence without being equal to it).
 //   node secondhome2.mjs <pg module dir> <db> [<db> ...]
 import { createRequire } from 'node:module';
 const [pgdir, ...dbs] = process.argv.slice(2);
@@ -31,6 +33,7 @@ for (const dbn of dbs) {
     }
     for (const x of floor) gov.delete(x);
     nGov += gov.size;
+    const sentences = new Map(); if (process.env.SENTENCES) for (const [g, org] of gov) for (const sent of g.split(/(?<=[.!?])\s+/)) if (sent.trim().length >= 20 && !floor.has(sent)) sentences.set(sent.trim(), org);
     const mapSlug = (await db.query(`select public_slug from public.saved_maps where map_data #>> '{campaign,settlementIds,0}' = $1`, [r.id])).rows[0]?.public_slug;
     await db.query(`select set_config('test.uid', '', false)`);
     const resp = { gallery: (await db.query('select data from public.get_gallery_dossier($1)', [r.public_slug])).rows[0]?.data,
@@ -47,6 +50,7 @@ for (const dbn of dbs) {
     for (const [read, body] of Object.entries(resp)) {
       if (!body) continue;
       const walk = (v, p) => { if (Array.isArray(v)) v.forEach((x) => walk(x, `${p}[]`)); else if (isRec(v)) for (const [k, x] of Object.entries(v)) walk(x, p ? `${p}.${k}` : k); else if (typeof v === 'string') {
+        if (process.env.SENTENCES) { for (const [sent, org] of sentences) if (v.includes(sent) && !(gov.has(v))) { const k = `(c) a sentence of ${org} embedded at ${p}`; hist[k] = hist[k] || {}; hist[k][read] = (hist[k][read] || 0) + 1; (towns[k] = towns[k] || new Set()).add(r.name); ex[k] = ex[k] || `${r.name} [${dbn}] ${read}: ${v.slice(0, 160)}`; } }
         if (gov.has(v)) { const k = `(a) ${gov.get(v)} sent at ${p}`; hist[k] = hist[k] || {}; hist[k][read] = (hist[k][read] || 0) + 1; (towns[k] = towns[k] || new Set()).add(r.name); ex[k] = ex[k] || `${r.name} [${dbn}] ${read}: ${v.slice(0, 120)}`; }
         for (const nme of gone) if (v.includes(nme)) { const k = `(b) a house hidden whole, named at ${p}`; hist[k] = hist[k] || {}; hist[k][read] = (hist[k][read] || 0) + 1; (towns[k] = towns[k] || new Set()).add(r.name); ex[k] = ex[k] || `${r.name} [${dbn}] ${read}: house "${nme}" in "${v.slice(0, 90)}"`; } } };
       walk(body, '');

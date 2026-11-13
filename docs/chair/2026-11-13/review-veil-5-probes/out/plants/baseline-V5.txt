@@ -1,0 +1,3 @@
+ Test Files  1 passed (1)
+      Tests  1 passed | 28 skipped (29)
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

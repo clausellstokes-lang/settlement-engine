@@ -257,7 +257,8 @@ it(`REVIEW-VEIL-5 attack (${SIDE})`, async () => {
           const base = [['default', []], ['allShut', shut(m0.eyes)], ['opened', m0.defaults.map((a) => ({ address: a, hidden: false }))]];
           if (variant.startsWith('mutant')) base.splice(2, 1, [`rand0`, [...shut(m0.eyes.filter(() => r() < 0.5)), ...m0.defaults.filter(() => r() < 0.3).map((a) => ({ address: a, hidden: false }))]]);
           if (variant.startsWith('mutant') && mode === 'snapshot') base.length = 2;
-          if (variant === 'salted') {
+          if (process.env.RV5_LEAN) base.length = 2; // the default veil and every eye shut (the powers arm and the members share follow)
+          if (variant === 'salted' && !process.env.RV5_LEAN) {
             for (let k = 0; k < 2; k += 1) base.push([`rand${k}`, [...shut(m0.eyes.filter(() => r() < 0.4)), ...m0.defaults.filter(() => r() < 0.3).map((a) => ({ address: a, hidden: false }))]]);
             if (mode === 'live') for (const kind of Object.keys(veil.CARD_KINDS)) base.push([`only-${kind}`, shut(m0.cards.filter((c) => c.kind === kind).flatMap((c) => c.eyes))]);
           }
@@ -266,7 +267,7 @@ it(`REVIEW-VEIL-5 attack (${SIDE})`, async () => {
           shares.push({ name: `members/${dm ? 'dm' : 'pub'}/${mode}`, dm, mode, deltas: memberDeltas, mo });
         }
         shares.push({ name: `unmarked/${dm ? 'dm' : 'pub'}/live`, dm, mode: null, deltas: [], mo: {} });
-        if (variant === 'salted') shares.push({ name: `narrated-allShut/${dm ? 'dm' : 'pub'}/live`, dm, mode: 'live', deltas: shut(m0.eyes), mo: {}, narrated: true });
+        if (variant === 'salted' && !process.env.RV5_LEAN) shares.push({ name: `narrated-allShut/${dm ? 'dm' : 'pub'}/live`, dm, mode: 'live', deltas: shut(m0.eyes), mo: {}, narrated: true });
       }
 
       T.model = (T.model || 0) + Date.now() - tModel;

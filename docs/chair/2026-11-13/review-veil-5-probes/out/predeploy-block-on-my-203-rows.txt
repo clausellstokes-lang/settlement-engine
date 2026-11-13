@@ -1,0 +1,74 @@
+BEGIN
+SET
+    rolname    | role_settings | role_in_db_settings 
+---------------+---------------+---------------------
+ anon          |               | 
+ authenticated |               | 
+ service_role  |               | 
+(3 rows)
+
+ every_role_in_this_db | server_default_at_session_start 
+-----------------------+---------------------------------
+                       | 0 ms
+(1 row)
+
+ frozen_copies | largest_copy_jsonb_chars | over_1000000 | refused_at_211 | snapshot_without_copy 
+---------------+--------------------------+--------------+----------------+-----------------------
+            60 |                   322610 |            0 |              0 |                     0
+(1 row)
+
+ importable_snapshot_shares 
+----------------------------
+                         60
+(1 row)
+
+ non_boolean_reveal_dm | non_boolean_allow_import | rows_holding_one 
+-----------------------+--------------------------+------------------
+                     0 |                        0 |                0
+(1 row)
+
+ most_withheld_member_keys | rows_over_1000 
+---------------------------+----------------
+                         6 |              0
+(1 row)
+
+ longest_delta_list | rows_over_2000 
+--------------------+----------------
+                536 |              0
+(1 row)
+
+  source   | most_houses | most_anonymous_events 
+-----------+-------------+-----------------------
+ copy      |          62 |                     0
+ document  |          62 |                     0
+ narration |          62 |                     0
+(3 rows)
+
+  source   | at_or_past_1e130748 | with_numeric_id | with_numeric_name_or_part | past_double 
+-----------+---------------------+-----------------+---------------------------+-------------
+ copy      |                   0 |               0 |                         0 |           0
+ document  |                   0 |               0 |                         0 |           0
+ narration |                   0 |               0 |                         0 |           0
+(3 rows)
+
+ reveal_dm_listings_sending_editor_state 
+-----------------------------------------
+                                      15
+(1 row)
+
+ reveal_dm_shares_sending_editor_state_today 
+---------------------------------------------
+                                          63
+(1 row)
+
+ old_shape_shares_hiding_a_relationship_by_hand | old_shape_relationship_hand_hides 
+------------------------------------------------+-----------------------------------
+                                             40 |                              1738
+(1 row)
+
+ reveal_shares_shutting_goals_over_factiongoal | reveal_shares_shutting_ties_over_linkedfactionids 
+-----------------------------------------------+---------------------------------------------------
+                                            24 |                                                34
+(1 row)
+
+ROLLBACK

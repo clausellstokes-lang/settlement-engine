@@ -1,0 +1,344 @@
+{
+ "side": "master",
+ "timers": {
+  "birth": 613,
+  "model": 887,
+  "insert": 2227,
+  "ref": 6542,
+  "reads": 360850,
+  "compare": 44523,
+  "page": 64110
+ },
+ "shard": [
+  1,
+  2
+ ],
+ "towns": [
+  "rv5-f-thorp-infiltrated-0",
+  "rv5-f-hamlet-infiltrated-0",
+  "rv5-f-village-infiltrated-0",
+  "rv5-f-town-infiltrated-0"
+ ],
+ "shares": 128,
+ "reads": 1024,
+ "raised": [],
+ "noRow": {},
+ "diff": {
+  "f203p211:gallery:MISSING:decrees": 9,
+  "f203p211:gallery:MISSING:dmLayer": 9,
+  "f203p211:import:MISSING:decrees": 9,
+  "f203p211:import:MISSING:dmLayer": 9,
+  "f211:gallery:MISSING:decrees": 9,
+  "f211:gallery:MISSING:dmLayer": 9,
+  "f211:import:MISSING:decrees": 9,
+  "f211:import:MISSING:dmLayer": 9,
+  "f203p211:link:MISSING:history.historicalEvents[].lastingEffects": 7,
+  "f203p211:map:MISSING:history.historicalEvents[].lastingEffects": 7,
+  "f211:link:MISSING:history.historicalEvents[].lastingEffects": 7,
+  "f211:map:MISSING:history.historicalEvents[].lastingEffects": 7,
+  "f203p211:gallery:MISSING:history.historicalEvents[].lastingEffects": 3,
+  "f203p211:gallery:MISSING:history.historicalEvents[].description": 2,
+  "f203p211:link:MISSING:history.historicalEvents[].description": 3,
+  "f203p211:map:MISSING:history.historicalEvents[].description": 3,
+  "f203p211:import:MISSING:history.historicalEvents[].lastingEffects": 3,
+  "f203p211:import:MISSING:history.historicalEvents[].description": 2,
+  "f211:gallery:MISSING:history.historicalEvents[].lastingEffects": 3,
+  "f211:gallery:MISSING:history.historicalEvents[].description": 2,
+  "f211:link:MISSING:history.historicalEvents[].description": 3,
+  "f211:map:MISSING:history.historicalEvents[].description": 3,
+  "f211:import:MISSING:history.historicalEvents[].lastingEffects": 3,
+  "f211:import:MISSING:history.historicalEvents[].description": 2
+ },
+ "examples": {
+  "f203p211:gallery:MISSING:decrees": [
+   "rv5-f-thorp-infiltrated-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant0~grp~115~decrees~Z\"}]",
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~115~decrees~Z\"}]",
+   "rv5-f-thorp-infiltrated-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~115~decrees~Z\"}]",
+   "rv5-f-hamlet-infiltrated-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletinfiltrated0mutant0~grp~256~decrees~Z\"}]"
+  ],
+  "f203p211:gallery:MISSING:dmLayer": [
+   "rv5-f-thorp-infiltrated-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant0~grp~116~dmLayer~Z\"}",
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~116~dmLayer~Z\"}",
+   "rv5-f-thorp-infiltrated-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~116~dmLayer~Z\"}",
+   "rv5-f-hamlet-infiltrated-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletinfiltrated0mutant0~grp~257~dmLayer~Z\"}"
+  ],
+  "f203p211:import:MISSING:decrees": [
+   "rv5-f-thorp-infiltrated-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant0~grp~115~decrees~Z\"}]",
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~115~decrees~Z\"}]",
+   "rv5-f-thorp-infiltrated-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~115~decrees~Z\"}]",
+   "rv5-f-hamlet-infiltrated-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletinfiltrated0mutant0~grp~256~decrees~Z\"}]"
+  ],
+  "f203p211:import:MISSING:dmLayer": [
+   "rv5-f-thorp-infiltrated-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant0~grp~116~dmLayer~Z\"}",
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~116~dmLayer~Z\"}",
+   "rv5-f-thorp-infiltrated-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~116~dmLayer~Z\"}",
+   "rv5-f-hamlet-infiltrated-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletinfiltrated0mutant0~grp~257~dmLayer~Z\"}"
+  ],
+  "f211:gallery:MISSING:decrees": [
+   "rv5-f-thorp-infiltrated-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant0~grp~115~decrees~Z\"}]",
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~115~decrees~Z\"}]",
+   "rv5-f-thorp-infiltrated-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~115~decrees~Z\"}]",
+   "rv5-f-hamlet-infiltrated-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletinfiltrated0mutant0~grp~256~decrees~Z\"}]"
+  ],
+  "f211:gallery:MISSING:dmLayer": [
+   "rv5-f-thorp-infiltrated-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant0~grp~116~dmLayer~Z\"}",
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~116~dmLayer~Z\"}",
+   "rv5-f-thorp-infiltrated-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~116~dmLayer~Z\"}",
+   "rv5-f-hamlet-infiltrated-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletinfiltrated0mutant0~grp~257~dmLayer~Z\"}"
+  ],
+  "f211:import:MISSING:decrees": [
+   "rv5-f-thorp-infiltrated-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant0~grp~115~decrees~Z\"}]",
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~115~decrees~Z\"}]",
+   "rv5-f-thorp-infiltrated-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~115~decrees~Z\"}]",
+   "rv5-f-hamlet-infiltrated-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletinfiltrated0mutant0~grp~256~decrees~Z\"}]"
+  ],
+  "f211:import:MISSING:dmLayer": [
+   "rv5-f-thorp-infiltrated-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant0~grp~116~dmLayer~Z\"}",
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~116~dmLayer~Z\"}",
+   "rv5-f-thorp-infiltrated-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpinfiltrated0mutant1~grp~116~dmLayer~Z\"}",
+   "rv5-f-hamlet-infiltrated-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletinfiltrated0mutant0~grp~257~dmLayer~Z\"}"
+  ],
+  "f203p211:link:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: [\"A standing security office and informant network persist\",\"RV5~rv5fthorpinfiltrated0mutant1~event~97~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Wage disputes settled by a standing arbitration council since founded\",\"RV5~rv5fvillageinfiltrated0mutant0~event~221~lastingEffects~Z\"]"
+  ],
+  "f203p211:map:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: [\"A standing security office and informant network persist\",\"RV5~rv5fthorpinfiltrated0mutant1~event~97~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Wage disputes settled by a standing arbitration council since founded\",\"RV5~rv5fvillageinfiltrated0mutant0~event~221~lastingEffects~Z\"]"
+  ],
+  "f211:link:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: [\"A standing security office and informant network persist\",\"RV5~rv5fthorpinfiltrated0mutant1~event~97~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Wage disputes settled by a standing arbitration council since founded\",\"RV5~rv5fvillageinfiltrated0mutant0~event~221~lastingEffects~Z\"]"
+  ],
+  "f211:map:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-thorp-infiltrated-0 mutant1 rand0/dm/live :: [\"A standing security office and informant network persist\",\"RV5~rv5fthorpinfiltrated0mutant1~event~97~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Wage disputes settled by a standing arbitration council since founded\",\"RV5~rv5fvillageinfiltrated0mutant0~event~221~lastingEffects~Z\"]"
+  ],
+  "f203p211:gallery:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-town-infiltrated-0 mutant0 rand0/pub/live :: [\"Collaborator and resistance families still keep to separate quarters\",\"RV5~rv5ftowninfiltrated0mutant0~event~361~lastingEffects~Z\"]"
+  ],
+  "f203p211:gallery:MISSING:history.historicalEvents[].description": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\"",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force. RV5~rv5fvillageinfiltrated0mut"
+  ],
+  "f203p211:link:MISSING:history.historicalEvents[].description": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\"",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force. RV5~rv5fvillageinfiltrated0mut",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\""
+  ],
+  "f203p211:map:MISSING:history.historicalEvents[].description": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\"",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force. RV5~rv5fvillageinfiltrated0mut",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\""
+  ],
+  "f203p211:import:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-town-infiltrated-0 mutant0 rand0/pub/live :: [\"Collaborator and resistance families still keep to separate quarters\",\"RV5~rv5ftowninfiltrated0mutant0~event~361~lastingEffects~Z\"]"
+  ],
+  "f203p211:import:MISSING:history.historicalEvents[].description": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\"",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force. RV5~rv5fvillageinfiltrated0mut"
+  ],
+  "f211:gallery:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-town-infiltrated-0 mutant0 rand0/pub/live :: [\"Collaborator and resistance families still keep to separate quarters\",\"RV5~rv5ftowninfiltrated0mutant0~event~361~lastingEffects~Z\"]"
+  ],
+  "f211:gallery:MISSING:history.historicalEvents[].description": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\"",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force. RV5~rv5fvillageinfiltrated0mut"
+  ],
+  "f211:link:MISSING:history.historicalEvents[].description": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\"",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force. RV5~rv5fvillageinfiltrated0mut",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\""
+  ],
+  "f211:map:MISSING:history.historicalEvents[].description": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\"",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force. RV5~rv5fvillageinfiltrated0mut",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\""
+  ],
+  "f211:import:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: [\"Quarrymen's guild retains unusual civic influence\",\"Architectural legacy of the construction period defines the settlement's visual character\",\"RV5~rv5fvillageinfiltrated0mutant0~event~213~lastingEffects~Z\"]",
+   "rv5-f-town-infiltrated-0 mutant0 rand0/pub/live :: [\"Collaborator and resistance families still keep to separate quarters\",\"RV5~rv5ftowninfiltrated0mutant0~event~361~lastingEffects~Z\"]"
+  ],
+  "f211:import:MISSING:history.historicalEvents[].description": [
+   "rv5-f-village-infiltrated-0 mutant0 rand0/pub/live :: \"A widening gulf between wealthy merchants and working poor breeds lasting resentment RV5~rv5fvillageinfiltrated0mutant0~event~219~description~Z\"",
+   "rv5-f-village-infiltrated-0 mutant0 rand0/dm/live :: \"A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force. RV5~rv5fvillageinfiltrated0mut"
+  ]
+ },
+ "tokenLeaks": [],
+ "postFreeze": {
+  "f203p211:link": 32,
+  "f211:link": 32
+ },
+ "served": {},
+ "pageShowMore": {},
+ "handHides": 5018,
+ "hiddenTokens": 56960,
+ "hidden": {
+  "f203p211:gallery": 9278,
+  "f203p211:link": 5526,
+  "f203p211:map": 5370,
+  "f203p211:import": 9278,
+  "f211:gallery": 8963,
+  "f211:link": 4847,
+  "f211:map": 4735,
+  "f211:import": 8963
+ },
+ "secondHome": {
+  "f203p211:gallery:institution:desc": 22,
+  "f203p211:gallery:institution:tags": 20,
+  "f203p211:gallery:institution:facets": 15,
+  "f203p211:gallery:institution:serviceKeys": 15,
+  "f203p211:link:institution:desc": 22,
+  "f203p211:link:institution:tags": 20,
+  "f203p211:link:institution:facets": 15,
+  "f203p211:link:institution:serviceKeys": 15,
+  "f203p211:map:institution:desc": 22,
+  "f203p211:map:institution:tags": 20,
+  "f203p211:map:institution:facets": 15,
+  "f203p211:map:institution:serviceKeys": 15,
+  "f203p211:import:institution:desc": 22,
+  "f203p211:import:institution:tags": 20,
+  "f203p211:import:institution:facets": 15,
+  "f203p211:import:institution:serviceKeys": 15,
+  "f211:gallery:institution:desc": 22,
+  "f211:gallery:institution:tags": 20,
+  "f211:gallery:institution:facets": 15,
+  "f211:gallery:institution:serviceKeys": 15,
+  "f211:link:institution:desc": 22,
+  "f211:link:institution:tags": 20,
+  "f211:link:institution:facets": 15,
+  "f211:link:institution:serviceKeys": 15,
+  "f211:map:institution:desc": 22,
+  "f211:map:institution:tags": 20,
+  "f211:map:institution:facets": 15,
+  "f211:map:institution:serviceKeys": 15,
+  "f211:import:institution:desc": 22,
+  "f211:import:institution:tags": 20,
+  "f211:import:institution:facets": 15,
+  "f211:import:institution:serviceKeys": 15,
+  "f203p211:gallery:institution:description": 6,
+  "f203p211:link:institution:description": 6,
+  "f203p211:map:institution:description": 6,
+  "f203p211:import:institution:description": 6,
+  "f211:gallery:institution:description": 6,
+  "f211:link:institution:description": 6,
+  "f211:map:institution:description": 6,
+  "f211:import:institution:description": 6
+ },
+ "secondHomeEx": [
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~301~desc~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].desc"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~303~tags~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~304~facets~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].facets"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~305~serviceKeys~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].serviceKeys"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~306~desc~Z",
+   "at": [
+    "defenseProfile.institutions.walls[].desc"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~308~tags~Z",
+   "at": [
+    "defenseProfile.institutions.walls[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~310~serviceKeys~Z",
+   "at": [
+    "defenseProfile.institutions.walls[].serviceKeys"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~301~desc~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].desc"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~303~tags~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~304~facets~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].facets"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~305~serviceKeys~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].serviceKeys"
+   ]
+  },
+  {
+   "share": "rv5-f-town-infiltrated-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5ftowninfiltrated0mutant0~institution~306~desc~Z",
+   "at": [
+    "defenseProfile.institutions.walls[].desc"
+   ]
+  }
+ ],
+ "hiddenPowerName": {},
+ "covertTies": {},
+ "hiddenPowerTowns": 0
+}

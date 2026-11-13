@@ -1,0 +1,464 @@
+{
+ "side": "master",
+ "timers": {
+  "birth": 511,
+  "model": 896,
+  "insert": 2133,
+  "ref": 6721,
+  "reads": 342395,
+  "compare": 60704,
+  "page": 64401
+ },
+ "shard": [
+  0,
+  2
+ ],
+ "towns": [
+  "rv5-f-thorp-calm-0",
+  "rv5-f-hamlet-calm-0",
+  "rv5-f-village-calm-0",
+  "rv5-f-town-calm-0"
+ ],
+ "shares": 128,
+ "reads": 1024,
+ "raised": [],
+ "noRow": {},
+ "diff": {
+  "f203p211:gallery:MISSING:decrees": 9,
+  "f203p211:gallery:MISSING:dmLayer": 9,
+  "f203p211:import:MISSING:decrees": 9,
+  "f203p211:import:MISSING:dmLayer": 9,
+  "f211:gallery:MISSING:decrees": 9,
+  "f211:gallery:MISSING:dmLayer": 9,
+  "f211:import:MISSING:decrees": 9,
+  "f211:import:MISSING:dmLayer": 9,
+  "f203p211:gallery:MISSING:history.eventsTimeline[].description": 3,
+  "f203p211:link:MISSING:history.eventsTimeline[].description": 3,
+  "f203p211:map:MISSING:history.eventsTimeline[].description": 3,
+  "f203p211:import:MISSING:history.eventsTimeline[].description": 3,
+  "f211:gallery:MISSING:history.eventsTimeline[].description": 3,
+  "f211:link:MISSING:history.eventsTimeline[].description": 3,
+  "f211:map:MISSING:history.eventsTimeline[].description": 3,
+  "f211:import:MISSING:history.eventsTimeline[].description": 3,
+  "f203p211:gallery:MISSING:history.historicalEvents[].desc": 3,
+  "f203p211:gallery:MISSING:history.historicalEvents[].description": 3,
+  "f203p211:link:MISSING:history.historicalEvents[].desc": 4,
+  "f203p211:link:MISSING:history.historicalEvents[].description": 5,
+  "f203p211:map:MISSING:history.historicalEvents[].desc": 4,
+  "f203p211:map:MISSING:history.historicalEvents[].description": 5,
+  "f203p211:import:MISSING:history.historicalEvents[].desc": 3,
+  "f203p211:import:MISSING:history.historicalEvents[].description": 3,
+  "f211:gallery:MISSING:history.historicalEvents[].desc": 3,
+  "f211:gallery:MISSING:history.historicalEvents[].description": 3,
+  "f211:link:MISSING:history.historicalEvents[].desc": 4,
+  "f211:link:MISSING:history.historicalEvents[].description": 5,
+  "f211:map:MISSING:history.historicalEvents[].desc": 4,
+  "f211:map:MISSING:history.historicalEvents[].description": 5,
+  "f211:import:MISSING:history.historicalEvents[].desc": 3,
+  "f211:import:MISSING:history.historicalEvents[].description": 3,
+  "f203p211:gallery:MISSING:history.eventsTimeline[].lastingEffects": 2,
+  "f203p211:link:MISSING:history.eventsTimeline[].lastingEffects": 2,
+  "f203p211:link:MISSING:history.historicalEvents[].lastingEffects": 3,
+  "f203p211:map:MISSING:history.eventsTimeline[].lastingEffects": 2,
+  "f203p211:map:MISSING:history.historicalEvents[].lastingEffects": 3,
+  "f203p211:import:MISSING:history.eventsTimeline[].lastingEffects": 2,
+  "f211:gallery:MISSING:history.eventsTimeline[].lastingEffects": 2,
+  "f211:link:MISSING:history.eventsTimeline[].lastingEffects": 2,
+  "f211:link:MISSING:history.historicalEvents[].lastingEffects": 3,
+  "f211:map:MISSING:history.eventsTimeline[].lastingEffects": 2,
+  "f211:map:MISSING:history.historicalEvents[].lastingEffects": 3,
+  "f211:import:MISSING:history.eventsTimeline[].lastingEffects": 2
+ },
+ "examples": {
+  "f203p211:gallery:MISSING:decrees": [
+   "rv5-f-thorp-calm-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpcalm0mutant0~grp~120~decrees~Z\"}]",
+   "rv5-f-thorp-calm-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpcalm0mutant1~grp~120~decrees~Z\"}]",
+   "rv5-f-hamlet-calm-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletcalm0mutant0~grp~137~decrees~Z\"}]",
+   "rv5-f-hamlet-calm-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletcalm0mutant1~grp~137~decrees~Z\"}]"
+  ],
+  "f203p211:gallery:MISSING:dmLayer": [
+   "rv5-f-thorp-calm-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpcalm0mutant0~grp~121~dmLayer~Z\"}",
+   "rv5-f-thorp-calm-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpcalm0mutant1~grp~121~dmLayer~Z\"}",
+   "rv5-f-hamlet-calm-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletcalm0mutant0~grp~138~dmLayer~Z\"}",
+   "rv5-f-hamlet-calm-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletcalm0mutant1~grp~138~dmLayer~Z\"}"
+  ],
+  "f203p211:import:MISSING:decrees": [
+   "rv5-f-thorp-calm-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpcalm0mutant0~grp~120~decrees~Z\"}]",
+   "rv5-f-thorp-calm-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpcalm0mutant1~grp~120~decrees~Z\"}]",
+   "rv5-f-hamlet-calm-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletcalm0mutant0~grp~137~decrees~Z\"}]",
+   "rv5-f-hamlet-calm-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletcalm0mutant1~grp~137~decrees~Z\"}]"
+  ],
+  "f203p211:import:MISSING:dmLayer": [
+   "rv5-f-thorp-calm-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpcalm0mutant0~grp~121~dmLayer~Z\"}",
+   "rv5-f-thorp-calm-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpcalm0mutant1~grp~121~dmLayer~Z\"}",
+   "rv5-f-hamlet-calm-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletcalm0mutant0~grp~138~dmLayer~Z\"}",
+   "rv5-f-hamlet-calm-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletcalm0mutant1~grp~138~dmLayer~Z\"}"
+  ],
+  "f211:gallery:MISSING:decrees": [
+   "rv5-f-thorp-calm-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpcalm0mutant0~grp~120~decrees~Z\"}]",
+   "rv5-f-thorp-calm-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpcalm0mutant1~grp~120~decrees~Z\"}]",
+   "rv5-f-hamlet-calm-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletcalm0mutant0~grp~137~decrees~Z\"}]",
+   "rv5-f-hamlet-calm-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletcalm0mutant1~grp~137~decrees~Z\"}]"
+  ],
+  "f211:gallery:MISSING:dmLayer": [
+   "rv5-f-thorp-calm-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpcalm0mutant0~grp~121~dmLayer~Z\"}",
+   "rv5-f-thorp-calm-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpcalm0mutant1~grp~121~dmLayer~Z\"}",
+   "rv5-f-hamlet-calm-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletcalm0mutant0~grp~138~dmLayer~Z\"}",
+   "rv5-f-hamlet-calm-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletcalm0mutant1~grp~138~dmLayer~Z\"}"
+  ],
+  "f211:import:MISSING:decrees": [
+   "rv5-f-thorp-calm-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpcalm0mutant0~grp~120~decrees~Z\"}]",
+   "rv5-f-thorp-calm-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fthorpcalm0mutant1~grp~120~decrees~Z\"}]",
+   "rv5-f-hamlet-calm-0 mutant0 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletcalm0mutant0~grp~137~decrees~Z\"}]",
+   "rv5-f-hamlet-calm-0 mutant1 unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5fhamletcalm0mutant1~grp~137~decrees~Z\"}]"
+  ],
+  "f211:import:MISSING:dmLayer": [
+   "rv5-f-thorp-calm-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpcalm0mutant0~grp~121~dmLayer~Z\"}",
+   "rv5-f-thorp-calm-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fthorpcalm0mutant1~grp~121~dmLayer~Z\"}",
+   "rv5-f-hamlet-calm-0 mutant0 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletcalm0mutant0~grp~138~dmLayer~Z\"}",
+   "rv5-f-hamlet-calm-0 mutant1 unmarked/dm/live :: {\"notes\":\"RV5~rv5fhamletcalm0mutant1~grp~138~dmLayer~Z\"}"
+  ],
+  "f203p211:gallery:MISSING:history.eventsTimeline[].description": [
+   "rv5-f-thorp-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5fthorpcalm0mutant1~event~112~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\""
+  ],
+  "f203p211:link:MISSING:history.eventsTimeline[].description": [
+   "rv5-f-thorp-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5fthorpcalm0mutant1~event~112~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\""
+  ],
+  "f203p211:map:MISSING:history.eventsTimeline[].description": [
+   "rv5-f-thorp-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5fthorpcalm0mutant1~event~112~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\""
+  ],
+  "f203p211:import:MISSING:history.eventsTimeline[].description": [
+   "rv5-f-thorp-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5fthorpcalm0mutant1~event~112~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\""
+  ],
+  "f211:gallery:MISSING:history.eventsTimeline[].description": [
+   "rv5-f-thorp-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5fthorpcalm0mutant1~event~112~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\""
+  ],
+  "f211:link:MISSING:history.eventsTimeline[].description": [
+   "rv5-f-thorp-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5fthorpcalm0mutant1~event~112~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\""
+  ],
+  "f211:map:MISSING:history.eventsTimeline[].description": [
+   "rv5-f-thorp-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5fthorpcalm0mutant1~event~112~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\""
+  ],
+  "f211:import:MISSING:history.eventsTimeline[].description": [
+   "rv5-f-thorp-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5fthorpcalm0mutant1~event~112~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~603~description~Z\""
+  ],
+  "f203p211:gallery:MISSING:history.historicalEvents[].desc": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\""
+  ],
+  "f203p211:gallery:MISSING:history.historicalEvents[].description": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\""
+  ],
+  "f203p211:link:MISSING:history.historicalEvents[].desc": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\""
+  ],
+  "f203p211:link:MISSING:history.historicalEvents[].description": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\""
+  ],
+  "f203p211:map:MISSING:history.historicalEvents[].desc": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\""
+  ],
+  "f203p211:map:MISSING:history.historicalEvents[].description": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\""
+  ],
+  "f203p211:import:MISSING:history.historicalEvents[].desc": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\""
+  ],
+  "f203p211:import:MISSING:history.historicalEvents[].description": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\""
+  ],
+  "f211:gallery:MISSING:history.historicalEvents[].desc": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\""
+  ],
+  "f211:gallery:MISSING:history.historicalEvents[].description": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\""
+  ],
+  "f211:link:MISSING:history.historicalEvents[].desc": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\""
+  ],
+  "f211:link:MISSING:history.historicalEvents[].description": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\""
+  ],
+  "f211:map:MISSING:history.historicalEvents[].desc": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\""
+  ],
+  "f211:map:MISSING:history.historicalEvents[].description": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\""
+  ],
+  "f211:import:MISSING:history.historicalEvents[].desc": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant0~event~580~desc~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~576~desc~Z\""
+  ],
+  "f211:import:MISSING:history.historicalEvents[].description": [
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/pub/live :: \"Competing creeds vied for converts, each seeking to outweigh the others RV5~rv5ftowncalm0mutant0~event~579~description~Z\"",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~rv5ftowncalm0mutant0~event~575~description~Z\""
+  ],
+  "f203p211:gallery:MISSING:history.eventsTimeline[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~605~lastingEffects~Z\"",
+   "rv5-f-town-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant1~event~621~lastingEffects~Z\""
+  ],
+  "f203p211:link:MISSING:history.eventsTimeline[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~605~lastingEffects~Z\"",
+   "rv5-f-town-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant1~event~621~lastingEffects~Z\""
+  ],
+  "f203p211:link:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Denunciation records from the panic remain sealed in the archive\",\"RV5~rv5ftowncalm0mutant0~event~577~lastingEffects~Z\"]",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Two rival congregations still divide the settlement's faithful\",\"RV5~rv5ftowncalm0mutant0~event~581~lastingEffects~Z\"]",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Succession now governed by a charter drafted in the aftermath\",\"RV5~rv5ftowncalm0mutant0~event~589~lastingEffects~Z\"]"
+  ],
+  "f203p211:map:MISSING:history.eventsTimeline[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~605~lastingEffects~Z\"",
+   "rv5-f-town-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant1~event~621~lastingEffects~Z\""
+  ],
+  "f203p211:map:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Denunciation records from the panic remain sealed in the archive\",\"RV5~rv5ftowncalm0mutant0~event~577~lastingEffects~Z\"]",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Two rival congregations still divide the settlement's faithful\",\"RV5~rv5ftowncalm0mutant0~event~581~lastingEffects~Z\"]",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Succession now governed by a charter drafted in the aftermath\",\"RV5~rv5ftowncalm0mutant0~event~589~lastingEffects~Z\"]"
+  ],
+  "f203p211:import:MISSING:history.eventsTimeline[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~605~lastingEffects~Z\"",
+   "rv5-f-town-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant1~event~621~lastingEffects~Z\""
+  ],
+  "f211:gallery:MISSING:history.eventsTimeline[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~605~lastingEffects~Z\"",
+   "rv5-f-town-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant1~event~621~lastingEffects~Z\""
+  ],
+  "f211:link:MISSING:history.eventsTimeline[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~605~lastingEffects~Z\"",
+   "rv5-f-town-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant1~event~621~lastingEffects~Z\""
+  ],
+  "f211:link:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Denunciation records from the panic remain sealed in the archive\",\"RV5~rv5ftowncalm0mutant0~event~577~lastingEffects~Z\"]",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Two rival congregations still divide the settlement's faithful\",\"RV5~rv5ftowncalm0mutant0~event~581~lastingEffects~Z\"]",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Succession now governed by a charter drafted in the aftermath\",\"RV5~rv5ftowncalm0mutant0~event~589~lastingEffects~Z\"]"
+  ],
+  "f211:map:MISSING:history.eventsTimeline[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~605~lastingEffects~Z\"",
+   "rv5-f-town-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant1~event~621~lastingEffects~Z\""
+  ],
+  "f211:map:MISSING:history.historicalEvents[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Denunciation records from the panic remain sealed in the archive\",\"RV5~rv5ftowncalm0mutant0~event~577~lastingEffects~Z\"]",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Two rival congregations still divide the settlement's faithful\",\"RV5~rv5ftowncalm0mutant0~event~581~lastingEffects~Z\"]",
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: [\"Succession now governed by a charter drafted in the aftermath\",\"RV5~rv5ftowncalm0mutant0~event~589~lastingEffects~Z\"]"
+  ],
+  "f211:import:MISSING:history.eventsTimeline[].lastingEffects": [
+   "rv5-f-town-calm-0 mutant0 rand0/dm/live :: \"RV5~rv5ftowncalm0mutant0~event~605~lastingEffects~Z\"",
+   "rv5-f-town-calm-0 mutant1 rand0/pub/live :: \"RV5~rv5ftowncalm0mutant1~event~621~lastingEffects~Z\""
+  ]
+ },
+ "tokenLeaks": [],
+ "postFreeze": {
+  "f203p211:link": 32,
+  "f211:link": 32
+ },
+ "served": {},
+ "pageShowMore": {},
+ "handHides": 5469,
+ "hiddenTokens": 64880,
+ "hidden": {
+  "f203p211:gallery": 10465,
+  "f203p211:link": 6357,
+  "f203p211:map": 6131,
+  "f203p211:import": 10465,
+  "f211:gallery": 10144,
+  "f211:link": 5674,
+  "f211:map": 5500,
+  "f211:import": 10144
+ },
+ "secondHome": {
+  "f203p211:gallery:institution:desc": 31,
+  "f203p211:gallery:institution:tags": 29,
+  "f203p211:gallery:institution:facets": 15,
+  "f203p211:gallery:institution:description": 21,
+  "f203p211:link:institution:desc": 31,
+  "f203p211:link:institution:tags": 29,
+  "f203p211:link:institution:facets": 15,
+  "f203p211:link:institution:description": 21,
+  "f203p211:map:institution:desc": 31,
+  "f203p211:map:institution:tags": 29,
+  "f203p211:map:institution:facets": 15,
+  "f203p211:map:institution:description": 21,
+  "f203p211:import:institution:desc": 31,
+  "f203p211:import:institution:tags": 29,
+  "f203p211:import:institution:facets": 15,
+  "f203p211:import:institution:description": 21,
+  "f211:gallery:institution:desc": 31,
+  "f211:gallery:institution:tags": 29,
+  "f211:gallery:institution:facets": 15,
+  "f211:gallery:institution:description": 21,
+  "f211:link:institution:desc": 31,
+  "f211:link:institution:tags": 29,
+  "f211:link:institution:facets": 15,
+  "f211:link:institution:description": 21,
+  "f211:map:institution:desc": 31,
+  "f211:map:institution:tags": 29,
+  "f211:map:institution:facets": 15,
+  "f211:map:institution:description": 21,
+  "f211:import:institution:desc": 31,
+  "f211:import:institution:tags": 29,
+  "f211:import:institution:facets": 15,
+  "f211:import:institution:description": 21,
+  "f203p211:gallery:institution:serviceKeys": 8,
+  "f203p211:link:institution:serviceKeys": 8,
+  "f203p211:map:institution:serviceKeys": 8,
+  "f203p211:import:institution:serviceKeys": 8,
+  "f211:gallery:institution:serviceKeys": 8,
+  "f211:link:institution:serviceKeys": 8,
+  "f211:map:institution:serviceKeys": 8,
+  "f211:import:institution:serviceKeys": 8
+ },
+ "secondHomeEx": [
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~181~desc~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].desc"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~183~tags~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~184~facets~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].facets"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~182~description~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].description"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~181~desc~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].desc"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~183~tags~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~184~facets~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].facets"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "link",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~182~description~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].description"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "map",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~181~desc~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].desc"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "map",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~183~tags~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "map",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~184~facets~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].facets"
+   ]
+  },
+  {
+   "share": "rv5-f-village-calm-0 mutant0 allShut/pub/live",
+   "read": "map",
+   "tok": "RV5~rv5fvillagecalm0mutant0~institution~182~description~Z",
+   "at": [
+    "defenseProfile.institutions.charter[].description"
+   ]
+  }
+ ],
+ "hiddenPowerName": {},
+ "covertTies": {},
+ "hiddenPowerTowns": 0
+}

@@ -1,0 +1,100 @@
+{
+ "rows": 96,
+ "reads": 1152,
+ "breaks": [],
+ "showMore": {
+  "mfull:map": 24,
+  "m203p211:map": 24,
+  "mfull:import": 24,
+  "m203p211:import": 24
+ },
+ "hideMore": {
+  "mfull:link": 80,
+  "m203p211:link": 74,
+  "mfull:map": 80,
+  "m203p211:map": 68,
+  "mfull:import": 82,
+  "m203p211:import": 70,
+  "mfull:gallery": 40,
+  "m203p211:gallery": 10
+ },
+ "carried": {
+  "m203:link": 96,
+  "m203:link:strings": 96,
+  "mfull:link": 96,
+  "mfull:link:strings": 1140,
+  "m203p211:link": 96,
+  "m203p211:link:strings": 1140,
+  "m203:map": 96,
+  "m203:map:strings": 96,
+  "mfull:map": 96,
+  "mfull:map:strings": 96,
+  "m203p211:map": 96,
+  "m203p211:map:strings": 96,
+  "m203:gallery": 82,
+  "m203:gallery:strings": 17806,
+  "mfull:gallery": 82,
+  "mfull:gallery:strings": 1202,
+  "m203p211:gallery": 82,
+  "m203p211:gallery:strings": 1205
+ },
+ "postFreeze": {
+  "m203:gallery:response": 36,
+  "m203:link:response": 36,
+  "m203:link:page": 36,
+  "mfull:link:response": 24,
+  "mfull:link:page": 24,
+  "m203p211:link:response": 24,
+  "m203p211:link:page": 24,
+  "m203:map:response": 36,
+  "m203:map:page": 36,
+  "m203:import:response": 36,
+  "m203:import:page": 36
+ },
+ "labels": {
+  "mfull:gallery:snapshot/2026-11-01T00:00:00.000Z->snapshot/null": 36,
+  "m203p211:gallery:snapshot/2026-11-01T00:00:00.000Z->snapshot/null": 36
+ },
+ "examples": {
+  "showMore mfull:map": [
+   "m3-thorp-calm snapDefault: Each household farms ~12-16 acres for survival.",
+   "m3-thorp-calm dmSnap: Each household farms ~12-16 acres for survival.",
+   "m3-thorp-infiltrated snapDefault: Every household works some 12-16 acres, enough to stay alive and no more.",
+   "m3-thorp-infiltrated dmSnap: Every household works some 12-16 acres, enough to stay alive and no more.",
+   "m3-hamlet-calm snapDefault: Open-field farming, parcelled into strips.",
+   "m3-hamlet-calm dmSnap: Open-field farming, parcelled into strips.",
+   "m3-hamlet-infiltrated snapDefault: Strip farming in open fields.",
+   "m3-hamlet-infiltrated dmSnap: Strip farming in open fields."
+  ],
+  "showMore m203p211:map": [
+   "m3-thorp-calm snapDefault: Each household farms ~12-16 acres for survival.",
+   "m3-thorp-calm dmSnap: Each household farms ~12-16 acres for survival.",
+   "m3-thorp-infiltrated snapDefault: Every household works some 12-16 acres, enough to stay alive and no more.",
+   "m3-thorp-infiltrated dmSnap: Every household works some 12-16 acres, enough to stay alive and no more.",
+   "m3-hamlet-calm snapDefault: Open-field farming, parcelled into strips.",
+   "m3-hamlet-calm dmSnap: Open-field farming, parcelled into strips.",
+   "m3-hamlet-infiltrated snapDefault: Strip farming in open fields.",
+   "m3-hamlet-infiltrated dmSnap: Strip farming in open fields."
+  ],
+  "showMore mfull:import": [
+   "m3-thorp-calm snapDefault: Each household farms ~12-16 acres for survival.",
+   "m3-thorp-calm dmSnap: Each household farms ~12-16 acres for survival.",
+   "m3-thorp-infiltrated snapDefault: Every household works some 12-16 acres, enough to stay alive and no more.",
+   "m3-thorp-infiltrated dmSnap: Every household works some 12-16 acres, enough to stay alive and no more.",
+   "m3-hamlet-calm snapDefault: Open-field farming, parcelled into strips.",
+   "m3-hamlet-calm dmSnap: Open-field farming, parcelled into strips.",
+   "m3-hamlet-infiltrated snapDefault: Strip farming in open fields.",
+   "m3-hamlet-infiltrated dmSnap: Strip farming in open fields."
+  ],
+  "showMore m203p211:import": [
+   "m3-thorp-calm snapDefault: Each household farms ~12-16 acres for survival.",
+   "m3-thorp-calm dmSnap: Each household farms ~12-16 acres for survival.",
+   "m3-thorp-infiltrated snapDefault: Every household works some 12-16 acres, enough to stay alive and no more.",
+   "m3-thorp-infiltrated dmSnap: Every household works some 12-16 acres, enough to stay alive and no more.",
+   "m3-hamlet-calm snapDefault: Open-field farming, parcelled into strips.",
+   "m3-hamlet-calm dmSnap: Open-field farming, parcelled into strips.",
+   "m3-hamlet-infiltrated snapDefault: Strip farming in open fields.",
+   "m3-hamlet-infiltrated dmSnap: Strip farming in open fields."
+  ]
+ }
+}

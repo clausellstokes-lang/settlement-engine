@@ -1,0 +1,270 @@
+{
+ "side": "tip",
+ "towns": 12,
+ "birthsThatThrew": [],
+ "planted": 3774,
+ "plantedByOrigin": {
+  "institution.desc": 455,
+  "faction.desc": 177,
+  "npc.personality": 343,
+  "npc.physical": 343,
+  "npc.secret": 412,
+  "npc.plotHooks": 681,
+  "event.description": 65,
+  "event.lastingEffects": 52,
+  "event.plotHooks": 22,
+  "tension.description": 21,
+  "tension.lastingEffects": 20,
+  "tension.plotHooks": 21,
+  "npc.goal": 343,
+  "npc.activeConstraint": 5,
+  "grouping.criminalCaptureState": 12,
+  "grouping.reason": 2,
+  "grouping.decrees": 12,
+  "grouping.dmLayer": 12,
+  "relationship.tension": 341,
+  "relationship.description": 341,
+  "grouping.desc": 59,
+  "conflict.stakes": 7,
+  "conflict.desc": 7,
+  "conflict.plotHooks": 7,
+  "npc.allegiance": 10,
+  "faction.crisisNote": 3,
+  "grouping.note": 1
+ },
+ "plantedAfterStep": {
+  "institution.desc after assembleInstitutions": 434,
+  "faction.desc after generatePower": 66,
+  "faction.desc after powerEconomyReconcilePass": 66,
+  "npc.personality after generatePopulation": 338,
+  "npc.physical after generatePopulation": 338,
+  "npc.secret after generatePopulation": 338,
+  "npc.plotHooks after generatePopulation": 338,
+  "event.description after generateNarratives": 65,
+  "event.lastingEffects after generateNarratives": 52,
+  "event.plotHooks after generateNarratives": 22,
+  "tension.description after generateNarratives": 21,
+  "tension.lastingEffects after generateNarratives": 20,
+  "tension.plotHooks after generateNarratives": 21,
+  "npc.goal after assembleSettlement": 343,
+  "npc.activeConstraint after assembleSettlement": 5,
+  "npc.plotHooks after assembleSettlement": 343,
+  "faction.desc after assembleSettlement": 45,
+  "grouping.criminalCaptureState after assembleSettlement": 12,
+  "grouping.reason after assembleSettlement": 2,
+  "grouping.decrees after by the editor": 12,
+  "grouping.dmLayer after by the editor": 12,
+  "relationship.tension after assembleSettlement": 341,
+  "relationship.description after assembleSettlement": 341,
+  "institution.desc after cascadePass": 16,
+  "npc.secret after assembleSettlement": 74,
+  "npc.personality after assembleSettlement": 5,
+  "npc.physical after assembleSettlement": 5,
+  "institution.desc after factionCorrelationPass": 3,
+  "grouping.desc after economyReconcilePass": 45,
+  "conflict.stakes after assembleSettlement": 7,
+  "conflict.desc after assembleSettlement": 7,
+  "conflict.plotHooks after assembleSettlement": 7,
+  "grouping.desc after generateEconomy": 11,
+  "npc.allegiance after assembleSettlement": 10,
+  "grouping.desc after assembleSettlement": 3,
+  "faction.crisisNote after generatePower": 1,
+  "faction.crisisNote after powerEconomyReconcilePass": 1,
+  "faction.crisisNote after assembleSettlement": 1,
+  "institution.desc after coherenceRepairPass": 2,
+  "grouping.note after assembleSettlement": 1
+ },
+ "shares": 48,
+ "reads": 192,
+ "handHides": 17262,
+ "sent": {
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": {
+   "gallery": 4,
+   "link": 4,
+   "map": 4,
+   "import": 4
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": {
+   "gallery": 4,
+   "link": 4,
+   "map": 4,
+   "import": 4
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": {
+   "gallery": 12,
+   "link": 12,
+   "map": 12,
+   "import": 12
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": {
+   "gallery": 12,
+   "link": 12,
+   "map": 12,
+   "import": 12
+  },
+  "qtip | no reveal | tension.description  ->  history.siegeNarrative": {
+   "gallery": 2,
+   "link": 2,
+   "map": 2,
+   "import": 2
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  },
+  "qtip | DM reveal on | tension.description  ->  history.siegeNarrative": {
+   "gallery": 2,
+   "link": 2,
+   "map": 2,
+   "import": 2
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": {
+   "gallery": 8,
+   "link": 8,
+   "map": 8,
+   "import": 8
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": {
+   "gallery": 18,
+   "link": 18,
+   "map": 18,
+   "import": 18
+  },
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": {
+   "gallery": 6,
+   "link": 6,
+   "map": 6,
+   "import": 6
+  }
+ },
+ "sentTowns": {
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": 7,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": 2,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": 7,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": 2,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": 6,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": 6,
+  "qtip | no reveal | tension.description  ->  history.siegeNarrative": 1,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": 4,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": 5,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": 4,
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": 3,
+  "qtip | DM reveal on | tension.description  ->  history.siegeNarrative": 1,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": 4,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": 5,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": 4,
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": 3
+ },
+ "examples": {
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc": "rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. RV5~institution~11~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc": "rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. RV5~institution~12~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc": "rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. RV5~institution~11~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc": "rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. RV5~institution~12~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc": "rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. RV5~institution~35~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc": "rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. RV5~institution~35~desc~Z",
+  "qtip | no reveal | tension.description  ->  history.siegeNarrative": "rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~t",
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": "rv5-plant-city-infiltrated-0 live gallery: \"Smuggling network\" in \"Smuggling network\"",
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].label": "rv5-plant-city-infiltrated-0 live gallery: \"Black market\" in \"Black market\"",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc": "rv5-plant-city-infiltrated-0 live gallery: Rival organisations. RV5~institution~72~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc": "rv5-plant-city-infiltrated-0 live gallery: Full-time keepers of order, about one for every hundred people in the city. RV5~institution~63~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": "rv5-plant-city-infiltrated-0 live gallery: Several alchemical workshops, run under a guild. RV5~institution~49~desc~Z",
+  "qtip | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": "rv5-plant-city-infiltrated-0 live gallery: Sellsword companies under proper organisation, mustering hundreds to thousands. RV5~institution~66~desc~Z",
+  "qtip | DM reveal on | tension.description  ->  history.siegeNarrative": "rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~t",
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": "rv5-plant-city-infiltrated-0 live gallery: \"Smuggling network\" in \"Smuggling network\"",
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].label": "rv5-plant-city-infiltrated-0 live gallery: \"Black market\" in \"Black market\"",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc": "rv5-plant-city-infiltrated-0 live gallery: Rival organisations. RV5~institution~72~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc": "rv5-plant-city-infiltrated-0 live gallery: Full-time keepers of order, about one for every hundred people in the city. RV5~institution~63~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc": "rv5-plant-city-infiltrated-0 live gallery: Several alchemical workshops, run under a guild. RV5~institution~49~desc~Z",
+  "qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc": "rv5-plant-city-infiltrated-0 live gallery: Sellsword companies under proper organisation, mustering hundreds to thousands. RV5~institution~66~desc~Z",
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": "rv5-plant-city-infiltrated-0 live gallery: \"Smuggling network\" in \"Smuggling network converts raw inputs into chain output.\"",
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": "rv5-plant-city-infiltrated-0 live gallery: \"Smuggling network\" in \"processor.Smuggling network\"",
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": "rv5-plant-city-infiltrated-0 live gallery: \"Smuggling network\" in \"Smuggling network\""
+ },
+ "houseNames": {
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": {
+   "gallery": 24,
+   "link": 24,
+   "map": 24,
+   "import": 24
+  },
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].label": {
+   "gallery": 4,
+   "link": 4,
+   "map": 4,
+   "import": 4
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": {
+   "gallery": 24,
+   "link": 24,
+   "map": 24,
+   "import": 24
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].label": {
+   "gallery": 4,
+   "link": 4,
+   "map": 4,
+   "import": 4
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": {
+   "gallery": 36,
+   "import": 36
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": {
+   "gallery": 16,
+   "import": 16
+  },
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": {
+   "gallery": 20,
+   "import": 20
+  }
+ },
+ "houseNameTowns": {
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": 4,
+  "qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].label": 2,
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]": 4,
+  "qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].label": 2,
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason": 4,
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source": 4,
+  "qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target": 4
+ },
+ "housesHiddenWhole": 23,
+ "raised": []
+}
