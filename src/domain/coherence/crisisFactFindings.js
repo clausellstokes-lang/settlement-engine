@@ -98,7 +98,7 @@ const NUMBER_WORDS = Object.freeze(['zero', 'one', 'two', 'three', 'four', 'five
  * `tonightSheet.js :: storesSpanWords` speaks days and weeks under a month; "a few weeks" is the
  * older form, still read for a page written before it).
  */
-const STORES_LINE = /Stores: a granary(?:,| of) (a few weeks|(?:about |less than )?(?:a|[a-z]+|\d+) (?:months?|weeks?|days?))\b[^.]*\./gi;
+const STORES_LINE = /Stores: a granary(?:,| of) (a few weeks|(?:about |less than )?(?:a|[a-z]+|\d+)(?: and a half)? (?:months?|weeks?|days?)(?: and a half)?)\b[^.]*\./gi;
 /** The words that say the stores are held back, not in hand. */
 const HELD = /\bwill not open\b|\bwithh(?:eld|olds?)\b|\bhoard/i;
 /** The months a famine's stores line may print without saying they are held. */
@@ -114,11 +114,12 @@ const UNIT_MONTHS = Object.freeze({ month: 1, week: 7 / DAYS_PER_MONTH, day: 1 /
 function monthsOfSpan(span) {
   const lower = span.toLowerCase();
   if (lower === 'a few weeks') return FEW_WEEKS_AS_MONTHS;
-  const m = lower.match(/^(?:about |less than )?(\S+) (month|week|day)s?$/);
+  // ROUND THREE: the half forms the writer says from a month up ("about a month and a half", "about two and a half months").
+  const m = lower.match(/^(?:about |less than )?(\S+)( and a half)? (month|week|day)s?( and a half)?$/);
   if (!m) return NaN;
   const at = NUMBER_WORDS.indexOf(m[1]);
-  const n = m[1] === 'a' ? 1 : at >= 0 ? at : Number(m[1]);
-  return n * UNIT_MONTHS[/** @type {'month'|'week'|'day'} */ (m[2])];
+  const n = (m[1] === 'a' ? 1 : at >= 0 ? at : Number(m[1])) + (m[2] || m[4] ? 1 / 2 : 0);
+  return n * UNIT_MONTHS[/** @type {'month'|'week'|'day'} */ (m[3])];
 }
 
 /**

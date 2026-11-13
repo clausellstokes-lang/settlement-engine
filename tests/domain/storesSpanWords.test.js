@@ -31,7 +31,7 @@ describe('the stores span says the record\'s time in store', () => {
     [{ storageMonths: 0.1, hasGranary: true, storesHeld: false }, 'Stores: a granary, about three days of grain.'],
     [{ storageMonths: 0.5, hasGranary: true }, 'Stores: a granary, about two weeks of grain.'],
     [{ storageMonths: 1.2, hasGranary: true }, 'Stores: a granary, about a month of grain.'],
-    [{ storageMonths: 2.4, hasGranary: true, storesHeld: false }, 'Stores: a granary, two months of grain.'],
+    [{ storageMonths: 2.4, hasGranary: true, storesHeld: false }, 'Stores: a granary, about two and a half months of grain.'], // R2-CODE-B-3 item 2a: the words contain the figure
     ];
     for (const [record, line] of TABLE) expect(foodStoresWords(record), JSON.stringify(record)).toBe(line);
   });

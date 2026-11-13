@@ -642,7 +642,9 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Institutions": { measured: 72, sub14: 72 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
-  "Systems/Economics":   { measured: 47, sub14: 47 },
+  // 47 -> 48 (R2-CODE-B-3 item 2a, the stores' span contains its figure): no token moved; the fixture city's stores line
+  // "Stores: a granary, nine months of grain." (40 characters) reads "about nine months" and crosses the measured length.
+  "Systems/Economics":   { measured: 48, sub14: 48 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
   "Systems/Power":       { measured: 34, sub14: 33 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
@@ -790,7 +792,9 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 71, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
-  "Systems/Economics":   { prose: 39, chrome: 8, sub14: 8, sub12: 0 },
+  // prose 39 -> 40 (R2-CODE-B-3 item 2a): the stores line "Stores: a granary, about nine months of grain." crosses the
+  // measured length at the prose floor; chrome and both sub-floor counts hold.
+  "Systems/Economics":   { prose: 40, chrome: 8, sub14: 8, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 33, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one

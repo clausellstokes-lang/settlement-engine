@@ -643,13 +643,21 @@ export const DAYS_PER_MONTH = 1461 / 48;
  * the months as before ("about a month", "N months"). Any line that speaks of the stores' span in
  * words reads this (the Defence tab's food endurance line is owed the same switch:
  * defenseDisplay.js :: monthsInWords, the third leaves seat's file).
+ * ROUND THREE (the chair's ruling on the increment's #472 #668 #769: "No granary; two months in household stores" where the
+ * record holds 1.5): THE WORDS CONTAIN THE FIGURE, and a band's word is true of every figure in the band. From a month up
+ * the span is said with "about", to the nearest half month below three months ("about a month and a half", "about two and a
+ * half months") and to the nearest month from there ("about three months"): never a whole number rounded up and said bare.
  * @param {number} months the record's `storageMonths` @returns {string} '' for no stores
  */
 export function storesSpanWords(months) {
   if (!Number.isFinite(months) || months <= 0) return '';
   if (months >= 1) {
-    const whole = Math.round(months);
-    return whole <= 1 ? 'about a month' : `${numberWord(whole)} months`;
+    const halves = Math.round(months * 2);
+    if (halves >= 6) return `about ${numberWord(Math.round(months))} months`; // three months and up: the nearest month
+    const whole = Math.floor(halves / 2);
+    const half = halves % 2 === 1;
+    if (whole <= 1) return half ? 'about a month and a half' : 'about a month';
+    return half ? `about ${numberWord(whole)} and a half months` : `about ${numberWord(whole)} months`;
   }
   const days = months * DAYS_PER_MONTH;
   if (days < 1) return 'less than a day';

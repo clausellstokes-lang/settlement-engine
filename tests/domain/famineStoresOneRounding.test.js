@@ -32,6 +32,8 @@ const recordAt = (storageMonths, stressFamine = true) => deriveFoodRecord({
   dailyNeed: 100, dailyProduction: 35, deficitPct: 65, surplusPct: 0, stressFamine, storageMonths, hasGranary: true,
 });
 
+  // RE-KEYED BY IDENTITY (R2-CODE-B-3 item 2a, the chair's ruling: the words contain the figure, "about" from a month up):
+  // the same records, the same held/open reading and the same rounding; the span now says "about".
 describe('rung 2D · the held granary and the stores line read one rounding', () => {
   // LANDING-R2 seat E: one parameterless test over the three seeds, every seed run and collected.
   it('soak1k-1582, -1846, -2962: a famine granary printed as six months is held, and the page says so', () => {
@@ -43,7 +45,7 @@ describe('rung 2D · the held granary and the stores line read one rounding', ()
       expect(record.storageMonths, `soak1k-${i}`).toBeLessThan(FAMINE_HELD_STORE_MONTHS);
       expect(record.storesHeld, `soak1k-${i}`).toBe(true);
       const words = foodStoresWords(record);
-      expect(words, `soak1k-${i}`).toBe(`Stores: a granary of six months that ${HELD_STORES_WORDS}.`);
+      expect(words, `soak1k-${i}`).toBe(`Stores: a granary of about six months that ${HELD_STORES_WORDS}.`);
       expect(famineStoresFindings(s, words), `soak1k-${i}`).toHaveLength(0);
       expect(foodEnduranceLine(s)?.sentence, `soak1k-${i}`).toContain(HELD_STORES_WORDS);
     });
@@ -53,14 +55,14 @@ describe('rung 2D · the held granary and the stores line read one rounding', ()
   it('soak1k-3605 (the control): twelve months, held before and after', () => {
     const record = born[3605].economicState.foodSecurity.foodRecord;
     expect(record).toMatchObject({ band: 'famine', hasGranary: true, storesHeld: true });
-    expect(foodStoresWords(record)).toBe(`Stores: a granary of twelve months that ${HELD_STORES_WORDS}.`);
+    expect(foodStoresWords(record)).toBe(`Stores: a granary of about twelve months that ${HELD_STORES_WORDS}.`);
   });
 
   it('the boundary is the printed figure: 5.49 prints five and is open, 5.5 prints six and is held', () => {
     expect(recordAt(5.49).storesHeld).toBe(false);
-    expect(foodStoresWords(recordAt(5.49))).toBe('Stores: a granary, five months of grain.');
+    expect(foodStoresWords(recordAt(5.49))).toBe('Stores: a granary, about five months of grain.');
     expect(recordAt(5.5).storesHeld).toBe(true);
-    expect(foodStoresWords(recordAt(5.5))).toBe(`Stores: a granary of six months that ${HELD_STORES_WORDS}.`);
+    expect(foodStoresWords(recordAt(5.5))).toBe(`Stores: a granary of about six months that ${HELD_STORES_WORDS}.`);
     expect(recordAt(6).storesHeld).toBe(true);
     expect('storesHeld' in recordAt(12, false)).toBe(false);
   });
