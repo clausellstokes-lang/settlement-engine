@@ -796,6 +796,7 @@ function outlookFactsOf(settlement) {
   const res = settlement?.resourceAnalysis;
   const terrain = res && !Array.isArray(res.imports) ? lower(res.imports?.critical) : [];
   // the import list AS THE ECONOMICS TAB PRINTS IT: the record's imports and the terrain's criticals, through the list's one filter
+  /** @type {string[]} */
   const recorded = Array.isArray(eco.primaryImports) ? eco.primaryImports.map(String) : [];
   const imports = lower(displayTradeList([...recorded, ...terrain.filter((t) => !recorded.some((imp) => imp.toLowerCase().includes(t)))],
     settlement, { side: 'imports', exports: eco.primaryExports }));
