@@ -149,6 +149,16 @@ export const ARM1_NOT_PRINTED = Object.freeze([
   }),
 ]);
 
+/**
+ * THE RULE BOOK'S OWN DATA (W2-B-DECLARE second seat, F10): the files whose literals are the vocabulary itself — a
+ * word's pattern, its atoms, the leaf it reads — never a line about a town. Read by no printing file: the pin "the rule
+ * book is read only by its checks" holds the files that import it. Exempt by its SITE, so no row of the register ever
+ * banks a string of the rule book.
+ */
+export const ARM1_RULE_BOOK = Object.freeze({
+  'src/domain/facts/registeredWords.js': 'the registered words, their atoms and their leaves: the walker\'s and the page check\'s rule book, imported by no printing file',
+});
+
 /** Is this literal one of ARM1_NOT_PRINTED's sites? @param {string} rel @param {any} node */
 function isNotPrintedSite(rel, node) {
   const call = node.parent;
@@ -241,6 +251,7 @@ function collectStrings(n, out) {
  * @returns {Array<{ file: string, thing: string, text: string }>}
  */
 export function scanSource(rel, src, keyed = keyedDeclarations(rel, src)) {
+  if (Object.hasOwn(ARM1_RULE_BOOK, rel)) return [];
   const sf = ts.createSourceFile(rel, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.JSX);
   /** @type {Array<{ file: string, thing: string, text: string }>} */ const hits = [];
   const visit = (n) => {

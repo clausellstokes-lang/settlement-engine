@@ -35,7 +35,7 @@ import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
-  ARM1_NOT_PRINTED, ARM1_ROOTS, COURT_HOUSES, stripKey, stripSites, stripTree, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
+  ARM1_NOT_PRINTED, ARM1_ROOTS, ARM1_RULE_BOOK, COURT_HOUSES, stripKey, stripSites, stripTree, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
   deniesExistence, hitKey, listFiles, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
@@ -156,6 +156,29 @@ describe('the rule book', () => {
     expect(scanSource('src/generators/generationCoherence.js', src).map((h) => h.text)).toEqual([line, line.replace('this test', 'that test')]);
     expect(scanSource('src/generators/elsewhere.js', `push(finding('p', '${line}'));`).map((h) => h.text)).toEqual([line]);
     expect(ARM1_NOT_PRINTED.map((s) => `${s.file} :: ${s.callee} :: ${s.argument}`)).toEqual(['src/generators/generationCoherence.js :: finding :: 1']);
+  });
+
+  /**
+   * W2-B-DECLARE second seat, F10: the rule book's own data is exempt by its SITE, not banked row by row (the four rows
+   * the first seat banked against its own commit e55ede7d2 are gone). Its pin: only the checks read the rule book — no
+   * file under src imports it but the page check, so no string of it reaches a page. Red at 9d5d6e091, whose walker read
+   * `registeredWords.js` as lines and banked four of them.
+   */
+  test('planted: the rule book\'s own strings are not lines; the same words in any other file are read', () => {
+    const src = "export const W = { leaf: 'crisisKind.js (occupied) · rulerKind.js (occupier) under occupation' };";
+    expect(scanSource('src/domain/facts/registeredWords.js', src)).toEqual([]);
+    expect(scanSource('src/domain/facts/elsewhere.js', src).map((h) => h.thing)).toEqual(['occupation']);
+    expect(Object.keys(ARM1_RULE_BOOK)).toEqual(['src/domain/facts/registeredWords.js']);
+    const importers = [];
+    const walk = (rel) => {
+      for (const e of readdirSync(join(ROOT, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(ROOT, p)).isDirectory()) walk(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e) && /from '[^']*facts\/registeredWords\.js'/.test(readFileSync(join(ROOT, p), 'utf8'))) importers.push(p);
+      }
+    };
+    walk('src');
+    expect(importers, 'a printing file imports the rule book').toEqual(['src/domain/coherence/vocabularyPageFindings.js']);
   });
 
   /**

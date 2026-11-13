@@ -9201,28 +9201,6 @@
     "generated relationship prose names both factions"
    ]
   ],
-  "src/domain/facts/registeredWords.js": [
-   [
-    "war",
-    "root",
-    "war: at war"
-   ],
-   [
-    "famine",
-    "word",
-    "famine.js :: famineOf · crisisKind.js (famine)"
-   ],
-   [
-    "occupation",
-    "word",
-    "crisisKind.js (occupied) · rulerKind.js (occupier)"
-   ],
-   [
-    "revolt",
-    "word",
-    "crisisKind.js (insurgency, slave_revolt)"
-   ]
-  ],
   "src/domain/fieldManifest.js": [
    [
     "granary",
