@@ -334,3 +334,38 @@ widest writer first), still to do:
 
 **New wording for the owner's veto, this seat:** "older than anyone living" (a322b602f); "The settlement is starving,
 and its hungriest are turning to banditry." (0b3ce25a3).
+
+## THE THIRD SEAT (R3-CODE-C-3), kept current after every item
+
+The seat R3-CODE-C-3 (session_01FE9mEuWNtxm4EQz18xGtYK), started from the lane's tip **6622bcdbf** (read back from
+origin: code tip f51767e11, as the brief said). Its assignment is the chair's message of 2026-11-13 (copied in brief):
+the second seat's successor list above, in its order, with these changes: (1) plotHooks.js is the lane's whole file;
+#ww-868 "find why the exclude did not hold, then cure the line AND the reason"; ECHO_PREFIXES "the hook's own text is
+the data lane's: cure only what the frame says falsely, name the rest"; (4) the income lines are ONE FAMILY on the
+defence lane (its seat works in economicState.js and APPENDS twins to incomeLineSiblings.js): find each row's true
+writer; where it is economicState.js or a condition there, NAME it with town and fact; cure here only a row whose
+fault is the text of an existing row no condition could make true, and then by APPENDING a twin, changing no
+existing row; (5) chainYield.js #ww-1362 is NOT this lane's now (another lane cures the note where it prints: leave
+the writer alone and say so); (6) the four LOW findings and the five lines that never reach the page; (7) CENSUS-2's
+r2s-plague_onset-town-0 ("courts"); (8) the command's rule (record 403), base aac79b808 and tip; (9) the two
+mutation-manifest entries, the merge of the line, THE FINAL STATEMENT. THE METHOD (records 386, 387, 404): read
+where it prints (three towns, a siege, a famine or an occupation, the smallest and largest tier); a twin carries
+every condition of its siblings; a line naming a house, role, force or good reads the roster; a line that cannot
+be made true is not written; every cure has its guard town; a seat that rewords a sentence owns it whole. The
+powers lane holds #ww-371, #pf-813, #pf-89, #ww-1432 (passed). Never rewrite a commit at or below 6622bcdbf.
+
+**How the measures are rebuilt (EXECUTED).** The 720 and the 240: REVIEW-R2-STAGES births.mjs (be53f933b), its
+seeds and dials unchanged, with the fresh set's seed match widened to `r2r-<size>-fresh3c-<i>`
+(r2s-<crisis>-<size>-70..71 as before); 0 errors at every tree. Field diff: its fielddiff.mjs. The readers' towns:
+the increment's render.rww.jsx (seeds.ww.txt) and render.rw3.jsx (seeds.pf.txt), two workers each, at each commit,
+line-diffed town by town (the lazy "Patron deity" panel's timing is noise in both trees). HAZARD seen: `npm ci` set
+`core.hookspath=.husky/_` in the shared local config (it was unset before); kept, since it is what runs the lane's
+pre-push gates; refs and config compared before and after every push since.
+
+### Items (EXECUTED unless marked)
+
+| item | writer (traced) | outcome | commit |
+|---|---|---|---|
+| #ww-868 (rww-thorp-plague_onset-1) | the hook: historyData.js (succession_crisis, `excludes: ['ruler: council']`, fd's); the frame: historyGenerator.js; the gate every hook passes: hookTruth.js | WHY THE EXCLUDE DID NOT HOLD: rulerKind.js reads "Elder Council" as `elder` (and church councils as `priest`); 87 of 146 ruler-hook towns are council-governed and none reads `ruler: council`. CURED at the gate (birth and page): "the ruler" refused where a council governs; "the physician" refused with no healer, monastic house or hospital. 85 of 720, 28 of 240, history only, the moved set = the predicted set. NAMED to fd: the row's declaration. PARKED: a council-presence atom (a new vocabulary word) | 6e658915a |
+| CENSUS-2 ECHO_PREFIXES (19 towns) | plotHooks.js only MATCHES the prefixes (never printed); the frame is historyGenerator.js's; every hit's false word is in the hook's own text, historyData.js HISTORICAL_EVENTS_DATA.plotHooks (fd's) | READ, the frame says nothing false (each frames a past telling; "Families who lived through it" has its twin past sixty years). NAMED to fd, by text: "a merchant is funding both the reform movement and the suppression of it" (11 towns, e.g. r2r-hamlet-18, no merchant); "the affected district is slowly spreading its strangeness" (4: r2r-thorp-47, r2s-recently_betrayed-hamlet-1, r2s-infiltrated-thorp-2, r2s-infiltrated-village-2: a district in a thorp, hamlet or village); "a healer who profited enormously during the plague" (3: r2r-town-53, r2s-wartime-hamlet-3, r2s-wartime-village-0, no healer); "a guild master's records have gone missing" (r2s-wartime-hamlet-0, no guild) | — |
+| CENSUS-2 TENSION_LABELS (2: r2r-hamlet-43, r2r-village-12) | the label names the tension the record holds: a guild_conflict ("Rival guilds fought over who may sell what") in places with no guild; the choice is historyGenerator.js's (fd's) | NAMED to fd; the label is true to its tension | — |
