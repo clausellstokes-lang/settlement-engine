@@ -918,6 +918,11 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.": declaredSet(
     "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.", ['prosperity: ≤ comfortable'],
     "The adventurers' charter hall coordinates emergency response to threats."),
+  // COHERENCE-UPKEEP-6 (the review's F7): the charter hall's two true readings, as the hired company's pair:
+  // the coin for bounties short (Poor and below); its twin, the purse line above (Moderate and Comfortable).
+  "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short.": declaredSet(
+    "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short.", ['prosperity: ≤ poor'],
+    "The adventurers' charter hall takes bounty work against threats, as far as the purse runs."),
   // COHERENCE-UPKEEP (the chair's ruling of 2026-11-12, point 1): a famine or a siege caps the label
   // at Struggling, so there the purse lines above would call the place poor when the crisis is why.
   // Each purse line has a crisis line per kind (COHERENCE-UPKEEP-6, F4): the hunger line, declared by the
@@ -940,7 +945,7 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
     "The adventurers' charter hall takes bounty work against threats, paid from what the siege leaves."),
   "The adventurers' charter hall takes bounty work against threats, paid from what the siege leaves.": crisisSet(
     "The adventurers' charter hall takes bounty work against threats, paid from what the siege leaves.", SIEGE_CRISIS,
-    "The adventurers' charter hall takes bounty work against threats, as far as the purse runs."),
+    "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short."),
 });
 
 // ─── SW-B5 FRAMES: the guard assessment's frames get vantages ────────────────
@@ -1039,7 +1044,8 @@ const MERCHANT_ARMY_LEAD = 'Public law enforcement is largely a formality.';
  *   - a hired company and no standing guard: the paid line (Moderate and above) or the short line
  *     (Poor and below) in place of today's lead;
  *   - a hired company beside a garrison: one more sentence, the purse-bound line below Prosperous;
- *   - a charter hall with no garrison and no watch: the bounty line below Prosperous.
+ *   - a charter hall with no garrison and no watch: the bounty line below Prosperous, short at Poor and
+ *     below (COHERENCE-UPKEEP-6, F7).
  * Under a famine or a siege (each caps the label at Struggling) a purse line gives way to its
  * crisis line, which says the hunger or the siege is why (the chair's ruling of 2026-11-12, point 1;
  * COHERENCE-UPKEEP-6, F4).

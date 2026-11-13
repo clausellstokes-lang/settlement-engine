@@ -235,9 +235,12 @@ describe('the guard assessment says what the place can pay for its hired force',
   test('RED-FIRST agree-village-40 (Poor, a charter hall and no standing guard): the guard line is the purse-bound charter line', () => {
     const s = born('agree-village-40');
     expect(s.economicState.prosperity).toBe('Poor');
+    // Re-keyed by identity at COHERENCE-UPKEEP-6 (F7): the charter hall's purse line is now a pair (as far as
+    // the purse runs; the coin for bounties short), so the claim is that a declared charter purse line prints.
     const charter = upkeepLines().filter((line) => /charter hall/.test(line.text));
-    expect(charter.length, 'anchored: the charter line is declared').toBe(1);
-    expect(s.economicState.safetyProfile.guardEffectivenessDesc).toContain(charter[0].text);
+    expect(charter.length, 'anchored: the charter pair is declared').toBe(2);
+    const desc = s.economicState.safetyProfile.guardEffectivenessDesc;
+    expect(charter.filter((line) => desc.includes(line.text)).length).toBe(1);
   });
 });
 
@@ -266,10 +269,18 @@ describe('under a famine or a siege, the hired lines name the crisis, not the pu
   };
 
   test('RED-FIRST: each purse line has a declared crisis line, its twin the purse line', () => {
+    // Re-keyed at COHERENCE-UPKEEP-6 (F7): the charter hall's short line stands between its siege line and its
+    // purse line, so each of the three branches' FIRST purse line (a siege line's twin) has its crisis lines,
+    // and every purse line is reached from one by its twins.
     const lines = purseLines();
-    expect(lines.length, 'anchored: the three purse lines').toBe(3);
+    expect(lines.length, 'anchored: the four purse lines (the charter pair)').toBe(4);
+    const first = lines.filter((line) => crisisLineFor(line.text, 'under_siege'));
+    expect(first.length, 'the three branches').toBe(3);
+    for (const line of first) expect(crisisLineFor(line.text, 'famine'), `${line.text} has its famine line`).toBeDefined();
+    const setOf = (/** @type {string} */ text) => Object.values(SAFETY_LINE_SIBLINGS).find((set) => set[0].text === text);
     for (const line of lines) {
-      for (const kind of ['under_siege', 'famine']) expect(crisisLineFor(line.text, kind), `${line.text} has its ${kind} line`).toBeDefined();
+      const reached = first.some((f) => { for (let t = f.text; t; t = setOf(t)?.[1]?.text) if (t === line.text) return true; return false; });
+      expect(reached, `${line.text} is reached from a crisis line`).toBe(true);
     }
   });
 
@@ -333,5 +344,35 @@ describe('a siege with no famine names the siege, not the hunger (F4)', () => {
       const both = keptGuardLine(today, roster, 'Struggling', ['under_siege', 'famine']);
       expect(hungerLines.some((line) => both.includes(line)), `${roster[0].name}: a famine in a siege is a hunger`).toBe(true);
     }
+  });
+});
+
+/**
+ * COHERENCE-UPKEEP-6, the review's F7: the charter hall's purse line was one line for every label up to
+ * Comfortable, so a Comfortable place and a Poor place printed the same words. Two true readings, as the
+ * hired company's pair has: the bounty paid as far as the purse runs (Moderate and Comfortable), and the
+ * coin for bounties short (Poor and below). Found by their declared atoms.
+ */
+describe('the charter hall says whether the town can pay its bounties (F7)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const charterLine = (/** @type {string} */ atom) => Object.values(SAFETY_LINE_SIBLINGS).map((set) => set[0])
+    .find((line) => /charter hall/.test(line.text) && line.needs.includes(atom));
+
+  test('RED-FIRST: a Poor charter town and a Comfortable one print different purse lines, each its own declared line', () => {
+    const charter = [{ name: "Adventurers' charter hall", category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
+    const today = generateSafetyProfile({ priorityMilitary: 60, priorityEconomy: 60 }, 'village', charter).guardEffectivenessDesc;
+    const short = charterLine('prosperity: ≤ poor');
+    const purse = charterLine('prosperity: ≤ comfortable');
+    expect(short, 'the short line is declared').toBeDefined();
+    expect(purse, 'anchored: the purse line is declared').toBeDefined();
+    for (const label of ['Poor', 'Struggling', 'Subsistence']) expect(keptGuardLine(today, charter, label), label).toContain(short.text);
+    for (const label of ['Moderate', 'Comfortable']) expect(keptGuardLine(today, charter, label), label).toContain(purse.text);
+    expect(keptGuardLine(today, charter, 'Prosperous'), 'Prosperous: today\'s lead').toBe(today);
+  });
+
+  test('agree-village-40 (Poor, a charter hall and no standing guard) prints the short line', () => {
+    const s = born('agree-village-40');
+    expect(s.economicState.prosperity).toBe('Poor');
+    expect(s.economicState.safetyProfile.guardEffectivenessDesc).toContain(charterLine('prosperity: ≤ poor')?.text);
   });
 });
