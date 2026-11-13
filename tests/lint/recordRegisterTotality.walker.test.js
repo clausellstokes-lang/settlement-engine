@@ -226,6 +226,47 @@ const sumOf = (array, field) => Math.round(
 
 const sorted = (values) => [...values].sort();
 
+/** The two REJECTED cross-entry candidates A7's paired negative re-measures. */
+const REJECTED_CANDIDATES = Object.freeze(['defenseProfile.institutions.magicDef', 'defenseProfile.institutions.walls']);
+/**
+ * ⚠ THE UNTESTED REJECTED CANDIDATES — NAMED, EXACT, SHRINK-ONLY, PINNED AT ONE (the chair's ruling on UPKEEP-CAPACITY's
+ * stop at C6, 2026-11-13: a change to this walker authorised for this one purpose, made on the capacity branch).
+ * A candidate the corpus shows with fewer than two DISTINCT MEMBER SETS cannot show two distinct sums, so it is
+ * UNTESTED, not a total, and is named here rather than passed in silence. Its row leaves the list the day the corpus
+ * shows a second member set (A7 reds a named row that has its evidence again).
+ * @type {Readonly<Record<string, string>>}
+ */
+const REJECTED_UNTESTED = Object.freeze({
+  'defenseProfile.institutions.magicDef': 'UPKEEP-CAPACITY C6 (the chair\'s G5): the alchemist is not arcane defence, so every multi-entry list'
+    + " of the corpus is one pair (Mages' district, Academy of magic); evidence returns with a second member set",
+});
+
+/**
+ * The paired negative, over DISTINCT MEMBER SETS: for each candidate, the multi-entry lists grouped by their members'
+ * names; fewer than two sets is UNTESTED (and must be named, exactly), two or more with one distinct baseChance sum
+ * looks like a total. @param {Record<string, any[][]>} samplesByPath @param {Record<string, string>} untested
+ */
+function rejectedCandidateFaults(samplesByPath, untested) {
+  const faults = [];
+  for (const [path, samples] of Object.entries(samplesByPath)) {
+    const sumBySet = new Map();
+    for (const array of samples.filter((a) => a.length > 1)) {
+      sumBySet.set(array.map((entry) => String(entry?.name)).sort().join(' | '), sumOf(array, 'baseChance'));
+    }
+    const named = Object.hasOwn(untested, path);
+    if (sumBySet.size < 2) {
+      if (!named) faults.push(`${path}: ${sumBySet.size} member set(s) in the corpus, so the candidate is UNTESTED, and the untested list does not name it`);
+      continue;
+    }
+    if (named) faults.push(`${path}: named untested, but the corpus shows ${sumBySet.size} member sets: it leaves the untested list`);
+    if (new Set(sumBySet.values()).size < 2) faults.push(`${path}: baseChance carries 1 distinct sum over ${sumBySet.size} member sets — it now looks like a total, and the register does not name it`);
+  }
+  for (const path of Object.keys(untested)) {
+    if (!Object.hasOwn(samplesByPath, path)) faults.push(`${path}: named untested, but it is not a rejected candidate`);
+  }
+  return faults;
+}
+
 describe('the record class register — totality over a generated record, in both directions', () => {
   it('A1 — every record key is classed, and GENERATED_KEYS equals the observed set exactly', () => {
     // THE DENOMINATOR IS REFUSED FIRST: every set equality below is vacuous on an empty walk.
@@ -473,13 +514,31 @@ describe('the record class register — totality over a generated record, in bot
     // THE PAIRED NEGATIVE, so the arm that ADMITS a total also REFUSES a near-miss. A loose
     // absolute tolerance once raised these two; a relative reading refuted them as independent
     // per-institution probabilities, and the refutation is re-measured rather than remembered.
-    const rejectedFaults = [];
-    for (const path of ['defenseProfile.institutions.magicDef', 'defenseProfile.institutions.walls']) {
-      const stats = CENSUS.collections.get(path);
-      const sums = new Set(stats.samples.filter((array) => array.length > 1)
-        .map((array) => sumOf(array, 'baseChance')));
-      if (sums.size < 2) rejectedFaults.push(`${path}: baseChance carries ${sums.size} distinct sum(s) — it now looks like a total, and the register does not name it`);
-    }
+    // The sums are counted over DISTINCT MEMBER SETS, and an untested candidate is named (the chair's ruling, above).
+    const samplesByPath = Object.fromEntries(REJECTED_CANDIDATES.map((path) => [path, CENSUS.collections.get(path).samples]));
+    const rejectedFaults = rejectedCandidateFaults(samplesByPath, REJECTED_UNTESTED);
     expect(rejectedFaults, `a REJECTED cross-entry candidate has become a total:\n${rejectedFaults.join('\n')}`).toEqual([]);
+    expect(Object.keys(REJECTED_UNTESTED), 'the untested list is pinned at one: a second untested candidate reds').toEqual(['defenseProfile.institutions.magicDef']);
+  });
+
+  it('A7 plants: the paired negative over member sets, and the untested list, each red where it must be', () => {
+    const house = (/** @type {string} */ name, /** @type {number} */ baseChance) => ({ name, baseChance });
+    const PATH = 'plant.candidate';
+    // Two member sets with EQUAL sums still red "has become a total".
+    const equal = rejectedCandidateFaults({ [PATH]: [[house('A', 0.5), house('B', 0.4)], [house('C', 0.6), house('D', 0.3)]] }, {});
+    expect(equal.join('\n')).toMatch(/now looks like a total/);
+    // Two member sets with DISTINCT sums pass.
+    expect(rejectedCandidateFaults({ [PATH]: [[house('A', 0.5), house('B', 0.4)], [house('C', 0.6), house('D', 0.1)]] }, {})).toEqual([]);
+    // One member set, named untested, passes; the same set unnamed reds as UNTESTED.
+    const one = [[house('A', 0.5), house('B', 0.4)], [house('B', 0.4), house('A', 0.5)]];
+    expect(rejectedCandidateFaults({ [PATH]: one }, { [PATH]: 'plant' })).toEqual([]);
+    expect(rejectedCandidateFaults({ [PATH]: one }, {}).join('\n')).toMatch(/UNTESTED, and the untested list does not name it/);
+    // A second name added to the untested list reds: the real walls, which carry their evidence, and a stranger.
+    const real = Object.fromEntries(REJECTED_CANDIDATES.map((path) => [path, CENSUS.collections.get(path).samples]));
+    const second = rejectedCandidateFaults(real, { ...REJECTED_UNTESTED, 'defenseProfile.institutions.walls': 'plant' });
+    expect(second.join('\n')).toMatch(/defenseProfile\.institutions\.walls: named untested, but the corpus shows/);
+    expect(rejectedCandidateFaults(real, { ...REJECTED_UNTESTED, [PATH]: 'plant' }).join('\n')).toMatch(/not a rejected candidate/);
+    // The list removed reds, as the arm did before the ruling.
+    expect(rejectedCandidateFaults(real, {}).join('\n')).toMatch(/defenseProfile\.institutions\.magicDef: 1 member set\(s\) in the corpus/);
   });
 });
