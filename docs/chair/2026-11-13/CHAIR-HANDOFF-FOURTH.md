@@ -1,0 +1,66 @@
+# THE CHAIR'S FOURTH HANDOFF OF 2026-11-13 (written at 20:45 UTC, after point 48 landed and the cut's increment was handed out)
+
+**Why this file exists.** Between 19:00 and 20:45 UTC five builders handed back at their limits and were succeeded, the corpus lane was read and found not clear, migration 211 was frozen and its later cures moved to a new migration 212, two newer cold lists were cut against round three, point 48 landed, and a measuring seat was opened. The third handoff's sections 1, 3, 4 and 6 are out of date. If this chair's session ends, start here.
+
+**Read in this order.** `docs/OPERATING_STANDARD.md`; `docs/chair/2026-11-13/CHAIR-HANDOFF-2026-11-13.md` (section 5, the laws for every brief); `CHAIR-HANDOFF-THIRD.md` sections 2, 5 and 7 (the measure of the bar, the rulings to record 373, the chair's tools: all still true); this file; records 374 to 388, the last lines of `docs/chair/2026-11-07/ODQ-934.105-DRAFT.md`; the briefs in `docs/chair/2026-11-13/briefs/`.
+
+## 1. The owner's words, and what is open with the owner
+- No new word from the owner since 18:53 UTC ("Where is everything's individual progress?", answered with a table). The words of 17:11, 17:17 and 18:21 UTC stand as the third handoff gives them.
+- **MIGRATION 211: THE OWNER HAS NOT YET SAID IT IS APPLIED.** The pack `docs/chair/2026-11-13/APPLY-211/` is unchanged and is still the right one (its README's note of 19:45 UTC). 211 is FROZEN at the reviewed bytes (sha256 `eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01`; the rollback `ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f`): a migration the owner may apply never changes again. When the owner says it is applied, record the counts from the two read-first blocks.
+- **MIGRATION 212 IS NOT TO BE APPLIED until the security review of 212 clears it.** The owner's step for 212 is on the veil lane as files (`docs/chair/2026-11-13/veil-212/`, at 45317ee3f). Like 211 it is the owner's hand alone; no session applies it; never a database push from a lane (it would send 204 to 210, and 208 must not go before the new client).
+- THE CAPACITY ANCHOR: the default (B: least rung 0.8, greatest 1.2) is being built; the owner did not veto it. The owner is OWED eight example towns, before and after, when the capacity seat hands back.
+- PUT TO THE OWNER FOR VETO since the third handoff: the hired-only rule stays military (record 387); a port with no docks house (387); the "complete production chain" claim (387); the corpus method (386); the hand re-base of the page-census register and the suite not re-run at point 48 (383); the strip ban's known limit (379); the measuring seat (388).
+
+## 2. The line
+`lane/integration-2026-11-07` is at **9e57f5023** (POINT 48: the first leaves lane at 817980b33 and the rider, the agreement follow-up at 41b3e4117; checked by the chair at 20:36 UTC). Carried red, each with its owner: landingFixtureFreshness twice, Mossgate, the prose manifest's three titles, the news contracts and proseFamilyContract (the closing act), the site inventory's sixteen rows (after the release), the byte ceilings. The twelfth merge seat is THIN and done. POINT 49 is the instrument lane: when its sixth seat hands back, seat a diff-only reader for its commits after c3913f999 (the third read's findings, `lane/review-w2b-2026-11-13` at cc0dd4ed2); on CLEAR seat the THIRTEENTH merge seat (the brief pattern is `briefs/BRIEF-MERGE-12.md`).
+
+## 3. The lanes, their seats and their lists (tips read from origin at 20:41 UTC)
+Every session id below is a child of the chair's session. A `priority: "next"` message does not wake an idle seat: send a plain one.
+
+| lane | tip | seat | what it holds now |
+|---|---|---|---|
+| instrument `lane/w2-b-declare-2026-11-12` | 5c418e428 | W2-B-DECLARE-6 `session_01FE9mEtdbhcCVuLmBETjJho` | the third read's findings (four, six, seven and eight done); then its hand-back, a diff-only reader, point 49 |
+| defence `lane/coherence-upkeep-2026-11-12` | 3ac6abd4c | UPKEEP-7 `session_01FE9mEv6MJCHc14iJWwMuyv` | the fourth read's last cures. Its successor (UPKEEP-8) merges the capacity branch, takes the HELD rows (the first cut's #437, round two's #257, #501, #1301, #869; the increment's 3 medium in economicState.js, safetyProfile.js, viability.js), then the final statement; then a fresh reader, the capacity commits read as their own stage |
+| capacity `lane/upkeep-capacity-2026-11-13` | 2c3bd62a4 | UPKEEP-CAPACITY `session_01FE9mEsvoX2Lm1tbZJNf3Hw` | C0 landed (the hired-only cap); C1 to C6 as six commits; eight example towns for the owner; how many hired-only places print a higher band word |
+| veil `lane/coherence-veil-2026-11-11` | 45317ee3f | VEIL-7 `session_01FE9mEvA3om7k4PXdQ2qSky` | 211 frozen, 212 written and proved equal, the owner's step for 212; the pins; the whole suite |
+| veil's review `lane/review-veil-3-2026-11-12` | f25dbec9c | REVIEW-VEIL-6 `session_01FE9mEtELUJCwjatRVR6pf3` (security) | the cures at 28f52b1e4, the split at 2c5e9356e, then 212 alone for the owner's hand |
+| third leaves `lane/w2-c-leaves-2026-11-13` | f57b61629 | W2-C-LEAVES-3 `session_01FE9mEwfLhtfWudLqnUrFHx` | the grade cards, round three, the increment's 18 medium and seven rows R3-CODE-C traced to it |
+| corpus `lane/w2-write-2026-11-13` | cfe7e0d91 | W2-WRITE-5 `session_01FE9mEvRZTp8ngevVYyCuQ6` | NOT CLEAR at b5206acd3. Order: the overlap; the read's findings; the 58 strikes; a re-read of the fourth seat's rewordings; round three's rest; the increment (8 high, 69 medium); the statement. Several seats' work |
+| data `lane/w2-fix-data-2026-11-13` | dabdb6061 | W2-FIX-DATA-5 `session_01FE9mEugZKNZ2iycHbEAfvD` | #1003 done; its rows; the increment's 17 high and 78 medium. REVIEW-W2-FIX-DATA-2 `session_01FE9mEu28n3ocuS3jGXYZTr` is reading it at 34520a697 |
+| powers `lane/powers-follow-up-2026-11-13` | f1188ba8f | POWERS-8 `session_01FE9mEx8aKBrNzHdeDHShrk` | its final statement in hand STANDS as that stage's; then the increment's 1 high and 77 medium as the lane's next stage. Seat a fresh reader at the statement's tip |
+| round two A `lane/r2-code-a-2026-11-13` | 0d3972d8f | R2-CODE-A-3 `session_01FE9mEx2bPXnn8giMsSquLq` | round three's high lines done; its medium; the increment's 9 and 29; settlementOriginProse.js with #7, #154, #237 |
+| round two B `lane/r2-code-b-2026-11-13` | 24ab15c9b | R2-CODE-B-2 `session_01FE9mEsvRCQQpZm8mEtEsz3` | the house's label; the Economics line; the increment's 6 and 24; #13, #55, #270, #9, #51, #1049 |
+| round three tabs `lane/r3-tabs-2026-11-13` | 38f49e420 | R3-TABS `session_01FE9mEvvxXu4UiSevxtNLaR` | merges the line at 9e57f5023, then L0 to L3 in the posture selector; the increment's 1 and 2 |
+| round three code `lane/r3-code-c-2026-11-13` | 74366192c | R3-CODE-C `session_01FE9mEtmUDK5KYBYty6oGoM` | handed back its first list; woken with the increment's 5 and 18 and the ruling on #457 and #1163 |
+| measuring `lane/census-2-2026-11-13` | not yet pushed | CENSUS-2 `session_01FE9mEw2Rw4v8SD9q2wrkdt` | measure only (record 388). Not the old `lane/census-2-2026-11-04`, an unrelated lane of 5 November |
+| the cut `lane/round-3-cut-2026-11-13` | fe6d5b741 | done | the cut, the increment, both JSON lists, the readers' probes |
+
+Scheduled task `trig_01XAPp2Tvsunxp5QGqaqPgHx` fires into the chair's session at minute 52 of every fourth hour.
+
+## 4. Rulings in force made since the third handoff (each the chair's, vetoable; the record that holds it)
+- A chain run only through an "Access to ..." row is not run here (375).
+- THE LAW OF THE COUNT, final: one job is counted once; a house opens two parts only where they are two jobs, each named in the test (376). The AI prompt's "Magical instability" is not drawn from the defence's magical score (376; built by R3-CODE-C).
+- The instrument lane: the role family withdrawn from the page list; the strip ban's limit said and tracked (379).
+- Point 48's three stops (380, 383).
+- The "no force" fault's home is the selector `defenseStateProse.js :: defenseThreatProse`; the Economic Survival row speaks of the purse (381).
+- The grade cards and the apothecary's herbs (382, 385). The player's export parked until the lanes are joined (384).
+- THE CORPUS METHOD (386), EXTENDED TO EVERY LANE THAT WRITES A LINE (387): a line is read where it prints before it is pushed (three towns, a crisis among them, the smallest and the largest tier); a twin carries every condition its siblings carry; a line that names a house, a role, a force or a good reads the roster; a line that cannot be made true by its conditions is not written; every disqualifier cure has its guard town.
+- The hired-only rule stays military; the port's two homes; the "complete production chain" claim; one home for clergy with powers and for how a seat's keeper is styled; the Trade Profile under a siege (387).
+
+## 5. The queue, in order
+1. THE OWNER'S WORD on migration 211: record it with the counts.
+2. ON EACH SEAT'S MESSAGE: verify its tip on origin before acting; rule what it asks; route what it names to the holder by file; seat a successor on the same lane when it hands back at its limit (the lane's latest brief is the pattern; add the increment's message for that lane).
+3. CENSUS-2's first message (three kinds proved and counted): hand its NEW writers to their holders; when its command is packaged, tell every builder to run it on its own tree before its final statement, and the merge seat after a landing.
+4. REVIEW-VEIL-6's verdict on 212: only on CLEAR tell the owner where the 212 step is.
+5. UPKEEP-CAPACITY's hand-back: show the owner the eight towns; UPKEEP-8 merges the branch into the defence lane.
+6. WHEN A LANE IS FINAL: it merges the line's tip; a fresh reader reads it (small stages batched in one reader); round-three lanes are JOINED before they land; the merge seat lands them.
+7. AFTER THE MERGES, one seat: #883; the vocabulary words the parked rows wait on (sovereignty, court, practitioner, seat-holder, house-trade, capture, a council's member count, a chain's status, the survival band, the wayside shrine); the church and militia originals; the patronage ranges; the player's export; the phone-floor rows; the page-census re-base arm; the reserves' holder.
+8. THE CLOSING ACTS (the tuning; the site inventory ruled once); CENSUS-2's command at zero on a fresh tree; THE FRESH ROUND OF THIRTY read thoroughly; one whole check; CI; a draft pull request ONLY when the owner asks; the merge and the deploy are the owner's.
+
+## 6. Lessons of this stretch
+- A count falling is not a cure: 59 of the corpus lane's 151 new lines were false where they print. Hence the method of record 386.
+- A fresh read finds four in ten of its faults for the first time. Hence CENSUS-2.
+- Read a lane's design document before ruling on its design (the withdrawn ruling of record 370).
+- Freeze a migration the moment the owner may apply it (record 386's account of 211).
+- A holder is read from a lane's own commits; six older lanes have no merge base in the chair's shallow clone: use the cut's holders for them, or deepen.
+- Time labels are read from the clock: seven messages of 20:33 UTC were labelled "20:4x" (record 387).
