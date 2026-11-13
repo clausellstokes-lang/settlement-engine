@@ -1058,14 +1058,6 @@
     "13cc788f04e62473"
    ]
   ],
-  "src/components/new/tabs/WhoRunsThisTownPanel.jsx": [
-   [
-    "rulingFaces",
-    "word",
-    "The ruling three of",
-    "696c217712e0a3c1"
-   ]
-  ],
   "src/components/organic/samples/PricingSample.jsx": [
    [
     "smith",
@@ -17399,12 +17391,6 @@
     "2e5bbcad8d5be670"
    ],
    [
-    "siege",
-    "word",
-    "under siege the outlying fields are lost",
-    "30d3c47485997628"
-   ],
-   [
     "house: gambling",
     "family",
     "Operates unlicensed gambling. Revenue funds broader criminal network. Attracts debt spirals and desperation crime.",
@@ -17421,12 +17407,6 @@
     "family",
     "the siege has taken the outlying fields",
     "2fa832bcf88186e8"
-   ],
-   [
-    "streets",
-    "family",
-    "Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and",
-    "f5ed28662dc5fdd3"
    ],
    [
     "siege",
