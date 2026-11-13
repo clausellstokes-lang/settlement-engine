@@ -32,6 +32,8 @@
 --       (economicState.compound.inst.names[], economicState.safetyProfile.compound.inst.names[]) lose each entry that
 --       is such a name; on a Reveal-DM read the trace loses each entry that targets such a house
 --       (`institution.<snake>`) and each cause that names it, in any case (_gallery_veil_fold, _folded_name, _names).
+--       The same name inside the economy's fixed prose goes too: an income source whose label names it is withheld
+--       whole, a description that names it leaves its source, and the safety profile's description that names it.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -305,6 +307,20 @@ begin
                    and not public._gallery_veil_fold(x #>> '{}') = any(open_folds))), '[]'));
     end if;
   end loop;
+  -- COHERENCE-VEIL-8 (N4): the name of a house removed whole inside the economy's fixed prose, in any spelling. The
+  -- words are the generator's, chosen by the KIND of house present ('Smuggling Network Revenue'; '... and black
+  -- market trade'), and they are the hidden house's name: the hidden name wins (COHERENCE-VEIL-6's ruling for a
+  -- chain's label). An income source whose label names it is withheld whole (its label is its row, as a chain's);
+  -- one whose description names it loses the description; the safety profile's description that names it goes.
+  if jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
+    s := jsonb_set(s, '{economicState,incomeSources}', coalesce((
+      select jsonb_agg(case when jsonb_typeof(e) = 'object' and public._gallery_veil_names(e -> 'desc', named) then e - 'desc' else e end order by o)
+        from jsonb_array_elements(s #> '{economicState,incomeSources}') with ordinality x(e, o)
+       where not (jsonb_typeof(e) = 'object' and public._gallery_veil_names(e -> 'source', named))), '[]'));
+  end if;
+  if jsonb_typeof(s #> '{economicState,safetyProfile}') = 'object' and public._gallery_veil_names(s #> '{economicState,safetyProfile,safetyDesc}', named) then
+    s := s #- '{economicState,safetyProfile,safetyDesc}';
+  end if;
 
   if jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,activeChains}') = 'array' then
     s := jsonb_set(s, '{economicState,activeChains}', coalesce((
