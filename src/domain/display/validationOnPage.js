@@ -375,6 +375,40 @@ export function exploitationCardShown(s, card, filed) {
 }
 
 /**
+ * THE EXPLOITATION THE ECONOMY DESK MAY SPEAK OF (W2-C-LEAVES-3, the chair's ruling P1-c): DS-ECO-11's exploitation line
+ * (`stateProse/economyStateProse.js :: leadingExploitation`) reads the grade the cards print, in the resource analysis's
+ * own shape, each row as the page reads it: its `processingInstitutions` are the houses still needed here
+ * (`housesStillNeeded`, #452), so the pools' "{institution}" ("what it lacks is …", "one … the town does not have")
+ * never names a house the roster keeps.
+ *  - A card MOVED to Unexploited (its herbs bought, its ground spent) is not offered: the Unexploited pool's
+ *    "what it lacks is {institution}" would name the apothecary the town keeps. PARKED for the corpus lane.
+ *  - A Partial row is offered only where the record bears the Partial pool out: its four variants say the raw material
+ *    leaves unfinished and is sold ("moves before it has been made into anything worth more", "leaves half-finished",
+ *    "takes the easy half … and sells the rest"), so the town must sell the resource's own raw good (`sold`) and still
+ *    lack a house that finishes it. Read on the census's 720 at 8e0be75e4 (twelve of the 75 Partial lines): 4 true
+ *    (raw stone or iron ore sold with no mason or smelter), 4 doubtful, 4 false (r2r-city-27 and
+ *    r2s-politically_fractured-metropolis-2: "takes the easy half" beside a Fuller, a Dyer and Weavers; r2r-town-48:
+ *    herbs beside exports of remedies and potions). The rest of the cell is PARKED for the corpus lane.
+ * @param {PageRecord} s
+ * @returns {{ exploitation: { unexploited: ExploitationCard[], partiallyExploited: ExploitationCard[], fullyExploited: ExploitationCard[] } }}
+ */
+export function exploitationForDesk(s) {
+  const g = exploitationGroupsShown(s);
+  /** @param {ExploitationCard} card @returns {ExploitationCard} the row with the houses still needed here */
+  const asRead = (card) => {
+    const needed = housesStillNeeded(s, card.processingInstitutions);
+    return needed.length ? { ...card, processingInstitutions: needed } : card;
+  };
+  const partial = g.partial.filter((x) => resourceWorkReading(s, x.card.rawResource).sold
+    && housesStillNeeded(s, x.card.processingInstitutions).length > 0);
+  return { exploitation: {
+    unexploited: g.unexploited.filter((x) => !x.moved).map((x) => asRead(x.card)),
+    partiallyExploited: partial.map((x) => asRead(x.card)),
+    fullyExploited: g.full.map((x) => x.card),
+  } };
+}
+
+/**
  * The record's exploitation cards, grouped by the grade they print (`exploitationCardShown`), each group in the
  * record's order (a surface sorts as it always has).
  * @param {PageRecord} s @returns {Record<ExploitationStage, ExploitationShown[]>}

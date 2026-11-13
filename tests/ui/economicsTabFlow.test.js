@@ -548,12 +548,16 @@ const GROUND = {
     strategicValue: 'Medium - agricultural heartland, but exposed to raids',
     economicStrengths: ['Grain production', 'Livestock'],
     exploitation: {
+      // RE-KEYED BY IDENTITY (W2-C-LEAVES-3, P1-b and P1-c): the unexploited card was the timber, beside an export of
+      // 'Timber': a resource whose own raw good the town sells is worked (P1-b), so the cards print it Partial and the
+      // desk's "nothing in the town takes it out of the ground" no longer speaks of it. The lens's case is a resource the
+      // town does not sell: the iron ore, which no house here smelts.
       unexploited: [{
-        rawResource: 'timber',
+        rawResource: 'iron ore',
         exportValue: 'very high',
-        processingInstitutions: ['Sawmill'],
-        intermediateGoods: ['sawn planks'],
-        finalProducts: ['furniture'],
+        processingInstitutions: ['Smelter'],
+        intermediateGoods: ['pig iron'],
+        finalProducts: ['tools'],
       }],
       partiallyExploited: [],
       fullyExploited: [],
@@ -586,7 +590,7 @@ const GROUND_LINES = Object.freeze(drawnMembers({
   workings: {
     blockId: 'DS-ECO-11',
     poolKey: 'EXPLOITATION: unexploited, exportValue: high',
-    slots: { ...GROUND_SLOTS, resource: 'timber', institution: 'Sawmill' },
+    slots: { ...GROUND_SLOTS, resource: 'iron ore', institution: 'Smelter' },
   },
   catalog: { blockId: 'DS-SUP-3', poolKey: 'THE HEALING GAP' },
   posture: { blockId: 'DS-ECO-10', poolKey: 'POSTURE: established' },
