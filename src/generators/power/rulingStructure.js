@@ -522,7 +522,11 @@ export const generatePowerStructure = (
                 : priorityToCategory(priorities.military) === 'very_high'
                   ? "Militarised noble families whose landholdings double as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return."
                   : noblePower > 20
-                    ? 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.'
+                    // COHERENCE-POWERS-8 (the lane's row #295, rw3-metropolis-under_siege-1): "the elected council" only where a
+                    // council sits in the seat; under a duke, a guild consortium or a military council, the seat itself
+                    ? (['Town Council', 'City Council', 'Grand Council'].includes(String(governingFaction || ''))
+                      ? 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.'
+                      : 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the seat cannot easily override.')
                     : noblePower > 10
                       ? tier === 'metropolis'
                         ? 'Hereditary great families with land grants, court appointments, and dynastic marriage networks; structurally embedded in governance even when not formally in power.'
@@ -834,11 +838,13 @@ const CLAIM_RUNGS = Object.freeze([
   { claim: 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.',
     minor: () => 'Hereditary landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them.',
     suppressed: () => 'Noble families with residual feudal claims; the formal obligations are real, but other powers set the practical agenda day to day.' },
-  { claim: 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.',
+  ...['Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.',
+    'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the seat cannot easily override.',
+  ].map((claim) => ({ claim,
     minor: (/** @type {string} */ tier) => tier === 'town'
       ? 'Gentry families with local landholdings; active in civic politics but outpaced by merchant capital in raw financial leverage'
       : 'Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.',
-    suppressed: () => 'Minor landed families with limited political reach; present in civic life but rarely decisive.' },
+    suppressed: () => 'Minor landed families with limited political reach; present in civic life but rarely decisive.' })),
 ]);
 
 /**
