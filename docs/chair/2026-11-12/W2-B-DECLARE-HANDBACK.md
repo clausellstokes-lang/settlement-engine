@@ -510,3 +510,142 @@ Plus this hand-back, and the probes under `docs/chair/2026-11-13/probes/W2-B-DEC
 ## 13. Parked for the chair (sent together, once, in the hand-back message)
 - The `streets` standard for hamlets (§4, §12.1).
 - The `economicState.js` `hasAlch` presumption (§3): another lane's file.
+
+# PART SIX — the sixth seat (2026-11-13), from `c3913f999`, on REVIEW-W2B's third read (NOT CLEAR)
+
+**Kept current after every item.** Every count is executed unless marked PLAUSIBLE. Work tree: a scratch worktree on a local branch at the lane's tip (`npm ci`); the base `c3913f999` in a detached worktree with the lane's `node_modules` linked (one lockfile, `db637c28d`, at every tree read); the main checkout untouched. Refs and local config snapshotted before and after every suite and every push.
+
+## 0. Status
+- **DONE; handed back.** R1 (`afc6f0380`), R2 (`3ba6c3f93`), R3 (`27e37fac0`; the chair told), R4: finding 4 (`718fffc51`), 7 (`faace95de`), 8 (`ca8e70e43`), 6 (`e5f0173e0`), 9 (`5c418e428`), 10 (this commit's saved lists); the lighting census through its door (`9f83ffbb2`); the page and the records unmoved over the 720 (§7); the six surfaces measured (§8); the whole suite once at `9f83ffbb2`, every red classed (§9), which found ONE red of this seat's own, cured with its cause named (`b861d1b22`). The final source tip is `b861d1b22`; this hand-back is the commit on top of it.
+- **The one lane red stays:** `tests/lint/tuningRegister.walker.test.js` › "the measured tree matches the committed inventory exactly", the row `src/domain/people/patronage.js#RULING_PATRONAGE_TUNING: dependents + src/domain/facts/registeredWords.js` (`tuningdiff.mjs` at the tip: the only moved row, unchanged from PART FIVE). Its door is the merge seat's.
+
+## 1. The brief's rulings, copied (the chair's messages are not on the branch)
+The seat: W2-B-DECLARE-6, the sixth and last seat on `lane/w2-b-declare-2026-11-12`, from `c3913f999` (read back from origin first: equal). The chair: session `session_01FE9mEws7PXYRYdjQPbSX15`; the owner re-confirmed the standing delegation in the chair's chat on 2026-11-13 and has left every decision but the release's merge and deploy to the chair. The lane holds the registered vocabulary, the page list and the walkers that guard a pool's declarations; it moves no page. The third read (`origin/lane/review-w2b-2026-11-13` `cc0dd4ed2`, `REVIEW-W2B-c3913f999-2026-11-13.md`) came back NOT CLEAR on three medium findings. The job: those findings, the lows, the record put right; no adjacent repair.
+
+**Read first:** the operating standard and CONTRIBUTING; from `origin/lane/chair-2026-11-08` the chair's handoff of 2026-11-13 (§5, the laws for every brief), the second wave's charters (records 303 and 306), BRIEF-W2-B-DECLARE-5 (its laws and way of working bind); this hand-back's PART FOUR and FIVE; the draft record whole; the third read whole with its probes.
+
+**The work, in this order, each its own commit, red first, pushed as made:**
+- **R1 (finding 1, MEDIUM).** WITHDRAW the role family from the page list, in the form the four earlier families were withdrawn, with its reason beside it; the words stay registered for the walker's other arms and for conditions. Narrowing its leaves is for after the release: written here, none built. The page list's count on the census's 720 before and after.
+- **R2 (finding 3, MEDIUM).** The record declares the dossier prose manifest MOVED by `aa41b1f25`, with the thirty keys and the cause, measured by this seat with the reader's `manifestmoved.mjs` (re-measured, not copied; said whether they agree). The record's other surfaces re-read against the reader's B2, any other "unmoved by inference" corrected.
+- **R3 (finding 2, MEDIUM).** The strip ban's limit SAID and TRACKED, not widened now: NOT rebuilt as a data-flow read before the release. The reader's fifteen shapes as a fixture with a test that asserts today's truth exactly (the three caught; the twelve named as KNOWN GAPS, each by its shape); the record and the hand-back say in plain words that the ban catches the shapes it names and no others; "closed" or "complete" leave every comment and test title that claims them.
+- **R4 (the lows, each tiny, each its own commit, in the instrument's own file):** finding 4, a hedge read by its lower count; finding 7, `both` counts as two and an "Access to …" row is no house of that kind (the lane's own NOT_HERE); finding 8, `neighbourhoods` leaves `quarters` (the ruled size standard: plural neighbourhoods are a size error only in a thorp or a hamlet); finding 6, "the church's name" spares only the invitation; finding 9, the test title renamed by identity; finding 10, the red-file list of the lane's suite classing saved beside the hand-back. Finding 5 (the classifier's tense) is a probe's, not the lane's: listed. For each of 4, 6, 7 and 8: the page list's lines on the 720 before and after, and ten read.
+- **Then:** the lane's whole suite ONCE at the final tip (the tuning register's row stays the one lane red, named for the merge seat's door), every red classed against the lane's base, the list saved; PART SIX; the draft record current.
+
+**Ruled:** this lane MOVES NO PAGE AND NO RECORD: the field diff of the census's births empty, base against tip, and the rendered page equal on a sample of sixty. The vocabulary gains NO new word. Never bank a baseline row, skip a test or loosen a pin; a register moves only through its own door; no golden's door. No commit at or below `c3913f999` rewritten.
+
+**How:** a scratch worktree on a local branch, `npm ci`, plain pushes `git push origin <local>:refs/heads/lane/w2-b-declare-2026-11-12`; push after every item and before any long run; at every commit touching `src/` or `tests/` the strict-domain gate, the type ratchet and eslint on the touched files through `sh scripts/gate-tail.sh`; long runs to a file; query by script. Hazards: tests running git from a linked worktree act on the real repository, and `npm ci` writes `core.hooksPath=.husky/_` into the shared config (snapshot and compare); the census lane's `census.sh` exits 0 when its counter fails (check the counter's own exit and that `counts.txt` is not empty). NEVER: a push to any other branch, `--no-verify`, a force push, an empty push, a pull request, master, a golden's door, a deploy, a hosted database or production credentials. Messages to the chair: a stop that blocks everything left; one line when R1 to R3 are pushed (sent: tip `27e37fac0`); the hand-back (150 words, the tip read back first).
+
+## 2. R1 — the role words leave the page list (DONE, `afc6f0380`)
+- **The cure.** `registeredWords.js :: PAGE_WITHDRAWN.role` (its reason: the third read's 7 of 19; the not-false shapes on the 720), set on the SEVEN role words the read measured: `smith`, `prisoner`, `physician`, `guardCaptain`, `notary`, `mason`, `armoury` (`ROLE_PAGE_WITHDRAWN`). The words stay registered: the matcher names them, the walker's source and printed arms and a line's conditions read them (pinned).
+- **Red first:** the new describe "R1 (third read, finding 1)" and the F1 hamlet pin, red at `c3913f999` (2 of 30); green (30 of 30). The F1 pin is re-keyed by identity with its cause (`smith` leaves its expected list).
+- **The page list on the census's 720** (dumps of `c3913f999`; census alone, two workers, both renderers 360/360; the counter re-run alone exits 0 and its sorted output equals `counts.txt`, 51 rows):
+
+| | lines | (town, sentence) pairs | towns |
+|---|---|---|---|
+| before (`c3913f999`) | 2,430 | 2,368 | 633 |
+| after R1 | 2,012 | 1,965 | 588 |
+
+  418 lines left (smith 196, notary 67, physician 54, prisoner 54, armoury 23, mason 15, guard captain 9); none entered. The before figure equals the reader's (2,430 in 633). `probes/W2-B-DECLARE-6/r1-pagelist.json`.
+- **A call (vetoable): `clergy` and `armedForce` stay on the page list.** They sit in `ROLE_FAMILIES` in the code but not in the read that withdrew the seven (the reader's 7 of 19 and its 418 lines are the seven words; `clergy` read 1/1 and `armedForce` 5/6 in the reader's first sixty). Withdrawing them on no measure of their own would drop 208 lines unread. **For the chair:** `armedForce`'s 5 of 6 is below nine in ten on a small draw (the one not false: "the guard" naming the Military power on the powers roster). If the chair reads "the role family" as the whole `ROLE_FAMILIES`, the change is one line (add the two ids), and the page list falls a further 208 lines (clergy 102, armedForce 106).
+- **The narrowing, for after the release (NOT BUILT):**
+  1. `smith`: a sentence that is a standing house's own catalogue description names its neighbours, not this town's smith ("Essential intermediate step between forest and forge.", "… what the smith uses", "between the mine and the smithy": about 46 lines on the 720), and a festival's or tradition's Title-Case name ("The Old Forge Offering", about 9) names no smith: spare both senses by their words, as `PAGE_WITHDRAWN.house` already says of descriptions.
+  2. `prisoner`, `armoury`: a watch or a court keeps prisoners and arms. The leaf widens from `defence.prison` (prisoner) and garrison or militia (armoury) to also the watch and `COURT_HOUSES` (52 of 54 prisoner lines and 22 of 23 armoury lines stand in towns with a watch and a court).
+  3. `physician`: a great town or an apothecary house holds one (the reader's metropolis of 22,766 with an apothecary district): the leaf adds the roster's apothecary or hospital rows and the city and metropolis tiers.
+  4. `guardCaptain`: a militia captain keeps a walled militia village's gate: the leaf adds the militia.
+  5. `notary`, `mason`: read 0 of 3 in the reader's second draw with no shape named; each needs its own ten read before its leaf is changed.
+  Then a fresh draw, ten of each word, nine in ten or it stays withdrawn.
+
+## 3. R3 — the strip ban's limit, said and tracked (DONE, `27e37fac0`)
+**THE STRIP BAN CATCHES THE SHAPES IT NAMES AND NO OTHERS.** It is a list of named shapes, not a data-flow read, and it was not rebuilt as one before the release (the chair's ruling).
+- **Measured** with the reader's `stripshapes.mjs` through `stripSites` at `c3913f999`: **3 of 15 caught** (spread into a Set, receiver `[...POOL]`; reduce into a string, `POOL`; join after map of a getter, `POOL`); **12 KNOWN GAPS**: a destructure in a block body; the same renamed; `Reflect.get`; the third callback argument; for-in over the pool; a while loop by index; concat in a for-of; index assignment in a for-of; a destructure off a pick; an array destructure then `.text`; a property helper (pluck); an `Object.assign` target. **Agrees with the reader.**
+- **The fixture** `tests/lint/presumedThings.stripShapes.json` (the fifteen verbatim, each with today's truth) and the walker's test "the strip ban's known gaps: … three caught and twelve named as gaps, exactly". A seat that widens the ban moves a named row in the same commit. Red first by three plants, each restored: the fixture absent; a widened ban (`Reflect.get` read as the text) moves the named `Reflect.get` row; a row flipped to caught with no widening. Green: the walker 42 of 42.
+- **The claims leave:** the ARM 3 doc ("a new strip is red" now reads "in a shape the ban names", and says the ban catches no others), `takesText` and `stripSites` ("any member access" now "a member access"; other paths are the known gaps), the walker's header, and the title "⛔ no strip without its row: a new unwrap of a pool, in a shape the ban names, is red". No literal "closed" or "complete" stood in these files (grepped); PART FOUR §3's "reads any `.text` of the line" carries a correction note. The draft record says it too (`stripBan`).
+
+## 4. R2 — the record put right (DONE, `3ba6c3f93`)
+Re-measured with the reader's `manifestmoved.mjs` (unchanged) at five trees, each a detached worktree; the fixture is unchanged at all five:
+
+| tree | rows off the fixture | rows changed since the tree before |
+|---|---|---|
+| `1930cec6e` (the record's base) | 954 | — |
+| `9d5d6e091` | 954 | 0 |
+| `a51634ede` | 954 | 0 |
+| `aa41b1f25` | 956 | **30** |
+| `c3913f999` | 956 | 0 |
+
+**Agrees with the reader:** the same 30 keys, every hash equal at `9d5d6e091` and at the tip. 15 configurations, both audiences: the twelve forest/isolated/civilized hamlets of `golden-master-v3` (one per culture), and three germanic towns of `gm-seed-c`; newly moved: `town|germanic|mountain|random_trade|civilized|gm-seed-c` (dm, player). `probes/W2-B-DECLARE-6/manifest-moved.json`.
+- The record: `surfaces[dossier-prose-manifest]` is `re-record`, 30 rows, `movedBy: aa41b1f25`, with the cause, the keys file, and the merge seat's note: signed whole, the refreeze would carry two causes (the 954 that stood at the base and these 30); the keys are listed so the two can be signed apart. The `_doc`'s "one cause that moves a generated byte" is corrected: a second cause moves a golden surface, a display composer the reader's 525-hash measure spans.
+- **The other "unmoved by inference":** every `thirdSeat.surfaces` entry whose ground was a file set (the generator golden master, the espionage fence, the PDF golden, the Herald desk, the preset-lighting witness) is relabelled by what was executed, citing the reader's B2 measure; its dossier entry ("UNMOVED by measure … identityLines are empty") is corrected. The top-level surfaces (the first seat's base-to-tip measures) stand as measured. The sixth seat's own window is measured in §8.
+
+## 5. R4 — the lows (DONE)
+
+| finding | commit | the cure | red first | the page list on the 720 (lines / pairs) | read |
+|---|---|---|---|---|---|
+| 4 (hedge) | `718fffc51` | `statedCount`: a count after "<count> or / to" is read by the lower | 1 of 31 red at `27e37fac0` | 2,012 / 1,965 → 2,001 / 1,954; powersCount 38 → 27; 11 left, 0 entered | **all 11** read: "Two or three powers each run part of <town>, and none will give way." in towns of exactly two powers: true by the hedge, 11 of 11 (`f4-read.ndjson`) |
+| 7 (`both`; access row) | `faace95de` | housesCount: `both` counts the houses it governs ("both granaries", "both the mills"; no word between, no "and" after); the roster filter applies NOT_HERE | 1 of 32 red at `718fffc51` (both plants: no finding at the base) | 2,001 → 2,001; 0 left, 0 entered | the FIRST cut (any `both`) brought in 2 lines, **0 of 2 true** ("whatever both Merchant Guilds and Elected Reeve want": a join of names), so the cure was narrowed and both shapes planted as controls (`f7-read.md`) |
+| 8 (`neighbourhoods`) | `ca8e70e43` | `neighbou?rhoods` leaves `quarters`; `streets` keeps it | 1 of 33 red at `faace95de` | 2,001 / 1,954 → 1,998 / 1,953; quarters 305 → 302; 3 left, 0 entered | **all 3** read: r2r-village-49 (168) rightly leaves (the reader's line); r2r-thorp-44 and r2r-hamlet-2 keep the same sentence's `streets` finding (`f8-read.ndjson`) |
+| 6 (church's name) | `e5f0173e0` | the lookahead spares only "church's name are/is yours/theirs to set" | 1 of 34 red at `ca8e70e43` | 1,998 → 1,998 (`temple` is off the page list) | **every** "church's name" sentence on the 720 read (`churchname.cjs`): 720 towns, one each, all the invitation; no claim prints |
+| 9 (title) | `5c418e428` | "F6, as F9 re-read it: a range row holds up to its own maximum; a single row holds one" | the reader's rowCount plant reds it (and F9's), restored | — | — |
+| 10 (red-file list) | this hand-back's commit | `probes/W2-B-DECLARE-6/suite-*.txt` beside the hand-back (§9) | — | — | — |
+
+- **Fewer than ten changed** on findings 7, 8 and 6, so every changed line (and, for 6, every line of its words on the 720) was read; finding 4 read eleven.
+- **Registers through their doors:** finding 7's widened count newly sees ONE old source line, `historyData.js` "Someone is sabotaging both guilds to destabilize the market for a third party" (a true count presumption that stood at `c3913f999`): banked `--bank word --base c3913f999 --thing housesCount` (widened 4,719 → 4,720). Finding 8 leaves three `quarters` rows of `cultureProfiles.js` stale (the same literals stay banked under `streets`): `--shrink` (4,720 → 4,717). The door's `--check`: 0 fresh, 0 stale.
+- **Finding 5 (the classifier's `eventhook` rule reads tense by a word list) is the probe's, not the lane's:** `probes/W2-B-DECLARE/classify.mjs` is not product or guard; the reader's measure stands (7 of 8 present-tense plants `past`; 41 present-perfect notary lines and 3 "were never meant" lines on the 720). Listed; not built.
+- **The page list across the seat:** 2,430 lines / 2,368 pairs / 633 towns at `c3913f999` → **1,998 / 1,953 / 588** at the tip. Every move is one of the above; no line entered.
+- **The lighting census** through its own door at the clean tip `5c418e428` (`9f83ffbb2`): titles 29,265 → 29,273 (+8), suite titles 7,930 → 7,931; files 3,221, parked 399, credited 2,822 unchanged; the plain re-run green.
+
+## 7. THE PAGE AND THE RECORDS DID NOT MOVE: the census at the base `c3913f999` and at the final source tip `9f83ffbb2`
+Each run ALONE, two workers (`SECOND-WAVE-CENSUS/census.sh`, `origin/lane/second-wave-census-2026-11-12` `6b262d4e0`): births 720, errors 0 at both; every render worker `Tests 360 passed (360)`, `EXIT 0`; 720 dumps each; `CENSUS EXIT 0`; and, for the hazard, the counter re-run ALONE at each tree exits 0 and its sorted output equals `counts.txt` (51 rows).
+- **The births' field diff, base against tip** (`probes/W2-B-DECLARE/fielddiff.mjs`): **720 compared, 0 moved**, no field.
+- **The rendered page:** `cmp` of every dump pair, **720 of 720 identical** (the brief asked a sample of sixty; all 720 were compared), the same 720 names.
+- **The census counter:** `counts.txt` and `counts.perseed.json` byte-identical; `compare.mjs`: every row OLD, base = tip (26 rows); GLANCE 717 / 717.
+- Saved: `probes/W2-B-DECLARE-6/page-unmoved.c3913f999-9f83ffbb2.txt`, `census-compare.c3913f999-9f83ffbb2.txt`.
+
+## 8. The six golden surfaces, measured for this seat's window (`c3913f999` → tip)
+The lane runs no golden door. Each surface's suite was run at the base `c3913f999` (alone) and at the tip (the whole suite), and its status and failure messages compared, paths and timings stripped (`surfcmp.mjs`); the hashes equal the reader's own at `c3913f999`:
+
+| surface | base | tip | | the deeper measure |
+|---|---|---|---|---|
+| generator golden master | 2/1 red | 2/1 red | IDENTICAL | `goldenhash.mjs`, the 525 configurations: **0 differ** |
+| espionage dormancy fence | 20/1 | 20/1 | IDENTICAL | — |
+| dossier prose manifest | 15/2 | 15/2 | IDENTICAL | `manifestmoved.mjs`: 956 rows off the fixture at both, **0 changed** (MOVED by `aa41b1f25` only, §4) |
+| PDF golden | 3/1 | 3/1 | IDENTICAL | — |
+| Herald desk golden | 2/1 | 2/1 | IDENTICAL | — |
+| preset-lighting witness | 7/0 green | 7/0 green | IDENTICAL | — |
+| (cartography calibration, red on the line) | 31/1 | 31/1 | IDENTICAL | — |
+
+UNMOVED by this seat, by measure, all six; the record's `fourthToSixthSeats` block says so surface by surface (`probes/W2-B-DECLARE-6/surfaces.c3913f999-tip.txt`).
+
+## 9. The whole suite at the final tip, ONCE (`9f83ffbb2`; alone, two workers, 21:03 → 22:15 UTC)
+`git fetch origin review-fixes-2026-07-08:review-fixes-2026-07-08` (`235efce1a`), then `npx vitest run --maxWorkers=2` (default and JSON reporters) to files: **Test Files 41 failed | 3172 passed | 8 skipped (3221); Tests 54 failed | 38736 passed | 252 skipped (39042); EXIT 1** (the reader's at `c3913f999`: 41 and 54; +8 passing titles are this seat's). Refs and local config before and after: equal.
+
+**Classed** against the reader's own red lists at `c3913f999` (the lane's base for this seat), at `9d5d6e091` and at `1fb15980d` (`classme.mjs`; FILE-LEVEL rows by file). **Finding 10: the lists are saved beside the hand-back**: `probes/W2-B-DECLARE-6/suite-9f83ffbb2.redrows.txt` (59 rows), `suite-9f83ffbb2.redfiles.txt` (41 files), `suite-9f83ffbb2.classed.tsv`.
+
+| at `c3913f999` / `9d5d6e091` / `1fb15980d` | rows |
+|---|---|
+| red / red / red (the base's; not this lane's) | **57** |
+| red / green / red (the lane's, from the third seat: the tuning register's row, the merge seat's door) | **1** |
+| GREEN / green / green (**this seat's own**) | **1**, CURED |
+| red at `c3913f999`, green here | 1: `tests/lint/readerShapeResolver.test.js` › "versions a pulse-like mutable pipeline at each write …", red at all three of the reader's trees, green in this run; not this lane's file, and nothing this seat changed reaches it: classed the base's, its flip PLAUSIBLE timing |
+
+- **This seat's red, cured (`b861d1b22`):** `tests/copy/voiceMechanics.test.js` › "per-file debt exactly matches the baseline": `registeredWords.js` bang 0 → 1. Cause: finding 7's `(?!\s+and\b)` written inside a template STRING (`faace95de`); the voice ratchet counts every `!` in a string literal of `src/domain`. Cure through the file (the baseline is never raised): the lookahead moves to a regex literal (`NOT_AND`); the compiled pattern is byte-identical (compared), so no finding, page or record moves. Red at `9f83ffbb2`, green at `b861d1b22`.
+- **The suite was not re-run whole after the cure** (the compiled instrument is identical); every test file that names the changed module, plus the walkers that scan its literals, was run at `b861d1b22` (voiceMechanics, vocabularyPageFindings, presumedThings walker, tuningRegister, the lighting contract, spAxisVocabulary, proseDrawnAnchors, negativeAssertionAnchor, vendorPdfLazy): 268 passed, 28 skipped, 1 failed, the tuning register's row alone.
+
+## 10. Hazards met
+- `npm ci` wrote `core.hooksPath=.husky/_` into the shared `.git/config` (the snapshot before had none); the worktree's own branch tracking (`branch.w6.*`) was added by `git worktree add -b`. Both were left while the seat pushed (the lane hook ran its three fast gates on every push) and removed after the last push, with the local ref `review-fixes-2026-07-08` the suite's fetch created, the scratch worktrees and the local branch `w6`, so the shared repository's refs and config return to the first snapshot (said in the hand-back message).
+- Every commit's lint-staged run backed up to a git stash and dropped it; `git stash list` empty after each; refs compared after every push: only `refs/heads/w6` (this seat's local branch) and the fetched remote refs moved.
+- The census counter's own exit read after each census (the brief's second hazard): exit 0 and a 51-row `counts.txt` at both trees.
+
+## 11. Calls taken without the chair (vetoable)
+1. **R1:** the seven role words the read measured are withdrawn; `clergy` and `armedForce` stay (§2).
+2. **Finding 7:** `both` counts only the houses it governs (no word between, no "and" after), because the first cut's two new lines on the 720 read 0 of 2 (§5).
+3. **Finding 7:** the one old line the widened count newly sees is banked through the door under `word` (a count has no atom yet), not cured: its file is a generator data file, not this lane's to rewrite (§5).
+4. **R2:** the third seat's file-set grounds relabelled as inference, each surface naming the measure the reader executed (§4).
+5. **The suite after the cure:** not re-run whole; the governing files and the literal-scanning walkers at `b861d1b22` instead, because the cure leaves the compiled pattern byte-identical (§9). A full run at `b861d1b22` is the merge seat's check, as always.
+6. **The rendered page:** all 720 dumps compared, not a sample of sixty (§7).
+
+## 12. Not this seat's (listed; none built)
+- The role narrowing (§2): after the release.
+- Rebuilding the strip ban as a data-flow read (§3): after the release, by the chair's ruling.
+- Finding 5, the probe's classifier tense (§5).
+- F12 (the getters); the tuning register's refreeze (the merge seat's door; the row stays the one lane red, §9); other lanes' asks of the instrument (the six key-implied lines to re-bank, the river-route pools, the vocabulary atoms for an official in a criminal's pay and for an agent in the hall, a stability band, an `inn` word); more recall; the `economicState.js` `hasAlch` line (PART FIVE §3).
+- Finding 11 (`census.sh` exits 0 when its counter fails): the census lane's; met here only as the hazard (§10).

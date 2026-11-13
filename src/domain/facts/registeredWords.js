@@ -263,6 +263,8 @@ const COUNTED_HOUSES = /** @type {Readonly<Record<string, string>>} */ (Object.f
 }));
 /** The nouns a count of houses reads (`COUNTED_HOUSES`' keys), as a pattern group's body. */
 const HOUSE_NOUNS = 'temples|churches|chapels|shrines|mills|markets|granaries|guildhalls|guilds';
+/** Not followed by "and" (finding 7: "both granaries and mills" joins two nouns). A regex literal, so no string carries `!`. */
+const NOT_AND = /(?!\s+and\b)/.source;
 /** F13: guilds are a counted noun, read off the roster's guild rows (a guild hall's words name a building, not a guild). */
 const GUILD_ROW = /\bguilds?\b/i;
 /**
@@ -364,7 +366,7 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
     kind: 'count', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames',
     // finding 7 of REVIEW-W2B's third read: `both` counts as two, where it counts the houses ("both granaries", "both the
     // mills"); "both Merchant Guilds and the reeve" joins two names and counts nothing (no word between, no "and" after)
-    words: new RegExp(`\\b(${COUNT})\\s+(?:\\w+\\s+)?(${HOUSE_NOUNS})\\b|\\b(both)\\s+(?:the\\s+|its\\s+|of\\s+(?:the|its)\\s+)?(${HOUSE_NOUNS})\\b(?!\\s+and\\b)`, 'i'),
+    words: new RegExp(`\\b(${COUNT})\\s+(?:\\w+\\s+)?(${HOUSE_NOUNS})\\b|\\b(both)\\s+(?:the\\s+|its\\s+|of\\s+(?:the|its)\\s+)?(${HOUSE_NOUNS})\\b${NOT_AND}`, 'i'),
     atoms: [],
     absent: (_f, names, _record, sentence) => {
       const m = new RegExp(NEW_WORDS.housesCount.words.source, 'i').exec(String(sentence ?? ''));
