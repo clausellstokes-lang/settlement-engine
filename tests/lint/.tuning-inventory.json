@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "da09e1221799bba29a02ca7aac4e62eff5f4eb3e",
+  "measuredAtSha": "385d4b6782c9f53473b6459b3d531be105d6416b",
   "measuredBy": "COHERENCE-UPKEEP-6",
   "date": "2026-11-13",
-  "note": "COHERENCE-UPKEEP-6 B (da09e1221): DEFENCE_TUNING gains wallKind (stone 1, palisade 0.6, earthwork 0.4, draft), the walls part scaled by the wall kind from the roster defence home",
+  "note": "COHERENCE-UPKEEP-6 C: DEFENCE_TUNING.crises gains wartime (sup 15, draft): war drains what sustains a town",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -133,7 +133,7 @@
       "idiom": "literal",
       "keys": 32,
       "line": 14,
-      "spanDigest": "681f48e018146a369260d1679c5ea7d6e6be2f9a7675e5ea22b08d1549c686f5",
+      "spanDigest": "5283ec86efe447697bf1aeab0e9b976bbe046af089c58a6ded14026c40517c7a",
       "leaves": {
         "walls.mil": 30,
         "walls.mon": 20,
@@ -293,7 +293,8 @@
         "crises.monster_pressure.arcaneFrom": 40,
         "crises.monster_pressure.arcaneMon": 0.25,
         "crises.monster_pressure.divineMon": 0.4,
-        "crises.monster_pressure.druidMon": 0.5
+        "crises.monster_pressure.druidMon": 0.5,
+        "crises.wartime.sup": 15
       },
       "dependents": [
         "src/generators/defenseGenerator.js",
