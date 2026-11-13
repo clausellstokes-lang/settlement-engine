@@ -225,7 +225,7 @@ export function deriveCriminalStructure(settlement) {
   // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
   const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
     : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
-  return key ? withRingVantage(CRIM_STRUCTURE_DATA[key], r) : null;
+  return key ? ringNoteUnderStreetFighting(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r) : null;
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
@@ -732,3 +732,38 @@ import { rivalRingsOf } from '../corruption.js';
 // literal order: Economic Backing, Arcane Support, …); it is never turned to "None", which would deny the practitioner.
 // Measured on the census's 720 at 5ab1d2c7c: 73 of the 230 Present rows.
 import { defenceHoldsArcane } from '../facts/magic.js';
+
+// ─── W2-C-LEAVES-SIDE: NO ONE-RING NOTE WHERE THE TAB SAYS THE STREETS ARE FOUGHT OVER (at the end of the file) ───
+/**
+ * The crisis lines the Defense tab prints beside the criminal structure (the safety profile's own `safetyDesc` and its
+ * crime patterns, `crimeTypes[].desc`) that say the streets are fought over or the law has gone: a slave revolt's "Rebels
+ * and guards are fighting in the contested districts" and "Active armed conflict … in contested districts", an
+ * insurgency's "Street-level confrontations between insurgent supporters and the watch", "There is no meaningful law
+ * enforcement", "the regular patrols have stopped". Matched by those words, the tab's own.
+ */
+/** The safety label names the crisis in force after a dash (`safetyProfile.js`: "<strain> — <condition>"). */
+const CRISIS_IN_LABEL = /\s—\s\S/;
+const STREETS_FOUGHT_OVER = /fighting in the contested districts|armed conflict between revolt participants|street-level confrontations|no (?:meaningful )?law enforcement|patrols have stopped|abandoned normal patrol/i;
+
+/**
+ * THE ORGANISED-RING NOTE IS NOT PRINTED UNDER A CRISIS WHOSE OWN LINES SAY THE STREETS ARE FOUGHT OVER (W2-C-LEAVES-SIDE,
+ * 2026-11-13; the chair's ruling on the round-three increment's rww-town-slave_revolt-1: "Crime here answers to one ring.
+ * It keeps the streets quiet …" printed under a slave revolt beside "Rebels and guards are fighting in the contested
+ * districts"). Every vantage of the note says the ring puts down violence and keeps order of its own; beside the crisis's
+ * own fighting line that is false. Where a crisis is in force (the tab's safety label names it: "Critical — Slave
+ * Revolt") and one of the tab's lines says so
+ * (`STREETS_FOUGHT_OVER`), the note is left out: the structure's key and label stand, every reader of `key` unmoved.
+ * Measured on the census's 720 at 408c2e30c: 7 of 134 organised rings (3 insurgencies, 4 slave revolts); none without a
+ * crisis in force. The record is read as stored; no fact is added.
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function ringNoteUnderStreetFighting(row, settlement) {
+  if (row.key !== 'organized') return row;
+  const sp = /** @type {{ safetyLabel?: unknown, safetyDesc?: unknown, crimeTypes?: unknown } | undefined} */ (settlement?.economicState?.safetyProfile);
+  // The crisis in force, as the tab prints it: the safety label's own condition ("Critical — Slave Revolt").
+  if (typeof sp?.safetyLabel !== 'string' || !CRISIS_IN_LABEL.test(sp.safetyLabel)) return row;
+  const lines = [sp?.safetyDesc, ...(Array.isArray(sp?.crimeTypes) ? sp.crimeTypes : []).map((c) => /** @type {{ desc?: unknown } | null} */ (c)?.desc)];
+  return lines.some((l) => typeof l === 'string' && STREETS_FOUGHT_OVER.test(l)) ? Object.freeze({ ...row, note: '' }) : row;
+}
