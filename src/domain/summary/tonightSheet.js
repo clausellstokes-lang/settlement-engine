@@ -36,7 +36,7 @@ import { crisisSummaryForSurface } from '../crisis/crisisSummaryVantage.js';
 import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
-import { keeperFormOf, seatKeeperOf } from '../people/seatKeeper.js';
+import { isSeatVacant, keeperFormOf, seatKeeperOf } from '../people/seatKeeper.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -65,6 +65,8 @@ export const TONIGHT_COPY = Object.freeze({
  * want fits an instigator, never the want of the people answering the crisis ("identify the
  * infiltrator", soak1k-1805); the seat-holder's want stays the seat's (the NPC's own goal). One
  * line per person, chosen by `castHash` over the person, the crisis and the role: no draw.
+ * ROUND THREE (the chair's ruling): these lines are voiced ONLY for a cast person whose card carries no goal of its own
+ * (`castWantOf`); a person with a goal wants what their card says they want.
  */
 export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
   // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, A·T3; W4 PEOPLE #40, granted by the chair 12:5x): the wants read
@@ -103,23 +105,57 @@ const SCARCE_OF_KIND = Object.freeze(/** @type {Record<string, string>} */ ({
 }));
 
 /**
- * The want a cast person voices: the role's own pool, one line by `castHash` over the person, the
- * crisis and the role (no draw), filled with the crisis's scarce good and noun and the person's own
- * house (their first-rank power; '' when they hold none). A role with no pool (never voiced today)
- * falls back to the person's own goal.
+ * The role wants that say the seat is still held (it can still "give way", it can still "fail"): false where the seat
+ * stands empty (the increment's #303, rpf-city-succession_void+politically_fractured-13: "keep the pressure on until the
+ * seat gives way" where the seat has given way). Read by reference to the pool, so the pool's words stay its own.
+ */
+const CAST_WANTS_HELD_SEAT = new Set([CAST_WANTS.instigator[0], CAST_WANTS.instigator[2]]);
+
+/**
+ * Is this role want true of the person and the town (ROUND THREE, the chair's ruling on the increment's #176 #303
+ * #856)? A line that names the person's house needs one (never "their house" for a person with none); a line that
+ * says the seat is held needs a held seat; a line whose crisis noun takes a singular verb needs a singular noun
+ * ("the raids takes"). @param {string} line @param {string} house @param {string} noun @param {{ seatEmpty?: boolean }} facts
+ * @returns {boolean}
+ */
+function castWantAdmits(line, house, noun, facts) {
+  if (/\{house\}/.test(line) && !house) return false;
+  if (CAST_WANTS_HELD_SEAT.has(line) && facts.seatEmpty) return false;
+  if (/\{noun\} takes/.test(line) && /s$/.test(noun)) return false;
+  return true;
+}
+
+/**
+ * The want a cast person WITH NO GOAL OF THEIR OWN voices (ROUND THREE, the chair's ruling: one home for what a person
+ * wants is the person's own goal, as the card prints it; the role's line only where the card carries none, and only
+ * where it is true of that person in that crisis): the role's own pool, one line by `castHash` over the person, the
+ * crisis and the role (no draw); a line the town makes false (`castWantAdmits`) resolves draw-free to the pool's next
+ * admitted line; '' where none is admitted. Filled with the crisis's scarce good and noun and the person's own house
+ * (their first-rank power; '' when they hold none). A role with no pool (never voiced today) falls back to `ownWant`.
  * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant @param {string} [house]
+ * @param {{ seatEmpty?: boolean }} [facts] the town's facts a line is read against (`seatEmpty`: people/seatKeeper.js :: isSeatVacant)
  * @returns {string}
  */
-export function castWantOf(role, personId, crisis, ownWant, house = '') {
+export function castWantOf(role, personId, crisis, ownWant, house = '', facts = {}) {
   const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role];
   if (!pool || pool.length === 0) return ownWant;
-  const line = pool[Math.floor(castHash(personId, crisis, role) * pool.length)];
+  const noun = /** @type {Record<string, string>} */ (CRISIS_NOUN)[crisis] || 'crisis';
+  const start = Math.floor(castHash(personId, crisis, role) * pool.length);
+  const line = pool.map((_, k) => pool[(start + k) % pool.length]).find((l) => castWantAdmits(l, house, noun, facts));
+  if (!line) return '';
   const named = house ? powerNameInProse(house) : '';
   return line
     .replace(/\{people\}/g, named ? `the people of ${named}` : 'their own people')
-    .replace(/\{house\}/g, named || 'their house')
+    .replace(/\{house\}/g, named)
     .replace(/\{scarce\}/g, SCARCE_OF_KIND[crisis] || 'help')
-    .replace(/\{noun\}/g, /** @type {Record<string, string>} */ (CRISIS_NOUN)[crisis] || 'crisis');
+    .replace(/\{noun\}/g, noun);
+}
+
+/**
+ * Does the card carry a goal of its own (the goal the card prints after "Wants")? @param {TonightNpc} npc @returns {boolean}
+ */
+export function hasOwnGoal(npc) {
+  return !!clean(typeof npc?.goal === 'object' && npc.goal ? (npc.goal.short || npc.goal.long) : npc?.goal);
 }
 
 /**
@@ -421,7 +457,7 @@ function temperamentOf(npc) {
  * by the Tonight sheet and the Quick Guide (`settlementQuickGuide.js :: personDetail`): the most
  * concrete of (b) the person's own goal, only when it passes the voiceable shape rule
  * (`isVoiceableWant`); (c) their secret; (d) their temperament. (a), the crisis cast's role want
- * (CAST_WANTS), is the sheet's own and comes first there. `text` is the want lower-led and closed
+ * (CAST_WANTS), is the sheet's own and is voiced only for a cast person with no goal (ROUND THREE). `text` is the want lower-led and closed
  * (read after "Wants to"), or the secret / temperament as the record holds it; '' when the record
  * holds none of the three. `withholdSecret` skips (c) for a person who may not voice the secret
  * they keep (a crisis's TARGET keeping that crisis's own secret, F13's `target_runs_plot`).
@@ -502,32 +538,41 @@ function peopleOf(source) {
     out.push({ name, role: roleOf(row.npc), why, ...(castLabel ? { castLabel } : {}), ...(castOf || {}), line, says, sourcePath: `npcs[${row.index}]` });
   };
 
-  // THE CAST FIRST (docs/DESIGN_CRISIS_TAB.md): slot by slot, the worst crisis's holder first.
   const casts = castsOf(source);
+  const patterns = crisisSecretPatterns(source);
+  // RUNG2-F13 (soak1k-4200): a crisis's TARGET never voices the crisis's own secret — the target
+  // and the plot's insider are opposed roles; the next keeper is voiced instead. Nor does a person
+  // already voiced from the cast (soak1k-3005): their line is their own, never overwritten.
+  const targets = new Set(casts.flatMap(({ cast }) => cast.roles.filter((r) => r.role === 'target' && r.kind === 'npc').map((r) => r.id)));
+  // R11: the same holds when a target's OWN line falls back to their secret (soak1k-26, -55).
+  /** @param {TonightNpc} npc */
+  const withholdSecret = (npc) => targets.has(clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name))
+    && patterns.some((re) => re.test(secretOf(npc)));
+
+  // THE CAST FIRST (docs/DESIGN_CRISIS_TAB.md): slot by slot, the worst crisis's holder first.
+  // ROUND THREE (the chair's ruling on the increment's #176 #303 #856: "Wants to hold the line through the war with fewer
+  // hands …" over Narantuya Tanghud's own "Find one person willing to speak against Dogshin Kipchak …"): ONE home for what a
+  // person wants, the person's own goal as the card prints it. A cast person is voiced as every other person is
+  // (`voicedLineOf`: their goal where it is voiceable, else their secret, else their temperament); the role's line
+  // (CAST_WANTS) only for a person whose card carries no goal, and only where the town leaves it true (`castWantOf`).
   const order = powerOrderOf(/** @type {never} */ (source));
+  const seatEmpty = isSeatVacant(source);
   for (const slot of VOICE_SLOTS) {
     let filled = false;
     for (const { cast, kind } of casts) {
       for (const role of slot) {
         const row = cast.roles.find((r) => r.role === role && r.kind === 'npc');
         const hit = row ? npcs.find(({ npc }) => (clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) === row.id) : undefined;
-        // RUNG2-F13: the cast person wants what the ROLE wants (CAST_WANTS), never the want of
-        // the people answering the crisis (soak1k-1805's instigator "identify the infiltrator").
-        if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) { add(hit, 'cast', castWantOf(role, row.id, kind, wantOf(hit.npc), clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power)), CRISIS_ROLE_LABEL[role], undefined, { castId: row.id, castKind: kind }); filled = true; break; }
+        if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) {
+          const roleWant = hasOwnGoal(hit.npc) ? '' : castWantOf(role, row.id, kind, '', clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power), { seatEmpty });
+          const own = roleWant ? { says: /** @type {'want'} */ ('want'), line: roleWant } : ownLineOf(hit.npc, { withholdSecret: withholdSecret(hit.npc) });
+          add(hit, 'cast', own.line, CRISIS_ROLE_LABEL[role], own.says, { castId: row.id, castKind: kind });
+          filled = true; break;
+        }
       }
       if (filled) break;
     }
   }
-
-  const patterns = crisisSecretPatterns(source);
-  // RUNG2-F13 (soak1k-4200): a crisis's TARGET never voices the crisis's own secret — the target
-  // and the plot's insider are opposed roles; the next keeper is voiced instead. Nor does a person
-  // already voiced from the cast (soak1k-3005): their line is the role's want, never overwritten.
-  const targets = new Set(casts.flatMap(({ cast }) => cast.roles.filter((r) => r.role === 'target' && r.kind === 'npc').map((r) => r.id)));
-  // R11: the same holds when a target's OWN line falls back to their secret (soak1k-26, -55).
-  /** @param {TonightNpc} npc */
-  const withholdSecret = (npc) => targets.has(clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name))
-    && patterns.some((re) => re.test(secretOf(npc)));
 
   const seatName = rulingChainOf(/** @type {Parameters<typeof rulingChainOf>[0]} */ (source)).npc?.name || '';
   const seat = seatName ? npcs.find(({ npc }) => clean(npc.name) === seatName) : undefined;

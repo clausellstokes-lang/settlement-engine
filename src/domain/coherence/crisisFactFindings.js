@@ -14,7 +14,9 @@
  *                        (`migrationDirectionOf`). Per surface.
  *   crisis-cast-sense    the crisis cast contradicting itself, read from the one Tonight sheet
  *                        (`composeTonightSheet`) and the cast it reads:
- *                          want_not_role:<role>  a cast person's want is not drawn from that
+ *                          want_not_own:<role>   a cast person whose card carries a goal voiced with
+ *                                                another want (ROUND THREE: the card's goal is the one home);
+ *                          want_not_role:<role>  a cast person with no goal: the want is not drawn from that
  *                                                role's own pool (`CAST_WANTS`): the instigator
  *                                                wanting to identify the infiltrator (soak1k-1805),
  *                                                the split's instigator wanting no political
@@ -31,8 +33,12 @@
  * receipt runs never sees them, so no receipt moves. Pure: no clock, no seed, no draw.
  */
 
-import { composeTonightSheet, castWantOf, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
+import { composeTonightSheet, castWantOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
 import { governingFactionOf } from '../rulingPower.js';
+import { isSeatVacant } from '../people/seatKeeper.js';
+
+/** A want compared in one form: lower-cased, unclosed, spaces folded. @param {unknown} v @returns {string} */
+const bareWant = (v) => (typeof v === 'string' ? v : '').replace(/\s+/g, ' ').trim().replace(/[.!?]$/, '').toLowerCase();
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { migrationDirectionOf } from '../crisis/migrationDirection.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
@@ -199,15 +205,23 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
 
   if (entries.length) {
     const sheet = composeTonightSheet(settlement);
-    // want_not_role: every cast-voiced person's want, against its role's own pool.
+    // want_not_own / want_not_role: every cast-voiced person's want. ROUND THREE (the chair's ruling: one home for what
+    // a person wants, the card's own goal): a person whose card carries a goal wants that goal, never a role's line
+    // (want_not_own); a person with none wants their role's line, re-derived through the writer's own fill (the role,
+    // the person, the crisis, the person's house, the seat) and compared by EXACT equality (want_not_role, SW-6 #40).
+    // A secret or a temperament (`says`) is not a want and is not read here.
+    const seatEmpty = isSeatVacant(settlement);
     for (const p of sheet.people || []) {
-      if (p.why !== 'cast' || p.sameAs) continue;
+      if (p.why !== 'cast' || p.sameAs || (p.says && p.says !== 'want') || !str(p.line)) continue;
       const role = ROLE_OF_LABEL[str(p.castLabel)] || str(p.castLabel);
-      // SW-6 CRISIS-SURFACES (#40, the chair's grant 12:5x): the want is re-derived through the writer's own fill
-      // (the role, the person, the crisis, the person's house) and compared by EXACT equality, not pool membership.
       const npc = npcById(str(p.castId));
+      if (npc && hasOwnGoal(npc)) {
+        const goal = str(typeof npc.goal === 'object' && npc.goal ? (npc.goal.short || npc.goal.long) : npc.goal).replace(/^to\s+/i, '');
+        if (bareWant(p.line) !== bareWant(goal)) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_own:${role}` });
+        continue;
+      }
       const house = str(firstRankMembershipOf(npc, powerOrderOf(settlement))?.power);
-      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house);
+      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house, { seatEmpty });
       if (!want || str(p.line) !== want) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_role:${role}` });
     }
     // target_runs_plot: a crisis's target voiced with that crisis's own secret.
