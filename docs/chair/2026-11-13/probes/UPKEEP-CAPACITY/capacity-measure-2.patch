@@ -1,0 +1,35 @@
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index f94ed25f0..00133ddb2 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -235,7 +235,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   // (alchemists, druids, arcane, the hospital) leaves the presence: count once (ruling 4, reading A).
+   const hasActualMagic = inst.hasMagicInst || t.hasDruid || t.hasArcane || names.actualMagic;
+   const presence = magicOn && !(isSmall && !hasActualMagic)
+-    ? computeEffectiveMagicPresence(magicPresenceRosterOf(institutions), { ...config, nearbyResources: config.nearbyResources || [] }).score
++    ? computeEffectiveMagicPresence(institutions, { ...config, nearbyResources: config.nearbyResources || [] }).score // UPKEEP-CAPACITY probe: the presence as at c72917251 (reading A withdrawn)
+     : null;
+   const chains = chainsOf(settlement, config);
+   const terrainType = config.terrainType || 'plains';
+@@ -248,15 +248,19 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const clean = (dims) => Object.fromEntries(Object.entries(dims).filter(([, v]) => v));
+   /** A part kept at a share of its full points. @param {string} group @param {string} id @param {any} dims */
+   const add = (group, id, dims, share = 1, extra = {}) => {
+-    const raw = clean(dims);
++    const capF = globalThis.__CAP_f ? globalThis.__CAP_f(id, institutions, tier) : 1; // UPKEEP-CAPACITY probe: the house's scale factor
++    const raw = clean(capF === 1 ? dims : Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, v * capF])));
+     if (!Object.keys(raw).length) return;
++    if (globalThis.__CAP_rawSink && !instead) globalThis.__CAP_rawSink.push([id, raw]); // probe: the part's own scores
+     parts.push({ group, id, raw, dims: Object.fromEntries(Object.entries(raw).map(([d, v]) => [d, v * share])), ...extra });
+   };
+   /** @param {number} floor */
+   const F = (floor) => fundedGate(floor, keep);
+   /** A paid part: each score kept at its funded floor. @param {string} group @param {string} id @param {any} dims */
+   const paid = (group, id, dims) => {
+-    const raw = clean(dims);
++    const capF = globalThis.__CAP_f ? globalThis.__CAP_f(id, institutions, tier) : 1; // UPKEEP-CAPACITY probe: the house's scale factor
++    const raw = clean(capF === 1 ? dims : Object.fromEntries(Object.entries(dims).map(([d, v]) => [d, v * capF])));
++    if (globalThis.__CAP_rawSink && !instead) globalThis.__CAP_rawSink.push([id, raw]); // probe: the part's own scores
+     parts.push({ group, id, raw, dims: Object.fromEntries(Object.entries(raw).map(([d, v]) => [d, v * F(W.floors[d])])) });
+   };
+   const A = W.arcane;
