@@ -1,3 +1,70 @@
+# COHERENCE-UPKEEP: the hand-back (the sixth seat, COHERENCE-UPKEEP-6, 2026-11-13) — IN PROGRESS, kept current after every item
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** ce3bceda9 (the fifth seat's last commit). **The lane's reviewed base:** 69b53decd. **The probes:** `docs/chair/2026-11-13/probes/UPKEEP-6/` (`births6.mjs` births the fifth seat's 3,036 and this seat's own 720 `fresh6-*`, which no seat tuned on, or named keys; `an6.py` reads two dumps). The fifth seat's record and every earlier one are kept below, unchanged.
+
+## The brief's rulings, copied in (the chair's message of 2026-11-13 is not on the branch)
+
+- **Who asks:** the chair, session `session_01FE9mEws7PXYRYdjQPbSX15`, on a new account; the owner re-confirmed the standing delegation on 2026-11-13 ("all judgement and all permissions are yours, and you may create child sessions") and told the chair to start this seat. No adjacent repair.
+- **A, what the derived form left:** re-measure F3 (`foodRecord.storesHeld`) on the review's six births and unseen famines; F7 and F4 under pay at the standing label; the census's low line (row 2's entrants, classed).
+- **RULED on the fifth seat's calls:** (1) the band is read from the score AS THE PAGE SHOWS IT, so a number and its band can never disagree on a page: where a surface prints a rounded figure the band must agree with the printed figure on every birth, cured at one home if not; (3) services and the Magic tab keep reading the SHOWN label in this release.
+- **B, the kind of wall** (decided by the chair on the owner's deferral): the walls part scaled by the wall's kind, read from the roster's defence home (47581b61b); stone at today's full value, so no stone-walled birth moves (prove it); a palisade 0.6 and an earthwork 0.4 to start, as rows of DEFENCE_TUNING for the owner's veto. Measure first: every roster name that sets walls, with its count by size, what a citadel or a keep is on the roster, then the births that change band, listed. The tuning inventory moves through its own ritual.
+- **C, war drains** (the same decision): wartime enters the crisis table as one more row through the same machinery; it takes from what sustains a town (the stores, the purse, the market) and leaves who stands and what is built alone; 15 economic points to start (about three points of a rating), the weight in the table for the owner's veto; its cost measured on unseen births before it is built. It re-homes onto the parts an effect the product had by a hidden route.
+- **D, the named conditions (the loaded dice): NOT BUILT** and no frame prepared, until the owner answers (the chair sends it if it comes).
+- **E, the final statement, once, at the final tip:** the census against the base counts; the whole suite (`npx vitest run --maxWorkers=2`, to a file), every red classed against 69b53decd and the fifth seat's list (the golden master red as expected; no golden's door); the draft record's six golden surfaces by measure; the eight example towns from the built code as `docs/chair/2026-11-13/UPKEEP-EIGHT-TOWNS.md` (for the owner and the record; no page shows a part); LAST and alone, the edge bundles.
+- **The laws:** defence holds no fact of its own (strip-and-recompute green at every commit); the parts sum exactly to the rating on every birth; one direction; count once; every number in DEFENCE_TUNING; a saved town's stored profile is read as it is (tested on a record as the deployed client stored it); every claim on births not tuned on; a count falling is not a cure; SHOW THE RATINGS, NOT THE MACHINERY (no part's points, sum, pay share, weight, limit, slider name or explanation on any page, PDF or export; every reader-surface string added or changed is listed; the guard's reader-surface arm stays green).
+- **How:** scratch worktree, plain pushes to this lane only; the three gates at every `src/` commit through `scripts/gate-tail.sh`; pins re-keyed by identity with the cause; no baseline banked, no skip, no `--tighten`; refs and local config snapshotted around every suite and push. NEVER: `--no-verify`, a force push, an empty push, another branch, a pull request, master, a golden's door, a deploy, production credentials.
+- **Messages:** to the chair only for a stop that blocks everything, ONE short message when A is pushed (its tip), and the hand-back (150 words, the tip read back from origin, executed told from plausible).
+
+## A — what the derived form left
+
+| Item | Commit | What |
+|---|---|---|
+| Call 1, the band | de371fc40 | readiness stored in the whole points the page prints; a record-only LIMIT line carries the rounding |
+| F4 | cd7242c00 | a siege with no famine names the siege, not the hunger |
+| F7 | 05b8ee712 | the charter hall's two true readings |
+| F3 | none (measured) | the held granary restored where the standing share keeps six months |
+| Row 2 | none (classed) | 78 entrants, all exposure |
+
+**Call 1, the band (RULED: the band is read from the score as the page shows it).**
+- *Every surface that prints the figure:* the causal contributor sentence "Defense readiness score: N." (whole points, `Math.round`) and the record itself (the JSON export). No tab, PDF section or Foundry page prints `readiness.score`; every other surface prints the label.
+- *Measured at ce3bceda9:* the printed figure's band disagreed with the label on **113 of 3,036 and 18 of 720** fresh6 births.
+- *The cure, at one home (the producer):* the score is the exact sum rounded once to whole points; a record-only LIMIT line (`DEFENCE_WORDS.rounding`) carries the difference, so every part keeps its own measure and the tenths still sum exactly.
+- *After:* 0 and 0. Band moves against ce3bceda9: **107 of 3,036 and 18 of 720, every one up one band**, each a sum within half a point below a cut (the V3 build report's 107). Red first: 107 of 120 in `defenceParts.test.js`. Reader-surface strings: none.
+
+**F4 (the hunger line in a siege).** At ce3bceda9 the hunger line printed with no famine in **177 births** (sieges, food band deficit or import-dependent, up to 9 months stored). Cure: each crisis line is one per kind (the hunger line on the famine, its twin a siege line; the siege line on the siege, its twin the purse line). After: 177 → 0, the siege line with no siege 0. The guard text changes in exactly those 177; no other field moves. Three pins re-keyed by identity (the cause in the file).
+
+**F7 (the hired lines under standing-label pay).** Measured at the tip:
+- the hired company's pair (paid / short) is reached by **0 of 3,756** births, because every company born stands beside a watch. **Kept** (my call, it only declares): both lines are true wherever they print (a custom or edited roster), and they are the model for the cure;
+- hired swords beside a garrison: two readings reached (Comfortable and below 520; Prosperous and above 184), each against the label the page shows;
+- the charter hall's purse line was **one reading** for every label from Struggling to Comfortable (46 births).
+- The guard lines read the label the page SHOWS (R3: the page states no pay against a label it does not show). Defence's own pay reads the standing label, in the record only.
+- Cure: the charter hall's short line on `prosperity: ≤ poor`, its twin the purse line. After: the short line in 30 births (Poor 16, Struggling 14), the purse line at Moderate (10) and Comfortable (6). No other field moves. Two pins re-keyed by identity.
+
+**F3 (the held granary), measured; no cure.**
+- **The review's six births:** all six now hold the granary as at the base: agree-city-58, agree-force-famine-town-4, -city-1, -city-5 (the 660's recipe), cold-famine-town-1, cold-famine-city-1.
+- **Every famine birth, base 69b53decd against ce3bceda9:** held→held 190 and 38; not held→not held 295 and 98. Held→not held: **5 of 490** (u5) and **2 of 138** (fresh6). Not held→held: 0.
+- **Those seven:** cold-famine-town-24, -town-58, cold-famine-city-79, fresh5-famine-town-6, fresh5-famine-city-9, fresh6-famine-city-5, -city-12. In each, the stores laid by at the standing share (Poor, Moderate or Comfortable) fall below the six-month window (5.5–5.8 → 4.7–5.4 months).
+- **Classed as the ruled design** (one measure for stores, the leaf): the page states the months it holds, and the held clause reads the same months. Nothing to cure.
+
+**Row 2 of the census ("two store durations"), classed.** At ce3bceda9 against the base counts (`probes/UPKEEP-5/census/69b53decd.*`, the same 720): 571 → 544; **78 enter, 105 leave.** Each was born at both trees:
+- all 183 are small places with no granary (thorp, hamlet, village);
+- in each, the stores' months moved by the standing share (e.g. 1.5 → 1.4 months), crossing a word boundary between two writers that round different quantities (the stores line: the household stores; the endurance line: the stores plus what is still harvested).
+- **Every entrant is EXPOSURE** (the lane moved the input; neither writer changed). None is origin.
+- The census's only other move: row 4, 106 → 109 (5 in, 2 out), not this lane's reading. Every other row is identical.
+
+**Strings added on a reader's surface by A** (the Defense tab's guard assessment), for the owner's veto:
+1. "A hired company is on the books, paid from what the siege leaves; it comes when called and leaves when the coin does."
+2. "Hired swords back the garrison, paid from what the siege leaves."
+3. "The adventurers' charter hall takes bounty work against threats, paid from what the siege leaves."
+4. "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short."
+None names a part, a point, a share or a rule (the guard's reader-surface arm is green).
+
+## Incidents
+- A `tests/lint` run I started in the live worktree overlapped my next edits, so its result is discarded. My stop of it by PID was refused by the permission layer, so it ran to its end. `tests/lint` is re-run in clean, detached measurement worktrees (`/home/user/wt6-m` at 05b8ee712, `/home/user/wt6-b` at ce3bceda9).
+- lint-staged backs the index up in `git stash` at each commit and drops it again. The refs and local config were compared after every commit and suite: only `refs/heads/u6-local` and the fetched remote refs differ. `npm ci` set `core.hooksPath=.husky/_` (the lane hook), as expected.
+
+---
+
 # COHERENCE-UPKEEP: the hand-back (the fifth seat, COHERENCE-UPKEEP-5, 2026-11-13) — HANDED BACK BY FILE AT THE CONTEXT GUARD
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Tip:** read it back from the remote; it is the commit that adds this part. **Base for every measure:** the agreement lane's tip `69b53decd`. The fourth seat's record and every earlier one are kept below, unchanged.
