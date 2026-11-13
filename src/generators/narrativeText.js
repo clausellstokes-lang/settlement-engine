@@ -20,7 +20,7 @@
 import { random as _rng } from "../kernel/rngContext.js";
 import { pickRandom2 } from "./helpers.js";
 import { speakTierNoun } from "../domain/display/stateProse/stateProseKernel.js";
-import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js";
+import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js"; import { foodStoreWord } from "./economy/foodBalance.js"; // R2-CODE-A item 1: one line, so no cited line moves
 
 // AMENDMENT B — THE CASING PASS. The ${govFaction}/${topFaction} interpolations
 // carry a value that is usually lowercased ("the town council"), while their
@@ -74,17 +74,17 @@ export const PRESSURE_SENTENCES = {
   under_siege: (r) => [
     `${r.name} is surrounded. Supply lines are cut, morale is fracturing, and ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} is deciding whether to negotiate terms or hold out for relief that may not be coming.`,
     { text: `The siege has entered its second week; ${r.govFaction || "the council"} controls the rationing and the gates, which means they control everything else too, for now.`, needs: ['gate'] },
-    `Every ${r.commodity || "resource"} cache in ${r.name} has been inventoried and argued over; the next argument will be about what to give up and what to defend to the end.`,
+    `Every ${foodStoreWord(r.foodRecord)} cache in ${r.name} has been inventoried and argued over; the next argument will be about what to give up and what to defend to the end.`,
     { text: `The walls of ${r.name} have held so far, but the relief has not come, and every day it does not, more of the blame falls on ${r.govFaction || "the council"}.`, needs: ['walls'] },
-    { text: `${r.name} counts its mouths and its days of ${r.commodity || "grain"} every morning, and the people on the walls watch each other as closely as they watch the enemy.`, needs: ['walls'] },
+    { text: `${r.name} counts its mouths and its days of ${foodStoreWord(r.foodRecord)} every morning, and the people on the walls watch each other as closely as they watch the enemy.`, needs: ['walls'] },
     `Word came into ${r.name} three days ago that the relief column had turned back; ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} has not made it public, and the effort of not making it public is beginning to show.`,
   ],
   famine: (r) => [
-    `${r.name} is two bad weeks from genuine starvation; ${r.topFaction || "the merchant class"} controls the remaining ${r.commodity || "grain"} reserves and is not discussing it openly.`,
+    `${r.name} is two bad weeks from genuine starvation; ${r.topFaction || "the merchant class"} controls the remaining ${foodStoreWord(r.foodRecord)} reserves and is not discussing it openly.`,
     `Since the harvest failed, whoever holds the food in ${r.name} holds the power, and at least three powers are fighting over the stores.`,
-    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} can be found and is not saying; someone close to them is among the hoarders.`,
+    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${foodStoreWord(r.foodRecord)} can be found and is not saying; someone close to them is among the hoarders.`,
     `The bakers of ${r.name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.`,
-    `${capFirst(r.govFaction) || "The council"} of ${r.name} promised a fair share of the ${r.commodity || "grain"} reserves last week, and little of it has reached the poor.`,
+    `${capFirst(r.govFaction) || "The council"} of ${r.name} promised a fair share of the ${foodStoreWord(r.foodRecord)} reserves last week, and little of it has reached the poor.`,
     { text: `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.`, needs: ['market'] },
   ],
   occupied: (r) => [

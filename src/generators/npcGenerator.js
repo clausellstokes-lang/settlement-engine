@@ -29,7 +29,7 @@ import { TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; // F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2: one line, so no cited line moves
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; import { foodStoreWord } from './economy/foodBalance.js'; // F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2 / R2-CODE-A item 1: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -356,12 +356,12 @@ const generateNPCAppearance = (r = 'other', facts = null) => ({
 // verbatim; people/goals.js :: dealGoals draws them at the seam's end, A9, through resolveDeclared). Moved here, unchanged,
 // from the retired role-goal draw (`generateNPCGoal`) and `mergeNPCLists`'s stress block.
 
-/** The siege goal's three rows (`STRESS_GOALS.under_siege`), the trade commodity filled. @param {string | null} commodity */
-export const SIEGE_GOALS = (commodity) => {
+/** The siege goal's three rows (`STRESS_GOALS.under_siege`); R2-CODE-A item 1: the reserves are the town's food, read from its food record (`foodBalance.js :: foodStoreWord`), never the export ("Secure enough legal reserves"). The caller hands the trade commodity, unread, and no record yet (`people/goals.js`, parked): the row reads "food". @param {string | null} _commodity @param {Parameters<typeof foodStoreWord>[0]} [foodRecord] */
+export const SIEGE_GOALS = (_commodity, foodRecord = null) => {
   const STRESS_GOALS = {
     under_siege: [
       {
-        short: `Secure enough ${commodity || 'food'} reserves to outlast the blockade`,
+        short: `Secure enough ${foodStoreWord(foodRecord)} reserves to outlast the blockade`,
         long: 'Survive this: everything else can wait',
         driven_by: 'protection',
       },
@@ -617,10 +617,10 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []).filter(e => !e.direction || e.direction === (summary.migrationDirection || 'arrivals')), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
     const otherNpc = otherNpcOf({ npcs: allNpcs }, npcIndex); // CENSUS-1 fact 14: the other-NPC home's selection — MERGE-R2: read before the draw, so the held key reads the text the figure would carry
-    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type, ...(type === 'mass_migration' && summary.migrationDirection ? { direction: summary.migrationDirection } : {}) })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', held, heldKey: (e) => fillSentenceSlots(e.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }) }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record // MERGE-R2: REVIEW-INTAKE-4's held refusal; W0's direction on the partial record's migration entry
+    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type, ...(type === 'mass_migration' && summary.migrationDirection ? { direction: summary.migrationDirection } : {}) })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', held, heldKey: (e) => fillSentenceSlots(e.secret, { faction: topFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }) }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record // MERGE-R2: REVIEW-INTAKE-4's held refusal; W0's direction on the partial record's migration entry
     if (effect) return {
-      what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased
-      stakes: fillSentenceSlots(effect.stakes, { faction: govFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }),
+      what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased; R2-CODE-A item 1: {food} is the town's own (foodBalance.js :: foodStoreWord)
+      stakes: fillSentenceSlots(effect.stakes, { faction: govFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }),
     };
   }
 

@@ -60,7 +60,7 @@ export function grownShareOf(effectiveAgri) {
 }
 
 /** The words a famine note uses for the source it failed (FOOD-3). */
-const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' });
+const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }); /** R2-CODE-A item 1: WHAT A PLACE EATS AND STORES, in one plain word, from its one food record (below): "grain" where the record keeps grain (a granary, whose stores line reads "months of grain", or a grain or mill source), else "food"; no record reads "food". Every crisis line that means the town's food reads this, never the export slot (`tradeCommodity.js`). Draw-free; one line, so no cited line moves. @param {{ hasGranary?: unknown, foodSources?: unknown } | null | undefined} foodRecord @returns {'grain' | 'food'} */ export const foodStoreWord = (foodRecord) => (foodRecord && (foodRecord.hasGranary === true || (Array.isArray(foodRecord.foodSources) && foodRecord.foodSources.some((s) => s === 'grain' || s === 'mill'))) ? 'grain' : 'food');
 
 // ── THE FOOD RECORD (FOOD-1, chair ruling 1, 2026-11-03) ─────────────────────────────
 /**

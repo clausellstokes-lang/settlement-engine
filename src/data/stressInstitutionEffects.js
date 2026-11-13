@@ -62,14 +62,14 @@ export const STRESS_INSTITUTION_EFFECTS = {
       needs: ["other npc"],
     },
     {
-      secret: "Has been skimming from the {commodity} reserves to pay a personal debt that predates the siege",
+      secret: "Has been skimming from the {food} reserves to pay a personal debt that predates the siege",
       stakes:
         "The shortage will be noticed when the final accounting is done. They're hoping they die before that happens",
     },
   ],
   famine: [
     {
-      secret: "Controls a hidden cache of {commodity} reserves that could feed the settlement for two more weeks",
+      secret: "Controls a hidden cache of {food} reserves that could feed the settlement for two more weeks",
       stakes: "{faction} suspects it. They've been watching the property",
     },
     {
@@ -99,7 +99,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Is receiving {commodity} shipments through a covert route and selling them at triple the official price after dark",
+        "Is receiving {food} shipments through a covert route and selling them at triple the official price after dark",
       stakes: "Three people know. One of them is already dead. The other two don't know about each other",
     },
     {
@@ -462,7 +462,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
   ],
   wartime: [
     {
-      secret: "Has been under-declaring the settlement's stores to the requisition officers and selling the concealed {commodity} to both armies",
+      secret: "Has been under-declaring the settlement's stores to the requisition officers and selling the concealed {food} to both armies",
       stakes: "The next requisition will physically count what the ledgers claim. The ledgers are wrong by a wagon-train",
     },
     {
