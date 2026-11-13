@@ -1,0 +1,10 @@
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 28 skipped (29)
+   Start at  12:24:13
+   Duration  109.31s (transform 3.88s, setup 49ms, import 219ms, tests 108.91s, environment 0ms)
+
+[gate-tail] end:  12:26:02 up 42 min,  0 user,  load average: 1.94, 2.27, 2.19
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/f87af9a7-d5c7-5553-9326-6c79fdba1af5/scratchpad/post/gate-tail.19942.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

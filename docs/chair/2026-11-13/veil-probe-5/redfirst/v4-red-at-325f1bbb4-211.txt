@@ -1,0 +1,14 @@
+    977|   }, ROW_TIMEOUT_MS);
+    978|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed | 23 skipped (28)
+   Start at  12:00:50
+   Duration  15.41s (transform 3.25s, setup 42ms, import 239ms, tests 15.02s, environment 0ms)
+
+[gate-tail] end:  12:01:06 up 17 min,  0 user,  load average: 3.08, 1.97, 0.96
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/f87af9a7-d5c7-5553-9326-6c79fdba1af5/scratchpad/redfirst/gate-tail.11073.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
