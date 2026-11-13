@@ -73,8 +73,13 @@ function assertPowers(s, label) {
       // dual-hat leader's office (a house's face carrying the office in its role, first of the governing power), which
       // is exactly 0 where its house backs elsewhere and > 0 where it backs the governing power
       const office = m.power === governing && m.rank === 1 && card.institution?.kind === 'house' && card.role !== card.title;
-      if (office && m.share === 0) expect(Object.is(m.share, 0), `${label}: ${card.id} the office at share exactly 0`).toBe(true);
-      else expect(m.share, `${label}: ${card.id} share > 0`).toBeGreaterThan(0);
+      // COHERENCE-POWERS-6 (item 6; REVIEW-POWERS-2 N8): a share of exactly +0 is the DUAL-HAT OFFICE's signature and no one
+      // else's — the office is the one member a house joins at no weight (the office held whatever its house backs). The old
+      // arm `Object.is(m.share, 0)` INSIDE `m.share === 0` was a tautology (it could red only on -0, which the else arm also
+      // catches). Strict and tested: a clean +0 on any OTHER membership reds here; a -0, NaN or negative anywhere reds on the
+      // else arm (none is > 0). Made stricter, never looser.
+      if (Object.is(m.share, 0)) expect(office, `${label}: ${card.id} only the dual-hat office sits at share exactly +0 (${m.power})`).toBe(true);
+      else expect(m.share, `${label}: ${card.id} share > 0 (${m.power})`).toBeGreaterThan(0);
     }
     expect(new Set(card.memberships.map((m) => m.power)).size, `${label}: ${card.id} one membership per power`).toBe(card.memberships.length);
   }
@@ -257,6 +262,29 @@ describe('the people car — the powers\' people (step 3)', () => {
     expect(zeroWithHouse, 'no sole power with a house of its archetype is at zero').toBe(0);
     expect(mints, 'the corpus mints faces').toBeGreaterThan(0);
   }, 300_000);
+
+  it('N8 (COHERENCE-POWERS-6 item 6): the share arm names the +0 the dual-hat office\'s alone — a planted +0 off the office reds, and a -0 on the office reds', async () => {
+    await ensureLaws();
+    const base = birth(5).settlement;
+    const govName = nameOf(governingFactionOf(base));
+    const isOffice = (c, m) => m.power === govName && m.rank === 1 && c.institution?.kind === 'house' && c.role !== c.title;
+    // the control: the real record passes the arm
+    expect(() => assertPowers(JSON.parse(JSON.stringify(base)), 'N8-control')).not.toThrow();
+    const plantShare = (pred, value) => {
+      const s = JSON.parse(JSON.stringify(base));
+      for (const c of s.npcs) for (const m of (c.memberships || [])) if (pred(c, m)) { m.share = value; return s; }
+      return null;
+    };
+    // (a) a clean +0 on a POSITIVE non-office membership: the zero arm reds — a +0 is the dual-hat office's alone. The
+    // shareSum arm is unmoved (a lowered share keeps the sum <= 1). With the arm made meaningful the +0 case has a live
+    // assertion of its own (the old arm reached the +0 only inside `m.share === 0`, where Object.is could not fail).
+    const planted = plantShare((c, m) => m.share > 0 && !isOffice(c, m), 0);
+    expect(planted, 'the fixture has a positive non-office membership to move').toBeTruthy();
+    expect(() => assertPowers(planted, 'N8-plant-nonoffice-zero')).toThrow();
+    // (b) a -0 on the office membership held at 0 (where its house backs elsewhere): never accepted, however it is spelled
+    const negZero = plantShare((c, m) => Object.is(m.share, 0) && isOffice(c, m), -0);
+    if (negZero) expect(() => assertPowers(negZero, 'N8-plant-office-negzero')).toThrow();
+  }, 90_000);
 
   it('determinism: the same seed gives the same memberships and ranks, twice', async () => {
     await ensureLaws();
