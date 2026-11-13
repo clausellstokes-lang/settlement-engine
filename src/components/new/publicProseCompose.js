@@ -153,9 +153,15 @@ export function composePublicProse(settlement, { publicDossier = false } = {}) {
   // Not built for a caller that says publicDossier: every site then prints what the save shipped.
   /** @type {{veiledRecord: any}} */
   const ctx = { veiledRecord: publicDossier ? null : publicVeiledRecordOf(settlement) };
+  // COHERENCE-VEIL-6 (the fifth review's V5-2): EVERY site draws from what a public reader may see, the record
+  // after the strip (seed and all), never the owner's: the text ships to every reader of every share. Before,
+  // only the three audience-gated readers took the stripped record, and in a town with a hidden power the
+  // succession line and the conflict lines were composed from the owner's (tests/components/
+  // publicProseVeilInvariance.test.js, the review's class). The owner's own view reads the record live.
+  const source = ctx.veiledRecord || settlement;
   for (const [site, draw] of PUBLIC_PROSE_SITES) {
     try {
-      const shipped = shippedProseOf(draw(settlement, publicDossier, ctx));
+      const shipped = shippedProseOf(draw(source, publicDossier, ctx));
       if (shipped !== null && shipped !== undefined) blocks[site] = shipped;
     } catch {
       // The site prints SILENT on the public page; the owner's own view is untouched.

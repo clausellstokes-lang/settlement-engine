@@ -14,7 +14,7 @@ hosted database, no production credential, no `supabase db push`, no `migration 
 | Item | State | Commit |
 |---|---|---|
 | 1. The ten second homes (V5-1) | BUILT, pushed; the attack and sentence search at item 1 running | the commit carrying this line |
-| 2. The public prose from the stripped record (V5-2) | not started | — |
+| 2. The public prose from the stripped record (V5-2) | DONE, pushed | the commit carrying this line |
 | 3. 211's helpers, an early-applied copy (V5-7) | not started | — |
 
 ## 1. Item 1 — the ten second homes
@@ -98,6 +98,36 @@ shapes (EXTRA / MISSING: nothing open taken), and the sentence search over its c
 passed**, exit 0 (the parity fuzz of 400 documents, the V4 class pin of 60 old-shape towns, the V5 composition pin and
 the rollback pin among them). The gates on the touched files: `typecheck:domain:strict` 0 (1,113, ceiling 1,113),
 `typecheck:ratchet` 0 (167, ceiling 167), eslint 0, each through `scripts/gate-tail.sh`.
+
+## 2. Item 2 — the public prose is composed from the stripped record (V5-2)
+
+**The cause.** `composePublicProse` (src/components/new/publicProseCompose.js) drew every site from the OWNER's
+record and handed the stripped record (`publicVeiledRecordOf`, seed and all) only to the three audience-gated readers.
+The text ships to every reader of every share, so in a town with a hidden power the succession line (`power:desk`)
+and the conflict lines (`general:overview`) were composed from what no reader may see.
+
+**The cure** (one line of behaviour): every site draws from `ctx.veiledRecord`, the record after the strip, whenever
+it exists (that is, for every compose but a caller's `publicDossier: true`, which ships every site SILENT). The
+owner's own view reads the record live and is untouched.
+
+**Red first, the lane's invariance pin widened** (`tests/components/publicProseVeilInvariance.test.js`): a new arm
+births every infiltrated village and town of the review's own seeds 0 to 24 (50 towns, the review's probe's dials),
+asserts `composePublicProse(owner)` deep-equals `composePublicProse(stripped owner)` on every block, and on the
+review's town `rv5-r3-village-infiltrated-3` asserts by text that the shipped succession line is the stripped
+record's and never "the heavier of the two". At item 1: **RED**, 8 site mismatches in 7 towns, among them the review's
+two towns (`invariance-red-item2.txt`); at item 2: **5 of 5** (the 132-town arm and the new one).
+
+**The review's own instrument** (`r3.probe.jsx`): at item 1, 200 towns, 47 with a hidden power, **7 divergent**
+(`r3-item1-200.json`); at item 2, the review's full 800 towns, 188 with a hidden power, **0 divergent**
+(`r3-item2-800.json`; the review's count at the base: 25).
+
+Every other test that calls the composer at item 2 (dossierPhoneFloorAllViews, defenseRingNoteProjection,
+publicProseVeilOnce, publicProseEquality, generalDeskTabFlow, publicProseAdoption, saves.smoke, entityIndex,
+domain/publicProse, publicCrisisHookLabel, people6InstitutionFaceLinks): **11 files, 564 of 564**. Gates: strict 0
+(1,113), ratchet 0 (167), eslint 0.
+
+**Stored towns.** The deployed client (master) writes no `publicProse`, so no stored town carries an owner-composed
+stamp; a town the new client saves is stamped by this composer. Nothing stored needs re-stamping.
 
 ## 9. This brief's rulings, copied in (the chair, session_01FE9mEws7PXYRYdjQPbSX15, 2026-11-13)
 

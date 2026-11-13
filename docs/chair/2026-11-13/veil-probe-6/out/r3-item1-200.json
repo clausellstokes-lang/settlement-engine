@@ -1,0 +1,125 @@
+{
+ "towns": 200,
+ "withHiddenPower": 47,
+ "divergentTowns": 7,
+ "bySite": {
+  "power:desk.successionRisk.glance": 5,
+  "power:desk.successionRisk.sentence": 5,
+  "general:overview.conflictLines.length": 3,
+  "general:overview.conflictLines[]": 3
+ },
+ "rows": [
+  {
+   "seed": "rv5-r3-village-infiltrated-3",
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Elected Reeve at Evangephoros holds because Elected Reeve is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "The question of who might replace the Elected Reeve at Evangephoros does not come up, because there is nobody the village would name if it did."
+    }
+   ]
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-8",
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Church Council at Goranitsa holds because Church Council is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "Nobody at Goranitsa is in a position to take Church Council's place; it has no rival, and nobody in the town is asking who comes next."
+    }
+   ]
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-9",
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Llanbridge has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "People at Llanbridge grumble, but nobody in the village stands ready to lead them, so Elected Reeve is safe in the hall."
+    }
+   ]
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-12",
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 2,
+     "stripped": 1
+    },
+    {
+     "path": "general:overview.conflictLines[1]",
+     "owner": null
+    }
+   ]
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-14",
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Elder Council at Umamala holds because Elder Council is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "People at Umamala grumble, but nobody in the village stands ready to lead them, so Elder Council is safe in the hall."
+    }
+   ]
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-23",
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 1,
+     "stripped": 0
+    },
+    {
+     "path": "general:overview.conflictLines[0]",
+     "owner": null
+    },
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Elder Council at Yurtbaliq holds because Elder Council is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "The question of who might replace the Elder Council at Yurtbaliq does not come up, because there is nobody the village would name if it did."
+    }
+   ]
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-23",
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 1,
+     "stripped": 0
+    },
+    {
+     "path": "general:overview.conflictLines[0]",
+     "owner": null
+    }
+   ]
+  }
+ ]
+}

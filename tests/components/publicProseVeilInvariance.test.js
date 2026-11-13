@@ -55,6 +55,40 @@ describe('(i) the invariance pin: the projection depends on nothing the sanitize
     expect(blocks, 'anchored: the corpus ships blocks').toBeGreaterThan(132 * 10);
     expect(mismatches).toEqual([]);
   }, 600_000);
+
+  // THE CLASS THE SOAK CORPUS DOES NOT HOLD (COHERENCE-VEIL-6; the fifth review's V5-2, REVIEW-VEIL-211-333b33973 §1.6):
+  // a town with a HIDDEN power, which a DM gets by picking the infiltrated stress. In 25 of the review's 188 such towns
+  // the text every public reader got was composed from the owner's record: the succession line and the conflict lines
+  // read the hidden power ("... is still the heavier of the two"; one conflict line more). Every infiltrated village and
+  // town of the review's own seeds 0 to 24 (its divergent towns among them), born as the review's probe births them.
+  it("the review's class (V5-2): composePublicProse(owner) deep-equals composePublicProse(stripped owner) on 50 infiltrated villages and towns, rv5-r3-village-infiltrated-3 by text", async () => {
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const { birthConfig, loadGenerationLawPayloads } = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    await loadGenerationLawPayloads();
+    const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+      selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    const mismatches = [];
+    let hidden = 0;
+    /** @type {any} */ let specimen = null;
+    for (let k = 0; k < 25; k += 1) for (const size of ['village', 'town']) {
+      const seed = `rv5-r3-${size}-infiltrated-${k}`;
+      const owner = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: size, selectedStresses: ['infiltrated'], selectedStressesRandom: false }),
+        null, { seed, customContent: {} });
+      if ((owner.powerStructure?.factions || []).length > (publicVeiledRecordOf(owner).powerStructure?.factions || []).length) hidden += 1;
+      const a = composePublicProse(owner).blocks;
+      const b = composePublicProse(stripped(owner)).blocks;
+      for (const site of new Set([...Object.keys(a), ...Object.keys(b)])) if (JSON.stringify(a[site]) !== JSON.stringify(b[site])) mismatches.push(`${seed} ${site}`);
+      if (seed === 'rv5-r3-village-infiltrated-3') specimen = { owner, a };
+    }
+    expect(hidden, 'anchored: the class holds towns with a hidden power').toBeGreaterThan(5);
+    expect(mismatches).toEqual([]);
+    // the review's own town: the shipped succession line is the one the stripped record gives, never the weighing
+    const line = specimen.a['power:desk']?.successionRisk?.sentence;
+    expect(typeof line === 'string' && line.length > 0, 'anchored: the specimen ships a succession line').toBe(true);
+    expect(line.includes('the heavier of the two')).toBe(false);
+    expect(line).toBe(composePublicProse(publicVeiledRecordOf(specimen.owner)).blocks['power:desk'].successionRisk.sentence);
+  }, 600_000);
 });
 
 describe("(ii) the review's specimens, by text (each anchor computed from the DM's own draw, never a literal corpus sentence)", () => {
