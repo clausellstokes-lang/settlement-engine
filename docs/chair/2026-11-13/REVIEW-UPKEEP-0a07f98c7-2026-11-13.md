@@ -528,4 +528,4 @@ rendered on every surface at 65cb03ef1 and at 0a07f98c7 (`saved-render.mjs`).
 - §3: `plant4.sh` and `plant5.sh`.
 - §4: `machinery.py`.
 - The seeds and logs: `own.seeds`, and the result files `attrib.txt`, `countonce.tip.ndjson`,
-  `countonce.base.ndjson`, `willpay.tip.ndjson`, `plants.log`.
+  `countonce.base.ndjson`, `willpay.tip.ndjson`, `plants.txt`.
