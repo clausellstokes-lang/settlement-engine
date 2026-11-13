@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2942,
+    "variants": 2943,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -36269,7 +36269,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 3,
       "predicate": [
         {
@@ -36343,7 +36343,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 3,
         "watch": 1
       },
       "undeclared": 0,
@@ -54769,7 +54769,7 @@
         "DS-POW-6 :: capture pressure ADVANCING (weak security, poor prosperity)",
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
-      "variants": 13,
+      "variants": 14,
       "grammars": 8,
       "blocks": [
         "DS-POW-6"
@@ -54781,7 +54781,7 @@
         "DS-POW-6 :: capture pressure ADVANCING (weak security, poor prosperity)",
         "DS-POW-6 :: capture pressure RECOVERING (strong security, prosperity)"
       ],
-      "variants": 13,
+      "variants": 14,
       "grammars": 8,
       "blocks": [
         "DS-POW-6"
@@ -71233,7 +71233,7 @@
         "breakdown.prosperity"
       ],
       "readingFunction": "capturePoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

@@ -2526,6 +2526,7 @@ own entailment and licenses nothing about who runs it.
 1. `[unfolding · dm-only · colour]` The criminals at {settlement} are losing their grip on the hall: the town is doing well again and its streets are guarded.
 2. `[counterforce · dm-only · watch]` The approach was made at {settlement} and did not take. Prosperity and a working watch did what no investigation did.
 3. `[ledger · dm-only · colour]` The criminals at {settlement} still own a few officials, but keeping them bought now costs more than it brings in.
+4. `[ledger · dm-only · colour]` Criminal money finds little purchase at {settlement}: the town is doing well, and its officials have little reason to sell.
 
 **capture reached an AGENT of a faction** *(every variant `dm-only`; print-deferred)* {colour}
 1. `[ledger · dm-only]` Someone low down in {faction} at {settlement} is being paid to pass on what they hear. They decide nothing, but they hear a great deal.

@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 129193,
-      "gzip": 18211,
+      "raw": 129570,
+      "gzip": 18255,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -763,6 +763,14 @@
       "toRaw": 129193,
       "gzipAfter": 18211,
       "reason": "+2788 B raw over the committed 126405 (gzip level 9: 17844 -> 18211): DS-POW-6 ADVANCING v1, v2 declared off held streets and a watch; six twins (the leaves review R1, 2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 E",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 129193,
+      "toRaw": 129570,
+      "gzipAfter": 18255,
+      "reason": "+377 B raw over the committed 129193 (gzip level 9: 18211 -> 18255): DS-POW-6 RECOVERING: one line true in the leaves lane's empty case (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
