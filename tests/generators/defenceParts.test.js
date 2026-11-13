@@ -294,6 +294,42 @@ describe('the martial will (R13, R14)', () => {
   });
 });
 
+// COHERENCE-UPKEEP-7, the chair's ruling W3 on the fourth read (E-M1): the will's OTHER branch, where nothing is built
+// and nothing stands but a hired body (a charter hall or a company), scaled the will by pay. Pay reaches the will only
+// through its hold. These are the reader's eleven births (REVIEW-UPKEEP-3 willpay.mjs), in the app's own shape, so
+// the corpus MEETS the branch; each is anchored to it (no walls, no standing body, a hired part).
+describe('the martial will is not paid on the hired branch either (W3)', () => {
+  const READER = ['calm-hamlet-9', 'calm-hamlet-14', 'calm-hamlet-28', 'calm-hamlet-33', 'calm-village-1', 'calm-village-5',
+    'calm-village-38', 'wartime-hamlet-33', 'wartime-village-4', 'wartime-village-30'];
+  /** @type {Array<[string, any]>} */
+  const hiredOnly = [];
+  beforeAll(async () => {
+    await loadGenerationLawPayloads();
+    for (const key of READER) {
+      const [crisis, tier] = key.split('-');
+      const seed = `rv2-${key}`;
+      const cfg = birthConfig({ ...DEFAULT_CONFIG, settType: tier, selectedStresses: crisis === 'calm' ? [] : [crisis], selectedStressesRandom: false });
+      hiredOnly.push([seed, generateSettlementPipeline(cfg, null, { seed, customContent: {} })]);
+    }
+  }, 300000);
+
+  test('RED-FIRST: where only a hired body stands, the will at the standing pay equals the will at full pay', () => {
+    for (const [seed, s] of hiredOnly) {
+      const keep = keepOfRecord(s.economicState);
+      const atPay = defencePartsOf(s, keep);
+      const ids = new Set(atPay.map((p) => p.id));
+      // anchored: the hired branch (nothing built, nothing standing, a hired part), paid short, not held, no crisis on the will
+      expect(['walls', 'garrison', 'militia', 'watch'].some((id) => ids.has(id)), `${seed}: nothing built or standing`).toBe(false);
+      expect(ids.has('charter') || ids.has('company'), `${seed}: a hired body`).toBe(true);
+      expect(keep.bought, `${seed}: paid short`).toBeLessThan(1);
+      const will = atPay.find((p) => p.id === 'will');
+      const full = defencePartsOf(s, { bought: 1, funded: 1 }).find((p) => p.id === 'will');
+      expect(will?.held === undefined && full?.held === undefined && !will?.crisis && !full?.crisis, `${seed}: no hold, no crisis`).toBe(true);
+      expect(will?.full, `${seed}: the will at its standing pay`).toBe(full?.full);
+    }
+  });
+});
+
 describe('the weights', () => {
   test('every row of the table carries a one-line reason, and every reason a row', () => {
     expect(Object.keys(DEFENCE_WEIGHT_REASONS).sort()).toEqual(Object.keys(DEFENCE_TUNING).sort());

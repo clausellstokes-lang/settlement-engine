@@ -293,7 +293,10 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   if (bos) {
     add('STANDS', 'will', { mil: Math.round(dial * D.mil), int: Math.round(dial * (law ? D.int : D.intNoLaw)) });
   } else {
-    const rate = hired ? D.none + D.hiredExtra * keep.bought : D.none;
+    // The hired branch is not paid either (COHERENCE-UPKEEP-7, the chair's ruling W3 on the fourth read's E-M1): the
+    // hired body's extra will is the base configuration's; pay reaches it only through the hold (R13), on the hired
+    // parts that are themselves paid.
+    const rate = hired ? D.none + D.hiredExtra : D.none;
     add('STANDS', 'will', { mil: Math.round(dial * rate), int: Math.round(dial * (law ? D.int : D.intNoLaw)) });
   }
   if (inst.hasMercenary) add('STANDS', 'company', { mil: W.company.mil + (chains.contract ? W.company.contract : 0) }, keep.bought);
