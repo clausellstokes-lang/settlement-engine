@@ -53737,9 +53737,10 @@
         "no crisis: plague_onset": 1,
         "no crisis: recently_betrayed": 1,
         "no crisis: threat": 1,
-        "no crisis: under_siege": 1
+        "no crisis: under_siege": 2,
+        "tier: ≥ town": 2
       },
-      "undeclared": 18,
+      "undeclared": 17,
       "crisisScoped": false
     },
     {
@@ -53773,16 +53774,16 @@
         "crisis: any": 40,
         "fish": 6,
         "institution: mill": 2,
-        "market": 7,
+        "market": 8,
         "navigable": 3,
         "no crisis: hunger": 6,
         "no crisis: monster_pressure": 1,
         "no crisis: threat": 4,
-        "no crisis: under_siege": 9,
+        "no crisis: under_siege": 10,
         "no crisis: unrest": 1,
         "sacredHouse": 3
       },
-      "undeclared": 262,
+      "undeclared": 261,
       "crisisScoped": false
     },
     {
@@ -53980,16 +53981,17 @@
       "lines": 87,
       "declares": [],
       "lineDeclares": {
-        "guardPresence": 1,
+        "guild": 2,
         "institution: temple": 3,
         "market": 3,
         "migration: exodus": 1,
         "migration: influx": 2,
         "navigable": 2,
         "no ruler: council": 2,
-        "tier: >= town": 1
+        "tier: >= town": 1,
+        "watch": 1
       },
-      "undeclared": 72,
+      "undeclared": 70,
       "crisisScoped": false
     },
     {
@@ -53998,26 +54000,40 @@
       "name": "INSTITUTION_DESC_VARIANTS",
       "drawKind": "H",
       "drawSite": "assembleInstitutions.js:65 shipFreeDesc + :1004 kernel/proseHash.js pickVariant over [catalogDesc, ...variants]",
-      "lines": 1039,
+      "lines": 1079,
       "declares": [],
       "lineDeclares": {
         "coast": 5,
-        "colour": 777,
+        "colour": 760,
+        "crisis: famine": 1,
+        "crisis: under_siege": 1,
         "garrison": 6,
-        "gate": 2,
+        "gate": 4,
         "guild": 25,
-        "market": 11,
-        "navigable": 2,
+        "institution: bank": 6,
+        "institution: docks": 6,
+        "institution: tavern": 4,
+        "market": 23,
+        "mercenary": 8,
+        "navigable": 8,
+        "no crisis: famine": 1,
+        "no crisis: under_siege": 1,
         "no garrison": 2,
+        "no institution: bank": 6,
+        "no institution: docks": 6,
+        "no institution: tavern": 4,
+        "no navigable": 6,
+        "no terrain: forest": 10,
         "no walls": 1,
         "river": 24,
         "terrain: forest": 10,
+        "tier: = metropolis": 4,
         "tier: ≤ hamlet": 6,
         "tier: ≥ city": 15,
         "walls": 8,
         "watch": 7
       },
-      "undeclared": 147,
+      "undeclared": 135,
       "crisisScoped": false
     },
     {
@@ -54026,10 +54042,11 @@
       "name": "INSTITUTION_SERVICES",
       "drawKind": "R",
       "drawSite": "services/institutionServices.js:69/203 one _rng()<p roll per eligible definition (A-printed at serviceRollMaterializatio",
-      "lines": 992,
+      "lines": 995,
       "declares": [],
       "lineDeclares": {
         "coast": 2,
+        "crisis: under_siege": 3,
         "gate": 6,
         "guardPresence": 1,
         "guild": 3,
@@ -54039,6 +54056,7 @@
         "market": 4,
         "militia": 3,
         "navigable": 3,
+        "no crisis: under_siege": 3,
         "no walls": 2,
         "organised crime": 1,
         "river": 2,
@@ -54048,7 +54066,7 @@
         "walls": 4,
         "watch": 6
       },
-      "undeclared": 939,
+      "undeclared": 936,
       "crisisScoped": false
     },
     {
