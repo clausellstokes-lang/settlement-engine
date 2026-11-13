@@ -33,3 +33,19 @@ export function magicOf(record) {
     priority: Number(ledger.priorityMagic ?? 0),
   });
 }
+
+/**
+ * WHETHER THE DEFENCE ITSELF HOLDS AN ARCANE TRADITION (W2-C-LEAVES-3; the chair's ruling, record 369 G5): the stored
+ * `defenseProfile.traditions.hasArcane`, the defence's own fact. The Defense tab's Arcane Support row is a claim about the
+ * defence, so a practitioner on the Magic tab's census does not make it alone (`defenseDisplay.js ::
+ * deriveSupportingCapabilities`). Read here, in the magic fact's home.
+ * @param {unknown} record the settlement record
+ * @returns {boolean}
+ */
+export function defenceHoldsArcane(record) {
+  const profile = record && typeof record === 'object'
+    ? /** @type {{ defenseProfile?: { traditions?: { hasArcane?: unknown } | null } | null }} */ (record).defenseProfile
+    : null;
+  return profile?.traditions?.hasArcane === true;
+}
+

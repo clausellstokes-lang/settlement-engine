@@ -443,7 +443,8 @@ export function deriveSupportingCapabilities(settlement) {
     });
   }
   // The Arcane Support row is the list's one magic row.
-  return magicWorksAt({ settlement: r }) === false || arcaneRowUnbacked(r, caps) ? caps.filter((c) => c.label !== 'Arcane Support') : caps;
+  if (practitioners.length > 0 && !defenceHoldsArcane(r)) caps.splice(1, 1); // record 369 G5: the list's second row (below)
+  return magicWorksAt({ settlement: r }) === false ? caps.filter((c) => c.label !== 'Arcane Support') : caps;
 }
 
 /**
@@ -723,19 +724,11 @@ function rivalRingsHere(settlement) {
 import { rivalRingsOf } from '../corruption.js';
 
 // ─── W2-C-LEAVES-3: THE ARCANE SUPPORT ROW IS A CLAIM ABOUT THE DEFENCE (at the end of the file, so no line above moves) ───
-/**
- * The chair's ruling (record 369, G5; vetoable): "Arcane Support · Present … Detection, wards, counterspell." prints only
- * where BOTH hold: the Magic tab's practitioner census holds a practitioner (`magicReliance.js :: magicPractitioners`,
- * unchanged) AND the defence profile's OWN arcane tradition holds (the stored `defenseProfile.traditions.hasArcane`).
- * Where a practitioner stands and the defence's own tradition does not, the row does not print (it is never turned to
- * "None", which would deny the practitioner the Magic tab names). Measured on the census's 720 at 5ab1d2c7c: 73 of
- * the 230 Present rows.
- * @param {DefenseDisplaySettlement} settlement
- * @param {ReadonlyArray<{ label: string, status: string }>} caps the rows as composed
- * @returns {boolean}
- */
-function arcaneRowUnbacked(settlement, caps) {
-  const row = caps.find((cap) => cap.label === 'Arcane Support');
-  const traditions = /** @type {{ traditions?: { hasArcane?: unknown } } | undefined} */ (settlement?.defenseProfile)?.traditions;
-  return row?.status === 'Present' && traditions?.hasArcane !== true;
-}
+// The chair's ruling (record 369, G5; vetoable): "Arcane Support · Present … Detection, wards, counterspell." prints only
+// where BOTH hold: the Magic tab's practitioner census holds a practitioner (`magicReliance.js :: magicPractitioners`,
+// unchanged) AND the defence profile's OWN arcane tradition holds (`facts/magic.js :: defenceHoldsArcane`, the stored
+// `defenseProfile.traditions.hasArcane`, read in the magic fact's home). Where a practitioner stands and the defence's
+// tradition does not, deriveSupportingCapabilities takes the row out of the list (its SECOND row, by the list's own
+// literal order: Economic Backing, Arcane Support, …); it is never turned to "None", which would deny the practitioner.
+// Measured on the census's 720 at 5ab1d2c7c: 73 of the 230 Present rows.
+import { defenceHoldsArcane } from '../facts/magic.js';
