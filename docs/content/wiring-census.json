@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2779,
+    "variants": 2803,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -27532,7 +27532,7 @@
         "band"
       ],
       "hasBag": true,
-      "variants": 4,
+      "variants": 7,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -27581,11 +27581,12 @@
       "slotsNamed": [
         "event",
         "settlement",
+        "timeband_age",
         "timeband_since"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 7,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -27634,11 +27635,12 @@
       "slotsNamed": [
         "event",
         "settlement",
+        "timeband_age",
         "timeband_since"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 7,
       "grammars": 3,
       "predicate": [],
       "branchReads": [],
@@ -27672,6 +27674,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 3,
         "market": 1
       },
       "undeclared": 3,
@@ -27693,7 +27696,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 7,
       "grammars": 3,
       "predicate": [],
       "branchReads": [],
@@ -27727,6 +27730,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 3,
         "institution: temple": 1
       },
       "undeclared": 3,
@@ -27748,7 +27752,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 7,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -27804,8 +27808,8 @@
         "band"
       ],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 2,
+      "variants": 7,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -27851,13 +27855,14 @@
         "timeband_since"
       ],
       "slotsNamed": [
+        "event",
         "settlement",
         "timeband_age",
         "timeband_since"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 7,
       "grammars": 4,
       "predicate": [],
       "branchReads": [],
@@ -27904,12 +27909,13 @@
         "timeband_since"
       ],
       "slotsNamed": [
+        "event",
         "settlement",
         "timeband_since"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 7,
       "grammars": 4,
       "predicate": [],
       "branchReads": [],
@@ -69920,7 +69926,7 @@
       "subject": "event type: disaster",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {band, event, settlement, timeband_age, timeband_since}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {band, event, settlement, timeband_age, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69928,7 +69934,7 @@
       "subject": "event type: political",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {event, settlement, timeband_since}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {event, settlement, timeband_age, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69936,7 +69942,7 @@
       "subject": "event type: economic",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_since}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_age, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69944,7 +69950,7 @@
       "subject": "event type: religious",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_since}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {event, settlement, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69952,7 +69958,7 @@
       "subject": "event type: magical",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {event, settlement, timeband_since}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {event, settlement, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69960,7 +69966,7 @@
       "subject": "event type: demographic",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {band, event, settlement, timeband_since}"
+      "count": "7 variant(s) · 3 grammar(s) · slots {band, event, settlement, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69968,7 +69974,7 @@
       "subject": "event type: exile_return",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 4 grammar(s) · slots {settlement, timeband_age, timeband_since}"
+      "count": "7 variant(s) · 4 grammar(s) · slots {event, settlement, timeband_age, timeband_since}"
     },
     {
       "tier": "COVERED",
@@ -69976,7 +69982,7 @@
       "subject": "event type: occupation_infiltration",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 4 grammar(s) · slots {settlement, timeband_since}"
+      "count": "7 variant(s) · 4 grammar(s) · slots {event, settlement, timeband_since}"
     },
     {
       "tier": "THIN",

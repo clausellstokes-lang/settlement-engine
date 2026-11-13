@@ -1306,9 +1306,13 @@ describe('the history chapter', () => {
     const religious = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-9'].pools['event type: religious'];
     const unslotted = religious.filter((v) => !(v.slots || []).includes('timeband_since'));
     expect(unslotted.length, 'the religious pool changed shape').toBeGreaterThan(0);
+    // W2-WRITE GEN-9 history events (2026-11-13): THE CURE THIS ARM NAMED, TAKEN AS A CORPUS ACT. The pool
+    // gains three duration-free lines that carry no anchor word (vids 5-7), so an anchored religious event
+    // older than a generation has lines to say; the arm is re-keyed by identity from "the silence holds" to
+    // "the silence is cured", and still reds if every duration-free line goes back to `not anchored`.
     expect(
-      unslotted.every((v) => (v.marks || []).includes('not anchored')),
-      'a duration-free ANCHORED variant appeared — the religious silence below is cured',
+      unslotted.some((v) => !(v.marks || []).includes('not anchored') && !(v.marks || []).includes('anchored')),
+      'the religious silence came back: no duration-free variant speaks over an anchored event',
     ).toBe(true);
   });
 });

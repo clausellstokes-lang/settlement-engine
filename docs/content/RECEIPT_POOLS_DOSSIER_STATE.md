@@ -6464,48 +6464,72 @@ unchanged.
 2. `[ledger · anchored]` {event} is {timeband_age}, and what it destroyed in {settlement} was never replaced.
 3. `[street · not anchored]` {settlement} remembers {event} as a hard time, and holds no grudge over it.
 4. `[visitor · not anchored]` {settlement} came through {event} {timeband_since} and does not show it.
+5. `[ledger]` {event} is written into {settlement}'s rolls as a loss, with the damage set down item by item.
+6. `[street]` People in {settlement} speak of {event} plainly, as a hard thing that happened to the place and was got through.
+7. `[elder]` The telling of {event} at {settlement} carries the names of those who dealt with it, handed down with care.
 
 **event type: `political`** {colour}
 1. `[ledger · anchored]` What was decided at {settlement} {timeband_since} in {event} is still the rule here, and the people it was decided against are still living under it.
 2. `[elder · anchored]` {event} settled a question in {settlement} {timeband_since}, and the town still runs by that answer.
 3. `[street · not anchored]` {event} is a thing that happened to {settlement}'s hall {timeband_since} and does not come up.
 4. `[unfolding · anchored]` {event} was meant to end an argument in {settlement}; the argument goes on, on the terms {event} set.
+5. `[ledger]` {settlement}'s rolls mark {event} as a turn in how the place is governed, and the entry is {timeband_age}.
+6. `[street]` Ask about {event} in {settlement} and you hear the hall's account first and the street's second, and the two do not quite agree.
+7. `[elder]` The older families of {settlement} know who stood on which side of {event}, and they tell it as a story about the hall, not about themselves.
 
 **event type: `economic`**
 1. `[ledger · anchored]` {event} changed what {settlement} lives on {timeband_since}, and the town has been living on the new thing ever since.
 2. `[street · anchored]` {settlement} still divides its year the way {event} taught it to, {timeband_since} on.
 3. `[visitor · not anchored · market]` {event} turned {settlement}'s fortunes {timeband_since}, though nothing in today's market shows it.
 4. `[counterforce · not anchored]` {event} should have remade {settlement} and did not; the town absorbed it and went on doing what it had been doing.
+5. `[ledger · colour]` {event} sits in {settlement}'s accounts as a turn in its fortunes, {timeband_age} and plainly entered.
+6. `[street · colour]` People in {settlement} argue over whether {event} left the place richer or poorer, and each side has a story to prove it.
+7. `[elder · colour]` The older heads of {settlement} measure good years and bad against {event}, a turn in its trade that everyone there has heard of.
 
 **event type: `religious`**
 1. `[elder · anchored]` {event} changed what {settlement} keeps, {timeband_since}, and there are households here still keeping the older way quietly.
 2. `[ledger · anchored]` Since {event}, {timeband_since}, what {settlement} officially observes and what its households actually keep have differed.
 3. `[street · not anchored]` {settlement} remembers {event} as a passing upset, not a change of faith.
 4. `[visitor · not anchored · institution: temple]` {settlement}'s altars carry a history visitors only learn by asking.
+5. `[ledger · colour]` {settlement}'s rolls set down {event} as a matter of faith, between the harvests and the deaths.
+6. `[street · colour]` In {settlement}, {event} is spoken of in a lowered voice, by believers and doubters alike.
+7. `[elder · colour]` The elders of {settlement} tell {event} as a test of the faith the place keeps, and they tell it with care.
 
 **event type: `magical`** {colour}
 1. `[elder · anchored]` {event} left something at {settlement} that is still there {timeband_since}, and the town lives around it.
 2. `[ledger · anchored]` {settlement} still keeps rules written after {event}, and the rules are specific in a way that suggests they were written by people who were there.
 3. `[street · not anchored]` {event} happened at {settlement} {timeband_since} and is now a story told to children with the frightening part left in.
 4. `[counterforce · not anchored]` {event} could have marked {settlement} permanently and did not; what it touched has grown back.
+5. `[ledger]` {settlement}'s rolls note {event} in plainer words than the people use when they tell it.
+6. `[street]` Every child in {settlement} has heard of {event}, and most have been told a different version of it.
+7. `[elder]` {settlement} keeps the story of {event} close, the way a place keeps a thing it does not fully understand.
 
 **event type: `demographic`** {colour}
 1. `[ledger · anchored]` {event}, {timeband_since}, changed {settlement}'s numbers by {band}, and the town has been that size since.
 2. `[elder · anchored]` The people who came to {settlement} at {event} are the people {settlement} is now made of, and the older families still know which is which.
 3. `[street · not anchored]` {settlement} was a different size {timeband_since}, and almost nobody here thinks about that.
 4. `[visitor · anchored]` {settlement} has quarters that do not match each other, and the mismatch dates from {event}.
+5. `[ledger]` The count of households at {settlement} changed with {event}, and the rolls say so in plain figures.
+6. `[street]` Families in {settlement} know which of them were here before {event} and which came or stayed after it.
+7. `[elder]` {event} is told at {settlement} as a year when people came and went in numbers.
 
 **event type: `exile_return`** {colour}
 1. `[elder · anchored]` People {settlement} sent away came back {timeband_since}, and the town has never fully resolved what it owes them or what they owe it.
 2. `[ledger · anchored]` {settlement}'s rolls carry names that were struck and restored, and the restoring is {timeband_age}.
 3. `[street · not anchored]` {settlement} once exiled some of its own and later took them back, and nobody here talks about either.
 4. `[unfolding · anchored]` The returned in {settlement} have claims the town has not settled, and the claims are being pressed rather than dropped.
+5. `[ledger]` {event} is in {settlement}'s rolls as a sending-away and a coming-back, and the rolls do not say who was in the right.
+6. `[street]` In {settlement}, everyone knows which families left and came back at {event}, and which never left.
+7. `[elder]` {event} is {timeband_age}, and {settlement} tells it as a family quarrel that grew too large for the families.
 
 **event type: `occupation_infiltration`** {colour}
 1. `[elder · anchored]` {settlement} was held {timeband_since} and the arrangements made then are the arrangements the town still runs on.
 2. `[ledger · anchored]` Who holds what in {settlement} was decided by an authority that is no longer here, and nothing has been rewritten.
 3. `[street · not anchored]` {settlement} was taken and released {timeband_since}, and the town has put it behind it.
 4. `[counterforce · not anchored]` {settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.
+5. `[ledger]` {settlement}'s rolls carry {event}, when a power from outside reached into the running of the place.
+6. `[street]` {event} is talked of quietly in {settlement}, and only among people who know each other well.
+7. `[visitor]` A visitor who asks about {event} in {settlement} gets a short answer and a change of subject.
 
 **recency framing** *(composed with the type variant, never instead of it)*
 - `Recent` {colour} — 1. `[street]` It is recent enough at {settlement} that the people it happened to are the people running the town. · 2. `[unfolding]` {settlement} has not finished with it.
