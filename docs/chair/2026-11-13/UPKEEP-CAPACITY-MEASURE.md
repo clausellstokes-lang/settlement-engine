@@ -779,3 +779,42 @@ In their own file, in plain words: `docs/chair/2026-11-13/UPKEEP-CAPACITY-EIGHT-
 9. **"Magical instability" from a weaker magical defence** (+9 at C6, +22 cumulative): the threat reader's defect (the review's C-H1 class), as the first seat named.
 10. **The Scroll scribe** joins the count test's two-role list at C6 (a magic house, arcane force and magic presence, the two roles the law allows the magic houses): seen once the alchemist no longer opened the arcane part beside it. Declared, not a new double feed (its two parts feed different scores).
 11. **Corrections of the hand-back, by name:** the levy thorps' palisades were already manned (C3); the hired-only probe read the crisis-capped keep (section 7). And one of my own: in a scratch worktree I made and popped one `git stash` (refs/stash), against the checkout's rule; no ref remains, and the branch's refs and the local config were compared after every run.
+
+## The chair's two questions on the owner's own example (after the eight towns were read)
+
+1. **Ioannoakra's Economic Survival, 31 with the shop and 30 with a quarter** (`alchx.mjs`, every score unrounded, on a scratch copy exporting the one function): it is limit 1 at work, not a fault. The town's force fixes the held total of what sustains it (readiness 28.464 either way); raw supply rises with the quarter by 3.2 (its alchemists 6.4 → 9.6) and raw magic by 3 (the presence, 54 → 57), and the fixed whole is shared in proportion, so supply's held share falls from 30.56 to 30.40 (rounded 31 → 30) while magic's rises 24.73 → 24.78 and the unprovisioned penalty's falls. No rung is applied the wrong way round; no part is displaced. The one-sentence reason is under the table in the eight towns' file. Not cured (the design's own rule, "what sustains a force counts for no more than the force", scaled together).
+2. **Where the alchemist's size shows** (`alchsize.mjs` over the 633 holders, each house swapped for the other size in its own record, the one writer and the record's own keep; `alchsize.ndjson`): the larger house reads higher readiness in 299 and lower in none; it moves the readiness band in 23 (4 of the 108 shop towns, 19 of the 525 quarter cities) and a score's band in 65 (Magical higher in 435, Economic higher in 257 and lower in 31). The real pair added to the file: Tikalahau (cold-town-96), 54 Defensible with its shop against 55 Well-Defended with a quarter (Economic 98 → 100, Magical 27 → 31).
+
+## 9. The defence lane's tip merged last (722dcf408)
+
+The tip 6e61d042a (six commits of the eighth seat since fbc4a0080: the threat rows, the safety lines, the Food endurance line's measure, the Outlook, the glance's Output chip, the typed import list). **No conflict: none touches a file this branch changed.** Re-read at this tip: **on the 3,756, 1,665 records differ, all outside the defence profile and the powers (the eighth seat's safety lines); readiness, the five scores and the powers 0**; the eight towns read the same figures. **The pin census once after it** (`census-M3.log`): 62 `FAIL` lines. Against C6's census, two are gone (this seat's own, cured: the defence walker's first cut and A7) and sixteen are new, **every one red at the defence lane's own tip 6e61d042a**, run there file by file (`attr-6e6.log`): the safety survival lines (6), projectionAgreement's court-without-prison line, defenceFactReaders, the domain any-cast ratchet (5), the wiring census (3) and the style ratchet. None is this branch's. Local refs and config: unchanged.
+
+# HAND-BACK (seat 2, 2026-11-14)
+
+**Tip:** the commit that adds this hand-back, on 722dcf408 (`lane/upkeep-capacity-2026-11-13`; its hash, read back from origin, is in the hand-back message to the chair).
+
+**Done, each pushed:**
+
+| Commit | What |
+|---|---|
+| f6e1ad283 | merge of the defence lane's 3ac6abd4c (no conflict; 0 records move) |
+| c6cace837 | the wiring census re-taken after that merge (producer index 1,330 → 1,331) |
+| 5ed61fd22 | **C2** G1: the professional city watch is the watch only |
+| c5877cf83 | **C3** G2: the household levy is the militia, at the least rung |
+| 42d82c775 | **C4a** G3: the walk to another's church opens no clergy part |
+| 1ae54c094 | **C4b** G3s (the chair's ruling on my stop): the wayside shrine opens no clergy part; THE ONE COUNT TEST |
+| 5fa1cdc90 | **C5** G4: the one successor key on the Druid Circle family (the key alone moves 0 records) |
+| e22308d24 | merge of the defence lane's fbc4a0080 before C6 (no conflict; no rating moves) |
+| 83883baaa | **C6** G5: the alchemist's shop and quarter are a trade (pushed with A7's red declared, before the ruling arrived) |
+| 1dac1ca25 | A7's cure, the chair's ruling: **a change to another lane's walker**, authorised for this one purpose |
+| eb63f0fa7 | the cumulative move and THE EIGHT TOWNS (`UPKEEP-CAPACITY-EIGHT-TOWNS.md`) |
+| 722dcf408 | merge of the defence lane's 6e61d042a, last (no conflict; no rating moves) |
+| (this commit) | this hand-back, and the chair's two questions on the owner's example answered (Ioannoakra's 31 against 30 explained; Tikalahau, the real pair where the size shows) |
+
+**The rulings this seat worked to** (the chair's messages are not on the branch): the brief's list at the head of "SEAT 2"; G3s (the wayside shrine; C4 split into C4a and C4b, the count test in C4b); A7 (distinct member sets; the untested list named, exact, shrink-only, pinned at one; the plants; its own commit; do not push C6 red, which had already happened when the ruling arrived).
+
+**Open, for the chair and for the lanes that hold the writers:** the eleven rows of "Seat 2: named for the chair" above. The first of them for a later seat of this branch: **A7's untested row leaves its list when the golden corpus's stride shows a second member set of multi-entry `magicDef` lists** (a city or metropolis whose arcane houses differ from Mages' district and Academy of magic); the arm reds when that happens, by design.
+
+**Executed against plausible.**
+- **EXECUTED, each with its probe and output in `probes/UPKEEP-CAPACITY/seat2/`:** every step's move on the 3,756 births at its committed tree (and the real commits' trees reproduce the measured ones: C2's golden hashes, C4b's and C6's whole records); the golden corpus at every step; the page reads (C2's twenty cities, C3's thirty, C4a's and C4b's twenty each, C6's twenty pairs); the count test's static arm on the 3,756 (`once-C3.txt`); C5's proof (0 records); the Arcane Support listing over the 223 alchemist-only births; the hired-only re-count under both keeps; the census and the gates at every step; the cumulative move; the eight towns at both ends (and the corpus history of each step).
+- **PLAUSIBLE, not executed:** that the eleven named rows are each their writer's alone (read by grep and by the pages, not by a fix); the count test's corpus covers the named houses but not every tier-and-dial corner.

@@ -135,6 +135,21 @@ The five scores are: **Invasion & War**, **Beasts & Monsters**, **Internal Secur
 
 **Why:** its alchemist was being counted as hired spell-casters, and an alchemist is a tradesman. With no spell-casters it has no arcane defence, and with a smaller force behind it, what keeps that force going (its stores, its alchemists, its magic) counts for less: a granary defends nobody by itself. A quarter's many alchemists would preserve more grain than one shop, but in a town held by one watch that cannot show in its rating.
 
+**Why Economic Survival reads 30 with the quarter and 31 with the shop:** this town keeps only one watch, so what keeps its force going can count for no more than that force, and that fixed share is divided between its stores, its alchemists and its magic in proportion; the quarter brings more grain-preserving (its alchemists count half as much again) but also more magic, and the magic takes a slightly larger part of the same fixed share, leaving supply at 30.4 rather than 30.6, which the page rounds to 30 rather than 31. The larger house is not counted the wrong way round; it is the town's small force that caps them both.
+
 **Politics:** re-dealt (its band fell from Defensible to Lightly Defended).
 
 **Berghavn (cold-city-101), a wealthy city with an alchemist quarter and no other magic house:** walls and gates, a citadel, a garrison, the professional city watch, a mercenary quarter, several adventurers' guilds, a city hall and several courthouses, a major hospital, many parish churches, an apothecary district and the city granaries. Before **69, Well-Defended**; after **72, Well-Defended** (Invasion 100 Strong both; Beasts 84 → 91 Strong; Internal 68 → 77 Strong; Economic 100 Strong both; Magical 29 Weak both). Its alchemist quarter changed nothing: it was never counted as arcane defence here. It rises because its watch, its courts, its mercenary quarter and its adventurers' guilds are the large city kinds. **Politics:** not re-dealt.
+
+## Where the size of an alchemist's house shows on the page
+
+Swapping each alchemist's house of the 3,756 towns for the other size, in its own town and nothing else changed (633 towns: 108 shops, 525 quarters), the larger house reads **higher readiness in 299 of them and never lower**; it changes the **readiness band in 23** and **a score's band in 65**. Where it shows, it is in Magical Capability (higher in 435) and Economic Survival (higher in 257; lower in 31, by the share explained above).
+
+**One real town where the owner can see it: Tikalahau (cold-town-96), a prosperous town** with a barracks, a town watch, a town hall, a small hospital, the town's parish churches, a granary and an alchemist's shop.
+
+| | Readiness | Invasion | Beasts | Internal | Economic | Magical |
+|---|---|---|---|---|---|---|
+| With its alchemist's shop (as it is) | **54, Defensible** | 59 Adequate | 20 Weak | 54 Adequate | 98 Strong | 27 Weak |
+| With an alchemist quarter in the shop's stead | **55, Well-Defended** | 59 Adequate | 20 Weak | 54 Adequate | 100 Strong | 31 Weak |
+
+**Why:** Tikalahau keeps soldiers enough (a barracks and a watch) that what keeps them going is not held back, so a quarter's many alchemists, who preserve more of its grain and add more to its magic than one shop, lift the town from Defensible to Well-Defended.
