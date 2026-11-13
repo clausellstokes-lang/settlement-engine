@@ -281,7 +281,15 @@ const PICK_VARIANT_CALLS = 31;
 // RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
 // take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
 // parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 17;
+// RE-KEYED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16,
+// MEASURED by A6 and CONFIRMED caller by caller (a probe recording each external fnv1a32 caller's first src frame on
+// this probe row, at 3575cf061 against the merge): buildConflictPlotHooks 2 = 2, composeFoodwaysLine 1 = 1,
+// fingerprintPowerEconomyInput 6 = 6, the tie prose's per-archetype offset (power/relationshipArchetypes.js) 7 = 7 (the
+// pairs re-dealt: 5 of its 7 strings and one quarrel's parties differ), and resolveTieKey (domain/roles/roleClass.js)
+// 1 -> 0: the base's 'mutual_leverage::npc_town_watch>npc_town_hall' tie key is no longer resolved, the dual hat having
+// re-dealt the probe row's cast and ties. No call site left the code (no changed line under src names fnv1a32); the
+// figure is the probe row's runtime count. The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 16;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
