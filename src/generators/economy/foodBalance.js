@@ -60,7 +60,7 @@ export function grownShareOf(effectiveAgri) {
 }
 
 /** The words a famine note uses for the source it failed (FOOD-3). */
-const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }); /** R2-CODE-A item 1: WHAT A PLACE EATS AND STORES, in one plain word, from its one food record (below): "grain" where the record keeps grain (a granary, whose stores line reads "months of grain", or a grain or mill source), else "food"; no record reads "food". Every crisis line that means the town's food reads this, never the export slot (`tradeCommodity.js`). Draw-free; one line, so no cited line moves. @param {{ hasGranary?: unknown, foodSources?: unknown } | null | undefined} foodRecord @returns {'grain' | 'food'} */ export const foodStoreWord = (foodRecord) => (foodRecord && (foodRecord.hasGranary === true || (Array.isArray(foodRecord.foodSources) && foodRecord.foodSources.some((s) => s === 'grain' || s === 'mill'))) ? 'grain' : 'food');
+/** R2-CODE-A item 6: the shortage hook where no food comes in by trade: the siege this file reads (`config.stressTypes`, the one that sets the route to isolated below) has cut every road, and the balance names no channel (`importChannel`: a route's, or a magic channel's past the siege) carrying food in. @param {any} config @param {any} foodBalance @returns {boolean} */ const siegeCutsImports = (config, foodBalance) => (config?.stressTypes || []).includes('under_siege') && !foodBalance?.importChannel; const NO_FOOD_BY_TRADE_HOOK = 'No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it.'; const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }); /** R2-CODE-A item 1: WHAT A PLACE EATS AND STORES, in one plain word, from its one food record (below): "grain" where the record keeps grain (a granary, whose stores line reads "months of grain", or a grain or mill source), else "food"; no record reads "food". Every crisis line that means the town's food reads this, never the export slot (`tradeCommodity.js`). Draw-free; one line, so no cited line moves. @param {{ hasGranary?: unknown, foodSources?: unknown } | null | undefined} foodRecord @returns {'grain' | 'food'} */ export const foodStoreWord = (foodRecord) => (foodRecord && (foodRecord.hasGranary === true || (Array.isArray(foodRecord.foodSources) && foodRecord.foodSources.some((s) => s === 'grain' || s === 'mill'))) ? 'grain' : 'food');
 
 // ── THE FOOD RECORD (FOOD-1, chair ruling 1, 2026-11-03) ─────────────────────────────
 /**
@@ -790,10 +790,10 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
       });
     } else if (route !== 'isolated') {
       hooks.push({
-        category: 'Trade Monopoly',
+        category: siegeCutsImports(config, foodBalance) ? 'Hoarded Food' : 'Trade Monopoly',
         // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
         // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
-        hook: 'One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.',
+        hook: siegeCutsImports(config, foodBalance) ? NO_FOOD_BY_TRADE_HOOK : 'One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.', // R2-CODE-A item 6: the importer presumes food comes in by trade; where the siege has cut every road in and no channel carries food past it, the hoard inside
         severity: 'high',
       });
       if (route === 'river')
