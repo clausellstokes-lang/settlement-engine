@@ -41,14 +41,16 @@ export function shownHonorificOf(card, settlement, place = settlement) {
  * THE SEAT'S HOUSE'S CONNECTION ROW, its name and its tail: the dual-hat leader names both hats ("Reeve Egilbert
  * Neumann" + ", the miller"), any other face its honorific and name; the keeper of an empty seat its caretaker's form.
  * The tail never repeats a title the name already carries (a disambiguated name, "Gebhard Schneider (the exchange
- * master)").
+ * master)"). COHERENCE-POWERS-5 (N6; REVIEW-POWERS-2 at e86d069be): the leader's OWN house's row composes the same way
+ * (it read "Headman Cosij Chan" there while the seat row and the seat's house said "Elder"), so every row naming the
+ * leader opens on the office held; it reads the card's office (cardPowers.js :: cardOfficeOf) and title.
  * @param {KeeperCard} face @param {unknown} settlement @param {boolean} seatFaced the face is the seat
  * holder's, not the house's own @returns {{ name: string, tail: string }}
  */
 export function connectionOf(face, settlement, seatFaced) {
   const keeper = seatKeeperOf(settlement);
   const keeps = !!keeper && keeper.id === face?.id;
-  if (seatFaced) {
+  if (seatFaced || cardOfficeOf(face)) {
     const office = cardOfficeOf(face);
     const shown = keeps ? caretakerFormOf(office, governmentOf(settlement)) : office;
     const title = String(face?.title || '');
