@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 126405,
-      "gzip": 17844,
+      "raw": 129193,
+      "gzip": 18211,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -755,6 +755,14 @@
       "toRaw": 261385,
       "gzipAfter": 35314,
       "reason": "+1637 B raw over the committed 259748 (gzip level 9: 35133 -> 35314): DS-DEF-1 readiness STRONG v2 declared off a threat and a war; two threat twins, two wartime twins (the defence review M1, 2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 R1",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 126405,
+      "toRaw": 129193,
+      "gzipAfter": 18211,
+      "reason": "+2788 B raw over the committed 126405 (gzip level 9: 17844 -> 18211): DS-POW-6 ADVANCING v1, v2 declared off held streets and a watch; six twins (the leaves review R1, 2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
