@@ -53729,7 +53729,7 @@
       "lineDeclares": {
         "crisis: any": 28,
         "institution: bank": 1,
-        "market": 3,
+        "market": 5,
         "navigable": 1,
         "no crisis: hunger": 3,
         "no crisis: infiltrated": 1,
@@ -53738,9 +53738,9 @@
         "no crisis: recently_betrayed": 1,
         "no crisis: threat": 1,
         "no crisis: under_siege": 4,
-        "tier: ≥ town": 2
+        "tier: ≥ town": 3
       },
-      "undeclared": 16,
+      "undeclared": 13,
       "crisisScoped": false
     },
     {
@@ -53772,7 +53772,7 @@
       "lineDeclares": {
         "church": 2,
         "colour": 6,
-        "crisis: any": 39,
+        "crisis: any": 40,
         "crisis: wartime, insurgency": 1,
         "fish": 6,
         "institution: mill": 2,
@@ -53782,12 +53782,12 @@
         "no crisis: hunger": 6,
         "no crisis: monster_pressure": 1,
         "no crisis: threat": 4,
-        "no crisis: under_siege": 10,
+        "no crisis: under_siege": 11,
         "no crisis: unrest": 1,
         "sacredHouse": 3,
         "tier: ≥ town": 8
       },
-      "undeclared": 258,
+      "undeclared": 257,
       "crisisScoped": false
     },
     {
@@ -53986,17 +53986,21 @@
       "declares": [],
       "lineDeclares": {
         "guild": 2,
+        "healer": 1,
         "institution: temple": 3,
         "market": 3,
         "migration: exodus": 1,
         "migration: influx": 2,
         "navigable": 2,
+        "no crisis: occupied": 1,
         "no crisis: succession_void": 2,
         "no ruler: council": 2,
+        "no ruler: elder": 2,
         "tier: >= town": 1,
+        "tier: ≥ town": 1,
         "watch": 1
       },
-      "undeclared": 70,
+      "undeclared": 67,
       "crisisScoped": false
     },
     {

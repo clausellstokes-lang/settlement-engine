@@ -32,6 +32,9 @@ describe('textOf', () => {
     // 101 → 105: W2-FIX-DATA-3 (REVIEW-W2A-3 #366, #2) — the smiths' three bare dominant lines ("Forge smoke hangs …",
     // "The hammering echoes through all of …", "… lives by its forges …") declare `tier: ≥ town` (fb48fb8bc), and the
     // mesoamerican craftspeople row ("Craftspeople sit in rows …") declares `market` (c0f8dd279); re-keyed by W2-FIX-DATA-6
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(105);
+    // 105 → 109: W2-FIX-DATA-HISTORY item F (9d952d02b; ROUND-3-CUT-INCREMENT ww-541, CENSUS-2) — the east-asian lanes of trades
+    // (tier: ≥ town), the tea for a merchant and the oath on the scales (market), and the timber planks waiting for carts
+    // (no crisis: under_siege) were bare; each declares now (re-keyed by identity with its cause).
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(109);
   });
 });
