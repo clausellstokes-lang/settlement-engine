@@ -25,4 +25,10 @@ describe('W2-FIX-DATA: a service line prints only where it is true', () => {
       expect(String(resolveServiceRow(row(inst, svc), facts([]))?.desc)).toMatch(falseUnderSiege);
     });
   }
+  it('the last rites name no priest keeping a graveyard the hamlet has none of (c09, c10)', () => {
+    expect(row('Access to parish church', 'Last rites').desc).not.toMatch(/manages the graveyard/i);
+  });
+  it('the village reeve answers to no lord the village lacks (c12)', () => {
+    expect(row('Village reeve', 'Administrative oversight').desc).not.toMatch(/on behalf of the lord/i);
+  });
 });

@@ -1379,7 +1379,7 @@ export const INSTITUTION_SERVICES = {
     "Hue and cry": { on: false, p: 0.6, desc: "Turn the village out after a thief or a stray beast." }
   },
   "Village reeve": {
-    "Administrative oversight": { on: true,  p: 1.0, desc: "Manage village affairs on behalf of the lord. Allocate strips and common access." },
+    "Administrative oversight": { on: true,  p: 1.0, desc: "Manage the village's affairs day to day. Allocate strips and common access." },
     [DISPUTE_RESOLUTION]: { on: true, p: 0.8, desc: "Settle minor disputes before they require higher authority." },
     "Tax collection": { on: false, p: 0.7, desc: "Collect dues owed to the lord and accounting for common resources." }
   },
@@ -1532,7 +1532,7 @@ export const INSTITUTION_SERVICES = {
     "Weekly rite": { on: true, p: 1.0, desc: "The weekly service. Attendance expected of all residents." },
     "Rite of entry": { on: true, p: 0.9, desc: "The rite that admits a person to the faith. Required for most civil recognition." },
     "Marriage ceremony": { on: true, p: 0.9, desc: "Marriage sanctioned by the faith, legally binding." },
-    "Last rites": { on: true, p: 0.9, desc: "Funeral rites and burial. The priest manages the graveyard." },
+    "Last rites": { on: true, p: 0.9, desc: "Funeral rites, said by the parish priest, who comes or is sent for." },
     "Confession": { on: false, p: 0.6, desc: "Private confession to the priest. The fault is heard and released." }
   },
   "Monastery": {

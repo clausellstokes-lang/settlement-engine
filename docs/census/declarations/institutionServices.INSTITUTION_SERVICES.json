@@ -6781,7 +6781,7 @@
     },
     {
       "id": "Village reeve|Administrative oversight",
-      "text": "Manage village affairs on behalf of the lord. Allocate strips and common access.",
+      "text": "Manage the village's affairs day to day. Allocate strips and common access.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -7411,7 +7411,7 @@
     },
     {
       "id": "Access to parish church|Last rites",
-      "text": "Funeral rites and burial. The priest manages the graveyard.",
+      "text": "Funeral rites, said by the parish priest, who comes or is sent for.",
       "needs": [],
       "excludes": [],
       "crisis": [],
