@@ -1,3 +1,248 @@
+# COHERENCE-UPKEEP: the hand-back (the fourth seat, COHERENCE-UPKEEP-4, 2026-11-13)
+
+**The lane:** `lane/coherence-upkeep-2026-11-12`. The tip is the commit that adds the edge bundles (the last commit, alone); read it back from the remote. **An independent reviewer reads the whole lane next.** The third seat's record and the first two seats' are kept below this section, unchanged.
+
+**Base for every measure below: AGREE's final tip `faa20bc6c` itself** (the agreement lane without this lane). **Tip:** `6f95af557`; the lane's `src/` is final there, and every later commit is docs, one test-free census file, or the bundles. **Corpora:** the 660 (the 360 `agree-<tier>-<i>`, 60 thorps, 60 hamlets, 180 forced births of famine, war and siege), the golden master's 525, and the espionage fence's 360. **The harness** (it births the corpora in both trees and takes every figure) is `docs/chair/2026-11-13/probes/UPKEEP-4/` (`dump.mjs`, `measures.mjs`, `fielddiff.py`, with a README). The field diff is `UPKEEP-FIELD-DIFF.json`; the draft record is `docs/chair/2026-11-11/UPKEEP-shift-record.DRAFT.json`.
+
+## ⚠ FOR THE REVIEWER: condition (d) was RESTATED BY THE CHAIR at this seat's stop
+
+Read it as a ruling, not as silence. **The stop (2026-11-13):** agree-city-38's criminal capture moved none → equilibrium, toward danger, while its readiness ROSE 45 → 56. That breaks (d) as the third seat held it.
+
+**The chair's ruling:** declare it, and go on. (d) now reads: a flag toward danger where readiness did not fall is accepted ONLY when it is traced, town by town, to a change of council membership that the lane's own declared chain causes, and in at most 3 of the 660. A fourth such town, or one that cannot be traced, is a STOP.
+
+**At this tip: 1 town (agree-city-38). The trace:**
+1. The gates go to the identity at Comfortable (0.84/0.88/0.86/0.78/0.82 → 1).
+2. Readiness 45 → 56 (Defensible → Well-Defended).
+3. Legitimacy 58 → 65 (Tolerated → Approved).
+4. The council's power 28 → 31.
+5. The roster swaps Religious Authorities (10) for Merchant Guilds (9).
+6. npc_merchant_guilds_15_40 takes the Merchant Guilds' rank 1 and leaves the council's rank 2.
+7. castPowers re-ranks the council: npc_city_granaries, who carries a covert retainer to "Multiple criminal factions", takes rank 3.
+8. `hallCapture.js :: hallCaptureOf`'s agent rung reads equilibrium.
+
+**No person is re-dealt, shown by diff:** the 42 cards' ids, names and personalities are equal, and the granaries' allegiance is the same object at the base and at the tip.
+
+## What this seat did, in commit order
+
+| Commit | What |
+|---|---|
+| 5e10fd07f | **Merge AGREE's final tip faa20bc6c.** Under `src/`, both sides touched two files since AGREE's line merge: `economicState.js` (both composed: the two end-of-file imports, `keep.js` and `chainYield.js`) and `holderTable.js` (no conflict). The census5b test composed: AGREE's narrowed `twinAnswersOnItsKey`, asked by the lane's `malformedRows`, with an original's crisis disjunction carried as one atom on its needs side. The mutation manifest keeps both sides' rows. The wiring census was re-taken by its writer. The lighting census and the bundles take AGREE's side (re-taken below, and last). |
+| 00fc0d9ce | **P6** (red first at the merge): `garrison` on the garrison purse set and its crisis set; `mercenary` on the two hired-only purse sets (the mercenary lead is their twin) and the hired-only crisis set. `declaredSet` / `crisisSet` take `shared` atoms that both lines need. `MERCENARY_LEAD` is read off its set. No line moves (the guard-line births: 139 on the 660 and 96 golden, the third seat's figures). |
+| fbdae5389 | **P1:** the gate fixtures re-keyed by identity to the label. Struggling against Prosperous over the same buildings, and the climb 10/30/50/80 as Struggling/Poor/Moderate/Comfortable, profiled as the pipeline profiles. The palisade pin moves to defense-hamlet-13 (Struggling, its one defence "Palisade or earthworks"); defense-thorp-3 is Comfortable now. Green 33/33. **The plant** (`keepOf` → identity) reds 10. |
+| 6f95af557 | The lighting census through its door (files 3219 → 3221, titles 29225 → 29245). |
+| 462ad5d3b | The draft record and the field diff re-taken; the harness committed as a probe. |
+| c950cc823 | The page count: the census counter at both trees (below). |
+
+**L1 at every `src/` commit:** domain-strict 1113 = ceiling; typecheck ratchet 167 = ceiling; eslint clean on the touched files. **The push gates** (c950cc823): ratchet 167 = 167, strict 1113 = 1113, lint 0 errors (37 warnings), all exit 0.
+
+## Calls taken without the chair (they only declare or name)
+
+1. **The census5b composition** at the merge: the lane's crisis lines are keyed on one crisis atom, so `malformedRows` hands AGREE's narrowed rule the original's crisis disjunction as one atom on its needs side.
+2. **P6's reach:** `mercenary` is also declared on the hired-only crisis set, so the short purse line declares the company in both sets it stands in. `MERCENARY_LEAD` is read off its declared set instead of spelled again. Without that, the constant stayed an undeclared literal.
+3. **P1's reach:** the green fixtures that drive a gate through the economy are re-keyed too: the two climbs, the floors, the thorp and the hamlet. At the identity they passed with no gate biting, so they no longer held their claim.
+4. **Two people-paths, new to the declared list, declared in the record:**
+   - `npcs[].allegiance`. On the 660, a covert allegiance's `power` moves for 25 cards and its `handler` for 33, in the 5 roster-changed births. 0 allegiances are gained or lost, and 0 houses, vectors or vias move. Both are draw-free functions of the roster by design (`allegiance.js :: allegiancePowerFor`, `assignHandlers`). Golden and fence: index order only.
+   - `factions[].modifiers`, index order only.
+5. **A slip, reported:** in the scratch worktree I ran `git stash` once by mistake. It held my own two uncommitted P5 edits. I popped it at once, and the stash list is empty, as it was before. Nothing else was touched.
+
+## Parked (each would bank a baseline upward or touch a ruled door)
+
+| # | Item | Recommendation |
+|---|---|---|
+| P5 | It cannot land as ruled. The door (`npm run gen:dossier-prose`: 169 pairs, 0 joining rows) and the four places green the contract test only after one more pin (the one-endpoint row count 10 → 11, by identity: `econOutput|economicGates.military` became `fundedGate|…` and `upkeep|…`). The regenerated file then reds two pins outside the ruling. **`proseComposed.walker.test.js:215`** pins the leaf's count, 165: a fifth place, with the same cause. **`proseCorpusBytes.test.js` RAW:** the leaf grows 28249 → 28926 raw bytes, and that ratchet's door appends a declared row and moves the number up. That is a baseline banked upward, which is barred to the lane. The built patch is `docs/chair/2026-11-13/probes/UPKEEP-4/P5-built.patch`. | The chair rules the byte row (+677 bytes, cause 07ebe8bdc: the gates' new inputs). Then P5 lands in one commit: the door, six places, and that row. |
+| pool | `ledger:NPC_STRUCTURE.magic__contested__dominant` is stale on the composed tree. AGREE banked it through `--bank-new` (a62d984e1) when its re-deal first drew the pool; the composed corpus does not draw it. Its only removal door is `--tighten`. | Name it for the merge point beside `SAFETY_LINE_SIBLINGS`. |
+
+## The measures (base faa20bc6c, tip 6f95af557)
+
+**Readiness, the one-band law (HARD):** **0** places more than one band from base, on the 660 and on the golden 525.
+- Labels moved: the 660 131 (the 360 84, thorps and hamlets 9, forced 38); golden 63.
+- By stress and distance: {"360|random|-1": 25, "360|random|+1": 59, "small|random|-1": 7, "small|random|+1": 2, "forced|famine|-1": 18, "forced|famine|+1": 1, "forced|wartime|-1": 6, "forced|wartime|+1": 5, "forced|under_siege|-1": 5, "forced|under_siege|+1": 3}.
+- Golden: −1 61, +1 2.
+
+**The top two bands on the 360:**
+- **Entries 24, against the line of 25.** Exits 5.
+- Well-Defended+Fortress 37.8% → 43.1% (+5.3). Declared under the restated line; the entering and exiting towns are listed in the draft.
+
+**Prosperity, food band, safety label:** 0 moves on both corpora.
+
+**Services:**
+- **0 rows added. 0 institutions newly empty:** 1218 at both, of a roster of 23548 on the 660.
+- Rows removed: 981 on the 660 (313 births), 336 golden.
+- **Healing by band, the 660:**
+  - Struggling 1034 → 927 (−10.3%)
+  - Poor 468 → 428 (−8.5%)
+  - Moderate 472 → 439 (−7.0%)
+  - Comfortable 747 → 729 (−2.4%)
+  - Prosperous 709 → 709
+  - Wealthy 274 → 274
+- **Healing by band, golden:**
+  - Struggling 156 → 120 (−23.1%, under the STOP at 25)
+  - Poor 647 → 574 (−11.3%)
+  - Moderate 203 → 190 (−6.4%)
+  - Comfortable and Prosperous unmoved
+- **Criminal rows: none rises** on either corpus (the 660: 371 → 368, 160 → 157, 197 → 195, 451 → 450, 304 → 304, 99 → 99).
+
+**Magic:** every band moves one step down, all in Struggling or Poor places.
+- The 660: 328 bands. Poor|broad→common 27, Poor|common→moderate 7, Poor|limited→rare 25, Poor|moderate→limited 46, Poor|pervasive→broad 6; Struggling|broad→common 49, Struggling|common→moderate 17, Struggling|limited→rare 47, Struggling|moderate→limited 81, Struggling|pervasive→broad 23.
+- Golden: 250 bands. Poor|moderate→limited 179, Poor|common→moderate 11, Struggling|moderate→limited 60.
+
+**Stores:**
+- Months fall in 477 births of the 660 and 328 golden; **rise 0**.
+- **The 660's crossings: 57, 0 toward more.**
+  - By direction: seasonal→minimal 35, strategic→buffer 19, buffer→seasonal 3.
+  - By cohort and stress: 360 21, small 3, famine 9, wartime 5, siege 19.
+  - By tier: village 26, city 18, town 7, hamlet 4, thorp 1, metropolis 1.
+- Golden: 60 crossings, 0 toward more.
+- The famine births are listed in the draft; each keeps its food band.
+
+**The hired counterfactual:** 9 hired-only places, **every one at or under its watch**. Hired vs watch:
+
+| Place | Label | Hired | Watch |
+|---|---|---|---|
+| agree-village-28 | Struggling | 13 | 15 |
+| agree-village-30 | Comfortable | 30 | 30 |
+| agree-village-40 | Poor | 23 | 28 |
+| agree-village-43 | Poor | 51 | 51 |
+| agree-village-45 | Poor | 76 | 76 |
+| agree-hamlet-5 | Poor | 29 | 32 |
+| agree-hamlet-8 | Moderate | 28 | 29 |
+| agree-hamlet-38 | Moderate | 34 | 34 |
+| agree-force-wartime-village-7 | Struggling | 23 | 26 |
+
+**The page:** under famine or siege on the 660, 31 births print a crisis line and 0 a purse line. Golden: 23 food-capped births keep the purse line (the third seat's 19, with AGREE's final base re-dealing five forest metropolises in and one out; the same rule, keys in the draft).
+
+## The legitimacy chain, conditions (a) to (g)
+
+- **(a)** The field diff, base → tip:
+  - Golden 507 of 525 (145 paths).
+  - The 660: 594 (232 paths).
+  - The fence: 346 of 360 (198 paths).
+  - Every path is in a declared family.
+- **(b)** Declared with counts in the draft:
+  - Legitimacy score: golden 63, the 660 115.
+  - Defence term: 63 / 129.
+  - Multipliers: 11 / 29.
+  - Labels and flags, with their directions.
+  - Governance fractured: 0 / 4, each where readiness fell.
+  - Faction power: 11 / 29.
+  - Roster changed: 0 / 9.
+  - Relationships: 11 / 16.
+  - The people: goals 85 cards in 11 births / 572 cards in 19 births, every one where a power moved; memberships 0 / 182 cards in exactly the 9 roster-changed births; allegiance as above.
+  - Relationship prose: 11 / 20.
+  - Condition severity: 46 / 42.
+  - Stores held: 0 / 4.
+- **(c) The sign:** 0 exceptions (63 golden moves, 115 on the 660).
+- **(d)**
+  - Who governs: **0**.
+  - A danger flag where readiness did not fall: **0**.
+  - The largest flag move: isTolerated **16** (line 33).
+  - Stability: **0**.
+  - **Capture: 5 on the 660, 0 golden.**
+    - agree-city-82, agree-city-87 and agree-metropolis-27 move away from danger.
+    - agree-force-wartime-metropolis-7 moves toward danger where readiness fell.
+    - **agree-city-38 moves toward danger where readiness rose: RULED (above), 1 of the restated 3.**
+- **(e) NO PERSON RE-DEALT:** by person id on all three corpora, 0 people added, removed or renamed and 0 personality changes.
+- **(f) The receipt:** evidence moves in 4 births of the 660 (agree-city-38, -40, -43, agree-force-wartime-city-4); **0 status changes**.
+- **(g)** String roots: one line each in the draft.
+
+**Read by other lanes:**
+- `castPowers.js` reads the criminal power's points (moved in 14 of the 660, 11 golden) and the roster (9 of the 660, 0 golden).
+- `representatives.js` reads `factions[0]` (by name: 4 of the 660, 0 golden) and the prosperity label (0).
+
+## The page count (the census counter; `docs/chair/2026-11-13/probes/UPKEEP-4/census/`)
+
+`census.sh` was run at faa20bc6c and at 6f95af557 (720 dossiers each), then `compare.mjs`. **No new row.** Three rows rise. **Each is EXPOSURE:**
+- the row is old;
+- the class table names a later cure for it (row 4: `factionStanding.js`; row 9: `defenseStateProse.js :: beastsRowPoolKey`; NEW-1: `governanceNarrative.js :: deriveBaselineStability`, "after the powers and upkeep lanes merge");
+- every entering town is one whose fact this lane changed.
+
+| Row | Base → tip | Entering towns, and the fact the lane moved |
+|---|---|---|
+| 4 "almost level" vs leader far ahead | 106 → 108 | r2r-town-36 (powers 47/31/22 → 51/26/23), r2r-metropolis-53 (31/18/17 → 33/17/16), r2s-religious_conversion-city-2 (24/18/12 → 28/16/12). r2r-city-26 leaves. |
+| 9 Critical over reassuring text | 148 → 149 | r2s-famine-city-0 (monster 43 → 38; readiness Defensible → Lightly Defended) |
+| NEW-1 governance vs Defense | 11 → 12 | r2r-village-8 (readiness Defensible → Lightly Defended, 40 → 34) |
+
+Every other row is equal or lower: row 2 571 → 540; row 15 720 → 717.
+
+## The six golden surfaces (each by measure; no door run)
+
+| Surface | Base → tip |
+|---|---|
+| Generator golden master | 507 of 525 rows move |
+| Espionage fence | 346 of 360 move; driven hash 366d5c20 → 7b5e14b0 (banked 38a52b05) |
+| Dossier prose manifest | the DRIFT arm 990 → 1024 rows; four-seed total cells 73491 → 73201; mixed-pool 177 = 177 |
+| Herald desk | contentSha 02d3fa8e → 919f46cb (banked 0fa1f3ca) |
+| PDF golden | `defense.scoreAvg` 41 → 42 (banked 43) |
+| Preset-lighting witness | UNMOVED: green at both |
+
+## The repetition guard
+
+`node scripts/census/pool-dominance.mjs` (read-only), 908 pools:
+- 0 over;
+- 0 unregistered;
+- **1 stale** (`NPC_STRUCTURE.magic__contested__dominant`, parked above);
+- **1 loose** (`SAFETY_LINE_SIBLINGS` 0.8919 over its measure 0.7281: the merge seat lowers it at the merge point, as ruled).
+
+No `--tighten` was run.
+
+## Rows named for the merge seat
+
+- **P2** `famineStoresOneRounding` (2). Cause: ruling 6. The third seat's values: 6 → 4 months, 12 → 9.
+- **P3** `captureBirthScale`. The floor is re-measured on the merged tree; a reading under 360 there is a STOP.
+- **P4** `mundaneRealmAcceptance`: services 121/124 → 116/119, ruling 4.
+- **The goldens** (above).
+- **`generationForkCensus`** A1, A3e, A4: red at the base with identical disagreements (AGREE's).
+- **`poolDominance`**: the loose row and the stale row.
+
+## The whole suite
+
+Run once at c950cc823 (the lane before the bundles), 03:20–04:43 UTC, with `npx vitest run --maxWorkers=2 --reporter=json`. Results: 39,032 tests; 38,710 passed, 70 failed, 252 skipped. That makes **75 failing rows**: the 70 failed tests plus 5 files that fail at load (the news pair, proseFamilyContract, observedShapeReaders and writerReach). The class of every row is in `docs/chair/2026-11-13/probes/UPKEEP-4/FAILSET.txt`. The 11 files whose reds are new since the third seat's set were re-run at the base faa20bc6c with the same command.
+
+| Class | Rows | What |
+|---|---|---|
+| A. Bundles stale against `src/` | 11 | engineBundleReplay ×4, engineServiceCore, engineServiceStoreParity ×3, aiGroundingBundle freshness, edgeSharedBundleReproducibility ×2. Cured by the last commit (below). |
+| B. Red at the base faa20bc6c, re-run there | 20 | See the list below. Every message is identical at base and tip, except two figures the lane moves: the DRIFT arm (990 → 1024 rows) and editCorpusRatchet A8 (the witnessed sets [20, 32] → [22, 36], pinned at [20, 36]). |
+| C. The lane's, green at the base | 2 | poolDominance's stale row and loose row (see the repetition guard). The removal door for both is `--tighten`, which is the chair's door, so neither was run. Named for the merge seat. |
+| D. In the third seat's tip set, classed there | 42 | See the list below. |
+| Unclassed | **0** | |
+
+**Class B, the 20 rows:**
+- mergeLadderHeldKeys A2, A3, A5, A6;
+- recordMerge A6;
+- foodModelSingleWriter;
+- generationCertificationCorpus;
+- generationForkCensus A1, A3e, A4;
+- newsHeadlineContract, newsVoiceContract and proseFamilyContract, all three failing at load: AGREE's "line's known set", and proseFamilyContract's load failure is the osr-tier-14 seed;
+- dossierProseManifest ×3;
+- editCorpusRatchet A4, A6, A7, A8.
+
+**Class D, the 42 rows:**
+- the goldens: gm, fence, herald, PDF;
+- P2 famineStoresOneRounding ×2, P3 captureBirthScale, P4 mundaneRealmAcceptance;
+- P5 dossierStateProseProjection ×2;
+- the phone floors ×2;
+- pipelinePinnedChoosers A6 and townCartographyCalibration W8: the merge seat's;
+- the pin-seam and golden-isolation rows;
+- osr-tier-14: observedShapeReaders and writerReach;
+- the taste towns ×6;
+- siteCoherence C1;
+- institutionTable;
+- landingFixtureFreshness ×2;
+- the other rows red at both in the third seat's set.
+
+**Gone since the third seat (14):**
+- P1, cured in fbdae5389: defenseEconomicGate ×8 and defenseWordsFindings;
+- presumedThings ARM 1;
+- sovereigntyLightingContract, cured in 6f95af557;
+- proseComposed A13, proseWaveGate (d) "differ in exactly one way" and statecraftExposureBand: green after the AGREE merge.
+
+## Left
+
+- The edge bundles, the last commit, alone (`npm run build:edge-shared`).
+
+---
+
+
 # COHERENCE-UPKEEP: the hand-back (the third seat, COHERENCE-UPKEEP-3, 2026-11-12)
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`, base `65ce74ce6`. The tip is the commit that adds this text; read it back from the remote. **An independent reviewer reads the whole lane next.** The first two seats' record is kept below this section, unchanged.
