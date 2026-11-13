@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 129618,
-      "gzip": 18257,
+      "raw": 129770,
+      "gzip": 18282,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -883,6 +883,14 @@
       "toRaw": 129618,
       "gzipAfter": 18257,
       "reason": "+48 B raw over the committed 129570 (gzip level 9: 18255 -> 18257): POW-6 threat atoms"
+    },
+    {
+      "car": "W2-WRITE-5 B POW-6 v7 v8",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 129618,
+      "toRaw": 129770,
+      "gzipAfter": 18282,
+      "reason": "+152 B raw over the committed 129618 (gzip level 9: 18257 -> 18282): off a revolt"
     }
   ],
   "ceilingTransfersNewLeaves": [

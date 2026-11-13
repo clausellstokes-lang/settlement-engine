@@ -36267,6 +36267,8 @@
       "lineDeclares": {
         "crisis: threat": 2,
         "crisis: wartime": 2,
+        "no crisis: insurgency": 2,
+        "no crisis: slave_revolt": 2,
         "no crisis: threat": 4,
         "no crisis: wartime": 4,
         "no watch": 2,

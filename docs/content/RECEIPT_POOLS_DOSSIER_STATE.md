@@ -2520,8 +2520,8 @@ own entailment and licenses nothing about who runs it.
 4. `[ledger · dm-only · tier: ≤ hamlet]` {settlement} is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply.
 5. `[ledger · dm-only · tier: ≥ village · crisis: threat]` Whoever holds {settlement}'s streets now, nobody is watching its officials, and they are paid poorly enough to be bought.
 6. `[unfolding · dm-only · tier: ≥ village · crisis: wartime]` With the war taking everyone's attention, {settlement}'s officials are left to themselves, and an underpaid official left alone is easily bought.
-7. `[ledger · dm-only · tier: ≥ village · watch · no crisis: threat · no crisis: wartime]` {settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.
-8. `[counterforce · dm-only · tier: ≥ village · watch · no crisis: threat · no crisis: wartime]` A watch walks {settlement}'s streets, but the danger is in the hall, where officials paid next to nothing are worth buying.
+7. `[ledger · dm-only · tier: ≥ village · watch · no crisis: threat · no crisis: wartime · no crisis: insurgency · no crisis: slave_revolt]` {settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.
+8. `[counterforce · dm-only · tier: ≥ village · watch · no crisis: threat · no crisis: wartime · no crisis: insurgency · no crisis: slave_revolt]` A watch walks {settlement}'s streets, but the danger is in the hall, where officials paid next to nothing are worth buying.
 9. `[street · dm-only · tier: ≥ village · crisis: threat]` With everyone's mind on the present danger, nobody at {settlement} is watching its officials, and they are paid little enough to be bought.
 10. `[ledger · dm-only · tier: ≥ village · crisis: wartime]` {settlement}'s officials are poorly paid and, with the war on, nobody is checking their accounts.
 

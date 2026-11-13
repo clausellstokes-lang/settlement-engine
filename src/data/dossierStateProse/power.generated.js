@@ -3065,7 +3065,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "tier: ≥ village",
             "watch",
             "no crisis: threat",
-            "no crisis: wartime"
+            "no crisis: wartime",
+            "no crisis: insurgency",
+            "no crisis: slave_revolt"
           ],
           "text": "{settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
           "slots": [
@@ -3080,7 +3082,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "tier: ≥ village",
             "watch",
             "no crisis: threat",
-            "no crisis: wartime"
+            "no crisis: wartime",
+            "no crisis: insurgency",
+            "no crisis: slave_revolt"
           ],
           "text": "A watch walks {settlement}'s streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
           "slots": [

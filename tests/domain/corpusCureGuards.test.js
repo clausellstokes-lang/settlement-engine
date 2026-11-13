@@ -31,8 +31,11 @@ vi.mock('../../src/domain/display/stateProse/stateProseKernel.js', async (import
 
 /**
  * One row per cure: the town (its seed names its size and its ticked crises), the pool, the cured line's
- * vid, and what makes the line false there.
- * @type {ReadonlyArray<{seed: string, pool: string, vid: number, why: string}>}
+ * vid, and what makes the line false there. A row marked `by: 'record'` guards a line the public sites
+ * never draw (a `dm-only` line, read on the owner's page only): it reads the fixed town's own record
+ * against the line's declaration through the kernel's one rule, and its control is that another line of
+ * the same pool is admitted there.
+ * @type {ReadonlyArray<{seed: string, pool: string, vid: number, why: string, by?: 'record'}>}
  */
 const GUARDS = [
   { seed: 'w5-village-under_siege-1', pool: 'DS-ECO-9::DEFICIT', vid: 1, why: 'a siege: "not enough comes in" presumes a road that is open (the second seat\'s `no crisis: under_siege`)' },
@@ -52,6 +55,8 @@ const GUARDS = [
   { seed: 'rww-city-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 3, why: 'a siege: "Visitors find X\'s market without asking" beside a market critically impaired by the siege (the read\'s M2)' },
   { seed: 'rww-metropolis-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 3, why: 'a siege: the same (the read\'s M2, its second town)' },
   { seed: 'rw3-town-under_siege-1', pool: 'DS-GEN-13::MARKET-OPEN', vid: 4, why: 'a siege: "The market stands where carts always stopped" beside "the caravans have stopped coming" (the read\'s M4, #964)' },
+  { seed: 'w5-city-slave_revolt-102', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 7, by: 'record', why: 'a slave revolt: "its watch keeps the streets" while the revolt holds them (LINES-READ, slave_revolt-town-3)' },
+  { seed: 'w5-city-slave_revolt-102', pool: 'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)', vid: 8, by: 'record', why: 'a slave revolt: "A watch walks X\'s streets" (v7\'s twin)' },
 ];
 
 /** @param {string} seed */
@@ -63,6 +68,12 @@ function configOf(seed) {
 
 /** @type {Map<string, Record<string, Set<number>>>} */
 const READ = new Map();
+/** @type {Map<string, object>} */
+const FACTS = new Map();
+/** @type {Record<string, any>} */
+const CORPUS = {};
+/** @type {{ variantFactDeclaration?: Function, declarationAdmits?: Function }} */
+const RULE = {};
 
 beforeAll(async () => {
   const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
@@ -71,6 +82,15 @@ beforeAll(async () => {
   const { withPublicProse } = await import('../../src/domain/display/publicProse.js');
   const { composePublicProse, PUBLIC_PROSE_SITES } = await import('../../src/components/new/publicProseCompose.js');
   const { publicVeiledRecordOf } = await import('../../src/domain/display/publicSafe.js');
+  const { factsOf } = await import('../../src/domain/facts/factsOf.js');
+  const kernel = await import('../../src/domain/display/stateProse/stateProseKernel.js');
+  const vocabulary = await import('../../src/domain/facts/factVocabulary.js');
+  RULE.variantFactDeclaration = kernel.variantFactDeclaration;
+  RULE.declarationAdmits = vocabulary.declarationAdmits;
+  for (const desk of ['defense', 'economy', 'general', 'power', 'stressors', 'warFaith']) {
+    const leaf = Object.values(await import(`../../src/data/dossierStateProse/${desk}.generated.js`)).find((v) => v && typeof v === 'object');
+    for (const [blockId, block] of Object.entries(leaf)) CORPUS[blockId] = block;
+  }
   await boundary.loadGenerationLawPayloads();
   for (const seed of new Set(GUARDS.map((g) => g.seed))) {
     let town = generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} });
@@ -81,6 +101,7 @@ beforeAll(async () => {
       try { draw(town, false, ctx); } catch { /* a site that throws prints nothing; the row's own control says so */ }
     }
     READ.set(seed, seen.cur);
+    FACTS.set(seed, factsOf(town));
     seen.cur = null;
   }
 }, 300000);
@@ -88,6 +109,15 @@ beforeAll(async () => {
 describe('a cured line is not eligible in the fixed town that made it false', () => {
   for (const g of GUARDS) {
     it(`${g.pool} v${g.vid} at ${g.seed}: ${g.why}`, () => {
+      if (g.by === 'record') {
+        const [blockId, ...rest] = g.pool.split('::'); const key = rest.join('::');
+        const block = CORPUS[blockId]; const pool = block?.pools?.[key] || [];
+        const crisisScoped = block?.poolMeta?.[key]?.crisisScoped === true;
+        const admits = (/** @type {any} */ v) => RULE.declarationAdmits?.(RULE.variantFactDeclaration?.(v), FACTS.get(g.seed), { crisisScoped }).admitted;
+        expect(pool.filter((v) => v.vid !== g.vid).some(admits), `${g.seed}'s record admits no other line of ${g.pool}: re-key the row`).toBe(true);
+        expect(admits(pool.find((v) => v.vid === g.vid)), `${g.pool} v${g.vid} is admitted by ${g.seed}'s record`).toBe(false);
+        return;
+      }
       const pools = READ.get(g.seed) || {};
       expect(Object.keys(pools), `${g.seed} no longer reads ${g.pool}: re-key the row to a town of the case`).toContain(g.pool);
       expect([...pools[g.pool]], `${g.pool} v${g.vid} is eligible at ${g.seed}`).not.toContain(g.vid);
