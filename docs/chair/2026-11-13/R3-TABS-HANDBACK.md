@@ -138,3 +138,15 @@ their other surfaces with `surfaces.sh` (PDF canon/draft/timeline, Foundry journ
   where the capped "Adequate" stood; the pin's point, not Surplus, stands).
 - Other surfaces: the PDF prints no Foundations Food band on the twenty (0); Foundry, Tonight 0.
 - Red first: tests/components/substrateFoodOneHome.test.jsx (red at the base tree: eight of eight towns disagree).
+
+### 8. SubstrateTab — "Trade connectivity" under a siege (round two's #329 #858, the chair's added ruling) — DONE
+- Measure at base, 82 siege births (census, reader, fresh; app shape): the reading folds the siege in as the condition
+  "wartime pressure" (−13/−14 from `causalState.js :: deriveTradeConnectivity`, the defence lane's, not changed), so
+  the row read Strained 45, Adequate 29, Critical 6, Surplus 1, Collapsed 1, while every one of the 82 crises' own
+  summary says "nothing comes in by road".
+- Cure, at the tab, no new reading: under a siege in force the row prints the crisis's own label (`stress.label`,
+  "Under Siege", cased "Under siege"); a siege with no label would print no word of its own (none in the 82). Read in
+  rr2s-town-under_siege-rand-1: "Trade connectivity · Under siege", true. No new words.
+- NAMED, not touched: the note under the rows says "This reading includes the current condition: wartime pressure."
+  under a siege (`domain/display/conditionWords.js`, the condition's name for the siege).
+- Red first: tests/components/substrateTradeUnderSiege.test.jsx (red at the base tree). The eleven SubstrateTab files green.

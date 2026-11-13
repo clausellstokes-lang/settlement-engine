@@ -110,6 +110,22 @@ function foodRecordWord(settlement) {
 }
 
 /**
+ * ⭐ UNDER A SIEGE THE TRADE ROW SAYS SO (R3-TABS, round two's #329 and #858; the chair's ruling of
+ * 2026-11-13: the tab does not print a connectivity word the town's own crisis contradicts). The reading
+ * (`causalState.js :: deriveTradeConnectivity`) folds a siege in as wartime pressure, so the row read
+ * "Adequate" in 29 of 82 siege births at aac79b808 (Surplus in 1) while every one of those crises' own
+ * summary says nothing comes in by road. Under a siege in force the row prints the crisis's own label.
+ * @param {any} settlement
+ * @returns {{ word: string, tone: string } | null}
+ */
+function siegeCrisisWord(settlement) {
+  const stresses = Array.isArray(settlement?.stress) ? settlement.stress : settlement?.stress ? [settlement.stress] : [];
+  const siege = stresses.find((x) => x?.type === 'under_siege');
+  const label = typeof siege?.label === 'string' ? siege.label.trim() : '';
+  return label ? { word: statusCase(label), tone: RED } : null;
+}
+
+/**
  * @param {{ settlement: any }} props
  */
 export default function SubstrateTab({ settlement }) {
@@ -191,7 +207,8 @@ export default function SubstrateTab({ settlement }) {
             of its column exactly as it sat at the right edge of the page. */}
         <NameColumns count={rows.length} style={{ padding: `0 ${SP.md}px` }}>
           {rows.map(row => {
-            const recordRead = row.key === 'food_security' ? foodRecordWord(settlement) : null;
+            const recordRead = row.key === 'food_security' ? foodRecordWord(settlement)
+              : row.key === 'trade_connectivity' ? siegeCrisisWord(settlement) : null;
             return (
             <div key={row.key} data-substrate-row style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
