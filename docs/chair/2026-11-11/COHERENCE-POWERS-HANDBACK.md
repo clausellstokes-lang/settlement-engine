@@ -840,3 +840,131 @@ tip, the plain re-run 34 of 34). **The check after the two commits:** `tests/lin
 but the census, cured as above. L1 at 0ffbf39b8: domain-strict 1,113 (ceiling 1,113), typecheck:ratchet 167 (ceiling
 167), eslint 0. **L5's classing at the tip changes by these two only:** the parked 2 are green, so the line's 8, the
 founding worlds' 1 and the merge seat's 46 remain.
+
+---
+
+# PART 5 — the fifth seat (COHERENCE-POWERS-5, 2026-11-13)
+
+The fifth seat took the lane at 463eb0b04 and cures the findings of REVIEW-POWERS-2 (`REVIEW-POWERS-e86d069be-2026-11-12.md`
+on `lane/chair-2026-11-08`) as the chair ruled them, and nothing else. It works in a scratch worktree on the lane branch; every
+push ran the hook's three gates, plain. **Corpora:** the review's 720 (the census's `births.mjs`, DEFAULT_CONFIG and the
+browser's dials) and the lane's two (R 1,845 with the golden's 525; S 2,460), every one born before (463eb0b04) and after.
+Probes: `probes/COHERENCE-POWERS-5/` (README there). The first act was the measurement: the review's counts reproduced on its
+720 (N1 584 -> 170 and 36 -> 96 by the review's measure; N2 low 295 of 480; N3 the occupier 0 -> 19; census row 16a 332 -> 393).
+
+### Calls taken without the chair (each only declares or names)
+
+1. **The holder whose condition row the record's facts refuse** (a crisis the condition does not name: the calm row is
+   CALM_ONLY) states the seat row's bare fact, "Holds the seat.", with its house second; no constraint and no goal are
+   claimed (the refusal's rule). No new pool, so the repetition guard gains no row.
+2. **A non-holder whose key reaches a seat row** (the occupier's governor, a fractured realm's bloc speaker, the keeper of an
+   empty seat) takes no structural line, the refusal's rule, rather than a new occupier's row (no new words, no new pool).
+3. **The office's band** is the band the seat's own face draws through at the size (poolMap.js :: seatPoolFor: an Elder in a
+   thorp or hamlet, low; a Mayor or Governor above, high), the line's own seat face: the line read 480 of 480 high above
+   hamlets.
+4. **The keeper of an empty seat is not the seat's holder** (rulingChainOf names no one while it stands empty): its card keeps
+   its house's row; 3 of the 720's keepers read a subordinate house row ("Belongs to a lesser old family"). The guard reads the
+   holder only.
+5. **"Of the line"** is a face bearing a title of the noble line's persons ("the lord", "the monarch"); no such face was a
+   body's member on any corpus, so every body is faced by its minted claimant.
+6. **The keeper leaves the claim** (its memberships in the succession's powers dropped, the parties' ranks re-dealt), rather
+   than a different keeper drawn: draw-free, the seat row unchanged.
+7. **N7's doubled word** takes the review's form: the office is dropped where the house title carries its last word
+   ("the boat-headman"); "the mine captain and Headman" is not a doubled word and is unchanged.
+8. **The leaderless line's once-rule** (0ffbf39b8's `pointer`) stays in code; no row carries a pointer now.
+9. **The phone floors, the lighting census and the size ratchet** re-measured through their own doors with their causes
+   (e1f821db3, a4858163b, 6f73bb75b); nothing banked upward.
+
+### Parked for the chair (a ruled design)
+
+- **The density law's rival noble power in a succession town** (`contestsNiche`: The Landed Bloc, The Highborn Circle, The
+  Peerage where they are the roster's niche contender, not the succession's party by the table's rule) is faced by its landed
+  share's house: a miller, a college master, a mine captain (the 720: r2r-metropolis-8's two, r2s-succession_void-city-2's and
+  -metropolis-3's The Landed Bloc; R+S: 13; the line: 22 in succession births). Its pool line reads "Hereditary or institutional
+  claim". RECOMMENDATION: N4's rule (faced by its line, else a minted claimant) extends to every noble power in a succession town;
+  it would change the deal outside the table, so it is the chair's.
+
+### Seen, not chased
+
+- The minted claimants ("the lord", CLAIMANT_FACE's role 'Duke/Duchess') read low influence by the keyword band, as F3's royal
+  claimants did.
+- A keeper who leads a contender ("Renuka Ahuja, first of Landed Gentry … Contests the seat", r2s-succession_void-town-0) is in a
+  contender's party, not a claimant's; the brief ruled the claimant's party.
+
+## 1. Per finding (before -> after; the review's 720, then the lane's R+S 4,305)
+
+| finding | commit | the 720 | R+S | pin / guard |
+|---|---|---|---|---|
+| N1 the holder's card keyed on the seat | c0b46646e | holds the seat 166 -> 689 of 689; subordinate 216 -> 0 (the review's measure, the governing first: 170 -> 689 of 720, the other 31 the keepers of an empty seat; 96 -> 3, three keepers) | 908 -> 4,111 of 4,111; 1,093 -> 0 | seatHolderCard N1, 2 of 2 red first |
+| N2 the higher of the two hats | a355ef454 | below the office 321 -> 0; village-metropolis low 295 -> 0 of 480 | 2,069 -> 0; 1,915 -> 0 of 2,797 | seatHolderCard N2, 2 of 2 red first |
+| N3 "Holds the seat" the holder's alone | 7c2a95aa7 | 56 -> 0 (the review's measure 52 -> 0; 4 keepers) | 322 -> 0 | seatHolderCard N3, 2 of 2 red first |
+| N4 the body faced by its line | fe1440612 | tradespeople 19 -> 0, no one 2 -> 0; 21 claimants minted | 97 -> 0, 17 -> 0; 114 minted | successionClaimants 4 of 6 red first |
+| N4 the keeper in no claimant's party | 52a134715 | 3 -> 0 of 31 vacancies | 5 -> 0 of 194 | successionClaimants keeper checks, 2 red first |
+| N5 the title reads its count | f3ef5aca6 | titles over fewer names on the pages: line 173, 463eb0b04 209, tip 0 | (display) | seatWordsOnce N5, 2 of 2 red first |
+| N6 one office on the Connection row | 9ae99bf8b | 31 -> 0 | (display) | seatWordsOnce N6, 2 of 2 red first |
+| N7 no doubled office word | f019d1aad | 29 -> 0 | (display) | seatWordsOnce N7, 2 of 2 red first |
+| N7 the keeper's one title | c5ef4c3a4 | 30 -> 0 of 31 | (display) | seatWordsOnce keeper, 2 of 2 red first |
+| N8 the share pin | ec1b31471 | — | — | its subject moved for ONE identity (the dual-hat office at share 0): re-keyed by identity; planted -0.5 red, the loosened pin passed it |
+| N9 the capture class | 7f286e9eb | the record states the class by its rule | — | — |
+| N10 coherenceNotes named | da39e6e0a | — | — | — |
+| N11 the hand-back's claim tagged | a4fc46b10 | enforcement-claims 2 red -> 23 of 23 | — | — |
+
+## 2. THE GUARD (1d11b25e0, `tests/components/seatHolderOnThePage.test.jsx`)
+
+On the rendered page, per town: the Power tab prints the holder; the people list opened as the owner reads it; the holder's
+card (1) says it holds the seat, (2) carries no subordinate row, (3) reads the office's dots or more; (4) no other card says it
+holds the seat. The review's eight towns, and 114 births (six sizes x four random, and the fifteen crises forced at each
+size). **Red at 463eb0b04: (1) 91, (2) 42, (3) 51, (4) 18. Planted at the tip, each alone:** isHolder off -> (1) 115, (2) 42;
+the band raise skipped -> (3) 51; the seat rows not withheld -> (4) 20. Green at the tip.
+
+## 3. THE CENSUS COUNTER (SECOND-WAVE-CENSUS, both trees rendered, 720 each)
+
+`compare.mjs` line (3575cf061) against the tip: **no row rises; no new row.** Row 16a "ruling three lists fewer" 332 -> 184
+(BETTER; against 463eb0b04 393 -> 184): the 184 are the counter's three-line window, which reads a boost line between two names
+or the keeper's "Acting …" label where it looks for "Steward"; the true class (every name row under the title, `n5true.mjs`) is
+0 at the tip (173 at the line). Row 4 103 -> 94, row 14 167 -> 166, row 16b 291 -> 282 (the lane's earlier falls); every other
+row equal. GLANCE towns (excluding 17, 18) 623 -> 576.
+
+## 4. THE FIELD DIFF BY FAMILY
+
+**This seat's own (463eb0b04 against the tip, R+S, whole records): 3,413 of 4,305 births differ.** relationships 153,771
+leaves; npcs 134,042; conflicts 2,705 / 2,616; prominentRelationship ~2,200; the receipt's judgments 527; simulationTrace 157;
+stress.cast 100; pressureSentence 82. **Labels (coup, capture, stability, legitimacy, government, power labels): 0.**
+powerStructure.factions and every economy, institution and service family: 0. The seat's person: the same in 4,305 of 4,305
+(`sameseat.mjs`). By cause, on the 720 commit by commit: N1 the card's three template fields only (523 births); N2 the leader's
+influence and power (338, all on the raised card; no birth without a raise) and what reads them — the ties' archetype
+(computeRelTension reads the pair's power gap), the tie prose's hash rotation (fnv1a32 plus a counter: no stream), the goals
+dealt from the ties, the conflicts read from the ties' rival pairs, the prominent relationship, the receipt; N3 56 cards' three
+fields; N4 14 births (21 claimants added, 0 removed; by card id no existing card's drawn leaf moves) and 3 births (the keeper);
+N5–N7 no record.
+
+**The whole lane (the line 3575cf061 against the tip): 3,737 of 4,305 births differ** (rvw 511, rvf 651, golden 393, critique
+573, l2 1,609); the table is the draft record's `_wholeLaneFieldDiff`.
+
+## 5. THE SIX SURFACES (measured; no door run)
+
+| surface | state | at the tip |
+|---|---|---|
+| generator golden master | MOVED | 393 of 525 configurations differ (was 376) |
+| espionage dormancy fence | MOVED | 1 of 21, the driven golden's hash |
+| dossier prose manifest | MOVED | 3 of 17: the drift arm (998 rows in its capped list), the tally, the audience arm 204 against 203 |
+| PDF golden (pdf.6) | MOVED | red |
+| Herald knowledge desk golden | MOVED | 1 of 3, its hash |
+| preset-lighting witness | UNMOVED | green |
+
+The repetition guard (poolDominance), red at 463eb0b04 for the six pools with no row, is GREEN at the tip: the holders read the
+seat's government rows (N1), so the draws fall (R 21 -> 6, S 50 -> 7) and the guard's own corpus draws none. Nothing banked.
+
+## 6. THE GATES
+
+At every commit touching `src/`: domain-strict exit 0 (1,113, ceiling 1,113); typecheck:ratchet exit 0 (167, ceiling 167); eslint
+on the touched files exit 0. The push at a4fc46b10 ran the hook's three gates, plain: exit 0.
+
+## 7. New words for the owner's veto
+
+- The holder's card, the house second: "Still <the house title> as well." ("Still the boat-headman as well.")
+- The holder's card where the condition's row is refused: "Holds the seat."
+- The DM block's title: "The ruling two of <power>", "Who leads <power>", "No one stands at the head of <power>".
+- The old families' body's face: "the lord" (an existing title, F3's claimant mint).
+- The DM block's keeper label and the leader's own house's Connection row reuse the seat row's words ("Acting Elder", "Elder
+  Cosij Chan, the boat-headman").
