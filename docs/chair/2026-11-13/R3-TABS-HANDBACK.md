@@ -43,3 +43,29 @@ their other surfaces with `surfaces.sh` (PDF canon/draft/timeline, Foundry journ
   the defence lane's, NAMED, not touched; some REQ may be the PDF roster's); timeline packet, Foundry journal and
   Tonight sheet 0.
 - Red first: tests/components/defenseForceCardNoProvenance.test.jsx (27 badges on twelve towns at the base).
+
+### 2. DefenseTab — "Underworld: <faction> · <band>" (c) — DONE
+- Line: #816 (MED), rr2s-city-famine-rand-1: "Underworld: Thieves' Guild · Minor" beside the Power tab's "Criminal 18".
+- Measure at base: the line read the faction's stored `powerLabel`; the generators' own ladder (factionDynamics.js,
+  economyReconciliation.js, neighbourFactions.js: ≥35 Dominant, ≥25 Strong, ≥18 Significant, ≥10 Minor) bands 18
+  Significant. On 884 births (census + reader + fresh) 1,105 of 3,247 factions carry a label off their own figure
+  (48 of 150 criminal factions). The stored label cannot be read; the strength is the Power tab's (T2-20).
+- Cure: the line names the faction ("Underworld: Thieves' Guild"), true in its three towns of the twenty.
+- NAMED, not touched: the stale `powerLabel` itself (the power generators); the PDF prints the same band
+  (DefenseSecurity.jsx :: "Underworld:", 3 per variant on the twenty, the defence lane's).
+- Red first: tests/components/defenseUnderworldLine.test.jsx.
+
+## The chair's added rulings (arrived by message, 2026-11-13 18:51 and 18:56 UTC; copied here)
+- **defenseStateProse.js (posture selector), after point 48 lands on the line** (the chair gives its hash): merge the
+  line's tip into this lane (a merge, never a rebase), then do LAST: L1 one ladder for one number (the posture line
+  reads the readiness BADGE: Fortress/Well-Defended → strong pool; Defensible → adequate; Lightly Defended/Vulnerable →
+  weak; Undefended → critical; no new words, all four pools kept; read ten towns of each changed cell and declare);
+  L2 a row's sentence is drawn within the band its bar prints (classes A1, F; do not touch the force reader; say which
+  tree was measured); L3 every band has a pool (C-L5: measure the six births, say what key is missing). Corpus variants
+  are the corpus lane's: a pool lacking a true variant for a cell is parked with the cell and three towns. Acceptance:
+  the reader's classes E, K, A1, F at zero by its own instrument. Until point 48 lands the file is not opened for writing.
+- **SubstrateTab, round two's #329 and #858**: "Trade connectivity: Adequate" under a siege that cuts every road. The
+  reading (causalState.js) is the defence lane's: not changed. Measure what it takes from a siege in force and what the
+  tab prints; the tab does not print a connectivity word the town's own crisis contradicts: under such a siege the row
+  says so in the crisis's own words from the record, or does not print; if that cannot be done at the tab without a new
+  reading, PARK with the measure and three towns.

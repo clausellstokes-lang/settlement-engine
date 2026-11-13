@@ -500,10 +500,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             </div>
           </div>}
 
-          {/* The criminal faction as ONE coupled line, name and band (T2-20): its description
-              lives on Power's roster and the capture state is Power's. */}
+          {/* The criminal faction as ONE line, by name (T2-20): its description lives on Power's
+              roster and the capture state is Power's. ⛔ AND SO DOES ITS STRENGTH (R3-TABS, cut #816,
+              the chair's ruling (c)): the band printed here was the faction's stored `powerLabel`,
+              stale against the faction's own figure on 1,105 of 3,247 factions at aac79b808 ("Thieves'
+              Guild · Minor" beside the Power tab's 18, which the generators' ladder calls Significant). */}
           {crimFaction&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',padding:'7px 13px',fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.danger}}>
-            Underworld: {crimFaction.faction}{crimFaction.powerLabel?` · ${crimFaction.powerLabel}`:''}
+            Underworld: {crimFaction.faction}
           </div>}
 
           {/* Crime types — as enforcement challenges, not economic statistics */}
