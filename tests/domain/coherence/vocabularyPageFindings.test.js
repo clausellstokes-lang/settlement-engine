@@ -306,3 +306,15 @@ describe('F2 (second read) — streets are false only in a thorp or a hamlet', (
     expect(words(place('town', 3000), q)).toEqual([]);
   });
 });
+
+/**
+ * F8 of the second read (REVIEW-W2B-1fb15980d: "one true sentence newly flagged in shrine-only towns, 'The faith's god
+ * and the church's name are yours to set.'"). "The church's name" invites the reader to name a church; it puts none in
+ * the town. Spared by its words; the church's other possessions still name one. Red at 4f912cb2b.
+ */
+describe('F8 (second read) — "the church\'s name" names no church here', () => {
+  test('the invitation to name the church is spared; a church\'s bell is not', () => {
+    expect(thingsNamedIn('The faith\'s god and the church\'s name are yours to set.')).toEqual([]);
+    expect(thingsNamedIn('The church\'s bell rings over the square at noon.')).toEqual(['temple']);
+  });
+});
