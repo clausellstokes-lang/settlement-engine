@@ -1,0 +1,210 @@
+{"seed":"rv3-under_siege-village-0","stress":["under_siege"],"pros":"Struggling","stand":"Poor","line":"Poor before the siege; Struggling while it lasts.","rs":10,"rl":"Undefended"}
+{"seed":"rv3-under_siege-village-1","stress":["under_siege"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the siege; Struggling while it lasts.","rs":23,"rl":"Vulnerable"}
+{"seed":"rv3-under_siege-village-2","stress":["under_siege"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the siege; Struggling while it lasts.","rs":9,"rl":"Undefended"}
+{"seed":"rv3-under_siege-town-0","stress":["under_siege"],"pros":"Struggling","stand":"Comfortable","line":"Comfortable before the siege; Struggling while it lasts.","rs":22,"rl":"Vulnerable"}
+{"seed":"rv3-under_siege-town-1","stress":["under_siege"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the siege; Struggling while it lasts.","rs":24,"rl":"Lightly Defended"}
+{"seed":"rv3-under_siege-town-2","stress":["under_siege"],"pros":"Struggling","stand":"Comfortable","line":"Comfortable before the siege; Struggling while it lasts.","rs":22,"rl":"Vulnerable"}
+{"seed":"rv3-under_siege-city-0","stress":["under_siege"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege; Struggling while it lasts.","rs":77,"rl":"Fortress"}
+{"seed":"rv3-under_siege-city-1","stress":["under_siege"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege; Struggling while it lasts.","rs":78,"rl":"Fortress"}
+{"seed":"rv3-under_siege-city-2","stress":["under_siege"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege; Struggling while it lasts.","rs":74,"rl":"Well-Defended"}
+{"seed":"rv3-under_siege-metropolis-0","stress":["under_siege"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege; Struggling while it lasts.","rs":77,"rl":"Fortress"}
+{"seed":"rv3-under_siege-metropolis-1","stress":["under_siege"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege; Struggling while it lasts.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-under_siege-metropolis-2","stress":["under_siege"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege; Struggling while it lasts.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-famine-village-0","stress":["famine"],"pros":"Struggling","stand":"Poor","line":"Poor before the famine; Struggling while it lasts.","rs":18,"rl":"Vulnerable"}
+{"seed":"rv3-famine-village-1","stress":["famine"],"pros":"Struggling","stand":"Poor","line":"Poor before the famine; Struggling while it lasts.","rs":10,"rl":"Undefended"}
+{"seed":"rv3-famine-village-2","stress":["famine"],"pros":"Struggling","stand":"Poor","line":"Poor before the famine; Struggling while it lasts.","rs":24,"rl":"Lightly Defended"}
+{"seed":"rv3-famine-town-0","stress":["famine"],"pros":"Struggling","stand":"Poor","line":"Poor before the famine; Struggling while it lasts.","rs":18,"rl":"Vulnerable"}
+{"seed":"rv3-famine-town-1","stress":["famine"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine; Struggling while it lasts.","rs":19,"rl":"Vulnerable"}
+{"seed":"rv3-famine-town-2","stress":["famine"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the famine; Struggling while it lasts.","rs":26,"rl":"Lightly Defended"}
+{"seed":"rv3-famine-city-0","stress":["famine"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine; Struggling while it lasts.","rs":71,"rl":"Well-Defended"}
+{"seed":"rv3-famine-city-1","stress":["famine"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine; Struggling while it lasts.","rs":72,"rl":"Well-Defended"}
+{"seed":"rv3-famine-city-2","stress":["famine"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine; Struggling while it lasts.","rs":68,"rl":"Well-Defended"}
+{"seed":"rv3-famine-metropolis-0","stress":["famine"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine; Struggling while it lasts.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-famine-metropolis-1","stress":["famine"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine; Struggling while it lasts.","rs":76,"rl":"Fortress"}
+{"seed":"rv3-famine-metropolis-2","stress":["famine"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine; Struggling while it lasts.","rs":76,"rl":"Fortress"}
+{"seed":"rv3-occupied-village-0","stress":["occupied"],"pros":"Poor","stand":"Poor","line":null,"rs":1,"rl":"Undefended"}
+{"seed":"rv3-occupied-village-1","stress":["occupied"],"pros":"Poor","stand":"Moderate","line":"Moderate before the occupation; Poor while it lasts.","rs":0,"rl":"Undefended"}
+{"seed":"rv3-occupied-village-2","stress":["occupied"],"pros":"Poor","stand":"Poor","line":null,"rs":0,"rl":"Undefended"}
+{"seed":"rv3-occupied-town-0","stress":["occupied"],"pros":"Poor","stand":"Moderate","line":"Moderate before the occupation; Poor while it lasts.","rs":14,"rl":"Vulnerable"}
+{"seed":"rv3-occupied-town-1","stress":["occupied"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the occupation; Poor while it lasts.","rs":66,"rl":"Well-Defended"}
+{"seed":"rv3-occupied-town-2","stress":["occupied"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the occupation; Poor while it lasts.","rs":42,"rl":"Defensible"}
+{"seed":"rv3-occupied-city-0","stress":["occupied"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the occupation; Poor while it lasts.","rs":73,"rl":"Well-Defended"}
+{"seed":"rv3-occupied-city-1","stress":["occupied"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the occupation; Poor while it lasts.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-occupied-city-2","stress":["occupied"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the occupation; Poor while it lasts.","rs":79,"rl":"Fortress"}
+{"seed":"rv3-occupied-metropolis-0","stress":["occupied"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the occupation; Poor while it lasts.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-occupied-metropolis-1","stress":["occupied"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the occupation; Poor while it lasts.","rs":76,"rl":"Fortress"}
+{"seed":"rv3-occupied-metropolis-2","stress":["occupied"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the occupation; Poor while it lasts.","rs":82,"rl":"Fortress"}
+{"seed":"rv3-politically_fractured-village-0","stress":["politically_fractured"],"pros":"Poor","stand":"Moderate","line":"Moderate before the split between the powers; Poor while it lasts.","rs":13,"rl":"Vulnerable"}
+{"seed":"rv3-politically_fractured-village-1","stress":["politically_fractured"],"pros":"Struggling","stand":"Poor","line":"Poor before the split between the powers; Struggling while it lasts.","rs":8,"rl":"Undefended"}
+{"seed":"rv3-politically_fractured-village-2","stress":["politically_fractured"],"pros":"Struggling","stand":"Poor","line":"Poor before the split between the powers; Struggling while it lasts.","rs":16,"rl":"Vulnerable"}
+{"seed":"rv3-politically_fractured-town-0","stress":["politically_fractured"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the split between the powers; Moderate while it lasts.","rs":46,"rl":"Defensible"}
+{"seed":"rv3-politically_fractured-town-1","stress":["politically_fractured"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the split between the powers; Comfortable while it lasts.","rs":56,"rl":"Well-Defended"}
+{"seed":"rv3-politically_fractured-town-2","stress":["politically_fractured"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the split between the powers; Moderate while it lasts.","rs":25,"rl":"Lightly Defended"}
+{"seed":"rv3-politically_fractured-city-0","stress":["politically_fractured"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the split between the powers; Comfortable while it lasts.","rs":67,"rl":"Well-Defended"}
+{"seed":"rv3-politically_fractured-city-1","stress":["politically_fractured"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the split between the powers; Comfortable while it lasts.","rs":76,"rl":"Fortress"}
+{"seed":"rv3-politically_fractured-city-2","stress":["politically_fractured"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the split between the powers; Comfortable while it lasts.","rs":85,"rl":"Fortress"}
+{"seed":"rv3-politically_fractured-metropolis-0","stress":["politically_fractured"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the split between the powers; Comfortable while it lasts.","rs":76,"rl":"Fortress"}
+{"seed":"rv3-politically_fractured-metropolis-1","stress":["politically_fractured"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the split between the powers; Comfortable while it lasts.","rs":83,"rl":"Fortress"}
+{"seed":"rv3-politically_fractured-metropolis-2","stress":["politically_fractured"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the split between the powers; Comfortable while it lasts.","rs":77,"rl":"Fortress"}
+{"seed":"rv3-indebted-village-0","stress":["indebted"],"pros":"Struggling","stand":"Poor","line":"Poor before the debt crisis; Struggling while it lasts.","rs":7,"rl":"Undefended"}
+{"seed":"rv3-indebted-village-1","stress":["indebted"],"pros":"Poor","stand":"Moderate","line":"Moderate before the debt crisis; Poor while it lasts.","rs":9,"rl":"Undefended"}
+{"seed":"rv3-indebted-village-2","stress":["indebted"],"pros":"Struggling","stand":"Poor","line":"Poor before the debt crisis; Struggling while it lasts.","rs":4,"rl":"Undefended"}
+{"seed":"rv3-indebted-town-0","stress":["indebted"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis; Comfortable while it lasts.","rs":25,"rl":"Lightly Defended"}
+{"seed":"rv3-indebted-town-1","stress":["indebted"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the debt crisis; Moderate while it lasts.","rs":32,"rl":"Lightly Defended"}
+{"seed":"rv3-indebted-town-2","stress":["indebted"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis; Comfortable while it lasts.","rs":46,"rl":"Defensible"}
+{"seed":"rv3-indebted-city-0","stress":["indebted"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis; Comfortable while it lasts.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-indebted-city-1","stress":["indebted"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis; Comfortable while it lasts.","rs":56,"rl":"Well-Defended"}
+{"seed":"rv3-indebted-city-2","stress":["indebted"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis; Comfortable while it lasts.","rs":65,"rl":"Well-Defended"}
+{"seed":"rv3-indebted-metropolis-0","stress":["indebted"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis; Comfortable while it lasts.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-indebted-metropolis-1","stress":["indebted"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis; Comfortable while it lasts.","rs":87,"rl":"Fortress"}
+{"seed":"rv3-indebted-metropolis-2","stress":["indebted"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis; Comfortable while it lasts.","rs":87,"rl":"Fortress"}
+{"seed":"rv3-recently_betrayed-village-0","stress":["recently_betrayed"],"pros":"Struggling","stand":"Poor","line":"Poor before the betrayal; Struggling while it lasts.","rs":10,"rl":"Undefended"}
+{"seed":"rv3-recently_betrayed-village-1","stress":["recently_betrayed"],"pros":"Struggling","stand":"Poor","line":"Poor before the betrayal; Struggling while it lasts.","rs":13,"rl":"Vulnerable"}
+{"seed":"rv3-recently_betrayed-village-2","stress":["recently_betrayed"],"pros":"Struggling","stand":"Poor","line":"Poor before the betrayal; Struggling while it lasts.","rs":3,"rl":"Undefended"}
+{"seed":"rv3-recently_betrayed-town-0","stress":["recently_betrayed"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the betrayal; Comfortable while it lasts.","rs":57,"rl":"Well-Defended"}
+{"seed":"rv3-recently_betrayed-town-1","stress":["recently_betrayed"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the betrayal; Moderate while it lasts.","rs":40,"rl":"Defensible"}
+{"seed":"rv3-recently_betrayed-town-2","stress":["recently_betrayed"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the betrayal; Comfortable while it lasts.","rs":47,"rl":"Defensible"}
+{"seed":"rv3-recently_betrayed-city-0","stress":["recently_betrayed"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the betrayal; Comfortable while it lasts.","rs":82,"rl":"Fortress"}
+{"seed":"rv3-recently_betrayed-city-1","stress":["recently_betrayed"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the betrayal; Comfortable while it lasts.","rs":84,"rl":"Fortress"}
+{"seed":"rv3-recently_betrayed-city-2","stress":["recently_betrayed"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the betrayal; Comfortable while it lasts.","rs":71,"rl":"Well-Defended"}
+{"seed":"rv3-recently_betrayed-metropolis-0","stress":["recently_betrayed"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the betrayal; Comfortable while it lasts.","rs":79,"rl":"Fortress"}
+{"seed":"rv3-recently_betrayed-metropolis-1","stress":["recently_betrayed"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the betrayal; Comfortable while it lasts.","rs":71,"rl":"Well-Defended"}
+{"seed":"rv3-recently_betrayed-metropolis-2","stress":["recently_betrayed"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the betrayal; Comfortable while it lasts.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-infiltrated-village-0","stress":["infiltrated"],"pros":"Poor","stand":"Poor","line":null,"rs":9,"rl":"Undefended"}
+{"seed":"rv3-infiltrated-village-1","stress":["infiltrated"],"pros":"Moderate","stand":"Moderate","line":null,"rs":11,"rl":"Undefended"}
+{"seed":"rv3-infiltrated-village-2","stress":["infiltrated"],"pros":"Poor","stand":"Poor","line":null,"rs":3,"rl":"Undefended"}
+{"seed":"rv3-infiltrated-town-0","stress":["infiltrated"],"pros":"Moderate","stand":"Moderate","line":null,"rs":34,"rl":"Lightly Defended"}
+{"seed":"rv3-infiltrated-town-1","stress":["infiltrated"],"pros":"Comfortable","stand":"Comfortable","line":null,"rs":51,"rl":"Defensible"}
+{"seed":"rv3-infiltrated-town-2","stress":["infiltrated"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":60,"rl":"Well-Defended"}
+{"seed":"rv3-infiltrated-city-0","stress":["infiltrated"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":58,"rl":"Well-Defended"}
+{"seed":"rv3-infiltrated-city-1","stress":["infiltrated"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":76,"rl":"Fortress"}
+{"seed":"rv3-infiltrated-city-2","stress":["infiltrated"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":80,"rl":"Fortress"}
+{"seed":"rv3-infiltrated-metropolis-0","stress":["infiltrated"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":70,"rl":"Well-Defended"}
+{"seed":"rv3-infiltrated-metropolis-1","stress":["infiltrated"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":78,"rl":"Fortress"}
+{"seed":"rv3-infiltrated-metropolis-2","stress":["infiltrated"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":84,"rl":"Fortress"}
+{"seed":"rv3-plague_onset-village-0","stress":["plague_onset"],"pros":"Poor","stand":"Moderate","line":"Moderate before the outbreak; Poor while it lasts.","rs":5,"rl":"Undefended"}
+{"seed":"rv3-plague_onset-village-1","stress":["plague_onset"],"pros":"Poor","stand":"Moderate","line":"Moderate before the outbreak; Poor while it lasts.","rs":5,"rl":"Undefended"}
+{"seed":"rv3-plague_onset-village-2","stress":["plague_onset"],"pros":"Struggling","stand":"Poor","line":"Poor before the outbreak; Struggling while it lasts.","rs":9,"rl":"Undefended"}
+{"seed":"rv3-plague_onset-town-0","stress":["plague_onset"],"pros":"Poor","stand":"Comfortable","line":"Comfortable before the outbreak; Poor while it lasts.","rs":30,"rl":"Lightly Defended"}
+{"seed":"rv3-plague_onset-town-1","stress":["plague_onset"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the outbreak; Moderate while it lasts.","rs":22,"rl":"Vulnerable"}
+{"seed":"rv3-plague_onset-town-2","stress":["plague_onset"],"pros":"Moderate","stand":"Moderate","line":null,"rs":49,"rl":"Defensible"}
+{"seed":"rv3-plague_onset-city-0","stress":["plague_onset"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the outbreak; Moderate while it lasts.","rs":69,"rl":"Well-Defended"}
+{"seed":"rv3-plague_onset-city-1","stress":["plague_onset"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the outbreak; Comfortable while it lasts.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-plague_onset-city-2","stress":["plague_onset"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the outbreak; Comfortable while it lasts.","rs":67,"rl":"Well-Defended"}
+{"seed":"rv3-plague_onset-metropolis-0","stress":["plague_onset"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the outbreak; Comfortable while it lasts.","rs":79,"rl":"Fortress"}
+{"seed":"rv3-plague_onset-metropolis-1","stress":["plague_onset"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the outbreak; Moderate while it lasts.","rs":88,"rl":"Fortress"}
+{"seed":"rv3-plague_onset-metropolis-2","stress":["plague_onset"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the outbreak; Comfortable while it lasts.","rs":87,"rl":"Fortress"}
+{"seed":"rv3-succession_void-village-0","stress":["succession_void"],"pros":"Comfortable","stand":"Comfortable","line":null,"rs":3,"rl":"Undefended"}
+{"seed":"rv3-succession_void-village-1","stress":["succession_void"],"pros":"Moderate","stand":"Moderate","line":null,"rs":17,"rl":"Vulnerable"}
+{"seed":"rv3-succession_void-village-2","stress":["succession_void"],"pros":"Moderate","stand":"Moderate","line":null,"rs":0,"rl":"Undefended"}
+{"seed":"rv3-succession_void-town-0","stress":["succession_void"],"pros":"Comfortable","stand":"Comfortable","line":null,"rs":54,"rl":"Defensible"}
+{"seed":"rv3-succession_void-town-1","stress":["succession_void"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":36,"rl":"Lightly Defended"}
+{"seed":"rv3-succession_void-town-2","stress":["succession_void"],"pros":"Moderate","stand":"Moderate","line":null,"rs":21,"rl":"Vulnerable"}
+{"seed":"rv3-succession_void-city-0","stress":["succession_void"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-succession_void-city-1","stress":["succession_void"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":77,"rl":"Fortress"}
+{"seed":"rv3-succession_void-city-2","stress":["succession_void"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":63,"rl":"Well-Defended"}
+{"seed":"rv3-succession_void-metropolis-0","stress":["succession_void"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":82,"rl":"Fortress"}
+{"seed":"rv3-succession_void-metropolis-1","stress":["succession_void"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":67,"rl":"Well-Defended"}
+{"seed":"rv3-succession_void-metropolis-2","stress":["succession_void"],"pros":"Prosperous","stand":"Prosperous","line":null,"rs":77,"rl":"Fortress"}
+{"seed":"rv3-monster_pressure-village-0","stress":["monster_pressure"],"pros":"Struggling","stand":"Poor","line":"Poor before the raids; Struggling while they last.","rs":8,"rl":"Undefended"}
+{"seed":"rv3-monster_pressure-village-1","stress":["monster_pressure"],"pros":"Struggling","stand":"Poor","line":"Poor before the raids; Struggling while they last.","rs":15,"rl":"Vulnerable"}
+{"seed":"rv3-monster_pressure-village-2","stress":["monster_pressure"],"pros":"Struggling","stand":"Poor","line":"Poor before the raids; Struggling while they last.","rs":12,"rl":"Vulnerable"}
+{"seed":"rv3-monster_pressure-town-0","stress":["monster_pressure"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the raids; Comfortable while they last.","rs":61,"rl":"Well-Defended"}
+{"seed":"rv3-monster_pressure-town-1","stress":["monster_pressure"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the raids; Comfortable while they last.","rs":36,"rl":"Lightly Defended"}
+{"seed":"rv3-monster_pressure-town-2","stress":["monster_pressure"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the raids; Moderate while they last.","rs":67,"rl":"Well-Defended"}
+{"seed":"rv3-monster_pressure-city-0","stress":["monster_pressure"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the raids; Comfortable while they last.","rs":88,"rl":"Fortress"}
+{"seed":"rv3-monster_pressure-city-1","stress":["monster_pressure"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the raids; Comfortable while they last.","rs":76,"rl":"Fortress"}
+{"seed":"rv3-monster_pressure-city-2","stress":["monster_pressure"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the raids; Comfortable while they last.","rs":81,"rl":"Fortress"}
+{"seed":"rv3-monster_pressure-metropolis-0","stress":["monster_pressure"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the raids; Comfortable while they last.","rs":86,"rl":"Fortress"}
+{"seed":"rv3-monster_pressure-metropolis-1","stress":["monster_pressure"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the raids; Comfortable while they last.","rs":85,"rl":"Fortress"}
+{"seed":"rv3-monster_pressure-metropolis-2","stress":["monster_pressure"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the raids; Comfortable while they last.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-insurgency-village-0","stress":["insurgency"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the insurgency; Moderate while it lasts.","rs":11,"rl":"Undefended"}
+{"seed":"rv3-insurgency-village-1","stress":["insurgency"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the insurgency; Moderate while it lasts.","rs":12,"rl":"Vulnerable"}
+{"seed":"rv3-insurgency-village-2","stress":["insurgency"],"pros":"Poor","stand":"Moderate","line":"Moderate before the insurgency; Poor while it lasts.","rs":15,"rl":"Vulnerable"}
+{"seed":"rv3-insurgency-town-0","stress":["insurgency"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the insurgency; Comfortable while it lasts.","rs":26,"rl":"Lightly Defended"}
+{"seed":"rv3-insurgency-town-1","stress":["insurgency"],"pros":"Poor","stand":"Moderate","line":"Moderate before the insurgency; Poor while it lasts.","rs":28,"rl":"Lightly Defended"}
+{"seed":"rv3-insurgency-town-2","stress":["insurgency"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the insurgency; Comfortable while it lasts.","rs":49,"rl":"Defensible"}
+{"seed":"rv3-insurgency-city-0","stress":["insurgency"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the insurgency; Comfortable while it lasts.","rs":84,"rl":"Fortress"}
+{"seed":"rv3-insurgency-city-1","stress":["insurgency"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the insurgency; Comfortable while it lasts.","rs":57,"rl":"Well-Defended"}
+{"seed":"rv3-insurgency-city-2","stress":["insurgency"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the insurgency; Comfortable while it lasts.","rs":68,"rl":"Well-Defended"}
+{"seed":"rv3-insurgency-metropolis-0","stress":["insurgency"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the insurgency; Comfortable while it lasts.","rs":73,"rl":"Well-Defended"}
+{"seed":"rv3-insurgency-metropolis-1","stress":["insurgency"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the insurgency; Comfortable while it lasts.","rs":79,"rl":"Fortress"}
+{"seed":"rv3-insurgency-metropolis-2","stress":["insurgency"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the insurgency; Comfortable while it lasts.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-religious_conversion-village-0","stress":["religious_conversion"],"pros":"Struggling","stand":"Poor","line":"Poor before the conversion; Struggling while it lasts.","rs":13,"rl":"Vulnerable"}
+{"seed":"rv3-religious_conversion-village-1","stress":["religious_conversion"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the conversion; Moderate while it lasts.","rs":11,"rl":"Undefended"}
+{"seed":"rv3-religious_conversion-village-2","stress":["religious_conversion"],"pros":"Struggling","stand":"Poor","line":"Poor before the conversion; Struggling while it lasts.","rs":19,"rl":"Vulnerable"}
+{"seed":"rv3-religious_conversion-town-0","stress":["religious_conversion"],"pros":"Poor","stand":"Moderate","line":"Moderate before the conversion; Poor while it lasts.","rs":41,"rl":"Defensible"}
+{"seed":"rv3-religious_conversion-town-1","stress":["religious_conversion"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the conversion; Comfortable while it lasts.","rs":45,"rl":"Defensible"}
+{"seed":"rv3-religious_conversion-town-2","stress":["religious_conversion"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the conversion; Moderate while it lasts.","rs":26,"rl":"Lightly Defended"}
+{"seed":"rv3-religious_conversion-city-0","stress":["religious_conversion"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the conversion; Comfortable while it lasts.","rs":72,"rl":"Well-Defended"}
+{"seed":"rv3-religious_conversion-city-1","stress":["religious_conversion"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the conversion; Comfortable while it lasts.","rs":78,"rl":"Fortress"}
+{"seed":"rv3-religious_conversion-city-2","stress":["religious_conversion"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the conversion; Comfortable while it lasts.","rs":79,"rl":"Fortress"}
+{"seed":"rv3-religious_conversion-metropolis-0","stress":["religious_conversion"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the conversion; Comfortable while it lasts.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-religious_conversion-metropolis-1","stress":["religious_conversion"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the conversion; Comfortable while it lasts.","rs":81,"rl":"Fortress"}
+{"seed":"rv3-religious_conversion-metropolis-2","stress":["religious_conversion"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the conversion; Comfortable while it lasts.","rs":79,"rl":"Fortress"}
+{"seed":"rv3-slave_revolt-village-0","stress":["slave_revolt"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the revolt; Struggling while it lasts.","rs":16,"rl":"Vulnerable"}
+{"seed":"rv3-slave_revolt-village-1","stress":["slave_revolt"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the revolt; Comfortable while it lasts.","rs":21,"rl":"Vulnerable"}
+{"seed":"rv3-slave_revolt-village-2","stress":["slave_revolt"],"pros":"Struggling","stand":"Poor","line":"Poor before the revolt; Struggling while it lasts.","rs":11,"rl":"Undefended"}
+{"seed":"rv3-slave_revolt-town-0","stress":["slave_revolt"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the revolt; Moderate while it lasts.","rs":25,"rl":"Lightly Defended"}
+{"seed":"rv3-slave_revolt-town-1","stress":["slave_revolt"],"pros":"Poor","stand":"Comfortable","line":"Comfortable before the revolt; Poor while it lasts.","rs":64,"rl":"Well-Defended"}
+{"seed":"rv3-slave_revolt-town-2","stress":["slave_revolt"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the revolt; Struggling while it lasts.","rs":36,"rl":"Lightly Defended"}
+{"seed":"rv3-slave_revolt-city-0","stress":["slave_revolt"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the revolt; Poor while it lasts.","rs":61,"rl":"Well-Defended"}
+{"seed":"rv3-slave_revolt-city-1","stress":["slave_revolt"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the revolt; Poor while it lasts.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-slave_revolt-city-2","stress":["slave_revolt"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the revolt; Moderate while it lasts.","rs":64,"rl":"Well-Defended"}
+{"seed":"rv3-slave_revolt-metropolis-0","stress":["slave_revolt"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the revolt; Poor while it lasts.","rs":88,"rl":"Fortress"}
+{"seed":"rv3-slave_revolt-metropolis-1","stress":["slave_revolt"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the revolt; Moderate while it lasts.","rs":87,"rl":"Fortress"}
+{"seed":"rv3-slave_revolt-metropolis-2","stress":["slave_revolt"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the revolt; Moderate while it lasts.","rs":79,"rl":"Fortress"}
+{"seed":"rv3-wartime-village-0","stress":["wartime"],"pros":"Poor","stand":"Moderate","line":"Moderate before the war; Poor while it lasts.","rs":9,"rl":"Undefended"}
+{"seed":"rv3-wartime-village-1","stress":["wartime"],"pros":"Poor","stand":"Moderate","line":"Moderate before the war; Poor while it lasts.","rs":21,"rl":"Vulnerable"}
+{"seed":"rv3-wartime-village-2","stress":["wartime"],"pros":"Poor","stand":"Moderate","line":"Moderate before the war; Poor while it lasts.","rs":17,"rl":"Vulnerable"}
+{"seed":"rv3-wartime-town-0","stress":["wartime"],"pros":"Poor","stand":"Moderate","line":"Moderate before the war; Poor while it lasts.","rs":41,"rl":"Defensible"}
+{"seed":"rv3-wartime-town-1","stress":["wartime"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the war; Moderate while it lasts.","rs":51,"rl":"Defensible"}
+{"seed":"rv3-wartime-town-2","stress":["wartime"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the war; Comfortable while it lasts.","rs":40,"rl":"Defensible"}
+{"seed":"rv3-wartime-city-0","stress":["wartime"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the war; Comfortable while it lasts.","rs":68,"rl":"Well-Defended"}
+{"seed":"rv3-wartime-city-1","stress":["wartime"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the war; Moderate while it lasts.","rs":73,"rl":"Well-Defended"}
+{"seed":"rv3-wartime-city-2","stress":["wartime"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the war; Comfortable while it lasts.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-wartime-metropolis-0","stress":["wartime"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the war; Comfortable while it lasts.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-wartime-metropolis-1","stress":["wartime"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the war; Comfortable while it lasts.","rs":81,"rl":"Fortress"}
+{"seed":"rv3-wartime-metropolis-2","stress":["wartime"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the war; Comfortable while it lasts.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-mass_migration-village-0","stress":["mass_migration"],"pros":"Struggling","stand":"Poor","line":"Poor before the migration; Struggling while it lasts.","rs":13,"rl":"Vulnerable"}
+{"seed":"rv3-mass_migration-village-1","stress":["mass_migration"],"pros":"Struggling","stand":"Poor","line":"Poor before the migration; Struggling while it lasts.","rs":10,"rl":"Undefended"}
+{"seed":"rv3-mass_migration-village-2","stress":["mass_migration"],"pros":"Struggling","stand":"Poor","line":"Poor before the migration; Struggling while it lasts.","rs":16,"rl":"Vulnerable"}
+{"seed":"rv3-mass_migration-town-0","stress":["mass_migration"],"pros":"Moderate","stand":"Comfortable","line":"Comfortable before the migration; Moderate while it lasts.","rs":28,"rl":"Lightly Defended"}
+{"seed":"rv3-mass_migration-town-1","stress":["mass_migration"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the migration; Comfortable while it lasts.","rs":50,"rl":"Defensible"}
+{"seed":"rv3-mass_migration-town-2","stress":["mass_migration"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the migration; Comfortable while it lasts.","rs":27,"rl":"Lightly Defended"}
+{"seed":"rv3-mass_migration-city-0","stress":["mass_migration"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the migration; Comfortable while it lasts.","rs":76,"rl":"Fortress"}
+{"seed":"rv3-mass_migration-city-1","stress":["mass_migration"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the migration; Comfortable while it lasts.","rs":79,"rl":"Fortress"}
+{"seed":"rv3-mass_migration-city-2","stress":["mass_migration"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the migration; Comfortable while it lasts.","rs":73,"rl":"Well-Defended"}
+{"seed":"rv3-mass_migration-metropolis-0","stress":["mass_migration"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the migration; Comfortable while it lasts.","rs":86,"rl":"Fortress"}
+{"seed":"rv3-mass_migration-metropolis-1","stress":["mass_migration"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the migration; Comfortable while it lasts.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-mass_migration-metropolis-2","stress":["mass_migration"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the migration; Comfortable while it lasts.","rs":87,"rl":"Fortress"}
+{"seed":"rv3-famine+wartime-town-0","stress":["famine","wartime"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the famine and the war; Struggling while they last.","rs":46,"rl":"Defensible"}
+{"seed":"rv3-famine+wartime-town-1","stress":["famine","wartime"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the famine and the war; Struggling while they last.","rs":8,"rl":"Undefended"}
+{"seed":"rv3-famine+wartime-town-2","stress":["famine","wartime"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine and the war; Struggling while they last.","rs":42,"rl":"Defensible"}
+{"seed":"rv3-famine+wartime-city-0","stress":["famine","wartime"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine and the war; Struggling while they last.","rs":57,"rl":"Well-Defended"}
+{"seed":"rv3-famine+wartime-city-1","stress":["famine","wartime"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine and the war; Struggling while they last.","rs":69,"rl":"Well-Defended"}
+{"seed":"rv3-famine+wartime-city-2","stress":["famine","wartime"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the famine and the war; Struggling while they last.","rs":69,"rl":"Well-Defended"}
+{"seed":"rv3-under_siege+plague_onset-town-0","stress":["under_siege","plague_onset"],"pros":"Struggling","stand":"Comfortable","line":"Comfortable before the siege and the outbreak; Struggling while they last.","rs":32,"rl":"Lightly Defended"}
+{"seed":"rv3-under_siege+plague_onset-town-1","stress":["under_siege","plague_onset"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege and the outbreak; Struggling while they last.","rs":29,"rl":"Lightly Defended"}
+{"seed":"rv3-under_siege+plague_onset-town-2","stress":["under_siege","plague_onset"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the siege and the outbreak; Struggling while they last.","rs":21,"rl":"Vulnerable"}
+{"seed":"rv3-under_siege+plague_onset-city-0","stress":["under_siege","plague_onset"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege and the outbreak; Struggling while they last.","rs":64,"rl":"Well-Defended"}
+{"seed":"rv3-under_siege+plague_onset-city-1","stress":["under_siege","plague_onset"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege and the outbreak; Struggling while they last.","rs":68,"rl":"Well-Defended"}
+{"seed":"rv3-under_siege+plague_onset-city-2","stress":["under_siege","plague_onset"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the siege and the outbreak; Struggling while they last.","rs":51,"rl":"Defensible"}
+{"seed":"rv3-indebted+succession_void-town-0","stress":["indebted","succession_void"],"pros":"Poor","stand":"Moderate","line":"Moderate before the debt crisis and the succession crisis; Poor while they last.","rs":23,"rl":"Vulnerable"}
+{"seed":"rv3-indebted+succession_void-town-1","stress":["indebted","succession_void"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis and the succession crisis; Comfortable while they last.","rs":49,"rl":"Defensible"}
+{"seed":"rv3-indebted+succession_void-town-2","stress":["indebted","succession_void"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis and the succession crisis; Comfortable while they last.","rs":18,"rl":"Vulnerable"}
+{"seed":"rv3-indebted+succession_void-city-0","stress":["indebted","succession_void"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis and the succession crisis; Comfortable while they last.","rs":75,"rl":"Well-Defended"}
+{"seed":"rv3-indebted+succession_void-city-1","stress":["indebted","succession_void"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis and the succession crisis; Comfortable while they last.","rs":84,"rl":"Fortress"}
+{"seed":"rv3-indebted+succession_void-city-2","stress":["indebted","succession_void"],"pros":"Comfortable","stand":"Prosperous","line":"Prosperous before the debt crisis and the succession crisis; Comfortable while they last.","rs":80,"rl":"Fortress"}
+{"seed":"rv3-recently_betrayed+religious_conversion-town-0","stress":["recently_betrayed","religious_conversion"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the betrayal and the conversion; Struggling while they last.","rs":20,"rl":"Vulnerable"}
+{"seed":"rv3-recently_betrayed+religious_conversion-town-1","stress":["recently_betrayed","religious_conversion"],"pros":"Poor","stand":"Comfortable","line":"Comfortable before the betrayal and the conversion; Poor while they last.","rs":26,"rl":"Lightly Defended"}
+{"seed":"rv3-recently_betrayed+religious_conversion-town-2","stress":["recently_betrayed","religious_conversion"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the betrayal and the conversion; Moderate while they last.","rs":24,"rl":"Lightly Defended"}
+{"seed":"rv3-recently_betrayed+religious_conversion-city-0","stress":["recently_betrayed","religious_conversion"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the betrayal and the conversion; Poor while they last.","rs":69,"rl":"Well-Defended"}
+{"seed":"rv3-recently_betrayed+religious_conversion-city-1","stress":["recently_betrayed","religious_conversion"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the betrayal and the conversion; Poor while they last.","rs":64,"rl":"Well-Defended"}
+{"seed":"rv3-recently_betrayed+religious_conversion-city-2","stress":["recently_betrayed","religious_conversion"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the betrayal and the conversion; Poor while they last.","rs":64,"rl":"Well-Defended"}
+{"seed":"rv3-mass_migration+insurgency-town-0","stress":["mass_migration","insurgency"],"pros":"Struggling","stand":"Moderate","line":"Moderate before the migration and the insurgency; Struggling while they last.","rs":29,"rl":"Lightly Defended"}
+{"seed":"rv3-mass_migration+insurgency-town-1","stress":["mass_migration","insurgency"],"pros":"Poor","stand":"Comfortable","line":"Comfortable before the migration and the insurgency; Poor while they last.","rs":32,"rl":"Lightly Defended"}
+{"seed":"rv3-mass_migration+insurgency-town-2","stress":["mass_migration","insurgency"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the migration and the insurgency; Poor while they last.","rs":39,"rl":"Defensible"}
+{"seed":"rv3-mass_migration+insurgency-city-0","stress":["mass_migration","insurgency"],"pros":"Struggling","stand":"Prosperous","line":"Prosperous before the migration and the insurgency; Struggling while they last.","rs":69,"rl":"Well-Defended"}
+{"seed":"rv3-mass_migration+insurgency-city-1","stress":["mass_migration","insurgency"],"pros":"Moderate","stand":"Prosperous","line":"Prosperous before the migration and the insurgency; Moderate while they last.","rs":67,"rl":"Well-Defended"}
+{"seed":"rv3-mass_migration+insurgency-city-2","stress":["mass_migration","insurgency"],"pros":"Poor","stand":"Prosperous","line":"Prosperous before the migration and the insurgency; Poor while they last.","rs":69,"rl":"Well-Defended"}

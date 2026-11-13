@@ -1,0 +1,26 @@
+distinct new 25
+1195 ['pdf', 'tab:economics', 'tab:overview'] rv2-famine-thorp-17 | Comfortable before the famine; Struggling while it lasts.
+1175 ['pdf', 'tab:economics', 'tab:overview'] rv2-under_siege-town-6 | Comfortable before the siege; Struggling while it lasts.
+1165 ['pdf', 'tab:economics', 'tab:overview'] rv2-wartime-town-15 | Comfortable before the war; Poor while it lasts.
+478 ['foundry'] rv2-famine-thorp-17 |   - Comfortable before the famine; Struggling while it lasts.
+470 ['foundry'] rv2-under_siege-town-6 |   - Comfortable before the siege; Struggling while it lasts.
+466 ['foundry'] rv2-wartime-town-15 |   - Comfortable before the war; Poor while it lasts.
+15 ['pdf', 'tab:economics', 'tab:overview'] rv2-succession_void-village-26 | Poor before the succession crisis; Struggling while it lasts.
+10 ['pdf', 'tab:economics', 'tab:overview'] rv2-succession_void-thorp-26 | Poor before the succession crisis and the famine; Struggling while they last.
+8 ['pdf', 'tab:defense'] rv2-wartime-city-9 | The garrison and city watch is well paid, well equipped and patrols properly. They come when called, and though some take bribes, it is not the custom. The court can try a case, but there is little room to hold anyone it convicts.
+8 ['pdf', 'tab:defense'] rv2-famine-metropolis-4 | The garrison and city watch walks the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them. A functioning court and prison mean crimes carry real consequences. Everyone comes an
+6 ['foundry'] rv2-succession_void-village-26 |   - Poor before the succession crisis; Struggling while it lasts.
+6 ['pdf', 'tab:defense'] rv2-famine-metropolis-30 | The garrison and city watch walks the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them. Offenders the garrison and city watch catches go before the court; there is little ro
+5 ['pdf', 'tab:economics', 'tab:overview'] rv2-under_siege-hamlet-12 | Poor before the siege and the famine; Struggling while they last.
+5 ['pdf', 'tab:economics', 'tab:overview'] rv2-wartime-thorp-9 | Poor before the war and the famine; Struggling while they last.
+4 ['foundry'] rv2-succession_void-thorp-26 |   - Poor before the succession crisis and the famine; Struggling while they last.
+4 ['pdf', 'tab:defense'] rv2-wartime-city-37 | The garrison and city watch is well paid, well equipped and patrols properly. They come when called, and though some take bribes, it is not the custom. A court exists, though there is nowhere to hold the guilty. Everyone comes and
+4 ['pdf', 'tab:defense'] rv2-famine-city-9 | The garrison and city watch patrols on a regular round, so petty theft is often caught and planned crime seldom is. A court exists, though there is nowhere to hold the guilty. Everyone comes and goes by the gates, so smugglers hav
+4 ['pdf', 'tab:defense'] rv2-famine-city-12 | You will see the garrison and city watch on the rounds most hours of the day; it catches the careless and misses the careful. A court exists, though there is nowhere to hold the guilty. Everyone comes and goes by the gates, so smu
+2 ['pdf', 'tab:defense'] rv2-under_siege-town-15 | You will see the garrison and town watch on the rounds most hours of the day; it catches the careless and misses the careful. A court exists, though there is nowhere to hold the guilty. Everyone comes and goes by the gates, so smu
+2 ['pdf', 'tab:defense'] rv2-under_siege-town-4 | The garrison and town watch patrols on a regular round, so petty theft is often caught and planned crime seldom is. A functioning court and prison mean crimes carry real consequences. Everyone comes and goes by the gates, so smugg
+2 ['foundry'] rv2-under_siege-hamlet-12 |   - Poor before the siege and the famine; Struggling while they last.
+2 ['pdf', 'tab:defense'] rv2-famine-town-8 | The garrison and town watch walks the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them. Thieves here know that the court sits and the cells are real. Hired swords back the g
+2 ['pdf', 'tab:defense'] rv2-under_siege-town-1 | You will see the garrison and town watch on the rounds most hours of the day; it catches the careless and misses the careful. A court exists, though there is nowhere to hold the guilty. Hired swords back the garrison.
+2 ['foundry'] rv2-wartime-thorp-9 |   - Poor before the war and the famine; Struggling while they last.
+2 ['pdf', 'tab:defense'] rv2-under_siege-city-2 | The garrison and city watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan around patrol routes. Thieves here know that the court sits and the c
