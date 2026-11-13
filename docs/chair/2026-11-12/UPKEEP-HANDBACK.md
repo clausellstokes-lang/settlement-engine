@@ -1,4 +1,4 @@
-# COHERENCE-UPKEEP: the hand-back (the sixth seat, COHERENCE-UPKEEP-6, 2026-11-13) — IN PROGRESS, kept current after every item
+# COHERENCE-UPKEEP: the hand-back (the sixth seat, COHERENCE-UPKEEP-6, 2026-11-13) — HANDED BACK BY FILE, WITHOUT THE FINAL STATEMENT (the chair's ruling of 15:04: the seventh seat makes it once)
 
 **The lane:** `lane/coherence-upkeep-2026-11-12`. **Base of this seat:** ce3bceda9 (the fifth seat's last commit). **The lane's reviewed base:** 69b53decd. **The probes:** `docs/chair/2026-11-13/probes/UPKEEP-6/` (`births6.mjs` births the fifth seat's 3,036 and this seat's own 720 `fresh6-*`, which no seat tuned on, or named keys; `an6.py` reads two dumps). The fifth seat's record and every earlier one are kept below, unchanged.
 
@@ -98,7 +98,7 @@ Then A (done), B, C and E. Read notifications after every commit; hand back by f
 - CORPUS, named for the corpus lane: DS-DEF-2 Economic Survival STRONG ("has not turned into a collapse" 7, "arrangements intact" 2, "money in hand" 2), DS-DEF-2 CHAIN defence supplied 8, CHAIN food trades working 2, DS-DEF-2 Invasion & War walls and garrison "raiders stay away" on besieged pages 3, DS-DEF-11 WALLED-QUIET 1; trade lines DS-GEN-13 and DS-ECO-1 C4 (19).
 - Made false by 1(a): Treshaw's corpus "short of money for years" (DS-DEF-2 WEAK) and Dharmapura's "Trade collapse" tension, each beside "Prosperous before the famine"; and 1(a) sharpens the two wartime narrative lines above.
 
-**Ruling 4, measured, NOT built (`probes/UPKEEP-6/magic-count-once.md`):** 1,559 of 3,756 births hold one of the eight houses. Reading A (each keeps its named part, leaves magic): 895 move, mean -1.4 (max -6), 103 down a band, none up; the magic part's mean 11.7 -> 10.3. Reading B (keeps magic, leaves its named part): 1,037 move, mean -2.7 (max -26), 212 down a band. Per house in the file. Sent to the chair; it rules.
+**Ruling 4, measured (`probes/UPKEEP-6/magic-count-once.md`), then READING A BUILT by the chair's ruling E (below):** 1,559 of 3,756 births hold one of the eight houses. Reading A (each keeps its named part, leaves magic): 895 move, mean -1.4 (max -6), 103 down a band, none up; the magic part's mean 11.7 -> 10.3. Reading B (keeps magic, leaves its named part): 1,037 move, mean -2.7 (max -26), 212 down a band. Per house in the file. Sent to the chair; it rules.
 
 **Ruling 5, BUILT (008fc3328):** the reviewer's plausible C7 confirmed by execution first (with no hold and no crisis, pay alone cut the will at Moderate 16 of 36, Poor 26 of 70, Struggling 4 of 9). The will is added unpaid where something is built or standing; R13 holds it to the paid armed bodies. Comfortable and above: 0 of 2,099 move; Moderate, Poor, Struggling: 639 up, mean 0.5 to 1.0 (max 3); 35 up a band.
 
@@ -109,6 +109,46 @@ Then A (done), B, C and E. Read notifications after every commit; hand back by f
 **Ruling 8, AT THE FINAL TIP (with E):** M1, M2, M3, M5 and L2 are declared town by town in the draft record under record 287's four conditions (the row old on the line; a named later lane owes the cure, the corpus lane; the rise confined to towns whose fact this lane changed; declared). The base is the reviewer's `classes.base.json` at 69b53decd (its 1,200 rv2 births); the tip side is rendered at the final tip by the reviewer's own `render.mjs`, `scan.mjs`, `classes.py`, after ruling 4's answer, since it moves ratings.
 
 M4 (hired swords with none hired), by execution: the three named births each hold a "Free company hall", which the defence home counts as a hired company (defenseFacts.js :: defenseFactsOf, FREE_COMPANY_RE) and whose catalogue line reads "garrison contracts, and short-term military hire". True as printed; nothing cured.
+
+## THE THIRD READ'S RULINGS (REVIEW-UPKEEP-2 at 65cb03ef1; the chair's message of 2026-11-13 15:04, copied in)
+
+A through E, each its own commit, red first, pushed as made:
+- **A.** One home for pay on every surface: the Economic Survival band.
+- **B.** "Hired swords" only where a company is contracted.
+- **C.** The two-label sentence leaves the realm register. List the map-vs-town war disagreement; do not cure it.
+- **D.** The sentence's own home: (i) event crises read "<Shown> since."; (ii) name only the crises that lower the word, from the prosperity writer's table, or leave it and say so; (iii) on the PDF cover the sentence sits with its word.
+- **E.** Ruling 4 READING A, built now as a declared move; no weight changed. Then MEASURE ONLY: the alchemist shop and the alchemist quarter keeping alchemists and leaving arcane.
+- Then hand back by file, without the final statement: the seventh seat makes the lane's final statement once.
+
+| Commit | Ruling | What, and its measure |
+|---|---|---|
+| b79970bec | A | `defenseScoreBands.js :: economicSurvivalBandOf`; the PDF money line (`threatAssessment.js :: moneyRungOf`) and the guard's purse clauses (`safetyProfile.js :: purseWordOfBand`) read the band. The guard line is written after the defence profile (`assembleSettlement.js :: withGuardPaidFromDefence`). On the reader's 1,200: tab against PDF 83 -> 0; a short purse beside can-pay (J) -> 0; labels differ with no two-label line (L1) -> 0. Test: `tests/generators/payOneHome.test.js`. |
+| 22a8a956b | B | the swords clause needs the defence home's mercenary bucket. My corpus 34 -> 0, the reader's 7 -> 0; with a contracted company 843 -> 843. |
+| 6c8501fcc | C | the register row is again what it was before 1(a). **LISTED, NOT CURED:** in a campaign whose map has no war, 40 of 40 forced-wartime births read "at peace" on the register (`heraldRegister.js :: warClauseOf` reads the map, the town reads its own crisis). |
+| c72917251 | D | (i) "since" when every crisis named is an event (betrayal, conversion); (iii) "Prosperity: <sentence>" on the PDF cover, Overview and Economics (`prosperityInCrisis.js :: prosperityInCrisisLed`). **(ii) LEFT, and why:** the prosperity writer lowers the label through an if-chain, not a table; naming only the crises that lowered it would need a second copy of that chain. Every active crisis is still named (the third read's 1a-L3 stands). |
+| 13782cf82 | E | READING A: the eight houses leave the magic presence's roster (`defenseInstitutionBuckets.js :: DEFENSE_NAMED_MAGIC_HOUSES`, `magicPresenceRosterOf`); each keeps its named part. `probes/UPKEEP-6/magic-reading-A-built.txt`: 899 of 3,756 move, all down (mean -2.43 over movers, min -6); 104 down a band (Fortress -> Well-Defended 63, Well-Defended -> Defensible 37, Defensible -> Lightly Defended 3, Lightly Defended -> Vulnerable 1); fresh6 154 move, 15 down a band. The Economic Survival score rises in 88 (inferred through the SUSTAINS hold, not traced), so the money line goes one rung up in 8 births. Test: `tests/generators/magicCountOnce.test.js` (30 of 96 red before). Re-keyed by identity: `defenseEconomicGate.test.js` "a healthy settlement is not taxed" (the presence it compares is the presence roster's). Suites generators, lint, pdf, domain/display against c72917251: no other new red (35 red at both). |
+
+**E, MEASURE ONLY (for the next seat): the alchemist shop and the alchemist quarter keep alchemists and leave arcane.** `probes/UPKEEP-6/alch-measure.txt` (alch6.mjs + alch-measure.patch on a scratch copy of 13782cf82; 3,756 births). Arcane closes in 85 of the 361 holders it was open for; alchemists kept in 633 of 633. Readiness moves in 81, all down (mean -8.5 over movers, min -23); 43 down a band. The shop carries it: 59 of 108 move (mean -10.3), 37 down a band, including 18 Defensible -> Lightly Defended, 6 Lightly Defended -> Vulnerable and 2 Defensible -> Vulnerable. The quarter: 22 of 525 move (mean -3.6), 6 down a band. fresh6: 13 move, 8 down a band. Nothing built; the chair rules.
+
+**Red at base, not this seat's to sign:** `tests/pdf/goldenViewModel.test.js` (defense.scoreAvg 43 -> 37, headcounts 44 -> 43 and 36 -> 35); red at ec3084650 and at c72917251 alike.
+
+## EVERY NEW OR CHANGED READER SENTENCE, FOR THE OWNER'S VETO (the whole seat)
+1. "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short." (A, F7; the Defense tab's guard assessment). Stands.
+2. "<Standing> before the <crisis>; <Shown> while it lasts." and "<Standing> before the <a> and the <b>; <Shown> while they last.", with the fallback noun "the crisis" (1(a)). The Overview, the Economics glance, the Summary tab, the table view, the PDF and the Foundry. NOT on the realm register (C).
+3. "<Standing> before the <crisis>; <Shown> since." when every crisis named is an event (D(i)).
+4. "Prosperity: <sentence 2 or 3>" on the PDF cover, Overview and Economics (D(iii)).
+5. Changed in WHERE they print, not in words:
+   - the PDF money line and the guard's purse clauses (now on the Economic Survival band, A);
+   - "Hired swords back the garrison" (contracted companies only, B).
+6. RETIRED: the three siege guard lines (A, F4) and the hunger guard line in the guard assessment (1(b)).
+
+## LEFT FOR THE SEVENTH SEAT (not started here)
+- The lane's final statement, once: the census, the whole suite, the goldens, the eight towns doc, the edge bundles last.
+- Ruling 8 at the final tip: declare M1, M2, M3, M5 and L2 town by town. 1b-M3 (the purse beside the people's hunger, 202 births) belongs to it.
+- Ruling 4's second half: whatever the chair rules on the alchemist measure above.
+- Ruling 7: kept; L3 and C11 listed for the owner.
+- The cold-list lines (1(c)'s CODE lines, by home, above).
+- Ruling 6: the one ladder for the posture line, for the holder of `defenseStateProse.js`.
 
 ## Incidents
 - A `tests/lint` run I started in the live worktree overlapped my next edits, so its result is discarded. My stop of it by PID was refused by the permission layer, so it ran to its end. `tests/lint` is re-run in clean, detached measurement worktrees (`/home/user/wt6-m` at 05b8ee712, `/home/user/wt6-b` at ce3bceda9).
