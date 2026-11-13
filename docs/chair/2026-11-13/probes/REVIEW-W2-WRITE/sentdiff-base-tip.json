@@ -1,0 +1,2754 @@
+[
+ {
+  "town": "rww-city-calm-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "Vysokoko's market lives off through-traffic.",
+  "nearestBase": null,
+  "sim": 0.17
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Summary/Overview",
+  "kind": "baseGone",
+  "sentence": "Market day is when Vysokoko fills: the roads bring buyers."
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Some of Vysokoko's work cannot go on without grapes, and the country around the city produces none, so the city buys it from outside or that work stops.",
+  "nearestBase": "Its Vintner cannot work without grapes, and the country around the city produces none, so the city buys from outside or the work stops.",
+  "sim": 0.89
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Resources",
+  "kind": "tip",
+  "sentence": "The city has taken this trade as far as it goes, from the ground to the finished thing.",
+  "nearestBase": "This is the trade the city is actually built on, and the city has taken it as far as it goes.",
+  "sim": 0.67
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No timber reaches the charcoal burner."
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No grapes reach the vintner."
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the city for about eleven months at full rations, more than two years on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the city for about eleven months at full rations, more than two years on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Vysokoko has people who keep order, and order holds about as well as anyone here expects.",
+  "nearestBase": null,
+  "sim": 0.21
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Vysokoko runs on a working balance: the law is present, crime exists, and neither has the run of the city."
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Relied upon · supplied by Wizard's tower and Jiri Vorobev",
+  "nearestBase": "Reliance on magic: Relied upon",
+  "sim": 1
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Vysokoko does better than its ground and roads would explain, and the reason is the arcane work done here.",
+  "nearestBase": "Vysokoko does better than its ground and roads would explain, and the reason is its few practitioners.",
+  "sim": 0.87
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "World/Faith",
+  "kind": "tip",
+  "sentence": "A charm worked in the open at Vysokoko is reported before nightfall, and the faithful see to it that whoever worked it leaves.",
+  "nearestBase": null,
+  "sim": 0.35
+ },
+ {
+  "town": "rww-city-calm-1",
+  "view": "World/Faith",
+  "kind": "baseGone",
+  "sentence": "The church in Vysokoko watches for heresy: a charm sold in the street or a spell worked behind a shutter can bring armed men to the door in the faith's name."
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With the famine on, every trade Megaousa sells outward is judged by one thing: what it can bring back to eat.",
+  "nearestBase": null,
+  "sim": 0.43
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Megaousa's Garrison is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "nearestBase": "Megaousa's Garrison stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+  "sim": 0.67
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "There is always something going out."
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "If one trade is quiet, another is not."
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Megaousa has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+  "nearestBase": null,
+  "sim": 0.32
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "You can see that Megaousa's defenders are armed and equipped from the city's own trades; you can also see that they eat no better than anyone else.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the city for about six months at full rations, about a year on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the city for about six months at full rations, about a year on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "People at Megaousa know it could not survive a serious attack, so they take care not to provoke anyone who could mount one."
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "While the trades behind Megaousa's defence keep working, its defenders will not go short."
+ },
+ {
+  "town": "rww-city-famine-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Relied upon · supplied by Parish church",
+  "nearestBase": "Reliance on magic: Relied upon",
+  "sim": 1
+ },
+ {
+  "town": "rww-city-insurgency-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With only its grain harvest to fall back on, Eisenberg feels every bad season there at every table.",
+  "nearestBase": "With only its grain harvest to fall back on, Eisenberg would feel a single failure there at every table within the season.",
+  "sim": 0.88
+ },
+ {
+  "town": "rww-city-insurgency-1",
+  "view": "Systems/Resources",
+  "kind": "tip",
+  "sentence": "The city takes everything it can from the grain its country gives.",
+  "nearestBase": null,
+  "sim": 0.27
+ },
+ {
+  "town": "rww-city-insurgency-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "Every stage of the grain trade at Eisenberg is done here, from the ground to the gate."
+ },
+ {
+  "town": "rww-city-insurgency-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No timber reaches the charcoal burner."
+ },
+ {
+  "town": "rww-city-insurgency-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Whatever the present trouble costs Eisenberg, the city has the money to meet it.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-city-insurgency-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the city for about eleven months at full rations, more than two years on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the city for about eleven months at full rations, more than two years on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-city-insurgency-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Eisenberg buys alchemical preparations for its defence by the batch, and the city's accounts carry them as a purchase, not a defence.",
+  "nearestBase": "Eisenberg buys its magical support from its alchemists by the batch, and the city's accounts carry it as a purchase, not a defence.",
+  "sim": 0.79
+ },
+ {
+  "town": "rww-city-insurgency-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The city could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it."
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Work is slowing at Qaryatqala for a fault that is not all its own: its food processing is short of what it needs from upstream.",
+  "nearestBase": "Work is slowing at Qaryatqala for a fault that is not the city's own: the food processing it relies on upstream has gone short.",
+  "sim": 0.73
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Qaryatqala's Smelter is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "nearestBase": "Qaryatqala's Smelter stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+  "sim": 0.67
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the potter."
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the brickmaker."
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Whatever the present trouble costs Qaryatqala, the city has the money to meet it.",
+  "nearestBase": null,
+  "sim": 0.25
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the city for about eleven months at full rations, more than two years on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the city for about eleven months at full rations, more than two years on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Qaryatqala's accounts have money in hand: the city can keep its defenders paid and buy what a bad season needs without going begging."
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Integral · supplied by Mages' guild, Enchanter's shop and Scroll scribe",
+  "nearestBase": "Reliance on magic: Integral",
+  "sim": 1
+ },
+ {
+  "town": "rww-city-recently_betrayed-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Qaryatqala does better than its ground and roads would explain, and the reason is the arcane work done here.",
+  "nearestBase": "Qaryatqala does better than its ground and roads would explain, and the reason is its few practitioners.",
+  "sim": 0.87
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "Visitors find Panteakra's market without asking.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Summary/Overview",
+  "kind": "baseGone",
+  "sentence": "Panteakra's market lives off through-traffic."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Panteakra had little to begin with, and the siege has stopped the passing traffic that brought in the rest.",
+  "nearestBase": null,
+  "sim": 0.25
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The city's Smelter has had no gold/silver ore since the siege closed the roads, and its work has stopped or soon will.",
+  "nearestBase": null,
+  "sim": 0.45
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Panteakra has several kinds of goods to sell outward, and the siege has shut every one of them in.",
+  "nearestBase": "The carts that leave Panteakra carry several kinds of goods, not one.",
+  "sim": 0.58
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Nothing has come into Panteakra since the siege closed the roads, and what the city can still grow is not near enough.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Panteakra is running short of capital, and the siege lets none in.",
+  "nearestBase": null,
+  "sim": 0.42
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Panteakra's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Its Smelter cannot work without gold/silver ore, and the country around the city produces none, so the city buys from outside or the work stops."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "What the city raises falls far short of what it needs, and the difference is being taken out of the stores rather than made up from anywhere."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Carts bring Panteakra what its workshops need, and carry the worked capital away again."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "tip",
+  "sentence": "The city used to send its wool out half-worked; with the roads cut by the siege it piles up instead, and nobody here can finish it.",
+  "nearestBase": null,
+  "sim": 0.22
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "The city works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the brickmaker."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the potter."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Officials at Panteakra are spending money their posts never paid them, and nobody in the city asks where it came from."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The siege has put more people on Panteakra's city walls and gates than the city could ever find for it in quieter seasons.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Panteakra's wall is all that stands between the city and the siege, and every stretch of it is watched now.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Panteakra's gates are shut and barred, and nothing has come through them since the siege began.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Panteakra's defences are sound, but fewer people turn out each season to man the city walls and gates, and the city is slow to notice."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Panteakra is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the city decides."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "You come into Panteakra by a gate, and someone at the gate sees you come."
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Integral · supplied by Mages' guild, Enchanter's shop, Scroll scribe, Golem workforce, Apothecary district and Eire Hexamilites",
+  "nearestBase": "Reliance on magic: Integral",
+  "sim": 1
+ },
+ {
+  "town": "rww-city-under_siege-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "The bows and crossbows made at Panteakra cannot be made without arcane work, which puts the whole line behind a very small number of people.",
+  "nearestBase": "The bows and crossbows that Panteakra lives on cannot be made here without arcane work, which puts the whole line behind a very small number of people.",
+  "sim": 0.96
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The country around Ormaker produces no timber: whatever the hamlet has of it comes from outside.",
+  "nearestBase": "It has to buy its timber from outside: the country around the hamlet produces none.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Ormaker cannot produce its own salt, so it buys it in.",
+  "nearestBase": "Ormaker buys in what it cannot make, and the trading keeps as many people busy as the making would.",
+  "sim": 0.5
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nothing threatens Ormaker now, and nothing about the hamlet would stop it if something did.",
+  "nearestBase": "Nothing has come for Ormaker and nothing about the hamlet would stop it.",
+  "sim": 0.75
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Its safety rests on nobody wanting it.",
+  "nearestBase": null,
+  "sim": 0.43
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Ormaker pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the hamlet for about two months at full rations, about eleven months on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the hamlet for about two months at full rations, about eleven months on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Visitors to Ormaker are told which few streets to avoid, and the advice turns out to be right.",
+  "nearestBase": null,
+  "sim": 0.44
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nobody ever thought Ormaker worth a wall, and nothing has yet given it cause to want one.",
+  "nearestBase": null,
+  "sim": 0.42
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The safety here is entirely a matter of nobody having wanted to."
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Ormaker's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The hamlet's record of crimes at Ormaker is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes."
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Ormaker is too small to wall and knows it; the hamlet's safety is its neighbours, its distance, and its unimportance."
+ },
+ {
+  "town": "rww-hamlet-calm-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "The hamlet would go on if the arcane went away, more slowly and less comfortably.",
+  "nearestBase": "The hamlet would go on if the arcane went away, more slowly and less comfortably and go on.",
+  "sim": 1
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Each season it gets easier to buy an official at Ulfset: the hamlet stays poor, the streets stay badly guarded, and nobody in the Feudal Stewardship is mending either."
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Ulfset has nobody paid to defend it, only households, and every household is minding its own share of what is left.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nothing threatens Ulfset now, and nothing about the hamlet would stop it if something did.",
+  "nearestBase": "Nothing has come for Ulfset and nothing about the hamlet would stop it.",
+  "sim": 0.75
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Its safety rests on nobody wanting it.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the hamlet for a few weeks at full rations, a few weeks on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the hamlet for a few weeks at full rations, a few weeks on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nobody ever thought Ulfset worth a wall, and nothing has yet given it cause to want one.",
+  "nearestBase": null,
+  "sim": 0.42
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The hamlet knows it needs specialists against the creatures, and has none of its own to send.",
+  "nearestBase": "The hamlet knows it needs specialists against the creatures and cannot afford to keep them.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "At Ulfset the people who keep order spend their days at the food stores, not watching the roads."
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The safety here is entirely a matter of nobody having wanted to."
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "No wall marks where Ulfset ends; the last houses simply give way to open country."
+ },
+ {
+  "town": "rww-hamlet-famine-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "The hamlet would go on if the arcane went away, more slowly and less comfortably.",
+  "nearestBase": "The hamlet would go on if the arcane went away, more slowly and less comfortably and go on.",
+  "sim": 1
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Traffic moves along Vikborg's river every day, and little of its money stays behind.",
+  "nearestBase": "Traffic moves along Vikborg's river every day, and little of its money stays.",
+  "sim": 1
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "None of the metals used at Vikborg comes from the country here; it is brought in or done without.",
+  "nearestBase": "Every load of metals used at Vikborg comes from elsewhere, because the country here produces none.",
+  "sim": 0.69
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "What Vikborg's trades use comes in from elsewhere more often than from its own ground.",
+  "nearestBase": null,
+  "sim": 0.21
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The place earns less than it spends."
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Anyone looking for work at Vikborg finds it in carrying, weighing and selling as often as in making."
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Resources",
+  "kind": "tip",
+  "sentence": "The fish in Vikborg's country is worked all the way to the finished preserved fish.",
+  "nearestBase": "The fish in Vikborg's country is worked all the way through: the ground gives it, Fishmonger finishes it, and it leaves as preserved fish.",
+  "sim": 0.83
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Criminal money is reaching the officials of Vikborg one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here."
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nothing threatens Vikborg now, and nothing about the hamlet would stop it if something did.",
+  "nearestBase": "Nothing has come for Vikborg and nothing about the hamlet would stop it.",
+  "sim": 0.75
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Its safety rests on nobody wanting it.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the hamlet for about three months at full rations, about eleven months on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the hamlet for about three months at full rations, about eleven months on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-hamlet-mass_migration-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The safety here is entirely a matter of nobody having wanted to."
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "There is no market at Xitang to hold the trade that passes by, and the hamlet stays poor while the trade goes on its way.",
+  "nearestBase": "Xitang lives on one trade.",
+  "sim": 0.6
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "More than half of what Xitang earns comes from a single trade, and most households depend on it one way or another.",
+  "nearestBase": "Xitang lives on one trade.",
+  "sim": 0.8
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The country around Xitang produces no timber: whatever the hamlet has of it comes from outside.",
+  "nearestBase": "It has to buy its timber from outside: the country around the hamlet produces none.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Ask where Xitang's incense and votive candles comes from and you are pointed at the carts, not at anyone in the hamlet.",
+  "nearestBase": null,
+  "sim": 0.31
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Plenty passes through Xitang, and little of it stops."
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "It is doing well enough now, but if that trade has a bad year, the whole hamlet has a bad year."
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Anyone looking for work at Xitang finds it in carrying, weighing and selling as often as in making."
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Criminal money is reaching the officials of Xitang one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here."
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the hamlet for about three months at full rations, more than a year on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the hamlet for about three months at full rations, more than a year on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "The hamlet would go on if the arcane went away, more slowly and less comfortably.",
+  "nearestBase": "The hamlet would go on if the arcane went away, more slowly and less comfortably and go on.",
+  "sim": 1
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "World/Daily Life",
+  "kind": "tip",
+  "sentence": "Money is short in Xitang, and most households spend what they earn as soon as it comes in.",
+  "nearestBase": "Xitang covers what it must and nothing beyond.",
+  "sim": 0.5
+ },
+ {
+  "town": "rww-hamlet-succession_void-1",
+  "view": "World/Daily Life",
+  "kind": "baseGone",
+  "sentence": "Every essential is accounted for and there is no line for anything else."
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Miroko had little to begin with, and the siege has stopped the passing traffic that brought in the rest.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "None of the metals used at Miroko comes from the country here; it is brought in or done without.",
+  "nearestBase": "Every load of metals used at Miroko comes from elsewhere, because the country here produces none.",
+  "sim": 0.69
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Miroko bought its grain from outside, and since the siege nothing has come in; what is left is being made to last.",
+  "nearestBase": null,
+  "sim": 0.38
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Plenty passes through Miroko, and little of it stops."
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The hamlet is poor, and its people say so to anyone who asks."
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Anyone looking for work at Miroko finds it in carrying, weighing and selling as often as in making."
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "tip",
+  "sentence": "The hamlet has taken this trade as far as it goes, from the ground to the finished thing.",
+  "nearestBase": null,
+  "sim": 0.27
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "The grain in Miroko's country is worked all the way through: the ground gives it, Mill finishes it, and it leaves as bread."
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Criminal money is reaching the officials of Miroko one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here."
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "You find Miroko open on every side, with nobody posted anywhere, while the danger everyone talks about is close.",
+  "nearestBase": null,
+  "sim": 0.2
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Miroko has no wall to fall back behind, so the threat now at hand is being met in the open, house by house.",
+  "nearestBase": "Miroko has no line and no force, and the threat now at hand has noticed both.",
+  "sim": 0.62
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "There was never a force at Miroko; whoever leads the defence now is learning the work as the trouble goes on.",
+  "nearestBase": null,
+  "sim": 0.38
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The hamlet knows it needs specialists against the creatures, and has none of its own to send.",
+  "nearestBase": "The hamlet knows it needs specialists against the creatures and cannot afford to keep them.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "No wall marks where Miroko ends; the last houses simply give way to open country."
+ },
+ {
+  "town": "rww-hamlet-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Defense here is individual armed citizens, with no command, no training and no way to coordinate a response."
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "Temürger's market lives off through-traffic.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "The monks keep their own hours.",
+  "nearestBase": "The monastery keeps its own hours.",
+  "sim": 0.5
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Summary/Overview",
+  "kind": "baseGone",
+  "sentence": "Market day is when Temürger fills: the roads bring buyers."
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Some of Temürger's work cannot go on without grain, and the country around the metropolis produces none, so the metropolis buys it from outside or that work stops.",
+  "nearestBase": "Its Mill cannot work without grain, and the country around the metropolis produces none, so the metropolis buys from outside or the work stops.",
+  "sim": 0.89
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Work is slowing at Temürger for a fault that is not all its own: its cartography is short of what it needs from upstream.",
+  "nearestBase": "Work is slowing at Temürger for a fault that is not the metropolis's own: the cartography it relies on upstream has gone short.",
+  "sim": 0.73
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Temürger cannot produce its own stone, so it buys it in.",
+  "nearestBase": "Temürger works stone it cannot produce; it buys the raw stuff in, and always has.",
+  "sim": 0.73
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "Gaps & Opportunities▲"
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No grapes reach the vintner."
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the potter."
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the brickmaker."
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The wall at Temürger is manned day and night against the creatures, and nobody walks out past it unarmed.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the metropolis for more than a year at full rations, more than two years on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the metropolis for more than a year at full rations, more than two years on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Temürger has people who keep order, and order holds about as well as anyone here expects.",
+  "nearestBase": null,
+  "sim": 0.27
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Temürger buys alchemical preparations for its defence by the batch, and the metropolis's accounts carry them as a purchase, not a defence.",
+  "nearestBase": "Temürger buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.",
+  "sim": 0.8
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nothing armed meets a ship coming into Temürger; the waterfront is kept for trade, not for defence.",
+  "nearestBase": null,
+  "sim": 0.35
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Temürger's walls and fighters are holding against the creatures, but each season wears them down, and the metropolis is barely keeping up."
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Visitors to Temürger are told which few streets to avoid, and the advice turns out to be right."
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "You can sail into Temürger unchallenged; nobody watches the harbour mouth."
+ },
+ {
+  "town": "rww-metropolis-calm-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Integral · supplied by Academy of magic, Scroll scribe, Parish churches (50-100+) and Great cathedral",
+  "nearestBase": "Reliance on magic: Integral",
+  "sim": 1
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "Anyone new to Kilwell who needs a meal or a bed is sent to the monks.",
+  "nearestBase": "Anyone new to Kilwell who needs a meal or a bed is sent to the monastery door.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Traffic moves along Kilwell's crossroads every day, and little of its money stays behind.",
+  "nearestBase": "Traffic moves along Kilwell's crossroads every day, and little of its money stays.",
+  "sim": 1
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Some of Kilwell's work cannot go on without gold/silver ore, and the country around the metropolis produces none, so the metropolis buys it from outside or that work stops.",
+  "nearestBase": "Its Smelter cannot work without gold/silver ore, and the country around the metropolis produces none, so the metropolis buys from outside or the work stops.",
+  "sim": 0.9
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Nearly every meal at Kilwell goes back to the grain harvest, and after a poor season for the grain harvest, everyone eats less.",
+  "nearestBase": "With only its grain harvest to fall back on, Kilwell would feel a single failure there at every table within the season.",
+  "sim": 0.5
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Some of Kilwell's smelting depends on supplies from elsewhere, and those supplies are failing: what should come down the line arrives short.",
+  "nearestBase": "Some of Kilwell's work depends on smelting done elsewhere, and that supply is failing: what should come down the line arrives short.",
+  "sim": 0.81
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The place earns less than it spends."
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No timber reaches the charcoal burner."
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Officials at Kilwell are spending money their posts never paid them, and nobody in the metropolis asks where it came from."
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "You can see that Kilwell's defenders are armed and equipped from the metropolis's own trades; you can also see that they eat no better than anyone else.",
+  "nearestBase": null,
+  "sim": 0.3
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food is dear and hard to find here, but whatever food reaches the metropolis is bought: the money is there for it.",
+  "nearestBase": null,
+  "sim": 0.39
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the metropolis for more than a year at full rations, more than two years on half, but the hall will not open it.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary would carry the metropolis for more than a year at full rations, more than two years on half, but the hall will not open it.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Kilwell buys alchemical preparations for its defence by the batch, and the metropolis's accounts carry them as a purchase, not a defence.",
+  "nearestBase": "Kilwell buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.",
+  "sim": 0.79
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The supply book for Kilwell's defenders balances: the metropolis's own trades feed and equip them, so a call to arms does not begin with a shortage."
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Kilwell's accounts have money in hand: the metropolis can keep its defenders paid and buy what a bad season needs without going begging."
+ },
+ {
+  "town": "rww-metropolis-famine-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Integral · supplied by Mages' district, Academy of magic, Enchanter's shop, Scroll scribe, Elder Grove Council, Parish churches (50-100+) and Great cathedral",
+  "nearestBase": "Reliance on magic: Integral",
+  "sim": 1
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Ask where Aqualitus's iron comes from and you are pointed at the carts, not at anyone in the metropolis.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Carts bring Aqualitus what its workshops need, and carry the worked iron away again."
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "Gaps & Opportunities▲"
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the potter."
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the brickmaker."
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No grapes reach the vintner."
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The country around Aqualitus is thick with creatures, and the metropolis keeps both a wall and people to hold it, and both are in use constantly.",
+  "nearestBase": "The country around Aqualitus is thick with creatures and the metropolis has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.",
+  "sim": 0.95
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Whatever the present trouble costs Aqualitus, the metropolis has the money to meet it.",
+  "nearestBase": "The country around Aqualitus is thick with creatures and the metropolis has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.",
+  "sim": 0.5
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the metropolis for more than a year at full rations, more than two years on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the metropolis for more than a year at full rations, more than two years on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Aqualitus keeps a working balance: the law is present, and nobody has the run of the metropolis.",
+  "nearestBase": "Aqualitus runs on a working balance: the law is present, crime exists, and neither has the run of the metropolis.",
+  "sim": 0.87
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Part of the magical help at Aqualitus is brewed: alchemy is practised here, and some of what it makes goes to the defenders.",
+  "nearestBase": null,
+  "sim": 0.46
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The metropolis could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it."
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The magical help at Aqualitus comes from its alchemists, who brew for the defenders."
+ },
+ {
+  "town": "rww-metropolis-infiltrated-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Integral · supplied by Academy of magic, Enchanter's shop, Scroll scribe, Elder Grove Council, Parish churches (50-100+) and Great cathedral",
+  "nearestBase": "Reliance on magic: Integral",
+  "sim": 1
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "Visitors find Naranjotepec's market without asking.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "Anyone new to Naranjotepec who needs a meal or a bed is sent to the monks.",
+  "nearestBase": "Anyone new to Naranjotepec who needs a meal or a bed is sent to the monastery door.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Summary/Overview",
+  "kind": "baseGone",
+  "sentence": "Naranjotepec's market lives off through-traffic."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With the siege closing every way in, Naranjotepec has lost even the little that passing trade used to leave behind.",
+  "nearestBase": null,
+  "sim": 0.26
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The metropolis's Mill has had no grain since the siege closed the roads, and its work has stopped or soon will.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Naranjotepec had several trades sending goods out before the siege, and none of them can send anything now.",
+  "nearestBase": null,
+  "sim": 0.17
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "What the metropolis raises falls far short of what it needs, and the difference is being taken out of the stores rather than made up from anywhere.",
+  "nearestBase": null,
+  "sim": 0.39
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With only its herds to fall back on, Naranjotepec feels every bad season there at every table.",
+  "nearestBase": "With only its herds to fall back on, Naranjotepec would feel a single failure there at every table within the season.",
+  "sim": 0.88
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Naranjotepec's Furrier's district is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "nearestBase": "Naranjotepec's Furrier's district stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+  "sim": 0.68
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Naranjotepec's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Every load of grain that Naranjotepec's Mill uses comes in from elsewhere; a closed road would stop its work within the season."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "There is always something going out."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "If one trade is quiet, another is not."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Naranjotepec grows far less food than it needs, and not enough comes in to make up the rest."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "tip",
+  "sentence": "The metropolis has taken this trade as far as it goes, from the ground to the finished thing.",
+  "nearestBase": "This is the trade the metropolis is actually built on, and the metropolis has taken it as far as it goes.",
+  "sim": 0.67
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "Gaps & Opportunities▲"
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No grapes reach the vintner."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Each season it gets easier to buy an official at Naranjotepec: the metropolis stays poor, the streets stay badly guarded, and nobody in the Royal Authority is mending either."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "People at Naranjotepec believe the metropolis could be held, and the soldiers on the walls give them good reason to.",
+  "nearestBase": null,
+  "sim": 0.39
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Naranjotepec's massive walls and fortifications was short of hands before the siege; now everyone who can hold a weapon has a place on it, and most of them are learning as they go.",
+  "nearestBase": null,
+  "sim": 0.32
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The metropolis has a wall and arranges its day around the gates without noticing that it does.",
+  "nearestBase": null,
+  "sim": 0.31
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Naranjotepec's gates are shut and barred, and nothing has come through them since the siege began.",
+  "nearestBase": null,
+  "sim": 0.27
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The metropolis's soldiers are paid by the season and drilled by the week, whether or not anything comes.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Naranjotepec buys alchemical preparations for its defence by the batch, and the metropolis's accounts carry them as a purchase, not a defence.",
+  "nearestBase": "Naranjotepec buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.",
+  "sim": 0.79
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Approaching Naranjotepec, you see the walls and the soldiers who belong on them, and any attacker would think again about the cost."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Naranjotepec's defences are sound, but fewer people turn out each season to man the massive walls and fortifications, and the metropolis is slow to notice."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Naranjotepec is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the metropolis decides."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Traffic in and out of Naranjotepec goes through its gates, and that is where anyone arriving is first seen."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Its soldiers serve all year, not for a season; the metropolis relies on them and grumbles about them in equal measure."
+ },
+ {
+  "town": "rww-metropolis-under_siege-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Relied upon · supplied by Mages' district, Scroll scribe and Enchanter's shop",
+  "nearestBase": "Reliance on magic: Relied upon",
+  "sim": 1
+ },
+ {
+  "town": "rww-metropolis-wartime-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "The monks keep their own hours.",
+  "nearestBase": "The monastery keeps its own hours.",
+  "sim": 0.5
+ },
+ {
+  "town": "rww-metropolis-wartime-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Work is slowing at Jalaliin for a fault that is not all its own: its cartography is short of what it needs from upstream.",
+  "nearestBase": "Work is slowing at Jalaliin for a fault that is not the metropolis's own: the cartography it relies on upstream has gone short.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-metropolis-wartime-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "Gaps & Opportunities▲"
+ },
+ {
+  "town": "rww-metropolis-wartime-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No grapes reach the vintner."
+ },
+ {
+  "town": "rww-metropolis-wartime-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The wall at Jalaliin is manned day and night against the creatures, and nobody walks out past it unarmed.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-metropolis-wartime-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the metropolis for more than a year at full rations, more than two years on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the metropolis for more than a year at full rations, more than two years on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-metropolis-wartime-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Jalaliin's walls and fighters are holding against the creatures, but each season wears them down, and the metropolis is barely keeping up."
+ },
+ {
+  "town": "rww-metropolis-wartime-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Integral · supplied by Mages' district, Academy of magic, Enchanter's shop, Scroll scribe, Teleportation circle, Planar traders, Golem workforce, Dream parlors (high magic), Airship docking (high magic), Message network (high magic) and 2 practitioners",
+  "nearestBase": "Reliance on magic: Integral",
+  "sim": 1
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "None of the metals used at Cnocholme comes from the country here; it is brought in or done without.",
+  "nearestBase": "Every load of metals used at Cnocholme comes from elsewhere, because the country here produces none.",
+  "sim": 0.69
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Each season it gets easier to buy an official at Cnocholme: the thorp stays poor, the streets stay badly guarded, and nobody in the Elder Council is mending either."
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "With nobody at Cnocholme paid to keep order, the hunger is policed by neighbours watching each other's doors.",
+  "nearestBase": null,
+  "sim": 0.4
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nothing threatens Cnocholme now, and nothing about the thorp would stop it if something did.",
+  "nearestBase": "Nothing has come for Cnocholme and nothing about the thorp would stop it.",
+  "sim": 0.75
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Its safety rests on nobody wanting it.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the thorp for a few weeks at full rations, a few weeks on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for a few weeks at full rations, a few weeks on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The thorp knows it needs specialists against the creatures, and has none of its own to send.",
+  "nearestBase": "The thorp knows it needs specialists against the creatures and cannot afford to keep them.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "At Cnocholme the people who keep order spend their days at the food stores, not watching the roads."
+ },
+ {
+  "town": "rww-thorp-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The safety here is entirely a matter of nobody having wanted to."
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Traffic moves along Kolbø's river every day, and little of its money stays behind.",
+  "nearestBase": "Traffic moves along Kolbø's river every day, and little of its money stays.",
+  "sim": 1
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "None of the timber used at Kolbø comes from the country here; it is brought in or done without.",
+  "nearestBase": "Every load of timber used at Kolbø comes from elsewhere, because the country here produces none.",
+  "sim": 0.69
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Its food comes from more than one source, and this year that has not been enough: the thorp is hungry all the same.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Ask where Kolbø's grain comes from and you are pointed at the carts, not at anyone in the thorp.",
+  "nearestBase": null,
+  "sim": 0.36
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The place earns less than it spends."
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The herds feeds Kolbø first, but not alone; when one source has a lean year, the others carry it."
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Carts bring Kolbø what its workshops need, and carry the worked grain away again."
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Criminal money is reaching the officials of Kolbø one at a time, because the thorp is poor and its streets are badly watched, and a bribe goes a long way here."
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Kolbø has nobody paid to defend it, only households, and every household is minding its own share of what is left.",
+  "nearestBase": null,
+  "sim": 0.25
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the thorp for about a month at full rations, about three months on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about a month at full rations, about three months on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Kolbø keeps its palisade in repair and pays nobody to stand guard there.",
+  "nearestBase": null,
+  "sim": 0.31
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The wall around Kolbø turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "At Kolbø the people who keep order spend their days at the food stores, not watching the roads."
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Kolbø's defences are sound, but fewer people turn out each season to man the palisade, and the thorp is slow to notice."
+ },
+ {
+  "town": "rww-thorp-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Kolbø is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the thorp decides."
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "None of the timber used at Monteium comes from the country here; it is brought in or done without.",
+  "nearestBase": "Every load of timber used at Monteium comes from elsewhere, because the country here produces none.",
+  "sim": 0.69
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Monteium sells on goods it never made: some of what leaves the thorp entered it as imports the same season.",
+  "nearestBase": "Monteium sells on what it never made.",
+  "sim": 1
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Ask where Monteium's salt comes from and you are pointed at the carts, not at anyone in the thorp.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Carts bring Monteium what its workshops need, and carry the worked salt away again."
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "With nobody posted at Monteium, every household watches its own edge of the place against the beasts, and nobody sleeps well.",
+  "nearestBase": null,
+  "sim": 0.22
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Monteium pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the thorp for about three months at full rations, more than a year on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about three months at full rations, more than a year on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The beasts give Monteium no rest between attacks, and each one costs the thorp something it cannot quickly replace."
+ },
+ {
+  "town": "rww-thorp-monster_pressure-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The people who would have to hold Monteium through something are already owed, and they have not forgotten it."
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The thorp spends on its faith without keeping a house for it, so a quarrel over the rites would be felt in its money first.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "None of the luxury goods used at Benglen comes from the country here; it is brought in or done without.",
+  "nearestBase": "Every load of luxury goods used at Benglen comes from elsewhere, because the country here produces none.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Benglen sends several different goods out to market; if one trade fails, the others still go.",
+  "nearestBase": null,
+  "sim": 0.21
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With only its fishing to fall back on, Benglen feels every bad season there at every table.",
+  "nearestBase": "With only its fishing to fall back on, Benglen would feel a single failure there at every table within the season.",
+  "sim": 0.88
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Benglen cannot produce its own medicinal herbs, so it buys it in.",
+  "nearestBase": "Benglen works medicinal herbs it cannot produce; it buys the raw stuff in, and always has.",
+  "sim": 0.73
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The religious houses at Benglen are among its biggest buyers and employers, and a bad year for them is a bad year for the thorp."
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The yards here are full of goods bound out and no two of them are the same."
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "This is a thorp that sells."
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Resources",
+  "kind": "tip",
+  "sentence": "The thorp takes everything it can from the fish its country gives.",
+  "nearestBase": null,
+  "sim": 0.45
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "The fish in Benglen's country is worked all the way through: the ground gives it, Fishmonger finishes it, and it leaves as preserved fish."
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the thorp for about three months at full rations, about eight months on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about three months at full rations, about eight months on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-thorp-plague_onset-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "The thorp would go on if the arcane went away, more slowly and less comfortably.",
+  "nearestBase": "The thorp would go on if the arcane went away, more slowly and less comfortably and go on.",
+  "sim": 1
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With the siege closing every way in, Belovich has lost even the little that passing trade used to leave behind.",
+  "nearestBase": null,
+  "sim": 0.26
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With only its fishing to fall back on, Belovich feels every bad season there at every table.",
+  "nearestBase": "With only its fishing to fall back on, Belovich would feel a single failure there at every table within the season.",
+  "sim": 0.88
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Belovich is running short of grain, and the siege lets none in.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Traffic moves along Belovich's port every day, and little of its money stays."
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The place earns less than it spends."
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Belovich buys in what it cannot make, and the trading keeps as many people busy as the making would."
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Criminal money is reaching the officials of Belovich one at a time, because the thorp is poor and its streets are badly watched, and a bribe goes a long way here."
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Belovich has people under arms, but too few and too badly placed to hold off a serious attack for long.",
+  "nearestBase": null,
+  "sim": 0.45
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The wall at Belovich is manned day and night against the creatures, and nobody walks out past it unarmed.",
+  "nearestBase": null,
+  "sim": 0.41
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The siege has put more people on Belovich's palisade than the thorp could ever find for it in quieter seasons.",
+  "nearestBase": null,
+  "sim": 0.36
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "With no gate in its wall, Belovich has no proper way to shut itself in against the siege.",
+  "nearestBase": null,
+  "sim": 0.44
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The thorp knows it needs specialists against the creatures, and has none of its own to send.",
+  "nearestBase": "The thorp knows it needs specialists against the creatures and cannot afford to keep them.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Belovich is all but undefended."
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Nothing in the thorp would stop a serious attack for long."
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The country around Belovich is thick with creatures and the thorp has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly."
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Belovich's defences are sound, but fewer people turn out each season to man the palisade, and the thorp is slow to notice."
+ },
+ {
+  "town": "rww-thorp-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Belovich is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the thorp decides."
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The country around Drumton produces no grain: whatever the town has of it comes from outside.",
+  "nearestBase": "It has to buy its grain from outside: the country around the town produces none.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With only its fishing to fall back on, Drumton feels every bad season there at every table.",
+  "nearestBase": "With only its fishing to fall back on, Drumton would feel a single failure there at every table within the season.",
+  "sim": 0.88
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Drumton's Carriers' guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "nearestBase": "Drumton's Carriers' guild stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+  "sim": 0.68
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "The criminals at Drumton still own a few officials, but keeping them bought now costs more than it brings in."
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The only people on Drumton's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the town for about nine months at full rations, more than two years on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the town for about nine months at full rations, more than two years on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nothing armed meets a ship coming into Drumton; the waterfront is kept for trade, not for defence.",
+  "nearestBase": null,
+  "sim": 0.27
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "People at Drumton admit it when asked: the town has walls and nobody to stand on them."
+ },
+ {
+  "town": "rww-town-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "You can sail into Drumton unchallenged; nobody watches the harbour mouth."
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Traffic moves along Kitaxian's crossroads every day, and little of its money stays behind.",
+  "nearestBase": "Traffic moves along Kitaxian's crossroads every day, and little of its money stays.",
+  "sim": 1
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Some of Kitaxian's work cannot go on without clay, and the country around the town produces none, so the town buys it from outside or that work stops.",
+  "nearestBase": "Its Potter cannot work without clay, and the country around the town produces none, so the town buys from outside or the work stops.",
+  "sim": 0.89
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Kitaxian's Town watch is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "nearestBase": "Kitaxian's Town watch stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+  "sim": 0.68
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The place earns less than it spends."
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the potter."
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the brickmaker."
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Kitaxian has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+  "nearestBase": null,
+  "sim": 0.35
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the town for about four months at full rations, about ten months on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the town for about four months at full rations, about ten months on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Kitaxian is large enough that anyone arriving expects a wall around it, and is surprised to walk straight in from open country.",
+  "nearestBase": null,
+  "sim": 0.24
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The town's plan for an army is to not be interesting to one, and everybody here can state the plan."
+ },
+ {
+  "town": "rww-town-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Kitaxian's accounts show nothing spent on a wall: the money a place its size would put into stone goes to other needs, and the town stays open."
+ },
+ {
+  "town": "rww-town-occupied-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-town-occupied-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Each season it gets easier to buy an official at Tulumtzal: the town stays poor, the streets stay badly guarded, and nobody in the Guild Council is mending either."
+ },
+ {
+  "town": "rww-town-occupied-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Tulumtzal's walls are kept by its watch and nobody else, which is enough to see who comes and goes and nothing like enough to hold them.",
+  "nearestBase": null,
+  "sim": 0.38
+ },
+ {
+  "town": "rww-town-occupied-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the town for about eight months at full rations, more than a year on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the town for about eight months at full rations, more than a year on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-town-occupied-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "You can walk the length of Tulumtzal's walls and meet nobody on them."
+ },
+ {
+  "town": "rww-town-slave_revolt-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Traffic moves along Tarkhanörtöö's crossroads every day, and little of its money stays behind.",
+  "nearestBase": "Traffic moves along Tarkhanörtöö's crossroads every day, and little of its money stays.",
+  "sim": 1
+ },
+ {
+  "town": "rww-town-slave_revolt-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The country around Tarkhanörtöö produces no luxury goods: whatever the town has of it comes from outside.",
+  "nearestBase": "It has to buy its luxury goods from outside: the country around the town produces none.",
+  "sim": 0.73
+ },
+ {
+  "town": "rww-town-slave_revolt-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The place earns less than it spends."
+ },
+ {
+  "town": "rww-town-slave_revolt-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The only people on Tarkhanörtöö's walls are the watch on their rounds, and everyone knows that would not stop an army.",
+  "nearestBase": null,
+  "sim": 0.47
+ },
+ {
+  "town": "rww-town-slave_revolt-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: Under siege the outlying fields would be lost; with what is still harvested, the granary would carry the town for about eight months at full rations, more than a year on half.",
+  "nearestBase": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary carries the town for about eight months at full rations, more than a year on half.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-town-slave_revolt-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The town knows it needs specialists against the creatures, and has none of its own to send.",
+  "nearestBase": "The town knows it needs specialists against the creatures and cannot afford to keep them.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-town-slave_revolt-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "You can walk the length of Tarkhanörtöö's walls and meet nobody on them."
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "Anyone new to Sanctavallis who needs a meal or a bed is sent to the monks.",
+  "nearestBase": "Anyone new to Sanctavallis who needs a meal or a bed is sent to the monastery door.",
+  "sim": 0.93
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The town's Smelter has had no iron ore since the siege closed the roads, and its work has stopped or soon will.",
+  "nearestBase": null,
+  "sim": 0.42
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Nothing has come into Sanctavallis since the siege closed the roads, and what the town can still grow is not near enough.",
+  "nearestBase": null,
+  "sim": 0.28
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Sanctavallis's Caravanserai is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "nearestBase": "Sanctavallis's Caravanserai stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+  "sim": 0.67
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Its Smelter cannot work without iron ore, and the country around the town produces none, so the town buys from outside or the work stops."
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Sanctavallis grows far less food than it needs, and not enough comes in to make up the rest."
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No clay reaches the potter."
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "With trouble at hand, Sanctavallis's watch is all the town has to send, and there is no wall to send it to.",
+  "nearestBase": null,
+  "sim": 0.46
+ },
+ {
+  "town": "rww-town-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Sanctavallis has no line and no force, and the threat now at hand has noticed both."
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With only its fishing to fall back on, Maghleigh feels every bad season there at every table.",
+  "nearestBase": "With only its fishing to fall back on, Maghleigh would feel a single failure there at every table within the season.",
+  "sim": 0.88
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Maghleigh's Cartographer's guild is short of what it needs from upstream, though the building and the skilled hands are all still there.",
+  "nearestBase": "Maghleigh's Cartographer's guild stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+  "sim": 0.68
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Resources",
+  "kind": "tip",
+  "sentence": "The village has taken this trade as far as it goes, from the ground to the finished thing.",
+  "nearestBase": "This is the trade the village is actually built on, and the village has taken it as far as it goes.",
+  "sim": 0.67
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No timber reaches the sawmill."
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No livestock or hides reaches the tannery."
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nothing threatens Maghleigh now, and nothing about the village would stop it if something did.",
+  "nearestBase": "Nothing has come for Maghleigh and nothing about the village would stop it.",
+  "sim": 0.75
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Its safety rests on nobody wanting it.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the village for about three months at full rations, more than a year on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the village for about three months at full rations, more than a year on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The village knows it needs specialists against the creatures, and has none of its own to send.",
+  "nearestBase": "The village knows it needs specialists against the creatures and cannot afford to keep them.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-village-calm-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The safety here is entirely a matter of nobody having wanted to."
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "What Naranjopeten's trades use comes in from elsewhere more often than from its own ground.",
+  "nearestBase": null,
+  "sim": 0.17
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Much of the work in Naranjopeten's workshops begins with unloading a cart."
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Officials at Naranjopeten are spending money their posts never paid them, and nobody in the village asks where it came from."
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Naranjopeten has nobody paid to defend it, only households, and every household is minding its own share of what is left.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Nothing threatens Naranjopeten now, and nothing about the village would stop it if something did.",
+  "nearestBase": "Nothing has come for Naranjopeten and nothing about the village would stop it.",
+  "sim": 0.75
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Its safety rests on nobody wanting it.",
+  "nearestBase": null,
+  "sim": 0.29
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the village for a few weeks at full rations, a few weeks on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the village for a few weeks at full rations, a few weeks on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "At Naranjopeten the people who keep order spend their days at the food stores, not watching the roads."
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "The safety here is entirely a matter of nobody having wanted to."
+ },
+ {
+  "town": "rww-village-famine-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "The village would go on if the arcane went away, more slowly and less comfortably.",
+  "nearestBase": "The village would go on if the arcane went away, more slowly and less comfortably and go on.",
+  "sim": 1
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Traffic moves along Quirigek's road every day, and little of its money stays behind.",
+  "nearestBase": "Traffic moves along Quirigek's road every day, and little of its money stays.",
+  "sim": 1
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "More than half of what Quirigek earns comes from a single trade, and most households depend on it one way or another.",
+  "nearestBase": "Quirigek lives on one trade.",
+  "sim": 0.8
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The country around Quirigek produces no stone: whatever the village has of it comes from outside.",
+  "nearestBase": "It has to buy its stone from outside: the country around the village produces none.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "What Quirigek's trades use comes in from elsewhere more often than from its own ground.",
+  "nearestBase": null,
+  "sim": 0.17
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The place earns less than it spends."
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "It is doing well enough now, but if that trade has a bad year, the whole village has a bad year."
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Much of the work in Quirigek's workshops begins with unloading a cart."
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Officials at Quirigek are spending money their posts never paid them, and nobody in the village asks where it came from."
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Quirigek keeps no defenders to pay, and the debt is one more reason it never will.",
+  "nearestBase": null,
+  "sim": 0.19
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the village for about three months at full rations, about nine months on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the village for about three months at full rations, about nine months on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Every year the debt stands, less of Quirigek's money reaches its defence."
+ },
+ {
+  "town": "rww-village-indebted-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "The village would go on if the arcane went away, more slowly and less comfortably.",
+  "nearestBase": "The village would go on if the arcane went away, more slowly and less comfortably and go on.",
+  "sim": 1
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Some trade comes past Hochplatz, and little of it stops.",
+  "nearestBase": "Plenty passes through Hochplatz, and little of it stops.",
+  "sim": 0.67
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "More than half of what Hochplatz earns comes from a single trade, and most households depend on it one way or another.",
+  "nearestBase": "Hochplatz lives on one trade.",
+  "sim": 0.8
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The country around Hochplatz produces no stone: whatever the village has of it comes from outside.",
+  "nearestBase": "It has to buy its stone from outside: the country around the village produces none.",
+  "sim": 0.71
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Ask where Hochplatz's incense and votive candles comes from and you are pointed at the carts, not at anyone in the village.",
+  "nearestBase": null,
+  "sim": 0.25
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "It is doing well enough now, but if that trade has a bad year, the whole village has a bad year."
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Much of the work in Hochplatz's workshops begins with unloading a cart."
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Officials at Hochplatz are spending money their posts never paid them, and nobody in the village asks where it came from."
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Hochplatz pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.",
+  "nearestBase": null,
+  "sim": 0.21
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Food endurance: No granary: under siege the outlying fields would be lost; with what is still harvested, household stores would carry the village for about four months at full rations, more than a year on half.",
+  "nearestBase": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the village for about four months at full rations, more than a year on half.",
+  "sim": 0.97
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Hochplatz has been short of money for years, and each lean season leaves less to spend when a real crisis comes."
+ },
+ {
+  "town": "rww-village-religious_conversion-1",
+  "view": "Systems/Magic",
+  "kind": "tip",
+  "sentence": "Reliance on magic: Relied upon · supplied by Parish church and Priest (resident)",
+  "nearestBase": "Reliance on magic: Relied upon",
+  "sim": 1
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Summary/Overview",
+  "kind": "tip",
+  "sentence": "Qaryatsaray's market grew up on the road's trade.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Summary/Overview",
+  "kind": "baseGone",
+  "sentence": "Qaryatsaray's market lives off through-traffic."
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "With the siege closing every way in, Qaryatsaray has lost even the little that passing trade used to leave behind.",
+  "nearestBase": null,
+  "sim": 0.15
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "The village's Fishmonger has had no fish since the siege closed the roads, and its work has stopped or soon will.",
+  "nearestBase": null,
+  "sim": 0.39
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "tip",
+  "sentence": "Qaryatsaray is running short of grain, and the siege lets none in.",
+  "nearestBase": null,
+  "sim": 0.33
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Traffic moves along Qaryatsaray's road every day, and little of its money stays."
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "The place earns less than it spends."
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Its Fishmonger cannot work without fish, and the country around the village produces none, so the village buys from outside or the work stops."
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Economics",
+  "kind": "baseGone",
+  "sentence": "Carts bring Qaryatsaray what its workshops need, and carry the worked grain away again."
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Resources",
+  "kind": "baseGone",
+  "sentence": "No fish reaches the fishmonger."
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Crime and the hall"
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Power",
+  "kind": "baseGone",
+  "sentence": "Criminal money is reaching the officials of Qaryatsaray one at a time, because the village is poor and its streets are badly watched, and a bribe goes a long way here."
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "With trouble at hand, Qaryatsaray has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.",
+  "nearestBase": null,
+  "sim": 0.46
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "Qaryatsaray has no wall to fall back behind, so the threat now at hand is being met in the open, house by house.",
+  "nearestBase": "Qaryatsaray has no line and no force, and the threat now at hand has noticed both.",
+  "sim": 0.62
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "tip",
+  "sentence": "The village kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.",
+  "nearestBase": "The village has no organized force.",
+  "sim": 0.5
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Qaryatsaray is too small to wall, and what has come for it now makes the smallness a danger rather than a protection."
+ },
+ {
+  "town": "rww-village-under_siege-1",
+  "view": "Systems/Defense",
+  "kind": "baseGone",
+  "sentence": "Defense here is individual armed citizens, with no command, no training and no way to coordinate a response."
+ }
+]
