@@ -1,0 +1,105 @@
+{
+ "side": "master",
+ "timers": {
+  "birth": 835,
+  "model": 934,
+  "insert": 6565,
+  "page203": 81955,
+  "ref": 14703,
+  "reads": 526794,
+  "compare": 153216,
+  "page": 155413
+ },
+ "shard": [
+  1,
+  4
+ ],
+ "towns": [
+  "rv5-m-thorp-infiltrated-0",
+  "rv5-m-village-infiltrated-0",
+  "rv5-m-city-infiltrated-0"
+ ],
+ "shares": 180,
+ "reads": 1440,
+ "raised": [],
+ "noRow": {},
+ "diff": {
+  "a203p211:gallery:MISSING:decrees": 7,
+  "a203p211:gallery:MISSING:dmLayer": 7,
+  "a203p211:import:MISSING:decrees": 7,
+  "a203p211:import:MISSING:dmLayer": 7,
+  "a211:gallery:MISSING:decrees": 7,
+  "a211:gallery:MISSING:dmLayer": 7,
+  "a211:import:MISSING:decrees": 7,
+  "a211:import:MISSING:dmLayer": 7
+ },
+ "examples": {
+  "a203p211:gallery:MISSING:decrees": [
+   "rv5-m-thorp-infiltrated-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mthorpinfiltrated0~grp~99~decrees~Z\"}]",
+   "rv5-m-thorp-infiltrated-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mthorpinfiltrated0~grp~99~decrees~Z\"}]",
+   "rv5-m-village-infiltrated-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mvillageinfiltrated0~grp~441~decrees~Z\"}]",
+   "rv5-m-village-infiltrated-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mvillageinfiltrated0~grp~441~decrees~Z\"}]"
+  ],
+  "a203p211:gallery:MISSING:dmLayer": [
+   "rv5-m-thorp-infiltrated-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mthorpinfiltrated0~grp~100~dmLayer~Z\"}",
+   "rv5-m-thorp-infiltrated-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5mthorpinfiltrated0~grp~100~dmLayer~Z\"}",
+   "rv5-m-village-infiltrated-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mvillageinfiltrated0~grp~442~dmLayer~Z\"}",
+   "rv5-m-village-infiltrated-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5mvillageinfiltrated0~grp~442~dmLayer~Z\"}"
+  ],
+  "a203p211:import:MISSING:decrees": [
+   "rv5-m-thorp-infiltrated-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mthorpinfiltrated0~grp~99~decrees~Z\"}]",
+   "rv5-m-thorp-infiltrated-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mthorpinfiltrated0~grp~99~decrees~Z\"}]",
+   "rv5-m-village-infiltrated-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mvillageinfiltrated0~grp~441~decrees~Z\"}]",
+   "rv5-m-village-infiltrated-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mvillageinfiltrated0~grp~441~decrees~Z\"}]"
+  ],
+  "a203p211:import:MISSING:dmLayer": [
+   "rv5-m-thorp-infiltrated-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mthorpinfiltrated0~grp~100~dmLayer~Z\"}",
+   "rv5-m-thorp-infiltrated-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5mthorpinfiltrated0~grp~100~dmLayer~Z\"}",
+   "rv5-m-village-infiltrated-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mvillageinfiltrated0~grp~442~dmLayer~Z\"}",
+   "rv5-m-village-infiltrated-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5mvillageinfiltrated0~grp~442~dmLayer~Z\"}"
+  ],
+  "a211:gallery:MISSING:decrees": [
+   "rv5-m-thorp-infiltrated-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mthorpinfiltrated0~grp~99~decrees~Z\"}]",
+   "rv5-m-thorp-infiltrated-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mthorpinfiltrated0~grp~99~decrees~Z\"}]",
+   "rv5-m-village-infiltrated-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mvillageinfiltrated0~grp~441~decrees~Z\"}]",
+   "rv5-m-village-infiltrated-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mvillageinfiltrated0~grp~441~decrees~Z\"}]"
+  ],
+  "a211:gallery:MISSING:dmLayer": [
+   "rv5-m-thorp-infiltrated-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mthorpinfiltrated0~grp~100~dmLayer~Z\"}",
+   "rv5-m-thorp-infiltrated-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5mthorpinfiltrated0~grp~100~dmLayer~Z\"}",
+   "rv5-m-village-infiltrated-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mvillageinfiltrated0~grp~442~dmLayer~Z\"}",
+   "rv5-m-village-infiltrated-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5mvillageinfiltrated0~grp~442~dmLayer~Z\"}"
+  ],
+  "a211:import:MISSING:decrees": [
+   "rv5-m-thorp-infiltrated-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mthorpinfiltrated0~grp~99~decrees~Z\"}]",
+   "rv5-m-thorp-infiltrated-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mthorpinfiltrated0~grp~99~decrees~Z\"}]",
+   "rv5-m-village-infiltrated-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mvillageinfiltrated0~grp~441~decrees~Z\"}]",
+   "rv5-m-village-infiltrated-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mvillageinfiltrated0~grp~441~decrees~Z\"}]"
+  ],
+  "a211:import:MISSING:dmLayer": [
+   "rv5-m-thorp-infiltrated-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mthorpinfiltrated0~grp~100~dmLayer~Z\"}",
+   "rv5-m-thorp-infiltrated-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5mthorpinfiltrated0~grp~100~dmLayer~Z\"}",
+   "rv5-m-village-infiltrated-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mvillageinfiltrated0~grp~442~dmLayer~Z\"}",
+   "rv5-m-village-infiltrated-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5mvillageinfiltrated0~grp~442~dmLayer~Z\"}"
+  ]
+ },
+ "tokenLeaks": [],
+ "postFreeze": {
+  "a203p211:link": 47,
+  "a211:link": 47
+ },
+ "served": {},
+ "pageShowMore": {},
+ "handHides": 8438,
+ "hiddenTokens": 79104,
+ "hidden": {
+  "a203p211:gallery": 12840,
+  "a203p211:link": 7671,
+  "a203p211:map": 7573,
+  "a203p211:import": 12840,
+  "a211:gallery": 12391,
+  "a211:link": 6735,
+  "a211:map": 6663,
+  "a211:import": 12391
+ }
+}

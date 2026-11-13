@@ -1,0 +1,105 @@
+{
+ "side": "master",
+ "timers": {
+  "birth": 897,
+  "model": 1605,
+  "insert": 11257,
+  "page203": 141411,
+  "ref": 29427,
+  "reads": 766643,
+  "compare": 729659,
+  "page": 286178
+ },
+ "shard": [
+  2,
+  4
+ ],
+ "towns": [
+  "rv5-m-hamlet-calm-0",
+  "rv5-m-town-calm-0",
+  "rv5-m-metropolis-calm-0"
+ ],
+ "shares": 180,
+ "reads": 1440,
+ "raised": [],
+ "noRow": {},
+ "diff": {
+  "a203p211:gallery:MISSING:decrees": 7,
+  "a203p211:gallery:MISSING:dmLayer": 7,
+  "a203p211:import:MISSING:decrees": 7,
+  "a203p211:import:MISSING:dmLayer": 7,
+  "a211:gallery:MISSING:decrees": 7,
+  "a211:gallery:MISSING:dmLayer": 7,
+  "a211:import:MISSING:decrees": 7,
+  "a211:import:MISSING:dmLayer": 7
+ },
+ "examples": {
+  "a203p211:gallery:MISSING:decrees": [
+   "rv5-m-hamlet-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mhamletcalm0~grp~191~decrees~Z\"}]",
+   "rv5-m-hamlet-calm-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mhamletcalm0~grp~191~decrees~Z\"}]",
+   "rv5-m-town-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mtowncalm0~grp~748~decrees~Z\"}]",
+   "rv5-m-town-calm-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mtowncalm0~grp~748~decrees~Z\"}]"
+  ],
+  "a203p211:gallery:MISSING:dmLayer": [
+   "rv5-m-hamlet-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mhamletcalm0~grp~192~dmLayer~Z\"}",
+   "rv5-m-hamlet-calm-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5mhamletcalm0~grp~192~dmLayer~Z\"}",
+   "rv5-m-town-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mtowncalm0~grp~749~dmLayer~Z\"}",
+   "rv5-m-town-calm-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5mtowncalm0~grp~749~dmLayer~Z\"}"
+  ],
+  "a203p211:import:MISSING:decrees": [
+   "rv5-m-hamlet-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mhamletcalm0~grp~191~decrees~Z\"}]",
+   "rv5-m-hamlet-calm-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mhamletcalm0~grp~191~decrees~Z\"}]",
+   "rv5-m-town-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mtowncalm0~grp~748~decrees~Z\"}]",
+   "rv5-m-town-calm-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mtowncalm0~grp~748~decrees~Z\"}]"
+  ],
+  "a203p211:import:MISSING:dmLayer": [
+   "rv5-m-hamlet-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mhamletcalm0~grp~192~dmLayer~Z\"}",
+   "rv5-m-hamlet-calm-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5mhamletcalm0~grp~192~dmLayer~Z\"}",
+   "rv5-m-town-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mtowncalm0~grp~749~dmLayer~Z\"}",
+   "rv5-m-town-calm-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5mtowncalm0~grp~749~dmLayer~Z\"}"
+  ],
+  "a211:gallery:MISSING:decrees": [
+   "rv5-m-hamlet-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mhamletcalm0~grp~191~decrees~Z\"}]",
+   "rv5-m-hamlet-calm-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mhamletcalm0~grp~191~decrees~Z\"}]",
+   "rv5-m-town-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mtowncalm0~grp~748~decrees~Z\"}]",
+   "rv5-m-town-calm-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mtowncalm0~grp~748~decrees~Z\"}]"
+  ],
+  "a211:gallery:MISSING:dmLayer": [
+   "rv5-m-hamlet-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mhamletcalm0~grp~192~dmLayer~Z\"}",
+   "rv5-m-hamlet-calm-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5mhamletcalm0~grp~192~dmLayer~Z\"}",
+   "rv5-m-town-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mtowncalm0~grp~749~dmLayer~Z\"}",
+   "rv5-m-town-calm-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5mtowncalm0~grp~749~dmLayer~Z\"}"
+  ],
+  "a211:import:MISSING:decrees": [
+   "rv5-m-hamlet-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mhamletcalm0~grp~191~decrees~Z\"}]",
+   "rv5-m-hamlet-calm-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mhamletcalm0~grp~191~decrees~Z\"}]",
+   "rv5-m-town-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mtowncalm0~grp~748~decrees~Z\"}]",
+   "rv5-m-town-calm-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5mtowncalm0~grp~748~decrees~Z\"}]"
+  ],
+  "a211:import:MISSING:dmLayer": [
+   "rv5-m-hamlet-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mhamletcalm0~grp~192~dmLayer~Z\"}",
+   "rv5-m-hamlet-calm-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5mhamletcalm0~grp~192~dmLayer~Z\"}",
+   "rv5-m-town-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5mtowncalm0~grp~749~dmLayer~Z\"}",
+   "rv5-m-town-calm-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5mtowncalm0~grp~749~dmLayer~Z\"}"
+  ]
+ },
+ "tokenLeaks": [],
+ "postFreeze": {
+  "a203p211:link": 48,
+  "a211:link": 48
+ },
+ "served": {},
+ "pageShowMore": {},
+ "handHides": 17293,
+ "hiddenTokens": 151126,
+ "hidden": {
+  "a203p211:gallery": 24504,
+  "a203p211:link": 14229,
+  "a203p211:map": 14079,
+  "a203p211:import": 24504,
+  "a211:gallery": 23926,
+  "a211:link": 13036,
+  "a211:map": 12922,
+  "a211:import": 23926
+ }
+}

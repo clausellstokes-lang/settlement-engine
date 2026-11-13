@@ -1,0 +1,1565 @@
+{
+ "towns": 48,
+ "census": {
+  "TOP": {
+   "name": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "tier": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "population": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "institutions": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "structuralViolations": {
+    "n": 48,
+    "types": {
+     "array<>": 43,
+     "array<object>": 5
+    }
+   },
+   "structuralSuggestions": {
+    "n": 48,
+    "types": {
+     "array<>": 33,
+     "array<object>": 15
+    }
+   },
+   "neighborRelationship": {
+    "n": 48,
+    "types": {
+     "null": 48
+    }
+   },
+   "economicState": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "spatialLayout": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "availableServices": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "powerStructure": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "settlementReason": {
+    "n": 48,
+    "types": {
+     "array<string>": 48
+    }
+   },
+   "npcs": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "relationships": {
+    "n": 48,
+    "types": {
+     "array<object>": 43,
+     "array<>": 5
+    }
+   },
+   "factions": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "conflicts": {
+    "n": 48,
+    "types": {
+     "array<>": 23,
+     "array<object>": 25
+    }
+   },
+   "resourceAnalysis": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "economicViability": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "history": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "isolationSupport": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "culturalIdentity": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "culturalNotes": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "stress": {
+    "n": 48,
+    "types": {
+     "null": 7,
+     "object": 41
+    }
+   },
+   "stressors": {
+    "n": 48,
+    "types": {
+     "null": 7,
+     "object": 41
+    }
+   },
+   "config": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "_config": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "pressureSentence": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "arrivalScene": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "defenseProfile": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "prominentRelationship": {
+    "n": 48,
+    "types": {
+     "null": 22,
+     "object": 26
+    }
+   },
+   "coherenceNotes": {
+    "n": 48,
+    "types": {
+     "array<>": 41,
+     "array<object>": 7
+    }
+   },
+   "generationCoherenceReceipt": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "simulationTrace": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "_seed": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "simulationVersion": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "generatorVersion": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "id": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "activeConditions": {
+    "n": 48,
+    "types": {
+     "array<>": 7,
+     "array<object>": 41
+    }
+   },
+   "aiOverlays": {
+    "n": 48,
+    "types": {
+     "array<>": 48
+    }
+   },
+   "userCanon": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "schemaVersion": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   }
+  },
+  "npc @ npcs": {
+   "id": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "name": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "gender": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "role": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "title": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "category": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "personality": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "physical": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "goal": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "secret": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "plotHooks": {
+    "n": 471,
+    "types": {
+     "array<string>": 470,
+     "array<>": 1
+    }
+   },
+   "influence": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "power": {
+    "n": 471,
+    "types": {
+     "number": 471
+    }
+   },
+   "presentation": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "factionAffiliation": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "importance": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "densityRungRole": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "structuralPosition": {
+    "n": 150,
+    "types": {
+     "string": 150
+    }
+   },
+   "activeConstraint": {
+    "n": 150,
+    "types": {
+     "string": 150
+    }
+   },
+   "settlementCondition": {
+    "n": 150,
+    "types": {
+     "string": 150
+    }
+   },
+   "structuralRank": {
+    "n": 150,
+    "types": {
+     "string": 150
+    }
+   },
+   "corrupt": {
+    "n": 362,
+    "types": {
+     "boolean": 362
+    }
+   },
+   "secondaryAffiliation": {
+    "n": 75,
+    "types": {
+     "string": 75
+    }
+   },
+   "institution": {
+    "n": 25,
+    "types": {
+     "string": 25
+    }
+   },
+   "factionGoal": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "corruptionVector": {
+    "n": 17,
+    "types": {
+     "string": 17
+    }
+   },
+   "corruptTies": {
+    "n": 17,
+    "types": {
+     "object": 17
+    }
+   },
+   "stressNote": {
+    "n": 1,
+    "types": {
+     "string": 1
+    }
+   }
+  },
+  "npc @ factions.*.members": {
+   "id": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "name": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "gender": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "role": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "title": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "category": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "personality": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "physical": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "goal": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "secret": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "plotHooks": {
+    "n": 471,
+    "types": {
+     "array<string>": 470,
+     "array<>": 1
+    }
+   },
+   "influence": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "power": {
+    "n": 471,
+    "types": {
+     "number": 471
+    }
+   },
+   "presentation": {
+    "n": 471,
+    "types": {
+     "object": 471
+    }
+   },
+   "factionAffiliation": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "importance": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "densityRungRole": {
+    "n": 471,
+    "types": {
+     "string": 471
+    }
+   },
+   "structuralPosition": {
+    "n": 150,
+    "types": {
+     "string": 150
+    }
+   },
+   "activeConstraint": {
+    "n": 150,
+    "types": {
+     "string": 150
+    }
+   },
+   "settlementCondition": {
+    "n": 150,
+    "types": {
+     "string": 150
+    }
+   },
+   "structuralRank": {
+    "n": 150,
+    "types": {
+     "string": 150
+    }
+   },
+   "corrupt": {
+    "n": 362,
+    "types": {
+     "boolean": 362
+    }
+   },
+   "secondaryAffiliation": {
+    "n": 75,
+    "types": {
+     "string": 75
+    }
+   },
+   "institution": {
+    "n": 25,
+    "types": {
+     "string": 25
+    }
+   },
+   "factionGoal": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "corruptionVector": {
+    "n": 17,
+    "types": {
+     "string": 17
+    }
+   },
+   "corruptTies": {
+    "n": 17,
+    "types": {
+     "object": 17
+    }
+   },
+   "stressNote": {
+    "n": 1,
+    "types": {
+     "string": 1
+    }
+   }
+  },
+  "institution @ institutions": {
+   "category": {
+    "n": 1753,
+    "types": {
+     "string": 1753
+    }
+   },
+   "name": {
+    "n": 1753,
+    "types": {
+     "string": 1753
+    }
+   },
+   "required": {
+    "n": 1749,
+    "types": {
+     "boolean": 1749
+    }
+   },
+   "baseChance": {
+    "n": 1751,
+    "types": {
+     "number": 1751
+    }
+   },
+   "desc": {
+    "n": 1753,
+    "types": {
+     "string": 1753
+    }
+   },
+   "tags": {
+    "n": 1753,
+    "types": {
+     "array<string>": 1610,
+     "array<>": 143
+    }
+   },
+   "priorityCategory": {
+    "n": 1743,
+    "types": {
+     "string": 1743
+    }
+   },
+   "source": {
+    "n": 1753,
+    "types": {
+     "string": 1753
+    }
+   },
+   "catalogId": {
+    "n": 1653,
+    "types": {
+     "string": 1653
+    }
+   },
+   "tradeRouteRequired": {
+    "n": 33,
+    "types": {
+     "array<string>": 33
+    }
+   },
+   "terrainAccess": {
+    "n": 19,
+    "types": {
+     "array<string>": 19
+    }
+   },
+   "terrainRequired": {
+    "n": 8,
+    "types": {
+     "array<string>": 8
+    }
+   },
+   "exclusiveGroup": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "coherenceRepair": {
+    "n": 26,
+    "types": {
+     "string": 26
+    }
+   },
+   "tier": {
+    "n": 87,
+    "types": {
+     "string": 87
+    }
+   },
+   "cascadeAdded": {
+    "n": 85,
+    "types": {
+     "boolean": 85
+    }
+   },
+   "cascadeBoost": {
+    "n": 85,
+    "types": {
+     "number": 85
+    }
+   },
+   "magicLicense": {
+    "n": 78,
+    "types": {
+     "string": 78
+    }
+   },
+   "forbiddenTradeRoutes": {
+    "n": 52,
+    "types": {
+     "array<string>": 52
+    }
+   },
+   "serviceKeys": {
+    "n": 18,
+    "types": {
+     "array<string>": 18
+    }
+   },
+   "factionSource": {
+    "n": 2,
+    "types": {
+     "string": 2
+    }
+   },
+   "nativeTier": {
+    "n": 9,
+    "types": {
+     "string": 9
+    }
+   },
+   "exclusiveGroupCoexists": {
+    "n": 17,
+    "types": {
+     "boolean": 17
+    }
+   },
+   "forbiddenResources": {
+    "n": 5,
+    "types": {
+     "array<string>": 5
+    }
+   },
+   "facets": {
+    "n": 13,
+    "types": {
+     "object": 13
+    }
+   },
+   "forcedByIsolation": {
+    "n": 2,
+    "types": {
+     "boolean": 2
+    }
+   }
+  },
+  "faction @ powerStructure.factions": {
+   "faction": {
+    "n": 184,
+    "types": {
+     "string": 184
+    }
+   },
+   "modifier": {
+    "n": 48,
+    "types": {
+     "string": 30,
+     "null": 18
+    }
+   },
+   "power": {
+    "n": 184,
+    "types": {
+     "number": 184
+    }
+   },
+   "desc": {
+    "n": 184,
+    "types": {
+     "string": 184
+    }
+   },
+   "isGoverning": {
+    "n": 73,
+    "types": {
+     "boolean": 73
+    }
+   },
+   "category": {
+    "n": 184,
+    "types": {
+     "string": 184
+    }
+   },
+   "rawPower": {
+    "n": 184,
+    "types": {
+     "number": 184
+    }
+   },
+   "powerLabel": {
+    "n": 184,
+    "types": {
+     "string": 184
+    }
+   },
+   "legitimacyCrisis": {
+    "n": 30,
+    "types": {
+     "boolean": 30
+    }
+   },
+   "crisisNote": {
+    "n": 30,
+    "types": {
+     "string": 30
+    }
+   },
+   "modifiers": {
+    "n": 1,
+    "types": {
+     "array<string>": 1
+    }
+   },
+   "hidden": {
+    "n": 3,
+    "types": {
+     "boolean": 3
+    }
+   },
+   "name": {
+    "n": 25,
+    "types": {
+     "string": 25
+    }
+   },
+   "contestsNiche": {
+    "n": 25,
+    "types": {
+     "string": 25
+    }
+   },
+   "captureState": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   }
+  },
+  "faction @ factions": {
+   "name": {
+    "n": 184,
+    "types": {
+     "string": 184
+    }
+   },
+   "members": {
+    "n": 184,
+    "types": {
+     "array<object>": 184
+    }
+   },
+   "dominantCategory": {
+    "n": 184,
+    "types": {
+     "string": 184
+    }
+   }
+  },
+  "event @ history.historicalEvents": {
+   "yearsAgo": {
+    "n": 252,
+    "types": {
+     "number": 252
+    }
+   },
+   "type": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "name": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "description": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "severity": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "lastingEffects": {
+    "n": 252,
+    "types": {
+     "array<string>": 209,
+     "array<>": 43
+    }
+   },
+   "plotHooks": {
+    "n": 252,
+    "types": {
+     "array<>": 164,
+     "array<string>": 88
+    }
+   },
+   "templateType": {
+    "n": 243,
+    "types": {
+     "string": 243
+    }
+   },
+   "anchored": {
+    "n": 128,
+    "types": {
+     "boolean": 128
+    }
+   }
+  },
+  "event @ history.eventsTimeline": {
+   "year": {
+    "n": 252,
+    "types": {
+     "number": 252
+    }
+   },
+   "yearsAgo": {
+    "n": 252,
+    "types": {
+     "number": 252
+    }
+   },
+   "name": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "type": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "anchored": {
+    "n": 252,
+    "types": {
+     "boolean": 252
+    }
+   }
+  },
+  "tension @ history.currentTensions": {
+   "type": {
+    "n": 93,
+    "types": {
+     "string": 93
+    }
+   },
+   "description": {
+    "n": 93,
+    "types": {
+     "string": 93
+    }
+   },
+   "factions": {
+    "n": 93,
+    "types": {
+     "array<string>": 93
+    }
+   },
+   "lastingEffects": {
+    "n": 81,
+    "types": {
+     "array<string>": 81
+    }
+   },
+   "plotHooks": {
+    "n": 93,
+    "types": {
+     "array<string>": 93
+    }
+   },
+   "severity": {
+    "n": 93,
+    "types": {
+     "array<string>": 93
+    }
+   },
+   "specificIssue": {
+    "n": 20,
+    "types": {
+     "string": 20
+    }
+   }
+  },
+  "relationship @ relationships": {
+   "type": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "typeName": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "description": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "tension": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "strength": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "npc1Id": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "npc2Id": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "npc1Name": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "npc2Name": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "npc1Role": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "npc2Role": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "archetypeKey": {
+    "n": 1069,
+    "types": {
+     "string": 1069
+    }
+   },
+   "proseVariant": {
+    "n": 1069,
+    "types": {
+     "number": 1069
+    }
+   },
+   "flagDriven": {
+    "n": 1069,
+    "types": {
+     "boolean": 1069
+    }
+   }
+  },
+  "REC availableServices": {
+   "lodging": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "food": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "equipment": {
+    "n": 48,
+    "types": {
+     "array<>": 10,
+     "array<object>": 38
+    }
+   },
+   "magic": {
+    "n": 48,
+    "types": {
+     "array<>": 33,
+     "array<object>": 15
+    }
+   },
+   "information": {
+    "n": 48,
+    "types": {
+     "array<>": 12,
+     "array<object>": 36
+    }
+   },
+   "healing": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "transport": {
+    "n": 48,
+    "types": {
+     "array<object>": 36,
+     "array<>": 12
+    }
+   },
+   "legal": {
+    "n": 48,
+    "types": {
+     "array<object>": 47,
+     "array<>": 1
+    }
+   },
+   "employment": {
+    "n": 48,
+    "types": {
+     "array<object>": 39,
+     "array<>": 9
+    }
+   },
+   "entertainment": {
+    "n": 48,
+    "types": {
+     "array<>": 27,
+     "array<object>": 21
+    }
+   },
+   "criminal": {
+    "n": 48,
+    "types": {
+     "array<>": 22,
+     "array<object>": 26
+    }
+   }
+  },
+  "REC economicState.safetyProfile": {
+   "safetyLabel": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "safetyDesc": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "guardEffectivenessDesc": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "crimeTypes": {
+    "n": 48,
+    "types": {
+     "array<>": 11,
+     "array<object>": 37
+    }
+   },
+   "criminalInstitutions": {
+    "n": 48,
+    "types": {
+     "array<>": 29,
+     "array<string>": 19
+    }
+   },
+   "economicDragDesc": {
+    "n": 48,
+    "types": {
+     "null": 18,
+     "string": 30
+    }
+   },
+   "blackMarketCapture": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "plotHooks": {
+    "n": 48,
+    "types": {
+     "array<>": 33,
+     "array<string>": 15
+    }
+   },
+   "safetyRatio": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "flags": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "compound": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   }
+  },
+  "REC powerStructure": {
+   "factions": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "governingName": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "government": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "stability": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "recentConflict": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "publicLegitimacy": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "factionRelationships": {
+    "n": 48,
+    "types": {
+     "array<>": 13,
+     "array<object>": 35
+    }
+   },
+   "criminalCaptureState": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "powerProjectionVersion": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "economyInputFingerprint": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "conflicts": {
+    "n": 48,
+    "types": {
+     "array<>": 23,
+     "array<object>": 25
+    }
+   }
+  },
+  "REC history": {
+   "age": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "founding": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "historicalEvents": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "currentTensions": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "historicalCharacter": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "eventsTimeline": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "legacyAnnotations": {
+    "n": 45,
+    "types": {
+     "array<object>": 45
+    }
+   },
+   "siegeNarrative": {
+    "n": 48,
+    "types": {
+     "null": 43,
+     "string": 5
+    }
+   }
+  },
+  "LIST structuralViolations": {
+   "type": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "institution": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "reason": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "severity": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "suggestedFixes": {
+    "n": 2,
+    "types": {
+     "array<string>": 2
+    }
+   }
+  },
+  "conflict @ conflicts": {
+   "parties": {
+    "n": 42,
+    "types": {
+     "array<string>": 42
+    }
+   },
+   "issue": {
+    "n": 42,
+    "types": {
+     "string": 42
+    }
+   },
+   "stakes": {
+    "n": 42,
+    "types": {
+     "string": 42
+    }
+   },
+   "intensity": {
+    "n": 42,
+    "types": {
+     "string": 42
+    }
+   },
+   "desc": {
+    "n": 42,
+    "types": {
+     "string": 42
+    }
+   },
+   "plotHooks": {
+    "n": 42,
+    "types": {
+     "array<string>": 42
+    }
+   }
+  },
+  "conflict @ powerStructure.conflicts": {
+   "parties": {
+    "n": 42,
+    "types": {
+     "array<string>": 42
+    }
+   },
+   "issue": {
+    "n": 42,
+    "types": {
+     "string": 42
+    }
+   },
+   "stakes": {
+    "n": 42,
+    "types": {
+     "string": 42
+    }
+   },
+   "intensity": {
+    "n": 42,
+    "types": {
+     "string": 42
+    }
+   },
+   "desc": {
+    "n": 42,
+    "types": {
+     "string": 42
+    }
+   },
+   "plotHooks": {
+    "n": 42,
+    "types": {
+     "array<string>": 42
+    }
+   }
+  },
+  "LIST powerStructure.factionRelationships": {
+   "pair": {
+    "n": 95,
+    "types": {
+     "array<string>": 95
+    }
+   },
+   "type": {
+    "n": 95,
+    "types": {
+     "string": 95
+    }
+   },
+   "direction": {
+    "n": 95,
+    "types": {
+     "string": 95
+    }
+   },
+   "ratio": {
+    "n": 77,
+    "types": {
+     "number": 77
+    }
+   },
+   "narrative": {
+    "n": 95,
+    "types": {
+     "string": 95
+    }
+   },
+   "dmNote": {
+    "n": 30,
+    "types": {
+     "null": 22,
+     "string": 8
+    }
+   },
+   "captureState": {
+    "n": 10,
+    "types": {
+     "string": 10
+    }
+   }
+  }
+ },
+ "idShapes": {
+  "npc": {
+   "a_9": 942
+  },
+  "institution": {
+   "a-a": 713,
+   "a-a-a": 385,
+   "a-a-a-a": 110,
+   "a-9-9": 125,
+   "a": 302,
+   "a-a-9-9": 81,
+   "a-9-9-a": 17,
+   "a-a-a-a-a": 11,
+   "a-9-a": 8,
+   "a-a-9a-a": 1
+  },
+  "faction": {
+   "a.a_a": 286,
+   "a.a_a_a": 80,
+   "a.a_a_a_a_a": 2
+  },
+  "event": {
+   "a.a-a-a": 266,
+   "a.a-a": 234,
+   "a.a-a-a-a": 4
+  },
+  "tension": {
+   "a.a-a": 93
+  },
+  "relationship": {
+   "a.a-9-a-9-a": 761,
+   "a.a-9-a-9-a-a": 308
+  },
+  "conflict": {
+   "a.a-a-a-a-a-a-a-a-a-a-a": 28,
+   "a.a-a-a-a-a-a-a-a-a": 26,
+   "a.a-a-a-a-a-a-a-a-a-a": 24,
+   "a.a-a-a-a-a-a-a-a-a-a-a-a": 4,
+   "a.a-a-a-a-a-a-a-a": 2
+  }
+ },
+ "linked": {
+  "cards": 471,
+  "withLinked": 0,
+  "linkedBeyondAffiliations": 0,
+  "examples": []
+ }
+}

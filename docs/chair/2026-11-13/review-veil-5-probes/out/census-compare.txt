@@ -1,0 +1,30 @@
+towns: master 48, tip 48
+= LIST powerStructure.factionRelationships: 7 keys, same on both sides
+= LIST structuralViolations: 5 keys, same on both sides
+= REC availableServices: 11 keys, same on both sides
+= REC economicState.safetyProfile: 11 keys, same on both sides
+= REC history: 8 keys, same on both sides
+= REC powerStructure: 11 keys, same on both sides
+# TOP
+   only on MASTER (retired at the tip): factions(48;array<object>)
+= conflict @ conflicts: 6 keys, same on both sides
+= conflict @ powerStructure.conflicts: 6 keys, same on both sides
+= event @ history.eventsTimeline: 5 keys, same on both sides
+= event @ history.historicalEvents: 9 keys, same on both sides
+# faction @ factions
+   only on MASTER (retired at the tip): name(184;string), members(184;array<object>), dominantCategory(184;string)
+= faction @ powerStructure.factions: 15 keys, same on both sides
+= institution @ institutions: 26 keys, same on both sides
+# npc @ factions.*.members
+   only on MASTER (retired at the tip): id(471;string), name(471;string), gender(471;string), role(471;string), title(471;string), category(471;string), personality(471;object), physical(471;object), goal(471;object), secret(471;object), plotHooks(471;array<string>/array<>), influence(471;string), power(471;number), presentation(471;object), factionAffiliation(471;string), importance(471;string), densityRungRole(471;string), structuralPosition(150;string), activeConstraint(150;string), settlementCondition(150;string), structuralRank(150;string), corrupt(362;boolean), secondaryAffiliation(75;string), institution(25;string), factionGoal(6;string), corruptionVector(17;string), corruptTies(17;object), stressNote(1;string)
+# npc @ npcs
+   only on MASTER (retired at the tip): factionAffiliation(471;string), densityRungRole(471;string), corrupt(362;boolean), secondaryAffiliation(75;string), factionGoal(6;string), corruptionVector(17;string), corruptTies(17;object), stressNote(1;string)
+   only at the TIP (new): memberships(1358;array<object>/array<>), allegiance(78;object)
+   type changed: plotHooks: array<string>/array<> -> array<string>; institution: string -> object
+# relationship @ relationships
+   only on MASTER (retired at the tip): npc1Id(1069;string), npc2Id(1069;string)
+   only at the TIP (new): id(1352;string), from(1352;string), to(1352;string), covert(78;boolean), handler(78;boolean)
+= tension @ history.currentTensions: 7 keys, same on both sides
+id shapes master {"npc":{"a_9":942},"institution":{"a-a":713,"a-a-a":385,"a-a-a-a":110,"a-9-9":125,"a":302,"a-a-9-9":81,"a-9-9-a":17,"a-a-a-a-a":11,"a-9-a":8,"a-a-9a-a":1},"faction":{"a.a_a":286,"a.a_a_a":80,"a.a_a_a_a_a":2},"event":{"a.a-a-a":266,"a.a-a":234,"a.a-a-a-a":4},"tension":{"a.a-a":93},"relationship":{"a.a-9-a-9-a":761,"a.a-9-a-9-a-a":308},"conflict":{"a.a-a-a-a-a-a-a-a-a-a-a":28,"a.a-a-a-a-a-a-a-a-a":26,"a.a-a-a-a-a-a-a-a-a-a":24,"a.a-a-a-a-a-a-a-a-a-a-a-a":4,"a.a-a-a-a-a-a-a-a":2}}
+id shapes tip    {"npc":{"a_a_a":498,"a_a_a_a":270,"a_a_a_a_a":52,"a_a_9a9a9a9a9":9,"a_a":279,"a_a_a_9_9":73,"a_a_9_9":101,"a_a_9a9a9a9a":9,"a_a_9a9a9a9a9a":4,"a_a_9a9a9":7,"a_a_a9a9a9a9":8,"a_a_9a9":2,"a_a_9a9a9a9":13,"a_a_a9a9a9a9a":4,"a_a_a9a9a9a9a9a":2,"a_a_9_9_a":1,"a_a_a9a9a9a":3,"a_a_a9a9a9a9a9":4,"a_a_9a9a9a9a9a9a9":1,"a_a_a9a9a9":2,"a_a_a_a_a_a":3,"a_a_9a9a":3,"a_a_a9a9a":2,"a_a_9a9a9a9a9a9":3,"a_a_a_9a_a":1,"a_a_9a9a9a":4},"institution":{"a-a":713,"a-a-a":385,"a-a-a-a":110,"a-9-9":125,"a":302,"a-a-9-9":81,"a-9-9-a":17,"a-a-a-a-a":11,"a-9-a":8,"a-a-9a-a":1},"faction":{"a.a_a":139,"a.a_a_a":40,"a.a_a_a_a_a":1},"event":{"a.a-a-a":266,"a.a-a":234,"a.a-a-a-a":4},"tension":{"a.a-a":93},"relationship":{"a_a_a_a":492,"a_a_a_a_a":270,"a_a_a_a_a_a":52,"a_a_a_9a9a9a9a9":9,"a_a_a":279,"a_a_a_a_9_9":73,"a_a_a_9_9":101,"a_a_a_9a9a9a9a":9,"a_a_a_9a9a9a9a9a":4,"a_a_a_9a9a9":7,"a_a_a_a9a9a9a9":8,"a_a_a_9a9":2,"a_a_a_9a9a9a9":13,"a_a_a_a9a9a9a9a":4,"a_a_a_a9a9a9a9a9a":2,"a_a_a_9_9_a":1,"a_a_a_a9a9a9a":3,"a_a_a_a9a9a9a9a9":4,"a_a_a_9a9a9a9a9a9a9":1,"a_a_a_a9a9a9":2,"a_a_a_a_a_a_a":3,"a_a_a_9a9a":3,"a_a_a_a9a9a":2,"a_a_a_9a9a9a9a9a9":3,"a_a_a_a_9a_a":1,"a_a_a_9a9a9a":4},"conflict":{"a.a-a-a-a-a-a-a-a-a":22,"a.a-a-a-a-a-a-a-a-a-a-a":32,"a.a-a-a-a-a-a-a-a-a-a-a-a":6,"a.a-a-a-a-a-a-a-a-a-a-a-a-a":6,"a.a-a-a-a-a-a-a-a-a-a":10,"a.a-a-a-a-a-a-a-a-a-a-a-a-a-a":2,"a.a-a-a-a-a-a-a-a":2}}
+linkedFactionIds (master): {"cards":471,"withLinked":0,"linkedBeyondAffiliations":0,"examples":[]}

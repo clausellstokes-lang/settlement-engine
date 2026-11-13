@@ -1,0 +1,1401 @@
+{
+ "towns": 48,
+ "census": {
+  "TOP": {
+   "name": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "tier": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "population": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "institutions": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "structuralViolations": {
+    "n": 48,
+    "types": {
+     "array<>": 43,
+     "array<object>": 5
+    }
+   },
+   "structuralSuggestions": {
+    "n": 48,
+    "types": {
+     "array<>": 33,
+     "array<object>": 15
+    }
+   },
+   "neighborRelationship": {
+    "n": 48,
+    "types": {
+     "null": 48
+    }
+   },
+   "economicState": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "spatialLayout": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "availableServices": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "powerStructure": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "settlementReason": {
+    "n": 48,
+    "types": {
+     "array<string>": 48
+    }
+   },
+   "npcs": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "relationships": {
+    "n": 48,
+    "types": {
+     "array<object>": 42,
+     "array<>": 6
+    }
+   },
+   "conflicts": {
+    "n": 48,
+    "types": {
+     "array<>": 23,
+     "array<object>": 25
+    }
+   },
+   "resourceAnalysis": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "economicViability": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "history": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "isolationSupport": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "culturalIdentity": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "culturalNotes": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "stress": {
+    "n": 48,
+    "types": {
+     "null": 7,
+     "object": 41
+    }
+   },
+   "stressors": {
+    "n": 48,
+    "types": {
+     "null": 7,
+     "object": 41
+    }
+   },
+   "config": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "_config": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "arrivalScene": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "defenseProfile": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "prominentRelationship": {
+    "n": 48,
+    "types": {
+     "null": 22,
+     "object": 26
+    }
+   },
+   "coherenceNotes": {
+    "n": 48,
+    "types": {
+     "array<>": 41,
+     "array<object>": 7
+    }
+   },
+   "pressureSentence": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "simulationTrace": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "generationCoherenceReceipt": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "_seed": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "simulationVersion": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "generatorVersion": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "id": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "activeConditions": {
+    "n": 48,
+    "types": {
+     "array<>": 7,
+     "array<object>": 41
+    }
+   },
+   "aiOverlays": {
+    "n": 48,
+    "types": {
+     "array<>": 48
+    }
+   },
+   "userCanon": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "schemaVersion": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   }
+  },
+  "npc @ npcs": {
+   "id": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "name": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "gender": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "role": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "title": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "category": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "personality": {
+    "n": 1358,
+    "types": {
+     "object": 1358
+    }
+   },
+   "physical": {
+    "n": 1358,
+    "types": {
+     "object": 1358
+    }
+   },
+   "goal": {
+    "n": 1358,
+    "types": {
+     "object": 1358
+    }
+   },
+   "secret": {
+    "n": 1358,
+    "types": {
+     "object": 1358
+    }
+   },
+   "plotHooks": {
+    "n": 1358,
+    "types": {
+     "array<string>": 1358
+    }
+   },
+   "influence": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "power": {
+    "n": 1358,
+    "types": {
+     "number": 1358
+    }
+   },
+   "presentation": {
+    "n": 1358,
+    "types": {
+     "object": 1358
+    }
+   },
+   "institution": {
+    "n": 1358,
+    "types": {
+     "object": 1358
+    }
+   },
+   "memberships": {
+    "n": 1358,
+    "types": {
+     "array<object>": 1244,
+     "array<>": 114
+    }
+   },
+   "importance": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "structuralPosition": {
+    "n": 140,
+    "types": {
+     "string": 140
+    }
+   },
+   "activeConstraint": {
+    "n": 131,
+    "types": {
+     "string": 131
+    }
+   },
+   "settlementCondition": {
+    "n": 140,
+    "types": {
+     "string": 140
+    }
+   },
+   "structuralRank": {
+    "n": 1358,
+    "types": {
+     "string": 1358
+    }
+   },
+   "allegiance": {
+    "n": 78,
+    "types": {
+     "object": 78
+    }
+   }
+  },
+  "institution @ institutions": {
+   "category": {
+    "n": 1753,
+    "types": {
+     "string": 1753
+    }
+   },
+   "name": {
+    "n": 1753,
+    "types": {
+     "string": 1753
+    }
+   },
+   "required": {
+    "n": 1749,
+    "types": {
+     "boolean": 1749
+    }
+   },
+   "baseChance": {
+    "n": 1751,
+    "types": {
+     "number": 1751
+    }
+   },
+   "desc": {
+    "n": 1753,
+    "types": {
+     "string": 1753
+    }
+   },
+   "tags": {
+    "n": 1753,
+    "types": {
+     "array<string>": 1597,
+     "array<>": 156
+    }
+   },
+   "priorityCategory": {
+    "n": 1743,
+    "types": {
+     "string": 1743
+    }
+   },
+   "source": {
+    "n": 1753,
+    "types": {
+     "string": 1753
+    }
+   },
+   "catalogId": {
+    "n": 1653,
+    "types": {
+     "string": 1653
+    }
+   },
+   "tradeRouteRequired": {
+    "n": 33,
+    "types": {
+     "array<string>": 33
+    }
+   },
+   "terrainAccess": {
+    "n": 19,
+    "types": {
+     "array<string>": 19
+    }
+   },
+   "terrainRequired": {
+    "n": 8,
+    "types": {
+     "array<string>": 8
+    }
+   },
+   "exclusiveGroup": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "coherenceRepair": {
+    "n": 26,
+    "types": {
+     "string": 26
+    }
+   },
+   "tier": {
+    "n": 87,
+    "types": {
+     "string": 87
+    }
+   },
+   "cascadeAdded": {
+    "n": 85,
+    "types": {
+     "boolean": 85
+    }
+   },
+   "cascadeBoost": {
+    "n": 85,
+    "types": {
+     "number": 85
+    }
+   },
+   "magicLicense": {
+    "n": 78,
+    "types": {
+     "string": 78
+    }
+   },
+   "forbiddenTradeRoutes": {
+    "n": 52,
+    "types": {
+     "array<string>": 52
+    }
+   },
+   "serviceKeys": {
+    "n": 18,
+    "types": {
+     "array<string>": 18
+    }
+   },
+   "factionSource": {
+    "n": 2,
+    "types": {
+     "string": 2
+    }
+   },
+   "nativeTier": {
+    "n": 9,
+    "types": {
+     "string": 9
+    }
+   },
+   "exclusiveGroupCoexists": {
+    "n": 17,
+    "types": {
+     "boolean": 17
+    }
+   },
+   "forbiddenResources": {
+    "n": 5,
+    "types": {
+     "array<string>": 5
+    }
+   },
+   "facets": {
+    "n": 13,
+    "types": {
+     "object": 13
+    }
+   },
+   "forcedByIsolation": {
+    "n": 2,
+    "types": {
+     "boolean": 2
+    }
+   }
+  },
+  "faction @ powerStructure.factions": {
+   "faction": {
+    "n": 180,
+    "types": {
+     "string": 180
+    }
+   },
+   "modifier": {
+    "n": 48,
+    "types": {
+     "string": 29,
+     "null": 19
+    }
+   },
+   "power": {
+    "n": 180,
+    "types": {
+     "number": 180
+    }
+   },
+   "desc": {
+    "n": 180,
+    "types": {
+     "string": 180
+    }
+   },
+   "isGoverning": {
+    "n": 71,
+    "types": {
+     "boolean": 71
+    }
+   },
+   "category": {
+    "n": 180,
+    "types": {
+     "string": 180
+    }
+   },
+   "rawPower": {
+    "n": 180,
+    "types": {
+     "number": 180
+    }
+   },
+   "powerLabel": {
+    "n": 180,
+    "types": {
+     "string": 180
+    }
+   },
+   "legitimacyCrisis": {
+    "n": 30,
+    "types": {
+     "boolean": 30
+    }
+   },
+   "crisisNote": {
+    "n": 30,
+    "types": {
+     "string": 30
+    }
+   },
+   "modifiers": {
+    "n": 1,
+    "types": {
+     "array<string>": 1
+    }
+   },
+   "hidden": {
+    "n": 3,
+    "types": {
+     "boolean": 3
+    }
+   },
+   "name": {
+    "n": 23,
+    "types": {
+     "string": 23
+    }
+   },
+   "contestsNiche": {
+    "n": 23,
+    "types": {
+     "string": 23
+    }
+   },
+   "captureState": {
+    "n": 5,
+    "types": {
+     "string": 5
+    }
+   }
+  },
+  "event @ history.historicalEvents": {
+   "yearsAgo": {
+    "n": 252,
+    "types": {
+     "number": 252
+    }
+   },
+   "type": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "name": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "description": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "severity": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "lastingEffects": {
+    "n": 252,
+    "types": {
+     "array<string>": 209,
+     "array<>": 43
+    }
+   },
+   "plotHooks": {
+    "n": 252,
+    "types": {
+     "array<>": 164,
+     "array<string>": 88
+    }
+   },
+   "templateType": {
+    "n": 243,
+    "types": {
+     "string": 243
+    }
+   },
+   "anchored": {
+    "n": 128,
+    "types": {
+     "boolean": 128
+    }
+   }
+  },
+  "event @ history.eventsTimeline": {
+   "year": {
+    "n": 252,
+    "types": {
+     "number": 252
+    }
+   },
+   "yearsAgo": {
+    "n": 252,
+    "types": {
+     "number": 252
+    }
+   },
+   "name": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "type": {
+    "n": 252,
+    "types": {
+     "string": 252
+    }
+   },
+   "anchored": {
+    "n": 252,
+    "types": {
+     "boolean": 252
+    }
+   }
+  },
+  "tension @ history.currentTensions": {
+   "type": {
+    "n": 93,
+    "types": {
+     "string": 93
+    }
+   },
+   "description": {
+    "n": 93,
+    "types": {
+     "string": 93
+    }
+   },
+   "factions": {
+    "n": 93,
+    "types": {
+     "array<string>": 93
+    }
+   },
+   "lastingEffects": {
+    "n": 81,
+    "types": {
+     "array<string>": 81
+    }
+   },
+   "plotHooks": {
+    "n": 93,
+    "types": {
+     "array<string>": 93
+    }
+   },
+   "severity": {
+    "n": 93,
+    "types": {
+     "array<string>": 93
+    }
+   },
+   "specificIssue": {
+    "n": 20,
+    "types": {
+     "string": 20
+    }
+   }
+  },
+  "relationship @ relationships": {
+   "id": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "from": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "to": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "type": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "typeName": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "description": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "tension": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "strength": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "npc1Name": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "npc2Name": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "npc1Role": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "npc2Role": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "archetypeKey": {
+    "n": 1352,
+    "types": {
+     "string": 1352
+    }
+   },
+   "proseVariant": {
+    "n": 1352,
+    "types": {
+     "number": 1352
+    }
+   },
+   "flagDriven": {
+    "n": 1352,
+    "types": {
+     "boolean": 1352
+    }
+   },
+   "covert": {
+    "n": 78,
+    "types": {
+     "boolean": 78
+    }
+   },
+   "handler": {
+    "n": 78,
+    "types": {
+     "boolean": 78
+    }
+   }
+  },
+  "REC availableServices": {
+   "lodging": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "food": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "equipment": {
+    "n": 48,
+    "types": {
+     "array<>": 10,
+     "array<object>": 38
+    }
+   },
+   "magic": {
+    "n": 48,
+    "types": {
+     "array<>": 33,
+     "array<object>": 15
+    }
+   },
+   "information": {
+    "n": 48,
+    "types": {
+     "array<>": 19,
+     "array<object>": 29
+    }
+   },
+   "healing": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "transport": {
+    "n": 48,
+    "types": {
+     "array<>": 12,
+     "array<object>": 36
+    }
+   },
+   "legal": {
+    "n": 48,
+    "types": {
+     "array<object>": 47,
+     "array<>": 1
+    }
+   },
+   "employment": {
+    "n": 48,
+    "types": {
+     "array<>": 19,
+     "array<object>": 29
+    }
+   },
+   "entertainment": {
+    "n": 48,
+    "types": {
+     "array<>": 28,
+     "array<object>": 20
+    }
+   },
+   "criminal": {
+    "n": 48,
+    "types": {
+     "array<>": 23,
+     "array<object>": 25
+    }
+   }
+  },
+  "REC economicState.safetyProfile": {
+   "safetyLabel": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "safetyDesc": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "guardEffectivenessDesc": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "crimeTypes": {
+    "n": 48,
+    "types": {
+     "array<>": 11,
+     "array<object>": 37
+    }
+   },
+   "criminalInstitutions": {
+    "n": 48,
+    "types": {
+     "array<>": 29,
+     "array<string>": 19
+    }
+   },
+   "economicDragDesc": {
+    "n": 48,
+    "types": {
+     "null": 18,
+     "string": 30
+    }
+   },
+   "blackMarketCapture": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "plotHooks": {
+    "n": 48,
+    "types": {
+     "array<>": 33,
+     "array<string>": 15
+    }
+   },
+   "safetyRatio": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "flags": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "compound": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   }
+  },
+  "REC powerStructure": {
+   "factions": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "governingName": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "government": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "stability": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "recentConflict": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "publicLegitimacy": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "factionRelationships": {
+    "n": 48,
+    "types": {
+     "array<>": 13,
+     "array<object>": 35
+    }
+   },
+   "criminalCaptureState": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "powerProjectionVersion": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "economyInputFingerprint": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "conflicts": {
+    "n": 48,
+    "types": {
+     "array<>": 23,
+     "array<object>": 25
+    }
+   }
+  },
+  "REC history": {
+   "age": {
+    "n": 48,
+    "types": {
+     "number": 48
+    }
+   },
+   "founding": {
+    "n": 48,
+    "types": {
+     "object": 48
+    }
+   },
+   "historicalEvents": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "currentTensions": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "historicalCharacter": {
+    "n": 48,
+    "types": {
+     "string": 48
+    }
+   },
+   "eventsTimeline": {
+    "n": 48,
+    "types": {
+     "array<object>": 48
+    }
+   },
+   "legacyAnnotations": {
+    "n": 45,
+    "types": {
+     "array<object>": 45
+    }
+   },
+   "siegeNarrative": {
+    "n": 48,
+    "types": {
+     "null": 43,
+     "string": 5
+    }
+   }
+  },
+  "LIST structuralViolations": {
+   "type": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "institution": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "reason": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "severity": {
+    "n": 6,
+    "types": {
+     "string": 6
+    }
+   },
+   "suggestedFixes": {
+    "n": 2,
+    "types": {
+     "array<string>": 2
+    }
+   }
+  },
+  "LIST powerStructure.factionRelationships": {
+   "pair": {
+    "n": 94,
+    "types": {
+     "array<string>": 94
+    }
+   },
+   "type": {
+    "n": 94,
+    "types": {
+     "string": 94
+    }
+   },
+   "direction": {
+    "n": 94,
+    "types": {
+     "string": 94
+    }
+   },
+   "ratio": {
+    "n": 76,
+    "types": {
+     "number": 76
+    }
+   },
+   "narrative": {
+    "n": 94,
+    "types": {
+     "string": 94
+    }
+   },
+   "dmNote": {
+    "n": 30,
+    "types": {
+     "null": 22,
+     "string": 8
+    }
+   },
+   "captureState": {
+    "n": 10,
+    "types": {
+     "string": 10
+    }
+   }
+  },
+  "conflict @ conflicts": {
+   "parties": {
+    "n": 40,
+    "types": {
+     "array<string>": 40
+    }
+   },
+   "issue": {
+    "n": 40,
+    "types": {
+     "string": 40
+    }
+   },
+   "stakes": {
+    "n": 40,
+    "types": {
+     "string": 40
+    }
+   },
+   "intensity": {
+    "n": 40,
+    "types": {
+     "string": 40
+    }
+   },
+   "desc": {
+    "n": 40,
+    "types": {
+     "string": 40
+    }
+   },
+   "plotHooks": {
+    "n": 40,
+    "types": {
+     "array<string>": 40
+    }
+   }
+  },
+  "conflict @ powerStructure.conflicts": {
+   "parties": {
+    "n": 40,
+    "types": {
+     "array<string>": 40
+    }
+   },
+   "issue": {
+    "n": 40,
+    "types": {
+     "string": 40
+    }
+   },
+   "stakes": {
+    "n": 40,
+    "types": {
+     "string": 40
+    }
+   },
+   "intensity": {
+    "n": 40,
+    "types": {
+     "string": 40
+    }
+   },
+   "desc": {
+    "n": 40,
+    "types": {
+     "string": 40
+    }
+   },
+   "plotHooks": {
+    "n": 40,
+    "types": {
+     "array<string>": 40
+    }
+   }
+  }
+ },
+ "idShapes": {
+  "npc": {
+   "a_a_a": 498,
+   "a_a_a_a": 270,
+   "a_a_a_a_a": 52,
+   "a_a_9a9a9a9a9": 9,
+   "a_a": 279,
+   "a_a_a_9_9": 73,
+   "a_a_9_9": 101,
+   "a_a_9a9a9a9a": 9,
+   "a_a_9a9a9a9a9a": 4,
+   "a_a_9a9a9": 7,
+   "a_a_a9a9a9a9": 8,
+   "a_a_9a9": 2,
+   "a_a_9a9a9a9": 13,
+   "a_a_a9a9a9a9a": 4,
+   "a_a_a9a9a9a9a9a": 2,
+   "a_a_9_9_a": 1,
+   "a_a_a9a9a9a": 3,
+   "a_a_a9a9a9a9a9": 4,
+   "a_a_9a9a9a9a9a9a9": 1,
+   "a_a_a9a9a9": 2,
+   "a_a_a_a_a_a": 3,
+   "a_a_9a9a": 3,
+   "a_a_a9a9a": 2,
+   "a_a_9a9a9a9a9a9": 3,
+   "a_a_a_9a_a": 1,
+   "a_a_9a9a9a": 4
+  },
+  "institution": {
+   "a-a": 713,
+   "a-a-a": 385,
+   "a-a-a-a": 110,
+   "a-9-9": 125,
+   "a": 302,
+   "a-a-9-9": 81,
+   "a-9-9-a": 17,
+   "a-a-a-a-a": 11,
+   "a-9-a": 8,
+   "a-a-9a-a": 1
+  },
+  "faction": {
+   "a.a_a": 139,
+   "a.a_a_a": 40,
+   "a.a_a_a_a_a": 1
+  },
+  "event": {
+   "a.a-a-a": 266,
+   "a.a-a": 234,
+   "a.a-a-a-a": 4
+  },
+  "tension": {
+   "a.a-a": 93
+  },
+  "relationship": {
+   "a_a_a_a": 492,
+   "a_a_a_a_a": 270,
+   "a_a_a_a_a_a": 52,
+   "a_a_a_9a9a9a9a9": 9,
+   "a_a_a": 279,
+   "a_a_a_a_9_9": 73,
+   "a_a_a_9_9": 101,
+   "a_a_a_9a9a9a9a": 9,
+   "a_a_a_9a9a9a9a9a": 4,
+   "a_a_a_9a9a9": 7,
+   "a_a_a_a9a9a9a9": 8,
+   "a_a_a_9a9": 2,
+   "a_a_a_9a9a9a9": 13,
+   "a_a_a_a9a9a9a9a": 4,
+   "a_a_a_a9a9a9a9a9a": 2,
+   "a_a_a_9_9_a": 1,
+   "a_a_a_a9a9a9a": 3,
+   "a_a_a_a9a9a9a9a9": 4,
+   "a_a_a_9a9a9a9a9a9a9": 1,
+   "a_a_a_a9a9a9": 2,
+   "a_a_a_a_a_a_a": 3,
+   "a_a_a_9a9a": 3,
+   "a_a_a_a9a9a": 2,
+   "a_a_a_9a9a9a9a9a9": 3,
+   "a_a_a_a_9a_a": 1,
+   "a_a_a_9a9a9a": 4
+  },
+  "conflict": {
+   "a.a-a-a-a-a-a-a-a-a": 22,
+   "a.a-a-a-a-a-a-a-a-a-a-a": 32,
+   "a.a-a-a-a-a-a-a-a-a-a-a-a": 6,
+   "a.a-a-a-a-a-a-a-a-a-a-a-a-a": 6,
+   "a.a-a-a-a-a-a-a-a-a-a": 10,
+   "a.a-a-a-a-a-a-a-a-a-a-a-a-a-a": 2,
+   "a.a-a-a-a-a-a-a-a": 2
+  }
+ },
+ "linked": {
+  "cards": 1358,
+  "withLinked": 0,
+  "linkedBeyondAffiliations": 0,
+  "examples": []
+ }
+}

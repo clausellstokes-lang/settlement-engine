@@ -1,0 +1,8 @@
+(1) full chain, after the down file, lines differing from 210: 0
+    the down file a second time: 0
+    211 again, lines differing from the chain at 211: 0
+    control, 210 against 211: 50
+(2) 211 alone, after the down file ONLY, lines differing from 203: 2  (public.get_unlisted_dossier(text) )
+    then 203's get_unlisted_dossier: 0
+    211 again, lines differing from 203+211: 0
+    control, 203 against 203+211: 50

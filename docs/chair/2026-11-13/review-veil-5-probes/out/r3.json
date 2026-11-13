@@ -1,0 +1,516 @@
+{
+ "towns": 800,
+ "withHiddenPower": 188,
+ "divergentTowns": 25,
+ "bySite": {
+  "power:desk.successionRisk.glance": 17,
+  "power:desk.successionRisk.sentence": 17,
+  "general:overview.conflictLines.length": 9,
+  "general:overview.conflictLines[]": 9
+ },
+ "rows": [
+  {
+   "seed": "rv5-r3-village-infiltrated-3",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Elected Reeve at Evangephoros holds because Elected Reeve is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "The question of who might replace the Elected Reeve at Evangephoros does not come up, because there is nobody the village would name if it did."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-8",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Church Council at Goranitsa holds because Church Council is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "Nobody at Goranitsa is in a position to take Church Council's place; it has no rival, and nobody in the town is asking who comes next."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-9",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Llanbridge has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "People at Llanbridge grumble, but nobody in the village stands ready to lead them, so Elected Reeve is safe in the hall."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-12",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 2,
+     "stripped": 1
+    },
+    {
+     "path": "general:overview.conflictLines[1]",
+     "owner": null
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-14",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Elder Council at Umamala holds because Elder Council is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "People at Umamala grumble, but nobody in the village stands ready to lead them, so Elder Council is safe in the hall."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-23",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 1,
+     "stripped": 0
+    },
+    {
+     "path": "general:overview.conflictLines[0]",
+     "owner": null
+    },
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Elder Council at Yurtbaliq holds because Elder Council is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "The question of who might replace the Elder Council at Yurtbaliq does not come up, because there is nobody the village would name if it did."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-23",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 1,
+     "stripped": 0
+    },
+    {
+     "path": "general:overview.conflictLines[0]",
+     "owner": null
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-26",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Nordstrand has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "People at Nordstrand grumble, but nobody in the village stands ready to lead them, so Elected Reeve is safe in the hall."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-metropolis-infiltrated-28",
+   "hiddenPowers": [
+    "The Independent Bloc",
+    "The Grey Council"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 3,
+     "stripped": 2
+    },
+    {
+     "path": "general:overview.conflictLines[2]",
+     "owner": null
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-34",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Divoets has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "Nobody at Divoets is in a position to take Elder Council's place; it has no rival, and nobody in the village is asking who comes next."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-36",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Headman's Authority at Uxmalhuacan holds because Headman's Authority is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "Nobody at Uxmalhuacan is in a position to take Headman's Authority's place; it has no rival, and nobody in the village is asking who comes next."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-38",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Miloka has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "People at Miloka grumble, but nobody in the village stands ready to lead them, so Priestly Guidance is safe in the hall."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-44",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Agiicastron has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "Nobody at Agiicastron is in a position to take Elected Reeve's place; it has no rival, and nobody in the village is asking who comes next."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-45",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Elected Reeve outweighs everyone at Edznaek who wants its place, and the whole village knows who they are. Elected Reeve holds on, but has to watch them.",
+     "stripped": "The question of who might replace the Elected Reeve at Edznaek does not come up, because there is nobody the village would name if it did."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-49",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 2,
+     "stripped": 1
+    },
+    {
+     "path": "general:overview.conflictLines[1]",
+     "owner": null
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-51",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Agiiopolis has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "The question of who might replace the Elder Council at Agiiopolis does not come up, because there is nobody the village would name if it did."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-53",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Elder Council outweighs everyone at Aryapuram who wants its place, and the whole village knows who they are. Elder Council holds on, but has to watch them.",
+     "stripped": "The question of who might replace the Elder Council at Aryapuram does not come up, because there is nobody the village would name if it did."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-62",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 1,
+     "stripped": 0
+    },
+    {
+     "path": "general:overview.conflictLines[0]",
+     "owner": null
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-66",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 1,
+     "stripped": 0
+    },
+    {
+     "path": "general:overview.conflictLines[0]",
+     "owner": null
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-city-null-66",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 2,
+     "stripped": 1
+    },
+    {
+     "path": "general:overview.conflictLines[1]",
+     "owner": null
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-70",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Morkstad has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "The question of who might replace the Elder Council at Morkstad does not come up, because there is nobody the village would name if it did."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-town-infiltrated-77",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Corrupt Council outweighs everyone at Karakfort who wants its place, and the whole town knows who they are. Corrupt Council holds on, but has to watch them.",
+     "stripped": "Nobody at Karakfort is in a position to take Corrupt Council's place; it has no rival, and nobody in the town is asking who comes next."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-metropolis-infiltrated-82",
+   "hiddenPowers": [
+    "The Independent Bloc",
+    "The Grey Council"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "general:overview.conflictLines.length",
+     "owner": 3,
+     "stripped": 2
+    },
+    {
+     "path": "general:overview.conflictLines[2]",
+     "owner": null
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-83",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "Amarpeth has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+     "stripped": "People at Amarpeth grumble, but nobody in the village stands ready to lead them, so Elder Council is safe in the hall."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  },
+  {
+   "seed": "rv5-r3-village-infiltrated-86",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "hiddenNamesInOwnerText": [],
+   "diverge": [
+    {
+     "path": "power:desk.successionRisk.glance",
+     "owner": "Holding",
+     "stripped": "Stable"
+    },
+    {
+     "path": "power:desk.successionRisk.sentence",
+     "owner": "The Elder Council at Karakshahr holds because Elder Council is still the heavier of the two, and the weighing is done again every season.",
+     "stripped": "The question of who might replace the Elder Council at Karakshahr does not come up, because there is nobody the village would name if it did."
+    }
+   ],
+   "pageDiffersFromOwnerComposed": 1
+  }
+ ]
+}

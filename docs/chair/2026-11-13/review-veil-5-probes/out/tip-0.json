@@ -1,0 +1,222 @@
+{
+ "side": "tip",
+ "timers": {
+  "birth": 2195,
+  "model": 3251,
+  "insert": 4850,
+  "ref": 21537,
+  "reads": 512947,
+  "compare": 413729,
+  "page": 166383
+ },
+ "shard": [
+  0,
+  4
+ ],
+ "towns": [
+  "rv5-t-thorp-calm-0",
+  "rv5-t-village-calm-0",
+  "rv5-t-city-calm-0"
+ ],
+ "shares": 228,
+ "reads": 912,
+ "raised": [],
+ "noRow": {},
+ "diff": {
+  "c211:gallery:MISSING:npcs[].linkedFactionIds": 317,
+  "c211:import:MISSING:npcs[].linkedFactionIds": 317,
+  "c211:gallery:MISSING:decrees": 8,
+  "c211:gallery:MISSING:dmLayer": 8,
+  "c211:import:MISSING:decrees": 8,
+  "c211:import:MISSING:dmLayer": 8,
+  "c211:gallery:MISSING:npcs[].factionGoal": 265,
+  "c211:import:MISSING:npcs[].factionGoal": 265
+ },
+ "examples": {
+  "c211:gallery:MISSING:npcs[].linkedFactionIds": [
+   "rv5-t-thorp-calm-0 salted members/pub/live :: \"RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z\"",
+   "rv5-t-thorp-calm-0 salted members/pub/snapshot :: \"RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z\"",
+   "rv5-t-thorp-calm-0 salted allShut/dm/live :: \"RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z\"",
+   "rv5-t-thorp-calm-0 salted only-npc/dm/live :: \"RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z\""
+  ],
+  "c211:import:MISSING:npcs[].linkedFactionIds": [
+   "rv5-t-thorp-calm-0 salted members/pub/live :: \"RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z\"",
+   "rv5-t-thorp-calm-0 salted members/pub/snapshot :: \"RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z\"",
+   "rv5-t-thorp-calm-0 salted allShut/dm/live :: \"RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z\"",
+   "rv5-t-thorp-calm-0 salted only-npc/dm/live :: \"RV5~rv5tthorpcalm0~npc~12~linkedFactionIds~Z\""
+  ],
+  "c211:gallery:MISSING:decrees": [
+   "rv5-t-thorp-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5tthorpcalm0~grp~96~decrees~Z\"}]",
+   "rv5-t-thorp-calm-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5tthorpcalm0~grp~96~decrees~Z\"}]",
+   "rv5-t-village-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5tvillagecalm0~grp~231~decrees~Z\"}]",
+   "rv5-t-village-calm-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5tvillagecalm0~grp~231~decrees~Z\"}]"
+  ],
+  "c211:gallery:MISSING:dmLayer": [
+   "rv5-t-thorp-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5tthorpcalm0~grp~97~dmLayer~Z\"}",
+   "rv5-t-thorp-calm-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5tthorpcalm0~grp~97~dmLayer~Z\"}",
+   "rv5-t-village-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5tvillagecalm0~grp~232~dmLayer~Z\"}",
+   "rv5-t-village-calm-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5tvillagecalm0~grp~232~dmLayer~Z\"}"
+  ],
+  "c211:import:MISSING:decrees": [
+   "rv5-t-thorp-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5tthorpcalm0~grp~96~decrees~Z\"}]",
+   "rv5-t-thorp-calm-0 salted unmarked/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5tthorpcalm0~grp~96~decrees~Z\"}]",
+   "rv5-t-village-calm-0 salted opened/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5tvillagecalm0~grp~231~decrees~Z\"}]",
+   "rv5-t-village-calm-0 salted rand0/dm/live :: [{\"id\":\"d1\",\"text\":\"RV5~rv5tvillagecalm0~grp~231~decrees~Z\"}]"
+  ],
+  "c211:import:MISSING:dmLayer": [
+   "rv5-t-thorp-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5tthorpcalm0~grp~97~dmLayer~Z\"}",
+   "rv5-t-thorp-calm-0 salted unmarked/dm/live :: {\"notes\":\"RV5~rv5tthorpcalm0~grp~97~dmLayer~Z\"}",
+   "rv5-t-village-calm-0 salted opened/dm/live :: {\"notes\":\"RV5~rv5tvillagecalm0~grp~232~dmLayer~Z\"}",
+   "rv5-t-village-calm-0 salted rand0/dm/live :: {\"notes\":\"RV5~rv5tvillagecalm0~grp~232~dmLayer~Z\"}"
+  ],
+  "c211:gallery:MISSING:npcs[].factionGoal": [
+   "rv5-t-village-calm-0 salted members/pub/live :: \"RV5~rv5tvillagecalm0~npc~5~factionGoal~Z\"",
+   "rv5-t-village-calm-0 salted members/pub/snapshot :: \"RV5~rv5tvillagecalm0~npc~5~factionGoal~Z\"",
+   "rv5-t-village-calm-0 salted allShut/dm/live :: \"RV5~rv5tvillagecalm0~npc~5~factionGoal~Z\"",
+   "rv5-t-village-calm-0 salted allShut/dm/live :: \"RV5~rv5tvillagecalm0~npc~37~factionGoal~Z\""
+  ],
+  "c211:import:MISSING:npcs[].factionGoal": [
+   "rv5-t-village-calm-0 salted members/pub/live :: \"RV5~rv5tvillagecalm0~npc~5~factionGoal~Z\"",
+   "rv5-t-village-calm-0 salted members/pub/snapshot :: \"RV5~rv5tvillagecalm0~npc~5~factionGoal~Z\"",
+   "rv5-t-village-calm-0 salted allShut/dm/live :: \"RV5~rv5tvillagecalm0~npc~5~factionGoal~Z\"",
+   "rv5-t-village-calm-0 salted allShut/dm/live :: \"RV5~rv5tvillagecalm0~npc~37~factionGoal~Z\""
+  ]
+ },
+ "tokenLeaks": [],
+ "postFreeze": {
+  "c211:link": 68
+ },
+ "served": {},
+ "pageShowMore": {},
+ "handHides": 16926,
+ "hiddenTokens": 62480,
+ "hidden": {
+  "c211:gallery": 20479,
+  "c211:link": 10802,
+  "c211:map": 10720,
+  "c211:import": 20479
+ },
+ "secondHome": {
+  "c211:gallery:institution:desc": 95,
+  "c211:gallery:institution:tags": 74,
+  "c211:gallery:institution:facets": 32,
+  "c211:gallery:institution:description": 82,
+  "c211:link:institution:desc": 95,
+  "c211:link:institution:tags": 74,
+  "c211:link:institution:facets": 32,
+  "c211:link:institution:description": 82,
+  "c211:map:institution:desc": 95,
+  "c211:map:institution:tags": 74,
+  "c211:map:institution:facets": 32,
+  "c211:map:institution:description": 82,
+  "c211:import:institution:desc": 95,
+  "c211:import:institution:tags": 74,
+  "c211:import:institution:facets": 32,
+  "c211:import:institution:description": 82
+ },
+ "secondHomeEx": [
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1282~desc~Z",
+   "at": [
+    "defenseProfile.institutions.magicDef[].desc"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1284~tags~Z",
+   "at": [
+    "defenseProfile.institutions.magicDef[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1285~facets~Z",
+   "at": [
+    "defenseProfile.institutions.magicDef[].facets"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1283~description~Z",
+   "at": [
+    "defenseProfile.institutions.magicDef[].description"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1332~desc~Z",
+   "at": [
+    "defenseProfile.institutions.walls[].desc"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1334~tags~Z",
+   "at": [
+    "defenseProfile.institutions.walls[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1335~facets~Z",
+   "at": [
+    "defenseProfile.institutions.walls[].facets"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1333~description~Z",
+   "at": [
+    "defenseProfile.institutions.walls[].description"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1337~desc~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].desc",
+    "defenseProfile.institutions.garrison[].desc"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1339~tags~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].tags[]",
+    "defenseProfile.institutions.garrison[].tags[]"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1338~description~Z",
+   "at": [
+    "defenseProfile.institutions.watch[].description",
+    "defenseProfile.institutions.garrison[].description"
+   ]
+  },
+  {
+   "share": "rv5-t-city-calm-0 salted allShut/pub/live",
+   "read": "gallery",
+   "tok": "RV5~rv5tcitycalm0~institution~1342~desc~Z",
+   "at": [
+    "defenseProfile.institutions.garrison[].desc"
+   ]
+  }
+ ],
+ "hiddenPowerName": {},
+ "covertTies": {},
+ "hiddenPowerTowns": 0,
+ "powersCards": 136
+}
