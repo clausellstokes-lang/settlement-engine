@@ -44,6 +44,9 @@
 // they presume (`needs`, the vocabulary's water atoms: First Landing `navigable` — a coast, a river
 // or a port; River `river`; Tide `coast`). The Traditions tab prints only admissible rows
 // (`filterDeclared`); genesis's weights are CENSUS-1c's and read nothing here.
+// R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #536: "The Market Contest" in a village where "No
+// market or fair stands"): the Market element declares the market it presumes (`market`, the
+// vocabulary's market atom, facts/market.js — the home the Overview's market line reads).
 
 /**
  * The motif ELEMENTS (design §2 "element" vocabulary). Index 0 (`founding`) is the
@@ -62,7 +65,7 @@ export const TRADITION_ELEMENTS = Object.freeze([
   { id: 'the-dead',      glyph: '☾', noun: 'Dead',       genitive: 'the Dead',            adjective: 'Mourning', season: 'autumn', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: true,  foundingFit: false },
   { id: 'field',         glyph: '▦', noun: 'Furrow',     genitive: 'the Fields',          adjective: 'Field',    season: 'spring', terrains: Object.freeze(['plains']),                   econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
   { id: 'forge',         glyph: '⚒', noun: 'Forge',      genitive: 'the Forge',           adjective: 'Forge',    season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze(['road']),                  deityFit: false, foundingFit: false },
-  { id: 'market',        glyph: '⚖', noun: 'Market',     genitive: 'the Market',          adjective: 'Market',   season: 'summer', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads', 'port', 'road']), deityFit: false, foundingFit: false },
+  { id: 'market',        glyph: '⚖', noun: 'Market',     genitive: 'the Market',          adjective: 'Market',   season: 'summer', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads', 'port', 'road']), deityFit: false, foundingFit: false, needs: Object.freeze(['market']) },
   { id: 'hunt',          glyph: '➹', noun: 'Hunt',       genitive: 'the Hunt',            adjective: 'Hunt',     season: 'autumn', terrains: Object.freeze(['forest']),                   econ: Object.freeze(['isolated']),              deityFit: false, foundingFit: false },
   { id: 'long-sun',      glyph: '☀', noun: 'Long Sun',   genitive: 'the Long Sun',        adjective: 'Sun',      season: 'summer', terrains: Object.freeze(['desert']),                   econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
   { id: 'tide',          glyph: '∿', noun: 'Tide',       genitive: 'the Tide',            adjective: 'Tide',     season: 'summer', terrains: Object.freeze(['coastal']),                  econ: Object.freeze(['port']),                  deityFit: false, foundingFit: false, needs: Object.freeze(['coast']) },

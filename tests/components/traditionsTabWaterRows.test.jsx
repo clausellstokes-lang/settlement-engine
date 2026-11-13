@@ -20,9 +20,10 @@ const withElement = (rec, element, name) => ({ ...rec, name, coreMotif: { ...rec
 const MIRROR = [withElement(recs[0], 'tide', 'The Fair of the Tide'), withElement(recs[1] || recs[0], 'hearth', 'The Hearth Night'), withElement(recs[0], 'river', 'The River Blessing')];
 
 describe('the water-keyed rows print only where the water is', () => {
-  it('declares exactly the three water elements', () => {
+  // RE-KEYED (R2-CODE-B item 4, the cold list REVIEW-W2A-3 #536): the Market element declares its market too.
+  it('declares exactly the three water elements, and the market', () => {
     const declared = Object.fromEntries(TRADITION_ELEMENTS.filter((e) => e.needs).map((e) => [e.id, e.needs]));
-    expect(declared).toEqual({ 'first-landing': ['navigable'], river: ['river'], tide: ['coast'] });
+    expect(declared).toEqual({ 'first-landing': ['navigable'], river: ['river'], tide: ['coast'], market: ['market'] });
   });
   it('a plains road prints neither the Tide nor the River; the Hearth stands', () => {
     render(<TraditionsTab settlement={{ ...BASE, traditions: MIRROR }} />);
