@@ -37,6 +37,9 @@ import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { importsAsPrinted } from './tradeListDisplay.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { familyOfInstitution } from '../../data/institutionalCatalog.js';
+import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -173,6 +176,26 @@ function houseWords(inst) {
 /** @param {string[]} nouns */
 const orList = (nouns) => (nouns.length < 2 ? nouns.join('') : `${nouns.slice(0, -1).join(', ')} or ${nouns[nouns.length - 1]}`);
 
+/**
+ * Whether the roster holds a house OF THIS KIND, live (W2-C-LEAVES, 2026-11-13; REVIEW-W2A-3 #628, #911: "no tannery
+ * … finishes it" beside Tanners, "no apothecary … finishes it" beside an Apothecary district). A chain's list names
+ * one spelling of a house; the catalogue's family is the house's own home and holds every spelling of it at every
+ * tier ("Tannery" in a village is "Tanners" in a town), and the ladder holds its larger and smaller forms of the same
+ * function ("Apothecary" grows into the "Apothecary district"). Never by one name.
+ * @param {PageRecord} s @param {string} name a house the chain's list names
+ */
+function houseOfKindHere(s, name) {
+  const want = familyOfInstitution({ name });
+  return liveInstitutions(s).some((inst) => {
+    const have = str(inst?.name);
+    if (!have) return false;
+    if (have.toLowerCase() === name.toLowerCase()) return true;
+    const family = familyOfInstitution(inst);
+    if (want && family && want.key === family.key) return true;
+    return institutionLadderEvicts(have, name) || institutionLadderEvicts(name, have);
+  });
+}
+
 /** @typedef {(typeof RESOURCE_CHAINS)[keyof typeof RESOURCE_CHAINS]} ResourceChain */
 
 /** @param {string} rawResource @returns {[string, ResourceChain]|null} the chain entry for a gap's raw resource */
@@ -188,7 +211,8 @@ const chainFor = (rawResource) => /** @type {[string, ResourceChain]|undefined} 
  *  - a raw resource no house works: "No one here works the stone near Ashford." — unless
  *    the economy already exports it;
  *  - a chain worked part-way: "Work on the glass sand here stops half-way: no glassblower
- *    finishes it."
+ *    finishes it." — naming only the houses the roster lacks BY KIND (`houseOfKindHere`), and
+ *    nothing where it holds every one.
  * @param {PageRecord} s the settlement record
  * @returns {GapLine[]}
  */
@@ -211,7 +235,10 @@ export function resourceGapLines(s) {
     const spec = entry ? CHAIN_INPUTS[entry[0]] : null;
     const raw = (spec?.raw || str(resourceDisplayName(str(g.chain)))).toLowerCase();
     if (spec && spec.words.some((w) => holds(exportsText, w))) continue; // the economy sells it: someone works it
-    const missing = arr(g.missing).map((n) => str(institutionDisplayName(n) || n)).filter(Boolean).map((n) => n.charAt(0).toLowerCase() + n.slice(1));
+    // The houses the line names as missing are read by kind: a house of the roster that is the named one's own
+    // family or ladder rung is not missing (W2-C-LEAVES, item 1).
+    const missing = arr(g.missing).map(str).filter((n) => n && !houseOfKindHere(s, n))
+      .map((n) => str(institutionDisplayName(n) || n)).filter(Boolean).map((n) => n.charAt(0).toLowerCase() + n.slice(1));
     if (/not being processed/.test(str(g.impact))) {
       push({ chain: null, impact: `No one here works the ${raw} near ${str(s?.name) || 'the place'}.`, severity: str(g.severity) || 'low' });
     } else if (missing.length) {
