@@ -58,6 +58,8 @@ export const NOT_WORKED_THROUGH = Object.freeze([
 export const WORKED_BY_HOUSE = Object.freeze([
   Object.freeze({ houses: ['apothecar'], goods: ['medicinal herbs'], brought: /\bherbs?\b/i,
     cause: "an apothecary's house works the medicinal herbs of the town's own ground into its remedies; the chain model takes the herbs only from foraging areas (P1-a: r2r-village-47, r2r-metropolis-31, r2r-metropolis-54). Where the record imports herbs (\"Medicinal herbs\", \"Herbs and forage (local gathering areas exhausted)\": r2r-town-17, r2r-city-41, the cold list's #1146) the apothecary's herbs are bought" }),
+  Object.freeze({ houses: ['charcoal burner'], goods: ['timber'], brought: /\b(?:timber|wood|lumber)\b/i,
+    cause: "a charcoal burner cuts and burns the wood of the town's own forest in its kilns (the catalogue: \"Operates kilns in nearby woodland\"); the chain model takes the timber only through a sawmill or carpenters (the chair's ruling on P1-b's doubtful lines: r2s-plague_onset-hamlet-2, r2s-wartime-hamlet-0, r2s-under_siege-village-0). Where the record imports timber or wood the burner's wood is bought" }),
 ]);
 
 /**
