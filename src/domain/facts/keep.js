@@ -65,6 +65,18 @@ export function keepOf(prosperity) {
 }
 
 /**
+ * What a place can keep up, read from its record (COHERENCE-UPKEEP-5, the chair's R3): the
+ * STANDING label (`economicState.prosperityStanding`, the label with no crisis in force), so a
+ * crisis acts once, on the parts it touches, never through a label it capped. A record written
+ * before the standing label existed reads the label it has.
+ * @param {{ prosperity?: unknown, prosperityStanding?: unknown } | null | undefined} economicState
+ * @returns {Readonly<{ bought: number, funded: number }>}
+ */
+export function keepOfRecord(economicState) {
+  return keepOf(economicState?.prosperityStanding ?? economicState?.prosperity);
+}
+
+/**
  * The floors of what is bought outright, by family (the chair's ruling of 2026-11-12, rulings 4
  * and 6): a family keeps `floor + (1 - floor) × bought` of its full measure. And the magic line
  * (ruling 5): below this `bought` share, magic availability steps down one band. DRAFT, the

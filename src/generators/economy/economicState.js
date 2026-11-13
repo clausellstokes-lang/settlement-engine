@@ -9,7 +9,7 @@ import { generateSafetyProfile, keptGuardLine } from '../safetyProfile.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../data/goods/chains.js';
 import { computeActiveChains, deriveExportsFromChains, deriveImportsFromChains, deriveLocalProductionFromChains, deriveInstitutionalServices, deriveServiceExports } from '../computeActiveChains.js';
 import { generateTradeIncomeStreams } from './tradeGoods.js';
-import { computeBaseProsperity, deriveEconomicComplexity, deriveProsperityLabel, deriveEconomicSituationDesc } from './prosperity.js';
+import { computeBaseProsperity, deriveEconomicComplexity, deriveProsperityLabels, standingBaseProsperity, deriveEconomicSituationDesc } from './prosperity.js';
 import { nativeSemanticName } from '../../domain/content/customContentSemanticAuthority.js';
 import { resolveNativeEconomicInputs } from './nativeEconomicInputs.js';
 import { applyFinishedGoodsDemandWithOwnership, applySubsistenceTradeBoundary,
@@ -829,7 +829,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeNormalized,
     _foodSec,
   );
-  const prosperity = deriveProsperityLabel(baseProsperity, config, institutions);
+  const { prosperity, prosperityStanding } = deriveProsperityLabels(baseProsperity, standingBaseProsperity(tier, tradeRoute, institutions, config, instNames, incomeNormalized), config, institutions); // COHERENCE-UPKEEP-5 (R3): beside the printed label, the label with no crisis in force, the one draw replayed
   // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force.
   safetyProfile.guardEffectivenessDesc = keptGuardLine(safetyProfile.guardEffectivenessDesc, institutions, prosperity, config.stressTypes || []);
   // COHERENCE-UPKEEP (ruling 6): the stores are laid by at the label's share, at the stores' writer,
@@ -837,11 +837,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // only draw is a label-keyed fork, so this second call draws the same crop fortune and moves no
   // stream; every storage field (the months, the note, the resilience) follows the kept months.
   const _keptFoodSec = generateFoodSecurity(
-    tier, institutions, { ...config, tradeRouteAccess: tradeRoute }, boughtShare('stores', keepOf(prosperity)),
+    tier, institutions, { ...config, tradeRouteAccess: tradeRoute }, boughtShare('stores', keepOf(prosperityStanding)), // R3: laid by at the standing label's share
   );
   return {
       tier: tier,
-      prosperity,
+      prosperity, prosperityStanding, // R3: the standing label sits beside the printed one
       situationDesc: deriveEconomicSituationDesc(
         config,
         tier,

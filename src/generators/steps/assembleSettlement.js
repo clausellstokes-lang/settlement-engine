@@ -230,7 +230,7 @@ registerStep('assembleSettlement', {
   // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
   // no other draw).
   settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
-  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOf(settlement.economicState?.prosperity)); // COHERENCE-UPKEEP: what the place can keep up, from the one home
+  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label
 
   // The final-economy pass already proved that power consumed the final
   // prosperity/safety/food tuple. Assert that proof before applying the one
@@ -461,4 +461,4 @@ registerStep('assembleSettlement', {
   // GENERATION-stamped twins the stressor promotion just minted.
   return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
 });
-import { keepOf } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
+import { keepOfRecord } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
