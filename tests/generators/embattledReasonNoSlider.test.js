@@ -27,3 +27,20 @@ describe('the embattled-region warning never prints the military slider (ROUND-3
     expect(reasonAt(60)).toBeUndefined();
   });
 });
+
+// R3-CODE-C-2, the chair's ruling on REVIEW-R3-STAGES C11 (MED, 36 cities and metropolises of 1,536 births, e.g.
+// r2s-politically_fractured-metropolis-2): "A beleaguered outpost surviving on the edge." is a size word; it is
+// said in a thorp to a town (true there, by the reader) and left out of a city or a metropolis.
+describe('"outpost" is said only of a place small enough to be one', () => {
+  const reasonFor = (tier) => checkStructuralValidity(ROSTER, { tier, monsterThreat: 'plagued', priorityMilitary: 38 })
+    .violations.find((v) => v.type === 'survival_crisis')?.reason;
+  it('thorp to town keep the clause; city and metropolis read the warning without it', () => {
+    const OUTPOST = 'A beleaguered outpost surviving on the edge.';
+    for (const tier of ['thorp', 'hamlet', 'village', 'town']) expect(reasonFor(tier), tier).toContain(OUTPOST);
+    const large = ['city', 'metropolis'].map((tier) => reasonFor(tier));
+    expect(large).toEqual([
+      'Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.',
+      'Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.',
+    ]);
+  });
+});

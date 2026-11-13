@@ -599,7 +599,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         violations.push({
           type:        'survival_crisis',
           institution: 'Regional Threat',
-          reason:      'Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement. A beleaguered outpost surviving on the edge.',
+          reason:      `Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.${tierAtLeast(tier, 'city') ? '' : ' A beleaguered outpost surviving on the edge.'}`, // R3-CODE-C-2 (REVIEW-R3-STAGES C11): "outpost" is a size word, said only of a place small enough to be one
           severity:    'warning',
         });
       }
