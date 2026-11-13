@@ -1,0 +1,1 @@
+for (const w of Object.values(ROLE_FAMILIES)) if (w !== ROLE_FAMILIES.armedForce) w.pageWithdrawn = PAGE_WITHDRAWN.role;

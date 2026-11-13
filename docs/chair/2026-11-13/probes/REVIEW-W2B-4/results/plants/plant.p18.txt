@@ -1,0 +1,3 @@
+     × planted: each family is a finding where the town makes it false, and none where it is true
+     × the family is withdrawn whole: clergy and armedForce leave the page list too, and stay registered
+      Tests  2 failed | 32 passed (34)
