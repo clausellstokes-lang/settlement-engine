@@ -2530,6 +2530,9 @@ own entailment and licenses nothing about who runs it.
 **GM ADVISORY: the commander is a political actor** *(WIRING W3 C1: `factionRelationships[].dmNote` on a competitive governing-military pair; every variant `dm-only`)*
 1. `[ledger · dm-only · commander]` The commander at {settlement} is a political player in their own right. Whatever the {seat} plans needs the commander's backing, and that backing has to be kept, bought or worked around.
 2. `[counterforce · dm-only · commander]` Treat the commander at {settlement} as a power, not a servant: the {seat} cannot act against the soldiers' wishes, and anyone who wins the commander over wins the town's muscle.
+3. `[ledger · dm-only · colour]` {faction} answers to the {seat} at {settlement} in name only: whatever the {seat} plans needs its consent, and that consent is bargained for.
+4. `[street · dm-only · colour]` At {settlement} the {seat} gives no order {faction} would refuse, and whoever can turn {faction} turns the place's armed strength with it.
+5. `[unfolding · dm-only · colour]` {faction} has grown stronger than the {seat} at {settlement}, and both know it; the {seat} keeps the title while {faction} decides what is enforced.
 
 **GM ADVISORY: officials with criminal arrangements** *(WIRING W3 C1: `factionRelationships[].dmNote` on a governing-criminal pair whose capture state is past adversarial; every variant `dm-only`)*
 1. `[ledger · dm-only · colour]` Some officials of the {seat} at {settlement} have an understanding with {faction}, and each owes it something different; every one of them is a thread the party can pull.

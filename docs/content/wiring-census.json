@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2824,
+    "variants": 2827,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -37,8 +37,8 @@
     "syntheticTableFields": 174,
     "tiers": {
       "MISSING": 33,
-      "THIN": 615,
-      "COVERED": 241,
+      "THIN": 614,
+      "COVERED": 242,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -36742,13 +36742,14 @@
         "settlement"
       ],
       "slotsNamed": [
+        "faction",
         "seat",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
-      "grammars": 1,
+      "variants": 5,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [
         "power.factionRelationships"
@@ -36791,6 +36792,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 3,
         "commander": 2
       },
       "undeclared": 0,
@@ -71174,12 +71176,12 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-POW-6",
       "subject": "GM ADVISORY: the commander is a political actor",
       "fields": [],
       "readingFunction": "gmAdvisoryPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {faction, seat, settlement}"
     },
     {
       "tier": "THIN",
