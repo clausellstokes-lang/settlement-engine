@@ -237,6 +237,33 @@ export function defenseTraditionNamesOf(institutions) {
 }
 
 /**
+ * COUNT ONCE, THE MAGIC HOUSES (COHERENCE-UPKEEP-6, the chair's ruling 4, READING A, a declared move): a house
+ * that stands as its own named part of defence (alchemists, druids, arcane, the hospital) keeps that part and
+ * leaves the magic presence. Same keyword discipline over the same lowered native semantic name. Measured first:
+ * docs/chair/2026-11-13/probes/UPKEEP-6/magic-count-once.md. No weight changed.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEFENSE_NAMED_MAGIC_HOUSES = Object.freeze([
+  'apothecary district', 'elder grove council', "wizard's tower", 'alchemist shop',
+  "mages' guild", 'alchemist quarter', 'hedge wizard', 'healer (divine',
+]);
+
+/**
+ * The roster the magic presence reads: the roster without the named magic houses (count once). RUIN-BLIND, as
+ * the partition. One name reading per institution.
+ * @param {unknown} institutions
+ * @returns {unknown[]} a new array; the roster is not touched
+ */
+export function magicPresenceRosterOf(institutions) {
+  /** @type {ReadonlyArray<unknown>} */
+  const list = Array.isArray(institutions) ? institutions : [];
+  return list.filter((inst) => {
+    const name = nativeSemanticName(inst).toLowerCase();
+    return !DEFENSE_NAMED_MAGIC_HOUSES.some((kw) => name.includes(kw));
+  });
+}
+
+/**
  * THE WALL'S KIND (the chair's R17, optional): read from the walls row's name by the same keyword
  * discipline, stone by default. NO term of the defence profile reads it, and no record stores it;
  * it is the home's answer, ready for a later reader.

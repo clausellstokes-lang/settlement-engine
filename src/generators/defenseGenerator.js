@@ -39,7 +39,7 @@
 import { getInstFlags, getPriorities } from './helpers.js';
 import { computeEffectiveMagicPresence, neighbourMilitaryFactorOf } from './priorityHelpers.js';
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
-import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf } from '../domain/institutions/defenseInstitutionBuckets.js';
+import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf, magicPresenceRosterOf } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
 import { deriveMagicReliance } from '../domain/magicReliance.js';
@@ -231,10 +231,11 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
     if (inst.hasChurch) { c.churchInt = K.parishInt; c.churchMil = K.parishMil; }
     if (names.elders) { c.elderInt = K.eldersInt; c.elderMil = K.eldersMil; }
   }
-  // A small place has magical defence only where a magic house actually stands.
+  // A small place has magical defence only where a magic house actually stands. A house that is its own named part
+  // (alchemists, druids, arcane, the hospital) leaves the presence: count once (ruling 4, reading A).
   const hasActualMagic = inst.hasMagicInst || t.hasDruid || t.hasArcane || names.actualMagic;
   const presence = magicOn && !(isSmall && !hasActualMagic)
-    ? computeEffectiveMagicPresence(institutions, { ...config, nearbyResources: config.nearbyResources || [] }).score
+    ? computeEffectiveMagicPresence(magicPresenceRosterOf(institutions), { ...config, nearbyResources: config.nearbyResources || [] }).score
     : null;
   const chains = chainsOf(settlement, config);
   const terrainType = config.terrainType || 'plains';
