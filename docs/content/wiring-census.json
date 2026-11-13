@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2888,
+    "variants": 2908,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -596,7 +596,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -650,7 +650,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 3,
         "gate": 1
       },
       "undeclared": 0,
@@ -806,7 +806,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -858,8 +858,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 3,
-        "no crisis: threat": 1
+        "crisis: any": 4,
+        "no crisis: threat": 1,
+        "threat": 1
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -1014,7 +1015,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
+      "variants": 6,
       "grammars": 1,
       "predicate": [
         {
@@ -1066,9 +1067,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 5,
+        "crisis: any": 6,
         "no threat": 3,
-        "threat": 2
+        "threat": 3
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -1430,7 +1431,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 6,
       "grammars": 1,
       "predicate": [
         {
@@ -1482,10 +1483,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 4,
+        "crisis: any": 6,
         "no crisis: threat": 1,
         "no threat": 2,
-        "threat": 1
+        "threat": 3
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -5001,7 +5002,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -5065,7 +5066,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 3,
         "gate": 1
       },
       "undeclared": 0,
@@ -8251,7 +8252,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -8300,7 +8301,8 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 1
+        "guardPresence": 1,
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -8316,7 +8318,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 5,
       "grammars": 1,
       "predicate": [
         {
@@ -8364,8 +8366,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "guardPresence": 1
+        "colour": 1,
+        "guardPresence": 2,
+        "no guardPresence": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -8443,7 +8446,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -8492,7 +8495,8 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 1
+        "guardPresence": 1,
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -8508,7 +8512,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -8557,7 +8561,8 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 1
+        "guardPresence": 1,
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -8573,8 +8578,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 1,
+      "variants": 4,
+      "grammars": 2,
       "predicate": [
         {
           "field": "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)",
@@ -8622,7 +8627,8 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 1
+        "guardPresence": 1,
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -8703,7 +8709,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -8752,7 +8758,8 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 1
+        "guardPresence": 1,
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -8830,7 +8837,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 5,
       "grammars": 2,
       "predicate": [
         {
@@ -8879,7 +8886,8 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
-        "guardPresence": 2
+        "guardPresence": 2,
+        "no guardPresence": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -8895,7 +8903,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -8944,7 +8952,9 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 1
+        "crisis: insurgency": 1,
+        "guardPresence": 1,
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -9146,7 +9156,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -9191,7 +9201,7 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
-        "guardPresence": 1,
+        "guardPresence": 2,
         "no guardPresence": 1
       },
       "undeclared": 0,
@@ -11539,7 +11549,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 5,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -11594,9 +11604,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 3,
-        "no threat": 1,
-        "threat": 1
+        "crisis: any": 5,
+        "no threat": 2,
+        "threat": 2
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -11612,7 +11622,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
+      "variants": 3,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -11666,7 +11676,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: under_siege": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -54716,7 +54728,7 @@
         "DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need",
         "DS-DEF-2 :: Beasts & Monsters: settled, nothing organized"
       ],
-      "variants": 25,
+      "variants": 28,
       "grammars": 11,
       "blocks": [
         "DS-DEF-2"
@@ -55039,7 +55051,7 @@
       "pools": [
         "DS-DEF-5 :: garrison PRESENT"
       ],
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "blocks": [
         "DS-DEF-5"
@@ -55126,7 +55138,7 @@
         "DS-DEF-2 :: Invasion & War: militia only",
         "DS-DEF-2 :: Invasion & War: neither walls nor force"
       ],
-      "variants": 24,
+      "variants": 26,
       "grammars": 14,
       "blocks": [
         "DS-DEF-2"
@@ -55681,8 +55693,8 @@
         "DS-DEF-8 :: override: REVOLT ACTIVE",
         "DS-DEF-8 :: override: WAR FOOTING"
       ],
-      "variants": 43,
-      "grammars": 19,
+      "variants": 53,
+      "grammars": 20,
       "blocks": [
         "DS-DEF-8"
       ]
@@ -66289,7 +66301,7 @@
         "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "BEASTS_ROW_POOL",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66319,7 +66331,7 @@
         "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "BEASTS_ROW_POOL",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66349,7 +66361,7 @@
         "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "BEASTS_ROW_POOL",
-      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66409,7 +66421,7 @@
         "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "INVASION_ROW_POOL",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66934,7 +66946,7 @@
         "forces.garrison.present"
       ],
       "readingFunction": "forceCorePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67372,7 +67384,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67382,7 +67394,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67402,7 +67414,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67412,7 +67424,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67422,7 +67434,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67442,7 +67454,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67462,7 +67474,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67472,7 +67484,7 @@
         "text(active.type) (via OVERRIDE_POOL_BY_TYPE in defenseStateProse.js)"
       ],
       "readingFunction": "OVERRIDE_POOL_BY_TYPE",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67510,7 +67522,7 @@
       "subject": "override: MIGRATION, arrivals",
       "fields": [],
       "readingFunction": "militaryOverridePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67848,7 +67860,7 @@
       "subject": "UNWALLED-SMALL",
       "fields": [],
       "readingFunction": "wallRationalePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67856,7 +67868,7 @@
       "subject": "UNWALLED-LARGE",
       "fields": [],
       "readingFunction": "wallRationalePoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 246853,
-      "gzip": 33480,
+      "raw": 254164,
+      "gzip": 34385,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -675,6 +675,14 @@
       "toRaw": 294443,
       "gzipAfter": 37639,
       "reason": "+64 B raw over the committed 294379 (gzip level 9: 37631 -> 37639): the first seat's lines read town by town: three cured by a declaration, one line for the case a declaration left thin (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE stage 3",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 246853,
+      "toRaw": 254164,
+      "gzipAfter": 34385,
+      "reason": "+7311 B raw over the committed 246853 (gzip level 9: 33480 -> 34385): three for every case, the layer-2 list first: DS-DEF-8's guardless overrides, DS-DEF-2's threat cases, DS-DEF-11 unwalled, DS-DEF-5 garrison (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [

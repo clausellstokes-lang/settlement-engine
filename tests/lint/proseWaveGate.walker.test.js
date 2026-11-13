@@ -168,7 +168,7 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     // (c66099791), DS-DEF-4 FIXTURE pools +8 (ec73f09f3), DS-DEF-5 FIXTURE pools +6 (e4cbe50db) and gates v3-v4 +2
     // (4aaa0f230), DS-DEF-5 ARCANE pools +12 (15e146c53), DS-DEF-12 +15 (the third seat). This pin was not re-keyed by
     // the lane's first two seats; the sum is measured, not inferred.
-    expect(total, 'the units actually compared').toBe(584); // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 444 -> 458 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 458 -> 557 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 557 -> 558 // W2-WRITE DEF-3 districts in small places (2026-11-13): 558 -> 562 // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 562 -> 584
+    expect(total, 'the units actually compared').toBe(604); // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 444 -> 458 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 458 -> 557 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 557 -> 558 // W2-WRITE DEF-3 districts in small places (2026-11-13): 558 -> 562 // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 562 -> 584 // W2-WRITE stage 3, three lines for every case (layer 2) (2026-11-13): 584 -> 604
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.

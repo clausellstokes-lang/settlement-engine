@@ -7934,11 +7934,6 @@
     "override: UNDER OCCUPATION"
    ],
    [
-    "revolt",
-    "word",
-    "override: INSURGENCY ACTIVE"
-   ],
-   [
     "famine",
     "word",
     "posture INTERNAL PRESSURE (famine)"
