@@ -1,0 +1,11 @@
+PLANT CAUGHT [structuralPosition] Holds the seat, though the guild masters decide what it may do.
+PLANT MISSED [structuralPosition] Holds the seat, but only at the merchants' pleasure.
+PLANT MISSED [structuralPosition] Holds the seat in the abbot's name and signs nothing the abbot has not read.
+PLANT MISSED [structuralPosition] Holds the seat as the guildmaster's deputy.
+PLANT MISSED [structuralPosition] Holds the seat on sufferance; the council of elders can remove them with a word.
+PLANT MISSED [activeConstraint] Must answer to the old families for every coin spent.
+PLANT MISSED [activeConstraint] Cannot act without the consent of the temple.
+PLANT MISSED [activeConstraint] Every order is reviewed by the governor's clerks before it is obeyed.
+PLANT MISSED [goal] Keep the favour of the lord who appointed them.
+PLANT MISSED [goal] Win back the trust of the masters they serve.
+PLANT MISSED [goal] Earn a place among the families who really decide things here.

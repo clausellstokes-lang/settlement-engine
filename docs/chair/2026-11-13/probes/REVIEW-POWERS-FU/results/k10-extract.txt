@@ -1,0 +1,269 @@
+### rvf-succession_void-metropolis-2 — keeper Sharda Mishra, heads Merchant Guilds
+  [Summary/Crisis] Merchant Guilds no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting Lord Mayor Sharda Mishra, the exchange master, keeps the seat meanwhile.
+  [Systems/Power] ↳27 members · first Sharda Mishra · second Umesh Pandey · third Anjali Narayanan
+  [Systems/Power] Merchant Guilds
+  [Systems/Power] ↳30 members · first Sharda Mishra · second Indumati Chakravarti · third Pandit Mukhopadhyay
+  [Systems/Power] Grand Council↔Merchant Guildsstable
+  [Systems/Power] Grand Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Grand Council to enforce its contracts and keep the law. Neither can afford to ruin the other.
+  [Systems/Power] Merchant Guilds↔Religious Authoritiesstable
+  [Systems/Power] The money of Merchant Guilds pays for the charity of Religious Authorities, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+  [Systems/Power] Acting Lord Mayor · Sharda Mishra, the exchange master · also first in Merchant Guilds
+  [Systems/Power] While the seat of Grand Council stands empty, its steward Sharda Mishra holds a full share in Merchant Guilds, and Merchant Guilds's requests go through Sharda Mishra.
+  [Systems/Power] Merchant Guilds · a little stronger than its own members make it
+  [Systems/Power] Sharda Mishra, steward of Grand Council while its seat stands empty, also holds a full share in Merchant Guilds, and that lends Merchant Guilds weight it would not have on its own.
+  [card] Sharda Mishra●●●
+  [card] ▲
+  [card] International trade center · Acting Lord Mayor, first of Grand Council · first of Merchant Guilds
+  [card] Master of the Exchange
+  [card] Flaw: stubborn
+  [card] Outstanding DebtChhaya Nair
+  [card] Called byLakshmi Bajaj · Mentor and Successor
+  [card] Called byChhaya Panda · Outstanding Debt
+  [card] Called byPooja Subramanian · Mutual Leverage
+  [card] Called byJatin Sarkar · Mentor and Successor
+  [card] Wants Settle one quarrel inside Merchant Guilds before Indumati Chakravarti can settle it and take the credit.
+  [card] Disposition commanding
+  [card] How they deal Keeps out of trouble by keeping away from you, and sends you to someone else when they can.
+  [card] Secret: Survived something everyone believes killed them, under a different name
+### critique-city-17 — keeper Nessa MacCormack, heads Merchant Guilds
+  [Summary/Crisis] Merchant Guilds no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting First Councillor Nessa MacCormack, the senior guild master, keeps the seat meanwhile.
+  [Systems/Power] ↳12 members · first Nessa MacCormack · second Kieran Kennedy · third Eithne O'Brien
+  [Systems/Power] Merchant Guilds
+  [Systems/Power] ↳16 members · first Nessa MacCormack · second Liam MacCormack · third Laoghaire O'Leary
+  [Systems/Power] Merchant Guilds~Craft Guildsstable
+  [Systems/Power] Merchant Guilds and Craft Guilds vote together against The Highborn Circle, then fight over who keeps the profit.
+  [Systems/Power] City-State Council↓Merchant Guildsstable
+  [Systems/Power] Merchant Guilds works under the rules City-State Council sets, and pays for a hearing in the hall when it wants something.
+  [Systems/Power] Acting First Councillor · Nessa MacCormack, the senior guild master · also first in Merchant Guilds
+  [Systems/Power] While the seat of City-State Council stands empty, its steward Nessa MacCormack holds a full share in Merchant Guilds, and Merchant Guilds's requests go through Nessa MacCormack.
+  [Systems/Power] Merchant Guilds · a little stronger than its own members make it
+  [Systems/Power] Nessa MacCormack, steward of City-State Council while its seat stands empty, also holds a full share in Merchant Guilds, and that lends Merchant Guilds weight it would not have on its own.
+  [card] Nessa MacCormack●●●
+  [card] ▲
+  [card] Merchant guilds (15-40) · Acting First Councillor, first of City-State Council · first of Merchant Guilds
+  [card] Warden of the Guild
+  [card] Temperament: wise
+  [card] Outstanding DebtDeclan Sweetman
+  [card] Called byDiarmuid O'Flaherty · Mutual Leverage
+  [card] Called byQuinn Murray · Professional Rivalry
+  [card] Called bySiobhan Murray · Outstanding Debt
+  [card] Heads the leading house in the trade while rivals fight over the seat; whoever wins can make or break it.
+  [card] Constraint: Keeping friends on both sides means neither side fully trusts the house.
+  [card] Wants Look for a way to do more for Fishing & Seafood with the same hands.
+  [card] Disposition wise, commanding
+  [card] How they deal Friendly and quick; by the end of the talk they know more about you than you do about them.
+  [card] Secret: Knows the deceased's actual wishes regarding succession. They were told privately and have chosen not to share them
+  [Table/Tonight sheet] Nessa MacCormack
+### l2-succession_void-city-11 — keeper Elica Denisov, heads Merchant Guilds
+  [Summary/Crisis] Merchant Guilds no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting Speaker of the Assembly Elica Denisov, the senior guild master, keeps the seat meanwhile.
+  [Systems/Power] ↳23 members · first Elica Denisov · second Alexei Nikolayev · third Uglješa Orlov
+  [Systems/Power] Merchant Guilds
+  [Systems/Power] ↳26 members · first Elica Denisov · second Galina Kiselev · third Uroš Zaytsev
+  [Systems/Power] Democratic assembly↔Merchant Guildsstable
+  [Systems/Power] Democratic assembly needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Democratic assembly to enforce its contracts and keep the law. Neither can afford to ruin the other.
+  [Systems/Power] Merchant Guilds↔Religious Authoritiesstable
+  [Systems/Power] The money of Merchant Guilds pays for the charity of Religious Authorities, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+  [Systems/Power] Acting Speaker of the Assembly · Elica Denisov, the senior guild master · also first in Merchant Guilds
+  [card] Elica Denisov●●●
+  [card] Merchant guilds (15-40) · Acting Speaker of the Assembly, first of Democratic assembly · first of Merchant Guilds
+  [card] Warden of the Guild
+  [card] Flaw: mendaciousTemperament: courteous
+  [card] Mentor and SuccessorBoris Klimov
+  [card] Called byDragana Medvedev · Mentor and Successor
+  [card] Called byPetra Vinogradov · Mentor and Successor
+  [card] Wants Make sure every decision of Merchant Guilds this season goes out under their own name.
+  [card] Disposition courteous, commanding
+  [card] How they deal Agrees quickly, and the terms are never quite what you remember agreeing to.
+  [card] Secret: Was promised a specific appointment by one claimant in exchange for a public endorsement they have not yet delivered
+  [Table/Tonight sheet] Elica Denisov
+  [Table/Tonight sheet] Democratic assembly vs Merchant Guilds
+### l2-succession_void-metropolis-1 — keeper Toghrul Ongut, heads The Merchant Bloc
+  [Summary/Crisis] The Merchant Bloc no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting Lord Mayor Toghrul Ongut, the exchange master, keeps the seat meanwhile.
+  [Systems/Power] ↳23 members · first Toghrul Ongut · second Sarnai Jirgin · third Bochak Besud
+  [Systems/Power] The Merchant Bloc
+  [Systems/Power] ↳6 members · first Toghrul Ongut · second Batu Tatar · third Arslankhan Merv
+  [Systems/Power] Acting Lord Mayor · Toghrul Ongut, the exchange master · also first in The Merchant Bloc
+  [Systems/Power] While the seat of Grand Council stands empty, its steward Toghrul Ongut holds a full share in The Merchant Bloc, and The Merchant Bloc's requests go through Toghrul Ongut.
+  [Systems/Power] The Merchant Bloc · a little stronger than its own members make it
+  [Systems/Power] Toghrul Ongut, steward of Grand Council while its seat stands empty, also holds a full share in The Merchant Bloc, and that lends The Merchant Bloc weight it would not have on its own.
+  [card] Toghrul Ongut●●●
+  [card] ▲
+  [card] International trade center · Acting Lord Mayor, first of Grand Council · first of The Merchant Bloc
+  [card] Master of the Exchange
+  [card] Flaw: petty
+  [card] Mentor and SuccessorQarabek Chagatai
+  [card] Called byRegünjid Ghaznavid · Outstanding Debt
+  [card] Called byAriun Merkit · Pragmatic Alliance
+  [card] Called bySarnai Zunghar · Mentor and Successor
+  [card] Called byOrgana Arlat · Outstanding Debt
+  [card] Called byToragana Balkar · Mentor and Successor
+  [card] Wants Find out how much is owed by the merchant guilds, and to whom.
+  [card] Disposition commanding
+  [card] How they deal Keeps out of trouble by keeping away from you, and sends you to someone else when they can.
+  [card] Secret: Has a document that would legally resolve the succession, in a direction that would require them to give up their current position
+  [Table/Tonight sheet] Toghrul Ongut
+### l2-succession_void-metropolis-9 — keeper Erene Zunghar, heads The Trade Compact
+  [Summary/Crisis] The Trade Compact no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting First Councillor Erene Zunghar, the exchange master, keeps the seat meanwhile.
+  [Systems/Power] ↳17 members · first Erene Zunghar · second Zanabazar Qatagin · third Nomun Tayichi'ud
+  [Systems/Power] The Trade Compact
+  [Systems/Power] ↳9 members · first Erene Zunghar · second Chinggis Salji'ud · third Unurtsetseg Taichiud
+  [Systems/Power] Acting First Councillor · Erene Zunghar, the exchange master · also first in The Trade Compact
+  [Systems/Power] While the seat of City-State Council stands empty, its steward Erene Zunghar holds a full share in The Trade Compact, and The Trade Compact's requests go through Erene Zunghar.
+  [Systems/Power] The Trade Compact · a little stronger than its own members make it
+  [Systems/Power] Erene Zunghar, steward of City-State Council while its seat stands empty, also holds a full share in The Trade Compact, and that lends The Trade Compact weight it would not have on its own.
+  [card] Erene Zunghar●●●
+  [card] ▲
+  [card] International trade center · Acting First Councillor, first of City-State Council · first of The Trade Compact
+  [card] Master of the Exchange
+  [card] Temperament: level-headed
+  [card] Mentor and SuccessorTümer Dzungar (the mint master)
+  [card] Called byBorte Ongut · Outstanding Debt
+  [card] Called byÖgedei Karachay · Outstanding Debt
+  [card] Called byTuyaa Kazakh · Outstanding Debt
+  [card] Wants Stay out of every quarrel they can this season.
+  [card] Disposition level-headed, commanding
+  [card] How they deal Friendly, but takes their time; hears the whole question before answering it.
+  [card] Secret: Owes Yisugei Qonggirad a debt from before either of them held their current position: one that Yisugei Qonggirad has never formally called in
+### l2-succession_void-city-12 — keeper Garbhán MacCormack, heads Merchant Guilds
+  [Summary/Crisis] Merchant Guilds no stake yet · it could side with either camp
+  [Summary/Crisis] Mayor and council · held by Garbhán MacCormack
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting Lord Mayor Garbhán MacCormack, the senior guild master, keeps the seat meanwhile.
+  [Systems/Power] ↳29 members · first Garbhán MacCormack · second Daigh MacCulloch · third Toirdelbach MacLean
+  [Systems/Power] Merchant Guilds
+  [Systems/Power] ↳28 members · first Garbhán MacCormack · second Hector MacBride · third Cairbre Nolan
+  [Systems/Power] City Council↔Merchant Guildsstable
+  [Systems/Power] City Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs City Council to enforce its contracts and keep the law. Neither can afford to ruin the other.
+  [Systems/Power] Merchant Guilds↔Religious Authoritiesstable
+  [Systems/Power] The money of Merchant Guilds pays for the charity of Religious Authorities, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+  [Systems/Power] Acting Lord Mayor · Garbhán MacCormack, the senior guild master · also first in Merchant Guilds
+  [Systems/Power] While the seat of City Council stands empty, its steward Garbhán MacCormack holds a full share in Merchant Guilds, and Merchant Guilds's requests go through Garbhán MacCormack.
+  [Systems/Power] Merchant Guilds · a little stronger than its own members make it
+  [Systems/Power] Garbhán MacCormack, steward of City Council while its seat stands empty, also holds a full share in Merchant Guilds, and that lends Merchant Guilds weight it would not have on its own.
+  [card] Garbhán MacCormack●●●
+  [card] Merchant guilds (15-40) · Acting Lord Mayor, first of City Council · first of Merchant Guilds
+  [card] Warden of the Guild
+  [card] Flaw: enviousTemperament: plain-dealing
+  [card] Outstanding DebtSeanchán MacPherson
+  [card] Called byErin Gallagher · Outstanding Debt
+  [card] Called byEileen MacPherson · Outstanding Debt
+  [card] Called byVeradach Lynch · Mentor and Successor
+  [card] Wants Do Seanchán MacPherson a favour big enough to count against what is owed.
+  [card] Disposition plain-dealing, commanding
+  [card] How they deal Promises help easily, and is hard to find when the time comes to give it.
+  [card] Secret: Has a document that would legally resolve the succession, in a direction that would require them to give up their current position
+  [Table/Tonight sheet] Garbhán MacCormack
+  [Table/Tonight sheet] The succession crisis turns on the mayor and council, run by Garbhán MacCormack: if it gives way, City Council loses most, because its own people feel the crisis first.
+### l2-succession_void-metropolis-8 — keeper Gebhard Schneider, heads The Commercial Circle
+  [Summary/Crisis] The Commercial Circle no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting First Councillor Gebhard Schneider (the exchange master) keeps the seat meanwhile.
+  [Systems/Power] ↳22 members · first Gebhard Schneider (the exchange master) · second Fastrada Reich · third Waltrada Jäger
+  [Systems/Power] The Commercial Circle
+  [Systems/Power] ↳10 members · first Gebhard Schneider (the exchange master) · second Nanthild Schmidt · third Hildegard Werner
+  [Systems/Power] Acting First Councillor · Gebhard Schneider (the exchange master), the exchange master · also first in The Commercial Circle
+  [Systems/Power] While the seat of City-State Council stands empty, its steward Gebhard Schneider (the exchange master) holds a full share in The Commercial Circle, and The Commercial Circle's requests go through Gebhard Schneider (the exchange master).
+  [Systems/Power] The Commercial Circle · a little stronger than its own members make it
+  [Systems/Power] Gebhard Schneider (the exchange master), steward of City-State Council while its seat stands empty, also holds a full share in The Commercial Circle, and that lends The Commercial Circle weight it would not have on its own.
+  [card] Gebhard Schneider (the exchange master)●●●
+  [card] ▲
+  [card] International trade center · Acting First Councillor, first of City-State Council · first of The Commercial Circle
+  [card] Master of the Exchange
+  [card] Temperament: merciful
+  [card] Outstanding DebtSabine Klein
+  [card] Called byVolker Jäger · Unresolved History
+  [card] Called byLiesel Steiner · Outstanding Debt
+  [card] Wants Find out which members of City-State Council are still friendly with Thieves' Guild, and why.
+  [card] Disposition merciful, commanding
+  [card] How they deal Makes you welcome, finds you a seat, and helps without counting the cost.
+  [card] Secret: Secretly receives what they believe are genuine divine visions, which terrifies them
+  [card] Gebhard Schneider (the postmaster)●
+  [card] Post relay station · member of City-State Council
+  [card] Master of the Post
+  [card] Flaw: overbearingTemperament: dependable
+  [card] Called bySabine Klein · Mutual Leverage
+  [card] Wants Get the sage's quarter to rely on the post relay station for something no one else can supply.
+  [card] How they deal Takes letters at the posted rate; urgent ones cost more and leave sooner.
+  [card] Secret: Knows something about Pilgrim Deutsch that Pilgrim Deutsch believes no one else knows, and has been deciding for months whether to use it
+### l2-succession_void-metropolis-10 — keeper Luvsandorj Tatar, heads The Commercial Circle
+  [Summary/Crisis] The Commercial Circle no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting Speaker of the Assembly Luvsandorj Tatar, the exchange master, keeps the seat meanwhile.
+  [Systems/Power] ↳21 members · first Luvsandorj Tatar · second Otgonbayar Fergana · third Yisugei Bashkir
+  [Systems/Power] The Commercial Circle
+  [Systems/Power] ↳9 members · first Luvsandorj Tatar · second Khishigbayar Suldus · third Samarkand Salji'ud
+  [Systems/Power] Acting Speaker of the Assembly · Luvsandorj Tatar, the exchange master · also first in The Commercial Circle
+  [Systems/Power] While the seat of Democratic assembly stands empty, its steward Luvsandorj Tatar holds a full share in The Commercial Circle, and The Commercial Circle's requests go through Luvsandorj Tatar.
+  [Systems/Power] The Commercial Circle · a little stronger than its own members make it
+  [Systems/Power] Luvsandorj Tatar, steward of Democratic assembly while its seat stands empty, also holds a full share in The Commercial Circle, and that lends The Commercial Circle weight it would not have on its own.
+  [card] Luvsandorj Tatar●●●
+  [card] ▲
+  [card] International trade center · Acting Speaker of the Assembly, first of Democratic assembly · first of The Commercial Circle
+  [card] Master of the Exchange
+  [card] Flaw: cruel
+  [card] Mentor and SuccessorNergüi Tanghud
+  [card] Called byArslankhan Tanghud · Unresolved History
+  [card] Called byBayasgalan Borjigin · Genuine Respect
+  [card] Called byGüyük Tatar · Mentor and Successor
+  [card] Called byKhishigbayar Suldus · Outstanding Debt
+  [card] Called bySaikhan Qatagin · Mentor and Successor
+  [card] Wants See someone who wronged them lose face in public this season.
+  [card] Disposition commanding
+  [card] How they deal Pleasant until crossed; then the warmth goes at once and does not come back.
+  [card] Secret: Secretly receives what they believe are genuine divine visions, which terrifies them
+### l2-succession_void-metropolis-12 — keeper Samira al-Waqqas, heads Merchant Guilds
+  [Summary/Crisis] Merchant Guilds no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting First Magnate Samira al-Waqqas, the exchange master, keeps the seat meanwhile.
+  [Systems/Power] ↳32 members · first Samira al-Waqqas · second Yaqub al-Isfahani · third Dhul-Nun ibn Abbas
+  [Systems/Power] Merchant Guilds
+  [Systems/Power] ↳18 members · first Samira al-Waqqas · second Bashir al-Mawsili · third Yasmin al-Misri
+  [Systems/Power] Merchant Guilds×Religious Authoritiesstable
+  [Systems/Power] Merchant Guilds now has more money than Religious Authorities has sway. Merchants pay for churches, hospitals and indulgences, and they set the terms.
+  [Systems/Power] Merchant Guilds~Craft Guildsstable
+  [Systems/Power] Merchant Guilds and Craft Guilds vote together against Noble Houses, then fight over who keeps the profit.
+  [Systems/Power] Grand Merchant Oligarchy↔Merchant Guildsstable
+  [Systems/Power] Grand Merchant Oligarchy needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Grand Merchant Oligarchy to enforce its contracts and keep the law. Neither can afford to ruin the other.
+  [Systems/Power] Acting First Magnate · Samira al-Waqqas, the exchange master · also first in Merchant Guilds
+  [Systems/Power] While the seat of Grand Merchant Oligarchy stands empty, its steward Samira al-Waqqas holds a full share in Merchant Guilds, and Merchant Guilds's requests go through Samira al-Waqqas.
+  [Systems/Power] Merchant Guilds · a little stronger than its own members make it
+  [Systems/Power] Samira al-Waqqas, steward of Grand Merchant Oligarchy while its seat stands empty, also holds a full share in Merchant Guilds, and that lends Merchant Guilds weight it would not have on its own.
+  [card] Samira al-Waqqas●●●
+  [card] International trade center · Acting First Magnate, first of Grand Merchant Oligarchy · first of Merchant Guilds
+  [card] Master of the Exchange
+  [card] Mentor and SuccessorSalma al-Bukhari
+  [card] Called byOla al-Aziz · Mutual Leverage
+  [card] Called byMais ibn Musa · Pragmatic Alliance
+  [card] Called byHana al-Farabi · Outstanding Debt
+  [card] Wants Pay every hand at the international trade center in full and on time this season.
+  [card] Disposition commanding
+  [card] Secret: Has been feeding strategic intelligence to outsiders who pay for it
+### l2-succession_void-metropolis-14 — keeper Theofanis Kyriadotes, heads Merchant Guilds
+  [Summary/Crisis] Merchant Guilds no stake yet · it could side with either camp
+  [Systems/Power] The seatStands empty; the succession is unsettled. Acting Master of the Guilds Theofanis Kyriadotes, the senior guild master, keeps the seat meanwhile.
+  [Systems/Power] ↳40 members · first Theofanis Kyriadotes · second Kallinikos Phakrases · third Georgios II Gabalas
+  [Systems/Power] Merchant Guilds
+  [Systems/Power] ↳31 members · first Theofanis Kyriadotes · second Kassandra Nestongos · third Sevaste Zaoutzes
+  [Systems/Power] Grand Guild Consortium↔Merchant Guildsstable
+  [Systems/Power] Grand Guild Consortium needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Grand Guild Consortium to enforce its contracts and keep the law. Neither can afford to ruin the other.
+  [Systems/Power] Acting Master of the Guilds · Theofanis Kyriadotes, the senior guild master · also first in Merchant Guilds
+  [Systems/Power] While the seat of Grand Guild Consortium stands empty, its steward Theofanis Kyriadotes holds a full share in Merchant Guilds, and Merchant Guilds's requests go through Theofanis Kyriadotes.
+  [Systems/Power] Merchant Guilds · a little stronger than its own members make it
+  [Systems/Power] Theofanis Kyriadotes, steward of Grand Guild Consortium while its seat stands empty, also holds a full share in Merchant Guilds, and that lends Merchant Guilds weight it would not have on its own.
+  [card] Theofanis Kyriadotes●●●
+  [card] ▲
+  [card] Merchant guilds (50-100+) · Acting Master of the Guilds, first of Grand Guild Consortium · first of Merchant Guilds
+  [card] Master of the Guild
+  [card] Flaw: vindictiveTemperament: plain-dealing
+  [card] Mentor and SuccessorEirene Lekapenos
+  [card] Called byDionysios Chrysoberges · Mutual Leverage
+  [card] Called byAristoteles Chortasmenos · Mutual Leverage
+  [card] Called byGlykeria Zaoutzes · Mentor and Successor
+  [card] Called byGlykeria Tornikios · Mentor and Successor
+  [card] Called byZoe Muzalon · Outstanding Debt
+  [card] Wants Make sure no new rule from those who govern costs the merchant guilds anything this season.
+  [card] Disposition plain-dealing, commanding
+  [card] How they deal Treats every question as a possible threat, and remembers who asked it.
+  [card] Secret: Has been protecting a sibling's crime for years (a serious one)
+  [Table/Tonight sheet] Theofanis Kyriadotes

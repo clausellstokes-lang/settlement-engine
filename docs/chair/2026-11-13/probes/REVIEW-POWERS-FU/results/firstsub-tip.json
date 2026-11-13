@@ -1,0 +1,60 @@
+{
+ "townsWith": 279,
+ "cards": 579,
+ "top": [
+  [
+   "the dean :: Serves the faith under its leaders in quiet t",
+   73
+  ],
+  [
+   "the garrison commander :: Leads a squad in quiet times, where the work ",
+   46
+  ],
+  [
+   "the senior craft-guild master :: Runs a smaller house behind the leading one i",
+   43
+  ],
+  [
+   "the senior guild master :: Runs a smaller house behind the leading one i",
+   32
+  ],
+  [
+   "the garrison commander :: Leads a squad that now takes orders from more",
+   17
+  ],
+  [
+   "the watch commander :: Leads a squad in quiet times, where the work ",
+   16
+  ],
+  [
+   "the network's head :: Holds a place in a crew in quiet times, with ",
+   16
+  ],
+  [
+   "the guild archmage :: Works spells under the senior casters in quie",
+   13
+  ],
+  [
+   "the innkeeper :: Belongs to a lesser old family, behind the le",
+   12
+  ],
+  [
+   "the dean :: Serves the faith under its leaders while the ",
+   9
+  ],
+  [
+   "the watch captain :: Leads a squad in quiet times, where the work ",
+   9
+  ],
+  [
+   "the warehouse factor :: Runs a smaller house behind the leading one i",
+   8
+  ]
+ ],
+ "ex": [
+  "r2r-hamlet-3 Ottmar Schmidt first of Military/Guard: Belongs to a lesser old family, behind the leading one.",
+  "r2r-hamlet-15 Vachir Tayichi'ud first of Merchant Guilds: Belongs to a lesser old family, behind the leading one.",
+  "r2r-hamlet-18 Rian Fitzgerald first of Military/Guard: Belongs to a lesser old family, behind the leading one.",
+  "r2r-hamlet-20 Auðr Bjarnarson first of Merchant Guilds: Runs a smaller house behind the leading one in quiet times."
+ ]
+}

@@ -1,0 +1,320 @@
+towns 720 | structural lines lost 124 gained 191 | towns with >1 "Holds the seat" card: base 0 tip 0
+--- LOST
+r2r-city-1 | Barra Flaherty | Belongs to a lesser old family, behind the leading one.
+r2r-city-1 | Barra Flaherty | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-17 | Checheyigen Ghurid | Belongs to a lesser old family, behind the leading one.
+r2r-city-17 | Checheyigen Ghurid | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-18 | Vadim Semyonov | Belongs to a lesser old family, behind the leading one.
+r2r-city-18 | Vadim Semyonov | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-19 | Cara Whelan | Belongs to a lesser family behind the leading one while the seat fails.
+r2r-city-19 | Cara Whelan | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2r-city-19 | Killian Nolan | Hidden allegianceanswers to Thieves' Guild, through Caoilfhinn MacGillivray
+r2r-city-19 | Rónnat Ryan | Hidden allegianceanswers to Thieves' Guild, through Flann MacKenzie
+r2r-city-19 | Ériu MacEwan | Hidden allegianceanswers to Thieves' Guild, through Kathleen MacIntyre
+r2r-city-19 | Eoghan Kennedy | Hidden allegianceanswers to Thieves' Guild, through Peig Kelly
+r2r-city-19 | Fuamnach MacLachlan | Hidden allegianceanswers to Thieves' Guild, through Inghean MacQuarrie
+r2r-city-21 | Snake Cauac | Belongs to a lesser old family, behind the leading one.
+r2r-city-21 | Snake Cauac | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-23 | Scannlán Nolan | Hidden allegianceanswers to Thieves' Guild, through Aifric MacGregor
+r2r-city-23 | Nessa MacRae | Hidden allegianceanswers to Thieves' Guild, through Seamus O'Donnell
+r2r-city-23 | Uilleam MacCormack | Hidden allegianceanswers to Thieves' Guild, through Aoife MacDonald
+r2r-city-27 | Noyans Nogai | Belongs to a lesser old family, behind the leading one.
+r2r-city-27 | Noyans Nogai | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-28 | Ioasaph Botaneiates | Belongs to a lesser old family, behind the leading one.
+r2r-city-28 | Ioasaph Botaneiates | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-34 | Xochicueitl Itza | Belongs to a lesser old family, behind the leading one.
+r2r-city-34 | Xochicueitl Itza | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-38 | Ehecatl Zuyua | Belongs to a lesser old family, behind the leading one.
+r2r-city-38 | Ehecatl Zuyua | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-46 | Yanzhima Borjigin | Belongs to a lesser old family, behind the leading one.
+r2r-city-46 | Yanzhima Borjigin | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-49 | Decima Albinus | Belongs to a lesser old family, behind the leading one.
+r2r-city-49 | Decima Albinus | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-52 | Dragana Popov | Belongs to a lesser old family, behind the leading one.
+r2r-city-52 | Dragana Popov | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-55 | Michail Chomatenos | Belongs to a lesser old family, behind the leading one.
+r2r-city-55 | Michail Chomatenos | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-6 | Giollachríost Murray | Belongs to a lesser old family, behind the leading one.
+r2r-city-6 | Giollachríost Murray | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-8 | Zolboo Uighur | Leads a squad in quiet times, where the work is routine and the risks are low.
+r2r-city-8 | Zolboo Uighur | Constraint: Steady work earns no notice; getting ahead takes a crisis or a patron.
+r2r-city-8 | Bayarmaa Urgench | Belongs to a lesser old family, behind the leading one.
+r2r-city-8 | Bayarmaa Urgench | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-0 | Zixuan Deng | Runs a smaller house in a trade where many pay the criminals to be left alone.
+r2r-metropolis-0 | Zixuan Deng | Constraint: Standing apart from the crooked dealing draws the crooks' eye; going along makes it everyone's habit.
+r2r-metropolis-10 | Jorunn Flokason (the impresario) | Hidden allegianceanswers to Thieves' Guild, through Menja Randversson
+r2r-metropolis-10 | Jorunn Flokason (the impresario) | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-10 | Jorunn Flokason (the impresario) | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-10 | Inge Styrkarsson | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-10 | Inge Styrkarsson | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-10 | Domaldr Eyjolfsson | Hidden allegianceanswers to Thieves' Guild, through Nidud Ormsson
+r2r-metropolis-10 | Sigyn Svensson | Hidden allegianceanswers to Thieves' Guild, through Drengr Gormsson
+r2r-metropolis-10 | Idunn Sigvaldsson | Hidden allegianceanswers to Thieves' Guild, through Sif Hrafnsson
+r2r-metropolis-13 | Kallinikos Synadenos | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-13 | Kallinikos Synadenos | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-13 | Nikephoros Limniotes | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-13 | Nikephoros Limniotes | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-2 | Keiko Kang | Runs a smaller house that sells to both sides in the fight for the seat.
+r2r-metropolis-2 | Keiko Kang | Constraint: To both sides, staying out of it looks like fear or scheming.
+r2r-metropolis-21 | Dorothea Engel | Hidden allegianceanswers to Thieves' Guild, through Cyriak Schmitt
+r2r-metropolis-21 | Liesel Berger | Hidden allegianceanswers to Thieves' Guild, through Gerhard Friedmann
+r2r-metropolis-22 | Bayasgalan Merv | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-22 | Bayasgalan Merv | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-23 | Muirchertach Hennessy | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-23 | Muirchertach Hennessy | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-32 | Postumia Crispus | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-32 | Postumia Crispus | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-42 | Sofokles Xerokampos | Hidden allegianceanswers to Smuggling network, through Tyche Kurtikios
+r2r-metropolis-42 | Elektra Dalassenos | Hidden allegianceanswers to Assassins' guild, through Demetrios Tarchaneiotes
+r2r-metropolis-47 | Nomun Merkit | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-47 | Nomun Merkit | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-47 | Munkhtuya Merkit | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-47 | Munkhtuya Merkit | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-48 | Rind Knarrarsson | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-48 | Rind Knarrarsson | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-48 | Þrúðr Helgason | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-48 | Þrúðr Helgason | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-53 | Munkhtuya Tanghud | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-53 | Munkhtuya Tanghud | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-56 | Vibia Naso | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-56 | Vibia Naso | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-57 | Santosh Banerjee | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-57 | Santosh Banerjee | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-town-15 | Stylianos Akropolites | Belongs to a lesser old family, behind the leading one.
+r2r-town-15 | Stylianos Akropolites | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-town-28 | Jormundr Ljotsson | Belongs to a lesser old family, behind the leading one.
+r2r-town-28 | Jormundr Ljotsson | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-town-9 | Edda Ketilsson | Belongs to a lesser old family, behind the leading one.
+r2r-town-9 | Edda Ketilsson | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2s-famine-city-0 | Daisuke Zheng | Heads an old family while the seat fails, and old names count for more when the seat counts for less.
+r2s-famine-city-0 | Daisuke Zheng | Constraint: Old claims that would once have been laughed off are now watched by everyone looking for a grab at power.
+r2s-famine-city-0 | Reiko Xu | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-famine-city-0 | Reiko Xu | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-famine-metropolis-0 | Myrkjartan Sigurðarson | Heads an old family while the seat fails, and old names count for more when the seat counts for less.
+r2s-famine-metropolis-0 | Myrkjartan Sigurðarson | Constraint: Old claims that would once have been laughed off are now watched by everyone looking for a grab at power.
+r2s-famine-metropolis-0 | Yngvar Ljotsson | Hidden allegianceanswers to Thieves' Guild, through Domaldr Vagnsson
+r2s-famine-metropolis-0 | Idunn Ogmundsson | Hidden allegianceanswers to Thieves' Guild, through Kari Ketilsson
+r2s-famine-metropolis-3 | Georgios Palaiologos | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-famine-metropolis-3 | Georgios Palaiologos | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-mass_migration-city-3 | Oengus MacAlister | Hidden allegianceanswers to Black market, through Yves Doyle
+r2s-mass_migration-city-3 | Emmet O'Leary | Hidden allegianceanswers to Multiple criminal factions, through Olwen Tobin
+r2s-mass_migration-city-3 | Rian Hennessy | Hidden allegianceanswers to Black market, through Olwen Tobin
+r2s-mass_migration-city-3 | Brian Kennedy | Hidden allegianceanswers to Multiple criminal factions, through Malachy Burke
+r2s-mass_migration-city-3 | Háken Nolan | Hidden allegianceanswers to Black market, through Malachy Burke
+r2s-recently_betrayed-metropolis-3 | Oleg Morozov | Hidden allegianceanswers to Thieves' Guild, through Lyuben Bykov
+r2s-recently_betrayed-metropolis-3 | Denis Alexeyev | Hidden allegianceanswers to Thieves' Guild, through Cveta Petrov
+r2s-recently_betrayed-metropolis-3 | Dragana Čupić | Hidden allegianceanswers to Thieves' Guild, through Larisa Simić
+r2s-recently_betrayed-metropolis-3 | Daria Tretyakov | Hidden allegianceanswers to Thieves' Guild, through Viktoriya Kozlov
+r2s-recently_betrayed-metropolis-3 | Ezechiel Jovanović | Hidden allegianceanswers to Thieves' Guild, through Liliya Gavrilović
+r2s-slave_revolt-metropolis-0 | Nott Randversson | Hidden allegianceanswers to Rookery, through Þrúðr Hrafnsson
+r2s-slave_revolt-metropolis-0 | Vifil Eriksson | Hidden allegianceanswers to Thieves' guild (powerful), through Böðvildr Eyjolfsson
+r2s-slave_revolt-metropolis-0 | Þorbjörg Ketilsson | Hidden allegianceanswers to Rookery, through Hild Froðason
+r2s-slave_revolt-metropolis-0 | Auðr Halfdarson | Hidden allegianceanswers to Thieves' guild (powerful), through Liv Olafsson
+r2s-succession_void-town-2 | Yaotl Puc | Runs a smaller house behind the leading one in the trade while the seat fails.
+r2s-succession_void-town-2 | Yaotl Puc | Constraint: The disorder that lets the house get ahead can just as quickly knock it back.
+r2s-succession_void-town-2 | Wind Kanil | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-succession_void-town-2 | Wind Kanil | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-succession_void-town-3 | Yngvi Bjornsson | Heads an old family while the seat fails, and old names count for more when the seat counts for less.
+r2s-succession_void-town-3 | Yngvi Bjornsson | Constraint: Old claims that would once have been laughed off are now watched by everyone looking for a grab at power.
+r2s-succession_void-town-3 | Raud Gunnarsson | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-succession_void-town-3 | Raud Gunnarsson | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-under_siege-metropolis-1 | Galeria Pulvillus | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-under_siege-metropolis-1 | Galeria Pulvillus | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-wartime-city-2 | Ulrike Theis | Hidden allegianceanswers to Thieves' Guild, through Helena Braun
+r2s-wartime-city-2 | Ilse Koch | Hidden allegianceanswers to Thieves' Guild, through Sigibald Rosenfeld
+r2s-wartime-town-0 | Ljot Gunnarsson | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-wartime-town-0 | Ljot Gunnarsson | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+--- GAINED
+r2r-city-1 | Oengus Treacy | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-1 | Oengus Treacy | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-1 | Declan O'Leary | Works spells under the senior casters in quiet times.
+r2r-city-1 | Declan O'Leary | Constraint: Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.
+r2r-city-17 | Vachir Dörbete | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-17 | Vachir Dörbete | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-18 | Olga Kovačević | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-18 | Olga Kovačević | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-18 | Nikoleta Kovačević | Serves the faith under its leaders in quiet times.
+r2r-city-18 | Nikoleta Kovačević | Constraint: Doing the work well, the leaders' way, goes unnoticed; doing it another way brings trouble.
+r2r-city-19 | Grainne Shaughnessy | Hidden allegianceanswers to Thieves' Guild, through Peig Kelly
+r2r-city-19 | Grainne Shaughnessy | Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.
+r2r-city-19 | Grainne Shaughnessy | Constraint: Moving to protect the office looks like a grab; standing still means falling with the seat.
+r2r-city-19 | Gráinne MacGillivray | Holds a place under the crew's boss while the seat fails.
+r2r-city-19 | Gráinne MacGillivray | Constraint: Climbing means being worth more to the boss or being more of a danger, and the boss can see both.
+r2r-city-19 | Killian Nolan | Hidden allegianceanswers to Thieves' Guild, through Inghean MacQuarrie
+r2r-city-19 | Rónnat Ryan | Hidden allegianceanswers to Thieves' Guild, through Órlaith O'Mahony
+r2r-city-19 | Ériu MacEwan | Hidden allegianceanswers to Thieves' Guild, through Flann MacKenzie
+r2r-city-19 | Eoghan Kennedy | Hidden allegianceanswers to Thieves' Guild, through Caoilfhinn MacGillivray
+r2r-city-19 | Fuamnach MacLachlan | Hidden allegianceanswers to Thieves' Guild, through Kathleen MacIntyre
+r2r-city-21 | Nakul Itzam | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-21 | Nakul Itzam | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-21 | Veloz Coh | Works spells under the senior casters in quiet times.
+r2r-city-21 | Veloz Coh | Constraint: Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.
+r2r-city-23 | Deirdre MacMillan | Hidden allegianceanswers to Thieves' Guild, through Seamus O'Donnell
+r2r-city-23 | Meadhbh Byrne | Holds a place in a crew in quiet times, with order well kept around it.
+r2r-city-23 | Meadhbh Byrne | Constraint: Getting ahead in the crew means showing what one can do, and showing it is how one gets noticed.
+r2r-city-23 | Scannlán Nolan | Hidden allegianceanswers to Thieves' Guild, through Aoife MacDonald
+r2r-city-23 | Nessa MacRae | Hidden allegianceanswers to Thieves' Guild, through Aifric MacGregor
+r2r-city-23 | Uilleam MacCormack | Hidden allegianceanswers to Thieves' Guild, through Hamish Larkin
+r2r-city-27 | Enkhtuya Jalayir | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-27 | Enkhtuya Jalayir | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-27 | Toquchar Uzbek | Serves the faith under its leaders in quiet times.
+r2r-city-27 | Toquchar Uzbek | Constraint: Doing the work well, the leaders' way, goes unnoticed; doing it another way brings trouble.
+r2r-city-28 | Eustathios Choniates | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-28 | Eustathios Choniates | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-28 | Pavlos Palaiolagos | Works spells under the senior casters in quiet times.
+r2r-city-28 | Pavlos Palaiolagos | Constraint: Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.
+r2r-city-34 | Cuauhtli Yax | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-34 | Cuauhtli Yax | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-34 | Chan Kab | Holds a place in a crew in quiet times, with order well kept around it.
+r2r-city-34 | Chan Kab | Constraint: Getting ahead in the crew means showing what one can do, and showing it is how one gets noticed.
+r2r-city-34 | Itzpapalotl Dzul | Belongs to a lesser old family, behind the leading one.
+r2r-city-34 | Itzpapalotl Dzul | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-38 | Metztli Uc | Belongs to a lesser old family, behind the leading one.
+r2r-city-38 | Metztli Uc | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-38 | Yagul Itzam | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-38 | Yagul Itzam | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-46 | Borte Dörbete | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-46 | Borte Dörbete | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-46 | Yisugei Jalayir | Belongs to a lesser old family, behind the leading one.
+r2r-city-46 | Yisugei Jalayir | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-city-49 | Claudia Crispus | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-49 | Claudia Crispus | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-52 | Hristina Grbić | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-52 | Hristina Grbić | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-55 | Eudoxia Hyaleas | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-55 | Eudoxia Hyaleas | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-55 | Barbara Chrysoberges | Holds a place in a crew in quiet times, with order well kept around it.
+r2r-city-55 | Barbara Chrysoberges | Constraint: Getting ahead in the crew means showing what one can do, and showing it is how one gets noticed.
+r2r-city-6 | Eithne Treacy | Holds an office that runs from day to day, with no crisis to answer.
+r2r-city-6 | Eithne Treacy | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-city-6 | Honor Carey | Works spells under the senior casters in quiet times.
+r2r-city-6 | Honor Carey | Constraint: Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.
+r2r-city-8 | Khutulun Merkit | Leads a squad in quiet times, where the work is routine and the risks are low.
+r2r-city-8 | Khutulun Merkit | Constraint: Steady work earns no notice; getting ahead takes a crisis or a patron.
+r2r-metropolis-0 | Zixuan Dong | Runs a smaller house in a trade where many pay the criminals to be left alone.
+r2r-metropolis-0 | Zixuan Dong | Constraint: Standing apart from the crooked dealing draws the crooks' eye; going along makes it everyone's habit.
+r2r-metropolis-0 | Shan Nakamura | Holds an office among officials who take bribes; not one of the takers, but working beside them.
+r2r-metropolis-0 | Shan Nakamura | Constraint: Any honest inquiry needs the help of officials who are themselves on the take.
+r2r-metropolis-10 | Skuld Yngvarsson | Hidden allegianceanswers to Thieves' Guild, through Menja Randversson
+r2r-metropolis-10 | Skuld Yngvarsson | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-10 | Skuld Yngvarsson | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-10 | Jorunn Flokason (the impresario) | Hidden allegianceanswers to Thieves' Guild, through Drengr Gormsson
+r2r-metropolis-10 | Gudrun Egilsson | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-10 | Gudrun Egilsson | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-10 | Domaldr Eyjolfsson | Hidden allegianceanswers to Thieves' Guild, through Sif Hrafnsson
+r2r-metropolis-10 | Sigyn Svensson | Hidden allegianceanswers to Thieves' Guild, through Nidud Ormsson
+r2r-metropolis-10 | Idunn Sigvaldsson | Hidden allegianceanswers to Thieves' Guild, through Skadi Ingvarsson
+r2r-metropolis-13 | Thaleia Muzalon | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-13 | Thaleia Muzalon | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-13 | Markos Chomatenos | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-13 | Markos Chomatenos | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-21 | Dorothea Engel | Hidden allegianceanswers to Thieves' Guild, through Gerhard Friedmann
+r2r-metropolis-21 | Liesel Berger | Hidden allegianceanswers to Thieves' Guild, through Cyriak Schmitt
+r2r-metropolis-22 | Khurelbaatar Önggirad | Belongs to a lesser old family, behind the leading one.
+r2r-metropolis-22 | Khurelbaatar Önggirad | Constraint: The family has as much say as the offices find it useful to give, whatever its old claim.
+r2r-metropolis-22 | Unurtsetseg Balkar | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-22 | Unurtsetseg Balkar | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-23 | Muirenn MacIntyre | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-23 | Muirenn MacIntyre | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-23 | Diarmuid MacPherson | Holds a place in a crew in quiet times, with order well kept around it.
+r2r-metropolis-23 | Diarmuid MacPherson | Constraint: Getting ahead in the crew means showing what one can do, and showing it is how one gets noticed.
+r2r-metropolis-30 | Auðr Magnusson | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-30 | Auðr Magnusson | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-30 | Thordis Lifolfsson | Serves the faith under its leaders in quiet times.
+r2r-metropolis-30 | Thordis Lifolfsson | Constraint: Doing the work well, the leaders' way, goes unnoticed; doing it another way brings trouble.
+r2r-metropolis-31 | Gantulga Shaybanid | Holds an office that hangs on a seat someone else is trying to take.
+r2r-metropolis-31 | Gantulga Shaybanid | Constraint: Waiting to see who wins keeps the office safe today and earns no thanks from the winner.
+r2r-metropolis-32 | Trebonianus Sabinus | Serves the faith under its leaders in quiet times.
+r2r-metropolis-32 | Trebonianus Sabinus | Constraint: Doing the work well, the leaders' way, goes unnoticed; doing it another way brings trouble.
+r2r-metropolis-42 | Sofokles Xerokampos | Hidden allegianceanswers to Smuggling network, through Demetrios Tarchaneiotes
+r2r-metropolis-42 | Elektra Dalassenos | Hidden allegianceanswers to Assassins' guild, through Tyche Kurtikios
+r2r-metropolis-46 | Chae Yamamoto | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-46 | Chae Yamamoto | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-47 | Kuchug Shaybanid | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-47 | Kuchug Shaybanid | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-47 | Tümer Yorqin | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-47 | Tümer Yorqin | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-47 | Burmaa Yorqin | Works spells under the senior casters in quiet times.
+r2r-metropolis-47 | Burmaa Yorqin | Constraint: Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.
+r2r-metropolis-48 | Dyrfinna Ingvarsson | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-48 | Dyrfinna Ingvarsson | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-48 | Egil Illugason | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-48 | Egil Illugason | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-53 | Gantögs Qonggirad | Runs a smaller house behind the leading one in quiet times.
+r2r-metropolis-53 | Gantögs Qonggirad | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-metropolis-53 | Mönkhtsetseg Dzungar (the lord) | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-53 | Mönkhtsetseg Dzungar (the lord) | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-56 | Aurelius Merula | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-56 | Aurelius Merula | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-metropolis-56 | Sabina Cordus | Works spells under the senior casters in quiet times.
+r2r-metropolis-56 | Sabina Cordus | Constraint: Skill without a senior post leaves the caster at the mercy of whoever decides who may cast.
+r2r-metropolis-57 | Santosh Panda | Holds an office that runs from day to day, with no crisis to answer.
+r2r-metropolis-57 | Santosh Panda | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-town-13 | Qutlugh Jirgin | Holds an office that hangs on a seat someone else is trying to take.
+r2r-town-13 | Qutlugh Jirgin | Constraint: Waiting to see who wins keeps the office safe today and earns no thanks from the winner.
+r2r-town-15 | Hierotheos Nestongos | Holds an office that runs from day to day, with no crisis to answer.
+r2r-town-15 | Hierotheos Nestongos | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-town-28 | Palnatoke Finsson | Holds an office that runs from day to day, with no crisis to answer.
+r2r-town-28 | Palnatoke Finsson | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-town-9 | Jorvik Mordsson | Runs a smaller house behind the leading one in quiet times.
+r2r-town-9 | Jorvik Mordsson | Constraint: Growing into the leading house's trade invites a reply; staying out of it means staying small.
+r2r-town-9 | Ingvar Bjornsson | Holds an office that runs from day to day, with no crisis to answer.
+r2r-town-9 | Ingvar Bjornsson | Constraint: Good work is expected and goes unnoticed; a mistake is remembered.
+r2r-village-27 | Radbot Klein | Holds an office whose purse shrinks with everyone else's.
+r2r-village-27 | Radbot Klein | Constraint: Every office is after the same few coins; making this one needed means taking from the others.
+r2r-village-56 | Rónán Reilly | Belongs to a lesser family behind the leading one while the seat fails.
+r2r-village-56 | Rónán Reilly | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-famine-city-0 | Daisuke Zheng | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-famine-city-0 | Daisuke Zheng | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-famine-city-0 | Ukon Ito | Runs a smaller house behind the leading one in the trade while the seat fails.
+r2s-famine-city-0 | Ukon Ito | Constraint: The disorder that lets the house get ahead can just as quickly knock it back.
+r2s-famine-city-0 | Oh Jang | Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.
+r2s-famine-city-0 | Oh Jang | Constraint: Moving to protect the office looks like a grab; standing still means falling with the seat.
+r2s-famine-metropolis-0 | Magnr Rognvaldsson | Holds a place under the crew's boss while the seat fails.
+r2s-famine-metropolis-0 | Magnr Rognvaldsson | Constraint: Climbing means being worth more to the boss or being more of a danger, and the boss can see both.
+r2s-famine-metropolis-0 | Yngvar Ljotsson | Hidden allegianceanswers to Thieves' Guild, through Kari Ketilsson
+r2s-famine-metropolis-0 | Víðr Þorsteinsson | Works spells under the senior casters while the seat fails.
+r2s-famine-metropolis-0 | Víðr Þorsteinsson | Constraint: Staying on no side while everyone suffers is hard to do without looking like a calculation.
+r2s-famine-metropolis-0 | Idunn Ogmundsson | Hidden allegianceanswers to Thieves' Guild, through Domaldr Vagnsson
+r2s-famine-metropolis-3 | Sophia Nikerites | Serves the faith under its leaders while the seat fails around them.
+r2s-famine-metropolis-3 | Sophia Nikerites | Constraint: The flock's trust is easy to earn now, but it buys no say once someone holds the seat firmly again.
+r2s-famine-metropolis-3 | Georgios Vatatzes | Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.
+r2s-famine-metropolis-3 | Georgios Vatatzes | Constraint: Moving to protect the office looks like a grab; standing still means falling with the seat.
+r2s-indebted-town-0 | Maeve MacNamara | Holds an office that hangs on a seat someone else is trying to take.
+r2s-indebted-town-0 | Maeve MacNamara | Constraint: Waiting to see who wins keeps the office safe today and earns no thanks from the winner.
+r2s-mass_migration-city-3 | Oengus MacAlister | Hidden allegianceanswers to Black market, through Malachy Burke
+r2s-mass_migration-city-3 | Tailte MacEwan | Hidden allegianceanswers to Multiple criminal factions, through Olwen Tobin
+r2s-mass_migration-city-3 | Emmet O'Leary | Hidden allegianceanswers to Multiple criminal factions, through Yves Doyle
+r2s-mass_migration-city-3 | Rian Hennessy | Hidden allegianceanswers to Black market, through Yves Doyle
+r2s-mass_migration-city-3 | Háken Nolan | Hidden allegianceanswers to Black market, through Olwen Tobin
+r2s-plague_onset-town-0 | Badr al-Isfahani | Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.
+r2s-plague_onset-town-0 | Badr al-Isfahani | Constraint: Moving to protect the office looks like a grab; standing still means falling with the seat.
+r2s-politically_fractured-metropolis-0 | Xaman Zam | Holds an office that hangs on a seat someone else is trying to take.
+r2s-politically_fractured-metropolis-0 | Xaman Zam | Constraint: Waiting to see who wins keeps the office safe today and earns no thanks from the winner.
+r2s-recently_betrayed-metropolis-3 | Oleg Morozov | Hidden allegianceanswers to Thieves' Guild, through Larisa Simić
+r2s-recently_betrayed-metropolis-3 | Denis Alexeyev | Hidden allegianceanswers to Thieves' Guild, through Viktoriya Kozlov
+r2s-recently_betrayed-metropolis-3 | Dragana Čupić | Hidden allegianceanswers to Thieves' Guild, through Cveta Petrov
+r2s-recently_betrayed-metropolis-3 | Daria Tretyakov | Hidden allegianceanswers to Thieves' Guild, through Liliya Gavrilović
+r2s-recently_betrayed-metropolis-3 | Ezechiel Jovanović | Hidden allegianceanswers to Thieves' Guild, through Lyuben Bykov
+r2s-slave_revolt-metropolis-0 | Nott Randversson | Hidden allegianceanswers to Rookery, through Hild Froðason
+r2s-slave_revolt-metropolis-0 | Vifil Eriksson | Hidden allegianceanswers to Thieves' guild (powerful), through Þrúðr Hrafnsson
+r2s-slave_revolt-metropolis-0 | Þorbjörg Ketilsson | Hidden allegianceanswers to Rookery, through Liv Olafsson
+r2s-slave_revolt-metropolis-0 | Auðr Halfdarson | Hidden allegianceanswers to Thieves' guild (powerful), through Böðvildr Eyjolfsson
+r2s-succession_void-hamlet-0 | Gnaeus Cicero | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-succession_void-hamlet-0 | Gnaeus Cicero | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-succession_void-town-2 | Chan Ahau | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-succession_void-town-2 | Chan Ahau | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-succession_void-town-2 | Quetzalxochitl Tut | Runs a smaller house behind the leading one in the trade while the seat fails.
+r2s-succession_void-town-2 | Quetzalxochitl Tut | Constraint: The disorder that lets the house get ahead can just as quickly knock it back.
+r2s-succession_void-town-3 | Yngvi Bjornsson | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-succession_void-town-3 | Yngvi Bjornsson | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+r2s-under_siege-metropolis-1 | Vita Figulus | Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.
+r2s-under_siege-metropolis-1 | Vita Figulus | Constraint: Moving to protect the office looks like a grab; standing still means falling with the seat.
+r2s-under_siege-metropolis-1 | Albinus Nasica | Works spells under the senior casters while the seat fails.
+r2s-under_siege-metropolis-1 | Albinus Nasica | Constraint: Staying on no side while everyone suffers is hard to do without looking like a calculation.
+r2s-wartime-city-2 | Ulrike Theis | Hidden allegianceanswers to Thieves' Guild, through Sigibald Rosenfeld
+r2s-wartime-city-2 | Ilse Koch | Hidden allegianceanswers to Thieves' Guild, through Helena Braun
+r2s-wartime-town-0 | Sigvald Rognvaldsson | Belongs to a lesser family behind the leading one while the seat fails.
+r2s-wartime-town-0 | Sigvald Rognvaldsson | Constraint: Getting ahead of the greater family now will look like seizing a chance, not earning a place.
+--- MULTI HOLDS (tip)
+

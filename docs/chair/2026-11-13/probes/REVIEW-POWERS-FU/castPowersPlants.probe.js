@@ -12,6 +12,7 @@
  * BUDGET: the 525 arm births 525 full settlements under an explicit per-test budget at its
  * measured cost (~80 s), never the suite-wide timeout.
  */
+import * as __fs from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { goldenCorpus } from '../../helpers/goldenMasterCorpus.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
@@ -313,7 +314,7 @@ describe('the people car — the powers\' people (step 3)', () => {
       // F5: the office at -0 -> must red
       tries('F5 office at -0', (s) => { const c = s.npcs.find((x) => x.id === office?.id); const m = c && c.memberships.find((x) => isOffice(c, x)); if (!m) return false; m.share = -0; return true; });
     }
-    console.log('ITEM6\n' + report.join('\n'));
+    __fs.writeFileSync('/home/user/wt/item6.out', 'ITEM6\n' + report.join('\n') + '\n');
   }, 300_000);
 
   it('determinism: the same seed gives the same memberships and ranks, twice', async () => {

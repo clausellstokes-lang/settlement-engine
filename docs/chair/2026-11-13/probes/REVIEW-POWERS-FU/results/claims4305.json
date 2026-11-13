@@ -1,0 +1,61 @@
+{
+ "births": 4305,
+ "seatSame": 4305,
+ "seatDiff": [],
+ "labelsMoved": 0,
+ "differing": 947,
+ "nobleFirst": {
+  "base": {
+   "MINTED the lord": 124,
+   "the miller": 374,
+   "the lord's appointee": 43,
+   "the college master": 228,
+   "the governor": 140,
+   "the mine captain": 59,
+   "the impresario": 188,
+   "the steward": 53,
+   "the theatre manager": 3,
+   "no one": 3,
+   "the peat-reeve": 1
+  },
+  "tip": {
+   "MINTED the lord": 986,
+   "the lord's appointee": 41,
+   "the governor": 136,
+   "the steward": 53
+  }
+ },
+ "minted": 862,
+ "mintedCat": {
+  "government": 862
+ },
+ "mintedTitle": {
+  "the lord": 862
+ },
+ "mintedGender": {
+  "female": 327,
+  "male": 535
+ },
+ "mintedInf": {
+  "moderate": 421,
+  "low": 423,
+  "high": 18
+ },
+ "inf": {
+  "minted the lord low->high": 114,
+  "the steward low->moderate": 51
+ },
+ "gs": 6170,
+ "gl": 9401,
+ "relTowns": 875,
+ "govSide": 37,
+ "govSideTowns": 32,
+ "govEx": [
+  "rvw-city-74: Every civic project Ariadne Chortasmenos announces has first been costed, quietly, in Evanthia Raoul's counting-room. The public believes the order is the other way around.",
+  "rvw-city-78: Regünjid Bukhara pays for the common works with money borrowed from Checheyigen Kereit. Regünjid Bukhara cannot cross Checheyigen Kereit, and Checheyigen Kereit makes sure Regünjid Bukhara remembers it.",
+  "rvw-metropolis-60: Dimitri Rakić holds the debts Vladislav Filipović has run up, and so Dimitri Rakić decides what Vladislav Filipović can afford to do.",
+  "rvw-metropolis-60: Every civic project Andrei Vinogradov announces has first been costed, quietly, in Dimitri Rakić's counting-room. The public believes the order is the other way around.",
+  "rvw-metropolis-68: Every civic project Garbhán Thornton announces has first been costed, quietly, in Blathnaid Fitzgerald's counting-room. The public believes the order is the other way around."
+ ],
+ "femaleLordRows": 479
+}

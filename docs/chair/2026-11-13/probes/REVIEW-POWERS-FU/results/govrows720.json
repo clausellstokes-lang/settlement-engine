@@ -1,0 +1,26 @@
+{
+ "rowsByKey": {
+  "Outstanding Debt": 45,
+  "Financial Dependence": 11,
+  "Professional Rivalry": 25,
+  "Mentor and Successor": 44,
+  "Genuine Respect": 13,
+  "Pragmatic Alliance": 18,
+  "Mutual Leverage": 22,
+  "Silent Partnership": 4,
+  "Unresolved History": 4,
+  "Family Complication": 3
+ },
+ "lordGovSide": 9,
+ "lordOtherSide": 2,
+ "towns": 8,
+ "ex": [
+  "r2r-town-9: Ingvar Bjornsson (the lord) ← Ulf Ulfsson (Alderman): Ulf Ulfsson holds the debts Ingvar Bjornsson has run up, and so Ulf Ulfsson decides what Ingvar Bjornsson can afford to do.",
+  "r2r-metropolis-32: Decimia Capito (the lord) ← Hadrian Laevinus (Master of the Guilds): Decimia Capito owes Hadrian Laevinus more than the settlement collects in two years of taxes. Hadrian Laevinus is paid first, every quarter.",
+  "r2s-recently_betrayed-city-2: Ériu MacGillivray (the lord) ← Fionnuala MacRae (Speaker of the Assembly): Fionnuala MacRae lends and Ériu MacGillivray spends. The council's decisions are made in Ériu MacGillivray's chamber and approved in Fionnuala MacRae's counting-house.",
+  "r2s-succession_void-metropolis-2: Walid al-Din (the lord) ← Kausar al-Nuri (First Magnate): Kausar al-Nuri lends and Walid al-Din spends. The council's decisions are made in Walid al-Din's chamber and approved in Kausar al-Nuri's counting-house.",
+  "r2s-succession_void-metropolis-3: Wershi Timurid (the lord) ← Luvsandorj Budaad (Doge): Wershi Timurid governs on Luvsandorj Budaad's credit. Every loan renewed adds one more condition to the next.",
+  "r2s-succession_void-metropolis-3: Ügedei Jirgin (the lord) ← Luvsandorj Budaad (Doge): Ügedei Jirgin pays for the common works with money borrowed from Luvsandorj Budaad. Ügedei Jirgin cannot cross Luvsandorj Budaad, and Luvsandorj Budaad makes sure Ügedei Jirgin remembers it."
+ ],
+ "baseClaimantGovSide": 2
+}

@@ -1,0 +1,51 @@
+{
+ "towns": 720,
+ "townsHit": 35,
+ "hits": [
+  [
+   "Merchant Guilds's @ Systems/Power",
+   18
+  ],
+  [
+   "Religious Authorities's @ Systems/Power",
+   8
+  ],
+  [
+   "Arcane Orders's @ Systems/Power",
+   4
+  ],
+  [
+   "Noble Houses's @ Systems/Power",
+   3
+  ],
+  [
+   "Craft Guilds's @ Systems/Power",
+   2
+  ],
+  [
+   "Grain Holders's @ Systems/Power",
+   1
+  ],
+  [
+   "Noble Families's @ Systems/Power",
+   1
+  ]
+ ],
+ "ex": [
+  "r2r-hamlet-20 [Systems/Power] Styrkar Sigmundsson is third in Feudal Stewardship and holds a third share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-village-31 [Systems/Power] Jordanka Kozlov is third in Elder Council and holds a large share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-town-6 [Systems/Power] Aleidis Krüger is third in Arcane Council and holds a large share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-town-25 [Systems/Power] Udayan Nair is third in Military Council and holds a half share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-town-29 [Systems/Power] Lidija Korolev is third in Merchant Council and holds a large share in Religious Authorities, and carries Religious Authorities's requests to the two above.",
+  "r2r-town-42 [Systems/Power] Chandrasekhar Rao is third in Town Mayor and holds a third share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-city-13 [Systems/Power] Rakesh Prasad is third in Merchant Guild Council and holds a third share in Religious Authorities, and carries Religious Authorities's requests to the two above.",
+  "r2r-city-26 [Systems/Power] Elica Lazić is third in Merchant Guild Council and holds a third share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-city-36 [Systems/Power] Ivo Berger is third in Ecclesiastical Council and holds a half share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-city-38 [Systems/Power] Metztli Uc is third in Ecclesiastical Council and holds a third share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-metropolis-4 [Systems/Power] Melane Melissenos is third in High Theocratic Council and holds a third share in Merchant Guilds, and carries Merchant Guilds's requests to the two above.",
+  "r2r-metropolis-6 [Systems/Power] Rain Maceual is third in Grand Council and holds a third share in Religious Authorities, and carries Religious Authorities's requests to the two above.",
+  "r2r-metropolis-6 [Systems/Power] Rain Maceual is third in Grand Council and holds a third share in Arcane Orders, and carries Arcane Orders's requests to the two above.",
+  "r2r-metropolis-14 [Systems/Power] Sumitra Bhat is third in High Theocratic Council and holds a large share in Craft Guilds, and carries Craft Guilds's requests to the two above.",
+  "r2r-metropolis-21 [Systems/Power] Hadwig Engel is third in Ducal Governorship and holds a third share in Noble Houses, and carries Noble Houses's requests to the two above."
+ ]
+}

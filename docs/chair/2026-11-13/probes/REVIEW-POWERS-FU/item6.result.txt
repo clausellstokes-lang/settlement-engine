@@ -1,0 +1,57 @@
+ITEM6
+5 control: green
+5 office=npc_international_trade_center share=+0
+5 F1 office loses its office word, share +0: RED
+5 F2 +0 on the governing second: RED
+5 F3 +0 on the office card in another power: RED
+5 F4 +0 on a minted face: n/a
+5 F5 office at -0: RED
+4 control: green
+4 office=none share=-
+4 F1 office loses its office word, share +0: n/a
+4 F2 +0 on the governing second: RED
+4 F3 +0 on the office card in another power: n/a
+4 F4 +0 on a minted face: n/a
+4 F5 office at -0: n/a
+17 control: green
+17 office=npc_merchant_guilds_50_100 share=+0
+17 F1 office loses its office word, share +0: RED
+17 F2 +0 on the governing second: RED
+17 F3 +0 on the office card in another power: RED
+17 F4 +0 on a minted face: n/a
+17 F5 office at -0: RED
+2 control: green
+2 office=npc_pawnbroker share=+0
+2 F1 office loses its office word, share +0: RED
+2 F2 +0 on the governing second: RED
+2 F3 +0 on the office card in another power: n/a
+2 F4 +0 on a minted face: RED
+2 F5 office at -0: RED
+9 control: green
+9 office=npc_inn_multiple share=+0
+9 F1 office loses its office word, share +0: RED
+9 F2 +0 on the governing second: RED
+9 F3 +0 on the office card in another power: RED
+9 F4 +0 on a minted face: RED
+9 F5 office at -0: RED
+11 control: green
+11 office=npc_international_trade_center share=+0
+11 F1 office loses its office word, share +0: RED
+11 F2 +0 on the governing second: RED
+11 F3 +0 on the office card in another power: RED
+11 F4 +0 on a minted face: n/a
+11 F5 office at -0: RED
+23 control: green
+23 office=npc_international_trade_center share=1
+23 F1 office loses its office word, share +0: RED
+23 F2 +0 on the governing second: RED
+23 F3 +0 on the office card in another power: n/a
+23 F4 +0 on a minted face: RED
+23 F5 office at -0: RED
+31 control: green
+31 office=npc_mine_open_cast share=1
+31 F1 office loses its office word, share +0: RED
+31 F2 +0 on the governing second: RED
+31 F3 +0 on the office card in another power: n/a
+31 F4 +0 on a minted face: n/a
+31 F5 office at -0: RED

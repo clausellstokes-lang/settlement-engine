@@ -1,0 +1,83 @@
+{
+ "nobleFirstBase": {
+  "the steward": 1,
+  "the miller": 40,
+  "MINTED the lord": 23,
+  "the lord's appointee": 11,
+  "the college master": 36,
+  "the governor": 32,
+  "the mine captain": 15,
+  "the impresario": 35
+ },
+ "nobleFirstTip": {
+  "the steward": 1,
+  "MINTED the lord": 151,
+  "the lord's appointee": 10,
+  "the governor": 31
+ },
+ "minted": 128,
+ "mintedBy": {
+  "Manor Household": 1,
+  "Landed Gentry": 11,
+  "Noble Families": 29,
+  "The Old Houses": 6,
+  "The Peerage": 9,
+  "The Landed Bloc": 8,
+  "The Highborn Circle": 10,
+  "Noble Houses": 52,
+  "Loyalist Noble Opposition": 1,
+  "Crown Creditors (Noble Coalition)": 1
+ },
+ "mintedGender": {
+  "male": 59,
+  "female": 69
+ },
+ "mintedInf": {
+  "moderate": 89,
+  "low": 34,
+  "high": 5
+ },
+ "mintedCat": {
+  "government": 128
+ },
+ "mintedTitle": {
+  "the lord": 128
+ },
+ "govRelMinted": 11,
+ "govRelExamples": [
+  "r2r-town-9: Financial Dependence | Ulf Ulfsson holds the debts Ingvar Bjornsson has run up, and so Ulf Ulfsson decides what Ingvar Bjornsson can afford to do. | The interest falls due at midsummer and the treasury will not cover it. Ulf Ulfsson has already drafted the terms of the extension.",
+  "r2r-metropolis-32: Financial Dependence | Decimia Capito owes Hadrian Laevinus more than the settlement collects in two years of taxes. Hadrian Laevinus is paid first, every quarter. | Hadrian Laevinus is calling in a third of the debt at once. Decimia Capito has until the next quarter day to find it.",
+  "r2s-recently_betrayed-city-2: Financial Dependence | Fionnuala MacRae lends and Ériu MacGillivray spends. The council's decisions are made in Ériu MacGillivray's chamber and approved in Fionnuala MacRae's counting-house. | Ériu MacGillivray has started borrowing small sums from Fionnuala MacRae's rivals. Fionnuala MacRae's clerks have seen the receipts.",
+  "r2s-succession_void-metropolis-2: Financial Dependence | Kausar al-Nuri lends and Walid al-Din spends. The council's decisions are made in Walid al-Din's chamber and approved in Kausar al-Nuri's counting-house. | Walid al-Din has started borrowing small sums from Kausar al-Nuri's rivals. Kausar al-Nuri's clerks have seen the receipts.",
+  "r2s-succession_void-metropolis-2: Financial Dependence | Every civic project Walid al-Din announces has first been costed, quietly, in Intisar ibn Battuta's counting-room. The public believes the order is the other way around. | One camp on the council wants the debt repudiated outright. Walid al-Din has stopped disagreeing in public.",
+  "r2s-succession_void-metropolis-3: Financial Dependence | Wershi Timurid governs on Luvsandorj Budaad's credit. Every loan renewed adds one more condition to the next. | Luvsandorj Budaad has refused credit for the winter grain stores. Wershi Timurid must choose between the creditor and the granary.",
+  "r2s-succession_void-metropolis-3: Financial Dependence | Ügedei Jirgin pays for the common works with money borrowed from Luvsandorj Budaad. Ügedei Jirgin cannot cross Luvsandorj Budaad, and Luvsandorj Budaad makes sure Ügedei Jirgin remembers it. | Ügedei Jirgin has identified an alternative creditor. Luvsandorj Budaad has heard the same rumour.",
+  "r2s-succession_void-metropolis-3: Financial Dependence | Chimgee Geniges holds the settlement's tax rolls as security for its loans. Wershi Timurid cannot raise a levy without Chimgee Geniges's clerks counting it first. | Wershi Timurid has proposed a new tax to clear the debt. Chimgee Geniges's friends on the council will vote against it.",
+  "r2s-monster_pressure-city-1: Financial Dependence | Eileen Jordan governs on Raghallach MacKenzie's credit. Every loan renewed adds one more condition to the next. | Raghallach MacKenzie has refused credit for the winter grain stores. Eileen Jordan must choose between the creditor and the granary.",
+  "r2s-wartime-metropolis-0: Financial Dependence | Every civic project Dina al-Farabi announces has first been costed, quietly, in Salim ibn Hazm's counting-room. The public believes the order is the other way around. | One camp on the council wants the debt repudiated outright. Dina al-Farabi has stopped disagreeing in public.",
+  "r2s-wartime-metropolis-1: Financial Dependence | Bojana Lazarev's treasury borrowed from Zoya Grbić to cover a bad harvest and has borrowed every year since. The interest is paid before the wages. | Zoya Grbić has asked for a seat on the council as a condition of the next loan. Bojana Lazarev has three weeks to answer."
+ ],
+ "relLordFemale": 100,
+ "femEx": [
+  "r2r-town-15: Kyriake Limniotes (the lord)",
+  "r2r-town-15: Kyriake Limniotes (the lord)",
+  "r2r-city-6: Eithne Treacy (the lord)",
+  "r2r-city-6: Eithne Treacy (the lord)",
+  "r2r-city-8: Altantsetseg Noyakin (the lord)"
+ ],
+ "moved": {
+  "inf": 23,
+  "gs": 1146,
+  "gl": 1672,
+  "imp": 338,
+  "sr": 229,
+  "rel": 124,
+  "sec": 0,
+  "name": 0
+ },
+ "movedTowns": 131,
+ "townsWithMint": 103,
+ "movedTownsWithoutMint": 28,
+ "seatSame": 0,
+ "seatDiff": []
+}

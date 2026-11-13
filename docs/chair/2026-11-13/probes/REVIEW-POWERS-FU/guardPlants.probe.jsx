@@ -16,6 +16,7 @@
  *
  * @enforced-by npx vitest run tests/components/seatHolderOnThePage.test.jsx
  */
+import * as __fs from 'node:fs';
 import { beforeAll, afterEach, describe, expect, it } from 'vitest';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import PowerTab from '../../src/components/new/tabs/PowerTab.jsx';
@@ -133,6 +134,7 @@ describe('COHERENCE-POWERS-5 — the seat-holder on the rendered page (the guard
   // check (2) alone. The old guard (first matching paragraph; the narrow SUBORDINATE vocabulary) missed all three; the
   // widened guard (holderStructuralLines + the subordinating markers) catches each. The control (no plant) stays green.
   const PLANTS = Object.freeze([
+    { field: 'structuralPosition', line: 'Holds the seat, though the guild masters decide what it may do.' }, // CONTROL: the lane's own plant
     // REVIEW-POWERS-FU's own plants: subordinating clauses NOT drawn from the review's three or the guard's vocabulary
     { field: 'structuralPosition', line: 'Holds the seat, but only at the merchants\' pleasure.' },
     { field: 'structuralPosition', line: 'Holds the seat in the abbot\'s name and signs nothing the abbot has not read.' },
@@ -165,7 +167,7 @@ describe('COHERENCE-POWERS-5 — the seat-holder on the rendered page (the guard
     expect(rulingChainOf(s).npc?.name, 'the control town has a seat-holder').toBeTruthy();
     expect(holderSubordinateMiss(s, seed, null), 'the real holder reads no subordinate line').toBeNull();
     for (const plant of PLANTS) {
-      const got = holderSubordinateMiss(s, seed, plant); console.log(`PLANT ${got && got.includes(plant.line) ? 'CAUGHT' : 'MISSED'} [${plant.field}] ${plant.line}`);
+      const got = holderSubordinateMiss(s, seed, plant); __fs.appendFileSync("/home/user/wt/guardplants.out", `PLANT ${got && got.includes(plant.line) ? 'CAUGHT' : 'MISSED'} [${plant.field}] ${plant.line}\n`);
     }
   }, 120_000);
 

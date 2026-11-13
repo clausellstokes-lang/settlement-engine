@@ -29,6 +29,10 @@ const OUT = process.env.CENSUS_OUT; const SEEDS = fs.readFileSync(process.env.CE
 // store ships it; randomSliderMode true -> _randomizePriorities; the stress panel with Random OFF writes
 // selectedStressesRandom:false and the ticked list (an empty list = "None"). Seeds: rw3- or rpf-<size>-<calm|s1+s2>-<i>.
 function cfgFor(seed){
+  // REVIEW-POWERS-FU: also the lane's 4,305 keys (COHERENCE-POWERS-3/corpus.mjs: birthConfig({...DIALS, ...}) without DEFAULT_CONFIG)
+  const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  let c=seed.match(/^(?:rvf|l2)-([a-z_]+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if(c) return birthConfig({ ...DIALS, settType: c[2], selectedStresses: [c[1]], selectedStressesRandom: false });
+  c=seed.match(/^(?:rvw|critique)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/); if(c) return birthConfig({ ...DIALS, settType: c[1] });
   const m=seed.match(/^(?:rw3|rpf)-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-(\d+)$/); if(!m) throw new Error(seed);
   const stresses = m[2]==='calm' ? [] : m[2].split('+');
   return birthConfig({...DEFAULT_CONFIG, settType:m[1], selectedStressesRandom:false, selectedStresses:stresses, _randomizePriorities:true});

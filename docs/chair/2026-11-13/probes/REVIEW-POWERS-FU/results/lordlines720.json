@@ -1,0 +1,54 @@
+{
+ "lordsMintedAtTip": 128,
+ "lordsWithAStructuralLine": 34,
+ "byLine": [
+  [
+   "Holds an office that runs from day to day, with no crisis to answer.",
+   25
+  ],
+  [
+   "Constraint: Good work is expected and goes unnoticed; a mistake is remembered.",
+   25
+  ],
+  [
+   "Holds an office under a seat that fewer people now obey; the office is only as strong as t",
+   5
+  ],
+  [
+   "Constraint: Moving to protect the office looks like a grab; standing still means falling w",
+   5
+  ],
+  [
+   "Holds an office that hangs on a seat someone else is trying to take.",
+   2
+  ],
+  [
+   "Constraint: Waiting to see who wins keeps the office safe today and earns no thanks from t",
+   2
+  ],
+  [
+   "Holds an office whose purse shrinks with everyone else's.",
+   1
+  ],
+  [
+   "Constraint: Every office is after the same few coins; making this one needed means taking ",
+   1
+  ],
+  [
+   "Holds an office among officials who take bribes; not one of the takers, but working beside",
+   1
+  ],
+  [
+   "Constraint: Any honest inquiry needs the help of officials who are themselves on the take.",
+   1
+  ]
+ ],
+ "ex": [
+  "r2r-village-27 Radbot Klein (Manor Household): Holds an office whose purse shrinks with everyone else's. / Constraint: Every office is after the same few coins; making this one needed means taking from the others.",
+  "r2r-town-9 Ingvar Bjornsson (Landed Gentry): Holds an office that runs from day to day, with no crisis to answer. / Constraint: Good work is expected and goes unnoticed; a mistake is remembered.",
+  "r2r-city-1 Oengus Treacy (Noble Families): Holds an office that runs from day to day, with no crisis to answer. / Constraint: Good work is expected and goes unnoticed; a mistake is remembered.",
+  "r2r-city-6 Eithne Treacy (Noble Families): Holds an office that runs from day to day, with no crisis to answer. / Constraint: Good work is expected and goes unnoticed; a mistake is remembered.",
+  "r2r-city-17 Vachir Dörbete (Noble Families): Holds an office that runs from day to day, with no crisis to answer. / Constraint: Good work is expected and goes unnoticed; a mistake is remembered.",
+  "r2r-city-18 Olga Kovačević (Noble Families): Holds an office that runs from day to day, with no crisis to answer. / Constraint: Good work is expected and goes unnoticed; a mistake is remembered."
+ ]
+}
