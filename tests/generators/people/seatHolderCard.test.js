@@ -63,6 +63,21 @@ function n1MissesOf(s, key) {
   return out;
 }
 
+/**
+ * N2 — THE HIGHER OF THE TWO HATS: the holder's influence is never below the office's. The office's band is the one
+ * the seat's own face draws through at each size (poolMap.js :: SEAT_ROLE_BY_TIER: an Elder in a thorp or hamlet, a
+ * Mayor or Governor above), a literal here: the line read every village-to-metropolis leader high (480 of 480).
+ */
+const OFFICE_BAND = Object.freeze({ thorp: 'low', hamlet: 'low', village: 'high', town: 'high', city: 'high', metropolis: 'high' });
+const BAND = Object.freeze({ low: 0, moderate: 1, high: 2 });
+/** N2's misses in one birth. @param {any} s @param {string} key */
+function n2MissesOf(s, key) {
+  const c = holderOf(s);
+  if (!c) return [];
+  const want = OFFICE_BAND[s.tier];
+  return BAND[c.influence] >= BAND[want] ? [] : [`${key}: ${c.name} (${c.role}) reads ${c.influence} (power ${c.power}) under a ${want} office`];
+}
+
 describe('COHERENCE-POWERS-5 — the seat-holder\'s card (REVIEW-POWERS-2 N1–N3)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
 
@@ -88,6 +103,26 @@ describe('COHERENCE-POWERS-5 — the seat-holder\'s card (REVIEW-POWERS-2 N1–N
     for (const t of TIERS) {
       for (let i = 0; i < 8; i++) misses.push(...n1MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
       for (const x of CRISES) misses.push(...n1MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
+    }
+    expect(misses).toEqual([]);
+  }, 600_000);
+
+  it('N2: the review\'s two towns — the city\'s Lord Burgomaster and the town\'s Archmage read high', () => {
+    const misses = [];
+    for (const [seed, name] of Object.entries({ 'r2r-city-0': 'Varvara Vorobev', 'r2r-town-1': 'Tabassum al-Dimashqi' })) {
+      const s = born(seed);
+      const c = holderOf(s);
+      if (c?.name !== name) misses.push(`${seed}: the seat row names ${c?.name}, not ${name}`);
+      else if (c.influence !== 'high' || !(c.power >= 8 && c.power <= 10)) misses.push(`${seed}: ${name} reads ${c.influence} (power ${c.power})`);
+    }
+    expect(misses).toEqual([]);
+  }, 120_000);
+
+  it('N2: at every size, random and under every crisis — no holder reads below the office', () => {
+    const misses = [];
+    for (const t of TIERS) {
+      for (let i = 0; i < 8; i++) misses.push(...n2MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
+      for (const x of CRISES) misses.push(...n2MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
     }
     expect(misses).toEqual([]);
   }, 600_000);

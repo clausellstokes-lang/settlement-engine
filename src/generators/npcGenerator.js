@@ -20,7 +20,7 @@ import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
-import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
+import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { POWER_BANDS, titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
 
@@ -56,7 +56,7 @@ const pickFromArray = r => ctxPick(r);
 // is the one it always described; the name it USED to wear has moved to the function that
 // actually generates the goal, twenty lines down (§759, the misleading-vocabulary risk: "each
 // new consumer that trusts a function name in that file risks wiring the wrong field").
-const generateNPCPowerLevel = role => {
+export const powerBandOfRole = role => { // COHERENCE-POWERS-5 (N2): the keyword band, draw-free, read by people/castPowers.js :: raiseToOfficeBand
   const HIGH_POWER = [
     'mayor',
     'lord',
@@ -69,11 +69,11 @@ const generateNPCPowerLevel = role => {
     'crime lord',
   ];
   const MID_POWER = ['council_member', 'priest', 'wealthy_merchant', 'wizard', 'knight', 'magister', 'sergeant'];
-  const r = role.toLowerCase();
-  if (HIGH_POWER.some(kw => r.includes(kw))) return { level: 'high', power: 8 + Math.floor(_rng() * 3) };
-  if (MID_POWER.some(kw => r.includes(kw))) return { level: 'moderate', power: 4 + Math.floor(_rng() * 4) };
-  return { level: 'low', power: 1 + Math.floor(_rng() * 3) };
+  const r = String(role || '').toLowerCase();
+  return HIGH_POWER.some(kw => r.includes(kw)) ? 'high' : MID_POWER.some(kw => r.includes(kw)) ? 'moderate' : 'low';
 };
+// one draw within the role's band (people/poolMap.js :: POWER_BANDS), as before: the same one `_rng()` call, the same values
+const generateNPCPowerLevel = role => { const band = POWER_BANDS[powerBandOfRole(role)]; return { level: band.level, power: band.floor + Math.floor(_rng() * band.span) }; };
 
 // generateSingleNPC
 // `hookRegistry` — the settlement-scoped anti-repetition registry, created once

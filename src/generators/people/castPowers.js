@@ -48,7 +48,8 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
 import { FACE_SEAT, faceOfInstitution, isFabricInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
-import { hookPoolFor } from './poolMap.js';
+import { hookPoolFor, POWER_BANDS, seatPoolFor } from './poolMap.js';
+import { powerBandOfRole } from '../npcGenerator.js';
 import { drawCardHooks, dualHatHouseOf, HOOKS_FORK_LABEL, houseKindOf, mintPowerFace, officeTitleFor, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
 import { CLAIMANT_FACE, HOUSELESS_CRIMINAL_FACE } from '../../data/stressPowerFaces.js';
@@ -371,6 +372,7 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
       if (leader) {
         take(leader);
         leader.card.role = officeTitleFor(power, tier);
+        raiseToOfficeBand(leader.card, seatPoolFor(tier).role); // COHERENCE-POWERS-5 (N2): the higher of the two hats, no draw
       } else {
         take(remaining.find((m) => (seatKey ? m.card.institution?.key === seatKey && m.card.institution?.kind === 'house' : m.card.id === SEAT_CARD_ID)));
       }
@@ -505,6 +507,24 @@ function settleCrisisLeaders(settlement, all) {
     }
     [next, ...ranked.filter((c) => c !== next)].forEach((c, i) => { own(c).rank = i < RANKS ? i + 1 : null; });
   }
+}
+
+/**
+ * THE HIGHER OF THE TWO HATS (COHERENCE-POWERS-5, N2; REVIEW-POWERS-2 at e86d069be): the dual-hat leader's influence is
+ * never below the office's. The office's band is the one the seat's own face draws through at the town's size (the tier's
+ * seat role, poolMap.js :: seatPoolFor: an Elder in a thorp or hamlet, a Mayor or Governor above). The house's draw stands
+ * where its band is the office's or above; else the card takes the office's band and keeps its draw's place within it
+ * (the same offset from the band's floor, clamped to the band), so NO stream draws again. Mutates `influence` and `power`.
+ * Draw-free and idempotent.
+ * @param {Record<string, any>} card @param {string} officeRole the role the office's own face draws through
+ */
+export function raiseToOfficeBand(card, officeRole) {
+  const office = POWER_BANDS[powerBandOfRole(officeRole)];
+  const own = POWER_BANDS[/** @type {keyof typeof POWER_BANDS} */ (String(card?.influence || ''))];
+  if (!card || !own || own.order >= office.order) return;
+  const offset = Math.max(0, Math.min(office.span - 1, (Number(card.power) || own.floor) - own.floor));
+  card.influence = office.level;
+  card.power = office.floor + offset;
 }
 
 /** A member's house kind (representatives.js :: houseKindOf); null for a minted face. @param {Member} m */
