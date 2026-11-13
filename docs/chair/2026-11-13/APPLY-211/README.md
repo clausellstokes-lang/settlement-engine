@@ -2,6 +2,8 @@
 
 **For the owner's hand only.** No session applies this. Do it in the SQL editor of the production project. Do NOT use a database push from any branch: that would send migrations 204 to 210 with it, and 208 must not go before the new site.
 
+**A note added on 2026-11-13 at 19:45 UTC: this pack is still the right one.** After the pack was built, the veil lane's builder wrote its newer cures into the lane's copy of migration 211, so that copy no longer matched this pack. The chair has ruled that migration 211 is FROZEN at the reviewed bytes, which are the bytes in this pack; the newer cures move to a new migration 212, which is not in this pack and is not to be applied until a security review clears it. Applying this pack is correct whether or not 212 follows. If it is already applied, nothing needs redoing.
+
 **What it does.** Today the server sends every reader of a shared town everything its game master hid by hand, and only the reader's browser hides it. Migration 211 makes the server withhold it, on the gallery page, the party link, the map page and the import. It creates and replaces functions only: no table, column, policy or row is touched.
 
 **What was checked.** The chair checked on 2026-11-13 at 17:18 UTC that the file inside `3-apply-211.sql` is byte for byte the reviewed file (sha256 `eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01`), and that the two read-first files open a read-only transaction, end in a rollback and hold no statement that writes. The security reviewer rehearsed the whole step on a local database, not in the hosted editor. The full review is `docs/chair/2026-11-13/REVIEW-VEIL-211-333b33973-2026-11-13.md`, section 7.
