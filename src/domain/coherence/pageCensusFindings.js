@@ -227,7 +227,7 @@ export function pageCensusFindings(settlement, views) {
   run('P5false', () => {
     // a line of the crime desk (Power, Defense) whose declared fact this town makes false (crimeLineDisqualifiers.js),
     // or the organised ring's note naming bought officials where the cast holds none
-    const facts = crimeLineFactsOf(/** @type {Parameters<typeof crimeLineFactsOf>[0]} */ (rec));
+    const facts = crimeLineFactsOf(/** @type {Parameters<typeof crimeLineFactsOf>[0]} */ (rec), 'dm'); // the owner's page: the DM's facts
     const lines = [...PW, ...D];
     for (const l of lines) {
       const hit = declaredCrimeLines().find((c) => c.re.test(l) && CRIME_LINE_FACTS[c.falseWhere](facts));

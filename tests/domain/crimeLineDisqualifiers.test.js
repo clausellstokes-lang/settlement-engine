@@ -6,7 +6,7 @@
 import { describe, expect, test } from 'vitest';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
-import { CRIME_LINE_DISQUALIFIERS, corpusAdmittingCrimeLines } from '../../src/domain/display/stateProse/crimeLineDisqualifiers.js';
+import { CRIME_LINE_DISQUALIFIERS, corpusAdmittingCrimeLines, crimeLineFactsOf } from '../../src/domain/display/stateProse/crimeLineDisqualifiers.js';
 import { officialsInCriminalPayOf } from '../../src/domain/facts/officialsInPay.js';
 import { powerStateProse } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { defenseCriminalProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
@@ -88,26 +88,30 @@ describe('F3b (the read of thirty): an official of the hall, and a hall the crim
   const council = (state, npcs) => ({ _seed: 'a', npcs, institutions: [{ name: "Thieves' guild" }], powerStructure: { criminalCaptureState: state, factions: [{ faction: 'Merchant Council', name: 'Merchant Council', power: 60, isGoverning: true }] } });
   test('a member of the ruling power who answers to a criminal house is an official in pay', () => {
     expect(officialsInCriminalPayOf(council('none', [MEMBER]))).toEqual(['Liliya Gusev']);
-    expect(deriveCriminalStructure(council('none', [MEMBER])).note).toMatch(/official/i);
+    expect(crimeLineFactsOf(council('none', [MEMBER]), 'dm').officialsInPay).toBe(1);
   });
-  test('at corrupted the criminals hold the hall: the ring\'s note keeps its officials', () => {
-    expect(deriveCriminalStructure(council('corrupted', [])).note).toMatch(/official/i);
-    expect(deriveCriminalStructure(council('none', [])).note).toMatch(/one ring/);
-    expect(deriveCriminalStructure(council('none', [])).note).not.toMatch(/official/i); // anchored: the same note matched 'one ring' on the line above
+  test('at corrupted the criminals hold the hall: a line denying a bought official is struck for the DM', () => {
+    const facts = crimeLineFactsOf(council('corrupted', []), 'dm');
+    expect(facts.officialsInPay).toBe(0);
+    expect(vidsOf('DS-DEF-4', 'capture none', facts)).toEqual([1]);
   });
 });
 
-describe('the organised ring\'s note says "bought officials" only where the cast holds one', () => {
-  const ring = (npcs, seed) => deriveCriminalStructure({ _seed: seed, npcs, institutions: [{ name: "Thieves' guild" }] });
-  test('the same vantage, with the clause only where an official is in pay; the key is untouched', () => {
+describe('F3c: the organised ring\'s note reads nothing veiled and says what is true in every town', () => {
+  const ring = (state, npcs, seed) => deriveCriminalStructure({ _seed: seed, npcs, institutions: [{ name: "Thieves' guild" }], powerStructure: { criminalCaptureState: state } });
+  test('one note per vantage whatever the cast or the hall: "any official it can buy", never "bought officials"', () => {
     /** @type {string[]} */ const wrong = [];
     for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
-      const none = ring([], seed); const one = ring([OFFICIAL], seed);
-      if (none.key !== 'organized' || /official/i.test(none.note) || !/official/i.test(one.note)) wrong.push(`${seed}: ${none.note} | ${one.note}`);
-      // the pick is unchanged: the note without the clause is the same vantage's opening
-      if (none.note.slice(0, 24) !== one.note.slice(0, 24)) wrong.push(`${seed}: another vantage`);
+      const free = ring('none', [], seed); const held = ring('corrupted', [OFFICIAL], seed);
+      if (free.key !== 'organized' || free.note !== held.note) wrong.push(`${seed}: ${free.note} | ${held.note}`);
+      if (/bought officials|the officials it pays|pays officials in turn|bribed officials/.test(free.note)) wrong.push(`${seed}: ${free.note}`);
+      if (!/any official|whatever official/.test(free.note)) wrong.push(`${seed}: ${free.note}`);
     }
     expect(wrong).toEqual([]);
-    expect(ring([], 'a').note).toMatch(/one ring/);
+  });
+  test('the desks read the cast and the hall for the DM only: for a player both are unknown and strike nothing', () => {
+    expect(crimeLineFactsOf(town('equilibrium', [OFFICIAL]), 'player')).toEqual({ officialsInPay: null, captureState: '' });
+    expect(crimeLineFactsOf(town('equilibrium', [OFFICIAL]), 'dm')).toEqual({ officialsInPay: 1, captureState: 'equilibrium' });
+    expect(vidsOf('DS-DEF-4', 'capture equilibrium', crimeLineFactsOf(town('equilibrium', [OFFICIAL]), 'player'))).toEqual([1, 2, 3]);
   });
 });

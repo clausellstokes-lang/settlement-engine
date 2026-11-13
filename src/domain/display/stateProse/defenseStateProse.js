@@ -1010,7 +1010,7 @@ export function defenseCriminalProse(settlement, structureKey, options = {}) {
 
   // W2-A-LEAVES-2 (REVIEW-W2A F3): the capture lens's lines that deny a bought official are struck where the cast
   // holds one (`crimeLineDisqualifiers.js`, enforced at the draw).
-  const corpus4 = corpusAdmittingCrimeLines(CORPUS, 'DS-DEF-4', crimeLineFactsOf(settlement));
+  const corpus4 = corpusAdmittingCrimeLines(CORPUS, 'DS-DEF-4', crimeLineFactsOf(settlement, options.audience));
   /** @param {string|null} poolKey */
   const line = (poolKey) => (poolKey
     ? composeStateProse(corpus4, 'DS-DEF-4', {

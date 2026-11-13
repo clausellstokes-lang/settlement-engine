@@ -35,12 +35,13 @@ const HALL_HELD = Object.freeze(['corrupted', 'capture']);
 export const CRIME_LINE_FACTS = Object.freeze({
   // the criminals holding the hall (`corrupted`, `capture`: an agent at its head, or the second and the third, or a
   // criminal ruling power) is itself an official in their pay
+  // for any audience but the DM's both facts are unknown (null, ''), and nothing is struck: see crimeLineFactsOf
   'no official in pay': (/** @type {CrimeLineFacts} */ f) => f.officialsInPay === 0 && !HALL_HELD.includes(f.captureState),
-  'an official in pay': (/** @type {CrimeLineFacts} */ f) => f.officialsInPay > 0 || HALL_HELD.includes(f.captureState),
+  'an official in pay': (/** @type {CrimeLineFacts} */ f) => (f.officialsInPay ?? 0) > 0 || HALL_HELD.includes(f.captureState),
   'no agent in the hall': (/** @type {CrimeLineFacts} */ f) => f.captureState === 'none' || f.captureState === 'adversarial',
 });
 
-/** @typedef {{ officialsInPay: number, captureState: string }} CrimeLineFacts */
+/** @typedef {{ officialsInPay: number|null, captureState: string }} CrimeLineFacts */
 /** @typedef {{ opens: string, falseWhere: keyof typeof CRIME_LINE_FACTS, says: string }} CrimeLineDeclaration */
 
 /** @param {string} opens @param {keyof typeof CRIME_LINE_FACTS} falseWhere @param {string} says @returns {Readonly<CrimeLineDeclaration>} */
@@ -71,14 +72,18 @@ export const CRIME_LINE_DISQUALIFIERS = Object.freeze({
 });
 
 /**
- * The two facts for one record.
+ * The two facts for one record, as an audience may read them: BOTH are veiled (the cast's allegiances and the hall's
+ * rung are stripped from the public record), so only the DM's audience reads them; for every other audience they are
+ * unknown and strike nothing, and the line reads as at the base (W2-A-LEAVES-2, F3c: the veil's invariance pin).
  * @param {{ npcs?: unknown, powerStructure?: { criminalCaptureState?: unknown } | null } | null | undefined} settlement
+ * @param {unknown} [audience] the desk's audience (`'dm'` reads the cast)
  * @returns {CrimeLineFacts}
  */
-export function crimeLineFactsOf(settlement) {
+export function crimeLineFactsOf(settlement, audience) {
   return {
-    officialsInPay: officialsInCriminalPayOf(settlement).length,
-    captureState: String(settlement?.powerStructure?.criminalCaptureState ?? ''),
+    officialsInPay: audience === 'dm' ? officialsInCriminalPayOf(settlement).length : null,
+    // the hall's rung is veiled too (`publicSafe.js`, `galleryVeil.js` strip it): the DM's alone
+    captureState: audience === 'dm' ? String(settlement?.powerStructure?.criminalCaptureState ?? '') : '',
   };
 }
 

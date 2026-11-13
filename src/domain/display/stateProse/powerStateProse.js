@@ -1057,7 +1057,7 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     : null);
   // W2-A-LEAVES-2 (REVIEW-W2A F3): the crime desk's lines are drawn among those no declared disqualifier strikes
   // for this town (an official in a criminal's pay, or none; the hall's stored rung).
-  const corpus6 = corpusAdmittingCrimeLines(CORPUS, 'DS-POW-6', crimeLineFactsOf(settlement));
+  const corpus6 = corpusAdmittingCrimeLines(CORPUS, 'DS-POW-6', crimeLineFactsOf(settlement, options.audience));
   /** @param {string|null} poolKey */
   const line6 = (poolKey) => (poolKey
     ? composeStateProse(corpus6, 'DS-POW-6', {

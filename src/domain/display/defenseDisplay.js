@@ -167,7 +167,7 @@ export function criminalOpNote(name) {
 const CRIM_STRUCTURE_DATA = Object.freeze({
   organized: {
     key: 'organized', label: 'Organized Syndicate', color: '#8b1a1a', bg: '#fdf4f4',
-    note: 'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and bought officials.',
+    note: 'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and on any official it can buy.',
   },
   'semi-organized': {
     key: 'semi-organized', label: 'Semi-Organized Networks', color: '#8a3010', bg: '#fdf0e8',
@@ -644,7 +644,6 @@ export function foodEnduranceLine(settlement) {
 // ─── SW-B5 FRAMES: the criminal ring's note gets vantages ─────────────────────
 // ⚠ AT THE END OF THE FILE so no line above moves (lines of this module are cited elsewhere).
 import { hashKey } from './stateProse/stateProseKernel.js';
-import { CRIME_LINE_FACTS, crimeLineFactsOf } from './stateProse/crimeLineDisqualifiers.js';
 
 /**
  * ⭐ THE RING'S NOTE GETS VANTAGES (lane SW-B5 FRAMES, 2026-11-09; STYLE-RULINGS-2 B5, the
@@ -660,45 +659,27 @@ import { CRIME_LINE_FACTS, crimeLineFactsOf } from './stateProse/crimeLineDisqua
  */
 const ORGANIZED_RING_NOTES = Object.freeze([
   CRIM_STRUCTURE_DATA.organized.note,
-  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and the officials it pays, and anyone who needs something from it can bargain.',
-  'Shopkeepers here pay one ring for protection, and the ring pays officials in turn. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
-  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and bribed officials.',
+  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.',
+  'Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
+  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.',
 ]);
 
 /**
- * THE SAME FOUR VANTAGES WITHOUT "BOUGHT OFFICIALS" (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F3). Each vantage above
- * says the ring "lives on protection money and bought officials" (or the officials it pays, pays officials, bribed
- * officials). That clause is TRUE where an official answers to a criminal house (`facts/officialsInPay.js`: by
- * office, or a member of the ruling power) or the criminals hold the hall (`corrupted`, `capture`;
- * `crimeLineDisqualifiers.js :: CRIME_LINE_FACTS`), and FALSE where none of these holds: 87 of the census's 720
- * organised rings (74 beside a hall "free of the criminals", 8 at `equilibrium`, 5 at `adversarial`). So the
- * clause is the fact's: index i here is vantage i with that clause, and nothing else, taken out. No new claim; the pick is unchanged.
- * @type {ReadonlyArray<string>}
- */
-const ORGANIZED_RING_NOTES_NONE_BOUGHT = Object.freeze([
-  'One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money.',
-  'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money, and anyone who needs something from it can bargain.',
-  'Shopkeepers here pay one ring for protection. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
-  'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money.',
-]);
-
-/**
- * The organised ring's note. ⚠ THE NOTE IS A LINE, NOT THE LEAF'S FACT: the structure's KEY is the crime leaf
- * (layer 3, `factLayers.js :: crime`, read by `factsOf(record).crime`), while the note reads the cast (an
- * official in a criminal's pay, layer 4), so it is composed WHEN IT IS READ (a getter): the key's readers never
- * reach the cast, and every printer of the note (the Defense tab, the PDF) reads it through the fact.
+ * W2-A-LEAVES-2 (2026-11-13; REVIEW-W2A F3, F3c). Each vantage said the ring "lives on protection money and bought
+ * officials" (the officials it pays, pays officials in turn, bribed officials): FALSE in 87 of the census's 720
+ * organised rings, where no official answers to a criminal house and the hall is not the criminals'. Whether one
+ * does is VEILED (the cast's allegiances and the hall's rung are stripped from the public record), and this note is
+ * one value printed on the DM's Defense tab and the public page alike, so it may not read it. The four vantages now
+ * say what is true in every town and read nothing hidden: the ring lives on "any official it can buy" (pays "any
+ * official who will take its money"), which presumes no buyer; the DM's "Who answers to whom" names those it has.
+ * The pick is the settlement's seed, as before (SW-B5); for the owner's veto, as new words.
  * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
- * @param {DefenseDisplaySettlement} settlement
+ * @param {{ _seed?: unknown }} settlement
  * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
  */
 function withRingVantage(row, settlement) {
-  if (row.key !== 'organized') return row;
   const seed = settlement?._seed;
-  const i = typeof seed === 'string' && seed ? hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length : 0;
-  const copy = { ...row };
-  Object.defineProperty(copy, 'note', {
-    enumerable: true,
-    get: () => (CRIME_LINE_FACTS['no official in pay'](crimeLineFactsOf(/** @type {Parameters<typeof crimeLineFactsOf>[0]} */ (/** @type {unknown} */ (settlement)))) ? ORGANIZED_RING_NOTES_NONE_BOUGHT[i] : ORGANIZED_RING_NOTES[i]),
-  });
-  return Object.freeze(copy);
+  if (row.key !== 'organized' || typeof seed !== 'string' || !seed) return row;
+  const note = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
+  return note === row.note ? row : Object.freeze({ ...row, note });
 }
