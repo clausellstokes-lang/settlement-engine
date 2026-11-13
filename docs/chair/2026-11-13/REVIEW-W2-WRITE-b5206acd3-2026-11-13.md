@@ -184,7 +184,23 @@ As in 2c: deb1544eb against a041a7bc5, every row level or lower, no new row. **N
 The census's patterns do not count the classes this lane adds, such as "Nothing threatens X now" or the siege twins. The cold list and §3 are the measure for those.
 
 ## 6. The whole suite at a041a7bc5
-(Filled after the run ends: see the section at the foot.)
+**The run.** `npx vitest run --maxWorkers=2`, with the ledger branch fetched, 17:20 to 19:11 UTC (6,650 s). **Exit 1.** 39,049 tests: 38,733 pass, 62 fail, 254 skipped. There are 67 red titles in 47 files, counting files that failed at load. The lists are `probes/REVIEW-W2-WRITE/suite-tip-reds.txt` and `suite-classed.txt`.
+
+**How the reds were classed.** Every red file was run again at deb1544eb and alone at the tip. Each title red at the tip but green at deb1544eb was then run at `mbase`.
+
+| Class | Titles |
+|---|---|
+| Red at deb1544eb too (the base's own) | 51 |
+| Red in the full run only, green alone (load flakes) | 4: `simulationSpine` › comma-split export; `urbanBandInstitutions` › G3, G6; `centuryLegSoak` › Tier 1 second seed |
+| Red at the tip, green at deb1544eb, red at `mbase` (from the two merged lanes, not this one) | 8: the aiCharter and aiOutputSchema bundle freshness, ×2 files and ×2 reproducibility; `factLayers` › READERS; `presumedThings` ARM 1 ×2; `dossierProseManifest` › MIXED-POOL AUDIENCE |
+| **Red at the tip, green at `mbase`: THE LANE'S** | **4 titles in 3 files** |
+
+The lane's four reds:
+- **`tests/domain/facts/census2DeclaredPools.test.js` › "DS-GEN-13's open-market lines are refused under a siege where they deny it, and kept in calm".** It expected `[2, 3, 4]` and got `[3, 4, 5]`. The third seat's a191f6815 refused v2 under a siege and added v5; the pin was not re-keyed. **The pin also shows that v3 ("Visitors find {settlement}'s market without asking") and v4 stay eligible under a siege**, which is finding M2.
+- **`tests/lint/dossierMountRegistry.walker.test.js` › "C2 mount registry — the shipped table every row is well formed, unique, reachable and honest about its dimensions".** A mount over a dimension-bearing block does not declare its dimension, so the kernel would fail closed and print nothing there.
+- **`tests/lint/proseMoveGrammar.walker.test.js` › CONTROL 4: 134 against 132, and CONTROL 4 SECOND HALF: 125 against 123.** The figures drifted with the third seat's new lines.
+
+These match the third seat's warning: its whole suite was stopped before the last code commits. **The lane does not stand green on its own reds.**
 
 ## 7. Plants for the lane's guards
 The lane added no test file and no test title. Its guards are register rows it lowered through their doors. Each plant was made in a scratch worktree at the tip, by editing the annex and regenerating through `gen:dossier-prose`, then restored.
@@ -210,6 +226,7 @@ The lane added no test file and no test title. Its guards are register rows it l
 | M4 | MED | Debt-cut lines claimed cured and still false: #755 (depleted fishery as the fallback), #166, #964 (market "where carts always stopped" under siege), #451 (garrison short beside "kept supplied") | rw3 towns | EXECUTED (#964, #451); reader seat (#755, #166) |
 | M5 | MED | No guard reds when a cure's crisis disqualifier is undone or mis-written | plant 4 | EXECUTED |
 | M6 | MED | GEN-18 STALLED's reworded v2 is the pool's only printing line (top share 1.000 in 210 of 720), says how the model works, and is false where the Defense tab says the supply is kept | census 720; rw3-metropolis-calm-1 | EXECUTED |
+| M7 | MED | Four reds born on the lane at the code tip (green at `mbase`): census2DeclaredPools › DS-GEN-13 under a siege; dossierMountRegistry › C2; proseMoveGrammar › CONTROL 4 ×2 | §6 | EXECUTED |
 | L1 | LOW | presumedThings ARM 1 is red at the tip (base reds), so the lane's register shrinks are guarded only by row diff | plant 1 | EXECUTED |
 | L2 | LOW | The seat's census and its "≤ 0.483" were measured from 31f57e8eb and on its own pools. From deb1544eb no row rises (holds); lane-wide, nine pools exceed 0.483 | §2c | EXECUTED |
 | L3 | LOW | Grammar after slots: "incense and votive candles comes", "buys it in" for plurals, "walls and fortifications was", "palisade or earthworks" twice | §3 | EXECUTED (cold list and reads) |
@@ -218,7 +235,8 @@ The lane added no test file and no test title. Its guards are register rows it l
 - re-gate the twins whose siblings carry `no watch`, `guardPresence` or a crisis exclusion;
 - remove `{institution}` from the siege twin;
 - strike or re-gate the 58 lines proposed;
-- add a guard per disqualifier cure, a fixed town in which the cured line must not print.
+- add a guard per disqualifier cure, a fixed town in which the cured line must not print;
+- cure its four reds (§6).
 
 ## What I did not measure
 - More than three reads per line; the 68 lines that print nowhere were not read in any town.
