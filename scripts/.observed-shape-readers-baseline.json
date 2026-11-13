@@ -217,14 +217,14 @@
  "digests": {
   "corpusMeta": "5ceb9affe14f90141cd363d420e2dbc02bd01f565d9704779f757776f32247f2",
   "inventory": "5af49e4d988d09494d3a69a01c65bded49b320959debf14100c0ee43a6372293",
-  "manifests": "0ade7b02b744f3ca93e1b4fb6b5ec5ba72de42f405a7171ec78371823e7987ff",
+  "manifests": "23bcbdd8d1440d7a3bce4b1ac764efe6941f206022dda728ebc1f30a6c78473f",
   "migrationReview": "1603931d40c41441a09b7e2334566544d67422ef9d6bb064b01295e54063c398",
   "rowTags": "a3127aa474bc89b4a9970dcd722ffd474cf0c8a23a54f66e13512a73135e28f4",
   "scanStats": "47195ca0267120a20e8a109b7f9c8c757c054106c6ff80ee91024ec08300b5dd",
   "sentinel": "fc725ee62a8aad3cebcd541bdd209a452636d38df1891ad19142681fb6c7750f"
  },
  "frozen": "2026-11-13",
- "frozenAtSha": "5c09b7a32c5b59b8c366a56590b227259379b8b6",
+ "frozenAtSha": "2e46400bf6708a5c8baba948bc3294ef9c56f123",
  "identities": 1527,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2709,7 +2709,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "3e0fa6424ed27029ead8f55acf2fd471f1dd4adcf8645f5d2d3aa7c91df4a452",
+   "digest": "6179040f06e857cf55dff4c4382dc2becb87208c82170168ce81f2aae86edbd5",
    "entries": [
     {
      "mode": "100644",
@@ -9105,8 +9105,8 @@
     {
      "mode": "100644",
      "path": "src/domain/data/intentAtlas.distillate.json",
-     "sha256": "4e11d18b158b93b12b494cdff58b47820eed7f283875d42618938967cc01dabc",
-     "size": 20656,
+     "sha256": "4d4dcd59228e401f93465010c64dcf96dae242de5f730cd3ea2db783ed794357",
+     "size": 20205,
      "type": "file"
     },
     {
@@ -10932,8 +10932,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "5b86a0df2dce8fd3a99ec6478a69989644729281d7c8bbf6bb2cc6c739eca8b9",
-     "size": 43268,
+     "sha256": "563e1bc935f7983cdd6a90cd2e9357337d63b2f48925bf2616f1dfa15ccc03e5",
+     "size": 43509,
      "type": "file"
     },
     {
@@ -20166,7 +20166,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6fb9c317a9801ac6f4616ecec8bb81c09ddb8385e1f47d0b6f14cf01c7b2fa07",
+   "digest": "daa5317114f03ec712318777cb696597a9fe4901bde79f084117504e915b1678",
    "entries": [
     {
      "mode": "100644",
@@ -28200,8 +28200,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "5b86a0df2dce8fd3a99ec6478a69989644729281d7c8bbf6bb2cc6c739eca8b9",
-     "size": 43268,
+     "sha256": "563e1bc935f7983cdd6a90cd2e9357337d63b2f48925bf2616f1dfa15ccc03e5",
+     "size": 43509,
      "type": "file"
     },
     {
@@ -37427,7 +37427,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "8aeed241ab6aae68d7857f5acd6f9ed007567a967b49a13d68a977fd5cd215bc",
+   "digest": "bc06c2b1a558e94e4e45365613c0ba4be1275066cf37a018451d4264c156f5ed",
    "entries": [
     {
      "mode": "100644",
@@ -43753,8 +43753,8 @@
     {
      "mode": "100644",
      "path": "src/domain/data/intentAtlas.distillate.json",
-     "sha256": "4e11d18b158b93b12b494cdff58b47820eed7f283875d42618938967cc01dabc",
-     "size": 20656,
+     "sha256": "4d4dcd59228e401f93465010c64dcf96dae242de5f730cd3ea2db783ed794357",
+     "size": 20205,
      "type": "file"
     },
     {
@@ -45580,8 +45580,8 @@
     {
      "mode": "100644",
      "path": "src/domain/generation/generationForkRegistry.js",
-     "sha256": "5b86a0df2dce8fd3a99ec6478a69989644729281d7c8bbf6bb2cc6c739eca8b9",
-     "size": 43268,
+     "sha256": "563e1bc935f7983cdd6a90cd2e9357337d63b2f48925bf2616f1dfa15ccc03e5",
+     "size": 43509,
      "type": "file"
     },
     {
@@ -55142,10 +55142,10 @@
  },
  "scannerProvenance": {
   "detectorDigest": "2e1fe89a898adadc2be86e34bd9b4d97caa9610896d2d3e038dee2734d11057e",
-  "executionTreeDigest": "3e0fa6424ed27029ead8f55acf2fd471f1dd4adcf8645f5d2d3aa7c91df4a452",
-  "scanTreeDigest": "6fb9c317a9801ac6f4616ecec8bb81c09ddb8385e1f47d0b6f14cf01c7b2fa07",
-  "sourceTreeDigest": "8aeed241ab6aae68d7857f5acd6f9ed007567a967b49a13d68a977fd5cd215bc",
-  "unscannedInputDigest": "37dffc07b5edfec265f03cbb2b3502f053b6c5a327974fb740aea2fb25f1d681"
+  "executionTreeDigest": "6179040f06e857cf55dff4c4382dc2becb87208c82170168ce81f2aae86edbd5",
+  "scanTreeDigest": "daa5317114f03ec712318777cb696597a9fe4901bde79f084117504e915b1678",
+  "sourceTreeDigest": "bc06c2b1a558e94e4e45365613c0ba4be1275066cf37a018451d4264c156f5ed",
+  "unscannedInputDigest": "44f139205ceb3927c8cf28c750a128194b8ce85782696a36a6b1b97395a99e7f"
  },
  "schema": 41,
  "sentinel": {
