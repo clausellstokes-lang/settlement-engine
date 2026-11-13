@@ -385,7 +385,10 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // point through FIX-ARROW-PLAQUE (8b75f466a) -> 62 at the ALLEGIANCE-CAR4 merge 824a8ce2f: car 4's birth stream (A9's goals
     // 03ff59084 and item 15's title-secret draw eabc93dfe leave a face's fork before its power roll) re-deals the ties whose
     // conflicts the post-pass restates (+19); the cures after it 0. `foreign` stays empty.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(62);
+    // RE-KEYED at STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154; a figure its drafted record names for
+    // the merge seat, mergeLadderHeldKeys A3): 62 -> 63, this arm's received value at the merged tree: the dual hat re-deals the cast
+    // and the ties whose conflicts the post-pass restates (+1). `foreign` stays empty.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(63);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
