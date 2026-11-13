@@ -1,7 +1,7 @@
 // CENSUS-2 recall: does each kind's test fire on the cold readers' own lines? The readers' 80 towns (seeds.readers.txt)
 // are re-born and re-rendered at the counted tree by census2.sh --seeds seeds.readers.txt; this joins their lines
 // (ROUND-3-CUT.json `lines` and ROUND-3-CUT-INCREMENT.json `lines`) to that run's dumps and hits.
-//   node recall.mjs <readers-out-dir> <ROUND-3-CUT.json> <ROUND-3-CUT-INCREMENT.json> [kinds=a,b,c] [misses=5]
+//   node recall.mjs <readers-out-dir> <ROUND-3-CUT.json> <ROUND-3-CUT-INCREMENT.json> [kinds] [misses=5]
 // A reader line is PRINTING when its sentence (whitespace folded) is inside a line of the same town's dump; recall is
 // fired / printing, per kind. The readers' `mechanism` is mapped to a kind by MECH below (a guide, not a key: a line
 // of another mechanism that a test catches is counted apart as "caught across").

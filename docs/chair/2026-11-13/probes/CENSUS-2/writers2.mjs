@@ -54,6 +54,12 @@ function trace(seed, sent) {
 const FORMS = [
   { id: 'flow-card house list', test: (h) => h.view === 'Systems/Economics' && / · /.test(h.line) && h.line.split(' · ').every((x) => /^[A-Z]/.test(x)), file: 'src/components/new/tabs/EconomicsTab.jsx', anchor: 'facts.institutions.map(', words: 'the chain\'s processingInstitutions (src/data/supplyChainData.js) through institutionDisplayName' },
   { id: 'flow-card house (one name)', test: (h) => h.view === 'Systems/Economics' && /^[A-Z][\w'’&/ -]{2,40}$/.test(h.line.trim()) && h.line.trim().split(' ').length <= 5 && h.pattern === 'a', file: 'src/components/new/tabs/EconomicsTab.jsx', anchor: 'facts.institutions.map(', words: 'the chain\'s processingInstitutions through institutionDisplayName' },
+  // a house's catalogue key printed raw (kind f): the SURFACE that prints it, by view (the cut's rule); words: the
+  // catalogue (src/data/institutionalCatalog.js) not passed through institutionDisplayName at that site
+  { id: 'roster heading (raw house name)', test: (h) => h.pattern === 'f' && h.view === 'Systems/Institutions', file: 'src/components/new/tabs/InstitutionsTab.jsx', anchor: 'export function InstitutionCard', words: 'src/data/institutionalCatalog.js (the key, raw)' },
+  { id: 'service row house (raw house name)', test: (h) => h.pattern === 'f' && h.view === 'Systems/Services', file: 'src/components/new/tabs/ServicesTab.jsx', anchor: "svc.institution || ''", words: 'src/data/institutionalCatalog.js (the key, raw)' },
+  { id: 'power support list (raw house name)', test: (h) => h.pattern === 'f' && h.view === 'Systems/Power' && !/ · /.test(h.line), file: 'src/components/new/tabs/power/PowerStrata.jsx', anchor: 'Institutions behind this power', words: 'src/data/institutionalCatalog.js (the key, raw)' },
+  { id: 'criminal front row (raw house name)', test: (h) => h.pattern === 'f' && / · [^·]* · fronts for /.test(h.line), file: 'src/components/new/tabs/WhoRunsThisTownPanel.jsx', anchor: 'fronts for ${f.guild}', words: 'the front house name, raw' },
 ];
 function formWriter(h) { for (const f of FORMS) { if (!f.test(h)) continue; const g = (() => { try { return execFileSync('git', ['-C', TREE, 'grep', '-n', '-F', f.anchor, '--', f.file], { encoding: 'utf8' }).trim().split('\n')[0]; } catch { return ''; } })();
     const ln = g ? +g.split(':')[1] : 0; return { file: f.file, line: ln, fn: ln ? topDef(f.file, ln) : '', words: f.words, evidence: `traced form: ${f.id} (anchor "${f.anchor}" in the counted tree)` }; } return null; }

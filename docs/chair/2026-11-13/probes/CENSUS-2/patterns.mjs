@@ -74,7 +74,7 @@ export const A_VOCAB = [
 const SKIP_VIEW = /^Notes\//;
 const LIST_LINE = /^(?:Needs|Draws on|Requires|Unexploited|Opportunity):/i;
 export function rosterNames(s, displayName) {
-  const out = []; for (const i of s.institutions || []) { const n = String(i.name || ''); if (!n || /^access to/i.test(n)) continue; out.push(n); const d = displayName ? displayName(n) : n; if (d && d !== n) out.push(d); }
+  const out = []; for (const i of s.institutions || []) { const n = String(i.name || ''); if (!n || /^access to/i.test(n)) continue; out.push(n); if (i.catalogId) out.push(String(i.catalogId).replace(/_/g, ' ')); const d = displayName ? displayName(n) : n; if (d && d !== n) out.push(d); }
   for (const f of s.powerStructure?.factions || []) { const n = String(f.faction || f.name || ''); if (n) out.push(n); }   // a power is a force or a house of the town too
   return out;
 }
@@ -90,7 +90,7 @@ export function maskResources(line, s) {
 export function testA(line0, view, ctx) {
   if (SKIP_VIEW.test(view) || LIST_LINE.test(line0) || /^access to /i.test(line0) || /^access to /i.test(ctx.prev || '')) return [];
   if (line0.includes('✓') || PAST_ROW.test(line0)) return [];
-  const line = maskResources(line0, ctx.s);
+  const line = maskResources(line0, ctx.s).replace(/_/g, ' ');   // a slugged name ("thieves_guild") is read as its words
   const res = []; const names = ctx.roster;
   for (const v of A_VOCAB) {
     const re = new RegExp(v.t.source, 'gi'); let m;
