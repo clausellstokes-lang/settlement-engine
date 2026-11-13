@@ -830,6 +830,8 @@ the access.
 3. `[visitor · market · no crisis: under_siege]` {settlement}'s market sells little, though the {access} is busy; most of the traffic does not stop, and the traders here are poor.
 4. `[ledger · crisis: under_siege]` With the siege closing every way in, {settlement} has lost even the little that passing trade used to leave behind.
 5. `[street · crisis: under_siege]` {settlement} was poor even while its trade moved freely, and the siege has stopped it moving at all.
+6. `[visitor · no market · no crisis: under_siege]` There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.
+7. `[ledger · crisis: under_siege]` {settlement} had little to begin with, and the siege has stopped the passing traffic that brought in the rest.
 
 **COMBINATION C5: a low rung on a narrow approach**
 1. `[visitor]` {settlement} is poor, and the road to it is long and hard. What the road does not bring in, the people here go without.
@@ -1232,6 +1234,7 @@ contradict** it (R-DST-C).
 1. `[ledger · crisis: any]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
 2. `[street · no hunger · food: ≥ secure]` The town gets by. Nobody is going without bread and nobody is building anything either.
 3. `[visitor · crisis: any]` In {settlement} the old buildings are patched and kept standing, and nothing new goes up.
+4. `[street · crisis: any]` Money is short in {settlement}, and most households spend what they earn as soon as it comes in.
 
 **MODERATE** — *steady, thin margin* {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
@@ -1571,6 +1574,8 @@ note that carries it on the six wired surfaces.
 6. `[newcomer · no crisis: under_siege · no crisis: famine]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
 7. `[ledger · crisis: under_siege]` {settlement} had several trades sending goods out before the siege, and none of them can send anything now.
 8. `[unfolding · crisis: famine]` {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.
+9. `[street · crisis: famine]` With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat.
+10. `[visitor · crisis: under_siege]` {settlement} has several kinds of goods to sell outward, and the siege has shut every one of them in.
 
 **SCARCITY: `shortage`**
 1. `[ledger · market]` {good} is scarce in {settlement} and its price has risen.
@@ -1717,6 +1722,8 @@ A composed page draws one of each grain, never two.
 1. `[ledger · no crisis: under_siege]` The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.
 2. `[visitor · gate]` Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.
 3. `[street · colour]` The town has taken this trade as far as it goes, from the ground to the finished thing.
+4. `[street · colour]` {settlement} takes everything it can from the {resource} its country gives.
+5. `[ledger · crisis: under_siege]` With the siege on, none of {settlement}'s {resource} can go out to buyers; whatever the town works, the town must use.
 
 **EXPLOITATION — nothing in any bucket** · **R-DST-K GATED: no exploitation record ⇒ no section ⇒ no sentence.**
 The Resource Exploitation section does not render when all three buckets are
@@ -2912,6 +2919,10 @@ supplies the ancestry.
 5. `[ledger · crisis: debt]` The debt takes much of what {settlement} earns, but what is left still keeps the town's own business running.
 6. `[street · crisis: debt]` People in {settlement} complain of what the creditor takes, but nobody here expects the town to go under for it.
 7. `[unfolding · crisis: debt]` {settlement} cannot pay off what it owes, but it can carry the debt, and for now it does.
+8. `[street · no crisis]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
+9. `[ledger · crisis · no crisis: debt · no crisis: famine]` Whatever the present trouble costs {settlement}, the town has the money to meet it.
+10. `[street · crisis: famine]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
+11. `[visitor · crisis: famine]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
 
 **`Economic Survival`: `ADEQUATE`** {colour}
 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.
@@ -3275,6 +3286,9 @@ may not say the contract is failing unless the economic arm supplies that.
 4. `[visitor · no gate · no crisis: under_siege]` {settlement} has a wall but no proper gate in it: people come and go by gaps everyone knows, and the wall slows trouble more than it stops it.
 5. `[street · no gate · no crisis: under_siege]` The wall around {settlement} turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at.
 6. `[ledger · crisis: under_siege]` {settlement}'s wall is all that stands between the town and the siege, and every stretch of it is watched now.
+7. `[ledger · no gate · no crisis: under_siege]` {settlement} put its labour into a wall and none into a gate; the wall marks the edge of the town more than it closes it.
+8. `[ledger · no gate · crisis: under_siege]` With no gate in its wall, {settlement} has no proper way to shut itself in against the siege.
+9. `[street · no gate · guardPresence · crisis: under_siege]` The people who keep order in {settlement} are spread along a wall with no gate in it, and the siege can try it anywhere.
 
 **walls ABSENT** {colour}
 1. `[ledger]` {settlement} is unfortified. There is no perimeter, which means the town cannot control entry and cannot make a chokepoint of anything.
@@ -3303,6 +3317,7 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[visitor · no crisis: under_siege · no crisis: wartime]` Nobody at {settlement} is responsible for defending the town; ask who is, and nobody can name anyone.
 4. `[unfolding · crisis: under_siege · crisis: wartime]` {settlement} kept no defenders of its own, and the people defending it now are neighbours who stepped forward when the trouble came.
 5. `[street · crisis: under_siege · crisis: wartime]` There was never a force at {settlement}; whoever leads the defence now is learning the work as the trouble goes on.
+6. `[visitor · crisis: under_siege · crisis: wartime]` With trouble at hand and no force to meet it, {settlement} leans on whoever owns a weapon and is willing to use it.
 
 **mercenary / contracted forces PRESENT** {colour}
 1. `[ledger]` Part of what defends {settlement} is contracted rather than owed: competent, available, and loyal for exactly as long as the terms run.
@@ -7282,6 +7297,7 @@ no compass word, no real-world place, no named analogy.*
 7. `[ledger · crisis: under_siege]` {settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last.
 8. `[street · crisis: under_siege]` The carts that kept {settlement}'s trades supplied have not come since the siege began.
 9. `[trade · no crisis: under_siege]` What {settlement}'s trades use comes in from elsewhere more often than from its own ground.
+10. `[unfolding · crisis: under_siege]` {settlement} is running short of {good}, and the siege lets none in.
 
 **`UNWORKED`** {colour}
 1. `[counterforce]` The {resource} around {settlement} goes unworked; no house takes it up.

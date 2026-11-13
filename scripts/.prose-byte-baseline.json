@@ -55,20 +55,20 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 255208,
-      "gzip": 34551,
+      "raw": 258095,
+      "gzip": 34972,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 182387,
-      "gzip": 25593,
+      "raw": 184888,
+      "gzip": 25907,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 294547,
-      "gzip": 37647,
+      "raw": 294885,
+      "gzip": 37686,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -715,6 +715,30 @@
       "toRaw": 255208,
       "gzipAfter": 34551,
       "reason": "+1055 B raw over the committed 254153 (gzip level 9: 34373 -> 34551): DS-DEF-2 Economic Survival STRONG: three lines for the debt crisis, whose one line (v3) is declared off it (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 stage 3 crisis cases",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 255208,
+      "toRaw": 258095,
+      "gzipAfter": 34972,
+      "reason": "+2887 B raw over the committed 255208 (gzip level 9: 34551 -> 34972): stage 3 item 1: sixteen lines for the crisis cases round 1 thinned (DS-ECO-1 C4, DS-ECO-8 POOR, DS-DEF-2 STRONG, DS-ECO-11 fullyExploited, DS-DEF-5 walls PRESENT and NO organized force, DS-GEN-18 BOUGHT-IN, DS-ECO-10 established) (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 stage 3 crisis cases",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 182387,
+      "toRaw": 184888,
+      "gzipAfter": 25907,
+      "reason": "+2501 B raw over the committed 182387 (gzip level 9: 25593 -> 25907): stage 3 item 1: sixteen lines for the crisis cases round 1 thinned (DS-ECO-1 C4, DS-ECO-8 POOR, DS-DEF-2 STRONG, DS-ECO-11 fullyExploited, DS-DEF-5 walls PRESENT and NO organized force, DS-GEN-18 BOUGHT-IN, DS-ECO-10 established) (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-3 stage 3 crisis cases",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 294547,
+      "toRaw": 294885,
+      "gzipAfter": 37686,
+      "reason": "+338 B raw over the committed 294547 (gzip level 9: 37647 -> 37686): stage 3 item 1: sixteen lines for the crisis cases round 1 thinned (DS-ECO-1 C4, DS-ECO-8 POOR, DS-DEF-2 STRONG, DS-ECO-11 fullyExploited, DS-DEF-5 walls PRESENT and NO organized force, DS-GEN-18 BOUGHT-IN, DS-ECO-10 established) (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
