@@ -41,7 +41,7 @@ const WATER_TERRAIN = new Set(['coastal', 'riverside']);
  * only some arms; the domain layer typechecks strict, so the catalog is read
  * through ONE declared row shape (the resourceDynamicsKernel idiom). Erased at
  * runtime — the values are the same object.
- * @typedef {{ forbidden?: string[], requires?: string[], terrain?: string, terrainRequired?: string[],
+ * @typedef {{ forbidden?: string[], requires?: string[], requiresTerrain?: string[], terrain?: string, terrainRequired?: string[],
  *   warning?: string }} ResourceTerrainRow
  */
 const CATALOG = /** @type {Record<string, ResourceTerrainRow & Record<string, unknown>>} */ (
@@ -109,7 +109,12 @@ export const getCompatibleResources = (route, terrain = null) =>
     }
 
     const accessMissing = Array.isArray(r.requires) && !r.requires.includes(resourceRoute);
-    const offered = compatible && !accessMissing;
+    // COHERENCE-AGREE-6 (REVIEW-AGREE-2 F5 (d)): the terrain a row requires (`requiresTerrain`: the mountain pass) is
+    // read as its access is: the pool (`compatible`) is unchanged, the wizard does not offer it elsewhere, and a
+    // person may still force it.
+    const terrainMissing = Array.isArray(r.requiresTerrain) && !r.requiresTerrain.includes(String(terrain));
+    const offered = compatible && !accessMissing && !terrainMissing;
     if (compatible && accessMissing) incompatibleReason = r.warning || 'Not compatible with ' + route + ' access.';
+    else if (compatible && terrainMissing) incompatibleReason = `Only available in ${(r.requiresTerrain || []).join(' or ')} terrain`;
     return { key, ...r, compatible, offered, incompatibleReason };
   });

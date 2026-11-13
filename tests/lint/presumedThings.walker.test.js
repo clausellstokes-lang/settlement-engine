@@ -5,8 +5,14 @@
  * `tests/lint/presumedThings.register.json`, shrink-only.
  *
  * THIS FILE REDS WHEN:
- *   • ARM 1: a source literal under src/data or src/generators names a thing, declares no atom that
- *     answers it, and has no row in the register (a new undeclared line);
+ *   • ARM 1: a source literal (or a component's JSX text) under src/data, src/generators, src/domain or
+ *     src/components (the last two since W2-B-DECLARE item 3) names a thing, declares no atom that
+ *     answers it through a carrier a draw door enforces (W2-B-DECLARE item 1), and has no row in the
+ *     register or the widened register (`presumedThings.widened.register.json`) (a new undeclared line);
+ *   • the tagged tables the walker credits differ from the `tagged: true` sites in src;
+ *   • THE STRIP BAN (W2-B-DECLARE item 3): a call that unwraps lines to their text (`.map(textOf)`,
+ *     `.map(lineText)`, `.map((l) => l.text)`) stands nowhere in src without its row in the widened
+ *     register's `strips` (`strip-before-draw`, to cure; `not-a-draw`), and no strip row is stale;
  *   • ARM 2: a sentence of the corpus (360 births, the browser's configuration, seeds
  *     presume-<tier>-<i>) names a thing the town lacks by the vocabulary's own readers, and no row
  *     of the register covers it (a new false presumption, or a cured line come back);
@@ -21,19 +27,22 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
-import { parseAtom } from '../../src/domain/facts/factVocabulary.js';
+import { FACT_DIMENSIONS, parseAtom } from '../../src/domain/facts/factVocabulary.js';
+import { REGISTERED_WORDS } from '../../src/domain/facts/registeredWords.js';
 import {
-  ARM1_NOT_PRINTED, COURT_HOUSES, REGISTER_REL, THINGS, THING_IDS, corpusConfig, corpusSeeds, deniesExistence, listFiles, negates, printedAbsent, printedOutOfTime,
-  rowCovers, scanSource, scanTree, unlicensedServiceRows,
+  ARM1_NOT_PRINTED, ARM1_ROOTS, COURT_HOUSES, stripKey, stripSites, stripTree, REGISTER_REL, TAGGED_TABLE_FILES, THINGS, THING_IDS, WIDENED_REGISTER_REL, bankedKeys, corpusConfig, corpusSeeds,
+  deniesExistence, hitKey, listFiles, negates, printedAbsent, printedOutOfTime, rowCovers, scanSource, scanTree, unlicensedServiceRows,
 } from './presumedThings.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const register = JSON.parse(readFileSync(join(ROOT, REGISTER_REL), 'utf8'));
 const REASONS = Object.keys(register.reasons);
+const widened = JSON.parse(readFileSync(join(ROOT, WIDENED_REGISTER_REL), 'utf8'));
 
 describe('the rule book', () => {
   test('every thing\'s atoms are atoms of the vocabulary', () => {
@@ -53,6 +62,88 @@ describe('the rule book', () => {
     ].join('\n');
     const hits = scanSource('planted.js', src);
     expect(hits).toEqual([{ file: 'planted.js', thing: 'militia', text: 'The militia drills on the green every week.' }]);
+  });
+
+  /**
+   * W2-B-DECLARE item 1 (record 294, ruling 5): a carrier counts only where a draw door reads it. Red at the
+   * base rule book (1930cec6e), whose DECL_PROPS credited `cast`, `requires`, every `marks` and every `tags`.
+   */
+  test('planted: a carrier no door enforces declares nothing; the doors\' carriers still do', () => {
+    const src = [
+      "export const A = [{ text: 'The militia drills on the green every week.', cast: ['militia'] }];",
+      "export const B = { x: { requires: ['militia'], reason: 'A militia needs a muster field near the green.' } };",
+      "export const C = [{ marks: ['militia'], text: 'The militia drills on the green in the causal arm.' }];",
+      "export const D = [{ vid: 3, marks: ['militia'], text: 'The militia drills on the green in a state pool.' }];",
+      "export const E = [{ tags: ['militia'], position: 'Leads the militia drill on the green each week.' }];",
+      "export const F = [{ text: 'The militia drills on the green when a crisis looms.', excludes: ['militia'] }];",
+      "export const G = [{ text: 'The militia drills on the green by a pool rule.', poolDeclares: ['militia'] }];",
+    ].join('\n');
+    expect(scanSource('src/data/planted.js', src).map((h) => h.text)).toEqual([
+      'The militia drills on the green every week.',
+      'A militia needs a muster field near the green.',
+      'The militia drills on the green in the causal arm.',
+      'Leads the militia drill on the green each week.',
+    ]);
+    // the same source, read as a table drawn `{ tagged: true }`: its `tags` declare, so the line it flagged elsewhere is answered
+    expectPresentThenAbsent(
+      scanSource('src/data/planted.js', src).map((h) => h.text),
+      scanSource('src/generators/npcStructure.js', src).map((h) => h.text),
+      'Leads the militia drill on the green each week.',
+      'tags credited only in a tagged table',
+    );
+  });
+
+  /**
+   * W2-B-DECLARE item 3 (record 288, ruling 1, B (i)): the display and the components are roots, and a component's
+   * JSX text is read as a line. Red at e55ede7d2's rule book (two roots, no JSX text): every `root` row stale.
+   */
+  test('the roots are the four trees that hold lines, and a component\'s JSX text is read', () => {
+    expect([...ARM1_ROOTS]).toEqual(['src/data', 'src/generators', 'src/domain', 'src/components']);
+    const jsx = 'export const P = () => <p>The militia drills on the green every week.</p>;';
+    expect(scanSource('src/components/planted.jsx', jsx).map((h) => `${h.thing} :: ${h.text}`)).toEqual(['militia :: The militia drills on the green every week.']);
+  });
+
+  /**
+   * W2-B-DECLARE item 3 (record 288, ruling 1, B (ii); record 290, ruling 3: "a line that uses a registered word must
+   * carry that word's disqualifier"). Red at 21a27e035's rule book, which read the sixteen things alone.
+   */
+  test('planted: a state, a size or a count with no declaration is a hit; the door\'s carriers answer it', () => {
+    const src = [
+      "export const A = ['The town has been under siege since the thaw.'];",
+      "export const B = [{ text: 'The town has been under siege since the thaw, still.', crisis: ['siege'] }];",
+      "export const C = [{ vid: 1, marks: ['threat'], text: 'The town has been under siege since the thaw, again.' }];",
+      "export const D = ['Smoke rises from the poorest quarters at dusk.'];",
+      "export const E = [{ text: 'Smoke rises from the poorest quarters at dusk, still.', needs: ['population: ≥ middling'] }];",
+      "export const F = ['The ruling three meet each spring at the hall.'];",
+    ].join('\n');
+    expect(scanSource('src/data/planted.js', src).map((h) => `${h.thing} :: ${h.text}`)).toEqual([
+      'siege :: The town has been under siege since the thaw.',
+      'quarters :: Smoke rises from the poorest quarters at dusk.',
+      'powersCount :: The ruling three meet each spring at the hall.',
+    ]);
+  });
+
+  test('every registered word carries its disqualifier: atoms of the vocabulary, or the leaf its atom waits for', () => {
+    const bad = [];
+    for (const [id, w] of Object.entries(REGISTERED_WORDS)) {
+      if (w.atoms.length === 0 && !w.leaf) bad.push(`${id}: no atom and no leaf`);
+      for (const a of w.atoms) if (!(a.endsWith(':') ? FACT_DIMENSIONS[a.slice(0, -1)] : parseAtom(a))) bad.push(`${id}: ${a}`);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  test('the tagged tables are exactly the files a door draws `{ tagged: true }`', () => {
+    const files = [];
+    const walk = (rel) => {
+      for (const e of readdirSync(join(ROOT, rel)).sort()) {
+        const p = `${rel}/${e}`;
+        if (statSync(join(ROOT, p)).isDirectory()) walk(p);
+        else if (/\.(?:js|jsx|mjs)$/.test(e) && p !== 'src/domain/facts/drawDeclared.js' && p !== 'src/domain/facts/factVocabulary.js') files.push(p);
+      }
+    };
+    walk('src');
+    const tagged = files.filter((f) => /\btagged:\s*true\b/.test(readFileSync(join(ROOT, f), 'utf8')));
+    expect(tagged).toEqual(Object.keys(TAGGED_TABLE_FILES).sort());
   });
 
   test('planted: a finding\'s detail in generationCoherence.js is out of reach; the same words anywhere else are read', () => {
@@ -171,15 +262,23 @@ describe('the register', () => {
     const bad = [
       ...register.arm2.filter((r) => !REASONS.includes(r.reason)).map((r) => `arm2 ${r.thing} ${r.text}`),
       ...Object.entries(register.arm1).flatMap(([f, rows]) => rows.filter((r) => !REASONS.includes(r[1])).map((r) => `arm1 ${f} ${r[2]}`)),
+      ...Object.entries(widened.arm1).flatMap(([f, rows]) => rows.filter((r) => !Object.keys(widened.reasons).includes(r[1])).map((r) => `widened ${f} ${r[2]}`)),
     ];
     expect(bad).toEqual([]);
+  });
+
+  test('no row is banked twice: the widened register holds nothing the first one holds, nor any key twice', () => {
+    const first = bankedKeys(register);
+    expect([...bankedKeys(widened)].filter((k) => first.has(k))).toEqual([]);
+    const rows = Object.entries(widened.arm1).flatMap(([f, rs]) => rs.map((r) => hitKey(f, r[0], r[2])));
+    expect(rows.length).toBe(new Set(rows).size);
   });
 });
 
 describe('ARM 1 — the source', () => {
   const hits = scanTree(ROOT);
-  const key = (file, thing, text) => `${file}\t${thing}\t${text.slice(0, 120)}`;
-  const banked = new Set(Object.entries(register.arm1).flatMap(([f, rows]) => rows.map((r) => key(f, r[0], r[2]))));
+  const key = hitKey;
+  const banked = new Set([...bankedKeys(register), ...bankedKeys(widened)]);
   const found = new Set(hits.map((h) => key(h.file, h.thing, h.text)));
 
   test('anti-vacuity: the walk reads its roots', () => {
@@ -194,6 +293,37 @@ describe('ARM 1 — the source', () => {
 
   test('⛔ no stale row: a cured line leaves the register in its own commit', () => {
     expect([...banked].filter((k) => !found.has(k))).toEqual([]);
+  });
+});
+
+describe('ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B (iii))', () => {
+  const sites = stripTree(ROOT);
+  const banked = new Map((widened.strips || []).map((r) => [stripKey(r[0], r[1]), r[2]]));
+
+  test('planted: each unwrap shape is a strip; a door\'s own draw and a map to another field are not', () => {
+    const src = [
+      "const a = POOL.map(textOf);",
+      "const b = [{ text: 'x', needs: ['river'] }].map(lineText);",
+      "const c = rows.map((l) => l.text);",
+      "const d = drawDeclared(POOL, { draw, key }).text;",
+      "const e = rows.map((l) => l.name);",
+    ].join('\n');
+    expect(stripSites('src/generators/planted.js', src).map((x) => x.receiver)).toEqual(['POOL', "[{ text: 'x', needs: ['river'] }]", 'rows']);
+  });
+
+  test('anti-vacuity: the strip walk finds the twelve sites of the class table', () => {
+    expect(sites.length).toBeGreaterThanOrEqual(12);
+  });
+
+  test('⛔ no strip without its row: a new unwrap of a pool is red (draw it through a door)', () => {
+    const fresh = sites.filter((x) => !banked.has(stripKey(x.file, x.receiver)));
+    expect(fresh.map((x) => stripKey(x.file, x.receiver)), 'draw a declared pool through drawDeclared / filterDeclared; never unwrap it first').toEqual([]);
+  });
+
+  test('⛔ no stale strip row, and every row names one of the two reasons', () => {
+    const found = new Set(sites.map((x) => stripKey(x.file, x.receiver)));
+    expect([...banked.keys()].filter((k) => !found.has(k))).toEqual([]);
+    expect([...banked.values()].filter((r) => r !== 'strip-before-draw' && r !== 'not-a-draw')).toEqual([]);
   });
 });
 

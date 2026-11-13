@@ -454,3 +454,163 @@ leaves the PDF golden and the phone floor unmoved. The record says each with its
 One register row through the narrow door (ca1ed8ddd). The wiring census and the fork census register re-taken by
 their own doors (e8f54fc57, ed159ff8c), the goods roster's row by the walker's own reading (4c33003d0), the lighting
 census by its ritual (b4670a365). No test skipped, no pin loosened, no baseline banked upward, no golden door run.
+
+# PART FIVE — the sixth seat (COHERENCE-AGREE-6, 2026-11-12), from 8866a0ddd
+
+REVIEW-AGREE-2 (`lane/review-agree-2-2026-11-12`, NOT CLEAR, nine findings) answered as the chair ruled it. This
+seat worked in a scratch worktree on the lane branch, under the owner's word given in its session. Every push was a
+plain push, and the hook's three lane gates ran on each.
+
+## Calls taken without the chair (the chair's standing rule of 2026-11-12: declared or named only)
+
+- **F2's moves**: declared inside the item's bound. 131 births: the two trade lists and the text that reads them.
+  No label moves.
+- **F2's writers**: four writers were found, not two. Besides the export bonus and the land's commodity list, the
+  land's raw goods (Charcoal, Peat fuel, Salted fish) and the entrepôt transit branch ("Preserved foods (transit)"
+  from a depleted salt chain) each read the leaf. The guard reads the writer's suffixes off.
+- **F1's datum lives in its own leaf**: `src/data/chainAccessNames.js`. The chain's catalogue entry carries it by
+  reference, because the page's leaf sits in the first-paint graph, which the chains table may not reach (the goods
+  surface law in vendorPdfLazy). The leaf takes a row in the goods roster.
+- **F1's print sites**: every changed line is folded so that the prose-numerics register (line-keyed) does not move.
+- **F8 (i)**: only name-like constants are resolved (no comma, 40 characters at most), as the chair ruled. 0 new
+  readers, and nothing banked.
+- **F5 (a)'s key**: `requiresTerrain`, not `terrain`, which the pool reads, and not `terrainRequired`, which the
+  cascade and institution rolls read.
+- **Re-keyed by identity, never loosened**: coherenceAgreeCures `item 3′ (i)` (the exporter's one import now also
+  names the goods set) and w0WriterAgreement (F7, now a literal per row).
+- **The ledger ref fetched for the suite** (L5): `ledgerCitationIntegrity` fails at load without it.
+
+## Per item: commit, count before -> after, pin, plant
+
+| Item | Commit | Before -> after (corpus of 4,141 = L2 2,866 + golden 525 + REVIEW-AGREE-2's 750; and the reviewer's seeds) | Pin, and the plant executed |
+|---|---|---|---|
+| 1 the line | d0f0d022b | merge of 3575cf061. Generated files: wiring census by its writer, lighting baseline the line's, bundles the lane's. 0 leaves in 4,141 | - |
+| 2 F1 the toll's name | bdb2cb8cb | Printed "Crossroads" off a crossroads: 636 -> 0 (river 399, port 237). Reviewer's seeds 90 -> 0. 600 fresh births of six sizes 75 -> 0. The record moves 0 leaves | chainPrintName.test.jsx (5 seeds). chainPrintSites.walker. Receipt "A chain prints a resource whose row refuses the town's access". PLANT, the river row removed: 6 tests red |
+| 3 F2 refused goods | e449afc4e, 1a3a1f51b | Exports 191 in 101 births -> 0. Local production 17 births -> 0. Reviewer's seeds 28/15 -> 0, 6 -> 0. Golden 2/1 -> 0 | coherenceAgreeCures "F2" (4 seeds). Receipt "A trade list carries a good only a refused chain makes". PLANT, the export bonus not asking: 2 red |
+| 4 F3 reach | 2c428c7a0 | G2 convicted in 41 births, G5 in 10 (seeds below). Every one of 23 members live in 1 or more arm-2 births | All six plants red, below. The reach test is red with its two surplus seeds removed |
+| 5 F7 literal pin | e1bc84b23 | 14 zero-source golden rows written as literals | PLANT, `worksOwnLand` inverted: new pin red, old pin green |
+| 6 F8 the walker | 682ddc2f3 (constants), a9d2bc1cf (prison), 9b5fb174a (`:828`) | Constants: 0 new readers. Prison: 0 leaves | Constant plant red. Ruined-prison and gaol pin red at the parent. (ii) widening PARKED (P1) |
+| 7 F5 the pass | deb1544eb (a), 97804b535 (d, wizard) | 0 leaves each | "F5 (a)": the row agrees with the geography table. "F5 (d)": offered on the mountains only. (b), (c) and (d)-validator PARKED (P2-P4) |
+| 8 F6 directions | the draft record (this seat's paragraph) | Every family restated as counts by direction on named corpora | - |
+| 9 F4 income | - | PARKED (P5) on its own STOP bounds | - |
+
+**F3's six plants**, each executed alone in a scratch tree:
+- G1 (gates read the walls): red in "every seed …" and "every reviewer seed …".
+- G2 (the company read off the garrison): red in "every reviewer seed …", on agree-town-146, agree-city-60,
+  rvw12b-metropolis-52 and r2read-city-4.
+- G3 (the watch read off the militia): red in "every seed …" and "every reviewer seed …".
+- G4 (the surplus swap off): red in "every seed …" and "every reviewer seed …".
+- G5 (the market filter off): red in "every reviewer seed …", on agree-thorp-56, r2r-hamlet-5 and rvw12-village-25.
+- G6 (the access refusal off): red in both arm-2 tests and coherenceAgreeCures "road holders at the bottom of their
+  range …".
+
+## The field diffs (L3)
+
+- **The seat's own, 8866a0ddd -> the tip**: 131 births (1 golden). The families are economicState.primaryExports
+  114 and .localProduction 17, and the text that reads them: arrivalScene 30, npcs[].goal 4, npcs[].secret 3,
+  history.founding 3, history.currentTensions 3, history.historicalEvents 1, pressureSentence 1. No label moves.
+  These are F2's moves; every other commit of the seat moves 0 leaves.
+- **The lane's total, the line 3575cf061 -> the tip**: 4,084 of 4,141 births (golden 501 of 525). The families most
+  touched are economicStrengths 3,888, primaryImports 1,924, safetyProfile 1,602, foodSecurity 1,560, incomeSources
+  1,542, plotHooks 1,412, defence scores 1,371, strategicValue 1,156, foodways 1,050, primaryExports 732, and A′'s
+  666 holders.
+
+Label moves by direction (toward safety / toward danger):
+
+| Family | L2 | The second review's 750 | Golden |
+|---|---|---|---|
+| Readiness | 29 / 46 | 6 / 4 | - |
+| Public legitimacy | 9 / 18 | 3 / 1 | - |
+| Prosperity | 4 / 14 | 3 / 0 | 0 / 1 |
+| Safety | 6 / 8, 1 level | 1 / 1 | - |
+| Food band | 2 / 0 | 2 / 1 | - |
+
+The R2 moves toward danger, by town, with their causes:
+- r2s-politically_fractured-town-1 and r2s-wartime-village-3, readiness: cure 9.
+- r2r-town-42, readiness: A′.
+- r2r-village-22, readiness and legitimacy: A′.
+- r2r-town-57, safety: A′.
+- r2s-under_siege-city-3, food band importDependent -> deficit: A′ (F6).
+
+Every one is a cause the record declares. A re-deal moves each family both ways.
+
+## A′ re-taken on the 4,141 (the counterfactual: the tip with the access refusal off)
+
+There are 666 holders. Toward safety / toward danger:
+
+| Family | L2 | R2 |
+|---|---|---|
+| Readiness | 21 / 17 | 4 / 2 |
+| Legitimacy | 7 / 12 | 3 / 1 |
+| Prosperity | 4 / 14 | 3 / 0 |
+| Safety | 6 / 8 | 1 / 1 |
+| Food band | 2 / 0 | 2 / 1 |
+
+The golden's prosperity moves 0 / 1. The L2 figures equal the fourth seat's figures exactly.
+
+## PARKED (the chair's standing rule: sent together once, at the end; detail in the seat's scratch PARKED.md, summarised here)
+
+- **P1, F8 (ii)**: the hospital cure (`home.hasHospital || home.hasHealer`) moves LABELS, all toward safety.
+  Readiness: Well-Defended -> Fortress 16, Defensible -> Well-Defended 3, Undefended -> Vulnerable 1. Legitimacy
+  3 up. 176 births. The ruling was to stop on a label that moves. The widening (the third member, the atom test, all
+  nine plants) waits on it, because the lane's own reader may not be banked.
+- **P2, F5 (c)**: built in scratch. 963 holders, 0 non-holders, golden 297, every family under the one-in-fifty
+  bound (prosperity's net is 10 toward danger against about 19). It FAILS A′'s proof: 11 holders are left with
+  nothing live, because the slot's depletion draw lands on the replacement. Left out, as the brief says.
+  Recommendation: a refilled slot takes a draw only where the refused member could be depleted.
+- **P3, F5 (b)**: 269 holders, confined. Depleted arrivals 34.9% against the base roll's 35.0%. It grows the
+  certification corpus's identity pin by one specimen (certification-v1-plagued-martial-city-bracken: a re-dealt
+  role-only person).
+- **P4, F5 (d)'s validator half**: waits on (c).
+- **P5, F4**: the chain gate moves the income list in 2,019 births. Prosperity moves in 54 of the 1,671 that lose a
+  source (3.2%, over 2%). One roster moves (rvw12b-town-264 gains a harbour master's office). The history
+  annotations move in 22.
+
+## Found, not mine
+
+- `region/goodsCatalog.js :: normalizeGood` reads "River traffic" and "River Toll" as **fish**, by a fuzzy match.
+- The 15 logic readers of a chain's printed strings (to be kept on the record's strings by the next wave):
+  - institutionLifecycle :: institutionContribution
+  - supplyCompleteness :: chainGoodIds
+  - supplyKernel :: resolveConsumingInstitution and countProducingChains
+  - supplyChainState :: searchableChainText and chainIdFromShape
+  - EconomicsTab's income keyword
+  - propagation :: matchingGoods
+  - magicReliance :: chainNeedsMagic
+  - viewModel :: isArcaneChain
+  - economicState's allowsGeneratedContent(label)
+  - chainYield's resource fallback
+  - generalStateProse :: homeFedChain
+  - resourceDynamicsKernel :: resourceProjection
+  - goals.js's target id
+- **The defence atoms' private readers outside the lane**, for the next wave's charter. Hospital or healer:
+  - institutionProbability.js 144 (steers the roll)
+  - defenseGenerator.js 313 (steers the scores; the upkeep lane's file)
+  - narrativeGenerator.js 505 and 509
+  - spatialGenerator.js 99
+  - services/serviceClassifier.js 413
+  - stressGenerator.js 123
+  - display/threatAssessment.js 92
+
+  Palisade: power/rulingStructure.js 707 (the powers lane's). Two need a rule, not a row:
+  worldPulse/npcGoalBranches.js 130 (a role archetype) and summary/settlementQuickGuide.js 280 (an agreement check).
+- **F2's readers of the export list print poorly once an export changes.** "Secure enough recovered reserves to
+  outlast the blockade" (the first export's first word); "The speculative fever in recovered artefacts (naval route
+  only) and land" (the list's suffix printed). This is the B class, not the lane's.
+- **The PDF's flag-off chain path** (`viewModelBodySlices.js :: economicsSlice`) names every chain `c.name ||
+  c.chainName || 'Chain'`. An active chain carries `label`, so with `pdfVisualChains` off every card reads "Chain".
+
+## New words, for the owner's veto
+
+- "River Toll" / "River traffic"; "Harbour Dues" / "Harbour traffic". These are printed.
+- "Only available in mountain terrain": the wizard's reason, on the existing pattern.
+- The receipt's findings: "A chain prints a resource whose row refuses the town's access." and "A trade list
+  carries a good only a refused chain makes." These are never printed: the presumed-things walker's rule exempts a
+  finding's words.
+
+## What was banked
+
+Nothing. No register row was added, no test skipped, no pin loosened and no golden door run. The wiring census was
+re-taken by its writer twice (the merge; F1's new leaf: producerIndexFiles 1325 -> 1326). The lighting census was
+re-taken by its ritual (87a14f413: files 3211 -> 3218). The mutation manifest gained one rationale row
+(chainPrintSites.walker), and its F8 text was corrected.
