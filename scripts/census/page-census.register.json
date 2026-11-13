@@ -34,7 +34,7 @@
    "master": null,
    "integration": null,
    "base": 74,
-   "banked": 74
+   "banked": 0
   },
   "P4": {
    "label": "4 \"three powers stand almost level\" beside a leader far ahead",
@@ -220,8 +220,7 @@
    "NEW2",
    "P11",
    "P14",
-   "P17",
-   "P3source"
+   "P17"
   ],
   "r2r-town-0": [
    "P16powers",
@@ -248,8 +247,7 @@
    "P16three",
    "P17",
    "P18",
-   "P1b",
-   "P3source"
+   "P1b"
   ],
   "r2r-metropolis-0": [
    "P16powers",
