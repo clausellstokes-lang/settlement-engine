@@ -373,16 +373,54 @@ const buildViabilityReport = (
 
 // ─── evaluateInstitutionDeps ──────────────────────────────────────────────────
 // Build the list of export products based on exploitation level.
+//
+// A COMPLETE ROW SAYS ONLY WHAT THE ANALYSIS ITSELF HOLDS (R3-CODE-C-2, ROUND-3-CUT #457 and
+// #1163; the chair's ruling of 2026-11-13: no map between this model and the chain model is
+// built, the row reads this analysis's own data). A chain counts as fully exploited at two
+// processors of ANY of its tags, so the livestock row named "leather goods" from a butcher and a
+// dairy farmer while the same analysis's gaps listed the Tannery missing (#457), and the herbs
+// row claimed "Complete production chain in place" while the town's own settings mark its herb
+// ground depleted (#1163). So, for a fully exploited chain:
+//   (1) a final good made by a house the gaps list as MISSING (that house's own other chains
+//       name the good: the Tannery's hides chain makes "leather") is not named in the row; a
+//       row left with no good is not written;
+//   (2) the claim of completeness stands only where no source the analysis counts for the
+//       chain's raw material (a resource key, or its commodities, that reconciles with the raw
+//       material as `evaluateEconomicActivity` reconciles it) is marked depleted in the town's
+//       own settings (`nativeResourceConditionRecords`); otherwise the row gives its goods and
+//       its reason is empty (the page prints no reason).
+// A partial row is unchanged: its goods are intermediates, made by the lone processor it has.
 
-const evaluateInstitutionDeps = (exploitation) => {
+/**
+ * @param {{ fullyExploited?: Array<any>, partiallyExploited?: Array<any> }} exploitation
+ * @param {Array<{ name?: string }>} [institutions] the native roster the gaps were read on
+ * @param {Array<{ missing?: unknown }>} [gaps] this analysis's own gaps (evaluateInstitutionChain)
+ * @param {Array<{ key: string, condition: string }>} [resourceConditions] the town's own settings
+ */
+const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], resourceConditions = []) => {
   const exports = [];
+  const listedMissing = new Set(gaps.flatMap((gap) => (Array.isArray(gap?.missing) ? gap.missing : [])));
+  const depleted = resourceConditions.filter((record) => record?.condition === 'depleted');
 
   exploitation.fullyExploited?.forEach(chain => {
+    const absent = (chain.processingInstitutions || []).filter((name) => (
+      listedMissing.has(name) && !institutions.some((inst) => inst?.name === name)));
+    const madeByAbsent = Object.entries(RESOURCE_CHAINS)
+      .filter(([key, other]) => key !== chain.chainKey
+        && absent.some((name) => (other.processingInstitutions || []).includes(name)))
+      .flatMap(([, other]) => [...(other.intermediateGoods || []), ...(other.finalProducts || [])]);
+    const products = (chain.finalProducts || []).filter((product) => (
+      !madeByAbsent.some((good) => tokensReconcile(product, good))));
+    if (products.length === 0) return;
+    const raws = [chain.rawResource, ...terrainSynonymsFor(chain.rawResource)];
+    const sourceDepleted = depleted.some((record) => (
+      [record.key, ...(RESOURCE_DATA[record.key]?.commodities || [])]
+        .some((token) => raws.some((raw) => tokensReconcile(token, raw)))));
     exports.push({
-      product: chain.finalProducts.join(', '),
+      product: products.join(', '),
       chain:   chain.rawResource,
       value:   chain.exportValue,
-      reason:  'Complete production chain in place',
+      reason:  sourceDepleted ? '' : 'Complete production chain in place',
     });
   });
 
@@ -558,7 +596,6 @@ export const generateResourceAnalysis = (
     nativeInstitutions,
     nearbyResources,
   );
-  const exports        = evaluateInstitutionDeps(exploitation);
   const gaps           = evaluateInstitutionChain(
     exploitation,
     nativeInstitutions,
@@ -569,11 +606,13 @@ export const generateResourceAnalysis = (
       foodImportPct:      economicState?.foodSecurity?.importPct,
     },
   );
+  const resourceConditions = nativeResourceConditionRecords(config);
+  // after the gaps and the town's settings: a complete row reads both (#457, #1163)
+  const exports        = evaluateInstitutionDeps(exploitation, nativeInstitutions, gaps, resourceConditions);
   const featureEffects = evaluateResourceChain(specialResources);
 
   const pri            = getPriorities(config);
   const priorityNotes  = [];
-  const resourceConditions = nativeResourceConditionRecords(config);
   const conditionNotes = resourceConditions
     .filter(record => record.condition === 'depleted')
     .map(record => record.conditionDescription)
