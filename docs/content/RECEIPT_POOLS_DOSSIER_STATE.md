@@ -3027,9 +3027,11 @@ the ledger).
 3. `[ledger]` The burial register at {settlement} grows every day, and medicine and graves cost whatever the sellers ask, so the poorest go without both.
 
 **COMPOUND: insurgency**
-1. `[street · guardPresence]` Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.
+1. `[street · guardPresence · population: ≥ middling]` Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.
 2. `[visitor · colour]` Nobody at {settlement} will say whose side they are on, and visitors are asked their business at every turn.
-3. `[ledger · colour]` Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.
+3. `[ledger · population: ≥ middling]` Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.
+4. `[street · colour]` People at {settlement} keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.
+5. `[watch · guardPresence]` Those who keep order at {settlement} walk in pairs now, and there are lanes they no longer walk at all.
 
 **COMPOUND: slave revolt**
 1. `[street · guardPresence]` Fighting between the rebels and the town's guards has closed whole streets of {settlement}.
@@ -3041,10 +3043,12 @@ the ledger).
 2. `[visitor]` Strangers at {settlement} are watched and questioned; the war has made everyone careful.
 3. `[ledger]` War orders at {settlement} fix prices and set curfews, and they are enforced whenever someone is looking.
 
-**COMPOUND: political fracture** {colour}
-1. `[street]` Which power holds a district of {settlement} decides which rules apply there.
-2. `[visitor]` Cross a street at {settlement} and you may cross from one power's rules into another's.
-3. `[ledger]` Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+**COMPOUND: political fracture**
+1. `[street · population: ≥ middling]` Which power holds a district of {settlement} decides which rules apply there.
+2. `[visitor · colour]` Cross a street at {settlement} and you may cross from one power's rules into another's.
+3. `[ledger · population: ≥ middling]` Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.
+4. `[street · colour]` At {settlement} a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.
+5. `[ledger · colour]` What counts as an offence at {settlement} depends on who is asked, because each power keeps its own rules and enforces them on its own people.
 
 **COMPOUND: succession crisis** {colour}
 1. `[street]` With nobody clearly in charge at {settlement}, those who keep order are unsure whose orders to follow, and petty crime has risen in the gap.

@@ -23,7 +23,7 @@
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2830,
+    "variants": 2834,
     "resolved": 488,
     "unresolved": 368,
     "resolvedWithPredicate": 317,
@@ -3152,7 +3152,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 5,
       "grammars": 1,
       "predicate": [
         {
@@ -3201,7 +3201,8 @@
       "declares": [],
       "lineDeclares": {
         "colour": 2,
-        "guardPresence": 1
+        "guardPresence": 2,
+        "population: ≥ middling": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -3344,7 +3345,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 5,
       "grammars": 1,
       "predicate": [
         {
@@ -3391,7 +3392,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "colour": 3,
+        "population: ≥ middling": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -54674,7 +54678,7 @@
         "DS-DEF-3 :: COMPOUND: authoritarian rule",
         "DS-DEF-3 :: COMPOUND: criminal governance"
       ],
-      "variants": 45,
+      "variants": 49,
       "grammars": 19,
       "blocks": [
         "DS-DEF-3"
@@ -66564,7 +66568,7 @@
         "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
       ],
       "readingFunction": "COMPOUND_POOL_BY_CONDITION",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66594,7 +66598,7 @@
         "compoundConditionOf(safetyLabel) (via COMPOUND_POOL_BY_CONDITION in defenseStateProse.js)"
       ],
       "readingFunction": "COMPOUND_POOL_BY_CONDITION",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

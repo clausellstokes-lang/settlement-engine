@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 234447,
-      "gzip": 31731,
+      "raw": 236101,
+      "gzip": 31990,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
@@ -563,6 +563,14 @@
       "toRaw": 171347,
       "gzipAfter": 24131,
       "reason": "+1092 B raw over the committed 170255 (gzip level 9: 23958 -> 24131): DS-ECO-6's significant off-book pool gains three player lines that name no guild, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
+    },
+    {
+      "car": "W2-WRITE DEF-3 districts in small places (2026-11-13)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 234453,
+      "toRaw": 236101,
+      "gzipAfter": 31990,
+      "reason": "+1654 B raw over the committed 234447 (gzip level 9: 31731 -> 31990): DS-DEF-3's insurgency and political-fracture district lines declare population: >= middling, and four lines that name no district, projected through node scripts/generate-dossier-state-prose.mjs (--check exit 0); no pool added"
     }
   ],
   "ceilingTransfersNewLeaves": [

@@ -794,26 +794,6 @@
     "With the town under siege, quarrels over rations and theft of food are the trouble on {settlement}'s streets now."
    ],
    [
-    "quarters",
-    "word",
-    "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there."
-   ],
-   [
-    "quarters",
-    "word",
-    "Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished."
-   ],
-   [
-    "quarters",
-    "word",
-    "Which power holds a district of {settlement} decides which rules apply there."
-   ],
-   [
-    "quarters",
-    "word",
-    "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the ne"
-   ],
-   [
     "plague",
     "word",
     "{settlement} has no dedicated healers. Wounds take what they take, and a plague here runs until it has finished."
@@ -6330,11 +6310,6 @@
     "prison",
     "root",
     "Court + Prison"
-   ],
-   [
-    "siege",
-    "word",
-    "under siege the outlying fields are lost"
    ]
   ],
   "src/domain/display/demographicReading.js": [
