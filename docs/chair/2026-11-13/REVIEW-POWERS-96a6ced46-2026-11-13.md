@@ -24,7 +24,7 @@ Every new or reworded line I read where it prints is true in every town, save fo
 
 Each of 30 plants reds its guard and no other guard but one that covers the same fault; one cure has no guard. The gates are green. CENSUS-2 rises in no kind by towns.
 
-The lane is NOT CLEAR for one MEDIUM class in its own file, which its own statement lists and leaves. The commanding-claim descriptions the claim table does not cover still print beside a Minor or Suppressed label: 122 on the 720, 174 prints in 1,080 towns. One example is "Major church institutions hold structural influence … leverage across multiple civic domains" beside "The Holy Compact · 5 · Suppressed". These are the #111/#639 class the stage set out to cure, written by `rulingStructure.js :: generatePowerStructure`. The release bar will meet them. The chair rules whether the fourth stage owns them.
+The lane is NOT CLEAR, for two reasons. First, the stage leaves 11 test titles red that are green at the lane's reviewed base 714381934 (M4). The hand-back classes seven of them against its seat's own base 91a3a9623, which lies inside this stage, and does not name one at all: the each-family park debt, raised by the stage's own new test files. Second, one MEDIUM class in the lane's own file remains, which the lane's own statement lists and leaves. The commanding-claim descriptions the claim table does not cover still print beside a Minor or Suppressed label: 122 on the 720, 174 prints in 1,080 towns. One example is "Major church institutions hold structural influence … leverage across multiple civic domains" beside "The Holy Compact · 5 · Suppressed". These are the #111/#639 class the stage set out to cure, written by `rulingStructure.js :: generatePowerStructure`. The release bar will meet them. The chair rules two things: whether the fourth stage owns M1, and how M4's eleven reds are classed.
 
 ## FINDINGS, most serious first
 
@@ -68,6 +68,26 @@ But the roster's cards in towns with crime and no thieves' guild still read "On 
 
 The roster's rule (`mergeNPCLists`, npcGenerator.js, named to the first round-two seat) rewrites only where there is no crime at all. For the chair to route.
 
+### M4 — MEDIUM, EXECUTED, the lane's: eleven test titles red at the tip that are green at the lane's reviewed base 714381934.
+
+I ran the 38 files red at the tip at both trees (`results/redclass.txt`). The first-stage red list is the same 52 titles at both trees. The stage adds 11, in 9 files:
+- phoneChromeFloor (ROUTE_BASELINE);
+- tuningRegister ("the measured tree matches the committed inventory": 6 rows);
+- noLegacyFactionReaders (2 reads);
+- wiringCensusDeclared (26 → 25 channels);
+- negativeAssertionAnchor (2 titles: 6 un-anchored rows; the quarantine 5 against 3);
+- presumedThings ARM 1 (2 rows);
+- observedShapeReaders (2 more titles: reads 2186 → 2188, the `contestsNiche` read);
+- poolDominance (7 pools);
+- **sovereigntyLightingContract "THE EACH-FAMILY PARK DEBT ONLY SHRINKS": 115 against a ceiling of 108.** The files it names include the stage's own new `legitimacyPlainWords.test.jsx` and `criminalHouseNoDefault.test.js`.
+
+How the hand-back classes them:
+- **Seven**, as "red at this seat's base 91a3a9623 with byte-equal offenders". 91a3a9623 is the second seat's tip, inside this stage. Against the lane's reviewed base they are the stage's own reds. The law of every brief: "a red is classed against the lane's reviewed base as well as the seat's own".
+- **Two**, named for the merge seat (observedShapeReaders' `contestsNiche`; poolDominance as exposure).
+- **The each-family park debt is not named anywhere** in the hand-back. It is a shrink-only ceiling the stage's own tests raise, which is origin.
+
+No page line is false because of these. But they are shrink-only registers raised without their door and, in one case, without a word.
+
 ### L1 — LOW, EXECUTED. R1's re-deal gives the lords the common pool's plot hooks and clothes.
 
 Minting the lords in the `other` category re-deals their clothes, impression and hook. The commit declares it.
@@ -109,6 +129,12 @@ All are confined to the re-dealt towns: the move is real and in scope, but undec
 - The plain fishmonger's undeclared boat lines: "Owes the boats a month of fish…" with no water (`r2s-monster_pressure-village-2`). It is a twin of the master fishmonger's declared line.
 - A hidden power carrying a standing sentence ("They are always at the table…") beside "Its presence is not known to the settlement." (`r2r-village-48`; identical at the base).
 
+### L7 — LOW, EXECUTED. The draft record's figures for two moved surfaces are the first seat's, not the tip's.
+- **The generator golden master** differs in **320 of 525 configurations at the base and 501 at the tip.** The draft still says `predictedRows: 320`.
+- **The Herald desk hash** is 86075798… at the base and **35b9a354… at the tip**. The draft's measure quotes 86075798….
+
+Both are declared MOVED, so the state is right. Their numbers are stale for the merge seat's re-record.
+
 ## THE CLAIMS (step 2), each by my own run
 
 | the hand-back's row | its count | mine | read in its place |
@@ -148,7 +174,10 @@ All are confined to the re-dealt towns: the move is real and in scope, but undec
 - **No change to the vocabulary file**: `factVocabulary.js` is not in the range's diff.
 - **No name a user can hide written into a new stored sentence.** The underworld rule writes "the local underworld", never a criminal power's name; the plant `underworld-names-power` reds `mintedFaceUnderworld.test.js`. The settled standing sentences name powers, as the base's did (an old class, unwidened in kind).
 
-**The draft record.** All 51 registered surfaces are in it: 6 moved, 45 unmoved, each with a measure at 1900b88fe. Measured here: see section 6.
+**The draft record.** All 51 registered surfaces are in it: 6 moved, 45 unmoved, each with a measure at 1900b88fe.
+- **The six moved, measured at the tip:** all red, as declared. The golden master 501 rows (L7); the espionage fence; the Herald desk (35b9a354…, L7); pdf.6's one snapshot; the prose manifest (red at the base too, drift at its 1,000 cap); the preset lighting witness (rows not re-counted).
+- **Twelve of the 45 unmoved, run at the tip: all green** (68 tests): belief map, npc ledger, settlement politics, rumor ledger, chronicler's letter, npc credibility, corruption web, town map, worldpulse seasons, contested goals, intel trade, espionage mission fence.
+- **The fork census:** red at both trees with the same failures. A6's external fnv1a32 callers are 15 against 16 at both; A1's control hash differs only because the record moved. No draw is counted moved.
 
 ## THE GUARDS (step 4): a plant for each
 
@@ -197,7 +226,12 @@ The leaf has no reader at 96a6ced46. The hand-back says another lane's Tonight s
 
 - **The strict-domain gate, the type ratchet, and eslint on the 59 touched src and test files**, at the tip, through `scripts/gate-tail.sh`: **exit 0, exit 0, exit 0**.
 - The stage's guard files: section 4, all green at the tip (23 files, 116 tests).
-- The classed reds: see the addendum below.
+- **The classed reds:** the 38 files red at the tip, run at both trees with `--maxWorkers=2/3` (the ledger branch fetched first).
+  - **Tip: 63 red titles. Base 714381934: 52.**
+  - **Red at both: 52**, the first stage's list, classed by the earlier reader.
+  - **Red at the tip only: 11** (M4).
+  - **Red at the base only: none.** The ten bundle titles the hand-back names are green at the tip: the bundles were re-emitted.
+- **Hazard:** local config compared before and after every run and push: unchanged. Refs moved only by this branch, the fetched lanes and the ledger ref the brief fetches. A container restart killed one base run; it was re-run whole.
 
 ## CENSUS-2 (step 7), EXECUTED
 
@@ -222,4 +256,5 @@ The leaf has no reader at 96a6ced46. The hand-back says another lane's Tonight s
 - The PDF's text and the Foundry export were not rendered. No PDF or export file reads a relationship row's role.
 - The foundling line under a forbidding content profile: every birth here is `grounded`.
 - The 4,305's office lines: its compact rows carry no structural lines. I counted the category, the debt rows and the women's rows only.
-- The whole suite: not run. The red files the seat names were run instead (see the addendum).
+- The whole suite: not run. The 46 files the seat and the earlier reader name were run at the tip; the 38 red there were run at the base.
+- The preset lighting witness's rows at the tip were not re-counted.
