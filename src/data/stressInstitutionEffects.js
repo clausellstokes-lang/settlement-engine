@@ -18,7 +18,7 @@
 // (lane DEFENSE-2, 2026-11-03; pinned by tests/domain/defenseRosterLines.test.js). A reworded
 // `secret` keeps every keyword npcGenerator.js :: getStressHistory branches on, and no reworded
 // secret or stakes gains or loses a word generateNPCs' criminal-secret and criminal-guild tests read
-// (they match substrings: 'defence' contains 'fence', so the rewording avoids that word).
+// (they match substrings: 'defence' contains 'fence', so the rewording avoids that word). R2-CODE-A-3 (round three HIGH #651 #327): no secret reads the {commodity} slot, which is the first export's scan label or, failing one, its first word ("the original recovered contract", "the milled operation", "medicinal milled"); the three lines that read it say what is true without it.
 
 export const STRESS_INSTITUTION_EFFECTS = {
   under_siege: [
@@ -208,7 +208,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "The original {commodity} contract that created the debt was based on projections they knew were false at the time of signing",
+        "The original contract that created the debt was based on projections they knew were false at the time of signing",
       stakes:
         "The creditor's representative has begun asking questions that suggest they've found the original projection documents",
     },
@@ -307,7 +307,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Is hoarding medicinal {commodity} that should have been distributed, rationing it for their own use and close associates",
+        "Is hoarding medicines that should have been distributed, rationing them for their own use and close associates",
       stakes: "The official stores are now visibly insufficient. Someone will investigate where the gap is",
     },
   ],
@@ -355,7 +355,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "The {commodity} operation they authorised six months ago disturbed a nesting site. The attacks started three weeks later",
+        "The work they authorised six months ago disturbed a nesting site. The attacks started three weeks later",
       stakes: "The connection shows on the maps. Anyone who reads them closely will make it",
     },
     {
