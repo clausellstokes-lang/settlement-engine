@@ -202,3 +202,49 @@ This seat's two commits do NOT build a styled name of their own: they read the e
 - `src/domain/summary/tonightSheet.js :: peopleOf`, the person's `role` (was `clean(npc.role || npc.title)`; now `roleOf(npc)`, the keeper's form for the keeper of an empty seat) — #pf-84, #pf-720.
 - `src/components/new/npcComponents.jsx :: NPCRelCard2`, the role line `{npc1Role} · {strength} · {npc2Role}` (now `roleShown(rel.from|rel.to, …)`) — #pf-717, #pf-718.
 AT THE JOIN, where the ruled one home is `seatKeeper.js :: seatKeeperStyledNameOf(settlement)` (powers lane 96a6ced46, fb4561b03): the join seat replaces `keeperFormOf(source)` in those two expressions by the leaf's styled form (or reverts the two commits if the leaf prints the name with the form, since both rows already print the name beside the role). The test that reds on the four towns: render rpf-metropolis-succession_void-13 and rpf-village-succession_void+famine-13 (app shape) and assert the Tonight person and the relationship role line never print the bare "First Magnate" / "Headman" for the keeper (read here at f09e55042: "Acting First Magnate", "Acting Headman"). Not written by this seat (context limit).
+
+---
+
+# PART 3 — R2-CODE-B-3, the third seat (the people and crisis surfaces; the lane's one final statement)
+
+**Seat:** R2-CODE-B-3 (session_01FE9mEtsvAovTvSQFwwYdDT). **Tip read back from origin at start:** 0570b3441 (the brief said 4d546386d; the one commit between is the second seat's docs-only FOR THE JOIN note — the chair's correction of 22:38 UTC: "NOT a stop: work from 0570b3441; read 4d546386d as 0570b3441, including 'do not rewrite a commit at or below'"). Scratch worktree on a local branch; plain pushes. The side seat (R2-CODE-B-SIDE, lane/r2-code-b-side-2026-11-13) holds the flow card's facts, the quick guide, the Power strata, the traditions and the faith reading.
+
+## The brief's rulings, copied (the chair's message; it is not on the branch)
+- MY FILES: tonightSheet.js; npcComponents.jsx; the crisis cast and hooks (crisisCast.js, the hooks' lever clause); tabs/DailyLifeTab.jsx, RelationshipsTab.jsx, NPCsTab.jsx; the label leaf and the second seat's surfaces for upkeep only. NOT MINE: the side seat's files (SupplyChainsPanel.jsx, chainHouses.js, engineKeysInText.js, the PDF's Services.jsx and SupplyChainFlow.jsx, PowerStrata.jsx, settlementQuickGuide.js, traditionCorpus.js, faithReading.js); viability.js (RULED: its rows, the slider lines #576 #823 #824 #825, the "hedge practitioner" suggestion and the stockpile sentence's writer go to the defence lane); data/faceHonorifics.js, patronage.js (#944 #946 #1077, the powers lane's); the Defense surfaces; EconomicsTab.jsx (#1049 to the third leaves lane).
+- ITEM 1 RULED: one home for what a person wants, the person's own goal as the card prints it; a cast "wants" line only where the card carries no goal AND the line is true of the role in that crisis; otherwise nothing is added.
+- ITEM 2 RULED: the words contain the figure (1.5 months is not "two months"; the span's words from the stores' one home; a band's word true of every figure in the band); the food label on every surface reads ONE home, the food record the Economics tab's sentence reads; a label of plenty never stands beside a deficit. New words listed with three towns.
+- ITEM 4 RULED: an "Access to …" row is not a house (record 375): never a lever; the hook's lever clause prints the house through `houseInProse`.
+- THE METHOD (records 386, 387, 404): read where it prints (three towns, a siege/famine/occupation among them, the smallest and largest tier); a twin carries every condition; a line naming a house/role/force/good reads the roster; a line its conditions cannot make true is not written; every cure that takes a line off some towns has its guard town; a seat that rewords a sentence owns it whole.
+- The page shows the ratings, never the machinery. No new key in the record, no new word in the vocabulary file. A claim of zero counted on every surface. The false sentence gone and what prints in its place read true. A cure that moves a stored line is a DECLARED MOVE. Do not rewrite a commit at or below 0570b3441.
+- Item 8 (merge the side branch; THE ONE FINAL STATEMENT) ON THE CHAIR'S WORD ONLY.
+
+## The chair's rulings received by this seat (notifications)
+- 22:38 UTC: the tip correction above.
+- 22:42 UTC: ONE ADDED ITEM, HIGH, FIRST: the Services tab's "Needs TimberSupply route severed." run together (the cut's #163 #427 #497 #891; CENSUS-2 kind d) in serviceComponents.jsx :: ServiceItem. RULED: "Needs X" and the sentence after it are two things: two elements, a separator that survives copying; no word changes. Count page, PDF, Foundry on the 720 and the readers' towns; read ten. FOR THE JOIN: ServicesTab.jsx's `impactCovers` is read by nothing once the change is in. (Read after item 1 was pushed; done next.)
+
+## Instruments (scratchpad only)
+- The base: a detached worktree at 0570b3441; CENSUS-2's births and render (its own census2.sh, `--count-only`) over the census's 720 + the readers' 80 (seeds.txt + seeds.readers.txt), app shape: 800 births, 0 errors, 800 dumps.
+- `tonight.mjs`: composeTonightSheet over the same 800 records with any tree's code (people, facts, food record), diffed tip against tip.
+- `svc.census.jsx`: ServicesTab rendered over the 800 records, every need line.
+- `surfaces.census.jsx` (the reader's, with public prose stamped as the reader's render stamps it): the PDF (three variants), the Foundry journal (three) and the Tonight sheet of the readers' 80.
+
+## Items (this seat)
+| item | rows | commit | measured (800 = census's 720 + readers' 80, app shape) |
+|---|---|---|---|
+| 1 Tonight wants: the card's own goal | inc #176 #303 #856 | 48ddf7685 (+72bbaf182 anchors) | cast people 427: overprinted 406 -> 0; 21 goal-less temporaries keep a true role line; 330 towns' people change; display only |
+| ADDED HIGH: "Needs X" apart from its sentence | cut #163 #427 #497 #891 | e878a1367 | need lines 444; run together 30 (30 towns) -> 0; only those 30 change; PDF/Foundry print no service need line (0/0); "· covers" 0 on 800 page dumps |
+| 2a stores' span contains its figure | inc #472 #668 #769 | f719dbb38 | stores lines 800: off figure 127 -> 0; bare above a month 758 -> 0; 759 towns' line changes |
+| 2b food label, one home | cut #843 #1102 #1297; inc #197 #941 #995 #1329 #1516, #472 #668 #769 | d94638185 (+bc2860a35 tuning door) | Secure->Pressured 160, Import-Dependent->Deficit 6; plenty beside a deficit 160 -> 0; tile = sheet word 800/800 |
+
+## FOR THE JOIN (this seat)
+- ServicesTab.jsx's `impactCovers` (the X-50 plan's `covers` list) is read by nothing once this lane's ServiceItem is in: it goes at the join (the tabs lane's file).
+- The food label's one home is `src/domain/summary/tonightSheet.js :: foodBandOf(foodRecord)`. Two surfaces still print the generator's label raw and disagree with the sheet in the 160 "Pressured" towns: the Overview's Food Security (OverviewTab.jsx, `eco.foodSecurity.label`, the upkeep lanes') and the Quick Guide's food line (settlementQuickGuide.js :: the `economy.foodSecurity?.label` read, the side seat's). Each takes `foodBandOf(eco.foodSecurity.foodRecord)?.label`.
+- The Defence tab's endurance line says "about three months at full rations" where the record holds 1.5 months (rpf-thorp-under_siege-13): defenseDisplay.js's own arithmetic (the first seat's #883), the defence lanes'.
+
+## New words (this seat, for the owner's veto)
+- Item 2a: "about a month and a half" (rpf-thorp-occupied-13, rpf-thorp-succession_void-13, rpf-thorp-under_siege-13), "about two and a half months" (2.25–2.75 months), and "about" before every span of a month and more ("about two months", rww-village-indebted-1; "about nine months", r2r-city-7; "about 13 months", r2s-famine-metropolis-2).
+- Item 2b: none (the band ladder's own "Pressured" and "Deficit"); the Daily Life tile's own words "Severe/Serious/Strained/Tightening/Adequate" print only for a record with no band.
+- Item 1 and the added HIGH: none.
+
+## Stops and parked items (with recommendation)
+- (none yet)
