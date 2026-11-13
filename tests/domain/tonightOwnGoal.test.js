@@ -97,14 +97,17 @@ describe('ROUND THREE · a role\'s line is said only where the town leaves it tr
     for (const id of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
       const lever = castWantOf('lever', id, 'famine', '', '');
       const defender = castWantOf('defender', id, 'under_siege', '', '');
-      expect([lever, defender].join(' ')).not.toMatch(/their house|\{house\}/);
       expect(defender).toBe('hold the line through the siege with fewer hands than the line needs.');
+      expect(lever).toMatch(/^(decide who gets the food|share out the food)/);
+      // anchored: both lines are asserted to their exact admitted text on the two lines just above
+      expect([lever, defender].join(' ')).not.toMatch(/their house|\{house\}/);
     }
   });
   it('the raids never "takes": a singular verb is not said of a plural crisis', () => {
     for (const id of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
       const want = castWantOf('brunt', id, 'monster_pressure', '', 'Elder Council');
-      expect(want.length).toBeGreaterThan(0);
+      expect(want).toMatch(/the people of the Elder Council/);
+      // anchored: the same want is asserted to name its house on the line just above
       expect(want).not.toMatch(/the raids takes/);
     }
   });
