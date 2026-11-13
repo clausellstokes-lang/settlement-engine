@@ -73,4 +73,51 @@ The rollback file is unchanged: it restores the reads' 210 bodies and drops ever
 
 ## 7. Leaving
 
-The hook's wrappers are installed (`core.hooksPath` = `.husky/_`, `.husky/_/pre-push` present). The lane is pushed once, `git push -u origin lane/coherence-veil-2026-11-11`, through the whole check in the hook; its exit is in the message to the chair.
+The hook's wrappers are installed (`core.hooksPath` = `.husky/_`, `.husky/_/pre-push` present). The first push through the whole check in the hook failed and sent nothing (§8). The lane is pushed once, `git push -u origin lane/coherence-veil-2026-11-11`, after §8's cure. The hand-run check's exit and the push's are in the message to the chair.
+
+## 8. The first push, the leak it exposed, and the cure (the chair's ruling of 2026-11-13)
+
+**What happened.** The first push, from this seat's linked worktree at `7cc74d252`, ran the whole check in the hook and exited 1 at `test:ratchet`. Nothing was sent; the remote stayed at `f07db8760`. Git exports `GIT_DIR` to a hook, and from a linked worktree that path is absolute. So five suites that run git in `mkdtemp` folders acted on the real repository instead:
+- `tests/scripts/implementationPackets.test.js`
+- `tests/scripts/implementationSession.test.js`
+- `tests/scripts/landingStageMeasure.test.js`
+- `tests/soak-harness/soakRegister.test.js`
+- `tests/lint/tuningRegister.walker.test.js` (a bare `git init`)
+
+They moved the lane branch onto fixture commits ("packet authority") and created branches `other` and `side`. They wrote `user.email=fixture@example.test`, `user.name=Fixture` and `commit.gpgsign=false` into the shared `.git/config`, and set `core.bare=true`. The main checkout stopped reading as a work tree. Four suites then collected zero tests, which tripped the ratchet's scope sentinel:
+- `declaredLineShape` and `drawDeclaredKeys`: their `git grep` failed against the now-bare repository.
+- `ledgerCitationIntegrity` and `provenanceMap`: no local `review-fixes-2026-07-08` ref.
+
+It never bit before because every earlier whole-check push ran from a main checkout.
+
+**Restored by this seat, each from the record:**
+- The lane ref went back to `7cc74d252`, read from its reflog, with an old-value guard. The worktree's HEAD and index went back to it.
+- `core.bare=false` again, and the `[user]` and `[commit]` sections removed. Every commit on the lane carries `Claude <noreply@anthropic.com>`. The fixture sections were appended after `[branch]`, so they postdate the clone; `[gc] auto = 0` sits before `[remote]`, so it predates the run and stays.
+- The main checkout reads as a work tree again, detached at `f07db8760` as before the push.
+- A copy of the leaked config is in the seat's scratch area.
+
+Then, on the chair's ruling:
+- `other` and `side` were deleted after reading them. `other` held 16 commits outside every other ref, all by `t <t@t>` at 00:45:06; `side` held none of its own.
+- The ledger ref was fetched: `review-fixes-2026-07-08` → `235efce1a`.
+
+**The cure** (`ec861dbd8`, tests only, no `src/`). One helper, `tests/helpers/fixtureGit.js`:
+- `fixtureEnv()` returns the environment with the repository-locating variables removed: `GIT_DIR`, `GIT_WORK_TREE`, `GIT_INDEX_FILE`, `GIT_COMMON_DIR`, `GIT_OBJECT_DIRECTORY`, `GIT_ALTERNATE_OBJECT_DIRECTORIES`, `GIT_PREFIX` and every `GIT_CONFIG*`.
+- `fixtureGit()` spawns git with that environment.
+- `isolateFromHostRepo()` removes the same variables from `process.env` for a file that builds a fixture repository, so the library code and CLIs under test act on the fixture too.
+
+The five suites use it. The walker `tests/lint/fixtureGitIsolation.walker.test.js` enforces two rules:
+- **R1:** a test may not run git with a cwd outside the repository root unless it passes `env: fixtureEnv()`.
+- **R2:** a file that builds a repository must call `isolateFromHostRepo()`.
+
+`tests/helpers/goldenRecordDoor.js` stays outside R1. Its `root` is its caller's, and five scripts that run outside vitest import it, so it may not import vitest. The mutation-coverage manifest takes the walker's rationale entry through its own door. Scope: 8 files, under the chair's bound of about thirteen.
+
+| Proof | Result |
+|---|---|
+| Red, never against the real repository: a throwaway with `GIT_DIR` exported to it, the five suites run | the throwaway's `main` moved to "packet authority"; it gained `other` and `side`; its config took the Fixture identity: **7 lines moved** (the hook's damage, reproduced); with `GIT_WORK_TREE` and `GIT_INDEX_FILE` also exported: 3 lines |
+| Green, the same throwaway runs, the five suites and the walker | `GIT_DIR` only, and all three: **6 files, 133/133, 0 lines moved**; plain run 133/133; the real repository's refs and config byte-identical before and after |
+| The walker on the five suites' pre-cure bytes (cured copies held aside, restored by cp) | **R1 red at the 5 call sites, R2 red at the 5 files**; green after, 5/5 |
+| The walker's own non-vacuity | under a foreign `GIT_DIR` its subject list read empty and its subject test **red**; the list now reads through `fixtureGit` |
+| The four zero-test suites, the manifest totality, `testRatchet` (the walker-census law) | 7 files, 124/124 |
+| eslint on the 8 files | exit 0 |
+
+**The push.** The whole check is run by hand first (`sh scripts/gate-tail.sh npm run check`). Then `git for-each-ref` and `git config --local --list` are snapshotted, the lane is pushed once, and both are compared. Anything moved means restore and stop.
