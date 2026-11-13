@@ -101,6 +101,9 @@ describe('EconomicsTab Food Security — no NaN% in trade-coverage readout', () 
     };
     const { container } = render(<EconomicsTab settlement={settlement} />);
     expect(container.textContent).not.toContain('NaN');
-    expect(screen.getByText(/Trade covers \d+% of gap/)).toBeTruthy();
+    // RE-KEYED BY CAUSE (W2-C-LEAVES item 4(c), 2026-11-13): the "Trade covers N% of gap" caption left the tab (the
+    // owner's law: the ratings, never the machinery); the same falsy-denominator share is now said in words by the food
+    // sentence (`foodSentence`'s `brought` band), so the pin reads the words where it read the figure.
+    expect(container.textContent).toMatch(/grows .+ of what it eats, and carts bring in (?:a little of|about half|most of|nearly all) the rest\./);
   });
 });

@@ -568,11 +568,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             {foodBar.imports>0&&foodComesByTrade(eco)&&<div style={{position:'absolute',top:0,left:`${foodBar.production}%`,height:'100%',width:`${foodBar.imports}%`,background:swatch['#2A5A8A']}}/>}
             {foodBar.magic>0&&<div style={{position:'absolute',top:0,left:`${foodBar.production+foodBar.imports}%`,height:'100%',width:`${foodBar.magic}%`,background:swatch.info}}/>}
           </div>
-          <div style={{display:'flex',justifyContent:'space-between',gap:8,color:MUTED,marginTop:3}}>
-            <span style={{fontSize:chromeFontSize(FS.xxs, mobile)}}>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
-            {fb.stressModifier&&fb.stressModifier<1&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.danger}}>Stress penalty: ×{fb.stressModifier}</span>}
-            {fb.importCoverage>0&&foodComesByTrade(eco)&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
-          </div>
+          {/* W2-C-LEAVES item 4(c) (2026-11-13; the cold list REVIEW-W2A-3, fifteen MEDIUM lines in twenty towns): the row that
+              printed the food model's machinery ("Agriculture modifier: 55%", "Stress penalty: ×0.35", "Trade covers 62% of gap")
+              is gone: the owner's law shows the ratings, never the machinery. The stat line above keeps the figures (grown, brought
+              in, needed, short) and the sentence below says the shares in words. Five lines here, as the row had (the prose-numerics
+              register keys this file by line). */}
         </div>
         {/* Narrative */}
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',...edged(`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,`3px solid ${foodColor}`),padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>

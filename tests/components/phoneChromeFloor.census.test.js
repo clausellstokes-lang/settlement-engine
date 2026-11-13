@@ -343,7 +343,10 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-13, W2-C-LEAVES item 4(b): the Economics tab's "Needed, and not brought in" line (one `proseFontSize` site,
   // EconomicsTab.jsx :: NeedsNotMet) — `floored` +1 on /create, /settlements and /gallery: 621 -> 622, 864 -> 865,
   // 666 -> 667; `bare` unmoved; re-measured by this census.
-  '/create':                { roots: 1, files: 162, floored: 622, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-13, W2-C-LEAVES item 4(c): the Economics food card's machinery row left (three `chromeFontSize` sites:
+  // "Agriculture modifier", "Stress penalty", "Trade covers") — `floored` -3 on /create, /settlements and /gallery:
+  // 622 -> 619, 865 -> 862, 667 -> 664; `bare` unmoved; re-measured by this census.
+  '/create':                { roots: 1, files: 162, floored: 619, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -394,7 +397,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-10, LIBRARY-SIMPLE (owner: "No longer does it advance time."): floored 867 -> 864, the
   // campaign folder's three advance sites left with their controls — the "Advance by" micro-label,
   // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
-  '/settlements':           { roots: 1, files: 206, floored: 865, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 862, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
@@ -423,7 +426,7 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-07, PEOPLE-6 LINKS: the Institutions card's face row (one `proseFontSize` site, 0 bare) — +1; the
   // other +1 is red at the base bc4b6423 (the people car's lanes; /admin and /world's +1 there are left red, the base's).
   // PEOPLE-6 LINKS step 2: +1, the NPC card's role row (one `chromeFontSize` site, 0 bare).
-  '/gallery':               { roots: 1, files: 151, floored: 667, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 664, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
