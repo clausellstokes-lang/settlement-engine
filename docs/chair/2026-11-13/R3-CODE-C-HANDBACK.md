@@ -74,7 +74,7 @@ chair's #1386 the list is 3 HIGH and 24 MED. All 26 that print were reproduced a
   and 19 tip dumps: a lazy panel's render timing, both trees, no change of mine near it.
 - **Running when this was written:** the whole suite at fb8b24fbe (`npx vitest run --maxWorkers=2`), and the census
   counter (lane/second-wave-census-2026-11-12, 6b262d4e0) base against tip, its counter's own exit checked. Their
-  results are appended here when they land; a successor's final statement re-runs both at its own final tip.
+  results are in the section "The first seat's last two runs" below.
 - **The suite's reds seen so far, by the governing runs, classed:** red at base too (undercitySewerDerivation;
   siteCoherenceRatchet C1; dossierProseManifest's three drift arms); declared by this lane: the lighting census file
   count 3234 -> 3238 (+4 test files; the census's door), espionageDormancyFence's driven golden (the generator moves of
@@ -159,6 +159,45 @@ sits on line 18 because the holder census keys the file by line: keep every line
 | pf-590 | MED | rpf-town-politically_fractured-13 · Systems/Power | Religious Authorities and Church Council are the same people in practice; the hall rules because the faith says it may. | no shared members: Religious Authorities has 1 member (Cesair O'Sullivan), Church Council 16 others; same tab marks Religious Authorities 'Contests the seat' and 'Holds t | generators/factionDynamics.js :: computeFactionRelationships |
 | pf-591 | MED | rpf-town-politically_fractured-13 · Systems/Power | Military/Guard no longer takes orders from Church Council. Church Council keeps the title; Military/Guard makes the decisions that matter. | same tab: 'Holds the title; the decisions that matter are made by Religious Authorities.'; Military/Guard is 'Minor' 19 vs Religious Authorities 'Strong' 47 | generators/factionDynamics.js :: computeFactionRelationships |
 | pf-813 | MED | rpf-metropolis-wartime-13 · Systems/Power | Grand Guild Consortium gives the orders and War Council carries them out; each needs the other to stay strong. | powerStructure.conflicts: Grand Guild Consortium vs War Council, intensity "high", issue "A ruling one power refuses to obey" (World/Relationships "High tension"); War Co | generators/factionDynamics.js :: computeFactionRelationships |
+
+## The first seat's last two runs, at fb8b24fbe (EXECUTED; finished after the hand-back of 74366192c)
+
+These read fb8b24fbe, the first seat's final code tip, not the second seat's later tip; the second seat re-runs both
+at its own final tip.
+
+- **The census counter** (lane/second-wave-census-2026-11-12 at 6b262d4e0, census.sh, 2 workers), base aac79b808
+  against fb8b24fbe. The hazard was checked: census.sh pipes its counter, so count.mjs was re-run alone on each tree.
+  Its own exit was **0 on both**, its output sorted matched counts.txt on both, and each holds its **50 rows**, with
+  720 dumps each. compare.mjs: **every row is OLD, base = tip, no row rises or falls** (e.g. row 18 "count ranges as
+  names" 360/360, row 20 "siege text, no siege" 689/689; GLANCE towns 710/710). None of the census's rows counts a
+  sentence this seat cured, so a flat census is what the cures predict.
+- **The whole suite** at fb8b24fbe (`npx vitest run --maxWorkers=2`, ledger branch fetched): **16 files failed, 22
+  tests failed**; 38,941 passed, 146 skipped. Refs and local config were the same before and after the run, apart from
+  this branch's own pushes. The 16 files were re-run at base aac79b808: 8 files and 13 tests are red there too.
+  - **Red at base too (13 titles, the line's own set):** landingFixtureFreshness (2), foundingWorldBones,
+    undercitySewerDerivation, newsHeadlineContract.walker, newsVoiceContract.walker, proseFamilyContract.walker (A1, A2,
+    A3, A5, A6), siteCoherenceRatchet C1, dossierProseManifest (the drift arm, the four-seed drift corpus, the
+    mixed-pool audience arm).
+  - **Red only at the tip, this seat's 9 titles, each classed:**
+    1. espionageDormancyFence, "THE DRIVEN GOLDEN: 360 settlements …": a GOLDEN SURFACE moved by the declared generator
+       moves (476800e1d power relations, cdf84d431 structuralViolations). The merge seat's door.
+    2. institutionBudgetPromise, "every one of sixty seeds is byte-identical with the density factor forced to 1.0", and
+       3. x46NpcBand, "sixty seeds … byte-identically to the dark digests": byte-identity digests over generated towns.
+       They move by the same declared generator moves; re-recorded through their own doors with that cause.
+    4. townCartographyCalibration W2 and 5. W8, "every sampled row reproduces its manifest record exactly" and "each
+       tier's argmax row re-measures …": cartography rows recorded over generated towns (9 rows). Their bytes move with
+       the record. PLAUSIBLE that this is the same declared move (structuralViolations' reason length in the record);
+       not traced row by row.
+    6. sovereigntyLightingContract, "THE CENSUS IS AN ASSERTION …": the lighting census's file count, 3234 to 3238
+       (this seat's four new test files). The census's own door, re-frozen at the merge.
+    7. mutationCoverageManifest, "TOTALITY: every enumerated invariant file has a manifest entry": two of this seat's new
+       test files, tests/generators/embattledReasonNoSlider.test.js and occupierRelationLine.test.js, need an entry in
+       scripts/mutation-coverage-manifest.json. **OWED**, a test-hygiene row (the manifest's door).
+    8. presumedThings.walker, "no stale row: a cured line leaves the register in its own commit": the row for the cured
+       structuralValidator reason. **Done on the lane by the second seat** (19d4a8506).
+    9. tuningRegister.walker, "no file carries more bare decimals than the inventory banked": factionDynamics.js went
+       from 38 to 39 bare decimals, from 476800e1d's `ratio > 1.2` (the occupier row's band). **OWED**: name it, or give
+       it a DECLARED_GROWTH entry. Cleanest: reuse the competitive band's own cut instead of a second literal.
 
 ## THE SECOND SEAT (R3-CODE-C-2), kept current after every item
 
