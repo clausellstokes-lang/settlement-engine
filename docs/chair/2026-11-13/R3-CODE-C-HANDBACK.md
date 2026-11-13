@@ -159,3 +159,31 @@ sits on line 18 because the holder census keys the file by line: keep every line
 | pf-590 | MED | rpf-town-politically_fractured-13 · Systems/Power | Religious Authorities and Church Council are the same people in practice; the hall rules because the faith says it may. | no shared members: Religious Authorities has 1 member (Cesair O'Sullivan), Church Council 16 others; same tab marks Religious Authorities 'Contests the seat' and 'Holds t | generators/factionDynamics.js :: computeFactionRelationships |
 | pf-591 | MED | rpf-town-politically_fractured-13 · Systems/Power | Military/Guard no longer takes orders from Church Council. Church Council keeps the title; Military/Guard makes the decisions that matter. | same tab: 'Holds the title; the decisions that matter are made by Religious Authorities.'; Military/Guard is 'Minor' 19 vs Religious Authorities 'Strong' 47 | generators/factionDynamics.js :: computeFactionRelationships |
 | pf-813 | MED | rpf-metropolis-wartime-13 · Systems/Power | Grand Guild Consortium gives the orders and War Council carries them out; each needs the other to stay strong. | powerStructure.conflicts: Grand Guild Consortium vs War Council, intensity "high", issue "A ruling one power refuses to obey" (World/Relationships "High tension"); War Co | generators/factionDynamics.js :: computeFactionRelationships |
+
+## THE SECOND SEAT (R3-CODE-C-2), kept current after every item
+
+The seat R3-CODE-C-2 (session_01FE9mEtaa8NvaX3ho5zd1nH), started from the lane's tip **74366192c** (read back
+from origin). Its assignment is the chair's message of 2026-11-13 (copied in brief): the 20:4x rows above, in the
+order 5 HIGH, #457 and #1163 as ruled, the 18 MED by file; then the merge of the line's tip
+(lane/integration-2026-11-07, 9e57f5023 or later) and the final statement for the whole lane. Rulings it carries
+beyond those above: "One that another lane holds is NAMED with its file in your hand-back and left"; NOT this
+lane's: faithReading.js, crisisCast.js (rb), domain/dossier/powerStrata.js, src/generators/power/**,
+src/data/people/** (powers), viability.js, economicState.js, causalState.js, defenseFacts.js (defence),
+settlementOriginProse.js (ra), src/data/** (data and corpus lanes), the tabs. The census.sh hazard: read the
+counter's own exit and that counts.txt is not empty. If CENSUS-2's command arrives, run it on this tree.
+
+**How the measures are rebuilt (EXECUTED).** The 720: REVIEW-R2-STAGES births.mjs (lane/review-r2-stages-2026-11-13,
+be53f933b) unchanged in its seeds and dials (r2r-<size>-0..59 with every dial random, r2s-<crisis>-<size>-0..3 with
+`selectedStresses:[crisis]`, `selectedStressesRandom:false`). The 240 fresh: the same script with the first seat's
+fresh seeds (r2r-<size>-fresh3c-0..9, r2s-<crisis>-<size>-70..71). Field diff: REVIEW-R2-STAGES fielddiff.mjs. The
+readers' towns: the ROUND-3-CUT increment's render.rww.jsx and render.rw3.jsx with seeds.ww.txt and seeds.pf.txt
+(the readers' render.sh, two workers each), rendered at each commit and line-diffed town by town.
+
+### The 5 HIGH
+
+| line | town | true writer (traced) | outcome | commit |
+|---|---|---|---|---|
+| pf-88, pf-514 | rpf-city-occupied-13, rpf-metropolis-occupied-13 | factionDynamics.js :: computeFactionRelationships (the occupier row) | ALREADY CURED by the first seat's 476800e1d (the cut's lines are at the line's tip aac79b808). EXECUTED at 74366192c: both towns now read "Royal Authority carries out what Occupation Authority decides." | 476800e1d |
+| ww-470 | rww-metropolis-wartime-1 | heraldCausalGrammar.js :: TIME_BANDS, the sixth band's predicate ("older than its bearers", a grudge's phrase), filled by generalStateProse.js :: timebandAgeFill into the legacy molds | CURED: "older than anyone living". 25 broken prints in the 60 readers' towns -> 0, each replacement read; 0 leaf diffs on 960 births | a322b602f |
+| ww-4 | rww-thorp-calm-1 | stored by historyGenerator.js (The Great Construction's hook; the data lane's file, w2-fix-data): NAMED there, cure: a wall-less twin. Gated by hookTruth.js :: WORDS.walls (mine) | CURED at the gate: "inside/within the walls" (no "of") is a claim of walls (record 386). Declared move: 9 of 960 births, history + the coherence receipt (which had flagged the same hook) | a4897beb6 |
+| ww-1227 | rww-village-under_siege-1 | settlementOriginProse.js :: ORIGIN_POOLS.road[0] ("Trade flows in, goods flow out"), stored as settlementReason by narrativeGenerator.js :: generateSettlementReason (which passes no siege) and printed by OverviewTab.jsx's "Settlement Origin"; simulationSpine.js only reads the same stored sentence | NAMED to ra (settlementOriginProse.js is ra's; narrativeGenerator.js is held by ra, bd, fd, wr): the same fault and the same cure as the first seat's #154 (the caller passes the siege; the pool refuses its present-traffic rows road[0], road[2], road[3] under a siege; the refused pick resolves draw-free) | — |
