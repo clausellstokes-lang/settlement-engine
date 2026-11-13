@@ -21,6 +21,7 @@ The cut's query returns 40 rows: the 37 MEDIUM and the three HIGH (#55, #964, #9
 | 2 | 579c13d7f | #91 DS-ECO-9 SECURE v3 "fed, but only just" | 172 -> 33 with a year of stores or more (the page says the granary lasts a year or more in 33 of 33) | `stores: < 12` (the stores home); two lines `no hunger · stores: >= 12` | 6 of 6 true (r2r-metropolis-0, -1, -2) |
 | 3 | 4a01b3190 | #179 DS-GEN-16 LEGACY-UNRESOLVED v2 "the economic divide, years old" (broken) | 151 -> 30 dumps print "the <event>, years old" | the eight LEGACY lines re-said with the band as a predicate ("The {calamity} is {timeband_age}, and ...") | 5 of 5 whole (r2r-city-45, r2r-hamlet-18, -2, -32, r2r-village-3) |
 | 4 | 1bbf89408 | #396 DEF-2 no legal v3; #1033 GEN-17 GARRISONED v1; #767 DEF-2 plagued v3; #125 DEF-5 mages' guild v2 (and v1); #57 DEF-9 false v2 | 114 / 93 / 39 / 52 / 124 (113 with no arcane tradition) | reworded off the claim no fact can check | 5 of 5 true in their rw3 towns |
+| 5 | 0c2438025 | #869 ECO-10 established v5; #614 ECO-9 brought-in v3; #348/#386 ECO-9 by magic v2, v3; #435 ECO-1 C3 v2; #876 ECO-6 large share v2; #58 DEF-12 enough v2 | 91 / 82 / 35 / 35 / 14 / 12 | reworded off the claim no fact can check | 7 of 7 true in their rw3 towns |
 
 ## Parked (a fact with no home), each with what it needs
 (pending)
