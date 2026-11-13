@@ -99,7 +99,13 @@ describe('the rule book', () => {
       'Leads the militia drill on the green each week.',
       'The militia drills on the green when a crisis looms.',
     ]);
-    expect(scanSource('src/data/dossierStateProse/planted.generated.js', src).map((h) => h.text)).not.toContain('The militia drills on the green in a state pool.');
+    // anchored: the same line is a hit in an ordinary data file and answered in a kernel pool file
+    expectPresentThenAbsent(
+      scanSource('src/data/planted.js', src).map((h) => h.text),
+      scanSource('src/data/dossierStateProse/planted.generated.js', src).map((h) => h.text),
+      'The militia drills on the green in a state pool.',
+      'marks declare only in a kernel pool file',
+    );
     // the same source, read as a table drawn `{ tagged: true }`: its `tags` declare, so the line it flagged elsewhere is answered
     expectPresentThenAbsent(
       scanSource('src/data/planted.js', src).map((h) => h.text),
