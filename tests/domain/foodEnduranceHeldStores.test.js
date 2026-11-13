@@ -44,7 +44,9 @@ describe('rung-2 window · the Food endurance line reads the held stores', () =>
 
   it('an open granary reads as it did: it carries the place', () => {
     const line = foodEnduranceLine(placeWith({ storageMonths: 12 }));
-    expect(line?.sentence).toMatch(/\bthe granary carries the town\b/);
+    // re-keyed (W2-A-LEAVES 2 + 20, 2026-11-12): outside a siege the line is a condition, so the open granary
+    // WOULD carry the town; the held-stores words stay the held granary's alone (the line below)
+    expect(line?.sentence).toMatch(/\bthe granary would carry the town\b/);
     expect(line?.sentence).not.toContain(FACTS.HELD_STORES_WORDS); // anchored: 'the granary carries the town' is matched in this same sentence on the line above
   });
 
