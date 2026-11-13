@@ -1,6 +1,6 @@
-# THE CHAIR'S FOURTH HANDOFF OF 2026-11-13 (written at 20:45 UTC, after point 48 landed and the cut's increment was handed out)
+# THE CHAIR'S FOURTH HANDOFF OF 2026-11-13 (written at 20:42 UTC by the clock; first pushed labelled 20:45, after point 48 landed and the cut's increment was handed out)
 
-**Why this file exists.** Between 19:00 and 20:45 UTC five builders handed back at their limits and were succeeded, the corpus lane was read and found not clear, migration 211 was frozen and its later cures moved to a new migration 212, two newer cold lists were cut against round three, point 48 landed, and a measuring seat was opened. The third handoff's sections 1, 3, 4 and 6 are out of date. If this chair's session ends, start here.
+**Why this file exists.** Between 19:00 and 20:42 UTC five builders handed back at their limits and were succeeded, the corpus lane was read and found not clear, migration 211 was frozen and its later cures moved to a new migration 212, two newer cold lists were cut against round three, point 48 landed, and a measuring seat was opened. The third handoff's sections 1, 3, 4 and 6 are out of date. If this chair's session ends, start here.
 
 **Read in this order.** `docs/OPERATING_STANDARD.md`; `docs/chair/2026-11-13/CHAIR-HANDOFF-2026-11-13.md` (section 5, the laws for every brief); `CHAIR-HANDOFF-THIRD.md` sections 2, 5 and 7 (the measure of the bar, the rulings to record 373, the chair's tools: all still true); this file; records 374 to 388, the last lines of `docs/chair/2026-11-07/ODQ-934.105-DRAFT.md`; the briefs in `docs/chair/2026-11-13/briefs/`.
 
@@ -31,7 +31,7 @@ Every session id below is a child of the chair's session. A `priority: "next"` m
 | round two A `lane/r2-code-a-2026-11-13` | 0d3972d8f | R2-CODE-A-3 `session_01FE9mEx2bPXnn8giMsSquLq` | round three's high lines done; its medium; the increment's 9 and 29; settlementOriginProse.js with #7, #154, #237 |
 | round two B `lane/r2-code-b-2026-11-13` | 24ab15c9b | R2-CODE-B-2 `session_01FE9mEsvRCQQpZm8mEtEsz3` | the house's label; the Economics line; the increment's 6 and 24; #13, #55, #270, #9, #51, #1049 |
 | round three tabs `lane/r3-tabs-2026-11-13` | 38f49e420 | R3-TABS `session_01FE9mEvvxXu4UiSevxtNLaR` | merges the line at 9e57f5023, then L0 to L3 in the posture selector; the increment's 1 and 2 |
-| round three code `lane/r3-code-c-2026-11-13` | 74366192c | R3-CODE-C `session_01FE9mEtmUDK5KYBYty6oGoM` | handed back its first list; woken with the increment's 5 and 18 and the ruling on #457 and #1163 |
+| round three code `lane/r3-code-c-2026-11-13` | 74366192c | R3-CODE-C-2 `session_01FE9mEtaa8NvaX3ho5zd1nH` (seated 20:43 UTC; the first seat `session_01FE9mEtmUDK5KYBYty6oGoM` handed back at its limit and may push one docs-only commit) | the increment's 5 high and 18 medium; #457 and #1163 as ruled; then it merges the line and makes the lane's final statement |
 | measuring `lane/census-2-2026-11-13` | not yet pushed | CENSUS-2 `session_01FE9mEw2Rw4v8SD9q2wrkdt` | measure only (record 388). Not the old `lane/census-2-2026-11-04`, an unrelated lane of 5 November |
 | the cut `lane/round-3-cut-2026-11-13` | fe6d5b741 | done | the cut, the increment, both JSON lists, the readers' probes |
 
