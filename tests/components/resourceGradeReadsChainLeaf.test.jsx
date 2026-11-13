@@ -105,8 +105,9 @@ describe('the grade cards read the chain leaf through the sentence\'s own readin
     expect(stages(town([chain('running', false)], { partiallyExploited: [TIMBER] })), 'modelled, idle, filed Partial, no such house: Unexploited')
       .toEqual({ unexploited: ['timber'], partial: [], full: [] });
     const { container, unmount } = render(<ResourcesTab settlement={town([chain('running')], { unexploited: [TIMBER] })} narrativeNote={null} />);
-    expect(container.textContent).not.toMatch(/Unexploited/);
-    expect(container.textContent, 'the moved card names no promised goods').not.toMatch(/planks/);
+    expect(container.textContent).toMatch(/Partial/);
+    expect(container.textContent).not.toMatch(/Unexploited/); // anchored: toMatch(/Partial/) on this render, the card's own badge
+    expect(container.textContent, 'the moved card names no promised goods').not.toMatch(/planks/); // anchored: the same render's Partial badge above
     unmount();
   });
 
@@ -138,7 +139,7 @@ describe('the grade cards read the chain leaf through the sentence\'s own readin
     const cards = cardsOf(town).filter((c) => c.resource === resourceDisplayName('medicinal herbs'));
     expect(cards.map((c) => c.badge)).toEqual(['Unexploited']);
     expect(cards[0].chips, 'the body: the resource alone').toEqual([resourceDisplayName('medicinal herbs')]);
-    expect(text).not.toMatch(/Draws on: herb gathering areas/);
+    expect(text).not.toMatch(/Draws on: herb gathering areas/); // anchored: cards[0].chips asserted on the same town's render above
   }, 60000);
 
   test('on the reader\'s twenty towns: no Unexploited card beside a working chain, no Partial or Full card beside "No one here works", the PDF\'s groups the tab\'s', () => {

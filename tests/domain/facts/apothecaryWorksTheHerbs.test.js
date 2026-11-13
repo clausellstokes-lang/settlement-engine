@@ -17,6 +17,7 @@ import { configOf } from '../../components/pageCensusWalk.shared.mjs';
 import { chainWorksResource } from '../../../src/domain/facts/chainWorking.js';
 import { exploitationGroupsShown } from '../../../src/domain/display/validationOnPage.js';
 import { localProductionAsPrinted } from '../../../src/domain/display/tradeListDisplay.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 /** @param {string} seed */
 const birthCensus = (seed) => {
@@ -59,7 +60,9 @@ describe('an apothecary works the medicinal herbs of the town\'s own ground (P1-
     expect(chainWorksResource(t17, ['hot_springs'], 'medicinal herbs')).toBe(false);
     expect((t17.resourceAnalysis.exploitation.fullyExploited || []).map((/** @type {any} */ c) => c.rawResource), 'anchored: filed Full').toContain('medicinal herbs');
     expect(gradeOf(t17, 'medicinal herbs'), 'its herbs come in by trade: Unexploited (the chair, 19:49 UTC)').toBe('unexploited');
-    expect(localProductionAsPrinted(t17), 'not "produced locally" beside a herb import').not.toContain('medicinal herbs');
+    const local = localProductionAsPrinted(t17);
+    expect(local.length, 'anchored: the row prints').toBeGreaterThan(0);
+    expectAbsentWithAnchor(local, 'medicinal herbs', local[0], 'not "produced locally" beside a herb import');
     const v8 = birthCensus('r2r-village-8');
     expect((v8.resourceAnalysis.exploitation.partiallyExploited || []).map((/** @type {any} */ c) => c.rawResource), 'anchored: filed Partial').toContain('medicinal herbs');
     expect(gradeOf(v8, 'medicinal herbs')).toBe('unexploited');
