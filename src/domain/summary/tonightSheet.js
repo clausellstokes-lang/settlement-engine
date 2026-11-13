@@ -577,21 +577,49 @@ function wantsOnce(people) {
   });
 }
 
+/** The days a month of stores is read as (the food record counts stores in months): a year of
+ *  1461 days in four, over 48 months. */
+export const DAYS_PER_MONTH = 1461 / 48;
+
 /**
- * The stores in plain words, from the one food record: the months in store and the granary.
+ * THE SPAN OF THE STORES IN WORDS — ONE HOME (R2-CODE-B item 3; the cold list REVIEW-W2A-3 #149
+ * #856 #872: "No granary; a few weeks in the larder." and "a granary, a few weeks of grain" where
+ * the record holds `storageMonths` 0.1, about three days). Every span under a month was "a few
+ * weeks". It is now true at days, weeks and months, read from the record's months: under a day,
+ * "less than a day"; up to ten days, "about N days"; under a month, "about N weeks"; from a month,
+ * the months as before ("about a month", "N months"). Any line that speaks of the stores' span in
+ * words reads this (the Defence tab's food endurance line is owed the same switch:
+ * defenseDisplay.js :: monthsInWords, the third leaves seat's file).
+ * @param {number} months the record's `storageMonths` @returns {string} '' for no stores
+ */
+export function storesSpanWords(months) {
+  if (!Number.isFinite(months) || months <= 0) return '';
+  if (months >= 1) {
+    const whole = Math.round(months);
+    return whole <= 1 ? 'about a month' : `${numberWord(whole)} months`;
+  }
+  const days = months * DAYS_PER_MONTH;
+  if (days < 1) return 'less than a day';
+  const d = Math.round(days);
+  if (d <= 1) return 'about a day';
+  if (d <= 10) return `about ${numberWord(d)} days`;
+  return `about ${numberWord(Math.max(2, Math.round(days / 7)))} weeks`;
+}
+
+/**
+ * The stores in plain words, from the one food record: the span in store and the granary.
  * The same words as the Economics tab's stores row.
  * @param {{ storageMonths?: unknown, hasGranary?: unknown, storesHeld?: unknown }} record @returns {string}
  */
 export function foodStoresWords(record) {
   const months = Number(record?.storageMonths);
   if (!Number.isFinite(months) || months <= 0) return '';
-  const whole = Math.round(months);
-  const span = months < 1 ? 'a few weeks' : whole <= 1 ? 'about a month' : `${numberWord(whole)} months`;
+  const span = storesSpanWords(months);
   // RUNG2-F13: under an active famine a granary still holding six months or more is HELD — the
   // record says so (foodRecord.storesHeld), and so does the line.
   if (record.hasGranary === true && record.storesHeld === true) return `Stores: a granary of ${span} that ${HELD_STORES_WORDS}.`;
   if (record.hasGranary === true) return `Stores: a granary, ${span} of grain.`;
-  return months < 1 ? 'No granary; a few weeks in the larder.' : `No granary; ${span} in household stores.`;
+  return months < 1 ? `No granary; ${span} in the larder.` : `No granary; ${span} in household stores.`;
 }
 
 /** @param {number} n @returns {string} */

@@ -31,7 +31,7 @@
  * receipt runs never sees them, so no receipt moves. Pure: no clock, no seed, no draw.
  */
 
-import { composeTonightSheet, castWantOf } from '../summary/tonightSheet.js';
+import { composeTonightSheet, castWantOf, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { migrationDirectionOf } from '../crisis/migrationDirection.js';
@@ -86,8 +86,13 @@ const stressesOf = (s) => {
 // ── famine-stores ────────────────────────────────────────────────────────────────────────
 
 const NUMBER_WORDS = Object.freeze(['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve']);
-/** The stores sentence `foodStoresWords` writes, in its granary forms. */
-const STORES_LINE = /Stores: a granary(?:,| of) (about a month|a few weeks|[a-z]+|\d+) months?\b[^.]*\./gi;
+/**
+ * The stores sentence `foodStoresWords` writes, in its granary forms: the span is read whole and
+ * turned back into months (`monthsOfSpan`), in every unit the writer prints (R2-CODE-B item 3:
+ * `tonightSheet.js :: storesSpanWords` speaks days and weeks under a month; "a few weeks" is the
+ * older form, still read for a page written before it).
+ */
+const STORES_LINE = /Stores: a granary(?:,| of) (a few weeks|(?:about |less than )?(?:a|[a-z]+|\d+) (?:months?|weeks?|days?))\b[^.]*\./gi;
 /** The words that say the stores are held back, not in hand. */
 const HELD = /\bwill not open\b|\bwithh(?:eld|olds?)\b|\bhoard/i;
 /** The months a famine's stores line may print without saying they are held. */
@@ -96,13 +101,18 @@ export const FAMINE_STORES_HELD_MONTHS = 6;
 /** The months 'a few weeks' reads back as (ODQ §934.105). */
 const FEW_WEEKS_AS_MONTHS = 0.5;
 
-/** @param {string} w @returns {number} */
-function monthsOfWord(w) {
-  const lower = w.toLowerCase();
-  if (lower === 'about a month') return 1;
+/** The months one of each unit the stores line speaks in is worth (the writer's own days per month). */
+const UNIT_MONTHS = Object.freeze({ month: 1, week: 7 / DAYS_PER_MONTH, day: 1 / DAYS_PER_MONTH });
+
+/** @param {string} span the stores line's span ("six months", "about a month", "about three days") @returns {number} */
+function monthsOfSpan(span) {
+  const lower = span.toLowerCase();
   if (lower === 'a few weeks') return FEW_WEEKS_AS_MONTHS;
-  const at = NUMBER_WORDS.indexOf(lower);
-  return at >= 0 ? at : Number(lower);
+  const m = lower.match(/^(?:about |less than )?(\S+) (month|week|day)s?$/);
+  if (!m) return NaN;
+  const at = NUMBER_WORDS.indexOf(m[1]);
+  const n = m[1] === 'a' ? 1 : at >= 0 ? at : Number(m[1]);
+  return n * UNIT_MONTHS[/** @type {'month'|'week'|'day'} */ (m[2])];
 }
 
 /**
@@ -117,7 +127,7 @@ export function famineStoresFindings(settlement, text) {
   /** @type {CrisisFactFinding[]} */
   const out = [];
   for (const m of str(text).matchAll(STORES_LINE)) {
-    const months = monthsOfWord(m[1]);
+    const months = monthsOfSpan(m[1]);
     if (!(months >= FAMINE_STORES_HELD_MONTHS) || HELD.test(m[0])) continue;
     out.push({ quote: m[0], detail: `active famine; the line prints ${months} months in hand (record ${/** @type {{ storageMonths?: unknown }} */ (record).storageMonths})` });
   }
