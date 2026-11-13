@@ -810,21 +810,24 @@ const UPKEEP_CRISIS = Object.freeze(['famine', 'under_siege']);
 
 /**
  * One declared crisis set (`stressNarrative.js`' idiom): the original declares the crisis
- * disjunction on the crisis dimension; its twin excludes it as one atom.
- * @param {string} text @param {ReadonlyArray<string>} kinds @param {string} twin
+ * disjunction on the crisis dimension; its twin excludes it as one atom. `shared`: the atoms both
+ * lines name, which both declare (the complement rule, narrowed: COHERENCE-AGREE-6, fd10c7dc6).
+ * @param {string} text @param {ReadonlyArray<string>} kinds @param {string} twin @param {string[]} [shared]
  */
-const crisisSet = (text, kinds, twin) => Object.freeze([
-  Object.freeze({ text, needs: Object.freeze([]), crisis: Object.freeze([...kinds]) }),
-  Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze([`crisis: ${kinds.join(', ')}`]) }),
+const crisisSet = (text, kinds, twin, shared = []) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze([...shared]), crisis: Object.freeze([...kinds]) }),
+  Object.freeze({ text: twin, twinOf: text, needs: Object.freeze([...shared]), excludes: Object.freeze([`crisis: ${kinds.join(', ')}`]) }),
 ]);
 
 /**
  * One declared sibling set: the original, `needs` its atoms; its twin (when the slot needs one)
- * `excludes` them. @param {string} text @param {string[]} needs @param {string} [twin]
+ * `excludes` them. `shared`: the atoms both lines name, which both NEED; the pair stays keyed on
+ * `needs` alone (the complement rule, narrowed: COHERENCE-AGREE-6, fd10c7dc6).
+ * @param {string} text @param {string[]} needs @param {string} [twin] @param {string[]} [shared]
  */
-const declaredSet = (text, needs, twin) => Object.freeze([
-  Object.freeze({ text, needs: Object.freeze(needs) }),
-  ...(twin === undefined ? [] : [Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(needs) })]),
+const declaredSet = (text, needs, twin, shared = []) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze([...needs, ...shared]) }),
+  ...(twin === undefined ? [] : [Object.freeze({ text: twin, twinOf: text, ...(shared.length ? { needs: Object.freeze([...shared]) } : {}), excludes: Object.freeze(needs) })]),
 ]);
 
 /**
@@ -895,15 +898,18 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   // `prosperity` atom (`prosperity: ≥ moderate` is `keepOf().bought` ≥ 0.6); each twin is today's
   // line. The hired company, the garrison and the charter hall each line names are the branch's own
   // guarantee (`keptGuardLine` reads them off the defence home), so a twin excludes the purse alone.
+  // The hired company (`mercenary`) and the garrison a pair BOTH name, both declare (the chair's
+  // ruling P6 of 2026-11-12, the complement rule narrowed in fd10c7dc6): the branch guarantees
+  // them, so the declaration moves no line.
   'There is no standing guard; a hired company is paid to keep the peace, and gives what it is paid for.': declaredSet(
     'There is no standing guard; a hired company is paid to keep the peace, and gives what it is paid for.', ['prosperity: ≥ moderate'],
-    'A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.'),
+    'A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.', ['mercenary']),
   'A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.': declaredSet(
     'A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.', ['prosperity: ≤ poor'],
-    'A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.'),
+    'A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.', ['mercenary']),
   'Hired swords back the garrison when the purse allows.': declaredSet(
     'Hired swords back the garrison when the purse allows.', ['prosperity: ≤ comfortable'],
-    'Hired swords back the garrison.'),
+    'Hired swords back the garrison.', ['garrison']),
   "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.": declaredSet(
     "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.", ['prosperity: ≤ comfortable'],
     "The adventurers' charter hall coordinates emergency response to threats."),
@@ -913,10 +919,10 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   // label; its twin is the purse line itself, which then resolves through its own set above.
   'A hired company is on the books, paid from what the hunger leaves; it comes when called and leaves when the coin does.': crisisSet(
     'A hired company is on the books, paid from what the hunger leaves; it comes when called and leaves when the coin does.', UPKEEP_CRISIS,
-    'A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.'),
+    'A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.', ['mercenary']),
   'Hired swords back the garrison, paid from what the hunger leaves.': crisisSet(
     'Hired swords back the garrison, paid from what the hunger leaves.', UPKEEP_CRISIS,
-    'Hired swords back the garrison when the purse allows.'),
+    'Hired swords back the garrison when the purse allows.', ['garrison']),
   "The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.": crisisSet(
     "The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.", UPKEEP_CRISIS,
     "The adventurers' charter hall takes bounty work against threats, as far as the purse runs."),
@@ -997,8 +1003,11 @@ export const NO_WATCH_SMALL = Object.freeze([ // exported for the no-watch pin (
 // ─── COHERENCE-UPKEEP: the hired force's lines, after prosperity ─────────────
 // ⚠ AT THE END OF THE FILE for the same reason as the frames above (LINE citations).
 
-/** Today's leads the upkeep lines stand in for (each is its declared line's twin). */
-const MERCENARY_LEAD = 'A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.';
+/**
+ * Today's leads the upkeep lines stand in for (each is its declared line's twin). The mercenary lead
+ * is read off its declared set, where it declares the hired company it names (P6), not spelled again.
+ */
+const MERCENARY_LEAD = SAFETY_LINE_SIBLINGS['There is no standing guard; a hired company is paid to keep the peace, and gives what it is paid for.'][1].text;
 const CHARTER_LEAD = "The adventurers' charter hall coordinates emergency response to threats.";
 
 /**
