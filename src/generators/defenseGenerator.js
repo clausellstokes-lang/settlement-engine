@@ -12,7 +12,8 @@
  * number of scores the world has. Groups: BUILT (what stands), STANDS (who defends), SUSTAINS (what
  * keeps the force going), GROUND (the place itself, its size and its dangers), AGAINST (crime),
  * and LIMIT (the rules that hold a part, and each score's fullness). The parts are listed with
- * their points rounded to tenths, and the tenths sum EXACTLY to `readiness.score`.
+ * their points rounded to tenths, and the tenths sum EXACTLY to `readiness.score`, which is in whole
+ * points, the figure the page prints (a LIMIT line carries the rounding; COHERENCE-UPKEEP-6).
  *
  * ONE SCALE, ONE LABEL. Pay reads `keep`, the STANDING label's keep (`keepOfRecord`, the label with
  * no crisis in force, R3): paid parts keep `floor + (1 - floor) × funded` per score, bought parts
@@ -454,7 +455,12 @@ const listOf = (r) => {
   }
   if (r.raw > 100) rows.push({ exact: r.total - r.raw, line: lineOf('scaleTop', 'LIMIT') });
   if (r.raw < 0) rows.push({ exact: r.total - r.raw, line: lineOf('scaleBottom', 'LIMIT') });
-  const target = Math.round(r.total * 10);
+  // The score is the figure the page prints: whole points, the exact sum rounded once (COHERENCE-UPKEEP-6, the
+  // chair's ruling on the fifth seat's call 1: the band is read from the score as the page shows it). The
+  // rounding is its own line, so every part keeps its own measure and the tenths still sum to the score.
+  const score = Math.round(r.total);
+  if (score !== r.total) rows.push({ exact: score - r.total, line: lineOf('rounding', 'LIMIT') });
+  const target = score * 10;
   const shares = apportionTenths(rows.map((x) => x.exact), target);
   return { list: rows.map((x, i) => ({ ...x.line, points: shares[i] / 10 })), score: target / 10 };
 };

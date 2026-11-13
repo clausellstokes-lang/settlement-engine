@@ -159,5 +159,6 @@ export const DEFENCE_WORDS = Object.freeze({
   floor: { label: 'below nothing, brought to nothing', source: 'rule (fullness)' },
   scaleTop: { label: 'Readiness full', source: 'rule (the scale\'s top)' },
   scaleBottom: { label: 'Readiness at nothing', source: 'rule (the scale\'s bottom)' },
+  rounding: { label: 'Rounded to the whole point the page prints', source: 'rule (the printed figure)' },
   scores: { mil: 'Military', mon: 'Beasts', int: 'Order', sup: 'Supply', mag: 'Magic' },
 });

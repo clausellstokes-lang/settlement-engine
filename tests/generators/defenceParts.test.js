@@ -13,6 +13,7 @@ import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js
 import { neighbourMilitaryFactorOf } from '../../src/generators/priorityHelpers.js';
 import { keepOfRecord } from '../../src/domain/facts/keep.js';
 import { readinessBandOf } from '../../src/data/bandLadders.js';
+import { deriveCausalState } from '../../src/domain/causalState.js';
 import { DEFENCE_TUNING, DEFENCE_WEIGHT_REASONS, DEFENCE_WORDS } from '../../src/data/defenceWeights.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -96,6 +97,23 @@ describe('defence is the sum of its parts', () => {
         expect(scores[k], `${key} ${k}`).toBeLessThanOrEqual(100);
       }
     }
+  });
+
+  // COHERENCE-UPKEEP-6 (the chair's ruling on the fifth seat's call 1): the band is read from the score AS
+  // THE PAGE SHOWS IT. The page prints readiness in whole points (the causal contributor's sentence), so the
+  // score is whole points and the band is the ladder's for that figure: a number and its band never disagree.
+  test('the score is the figure the page prints, in whole points, and its band is the ladder\'s for that figure', () => {
+    const bad = [];
+    for (const [key, s] of Object.entries(births)) {
+      const { readiness } = s.defenseProfile;
+      const said = deriveCausalState(s).variables.defense_readiness.contributors
+        .find((c) => c.source === 'defenseProfile.readiness.score')?.reason;
+      const printed = Number(/Defense readiness score: (\d+)\./.exec(String(said))?.[1]);
+      if (!Number.isInteger(readiness.score) || printed !== readiness.score || readinessBandOf(printed).label !== readiness.label) {
+        bad.push([key, readiness.score, printed, readiness.label]);
+      }
+    }
+    expect(bad).toEqual([]);
   });
 
   test('a crisis acts once, on the parts it touches: every forced siege, famine and occupation takes from a part', () => {
