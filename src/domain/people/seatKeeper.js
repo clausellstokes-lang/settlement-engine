@@ -63,6 +63,20 @@ export function keeperHonorificOf(card, settlement) {
 }
 
 /**
+ * THE KEEPER'S WORDS (COHERENCE-POWERS-5, N7; REVIEW-POWERS-2 at e86d069be): the caretaker's form the seat row prints
+ * before the keeper's name — "Acting Burgomaster" for a dual-hat keeper (its office in the caretaker's form), else its
+ * title's honorific in that form ("Regent", "Acting Steward") — so the DM block's label and the seat row agree; '' where
+ * the seat is held or the keeper has neither.
+ * @param {unknown} settlement @returns {string}
+ */
+export function keeperFormOf(settlement) {
+  const keeper = seatKeeperOf(settlement);
+  if (!keeper) return '';
+  const office = cardOfficeOf(keeper);
+  return office ? caretakerFormOf(office, governmentOf(settlement)) : keeperHonorificOf(keeper, settlement);
+}
+
+/**
  * The seat row's keeper sentence: "Acting Burgomaster Tserenpuntsag Barlas, the senior guild master, keeps the seat
  * meanwhile." / "Regent Biljana Nikolić keeps the seat meanwhile."; '' where the seat is held or no one keeps it.
  * @param {unknown} settlement @returns {string}
@@ -70,12 +84,11 @@ export function keeperHonorificOf(card, settlement) {
 export function seatKeeperLineOf(settlement) {
   const keeper = seatKeeperOf(settlement);
   if (!keeper) return '';
-  const office = cardOfficeOf(keeper);
-  if (office) {
+  const form = keeperFormOf(settlement);
+  if (cardOfficeOf(keeper)) {
     const title = String(keeper.title || '');
     const named = title && !String(keeper.name).includes(`(${title})`) ? `${keeper.name}, ${title},` : String(keeper.name);
-    return `${caretakerFormOf(office, governmentOf(settlement))} ${named} keeps the seat meanwhile.`;
+    return `${form} ${named} keeps the seat meanwhile.`;
   }
-  const honorific = keeperHonorificOf(keeper, settlement);
-  return `${honorific ? `${honorific} ` : ''}${keeper.name} keeps the seat meanwhile.`;
+  return `${form ? `${form} ` : ''}${keeper.name} keeps the seat meanwhile.`;
 }

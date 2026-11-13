@@ -10,7 +10,9 @@
  * N6 — the holder's own house's Connection row names the office the holder holds, as the seat row does (the review:
  * "Connection: Headman Cosij Chan" on the Fishing community, "Elder Cosij Chan, the boat-headman" two rows down).
  *
- * N7 — the seat row never doubles an office word ("the boat-headman and Headman", "the priest and Elder Priest").
+ * N7 — the seat row never doubles an office word ("the boat-headman and Headman", "the priest and Elder Priest"); and the
+ * keeper of an empty seat has one title on the tab: the DM block's label is the seat row's caretaker form ("Acting
+ * Household Elder Asuka Yang … keeps the seat meanwhile" beside "Steward · Asuka Yang").
  *
  * Births through birthConfig with the census's dials (DEFAULT_CONFIG and the browser's random dials, the review's own
  * seeds); the Power tab rendered as the DM reads it.
@@ -94,6 +96,20 @@ function n7MissesOf(s, key) {
   return out;
 }
 
+/** N7's keeper: the DM block labels the keeper with the words the seat row prints before the keeper's name. */
+function keeperMissesOf(s, key) {
+  const line = rulingChainOf(s).absence?.line || '';
+  const m = line.match(/(?:\.|^) ?([^.]*?) keeps the seat meanwhile\.$/);
+  if (!m) return [];
+  const c = powerTab(s);
+  const rows = [...c.querySelectorAll('[data-testid="dm-ruling-face"]')].map((r) => (r.textContent || '').trim());
+  cleanup();
+  const row = rows.find((t) => /^[^·]+ · /.test(t) && m[1].includes(t.split(' · ')[1].split(',')[0]));
+  if (!row) return [`${key}: no DM row for the keeper of "${m[1]}"`];
+  const label = row.split(' · ')[0];
+  return m[1].startsWith(`${label} `) ? [] : [`${key}: the DM block labels the keeper "${label}", the seat row "${m[1]}"`];
+}
+
 describe('COHERENCE-POWERS-5 — the seat\'s words on the page (REVIEW-POWERS-2 N5–N7)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
 
@@ -135,6 +151,18 @@ describe('COHERENCE-POWERS-5 — the seat\'s words on the page (REVIEW-POWERS-2 
       for (let i = 0; i < 8; i++) misses.push(...n7MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
       for (const x of CRISES) misses.push(...n7MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
     }
+    expect(misses).toEqual([]);
+  }, 900_000);
+
+  it('N7: the review\'s towns — the keeper of the empty seat has one title on the tab', () => {
+    const misses = [];
+    for (const seed of ['r2s-succession_void-thorp-0', 'r2s-succession_void-town-0', 'r2r-village-56']) misses.push(...keeperMissesOf(born(seed), seed));
+    expect(misses).toEqual([]);
+  }, 120_000);
+
+  it('N7: every succession at every size — the DM block labels the keeper in the seat row\'s caretaker form', () => {
+    const misses = [];
+    for (const t of TIERS) for (let i = 0; i < 4; i++) misses.push(...keeperMissesOf(born(`r2s-succession_void-${t}-${i}`), `r2s-succession_void-${t}-${i}`));
     expect(misses).toEqual([]);
   }, 900_000);
 });

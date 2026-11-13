@@ -28,7 +28,7 @@ export function WhoRunsThisTown({ dm }) {
         {dm.rulingThree.map((f) => (
           <View key={f.id} wrap={false}>
             <Text style={rowStyle}>
-              {`${PLACE[f.rank]} · ${f.name}${f.title ? `, ${f.title}` : ''}`}
+              {`${f.place || PLACE[f.rank]} · ${f.name}${f.title ? `, ${f.title}` : ''}`}
               {f.openPowers.length ? ` · also ${f.openPowers.map((m) => (m.rank ? `${RANK_WORD[m.rank]} in ${m.powerName}` : `in ${m.powerName}`)).join(', ')}` : ''}
               {f.answersTo ? ` · answers to ${f.answersTo.guild}${f.answersTo.handler ? ` through ${f.answersTo.handler}` : ''}` : ''}
             </Text>

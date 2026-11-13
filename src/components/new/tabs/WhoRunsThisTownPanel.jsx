@@ -53,7 +53,7 @@ export default function WhoRunsThisTownPanel({ settlement }) {
       {view.rulingThree.map((f) => (
         <div key={f.id} data-testid="dm-ruling-face">
           <div style={row}>
-            <strong>{PLACE[f.rank]}</strong>{' · '}<Face face={f} />{f.title ? `, ${f.title}` : ''}
+            <strong>{f.place || PLACE[f.rank]}</strong>{' · '}<Face face={f} />{f.title ? `, ${f.title}` : ''}
             {f.openPowers.length > 0 && <span style={{ color: MUTED }}>{` · also ${f.openPowers.map((m) => (m.rank ? `${RANK_WORD[m.rank]} in ${m.powerName}` : `in ${m.powerName}`)).join(', ')}`}</span>}
             {f.answersTo && <span>{` · answers to ${f.answersTo.guild}${f.answersTo.handler ? ` through ${f.answersTo.handler}` : ''}`}</span>}
           </div>
