@@ -61,8 +61,8 @@
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 185143,
-      "gzip": 25938,
+      "raw": 185880,
+      "gzip": 26025,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
@@ -803,6 +803,14 @@
       "toRaw": 296009,
       "gzipAfter": 37833,
       "reason": "+1212 B raw over the committed 294797 (gzip level 9: 37711 -> 37833): the NO-MARKET pool declared off a siege (no crisis: under_siege on its three lines) and three siege lines for the case it empties (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE-4 item 2",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 185251,
+      "toRaw": 185880,
+      "gzipAfter": 26025,
+      "reason": "+737 B raw over the committed 185143 (gzip level 9: 25938 -> 26025): DS-ECO-9 SECURE v3 (fed, but only just) declared off a year of stores (stores: < 12); two lines for the case (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
