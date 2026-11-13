@@ -334,16 +334,15 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const foodEndurance = foodEnduranceLine(r);
   const defViolations = deriveDefenseVulnerabilities(r);
 
-  // Force card component
+  // Force card component. ⛔ NO PROVENANCE BADGE (R3-TABS, the chair's ruling b1, 2026-11-13): the
+  // card printed "REQ" for a 'required' source and "FORCED" for every other source but 'generated'
+  // ('coherence_repair', 'cascade', 'faction_boost', 'forced'), so a wall the coherence pass raised
+  // read as forced by the user. Both are the generator's provenance, which the page never shows; the
+  // Institutions tab's badge says who put a house there.
   const ForceCard = ({inst:i,accent}) => (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${accent||'#6b5340'}`,padding:'9px 12px',marginBottom:6}}>
-      <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
-        <div style={{flex:1}}>
-          <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
-          {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
-        </div>
-        {i.source&&i.source!=='generated'&&<span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
-      </div>
+      <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
+      {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
     </div>
   );
 
