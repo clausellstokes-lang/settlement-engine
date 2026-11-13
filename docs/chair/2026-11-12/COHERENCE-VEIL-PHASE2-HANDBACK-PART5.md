@@ -121,3 +121,9 @@ The five suites use it. The walker `tests/lint/fixtureGitIsolation.walker.test.j
 | eslint on the 8 files | exit 0 |
 
 **The push.** The whole check is run by hand first (`sh scripts/gate-tail.sh npm run check`). Then `git for-each-ref` and `git config --local --list` are snapshotted, the lane is pushed once, and both are compared. Anything moved means restore and stop.
+
+**The first hand check (at `a4884b7aa`) exited 1, with two reds, both from the cure's own new file.** Refs and local config were byte-identical before and after that run, so the leak stayed closed under the whole check.
+- `contractTestAntiVacuity` Rule 3 flagged `fixtureGitIsolation.walker.test.js:74` (`SPAWNS && BUILDS_REPO over src`). There `src` is a whole file's text, never a line; the file's one `.split('\n')` only numbered a call's line, and Rule 3 reads that split as a per-line probe. Cured in `b5fc38c2d`: the line is counted from the newlines before the call. No regex widened, no exemption. Red 1 failed / 14 passed; green, exit 0.
+- `sovereigntyLightingContract`'s census: files expected 3203 to be 3202. Re-measured through the register's door (`LIGHTING_CENSUS_REFREEZE`, clean tree, at `b5fc38c2d`) in `a4e1751f3`: files 3202 → 3203, credited 2804 → 2805, titles 29110 → 29119, suites 7867 → 7868, parked 398 unchanged. The walker is one file, five titles and one suite; the V3 pins are four titles. The plain re-run exits 0.
+
+The second hand check runs at this section's commit, which is the tip pushed.
