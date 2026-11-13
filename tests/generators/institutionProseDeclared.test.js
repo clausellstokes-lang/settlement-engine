@@ -30,10 +30,11 @@ describe('the institution descriptions declare by text (CENSUS-4c unit 5)', () =
   const rows = ledger('institutionDescVariants.INSTITUTION_DESC_VARIANTS').rows.filter(declares);
   it('the column is the ledger\'s declaring rows less the three waiting on order', () => {
     // COHERENCE-PRESUME (2026-11-11): the town bowyers' line #0 reworded to presume no militia, so it declares nothing (65 → 64, 62 → 61)
-    expect(rows).toHaveLength(64);
+    // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): eleven variant texts read false now declare what makes them false (alehouse, port, bank, famine, metropolis, navigable water) and carry a twin in DESC_VARIANT_SIBLINGS (64 → 75, 61 → 72)
+    expect(rows).toHaveLength(75);
     const cols = /** @type {Record<string, any>} */ (D.DESC_VARIANT_DECLARATIONS);
     const want = rows.filter((/** @type {any} */ r) => !WAITING_ON_ORDER.includes(r.id));
-    expect(Object.keys(cols)).toHaveLength(61);
+    expect(Object.keys(cols)).toHaveLength(72);
     for (const r of want) {
       expect({ id: r.id, ...shape(V.declarationOf(cols[r.text])) }).toEqual({ id: r.id, needs: r.needs, excludes: r.excludes, crisis: r.crisis });
     }

@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 908,
-    "printOneLine": 677,
-    "measuredUnder30Draws": 143,
+    "pools": 923,
+    "printOneLine": 678,
+    "measuredUnder30Draws": 145,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction",
@@ -5598,6 +5598,96 @@
       "top1": 0.6833,
       "top5": 1,
       "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Defense|Mercenary quarter": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Economy|Customs house": {
+      "top1": 0.6992,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Economy|Fish market": {
+      "top1": 0.5455,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Economy|Pawnbroker": {
+      "top1": 0.3289,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:hamlet|Crafts|Maltster": {
+      "top1": 0.7143,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Defense|Mercenary quarter": {
+      "top1": 0.384,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Economy|Customs house": {
+      "top1": 0.7265,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Economy|Fish market": {
+      "top1": 0.5778,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Economy|Pawnbroker": {
+      "top1": 0.3674,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Defense|Town watch": {
+      "top1": 0.3672,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Economy|Customs house": {
+      "top1": 0.8077,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Economy|Fish market": {
+      "top1": 0.5847,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Economy|Pawnbroker": {
+      "top1": 0.9028,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Economy|Town granary": {
+      "top1": 0.3586,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:village|Crafts|Maltster": {
+      "top1": 0.8,
+      "top5": 1,
+      "lines": 4,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }

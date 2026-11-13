@@ -728,7 +728,9 @@
     {
       "id": "hamlet|Crafts|Maltster#0",
       "text": "Turns barley into malt for the brewers. A small concern feeding the local alehouses, and one that only runs when grain is in surplus.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -737,7 +739,9 @@
     {
       "id": "hamlet|Crafts|Maltster#1",
       "text": "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -2068,18 +2072,26 @@
     {
       "id": "town|Economy|Fish market#0",
       "text": "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.",
-      "needs": [],
+      "needs": [
+        "navigable",
+        "market"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Fish market#1",
       "text": "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.",
-      "needs": [],
+      "needs": [
+        "navigable",
+        "market"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Charcoal burner#0",
@@ -2218,7 +2230,9 @@
     {
       "id": "town|Economy|Pawnbroker#0",
       "text": "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.",
-      "needs": [],
+      "needs": [
+        "institution: bank"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -2227,7 +2241,9 @@
     {
       "id": "town|Economy|Pawnbroker#1",
       "text": "High-interest loans against pledged goods, with no questions. For labourers, journeymen, and anyone the banks will not serve, it is the only lender.",
-      "needs": [],
+      "needs": [
+        "institution: bank"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -2439,26 +2455,35 @@
     {
       "id": "town|Economy|Customs house#0",
       "text": "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
-      "needs": [],
+      "needs": [
+        "institution: docks"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Customs house#1",
       "text": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
-      "needs": [],
+      "needs": [
+        "institution: docks"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Town granary#0",
       "text": "Shared grain stores that even out the harvests and hold off famine.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: famine"
+      ],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Town granary#1",
@@ -4327,7 +4352,9 @@
       "needs": [
         "walls"
       ],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -4660,18 +4687,26 @@
     {
       "id": "city|Defense|Mercenary quarter#0",
       "text": "Sellsword companies under proper organisation, mustering hundreds to thousands.",
-      "needs": [],
+      "needs": [
+        "tier: = metropolis",
+        "mercenary"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "city|Defense|Mercenary quarter#1",
       "text": "Organised bands of hired blades. Major forces, hundreds to thousands strong.",
-      "needs": [],
+      "needs": [
+        "tier: = metropolis",
+        "mercenary"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "city|Magic|Wizard's tower#0",

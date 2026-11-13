@@ -1324,11 +1324,6 @@
     "A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new"
    ],
    [
-    "famine",
-    "word",
-    "Shared grain stores that even out the harvests and hold off famine."
-   ],
-   [
     "siege",
     "word",
     "An innermost stronghold, the city's final hold under siege."
@@ -1609,11 +1604,6 @@
    [
     "market",
     "carrier",
-    "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and ins"
-   ],
-   [
-    "market",
-    "carrier",
     "Multiple market squares"
    ],
    [
@@ -1670,11 +1660,6 @@
     "quarters",
     "word",
     "At city scale drink and lodging share one district row."
-   ],
-   [
-    "famine",
-    "word",
-    "Communal grain storage. Buffers harvests, prevents famine."
    ],
    [
     "quarters",

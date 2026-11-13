@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
-import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
+import { DESC_VARIANT_SIBLINGS, INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
 import { INLAND_DESCRIPTIONS } from '../../src/data/inlandDescriptions.js';
 import { HISTORY_DESC_VARIANTS } from '../../src/data/historyDescVariants.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
@@ -111,7 +111,9 @@ describe('institution desc variety at generation (draw-free fnv select)', () => 
         // whole pool speaks of water takes the row's authored inland text (src/data/inlandDescriptions.js).
         const noun = tierNounFor(s.tier);
         const inland = INLAND_DESCRIPTIONS[key];
-        const pool = [...canonsFor(inst.category, inst.name), ...variants, ...(inland ? [inland] : [])]
+        const drawn = [...canonsFor(inst.category, inst.name), ...variants, ...(inland ? [inland] : [])];
+        // W2-FIX-DATA (2026-11-13): a member the record refuses resolves to its declared twin (DESC_VARIANT_SIBLINGS), an authored line of the same pool
+        const pool = [...drawn, ...drawn.flatMap((t) => (DESC_VARIANT_SIBLINGS[t] || []).filter((l) => l.twinOf === t).map((l) => l.text))]
           .map((line) => speakTierNoun(line, noun));
         expect(pool, `${key} desc from its pool`).toContain(inst.desc);
       }
