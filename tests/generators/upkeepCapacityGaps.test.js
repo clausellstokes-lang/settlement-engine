@@ -20,7 +20,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** @type {Record<string, any>} */
 const births = {};
-const KEYS = ['cold-city-227', 'fresh6-metropolis-30', 'cold-thorp-191', 'fresh6-thorp-52', 'cold-thorp-16', 'cold-hamlet-123', 'cold-thorp-20', 'cold-famine-village-24'];
+const KEYS = ['cold-city-227', 'fresh6-metropolis-30', 'cold-thorp-191', 'fresh6-thorp-52', 'cold-thorp-16', 'cold-hamlet-123', 'cold-thorp-20', 'cold-famine-village-24', 'cold-wartime-town-75'];
 const CITIES = ['cold-city-227', 'fresh6-metropolis-30'];
 
 /** @param {string} key */
@@ -161,5 +161,31 @@ describe('G4 (C5): the druid houses are one function at two scales (the catalogu
     expect(circle).not.toBeNull();
     expect(council).not.toBeNull();
     expect(council.full / circle.full).toBeCloseTo(greatest / least, 1);
+  });
+});
+
+describe('G5 (C6): the alchemist\'s shop and quarter are a trade, not retained casters', () => {
+  test('RED-FIRST: a town whose only such house is an alchemist\'s shop has no arcane part and no arcane tradition, and keeps its alchemists and its magic', () => {
+    const s = births['cold-wartime-town-75'];
+    expect(s.institutions.some((i) => i.name === 'Alchemist shop')).toBe(true);
+    expect(partOf(s, 'arcane')).toBeNull();
+    expect(s.defenseProfile.traditions.hasArcane).toBe(false);
+    expect(partOf(s, 'alchemists')).not.toBeNull();
+    expect(partOf(s, 'magic')).not.toBeNull();
+  });
+
+  test('RED-FIRST: the stored "Arcane defense" list holds no alchemist\'s house, and still holds a wizard\'s', () => {
+    const roster = [{ name: 'Alchemist shop' }, { name: 'Alchemist quarter' }, { name: "Wizard's tower" }];
+    const names = partitionDefenseInstitutions(roster).magicDef.map((i) => /** @type {any} */ (i).name);
+    expectAbsentWithAnchor(names, 'Alchemist shop', "Wizard's tower", 'magicDef');
+    expectAbsentWithAnchor(names, 'Alchemist quarter', "Wizard's tower", 'magicDef');
+    const g = births['cold-wartime-town-75'].defenseProfile.institutions.magicDef.map((i) => i.name);
+    expect(g).toEqual([]);
+  });
+
+  test('a wizard\'s house still opens the arcane part beside an alchemist\'s', () => {
+    const s = births['cold-wartime-town-75'];
+    const withTower = { ...s, institutions: [...s.institutions, { name: "Wizard's tower" }] };
+    expect(partOf(withTower, 'arcane')).not.toBeNull();
   });
 });

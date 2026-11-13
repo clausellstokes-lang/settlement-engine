@@ -242,7 +242,10 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
   const names = defenseTraditionNamesOf(housedOf(institutions));
   const G = W.traditionGates;
   const t = {
-    hasArcane: magicOn && magPri >= G.arcane && (inst.hasMagicInst || names.arcane),
+    // UPKEEP-CAPACITY C6 (the chair's G5): the alchemist's shop and quarter are a trade, not retained casters, so the
+    // arcane opener is the roster's casters alone (the defence home's `arcane` names, which hold every magic house of the
+    // roster flags but the alchemist's); `hasMagicInst` itself is unchanged (other generators read it).
+    hasArcane: magicOn && magPri >= G.arcane && names.arcane,
     hasArcaneGuild: magicOn && magPri >= G.arcaneGuild && names.arcaneGuild,
     hasDivine: magicOn && relPri >= G.divine && (names.divine || (relPri >= G.divineShrine && names.divineShrine)),
     hasDivineStrong: magicOn && relPri >= G.divineStrong && names.divineStrong,

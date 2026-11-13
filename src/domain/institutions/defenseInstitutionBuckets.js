@@ -105,7 +105,7 @@ export const DEFENSE_BUCKET_KEYWORDS = Object.freeze({
   ]),
   magicDef: Object.freeze([
     'wizard', "mages' guild", 'mage', 'academy of magic',
-    'golem workforce', 'alchemist',
+    'golem workforce', // UPKEEP-CAPACITY C6 (the chair's G5): the alchemist's shop and quarter are a trade
   ]),
 });
 
@@ -202,7 +202,7 @@ export function standingDefenseForces(settlement) {
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const DEFENSE_TRADITION_KEYWORDS = Object.freeze({
-  arcane: Object.freeze(['wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', "mages' district"]),
+  arcane: Object.freeze(['wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic', "mages' district", 'mage', 'scroll scribe']), // UPKEEP-CAPACITY C6 (G5): the casters, with no alchemist
   arcaneGuild: Object.freeze(["mages' guild", "wizard's tower", 'arcane academy', "mages' district", 'academy of magic']),
   divine: Object.freeze(['cathedral', 'monastery', 'great cathedral', 'parish church']),
   divineShrine: Object.freeze(['temple', 'friary']), // UPKEEP-CAPACITY C4b (the chair's G3s): a wayside shrine has no clergy

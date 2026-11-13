@@ -38,8 +38,11 @@ const TWO_ROLES = {
   "wizard's tower": { arcane: ['military', 'monster', 'internal'], magic: ['magical'] },
   "mages' guild": { arcane: ['military', 'monster', 'internal'], magic: ['magical'] },
   'hedge wizard': { arcane: ['military', 'monster', 'internal'], magic: ['magical'] },
-  'alchemist shop': { arcane: ['military', 'monster', 'internal'], alchemists: ['economic'], magic: ['magical'] },
-  'alchemist quarter': { arcane: ['military', 'monster', 'internal'], alchemists: ['economic'], magic: ['magical'] },
+  // UPKEEP-CAPACITY C6: a magic house in the same two roles, seen once the alchemist no longer opens the arcane part beside it.
+  'scroll scribe': { arcane: ['military', 'monster', 'internal'], magic: ['magical'] },
+  // UPKEEP-CAPACITY C6 (the chair's G5): the alchemist's shop and quarter are a trade; they open no arcane part.
+  'alchemist shop': { alchemists: ['economic'], magic: ['magical'] },
+  'alchemist quarter': { alchemists: ['economic'], magic: ['magical'] },
   'apothecary district': { alchemists: ['economic'], magic: ['magical'] },
   'elder grove council': { druids: ['monster'], magic: ['magical'] },
   'druid circle': { druids: ['monster'], magic: ['magical'] },

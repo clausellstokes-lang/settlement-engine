@@ -43,7 +43,8 @@ describe('partitionDefenseInstitutions — one name reading per institution per 
     expect(buckets.garrison).toEqual([roster[7]]);
     expect(buckets.watch).toEqual([roster[0]]);
     expect(buckets.militia).toEqual([roster[4]]);
-    expect(buckets.magicDef).toEqual([roster[3]]);
+    // UPKEEP-CAPACITY C6 (the chair's G5): an alchemist is a trade, not arcane defence; the roster holds no other magic house.
+    expect(buckets.magicDef).toEqual([]);
     expect(buckets.mercenary).toEqual([]);
     expect(buckets.charter).toEqual([]);
     expect(buckets.garrison[0]).toBe(roster[7]);

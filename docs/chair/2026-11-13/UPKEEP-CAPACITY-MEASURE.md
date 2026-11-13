@@ -673,3 +673,51 @@ The hand-back's order: the defence lane's seventh seat edits `defenseInstitution
 - Beasts moves in 69 (±3; 2 bands up); supply 24 and magic 24 through limit 1 (2 bands each); military 2; order 0.
 - **5 power structures re-drawn, each with a band move; no power appears or vanishes.** No AI threat; magic against the page 0. Outside defence and powers: 5 records, the same five whose power structure is re-drawn.
 - **Golden corpus: 0 of 525 rows move.**
+
+## M2. The defence lane's tip merged again before C6 (fbc4a0080)
+
+The hand-back's order (C6 edits the buckets file again). The tip had moved by five commits: the seventh seat's two cures (the safety profile names only a force that stands; the PDF's forces carry no "REQ" or "FORCED" badge) and its hand-back, and an eighth seat's two (the income lines say only what the finished record holds, a declared move of that family; the income family's census lines). **No conflict**; none touches the buckets file. (It moved twice while this seat worked: a scratch merge of 995293e81 was measured first and is kept, `move-M2-995293e81.txt`.)
+
+**Its move on the corpus** (`move-M2.txt`): **2,984 records differ, all outside the defence profile and the powers** (the eighth seat's income lines, and the safety profile's force lines); readiness, the five scores, the parts and the powers: 0. **Golden corpus: 476 of 525 records move, none in the defence profile or the powers** (the defence lane's own declared move of the income family; measured only).
+
+## C6. G5: the alchemist's shop and quarter are a trade, not retained casters
+
+**Built:**
+- **The arcane opener** reads the defence home's arcane names alone: `DEFENSE_TRADITION_KEYWORDS.arcane` gains 'mage' and 'scroll scribe', so it holds every magic house the roster flags hold (`hasMagicInst`) but the alchemist's shop and quarter. `hasMagicInst` itself is unchanged: other generators read it, and so does the small place's magic gate. The arcane crisis reliefs follow `t.hasArcane`. (A first cut read the caster houses in the generator; `defenceDerived.walker` reds a name test outside the home, so it moved to the home. Re-measured: the same 3,756 records.)
+- **The page's "Arcane defense" list:** 'alchemist' out of `DEFENSE_BUCKET_KEYWORDS.magicDef` (its line kept, the note on it, so the holder table's line citations hold).
+- **Kept:** the alchemists part and its reliefs (`names.alchemy`) and the magic presence (the small place's magic gate still reads `hasMagicInst`). The apothecary's houses are not opened.
+- **Not touched, as ruled:** `magicReliance.js :: magicPractitioners` and `defenseDisplay.js`.
+- Red first: `upkeepCapacityGaps.test.js`, two tests red at M2 (a town whose only such house is an alchemist's shop had an arcane part and the arcane tradition; the stored list held the alchemist's houses), green after; a wizard's house beside an alchemist's still opens the part. `magicCountOnce.test.js`'s two-role list re-keyed by identity with the cause: the shop and the quarter stand as alchemists and magic, no longer arcane.
+
+**The move against M2** (`move-C6.txt`; **identical, line for line, whether measured on the merge of 995293e81 or of fbc4a0080**): **633 records differ, exactly the holders** (108 towns with a shop; 413 cities and 112 metropolises with a quarter): the stored "Arcane defense" list loses the alchemist in every one. **The arcane part closes in 85**, where the alchemist's house was the one that opened it; readiness falls in 77, mean −0.19 over all, at most −24; 46 bands (Defensible → Lightly Defended 23, Well-Defended → Defensible 10, Lightly Defended → Vulnerable 9, Fortress → Well-Defended 3, Vulnerable → Undefended 1).
+
+| | Holders | Arcane part closes | Readiness down | Mean over those (least) | Bands | Power structures |
+|---|---|---|---|---|---|---|
+| Alchemist shop (towns) | 108 | 60 | 60 | −10.9 (−24) | 43 | 43 |
+| Alchemist quarter (cities, metropolises) | 525 | 25 | 17 | −2.6 (−9) | 3 | 3 |
+
+- The scores: military 64 down, 37 bands (Strong → Adequate 21); beasts 74, 32 bands; order 47, 5 bands; supply 47, 27 bands; **magic 44 down, 19 bands (Adequate → Weak 9, Weak → Critical 9), through limit 1**, as the first seat measured (the force falls, so what sustains it is held).
+- **46 power structures re-drawn, each with a band move; no power appears or vanishes; 6 legitimacy labels change.**
+- **AI threats:** 19 change: "Economic fragility" gained in 13, **"Magical instability" gained in 9** (the threat reader turning a weaker magical defence into wild magic: the reader's defect, the review's C-H1 class, named by the first seat; not touched).
+- **Magic against the page: 3 made** (cold-town-25, cold-wartime-town-53, fresh5-town-48: "Reliance on magic: relied-upon" beside Magical Capability Weak or Critical), none cured.
+- The alchemists part stands in every birth that had it, and the magic part in every birth that had it.
+- **Golden corpus:** 46 of 525 records move (all in the defence profile; the powers in 4); readiness in 5, the band in 4.
+
+**THE DEFENSE DISPLAY'S ARCANE LINE, for the lane that holds `defenseDisplay.js`** (`arcsup-C6.ndjson`; every birth of the 3,756 whose only such house is an alchemist's, 223, born at C6): the stored profile holds no arcane tradition and no alchemist in its "Arcane defense" list in all 223. The Arcane Support row reads **None in 219**. It reads **"Present: Teleportation circle. Detection, wards, counterspell." in 4**, against a profile with no arcane tradition: cold-town-221, cold-under_siege-city-16, cold-under_siege-town-56, fresh6-wartime-town-0. In each the practitioner census counts the Teleportation circle, which opens no arcane part (no reading of the profile's names it); not the alchemist.
+
+**The pages: twenty towns and cities whose only such house is an alchemist's, the Defense tab beside the Magic tab** (`pages/c6-side.txt`; read on the 995293e81 merge, whose C6 move is the same; the four above among them):
+- In all twenty the Defense tab's force header loses its "1 arcane" (the alchemist had been listed as arcane defence); Magical Capability moves in one (cold-wartime-town-75, Adequate → Weak).
+- **The pairs that disagree, each listed:**
+  - **The Magic tab's "Military role: common" or "occasional" beside a Defense tab with no arcane defence: 14 of the 20** (common: cold-town-221, fresh6-wartime-town-0, cold-wartime-town-75; occasional: cold-under_siege-city-16, cold-under_siege-town-56, cold-famine-town-18, cold-famine-town-40, cold-town-15, cold-town-206, cold-town-23, cold-town-41, cold-famine-city-32, cold-wartime-city-64, fresh6-wartime-city-6). The Magic tab's role reads the place's magic envelope (its dial), not a house that stands; the Defense tab reads the houses. Named for the Magic tab's holder; not this lane's.
+  - **"Reliance on magic: Relied upon" beside Magical Capability Critical: 2** (cold-town-71, cold-under_siege-town-32), the same before C6: the class the first seat counted (500 at base), not made here.
+  - **The four teleportation-circle towns** above: the Magic tab and the Arcane Support row agree with each other ("Present"); both disagree with the stored defence profile.
+- The other four pairs agree (no arcane defence, military role absent, no reliance): cold-famine-town-9, cold-town-122, cold-town-184, cold-city-101.
+
+**Pins:** `defenseInstitutionBucketsWork` (the "Arcane defense" list holds no alchemist; cause G5) and the count test's two-role list (the shop and the quarter stand as alchemists and magic; **the Scroll scribe** joins it, a magic house in the two roles the law allows, seen once the alchemist no longer opened the arcane part beside it), each re-keyed by identity with the cause.
+
+**The pin census** (`census-C6.log`): 48 `FAIL` lines against the base's 41. Each new one attributed by running its file at the defence lane's tip fbc4a0080, at the merge and at C6:
+- **six are red at fbc4a0080 itself** and come in with the merge: sovereigntyLighting's park debt, recordRegister's "the census is an assertion", the anchor walker's two, chainPrintSites F1, the wiring census's alias draft;
+- **one was this step's and is cured here:** `defenceDerived.walker` (a name test in the generator), now read at the home;
+- **ONE IS THIS STEP'S AND OPEN, put to the chair (a stop):** `recordRegisterTotality.walker` A7's paired negative, "a REJECTED cross-entry candidate has become a total", on `defenseProfile.institutions.magicDef`. With the alchemist out of the list, the golden corpus's 68 multi-entry lists are all one pair (Mages' district and Academy of magic, baseChance sum 0.9), so the arm's evidence of two distinct sums is gone: the candidate is untested, not a total. **Recommend:** the arm counts distinct sums over distinct member sets and reports a candidate with one set as untested, as A4 does for keys. Not cured here (another lane's walker logic); not banked; declared.
+
+**Gates:** eslint 0 on the touched files; typecheck:domain:strict 0 (1,113 at its ceiling); typecheck:ratchet 0 (167 at its ceiling).
