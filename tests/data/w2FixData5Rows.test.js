@@ -67,4 +67,10 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     expect(arrivalText(town)).not.toMatch(/argue politics in the open|argue law in the open/);
   }, 60_000);
 
+  test('ww-1157 (HIGH): no forge making for a war in a famine city with no war (rww-city-famine-1)', () => {
+    const town = bornInc('rww-city-famine-1');
+    expect(arrivalText(town)).not.toContain('making something meant for a war');
+    expect(arrivalText(town)).toContain('blades being made');
+  }, 60_000);
+
 });

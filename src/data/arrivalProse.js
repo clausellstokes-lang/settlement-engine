@@ -78,7 +78,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       // three of its lines speak of many forges and workshops: each needs a smith, and the three a town (a hamlet has one part-time smith)
       { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
       { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], crisis: ['any'] },
-      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['wartime', 'insurgency'] }, // W2-FIX-DATA-5 (ww-1157): a war the record holds
       { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', needs: ['institution: smith'], crisis: ['any'] },
     ] },
   { key: 'bread',
