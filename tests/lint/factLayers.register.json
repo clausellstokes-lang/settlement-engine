@@ -2131,10 +2131,6 @@
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {
-     "line": "hasHospital: hasAny(names, ['hospital','monastery','healer','friary']),",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
      "line": "hasMonastery: hasAny(names, ['monastery','friary','major monasteries']),",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
@@ -2154,12 +2150,6 @@
    "bank": [
     {
      "line": "hasBank: hasAny(names, ['bank','money changer','counting','stock exchange']),",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    }
-   ],
-   "healer": [
-    {
-     "line": "hasHospital: hasAny(names, ['hospital','monastery','healer','friary']),",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
    ],
