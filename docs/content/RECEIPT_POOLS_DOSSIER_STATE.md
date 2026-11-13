@@ -6542,7 +6542,7 @@ unchanged.
 4. `[visitor · not anchored]` {settlement} came through {event} {timeband_since} and does not show it.
 5. `[ledger]` {event} is written into {settlement}'s rolls as a loss, with the damage set down item by item.
 6. `[street]` People in {settlement} speak of {event} plainly, as a hard thing that happened to the place and was got through.
-7. `[elder]` The telling of {event} at {settlement} carries the names of those who dealt with it, handed down with care.
+7. `[elder]` When {settlement} tells of {event}, it remembers by name those who dealt with it, and hands the telling down with care.
 
 **event type: `political`** {colour}
 1. `[ledger · anchored]` What was decided at {settlement} {timeband_since} in {event} is still the rule here, and the people it was decided against are still living under it.

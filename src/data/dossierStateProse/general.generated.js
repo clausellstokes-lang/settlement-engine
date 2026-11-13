@@ -7012,10 +7012,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
-          "text": "The telling of {event} at {settlement} carries the names of those who dealt with it, handed down with care.",
+          "text": "When {settlement} tells of {event}, it remembers by name those who dealt with it, and hands the telling down with care.",
           "slots": [
-            "event",
-            "settlement"
+            "settlement",
+            "event"
           ],
           "vid": 7
         }

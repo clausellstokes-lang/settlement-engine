@@ -67,8 +67,8 @@
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 294535,
-      "gzip": 37645,
+      "raw": 294547,
+      "gzip": 37647,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -699,6 +699,14 @@
       "toRaw": 294535,
       "gzipAfter": 37645,
       "reason": "+354 B raw over the committed 294181 (gzip level 9: 37611 -> 37645): DS-GEN-3 Undefended: a no-walls line that names neither walls nor a force (2026-11-13)"
+    },
+    {
+      "car": "W2-WRITE move grammar",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 294535,
+      "toRaw": 294547,
+      "gzipAfter": 37647,
+      "reason": "+12 B raw over the committed 294535 (gzip level 9: 37645 -> 37647): GEN-9 disaster v7 reworded off a test literal it aligned with (2026-11-13)"
     }
   ],
   "ceilingTransfersNewLeaves": [
