@@ -428,7 +428,7 @@ const NOT_HERE = /^access to\b|\bexternal\b|^dwellings\b|^housing\b/i;
 
 /** The powers' names (`powerStructure.factions[].faction`). @param {WordRecord | null | undefined} record @returns {string[]} */
 const powerNames = (record) => (Array.isArray(record?.powerStructure?.factions) ? record.powerStructure.factions : [])
-  .map((/** @type {{ faction?: unknown, name?: unknown }} */ x) => String(x?.faction ?? x?.name ?? '')).filter(Boolean);
+  .map((/** @type {{ faction?: unknown }} */ x) => String(x?.faction ?? '')).filter(Boolean);
 
 /** The live roster has a row whose name matches. @param {string[]} names @param {RegExp} re */
 const rosterHas = (names, re) => names.some((n) => !NOT_HERE.test(n) && re.test(n));
