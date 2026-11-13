@@ -14,6 +14,7 @@
  */
 import { describe, expect, test } from 'vitest';
 import { chainFlowFacts } from '../../src/components/new/SupplyChainsPanel.jsx';
+import { chainHousesOf } from '../../src/domain/display/chainHouses.js';
 
 // r2r-metropolis-29 :: News & Public Information (cartography is Vulnerable on the same tab).
 const NEWS = {
@@ -57,5 +58,33 @@ describe('a chain\'s category is not a good on the From line (item 2)', () => {
   });
   test('the guard: a ground the town holds stays the From line', () => {
     expect(chainFlowFacts(WALLS, ['Palisade']).resource).toBe('Stone quarry');
+  });
+});
+
+describe('the card names the roster\'s houses that do the work, never a template name (item 3)', () => {
+  test('#506 HIGH / #1370 HIGH: two catalogue ranks the town lacks read as the one house it holds', () => {
+    // rr2s-metropolis-plague_onset-port-1's Spices & Dyes over a roster of Merchant guilds (50-100+) and Major annual fairs.
+    expect(chainHousesOf(['Merchant guilds (3-8)', 'Merchant guilds (15-40)', 'Luxury goods quarter', 'Annual fair'],
+      ['Merchant guilds (50-100+)', 'Luxury goods quarter', 'Major annual fairs']).map((h) => h.name))
+      .toEqual(['Merchant guilds', 'Luxury goods quarter', 'Major annual fairs']);
+  });
+  test('#368: the town\'s one charter hall is named once, and no "Adventurers\' guild" it lacks', () => {
+    expect(chainHousesOf(["Adventurers' charter hall", "Adventurers' guild"], ["Adventurers' charter hall"]).map((h) => h.name))
+      .toEqual(["Adventurers' charter hall"]);
+  });
+  test('the increment: a house of the same trade under another name is the house named', () => {
+    expect(chainHousesOf(['Great library', "Cartographer's guild", 'Message Network'], ["Cartographer's workshop"]).map((h) => h.name))
+      .toEqual(["Cartographer's workshop"]);
+  });
+  test('a trade is read from the start of a word: "Mill" is not the sawmill', () => {
+    expect(chainHousesOf(['Maltster', 'Mills (2-5)', 'Mill', 'Access to external mill'], ['Mills (2-5)', 'Sawmill (commercial)']).map((h) => h.name))
+      .toEqual(['Mills']);
+  });
+  test('the guard (ruling (e)): a hamlet that only reaches a mill elsewhere is named by its own row', () => {
+    expect(chainHousesOf(['Maltster', 'Mills (2-5)', 'Mill', 'Access to external mill'], ['Access to external mill', 'Dwellings']).map((h) => h.name))
+      .toEqual(['Access to external mill']);
+  });
+  test('every house named is on the roster, so none is marked missing', () => {
+    expect(chainHousesOf(['Smelter', 'Foundry'], ['Smelter'])).toEqual([{ name: 'Smelter', present: true }]);
   });
 });
