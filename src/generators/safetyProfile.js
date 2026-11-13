@@ -56,7 +56,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const defence = defenceOf({ institutions });
   // COHERENCE-AGREE: the mercenary atom is the home's too (priorityHelpers' own list of names named
   // "a mercenary company" in towns whose defence record lists none).
-  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia, hasMercenary: defence.mercenary };
+  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia, hasMercenary: defence.mercenary }, courthouse = defenseFactsOf({ institutions }).hasCourthouse; // UPKEEP-8: the home's narrower court fact
   // CENSUS-1e unit 2 (Appendix B item 23, the inline T branches): each line CENSUS-5b declared in
   // SAFETY_LINE_SIBLINGS (below) resolves at the branch that prints it, against the live roster's
   // facts — the original where the record holds its atom, else its twin. Draw-free.
@@ -144,7 +144,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
 
   if (hasStress('under_siege')) {
     const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Desperate';
-    const milRef = inst.hasGarrison ? 'The garrison keeps order' : 'The military command has taken charge of the streets';
+    const milRef = inst.hasGarrison ? 'The garrison keeps order' : SMALL_PLACES.includes(tier) ? 'Those holding the place keep order' : 'The military command has taken charge of the streets'; // UPKEEP-8: no command or streets in a small place
     safetyStrains.push({ strain: strainLabel, condition: 'Active Siege' });
     safetyDescs.push(
       `${milRef}, and more harshly as the food runs down. People quarrel over rations, food is sold ` +
@@ -182,7 +182,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Dangerous';
       safetyStrains.push({ strain: strainLabel, condition: 'Insurgency' });
       safetyDescs.push(
-        said('Armed rebels are active. Patrols have changed their routes, some districts are closed off, ' +
+        SMALL_PLACES.includes(tier) ? 'Armed rebels are active, and nobody is sure whose side a neighbour is on.' : said('Armed rebels are active. Patrols have changed their routes, some districts are closed off, ' +
         'and nobody is sure whose side a neighbour is on.')
       );
     }
@@ -190,7 +190,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Dangerous' : 'Critical';
       safetyStrains.push({ strain: strainLabel, condition: 'Slave Revolt' });
       safetyDescs.push(
-        said('Rebels and guards are fighting in the contested districts. People keep off certain streets, ' +
+        SMALL_PLACES.includes(tier) ? 'The rebels are loose and armed. People keep to their homes, and nobody goes out after dark.' : said('Rebels and guards are fighting in the contested districts. People keep off certain streets, ' +
         'and the regular patrols have stopped.')
       );
     }
@@ -206,7 +206,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Volatile';
       safetyStrains.push({ strain: strainLabel, condition: 'Political Fracture' });
       safetyDescs.push(
-        'No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.'
+        SMALL_PLACES.includes(tier) || !(inst.hasGarrison || inst.hasWatch || inst.hasMilitia || inst.hasMercenary) ? 'No stable governing authority; whoever holds sway decides what rules apply, and that changes.' : 'No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.'
       );
     }
     if (hasStress('succession_void')) {
@@ -242,7 +242,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
       safetyStrains.push({ strain: strainLabel, condition: 'Mass Migration' });
       safetyDescs.push(
-        said("More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. " +
+        TINY_PLACES.includes(tier) ? 'More people have arrived than there are roofs or work for, and newcomers and old residents quarrel over what there is.' : said("More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. " +
         "The watch cannot tell one stranger from the next.")
       );
     }
@@ -317,7 +317,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const lawLine = inst.hasGarrison ? 'The garrison is present and responsive.' : inst.hasWatch ? 'The watch is present and responsive.'
       : inst.hasMilitia ? 'The militia is present and responsive.' : 'Neighbours notice trouble and deal with it themselves.';
     const wallNote = inst.hasWalls ? ' The walls keep most trouble outside.' : '';
-    const courtNote = inst.hasCourtSystem ? ' With a working court, organised crime treads carefully.' : '';
+    const courtNote = inst.hasCourtSystem && courthouse ? ' With a working court, organised crime treads carefully.' : ''; // UPKEEP-8: a court named only where a courthouse stands
     safetyDesc = `Crime exists but is well-managed. ${lawLine} Petty theft is the primary risk; ` +
       `organized crime has a limited foothold.${courtNote}${wallNote}`;
   } else if (effectiveSafety >= 1.2) {
@@ -361,10 +361,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       inst.hasMercenary  ? 'mercenary company':
       inst.hasCharterHall? "adventurers' charter hall" : 'local guard';
 
-    const prisonNote = inst.hasCourtSystem && inst.hasPrison
+    const prisonNote = inst.hasCourtSystem && courthouse && inst.hasPrison
       ? voiceOf('courtAndPrison', COURT_AND_PRISON(lawRef)) // SW-B5 FRAMES: the original is index 0
       : inst.hasCourtSystem
-      ? voiceOf('courtNoPrison', COURT_NO_PRISON(lawRef))
+      ? (courthouse ? voiceOf('courtNoPrison', COURT_NO_PRISON(lawRef)) : '') // UPKEEP-8: the court flag with no courthouse names no court (the flag is #598's, step 7)
       : inst.hasPrison
       ? ' Offenders can be jailed, but without a working court system enforcement is arbitrary.'
       : ' Without courts or prison, enforcement relies entirely on fines, exile, or summary violence.';
@@ -385,7 +385,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     } else if (stress.merchantArmy) {
       const secRef = inst.hasMercenary ? 'mercenary companies' : 'private security';
       const guildRef = inst.hasMerchantGuild ? 'The merchant guilds' : 'Wealthy interests';
-      guardEffectivenessDesc = `Public law enforcement is largely a formality. ${guildRef} maintain their own ${secRef}: ` +
+      guardEffectivenessDesc = (inst.hasGarrison || inst.hasWatch ? `${guildRef} keep their own ${secRef} beside the ${lawRef}: ` : `Public law enforcement is largely a formality. ${guildRef} maintain their own ${secRef}: `) + // UPKEEP-8 (#1080)
         `real protection exists, but only for those with the right associations.${prisonNote}`;
     } else if (inst.hasMilitia && !inst.hasGarrison && !inst.hasWatch) {
       if (flags.militaryEffective >= 55) {
@@ -412,7 +412,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
         `${prisonNote}${wallNote}`;
     }
   } else if (inst.hasCourtSystem) {
-    guardEffectivenessDesc = 'There is no watch, only a court. ' +
+    guardEffectivenessDesc = (courthouse ? 'There is no watch, only a court. ' : 'There is no watch. ') + // UPKEEP-8: a court named only where a courthouse stands
       'When a quarrel turns violent, the neighbours or whoever is strongest nearby step in.';
   } else {
     guardEffectivenessDesc = ['thorp', 'hamlet', 'village'].includes(tier)
@@ -504,7 +504,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const magRef = inst.hasWizardTower ? 'tower resources' : inst.hasAlchemist ? 'alchemical knowledge' : 'magical ability';
     crimeTypes.push({
       type: 'Magical crime',
-      desc: `Practitioners misuse ${magRef} for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.`,
+      desc: `Practitioners misuse ${magRef} for profit. Identity alteration, scrying, ${inst.hasAlchemist ? 'alchemical fraud' : 'fraud'}, or targeted curses-for-hire.`,
     });
   }
   if (inst.hasSmuggling) {
@@ -532,7 +532,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const wallNote = inst.hasWalls ? ' District boundaries often follow the old wall lines and alleyways.' : '';
     crimeTypes.push({
       type: 'Street gang activity',
-      desc: `Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing territorial boundaries.${garRef}${wallNote}`,
+      desc: GANG_HOUSES_OF(institutions) >= 2 && !SMALL_PLACES.includes(tier) ? `Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing territorial boundaries.${garRef}${wallNote}` // UPKEEP-8 (#ww-516): one gang, or a small place
+        : `A street gang controls part of the place, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing its territory.${garRef}`,
     });
   }
 
@@ -591,7 +592,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     addCrimeIfMissing('quarantine violation',
       'Movement restrictions ignored for economic necessity or family access. Creates both genuine public health risk and enforcement revenue.');
     addCrimeIfMissing('plague profiteering',
-      'Price gouging on medicines, protective herbs, and burial services. Often conducted by otherwise respectable merchants.');
+      inst.hasMarket || inst.hasMerchantGuild ? 'Price gouging on medicines, protective herbs, and burial services. Often conducted by otherwise respectable merchants.' : 'Price gouging on medicines, protective herbs, and burial services.');
   }
   if (hasStress('indebted')) {
     addCrimeIfMissing('debt evasion', DEBT_EVASION_DESC);
@@ -608,20 +609,20 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       'Intelligence about the other side commands real money. Both sides pay for names, plans, and movements.');
   }
   if (hasStress('slave_revolt')) {
-    addCrimeIfMissing('revolt violence',
+    addCrimeIfMissing('revolt violence', SMALL_PLACES.includes(tier) ? 'Armed fighting between the rebels and those set against them. People keep to their homes.' :
       said('Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.'));
     addCrimeIfMissing('escape networks',
       'Organised infrastructure helping enslaved persons escape. Safe houses, forged papers, passage out of the settlement. The same network that was small and cautious is now large and urgent.');
     addCrimeIfMissing('informant pressure',
       'Both the authorities and the revolt leadership are pressing people for information. Silence is being interpreted as allegiance. Some residents have already left, so they will not be forced to choose.');
     addCrimeIfMissing('weapons trade',
-      'Stolen and improvised weapons circulating in the revolt-held districts. Some are being smuggled in from outside. The black market is very active.');
+      SMALL_PLACES.includes(tier) ? 'Stolen and improvised weapons circulating among the rebels. Some are being smuggled in from outside.' : 'Stolen and improvised weapons circulating in the revolt-held districts. Some are being smuggled in from outside. The black market is very active.');
   }
   if (hasStress('religious_conversion')) {
     addCrimeIfMissing('underground worship',
       'Banned or contested religious practice continuing in private homes, cellars, and outbuildings. Informal networks providing space, materials, and warning of enforcement activity.');
     addCrimeIfMissing('religious fraud',
-      'False conversion declarations sold or arranged for a fee. Forged certification of compliance. Priests accepting payment to record conversions that did not occur.');
+      inst.hasChurch ? 'False conversion declarations sold or arranged for a fee. Forged certification of compliance. Priests accepting payment to record conversions that did not occur.' : 'False conversion declarations sold or arranged for a fee. Forged certification of compliance.');
     addCrimeIfMissing('contested property',
       "Religious buildings, land, and endowments whose ownership is legally ambiguous following the change in religious authority. Being occupied, transferred, or stripped by whoever moves fastest.");
     addCrimeIfMissing('informant networks',
@@ -696,7 +697,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   if (blackMarketCapture > 15) {
     economicDragDesc = 'Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and the stalls that pay their fees lose custom to the ones that do not.';
   } else if (blackMarketCapture > 5) {
-    economicDragDesc = 'Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.';
+    economicDragDesc = factsOf({ institutions }).crime === 'organized' ? 'Some goods change hands here without a licence or a duty paid.' : 'Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.'; // UPKEEP-8 (#1377): no 'little harm' beside an organised criminal power
   }
 
   // ── Plot hooks ────────────────────────────────────────────────────────────
@@ -795,7 +796,8 @@ export function settleCrimeLinesToSignal(economicState, lists) {
   const infrastructure = present
     || (Array.isArray(safetyProfile?.criminalInstitutions) && safetyProfile.criminalInstitutions.length > 0)
     || runningCriminalChains({ economicState: { activeChains: economicState?.activeChains } }).length > 0;
-  const lineFor = { 'Survival crime': infrastructure ? DESPERATION_THEFT_DESC : SURVIVAL_NO_NETWORK_DESC,
+  const hunger = hungerIn(economicState); // UPKEEP-8 (#1173): "Hunger-driven" only where the record holds hunger
+  const lineFor = { 'Survival crime': infrastructure ? (hunger ? DESPERATION_THEFT_DESC : THEFT_NETWORK_DESC) : SURVIVAL_NO_NETWORK_DESC,
     'debt evasion': present ? DEBT_EVASION_DESC : DEBT_EVASION_NO_NETWORK_DESC };
   let settled = crimes.map((entry) => {
     const desc = lineFor[/** @type {keyof typeof lineFor} */ (String(entry?.type))];
@@ -1033,8 +1035,8 @@ export function purseWordOfBand(band, standing) {
   return band ? ({ STRONG: 'Prosperous', ADEQUATE: 'Moderate', WEAK: 'Poor', CRITICAL: 'Poor' })[band] ?? standing : standing;
 }
 
-export function keptGuardLine(desc, institutions, prosperity) {
-  const text = String(desc || '');
+export function keptGuardLine(desc, institutions, prosperity, read = {}) {
+  const text = patrolTruth(paperTruth(String(desc || ''), prosperity, read), read, STANDARD_PATROL); // UPKEEP-8 (#713 #1201, #459)
   /** @type {Omit<import('../domain/facts/drawDeclared.js').DrawDeclaredOptions, 'draw'>} */
   const opts = {
     facts: () => factsOf({ institutions, economicState: { prosperity } }),
@@ -1065,8 +1067,13 @@ export function keptGuardLine(desc, institutions, prosperity) {
   // 1b-M2): the defence home's mercenary bucket (a mercenary company or quarter, hired muscle). A charter hall or a
   // free company hall offers swords for hire; it does not back the garrison.
   const contracted = partitionDefenseInstitutions(institutions).mercenary.length > 0;
-  if (contracted && d.garrison && !text.startsWith(MERCENARY_LEAD) && !text.startsWith(MERCHANT_ARMY_LEAD)) {
+  if (contracted && d.garrison && !text.startsWith(MERCENARY_LEAD) && !text.startsWith(MERCHANT_ARMY_LEAD) && !MERCHANT_ARMY_BESIDE.test(text)) {
     return `${text} ${resolved('Hired swords back the garrison when the purse allows.')}`;
   }
   return text;
 }
+
+// ─── UPKEEP-8 (2026-11-13): the safety lines say only what the record holds (safetyLineTruth.js) ─────────────
+// At the END of the file, as the frames above, so no producer write moves.
+import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
+import { GANG_HOUSES_OF, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, hungerIn, paperTruth, patrolTruth } from './safetyLineTruth.js';
