@@ -73,8 +73,8 @@
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 129570,
-      "gzip": 18255,
+      "raw": 129618,
+      "gzip": 18257,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -875,6 +875,14 @@
       "toRaw": 296662,
       "gzipAfter": 37915,
       "reason": "+76 B raw over the committed 296586 (gzip level 9: 37912 -> 37915): MARKET-OPEN v3 v4 off a siege"
+    },
+    {
+      "car": "W2-WRITE-5 A M7 POW-6",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 129570,
+      "toRaw": 129618,
+      "gzipAfter": 18257,
+      "reason": "+48 B raw over the committed 129570 (gzip level 9: 18255 -> 18257): POW-6 threat atoms"
     }
   ],
   "ceilingTransfersNewLeaves": [

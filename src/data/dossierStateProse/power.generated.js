@@ -2983,7 +2983,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only",
             "tier: ≥ village",
-            "no threat",
+            "no crisis: threat",
             "no crisis: wartime",
             "no watch"
           ],
@@ -2998,7 +2998,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only",
             "tier: ≥ village",
-            "no threat",
+            "no crisis: threat",
             "no crisis: wartime",
             "no watch"
           ],
@@ -3037,7 +3037,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only",
             "tier: ≥ village",
-            "threat"
+            "crisis: threat"
           ],
           "text": "Whoever holds {settlement}'s streets now, nobody is watching its officials, and they are paid poorly enough to be bought.",
           "slots": [
@@ -3064,7 +3064,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "tier: ≥ village",
             "watch",
-            "no threat",
+            "no crisis: threat",
             "no crisis: wartime"
           ],
           "text": "{settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.",
@@ -3079,7 +3079,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "tier: ≥ village",
             "watch",
-            "no threat",
+            "no crisis: threat",
             "no crisis: wartime"
           ],
           "text": "A watch walks {settlement}'s streets, but the danger is in the hall, where officials paid next to nothing are worth buying.",
@@ -3093,7 +3093,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only",
             "tier: ≥ village",
-            "threat"
+            "crisis: threat"
           ],
           "text": "With everyone's mind on the present danger, nobody at {settlement} is watching its officials, and they are paid little enough to be bought.",
           "slots": [

@@ -36265,11 +36265,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "crisis: threat": 2,
         "crisis: wartime": 2,
+        "no crisis: threat": 4,
         "no crisis: wartime": 4,
-        "no threat": 4,
         "no watch": 2,
-        "threat": 2,
         "tier: ≤ hamlet": 1,
         "tier: ≥ village": 8,
         "watch": 2

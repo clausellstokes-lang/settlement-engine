@@ -2514,15 +2514,15 @@ own entailment and licenses nothing about who runs it.
 4. `[ledger · no walls]` Nothing at {settlement} is moving the town's view of its rulers: not the harvest, not the watch, not the roads. The {seat} stands on the bare fact of being the {seat}.
 
 **capture pressure ADVANCING (weak security, poor prosperity)** *(every variant `dm-only`)* {colour}
-1. `[unfolding · dm-only · tier: ≥ village · no threat · no crisis: wartime · no watch]` Criminal money would go a long way with the officials of {settlement}: the town is poor, its streets are badly watched, and nobody has shut the door.
-2. `[ledger · dm-only · tier: ≥ village · no threat · no crisis: wartime · no watch]` Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and nobody in the {seat} is mending either.
+1. `[unfolding · dm-only · tier: ≥ village · no crisis: threat · no crisis: wartime · no watch]` Criminal money would go a long way with the officials of {settlement}: the town is poor, its streets are badly watched, and nobody has shut the door.
+2. `[ledger · dm-only · tier: ≥ village · no crisis: threat · no crisis: wartime · no watch]` Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and nobody in the {seat} is mending either.
 3. `[street · dm-only]` Officials at {settlement} are paid little and watched less, and a purse offered in the right doorway would not be turned away.
 4. `[ledger · dm-only · tier: ≤ hamlet]` {settlement} is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply.
-5. `[ledger · dm-only · tier: ≥ village · threat]` Whoever holds {settlement}'s streets now, nobody is watching its officials, and they are paid poorly enough to be bought.
+5. `[ledger · dm-only · tier: ≥ village · crisis: threat]` Whoever holds {settlement}'s streets now, nobody is watching its officials, and they are paid poorly enough to be bought.
 6. `[unfolding · dm-only · tier: ≥ village · crisis: wartime]` With the war taking everyone's attention, {settlement}'s officials are left to themselves, and an underpaid official left alone is easily bought.
-7. `[ledger · dm-only · tier: ≥ village · watch · no threat · no crisis: wartime]` {settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.
-8. `[counterforce · dm-only · tier: ≥ village · watch · no threat · no crisis: wartime]` A watch walks {settlement}'s streets, but the danger is in the hall, where officials paid next to nothing are worth buying.
-9. `[street · dm-only · tier: ≥ village · threat]` With everyone's mind on the present danger, nobody at {settlement} is watching its officials, and they are paid little enough to be bought.
+7. `[ledger · dm-only · tier: ≥ village · watch · no crisis: threat · no crisis: wartime]` {settlement}'s watch keeps the streets, but nobody keeps an eye on the officials, and they are paid too little to refuse a purse.
+8. `[counterforce · dm-only · tier: ≥ village · watch · no crisis: threat · no crisis: wartime]` A watch walks {settlement}'s streets, but the danger is in the hall, where officials paid next to nothing are worth buying.
+9. `[street · dm-only · tier: ≥ village · crisis: threat]` With everyone's mind on the present danger, nobody at {settlement} is watching its officials, and they are paid little enough to be bought.
 10. `[ledger · dm-only · tier: ≥ village · crisis: wartime]` {settlement}'s officials are poorly paid and, with the war on, nobody is checking their accounts.
 
 **capture pressure RECOVERING (strong security, prosperity)** *(every variant `dm-only`)*
