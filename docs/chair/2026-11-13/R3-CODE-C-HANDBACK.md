@@ -187,3 +187,29 @@ readers' towns: the ROUND-3-CUT increment's render.rww.jsx and render.rw3.jsx wi
 | ww-470 | rww-metropolis-wartime-1 | heraldCausalGrammar.js :: TIME_BANDS, the sixth band's predicate ("older than its bearers", a grudge's phrase), filled by generalStateProse.js :: timebandAgeFill into the legacy molds | CURED: "older than anyone living". 25 broken prints in the 60 readers' towns -> 0, each replacement read; 0 leaf diffs on 960 births | a322b602f |
 | ww-4 | rww-thorp-calm-1 | stored by historyGenerator.js (The Great Construction's hook; the data lane's file, w2-fix-data): NAMED there, cure: a wall-less twin. Gated by hookTruth.js :: WORDS.walls (mine) | CURED at the gate: "inside/within the walls" (no "of") is a claim of walls (record 386). Declared move: 9 of 960 births, history + the coherence receipt (which had flagged the same hook) | a4897beb6 |
 | ww-1227 | rww-village-under_siege-1 | settlementOriginProse.js :: ORIGIN_POOLS.road[0] ("Trade flows in, goods flow out"), stored as settlementReason by narrativeGenerator.js :: generateSettlementReason (which passes no siege) and printed by OverviewTab.jsx's "Settlement Origin"; simulationSpine.js only reads the same stored sentence | NAMED to ra (settlementOriginProse.js is ra's; narrativeGenerator.js is held by ra, bd, fd, wr): the same fault and the same cure as the first seat's #154 (the caller passes the siege; the pool refuses its present-traffic rows road[0], road[2], road[3] under a siege; the refused pick resolves draw-free) | — |
+
+### #457 and #1163 (as ruled)
+
+CURED at 9a3239ae7 (resourceGenerator.js :: evaluateInstitutionDeps). Both rules read from the analysis's own data
+(the gaps' missing houses and their own chains' goods; nativeResourceConditionRecords). Declared move: 54 of 720 and
+22 of 240 towns, one export row each, resourceAnalysis only. GOLDEN SURFACES moved by this cause: the generator golden
+master (91 configs) and worldFactRederive A7, pipelinePinnedChoosers A1 (green at eba8e5397): the merge seat's door.
+Note: resourceGenerator.js is also changed by w2-c-leaves (STRENGTH_SUPPORT, townSupports, a disjoint hunk).
+
+### The chair's messages to this seat (copied: the messages are not on the branch)
+
+- 21:14Z: an independent reader (lane/review-r3-stages-2026-11-13, b3bbda3f5, REVIEW-R3-STAGES-LINES-READ.md, stage
+  C1) read the first stage: 8 of 9 lines true. ONE FALSE AT MEDIUM, RULED, its own commit, red first: the reworded
+  embattled-region warning (the first seat's cure of #325/#468, structuralValidator.js) keeps "A beleaguered outpost"
+  and prints it in 36 cities and metropolises. "outpost" is a size word: said only of a place small enough to be one;
+  a larger place gets a twin true of its size, or the clause is left out. Reproduce on the reader's towns; read the
+  cure in three towns (the smallest and the largest size it reaches); a guard town. The reader also notes five of the
+  stage's lines never reach the page (the daily-life slots go only to the AI grounding): to be said here; no cure asked.
+- 21:27Z: the five high lines at eba8e5397 are taken. CENSUS-2's first count (lane/census-2-2026-11-13, a5cda3915,
+  CENSUS-2-2026-11-13.md and CENSUS-2.json, key `hits`): three kinds of fault over the 720 at the line's tip; a hit is
+  a CANDIDATE, read against the town's record before a cure. NOW THIS LANE'S FILES: outlookHookSiblings.js
+  (STARVING_HOOK 26 towns, MODERATE_GAP_TWIN 19, PEACE_IRON_HOOKS 2), hookThemes.js (AUTHORED_HOOK_THEMES, 7 + 7),
+  facts/magicSource.js (MAGIC_NOTE_TRADITION 11), dossier/plotHooks.js (TENSION_LABELS 2), servicesGenerator.js ("ask
+  around at the right tavern", 10). Not the data tables. And for every writer this lane holds, its CENSUS-2 hits.
+  ORDER: #457/#1163, the "outpost" ruling, then the medium rows and these together, the widest writer first. The
+  measuring seat's command, when sent, is run on this tree before the final statement.
