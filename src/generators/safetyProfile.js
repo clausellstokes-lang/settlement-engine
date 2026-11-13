@@ -805,8 +805,13 @@ export function settleCrimeLinesToSignal(economicState, lists) {
   return { ...economicState, safetyProfile: { ...safetyProfile, crimeTypes: settled } };
 }
 
-/** The two crisis kinds that cap the prosperity label at Struggling (`prosperity.js :: deriveProsperityLabel`). */
-const UPKEEP_CRISIS = Object.freeze(['famine', 'under_siege']);
+/**
+ * The two crisis kinds that cap the prosperity label at Struggling (`prosperity.js :: deriveProsperityLabel`),
+ * each with its own line: a famine is a hunger, a siege is a siege (COHERENCE-UPKEEP-6, the review's F4: a
+ * besieged town may hold a year of grain).
+ */
+const HUNGER_CRISIS = Object.freeze(['famine']);
+const SIEGE_CRISIS = Object.freeze(['under_siege']);
 
 /**
  * One declared crisis set (`stressNarrative.js`' idiom): the original declares the crisis
@@ -915,16 +920,26 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
     "The adventurers' charter hall coordinates emergency response to threats."),
   // COHERENCE-UPKEEP (the chair's ruling of 2026-11-12, point 1): a famine or a siege caps the label
   // at Struggling, so there the purse lines above would call the place poor when the crisis is why.
-  // Each purse line has a crisis line, declared by the `crisis` atom on the two kinds that cap the
-  // label; its twin is the purse line itself, which then resolves through its own set above.
+  // Each purse line has a crisis line per kind (COHERENCE-UPKEEP-6, F4): the hunger line, declared by the
+  // `crisis` atom on the famine, whose twin is the siege line; the siege line, declared on the siege, whose
+  // twin is the purse line itself, which then resolves through its own set above.
   'A hired company is on the books, paid from what the hunger leaves; it comes when called and leaves when the coin does.': crisisSet(
-    'A hired company is on the books, paid from what the hunger leaves; it comes when called and leaves when the coin does.', UPKEEP_CRISIS,
+    'A hired company is on the books, paid from what the hunger leaves; it comes when called and leaves when the coin does.', HUNGER_CRISIS,
+    'A hired company is on the books, paid from what the siege leaves; it comes when called and leaves when the coin does.', ['mercenary']),
+  'A hired company is on the books, paid from what the siege leaves; it comes when called and leaves when the coin does.': crisisSet(
+    'A hired company is on the books, paid from what the siege leaves; it comes when called and leaves when the coin does.', SIEGE_CRISIS,
     'A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.', ['mercenary']),
   'Hired swords back the garrison, paid from what the hunger leaves.': crisisSet(
-    'Hired swords back the garrison, paid from what the hunger leaves.', UPKEEP_CRISIS,
+    'Hired swords back the garrison, paid from what the hunger leaves.', HUNGER_CRISIS,
+    'Hired swords back the garrison, paid from what the siege leaves.', ['garrison']),
+  'Hired swords back the garrison, paid from what the siege leaves.': crisisSet(
+    'Hired swords back the garrison, paid from what the siege leaves.', SIEGE_CRISIS,
     'Hired swords back the garrison when the purse allows.', ['garrison']),
   "The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.": crisisSet(
-    "The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.", UPKEEP_CRISIS,
+    "The adventurers' charter hall takes bounty work against threats, paid from what the hunger leaves.", HUNGER_CRISIS,
+    "The adventurers' charter hall takes bounty work against threats, paid from what the siege leaves."),
+  "The adventurers' charter hall takes bounty work against threats, paid from what the siege leaves.": crisisSet(
+    "The adventurers' charter hall takes bounty work against threats, paid from what the siege leaves.", SIEGE_CRISIS,
     "The adventurers' charter hall takes bounty work against threats, as far as the purse runs."),
 });
 
@@ -1026,7 +1041,8 @@ const MERCHANT_ARMY_LEAD = 'Public law enforcement is largely a formality.';
  *   - a hired company beside a garrison: one more sentence, the purse-bound line below Prosperous;
  *   - a charter hall with no garrison and no watch: the bounty line below Prosperous.
  * Under a famine or a siege (each caps the label at Struggling) a purse line gives way to its
- * crisis line, which says the hunger is why (the chair's ruling of 2026-11-12, point 1).
+ * crisis line, which says the hunger or the siege is why (the chair's ruling of 2026-11-12, point 1;
+ * COHERENCE-UPKEEP-6, F4).
  * @param {string} desc the guard assessment as the safety profile wrote it
  * @param {Array<{ name?: string }>} institutions the roster
  * @param {unknown} prosperity the prosperity label
@@ -1042,10 +1058,15 @@ export function keptGuardLine(desc, institutions, prosperity, stressTypes = []) 
     poolId: 'safetyProfile:SAFETY_LINE_SIBLINGS', surface: 'defense', drawKind: 'T',
   };
   const said = (/** @type {string} */ line) => resolveSibling(line, SAFETY_LINE_SIBLINGS, opts);
-  /** The crisis line where a famine or a siege holds, else the purse line through its own set. @param {string} crisisLine */
+  /**
+   * The hunger line where a famine holds, else the siege line where a siege holds, else the purse line
+   * through its own set: each line resolves to itself or to its twin, and a twin resolves in turn (the
+   * chain has no loop: hunger, siege, purse, today's line). @param {string} crisisLine
+   */
   const purseOrCrisis = (crisisLine) => {
-    const crisis = said(crisisLine);
-    return crisis === crisisLine ? crisis : said(crisis);
+    let line = crisisLine;
+    for (let next = said(line); next !== line; next = said(line)) line = next;
+    return line;
   };
   const d = defenceOf({ institutions });
   const standing = d.garrison || d.watch || d.militia;

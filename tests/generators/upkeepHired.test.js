@@ -250,18 +250,27 @@ describe('the guard assessment says what the place can pay for its hired force',
  */
 describe('under a famine or a siege, the hired lines name the crisis, not the purse', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  const CRISIS = 'crisis: famine, under_siege';
+  // Re-keyed by identity at COHERENCE-UPKEEP-6 (F4): the one crisis line per purse line, declared on
+  // `crisis: famine, under_siege`, is now a line per kind — the siege line, its twin the purse line, and
+  // the hunger line, its twin the siege line. The claim is kept: each purse line has its crisis lines.
   /** The purse lines: declared originals needing a `prosperity: ≤ …` atom. */
   const purseLines = () => Object.values(SAFETY_LINE_SIBLINGS).map((set) => set[0])
     .filter((line) => line.needs.some((atom) => atom.startsWith('prosperity: ≤')));
-  /** The declared crisis line whose twin is this purse line, if any. @param {string} text */
-  const crisisLineFor = (text) => Object.values(SAFETY_LINE_SIBLINGS)
-    .find((set) => atomsOf(declarationOf(set[0])).includes(CRISIS) && set[1]?.text === text)?.[0];
+  /** The declared line on this crisis kind whose twin is `text`, if any. @param {string} text @param {string} kind */
+  const declaredOn = (text, kind) => Object.values(SAFETY_LINE_SIBLINGS)
+    .find((set) => atomsOf(declarationOf(set[0])).includes(`crisis: ${kind}`) && set[1]?.text === text)?.[0];
+  /** This purse line's crisis line for a kind: the siege line, or the hunger line over it. @param {string} text @param {string} kind */
+  const crisisLineFor = (text, kind) => {
+    const siege = declaredOn(text, 'under_siege');
+    return kind === 'under_siege' ? siege : siege && declaredOn(siege.text, 'famine');
+  };
 
   test('RED-FIRST: each purse line has a declared crisis line, its twin the purse line', () => {
     const lines = purseLines();
     expect(lines.length, 'anchored: the three purse lines').toBe(3);
-    for (const line of lines) expect(crisisLineFor(line.text), `${line.text} has its crisis line`).toBeDefined();
+    for (const line of lines) {
+      for (const kind of ['under_siege', 'famine']) expect(crisisLineFor(line.text, kind), `${line.text} has its ${kind} line`).toBeDefined();
+    }
   });
 
   test('RED-FIRST agree-force-famine-city-0 (famine, Struggling, hired swords beside a garrison): the guard line names the crisis', () => {
@@ -271,7 +280,7 @@ describe('under a famine or a siege, the hired lines name the crisis, not the pu
     const garrisonPurse = purseLines().find((line) => /garrison/.test(line.text));
     // anchored: the next line pins the crisis line in the same text, so a drifted text reds there
     expect(desc, 'no purse line under a famine').not.toContain(garrisonPurse.text);
-    expect(desc).toContain(crisisLineFor(garrisonPurse.text)?.text);
+    expect(desc).toContain(crisisLineFor(garrisonPurse.text, 'famine')?.text);
   });
 
   test('planted rosters: each branch names the crisis under a famine and a siege, and the purse with none', () => {
@@ -287,9 +296,42 @@ describe('under a famine or a siege, the hired lines name the crisis, not the pu
         const hard = keptGuardLine(today, roster, 'Struggling', [stress]);
         // anchored: the next line pins the crisis line in the same text, so a drifted text reds there
         expect(hard, `${roster[0].name} under ${stress}`).not.toContain(purse.text);
-        expect(hard).toContain(crisisLineFor(purse.text)?.text);
+        expect(hard).toContain(crisisLineFor(purse.text, stress)?.text);
       }
       expect(keptGuardLine(today, roster, 'Struggling', ['wartime']), 'wartime is no cap: the purse stays').toContain(purse.text);
+    }
+  });
+});
+
+/**
+ * COHERENCE-UPKEEP-6, the review's F4: a siege is not a hunger. Under a siege with no famine the
+ * crisis line names the siege; the hunger line is the famine's alone (a besieged town may hold a
+ * year of grain). Each crisis line is found by its declared `crisis` atom, never by a literal.
+ */
+describe('a siege with no famine names the siege, not the hunger (F4)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** The declared originals whose crisis atom is exactly this one kind. @param {string} kind */
+  const crisisLinesOf = (kind) => Object.values(SAFETY_LINE_SIBLINGS).map((set) => set[0])
+    .filter((line) => atomsOf(declarationOf(line)).includes(`crisis: ${kind}`));
+
+  test('RED-FIRST: each hired branch prints its siege line under a siege alone, and its hunger line under a famine', () => {
+    const merc = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
+    const beside = [{ name: 'Mercenary company', category: 'Defense' }, { name: 'Garrison', category: 'Defense' }];
+    const charter = [{ name: "Adventurers' charter hall", category: 'Defense' }, { name: 'Town hall', category: 'Government' }];
+    const siegeLines = crisisLinesOf('under_siege').map((line) => line.text);
+    const hungerLines = crisisLinesOf('famine').map((line) => line.text);
+    expect(siegeLines.length, 'a siege line for each of the three branches').toBe(3);
+    expect(hungerLines.length, 'a hunger line for each of the three branches').toBe(3);
+    for (const roster of [merc, beside, charter]) {
+      const today = generateSafetyProfile({ priorityMilitary: 60, priorityEconomy: 60 }, 'town', roster).guardEffectivenessDesc;
+      const siege = keptGuardLine(today, roster, 'Struggling', ['under_siege']);
+      expect(siegeLines.some((line) => siege.includes(line)), `${roster[0].name}: the siege line`).toBe(true);
+      // anchored: the line above pins the siege line in the same text, so a drifted text reds there
+      expect(hungerLines.some((line) => siege.includes(line)), `${roster[0].name}: no hunger line under a siege alone`).toBe(false);
+      const famine = keptGuardLine(today, roster, 'Struggling', ['famine']);
+      expect(hungerLines.some((line) => famine.includes(line)), `${roster[0].name}: the hunger line`).toBe(true);
+      const both = keptGuardLine(today, roster, 'Struggling', ['under_siege', 'famine']);
+      expect(hungerLines.some((line) => both.includes(line)), `${roster[0].name}: a famine in a siege is a hunger`).toBe(true);
     }
   });
 });
