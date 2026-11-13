@@ -25,7 +25,7 @@ describe('COHERENCE-PRESUME: time on the page', () => {
     expect(yearBand(23).predicate).toBe('a generation old');
     expect(yearBand(12).predicate).toBe('a decade old');
     expect(yearBand(5).predicate).toBe('years old');
-    expect(yearBand(182).predicate).toBe('older than its bearers');
+    expect(yearBand(182).predicate).toBe('older than anyone living'); // R3-CODE-C-2 #ww-470: the sixth band's word, re-keyed
   });
 
   test('the siege line names living memory only inside sixty years', () => {
