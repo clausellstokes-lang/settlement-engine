@@ -161,6 +161,11 @@ export const CAST_REASONS = Object.freeze({
   })),
   // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 A1, R1–R3): the fragments in the cast's own voice, no gender, no unread noun.
   bruntLeast: 'the one with the least say in the house the crisis hits',
+  // ROUND THREE, ruling (c) (the chair, 2026-11-13; the cut's #11 #13 #53 #55): "the least say" presumes a house of
+  // several. In a house of ONE the person is named as its only member; a person who also holds the crisis's lever
+  // (the cut's #268) is named as one of the house, never as the one with the least say.
+  bruntOnly: 'the only one in the house the crisis hits',
+  bruntMember: 'one of the house the crisis hits',
   leverRuns: 'runs the office that decides how the crisis goes',
   leverInstitution: 'whoever runs it decides how the crisis goes, and nobody named here runs it',
   leverTemporary: 'nobody here could, so this one stepped in for the crisis',
@@ -527,6 +532,16 @@ export function deriveStakes(s, kind) {
 /** @typedef {{ candidates: CastRow[], absent: string }} Candidates */
 
 /**
+ * Ruling (c): the brunt's own words for a member of the house hit: "the least say" only in a house of more
+ * than one; its only member is named as such. No draw; the candidates and their order are unchanged.
+ * @param {ReadonlyArray<unknown>} members the house's members, the least powerful first
+ * @returns {string}
+ */
+function leastSayOf(members) {
+  return members.length > 1 ? CAST_REASONS.bruntLeast : CAST_REASONS.bruntOnly;
+}
+
+/**
  * Rule 1 — bears the brunt.
  * @param {CastSettlement} s @param {string} kind @param {CastStake[]} stakes
  * @returns {Candidates}
@@ -546,16 +561,18 @@ export function bruntCandidates(s, kind, stakes) {
     const hit = factions.filter((f) => losers.has(factionName(f)) && ((base.governing && factionName(f) === govName) || base.archetypes.includes(factionArchetype(f))));
     for (const f of hit) {
       const members = membersOf(s, factionName(f)).reverse(); // the least powerful first
+      const least = leastSayOf(members);
       const touching = members.filter((n) => base.role.test(str(n.role)));
-      for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
-      for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntLeast));
+      for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || least, BRUNT_SIBLINGS, defence)));
+      for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', least));
       out.push(factionRow(f, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
     }
     if (out.length) break;
   }
   if (!out.length && factions.length === 1) {
     const f = factions[0];
-    for (const n of membersOf(s, factionName(f)).reverse()) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntLeast));
+    const members = membersOf(s, factionName(f)).reverse();
+    for (const n of members) out.push(npcRow(n, 'brunt', leastSayOf(members)));
     out.push(factionRow(f, 'brunt', CAST_REASONS.bruntLeast));
   }
   return { candidates: out, absent: CAST_ABSENCES.noBase };
@@ -1009,6 +1026,13 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
       else if (role === 'defender') take('defender', defenderCandidates(settlement));
       else if (role === 'treater') take('treater', treaterCandidates(settlement));
       else if (role === 'face') take('face', faceCandidates(settlement));
+    }
+
+    // Ruling (c), the cut's #268: the person who bears the brunt and also holds the lever is not "the one with the
+    // least say": that clause reads "one of the house the crisis hits" (any next-in-line tail kept). No draw moves.
+    const bruntAt = roles.findIndex((r) => r.role === 'brunt' && r.kind === 'npc' && r.reason.startsWith(CAST_REASONS.bruntLeast));
+    if (bruntAt >= 0 && roles.some((r) => r.role === 'lever' && keyOf(r) === keyOf(roles[bruntAt]))) {
+      roles[bruntAt] = { ...roles[bruntAt], reason: CAST_REASONS.bruntMember + roles[bruntAt].reason.slice(CAST_REASONS.bruntLeast.length) };
     }
 
     for (const role of occasionalRolesOf(kind)) {
