@@ -73,6 +73,16 @@ function getRank(standing, allFactions) {
 const HOUSE_KINDS = Object.freeze({ economy: Object.freeze(['economy']), other: Object.freeze(['noble']) });
 
 /**
+ * COHERENCE-POWERS-8 (round three #723 #725 #1398): the card categories whose subordinate rows place the card UNDER its own
+ * body's leaders ("Serves the faith under its leaders", "Holds a place under the crew's boss", "Works spells under the
+ * senior casters"), and the power categories that are that body. Such a row is false of the card that HEADS its power: the
+ * head of the strongest power of its kind reads its kind's head row; the head of a lesser one reads neither (the refusal's
+ * rule: it keeps its own goal and claims no position), since it leads its own body and is not the kind's leader.
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+const UNDER_KINDS = Object.freeze({ religious: Object.freeze(['religious']), criminal: Object.freeze(['criminal']), magic: Object.freeze(['magic']) });
+
+/**
  * Whether the card heads the strongest power of its own kind (so no house of its kind stands ahead of it).
  * @param {{ standing: string, power?: string | null }} standing @param {Array<Record<string, any>>} factions
  * @param {readonly string[] | undefined} kinds @returns {boolean}
@@ -534,7 +544,9 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     // COHERENCE-POWERS-7 (the chair's R1): the trade's and the old families' subordinate rows say the card stands "behind the
     // leading one" of its kind; the head of the strongest power of its own kind is that leading one, whatever its weight
     // beside the ruler, and reads its kind's head row ("Heads the leading house in the trade", "Heads an old family")
-    const rank = isHolder ? 'dominant' : headsItsKind(standing, powerFactions, HOUSE_KINDS[cat]) ? 'dominant' : getRank(standing, powerFactions);
+    const rank = isHolder ? 'dominant' : headsItsKind(standing, powerFactions, HOUSE_KINDS[cat] || UNDER_KINDS[cat]) ? 'dominant' : getRank(standing, powerFactions);
+    // COHERENCE-POWERS-8: a card that heads its power is never "under" its own body's leaders; a lesser body's head takes no row
+    if (!isHolder && UNDER_KINDS[cat] && standing.standing === STANDING.head && rank === 'subordinate') return { ...npc, structuralRank: standing.standing };
     const key  = `${cat}__${condition}__${rank}`;
     const looked = T[key] ? key : T[`${cat}__stable__${rank}`] ? `${cat}__stable__${rank}` : OTHER_STABLE_DOMINANT;
     // ⭐ CENSUS-1d unit 2 (the chair's R-A ruling of 2026-11-05 02:30; Appendix B item 3, kind T):
