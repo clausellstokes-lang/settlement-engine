@@ -29,6 +29,7 @@ import { powerOrderOf, structuralStandingOf, STANDING } from '../domain/people/m
 import { seatCandidatesOf } from '../domain/dossier/seatHolder.js';
 import { isSeatVacant } from '../domain/people/seatKeeper.js';
 import { cardOfficeOf } from '../domain/people/cardPowers.js';
+import { CLAIMANT_FACE } from '../data/stressPowerFaces.js';
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const GOVERNANCE_FRACTURED = 'governance_fractured';
@@ -471,13 +472,24 @@ function holderHouseLineOf(npc) {
   return cardOfficeOf(npc) && title ? `Still ${title} as well.` : '';
 }
 
+// ── A MINTED LORD PUSHES NO LINE OFF A CARD (COHERENCE-POWERS-6, item 3; REVIEW-POWERS-2 at 313c67e2b, section 6) ──────
+// A lord minted for a claim or for a noble body (people/castPowers.js, data/stressPowerFaces.js :: CLAIMANT_FACE's row) is a
+// card the cast gained after its people were dealt; counted in the cut it moved the cut, and a card that read its line lost
+// it. The cut is taken over the cast less those lords (each card's place among the others); a lord keeps the lines it reads
+// within the whole cast's cut, as before. Draw-free.
+/** @param {Record<string, any>} npc */
+const isMintedLord = (npc) => npc?.institution?.kind === 'power' && npc?.title === CLAIMANT_FACE.title;
+/** The enrichment cut over a cast of `n`. @param {number} n */
+const cutOf = (n) => Math.min(5, Math.max(2, Math.floor(n * 0.45)));
+
 // ── Main export ────────────────────────────────────────────────────────────────
 export function enrichNPCsWithStructure(npcs, settlement) {
   if (!npcs?.length) return npcs;
 
   const powerFactions   = settlement.powerStructure?.factions || [];
   const condition       = getPrimaryCondition(settlement);
-  const TOP_N           = Math.min(5, Math.max(2, Math.floor(npcs.length * 0.45)));
+  const TOP_N           = cutOf(npcs.length);
+  const TOP_N_UNMINTED  = cutOf(npcs.filter((n) => !isMintedLord(n)).length); // item 3: the cut among the cards the cast was dealt
   /** @type {ReturnType<typeof factsOf> | null} */
   let facts = null;
 
@@ -493,9 +505,11 @@ export function enrichNPCsWithStructure(npcs, settlement) {
   const goalsNow = scored.map(({ npc }) => npc?.goal?.short);
   const holder = seatHolderAmong(npcs, settlement); // COHERENCE-POWERS-5 (N1): the seat's row is the holder's, office first
 
+  let unminted = 0; // item 3: each card's place among the cards the cast was dealt
   return scored.map(({ npc, standing }, idx) => {
     const isHolder = npc === holder;
-    if (idx >= TOP_N && !isHolder) return { ...npc, structuralRank: standing.standing };
+    const within = isMintedLord(npc) ? idx < TOP_N : unminted++ < TOP_N_UNMINTED;
+    if (!within && !isHolder) return { ...npc, structuralRank: standing.standing };
 
     const cat  = isHolder ? 'government' : npc.category || 'other';
     const rank = isHolder ? 'dominant' : getRank(standing, powerFactions);
