@@ -546,8 +546,8 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         });
       }
       plotHooks.push({
-        category: 'Trade Politics',
-        hook: 'A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.',
+        category: !(importCoverageFinal > 0 && importChannelLabel) ? 'Scarce Food' : 'Trade Politics', // R2-CODE-A-2 (cold #152): the line reads the famine and the channel this balance reads; nothing coming in, no trade to speak of
+        hook: !(importCoverageFinal > 0 && importChannelLabel) ? `No food can be bought in from outside now, so the ${foodStoreWord(foodSecurity?.foodRecord)} already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.` : stresses.includes('famine') ? `The ${FAILED_SOURCE_WORDS[/** @type {keyof typeof FAILED_SOURCE_WORDS} */ (foodSecurity?.foodRecord?.failedSource)] || 'crops'} failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.` : 'A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.',
         severity: 'medium',
       });
     }
