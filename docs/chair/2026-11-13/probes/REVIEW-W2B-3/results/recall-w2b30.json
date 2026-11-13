@@ -1,0 +1,3508 @@
+{
+ "cold": "docs/chair/2026-11-13/REVIEW-W2B-COLD-LIST.json",
+ "page": "/tmp/claude-0/-home-user-settlement-engine/22d6deca-9d38-55d5-b447-c7fa10d3d0d7/scratchpad/runs/pm-w2b30.json",
+ "severities": [
+  "HIGH",
+  "MED",
+  "LOW"
+ ],
+ "total": {
+  "lines": 361,
+  "found": 78,
+  "HIGH": 67,
+  "HIGHfound": 44
+ },
+ "all": {
+  "lines": 361,
+  "found": 78
+ },
+ "byMechanism": {
+  "a size": {
+   "lines": 39,
+   "found": 16,
+   "HIGH": 7,
+   "HIGHfound": 6
+  },
+  "names a resource, a good or a chain state that is not so": {
+   "lines": 42,
+   "found": 0,
+   "HIGH": 8,
+   "HIGHfound": 0
+  },
+  "a count": {
+   "lines": 14,
+   "found": 7,
+   "HIGH": 7,
+   "HIGHfound": 7
+  },
+  "names a house, a role or a force the town lacks": {
+   "lines": 79,
+   "found": 27,
+   "HIGH": 18,
+   "HIGHfound": 14
+  },
+  "a figure against the record's": {
+   "lines": 45,
+   "found": 3,
+   "HIGH": 2,
+   "HIGHfound": 1
+  },
+  "other: denies a house, force or crossing the town has": {
+   "lines": 12,
+   "found": 0,
+   "HIGH": 1,
+   "HIGHfound": 0
+  },
+  "other: a ruler, a power, a threat or a history state that is not so": {
+   "lines": 14,
+   "found": 0,
+   "HIGH": 0,
+   "HIGHfound": 0
+  },
+  "other": {
+   "lines": 4,
+   "found": 0,
+   "HIGH": 0,
+   "HIGHfound": 0
+  },
+  "two homes that disagree": {
+   "lines": 22,
+   "found": 3,
+   "HIGH": 5,
+   "HIGHfound": 2
+  },
+  "internal text (a template name, a range, a debug or chip row)": {
+   "lines": 19,
+   "found": 2,
+   "HIGH": 1,
+   "HIGHfound": 0
+  },
+  "presumes normal times under a crisis in force": {
+   "lines": 60,
+   "found": 19,
+   "HIGH": 18,
+   "HIGHfound": 14
+  },
+  "other: content the town's own boundaries switch off": {
+   "lines": 4,
+   "found": 0,
+   "HIGH": 0,
+   "HIGHfound": 0
+  },
+  "other: a place, a route or a coast the town lacks": {
+   "lines": 7,
+   "found": 1,
+   "HIGH": 0,
+   "HIGHfound": 0
+  }
+ },
+ "rows": [
+  {
+   "n": 1,
+   "seed": "c01-thorp-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Ask about the place and you are told it is built around the agora, on hillside ground, and run by civic association.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 2,
+   "seed": "c01-thorp-none",
+   "severity": "HIGH",
+   "mechanism": "a size",
+   "sentence": "Whitewashed courts and stone stairs climb toward a fortified high precinct.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 3,
+   "seed": "c01-thorp-none",
+   "severity": "HIGH",
+   "mechanism": "a size",
+   "sentence": "Waters rose with little warning and reshaped the lower districts, drowning livelihoods and redrawing who owned what",
+   "found": true,
+   "words": [
+    "quarters"
+   ]
+  },
+  {
+   "n": 4,
+   "seed": "c01-thorp-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Neacastron lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole thorp has a bad year.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 5,
+   "seed": "c01-thorp-none",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "It has to buy its luxury goods from outside: the country around the thorp produces none.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 6,
+   "seed": "c01-thorp-none",
+   "severity": "HIGH",
+   "mechanism": "a count",
+   "sentence": "The ruling three of Elder Council",
+   "found": true,
+   "words": [
+    "rulingFaces"
+   ]
+  },
+  {
+   "n": 7,
+   "seed": "c01-thorp-none",
+   "severity": "HIGH",
+   "mechanism": "a size",
+   "sentence": "Waters rose with little warning and reshaped the lower districts, drowning livelihoods and redrawing who owned what",
+   "found": true,
+   "words": [
+    "quarters"
+   ]
+  },
+  {
+   "n": 8,
+   "seed": "c01-thorp-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 9,
+   "seed": "c06-hamlet-none",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Plenty passes through Ainhaven, and little of it stops.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 10,
+   "seed": "c06-hamlet-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Iron & Metalwork Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
+   "found": true,
+   "words": [
+    "smith"
+   ]
+  },
+  {
+   "n": 11,
+   "seed": "c06-hamlet-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Timber Trade Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 12,
+   "seed": "c06-hamlet-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Much of the work in Ainhaven's workshops begins with unloading a cart.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 13,
+   "seed": "c06-hamlet-none",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Elder Council has been debating market levies for three months. The merchants have stopped attending the sessions.",
+   "found": true,
+   "words": [
+    "market"
+   ]
+  },
+  {
+   "n": 14,
+   "seed": "c06-hamlet-none",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the hamlet for about three months at full rations, about eleven months on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 15,
+   "seed": "c06-hamlet-none",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "Open pasture the village grazes in common.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 16,
+   "seed": "c11-village-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Greek-inspired: built around the agora, on the open plain, and run by civic association.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 17,
+   "seed": "c11-village-none",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "Whitewashed courts and stone stairs climb toward a fortified high precinct.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 18,
+   "seed": "c11-village-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Entrepôt Trade Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 19,
+   "seed": "c11-village-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Iron & Metalwork Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
+   "found": true,
+   "words": [
+    "smith"
+   ]
+  },
+  {
+   "n": 20,
+   "seed": "c11-village-none",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Herbalist & Apothecary Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.",
+   "found": true,
+   "words": [
+    "house: alchemist"
+   ]
+  },
+  {
+   "n": 21,
+   "seed": "c11-village-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Chrissonea lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole village has a bad year.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 22,
+   "seed": "c11-village-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Chrissonea's Cartographer's guild stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 23,
+   "seed": "c11-village-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Divine healing magic for the sick and injured.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 24,
+   "seed": "c11-village-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Malts barley for brewing on a modest scale, supplying the alehouses nearby.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 25,
+   "seed": "c11-village-none",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "Chrissonea is all but undefended. Nothing in the village would stop a serious attack for long.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 26,
+   "seed": "c11-village-none",
+   "severity": "MED",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "The country around Chrissonea is thick with creatures and the village has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 27,
+   "seed": "c11-village-none",
+   "severity": "LOW",
+   "mechanism": "other",
+   "sentence": "Chrissonea is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the village decides.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 28,
+   "seed": "c11-village-none",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the village for about three months at full rations, more than a year on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 29,
+   "seed": "c11-village-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Waters rose with little warning and reshaped the lower districts, drowning livelihoods and redrawing who owned what",
+   "found": true,
+   "words": [
+    "quarters"
+   ]
+  },
+  {
+   "n": 30,
+   "seed": "c11-village-none",
+   "severity": "HIGH",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Nothing Chrissonea needs to get through the year has to come from outside.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 31,
+   "seed": "c16-town-none",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "The last strong leader died or left, and no one has yet consolidated their position",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 32,
+   "seed": "c16-town-none",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Stone Quarrying Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 33,
+   "seed": "c16-town-none",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "Jalalkher's Caravaneer's post stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 34,
+   "seed": "c16-town-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Part-time guards who walk the night and hold the gates.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 35,
+   "seed": "c16-town-none",
+   "severity": "HIGH",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 36,
+   "seed": "c16-town-none",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "By weight, it is the settlement's most traded product, and no household does without it.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 37,
+   "seed": "c16-town-none",
+   "severity": "MED",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "Nothing has come for Jalalkher and nothing about the town would stop it.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 38,
+   "seed": "c16-town-none",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and people are starting to complain.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 39,
+   "seed": "c21-city-none",
+   "severity": "MED",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "\"Nothing has ever forced this place to change much. It has kept its options, its neighbours and its temper, and the people here count all three as achievements\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 40,
+   "seed": "c21-city-none",
+   "severity": "LOW",
+   "mechanism": "two homes that disagree",
+   "sentence": "A speculative frenzy in toll revenue and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 41,
+   "seed": "c21-city-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Apothecary & Alchemy A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 42,
+   "seed": "c21-city-none",
+   "severity": "HIGH",
+   "mechanism": "a figure against the record's",
+   "sentence": "Ulfholm feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 43,
+   "seed": "c21-city-none",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Mining & Quarrying Raw materials & fuel Vulnerable / From / Iron ore deposits",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 44,
+   "seed": "c21-city-none",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "Ulfholm's Caravan masters' exchange stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 45,
+   "seed": "c21-city-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 46,
+   "seed": "c21-city-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 47,
+   "seed": "c21-city-none",
+   "severity": "HIGH",
+   "mechanism": "two homes that disagree",
+   "sentence": "A working quarry with dressed-stone yards and a crew of masons. Builds the walls and churches of half the region.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 48,
+   "seed": "c21-city-none",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "The people who salt, dry and preserve food at Ulfholm are working steadily, which matters a great deal if the city is ever cut off.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 49,
+   "seed": "c21-city-none",
+   "severity": "MED",
+   "mechanism": "other",
+   "sentence": "One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence because that brings the law, and it lives on protection money and bought officials.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 50,
+   "seed": "c21-city-none",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "The game meat that Ulfholm lives on cannot be made here without arcane work, which puts the whole line behind a very small number of people.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 51,
+   "seed": "c21-city-none",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and people are starting to complain.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 52,
+   "seed": "c26-metropolis-none",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "\"The Uprising produced a governing arrangement that has never been fully endorsed by everyone it governs. Ask who has legitimate authority here and you will get different answers depending on who you ask\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 53,
+   "seed": "c26-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "Even the outbuildings have new roofs, and nobody looks hungry.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 54,
+   "seed": "c26-metropolis-none",
+   "severity": "MED",
+   "mechanism": "a count",
+   "sentence": "The monastery keeps its own hours.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 55,
+   "seed": "c26-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Arcane Industry Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 56,
+   "seed": "c26-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Apothecary & Alchemy A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 57,
+   "seed": "c26-metropolis-none",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Salt & Preservation Food security Entrepôt / From / Salt flats",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 58,
+   "seed": "c26-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Furs & Pelts Trade & entrepôt Entrepôt / From / Hunting grounds",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 59,
+   "seed": "c26-metropolis-none",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "There is some thieving and some selling without a licence. Every metropolis this size has both.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 60,
+   "seed": "c26-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 61,
+   "seed": "c26-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Horses, dogs, and falcons. Nothing more exotic.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 62,
+   "seed": "c26-metropolis-none",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Salt is the settlement's most traded commodity by weight.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 63,
+   "seed": "c26-metropolis-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "A working quarry with dressed-stone yards and a crew of masons. Builds the walls and churches of half the region.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 64,
+   "seed": "c26-metropolis-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "There is very little street violence at Athenation, and the watch is not the reason: the people who run the metropolis's crime put down anything that would bring the law on them.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 65,
+   "seed": "c26-metropolis-none",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "The magical help at Athenation comes from its alchemists, who brew for the defenders.",
+   "found": true,
+   "words": [
+    "house: alchemist"
+   ]
+  },
+  {
+   "n": 66,
+   "seed": "c26-metropolis-none",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "This is the trade the metropolis is actually built on, and the metropolis has taken it as far as it goes.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 67,
+   "seed": "c26-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "The herbal remedies that Athenation lives on cannot be made here without arcane work, which puts the whole line behind a very small number of people.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 68,
+   "seed": "c02-thorp-under_siege",
+   "severity": "HIGH",
+   "mechanism": "a size",
+   "sentence": "South-Asian-inspired, and it shows: built around the tank, in quarters by trade and kin.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 69,
+   "seed": "c02-thorp-under_siege",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Collaborator and resistance families still keep to separate quarters, and old property seizures remain legally unresolved",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 70,
+   "seed": "c02-thorp-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Traffic moves along Chandrapur's crossroads every day, and little of its money stays.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 71,
+   "seed": "c02-thorp-under_siege",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Faith carries real weight in Chandrapur's money. What the religious houses take in and spend is a large part of the thorp's business.",
+   "found": true,
+   "words": [
+    "religiousHouses"
+   ]
+  },
+  {
+   "n": 72,
+   "seed": "c02-thorp-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Chandrapur works salt it cannot produce; it buys the raw stuff in, and always has.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 73,
+   "seed": "c02-thorp-under_siege",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 74,
+   "seed": "c02-thorp-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Grain carted to a mill outside the settlement and brought back as flour.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 75,
+   "seed": "c02-thorp-under_siege",
+   "severity": "LOW",
+   "mechanism": "two homes that disagree",
+   "sentence": "Officials at Chandrapur are spending money their posts never paid them, and nobody in the thorp asks where it came from.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 76,
+   "seed": "c02-thorp-under_siege",
+   "severity": "HIGH",
+   "mechanism": "a count",
+   "sentence": "The ruling three of Elder Council",
+   "found": true,
+   "words": [
+    "rulingFaces"
+   ]
+  },
+  {
+   "n": 77,
+   "seed": "c02-thorp-under_siege",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "The military command has taken charge of the streets, and more harshly as the food runs down.",
+   "found": true,
+   "words": [
+    "armedForce",
+    "streets"
+   ]
+  },
+  {
+   "n": 78,
+   "seed": "c02-thorp-under_siege",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 79,
+   "seed": "c02-thorp-under_siege",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: No granary: the siege has taken the outlying fields; with what is still harvested, household stores carry the thorp for about three months at full rations, about a year on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 80,
+   "seed": "c02-thorp-under_siege",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "The Founding Fair",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 81,
+   "seed": "c02-thorp-under_siege",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 82,
+   "seed": "c02-thorp-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 83,
+   "seed": "c02-thorp-under_siege",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Trade connectivity Adequate",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 84,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Collaborator and resistance families still keep to separate quarters, and old property seizures remain legally unresolved",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 85,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Plenty passes through Neugate, and little of it stops.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 86,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Faith carries real weight in Neugate's money. What the religious houses take in and spend is a large part of the hamlet's business.",
+   "found": true,
+   "words": [
+    "religiousHouses"
+   ]
+  },
+  {
+   "n": 87,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "There is not enough here and there has not been for a while. What comes in helps and does not close the gap.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 88,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Faith & Worship Religion & civic ○ Operational / Via / House of worship · Wayside shrine",
+   "found": true,
+   "words": [
+    "religiousHouses"
+   ]
+  },
+  {
+   "n": 89,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Much of the work in Neugate's workshops begins with unloading a cart.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 90,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 91,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Cuts and dries peat blocks from nearby marshland for domestic fuel.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 92,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "LOW",
+   "mechanism": "two homes that disagree",
+   "sentence": "Officials at Neugate are spending money their posts never paid them, and nobody in the hamlet asks where it came from.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 93,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "The military command has taken charge of the streets, and more harshly as the food runs down.",
+   "found": true,
+   "words": [
+    "armedForce",
+    "streets"
+   ]
+  },
+  {
+   "n": 94,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: No granary: the siege has taken the outlying fields; with what is still harvested, household stores carry the hamlet for about three months at full rations, more than a year on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 95,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "Nobody at Neugate is responsible for defending the hamlet; ask who is, and nobody can name anyone.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 96,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "Their bookkeeper has been taking a little from every sale for years, and the books balance only because the bookkeeper wrote them.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 97,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 98,
+   "seed": "c07-hamlet-under_siege",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Trade connectivity Adequate",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 99,
+   "seed": "c12-village-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Travellers are offered water before anyone asks their business.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 100,
+   "seed": "c12-village-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The market stands where carts always stopped. Anyone with goods and the stall fee can sell at Qal'athaven's market without a guild's leave.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 101,
+   "seed": "c12-village-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Qal'athaven's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 102,
+   "seed": "c12-village-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Qal'athaven grows about a quarter of what it eats, and carts bring in a little of the rest.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 103,
+   "seed": "c12-village-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Carts bring Qal'athaven what its workshops need, and carry the worked salt away again.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 104,
+   "seed": "c12-village-under_siege",
+   "severity": "LOW",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Produced locally ... Guild-manufactured goods",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 105,
+   "seed": "c12-village-under_siege",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Manage village affairs on behalf of the lord. Allocate strips and common access.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 106,
+   "seed": "c12-village-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "An open stall or small roofed market selling salted and smoked fish brought in by cart. The barrels keep, so the price holds.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 107,
+   "seed": "c12-village-under_siege",
+   "severity": "LOW",
+   "mechanism": "two homes that disagree",
+   "sentence": "Officials at Qal'athaven are spending money their posts never paid them, and nobody in the village asks where it came from.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 108,
+   "seed": "c12-village-under_siege",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: No granary: the siege has taken the outlying fields; with what is still harvested, household stores carry the village for about three months at full rations, about eight months on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 109,
+   "seed": "c12-village-under_siege",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "The military command has taken charge of the streets, and more harshly as the food runs down.",
+   "found": true,
+   "words": [
+    "armedForce"
+   ]
+  },
+  {
+   "n": 110,
+   "seed": "c12-village-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Qal'athaven's defences are sound, but fewer people turn out each season to man the palisade or earthworks, and the village is slow to notice.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 111,
+   "seed": "c12-village-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Qal'athaven is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the village decides.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 112,
+   "seed": "c12-village-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 113,
+   "seed": "c17-town-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Naranjoek's market lives off through-traffic. Its merchant guild sets the terms of trade and its members carry the town's dealings outward.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 114,
+   "seed": "c17-town-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Plenty passes through Naranjoek, and little of it stops.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 115,
+   "seed": "c17-town-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Naranjoek grows far less food than it needs, and not enough comes in to make up the rest.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 116,
+   "seed": "c17-town-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Organised road transport for goods between towns. Reliable, guild-backed.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 117,
+   "seed": "c17-town-under_siege",
+   "severity": "LOW",
+   "mechanism": "two homes that disagree",
+   "sentence": "Criminal money is reaching the officials of Naranjoek one at a time, because the town is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 118,
+   "seed": "c17-town-under_siege",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "You can walk the length of Naranjoek's walls and meet nobody on them.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 119,
+   "seed": "c17-town-under_siege",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: The siege has taken the outlying fields; with what is still harvested, the granary carries the town for about eight months at full rations, more than two years on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 120,
+   "seed": "c17-town-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Traffic in and out of Naranjoek goes through its gates, and that is where anyone arriving is first seen.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 121,
+   "seed": "c17-town-under_siege",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.",
+   "found": true,
+   "words": [
+    "prisoner"
+   ]
+  },
+  {
+   "n": 122,
+   "seed": "c17-town-under_siege",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.",
+   "found": true,
+   "words": [
+    "armoury"
+   ]
+  },
+  {
+   "n": 123,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 124,
+   "seed": "c22-city-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Nikephchorion's market sells little, though the road is busy; most of the traffic does not stop, and the traders here are poor.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 125,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Arcane Industry Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 126,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Every load of grapes that Nikephchorion's Vintner uses comes in from elsewhere; a closed road would stop its work within the season.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 127,
+   "seed": "c22-city-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "There is always something going out. If one trade is quiet, another is not.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 128,
+   "seed": "c22-city-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The carts feed this city as much as the fields do. Everybody knows what day they come and what it means if they do not.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 129,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Fishing & Seafood ... Via Cooper · Salt works · Merchant guilds (3-8) · Fish market (also River Fishing \"Via Cooper · Merchant guilds (3-8)\")",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 130,
+   "seed": "c22-city-under_siege",
+   "severity": "LOW",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Adventuring & Escort ... Via Adventurers' charter hall · Adventurers' guild · Multiple adventurers' guilds · Veteran's lodge",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 131,
+   "seed": "c22-city-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Fruit, vegetables, dairy, and eggs. Available every morning.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 132,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "other: content the town's own boundaries switch off",
+   "sentence": "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then persons.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 133,
+   "seed": "c22-city-under_siege",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Levies duties on goods entering and leaving via the port or main roads.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 134,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 135,
+   "seed": "c22-city-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 136,
+   "seed": "c22-city-under_siege",
+   "severity": "LOW",
+   "mechanism": "a count",
+   "sentence": "Organised bands of hired blades. Major forces, hundreds to thousands strong.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 137,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Nikephchorion's garrison roll puts paid soldiers on every stretch of its walls, so raiders stay away and an army would pay dearly; a long siege would be another matter.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 138,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "a count",
+   "sentence": "Food endurance: The siege has taken the outlying fields; with what is still harvested, the granary carries the city for about a year at full rations, more than two years on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 139,
+   "seed": "c22-city-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "An active overland smuggling operation moves contraband through the settlement.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 140,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The fish in Nikephchorion's country is worked all the way through: the ground gives it, Fishmonger finishes it, and it leaves as preserved fish.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 141,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "A driver has been carrying a sealed box on every coach, and the box goes off with a different rider at each stop.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 142,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 143,
+   "seed": "c22-city-under_siege",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food Adequate",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 144,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Its warehouses fill after the harvest and empty through the year as the metropolis trades out of them.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 145,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "a count",
+   "sentence": "The monastery keeps its own hours.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 146,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Andronchorio's market sells little, though the crossroads is busy; most of the traffic does not stop, and the traders here are poor.",
+   "found": true,
+   "words": [
+    "openTrade"
+   ]
+  },
+  {
+   "n": 147,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Every load of grapes that Andronchorio's Vintner uses comes in from elsewhere; a closed road would stop its work within the season.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 148,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Andronchorio sells on what it never made. The export column is full of goods that entered the metropolis as imports the same season.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 149,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "A substantial part of what Andronchorio eats is bought, and under the hunger the bought part comes short.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 150,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Divine healing supplements mundane medicine",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 151,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Horse & Animal Trade ... Via Beast trainers · Merchant guilds (3-8) · Merchant guilds (15-40) (also Spices & Dyes \"Via Merchant guilds (3-8) · Merchant guilds (15-40) ...\")",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 152,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Strategic Crossroads Toll Trade & entrepôt ✓ Running",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 153,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "other: content the town's own boundaries switch off",
+   "sentence": "A formal house for the sale of costly goods: estates, livestock, art, and now and then persons.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 154,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Horses, dogs, and falcons. Nothing more exotic.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 155,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 156,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 157,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "A working quarry with dressed-stone yards and a crew of masons. Builds the walls and churches of half the region.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 158,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "a count",
+   "sentence": "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 159,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "LOW",
+   "mechanism": "two homes that disagree",
+   "sentence": "Criminal money is reaching the officials of Andronchorio one at a time, because the metropolis is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 160,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The trades that feed and equip Andronchorio's defenders are busy and well stocked, and the defenders know it.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 161,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The tally of preserved food at Andronchorio is falling, because the trades that salt and dry it are failing; if the metropolis were cut off, it would run short quickly.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 162,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "The magical help at Andronchorio comes from its alchemists, who brew for the defenders.",
+   "found": true,
+   "words": [
+    "house: alchemist"
+   ]
+  },
+  {
+   "n": 163,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "LOW",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The metropolis takes the easy half of this trade and sells the rest of it to whoever will do the hard half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 164,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "HIGH",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Work on the wool here stops half-way: no weavers' guild, dyers' guild or fulling mill finishes it.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 165,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "HIGH",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Work on the animal hides here stops half-way: no tannery or leatherworkers' guild finishes it.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 166,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 167,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 168,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Trade connectivity Adequate",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 169,
+   "seed": "c27-metropolis-under_siege",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food Adequate",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 170,
+   "seed": "c03-thorp-famine",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Ask about the place and you are told it is built in masonry around a civic square, and run by patronage and law.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 171,
+   "seed": "c03-thorp-famine",
+   "severity": "HIGH",
+   "mechanism": "a size",
+   "sentence": "A notary's clerk hurries past with a satchel of contracts.",
+   "found": true,
+   "words": [
+    "notary"
+   ]
+  },
+  {
+   "n": 172,
+   "seed": "c03-thorp-famine",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "The famine in Pratomagnum is getting worse: the rations shrink each week, and the queues for them grow longer.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 173,
+   "seed": "c03-thorp-famine",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Established along the river for drinking, for milling, and for moving what the fields produce. All three still hold.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 174,
+   "seed": "c03-thorp-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The yards here are full of goods bound out and no two of them are the same. This is a thorp that sells.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 175,
+   "seed": "c03-thorp-famine",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Pratomagnum grows about half of what it eats, and boats bring in about half the rest. Many households go short, and a bad season would bring real hunger.",
+   "found": true,
+   "words": [
+    "famineToCome"
+   ]
+  },
+  {
+   "n": 176,
+   "seed": "c03-thorp-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "No granary; a few weeks in the larder.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 177,
+   "seed": "c03-thorp-famine",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Most meals start from salted fish. Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 178,
+   "seed": "c03-thorp-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Anyone looking for work at Pratomagnum finds it in carrying, weighing and selling as often as in making.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 179,
+   "seed": "c03-thorp-famine",
+   "severity": "HIGH",
+   "mechanism": "two homes that disagree",
+   "sentence": "Criminal money is reaching the officials of Pratomagnum one at a time, because the thorp is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 180,
+   "seed": "c03-thorp-famine",
+   "severity": "HIGH",
+   "mechanism": "a count",
+   "sentence": "The ruling three of Elder Council",
+   "found": true,
+   "words": [
+    "rulingFaces"
+   ]
+  },
+  {
+   "n": 181,
+   "seed": "c03-thorp-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for a few weeks at full rations, a few weeks on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 182,
+   "seed": "c03-thorp-famine",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 183,
+   "seed": "c03-thorp-famine",
+   "severity": "LOW",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "The reigning ruler was failing in health, and rival claimants maneuvered quietly for the throne",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 184,
+   "seed": "c03-thorp-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food Deficit — Active Famine. No granary; a few weeks in the larder.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 185,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "South-Asian-inspired. Ask about the place and you are told it is built around the tank, in quarters by trade and kin.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 186,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "A merchant who comes to Brahmapuram for one thing usually leaves with two or three.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 187,
+   "seed": "c08-hamlet-famine",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Brahmapuram grows about half of what it eats, and carts bring in a little of the rest. Many households go short, and a bad season would bring real hunger.",
+   "found": true,
+   "words": [
+    "famineToCome"
+   ]
+  },
+  {
+   "n": 188,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "No granary; a few weeks in the larder.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 189,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Most meals start from the field grain. Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 190,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "It lives off its grain harvest and little else. One bad year for the grain harvest would be a hungry year for the whole hamlet.",
+   "found": true,
+   "words": [
+    "famineToCome"
+   ]
+  },
+  {
+   "n": 191,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Faith & Worship Religion & civic ✓ Running / Via / House of worship · Wayside shrine",
+   "found": true,
+   "words": [
+    "religiousHouses"
+   ]
+  },
+  {
+   "n": 192,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Anyone looking for work at Brahmapuram finds it in carrying, weighing and selling as often as in making.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 193,
+   "seed": "c08-hamlet-famine",
+   "severity": "HIGH",
+   "mechanism": "two homes that disagree",
+   "sentence": "Criminal money is reaching the officials of Brahmapuram one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 194,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the hamlet for a few weeks at full rations, a few weeks on half.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 195,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Origin: grew as an agricultural market center",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 196,
+   "seed": "c08-hamlet-famine",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "A widening gulf between wealthy merchants and working poor breeds lasting resentment",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 197,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "The grain in Brahmapuram's country is worked all the way through: the ground gives it, Mill finishes it, and it leaves as bread.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 198,
+   "seed": "c08-hamlet-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food Deficit — Active Famine. No granary; a few weeks in the larder.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 199,
+   "seed": "c13-village-famine",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Khankul looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce.",
+   "found": true,
+   "words": [
+    "quarters"
+   ]
+  },
+  {
+   "n": 200,
+   "seed": "c13-village-famine",
+   "severity": "HIGH",
+   "mechanism": "a count",
+   "sentence": "Since the harvest failed, whoever holds the food in Khankul holds the power, and at least three powers are fighting over the stores.",
+   "found": true,
+   "words": [
+    "powersCount"
+   ]
+  },
+  {
+   "n": 201,
+   "seed": "c13-village-famine",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Khankul grows about a third of what it eats, and carts bring in most of the rest. Many households go short, and a bad season would bring real hunger.",
+   "found": true,
+   "words": [
+    "famineToCome"
+   ]
+  },
+  {
+   "n": 202,
+   "seed": "c13-village-famine",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Carts bring Khankul what its workshops need, and carry the worked salt away again.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 203,
+   "seed": "c13-village-famine",
+   "severity": "HIGH",
+   "mechanism": "two homes that disagree",
+   "sentence": "Criminal money is reaching the officials of Khankul one at a time, because the village is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 204,
+   "seed": "c13-village-famine",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "An uncontrolled surge of magic left its mark on the waterfront and on the people who were there, and the effects have never fully faded",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 205,
+   "seed": "c18-town-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Life here runs mostly on the wool trade, and that trade is under strain.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 206,
+   "seed": "c18-town-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Production: 1,317 lbs/day + 1,928 imported Need: 4,844 lbs/day Short: 1,599 lbs/day",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 207,
+   "seed": "c18-town-famine",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Gantulgager grows about a quarter of what it eats, and carts bring in about half the rest. Many households go short, and a bad season would bring real hunger.",
+   "found": true,
+   "words": [
+    "famineToCome"
+   ]
+  },
+  {
+   "n": 208,
+   "seed": "c18-town-famine",
+   "severity": "MED",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Horse & Animal Trade Food security Vulnerable / Via / Merchant guilds (3-8) · Merchant guilds (15-40)",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 209,
+   "seed": "c18-town-famine",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Gantulgager's Town watch stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 210,
+   "seed": "c18-town-famine",
+   "severity": "LOW",
+   "mechanism": "other: a place, a route or a coast the town lacks",
+   "sentence": "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 211,
+   "seed": "c18-town-famine",
+   "severity": "LOW",
+   "mechanism": "other: a place, a route or a coast the town lacks",
+   "sentence": "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 212,
+   "seed": "c18-town-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Shared grain stores that even out the harvests and hold off famine.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 213,
+   "seed": "c18-town-famine",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "Criminal money is reaching the officials of Gantulgager one at a time, because the town is poor and its streets are badly watched, and a bribe goes a long way here.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 214,
+   "seed": "c18-town-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Life here runs mostly on the wool trade, and that trade is under strain. The crops failed, and only about a third of the usual harvest will come in. The winter ahead will be hungry.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 215,
+   "seed": "c23-city-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Production: 3,877 lbs/day + 4,198 imported + 698 by arcane provision Need: 10,444 lbs/day Short: 1,671 lbs/day",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 216,
+   "seed": "c23-city-famine",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Jayakota grows about a third of what it eats, and boats bring in most of the rest. Arcane provision makes up a little more. Many households go short, and a bad season would bring real hunger.",
+   "found": true,
+   "words": [
+    "famineToCome"
+   ]
+  },
+  {
+   "n": 217,
+   "seed": "c23-city-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the city's tables.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 218,
+   "seed": "c23-city-famine",
+   "severity": "LOW",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Adventuring & Escort Defense & security ○ Operational / Via / Adventurers' charter hall · Adventurers' guild · Multiple adventurers' guilds",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 219,
+   "seed": "c23-city-famine",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Jayakota's Garrison stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 220,
+   "seed": "c23-city-famine",
+   "severity": "MED",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "A royal governor or viceroy administers directly on behalf of the crown. High status, high scrutiny.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 221,
+   "seed": "c23-city-famine",
+   "severity": "HIGH",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Salt is won from local brine in broad evaporation pans. It is the settlement's most-traded good by weight and a necessity in every home.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 222,
+   "seed": "c23-city-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "The supply book for Jayakota's defenders balances: the city's own trades feed and equip them, so a call to arms does not begin with a shortage.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 223,
+   "seed": "c23-city-famine",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "Food endurance: Under siege the outlying fields are lost; with what is still harvested, the granary would carry the city for about nine months at full rations, more than a year on half, but the hall will not open it.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 224,
+   "seed": "c23-city-famine",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "You can sail into Jayakota unchallenged; nobody watches the harbour mouth.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 225,
+   "seed": "c23-city-famine",
+   "severity": "HIGH",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Unexploited Animal hides high value / Animal hides → leather → boots → armor / Needs: Tannery, Leatherworkers' guild",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 226,
+   "seed": "c23-city-famine",
+   "severity": "HIGH",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "No one here works the animal hides near Jayakota.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 227,
+   "seed": "c23-city-famine",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Jayakota does better than its ground and roads would explain, and the reason is its few practitioners.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 228,
+   "seed": "c23-city-famine",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 229,
+   "seed": "c28-metropolis-famine",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "The monastery answers to its own order before it answers to whoever governs Petentepec.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 230,
+   "seed": "c28-metropolis-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Life here runs mostly on the timber trade, and that trade is under strain.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 231,
+   "seed": "c28-metropolis-famine",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Production: 66,955 lbs/day + 124,255 imported + 79,589 by druidic provision Need: 314,882 lbs/day Short: 44,083 lbs/day",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 232,
+   "seed": "c28-metropolis-famine",
+   "severity": "HIGH",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Petentepec grows about a fifth of what it eats, and carts bring in about half the rest. Druidic provision makes up a little more. Some households still go short, and a bad season would leave more of them hungry.",
+   "found": true,
+   "words": [
+    "famineToCome"
+   ]
+  },
+  {
+   "n": 233,
+   "seed": "c28-metropolis-famine",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Petentepec's Cobbler's guild stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 234,
+   "seed": "c28-metropolis-famine",
+   "severity": "MED",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "It arises only in cities at peace with the wild.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 235,
+   "seed": "c28-metropolis-famine",
+   "severity": "LOW",
+   "mechanism": "other: a place, a route or a coast the town lacks",
+   "sentence": "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 236,
+   "seed": "c28-metropolis-famine",
+   "severity": "MED",
+   "mechanism": "presumes normal times under a crisis in force",
+   "sentence": "Petentepec's accounts have money in hand: the metropolis can keep its defenders paid and buy what a bad season needs without going begging.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 237,
+   "seed": "c28-metropolis-famine",
+   "severity": "MED",
+   "mechanism": "a count",
+   "sentence": "Shopkeepers here pay one ring for protection, and the ring pays officials in turn.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 238,
+   "seed": "c28-metropolis-famine",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Petentepec buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.",
+   "found": true,
+   "words": [
+    "house: alchemist"
+   ]
+  },
+  {
+   "n": 239,
+   "seed": "c28-metropolis-famine",
+   "severity": "LOW",
+   "mechanism": "other: a place, a route or a coast the town lacks",
+   "sentence": "Founded by: a dynastic decision that this crossroads would anchor the realm",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 240,
+   "seed": "c28-metropolis-famine",
+   "severity": "HIGH",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Work on the animal hides here stops half-way: no tannery or leatherworkers' guild finishes it.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 241,
+   "seed": "c04-thorp-none",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "A guard captain is on the payroll of the criminal network",
+   "found": true,
+   "words": [
+    "guardCaptain"
+   ]
+  },
+  {
+   "n": 242,
+   "seed": "c04-thorp-none",
+   "severity": "HIGH",
+   "mechanism": "a count",
+   "sentence": "The ruling three of Elder Council",
+   "found": true,
+   "words": [
+    "rulingFaces"
+   ]
+  },
+  {
+   "n": 243,
+   "seed": "c04-thorp-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Iron & Metalwork Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
+   "found": true,
+   "words": [
+    "smith"
+   ]
+  },
+  {
+   "n": 244,
+   "seed": "c04-thorp-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "grain dates livestock dairy wool animal hides salt medicinal herbs honey coal Honey and beeswax Foraged goods Religious services Education (basic)",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 245,
+   "seed": "c04-thorp-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Plenty passes through Ögedeibulag, and little of it stops.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 246,
+   "seed": "c04-thorp-none",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "The thorp gets by. Nobody is going without bread and nobody is building anything either.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 247,
+   "seed": "c04-thorp-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 248,
+   "seed": "c04-thorp-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Someone has been using their name to frighten shopkeepers, and the shopkeepers have begun paying the wrong people.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 249,
+   "seed": "c04-thorp-none",
+   "severity": "LOW",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "The militia Vigilantes the criminal network",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 250,
+   "seed": "c04-thorp-none",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Felt tents stand beside the timber houses, and their owners seem at home in either.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 251,
+   "seed": "c09-hamlet-none",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Funeral rites and burial. The priest manages the graveyard.",
+   "found": true,
+   "words": [
+    "clergy"
+   ]
+  },
+  {
+   "n": 252,
+   "seed": "c09-hamlet-none",
+   "severity": "HIGH",
+   "mechanism": "a count",
+   "sentence": "The ruling three of Elder Council",
+   "found": true,
+   "words": [
+    "rulingFaces"
+   ]
+  },
+  {
+   "n": 253,
+   "seed": "c09-hamlet-none",
+   "severity": "HIGH",
+   "mechanism": "a size",
+   "sentence": "Warm tile roofs and enclosed courtyards break up the stone streets.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 254,
+   "seed": "c09-hamlet-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "A patron moves through the crowd with clients at their heels, greeting people by name.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 255,
+   "seed": "c09-hamlet-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Latin-inspired. Ask about the place and you are told it is built in masonry around a civic square, and run by patronage and law.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 256,
+   "seed": "c09-hamlet-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "The table rests on the hunters' game. Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 257,
+   "seed": "c09-hamlet-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Much of the work in Saltofundus's workshops begins with unloading a cart.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 258,
+   "seed": "c09-hamlet-none",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "Saltofundus has not been attacked lately, and if it were, it would struggle to hold.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 259,
+   "seed": "c09-hamlet-none",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "The country around Saltofundus is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 260,
+   "seed": "c09-hamlet-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Nothing Saltofundus needs to get through the year has to come from outside.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 261,
+   "seed": "c09-hamlet-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Saltofundus is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the hamlet decides.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 262,
+   "seed": "c09-hamlet-none",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Traffic moves along Saltofundus's road every day, and little of its money stays.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 263,
+   "seed": "c14-village-none",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Bjornaker's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+   "found": true,
+   "words": [
+    "armedForce"
+   ]
+  },
+  {
+   "n": 264,
+   "seed": "c14-village-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Bjornaker's Cartographer's guild stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 265,
+   "seed": "c14-village-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 266,
+   "seed": "c14-village-none",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "Bjornaker is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+   "found": true,
+   "words": [
+    "onlyJust"
+   ]
+  },
+  {
+   "n": 267,
+   "seed": "c14-village-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 268,
+   "seed": "c14-village-none",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "Carved roof beams and long hall ridges dominate the older quarter.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 269,
+   "seed": "c14-village-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Bjornaker leans on its practitioners; a hard season for them (a feud, a sickness, a falling-out with the hall) is a hard season for everyone.",
+   "found": true,
+   "words": [
+    "practitioner"
+   ]
+  },
+  {
+   "n": 270,
+   "seed": "c19-town-none",
+   "severity": "HIGH",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Salt is won from local brine in broad evaporation pans. It is the settlement's most-traded good by weight and a necessity in every home.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 271,
+   "seed": "c19-town-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Timber Trade Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 272,
+   "seed": "c19-town-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Watchmen serving part-time. Night patrols and gate duty.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 273,
+   "seed": "c19-town-none",
+   "severity": "LOW",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Merchant guilds (3-8) · Merchant guilds (15-40)",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 274,
+   "seed": "c19-town-none",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Camel Herds",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 275,
+   "seed": "c19-town-none",
+   "severity": "LOW",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "Military/Guard carries out what Town Mayor decides.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 276,
+   "seed": "c19-town-none",
+   "severity": "LOW",
+   "mechanism": "other",
+   "sentence": "Mahaabad's market lives off through-traffic.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 277,
+   "seed": "c24-city-none",
+   "severity": "HIGH",
+   "mechanism": "a figure against the record's",
+   "sentence": "Ribatnala feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.",
+   "found": true,
+   "words": [
+    "smallMargin"
+   ]
+  },
+  {
+   "n": 278,
+   "seed": "c24-city-none",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "It lives off its herds and little else.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 279,
+   "seed": "c24-city-none",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "Ribatnala's Garrison stands idle: its supply has failed upstream, though the building and the skilled hands are still there.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 280,
+   "seed": "c24-city-none",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "Organised bands of hired blades. Major forces, hundreds to thousands strong.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 281,
+   "seed": "c24-city-none",
+   "severity": "MED",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "It arises only in cities at peace with the wild.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 282,
+   "seed": "c24-city-none",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "A surge of magic no one could contain marked the waterfront and everyone caught in it, and what it did has never entirely worn away",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 283,
+   "seed": "c24-city-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Military/Guard Vigilantes Thieves' Guild",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 284,
+   "seed": "c24-city-none",
+   "severity": "LOW",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Merchant guilds (3-8) · Merchant guilds (15-40)",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 285,
+   "seed": "c24-city-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 286,
+   "seed": "c24-city-none",
+   "severity": "LOW",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "The city knows it needs specialists against the creatures and cannot afford to keep them.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 287,
+   "seed": "c29-metropolis-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Hired crews, winding gear, and ore carts work a shaft into the deposits.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 288,
+   "seed": "c29-metropolis-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "A quarry with yards of dressed stone and its own masons.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 289,
+   "seed": "c29-metropolis-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 290,
+   "seed": "c29-metropolis-none",
+   "severity": "MED",
+   "mechanism": "other: content the town's own boundaries switch off",
+   "sentence": "A formal house for the sale of costly goods: estates, livestock, art, and now and then persons.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 291,
+   "seed": "c29-metropolis-none",
+   "severity": "MED",
+   "mechanism": "other: a place, a route or a coast the town lacks",
+   "sentence": "Uaxacac buys its magical support from its alchemists by the batch, and the metropolis's accounts carry it as a purchase, not a defence.",
+   "found": true,
+   "words": [
+    "house: alchemist"
+   ]
+  },
+  {
+   "n": 292,
+   "seed": "c29-metropolis-none",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "The monastery answers to its own order before it answers to whoever governs Uaxacac.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 293,
+   "seed": "c29-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "Arcane Industry Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 294,
+   "seed": "c29-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "Uaxacac is fed, but only just. A poor harvest is felt at every table; a good one means a little put by.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 295,
+   "seed": "c29-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "Craft guilds (5-15) · Bowyers & fletchers (guild)",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 296,
+   "seed": "c29-metropolis-none",
+   "severity": "LOW",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "Found in cities that have made their peace with the wild.",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 297,
+   "seed": "c05-thorp-random",
+   "severity": "HIGH",
+   "mechanism": "a size",
+   "sentence": "\"Latin-inspired, and it shows: built in masonry around a civic square, and run by patronage and law.\"",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 298,
+   "seed": "c05-thorp-random",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "\"Warm tile roofs and enclosed courtyards break up the stone streets.\"",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 299,
+   "seed": "c05-thorp-random",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "\"A fishmonger shouts a price over the slap of wet baskets.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 300,
+   "seed": "c05-thorp-random",
+   "severity": "LOW",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "\"The last strong leader died or left, and no one has yet consolidated their position\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 301,
+   "seed": "c05-thorp-random",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Iron & Metalwork Local ore feeds the smithy directly.\"",
+   "found": true,
+   "words": [
+    "smith"
+   ]
+  },
+  {
+   "n": 302,
+   "seed": "c05-thorp-random",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Stone Quarrying Stone masons work imported material; the quarrying income notation reflects processing margin only.\"",
+   "found": true,
+   "words": [
+    "mason"
+   ]
+  },
+  {
+   "n": 303,
+   "seed": "c05-thorp-random",
+   "severity": "MED",
+   "mechanism": "a count",
+   "sentence": "\"Magnaminus sends several different goods out to market; if one trade fails, the others still go.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 304,
+   "seed": "c05-thorp-random",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "\"Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.\"",
+   "found": true,
+   "words": [
+    "streets"
+   ]
+  },
+  {
+   "n": 305,
+   "seed": "c05-thorp-random",
+   "severity": "HIGH",
+   "mechanism": "a count",
+   "sentence": "\"The ruling three of Elder Council\"",
+   "found": true,
+   "words": [
+    "rulingFaces"
+   ]
+  },
+  {
+   "n": 306,
+   "seed": "c05-thorp-random",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Magnaminus's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.\"",
+   "found": true,
+   "words": [
+    "armedForce"
+   ]
+  },
+  {
+   "n": 307,
+   "seed": "c10-hamlet-random",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Yanjmaa Jalayir has written down what Sarnai Taichiud owes and left a copy with a notary.\"",
+   "found": true,
+   "words": [
+    "notary"
+   ]
+  },
+  {
+   "n": 308,
+   "seed": "c10-hamlet-random",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Iron & Metalwork Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.\"",
+   "found": true,
+   "words": [
+    "smith"
+   ]
+  },
+  {
+   "n": 309,
+   "seed": "c10-hamlet-random",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "\"Zoltanbaliq sells on what it never made. The export column is full of goods that entered the hamlet as imports the same season.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 310,
+   "seed": "c10-hamlet-random",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Carts bring Zoltanbaliq what its workshops need, and carry the worked salt away again.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 311,
+   "seed": "c10-hamlet-random",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Funeral rites and burial. The priest manages the graveyard.\"",
+   "found": true,
+   "words": [
+    "clergy"
+   ]
+  },
+  {
+   "n": 312,
+   "seed": "c10-hamlet-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Rooms for travelers\" / \"Horse care\" (Alehouse lodging and stabling)",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 313,
+   "seed": "c10-hamlet-random",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "\"Zoltanbaliq is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the hamlet decides.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 314,
+   "seed": "c10-hamlet-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Competing guilds struggled for control of the market and a voice in local politics\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 315,
+   "seed": "c10-hamlet-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"A journeyman denied mastership has proof the exam was rigged\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 316,
+   "seed": "c10-hamlet-random",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"Food / Surplus\" and \"Food Surplus\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 317,
+   "seed": "c15-village-random",
+   "severity": "MED",
+   "mechanism": "other",
+   "sentence": "\"Traffic moves along Weißplatz's road every day, and little of its money stays. The place earns less than it spends.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 318,
+   "seed": "c15-village-random",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"People in Weißplatz work at more than one trade, so a bad year for one is not a bad year for everyone.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 319,
+   "seed": "c15-village-random",
+   "severity": "HIGH",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "\"Weißplatz works salt it cannot produce; it buys the raw stuff in, and always has.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 320,
+   "seed": "c15-village-random",
+   "severity": "MED",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "\"The Elder Council at Weißplatz worries less about rivals than about the village turning on it.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 321,
+   "seed": "c15-village-random",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "\"Weißplatz's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.\"",
+   "found": true,
+   "words": [
+    "armedForce"
+   ]
+  },
+  {
+   "n": 322,
+   "seed": "c15-village-random",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"The village's living at Weißplatz passes through a workshop that could not run without the arcane, and everybody in the trade knows which workshop.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 323,
+   "seed": "c15-village-random",
+   "severity": "LOW",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "\"The Quiet Fair\" / \"The Long Furrow Fair\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 324,
+   "seed": "c15-village-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Someone is poisoning the ruler slowly, and the physician knows\"",
+   "found": true,
+   "words": [
+    "physician"
+   ]
+  },
+  {
+   "n": 325,
+   "seed": "c20-town-random",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Fish & Preserved Produce Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 326,
+   "seed": "c20-town-random",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"Kolstrand feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 327,
+   "seed": "c20-town-random",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "\"Some of Kolstrand's work depends on smelting done elsewhere, and that supply is failing: what should come down the line arrives short.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 328,
+   "seed": "c20-town-random",
+   "severity": "MED",
+   "mechanism": "two homes that disagree",
+   "sentence": "\"Kolstrand's Smelter stands idle: its supply has failed upstream, though the building and the skilled hands are still there.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 329,
+   "seed": "c20-town-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Part-time guards. Night patrol and gate duty.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 330,
+   "seed": "c20-town-random",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "\"Essential for anyone who doesn't want a long walk to the nearest bridge.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 331,
+   "seed": "c20-town-random",
+   "severity": "LOW",
+   "mechanism": "other: a place, a route or a coast the town lacks",
+   "sentence": "\"...and one that has filled its ground buries beyond the gate instead.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 332,
+   "seed": "c20-town-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"A relic seized during the trial never reached the temple vault it was bound for\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 333,
+   "seed": "c25-city-random",
+   "severity": "MED",
+   "mechanism": "other: a ruler, a power, a threat or a history state that is not so",
+   "sentence": "\"Dmytro Filipović and Nataliya Kovačević are rivals in the same line of work.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 334,
+   "seed": "c25-city-random",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"Svetoka feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.\"",
+   "found": true,
+   "words": [
+    "smallMargin"
+   ]
+  },
+  {
+   "n": 335,
+   "seed": "c25-city-random",
+   "severity": "LOW",
+   "mechanism": "internal text (a template name, a range, a debug or chip row)",
+   "sentence": "\"Merchant guilds (3-8) · Fish market\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 336,
+   "seed": "c25-city-random",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "\"Iron ore deposits\" (Mining & Quarrying \"From\")",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 337,
+   "seed": "c25-city-random",
+   "severity": "MED",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Carts bring Svetoka what its workshops need, and carry the worked livestock away again.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 338,
+   "seed": "c25-city-random",
+   "severity": "MED",
+   "mechanism": "a size",
+   "sentence": "\"One killer, or a handful, in a place too small to keep an assassins guild.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 339,
+   "seed": "c25-city-random",
+   "severity": "LOW",
+   "mechanism": "other: content the town's own boundaries switch off",
+   "sentence": "\"The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion persons.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 340,
+   "seed": "c25-city-random",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "\"Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 341,
+   "seed": "c25-city-random",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"Svetoka's food trades are failing, and each season they fail the city has less to fall back on if it is cut off.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 342,
+   "seed": "c25-city-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Adventurers at Svetoka take their contracts at the charter hall, and the city posts its worst problems there.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 343,
+   "seed": "c25-city-random",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "\"You can sail into Svetoka unchallenged; nobody watches the harbour mouth.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 344,
+   "seed": "c25-city-random",
+   "severity": "LOW",
+   "mechanism": "other: a place, a route or a coast the town lacks",
+   "sentence": "\"A valuable cargo was reported lost at sea.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 345,
+   "seed": "c25-city-random",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work waits on mended tools.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 346,
+   "seed": "c30-metropolis-random",
+   "severity": "LOW",
+   "mechanism": "a size",
+   "sentence": "\"Market day is when Anonea fills: the roads bring buyers.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 347,
+   "seed": "c30-metropolis-random",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "\"Fish & Preserved Produce Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 348,
+   "seed": "c30-metropolis-random",
+   "severity": "MED",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"Its food comes from more than one source, the fishing most of all, so a poor year in one does not empty the metropolis's tables.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 349,
+   "seed": "c30-metropolis-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Iron ore deposits\" (Mining & Quarrying \"From\")",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 350,
+   "seed": "c30-metropolis-random",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "\"Work is slowing at Anonea for a fault that is not the metropolis's own: the cartography it relies on upstream has gone short.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 351,
+   "seed": "c30-metropolis-random",
+   "severity": "HIGH",
+   "mechanism": "two homes that disagree",
+   "sentence": "\"Anonea's Garrison stands idle: its supply has failed upstream, though the building and the skilled hands are still there.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 352,
+   "seed": "c30-metropolis-random",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"A little of Anonea's trade goes unrecorded, small enough to annoy the clerks and too small to change what the metropolis is.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 353,
+   "seed": "c30-metropolis-random",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "\"Essential for anyone who doesn't want a long walk to the nearest bridge.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 354,
+   "seed": "c30-metropolis-random",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"Salt is the settlement's most traded commodity by weight.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 355,
+   "seed": "c30-metropolis-random",
+   "severity": "MED",
+   "mechanism": "other: denies a house, force or crossing the town has",
+   "sentence": "\"Everyone comes and goes by the gates, so smugglers have to get past the garrison and city watch.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 356,
+   "seed": "c30-metropolis-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Adventurers at Anonea take their contracts at the charter hall, and the metropolis posts its worst problems there.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 357,
+   "seed": "c30-metropolis-random",
+   "severity": "HIGH",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"The magical help at Anonea comes from its alchemists, who brew for the defenders.\"",
+   "found": true,
+   "words": [
+    "house: alchemist"
+   ]
+  },
+  {
+   "n": 358,
+   "seed": "c30-metropolis-random",
+   "severity": "MED",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "\"The settlement was founded by a few families who trusted each other.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 359,
+   "seed": "c30-metropolis-random",
+   "severity": "LOW",
+   "mechanism": "a figure against the record's",
+   "sentence": "\"The river fish that Anonea lives on cannot be made here without arcane work, which puts the whole line behind a very small number of people.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 360,
+   "seed": "c30-metropolis-random",
+   "severity": "LOW",
+   "mechanism": "names a house, a role or a force the town lacks",
+   "sentence": "\"Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.\"",
+   "found": false,
+   "words": []
+  },
+  {
+   "n": 361,
+   "seed": "c30-metropolis-random",
+   "severity": "LOW",
+   "mechanism": "names a resource, a good or a chain state that is not so",
+   "sentence": "\"The iron merchants have doubled their price this season, and the smiths are mending tools with scrap.\"",
+   "found": false,
+   "words": []
+  }
+ ]
+}
