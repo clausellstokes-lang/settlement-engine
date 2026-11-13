@@ -53870,11 +53870,14 @@
         "no crisis: under_siege": 1,
         "no crisis: unrest": 5,
         "no war: front": 1,
+        "population: ≥ middling": 1,
+        "sacredHouse": 1,
         "soldiers": 2,
+        "tier: ≥ town": 1,
         "walls": 12,
         "watch": 4
       },
-      "undeclared": 30,
+      "undeclared": 27,
       "crisisScoped": false
     },
     {

@@ -541,7 +541,9 @@
     {
      "lineId": "STRESS_DESCS.indebted[3]",
      "text": "The merchant district of {name} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.",
-     "needs": [],
+     "needs": [
+      "population: ≥ middling"
+     ],
      "excludes": [],
      "crisis": [
       "indebted"
@@ -1029,8 +1031,10 @@
     },
     {
      "lineId": "STRESS_DESCS.succession_void[4]",
-     "text": "The masons of {name} have stopped mid-job on the great house; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
-     "needs": [],
+     "text": "Building has stopped mid-job across {name}; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
+     "needs": [
+      "tier: ≥ town"
+     ],
      "excludes": [],
      "crisis": [
       "succession_void"
@@ -1599,8 +1603,10 @@
     },
     {
      "lineId": "STRESS_DESCS.religious_conversion[4]",
-     "text": "The mason's yard in {name} is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
-     "needs": [],
+     "text": "The busiest work in {name} is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.",
+     "needs": [
+      "sacredHouse"
+     ],
      "excludes": [],
      "crisis": [
       "religious_conversion"

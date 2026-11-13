@@ -235,8 +235,8 @@ export const STRESS_DESCS = {
       "A building near the gate has a new sign, freshly painted with the name of an outside creditor. The creditor has opened an office here, and the locals walk past it without looking in.", needs: ['gate'] },
     { text: r =>
       `${r} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.`, needs: ['market'] },
-    r =>
-      `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`,
+    { text: r =>
+      `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-3 (the increment's ww-920): a district is a size error below the middling band (ruling (f))
     { text: r =>
       `The finest building in ${r} is new, stone-built, and belongs to nobody local: a counting house, its brass plate polished daily by a clerk who arrived with the ledgers. It is what everything else in town is working to pay for.`, needs: ['institution: bank'] }, // COHERENCE-PRESUME: it printed in towns with no counting house
     { text: r =>
@@ -301,8 +301,8 @@ export const STRESS_DESCS = {
       `The road into ${r} has been busy recently. You can tell by the wheel ruts, the quality of the mud, the number of horses at the inn you pass on the approach. Something is happening that requires people to arrive quickly.`, needs: ['institution: tavern'] },
     { text: r =>
       `${r} functions, after a fashion. The market is open, the gates are attended. The flagpole above the council building is empty. Someone removed the standard and hasn't replaced it yet.`, needs: ['market', 'gate'] },
-    r =>
-      `The masons of ${r} have stopped mid-job on the great house; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.`,
+    { text: r =>
+      `Building has stopped mid-job across ${r}; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.`, needs: ['tier: ≥ town'] }, // R2-CODE-A-3 (the increment's ww-540): no masons or great house the roster cannot name (record 386 (3)); stone building work at a town's size
     { text: r =>
       `In ${r}'s taproom the toast is to "the settlement": a formulation everyone has adopted at once, smooth as furniture, since naming anyone more specific has become a wager.`, needs: ['institution: tavern'] },
   ],
@@ -381,8 +381,8 @@ export const STRESS_DESCS = {
       `${r} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.`,
     { text: r =>
       `The bells of ${r} ring twice for every hour: one set of chimes, then another from a different quarter, a beat later and out of tune. Nobody in the street looks up.`, needs: ['institution: temple'] },
-    r =>
-      `The mason's yard in ${r} is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both. They no longer joke about it.`,
+    { text: r =>
+      `The busiest work in ${r} is on its holy symbols: one set coming down, another going up, and the same three workmen paid for both. They no longer joke about it.`, needs: ['sacredHouse'] }, // R2-CODE-A-3 (the increment's ww-58): no mason's yard the roster cannot name (record 386 (3)); the symbols are a sacred house's
     r =>
       `${r} has two burial grounds now, one old and one new, and the town's grief is learning to sort itself accordingly. The gravedigger serves both and is the most carefully neutral man alive.`,
   ],
