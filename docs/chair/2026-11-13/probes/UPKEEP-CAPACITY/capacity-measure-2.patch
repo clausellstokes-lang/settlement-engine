@@ -1,9 +1,22 @@
 diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
-index f94ed25f0..c0589f1dc 100644
+index f94ed25f0..4f3788648 100644
 --- a/src/generators/defenseGenerator.js
 +++ b/src/generators/defenseGenerator.js
-@@ -211,7 +211,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
-   const names = defenseTraditionNamesOf(institutions);
+@@ -190,7 +190,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+     : (config.stressTypes || config.intendedStressTypes || []);
+   const stressSet = new Set(stressTypes);
+   const flags = getInstFlags(config, institutions);
+-  const inst = instead || flags.inst;
++  const inst = instead || (globalThis.__CAP_G ? globalThis.__CAP_G(flags.inst, institutions, config) : flags.inst); // probe: a gap candidate's flags (inert unless set)
+   const pri = getPriorities(config);
+   const tier = settlement.tier || 'town';
+   const threat = config.monsterThreat || 'frontier';
+@@ -208,10 +208,10 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const crimeOf = (/** @type {Array<[string, any]>} */ list) => Math.max(2, Math.min(100, list.reduce((a, [, row]) => a * row.crime, flags.criminalPreStress)));
+   const crimEff = Math.round(crimeOf(crimeRows));
+   const crimBase = Math.round(crimeOf([]));
+-  const names = defenseTraditionNamesOf(institutions);
++  const names = globalThis.__CAP_N ? globalThis.__CAP_N(institutions) : defenseTraditionNamesOf(institutions); // probe: a gap candidate's names (inert unless set)
    const G = W.traditionGates;
    const t = {
 -    hasArcane: magicOn && magPri >= G.arcane && (inst.hasMagicInst || names.arcane),
