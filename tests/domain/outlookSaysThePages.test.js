@@ -15,8 +15,9 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { deriveViability } from '../../src/domain/display/dossierViewModel.js';
+import { deriveViability, outputChipBesideWord } from '../../src/domain/display/dossierViewModel.js';
 import { bandForVariable } from '../../src/domain/causalState.js';
+import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -50,5 +51,26 @@ describe('step 5: the Outlook says what the pages say', () => {
       expect(t, seed).not.toMatch(/only while [a-z]+ keep arriving/); // a mass noun keeps arriving; anchored: `read` counts the verdicts, asserted below
     }));
     expect(read).toBe(seeds.length);
+  });
+});
+
+describe('step 6: the glance chip and the Economic Survival colour', () => {
+  test('#608: the reader\'s town prints the word alone; a town whose figure agrees keeps the chip', () => {
+    const s = birth('rww-metropolis-infiltrated-1');
+    expect(s.economicState.prosperity).toBe('Prosperous');
+    expect(Math.round(s.economicState.compound.economyOutput)).toBeLessThan(35);
+    expect(outputChipBesideWord(Math.round(s.economicState.compound.economyOutput), s.economicState.prosperity)).toBe(false);
+    expect(outputChipBesideWord(55, 'Moderate')).toBe(true);
+    expect(outputChipBesideWord(74, 'Poor')).toBe(false);
+  });
+  test('C-L7: the Economic Survival bar is coloured by the band its row prints', () => {
+    const COLOR = { STRONG: '#1a4a2a', ADEQUATE: '#7a5010', WEAK: '#8b1a1a', CRITICAL: '#8b1a1a' };
+    let edges = 0;
+    expectNoSeedFailures(collectSeedFailures(seeds.slice(0, 40), (seed) => {
+      const row = deriveDefenseReadiness(birth(seed)).find((r) => r.label === 'Economic Survival');
+      if ((row.score >= 60 && row.score < 65) || (row.score >= 35 && row.score < 40)) edges++;
+      expect(row.barColor, `${seed} ${row.score} ${row.status}`).toBe(COLOR[row.status]);
+    }));
+    expect(edges, 'scores between the old cuts and the band\'s were read (rv2-calm-thorp-3: 37, Weak)').toBeGreaterThan(0);
   });
 });

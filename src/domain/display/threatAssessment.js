@@ -293,10 +293,11 @@ export function buildThreatAssessment(r) {
     assess: intA,
   });
 
-  const econScore = scores.economic || 0;
-  const econColor = econScore >= 60
+  // C-L7 (UPKEEP-8): the bar's colour reads the band its row prints (the Economic Survival band's ONE home), not cuts of its own.
+  const econBand = economicSurvivalBandOf(r);
+  const econColor = econBand === 'STRONG'
     ? '#1a4a2a'
-    : econScore >= 35
+    : econBand === 'ADEQUATE'
       ? '#7a5010'
       : '#8b1a1a';
   let econA;

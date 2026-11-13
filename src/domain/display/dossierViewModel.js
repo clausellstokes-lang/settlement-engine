@@ -807,4 +807,18 @@ function outlookFactsOf(settlement) {
   };
 }
 
+/**
+ * #608 (UPKEEP-8, the chair's ruling of 2026-11-13): does the Economics glance's Output chip print beside the prosperity
+ * word? The figure (the economy's output, 0-100) and the word (the printed prosperity label) have no common home, so
+ * where they stand two bands apart (the chip red, under 35, beside Prosperous or Wealthy; green, 60 or more, beside
+ * Poor or lower) the word prints alone. Elsewhere the chip prints once, as the T2-1 ruling keeps it.
+ * @param {number} score the chip's figure @param {unknown} label the printed prosperity word @returns {boolean}
+ */
+export function outputChipBesideWord(score, label) {
+  if (!(score > 0)) return false;
+  const rung = ['Subsistence', ...PROSPERITY_LABELS].indexOf(/** @type {any} */ (String(label ?? '')));
+  if (rung < 0) return true;
+  const high = rung >= 1 + PROSPERITY_LABELS.indexOf('Prosperous'), low = rung <= 1 + PROSPERITY_LABELS.indexOf('Poor');
+  return !((score < 35 && high) || (score >= 60 && low));
+}
 import { bandForVariable } from '../causalState.js'; import { PROSPERITY_LABELS } from '../prosperityRank.js'; import { displayTradeList } from './tradeListDisplay.js'; // at the END: no line above moves
