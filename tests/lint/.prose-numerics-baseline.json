@@ -331,7 +331,7 @@
   },
   {
     "path": "src/components/new/tabs/DailyLifeTab.jsx",
-    "line": 249,
+    "line": 253,
     "category": "floatInterpolation",
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
