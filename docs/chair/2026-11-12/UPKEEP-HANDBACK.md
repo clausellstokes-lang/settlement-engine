@@ -56,6 +56,50 @@ The build was made and measured before the ruling arrived and was never committe
 - **C-M1, declared as exposure at the final statement** (the six births of the fourth read, town by town; the corpus untouched).
 
 
+- **Later message (19:05), #608:** the Economics prosperity glance prints "26/100" beside "Prosperous" (the third leaves lane's stop, its hand-back part 2): the glance's call in `EconomicsTab.jsx` was changed by this lane (d8986c04c), so the cure is this lane's, the glance's own lines only, the file named as shared. RULED: the figure and the word beside it read ONE home; where the word is the standing label and the figure the crisis's, the page says which is which through the two-label sentence's home, or prints the word alone. Measure the class first.
+- **Later message (19:10):** the capacity move is built on `lane/upkeep-capacity-2026-11-13` and reaches this lane by a MERGE the chair orders; build none of it. F1 next and pushed; after it, `defenseInstitutionBuckets.js` is not changed again without saying so. THE LAW OF THE COUNT, final: ONE JOB IS COUNTED ONCE; a house opens two parts only where they are two jobs, each such house named in the test (the magic houses, the village's parish church, the monastery); the capacity seat makes one test of this lane's and its own; leave this lane's count test as it stands. Files the capacity build takes, LEFT ALONE from now: `src/data/defenceWeights.js`, `src/generators/defenseGenerator.js`, the flags in `priorityHelpers.js` that open a defence part, the catalogue's ladders. ORDER: F1, W4, F2, F3, item 1, item 2b, the round-three lines, #608, item 4; the final statement held until the capacity branch is merged.
+- **Later message (19:28), THE CENSUS HAZARD:** `census.sh` exits 0 when its counter fails (the pipe's exit): after every census run, check the counter's own exit and that `counts.txt` holds the rows expected; say so in the final statement.
+
+## W4 — the PDF's "Score avg" leaves (a5d202135)
+
+- `src/pdf/sections/DefenseSecurity.jsx :: DefenseSecurity`: the stat leaves the readiness strip (a comment keeps its line, so the prose-numerics register's addresses below it hold); `scoreTone` leaves with it. The view model keeps `defense.scoreAvg` (the parity row and the view-model snapshot read it; no surface prints it).
+- Red first: `tests/pdf/defenseReadinessWord.test.jsx` (six births; the rating's word anchored).
+
+## Item 1's own reds, cured (1abd3bbf4)
+
+- Found by this seat's suites at W4: 0ab206f77 made two architecture guards red that are green at 0a07f98c7: the import-cycle set (`layerBoundaries.test.js`) and the engine-core-to-lazy edge (`engineCoreLazyEdge.test.js`).
+- The cure: `src/domain/crisis/crisisNoun.js`, a zero-import leaf holding CRISIS_NOUN byte for byte (crisisHooks.js re-exports it); `vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN` pins `prosperityInCrisis.js` and `crisisNoun.js` with their reasons.
+- **Measured by a fresh build + verify:dist here and at 0a07f98c7:** the same set of verify:dist reds at both (the line's carried ceilings); first paint 1,126,131 -> 1,125,833 B raw (-298), gzip 358,720 -> 358,636, Brotli 301,083 -> 300,785; the engine chunk +19 B (red at both). An intermediate build with the leaf unpinned measured engine-core +130 B.
+
+## F1 — STOPPED, measured (the chair told in one line at 1abd3bbf4)
+
+- **The ruling's premise does not hold:** `standingDefenseForces` is already total over every bucket (walls, garrison, militia, watch, mercenary, charter, magicDef). On the reader's own seeds, all **113** class-A births and all **26** class-B births have `watch.present === true` in the projection (`probes/UPKEEP-7/f1why.mjs`: A = walls+watch 63, walls+watch+charter 50; B = watch 25, watch+charter 1; EXECUTED). The cut's `defenceClasses` entry "(walls, garrison, militia only)" describes the selector, not the projection.
+- **The line that decides "no force"** is `src/domain/display/stateProse/defenseStateProse.js :: defenseThreatProse`, its three locals (`walls`, `garrison`, `militia`) handed to `invasionRowPoolKey` and `beastsRowPoolKey`; the file is held by lane/w2-a-leaves, lane/w2-c-leaves and lane/merge-12. **Recommendation:** its holder reads "a force" as garrison, militia, watch or contracted company from the same projection; no new list of names. `defenseInstitutionBuckets.js` is NOT changed by this seat.
+
+## F2 — the journal never prints a category key (af48c3ab2)
+
+- `src/pdf/lib/viewModel.js`, the NPC rows: `factionLabel` reads the first-rank power or the stated faction only; a person in no power prints no "Member of" line and an empty people-table cell.
+- Red first: `tests/pdf/journalMemberOfPower.test.js` (24 births): 91 raw keys at 0a07f98c7, 0 now. Measured before on the reader's 1,200 (0ab206f77): "Member of: criminal" 59, "magic" 45, "other" 40, and raw keys in the people table on 764 births.
+
+## F3 — STOPPED BY ITS OWN RULE, measured (`probes/UPKEEP-7/f3.mjs`, `f3cls.py`, `f3-classes-af48c3ab2.txt`)
+
+- On the reader's 1,440 at af48c3ab2: **726 rows in 605 births** print a Beasts or Invasion sentence under a band its own words contradict (each sentence's true bands read from its words, listed in `f3cls.py`).
+- `threatAssessment.js :: buildThreatAssessment` holds ONE sentence per threat family and forces; under the band a row prints, no other existing sentence is true of the same forces. So, as ruled, a stop on each band, three towns each (the file holds all 25 cells). The largest:
+  - Beasts CRITICAL, "Quiet country and no organised defence, which is all the country asks." — 233 (rv2-calm-thorp-3, -5, -9);
+  - Beasts CRITICAL, "Palisade and citizen militia provide a viable but demanding posture" — 96 (rv2-calm-thorp-1, -6, -13);
+  - Invasion ADEQUATE / STRONG, "Walls present but no organized military force to man them…" — 86 / 54 (rv2-calm-town-0, -6, -15 / rv2-calm-town-1, -2, -3);
+  - Beasts ADEQUATE / STRONG, "Wild country all round and nobody organised to meet it…" — 44 / 16 (rv2-calm-town-7, -15, -16 / rv2-calm-town-1, -3, -4);
+  - Invasion STRONG, "A palisade and armed townsfolk…" — 28 (rv2-calm-hamlet-1, -12, -27);
+  - Beasts WEAK / CRITICAL, "Safe heartland with minimal creature activity. Existing defenses are appropriate." — 26 / 15 (rv2-calm-town-0, -10, -13 / rv2-calm-thorp-4, -10, rv2-calm-hamlet-17).
+- **Recommendation:** each row's sentences gain band-true twins over the same forces (new words, for the owner), or the row prints the band word alone where no sentence is true; and the rows' facts read the watch (the F1 class again: "no organized military force" beside a watch).
+
+## W5 — Inverford (rv2-famine-city-0), read together after the clause: STILL CONTRADICTS; not widened
+
+- Defense tab: "No one can earn a normal living while the famine lasts, and every coin goes on food." (`src/data/stressTypes.js`, the famine's `viabilityNote`) · "The longer the hunger lasts at Inverford, … The city may not come through this crisis, and what it spends on defence now only buys time." (the corpus, `src/data/dossierStateProse/defense.generated.js` / `RECEIPT_POOLS_DOSSIER_STATE.md`) · "Trouble at Inverford has not turned into a collapse, because the city can pay its way through it." (the corpus, DS-DEF-2 Economic Survival STRONG).
+- PDF: "Money enough to ride out a long crisis, laid by before the famine: …" (this lane's, `threatAssessment.js`): it now says where the money comes from; it still stands beside the corpus's "may not come through this crisis".
+- **The class, counted** on the reader's 1,200 rv2 renders at 0ab206f77: the Defense tab's can-pay corpus row beside a doom line 112, beside a crisis spending line 181, either **238**. Every writer but the PDF line is the corpus's or the crisis data table's; for the chair to rule for the corpus.
+
+
 ---
 
 # COHERENCE-UPKEEP: the hand-back (the sixth seat, COHERENCE-UPKEEP-6, 2026-11-13) — HANDED BACK BY FILE, WITHOUT THE FINAL STATEMENT (the chair's ruling of 15:04: the seventh seat makes it once)
